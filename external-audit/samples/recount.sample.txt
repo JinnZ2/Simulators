@@ -1,0 +1,124 @@
+RECOUNT -- DEEP_RESEARCH_2026_09_14.md against the tree
+==================================================================
+
+Delivered verbatim and modified by nothing here. Judgement in the
+report is not adjudicated; arithmetic over the tree is recomputed.
+
+CHOICES IN FORCE
+  [CHOICE 1] survey revision established by family drift, not stated in the report
+  [CHOICE 2] `.github` counted as present-and-unnamed, not as a miscount
+  [CHOICE 3] a folder 'exists' iff the tree carries any path under `<name>/`
+
+BASELINE -- established, not taken from the stated date  [CHOICE 1]
+  revision                                   6633778^
+  families exact at that revision            7 of 9  F3,F4,F5,F6,F7,F8,F9
+  families exact at its child                6 of 9  F4,F5,F6,F7,F8,F9
+  families that move between the two         F3
+
+FOLDERS NAMED BY THE REPORT
+  named in family tables                     166
+  top-level directories in tree              165
+  named but ABSENT from the tree             frame-token-audit, gap-register
+  in tree, never named  [CHOICE 2]           .github
+  real content folders                       164
+    `frame-token-audit` occurs elsewhere in tree no -- invented, not renamed
+    `gap-register` occurs elsewhere in tree  no -- invented, not renamed
+
+FAMILY RECOUNT at 6633778^
+  fam  named  exist  phantom            claimed  actual  delta
+  F1      26     25  gap-register           326     312    -14
+  F2      58     57  frame-token-audit      924     917     -7
+  F3      30     30  -                      483     483     +0
+  F4      13     13  -                      214     214     +0
+  F5      10     10  -                      280     280     +0
+  F6       4      4  -                       11      11     +0
+  F7       9      9  -                      141     141     +0
+  F8       6      6  -                      175     175     +0
+  F9      10     10  -                      119     119     +0
+
+TOTAL RECONCILIATION
+  report's stated total                      2673
+  sum of its own family counts               2673
+  sum of actual files in existing folders    2652
+  attributed to folders that do not exist    21
+  actual + phantom                           2673
+  closes to the digit                        yes
+  tracked at revision (all paths)            2679
+  root files excluded by the survey          22
+  infra files excluded by the survey         5
+
+HEADLINE DECOMPOSITION -- all three short by the same two folders
+               stated   actual    short
+  files          2673     2652       21
+  py              961      956        5
+  md              761      754        7
+  neither .py nor .md                        9
+  21 phantom files = 5 py + 7 md + 9 other   yes
+
+SPOT CHECKS -- report's own numbers, recomputed
+  EXACT    nineteen spine documents at root       expected 19     actual 19
+  EXACT    no Python files at the repository root expected 0      actual 0
+  EXACT    tools/ 10 files                        expected 10     actual 10
+  EXACT    tests/ 9 files                         expected 9      actual 9
+  EXACT    GAP_INDEX entries                      expected 255    actual 255
+  EXACT    GAP_INDEX folders                      expected 24     actual 24
+  EXACT    reasoning-gate guards                  expected 8      actual 8
+  EXACT    fragility-cascade files                expected 173    actual 173
+  EXACT    fragility-cascade python               expected 85     actual 85
+  EXACT    energy files                           expected 66     actual 66
+  EXACT    play-sims files                        expected 30     actual 30
+  EXACT    relational files                       expected 38     actual 38
+  EXACT    gdprf-framework files                  expected 33     actual 33
+  EXACT    msiaf-framework markdown               expected 14     actual 14
+  EXACT    earth_economics files                  expected 21     actual 21
+  EXACT    emergence-stability-simulator files    expected 28     actual 28
+  EXACT    emergence-stability-simulator python   expected 12     actual 12
+  EXACT    machine-record-format python           expected 10     actual 10
+  EXACT    fourd-municipal-engine both versions   expected 80     actual 80
+  EXACT    F5 python across 10 folders            expected 130    actual 130
+  EXACT    F6 python                              expected 0      actual 0
+  exact                                      21 of 21
+
+MARKDOWN COVERAGE -- enumeration and count checked apart
+  report states                              162 of 166
+  folders with no markdown                   6  exploration-engine, exploration-playground, tests, tools, vector-field-explorer, voice-attractor-probe
+  named list is a subset of the truth        yes
+  missing from the report's list             tests, tools
+  on the report's own denominator            160 of 166
+
+CLAIMS THAT TURN ON THE UNNAMED DIRECTORY
+  report says 'no test-running CI'           yes
+  workflow files in tree                     .github/workflows/study-watch.yml, .github/workflows/test.yml
+  unittest suites run on push                7
+  files mentioning --selftest                297
+  verdict                                    REFUTED
+  CI exists and runs 7 unittest suites on push; it runs neither the per-module --selftest surface nor tools/known_answer.py
+
+  package definitions in tree                crossdomain-eval/pyproject.toml, fourd-municipal-engine-v2/pyproject.toml, fourd-municipal-engine/pyproject.toml
+  'no installable package'                   NARROWED
+  no repo-wide installable core; three folders do ship a package definition
+
+  CLAIM_TABLE.json in tree                   none
+  validator for that format                  tests/test_validate_claim_table.py, tools/validate_claim_table.py
+  CLAIM_TABLE.md in tree                     98
+  'no machine-readable claim index'          HOLDS
+  the validator exists and has zero inputs: a consumer with no producer, CONSTANT_SILENT at repository scale
+
+THE RESPONSE'S OWN COUNTABLE CLAIMS
+  inline links in the report                 138
+  unique urls                                49
+  response states external citations         136
+  delta                                      2
+  'external citation' is undefined in the response; both readings printed, neither picked
+  F1+F2+F3 share, response states            64.8
+    on the report's own counts               64.8
+    on the tree                              64.6
+
+SELF-REFERENCE
+  report present at the counted revision     no
+  top-level: counted rev / head / working tree 165 / 165 / 166
+  counting the working tree would measure the report's own arrival; the recount is pinned by revision
+
+NOT CHECKED HERE: every external citation. The egress gate refuses
+the publisher hosts, and the report's own 0.3 records the same for
+its arXiv identifiers. Nothing above rests on an external source.

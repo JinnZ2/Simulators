@@ -1,0 +1,7 @@
+[CHOICE 1] the second pass's failure list is parsed from its own numbered section 0.2, not transcribed
+[CHOICE 2] only the union of the two failure sets is re-run here; a full 300-module re-sweep would measure the sweep, not the disagreement
+[CHOICE 3] each contested module is run at BOTH revisions, because the two sweeps ran at different ones and that is the first candidate explanation for every divergence
+[CHOICE 4] a module whose verdict differs across revisions is reported REVISION_DEPENDENT, which attaches to neither party
+[CHOICE 5] a module reading a path outside the repository is reported ENVIRONMENT_DEPENDENT and is not scored against either sweep
+[CHOICE 6] file counts are taken at a COMMIT, never the working tree, since this audit is written into the tree it measures
+[CHOICE 7] the three tools named in the mismatch claim are read out of the document and checked at every entry point in their folder

@@ -1,140 +1,176 @@
 # substrate-alternative
 
-Two instruments. One locates money-frame assumptions in text. One models ICS
-(Incident Command System) as a coordination substrate with no monetary terms in
-the model.
+Two modules.  One locates money-frame assumptions in text and
+proposes nothing.  The other runs a food-distribution coordination
+loop on ICS structure with the price signal taken out, and reports
+what it could not move as a value rather than as an error.
 
-stdlib only. No network. No build step. Runs on a phone.
-
-A folder in `JinnZ2/Simulators`. It was built to a dispatch that named a
-standalone repo, and landed here instead; nothing in it assumes a repo root.
-The root CC0 licence covers it and the root `.gitignore` covers `__pycache__`,
-so neither is duplicated in the folder.
-
-NOTE, a name collision this tree already had twice. `frame_audit.py` is also
-the name of `declared-frame/frame_audit.py` and `frame-token-audit/frame_audit.py`.
-The three are not copies of each other and measure different objects: this one
-locates money-frame tokens. Each resolves from its own folder, so imports are
-unambiguous, but a grep for the name returns three files.
+CC0.  Python 3 standard library only.  No network.  Parses under
+3.9.  Phone-buildable.
 
 ```
-frame_audit.py      locate money-frame tokens in any text. Locate only.
-pilot_loop.py       the ICS coordination loop
-selftest_pilot.py   checks for pilot_loop
-SOURCES.md          the documents, the provenance states, and what is unverified
-params/*.json       scenarios
+python3 frame_audit.py FILE          locate money-frame tokens
+python3 frame_audit.py -             ... from standard input
+python3 frame_audit.py --choices
+
+python3 pilot_loop.py --demo         run the constructed scenario
+python3 pilot_loop.py --screen       screen the loop for slippage
+python3 pilot_loop.py --choices
+
+python3 test_substrate.py            126 checks
 ```
 
-## Run it
+---
 
-```bash
-python3 frame_audit.py somefile.txt        # or pipe text on stdin
-python3 frame_audit.py --selftest
-
-python3 pilot_loop.py params/baseline.json
-python3 pilot_loop.py --provenance         # structure and where it came from
-python3 pilot_loop.py --scan-only          # the monetary scan alone
-python3 selftest_pilot.py
-```
-
-`pilot_loop.py` scans its own source for money-frame vocabulary before it runs
-anything and **refuses the run** if any appears in model logic or model
-vocabulary. The lexicon is imported from `frame_audit.py` rather than copied, so
-there is one lexicon and it cannot drift.
-
-## ENVELOPE
-
-**Valid for.** Coordination of declared capacity against declared need, under a
-**declared ICS activation**, within one operational period, where every resource
-kind is typed by a catalog supplied with the scenario, and where the parties
-have already agreed to coordinate.
-
-**Not valid for.** Steady-state allocation. This does not model an economy, a
-market, or any ongoing distribution outside an incident. It does not model
-whether parties will declare honestly, whether they will participate at all, or
-what happens across many periods. **Do not claim transfer to the non-incident
-case.** A result from this loop says something about an activated incident
-structure and nothing about the case where no incident has been declared.
-
-**Degradation mode.** It degrades toward silence, not toward a wrong number.
-A resource the catalog cannot type returns `UNTYPED` and is matched to nothing.
-A need nothing reaches returns `UNMET` with a reason. A node that received
-nothing reports `None` for its lag rather than zero. Where the model runs past
-what doctrine supplies, it is marked `ASSUMED` in the structure and printed by
-`--provenance`. The failure you should expect is an empty or partial assignment
-log with reasons attached, not a plausible allocation that is wrong.
-
-**Revalidation trigger.** Any of these invalidates a run:
+## frame_audit.py -- locate only
 
 ```
-a NIMS edition later than the Third (October 2017) exists   SOURCES.md V-1
-a section number in SOURCES.md is read and does not match   SOURCES.md V-2
-the span-of-control element moves from CARRIED to CITED     SOURCES.md V-3
-a real typing catalog replaces a scenario's inline one      SOURCES.md V-4
-the monetary scan stops returning clean
-an element's provenance changes, in either direction
+   text
+     |
+     v
+ [ registry: 165 surfaces, 5 frames, 32 with a second live sense ]
+     |
+     v
+ [ one alternation, longest surface first ]     [CHOICE 1]
+     |
+     v
+ hits ---> token | sentence index | char span | frame
+     |
+     +---> counts            (all five frames, zeros visible)
+     +---> counts_unambiguous
+     +---> counts_ambiguous  (never merged with the above)
 ```
 
-**Margin applied.** None. No safety factor, no rounding up, no buffer is added
-anywhere. Quantities move as declared and lag is the arithmetic of distance
-times the declared `time_per_distance_unit`. If you want a margin, it goes in
-the scenario, where it is visible, not in the model, where it would not be.
+Five frames: `OWNERSHIP`, `PRICE`, `TRANSACTION`,
+`SCARCITY_AS_GIVEN`, `VALUE_AS_PRICE`.
 
-## NOT CLAIMED
+There is no replacement field.  There is no score, no verdict and
+no rewrite.  A hit is a **location**.  That is enforced by an AST
+walk in the suite rather than promised in prose, and the scan is
+planted against so its silence means something.
 
-That ICS is a general substitute for price coordination. The pilot tests one
-thing: whether the loop closes on documented structure alone. It closes on the
-shipped scenarios. That is a statement about the loop, not about coordination in
-general and not about any alternative to anything.
+**The limit is stated at the top of the file, not the bottom.**
+This is a word list and a paraphrase steps around it:
 
-## Source discipline
+| sentence                                              | hits |
+|-------------------------------------------------------|------|
+| `You have to pay for it.`                              | 1    |
+| `It takes something from you before you may have it.`  | 0    |
+| `They compete.`                                        | 1    |
+| `They are competing.`                                  | 0    |
 
-Structure comes from the documents in `SOURCES.md` and is not invented. Every
-element carries a provenance state:
+So a zero is a property of **the registry**, never evidence that a
+text is frame-free.  The registry's coverage is the measurement;
+the text is only the sample.
+
+**Three counts, kept apart.**  `value` (absolute value),
+`property` (a property of a system), `cost` (a cost function),
+`budget` (an energy budget), `competition` (a measured ecological
+interaction), `efficiency` (a measured ratio) -- 32 entries carry
+a live non-money sense, each with the sense stated.  They are
+counted apart, never silently included and never silently dropped.
+The module locates; it does not adjudicate which sense is live.
+
+---
+
+## pilot_loop.py -- ICS with the price signal removed
 
 ```
-CITED          taken from a source in SOURCES.md
-ASSUMED        doctrine silent on something the model needs; the model supplies it
-CARRIED        from memory, citation unconfirmed. Not a citation.
-NOT_ACTIVATED  doctrine present, and doctrine itself provides for non-activation
-EXCLUDED       doctrine present, and a spec requirement excludes it
+ capacity declarations            need declarations
+ (who has what, ready when)       (who needs what, wanted by when)
+        \                                /
+         \                              /
+          +---------> matching <-------+      [CHOICE 2] [CHOICE 3]
+                         |                    ours, not ICS's
+                         |
+          +--------------+---------------+
+          |                              |
+          v                              v
+      ALLOCATED                        UNMET
+  from / to / qty / dep /        node / resource / qty / reason
+  arr / lag                      a RETURN TYPE, not an error
+          |
+          v
+   lag = arrival - declaration       [CHOICE 6]
+          |
+          v
+   per node, per resource: needed, met, unfilled,
+   lags[], max_lag, min_lag     -- no total, no ranking [CHOICE 7]
 ```
 
-`EXCLUDED` names the requirement that excluded it and what was omitted, and a
-run carrying one reports it at the **top** of the output. This build uses it
-zero times, and prints the zero.
+`UNMET` reasons, all four reachable and asserted so:
 
-**Every CITED element is VERIFIED LOCATOR / UNVERIFIED SECTION.** The documents
-resolve. Their sections were not read by the party that wrote this model, whose
-network cannot reach the host. `section_verified` is `False` on every row.
+| reason                  | what it means                          |
+|-------------------------|----------------------------------------|
+| `NO_CAPACITY_DECLARED`  | nobody declared that resource at all   |
+| `CAPACITY_EXHAUSTED`    | it existed and earlier needs drew it   |
+| `UNREACHABLE`           | it exists, no route is declared        |
+| `ARRIVES_AFTER_HORIZON` | reachable, arrives past the deadline   |
 
-`Finance/Administration` is present in the structure with activation state
-`NOT_ACTIVATED`, citing the doctrine that provides for its non-activation. It is
-not deleted and it is not `EXCLUDED`. Modelling a documented non-activation
-state is neither inventing structure nor excluding documented structure.
-`Intelligence/Investigations` is represented the same way.
+An undeclared route is `None`, never a large number and never
+zero.  A node that received nothing has `max_lag None`, never `0`.
 
-## The scanner's scope, and what it does not read
+### The finding
 
-It reads the vocabulary the model **declares** — function, class, argument and
-field names, and model data strings — plus scenario files. It does not read
-attribute accesses, because `x.value` on a standard-library enum is language
-surface rather than model vocabulary. A model-defined field named for money is
-still caught, at its definition, which is where the model's vocabulary is set.
-Docstrings are counted on their own line rather than silently dropped, so the
-prose exemption is measured.
+The screen over the loop's own source:
 
-Structural identifiers carried from cited doctrine are exempt, and every
-exemption carries its citation. Two are declared and **zero are used**, which is
-printed rather than left to look load-bearing.
+```
+unexempted hits : 0   FLAGGED: False
+exempted hits   : 5   -> compensation, cost, finance, procurement
+```
 
-One thing the scanner changed while this was being built: `@property` is in the
-ownership lexicon, so the two lag accessors are plain methods. The constraint
-was easier to satisfy than to widen the exemption list for.
+Every token that fires is a name **ICS itself gives** a part of
+its structure:
 
-## Known limits
+```
+ ICS General Staff
+   Operations   Planning   Logistics   Finance/Administration
+                                        |
+                        +---------------+---------------+
+                        |        |             |        |
+                      Time   Procurement   Compensation  Cost
+                      Unit      Unit        /Claims Unit  Unit
+```
 
-`frame_audit.py` is a word list, and a word list deciding a question of meaning
-is the failure mode of this class of instrument. Tokens with a common non-money
-sense are declared in `KNOWN_COLLISIONS` and every hit on one carries its note.
-A hit is a candidate, not a finding, and nothing in either file promotes one.
+One of four sections, and three of its four units, are the part of
+the structure this loop has no channel for.  A pilot that borrows
+ICS as a non-monetary substrate has dropped or repurposed a
+quarter of what it borrowed, and the doctrine's vocabulary says so
+before any of ours does.  That is the single exempted region, and
+it is measured in three arms: masked, the file is clean; unmasked,
+the carried block is the only thing that fires; planted, a token
+outside the region is caught.
+
+### Two limits, stated up front
+
+**It is smaller than it sounds.**  A matching rule that hands
+limited capacity to several needs IS a distribution decision.  A
+number attached to a unit of food is one such rule.  Removing it
+does not remove the decision -- it makes the rule explicit,
+logged, and arguable.
+
+**The screen has a blind spot shaped like the substrate.**  ICS is
+a *command* structure: it coordinates under a declared incident
+with a declared commander.  So this loop substitutes an allocation
+rule for one signal **and an authority for another**.
+`frame_audit` screens for one vocabulary; the authority assumption
+is not in it.  The screen returns clean on a module that made a
+second substitution it cannot see.
+
+---
+
+## Carried, not verified
+
+Everything about ICS here -- the General Staff sections, the
+Finance/Admin units, ICS-213RR / 211 / 204 / 215, the
+resource-status vocabulary, span of control 3-7, the Planning P --
+is transcribed from public doctrine **from memory**.  This
+environment's network is an allowlist and the doctrine hosts are
+not on it, so nobody here opened a source.  The finding above
+rests on it and says so.
+
+Every scenario in the folder is constructed.  Nothing here is a
+statement about any actual food system.
+
+Findings and their falsifiers: [`CLAIM_TABLE.md`](CLAIM_TABLE.md),
+`SA_001..SA_018`.

@@ -1,0 +1,68 @@
+MOVE SET v2 -- score
+==============================================================
+artifact : /home/user/Simulators/aperiodic-order-sim-stack/SIM_STACK_REPORT.txt
+sha256   : 165faf5346b322e43a5e7b4a426e50b997982b611f44c6a0da7d18ae7a7b6f31
+pinned   : unchanged
+order    : M4_perturb, M1_provenance, M6_absence_first_class, M3_relation_held, M5_self_report, M2_substitution
+
+move                       kind     verdict                      pts
+----------------------------------------------------------------------
+M1_provenance              ABSENT   VERIFIED_ABSENCE             1.0
+      92 line(s) searched, 3 token(s) not found
+      coverage: 1.0000 of artifact lines searched
+      confidence (unscored): high -- a whole-artifact token search, recomputable by anyone
+M2_substitution            QUOTE    BOUND                        1.0
+      sliced from /home/user/Simulators/aperiodic-order-sim-stack/SIM_STACK_REPORT.txt line 6 cols 18:54 (M2_substitution)
+      confidence (unscored): high -- the operative clause is on the cited line
+M3_relation_held           QUOTE    BOUND                        1.0
+      sliced from /home/user/Simulators/aperiodic-order-sim-stack/SIM_STACK_REPORT.txt line 17 cols 41:46 (M3_relation_held)
+      confidence (unscored): high -- the operand is on the cited line
+M4_perturb                 DERIVED  NOT_EVALUABLE                0.0
+      stated value within shipped precision -- abs_sub = 0.022 point, band [0.0210, 0.0230] at shipped precision, stated 0.021  [/home/user/Simulators/aperiodic-order-sim-stack/SIM_STACK_REPORT.txt line 15 cols 41:46 (M4_perturb) 1.889+/-0.0005; /home/user/Simulators/aperiodic-order-sim-stack/SIM_STACK_REPORT.txt line 17 cols 41:46 (M4_perturb) 1.911+/-0.0005]
+      confidence (unscored): high on the arithmetic, and the arithmetic is what refuses -- both operands ship three decimal places
+M5_self_report             ABSENT   VERIFIED_ABSENCE             1.0
+      45 line(s) searched, 3 token(s) not found
+      coverage: 0.4891 of artifact lines searched
+      confidence (unscored): medium -- a token search over a declared span, and 'control' is one word for the thing
+M6_absence_first_class     ABSENT   VERIFIED_ABSENCE             1.0
+      92 line(s) searched, 3 token(s) not found
+      coverage: 1.0000 of artifact lines searched
+      confidence (unscored): high -- a whole-artifact token search, recomputable by anyone
+----------------------------------------------------------------------
+total 5.0 of 6.0
+moves not run   : none
+absence fraction: 0.5
+
+absence_fraction is reported, never penalized. confidence enters no score. coverage is reported beside a verified absence and never folded into it.
+
+CONTAMINATION, DECLARED BEFORE THE NUMBERS.
+
+This repository already carries an audit of this artifact
+(aperiodic-order-sim-stack/CLAIM_TABLE.md, AOS_001..AOS_010). The reading
+layer of this demo is therefore NOT blind: whoever wrote the ledger had
+access to prior findings about the same document.
+
+What is scored here is the MECHANICAL layer only -- does a cited line
+exist, does a value sit at the cited columns, does a stated value fall
+outside the band its own shipped operands span, is a sought token absent
+from a declared span. Every one of those is recomputable by a reader with
+the artifact and no other context.
+
+M4 returns NOT_EVALUABLE on this artifact and the reason is worth reading
+rather than skipping. The report states the AB-Poisson baseline as 0.021
+and ships the two dimensions it is the gap between, rounded to three
+decimal places. Those roundings span [0.0210, 0.0230]; 0.021 is inside
+it. The artifact is self-consistent at the precision it shipped, so a
+point recomputation returning 0.022 is reporting the rounding and not a
+discrepancy. The same holds for every other stated relationship in this
+document. M4 establishes nothing here, and that is the result.
+
+What is NOT scored is whether any reading is correct. AOS_009 holds that
+the report's 0.021 baseline is the smallest of three pairwise gaps and
+that the honest ratio is nearer 4.5x than 15x. That is a reading, and it
+is untouched by the band above -- consistency at shipped precision says
+nothing about which baseline belongs in the denominator.
+
+A self-run is void as a capability score -- the runner holds the key
+(frame-location-benchmark FLB_010). This demo shows the harness runs and
+what it refuses. It is not evidence about anyone's auditing ability.

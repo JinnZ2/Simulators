@@ -1,0 +1,9 @@
+SCREEN -- pilot_loop.py source
+==============================================================
+unexempted hits : 0   FLAGGED: False
+exempted hits   : 5
+  region: section and unit names transcribed from public ICS doctrine; that they fire is the finding
+    compensation, cost, finance, procurement
+
+SCREEN -- rendered run (no exemptions apply)
+unexempted hits : 0   FLAGGED: False

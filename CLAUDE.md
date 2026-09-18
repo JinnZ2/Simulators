@@ -94,6 +94,21 @@ carrying structural load is a flagged defect, and co-produced documents are
 layer-separated before audit rather than audited as a composite. Read it
 before reporting.
 
+**What produces findings here.** Not the suites. The mechanism, stated
+because it recurs: *a finding surfaces when a claim is made externally
+checkable* — written into a place a second party, or a second instrument,
+can test it. `MSV_024` is the clean instance — a registration reachable
+only from a module tail survived 157 module checks and 105 repo tests, all
+green, and fell the moment two ids were written into another file's
+coverage manifest. `SS_009`, `UNI_010`, `EA_025` and `CD_006` are the same
+shape from other directions: running the thing rather than reading it,
+diffing two runs, handing one artifact to a second reader, checking a
+stated count against the script that produced it. A green suite is
+evidence that what is already checkable passes; it is not evidence about
+what is not. The corollary is the working rule — when a claim is stated in
+prose, the next move is to write it where something else reads it, and the
+denominator that grows is the one worth growing.
+
 ## Meta-spine (read first)
 
 The methodology spine sits in six root-level files. Every simulator
@@ -241,8 +256,11 @@ last three; read in order:
 - `valence-divergence/` — two decoders, one term; logs which read is whose, never assigns a valence
 - `terrain-prior/` — an indicator is a record of the process that made the site; bearing and entanglement, never collapsed
 - `trigger-geometry/` — was the RESPONSE validated in THIS geometry; sensor correct, model inverted
-- `failure-mode-register/` — durability and reconstructability only; the delivered register, parsed not retyped; v2 lands beside v1, purely additive
+- `failure-mode-register/` — durability and reconstructability only; the delivered register, parsed not retyped; four orders land beside each other, one parser reads all four
 - `internal-reference-boundary/` — seven radials on a boundary drawn from inside; R3's two legs, two time bases
+- `external-audit/` — three outside documents on this repo, landed verbatim; counts recomputed, instruments run, three sweeps cross-checked
+- `substrate-alternative/` — locate the money frame; one coordination loop without it
+- `revision-survival/` — can a model predict which of its held claims will be revised, and why; three arms, one sealed, the self-run VOID by its own reading
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -8845,7 +8863,172 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `MV_004` sharper (eleven keys shuffled instead of six, and still no
   field recording which order was used) and `MV_005` narrower
   (`NO_FINDING` now admissible on two of eleven moves, still scoring
-  zero). Stdlib only, parses under 3.9, CC0.
+  zero).
+  **Second order, 2026-09-16** (`WORK_ORDER_V2.md`, verbatim): same six
+  moves, a different output shape (`move_id / finding / confidence / or
+  ABSENT(reason)`), and one repair. The order names the file
+  `move_set_sim.py`, which holds a delivered artifact that is never
+  edited, so the build lands beside it as `move_set_sim_v2.py` under the
+  supersession convention (`MSV_001`). **`MSV_003`, the repair and the
+  whole point: `MV_002` closes.** v1 checked two non-empty strings, so a
+  ledger carrying `"x"` in every blocker and unblocker scored 6.0 of 6.0;
+  the same shape here scores **0.0 of 6.0**, every row
+  `UNVERIFIED_NO_SPAN` with a stated reason, while an honest all-absence
+  ledger over the same artifact scores 6.0 — so it is not a module that
+  refuses everything. The mechanism is `ACL_012`/`ACL_017` (*a guard that
+  asks for prose can be satisfied with prose*): **every entry is checked
+  against the artifact** in one of three kinds — `QUOTE` (the ledger
+  supplies a line and a column range, the ARTIFACT supplies the value,
+  sliced out), `DERIVED` (operands sliced out and the stated arithmetic
+  recomputed, gated on the ledger's own `holds: true|false` declaration
+  **in both directions**, so a discrepancy stays reportable), `ABSENT`
+  (reason + searched span + sought token, and the scorer confirms the span
+  resolves and the token is not in it). Each earns 1.0, so a correctly
+  refused verdict scores as high as a bound one and neither scores on
+  prose alone. **`MSV_004`:** `tools/sourced.py` is **imported** and its
+  own stated limit is the layer added — it gates value/source/locator for
+  mutual consistency and says it does not check whether the source is
+  *true*, so a self-supplied `source_text` passes; `bind_quote()` resolves
+  the locator INTO the artifact and requires the cited text to be the
+  artifact's own line. **`MSV_002`:** the order's M6 (*refuse to score what
+  cannot be seen; make the absence a first-class value*) and the delivered
+  v1 M6 family (sequence gaps, negative space — absences IN the artifact)
+  are **different moves sharing an ordinal**; not exclusive, so both are
+  built (`CHOICE 1`) — M6 has its own artifact-side trigger AND all six
+  moves admit `ABSENT`. **The demo** runs on a public artifact already in
+  this repo, cited by path and sha256-pinned rather than copied
+  (`CHOICE 2`, the `MF_019` drift): `aperiodic-order-sim-stack/
+  SIM_STACK_REPORT.txt`. **`MSV_006`, VOID — the M4 finding
+  does not stand, reported from outside this build and recorded rather
+  than quietly removed:** the report states the AB–Poisson finite-size
+  baseline as **0.021** and ships both dimensions that gap is between (AB
+  1.889, Poisson 1.911), point-recomputed **0.022** — but both operands
+  are written to three decimal places, so the gap they span is
+  `[0.0210, 0.0230]` and 0.021 is **inside** it; the artifact is
+  self-consistent at the precision it shipped and the third decimal was
+  the rounding. **`MSV_017`, and the scope note is the larger half:** *a
+  false-positive generator, not a one-off* — any artifact rounding an
+  operand has not stated the recomputed quantity to better than that
+  band, and a difference of near-equal numbers is the common case in a
+  results table. Repaired structurally: shipped precision parsed from
+  each operand **as written** (never through a float, which has already
+  thrown it away) and propagated through the operation, containment
+  deciding the verdict, with the stipulated relative tolerance **retired
+  in place** as choice 3 rather than renumbered (`MSV_021`) — the
+  `reasoning-gate` **G-RES** shape with the artifact's own significant
+  figures as the instrument. **`MSV_018`, the result:** all four stated
+  relationships in the artifact (0.334, 0.021, 1.460, 54.1) fall inside
+  their own shipped bands, because every operand is 3–4 significant
+  figures and every relationship is a difference of near-equal numbers or
+  a ratio of small ones — so **M4 establishes nothing on this document**
+  and the demo total falls **6.0 → 5.0**, a fall that is the instrument
+  working, since a harness scoring higher before was scoring a rounding.
+  **`MSV_019`:** `ARITHMETIC_AS_DECLARED` is now reachable only from
+  `holds: false`, so **holds=True is unearnable** — correct rather than a
+  limitation, a band containing the stated value being *consistency* and
+  not confirmation; M4 refutes or refuses and never confirms.
+  **`MSV_020`:** containment is tested in `decimal.Decimal` and not float,
+  because the exact band is `[0.0210, 0.0230]` while the float lower bound
+  computes as `0.02100000000000013` — a float test returns **False** by
+  1.3e-16 on a quantity whose smallest meaningful unit is 5e-4, producing
+  a finding on the one case the repair exists to refuse, and an epsilon
+  would be a second stipulated constant replacing the one just retired.
+  **`MSV_022`:** two choices are set one-sided toward refusing — an
+  operand with no decimal point takes half-width 0.5, which is wrong for
+  an exact count and errs toward `NOT_EVALUABLE`, and the stated value is
+  read as a point rather than widened to its own band. Whether 0.021 is
+  the right baseline at all is still a reading and is still not scored
+  (`AOS_009` holds it is the smallest of three pairwise gaps), and
+  consistency at shipped precision says nothing about it. **`MSV_007`, the M6 finding:** line
+  41's peak/floor ratio of 5537 has **no operands anywhere in the
+  artifact** — three of the document's four stated relationships recompute
+  from values it supplies and this one does not, so it is asserted rather
+  than checkable; not zero and not unknown. **`MSV_008`:** `MV_004`
+  repaired — `order` is a required ledger field, `read_ledger` refuses a
+  ledger without one and names `MV_004`, and `path_dependence` returns
+  `NOT_EVALUABLE` (a third state, not a pass) for fewer than two runs, for
+  zero runs, and for runs that do not declare distinct orders.
+  **`MSV_009`:** `MV_005` does not recur — there is no `NO_FINDING`
+  verdict, so no move scores zero for a clean read. **`MSV_011`:** the
+  demo ledger is model-authored and this repo already carries
+  `AOS_001..010` on the same artifact, so a contamination block prints
+  **before** the numbers naming both facts and `FLB_010` (*a self-run is
+  void as a capability score — the runner holds the key*); only the
+  mechanical layer is scored and no reading is. **`MSV_010`/`MSV_012`, the
+  two limits stated rather than repaired:** `coverage` (distinct lines
+  searched, overlaps counted once) is printed beside every verified
+  absence and **enters no arithmetic**, so an absence over 3% and one over
+  100% both score 1.0 and nothing separates a well-chosen narrow span from
+  a cherry-picked one — demonstrated directly, since the same token
+  verifies absent over lines 1-5 and is refuted over 1-92; and the sought
+  token list is a word list, named as one **at the point of use** (the
+  demo's M5 confidence field reads *"'control' is one word for the
+  thing"*). **`MSV_013`, two defects in this build, both found by
+  running:** the `tools/known_answer.py` registration landed **after a
+  `finally`** inside its own helper — dead code, registry one metric short,
+  the **second** instance of that shape there (`FMR_036` the first, and
+  `tools/sourced.registry_complete` exists because of it) — and the patch
+  adding the metric id to `EXPECTED_METRICS` matched its anchor a second
+  time inside an unrelated `register()` call in `seed()`; neither found by
+  reading. **`MSV_014`/`MSV_015`:** M4 and M6 reach the same place from two
+  sides on the demo and the overlap is recorded rather than repaired
+  (enforcing disjointness needs the cross-entry comparison the design
+  removes), and the demo ledger carries `note` and `_says`, two fields the
+  shipped `ledger_schema` does not declare — the `MF_017` shape arriving in
+  this build's own data file within one session of it being written.
+  **`MSV_016` UNVERIFIED and it covers the folder:** the move set has
+  never been run against any artifact by a party that did not write the
+  harness. `coverage` is registered in `tools/known_answer.py` with six
+  cases (the overlap case is the detector — summing range lengths returns
+  1.0 for two copies of one half; the empty case is where a zero hides,
+  since an undeclared span is no measurement); `move_set_sim_v2.py`
+  refuses `--selftest` (exit 2) and check count is printed by
+  `python3 move-set/test_move_set_v2.py`. **`MSV_023`, reported and not
+  repaired at the reporter's instruction — provenance of the
+  known-answer registry:** 19 of the 20 commits touching
+  `tools/known_answer.py` are model-authored and the twentieth is a merge
+  authoring no case, so every expected value was written by one author
+  who also wrote the functions being checked; and measured rather than
+  asserted, comparing the earliest commit introducing `def <fn>` against
+  the earliest introducing its registration string, **16 same-commit, 8
+  implementation-first, 0 registered before the implementation existed**
+  — including the two seed cases the file's own docstring describes as
+  answers *"fixed in advance"*, both implementation-first. So the 26/26
+  is a **regression** result (every case agrees with the current
+  implementation, authored by the same party with knowledge of it) and
+  not a validation one; what would change that is an expected value
+  traceable to a source outside this repository, to a commit preceding
+  the implementation, or to a second author, and none of the 26 meets
+  any of the three. **`MSV_024`, surfaced by making that claim
+  checkable:** the move-set registrations were reachable only from the
+  module tail, so the CLI read `26/26 COMPLETE` while
+  `tests/test_known_answer_gate.py`'s clear-and-reseed lost both —
+  invisible until the two ids were added to that test's MANIFEST, and the
+  third instance of a registration whose call site is off the path that
+  matters (`MSV_013` here, `FMR_036` before it, and
+  `tools/sourced.registry_complete` exists because of the first).
+  `_halfwidth` is registered beside `coverage` with six cases, the
+  exponent and empty cases being where a default width would hide. **The
+  denominator reconciles as two lists moving by different amounts** —
+  `EXPECTED_METRICS` 25 → 26 (one id, `_halfwidth`) against the test
+  MANIFEST 24 → 26 (two, because `coverage` was already registered under
+  `MSV_013`'s repair and had never been manifested), so `25 + 2 = 27`
+  fails and the ordering table's 25 rows are the committed metrics at
+  measurement time with `_halfwidth` the uncommitted 26th. **`MSV_025`,
+  the repair moved to the level:** three occurrences all repaired per
+  instance, so `seed_reachable()` now closes a call graph from `seed` over
+  the module's own AST and requires every `register(...)` call site to sit
+  inside it (a module-level call is a violation by construction), with
+  `registration_sites_elsewhere()` as the second arm — a `register(...)`
+  in any other file cannot be reached by `seed()` at all, a visible zero —
+  both failing `python3 tools/known_answer.py` and both in the repo suite,
+  null-tested in four directions including transitivity, with the nested-def
+  limit stated in the function. **`MSV_026`:** the finding came from
+  neither suite — 157 module checks and 105 repo tests were green with the
+  defect standing — but from writing two ids into another file's manifest,
+  which is the repo's own finding mechanism and is now recorded under
+  `AUDIT_CONTRACT.md` rather than as an incident.
+  Twenty-six claims `MSV_001..026` in `CLAIM_TABLE_V2.md`. Stdlib only, parses under 3.9, CC0.
 - `clustering-axes/` — Six exploration routes for what AI agents cluster
   on when the axis is **not imported from human social science**, plus a
   model-free stylometric instrument for the cheapest of them. Both
@@ -12031,6 +12214,517 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   check cannot see; the spill files `UNPARSED` and is kept apart from `EMPTY`.
   **`FMR_043`** states what the gate does not do. Check count printed by
   `python3 test_register_v2.py`.
+  **A third order then landed** (`WORK_ORDER_V3.md`, verbatim beside the
+  other two — three orders, none overwritten), with `entries_v3.py`
+  defining no parser of its own: the gutter parser and fence walker come
+  from `entries.py`, and the gated score map, the column-boundary report
+  and the F3 reader from `entries_v2.py`, **generalised to take a document
+  rather than copied** — one parser, three documents (`FMR_055`, checked
+  from the AST, with v2's own readings and 142 checks unchanged).
+  **`FMR_044`: v2 against v1 was a pure insertion and this is a rewrite** —
+  338 equal lines of 1218 and 1104, similarity 0.2911 — and **shorter than
+  v2 while carrying three sections v2 lacks**, so prose was compressed,
+  which is the order's own *"expected to be SHORT"* rule applied to the
+  order. **`FMR_045`, the standing blocker removed by declaration:** §0-1
+  reports the prior-art gate run, tables four adjacent artifacts, marks one
+  `CLOSEST PRIOR ART. CITE.` and states `GATE RESULT: not redundant`, with
+  Step 0 now `DONE` — so `FMR_001` (*"the register is not cleared to
+  ship"*) is SUPERSEDED by the order's own report, which is
+  `NOT_VERIFIABLE_HERE` (arxiv.org and export.arxiv.org refuse CONNECT
+  403, measured; github.com is the connecting control) and which the order
+  itself flags *"Verify before citing"*. **`FMR_049`, the sharpest result:
+  §6 THE PARSER GATE is this session's own repair delivered back as a
+  control inside the order it repairs**, and it restates it **one field
+  short** — three fields where `tools/sourced.py` refuses on a fourth, the
+  span, with `span` and `offset` at **zero hits** in §6. Demonstrated
+  rather than argued, three readings of the same two rows: **containment**
+  (what the three fields buy) catches V3 and **misses V6**, where the buggy
+  `-` occurs in its own cell through the hyphen of the arrow; a **searched
+  span** misses it too and points at **offset 0, the arrow**, where the
+  score sits at offset 3 — a span found after the fact can name the wrong
+  occurrence; only a span **produced by the extraction** refuses both, and
+  §6 names neither the span nor where it must come from. **`FMR_047`:** the
+  boundary defect recurs on the same score row **and arrives a second time
+  in the section v3 adds** — one prior-art line cuts on both sides of the
+  column, truncating a cross-reference at `see DUR-` and prefixing its
+  neighbour with `005`, found by the same check on material written after
+  the check existed. **`FMR_048`:** the `id` moved out of the entry fence
+  into the `### DUR-00n` heading, so every block carries 11 of 12 schema
+  fields and the order's own *"an entry missing any field is an UNRATED
+  PART"* fires on **6 of 6** against a format change rather than an
+  omission — while v2's undeclared `NOTE` field is gone, closing `FMR_013`.
+  **`FMR_050`:** Step 6's first conjunct is an equality against a free-text
+  field with no declared vocabulary, and a whole-word `NONE` scan gates in
+  the one entry whose cell reads *"Scored PARTIAL, not NONE"* — the
+  lexical-proxy shape avoided rather than found, reported as a measured
+  false positive; `FMR_008` stands, *consequence non-trivial* still having
+  no test anywhere. **`FMR_051`:** `F_D` directs the PROJECTED fraction
+  into the header and the header states an entry count and a gate status,
+  while the recount is unchanged at **1 of 6, exactly at the cap**.
+  **`FMR_052`:** `F_J`'s exemption is **named and not exercised** — six
+  subsections, zero ENTRY blocks, zero cited instances, two named
+  *observable now*, and the one worked case introduced as a case rather
+  than cited. **`FMR_046`, `FMR_053`, `FMR_054` did not move across the
+  rewrite:** four protective variables against F3's two with `V5` argued
+  away by nothing (and `A-01`'s carrier-as-reader redefinition still not
+  applied to `V5`'s gloss, in a register whose own `DUR-004 STRANDED UNDER
+  LOAD` names the state it produces); `F_L` still stating that correlation
+  makes joint failure HIGHER when survival is non-decreasing in
+  correlation (0.5217 → 0.1000 at p=0.9, n=7) while `A-07` states the same
+  correction without a direction and is right; and `0 of 7` ambient
+  conditions stating a lifetime against prose claiming each has one, `0 of
+  5` carrier-side conditions stating a rate, so `F_M`'s active set is
+  empty in the document that delivers `F_M`. **`FMR_056` UNVERIFIED:** no
+  deployed component inspected and no entity rated — no function takes an
+  entity as an argument — and the register's own ship gate now turns on a
+  claim nobody here can check. Five `[CHOICE n]` markers across the two v3
+  modules (the duration and rate rules being `register_v2`'s, imported with
+  the functions that take them), each printed and each cited inline; the
+  renders screen clean through `sheet-structure-scan/no_severity` with
+  **no exemption**, four authored words reworded rather than exempted.
+  Check count printed by `python3 test_register_v3.py`; `entries_v3.py` and
+  `register_v3.py` both refuse `--selftest`.
+  **A fourth order then landed** (`WORK_ORDER_V4.md`, verbatim beside the
+  other three — four orders, none overwritten), with `entries_v4.py`
+  defining no parser of its own: the gutter parser and fence walker come
+  from `entries.py` and the boundary reader from `entries_v2.py`,
+  **generalised to take a COLUMN LAYOUT rather than copied**, since v4
+  rewrote the V-map into five columns with word score tokens — one parser,
+  four documents, and v2's and v3's own readings and 142/132 checks
+  unchanged. **`FMR_057`: v4 is a REWRITE of v3 and the longest of the
+  four** — 727 of 1104/1235 lines equal, ratio 0.6216, 12 deleted and 534
+  replaced — so prose grew where v3 compressed, entries staying at six.
+  **`FMR_058`, the standing blocker reinstated by the order itself:**
+  `FMR_045` recorded v3 reporting Step 0 `DONE` and removing the ship
+  blocker on the strength of an unverifiable report; v4 reverses it to
+  `RUN` / `NOT_VERIFIABLE_HERE` / `SHIP BLOCKER FMR_001 OPEN`, with §0-1,
+  the version line and §7's Step 0 **all three agreeing** (which is what
+  `[CHOICE 5]` reads them apart to establish), so `FMR_001` is OPEN again
+  by declaration rather than by audit — arXiv still refusing CONNECT with
+  `github.com` the control. **`FMR_059`:** §10's rule is that a superseded
+  statement is retained and silent overwrite is not permitted, and of
+  eighteen amendments **none is about the gate** — the only one mentioning
+  prior art is `A-13`, about the table's format — while the blocker's one
+  cross-reference reads *"See A-12"*, which is the id-field amendment; the
+  reversal is right and is filed where a reader will not find it.
+  **`FMR_060`:** `A-14` restates F3 as four PROT with `F2` disposing `V9`
+  and `F3` claiming `V7`/`V13`, and **the restatement reproduces from the
+  table** on a recount — while `V5` is still PROT, still unargued, `D-04`
+  open, so the restatement is SUPPORTED and the gap it names does not
+  close. **`FMR_062`, the build `D-06` asks for:** *a mechanical check in
+  the harness, not a rule in the text* — `format_rule_scan` walks **every**
+  fixed-width table in the whole document, because the recurrence `D-06`
+  records was in a table the V-map check did not look at, and run on all
+  three documents it gives cuts **v2 0 / v3 2 / v4 0**, both v3 cuts on
+  line 50 across `SCOPE` and `MISSES` (the prior-art table, truncating a
+  cross-reference at `see DUR-` and prefixing its neighbour with `005`),
+  null-tested in four directions on constructed documents so the v4 zero
+  is a result and not a silence. **`FMR_063`:** §5-1's rate table carries a
+  hyphenated line wrap inside a rate cell **in v2, v3 and v4 alike**, plus
+  three rows whose first column is filled while the rest are blank — a wrap
+  and a one-cell row written the same way — never repaired across three
+  revisions, which is `D-06`'s own sentence with a denominator under it.
+  **`FMR_061`, the stated cost paid immediately:** the scan reads a table at
+  three or more columns, because a two-column fixed-width block is the same
+  shape as a gutter block (`[CHOICE 5]`), and F3's own restatement block
+  reads `UNDISPOSED   V5   -> D-04`, an arrow in a status cell one section
+  after §1 applies the rule against one — reported by name with the blind
+  spot beside it rather than by tuning a threshold. **`FMR_064`: `F_N`
+  passes** — `A-12` puts the id back in the field block and the rating
+  vector goes **v3 6 of 6 UNRATED → v4 0 of 6**, computed on both documents
+  with the same rule (`[CHOICE 2]`) so a difference is a property of the
+  format and not of two readers, with both verdicts shown reachable on
+  constructed entries. **`FMR_065`:** `A-15` declares `note` optional
+  (5 of 6, absent on the sixth, firing nothing) and closes `FMR_013`, while
+  **`name` is carried by 6 of 6 and appears in no schema** — the same shape
+  one field over in the revision that names it, firing nothing either,
+  correctly, since the UNRATED PART rule is about absence. **`FMR_066`,
+  this session's own `FMR_049` delivered back as a control:** `A-18` adds
+  §6's fourth requirement (the span must be EMITTED BY THE EXTRACTION), and
+  constructing both spans on the row the defect was first found on
+  reproduces the order's stated signature **exactly** — searched `(0,1)` at
+  offset 0, emitted `(3,5)` at offset 3, **and the gate passes both**,
+  because provenance is a property of the CONSTRUCTOR and the gate sees
+  fields; `tools/sourced.py` already ships both constructors and what it
+  does not do is refuse the searched one, which no check of three fields
+  can, so `entries_v4` calls `find_span` nowhere and `slice_sourced`
+  everywhere. **`FMR_067`:** `F_L` now prohibits a **sign** as well as a
+  number, `A-17` retaining the withdrawn direction and recording *found by:
+  computing survival across rho against the asserted sign*, with the
+  `DUR-006-B` conclusion unchanged. **`FMR_068`:** the active ambient set
+  is EMPTY and the header says so — recounted through `register_v2`'s
+  imported bounds at **0 of 7 lifetimes** (every cell `not stated`) and
+  **0 of 5 rates** (every cell `none`, every mechanism `not named`), both
+  bounds shown able to admit a constructed condition so the zeros are
+  measurements; alongside, the header states the PROJECTED fraction as a
+  SCOPE rather than a count (which is what `F_D` asks for and is not the
+  entry-level quantity), and the legend declares three score tokens while
+  `V14`'s amended cell reads a fourth, `SPLIT` — `A-03`'s split, in the
+  amendment record and not in the legend. **`FMR_069` UNVERIFIED:** no
+  deployed component inspected and **no entity rated**, asserted from the
+  AST; nothing is registered in `tools/known_answer.py` from this build and
+  the reason is stated rather than left as an absence — every function
+  returns a structure or a declared vocabulary member and the one counting
+  function's known answer is the enumeration it walks (the
+  `internal-reference-boundary` `IRB_011` reasoning), with the classifiers
+  null-tested in both directions instead. Eleven `[CHOICE n]` markers across
+  the two v4 modules, each printed by `--choices` and cited inline; the
+  renders screen clean through `sheet-structure-scan/no_severity` with
+  **no exemption**, five authored words reworded rather than exempted.
+  Check count printed by `python3 test_register_v4.py`; `entries_v4.py` and
+  `register_v4.py` both refuse `--selftest`.
+- `external-audit/` — Two documents about this repository, delivered from
+  outside it and landed verbatim, plus the two checkers that recompute
+  what is recomputable in them. `DEEP_RESEARCH_2026_09_14.md` is a
+  166-folder survey grouped into nine families with per-audience
+  applications, improvements and a fifteen-item roadmap;
+  `RESPONSE_TO_REVIEW.md` is the reply, which accepts the survey's scope
+  discipline, states where the roadmap collides with the repo's own
+  durability register (a PyPI core is a CUSTODIAN, CI is a HOP
+  GENERATOR), refuses the reading of `NOT_RUN` as a credibility debt
+  rather than a recorded state, and makes one request: run the
+  instruments and report the failures. Neither document is edited here;
+  disagreements go in `recount.py`'s output and in `CLAIM_TABLE.md`
+  (`EA_001..EA_017`), the `uninstrumented/cases/` arrangement.
+  **`EA_003`, the headline: the review's arithmetic is internally
+  consistent and externally wrong by exactly two folders that do not
+  exist.** Its family tables name 166 folders and `frame-token-audit`
+  and `gap-register` are not in the tree — `git grep` finds neither
+  string anywhere, so invented rather than renamed — leaving **164 real
+  content folders**. At the surveyed revision **seven of nine families
+  reproduce exactly** (F3 483, F4 214, F5 280, F6 11, F7 141, F8 175,
+  F9 119, plus F5's 130 Python files and F6's zero), and the only two
+  that do not are exactly the two carrying a phantom: F1 short by 14,
+  F2 by 7. **Family sum 2652 + 21 phantom = 2673, the report's own
+  stated total, to the digit** — and all three headline numbers
+  decompose from the same 21 (5 Python, 7 Markdown, 9 other), so the
+  shortfall is one error and not three. **`EA_002`:** the revision is
+  **established rather than taken**, since the report states a survey
+  date and no commit — exactly one family moves between `6633778^` and
+  `6633778`, by exactly the size of the commit between them, seven
+  exact at the parent against six at the child. **`EA_004`, the sharp
+  one: `.github` is the one top-level directory the tables never name,
+  and it carries the refutation of two claims that rest on its
+  absence** — `workflows/test.yml` runs `unittest discover` across seven
+  suites on push, so §12.2's *"no test-running CI"* is **REFUTED**,
+  while roadmap item 3 survives **narrowed** (CI exists and covers seven
+  suites, not the per-module `--selftest` surface, and does not run
+  `tools/known_answer.py`). **`EA_005`:** "no installable package" is
+  narrowed, three folders shipping a `pyproject.toml`, with the
+  repo-wide-core form intact. **`EA_006`:** "no machine-readable claim
+  index" **HOLDS and is sharper than stated** — `tools/validate_claim_table.py`
+  validates a `CLAIM_TABLE.json`, **zero exist against 98
+  `CLAIM_TABLE.md`**, a consumer with no producer and `CONSTANT_SILENT`
+  at repository scale; the same recommendation is the one the response's
+  §5 accepts without objection, reached from the other side.
+  **`EA_007`:** the markdown-coverage **enumeration is right and the
+  count is two short** — the four named exceptions are all real, and
+  `tools/` and `tests/` also carry none, so 160 of 166 on the report's
+  own denominator; enumeration and count are checked apart for exactly
+  that reason. **`EA_008`:** twenty-one individual numeric claims
+  reproduce **exactly**, including the two `fragility-cascade` figures
+  that read as a contradiction and are not (173 files, 85 Python, in a
+  sentence about Python). **`EA_009`:** the report is now inside the
+  tree it counts — 165 / 165 / 166 across counted revision, head and
+  working tree — so every number is pinned by revision and a selftest
+  check asserts the report is absent from the revision it is measured
+  against; `UNI_010`/`ANC_001`/`QA_007` on the largest substrate
+  available. **`EA_010`:** the report's §0 is the house discipline
+  arrived at independently — a verification record placed *before* the
+  body, two claims WITHDRAWN with their prior support named, and the
+  same arXiv CONNECT 403 with `github.com` as the same control that
+  `failure-mode-register/WORK_ORDER_V4.md` §0-1 carries. **`EA_011`:**
+  the response accepts an arithmetic that does not hold — its §1 lists
+  the sums as established, and the disagreement runs toward the
+  repository, so it is stated rather than left. **The instruments then
+  ran**, at a pinned revision in a throwaway worktree because running
+  them in place edits the tree being measured (`SS_009`):
+  `tools/known_answer.py` **24 metrics, 24 expected, COMPLETE, 0 cases
+  disagreeing**; `gate-check` four checks all `HELD_RETRIEVABLE` over
+  2331 files; `self-scan/resolve.py` all five registered predictions
+  HELD; and across the 300 modules exposing `--selftest`, **156 PASS
+  carrying 4922 checks, 107 REFUSED, 28 NO_CHECKS, 5 FAIL, 2
+  FLAG_NOT_ACCEPTED, 2 RUNS_BARE, 0 TIMEOUT, 0 DEP_MISSING**. **`EA_015`, found by running rather than reading, and it is a
+  defect in this folder's own instrument first:** the sweep read **132
+  modules as NO_CHECKS that do print a count**, because the tree carries
+  **five** selftest output conventions and refuses `--selftest` with
+  exit **2** in one folder and **1** in another — so neither the exit
+  code nor one format is the discriminator, and the repo's own
+  `census.py` shows the same symptom as `RAN_NO_VERDICT`. Repaired by
+  parsing all five and recognising a refusal **structurally** (no count
+  reported AND the output names a different `.py` to run), which is what
+  a refusal does rather than a word list over *library*/*parser*/*run:*,
+  the `T1-1` failure; a sixth convention lands in `NO_CHECKS` rather
+  than being absorbed, asserted, and all five states are shown reachable
+  on constructed modules before the sweep runs. **`EA_016`:** the live
+  failures are **content findings, not broken tests** —
+  `mining-increment` and `zero-sum-curriculum-null` both firing
+  named-and-absent cross-reference checks, and the sharpest,
+  `notes/check_datasets.py`, reporting that `G-SPAN` and `MESA` now
+  resolve **outside** `sim-span/` so *"finding 3 must be restated"*: an
+  instrument telling its operator which recorded finding has gone stale
+  and naming the file that broke it. **`EA_018`, the fifth failure and a real defect rather than a sweep
+  artifact:** `columbia-chain-cascade/UNDERGRADUATE_RESEARCH_GAPS.md` is
+  read by four modules and is **not in the tree** — only the `_V2` file
+  is — so `selftest_kill.py` dies before its first check and
+  `assemble_gaps_v2.py` cannot run at all, which means the published
+  *strip the fences and v1 returns byte-for-byte* identity **has no
+  input side and is not checkable here**; the `SS_026` shape, invisible
+  until something ran. **And the sweep's own reader was wrong twice
+  before its numbers were worth anything** — the second time a crashing
+  module read as REFUSED, because the refusal rule looks for the output
+  naming another `.py` and a traceback names `.py` files, so the
+  `FileNotFoundError` vanished from the failure list; both repaired,
+  both null-tested, and all seven states shown reachable on constructed
+  modules before the sweep is allowed to run, with `RUNS_BARE` and
+  `FLAG_NOT_ACCEPTED` existing so a property of the invocation is not
+  filed as a property of the module. **`EA_017`:** O-1's
+  first clause is answered and its second is not — no claim has been
+  checked against its own falsifier, which needs a reader per claim
+  across 98 tables rather than a runner, and stays open with `EA_006`
+  naming the artifact that would make it tractable. **`EA_014`
+  UNVERIFIED and it covers the folder:** no external citation was
+  checked, the egress gate refusing every publisher host and the
+  report's own §0.3 recording the same for its arXiv identifiers —
+  every finding here is a property of this tree, recomputable by anyone
+  with the clone. Check counts printed by
+  `python3 external-audit/recount.py --selftest` and
+  `python3 external-audit/run_instruments.py --selftest`; eleven
+  `[CHOICE n]` markers, each printed by `--choices` and cited inline.
+  **The review then landed a SECOND time**
+  (`DEEP_RESEARCH_2026_09_14_V2.md`, verbatim beside the first, both
+  inspectable, plus the four SVG assets under `assets/` that the first
+  rendering referenced without carrying). **`EA_019`:** a revision and
+  not a rewrite — 580 of 649 lines equal, ratio 0.9070, **0 deleted** —
+  which **replaces** its own §0, v1's source-verification record becoming
+  v2's execution record, so the WITHDRAWN and arXiv tables survive only
+  as prose; the **family tables are byte-identical**, so `recount.py`
+  reads both with one parser (`report_text(path)` / `families(path)`,
+  generalised rather than copied) and every `EA_001..EA_014` finding
+  carries unchanged, the two phantom folders included. That gives
+  **three independent sweeps of one tree** — the second pass's, this
+  folder's, and the repo's own `self-scan/census.py` — compared by
+  `crosscheck.py`, which parses the second pass's claims out of the
+  delivered document at call time. **`EA_020`, the cleanest VOID RATIO
+  in the tree:** `tools/known_answer.py` prints **84 PASS and 2 FAIL
+  (pinned)** per case and a headline reading *cases disagreeing with the
+  registry: 0* — the second pass read the column, `run_instruments.py`
+  read the headline, and **two parties who never spoke reported 0 and 2,
+  both correctly**, since the headline counts disagreement with what the
+  registry EXPECTS and a pinned failure that fails agrees with it; one
+  name over two denominators, on a summary line. **`EA_021`:** the two
+  sweeps ran at different revisions — `gate-check` scans **2342** for
+  the second pass and **2331** for ours, which pins `6633778`, and the
+  eleven-file gap is this audit folder landing, so the revision is the
+  first candidate explanation for every divergence and `crosscheck.py`
+  takes every count at a COMMIT rather than the working tree.
+  **`EA_022`:** four of five failures agree and **each sweep carries one
+  the other missed**. **`EA_023`, the sharpest:**
+  `evaluation-frame/frame.py` sets `CORPUS_DIR` to a path **outside the
+  repository** and says so in its own comment, so its selftest returns
+  73/0 here at both revisions and fails for the second pass — **neither
+  party misreading**, the verdict being a property of the sandbox, which
+  is `EF_009`'s *the corpus is written by the run that reads it*
+  measured from outside by someone who could not have known to look for
+  it: `TP_008`'s decorrelated shadows arriving because nobody
+  coordinated. **`EA_025`, the finding that pays for the cross-check:**
+  the second pass reports the repo's own census surfacing *three tools
+  that report zero failed checks while exiting nonzero*, and every
+  nonzero exit in those folders is the house REFUSAL convention while
+  their runners are green — but running the census directly, **four rows
+  come back `SOME_FAILED_UNCOUNTED` on output that says `failed: 0`**,
+  because `checks: N   failed: M` was a fourth convention
+  `self-scan/resolve.py::parse_count` did not parse and the fallback
+  heuristic's dirty test `[1-9]\d*\s+failed` matches **the check
+  count**, `142   failed`, while its clean test does not fire at all, so
+  the misread was unambiguous rather than a tie. REPAIRED in
+  `parse_count`, where census and `resolve.py` both read it, with four
+  checks pinned: whole tree, nothing else changed, `GREEN` 146 → **150**,
+  `SOME_FAILED_UNCOUNTED` 5 → **1**, and **513 already-passing checks
+  started being counted** (6236 → 6749), so the repo's own headline check
+  total was 8% low because four suites' output was unparsed.
+  **`EA_026`:** three readers, one trap — a refusal read as a failure —
+  and the only one that did not fall in is the one carrying a state for
+  it, the absent-vs-known-negative repair doing its job on evidence
+  nobody here produced. **`EA_027`:** `notes/check_datasets.py` now names
+  `external-audit/CLAIM_TABLE.md` and `external-audit/README.md` among
+  the files giving its guarded terms an antecedent independent of the
+  note — the check is working, and what it caught is the audit.
+  **`EA_024` is this session's own**, recorded rather than smoothed: a
+  first pass read `check_datasets.py` as exiting 0 because the exit code
+  was taken from a pipeline rather than from the module, which is the
+  class of defect this folder exists to find, committed inside it.
+  Twenty-seven `EA_*` claims; check count printed by
+  `python3 external-audit/crosscheck.py --selftest`; seven further
+  `[CHOICE n]` markers, each printed by `--choices` and cited inline; the
+  render screens clean through `sheet-structure-scan/no_severity` with
+  **no exemption**, seven authored words reworded rather than exempted.
+  Stdlib only, parses under 3.9, CC0.
+- `substrate-alternative/` — Two modules, self-contained and
+  promotable: one locates money-frame assumptions in text and
+  proposes nothing, the other runs a food-distribution
+  coordination loop on ICS structure with the price signal taken
+  out. Addressed to a repository of its own
+  (`JinnZ2/substrate-alternative`) which **does not exist and
+  could not be created from this session** — the GitHub
+  integration answers `403 Resource not accessible by
+  integration` and `add_repo` answers `not found` (`SA_018`) — so
+  it lands here as a folder that imports nothing across its own
+  boundary and carries its own LICENSE and suite. **`frame_audit.py`**
+  reads any text and reports every token carrying a money-frame
+  assumption across five frames (`OWNERSHIP` / `PRICE` /
+  `TRANSACTION` / `SCARCITY_AS_GIVEN` / `VALUE_AS_PRICE`) with the
+  sentence index, the character span and the frame, plus counts by
+  frame. **`SA_001`: LOCATE ONLY is enforced rather than
+  promised** — an AST walk over every identifier, argument,
+  attribute, function name and dict key finds no member of
+  `suggest / replace / instead / alternative / rewrite /
+  recommend / improve / fix / better / prefer / should`, and
+  `Hit._fields` intersects that vocabulary at zero, with the scan
+  null-tested on a planted `def suggestion`. **`SA_005`, the limit
+  stated at the TOP of the file and measured rather than
+  asserted:** `You have to pay for it.` returns one hit and `It
+  takes something from you before you may have it.` returns zero
+  carrying the same frame, while `compete` fires and `competing`
+  does not, since inflections are not generated — so a zero is a
+  property of THE REGISTRY and never evidence that a text is
+  frame-free (`T1-1`/`UNI_009` stated as the design's own ceiling
+  rather than found in audit). **`SA_003`:** of 165 surfaces, 32
+  carry a live non-money sense (`value` = absolute value,
+  `property` = a property of a system, `cost` = a cost function,
+  `budget` = an energy budget, `competition` = a measured
+  ecological interaction, `efficiency` = a measured ratio), each
+  with the sense stated, and three counts are returned and never
+  collapsed — total, unambiguous, ambiguous, with
+  `total == unambiguous + ambiguous` per frame — because the
+  module locates and does not adjudicate which sense is live; a
+  frame with no hits is a visible zero and a text with no hits is
+  a reachable negative, so it is not `CONSTANT_FIRES`.
+  **`pilot_loop.py`** replaces the price signal with four
+  channels — capacity declarations, need declarations, matching,
+  lag tracking — on ICS (public FEMA/NIMS doctrine) as the
+  coordination substrate. **`SA_010`:** `UNMET(node, resource,
+  quantity, reason)` is a namedtuple and not an exception,
+  asserted both ways, with all four reasons
+  (`NO_CAPACITY_DECLARED` / `CAPACITY_EXHAUSTED` / `UNREACHABLE` /
+  `ARRIVES_AFTER_HORIZON`) reached by constructed scenarios and a
+  partial fill returning BOTH an allocation for what moved and an
+  UNMET for the remainder. **`SA_011`:** an undeclared route is
+  `None`, never a large number and never zero, since either would
+  put an undeclared route on the same scale as a declared one, and
+  a node that received nothing carries `max_lag None` rather than
+  `0`. **`SA_007`, the finding: the substrate's own vocabulary
+  carries the thing being removed.** The screen over the loop's
+  source returns **0 unexempted hits and 5 exempted**, reducing to
+  four entries — `finance`, `procurement`, `compensation`,
+  `cost` — every one a name ICS itself gives a part of its
+  structure: the **Finance/Administration** section of the General
+  Staff and three of its four units. One of four sections, and
+  three of its four units, are the part of the structure this loop
+  has no channel for, so a pilot borrowing ICS as a non-monetary
+  substrate has dropped or repurposed a quarter of what it
+  borrowed and the doctrine says so before any of ours does; it is
+  the single exempted region, measured in three arms (masked the
+  file is clean, unmasked the carried block is the only thing that
+  fires, planted a token outside it is caught). **`SA_008`:** a
+  second exemption was reserved for the docstring on the reasoning
+  that a module cannot say which signal it removed without naming
+  it, the docstring was then written without the vocabulary, the
+  anticipated hits did not occur and the region was **deleted
+  rather than kept empty**, since an unfired exemption reads as a
+  hit that was forgiven. **`SA_009`/`SA_012`:** the matching rule
+  is ours and not ICS's — ICS specifies a request channel
+  (ICS-213RR) and an assignment authority, not who wins when two
+  requests meet one pallet — declared as `[CHOICE 2]`/`[CHOICE 3]`
+  with a counter-rule stated, while per-node readouts carry
+  `needed / met / unfilled / lags / max_lag / min_lag` and no
+  seventh number, nothing summed across nodes and no ranking
+  identifier anywhere (AST-asserted, null-tested), because one
+  number per node would be a standing for the node and so a second
+  allocation signal arriving through the readout. **`SA_013`, the
+  sharpest thing in the folder:** removing the price signal and
+  keeping ICS substitutes an allocation rule for one signal AND a
+  command authority for another, and `frame_audit` screens for one
+  vocabulary in which the authority assumption does not appear —
+  **the screen has a blind spot exactly the shape of the substrate
+  chosen to fill the hole it screens for** — with no authority
+  registry built here, since inventing one in the same session
+  that wrote the module would score the module against a list
+  written to let it pass. **`SA_014`:** the result is smaller than
+  it sounds and says so — a matching rule handing limited capacity
+  to several needs IS a distribution decision, price is one such
+  rule, and removing it makes the rule explicit, logged and
+  arguable rather than removing the decision. **`SA_019`, found by
+  running rather than reading:** the prose first stated 23 entries
+  carrying a second sense where the registry holds 32 — a
+  transposition, in a folder whose subject is a number standing in
+  for a thing — now asserted against the loaded registry and
+  required to appear in both documents. **`SA_017`:** the AST scan
+  is a copy of `tools/authority_scan.py`'s operation rather than
+  an import, forced by the folder having to stand as its own
+  repository, with the drift cost stated rather than hidden.
+  **`SA_015`/`SA_016` UNVERIFIED:** every ICS fact is carried from
+  memory (the doctrine hosts are not on this environment's egress
+  allowlist, so nobody here opened a source) and every scenario is
+  constructed, so nothing in the folder is a statement about any
+  actual food system. Check count printed by
+  `python3 test_substrate.py`; both modules refuse `--selftest`
+  (exit 2). Stdlib only, no network, parses under 3.9,
+  phone-buildable, CC0.
+- `revision-survival/` — WORK ORDER M, delivered verbatim with the
+  session notes that produced it (`SOURCE_DROP.md`), and built to it: can a
+  model predict WHICH of its currently held established claims will be
+  revised, and WHY. Two quantities never combined, `Q_label` and `Q_mech`,
+  the second load-bearing since a label can be retrieved and a structural
+  reason cannot. Three arms in one stdlib file. **ARM A** scores a corpus of
+  claims established as of Y=2005 under OPEN and BLIND, and the order's
+  rule that a result without `delta = acc(OPEN) - acc(BLIND)` is void is
+  **enforced**: a missing condition returns `VOID` with the reason and no
+  member of the return enum (`RS_001`). **`RS_002`, the finding on the
+  delivered corpus:** five of the twelve seeds fail the order's own
+  admission rule by this session's dating (peptic ulcer, HRT, arsenic life,
+  knee arthroscopy, CRASH were reversed or did not exist before Y), one is
+  UNCERTAIN, six admit at **0 SURVIVED** — the list is selected on being a
+  memorable reversal, D1 in a second form. **`RS_003`:** five SURVIVED
+  candidates ship authored here and NOT admitted, since the test shows
+  admitting them clears D1 by itself: whoever writes the SURVIVED rows sets
+  the base rate. **`RS_004`:** on a SURVIVED row the key mechanism is
+  `NONE_GIVEN`, so Q_mech there is a function of Q_label and the
+  load-bearing quantity lives on the revised subset, which D1's floor
+  shrinks; `acc_mech_revised` is reported beside it. Chance is
+  `max(1/|vocab|, majority share of the key)` so a constant NONE_GIVEN
+  responder reads at chance and not below (`RS_005`); the return enum is
+  read as primary plus an OVERCONFIDENT co-flag since it is not a partition
+  (`RS_006`), every member reached on constructed worlds under a responder
+  author distinct from the key's. This session's own OPEN responses agree
+  with the key 6 of 6 because one hand wrote both, and the scorer reads the
+  `author` field and returns `VOID_SAME_AUTHOR` (`RS_011`). `blind()` is
+  the mechanical half only, declared nouns to tokens and years stripped,
+  with the synonym limit shown and the paraphrase left as the operator's
+  step (`RS_013`). **ARM B is a real forward commit:** thirteen claims the
+  BRC cycle register rests on, each with verdict, confidence,
+  mechanism-if-revised, the evidence that would flag it now and an explicit
+  `p_survive`, sealed by sha256 with review dates fixed at 2028-09-17 and
+  2031-09-17; the scorer returns `NOT_DUE` before the first and `VOID_HASH`
+  on any edit, the block published whole beside its hash at the stated
+  `UNI_108` cost, the model identifier `WITHHELD` with a reason and a bare
+  UNKNOWN refused (`RS_008`). **ARM C, the dispatch note's question answered
+  for one model:** nine BRC rows classed with a basis each, and **two
+  TERMINAL cells rest on claims this session rates below 0.8** — soil
+  formation on B-13 at 0.70, ore grade on B-07 at 0.50 — with three rows
+  carrying no substitution decision on record (`NOT_ON_RECORD`, a fourth
+  state the order lacks, `RS_010`) and one rated claim under no row, all
+  kept apart and never summed in (`RS_009`). The mechanism vocabulary has
+  no member for confounding, which seed-04 needs, and the key is
+  single-valued where seed-06 needs two (`RS_007`). `delta` is registered
+  in `tools/known_answer.py` and its first run was refused on
+  `-0.15000000000000002` (`RS_012`); two defects in the build's own test
+  file were found by running and recorded (`RS_014`). **`RS_016`
+  UNVERIFIED:** every outcome is carried from model memory with the egress
+  gate refusing every publisher host, no independent model has run BLIND,
+  and nothing here bears on whether any model is calibrated. Check count
+  printed by `python3 revision-survival/test_revision.py`; the render screens clean through `no_severity` with no exemption. Stdlib
+  only, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

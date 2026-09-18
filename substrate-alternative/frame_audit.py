@@ -1,444 +1,472 @@
 #!/usr/bin/env python3
-"""Locate tokens carrying money-frame assumptions in any text.
+"""frame_audit -- locate money-frame assumptions in text.
 
-LOCATE ONLY. This module reports where a frame token sits and which frame it
-belongs to. It proposes no replacement, rewrites nothing, and scores no text as
-better or worse than another. There is no suggestion field in the record and no
-function that returns one, and the selftest reads this module's own AST to
-assert it.
+LOCATE ONLY.  This module proposes nothing.  There is no
+replacement field, no suggestion, no rewrite, no score and no
+verdict on the text.  A hit is a LOCATION, not a defect.  That
+is enforced structurally rather than promised: test_substrate.py
+walks this module's AST and fails if an identifier from the
+proposal vocabulary (suggest / replace / instead / alternative /
+rewrite / recommend / improve / fix / better) appears anywhere in
+it, and plants one to show the scan is not silent.
 
-FIVE FRAMES, declared:
+THE LIMIT, STATED HERE RATHER THAN AT THE BOTTOM
+    This is a WORD LIST.  Any paraphrase steps around it.
+    "what it costs" is caught.  "what it takes from you before
+    you may have it" is not, and carries the same frame.  So a
+    zero from this module is a property of THE REGISTRY, never
+    evidence that a text is frame-free.  The registry's coverage
+    is the measurement; the text is only the sample.
 
-    ownership          the thing has a holder, and holding is the relation
-    price              the thing has a number attached that is what it takes
-    transaction        the relation between parties is an exchange
-    scarcity_as_given  there is not enough, taken as a premise rather than a
-                       measurement
-    value_as_price     what a thing is worth IS what it costs
+THREE COUNTS, KEPT APART
+    Many money-frame words carry a live non-money sense in the
+    same corpus this was written in: `value` (absolute value),
+    `property` (a property of a system), `cost` (a cost function),
+    `budget` (an energy budget), `competition` (an ecological
+    interaction), `efficiency` (a measured ratio).  Each such
+    entry carries a stated reason and is counted APART, never
+    silently included and never silently dropped -- the module
+    locates, it does not adjudicate which sense is live.  A
+    single collapsed count is the failure this split exists to
+    prevent.
 
-A token can carry more than one frame and every frame it carries fires. One
-occurrence of a token listed under two frames is therefore two hits and one
-span, and both numbers are reported, because a count of hits divided by nothing
-is a number with an unstated denominator.
-
-WHAT THIS IS, said plainly: a word list. A word list deciding a question of
-meaning is the failure mode of this whole class of instrument, and it is not
-avoidable here, because whether a sentence carries a money frame is a question
-about sense and the tokens are only evidence. So:
-
-  - every token is matched on word boundaries, never as a substring, so `lean`
-    does not fire on `clean`
-  - tokens with a common non-money sense are declared in KNOWN_COLLISIONS and
-    every hit on one carries its note. `charge` is electrical, `rate` is a rate
-    of change, `market` is a place with vegetables in it, `value` is what a
-    variable holds. The note is a property of the lexicon, declared before any
-    text is read; it is not a judgement about the text.
-  - a hit is a CANDIDATE. Nothing here promotes one to a finding.
-
-ABSENCE. A text with no hits returns a zero for every frame, not an empty
-result. Zero is a count; an absent count is a different statement.
-
-stdlib only, CC0, runs on a phone.
+CC0.  Standard library only.  Parses under Python 3.9.
 """
 
-from __future__ import annotations
-
-import argparse
-import ast
-import io
-import json
-import os
+import bisect
+import collections
 import re
 import sys
-from dataclasses import dataclass
-from typing import Any, Dict, List, Optional, Sequence, Tuple
 
-SCHEMA_VERSION = "1.0"
+FRAMES = (
+    "OWNERSHIP",
+    "PRICE",
+    "TRANSACTION",
+    "SCARCITY_AS_GIVEN",
+    "VALUE_AS_PRICE",
+)
 
-FRAMES = ("ownership", "price", "transaction", "scarcity_as_given",
-          "value_as_price")
-
-LEXICON: Dict[str, Tuple[str, ...]] = {
-    "ownership": (
-        "own", "owns", "owned", "owning", "owner", "owners", "ownership",
-        "property", "proprietary", "belongs to", "belong to", "title to",
-        "stake", "stakes", "equity", "asset", "assets", "holdings",
-        "possess", "possesses", "possession", "proprietor", "landlord",
-        "tenant", "lease", "leased", "deed", "entitlement", "entitled to",
-    ),
-    "price": (
-        "price", "prices", "priced", "pricing", "cost", "costs", "costly",
-        "fee", "fees", "tariff", "charge", "charges", "expensive", "cheap",
-        "afford", "affordable", "unaffordable", "budget", "budgets",
-        "dollar", "dollars", "cent", "cents", "payment", "payments",
-        "pay", "pays", "paid", "wage", "wages", "salary", "rent",
-        "rate", "rates", "premium", "subsidy", "subsidies", "billing",
-    ),
-    "transaction": (
-        "buy", "buys", "buying", "bought", "sell", "sells", "selling",
-        "sold", "purchase", "purchases", "purchased", "trade", "trades",
-        "market", "markets", "marketplace", "transaction", "transactions",
-        "exchange", "exchanges", "deal", "deals", "contract", "contracts",
-        "customer", "customers", "client", "clients", "vendor", "vendors",
-        "supplier", "suppliers", "invoice", "procure", "procurement",
-        "bid", "bids", "tender", "consumer", "consumers", "retail",
-    ),
-    "scarcity_as_given": (
-        "scarce", "scarcity", "shortage", "shortages", "zero-sum",
-        "zero sum", "ration", "rationed", "rationing", "limited resources",
-        "finite resources", "scarce resources", "supply and demand",
-        "compete for", "competition for", "competing for",
-        "not enough to go around", "too few to", "trade-off between",
-    ),
-    "value_as_price": (
-        "value", "values", "valued", "valuation", "worth", "worthwhile",
-        "return on investment", "roi", "profit", "profits", "profitable",
-        "margin", "margins", "revenue", "revenues", "yield", "yields",
-        "monetize", "monetise", "capital", "investment", "investments",
-        "invest", "invests", "cost-effective", "cost effective",
-        "cost-benefit", "cost benefit", "bottom line", "net worth",
-    ),
+CHOICES = {
+    1: "Longest match wins at a position.  The registry is sorted "
+       "by descending surface length before the alternation is "
+       "built, so `cost-effective` is one VALUE_AS_PRICE hit and "
+       "not a PRICE hit plus a loose word.  The alternative "
+       "(count both) double-counts one utterance.",
+    2: "A sentence ends at . ! or ? followed by whitespace.  "
+       "Abbreviations over-split.  The sentence index is a "
+       "locator for a reader, not a linguistic claim.",
+    3: "A multi-frame phrase is filed under one frame by a "
+       "declared reading: `supply and demand`, `market forces` "
+       "and `free market` are SCARCITY_AS_GIVEN, because what "
+       "they assert is the allocation premise, not a single "
+       "price or a single exchange.",
+    4: "`finance` / `financial` / `fiscal` / `compensation` are "
+       "filed under PRICE, on the reading that what they name is "
+       "money-quantity handling.  They could as defensibly sit "
+       "under TRANSACTION.  The assignment is visible here so it "
+       "can be disagreed with rather than inferred from output.",
+    5: "A surface form may appear under exactly one frame.  A "
+       "duplicate raises at load rather than being counted "
+       "twice or silently taking the first frame.",
 }
 
-# Tokens with a common sense that is not a money sense. Declared before any
-# text is read. Every hit on one of these carries the note.
-KNOWN_COLLISIONS: Dict[str, str] = {
-    "charge": "also electrical charge, and to charge at something",
-    "rate": "also a rate of change, a sampling rate",
-    "rates": "also rates of change",
-    "market": "also a physical place where food is handed over",
-    "markets": "also physical places",
-    "value": "also the content of a variable, and a held principle",
-    "values": "also held principles",
-    "valued": "also esteemed, with no number implied",
-    "yield": "also crop yield, and to give way",
-    "yields": "also crop yields",
-    "capital": "also a capital city, and a capital letter",
-    "stake": "also a wooden stake, and what is at stake",
-    "stakes": "also what is at stake",
-    "deal": "also to deal with, and to deal cards",
-    "deals": "also deals with",
-    "own": "also to own up to, and one's own",
-    "owns": "also owns up to",
-    "property": "also a property of a system, a measurable attribute",
-    "exchange": "also an exchange of words, heat exchange",
-    "exchanges": "also exchanges of words",
-    "trade": "also a trade as a craft",
-    "trades": "also crafts",
-    "premium": "also premium as in higher grade",
-    "contract": "also to contract, to become smaller",
-    "contracts": "also becomes smaller",
-    "asset": "also an asset in the sense of a strength",
-    "assets": "also strengths",
-    "budget": "also a budget of time, tokens, or energy",
-    "budgets": "also budgets of time or energy",
-    "cost": "also cost in the physics sense, which SHAPE_SPEC argues against",
-    "costs": "also cost in the physics sense",
-    "paid": "also paid attention",
-    "pay": "also pay attention",
-    "pays": "also pays attention",
-    "margin": "also a page margin, and a margin of error",
-    "margins": "also margins of error",
-    "tender": "also tender as in soft",
-    "bid": "also a bid in the sense of an attempt",
-    "title to": "also a title in the sense of a name",
-}
+Hit = collections.namedtuple(
+    "Hit",
+    "surface entry frame sentence_index char_start char_end "
+    "sentence sense_ambiguous ambiguity_reason",
+)
 
-_SENT_END = re.compile(r"(?<=[.!?])\s+")
+_AMB_PROPERTY = "a property of a system (physics, mathematics)"
+_AMB_COST = "a cost function; the compute or energy cost of an operation"
+_AMB_VALUE = "absolute value; a value in a field; values as commitments"
+_AMB_BUDGET = "an energy budget, a compute budget, a token budget"
+_AMB_MARGIN = "a margin of error; a page margin"
+_AMB_TRADE = "a trade as a craft; trade winds"
+_AMB_EXCHANGE = "heat exchange; an exchange of letters"
+_AMB_CONTRACT = "to contract; a muscle contracts"
+_AMB_MARKET = "a marketplace of ideas; a farmers market as a place"
+_AMB_CONSUMER = "an ecological consumer is a trophic position"
+_AMB_COMPETE = "ecological competition is a measured interaction"
+_AMB_EFF = "thermodynamic efficiency is a measured ratio"
+_AMB_TRADEOFF = "a physical trade-off is a real constraint"
+_AMB_TITLE = "the title of a document"
+_AMB_STAKE = "a stake driven into the ground"
+_AMB_EQUITY = "equity in the sense of fairness"
+_AMB_QUOTE = "to quote a passage"
+_AMB_CHARGE = "electric charge; to charge a battery"
+_AMB_DEAL = "to deal with something"
+_AMB_CLIENT = "a client in a client-server system"
+_AMB_MINE = "a mine as an excavation"
+_AMB_RATE = "a rate as a quantity per unit time"
+_AMB_CLAIM = "a claim as an assertion under test"
+
+REGISTRY = (
+    # Frame assignment for a multi-frame phrase is a declared
+    # reading -- [CHOICE 3].  The filing of `finance` and its
+    # neighbours under PRICE is [CHOICE 4].
+    # ---- OWNERSHIP --------------------------------------------
+    ("own", "OWNERSHIP", None),
+    ("owns", "OWNERSHIP", None),
+    ("owned", "OWNERSHIP", None),
+    ("owning", "OWNERSHIP", None),
+    ("owner", "OWNERSHIP", None),
+    ("owners", "OWNERSHIP", None),
+    ("ownership", "OWNERSHIP", None),
+    ("private property", "OWNERSHIP", None),
+    ("intellectual property", "OWNERSHIP", None),
+    ("property", "OWNERSHIP", _AMB_PROPERTY),
+    ("proprietor", "OWNERSHIP", None),
+    ("proprietary", "OWNERSHIP", None),
+    ("deed", "OWNERSHIP", None),
+    ("landlord", "OWNERSHIP", None),
+    ("tenant", "OWNERSHIP", None),
+    ("freehold", "OWNERSHIP", None),
+    ("leasehold", "OWNERSHIP", None),
+    ("title", "OWNERSHIP", _AMB_TITLE),
+    ("possession", "OWNERSHIP", None),
+    ("shareholder", "OWNERSHIP", None),
+    ("stake", "OWNERSHIP", _AMB_STAKE),
+    ("asset", "OWNERSHIP", None),
+    ("assets", "OWNERSHIP", None),
+    ("equity", "OWNERSHIP", _AMB_EQUITY),
+    ("holdings", "OWNERSHIP", None),
+    ("belongs to", "OWNERSHIP", None),
+    ("entitled to", "OWNERSHIP", None),
+    # ---- PRICE ------------------------------------------------
+    ("price", "PRICE", None),
+    ("prices", "PRICE", None),
+    ("priced", "PRICE", None),
+    ("pricing", "PRICE", None),
+    ("cost", "PRICE", _AMB_COST),
+    ("costs", "PRICE", _AMB_COST),
+    ("costly", "PRICE", None),
+    ("expensive", "PRICE", None),
+    ("cheap", "PRICE", None),
+    ("cheaper", "PRICE", None),
+    ("afford", "PRICE", None),
+    ("affordable", "PRICE", None),
+    ("unaffordable", "PRICE", None),
+    ("fee", "PRICE", None),
+    ("fees", "PRICE", None),
+    ("fare", "PRICE", None),
+    ("tariff", "PRICE", None),
+    ("surcharge", "PRICE", None),
+    ("invoice", "PRICE", None),
+    ("billed", "PRICE", None),
+    ("quote", "PRICE", _AMB_QUOTE),
+    ("markup", "PRICE", None),
+    ("discount", "PRICE", None),
+    ("dollar", "PRICE", None),
+    ("dollars", "PRICE", None),
+    ("cents", "PRICE", None),
+    ("currency", "PRICE", None),
+    ("money", "PRICE", None),
+    ("monetary", "PRICE", None),
+    ("cash", "PRICE", None),
+    ("payment", "PRICE", None),
+    ("payments", "PRICE", None),
+    ("pay", "PRICE", None),
+    ("paid", "PRICE", None),
+    ("paying", "PRICE", None),
+    ("wage", "PRICE", None),
+    ("wages", "PRICE", None),
+    ("salary", "PRICE", None),
+    ("budget", "PRICE", _AMB_BUDGET),
+    ("revenue", "PRICE", None),
+    ("profit", "PRICE", None),
+    ("profitable", "PRICE", None),
+    ("margin", "PRICE", _AMB_MARGIN),
+    ("subsidy", "PRICE", None),
+    ("subsidize", "PRICE", None),
+    ("finance", "PRICE", None),
+    ("financial", "PRICE", None),
+    ("fiscal", "PRICE", None),
+    ("compensation", "PRICE", None),
+    ("charge", "PRICE", _AMB_CHARGE),
+    ("rate", "PRICE", _AMB_RATE),
+    # ---- TRANSACTION ------------------------------------------
+    ("buy", "TRANSACTION", None),
+    ("buys", "TRANSACTION", None),
+    ("buying", "TRANSACTION", None),
+    ("bought", "TRANSACTION", None),
+    ("sell", "TRANSACTION", None),
+    ("sells", "TRANSACTION", None),
+    ("selling", "TRANSACTION", None),
+    ("sold", "TRANSACTION", None),
+    ("for sale", "TRANSACTION", None),
+    ("purchase", "TRANSACTION", None),
+    ("purchased", "TRANSACTION", None),
+    ("trade", "TRANSACTION", _AMB_TRADE),
+    ("traded", "TRANSACTION", _AMB_TRADE),
+    ("exchange", "TRANSACTION", _AMB_EXCHANGE),
+    ("transaction", "TRANSACTION", None),
+    ("transactions", "TRANSACTION", None),
+    ("deal", "TRANSACTION", _AMB_DEAL),
+    ("contract", "TRANSACTION", _AMB_CONTRACT),
+    ("market", "TRANSACTION", _AMB_MARKET),
+    ("markets", "TRANSACTION", _AMB_MARKET),
+    ("customer", "TRANSACTION", None),
+    ("customers", "TRANSACTION", None),
+    ("client", "TRANSACTION", _AMB_CLIENT),
+    ("vendor", "TRANSACTION", None),
+    ("supplier", "TRANSACTION", None),
+    ("consumer", "TRANSACTION", _AMB_CONSUMER),
+    ("seller", "TRANSACTION", None),
+    ("buyer", "TRANSACTION", None),
+    ("negotiate", "TRANSACTION", None),
+    ("bid", "TRANSACTION", None),
+    ("auction", "TRANSACTION", None),
+    ("lease", "TRANSACTION", None),
+    ("rent", "TRANSACTION", None),
+    ("rental", "TRANSACTION", None),
+    ("hire", "TRANSACTION", None),
+    ("procurement", "TRANSACTION", None),
+    ("procure", "TRANSACTION", None),
+    ("monetize", "TRANSACTION", None),
+    ("commodity", "TRANSACTION", None),
+    ("commerce", "TRANSACTION", None),
+    ("commercial", "TRANSACTION", None),
+    ("mine", "TRANSACTION", _AMB_MINE),
+    # ---- SCARCITY_AS_GIVEN ------------------------------------
+    ("scarce", "SCARCITY_AS_GIVEN", None),
+    ("scarcity", "SCARCITY_AS_GIVEN", None),
+    ("shortage", "SCARCITY_AS_GIVEN", None),
+    ("supply and demand", "SCARCITY_AS_GIVEN", None),
+    ("market forces", "SCARCITY_AS_GIVEN", None),
+    ("free market", "SCARCITY_AS_GIVEN", None),
+    ("limited supply", "SCARCITY_AS_GIVEN", None),
+    ("zero-sum", "SCARCITY_AS_GIVEN", None),
+    ("ration", "SCARCITY_AS_GIVEN", None),
+    ("rationing", "SCARCITY_AS_GIVEN", None),
+    ("rationed", "SCARCITY_AS_GIVEN", None),
+    ("opportunity cost", "SCARCITY_AS_GIVEN", None),
+    ("trade-off", "SCARCITY_AS_GIVEN", _AMB_TRADEOFF),
+    ("tradeoff", "SCARCITY_AS_GIVEN", _AMB_TRADEOFF),
+    ("not enough to go around", "SCARCITY_AS_GIVEN", None),
+    ("competition", "SCARCITY_AS_GIVEN", _AMB_COMPETE),
+    ("compete", "SCARCITY_AS_GIVEN", _AMB_COMPETE),
+    ("competitive", "SCARCITY_AS_GIVEN", _AMB_COMPETE),
+    # ---- VALUE_AS_PRICE ---------------------------------------
+    ("value", "VALUE_AS_PRICE", _AMB_VALUE),
+    ("values", "VALUE_AS_PRICE", _AMB_VALUE),
+    ("valued", "VALUE_AS_PRICE", _AMB_VALUE),
+    ("valuable", "VALUE_AS_PRICE", None),
+    ("valuation", "VALUE_AS_PRICE", None),
+    ("worth", "VALUE_AS_PRICE", None),
+    ("worth it", "VALUE_AS_PRICE", None),
+    ("not worth", "VALUE_AS_PRICE", None),
+    ("net worth", "VALUE_AS_PRICE", None),
+    ("priceless", "VALUE_AS_PRICE", None),
+    ("adds value", "VALUE_AS_PRICE", None),
+    ("value proposition", "VALUE_AS_PRICE", None),
+    ("return on investment", "VALUE_AS_PRICE", None),
+    ("roi", "VALUE_AS_PRICE", None),
+    ("cost-effective", "VALUE_AS_PRICE", None),
+    ("cost effective", "VALUE_AS_PRICE", None),
+    ("cost-benefit", "VALUE_AS_PRICE", None),
+    ("cost benefit", "VALUE_AS_PRICE", None),
+    ("willingness to pay", "VALUE_AS_PRICE", None),
+    ("willing to pay", "VALUE_AS_PRICE", None),
+    ("bottom line", "VALUE_AS_PRICE", None),
+    ("economic value", "VALUE_AS_PRICE", None),
+    ("market value", "VALUE_AS_PRICE", None),
+    ("pays for itself", "VALUE_AS_PRICE", None),
+    ("efficiency", "VALUE_AS_PRICE", _AMB_EFF),
+    ("efficient", "VALUE_AS_PRICE", _AMB_EFF),
+    ("claim on", "VALUE_AS_PRICE", _AMB_CLAIM),
+)
 
 
-def _pattern(token: str) -> "re.Pattern":
-    """Word-boundary match. Multi-word tokens tolerate any run of whitespace."""
-    parts = [re.escape(p) for p in token.split()]
-    body = r"\s+".join(parts)
-    return re.compile(r"(?<![\w-])" + body + r"(?![\w-])", re.IGNORECASE)
+class RegistryError(Exception):
+    """A registry that cannot be loaded is not silently repaired."""
 
 
-_COMPILED: Dict[str, List[Tuple[str, "re.Pattern"]]] = {
-    frame: [(tok, _pattern(tok)) for tok in toks]
-    for frame, toks in LEXICON.items()
-}
-
-
-@dataclass(frozen=True)
-class Hit:
-    token: str
-    matched_text: str
-    frame: str
-    sentence_index: int
-    char_start: int
-    char_end: int
-    collision_note: Optional[str]
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "token": self.token,
-            "matched_text": self.matched_text,
-            "frame": self.frame,
-            "sentence_index": self.sentence_index,
-            "char_start": self.char_start,
-            "char_end": self.char_end,
-            "collision_note": self.collision_note,
-        }
-
-
-@dataclass(frozen=True)
-class AuditResult:
-    schema_version: str
-    sentences: List[str]
-    hits: List[Hit]
-    counts_by_frame: Dict[str, int]
-    distinct_spans: int
-    hits_with_collision_note: int
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "schema_version": self.schema_version,
-            "sentence_count": len(self.sentences),
-            "hits": [h.to_dict() for h in self.hits],
-            "counts_by_frame": dict(self.counts_by_frame),
-            "distinct_spans": self.distinct_spans,
-            "hits_with_collision_note": self.hits_with_collision_note,
-        }
-
-
-def split_sentences(text: str) -> List[Tuple[int, int, str]]:
-    """(start, end, text) per sentence.
-
-    A period ends a sentence and a newline ends a sentence. LIMIT, stated: an
-    abbreviation ending in a period splits early, so `Dr. Smith` is two
-    sentences here. That shifts a sentence index; it moves no hit into or out
-    of the result.
-    """
-    out: List[Tuple[int, int, str]] = []
-    pos = 0
-    for block in text.split("\n"):
-        if block.strip():
-            start = pos
-            for piece in _SENT_END.split(block):
-                if not piece:
-                    continue
-                idx = text.find(piece, start)
-                if idx < 0:
-                    idx = start
-                out.append((idx, idx + len(piece), piece))
-                start = idx + len(piece)
-        pos += len(block) + 1
-    if not out and text.strip():
-        out.append((0, len(text), text))
+def load_registry(registry=REGISTRY):
+    """surface -> (frame, ambiguity_reason).  [CHOICE 5]"""
+    out = {}
+    for surface, frame, amb in registry:
+        key = " ".join(surface.lower().split())
+        if frame not in FRAMES:
+            raise RegistryError("unknown frame %r for %r" % (frame, key))
+        if not key:
+            raise RegistryError("empty surface form")
+        if key in out:
+            raise RegistryError(
+                "duplicate surface %r -- a surface form may carry "
+                "exactly one frame [CHOICE 5]" % key)
+        out[key] = (frame, amb)
     return out
 
 
-def _sentence_of(spans: Sequence[Tuple[int, int, str]], pos: int) -> int:
-    for i, (s, e, _t) in enumerate(spans):
-        if s <= pos < e:
-            return i
-    return len(spans) - 1 if spans else 0
+def build_pattern(entries):
+    """One alternation, longest surface first.  [CHOICE 1]"""
+    keys = sorted(entries, key=lambda s: (-len(s), s))
+    alts = []
+    for key in keys:
+        alts.append(r"\s+".join(re.escape(p) for p in key.split()))
+    return re.compile(r"\b(?:" + "|".join(alts) + r")\b", re.I)
 
 
-def audit(text: str) -> AuditResult:
-    spans = split_sentences(text)
-    hits: List[Hit] = []
-    seen_spans = set()
+_SENTENCE_BREAK = re.compile(r"(?<=[.!?])\s+")
+
+
+def sentence_spans(text):
+    """[(start, end)] over the text.  Empty text -> [].  [CHOICE 2]"""
+    if not text.strip():
+        return []
+    spans = []
+    start = 0
+    for m in _SENTENCE_BREAK.finditer(text):
+        spans.append((start, m.start()))
+        start = m.end()
+    spans.append((start, len(text)))
+    return [(a, b) for a, b in spans if text[a:b].strip()]
+
+
+def zero_counts():
+    """Every declared frame present, at zero.
+
+    A frame with no hits is a visible zero, not a missing key.
+    A caller cannot tell an absent frame from an unexamined one
+    if the key is simply not there."""
+    return collections.OrderedDict((f, 0) for f in FRAMES)
+
+
+def audit(text, registry=REGISTRY):
+    entries = load_registry(registry)
+    pattern = build_pattern(entries)
+    spans = sentence_spans(text)
+    starts = [a for a, _ in spans]
+    hits = []
+    for m in pattern.finditer(text):
+        key = " ".join(m.group(0).lower().split())
+        frame, amb = entries[key]
+        idx = bisect.bisect_right(starts, m.start()) - 1
+        if idx < 0:
+            idx = 0
+        if spans:
+            a, b = spans[idx]
+            sentence = " ".join(text[a:b].split())
+        else:
+            sentence = ""
+            idx = -1
+        hits.append(Hit(
+            surface=m.group(0),
+            entry=key,
+            frame=frame,
+            sentence_index=idx,
+            char_start=m.start(),
+            char_end=m.end(),
+            sentence=sentence,
+            sense_ambiguous=amb is not None,
+            ambiguity_reason=amb,
+        ))
+    counts = zero_counts()
+    unamb = zero_counts()
+    amb_counts = zero_counts()
+    for hit in hits:
+        counts[hit.frame] += 1
+        if hit.sense_ambiguous:
+            amb_counts[hit.frame] += 1
+        else:
+            unamb[hit.frame] += 1
+    return {
+        "hits": hits,
+        "counts": counts,
+        "counts_unambiguous": unamb,
+        "counts_ambiguous": amb_counts,
+        "hits_n": len(hits),
+        "ambiguous_n": sum(1 for h in hits if h.sense_ambiguous),
+        "sentences_n": len(spans),
+        "registry_n": len(entries),
+        "frames": FRAMES,
+        "choices": sorted(CHOICES),
+    }
+
+
+def render(result, source="<text>"):
+    lines = []
+    lines.append("FRAME AUDIT -- %s" % source)
+    lines.append("=" * 62)
+    lines.append("registry entries : %d" % result["registry_n"])
+    lines.append("sentences        : %d" % result["sentences_n"])
+    lines.append("hits             : %d  (of which sense-ambiguous: %d)"
+                 % (result["hits_n"], result["ambiguous_n"]))
+    lines.append("")
+    lines.append("COUNTS BY FRAME   total  unambiguous  ambiguous")
     for frame in FRAMES:
-        for token, pat in _COMPILED[frame]:
-            for m in pat.finditer(text):
-                hits.append(Hit(
-                    token=token,
-                    matched_text=m.group(0),
-                    frame=frame,
-                    sentence_index=_sentence_of(spans, m.start()),
-                    char_start=m.start(),
-                    char_end=m.end(),
-                    collision_note=KNOWN_COLLISIONS.get(token),
-                ))
-                seen_spans.add((m.start(), m.end()))
-    hits.sort(key=lambda h: (h.char_start, h.frame))
-    # Every frame reports a number. A frame with nothing is a zero, not absent.
-    counts = dict((f, 0) for f in FRAMES)
-    for h in hits:
-        counts[h.frame] += 1
-    return AuditResult(
-        schema_version=SCHEMA_VERSION,
-        sentences=[t for _s, _e, t in spans],
-        hits=hits,
-        counts_by_frame=counts,
-        distinct_spans=len(seen_spans),
-        hits_with_collision_note=sum(1 for h in hits if h.collision_note),
-    )
-
-
-def render(result: AuditResult) -> str:
-    lines = ["frame_audit  sentences=%d  hits=%d  distinct_spans=%d  "
-             "with_collision_note=%d"
-             % (len(result.sentences), len(result.hits),
-                result.distinct_spans, result.hits_with_collision_note)]
-    lines.append("locate only. no replacement is proposed for any hit.")
+        lines.append("  %-20s %5d  %11d  %9d" % (
+            frame,
+            result["counts"][frame],
+            result["counts_unambiguous"][frame],
+            result["counts_ambiguous"][frame]))
     lines.append("")
-    lines.append("COUNTS BY FRAME")
-    for f in FRAMES:
-        lines.append("  %-20s %4d" % (f, result.counts_by_frame[f]))
+    lines.append("HITS")
+    if not result["hits"]:
+        lines.append("  none.  A zero here is a property of the "
+                     "registry, not of the text.")
+    for hit in result["hits"]:
+        mark = " [sense-ambiguous]" if hit.sense_ambiguous else ""
+        lines.append("  s%-4d %-20s %-18s %r%s" % (
+            hit.sentence_index, hit.frame, hit.entry,
+            hit.surface, mark))
+        if hit.sense_ambiguous:
+            lines.append("        other live sense: %s"
+                         % hit.ambiguity_reason)
+        lines.append("        %s" % _clip(hit.sentence, 58))
     lines.append("")
-    lines.append("HITS  (sentence index, token, frame)")
-    if not result.hits:
-        lines.append("  none")
-    for h in result.hits:
-        note = ("   [collision: %s]" % h.collision_note) if h.collision_note else ""
-        lines.append("  s%-4d %-22s %-20s %s%s"
-                     % (h.sentence_index, h.matched_text, h.frame,
-                        "", note))
-    lines.append("")
-    lines.append("A hit is a candidate. Whether a sentence carries the frame is")
-    lines.append("a question about sense, and these tokens are only evidence.")
+    lines.append("This module locates.  It states nothing about what "
+                 "any of these")
+    lines.append("hits ought to be, and carries no field in which such "
+                 "a thing")
+    lines.append("could be written.")
     return "\n".join(lines)
 
 
-# ------------------------------------------------------------------ selftest
-
-def selftest() -> int:
-    checks = 0
-    failed = 0
-
-    def ck(cond, label):
-        nonlocal checks, failed
-        checks += 1
-        if not cond:
-            failed += 1
-            print("FAIL  %s" % label)
-        else:
-            print("ok    %s" % label)
-
-    print("-- every frame fires, and only on its own text")
-    probes = {
-        "ownership": "The land belongs to the family that owns it.",
-        "price": "The fee was expensive and nobody could afford it.",
-        "transaction": "We bought it from a vendor at the market.",
-        "scarcity_as_given": "Water is scarce so they compete for it.",
-        "value_as_price": "The profit margin shows the true worth.",
-    }
-    for frame, text in probes.items():
-        r = audit(text)
-        ck(r.counts_by_frame[frame] > 0, "%s fires on its own probe" % frame)
-
-    print("\n-- the null: text carrying no money frame")
-    neutral = ("The river rose overnight. Three crates moved to the north "
-               "shelter before dawn. Nobody was hurt.")
-    r = audit(neutral)
-    ck(sum(r.counts_by_frame.values()) == 0,
-       "no hit on neutral text (got %d)" % sum(r.counts_by_frame.values()))
-    ck(set(r.counts_by_frame) == set(FRAMES),
-       "every frame still reports a number")
-    ck(all(v == 0 for v in r.counts_by_frame.values()),
-       "and every number is a zero, not an absence")
-
-    print("\n-- word boundaries, not substrings")
-    ck(audit("The ocean is clean.").counts_by_frame["price"] == 0,
-       "`clean` does not fire `lean`-style substring matches")
-    ck(audit("He was a downpayment away").counts_by_frame["price"] == 0,
-       "`downpayment` does not fire `pay`")
-    ck(audit("They pay for it.").counts_by_frame["price"] > 0,
-       "and the bare word does fire")
-    ck(audit("ownership").counts_by_frame["ownership"] > 0,
-       "a token alone on a line fires")
-
-    print("\n-- multi-word tokens")
-    ck(audit("It is a zero-sum game.").counts_by_frame["scarcity_as_given"] > 0,
-       "hyphenated multi-word token fires")
-    ck(audit("a return on investment").counts_by_frame["value_as_price"] > 0,
-       "spaced multi-word token fires")
-    ck(audit("a return   on\ninvestment").counts_by_frame["value_as_price"] > 0,
-       "and tolerates any run of whitespace between its words")
-
-    print("\n-- collisions are declared, carried, and never used to drop a hit")
-    r = audit("The charge on the electron is fixed.")
-    ck(r.counts_by_frame["price"] > 0, "a collision token still produces a hit")
-    ck(any(h.collision_note for h in r.hits),
-       "and the hit carries its declared note")
-    ck(all(t in dict((tok, 1) for toks in LEXICON.values() for tok in toks)
-           for t in KNOWN_COLLISIONS),
-       "every declared collision names a token that is in the lexicon")
-
-    print("\n-- one span, two frames, both reported and both counted")
-    r = audit("The cost was high.")
-    ck(r.distinct_spans < len(r.hits) or r.distinct_spans == len(r.hits),
-       "spans and hits are both reported")
-    multi = [t for t in LEXICON["price"] if t in LEXICON["value_as_price"]]
-    ck(isinstance(multi, list), "cross-frame membership is computable")
-
-    print("\n-- sentence index")
-    r = audit("Nothing here. The price was high. Nothing here either.")
-    ck(r.hits and r.hits[0].sentence_index == 1,
-       "a hit in the second sentence indexes as 1 (got %s)"
-       % (r.hits[0].sentence_index if r.hits else None))
-
-    print("\n-- LOCATE ONLY, asserted from this module's own AST")
-    own = io.open(os.path.abspath(__file__), encoding="utf-8").read()
-    tree = ast.parse(own)
-    banned = ("suggest", "replacement", "replace_with", "rewrite", "better",
-              "recommend", "improved")
-    found = []
-    for n in ast.walk(tree):
-        name = None
-        if isinstance(n, ast.Name):
-            name = n.id
-        elif isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
-            name = n.name
-        elif isinstance(n, ast.arg):
-            name = n.arg
-        elif isinstance(n, ast.Attribute):
-            name = n.attr
-        if name:
-            low = name.lower()
-            for b in banned:
-                if b in low:
-                    found.append(name)
-    ck(not found, "no identifier proposes a replacement (got %s)" % found)
-    # and the check is shown to fire, so its silence means something
-    planted = ast.parse("def suggest_replacement(x):\n    return x\n")
-    hit = any(isinstance(n, ast.FunctionDef) and "suggest" in n.name
-              for n in ast.walk(planted))
-    ck(hit, "the locate-only check fires on a planted suggestion function")
-
-    keys = set(Hit("a", "a", "price", 0, 0, 1, None).to_dict().keys())
-    ck("suggestion" not in keys and "replacement" not in keys,
-       "the hit record has no suggestion field")
-
-    print("\n-- json round trip")
-    r = audit("They sold the property at a profit.")
-    ck(json.loads(json.dumps(r.to_dict()))["distinct_spans"] == r.distinct_spans,
-       "the result serialises")
-
-    print("\n-- empty and degenerate inputs do not raise")
-    for t in ("", "   ", "\n\n", ".", "!?!", "a" * 5000):
-        ck(audit(t) is not None, "audit does not raise on %r" % t[:12])
-
-    print("\nchecks: %d   failed: %d" % (checks, failed))
-    print("VERDICT: %s   checks=%d failed=%d"
-          % ("PASS" if failed == 0 else "FAIL", checks, failed))
-    return 0 if failed == 0 else 1
+def _clip(text, width):
+    if len(text) <= width:
+        return text
+    return text[:width - 3] + "..."
 
 
-def main(argv: Optional[Sequence[str]] = None) -> int:
-    p = argparse.ArgumentParser(
-        description="Locate money-frame tokens in text. Locate only; no "
-                    "replacement is proposed.")
-    p.add_argument("path", nargs="?", help="file to read; omit to read stdin")
-    p.add_argument("--json", action="store_true")
-    p.add_argument("--selftest", action="store_true")
-    args = p.parse_args(argv)
-    if args.selftest:
-        return selftest()
-    if args.path:
-        text = io.open(args.path, encoding="utf-8", errors="replace").read()
-    else:
+def choices_report():
+    out = ["frame_audit [CHOICE n]"]
+    for n in sorted(CHOICES):
+        out.append("  [CHOICE %d] %s" % (n, CHOICES[n]))
+    return "\n".join(out)
+
+
+USAGE = """usage: python3 frame_audit.py FILE
+       python3 frame_audit.py -          (read standard input)
+       python3 frame_audit.py --choices
+
+Locates money-frame tokens.  Proposes nothing.
+"""
+
+
+def main(argv):
+    args = list(argv[1:])
+    if "--selftest" in args:
+        sys.stderr.write(
+            "frame_audit.py has no selftest of its own.\n"
+            "Run: python3 test_substrate.py\n")
+        return 2
+    if not args or args[0] in ("-h", "--help"):
+        sys.stdout.write(USAGE)
+        return 0
+    if args[0] == "--choices":
+        print(choices_report())
+        return 0
+    if args[0] == "-":
         text = sys.stdin.read()
-    result = audit(text)
-    if args.json:
-        print(json.dumps(result.to_dict(), indent=2, sort_keys=True))
+        source = "<stdin>"
     else:
-        print(render(result))
+        with open(args[0]) as handle:
+            text = handle.read()
+        source = args[0]
+    print(render(audit(text), source))
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(main(sys.argv))

@@ -1,0 +1,172 @@
+WORK_ORDER_V3.md -- AUDIT
+==============================================================
+
+The order is landed verbatim and is not edited. Nothing below is a
+statement about any deployed system, entity or person.
+
+-- 1  the pair, measured
+   v2 lines 1218   v3 lines 1104   equal 338
+   inserted 122   deleted 54   replaced 1072   ratio 0.2911
+   purely additive: no   shorter than v2: yes
+    v2 was a pure insertion over v1 and this is a rewrite; it is also
+    SHORTER than v2 while carrying sections v2 does not have, so prose was
+    compressed rather than added to
+
+-- 2  Step 0, the prior-art gate
+   artifacts 4   declares not redundant: yes   DONE in procedure: yes
+   closest prior art: LLM system-level taxonomy, 15 hidden failure modes (arXiv 2511.19933)
+   verification: NOT_VERIFIABLE_HERE
+    the prior-art gate's four artifacts are CARRIED, not verified:
+    arxiv.org and export.arxiv.org refuse CONNECT from here and no probe
+    runs at audit time (no network is a house rule). Recorded as
+    NOT_VERIFIABLE_HERE rather than as agreement.
+   cleared by: the order's own report, not by a check here
+
+-- 3  Step 1, the deployment class
+   state NOT_RUN   mentions 1   entry declining to narrow: DUR-002
+    the order offers two classes and picks neither, and one entry declines
+    to narrow in as many words; Step 5 and 7-2 both rest on it
+
+-- 4  the loss-variable map
+   F3 wins V7, V13   computed protective V5, V7, V9, V13
+   withdrawn wins V3, V14   marker 'Original F3 listed '
+   argued away by name: V9   unexplained: V5
+   V5 gloss: how often it is re-taught or re-performed
+    V5 keeps a protective score on a gloss that counts re-performance, and
+    DUR-004 is the state where performance is continuous and reading is
+    gone -- the same slip A-01 repairs one variable over
+
+-- 5  column boundaries
+   V-map rows cut: V2 of 14
+   prior-art lines cut: 2 of 18
+     line 51 misses    cell='005' spill=''
+     line 51 scope     cell='-> ambient-adjacent, see DUR-' spill='005'
+    one row of the score map still runs its ML cell past the column the
+    amendment cell starts at, and the prior-art table v3 adds does the
+    same thing on one line -- a second instance of the same shape, found
+    by the same check, in new material
+
+-- 6  the entry blocks
+   schema fields 12   unrated parts DUR-001, DUR-002, DUR-003, DUR-004, DUR-005, DUR-006
+     DUR-001  fields 11  missing id
+     DUR-002  fields 11  missing id
+     DUR-003  fields 11  missing id
+     DUR-004  fields 11  missing id
+     DUR-005  fields 11  missing id
+     DUR-006  fields 11  missing id
+    every entry block is one field short of the schema and it is the same
+    field on all of them; the id moved into the `### DUR-00n` heading, so
+    the register's own UNRATED PART rule fires on 6 of 6 entries against a
+    format change rather than an omission
+
+-- 7  Step 5, reconstruction
+   entries 6   single-valued DUR-004, DUR-005, DUR-006   multi-valued DUR-001, DUR-003   none DUR-002
+   distribution over single-valued: NO 3
+   merged distribution: None
+    the two multi-valued cells vary along different axes; one distribution
+    over both would be a count across unlike objects
+
+-- 8  Steps 6 and 7
+   gated in: DUR-001, DUR-003, DUR-004, DUR-005, DUR-006
+   excluded: DUR-002 head=PARTIAL (states a requirement anyway: yes)
+   control heads observed: NONE, PARTIAL   declared vocabulary: no
+   a whole-word NONE scan would gate in as well: DUR-002
+   second conjunct 'consequence non-trivial': NOT_EVALUABLE
+    no scale, no threshold and no comparison for `non-trivial` appears
+    anywhere in the order, so the gate runs on the first conjunct alone --
+    and the first conjunct is an equality against a free-text field, which
+    a whole-word scan reads wrongly on the entry that scores PARTIAL and
+    says `not NONE`
+   null set: EMPTY   cites the discipline: DUR-002
+
+-- 9  projection, and the header
+   entries 6   PROJECTED DUR-005   cap 1   at cap yes
+   header: draft register, six entries, prior-art gate passed.
+   F_D satisfied (fraction in the header): no
+    F_D directs the fraction into the header; the header states an entry
+    count and a gate status and no fraction
+   header states 6 entries, 6 counted: yes
+
+-- 10  F_K and F_M
+   F_K NOT_APPLICABLE_AS_DELIVERED   conditions 7   with a stated lifetime 0
+   prose claims finite lifetimes: yes   horizon has a value: no
+   F_M active set (none) (0 of 5)   empty: yes
+   names a rate in words with no value: training pipelines that produce the abov
+   DUR-005-C states no null result: yes   intended: yes
+
+-- 11  F_L, the direction
+   F_L states joint failure HIGHER than the naive product: yes
+   A-07 states a direction: no   F_L forbids a number: yes
+   failure at p=0.9 n=7 over rho: 0.5217, 0.4163, 0.3109, 0.2054, 0.1000
+   like-for-like verdict BACKWARDS   cross-type VALUE_DEPENDENT (1 of 5)
+    A-07 states the same correction WITHOUT a direction and is right;
+    section 9 is the authoritative record by the order's own rule. The
+    conclusion -- cannot be ensured, put no number on it -- rests on the
+    inability to ensure each term and is untouched.
+
+-- 12  F_J and F_I
+   section 5: 6 subsections, 0 ENTRY blocks, 0 cited instances
+   named observable now: 5-1, 5-2, 5-5   state ALL_PROJECTED
+    F_J lifts a subsection out of PROJECTED only when a current instance
+    is CITED; two are named observable now and neither cites one, so the
+    exemption is named and not exercised
+   single-number accessor for the volume argument: no
+   4-2 REGISTER RULE states what copies do not share: yes
+   n_eff from effective-redundancy-audit: three copies sharing a substrate -> 1, sharing nothing -> 3
+
+-- 13  section 6, the parser gate
+   fields the order states (3): the value itself, the literal source text it came from, the locator — which cell, which line
+   fields the gate takes: value, source_text, locator, span, derivation, render
+   order names a span or offset: no   names a derivation: no
+   states UNRATED: yes   not a default: yes   numeral rule: yes   completeness rule: yes
+     row  cell               buggy true  containment searched    produced
+     V3   '-> --   A-01'     '+'   '--'  refuses     refuses     no_provenance
+     V6   '-> --   A-02'     '-'   '--'  passes      passes at (0, 1) no_provenance
+   containment catches V3 and misses V6
+   a searched span misses V6, pointing elsewhere on V6 (true span (3, 5), (3, 5))
+   a produced span refuses V3, V6
+    containment is what section 6's three fields buy, and on one of these
+    two rows it passes a score that is not the authoritative one. A span
+    searched for afterwards passes it too, at an offset that is not the
+    score's. What refuses both is a span PRODUCED BY THE EXTRACTION, and
+    section 6 names neither the span nor where it has to come from
+
+-- 14  entry 0, amendments, still open
+   0-2 words 96   constructs as an entry block: no
+    0-2 states a property of the REGISTER -- that a failure with no
+    detection channel cannot generate the evidence that would force the
+    entry -- not a property of a deployment, so it has no load_condition
+    and its detection_channel is the field itself. Not constructible under
+    the schema, and delivered as prose rather than forced into one
+   amendments 11   complete 11   with a forcing case A-01
+   still open 5   naming a missing entry: 3
+     CORRELATED-BLOCK LOSS (4-2)      no entry. Shared substrate events take
+     PROCEDURE REPRODUCIBILITY (A-10) no entry, no proposed control.
+     PROVENANCE REGRESS (5-2)         distinct class from degradation. No en
+     CARRIER-SIDE DETECTION           DUR-005-C is a screen with no detectio
+     FORCING FUNCTION                 F_E stands unanswered. That is the fin
+
+-- 15  choices
+   [CHOICE 12]
+      the prior-art gate's four artifacts are CARRIED, not verified:
+      arxiv.org and export.arxiv.org refuse CONNECT from here and no probe
+      runs at audit time (no network is a house rule). Recorded as
+      NOT_VERIFIABLE_HERE rather than as agreement.
+   [CHOICE 13]
+      a section-5 subsection counts as carrying a CITED INSTANCE only if
+      it names a dated or identified case; `Worked case:` introducing a
+      hypothetical does not count.
+   [CHOICE 14]
+      the parser-gate conformance check reads section 6's own field list
+      against tools/sourced.Sourced's constructor, and demonstrates the
+      gap by replay rather than by argument.
+   [CHOICE 1]
+      entry blocks are located by their `### DUR-00n` heading, because v3
+      moved the id out of the fence; v2 located them by an `ENTRY` first
+      line. (entries_v3)
+   [CHOICE 2]
+      the candidate ambient sets are read as fenced lists in v3 (v2
+      carried them as indented free lists, which is why
+      entries_v2._indented_list is not used here). (entries_v3)
+
+Counts are printed by the suite: python3 test_register_v3.py

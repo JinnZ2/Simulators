@@ -1,0 +1,123 @@
+<svg width="1240" height="620" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" baseProfile="full" viewBox="0 0 1240 620">
+<rect width="1240" height="620" x="0" y="0" fill="#FAFAF8"></rect>
+<path d="M240.5 70L240.5 570" fill="none" pointer-events="visible" stroke="#dbdee4" class="zr0-cls-0"></path>
+<path d="M373.5 70L373.5 570" fill="none" pointer-events="visible" stroke="#dbdee4" class="zr0-cls-0"></path>
+<path d="M505.5 70L505.5 570" fill="none" pointer-events="visible" stroke="#dbdee4" class="zr0-cls-0"></path>
+<path d="M638.5 70L638.5 570" fill="none" pointer-events="visible" stroke="#dbdee4" class="zr0-cls-0"></path>
+<path d="M771.5 70L771.5 570" fill="none" pointer-events="visible" stroke="#dbdee4" class="zr0-cls-0"></path>
+<path d="M904.5 70L904.5 570" fill="none" pointer-events="visible" stroke="#dbdee4" class="zr0-cls-0"></path>
+<path d="M1037.5 70L1037.5 570" fill="none" pointer-events="visible" stroke="#dbdee4" class="zr0-cls-0"></path>
+<path d="M1170.5 70L1170.5 570" fill="none" pointer-events="visible" stroke="#dbdee4" class="zr0-cls-0"></path>
+<path d="M240.5 570L240.5 70" fill="none" pointer-events="visible" stroke="#54555a" stroke-linecap="round" class="zr0-cls-0"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:13px;font-family:DejaVu Sans, sans-serif;" xml:space="preserve" transform="translate(232 542.2222)" fill="#54555a">F6 Offline field guides</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:13px;font-family:DejaVu Sans, sans-serif;" xml:space="preserve" transform="translate(232 486.6667)" fill="#54555a">F8 Social &amp; civic audits</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:13px;font-family:DejaVu Sans, sans-serif;" xml:space="preserve" transform="translate(232 431.1111)" fill="#54555a">F7 Energy/labor accounting</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:13px;font-family:DejaVu Sans, sans-serif;" xml:space="preserve" transform="translate(232 375.5556)" fill="#54555a">F5 Flood &amp; infrastructure</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:13px;font-family:DejaVu Sans, sans-serif;" xml:space="preserve" transform="translate(232 320)" fill="#54555a">F9 Exploration engines</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:13px;font-family:DejaVu Sans, sans-serif;" xml:space="preserve" transform="translate(232 264.4444)" fill="#54555a">F4 Physics &amp; natural world</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:13px;font-family:DejaVu Sans, sans-serif;" xml:space="preserve" transform="translate(232 208.8889)" fill="#54555a">F1 Meta-protocol spine</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:13px;font-family:DejaVu Sans, sans-serif;" xml:space="preserve" transform="translate(232 153.3333)" fill="#54555a">F3 Work-order harnesses</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:13px;font-family:DejaVu Sans, sans-serif;" xml:space="preserve" transform="translate(232 97.7778)" fill="#54555a">F2 AI/LLM eval instruments</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:12px;font-family:DejaVu Sans, sans-serif;" y="6" transform="translate(240 578)" fill="#54555a">0</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:12px;font-family:DejaVu Sans, sans-serif;" y="6" transform="translate(372.8571 578)" fill="#54555a">50</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:12px;font-family:DejaVu Sans, sans-serif;" y="6" transform="translate(505.7143 578)" fill="#54555a">100</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:12px;font-family:DejaVu Sans, sans-serif;" y="6" transform="translate(638.5714 578)" fill="#54555a">150</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:12px;font-family:DejaVu Sans, sans-serif;" y="6" transform="translate(771.4286 578)" fill="#54555a">200</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:12px;font-family:DejaVu Sans, sans-serif;" y="6" transform="translate(904.2857 578)" fill="#54555a">250</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:12px;font-family:DejaVu Sans, sans-serif;" y="6" transform="translate(1037.1429 578)" fill="#54555a">300</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:12px;font-family:DejaVu Sans, sans-serif;" y="6" transform="translate(1170 578)" fill="#54555a">350</text>
+<path d="M240 527.5l10.6 0l0 14l-10.6 0Z" fill="#7A6E9E" ecmeta_series_index="0" ecmeta_data_index="0" ecmeta_ssr_type="chart" class="zr0-cls-1"></path>
+<path d="M240 472l15.9 0l0 14l-15.9 0Z" fill="#3F7AA6" ecmeta_series_index="0" ecmeta_data_index="1" ecmeta_ssr_type="chart" class="zr0-cls-2"></path>
+<path d="M240 416.4l23.9 0l0 14l-23.9 0Z" fill="#A65E3F" ecmeta_series_index="0" ecmeta_data_index="2" ecmeta_ssr_type="chart" class="zr0-cls-3"></path>
+<path d="M240 360.9l26.6 0l0 14l-26.6 0Z" fill="#8E4E6E" ecmeta_series_index="0" ecmeta_data_index="3" ecmeta_ssr_type="chart" class="zr0-cls-4"></path>
+<path d="M240 305.3l26.6 0l0 14l-26.6 0Z" fill="#8A8A8A" ecmeta_series_index="0" ecmeta_data_index="4" ecmeta_ssr_type="chart" class="zr0-cls-5"></path>
+<path d="M240 249.7l34.5 0l0 14l-34.5 0Z" fill="#6B8F4E" ecmeta_series_index="0" ecmeta_data_index="5" ecmeta_ssr_type="chart" class="zr0-cls-6"></path>
+<path d="M240 194.2l69.1 0l0 14l-69.1 0Z" fill="#4E6E8E" ecmeta_series_index="0" ecmeta_data_index="6" ecmeta_ssr_type="chart" class="zr0-cls-7"></path>
+<path d="M240 138.6l79.7 0l0 14l-79.7 0Z" fill="#C08329" ecmeta_series_index="0" ecmeta_data_index="7" ecmeta_ssr_type="chart" class="zr0-cls-8"></path>
+<path d="M240 83.1l154.1 0l0 14l-154.1 0Z" fill="#2E8B8B" ecmeta_series_index="0" ecmeta_data_index="8" ecmeta_ssr_type="chart" class="zr0-cls-9"></path>
+<path d="M240 542.9l0 0l0 14l0 0Z" fill="#7A6E9E" fill-opacity="0.45" stroke="#7A6E9E" stroke-opacity="0.45" stroke-dasharray="4,2" ecmeta_series_index="1" ecmeta_data_index="0" ecmeta_ssr_type="chart" class="zr0-cls-1"></path>
+<path d="M240 487.4l225.9 0l0 14l-225.9 0Z" fill="#3F7AA6" fill-opacity="0.45" stroke="#3F7AA6" stroke-opacity="0.45" stroke-dasharray="4,2" ecmeta_series_index="1" ecmeta_data_index="1" ecmeta_ssr_type="chart" class="zr0-cls-2"></path>
+<path d="M240 431.8l127.5 0l0 14l-127.5 0Z" fill="#A65E3F" fill-opacity="0.45" stroke="#A65E3F" stroke-opacity="0.45" stroke-dasharray="4,2" ecmeta_series_index="1" ecmeta_data_index="2" ecmeta_ssr_type="chart" class="zr0-cls-3"></path>
+<path d="M240 376.3l345.4 0l0 14l-345.4 0Z" fill="#8E4E6E" fill-opacity="0.45" stroke="#8E4E6E" stroke-opacity="0.45" stroke-dasharray="4,2" ecmeta_series_index="1" ecmeta_data_index="3" ecmeta_ssr_type="chart" class="zr0-cls-4"></path>
+<path d="M240 320.7l172.7 0l0 14l-172.7 0Z" fill="#8A8A8A" fill-opacity="0.45" stroke="#8A8A8A" stroke-opacity="0.45" stroke-dasharray="4,2" ecmeta_series_index="1" ecmeta_data_index="4" ecmeta_ssr_type="chart" class="zr0-cls-5"></path>
+<path d="M240 265.1l217.9 0l0 14l-217.9 0Z" fill="#6B8F4E" fill-opacity="0.45" stroke="#6B8F4E" stroke-opacity="0.45" stroke-dasharray="4,2" ecmeta_series_index="1" ecmeta_data_index="5" ecmeta_ssr_type="chart" class="zr0-cls-6"></path>
+<path d="M240 209.6l151.5 0l0 14l-151.5 0Z" fill="#4E6E8E" fill-opacity="0.45" stroke="#4E6E8E" stroke-opacity="0.45" stroke-dasharray="4,2" ecmeta_series_index="1" ecmeta_data_index="6" ecmeta_ssr_type="chart" class="zr0-cls-7"></path>
+<path d="M240 154l438.4 0l0 14l-438.4 0Z" fill="#C08329" fill-opacity="0.45" stroke="#C08329" stroke-opacity="0.45" stroke-dasharray="4,2" ecmeta_series_index="1" ecmeta_data_index="7" ecmeta_ssr_type="chart" class="zr0-cls-8"></path>
+<path d="M240 98.5l874.2 0l0 14l-874.2 0Z" fill="#2E8B8B" fill-opacity="0.45" stroke="#2E8B8B" stroke-opacity="0.45" stroke-dasharray="4,2" ecmeta_series_index="1" ecmeta_data_index="8" ecmeta_ssr_type="chart" class="zr0-cls-9"></path>
+<text dominant-baseline="central" text-anchor="start" style="font-size:12px;font-family:DejaVu Sans, sans-serif;" transform="translate(255.6286 534.5222)" fill="#333" stroke="rgb(250,250,248)" stroke-width="2" paint-order="stroke" stroke-miterlimit="2">4</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:12px;font-family:DejaVu Sans, sans-serif;" transform="translate(260.9429 478.9667)" fill="#333" stroke="rgb(250,250,248)" stroke-width="2" paint-order="stroke" stroke-miterlimit="2">6</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:12px;font-family:DejaVu Sans, sans-serif;" transform="translate(268.9143 423.4111)" fill="#333" stroke="rgb(250,250,248)" stroke-width="2" paint-order="stroke" stroke-miterlimit="2">9</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:12px;font-family:DejaVu Sans, sans-serif;" transform="translate(271.5714 367.8556)" fill="#333" stroke="rgb(250,250,248)" stroke-width="2" paint-order="stroke" stroke-miterlimit="2">10</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:12px;font-family:DejaVu Sans, sans-serif;" transform="translate(271.5714 312.3)" fill="#333" stroke="rgb(250,250,248)" stroke-width="2" paint-order="stroke" stroke-miterlimit="2">10</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:12px;font-family:DejaVu Sans, sans-serif;" transform="translate(279.5429 256.7444)" fill="#333" stroke="rgb(250,250,248)" stroke-width="2" paint-order="stroke" stroke-miterlimit="2">13</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:12px;font-family:DejaVu Sans, sans-serif;" transform="translate(314.0857 201.1889)" fill="#333" stroke="rgb(250,250,248)" stroke-width="2" paint-order="stroke" stroke-miterlimit="2">26</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:12px;font-family:DejaVu Sans, sans-serif;" transform="translate(324.7143 145.6333)" fill="#333" stroke="rgb(250,250,248)" stroke-width="2" paint-order="stroke" stroke-miterlimit="2">30</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:12px;font-family:DejaVu Sans, sans-serif;" transform="translate(399.1143 90.0778)" fill="#333" stroke="rgb(250,250,248)" stroke-width="2" paint-order="stroke" stroke-miterlimit="2">58</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:11px;font-family:DejaVu Sans, sans-serif;" transform="translate(245.5 549.9222)" fill="#555" fill-opacity="0.45">0</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:11px;font-family:DejaVu Sans, sans-serif;" transform="translate(471.3571 494.3667)" fill="#555" fill-opacity="0.45">85</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:11px;font-family:DejaVu Sans, sans-serif;" transform="translate(373.0429 438.8111)" fill="#555" fill-opacity="0.45">48</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:11px;font-family:DejaVu Sans, sans-serif;" transform="translate(590.9286 383.2556)" fill="#555" fill-opacity="0.45">130</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:11px;font-family:DejaVu Sans, sans-serif;" transform="translate(418.2143 327.7)" fill="#555" fill-opacity="0.45">65</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:11px;font-family:DejaVu Sans, sans-serif;" transform="translate(463.3857 272.1444)" fill="#555" fill-opacity="0.45">82</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:11px;font-family:DejaVu Sans, sans-serif;" transform="translate(396.9571 216.5889)" fill="#555" fill-opacity="0.45">57</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:11px;font-family:DejaVu Sans, sans-serif;" transform="translate(683.9286 161.0333)" fill="#555" fill-opacity="0.45">165</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:11px;font-family:DejaVu Sans, sans-serif;" transform="translate(1119.7 105.4778)" fill="#555" fill-opacity="0.45">329</text>
+<path d="M-5 -5l180.4 0l0 24l-180.4 0Z" transform="translate(534.82 593)" fill="rgb(0,0,0)" fill-opacity="0" stroke="#b7b9be" stroke-width="0" class="zr0-cls-0"></path>
+<path d="M3.5 0L21.5 0A3.5 3.5 0 0 1 25 3.5L25 10.5A3.5 3.5 0 0 1 21.5 14L3.5 14A3.5 3.5 0 0 1 0 10.5L0 3.5A3.5 3.5 0 0 1 3.5 0Z" transform="translate(534.82 593)" fill="#5B7A99" ecmeta_series_index="0" ecmeta_data_index="0" ecmeta_ssr_type="legend" ecmeta_silent="true" class="zr0-cls-0"></path>
+<text dominant-baseline="central" text-anchor="start" style="font-size:12px;font-family:DejaVu Sans, sans-serif;" x="30" y="7" transform="translate(534.82 593)" fill="#54555a">Folders</text>
+<path d="M0 0l70.1 0l0 14l-70.1 0Z" transform="translate(534.82 593)" fill="none" pointer-events="visible" ecmeta_series_index="0" ecmeta_data_index="0" ecmeta_ssr_type="legend" class="zr0-cls-10"></path>
+<path d="M3.5 0L21.5 0A3.5 3.5 0 0 1 25 3.5L25 10.5A3.5 3.5 0 0 1 21.5 14L3.5 14A3.5 3.5 0 0 1 0 10.5L0 3.5A3.5 3.5 0 0 1 3.5 0Z" transform="translate(612.9 593)" fill="#B9B29F" ecmeta_series_index="1" ecmeta_data_index="1" ecmeta_ssr_type="legend" ecmeta_silent="true" class="zr0-cls-0"></path>
+<text dominant-baseline="central" text-anchor="start" style="font-size:12px;font-family:DejaVu Sans, sans-serif;" xml:space="preserve" x="30" y="7" transform="translate(612.9 593)" fill="#54555a">Python files</text>
+<path d="M0 0l92.3 0l0 14l-92.3 0Z" transform="translate(612.9 593)" fill="none" pointer-events="visible" ecmeta_series_index="1" ecmeta_data_index="1" ecmeta_ssr_type="legend" class="zr0-cls-10"></path>
+<path d="M-233.3 -5l466.6 0l0 52l-466.6 0Z" transform="translate(620 20)" fill="rgb(0,0,0)" fill-opacity="0" stroke="#3c3c41" stroke-width="0" class="zr0-cls-0"></path>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:20px;font-family:DejaVu Sans, sans-serif;font-weight:bold;" xml:space="preserve" y="10" transform="translate(620 20)" fill="#2b2b2b">Repository composition by family</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:12px;font-family:DejaVu Sans, sans-serif;" xml:space="preserve" y="36" transform="translate(620 20)" fill="#666">166 folders / 2,673 files / 961 Python scripts — JinnZ2/Simulators (surveyed 2026-09)</text>
+<style ><![CDATA[
+.zr0-cls-0:hover {
+pointer-events:none;
+}
+.zr0-cls-1:hover {
+cursor:pointer;
+fill:rgba(134,121,173,1);
+}
+.zr0-cls-2:hover {
+cursor:pointer;
+fill:rgba(69,134,182,1);
+}
+.zr0-cls-3:hover {
+cursor:pointer;
+fill:rgba(182,103,69,1);
+}
+.zr0-cls-4:hover {
+cursor:pointer;
+fill:rgba(156,85,121,1);
+}
+.zr0-cls-5:hover {
+cursor:pointer;
+fill:rgba(151,151,151,1);
+}
+.zr0-cls-6:hover {
+cursor:pointer;
+fill:rgba(117,157,85,1);
+}
+.zr0-cls-7:hover {
+cursor:pointer;
+fill:rgba(85,121,156,1);
+}
+.zr0-cls-8:hover {
+cursor:pointer;
+fill:rgba(211,144,45,1);
+}
+.zr0-cls-9:hover {
+cursor:pointer;
+fill:rgba(50,152,152,1);
+}
+.zr0-cls-10:hover {
+cursor:pointer;
+fill:rgba(0,0,0,0);
+}
+
+]]>
+
+</style>
+</svg>

@@ -126,14 +126,22 @@ _CHECKS = re.compile(r"selftest:\s*(\d+)\s+checks?,\s*(\d+)\s+failed", re.I)
 _CHECKS2 = re.compile(r"SELFTEST\s+(PASS|FAIL)\s*\((\d+)\s+checks?\s+failed",
                       re.I)
 _PASSFAIL = re.compile(r"(\d+)\s+checks?,\s*(\d+)\s+failed", re.I)
+# A fourth shape, unparsed until the external cross-check found it:
+# `checks: N   failed: M`. Left to the heuristic below, it read as a
+# FAILURE, because the heuristic's dirty test is `[1-9]\d*\s+failed`
+# and that matches the CHECK COUNT sitting immediately before the word
+# -- `checks: 142   failed: 0` fires on "142   failed". Four green
+# modules were binned SOME_FAILED_UNCOUNTED by their own passing output.
+_CHECKS3 = re.compile(r"^checks:\s*(\d+)\s+failed:\s*(\d+)", re.M)
 
 
 def parse_count(out, how):
     """(count, failed) from a module's own selftest line, or (None, None).
 
-    Three shapes are in use across the repo and none is normalised here:
+    Shapes in use across the repo, none normalised here:
     `selftest: N checks, M failed`, `SELFTEST PASS (M checks failed)` with
-    an N printed per line above it, and `selftest N/N`.
+    an N printed per line above it, `selftest N/N`, and
+    `checks: N   failed: M`.
     """
     m = _CHECKS.search(out)
     if m:
@@ -148,6 +156,9 @@ def parse_count(out, how):
     if ms:
         a, b_ = ms[-1]
         return int(b_), int(b_) - int(a)
+    m = _CHECKS3.search(out)
+    if m:
+        return int(m.group(1)), int(m.group(2))
     m = _CHECKS2.search(out)
     if m:
         n = len(re.findall(r"^\s{2}\S.*\b(PASS|FAIL)\b", out, re.M))
@@ -1069,6 +1080,20 @@ def selftest():
         parse_count("15/15 checks passed\n", None) == (15, 0))
     chk("parses a bare N/N on its own line",
         parse_count("PASS a\nPASS b\n\n53/53\n", None) == (53, 0))
+    # -- the fourth shape, and why it had to be parsed rather than left
+    #    to the heuristic. Found by an outside cross-check: census binned
+    #    four modules SOME_FAILED_UNCOUNTED on output that says 0 failed.
+    chk("parses `checks: N   failed: M`",
+        parse_count("checks: 142   failed: 0", None) == (142, 0))
+    chk("and reads a real failure in that shape",
+        parse_count("checks: 41   failed: 3", None) == (41, 3))
+    chk("the heuristic it used to fall through to reads the CHECK COUNT "
+        "as a failure count",
+        re.search(r"\b[1-9]\d*\s+failed\b", "checks: 142   failed: 0")
+        is not None)
+    chk("while its clean test does not fire, the zero sitting AFTER the "
+        "word -- so the misread was unambiguous, not a tie",
+        re.search(r"\b0\s+failed\b", "checks: 142   failed: 0") is None)
     chk("a bare ratio inside prose does not match",
         parse_count("the 3/4 majority held\n", None) == (None, None))
     chk("no count is None, not zero",

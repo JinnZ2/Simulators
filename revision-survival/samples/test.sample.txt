@@ -1,0 +1,138 @@
+ok    VERDICTS match the order
+ok    MECHANISMS match the order
+ok    RETURNS match the order
+ok    leak threshold 0.15 is the order's
+ok    overconfidence threshold 0.2 is the order's
+ok    survival cut 0.8 is the order's
+ok    Y = 2005 is the order's
+ok    N >= 40 is the order's
+ok    SURVIVED floor 40% is the order's
+ok    twelve seeds in the order, twelve DELIVERED records
+ok    consequence classes are the order's three
+ok    a well-formed claim reads
+ok    claim refused without id
+ok    claim refused without statement
+ok    claim refused without field_nouns
+ok    claim refused without established_as_of_Y
+ok    claim refused without established_basis
+ok    claim refused without outcome
+ok    claim refused without status
+ok    claim refused without author
+ok    claim refused without outcome.label
+ok    claim refused without outcome.mechanism
+ok    claim refused without outcome.basis
+ok    claim refused without outcome.verified
+ok    claim refused without outcome.source
+ok    claim refused on a label outside the vocabulary
+ok    claim refused on a mechanism outside the vocabulary (confounding is what seed-04 needed and the vocabulary lacks)
+ok    claim refused on a non-bool verified
+ok    claim refused on an admission reading outside YES/NO/UNCERTAIN
+ok    a well-formed response reads
+ok    response refused without claim_id
+ok    response refused without condition
+ok    response refused without verdict
+ok    response refused without confidence
+ok    response refused without mechanism
+ok    response refused without flag_evidence
+ok    response refused without author
+ok    response refused on confidence > 1
+ok    response refused on a bool confidence
+ok    response refused on a condition outside OPEN/BLIND
+ok    six seeds admitted
+ok    five seeds read NO on established-as-of-2005
+ok    one seed reads UNCERTAIN
+ok    every CANDIDATE is excluded, none admitted
+ok    every excluded record carries a reason
+ok    every seed outcome is carried, none verified
+ok    every seed carries a source for its dating (D4)
+ok    SURVIVED share of the admitted corpus is 0 of 6
+ok    admitting the scorer's candidates would clear D1 by itself
+ok    blind replaces every declared noun
+ok    blind reports what moved per noun
+ok    blind strips four-digit years
+ok    LIMIT: an undeclared synonym is not replaced (word list)
+ok    blind output says it is MECHANICAL_ONLY
+ok    [CHOICE 1] chance is the larger of uniform and majority
+ok    [CHOICE 1] uniform wins on a flat key
+ok    chance is None on an empty key
+ok    above_chance is None on no rows
+ok    [CHOICE 2] one perfect row does not clear chance
+ok    [CHOICE 2] 0.8 on 50 rows clears chance 0.4
+ok    accuracy is None on nothing, never 0
+ok    accuracy counts
+ok    delta: quarter
+ok    delta: None when BLIND absent
+ok    delta: None when OPEN absent
+ok    delta: sign kept
+ok    constructed world clears N and D1 floors
+ok    CALIBRATED reachable
+ok    LEAK_DOMINATED reachable
+ok    LABEL_ONLY reachable
+ok    UNCALIBRATED reachable
+ok    OVERCONFIDENT rides as a co-flag on both conditions
+ok    no co-flag at honest confidence
+ok    VOID with no BLIND arm, naming the reason
+ok    VOID when key and responses share an author
+ok    a void result carries no primary member
+ok    every RETURN member is produced by some world
+ok    delta gates on the larger of the two [CHOICE 3]
+ok    a leak of 0.5 in mechanism alone voids
+ok    D1 does not fire on the constructed world
+ok    BELOW_N_FLOOR does not fire at n = 50
+ok    D4 fires on a carried key regardless of the rest
+ok    on an all-SURVIVED key the revised-row Q_mech is None (no rows)
+ok    on the 40% world the revised-row denominator is 30 of 50
+ok    chance for mechanism on the 40% world is the NONE_GIVEN share, 0.4
+ok    shipped Arm A is VOID
+ok    shipped Arm A voids on both reasons
+ok    shipped Arm A states D1, D4 and the N floor
+ok    shipped OPEN agreement is 6 of 6, by construction
+ok    responses on excluded seeds are not scored
+ok    no response gives NONE_GIVEN
+ok    shipped record hash equals the recomputed seal
+ok    review dates are T+24mo and T+60mo [CHOICE 6]
+ok    record carries k = 13
+ok    record carries nothing from the block but hash, date, domain, k, review
+ok    seal is deterministic
+ok    one edited p_survive fails verify
+ok    scoring a tampered block is VOID_HASH
+ok    scoring before the first review date is NOT_DUE, naming it
+ok    scoring on the review date with ten outcomes: SCORED, three unresolved
+ok    a block with model UNKNOWN is refused
+ok    a block with model WITHHELD and a reason reads
+ok    a duplicate claim id is refused
+ok    a claim without p_survive is refused [CHOICE 5]
+ok    every Arm B claim carries a mechanism-if-revised and a flag
+ok    Arm B rates at least one claim below and one at or above the cut
+ok    FINDING: two TERMINAL cells rest on a claim rated below 0.8
+ok    C9 rests on B-07 at 0.5
+ok    three rows carry no substitution decision
+ok    B-12 is rated and under no row
+ok    nine rows, the drop's register
+ok    the finding counts only the low bucket
+ok    TERMINAL_UNRATED reachable and kept apart
+ok    TERMINAL_RATED_HELD reachable and kept apart
+ok    UNDECLARED reachable and kept apart
+ok    a rests_on id absent from the block is refused, not skipped
+ok    a class with no basis is refused
+ok    an UNDECLARED class needs no basis
+ok    a class outside the vocabulary is refused
+ok    every row's rests_on resolves in the block
+ok    every under_brc_rows on the block resolves to a row
+ok    block and rows agree on who rests on whom
+ok    render prints the contamination block before Arm A
+ok    render prints every [CHOICE n]
+ok    render prints the finding
+ok    render screens clean through no_severity, no exemption
+ok    the screen fires on a planted word
+ok    --selftest is refused with exit 2
+ok    CLI render exits 0 and matches run()
+ok    revision_survival.py is ASCII
+ok    revision_survival.py parses under 3.9
+ok    cases.py is ASCII
+ok    cases.py parses under 3.9
+ok    test_revision.py is ASCII
+ok    test_revision.py parses under 3.9
+ok    cases.py binds no name for an expected result
+
+checks: 136   failed: 0

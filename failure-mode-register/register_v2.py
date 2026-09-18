@@ -247,7 +247,7 @@ def _has_numeral(text):
     return any(ch.isdigit() for ch in text)
 
 
-def _has_duration(text, locator=None):
+def _has_duration(text, locator=None, order_name=None):
     """A numeral adjacent to a time unit.
 
     NOT a bare numeral test. The first version of F_K's check used one and
@@ -264,13 +264,14 @@ def _has_duration(text, locator=None):
     the quantity, and one that does not comes back as a refusal naming
     what was missing rather than as a False that reads like a
     measurement."""
-    loc = locator or S.Locator(E2.ORDER_NAME, None, None, None, "text")
+    loc = locator or S.Locator(order_name or E2.ORDER_NAME,
+                               None, None, None, "text")
     return S.numeral_with_unit(text, loc, units=TIME_UNITS)
 
 
-def _is_duration(text, locator=None):
+def _is_duration(text, locator=None, order_name=None):
     """The boolean form, for a caller that only needs the branch."""
-    return isinstance(_has_duration(text, locator), S.Sourced)
+    return isinstance(_has_duration(text, locator, order_name), S.Sourced)
 
 
 def _has_rate(text):
@@ -281,7 +282,7 @@ def _has_rate(text):
     return _has_numeral(low) and any(m in low for m in RATE_MARKS)
 
 
-def f_k_bound():
+def f_k_bound(conds=None, order_name=None, text=None):
     """F_K: a condition enters the register only if its expected lifetime
     is within the retention horizon being claimed. [CHOICE 11].
 
@@ -289,25 +290,26 @@ def f_k_bound():
     admitted here carries the span covering its quantity and one refused
     carries the reason. `~1` with no unit does not parse into a horizon;
     it fails the gate."""
-    conds = E2.artifact_side_ambient()
+    conds = E2.artifact_side_ambient() if conds is None else conds
+    order_name = order_name or E2.ORDER_NAME
     with_lifetime, refused = [], []
     for k, c in enumerate(conds):
-        loc = S.Locator(E2.ORDER_NAME, None, None, None,
+        loc = S.Locator(order_name, None, None, None,
                         "artifact-side condition %d" % (k + 1))
-        d = _has_duration(c, loc)
+        d = _has_duration(c, loc, order_name)
         if isinstance(d, S.Sourced):
             with_lifetime.append({"condition": c, "quantity": d.value,
                                   "span": d.span})
         else:
             refused.append({"condition": c, "reason": d.reason})
-    txt = E2.order_text()
+    txt = E2.order_text() if text is None else text
     horizon_mentions = txt.count("retention horizon")
     horizon_valued, horizon_quantity = False, None
     for n, line in enumerate(txt.split("\n"), start=1):
         if "retention horizon" not in line:
             continue
-        loc = S.Locator(E2.ORDER_NAME, n, None, None, "retention horizon")
-        d = _has_duration(line, loc)
+        loc = S.Locator(order_name, n, None, None, "retention horizon")
+        d = _has_duration(line, loc, order_name)
         if isinstance(d, S.Sourced):
             horizon_valued, horizon_quantity = True, d.value
             break
@@ -329,12 +331,12 @@ def f_k_bound():
             "choice": 11}
 
 
-def f_m_bound():
+def f_m_bound(conds=None):
     """F_M: a carrier-side condition enters the register only with (a) a
     named producing mechanism and (b) a currently measurable production
     rate. Conditions failing (b) are UNINSTRUMENTED and excluded from the
     ACTIVE SET rather than carried as claims. [CHOICE 10]."""
-    conds = E2.carrier_side_ambient()
+    conds = E2.carrier_side_ambient() if conds is None else conds
     rows = []
     for c in conds:
         rate = _has_rate(c)
@@ -354,15 +356,16 @@ def f_m_bound():
             "choice": 10}
 
 
-def screen_has_null():
+def screen_has_null(text=None):
     """DUR-005-C states its own CONSTANT_FIRES property: every capacity
     scores PRODUCED or FLAGGED and nothing scores clean. Read out of the
     delivered text rather than asserted about it."""
-    txt = E2.screen_rule()
-    flat = " ".join(txt.split())
+    txt = E2.screen_rule() if text is None else text
+    flat = " ".join(txt.split()).lower()
     return {"section": "DUR-005-C",
             "states_no_null": "has no null result" in flat,
             "states_intended": "intended behaviour" in flat,
+            "read_case_insensitively": True,
             "reading": ("a screen with no null cannot separate an "
                         "examined capacity from an unexamined one; it "
                         "records what is unexamined, which is what the "
@@ -375,13 +378,13 @@ def screen_has_null():
 
 # ------------------------------------------------ recounts on 6 entries
 
-def reconstruction_distribution_v2():
+def reconstruction_distribution_v2(recs=None, axes=None):
     """Step 5 over the six delivered entries. A cell stating two of the
     three values is reported as two, not resolved to one, and the AXIS
     each multi-value cell varies along is named -- they are different
     axes and a merged distribution would put them on one."""
     rows = []
-    for rec in E2.entries_v2():
+    for rec in (E2.entries_v2() if recs is None else recs):
         vals = E2.reconstruction_values(rec)
         rows.append({"id": rec["id"], "values": vals, "n": len(vals),
                      "cell": rec["fields"].get("reconstruction", "")})
@@ -396,21 +399,24 @@ def reconstruction_distribution_v2():
             "multi_valued": [r["id"] for r in multi],
             "no_declared_value": [r["id"] for r in none],
             "distribution_over_single_valued": dist,
-            "axes": {"DUR-001": "control state (without / with the control)",
-                     "DUR-003": "time (degrades from PARTIAL toward NO)"},
+            "axes": (axes if axes is not None else
+                     {"DUR-001": "control state (without / with the "
+                                 "control)",
+                      "DUR-003": "time (degrades from PARTIAL toward "
+                                 "NO)"}),
             "merged_distribution": None,
             "why_no_merge": ("the two multi-valued cells vary along "
                              "different axes; one distribution over both "
                              "would be a count across unlike objects")}
 
 
-def projected_fraction_v2(fraction=None):
+def projected_fraction_v2(fraction=None, recs=None):
     """The section 2 rule recounted on six entries, using register.py's
     own fraction_cap rather than a second copy of the inequality."""
     if fraction is None:
         fraction = R1.DEFAULT_PROJECTED_FRACTION
     rows = []
-    for rec in E2.entries_v2():
+    for rec in (E2.entries_v2() if recs is None else recs):
         vals = E2.evidence_values(rec)
         rows.append({"id": rec["id"], "values": vals,
                      "projected": "PROJECTED" in vals})

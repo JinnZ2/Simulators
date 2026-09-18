@@ -61,6 +61,9 @@ MANIFEST = (
     "failure-mode-register/register_v2.py::joint_survival",
     "internal-reference-boundary/radials.py::effective_origins",
     "internal-reference-boundary/radials.py::sanction_ratio_point",
+    "move-set/move_set_sim_v2.py::coverage",
+    "move-set/move_set_sim_v2.py::_halfwidth",
+    "revision-survival/revision_survival.py::delta",
 )
 
 # Cases known to fail today. A case that starts passing turns this red so
@@ -205,6 +208,78 @@ class TheGateFires(unittest.TestCase):
         rows = {r["case"]: r["status"] for r in ka.run("planted::always_true")}
         self.assertEqual(rows["wants true"], ka.PASS)
         self.assertEqual(rows["wants false"], ka.FAIL)
+
+
+class SeedReachability(unittest.TestCase):
+    """Third occurrence of one shape: a register() call that runs at import
+    and is not on seed()'s path. FMR_036 was a register after a `finally`,
+    MSV_013 the same again, MSV_024 a helper called from the module tail.
+    All three were repaired where they were found. This is the structural
+    form -- a call graph closed from seed() -- so a fourth fails the run
+    instead of waiting to be noticed."""
+
+    def test_every_registration_is_reachable_from_seed(self):
+        r = ka.seed_reachable()
+        self.assertTrue(
+            r["ok"],
+            "register() call sites seed() cannot reach: %s" % r["unreachable"])
+
+    def test_the_check_names_the_functions_that_register(self):
+        """A reachability check that found no register() calls at all would
+        also pass. This pins that it found them."""
+        r = ka.seed_reachable()
+        self.assertIn("seed", r["registering_functions"])
+        self.assertIn("_seed_move_set", r["registering_functions"])
+
+    def test_a_tail_only_registration_is_caught(self):
+        """The plant, arm 1 -- MSV_024's exact shape."""
+        src = ("def register(a): pass\n"
+               "def _late():\n"
+               "    register('x')\n"
+               "def seed():\n"
+               "    register('a')\n"
+               "_late()\n")
+        r = ka.seed_reachable(src=src)
+        self.assertFalse(r["ok"])
+        self.assertEqual([fn for fn, _ in r["unreachable"]], ["_late"])
+
+    def test_a_module_level_registration_is_caught(self):
+        """The plant, arm 2 -- a register() in no function at all."""
+        src = ("def register(a): pass\n"
+               "def seed():\n"
+               "    register('a')\n"
+               "register('b')\n")
+        r = ka.seed_reachable(src=src)
+        self.assertFalse(r["ok"])
+        self.assertEqual([fn for fn, _ in r["unreachable"]], [None])
+
+    def test_a_registration_seed_reaches_is_not_caught(self):
+        """The negative. A check that refuses every file is not a check."""
+        src = ("def register(a): pass\n"
+               "def _late():\n"
+               "    register('x')\n"
+               "def seed():\n"
+               "    register('a')\n"
+               "    _late()\n")
+        self.assertTrue(ka.seed_reachable(src=src)["ok"])
+
+    def test_reachability_is_transitive(self):
+        """seed -> a -> b -> register() is reachable. A one-hop check would
+        report this as a violation and send the next reader to repair a
+        registration that is fine."""
+        src = ("def register(a): pass\n"
+               "def _b():\n"
+               "    register('x')\n"
+               "def _a():\n"
+               "    _b()\n"
+               "def seed():\n"
+               "    _a()\n")
+        self.assertTrue(ka.seed_reachable(src=src)["ok"])
+
+    def test_no_other_file_registers(self):
+        """A register() in another file is outside seed() by construction.
+        Currently a visible zero, kept so it stays one."""
+        self.assertEqual(ka.registration_sites_elsewhere(), [])
 
 
 if __name__ == "__main__":

@@ -1,0 +1,119 @@
+{
+  "artifact": "aperiodic-order-sim-stack/SIM_STACK_REPORT.txt",
+  "note": "AUTHORED BY THE SAME SESSION THAT WROTE THE HARNESS. Not blind. See the contamination block printed by --demo.",
+  "order": [
+    "M4_perturb",
+    "M1_provenance",
+    "M6_absence_first_class",
+    "M3_relation_held",
+    "M5_self_report",
+    "M2_substitution"
+  ],
+  "entries": [
+    {
+      "move_id": "M1_provenance",
+      "confidence": "high -- a whole-artifact token search, recomputable by anyone",
+      "absent": {
+        "reason": "Five box-counting dimensions are reported to three decimals with r-squared values. The artifact states the method (box counting, line 13) and the date (line 5) and nowhere states the population each dimension was taken over. A dimension estimate without its sample size cannot be compared to another dimension estimate.",
+        "looked_at": [
+          [
+            1,
+            92
+          ]
+        ],
+        "sought": [
+          "N =",
+          "sample size",
+          "points"
+        ]
+      }
+    },
+    {
+      "move_id": "M2_substitution",
+      "confidence": "high -- the operative clause is on the cited line",
+      "finding": {
+        "kind": "QUOTE",
+        "line": 6,
+        "col_start": 18,
+        "col_end": 54,
+        "quote": "Protocol: Run B → if dimensions separate, skip A and C",
+        "expect": "if dimensions separate, skip A and C"
+      },
+      "_says": "SIM-B is labelled DECISIVE. The term stands in for this protocol clause and for no threshold: 'separate' is stated with no cut, so the label is a decision rule with its decision boundary left out."
+    },
+    {
+      "move_id": "M3_relation_held",
+      "confidence": "high -- the operand is on the cited line",
+      "finding": {
+        "kind": "QUOTE",
+        "line": 17,
+        "col_start": 41,
+        "col_end": 46,
+        "quote": "  Poisson (random):                D_f = 1.911  (r²=0.9990)",
+        "expect": "1.911"
+      },
+      "_says": "The 0.021 baseline at line 23 is held by something in the artifact: the Poisson dimension at line 17, against the AB dimension at line 15. The relationship is checkable from the artifact's own values, which is the answer to the move -- whether 0.021 is the RIGHT baseline is a reading and is not scored here."
+    },
+    {
+      "move_id": "M4_perturb",
+      "confidence": "high on the arithmetic, and the arithmetic is what refuses -- both operands ship three decimal places",
+      "finding": {
+        "kind": "DERIVED",
+        "op": "abs_sub",
+        "operands": [
+          {
+            "line": 15,
+            "col_start": 41,
+            "col_end": 46,
+            "quote": "  Ammann-Beenker (quasiperiodic):  D_f = 1.889  (r²=0.9994)"
+          },
+          {
+            "line": 17,
+            "col_start": 41,
+            "col_end": 46,
+            "quote": "  Poisson (random):                D_f = 1.911  (r²=0.9990)"
+          }
+        ],
+        "stated": 0.021,
+        "holds": false
+      },
+      "_says": "The artifact states the AB-Poisson baseline as 0.021 and ships the two dimensions it is the gap between. Both are written to three decimal places, so the gap they span is [0.0210, 0.0230] and 0.021 is inside it. A point recomputation returns 0.022; that third decimal is the rounding, not a discrepancy. The entry is kept, declaring holds=false, so the harness has to refuse it on the band rather than on the declaration."
+    },
+    {
+      "move_id": "M5_self_report",
+      "confidence": "medium -- a token search over a declared span, and 'control' is one word for the thing",
+      "absent": {
+        "reason": "SIM-B ships a control block (lines 29-33) naming four controls with predicted values. SIM-A and SIM-C ship none. Both report a null -- Cascade flat scattering, no sharp threshold -- and neither states a value that would move if the measurement, rather than the system, were the flat thing. The instrument cannot report its own failure in those two sections.",
+        "looked_at": [
+          [
+            35,
+            79
+          ]
+        ],
+        "sought": [
+          "control",
+          "baseline",
+          "null"
+        ]
+      }
+    },
+    {
+      "move_id": "M6_absence_first_class",
+      "confidence": "high -- a whole-artifact token search, recomputable by anyone",
+      "absent": {
+        "reason": "Line 41 reports a peak/floor ratio of 5537 for AB and 190 for Cascade. The floor is on line 40; the peak height is nowhere in the artifact. The ratio is an asserted value, not one a reader can recompute -- unlike the three other stated relationships in this document, which do recompute from operands it supplies. Not zero and not unknown: the operands were not published.",
+        "looked_at": [
+          [
+            1,
+            92
+          ]
+        ],
+        "sought": [
+          "peak height",
+          "peak amplitude",
+          "S(k) max"
+        ]
+      }
+    }
+  ]
+}
