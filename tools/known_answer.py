@@ -638,6 +638,7 @@ EXPECTED_METRICS = (
     "ontology-probe/probe.py::rates",
     "operator-machine-coupling/coupling_separation.py::interaction_fraction",
     "return-path/return_path.py::ratio",
+    "measurand-partition/wo4_lumber.py::stiffness_ratio",
     "revision-survival/revision_survival.py::delta",
     "routing-data-layer/rate_form.py::sustained_excess",
     "shape-spec-audit/shadow_read.py::outline_area",
@@ -658,6 +659,22 @@ def _rs_delta(acc_open, acc_blind):
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     return mod.delta(acc_open, acc_blind)
+
+
+def _mp_stiffness_ratio(nb, nh, ab, ah):
+    """measurand-partition/wo4_lumber.py::stiffness_ratio, imported. The
+    share of bending stiffness a dimensional substitution keeps,
+    I_actual / I_nominal with I = b h^3 / 12. None on a non-positive
+    dimension, never 0 or 1 by default."""
+    import importlib.util
+    folder = os.path.join(ROOT, "measurand-partition")
+    if folder not in sys.path:
+        sys.path.insert(0, folder)
+    path = os.path.join(folder, "wo4_lumber.py")
+    spec = importlib.util.spec_from_file_location("_mp_lumber", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.stiffness_ratio(nb, nh, ab, ah)
 
 
 def seed():
@@ -1455,6 +1472,30 @@ def _seed_move_set():
         note="the None case is where a default would hide: an OPEN-only "
              "run scored as delta 0.0 would clear the leak gate having "
              "measured nothing")
+    register(
+        "measurand-partition/wo4_lumber.py::stiffness_ratio",
+        _mp_stiffness_ratio,
+        [case("4x4 to 3.5x3.5, both dimensions", (4.0, 4.0, 3.5, 3.5),
+              0.5861816406, "(3.5/4)^4 = 0.5861816406 by hand: the order's "
+              "~40% loss; cubic in depth times linear in width",
+              tol=1e-9),
+         case("4x4 depth only, width at nominal", (4.0, 4.0, 4.0, 3.5),
+              0.669921875, "(3.5/4)^3 = 0.669921875 exactly: what 'scales "
+              "with depth' alone gives, a third short of the fourth power",
+              tol=1e-9),
+         case("2x4 to 1.5x3.5", (2.0, 4.0, 1.5, 3.5), 0.5024414062,
+              "0.75 * (3.5/4)^3 = 0.5024414062 by hand: half the full "
+              "section's stiffness, the case the square 4x4 hides",
+              tol=1e-9),
+         case("no substitution", (4.0, 4.0, 4.0, 4.0), 1.0,
+              "identical sections keep everything; 1.0 is a measurement "
+              "here, not a default"),
+         case("zero nominal is None", (0.0, 4.0, 3.5, 3.5), None,
+              "no nominal section is no ratio; a 0 or 1 here would read a "
+              "malformed record as a substitution result")],
+        note="the depth-only case is where the order's mechanism sentence "
+             "and its number come apart; the None case is where a default "
+             "would hide")
 
 
 

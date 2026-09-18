@@ -261,6 +261,7 @@ last three; read in order:
 - `external-audit/` — three outside documents on this repo, landed verbatim; counts recomputed, instruments run, three sweeps cross-checked
 - `substrate-alternative/` — locate the money frame; one coordination loop without it
 - `revision-survival/` — can a model predict which of its held claims will be revised, and why; rev 2: a declared draw as a HARD GATE, two Arm C axes, EPS rules, Q_mech on revised rows only; the self-run VOID_KEY_HOLDER by its own reading
+- `measurand-partition/` — five work orders, one instrument fault: an observation in one setting scored against an outcome of many unmeasured variables, the residual assigned to the thing observed; WO-4a's fourth power is two factors and its test measures the other quantity
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -12768,6 +12769,80 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   **`RS_024` UNVERIFIED:** no draw from a real index, no second party
   under BLIND, nothing read. Check count printed by
   `python3 revision-survival/test_revision.py`.
+- `measurand-partition/` — Five work orders delivered as one message
+  (`WORK_ORDER.md`, verbatim) and built to, each standalone, each with its
+  scope limits and its NOT KNOWN; `common.py` carries what they share as a
+  record shape — *an observation made in ONE setting is scored against an
+  outcome produced by MANY unmeasured variables, and the whole residual is
+  assigned to the thing observed* — with `attribution()` returning
+  UNPARTITIONED / PARTITIONED / ASSIGNED_ELSEWHERE / NOT_EVALUABLE (an
+  unenumerated set is not an empty one), and the four delivered
+  populations (the child, the observer's eye, the building method, the
+  released athlete) all reading UNPARTITIONED (`MPS_001`). Everything
+  constructed carries the delivery's own PROPOSED tag and nothing is a
+  statement about any person, program, structure or piece of wood.
+  **WO-1** (`wo1_partition.py`): STEP 3 is a **gate, not a subtraction** —
+  the order supplies no axis-to-performance model, so a score is a
+  RESIDUAL_CANDIDATE only when A1–A4 are each MEASURED with a named
+  instrument and the interaction entered, NOT_SEPARABLE naming the axes
+  otherwise, and `residual()` never subtracts, asserted over the source
+  (`MPS_002`); the two-setting arm needs no model and runs — one moved
+  label of two establishes a floor of 0.50, single-setting individuals are
+  UNBOUNDED and out of the denominator, an unrun arm is NOT_RUN and never
+  floor 0 (`MPS_003`). **WO-2** (`wo2_band_sweep.py`): the order's
+  measurement fault **reproduces as a number** — a band shifted low, a band
+  shifted high and a flat curve all return 0.10 at the standard level and
+  separate under the sweep into BAND_LOCATED on opposite sides and
+  NOT_REGISTERED (`MPS_004`); absences are three states (NOT_REGISTERED,
+  NOT_ESTIMABLE below three levels, CEILING_NOT_REACHED for a curve still
+  registering at the top) and an unswept level is NOT_SWEPT, never
+  interpolated (`MPS_005`). **WO-3** (`wo3_control_manifest.py`): the
+  academy as the order describes it grades **0.40** with nutrition and
+  hydration ADVISED_ON counted apart and never inside the fraction —
+  education on intake is not control of intake — while an UNDECLARED
+  variable makes the gradient NOT_COMPUTABLE, NOT_TOUCHED being a
+  declaration and not a default (`MPS_006`); 3b returns NOT_EVALUABLE with
+  no program carrying a measured accuracy and 3c returns UNDECLARED until
+  the not-controllable variance shares are declared, **which is the state
+  the literature reads its reliability results in, an implicit ceiling of
+  100%** — on constructed shares the ceiling is 0.60 and a reported 0.60
+  reads as 1.00 of achievable (`MPS_007`). **WO-4a** (`wo4_lumber.py`),
+  the two arithmetic findings: the order's ~40% **holds (41.4%) and its
+  mechanism sentence does not** — `I = b h^3/12` is cubic in depth times
+  linear in width, a 4x4 shrinks in both so the fourth power is the
+  product, and depth alone gives 33% (`MPS_008`, registered in
+  `tools/known_answer.py` with the depth-only case as the one where
+  sentence and number part); and the ARITHMETIC line quotes stiffness
+  while the TEST line ("load capacity measured to failure") measures
+  **strength**, whose 4x4 ratio is 0.670 against 0.586 — the test as
+  written returns one quantity to be read against a claim about the other,
+  `measurement-fork`'s VOID RATIO in a one-paragraph order (`MPS_009`);
+  the square case understates the general one, a 2x4 keeping **half**
+  (`MPS_010`). **WO-4b** (`wo4_survival.py`): the critical split is
+  machinery before any record exists — Kaplan-Meier per population per
+  maintenance arm over matched (decade, exposure) strata, `pooled()`
+  existing to refuse by name, REMOVED censoring rather than failing,
+  UNKNOWN maintenance excluded and counted, an unmatched stratum entering
+  no comparison (`MPS_011`); *"150 years with proper maintenance"* reads
+  against the maintained arm only, from a declared boolean and never from
+  the wording (`MPS_012`). **WO-5** (`wo5_deselection.py`): under PODIUM
+  three constructed athletes are failures and under LEARNED the same three
+  are AHEAD of untrained peers on four of five capacities and TIE on the
+  one they were released for — the category exists under one measurand
+  and not the other — with the cohort built to the order's PROPOSED
+  prediction, so the demo is a known-answer run on the scorer and no
+  evidence about athletes (`MPS_013`); LEARNED is NOT_COMPUTABLE without
+  the untrained group no program recruits, manufactured then None not 0
+  (`MPS_014`), and an imported frame must declare its measurand apart from
+  its fields, PODIUM never a default (`MPS_015`). **`MPS_016`:** four of
+  the five orders rest a step on an absence and only WO-4b states its
+  corpus (ten results, all builders); the rest are the author's nulls with
+  no corpus and no terms (`QA_004`). **`MPS_017` UNVERIFIED:** every
+  literature figure carried and egress-blocked. Every module refuses
+  `--selftest`; every render screens clean through `no_severity` with no
+  exemption, three authored words reworded rather than exempted. Check count
+  printed by `python3 measurand-partition/test_partition.py`. Stdlib only,
+  parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

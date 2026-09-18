@@ -1,0 +1,115 @@
+COMMON STRUCTURE -- four populations, one record shape
+------------------------------------------------------------
+  the child                    UNPARTITIONED  unmeasured 5  residual -> the child
+  the observer's judgment      UNPARTITIONED  unmeasured 7  residual -> the observer's judgment
+  the building method          UNPARTITIONED  unmeasured 3  residual -> the building method
+  the released athlete         UNPARTITIONED  unmeasured 5  residual -> the released athlete
+  a record whose unmeasured set was never enumerated reads NOT_EVALUABLE, not PARTITIONED
+
+WO-1  PARTITION A DEFICIT LABEL   (data CONSTRUCTED, PROPOSED)
+------------------------------------------------------------------------
+  p-01   S-written  deficit  NOT_SEPARABLE      missing A1_FRAME,A2_CHANNEL,A3_FREQUENCY,A4_DOMAIN_LOAD,INTERACTION
+  p-01   S-spatial  typical  NOT_SEPARABLE      missing A1_FRAME,A2_CHANNEL,A3_FREQUENCY,A4_DOMAIN_LOAD,INTERACTION
+  p-02   S-written  deficit  NOT_SEPARABLE      missing A1_FRAME,A2_CHANNEL,A3_FREQUENCY,A4_DOMAIN_LOAD,INTERACTION
+  p-02   S-spatial  deficit  NOT_SEPARABLE      missing A1_FRAME,A2_CHANNEL,A3_FREQUENCY,A4_DOMAIN_LOAD,INTERACTION
+  p-03   S-written  deficit  NOT_SEPARABLE      missing A1_FRAME,A2_CHANNEL,A3_FREQUENCY,A4_DOMAIN_LOAD,INTERACTION
+  p-04   S-written  deficit  RESIDUAL_CANDIDATE missing -
+  p-05   S-written  deficit  NOT_SEPARABLE      missing A4_DOMAIN_LOAD
+
+  two-setting arm  FLOOR_ESTABLISHED   floor 0.50   n(two settings) 2   moved p-01   unbounded p-03,p-04,p-05  [CHOICE 2]
+  1 of 2 labels moved between settings; at least that share of the label is displacement from a reference
+  no claim that any residual is zero; no claim about any individual
+  [CHOICE 1] an axis is MEASURED only if its record says so AND names an instrument; a value with no instrument is UNMEASURED
+  [CHOICE 2] the two-setting floor is a share of individuals labelled at two or more settings; single-setting individuals are counted apart as UNBOUNDED, never in the denominator
+
+WO-2  BAND SWEEP   (curves CONSTRUCTED, PROPOSED)   standard test point 5
+------------------------------------------------------------------------
+  subject    state                 floor  ceiling  width point-read standard point sits
+  band-low   BAND_LOCATED              1        5      4       0.10 ABOVE_CEILING
+  band-high  BAND_LOCATED              6       10      4       0.10 BELOW_FLOOR
+  flat-low   NOT_REGISTERED           --       --     --       0.10 NOT_LOCATABLE
+  band-open  CEILING_NOT_REACHED       2       --     --       0.90 IN_BAND
+
+  distinct single-point reads across the set: 2   distinct band states: 3
+  a curve, not a score; the point-read column is what a fixed-level instrument returns
+  [CHOICE 1] a task REGISTERS at a level when performance >= 0.50; the threshold is stipulated and printed, not derived
+  [CHOICE 2] floor and ceiling need at least 3 swept levels; below that the curve is NOT_ESTIMABLE
+  [CHOICE 3] the ceiling is the first level AFTER the peak at which performance drops back below the register threshold; a curve still registering at the top of the sweep has ceiling NOT_REACHED
+
+WO-3  CONTROL MANIFEST   (programs CONSTRUCTED, PROPOSED; the academy statuses are the order's reading, CARRIED)
+------------------------------------------------------------------------
+  program academy-as-described
+    nutrition                        CONTROLLABLE_IN_PRINCIPLE      ADVISED_ON
+    hydration                        CONTROLLABLE_IN_PRINCIPLE      ADVISED_ON
+    sleep opportunity                CONTROLLABLE_IN_PRINCIPLE      NOT_TOUCHED
+    training load                    CONTROLLABLE_IN_PRINCIPLE      HELD
+    coaching contact                 CONTROLLABLE_IN_PRINCIPLE      HELD
+    endocrine developmental timing   NOT_CONTROLLABLE_IN_PRINCIPLE  NOT_TOUCHED
+    experienced social environment   NOT_CONTROLLABLE_IN_PRINCIPLE  NOT_TOUCHED
+    gradient 0.40   held 2   advised_on 2   not_touched 1   undeclared -  [CHOICE 1]
+  program day-program
+    nutrition                        CONTROLLABLE_IN_PRINCIPLE      UNDECLARED
+    hydration                        CONTROLLABLE_IN_PRINCIPLE      UNDECLARED
+    sleep opportunity                CONTROLLABLE_IN_PRINCIPLE      UNDECLARED
+    training load                    CONTROLLABLE_IN_PRINCIPLE      HELD
+    coaching contact                 CONTROLLABLE_IN_PRINCIPLE      UNDECLARED
+    endocrine developmental timing   NOT_CONTROLLABLE_IN_PRINCIPLE  UNDECLARED
+    experienced social environment   NOT_CONTROLLABLE_IN_PRINCIPLE  UNDECLARED
+    gradient NOT_COMPUTABLE   held 1   advised_on 0   not_touched 0   undeclared nutrition,hydration,sleep opportunity,coaching contact,endocrine developmental timing,experienced social environment  [CHOICE 1]
+  WO-3b accuracy vs gradient: NOT_EVALUABLE (n 0)  [CHOICE 2]
+    fewer than 3 programs carry both a gradient and a measured accuracy; 'the eye is unreliable' stays UNPARTITIONED
+  WO-3c accuracy floor, shares undeclared: UNDECLARED  missing endocrine developmental timing,experienced social environment
+  WO-3c accuracy floor, shares CONSTRUCTED: STATED  ceiling 0.60   a reported 0.60 reads 1.00 of achievable  [CHOICE 3]
+  the 6.3 h against 8-10 h sleep figure is carried from the order and enters no computation
+  [CHOICE 1] the gradient counts HELD over controllable variables only; ADVISED_ON is reported beside it and never as a fraction of HELD
+  [CHOICE 2] the accuracy-vs-gradient trend requires 3 programs carrying both a gradient and a measured accuracy; below that NOT_EVALUABLE
+  [CHOICE 3] variance shares are declared inputs summing to at most 1; the ceiling is 1 - sum(shares of not-controllable variables), UNDECLARED if any such share is
+
+WO-4a  LUMBER: DIMENSIONAL SUBSTITUTION, THE ARITHMETIC (nothing measured)
+------------------------------------------------------------------------
+  nominal  actual      lin. red. stiff kept   str kept depth-only
+  2x10     1.5x9.25        0.075      0.594      0.642      0.791
+  2x12     1.5x11.25       0.062      0.618      0.659      0.824
+  2x4      1.5x3.5         0.125      0.502      0.574      0.670
+  2x6      1.5x5.5         0.083      0.578      0.630      0.770
+  2x8      1.5x7.25        0.094      0.558      0.616      0.744
+  4x4      3.5x3.5         0.125      0.586      0.670      0.670
+  6x6      5.5x5.5         0.083      0.706      0.770      0.770
+
+  4x4: the order's ~40% holds (41.4% of stiffness removed) and its mechanism does not: I = b h^3/12 is cubic in depth, linear in width; the fourth power is both shrinking
+  a to-failure test returns the strength ratio 0.670 and would be read against the stiffness claim 0.586
+  2x4: 0.502 of a full 2x4's stiffness kept -- half
+  confounds carried from the order: joinery, wood quality, seasoning; moisture is the one 'same species' does not hold
+  [CHOICE 1] the strong axis is the larger dimension (h); loaded on edge
+  [CHOICE 2] material terms (E, modulus of rupture) are held equal across the pair; the ratios are geometric only
+
+WO-4b  STRUCTURES: MATCHED SURVIVAL, TWO ARMS   (records CONSTRUCTED, PROPOSED)
+------------------------------------------------------------------------
+  matched strata [(1870, 'ridge')]   unmatched [(1900, 'valley')]   records in matched strata 8
+  maintenance UNKNOWN, excluded and counted: ['c-04']
+  CODE_BUILT   MAINTAINED_IN_USE    n 2   S(100) 1.00   S(150) 0.50
+  CODE_BUILT   SURVIVING_NEGLECTED  n 1   S(100) 0.00   S(150) 0.00
+  TRANSMITTED  MAINTAINED_IN_USE    n 2   S(100) 1.00   S(150) 1.00
+  TRANSMITTED  SURVIVING_NEGLECTED  n 2   S(100) 1.00   S(150) 0.50
+  pooled(): REFUSED -- MAINTAINED_IN_USE and SURVIVING_NEGLECTED are not one curve; read split_curves() and report both
+  '150 years with proper maintenance' reads against MAINTAINED_IN_USE only
+  the Driftless field report is carried from the order, unverified; no county record was read
+  [CHOICE 1] matching strata are (construction decade, declared exposure class)
+  [CHOICE 2] REMOVED is censoring at the removal year, never an event
+
+WO-5  DESELECTION SCORED TWO WAYS   (cohort CONSTRUCTED to the prediction's shape, PROPOSED)
+------------------------------------------------------------------------
+  PODIUM   success 2   failure 3   not on scale 3
+  LEARNED  COMPUTED   deselected n 3   untrained n 3  [CHOICE 2]
+    balance                      AHEAD    deselected 0.78   untrained 0.52
+    spatial_awareness            AHEAD    deselected 0.80   untrained 0.50
+    load_tolerance               TIE      deselected 0.48   untrained 0.50
+    controlled_falling           AHEAD    deselected 0.82   untrained 0.42
+    transferable_motor_structure AHEAD    deselected 0.78   untrained 0.52
+  4 of 5 capacities AHEAD for the deselected group
+  MANUFACTURED failure category: 3   ahead on balance,spatial_awareness,controlled_falling,transferable_motor_structure   released for load_tolerance (TIE under LEARNED)
+  import line: measurand LEARNED   podium imported False
+  the demo recovers a shape it was built to carry; it is a known-answer run on the scorer and no evidence about athletes
+  [CHOICE 1] AHEAD/BEHIND require the group averages to differ by more than 0.05 on a [0,1] scale; inside that is TIE
+  [CHOICE 2] LEARNED compares group AVERAGES; no per-athlete rank is produced
+
