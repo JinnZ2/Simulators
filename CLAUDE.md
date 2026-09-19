@@ -262,6 +262,7 @@ last three; read in order:
 - `substrate-alternative/` — locate the money frame; one coordination loop without it
 - `cooperative-substrate-proof/` — DISPATCH 3; five self-verifiable checks plus the C1-C4 coder; repo refused, lands standalone
 - `chain-position/` — WO-1; can a step know it is a step; position never OBSERVED, evidence EXTERIOR in every row, compounding a floor over 4 of 7
+- `assessor-coupling/` — WO-6; the eight independence conditions as a scorer, no composite; pool metric where the label reaches no arithmetic; no party named
 - `revision-survival/` — can a model predict which of its held claims will be revised, and why; three arms, one sealed, the self-run VOID by its own reading
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
@@ -12736,6 +12737,51 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   (`CHP_017`); `CHP_018` UNVERIFIED covers the folder. Eighteen claims
   `CHP_001..018`; check count printed by
   `python3 chain-position/selftest.py`. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
+- `assessor-coupling/` — WO-6, delivered verbatim and built as an
+  instrument to its five runnable steps: whether an assessor is
+  structurally independent of the party it assesses, kept apart from
+  whether a payment runs between them (the hop-1 test against the pool
+  test). The order is NOT ABOUT ANY NAMED ORGANIZATION and no authored
+  file here names one — asserted by the suite against the names the
+  order's own table carries, which the renders print only because they
+  parse the order at call time (`ASC_001`, `ASC_017`); the author is
+  declared a member of the assessed class before any number. **The remedy
+  set as a scorer:** the eight INDEPENDENCE CONDITIONS parsed from the
+  order (a retyped seven raises), a scoring as per-condition `MET` /
+  `FAILS` / `UNVERIFIABLE` / `UNDECLARED` with counts and no composite,
+  and the one scoring shipped is the order's own current-position
+  section, carried — which **scores seven of eight** and says nothing
+  about condition 1, read as `UNDECLARED` rather than either verdict
+  (`ASC_003`); hop-1 is carried beside the eight and reaches none, and
+  the common prior defense stated in full moves no condition,
+  `INVARIANT` (`ASC_004`); a name-shaped subject is refused (`ASC_005`).
+  **Step 1, the pool metric:** arithmetic on constructed funding graphs
+  where the label on an edge (grant / contract / salary) enters no
+  arithmetic, AST-asserted, so relabeling every edge moves no fraction —
+  *a pool cannot audit itself by relabeling its outflows* shown as an
+  invariance rather than stated; single pool `[1.0, 1.0, 1.0]`, disjoint
+  `[0.0, 0.0]`, mixed `[0.2, 1.0, 1.0]` with one `UNDECLARED` counted
+  apart and no-funding `None` never 0 (`ASC_006`, `ASC_007`); the public
+  records it wants are egress-refused, three hosts 403 measured and
+  timestamped, so nothing is a fraction for any real assessor
+  (`ASC_008`). **Step 4, the disclosure-field audit:** coverage DECLARED
+  per field and never read from a name, five verdicts reachable, the
+  order's expected null returned as `MONEY_ONLY` with the other seven in
+  `no_field`, and the five non-financial couplings reading `COVERED` or
+  `UNMEASURED` with no `ABSENT` in the vocabulary (`ASC_009`,
+  `ASC_010`). **The precedent record** parses to ten entries in three
+  eras, every one `CARRIED_NOT_VERIFIED`, numbers as written with a span
+  — and the three entries with no stated remedy are the three closest to
+  the present (`ASC_011`, `ASC_012`); steps 2 and 3 are schemas with
+  every cell `UNMEASURED` and the survey's failure-selected frame stated
+  (`ASC_013`); step 5 is NOT RUN since a blind calibration requires a
+  party outside the sample (`ASC_014`). WO-4 and WO-5 are named-and-absent,
+  checked by artifact so the check cannot fire on this mention
+  (`ASC_015`). Two defects found by running are recorded (`ASC_016`,
+  `ASC_017`); `ASC_018` UNVERIFIED covers the folder. Eighteen claims
+  `ASC_001..018`; check count printed by
+  `python3 assessor-coupling/selftest.py`. Stdlib only, parses under 3.9,
   phone-buildable, CC0.
 - `revision-survival/` — WORK ORDER M, delivered verbatim with the
   session notes that produced it (`SOURCE_DROP.md`), and built to it: can a
