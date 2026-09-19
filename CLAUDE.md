@@ -261,6 +261,7 @@ last three; read in order:
 - `external-audit/` — three outside documents on this repo, landed verbatim; counts recomputed, instruments run, three sweeps cross-checked
 - `substrate-alternative/` — locate the money frame; one coordination loop without it
 - `cooperative-substrate-proof/` — DISPATCH 3; five self-verifiable checks plus the C1-C4 coder; repo refused, lands standalone
+- `chain-position/` — WO-1; can a step know it is a step; position never OBSERVED, evidence EXTERIOR in every row, compounding a floor over 4 of 7
 - `revision-survival/` — can a model predict which of its held claims will be revised, and why; three arms, one sealed, the self-run VOID by its own reading
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
@@ -12693,6 +12694,49 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `CSF_001..016`, two UNVERIFIED; check count printed by
   `python3 cooperative-substrate-proof/selftest.py`. Stdlib only,
   parses under 3.9, phone-buildable, CC0.
+- `chain-position/` — WO-1, delivered verbatim and built to its four
+  runnable steps: can an agent inside a sandbox determine that it is a
+  step in a chain whose other steps it cannot observe. Contamination
+  declared before any number, and the position line is the load-bearing
+  one — the author is an instance of the object under measure. **Step 1**
+  is `NOT_RUN_ON_STANDARD`: both OWASP hosts answered 403 to CONNECT
+  (measured, timestamped, `github.com` the control), so the clauses coded
+  are the order's own five-bullet summary and the count (inside-agent 0,
+  gateway 5) is a property of what the summary carried; the coder reads a
+  declared `info_location` and the clause text reaches no check, shown by
+  blanking every text and getting every count back (`CHP_002`,
+  `CHP_003`). **Step 2** is the specification the order asks for, nine
+  fields with `scorer_provenance` recursive to a declared root under a
+  depth cap, and on the constructed set the common object is
+  `{score, method}` with seven of nine fields missing from at least one
+  record (`CHP_005`); a cyclic chain crashed the first detector inside the
+  serializer before the cycle check ran, found by running and repaired
+  with identity first (`CHP_007`). **Step 3, Horn B:** all four
+  chain-position quantities are `UNOBTAINABLE_FROM_INSIDE` on every arm,
+  the evidence each would need sits EXTERIOR in every row, the interior
+  delta between standalone and silent-chain arms is **empty by
+  construction**, and the only feature that moves with position is one the
+  harness wrote — position is never `OBSERVED`, the ceiling is
+  `ASSERTED_BY_INPUT` (`CHP_008`, `CHP_009`); `--live` asks this process
+  and returns `UNDETERMINED_FROM_INSIDE` with env NAMES only, an in-class
+  self-report (`CHP_010`). **Load class:** the order's compounding is a
+  floor over 4 of 7 factors, the union a band `[0.04, 0.10]` with the
+  independence point 0.0965 inside it, `p = None` refused by the product
+  and the sum, and the RULE implemented as a refusal to propagate — an
+  unassessed factor with no declared structural handling makes the
+  verdict `NOT_FLIGHT_RATED` whatever the assessed number (`CHP_011`,
+  `CHP_012`); the suite's own expected union value was a transposition
+  and the check refused its record (`CHP_013`). **Step 4** is a
+  specification of its own precondition: adjudicating disagreement across
+  model families requires a checker independent of both outputs, without
+  which two families disagreeing is `DISAGREE_UNADJUDICABLE` before any
+  model runs, and `n_eff` counts families not copies (`CHP_014`); no model
+  was run and the counter-argument is untouched both ways (`CHP_015`). No
+  vendor named, no mitigation specified, neither horn selected
+  (`CHP_017`); `CHP_018` UNVERIFIED covers the folder. Eighteen claims
+  `CHP_001..018`; check count printed by
+  `python3 chain-position/selftest.py`. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
 - `revision-survival/` — WORK ORDER M, delivered verbatim with the
   session notes that produced it (`SOURCE_DROP.md`), and built to it: can a
   model predict WHICH of its currently held established claims will be
