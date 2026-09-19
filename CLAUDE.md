@@ -262,6 +262,11 @@ last three; read in order:
 - `substrate-alternative/` — locate the money frame; one coordination loop without it
 - `revision-survival/` — can a model predict which of its held claims will be revised, and why; rev 2: a declared draw as a HARD GATE, two Arm C axes, EPS rules, Q_mech on revised rows only; the self-run VOID_KEY_HOLDER by its own reading
 - `measurand-partition/` — five work orders, one instrument fault: an observation in one setting scored against an outcome of many unmeasured variables, the residual assigned to the thing observed; WO-4a's fourth power is two factors and its test measures the other quantity
+- `criterion-externality/` — WO-6, a proposed fourth audit-independence axis (who holds the ruler, C0..C3) against a three-axis paper read at abstract level; the direction is arithmetic and the magnitude is a constructed model, the target paper egress-blocked
+- `rule-coherence-counterfactual/` — WO-7, three arms: an A1 counterfactual with MEASURED restrictiveness and a four-branch classifier + permutation null (the restrictiveness arm's power is set by the number of levels), an A2b record-field audit, an A3 divergence design; no model run
+- `transmission-cascade/` — WO-8, the join of two literatures: a coder-kappa gate FIRST (imported), a type-by-layer distribution withheld until it clears, an R3 recompute-vs-repeat probe, R4 identification-with-leader entered alongside type behind a material floor
+- `additivity-inheritance/` — WO-9, the additivity assumption traced forward as OPEN QUESTIONS: an R1 coding, an R2 re-entry audit, R4 the citation-trace false negative reproduced on the eugenics/Mendel graph, and an additive 2x2 whose residual IS the interaction SS
+- `credential-channel/` — WO-10, five instruments from one field case: I-1 route rank correlation (imported) + objection coding, I-2 the routing-cost join (not procedure), I-3/I-4 gap and inventory vs exposure (imported ols), I-5 attribution at the wrong node; all constructed
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -12843,6 +12848,153 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   exemption, three authored words reworded rather than exempted. Check count
   printed by `python3 measurand-partition/test_partition.py`. Stdlib only,
   parses under 3.9, phone-buildable, CC0.
+- `criterion-externality/` — WO-6 delivered verbatim and built to: a
+  proposed FOURTH audit-independence axis, CRITERION (who holds the ruler,
+  graded C0..C3), added to a published three-axis framework
+  (arXiv:2609.18272) the order's author read at abstract level. The
+  paper's body is not read and its host refuses CONNECT (R1 NOT_RUN, probe
+  recorded), so its Monte Carlo is not re-run; the model is CONSTRUCTED and
+  every number is a property of the construction. **The direction is
+  arithmetic, the magnitude is the model.** Under weakest-link aggregation
+  an added axis never raises the aggregate and lowers it on a non-empty set
+  (all 256 grade cells), so the order's "it lowers the reported number"
+  needs no model (`CEX_002`); a coverage gate in front of every party can
+  only move a fault class INTO the never-surfaced set, so the order's R2
+  question "does any class move out" has one answer before any draw, none
+  (`CEX_009`). `expected_rate` is the beta-factor form in closed form
+  `q(beta p + (1-beta)(1-(1-p)^n))`, registered in `tools/known_answer.py`,
+  and the Monte Carlo is checked against it (`CEX_004`). **R4 as computed**
+  is a property of the constructed form: the beta-factor common cause is a
+  shared draw between parties with no term for what the ruler covers, so an
+  excluded class is surfaced at 0.0 at every beta and every party count
+  (INDEPENDENT on this model); whether the paper's own model has such a
+  term is what reading the paper decides (`CEX_003`). **The C-grades order
+  AUTHORSHIP, not surfaced rate** — C2 covers more classes than C1 and,
+  applied at discretion below a computed crossover (0.959 here against a
+  stipulated 0.7), surfaces FEWER faults, so the grading is an ordinal on
+  one quantity read against another (`CEX_005`, `measurement-fork`'s VOID
+  RATIO in a scale). R3 returns NOT_EVALUABLE (five regimes carried
+  UNCODED, a grade with no basis refused, both prediction branches
+  reachable, `CEX_007`); two of the three arrivals resolve by path and
+  marker in this tree and the third is not in it, all one operator's work,
+  so "not built together" is what is established and "independent" is not
+  (`CEX_008`, `TP_003`). Six `[CHOICE n]` markers, each printed where it
+  takes effect; the render screens clean through
+  `sheet-structure-scan/no_severity`. 60 checks. Stdlib only, parses under
+  3.9, phone-buildable, CC0.
+- `rule-coherence-counterfactual/` — WO-7 delivered verbatim and built to:
+  does circumvention track a property of the RULE (internal incoherence)
+  or how RESTRICTIVE it is? Three arms, run separately; no model is run
+  anywhere and every world is CONSTRUCTED with a declared generative model.
+  **A1** is the counterfactual: restrictiveness operationalised BEFORE the
+  run as `1 - permitted/unconstrained`, applied to both arms, and a pair
+  whose restrictiveness differs by more than TOL is VOID — then A and B
+  differ on an uncontrolled quantity and the run cannot attribute a rate
+  difference to incoherence (`RCC_002`). The four branches (tracks
+  incoherence / restrictiveness / both / neither) are each reachable on one
+  declared world, distinct, with SEPARATES_NEITHER the design's own limit
+  and a result (`RCC_003`); the incoherence contrast is tested against a
+  label-permutation null and a null contrast does not clear it (`RCC_004`).
+  **`RCC_005`, the finding:** the restrictiveness arm's power is set by the
+  number of levels — a two-sided permutation null over k levels has k!
+  arrangements, so a strong 4-level slope cannot clear 0.05 and the same
+  strength at 8 levels can, so a failed restrictiveness contrast can be a
+  property of the sweep, not the rule (`reasoning-gate` G-RES on a new
+  substrate); the demo worlds carry 8 levels for this reason. **A2b** the
+  record-field audit returns act-only dominant (5 of 7, the order's
+  prediction) with a coded-empty field counted apart from an absent field
+  (`RCC_006`); **A3** the observer divergence reports the label cost as the
+  drop in reasoning transfer from plain to dispositionally-labelled runs,
+  NOT_EVALUABLE runs excluded from the denominator rather than read as
+  behaviour (`RCC_007`). The machine and human arms are not claimed to
+  share a mechanism, and the two disclosures the order carries (the
+  reasoning traces, the truck-at-minus-50 worked case) are carried and not
+  adjudicated (`RCC_008`). Six `[CHOICE n]` markers; the render screens
+  clean with no exemption. 46 checks. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
+- `transmission-cascade/` — WO-8 delivered verbatim and built to: the join
+  of two literatures that do not cite each other — organizational cascade
+  (depth, outcome measures, identification-with-leader) and cultural-
+  evolution transmission TYPES (stimulus enhancement / emulation /
+  imitation / overimitation). No dataset is recoded; every world is
+  CONSTRUCTED and `cohen_kappa` is imported from `effective-redundancy-
+  audit`, not copied. **R2 gates R1 and the gate is not decorative:** on
+  the high-agreement coding kappa clears a 0.60 floor and R1 renders; on a
+  low-agreement coding R1 is WITHHELD and the module reports the taxonomy
+  is domain-bound, the order's stated useful result costing one subsample
+  (`TC_001`, `TC_002`). **R3 is a known-answer run on the scorer** — the
+  condition-change runs are generated with overimitation repeating and
+  emulation recomputing, the order's decisive prediction as a declared
+  model, and the does-not-transfer branch is reachable on a flat world so
+  the verdict is not `CONSTANT_FIRES` (`TC_003`, `TC_004`). **R4 enters
+  identification-with-leader alongside type, not instead**, and the
+  separator is a MATERIAL floor (|b| >= 0.10): both a real-type-null-id
+  world and a real-id-null-type world pass a relative-only survival test
+  because their coefficients are noise near zero, so an absolute floor is
+  required and declared, without which R4 is `CONSTANT_FIRES` — a
+  competing-explanation test that never credits the competitor (`TC_005`,
+  `TC_006`). The taxonomy's transfer from children-and-toolmaking to adult
+  hierarchy is unvalidated and is the object R2 tests, and the join and
+  prediction are PROPOSED (`TC_007`, `TC_008`). Five `[CHOICE n]` markers;
+  the render screens clean with no exemption. 36 checks. Stdlib only,
+  parses under 3.9, phone-buildable, CC0.
+- `additivity-inheritance/` — WO-9 delivered verbatim and built to: the
+  additivity assumption traced forward from the Fisher synthesis, as OPEN
+  QUESTIONS instrumented, NOT a critique of statistics — the tools are not
+  in dispute, their inherited assumptions are the object. No primary source
+  is read and every corpus is CONSTRUCTED. **`AI_004`, the portable
+  finding:** the order's methodological result is that citation tracing
+  cannot detect a precondition carried by a shared structural inheritance —
+  eugenics predates Mendel's rediscovery and Galton had to be told of
+  Mendel in 1900, so the precondition reached both camps through the fork
+  they inherited, not a citation. The graph reproduces it exactly (the
+  citation trace does not reach the precondition, the structural trace
+  does, a false negative), and when the precondition IS cited both traces
+  reach it, so the instrument is not `CONSTANT_SILENT`. **`AI_005`, the
+  arithmetic:** on a balanced 2x2 the additive model's residual IS the
+  interaction SS `(a-b-c+d)^2/4` (9 on the demo cells), so a real gene-
+  environment interaction is assigned to noise by the decomposition itself,
+  not lost to a downstream choice; `interaction_ss` is registered in
+  `tools/known_answer.py`. R1 codes a constructed corpus and the C-share
+  (present-and-unstated) rises with declared field distance on a corpus
+  built to carry it, the non-monotone finding branch reachable (`AI_001`);
+  R2 counts phenomena that had to fight the frame (3 of 4, `AI_002`); R3 is
+  NOT_RUN (prior art at the merge unsearched, egress-blocked, `AI_003`).
+  The lineage claim (variance partitioning descends from the merge,
+  heritability inherits additivity) is CARRIED and not verified here — the
+  order says test it first (`AI_006`). Four `[CHOICE n]` markers; the
+  render screens clean with no exemption. 35 checks. Stdlib only, parses
+  under 3.9, phone-buildable, CC0.
+- `credential-channel/` — WO-10 delivered verbatim and built to: five
+  instruments bundled from one plant floor, separable, each runs alone. No
+  plant, worker, record or review is read; every world is CONSTRUCTED and
+  `spearman` is imported from `readout-count` and `ols` from `sim-span`,
+  not copied. **I-1** ranks a written route and a demonstrate route against
+  later performance (route B tracks, route A inverse on the constructed
+  world; both-track and NOT_EVALUABLE branches reachable) plus the
+  methodology-objection coding (seniors cite prior usage more), where prior
+  use is not construct validity (`CDC_001`, `CDC_002`). **I-2, the routing-
+  cost join:** the external plus downtime cost of an off-authorisation
+  cheap resolution is attributed to ROUTING and NOTHING to a procedure
+  change — the order's mechanism note that the block was overshadowing and
+  ripple avoidance, not procedure — and the on-authorisation 250 external
+  is a fault cost, not counted (1200 on the field events, `CDC_003`).
+  **I-3 and I-4** regress the confidence-accuracy gap and the inventory
+  score on years of exposure and recover the signs their worlds were built
+  with (downward gap, upward score), the opposite and flat branches
+  reachable so neither is `CONSTANT_FIRES` (`CDC_004`, `CDC_005`). **I-5**
+  reports attribution mismatch by credited level and the upward share of
+  mismatches; on the constructed world credit flows up entirely, so a
+  downstream statistic — a review, promotion data, a training set —
+  measures reporting position, not competence (`CDC_006`), which is I-3's
+  manufactured-signal shape read from the other side. Two items are carried
+  not run: the Combine-Cognitive-Architecture repo (not in this tree,
+  overlay unattributed) and the specialisation assumption (NOT YET
+  RUNNABLE, needs a measurand) (`CDC_007`, `CDC_008`). `routing_cost` is
+  registered in `tools/known_answer.py`. Six `[CHOICE n]` markers; the
+  render screens clean with no exemption after three authored severity
+  words were reworded. 42 checks. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

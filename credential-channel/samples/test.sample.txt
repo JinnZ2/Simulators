@@ -1,0 +1,43 @@
+ok    order bundles five instruments
+ok    order says each runs alone
+ok    order carries the forklift-fuse sequence
+ok    order's I-2 mechanism note: not procedural
+ok    order carries the Combine-Cognitive-Architecture caution
+ok    spearman imported from readout-count
+ok    ols imported from sim-span
+ok    no local def of spearman or ols
+ok    I-1: route B tracks performance (rho > 0)
+ok    I-1: route A is at or below zero on the constructed world
+ok    I-1: verdict is the gate uncorrelated/inverse
+ok    I-1: both-track branch reachable
+ok    I-1: NOT_EVALUABLE on a constant side
+ok    I-1: seniors cite prior usage more (engage less)
+ok    I-1: objection coding refuses a bad kind
+ok    I-2: two events routed off-authorisation
+ok    I-2: routing cost is 300 + 900 = 1200
+ok    I-2: the on-authorisation 250 external is NOT counted (fault, not routing)
+ok    I-2: refuses an event with no authorised
+ok    I-2: routing_cost formula
+ok    I-2: same-authorisation cheap event is not routing cost
+ok    I-3: gap widens downward with exposure (coef < 0)
+ok    I-3: verdict names the downward direction
+ok    I-3: an upward world reads coef > 0
+ok    I-4: inventory score tracks exposure (coef != 0)
+ok    I-4: verdict names history not disposition
+ok    I-4: a flat world reads no exposure trend
+ok    I-5: level 1 error rate is 0 (resolvers, never mis-credited up as level 1)
+ok    I-5: higher credited levels carry higher error rates
+ok    I-5: all errors flow upward on the constructed world
+ok    I-5: reads reporting position not competence
+ok    I-5: a level with no events is None
+ok    Combine-Cognitive-Architecture carried and marked not in this tree
+ok    specialisation assumption filed NOT YET RUNNABLE
+ok    render screens clean through no_severity, no exemption
+ok    screen fires on a planted word
+ok    every declared choice is cited
+ok    every cited choice is declared
+ok    module is ASCII
+ok    README carries no author or working-style section
+ok    README marks the data CONSTRUCTED
+ok    module refuses --selftest (exit 2)
+checks: 42   failed: 0

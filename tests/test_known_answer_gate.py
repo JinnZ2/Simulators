@@ -64,6 +64,9 @@ MANIFEST = (
     "move-set/move_set_sim_v2.py::coverage",
     "move-set/move_set_sim_v2.py::_halfwidth",
     "revision-survival/revision_survival.py::delta",
+    "additivity-inheritance/additivity_inheritance.py::interaction_ss",
+    "credential-channel/credential_channel.py::routing_cost",
+    "criterion-externality/criterion_externality.py::expected_rate",
     "measurand-partition/wo4_lumber.py::stiffness_ratio",
 )
 

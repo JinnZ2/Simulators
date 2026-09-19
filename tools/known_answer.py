@@ -638,6 +638,9 @@ EXPECTED_METRICS = (
     "ontology-probe/probe.py::rates",
     "operator-machine-coupling/coupling_separation.py::interaction_fraction",
     "return-path/return_path.py::ratio",
+    "additivity-inheritance/additivity_inheritance.py::interaction_ss",
+    "credential-channel/credential_channel.py::routing_cost",
+    "criterion-externality/criterion_externality.py::expected_rate",
     "measurand-partition/wo4_lumber.py::stiffness_ratio",
     "revision-survival/revision_survival.py::delta",
     "routing-data-layer/rate_form.py::sustained_excess",
@@ -659,6 +662,45 @@ def _rs_delta(acc_open, acc_blind):
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     return mod.delta(acc_open, acc_blind)
+
+
+def _cdc_routing_cost(external, downtime_hours):
+    """credential-channel/credential_channel.py::routing_cost, imported.
+    The per-event cost attributable to routing an off-authorisation cheap
+    resolution: external + downtime_hours * 150. A zero-downtime zero-
+    external event is 0, the case a default would mis-price."""
+    import importlib.util
+    path = os.path.join(ROOT, "credential-channel", "credential_channel.py")
+    spec = importlib.util.spec_from_file_location("_cdc", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.routing_cost(external, downtime_hours)
+
+
+def _ai_interaction_ss(a, b, c, d):
+    """additivity-inheritance/additivity_inheritance.py::interaction_ss,
+    imported. The interaction sum of squares of a balanced 2x2 with cell
+    means [[a,b],[c,d]], (a-b-c+d)^2/4. Zero exactly on a purely additive
+    world, which is where a wrong sign hides."""
+    import importlib.util
+    path = os.path.join(ROOT, "additivity-inheritance", "additivity_inheritance.py")
+    spec = importlib.util.spec_from_file_location("_ai", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.interaction_ss(a, b, c, d)
+
+
+def _cex_expected_rate(p, n, beta, q):
+    """criterion-externality/criterion_externality.py::expected_rate,
+    imported. The beta-factor common-cause form in closed form with the
+    criterion applied at probability q. None on an out-of-range input,
+    never 0."""
+    import importlib.util
+    path = os.path.join(ROOT, "criterion-externality", "criterion_externality.py")
+    spec = importlib.util.spec_from_file_location("_cex", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.expected_rate(p, n, beta, q)
 
 
 def _mp_stiffness_ratio(nb, nh, ab, ah):
@@ -1472,6 +1514,45 @@ def _seed_move_set():
         note="the None case is where a default would hide: an OPEN-only "
              "run scored as delta 0.0 would clear the leak gate having "
              "measured nothing")
+    register(
+        "credential-channel/credential_channel.py::routing_cost",
+        _cdc_routing_cost,
+        [case("two hours down, no external", (0.0, 2.0), 300.0,
+              "2 * 150 = 300 by hand: the fuse event's routing cost", tol=1e-9),
+         case("one hour plus a 250 call-out", (250.0, 1.0), 400.0,
+              "250 + 150 = 400 by hand", tol=1e-9),
+         case("nothing spent", (0.0, 0.0), 0.0,
+              "0: an instant free resolution costs nothing, the case a "
+              "default hourly would mis-price", tol=1e-9)])
+    register(
+        "additivity-inheritance/additivity_inheritance.py::interaction_ss",
+        _ai_interaction_ss,
+        [case("the demo cells", (10.0, 12.0, 12.0, 20.0), 9.0,
+              "(10-12-12+20)^2/4 = 36/4 = 9 by hand; the interaction an "
+              "additive 2x2 model assigns to its residual", tol=1e-9),
+         case("purely additive world", (10.0, 12.0, 14.0, 16.0), 0.0,
+              "(10-12-14+16) = 0, so 0: no interaction, the case where a "
+              "sign error would still read near zero", tol=1e-9),
+         case("unit interaction", (0.0, 0.0, 0.0, 2.0), 1.0,
+              "(0-0-0+2)^2/4 = 4/4 = 1 by hand", tol=1e-9),
+         case("negative corner", (1.0, 0.0, 0.0, 1.0), 1.0,
+              "(1-0-0+1)^2/4 = 4/4 = 1: the sign of the corner sum is "
+              "squared away, a distinct input from the unit case", tol=1e-9)])
+    register(
+        "criterion-externality/criterion_externality.py::expected_rate",
+        _cex_expected_rate,
+        [case("one party, no common cause", (0.3, 1, 0.0, 1.0), 0.3,
+              "one party detects at p; 0.3 by hand", tol=1e-9),
+         case("two parties independent", (0.5, 2, 0.0, 1.0), 0.75,
+              "1 - (1-0.5)^2 = 0.75: two independent draws", tol=1e-9),
+         case("two parties fully common", (0.5, 2, 1.0, 1.0), 0.5,
+              "beta 1 collapses two parties to one draw; the case where a "
+              "sum of parties would overstate", tol=1e-9),
+         case("half common", (0.5, 2, 0.5, 1.0), 0.625,
+              "0.5*0.5 + 0.5*0.75 = 0.625 by hand", tol=1e-9),
+         case("criterion never applied", (0.5, 2, 0.0, 0.0), 0.0,
+              "q 0 gates everything; 0.0 is a measurement of the gate, "
+              "not a default", tol=1e-9)])
     register(
         "measurand-partition/wo4_lumber.py::stiffness_ratio",
         _mp_stiffness_ratio,

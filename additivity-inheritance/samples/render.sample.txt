@@ -1,0 +1,28 @@
+WO-9  ADDITIVITY TRACED FORWARD   (corpora CONSTRUCTED, PROPOSED; no primary source read)
+------------------------------------------------------------------------
+R1  C-share by field distance   [CHOICE 1]
+    distance 1  C-share 0.200
+    distance 2  C-share 0.400
+    distance 3  C-share 0.600
+    distance 4  C-share 0.800
+    -> C rises with distance from the source discipline
+
+R2  re-entry audit   [CHOICE 2]
+    3 of 4 phenomena had to fight the frame: epigenetics, gene-environment interaction, plasticity
+
+R3  prior art: NOT_RUN -- prior art unsearched; the history-of-statistics and philosophy-of-biology hosts are egress-blocked
+
+R4  citation-trace false negative (eugenics/Mendel)   [CHOICE 3]
+    citation trace reaches the precondition: False
+    structural trace reaches it:             True
+    -> false negative: True
+
+additive decomposition, balanced 2x2   [CHOICE 4]
+    SS_G 25.00  SS_E 25.00  SS_interaction 9.00  (= additive residual)
+    the additive model's residual IS the interaction SS; a real interaction is assigned to noise
+
+lineage claim (CARRIED, test first): variance partitioning descends from the Fisher merge and heritability estimates inherit the additivity assumption
+[CHOICE 1] R1 codes a constructed corpus by the order's four codes; the prediction is that C (present and unstated) rises with distance from the source discipline, and the corpus is built to carry that shape so R1 is a known-answer run on the coder, not evidence
+[CHOICE 2] R2 codes a re-entry as HAD_TO_FIGHT iff the constructed record carries rejection or nuisance-framing; the field-distance axis is declared, not measured from a real literature
+[CHOICE 3] R4's citation trace is a BFS over CITATION edges only; the structural trace adds INHERITANCE edges; a precondition reachable only through an inheritance edge is a citation-trace false negative
+[CHOICE 4] the additive decomposition is main-effects-only on a balanced 2x2; the full model adds the interaction; the interaction SS the additive model assigns to residual is the quantity
