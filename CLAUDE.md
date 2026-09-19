@@ -268,6 +268,7 @@ last three; read in order:
 - `additivity-inheritance/` — WO-9, the additivity assumption traced forward as OPEN QUESTIONS: an R1 coding, an R2 re-entry audit, R4 the citation-trace false negative reproduced on the eugenics/Mendel graph, and an additive 2x2 whose residual IS the interaction SS
 - `credential-channel/` — WO-10, five instruments from one field case: I-1 route rank correlation (imported) + objection coding, I-2 the routing-cost join (not procedure), I-3/I-4 gap and inventory vs exposure (imported ols), I-5 attribution at the wrong node; all constructed
 - `publication-loop-work-orders/` — WO-11/12/13, delivered verbatim as study designs and NOT built (the delivery's own line 3: "Not a code build. Do not route to a build model."); WO-11 transfers the measurand-partition designs onto model eval, WO-12 the health-utility anchor's definition-instrument mismatch, WO-13 introspective access as a training variable; documents only, no code
+- `deep-research-correction/` — an external deep-research report on the repo (Kimi) and the correction notice against it (both verbatim), plus a checker recomputing the mechanical items: C-1 forward-dated, C-2 the 157-vs-220 count, C-3 a jul-3026 URL, C-4 (load-bearing) commit-author read as contribution share scored UNPARTITIONED by imported attribution, C-5/C-6 present-in-doc, C-7 carried, U-1 the same-author void scope undeclared here
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -13042,6 +13043,54 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   findings document. Delivered verbatim; em dashes and mid dots are the
   documents' own and the folder has no ASCII constraint because it ships no
   code. CC0.
+- `deep-research-correction/` — An external deep-research report about the
+  repository (Kimi, deep-research mode, self-dated 2026-09-19, covering the
+  five newest content folders on `main`) and the **correction notice**
+  issued against it (Claude Opus 5, 2026-09-18, single session, no clone),
+  both landed **verbatim**, plus `check.py` recomputing the notice's
+  mechanical items — the `external-audit/` pattern, and the checker
+  inherits the notice's own scope (document integrity and measurand
+  assignment only, not the repository's instruments and not the target's
+  suite results). **`DRC_004`, the load-bearing one, is the repository's
+  own thesis pointed at the report:** the target reads the git
+  commit-author field as a share of contribution ("roughly 65% authored by
+  Claude"), and a commit-author share records which identity ran `git
+  commit`, not who originated the specification, the claim set, the
+  falsifier choice or the decision to build — exactly
+  `measurand-partition/`'s instrument fault (an observation in one setting
+  scored against an outcome of many unmeasured variables, the residual
+  assigned to the observed thing), so the checker does not restate it but
+  **imports `common.attribution`** and lets it return `UNPARTITIONED`,
+  while a local git recompute shows the count is not even stable (the
+  target read `main` at 853 commits / Claude 550; this is a working branch
+  at a different total, both a property of who ran the tool `[CHOICE 2]`).
+  **`DRC_002`:** C-2 is doc-internal arithmetic — `count_relation(63,157,
+  220)` is `DISJOINT` and `count_relation(63,157,157)` is `NESTED`, so the
+  table's 220 (63+157, non-overlapping) and the text's "the 63 run within
+  the 157" (total 157) cannot both hold, with the TL;DR separately
+  enumerating four values against five folders; registered in
+  `tools/known_answer.py` with the equal-parts cases pinning the
+  `inner<outer` guard. **`DRC_001`/`DRC_003`/`DRC_005`** recompute from the
+  target text (a re-execution timestamp 2026-09-19 later than the notice's
+  issue date 2026-09-18 `[CHOICE 1]`; a `jul-3026` citation URL — July
+  3026, a future year; the two operator-characterizing clauses and the
+  preference attribution present verbatim). **`DRC_007`, U-1 with a
+  correction to the notice:** the same-author void's instance-or-class
+  scope is declared nowhere in the tree so U-1 holds, and the void the
+  notice calls `VOID_SAME_AUTHOR` is actually named `VOID_KEY_HOLDER`
+  (revision-survival). **`DRC_008`:** the target's five named folders are a
+  branch-vs-main difference not a defect — four resolve here and `ledger`
+  does not, so U-2 stands and the suite results are not checkable from
+  here. **`DRC_006`/`DRC_009` UNVERIFIED:** the sibling count (~thirty vs
+  the operator's 20+) and the notice's own V-1..V-3 citation checks are
+  carried, the egress gate refusing publisher hosts `[CHOICE 3]`. The two
+  documents carry em dashes and mid dots and are landed unedited; the three
+  chart PNGs are recorded in `CHARTS.md` by name/size/sha256 and not
+  checked in (text-only repo). The render screens clean through
+  `no_severity` with no exemption; `check.py` refuses `--selftest`. Ten
+  `DRC_*` claims; check count printed by
+  `python3 deep-research-correction/test_check.py`. Stdlib only, parses
+  under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

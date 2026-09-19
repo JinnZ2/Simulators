@@ -67,6 +67,7 @@ MANIFEST = (
     "additivity-inheritance/additivity_inheritance.py::interaction_ss",
     "credential-channel/credential_channel.py::routing_cost",
     "criterion-externality/criterion_externality.py::expected_rate",
+    "deep-research-correction/check.py::count_relation",
     "measurand-partition/wo4_lumber.py::stiffness_ratio",
 )
 

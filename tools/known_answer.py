@@ -609,6 +609,24 @@ def _gxc_commit_specificity(which):
     raise ValueError(which)
 
 
+def _drc_count_relation(inner, outer, stated_total):
+    """deep-research-correction/check.py::count_relation, imported. The
+    C-2 classifier: given an inner count and an outer count and a stated
+    total, which arithmetic the total implies -- DISJOINT (inner+outer),
+    NESTED (outer, inner<outer) or NEITHER. Expected values are the
+    definitions, not the implementation."""
+    import importlib.util
+    path = os.path.join(ROOT, "deep-research-correction", "check.py")
+    sys.path.insert(0, os.path.join(ROOT, "measurand-partition"))
+    try:
+        spec = importlib.util.spec_from_file_location("_drc_check", path)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        return mod.count_relation(inner, outer, stated_total)
+    finally:
+        sys.path.pop(0)
+
+
 # The metrics `seed()` is expected to register, written down here rather
 # than counted from the calls. A `register(...)` for a new metric once
 # landed after a `finally` inside a helper and never executed: the registry
@@ -641,6 +659,7 @@ EXPECTED_METRICS = (
     "additivity-inheritance/additivity_inheritance.py::interaction_ss",
     "credential-channel/credential_channel.py::routing_cost",
     "criterion-externality/criterion_externality.py::expected_rate",
+    "deep-research-correction/check.py::count_relation",
     "measurand-partition/wo4_lumber.py::stiffness_ratio",
     "revision-survival/revision_survival.py::delta",
     "routing-data-layer/rate_form.py::sustained_excess",
@@ -1577,6 +1596,30 @@ def _seed_move_set():
         note="the depth-only case is where the order's mechanism sentence "
              "and its number come apart; the None case is where a default "
              "would hide")
+    register(
+        "deep-research-correction/check.py::count_relation",
+        _drc_count_relation,
+        [case("63 nested in 157, total 220", (63, 157, 220), "DISJOINT",
+              "63 + 157 = 220, so the stated total counts them as "
+              "non-overlapping -- the table's reading"),
+         case("63 nested in 157, total 157", (63, 157, 157), "NESTED",
+              "the total equals the outer with the inner smaller, so the "
+              "63 are inside the 157 -- the text's reading; both cannot "
+              "hold, which is C-2"),
+         case("neither sum nor outer", (63, 157, 300), "NEITHER",
+              "300 is neither the sum nor the outer; a total that names no "
+              "relation is NEITHER, not silently one of the two"),
+         case("equal parts are not nested", (100, 100, 100), "NEITHER",
+              "stated_total==outer fires but inner<outer is false, and the "
+              "sum branch (200) missed, so this is NEITHER -- the case that "
+              "pins the inner<outer guard against reading equal parts as "
+              "nested"),
+         case("equal parts summed", (100, 100, 200), "DISJOINT",
+              "200 = 100 + 100: the sum branch is checked first, so equal "
+              "parts summed read DISJOINT")],
+        note="the equal-parts cases pin the inner<outer guard and the "
+             "branch order; DISJOINT is tested before NESTED, so a total "
+             "that satisfied both would read DISJOINT")
 
 
 
