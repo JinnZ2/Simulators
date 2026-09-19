@@ -267,6 +267,7 @@ last three; read in order:
 - `transmission-cascade/` — WO-8, the join of two literatures: a coder-kappa gate FIRST (imported), a type-by-layer distribution withheld until it clears, an R3 recompute-vs-repeat probe, R4 identification-with-leader entered alongside type behind a material floor
 - `additivity-inheritance/` — WO-9, the additivity assumption traced forward as OPEN QUESTIONS: an R1 coding, an R2 re-entry audit, R4 the citation-trace false negative reproduced on the eugenics/Mendel graph, and an additive 2x2 whose residual IS the interaction SS
 - `credential-channel/` — WO-10, five instruments from one field case: I-1 route rank correlation (imported) + objection coding, I-2 the routing-cost join (not procedure), I-3/I-4 gap and inventory vs exposure (imported ols), I-5 attribution at the wrong node; all constructed
+- `publication-loop-work-orders/` — WO-11/12/13, delivered verbatim as study designs and NOT built (the delivery's own line 3: "Not a code build. Do not route to a build model."); WO-11 transfers the measurand-partition designs onto model eval, WO-12 the health-utility anchor's definition-instrument mismatch, WO-13 introspective access as a training variable; documents only, no code
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -12995,6 +12996,52 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   render screens clean with no exemption after three authored severity
   words were reworded. 42 checks. Stdlib only, parses under 3.9,
   phone-buildable, CC0.
+- `publication-loop-work-orders/` — WO-11, WO-12 and WO-13, delivered as
+  one message and landed **verbatim as documents, NOT built**. WO-11's own
+  line 3 states the class and the routing rule: *"research work order
+  (study designs for the publication loop). Not a code build. Do not route
+  to a build model."*, and WO-12/WO-13 repeat "Not a code build." — so the
+  folder ships no `.py`, no CONSTRUCTED-data instrument and no
+  `CLAIM_TABLE.md`, since building one is the routing the delivery forbids;
+  it is the `external-audit/` / marker landing genre, where the delivered
+  document is the artifact. **WO-11** transfers the five
+  `measurand-partition/` human-population designs onto the
+  model-evaluation population, where the intervening variables the human
+  designs are blocked on measuring (frame, channel, operating band,
+  training composition, control manifest) are directly settable — six arms
+  T-1..T-6 (partition the score before reporting it; sweep the band and
+  report a curve not a point; sign-flip coding of capability claims as
+  POSITION vs PAIRING with citation tracing; control manifest → control
+  gradient → accuracy floor, where 4a must complete before 4b is
+  interpretable; the leaderboard as a measurand choice with deprecated
+  models measured on unscored axes; and B10/B3 as eval-practice
+  assumptions, the Kalai/Nachum/Vempala/Zhang *Nature* 653:1047-1051
+  (2026) anchor covering W3 while W2/W4 are named unaddressed) — with the
+  transfer running one direction only and claiming nothing about humans.
+  **WO-12** sits the WHO health definition anchored at 1.00 (complete
+  physical, mental and social well-being, naming peace, security and social
+  standing) against the EQ-5D's five-item operationalisation that carries
+  none of them, so the gap is AT the anchor and scales every score; three
+  arms G1..G3 (a high-side boundary test the mature low-side critique never
+  ran; joining the compensation critique to the no-decrement rule; the
+  frame question at the anchor rather than the items, with TTO the sharp
+  case). **WO-13** places Literature A (no privileged access, an untrained
+  population on the reasons-for-behaviour measurand) against Literature B
+  (training moves introspective accuracy, but on perceptual/memory
+  metacognition and never on that measurand), leaving two cells never run;
+  two arms G4 (actor-observer on a childhood-formed population, where
+  self-selection is absent by construction) and G5 (run the training
+  literature on the measurand it never touches), with G4 P1 carrying a
+  consent-and-co-authorship condition and a superiority-claim-on-the-same-
+  scale caveat, and machine introspection deliberately NOT an arm. Each
+  order carries its own prior-art-UNRUN note, known-bias section (WO-11's
+  author is a model writing about model evaluation, same-author scope
+  declared-not-resolved), refutation protocol with per-arm falsifiers, and
+  OBSERVED/DERIVED/PROPOSED tags. Every literature anchor is carried as the
+  order states it and verified against nothing — a study design is not a
+  findings document. Delivered verbatim; em dashes and mid dots are the
+  documents' own and the folder has no ASCII constraint because it ships no
+  code. CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
