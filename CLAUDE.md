@@ -260,6 +260,7 @@ last three; read in order:
 - `internal-reference-boundary/` — seven radials on a boundary drawn from inside; R3's two legs, two time bases
 - `external-audit/` — three outside documents on this repo, landed verbatim; counts recomputed, instruments run, three sweeps cross-checked
 - `substrate-alternative/` — locate the money frame; one coordination loop without it
+- `cooperative-substrate-proof/` — DISPATCH 3; five self-verifiable checks plus the C1-C4 coder; repo refused, lands standalone
 - `revision-survival/` — can a model predict which of its held claims will be revised, and why; three arms, one sealed, the self-run VOID by its own reading
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
@@ -12671,6 +12672,27 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `python3 test_substrate.py`; both modules refuse `--selftest`
   (exit 2). Stdlib only, no network, parses under 3.9,
   phone-buildable, CC0.
+- `cooperative-substrate-proof/` — DISPATCH 3, delivered verbatim and
+  built to it as a promotable unit: the named repository could not be
+  created (403, integration credential; the `SA_018` outcome), so it
+  lands here importing across no boundary. Framing block verbatim at the
+  top of the README; contamination declared before any number. **P3**
+  comprehension by compressibility, with both arms pseudo-word remaps of
+  equal length differing only in whether the map is shared across parts
+  (a first version compared the private arm to the raw corpus and read a
+  disjoint-vocabulary corpus as CONVERGENT, `CSF_002`); **P4** a chain
+  checker separating CORRECTION (replacement with a reason; terminates)
+  from CONTEST (no replacement; `NO_ANSWER`, final `None`) plus an exact
+  turf war where sabotage-cheaper gives 0 completed at any budget;
+  **P2** an existence proof on its own source with six live layer checks
+  and a planted-link chain demo; **P1** dependency records whose spans
+  are checked by slicing (`UNSOURCED` enters no count) on a CONSTRUCTED
+  fixture, no published section reachable; **P5** three lag states with
+  `UNDECLARED` an absent quantity never a small ratio, and its clocks
+  the C1 coder for `scope.py`'s three-valued C1-C4 pass. Sixteen claims
+  `CSF_001..016`, two UNVERIFIED; check count printed by
+  `python3 cooperative-substrate-proof/selftest.py`. Stdlib only,
+  parses under 3.9, phone-buildable, CC0.
 - `revision-survival/` — WORK ORDER M, delivered verbatim with the
   session notes that produced it (`SOURCE_DROP.md`), and built to it: can a
   model predict WHICH of its currently held established claims will be
