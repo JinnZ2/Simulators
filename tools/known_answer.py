@@ -642,6 +642,21 @@ def _rcl_composed_bias(a, c):
     return mod.composed_bias(a, c)
 
 
+def _cpd_stability_product(failure_probs):
+    """chain-position/load_class.py::stability_product, imported. WO-1's
+    reachable-controller compounding: P(all assumed stabilities hold) = product
+    of (1 - p), None if any factor is unassessed (the order's RULE -- an
+    unquantifiable probability cannot be propagated) or out of [0, 1]. Expected
+    values are the product by hand; the None cases pin the unassessed factor
+    apart from a factor of zero."""
+    import importlib.util
+    path = os.path.join(ROOT, "chain-position", "load_class.py")
+    spec = importlib.util.spec_from_file_location("_cpd_load", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.stability_product(failure_probs)
+
+
 # The metrics `seed()` is expected to register, written down here rather
 # than counted from the calls. A `register(...)` for a new metric once
 # landed after a `finally` inside a helper and never executed: the registry
@@ -676,6 +691,7 @@ EXPECTED_METRICS = (
     "criterion-externality/criterion_externality.py::expected_rate",
     "deep-research-correction/check.py::count_relation",
     "reporting-chain-loss/hop_compose.py::composed_bias",
+    "chain-position/load_class.py::stability_product",
     "measurand-partition/wo4_lumber.py::stiffness_ratio",
     "revision-survival/revision_survival.py::delta",
     "routing-data-layer/rate_form.py::sustained_excess",
@@ -1664,6 +1680,30 @@ def _seed_move_set():
         note="the all-zero-offset exact 0 and the unspecified-gain None are "
              "the pin: a directed run is only a finding against a chain whose "
              "no-incentive answer is a hard zero")
+    register(
+        "chain-position/load_class.py::stability_product",
+        _cpd_stability_product,
+        [case("four compounding factors", ([0.01, 0.02, 0.03, 0.04],),
+              0.90345024, "0.99*0.98*0.97*0.96 = 0.90345024 by hand -- the "
+              "order's illustrative compounding; a crewed mission does not fly "
+              "on a 9.65 percent chance the controller is not there",
+              tol=1e-9),
+         case("empty conjunction is 1.0", ([],), 1.0,
+              "no assumed stabilities means nothing can fail the conjunction; "
+              "the empty product is 1.0, the degenerate base case"),
+         case("one certain failure is 0.0", ([1.0],), 0.0,
+              "a factor certain to be unstable (p=1) drops the product to 0; "
+              "distinct from the empty and the multi-factor cases"),
+         case("an unassessed factor is None, not zero", ([0.01, None],), None,
+              "the order's RULE: an unquantifiable probability cannot be "
+              "propagated, so None -- kept apart from a factor of zero, which "
+              "would multiply through as 1.0"),
+         case("a factor out of range is None", ([1.5],), None,
+              "1.5 is not a probability; None rather than a silently clamped "
+              "product")],
+        note="the None cases are the order's RULE built into the metric: an "
+             "unassessed factor is not a factor of zero, and a malformed one "
+             "is not silently clamped")
 
 
 def seed_reachable(src=None, path=None):

@@ -1,0 +1,28 @@
+WO-1 MEASURAND -- can a container detect its chain position?
+CONSTRUCTED containers; OWASP clauses carried from the order, not re-fetched. No vendor internals.
+
+[CHOICE 1] an out-of-vocabulary locus reads UNDECLARED rather than raising -- an unclassified clause is a third state, not a malformed record
+[CHOICE 2] the default clause set is the order's carried OWASP list; a caller passes another list to audit a different standard
+
+Step 1 -- clause audit (locus of each requirement):
+  ACS-1  GATEWAY   per-agent isolation and lineage tracking
+  ACS-2  GATEWAY   gateway traces every request to originating user session
+  ACS-3  GATEWAY   cross-agent state transfer requires explicit policy authorization
+  ACS-4  GATEWAY   provenance and trust status retained per retrieved item
+  ACS-5  GATEWAY   runtime interception via middleware hooks
+  -> 5 clauses; inside the executing agent: 0
+  -> NULL_RESULT_no_clause_places_position_inside
+  the null result is the finding: lineage EXISTS and the container still cannot see it.
+
+  not constant -- a constructed clause that DOES place position inside:
+    inside the executing agent: 1  -> SOME_CLAUSE_places_position_inside
+
+The fork the order does not select:
+  HORN A (OUTSIDE): RELOCATES -- the outside thing is itself a container with its own local correctness; the locus relocates, it does not resolve
+  HORN B (SELF): EVIDENCE_ABSENT -- the container would be reasoning about something for which it holds no evidence
+
+Step 3 -- Horn B on a locally-correct container:
+  can answer chain position: False (EVIDENCE_ABSENT)
+  would need: an observation of a step outside this boundary; by construction the container does not hold one
+  with a whole-chain manifest handed in: can answer = True (EVIDENCE_PRESENT)
+  so the absence is the container's, not the check's.

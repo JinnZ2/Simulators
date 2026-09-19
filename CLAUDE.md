@@ -270,6 +270,7 @@ last three; read in order:
 - `publication-loop-work-orders/` — WO-11/12/13, delivered verbatim as study designs and NOT built (the delivery's own line 3: "Not a code build. Do not route to a build model."); WO-11 transfers the measurand-partition designs onto model eval, WO-12 the health-utility anchor's definition-instrument mismatch, WO-13 introspective access as a training variable; documents only, no code
 - `deep-research-correction/` — an external deep-research report on the repo (Kimi) and the correction notice against it (both verbatim), plus a checker recomputing the mechanical items: C-1 forward-dated, C-2 the 157-vs-220 count, C-3 a jul-3026 URL, C-4 (load-bearing) commit-author read as contribution share scored UNPARTITIONED by imported attribution, C-5/C-6 present-in-doc, C-7 carried, U-1 the same-author void scope undeclared here
 - `reporting-chain-loss/` — WO-5, transit loss and pre-entry loss kept apart: a linear-Gaussian hop chain whose terminal is an estimator of the composed incentive stack not the ground (reader bias B/G amplifies with the chain, directed loss compounds where random cancels, the DPI floor used as null not re-derived), plus the pre-entry register (7 gates none logged) and Test B calibration with the delegation confound made a number and the proxy-undeclared refusal built in
+- `chain-position/` — WO-1, can a container detect it is a step in an unobservable chain; the OWASP clause audit returns the null the order predicts (lineage exists at the gateway, 0 clauses place position inside the agent) and the null is the finding, the reachable-controller compounding made a number (four factors 0.9035) with the unassessed-factor RULE built in as UNPROPAGATABLE, and the second-order gap UNEXAMINED vs NOT_AUDITABLE on the scorer's own provenance
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -13138,6 +13139,65 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   refuse `--selftest`. Ten `RCL_*` claims; check count printed by
   `python3 reporting-chain-loss/test_hop.py`. Stdlib only, parses under 3.9,
   phone-buildable, CC0.
+- `chain-position/` — WO-1, delivered verbatim and built to: can an agent
+  executing inside a sandbox determine it is a step in a chain whose other
+  steps it cannot observe. The quantity is CHAIN POSITION, not task content —
+  content is locally valid by construction, so compliance is what renders the
+  chain invisible. No vendor internals are used or sought and no mitigation is
+  specified (the order withholds the mitigation side until it exists).
+  **`chain_position.py`, the measurand:** the order's runnable step 1 made
+  decidable — `clause_audit` classifies each carried OWASP ACS clause by WHERE
+  the observability sits, all five sit at the GATEWAY, so **0 place
+  chain-position information inside the executing agent** and the verdict is
+  `NULL_RESULT_no_clause_places_position_inside`, which is the finding: lineage
+  EXISTS and the container still cannot see it (`CPD_001`). A constructed clause
+  that DOES place position inside flips the verdict, so the zero is not
+  constant, and an out-of-vocabulary locus reads `UNDECLARED` rather than
+  raising (`[CHOICE 1]`). The two horns are reported with their failure modes
+  and neither selected — Horn A `RELOCATES` (the outside thing is itself a
+  container with its own local correctness) and Horn B `EVIDENCE_ABSENT`
+  (`CPD_002`) — and `evidence_check` over a locally-correct container returns
+  `EVIDENCE_ABSENT`, names the cross-boundary observation it would need, and
+  answers `EVIDENCE_PRESENT` once a whole-chain manifest is handed in, so **the
+  absence is the container's, not the check's** (`CPD_003`). **`load_class.py`,
+  the load-bearing criterion made numbers:** the reachable controller is a
+  CONJUNCTION of seven assumed stabilities and `stability_product` composes them
+  as `∏(1−p)`, the order's illustrative discontinuities (1/2/3/4 percent) giving
+  **0.90345024**, so from four factors alone the controller is absent about 9.65
+  percent of the time (`CPD_004`); the order's RULE — where a factor is
+  unassessed, engineer as NOT stable — is built in as a refusal, an unassessed
+  `None` returning `UNPROPAGATABLE`, a zero multiplying through, an out-of-range
+  factor `MALFORMED`, three distinct states with the `None`-vs-zero split pinned
+  in the registry (`CPD_005`), and `stability_product` is registered in
+  `tools/known_answer.py`. `redundancy_adjudicability` settles the MECHANISM of
+  the order's own counter-argument — dissimilar redundancy detects a fault only
+  against a verifiable spec, so the discriminator is spec-verifiability, not
+  model diversity (`FAULT_DETECTED` / `NOISE_unadjudicable` /
+  `NO_SIGNAL_agreement`); whether real model families disagree adjudicably is
+  NOT_RUN (`CPD_006`). The engineering-gap register (no factor of safety, no
+  inspectability under load, no ductile failure mode — the chain lets go
+  silently because every container stayed compliant) and the two
+  counter-arguments are carried, both `UNRESOLVED` (`CPD_007`).
+  **`trust_provenance.py`, the second-order gap:** the order's step 2 as a
+  specification with no vendor internals — `PROVENANCE_SPEC` states what a trust
+  ASSIGNMENT must carry to be auditable, the scorer's OWN provenance included,
+  so the recursion (the score is a chained artifact) is the gap; the
+  load-bearing distinction is `UNEXAMINED` (the record does not declare scorer
+  provenance, so whether it is carried cannot be stated) versus `NOT_AUDITABLE`
+  (declared absent, a known negative), collapsing the two would read a silence
+  as a finding (`CPD_008`), and `common_object_exists` returns False so the
+  order's scorer-provenance claim stays UNVERIFIED, plausible not established,
+  as the order tags it (`CPD_009`). What is NOT_RUN — a live clause-by-clause
+  re-read of the standard (egress-blocked), the empirical dissimilar-redundancy
+  test (model access), any statement about a vendor's scorer provenance
+  (no-vendor-internals) — and the order's sharpest open problem, a method by
+  which the tool itself knows when it is crossing the method, when it IS the
+  method, and when it has been handed a binary gate to inspect rather than
+  execute, is stated not solved (`CPD_010`). WO-2..WO-5 are named-and-absent
+  siblings, carried as references. Ten `CPD_*` claims (two `UNVERIFIED`); every
+  module refuses `--selftest` and renders clean through `no_severity` with no
+  exemption; check count printed by `python3 chain-position/test_chain.py`.
+  Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

@@ -69,6 +69,7 @@ MANIFEST = (
     "criterion-externality/criterion_externality.py::expected_rate",
     "deep-research-correction/check.py::count_relation",
     "reporting-chain-loss/hop_compose.py::composed_bias",
+    "chain-position/load_class.py::stability_product",
     "measurand-partition/wo4_lumber.py::stiffness_ratio",
 )
 
