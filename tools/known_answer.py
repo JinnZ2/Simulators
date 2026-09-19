@@ -627,6 +627,21 @@ def _drc_count_relation(inner, outer, stated_total):
         sys.path.pop(0)
 
 
+def _rcl_composed_bias(a, c):
+    """reporting-chain-loss/hop_compose.py::composed_bias, imported. The
+    WO-5 transit-loss metric: B = sum_k (prod_{j>k} a_j) * c_k, the incentive
+    stack composed across a linear-Gaussian hop chain. Expected values are the
+    closed form by hand, not the implementation; the all-zero-offset case is
+    an exact 0, and the missing-gain case is None, so a zero and an absence
+    are pinned apart."""
+    import importlib.util
+    path = os.path.join(ROOT, "reporting-chain-loss", "hop_compose.py")
+    spec = importlib.util.spec_from_file_location("_rcl_hop", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.composed_bias(a, c)
+
+
 # The metrics `seed()` is expected to register, written down here rather
 # than counted from the calls. A `register(...)` for a new metric once
 # landed after a `finally` inside a helper and never executed: the registry
@@ -660,6 +675,7 @@ EXPECTED_METRICS = (
     "credential-channel/credential_channel.py::routing_cost",
     "criterion-externality/criterion_externality.py::expected_rate",
     "deep-research-correction/check.py::count_relation",
+    "reporting-chain-loss/hop_compose.py::composed_bias",
     "measurand-partition/wo4_lumber.py::stiffness_ratio",
     "revision-survival/revision_survival.py::delta",
     "routing-data-layer/rate_form.py::sustained_excess",
@@ -1620,7 +1636,34 @@ def _seed_move_set():
         note="the equal-parts cases pin the inner<outer guard and the "
              "branch order; DISJOINT is tested before NESTED, so a total "
              "that satisfied both would read DISJOINT")
-
+    register(
+        "reporting-chain-loss/hop_compose.py::composed_bias",
+        _rcl_composed_bias,
+        [case("all offsets zero is an exact zero", ([0.9, 0.9], [0.0, 0.0]),
+              0.0, "no incentive at any hop, so the composed bias is exactly "
+              "0 -- a real zero, the branch a directed run must be measured "
+              "against", tol=1e-12),
+         case("single hop is its own offset", ([0.9], [1.0]), 1.0,
+              "one hop has no downstream product (the empty product is 1), so "
+              "B = c_1 = 1.0; pins the empty-product base case", tol=1e-12),
+         case("two hops, gain 0.9, same sign", ([0.9, 0.9], [1.0, 1.0]), 1.9,
+              "B = a_2*c_1 + c_2 = 0.9*1 + 1 = 1.9 by hand; the downstream "
+              "gain attenuates the earlier hop, same-sign offsets accumulate",
+              tol=1e-12),
+         case("two hops, identity gain", ([1.0, 1.0], [1.0, 1.0]), 2.0,
+              "B = 1*1 + 1 = 2.0; identity gain accumulates undamped, distinct "
+              "from the 0.9-gain case so the downstream product is doing work",
+              tol=1e-12),
+         case("unspecified gain is None not zero", ([0.9, None], [1.0, 1.0]),
+              None, "a missing gain is not a gain of zero and not a bias of "
+              "zero; None keeps the absence distinct from the all-zero-offset "
+              "exact 0"),
+         case("length mismatch is None", ([0.9], [1.0, 1.0]), None,
+              "gains and offsets of different length is a malformed chain, "
+              "None rather than a silently truncated bias")],
+        note="the all-zero-offset exact 0 and the unspecified-gain None are "
+             "the pin: a directed run is only a finding against a chain whose "
+             "no-incentive answer is a hard zero")
 
 
 def seed_reachable(src=None, path=None):

@@ -68,6 +68,7 @@ MANIFEST = (
     "credential-channel/credential_channel.py::routing_cost",
     "criterion-externality/criterion_externality.py::expected_rate",
     "deep-research-correction/check.py::count_relation",
+    "reporting-chain-loss/hop_compose.py::composed_bias",
     "measurand-partition/wo4_lumber.py::stiffness_ratio",
 )
 

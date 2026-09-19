@@ -269,6 +269,7 @@ last three; read in order:
 - `credential-channel/` — WO-10, five instruments from one field case: I-1 route rank correlation (imported) + objection coding, I-2 the routing-cost join (not procedure), I-3/I-4 gap and inventory vs exposure (imported ols), I-5 attribution at the wrong node; all constructed
 - `publication-loop-work-orders/` — WO-11/12/13, delivered verbatim as study designs and NOT built (the delivery's own line 3: "Not a code build. Do not route to a build model."); WO-11 transfers the measurand-partition designs onto model eval, WO-12 the health-utility anchor's definition-instrument mismatch, WO-13 introspective access as a training variable; documents only, no code
 - `deep-research-correction/` — an external deep-research report on the repo (Kimi) and the correction notice against it (both verbatim), plus a checker recomputing the mechanical items: C-1 forward-dated, C-2 the 157-vs-220 count, C-3 a jul-3026 URL, C-4 (load-bearing) commit-author read as contribution share scored UNPARTITIONED by imported attribution, C-5/C-6 present-in-doc, C-7 carried, U-1 the same-author void scope undeclared here
+- `reporting-chain-loss/` — WO-5, transit loss and pre-entry loss kept apart: a linear-Gaussian hop chain whose terminal is an estimator of the composed incentive stack not the ground (reader bias B/G amplifies with the chain, directed loss compounds where random cancels, the DPI floor used as null not re-derived), plus the pre-entry register (7 gates none logged) and Test B calibration with the delegation confound made a number and the proxy-undeclared refusal built in
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -13091,6 +13092,52 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `DRC_*` claims; check count printed by
   `python3 deep-research-correction/test_check.py`. Stdlib only, parses
   under 3.9, phone-buildable, CC0.
+- `reporting-chain-loss/` — WO-5, delivered verbatim (companion to WO-2,
+  citing WO-4's term-gap; both siblings named-and-absent in this tree), and
+  built as two instruments that keep the order's two components apart.
+  **TRANSIT LOSS** (`hop_compose.py`): the order's formal floor is the data
+  processing inequality — a theorem, used here as the null, not re-derived —
+  and its GAP is that the DPI assumes a FIXED transform while organizational
+  hops each carry their own objective function, so random loss cancels toward
+  noise and DIRECTED loss compounds. In a linear-Gaussian chain
+  `x_n = a_n x_{n-1} + c_n + e_n` the terminal's expected offset from the
+  scaled ground is closed form, `E[x_N|g] = (prod a_n) g + sum_k (prod_{j>k}
+  a_j) c_k` — the retained gain `G` and the composed incentive stack `B` — so
+  a reader who takes the terminal AS a scaled ground reading carries bias
+  `B/G`, and a lossy chain has `|G|<=1` so the rescaling AMPLIFIES: on the
+  shipped directed chain the reader's bias runs 1.11 (N=1) → 5.24 (N=4) →
+  43.97 (N=16), the order's "estimator of the incentive stack, not the
+  ground" made a number. Same-sign offsets compound with N, random offsets
+  cancel (spread only sqrt(N)), so the directed/random ratio grows with the
+  chain (1.0 → 4.60 across N=1..16); at offset magnitude 0 both arms are an
+  exact 0 (`NO_INCENTIVE`), so the classifier is not constant. `composed_bias`
+  is the load-bearing metric, registered in `tools/known_answer.py` with the
+  all-zero-offset exact 0 pinned against the unspecified-gain `None`; a dead
+  hop (`prod a == 0`) returns `GROUND_UNRECOVERABLE` not an infinity.
+  **PRE-ENTRY LOSS** (`preentry_register.py`): the order's seven gates (L0,
+  L0', L1, L1', L2, delegation, form-field) carried in structure, none logged,
+  six conditioning which reports arrive — so arriving reports are a sample
+  past a per-operator threshold, not a sample of machine conditions, and the
+  threshold is unestimated. Then the order's **Test B** on CONSTRUCTED
+  operators: a calibrated world (reporting rate tracks the operator's own
+  (acted on)/(filed) ratio) reads `TRACKS_calibrated`, an independent world
+  reads `DOES_NOT_TRACK`, both reachable — the order's inverted finding
+  (non-reporting as a calibrated estimate, not disengagement) is the TRACKS
+  branch. The **STATED LIMITATION** is built in as a refusal:
+  delegation-as-null makes the per-operator prior unestimable for the
+  operators it matters most for, so an undeclared proxy-filed count returns
+  `UNESTIMABLE_PROXY_UNDECLARED`; `delegation_corruption` makes the cost a
+  number, declared-and-excluded staying calibrated (rho ~0.999) while pooling
+  proxy-filers as zero-reporters pulls the correlation down (rho ~0.56) and
+  flips the verdict. `spearman` is imported from `readout-count`, not
+  restated. Nothing here is a measurement: the chains and operators are
+  constructed and seeded, and the order's Tests A/C/D/E and the real Test B
+  (operators, a plant's CMMS, published ecology) are NOT_RUN — the first four
+  need access this session lacks, the ecology corpus is egress-blocked. Both
+  renders screen clean through `no_severity` with no exemption; both modules
+  refuse `--selftest`. Ten `RCL_*` claims; check count printed by
+  `python3 reporting-chain-loss/test_hop.py`. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
