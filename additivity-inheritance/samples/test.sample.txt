@@ -1,0 +1,36 @@
+ok    order frames these as OPEN QUESTIONS not a critique
+ok    order names the false-negative methodological result
+ok    order says citation tracing cannot detect a structural precondition
+ok    order says test the lineage claim first
+ok    order's R3 is prior-art NOT SEARCHED
+ok    r1_code refuses an uncoded paper
+ok    r1_code refuses a bad code
+ok    R1: C-share rises monotonically with distance
+ok    R1: the four distances are present
+ok    R1: C-share is 0.2 .. 0.8
+ok    R1: non-monotone branch reachable
+ok    R2: 3 of 4 had to fight
+ok    R2: names epigenetics among them
+ok    R2: share None on empty
+ok    R3 is NOT_RUN with a reason
+ok    R4: citation trace does NOT reach the precondition
+ok    R4: structural trace DOES reach it
+ok    R4: this is a false negative
+ok    R4: with a citation edge, both traces reach it (no false negative)
+ok    R4: with only an inheritance edge, citation misses and structural reaches
+ok    SS_interaction = additive residual
+ok    SS_interaction = 9.00 by hand
+ok    SS_total = SS_G + SS_E + SS_interaction (exact on balanced 2x2)
+ok    interaction_ss formula (a-b-c+d)^2/4
+ok    a purely additive world has zero interaction SS
+ok    variance_components refuses a non-2x2
+ok    lineage claim carried and not verified here
+ok    render screens clean through no_severity, no exemption
+ok    screen fires on a planted word
+ok    every declared choice is cited
+ok    every cited choice is declared
+ok    module is ASCII
+ok    README carries no author or working-style section
+ok    README marks corpora CONSTRUCTED
+ok    module refuses --selftest (exit 2)
+checks: 35   failed: 0

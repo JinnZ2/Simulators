@@ -1,0 +1,38 @@
+WO-6  CRITERION EXTERNALITY   (model CONSTRUCTED, PROPOSED)
+------------------------------------------------------------------------
+R1  arxiv.org: CONNECT tunnel failed, response 403 at 2026-09-19T01:51Z; github.com connects -> NOT_RUN; absence claim VERIFIED_AGAINST_ABSTRACT_ONLY
+
+separating test  axes 1-3 at top rung, axis 4 at C0: over three 1.00, over four 0.00   [CHOICE 1,2]
+
+R2  surfaced-fault rate, 2 parties, beta 0.3   [CHOICE 3-5]
+    three axes (ruler unmodelled)  mean 0.2563
+    four axes at C0  mean 0.2051  delta -0.0512  never-surfaced 4 of 8 (F2,F3,F5,F7)
+    four axes at C1  mean 0.2418  delta -0.0145  never-surfaced 2 of 8 (F3,F5)
+    four axes at C2  mean 0.1735  delta -0.0828  never-surfaced 1 of 8 (F5)
+    four axes at C3  mean 0.2563  delta +0.0000  never-surfaced 0 of 8 (-)
+    C-grades order authorship, not surfaced rate: C2 falls below C1 whenever discretion q < 0.959 (q is 0.7 here)
+
+R4  beta-factor test  excluded at C0: 4  reachable by any beta or party count: none  -> INDEPENDENT_ON_THIS_MODEL
+    F1  beta_sens +0.213  criterion_sens +0.000  covered
+    F2  beta_sens +0.092  criterion_sens +0.174  excluded at C0
+    F3  beta_sens +0.045  criterion_sens +0.093  excluded at C0
+    F4  beta_sens +0.236  criterion_sens +0.000  covered
+    F5  beta_sens +0.018  criterion_sens +0.039  excluded at C0
+    F6  beta_sens +0.119  criterion_sens +0.000  covered
+    F7  beta_sens +0.077  criterion_sens +0.146  excluded at C0
+    F8  beta_sens +0.192  criterion_sens +0.000  covered
+    scope: a property of the constructed model; the paper's own model is not read
+
+R3  regimes carried 5, coded 0 -> NOT_EVALUABLE (no regime coded)   [CHOICE 6]
+
+arrival 1  physics as trust floor                   RESOLVED
+arrival 2  the adjudication finding (condition B)   RESOLVED
+arrival 3  C4 in the audit-protocol work order      NOT_IN_TREE
+
+no claim that adding the axis raises assurance; every delta above is <= 0
+[CHOICE 1] axes 1-3 graded on a four-rung ordinal 0..3 matching C0..C3; the paper's own grading is not read
+[CHOICE 2] weakest-link aggregation is min over axes, normalised to [0,1] by the top rung; an empty axis set returns None
+[CHOICE 3] criterion coverage per grade is a declared set of fault classes (C0 the audited party's subset, C1 the auditor's, C2 a third party's applied with a discretion probability, C3 all); none is a fact about any audit regime
+[CHOICE 4] C2's discretion probability is 0.7, stipulated; the crossover at which C2 overtakes C1 is computed and printed beside it
+[CHOICE 5] the Monte Carlo uses 20000 draws per cell, seed 20260918
+[CHOICE 6] the five regimes the order names for R3 are carried UNCODED; a grade on a real regime is a reading and none is supplied here

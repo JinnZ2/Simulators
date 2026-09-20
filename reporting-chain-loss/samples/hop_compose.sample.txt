@@ -1,0 +1,28 @@
+WO-5 TRANSIT LOSS -- composition of a linear-Gaussian hop chain
+CONSTRUCTED chains, seeded; coefficients carry no units. Not a plant.
+
+[CHOICE 1] ensemble N-range (1, 2, 4, 8, 16) and offset magnitude 1 -- the sweep, not a finding
+[CHOICE 2] ensemble gain 0.9; |a|<=1 is the DPI floor, the value is stated
+[CHOICE 3] dead-hop gain threshold 1e-12; at or below it the ground is unrecoverable and the rescaled bias is None
+
+A single directed chain (a=0.90 at every hop, offset +1.00):
+  N= 1  retained gain G=0.90000  composed bias B=1.00000  reader bias B/G=1.11111
+  N= 4  retained gain G=0.65610  composed bias B=3.43900  reader bias B/G=5.24158
+  N=16  retained gain G=0.18530  composed bias B=8.14698  reader bias B/G=43.96595
+  the ground survives ever weaker (G falls); the incentive stack the reader carries (B/G) grows with the chain.
+
+Directed vs random loss over the ensemble:
+  N     directed |B|    random |B|      ratio
+  1     1.00000         1.00000         1.000
+  2     1.90000         0.94600         2.008
+  4     3.43900         1.41444         2.431
+  8     5.69533         1.57843         3.608
+  16    8.14698         1.77243         4.596
+  directed loss compounds; random loss cancels toward the noise floor. The ratio is the order's DIRECTED-vs-random flip.
+
+States that are not a zero:
+  no incentive (all c=0):   B=0.0
+  unspecified gain:         B=None
+  dead hop (G=0):           reader bias None (GROUND_UNRECOVERABLE)
+
+DPI floor holds in the model: partial-product magnitude non-increasing = True

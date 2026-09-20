@@ -1,0 +1,37 @@
+ok    order names all four transmission types
+ok    order names overimitation the load-bearing construct
+ok    order says coder reliability first
+ok    order states the divergence is the decisive prediction
+ok    order states the taxonomy transfer is unvalidated
+ok    cohen_kappa is imported from effective-redundancy-audit
+ok    no local def of cohen_kappa
+ok    R2: high agreement clears the floor
+ok    R2: kappa 1.0 on identical coders
+ok    R2: low agreement fails the floor
+ok    R2: the failing gate names domain-boundedness as the finding
+ok    R2: refuses a non-type label
+ok    R2: refuses misaligned lists
+ok    R1: distribution present when R2 cleared
+ok    R1: three layers
+ok    R1: overimitation rises with layer (constructed shape)
+ok    R1: WITHHELD when R2 failed, not computed anyway
+ok    R3: emulation recomputes above overimitation
+ok    R3: verdict is type-predicts
+ok    R3: overimitation share is lowest
+ok    R3: a run with neither response is uneval, not a repeat
+ok    R3: NOT_EVALUABLE when a decisive type has no runs
+ok    R3: does-not-transfer branch reachable
+ok    R3: refuses a non-type
+ok    R4: type-real survives identification entering
+ok    R4: type-null adds nothing once identification is entered
+ok    R4: the material floor is what separates them (both survive a relative-only test)
+ok    R4: identification coefficient is recovered in the id-real world
+ok    render screens clean through no_severity, no exemption
+ok    screen fires on a planted word
+ok    every declared choice is cited
+ok    every cited choice is declared
+ok    module is ASCII
+ok    README carries no author or working-style section
+ok    README marks the data CONSTRUCTED
+ok    module refuses --selftest (exit 2)
+checks: 36   failed: 0

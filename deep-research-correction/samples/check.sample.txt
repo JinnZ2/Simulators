@@ -1,0 +1,31 @@
+DEEP-RESEARCH CORRECTION -- recompute of CORRECTION_NOTICE.md
+target: Simulators_Last_5_Folders_Deep_Research.md
+------------------------------------------------------------------------
+  C-1          CONFIRMED_FROM_DOC forward-dated execution
+  C-2          CONFIRMED_FROM_DOC check counts (157 vs 220)
+  C-3          CONFIRMED_FROM_DOC dead citation URL
+  C-4          CONFIRMED_FROM_DOC commit author read as contribution share (LOAD-BEARING)
+  C-5          CONFIRMED_FROM_DOC operator characterization
+  C-6          CONFIRMED_FROM_DOC preference attributed to the repository
+  C-7          CARRIED            sibling repository count
+  U-1          CONFIRMED_HERE     same-author void scope
+  NOTE-folders NOT_EVALUABLE      target's five folders here
+
+  C-1: the target dates its research and its re-execution 2026-09-19, later than the date the correction was issued, 2026-09-18, so it carries an execution timestamp later than the date it was in hand [CHOICE 1]
+  C-2: 63 + 157 = 220: the table's 220 counts the two as DISJOINT while the text states the 63 are NESTED inside the 157 (total 157); both cannot hold. The TL;DR enumerates 4 values against 5 folders
+  C-3: a citation URL path reads jul-3026 (July 3026); the year is not a valid citation date, so the identifier is unusable as given even though the claim it supports is independently sourced in the same sentence
+  C-4: the target's own figures reconcile (550 + 303 = 853, ~64%/36%), so the fault is not arithmetic but the measurand: a commit-author share records which identity ran `git commit`, not contribution. measurand-partition/common.attribution scores it UNPARTITIONED -- the contribution residual assigned to the execution-channel identity, with 4 intervening variables unmeasured [CHOICE 2]
+  C-5: 2 of 2 operator-characterizing clauses present; the notice's point is that none is load-bearing for a finding elsewhere, so a report on instruments can strike them at no cost
+  C-6: the closing summary attributes a preference to the repository and frames its own conclusion as satisfying it; no such preference is in the cited sources
+  C-7: the target says ~thirty sibling repositories; the operator's stated figure is 20+. The true count requires the GitHub account, which egress refuses, so this is carried and not reconciled here [CHOICE 3]
+  U-1: the void the notice calls VOID_SAME_AUTHOR is named VOID_KEY_HOLDER in the repo; the instance-or-class scope is declared nowhere and is raised unresolved in 3 place(s), so U-1 holds: the scope is undeclared
+  NOTE-folders: 4 of 5 named folders resolve in this checkout; ledger absent. The target analysed `main` and this is a working branch, so this is a branch-vs-main difference and U-2 stands: the suite results are not checkable from here
+
+  C-4 local (HEAD 4237ac28e, 195 commits): Claude 136, JinnZ2 59
+  C-4 target (main): 853 commits, Claude 550, JinnZ2 303
+  the two differ because the target analysed main; the count is a property of who ran the tool, not a stable quantity
+
+  none of this audits the repository's instruments or the target's suite results; the notice does not, and neither does this
+  [CHOICE 1] the C-1 anchor is the date the notice states it was issued (2026-09-18); the checker has no independent clock for when the target was in hand
+  [CHOICE 2] C-4's local git recompute runs at the current HEAD and prints the commit; the target analysed `main`, so the two counts differ and the structural verdict does not depend on either
+  [CHOICE 3] C-7's reconciliation is UNVERIFIED: counting a GitHub account's public repositories requires network egress, which the environment's allowlist refuses

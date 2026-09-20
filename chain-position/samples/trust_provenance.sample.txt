@@ -1,0 +1,19 @@
+WO-1 SECOND-ORDER GAP -- provenance of the trust assignment
+CONSTRUCTED records. No vendor scorer is inspected.
+
+[CHOICE 1] a MISSING scorer_provenance key is UNEXAMINED (cannot say); an explicitly empty one is NOT_AUDITABLE (declared absent) -- a silence and a known negative are different states
+
+What an auditable trust ASSIGNMENT has to carry (the spec):
+  - scored_payload
+  - scorer_id
+  - scorer_provenance
+  - policy_applied
+  scorer_provenance is itself required: the score is a chained artifact, so the recursion is the gap.
+
+Classifier states (the load-bearing split is UNEXAMINED vs NOT_AUDITABLE):
+  payload_only     -> UNEXAMINED    (scorer_provenance)
+  declared_absent  -> NOT_AUDITABLE (scorer_provenance)
+  auditable        -> AUDITABLE     (complete)
+
+Consequence, carried: a common object to audit exists = False
+  so the order's claim stays UNVERIFIED here -- plausible, not established.

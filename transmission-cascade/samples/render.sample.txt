@@ -1,0 +1,27 @@
+WO-8  TRANSMISSION-TYPE CASCADE   (data CONSTRUCTED, PROPOSED; no dataset recoded)
+------------------------------------------------------------------------
+R2  coder gate FIRST   [CHOICE 1]
+    kappa 0.739  floor 0.60 -> R1_INTERPRETABLE
+
+R1  type by layer (gated on R2)
+    layer 1  STIM 9  EMUL 24  IMIT 24  OVER 23
+    layer 2  STIM 9  EMUL 19  IMIT 31  OVER 21
+    layer 3  STIM 5  EMUL 3  IMIT 23  OVER 49
+
+R3  condition-change recompute share by type   [CHOICE 2]
+    STIMULUS_ENHANCEMENT   0.500  (n 60)
+    EMULATION              0.783  (n 60)
+    IMITATION              0.333  (n 60)
+    OVERIMITATION          0.067  (n 60)
+    -> type predicts response (emulation recomputes above overimitation)
+
+R4  identification-with-leader entered alongside type   [CHOICE 3]
+    type real, id null:   type alone -0.417  with id -0.417 -> transmission type survives identification entering
+    id real, type null:   type alone -0.028  with id -0.022 -> type adds nothing once identification is entered
+
+scope [CHOICE 4]: the taxonomy's transfer to adult hierarchy is itself unvalidated and is what R2 tests
+[CHOICE 1] R2 gates R1: below a coder-agreement floor of 0.60 the taxonomy is not reliably applied and R1 is UNINTERPRETABLE, which is the finding
+[CHOICE 2] the recompute/repeat outcome is a declared response field; a run with neither is NOT_EVALUABLE, not a repeat
+[CHOICE 3] R4 enters identification-with-leader alongside transmission type as a two-predictor linear fit on the recompute outcome; type adds nothing iff its coefficient does not survive identification entering
+[CHOICE 4] the two literatures' join is PROPOSED; the taxonomy's transfer from children-and-toolmaking to adult hierarchy is itself unvalidated and is the object R2 tests, not an assumption
+[CHOICE 5] R4 counts type as surviving only if its coefficient stays material (|b| >= 0.10) with identification entered; a relative-only test passes on noise near zero

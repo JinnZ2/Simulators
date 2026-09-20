@@ -1,0 +1,29 @@
+WO-5 PRE-ENTRY LOSS -- the gates upstream of the form
+CONSTRUCTED operators for Test B; the register is the order's own account. Not a plant.
+
+[CHOICE 1] tracking threshold rho >= 0.60 reads calibrated; stated, not the order's
+
+Register (none logged):
+  L0          INCENTIVE GATE           conditions_sample=True
+  L0'         LEARNED PRIOR            conditions_sample=True [strongest]
+  L1          INTERFACE GATE           conditions_sample=True
+  L1'         LITERACY / SPELLING GATE conditions_sample=True
+  L2          DEVICE GATE              conditions_sample=True
+  DELEGATION  DELEGATION-AS-NULL       conditions_sample=True [breaks Test B]
+  FORM-FIELD  FORM-FIELD LOSS          conditions_sample=False [term gap]
+  -> 7 gates, 0 logged, 6 condition which reports arrive
+  -> arriving reports are a sample past a per-operator threshold, not a sample of machine conditions
+  -> the threshold is estimated: False
+
+Test B -- does reporting rate track (acted on)/(filed)?
+  calibrated world:   rho=0.998  TRACKS_calibrated  (n=40)
+  uncalibrated world: rho=0.181  DOES_NOT_TRACK  (n=40)
+  both branches reachable, so the classifier is not constant.
+
+Test B refuses when the proxy-filed count is undeclared (the order's stated limitation):
+  UNESTIMABLE_PROXY_UNDECLARED
+
+Delegation confound, made a number (calibrated world, 25 percent proxy-filers):
+  declared and excluded: rho=0.999  TRACKS_calibrated
+  pooled as zero:        rho=0.558  DOES_NOT_TRACK
+  pooling proxy-filers as zero-reporters pulls the correlation down: the cost of not declaring.
