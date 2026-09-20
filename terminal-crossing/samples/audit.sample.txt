@@ -1,0 +1,37 @@
+WO-3 AUDIT -- step 1 attack, and the three candidates
+The seventh medium is PROPOSED here and is not in the order's six.
+
+[CHOICE 5] the proposed seventh medium is held in a separate constant and is never merged into the six parsed from the order
+[CHOICE 6] each failed candidate carries a mechanism field of this audit's own reading; the order's single FAILS verdict is carried beside it rather than replaced
+
+Step 1, attack on the falsifier:
+  proposed medium : gravitational coupling
+  named by the six: no
+  shieldable      : False
+  falsifier state : UNSATISFIABLE_IF_COUNTED
+    an uncovered channel that no expenditure closes -- and whether it counts is UNRESOLVED
+  reading A: it is a channel: mass-energy inside the boundary is read outside it, so something goes out
+  reading B: it is not a crossing under the order's own usage: the order's examples are things that go out and come back, and nothing returns through this one
+  carried   : UNRESOLVED, neither reading taken here
+
+The order's three failed candidates:
+  candidate                            verdict    mechanism (read here)  channel
+  ab_test_recommendation_matchmaking   FAILS      DEFERRED_CONSEQUENCE   operator
+  throwaway_prototype                  FAILS      EXTERNALISED           supply+disposal
+  scratch_calculation_air_gap          FAILS      DESIGN_NOT_FACT        operator
+  distinct mechanisms 3 against distinct channels 2
+  channel operator carries 2 mechanisms: DEFERRED_CONSEQUENCE, DESIGN_NOT_FACT
+  so the channel is not a function of the mechanism, and the metric records the channel.
+
+Conditions exercised by no delivered candidate: 3 of 6
+  physical
+  shared
+  maintenance
+
+Contamination marker: UNKNOWN
+  Recorded as UNKNOWN deliberately. Not resolved in either direction.
+  a third state, kept apart from a measured zero and from a measured crossing
+
+Step 4 search: corpus NOT_STATED, terms NOT_STATED
+  order line: Two searches did not find one
+  reading   : an absence with no corpus and no terms bounding it

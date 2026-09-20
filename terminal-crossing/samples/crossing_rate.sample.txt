@@ -1,0 +1,41 @@
+WO-3 CROSSING RATE -- the falsifier as a quantity
+CONSTRUCTED rates. No repository, spacecraft or black hole is measured.
+
+[CHOICE 1] an undeclared channel is UNSEARCHED, never ABSENT_MEASURED -- a silence and a measured absence are different states
+[CHOICE 2] channel ids are derived mechanically from the order's own bullets (the first word after "no "), not assigned in this module
+[CHOICE 3] a horizon carries a value and a unit, or the token UNBOUNDED; a rate whose unit is outside the declared table returns UNIT_UNKNOWN rather than a silently converted number
+[CHOICE 4] a PRESENT channel with no declared rate contributes its completed count only; its rate stays None rather than defaulting to 0
+
+Falsifier conditions, parsed from WORK_ORDER.md (6):
+  physical     | - no physical media crossing, ever
+  operator     | - no operator, or an operator whose output is never acted on
+  shared       | - no shared power, thermal or acoustic side channel
+  maintenance  | - no maintenance — maintenance is a person crossing
+  supply       | - no supply chain — components arrived from somewhere
+  disposal     | - no disposal — that is an exit path
+
+Channel states: PRESENT, ABSENT_MEASURED, UNSEARCHED
+  an undeclared channel is UNSEARCHED, so a system carrying one
+  returns NOT_ESTABLISHED and never TERMINAL by omission.
+
+Readings:
+  system                     verdict          total state        expected crossings
+  sealed_repository          NOT_TERMINAL     COMPUTED           3.010000
+  voyager_post_transmission  NOT_TERMINAL     UNBOUNDED_HORIZON  --
+  black_hole_interior        NOT_TERMINAL     COMPUTED           1.000000
+  control_all_absent         TERMINAL         COMPUTED           0.000000
+  control_partly_declared    NOT_ESTABLISHED  NOT_ESTABLISHED    --
+
+Step 2 discrimination, on the order's three asymptotes:
+  sealed_repository          shape=('COMPUTED', True, True)
+  voyager_post_transmission  shape=('UNBOUNDED_HORIZON', None, None)
+  black_hole_interior        shape=('COMPUTED', False, True)
+  distinct shapes: True
+  asymptotes returning a total of zero: 0 
+
+Horizon carried per system:
+  sealed_repository          10000 year
+  voyager_post_transmission  UNBOUNDED
+  black_hole_interior        1e+06 year
+  control_all_absent         1 year
+  control_partly_declared    1 year
