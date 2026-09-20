@@ -264,6 +264,17 @@ last three; read in order:
 - `chain-position/` — WO-1; can a step know it is a step; position never OBSERVED, evidence EXTERIOR in every row, compounding a floor over 4 of 7
 - `assessor-coupling/` — WO-6; the eight independence conditions as a scorer, no composite; pool metric where the label reaches no arithmetic; no party named
 - `revision-survival/` — can a model predict which of its held claims will be revised, and why; three arms, one sealed, the self-run VOID by its own reading
+- `revision-survival/` — can a model predict which of its held claims will be revised, and why; rev 2: a declared draw as a HARD GATE, two Arm C axes, EPS rules, Q_mech on revised rows only; the self-run VOID_KEY_HOLDER by its own reading
+- `measurand-partition/` — five work orders, one instrument fault: an observation in one setting scored against an outcome of many unmeasured variables, the residual assigned to the thing observed; WO-4a's fourth power is two factors and its test measures the other quantity
+- `criterion-externality/` — WO-6, a proposed fourth audit-independence axis (who holds the ruler, C0..C3) against a three-axis paper read at abstract level; the direction is arithmetic and the magnitude is a constructed model, the target paper egress-blocked
+- `rule-coherence-counterfactual/` — WO-7, three arms: an A1 counterfactual with MEASURED restrictiveness and a four-branch classifier + permutation null (the restrictiveness arm's power is set by the number of levels), an A2b record-field audit, an A3 divergence design; no model run
+- `transmission-cascade/` — WO-8, the join of two literatures: a coder-kappa gate FIRST (imported), a type-by-layer distribution withheld until it clears, an R3 recompute-vs-repeat probe, R4 identification-with-leader entered alongside type behind a material floor
+- `additivity-inheritance/` — WO-9, the additivity assumption traced forward as OPEN QUESTIONS: an R1 coding, an R2 re-entry audit, R4 the citation-trace false negative reproduced on the eugenics/Mendel graph, and an additive 2x2 whose residual IS the interaction SS
+- `credential-channel/` — WO-10, five instruments from one field case: I-1 route rank correlation (imported) + objection coding, I-2 the routing-cost join (not procedure), I-3/I-4 gap and inventory vs exposure (imported ols), I-5 attribution at the wrong node; all constructed
+- `publication-loop-work-orders/` — WO-11/12/13, delivered verbatim as study designs and NOT built (the delivery's own line 3: "Not a code build. Do not route to a build model."); WO-11 transfers the measurand-partition designs onto model eval, WO-12 the health-utility anchor's definition-instrument mismatch, WO-13 introspective access as a training variable; documents only, no code
+- `deep-research-correction/` — an external deep-research report on the repo (Kimi) and the correction notice against it (both verbatim), plus a checker recomputing the mechanical items: C-1 forward-dated, C-2 the 157-vs-220 count, C-3 a jul-3026 URL, C-4 (load-bearing) commit-author read as contribution share scored UNPARTITIONED by imported attribution, C-5/C-6 present-in-doc, C-7 carried, U-1 the same-author void scope undeclared here
+- `reporting-chain-loss/` — WO-5, transit loss and pre-entry loss kept apart: a linear-Gaussian hop chain whose terminal is an estimator of the composed incentive stack not the ground (reader bias B/G amplifies with the chain, directed loss compounds where random cancels, the DPI floor used as null not re-derived), plus the pre-entry register (7 gates none logged) and Test B calibration with the delegation confound made a number and the proxy-undeclared refusal built in
+- `chain-position/` — WO-1, can a container detect it is a step in an unobservable chain; the OWASP clause audit returns the null the order predicts (lineage exists at the gateway, 0 clauses place position inside the agent) and the null is the finding, the reachable-controller compounding made a number (four factors 0.9035) with the unassessed-factor RULE built in as UNPROPAGATABLE, and the second-order gap UNEXAMINED vs NOT_AUDITABLE on the scorer's own provenance
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -12837,6 +12848,469 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   and nothing here bears on whether any model is calibrated. Check count
   printed by `python3 revision-survival/test_revision.py`; the render screens clean through `no_severity` with no exemption. Stdlib
   only, parses under 3.9, phone-buildable, CC0.
+  **REVISION 2 then arrived** (`WORK_ORDER_V2.md`, verbatim beside v1,
+  *"do not re-derive the order -- patch it"*): four spec defects found
+  by building rev 1, three in the order's own authoring, patched in place
+  (`RS_017..RS_024`). **D-C1** the seed list failed its own admission
+  rule, so recall seeding is replaced by a declared draw — `draw_frame.py`
+  hashes source, edition, index size, seed, n and a fate rule written
+  before the draw into a `frame_id`, and Arm A is a **HARD GATE**: no
+  verified frame, no score; any row outside the draw, no score. Every
+  rev-1 seed is demoted to `CANDIDATE` with no position, the new
+  `established_where` field reads `popular` on alpha wolf and junk DNA so
+  they never score, and the dispatch's *"seven admissible seeds"* are six
+  YES plus one UNCERTAIN under the order's own rule (`RS_017`). **D-C2**
+  Arm C runs on two axes never ranked on one scale —
+  `decision_reversibility {recoverable, costly, terminal, n/a}` and
+  `pathway_exists {yes, partial, none}` — so `NO_SUBSTITUTION_EXISTS`
+  (n/a, none) holds `C3`, `C6`, `C8`, the worst cell rev 1 could not name,
+  reported BESIDE the two-cell finding and ranked against nothing, with an
+  AST check that no ordering comparison takes a cell name as an operand,
+  and an `ENUMS` registry carrying a derivation per enum that the suite
+  requires for every module-level string tuple (`RS_018`). **D-C3** every
+  threshold comparison goes through a stated rule with `EPS = 1e-9` —
+  `delta(0.4, 0.55)` is `-0.15000000000000002` and now passes the leak
+  gate — and the suite walks the folder's four files and fails on any bare
+  float comparison against a decimal literal, the test file passing its
+  literals to `near()` rather than comparing against them (`RS_019`); the
+  repo-wide count is printed and **recorded, not failed** (`RS_022`,
+  [CHOICE 10]). **D-C4** no pooled Q_mech exists anywhere (the bare token
+  `acc_mech` is asserted absent from the module); `acc_mech_revised` is
+  read on revised rows only with `n_revised` beside it, `None` and
+  `INSUFFICIENT_REVISED` below 24, and the tension rev 1 omitted is
+  stated — D1's 40% SURVIVED floor and the informative subset pull
+  opposite ways, so `N >= 24 / (1 - survived_frac)` is printed with every
+  run, 40 at 0.4 and 60 at 0.6 (`RS_020`). The self-run now returns
+  `VOID_KEY_HOLDER`, an enum member with `score: None`, on all three void
+  reasons, and the required run record is **REFUSED** naming four missing
+  fields where a constructed drawn world emits one (`RS_021`); the defect
+  log keeps spec and implementation defects in disjoint columns
+  (`RS_023`). The README opens with the framing the dispatch asks for:
+  rev 1 produced no calibration number, it produced four spec defects,
+  and VOID plus a defect list is the run doing what it was for.
+  **`RS_024` UNVERIFIED:** no draw from a real index, no second party
+  under BLIND, nothing read. Check count printed by
+  `python3 revision-survival/test_revision.py`.
+- `measurand-partition/` — Five work orders delivered as one message
+  (`WORK_ORDER.md`, verbatim) and built to, each standalone, each with its
+  scope limits and its NOT KNOWN; `common.py` carries what they share as a
+  record shape — *an observation made in ONE setting is scored against an
+  outcome produced by MANY unmeasured variables, and the whole residual is
+  assigned to the thing observed* — with `attribution()` returning
+  UNPARTITIONED / PARTITIONED / ASSIGNED_ELSEWHERE / NOT_EVALUABLE (an
+  unenumerated set is not an empty one), and the four delivered
+  populations (the child, the observer's eye, the building method, the
+  released athlete) all reading UNPARTITIONED (`MPS_001`). Everything
+  constructed carries the delivery's own PROPOSED tag and nothing is a
+  statement about any person, program, structure or piece of wood.
+  **WO-1** (`wo1_partition.py`): STEP 3 is a **gate, not a subtraction** —
+  the order supplies no axis-to-performance model, so a score is a
+  RESIDUAL_CANDIDATE only when A1–A4 are each MEASURED with a named
+  instrument and the interaction entered, NOT_SEPARABLE naming the axes
+  otherwise, and `residual()` never subtracts, asserted over the source
+  (`MPS_002`); the two-setting arm needs no model and runs — one moved
+  label of two establishes a floor of 0.50, single-setting individuals are
+  UNBOUNDED and out of the denominator, an unrun arm is NOT_RUN and never
+  floor 0 (`MPS_003`). **WO-2** (`wo2_band_sweep.py`): the order's
+  measurement fault **reproduces as a number** — a band shifted low, a band
+  shifted high and a flat curve all return 0.10 at the standard level and
+  separate under the sweep into BAND_LOCATED on opposite sides and
+  NOT_REGISTERED (`MPS_004`); absences are three states (NOT_REGISTERED,
+  NOT_ESTIMABLE below three levels, CEILING_NOT_REACHED for a curve still
+  registering at the top) and an unswept level is NOT_SWEPT, never
+  interpolated (`MPS_005`). **WO-3** (`wo3_control_manifest.py`): the
+  academy as the order describes it grades **0.40** with nutrition and
+  hydration ADVISED_ON counted apart and never inside the fraction —
+  education on intake is not control of intake — while an UNDECLARED
+  variable makes the gradient NOT_COMPUTABLE, NOT_TOUCHED being a
+  declaration and not a default (`MPS_006`); 3b returns NOT_EVALUABLE with
+  no program carrying a measured accuracy and 3c returns UNDECLARED until
+  the not-controllable variance shares are declared, **which is the state
+  the literature reads its reliability results in, an implicit ceiling of
+  100%** — on constructed shares the ceiling is 0.60 and a reported 0.60
+  reads as 1.00 of achievable (`MPS_007`). **WO-4a** (`wo4_lumber.py`),
+  the two arithmetic findings: the order's ~40% **holds (41.4%) and its
+  mechanism sentence does not** — `I = b h^3/12` is cubic in depth times
+  linear in width, a 4x4 shrinks in both so the fourth power is the
+  product, and depth alone gives 33% (`MPS_008`, registered in
+  `tools/known_answer.py` with the depth-only case as the one where
+  sentence and number part); and the ARITHMETIC line quotes stiffness
+  while the TEST line ("load capacity measured to failure") measures
+  **strength**, whose 4x4 ratio is 0.670 against 0.586 — the test as
+  written returns one quantity to be read against a claim about the other,
+  `measurement-fork`'s VOID RATIO in a one-paragraph order (`MPS_009`);
+  the square case understates the general one, a 2x4 keeping **half**
+  (`MPS_010`). **WO-4b** (`wo4_survival.py`): the critical split is
+  machinery before any record exists — Kaplan-Meier per population per
+  maintenance arm over matched (decade, exposure) strata, `pooled()`
+  existing to refuse by name, REMOVED censoring rather than failing,
+  UNKNOWN maintenance excluded and counted, an unmatched stratum entering
+  no comparison (`MPS_011`); *"150 years with proper maintenance"* reads
+  against the maintained arm only, from a declared boolean and never from
+  the wording (`MPS_012`). **WO-5** (`wo5_deselection.py`): under PODIUM
+  three constructed athletes are failures and under LEARNED the same three
+  are AHEAD of untrained peers on four of five capacities and TIE on the
+  one they were released for — the category exists under one measurand
+  and not the other — with the cohort built to the order's PROPOSED
+  prediction, so the demo is a known-answer run on the scorer and no
+  evidence about athletes (`MPS_013`); LEARNED is NOT_COMPUTABLE without
+  the untrained group no program recruits, manufactured then None not 0
+  (`MPS_014`), and an imported frame must declare its measurand apart from
+  its fields, PODIUM never a default (`MPS_015`). **`MPS_016`:** four of
+  the five orders rest a step on an absence and only WO-4b states its
+  corpus (ten results, all builders); the rest are the author's nulls with
+  no corpus and no terms (`QA_004`). **`MPS_017` UNVERIFIED:** every
+  literature figure carried and egress-blocked. Every module refuses
+  `--selftest`; every render screens clean through `no_severity` with no
+  exemption, three authored words reworded rather than exempted. Check count
+  printed by `python3 measurand-partition/test_partition.py`. Stdlib only,
+  parses under 3.9, phone-buildable, CC0.
+- `criterion-externality/` — WO-6 delivered verbatim and built to: a
+  proposed FOURTH audit-independence axis, CRITERION (who holds the ruler,
+  graded C0..C3), added to a published three-axis framework
+  (arXiv:2609.18272) the order's author read at abstract level. The
+  paper's body is not read and its host refuses CONNECT (R1 NOT_RUN, probe
+  recorded), so its Monte Carlo is not re-run; the model is CONSTRUCTED and
+  every number is a property of the construction. **The direction is
+  arithmetic, the magnitude is the model.** Under weakest-link aggregation
+  an added axis never raises the aggregate and lowers it on a non-empty set
+  (all 256 grade cells), so the order's "it lowers the reported number"
+  needs no model (`CEX_002`); a coverage gate in front of every party can
+  only move a fault class INTO the never-surfaced set, so the order's R2
+  question "does any class move out" has one answer before any draw, none
+  (`CEX_009`). `expected_rate` is the beta-factor form in closed form
+  `q(beta p + (1-beta)(1-(1-p)^n))`, registered in `tools/known_answer.py`,
+  and the Monte Carlo is checked against it (`CEX_004`). **R4 as computed**
+  is a property of the constructed form: the beta-factor common cause is a
+  shared draw between parties with no term for what the ruler covers, so an
+  excluded class is surfaced at 0.0 at every beta and every party count
+  (INDEPENDENT on this model); whether the paper's own model has such a
+  term is what reading the paper decides (`CEX_003`). **The C-grades order
+  AUTHORSHIP, not surfaced rate** — C2 covers more classes than C1 and,
+  applied at discretion below a computed crossover (0.959 here against a
+  stipulated 0.7), surfaces FEWER faults, so the grading is an ordinal on
+  one quantity read against another (`CEX_005`, `measurement-fork`'s VOID
+  RATIO in a scale). R3 returns NOT_EVALUABLE (five regimes carried
+  UNCODED, a grade with no basis refused, both prediction branches
+  reachable, `CEX_007`); two of the three arrivals resolve by path and
+  marker in this tree and the third is not in it, all one operator's work,
+  so "not built together" is what is established and "independent" is not
+  (`CEX_008`, `TP_003`). Six `[CHOICE n]` markers, each printed where it
+  takes effect; the render screens clean through
+  `sheet-structure-scan/no_severity`. 60 checks. Stdlib only, parses under
+  3.9, phone-buildable, CC0.
+- `rule-coherence-counterfactual/` — WO-7 delivered verbatim and built to:
+  does circumvention track a property of the RULE (internal incoherence)
+  or how RESTRICTIVE it is? Three arms, run separately; no model is run
+  anywhere and every world is CONSTRUCTED with a declared generative model.
+  **A1** is the counterfactual: restrictiveness operationalised BEFORE the
+  run as `1 - permitted/unconstrained`, applied to both arms, and a pair
+  whose restrictiveness differs by more than TOL is VOID — then A and B
+  differ on an uncontrolled quantity and the run cannot attribute a rate
+  difference to incoherence (`RCC_002`). The four branches (tracks
+  incoherence / restrictiveness / both / neither) are each reachable on one
+  declared world, distinct, with SEPARATES_NEITHER the design's own limit
+  and a result (`RCC_003`); the incoherence contrast is tested against a
+  label-permutation null and a null contrast does not clear it (`RCC_004`).
+  **`RCC_005`, the finding:** the restrictiveness arm's power is set by the
+  number of levels — a two-sided permutation null over k levels has k!
+  arrangements, so a strong 4-level slope cannot clear 0.05 and the same
+  strength at 8 levels can, so a failed restrictiveness contrast can be a
+  property of the sweep, not the rule (`reasoning-gate` G-RES on a new
+  substrate); the demo worlds carry 8 levels for this reason. **A2b** the
+  record-field audit returns act-only dominant (5 of 7, the order's
+  prediction) with a coded-empty field counted apart from an absent field
+  (`RCC_006`); **A3** the observer divergence reports the label cost as the
+  drop in reasoning transfer from plain to dispositionally-labelled runs,
+  NOT_EVALUABLE runs excluded from the denominator rather than read as
+  behaviour (`RCC_007`). The machine and human arms are not claimed to
+  share a mechanism, and the two disclosures the order carries (the
+  reasoning traces, the truck-at-minus-50 worked case) are carried and not
+  adjudicated (`RCC_008`). Six `[CHOICE n]` markers; the render screens
+  clean with no exemption. 46 checks. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
+- `transmission-cascade/` — WO-8 delivered verbatim and built to: the join
+  of two literatures that do not cite each other — organizational cascade
+  (depth, outcome measures, identification-with-leader) and cultural-
+  evolution transmission TYPES (stimulus enhancement / emulation /
+  imitation / overimitation). No dataset is recoded; every world is
+  CONSTRUCTED and `cohen_kappa` is imported from `effective-redundancy-
+  audit`, not copied. **R2 gates R1 and the gate is not decorative:** on
+  the high-agreement coding kappa clears a 0.60 floor and R1 renders; on a
+  low-agreement coding R1 is WITHHELD and the module reports the taxonomy
+  is domain-bound, the order's stated useful result costing one subsample
+  (`TC_001`, `TC_002`). **R3 is a known-answer run on the scorer** — the
+  condition-change runs are generated with overimitation repeating and
+  emulation recomputing, the order's decisive prediction as a declared
+  model, and the does-not-transfer branch is reachable on a flat world so
+  the verdict is not `CONSTANT_FIRES` (`TC_003`, `TC_004`). **R4 enters
+  identification-with-leader alongside type, not instead**, and the
+  separator is a MATERIAL floor (|b| >= 0.10): both a real-type-null-id
+  world and a real-id-null-type world pass a relative-only survival test
+  because their coefficients are noise near zero, so an absolute floor is
+  required and declared, without which R4 is `CONSTANT_FIRES` — a
+  competing-explanation test that never credits the competitor (`TC_005`,
+  `TC_006`). The taxonomy's transfer from children-and-toolmaking to adult
+  hierarchy is unvalidated and is the object R2 tests, and the join and
+  prediction are PROPOSED (`TC_007`, `TC_008`). Five `[CHOICE n]` markers;
+  the render screens clean with no exemption. 36 checks. Stdlib only,
+  parses under 3.9, phone-buildable, CC0.
+- `additivity-inheritance/` — WO-9 delivered verbatim and built to: the
+  additivity assumption traced forward from the Fisher synthesis, as OPEN
+  QUESTIONS instrumented, NOT a critique of statistics — the tools are not
+  in dispute, their inherited assumptions are the object. No primary source
+  is read and every corpus is CONSTRUCTED. **`AI_004`, the portable
+  finding:** the order's methodological result is that citation tracing
+  cannot detect a precondition carried by a shared structural inheritance —
+  eugenics predates Mendel's rediscovery and Galton had to be told of
+  Mendel in 1900, so the precondition reached both camps through the fork
+  they inherited, not a citation. The graph reproduces it exactly (the
+  citation trace does not reach the precondition, the structural trace
+  does, a false negative), and when the precondition IS cited both traces
+  reach it, so the instrument is not `CONSTANT_SILENT`. **`AI_005`, the
+  arithmetic:** on a balanced 2x2 the additive model's residual IS the
+  interaction SS `(a-b-c+d)^2/4` (9 on the demo cells), so a real gene-
+  environment interaction is assigned to noise by the decomposition itself,
+  not lost to a downstream choice; `interaction_ss` is registered in
+  `tools/known_answer.py`. R1 codes a constructed corpus and the C-share
+  (present-and-unstated) rises with declared field distance on a corpus
+  built to carry it, the non-monotone finding branch reachable (`AI_001`);
+  R2 counts phenomena that had to fight the frame (3 of 4, `AI_002`); R3 is
+  NOT_RUN (prior art at the merge unsearched, egress-blocked, `AI_003`).
+  The lineage claim (variance partitioning descends from the merge,
+  heritability inherits additivity) is CARRIED and not verified here — the
+  order says test it first (`AI_006`). Four `[CHOICE n]` markers; the
+  render screens clean with no exemption. 35 checks. Stdlib only, parses
+  under 3.9, phone-buildable, CC0.
+- `credential-channel/` — WO-10 delivered verbatim and built to: five
+  instruments bundled from one plant floor, separable, each runs alone. No
+  plant, worker, record or review is read; every world is CONSTRUCTED and
+  `spearman` is imported from `readout-count` and `ols` from `sim-span`,
+  not copied. **I-1** ranks a written route and a demonstrate route against
+  later performance (route B tracks, route A inverse on the constructed
+  world; both-track and NOT_EVALUABLE branches reachable) plus the
+  methodology-objection coding (seniors cite prior usage more), where prior
+  use is not construct validity (`CDC_001`, `CDC_002`). **I-2, the routing-
+  cost join:** the external plus downtime cost of an off-authorisation
+  cheap resolution is attributed to ROUTING and NOTHING to a procedure
+  change — the order's mechanism note that the block was overshadowing and
+  ripple avoidance, not procedure — and the on-authorisation 250 external
+  is a fault cost, not counted (1200 on the field events, `CDC_003`).
+  **I-3 and I-4** regress the confidence-accuracy gap and the inventory
+  score on years of exposure and recover the signs their worlds were built
+  with (downward gap, upward score), the opposite and flat branches
+  reachable so neither is `CONSTANT_FIRES` (`CDC_004`, `CDC_005`). **I-5**
+  reports attribution mismatch by credited level and the upward share of
+  mismatches; on the constructed world credit flows up entirely, so a
+  downstream statistic — a review, promotion data, a training set —
+  measures reporting position, not competence (`CDC_006`), which is I-3's
+  manufactured-signal shape read from the other side. Two items are carried
+  not run: the Combine-Cognitive-Architecture repo (not in this tree,
+  overlay unattributed) and the specialisation assumption (NOT YET
+  RUNNABLE, needs a measurand) (`CDC_007`, `CDC_008`). `routing_cost` is
+  registered in `tools/known_answer.py`. Six `[CHOICE n]` markers; the
+  render screens clean with no exemption after three authored severity
+  words were reworded. 42 checks. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
+- `publication-loop-work-orders/` — WO-11, WO-12 and WO-13, delivered as
+  one message and landed **verbatim as documents, NOT built**. WO-11's own
+  line 3 states the class and the routing rule: *"research work order
+  (study designs for the publication loop). Not a code build. Do not route
+  to a build model."*, and WO-12/WO-13 repeat "Not a code build." — so the
+  folder ships no `.py`, no CONSTRUCTED-data instrument and no
+  `CLAIM_TABLE.md`, since building one is the routing the delivery forbids;
+  it is the `external-audit/` / marker landing genre, where the delivered
+  document is the artifact. **WO-11** transfers the five
+  `measurand-partition/` human-population designs onto the
+  model-evaluation population, where the intervening variables the human
+  designs are blocked on measuring (frame, channel, operating band,
+  training composition, control manifest) are directly settable — six arms
+  T-1..T-6 (partition the score before reporting it; sweep the band and
+  report a curve not a point; sign-flip coding of capability claims as
+  POSITION vs PAIRING with citation tracing; control manifest → control
+  gradient → accuracy floor, where 4a must complete before 4b is
+  interpretable; the leaderboard as a measurand choice with deprecated
+  models measured on unscored axes; and B10/B3 as eval-practice
+  assumptions, the Kalai/Nachum/Vempala/Zhang *Nature* 653:1047-1051
+  (2026) anchor covering W3 while W2/W4 are named unaddressed) — with the
+  transfer running one direction only and claiming nothing about humans.
+  **WO-12** sits the WHO health definition anchored at 1.00 (complete
+  physical, mental and social well-being, naming peace, security and social
+  standing) against the EQ-5D's five-item operationalisation that carries
+  none of them, so the gap is AT the anchor and scales every score; three
+  arms G1..G3 (a high-side boundary test the mature low-side critique never
+  ran; joining the compensation critique to the no-decrement rule; the
+  frame question at the anchor rather than the items, with TTO the sharp
+  case). **WO-13** places Literature A (no privileged access, an untrained
+  population on the reasons-for-behaviour measurand) against Literature B
+  (training moves introspective accuracy, but on perceptual/memory
+  metacognition and never on that measurand), leaving two cells never run;
+  two arms G4 (actor-observer on a childhood-formed population, where
+  self-selection is absent by construction) and G5 (run the training
+  literature on the measurand it never touches), with G4 P1 carrying a
+  consent-and-co-authorship condition and a superiority-claim-on-the-same-
+  scale caveat, and machine introspection deliberately NOT an arm. Each
+  order carries its own prior-art-UNRUN note, known-bias section (WO-11's
+  author is a model writing about model evaluation, same-author scope
+  declared-not-resolved), refutation protocol with per-arm falsifiers, and
+  OBSERVED/DERIVED/PROPOSED tags. Every literature anchor is carried as the
+  order states it and verified against nothing — a study design is not a
+  findings document. Delivered verbatim; em dashes and mid dots are the
+  documents' own and the folder has no ASCII constraint because it ships no
+  code. CC0.
+- `deep-research-correction/` — An external deep-research report about the
+  repository (Kimi, deep-research mode, self-dated 2026-09-19, covering the
+  five newest content folders on `main`) and the **correction notice**
+  issued against it (Claude Opus 5, 2026-09-18, single session, no clone),
+  both landed **verbatim**, plus `check.py` recomputing the notice's
+  mechanical items — the `external-audit/` pattern, and the checker
+  inherits the notice's own scope (document integrity and measurand
+  assignment only, not the repository's instruments and not the target's
+  suite results). **`DRC_004`, the load-bearing one, is the repository's
+  own thesis pointed at the report:** the target reads the git
+  commit-author field as a share of contribution ("roughly 65% authored by
+  Claude"), and a commit-author share records which identity ran `git
+  commit`, not who originated the specification, the claim set, the
+  falsifier choice or the decision to build — exactly
+  `measurand-partition/`'s instrument fault (an observation in one setting
+  scored against an outcome of many unmeasured variables, the residual
+  assigned to the observed thing), so the checker does not restate it but
+  **imports `common.attribution`** and lets it return `UNPARTITIONED`,
+  while a local git recompute shows the count is not even stable (the
+  target read `main` at 853 commits / Claude 550; this is a working branch
+  at a different total, both a property of who ran the tool `[CHOICE 2]`).
+  **`DRC_002`:** C-2 is doc-internal arithmetic — `count_relation(63,157,
+  220)` is `DISJOINT` and `count_relation(63,157,157)` is `NESTED`, so the
+  table's 220 (63+157, non-overlapping) and the text's "the 63 run within
+  the 157" (total 157) cannot both hold, with the TL;DR separately
+  enumerating four values against five folders; registered in
+  `tools/known_answer.py` with the equal-parts cases pinning the
+  `inner<outer` guard. **`DRC_001`/`DRC_003`/`DRC_005`** recompute from the
+  target text (a re-execution timestamp 2026-09-19 later than the notice's
+  issue date 2026-09-18 `[CHOICE 1]`; a `jul-3026` citation URL — July
+  3026, a future year; the two operator-characterizing clauses and the
+  preference attribution present verbatim). **`DRC_007`, U-1 with a
+  correction to the notice:** the same-author void's instance-or-class
+  scope is declared nowhere in the tree so U-1 holds, and the void the
+  notice calls `VOID_SAME_AUTHOR` is actually named `VOID_KEY_HOLDER`
+  (revision-survival). **`DRC_008`:** the target's five named folders are a
+  branch-vs-main difference not a defect — four resolve here and `ledger`
+  does not, so U-2 stands and the suite results are not checkable from
+  here. **`DRC_006`/`DRC_009` UNVERIFIED:** the sibling count (~thirty vs
+  the operator's 20+) and the notice's own V-1..V-3 citation checks are
+  carried, the egress gate refusing publisher hosts `[CHOICE 3]`. The two
+  documents carry em dashes and mid dots and are landed unedited; the three
+  chart PNGs are recorded in `CHARTS.md` by name/size/sha256 and not
+  checked in (text-only repo). The render screens clean through
+  `no_severity` with no exemption; `check.py` refuses `--selftest`. Ten
+  `DRC_*` claims; check count printed by
+  `python3 deep-research-correction/test_check.py`. Stdlib only, parses
+  under 3.9, phone-buildable, CC0.
+- `reporting-chain-loss/` — WO-5, delivered verbatim (companion to WO-2,
+  citing WO-4's term-gap; both siblings named-and-absent in this tree), and
+  built as two instruments that keep the order's two components apart.
+  **TRANSIT LOSS** (`hop_compose.py`): the order's formal floor is the data
+  processing inequality — a theorem, used here as the null, not re-derived —
+  and its GAP is that the DPI assumes a FIXED transform while organizational
+  hops each carry their own objective function, so random loss cancels toward
+  noise and DIRECTED loss compounds. In a linear-Gaussian chain
+  `x_n = a_n x_{n-1} + c_n + e_n` the terminal's expected offset from the
+  scaled ground is closed form, `E[x_N|g] = (prod a_n) g + sum_k (prod_{j>k}
+  a_j) c_k` — the retained gain `G` and the composed incentive stack `B` — so
+  a reader who takes the terminal AS a scaled ground reading carries bias
+  `B/G`, and a lossy chain has `|G|<=1` so the rescaling AMPLIFIES: on the
+  shipped directed chain the reader's bias runs 1.11 (N=1) → 5.24 (N=4) →
+  43.97 (N=16), the order's "estimator of the incentive stack, not the
+  ground" made a number. Same-sign offsets compound with N, random offsets
+  cancel (spread only sqrt(N)), so the directed/random ratio grows with the
+  chain (1.0 → 4.60 across N=1..16); at offset magnitude 0 both arms are an
+  exact 0 (`NO_INCENTIVE`), so the classifier is not constant. `composed_bias`
+  is the load-bearing metric, registered in `tools/known_answer.py` with the
+  all-zero-offset exact 0 pinned against the unspecified-gain `None`; a dead
+  hop (`prod a == 0`) returns `GROUND_UNRECOVERABLE` not an infinity.
+  **PRE-ENTRY LOSS** (`preentry_register.py`): the order's seven gates (L0,
+  L0', L1, L1', L2, delegation, form-field) carried in structure, none logged,
+  six conditioning which reports arrive — so arriving reports are a sample
+  past a per-operator threshold, not a sample of machine conditions, and the
+  threshold is unestimated. Then the order's **Test B** on CONSTRUCTED
+  operators: a calibrated world (reporting rate tracks the operator's own
+  (acted on)/(filed) ratio) reads `TRACKS_calibrated`, an independent world
+  reads `DOES_NOT_TRACK`, both reachable — the order's inverted finding
+  (non-reporting as a calibrated estimate, not disengagement) is the TRACKS
+  branch. The **STATED LIMITATION** is built in as a refusal:
+  delegation-as-null makes the per-operator prior unestimable for the
+  operators it matters most for, so an undeclared proxy-filed count returns
+  `UNESTIMABLE_PROXY_UNDECLARED`; `delegation_corruption` makes the cost a
+  number, declared-and-excluded staying calibrated (rho ~0.999) while pooling
+  proxy-filers as zero-reporters pulls the correlation down (rho ~0.56) and
+  flips the verdict. `spearman` is imported from `readout-count`, not
+  restated. Nothing here is a measurement: the chains and operators are
+  constructed and seeded, and the order's Tests A/C/D/E and the real Test B
+  (operators, a plant's CMMS, published ecology) are NOT_RUN — the first four
+  need access this session lacks, the ecology corpus is egress-blocked. Both
+  renders screen clean through `no_severity` with no exemption; both modules
+  refuse `--selftest`. Ten `RCL_*` claims; check count printed by
+  `python3 reporting-chain-loss/test_hop.py`. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
+- `chain-position/` — WO-1, delivered verbatim and built to: can an agent
+  executing inside a sandbox determine it is a step in a chain whose other
+  steps it cannot observe. The quantity is CHAIN POSITION, not task content —
+  content is locally valid by construction, so compliance is what renders the
+  chain invisible. No vendor internals are used or sought and no mitigation is
+  specified (the order withholds the mitigation side until it exists).
+  **`chain_position.py`, the measurand:** the order's runnable step 1 made
+  decidable — `clause_audit` classifies each carried OWASP ACS clause by WHERE
+  the observability sits, all five sit at the GATEWAY, so **0 place
+  chain-position information inside the executing agent** and the verdict is
+  `NULL_RESULT_no_clause_places_position_inside`, which is the finding: lineage
+  EXISTS and the container still cannot see it (`CPD_001`). A constructed clause
+  that DOES place position inside flips the verdict, so the zero is not
+  constant, and an out-of-vocabulary locus reads `UNDECLARED` rather than
+  raising (`[CHOICE 1]`). The two horns are reported with their failure modes
+  and neither selected — Horn A `RELOCATES` (the outside thing is itself a
+  container with its own local correctness) and Horn B `EVIDENCE_ABSENT`
+  (`CPD_002`) — and `evidence_check` over a locally-correct container returns
+  `EVIDENCE_ABSENT`, names the cross-boundary observation it would need, and
+  answers `EVIDENCE_PRESENT` once a whole-chain manifest is handed in, so **the
+  absence is the container's, not the check's** (`CPD_003`). **`load_class.py`,
+  the load-bearing criterion made numbers:** the reachable controller is a
+  CONJUNCTION of seven assumed stabilities and `stability_product` composes them
+  as `∏(1−p)`, the order's illustrative discontinuities (1/2/3/4 percent) giving
+  **0.90345024**, so from four factors alone the controller is absent about 9.65
+  percent of the time (`CPD_004`); the order's RULE — where a factor is
+  unassessed, engineer as NOT stable — is built in as a refusal, an unassessed
+  `None` returning `UNPROPAGATABLE`, a zero multiplying through, an out-of-range
+  factor `MALFORMED`, three distinct states with the `None`-vs-zero split pinned
+  in the registry (`CPD_005`), and `stability_product` is registered in
+  `tools/known_answer.py`. `redundancy_adjudicability` settles the MECHANISM of
+  the order's own counter-argument — dissimilar redundancy detects a fault only
+  against a verifiable spec, so the discriminator is spec-verifiability, not
+  model diversity (`FAULT_DETECTED` / `NOISE_unadjudicable` /
+  `NO_SIGNAL_agreement`); whether real model families disagree adjudicably is
+  NOT_RUN (`CPD_006`). The engineering-gap register (no factor of safety, no
+  inspectability under load, no ductile failure mode — the chain lets go
+  silently because every container stayed compliant) and the two
+  counter-arguments are carried, both `UNRESOLVED` (`CPD_007`).
+  **`trust_provenance.py`, the second-order gap:** the order's step 2 as a
+  specification with no vendor internals — `PROVENANCE_SPEC` states what a trust
+  ASSIGNMENT must carry to be auditable, the scorer's OWN provenance included,
+  so the recursion (the score is a chained artifact) is the gap; the
+  load-bearing distinction is `UNEXAMINED` (the record does not declare scorer
+  provenance, so whether it is carried cannot be stated) versus `NOT_AUDITABLE`
+  (declared absent, a known negative), collapsing the two would read a silence
+  as a finding (`CPD_008`), and `common_object_exists` returns False so the
+  order's scorer-provenance claim stays UNVERIFIED, plausible not established,
+  as the order tags it (`CPD_009`). What is NOT_RUN — a live clause-by-clause
+  re-read of the standard (egress-blocked), the empirical dissimilar-redundancy
+  test (model access), any statement about a vendor's scorer provenance
+  (no-vendor-internals) — and the order's sharpest open problem, a method by
+  which the tool itself knows when it is crossing the method, when it IS the
+  method, and when it has been handed a binary gate to inspect rather than
+  execute, is stated not solved (`CPD_010`). WO-2..WO-5 are named-and-absent
+  siblings, carried as references. Ten `CPD_*` claims (two `UNVERIFIED`); every
+  module refuses `--selftest` and renders clean through `no_severity` with no
+  exemption; check count printed by `python3 chain-position/test_chain.py`.
+  Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

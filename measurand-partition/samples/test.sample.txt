@@ -1,0 +1,130 @@
+ok    five work orders are in the delivery
+ok    status tags are the delivery's
+ok    the four axes are the order's
+ok    WO-3's seven variables are the order's
+ok    WO-3's three statuses are the order's
+ok    WO-5's five capacities are the order's
+ok    the common structure names four populations
+ok    the 4x4 pair and the ~40% are the order's
+ok    all four delivered populations read UNPARTITIONED
+ok    an empty unmeasured set reads PARTITIONED
+ok    an unenumerated set reads NOT_EVALUABLE, not PARTITIONED
+ok    residual assigned off the observed thing reads ASSIGNED_ELSEWHERE
+ok    attribution refuses an absent field
+ok    every ATTRIBUTION member is reachable
+ok    an axis MEASURED with no instrument is refused [CHOICE 1]
+ok    an axis not entered at all is refused (absent is not UNMEASURED)
+ok    a non-bool interaction flag is refused
+ok    residual is NOT_SEPARABLE naming every unmeasured axis and the interaction
+ok    residual is a candidate only with all four axes and the interaction entered
+ok    the residual candidate carries the raw score and says its size is not shown non-zero
+ok    two-setting arm: one moved label of two establishes a floor of 0.50
+ok    single-setting individuals are UNBOUNDED, out of the denominator [CHOICE 2]
+ok    with no individual labelled twice the arm is NOT_RUN, floor None not 0
+ok    two settings, no movement: NO_CASE_FOUND at floor 0, stated as not established above it
+ok    WO-1 has no axis-to-performance model: residual() never subtracts
+ok    THE MEASUREMENT FAULT: band-low, band-high and flat-low return one point read
+ok    the sweep separates them: BAND_LOCATED x2 (opposite sides), NOT_REGISTERED
+ok    standard point sits ABOVE_CEILING for band-low and BELOW_FLOOR for band-high
+ok    floor, ceiling, width are read off the curve
+ok    a curve still registering at the top is CEILING_NOT_REACHED, ceiling None
+ok    fewer than three levels is NOT_ESTIMABLE [CHOICE 2]
+ok    a level not swept reads NOT_SWEPT, not interpolated
+ok    read_curve refuses a level swept twice and a performance outside [0,1]
+ok    every band state and every position is reached by the demo or a fixture
+ok    academy-as-described grades 0.40: two HELD of five controllable, ADVISED_ON counted apart
+ok    ADVISED_ON never enters the gradient as a fraction [CHOICE 1]
+ok    an undeclared variable makes the gradient NOT_COMPUTABLE, naming it
+ok    a variable absent from the record is UNDECLARED, never NOT_TOUCHED
+ok    a variable outside the manifest is refused
+ok    WO-3b is NOT_EVALUABLE with no program carrying a measured accuracy [CHOICE 2]
+ok    WO-3b trend RISES and FALLS on constructed programs; not constant
+ok    WO-3b at one gradient is NOT_EVALUABLE (no trend)
+ok    WO-3c ceiling is UNDECLARED while any not-controllable share is
+ok    WO-3c ceiling = 1 - 0.25 - 0.15 = 0.60 on declared shares [CHOICE 3]
+ok    a reported 0.60 reads as 1.00 of achievable against that ceiling, None against UNDECLARED
+ok    shares summing past 1 are refused
+ok    the 6.3 h figure appears in the render and in no computation
+ok    4x4: (3.5/4)^4 = 0.5862, the order's ~40% (41.4%) holds
+ok    depth only: (3.5/4)^3 = 0.670; the fourth power needs the width
+ok    strength ratio on the 4x4 is the cube, 0.670, not the stiffness 0.586
+ok    the arithmetic names stiffness and the test measures strength; flagged
+ok    2x4 keeps 0.502 of a full 2x4: the square case understates the general one
+ok    a non-positive dimension is None, never 0 or 1
+ok    stiffness_ratio is registered in tools/known_answer.py
+ok    the table's linear reduction on the 4x4 is 12.5%
+ok    one matched stratum, one unmatched; the valley records enter no comparison
+ok    four arms, two per population, computed apart
+ok    maintenance UNKNOWN is excluded and counted
+ok    pooled() refuses, naming the split
+ok    REMOVED is censoring: t-04 removed at 82 leaves the maintained curve at 1.0 [CHOICE 2]
+ok    FAILED is the event: the transmitted neglected arm falls to 0.5 by 150
+ok    kaplan_meier over nothing is None, never a flat 1.0
+ok    a structure with no construction year is refused
+ok    FAILED without an event year, and observed before built, are refused
+ok    a maintenance-conditional claim reads against the maintained arm only, declared not parsed
+ok    an unconditional claim reads against both arms
+ok    PODIUM: 2 succeed, 3 fail, 3 untrained peers not on the scale
+ok    LEARNED: deselected AHEAD on 4 of 5, TIE on the released-for capacity
+ok    MANUFACTURED: the three PODIUM failures are the manufactured category
+ok    LEARNED is NOT_COMPUTABLE without untrained peers, manufactured None not 0
+ok    BEHIND is reachable: a cohort where the deselected trail its peers
+ok    a DESELECTED athlete must name the released-for capacity or UNDECLARED
+ok    released_for on a non-deselected athlete is refused
+ok    import line: an undeclared measurand is refused, PODIUM is never a default
+ok    the WO-5 render says the demo is a known-answer run on the scorer
+ok    common render screens clean through no_severity, no exemption
+ok    wo1 render screens clean through no_severity, no exemption
+ok    wo1 render prints every [CHOICE n]
+ok    wo1 render marks its data CONSTRUCTED or nothing measured
+ok    wo2 render screens clean through no_severity, no exemption
+ok    wo2 render prints every [CHOICE n]
+ok    wo2 render marks its data CONSTRUCTED or nothing measured
+ok    wo3 render screens clean through no_severity, no exemption
+ok    wo3 render prints every [CHOICE n]
+ok    wo3 render marks its data CONSTRUCTED or nothing measured
+ok    wo4a render screens clean through no_severity, no exemption
+ok    wo4a render prints every [CHOICE n]
+ok    wo4a render marks its data CONSTRUCTED or nothing measured
+ok    wo4b render screens clean through no_severity, no exemption
+ok    wo4b render prints every [CHOICE n]
+ok    wo4b render marks its data CONSTRUCTED or nothing measured
+ok    wo5 render screens clean through no_severity, no exemption
+ok    wo5 render prints every [CHOICE n]
+ok    wo5 render marks its data CONSTRUCTED or nothing measured
+ok    the screen fires on a planted word
+ok    common.py refuses --selftest with exit 2
+ok    common.py bare invocation renders and exits 0
+ok    wo1_partition.py refuses --selftest with exit 2
+ok    wo1_partition.py bare invocation renders and exits 0
+ok    wo2_band_sweep.py refuses --selftest with exit 2
+ok    wo2_band_sweep.py bare invocation renders and exits 0
+ok    wo3_control_manifest.py refuses --selftest with exit 2
+ok    wo3_control_manifest.py bare invocation renders and exits 0
+ok    wo4_lumber.py refuses --selftest with exit 2
+ok    wo4_lumber.py bare invocation renders and exits 0
+ok    wo4_survival.py refuses --selftest with exit 2
+ok    wo4_survival.py bare invocation renders and exits 0
+ok    wo5_deselection.py refuses --selftest with exit 2
+ok    wo5_deselection.py bare invocation renders and exits 0
+ok    common.py is ASCII
+ok    common.py parses under 3.9
+ok    wo1_partition.py is ASCII
+ok    wo1_partition.py parses under 3.9
+ok    wo2_band_sweep.py is ASCII
+ok    wo2_band_sweep.py parses under 3.9
+ok    wo3_control_manifest.py is ASCII
+ok    wo3_control_manifest.py parses under 3.9
+ok    wo4_lumber.py is ASCII
+ok    wo4_lumber.py parses under 3.9
+ok    wo4_survival.py is ASCII
+ok    wo4_survival.py parses under 3.9
+ok    wo5_deselection.py is ASCII
+ok    wo5_deselection.py parses under 3.9
+ok    test_partition.py is ASCII
+ok    test_partition.py parses under 3.9
+ok    README carries no author or working-style section
+ok    README states that everything constructed is PROPOSED
+ok    no module names any real person, program, county or product
+
+checks: 128   failed: 0

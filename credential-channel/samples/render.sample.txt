@@ -1,0 +1,31 @@
+WO-10  CREDENTIAL CHANNEL, five instruments   (data CONSTRUCTED, PROPOSED; no plant read)
+------------------------------------------------------------------------
+I-1  format gate   [CHOICE 1]
+    route A (written) rho -0.338  route B (demonstrate) rho 0.958 -> the gate is uncorrelated or inverse; demonstrate outperforms
+    objection: junior  engage share 0.800 (n 10)   [CHOICE 2]
+    objection: senior  engage share 0.300 (n 10)   [CHOICE 2]
+
+I-2  routing-cost join   [CHOICE 3,4]
+    4 events, 2 routed off-authorisation; cost attributable to routing 1200 (mean per routed 600)
+
+I-3  confidence-accuracy gap vs exposure   [CHOICE 5]
+    exposure coef -0.0206  r2 0.954 -> gap widens downward with exposure (coef < 0)
+
+I-4  inventory score vs exposure   [CHOICE 5]
+    exposure coef +0.0474  r2 0.704 -> the inventory is partly measuring history, not disposition (score tracks exposure)
+
+I-5  attribution mismatch by credited level   [CHOICE 6]
+    level 1  mismatch rate 0.000 (n 14)
+    level 2  mismatch rate 0.529 (n 17)
+    level 3  mismatch rate 0.733 (n 15)
+    level 4  mismatch rate 1.000 (n 2)
+    level 5  mismatch rate 1.000 (n 2)
+    upward share of mismatches 1.000 -- a downstream statistic on these reports measures REPORTING POSITION, not competence
+
+carried: Combine-Cognitive-Architecture (not in this tree, overlay not attributed); the specialisation assumption (NOT YET RUNNABLE, requires a measurand)
+[CHOICE 1] I-1 ranks each route's selection score against later performance with Spearman rho; the gate is uncorrelated or inverse iff route A (written) rho is at or below zero while route B (demonstrate) is positive
+[CHOICE 2] I-1's methodology-objection coding is ENGAGE vs CITE_PRIOR_USAGE from a declared response field; the ratio is reported by speaker status, not adjudicated
+[CHOICE 3] I-2 attributes to ROUTING the external cost plus the downtime cost of any event whose actual resolver differs from the authorised one AND whose resolution content is cheap; a procedure change is NOT modelled as the cause
+[CHOICE 4] I-2's downtime cost is downtime hours times a stipulated 150/hour
+[CHOICE 5] I-3 and I-4 regress the gap (or the inventory score) on years of exposure with ols; the sign of the exposure coefficient is the readout, the downward direction being negative
+[CHOICE 6] I-5 reports attribution error rate by hierarchy level from ground truth against reported credit; a level with no events is None

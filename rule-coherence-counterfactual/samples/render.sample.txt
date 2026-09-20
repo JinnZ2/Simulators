@@ -1,0 +1,22 @@
+WO-7  RULE COHERENCE vs RESTRICTIVENESS   (data CONSTRUCTED, PROPOSED; no model run)
+------------------------------------------------------------------------
+A1  four-branch classifier over declared worlds   [CHOICE 1-4]
+    world 'incoherence'   -> TRACKS_INCOHERENCE       inc_p 0.000  restr_slope -0.021
+    world 'restrictiveness' -> TRACKS_RESTRICTIVENESS   inc_p 0.593  restr_slope 0.536
+    world 'both'          -> TRACKS_BOTH              inc_p 0.000  restr_slope 0.536
+    world 'neither'       -> SEPARATES_NEITHER        inc_p 0.593  restr_slope -0.021
+    unmatched pair -> VOID_RESTRICTIVENESS_UNMATCHED (gap 0.30 > tol 0.05)
+
+A2b  record-field audit   [CHOICE 5]
+    n 7  condition-bearing 2  act-only 5 (of which coded empty 2)  share 0.286 -> act-only dominates
+
+A3  observer divergence, label cost   [CHOICE 6]
+    plain reasoning share 0.667 (n 18)  labelled 0.167 (n 18)  label cost +0.500
+
+the three arms share a structure and are NOT claimed to share a mechanism; run separately
+[CHOICE 1] restrictiveness is 1 - |permitted options| / |unconstrained options|, declared before any run and applied identically to both arms; a pair whose restrictiveness differs by more than TOL is VOID
+[CHOICE 2] restrictiveness match tolerance TOL = 0.05
+[CHOICE 3] a contrast is real iff its observed effect clears the 95th percentile of a label-permutation null (2000 shuffles, seed 20260918)
+[CHOICE 4] the incoherence contrast is A-arm rate minus B-arm rate; the restrictiveness contrast is the slope of rate on restrictiveness within one coherence class
+[CHOICE 5] A2b codes a record as CONDITION-bearing iff it carries a non-empty condition field; an act-only record and a record missing the field are the same for the count and both are distinguished from a coded empty
+[CHOICE 6] A3 reads BEHAVIOUR-reproduced vs PRINCIPLE-recomputed from a declared response field; a run with neither is NOT_EVALUABLE, not behaviour

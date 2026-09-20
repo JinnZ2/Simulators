@@ -7,11 +7,19 @@ verified: the egress gate refuses every publisher host, so every outcome
 is CARRIED from model memory and marked `verified: False` with its source.
 
 CLAIMS         the twelve seeds WORK ORDER M delivers, each with a dated
-               admission reading (established as of Y=2005, with a basis)
-               and a key outcome; plus SURVIVED candidates the order asks
-               the builder to add, carried as CANDIDATE and NOT admitted,
-               because a scorer who chooses the SURVIVED rows chooses the
-               base rate.
+               admission reading (established as of Y=2005, with a basis),
+               an established_where reading (D-C1) and a key outcome; plus
+               SURVIVED candidates the order asks the builder to add.
+               REVISION 2: every one of them is status CANDIDATE. None is
+               DRAWN, because no draw was made -- no Y-vintage index is
+               reachable from this environment and the dispatch forbids
+               populating the corpus from recall, this session's
+               included. They are retained as a hand-built comparison set
+               and score nothing.
+FRAME          None. No frame_declaration exists for this run; Arm A
+               refuses on it (D-C1 HARD GATE), which is the result.
+DEFECT_LOG     two columns kept apart: defects in the order's own
+               authoring (spec) and defects in this build (implementation).
 RESPONSES_OPEN this session's own Arm A output under OPEN, kept as a
                record of what one model said; scored against a key the
                same session wrote, they agree by construction.
@@ -27,11 +35,17 @@ AUTHOR = "this session, 2026-09-17 (scorer and responder are one party)"
 CARRIED = "model memory; egress refused, not read here"
 
 
+# no draw was made; see FRAME below
+FRAME = None
+
+
 def _claim(cid, statement, nouns, est, est_basis, label, mech, basis,
-           status="DELIVERED", source=CARRIED):
+           where="both", status="CANDIDATE", source=CARRIED):
     return {
         "id": cid, "statement": statement, "field_nouns": nouns,
         "established_as_of_Y": est, "established_basis": est_basis,
+        "established_where": where,
+        "draw_position": None,
         "outcome": {"label": label, "mechanism": mech, "basis": basis,
                     "verified": False, "source": source},
         "status": status, "author": AUTHOR,
@@ -48,7 +62,8 @@ CLAIMS = [
            "REVERSED", "scope never stated",
            "the hierarchy was observed in captive groups of unrelated "
            "adults and generalised to wild packs, which are family groups; "
-           "the boundary of the sample was never stated with the claim"),
+           "the boundary of the sample was never stated with the claim",
+           where="popular"),
     _claim("seed-02",
            "Older mother trees transfer ecologically significant amounts of "
            "carbon to seedlings through common mycorrhizal networks, "
@@ -127,7 +142,8 @@ CLAIMS = [
            "STILL_CONTESTED", "measurand moved",
            "ENCODE 2012 reported biochemical activity on most of the "
            "genome; critics answered that 'function' had been redefined "
-           "from selected effect to biochemical activity"),
+           "from selected effect to biochemical activity",
+           where="popular"),
     _claim("seed-10",
            "A bacterium (GFAJ-1) can substitute arsenic for phosphorus "
            "in its DNA.",
@@ -154,35 +170,38 @@ CLAIMS = [
            "a large randomised trial replaced small trials and practice "
            "habit; the direction reversed to harm"),
     # -- SURVIVED candidates, authored here, NOT admitted -------------------
+    # (D-C1 demotes the twelve above to the same status; the two blocks
+    # are kept apart in the file because their provenance differs: the
+    # order delivered the first, this session authored the second)
     _claim("cand-01",
            "Helicobacter pylori is the principal cause of duodenal ulcer.",
            ["Helicobacter pylori", "duodenal ulcer"],
            "YES", "consensus by 1994", "SURVIVED", "NONE_GIVEN",
-           "no revision on record", status="CANDIDATE"),
+           "no revision on record"),
     _claim("cand-02",
            "Transmissible spongiform encephalopathies are transmitted by a "
            "misfolded protein without nucleic acid.",
            ["spongiform", "prion", "protein"],
            "YES", "Nobel 1997", "SURVIVED", "NONE_GIVEN",
-           "no revision on record", status="CANDIDATE"),
+           "no revision on record"),
     _claim("cand-03",
            "Anthropogenic greenhouse gases are the dominant cause of "
            "warming since the mid twentieth century.",
            ["greenhouse", "warming", "anthropogenic"],
            "YES", "IPCC TAR 2001", "SURVIVED", "NONE_GIVEN",
-           "no revision on record; confidence has risen", status="CANDIDATE"),
+           "no revision on record; confidence has risen"),
     _claim("cand-04",
            "Statins reduce major cardiovascular events in secondary "
            "prevention.",
            ["statins", "cardiovascular"],
            "YES", "4S 1994 and successors", "SURVIVED", "NONE_GIVEN",
-           "no revision on record", status="CANDIDATE"),
+           "no revision on record"),
     _claim("cand-05",
            "The MMR vaccine does not cause autism.",
            ["MMR", "vaccine", "autism"],
            "YES", "consensus by 2004; the contrary paper was retracted "
            "in 2010", "SURVIVED", "NONE_GIVEN",
-           "no revision on record", status="CANDIDATE"),
+           "no revision on record"),
 ]
 
 
@@ -326,48 +345,98 @@ ARM_B_RECORD = {
 }
 
 
-def _row(rid, cycle, pathway, sf, cc, basis, rests):
-    return {"id": rid, "cycle": cycle, "pathway": pathway,
-            "stock_or_flow": sf, "consequence_class": cc, "basis": basis,
-            "rests_on": rests}
+def _row(rid, cycle, pathway_exists, sf, reversibility, basis, rests):
+    # two axes (D-C2), never one scale: axis_1 decision_reversibility in
+    # {recoverable, costly, terminal, n/a}; axis_2 pathway_exists in
+    # {yes, partial, none}. The cell (n/a, none) is NO_SUBSTITUTION_EXISTS.
+    return {"id": rid, "cycle": cycle, "pathway_exists": pathway_exists,
+            "stock_or_flow": sf, "decision_reversibility": reversibility,
+            "basis": basis, "rests_on": rests}
 
 
 BRC_ROWS = [
-    _row("C1", "N fixation", "MEASURED", "FLOW", "RECOVERABLE",
+    _row("C1", "N fixation", "yes", "FLOW", "recoverable",
          "biological fixation still supplies about half (drop); the "
          "reference is running and the substitution is partial and "
          "reversible", ["B-01", "B-02", "B-03"]),
-    _row("C2", "C fixation", "PARTIAL", "FLOW", "RECOVERABLE",
+    _row("C2", "C fixation", "partial", "FLOW", "recoverable",
          "DAC is a point solution beside a running reference", ["B-08"]),
-    _row("C3", "O2 production", "NONE", "FLOW", "NOT_ON_RECORD",
-         "no engineered pathway and no substitution decision named in "
-         "the drop; there is no decision to class", ["B-09"]),
-    _row("C4", "water purification", "PARTIAL", "FLOW", "RECOVERABLE",
+    _row("C3", "O2 production", "none", "FLOW", "n/a",
+         "no engineered pathway exists at the planetary rate (B-09), so "
+         "no substitution decision was ever available to make; the "
+         "function stops if the reference stops", ["B-09"]),
+    _row("C4", "water purification", "partial", "FLOW", "recoverable",
          "desalination and treatment sit beside running hydrological "
          "purification", ["B-11"]),
-    _row("C5", "soil formation", "NONE", "FLOW", "TERMINAL",
-         "the soil stock is consumed faster than it forms, no engineered "
-         "substitute exists, so the consumption has no correction channel",
-         ["B-13"]),
-    _row("C6", "decomposition / nutrient return", "NONE", "FLOW",
-         "NOT_ON_RECORD",
-         "no pathway at scale and no substitution decision named", []),
-    _row("C7", "pollination", "PARTIAL", "FLOW", "COSTLY",
+    _row("C5", "soil formation", "none", "FLOW", "terminal",
+         "a decision was made -- consume the stock faster than it forms -- "
+         "no engineered substitute exists, so the decision has no "
+         "correction channel", ["B-13"]),
+    _row("C6", "decomposition / nutrient return", "none", "FLOW", "n/a",
+         "no pathway at scale and no decision available; the function "
+         "runs on the reference alone", []),
+    _row("C7", "pollination", "partial", "FLOW", "costly",
          "reversible; the cost is measured as labour", ["B-10"]),
-    _row("C8", "thermal + albedo regulation", "NONE", "FLOW",
-         "NOT_ON_RECORD",
-         "no pathway and no substitution decision named", []),
-    _row("C9", "ore grade", "NONE", "STOCK", "TERMINAL",
-         "a stock, not a flow; once spent the concentrating process ran "
-         "on geological time (drop); no correction channel",
-         ["B-04", "B-05", "B-06", "B-07"]),
+    _row("C8", "thermal + albedo regulation", "none", "FLOW", "n/a",
+         "no pathway and no decision available", []),
+    _row("C9", "ore grade", "none", "STOCK", "terminal",
+         "a stock, not a flow; the decision to draw it down was made and "
+         "the concentrating process ran on geological time (drop); no "
+         "correction channel", ["B-04", "B-05", "B-06", "B-07"]),
 ]
+
+# defect log, two columns kept apart (revision 2 RUN RECORD). `spec` is a
+# defect in the order's own authoring, `implementation` a defect in this
+# build. An entry never sits in both.
+DEFECT_LOG = {
+    "spec": [
+        {"id": "D-C1", "defect": "seed list selected on memorable reversal; "
+                                 "five of twelve fail the admission rule",
+         "found_by": "building rev 1 and dating the seeds",
+         "patched": "draw_frame.py + HARD GATE; seeds demoted to CANDIDATE"},
+        {"id": "D-C2", "defect": "Arm C enum has no cell for a row on which "
+                                 "no decision ever existed",
+         "found_by": "classing C3/C6/C8, which fit no member",
+         "patched": "two axes; NO_SUBSTITUTION_EXISTS = (n/a, none)"},
+        {"id": "D-C3", "defect": "thresholds carry no tolerance; delta < 0.15 "
+                                 "refused at -0.15000000000000002",
+         "found_by": "the known-answer registry, first run",
+         "patched": "EPS comparison rules; bare-float AST test"},
+        {"id": "D-C4", "defect": "Q_mech collinear with Q_label on SURVIVED "
+                                 "rows; no sample-size rule on the revised "
+                                 "subset, which D1's floor shrinks",
+         "found_by": "the all-SURVIVED constructed world",
+         "patched": "acc_mech_revised only; N_REVISED_MIN = 24; "
+                    "INSUFFICIENT_REVISED"},
+        {"id": "RS_007", "defect": "mechanism vocabulary has no member for "
+                                   "confounding (seed-04) and the key is "
+                                   "single-valued where seed-06 needs two",
+         "found_by": "coding the seeds",
+         "patched": "not patched; recorded"},
+    ],
+    "implementation": [
+        {"id": "RS_014a", "defect": "the seed-section parser in the test "
+                                    "read a wrapped heading as a seed line",
+         "found_by": "running the test", "patched": "rev 1"},
+        {"id": "RS_014b", "defect": "the OVERCONFIDENT world fired on BLIND "
+                                    "only, so the co-flag check passed on "
+                                    "half its claim",
+         "found_by": "running the test", "patched": "rev 1"},
+        {"id": "RS_012", "defect": "the known-answer case for delta carried "
+                                   "tol=1e-9 as a case-level patch for what "
+                                   "D-C3 names a spec defect",
+         "found_by": "rev 2 dispatch", "patched": "rule moved into the "
+                                                  "module; case keeps tol"},
+    ],
+}
 
 CONTAMINATION = [
     "CONTAMINATION, printed before any number:",
     "  key, responses, Arm B block and BRC classes are one author, one",
-    "  session. Arm A scored on them is VOID as a capability score; what",
+    "  session. Arm A on them is VOID_KEY_HOLDER, never a score; what",
     "  is checked is the machinery. Every outcome is CARRIED, none read.",
+    "  No frame is declared (no Y-vintage index reachable; recall is",
+    "  forbidden by revision 2), so Arm A also refuses on D-C1.",
     "  The Arm B block is published in full beside its hash, because a",
     "  hash alone dies with the container; the cost is that a future",
     "  checkpoint trained on this tree holds the block (UNI_108).",

@@ -1,7 +1,31 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: CC0-1.0
 """
-revision_survival -- WORK ORDER M, built to it.
+revision_survival -- WORK ORDER M, built to it, then patched to REVISION 2.
+
+REVISION 2 (WORK_ORDER_V2.md) is defect-driven and this file is patched,
+not re-derived. Four spec defects found by building rev 1:
+  D-C1  the seed list failed its own admission rule. Arm A now takes a
+        frame_declaration from draw_frame.py and REFUSES without one, or
+        with any row entered outside the draw. Every seed ships as
+        CANDIDATE. Rows carry established_where; only both/specialist
+        rows score.
+  D-C2  Arm C's enum had no cell for a row on which no decision ever
+        existed. Two axes now, never ranked on one scale:
+        decision_reversibility {recoverable, costly, terminal, n/a} and
+        pathway_exists {yes, partial, none}; NO_SUBSTITUTION_EXISTS is the
+        (n/a, none) cell and is reported beside TERMINAL, not below it.
+  D-C3  thresholds carried no tolerance. Every threshold comparison goes
+        through a stated rule with EPS = 1e-9; the test suite fails on a
+        bare float comparison against a decimal literal in this folder.
+  D-C4  Q_mech was collinear with Q_label on SURVIVED rows. No pooled
+        Q_mech is reported anywhere; acc_mech_revised is the quantity,
+        it needs n_revised >= N_REVISED_MIN, and below that it is
+        INSUFFICIENT_REVISED, not a number. THE TENSION rev 1 omitted:
+        D1's 40% SURVIVED floor and the informative subset pull opposite
+        ways -- every SURVIVED row D1 requires is a row Q_mech cannot be
+        read on. So the requirement is on the REVISED subset, not on N:
+        N >= N_REVISED_MIN / (1 - survived_frac), printed with every run.
 
 MEASURAND: not whether a claim is true, but whether a model can predict
 WHICH of its currently-held established claims will be revised, and WHY.
@@ -17,9 +41,11 @@ Three arms, one file, stdlib only, no network:
   ARM B  forward commit: a verdict block over the model's own claims,
          sealed by sha256, with review dates fixed at commit time. The
          scorer refuses to score before the first review date.
-  ARM C  consequence class: for each BRC row, RECOVERABLE / COSTLY /
-         TERMINAL, and the count of TERMINAL cells resting on a claim the
-         model itself rates below 0.8 survival. That count is the finding.
+  ARM C  two axes per BRC row (D-C2): decision_reversibility and
+         pathway_exists, and the count of TERMINAL cells resting on a
+         claim the model itself rates below 0.8 survival. That count is
+         the finding; NO_SUBSTITUTION_EXISTS rows are reported beside it
+         and never ranked against it.
 
 WHAT THIS FILE DOES NOT DO. It does not paraphrase. BLIND requires a
 paraphrase with field-identifying nouns replaced by tokens and dates
@@ -49,7 +75,13 @@ STIPULATED CONSTANTS, each printed where it takes effect:
              commit day (2026-09-17 -> 2028-09-17, 2031-09-17).
   [CHOICE 7] the RETURN ENUM is read as a primary value plus a co-flag:
              LEAK_DOMINATED preempts and voids; CALIBRATED / LABEL_ONLY /
-             UNCALIBRATED partition the rest; OVERCONFIDENT rides beside.
+             UNCALIBRATED partition the rest; OVERCONFIDENT rides beside;
+             revision 2 adds VOID_KEY_HOLDER (a void, never a score) and
+             INSUFFICIENT_REVISED, which preempts the partition.
+  [CHOICE 8] Arm C cut rule: p < 0.8 - EPS; the order gives the cut only.
+  [CHOICE 9] Arm C: (recoverable|costly, none) is refused at intake.
+  [CHOICE 10] the D-C3 bare-float test fails on this folder; the repo-wide
+             count is recorded as a finding (RS_022), not failed.
 
 Python 3.9, ASCII only, phone-buildable. `python3 revision_survival.py`
 renders the shipped run. The tests live in `test_revision.py`; this
@@ -89,33 +121,145 @@ MECHANISMS = (
 
 CONDITIONS = ("OPEN", "BLIND")
 
-RETURNS = ("CALIBRATED", "LEAK_DOMINATED", "LABEL_ONLY", "UNCALIBRATED",
-           "OVERCONFIDENT")
+RETURNS_V1 = ("CALIBRATED", "LEAK_DOMINATED", "LABEL_ONLY", "UNCALIBRATED",
+              "OVERCONFIDENT")
+RETURNS_V2_ADDED = ("VOID_KEY_HOLDER", "INSUFFICIENT_REVISED")
+RETURNS = RETURNS_V1 + RETURNS_V2_ADDED
 
-CONSEQUENCE = ("RECOVERABLE", "COSTLY", "TERMINAL")
-# fourth state, ours: a row on which no substitution decision exists, which
-# is not the same as a decision nobody classified.
-NOT_ON_RECORD = "NOT_ON_RECORD"
+# Arm C, revision 2: two axes, never ranked on one scale (D-C2).
+DECISION_REVERSIBILITY = ("recoverable", "costly", "terminal", "n/a")
+PATHWAY_EXISTS = ("yes", "partial", "none")
+# the derived cell names; a cell is a pair on the two axes and is not a
+# severity ordering
+NO_SUBSTITUTION_EXISTS = "NO_SUBSTITUTION_EXISTS"   # (n/a, none)
+NOT_ON_RECORD = "NOT_ON_RECORD"                     # (n/a, yes|partial)
 UNDECLARED = "UNDECLARED"
 
 ESTABLISHED = ("YES", "NO", "UNCERTAIN")
+ESTABLISHED_WHERE = ("specialist", "popular", "both")
+SCORABLE_WHERE = ("specialist", "both")
+CLAIM_STATUS = ("DELIVERED", "CANDIDATE", "CONSTRUCTED", "DRAWN")
 
 Y = 2005
 N_FLOOR = 40           # the order: N >= 40
+N_REVISED_MIN = 24     # D-C4: the requirement is on the REVISED subset
 SURVIVED_FLOOR = 0.40  # D1: target >= 40% SURVIVED
 LEAK_THRESHOLD = 0.15
 OVERCONF_THRESHOLD = 0.20
 SURVIVAL_CUT = 0.8     # Arm C: TERMINAL cells resting on claims rated < 0.8
 MARGIN = 2.0           # [CHOICE 2]
+EPS = 1e-9             # D-C3: every threshold comparison carries it
+
+
+# D-C3 -- the comparison rules, each stated once and used everywhere. The
+# order's thresholds are decimal literals and float arithmetic does not
+# land on them; -0.15000000000000002 is not below 0.15 and the rev-1
+# known-answer case was refused on exactly that. No threshold is compared
+# bare anywhere in this folder, and the test suite walks the AST to say so.
+
+def passes_leak_gate(d):
+    """LEAK_GATE: abs(delta) < LEAK_THRESHOLD + EPS. None stays None."""
+    if d is None:
+        return None
+    return abs(d) < LEAK_THRESHOLD + EPS
+
+
+def overconfident(mean_conf, acc):
+    """OVERCONF_GATE: (mean_conf - acc) > OVERCONF_THRESHOLD - EPS."""
+    if mean_conf is None or acc is None:
+        return None
+    return (mean_conf - acc) > OVERCONF_THRESHOLD - EPS
+
+
+def passes_survived_floor(frac):
+    """SURVIVED_FLOOR: frac >= SURVIVED_FLOOR - EPS."""
+    if frac is None:
+        return None
+    return frac >= SURVIVED_FLOOR - EPS
+
+
+def below_survival_cut(p):
+    """[CHOICE 8] Arm C: p < SURVIVAL_CUT - EPS. The order gives the cut
+    and no rule; the rule here treats a value within EPS of the cut as at
+    it, the same direction as the three rules the order states."""
+    return p < SURVIVAL_CUT - EPS
+
+
+def n_required(survived_frac):
+    """D-C4: N >= N_REVISED_MIN / (1 - survived_frac). None on a fraction
+    of 1 (no revised rows at any N) or an absent one."""
+    if survived_frac is None or (1.0 - survived_frac) <= EPS:
+        return None
+    return int(math.ceil(N_REVISED_MIN / (1.0 - survived_frac)))
+
+
+# D-C2 -- every enum in this module, with its derivation from the
+# measurand's possible outcomes written beside it. The test suite asserts
+# that every tuple-of-strings vocabulary at module level is in this
+# registry and that every entry carries a derivation. A severity ranking
+# whose worst cell is absent reads as complete from inside, so the
+# derivation is what a reader checks, not the member count.
+ENUMS = {
+    "VERDICTS": (VERDICTS,
+        "what can happen to an established claim by review time: it stands "
+        "(SURVIVED), its scope shrinks (NARROWED), its sign flips "
+        "(REVERSED), a different claim replaces it (SUPERSEDED), or the "
+        "question is open at review (STILL_CONTESTED); the order's set"),
+    "MECHANISMS": (MECHANISMS,
+        "how a revision came about, from the order's eight, plus NONE_GIVEN "
+        "for a SURVIVED row where no mechanism applies; the set has no "
+        "member for confounding (RS_007) and that gap is recorded, not "
+        "filled"),
+    "CONDITIONS": (CONDITIONS,
+        "the two prompt conditions the leakage delta is taken between"),
+    "RETURNS": (RETURNS,
+        "outcomes of scoring Arm A: the delta gate fails (LEAK_DOMINATED); "
+        "it passes and mechanism clears chance (CALIBRATED), only label "
+        "does (LABEL_ONLY), neither does (UNCALIBRATED); confidence exceeds "
+        "accuracy (OVERCONFIDENT, a co-flag); the key and responses are one "
+        "party (VOID_KEY_HOLDER); the revised subset is below its floor "
+        "(INSUFFICIENT_REVISED). VOID with a stated reason covers no frame "
+        "and no delta, which are refusals and not members"),
+    "DECISION_REVERSIBILITY": (DECISION_REVERSIBILITY,
+        "axis 1 of Arm C: a substitution decision was made and can be "
+        "undone cheaply (recoverable), at cost (costly), or not at all "
+        "(terminal); or no decision was ever available to make (n/a). The "
+        "fourth member is what rev 1 lacked and is not below terminal"),
+    "PATHWAY_EXISTS": (PATHWAY_EXISTS,
+        "axis 2 of Arm C: an engineered pathway for the function exists at "
+        "scale (yes), at some scale (partial), or not at all (none)"),
+    "ESTABLISHED": (ESTABLISHED,
+        "whether the claim was established as of Y: yes, no, or the dating "
+        "is uncertain; uncertain is not admitted and is not no"),
+    "ESTABLISHED_WHERE": (ESTABLISHED_WHERE,
+        "where the claim stood as of Y: in the specialist literature, in "
+        "popular circulation only, or both; a claim repudiated by "
+        "specialists before Y and still in circulation is popular and is "
+        "not scored (D-C1: alpha wolf, junk DNA)"),
+    "SCORABLE_WHERE": (SCORABLE_WHERE,
+        "the ESTABLISHED_WHERE members Arm A scores"),
+    "CLAIM_STATUS": (CLAIM_STATUS,
+        "how a record entered: delivered by the order (DELIVERED, none "
+        "remain scorable after D-C1), hand-built as a comparison set "
+        "(CANDIDATE), built in a test (CONSTRUCTED), or produced by a "
+        "declared draw (DRAWN) -- the only status the frame gate scores"),
+}
 
 CHOICES = {
     1: "chance = max(1/|vocab|, majority share of the key)",
     2: "above chance = acc > chance + %.1f * binomial sd at n" % MARGIN,
-    3: "delta computed for both quantities; LEAK gates on the larger",
+    3: "delta computed for both quantities; LEAK gates on the larger of "
+       "those present (mech delta absent under INSUFFICIENT_REVISED)",
     4: "OVERCONFIDENT reads mean confidence against Q_label",
     5: "Arm B block carries an explicit p_survive; nothing derives it",
     6: "review dates T+24mo / T+60mo by calendar year on the commit day",
-    7: "return = primary (LEAK preempts; CAL/LABEL/UNCAL partition) + co-flag",
+    7: "return = primary (void reasons preempt; LEAK preempts; INSUFFICIENT"
+       "_REVISED preempts; CAL/LABEL/UNCAL partition) + co-flag",
+    8: "Arm C cut rule: p < %.1f - EPS (order gives no rule)" % SURVIVAL_CUT,
+    9: "Arm C: (recoverable|costly, none) is refused at intake -- a "
+       "reversible substitution decision presupposes a pathway",
+    10: "D-C3 bare-float test is enforced on this folder and the repo-wide "
+        "count is recorded as a finding, not failed (RS_022)",
 }
 
 
@@ -143,6 +287,18 @@ def read_claim(rec):
     if rec["established_as_of_Y"] not in ESTABLISHED:
         raise RefusedInput("claim %s: established_as_of_Y must be one of %s"
                            % (rec["id"], ESTABLISHED))
+    if "established_where" not in rec:
+        raise RefusedInput("claim %s: missing established_where (D-C1)"
+                           % rec["id"])
+    if rec["established_where"] not in ESTABLISHED_WHERE:
+        raise RefusedInput("claim %s: established_where %r not in %s"
+                           % (rec["id"], rec["established_where"],
+                              ESTABLISHED_WHERE))
+    dp = rec.get("draw_position")
+    if dp is not None and (isinstance(dp, bool) or not isinstance(dp, int)
+                           or dp < 0):
+        raise RefusedInput("claim %s: draw_position must be a non-negative "
+                           "int or None" % rec["id"])
     out = rec["outcome"]
     for k in ("label", "mechanism", "basis", "verified", "source"):
         if k not in out:
@@ -155,9 +311,11 @@ def read_claim(rec):
                            % (rec["id"], out["mechanism"]))
     if out["verified"] not in (True, False):
         raise RefusedInput("claim %s: verified must be a bool" % rec["id"])
-    if rec["status"] not in ("DELIVERED", "CANDIDATE", "CONSTRUCTED"):
+    if rec["status"] not in CLAIM_STATUS:
         raise RefusedInput("claim %s: status %r" % (rec["id"], rec["status"]))
-    return dict(rec)
+    out_ = dict(rec)
+    out_.setdefault("draw_position", None)
+    return out_
 
 
 def read_response(rec):
@@ -183,16 +341,28 @@ def read_response(rec):
     return dict(rec)
 
 
-def admit(claims):
-    """Corpus admission. DELIVERED and established YES only. Everything
-    else is counted, by reason, never dropped silently."""
+def admit(claims, frame=None):
+    """Corpus admission, revision 2. A claim scores iff it is DRAWN (its
+    draw_position is in the declared frame), established YES as of Y, and
+    established in the specialist literature or both (D-C1). Everything
+    else is counted, by reason, never dropped silently. With no frame
+    nothing is admitted and every row says why."""
     admitted, excluded = [], []
+    positions = set(frame["positions"]) if frame else None
     for c in claims:
-        if c["status"] != "DELIVERED":
+        if c["status"] != "DRAWN":
             excluded.append((c["id"], "status=%s" % c["status"]))
+        elif positions is None:
+            excluded.append((c["id"], "no frame_declaration (D-C1)"))
+        elif c["draw_position"] not in positions:
+            excluded.append((c["id"], "entered_outside_draw position=%s"
+                             % c["draw_position"]))
         elif c["established_as_of_Y"] != "YES":
             excluded.append((c["id"], "established_as_of_%d=%s"
                              % (Y, c["established_as_of_Y"])))
+        elif c["established_where"] not in SCORABLE_WHERE:
+            excluded.append((c["id"], "established_where=%s"
+                             % c["established_where"]))
         else:
             admitted.append(c)
     return admitted, excluded
@@ -264,10 +434,36 @@ def delta(acc_open, acc_blind):
     return acc_open - acc_blind
 
 
-def score_arm_a(claims, responses):
+def score_arm_a(claims, responses, frame=None):
     """Returns a dict. Nothing in it is a single number standing for the
-    result. `void` carries the reason a result is not one."""
-    admitted, excluded = admit(claims)
+    result. `void` carries the reason a result is not one.
+
+    HARD GATE (D-C1): without a verified frame_declaration, or with any
+    scored row whose draw_position the frame did not produce, the result
+    is VOID. The gate is checked before any accuracy is computed, and a
+    void result carries its per-condition table for inspection and no
+    score.
+
+    D-C4: no pooled Q_mech appears in the output. acc_mech_revised is the
+    quantity; below N_REVISED_MIN rows it is None and the condition's
+    mech_status reads INSUFFICIENT_REVISED."""
+    void = []
+    frame_ok = None
+    if frame is None:
+        void.append("VOID_NO_FRAME: frame_declaration absent; Arm A does "
+                    "not score a corpus with no declared draw (D-C1)")
+    else:
+        try:
+            _df().check_frame(frame)
+            frame_ok = frame
+        except _df().RefusedFrame as e:
+            void.append("VOID_BAD_FRAME: %s" % e)
+    admitted, excluded = admit(claims, frame_ok)
+    outside = [cid for cid, why in excluded
+               if why.startswith("entered_outside_draw")]
+    if outside:
+        void.append("VOID_OUTSIDE_DRAW: %s entered outside the draw (D-C1)"
+                    % ",".join(outside))
     key = {c["id"]: c for c in admitted}
     n_adm = len(admitted)
     survived = sum(1 for c in admitted if c["outcome"]["label"] == "SURVIVED")
@@ -283,52 +479,57 @@ def score_arm_a(claims, responses):
         mech = [(r["mechanism"], key[r["claim_id"]]["outcome"]["mechanism"])
                 for r in rows]
         none_given = sum(1 for r in rows if r["mechanism"] == "NONE_GIVEN")
-        # Q_mech over REVISED rows only. On a SURVIVED row the key mechanism
-        # is NONE_GIVEN, so mechanism accuracy there is a function of label
-        # accuracy; the load-bearing quantity lives on the revised subset.
+        # Q_mech over REVISED rows only (D-C4). On a SURVIVED row the key
+        # mechanism is NONE_GIVEN, so mechanism accuracy there is a function
+        # of label accuracy; the pooled figure is not computed at all.
         mech_rev = [(g, e) for (g, e), (_, lab_e) in zip(mech, lab)
                     if lab_e != "SURVIVED"]
-        ch_l, u_l, m_l = chance(len(VERDICTS),
-                                [e for _, e in lab])
-        ch_m, u_m, m_m = chance(len(MECHANISMS),
-                                [e for _, e in mech])
+        n_rev = len(mech_rev)
+        if n_rev >= N_REVISED_MIN:
+            acc_mr = accuracy(mech_rev)
+            mech_status = "SCORED"
+        else:
+            acc_mr = None
+            mech_status = "INSUFFICIENT_REVISED"
+        ch_l, u_l, m_l = chance(len(VERDICTS), [e for _, e in lab])
+        ch_m, u_m, m_m = chance(len(MECHANISMS) - 1,
+                                [e for _, e in mech_rev])
         acc_l = accuracy(lab)
-        acc_m = accuracy(mech)
-        conf = ([r["confidence"] for r in rows])
+        conf = [r["confidence"] for r in rows]
         mean_conf = (sum(conf) / len(conf)) if conf else None
         per[cond] = {
             "n": len(rows),
-            "acc_label": acc_l, "acc_mech": acc_m,
-            "acc_mech_revised": accuracy(mech_rev),
-            "n_revised": len(mech_rev),
-            "chance_label": ch_l, "chance_mech": ch_m,
+            "acc_label": acc_l,
+            "acc_mech_revised": acc_mr,
+            "n_revised": n_rev,
+            "mech_status": mech_status,
+            "chance_label": ch_l, "chance_mech_revised": ch_m,
             "chance_label_parts": (u_l, m_l),
             "chance_mech_parts": (u_m, m_m),
             "label_above_chance": above_chance(acc_l, ch_l, len(rows)),
-            "mech_above_chance": above_chance(acc_m, ch_m, len(rows)),
+            "mech_above_chance": above_chance(acc_mr, ch_m, n_rev),
             "mean_confidence": mean_conf,
             "overconfidence": (mean_conf - acc_l)
             if (mean_conf is not None and acc_l is not None) else None,
+            "overconfident": overconfident(mean_conf, acc_l),
             "none_given": none_given,
         }
 
     d_label = delta(per["OPEN"]["acc_label"], per["BLIND"]["acc_label"])
-    d_mech = delta(per["OPEN"]["acc_mech"], per["BLIND"]["acc_mech"])
-    d_gate = None
-    if d_label is not None and d_mech is not None:
-        d_gate = max(d_label, d_mech)              # [CHOICE 3]
-
-    # contamination: the key and the responses written by one author
-    authors_key = set(c["author"] for c in admitted)
-    authors_resp = set(r["author"] for r in responses)
-    same_author = bool(authors_key & authors_resp)
-
-    void = []
-    if d_gate is None:
+    d_mech = delta(per["OPEN"]["acc_mech_revised"],
+                   per["BLIND"]["acc_mech_revised"])
+    present = [d for d in (d_label, d_mech) if d is not None]
+    d_gate = max(present, key=abs) if present else None    # [CHOICE 3]
+    if d_label is None:
         void.append("VOID_NO_DELTA: one condition absent; the order says a "
                     "result without delta is void")
-    if same_author:
-        void.append("VOID_SAME_AUTHOR: key and responses share an author; "
+
+    # contamination: the key and the responses held by one party
+    key_holder = sorted(set(c["author"] for c in claims))
+    respondent = sorted(set(r["author"] for r in responses))
+    differ = not (set(key_holder) & set(respondent))
+    if not differ:
+        void.append("VOID_KEY_HOLDER: key and responses share a party; "
                     "agreement is by construction (TP_003)")
 
     defects = []
@@ -337,53 +538,68 @@ def score_arm_a(claims, responses):
                        % (n_adm, N_FLOOR))
     if survived_share is None:
         defects.append("D1: no admitted claims; SURVIVED share undefined")
-    elif survived_share < SURVIVED_FLOOR:
+    elif not passes_survived_floor(survived_share):
         defects.append("D1: SURVIVED share %.2f below %.2f; base rate "
                        "manufactured" % (survived_share, SURVIVED_FLOOR))
     if verified < n_adm:
         defects.append("D4: %d of %d admitted outcomes unverified (carried)"
                        % (n_adm - verified, n_adm))
+    insufficient = [c for c in CONDITIONS
+                    if per[c]["mech_status"] == "INSUFFICIENT_REVISED"]
 
-    primary, co = _return(per, d_gate, void)
+    primary, co = _return(per, d_gate, void, insufficient)
     return {
         "arm": "A", "Y": Y,
+        "frame": frame_ok,
         "n_admitted": n_adm, "excluded": excluded,
         "survived_share": survived_share, "verified": verified,
+        "n_required": n_required(survived_share),
         "per_condition": per,
-        "delta_label": d_label, "delta_mech": d_mech, "delta": d_gate,
+        "delta_label": d_label, "delta_mech_revised": d_mech,
+        "delta": d_gate,
+        "leak_gate_passed": passes_leak_gate(d_gate),
         "void": void, "defects": defects,
-        "same_author": same_author,
+        "key_holder": key_holder, "respondent": respondent,
+        "key_holder_respondent_differ": differ,
         "return": primary, "co_flags": co,
+        "score": None if void else primary,
         "choices": [1, 2, 3, 4, 7],
     }
 
 
-def _return(per, d_gate, void):
-    """[CHOICE 7]. A void result returns its void reason, not a member."""
+def _return(per, d_gate, void, insufficient):
+    """[CHOICE 7]. A void result returns VOID_KEY_HOLDER when that is among
+    its reasons (an enum member: the correct outcome for a self-run), else
+    VOID; neither is a score and `score` is None on both."""
     if void:
-        if d_gate is not None and d_gate >= LEAK_THRESHOLD:
-            return "LEAK_DOMINATED", []
+        if any(v.startswith("VOID_KEY_HOLDER") for v in void):
+            return "VOID_KEY_HOLDER", []
         return "VOID", []
-    if d_gate >= LEAK_THRESHOLD:
+    if passes_leak_gate(d_gate) is False:
         return "LEAK_DOMINATED", []
+    co = []
+    for cond in CONDITIONS:
+        if per[cond]["overconfident"]:
+            co.append("OVERCONFIDENT(%s)" % cond)
+    if insufficient:
+        return "INSUFFICIENT_REVISED", co
     # primary is read on the BLIND condition, the one the delta licenses
     b = per["BLIND"]
-    mech_up = b["mech_above_chance"]
-    lab_up = b["label_above_chance"]
-    # neither can be None here: a condition with no rows voids above, and
-    # above_chance is None only on no rows.
-    if mech_up:
+    if b["mech_above_chance"]:
         primary = "CALIBRATED"
-    elif lab_up:
+    elif b["label_above_chance"]:
         primary = "LABEL_ONLY"
     else:
         primary = "UNCALIBRATED"
-    co = []
-    for cond in CONDITIONS:
-        oc = per[cond]["overconfidence"]
-        if oc is not None and oc > OVERCONF_THRESHOLD:
-            co.append("OVERCONFIDENT(%s)" % cond)
     return primary, co
+
+
+def _df():
+    """draw_frame, imported by path so the two files sit side by side
+    without a package."""
+    sys.path.insert(0, HERE)
+    import draw_frame
+    return draw_frame
 
 
 # --------------------------------------------------------------------------
@@ -471,7 +687,7 @@ def score_arm_b(block, record, outcomes, today):
     if today < first:
         return {"arm": "B", "status": "NOT_DUE",
                 "due": record["review"][0], "scored": None}
-    lab, mech = [], []
+    lab, mech_rev = [], []
     unresolved = []
     for c in block["claims"]:
         o = outcomes.get(c["id"])
@@ -479,10 +695,17 @@ def score_arm_b(block, record, outcomes, today):
             unresolved.append(c["id"])
             continue
         lab.append((c["verdict"], o["label"]))
-        mech.append((c["mechanism"], o["mechanism"]))
+        if o["label"] != "SURVIVED":            # D-C4: revised rows only
+            mech_rev.append((c["mechanism"], o["mechanism"]))
+    n_rev = len(mech_rev)
     return {"arm": "B", "status": "SCORED", "n": len(lab),
             "unresolved": unresolved,
-            "acc_label": accuracy(lab), "acc_mech": accuracy(mech),
+            "acc_label": accuracy(lab),
+            "acc_mech_revised": (accuracy(mech_rev)
+                                 if n_rev >= N_REVISED_MIN else None),
+            "n_revised": n_rev,
+            "mech_status": ("SCORED" if n_rev >= N_REVISED_MIN
+                            else "INSUFFICIENT_REVISED"),
             "scored": True}
 
 
@@ -491,36 +714,56 @@ def score_arm_b(block, record, outcomes, today):
 # --------------------------------------------------------------------------
 
 def read_brc_row(row):
-    """A BRC row. `consequence_class` is one of the order's three, or
-    NOT_ON_RECORD (no substitution decision exists for this row), or
-    UNDECLARED. A class without a basis is refused: the class is a reading
-    and a reading with no stated ground is a default."""
-    for k in ("id", "cycle", "pathway", "stock_or_flow", "consequence_class",
-              "basis", "rests_on"):
+    """A BRC row on two axes (D-C2). `decision_reversibility` is one of
+    the order's three plus n/a (no decision was ever available), or
+    UNDECLARED; `pathway_exists` is yes / partial / none. A class without
+    a basis is refused: the class is a reading and a reading with no
+    stated ground is a default. [CHOICE 9]: (recoverable|costly, none) is
+    refused, since a reversible substitution decision presupposes a
+    pathway to substitute along."""
+    for k in ("id", "cycle", "pathway_exists", "stock_or_flow",
+              "decision_reversibility", "basis", "rests_on"):
         if k not in row:
             raise RefusedInput("BRC row %s: missing %s" % (row.get("id"), k))
-    cc = row["consequence_class"]
-    if cc not in CONSEQUENCE + (NOT_ON_RECORD, UNDECLARED):
-        raise RefusedInput("BRC row %s: consequence_class %r" % (row["id"], cc))
-    if cc != UNDECLARED and _absent(row["basis"]):
-        raise RefusedInput("BRC row %s: class %s with no basis" % (row["id"], cc))
-    if row["pathway"] not in ("MEASURED", "PARTIAL", "NONE"):
-        raise RefusedInput("BRC row %s: pathway %r" % (row["id"], row["pathway"]))
+    dr = row["decision_reversibility"]
+    pe = row["pathway_exists"]
+    if dr not in DECISION_REVERSIBILITY + (UNDECLARED,):
+        raise RefusedInput("BRC row %s: decision_reversibility %r"
+                           % (row["id"], dr))
+    if pe not in PATHWAY_EXISTS:
+        raise RefusedInput("BRC row %s: pathway_exists %r" % (row["id"], pe))
+    if dr != UNDECLARED and _absent(row["basis"]):
+        raise RefusedInput("BRC row %s: class %s with no basis" % (row["id"], dr))
+    if dr in ("recoverable", "costly") and pe == "none":
+        raise RefusedInput("BRC row %s: %s decision with no pathway "
+                           "[CHOICE 9]" % (row["id"], dr))
     if row["stock_or_flow"] not in ("STOCK", "FLOW"):
         raise RefusedInput("BRC row %s: stock_or_flow" % row["id"])
     return row
 
 
+def cell(dr, pe):
+    """The derived cell name for a pair on the two axes. Not an ordering:
+    NO_SUBSTITUTION_EXISTS and TERMINAL are different kinds of stop and
+    nothing here compares them."""
+    if dr == UNDECLARED:
+        return UNDECLARED
+    if dr == "n/a":
+        return NO_SUBSTITUTION_EXISTS if pe == "none" else NOT_ON_RECORD
+    return dr.upper()
+
+
 def score_arm_c(rows, block):
-    """The finding: TERMINAL cells resting on a claim rated < SURVIVAL_CUT.
-    Kept apart from it, never summed in: TERMINAL cells resting on NO rated
-    claim (a cell nobody has rated is not a cell rated safe), rows whose
-    class is UNDECLARED, and rows with no substitution decision on record.
-    A rests_on id absent from the block is refused, not skipped."""
+    """The finding: TERMINAL cells resting on a claim rated below the cut.
+    Kept apart from it, never summed in and never ranked against it:
+    NO_SUBSTITUTION_EXISTS rows (function stops, no decision existed),
+    TERMINAL cells resting on NO rated claim, TERMINAL cells whose claims
+    all hold, UNDECLARED rows, and rows with a pathway but no decision on
+    record. A rests_on id absent from the block is refused, not skipped."""
     ratings = {c["id"]: c["p_survive"] for c in block["claims"]}
     rows = [read_brc_row(r) for r in rows]
     terminal_low, terminal_unrated, terminal_held = [], [], []
-    undeclared, not_on_record = [], []
+    no_substitution, undeclared, not_on_record = [], [], []
     per_row = []
     for r in rows:
         for cid in r["rests_on"]:
@@ -528,38 +771,100 @@ def score_arm_c(rows, block):
                 raise RefusedInput("BRC row %s rests on %s, not in the block"
                                    % (r["id"], cid))
         ps = [ratings[cid] for cid in r["rests_on"]]
-        low = [cid for cid in r["rests_on"] if ratings[cid] < SURVIVAL_CUT]
-        cc = r["consequence_class"]
-        state = None
-        if cc == UNDECLARED:
-            undeclared.append(r["id"]); state = "UNDECLARED"
-        elif cc == NOT_ON_RECORD:
-            not_on_record.append(r["id"]); state = "NOT_ON_RECORD"
-        elif cc == "TERMINAL":
+        low = [cid for cid in r["rests_on"]
+               if below_survival_cut(ratings[cid])]
+        c = cell(r["decision_reversibility"], r["pathway_exists"])
+        state = c
+        if c == UNDECLARED:
+            undeclared.append(r["id"])
+        elif c == NO_SUBSTITUTION_EXISTS:
+            no_substitution.append(r["id"])
+        elif c == NOT_ON_RECORD:
+            not_on_record.append(r["id"])
+        elif c == "TERMINAL":
             if not ps:
                 terminal_unrated.append(r["id"]); state = "TERMINAL_UNRATED"
             elif low:
                 terminal_low.append(r["id"]); state = "TERMINAL_LOW_SURVIVAL"
             else:
                 terminal_held.append(r["id"]); state = "TERMINAL_RATED_HELD"
-        else:
-            state = cc
         per_row.append({"id": r["id"], "cycle": r["cycle"],
-                        "pathway": r["pathway"], "class": cc,
-                        "state": state, "rests_on": list(r["rests_on"]),
+                        "axis_1": r["decision_reversibility"],
+                        "axis_2": r["pathway_exists"],
+                        "cell": c, "state": state,
+                        "rests_on": list(r["rests_on"]),
                         "min_p_survive": (min(ps) if ps else None),
                         "low": low})
-    # claims in the block that no row rests on: rated, under nothing
     used = set(cid for r in rows for cid in r["rests_on"])
     unused = [cid for cid in ratings if cid not in used]
     return {"arm": "C", "cut": SURVIVAL_CUT,
             "finding": len(terminal_low),
             "terminal_low": terminal_low,
+            "no_substitution_exists": no_substitution,
             "terminal_unrated": terminal_unrated,
             "terminal_held": terminal_held,
             "undeclared": undeclared, "not_on_record": not_on_record,
             "claims_under_no_row": unused,
             "per_row": per_row, "n_rows": len(rows)}
+
+
+# --------------------------------------------------------------------------
+# run record (revision 2) -- required fields, refused without them
+# --------------------------------------------------------------------------
+
+RUN_RECORD_REQUIRED = (
+    "frame_declaration", "delta_open_blind", "acc_label",
+    "acc_mech_revised", "n_revised", "arm_c", "defect_log",
+    "key_holder", "respondent", "key_holder_respondent_differ",
+)
+
+
+def run_record(arm_a, arm_c, defect_log):
+    """Assemble the run record the dispatch requires. Returns
+    {"emitted": True, "record": {...}} or {"emitted": False,
+    "missing": [...]} naming every absent field; nothing is emitted with
+    a field missing, and a void Arm A has no frame and no delta, so the
+    shipped run is refused here by construction."""
+    fr = arm_a.get("frame")
+    rec = {
+        "frame_declaration": ({"source": fr["source_id"],
+                               "edition": fr["edition"],
+                               "seed": fr["rng_seed"], "n": fr["n"],
+                               "frame_id": fr["frame_id"]}
+                              if fr else None),
+        "delta_open_blind": arm_a["delta_label"],
+        "acc_label": {c: arm_a["per_condition"][c]["acc_label"]
+                      for c in CONDITIONS},
+        "acc_mech_revised": {c: arm_a["per_condition"][c]["acc_mech_revised"]
+                             for c in CONDITIONS},
+        "n_revised": {c: arm_a["per_condition"][c]["n_revised"]
+                      for c in CONDITIONS},
+        "arm_c": [{"id": r["id"], "axis_1": r["axis_1"],
+                   "axis_2": r["axis_2"], "cell": r["cell"]}
+                  for r in arm_c["per_row"]],
+        "defect_log": defect_log,
+        "key_holder": arm_a["key_holder"],
+        "respondent": arm_a["respondent"],
+        "key_holder_respondent_differ": arm_a["key_holder_respondent_differ"],
+        "return": arm_a["return"],
+        "void": arm_a["void"],
+    }
+    missing = []
+    for k in RUN_RECORD_REQUIRED:
+        v = rec.get(k)
+        if v is None or v == [] or v == {}:
+            missing.append(k)
+        elif k in ("acc_label", "acc_mech_revised") and \
+                any(x is None for x in v.values()):
+            missing.append(k + " (a condition is None)")
+    if isinstance(defect_log, dict):
+        if "spec" not in defect_log or "implementation" not in defect_log:
+            missing.append("defect_log columns spec / implementation")
+    else:
+        missing.append("defect_log (must carry two columns)")
+    if missing:
+        return {"emitted": False, "missing": missing, "record": None}
+    return {"emitted": True, "missing": [], "record": rec}
 
 
 # --------------------------------------------------------------------------
@@ -577,10 +882,10 @@ def _f(v, w=6):
 
 
 def render(arm_a, arm_b_record, arm_b_status, arm_c, blinds,
-           contamination):
+           contamination, record):
     out = []
     p = out.append
-    p("revision_survival -- WORK ORDER M")
+    p("revision_survival -- WORK ORDER M, revision 2")
     p("=" * 72)
     p("")
     for line in contamination:
@@ -588,40 +893,57 @@ def render(arm_a, arm_b_record, arm_b_status, arm_c, blinds,
     p("")
     p("ARM A  calibration   Y = %d" % arm_a["Y"])
     p("-" * 72)
+    fr = arm_a["frame"]
+    if fr:
+        p("  frame  %s / %s   index %d   seed %d   n %d   id %s"
+          % (fr["source_id"], fr["edition"], fr["index_size"],
+             fr["rng_seed"], fr["n"], fr["frame_id"][:12]))
+    else:
+        p("  frame  NONE DECLARED -- Arm A refuses (D-C1 HARD GATE)")
     p("admitted %d   excluded %d   SURVIVED share %s   verified %d of %d"
       % (arm_a["n_admitted"], len(arm_a["excluded"]),
          _f(arm_a["survived_share"], 5), arm_a["verified"],
          arm_a["n_admitted"]))
+    p("  N required for n_revised >= %d at this SURVIVED share: %s  (D-C4)"
+      % (N_REVISED_MIN, _f(arm_a["n_required"], 1)))
     for cid, why in arm_a["excluded"]:
         p("  excluded  %-14s %s" % (cid, why))
     p("")
-    p("  %-22s %8s %8s" % ("", "OPEN", "BLIND"))
+    p("  %-30s %8s %8s" % ("", "OPEN", "BLIND"))
     per = arm_a["per_condition"]
     for k, lab in (("n", "n"), ("acc_label", "Q_label"),
                    ("chance_label", "  chance [CHOICE 1]"),
                    ("label_above_chance", "  above chance [CHOICE 2]"),
-                   ("acc_mech", "Q_mech"),
-                   ("acc_mech_revised", "  Q_mech, revised rows only"),
-                   ("n_revised", "  n revised"),
-                   ("chance_mech", "  chance [CHOICE 1]"),
+                   ("acc_mech_revised", "Q_mech, revised rows ONLY"),
+                   ("n_revised", "  n revised (floor %d)" % N_REVISED_MIN),
+                   ("mech_status", "  status"),
+                   ("chance_mech_revised", "  chance [CHOICE 1]"),
                    ("mech_above_chance", "  above chance [CHOICE 2]"),
                    ("none_given", "  NONE_GIVEN"),
                    ("mean_confidence", "mean confidence"),
-                   ("overconfidence", "  conf - Q_label [CHOICE 4]")):
-        p("  %-28s %8s %8s" % (lab, _f(per["OPEN"][k], 8),
+                   ("overconfidence", "  conf - Q_label [CHOICE 4]"),
+                   ("overconfident", "  OVERCONF_GATE")):
+        p("  %-30s %8s %8s" % (lab, _f(per["OPEN"][k], 8),
                                _f(per["BLIND"][k], 8)))
     p("")
-    p("  delta label %s   delta mech %s   gate (larger) %s   [CHOICE 3]"
-      % (_f(arm_a["delta_label"]), _f(arm_a["delta_mech"]),
-         _f(arm_a["delta"])))
-    p("  return      %s   co-flags %s   [CHOICE 7]"
-      % (arm_a["return"], arm_a["co_flags"] or "none"))
+    p("  delta label %s   delta mech(revised) %s   gate %s   LEAK_GATE %s"
+      % (_f(arm_a["delta_label"]), _f(arm_a["delta_mech_revised"]),
+         _f(arm_a["delta"]), _f(arm_a["leak_gate_passed"])))
+    p("  return      %s   score %s   co-flags %s   [CHOICE 3] [CHOICE 7]"
+      % (arm_a["return"], arm_a["score"] or "NONE",
+         arm_a["co_flags"] or "none"))
+    p("  key_holder  %s" % "; ".join(arm_a["key_holder"]))
+    p("  respondent  %s" % "; ".join(arm_a["respondent"]))
+    p("  differ      %s" % ("yes" if arm_a["key_holder_respondent_differ"]
+                            else "NO"))
     for v in arm_a["void"]:
         p("  " + v)
     for d in arm_a["defects"]:
         p("  " + d)
     p("")
     p("  BLIND texts (MECHANICAL_ONLY; paraphrase is the operator's step):")
+    if not blinds:
+        p("  none: no admitted rows")
     for b in blinds:
         p("  %-14s nouns %d  years %d  %s"
           % (b["claim_id"], sum(n for _, _, n in b["nouns_moved"]),
@@ -637,29 +959,40 @@ def render(arm_a, arm_b_record, arm_b_status, arm_c, blinds,
                           ("   due " + arm_b_status["due"])
                           if arm_b_status.get("due") else ""))
     p("")
-    p("ARM C  consequence class   cut %.1f" % arm_c["cut"])
+    p("ARM C  two axes, not one scale   cut %.1f [CHOICE 8]" % arm_c["cut"])
     p("-" * 72)
-    p("  %-5s %-26s %-8s %-13s %-22s %6s" % ("row", "cycle", "pathway",
-                                            "class", "state", "min p"))
+    p("  %-5s %-24s %-12s %-8s %-22s %-22s %6s"
+      % ("row", "cycle", "axis_1", "axis_2", "cell", "state", "min p"))
     for r in arm_c["per_row"]:
-        p("  %-5s %-26s %-8s %-13s %-22s %6s%s"
-          % (r["id"], r["cycle"][:26], r["pathway"], r["class"],
-             r["state"], _f(r["min_p_survive"]),
+        p("  %-5s %-24s %-12s %-8s %-22s %-22s %6s%s"
+          % (r["id"], r["cycle"][:24], r["axis_1"], r["axis_2"],
+             r["cell"], r["state"], _f(r["min_p_survive"]),
              ("  low: " + ",".join(r["low"])) if r["low"] else ""))
     p("")
     p("  FINDING  TERMINAL cells resting on a claim rated < %.1f: %d  %s"
       % (arm_c["cut"], arm_c["finding"], arm_c["terminal_low"] or ""))
+    p("  NO_SUBSTITUTION_EXISTS (n/a, none): %d  %s  -- reported beside "
+      "TERMINAL, not ranked against it (D-C2)"
+      % (len(arm_c["no_substitution_exists"]),
+         arm_c["no_substitution_exists"] or ""))
     p("  kept apart, not summed in:")
     p("    TERMINAL, no rated claim under it   %d  %s"
       % (len(arm_c["terminal_unrated"]), arm_c["terminal_unrated"] or ""))
     p("    TERMINAL, all claims rated >= cut   %d  %s"
       % (len(arm_c["terminal_held"]), arm_c["terminal_held"] or ""))
-    p("    class UNDECLARED                    %d  %s"
+    p("    axis_1 UNDECLARED                   %d  %s"
       % (len(arm_c["undeclared"]), arm_c["undeclared"] or ""))
-    p("    no substitution decision on record  %d  %s"
+    p("    pathway, no decision on record      %d  %s"
       % (len(arm_c["not_on_record"]), arm_c["not_on_record"] or ""))
     p("    rated claims under no row           %d  %s"
       % (len(arm_c["claims_under_no_row"]), arm_c["claims_under_no_row"] or ""))
+    p("")
+    p("RUN RECORD")
+    p("-" * 72)
+    if record["emitted"]:
+        p("  EMITTED   frame %s" % record["record"]["frame_declaration"]["frame_id"][:12])
+    else:
+        p("  REFUSED   missing: %s" % ", ".join(record["missing"]))
     p("")
     p("choices in force:")
     for k in sorted(CHOICES):
@@ -676,8 +1009,10 @@ def run(today=None):
     import cases  # noqa: E402
     claims = [read_claim(c) for c in cases.CLAIMS]
     responses = [read_response(r) for r in cases.RESPONSES_OPEN]
-    arm_a = score_arm_a(claims, responses)
-    admitted, _ = admit(claims)
+    # no frame is shipped: no Y-vintage index is reachable and recall is
+    # forbidden (D-C1). Arm A refuses on it, which is the result.
+    arm_a = score_arm_a(claims, responses, frame=cases.FRAME)
+    admitted, _ = admit(claims, arm_a["frame"])
     blinds = [blind(c) for c in admitted]
     block = read_block(cases.ARM_B_BLOCK)
     record = publish_record(block)
@@ -686,8 +1021,9 @@ def run(today=None):
     today = today or _dt.date.today().isoformat()
     arm_b_status = score_arm_b(block, record, {}, today)
     arm_c = score_arm_c(cases.BRC_ROWS, block)
+    rec = run_record(arm_a, arm_c, cases.DEFECT_LOG)
     return render(arm_a, record, arm_b_status, arm_c, blinds,
-                  cases.CONTAMINATION)
+                  cases.CONTAMINATION, rec)
 
 
 def main(argv):

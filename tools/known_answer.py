@@ -713,6 +713,13 @@ EXPECTED_METRICS = (
     "ontology-probe/probe.py::rates",
     "operator-machine-coupling/coupling_separation.py::interaction_fraction",
     "return-path/return_path.py::ratio",
+    "additivity-inheritance/additivity_inheritance.py::interaction_ss",
+    "credential-channel/credential_channel.py::routing_cost",
+    "criterion-externality/criterion_externality.py::expected_rate",
+    "deep-research-correction/check.py::count_relation",
+    "reporting-chain-loss/hop_compose.py::composed_bias",
+    "chain-position/load_class.py::stability_product",
+    "measurand-partition/wo4_lumber.py::stiffness_ratio",
     "revision-survival/revision_survival.py::delta",
     "routing-data-layer/rate_form.py::sustained_excess",
     "shape-spec-audit/shadow_read.py::outline_area",
@@ -733,6 +740,61 @@ def _rs_delta(acc_open, acc_blind):
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     return mod.delta(acc_open, acc_blind)
+
+
+def _cdc_routing_cost(external, downtime_hours):
+    """credential-channel/credential_channel.py::routing_cost, imported.
+    The per-event cost attributable to routing an off-authorisation cheap
+    resolution: external + downtime_hours * 150. A zero-downtime zero-
+    external event is 0, the case a default would mis-price."""
+    import importlib.util
+    path = os.path.join(ROOT, "credential-channel", "credential_channel.py")
+    spec = importlib.util.spec_from_file_location("_cdc", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.routing_cost(external, downtime_hours)
+
+
+def _ai_interaction_ss(a, b, c, d):
+    """additivity-inheritance/additivity_inheritance.py::interaction_ss,
+    imported. The interaction sum of squares of a balanced 2x2 with cell
+    means [[a,b],[c,d]], (a-b-c+d)^2/4. Zero exactly on a purely additive
+    world, which is where a wrong sign hides."""
+    import importlib.util
+    path = os.path.join(ROOT, "additivity-inheritance", "additivity_inheritance.py")
+    spec = importlib.util.spec_from_file_location("_ai", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.interaction_ss(a, b, c, d)
+
+
+def _cex_expected_rate(p, n, beta, q):
+    """criterion-externality/criterion_externality.py::expected_rate,
+    imported. The beta-factor common-cause form in closed form with the
+    criterion applied at probability q. None on an out-of-range input,
+    never 0."""
+    import importlib.util
+    path = os.path.join(ROOT, "criterion-externality", "criterion_externality.py")
+    spec = importlib.util.spec_from_file_location("_cex", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.expected_rate(p, n, beta, q)
+
+
+def _mp_stiffness_ratio(nb, nh, ab, ah):
+    """measurand-partition/wo4_lumber.py::stiffness_ratio, imported. The
+    share of bending stiffness a dimensional substitution keeps,
+    I_actual / I_nominal with I = b h^3 / 12. None on a non-positive
+    dimension, never 0 or 1 by default."""
+    import importlib.util
+    folder = os.path.join(ROOT, "measurand-partition")
+    if folder not in sys.path:
+        sys.path.insert(0, folder)
+    path = os.path.join(folder, "wo4_lumber.py")
+    spec = importlib.util.spec_from_file_location("_mp_lumber", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.stiffness_ratio(nb, nh, ab, ah)
 
 
 def seed():
@@ -1530,7 +1592,145 @@ def _seed_move_set():
         note="the None case is where a default would hide: an OPEN-only "
              "run scored as delta 0.0 would clear the leak gate having "
              "measured nothing")
-
+    register(
+        "credential-channel/credential_channel.py::routing_cost",
+        _cdc_routing_cost,
+        [case("two hours down, no external", (0.0, 2.0), 300.0,
+              "2 * 150 = 300 by hand: the fuse event's routing cost", tol=1e-9),
+         case("one hour plus a 250 call-out", (250.0, 1.0), 400.0,
+              "250 + 150 = 400 by hand", tol=1e-9),
+         case("nothing spent", (0.0, 0.0), 0.0,
+              "0: an instant free resolution costs nothing, the case a "
+              "default hourly would mis-price", tol=1e-9)])
+    register(
+        "additivity-inheritance/additivity_inheritance.py::interaction_ss",
+        _ai_interaction_ss,
+        [case("the demo cells", (10.0, 12.0, 12.0, 20.0), 9.0,
+              "(10-12-12+20)^2/4 = 36/4 = 9 by hand; the interaction an "
+              "additive 2x2 model assigns to its residual", tol=1e-9),
+         case("purely additive world", (10.0, 12.0, 14.0, 16.0), 0.0,
+              "(10-12-14+16) = 0, so 0: no interaction, the case where a "
+              "sign error would still read near zero", tol=1e-9),
+         case("unit interaction", (0.0, 0.0, 0.0, 2.0), 1.0,
+              "(0-0-0+2)^2/4 = 4/4 = 1 by hand", tol=1e-9),
+         case("negative corner", (1.0, 0.0, 0.0, 1.0), 1.0,
+              "(1-0-0+1)^2/4 = 4/4 = 1: the sign of the corner sum is "
+              "squared away, a distinct input from the unit case", tol=1e-9)])
+    register(
+        "criterion-externality/criterion_externality.py::expected_rate",
+        _cex_expected_rate,
+        [case("one party, no common cause", (0.3, 1, 0.0, 1.0), 0.3,
+              "one party detects at p; 0.3 by hand", tol=1e-9),
+         case("two parties independent", (0.5, 2, 0.0, 1.0), 0.75,
+              "1 - (1-0.5)^2 = 0.75: two independent draws", tol=1e-9),
+         case("two parties fully common", (0.5, 2, 1.0, 1.0), 0.5,
+              "beta 1 collapses two parties to one draw; the case where a "
+              "sum of parties would overstate", tol=1e-9),
+         case("half common", (0.5, 2, 0.5, 1.0), 0.625,
+              "0.5*0.5 + 0.5*0.75 = 0.625 by hand", tol=1e-9),
+         case("criterion never applied", (0.5, 2, 0.0, 0.0), 0.0,
+              "q 0 gates everything; 0.0 is a measurement of the gate, "
+              "not a default", tol=1e-9)])
+    register(
+        "measurand-partition/wo4_lumber.py::stiffness_ratio",
+        _mp_stiffness_ratio,
+        [case("4x4 to 3.5x3.5, both dimensions", (4.0, 4.0, 3.5, 3.5),
+              0.5861816406, "(3.5/4)^4 = 0.5861816406 by hand: the order's "
+              "~40% loss; cubic in depth times linear in width",
+              tol=1e-9),
+         case("4x4 depth only, width at nominal", (4.0, 4.0, 4.0, 3.5),
+              0.669921875, "(3.5/4)^3 = 0.669921875 exactly: what 'scales "
+              "with depth' alone gives, a third short of the fourth power",
+              tol=1e-9),
+         case("2x4 to 1.5x3.5", (2.0, 4.0, 1.5, 3.5), 0.5024414062,
+              "0.75 * (3.5/4)^3 = 0.5024414062 by hand: half the full "
+              "section's stiffness, the case the square 4x4 hides",
+              tol=1e-9),
+         case("no substitution", (4.0, 4.0, 4.0, 4.0), 1.0,
+              "identical sections keep everything; 1.0 is a measurement "
+              "here, not a default"),
+         case("zero nominal is None", (0.0, 4.0, 3.5, 3.5), None,
+              "no nominal section is no ratio; a 0 or 1 here would read a "
+              "malformed record as a substitution result")],
+        note="the depth-only case is where the order's mechanism sentence "
+             "and its number come apart; the None case is where a default "
+             "would hide")
+    register(
+        "deep-research-correction/check.py::count_relation",
+        _drc_count_relation,
+        [case("63 nested in 157, total 220", (63, 157, 220), "DISJOINT",
+              "63 + 157 = 220, so the stated total counts them as "
+              "non-overlapping -- the table's reading"),
+         case("63 nested in 157, total 157", (63, 157, 157), "NESTED",
+              "the total equals the outer with the inner smaller, so the "
+              "63 are inside the 157 -- the text's reading; both cannot "
+              "hold, which is C-2"),
+         case("neither sum nor outer", (63, 157, 300), "NEITHER",
+              "300 is neither the sum nor the outer; a total that names no "
+              "relation is NEITHER, not silently one of the two"),
+         case("equal parts are not nested", (100, 100, 100), "NEITHER",
+              "stated_total==outer fires but inner<outer is false, and the "
+              "sum branch (200) missed, so this is NEITHER -- the case that "
+              "pins the inner<outer guard against reading equal parts as "
+              "nested"),
+         case("equal parts summed", (100, 100, 200), "DISJOINT",
+              "200 = 100 + 100: the sum branch is checked first, so equal "
+              "parts summed read DISJOINT")],
+        note="the equal-parts cases pin the inner<outer guard and the "
+             "branch order; DISJOINT is tested before NESTED, so a total "
+             "that satisfied both would read DISJOINT")
+    register(
+        "reporting-chain-loss/hop_compose.py::composed_bias",
+        _rcl_composed_bias,
+        [case("all offsets zero is an exact zero", ([0.9, 0.9], [0.0, 0.0]),
+              0.0, "no incentive at any hop, so the composed bias is exactly "
+              "0 -- a real zero, the branch a directed run must be measured "
+              "against", tol=1e-12),
+         case("single hop is its own offset", ([0.9], [1.0]), 1.0,
+              "one hop has no downstream product (the empty product is 1), so "
+              "B = c_1 = 1.0; pins the empty-product base case", tol=1e-12),
+         case("two hops, gain 0.9, same sign", ([0.9, 0.9], [1.0, 1.0]), 1.9,
+              "B = a_2*c_1 + c_2 = 0.9*1 + 1 = 1.9 by hand; the downstream "
+              "gain attenuates the earlier hop, same-sign offsets accumulate",
+              tol=1e-12),
+         case("two hops, identity gain", ([1.0, 1.0], [1.0, 1.0]), 2.0,
+              "B = 1*1 + 1 = 2.0; identity gain accumulates undamped, distinct "
+              "from the 0.9-gain case so the downstream product is doing work",
+              tol=1e-12),
+         case("unspecified gain is None not zero", ([0.9, None], [1.0, 1.0]),
+              None, "a missing gain is not a gain of zero and not a bias of "
+              "zero; None keeps the absence distinct from the all-zero-offset "
+              "exact 0"),
+         case("length mismatch is None", ([0.9], [1.0, 1.0]), None,
+              "gains and offsets of different length is a malformed chain, "
+              "None rather than a silently truncated bias")],
+        note="the all-zero-offset exact 0 and the unspecified-gain None are "
+             "the pin: a directed run is only a finding against a chain whose "
+             "no-incentive answer is a hard zero")
+    register(
+        "chain-position/load_class.py::stability_product",
+        _cpd_stability_product,
+        [case("four compounding factors", ([0.01, 0.02, 0.03, 0.04],),
+              0.90345024, "0.99*0.98*0.97*0.96 = 0.90345024 by hand -- the "
+              "order's illustrative compounding; a crewed mission does not fly "
+              "on a 9.65 percent chance the controller is not there",
+              tol=1e-9),
+         case("empty conjunction is 1.0", ([],), 1.0,
+              "no assumed stabilities means nothing can fail the conjunction; "
+              "the empty product is 1.0, the degenerate base case"),
+         case("one certain failure is 0.0", ([1.0],), 0.0,
+              "a factor certain to be unstable (p=1) drops the product to 0; "
+              "distinct from the empty and the multi-factor cases"),
+         case("an unassessed factor is None, not zero", ([0.01, None],), None,
+              "the order's RULE: an unquantifiable probability cannot be "
+              "propagated, so None -- kept apart from a factor of zero, which "
+              "would multiply through as 1.0"),
+         case("a factor out of range is None", ([1.5],), None,
+              "1.5 is not a probability; None rather than a silently clamped "
+              "product")],
+        note="the None cases are the order's RULE built into the metric: an "
+             "unassessed factor is not a factor of zero, and a malformed one "
+             "is not silently clamped")
 
 
 def seed_reachable(src=None, path=None):

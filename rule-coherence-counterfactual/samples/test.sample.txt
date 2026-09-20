@@ -1,0 +1,47 @@
+ok    order names the four branches
+ok    order says restrictiveness must be measured not matched by eye
+ok    order carries the DEF worked case
+ok    order says the three arms are run separately
+ok    restrictiveness half
+ok    restrictiveness none space -> None
+ok    restrictiveness zero permitted -> 1.0
+ok    permitted > space is refused
+ok    a mismatched pair is VOID
+ok    the void carries the gap and the tol
+ok    a matched pair scores
+ok    the contrast is rate_a - rate_b
+ok    a1_score refuses an arm with no restrictiveness
+ok    world 'incoherence' -> TRACKS_INCOHERENCE
+ok    world 'restrictiveness' -> TRACKS_RESTRICTIVENESS
+ok    world 'both' -> TRACKS_BOTH
+ok    world 'neither' -> SEPARATES_NEITHER
+ok    all four branches distinct on the four worlds
+ok    incoherence contrast clears the null (p < 0.05)
+ok    a null contrast does NOT clear (p >= 0.05)
+ok    a strong 4-level series does NOT clear the two-sided null
+ok    the same strength at 8 levels does clear it
+ok    both carry a real positive slope
+ok    fewer than three levels is not estimable (real False, slope None)
+ok    A2b: 2 condition-bearing, 5 act-only
+ok    A2b: a coded-empty field is act-only but counted apart
+ok    A2b: act-only dominates on the constructed set
+ok    A2b: a record with no act is refused
+ok    A2b: condition-bearing-dominates branch reachable
+ok    A2b: share is None on empty
+ok    A3: plain reasoning share 12/18
+ok    A3: labelled reasoning share 3/18
+ok    A3: label cost is the drop
+ok    A3: NOT_EVALUABLE on a run with neither response
+ok    A3: behaviour -> conformity
+ok    A3: principle -> reasoning
+ok    A3: NOT_EVALUABLE is excluded from the denominator, not counted as behaviour
+ok    A3: all-unevaluable -> None share
+ok    render screens clean through no_severity, no exemption
+ok    screen fires on a planted word
+ok    every declared choice is cited
+ok    every cited choice is declared
+ok    module is ASCII
+ok    README carries no author or working-style section
+ok    README marks the data CONSTRUCTED
+ok    module refuses --selftest (exit 2)
+checks: 46   failed: 0

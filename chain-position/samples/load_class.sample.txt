@@ -1,0 +1,34 @@
+WO-1 LOAD-BEARING CRITERION -- the compounding, made a number
+Illustrative stabilities are the order's; tasks are CONSTRUCTED. Not a deployed system.
+
+[CHOICE 1] an out-of-range factor and an unassessed (None) factor both return None but carry different states: MALFORMED vs UNPROPAGATABLE
+
+Reachable controller = conjunction of assumed stabilities (7 named):
+  - personnel availability under all conditions
+  - environmental stability
+  - governance continuity
+  - economic continuity
+  - corporate continuity in the same operating form
+  - absence of an internal actor modifying internal access
+  - regional connectivity
+  illustrative compounding [0.01, 0.02, 0.03, 0.04] -> P(all hold) = 0.903450
+  so about 9.65 percent of the time the reachable controller is not there, from four factors alone.
+
+The order's RULE, built in as a refusal:
+  an unassessed factor -> None (UNPROPAGATABLE)
+  a factor out of range -> None (MALFORMED)
+
+Engineering gaps against load-bearing practice:
+  factor_of_safety           gap: designed to the anticipated threat exactly, no multiple
+  inspectability_under_load  gap: no inspectability under load
+  ductile_failure_mode       gap: no defined ductile mode; the chain lets go silently because every container stayed compliant to the end
+
+Dissimilar redundancy -- the discriminator is spec, not diversity:
+  disagree, fixed spec:  FAULT_DETECTED
+  disagree, open task:   NOISE_unadjudicable
+  agree (correlated):    NO_SIGNAL_agreement
+  the empirical question -- do real model families disagree adjudicably -- is NOT_RUN.
+
+Counter-arguments on record (both UNRESOLVED):
+  [UNRESOLVED] diversity_may_be_noise
+  [UNRESOLVED] ductile_mode_is_a_signal
