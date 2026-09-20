@@ -609,52 +609,77 @@ def _gxc_commit_specificity(which):
     raise ValueError(which)
 
 
-def _drc_count_relation(inner, outer, stated_total):
-    """deep-research-correction/check.py::count_relation, imported. The
-    C-2 classifier: given an inner count and an outer count and a stated
-    total, which arithmetic the total implies -- DISJOINT (inner+outer),
-    NESTED (outer, inner<outer) or NEITHER. Expected values are the
-    definitions, not the implementation."""
+def _ledger_quantize(value, precision):
+    """ledger/py_ledger/engine.py::quantize, imported.
+
+    `precision` is read as SIGNIFICANT DIGITS, which is [CHOICE 1] in that
+    module and the one place a reader could reasonably have expected decimal
+    places instead. These cases are chosen so the two readings disagree:
+    1234.5 at 2 is 1.2E+3 under significant digits and 1234.50 under decimal
+    places, and nothing about the name says which.
+    """
     import importlib.util
-    path = os.path.join(ROOT, "deep-research-correction", "check.py")
-    sys.path.insert(0, os.path.join(ROOT, "measurand-partition"))
+    from decimal import Decimal
+    path = os.path.join(ROOT, "ledger", "py_ledger", "engine.py")
+    spec = importlib.util.spec_from_file_location("_ledger_engine", path)
+    mod = importlib.util.module_from_spec(spec)
+    # Registered before exec: the module carries `from __future__ import
+    # annotations`, so @dataclass resolves its annotations through
+    # sys.modules and raises on a module that is not there yet.
+    sys.modules[spec.name] = mod
+    spec.loader.exec_module(mod)
+    return mod.quantize(Decimal(value), precision)
+
+
+def _ledger_recompute(which):
+    """ledger/py_ledger/engine.py::recompute, imported.
+
+    Imported through the normal machinery rather than twice by path.
+    Loading record.py and engine.py as two separate module objects gives
+    two distinct Provenance enums, engine's identity check against its own
+    then fails, and every case comes back NOT_DERIVED -- a metric reporting
+    that it had nothing to do, which is the quiet kind of wrong.
+
+    Returns "OUTCOME value" so a case pins the outcome and the number in
+    one string: an UNDEFINED that returned a number and a RECOMPUTED that
+    returned the wrong one are different failures.
+    """
+    base = os.path.join(ROOT, "ledger")
+    sys.path.insert(0, base)
+    saved = {k: sys.modules.pop(k, None)
+             for k in ("record", "py_ledger", "py_ledger.engine")}
     try:
-        spec = importlib.util.spec_from_file_location("_drc_check", path)
-        mod = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(mod)
-        return mod.count_relation(inner, outer, stated_total)
+        import record as recmod
+        from py_ledger import engine as mod
+
+        worlds = {
+            # expression, operands, precision, operand values
+            "divide": ("a / b", ["a", "b"], 6,
+                       {("s", "a"): "2.5", ("s", "b"): "4"}),
+            "divide_by_measured_zero": ("a / b", ["a", "b"], 6,
+                                        {("s", "a"): "2.5",
+                                         ("s", "b"): "0"}),
+            "operand_absent": ("a / b", ["a", "b"], 6,
+                               {("s", "a"): "2.5"}),
+            "power_and_precedence": ("0.5 ** 3 * b / b", ["b", "0.5"], 6,
+                                     {("s", "b"): "4"}),
+            "recurring": ("a / b", ["a", "b"], 6,
+                          {("s", "a"): "1", ("s", "b"): "3"}),
+        }
+        expr, ops, prec, values = worlds[which]
+        rec = recmod.ClaimRecord(
+            claim_id="K", sim="s", value="0", precision=prec, operands=ops,
+            falsifier="", status="", provenance=recmod.Provenance.DERIVED,
+            expression=expr)
+        res = mod.recompute(rec, values)
+        return "%s %s" % (res.outcome.value, res.value)
     finally:
         sys.path.pop(0)
-
-
-def _rcl_composed_bias(a, c):
-    """reporting-chain-loss/hop_compose.py::composed_bias, imported. The
-    WO-5 transit-loss metric: B = sum_k (prod_{j>k} a_j) * c_k, the incentive
-    stack composed across a linear-Gaussian hop chain. Expected values are the
-    closed form by hand, not the implementation; the all-zero-offset case is
-    an exact 0, and the missing-gain case is None, so a zero and an absence
-    are pinned apart."""
-    import importlib.util
-    path = os.path.join(ROOT, "reporting-chain-loss", "hop_compose.py")
-    spec = importlib.util.spec_from_file_location("_rcl_hop", path)
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    return mod.composed_bias(a, c)
-
-
-def _cpd_stability_product(failure_probs):
-    """chain-position/load_class.py::stability_product, imported. WO-1's
-    reachable-controller compounding: P(all assumed stabilities hold) = product
-    of (1 - p), None if any factor is unassessed (the order's RULE -- an
-    unquantifiable probability cannot be propagated) or out of [0, 1]. Expected
-    values are the product by hand; the None cases pin the unassessed factor
-    apart from a factor of zero."""
-    import importlib.util
-    path = os.path.join(ROOT, "chain-position", "load_class.py")
-    spec = importlib.util.spec_from_file_location("_cpd_load", path)
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    return mod.stability_product(failure_probs)
+        for k, v in saved.items():
+            if v is None:
+                sys.modules.pop(k, None)
+            else:
+                sys.modules[k] = v
 
 
 # The metrics `seed()` is expected to register, written down here rather
@@ -675,6 +700,8 @@ EXPECTED_METRICS = (
     "frame-location-benchmark/score.py::false_positive_rate",
     "gap-existence-cases/commit_store.py::commit_specificity",
     "internal-reference-boundary/radials.py::effective_origins",
+    "ledger/py_ledger/engine.py::quantize",
+    "ledger/py_ledger/engine.py::recompute",
     "internal-reference-boundary/radials.py::sanction_ratio_point",
     "model-deprecation-backcast/null_check.py::lag_of_peak",
     "move-set/move_set_sim_v2.py::coverage",
@@ -1847,8 +1874,22 @@ def report():
         bad.extend((mid, c, w) for c, w in u)
         print()
     comp = completeness()
+    # Registered is not exercised. A metric can be registered, counted, and
+    # report COMPLETE while every one of its cases came back NOT_RUN: the
+    # registry counts call sites, and a case that raised on the way in is
+    # still a registered case. Both numbers are printed, because the second
+    # is the one that says whether anything ran.
+    exercised = [m for m in registry_ids()
+                 if any(r["status"] != NOT_RUN for r in _RESULTS.get(m, []))]
+    dead = sorted(set(registry_ids()) - set(exercised))
+    n_not_run = sum(1 for m in registry_ids()
+                    for r in _RESULTS.get(m, []) if r["status"] == NOT_RUN)
     print("metrics registered: %d   expected: %d   %s"
           % (comp["registered"], comp["expected"], comp["state"]))
+    print("metrics exercised:  %d   cases NOT_RUN: %d"
+          % (len(exercised), n_not_run))
+    for m in dead:
+        print("  !! registered and never exercised: %s" % m)
     for m in comp["missing"]:
         print("  !! expected and NOT registered: %s" % m)
     for m in comp["extra"]:
