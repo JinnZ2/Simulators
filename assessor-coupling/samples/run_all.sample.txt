@@ -1,0 +1,93 @@
+CONTAMINATION DECLARATION (read before any number below)
+  authorship   every file in this folder is model-authored, in one session, by the same
+               hand that wrote the checks and the fixtures the checks are pinned to
+  position     the author is a member of the assessed class the order's current-position
+               section is about; nothing here scores any assessor, and the one scoring
+               shipped is the order's own, carried
+  parties      no organization is named in any authored file; the historical names the
+               renders print are parsed out of WORK_ORDER.md at call time
+  records      no 990, grant database, COI instrument or archive was read: the hosts
+               answered 403 to CONNECT, measured and timestamped in pool_metric.EGRESS;
+               every graph, instrument and schema is CONSTRUCTED and says so
+  precedent    every table entry is CARRIED_NOT_VERIFIED; numbers are extracted as the
+               order wrote them and asserted by nobody here
+  companions   WO-4 and WO-5, cited by the order, are not in this tree (named-and-absent)
+  interest     the thesis lowers what an evaluation of the author's class can establish
+               and raises the demand for stricter evaluation of it; the two run opposite
+               ways, so the thesis is left unresolved here rather than resolved either way
+
+========================================================================
+conditions -- WO-6, the eight INDEPENDENCE CONDITIONS as a scorer
+  conditions parsed from WORK_ORDER.md at call time; scoring CARRIED from the order
+  subject: AI evaluation, as a field, no party named
+  source:  CARRIED: the order's reading of public statements; re-verified against nothing here
+  hop-1 (assessed pays assessor) stated: True   -- a routing question, not one of the eight
+    1  UNDECLARED    AUTHORITY NOT REVOCABLE BY THE ASSESSED
+    2  UNVERIFIABLE  FUNDING NOT ROUTED THROUGH THE ASSESSED
+    3  FAILS         MANDATORY ENGAGEMENT
+    4  FAILS         PUBLICATION NOT CONTROLLED BY THE ASSESSED
+    5  FAILS         ACCESS AS OF RIGHT
+    6  FAILS         PERSONAL LIABILITY ON THE ASSESSOR
+    7  FAILS         ROTATION / TENURE LIMITS
+    8  FAILS         CAPACITY PROPORTIONATE TO SCOPE
+  counts: MET 0  FAILS 6  UNVERIFIABLE 1  UNDECLARED 1   (no composite)
+  common prior defense, all four items stated vs none: INVARIANT  moved=[]
+  reading: the defense is stated at the transfer level and the eight are structural; stating
+           it moves none of them, which is the order's finding as an invariance
+========================================================================
+pool_metric -- WO-6 step 1, pool-level independence as arithmetic on CONSTRUCTED graphs
+  record hosts, measured 2026-09-19T22:00Z: projects.propublica.org:443 CONNECT 403; apps.irs.gov:443 CONNECT 403; www.grants.gov:443 CONNECT 403; github.com:443 connects (control)
+  governance depth 2 is [CHOICE 1]; every field CONSTRUCTED; no node is a real party
+  single_pool  assessors 3  measured 3  no_funding 0  undeclared 0  distribution [1.0, 1.0, 1.0]
+      A1  1.000  via {'P': 'funds_sector'}
+      A2  1.000  via {'P': 'funds_sector'}
+      A3  1.000  via {'P': 'funds_sector'}
+      relabel every edge 'salary': distribution [1.0, 1.0, 1.0]  moved=False
+  disjoint     assessors 2  measured 2  no_funding 0  undeclared 0  distribution [0.0, 0.0]
+      A1  0.000  via no coupled source
+      A2  0.000  via no coupled source
+      relabel every edge 'salary': distribution [0.0, 0.0]  moved=False
+  mixed        assessors 4  measured 3  no_funding 0  undeclared 1  distribution [0.2, 1.0, 1.0]
+      A1  1.000  via {'S1': 'funds_sector', 'S2': 'governed_by_equity_holder'}
+      A2  0.200  via {'S1': 'funds_sector'}
+      A3  1.000  via {'S2': 'governed_by_equity_holder'}
+      A4  UNDECLARED
+      relabel every edge 'salary': distribution [0.2, 1.0, 1.0]  moved=False
+  reading: the label on the pipe enters no arithmetic, so relabeling an outflow moves no
+           fraction -- 'a pool cannot audit itself by relabeling its outflows' as an invariance.
+           Nothing here is a fraction for any real assessor; the records are not reachable.
+========================================================================
+disclosure_audit -- WO-6 step 4, which conditions a COI instrument has a field for
+  coverage is DECLARED per field, never read from the field's name; every instrument CONSTRUCTED
+  expected null (the order): money only = condition 2
+  I-money        MONEY_ONLY          fields 3  has_field [2]  no_field [1, 3, 4, 5, 6, 7, 8]  uncoded []
+  I-money-plus   BEYOND_MONEY        fields 4  has_field [2, 3, 4]  no_field [1, 5, 6, 7, 8]  uncoded []
+  I-uncoded      NOT_EVALUABLE       fields 1  has_field []  no_field [1, 2, 3, 4, 5, 6, 7, 8]  uncoded ['other interests (free text)']
+  I-empty        NO_CONDITION_FIELD  fields 0  has_field []  no_field [1, 2, 3, 4, 5, 6, 7, 8]  uncoded []
+  non-financial couplings against I-money:
+      UNMEASURED  shared ideological formation
+      UNMEASURED  overlapping boards and advisory positions
+      UNMEASURED  a common recruitment and career pipeline
+      UNMEASURED  shared conference and professional circuit
+      UNMEASURED  future employment prospects inside the assessed sector
+  reading: a coupling with no field is UNMEASURED; the instrument cannot return ABSENT for it,
+           because the field that would carry the negative does not exist. No real instrument read.
+========================================================================
+precedent -- WO-6, the precedent record parsed; steps 2 and 3 as schemas
+  every entry CARRIED_NOT_VERIFIED; numbers extracted as written with a span, asserted by nobody here
+    Ancient / pre-industri Code of Hammurabi, builder clauses (~1750 BCE) remedy_stated=True  numbers=~1750 BCE
+    Ancient / pre-industri Roman and medieval guild inspection            remedy_stated=True  numbers=-
+    Ancient / pre-industri Assay offices and hallmarking                  remedy_stated=True  numbers=-
+    Industrial             Steam boiler explosions, 19th c                remedy_stated=True  numbers=-
+    Industrial             Food and drug adulteration, pre-regulatory     remedy_stated=True  numbers=-
+    Modern, well-documente Nuclear regulation pre-Three Mile Island       remedy_stated=True  numbers=-
+    Modern, well-documente Arthur Andersen / Enron                        remedy_stated=True  numbers=-
+    Modern, well-documente Credit rating agencies, 2008                   remedy_stated=False numbers=-
+    Modern, well-documente Boeing ODA                                     remedy_stated=False numbers=346 dead
+    Modern, well-documente Grenfell Tower                                 remedy_stated=False numbers=72 dead
+  entries 10  eras 3  with a stated remedy 7  with a number as written 3
+  step 2 survey: NOT_RUN  frame: selected on failure
+  step 3 decay:  NOT_RUN  remedies ['assay offices', 'boiler inspection', 'SOX separation', 'NRC split']  every field UNMEASURED
+  step 5 blind scoring of a non-AI field: NOT_RUN (requires a party outside the sample; the author is inside it)
+  reading: the table is the order's instrument and is carried whole; nothing in it was checked
+           against a source, and no base rate is claimed by the order or computed here

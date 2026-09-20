@@ -1,0 +1,84 @@
+
+conditions: the eight, parsed, scored, never composed
+  ok    eight conditions parsed from the order
+  ok    condition 6 is PERSONAL LIABILITY ON THE ASSESSOR
+  ok    every condition but 8 carries a gloss line
+  ok    a retyped copy holding seven raises
+  ok    common prior defense parses to four items
+  ok    carried scoring: FAILS 6, UNVERIFIABLE 1, UNDECLARED 1, MET 0
+  ok    condition 1 is UNDECLARED: the order's current-position section scores 7 of 8
+  ok    hop-1 is carried beside the eight and reaches none of them
+  ok    no composite key in the scoring
+  ok    an all-MET record scores MET 8 (branch reachable)
+  ok    an unknown state is MALFORMED, not read
+  ok    a missing states dict is eight UNDECLARED
+  ok    a name-shaped subject is REFUSED_NAMED_PARTY
+  ok    non-dict is MALFORMED
+  ok    stating all four defense items moves no condition (INVARIANT)
+  ok    defense_effect on a malformed record is NOT_EVALUABLE
+
+pool_metric: fractions on constructed graphs; the label reaches no arithmetic
+  ok    single pool: every assessor 1.0
+  ok    disjoint sources: every assessor 0.0 (reachable negative)
+  ok    mixed: A2 reads 0.2 (2 of 10 from the coupled source)
+  ok    mixed: A3 coupled only through governance (second order)
+  ok    mixed: A4 with an undeclared amount is UNDECLARED, not 0 and not measured
+  ok    relabel every edge 'salary' moves nothing on single_pool
+  ok    relabel every edge 'salary' moves nothing on disjoint
+  ok    relabel every edge 'salary' moves nothing on mixed
+  ok    assessor with no recorded funding -> NO_RECORDED_FUNDING, fraction None
+  ok    label is read by no arithmetic function (AST: no 'label' constant in them)
+  ok    a governance cycle terminates and reads no coupling
+  ok    governance depth 0 reads no second-order coupling
+  ok    EGRESS carries a measured timestamp and the control host
+
+disclosure_audit: declared coverage, five verdicts, UNMEASURED never ABSENT
+  ok    money-only instrument -> MONEY_ONLY, no_field is the other seven
+  ok    money-plus -> BEYOND_MONEY with fields on 2, 3, 4
+  ok    uncoded-only -> NOT_EVALUABLE, not NO_CONDITION_FIELD
+  ok    empty instrument -> NO_CONDITION_FIELD
+  ok    a cover outside 1..8 is MALFORMED
+  ok    field NAME reaches no check (renamed, same verdict and coverage)
+  ok    five non-financial couplings parsed from the order
+  ok    coupling readout never returns ABSENT
+  ok    all five UNMEASURED on the money-only instrument
+  ok    COVERED reachable when a field declares the coupling
+
+precedent: parsed from the order, carried, schemas empty
+  ok    ten entries across three eras
+  ok    every entry CARRIED_NOT_VERIFIED
+  ok    every number as written slices out of its own body
+  ok    three entries carry a digit-adjacent number as written
+  ok    a number written as a word ('Thousands') is NOT extracted: stated limit of a digit reader
+  ok    the three entries with no stated remedy are the three most recent in the table
+  ok    a text without the record raises
+  ok    survey schema: every field UNMEASURED, NOT_RUN, frame stated
+  ok    decay schema: four remedies, every field UNMEASURED
+  ok    no numeral anywhere in either schema's values
+
+folder: constraints read from the files
+  ok    conditions.py parses under 3.9, imports stdlib-or-local, no network module
+  ok    conditions.py under 300 lines
+  ok    pool_metric.py parses under 3.9, imports stdlib-or-local, no network module
+  ok    pool_metric.py under 300 lines
+  ok    disclosure_audit.py parses under 3.9, imports stdlib-or-local, no network module
+  ok    disclosure_audit.py under 300 lines
+  ok    precedent.py parses under 3.9, imports stdlib-or-local, no network module
+  ok    precedent.py under 300 lines
+  ok    run_all.py parses under 3.9, imports stdlib-or-local, no network module
+  ok    run_all.py under 300 lines
+  ok    selftest.py parses under 3.9, imports stdlib-or-local, no network module
+  ok    selftest.py under 300 lines
+  ok    conditions.py refuses --selftest with exit 2
+  ok    pool_metric.py refuses --selftest with exit 2
+  ok    disclosure_audit.py refuses --selftest with exit 2
+  ok    precedent.py refuses --selftest with exit 2
+  ok    no module inserts a parent path
+  ok    no authored file carries an entry name the order's table carries (parsed at call time only)
+  ok    the entry-name scan fires on a plant
+  ok    run_all prints the declaration before the first part
+  ok    declaration names position, parties, records, precedent, companions, interest
+  ok    WO-4 and WO-5 are named by the order and no folder's WORK_ORDER.md is headed by either (named-and-absent, by artifact)
+  ok    WORK_ORDER.md carries the delivered title line
+
+checks: 72   failed: 0

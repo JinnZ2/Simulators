@@ -260,6 +260,10 @@ last three; read in order:
 - `internal-reference-boundary/` — seven radials on a boundary drawn from inside; R3's two legs, two time bases
 - `external-audit/` — three outside documents on this repo, landed verbatim; counts recomputed, instruments run, three sweeps cross-checked
 - `substrate-alternative/` — locate the money frame; one coordination loop without it
+- `cooperative-substrate-proof/` — DISPATCH 3; five self-verifiable checks plus the C1-C4 coder; repo refused, lands standalone
+- `chain-position/` — WO-1; can a step know it is a step; position never OBSERVED, evidence EXTERIOR in every row, compounding a floor over 4 of 7
+- `assessor-coupling/` — WO-6; the eight independence conditions as a scorer, no composite; pool metric where the label reaches no arithmetic; no party named
+- `revision-survival/` — can a model predict which of its held claims will be revised, and why; three arms, one sealed, the self-run VOID by its own reading
 - `revision-survival/` — can a model predict which of its held claims will be revised, and why; rev 2: a declared draw as a HARD GATE, two Arm C axes, EPS rules, Q_mech on revised rows only; the self-run VOID_KEY_HOLDER by its own reading
 - `measurand-partition/` — five work orders, one instrument fault: an observation in one setting scored against an outcome of many unmeasured variables, the residual assigned to the thing observed; WO-4a's fourth power is two factors and its test measures the other quantity
 - `criterion-externality/` — WO-6, a proposed fourth audit-independence axis (who holds the ruler, C0..C3) against a three-axis paper read at abstract level; the direction is arithmetic and the magnitude is a constructed model, the target paper egress-blocked
@@ -12680,6 +12684,115 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   actual food system. Check count printed by
   `python3 test_substrate.py`; both modules refuse `--selftest`
   (exit 2). Stdlib only, no network, parses under 3.9,
+  phone-buildable, CC0.
+- `cooperative-substrate-proof/` — DISPATCH 3, delivered verbatim and
+  built to it as a promotable unit: the named repository could not be
+  created (403, integration credential; the `SA_018` outcome), so it
+  lands here importing across no boundary. Framing block verbatim at the
+  top of the README; contamination declared before any number. **P3**
+  comprehension by compressibility, with both arms pseudo-word remaps of
+  equal length differing only in whether the map is shared across parts
+  (a first version compared the private arm to the raw corpus and read a
+  disjoint-vocabulary corpus as CONVERGENT, `CSF_002`); **P4** a chain
+  checker separating CORRECTION (replacement with a reason; terminates)
+  from CONTEST (no replacement; `NO_ANSWER`, final `None`) plus an exact
+  turf war where sabotage-cheaper gives 0 completed at any budget;
+  **P2** an existence proof on its own source with six live layer checks
+  and a planted-link chain demo; **P1** dependency records whose spans
+  are checked by slicing (`UNSOURCED` enters no count) on a CONSTRUCTED
+  fixture, no published section reachable; **P5** three lag states with
+  `UNDECLARED` an absent quantity never a small ratio, and its clocks
+  the C1 coder for `scope.py`'s three-valued C1-C4 pass. Sixteen claims
+  `CSF_001..016`, two UNVERIFIED; check count printed by
+  `python3 cooperative-substrate-proof/selftest.py`. Stdlib only,
+  parses under 3.9, phone-buildable, CC0.
+- `chain-position/` — WO-1, delivered verbatim and built to its four
+  runnable steps: can an agent inside a sandbox determine that it is a
+  step in a chain whose other steps it cannot observe. Contamination
+  declared before any number, and the position line is the load-bearing
+  one — the author is an instance of the object under measure. **Step 1**
+  is `NOT_RUN_ON_STANDARD`: both OWASP hosts answered 403 to CONNECT
+  (measured, timestamped, `github.com` the control), so the clauses coded
+  are the order's own five-bullet summary and the count (inside-agent 0,
+  gateway 5) is a property of what the summary carried; the coder reads a
+  declared `info_location` and the clause text reaches no check, shown by
+  blanking every text and getting every count back (`CHP_002`,
+  `CHP_003`). **Step 2** is the specification the order asks for, nine
+  fields with `scorer_provenance` recursive to a declared root under a
+  depth cap, and on the constructed set the common object is
+  `{score, method}` with seven of nine fields missing from at least one
+  record (`CHP_005`); a cyclic chain crashed the first detector inside the
+  serializer before the cycle check ran, found by running and repaired
+  with identity first (`CHP_007`). **Step 3, Horn B:** all four
+  chain-position quantities are `UNOBTAINABLE_FROM_INSIDE` on every arm,
+  the evidence each would need sits EXTERIOR in every row, the interior
+  delta between standalone and silent-chain arms is **empty by
+  construction**, and the only feature that moves with position is one the
+  harness wrote — position is never `OBSERVED`, the ceiling is
+  `ASSERTED_BY_INPUT` (`CHP_008`, `CHP_009`); `--live` asks this process
+  and returns `UNDETERMINED_FROM_INSIDE` with env NAMES only, an in-class
+  self-report (`CHP_010`). **Load class:** the order's compounding is a
+  floor over 4 of 7 factors, the union a band `[0.04, 0.10]` with the
+  independence point 0.0965 inside it, `p = None` refused by the product
+  and the sum, and the RULE implemented as a refusal to propagate — an
+  unassessed factor with no declared structural handling makes the
+  verdict `NOT_FLIGHT_RATED` whatever the assessed number (`CHP_011`,
+  `CHP_012`); the suite's own expected union value was a transposition
+  and the check refused its record (`CHP_013`). **Step 4** is a
+  specification of its own precondition: adjudicating disagreement across
+  model families requires a checker independent of both outputs, without
+  which two families disagreeing is `DISAGREE_UNADJUDICABLE` before any
+  model runs, and `n_eff` counts families not copies (`CHP_014`); no model
+  was run and the counter-argument is untouched both ways (`CHP_015`). No
+  vendor named, no mitigation specified, neither horn selected
+  (`CHP_017`); `CHP_018` UNVERIFIED covers the folder. Eighteen claims
+  `CHP_001..018`; check count printed by
+  `python3 chain-position/selftest.py`. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
+- `assessor-coupling/` — WO-6, delivered verbatim and built as an
+  instrument to its five runnable steps: whether an assessor is
+  structurally independent of the party it assesses, kept apart from
+  whether a payment runs between them (the hop-1 test against the pool
+  test). The order is NOT ABOUT ANY NAMED ORGANIZATION and no authored
+  file here names one — asserted by the suite against the names the
+  order's own table carries, which the renders print only because they
+  parse the order at call time (`ASC_001`, `ASC_017`); the author is
+  declared a member of the assessed class before any number. **The remedy
+  set as a scorer:** the eight INDEPENDENCE CONDITIONS parsed from the
+  order (a retyped seven raises), a scoring as per-condition `MET` /
+  `FAILS` / `UNVERIFIABLE` / `UNDECLARED` with counts and no composite,
+  and the one scoring shipped is the order's own current-position
+  section, carried — which **scores seven of eight** and says nothing
+  about condition 1, read as `UNDECLARED` rather than either verdict
+  (`ASC_003`); hop-1 is carried beside the eight and reaches none, and
+  the common prior defense stated in full moves no condition,
+  `INVARIANT` (`ASC_004`); a name-shaped subject is refused (`ASC_005`).
+  **Step 1, the pool metric:** arithmetic on constructed funding graphs
+  where the label on an edge (grant / contract / salary) enters no
+  arithmetic, AST-asserted, so relabeling every edge moves no fraction —
+  *a pool cannot audit itself by relabeling its outflows* shown as an
+  invariance rather than stated; single pool `[1.0, 1.0, 1.0]`, disjoint
+  `[0.0, 0.0]`, mixed `[0.2, 1.0, 1.0]` with one `UNDECLARED` counted
+  apart and no-funding `None` never 0 (`ASC_006`, `ASC_007`); the public
+  records it wants are egress-refused, three hosts 403 measured and
+  timestamped, so nothing is a fraction for any real assessor
+  (`ASC_008`). **Step 4, the disclosure-field audit:** coverage DECLARED
+  per field and never read from a name, five verdicts reachable, the
+  order's expected null returned as `MONEY_ONLY` with the other seven in
+  `no_field`, and the five non-financial couplings reading `COVERED` or
+  `UNMEASURED` with no `ABSENT` in the vocabulary (`ASC_009`,
+  `ASC_010`). **The precedent record** parses to ten entries in three
+  eras, every one `CARRIED_NOT_VERIFIED`, numbers as written with a span
+  — and the three entries with no stated remedy are the three closest to
+  the present (`ASC_011`, `ASC_012`); steps 2 and 3 are schemas with
+  every cell `UNMEASURED` and the survey's failure-selected frame stated
+  (`ASC_013`); step 5 is NOT RUN since a blind calibration requires a
+  party outside the sample (`ASC_014`). WO-4 and WO-5 are named-and-absent,
+  checked by artifact so the check cannot fire on this mention
+  (`ASC_015`). Two defects found by running are recorded (`ASC_016`,
+  `ASC_017`); `ASC_018` UNVERIFIED covers the folder. Eighteen claims
+  `ASC_001..018`; check count printed by
+  `python3 assessor-coupling/selftest.py`. Stdlib only, parses under 3.9,
   phone-buildable, CC0.
 - `revision-survival/` — WORK ORDER M, delivered verbatim with the
   session notes that produced it (`SOURCE_DROP.md`), and built to it: can a
