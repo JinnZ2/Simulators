@@ -263,6 +263,7 @@ last three; read in order:
 - `cooperative-substrate-proof/` — DISPATCH 3; five self-verifiable checks plus the C1-C4 coder; repo refused, lands standalone
 - `chain-position/` — WO-1; can a step know it is a step; position never OBSERVED, evidence EXTERIOR in every row, compounding a floor over 4 of 7
 - `assessor-coupling/` — WO-6; the eight independence conditions as a scorer, no composite; pool metric where the label reaches no arithmetic; no party named
+- `quiet-failure/` — WO-2; the four-part decomposition as a three-valued coder, base rate refused; the anchor case codes REPORTED_NOWHERE from the order's own sentence; the null unbounded, the open question derived never picked
 - `revision-survival/` — can a model predict which of its held claims will be revised, and why; three arms, one sealed, the self-run VOID by its own reading
 - `revision-survival/` — can a model predict which of its held claims will be revised, and why; rev 2: a declared draw as a HARD GATE, two Arm C axes, EPS rules, Q_mech on revised rows only; the self-run VOID_KEY_HOLDER by its own reading
 - `measurand-partition/` — five work orders, one instrument fault: an observation in one setting scored against an outcome of many unmeasured variables, the residual assigned to the thing observed; WO-4a's fourth power is two factors and its test measures the other quantity
@@ -12793,6 +12794,54 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `ASC_017`); `ASC_018` UNVERIFIED covers the folder. Eighteen claims
   `ASC_001..018`; check count printed by
   `python3 assessor-coupling/selftest.py`. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
+- `quiet-failure/` — WO-2, delivered verbatim and built as an instrument to
+  its four runnable steps: whether failures described afterwards as sudden
+  or quiet were signalled, reported and left unjoined, and whether the
+  aggregation step was unowned by construction rather than neglected.
+  Contamination declared before any number — the order places agentic AI
+  infrastructure "at the pre-Tacoma stage ... no accumulated margin", the
+  author is an instance of that class, and the sentence is carried not
+  scored with the interest direction stated (`QFA_013`). **Step 1** is the
+  decomposition as a coder: three-valued signal fields where a missing
+  field reads `UNSEARCHED` and never `ABSENT`, six classes all reachable,
+  a holder count never inferred and a unitless lead time `UNDECLARED`
+  (`QFA_003`); `base_rate()` refuses on every corpus and divides nothing,
+  AST-asserted, since an accident corpus is selected on the outcome and
+  carries no denominator over systems — the order's own "No base rate is
+  claimed" — while `separation()` runs within the corpus and is
+  `NOT_EVALUABLE` on one signal level (`QFA_004`). **The finding, from the
+  order's own text:** coded from its own sentence the anchor case
+  classifies `REPORTED_NOWHERE` — the signal existed and reached no
+  channel (*not inspectable without disassembly*) — so part 1 of the
+  decomposition does not hold on the case the order opens with; it is the
+  contrast class step 1 wants, not an instance (`QFA_005`); the one case
+  that does instance the structure rests for `join_assigned` on a reading
+  of *denied through proper channels*, which is someone deciding, and is
+  recorded as the coding most in need of a blind coder (`QFA_006`); on all
+  four cases holder count and lead time are `UNDECLARED` and separation is
+  `NOT_EVALUABLE`, so the order's scope limit is also true of the cases it
+  was fitted on (`QFA_007`). **Evidence:** the three findings are parsed
+  and `CARRIED_NOT_VERIFIED` (the order's "(fetched, verified)" is the
+  order's verification; the journal host refuses CONNECT), and the flat
+  reading splits — *the reasoning was not recorded* is stated by 2 of 3
+  bullets, *no cost comparison was made* by 0 of 3, absence of record
+  being what the bullets carry and absence of the act the order's reading
+  of it (`QFA_008`). **Steps 3 and 4:** the order's null ("Not found in two
+  searches") is `UNBOUNDED`, lacking corpus, terms, date and hits, carried
+  and entering no count, with zero hits in a stated corpus `BOUNDED` and
+  an absent count not (`QFA_009`); the open question is derived from role
+  records and never picked — an `EXISTENCE_PROOF` makes it
+  `NEVER_ASSIGNED`, anything less `UNDETERMINED`, and `UNOWNABLE` is
+  returned by no path (`QFA_010`). **Step 2** is NOT RUN: every coding here
+  declares `saw_decomposition: True` and the gate refuses each, with
+  agreement per field and no composite (`QFA_011`). The suite's own number
+  scan fired on its literal, the third self-firing check in three folders
+  this session, repaired through the span (`QFA_012`). **`QFA_014`
+  UNVERIFIED covers the folder:** four hosts 403 measured and timestamped,
+  no corpus, no record, no blind coder, nothing bearing on any real
+  failure. Fourteen claims `QFA_001..014`; check count printed by
+  `python3 quiet-failure/selftest.py`. Stdlib only, parses under 3.9,
   phone-buildable, CC0.
 - `revision-survival/` — WORK ORDER M, delivered verbatim with the
   session notes that produced it (`SOURCE_DROP.md`), and built to it: can a
