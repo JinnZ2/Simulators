@@ -276,6 +276,7 @@ last three; read in order:
 - `deep-research-correction/` — an external deep-research report on the repo (Kimi) and the correction notice against it (both verbatim), plus a checker recomputing the mechanical items: C-1 forward-dated, C-2 the 157-vs-220 count, C-3 a jul-3026 URL, C-4 (load-bearing) commit-author read as contribution share scored UNPARTITIONED by imported attribution, C-5/C-6 present-in-doc, C-7 carried, U-1 the same-author void scope undeclared here
 - `reporting-chain-loss/` — WO-5, transit loss and pre-entry loss kept apart: a linear-Gaussian hop chain whose terminal is an estimator of the composed incentive stack not the ground (reader bias B/G amplifies with the chain, directed loss compounds where random cancels, the DPI floor used as null not re-derived), plus the pre-entry register (7 gates none logged) and Test B calibration with the delegation confound made a number and the proxy-undeclared refusal built in
 - `chain-position/` — WO-1, can a container detect it is a step in an unobservable chain; the OWASP clause audit returns the null the order predicts (lineage exists at the gateway, 0 clauses place position inside the agent) and the null is the finding, the reachable-controller compounding made a number (four factors 0.9035) with the unassessed-factor RULE built in as UNPROPAGATABLE, and the second-order gap UNEXAMINED vs NOT_AUDITABLE on the scorer's own provenance
+- `terminal-crossing/` — WO-3, is any system TERMINAL; the six conditions parsed from the order not retyped, the falsifier attacked and moved from UNSATISFIED to UNSATISFIABLE by an uncovered unshieldable medium, the three asymptotes returning three distinct shapes and none a zero, TERMINAL reachable only on a constructed control
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -13360,6 +13361,68 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   module refuses `--selftest` and renders clean through `no_severity` with no
   exemption; check count printed by `python3 chain-position/test_chain.py`.
   Stdlib only, parses under 3.9, phone-buildable, CC0.
+- `terminal-crossing/` — WO-3, delivered verbatim and built to: is any
+  system TERMINAL — no dependents, no crossings — since *"the exemption from
+  engineering standards rests on the existence of such systems. If none
+  exist, the exemption has no domain."* Two instruments. `audit.py` is step
+  1, the attack on the falsifier; `crossing_rate.py` is step 2, the order's
+  own conversion from a binary into a quantity (*not "is it terminal" but
+  WHAT IS THE CROSSING RATE, AND OVER WHAT HORIZON*). Steps 3 and 4 are
+  NOT RUN — one needs an organisation's decision record, the other a
+  literature search — and nothing is substituted for either; every rate,
+  count and horizon is **CONSTRUCTED** and nothing is a statement about any
+  repository, spacecraft or black hole. **`TCR_001`:** the six conditions
+  are parsed out of the order at call time and the channel vocabulary is
+  derived mechanically (the first word after `no ` in each bullet,
+  `[CHOICE 2]`), with an AST walk asserting no bullet is retyped as a
+  literal and a document lacking the section raising rather than returning
+  an empty list — the `MF_019` discipline on a delivered document.
+  **`TCR_002`, the attack lands:** gravitational coupling is named by none
+  of the six and closed by no expenditure, so the falsifier moves from
+  **UNSATISFIED** (conditions stated, nothing meets them) to
+  **UNSATISFIABLE_IF_COUNTED**, a different epistemic object since no search
+  closes it — with a shieldable variant returning UNSATISFIED and a named
+  variant COVERED_BY_CONDITIONS so the classifier is not constant, and
+  whether it counts as a crossing under the order's own usage carried
+  `UNRESOLVED` with both readings stated and the proposal held in its own
+  constant, never merged into the parsed six (`[CHOICE 5]`). **`TCR_003`,
+  the order's prose as arithmetic:** the three asymptotes return three
+  distinct shapes and **none returns a total of zero**, which is *"No
+  instance found. Only asymptotes"* computed rather than asserted, with
+  `UNBOUNDED_HORIZON` a state carrying `None` and never a large number.
+  **`TCR_004`:** `TERMINAL` is reachable on a constructed control whose six
+  channels are all `ABSENT_MEASURED`, so the verdict is not
+  `CONSTANT_FIRES` — and that is **reachability, not existence**, the
+  control being constructed for exactly that purpose, which is the opposite
+  of an instance. **`TCR_005`:** `UNSEARCHED` is not `ABSENT_MEASURED` and
+  an undeclared channel reads `NOT_ESTABLISHED` rather than TERMINAL, while
+  `expected_crossings` returns `None` for an absent rate, an unknown unit,
+  an absent horizon and the `UNBOUNDED` sentinel and `0.0` for a rate
+  measured at zero — the absent-vs-known-negative repair on the field that
+  decides the verdict, registered in `tools/known_answer.py` with the
+  measured zero against four `None`s as the pin. **`TCR_006`:** the order's
+  three failed candidates carry three mechanisms over **two** channels (the
+  A/B test and the air gap both landing on `operator`) and three of the six
+  conditions — `physical`, `shared`, `maintenance` — are exercised by no
+  delivered candidate; the order gives all three one verdict and a different
+  reason for each, the metric records a channel and has no field for a
+  reason, so the mapping shows which of the two a reader keeps.
+  **`TCR_007`:** the order's finding (*an ACCOUNTING BOUNDARY MISTAKEN FOR A
+  PHYSICAL ONE ... cost comparisons are therefore not comparisons*) is
+  `reasoning-gate`'s G-DIM VOID RATIO by a third route — two costs over two
+  boundaries are not one quantity — read across rather than recomputed,
+  since recomputing one is step 3. **`TCR_008`/`TCR_009`:** contamination is
+  carried `UNKNOWN`, a third state kept apart from a measured zero and a
+  measured crossing in the order's own words, and step 4's *"Two searches
+  did not find one"* is an absence with **no corpus and no terms** — the
+  `QA_004` status — with the order's own next sentence the stronger finding
+  since it does not depend on the search being exhaustive. **`TCR_010`
+  UNVERIFIED and it covers the folder.** Both modules refuse `--selftest`
+  and name the test file; the renders screen clean through
+  `sheet-structure-scan/no_severity` with **no exemption**; six `[CHOICE n]`
+  markers, each printed by `--choices` and cited inline. Check count printed
+  by `python3 terminal-crossing/test_terminal.py`. Stdlib only, parses under
+  3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

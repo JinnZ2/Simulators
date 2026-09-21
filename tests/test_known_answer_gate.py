@@ -57,6 +57,7 @@ MANIFEST = (
     "ontology-probe/probe.py::absent_coverage",
     "return-path/return_path.py::ratio",
     "trigger-geometry/trigger_geometry.py::accumulation_ratio",
+    "terminal-crossing/crossing_rate.py::expected_crossings",
     "failure-mode-register/register.py::fraction_cap",
     "failure-mode-register/register_v2.py::joint_survival",
     "internal-reference-boundary/radials.py::effective_origins",

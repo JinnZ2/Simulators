@@ -682,6 +682,22 @@ def _ledger_recompute(which):
                 sys.modules[k] = v
 
 
+def _tcr_expected_crossings(rate, rate_unit, horizon_value, horizon_unit):
+    """terminal-crossing/crossing_rate.py::expected_crossings, imported. WO-3
+    step 2's metric: crossings expected over a horizon, or None where not
+    computable. Expected values are the product by hand after unit
+    conversion; the None cases pin an absent rate, an unknown unit and the
+    UNBOUNDED sentinel apart from a rate MEASURED at zero, which is 0.0 and
+    is a reading. Collapsing those two would let an unsearched system read
+    as a terminal one."""
+    import importlib.util
+    path = os.path.join(ROOT, "terminal-crossing", "crossing_rate.py")
+    spec = importlib.util.spec_from_file_location("_tcr_rate", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.expected_crossings(rate, rate_unit, horizon_value, horizon_unit)
+
+
 # The metrics `seed()` is expected to register, written down here rather
 # than counted from the calls. A `register(...)` for a new metric once
 # landed after a `finally` inside a helper and never executed: the registry
@@ -727,6 +743,7 @@ EXPECTED_METRICS = (
     "sim-span/sim_span.py::quad_fit",
     "sim-span/three_column.py::ols",
     "trigger-geometry/trigger_geometry.py::accumulation_ratio",
+    "terminal-crossing/crossing_rate.py::expected_crossings",
 )
 
 
@@ -1707,6 +1724,37 @@ def _seed_move_set():
         note="the all-zero-offset exact 0 and the unspecified-gain None are "
              "the pin: a directed run is only a finding against a chain whose "
              "no-incentive answer is a hard zero")
+    register(
+        "terminal-crossing/crossing_rate.py::expected_crossings",
+        _tcr_expected_crossings,
+        [case("a rate and a horizon in the same unit", (1.0, "per_year", 10.0,
+              "year"), 10.0, "1 per year over 10 years = 10 by hand",
+              tol=1e-9),
+         case("units convert across the declared table",
+              (0.5, "per_day", 2.0, "day"), 1.0,
+              "0.5 per day over 2 days = 1; a distinct expected value from "
+              "the same-unit case, so a metric returning a constant fails",
+              tol=1e-9),
+         case("a rate MEASURED at zero is 0.0, a number",
+              (0.0, "per_year", 10.0, "year"), 0.0,
+              "a measured zero is a reading and must not collapse into the "
+              "None cases below -- that collapse is what would let an "
+              "unsearched channel read as a measured absence"),
+         case("an absent rate is None, not zero",
+              (None, "per_year", 10.0, "year"), None,
+              "nothing was measured; the absent-vs-known-negative split, on "
+              "the field that decides the verdict"),
+         case("an unknown rate unit is None, never a silent conversion",
+              (1.0, "per_fortnight", 10.0, "year"), None,
+              "a unit outside the declared table returns None rather than a "
+              "number converted on a guess [CHOICE 3]"),
+         case("the UNBOUNDED sentinel in the unit slot is None",
+              (1.0, "per_year", 1.0, "UNBOUNDED"), None,
+              "the order's third asymptote has no horizon at all; an "
+              "unbounded horizon is a state and not a large number")],
+        note="the measured-zero 0.0 against the four Nones is the pin: the "
+             "whole metric turns on a silence and a measured absence being "
+             "different states")
     register(
         "chain-position/load_class.py::stability_product",
         _cpd_stability_product,
