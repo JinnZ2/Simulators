@@ -274,6 +274,7 @@ last three; read in order:
 - `terminal-crossing/` — WO-3, is any system TERMINAL; the six conditions parsed from the order not retyped, the falsifier attacked and moved from UNSATISFIED to UNSATISFIABLE by an uncovered unshieldable medium, the three asymptotes returning three distinct shapes and none a zero, TERMINAL reachable only on a constructed control
 - `assessor-coupling/` — WO-6 (the second document under that ordinal), assessor-assessed coupling as a recurrent failure mode; hop-1 kept structurally out of the independence vector, the record's summary sentence refuted by its own scope limit at a negative arm of zero, no organization named and no field for one
 - `unowned-join/` — WO-4, the shape with seven faces and a registered term gap; A1-A4 stated formally and made checkable, face 6 NOT_EVALUABLE on the order's own reason, the order's "no term means no code" refuted by the folder building it and no term coined
+- `instrument-index/` — a REBUILD from a lost original: 13 fields, two renderings from one pass, a 0.70 axis falsifier that cannot fire where nothing is rated
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -13402,6 +13403,54 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   site outside its own declaration, both asserted. Check count printed by
   `python3 unowned-join/test_unowned.py`. Stdlib only, parses under 3.9,
   phone-buildable, CC0.
+- `instrument-index/` — A REBUILD, not a reconstruction. The delivered
+  design was recovered from session transcript fragments after the original
+  bytes were lost, and both shipped files carry the label saying so, with
+  every section marked `[RECOVERED]` or `[REBUILD-CHOICE]`. An index of the
+  instruments in one or more repositories: thirteen fields per scannable
+  file, an in-file `# INSTRUMENT:` header block with an
+  `index-overrides.json` fallback (**header wins, per field, not per file**
+  — `II_008`), and two renderings written from one `collect()` pass,
+  neither derived from the other, asserted by comparing the id sets.
+  **`II_001`, the one genuinely open decision:** the delivery's `repo:`
+  field is the literal placeholder `[where instrument-index lived]`, a
+  content search over the whole tree returns one unrelated hit, so the
+  placement here is a REBUILD-CHOICE and is recorded as one rather than as
+  a recovery. **`II_002`/`II_003`, the two states the design turns on:**
+  `NOT-SCANNED` is kept apart from scanned-with-zero-rated-rows in the
+  recovered spec's own words (*collapsing them reports a coverage hole as a
+  zero*), and `claim_only_fraction` returns `None` with no rated row against
+  `0.0` with rated rows and none CLAIM-only — not cosmetic, since `0.0`
+  returns *axis holds at this build* and `None` returns *UNRATED: check not
+  run*, opposite readings of one build separated by that field alone,
+  registered in `tools/known_answer.py` with the 0.0-against-two-Nones case
+  as the pin. **`II_004`:** the 0.70 axis check is `CONSTANT_SILENT` on a
+  corpus nobody has headered **by construction** — and the spec names that
+  state rather than letting it read as a pass; both firing branches are
+  shown, the fixture at 0.000 (*axis holds*) and a planted CLAIM-only
+  majority at 0.750 (*AXIS FALSIFIED*). **`II_005`:** all four flag
+  conditions fire on the fixture and **none alters a row value** — `BOGUS`
+  kept as `BOGUS`, `WIDGET` as `WIDGET`, an `EXTERNAL` run_cost with no
+  basis keeping the empty basis — with the flags committed to the MD rather
+  than left on stderr. **`II_009`:** an index generator walking a tree
+  holding its own output is `UNI_010`'s loop, closed by `SKIP_NAMES` for the
+  TSV (recovered) and the MD (REBUILD-CHOICE, the recovered list carried
+  only the TSV). **`II_010`:** `git rev-parse` walks UP, so a fixture inside
+  this repository takes this repository's hash and the `nogit-` fallback is
+  unreachable from it — exercised against a temporary directory outside any
+  repository, without which it would ship untested and read as covered.
+  **`II_006`:** the blank-line rule is a REBUILD-CHOICE with a stated cost,
+  a header below a shebang-plus-blank going unread — bounded by the spec's
+  own NEVER DROP A FILE rule, so the failure is a visible unrated row on the
+  located to-do list and never an absence. **`II_013`:** the `no_severity`
+  screen is deliberately NOT applied, the delivered spec fixing the output
+  strings verbatim and screening them meaning rewording delivered text.
+  **`II_012` UNVERIFIED and it covers the folder:** every `[RECOVERED]`
+  label is a claim about fragments this session did not read; what is
+  established is that the build implements the text as delivered. Fourteen
+  `II_*` claims; check count printed by
+  `python3 instrument-index/tests/test_build_index.py`. Stdlib only, parses
+  under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

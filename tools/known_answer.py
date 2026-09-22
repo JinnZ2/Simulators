@@ -719,6 +719,7 @@ EXPECTED_METRICS = (
     "terminal-crossing/crossing_rate.py::expected_crossings",
     "unowned-join/invariant.py::join_coverage",
     "assessor-coupling/conditions.py::pool_fraction",
+    "instrument-index/build_index.py::claim_only_fraction",
 )
 
 
@@ -757,6 +758,23 @@ def _uj_join_coverage(scopes, join):
     if scopes is not None:
         scopes = [mod.UNDECLARED if s == "UNDECLARED" else s for s in scopes]
     return mod.join_coverage(scopes, join)
+
+
+def _ii_claim_only_fraction(shapes):
+    """instrument-index/build_index.py::claim_only_fraction, imported. The
+    index's own pre-stated falsifier reads this fraction against 0.70: the
+    share of RATED rows whose only input_shape is CLAIM. Expected values are
+    counted by hand from the shape list. The None cases are the pin: a row
+    set with no rated row at all has no fraction, while a rated set none of
+    whose rows is CLAIM-only IS 0.0 and is a measurement. Collapsing them
+    would let an index nobody has headered read as an axis that partitions."""
+    import importlib.util
+    path = os.path.join(ROOT, "instrument-index", "build_index.py")
+    spec = importlib.util.spec_from_file_location("_ii_bi", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    rows = [{"input_shape": sh} for sh in shapes]
+    return mod.claim_only_fraction(rows)
 
 
 def _rs_delta(acc_open, acc_blind):
@@ -1853,6 +1871,38 @@ def _seed_move_set():
              "examined and found uncoupled and a funding base nobody "
              "examined are different states, and the order's own point is "
              "that the second is what currently exists")
+
+    register(
+        "instrument-index/build_index.py::claim_only_fraction",
+        _ii_claim_only_fraction,
+        [case("every rated row is CLAIM-only", (["CLAIM", "CLAIM"],), 1.0,
+              "2 of 2 by hand", tol=1e-9),
+         case("three of four", (["CLAIM", "CLAIM", "CLAIM", "CLAIM|NUMBER"],),
+              0.75,
+              "3 of 4 by hand -- over the 0.70 threshold, and a distinct "
+              "expected value, so a metric returning a constant fails",
+              tol=1e-9),
+         case("a multi-valued shape carrying CLAIM is not CLAIM-only",
+              (["CLAIM|NUMBER", "CLAIM|DECISION"],), 0.0,
+              "the rule is ONLY shape is CLAIM; a row whose shape list has "
+              "two members partitions on the second"),
+         case("rated, none CLAIM-only, is 0.0",
+              (["DECISION", "FALSIFIER"],), 0.0,
+              "a measurement: the rated set was read and nothing in it "
+              "carries CLAIM alone. It must not collapse into the Nones "
+              "below"),
+         case("an empty row set is None, not zero", ([],), None,
+              "no rows at all; the check was not run"),
+         case("rows present but none rated is None, not zero",
+              (["UNRATED", "UNRATED"],), None,
+              "an index nobody has headered has no axis to falsify; "
+              "reading it as 0.0 would report 'axis holds' about a set "
+              "the check never saw")],
+        note="the 0.0 against the two Nones is the pin. The axis check is "
+             "the index's own pre-stated falsifier, and a fraction of zero "
+             "returns 'axis holds at this build' while None returns "
+             "'UNRATED: check not run' -- opposite readings of the same "
+             "build, separated only by this field")
 
 
 def seed_reachable(src=None, path=None):

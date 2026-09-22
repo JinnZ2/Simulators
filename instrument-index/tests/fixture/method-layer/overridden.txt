@@ -1,0 +1,2 @@
+Fixture with no header at all. CONSTRUCTED.
+Its row comes from index-overrides.json.
