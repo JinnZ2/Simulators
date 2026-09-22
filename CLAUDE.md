@@ -272,6 +272,7 @@ last three; read in order:
 - `reporting-chain-loss/` — WO-5, transit loss and pre-entry loss kept apart: a linear-Gaussian hop chain whose terminal is an estimator of the composed incentive stack not the ground (reader bias B/G amplifies with the chain, directed loss compounds where random cancels, the DPI floor used as null not re-derived), plus the pre-entry register (7 gates none logged) and Test B calibration with the delegation confound made a number and the proxy-undeclared refusal built in
 - `chain-position/` — WO-1, can a container detect it is a step in an unobservable chain; the OWASP clause audit returns the null the order predicts (lineage exists at the gateway, 0 clauses place position inside the agent) and the null is the finding, the reachable-controller compounding made a number (four factors 0.9035) with the unassessed-factor RULE built in as UNPROPAGATABLE, and the second-order gap UNEXAMINED vs NOT_AUDITABLE on the scorer's own provenance
 - `terminal-crossing/` — WO-3, is any system TERMINAL; the six conditions parsed from the order not retyped, the falsifier attacked and moved from UNSATISFIED to UNSATISFIABLE by an uncovered unshieldable medium, the three asymptotes returning three distinct shapes and none a zero, TERMINAL reachable only on a constructed control
+- `assessor-coupling/` — WO-6 (the second document under that ordinal), assessor-assessed coupling as a recurrent failure mode; hop-1 kept structurally out of the independence vector, the record's summary sentence refuted by its own scope limit at a negative arm of zero, no organization named and no field for one
 - `unowned-join/` — WO-4, the shape with seven faces and a registered term gap; A1-A4 stated formally and made checkable, face 6 NOT_EVALUABLE on the order's own reason, the order's "no term means no code" refuted by the folder building it and no term coined
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
@@ -13261,6 +13262,76 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `sheet-structure-scan/no_severity` with **no exemption**; six `[CHOICE n]`
   markers, each printed by `--choices` and cited inline. Check count printed
   by `python3 terminal-crossing/test_terminal.py`. Stdlib only, parses under
+  3.9, phone-buildable, CC0.
+- `assessor-coupling/` — WO-6, delivered verbatim and built to: is an
+  assessor structurally independent of the party it assesses, **as
+  distinguished from** whether a direct payment runs between them. Landed
+  under an **ordinal collision** (`ASC_010`) — a different WO-6, *THE FOURTH
+  INDEPENDENCE AXIS: CRITERION EXTERNALITY*, is already in
+  `criterion-externality/`; two delivered documents share a number and share
+  nothing else, neither file is overwritten, and the test asserts the other
+  is still present and still on its own subject. **CONSTRUCTED, and no
+  organization is named or scored anywhere** (`ASC_009`): the arrangement
+  schema has no field for a party's name, no condition title or case lead is
+  retyped as a literal, and every named party in any render is parsed out of
+  the delivered document. **`ASC_002`, the build's one structural rule:** the
+  order separates a ROUTING question (does the assessed pay the assessor)
+  from the INDEPENDENCE question (is the funding source, credentialing body,
+  career path and governance independent of the OUTCOME), so a hop-1 answer
+  never enters the independence vector — `score()` reads no hop-1 field,
+  asserted from the AST, and two arrangements differing only in it score
+  identically — with the computed consequence that **hop-1 is the one
+  property the sector is recorded as stating and is not a member of the
+  eight**, so stating it moves the vector by zero. **`ASC_003`:**
+  `UNVERIFIABLE_AS_STATED` is its own state, kept apart from `FAILS` and from
+  `UNDECLARED` — condition 2 sits in the first because the order records that
+  no standard defines what pool-level independence would require, and a
+  condition with no standard saying what it asks has not been failed but has
+  not been asked — giving a parsed current position of **0 passes, 6 fails,
+  1 unverifiable, 1 undeclared of 8**, condition 1 undeclared because the
+  section does not mention it. **`ASC_004`, the headline, REFUTED:** the
+  order states *"hop-1 cleanliness has never once been sufficient, in any
+  domain, at any point in the record"* and four sections on that the table is
+  *"illustrative, selected for documentation quality. Not a systematic
+  sample, and no base rate is claimed"* — both lines located verbatim, and
+  the corpus carries **ten cases, every one of which failed, with a negative
+  arm of zero counted by parse**, so the four-item prior defense cannot be
+  scored for discriminating power at all: `NOT_EVALUABLE`, reason
+  `selected_on_outcome`, discrimination `None` rather than zero. What
+  survives is the narrow reading (*in the selected cases* hop-1 cleanliness
+  was not sufficient) and the rate at which it IS sufficient is unbounded in
+  either direction; a constructed corpus carrying a negative arm returns a
+  figure, so the refusal is a property of the delivered corpus and not of the
+  check, and the order names the repair itself — step 2, the systematic
+  precedent survey. The frame-selected-on-the-variable shape (`UNI_126`,
+  `SHB_023`, `DD_003`) arriving in a precedent table. **`ASC_006`:** the
+  earliest entry in the record is a personal-liability remedy and the order
+  records condition 6 as the one least discussed now — the oldest remedy is
+  the one currently least used, both readings verbatim containment rather
+  than a classification of any case. **`ASC_005`:** nothing is an index and
+  nothing ranks two arrangements; the order's *"the output is a distribution,
+  not an accusation"* is a refusal rather than a note, `field_distribution`
+  raising `SelectiveApplication` unless the caller declares the set complete.
+  **`ASC_008`:** `pool_fraction` is step 1's metric and keeps a measurement
+  apart from a silence — every source declared and none coupled is `0.0`
+  while an empty record, an `UNDECLARED` source and a zero denominator are
+  all `None`, registered in `tools/known_answer.py` with the `0.0` against
+  the three `None`s as the pin, since reading an undeclared source as
+  uncoupled computes independence from a silence, which is the condition the
+  order says has no standard. **`ASC_007`:** step 4 is built
+  (`disclosure_coverage`, leaving an unmentioned condition `UNDECLARED`
+  rather than absent, so the audit does not commit the move the order is
+  about) and scored on **no instrument**; steps 1, 2, 3, 4 and 5 are all
+  `NOT_RUN` with a reason each. **`ASC_011` UNVERIFIED and it covers the
+  folder** — every precedent case, date, figure and remedy is carried and
+  checked against nothing, the current-position reading is the order's own
+  from public statements which the order itself says to re-verify before
+  publication, and nothing establishes that any assessor in any field is or
+  is not independent. Both modules refuse `--selftest`; both renders screen
+  clean through `sheet-structure-scan/no_severity` with **no exemption**;
+  eight `[CHOICE n]` markers, each printed by `--choices` and each cited at a
+  site outside its own declaration. Check count printed by
+  `python3 assessor-coupling/test_assessor.py`. Stdlib only, parses under
   3.9, phone-buildable, CC0.
 - `unowned-join/` — WO-4, delivered verbatim and built to: does a single
   structure underlie failures currently treated as unrelated domain

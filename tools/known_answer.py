@@ -718,7 +718,27 @@ EXPECTED_METRICS = (
     "trigger-geometry/trigger_geometry.py::accumulation_ratio",
     "terminal-crossing/crossing_rate.py::expected_crossings",
     "unowned-join/invariant.py::join_coverage",
+    "assessor-coupling/conditions.py::pool_fraction",
 )
+
+
+def _asc_pool_fraction(record):
+    """assessor-coupling/conditions.py::pool_fraction, imported. WO-6 step
+    1's metric: the share of an assessor's funding originating from sources
+    coupled to the assessed sector. Expected values are the share by hand.
+    The None cases pin an empty record and a record carrying an UNDECLARED
+    source apart from a record every one of whose sources is declared and
+    none coupled, which is 0.0 and is a measurement. Collapsing them would
+    let an unexamined funding base read as an independent one."""
+    import importlib.util
+    path = os.path.join(ROOT, "assessor-coupling", "conditions.py")
+    spec = importlib.util.spec_from_file_location("_asc_cond", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    if record is not None:
+        record = [(a, mod.UNDECLARED if f == "UNDECLARED" else f)
+                  for a, f in record]
+    return mod.pool_fraction(record)
 
 
 def _uj_join_coverage(scopes, join):
@@ -1805,6 +1825,34 @@ def _seed_move_set():
              "reaches and a join nobody declared a scope for are different "
              "states, and the second is the one the order's failures are "
              "actually in")
+
+
+    register(
+        "assessor-coupling/conditions.py::pool_fraction",
+        _asc_pool_fraction,
+        [case("every source coupled", ([(10.0, True), (30.0, True)],), 1.0,
+              "40 of 40 by hand", tol=1e-9),
+         case("a quarter coupled", ([(10.0, True), (30.0, False)],), 0.25,
+              "10 of 40 by hand -- a distinct expected value, so a metric "
+              "returning a constant fails", tol=1e-9),
+         case("every source declared and none coupled is 0.0",
+              ([(10.0, False), (30.0, False)],), 0.0,
+              "a measurement: the field was examined and nothing is "
+              "coupled. It must not collapse into the Nones below"),
+         case("an empty record is None, not zero", ([],), None,
+              "no funding declared at all; a share with an empty "
+              "denominator has no value"),
+         case("an UNDECLARED source is None, not zero",
+              ([(10.0, True), (30.0, "UNDECLARED")],), None,
+              "one source's coupling was not established, so the share is "
+              "not established; reading it as uncoupled would compute "
+              "independence from a silence"),
+         case("a record summing to zero is None", ([(0.0, True)],), None,
+              "no denominator; not a share of zero")],
+        note="the 0.0 against the three Nones is the pin: a funding base "
+             "examined and found uncoupled and a funding base nobody "
+             "examined are different states, and the order's own point is "
+             "that the second is what currently exists")
 
 
 def seed_reachable(src=None, path=None):

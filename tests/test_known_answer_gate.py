@@ -59,6 +59,7 @@ MANIFEST = (
     "trigger-geometry/trigger_geometry.py::accumulation_ratio",
     "terminal-crossing/crossing_rate.py::expected_crossings",
     "unowned-join/invariant.py::join_coverage",
+    "assessor-coupling/conditions.py::pool_fraction",
     "failure-mode-register/register.py::fraction_cap",
     "failure-mode-register/register_v2.py::joint_survival",
     "internal-reference-boundary/radials.py::effective_origins",
