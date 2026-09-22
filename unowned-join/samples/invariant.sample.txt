@@ -1,0 +1,19 @@
+UNOWNED JOIN -- the invariant as a checkable predicate
+
+A1 n >= 2   A2 each component correct within its declared
+scope   A3 the join is non-empty   A4 no single scope
+covers the join. A1-A4 => no check confined to one scope
+can decide the join.
+
+CONSTRUCTED. Every row below is a declared structure.
+
+structure          verdict           cover  local?    owner
+ctl_owned          OWNED             1.00   True      a
+ctl_union          UNOWNED_BY_UNION  1.00   False     --
+ctl_unowned        UNOWNED           0.50   False     --
+ctl_local_fault    LOCAL_FAULT       1.00   False     --
+ctl_undeclared     NOT_EVALUABLE     --     --        --
+
+verdicts reached by the controls: 5 of 5
+
+no term is coined here; coin() raises. [CHOICE 3]

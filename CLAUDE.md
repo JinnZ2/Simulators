@@ -272,6 +272,7 @@ last three; read in order:
 - `reporting-chain-loss/` — WO-5, transit loss and pre-entry loss kept apart: a linear-Gaussian hop chain whose terminal is an estimator of the composed incentive stack not the ground (reader bias B/G amplifies with the chain, directed loss compounds where random cancels, the DPI floor used as null not re-derived), plus the pre-entry register (7 gates none logged) and Test B calibration with the delegation confound made a number and the proxy-undeclared refusal built in
 - `chain-position/` — WO-1, can a container detect it is a step in an unobservable chain; the OWASP clause audit returns the null the order predicts (lineage exists at the gateway, 0 clauses place position inside the agent) and the null is the finding, the reachable-controller compounding made a number (four factors 0.9035) with the unassessed-factor RULE built in as UNPROPAGATABLE, and the second-order gap UNEXAMINED vs NOT_AUDITABLE on the scorer's own provenance
 - `terminal-crossing/` — WO-3, is any system TERMINAL; the six conditions parsed from the order not retyped, the falsifier attacked and moved from UNSATISFIED to UNSATISFIABLE by an uncovered unshieldable medium, the three asymptotes returning three distinct shapes and none a zero, TERMINAL reachable only on a constructed control
+- `unowned-join/` — WO-4, the shape with seven faces and a registered term gap; A1-A4 stated formally and made checkable, face 6 NOT_EVALUABLE on the order's own reason, the order's "no term means no code" refuted by the folder building it and no term coined
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -13261,6 +13262,75 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   markers, each printed by `--choices` and cited inline. Check count printed
   by `python3 terminal-crossing/test_terminal.py`. Stdlib only, parses under
   3.9, phone-buildable, CC0.
+- `unowned-join/` — WO-4, delivered verbatim and built to: does a single
+  structure underlie failures currently treated as unrelated domain
+  problems, and is the absence of a term for it what prevents procedures and
+  code being built around it. Seven faces, three pointing at orders already
+  landed here. Everything is CONSTRUCTED — every structure is a declared
+  reading, nothing is a measurement of any container, rule, report,
+  boundary, channel, organism or institution. **`UJ_006`: no term is coined
+  and the instruction is structural rather than described** — the order's
+  *"NOT COINED HERE"* is `coin()` raising `TermCoinageRefused`, and step 3's
+  cross-language search is `NOT_RUN` with the status `UNSEARCHED` and zero
+  languages scored, since `UNSEARCHED` is not *no term exists* and the
+  order's own expected status is `named_elsewhere`. **`UJ_002`, what step 1
+  returns:** A1 two or more components, A2 each correct within its
+  **declared** scope, A3 a non-empty join, A4 no single scope covering it,
+  therefore no check confined to one scope decides the join — and once A1-A4
+  are written down the inference is immediate, so the difficulty is not the
+  theorem but **A4 being checkable at all**, which needs every `S(k)`
+  declared, and nothing in the failures the order lists declares one
+  anywhere; the formalisation relocates the work from the inference to the
+  declaration step. **`UJ_003`: two unowned states, not one** —
+  `UNOWNED_BY_UNION` (the union covers the join, no single scope does: every
+  part visible to somebody, the relation to nobody) against `UNOWNED` (an
+  observable in no scope at all), which call for different repairs and which
+  merging would lose, face 3 being the first and faces 1, 2, 4, 5 and 7 the
+  second. **`UJ_004`, the result that locates itself:** face 6, the frog, is
+  the one face the order marks UNRESOLVED and the one face the invariant
+  returns `NOT_EVALUABLE` on, **for the same reason** — declared per
+  `[CHOICE 7]` on the order's own *"you cannot list in advance which binaries
+  will turn out false, because that is precisely what the environment
+  supplies"*, the environment's scope is undeclarable in advance so A4 is not
+  checkable, and the verdict falls out of the declaration rather than being
+  stipulated. **`UJ_005`, the headline, REFUTED in the order's own strong
+  form:** *"Because there is no good word, NO PROCEDURES CAN BE MADE AROUND
+  IT AND NO CODE CAN BE MADE AROUND IT"*, restated in its scope limits as
+  *"this instrument cannot yet be implemented"* — and the folder implements
+  it, a checkable predicate with five reachable verdicts and no term coined,
+  with the refutation bounded to one structure and one folder; **what
+  survives is the order's own mechanism two sections on**, that with a term a
+  claim is a REPORT whose status is inherited and without one the same
+  content is rebuilt across several sentences and reads as a PROPOSAL, so
+  **code needs a predicate and transmission needs a name** and the order
+  merges two different requirements. **`UJ_007` bounds every number in the
+  folder:** six of seven faces hold the shape and that is near-tautological,
+  the invariant having been abstracted from those same seven, so the
+  evidence test is the order's step 2 — an eighth face from someone who did
+  not write them — which is `NOT_RUN` because this session holds the seven
+  and a face produced here would be one hand widening its own set, the
+  warning printed above the counts and asserted by position. **`UJ_009`:** the
+  instrument is not `CONSTANT_FIRES` (3 of 5 controls do not hold the shape,
+  including `OWNED` and `LOCAL_FAULT`) and `join_coverage` keeps a
+  measurement apart from a silence — a declared join no declared scope
+  reaches is `0.0` while an empty join and an `UNDECLARED` scope are `None`,
+  registered in `tools/known_answer.py` with the `0.0` against the two
+  `None`s as the pin, since reading an undeclared scope as an empty one
+  reports the shape from a silence, which is the failure the order is about.
+  **`UJ_008`:** face 5, the air gap, is the weakest fit and reads as an
+  unowned join only because there is no component for the unconsidered
+  channel, which is why the overclaim goes unchecked. **`UJ_001`/`UJ_010`:**
+  the faces are parsed at call time and a document lacking the section raises
+  rather than returning an empty list, and all three companion arrows resolve
+  by folder path plus a content marker (WO-1 `chain-position/`, WO-2
+  `quiet-aggregation/`, WO-3 `terminal-crossing/`) while faces 2, 5, 6 and 7
+  carry none, a count rather than a gap claim. **`UJ_011` UNVERIFIED and it
+  covers the folder.** Both modules refuse `--selftest`; both renders screen
+  clean through `sheet-structure-scan/no_severity` with **no exemption**;
+  eight `[CHOICE n]` markers, each printed by `--choices` and each cited at a
+  site outside its own declaration, both asserted. Check count printed by
+  `python3 unowned-join/test_unowned.py`. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

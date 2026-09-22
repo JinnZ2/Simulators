@@ -1,0 +1,35 @@
+WO-4 FACES -- parsed from WORK_ORDER.md, put through the
+invariant. CONSTRUCTED; the mapping is a declared reading.
+
+READ THIS FIRST: the invariant was abstracted from these
+seven faces, so their fit is near-tautological and is NOT
+evidence for it. The evidence test is the order's step 2,
+and step 2 is NOT_RUN.
+
+n   face                               verdict           holds  companion
+1   CONTAINER / CHAIN POSITION         UNOWNED           True   WO-1 RESOLVED
+2   REGULATION REACHING EXCLUSION ...  UNOWNED           True   --
+3   QUIET FAILURE                      UNOWNED_BY_UNION  True   WO-2 RESOLVED
+4   TERMINAL SYSTEM / COST EXEMPTION   UNOWNED           True   WO-3 RESOLVED
+5   AIR GAP                            UNOWNED           True   --
+6   THE FROG                           NOT_EVALUABLE     False  --
+7   DESCRIPTION DECOUPLED FROM REF...  UNOWNED           True   --
+
+faces parsed: 7   shape holds: 6   not evaluable: 1
+
+TERM GAP
+  coined here:        False
+  adjacent vocabulary CHECKED_ADJACENT (drift, lossy encoding, map-territory)
+  cross-language:     UNSEARCHED, languages scored 0
+  order step 3:       NOT_RUN -- the order's step 3 is a cross-language vocabulary search; the sources are not reachable from this environment (egress is an allowlist) and no language is scored from memory
+
+CAN CODE BE BUILT WITHOUT A TERM
+  predicate built:    True (5 of 5 verdicts reachable)
+  term coined:        False
+  strong claim:       REFUTED_HERE
+  scope:              one structure, one folder; it does not establish that every structure lacking a term is codeable
+  surviving claim:    what the missing term blocks is transmission, not code. The order states the mechanism two sections on: with a term a claim is a REPORT and status is inherited; without one the same content is rebuilt across several sentences and reads as a PROPOSAL.
+  mechanism tested:   False
+
+ORDER STEP 2 (adversarial face-finding): NOT_RUN
+  adversarial face-finding takes a second party. This session holds the seven faces and is not the party to supply an eighth; a face produced here would be the same hand widening its own set.

@@ -717,7 +717,26 @@ EXPECTED_METRICS = (
     "sim-span/three_column.py::ols",
     "trigger-geometry/trigger_geometry.py::accumulation_ratio",
     "terminal-crossing/crossing_rate.py::expected_crossings",
+    "unowned-join/invariant.py::join_coverage",
 )
+
+
+def _uj_join_coverage(scopes, join):
+    """unowned-join/invariant.py::join_coverage, imported. WO-4 step 1's one
+    numeric readout: the fraction of a join's observables lying in the union
+    of the declared component scopes. Expected values are counted by hand.
+    The two None cases are the pin: an empty join and a scope set carrying an
+    UNDECLARED member are not a coverage of zero, while a declared join that
+    no declared scope reaches IS 0.0 and is a measurement. Collapsing those
+    would let an undeclared scope read as the shape."""
+    import importlib.util
+    path = os.path.join(ROOT, "unowned-join", "invariant.py")
+    spec = importlib.util.spec_from_file_location("_uj_inv", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    if scopes is not None:
+        scopes = [mod.UNDECLARED if s == "UNDECLARED" else s for s in scopes]
+    return mod.join_coverage(scopes, join)
 
 
 def _rs_delta(acc_open, acc_blind):
@@ -1752,6 +1771,40 @@ def _seed_move_set():
         note="the None cases are the order's RULE built into the metric: an "
              "unassessed factor is not a factor of zero, and a malformed one "
              "is not silently clamped")
+
+
+    register(
+        "unowned-join/invariant.py::join_coverage",
+        _uj_join_coverage,
+        [case("a single scope covering the whole join", ([["x", "y"]],
+              ["x", "y"]), 1.0, "both join observables lie in the one scope; "
+              "1.0 by hand", tol=1e-9),
+         case("two scopes covering half each",
+              ([["x"], ["y"]], ["x", "y"]), 1.0,
+              "the UNION covers it; coverage is a union figure and does not "
+              "distinguish ownership -- that is what the verdict does "
+              "[CHOICE 1], and the same expected value from a different "
+              "shape is the case a metric keyed on scope count would fail",
+              tol=1e-9),
+         case("half the join reached", ([["x"], ["w"]], ["x", "y"]), 0.5,
+              "one of two observables lies in the union; 0.5 by hand",
+              tol=1e-9),
+         case("a declared join no declared scope reaches is 0.0",
+              ([["w"], ["z"]], ["x", "y"]), 0.0,
+              "every scope is declared and none reaches the join -- a "
+              "measurement, and the case that must not collapse into the "
+              "Nones below"),
+         case("an empty join is None, not zero", ([["x"]], []), None,
+              "there is nothing to cover; a fraction with an empty "
+              "denominator has no value"),
+         case("an UNDECLARED scope is None, not zero",
+              ([["x"], "UNDECLARED"], ["x", "y"]), None,
+              "an undeclared scope is not an empty scope; reading it as one "
+              "would report coverage from a silence [CHOICE 2]")],
+        note="the 0.0 against the two Nones is the pin: a join nobody "
+             "reaches and a join nobody declared a scope for are different "
+             "states, and the second is the one the order's failures are "
+             "actually in")
 
 
 def seed_reachable(src=None, path=None):
