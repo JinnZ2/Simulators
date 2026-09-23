@@ -349,3 +349,50 @@ Registered as watch items — each has a defined observation that would refute i
 F5 is the cheapest to watch and the most diagnostic of the closure-cost mechanism: the
 information is now unmistakably present, so continued absence of the handling class is pure
 prior-closure readout.
+
+---
+
+## 9. ENSO coupling: the 2026–27 super El Niño as a forcing pulse on the committed pool
+
+**Status as of 2026-09-24:** El Niño is official and intensifying — Niño 3.4 at +3.0°C
+mid-September 2026, 100% El Niño probability through February 2027, >90% chance of "very
+strong," 75% chance of a record Oct–Dec RONI (+2.5°C+), peak forecast Nov 2026–Jan 2027
+(NOAA CPC 2026-09-10; IRI 2026-09-21; WMO 2026-09-03).
+
+**The teleconnection (published mechanism):** El Niño weakens the Amundsen Sea Low and the
+coastal easterlies → reduced Ekman transport of cold surface water onto the shelf → warm
+Circumpolar Deep Water flows onto the continental shelf and under the ice shelves → basal
+melt rises. Shelf warming ~+0.5°C peaking near 200 m depth (Huguenin et al. 2024, GRL);
+during strong events Amundsen ice shelves lose up to 5× more mass from basal melting than
+they gain from the accompanying snowfall (Paolo et al. 2018, Nature Geoscience). Lag: the
+atmospheric wave train reaches West Antarctica within ~2 months; ice-shelf height correlates
+with winds lagged 4–6 months.
+
+**Why the coupling is asymmetric — the rectification:** basal melt responds faster to heat
+increases than to decreases (Kimura et al. 2017), the shelf stays warm longer than it stays
+cool over a strong ENSO cycle (Huguenin et al. 2024), and melt has a floor near zero but no
+symmetric ceiling. Labeled arithmetic (declared, not a result): a superlinear melt law
+(melt ∝ thermal driving^1.5, floored) over one strong ENSO cycle yields a net rectified
+melt anomaly of ~+29% of a baseline year per cycle; a 2026-27-scale event at Thwaites-melt
+magnitude is order 50–60 Gt of added basal melt over the event (~0.15 mm SLE one-time
+pulse) — *on top of* the committed trend, not instead of it.
+
+**Mapping onto the September 2026 papers:**
+
+| Paper | ENSO coupling read (risk-weighted) |
+|---|---|
+| Bradley (committed loss) | The super El Niño is a **wave arriving on the committed pool** — the operator swap again: wave + pool, not max(pool, wave). The event does not replace committed loss; it rides on it |
+| Goldberg (modeling) | A forcing pulse in the *initialization-dominated* window — exactly where the model is least informative, and exactly what the climate-modeling suite's `DataAggregationAudit` FAIL warns about: a pulse averaged into a mean disappears from the projection |
+| Phạm (seismic) | Prediction to watch: basal-melt pulse → accelerated flow → capsizing-berg earthquake rate should peak 2027. Falsifier THW-F3 applies — the peak must survive detection-threshold correction before it counts as physics |
+| Pierce / Killingbeck (bed, water) | A sub-seasonal hydrological pulse hitting a system characterized by *snapshot* instruments (single-epoch radar and MT). The event will not be in the maps; any drainage or pressure response is invisible to the existing characterization |
+| THW-04 redundancy | The observing system that would catch this in real time has N_eff = 1 under risk-weighted coding — and the satellites that survive the shared nodes cannot see the basal channel where the pulse acts |
+
+**The compounding chain, stated plainly:**
+committed internal loss (Bradley, 150 yr) + rectified ENSO staircase (each strong event
+leaves a net step because melt responds asymmetrically) + projected increase in ENSO
+amplitude/variability by 2100 (Cai et al. 2021, 2023) = the forcing term is not a smooth
+ramp but a rising staircase of pulses, each landing on a higher committed pool. The
+2026–27 event is the first super-tier pulse to arrive *after* the committed component was
+formally demonstrated. Risk-management posture: treat the 2027 melt season as the first
+observed wave+pool superposition and demand the observing system report it as such —
+event-triggered catalogs and snapshot maps will each miss their half by construction.
