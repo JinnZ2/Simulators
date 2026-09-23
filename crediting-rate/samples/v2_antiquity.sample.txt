@@ -4,6 +4,8 @@ CREDITING RATE -- DISPATCH L, revision 2
   frame: CONSTRUCTED general-reference corpus / CONSTRUCTED edition 1 / CONSTRUCTED
   items in list: 20   sides: technique_side
   model_authored: False
+  G_ABSENT: True -- no return-envelope tool among method-layer's five (branch_set, preference_free_rank, rank_detector, frame_probe, observer_position_control); RETURNS is defined locally
+  F: JinnZ2/method-layer (out of this session's GitHub scope; CARRIED)
 
   BEFORE THE FIT -- the order's NOTE, reported first
     bin vs antiquity        rho -0.598

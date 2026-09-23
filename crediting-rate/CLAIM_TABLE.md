@@ -52,15 +52,19 @@ hash every report carries.
 
 ---
 
-**CRD_006.** The method layer the order consumes (F branch set, G return
-enum) is not in this repository; nothing in the tree carries `branch_set` or
-a G enum. G is implemented locally as the five listed values plus one added
-BLOCKED reason (`frame_undeclared`); F is emitted as `branch_set.json` in the
-order's shape. `archive-siting-bias`, which the branch set links, is also
-absent.
+**CRD_006.** *(amended 2026-09-23; see `CRD_024`.)* As written this claim
+read the method layer as absent, which is half wrong. **F exists**, in
+another repository (`JinnZ2/method-layer`), so `branch_set.json` is an
+emission in F's shape pointing at a real consumer and not a stand-in for a
+missing build — a cross-repo pointer, not a gap. **G is absent**, and the
+local five values plus the added BLOCKED reason (`frame_undeclared`) are the
+order's own instruction for that state rather than a substitution for
+something that should have been imported. `archive-siting-bias`, which the
+branch set links, is absent.
 
-*Falsifier:* the layer landing; then this folder imports it and this claim
-closes. *Status:* OPEN — named-and-absent, the shape this tree records.
+*Falsifier:* a G tool landing; then this folder imports it and the local enum
+goes. *Status:* SUPERSEDED in part — the F half is refuted by `CRD_024`, the
+G half stands as `G_ABSENT`.
 
 ---
 
@@ -244,13 +248,15 @@ SUPPORTED.
 
 ---
 
-**CRD_021.** `CRD_006` does not close. The method layer (F branch set, G
-return enum) is still not in this tree; G is implemented locally as the
-order's seven values plus v1's added BLOCKED reasons, and F is emitted as
-`branch_set_v2.json` in the order's shape. `archive-siting-bias` is still
-absent.
+**CRD_021.** *(amended 2026-09-23; see `CRD_024`.)* This restated
+`CRD_006`'s reading for revision 2 and inherits its error: F is not missing,
+it is elsewhere. What holds for revision 2 is the G half — the order's seven
+values plus v1's added BLOCKED reasons are a local definition made because no
+return envelope exists to import, and `branch_set_v2.json` is an emission in
+F's shape. `archive-siting-bias` is still absent.
 
-*Falsifier:* the layer landing. *Status:* OPEN — named-and-absent.
+*Falsifier:* a G tool landing. *Status:* SUPERSEDED in part by `CRD_024`; the
+G half stands.
 
 ---
 
@@ -274,3 +280,32 @@ header. What is established is that the instrument's returns move on
 constructed data and that its refusals fire.
 
 *Falsifier:* a real run. *Status:* UNVERIFIED.
+
+---
+
+**CRD_024.** The F half of `CRD_006` and `CRD_021` is REFUTED, from outside
+this folder. The operator's return check records that the branch set exists
+at `JinnZ2/method-layer`, alongside four other tools
+(`preference_free_rank`, `rank_detector`, `frame_probe`,
+`observer_position_control`), so what this folder recorded as a missing build
+is a **cross-repo pointer**. That repository is outside this session's GitHub
+scope, so the fact is CARRIED and verified against nothing here — which is
+why the correction is recorded rather than checked, and why `F_LOCATION` says
+so in the module.
+
+The same check settles the other half in the opposite direction: none of the
+five is a return envelope, so **G is genuinely absent**, and the order's
+instruction for that state — define the enum locally, mark `G_ABSENT` — is
+what this build should have shipped and did not. It ships now:
+`G_ABSENT = True` with its reason and the five carried tool names beside
+`RETURNS`, printed in every render above the numbers, and asserted four ways
+in the selftest (the flag is set, the five names are recorded, none of them
+is an envelope, and the render states both the flag and F's location so a
+reader does not take the local enum for an imported one). The three false
+strings — `branch_set.json`, `branch_set_v2.json`, and the README's F/G
+sentence — are corrected in place rather than deleted, since deleting them
+removes the evidence that the folder ever read the layer as absent.
+
+*Falsifier:* `JinnZ2/method-layer` carrying no `branch_set`, or carrying a
+return envelope after all; either flips one half back. *Status:* SUPPORTED on
+the operator's report, CARRIED as to the repository's contents.

@@ -65,6 +65,32 @@ SIDES = ("technique_side", "language_side")
 RETURNS = ("ETYMOLOGY_TRACKING", "CONTRIBUTION_TRACKING", "UNKNOWN_measurable",
            "DOMAIN_SPECIFIC", "BLOCKED", "FRAME_ASYMMETRIC", "CONTAMINATED_FRAME")
 
+# The order's method layer is two pieces, F (branch set) and G (return
+# envelope / enum), and they are in different states.
+#
+# F EXISTS, in another repository: JinnZ2/method-layer carries branch_set
+# among its tools. That repository is outside this session's GitHub scope, so
+# the fact is CARRIED from the operator and verified against nothing here.
+# `branch_set_v2.json` is therefore an emission in F's shape pointing at a
+# real consumer, not a stand-in for a missing build.
+#
+# G IS ABSENT. method-layer's five tools are branch_set,
+# preference_free_rank, rank_detector, frame_probe and
+# observer_position_control (carried, same provenance) and none of them is a
+# return envelope. The order's instruction for that state is to define the
+# enum locally and mark it, so RETURNS above is the local definition and this
+# is the mark. It is declared rather than derived: nothing here searched
+# method-layer, and a False would be a claim about a repository this session
+# cannot read.
+G_ABSENT = True
+G_ABSENT_REASON = ("no return-envelope tool among method-layer's five "
+                   "(branch_set, preference_free_rank, rank_detector, "
+                   "frame_probe, observer_position_control); RETURNS is "
+                   "defined locally")
+METHOD_LAYER_TOOLS = ("branch_set", "preference_free_rank", "rank_detector",
+                      "frame_probe", "observer_position_control")
+F_LOCATION = "JinnZ2/method-layer (out of this session's GitHub scope; CARRIED)"
+
 # ----------------------------------------------------------------- constants
 
 # [CHOICE 1] items with attested ordering needed in each of the three bins
@@ -712,6 +738,8 @@ def render(out):
     L.append("  items in list: %d   sides: %s"
              % (out["n_items"], ", ".join(out.get("frame_sides") or ["--"])))
     L.append("  model_authored: %r" % (out["itemlist_header"].get("model_authored"),))
+    L.append("  G_ABSENT: %r -- %s" % (G_ABSENT, G_ABSENT_REASON))
+    L.append("  F: %s" % F_LOCATION)
     L.append("")
     if "correlations" in out:
         c = out["correlations"]
@@ -901,6 +929,16 @@ def selftest():
     print("-- the return set is closed and every member is reachable here")
     seen = {f1["return"], f2["return"], f3["return"], f4["return"], f5["return"]}
     ck(seen <= set(RETURNS), "every return is in the declared set")
+    # G_ABSENT: the enum is local because no return envelope exists upstream.
+    ck(G_ABSENT is True, "G_ABSENT is marked, so RETURNS reads as a local definition")
+    ck("branch_set" in METHOD_LAYER_TOOLS and len(METHOD_LAYER_TOOLS) == 5,
+       "the five carried method-layer tool names are recorded")
+    ck(not any("return" in t or "envelope" in t for t in METHOD_LAYER_TOOLS),
+       "none of the five is a return envelope, which is the G_ABSENT reason")
+    head = render(run(_f("v2.events.etymology.jsonl"), _f("v2.descriptions.etymology.jsonl"),
+                      _f("v2.depth.jsonl"), _f("v2.frame.constructed.json"), seed=7))
+    ck("G_ABSENT: True" in head, "the render states G_ABSENT above the numbers")
+    ck("method-layer" in head, "the render names where F is, so it does not read as missing")
     thin = run(_f("v2.events.thin.jsonl"), _f("v2.descriptions.etymology.jsonl"),
                _f("v2.depth.jsonl"), _f("v2.frame.constructed.json"), seed=7)
     ck(thin["return"] == "BLOCKED", "a thin bin returns BLOCKED (got %s)" % thin["return"])

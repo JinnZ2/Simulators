@@ -15,4 +15,4 @@
 -- determinism
 -- the prediction file gates the run
 
-crediting_rate_v2 selftest: checks: 50   failed: 0
+crediting_rate_v2 selftest: checks: 55   failed: 0

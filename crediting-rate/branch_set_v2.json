@@ -11,6 +11,6 @@
   "cost": "low once the item list exists -- published reference sources only. The item list is the cost, and it is the open item.",
   "predicts_elsewhere": "proxy archive siting (different domain, same preservation-weighting mechanism)",
   "emitted_by": "crediting-rate/crediting_rate_v2.py",
-  "supersedes": "branch_set.json, which is v1's emission and stays as delivered",
-  "method_layer": "F branch set NOT IN TREE; this file is the emission in the order's shape, to be lifted when F exists"
+  "supersedes": "branch_set.json, v1's emission, which stays in place; its one false line about the method layer was corrected alongside this one and the correction is recorded at CRD_024",
+  "method_layer": "F EXISTS at JinnZ2/method-layer (out of this session's GitHub scope; CARRIED, verified against nothing here), so this file is an emission in F's shape pointing at a real consumer, not a stand-in for a missing build. G is ABSENT -- none of method-layer's five tools (branch_set, preference_free_rank, rank_detector, frame_probe, observer_position_control) is a return envelope -- so the return enum is defined locally and marked G_ABSENT in crediting_rate_v2.py."
 }

@@ -51,9 +51,19 @@ The N1 band is a percentile interval over `SHUFFLES` (2000) seeded
 reassignments of the bin labels across included items; the `ci95` is a
 seeded bootstrap over items. N2, N3 and N4 each report the gap and its own
 band inside every stratum, so a confound shows as a gap that survives in
-one stratum and not another. The method layer the order consumes (F, G) is
-not in this tree: G is the five values above, F is `branch_set.json` in the
-order's shape.
+one stratum and not another.
+
+The method layer the order consumes is two pieces in two states. **F**, the
+branch set, exists at `JinnZ2/method-layer` — carried from the operator and
+verified against nothing here, that repository being outside this session's
+GitHub scope — so `branch_set.json` is an emission in F's shape pointing at a
+real consumer rather than a stand-in for a missing build. **G**, the return
+envelope, is absent: none of method-layer's five tools (`branch_set`,
+`preference_free_rank`, `rank_detector`, `frame_probe`,
+`observer_position_control`, same provenance) is one. The order's instruction
+for that state is to define the enum locally and mark it, so the five values
+above are the local definition and `G_ABSENT` is the mark — declared in
+`crediting_rate_v2.py`, printed in every render, asserted in the selftest.
 
 ## State
 

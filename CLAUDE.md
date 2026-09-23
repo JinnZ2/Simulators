@@ -243,7 +243,7 @@ last three; read in order:
 - `corpus-input-gaps/` — input-side gaps + a response-loop sim
 - `coinage-log/` — naming gaps; is the absent word the finding
 - `falsifier-survey/` — Run 1 of a delivered falsifier survey; Run 2 split to its two repos
-- `crediting-rate/` — credit tracks the loanword or the contribution; BLOCKED until ordered; rev 2: three visibility bins, a same-side frame gate and a model-authorship gate, crediting mechanical
+- `crediting-rate/` — credit tracks the loanword or the contribution; BLOCKED until ordered; rev 2: three visibility bins, a same-side frame gate and a model-authorship gate, crediting mechanical, the return enum local and marked G_ABSENT
 - `gate-check/` — four structural presence checks, file+line, no FAIL label; thresholds in data
 - `anchor-measurand-crossing/` — crossing given a target; prompts parsed from the order, scorer's judgement as data, no run
 - `anchor-position/` — same order, second build; band scored both ways, ABSENT kept apart, two arms behind flags, no run
@@ -11095,9 +11095,21 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   exists there is no admissible item list at all, since a language-side list
   fails the frame gate by construction and a model-drafted one fails the
   contamination gate by declaration, which is why **no item list was authored
-  here**. Every `v2.` fixture is CONSTRUCTED with invented tradition names and
-  nothing is a statement about any technique, tradition or person. Twenty-three
-  claims `CRD_001..023`; check counts printed by `python3
+  here**. **`CRD_024`, a correction from outside the folder:** `CRD_006` and
+  `CRD_021` recorded the method layer as absent and the F half is REFUTED —
+  the branch set EXISTS at `JinnZ2/method-layer` beside four other tools, so
+  `branch_set.json` is a **cross-repo pointer, not a missing build** (carried,
+  that repository being outside this session's GitHub scope, so recorded
+  rather than checked). The same report settles the G half the other way:
+  **none of the five is a return envelope**, so G is genuinely absent and the
+  order's instruction for that state — define the enum locally, mark
+  `G_ABSENT` — is what the build owed and did not ship; it ships now, declared
+  beside `RETURNS` with the five carried tool names, printed in every render
+  above the numbers, asserted four ways, and the three false strings corrected
+  in place rather than deleted so the misreading stays on the record. Every
+  `v2.` fixture is CONSTRUCTED with invented tradition names and
+  nothing is a statement about any technique, tradition or person. Twenty-four
+  claims `CRD_001..024`; check counts printed by `python3
   crediting-rate/crediting_rate.py --selftest` and `--selftest` on the v2
   module. Stdlib only, parses under 3.9, CC0.
 - `gate-check/` — A work order built as delivered, with no framework
