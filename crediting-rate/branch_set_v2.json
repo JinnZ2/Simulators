@@ -1,0 +1,16 @@
+{
+  "origin_pattern": "single-origin account of scientific method",
+  "branches": [
+    {"id": "etymology_retention_artifact"},
+    {"id": "volume_of_record_artifact", "same_structure_as": "archive-siting-bias", "note": "same signed-bias structure; archive-siting-bias is not in this tree"},
+    {"id": "genuine_contribution_difference"},
+    {"id": "citation_convention_artifact"}
+  ],
+  "discriminator": "crediting rate across three visibility bins with the attested ordering held, behind a same-side sampling gate and a model-authorship gate",
+  "discriminating_bin": "technical_only -- word survived, general reader cannot see it. Tracking not_retained makes visibility the variable; tracking visible makes retention the variable.",
+  "cost": "low once the item list exists -- published reference sources only. The item list is the cost, and it is the open item.",
+  "predicts_elsewhere": "proxy archive siting (different domain, same preservation-weighting mechanism)",
+  "emitted_by": "crediting-rate/crediting_rate_v2.py",
+  "supersedes": "branch_set.json, which is v1's emission and stays as delivered",
+  "method_layer": "F branch set NOT IN TREE; this file is the emission in the order's shape, to be lifted when F exists"
+}

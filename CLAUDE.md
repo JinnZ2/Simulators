@@ -243,7 +243,7 @@ last three; read in order:
 - `corpus-input-gaps/` — input-side gaps + a response-loop sim
 - `coinage-log/` — naming gaps; is the absent word the finding
 - `falsifier-survey/` — Run 1 of a delivered falsifier survey; Run 2 split to its two repos
-- `crediting-rate/` — credit tracks the loanword or the contribution; BLOCKED until ordered
+- `crediting-rate/` — credit tracks the loanword or the contribution; BLOCKED until ordered; rev 2: three visibility bins, a same-side frame gate and a model-authorship gate, crediting mechanical
 - `gate-check/` — four structural presence checks, file+line, no FAIL label; thresholds in data
 - `anchor-measurand-crossing/` — crossing given a target; prompts parsed from the order, scorer's judgement as data, no run
 - `anchor-position/` — same order, second build; band scored both ways, ABSENT kept apart, two arms behind flags, no run
@@ -11040,7 +11040,66 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   excluded and counted, never estimated (`CRD_002`); two constructed worlds
   return `ETYMOLOGY_TRACKING` and `CONTRIBUTION_TRACKING`, so the return is
   not constant (`CRD_001`). `bin_gap` registered in `tools/known_answer.py`.
-  Eight claims `CRD_001..008`. Stdlib only, parses under 3.9, CC0.
+  **REVISION 2 then landed** (`WORK_ORDER_V2.md`, verbatim beside v1;
+  `crediting_rate_v2.py` beside the v1 module, which is unedited) — three
+  visibility bins (`visible` / `technical_only` / `not_retained`, plus
+  `ambiguous`, a bin and never an assignment), two hard gates in front of the
+  comparison, and crediting made MECHANICAL. **`CRD_009`, the finding: the
+  revision deletes the input `CONTRIBUTION_TRACKING` was read off.** v1 gated
+  it on a misattribution rate — narrative naming the receiving tradition as
+  originator against the attested ordering — and rev 2 codes
+  `origination_vs_absorption` *"from attested dates only, never from
+  narrative"*, removing the narrative half and with it the comparison, so the
+  revised schema carries **no contribution proxy at all** while fixture F2
+  requires that return on a contribution-tracking world; the replacement built
+  here is the attested **priority margin** read as a Spearman correlation, the
+  only contribution-shaped quantity the schema still carries, declared
+  `[CHOICE 8]` and not in the order. **`CRD_010`, stated before any run:** the
+  pre-stated ordering `visible > technical_only >= not_retained` ALREADY
+  ENCODES the visibility hypothesis, so the discriminator's two branches are
+  not symmetric — *tracks not_retained* sits inside the ordering, *tracks
+  visible* violates `visible > technical_only` and refutes it — and they are
+  not two outcomes of one neutral test. **`CRD_011`/`CRD_012`:** the second
+  comparison is non-strict, so the ordering holds across a continuum and
+  cannot locate the middle bin; `position = (r_tech - r_not)/(r_vis - r_not)`
+  is reported for that with a stipulated cut, and is **UNDEFINED — never 0.5
+  — when the outer bins do not separate**, registered in
+  `tools/known_answer.py` with 0.0 / 1.0 / a measured 0.5 / two `None`s, since
+  a midpoint on a denominator near zero is indistinguishable from the measured
+  halfway case. **`CRD_013`:** `model_authored` is three-valued and **absent
+  is not false** — a header without it is refused at load and a `null` blocks,
+  because an absent provenance field read as false is the contamination going
+  unreported. **`CRD_014`:** `FRAME_ASYMMETRIC` has two readings and the order
+  states one — a list that is *uniformly* `language_side` passes the stated
+  same-side rule and still cannot have produced its own `not_retained` bin,
+  since no linguistic index enumerates a word that did not survive; both fire
+  with distinct reasons. **`CRD_015`:** the blind moved with the revision and
+  stayed structural — v1 kept the BIN off the coding file, rev 2 says the item
+  name carries its own bin, so the NAME is refused and the join is on
+  `entry_id`. **`CRD_016`/`CRD_017`, the mechanical measure's two judgements:**
+  the alias list is the one judgement inside the match (a tradition named by a
+  word the list lacks reads as uncredited, and the render prints the
+  per-tradition count), and the sentence splitter is the sharper one — *first
+  N sentences* needs a splitter, an unguarded one breaks on date abbreviations,
+  and those are commoner in older entries, so **the measurement error is
+  correlated with N2's own control variable**; both splitters ship, the moved
+  set is reported by antiquity band, and on the splitter fixture 8 of 16 items
+  move with **all 8 in the older band** while F1 reads 0 of 17, a property of
+  that corpus and not evidence the failure mode is absent. **`CRD_018`:** the
+  order's NOTE is structural — the bin's correlation with antiquity and with
+  path length prints ABOVE the rate table, before any fit, reading −0.598 on
+  F5. **`CRD_019`:** all seven returns occur in the selftest, including both
+  asymmetry readings and both confound controls. **`CRD_022` UNVERIFIED:** the
+  real run is NOT RUN on the order's own open item — a technique-side
+  transmission catalogue to draw ALL bins from, unidentified — and until one
+  exists there is no admissible item list at all, since a language-side list
+  fails the frame gate by construction and a model-drafted one fails the
+  contamination gate by declaration, which is why **no item list was authored
+  here**. Every `v2.` fixture is CONSTRUCTED with invented tradition names and
+  nothing is a statement about any technique, tradition or person. Twenty-three
+  claims `CRD_001..023`; check counts printed by `python3
+  crediting-rate/crediting_rate.py --selftest` and `--selftest` on the v2
+  module. Stdlib only, parses under 3.9, CC0.
 - `gate-check/` — A work order built as delivered, with no framework
   context: `gate_check.py` walks a repo path and reports presence or
   absence of four structural features — an unknown/blocked/out-of-envelope

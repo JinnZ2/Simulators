@@ -1,0 +1,18 @@
+-- F1..F5: the planted faults fire
+-- the second frame-asymmetry reading, which the order implies and does not state
+-- absent is not false, and absent is not zero
+-- position is UNDEFINED, never a midpoint, when the outer bins do not separate
+-- outer_gap distinguishes an empty bin from a measured zero
+-- the blind moved to the item name, and it is a file rule
+-- ambiguous is a bin and never an assignment
+-- the sentence splitter, and the direction of its failure
+-- the alias list is the one judgement inside the mechanical measure
+-- nulls and gates are reachable in both directions
+-- the path-length control, the second null with more than one stratum
+-- the splitter failure is measured, and it lands on one antiquity band
+-- the return set is closed and every member is reachable here
+-- the frame is a parameter and an undeclared one blocks
+-- determinism
+-- the prediction file gates the run
+
+crediting_rate_v2 selftest: checks: 50   failed: 0

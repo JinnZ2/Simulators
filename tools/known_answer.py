@@ -191,6 +191,28 @@ def _crediting_bin_gap(which):
               "empty_bin": {1: [0.5], 0: []}}
     return mod.bin_gap(worlds[which])
 
+def _crediting_position(which):
+    """crediting-rate/crediting_rate_v2.py::position, imported. Where the
+    technical_only bin sits between the two outer bins, 0.0 at not_retained
+    and 1.0 at visible. The cases that matter are the ones with no
+    denominator: a midpoint computed on outer bins that do not separate is a
+    number about the noise, so it is None."""
+    import importlib.util
+    path = os.path.join(ROOT, "crediting-rate", "crediting_rate_v2.py")
+    spec = importlib.util.spec_from_file_location("_crediting_rate_v2", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    V, T, N = mod.VISIBLE, mod.TECHNICAL_ONLY, mod.NOT_RETAINED
+    worlds = {
+        "at_not_retained": {V: [1.0, 1.0], T: [0.0], N: [0.0, 0.0]},
+        "at_visible": {V: [1.0, 1.0], T: [1.0], N: [0.0, 0.0]},
+        "halfway": {V: [1.0], T: [0.5], N: [0.0]},
+        "no_spread": {V: [0.5, 0.5], T: [0.5], N: [0.5, 0.5]},
+        "empty_middle": {V: [1.0], T: [], N: [0.0]},
+    }
+    return mod.position(worlds[which])
+
+
 def _amc_crossing_band(which):
     """anchor-measurand-crossing/amc.py::crossing_band, imported. Grouped ids
     and an ungrouped count are hand-built so the band can be counted off."""
@@ -685,6 +707,7 @@ EXPECTED_METRICS = (
     "agent-lifecycle-energy/phase_energy.py::integrate",
     "anchor-measurand-crossing/amc.py::crossing_band",
     "anchor-position/normalize.py::crossing_count",
+    "crediting-rate/crediting_rate_v2.py::position",
     "crediting-rate/crediting_rate.py::bin_gap",
     "failure-mode-register/register.py::fraction_cap",
     "failure-mode-register/register_v2.py::joint_survival",
@@ -1190,6 +1213,33 @@ def seed():
               "falsifiable. hit counts ONLY against a falsifiable EXPECT, so "
               "a vague commit that matches anything is voided by this "
               "denominator, not by trust."),
+    )
+    register(
+        "crediting-rate/crediting_rate_v2.py::position",
+        _crediting_position,
+        [
+            case("at not_retained", ("at_not_retained",), 0.0,
+                 "technical_only sits on the lower outer bin -> 0.0; this is "
+                 "the reading that leaves the pre-stated ordering intact",
+                 tol=1e-9),
+            case("at visible", ("at_visible",), 1.0,
+                 "technical_only sits on the upper outer bin -> 1.0; this "
+                 "reading refutes the pre-stated ordering rather than "
+                 "confirming a second branch of it", tol=1e-9),
+            case("halfway", ("halfway",), 0.5,
+                 "0.5 between 0.0 and 1.0 -> 0.5; a third distinct value, so "
+                 "the set can detect a constant metric", tol=1e-9),
+            case("no spread", ("no_spread",), None,
+                 "the outer bins do not separate, so there is no denominator "
+                 "worth dividing by. A 0.5 here would be indistinguishable "
+                 "from the measured halfway case above, on no signal"),
+            case("empty middle bin", ("empty_middle",), None,
+                 "no technical_only item -> None, absent not a midpoint"),
+        ],
+        note=("revision 2's discriminating quantity. The order names two "
+              "readings of the technical_only bin and no boundary between "
+              "them; the cut is a declared CHOICE in the module and the "
+              "UNDEFINED state is what keeps a noise midpoint out of it."),
     )
     register(
         "crediting-rate/crediting_rate.py::bin_gap",

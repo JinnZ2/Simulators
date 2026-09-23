@@ -1,0 +1,11 @@
+CREDITING RATE -- DISPATCH L, revision 2
+
+  prediction sha256 6c3642080c7f15b2
+  frame: CONSTRUCTED general-reference corpus / CONSTRUCTED edition 1 / CONSTRUCTED
+  items in list: 17   sides: language_side
+  model_authored: False
+
+  RETURN: FRAME_ASYMMETRIC
+  uniformly language_side, and the not_retained bin is non-empty (5 items). No linguistic index enumerates a word that did not survive, so that bin did not come from this side.
+
+  Nothing here is a measurement. Every fixture is CONSTRUCTED.

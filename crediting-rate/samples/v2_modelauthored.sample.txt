@@ -1,0 +1,11 @@
+CREDITING RATE -- DISPATCH L, revision 2
+
+  prediction sha256 6c3642080c7f15b2
+  frame: CONSTRUCTED general-reference corpus / CONSTRUCTED edition 1 / CONSTRUCTED
+  items in list: 17   sides: --
+  model_authored: True
+
+  RETURN: CONTAMINATED_FRAME
+  item list declares model_authored=true; a model-drafted list samples the training prior, which is the measurand
+
+  Nothing here is a measurement. Every fixture is CONSTRUCTED.

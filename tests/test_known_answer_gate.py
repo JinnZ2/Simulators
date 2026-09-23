@@ -51,6 +51,7 @@ MANIFEST = (
     "frame-location-benchmark/score.py::false_positive_rate",
     "gap-existence-cases/commit_store.py::commit_specificity",
     "crediting-rate/crediting_rate.py::bin_gap",
+    "crediting-rate/crediting_rate_v2.py::position",
     "anchor-measurand-crossing/amc.py::crossing_band",
     "anchor-position/normalize.py::crossing_count",
     "ontology-probe/probe.py::rates",

@@ -1,0 +1,36 @@
+CREDITING RATE -- DISPATCH L, revision 2
+
+  prediction sha256 6c3642080c7f15b2
+  frame: CONSTRUCTED general-reference corpus / CONSTRUCTED edition 1 / CONSTRUCTED
+  items in list: 18   sides: technique_side
+  model_authored: False
+
+  BEFORE THE FIT -- the order's NOTE, reported first
+    bin vs antiquity        rho --
+    bin vs intermediaries   rho --
+
+  bin              n   crediting   depth
+  ----------------------------------------
+  visible          7       0.786   1.429
+  technical_only   4       0.250   2.000
+  not_retained     7       0.214   1.286
+  ambiguous        0         n/a     n/a
+
+  outer gap (visible - not_retained)  0.571
+  N1 shuffle band                     [-0.357, 0.429]
+  bootstrap CI                        [0.286, 0.857]
+  position of technical_only          0.063  TRACKS_NOT_RETAINED
+  pre-stated ordering holds           True
+  crediting vs priority margin        rho --
+
+  sentence-splitter sensitivity: 0 of 18 items move with the abbreviation guard off
+    by antiquity band: 700-1300 0/18
+  alias list sizes: Meridian=2
+
+  excluded: no_alias_list=0, ordering_reversed=0, ordering_unknown=0, undescribed=0
+
+  RETURN: DOMAIN_SPECIFIC
+  domain: mathematics
+  the gap is outside the band in mathematics alone, and inside it in the other 1
+
+  Nothing here is a measurement. Every fixture is CONSTRUCTED.

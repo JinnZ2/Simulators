@@ -1,0 +1,28 @@
+CREDITING RATE -- DISPATCH L, revision 2
+
+  prediction sha256 6c3642080c7f15b2
+  frame: CONSTRUCTED general-reference corpus / CONSTRUCTED edition 1 / CONSTRUCTED
+  items in list: 14   sides: technique_side
+  model_authored: False
+
+  BEFORE THE FIT -- the order's NOTE, reported first
+    bin vs antiquity        rho 0.277
+    bin vs intermediaries   rho --
+
+  bin              n   crediting   depth
+  ----------------------------------------
+  visible          5       1.000   1.400
+  technical_only   5       0.000   1.600
+  not_retained     2       0.000   1.500
+  ambiguous        2         n/a     n/a
+
+  sentence-splitter sensitivity: 0 of 14 items move with the abbreviation guard off
+    by antiquity band: 700-1300 0/14
+  alias list sizes: Meridian=2
+
+  excluded: no_alias_list=0, ordering_reversed=0, ordering_unknown=0, undescribed=0
+
+  RETURN: BLOCKED
+  insufficient_attested_ordering: not_retained=2 below MIN_PER_BIN=3
+
+  Nothing here is a measurement. Every fixture is CONSTRUCTED.

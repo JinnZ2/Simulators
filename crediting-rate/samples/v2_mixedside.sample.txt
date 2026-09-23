@@ -1,0 +1,11 @@
+CREDITING RATE -- DISPATCH L, revision 2
+
+  prediction sha256 6c3642080c7f15b2
+  frame: CONSTRUCTED general-reference corpus / CONSTRUCTED edition 1 / CONSTRUCTED
+  items in list: 17   sides: language_side, technique_side
+  model_authored: False
+
+  RETURN: FRAME_ASYMMETRIC
+  items drawn from more than one side (language_side, technique_side); an asymmetric frame produces the predicted gap by construction
+
+  Nothing here is a measurement. Every fixture is CONSTRUCTED.
