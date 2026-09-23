@@ -4,7 +4,8 @@ Enter enclosure terms FIRST, measure residual, and only then treat the
 residual as a trait candidate. Trait is not excluded; it is demoted from
 assumption to survivor of a control.
 
-Order in [`WORK_ORDER.md`](WORK_ORDER.md), verbatim. Findings in
+Order in [`WORK_ORDER.md`](WORK_ORDER.md), verbatim; its 2026-09-23
+re-issue in [`DISPATCH_K.md`](DISPATCH_K.md), verbatim. Findings in
 [`CLAIM_TABLE.md`](CLAIM_TABLE.md). Consumes
 [`method-layer`](https://github.com/JinnZ2/method-layer) (F `branch_set`,
 G `preference_free_rank`) as a declared external dependency.
@@ -151,17 +152,53 @@ Located via `METHOD_LAYER_PATH`, else a sibling `method-layer/` or
   `method-layer=absent`, and nothing is estimated differently. The
   selftest passes identically in both modes (`EFR_009`).
 
+## Real run -- NOT_RUN, specified here per dispatch K
+
+**Target.** A published panel with (1) an exogenous option-set jump on a
+known date (benefit cliff crossing, licence suspension or restoration,
+lease end or forced move, plant closure), (2) at least two windows per
+person spanning that date, and (3) at least one behavior term in a graded
+animal-literature form with an operationalization string.
+
+**Expected.** Most panels carry (1) and (2) and not (3): they record
+employment, benefit receipt, housing moves and health items, not
+`latency_to_approach_novel` or `perseveration_rate`. The expected return
+on nearly every candidate is `BLOCKED(unoperationalized_term)`, and that
+return is the finding: the enclosure side is instrumented and the
+behavior side is not.
+
+**Panels checked: none.** This environment reaches no panel documentation
+(allowlist egress). The candidates below are named from model memory as
+places a survey would start, and every one is UNCHECKED.
+
+```text
+candidate                                  carries (1)+(2)?   carries (3)?   status
+PSID (US)                                  likely             unknown        UNCHECKED
+SIPP (US)                                  likely             unknown        UNCHECKED
+NLSY79 / NLSY97 (US)                       likely             unknown        UNCHECKED
+HRS (US, older adults)                     likely             unknown        UNCHECKED
+Understanding Society / UKHLS (UK)         likely             unknown        UNCHECKED
+SOEP (DE)                                  likely             unknown        UNCHECKED
+HILDA (AU)                                 likely             unknown        UNCHECKED
+```
+
+**Open item: the panel survey is UNRUN.** Its output is a table of the
+shape above with the two capability columns filled from each panel's
+codebook, and the first row that carries all three is the first real
+run. Until then every number in this folder is from constructed fixtures.
+
 ## Declared choices
 
 Printed with every run.
 
 | choice | value | what it fixes |
 |---|---|---|
-| `DELTA_THRESHOLD` | 1 | a within pair needs `|delta effective_exits|` at least this |
+| `THRESHOLD_SOURCE` | `thresholds.txt` | four thresholds are read from the data file, provenance in `threshold_chain.txt`; absent file -> `code_default`, and the record says so |
+| `DELTA_THRESHOLD` | 1 | a within pair needs `|delta effective_exits|` at least this (data file) |
 | `NULL_DRAWS`, `BOOT_DRAWS` | 300, 300 | permutation and bootstrap draws |
-| `DOMINANT_RATIO`, `CONFOUND_RATIO` | 0.5, 1.25 | the order's `<<`, `~`, `>` cells on the ratio |
+| `DOMINANT_RATIO`, `CONFOUND_RATIO` | 0.5, 1.25 | the order's `<<`, `~`, `>` cells on the ratio (data file) |
 | `NULL_BAND` | [0.025, 0.975] | central 95% of null draws; observed is inside when at or above the lower edge |
-| `MIN_WITHIN_PAIRS` | 3 | fewest exogenous pairs the discriminator will fit |
+| `MIN_WITHIN_PAIRS` | 3 | fewest exogenous pairs the discriminator will fit (data file) |
 | `CORRECTED_READING` | on | off with `--table-literal` |
 
 CC0. stdlib only. Parses under Python 3.9. ASCII only in the source.
