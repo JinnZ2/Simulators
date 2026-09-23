@@ -22,9 +22,12 @@ FIELD_LEDGER_001.md              seven entries, one discrepancy resolved by
 FIELD_LAYER_SEED_ROADS.md        WP1 unpaved-vs-paved wear + WP2 the
                                  infrastructure bill autonomy asks for
 driver_hours_evidence_register.py
-                                 eleven sources, eight questions, on what
-                                 is known / self-reported / UNMEASURED
-                                 about long days, fatigue and tenure
+                                 twelve sources, ten questions, a term
+                                 note, on what is known / self-reported /
+                                 UNMEASURED about long days, fatigue and
+                                 tenure.  Revised once; v1 is at 1bb8471
+                                 and register_audit.revision() measures
+                                 what moved
 
 audit.py                         recomputes what the six documents state
 register_audit.py                imports the register, checks it against
@@ -32,7 +35,7 @@ register_audit.py                imports the register, checks it against
 test_audit.py                    checks on the audit; prints its count
 test_register.py                 checks on the register audit; prints its
                                  count
-CLAIM_TABLE.md                   AGA_001..032 with falsifiers
+CLAIM_TABLE.md                   AGA_001..038 with falsifiers
 ```
 
 The register arrived a drop after the seed and is a different kind of
@@ -45,13 +48,24 @@ register's own -- rather than parsing it. Its `n_eff` comes from
 `effective-redundancy-audit`, imported and not reimplemented: two of the
 sources under one question turn out to share three authors.
 
-Five of the register's eight questions are UNMEASURED, which is the
+Five of the register's ten questions are UNMEASURED, which is the
 register's own headline and its own point: *an UNMEASURED cell is a
-result.* The audit adds that the fatigue-by-tenure question (QD) has no
-source at all, that the tenure curve cannot be read as learning rather
-than survivorship from any source in it (QE), and that one term of the
+result.* The audit adds that **seven of ten are not answered** -- the
+count reads one status token and the revision added two open questions
+under two others -- that the fatigue-by-tenure question (QD) has no source
+at all, that the tenure curve cannot be read as learning rather than
+survivorship from any source in it (QE), and that one term of the
 driverless-versus-human comparison (QH) is absent from the corpus
-entirely -- no document here states a driving-hours limit.
+entirely, since no document here states a driving-hours limit.
+
+The revision's own strongest content is QJ, which holds a contradiction
+between two sources the register already carries -- experience predicting
+MORE *"fell asleep at the wheel"* against crash risk falling with
+experience -- names three rival explanations, says which predicts it fully,
+and picks none. The one that predicts it fully is the register's own term
+drift: the phrase meant *pulled over and slept* to an older cohort and
+*dozed while moving* to a younger one, a rest act and a hazard event
+counted as one item with opposite signs for risk.
 
 **Everything in the drop is CARRIED.** Every figure is sourced to reporting
 this environment cannot reach -- the egress gate refuses every publisher

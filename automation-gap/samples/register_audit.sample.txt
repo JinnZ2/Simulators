@@ -1,44 +1,67 @@
 REGISTER AUDIT -- driver_hours_evidence_register.py
 Imported, not parsed. Nothing below reads a primary source.
 
-AGA_020  status scale: 6 declared, 3 in SOURCES, 2 in QUESTIONS
+AGA_020  status scale: 6 declared, 3 in SOURCES, 5 in QUESTIONS
     declared        : OBSERVED, SECONDARY, DERIVED, PROPOSED, UNMEASURED, UNREAD
     used in sources : OBSERVED, SECONDARY, UNREAD
-    used nowhere    : DERIVED, PROPOSED
-    undeclared      : SUPPORTED
+    used nowhere    : none
+    undeclared      : PARTIAL, SUPPORTED, UNRESOLVED
 
 AGA_021  citation strings sharing name tokens
-    S1 & S3 share Braver, Preusser, Ulmer   subset: True   same frame: True
+    S1 & S3 share Braver, Preusser, Ulmer   subset: True   same frame: False
     nominal sources vs n_eff, per question (n_eff imported):
       QA  n_nominal 4 -> n_eff 3   collapsed: S1, S3
       QB  n_nominal 2 -> n_eff 2   collapsed: none
       QC  n_nominal 2 -> n_eff 2   collapsed: none
       QF  n_nominal 1 -> n_eff 1   collapsed: none
       QH  n_nominal 2 -> n_eff 2   collapsed: none
+      QI  n_nominal 3 -> n_eff 3   collapsed: none
+      QJ  n_nominal 3 -> n_eff 3   collapsed: none
 
 AGA_022  frame flags: rule is 'every source carries one'
-    declared: ON_ROAD, ADMISSION, VENDOR, N_OF_1, ARCHIVE
+    declared: ON_ROAD, ADMISSION, VENDOR, N_OF_1, ARCHIVE, TERM_DRIFT
     sources carrying no flag: S6
     an UNKNOWN member exists: False
 
 AGA_023  QE states: within-driver trajectories (same person over years); every source here is ON_ROAD cross-section
-    as written    : 7 of 11 sources carry ON_ROAD
+    as written    : 8 of 12 sources carry ON_ROAD
     not a sample  : S9, S10, Q1
-    over samples  : 7 of 8
+    over samples  : 8 of 9
     what stops it being all of them: S6
 
 AGA_024  ON_ROAD is defined as: interviewed while working -> excludes drivers already out
     S1  inspection stations, truck stops; CT FL OK OR; fits definition: yes
     S2  rest areas + roadside inspections, random sele fits definition: yes
+    S11 carrier records                                fits definition: NO
     S3  drivers at weigh stations WY + TN; dispatchers fits definition: yes
     S4  national survey, pre/post HOS rule change      fits definition: yes
     S5  carrier records (crash, moving violation)      fits definition: NO
     S7  ?                                              fits definition: where UNKNOWN
     S8  truck stops                                    fits definition: yes
-    carries the flag, does not fit the definition: S5
+    carries the flag, does not fit the definition: S11, S5
 
-AGA_025  holds entries: 23 findings, 10 reading-state notes, 33 total
+AGA_025  holds entries: 26 findings, 10 reading-state notes, 36 total
     sources whose holds are ALL reading-state: S7, S8, Q1
+
+AGA_033  a source relayed through another source in the register
+    S11  relayed through S2 (named: McCartt); the author-token check sees it: False
+
+AGA_034  TERM_DRIFT flag against the sources the note itself names
+    notes: 1   flagged: S1, S2
+    named in note  : S1, S2, S7, S8
+    named, unflagged: S7, S8
+    QI's own source list: S1, S2, S10
+
+AGA_035  the closing number counts one token
+    counted UNMEASURED : QD, QE, QF, QG, QH  -> headline 5 of 10
+    open, not counted  : QI (PARTIAL), QJ (UNRESOLVED)
+    answered           : QA, QB, QC  -> not answered 7 of 10
+
+AGA_036  revision against 1bb8471: OK
+    +64 / -5 lines
+    byte-identical: none
+    changed       : QUESTIONS, RULES, SOURCES
+    added         : TERM_NOTES
 
 AGA_026  S2 rates: ever 47.1%, past-year 25.4%, nested True (ratio 0.539)
 
@@ -58,7 +81,7 @@ AGA_028  S9 headline: 1000 mi in 15 h -> 66.7 mph sustained
 AGA_029  register dates itself 2026-09-23; documents date 2026-09-24
     register shares a date with the documents: False
 
-refs     11 sources, 8 questions; unresolvable ids: none
-    named by no question: Q1, S7, S8
-count    5 of 8 questions UNMEASURED (QD, QE, QF, QG, QH)
+refs     12 sources, 10 questions; unresolvable ids: none
+    named by no question: Q1, S11, S7, S8
+count    5 of 10 questions UNMEASURED (QD, QE, QF, QG, QH)
     UNMEASURED and sourced at once: QF, QH

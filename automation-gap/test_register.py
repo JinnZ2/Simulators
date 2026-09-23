@@ -85,19 +85,37 @@ class ReadNotRestate(unittest.TestCase):
 
 class StatusVocabulary(unittest.TestCase):
 
-    def test_one_scale_declared_two_in_use(self):
+    def test_one_scale_declared_four_sites_in_use(self):
         v = RA.status_vocabulary()
         self.assertEqual(len(v["declared"]), 6)
+        self.assertEqual(v["n_sites"], 4)
         self.assertEqual(set(v["in_sources"]),
                          {"OBSERVED", "SECONDARY", "UNREAD"})
-        self.assertEqual(set(v["in_questions"]), {"SUPPORTED", "UNMEASURED"})
+        self.assertEqual(set(v["in_questions"]),
+                         {"PARTIAL", "SUPPORTED", "UNMEASURED", "UNREAD",
+                          "UNRESOLVED"})
 
-    def test_the_question_verdict_token_is_declared_nowhere(self):
-        self.assertIn("SUPPORTED", RA.status_vocabulary()["undeclared"])
+    def test_the_scale_reaches_prose_by_a_different_mechanism(self):
+        """A `status` field is a slot; a [TAG] in a sentence is not, and
+        the declared scale gives a reader no way to know the second
+        exists. The revision added both remaining sites."""
+        v = RA.status_vocabulary()
+        self.assertEqual(v["in_holds_tags"], ["OBSERVED", "SECONDARY"])
+        self.assertEqual(v["in_term_notes"],
+                         ["DERIVED", "OBSERVED", "PROPOSED"])
 
-    def test_two_declared_rungs_are_used_nowhere(self):
-        self.assertEqual(RA.status_vocabulary()["unused_anywhere"],
-                         ["DERIVED", "PROPOSED"])
+    def test_three_question_verdict_tokens_are_declared_nowhere(self):
+        self.assertEqual(RA.status_vocabulary()["undeclared"],
+                         ["PARTIAL", "SUPPORTED", "UNRESOLVED"])
+
+    def test_two_declared_rungs_reach_no_status_slot(self):
+        """DERIVED and PROPOSED are exercised, and only as inline tags in
+        TERM_NOTES. AGA_020's falsifier named a SOURCE carrying DERIVED;
+        what happened instead was a new kind of entry carrying it, so the
+        claim closes on one reading and not on the one it registered."""
+        v = RA.status_vocabulary()
+        self.assertEqual(v["unused_in_a_status_slot"], ["DERIVED", "PROPOSED"])
+        self.assertEqual(v["unused_anywhere"], [])
 
     def test_undeclared_is_not_constant(self):
         """The check must be able to come back empty."""
@@ -120,7 +138,15 @@ class SharedNode(unittest.TestCase):
         self.assertEqual((pr["a"], pr["b"]), ("S1", "S3"))
         self.assertEqual(pr["shared"], ["Braver", "Preusser", "Ulmer"])
         self.assertTrue(pr["subset"])
-        self.assertTrue(pr["frames_equal"])
+
+    def test_the_revision_split_their_frames(self):
+        """S1 took TERM_DRIFT and S3 did not -- correctly: S3 is about
+        dispatchers and schedules and carries no fatigue item to drift.
+        The shared node is unaffected; the flags are no longer identical."""
+        pr = RA.author_overlap()[0]
+        self.assertFalse(pr["frames_equal"])
+        self.assertIn("TERM_DRIFT", REG.SOURCES["S1"]["frame"])
+        self.assertNotIn("TERM_DRIFT", REG.SOURCES["S3"]["frame"])
 
     def test_qa_has_four_nominal_sources_and_n_eff_three(self):
         v = RA.question_n_eff()["QA"]
@@ -175,10 +201,10 @@ class FrameFlags(unittest.TestCase):
 class QEScope(unittest.TestCase):
 
     def test_as_written_it_is_seven_of_eleven(self):
-        self.assertEqual(RA.qe_scope()["as_written"], (7, 11))
+        self.assertEqual(RA.qe_scope()["as_written"], (8, 12))
 
     def test_over_samples_it_is_seven_of_eight(self):
-        self.assertEqual(RA.qe_scope()["over_samples"], (7, 8))
+        self.assertEqual(RA.qe_scope()["over_samples"], (8, 9))
 
     def test_s6_is_what_stops_it_being_all_of_them(self):
         """AGA_022's missing state and AGA_023's unchecked boundary are
@@ -190,7 +216,7 @@ class QEScope(unittest.TestCase):
         s6["frame"] = ["ON_ROAD"]
         with _patched(S6=s6):
             v = RA.qe_scope()
-            self.assertEqual(v["over_samples"], (8, 8))
+            self.assertEqual(v["over_samples"], (9, 9))
             self.assertEqual(v["blocked_by"], [])
 
 
@@ -198,9 +224,9 @@ class QEScope(unittest.TestCase):
 
 class FlagFitsDefinition(unittest.TestCase):
 
-    def test_s5_carries_the_flag_and_does_not_fit_the_definition(self):
+    def test_two_sources_carry_the_flag_and_do_not_fit_the_definition(self):
         v = RA.frame_definition_fit()
-        self.assertEqual(v["mismatched"], ["S5"])
+        self.assertEqual(v["mismatched"], ["S11", "S5"])
 
     def test_an_unknown_where_is_not_a_mismatch(self):
         """S7's `where` is '?'. A None must not be read as a False: that
@@ -219,7 +245,7 @@ class FlagFitsDefinition(unittest.TestCase):
         s5 = copy.deepcopy(REG.SOURCES["S5"])
         s5["where"] = "interviewed at truck stops"
         with _patched(S5=s5):
-            self.assertEqual(RA.frame_definition_fit()["mismatched"], [])
+            self.assertEqual(RA.frame_definition_fit()["mismatched"], ["S11"])
 
 
 # ------------------------------------------------------- AGA_025 holds kinds
@@ -228,9 +254,9 @@ class HoldsKinds(unittest.TestCase):
 
     def test_the_split(self):
         v = RA.holds_kinds()
-        self.assertEqual(v["total_holds"], 33)
+        self.assertEqual(v["total_holds"], 36)
         self.assertEqual(v["state_notes"], 10)
-        self.assertEqual(v["findings"], 23)
+        self.assertEqual(v["findings"], 26)
 
     def test_three_sources_carry_no_finding_at_all(self):
         self.assertEqual(RA.holds_kinds()["sources_with_no_finding"],
@@ -325,6 +351,87 @@ class SelfDate(unittest.TestCase):
                          {"2026-09-24"})
 
 
+# ------------------------------------------------- AGA_033..037 revision
+
+class RelayProvenance(unittest.TestCase):
+
+    def test_s11_is_relayed_through_s2(self):
+        rp = RA.relay_provenance()
+        self.assertEqual(len(rp), 1)
+        self.assertEqual(rp[0]["src"], "S11")
+        self.assertEqual(rp[0]["relayed_through"], ["S2"])
+
+    def test_the_author_token_check_cannot_see_it(self):
+        """The relation is stated in prose after the year, so a surname
+        overlap finds nothing: a second shared node, and the mechanical
+        check for shared nodes is blind to it."""
+        self.assertFalse(RA.relay_provenance()[0]["caught_by_author_overlap"])
+        self.assertNotIn("S11", [x for p in RA.author_overlap()
+                                 for x in (p["a"], p["b"])])
+
+    def test_it_reaches_no_question_so_no_n_eff_moves(self):
+        for qid, v in RA.question_n_eff().items():
+            self.assertNotIn("S11", v["collapsed"], qid)
+
+
+class TermNoteScope(unittest.TestCase):
+
+    def test_the_fix_names_four_sources_and_two_carry_the_flag(self):
+        v = RA.term_note_scope()
+        self.assertEqual(v["named_in_fix"], ["S1", "S2", "S7", "S8"])
+        self.assertEqual(v["flagged"], ["S1", "S2"])
+        self.assertEqual(v["named_but_unflagged"], ["S7", "S8"])
+
+    def test_no_source_is_flagged_without_being_named(self):
+        self.assertEqual(RA.term_note_scope()["flagged_but_unnamed"], [])
+
+    def test_qi_carries_a_third_set(self):
+        """Not an error: S10 is the term-drift evidence and S7/S8 are the
+        unread items. Two roles, and the schema has one list."""
+        v = RA.term_note_scope()
+        self.assertEqual(v["qi_sources"], ["S1", "S2", "S10"])
+        self.assertNotEqual(set(v["qi_sources"]), set(v["named_in_fix"]))
+
+
+class OpenButUncounted(unittest.TestCase):
+
+    def test_the_headline_counts_one_token_of_three_open_ones(self):
+        v = RA.open_but_uncounted()
+        self.assertEqual(v["headline"], "5 of 10")
+        self.assertEqual(v["not_answered"], "7 of 10")
+
+    def test_the_two_added_questions_are_open_and_uncounted(self):
+        """The revision added two open questions under labels the closing
+        count does not recognise, so the headline fell as a fraction
+        because open cells were added."""
+        v = RA.open_but_uncounted()
+        self.assertEqual(v["open_uncounted"],
+                         [("QI", "PARTIAL"), ("QJ", "UNRESOLVED")])
+
+    def test_answered_is_three(self):
+        self.assertEqual(RA.open_but_uncounted()["answered"],
+                         ["QA", "QB", "QC"])
+
+
+class Revision(unittest.TestCase):
+
+    def test_the_previous_version_resolves_by_content(self):
+        """Not HEAD~1: a fixed position compares against the same bytes as
+        soon as an unrelated commit lands between them."""
+        v = RA.revision()
+        if v["status"] != "OK":
+            self.skipTest("git history not reachable: %s" % v.get("reason"))
+        self.assertGreater(v["lines_added"], v["lines_removed"])
+        self.assertEqual(v["added"], ["TERM_NOTES"])
+        self.assertEqual(v["changed"], ["QUESTIONS", "RULES", "SOURCES"])
+        self.assertEqual(v["removed"], [])
+
+    def test_an_explicit_ref_that_does_not_resolve_is_reported(self):
+        v = RA.revision(against="no-such-ref-xyz")
+        self.assertIn(v["status"], ("NOT_AVAILABLE", "NO_PRIOR_VERSION"))
+        self.assertIn("reason", v)
+
+
 # ------------------------------------------------------- structure
 
 class Structure(unittest.TestCase):
@@ -332,8 +439,10 @@ class Structure(unittest.TestCase):
     def test_every_question_source_id_resolves(self):
         self.assertEqual(RA.question_refs()["unresolvable"], [])
 
-    def test_three_sources_are_named_by_no_question(self):
-        self.assertEqual(RA.question_refs()["unreferenced"], ["Q1", "S7", "S8"])
+    def test_four_sources_are_named_by_no_question(self):
+        """S11 arrived in the revision and reaches no question."""
+        self.assertEqual(RA.question_refs()["unreferenced"],
+                         ["Q1", "S11", "S7", "S8"])
 
     def test_aga_031_the_operator_record_takes_no_exemption(self):
         """S10 is scored on the same scale, carries a frame flag, and the
@@ -345,14 +454,14 @@ class Structure(unittest.TestCase):
         self.assertEqual(s10["frame"], ["N_OF_1"])
         naming = [q[0] for q in REG.QUESTIONS if "S10" in q[2]]
         alone = [q for q in REG.QUESTIONS if q[2] == ["S10"]]
-        self.assertEqual(naming, ["QA", "QF", "QH"])
+        self.assertEqual(naming, ["QA", "QF", "QH", "QI", "QJ"])
         self.assertEqual(len(alone), 1)
         self.assertTrue(alone[0][3].startswith("UNMEASURED"))
         self.assertIn("N=1", alone[0][3])
 
     def test_the_headline_count_recomputes(self):
         v = RA.headline_count()
-        self.assertEqual((v["n_unmeasured"], v["n_questions"]), (5, 8))
+        self.assertEqual((v["n_unmeasured"], v["n_questions"]), (5, 10))
 
     def test_unmeasured_and_sourced_are_not_exclusive(self):
         self.assertEqual(RA.headline_count()["unmeasured_and_sourced"],
@@ -376,9 +485,15 @@ class Structure(unittest.TestCase):
 
     def _masked(self):
         text = RA.render(RA.findings())
-        for s in REG.SOURCES.values():
-            if s["where"].strip() not in ("?", "-", ""):
-                text = text.replace(s["where"][:46], "<delivered>")
+        # LONGEST FIRST. S11's `where` is a strict prefix of S5's, so
+        # masking the short one first left "(crash, moving violation)"
+        # standing and the arm reported a hit it had been written to
+        # mask -- a defect found by running, recorded at AGA_037.
+        wheres = sorted((s["where"][:46] for s in REG.SOURCES.values()
+                         if s["where"].strip() not in ("?", "-", "")),
+                        key=len, reverse=True)
+        for w in wheres:
+            text = text.replace(w, "<delivered>")
         return text
 
     def test_arm_1_masked_the_render_is_clean(self):

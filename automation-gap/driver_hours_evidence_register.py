@@ -23,6 +23,8 @@ Sampling-frame flags (every source carries one):
   VENDOR       party reporting benefits from the number
   N_OF_1       single first-hand record
   ARCHIVE      narrative / oral history, not a sample
+  TERM_DRIFT   item wording carries two meanings across populations;
+               the count mixes them (see TERM NOTES)
 
 Nothing here is a finding about any individual. It is a map of which
 questions the record can and cannot answer yet.
@@ -42,7 +44,7 @@ SOURCES = {
                "in past month (per IIHS summary)",
                "violator characteristics table exists -- contents UNREAD"],
         status="OBSERVED (abstract) / UNREAD (tables)",
-        frame=["ON_ROAD", "ADMISSION"]),
+        frame=["ON_ROAD", "ADMISSION", "TERM_DRIFT"]),
     "S2": dict(
         cite="McCartt, Rohrbaugh, Hammer, Fuller (2000). Factors associated "
              "with falling asleep at the wheel among long-distance truck "
@@ -53,10 +55,24 @@ SOURCES = {
                "25.4% in the past year",
                "predictors include schedules, long hours, night driving "
                "(secondary summary)",
-               "'driving exposure' and 'demographics' were predictor "
-               "blocks -- whether tenure was one: UNREAD"],
-        status="OBSERVED (abstract) / UNREAD (predictor table)",
-        frame=["ON_ROAD"]),
+               "six factors from multivariate analysis; per a secondary "
+               "review (Brazil, scielo) one factor = OLDER AGE AND MORE "
+               "EXPERIENCE as a driver -> predicts MORE 'fell asleep at "
+               "the wheel'  [SECONDARY]",
+               "abstract wording: 'at the wheel of a truck'; later "
+               "citations restate it as 'while driving' (Tandfonline "
+               "2017; scielo)  [OBSERVED -- citation-chain conversion]",
+               "which item (ever vs past-year) the experience factor "
+               "predicted: UNREAD"],
+        status="OBSERVED (abstract) / UNREAD (predictor table, item wording)",
+        frame=["ON_ROAD", "TERM_DRIFT"]),
+    "S11": dict(
+        cite="Lin et al. (1994), operational data from a national motor "
+             "carrier, as summarised in McCartt et al. 2000",
+        n="carrier fleet", years="early 1990s", where="carrier records",
+        holds=["total driving time had a greater effect on crash risk "
+               "than time of day or driving experience  [SECONDARY]"],
+        status="SECONDARY", frame=["ON_ROAD"]),
     "S3": dict(
         cite="Braver, Preusser, Ulmer (1999). How long-haul motor carriers "
              "determine truck driver work schedules: the role of shipper "
@@ -137,6 +153,25 @@ SOURCES = {
         status="UNREAD", frame=["ARCHIVE"]),
 }
 
+TERM_NOTES = {
+    "fell asleep at the wheel": dict(
+        sense_old="pulled over, stopped, slept slumped on the steering "
+                  "wheel -- a REST ACT (fatigue managed)",
+        sense_new="dozed while the truck was moving -- a HAZARD EVENT "
+                  "(fatigue unmanaged)",
+        source="operator first-hand: old sense was standard in her "
+               "father's era; oilfield usage still carries it  [OBSERVED]",
+        effect="a survey counting 'yes' mixes a safety behaviour with "
+               "a hazard; the two have OPPOSITE signs for risk  [DERIVED]",
+        tenure_bias="if older / oilfield drivers answer in the old sense, "
+                    "experienced drivers' 'fatigue' rate is inflated by "
+                    "rest acts -> a tenure curve on this item is biased "
+                    "FLAT, masking any novice concentration  [DERIVED]",
+        fix="read item wording (S1, S2, S7, S8). If it does not say "
+            "'while the vehicle was moving', the count is TERM_DRIFT and "
+            "cannot be read as hazard prevalence  [PROPOSED]"),
+}
+
 # questions -> which sources speak to them, current status, next read
 QUESTIONS = [
     ("QA", "Did working drivers routinely run long days pre-ELD?",
@@ -166,6 +201,22 @@ QUESTIONS = [
     ("QH", "Door-to-door stops + human-touch minutes: driverless vs human",
      ["S9", "S10"], "UNMEASURED (vendor omits dwell)",
      "count every stop and touch, both systems, same lane"),
+    ("QI", "Did 'fell asleep at the wheel' items measure dozing-while-"
+           "moving or pulled-over sleep?",
+     ["S1", "S2", "S10"],
+     "PARTIAL -- abstract says 'at the wheel'; citing papers convert it "
+     "to 'while driving'; questionnaire text still UNREAD",
+     "questionnaire text for S1, S2, S7, S8; split by cohort / sector"),
+    ("QJ", "Why does experience PREDICT more 'fell asleep at the wheel' "
+           "(S2) while crash risk FALLS with experience (S5)?",
+     ["S2", "S5", "S10"],
+     "UNRESOLVED -- three rival explanations, not yet separable",
+     "E1 exposure: 'ever' item grows with years driven -> check "
+     "past-year item | E2 age: sleep disorders rise with age -> "
+     "control age vs tenure | E3 TERM DRIFT: experienced drivers "
+     "answer in the old sense (pulled over, slept) -> item wording + "
+     "cohort split. E3 predicts the S2/S5 contradiction; E1 and E2 "
+     "predict it only partly"),
 ]
 
 # propagation rules for readers of this register
@@ -177,6 +228,8 @@ RULES = [
     "N_OF_1 is OBSERVED, not anecdote: it bounds what is possible, "
     "it does not estimate a rate.",
     "An UNMEASURED cell is a result: it says where the next study goes.",
+    "A self-report count is read against the item's WORDING and the "
+    "respondent population's sense of the words, not the analyst's.",
 ]
 
 
@@ -196,6 +249,12 @@ def main():
         print("       sources: %s" % (", ".join(srcs) or "none"))
         print("       status : %s" % st)
         print("       next   : %s" % nxt)
+    print("\nTERM NOTES")
+    for term, t in TERM_NOTES.items():
+        print("  '%s'" % term)
+        for k in ("sense_old", "sense_new", "source", "effect",
+                  "tenure_bias", "fix"):
+            print("     %-11s %s" % (k, t[k]))
     print("\nREADING RULES")
     for r in RULES:
         print("  - " + r)

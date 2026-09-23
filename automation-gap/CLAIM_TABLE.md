@@ -4,7 +4,7 @@ Ids are permanent. `AGA_` = automation-gap. Status is SUPPORTED / REFUTED /
 UNVERIFIED. Every SUPPORTED claim is a property of the delivered material
 and is recomputable by anyone with the folder: `python3 audit.py` for the
 six documents (`AGA_001..019`), `python3 register_audit.py` for the
-evidence register (`AGA_020..031`). The delivered falsifiers are the
+evidence register (`AGA_020..038`). The delivered falsifiers are the
 documents' own (`AUT-F1..F8`, `RD-F1..F3`) and carry their own prefixes;
 nothing here renumbers them.
 
@@ -223,15 +223,24 @@ Every source in it is CARRIED: located by a search pass this environment
 cannot repeat, and several are marked UNREAD by the register itself.
 Nothing below reads a primary source or rules on one.
 
-**AGA_020 -- the register declares one status scale and runs two.
-SUPPORTED.** The docstring declares six rungs *"one scale for every source"*
--- `OBSERVED / SECONDARY / DERIVED / PROPOSED / UNMEASURED / UNREAD`. The
-sources use three of them (`OBSERVED`, `SECONDARY`, `UNREAD`). The question
-map uses a different pair, and **`SUPPORTED`, which carries three of the
-eight question verdicts, is declared nowhere**. `DERIVED` and `PROPOSED`
-are used in neither -- a visible zero, and `DERIVED` is the load-bearing
-one: nothing in the register combines two sources into a third statement,
-which is what `AGA_021` and `AGA_028` below both turn out to be.
+**AGA_020 -- the register declares one status scale and runs it at four
+sites through three mechanisms. SUPPORTED, amended by the revision.** The
+docstring declares six rungs *"one scale for every source"* --
+`OBSERVED / SECONDARY / DERIVED / PROPOSED / UNMEASURED / UNREAD`. The
+sources use three in a `status` field; the question map uses five in a
+tuple slot, of which **`PARTIAL`, `SUPPORTED` and `UNRESOLVED` are
+declared nowhere** and between them carry five of the ten question
+verdicts. The revision added the other two sites, both **inline `[TAG]`
+markers inside free-text prose** -- in a `holds` entry and in a
+`TERM_NOTES` field. A `status` field is a slot a reader can enumerate; a
+bracket in a sentence is not, and the declared scale gives no indication
+the second kind exists. **`DERIVED` and `PROPOSED` close on one reading
+and not on the one the claim registered:** both are now exercised, and
+only as inline tags, reaching **no status slot anywhere**. The falsifier
+asked for a SOURCE carrying `DERIVED`; what arrived was a new kind of
+entry carrying it, so the original gap -- nothing in the register combines
+two sources into a third statement in a place the scale is read from --
+is unchanged.
 *Falsifier:* a second declared scale for questions, or a source carrying
 `DERIVED`.
 
@@ -262,23 +271,27 @@ which is the absent-vs-known-negative repair missing on the field the
 register's entire bias argument runs through. *Falsifier:* a sixth declared
 flag for an unestablished frame.
 
-**AGA_023 -- QE's own sentence is 7 of 11 as written and 7 of 8 as meant,
-and S6 is what stops it being 8 of 8. SUPPORTED.** QE's next-read field
-states *"every source here is ON_ROAD cross-section."* Seven of eleven
+**AGA_023 -- QE's own sentence is 8 of 12 as written and 8 of 9 as meant,
+and S6 is what stops it being 9 of 9. SUPPORTED, numbers moved by the
+revision.** QE's next-read field
+states *"every source here is ON_ROAD cross-section."* Eight of twelve
 sources carry `ON_ROAD`; the four that do not are three non-samples (`S9`
-VENDOR, `S10` N_OF_1, `Q1` ARCHIVE) and S6. Over samples it is 7 of 8 and
-the eighth is S6, whose frame is unstated -- so **`AGA_022`'s missing state
+VENDOR, `S10` N_OF_1, `Q1` ARCHIVE) and S6. Over samples it is 8 of 9 and
+the ninth is S6, whose frame is unstated -- so **`AGA_022`'s missing state
 and this unchecked boundary are one gap at two sites**, and supplying S6 a
 flag closes both (asserted, in both directions). The sentence is right
 about what it means and wrong as written. *Falsifier:* S6 declaring a
 frame.
 
-**AGA_024 -- a flag is carried for a consequence and defined as a method.
-SUPPORTED.** `ON_ROAD` is defined as *"interviewed while working -> excludes
+**AGA_024 -- a flag is carried for a consequence and defined as a method,
+and the revision added a second instance. SUPPORTED, n=1 -> n=2.** `ON_ROAD` is defined as *"interviewed while working -> excludes
 drivers already out"*. S5's `where` is *"carrier records (crash, moving
-violation)"* -- **nobody was interviewed**, and S5 is the only source
-carrying the flag whose `where` names no method (S7's `where` is `"?"` and
-is reported as unknown, not as a mismatch). The survivorship *consequence*
+violation)"* -- **nobody was interviewed**. The revision added **S11**,
+`where` = *"carrier records"*, carrying `ON_ROAD` on the same reasoning:
+two of the flag's holders now name no method, against five that do (S7's
+`where` is `"?"` and is reported as unknown, not as a mismatch). The
+author has not seen this audit, so the second instance is independent
+recurrence and not a finding disregarded. The survivorship *consequence*
 still holds -- a driver who crashes out or quits leaves the roster -- so
 the flag is right about the bias and wrong about the mechanism: the
 vocabulary conflates a sampling METHOD with a sampling CONSEQUENCE. The
@@ -286,12 +299,13 @@ repair is either a member for record-based survivorship or a definition
 stated as the consequence. *Falsifier:* S5's `where` naming an interview.
 
 **AGA_025 -- `holds` carries two kinds of entry with no field between them.
-SUPPORTED.** Of 33 entries, **10 are reading-state notes rather than
-findings** (*"violator characteristics table exists -- contents UNREAD"*,
+SUPPORTED, numbers moved by the revision.** Of 36 entries, **10 are
+reading-state notes rather than findings** (*"violator characteristics table exists -- contents UNREAD"*,
 *"crash TYPE by tenure: not in relays"*), and **three of eleven sources
 contribute no finding at all** -- S7, S8 and Q1 are reading-state top to
-bottom. A consumer counting `holds` as evidence gets 33 where 23 are
-findings and three sources are worth zero. *Falsifier:* a `reading_state`
+bottom. A consumer counting `holds` as evidence gets 36 where 26 are
+findings and three sources are worth zero. The revision added four
+entries and removed one, and the reading-state count did not move. *Falsifier:* a `reading_state`
 field, or a source moving off the all-notes list.
 
 **AGA_026 -- the one containment the register admits, and it holds.
@@ -370,10 +384,12 @@ first-hand record and is scored on the same six-rung scale as every
 published source, carries a sampling-frame flag like every other source
 (`N_OF_1`), and is governed by a stated non-inference: *"N_OF_1 is
 OBSERVED, not anecdote: it bounds what is possible, it does not estimate a
-rate."* **Three** of the eight questions name S10, and the one that rests
-on it ALONE -- QF -- is UNMEASURED with the reason in its own status field
-(*"N=1 only"*); QA is SUPPORTED and names three other sources beside it. So
-the non-inference rule is followed rather than declared. This is the discipline the
+rate."* **Five** of the ten questions name S10 after the revision, up
+from three, and the one that rests on it ALONE -- QF -- is still
+UNMEASURED with the reason in its own status field (*"N=1 only"*); QA is
+SUPPORTED and names three other sources beside it. The rule held while the
+register's reliance on the record nearly doubled, which is the harder
+test. So the non-inference rule is followed rather than declared. This is the discipline the
 sibling register records at `UNI_071` -- noticing does not place a source
 outside its own population -- arrived at independently and, unlike there,
 built into the scale before any entry. *Falsifier:* a question scoring
@@ -383,7 +399,108 @@ SUPPORTED on S10 alone.
 read. The register says so itself for five of the eleven (`UNREAD`), and
 the egress gate refuses every publisher host, so the other six are carried
 on the strength of a search pass nobody here can repeat. Nothing in
-`AGA_020..031` is evidence about driving hours, fatigue, tenure, any
+`AGA_020..038` is evidence about driving hours, fatigue, tenure, any
 carrier or any vendor; every one is a property of the register's own
 declarations. Whether the eight questions have the status the register
 assigns them is untouched in both directions.
+
+---
+
+## The revision
+
+The register was revised after `AGA_020..032` were published against it.
+A revision is a copy of its predecessor and copies drift, so
+`register_audit.revision()` reports what moved rather than assuming it,
+resolving the previous version **by content** -- the most recent commit
+whose blob differs from what is on disk -- and not by a position in
+history, which would compare against the same bytes as soon as an
+unrelated commit landed between them. Twelve pinned checks fired on the
+revision; every one named a number that moved, which is the suite working
+rather than the revision being wrong.
+
+**AGA_033 -- a source whose provenance is another source in the register,
+and the shared-node check cannot see it. SUPPORTED.** S11 cites *"Lin et
+al. (1994) ... as summarised in McCartt et al. 2000"*, and McCartt et al.
+2000 is **S2**. `AGA_021`'s check matches name tokens ahead of the year,
+so it finds nothing: S11's own author list and S2's are disjoint, and the
+relation that makes them one channel is stated in prose after the
+parenthesis. A second shared node, of a different kind from S1/S3 --
+there two papers by one group, here one source relayed *through* another
+source in the same register -- and nothing in the register marks it.
+It costs no `n_eff` today only because S11 reaches no question.
+*Falsifier:* S11 entering a question alongside S2, or a `relayed_through`
+field.
+
+**AGA_034 -- the TERM_DRIFT flag marks two of the four sources the note
+itself names. SUPPORTED.** `TERM_NOTES` states the remedy as *"read item
+wording (S1, S2, S7, S8)"*; `TERM_DRIFT` is carried by **S1 and S2 only**.
+No source is flagged without being named, so the gap is one-directional:
+the two the note says to read and did not get the flag are exactly the two
+whose status is already `UNREAD` top to bottom, which is where a flag
+would do the most work. QI carries a **third set** (`S1, S2, S10`), and
+that is not an error -- S10 is the term-drift evidence and S7/S8 are the
+unread items, two roles with one list to put them in. *Falsifier:* S7 or
+S8 gaining the flag, or the note narrowing to two.
+
+**AGA_035 -- the closing number counts one token of the three the register
+uses for an open cell, so adding open questions lowered the reported
+fraction. SUPPORTED.** `main()` counts questions whose status begins
+`UNMEASURED`: five. The revision added **QI (`PARTIAL`)** and **QJ
+(`UNRESOLVED`)**, both open and neither counted, so the headline reads
+**5 of 10** where **7 of 10 are not answered** and only three carry
+`SUPPORTED`. The register's own thesis is that *an UNMEASURED cell is a
+result*; two results were added and the number that reports them went
+down as a fraction, 5/8 to 5/10. The repair is the same one `AGA_020`
+points at -- the question vocabulary is undeclared, so nothing says which
+tokens mean open. *Falsifier:* a declared question scale, or the count
+reading every non-`SUPPORTED` status.
+
+**AGA_036 -- the revision measured. SUPPORTED.** +64 lines, -5, against
+`1bb8471`. All three top-level objects changed (`SOURCES`, `QUESTIONS`,
+`RULES`), **none is byte-identical**, one is new (`TERM_NOTES`) and none
+was removed. The five removed lines are S2's frame and predictor-block
+entry, replaced in place. What the revision did NOT touch is as recorded:
+the self-date stays 2026-09-23 (`AGA_029` unmoved), S6 still carries no
+frame flag though the flag vocabulary itself gained a member
+(`AGA_022` untouched by a revision that edited the list it is about), and
+the S1/S3 shared node stands (`AGA_021`) -- though their frames are no
+longer identical, correctly, since S3 is about dispatchers and schedules
+and carries no fatigue item to drift. *Falsifier:* a later revision with
+an object byte-identical to this one and a claim about it moving anyway.
+
+**AGA_037 -- one defect in this session's harness, found by running.
+SUPPORTED.** The three-arm exemption masks each source's `where` string
+before screening. S11's *"carrier records"* is a **strict prefix** of S5's
+*"carrier records (crash, moving violation)"*, so masking in dict order
+replaced the short one first and left `(crash, moving violation)` standing
+-- the arm reported the token it had been written to mask. Repaired by
+masking longest-first. Same class as `AGA_030` defect 2: a pattern
+matching a second referent, here inside the harness that measures the
+exemption rather than inside a check. The exemption stays **one token
+wide** and the width assertion is unchanged; two further hits the revision
+produced (`fix`, the register's own field name, in this audit's prose)
+were **reworded rather than exempted**, per the house rule. *Falsifier:*
+the prefix collision failing to reproduce on the recorded revision.
+
+**AGA_038 -- what the revision gets right, and it is the strongest content
+in the folder. SUPPORTED.** Two things. **(1)** The term-drift note
+records a **citation-chain conversion** as an observation rather than an
+inference: the S2 abstract says *"at the wheel of a truck"*, later
+citations restate it as *"while driving"*, and both wordings are carried
+with their sources so a reader can see the conversion happen. That is the
+`term-drift-citation` folder's subject -- does a citation still attach to
+what it cites -- arriving from a different direction and on a case where
+the two readings have **opposite signs for risk**: a rest act and a hazard
+event counted as one. **(2)** QJ states a contradiction between two
+sources the register already holds -- S2 has experience predicting MORE
+*"fell asleep at the wheel"*, S5 has crash risk FALLING with experience --
+lists three rival explanations (exposure, age, term drift), says which
+predicts the contradiction fully and which only partly, and **picks
+none**. The register's own term-drift hypothesis is the one that predicts
+it fully, and it is not thereby selected. *Falsifier:* a later revision
+resolving QJ without the item wording being read.
+
+**The UNVERIFIED claim covers the revision too** (`AGA_032`): no source in it was read, S11 is
+relayed rather than located, and the secondary review the S2 holds cite is
+carried at the same status as everything else.
+

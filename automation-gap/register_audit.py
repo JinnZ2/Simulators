@@ -83,12 +83,33 @@ def status_vocabulary():
         in_sources |= set(re.findall(r"\b[A-Z_]{4,}\b", s["status"]))
     for q in REG.QUESTIONS:
         in_questions |= set(re.findall(r"\b[A-Z_]{4,}\b", q[3]))
+
+    # Two further sites the scale reaches, by a different MECHANISM: an
+    # inline [TAG] inside free-text prose, in a `holds` entry or a
+    # TERM_NOTES field. A `status` field is a slot; a bracket in a
+    # sentence is not, and a reader looking at the declared scale has no
+    # way to know the second exists.
+    tag = re.compile(r"\[([A-Z_]{4,})[^\]]*\]")
+    in_holds, in_term_notes = set(), set()
+    for s in REG.SOURCES.values():
+        for h in s["holds"]:
+            in_holds |= set(tag.findall(h))
+    for t in getattr(REG, "TERM_NOTES", {}).values():
+        for v in t.values():
+            in_term_notes |= set(tag.findall(str(v)))
+
+    everywhere = in_sources | in_questions | in_holds | in_term_notes
     return dict(declared=declared,
                 in_sources=sorted(in_sources),
                 in_questions=sorted(in_questions),
-                unused_anywhere=[d for d in declared
-                                 if d not in in_sources | in_questions],
-                undeclared=sorted((in_sources | in_questions) - set(declared)))
+                in_holds_tags=sorted(in_holds),
+                in_term_notes=sorted(in_term_notes),
+                n_sites=sum(1 for x in (in_sources, in_questions, in_holds,
+                                        in_term_notes) if x),
+                unused_in_a_status_slot=[d for d in declared
+                                         if d not in in_sources | in_questions],
+                unused_anywhere=[d for d in declared if d not in everywhere],
+                undeclared=sorted(everywhere - set(declared)))
 
 
 def frame_vocabulary():
@@ -211,6 +232,68 @@ def holds_kinds():
                 sources_with_no_finding=[k for k, v in per.items() if v["all_state"]])
 
 
+def relay_provenance():
+    """AGA_033 -- a source whose provenance is ANOTHER source in the
+    register. The relation is stated in prose after the year, so the
+    surname overlap in author_overlap() cannot see it: S11 and the source
+    that summarises it share every author S11 has, which is none of its
+    own. A second shared node, invisible to the mechanical check."""
+    rel = re.compile(r"as (?:summaris|summariz|report|relay|cit)ed in\s+"
+                     r"([A-Z][A-Za-z]+)", re.I)
+    out = []
+    for k, s in REG.SOURCES.items():
+        m = rel.search(s["cite"])
+        if not m:
+            continue
+        lead = m.group(1)
+        through = [o for o, t in REG.SOURCES.items()
+                   if o != k and t["cite"].split("(")[0].strip().startswith(lead)]
+        seen_by_surname = any(
+            {lead} & _surnames(REG.SOURCES[o]["cite"]) and
+            _surnames(s["cite"]) & _surnames(REG.SOURCES[o]["cite"])
+            for o in through)
+        out.append(dict(src=k, relayed_through=through, named=lead,
+                        caught_by_author_overlap=seen_by_surname))
+    return out
+
+
+def term_note_scope():
+    """AGA_034 -- the TERM_DRIFT flag against the sources the note's own
+    `fix` field says are affected."""
+    notes = getattr(REG, "TERM_NOTES", {})
+    flagged = [k for k, s in REG.SOURCES.items() if "TERM_DRIFT" in s["frame"]]
+    named = set()
+    for t in notes.values():
+        named |= set(re.findall(r"\bS\d+\b", str(t.get("fix", ""))))
+    qi = [q for q in REG.QUESTIONS if q[0] == "QI"]
+    return dict(n_notes=len(notes), flagged=flagged,
+                named_in_fix=sorted(named, key=lambda x: int(x[1:])),
+                named_but_unflagged=sorted(named - set(flagged),
+                                           key=lambda x: int(x[1:])),
+                flagged_but_unnamed=sorted(set(flagged) - named),
+                qi_sources=(qi[0][2] if qi else None))
+
+
+def open_but_uncounted():
+    """AGA_035 -- the register's closing number counts one token, and the
+    revision added two open questions under tokens it does not count. The
+    headline falls as a fraction because open cells were added."""
+    counted, open_other, answered = [], [], []
+    for q in REG.QUESTIONS:
+        st = q[3]
+        if st.startswith("UNMEASURED"):
+            counted.append(q[0])
+        elif st.startswith("SUPPORTED"):
+            answered.append(q[0])
+        else:
+            open_other.append((q[0], st.split()[0].rstrip("-").strip()))
+    n = len(REG.QUESTIONS)
+    return dict(counted=counted, answered=answered, open_uncounted=open_other,
+                n_questions=n,
+                headline="%d of %d" % (len(counted), n),
+                not_answered="%d of %d" % (n - len(answered), n))
+
+
 def nested_rates():
     """AGA_026 -- S2's past-year rate must not exceed its ever rate."""
     holds = REG.SOURCES["S2"]["holds"]
@@ -302,6 +385,81 @@ def headline_count():
                 unmeasured_and_sourced=[q for q in un if q in sourced])
 
 
+def revision(against=None):
+    """AGA_036 -- the register was revised after AGA_020..032 were
+    published against it. A revision is a copy of its predecessor and
+    copies drift, so this reports what moved rather than assuming it.
+
+    `against` resolves to the PREVIOUS VERSION OF THIS FILE, not to a
+    position in history: the most recent commit whose blob differs from
+    what is on disk. A fixed HEAD~1 would silently compare against the
+    same bytes as soon as any other commit lands between them.
+    Returns NOT_AVAILABLE where git history is not reachable."""
+    import subprocess
+    rel = os.path.relpath(os.path.join(HERE, "driver_hours_evidence_register.py"),
+                          ROOT)
+    with open(os.path.join(HERE, "driver_hours_evidence_register.py")) as fh:
+        current = fh.read()
+
+    def _git(args):
+        return subprocess.run(["git"] + args, cwd=ROOT, capture_output=True,
+                              text=True, timeout=20)
+
+    try:
+        if against is None:
+            log = _git(["log", "--format=%H", "--", rel])
+            if log.returncode:
+                return dict(status="NOT_AVAILABLE",
+                            reason=log.stderr.strip()[:120])
+            prev, against = None, None
+            for sha in log.stdout.split():
+                blob = _git(["show", "%s:%s" % (sha, rel)])
+                if blob.returncode == 0 and blob.stdout != current:
+                    prev, against = blob, sha[:7]
+                    break
+            if prev is None:
+                return dict(status="NO_PRIOR_VERSION",
+                            reason="no commit of this file differs from disk")
+        else:
+            prev = _git(["show", "%s:%s" % (against, rel)])
+            if prev.returncode:
+                return dict(status="NOT_AVAILABLE",
+                            reason=prev.stderr.strip()[:120])
+    except (OSError, subprocess.SubprocessError) as exc:
+        return dict(status="NOT_AVAILABLE", reason=str(exc)[:120])
+
+    import difflib
+    old = prev.stdout.splitlines()
+    new = current.splitlines()
+    ins = dele = 0
+    for tag, i1, i2, j1, j2 in difflib.SequenceMatcher(None, old, new,
+                                                       autojunk=False).get_opcodes():
+        if tag in ("insert", "replace"):
+            ins += j2 - j1
+        if tag in ("delete", "replace"):
+            dele += i2 - i1
+
+    def _objs(lines):
+        """Top-level names, and the source of each, for a same/changed split."""
+        import ast
+        tree = ast.parse("\n".join(lines))
+        out = {}
+        for node in tree.body:
+            if isinstance(node, ast.Assign) and len(node.targets) == 1 \
+                    and isinstance(node.targets[0], ast.Name):
+                out[node.targets[0].id] = "\n".join(
+                    lines[node.lineno - 1:node.end_lineno])
+        return out
+
+    a, b = _objs(old), _objs(new)
+    same = sorted(k for k in a if k in b and a[k] == b[k])
+    changed = sorted(k for k in a if k in b and a[k] != b[k])
+    added = sorted(set(b) - set(a))
+    return dict(status="OK", against=against, lines_added=ins,
+                lines_removed=dele, byte_identical=same, changed=changed,
+                added=added, removed=sorted(set(a) - set(b)))
+
+
 def findings():
     return {
         "AGA_020_status_vocabulary": status_vocabulary(),
@@ -312,6 +470,10 @@ def findings():
         "AGA_024_frame_definition_fit": frame_definition_fit(),
         "AGA_025_holds_kinds": holds_kinds(),
         "AGA_026_nested_rates": nested_rates(),
+        "AGA_033_relay_provenance": relay_provenance(),
+        "AGA_034_term_note_scope": term_note_scope(),
+        "AGA_035_open_but_uncounted": open_but_uncounted(),
+        "AGA_036_revision": revision(),
         "AGA_027_aurora_provenance": aurora_provenance(),
         "AGA_028_hos_sizing": hos_sizing(),
         "AGA_029_self_date": self_date(),
@@ -379,6 +541,44 @@ def render(f):
       % (hk["findings"], hk["state_notes"], hk["total_holds"]))
     p("    sources whose holds are ALL reading-state: %s\n"
       % (", ".join(hk["sources_with_no_finding"]) or "none"))
+
+    rp = f["AGA_033_relay_provenance"]
+    p("AGA_033  a source relayed through another source in the register")
+    for r in rp:
+        p("    %-4s relayed through %s (named: %s); the author-token check "
+          "sees it: %s"
+          % (r["src"], ", ".join(r["relayed_through"]) or "(not in register)",
+             r["named"], r["caught_by_author_overlap"]))
+    if not rp:
+        p("    none")
+    p("")
+
+    tn = f["AGA_034_term_note_scope"]
+    p("AGA_034  TERM_DRIFT flag against the sources the note itself names")
+    p("    notes: %d   flagged: %s" % (tn["n_notes"], ", ".join(tn["flagged"])))
+    p("    named in note  : %s" % ", ".join(tn["named_in_fix"]))
+    p("    named, unflagged: %s" % (", ".join(tn["named_but_unflagged"]) or "none"))
+    p("    QI's own source list: %s\n"
+      % (", ".join(tn["qi_sources"] or []) or "none"))
+
+    ob = f["AGA_035_open_but_uncounted"]
+    p("AGA_035  the closing number counts one token")
+    p("    counted UNMEASURED : %s  -> headline %s"
+      % (", ".join(ob["counted"]), ob["headline"]))
+    p("    open, not counted  : %s"
+      % (", ".join("%s (%s)" % (a, b) for a, b in ob["open_uncounted"]) or "none"))
+    p("    answered           : %s  -> not answered %s\n"
+      % (", ".join(ob["answered"]), ob["not_answered"]))
+
+    rv = f["AGA_036_revision"]
+    p("AGA_036  revision against %s: %s"
+      % (rv.get("against", "-"), rv["status"]))
+    if rv["status"] == "OK":
+        p("    +%d / -%d lines" % (rv["lines_added"], rv["lines_removed"]))
+        p("    byte-identical: %s" % (", ".join(rv["byte_identical"]) or "none"))
+        p("    changed       : %s" % (", ".join(rv["changed"]) or "none"))
+        p("    added         : %s" % (", ".join(rv["added"]) or "none"))
+    p("")
 
     nr = f["AGA_026_nested_rates"]
     p("AGA_026  S2 rates: ever %.1f%%, past-year %.1f%%, nested %s (ratio %.3f)\n"
