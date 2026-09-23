@@ -50,6 +50,7 @@ DOC = {
     "komatsu": "KOMATSU_AHS_INPUT_SCAFFOLD.md",
     "field":   "FIELD_LAYER_ZERO_BURDEN_SPEC.md",
     "ledger":  "FIELD_LEDGER_001.md",
+    "seed":    "FIELD_LAYER_SEED_ROADS.md",
 }
 # Records the drop's own vocabulary treats as humanoid, declared here because
 # no delivered field carries a form factor. A reader may disagree with a row;
@@ -299,6 +300,272 @@ def doc_dates():
     return out
 
 
+# ---------------------------------------------------------------- seed roads
+#
+# FIELD_LAYER_SEED_ROADS arrived one drop after the other five and is WP1 and
+# WP2 -- two of the four objects AGA_009 recorded as named-and-absent. The
+# checks below are the same shape as the rest: arithmetic over figures the
+# document itself supplies, plus two citations it makes into its siblings.
+
+DASH = "[–—-]"
+TIMES = "×"
+
+
+def _seed_table_rows():
+    """Every pipe-table data row in the seed, as cell lists."""
+    out = []
+    for line in text("seed").splitlines():
+        s = line.strip()
+        if not s.startswith("|") or set(s) <= set("|- :"):
+            continue
+        out.append([c.strip() for c in s.strip("|").split("|")])
+    return out
+
+
+def seed_tire_ratio():
+    """'gravel ~= 2.5-3.7x paved' against the three cent-per-mile figures
+    printed in the same cell."""
+    t = text("seed")
+    m = re.search(r"concrete ([0-9.]+).*?asphalt ([0-9.]+).*?gravel ([0-9.]+)"
+                  r".*?\*\*([0-9.]+)" + DASH + r"([0-9.]+)", t)
+    if not m:
+        return {"parsed": False}
+    conc, asph, grav = _f(m.group(1)), _f(m.group(2)), _f(m.group(3))
+    lo_s, hi_s = m.group(4), m.group(5)
+    lo_c, hi_c = grav / asph, grav / conc
+    hw_lo, hw_hi = halfwidth(lo_s), halfwidth(hi_s)
+    return {"parsed": True,
+            "cents": {"concrete": conc, "asphalt": asph, "gravel": grav},
+            "stated": [_f(lo_s), _f(hi_s)],
+            "as_written": [lo_s, hi_s],
+            "recomputed": [round(lo_c, 4), round(hi_c, 4)],
+            "halfwidth": [float(hw_lo), float(hw_hi)],
+            "lo_agrees": abs(lo_c - _f(lo_s)) <= float(hw_lo),
+            "hi_agrees": abs(hi_c - _f(hi_s)) <= float(hw_hi),
+            "note": "lo = gravel/asphalt, hi = gravel/concrete -- the two "
+                    "surfaces the cell calls paved"}
+
+
+def seed_cost_vs_frequency():
+    """The maintenance-frequency row and the county-expenditure row sit two
+    lines apart in one table and do not scale together."""
+    t = text("seed")
+    fq = re.search(r"~([0-9.]+)" + TIMES + r" paved", t)
+    mn = re.search(r"gravel \$([0-9,]+)/mi/yr vs paved \$([0-9.]+)/mi/yr", t)
+    if not (fq and mn):
+        return {"parsed": False}
+    freq = _f(fq.group(1))
+    g, p = _f(mn.group(1)), _f(mn.group(2))
+    cost = g / p
+    return {"parsed": True,
+            "frequency_ratio_stated": freq,
+            "expenditure": {"gravel": g, "paved": p},
+            "expenditure_ratio": round(cost, 1),
+            "factor_between_them": round(cost / freq, 1),
+            "same_quantity": False,
+            "note": "frequency and expenditure are different quantities, so "
+                    "this is a tension and not a contradiction. What it needs "
+                    "is the county's own units on $13.45/mi/yr; nothing here "
+                    "adjudicates either figure."}
+
+
+def seed_rainfall_and_restatement():
+    """THE COLLISION restates three WP1 figures. Each is checked against the
+    row it restates -- the containment check, not a new measurement."""
+    t = text("seed")
+    rows = {}
+    m = re.search(r"\+([0-9,]+)" + DASH + r"([0-9,]+) mm/km", t)
+    rows["rainfall_row"] = [_f(m.group(1)), _f(m.group(2))] if m else None
+    m = re.search(r"~([0-9,]+) mm/km per metre of rain", t)
+    rows["rainfall_restated"] = _f(m.group(1)) if m else None
+    m = re.search(r"([0-9.]+)" + DASH + r"([0-9.]+)" + TIMES + r" tire cost", t)
+    rows["tire_restated"] = [_f(m.group(1)), _f(m.group(2))] if m else None
+    m = re.search(r"([0-9.]+)" + TIMES + r"\s+maintenance\s+frequency", t)
+    rows["freq_restated"] = _f(m.group(1)) if m else None
+    tr = seed_tire_ratio()
+    fq = seed_cost_vs_frequency()
+    checks = []
+    if rows["rainfall_row"] and rows["rainfall_restated"] is not None:
+        lo, hi = rows["rainfall_row"]
+        checks.append({"figure": "rainfall roughness",
+                       "restated": rows["rainfall_restated"],
+                       "source_row": [lo, hi],
+                       "contained": lo <= rows["rainfall_restated"] <= hi})
+    if rows["tire_restated"] and tr.get("parsed"):
+        checks.append({"figure": "tire cost ratio",
+                       "restated": rows["tire_restated"],
+                       "source_row": tr["stated"],
+                       "contained": rows["tire_restated"] == tr["stated"]})
+    if rows["freq_restated"] is not None and fq.get("parsed"):
+        checks.append({"figure": "maintenance frequency",
+                       "restated": rows["freq_restated"],
+                       "source_row": [fq["frequency_ratio_stated"]],
+                       "contained": rows["freq_restated"]
+                                    == fq["frequency_ratio_stated"]})
+    return {"checks": checks,
+            "all_contained": bool(checks) and all(c["contained"] for c in checks)}
+
+
+def seed_provenance_vocabulary():
+    """Labels the seed declares in its own header, against labels its tables
+    use. A label in use and not declared is the finding."""
+    t = text("seed")
+    m = re.search(r"Provenance labels:\s*(.+)", t)
+    declared = []
+    if m:
+        s = re.sub(r"\([^)]*\)", " ", m.group(1))
+        for part in s.split("/"):
+            w = part.strip().strip(".").strip()
+            if w and w == w.upper() and re.match(r"^[A-Z][A-Z -]*$", w):
+                declared.append(w)
+    used = {}
+    for cells in _seed_table_rows():
+        if not cells:
+            continue
+        last = cells[-1]
+        lm = re.match(r"([A-Z][A-Z \-/]*[A-Z])", last)
+        if not lm:
+            continue
+        for lab in lm.group(1).split("/"):
+            lab = lab.strip()
+            if lab:
+                used[lab] = used.get(lab, 0) + 1
+    undeclared = sorted(k for k in used if k not in declared)
+    return {"declared": declared,
+            "used": dict(sorted(used.items())),
+            "undeclared": undeclared,
+            "undeclared_rows": sum(used[k] for k in undeclared),
+            "note": "the nearest declared member for an industry-stated "
+                    "requirement is VENDOR, and the section's own framing "
+                    "turns on it not being one"}
+
+
+def seed_crosscites():
+    """The two citations the seed makes into its sibling documents."""
+    out = []
+
+    # 1. "(from the Komatsu scaffold, V2.1)" -- is the figure in that section?
+    k = text("komatsu").splitlines()
+    start = next((i for i, l in enumerate(k)
+                  if l.startswith("###") and "V2.1" in l), None)
+    end = len(k)
+    if start is not None:
+        for i in range(start + 1, len(k)):
+            if k[i].startswith("###"):
+                end = i
+                break
+    span = "\n".join(k[start:end]) if start is not None else ""
+    seed_fig = re.search(r"2 weeks ungraded corrugation .{0,6} ([0-9]" + DASH
+                         + r"[0-9]+)% fleet tire life", text("seed"))
+    komatsu_fig = re.search(r"two weeks of un-graded corrugation costs ([0-9]"
+                            + DASH + r"[0-9]+)% of fleet tire life", span)
+    out.append({"cite": "Komatsu scaffold, V2.1",
+                "seed_figure": seed_fig.group(1) if seed_fig else None,
+                "found_in_cited_section": bool(komatsu_fig),
+                "cited_section_figure": komatsu_fig.group(1) if komatsu_fig else None,
+                "resolves": bool(seed_fig and komatsu_fig
+                                 and seed_fig.group(1) == komatsu_fig.group(1))})
+
+    # 2. "MEASURED (from demo-corpus audit)" on the Aurora row.
+    terms = ("observer", "roadside", "pull")
+    counts = {}
+    for key in ("corpus", "gap"):
+        body = text(key).lower()
+        counts[key] = {w: body.count(w) for w in terms}
+    cited = sum(counts["corpus"].values())
+    elsewhere = sum(counts["gap"].values())
+    out.append({"cite": "demo-corpus audit (Aurora emergency procedures row)",
+                "terms": list(terms),
+                "hits_in_cited_document": counts["corpus"],
+                "hits_in_gap_audit": counts["gap"],
+                "resolves": cited > 0,
+                "supporting_document": "gap" if elsewhere and not cited else None,
+                "note": "a term list, so a paraphrase steps around it; the "
+                        "counts are printed so a reader can check the call"})
+    return {"cites": out, "all_resolve": all(c["resolves"] for c in out)}
+
+
+def seed_survey_denominator():
+    """'18 companies, 90% response' and 'top ask, 12/18 companies' -- only one
+    reading of 18 is arithmetically possible."""
+    t = text("seed")
+    m = re.search(r"\(2021, ([0-9]+) companies, ([0-9]+)% response\)", t)
+    a = re.search(r"top ask, ([0-9]+)/([0-9]+) companies", t)
+    if not (m and a):
+        return {"parsed": False}
+    n, rate = _f(m.group(1)), _f(m.group(2)) / 100.0
+    as_surveyed = n * rate          # respondents if 18 were surveyed
+    as_responded = n / rate         # population if 18 responded
+    return {"parsed": True,
+            "n": n, "response_rate": rate,
+            "if_18_were_surveyed": round(as_surveyed, 2),
+            "if_18_responded": round(as_responded, 2),
+            "surveyed_reading_is_integral": abs(as_surveyed
+                                                - round(as_surveyed)) < 1e-9,
+            "responded_reading_is_integral": abs(as_responded
+                                                 - round(as_responded)) < 1e-9,
+            "share_numerator": _f(a.group(1)),
+            "share_denominator": _f(a.group(2)),
+            "note": "the share's denominator is the same 18, so it is a share "
+                    "of respondents under the only integral reading"}
+
+
+def falsifier_ids():
+    """Every registered falsifier id across the delivered documents. An id
+    carried by two documents with different bodies would be a collision."""
+    # A DEFINITION sits at column 0 inside the registered-falsifier block and
+    # is followed by its body. A CITATION is the same id anywhere else. The
+    # first version of this check counted both and reported AUT-F1 as a
+    # collision because the corpus audit's cross-links mention it.
+    defs, cites = {}, {}
+    for key in DOC:
+        body = text(key)
+        for fid in re.findall(r"^([A-Z]{2,5}-F[0-9]+)\s+\S", body, re.M):
+            defs.setdefault(fid, set()).add(key)
+        for m in re.finditer(r"([A-Z]{2,5}-F[0-9]+)", body):
+            at_line_start = m.start() == 0 or body[m.start() - 1] == "\n"
+            if not at_line_start:
+                cites.setdefault(m.group(1), set()).add(key)
+    prefixes = {}
+    for fid, docs in defs.items():
+        prefixes.setdefault(fid.split("-")[0], set()).update(docs)
+    return {"definitions": {k: sorted(v) for k, v in sorted(defs.items())},
+            "citations": {k: sorted(v) for k, v in sorted(cites.items())},
+            "prefixes": {k: sorted(v) for k, v in sorted(prefixes.items())},
+            "n_ids": len(defs),
+            "collisions": sorted(k for k, v in defs.items() if len(v) > 1),
+            "seed_prefix_is_new": "RD" in prefixes
+                                  and all(d == "seed" for d in prefixes["RD"])}
+
+
+def named_and_absent():
+    """AGA_009's four objects, re-checked against the folder as it now is."""
+    # FILED means a document or a heading IS the object. CITED means the name
+    # occurs in prose. The first version of this check tested for the name and
+    # reported both ledgers as delivered on the strength of the sentences that
+    # cite them -- a citation read as a filing, in the check written to
+    # separate the two.
+    bodies = {k: text(k) for k in DOC}
+    targets = {
+        "WP1": r"^#+\s+.*\bWP1\b",
+        "WP2": r"^#+\s+.*\bWP2\b",
+        "trades-shortage ledger": r"^#+\s+.*trades-shortage ledger",
+        "claim ledger": r"^#+\s+.*claim ledger",
+    }
+    out = {}
+    for name, pat in targets.items():
+        filed = sorted(k for k, b in bodies.items()
+                       if re.search(pat, b, re.M | re.I))
+        cited = sorted(k for k, b in bodies.items()
+                       if re.search(re.escape(name), b, re.I))
+        out[name] = {"filed_in": filed, "cited_in": cited,
+                     "delivered": bool(filed)}
+    return {"objects": out,
+            "delivered": sorted(k for k, v in out.items() if v["delivered"]),
+            "still_absent": sorted(k for k, v in out.items()
+                                   if not v["delivered"])}
+
+
 # ---------------------------------------------------------------- report
 
 def findings():
@@ -311,6 +578,14 @@ def findings():
         "AGA_006_tire_range": tire_range(),
         "AGA_007_ledger_share": parked_strike_share(),
         "AGA_008_dates": doc_dates(),
+        "AGA_009_named_and_absent": named_and_absent(),
+        "AGA_013_seed_tire_ratio": seed_tire_ratio(),
+        "AGA_014_seed_cost_vs_frequency": seed_cost_vs_frequency(),
+        "AGA_015_seed_provenance": seed_provenance_vocabulary(),
+        "AGA_016_seed_crosscites": seed_crosscites(),
+        "AGA_017_seed_restatement": seed_rainfall_and_restatement(),
+        "AGA_018_seed_survey": seed_survey_denominator(),
+        "AGA_019_falsifier_ids": falsifier_ids(),
     }
 
 
@@ -374,6 +649,78 @@ def render(f):
     for k2, v in sorted(f["AGA_008_dates"].items()):
         print("    %-9s latest %s" % (k2, v["max"]))
     print()
+
+    na = f["AGA_009_named_and_absent"]
+    print("AGA_009  objects cited as filed")
+    for name, v in na["objects"].items():
+        print("    %-24s %s" % (name,
+                                ("FILED in " + ", ".join(v["filed_in"]))
+                                if v["delivered"]
+                                else "ABSENT (cited in %s)"
+                                     % (", ".join(v["cited_in"]) or "nothing")))
+    print("    -> delivered %d of %d; still absent: %s\n"
+          % (len(na["delivered"]), len(na["objects"]),
+             ", ".join(na["still_absent"]) or "none"))
+
+    tr = f["AGA_013_seed_tire_ratio"]
+    print("AGA_013  seed WP1 tire cost: gravel %(gravel)g / asphalt %(asphalt)g"
+          " / concrete %(concrete)g cents-per-mile" % tr["cents"])
+    print("    stated %s   recomputed %s   agrees %s / %s"
+          % (tr["as_written"], tr["recomputed"], tr["lo_agrees"], tr["hi_agrees"]))
+    print("    tolerance is each figure's own shipped precision %s\n"
+          % tr["halfwidth"])
+
+    cf = f["AGA_014_seed_cost_vs_frequency"]
+    print("AGA_014  two rows of one table, %gx apart" % cf["factor_between_them"])
+    print("    maintenance FREQUENCY stated ~%gx paved" % cf["frequency_ratio_stated"])
+    print("    county EXPENDITURE gravel $%g vs paved $%g per mi/yr -> %gx"
+          % (cf["expenditure"]["gravel"], cf["expenditure"]["paved"],
+             cf["expenditure_ratio"]))
+    print("    different quantities, so a tension and not a contradiction;")
+    print("    nothing here adjudicates either figure.\n")
+
+    pv = f["AGA_015_seed_provenance"]
+    print("AGA_015  provenance vocabulary: declared %s" % pv["declared"])
+    print("    used      %s" % pv["used"])
+    print("    UNDECLARED %s on %d rows\n" % (pv["undeclared"], pv["undeclared_rows"]))
+
+    cc = f["AGA_016_seed_crosscites"]
+    print("AGA_016  the seed's two citations into its siblings")
+    for c in cc["cites"]:
+        print("    %-46s %s" % (c["cite"][:46],
+                                "resolves" if c["resolves"] else "DOES NOT RESOLVE"))
+        if not c["resolves"] and c.get("supporting_document"):
+            print("        the supporting text is in %s, not the cited document"
+                  % DOC[c["supporting_document"]])
+    print()
+
+    rs = f["AGA_017_seed_restatement"]
+    print("AGA_017  THE COLLISION restates %d WP1 figures" % len(rs["checks"]))
+    for c in rs["checks"]:
+        print("    %-22s restated %-14s source row %-16s %s"
+              % (c["figure"], c["restated"], c["source_row"],
+                 "contained" if c["contained"] else "NOT CONTAINED"))
+    print("    -> all contained: %s\n" % rs["all_contained"])
+
+    sv = f["AGA_018_seed_survey"]
+    print("AGA_018  Caltrans survey: %g companies at %g%% response"
+          % (sv["n"], sv["response_rate"] * 100))
+    print("    if the %g were surveyed, respondents = %g  (integral: %s)"
+          % (sv["n"], sv["if_18_were_surveyed"], sv["surveyed_reading_is_integral"]))
+    print("    if the %g responded, population  = %g  (integral: %s)"
+          % (sv["n"], sv["if_18_responded"], sv["responded_reading_is_integral"]))
+    print("    the %g/%g share therefore reads over respondents\n"
+          % (sv["share_numerator"], sv["share_denominator"]))
+
+    fi = f["AGA_019_falsifier_ids"]
+    print("AGA_019  registered falsifiers: %d defined, %d prefixes"
+          % (fi["n_ids"], len(fi["prefixes"])))
+    for pre, docs in fi["prefixes"].items():
+        print("    %-5s in %s" % (pre, ", ".join(docs)))
+    print("    cited but not redefined elsewhere: %s"
+          % (", ".join(k for k, v in fi["citations"].items()
+                       if k in fi["definitions"]) or "none"))
+    print("    collisions: %s\n" % (", ".join(fi["collisions"]) or "none"))
 
 
 def main(argv):

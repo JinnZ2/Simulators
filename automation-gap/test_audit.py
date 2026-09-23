@@ -5,6 +5,7 @@
 # Every guard is planted against: a constructed violation must fire it.
 
 import ast
+import inspect
 import os
 import re
 import shutil
@@ -173,6 +174,125 @@ class Scope(unittest.TestCase):
         s = audit.parked_strike_share()
         self.assertTrue(s["denominator_agrees"])
         self.assertEqual(s["stated"][1], s["headed_entry_records"])
+
+
+class SeedRoads(unittest.TestCase):
+    """FIELD_LAYER_SEED_ROADS -- the sixth document, and WP1/WP2."""
+
+    def test_tire_ratio_recomputes_at_shipped_precision(self):
+        t = audit.seed_tire_ratio()
+        self.assertTrue(t["parsed"])
+        self.assertTrue(t["lo_agrees"] and t["hi_agrees"])
+        # the tolerance is the document's own, not a constant here
+        self.assertEqual(t["halfwidth"], [0.05, 0.05])
+
+    def test_tire_ratio_would_refuse_a_wrong_pairing(self):
+        """gravel/gravel is 1.0 and must not agree with either bound."""
+        t = audit.seed_tire_ratio()
+        g = t["cents"]["gravel"]
+        self.assertFalse(abs(g / g - t["stated"][0]) <= t["halfwidth"][0])
+
+    def test_cost_and_frequency_are_reported_apart(self):
+        c = audit.seed_cost_vs_frequency()
+        self.assertTrue(c["parsed"])
+        self.assertFalse(c["same_quantity"])
+        self.assertGreater(c["factor_between_them"], 10)
+
+    def test_no_verdict_is_issued_on_the_two_rows(self):
+        """AGA_014 reports a tension and rules on neither figure."""
+        src = inspect.getsource(audit.seed_cost_vs_frequency)
+        for word in ("wrong", "error", "should be", "correct value"):
+            self.assertNotIn(word, src.split('"""')[2])
+
+    def test_undeclared_provenance_label_is_found(self):
+        v = audit.seed_provenance_vocabulary()
+        self.assertIn("INDUSTRY-STATED", v["undeclared"])
+        self.assertEqual(v["undeclared"], ["INDUSTRY-STATED"])
+        self.assertGreater(v["undeclared_rows"], 0)
+
+    def test_declared_labels_are_read_from_the_document(self):
+        v = audit.seed_provenance_vocabulary()
+        head = audit.text("seed").splitlines()[2]
+        for lab in v["declared"]:
+            self.assertIn(lab, head)
+
+    def test_provenance_check_is_not_constant(self):
+        """A label the header does declare must not be reported undeclared."""
+        v = audit.seed_provenance_vocabulary()
+        self.assertIn("MEASURED", v["used"])
+        self.assertNotIn("MEASURED", v["undeclared"])
+
+    def test_one_crosscite_resolves_and_one_does_not(self):
+        c = audit.seed_crosscites()
+        by = {x["cite"].split(",")[0]: x for x in c["cites"]}
+        self.assertTrue(by["Komatsu scaffold"]["resolves"])
+        aur = [x for x in c["cites"] if "demo-corpus" in x["cite"]][0]
+        self.assertFalse(aur["resolves"])
+        self.assertEqual(aur["supporting_document"], "gap")
+
+    def test_collision_restates_three_figures_and_all_are_contained(self):
+        r = audit.seed_rainfall_and_restatement()
+        self.assertEqual(len(r["checks"]), 3)
+        self.assertTrue(r["all_contained"])
+
+    def test_survey_denominator_has_one_integral_reading(self):
+        s = audit.seed_survey_denominator()
+        self.assertTrue(s["parsed"])
+        self.assertFalse(s["surveyed_reading_is_integral"])
+        self.assertTrue(s["responded_reading_is_integral"])
+
+    def test_seed_falsifier_prefix_does_not_collide(self):
+        f = audit.falsifier_ids()
+        self.assertEqual(f["collisions"], [])
+        self.assertTrue(f["seed_prefix_is_new"])
+        self.assertEqual(sorted(f["prefixes"]), ["AUT", "RD"])
+
+
+class NamedAndAbsent(unittest.TestCase):
+    """AGA_009 half-closes: WP1 and WP2 arrive, two ledgers do not."""
+
+    def test_wp1_and_wp2_are_filed(self):
+        n = audit.named_and_absent()
+        self.assertEqual(n["delivered"], ["WP1", "WP2"])
+        for k in ("WP1", "WP2"):
+            self.assertEqual(n["objects"][k]["filed_in"], ["seed"])
+
+    def test_both_ledgers_are_still_absent_and_still_cited(self):
+        n = audit.named_and_absent()
+        self.assertEqual(n["still_absent"],
+                         ["claim ledger", "trades-shortage ledger"])
+        for k in n["still_absent"]:
+            self.assertEqual(n["objects"][k]["filed_in"], [])
+            self.assertTrue(n["objects"][k]["cited_in"])
+
+
+class DefectsFoundByRunning(unittest.TestCase):
+    """Three defects in the checks above, each pinned by the case that
+    exposed it. All three ran toward the reassuring answer."""
+
+    def test_d1_a_wrapped_figure_is_still_found(self):
+        """'4x maintenance\n   frequency' wraps in the delivered text; a
+        single-space pattern matched nothing and the containment check
+        reported two figures where the document restates three."""
+        t = audit.text("seed")
+        self.assertRegex(t, r"4\u00d7 maintenance\n\s+frequency")
+        self.assertEqual(len(audit.seed_rainfall_and_restatement()["checks"]), 3)
+
+    def test_d2_a_citation_is_not_a_second_definition(self):
+        """AUT-F1 is defined in the gap audit and cited in the corpus
+        audit's cross-links. Counting both reported a collision."""
+        f = audit.falsifier_ids()
+        self.assertEqual(f["definitions"]["AUT-F1"], ["gap"])
+        self.assertIn("corpus", f["citations"]["AUT-F1"])
+        self.assertEqual(f["collisions"], [])
+
+    def test_d3_a_mention_is_not_a_delivery(self):
+        """Searching for the name reported both ledgers delivered, on the
+        strength of the sentences that cite them."""
+        n = audit.named_and_absent()
+        self.assertIn("komatsu",
+                      n["objects"]["trades-shortage ledger"]["cited_in"])
+        self.assertFalse(n["objects"]["trades-shortage ledger"]["delivered"])
 
 
 class Screen(unittest.TestCase):

@@ -1,10 +1,11 @@
 # CLAIM TABLE -- automation-gap
 
 Ids are permanent. `AGA_` = automation-gap. Status is SUPPORTED / REFUTED /
-UNVERIFIED. Every SUPPORTED claim is a property of the five delivered
+UNVERIFIED. Every SUPPORTED claim is a property of the six delivered
 documents and is recomputable by anyone with the folder:
 `python3 audit.py`. The delivered falsifiers are the documents' own
-(`AUT-F1..F8`) and carry their own prefix; nothing here renumbers them.
+(`AUT-F1..F8`, `RD-F1..F3`) and carry their own prefixes; nothing here
+renumbers them.
 
 **Scope, before anything else.** Every figure in the drop is CARRIED --
 sourced to reporting this environment cannot reach, the egress gate refusing
@@ -79,21 +80,28 @@ estimate inside it. *Falsifier:* a source fixing replacement at 7,000 h.
 (003 + 004 filed as one incident), matching the stated denominator.
 *Falsifier:* a seventh headed record without the fraction moving.
 
-**AGA_008 -- all five documents self-date one day ahead. SUPPORTED, recorded
+**AGA_008 -- all six documents self-date one day ahead. SUPPORTED, recorded
 not adjudicated.** Every document dates itself 2026-09-24; the session
 landing them runs 2026-09-23. Same class as the forward-dated item in
 `deep-research-correction` C-1, and equally not a finding about the content.
 Timezone is the ordinary explanation and is not established here.
 *Falsifier:* a timezone declaration in the drop.
 
-**AGA_009 -- four named objects are referenced and not delivered.
-SUPPORTED.** `WP1`, `WP2`, the *trades-shortage ledger* and the *claim
-ledger* are each cited as though filed and appear in no delivered document.
-WP1 and WP2 are load-bearing in `FIELD_LEDGER_001` -- entries 001 and 005
-read their value against them. The six Simulators folders the drop names
-(`effective-redundancy-audit`, `declared-frame`, `closure-cost`,
-`instrument-bias-sims`, `labor-instrument`, `readout-count`) all resolve.
-*Falsifier:* the four arriving.
+**AGA_009 -- four named objects were referenced and not delivered. HALF
+CLOSED: two arrived, two did not.** `WP1`, `WP2`, the *trades-shortage
+ledger* and the *claim ledger* were each cited as though filed. **WP1 and
+WP2 arrived** one drop later as the two sections of
+`FIELD_LAYER_SEED_ROADS`, which is what `FIELD_LEDGER_001` entries 001 and
+005 read their value against. The two ledgers are **still absent and still
+cited** -- *trades-shortage ledger* in the Komatsu scaffold, *claim ledger*
+in the zero-burden spec -- so the claim stands on half its subject. The six
+Simulators folders the drop names (`effective-redundancy-audit`,
+`declared-frame`, `closure-cost`, `instrument-bias-sims`,
+`labor-instrument`, `readout-count`) all resolve. **The check distinguishes
+FILED from CITED**, because its first version tested for the name and
+reported both ledgers delivered on the strength of the sentences that cite
+them -- a citation read as a filing, in the check written to separate the
+two (`AGA_019`). *Falsifier:* the remaining two arriving.
 
 **AGA_010 -- two defects in this audit, found by running it, both
 under-reporting the drop. SUPPORTED.** A separator quantifier `.{1,3}` was
@@ -105,7 +113,7 @@ consistent than it is. Each is pinned by a regression check. *Falsifier:*
 neither reproduces on the recorded revision.
 
 **AGA_011 -- UNVERIFIED, and it covers the folder.** No figure in any of the
-five documents was checked against a source. The corpus audit's own sampling
+six documents was checked against a source. The corpus audit's own sampling
 declaration already says the corpus is curated and event-sampled, so its
 rates are properties of those 16 records; this audit adds only that the
 arithmetic over those records is right. Whether the records describe the
@@ -120,3 +128,82 @@ check, and a mechanism correction that superseded the organizer's reading.
 Whether the loop survives absent a motivated operator is the claim, and one
 ledger is n=1. *Falsifier:* a second operator's ledger, or this one going
 quiet.
+
+---
+
+**AGA_013 -- the seed's tire-cost ratio recomputes from the cells printed
+beside it. SUPPORTED.** `FIELD_LAYER_SEED_ROADS` WP1 states *"concrete
+0.29c / asphalt 0.43c / gravel 1.07c -- gravel ~= 2.5-3.7x paved."* Gravel
+over asphalt is 2.4884 and gravel over concrete is 3.6897; both agree at the
+**shipped precision of the stated bound** (one decimal, so +/- 0.05), which
+is the tolerance rule the rest of this folder already runs on. The two
+surfaces the cell calls paved are the two the range spans, in that order.
+*Falsifier:* a fourth surface in the cell, or the stated range given to two
+places.
+
+**AGA_014 -- two rows of one table are 35x apart on a comparison they both
+make. SUPPORTED, adjudicating neither.** The maintenance row states gravel
+at *"~4x paved"*; the Minnesota row two lines below states *"gravel
+$1,887/mi/yr vs paved $13.45/mi/yr"*, a ratio of **140.3x**. The two are
+**different quantities** -- frequency against expenditure -- so this is a
+tension and not a contradiction, and neither figure is scored here. What
+would settle it is the county's own units on the $13.45 cell; a per-mile
+annual paved-maintenance figure below fifteen dollars is the part a reader
+should check first. The audit function carries no verdict token and a check
+asserts it. *Falsifier:* the county record stating its units.
+
+**AGA_015 -- the seed uses a provenance label its own header does not
+declare, on the rows the section's argument rests on. SUPPORTED.** Line 3
+declares `MEASURED / VENDOR / FORECAST / CONSTRUCTED`. The tables use
+`INDUSTRY-STATED` on **7 rows** -- every WP2 requirement row -- and WP2's
+framing turns on exactly that distinction: *"these are the autonomy
+industry's **own stated requirements**, not skeptics' estimates."* Under the
+declared vocabulary the nearest member is `VENDOR`, which is the label the
+section is written to avoid. Either the header gains a fifth member or the
+rows take an existing one; the audit picks neither. *Falsifier:* a fifth
+declared label.
+
+**AGA_016 -- one of the seed's two citations into its siblings resolves and
+one does not. SUPPORTED.** *"(from the Komatsu scaffold, V2.1)"* resolves:
+the corrugation figure sits inside that document's V2.1 section and the two
+figures match. *"MEASURED (from demo-corpus audit)"* on the Aurora
+emergency-procedures row does not: the observer, roadside-assist and
+weather-pull-over facts are in `AUTOMATION_GAP_AUDIT` section 1, and
+`DEMO_CORPUS_AUDIT` carries Aurora as a single matrix row with none of them
+(term counts 0 against 4, printed so the call is checkable). The facts are
+real and in the folder; the pointer names the wrong sibling. The term list
+is stated as one -- a paraphrase steps around it. *Falsifier:* the cited
+document carrying the supporting text.
+
+**AGA_017 -- every figure THE COLLISION restates traces to the WP1 row it
+restates. SUPPORTED, 3 of 3.** Tire cost `2.5-3.7x` and maintenance
+frequency `4x` are identical to their rows; roughness `~1,000 mm/km per
+metre` falls inside the row's `+970-1,100`. This is the containment check,
+not a new measurement: the argument section introduces no figure its own
+tables do not carry. *Falsifier:* a fourth figure in the section with no
+row behind it.
+
+**AGA_018 -- the Caltrans survey's two numbers have exactly one integral
+reading, and it is the favourable one. SUPPORTED.** The seed states *"18
+companies, 90% response"* and *"top ask, 12/18 companies."* If 18 were
+surveyed, respondents are 16.2 -- not an integer, so that reading is
+impossible; if 18 responded, the population was 20 exactly. The 12/18 share
+therefore reads over respondents, which is what the section needs. Recorded
+because the phrasing is ambiguous and the arithmetic settles it in the
+document's favour. *Falsifier:* the survey stating a population.
+
+**AGA_019 -- three defects in this session's own checks, each found by
+running and each running toward the reassuring answer. SUPPORTED.**
+(1) `4x maintenance / frequency` **wraps across a line** in the delivered
+text; a single-space pattern matched nothing and the containment check
+reported two restated figures where the document restates three -- an
+under-count of the document's own consistency. (2) The falsifier-id scan
+counted every occurrence, so `AUT-F1` -- defined in the gap audit and
+**cited** in the corpus audit's cross-links -- reported as a collision; a
+citation read as a second definition. (3) `named_and_absent` tested for the
+object's name, so both ledgers reported **delivered** on the strength of the
+sentences that cite them; a citation read as a filing, in the check whose
+whole job is that distinction. Defects 2 and 3 are the same error at two
+sites, and both are the shape this folder's siblings record repeatedly: a
+mention is not the thing. Each is pinned by the case that exposed it.
+*Falsifier:* any of the three failing to reproduce on the recorded revision.

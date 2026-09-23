@@ -45,4 +45,48 @@ AGA_008  self-dates per document
     gap       latest 2026-09-24
     komatsu   latest 2026-09-24
     ledger    latest 2026-09-24
+    seed      latest 2026-09-24
+
+AGA_009  objects cited as filed
+    WP1                      FILED in seed
+    WP2                      FILED in seed
+    trades-shortage ledger   ABSENT (cited in komatsu)
+    claim ledger             ABSENT (cited in field)
+    -> delivered 2 of 4; still absent: claim ledger, trades-shortage ledger
+
+AGA_013  seed WP1 tire cost: gravel 1.07 / asphalt 0.43 / concrete 0.29 cents-per-mile
+    stated ['2.5', '3.7']   recomputed [2.4884, 3.6897]   agrees True / True
+    tolerance is each figure's own shipped precision [0.05, 0.05]
+
+AGA_014  two rows of one table, 35.1x apart
+    maintenance FREQUENCY stated ~4x paved
+    county EXPENDITURE gravel $1887 vs paved $13.45 per mi/yr -> 140.3x
+    different quantities, so a tension and not a contradiction;
+    nothing here adjudicates either figure.
+
+AGA_015  provenance vocabulary: declared ['MEASURED', 'VENDOR', 'FORECAST', 'CONSTRUCTED']
+    used      {'FORECAST': 1, 'INDUSTRY-STATED': 7, 'MEASURED': 8, 'VENDOR': 1}
+    UNDECLARED ['INDUSTRY-STATED'] on 7 rows
+
+AGA_016  the seed's two citations into its siblings
+    Komatsu scaffold, V2.1                         resolves
+    demo-corpus audit (Aurora emergency procedures DOES NOT RESOLVE
+        the supporting text is in AUTOMATION_GAP_AUDIT.md, not the cited document
+
+AGA_017  THE COLLISION restates 3 WP1 figures
+    rainfall roughness     restated 1000.0         source row [970.0, 1100.0]  contained
+    tire cost ratio        restated [2.5, 3.7]     source row [2.5, 3.7]       contained
+    maintenance frequency  restated 4.0            source row [4.0]            contained
+    -> all contained: True
+
+AGA_018  Caltrans survey: 18 companies at 90% response
+    if the 18 were surveyed, respondents = 16.2  (integral: False)
+    if the 18 responded, population  = 20  (integral: True)
+    the 12/18 share therefore reads over respondents
+
+AGA_019  registered falsifiers: 11 defined, 2 prefixes
+    AUT   in corpus, gap, komatsu
+    RD    in seed
+    cited but not redefined elsewhere: AUT-F1
+    collisions: none
 
