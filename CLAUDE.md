@@ -277,6 +277,9 @@ last three; read in order:
 - `reporting-chain-loss/` — WO-5, transit loss and pre-entry loss kept apart: a linear-Gaussian hop chain whose terminal is an estimator of the composed incentive stack not the ground (reader bias B/G amplifies with the chain, directed loss compounds where random cancels, the DPI floor used as null not re-derived), plus the pre-entry register (7 gates none logged) and Test B calibration with the delegation confound made a number and the proxy-undeclared refusal built in
 - `chain-position/` — WO-1, can a container detect it is a step in an unobservable chain; the OWASP clause audit returns the null the order predicts (lineage exists at the gateway, 0 clauses place position inside the agent) and the null is the finding, the reachable-controller compounding made a number (four factors 0.9035) with the unassessed-factor RULE built in as UNPROPAGATABLE, and the second-order gap UNEXAMINED vs NOT_AUDITABLE on the scorer's own provenance
 - `terminal-crossing/` — WO-3, is any system TERMINAL; the six conditions parsed from the order not retyped, the falsifier attacked and moved from UNSATISFIED to UNSATISFIABLE by an uncovered unshieldable medium, the three asymptotes returning three distinct shapes and none a zero, TERMINAL reachable only on a constructed control
+- `assessor-coupling/` — WO-6 (the second document under that ordinal), assessor-assessed coupling as a recurrent failure mode; hop-1 kept structurally out of the independence vector, the record's summary sentence refuted by its own scope limit at a negative arm of zero, no organization named and no field for one
+- `unowned-join/` — WO-4, the shape with seven faces and a registered term gap; A1-A4 stated formally and made checkable, face 6 NOT_EVALUABLE on the order's own reason, the order's "no term means no code" refuted by the folder building it and no term coined
+- `instrument-index/` — a REBUILD from a lost original: 13 fields, two renderings from one pass, a 0.70 axis falsifier that cannot fire where nothing is rated
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -13432,6 +13435,193 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   markers, each printed by `--choices` and cited inline. Check count printed
   by `python3 terminal-crossing/test_terminal.py`. Stdlib only, parses under
   3.9, phone-buildable, CC0.
+- `assessor-coupling/` — WO-6, delivered verbatim and built to: is an
+  assessor structurally independent of the party it assesses, **as
+  distinguished from** whether a direct payment runs between them. Landed
+  under an **ordinal collision** (`ASC_010`) — a different WO-6, *THE FOURTH
+  INDEPENDENCE AXIS: CRITERION EXTERNALITY*, is already in
+  `criterion-externality/`; two delivered documents share a number and share
+  nothing else, neither file is overwritten, and the test asserts the other
+  is still present and still on its own subject. **CONSTRUCTED, and no
+  organization is named or scored anywhere** (`ASC_009`): the arrangement
+  schema has no field for a party's name, no condition title or case lead is
+  retyped as a literal, and every named party in any render is parsed out of
+  the delivered document. **`ASC_002`, the build's one structural rule:** the
+  order separates a ROUTING question (does the assessed pay the assessor)
+  from the INDEPENDENCE question (is the funding source, credentialing body,
+  career path and governance independent of the OUTCOME), so a hop-1 answer
+  never enters the independence vector — `score()` reads no hop-1 field,
+  asserted from the AST, and two arrangements differing only in it score
+  identically — with the computed consequence that **hop-1 is the one
+  property the sector is recorded as stating and is not a member of the
+  eight**, so stating it moves the vector by zero. **`ASC_003`:**
+  `UNVERIFIABLE_AS_STATED` is its own state, kept apart from `FAILS` and from
+  `UNDECLARED` — condition 2 sits in the first because the order records that
+  no standard defines what pool-level independence would require, and a
+  condition with no standard saying what it asks has not been failed but has
+  not been asked — giving a parsed current position of **0 passes, 6 fails,
+  1 unverifiable, 1 undeclared of 8**, condition 1 undeclared because the
+  section does not mention it. **`ASC_004`, the headline, REFUTED:** the
+  order states *"hop-1 cleanliness has never once been sufficient, in any
+  domain, at any point in the record"* and four sections on that the table is
+  *"illustrative, selected for documentation quality. Not a systematic
+  sample, and no base rate is claimed"* — both lines located verbatim, and
+  the corpus carries **ten cases, every one of which failed, with a negative
+  arm of zero counted by parse**, so the four-item prior defense cannot be
+  scored for discriminating power at all: `NOT_EVALUABLE`, reason
+  `selected_on_outcome`, discrimination `None` rather than zero. What
+  survives is the narrow reading (*in the selected cases* hop-1 cleanliness
+  was not sufficient) and the rate at which it IS sufficient is unbounded in
+  either direction; a constructed corpus carrying a negative arm returns a
+  figure, so the refusal is a property of the delivered corpus and not of the
+  check, and the order names the repair itself — step 2, the systematic
+  precedent survey. The frame-selected-on-the-variable shape (`UNI_126`,
+  `SHB_023`, `DD_003`) arriving in a precedent table. **`ASC_006`:** the
+  earliest entry in the record is a personal-liability remedy and the order
+  records condition 6 as the one least discussed now — the oldest remedy is
+  the one currently least used, both readings verbatim containment rather
+  than a classification of any case. **`ASC_005`:** nothing is an index and
+  nothing ranks two arrangements; the order's *"the output is a distribution,
+  not an accusation"* is a refusal rather than a note, `field_distribution`
+  raising `SelectiveApplication` unless the caller declares the set complete.
+  **`ASC_008`:** `pool_fraction` is step 1's metric and keeps a measurement
+  apart from a silence — every source declared and none coupled is `0.0`
+  while an empty record, an `UNDECLARED` source and a zero denominator are
+  all `None`, registered in `tools/known_answer.py` with the `0.0` against
+  the three `None`s as the pin, since reading an undeclared source as
+  uncoupled computes independence from a silence, which is the condition the
+  order says has no standard. **`ASC_007`:** step 4 is built
+  (`disclosure_coverage`, leaving an unmentioned condition `UNDECLARED`
+  rather than absent, so the audit does not commit the move the order is
+  about) and scored on **no instrument**; steps 1, 2, 3, 4 and 5 are all
+  `NOT_RUN` with a reason each. **`ASC_011` UNVERIFIED and it covers the
+  folder** — every precedent case, date, figure and remedy is carried and
+  checked against nothing, the current-position reading is the order's own
+  from public statements which the order itself says to re-verify before
+  publication, and nothing establishes that any assessor in any field is or
+  is not independent. Both modules refuse `--selftest`; both renders screen
+  clean through `sheet-structure-scan/no_severity` with **no exemption**;
+  eight `[CHOICE n]` markers, each printed by `--choices` and each cited at a
+  site outside its own declaration. Check count printed by
+  `python3 assessor-coupling/test_assessor.py`. Stdlib only, parses under
+  3.9, phone-buildable, CC0.
+- `unowned-join/` — WO-4, delivered verbatim and built to: does a single
+  structure underlie failures currently treated as unrelated domain
+  problems, and is the absence of a term for it what prevents procedures and
+  code being built around it. Seven faces, three pointing at orders already
+  landed here. Everything is CONSTRUCTED — every structure is a declared
+  reading, nothing is a measurement of any container, rule, report,
+  boundary, channel, organism or institution. **`UJ_006`: no term is coined
+  and the instruction is structural rather than described** — the order's
+  *"NOT COINED HERE"* is `coin()` raising `TermCoinageRefused`, and step 3's
+  cross-language search is `NOT_RUN` with the status `UNSEARCHED` and zero
+  languages scored, since `UNSEARCHED` is not *no term exists* and the
+  order's own expected status is `named_elsewhere`. **`UJ_002`, what step 1
+  returns:** A1 two or more components, A2 each correct within its
+  **declared** scope, A3 a non-empty join, A4 no single scope covering it,
+  therefore no check confined to one scope decides the join — and once A1-A4
+  are written down the inference is immediate, so the difficulty is not the
+  theorem but **A4 being checkable at all**, which needs every `S(k)`
+  declared, and nothing in the failures the order lists declares one
+  anywhere; the formalisation relocates the work from the inference to the
+  declaration step. **`UJ_003`: two unowned states, not one** —
+  `UNOWNED_BY_UNION` (the union covers the join, no single scope does: every
+  part visible to somebody, the relation to nobody) against `UNOWNED` (an
+  observable in no scope at all), which call for different repairs and which
+  merging would lose, face 3 being the first and faces 1, 2, 4, 5 and 7 the
+  second. **`UJ_004`, the result that locates itself:** face 6, the frog, is
+  the one face the order marks UNRESOLVED and the one face the invariant
+  returns `NOT_EVALUABLE` on, **for the same reason** — declared per
+  `[CHOICE 7]` on the order's own *"you cannot list in advance which binaries
+  will turn out false, because that is precisely what the environment
+  supplies"*, the environment's scope is undeclarable in advance so A4 is not
+  checkable, and the verdict falls out of the declaration rather than being
+  stipulated. **`UJ_005`, the headline, REFUTED in the order's own strong
+  form:** *"Because there is no good word, NO PROCEDURES CAN BE MADE AROUND
+  IT AND NO CODE CAN BE MADE AROUND IT"*, restated in its scope limits as
+  *"this instrument cannot yet be implemented"* — and the folder implements
+  it, a checkable predicate with five reachable verdicts and no term coined,
+  with the refutation bounded to one structure and one folder; **what
+  survives is the order's own mechanism two sections on**, that with a term a
+  claim is a REPORT whose status is inherited and without one the same
+  content is rebuilt across several sentences and reads as a PROPOSAL, so
+  **code needs a predicate and transmission needs a name** and the order
+  merges two different requirements. **`UJ_007` bounds every number in the
+  folder:** six of seven faces hold the shape and that is near-tautological,
+  the invariant having been abstracted from those same seven, so the
+  evidence test is the order's step 2 — an eighth face from someone who did
+  not write them — which is `NOT_RUN` because this session holds the seven
+  and a face produced here would be one hand widening its own set, the
+  warning printed above the counts and asserted by position. **`UJ_009`:** the
+  instrument is not `CONSTANT_FIRES` (3 of 5 controls do not hold the shape,
+  including `OWNED` and `LOCAL_FAULT`) and `join_coverage` keeps a
+  measurement apart from a silence — a declared join no declared scope
+  reaches is `0.0` while an empty join and an `UNDECLARED` scope are `None`,
+  registered in `tools/known_answer.py` with the `0.0` against the two
+  `None`s as the pin, since reading an undeclared scope as an empty one
+  reports the shape from a silence, which is the failure the order is about.
+  **`UJ_008`:** face 5, the air gap, is the weakest fit and reads as an
+  unowned join only because there is no component for the unconsidered
+  channel, which is why the overclaim goes unchecked. **`UJ_001`/`UJ_010`:**
+  the faces are parsed at call time and a document lacking the section raises
+  rather than returning an empty list, and all three companion arrows resolve
+  by folder path plus a content marker (WO-1 `chain-position/`, WO-2
+  `quiet-aggregation/`, WO-3 `terminal-crossing/`) while faces 2, 5, 6 and 7
+  carry none, a count rather than a gap claim. **`UJ_011` UNVERIFIED and it
+  covers the folder.** Both modules refuse `--selftest`; both renders screen
+  clean through `sheet-structure-scan/no_severity` with **no exemption**;
+  eight `[CHOICE n]` markers, each printed by `--choices` and each cited at a
+  site outside its own declaration, both asserted. Check count printed by
+  `python3 unowned-join/test_unowned.py`. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
+- `instrument-index/` — A REBUILD, not a reconstruction. The delivered
+  design was recovered from session transcript fragments after the original
+  bytes were lost, and both shipped files carry the label saying so, with
+  every section marked `[RECOVERED]` or `[REBUILD-CHOICE]`. An index of the
+  instruments in one or more repositories: thirteen fields per scannable
+  file, an in-file `# INSTRUMENT:` header block with an
+  `index-overrides.json` fallback (**header wins, per field, not per file**
+  — `II_008`), and two renderings written from one `collect()` pass,
+  neither derived from the other, asserted by comparing the id sets.
+  **`II_001`, the one genuinely open decision:** the delivery's `repo:`
+  field is the literal placeholder `[where instrument-index lived]`, a
+  content search over the whole tree returns one unrelated hit, so the
+  placement here is a REBUILD-CHOICE and is recorded as one rather than as
+  a recovery. **`II_002`/`II_003`, the two states the design turns on:**
+  `NOT-SCANNED` is kept apart from scanned-with-zero-rated-rows in the
+  recovered spec's own words (*collapsing them reports a coverage hole as a
+  zero*), and `claim_only_fraction` returns `None` with no rated row against
+  `0.0` with rated rows and none CLAIM-only — not cosmetic, since `0.0`
+  returns *axis holds at this build* and `None` returns *UNRATED: check not
+  run*, opposite readings of one build separated by that field alone,
+  registered in `tools/known_answer.py` with the 0.0-against-two-Nones case
+  as the pin. **`II_004`:** the 0.70 axis check is `CONSTANT_SILENT` on a
+  corpus nobody has headered **by construction** — and the spec names that
+  state rather than letting it read as a pass; both firing branches are
+  shown, the fixture at 0.000 (*axis holds*) and a planted CLAIM-only
+  majority at 0.750 (*AXIS FALSIFIED*). **`II_005`:** all four flag
+  conditions fire on the fixture and **none alters a row value** — `BOGUS`
+  kept as `BOGUS`, `WIDGET` as `WIDGET`, an `EXTERNAL` run_cost with no
+  basis keeping the empty basis — with the flags committed to the MD rather
+  than left on stderr. **`II_009`:** an index generator walking a tree
+  holding its own output is `UNI_010`'s loop, closed by `SKIP_NAMES` for the
+  TSV (recovered) and the MD (REBUILD-CHOICE, the recovered list carried
+  only the TSV). **`II_010`:** `git rev-parse` walks UP, so a fixture inside
+  this repository takes this repository's hash and the `nogit-` fallback is
+  unreachable from it — exercised against a temporary directory outside any
+  repository, without which it would ship untested and read as covered.
+  **`II_006`:** the blank-line rule is a REBUILD-CHOICE with a stated cost,
+  a header below a shebang-plus-blank going unread — bounded by the spec's
+  own NEVER DROP A FILE rule, so the failure is a visible unrated row on the
+  located to-do list and never an absence. **`II_013`:** the `no_severity`
+  screen is deliberately NOT applied, the delivered spec fixing the output
+  strings verbatim and screening them meaning rewording delivered text.
+  **`II_012` UNVERIFIED and it covers the folder:** every `[RECOVERED]`
+  label is a claim about fragments this session did not read; what is
+  established is that the build implements the text as delivered. Fourteen
+  `II_*` claims; check count printed by
+  `python3 instrument-index/tests/test_build_index.py`. Stdlib only, parses
+  under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

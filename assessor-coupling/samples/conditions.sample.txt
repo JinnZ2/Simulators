@@ -1,0 +1,41 @@
+WO-6 INDEPENDENCE CONDITIONS -- parsed from WORK_ORDER.md
+
+hop-1 (does the assessed pay the assessor) is a ROUTING
+question and is carried, not scored. [CHOICE 1]
+No index is emitted. [CHOICE 4]
+
+  1  AUTHORITY NOT REVOCABLE BY THE ASSESSED
+  2  FUNDING NOT ROUTED THROUGH THE ASSESSED
+  3  MANDATORY ENGAGEMENT
+  4  PUBLICATION NOT CONTROLLED BY THE ASSESSED
+  5  ACCESS AS OF RIGHT
+  6  PERSONAL LIABILITY ON THE ASSESSOR
+  7  ROTATION / TENURE LIMITS
+  8  CAPACITY PROPORTIONATE TO SCOPE
+
+CONSTRUCTED ARRANGEMENTS (no party is named; the schema
+has no field for one)
+
+arrangement        12345678 pass  fail  unver undcl hop-1
+ctl_all_pass       PPPPPPPP 8     0     0     0     FAILS
+ctl_all_fail       FFFFFFFF 0     8     0     0     PASSES
+ctl_unverifiable   UUUUUUUU 0     0     8     0     UNDECLARED
+ctl_silent         ........ 0     0     0     8     UNDECLARED
+
+key  P passes   F fails   U unverifiable as stated   . undeclared
+
+THE ORDER'S OWN READING OF THE CURRENT POSITION
+(parsed from the section, from public statements, carried
+and re-verified against nothing here)
+
+  .UFFFFFF
+  passes 0   fails 6   unverifiable 1   undeclared 1   of 8
+
+  hop-1 independence recorded as stated by the sector: True
+  conditions moved by that statement: 0 -- hop-1 is not a
+  member of the eight. [CHOICE 1]
+
+STEP 1, the pool metric: built, NOT RUN on any field.
+  no funding record is held here and none is composed
+  from memory; field_distribution refuses a set not
+  declared complete. [CHOICE 5]
