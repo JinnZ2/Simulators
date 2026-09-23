@@ -1,0 +1,48 @@
+AUTOMATION-GAP DROP -- internal recomputation
+Every figure in the drop is CARRIED. Nothing below is evidence
+about the world; it is whether the documents agree with themselves.
+
+AGA_001  distribution table vs the matrix (16 records)
+    teleop disclosed upfront   teleop       agrees   total 16
+    metrics published          metrics      agrees   total 16
+    repetitions under variatio variation    agrees   total 16
+    envelope declared          envelope     agrees   total 16
+    independent evaluation     independent  agrees   total 16
+    sustained runtime          sustained    agrees   total 16
+    -> all six columns reconcile: True
+
+AGA_002  records passing all six: Komatsu FrontRunner AHS
+
+AGA_003  F1: every humanoid record fails at least three
+    humanoid records read: 12
+    -> DOES NOT HOLD. Records failing fewer than three:
+       Figure 02 @ BMW, 11 months           2 non-PASS
+       Digit @ GXO Spanx                    2 non-PASS
+
+AGA_004  F2 deployment class (4 records)
+    independent PASS: 0    variation PASS: 0
+    (both are PASS-counts; ABSENT is not a measured negative)
+
+AGA_005  Komatsu ledger, derived cells recomputed
+    hours gain %                     stated 12.0     recomputed 11.7674   agrees
+    throughput AHS                   stated 1.05     recomputed 1.0506    agrees
+    human hours per unit, manned     stated 1.37     recomputed 1.3736    agrees
+    human hours per unit, AHS        stated 0.26     recomputed 0.2616    agrees
+    drop %                           stated 81.0     recomputed 81.0219   agrees
+    tire factor                      stated 0.71     recomputed 0.7143    agrees
+    -> ledger is internally consistent: True
+
+AGA_006  tire life: stated +40%, range from its own hours [20.0, 40.0], midpoint +30%
+    stated figure is the top of that range: True
+    consumption factor  at stated 0.714   at midpoint 0.769
+
+AGA_007  field ledger: stated [2, 6]; headed entry records 6 (denominator agrees)
+    headings: 001, 002, 003 + 004, 005, 006, 007
+
+AGA_008  self-dates per document
+    corpus    latest 2026-09-24
+    field     latest 2026-09-24
+    gap       latest 2026-09-24
+    komatsu   latest 2026-09-24
+    ledger    latest 2026-09-24
+
