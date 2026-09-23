@@ -772,6 +772,49 @@ def _cdc_routing_cost(external, downtime_hours):
     return mod.routing_cost(external, downtime_hours)
 
 
+def _rcl_composed_bias(a, c):
+    """reporting-chain-loss/hop_compose.py::composed_bias, imported.
+    B = sum_k (prod_{j>k} a_j) * c_k, the incentive stack composed across
+    the chain. All offsets zero returns an exact 0.0 -- a real zero, no
+    incentive at any hop -- and an unspecified gain or offset returns None,
+    which is the split a default would hide."""
+    import importlib.util
+    path = os.path.join(ROOT, "reporting-chain-loss", "hop_compose.py")
+    spec = importlib.util.spec_from_file_location("_rcl", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.composed_bias(a, c)
+
+
+def _cpd_stability_product(failure_probs):
+    """chain-position/load_class.py::stability_product, imported.
+    P(all assumed stabilities hold) = product of (1 - p). Returns None if
+    any factor is unassessed -- the work order's RULE, an unquantifiable
+    probability cannot be propagated -- and that None is the case a 1.0
+    default would turn into a reassuring number."""
+    import importlib.util
+    path = os.path.join(ROOT, "chain-position", "load_class.py")
+    spec = importlib.util.spec_from_file_location("_cpd", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.stability_product(failure_probs)
+
+
+def _drc_count_relation(inner, outer, stated_total):
+    """deep-research-correction/check.py::count_relation, imported.
+    Names which arithmetic a separately stated total implies: DISJOINT
+    when it equals inner + outer, NESTED when it equals the outer with the
+    inner strictly smaller, NEITHER otherwise. The equal-parts case is
+    where the inner<outer guard is the only thing standing between the two
+    readings, and the two readings are DRC_002's whole finding."""
+    import importlib.util
+    path = os.path.join(ROOT, "deep-research-correction", "check.py")
+    spec = importlib.util.spec_from_file_location("_drc", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.count_relation(inner, outer, stated_total)
+
+
 def _ai_interaction_ss(a, b, c, d):
     """additivity-inheritance/additivity_inheritance.py::interaction_ss,
     imported. The interaction sum of squares of a balanced 2x2 with cell
