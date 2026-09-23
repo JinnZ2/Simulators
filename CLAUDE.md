@@ -6795,7 +6795,16 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   Return classes are method-layer G's enum when that checkout is found
   (`METHOD_LAYER_PATH` or a sibling), mirrored and marked when not; the
   four-branch set emits to F's schema 1.0 and round-trips through its
-  loader. **`EFR_003`, the finding the fixtures forced:** under the
+  loader. **Dispatch K (2026-09-23) re-issued the order** and is landed
+  verbatim as `DISPATCH_K.md` beside it; the check-first report is
+  `EFR_010..012`: its F2 as specified returns `UNKNOWN_measurable` under
+  its own step 1 (trait-only gives enclosure no traction), its step-4
+  table is the one `EFR_003` refuted so its F1 requirement holds only
+  under the corrected reading, and the four thresholds now live in
+  `thresholds.txt` with an append-only `threshold_chain.txt`
+  (`gate-check/`'s convention), `THRESHOLD_SOURCE` printed on every run
+  and a malformed file a typed `ThresholdFileError`. The real-run spec is
+  in the README with the panel survey UNRUN and zero panels checked. **`EFR_003`, the finding the fixtures forced:** under the
   order's step-4 table as written, an enclosure-only panel lands in the
   **confound** cell (within 0.429 > between 0.201), because differencing
   doubles noise variance while enclosure within a person is
