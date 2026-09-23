@@ -55,13 +55,48 @@ AGA_034  TERM_DRIFT flag against the sources the note itself names
 AGA_035  the closing number counts one token
     counted UNMEASURED : QD, QE, QF, QG, QH  -> headline 5 of 10
     open, not counted  : QI (PARTIAL), QJ (UNRESOLVED)
-    answered           : QA, QB, QC  -> not answered 7 of 10
+    outside the list   : QK (UNMEASURED)  -> 11 questions exist, 10 are counted
+    answered           : QA, QB, QC  -> not answered 8 of 11
 
-AGA_036  revision against 1bb8471: OK
-    +64 / -5 lines
-    byte-identical: none
-    changed       : QUESTIONS, RULES, SOURCES
-    added         : TERM_NOTES
+AGA_036  revision against 2a6e2f3: OK
+    +212 / -0 lines
+    byte-identical: QUESTIONS, RULES, SOURCES, TERM_NOTES
+    changed       : none
+    added         : ADDENDUM_QUESTIONS, BEHAVIOUR_RECORD_SCHEMA, CONTINUED_WORK, CONTROL_LOOPS, EVENT_CLASSES, G0_NOTES, GATE_MAP, REST_BLOCK, TRANSFER_NOTE
+
+AGA_039  the two G0 parameter blocks carry provenance differently
+    REST_BLOCK (the window): comments only; in the object: False
+      PLACEHOLDER           : handoff_lead_min
+      literature, unverified: inertia_min, nap_min
+      neither stated        : cycle_min
+    EVENT_CLASSES (the rate): a source field on every row: True
+
+AGA_040  G0 recomputed -- every input declared PLACEHOLDER: True
+    human-required interrupts/h 0.330   mean gap 181.8 min
+    by contribution: work_zone 0.09, fuel_inspection_stop 0.08, weather_out_of_envelope 0.05, incident_or_closure 0.05, heavy_traffic_merge 0.05, mechanical_alert 0.01
+    highest raw rate is heavy_traffic_merge, top contributor is work_zone -> note 3 holds: True
+      nap_min   low   60 min -> P 0.719
+      nap_min   high  75 min -> P 0.662
+      cycle_min low  110 min -> P 0.546
+      cycle_min high 125 min -> P 0.503
+    binding row cycle_min/high at P 0.503; removing work_zone -> rate 0.24, P 0.607
+
+AGA_041  one caveat, two conditions, opposite directions (exact, no simulation)
+    window 125 min, Poisson P 0.503
+    A  bursting alone, k per burst : k=1 0.503, k=2 0.709, k=5 0.872, k=10 0.934
+       -> Poisson is a FLOOR. raises at every k > 1: True
+    B  rate peaking at rest time   : amp=0.0 0.503, amp=0.5 0.363, amp=1.0 0.261, amp=1.5 0.189
+       -> Poisson is a CEILING. lowers at every amplitude: True
+    the docstring names B (in the same hours as rest need); the G0 note describes A (interrupters bunch in the same hours)
+
+AGA_042  p_uninterrupted is typed as a probability, domain unguarded
+      zero rate        1.0000
+      zero window      1.0000
+      negative window  1.3910   <- not a probability
+      negative rate    1.9887   <- not a probability
+
+AGA_043  a DERIVED entry now exists: True
+    TRANSFER_NOTE draws on S5 (True, which states it: True) and on TERM_NOTES (True), tagged DERIVED: True
 
 AGA_026  S2 rates: ever 47.1%, past-year 25.4%, nested True (ratio 0.539)
 

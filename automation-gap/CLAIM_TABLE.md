@@ -4,7 +4,7 @@ Ids are permanent. `AGA_` = automation-gap. Status is SUPPORTED / REFUTED /
 UNVERIFIED. Every SUPPORTED claim is a property of the delivered material
 and is recomputable by anyone with the folder: `python3 audit.py` for the
 six documents (`AGA_001..019`), `python3 register_audit.py` for the
-evidence register (`AGA_020..038`). The delivered falsifiers are the
+evidence register (`AGA_020..043`). The delivered falsifiers are the
 documents' own (`AUT-F1..F8`, `RD-F1..F3`) and carry their own prefixes;
 nothing here renumbers them.
 
@@ -230,17 +230,20 @@ docstring declares six rungs *"one scale for every source"* --
 sources use three in a `status` field; the question map uses five in a
 tuple slot, of which **`PARTIAL`, `SUPPORTED` and `UNRESOLVED` are
 declared nowhere** and between them carry five of the ten question
-verdicts. The revision added the other two sites, both **inline `[TAG]`
-markers inside free-text prose** -- in a `holds` entry and in a
-`TERM_NOTES` field. A `status` field is a slot a reader can enumerate; a
+verdicts. Two further revisions added three more sites, all **inline
+`[TAG]` markers inside free-text prose** -- a `holds` entry, a
+`TERM_NOTES` field, and (in the addenda) an addendum question's status,
+a control-loop failure mode, the transfer note and a function docstring:
+**five sites, three mechanisms.** A `status` field is a slot a reader can enumerate; a
 bracket in a sentence is not, and the declared scale gives no indication
 the second kind exists. **`DERIVED` and `PROPOSED` close on one reading
-and not on the one the claim registered:** both are now exercised, and
-only as inline tags, reaching **no status slot anywhere**. The falsifier
-asked for a SOURCE carrying `DERIVED`; what arrived was a new kind of
-entry carrying it, so the original gap -- nothing in the register combines
-two sources into a third statement in a place the scale is read from --
-is unchanged.
+and not on the one the claim registered:** both are exercised, and only
+as inline tags, reaching **no status slot anywhere**. The falsifier asked
+for a SOURCE carrying `DERIVED`; what arrived was a new kind of entry
+carrying it. **The substantive half then closed too** -- see `AGA_043`:
+`TRANSFER_NOTE` combines two sources into a third statement and is
+tagged. What is left of this claim is the vocabulary: one declared scale,
+five sites, three mechanisms, three question tokens declared nowhere.
 *Falsifier:* a second declared scale for questions, or a source carrying
 `DERIVED`.
 
@@ -399,7 +402,7 @@ SUPPORTED on S10 alone.
 read. The register says so itself for five of the eleven (`UNREAD`), and
 the egress gate refuses every publisher host, so the other six are carried
 on the strength of a search pass nobody here can repeat. Nothing in
-`AGA_020..038` is evidence about driving hours, fatigue, tenure, any
+`AGA_020..043` is evidence about driving hours, fatigue, tenure, any
 carrier or any vendor; every one is a property of the register's own
 declarations. Whether the eight questions have the status the register
 assigns them is untouched in both directions.
@@ -448,9 +451,13 @@ fraction. SUPPORTED.** `main()` counts questions whose status begins
 `UNMEASURED`: five. The revision added **QI (`PARTIAL`)** and **QJ
 (`UNRESOLVED`)**, both open and neither counted, so the headline reads
 **5 of 10** where **7 of 10 are not answered** and only three carry
-`SUPPORTED`. The register's own thesis is that *an UNMEASURED cell is a
-result*; two results were added and the number that reports them went
-down as a fraction, 5/8 to 5/10. The repair is the same one `AGA_020`
+`SUPPORTED`. The addenda then put a further question -- **QK**,
+`UNMEASURED` -- in a **separate list** that `main()` does not count and
+`question_refs()` does not reach, so **eleven questions exist, the
+closing number is taken over ten, and eight are not answered.** The
+register's own thesis is that *an UNMEASURED cell is a result*; three
+results were added and the number that reports them went down as a
+fraction, 5/8 to 5/10. The repair is the same one `AGA_020`
 points at -- the question vocabulary is undeclared, so nothing says which
 tokens mean open. *Falsifier:* a declared question scale, or the count
 reading every non-`SUPPORTED` status.
@@ -503,4 +510,92 @@ resolving QJ without the item wording being read.
 **The UNVERIFIED claim covers the revision too** (`AGA_032`): no source in it was read, S11 is
 relayed rather than located, and the secondary review the S2 holds cite is
 carried at the same status as everything else.
+
+---
+
+## The addenda
+
+Two further additions, landed the same day: a continued-work block (QK, the
+clock-vs-state control loops, a behaviour-anchored record schema, W1-W9) and
+a **proposed gate map** G0-G4 with the first runnable arithmetic in the
+register. The addenda are **pure additions** -- `SOURCES`, `QUESTIONS`,
+`RULES` and `TERM_NOTES` are byte-identical across them, asserted. Every
+input to the arithmetic is declared `PLACEHOLDER` by the register itself,
+and nothing below is a statement about any route, season, carrier or
+vehicle.
+
+**AGA_039 -- the two blocks the G0 gate runs on carry provenance by
+different means, and only one survives import. SUPPORTED.**
+`EVENT_CLASSES` -- the RATE, the gate's denominator -- carries a source
+string as a fourth tuple element on all six rows. `REST_BLOCK` -- the
+WINDOW, the gate's numerator -- carries it in **comments**, which are not
+in the object at all: a consumer importing the register gets four bare
+numbers. The comments themselves hold three classes with nothing marking
+them apart (`handoff_lead_min` PLACEHOLDER; `nap_min` and `inertia_min`
+literature-but-NOT-VERIFIED; **`cycle_min` neither**), so the block whose
+values decide whether the gate passes is the one a reader cannot grade.
+*Falsifier:* a source field on `REST_BLOCK`.
+
+**AGA_040 -- the G0 block recomputes, and note 3 holds. SUPPORTED.**
+Human-required interrupt rate **0.330/h**, mean gap **181.8 min**, and
+the four window rows reproduce (60 min -> 0.719, 75 -> 0.662, 110 ->
+0.546, 125 -> 0.503). The binding row is `cycle_min` at high inertia,
+**P 0.503** -- a coin flip. Note 3 says *"the binding term is
+`p_machine_fails`, not raw event rate"* and that is exactly right:
+`heavy_traffic_merge` has the **highest raw rate** (0.50/h) and
+contributes 0.05, while `work_zone` at 0.30/h contributes **0.09** and is
+the top interrupter. Removing it -- the lever the note names -- takes the
+rate to 0.24 and the binding row to **0.607**. *Falsifier:* a rate table
+where the top raw rate and the top contributor are the same row.
+
+**AGA_041 -- one caveat is stated in two places under two different
+conditions, and the two run in opposite directions. SUPPORTED, shown
+exactly and with no simulation.** Both cases are Poisson integrals.
+**(A) Bursting alone.** In the limit where a burst of `k` arrives at one
+instant, the process of BURSTS is Poisson at `lam/k`, so
+`P = exp(-lam*w/60k)`, strictly **greater** than `exp(-lam*w/60)` for
+every `k > 1`: on the binding row, 0.503 -> 0.709 (k=2) -> 0.872 (k=5) ->
+0.934 (k=10). **Poisson is a FLOOR.** **(B) A rate peaking at the hour
+rest is needed.** P over a window started at the peak is `exp(-integral)`,
+and the integral exceeds `lam*w` at any positive amplitude: 0.503 ->
+0.363 -> 0.261 -> 0.189. **Poisson is a CEILING.** The function's
+docstring names **B** (*"when events cluster in the same hours as rest
+need"*) and is right. The G0 note **drops the condition**, describes
+**A** (*"interrupters bunch in the same hours (weather + traffic +
+incidents)"*) and draws **B's** conclusion (*"Poisson overstates usable
+windows -- treat as ceiling"*). A qualifier lost between two occurrences
+of one phrase, with the reading inverting -- which is this register's own
+subject, instanced in its own text. Correcting it makes the register's
+case **stronger**, not weaker, and strongest where it binds: the row that
+reads as a coin flip is the row bursting helps most. *Falsifier:* a
+cluster model where P falls at fixed mean rate without the peak being
+aligned to rest need.
+
+**AGA_042 -- `p_uninterrupted` is typed as a probability and its domain is
+unguarded. SUPPORTED, reported not repaired.** A negative window returns
+**1.391** and a negative rate **1.989**. Both valid-domain edges are exact
+1.0 and are real measurements rather than defaults -- a zero rate leaves
+every window clear, a zero-length window cannot contain an event -- which
+is the half that matters and the half that holds. The file is delivered,
+so this is recorded rather than patched. The metric is now registered in
+`tools/known_answer.py` with five cases; its note states the one class of
+error the case set **cannot** catch, since `lam*minutes` is symmetric and
+an argument swap returns the same number. *Falsifier:* a domain guard.
+
+**AGA_043 -- a DERIVED entry now exists, closing `AGA_020`'s substantive
+half. SUPPORTED.** `TRANSFER_NOTE` draws on **S5** (the NSTSCE authors'
+mentoring recommendation, which that source does state -- checked) and on
+**TERM_NOTES** (the rest-act / hazard-event drift) and produces a third
+statement neither carries: *mentoring runs on words, and where a term has
+drifted, told practice arrives inverted -- record the behaviour, not the
+phrase.* It is tagged `[DERIVED]`. The `BEHAVIOUR_RECORD_SCHEMA` beside it
+is that conclusion built: six fields anchored on what the vehicle and the
+body did, with the two free-text fields (`trigger`, `resumed_after`)
+carrying the skill the phrase cannot. *Falsifier:* the note resting on one
+source.
+
+**The UNVERIFIED claim covers the addenda too** (`AGA_032`): the aviation
+planned-nap lead, the FMCSA split-sleeper rule, the team-driver sleep-
+quality lead and every event rate are carried or declared placeholder, and
+nothing here was read.
 

@@ -85,10 +85,10 @@ class ReadNotRestate(unittest.TestCase):
 
 class StatusVocabulary(unittest.TestCase):
 
-    def test_one_scale_declared_four_sites_in_use(self):
+    def test_one_scale_declared_five_sites_in_use(self):
         v = RA.status_vocabulary()
         self.assertEqual(len(v["declared"]), 6)
-        self.assertEqual(v["n_sites"], 4)
+        self.assertEqual(v["n_sites"], 5)
         self.assertEqual(set(v["in_sources"]),
                          {"OBSERVED", "SECONDARY", "UNREAD"})
         self.assertEqual(set(v["in_questions"]),
@@ -102,6 +102,8 @@ class StatusVocabulary(unittest.TestCase):
         v = RA.status_vocabulary()
         self.assertEqual(v["in_holds_tags"], ["OBSERVED", "SECONDARY"])
         self.assertEqual(v["in_term_notes"],
+                         ["DERIVED", "OBSERVED", "PROPOSED"])
+        self.assertEqual(v["in_addendum"],
                          ["DERIVED", "OBSERVED", "PROPOSED"])
 
     def test_three_question_verdict_tokens_are_declared_nowhere(self):
@@ -398,7 +400,15 @@ class OpenButUncounted(unittest.TestCase):
     def test_the_headline_counts_one_token_of_three_open_ones(self):
         v = RA.open_but_uncounted()
         self.assertEqual(v["headline"], "5 of 10")
-        self.assertEqual(v["not_answered"], "7 of 10")
+        self.assertEqual(v["not_answered"], "8 of 11")
+
+    def test_a_question_now_sits_outside_the_counted_list(self):
+        """QK is UNMEASURED and lives in ADDENDUM_QUESTIONS, which main()
+        does not count and question_refs() does not reach: eleven
+        questions exist and the closing number is taken over ten."""
+        v = RA.open_but_uncounted()
+        self.assertEqual(v["outside_the_counted_list"], [("QK", "UNMEASURED")])
+        self.assertEqual((v["n_questions"], v["n_all_questions"]), (10, 11))
 
     def test_the_two_added_questions_are_open_and_uncounted(self):
         """The revision added two open questions under labels the closing
@@ -422,14 +432,122 @@ class Revision(unittest.TestCase):
         if v["status"] != "OK":
             self.skipTest("git history not reachable: %s" % v.get("reason"))
         self.assertGreater(v["lines_added"], v["lines_removed"])
-        self.assertEqual(v["added"], ["TERM_NOTES"])
-        self.assertEqual(v["changed"], ["QUESTIONS", "RULES", "SOURCES"])
         self.assertEqual(v["removed"], [])
+        # the addenda are pure additions: the v3 objects are untouched
+        for k in ("SOURCES", "QUESTIONS", "RULES", "TERM_NOTES"):
+            self.assertIn(k, v["byte_identical"], k)
+        for k in ("ADDENDUM_QUESTIONS", "CONTROL_LOOPS", "GATE_MAP",
+                  "EVENT_CLASSES", "REST_BLOCK", "TRANSFER_NOTE",
+                  "BEHAVIOUR_RECORD_SCHEMA", "CONTINUED_WORK", "G0_NOTES"):
+            self.assertIn(k, v["added"], k)
 
     def test_an_explicit_ref_that_does_not_resolve_is_reported(self):
         v = RA.revision(against="no-such-ref-xyz")
         self.assertIn(v["status"], ("NOT_AVAILABLE", "NO_PRIOR_VERSION"))
         self.assertIn("reason", v)
+
+
+# ------------------------------------------------- AGA_039..043 addenda
+
+class RestBlockProvenance(unittest.TestCase):
+
+    def test_the_window_block_carries_no_provenance_in_the_object(self):
+        """EVENT_CLASSES (the rate) has a source field on every row;
+        REST_BLOCK (the window) has comments, which are not in the object
+        -- a consumer importing the register gets four bare numbers."""
+        v = RA.rest_block_provenance()
+        self.assertFalse(v["provenance_in_the_object"])
+        self.assertTrue(v["event_classes_carry_a_source_field"])
+
+    def test_the_comments_carry_three_classes_and_one_is_silent(self):
+        v = RA.rest_block_provenance()
+        self.assertEqual(v["placeholder"], ["handoff_lead_min"])
+        self.assertEqual(v["literature_unverified"], ["inertia_min", "nap_min"])
+        self.assertEqual(v["unclassified"], ["cycle_min"])
+
+
+class G0Arithmetic(unittest.TestCase):
+
+    def test_every_input_is_declared_placeholder(self):
+        self.assertTrue(RA.g0_arithmetic()["all_placeholder"])
+
+    def test_the_rate_and_the_gap_recompute(self):
+        v = RA.g0_arithmetic()
+        self.assertAlmostEqual(v["lam_per_h"], 0.33, places=12)
+        self.assertAlmostEqual(v["mean_gap_min"], 60.0 / 0.33, places=9)
+
+    def test_note_three_holds_the_top_contributor_is_not_the_top_rate(self):
+        """'The binding term is p_machine_fails, not raw event rate.'"""
+        v = RA.g0_arithmetic()
+        self.assertEqual(v["top_contributor"], "work_zone")
+        self.assertEqual(v["highest_raw_rate"], "heavy_traffic_merge")
+        self.assertTrue(v["note_3_holds"])
+
+    def test_the_binding_row_and_the_lever(self):
+        v = RA.g0_arithmetic()
+        self.assertEqual((v["worst"]["block"], v["worst"]["inertia"]),
+                         ("cycle_min", "high"))
+        self.assertLess(v["worst"]["p"], 0.51)
+        self.assertGreater(v["p_worst_without_top"], v["worst"]["p"])
+
+
+class ClusteringDirection(unittest.TestCase):
+
+    def test_bursting_alone_raises_p_so_poisson_is_a_floor(self):
+        """Exact: a burst of k at one instant makes the BURST process
+        Poisson at lam/k, so P = exp(-lam*w/60k) > exp(-lam*w/60)."""
+        v = RA.clustering_direction()
+        self.assertTrue(v["clustering_raises"])
+        base = dict(v["clustering_only"])[1]
+        self.assertAlmostEqual(base, v["poisson"], places=12)
+        for k, val in v["clustering_only"]:
+            if k > 1:
+                self.assertGreater(val, v["poisson"], "k=%d" % k)
+
+    def test_a_rate_peaking_at_rest_time_lowers_p_so_poisson_is_a_ceiling(self):
+        v = RA.clustering_direction()
+        self.assertTrue(v["peak_lowers"])
+        self.assertAlmostEqual(dict(v["peak_aligned"])[0.0], v["poisson"],
+                               places=12)
+
+    def test_the_two_conditions_are_stated_in_two_places(self):
+        """The docstring names the condition; the G0 note drops it and
+        describes the other mechanism while drawing this one's
+        conclusion."""
+        v = RA.clustering_direction()
+        self.assertTrue(v["same_caveat_opposite_directions"])
+        self.assertIn("in the same hours as rest need",
+                      REG.p_uninterrupted.__doc__)
+        note = [n for n in REG.G0_NOTES if n.startswith("Clustering")][0]
+        self.assertNotIn("rest need", note)
+        self.assertIn("ceiling", note)
+
+
+class ProbabilityDomain(unittest.TestCase):
+
+    def test_the_valid_domain_returns_probabilities(self):
+        self.assertEqual(RA.probability_domain()["in_range"],
+                         ["zero rate", "zero window"])
+
+    def test_outside_it_the_function_returns_above_one(self):
+        v = RA.probability_domain()
+        self.assertEqual(v["out_of_range"],
+                         ["negative window", "negative rate"])
+        for name, val in v["probes"]:
+            if name in v["out_of_range"]:
+                self.assertGreater(val, 1.0, name)
+
+
+class DerivedEntry(unittest.TestCase):
+
+    def test_a_derived_entry_now_exists(self):
+        """AGA_020's substantive gap -- nothing combined two sources into
+        a third statement -- closes. TRANSFER_NOTE draws on S5 and on
+        TERM_NOTES and is tagged."""
+        v = RA.derived_entry()
+        self.assertTrue(v["combines_two"])
+        self.assertTrue(v["tagged_derived"])
+        self.assertTrue(v["s5_states_the_recommendation"])
 
 
 # ------------------------------------------------------- structure

@@ -36,6 +36,7 @@ import known_answer as ka  # noqa: E402
 
 # Hand-kept. Every entry must be registered with a known-answer case.
 MANIFEST = (
+    "automation-gap/driver_hours_evidence_register.py::p_uninterrupted",
     "null-harness/null_harness.py::_verdict",
     "nonidentity-census/t6_window_declaration.py::decided_by_tracks_window",
     "nonidentity-census/t6_window_declaration.py::"

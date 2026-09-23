@@ -263,5 +263,217 @@ def main():
                                                 len(QUESTIONS)))
 
 
+# ===========================================================================
+# ADDENDUM -- continued work, opened 2026-09-23
+# ===========================================================================
+
+ADDENDUM_QUESTIONS = [
+    ("QK", "State-driven rest (rest on need, split runs) vs clock-driven "
+           "rest (fixed HOS blocks): fatigue / crash rate on matched routes",
+     ["S10"],
+     "UNMEASURED -- S10 is N=1 (operator pattern: run ~600 mi, rest on "
+     "need, run ~400, finish the day)  [OBSERVED]",
+     "discriminator: drivers using split-sleeper flexibly vs fixed "
+     "blocks, same carrier, same lanes. Transfer lead: NASA 1990s "
+     "cockpit planned-nap study (aviation) -- NOT VERIFIED this session. "
+     "Regulatory lead: FMCSA split sleeper-berth (7/3, 8/2) pauses the "
+     "14-h window -- as far as known, NOT VERIFIED this session"),
+]
+
+CONTROL_LOOPS = dict(
+    clock=dict(input="elapsed hours", stop="clock says", resume="clock "
+               "allows", failure="drives through circadian low when hours "
+               "remain; forced rest when not sleepy"),
+    state=dict(input="body signals (sleep pressure + circadian)",
+               stop="signal says", resume="rested",
+               failure="depends on reading the signal -- a learned skill; "
+                       "candidate mechanism for part of the tenure curve "
+                       "[PROPOSED]"),
+)
+
+# Behaviour-anchored record: survives term drift in both directions.
+# The last two fields carry the transferable skill.
+BEHAVIOUR_RECORD_SCHEMA = [
+    ("vehicle_state", "moving | stopped | parked"),
+    ("location",      "shoulder | lot | ramp | dock | other"),
+    ("duration_min",  "int"),
+    ("trigger",       "what told you to stop (free text, the skill)"),
+    ("resumed_after", "what told you it was safe to go (free text, the "
+                      "skill)"),
+    ("clock_state",   "hours on duty / driving at stop, if logged"),
+]
+
+TRANSFER_NOTE = (
+    "Mentoring is the NSTSCE authors' named fix, but it runs on words. "
+    "Where a term has drifted ('fell asleep at the wheel': rest act -> "
+    "hazard), told practice arrives inverted. Record the behaviour, not "
+    "the phrase; show, not tell.  [DERIVED]")
+
+CONTINUED_WORK = [
+    ("W1", "Read McCartt et al. 2000 full text: item wording (QI); which "
+           "item the experience factor loaded on (QJ, E1)", "library"),
+    ("W2", "Read Braver et al. 1992 violator-characteristics table: "
+           "tenure column? (QD)", "library"),
+    ("W3", "Read NSTSCE 2020 primary report: crash TYPE by tenure band "
+           "(QC -> QD)", "online"),
+    ("W4", "Read NIOSH/FMCSA 2010 long-haul survey: tenure, sleep, hours "
+           "fields (QA magnitude, QD)", "online"),
+    ("W5", "Heaton et al. 2008: predictors incl. tenure? (QD)", "library"),
+    ("W6", "Verify NASA planned-nap study + FMCSA split-sleeper rule "
+           "text (QK leads)", "online"),
+    ("W7", "Search oral-history archives for pre-ELD trucker accounts "
+           "coded with the behaviour-anchored schema (QF, QI cohort "
+           "split)", "online + archive"),
+    ("W8", "Million-mile safe-driver rosters as a tenure-selected "
+           "population (QE survivorship arm)", "not searched"),
+    ("W9", "Regional / multi-stop sample with fatigue TYPE split -- no "
+           "existing sample found (QF)", "needs new data"),
+]
+
+
+def addendum():
+    print("\n" + "=" * 60)
+    print("ADDENDUM -- continued work (2026-09-23)")
+    print("=" * 60)
+    for qid, q, srcs, st, nxt in ADDENDUM_QUESTIONS:
+        print("  %s  %s" % (qid, q))
+        print("       sources: %s" % ", ".join(srcs))
+        print("       status : %s" % st)
+        print("       next   : %s" % nxt)
+    print("\n  CONTROL LOOPS")
+    for name, d in CONTROL_LOOPS.items():
+        print("    %-6s " % name + " | ".join("%s: %s" % kv
+                                              for kv in d.items()))
+    print("\n  BEHAVIOUR-ANCHORED RECORD")
+    for f, t in BEHAVIOUR_RECORD_SCHEMA:
+        print("    %-14s %s" % (f, t))
+    print("\n  TRANSFER NOTE\n    " + TRANSFER_NOTE)
+    print("\n  CONTINUED WORK")
+    for wid, w, access in CONTINUED_WORK:
+        print("    %s  [%s]  %s" % (wid, access, w))
+
+
+# ===========================================================================
+# ADDENDUM 2 -- PROPOSED GATE MAP (2026-09-23)
+# Question: can machine + human share a truck so the human rests on need
+# while the machine carries the monotonous miles?
+# Gates run IN ORDER. A FAIL at an earlier gate makes later gates moot
+# for this design (they stay open as science, not as design inputs).
+# ===========================================================================
+
+import math
+
+# G0 needs: the uninterrupted window must hold a usable rest block PLUS
+# the time to become takeover-capable after waking.
+REST_BLOCK = dict(
+    nap_min=40,          # planned-nap scale (aviation lead, NOT VERIFIED)
+    cycle_min=90,        # one sleep cycle, approx (general sleep science)
+    inertia_min=(15, 30),  # sleep inertia before alert takeover -- common
+                           # range in sleep literature; NOT VERIFIED here
+    handoff_lead_min=5,  # warning time machine gives before it needs
+                         # the human -- PLACEHOLDER, system-specific
+)
+
+# Event classes that could interrupt. Only events the MACHINE CANNOT
+# handle wake the human. rate = events/hour on the route;
+# p_machine_fails = share the machine cannot handle alone.
+# ALL VALUES BELOW ARE PLACEHOLDERS, NOT DATA. They exist so the
+# arithmetic can be checked; replace per route + season from sources.
+EVENT_CLASSES = [
+    # name,                 rate_per_h, p_machine_fails, source status
+    ("work_zone",               0.30, 0.3, "PLACEHOLDER -- DOT work-zone logs"),
+    ("weather_out_of_envelope", 0.05, 1.0, "PLACEHOLDER -- NWS + vendor envelope"),
+    ("incident_or_closure",     0.10, 0.5, "PLACEHOLDER -- state 511 incident feeds"),
+    ("heavy_traffic_merge",     0.50, 0.1, "PLACEHOLDER -- traffic data"),
+    ("mechanical_alert",        0.01, 1.0, "PLACEHOLDER -- fleet telematics"),
+    ("fuel_inspection_stop",    0.08, 1.0, "PLACEHOLDER -- route plan"),
+]
+
+
+def interrupt_rate(classes):
+    return sum(r * p for _, r, p, _ in classes)
+
+
+def p_uninterrupted(lam_per_h, minutes):
+    """Poisson assumption: events independent, constant rate.
+    Weather and congestion CLUSTER, so real windows are burstier than
+    this -- the Poisson figure is an upper bound on usable windows when
+    events cluster in the same hours as rest need.  [DERIVED]"""
+    return math.exp(-lam_per_h * minutes / 60.0)
+
+
+def g0_window_needed(block="nap_min", inertia="high"):
+    i = REST_BLOCK["inertia_min"][1 if inertia == "high" else 0]
+    return REST_BLOCK[block] + i + REST_BLOCK["handoff_lead_min"]
+
+
+GATE_MAP = [
+    ("G0", "INTERVAL FEASIBILITY",
+     "mean time between events the machine cannot handle, per route and "
+     "season, vs window needed = rest block + sleep inertia + handoff lead",
+     "PASS: P(uninterrupted window) high on the route -> go to G1",
+     "FAIL: human cannot rest while machine drives -> complementarity "
+     "design dead ON THAT ROUTE/SEASON; human stays primary or team-human",
+     "UNMEASURED -- needs per-route event rates (DOT work zones, 511 "
+     "incidents, NWS, vendor weather envelope, fuel plan)"),
+    ("G1", "TASK-TYPE SPLIT (QF)",
+     "is vigilance fatigue separable from muscular/contact fatigue",
+     "PASS: automate the monotonous segment, human keeps contact work",
+     "FAIL: segment placement irrelevant to fatigue",
+     "UNMEASURED"),
+    ("G2", "STATE vs CLOCK REST (QK)",
+     "does rest-on-need beat fixed blocks on matched routes",
+     "PASS: machine carries the leg while human rests on need",
+     "FAIL: clock rules adequate; machine value is utilisation only",
+     "UNMEASURED (S10 N=1)"),
+    ("G3", "LEARNING vs SURVIVORSHIP (QE)",
+     "is the tenure curve skill-building",
+     "PASS (learning): design must keep hard-segment exposure for skill",
+     "FAIL (survivorship): screen/selection is the lever",
+     "UNMEASURED"),
+    ("G4", "DOOR-TO-DOOR ACCOUNTING (QH)",
+     "stops + human-touch minutes, both systems, same lane",
+     "any result: required for honest cost/benefit",
+     "skipped: human work booked as free",
+     "UNMEASURED"),
+]
+
+G0_NOTES = [
+    "Sleep in a MOVING cab is lower quality than parked (team-driver "
+    "lead, NOT VERIFIED) -> the usable rest block may need to be longer "
+    "than the parked equivalent.",
+    "Route + season dependent: Upper Midwest winter and Sun Belt corridor "
+    "are different gates. One G0 result does not transfer.",
+    "The binding term is p_machine_fails, not raw event rate: a machine "
+    "that handles work zones alone removes the most frequent interrupter.",
+    "Clustering: interrupters bunch in the same hours (weather + traffic "
+    "+ incidents). Poisson overstates usable windows -- treat as ceiling.",
+]
+
+
+def addendum2():
+    print("\n" + "=" * 60)
+    print("ADDENDUM 2 -- PROPOSED GATE MAP")
+    print("=" * 60)
+    for gid, name, test, ok, bad, st in GATE_MAP:
+        print("  %s %s\n     test : %s\n     pass : %s\n     fail : %s"
+              "\n     now  : %s" % (gid, name, test, ok, bad, st))
+    lam = interrupt_rate(EVENT_CLASSES)
+    print("\n  G0 ARITHMETIC -- DEMONSTRATION ON PLACEHOLDER RATES, NOT DATA")
+    print("    human-required interrupts/hour (placeholder) = %.3f" % lam)
+    print("    mean gap between them = %.0f min" % (60.0 / lam))
+    for block in ("nap_min", "cycle_min"):
+        for inertia in ("low", "high"):
+            w = g0_window_needed(block, inertia)
+            print("    window %-9s inertia %-4s = %3d min -> "
+                  "P(uninterrupted) = %.2f"
+                  % (block, inertia, w, p_uninterrupted(lam, w)))
+    print("\n  G0 NOTES")
+    for n in G0_NOTES:
+        print("    - " + n)
+
+
 if __name__ == "__main__":
     main()
+    addendum()
+    addendum2()

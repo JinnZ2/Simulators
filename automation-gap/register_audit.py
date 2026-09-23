@@ -24,6 +24,7 @@
 
 import importlib.util
 import json
+import math
 import os
 import re
 import sys
@@ -98,14 +99,25 @@ def status_vocabulary():
         for v in t.values():
             in_term_notes |= set(tag.findall(str(v)))
 
-    everywhere = in_sources | in_questions | in_holds | in_term_notes
+    # The addenda added more prose-tag sites: an addendum question status,
+    # a control-loop failure mode, the transfer note, a function docstring.
+    in_addendum = set()
+    for obj in ("ADDENDUM_QUESTIONS", "CONTROL_LOOPS", "TRANSFER_NOTE"):
+        in_addendum |= set(tag.findall(str(getattr(REG, obj, ""))))
+    doc = getattr(REG, "p_uninterrupted", None)
+    if doc is not None and doc.__doc__:
+        in_addendum |= set(tag.findall(doc.__doc__))
+
+    everywhere = (in_sources | in_questions | in_holds | in_term_notes
+                  | in_addendum)
     return dict(declared=declared,
                 in_sources=sorted(in_sources),
                 in_questions=sorted(in_questions),
                 in_holds_tags=sorted(in_holds),
                 in_term_notes=sorted(in_term_notes),
+                in_addendum=sorted(in_addendum),
                 n_sites=sum(1 for x in (in_sources, in_questions, in_holds,
-                                        in_term_notes) if x),
+                                        in_term_notes, in_addendum) if x),
                 unused_in_a_status_slot=[d for d in declared
                                          if d not in in_sources | in_questions],
                 unused_anywhere=[d for d in declared if d not in everywhere],
@@ -288,10 +300,16 @@ def open_but_uncounted():
         else:
             open_other.append((q[0], st.split()[0].rstrip("-").strip()))
     n = len(REG.QUESTIONS)
+    # The addenda put further questions in a SEPARATE list, which main()
+    # does not count and question_refs() does not reach.
+    outside = [(q[0], q[3].split()[0].rstrip("-").strip())
+               for q in getattr(REG, "ADDENDUM_QUESTIONS", [])]
+    total = n + len(outside)
     return dict(counted=counted, answered=answered, open_uncounted=open_other,
-                n_questions=n,
+                n_questions=n, outside_the_counted_list=outside,
+                n_all_questions=total,
                 headline="%d of %d" % (len(counted), n),
-                not_answered="%d of %d" % (n - len(answered), n))
+                not_answered="%d of %d" % (total - len(answered), total))
 
 
 def nested_rates():
@@ -385,6 +403,142 @@ def headline_count():
                 unmeasured_and_sourced=[q for q in un if q in sourced])
 
 
+def rest_block_provenance():
+    """AGA_039 -- the two parameter blocks the G0 gate runs on carry
+    provenance by different means, and only one survives import.
+    EVENT_CLASSES (the RATE, the gate's denominator) carries a source
+    string as a fourth tuple element, reachable from the object.
+    REST_BLOCK (the WINDOW, the gate's numerator) carries it in
+    comments, which are not in the object at all: a consumer importing
+    the register gets four bare numbers."""
+    src = open(os.path.join(HERE, "driver_hours_evidence_register.py")).read()
+    block = re.search(r"REST_BLOCK = dict\((.*?)\n\)", src, re.S).group(1)
+    rows = {}
+    for line in block.splitlines():
+        m = re.match(r"\s*(\w+)\s*=", line)
+        if m:
+            rows[m.group(1)] = []
+        if rows:
+            c = line.split("#", 1)
+            if len(c) == 2:
+                rows[list(rows)[-1]].append(c[1].strip())
+    graded = {k: (" ".join(v) or None) for k, v in rows.items()}
+    placeholder = [k for k, v in graded.items() if v and "PLACEHOLDER" in v]
+    unverified = [k for k, v in graded.items()
+                  if v and "PLACEHOLDER" not in v and "NOT VERIFIED" in v]
+    other = [k for k in graded if k not in placeholder + unverified]
+    return dict(fields=sorted(REG.REST_BLOCK),
+                comments=graded,
+                placeholder=sorted(placeholder),
+                literature_unverified=sorted(unverified),
+                unclassified=sorted(other),
+                provenance_in_the_object=any(
+                    isinstance(v, str) for v in REG.REST_BLOCK.values()),
+                event_classes_carry_a_source_field=all(
+                    isinstance(c[3], str) and c[3] for c in REG.EVENT_CLASSES))
+
+
+def g0_arithmetic():
+    """AGA_040 -- the addendum's G0 block recomputed, and which class the
+    rate is carried by. Every input is declared PLACEHOLDER by the
+    register itself; nothing here is a statement about any route."""
+    classes = REG.EVENT_CLASSES
+    lam = REG.interrupt_rate(classes)
+    by_class = sorted(((r * pm, name) for name, r, pm, _ in classes),
+                      reverse=True)
+    raw = sorted(((r, name) for name, r, pm, _ in classes), reverse=True)
+    windows = []
+    for block in ("nap_min", "cycle_min"):
+        for inertia in ("low", "high"):
+            w = REG.g0_window_needed(block, inertia)
+            windows.append(dict(block=block, inertia=inertia, minutes=w,
+                                p=REG.p_uninterrupted(lam, w)))
+    worst = min(windows, key=lambda d: d["p"])
+    # removing the top contributor: the design lever the notes name
+    top = by_class[0][1]
+    lam_wo = REG.interrupt_rate([c for c in classes if c[0] != top])
+    return dict(lam_per_h=lam, mean_gap_min=60.0 / lam,
+                by_contribution=[(n, round(v, 4)) for v, n in by_class],
+                highest_raw_rate=raw[0][1], top_contributor=top,
+                note_3_holds=(raw[0][1] != top),
+                windows=windows, worst=worst,
+                lam_without_top=lam_wo,
+                p_worst_without_top=REG.p_uninterrupted(lam_wo,
+                                                        worst["minutes"]),
+                all_placeholder=all("PLACEHOLDER" in c[3] for c in classes))
+
+
+def clustering_direction():
+    """AGA_041 -- the G0 note and the function docstring state the SAME
+    caveat under DIFFERENT conditions, and the two run opposite ways.
+
+    Shown exactly, no simulation. Both are Poisson integrals:
+
+      A  clustering alone, in the limit where a burst of k arrives at one
+         instant: the process of BURSTS is Poisson at lam/k, so
+         P = exp(-lam*w/(60k)) > exp(-lam*w/60) for every k > 1.
+         Poisson is a FLOOR.
+
+      B  rate peaking at the hour rest is needed: P over a window started
+         at the peak is exp(-integral of the rate), and the integral
+         exceeds lam*w whenever the amplitude is positive.
+         Poisson is a CEILING.
+
+    The docstring names B ("when events cluster in the same hours as rest
+    need"). The G0 note describes A ("interrupters bunch in the same
+    hours (weather + traffic + incidents)") and draws B's conclusion."""
+    lam = REG.interrupt_rate(REG.EVENT_CLASSES)
+    w = REG.g0_window_needed("cycle_min", "high")     # the binding row
+    base = REG.p_uninterrupted(lam, w)
+
+    def bursts(k):
+        return math.exp(-lam * (w / 60.0) / k)
+
+    def at_peak(amp, period_h=24.0):
+        # integral of lam*(1 + amp*cos(2*pi*t/period)) from 0 to w, at the peak
+        t = w / 60.0
+        integral = lam * (t + amp * period_h / (2 * math.pi)
+                          * math.sin(2 * math.pi * t / period_h))
+        return math.exp(-integral)
+
+    a = [(k, bursts(k)) for k in (1, 2, 5, 10)]
+    b = [(amp, at_peak(amp)) for amp in (0.0, 0.5, 1.0, 1.5)]
+    return dict(window_min=w, lam_per_h=lam, poisson=base,
+                clustering_only=a, peak_aligned=b,
+                clustering_raises=all(v > base for k, v in a if k > 1),
+                peak_lowers=all(v < base for amp, v in b if amp > 0),
+                note_describes=("A", "interrupters bunch in the same hours"),
+                docstring_condition=("B", "in the same hours as rest need"),
+                same_caveat_opposite_directions=True)
+
+
+def probability_domain():
+    """AGA_042 -- p_uninterrupted is typed as a probability and has no
+    domain guard: a negative window or a negative rate returns a value
+    above 1. Reported, not repaired: the file is delivered."""
+    lam = REG.interrupt_rate(REG.EVENT_CLASSES)
+    probes = [("zero rate", REG.p_uninterrupted(0.0, 125)),
+              ("zero window", REG.p_uninterrupted(lam, 0)),
+              ("negative window", REG.p_uninterrupted(lam, -60)),
+              ("negative rate", REG.p_uninterrupted(-lam, 125))]
+    return dict(probes=[(n, v) for n, v in probes],
+                out_of_range=[n for n, v in probes if not 0.0 <= v <= 1.0],
+                in_range=[n for n, v in probes if 0.0 <= v <= 1.0])
+
+
+def derived_entry():
+    """AGA_043 -- AGA_020's substantive gap: nothing combined two sources
+    into a third statement. TRANSFER_NOTE does, and is tagged."""
+    note = getattr(REG, "TRANSFER_NOTE", "")
+    cites_s5 = "NSTSCE" in note
+    cites_term = "fell asleep at the wheel" in note
+    s5_holds = any("mentoring" in h.lower() for h in REG.SOURCES["S5"]["holds"])
+    return dict(exists=bool(note), tagged_derived="[DERIVED]" in note,
+                draws_on_s5=cites_s5, s5_states_the_recommendation=s5_holds,
+                draws_on_term_notes=cites_term,
+                combines_two=(cites_s5 and cites_term))
+
+
 def revision(against=None):
     """AGA_036 -- the register was revised after AGA_020..032 were
     published against it. A revision is a copy of its predecessor and
@@ -474,6 +628,11 @@ def findings():
         "AGA_034_term_note_scope": term_note_scope(),
         "AGA_035_open_but_uncounted": open_but_uncounted(),
         "AGA_036_revision": revision(),
+        "AGA_039_rest_block_provenance": rest_block_provenance(),
+        "AGA_040_g0_arithmetic": g0_arithmetic(),
+        "AGA_041_clustering_direction": clustering_direction(),
+        "AGA_042_probability_domain": probability_domain(),
+        "AGA_043_derived_entry": derived_entry(),
         "AGA_027_aurora_provenance": aurora_provenance(),
         "AGA_028_hos_sizing": hos_sizing(),
         "AGA_029_self_date": self_date(),
@@ -567,6 +726,10 @@ def render(f):
       % (", ".join(ob["counted"]), ob["headline"]))
     p("    open, not counted  : %s"
       % (", ".join("%s (%s)" % (a, b) for a, b in ob["open_uncounted"]) or "none"))
+    p("    outside the list   : %s  -> %d questions exist, %d are counted"
+      % (", ".join("%s (%s)" % (a, b)
+                   for a, b in ob["outside_the_counted_list"]) or "none",
+         ob["n_all_questions"], ob["n_questions"]))
     p("    answered           : %s  -> not answered %s\n"
       % (", ".join(ob["answered"]), ob["not_answered"]))
 
@@ -579,6 +742,63 @@ def render(f):
         p("    changed       : %s" % (", ".join(rv["changed"]) or "none"))
         p("    added         : %s" % (", ".join(rv["added"]) or "none"))
     p("")
+
+    rb = f["AGA_039_rest_block_provenance"]
+    p("AGA_039  the two G0 parameter blocks carry provenance differently")
+    p("    REST_BLOCK (the window): comments only; in the object: %s"
+      % rb["provenance_in_the_object"])
+    p("      PLACEHOLDER           : %s" % ", ".join(rb["placeholder"]))
+    p("      literature, unverified: %s" % ", ".join(rb["literature_unverified"]))
+    p("      neither stated        : %s" % (", ".join(rb["unclassified"]) or "none"))
+    p("    EVENT_CLASSES (the rate): a source field on every row: %s\n"
+      % rb["event_classes_carry_a_source_field"])
+
+    g0 = f["AGA_040_g0_arithmetic"]
+    p("AGA_040  G0 recomputed -- every input declared PLACEHOLDER: %s"
+      % g0["all_placeholder"])
+    p("    human-required interrupts/h %.3f   mean gap %.1f min"
+      % (g0["lam_per_h"], g0["mean_gap_min"]))
+    p("    by contribution: %s"
+      % ", ".join("%s %.2f" % (n, v) for n, v in g0["by_contribution"]))
+    p("    highest raw rate is %s, top contributor is %s -> note 3 holds: %s"
+      % (g0["highest_raw_rate"], g0["top_contributor"], g0["note_3_holds"]))
+    for w in g0["windows"]:
+        p("      %-9s %-4s %3d min -> P %.3f"
+          % (w["block"], w["inertia"], w["minutes"], w["p"]))
+    p("    binding row %s/%s at P %.3f; removing %s -> rate %.2f, P %.3f\n"
+      % (g0["worst"]["block"], g0["worst"]["inertia"], g0["worst"]["p"],
+         g0["top_contributor"], g0["lam_without_top"],
+         g0["p_worst_without_top"]))
+
+    cd = f["AGA_041_clustering_direction"]
+    p("AGA_041  one caveat, two conditions, opposite directions "
+      "(exact, no simulation)")
+    p("    window %d min, Poisson P %.3f" % (cd["window_min"], cd["poisson"]))
+    p("    A  bursting alone, k per burst : %s"
+      % ", ".join("k=%d %.3f" % (k, v) for k, v in cd["clustering_only"]))
+    p("       -> Poisson is a FLOOR. raises at every k > 1: %s"
+      % cd["clustering_raises"])
+    p("    B  rate peaking at rest time   : %s"
+      % ", ".join("amp=%.1f %.3f" % (a, v) for a, v in cd["peak_aligned"]))
+    p("       -> Poisson is a CEILING. lowers at every amplitude: %s"
+      % cd["peak_lowers"])
+    p("    the docstring names %s (%s); the G0 note describes %s (%s)\n"
+      % (cd["docstring_condition"][0], cd["docstring_condition"][1],
+         cd["note_describes"][0], cd["note_describes"][1]))
+
+    pd = f["AGA_042_probability_domain"]
+    p("AGA_042  p_uninterrupted is typed as a probability, domain unguarded")
+    for n, v in pd["probes"]:
+        p("      %-16s %.4f%s" % (n, v, "   <- not a probability"
+                                  if n in pd["out_of_range"] else ""))
+    p("")
+
+    de = f["AGA_043_derived_entry"]
+    p("AGA_043  a DERIVED entry now exists: %s" % de["combines_two"])
+    p("    TRANSFER_NOTE draws on S5 (%s, which states it: %s) and on "
+      "TERM_NOTES (%s), tagged DERIVED: %s\n"
+      % (de["draws_on_s5"], de["s5_states_the_recommendation"],
+         de["draws_on_term_notes"], de["tagged_derived"]))
 
     nr = f["AGA_026_nested_rates"]
     p("AGA_026  S2 rates: ever %.1f%%, past-year %.1f%%, nested %s (ratio %.3f)\n"

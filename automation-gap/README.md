@@ -25,9 +25,14 @@ driver_hours_evidence_register.py
                                  twelve sources, ten questions, a term
                                  note, on what is known / self-reported /
                                  UNMEASURED about long days, fatigue and
-                                 tenure.  Revised once; v1 is at 1bb8471
-                                 and register_audit.revision() measures
-                                 what moved
+                                 tenure, plus two addenda: continued
+                                 work (QK, clock-vs-state control loops, a
+                                 behaviour-anchored record) and a proposed
+                                 gate map G0-G4 carrying the register's
+                                 first runnable arithmetic.  Revised
+                                 twice; register_audit.revision() resolves
+                                 the previous version by content and
+                                 measures what moved
 
 audit.py                         recomputes what the six documents state
 register_audit.py                imports the register, checks it against
@@ -35,7 +40,7 @@ register_audit.py                imports the register, checks it against
 test_audit.py                    checks on the audit; prints its count
 test_register.py                 checks on the register audit; prints its
                                  count
-CLAIM_TABLE.md                   AGA_001..038 with falsifiers
+CLAIM_TABLE.md                   AGA_001..043 with falsifiers
 ```
 
 The register arrived a drop after the seed and is a different kind of
@@ -121,3 +126,25 @@ including that an emptied document breaks the checks rather than passing
 them.
 
 Stdlib only, parses under 3.9, no network. CC0.
+
+The gate map is the first thing in the folder with arithmetic in it, and
+every input is declared `PLACEHOLDER` by the register itself. It
+recomputes: interrupt rate 0.330/h, mean gap 181.8 min, and a binding row
+-- a full sleep cycle plus high sleep inertia, 125 min -- at
+**P = 0.503**, a coin flip. Its own note that *the binding term is
+`p_machine_fails`, not raw event rate* holds exactly: the class with the
+highest raw rate contributes 0.05 and the top contributor is a different
+one at 0.09.
+
+The sharp result is `AGA_041`. The same caveat about clustering is stated
+in two places under two different conditions, and the two run **opposite
+ways** -- shown exactly, no simulation, since both are Poisson integrals.
+Bursting alone makes Poisson a **floor** (a burst of `k` at one instant is
+a Poisson process of bursts at `lam/k`, so P rises: 0.503 to 0.934 at
+k=10). A rate peaking at the hour rest is needed makes it a **ceiling**
+(0.503 down to 0.189). The function's docstring names the second condition
+and is right; the note drops it, describes the first mechanism, and draws
+the second's conclusion. A qualifier lost between two occurrences of one
+phrase with the reading inverting -- which is the register's own subject,
+in its own text. Correcting it makes the register's case stronger, and
+strongest exactly where it binds.

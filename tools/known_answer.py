@@ -709,6 +709,7 @@ def _tcr_expected_crossings(rate, rate_unit, horizon_value, horizon_unit):
 EXPECTED_METRICS = (
     "agent-lifecycle-energy/phase_energy.py::integrate",
     "anchor-measurand-crossing/amc.py::crossing_band",
+    "automation-gap/driver_hours_evidence_register.py::p_uninterrupted",
     "anchor-position/normalize.py::crossing_count",
     "crediting-rate/crediting_rate.py::bin_gap",
     "failure-mode-register/register.py::fraction_cap",
@@ -770,6 +771,20 @@ def _cdc_routing_cost(external, downtime_hours):
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     return mod.routing_cost(external, downtime_hours)
+
+
+def _dhr_p_uninterrupted(lam_per_h, minutes):
+    """automation-gap/driver_hours_evidence_register.py::p_uninterrupted,
+    imported. P(no human-required interrupt in a window of `minutes`) under
+    a Poisson assumption: exp(-lam * minutes / 60). A zero rate and a zero
+    window are exact 1.0 and are real measurements, not defaults."""
+    import importlib.util
+    path = os.path.join(ROOT, "automation-gap",
+                        "driver_hours_evidence_register.py")
+    spec = importlib.util.spec_from_file_location("_dhr", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.p_uninterrupted(lam_per_h, minutes)
 
 
 def _rcl_composed_bias(a, c):
@@ -1739,6 +1754,34 @@ def _seed_move_set():
         note="the equal-parts cases pin the inner<outer guard and the "
              "branch order; DISJOINT is tested before NESTED, so a total "
              "that satisfied both would read DISJOINT")
+    register(
+        "automation-gap/driver_hours_evidence_register.py::p_uninterrupted",
+        _dhr_p_uninterrupted,
+        [case("no interrupter is an exact 1.0", (0.0, 125), 1.0,
+              "a rate of zero leaves every window clear. 1.0 here is a "
+              "measurement, not a default -- the case a shortcut on a "
+              "falsy rate would pass for the wrong reason"),
+         case("zero window is an exact 1.0", (0.33, 0), 1.0,
+              "a window of no length cannot contain an event"),
+         case("ln2 per hour over one hour is a half",
+              (0.6931471805599453, 60), 0.5,
+              "lam*t = ln 2 at t = 1 h, so exp(-ln 2) = 0.5 exactly. "
+              "Catches a dropped /60: the same inputs without it give "
+              "exp(-41.6), which is 0 to any tolerance", tol=1e-12),
+         case("the register's own binding row", (0.33, 125),
+              0.5028315779709409,
+              "the cycle_min / high-inertia window, 125 min at the "
+              "placeholder rate. Catches a dropped negation, which returns "
+              "1.99 -- above 1, from a function typed as a probability",
+              tol=1e-12),
+         case("three hours at one per hour", (1.0, 180),
+              0.049787068367863944,
+              "exp(-3). A scale error in either argument moves this by "
+              "more than an order of magnitude", tol=1e-12)],
+        note="argument ORDER cannot be caught by any expected value: the "
+             "product lam*minutes is symmetric, so a swap returns the same "
+             "number. Stated because a case set that cannot catch a class "
+             "of error should say so rather than look complete.")
     register(
         "reporting-chain-loss/hop_compose.py::composed_bias",
         _rcl_composed_bias,
