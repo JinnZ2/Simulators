@@ -1,11 +1,12 @@
 # CLAIM TABLE -- automation-gap
 
 Ids are permanent. `AGA_` = automation-gap. Status is SUPPORTED / REFUTED /
-UNVERIFIED. Every SUPPORTED claim is a property of the six delivered
-documents and is recomputable by anyone with the folder:
-`python3 audit.py`. The delivered falsifiers are the documents' own
-(`AUT-F1..F8`, `RD-F1..F3`) and carry their own prefixes; nothing here
-renumbers them.
+UNVERIFIED. Every SUPPORTED claim is a property of the delivered material
+and is recomputable by anyone with the folder: `python3 audit.py` for the
+six documents (`AGA_001..019`), `python3 register_audit.py` for the
+evidence register (`AGA_020..031`). The delivered falsifiers are the
+documents' own (`AUT-F1..F8`, `RD-F1..F3`) and carry their own prefixes;
+nothing here renumbers them.
 
 **Scope, before anything else.** Every figure in the drop is CARRIED --
 sourced to reporting this environment cannot reach, the egress gate refusing
@@ -207,3 +208,182 @@ whole job is that distinction. Defects 2 and 3 are the same error at two
 sites, and both are the shape this folder's siblings record repeatedly: a
 mention is not the thing. Each is pinned by the case that exposed it.
 *Falsifier:* any of the three failing to reproduce on the recorded revision.
+
+---
+
+## The evidence register
+
+`driver_hours_evidence_register.py` landed one drop after the seed: a
+register of what is known, self-reported and unmeasured about long driving
+days, fatigue and driver tenure, across eleven sources and eight questions.
+It is a Python object, so `register_audit.py` **imports** it rather than
+parsing it -- the objects under test are the register's own -- and no
+figure it states appears as a numeric literal in the audit (asserted).
+Every source in it is CARRIED: located by a search pass this environment
+cannot repeat, and several are marked UNREAD by the register itself.
+Nothing below reads a primary source or rules on one.
+
+**AGA_020 -- the register declares one status scale and runs two.
+SUPPORTED.** The docstring declares six rungs *"one scale for every source"*
+-- `OBSERVED / SECONDARY / DERIVED / PROPOSED / UNMEASURED / UNREAD`. The
+sources use three of them (`OBSERVED`, `SECONDARY`, `UNREAD`). The question
+map uses a different pair, and **`SUPPORTED`, which carries three of the
+eight question verdicts, is declared nowhere**. `DERIVED` and `PROPOSED`
+are used in neither -- a visible zero, and `DERIVED` is the load-bearing
+one: nothing in the register combines two sources into a third statement,
+which is what `AGA_021` and `AGA_028` below both turn out to be.
+*Falsifier:* a second declared scale for questions, or a source carrying
+`DERIVED`.
+
+**AGA_021 -- S1 and S3 are not two sources. SUPPORTED.** S3's author list
+(Braver, Preusser, Ulmer) is a strict **subset** of S1's (Braver, Preusser,
+Preusser, Baum, Beilock, Ulmer); the two carry identical sampling-frame
+flags (`ON_ROAD`, `ADMISSION`), are eight years apart, and their headline
+figures agree (*~3/4* and *73%*) -- which is what one group's instrument
+produces and is not two confirmations. QA names four sources; through
+`effective-redundancy-audit`'s own `n_eff`, **imported and not
+reimplemented**, it is **3**. The collapse is a DECLARED boolean, so a
+reader who holds two papers by one group to be two independent readings
+gets `n_eff == n_nominal` and the check says which. The register's reading
+rules have no rule for a shared node. The overlap is computed from citation
+strings, which is a name-token match and not a name index -- stated at the
+function, and the only positive it returns is a subset relation over three
+tokens, which survives both of that method's failure modes.
+*Falsifier:* a fourth reading rule, or QA gaining a source from another
+group.
+
+**AGA_022 -- the frame rule says every source carries one and one carries
+none. SUPPORTED.** The docstring heads the flag list *"(every source
+carries one)"*; **S6 carries an empty list**, and there is no `UNKNOWN`
+member, so an empty list reads as *no sampling-frame concern* and as
+*frame not established* identically. S6 is the source whose `n`, `years`
+and `where` are all `"?"` -- the absence is honest and unrepresentable,
+which is the absent-vs-known-negative repair missing on the field the
+register's entire bias argument runs through. *Falsifier:* a sixth declared
+flag for an unestablished frame.
+
+**AGA_023 -- QE's own sentence is 7 of 11 as written and 7 of 8 as meant,
+and S6 is what stops it being 8 of 8. SUPPORTED.** QE's next-read field
+states *"every source here is ON_ROAD cross-section."* Seven of eleven
+sources carry `ON_ROAD`; the four that do not are three non-samples (`S9`
+VENDOR, `S10` N_OF_1, `Q1` ARCHIVE) and S6. Over samples it is 7 of 8 and
+the eighth is S6, whose frame is unstated -- so **`AGA_022`'s missing state
+and this unchecked boundary are one gap at two sites**, and supplying S6 a
+flag closes both (asserted, in both directions). The sentence is right
+about what it means and wrong as written. *Falsifier:* S6 declaring a
+frame.
+
+**AGA_024 -- a flag is carried for a consequence and defined as a method.
+SUPPORTED.** `ON_ROAD` is defined as *"interviewed while working -> excludes
+drivers already out"*. S5's `where` is *"carrier records (crash, moving
+violation)"* -- **nobody was interviewed**, and S5 is the only source
+carrying the flag whose `where` names no method (S7's `where` is `"?"` and
+is reported as unknown, not as a mismatch). The survivorship *consequence*
+still holds -- a driver who crashes out or quits leaves the roster -- so
+the flag is right about the bias and wrong about the mechanism: the
+vocabulary conflates a sampling METHOD with a sampling CONSEQUENCE. The
+repair is either a member for record-based survivorship or a definition
+stated as the consequence. *Falsifier:* S5's `where` naming an interview.
+
+**AGA_025 -- `holds` carries two kinds of entry with no field between them.
+SUPPORTED.** Of 33 entries, **10 are reading-state notes rather than
+findings** (*"violator characteristics table exists -- contents UNREAD"*,
+*"crash TYPE by tenure: not in relays"*), and **three of eleven sources
+contribute no finding at all** -- S7, S8 and Q1 are reading-state top to
+bottom. A consumer counting `holds` as evidence gets 33 where 23 are
+findings and three sources are worth zero. *Falsifier:* a `reading_state`
+field, or a source moving off the all-notes list.
+
+**AGA_026 -- the one containment the register admits, and it holds.
+SUPPORTED.** S2 states *47.1% ever fell asleep* and *25.4% in the past
+year*; a past-year rate exceeding an ever rate would be impossible, and it
+does not (ratio 0.539). The check is shown able to fail on a constructed
+reversal, so the pass is a measurement. *Falsifier:* a third rate in S2
+that breaks the nesting.
+
+**AGA_027 -- the register gives the Aurora facts a source; `AGA_016` is
+not thereby closed. SUPPORTED.** `AGA_016` recorded that
+`FIELD_LAYER_SEED_ROADS` cites the observer / roadside-assist / weather
+facts to `DEMO_CORPUS_AUDIT`, which carries none of them. S9 cites the same
+material to *"Aurora Innovation releases + trade press (Feb-Mar 2026)"* --
+an origin rather than a sibling pointer -- and flags it `VENDOR`. Checked
+across the folder, **none of the four distinctive terms appears in
+`DEMO_CORPUS_AUDIT`**, so `AGA_016` stands as written and what has changed
+is that the facts now have a provenance, unread here. *Falsifier:* the
+cited sibling gaining the supporting text.
+
+**AGA_028 -- S9's headline cannot be sized from inside the corpus.
+SUPPORTED.** *"~1,000 mi Fort Worth-Phoenix in ~15 h, no HOS stop"* derives
+**66.7 mph sustained** from the register's own two numbers. The advantage
+the phrase names is the difference against a legal driving limit, and
+**no driving-hours limit is stated in the register or in any of the six
+delivered documents** -- the register states the off-duty figure (S4's
+*"< 10 h off"*) and names HOS three times and carries no driving-hours
+value. So QH is not merely unmeasured for want of terminal-dwell data: one
+of its two terms is absent from the corpus. The delivered corpus and this
+audit's own output are scanned apart and both columns print, for the reason
+`AGA_030` defect 4 records. *Falsifier:* any delivered document stating a
+driving-hours limit.
+
+**AGA_029 -- the register self-dates to the session, which bounds
+`AGA_008`. SUPPORTED.** `AGA_008` records all six delivered documents
+self-dating 2026-09-24, one day ahead of the session landing them. The
+register dates itself **2026-09-23**, the session date. `AGA_008` is
+therefore a property of the six and not of the drop family; the six still
+agree with each other (asserted). *Falsifier:* a seventh document dating
+2026-09-24.
+
+**AGA_030 -- four defects in this session's own checks, each found by
+checking or by running, none by reading. SUPPORTED.**
+(1) `frame_definition_fit` returned a bare boolean, so S7 -- whose `where`
+is `"?"` -- printed `fits definition: False` **identically to S5's measured
+mismatch**: the absent-vs-known-negative collapse this folder records
+repeatedly, committed inside the check, on the field that decides
+`AGA_024`. Repaired to three states, with `None` for unknown pinned in both
+directions. (2) A first hand-pass located the Aurora facts with a bare
+`40%` pattern, which matches the Komatsu ledger's `+40%` tire figure -- a
+different quantity -- and would have returned a duplication count that is
+not one; the shipped check uses distinctive terms only and says so. (3) `AGA_031` was first
+written as *"two of the eight questions rest on it and both are
+UNMEASURED"*; three name S10, one of those three is SUPPORTED, and exactly
+one rests on it alone -- a claim written from a plausible reading of the
+data rather than from the data, in a table about restated figures. Caught
+before commit by computing it, and now computed by a check rather than
+asserted. (4) Writing `AGA_028` down put
+the phrase *driving-hours limit* into `CLAIM_TABLE.md`, a `.md` file in the
+folder `hos_sizing` scans -- so the next run read **the audit's own record
+of an absence as evidence of a presence** and the suite went red. Repaired
+by scanning the delivered corpus and the audit's own output **apart**, with
+the delivered list imported from `audit.DOC` rather than retyped and the
+audit-side count printed rather than excluded: an exclude list would close
+the loop by hiding it, and anyone grepping the folder still finds the
+phrase. Defect 2 is the same class as `AGA_019`'s falsifier-id over-count,
+a pattern matching a second referent; defect 3 is `AGA_019`'s third, a
+sentence standing in for a count; defect 4 is `UNI_010`'s self-reference
+loop, arriving here through the claim table rather than through a samples
+directory. *Falsifier:* any of the four failing to reproduce on the
+recorded revision.
+
+**AGA_031 -- the register places the operator's own record inside its own
+sample and takes no exemption. SUPPORTED.** S10 is the requester's
+first-hand record and is scored on the same six-rung scale as every
+published source, carries a sampling-frame flag like every other source
+(`N_OF_1`), and is governed by a stated non-inference: *"N_OF_1 is
+OBSERVED, not anecdote: it bounds what is possible, it does not estimate a
+rate."* **Three** of the eight questions name S10, and the one that rests
+on it ALONE -- QF -- is UNMEASURED with the reason in its own status field
+(*"N=1 only"*); QA is SUPPORTED and names three other sources beside it. So
+the non-inference rule is followed rather than declared. This is the discipline the
+sibling register records at `UNI_071` -- noticing does not place a source
+outside its own population -- arrived at independently and, unlike there,
+built into the scale before any entry. *Falsifier:* a question scoring
+SUPPORTED on S10 alone.
+
+**AGA_032 -- UNVERIFIED, and it covers the register.** No source in it was
+read. The register says so itself for five of the eleven (`UNREAD`), and
+the egress gate refuses every publisher host, so the other six are carried
+on the strength of a search pass nobody here can repeat. Nothing in
+`AGA_020..031` is evidence about driving hours, fatigue, tenure, any
+carrier or any vendor; every one is a property of the register's own
+declarations. Whether the eight questions have the status the register
+assigns them is untouched in both directions.

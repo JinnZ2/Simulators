@@ -1,0 +1,64 @@
+REGISTER AUDIT -- driver_hours_evidence_register.py
+Imported, not parsed. Nothing below reads a primary source.
+
+AGA_020  status scale: 6 declared, 3 in SOURCES, 2 in QUESTIONS
+    declared        : OBSERVED, SECONDARY, DERIVED, PROPOSED, UNMEASURED, UNREAD
+    used in sources : OBSERVED, SECONDARY, UNREAD
+    used nowhere    : DERIVED, PROPOSED
+    undeclared      : SUPPORTED
+
+AGA_021  citation strings sharing name tokens
+    S1 & S3 share Braver, Preusser, Ulmer   subset: True   same frame: True
+    nominal sources vs n_eff, per question (n_eff imported):
+      QA  n_nominal 4 -> n_eff 3   collapsed: S1, S3
+      QB  n_nominal 2 -> n_eff 2   collapsed: none
+      QC  n_nominal 2 -> n_eff 2   collapsed: none
+      QF  n_nominal 1 -> n_eff 1   collapsed: none
+      QH  n_nominal 2 -> n_eff 2   collapsed: none
+
+AGA_022  frame flags: rule is 'every source carries one'
+    declared: ON_ROAD, ADMISSION, VENDOR, N_OF_1, ARCHIVE
+    sources carrying no flag: S6
+    an UNKNOWN member exists: False
+
+AGA_023  QE states: within-driver trajectories (same person over years); every source here is ON_ROAD cross-section
+    as written    : 7 of 11 sources carry ON_ROAD
+    not a sample  : S9, S10, Q1
+    over samples  : 7 of 8
+    what stops it being all of them: S6
+
+AGA_024  ON_ROAD is defined as: interviewed while working -> excludes drivers already out
+    S1  inspection stations, truck stops; CT FL OK OR; fits definition: yes
+    S2  rest areas + roadside inspections, random sele fits definition: yes
+    S3  drivers at weigh stations WY + TN; dispatchers fits definition: yes
+    S4  national survey, pre/post HOS rule change      fits definition: yes
+    S5  carrier records (crash, moving violation)      fits definition: NO
+    S7  ?                                              fits definition: where UNKNOWN
+    S8  truck stops                                    fits definition: yes
+    carries the flag, does not fit the definition: S5
+
+AGA_025  holds entries: 23 findings, 10 reading-state notes, 33 total
+    sources whose holds are ALL reading-state: S7, S8, Q1
+
+AGA_026  S2 rates: ever 47.1%, past-year 25.4%, nested True (ratio 0.539)
+
+AGA_027  S9 cite: Aurora Innovation releases + trade press (Feb-Mar 2026)  [VENDOR]
+    observer    in: AUTOMATION_GAP_AUDIT.md, CLAIM_TABLE.md, FIELD_LAYER_SEED_ROADS.md
+    roadside    in: AUTOMATION_GAP_AUDIT.md, CLAIM_TABLE.md, FIELD_LAYER_SEED_ROADS.md
+    Paccar      in: AUTOMATION_GAP_AUDIT.md
+    Fort Worth  in: AUTOMATION_GAP_AUDIT.md, CLAIM_TABLE.md
+    in DEMO_CORPUS_AUDIT: none of them
+
+AGA_028  S9 headline: 1000 mi in 15 h -> 66.7 mph sustained
+    'HOS' named 3 times; off-duty figure stated: True
+    a driving-hours limit in the register: False
+    a driving-hours limit in any of the 6 delivered documents: False
+    the phrase in this audit's own output: CLAIM_TABLE.md x1  (UNI_010, printed rather than excluded)
+
+AGA_029  register dates itself 2026-09-23; documents date 2026-09-24
+    register shares a date with the documents: False
+
+refs     11 sources, 8 questions; unresolvable ids: none
+    named by no question: Q1, S7, S8
+count    5 of 8 questions UNMEASURED (QD, QE, QF, QG, QH)
+    UNMEASURED and sourced at once: QF, QH

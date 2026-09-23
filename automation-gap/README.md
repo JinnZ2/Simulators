@@ -21,10 +21,37 @@ FIELD_LEDGER_001.md              seven entries, one discrepancy resolved by
                                  operator
 FIELD_LAYER_SEED_ROADS.md        WP1 unpaved-vs-paved wear + WP2 the
                                  infrastructure bill autonomy asks for
-audit.py                         recomputes what the documents state
+driver_hours_evidence_register.py
+                                 eleven sources, eight questions, on what
+                                 is known / self-reported / UNMEASURED
+                                 about long days, fatigue and tenure
+
+audit.py                         recomputes what the six documents state
+register_audit.py                imports the register, checks it against
+                                 its own declared rules
 test_audit.py                    checks on the audit; prints its count
-CLAIM_TABLE.md                   AGA_001..019 with falsifiers
+test_register.py                 checks on the register audit; prints its
+                                 count
+CLAIM_TABLE.md                   AGA_001..032 with falsifiers
 ```
+
+The register arrived a drop after the seed and is a different kind of
+object: the six documents are a self-contained drop whose figures can be
+checked against each other, and the register is a map of **external**
+evidence, eleven sources of which it marks five UNREAD itself. So
+`register_audit.py` checks it against its own declared rules rather than
+against its sources, and **imports** it -- the objects under test are the
+register's own -- rather than parsing it. Its `n_eff` comes from
+`effective-redundancy-audit`, imported and not reimplemented: two of the
+sources under one question turn out to share three authors.
+
+Five of the register's eight questions are UNMEASURED, which is the
+register's own headline and its own point: *an UNMEASURED cell is a
+result.* The audit adds that the fatigue-by-tenure question (QD) has no
+source at all, that the tenure curve cannot be read as learning rather
+than survivorship from any source in it (QE), and that one term of the
+driverless-versus-human comparison (QH) is absent from the corpus
+entirely -- no document here states a driving-hours limit.
 
 **Everything in the drop is CARRIED.** Every figure is sourced to reporting
 this environment cannot reach -- the egress gate refuses every publisher

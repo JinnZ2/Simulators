@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# audit.py -- recompute what the five delivered documents state.
+# audit.py -- recompute what the six delivered documents state.
 # CC0, stdlib only, no network. Parses the delivered files at call time;
 # no figure from them is retyped as a literal here (asserted by the suite).
 #
