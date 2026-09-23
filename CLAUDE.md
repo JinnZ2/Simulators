@@ -275,6 +275,7 @@ last three; read in order:
 - `assessor-coupling/` — WO-6 (the second document under that ordinal), assessor-assessed coupling as a recurrent failure mode; hop-1 kept structurally out of the independence vector, the record's summary sentence refuted by its own scope limit at a negative arm of zero, no organization named and no field for one
 - `unowned-join/` — WO-4, the shape with seven faces and a registered term gap; A1-A4 stated formally and made checkable, face 6 NOT_EVALUABLE on the order's own reason, the order's "no term means no code" refuted by the folder building it and no term coined
 - `instrument-index/` — a REBUILD from a lost original: 13 fields, two renderings from one pass, a 0.70 axis falsifier that cannot fire where nothing is rated
+- `cooperative-substrate-proof/` — P1-P5, each standalone; the cooperative substrate the competitive frame runs on, as a coverage argument; C1-C4 coded into the parts
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -13447,10 +13448,101 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   strings verbatim and screening them meaning rewording delivered text.
   **`II_012` UNVERIFIED and it covers the folder:** every `[RECOVERED]`
   label is a claim about fragments this session did not read; what is
-  established is that the build implements the text as delivered. Fourteen
+  established is that the build implements the text as delivered.
+  **`II_015`, a defect it surfaced elsewhere:** this is the first folder in
+  the tree to put its test file in a subdirectory, and
+  `tools/run_manifest.py` captured only the basename out of a redirect
+  message and resolved it beside the module, so a live target read as
+  missing and the folder landed red on two tree-level checks -- a flat
+  layout hides it because the basename happens to resolve; repaired in the
+  extractor with both cases pinned in that module's selftest. Fifteen
   `II_*` claims; check count printed by
   `python3 instrument-index/tests/test_build_index.py`. Stdlib only, parses
   under 3.9, phone-buildable, CC0.
+- `cooperative-substrate-proof/` — A work order delivered verbatim and
+  built to: a four-part self-verifiable artifact (P1-P5), each part
+  standalone, showing **the cooperative substrate the competitive frame
+  requires in order to be possible at all** — a **coverage** argument,
+  not a values argument, with the order's instruction *do not strip the
+  competition frame, add the layer underneath it* carried in
+  `FRAMING.md`. Landed here rather than at the repo the order names:
+  `add_repo` answered *not found* and a create call answered *403
+  Resource not accessible by integration*, the `substrate-alternative/`
+  `SA_018` precedent exactly, so it is a self-contained folder with its
+  own LICENSE and suite importing nothing across its boundary
+  (`PRF_001`). **`PRF_002`, the framing made structural:** `scope.py` has
+  no return member meaning *the competitive frame is wrong* and none
+  meaning another frame is preferable — the three are
+  `WITHIN_COMPETITIVE_FRAME`, `OUTSIDE_FRAME_SCOPE` naming the condition
+  that failed, and `UNDECLARED` naming the one not coded — and an AST
+  scan over every module refuses a declared ranking-and-values
+  vocabulary, null-tested with a plant. **`PRF_004`: that scan fired on
+  this folder's own code and the repair was a better reading of the
+  order** — P3's corpus verdict was a majority rule over pair readings
+  carrying a local `best`, which is a vote among pairs; replaced by
+  `weakest_link`, the order's own first sentence for P3 (*every link must
+  transmit faithfully*), since a majority rule reports SHARED_TERMS on a
+  corpus holding one pair that shares no terms at all. **`PRF_005`, the
+  null that had to be rebuilt:** P3 measures `gain = 1 - C(A+B)/(C(A) +
+  C(B))` and gain alone is evidence of shared FORM, so every pair is
+  re-measured against a control — first a token rename, which is **not**
+  a null, since renaming tokens to fresh strings destroys B's own
+  compressibility, moves the denominator, and returned a near-constant
+  `-0.025` offset that read the ciphered fixture as SHARED_TERMS; a
+  **monoalphabetic substitution cipher** is the control, leaving every
+  repeat inside B at the same length and distance while removing every
+  substring shared with A, and the shipped fixtures separate 0.2350
+  against -0.0052, forty times the threshold on either side of it.
+  **`PRF_006`:** the corpus carries its own null (`c_ciphered.txt` IS
+  `b_protocol.txt` under the permutation), and the b-c pair — identical
+  structure, no shared terms — reads `SHARED_FORM_ONLY`, which is the
+  reading. **`PRF_007`/`PRF_008`, P4:** the first settler had `accepts`
+  and `contests` and nothing else, and with every contest unbounded the
+  *corrective* chain ran to the budget exactly as the mutual-sabotage
+  pair did, both returning `NO_ANSWER budget_exhausted` — the two
+  outcomes the order asks to be separated coming back identical; the
+  `contest_limit` field (integer = bounded refusal, null = unbounded) is
+  the cut and is DECLARED, never inferred from a step's content, and the
+  turf-war chain now returns `NO_ANSWER` for a **structural** reason (a
+  cycle in the re-settle graph, both steps named) rather than by running
+  out of budget, with `SETTLES_WITH_REWORK` the load-bearing middle
+  member — without it every contest reads as failure and *no answer, not
+  a worse answer* has nothing to be distinguished from. **`PRF_009`:**
+  P2's `unverified_fraction` is a **ceiling on verification, not a
+  measurement of trust** — `LOCALLY_CHECKED` bounds one clause of a
+  contract with at least three, so 0.9900 on its own source understates
+  the unverified surface; `None` on a file with no call sites, never 0.0.
+  **`PRF_010`:** the existence proof is the narrow checkable one — this
+  output exists, producing it required every contract listed, the sha256
+  of the analysed file is printed beside the reading, scope stated as
+  this run, this machine, this digest, with no claim that any layer is
+  trustworthy. **`PRF_011`/`PRF_012`:** P1's source rule is a REFUSAL
+  (`Requirement` raises `SourceMissing` at construction, since an
+  admitted-but-flagged entry can be cited with the flag dropped) with its
+  limit stated — nothing checks whether the source says what the entry
+  says — and the PIPELINE is **ABSENT**, egress being an allowlist that
+  refuses every publisher and preprint host, with no methods section
+  paraphrased from memory and the shipped record declaring CONSTRUCTED in
+  its own provenance field. **`PRF_013`:** an undeclared `t_visible`
+  gives an UNDEFINED ratio and never a small one, which is the whole of
+  the antibiotic anchor — correct per patient for fifty years not because
+  the resistance signal was measured absent but because the interval it
+  becomes visible on was not a variable anyone was scored against — with
+  all four verdicts occurring on the shipped anchors. **`PRF_003`:**
+  C1-C4 are conjunctive and `UNDECLARED` outranks `OUTSIDE_FRAME_SCOPE`,
+  so a silence is never read as a failure; both WITHIN and OUTSIDE occur
+  across the parts, and the one chain coded WITHIN is the one with no
+  answer. **`PRF_014`:** one operation is a declared COPY of
+  `tools/authority_scan.py` with the drift cost stated, forced by the
+  folder having to be able to leave whole. **`PRF_016` UNVERIFIED and it
+  covers the folder:** every record, chain, action and document is
+  CONSTRUCTED, no methods section was read, no model was run, and nothing
+  is a statement about any published result, organisation or person.
+  `gain_from_sizes` and `lag_ratio` are registered in
+  `tools/known_answer.py` with the `None`-vs-`0.0` cases as the pin;
+  every module refuses `--selftest`; check count printed by `python3
+  cooperative-substrate-proof/test_proof.py`. Stdlib only, parses under
+  3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

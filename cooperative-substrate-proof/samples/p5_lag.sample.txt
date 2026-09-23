@@ -1,0 +1,21 @@
+P5 LAG DECLARATION CHECK
+
+  [CHOICE 1] gate: t_visible / t_scored >= 10
+
+  action                                          t_visible   t_scored      ratio  verdict
+  ----------------------------------------------------------------------------------------
+  antibiotic course scored per patient                50 yr       10 d       1825  DECLARED_UNKNOWN
+  trial endpoint scored at months, outcome at de      30 yr      180 d      60.83  DECLARED_UNKNOWN
+  compiler regression caught by the test suite         60 s      600 s        0.1  TRACKED
+  deployment scored weekly, failure interval nev         --        7 d         --  UNDECLARED
+  action with no scoring interval                      1 yr         --         --  NOT_EVALUABLE
+
+  DECLARED_UNKNOWN 2  NOT_EVALUABLE 1  TRACKED 1  UNDECLARED 1
+
+  DECLARED_UNKNOWN does not block. It moves a blind spot
+  from UNDECLARED, where a clean score reads as success,
+  to the record, where it reads as a score taken over an
+  interval that could not have carried the failure.
+
+  scope coding of the scoring arrangement (C1-C4): WITHIN_COMPETITIVE_FRAME
+  inside the competitive frame's coverage: C1-C4 all hold.

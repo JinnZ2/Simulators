@@ -1,0 +1,20 @@
+COOPERATIVE SUBSTRATE PROOF -- P1-P5
+
+  LOAD-BEARING FRAMING: OK -- present, un-stripped
+
+  part  name                                     status   detail
+  --------------------------------------------------------------
+  P1    dependency records                       PASS     the move runs on a CONSTRUCTED record; unstated_fraction 0.8333
+  P1*   dependency records -- PIPELINE           ABSENT   open-access methods sections: no publisher or preprint host answers in this environment, and none is paraphrased from me
+  P2    substrate check                          PASS     100 call sites, unverified share 0.9900, 6 layer contracts
+  P3    comprehension check                      PASS     3 documents, 3 pairs, corpus verdict SHARED_FORM_ONLY
+  P4    goal-coherence check                     PASS     cooperative=SETTLES, corrective=SETTLES_WITH_REWORK, turf_war=NO_ANSWER
+  P5    lag declaration check                    PASS     DECLARED_UNKNOWN 2, NOT_EVALUABLE 1, TRACKED 1, UNDECLARED 1
+
+  Each part also runs standalone:
+    python3 p1_records.py
+    python3 p2_substrate.py
+    python3 p3_comprehension.py
+    python3 p4_coherence.py
+    python3 p5_lag.py
+    python3 scope.py

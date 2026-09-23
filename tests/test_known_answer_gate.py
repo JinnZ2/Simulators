@@ -61,6 +61,8 @@ MANIFEST = (
     "unowned-join/invariant.py::join_coverage",
     "assessor-coupling/conditions.py::pool_fraction",
     "instrument-index/build_index.py::claim_only_fraction",
+    "cooperative-substrate-proof/p3_comprehension.py::gain_from_sizes",
+    "cooperative-substrate-proof/p5_lag.py::lag_ratio",
     "failure-mode-register/register.py::fraction_cap",
     "failure-mode-register/register_v2.py::joint_survival",
     "internal-reference-boundary/radials.py::effective_origins",

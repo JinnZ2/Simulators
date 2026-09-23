@@ -63,7 +63,13 @@ CLASSES = (
 # a redirect path is the redirect wearing another state's exit code.
 REDIRECT_EXIT = 2
 
-_PY_NAME = re.compile(r"\b([A-Za-z0-9_.-]+\.py)\b")
+# Captures an optional directory prefix. A message naming
+# `folder/tests/test_x.py` used to yield `test_x.py`, which then resolved
+# beside the module and reported a live target as missing -- the first
+# folder in the tree to put its test file in a subdirectory is what
+# surfaced it. A flat layout hides the bug because the basename happens
+# to resolve.
+_PY_NAME = re.compile(r"\b((?:[A-Za-z0-9_.-]+/)*[A-Za-z0-9_.-]+\.py)\b")
 
 
 def _literal_strings(node):
@@ -208,7 +214,7 @@ def _first_py_name(strings, relpath):
     own = os.path.basename(relpath)
     for s in strings:
         for m in _PY_NAME.findall(s):
-            if m != own:
+            if os.path.basename(m) != own:
                 return m
     return None
 
@@ -222,7 +228,13 @@ def resolve_targets(records):
     for r in records:
         if r["class"] != "REDIRECT" or not r["redirect_target"]:
             continue
-        cand = os.path.join(ROOT, os.path.dirname(r["path"]), r["redirect_target"])
+        target = r["redirect_target"]
+        if "/" in target:
+            # A message naming a path names it from the repo root, which is
+            # how every redirect message in the tree is written.
+            cand = os.path.join(ROOT, target)
+        else:
+            cand = os.path.join(ROOT, os.path.dirname(r["path"]), target)
         r["target_resolves"] = os.path.isfile(cand)
 
 
@@ -426,6 +438,21 @@ def selftest():
                   '        return 2\n    return 0\n', "solo.py")
     ck(r3["redirect_target"] is None,
        "a message naming only the file's own basename yields target None")
+
+    r4 = classify('def main(argv):\n'
+                  '    if "--selftest" in argv:\n'
+                  '        print("run: python3 folder/tests/test_x.py")\n'
+                  '        return 2\n    return 0\n', "folder/x.py")
+    ck(r4["redirect_target"] == "folder/tests/test_x.py",
+       "a target in a subdirectory keeps its path; taking the basename "
+       "resolved it beside the module and reported a live file as missing")
+    r5 = classify('def main(argv):\n'
+                  '    if "--selftest" in argv:\n'
+                  '        print("folder/solo.py carries no checks")\n'
+                  '        return 2\n    return 0\n', "folder/solo.py")
+    ck(r5["redirect_target"] is None,
+       "the own-name skip compares basenames, so a path form of the file's "
+       "own name is still skipped")
 
     print("\n-- absent is not a bucket")
     ck(classify('x = 1\n', "z.py")["contract_ok"] is None,

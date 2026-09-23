@@ -1,0 +1,20 @@
+CONSTRUCTED. Not a measurement of any real corpus.
+
+A protocol is an agreement about what the fields of a message mean. Two
+parties exchange a message only when both parties already share that
+agreement, and neither party owns it. A party that defects from the
+protocol can still emit messages; the messages are not read, because
+reading requires a convergence the defecting party has left.
+
+A unit behaves the same way. A laboratory that reports a length in
+metres is not the owner of the metre, and a laboratory that reports a
+duration in seconds is not the owner of the second. Both trace to a
+standard that neither laboratory owns, and a private redefinition of the
+unit does not stop the laboratory emitting numbers. It stops every other
+laboratory from reading them.
+
+The script the message is written in is a standard of the same kind. A
+private script transmits nothing. The convergence is the substrate, and
+the message rides on it. Transmission requires that the parts of the
+corpus do not contest each other's terms, and that requirement holds
+whether or not the parties intend anything at all.
