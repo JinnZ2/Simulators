@@ -550,6 +550,118 @@ class DerivedEntry(unittest.TestCase):
         self.assertTrue(v["s5_states_the_recommendation"])
 
 
+# -------------------------------------------------- AGA_044..050 note 3
+
+class Note3StatusRung(unittest.TestCase):
+
+    def test_the_note_declares_a_rung_the_register_scale_lacks(self):
+        v = RA.note3_status_rung()
+        self.assertEqual(v["note_declares"], ["EXPLORATION"])
+        self.assertFalse(v["in_register_scale"])
+        self.assertEqual(len(v["register_scale"]), 6)
+
+    def test_x1_carries_nine_fields(self):
+        self.assertEqual(len(RA.note3_status_rung()["x1_fields"]), 9)
+
+
+class Note3GateAxis(unittest.TestCase):
+
+    def test_the_note_makes_g0_per_operator(self):
+        self.assertTrue(RA.note3_gate_axis()["note_claims_per_operator"])
+
+    def test_the_register_names_route_and_season_and_not_operator(self):
+        v = RA.note3_gate_axis()
+        self.assertTrue(v["register_names_route"])
+        self.assertTrue(v["register_names_season"])
+        self.assertFalse(v["register_names_operator"])
+
+    def test_the_window_block_holds_constants(self):
+        self.assertTrue(RA.note3_gate_axis()["rest_block_is_a_constant"])
+
+
+class LcdForfeit(unittest.TestCase):
+
+    def test_the_longest_window_is_the_fleet_rule(self):
+        v = RA.lcd_forfeit()
+        self.assertEqual(v["lcd_minutes"], 125)
+        self.assertEqual(v["rows"][-1]["forfeit"], 0.0)
+
+    def test_the_best_sleeper_gives_up_about_a_third_of_their_own(self):
+        v = RA.lcd_forfeit()
+        self.assertGreater(v["worst_share"], 0.29)
+        self.assertLess(v["worst_share"], 0.31)
+
+    def test_it_peaks_where_the_gate_is_deciding(self):
+        """Zero when everyone clears and zero when nobody does."""
+        v = RA.lcd_forfeit()
+        self.assertTrue(v["vanishes_at_both_ends"])
+        self.assertGreater(v["peak_forfeit"], v["worst_forfeit"])
+        self.assertGreater(v["share_of_peak"], 0.8)
+
+    def test_no_fleet_aggregate_is_emitted(self):
+        """The mix of operators is unmeasured, so a fleet number would be
+        a figure with no denominator."""
+        self.assertFalse(RA.lcd_forfeit()["aggregate_emitted"])
+
+
+class Note3Confound(unittest.TestCase):
+
+    def test_the_scope_section_names_two_limits(self):
+        v = RA.note3_confound()
+        self.assertTrue(v["scope_section_names_stimulus"])
+        self.assertTrue(v["scope_section_names_ceiling"])
+
+    def test_the_compressed_record_drops_the_one_that_confounds_it(self):
+        """X1's scope field carries the stimulus limit and not the
+        ceiling -- and the ceiling predicts the same direction as X1's
+        own prediction."""
+        v = RA.note3_confound()
+        self.assertTrue(v["x1_scope_carries_stimulus"])
+        self.assertFalse(v["x1_scope_carries_ceiling"])
+        self.assertIn("smaller motion effect", v["x1_prediction"])
+
+    def test_the_probe_names_one_covariate_and_the_second_is_above_it(self):
+        v = RA.note3_confound()
+        self.assertFalse(v["probe_names_baseline"])
+        self.assertFalse(v["instrument_section_names_baseline"])
+        self.assertTrue(v["scope_section_names_the_repair"])
+        self.assertTrue(v["repair_is_one_section_above"])
+
+
+class Note3Halves(unittest.TestCase):
+
+    def test_both_halves_are_outside_the_register(self):
+        """Unlike QJ, which held a contradiction between two sources the
+        register already carried."""
+        v = RA.note3_halves()
+        self.assertTrue(v["both_halves_external"])
+        self.assertEqual(v["n_sources"], 12)
+        self.assertEqual(v["contrast_qj"], ["QJ"])
+
+    def test_no_frame_flag_covers_the_sampling_limit_it_states(self):
+        v = RA.note3_halves()
+        self.assertTrue(v["sampling_limit_stated"])
+        self.assertFalse(v["a_flag_for_a_narrow_lab_sample"])
+        self.assertEqual(len(v["declared_frames"]), 6)
+
+
+class Note3CrossRefs(unittest.TestCase):
+
+    def test_the_one_pointer_resolves_nowhere(self):
+        v = RA.note3_crossrefs()
+        self.assertEqual(v["links"], ["per-operator-fitness-vs-lcd-regulation"])
+        self.assertEqual(v["unresolved"], v["links"])
+
+
+class Note3Fencing(unittest.TestCase):
+
+    def test_the_flip_rests_on_n_of_1_and_is_fenced_four_ways(self):
+        v = RA.note3_fencing()
+        self.assertTrue(v["flip_rests_on_n_of_1"])
+        self.assertEqual(v["fences"], 4)
+        self.assertTrue(v["anchor_declares_n"])
+
+
 # ------------------------------------------------------- structure
 
 class Structure(unittest.TestCase):

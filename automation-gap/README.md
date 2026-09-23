@@ -21,6 +21,11 @@ FIELD_LEDGER_001.md              seven entries, one discrepancy resolved by
                                  operator
 FIELD_LAYER_SEED_ROADS.md        WP1 unpaved-vs-paved wear + WP2 the
                                  infrastructure bill autonomy asks for
+ADDENDUM_3.md                    a second delivered document, in notes:
+                                 a per-operator G0 factor, a two-
+                                 literature gap (X1), a probe, scope
+                                 limits, a flip, a new status rung
+
 driver_hours_evidence_register.py
                                  twelve sources, ten questions, a term
                                  note, on what is known / self-reported /
@@ -40,7 +45,7 @@ register_audit.py                imports the register, checks it against
 test_audit.py                    checks on the audit; prints its count
 test_register.py                 checks on the register audit; prints its
                                  count
-CLAIM_TABLE.md                   AGA_001..043 with falsifiers
+CLAIM_TABLE.md                   AGA_001..050 with falsifiers
 ```
 
 The register arrived a drop after the seed and is a different kind of
@@ -148,3 +153,28 @@ the second's conclusion. A qualifier lost between two occurrences of one
 phrase with the reading inverting -- which is the register's own subject,
 in its own text. Correcting it makes the register's case stronger, and
 strongest exactly where it binds.
+
+`ADDENDUM_3.md` is delivered in notes rather than Python, so the two
+documents are read **as delivered** and where they disagree that is
+reported rather than resolved: the note declares a status rung
+(`EXPLORATION`) the register's scale does not carry, and it makes G0 a
+**per-operator** gate where the register's G0 is indexed on route and
+season and holds its window as four constants.
+
+Its consequence -- *a blanket rule written to the lowest sleeper forfeits
+the capacity of everyone above it* -- computes on the register's own
+placeholder rate: the best motion-sleeper gives up **30.1% of their own
+capacity** under a fleet rule set to the longest window. The structural
+half is sharper. The gap vanishes at both ends -- at a low interrupt rate
+everyone clears, at a high one nobody does -- and peaks at 0.678/h, so
+**the cost of a blanket rule is largest exactly where the rule is deciding
+anything**, and the placeholder regime sits at 82% of that peak. No fleet
+aggregate is emitted, because the mix of operators is unmeasured.
+
+And `AGA_047`: X1 predicts *early habituation -> smaller motion effect*,
+while the note's own `SCOPE LIMITS` names a good-sleeper ceiling that
+predicts the same direction. The probe names one covariate; the second one
+-- record baseline -- sits one section above it and is in neither the
+probe nor X1's compressed `scope` field. The note contains its own
+confound and its own repair, and the compressed record drops the half that
+confounds it. Third instance here of a qualifier lost in compression.

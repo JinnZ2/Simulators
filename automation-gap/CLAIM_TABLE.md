@@ -4,7 +4,7 @@ Ids are permanent. `AGA_` = automation-gap. Status is SUPPORTED / REFUTED /
 UNVERIFIED. Every SUPPORTED claim is a property of the delivered material
 and is recomputable by anyone with the folder: `python3 audit.py` for the
 six documents (`AGA_001..019`), `python3 register_audit.py` for the
-evidence register (`AGA_020..043`). The delivered falsifiers are the
+evidence register (`AGA_020..050`). The delivered falsifiers are the
 documents' own (`AUT-F1..F8`, `RD-F1..F3`) and carry their own prefixes;
 nothing here renumbers them.
 
@@ -402,7 +402,7 @@ SUPPORTED on S10 alone.
 read. The register says so itself for five of the eleven (`UNREAD`), and
 the egress gate refuses every publisher host, so the other six are carried
 on the strength of a search pass nobody here can repeat. Nothing in
-`AGA_020..043` is evidence about driving hours, fatigue, tenure, any
+`AGA_020..050` is evidence about driving hours, fatigue, tenure, any
 carrier or any vendor; every one is a property of the register's own
 declarations. Whether the eight questions have the status the register
 assigns them is untouched in both directions.
@@ -597,5 +597,113 @@ source.
 **The UNVERIFIED claim covers the addenda too** (`AGA_032`): the aviation
 planned-nap lead, the FMCSA split-sleeper rule, the team-driver sleep-
 quality lead and every event rate are carried or declared placeholder, and
+nothing here was read.
+
+---
+
+## ADDENDUM_3.md
+
+A second DELIVERED document, in notes rather than Python: a G0 sleep-quality
+factor, a consequence, a two-literature gap, a probe, scope limits, a flip,
+a new status rung, and the X1 record. It is landed verbatim and read as
+delivered; the register is read as delivered; where the two disagree that is
+reported and **not resolved**, and nothing is transcribed from one into the
+other. Every source it names is carried or absent, and nothing below is a
+statement about sleep, infancy, any population or any operator.
+
+**AGA_044 -- the note declares a status rung the register's scale does not
+carry. SUPPORTED.** `STATUS ADDED / EXPLORATION -- real gap, relevance
+UNKNOWN; kept, not load-bearing.` The register's docstring declares six
+rungs and `EXPLORATION` is not among them. This is the **sixth site** for
+one scale and the first in a different file: two delivered documents share
+a vocabulary and only one of them declares it. Consistent with `AGA_020`,
+and worse in one respect -- a reader of the register alone cannot discover
+the rung exists. *Falsifier:* the register's docstring gaining it.
+
+**AGA_045 -- the note makes G0 a per-OPERATOR gate and the register's G0
+is per-route. SUPPORTED.** `motion_sleep_history` is entered `OBSERVED,
+N=1` with the consequence stated in one line: *"G0 can PASS for one
+operator and FAIL for another on the same route."* The register's G0 entry
+and its four notes name **route** and **season** and never **operator**
+(checked), and `REST_BLOCK` holds four constants where the note treats one
+as a variable. So the gate as built cannot express the note's own result:
+G0 is indexed on (route, season) and the note adds a third axis.
+*Falsifier:* an operator term in `REST_BLOCK` or in the G0 entry.
+
+**AGA_046 -- 'a blanket rule written to the lowest sleeper forfeits the
+capacity of everyone above it', made a number. SUPPORTED.** On the
+register's own placeholder rate (0.330/h) and its own four windows, a fleet
+rule set to the longest (125 min) leaves:
+
+    nap_min/low      60 min   own 0.7189   under the rule 0.5028   -30.1%
+    nap_min/high     75 min   own 0.6620                           -24.0%
+    cycle_min/low   110 min   own 0.5461                            -7.9%
+    cycle_min/high  125 min   own 0.5028                             0.0%
+
+so the best motion-sleeper gives up **30.1% of their own capacity**. The
+structural half is sharper than the arithmetic: the gap
+`exp(-lam*w1/60) - exp(-lam*w2/60)` **vanishes at both ends** -- at a low
+rate everyone clears, at a high rate nobody does -- and peaks at
+`lam = 60*ln(w2/w1)/(w2-w1) = 0.678/h`, so **the cost of a blanket rule is
+largest exactly where the rule is deciding anything**, and the register's
+placeholder regime sits at **82% of that peak**. No fleet aggregate is
+emitted: the mix of operators is unmeasured, and a fleet number would be a
+figure with no denominator. *Falsifier:* a window set where the longest is
+also the most common.
+
+**AGA_047 -- the note carries its own confound and the covariate that
+separates it, in adjacent sections, and the compressed record drops the
+one that confounds its own prediction. SUPPORTED.** X1 predicts *early
+habituation -> smaller motion effect*. `SCOPE LIMITS` names two limits: the
+stimulus differs (lab rocking is not cab vibration) and the **good-sleeper
+ceiling** -- *"effects may only show in people with room to improve ->
+baseline must be recorded"*. A habituated sleeper is a good motion sleeper,
+has less room, and shows a smaller effect: **the ceiling predicts the same
+direction as the prediction**, so the probe as written -- *one covariate*,
+`early_motion_exposure` -- cannot separate them. The second covariate is
+named one section above the probe and is in neither `CHEAPEST INSTRUMENT`
+nor X1's `probe` field, and X1's `scope` field carries the stimulus limit
+and **not** the ceiling (checked). Third instance in this family of a
+qualifier lost in compression, after `AGA_041` and the register's own
+`TERM_NOTES` subject. The repair is already written: record baseline.
+*Falsifier:* `baseline` appearing in the probe.
+
+**AGA_048 -- X1's two halves are both outside the register, and no frame
+flag covers the sampling limit it names. SUPPORTED.** Neither adult rocking
+labs nor infant carrying studies is among the register's twelve sources
+(checked), so unlike **QJ** -- which held a contradiction between two
+sources the register already carried -- X1 is a gap between two literatures
+it does not hold. That is honest and is what `EXPLORATION` is for. Beside
+it: the note states a sampling limit on half 1 (*"young males, lab,
+Swiss"*) and the six declared frame flags have **no member for a narrow
+laboratory sample**; `ON_ROAD` is the nearest and describes the opposite
+kind of draw. The same shape as `AGA_022`'s missing `UNKNOWN`, one axis
+over. *Falsifier:* a seventh flag, or either literature entering as a
+source.
+
+**AGA_049 -- the note's one pointer resolves nowhere. SUPPORTED.**
+`[[per-operator-fitness-vs-lcd-regulation]]` matches no file anywhere in
+the tree. Cited as the shape the consequence shares, so it is load-bearing
+for the analogy and not for the arithmetic, which `AGA_046` computes
+without it. *Falsifier:* the note arriving.
+
+**AGA_050 -- the flip rests on the operator's own record and is fenced four
+ways rather than promoted. SUPPORTED.** The `PROPOSED flip` argues that
+carried infancy was the ordinary human pattern and that *"the population a
+fleet rule is written for may be the unusual one, and your history closer
+to the species baseline"* -- a generalization from the register's `N_OF_1`
+source, and the one place in the whole register where the operator's own
+record could buy an exemption. It does not: the passage is labelled
+**PROPOSED**, given the status **EXPLORATION**, marked **relevance
+UNKNOWN**, and declared **not load-bearing**, with X1's `anchor` field
+stating its own n. `AGA_031` recorded that the operator's record takes no
+exemption; this is the harder case, because here the exemption would be
+favourable and is declined in the same breath it is proposed. *Falsifier:*
+a later entry resting a question on the flip.
+
+**The UNVERIFIED claim covers this note too** (`AGA_032`): Omlin, the
+whole-body vibration field (ISO 2631, unsearched by the note's own
+statement), the adult rocking literature, the infant carrying literature
+and the cross-cultural claim are all carried or declared unsearched, and
 nothing here was read.
 

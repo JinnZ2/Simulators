@@ -64,6 +64,49 @@ AGA_036  revision against 2a6e2f3: OK
     changed       : none
     added         : ADDENDUM_QUESTIONS, BEHAVIOUR_RECORD_SCHEMA, CONTINUED_WORK, CONTROL_LOOPS, EVENT_CLASSES, G0_NOTES, GATE_MAP, REST_BLOCK, TRANSFER_NOTE
 
+AGA_044  ADDENDUM_3.md declares a rung the register's scale lacks
+    note declares : EXPLORATION -- real gap, relevance UNKNOWN; kept, not load-bearing
+    in the register's six-rung scale: False
+    X1 carries 9 fields; relevance: UNKNOWN — may touch G0's motion_sleep_history, may not
+
+AGA_045  the note makes G0 a per-OPERATOR gate
+    note states one route, two operators, two outcomes: True
+    the register's G0 entry and notes name route True, season True, operator False
+    REST_BLOCK holds a constant where the note treats it as a variable: True
+
+AGA_046  'a blanket rule ... forfeits the capacity of everyone above it', as a number
+    fleet rule = the longest window = 125 min, at rate 0.330/h
+      nap_min/low       60 min  own 0.7189  under the rule 0.5028  gives up 0.2161 (30.1% of own)
+      nap_min/high      75 min  own 0.6620  under the rule 0.5028  gives up 0.1592 (24.0% of own)
+      cycle_min/low    110 min  own 0.5461  under the rule 0.5028  gives up 0.0432 (7.9% of own)
+      cycle_min/high   125 min  own 0.5028  under the rule 0.5028  gives up 0.0000 (0.0% of own)
+    largest: 30.1% of that operator's own capacity
+    the gap peaks at rate 0.6775/h (0.2641) and the placeholder rate sits at 82% of it
+    sweep: 0.05->0.050  0.20->0.159  0.33->0.216  0.68->0.264  1.50->0.179  4.00->0.018
+    it vanishes at both ends -- everyone clears, nobody clears -- so it
+    is largest where the gate is deciding: True
+    no fleet aggregate emitted (the mix of operators is unmeasured): True
+
+AGA_047  the note carries its own confound and the covariate that separates it
+    SCOPE LIMITS names   stimulus True   good-sleeper ceiling True
+    X1 'scope' carries   stimulus True   ceiling False
+    prediction: PROPOSED: early habituation → smaller motion effect
+    the ceiling predicts the same direction, so the probe as written
+    cannot separate them: probe names baseline False, CHEAPEST INSTRUMENT False,
+    SCOPE LIMITS True -- the second covariate is one section above the probe
+
+AGA_048  X1's two halves are both outside the register
+    12 sources; a rocking lab False, an infant-carrying study False
+    the note states a sampling limit (True) and the frame vocabulary
+    has a member for it: False   [ON_ROAD, ADMISSION, VENDOR, N_OF_1, ARCHIVE, TERM_DRIFT]
+
+AGA_049  pointers in the note: 1, resolving to a file: 0
+    [[per-operator-fitness-vs-lcd-regulation]] -- nothing in the tree
+
+AGA_050  the flip rests on the operator's own record and is fenced 4 ways
+    labelled PROPOSED True | status EXPLORATION True | relevance UNKNOWN True
+    declared not load-bearing True | anchor states its own n True
+
 AGA_039  the two G0 parameter blocks carry provenance differently
     REST_BLOCK (the window): comments only; in the object: False
       PLACEHOLDER           : handoff_lead_min

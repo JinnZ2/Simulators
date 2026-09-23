@@ -403,6 +403,176 @@ def headline_count():
                 unmeasured_and_sourced=[q for q in un if q in sourced])
 
 
+# --------------------------------------------------------- ADDENDUM_3.md
+# A second DELIVERED document, in notes rather than Python. It is read as
+# delivered and the register is read as delivered; where the two disagree
+# that is reported, not resolved. Nothing here transcribes one into the
+# other.
+
+NOTE3 = os.path.join(HERE, "ADDENDUM_3.md")
+
+
+def _note3():
+    with open(NOTE3, encoding="utf-8") as fh:
+        return fh.read()
+
+
+def _x1_fields():
+    body = _note3().split("ADDENDUM 3")[-1]
+    out = {}
+    for line in body.splitlines():
+        m = re.match(r"\s{2,}(\w+)\s{2,}(.+)", line)
+        if m:
+            out[m.group(1)] = m.group(2).strip()
+    return out
+
+
+def note3_status_rung():
+    """AGA_044 -- the note declares a status rung the register's scale
+    does not carry. Two delivered documents, one scale, and the scale
+    lives in only one of them."""
+    note = _note3()
+    declared_here = re.findall(r"^\s{2,}([A-Z_]{4,})\s{2,}", note, re.M)
+    scale = _declared("Status scale")
+    x1 = _x1_fields()
+    return dict(note_declares=sorted(set(declared_here) & {"EXPLORATION"}),
+                register_scale=scale,
+                in_register_scale="EXPLORATION" in scale,
+                note_says=re.search(r"EXPLORATION\s+(.+)", note).group(1).strip(),
+                x1_relevance=x1.get("relevance"),
+                x1_fields=sorted(x1))
+
+
+def note3_gate_axis():
+    """AGA_045 -- motion_sleep_history makes G0 a per-OPERATOR gate. The
+    register's G0 entry and its notes name route and season."""
+    note = _note3()
+    g0 = [t for t in REG.GATE_MAP if t[0] == "G0"][0]
+    blob = " ".join(g0) + " " + " ".join(REG.G0_NOTES)
+    return dict(
+        note_claims_per_operator=("PASS for one operator" in note
+                                  and "FAIL" in note),
+        factor="motion_sleep_history" in note,
+        register_names_route="route" in blob.lower(),
+        register_names_season="season" in blob.lower(),
+        register_names_operator=bool(re.search(r"\boperator\b", blob, re.I)),
+        rest_block_is_a_constant=isinstance(REG.REST_BLOCK["cycle_min"], int))
+
+
+def lcd_forfeit():
+    """AGA_046 -- 'a blanket rule written to the lowest sleeper forfeits
+    the capacity of everyone above it', made a number on the register's
+    own placeholder rate. Nothing here is a statement about any operator
+    or fleet; the window set is the register's four combinations and the
+    mix of operators is unmeasured, so no aggregate is emitted."""
+    lam = REG.interrupt_rate(REG.EVENT_CLASSES)
+    ws = [(b, i, REG.g0_window_needed(b, i))
+          for b in ("nap_min", "cycle_min") for i in ("low", "high")]
+    lcd = max(w for _, _, w in ws)
+    fleet = REG.p_uninterrupted(lam, lcd)
+    rows = []
+    for b, i, w in ws:
+        own = REG.p_uninterrupted(lam, w)
+        rows.append(dict(window="%s/%s" % (b, i), minutes=w, own=own,
+                         fleet=fleet, forfeit=own - fleet,
+                         share_of_own=(own - fleet) / own if own else None))
+    w1 = min(w for _, _, w in ws)
+    # d/dlam of exp(-lam*w1/60) - exp(-lam*w2/60) = 0
+    lam_star = 60.0 * math.log(lcd / w1) / (lcd - w1)
+    gap = lambda L: REG.p_uninterrupted(L, w1) - REG.p_uninterrupted(L, lcd)
+    return dict(lam_per_h=lam, lcd_minutes=lcd, rows=rows,
+                worst_forfeit=max(r["forfeit"] for r in rows),
+                worst_share=max(r["share_of_own"] for r in rows),
+                peak_lam=lam_star, peak_forfeit=gap(lam_star),
+                share_of_peak=gap(lam) / gap(lam_star),
+                sweep=[(L, gap(L)) for L in (0.05, 0.2, lam, lam_star, 1.5, 4.0)],
+                vanishes_at_both_ends=(gap(0.01) < gap(lam)
+                                       and gap(20.0) < gap(lam)),
+                aggregate_emitted=False)
+
+
+def note3_confound():
+    """AGA_047 -- the note carries its own confound and its own repair in
+    adjacent sections, and the compressed X1 record drops the one that
+    confounds its own prediction."""
+    note = _note3()
+    scope_sec = note.split("SCOPE LIMITS")[1].split('"not applicable')[0]
+    instrument = note.split("CHEAPEST INSTRUMENT")[1].split("SCOPE LIMITS")[0]
+    x1 = _x1_fields()
+    return dict(
+        scope_section_names_stimulus=("lab rocking" in scope_sec
+                                      and "truck cab" in scope_sec),
+        scope_section_names_ceiling="ceiling" in scope_sec,
+        scope_section_names_the_repair="baseline must be recorded" in scope_sec,
+        x1_scope=x1.get("scope"),
+        x1_scope_carries_stimulus="lab rocking" in (x1.get("scope") or ""),
+        x1_scope_carries_ceiling=any(t in (x1.get("scope") or "")
+                                     for t in ("ceiling", "baseline")),
+        x1_prediction=x1.get("prediction"),
+        x1_probe=x1.get("probe"),
+        probe_names_baseline="baseline" in (x1.get("probe") or ""),
+        instrument_section_names_baseline="baseline" in instrument,
+        both_predict_smaller_effect=True,
+        repair_is_one_section_above=("baseline must be recorded" in scope_sec
+                                     and "baseline" not in instrument))
+
+
+def note3_halves():
+    """AGA_048 -- X1's two halves are both OUTSIDE the register, and the
+    frame vocabulary has no flag for the sampling limit it names."""
+    note = _note3()
+    cites = " ".join(s["cite"].lower() for s in REG.SOURCES.values())
+    frames = _declared("Sampling-frame flags")
+    return dict(n_sources=len(REG.SOURCES),
+                rocking_lab_in_register=any(t in cites
+                                            for t in ("rocking", "rock ")),
+                infant_carrying_in_register="infant" in cites,
+                both_halves_external=not ("rocking" in cites
+                                          or "infant" in cites),
+                sampling_limit_stated=("young males, lab, Swiss" in note),
+                declared_frames=frames,
+                a_flag_for_a_narrow_lab_sample=any(
+                    t in " ".join(frames).upper()
+                    for t in ("LAB", "NARROW", "WEIRD", "DEMOGRAPH")),
+                contrast_qj=[q[0] for q in REG.QUESTIONS
+                             if q[0] == "QJ" and len(q[2]) > 1])
+
+
+def note3_crossrefs():
+    """AGA_049 -- the note's one wiki-style pointer."""
+    note = _note3()
+    links = re.findall(r"\[\[([^\]]+)\]\]", note)
+    out = {}
+    for link in links:
+        found = []
+        for root, dirs, files in os.walk(ROOT):
+            dirs[:] = [d for d in dirs if d not in (".git", "__pycache__")]
+            for f in files:
+                if link in f:
+                    found.append(os.path.relpath(os.path.join(root, f), ROOT))
+        out[link] = found
+    return dict(links=links, resolves=out,
+                unresolved=[k for k, v in out.items() if not v])
+
+
+def note3_fencing():
+    """AGA_050 -- the flip rests on the operator's own record and is
+    fenced four ways rather than promoted."""
+    note = _note3()
+    flip = note.split("PROPOSED flip")[1].split("STATUS ADDED")[0]
+    x1 = _x1_fields()
+    return dict(
+        flip_rests_on_n_of_1=("your history" in flip),
+        labelled_proposed="PROPOSED flip" in note,
+        status_is_exploration="EXPLORATION" in note,
+        relevance_unknown="UNKNOWN" in (x1.get("relevance") or ""),
+        declared_not_load_bearing="not load-bearing" in note,
+        anchor_declares_n=("N=1" in (x1.get("anchor") or "")),
+        fences=sum([("PROPOSED flip" in note), ("EXPLORATION" in note),
+                    "UNKNOWN" in (x1.get("relevance") or ""),
+                    "not load-bearing" in note]))
+
+
 def rest_block_provenance():
     """AGA_039 -- the two parameter blocks the G0 gate runs on carry
     provenance by different means, and only one survives import.
@@ -629,6 +799,13 @@ def findings():
         "AGA_035_open_but_uncounted": open_but_uncounted(),
         "AGA_036_revision": revision(),
         "AGA_039_rest_block_provenance": rest_block_provenance(),
+        "AGA_044_note3_status_rung": note3_status_rung(),
+        "AGA_045_note3_gate_axis": note3_gate_axis(),
+        "AGA_046_lcd_forfeit": lcd_forfeit(),
+        "AGA_047_note3_confound": note3_confound(),
+        "AGA_048_note3_halves": note3_halves(),
+        "AGA_049_note3_crossrefs": note3_crossrefs(),
+        "AGA_050_note3_fencing": note3_fencing(),
         "AGA_040_g0_arithmetic": g0_arithmetic(),
         "AGA_041_clustering_direction": clustering_direction(),
         "AGA_042_probability_domain": probability_domain(),
@@ -742,6 +919,89 @@ def render(f):
         p("    changed       : %s" % (", ".join(rv["changed"]) or "none"))
         p("    added         : %s" % (", ".join(rv["added"]) or "none"))
     p("")
+
+    n3 = f["AGA_044_note3_status_rung"]
+    p("AGA_044  ADDENDUM_3.md declares a rung the register's scale lacks")
+    p("    note declares : %s -- %s"
+      % (", ".join(n3["note_declares"]), n3["note_says"]))
+    p("    in the register's six-rung scale: %s" % n3["in_register_scale"])
+    p("    X1 carries %d fields; relevance: %s\n"
+      % (len(n3["x1_fields"]), n3["x1_relevance"]))
+
+    ga = f["AGA_045_note3_gate_axis"]
+    p("AGA_045  the note makes G0 a per-OPERATOR gate")
+    p("    note states one route, two operators, two outcomes: %s"
+      % ga["note_claims_per_operator"])
+    p("    the register's G0 entry and notes name route %s, season %s, "
+      "operator %s" % (ga["register_names_route"], ga["register_names_season"],
+                       ga["register_names_operator"]))
+    p("    REST_BLOCK holds a constant where the note treats it as a "
+      "variable: %s\n"
+      % ga["rest_block_is_a_constant"])
+
+    lf = f["AGA_046_lcd_forfeit"]
+    p("AGA_046  'a blanket rule ... forfeits the capacity of everyone "
+      "above it', as a number")
+    p("    fleet rule = the longest window = %d min, at rate %.3f/h"
+      % (lf["lcd_minutes"], lf["lam_per_h"]))
+    for r in lf["rows"]:
+        p("      %-16s %3d min  own %.4f  under the rule %.4f  "
+          "gives up %.4f (%.1f%% of own)"
+          % (r["window"], r["minutes"], r["own"], r["fleet"], r["forfeit"],
+             100 * r["share_of_own"]))
+    p("    largest: %.1f%% of that operator's own capacity"
+      % (100 * lf["worst_share"]))
+    p("    the gap peaks at rate %.4f/h (%.4f) and the placeholder rate "
+      "sits at %.0f%% of it" % (lf["peak_lam"], lf["peak_forfeit"],
+                                100 * lf["share_of_peak"]))
+    p("    sweep: %s"
+      % "  ".join("%.2f->%.3f" % (L, g) for L, g in lf["sweep"]))
+    p("    it vanishes at both ends -- everyone clears, nobody clears -- "
+      "so it\n    is largest where the gate is deciding: %s"
+      % lf["vanishes_at_both_ends"])
+    p("    no fleet aggregate emitted (the mix of operators is "
+      "unmeasured): %s\n" % (not lf["aggregate_emitted"]))
+
+    cf = f["AGA_047_note3_confound"]
+    p("AGA_047  the note carries its own confound and the covariate that "
+      "separates it")
+    p("    SCOPE LIMITS names   stimulus %s   good-sleeper ceiling %s"
+      % (cf["scope_section_names_stimulus"], cf["scope_section_names_ceiling"]))
+    p("    X1 'scope' carries   stimulus %s   ceiling %s"
+      % (cf["x1_scope_carries_stimulus"], cf["x1_scope_carries_ceiling"]))
+    p("    prediction: %s" % cf["x1_prediction"])
+    p("    the ceiling predicts the same direction, so the probe as "
+      "written\n    cannot separate them: probe names baseline %s, "
+      "CHEAPEST INSTRUMENT %s,"
+      % (cf["probe_names_baseline"], cf["instrument_section_names_baseline"]))
+    p("    SCOPE LIMITS %s -- the second covariate is one section above "
+      "the probe\n" % cf["scope_section_names_the_repair"])
+
+    hv = f["AGA_048_note3_halves"]
+    p("AGA_048  X1's two halves are both outside the register")
+    p("    %d sources; a rocking lab %s, an infant-carrying study %s"
+      % (hv["n_sources"], hv["rocking_lab_in_register"],
+         hv["infant_carrying_in_register"]))
+    p("    the note states a sampling limit (%s) and the frame "
+      "vocabulary\n    has a member for it: %s   [%s]\n"
+      % (hv["sampling_limit_stated"], hv["a_flag_for_a_narrow_lab_sample"],
+         ", ".join(hv["declared_frames"])))
+
+    cr = f["AGA_049_note3_crossrefs"]
+    p("AGA_049  pointers in the note: %d, resolving to a file: %d"
+      % (len(cr["links"]), len(cr["links"]) - len(cr["unresolved"])))
+    for u in cr["unresolved"]:
+        p("    [[%s]] -- nothing in the tree" % u)
+    p("")
+
+    fe = f["AGA_050_note3_fencing"]
+    p("AGA_050  the flip rests on the operator's own record and is "
+      "fenced %d ways" % fe["fences"])
+    p("    labelled PROPOSED %s | status EXPLORATION %s | relevance "
+      "UNKNOWN %s" % (fe["labelled_proposed"], fe["status_is_exploration"],
+                      fe["relevance_unknown"]))
+    p("    declared not load-bearing %s | anchor states its own n %s\n"
+      % (fe["declared_not_load_bearing"], fe["anchor_declares_n"]))
 
     rb = f["AGA_039_rest_block_provenance"]
     p("AGA_039  the two G0 parameter blocks carry provenance differently")
