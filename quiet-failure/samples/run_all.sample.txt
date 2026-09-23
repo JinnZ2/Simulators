@@ -1,0 +1,74 @@
+CONTAMINATION DECLARATION (read before any number below)
+  authorship   every file in this folder is model-authored, in one session, by the same
+               hand that wrote the checks and the fixtures the checks are pinned to
+  position     the order places agentic AI infrastructure "at the pre-Tacoma stage:
+               designed to calculated load, no accumulated margin"; the author is an
+               instance of that class. The sentence is carried, not scored -- and the
+               interest runs toward accepting it, since a claim that one's own class
+               lacks margin is the humble reading, so it is left unresolved here
+  coding       the four codings of the order's cases are THIS SESSION'S READING of the
+               order's own sentences, each code carrying the span it rests on; every one
+               declares saw_decomposition True and is REFUSED by step 2's gate
+  parties      no claim is made here that any organisation neglected a duty; authored
+               files carry the order's case (event) names as lookup keys and no company
+               or site name -- those are parsed out of WORK_ORDER.md at call time
+  records      no accident corpus, journal or archive was read: the hosts answered 403
+               to CONNECT, measured and timestamped in decomposition.EGRESS; every
+               corpus, null record and regulator record is CONSTRUCTED and says so
+  evidence     the order's "(fetched, verified)" is the order's verification; here every
+               finding and number is CARRIED_NOT_VERIFIED, extracted as written
+  rate         no base rate is computed anywhere and base_rate() refuses one: an
+               accident corpus is selected on failure and carries no denominator over
+               systems, which is the order's own scope limit
+
+========================================================================
+decomposition -- step 1 as a coder; the order's cases coded from its own text
+  egress (measured 2026-09-20T02:58Z): www.ntsb.gov:443 CONNECT 403; www.csb.gov:443 CONNECT 403; www.gov.uk:443 CONNECT 403; onlinelibrary.wiley.com:443 CONNECT 403; github.com:443 connects (control)
+  no accident corpus was read; the codings below are THIS SESSION'S READING of the order's sentences
+  parts (parsed from the order):
+    1. The signal exists and is reported through proper channels.
+    2. It is distributed across multiple holders, each of whom is locally correct.
+    3. No one is assigned the JOIN. The aggregation step is nobody's job by construction.
+    4. The failure is then called "sudden" — which describes the observer, not the system.
+  order's cases, coded from the order's text (span = the phrase the code rests on):
+    SILVER BRIDGE                            -> REPORTED_NOWHERE       holders UNDECLARED  lead UNDECLARED  described UNDECLARED
+        signal_present   PRESENT     <- 'Fracture initiated inside a joint'
+        signal_reported  ABSENT      <- 'not inspectable without disassembly'
+        event_duration               <- 'in under a minute'
+    COLUMBIA                                 -> SIGNALLED_UNJOINED     holders UNDECLARED  lead UNDECLARED  described UNDECLARED
+        signal_present   PRESENT     <- 'Foam strike known during flight'
+        signal_reported  PRESENT     <- 'Imaging requests made and denied through proper channels'
+        join_assigned    UNASSIGNED  <- 'Every step in procedure'
+    TACOMA NARROWS                           -> NOT_EVALUABLE          holders UNDECLARED  lead UNDECLARED  described UNDECLARED
+        note                         <- 'The failures that wrote the'
+    QUIET FAILURE CLASS                      -> NOT_EVALUABLE          holders UNDECLARED  lead UNDECLARED  described QUIET
+        signal_present   PRESENT     <- 'inspectable in principle'
+        described_as     QUIET       <- 'invisible to the operating system itself'
+  separation on the order's cases: NOT_EVALUABLE -- no case reached the table
+  base rate: REFUSED_SAMPLING_FRAME (corpus selected on the outcome; no denominator over systems)
+  CONSTRUCTED corpora (not cases): separates -> SEPARATES; does_not -> DOES_NOT_SEPARATE; one_level -> NOT_EVALUABLE
+========================================================================
+evidence -- parsed from the order, CARRIED (the order's own tag: 'fetched, verified'; not re-fetched here)
+  source as written: Hutchinson, Process Safety Progress, 2024  [CARRIED_NOT_VERIFIED]
+  Kuraray Pasadena numbers as written: 42% @18-21   states record absent: True
+  Macondo          numbers as written: none         states record absent: True
+  Texas City       numbers as written: none         states record absent: False
+  flat reading, clause 1 (reasoning not recorded): stated by 2 of 3 bullets
+  flat reading, clause 2 (no cost comparison made): stated by 0 bullets; absence of record is what the bullets state; absence of the act is the order's reading of the absent record
+  adjacent (carried): safety-economics literature reports that accounting functions struggle to identify and measure the r
+========================================================================
+ownability -- step 3 (inverse case) and step 4 (regulator role), derived not picked
+  order's null as written: 'an organisation that costed the aggregation function honestly and declined it anyway. Not '
+  searches stated: two; corpus/terms/date stated: no; bounded: UNBOUNDED lacks ['corpus', 'terms', 'searched_on', 'hits']
+  from here: NOT_MEASURED -- archive hosts refuse CONNECT (decomposition.EGRESS); no null is bounded in this folder
+  step 4 from here: NOT_MEASURED -- 0 real regulator records read; open question UNDETERMINED
+  order's current read (carried, OBSERVED): it is known in places, which points at never-assigned. Not established.
+  CONSTRUCTED nulls: CANDIDATES_TO_READ
+  CONSTRUCTED roles: {'EXISTENCE_PROOF': 1, 'ROLE_NOT_THE_JOIN': 1, 'ROLE_WITHOUT_AUTHORITY': 1, 'UNDECLARED': 1} -> open question NEVER_ASSIGNED
+  real records: {'counts': {}, 'n': 0, 'open_question': 'UNDETERMINED', 'why': 'no evaluable record; nothing bears on ownability either way'}
+========================================================================
+blind_coding -- step 2, NOT RUN: every coding in this folder saw the decomposition
+  this session's codings admitted as blind: 0 of 4 (REFUSED)
+  why: coder saw the decomposition; not blind
+  CONSTRUCTED blind pair: signal_present AGREE, signal_reported AGREE, join_assigned DISAGREE, described_as UNSEARCHED_ON_ONE_SIDE
+  real blind pairs: NOT_RUN

@@ -8,8 +8,26 @@ Where the order's own decision table is what the fixtures refute, the
 table is kept runnable and printed, and the corrected reading is the
 updated claim.
 
+**CONTAMINATION, declared before any number.** Every fixture is
+implementation-authored: the hand that wrote the generative models wrote
+the scorer that reads them. A fixture landing where its model says it
+should is therefore a REGRESSION result, not a validation. What a fixture
+can establish is that a return is reachable and that a planted fault
+fires; what it cannot establish is that the instrument reads a real
+panel correctly. No real panel has been read (README, "Real run").
+
 All numbers below are from `python3 enclosure_first_residual.py demo`
 with the seeds in `FIXTURES`; the full text is `samples/demo.sample.txt`.
+
+Dispatch K (2026-09-23, `DISPATCH_K.md`) requires four fixtures by its own
+numbering. They map onto this folder's seven:
+
+| dispatch | required return | this folder | return |
+|---|---|---|---|
+| F1 enclosure-driven world | `ENCLOSURE_DOMINANT` | F1 enclosure only | `ENCLOSURE_DOMINANT` |
+| F2 trait-driven world | `TRAIT_RESIDUAL` | F3 trait + enclosure | `TRAIT_RESIDUAL` (see `EFR_010`) |
+| F3 selection-into-windows | within > between, stop | F4 selection into windows | `VARIABLE_UNIDENT` |
+| F4 no operationalization | `BLOCKED` | F6 no operationalization | `BLOCKED(unoperationalized_term)` |
 
 ---
 
@@ -252,5 +270,72 @@ by name.
 
 **Falsifier:** a return that differs between the two modes, or a
 branch-set JSON F refuses to load.
+
+**Status: SUPPORTED.**
+
+---
+
+### EFR_010 -- the dispatch's F2, as specified, cannot return `TRAIT_RESIDUAL` under the dispatch's own step 1
+
+Dispatch K requires "F2 trait-driven world -> TRAIT_RESIDUAL" and, three
+sections earlier, "NULL FIRST, blocking: observed inside band ->
+UNKNOWN_measurable". A world driven by trait alone gives enclosure no
+traction, so its between residual sits inside the null band and step 1
+returns before any trait can be read:
+
+```
+F2 trait only     between residual 0.9807   null band [0.9143, 0.9995]   -> UNKNOWN_measurable
+F3 trait + encl.  between residual 0.5581   null band [0.9041, 0.9994]   -> TRAIT_RESIDUAL(0.477)
+```
+
+`TRAIT_RESIDUAL` is reachable only when a trait sits beside an enclosure
+effect, which is what "survives control" means: there has to be a control
+to survive. The dispatch's fixture list and its pipeline disagree on the
+same world, and the folder's F2/F3 pair is the disagreement instanced. The
+mapping above sends the dispatch's F2 requirement to F3.
+
+**Falsifier:** a trait-only generative model whose between residual falls
+below the population null band.
+
+**Status: SUPPORTED.**
+
+---
+
+### EFR_011 -- the dispatch re-issues the step-4 table `EFR_003` refuted, and its F1 requirement is unsatisfiable under it
+
+The dispatch's step 4 is the order's step 4 verbatim: `within << between
+-> ENCLOSURE_DOMINANT`. Its F1 requirement is "enclosure-driven world ->
+ENCLOSURE_DOMINANT". On this folder's enclosure-only F1 the ratio is
+2.13 (`>`), so under the table as written F1 lands in the confound cell,
+and no threshold pair moves it without also moving F3 (`EFR_004`). The
+two dispatch lines cannot both hold under the literal table; both hold
+under the corrected reading (`EFR_005`), which is the default. The
+literal table stays runnable (`--table-literal`) and its cell is printed
+on every run, so the disagreement is visible rather than resolved by
+choosing.
+
+**Falsifier:** the one `EFR_003` states.
+
+**Status: SUPPORTED; `EFR_003` and `EFR_004` unchanged by the re-issue.**
+
+---
+
+### EFR_012 -- thresholds moved to a data file with a provenance chain; the run says where they came from
+
+Dispatch K: "threshold in data file, provenance chained". The 2026-09-08
+build carried `DELTA_THRESHOLD`, `MIN_WITHIN_PAIRS`, `DOMINANT_RATIO` and
+`CONFOUND_RATIO` as in-code `[CHOICE]` constants. They now live in
+`thresholds.txt` (data only, `key = value`), with one append-only entry
+each in `threshold_chain.txt` naming who set the value, when, and why,
+following `gate-check/`'s convention. Every run prints
+`THRESHOLD_SOURCE` in its choices line: `thresholds.txt` when the file is
+read, `code_default` when it is absent. A file that is present and
+malformed (unknown key, duplicate, wrong type, missing key) raises
+`ThresholdFileError` before any fit: a typed refusal, not a fallback.
+Values are unchanged from the build, so no fixture moved
+(`samples/` regenerated; the only diff is the choices line).
+
+**Falsifier:** a run whose record does not say where its thresholds came
+from, or a malformed `thresholds.txt` that a run proceeds on.
 
 **Status: SUPPORTED.**
