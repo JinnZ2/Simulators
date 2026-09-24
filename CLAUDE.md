@@ -243,7 +243,7 @@ last three; read in order:
 - `corpus-input-gaps/` — input-side gaps + a response-loop sim
 - `coinage-log/` — naming gaps; is the absent word the finding
 - `falsifier-survey/` — Run 1 of a delivered falsifier survey; Run 2 split to its two repos
-- `crediting-rate/` — credit tracks the loanword or the contribution; BLOCKED until ordered
+- `crediting-rate/` — credit tracks the loanword or the contribution; BLOCKED until ordered; v2 the same order REVISED beside v1, three model-authored revisions sent un-adjudicated, one removing the input its own RETURN block keeps a class for
 - `gate-check/` — four structural presence checks, file+line, no FAIL label; thresholds in data
 - `anchor-measurand-crossing/` — crossing given a target; prompts parsed from the order, scorer's judgement as data, no run
 - `anchor-position/` — same order, second build; band scored both ways, ABSENT kept apart, two arms behind flags, no run
@@ -11127,7 +11127,77 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   excluded and counted, never estimated (`CRD_002`); two constructed worlds
   return `ETYMOLOGY_TRACKING` and `CONTRIBUTION_TRACKING`, so the return is
   not constant (`CRD_001`). `bin_gap` registered in `tools/known_answer.py`.
-  Eight claims `CRD_001..008`. Stdlib only, parses under 3.9, CC0.
+  **The same order then arrived REVISED** (`WORK_ORDER_V2.md`, verbatim
+  beside the first, neither superseding and `crediting_rate.py` unedited),
+  with `crediting_rate_v2.py` importing v1 for every piece the revision
+  does not change. **`CRD_009`, the provenance and it comes first:** the
+  dispatch bundle's own send-order table reads *"three revisions are
+  Claude's, PROPOSED, adopt or strip before sending"* and it was then sent
+  as delivered, so the three-state bin, the frame gate and the coding split
+  are **model-authored proposals the operator neither adopted nor
+  stripped** — named in the module docstring, in `PREDICTION_V2.md` and on
+  the first two lines of every render, per `AUDIT_CONTRACT.md`'s
+  layer-separation rule. **`CRD_010`, the finding: REVISION 2 removes the
+  input its own RETURN block still lists a class for** — v1's
+  `CONTRIBUTION_TRACKING` fires on a null gap plus a misattribution rate
+  derived from `described_originator`, REVISION 2 replaces that field with
+  *"attested dates only"* (an ordering, not a rate) and keeps the class, so
+  without a replacement discriminator it is unreachable and every null gap
+  lands on `UNKNOWN_measurable`; `[CHOICE 6]` declares one
+  (`attribution_depth`, stipulated with no derivation exactly as
+  `MISATTR_MAX` had none) and F2 and the suite's low-depth variant differ
+  **only** in depth — same gap, two returns. **`CRD_011`:** the frame gate
+  fires both ways and **before any rate exists**, `FRAME_ASYMMETRIC` naming
+  both sides and `CONTAMINATED_FRAME` on `model_authored=True`, both
+  returning no `rates` key at all. **`CRD_013`:** the redaction is
+  structural — a depth file carrying `item`, or any field naming the bin, is
+  refused at load, and the join key is `sha256(item|salt)[:16]`, which is
+  `UNI_078`'s repair (a field documented as an opaque handle that spelled
+  out the arm on every row). **`CRD_015`:** F5's pooled gap 0.5000 clears
+  its band [-0.3750, 0.3750] and the gap **inside the early date stratum is
+  exactly 0.0000** with the late stratum carrying no gap at all, and the
+  N2/N4 correlates print **before** the fit per the order's own NOTE, so
+  the confound (mean attestation 835 / 985 / 1135 by bin) sits above the
+  number it explains. **`CRD_016`:** `gap` means the POOLED gap on every
+  branch including `DOMAIN_SPECIFIC`, where an earlier version put the
+  domain's gap under that key — one name, two quantities by branch, which
+  is `measurement-fork`'s VOID RATIO in this module's own return shape,
+  found by misreading a probe's output. **`CRD_017`:** `model_authored`
+  must be an explicit boolean and an absent declaration is refused rather
+  than read as `False`, the absent-vs-known-negative repair applied first
+  at the gate that stops the whole run. **`CRD_018`, the CHECK FIRST
+  answer and it differs from `CRD_006`'s:** F (`branch_set.py`) and G
+  (`preference_free_rank.ReturnClass`) both exist in the sibling repo
+  `JinnZ2/method-layer`, located the way `enclosure-first-residual/`
+  locates it — so `CRD_006`'s *"not in this tree"* was true of what v1
+  could see (it looked inside `Simulators`) and is narrowed rather than
+  refuted; G is not a single module, the enum living in
+  `preference_free_rank.py` while `frame_probe.py` carries its own.
+  **`CRD_019`, three faults in this build's own checks, all found by
+  running:** two claimed v2 reached `V1.bin_gap` and `V1.shuffle_band`
+  which it does not and should not, and the third was a substring scan
+  asserting `described_originator` appears nowhere in v2 — firing on the
+  three comments in which v2 **names the field it removed**, `UNI_009` /
+  `T1-1` inside the check written against that removal, repaired to an AST
+  walk requiring the field to reach no constant, name or attribute while
+  the module is required to name it in prose. **`CRD_020`:** all seven
+  return classes are reached, five by fixtures and two by constructed
+  variants, with **F6 beyond the order** — the order lists five fixtures
+  and none reaches `DOMAIN_SPECIFIC`, a class its own RETURN block
+  declares — and its construction is the informative part, since a
+  domain's shuffle band is set by its **within-bin spread**, so a domain
+  can fail to clear only when its items disagree internally and the branch
+  cannot fire on two clean domains. **`CRD_021` UNVERIFIED:** nothing has
+  been run on any real item list, every world is constructed and says so in
+  its own frame file with Greek-letter items and invented letter-traditions
+  so no real technique's name can read as evidence, the generator
+  regenerates byte-identically, and the contamination is declared in its
+  header above any world — a fixture returning what it was built to return
+  is a REGRESSION result. The order's own REAL-RUN SPEC names why:
+  *"a technique-side transmission catalogue to draw ALL bins from.
+  Unidentified. This is the one piece needing a human with library
+  access."* Twenty-one claims `CRD_001..021`. Stdlib only, parses under
+  3.9, CC0.
 - `gate-check/` — A work order built as delivered, with no framework
   context: `gate_check.py` walks a repo path and reports presence or
   absence of four structural features — an unknown/blocked/out-of-envelope

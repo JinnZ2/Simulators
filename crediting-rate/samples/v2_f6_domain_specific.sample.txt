@@ -1,0 +1,39 @@
+======================================================================
+CREDITING RATE -- WORK ORDER L, REVISED
+======================================================================
+  the three revisions are model-authored and were sent
+  un-adjudicated; see the module docstring
+  prediction sha256[:16]  ec5e3319011920f5
+  method layer            present
+  item list model_authored False
+  items                   48
+
+RETURN  DOMAIN_SPECIFIC
+  the pooled gap is inside its shuffle band and exactly one domain's is not
+
+N2/N4 CORRELATES, reported before the fit
+  first_attested_source    {'not_retained': 834.5, 'technical_only': 824.5, 'visible': 814.5}
+  intermediary_count       {'not_retained': 1.0, 'technical_only': 1.0, 'visible': 1.0}
+
+COUNTS PER BIN   {'not_retained': 16, 'technical_only': 16, 'visible': 16}
+EXCLUDED         {'ordering_unknown': 0, 'ordering_reversed': 0, 'ambiguous_bin': 0, 'unscored': 0, 'no_depth': 0}
+
+RATES BY BIN
+  visible          0.6250
+  technical_only   0.5417
+  not_retained     0.3750
+  gap (visible - not_retained)  0.2500
+  N1 shuffle band               [-0.3333, 0.3333]  k=2000
+  mean attribution_depth        1.6250  (cut 1.50)  [CHOICE 6]
+  domain A                      gap 1.0000  band [-0.5833, 0.5833]
+
+N3 per domain
+  A              n=12  gap 1.0000  clears True
+  B              n=36  gap 0.0000  clears False
+
+NOTHING HERE IS A STATEMENT ABOUT ANY TECHNIQUE, TRADITION OR WORD.
+Every fixture is constructed and declares itself so.  The real run
+is NOT_RUN: the order's own open item is an unidentified
+technique-side transmission catalogue.
+
+======================================================================

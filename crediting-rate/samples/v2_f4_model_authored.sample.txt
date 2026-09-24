@@ -1,0 +1,14 @@
+======================================================================
+CREDITING RATE -- WORK ORDER L, REVISED
+======================================================================
+  the three revisions are model-authored and were sent
+  un-adjudicated; see the module docstring
+  prediction sha256[:16]  ec5e3319011920f5
+  method layer            present
+  item list model_authored True
+  items                   12
+
+RETURN  CONTAMINATED_FRAME
+  the item list declares model_authored=True.  A model-drafted list samples the training prior, which is the measurand.
+
+======================================================================
