@@ -73,6 +73,7 @@ MANIFEST = (
     "reporting-chain-loss/hop_compose.py::composed_bias",
     "chain-position/load_class.py::stability_product",
     "measurand-partition/wo4_lumber.py::stiffness_ratio",
+    "thwaites-risk-audit/audit.py::sle_to_sv",
 )
 
 # Cases known to fail today. A case that starts passing turns this red so

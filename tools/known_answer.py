@@ -741,6 +741,7 @@ EXPECTED_METRICS = (
     "routing-data-layer/rate_form.py::sustained_excess",
     "shape-spec-audit/shadow_read.py::outline_area",
     "sheet-structure-scan/sheetmodel.py::rank",
+    "thwaites-risk-audit/audit.py::sle_to_sv",
     "sim-span/sim_span.py::quad_fit",
     "sim-span/three_column.py::ols",
     "trigger-geometry/trigger_geometry.py::accumulation_ratio",
@@ -1865,6 +1866,41 @@ def _seed_move_set():
         note="the None cases are the order's RULE built into the metric: an "
              "unassessed factor is not a factor of zero, and a malformed one "
              "is not silently clamped")
+    register(
+        "thwaites-risk-audit/audit.py::sle_to_sv",
+        _tra_sle_to_sv,
+        [case("2.6 mm/yr, the figure the document converts", (2.6,),
+              0.029743049962493214,
+              "2.6e-3 m/yr * 3.61e14 m^2 / 31556952 s / 1e6 = 0.0297 Sv by "
+              "hand; the document states 0.030", tol=1e-9),
+         case("1 mm/yr", (1.0,), 0.011439634600958927,
+              "the same arithmetic at unit forcing; a factor-1000 unit slip "
+              "in either direction shows here and not in a ratio", tol=1e-9),
+         case("a measured zero is 0.0", (0.0,), 0.0,
+              "no flux is a measurement and converts to zero sverdrups",
+              tol=0.0),
+         case("an absent figure is None, not 0.0", (None,), None,
+              "the discriminating case: an unstated SLE must not read as a "
+              "measured zero flux, which is the reassuring direction")],
+        note="a unit conversion, registered because its two zero-shaped "
+             "returns mean opposite things and a wrong one is invisible in "
+             "the render")
+
+
+def _tra_sle_to_sv(mm_per_year):
+    """thwaites-risk-audit/audit.py::sle_to_sv, imported.
+
+    The expected values are computed from the stated constants by hand
+    (mm/yr * 1e-3 * 3.61e14 m^2 / 31556952 s / 1e6), not read off the
+    implementation.  The discriminating pair is None against 0.0: an
+    absent figure must not read as a measured zero flux.
+    """
+    import importlib.util
+    path = os.path.join(ROOT, "thwaites-risk-audit", "audit.py")
+    spec = importlib.util.spec_from_file_location("_tra_audit", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.sle_to_sv(mm_per_year)
 
 
 def seed_reachable(src=None, path=None):
