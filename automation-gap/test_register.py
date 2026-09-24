@@ -86,8 +86,12 @@ class ReadNotRestate(unittest.TestCase):
 class StatusVocabulary(unittest.TestCase):
 
     def test_one_scale_declared_five_sites_in_use(self):
+        """Seven rungs, not six: the v6 revision added EXPLORATION, which
+        is AGA_044 closing. The count is pinned so a rung arriving or
+        leaving turns this red rather than passing quietly."""
         v = RA.status_vocabulary()
-        self.assertEqual(len(v["declared"]), 6)
+        self.assertEqual(len(v["declared"]), 7)
+        self.assertIn("EXPLORATION", v["declared"])
         self.assertEqual(v["n_sites"], 5)
         self.assertEqual(set(v["in_sources"]),
                          {"OBSERVED", "SECONDARY", "UNREAD"})
@@ -100,7 +104,8 @@ class StatusVocabulary(unittest.TestCase):
         the declared scale gives a reader no way to know the second
         exists. The revision added both remaining sites."""
         v = RA.status_vocabulary()
-        self.assertEqual(v["in_holds_tags"], ["OBSERVED", "SECONDARY"])
+        self.assertEqual(v["in_holds_tags"],
+                         ["DERIVED", "OBSERVED", "SECONDARY"])
         self.assertEqual(v["in_term_notes"],
                          ["DERIVED", "OBSERVED", "PROPOSED"])
         self.assertEqual(v["in_addendum"],
@@ -116,8 +121,9 @@ class StatusVocabulary(unittest.TestCase):
         what happened instead was a new kind of entry carrying it, so the
         claim closes on one reading and not on the one it registered."""
         v = RA.status_vocabulary()
-        self.assertEqual(v["unused_in_a_status_slot"], ["DERIVED", "PROPOSED"])
-        self.assertEqual(v["unused_anywhere"], [])
+        self.assertEqual(v["unused_in_a_status_slot"],
+                         ["DERIVED", "PROPOSED", "EXPLORATION"])
+        self.assertEqual(v["unused_anywhere"], ["EXPLORATION"])
 
     def test_undeclared_is_not_constant(self):
         """The check must be able to come back empty."""
@@ -255,10 +261,12 @@ class FlagFitsDefinition(unittest.TestCase):
 class HoldsKinds(unittest.TestCase):
 
     def test_the_split(self):
+        """v7 added two S10 entries, both findings. The reading-state count
+        has not moved across three revisions; the findings count has."""
         v = RA.holds_kinds()
-        self.assertEqual(v["total_holds"], 36)
+        self.assertEqual(v["total_holds"], 38)
         self.assertEqual(v["state_notes"], 10)
-        self.assertEqual(v["findings"], 26)
+        self.assertEqual(v["findings"], 28)
 
     def test_three_sources_carry_no_finding_at_all(self):
         self.assertEqual(RA.holds_kinds()["sources_with_no_finding"],
@@ -433,13 +441,19 @@ class Revision(unittest.TestCase):
             self.skipTest("git history not reachable: %s" % v.get("reason"))
         self.assertGreater(v["lines_added"], v["lines_removed"])
         self.assertEqual(v["removed"], [])
-        # the addenda are pure additions: the v3 objects are untouched
-        for k in ("SOURCES", "QUESTIONS", "RULES", "TERM_NOTES"):
-            self.assertIn(k, v["byte_identical"], k)
+        # The previous version is the last COMMITTED one, and v6 and v7
+        # arrived between commits -- so what this reports is their UNION,
+        # not v7 alone. Nothing is estimated to split them: the union is
+        # what content resolution can see. (AGA_065.)
+        self.assertEqual(sorted(v["added"]),
+                         ["EXPLORATION", "SLEEP_QUALITY_FACTORS"])
+        self.assertEqual(sorted(v["changed"]),
+                         ["G0_NOTES", "QUESTIONS", "SOURCES"])
+        # the addenda are still pure additions across the union
         for k in ("ADDENDUM_QUESTIONS", "CONTROL_LOOPS", "GATE_MAP",
                   "EVENT_CLASSES", "REST_BLOCK", "TRANSFER_NOTE",
-                  "BEHAVIOUR_RECORD_SCHEMA", "CONTINUED_WORK", "G0_NOTES"):
-            self.assertIn(k, v["added"], k)
+                  "BEHAVIOUR_RECORD_SCHEMA", "RULES"):
+            self.assertIn(k, v["byte_identical"], k)
 
     def test_an_explicit_ref_that_does_not_resolve_is_reported(self):
         v = RA.revision(against="no-such-ref-xyz")
@@ -554,11 +568,23 @@ class DerivedEntry(unittest.TestCase):
 
 class Note3StatusRung(unittest.TestCase):
 
-    def test_the_note_declares_a_rung_the_register_scale_lacks(self):
+    def test_the_rung_the_note_declared_has_arrived_in_the_scale(self):
+        """AGA_044 CLOSES by arrival. The check detects the state change
+        rather than asserting the old state: the rung the note declared
+        and the register lacked is now the seventh rung of the scale, so
+        a reader of the register alone can discover it exists."""
         v = RA.note3_status_rung()
         self.assertEqual(v["note_declares"], ["EXPLORATION"])
-        self.assertFalse(v["in_register_scale"])
-        self.assertEqual(len(v["register_scale"]), 6)
+        self.assertTrue(v["in_register_scale"])
+        self.assertEqual(len(v["register_scale"]), 7)
+
+    def test_it_is_declared_and_carried_by_no_entry(self):
+        """The second half does not close. EXPLORATION is applied by the
+        section header the entries sit under; no field states it, so the
+        rung is discoverable and has no instance."""
+        self.assertFalse(RA.note3_status_rung()["carried_by_an_entry"])
+        self.assertTrue(RA._rung_on_an_entry("OBSERVED"))     # not constant
+        self.assertFalse(RA._rung_on_an_entry("NOT_A_RUNG"))
 
     def test_x1_carries_nine_fields(self):
         self.assertEqual(len(RA.note3_status_rung()["x1_fields"]), 9)
@@ -569,11 +595,16 @@ class Note3GateAxis(unittest.TestCase):
     def test_the_note_makes_g0_per_operator(self):
         self.assertTrue(RA.note3_gate_axis()["note_claims_per_operator"])
 
-    def test_the_register_names_route_and_season_and_not_operator(self):
+    def test_the_gate_entry_names_route_and_season_and_not_operator(self):
+        """AGA_045 is a claim about the GATE's own axes. The v6 revision
+        put the operator into the NOTES beside it, which is a different
+        statement -- read as one blob the arrival of a note would have
+        read as a change to the gate."""
         v = RA.note3_gate_axis()
         self.assertTrue(v["register_names_route"])
         self.assertTrue(v["register_names_season"])
         self.assertFalse(v["register_names_operator"])
+        self.assertTrue(v["operator_in_notes"])
 
     def test_the_window_block_holds_constants(self):
         self.assertTrue(RA.note3_gate_axis()["rest_block_is_a_constant"])
@@ -660,6 +691,343 @@ class Note3Fencing(unittest.TestCase):
         self.assertTrue(v["flip_rests_on_n_of_1"])
         self.assertEqual(v["fences"], 4)
         self.assertTrue(v["anchor_declares_n"])
+
+
+# -------------------------------------------------- AGA_051..058 the v6 pass
+
+class DeliveredTail(unittest.TestCase):
+    """AGA_052 -- the v6 delivery carried a duplicated tail; the v7
+    delivery does not. CLOSED by arrival, and the check reports the state
+    rather than asserting either end of it."""
+
+    def test_the_tail_is_single(self):
+        """v6: 2 __main__ blocks, the register printed twice, the
+        addendum-3 header three times. v7: one of each. The audit was
+        never sent, so the repair is independent of it."""
+        v = RA.delivered_tail()
+        self.assertEqual(v["main_blocks"], 1)
+        self.assertEqual(v["register_header_printed"], 1)
+        self.assertEqual(v["addendum3_header_printed"], 1)
+
+    def test_the_importable_surface_was_intact_throughout(self):
+        """Why the defect cost nothing while it stood: the duplication was
+        in the run path, not in the objects. Fifteen top-level objects,
+        none defined twice, in both versions -- so a consumer importing
+        the register got exactly what a consumer of the undoubled file
+        gets, and the defect cost a reader of stdout, not an importer."""
+        v = RA.delivered_tail()
+        self.assertEqual(v["duplicate_objects"], 0)
+        self.assertEqual(v["duplicate_functions"], 0)
+        self.assertTrue(v["importable_surface_intact"])
+        self.assertEqual(v["top_level_objects"], 15)
+
+
+class ExplorationRungSite(unittest.TestCase):
+    """AGA_053 -- one entry's relevance field contradicts the rung it is
+    filed under, and the rung is on no field to contradict."""
+
+    def test_the_rung_is_applied_by_the_section_name(self):
+        v = RA.exploration_rung_site()
+        self.assertFalse(v["rung_on_any_entry_field"])
+        self.assertTrue(v["applied_by_the_list_name"])
+
+    def test_the_definition_and_the_header_agree(self):
+        v = RA.exploration_rung_site()
+        self.assertTrue(v["definition_says_unknown"])
+        self.assertTrue(v["definition_says_not_load_bearing"])
+        self.assertTrue(v["header_says_unknown"])
+        self.assertTrue(v["header_says_not_load_bearing"])
+
+    def test_one_entry_states_a_relevance_the_rung_forbids(self):
+        """X1 says UNKNOWN, which is the rung. X2 says DIRECT and higher
+        than X1's -- a ranking inside a list whose own definition says
+        relevance is unknown. Two entries, one rung, opposite readings."""
+        v = RA.exploration_rung_site()
+        self.assertEqual(v["contradicting"], ["X2"])
+        x = {e["xid"]: e for e in v["entries"]}
+        self.assertTrue(x["X1"]["says_unknown"])
+        self.assertTrue(x["X2"]["says_direct"])
+
+
+class PerOperatorTerm(unittest.TestCase):
+    """AGA_054 -- the per-operator term AGA_045 named is now DECLARED and
+    reaches no arithmetic."""
+
+    def test_four_factors_each_stating_a_status(self):
+        v = RA.per_operator_term()
+        self.assertEqual(v["n_factors"], 4)
+        self.assertIn("motion_sleep_history", v["factors"])
+        self.assertTrue(v["every_factor_states_a_status"])
+
+    def test_the_operator_is_in_the_notes_and_not_in_the_gate(self):
+        v = RA.per_operator_term()
+        self.assertFalse(v["operator_in_gate_entry"])
+        self.assertTrue(v["operator_in_notes"])
+        self.assertTrue(v["operator_in_factors"])
+
+    def test_only_a_print_reads_the_factor_list(self):
+        """`addendum2` renders it. `g0_window_needed`, the function the
+        gate's own window comes out of, reads REST_BLOCK's four constants
+        and nothing else -- so the term is declared in the file and is not
+        in the number the gate is decided on."""
+        v = RA.per_operator_term()
+        self.assertEqual(v["readers"], ["addendum2"])
+        self.assertFalse(v["reaches_arithmetic"])
+        self.assertTrue(v["window_reads_rest_block_only"])
+
+
+class UntaggedClaim(unittest.TestCase):
+    """AGA_055 -- a causal claim sits untagged between two tagged ones."""
+
+    def test_three_sentences_two_tagged(self):
+        v = RA.untagged_claim()
+        self.assertEqual(v["note1_sentences"], 3)
+        self.assertEqual(v["note1_tags"], [["OBSERVED"], [], ["DERIVED"]])
+
+    def test_the_untagged_one_is_the_causal_reading(self):
+        """An OBSERVED observation and a DERIVED consequence with the step
+        between them carrying no rung. The register's own device is the
+        inline tag; the sentence it would cost most is the one without."""
+        v = RA.untagged_claim()
+        self.assertEqual(len(v["untagged"]), 1)
+        self.assertIn("trust + driving consistency", v["untagged"][0])
+        self.assertTrue(v["sits_between_tagged"])
+        self.assertTrue(v["claim_is_causal"])
+
+
+class CeilingSplit(unittest.TestCase):
+    """AGA_056 -- the good-sleeper ceiling and the figure that sizes it are
+    in different documents."""
+
+    def test_the_note_states_the_limit_and_carries_no_figure(self):
+        v = RA.ceiling_split()
+        self.assertTrue(v["note"]["states_the_limit"])
+        self.assertFalse(v["note"]["carries_the_figure"])
+
+    def test_the_register_carries_the_figure_and_states_no_limit(self):
+        v = RA.ceiling_split()
+        self.assertFalse(v["register"]["states_the_limit"])
+        self.assertTrue(v["register"]["carries_the_figure"])
+        self.assertIn("96%", v["register_figure"])
+
+    def test_neither_document_has_both(self):
+        """Computed, not asserted: a reader of either one alone gets the
+        limit without its size or the size without its consequence."""
+        v = RA.ceiling_split()
+        self.assertFalse(v["note_has_both"])
+        self.assertFalse(v["register_has_both"])
+        self.assertTrue(v["neither_has_both"])
+
+    def test_the_word_ceiling_in_the_register_is_a_different_sense(self):
+        """`treat as ceiling` in the register is about the POISSON bound,
+        not about good sleepers. The three senses are separated rather
+        than matched on the word, because the first version of this check
+        matched all three and read the split as closed."""
+        v = RA.ceiling_split()
+        self.assertTrue(v["poisson_ceiling_in_register"])
+        self.assertEqual(v["word_ceiling_in_register"], 1)
+
+    def test_x1_scope_does_not_carry_the_limit(self):
+        """AGA_047's finding survives the revision: the compressed record
+        carries the stimulus limit and drops the ceiling."""
+        self.assertFalse(RA.ceiling_split()["x1_scope_carries_the_limit"])
+
+
+class X1Drift(unittest.TestCase):
+    """AGA_057 -- X1 is in two documents and the two differ."""
+
+    def test_the_field_sets_differ_by_three_names(self):
+        v = RA.x1_drift()
+        self.assertEqual(v["only_in_note"], ["probe"])
+        self.assertEqual(v["only_in_register"], ["cheapest_probe", "xid"])
+
+    def test_the_register_half_is_six_times_the_note_half(self):
+        """Same field name, same claim, 49 chars against 301 -- and the
+        long one names dated studies the short one does not."""
+        v = RA.x1_drift()
+        self.assertEqual(v["half_a_note_chars"], 49)
+        self.assertEqual(v["half_a_register_chars"], 301)
+        self.assertTrue(v["register_names_studies"])
+        self.assertFalse(v["note_names_studies"])
+
+
+class X2Disciplines(unittest.TestCase):
+    """AGA_058 -- what X2 gets right, and the shape of its own prediction."""
+
+    def test_the_scope_is_a_consent_limit_and_it_is_the_first(self):
+        """Every prior scope field in the register bounds a SAMPLE. This
+        one bounds what may be recorded at all, which is a different kind
+        of limit and has no precedent here."""
+        v = RA.x2_disciplines()
+        self.assertTrue(v["scope_is_a_consent_limit"])
+        self.assertTrue(v["first_consent_limit_in_the_register"])
+
+    def test_the_prediction_is_selection_on_the_outcome(self):
+        """Stated in the author's own words: the population that had
+        trouble is the one that got studied. That is the sampling frame
+        the repo records over and over, named by the entry proposing it."""
+        v = RA.x2_disciplines()
+        self.assertTrue(v["prediction_is_selection_on_the_outcome"])
+        self.assertIn("PROPOSED", v["prediction"])
+
+    def test_the_join_is_unmeasured_and_says_which_side_is_missing(self):
+        v = RA.x2_disciplines()
+        self.assertTrue(v["join"].startswith("UNMEASURED"))
+        self.assertIn("never samples practice-holders", v["join"])
+
+
+# -------------------------------------------------- AGA_059..065 the v7 pass
+
+class FalsifierWording(unittest.TestCase):
+    """AGA_059 -- a fault in this audit's own claim table."""
+
+    def test_a_source_now_carries_derived_as_a_tag(self):
+        v = RA.falsifier_wording()
+        self.assertEqual(v["a_source_carries_derived_as_a_tag"], ["S10"])
+        self.assertTrue(v["fires_on_the_wording"])
+
+    def test_and_reaches_no_status_slot(self):
+        """So the claim's substance holds and its stated falsifier does
+        not distinguish the two. Both readings are reported."""
+        v = RA.falsifier_wording()
+        self.assertFalse(v["derived_in_any_status_slot"])
+        self.assertFalse(v["fires_on_the_meaning"])
+
+    def test_the_fault_is_read_out_of_history_not_asserted(self):
+        """This is the fault, and it is in the past, so it is measured
+        against the committed table rather than recalled. AGA_020's body
+        recorded the falsifier firing on a reading it did not intend and
+        then restated the same wording as the falsifier, naming the TOKEN
+        and not the FIELD -- so it fired twice, by one mechanism, in a
+        claim that had already seen it once."""
+        v = RA.falsifier_wording()
+        if not v["falsifier_before"]:
+            self.skipTest("git history not reachable")
+        self.assertTrue(v["claim_notes_the_ambiguity"])
+        self.assertTrue(v["falsifier_named_the_token_only"])
+        self.assertIn("source carrying", v["falsifier_before"])
+
+    def test_the_repair_is_in_the_working_tree(self):
+        """Repaired rather than defended: the falsifier now names the field,
+        and this check going red is what a re-widening would look like."""
+        v = RA.falsifier_wording()
+        self.assertTrue(v["falsifier_names_the_field_now"])
+        if v["falsifier_before"]:
+            self.assertTrue(v["repaired"])
+
+
+class ExplorationTagSite(unittest.TestCase):
+    """AGA_061 -- a sixth inline-tag site, unscanned, and silent."""
+
+    def test_three_fields_carry_a_tag(self):
+        v = RA.exploration_tag_site()
+        self.assertEqual(v["fields_carrying_a_tag"],
+                         ["X1.anchor", "X2.anchor", "X2.channels"])
+
+    def test_one_field_carries_two_rungs(self):
+        """`channels` tags one clause DERIVED and another PROPOSED inside
+        one string -- the first field in the register to do it."""
+        v = RA.exploration_tag_site()
+        self.assertEqual(v["two_rungs_in_one_field"], ["X2.channels"])
+        self.assertEqual(v["tags"]["X2.channels"], ["DERIVED", "PROPOSED"])
+
+    def test_the_site_is_not_scanned_and_the_omission_is_silent(self):
+        """Every token here also occurs at a scanned site, so no reported
+        number moves -- which is what makes the gap invisible. A rung
+        appearing only here would read as unused anywhere. The scanned
+        list is read off `status_vocabulary`'s own AST, so widening it
+        closes this check by itself."""
+        v = RA.exploration_tag_site()
+        self.assertFalse(v["site_scanned"])
+        self.assertNotIn("EXPLORATION", v["scanned_objects"])
+        self.assertEqual(v["tokens_new_to_the_file"], [])
+        self.assertTrue(v["omission_is_silent_today"])
+        self.assertEqual(v["n_sites_reported"], 5)
+
+    def test_the_scanned_list_is_read_not_retyped(self):
+        v = RA.exploration_tag_site()
+        self.assertEqual(v["scanned_objects"],
+                         ["ADDENDUM_QUESTIONS", "CONTROL_LOOPS",
+                          "TRANSFER_NOTE"])
+
+
+class ExplorationFieldSets(unittest.TestCase):
+    """AGA_062 -- two entries, one list, different field sets, no schema."""
+
+    def test_one_field_is_on_one_entry_only(self):
+        v = RA.exploration_field_sets()
+        self.assertEqual(v["only_in_one"], ["channels"])
+        self.assertEqual(len(v["field_sets"]["X1"]), 10)
+        self.assertEqual(len(v["field_sets"]["X2"]), 11)
+
+    def test_the_renderer_is_guarded_so_absence_prints_as_absence(self):
+        """`if k in x` is right for a renderer and it means an absent field
+        and a field nobody thought to fill are the same output. There is no
+        schema to say which."""
+        self.assertTrue(RA.exploration_field_sets()["renderer_is_guarded"])
+
+    def test_the_new_field_names_the_other_entry_s_whole_subject(self):
+        """X2's `channels` names motion as a portable cue; X1 is about
+        motion and sleep and has no channels field. The overlap is real and
+        the cross-reference runs one way -- X2 ranks itself against X1, X1
+        does not name X2."""
+        v = RA.exploration_field_sets()
+        self.assertTrue(v["x2_channels_names_motion"])
+        self.assertTrue(v["x1_is_about_motion"])
+        self.assertFalse(v["x1_has_a_channels_field"])
+        self.assertTrue(v["x2_names_x1"])
+        self.assertFalse(v["x1_names_x2"])
+
+
+class ConsentRecord(unittest.TestCase):
+    """AGA_063 -- the anchor records what was not asked for."""
+
+    def test_it_records_three_things_about_the_ask(self):
+        v = RA.consent_record()
+        self.assertTrue(v["names_the_channels"])
+        self.assertTrue(v["records_categories_only"])
+        self.assertTrue(v["records_specifics_withheld"])
+        self.assertTrue(v["records_the_ask_not_made"])
+
+    def test_the_scope_declares_it_and_the_anchor_records_it_honoured(self):
+        """Two different statements. A scope field saying what may be
+        recorded is a rule; an anchor saying the specifics were withheld
+        and none were requested is the rule being exercised, entered as
+        provenance. Nothing else in the file does the second."""
+        v = RA.consent_record()
+        self.assertTrue(v["scope_declares_the_limit"])
+        self.assertTrue(v["first_in_the_register"])
+        self.assertEqual(v["occurrences_in_the_file"]["none requested"], 1)
+
+
+class ImportedSkillArm(unittest.TestCase):
+    """AGA_064 -- QE's third arm against the register's own N_OF_1 rule."""
+
+    def test_the_arm_is_inside_the_rule_the_register_wrote(self):
+        """The rule: an N=1 record bounds what is possible and does not
+        estimate a rate. The arm states a possibility, estimates nothing,
+        and carries a tag. The register obeying its own rule on the one
+        source where it would be cheapest to break it."""
+        v = RA.imported_skill_arm()
+        self.assertTrue(v["arm_present"])
+        self.assertTrue(v["rule_present"])
+        self.assertFalse(v["arm_states_a_rate"])
+        self.assertTrue(v["arm_states_a_possibility"])
+        self.assertEqual(v["arm_tags"], ["DERIVED"])
+        self.assertTrue(v["obeys_the_rule"])
+
+    def test_the_arm_reaches_the_prose_and_not_the_map(self):
+        """QE's source list is empty and its next-step field now leans on
+        S10 by name. A reader counting which questions rest on the N=1
+        record off the structured slot gets six and misses this one."""
+        v = RA.imported_skill_arm()
+        self.assertEqual(v["leans_without_recording"], ["QE"])
+        self.assertNotIn("QE", v["s10_in_a_source_slot"])
+        self.assertIn("QE", v["s10_in_free_text"])
+
+    def test_two_holds_arrived_and_both_are_findings(self):
+        v = RA.imported_skill_arm()
+        self.assertEqual(len(v["new_holds"]), 2)
 
 
 # ------------------------------------------------------- structure

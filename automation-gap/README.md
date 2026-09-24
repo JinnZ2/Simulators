@@ -34,10 +34,12 @@ driver_hours_evidence_register.py
                                  work (QK, clock-vs-state control loops, a
                                  behaviour-anchored record) and a proposed
                                  gate map G0-G4 carrying the register's
-                                 first runnable arithmetic.  Revised
-                                 twice; register_audit.revision() resolves
-                                 the previous version by content and
-                                 measures what moved
+                                 first runnable arithmetic, an EXPLORATION
+                                 list (X1, X2) and an imported-skill arm on
+                                 QE.  Revised four times;
+                                 register_audit.revision() resolves the
+                                 previous version by content and measures
+                                 what moved
 
 audit.py                         recomputes what the six documents state
 register_audit.py                imports the register, checks it against
@@ -45,7 +47,7 @@ register_audit.py                imports the register, checks it against
 test_audit.py                    checks on the audit; prints its count
 test_register.py                 checks on the register audit; prints its
                                  count
-CLAIM_TABLE.md                   AGA_001..050 with falsifiers
+CLAIM_TABLE.md                   AGA_001..065 with falsifiers
 ```
 
 The register arrived a drop after the seed and is a different kind of
@@ -178,3 +180,68 @@ predicts the same direction. The probe names one covariate; the second one
 probe nor X1's compressed `scope` field. The note contains its own
 confound and its own repair, and the compressed record drops the half that
 confounds it. Third instance here of a qualifier lost in compression.
+
+## The v6 and v7 revisions
+
+`ADDENDUM_3.md`'s material then arrived **as code**, and `AGA_044` closed
+by arrival: `EXPLORATION` is the register's seventh docstring rung, so a
+reader of the register alone can discover it. The second half did not
+close -- the rung is carried by **no entry field**, applied by the name of
+the section its entries sit in, and `status_vocabulary` reports it
+`unused_anywhere`, the first rung ever to read that way. Beside it
+`SLEEP_QUALITY_FACTORS` puts the per-operator term `AGA_045` named into
+the file: four factors each stating a status, *operator* now in `G0_NOTES`
+and still not in the G0 gate entry, and the only function reading the list
+is a print -- `g0_window_needed`, the function the gate's window comes out
+of, reads `REST_BLOCK`'s four constants and nothing else. Declared, and
+absent from the number.
+
+**Two faults in this audit's own machinery, both found by running.**
+`_declared()` split a vocabulary block on two-or-more spaces where the
+rung names are padded to a column, so the **longest** name -- eleven
+characters, `EXPLORATION`, the newest -- was dropped: six rungs read
+against seven declared, which would have reported `AGA_044` as still open.
+A parser that drops the longest entry drops the newest, because a new name
+is what pushes a column. And `AGA_020`'s falsifier reads *a source carrying
+`DERIVED`*: v7 put `[DERIVED]` inside S10's `holds`, so it **fired a second
+time by the same mechanism** -- in a claim whose own body records the first
+firing and then restates the ambiguous wording verbatim. The falsifier now
+names the field, and the fault is read out of git rather than recalled, so
+the repair turns the check red on purpose.
+
+The v6 delivery also shipped a **duplicated tail** -- two `__main__`
+blocks, the addendum-3 header printed three times -- with the importable
+surface intact throughout: 15 top-level objects, none defined twice, so the
+cost fell on a reader of stdout and not on this audit. Recorded rather than
+repaired, the file being delivered, and **the v7 delivery removed it
+anyway** -- the audit was never sent, so the repair is independent of it.
+
+**What v7 adds is a third explanation for the tenure curve.** S10 gains
+two entries -- ran nights as a trainee, using exercises, katas, stretches
+and scents for state regulation -- and QE gains an IMPORTED-skill arm:
+*CDL tenure counts months licensed, not state-regulation skill brought from
+elsewhere*, so a novice by tenure can be adapted by practice and the screen
+measures a proxy. The register's own rule says an `N_OF_1` record **bounds
+what is possible and does not estimate a rate**, and the arm states a
+possibility, estimates nothing, and carries a `[DERIVED]` tag -- the rule
+obeyed on the one source where breaking it would be cheapest. The cost is
+in the slot: QE's source list is empty and its next-step field leans on S10
+by name, so a reader counting off the structured map gets six questions
+resting on the N=1 record and misses this one.
+
+X2 gains a `channels` field, and three things follow. `EXPLORATION` is a
+**sixth inline-tag site** the vocabulary checker does not scan, and
+`X2.channels` is the first field in the register to carry **two rungs in
+one string** (`[DERIVED]` on one clause, `[PROPOSED]` on another) -- the
+omission is silent today, because every token there also occurs at a
+scanned site, which is exactly what makes it invisible. The two entries now
+carry **different field sets with no schema**, and `addendum3` guards with
+`if k in x`, so an absent field and a field nobody thought to fill print
+identically; the substantive cost is that `channels` names **motion** as a
+portable sleep cue and motion is X1's entire subject, with X1 carrying no
+such field and the cross-reference running one way only. And the anchor
+records *"categories only, specifics not shared, none requested"* -- the
+scope field declares a consent limit, the anchor records it being
+exercised, and **a record of an ask that was not made** has no precedent
+here, where the usual failure is a record that does not say the ask
+happened.

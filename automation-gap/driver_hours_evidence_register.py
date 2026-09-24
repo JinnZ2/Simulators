@@ -14,6 +14,8 @@ record):
   PROPOSED    offered for test
   UNMEASURED  no source found that measures it
   UNREAD      source located, content relevant, full text not read
+  EXPLORATION real gap, relevance to the question UNKNOWN; kept, not
+              load-bearing
 
 Sampling-frame flags (every source carries one):
   ON_ROAD      interviewed while working -> excludes drivers already out
@@ -138,7 +140,11 @@ SOURCES = {
         n="1", years="COVID window; oilfield-exemption era",
         where="COVID relief runs; oilfield multi-stop",
         holds=["1,000-mi round trips under COVID HOS waiver",
-               "1,000-mi days under oilfield exemption, MORE stops/day"],
+               "1,000-mi days under oilfield exemption, MORE stops/day",
+               "as a TRAINEE ran nights; used exercises, katas, stretches "
+               "and essential scents for state regulation",
+               "-> novice by CDL tenure, not novice in state regulation: "
+               "skill IMPORTED from outside driving  [DERIVED]"],
         status="OBSERVED (first-hand)", frame=["N_OF_1"]),
     "Q1": dict(
         cite="Qualitative archive leads (not samples)",
@@ -189,7 +195,11 @@ QUESTIONS = [
     ("QE", "Is the tenure curve learning or survivorship?",
      [], "UNMEASURED",
      "within-driver trajectories (same person over years); "
-     "every source here is ON_ROAD cross-section"),
+     "every source here is ON_ROAD cross-section. Third arm: IMPORTED "
+     "skill -- CDL tenure counts months licensed, not state-regulation "
+     "skill brought from elsewhere (S10). A novice by tenure can be "
+     "adapted by practice -> tenure is a proxy, and the screen measures "
+     "the proxy [DERIVED]"),
     ("QF", "Multi-stop physical vs long-haul monotonous fatigue profile?",
      ["S10"], "UNMEASURED (N=1 only; all samples long-haul)",
      "regional/multi-stop sample with fatigue TYPE split "
@@ -374,6 +384,21 @@ REST_BLOCK = dict(
                          # the human -- PLACEHOLDER, system-specific
 )
 
+# G0 sleep-quality term (multiplies usable rest, does not add windows)
+SLEEP_QUALITY_FACTORS = [
+    ("trust_in_driver", "chosen/known partner vs assigned stranger vs "
+     "machine with checkable record", "OBSERVED (operator) -> key term"),
+    ("ride_consistency", "jolts, hard brakes, lane wander per hour",
+     "OBSERVED (operator) -> measurable from telematics"),
+    ("alert_noise", "chimes / takeover requests per hour, incl. false "
+     "alarms", "PROPOSED -- each one is a wake event"),
+    ("motion_sleep_history", "early / long exposure to sleeping in "
+     "motion (travois, wagon, vehicle) -- operator's own history  "
+     "[OBSERVED, N=1]", "PROPOSED as individual-variance term: G0 may "
+     "PASS for some operators and FAIL for others on the same route -> "
+     "per-operator assessment, not one fleet rule"),
+]
+
 # Event classes that could interrupt. Only events the MACHINE CANNOT
 # handle wake the human. rate = events/hour on the route;
 # p_machine_fails = share the machine cannot handle alone.
@@ -439,9 +464,16 @@ GATE_MAP = [
 ]
 
 G0_NOTES = [
-    "Sleep in a MOVING cab is lower quality than parked (team-driver "
-    "lead, NOT VERIFIED) -> the usable rest block may need to be longer "
-    "than the parked equivalent.",
+    "Sleep in a MOVING cab: operator first-hand -- no trouble falling "
+    "asleep when she TRUSTED the partner and they drove SAFE and "
+    "CONSISTENT  [OBSERVED]. So the variable is trust + driving "
+    "consistency, not motion itself. Team-driver poor-sleep findings "
+    "(lead, NOT VERIFIED) may be confounded by dispatcher-assigned "
+    "strangers vs chosen partners  [DERIVED].",
+    "For the machine: sleep quality then depends on (a) ride consistency "
+    "-- smooth throttle/brake, few jolts -- and (b) CALIBRATED trust, "
+    "earned by a track record the sleeper can check. False alarms and "
+    "frequent handoff chimes erode both  [PROPOSED].",
     "Route + season dependent: Upper Midwest winter and Sun Belt corridor "
     "are different gates. One G0 result does not transfer.",
     "The binding term is p_machine_fails, not raw event rate: a machine "
@@ -468,12 +500,109 @@ def addendum2():
             print("    window %-9s inertia %-4s = %3d min -> "
                   "P(uninterrupted) = %.2f"
                   % (block, inertia, w, p_uninterrupted(lam, w)))
+    print("\n  G0 SLEEP-QUALITY FACTORS")
+    for f, m, st in SLEEP_QUALITY_FACTORS:
+        print("    %-17s %s  [%s]" % (f, m, st))
     print("\n  G0 NOTES")
     for n in G0_NOTES:
         print("    - " + n)
+
+
+# ===========================================================================
+# ADDENDUM 3 -- EXPLORATION TERRITORY (2026-09-23)
+# Status EXPLORATION: a real gap between two literatures, relevance to the
+# gate map UNKNOWN. Not load-bearing for any gate. Kept so it is not lost.
+# ===========================================================================
+
+EXPLORATION = [
+    dict(
+        xid="X1",
+        gap="Does early carried-motion exposure (carried, cradleboard, "
+            "wagon/vehicle-raised) shape adult sleep in motion?",
+        half_a="Adult rocking lab studies: nap effects positive (Bayer "
+               "2011 Curr Biol; mice 2019); overnight null in good sleepers "
+               "(18 young males, 96% baseline efficiency); elderly null to "
+               "negative, reduced delta; proposed mechanism = sensory "
+               "confusion from translational motion. Early motion history "
+               "NEVER recorded.",
+        half_b="Infant carrying: Navajo cradleboard ~16 h/day first 3 mo "
+               "(1978); no clear long-term swaddling effects; Hopi (Chisholm "
+               "1983) lower arousal, motor milestones typical; Inuit amauti "
+               "~3 yr; babywearing linked to infant neural tracking of "
+               "biological-motion rhythm (2026 preprint). Never followed "
+               "to adult sleep.",
+        join="UNMEASURED -- nobody links half B exposure to half A outcome",
+        relevance="UNKNOWN -- may bear on G0 per-operator variance "
+                  "(motion_sleep_history); may not",
+        cheapest_probe="add covariate early_motion_exposure to any adult "
+                       "rocking / vehicle-sleep study; cross-cultural arm "
+                       "in communities that still carry infants",
+        prediction="PROPOSED: early vestibular habituation -> less sensory "
+                   "confusion -> smaller effect of motion on sleep in "
+                   "either direction",
+        scope="lab rocking is gentle pendular/translational; truck cab is "
+              "vibration + jolts + translation (whole-body vibration "
+              "literature, ISO 2631 field, NOT searched)",
+        anchor="operator first-hand: carried as infant, slept on travois, "
+               "hay wagon, canoe  [OBSERVED, N=1]",
+    ),    dict(
+        xid="X2",
+        gap="Community practices for sleeping in daylight (high-latitude / "
+            "long-photoperiod seasons) -- ever studied as METHOD, or "
+            "tested for day-sleeping night workers?",
+        half_a="Clinical / chronobiology: Tromso Study 69N, n=21,083, age "
+               "40+, some seasonal variation; Kiruna office workers n=32, "
+               "winter sleep onset delayed 39 min, morning light advances; "
+               "Arctic summer exploratory: >45 h/wk daytime sunlight -> "
+               "median sleep 102 min shorter. Samples = general / settler "
+               "/ indoor-worker populations measuring DISRUPTION.",
+        half_b="Ethnography / history: 'Beyond Darkness and Sleep. The "
+               "Inuit Night in North Baffin Island' (2016, UNREAD); EU "
+               "MSCA project on 19th-c. European explorers' sleep "
+               "DISORDERED by polar night / midnight sun (visitor frame).",
+        join="UNMEASURED -- practices recorded as culture, never tested "
+             "as method; clinical side never samples practice-holders",
+        relevance="DIRECT for night drivers sleeping by day and for G0 "
+                  "day-rest windows -- higher than X1",
+        cheapest_probe="read the 2016 Inuit-night ethnography for "
+                       "described practices; code them in the behaviour-"
+                       "anchored form (conditions, trigger, duration)",
+        prediction="PROPOSED: the population that had trouble (visitors, "
+                   "indoor workers) is the one that got studied; the "
+                   "population that solved it sits in the archive as custom",
+        scope="practice knowledge may not be public by choice; record only "
+              "what holders choose to share",
+        anchor="operator: communities carry histories of ways to sleep "
+               "in light, tied to long seasonal daylight; channels named: "
+               "SCENT and BODY MOTION  [OBSERVED -- categories only, "
+               "specifics not shared, none requested]",
+        channels="light is the channel a cab cannot control; scent and "
+                 "motion ARE controllable and portable -> candidate "
+                 "carry-anywhere sleep cues for day-sleeping drivers "
+                 "[DERIVED]. Literature leads, NOT searched: odor and "
+                 "sleep (lavender trials, odor cueing during sleep); "
+                 "rhythmic self-motion before sleep. Mechanism candidate: "
+                 "learned association -- cue paired with sleep becomes a "
+                 "trigger independent of light [PROPOSED]",
+    ),
+]
+
+
+def addendum3():
+    print("\n" + "=" * 60)
+    print("ADDENDUM 3 -- EXPLORATION TERRITORY (relevance unknown)")
+    print("=" * 60)
+    for x in EXPLORATION:
+        print("  %s  %s" % (x["xid"], x["gap"]))
+        for k in ("half_a", "half_b", "join", "relevance",
+                  "cheapest_probe", "prediction", "scope", "anchor",
+                  "channels"):
+            if k in x:
+                print("     %-14s %s" % (k, x[k]))
 
 
 if __name__ == "__main__":
     main()
     addendum()
     addendum2()
+    addendum3()

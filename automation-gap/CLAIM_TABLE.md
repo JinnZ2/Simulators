@@ -4,7 +4,7 @@ Ids are permanent. `AGA_` = automation-gap. Status is SUPPORTED / REFUTED /
 UNVERIFIED. Every SUPPORTED claim is a property of the delivered material
 and is recomputable by anyone with the folder: `python3 audit.py` for the
 six documents (`AGA_001..019`), `python3 register_audit.py` for the
-evidence register (`AGA_020..050`). The delivered falsifiers are the
+evidence register (`AGA_020..065`). The delivered falsifiers are the
 documents' own (`AUT-F1..F8`, `RD-F1..F3`) and carry their own prefixes;
 nothing here renumbers them.
 
@@ -244,8 +244,12 @@ carrying it. **The substantive half then closed too** -- see `AGA_043`:
 `TRANSFER_NOTE` combines two sources into a third statement and is
 tagged. What is left of this claim is the vocabulary: one declared scale,
 five sites, three mechanisms, three question tokens declared nowhere.
-*Falsifier:* a second declared scale for questions, or a source carrying
-`DERIVED`.
+**Fired again, on the wording, in v7** -- `AGA_059`, and the falsifier is
+amended here rather than defended. **Sixth site:** `EXPLORATION` (`AGA_061`),
+which the checker does not scan. *Falsifier:* a second declared scale for
+questions, or a source whose **`status` field** carries `DERIVED` -- the
+token alone is not enough, and asking for the token is what let this be
+refuted twice on a reading nobody intended.
 
 **AGA_021 -- S1 and S3 are not two sources. SUPPORTED.** S3's author list
 (Braver, Preusser, Ulmer) is a strict **subset** of S1's (Braver, Preusser,
@@ -302,13 +306,15 @@ repair is either a member for record-based survivorship or a definition
 stated as the consequence. *Falsifier:* S5's `where` naming an interview.
 
 **AGA_025 -- `holds` carries two kinds of entry with no field between them.
-SUPPORTED, numbers moved by the revision.** Of 36 entries, **10 are
+SUPPORTED, numbers moved twice.** Of 38 entries, **10 are
 reading-state notes rather than findings** (*"violator characteristics table exists -- contents UNREAD"*,
 *"crash TYPE by tenure: not in relays"*), and **three of eleven sources
 contribute no finding at all** -- S7, S8 and Q1 are reading-state top to
 bottom. A consumer counting `holds` as evidence gets 36 where 26 are
-findings and three sources are worth zero. The revision added four
-entries and removed one, and the reading-state count did not move. *Falsifier:* a `reading_state`
+findings and three sources are worth zero. Across three revisions the
+**reading-state count has never moved** and the findings count has, twice
+(26 -> 28 in v7, both new S10 entries being findings) -- so the split is a
+property of which sources are read, not of how much has been written. *Falsifier:* a `reading_state`
 field, or a source moving off the all-notes list.
 
 **AGA_026 -- the one containment the register admits, and it holds.
@@ -402,7 +408,7 @@ SUPPORTED on S10 alone.
 read. The register says so itself for five of the eleven (`UNREAD`), and
 the egress gate refuses every publisher host, so the other six are carried
 on the strength of a search pass nobody here can repeat. Nothing in
-`AGA_020..050` is evidence about driving hours, fatigue, tenure, any
+`AGA_020..065` is evidence about driving hours, fatigue, tenure, any
 carrier or any vendor; every one is a property of the register's own
 declarations. Whether the eight questions have the status the register
 assigns them is untouched in both directions.
@@ -618,7 +624,14 @@ rungs and `EXPLORATION` is not among them. This is the **sixth site** for
 one scale and the first in a different file: two delivered documents share
 a vocabulary and only one of them declares it. Consistent with `AGA_020`,
 and worse in one respect -- a reader of the register alone cannot discover
-the rung exists. *Falsifier:* the register's docstring gaining it.
+the rung exists. **CLOSED by arrival:** the next delivery put `EXPLORATION`
+into the docstring scale, seven rungs, so the discoverability half is done
+and the check reports the state change rather than asserting the old state.
+**The second half does not close** -- the rung is carried by **no entry
+field** (`AGA_053`), applied by the name of the section its entries sit in,
+so it is discoverable and has no instance, and `status_vocabulary` reports
+it `unused_anywhere`, the first rung ever to read that way.
+*Falsifier:* the register's docstring gaining it -- FIRED, v6.
 
 **AGA_045 -- the note makes G0 a per-OPERATOR gate and the register's G0
 is per-route. SUPPORTED.** `motion_sleep_history` is entered `OBSERVED,
@@ -627,8 +640,14 @@ operator and FAIL for another on the same route."* The register's G0 entry
 and its four notes name **route** and **season** and never **operator**
 (checked), and `REST_BLOCK` holds four constants where the note treats one
 as a variable. So the gate as built cannot express the note's own result:
-G0 is indexed on (route, season) and the note adds a third axis.
-*Falsifier:* an operator term in `REST_BLOCK` or in the G0 entry.
+G0 is indexed on (route, season) and the note adds a third axis. **Half
+fired, amended in place:** the v6 revision put *operator* into `G0_NOTES`
+and a `SLEEP_QUALITY_FACTORS` block into the file, so the notes now name it
+and **the gate entry still does not** -- the two sites are read apart here
+for that reason, since a blob over both would have read the arrival of a
+note as a change to the gate. Where the term goes from there is `AGA_054`:
+declared in the file, reaching no arithmetic. *Falsifier:* an operator term
+in `REST_BLOCK` or in the G0 **entry** -- the notes are not the gate.
 
 **AGA_046 -- 'a blanket rule written to the lowest sleeper forfeits the
 capacity of everyone above it', made a number. SUPPORTED.** On the
@@ -707,3 +726,191 @@ statement), the adult rocking literature, the infant carrying literature
 and the cross-cultural claim are all carried or declared unsearched, and
 nothing here was read.
 
+
+---
+
+## The v6 pass -- ADDENDUM 3 arrives in Python
+
+`ADDENDUM_3.md` landed in notes; the next delivery put the same material
+into the register as code, added a `SLEEP_QUALITY_FACTORS` block and the
+`EXPLORATION` rung, and shipped a duplicated tail.
+
+**AGA_051 -- a fault in this audit's own parser, and it ran toward the
+reassuring answer. RECORDED.** `_declared()` split a docstring vocabulary
+block on `\s{2,}`, and the rung names are padded to a column -- so the
+**longest** name sits one space from its description and is dropped.
+`EXPLORATION` is eleven characters, the longest rung, and the newest: the
+parser read **six rungs against a docstring declaring seven**, which would
+have reported `AGA_044` as still open. A parser that silently drops the
+longest entry drops the newest one, because a new name is what pushes a
+column. Repaired to `^  ([A-Z_0-9]+) +(?=\S)`; found by running, not by
+reading. *Falsifier:* a declared rung the parser reports and the docstring
+does not carry.
+
+**AGA_052 -- the v6 delivery carried a duplicated tail. RECORDED, then
+CLOSED by the next delivery.** Two `__main__` blocks, the register printed
+twice and the addendum-3 header three times. **The importable surface was
+intact throughout** -- 15 top-level objects, 0 defined twice, 0 duplicated
+functions -- so a consumer importing the register got exactly what a
+consumer of the undoubled file gets, and the cost fell on a reader of
+stdout, not on this audit. Recorded rather than repaired, the file being
+delivered; the v7 delivery removed it. *Falsifier:* a duplicated object
+rather than a duplicated call.
+
+**AGA_053 -- the EXPLORATION rung against the entries filed under it.
+SUPPORTED.** The rung's own definition reads *"relevance to the question
+UNKNOWN; kept, not load-bearing"* and the section header repeats both
+words. **X1 states `relevance: UNKNOWN`; X2 states `relevance: DIRECT ...
+higher than X1`** -- a ranking, inside a list whose definition says
+relevance is unknown. The rung is **on no entry field**: it is applied by
+the name of the list the entries sit in, so nothing in either record
+carries the status the section assigns them, and nothing can contradict it
+except the prose. *Falsifier:* a `status` field on an EXPLORATION entry.
+
+**AGA_054 -- the per-operator term is declared and reaches no arithmetic.
+SUPPORTED.** `AGA_045` recorded that G0 is written on route and season
+while the note made it per-operator. The revision adds
+`SLEEP_QUALITY_FACTORS`, four factors each stating a status, one of them
+`motion_sleep_history`, and puts *operator* into `G0_NOTES`. It is **not in
+the G0 gate entry**, and the only function reading the factor list is
+`addendum2`, a print. `g0_window_needed`, the function the gate's window
+comes out of, reads `REST_BLOCK`'s four constants and nothing else -- so
+the term the gate's own notes say can flip its verdict is declared in the
+file and absent from the number. *Falsifier:* the factor list entering
+`g0_window_needed` or `interrupt_rate`.
+
+**AGA_055 -- the causal step in G0 note 1 carries no tag. SUPPORTED.**
+Three sentences, tagged `[OBSERVED]` / nothing / `[DERIVED]`. The untagged
+one is *"So the variable is trust + driving consistency, not motion
+itself"* -- the inference that turns the observation into the consequence,
+sitting between a tagged pair, in a register whose own device for marking
+epistemic class is the inline tag. *Falsifier:* a tag on that sentence.
+
+**AGA_056 -- the good-sleeper ceiling and the figure that sizes it are in
+different documents. SUPPORTED, computed.** `ADDENDUM_3.md` states the
+limit (a ceiling in good sleepers, room to improve) and carries no number;
+the register carries the number -- *"overnight null in good sleepers (18
+young males, 96% baseline efficiency)"* -- and states no limit. **Neither
+document has both**, computed rather than asserted, so a reader of either
+alone gets the limit without its size or the size without its consequence.
+The word *ceiling* does occur in the register once and it is the **Poisson**
+sense (`AGA_041`), a different quantity; the three senses are separated
+because the first version of this check matched all three and read the
+split as closed. `AGA_047` survives the revision: X1's compressed `scope`
+field carries the stimulus limit and drops the ceiling. *Falsifier:* either
+document carrying both halves.
+
+**AGA_057 -- one record, two delivered documents, and the two differ.
+SUPPORTED.** X1 exists in `ADDENDUM_3.md` and in the register. Field sets
+differ by three names (`probe` in the note; `cheapest_probe` and `xid` in
+the register), and `half_a` -- the same field, the same claim -- is **49
+characters in the note and 301 in the register**, with the long one naming
+dated studies the short one does not. A copy is a copy and copies drift;
+here the drift runs toward the code, which is the direction that keeps the
+evidence. *Falsifier:* a single source of truth for X1.
+
+**AGA_058 -- what holds in X2. SUPPORTED.** Its `scope` is a **consent
+limit** -- *"record only what holders choose to share"* -- where every
+prior scope field in the register bounds a SAMPLE; that is a different kind
+of limit and has no precedent here. Its `prediction` states **selection on
+the outcome** in the author's own words: *"the population that had trouble
+(visitors, indoor workers) is the one that got studied; the population that
+solved it sits in the archive as custom."* Its `half_a` declares the frame
+of the clinical literature it summarises (settler / indoor-worker samples
+measuring DISRUPTION) rather than reporting its figures flat. *Falsifier:*
+a later entry reading the archive side as a measurement.
+
+---
+
+## The v7 pass -- an imported skill, and two channels named
+
+The next delivery added two `S10` holds, a third arm to `QE`, a `channels`
+field on X2, and removed the duplicated tail.
+
+**AGA_059 -- a fault in this audit's own claim table, and it is the same
+fault twice. RECORDED.** `AGA_020`'s falsifier reads *"a source carrying
+`DERIVED`"*. The v7 revision put `[DERIVED]` inside **S10's `holds` list**,
+so the wording fires. It fired once before, by the same mechanism, and the
+claim's own body records it -- *"the falsifier asked for a SOURCE carrying
+DERIVED; what arrived was a new kind of entry carrying it"* -- and then
+**restates the same wording verbatim as the falsifier**. Noticing that a
+falsifier is ambiguous and re-registering the ambiguous wording is how a
+claim gets refuted twice on a reading nobody intends. What the claim means
+is a status **slot**, and `DERIVED` still reaches none; the substance
+holds, the wording does not. Repaired rather than defended: `AGA_020`'s
+falsifier now names the field. **The fault is read out of git, not
+recalled** -- the checker compares the falsifier as committed against the
+falsifier in the working tree, so the repair turns three of its fields
+False and the record of what was repaired survives in history rather than
+in a sentence. *Falsifier:* a source whose `status` field carries
+`DERIVED`.
+
+**AGA_060 -- the duplicated tail was repaired without this audit.
+RECORDED.** `AGA_052` was written, never committed and never sent; the next
+delivery removed the duplication anyway. One instance, and the direction is
+worth keeping: the defect was visible to whoever ran the file, which is the
+class of defect an audit is least needed for and most likely to claim.
+*Falsifier:* a v6 finding reappearing in v8 unrepaired.
+
+**AGA_061 -- `EXPLORATION` is a sixth inline-tag site and the vocabulary
+check does not scan it. SUPPORTED.** `status_vocabulary` walks
+`ADDENDUM_QUESTIONS`, `CONTROL_LOOPS` and `TRANSFER_NOTE` -- read off its
+own AST, so widening it closes this by itself -- and not `EXPLORATION`,
+which carries three tagged fields. **`X2.channels` carries two rungs in one
+string**, `[DERIVED]` on one clause and `[PROPOSED]` on another, the first
+field in the register to do it. **The omission is silent today**: every
+token here also occurs at a scanned site, so no reported number moves,
+which is exactly what makes the gap invisible -- a rung appearing only here
+would read as unused anywhere, which is the state `EXPLORATION` itself is
+in. *Falsifier:* `EXPLORATION` in the scanned set, or a token appearing
+only there.
+
+**AGA_062 -- two entries, one list, different field sets, no schema.
+SUPPORTED.** X1 carries 10 fields and X2 carries 11; `channels` is on one
+entry only. `addendum3` guards with `if k in x`, which is right for a
+renderer and means **an absent field and a field nobody thought to fill
+print identically**. The substantive cost is visible in this pair: X2's new
+field names **motion** as a controllable, portable sleep cue, and motion is
+X1's entire subject -- X1 has no `channels` field, X2 names X1 (ranking
+itself above it), and X1 does not name X2. One shared term, two records,
+one direction of reference. *Falsifier:* a declared field set for
+`EXPLORATION`, or X1 gaining the field.
+
+**AGA_063 -- the anchor records what was not asked for. SUPPORTED.** X2's
+`scope` declares a consent limit; its `anchor` now records the limit being
+**exercised** -- *"channels named: SCENT and BODY MOTION [OBSERVED --
+categories only, specifics not shared, none requested]"*. Those are two
+different statements: a rule about what may be recorded, and a provenance
+note saying the specifics were withheld **and that nobody asked for them**.
+The second has no precedent in the register (*none requested* occurs once
+in the whole file) and is the rarer half -- a record of an absent ask,
+where the usual failure is a record that does not say the ask was made.
+*Falsifier:* a later entry carrying specifics under this anchor.
+
+**AGA_064 -- QE's third arm is inside the rule the register wrote for
+itself. SUPPORTED.** The IMPORTED-skill arm says CDL tenure counts months
+licensed rather than state-regulation skill brought from elsewhere, so a
+novice by tenure can be adapted by practice and the screen measures a
+proxy. The register's own rule reads *"N_OF_1 is OBSERVED, not anecdote: it
+bounds what is possible, it does not estimate a rate"* -- and the arm
+**states a possibility, estimates no rate, and carries a `[DERIVED]`
+tag**, on the one source where breaking the rule would be cheapest. The
+cost is in the slot rather than the claim: **`QE`'s source list is empty**
+and its next-step field leans on S10 by name, so a reader counting which
+questions rest on the N=1 record off the structured map gets six and misses
+this one. *Falsifier:* S10 entering QE's source list, or the arm stating a
+rate.
+
+**AGA_065 -- the revision reader measures against the last COMMITTED
+version, so two deliveries between commits report as their union.
+RECORDED.** `revision()` resolves the previous version by content rather
+than by a position in history -- which is what makes it survive an
+unrelated commit landing between two versions (`AGA_033`) -- and the
+consequence is that v6 and v7, delivered and landed between the same pair
+of commits, come back as one delta: `added` names v6's two objects and
+`changed` names v6's `G0_NOTES` beside v7's `SOURCES` and `QUESTIONS`.
+Nothing is estimated to split them; the union is what content resolution
+can see, and the alternative -- committing each delivery before the next
+arrives -- is a property of the landing order, not of the reader.
+*Falsifier:* a reader that separates two uncommitted revisions without a
+stored intermediate.

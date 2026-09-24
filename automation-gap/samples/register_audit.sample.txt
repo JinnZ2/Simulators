@@ -1,10 +1,10 @@
 REGISTER AUDIT -- driver_hours_evidence_register.py
 Imported, not parsed. Nothing below reads a primary source.
 
-AGA_020  status scale: 6 declared, 3 in SOURCES, 5 in QUESTIONS
-    declared        : OBSERVED, SECONDARY, DERIVED, PROPOSED, UNMEASURED, UNREAD
+AGA_020  status scale: 7 declared, 3 in SOURCES, 5 in QUESTIONS
+    declared        : OBSERVED, SECONDARY, DERIVED, PROPOSED, UNMEASURED, UNREAD, EXPLORATION
     used in sources : OBSERVED, SECONDARY, UNREAD
-    used nowhere    : none
+    used nowhere    : EXPLORATION
     undeclared      : PARTIAL, SUPPORTED, UNRESOLVED
 
 AGA_021  citation strings sharing name tokens
@@ -23,7 +23,7 @@ AGA_022  frame flags: rule is 'every source carries one'
     sources carrying no flag: S6
     an UNKNOWN member exists: False
 
-AGA_023  QE states: within-driver trajectories (same person over years); every source here is ON_ROAD cross-section
+AGA_023  QE states: within-driver trajectories (same person over years); every source here is ON_ROAD cross-section. Third arm: IMPORTED skill -- CDL tenure counts months licensed, not state-regulation skill brought from elsewhere (S10). A novice by tenure can be adapted by practice -> tenure is a proxy, and the screen measures the proxy [DERIVED]
     as written    : 8 of 12 sources carry ON_ROAD
     not a sample  : S9, S10, Q1
     over samples  : 8 of 9
@@ -40,7 +40,7 @@ AGA_024  ON_ROAD is defined as: interviewed while working -> excludes drivers al
     S8  truck stops                                    fits definition: yes
     carries the flag, does not fit the definition: S11, S5
 
-AGA_025  holds entries: 26 findings, 10 reading-state notes, 36 total
+AGA_025  holds entries: 28 findings, 10 reading-state notes, 38 total
     sources whose holds are ALL reading-state: S7, S8, Q1
 
 AGA_033  a source relayed through another source in the register
@@ -58,15 +58,103 @@ AGA_035  the closing number counts one token
     outside the list   : QK (UNMEASURED)  -> 11 questions exist, 10 are counted
     answered           : QA, QB, QC  -> not answered 8 of 11
 
-AGA_036  revision against 2a6e2f3: OK
-    +212 / -0 lines
-    byte-identical: QUESTIONS, RULES, SOURCES, TERM_NOTES
-    changed       : none
-    added         : ADDENDUM_QUESTIONS, BEHAVIOUR_RECORD_SCHEMA, CONTINUED_WORK, CONTROL_LOOPS, EVENT_CLASSES, G0_NOTES, GATE_MAP, REST_BLOCK, TRANSFER_NOTE
+AGA_036  revision against 9b638a8: OK
+    +134 / -5 lines
+    byte-identical: ADDENDUM_QUESTIONS, BEHAVIOUR_RECORD_SCHEMA, CONTINUED_WORK, CONTROL_LOOPS, EVENT_CLASSES, GATE_MAP, REST_BLOCK, RULES, TERM_NOTES, TRANSFER_NOTE
+    changed       : G0_NOTES, QUESTIONS, SOURCES
+    added         : EXPLORATION, SLEEP_QUALITY_FACTORS
+
+AGA_052  the delivered file carries a duplicated tail
+    __main__ blocks: 1   running it prints the register 1 times and
+    the addendum-3 header 1 times
+    top-level objects 15, duplicated 0; functions duplicated 0
+    the importable surface is intact, so this audit is unaffected: True
+
+AGA_053  the EXPLORATION rung against the entries filed under it
+    rung definition: real gap, relevance to the question UNKNOWN; kept, not load-bearing
+    section header repeats it (UNKNOWN True, not load-bearing True)
+      X1  relevance UNKNOWN  UNKNOWN -- may bear on G0 per-operator variance (motion_sl
+      X2  relevance DIRECT   DIRECT for night drivers sleeping by day and for G0 day-re
+    entries whose own field states the opposite of the rung: X2
+    the rung on any entry field: False; applied by the list's name: True
+
+AGA_054  the per-operator term is declared and reaches no arithmetic
+    4 sleep-quality factors, each stating a status: True
+    'operator' in the G0 gate entry False, in G0_NOTES True, in the factors True
+    functions reading the factor list: addendum2 -> reaches arithmetic: False
+    the window function reads the four constants only: True
+
+AGA_055  G0 note 1: 3 sentences, tags OBSERVED / NONE / DERIVED
+    untagged: So the variable is trust + driving consistency, not motion itself.
+    it sits between a tagged pair: True; it is a causal statement: True
+
+AGA_056  the good-sleeper ceiling: a limit in one document, a datum in the other
+                           states limit names the sample carries 96%
+    ADDENDUM_3.md          True         True             False
+    the register           False        True             True
+    register figure: overnight null in good sleepers (18 young males, 96% baseline efficiency)
+    the word 'ceiling' in the register: 1, and it is the Poisson sense: True
+    X1's scope field carries the limit: False
+    computed -- neither document carries both halves: True
+
+AGA_057  one record, two delivered documents
+    only in the note    : probe
+    only in the register: cheapest_probe, xid
+    half_a: 49 chars in the note, 301 in the register; the register names
+    dated studies True, the note False
+
+AGA_058  what holds in X2
+    scope is a consent limit: True, and the first in the register: True
+      practice knowledge may not be public by choice; record only what holders choose to share
+    the prediction names selection on the outcome: True
+    half_a declares its own sampling frame: True
+
+AGA_059  a fault in this audit's own claim table
+    AGA_020's falsifier: 'a source carrying DERIVED'
+    a source now carries it as an inline tag: S10
+      -> novice by CDL tenure, not novice in state regulation: skill IMPORTED from outside driving  [DERIVED]
+    in any status SLOT, the reading the claim intends: False
+    the committed claim recorded the first firing (True) and named the
+    token, not the field (True):
+      was: a second declared scale for questions, or a source carrying `DERIVED`.
+      now: a second declared scale for questions, or a source whose **`status` field** carries `DERIVED` -- the token alone is not enough, and asking for the token is what
+    repaired here rather than defended: True
+
+AGA_061  EXPLORATION is a sixth inline-tag site, unscanned
+    scanned for tags: ADDENDUM_QUESTIONS, CONTROL_LOOPS, TRANSFER_NOTE
+    tags here:
+      X1.anchor      OBSERVED
+      X2.anchor      OBSERVED
+      X2.channels    DERIVED, PROPOSED
+    two rungs in one field: X2.channels
+    sites reported: 5; this one counted: False
+    tokens new to the file: none -> the omission is silent today: True
+
+AGA_062  two entries, one list, different field sets, no schema
+    X1  10 fields
+    X2  11 fields
+    present on one entry only: channels
+    the renderer guards with `if k in x`: True -- so an absent field
+    and a field nobody filled print alike
+    X2's new field names motion True; X1 is about motion True; X1 has a
+    channels field False.  X2 names X1 True, X1 names X2 False
+
+AGA_063  the anchor records what was not asked for
+    channels named True | categories only True | specifics withheld True
+    the ask not made, recorded: True
+    scope declares the limit True; the anchor records it honoured
+    occurrences in the whole file: none requested x1, not shared x1, choose to share x1
+
+AGA_064  QE's third arm against the register's own N_OF_1 rule
+    the arm states a rate False, a possibility True, tagged DERIVED
+    -> inside the rule the register wrote for itself: True
+    S10 in a source slot: QA, QF, QH, QI, QJ, QK
+    S10 in free text    : QE, QK
+    leans on it and records it nowhere: QE
 
 AGA_044  ADDENDUM_3.md declares a rung the register's scale lacks
     note declares : EXPLORATION -- real gap, relevance UNKNOWN; kept, not load-bearing
-    in the register's six-rung scale: False
+    in the register's six-rung scale: True
     X1 carries 9 fields; relevance: UNKNOWN — may touch G0's motion_sleep_history, may not
 
 AGA_045  the note makes G0 a per-OPERATOR gate

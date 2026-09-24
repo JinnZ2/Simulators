@@ -22,7 +22,9 @@
 #     python3 register_audit.py --json
 #     python3 register_audit.py --selftest
 
+import ast
 import importlib.util
+import inspect
 import json
 import math
 import os
@@ -57,11 +59,22 @@ _NS = _import("sheet-structure-scan/no_severity.py", "_no_sev")
 # ---------------------------------------------------------------- helpers
 
 def _declared(heading):
-    """Pull a declared vocabulary out of the register's own docstring."""
+    """Pull a declared vocabulary out of the register's own docstring.
+
+    The separator is ONE OR MORE spaces, not two. The rung names are
+    padded to a column, so the LONGEST name sits one space from its
+    description -- and a `\s{2,}` rule silently drops exactly the longest
+    entry, which is the one most likely to be the newest. It did: the
+    revision adding EXPLORATION (11 chars, the longest rung) read as six
+    rungs against a docstring declaring seven, which would have reported
+    AGA_044 as still open. Recorded at AGA_051.
+
+    Continuation lines are excluded by requiring the token to be followed
+    by lower-case prose on the same line rather than by end-of-line."""
     block = re.search(heading + r".*?\n\n", REG.__doc__, re.S)
     if not block:
         raise AssertionError("vocabulary block not found: " + heading)
-    return re.findall(r"^  ([A-Z_0-9]+)\s{2,}", block.group(0), re.M)
+    return re.findall(r"^  ([A-Z_0-9]+) +(?=\S)", block.group(0), re.M)
 
 
 def _surnames(cite):
@@ -73,6 +86,30 @@ def _surnames(cite):
 
 
 # ---------------------------------------------------------------- checks
+
+_SRC = None
+
+
+def _source():
+    """The delivered file's own text, read once and closed. Five checks
+    read it; five bare open().read() calls leaked five handles and printed
+    five ResourceWarnings into the suite's output."""
+    global _SRC
+    if _SRC is None:
+        with open(os.path.join(HERE, "driver_hours_evidence_register.py")) as fh:
+            _SRC = fh.read()
+    return _SRC
+
+
+def _rung_on_an_entry(rung):
+    """Is a declared status rung carried by any FIELD, anywhere in the
+    register -- a status slot, an inline [TAG], a list entry? A rung a
+    reader can find only in the docstring is declared and not applied,
+    and the two are different states."""
+    blob = " ".join([str(getattr(REG, n, ""))
+                     for n in dir(REG) if not n.startswith("_")])
+    return bool(re.search(r"\b%s\b" % re.escape(rung), blob))
+
 
 def status_vocabulary():
     """AGA_020 -- the register declares ONE scale and runs TWO. SOURCES
@@ -427,10 +464,428 @@ def _x1_fields():
     return out
 
 
+def delivered_tail():
+    """AGA_052 -- the delivered file carries a duplicated tail: the
+    addendum3 body appears a second time inside the first __main__ block,
+    followed by a second __main__ block. Landed as delivered and reported
+    rather than repaired. The duplication is entirely inside __main__, so
+    the IMPORTABLE surface is untouched -- every object is defined once
+    and this audit, which imports, is unaffected."""
+    import subprocess
+    src = _source()
+    tree = ast.parse(src)
+    top = [n.targets[0].id for n in tree.body
+           if isinstance(n, ast.Assign) and len(n.targets) == 1
+           and isinstance(n.targets[0], ast.Name)]
+    funcs = [n.name for n in tree.body if isinstance(n, ast.FunctionDef)]
+    out = subprocess.run([sys.executable,
+                          os.path.join(HERE,
+                                       "driver_hours_evidence_register.py")],
+                         capture_output=True, text=True, timeout=60).stdout
+    return dict(
+        main_blocks=src.count('if __name__ == "__main__":'),
+        register_header_printed=out.count(
+            "DRIVER HOURS / FATIGUE / TENURE -- evidence register"),
+        addendum3_header_printed=out.count(
+            "ADDENDUM 3 -- EXPLORATION TERRITORY (relevance unknown)"),
+        top_level_objects=len(top), duplicate_objects=len(top) - len(set(top)),
+        duplicate_functions=len(funcs) - len(set(funcs)),
+        importable_surface_intact=(len(top) == len(set(top))
+                                   and len(funcs) == len(set(funcs))))
+
+
+def exploration_rung_site():
+    """AGA_053 + the rung's own application site. The section is titled
+    EXPLORATION in a COMMENT and the rung reaches no entry field; the
+    list's NAME is where it is applied. And X2's own relevance field
+    contradicts the rung's definition and the section header."""
+    src = _source()
+    defn = re.search(r"EXPLORATION (.*?)\n\nSampling", REG.__doc__,
+                     re.S).group(1)
+    defn = " ".join(defn.split())
+    hdr = re.search(r"# ADDENDUM 3 -- EXPLORATION TERRITORY.*?\n# ={10,}",
+                    src, re.S).group(0)
+    rows = []
+    for x in getattr(REG, "EXPLORATION", []):
+        rel = x.get("relevance", "")
+        rows.append(dict(xid=x.get("xid"), relevance=rel,
+                         says_unknown=rel.strip().upper().startswith("UNKNOWN"),
+                         says_direct="DIRECT" in rel.upper(),
+                         fields=sorted(x)))
+    return dict(rung_definition=defn,
+                definition_says_unknown="UNKNOWN" in defn,
+                definition_says_not_load_bearing="load-bearing" in defn,
+                header_says_unknown="UNKNOWN" in hdr,
+                header_says_not_load_bearing="Not load-bearing" in hdr,
+                entries=rows,
+                contradicting=[r["xid"] for r in rows if r["says_direct"]],
+                rung_on_any_entry_field=any(
+                    "EXPLORATION" in str(v) for x in getattr(REG, "EXPLORATION", [])
+                    for v in x.values()),
+                applied_by_the_list_name=hasattr(REG, "EXPLORATION"))
+
+
+def per_operator_term():
+    """AGA_054 -- successor to AGA_045. The per-operator term is now
+    DECLARED in the file and reaches no arithmetic: only a print reads
+    the list it lives in, and the gate's own window function reads the
+    four constants."""
+    src = _source()
+    tree = ast.parse(src)
+    readers = set()
+    for n in ast.walk(tree):
+        if isinstance(n, ast.FunctionDef):
+            for m in ast.walk(n):
+                if isinstance(m, ast.Name) and m.id == "SLEEP_QUALITY_FACTORS":
+                    readers.add(n.name)
+    win = [n for n in tree.body if isinstance(n, ast.FunctionDef)
+           and n.name == "g0_window_needed"][0]
+    win_src = ast.get_source_segment(src, win)
+    gate = [t for t in REG.GATE_MAP if t[0] == "G0"][0]
+    return dict(
+        factors=[f[0] for f in REG.SLEEP_QUALITY_FACTORS],
+        n_factors=len(REG.SLEEP_QUALITY_FACTORS),
+        every_factor_states_a_status=all(
+            isinstance(f[2], str) and f[2] for f in REG.SLEEP_QUALITY_FACTORS),
+        operator_in_gate_entry=bool(re.search(r"\boperator\b",
+                                              " ".join(gate), re.I)),
+        operator_in_notes=bool(re.search(r"\boperator\b",
+                                         " ".join(REG.G0_NOTES), re.I)),
+        operator_in_factors=bool(re.search(r"\boperator\b",
+                                           str(REG.SLEEP_QUALITY_FACTORS), re.I)),
+        readers=sorted(readers),
+        reaches_arithmetic=bool(readers - {"addendum2"}),
+        window_reads_rest_block_only=("SLEEP_QUALITY" not in win_src
+                                      and "REST_BLOCK" in win_src))
+
+
+def untagged_claim():
+    """AGA_055 -- the strongest statement in G0 note 1 carries no tag,
+    sitting between one marked OBSERVED and one marked DERIVED."""
+    rows = []
+    for i, n in enumerate(REG.G0_NOTES):
+        for sent in re.split(r"(?<=\.)\s+", n):
+            tags = re.findall(r"\[([A-Z_]+)\]", sent)
+            rows.append(dict(note=i, tags=tags, text=sent.strip()))
+    n1 = [r for r in rows if r["note"] == 0]
+    untagged = [r for r in n1 if not r["tags"]]
+    return dict(note1_sentences=len(n1),
+                note1_tags=[r["tags"] for r in n1],
+                untagged=[r["text"] for r in untagged],
+                sits_between_tagged=bool(len(n1) >= 3 and n1[0]["tags"]
+                                         and not n1[1]["tags"]
+                                         and n1[2]["tags"]),
+                claim_is_causal=any("not motion itself" in r["text"]
+                                    for r in untagged))
+
+
+def ceiling_split():
+    """AGA_056 -- the good-sleeper ceiling is a stated LIMIT in one
+    delivered document and a DATUM in the other, and neither carries both.
+
+    The word collides three ways and produced two false positives in this
+    check before it was separated (AGA_051):
+      "treat as ceiling"          the POISSON bound, a different quantity
+      "null in good sleepers"     a description of a study's SAMPLE
+      "room to improve / Omlin"   the interpretive LIMIT, the one that
+                                  confounds X1's own prediction
+    All three are counted apart and printed, and the conclusion is
+    computed from the two that matter rather than asserted."""
+    note = _note3()
+    src = _source()
+    x1 = [x for x in getattr(REG, "EXPLORATION", []) if x.get("xid") == "X1"]
+    x1 = x1[0] if x1 else {}
+
+    limit = re.compile(r"room to improve|Omlin|only show in|"
+                       r"baseline must be recorded", re.I)
+    sample = re.compile(r"good sleeper", re.I)
+    figure = re.compile(r"\b96%|baseline efficiency", re.I)
+
+    def read(text):
+        return dict(states_the_limit=bool(limit.search(text)),
+                    mentions_good_sleepers=bool(sample.search(text)),
+                    carries_the_figure=bool(figure.search(text)))
+
+    n, r = read(note), read(src)
+    return dict(
+        note=n, register=r,
+        poisson_ceiling_in_register=(
+            "Poisson overstates usable windows -- treat as ceiling" in src),
+        word_ceiling_in_register=src.count("ceiling"),
+        register_figure=(re.search(r"overnight null[^;]*",
+                                   str(x1.get("half_a", ""))).group(0)
+                         if "overnight null" in str(x1.get("half_a", ""))
+                         else None),
+        x1_scope_carries_the_limit=bool(limit.search(str(x1.get("scope", "")))),
+        note_has_both=(n["states_the_limit"] and n["carries_the_figure"]),
+        register_has_both=(r["states_the_limit"] and r["carries_the_figure"]),
+        neither_has_both=not (
+            (n["states_the_limit"] and n["carries_the_figure"])
+            or (r["states_the_limit"] and r["carries_the_figure"])))
+
+
+def x1_drift():
+    """AGA_057 -- one record, two delivered documents, different field
+    names and different content."""
+    note = _note3()
+    body = note.split("ADDENDUM 3")[-1]
+    nf = set(re.findall(r"\s{2,}(\w+)\s{2,}", body))
+    x1 = [x for x in getattr(REG, "EXPLORATION", []) if x.get("xid") == "X1"]
+    x1 = x1[0] if x1 else {}
+    note_fields = {}
+    for line in body.splitlines():
+        m = re.match(r"\s{2,}(\w+)\s{2,}(.+)", line)
+        if m:
+            note_fields[m.group(1)] = m.group(2).strip()
+    return dict(note_fields=sorted(nf), register_fields=sorted(x1),
+                only_in_note=sorted(nf - set(x1)),
+                only_in_register=sorted(set(x1) - nf),
+                half_a_note_chars=len(note_fields.get("half_a", "")),
+                half_a_register_chars=len(str(x1.get("half_a", ""))),
+                register_names_studies=bool(
+                    re.search(r"\b(19|20)\d\d\b", str(x1.get("half_a", "")))),
+                note_names_studies=bool(
+                    re.search(r"\b(19|20)\d\d\b", note_fields.get("half_a", ""))))
+
+
+def x2_disciplines():
+    """AGA_058 -- what holds in X2: a consent limit, and a prediction that
+    is this tree's observer-exclusion shape stated in the author's own
+    words."""
+    x2 = [x for x in getattr(REG, "EXPLORATION", []) if x.get("xid") == "X2"]
+    x2 = x2[0] if x2 else {}
+    return dict(
+        scope=x2.get("scope"),
+        scope_is_a_consent_limit=("choose to share" in str(x2.get("scope", ""))),
+        first_consent_limit_in_the_register=not any(
+            "consent" in str(v).lower() or "choose to share" in str(v).lower()
+            for s in REG.SOURCES.values() for v in s.values()),
+        prediction=x2.get("prediction"),
+        prediction_is_selection_on_the_outcome=(
+            "had trouble" in str(x2.get("prediction", ""))
+            and "got studied" in str(x2.get("prediction", ""))),
+        half_a_frame=("settler" in str(x2.get("half_a", ""))
+                      and "DISRUPTION" in str(x2.get("half_a", ""))),
+        join=x2.get("join"))
+
+
+def falsifier_wording():
+    """AGA_059 -- a defect in this audit's own claim table. AGA_020's
+    falsifier reads *a source carrying DERIVED*. The v7 revision put
+    `[DERIVED]` inside a SOURCE's `holds` list, so the wording fires -- for
+    the SECOND time, by the same mechanism, in a claim whose own body
+    records the first firing and then restates the ambiguous wording
+    verbatim rather than sharpening it. What the claim means is a status
+    SLOT; what it asks for is a token, and a token is cheap."""
+    tag = re.compile(r"\[([A-Z_]{4,})[^\]]*\]")
+    slot, in_holds = set(), {}
+    for sid, s in REG.SOURCES.items():
+        slot |= set(re.findall(r"\b[A-Z_]{4,}\b", s["status"]))
+        hits = set()
+        for h in s["holds"]:
+            hits |= set(tag.findall(h))
+        if "DERIVED" in hits:
+            in_holds[sid] = [h for h in s["holds"] if "[DERIVED]" in h]
+    def block(text):
+        if "**AGA_020" not in text:
+            return "", ""
+        b = text.split("**AGA_020")[1].split("**AGA_021")[0]
+        f = b.rsplit("*Falsifier:*", 1)[-1] if "*Falsifier:*" in b else ""
+        return b, f
+
+    now, _ = _claim_table()
+    body, fals = block(now)
+    before, fals_before = block(_claim_table_at_head())
+    def names_the_field(t):
+        return "`status` field" in t
+    return dict(
+        a_source_carries_derived_as_a_tag=sorted(in_holds),
+        derived_in_any_status_slot="DERIVED" in slot,
+        entries=[h for v in in_holds.values() for h in v],
+        # The fault is in HISTORY, so it is read out of git rather than
+        # asserted: the falsifier AS IT STOOD when v7 arrived, against the
+        # falsifier now. The repair turns the first three False.
+        claim_notes_the_ambiguity=("what arrived was a new kind of entry"
+                                   in before),
+        falsifier_before=" ".join(fals_before.split())[:120],
+        falsifier_named_the_token_only=(bool(fals_before)
+                                        and not names_the_field(fals_before)),
+        falsifier_now=" ".join(fals.split())[:160],
+        falsifier_names_the_field_now=names_the_field(fals),
+        repaired=(bool(fals_before) and not names_the_field(fals_before)
+                  and names_the_field(fals)),
+        fires_on_the_wording=bool(in_holds),
+        fires_on_the_meaning="DERIVED" in slot)
+
+
+def _claim_table():
+    ct = os.path.join(HERE, "CLAIM_TABLE.md")
+    if not os.path.exists(ct):
+        return "", ct
+    with open(ct) as fh:
+        return fh.read(), ct
+
+
+def _claim_table_at_head():
+    """The claim table as committed. A claim about a wording that has since
+    been repaired is checkable only against history; reading it out of git
+    makes it a measurement rather than a recollection. Empty string if git
+    is unreachable -- then the check reports the repair and not the fault."""
+    import subprocess
+    try:
+        rel = os.path.relpath(os.path.join(HERE, "CLAIM_TABLE.md"),
+                              os.path.join(HERE, ".."))
+        out = subprocess.run(["git", "show", "HEAD:" + rel],
+                             cwd=os.path.join(HERE, ".."),
+                             capture_output=True, text=True, timeout=20)
+        return out.stdout if out.returncode == 0 else ""
+    except Exception:
+        return ""
+
+
+def exploration_tag_site():
+    """AGA_061 -- EXPLORATION is a SIXTH inline-tag site and the vocabulary
+    check does not scan it. One field carries two rungs."""
+    tag = re.compile(r"\[([A-Z_]{4,})[^\]]*\]")
+    per_field, multi = {}, []
+    for x in getattr(REG, "EXPLORATION", []):
+        for k, v in x.items():
+            t = tag.findall(str(v))
+            if t:
+                per_field["%s.%s" % (x["xid"], k)] = t
+                if len(set(t)) > 1:
+                    multi.append("%s.%s" % (x["xid"], k))
+    scanned = set()
+    for obj in ("ADDENDUM_QUESTIONS", "CONTROL_LOOPS", "TRANSFER_NOTE"):
+        scanned |= set(tag.findall(str(getattr(REG, obj, ""))))
+    here = set(t for v in per_field.values() for t in v)
+    return dict(fields_carrying_a_tag=sorted(per_field),
+                tags=per_field,
+                two_rungs_in_one_field=multi,
+                tokens_here=sorted(here),
+                site_scanned=("EXPLORATION" in _scanned_objects()),
+                scanned_objects=_scanned_objects(),
+                # every token here also occurs at a site that IS scanned,
+                # so the omission changes no reported number today -- which
+                # is what makes it silent. A rung appearing only here would
+                # read as unused anywhere.
+                tokens_new_to_the_file=sorted(
+                    here - set(status_vocabulary()["in_addendum"])
+                    - set(status_vocabulary()["in_term_notes"])),
+                omission_is_silent_today=not (
+                    here - set(status_vocabulary()["in_addendum"])
+                    - set(status_vocabulary()["in_term_notes"])),
+                n_sites_reported=status_vocabulary()["n_sites"])
+
+
+def _scanned_objects():
+    """Which register objects `status_vocabulary` walks for inline tags --
+    read off its own source, so a widening there closes this by itself."""
+    src = inspect.getsource(status_vocabulary)
+    for n in ast.walk(ast.parse(src.lstrip())):
+        if isinstance(n, ast.Tuple) and all(
+                isinstance(e, ast.Constant) and isinstance(e.value, str)
+                for e in n.elts) and len(n.elts) > 1:
+            names = [e.value for e in n.elts]
+            if any(nm.isupper() for nm in names):
+                return names
+    return []
+
+
+def exploration_field_sets():
+    """AGA_062 -- two entries in one list, different field sets, no schema.
+    The renderer guards with `if k in x`, so an absent field prints exactly
+    like a field nobody thought to fill."""
+    xs = getattr(REG, "EXPLORATION", [])
+    sets = {x["xid"]: set(x) for x in xs}
+    union = set().union(*sets.values()) if sets else set()
+    src = _source()
+    a3 = [n for n in ast.parse(src).body
+          if isinstance(n, ast.FunctionDef) and n.name == "addendum3"]
+    guarded = bool(a3) and "if k in x" in ast.get_source_segment(src, a3[0])
+    # the substantive overlap: X2's new field names X1's whole subject
+    x1 = next((x for x in xs if x["xid"] == "X1"), {})
+    x2 = next((x for x in xs if x["xid"] == "X2"), {})
+    def blob(x):
+        return " ".join(str(v) for v in x.values()).lower()
+    return dict(
+        field_sets={k: sorted(v) for k, v in sets.items()},
+        only_in_one=sorted(set().union(
+            *[union - v for v in sets.values()]) if sets else []),
+        renderer_is_guarded=guarded,
+        x2_channels_names_motion="motion" in str(x2.get("channels", "")).lower(),
+        x1_is_about_motion=blob(x1).count("motion") >= 3,
+        x1_has_a_channels_field="channels" in x1,
+        x2_names_x1=bool(re.search(r"\bX1\b", blob(x2).upper())),
+        x1_names_x2=bool(re.search(r"\bX2\b", blob(x1).upper())))
+
+
+def consent_record():
+    """AGA_063 -- X2's anchor records what was NOT asked for. The scope
+    field declares a consent limit; the anchor records it being honoured,
+    which is a different statement and has no precedent here."""
+    xs = getattr(REG, "EXPLORATION", [])
+    x2 = next((x for x in xs if x["xid"] == "X2"), {})
+    anchor = str(x2.get("anchor", ""))
+    src = _source()
+    return dict(
+        anchor=anchor,
+        names_the_channels=bool(re.search(r"SCENT and BODY MOTION", anchor)),
+        records_categories_only=("categories only" in anchor),
+        records_specifics_withheld=("specifics not shared" in anchor),
+        records_the_ask_not_made=("none requested" in anchor),
+        occurrences_in_the_file=dict(
+            (pat, src.lower().count(pat))
+            for pat in ("none requested", "not shared", "choose to share")),
+        scope_declares_the_limit=("choose to share" in str(x2.get("scope", ""))),
+        first_in_the_register=src.lower().count("none requested") == 1)
+
+
+def imported_skill_arm():
+    """AGA_064 -- QE's third arm, against the register's own N_OF_1 rule.
+    The rule: an N=1 record BOUNDS WHAT IS POSSIBLE and does not estimate a
+    rate. The arm states a possibility, carries a tag, and estimates
+    nothing -- so it is inside the rule the register wrote for itself.
+
+    The cost is in the slot, not the claim: S10 carries the arm and QE's
+    source list is empty, so the arm reaches the prose and not the map."""
+    qe = [q for q in REG.QUESTIONS if q[0] == "QE"][0]
+    arm = qe[4].split("Third arm:", 1)[1] if "Third arm:" in qe[4] else ""
+    rule = [r for r in REG.RULES if "N_OF_1" in r]
+    slot, prose = [], []
+    for row in list(REG.QUESTIONS) + list(getattr(REG, "ADDENDUM_QUESTIONS", [])):
+        qid, q, srcs, st, nxt = row
+        if "S10" in srcs:
+            slot.append(qid)
+        if re.search(r"\bS10\b", " ".join([q, st, nxt])):
+            prose.append(qid)
+    return dict(
+        arm_present=bool(arm),
+        arm_states_a_rate=bool(re.search(r"\d+\s*%|\brate\b|\bof drivers\b", arm)),
+        arm_states_a_possibility=bool(re.search(r"\bcan be\b|\bmay\b", arm)),
+        arm_tags=re.findall(r"\[([A-Z_]+)\]", arm),
+        rule_present=bool(rule),
+        obeys_the_rule=(bool(arm) and not
+                        re.search(r"\d+\s*%|\brate\b|\bof drivers\b", arm)),
+        s10_in_a_source_slot=slot,
+        s10_in_free_text=prose,
+        leans_without_recording=sorted(set(prose) - set(slot)),
+        new_holds=[h for h in REG.SOURCES["S10"]["holds"]
+                   if "IMPORTED" in h or "TRAINEE" in h])
+
+
 def note3_status_rung():
-    """AGA_044 -- the note declares a status rung the register's scale
-    does not carry. Two delivered documents, one scale, and the scale
-    lives in only one of them."""
+    """AGA_044 -- the note declared a status rung the register's scale did
+    not carry. Two delivered documents, one scale, and the scale lived in
+    only one of them.
+
+    The check reports the STATE rather than asserting the old one: the
+    next revision put EXPLORATION into the docstring scale, so
+    `in_register_scale` goes False -> True and the claim closes by
+    arrival. What it closes on is discoverability -- a reader of the
+    register alone can now find the rung. `carried_by_an_entry` is the
+    second half and is still False: the rung is applied by the section
+    header the entries sit under, and no entry field states it."""
     note = _note3()
     declared_here = re.findall(r"^\s{2,}([A-Z_]{4,})\s{2,}", note, re.M)
     scale = _declared("Status scale")
@@ -438,6 +893,7 @@ def note3_status_rung():
     return dict(note_declares=sorted(set(declared_here) & {"EXPLORATION"}),
                 register_scale=scale,
                 in_register_scale="EXPLORATION" in scale,
+                carried_by_an_entry=_rung_on_an_entry("EXPLORATION"),
                 note_says=re.search(r"EXPLORATION\s+(.+)", note).group(1).strip(),
                 x1_relevance=x1.get("relevance"),
                 x1_fields=sorted(x1))
@@ -445,17 +901,27 @@ def note3_status_rung():
 
 def note3_gate_axis():
     """AGA_045 -- motion_sleep_history makes G0 a per-OPERATOR gate. The
-    register's G0 entry and its notes name route and season."""
+    register's G0 entry names route and season.
+
+    The two sites are read APART. AGA_045 is a claim about the GATE's own
+    axes, so `register_names_operator` reads the gate entry and nothing
+    else; the revision then put the operator into the NOTES beside it,
+    which is a different statement and is reported as its own field. A
+    blob over both would have read the arrival of a note as a change to
+    the gate. Where the term goes from there is AGA_054."""
     note = _note3()
     g0 = [t for t in REG.GATE_MAP if t[0] == "G0"][0]
-    blob = " ".join(g0) + " " + " ".join(REG.G0_NOTES)
+    entry = " ".join(g0)
+    blob = entry + " " + " ".join(REG.G0_NOTES)
     return dict(
         note_claims_per_operator=("PASS for one operator" in note
                                   and "FAIL" in note),
         factor="motion_sleep_history" in note,
         register_names_route="route" in blob.lower(),
         register_names_season="season" in blob.lower(),
-        register_names_operator=bool(re.search(r"\boperator\b", blob, re.I)),
+        register_names_operator=bool(re.search(r"\boperator\b", entry, re.I)),
+        operator_in_notes=bool(re.search(r"\boperator\b",
+                                         " ".join(REG.G0_NOTES), re.I)),
         rest_block_is_a_constant=isinstance(REG.REST_BLOCK["cycle_min"], int))
 
 
@@ -581,7 +1047,7 @@ def rest_block_provenance():
     REST_BLOCK (the WINDOW, the gate's numerator) carries it in
     comments, which are not in the object at all: a consumer importing
     the register gets four bare numbers."""
-    src = open(os.path.join(HERE, "driver_hours_evidence_register.py")).read()
+    src = _source()
     block = re.search(r"REST_BLOCK = dict\((.*?)\n\)", src, re.S).group(1)
     rows = {}
     for line in block.splitlines():
@@ -806,6 +1272,18 @@ def findings():
         "AGA_048_note3_halves": note3_halves(),
         "AGA_049_note3_crossrefs": note3_crossrefs(),
         "AGA_050_note3_fencing": note3_fencing(),
+        "AGA_052_delivered_tail": delivered_tail(),
+        "AGA_053_exploration_rung_site": exploration_rung_site(),
+        "AGA_054_per_operator_term": per_operator_term(),
+        "AGA_055_untagged_claim": untagged_claim(),
+        "AGA_056_ceiling_split": ceiling_split(),
+        "AGA_057_x1_drift": x1_drift(),
+        "AGA_058_x2_disciplines": x2_disciplines(),
+        "AGA_059_falsifier_wording": falsifier_wording(),
+        "AGA_061_exploration_tag_site": exploration_tag_site(),
+        "AGA_062_exploration_field_sets": exploration_field_sets(),
+        "AGA_063_consent_record": consent_record(),
+        "AGA_064_imported_skill_arm": imported_skill_arm(),
         "AGA_040_g0_arithmetic": g0_arithmetic(),
         "AGA_041_clustering_direction": clustering_direction(),
         "AGA_042_probability_domain": probability_domain(),
@@ -919,6 +1397,157 @@ def render(f):
         p("    changed       : %s" % (", ".join(rv["changed"]) or "none"))
         p("    added         : %s" % (", ".join(rv["added"]) or "none"))
     p("")
+
+    dt = f["AGA_052_delivered_tail"]
+    p("AGA_052  the delivered file carries a duplicated tail")
+    p("    __main__ blocks: %d   running it prints the register %d times "
+      "and\n    the addendum-3 header %d times"
+      % (dt["main_blocks"], dt["register_header_printed"],
+         dt["addendum3_header_printed"]))
+    p("    top-level objects %d, duplicated %d; functions duplicated %d"
+      % (dt["top_level_objects"], dt["duplicate_objects"],
+         dt["duplicate_functions"]))
+    p("    the importable surface is intact, so this audit is unaffected: "
+      "%s\n" % dt["importable_surface_intact"])
+
+    er = f["AGA_053_exploration_rung_site"]
+    p("AGA_053  the EXPLORATION rung against the entries filed under it")
+    p("    rung definition: %s" % er["rung_definition"])
+    p("    section header repeats it (UNKNOWN %s, not load-bearing %s)"
+      % (er["header_says_unknown"], er["header_says_not_load_bearing"]))
+    for e in er["entries"]:
+        p("      %-3s relevance %-8s %s"
+          % (e["xid"], "UNKNOWN" if e["says_unknown"]
+             else ("DIRECT" if e["says_direct"] else "other"),
+             e["relevance"][:58]))
+    p("    entries whose own field states the opposite of the rung: %s"
+      % (", ".join(er["contradicting"]) or "none"))
+    p("    the rung on any entry field: %s; applied by the list's name: %s\n"
+      % (er["rung_on_any_entry_field"], er["applied_by_the_list_name"]))
+
+    po = f["AGA_054_per_operator_term"]
+    p("AGA_054  the per-operator term is declared and reaches no arithmetic")
+    p("    %d sleep-quality factors, each stating a status: %s"
+      % (po["n_factors"], po["every_factor_states_a_status"]))
+    p("    'operator' in the G0 gate entry %s, in G0_NOTES %s, in the "
+      "factors %s" % (po["operator_in_gate_entry"], po["operator_in_notes"],
+                      po["operator_in_factors"]))
+    p("    functions reading the factor list: %s -> reaches arithmetic: %s"
+      % (", ".join(po["readers"]), po["reaches_arithmetic"]))
+    p("    the window function reads the four constants only: %s\n"
+      % po["window_reads_rest_block_only"])
+
+    uc = f["AGA_055_untagged_claim"]
+    p("AGA_055  G0 note 1: %d sentences, tags %s"
+      % (uc["note1_sentences"],
+         " / ".join(",".join(t) or "NONE" for t in uc["note1_tags"])))
+    for t in uc["untagged"]:
+        p("    untagged: %s" % t)
+    p("    it sits between a tagged pair: %s; it is a causal statement: %s\n"
+      % (uc["sits_between_tagged"], uc["claim_is_causal"]))
+
+    cs = f["AGA_056_ceiling_split"]
+    p("AGA_056  the good-sleeper ceiling: a limit in one document, a datum "
+      "in the other")
+    p("    %-22s %-12s %-16s %s" % ("", "states limit", "names the sample",
+                                    "carries 96%"))
+    for name, d in (("ADDENDUM_3.md", cs["note"]), ("the register", cs["register"])):
+        p("    %-22s %-12s %-16s %s"
+          % (name, d["states_the_limit"], d["mentions_good_sleepers"],
+             d["carries_the_figure"]))
+    p("    register figure: %s" % cs["register_figure"])
+    p("    the word 'ceiling' in the register: %d, and it is the Poisson "
+      "sense: %s" % (cs["word_ceiling_in_register"],
+                     cs["poisson_ceiling_in_register"]))
+    p("    X1's scope field carries the limit: %s"
+      % cs["x1_scope_carries_the_limit"])
+    p("    computed -- neither document carries both halves: %s\n"
+      % cs["neither_has_both"])
+
+    xd = f["AGA_057_x1_drift"]
+    p("AGA_057  one record, two delivered documents")
+    p("    only in the note    : %s" % ", ".join(xd["only_in_note"]))
+    p("    only in the register: %s" % ", ".join(xd["only_in_register"]))
+    p("    half_a: %d chars in the note, %d in the register; the register "
+      "names\n    dated studies %s, the note %s\n"
+      % (xd["half_a_note_chars"], xd["half_a_register_chars"],
+         xd["register_names_studies"], xd["note_names_studies"]))
+
+    xs = f["AGA_058_x2_disciplines"]
+    p("AGA_058  what holds in X2")
+    p("    scope is a consent limit: %s, and the first in the register: %s"
+      % (xs["scope_is_a_consent_limit"],
+         xs["first_consent_limit_in_the_register"]))
+    p("      %s" % xs["scope"])
+    p("    the prediction names selection on the outcome: %s"
+      % xs["prediction_is_selection_on_the_outcome"])
+    p("    half_a declares its own sampling frame: %s\n" % xs["half_a_frame"])
+
+    fw = f["AGA_059_falsifier_wording"]
+    p("AGA_059  a fault in this audit's own claim table")
+    p("    AGA_020's falsifier: 'a source carrying DERIVED'")
+    p("    a source now carries it as an inline tag: %s"
+      % (", ".join(fw["a_source_carries_derived_as_a_tag"]) or "none"))
+    p("      %s" % (fw["entries"][0] if fw["entries"] else "-"))
+    p("    in any status SLOT, the reading the claim intends: %s"
+      % fw["derived_in_any_status_slot"])
+    p("    the committed claim recorded the first firing (%s) and named the"
+      % fw["claim_notes_the_ambiguity"])
+    p("    token, not the field (%s):" % fw["falsifier_named_the_token_only"])
+    p("      was: %s" % (fw["falsifier_before"] or "history unreachable"))
+    p("      now: %s" % fw["falsifier_now"])
+    p("    repaired here rather than defended: %s\n" % fw["repaired"])
+
+    ts = f["AGA_061_exploration_tag_site"]
+    p("AGA_061  EXPLORATION is a sixth inline-tag site, unscanned")
+    p("    scanned for tags: %s" % ", ".join(ts["scanned_objects"]))
+    p("    tags here:")
+    for k in ts["fields_carrying_a_tag"]:
+        p("      %-14s %s" % (k, ", ".join(ts["tags"][k])))
+    p("    two rungs in one field: %s"
+      % (", ".join(ts["two_rungs_in_one_field"]) or "none"))
+    p("    sites reported: %d; this one counted: %s"
+      % (ts["n_sites_reported"], ts["site_scanned"]))
+    p("    tokens new to the file: %s -> the omission is silent today: %s\n"
+      % (ts["tokens_new_to_the_file"] or "none",
+         ts["omission_is_silent_today"]))
+
+    fs = f["AGA_062_exploration_field_sets"]
+    p("AGA_062  two entries, one list, different field sets, no schema")
+    for k in sorted(fs["field_sets"]):
+        p("    %s  %d fields" % (k, len(fs["field_sets"][k])))
+    p("    present on one entry only: %s" % ", ".join(fs["only_in_one"]))
+    p("    the renderer guards with `if k in x`: %s -- so an absent field"
+      % fs["renderer_is_guarded"])
+    p("    and a field nobody filled print alike")
+    p("    X2's new field names motion %s; X1 is about motion %s; X1 has a"
+      % (fs["x2_channels_names_motion"], fs["x1_is_about_motion"]))
+    p("    channels field %s.  X2 names X1 %s, X1 names X2 %s\n"
+      % (fs["x1_has_a_channels_field"], fs["x2_names_x1"], fs["x1_names_x2"]))
+
+    cr = f["AGA_063_consent_record"]
+    p("AGA_063  the anchor records what was not asked for")
+    p("    channels named %s | categories only %s | specifics withheld %s"
+      % (cr["names_the_channels"], cr["records_categories_only"],
+         cr["records_specifics_withheld"]))
+    p("    the ask not made, recorded: %s" % cr["records_the_ask_not_made"])
+    p("    scope declares the limit %s; the anchor records it honoured"
+      % cr["scope_declares_the_limit"])
+    p("    occurrences in the whole file: %s\n"
+      % ", ".join("%s x%d" % kv
+                  for kv in cr["occurrences_in_the_file"].items()))
+
+    ia = f["AGA_064_imported_skill_arm"]
+    p("AGA_064  QE's third arm against the register's own N_OF_1 rule")
+    p("    the arm states a rate %s, a possibility %s, tagged %s"
+      % (ia["arm_states_a_rate"], ia["arm_states_a_possibility"],
+         ", ".join(ia["arm_tags"]) or "-"))
+    p("    -> inside the rule the register wrote for itself: %s"
+      % ia["obeys_the_rule"])
+    p("    S10 in a source slot: %s" % ", ".join(ia["s10_in_a_source_slot"]))
+    p("    S10 in free text    : %s" % ", ".join(ia["s10_in_free_text"]))
+    p("    leans on it and records it nowhere: %s\n"
+      % ", ".join(ia["leans_without_recording"]))
 
     n3 = f["AGA_044_note3_status_rung"]
     p("AGA_044  ADDENDUM_3.md declares a rung the register's scale lacks")
