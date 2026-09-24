@@ -1,4 +1,5 @@
 <!-- landed verbatim 2026-09-24 from the DISPATCH ESP-1 message; nothing below this line is edited here -->
+<!-- amended 2026-09-24 by the dispatch author: sec. 9 line 'aeb-false-positive-measurand  override scored as error' replaced (the name was from working notes, not a repo artifact) -->
 
 # DISPATCH ESP-1 — stability trigger outside its validation envelope
 
@@ -213,7 +214,9 @@ WO 2002/020318     lateral accel compensation for inclined plane
 driver_hours_evidence_register.py  TRUST_PROTOCOL.machine_side_rule
   (this case is its worked instance: the operator's throttle-then-brake
    correction logs as driver-fighting-system)
-aeb-false-positive-measurand       override scored as error
+AEB takeover studies   a correct driver override of a false
+                       machine intervention is logged as
+                       driver error (same defect class)
 ```
 
 ```

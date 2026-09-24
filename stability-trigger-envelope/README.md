@@ -319,9 +319,10 @@ TAF labor_thermodynamics/driver_hours_evidence_register.py
     the throttle-then-brake correction logs as driver-fighting-system
 TAF in_progress/serpentine_grade_esp_notes.md
     the operator notes this work order was cut from
-aeb-false-positive-measurand -- NAMED, NOT FOUND in any attached repo.
-    Nearest in-tree match: TAF docs/case-studies/class8_aeb_field_advisory.md.
-    Not substituted; pointer left open.
+AEB takeover studies
+    a correct driver override of a false machine intervention is logged
+    as driver error (same defect class). Replaces a working-notes name
+    that was never a repo artifact.
 ```
 
 ---
@@ -343,7 +344,6 @@ bank / superelevation             UNMEASURED    no channel; Fault C's bank term 
 thresholds                        PLACEHOLDER   none measured
 sources (sec. 8)                  NOT_FETCHED   carried from the work order, not re-read
 Solomon 1964                      NOT_SEARCHED  not load-bearing
-aeb-false-positive-measurand      NOT_FOUND     named in the work order, absent from attached repos
 ```
 
 Files: `WORK_ORDER.md` (verbatim), `README.md`, `CLAIM_TABLE.md`,

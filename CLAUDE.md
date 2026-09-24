@@ -13647,8 +13647,9 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   total key (`STE_008`). Thresholds are an append-only PLACEHOLDER log pinned
   by prefix digest. F1-F5 fire and are REGRESSION, not validation. T1-T6
   written as design text; real run NOT_RUN, T3/T6 NOT_BUILT, T4/T5
-  UNMEASURED, sources NOT_FETCHED, `aeb-false-positive-measurand` named and
-  NOT_FOUND. Render screens clean through `sheet-structure-scan/no_severity`.
+  UNMEASURED, sources NOT_FETCHED; the AEB cross-link is an inline
+  definition (override of a false intervention logged as driver error).
+  Render screens clean through `sheet-structure-scan/no_severity`.
   Ten `STE_*` claims; test 47/47. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
