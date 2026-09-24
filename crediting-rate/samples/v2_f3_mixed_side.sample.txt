@@ -1,0 +1,16 @@
+======================================================================
+CREDITING RATE -- WORK ORDER L, REVISED
+======================================================================
+  the three revisions are model-authored and were sent
+  un-adjudicated; see the module docstring
+  prediction sha256[:16]  ec5e3319011920f5
+  method layer            present
+  item list model_authored False
+  items                   12
+
+RETURN  FRAME_ASYMMETRIC
+  bins are drawn from more than one side.  An asymmetric frame produces the predicted gap by construction.
+  sides        {'language': ['alpha', 'beta', 'epsilon'], 'technique': ['delta', 'eta', 'gamma', 'iota', 'kappa', 'lambda', 'mu', 'theta', 'zeta']}
+  unenumerable none
+
+======================================================================

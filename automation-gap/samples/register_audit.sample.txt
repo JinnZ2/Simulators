@@ -1,0 +1,254 @@
+REGISTER AUDIT -- driver_hours_evidence_register.py
+Imported, not parsed. Nothing below reads a primary source.
+
+AGA_020  status scale: 7 declared, 3 in SOURCES, 5 in QUESTIONS
+    declared        : OBSERVED, SECONDARY, DERIVED, PROPOSED, UNMEASURED, UNREAD, EXPLORATION
+    used in sources : OBSERVED, SECONDARY, UNREAD
+    used nowhere    : EXPLORATION
+    undeclared      : PARTIAL, SUPPORTED, UNRESOLVED
+
+AGA_021  citation strings sharing name tokens
+    S1 & S3 share Braver, Preusser, Ulmer   subset: True   same frame: False
+    nominal sources vs n_eff, per question (n_eff imported):
+      QA  n_nominal 4 -> n_eff 3   collapsed: S1, S3
+      QB  n_nominal 2 -> n_eff 2   collapsed: none
+      QC  n_nominal 2 -> n_eff 2   collapsed: none
+      QF  n_nominal 1 -> n_eff 1   collapsed: none
+      QH  n_nominal 2 -> n_eff 2   collapsed: none
+      QI  n_nominal 3 -> n_eff 3   collapsed: none
+      QJ  n_nominal 3 -> n_eff 3   collapsed: none
+
+AGA_022  frame flags: rule is 'every source carries one'
+    declared: ON_ROAD, ADMISSION, VENDOR, N_OF_1, ARCHIVE, TERM_DRIFT
+    sources carrying no flag: S6
+    an UNKNOWN member exists: False
+
+AGA_023  QE states: within-driver trajectories (same person over years); every source here is ON_ROAD cross-section. Third arm: IMPORTED skill -- CDL tenure counts months licensed, not state-regulation skill brought from elsewhere (S10). A novice by tenure can be adapted by practice -> tenure is a proxy, and the screen measures the proxy [DERIVED]
+    as written    : 8 of 12 sources carry ON_ROAD
+    not a sample  : S9, S10, Q1
+    over samples  : 8 of 9
+    what stops it being all of them: S6
+
+AGA_024  ON_ROAD is defined as: interviewed while working -> excludes drivers already out
+    S1  inspection stations, truck stops; CT FL OK OR; fits definition: yes
+    S2  rest areas + roadside inspections, random sele fits definition: yes
+    S11 carrier records                                fits definition: NO
+    S3  drivers at weigh stations WY + TN; dispatchers fits definition: yes
+    S4  national survey, pre/post HOS rule change      fits definition: yes
+    S5  carrier records (crash, moving violation)      fits definition: NO
+    S7  ?                                              fits definition: where UNKNOWN
+    S8  truck stops                                    fits definition: yes
+    carries the flag, does not fit the definition: S11, S5
+
+AGA_025  holds entries: 28 findings, 10 reading-state notes, 38 total
+    sources whose holds are ALL reading-state: S7, S8, Q1
+
+AGA_033  a source relayed through another source in the register
+    S11  relayed through S2 (named: McCartt); the author-token check sees it: False
+
+AGA_034  TERM_DRIFT flag against the sources the note itself names
+    notes: 1   flagged: S1, S2
+    named in note  : S1, S2, S7, S8
+    named, unflagged: S7, S8
+    QI's own source list: S1, S2, S10
+
+AGA_035  the closing number counts one token
+    counted UNMEASURED : QD, QE, QF, QG, QH  -> headline 5 of 10
+    open, not counted  : QI (PARTIAL), QJ (UNRESOLVED)
+    outside the list   : QK (UNMEASURED)  -> 11 questions exist, 10 are counted
+    answered           : QA, QB, QC  -> not answered 8 of 11
+
+AGA_036  revision against 9b638a8: OK
+    +134 / -5 lines
+    byte-identical: ADDENDUM_QUESTIONS, BEHAVIOUR_RECORD_SCHEMA, CONTINUED_WORK, CONTROL_LOOPS, EVENT_CLASSES, GATE_MAP, REST_BLOCK, RULES, TERM_NOTES, TRANSFER_NOTE
+    changed       : G0_NOTES, QUESTIONS, SOURCES
+    added         : EXPLORATION, SLEEP_QUALITY_FACTORS
+
+AGA_052  the delivered file carries a duplicated tail
+    __main__ blocks: 1   running it prints the register 1 times and
+    the addendum-3 header 1 times
+    top-level objects 15, duplicated 0; functions duplicated 0
+    the importable surface is intact, so this audit is unaffected: True
+
+AGA_053  the EXPLORATION rung against the entries filed under it
+    rung definition: real gap, relevance to the question UNKNOWN; kept, not load-bearing
+    section header repeats it (UNKNOWN True, not load-bearing True)
+      X1  relevance UNKNOWN  UNKNOWN -- may bear on G0 per-operator variance (motion_sl
+      X2  relevance DIRECT   DIRECT for night drivers sleeping by day and for G0 day-re
+    entries whose own field states the opposite of the rung: X2
+    the rung on any entry field: False; applied by the list's name: True
+
+AGA_054  the per-operator term is declared and reaches no arithmetic
+    4 sleep-quality factors, each stating a status: True
+    'operator' in the G0 gate entry False, in G0_NOTES True, in the factors True
+    functions reading the factor list: addendum2 -> reaches arithmetic: False
+    the window function reads the four constants only: True
+
+AGA_055  G0 note 1: 3 sentences, tags OBSERVED / NONE / DERIVED
+    untagged: So the variable is trust + driving consistency, not motion itself.
+    it sits between a tagged pair: True; it is a causal statement: True
+
+AGA_056  the good-sleeper ceiling: a limit in one document, a datum in the other
+                           states limit names the sample carries 96%
+    ADDENDUM_3.md          True         True             False
+    the register           False        True             True
+    register figure: overnight null in good sleepers (18 young males, 96% baseline efficiency)
+    the word 'ceiling' in the register: 1, and it is the Poisson sense: True
+    X1's scope field carries the limit: False
+    computed -- neither document carries both halves: True
+
+AGA_057  one record, two delivered documents
+    only in the note    : probe
+    only in the register: cheapest_probe, xid
+    half_a: 49 chars in the note, 301 in the register; the register names
+    dated studies True, the note False
+
+AGA_058  what holds in X2
+    scope is a consent limit: True, and the first in the register: True
+      practice knowledge may not be public by choice; record only what holders choose to share
+    the prediction names selection on the outcome: True
+    half_a declares its own sampling frame: True
+
+AGA_059  a fault in this audit's own claim table
+    AGA_020's falsifier: 'a source carrying DERIVED'
+    a source now carries it as an inline tag: S10
+      -> novice by CDL tenure, not novice in state regulation: skill IMPORTED from outside driving  [DERIVED]
+    in any status SLOT, the reading the claim intends: False
+    the committed claim recorded the first firing (True) and named the
+    token, not the field (True):
+      was: a second declared scale for questions, or a source carrying `DERIVED`.
+           (resolved by content at a5d84e3, never at HEAD -- AGA_066)
+      now: a second declared scale for questions, or a source whose **`status` field** carries `DERIVED` -- the token alone is not enough, and asking for the token is what
+    repaired here rather than defended: True
+
+AGA_061  EXPLORATION is a sixth inline-tag site, unscanned
+    scanned for tags: ADDENDUM_QUESTIONS, CONTROL_LOOPS, TRANSFER_NOTE
+    tags here:
+      X1.anchor      OBSERVED
+      X2.anchor      OBSERVED
+      X2.channels    DERIVED, PROPOSED
+    two rungs in one field: X2.channels
+    sites reported: 5; this one counted: False
+    tokens new to the file: none -> the omission is silent today: True
+
+AGA_062  two entries, one list, different field sets, no schema
+    X1  10 fields
+    X2  11 fields
+    present on one entry only: channels
+    the renderer guards with `if k in x`: True -- so an absent field
+    and a field nobody filled print alike
+    X2's new field names motion True; X1 is about motion True; X1 has a
+    channels field False.  X2 names X1 True, X1 names X2 False
+
+AGA_063  the anchor records what was not asked for
+    channels named True | categories only True | specifics withheld True
+    the ask not made, recorded: True
+    scope declares the limit True; the anchor records it honoured
+    occurrences in the whole file: none requested x1, not shared x1, choose to share x1
+
+AGA_064  QE's third arm against the register's own N_OF_1 rule
+    the arm states a rate False, a possibility True, tagged DERIVED
+    -> inside the rule the register wrote for itself: True
+    S10 in a source slot: QA, QF, QH, QI, QJ, QK
+    S10 in free text    : QE, QK
+    leans on it and records it nowhere: QE
+
+AGA_044  ADDENDUM_3.md declares a rung the register's scale lacks
+    note declares : EXPLORATION -- real gap, relevance UNKNOWN; kept, not load-bearing
+    in the register's six-rung scale: True
+    X1 carries 9 fields; relevance: UNKNOWN — may touch G0's motion_sleep_history, may not
+
+AGA_045  the note makes G0 a per-OPERATOR gate
+    note states one route, two operators, two outcomes: True
+    the register's G0 entry and notes name route True, season True, operator False
+    REST_BLOCK holds a constant where the note treats it as a variable: True
+
+AGA_046  'a blanket rule ... forfeits the capacity of everyone above it', as a number
+    fleet rule = the longest window = 125 min, at rate 0.330/h
+      nap_min/low       60 min  own 0.7189  under the rule 0.5028  gives up 0.2161 (30.1% of own)
+      nap_min/high      75 min  own 0.6620  under the rule 0.5028  gives up 0.1592 (24.0% of own)
+      cycle_min/low    110 min  own 0.5461  under the rule 0.5028  gives up 0.0432 (7.9% of own)
+      cycle_min/high   125 min  own 0.5028  under the rule 0.5028  gives up 0.0000 (0.0% of own)
+    largest: 30.1% of that operator's own capacity
+    the gap peaks at rate 0.6775/h (0.2641) and the placeholder rate sits at 82% of it
+    sweep: 0.05->0.050  0.20->0.159  0.33->0.216  0.68->0.264  1.50->0.179  4.00->0.018
+    it vanishes at both ends -- everyone clears, nobody clears -- so it
+    is largest where the gate is deciding: True
+    no fleet aggregate emitted (the mix of operators is unmeasured): True
+
+AGA_047  the note carries its own confound and the covariate that separates it
+    SCOPE LIMITS names   stimulus True   good-sleeper ceiling True
+    X1 'scope' carries   stimulus True   ceiling False
+    prediction: PROPOSED: early habituation → smaller motion effect
+    the ceiling predicts the same direction, so the probe as written
+    cannot separate them: probe names baseline False, CHEAPEST INSTRUMENT False,
+    SCOPE LIMITS True -- the second covariate is one section above the probe
+
+AGA_048  X1's two halves are both outside the register
+    12 sources; a rocking lab False, an infant-carrying study False
+    the note states a sampling limit (True) and the frame vocabulary
+    has a member for it: False   [ON_ROAD, ADMISSION, VENDOR, N_OF_1, ARCHIVE, TERM_DRIFT]
+
+AGA_049  pointers in the note: 1, resolving to a file: 0
+    [[per-operator-fitness-vs-lcd-regulation]] -- nothing in the tree
+
+AGA_050  the flip rests on the operator's own record and is fenced 4 ways
+    labelled PROPOSED True | status EXPLORATION True | relevance UNKNOWN True
+    declared not load-bearing True | anchor states its own n True
+
+AGA_039  the two G0 parameter blocks carry provenance differently
+    REST_BLOCK (the window): comments only; in the object: False
+      PLACEHOLDER           : handoff_lead_min
+      literature, unverified: inertia_min, nap_min
+      neither stated        : cycle_min
+    EVENT_CLASSES (the rate): a source field on every row: True
+
+AGA_040  G0 recomputed -- every input declared PLACEHOLDER: True
+    human-required interrupts/h 0.330   mean gap 181.8 min
+    by contribution: work_zone 0.09, fuel_inspection_stop 0.08, weather_out_of_envelope 0.05, incident_or_closure 0.05, heavy_traffic_merge 0.05, mechanical_alert 0.01
+    highest raw rate is heavy_traffic_merge, top contributor is work_zone -> note 3 holds: True
+      nap_min   low   60 min -> P 0.719
+      nap_min   high  75 min -> P 0.662
+      cycle_min low  110 min -> P 0.546
+      cycle_min high 125 min -> P 0.503
+    binding row cycle_min/high at P 0.503; removing work_zone -> rate 0.24, P 0.607
+
+AGA_041  one caveat, two conditions, opposite directions (exact, no simulation)
+    window 125 min, Poisson P 0.503
+    A  bursting alone, k per burst : k=1 0.503, k=2 0.709, k=5 0.872, k=10 0.934
+       -> Poisson is a FLOOR. raises at every k > 1: True
+    B  rate peaking at rest time   : amp=0.0 0.503, amp=0.5 0.363, amp=1.0 0.261, amp=1.5 0.189
+       -> Poisson is a CEILING. lowers at every amplitude: True
+    the docstring names B (in the same hours as rest need); the G0 note describes A (interrupters bunch in the same hours)
+
+AGA_042  p_uninterrupted is typed as a probability, domain unguarded
+      zero rate        1.0000
+      zero window      1.0000
+      negative window  1.3910   <- not a probability
+      negative rate    1.9887   <- not a probability
+
+AGA_043  a DERIVED entry now exists: True
+    TRANSFER_NOTE draws on S5 (True, which states it: True) and on TERM_NOTES (True), tagged DERIVED: True
+
+AGA_026  S2 rates: ever 47.1%, past-year 25.4%, nested True (ratio 0.539)
+
+AGA_027  S9 cite: Aurora Innovation releases + trade press (Feb-Mar 2026)  [VENDOR]
+    observer    in: AUTOMATION_GAP_AUDIT.md, CLAIM_TABLE.md, FIELD_LAYER_SEED_ROADS.md
+    roadside    in: AUTOMATION_GAP_AUDIT.md, CLAIM_TABLE.md, FIELD_LAYER_SEED_ROADS.md
+    Paccar      in: AUTOMATION_GAP_AUDIT.md
+    Fort Worth  in: AUTOMATION_GAP_AUDIT.md, CLAIM_TABLE.md
+    in DEMO_CORPUS_AUDIT: none of them
+
+AGA_028  S9 headline: 1000 mi in 15 h -> 66.7 mph sustained
+    'HOS' named 3 times; off-duty figure stated: True
+    a driving-hours limit in the register: False
+    a driving-hours limit in any of the 6 delivered documents: False
+    the phrase in this audit's own output: CLAIM_TABLE.md x1  (UNI_010, printed rather than excluded)
+
+AGA_029  register dates itself 2026-09-23; documents date 2026-09-24
+    register shares a date with the documents: False
+
+refs     12 sources, 10 questions; unresolvable ids: none
+    named by no question: Q1, S11, S7, S8
+count    5 of 10 questions UNMEASURED (QD, QE, QF, QG, QH)
+    UNMEASURED and sourced at once: QF, QH

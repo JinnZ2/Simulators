@@ -36,6 +36,7 @@ import known_answer as ka  # noqa: E402
 
 # Hand-kept. Every entry must be registered with a known-answer case.
 MANIFEST = (
+    "automation-gap/driver_hours_evidence_register.py::p_uninterrupted",
     "null-harness/null_harness.py::_verdict",
     "nonidentity-census/t6_window_declaration.py::decided_by_tracks_window",
     "nonidentity-census/t6_window_declaration.py::"
@@ -75,6 +76,7 @@ MANIFEST = (
     "reporting-chain-loss/hop_compose.py::composed_bias",
     "chain-position/load_class.py::stability_product",
     "measurand-partition/wo4_lumber.py::stiffness_ratio",
+    "thwaites-risk-audit/audit.py::sle_to_sv",
 )
 
 # Cases known to fail today. A case that starts passing turns this red so
