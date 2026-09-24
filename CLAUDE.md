@@ -280,6 +280,7 @@ last three; read in order:
 - `assessor-coupling/` — WO-6 (the second document under that ordinal), assessor-assessed coupling as a recurrent failure mode; hop-1 kept structurally out of the independence vector, the record's summary sentence refuted by its own scope limit at a negative arm of zero, no organization named and no field for one
 - `unowned-join/` — WO-4, the shape with seven faces and a registered term gap; A1-A4 stated formally and made checkable, face 6 NOT_EVALUABLE on the order's own reason, the order's "no term means no code" refuted by the folder building it and no term coined
 - `instrument-index/` — a REBUILD from a lost original: 13 fields, two renderings from one pass, a 0.70 axis falsifier that cannot fire where nothing is rated
+- `stability-trigger-envelope/` — DISPATCH ESP-1, a stability trigger outside its validation envelope (cab sensor vs trailer mass on serpentine downgrades); one instrument `descent_record.py` on CONSTRUCTED data, F1-F5 firing as regression, NEITHER_MODE added to the dispatch's five labels, clock offsets detected never corrected, relocation counted never scored; real run NOT_RUN, T3/T6 NOT_BUILT, T4/T5 UNMEASURED
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -13622,6 +13623,33 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `II_*` claims; check count printed by
   `python3 instrument-index/tests/test_build_index.py`. Stdlib only, parses
   under 3.9, phone-buildable, CC0.
+- `stability-trigger-envelope/` — DISPATCH ESP-1, landed verbatim in
+  `WORK_ORDER.md`. A tractor stability system reads rollover and brakes on
+  9-13% serpentine descents while the at-risk trailer is quiet: FAULT A
+  (measured body != at-risk body), FAULT B (braking removes the momentum
+  holding the combination), FAULT C (grade pitch and a bank term that flips
+  sign each reversal eat flat-calibrated headroom), plus the relocation
+  chain the safety score never sees (slowdown -> queue -> occluded passes ->
+  closure trap). N_operators = 1; the unit's stability system is UNREAD and
+  the Bendix documents are a reference case only. One instrument,
+  `descent_record.py`: `classify` walks absence gates BEFORE any reading
+  (OUT_OF_ENVELOPE = unassessed not clear, TRAILER_CHANNEL_ABSENT never
+  inferred, NOT_EVALUABLE with reason), then reads cab/trailer RMS, ratio
+  and lead from the moving-RMS envelope cross-correlation (raw roll is
+  ambiguous by whole reversals). **`STE_004`:** NEITHER_MODE is added to the
+  dispatch's five labels — both-quiet, trailer-leads and unresolved-lead
+  would otherwise be forced into support for Fault A or into its falsifier.
+  **`STE_005`:** clock offset is detected from sync marks and never
+  corrected; the loader refuses a tolerance at or above the phase floor so
+  an allowed offset cannot read as a lead. `envelope_edge` returns
+  INSUFFICIENT_RUNS / NO_TRIGGER_OBSERVED / EDGE_BRACKETED / ONSET_OVERLAP
+  with mixed grade/surface listed, not pooled; `relocation_tally` has no
+  total key (`STE_008`). Thresholds are an append-only PLACEHOLDER log pinned
+  by prefix digest. F1-F5 fire and are REGRESSION, not validation. T1-T6
+  written as design text; real run NOT_RUN, T3/T6 NOT_BUILT, T4/T5
+  UNMEASURED, sources NOT_FETCHED, `aeb-false-positive-measurand` named and
+  NOT_FOUND. Render screens clean through `sheet-structure-scan/no_severity`.
+  Ten `STE_*` claims; test 47/47. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

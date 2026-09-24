@@ -1,0 +1,33 @@
+descent_record -- ESP-1 instrument, CONSTRUCTED fixtures
+fixtures are implementation-authored: REGRESSION, not validation. Real run: NOT_RUN.
+thresholds: 16 log entries, 16 keys, status PLACEHOLDER
+
+fid  expected                got                     case
+F1   GEOMETRIC_CAB_MODE      GEOMETRIC_CAB_MODE      ok   serpentine, cab-only oscillation
+       cab_rms_dps=3.347  trailer_rms_dps=0.281  trailer_rms_at_trigger_dps=0.278  amp_ratio=11.91  trailer_lag_s=3.95  lag_corr=0.985  lead=CAB_LEADS  clock_misalign_s=0.0
+F2   TRAILER_ROLL_RISK       TRAILER_ROLL_RISK       ok   real trailer roll
+       reason: trailer channel high
+       cab_rms_dps=1.684  trailer_rms_dps=2.793  trailer_rms_at_trigger_dps=2.173  amp_ratio=0.6  trailer_lag_s=0.0  lag_corr=1.0  lead=SIMULTANEOUS  clock_misalign_s=0.0
+F3   TRAILER_CHANNEL_ABSENT  TRAILER_CHANNEL_ABSENT  ok   no trailer IMU
+       reason: no trailer trace; trailer state not inferred
+F4   NOT_EVALUABLE           NOT_EVALUABLE           ok   clocks misaligned > window
+       reason: clocks misaligned 3.00 s > 0.50 s tolerance
+       clock_misalign_s=3.0
+F5   INSUFFICIENT_RUNS       INSUFFICIENT_RUNS       ok   two runs on a road
+       n_runs=2
+X1   NOT_EVALUABLE           NOT_EVALUABLE           ok   gap in trailer trace
+       reason: gap 1.50 s in trailer trace > 0.50 s
+X2   OUT_OF_ENVELOPE         OUT_OF_ENVELOPE         ok   snow surface
+       reason: surface snow: thresholds not declared there; unassessed, not clear
+X3   NEITHER_MODE            NEITHER_MODE            ok   both channels quiet
+       reason: neither channel high
+       cab_rms_dps=0.125  trailer_rms_dps=0.122  trailer_rms_at_trigger_dps=0.094  amp_ratio=1.02  trailer_lag_s=0.15  lag_corr=0.997  lead=SIMULTANEOUS  clock_misalign_s=0.0
+X4   NEITHER_MODE            NEITHER_MODE            ok   cab high but trailer leads
+       reason: cab high, lead TRAILER_LEADS
+       cab_rms_dps=3.347  trailer_rms_dps=0.387  trailer_rms_at_trigger_dps=0.26  amp_ratio=8.65  trailer_lag_s=-3.65  lag_corr=0.965  lead=TRAILER_LEADS  clock_misalign_s=0.0
+X5   EDGE_BRACKETED          EDGE_BRACKETED          ok   four runs on a road
+       n_runs=4  n_fired=2  n_quiet=2  onset_mph=30.0  bracket_mph=(27.0, 30.0)  fired_spread_mph={'min': 30.0, 'max': 33.0, 'stdev': 2.12}  mixed_conditions={}
+
+relocation_tally on X5 (counts only, no total):
+  by_event   none=1  pass=1  near_miss=1  incident=0  closure=1
+  by_v2_bin  1=3  2=1
