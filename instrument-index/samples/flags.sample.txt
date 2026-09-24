@@ -1,0 +1,4 @@
+FLAG fixture/method-layer:branch_set.py run_cost: value outside the enum: BOGUS (kept, not normalized)
+FLAG fixture/method-layer:odd_shape.sh input_shape: value outside the enum: WIDGET
+FLAG fixture/method-layer:odd_shape.sh run_basis: value outside the enum: guesswork
+FLAG fixture/method-layer:overridden.txt run_basis: run_cost is EXTERNAL and run_basis is empty

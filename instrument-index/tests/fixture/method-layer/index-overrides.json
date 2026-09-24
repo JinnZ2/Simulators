@@ -1,0 +1,14 @@
+{
+  "branch_set.py": {
+    "name": "override-loses-to-header",
+    "input_shape": "NUMBER",
+    "catches": "override text that the in-file header wins over"
+  },
+  "overridden.txt": {
+    "name": "overridden",
+    "input_shape": "NUMBER",
+    "catches": "a quantity with no stated denominator",
+    "run_cost": "EXTERNAL",
+    "status": "PROPOSED"
+  }
+}

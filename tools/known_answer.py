@@ -746,7 +746,64 @@ EXPECTED_METRICS = (
     "sim-span/three_column.py::ols",
     "trigger-geometry/trigger_geometry.py::accumulation_ratio",
     "terminal-crossing/crossing_rate.py::expected_crossings",
+    "unowned-join/invariant.py::join_coverage",
+    "assessor-coupling/conditions.py::pool_fraction",
+    "instrument-index/build_index.py::claim_only_fraction",
 )
+
+
+def _asc_pool_fraction(record):
+    """assessor-coupling/conditions.py::pool_fraction, imported. WO-6 step
+    1's metric: the share of an assessor's funding originating from sources
+    coupled to the assessed sector. Expected values are the share by hand.
+    The None cases pin an empty record and a record carrying an UNDECLARED
+    source apart from a record every one of whose sources is declared and
+    none coupled, which is 0.0 and is a measurement. Collapsing them would
+    let an unexamined funding base read as an independent one."""
+    import importlib.util
+    path = os.path.join(ROOT, "assessor-coupling", "conditions.py")
+    spec = importlib.util.spec_from_file_location("_asc_cond", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    if record is not None:
+        record = [(a, mod.UNDECLARED if f == "UNDECLARED" else f)
+                  for a, f in record]
+    return mod.pool_fraction(record)
+
+
+def _uj_join_coverage(scopes, join):
+    """unowned-join/invariant.py::join_coverage, imported. WO-4 step 1's one
+    numeric readout: the fraction of a join's observables lying in the union
+    of the declared component scopes. Expected values are counted by hand.
+    The two None cases are the pin: an empty join and a scope set carrying an
+    UNDECLARED member are not a coverage of zero, while a declared join that
+    no declared scope reaches IS 0.0 and is a measurement. Collapsing those
+    would let an undeclared scope read as the shape."""
+    import importlib.util
+    path = os.path.join(ROOT, "unowned-join", "invariant.py")
+    spec = importlib.util.spec_from_file_location("_uj_inv", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    if scopes is not None:
+        scopes = [mod.UNDECLARED if s == "UNDECLARED" else s for s in scopes]
+    return mod.join_coverage(scopes, join)
+
+
+def _ii_claim_only_fraction(shapes):
+    """instrument-index/build_index.py::claim_only_fraction, imported. The
+    index's own pre-stated falsifier reads this fraction against 0.70: the
+    share of RATED rows whose only input_shape is CLAIM. Expected values are
+    counted by hand from the shape list. The None cases are the pin: a row
+    set with no rated row at all has no fraction, while a rated set none of
+    whose rows is CLAIM-only IS 0.0 and is a measurement. Collapsing them
+    would let an index nobody has headered read as an axis that partitions."""
+    import importlib.util
+    path = os.path.join(ROOT, "instrument-index", "build_index.py")
+    spec = importlib.util.spec_from_file_location("_ii_bi", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    rows = [{"input_shape": sh} for sh in shapes]
+    return mod.claim_only_fraction(rows)
 
 
 def _rs_delta(acc_open, acc_blind):
@@ -1901,6 +1958,100 @@ def _tra_sle_to_sv(mm_per_year):
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     return mod.sle_to_sv(mm_per_year)
+
+
+    register(
+        "unowned-join/invariant.py::join_coverage",
+        _uj_join_coverage,
+        [case("a single scope covering the whole join", ([["x", "y"]],
+              ["x", "y"]), 1.0, "both join observables lie in the one scope; "
+              "1.0 by hand", tol=1e-9),
+         case("two scopes covering half each",
+              ([["x"], ["y"]], ["x", "y"]), 1.0,
+              "the UNION covers it; coverage is a union figure and does not "
+              "distinguish ownership -- that is what the verdict does "
+              "[CHOICE 1], and the same expected value from a different "
+              "shape is the case a metric keyed on scope count would fail",
+              tol=1e-9),
+         case("half the join reached", ([["x"], ["w"]], ["x", "y"]), 0.5,
+              "one of two observables lies in the union; 0.5 by hand",
+              tol=1e-9),
+         case("a declared join no declared scope reaches is 0.0",
+              ([["w"], ["z"]], ["x", "y"]), 0.0,
+              "every scope is declared and none reaches the join -- a "
+              "measurement, and the case that must not collapse into the "
+              "Nones below"),
+         case("an empty join is None, not zero", ([["x"]], []), None,
+              "there is nothing to cover; a fraction with an empty "
+              "denominator has no value"),
+         case("an UNDECLARED scope is None, not zero",
+              ([["x"], "UNDECLARED"], ["x", "y"]), None,
+              "an undeclared scope is not an empty scope; reading it as one "
+              "would report coverage from a silence [CHOICE 2]")],
+        note="the 0.0 against the two Nones is the pin: a join nobody "
+             "reaches and a join nobody declared a scope for are different "
+             "states, and the second is the one the order's failures are "
+             "actually in")
+
+
+    register(
+        "assessor-coupling/conditions.py::pool_fraction",
+        _asc_pool_fraction,
+        [case("every source coupled", ([(10.0, True), (30.0, True)],), 1.0,
+              "40 of 40 by hand", tol=1e-9),
+         case("a quarter coupled", ([(10.0, True), (30.0, False)],), 0.25,
+              "10 of 40 by hand -- a distinct expected value, so a metric "
+              "returning a constant fails", tol=1e-9),
+         case("every source declared and none coupled is 0.0",
+              ([(10.0, False), (30.0, False)],), 0.0,
+              "a measurement: the field was examined and nothing is "
+              "coupled. It must not collapse into the Nones below"),
+         case("an empty record is None, not zero", ([],), None,
+              "no funding declared at all; a share with an empty "
+              "denominator has no value"),
+         case("an UNDECLARED source is None, not zero",
+              ([(10.0, True), (30.0, "UNDECLARED")],), None,
+              "one source's coupling was not established, so the share is "
+              "not established; reading it as uncoupled would compute "
+              "independence from a silence"),
+         case("a record summing to zero is None", ([(0.0, True)],), None,
+              "no denominator; not a share of zero")],
+        note="the 0.0 against the three Nones is the pin: a funding base "
+             "examined and found uncoupled and a funding base nobody "
+             "examined are different states, and the order's own point is "
+             "that the second is what currently exists")
+
+    register(
+        "instrument-index/build_index.py::claim_only_fraction",
+        _ii_claim_only_fraction,
+        [case("every rated row is CLAIM-only", (["CLAIM", "CLAIM"],), 1.0,
+              "2 of 2 by hand", tol=1e-9),
+         case("three of four", (["CLAIM", "CLAIM", "CLAIM", "CLAIM|NUMBER"],),
+              0.75,
+              "3 of 4 by hand -- over the 0.70 threshold, and a distinct "
+              "expected value, so a metric returning a constant fails",
+              tol=1e-9),
+         case("a multi-valued shape carrying CLAIM is not CLAIM-only",
+              (["CLAIM|NUMBER", "CLAIM|DECISION"],), 0.0,
+              "the rule is ONLY shape is CLAIM; a row whose shape list has "
+              "two members partitions on the second"),
+         case("rated, none CLAIM-only, is 0.0",
+              (["DECISION", "FALSIFIER"],), 0.0,
+              "a measurement: the rated set was read and nothing in it "
+              "carries CLAIM alone. It must not collapse into the Nones "
+              "below"),
+         case("an empty row set is None, not zero", ([],), None,
+              "no rows at all; the check was not run"),
+         case("rows present but none rated is None, not zero",
+              (["UNRATED", "UNRATED"],), None,
+              "an index nobody has headered has no axis to falsify; "
+              "reading it as 0.0 would report 'axis holds' about a set "
+              "the check never saw")],
+        note="the 0.0 against the two Nones is the pin. The axis check is "
+             "the index's own pre-stated falsifier, and a fraction of zero "
+             "returns 'axis holds at this build' while None returns "
+             "'UNRATED: check not run' -- opposite readings of the same "
+             "build, separated only by this field")
 
 
 def seed_reachable(src=None, path=None):
