@@ -4,7 +4,7 @@ Ids are permanent. `AGA_` = automation-gap. Status is SUPPORTED / REFUTED /
 UNVERIFIED. Every SUPPORTED claim is a property of the delivered material
 and is recomputable by anyone with the folder: `python3 audit.py` for the
 six documents (`AGA_001..019`), `python3 register_audit.py` for the
-evidence register (`AGA_020..065`). The delivered falsifiers are the
+evidence register (`AGA_020..066`). The delivered falsifiers are the
 documents' own (`AUT-F1..F8`, `RD-F1..F3`) and carry their own prefixes;
 nothing here renumbers them.
 
@@ -408,7 +408,7 @@ SUPPORTED on S10 alone.
 read. The register says so itself for five of the eleven (`UNREAD`), and
 the egress gate refuses every publisher host, so the other six are carried
 on the strength of a search pass nobody here can repeat. Nothing in
-`AGA_020..065` is evidence about driving hours, fatigue, tenure, any
+`AGA_020..066` is evidence about driving hours, fatigue, tenure, any
 carrier or any vendor; every one is a property of the register's own
 declarations. Whether the eight questions have the status the register
 assigns them is untouched in both directions.
@@ -914,3 +914,21 @@ can see, and the alternative -- committing each delivery before the next
 arrives -- is a property of the landing order, not of the reader.
 *Falsifier:* a reader that separates two uncommitted revisions without a
 stored intermediate.
+
+**AGA_066 -- a fault in the check that documents `AGA_059`, and it is
+`AGA_033`'s own shape. RECORDED.** The first version of
+`falsifier_wording` read `HEAD:CLAIM_TABLE.md` to establish what the
+falsifier said before the repair. Committing the repair **moved HEAD**, so
+one commit later the check documenting the fault read the repaired text and
+reported **no fault** -- the record of a firing erased by the commit that
+recorded it. `AGA_033` is the claim that a fixed position in history
+compares against whatever bytes sit there, and `AGA_065` restates it for
+the register; this was committed **one hour after amending `AGA_020`, in
+the same file, in a check written to hold a fault in the past.** A fault in
+history is found by walking back until the file stops carrying it, which is
+what `revision()` already does -- the checker now resolves the newest
+committed table whose `AGA_020` falsifier names the token only, prints the
+commit it resolved to, and a test asserts the literal `"HEAD:` appears
+nowhere in it. Found by running the suite **after** the commit; before the
+commit it could not fail. *Falsifier:* a reading of a past state that
+survives no later commit.

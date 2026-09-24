@@ -693,11 +693,17 @@ def falsifier_wording():
         f = b.rsplit("*Falsifier:*", 1)[-1] if "*Falsifier:*" in b else ""
         return b, f
 
-    now, _ = _claim_table()
-    body, fals = block(now)
-    before, fals_before = block(_claim_table_at_head())
     def names_the_field(t):
         return "`status` field" in t
+
+    def still_faulty(text):
+        _, f = block(text)
+        return bool(f) and not names_the_field(f)
+
+    now, _ = _claim_table()
+    body, fals = block(now)
+    raw_before, at = _claim_table_unrepaired(still_faulty)
+    before, fals_before = block(raw_before)
     return dict(
         a_source_carries_derived_as_a_tag=sorted(in_holds),
         derived_in_any_status_slot="DERIVED" in slot,
@@ -708,6 +714,7 @@ def falsifier_wording():
         claim_notes_the_ambiguity=("what arrived was a new kind of entry"
                                    in before),
         falsifier_before=" ".join(fals_before.split())[:120],
+        resolved_at=at,
         falsifier_named_the_token_only=(bool(fals_before)
                                         and not names_the_field(fals_before)),
         falsifier_now=" ".join(fals.split())[:160],
@@ -726,21 +733,39 @@ def _claim_table():
         return fh.read(), ct
 
 
-def _claim_table_at_head():
-    """The claim table as committed. A claim about a wording that has since
-    been repaired is checkable only against history; reading it out of git
-    makes it a measurement rather than a recollection. Empty string if git
-    is unreachable -- then the check reports the repair and not the fault."""
+def _claim_table_unrepaired(test):
+    """The newest committed claim table whose AGA_020 falsifier still fails
+    `test` -- resolved BY CONTENT, not at HEAD.
+
+    AGA_066. The first version of this read `HEAD:CLAIM_TABLE.md`, and
+    committing the repair moved HEAD, so the check documenting the fault
+    read the repaired text and reported no fault. That is AGA_033's own
+    shape -- a fixed position in history compares against whatever bytes
+    sit there -- committed one hour after amending the claim that states
+    it. A fault in the past is found by walking back until the file stops
+    carrying it, which is what `revision()` already does for the register.
+
+    Empty string if git is unreachable or no such commit exists; the check
+    then reports the repair and not the fault, and says so."""
     import subprocess
+    root = os.path.join(HERE, "..")
+    rel = os.path.relpath(os.path.join(HERE, "CLAIM_TABLE.md"), root)
     try:
-        rel = os.path.relpath(os.path.join(HERE, "CLAIM_TABLE.md"),
-                              os.path.join(HERE, ".."))
-        out = subprocess.run(["git", "show", "HEAD:" + rel],
-                             cwd=os.path.join(HERE, ".."),
-                             capture_output=True, text=True, timeout=20)
-        return out.stdout if out.returncode == 0 else ""
+        log = subprocess.run(["git", "log", "--format=%H", "--", rel],
+                             cwd=root, capture_output=True, text=True,
+                             timeout=30)
+        if log.returncode != 0:
+            return "", ""
+        for sha in log.stdout.split():
+            out = subprocess.run(["git", "show", sha + ":" + rel], cwd=root,
+                                 capture_output=True, text=True, timeout=20)
+            if out.returncode != 0:
+                continue
+            if test(out.stdout):
+                return out.stdout, sha[:7]
+        return "", ""
     except Exception:
-        return ""
+        return "", ""
 
 
 def exploration_tag_site():
@@ -1495,6 +1520,8 @@ def render(f):
       % fw["claim_notes_the_ambiguity"])
     p("    token, not the field (%s):" % fw["falsifier_named_the_token_only"])
     p("      was: %s" % (fw["falsifier_before"] or "history unreachable"))
+    p("           (resolved by content at %s, never at HEAD -- AGA_066)"
+      % (fw["resolved_at"] or "no such commit"))
     p("      now: %s" % fw["falsifier_now"])
     p("    repaired here rather than defended: %s\n" % fw["repaired"])
 

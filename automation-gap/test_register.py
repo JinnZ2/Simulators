@@ -7,6 +7,7 @@
 
 import ast
 import copy
+import inspect
 import os
 import sys
 import unittest
@@ -906,6 +907,21 @@ class FalsifierWording(unittest.TestCase):
         self.assertTrue(v["claim_notes_the_ambiguity"])
         self.assertTrue(v["falsifier_named_the_token_only"])
         self.assertIn("source carrying", v["falsifier_before"])
+
+    def test_the_unrepaired_table_is_resolved_by_content(self):
+        """AGA_066. The first version of this check read HEAD, and
+        committing the repair moved HEAD -- so the check documenting the
+        fault read the repaired text and reported no fault, which is
+        AGA_033's own shape committed one hour after amending the claim
+        that states it. It now walks back until the falsifier stops naming
+        the token only, so the reading survives every later commit."""
+        v = RA.falsifier_wording()
+        if not v["falsifier_before"]:
+            self.skipTest("git history not reachable")
+        self.assertTrue(v["resolved_at"])
+        src = inspect.getsource(RA._claim_table_unrepaired)
+        self.assertNotIn('"HEAD:', src)
+        self.assertIn("git", src)
 
     def test_the_repair_is_in_the_working_tree(self):
         """Repaired rather than defended: the falsifier now names the field,

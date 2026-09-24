@@ -47,7 +47,7 @@ register_audit.py                imports the register, checks it against
 test_audit.py                    checks on the audit; prints its count
 test_register.py                 checks on the register audit; prints its
                                  count
-CLAIM_TABLE.md                   AGA_001..065 with falsifiers
+CLAIM_TABLE.md                   AGA_001..066 with falsifiers
 ```
 
 The register arrived a drop after the seed and is a different kind of
@@ -207,7 +207,11 @@ is what pushes a column. And `AGA_020`'s falsifier reads *a source carrying
 time by the same mechanism** -- in a claim whose own body records the first
 firing and then restates the ambiguous wording verbatim. The falsifier now
 names the field, and the fault is read out of git rather than recalled, so
-the repair turns the check red on purpose.
+the repair turns the check red on purpose -- and **`AGA_066`**: the first
+version of that reader read `HEAD`, so committing the repair erased the
+record of the firing, which is `AGA_033`'s own shape committed one hour
+after amending the claim that states it. It now walks back until the
+falsifier stops naming the token only.
 
 The v6 delivery also shipped a **duplicated tail** -- two `__main__`
 blocks, the addendum-3 header printed three times -- with the importable

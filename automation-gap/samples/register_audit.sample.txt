@@ -117,6 +117,7 @@ AGA_059  a fault in this audit's own claim table
     the committed claim recorded the first firing (True) and named the
     token, not the field (True):
       was: a second declared scale for questions, or a source carrying `DERIVED`.
+           (resolved by content at a5d84e3, never at HEAD -- AGA_066)
       now: a second declared scale for questions, or a source whose **`status` field** carries `DERIVED` -- the token alone is not enough, and asking for the token is what
     repaired here rather than defended: True
 
