@@ -67,6 +67,7 @@ MANIFEST = (
     "internal-reference-boundary/radials.py::sanction_ratio_point",
     "move-set/move_set_sim_v2.py::coverage",
     "move-set/move_set_sim_v2.py::_halfwidth",
+    "route-independence/route_independence.py::independence_ratio",
     "revision-survival/revision_survival.py::delta",
     "additivity-inheritance/additivity_inheritance.py::interaction_ss",
     "credential-channel/credential_channel.py::routing_cost",

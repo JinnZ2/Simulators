@@ -1,0 +1,14 @@
+# MADR decision-record template (record TYPE). Read from
+# raw.githubusercontent.com/adr/madr/develop/template/adr-template.md on
+# 2026-09-27T01:31Z, sha256 prefix 940d45674563e0a2 (full digest in SOURCES.md).
+record_kind: type
+source: adr/madr template/adr-template.md
+source_status: read
+source_locator: raw.githubusercontent.com/adr/madr/develop/template/adr-template.md; lines cited per field
+decision: "Decision Outcome" slot (line 30)
+proposer: no proposer slot; the metadata block (lines 2-9) names decision-makers, consulted and informed roles
+authorizer: "decision-makers" metadata slot (line 5)
+options_tried:
+options_not_tried: "Considered Options" slot (line 23) with "Pros and Cons of the Options" (line 47)
+reviewer: "consulted" metadata slot (line 6: "with whom there is a two-way communication"); "Confirmation" (line 42) names how the decision is checked, not who may add options
+reviewer_added_options: UNKNOWN

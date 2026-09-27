@@ -1,0 +1,6 @@
+# REQUIRED FAILING INPUT. This file carries a gradient state, which the
+# definition forbids: DECOUPLED / COUPLED is binary. The tool must refuse
+# the row as INVALID_STATE, not read it as one side or the other.
+population: (fail) gradient state in a binary field
+food            | PARTLY_DECOUPLED |
+water           | DECOUPLED |

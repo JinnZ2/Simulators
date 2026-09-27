@@ -1,0 +1,14 @@
+# In-tree: design-basis-ai/SOURCE_DROP_V2.md, a design-basis proposal for
+# AI as knowledge infrastructure (alignment-adjacent). Read in this
+# session; line numbers index that file at the current revision.
+# Section 3 (lines 191-207) states that dissimilar verification "is a
+# PROVISION and not an option" (line 203): the document declines to
+# enumerate alternatives at that point and says so.
+record_kind: instance
+source: design-basis-ai/SOURCE_DROP_V2.md (this repository)
+source_status: read
+source_locator: sections 2-3, lines 58-207
+decision: adopt provisions P1-P8 as the design basis (section 2, line 58)
+proposer: the document as delivered (README of that folder records its provenance)
+reviewer: an independent, differently-built verifier (P3, lines 91-113; section 3 line 199)
+reviewer_can_add_options: UNKNOWN

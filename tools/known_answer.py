@@ -736,6 +736,7 @@ EXPECTED_METRICS = (
     "reporting-chain-loss/hop_compose.py::composed_bias",
     "chain-position/load_class.py::stability_product",
     "measurand-partition/wo4_lumber.py::stiffness_ratio",
+    "route-independence/route_independence.py::independence_ratio",
     "revision-survival/revision_survival.py::delta",
     "routing-data-layer/rate_form.py::sustained_excess",
     "shape-spec-audit/shadow_read.py::outline_area",
@@ -1553,6 +1554,7 @@ def seed():
               "wrong one are different failures."),
     )
     _seed_move_set()
+    _seed_route_independence()
 
 
 def _irb_effective_origins(coupling):
@@ -1624,6 +1626,19 @@ def _fmr_fraction_cap(n_other, fraction):
 
 
 
+def _ri_independence_ratio(independent_count, route_count):
+    """route-independence/route_independence.py::independence_ratio,
+    imported. Expected values are arithmetic on the two counts; the
+    zero-route case is where a default hides, since 0.0 would read as
+    'measured, and no route settles' where nothing was measured."""
+    import importlib.util
+    path = os.path.join(ROOT, "route-independence", "route_independence.py")
+    spec = importlib.util.spec_from_file_location("_ri", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.independence_ratio(independent_count, route_count)
+
+
 
 
 def _drc_count_relation(inner, outer, stated_total):
@@ -1670,6 +1685,23 @@ def _cpd_stability_product(failure_probs):
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     return mod.stability_product(failure_probs)
+
+
+def _seed_route_independence():
+    register(
+        "route-independence/route_independence.py::independence_ratio",
+        _ri_independence_ratio,
+        [
+            case("no route settles", (0, 4), 0.0,
+                 "0 of 4: a measured zero, distinct from the no-route case"),
+            case("half settle", (2, 4), 0.5, "2 of 4 by arithmetic"),
+            case("all settle", (3, 3), 1.0, "3 of 3 by arithmetic"),
+            case("no routes", (0, 0), None,
+                 "route_count 0 is NOT_EVALUABLE; a 0.0 here would report "
+                 "an enclosure nobody measured"),
+        ],
+        note="FWO-2; the zero-route case pins None against 0.0.",
+    )
 
 
 def _msv_coverage(which):

@@ -1,0 +1,15 @@
+# Rust RFC template (record TYPE, not an instance). Read from
+# raw.githubusercontent.com/rust-lang/rfcs/master/0000-template.md on
+# 2026-09-27T01:28Z, sha256 88423c4b1ad871fd97ab7a5480ae260984fa5ddcde05e05422f6ca1fc85df50f.
+# A type carries slots, not content; a slot with placeholder text is
+# entered with its heading so C3 reads the slot as present.
+record_kind: type
+source: rust-lang/rfcs 0000-template.md
+source_status: read
+source_locator: raw.githubusercontent.com/rust-lang/rfcs/master/0000-template.md; sha256 88423c4b...
+decision: Summary slot (line 6)
+proposer: RFC author slot (Feature Name / RFC PR metadata, lines 1-4)
+options_tried:
+options_not_tried: "Rationale and alternatives" slot (line 52): "What other designs have been considered and what is the rationale for not choosing them?" (line 56); "Drawbacks" slot (line 47); "Unresolved questions" slot (line 77)
+reviewer: RFC PR review (line 3 names the PR); the template names no reviewer role
+reviewer_added_options: UNKNOWN

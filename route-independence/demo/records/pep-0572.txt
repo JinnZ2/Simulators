@@ -1,0 +1,17 @@
+# PEP 572, Assignment Expressions. Read from
+# raw.githubusercontent.com/python/peps/main/peps/pep-0572.rst on
+# 2026-09-27T01:28Z, sha256 abf5401ec523a03d59a6f3173842784f426bfd49d8b0a87a512646557bcef8b1.
+# Line numbers below index that file. Fields with no slot in the PEP format
+# are omitted so the audit reads them as ABSENT_FIELD.
+record_kind: instance
+source: PEP 572 (python/peps, pep-0572.rst)
+source_status: read
+source_locator: raw.githubusercontent.com/python/peps/main/peps/pep-0572.rst; sha256 abf5401e...; lines cited per field
+decision: add assignment expressions (the := operator) to Python 3.8 (Title line 2; Python-Version line 8)
+proposer: the PEP authors listed at lines 3-4
+authorizer: the acceptance recorded at the Resolution link (line 11; python-dev, July 2018)
+options_tried:
+options_not_tried: changing the scope rules for comprehensions (line 682); alternative spellings incl. EXPR as NAME (line 693); special-casing conditional statements (line 780); special-casing comprehensions (line 801)
+reviewer: python-ideas and python-dev list discussion (Post-History lines 9-10; line 676 records proposals raised there)
+reviewer_can_add_options: yes
+reviewer_added_options: UNKNOWN

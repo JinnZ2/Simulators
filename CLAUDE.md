@@ -13854,6 +13854,43 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `MECH` is assigned to no source and that is a gap rather than a decision,
   and nothing here addresses SP 800-90B or AIS 31 health testing. Stdlib only,
   selftest 33/33, CC0.
+- `route-independence/` — FABLE WORK ORDER PACKET 2026-09-26, three
+  instruments and four research designs, landed here because the named
+  repository could not be created from the session (403, the `SA_018`
+  outcome). **FWO-1** `entry_condition_match.py`: match a study's entry
+  conditions to a candidate population row by row (`DECOUPLED | COUPLED
+  | REMOVED | PRESENT | UNKNOWN`, the first two binary at the parser, a
+  gradient word refused as `INVALID_STATE`), returning `TRANSFERABLE |
+  PARTIAL(hold, fail) | NOT_TRANSFERABLE | NOT_EVALUABLE` with PARTIAL and
+  NOT_TRANSFERABLE kept apart and any UNKNOWN row blocking TRANSFERABLE;
+  on the Universe 25 demo the order's kill line does not fire — (c), the
+  paid-provision stratum, reads PARTIAL failing on `exit` and `disease`
+  (`RIN_002`), and every study row is CARRIED since the 1973 paper's hosts
+  refuse CONNECT (`RIN_006`). **FWO-2** `route_independence.py`: route
+  count beside whether each route discharges its obligations in its own
+  medium, `permitted` a separate column reaching no measure (AST and
+  behavioural, `RIN_008`); an UNKNOWN medium gives a band and an UNKNOWN
+  flag, so the demo's `food` need is NOT established as enclosed while
+  `water` reads `ENCLOSED_PLURALITY` (`RIN_009`); the prior instrument
+  `effective-redundancy-audit` is IMPORTED as a cross-check rather than a
+  STOP, its `n_nominal >= 2 and n_eff == 1` agreeing on every decided need
+  (`RIN_007`); `independence_ratio` registered in `tools/known_answer.py`
+  with `None` pinned against `0.0`. **FWO-3** `untried_options_audit.py`:
+  five checks on a decision record, `ABSENT_FIELD` kept apart from `NO`
+  on every one; six read records coded by line (PEP 572, Rust RFC and
+  MADR templates, the OpenAI Model Spec, two in-tree documents) — record
+  types WITH an untried-options slot are common in engineering
+  governance, the finding the order asked to report prominently
+  (`RIN_014`), while no coded type binds first cost to the proposer or
+  records the authorizer's prior exposure (`RIN_013`), and both AI
+  documents read ABSENT_FIELD on C3 at n = 2 (`RIN_015`); the structure's
+  source line carried verbatim, no name attached. **FWO-4**
+  `RESEARCH_DESIGNS.md`, four designs with scope, kill condition and
+  cheapest first run, literature prior-art NOT_RUN and in-tree adjacency
+  recorded. `SOURCES.md` records every fetch (sha256, timestamp) and every
+  refused host. Nineteen `RIN_*` claims; check count printed by
+  `python3 route-independence/test_route.py`. Stdlib only, parses under
+  3.9, phone-buildable, CC0.
 - `custody-verification-band/` — Marker under exploration. Criterion: a layer
   buffers a system iff its productive function is self-custodied AND locally
   verifiable, otherwise it is a transmission belt. Eleven cases from Late

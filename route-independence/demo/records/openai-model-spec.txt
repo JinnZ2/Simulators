@@ -1,0 +1,17 @@
+# OpenAI Model Spec (a published AI alignment document). Read from
+# raw.githubusercontent.com/openai/model_spec/main/model_spec.md on
+# 2026-09-27T01:28Z, sha256 a52378c1ae7514b091162c17abd285365eddaf4066f70773f3ffe05453f94cab.
+# The document states intended model behaviour and a chain of command. It
+# carries no section enumerating alternatives to its own design. Line 3841
+# instructs the MODEL to offer "relevant alternatives considered" to users;
+# that is a slot for the model's outputs and not for the spec's own decisions,
+# so options_not_tried is left absent here.
+record_kind: instance
+source: openai/model_spec model_spec.md
+source_status: read
+source_locator: raw.githubusercontent.com/openai/model_spec/main/model_spec.md; sha256 a52378c1...; Overview lines 1-27, chain of command line 171
+decision: the intended behaviour and chain of command for the models named in the Overview (lines 3-19, 171)
+proposer: the document's publishing organization (line 3)
+reviewer: public discussion invited (line 13: "invite public discussion on ways to improve it")
+reviewer_can_add_options: UNKNOWN
+reviewer_added_options: UNKNOWN
