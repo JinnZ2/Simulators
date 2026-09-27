@@ -13650,7 +13650,9 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   UNMEASURED, sources NOT_FETCHED; the AEB cross-link is an inline
   definition (override of a false intervention logged as driver error).
   Render screens clean through `sheet-structure-scan/no_severity`.
-  Ten `STE_*` claims; test 47/47. Stdlib only, CC0.
+  Eleven `STE_*` claims (STE_011: X6, a trailer lead of a quarter
+  period, reads TRAILER_LEADS at -1.8 s against a constructed 2.0 s on the
+  first run, recorded before any repair); test 49/49. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
@@ -13966,9 +13968,55 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   unfielded (`RIN_035`, `RIN_036`); the C/NC tallies PARTIAL from search
   fragments (`RIN_037`). The order's code was pushed unexecuted through
   the API and run once afterwards, the render recorded as
-  `samples/dependency_chain.sample.txt` (`RIN_038`). Thirty-eight `RIN_*`
-  claims; check counts printed by `python3 route-independence/test_route.py`
-  and `python3 route-independence/test_dependency_chain.py`. Stdlib only,
+  `samples/dependency_chain.sample.txt` (`RIN_038`). **The order of 2026-09-27b (FWO-8..14, single-channel additions)** then
+  landed verbatim beside the other two, with `EXPECTED_2026-09-27b.md`
+  committed at `fd198aa` before any module, fixture or annotation existed
+  (the order's new key-holder rule: expected block first, inputs from an
+  external document, one fixture per instrument built to FAIL, a hold names
+  which rules it met). **FWO-8** `edge_taxonomy.py` extends FWO-5 without
+  redefining a name: `edge_class` (DIRECT / INSTITUTIONAL / ACCESS /
+  MEASUREMENT / TEMPORAL / RECURSIVE / UNKNOWN, carried) and `coupling_side`
+  (SURVIVAL / SELECTION / BOTH / UNKNOWN) on a copy of each route, a
+  SURVIVAL-only route INDEPENDENT at the selection layer and the two layer
+  readings never merged (AST); DIRECT is 0 across the three cases (`RIN_041`,
+  held under rules 1 and 3, rule 2 unmet since every class is the session's
+  reading), case (b)'s independent rows are `data_access` and `publication`
+  with the row-level registration REFUTED as the EXPECTED file predicted
+  (`RIN_043`), and in case (c) `input_purchase` is the point the
+  (account, settlement) pair cannot place, every one of its three USD/USD
+  routes colliding with the settlement penalty row and separated only by
+  `edge_class` (`RIN_044`). **FWO-9** `question_space.py` is a declared
+  column over FWO-5's six points plus FWO-13's `tax_step`, refusing a loss
+  estimate (`RIN_045`). **FWO-10** `standards_register.py` carries six
+  standards from memory with the applied-to-the-medium column
+  UNKNOWN_NOT_SEARCHED on every row, so the order's NOT_APPLIED expectation
+  is NOT_EVALUABLE rather than held, and the prior-art memory entries each
+  read as plumbing, not the medium (`RIN_046`). **FWO-11** `lag_count.py`
+  carries the six seeds with every date UNSOURCED, the survivor-filter line
+  in every header, Antikythera RECOVERED_NOT_REDISCOVERED with the
+  capability reading carried beside it, the unsourced lags [550, 1506, 1921,
+  2297] apart from an empty sourced distribution, no seed INDEPENDENT, a
+  reach before its production refused (`RIN_047`; `lag_years` registered in
+  `tools/known_answer.py`). **FWO-12** `unpaid_maintenance.py` is
+  DESIGN_WRITTEN: the three-party filter, a share that refuses to run without
+  a public dataset, the prediction NOT_RUN and a fixture on which it RISES
+  (`RIN_048`). **FWO-13** `tax_step.py` registers the tax step as its own row
+  type, refusing an FWO-6 entry shape and a PROPOSED row asking to be
+  REGISTERED; appearance 3 stays CANDIDATE, neither verified nor dropped
+  (`RIN_049`). **FWO-14** is DESIGN ONLY (`REFERENCE_INSTABILITY_DESIGN.md`,
+  twelve CANDIDATE_UNSOURCED rows, G(t) at seven dates with three falsifiable
+  directions, `RIN_050`). Carried questions: the Noise repository is outside
+  scope, but `origin/claude/noise-information-four-tools-5u0l4k` in this
+  repository carries a SECOND build of `stability-trigger-envelope/`
+  (`RIN_051`, RIN_024's shape again, not resolved); X6 added to ESP-1 with
+  its first run recorded before any repair (`RIN_053`, STE_011); the three
+  merge-lost blocks restored from the losing-parent blobs after the clone
+  was unshallowed, the superseded catalogue paragraph deliberately left
+  (`RIN_055`); RIN_024 untouched (`RIN_056`). Fifty-seven `RIN_*` claims;
+  check counts printed by `python3 route-independence/test_route.py`,
+  `python3 route-independence/test_dependency_chain.py` and
+  `python3 route-independence/test_single_channel.py`, the last also
+  printing the fail-fixture line. Stdlib only,
   parses under 3.9, phone-buildable, CC0.
 - `custody-verification-band/` — Marker under exploration. Criterion: a layer
   buffers a system iff its productive function is self-custodied AND locally

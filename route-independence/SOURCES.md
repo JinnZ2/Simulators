@@ -86,3 +86,31 @@ in `CLAIM_TABLE.md` RIN_038), and `dependency_chain_audit.py` was
 rendered to `samples/dependency_chain.sample.txt`. Carried item 1 was
 re-read from the local clone (`git diff 57b9cdf^1 57b9cdf --
 tools/run_manifest.py`), the one item that moved from CARRIED to READ.
+
+## Order of 2026-09-27b
+
+Nothing fetched. No publisher, standards-body, regulator, statistical-agency,
+treasury or central-bank host is on the egress allowlist; the same measured
+refusals as the sections above apply and no new host was probed, since a
+refused CONNECT on one more host is not new information. What each item
+carries instead:
+
+- FWO-8: FWO-5's three cases (CONSTRUCTED / CARRIED, above); every
+  `edge_class` and `coupling_side` is this session's reading with its basis in
+  the table. The taxonomy itself is CARRIED from the order, which carries it
+  from a pasted third-party model output.
+- FWO-9: declarations, this session's; the fifth class OBSERVED, carried.
+- FWO-10: six standards named from memory (CARRIED_FROM_MEMORY), none read;
+  prior-art entries from memory, none read.
+- FWO-11: six seed cases from the order's list; every date UNSOURCED —
+  recalled, and the order's "verify, do not assume" was not done because no
+  source could be reached.
+- FWO-12: the Linux figures CARRIED from the order (its own note: web search
+  2026-09-27, citations in the authoring session).
+- FWO-13: rows 1–2 CARRIED from the order's table (OBSERVED there); row 3
+  PROPOSED there, not verified; the fringe-benefit rules from memory.
+- FWO-14: twelve candidate rows from memory, CANDIDATE_UNSOURCED.
+
+Carried question 5 was answered from this clone's own history after
+`git fetch --unshallow origin` (236 → 894 commits), which is the one fetch
+made: the losing-parent blobs at `8d9b6c9^2`, `2c68758^1` and `83bb7d9^1`.

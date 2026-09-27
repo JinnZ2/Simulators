@@ -308,3 +308,48 @@ samples/dependency_chain.sample.txt the recorded first render
 CLAIM_TABLE.md                      RIN_025..038 appended
 SOURCES.md                          a section appended; nothing fetched
 ```
+
+# Order of 2026-09-27b — single-channel additions (FWO-8 .. FWO-14)
+
+`WORK_ORDER_2026-09-27b.md` verbatim. Six instruments and one design, extending
+FWO-5 and FWO-6 and rebuilding neither. `EXPECTED_2026-09-27b.md` was committed
+at `fd198aa` before any module, fixture or annotation of this order existed;
+`CLAIM_TABLE.md` RIN_039..057 score every registered expectation against it.
+
+```
+STATE   built and run; every render recorded under samples/
+        key-holder rules: 1 met everywhere (fd198aa); 3 met everywhere (6 of 6
+        fail fixtures); 2 met only on FWO-13 rows 1-2 -- every other input is
+        the FWO-5 cases, this session's readings, or a recalled date, and each
+        claim row says so.  Nothing here is a reader independent of the author.
+```
+
+| item | file | status | what it returns |
+|---|---|---|---|
+| FWO-8 edge taxonomy | `edge_taxonomy.py` | BUILT | the three FWO-5 cases under `edge_class` / `coupling_side`; two layer readings never merged; DIRECT 0 of 0 across the cases; the two-layer schema's unplaceable points per case |
+| FWO-9 question space | `question_space.py` | BUILT | per conversion point (FWO-5's six + `tax_step`), the declared classes that stop being askable; UNKNOWN allowed; no loss estimated |
+| FWO-10 standards register | `standards_register.py` | BUILT; verdict NOT_EVALUABLE | six rows CARRIED_FROM_MEMORY; applied column UNKNOWN_NOT_SEARCHED on every row; prior art NOT_RUN with the plumbing/medium reading declared |
+| FWO-11 lag count | `lag_count.py` | BUILT | six seeds, every date UNSOURCED; sourced distribution empty, unsourced [550, 1506, 1921, 2297]; no seed INDEPENDENT |
+| FWO-12 unpaid maintenance | `unpaid_maintenance.py` | DESIGN_WRITTEN | schema, filter, NOT_RUN share; prior art NOT_RUN; prediction NOT_RUN |
+| FWO-13 tax step | `tax_step.py`, `tax_step_register.json` | BUILT | its own row type; 2 REGISTERED, 1 CANDIDATE; 4 of 8 FWO-6 entries carry a tax mechanism |
+| FWO-14 reference instability | `REFERENCE_INSTABILITY_DESIGN.md` | DESIGN ONLY | row type, twelve CANDIDATE_UNSOURCED rows, the metrology comparison, G(t) at seven dates with three falsifiable directions |
+
+Where a prediction failed, first: E8.4's row-level registration (`data_access`
+alone) was REFUTED by the recorded FWO-5 render, exactly as the EXPECTED file
+said it would be — case (b)'s independent rows are `data_access` and
+`publication`. E10.1 and E12.1 are NOT_EVALUABLE, not held, because the
+searches they need cannot run here. Every other expectation held under rules 1
+and 3 with rule 2 unmet, which is the weakest kind of hold and is labelled so.
+
+Carried audit questions: 1 and 2 are about a repository outside scope
+(RIN_051, RIN_052 record what this tree does show — a second ESP-1 build on
+`origin/claude/noise-information-four-tools-5u0l4k`); 3 is done (X6, first
+run recorded before repair, STE_011); 4 is answered (RIN_043); 5 is done from
+the losing-parent blobs (RIN_055); 6 is not resolved, by instruction.
+
+Commands:
+
+```
+python3 route-independence/test_single_channel.py     # prints the count and the fail-fixture line
+python3 route-independence/edge_taxonomy.py           # and each of the other five modules; --choices on each
+```

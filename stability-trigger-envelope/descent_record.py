@@ -621,6 +621,7 @@ def fixtures():
     quiet_cab = constructed_trace(0.2, 8.0, 7)
     quiet_trl = constructed_trace(0.2, 8.0, 9)
     trl_lead = constructed_trace(0.6, 4.0, 8)            # trailer first
+    trl_sub = constructed_trace(0.6, 6.0, 10)            # trailer first by 2 s: a quarter of the 8 s period
 
     f5 = [_rec("ROAD_2", 31.0, None, None, ts=None),
           _rec("ROAD_2", 34.0, cab_osc, trl_lag)]
@@ -648,6 +649,8 @@ def fixtures():
         ("X4", "cab high but trailer leads", NEITHER_MODE,
          _rec("ROAD_1", 34.0, cab_osc, trl_lead), None),
         ("X5", "four runs on a road", EDGE_BRACKETED, x5, "ROAD_3"),
+        ("X6", "cab high, trailer leads by a fraction of one period", NEITHER_MODE,
+         _rec("ROAD_1", 34.0, cab_osc, trl_sub), None),
     ]
 
 

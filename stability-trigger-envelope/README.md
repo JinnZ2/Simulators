@@ -273,6 +273,7 @@ X2  snow surface                      OUT_OF_ENVELOPE
 X3  both channels quiet               NEITHER_MODE
 X4  cab high, trailer leads           NEITHER_MODE
 X5  four runs, stepped speeds         EDGE_BRACKETED 27-30 mph
+X6  cab high, trailer leads by 2.0 s  NEITHER_MODE (lag reads -1.8 s; STE_011)
 ```
 
 Trace CSV format (one file per phone):

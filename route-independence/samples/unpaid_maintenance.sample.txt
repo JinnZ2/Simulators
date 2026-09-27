@@ -1,0 +1,20 @@
+unpaid_maintenance -- FWO-12; DESIGN plus prior-art check; measurand NOT_RUN (no public dataset)
+
+record schema: work_order_id, requester, assignee, asset_owner, planned, in_paid_scope, returned_under_token, source
+classification on the CONSTRUCTED fixture: ['UNPAID', 'NOT_UNPAID', 'NOT_UNPAID', 'UNKNOWN']
+unpaid_share on the fixture: NOT_RUN -- no public dataset declared; the order says run only if one is found
+
+prior art: NOT_RUN (egress allowlist); memory entries unverified
+   employee engagement instruments                          measures: attitude, questionnaire                          counts behaviour: False
+   organisational citizenship behaviour scales              measures: supervisor- or self-rated frequency, questionnaire counts behaviour: False
+   counted unsolicited-fixing behaviour from work-order logs measures: NONE RECALLED                                    counts behaviour: UNKNOWN
+expected E12.1 (attitude by survey only): NOT_EVALUABLE here
+
+anchor: Linux kernel volunteer share and corporate-authored commit share
+   volunteer share fell from about 15% to about 6%; corporate-authored commits 84.3% in 2025
+   CARRIED: web search 2026-09-27, citations in the authoring session; not re-fetched here
+   not yet split by: whether the employer had a stake in the subsystem -- the selection-side test (FWO-8 coupling_side)
+
+prediction (PROPOSED): unpaid maintenance falls as token-coupling rises -- NOT_RUN
+fail fixture (CONSTRUCTED series): prediction_check -> RISES
+choices in force: [CHOICE 1], [CHOICE 2], [CHOICE 3]

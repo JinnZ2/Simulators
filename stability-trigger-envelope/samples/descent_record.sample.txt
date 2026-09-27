@@ -27,6 +27,9 @@ X4   NEITHER_MODE            NEITHER_MODE            ok   cab high but trailer l
        cab_rms_dps=3.347  trailer_rms_dps=0.387  trailer_rms_at_trigger_dps=0.26  amp_ratio=8.65  trailer_lag_s=-3.65  lag_corr=0.965  lead=TRAILER_LEADS  clock_misalign_s=0.0
 X5   EDGE_BRACKETED          EDGE_BRACKETED          ok   four runs on a road
        n_runs=4  n_fired=2  n_quiet=2  onset_mph=30.0  bracket_mph=(27.0, 30.0)  fired_spread_mph={'min': 30.0, 'max': 33.0, 'stdev': 2.12}  mixed_conditions={}
+X6   NEITHER_MODE            NEITHER_MODE            ok   cab high, trailer leads by a fraction of one period
+       reason: cab high, lead TRAILER_LEADS
+       cab_rms_dps=3.347  trailer_rms_dps=0.382  trailer_rms_at_trigger_dps=0.552  amp_ratio=8.77  trailer_lag_s=-1.8  lag_corr=0.979  lead=TRAILER_LEADS  clock_misalign_s=0.0
 
 relocation_tally on X5 (counts only, no total):
   by_event   none=1  pass=1  near_miss=1  incident=0  closure=1

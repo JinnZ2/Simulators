@@ -737,6 +737,7 @@ EXPECTED_METRICS = (
     "chain-position/load_class.py::stability_product",
     "measurand-partition/wo4_lumber.py::stiffness_ratio",
     "route-independence/route_independence.py::independence_ratio",
+    "route-independence/lag_count.py::lag_years",
     "revision-survival/revision_survival.py::delta",
     "routing-data-layer/rate_form.py::sustained_excess",
     "shape-spec-audit/shadow_read.py::outline_area",
@@ -1555,6 +1556,7 @@ def seed():
     )
     _seed_move_set()
     _seed_route_independence()
+    _seed_lag_count()
 
 
 def _irb_effective_origins(coupling):
@@ -1701,6 +1703,37 @@ def _seed_route_independence():
                  "an enclosure nobody measured"),
         ],
         note="FWO-2; the zero-route case pins None against 0.0.",
+    )
+
+
+def _lag_years(approx_date, reach_date, reached):
+    """route-independence/lag_count.py::lag_years, imported. FWO-11: the lag a
+    funding-coupled system took to reach a result produced under direct
+    constraint. Expected values are subtraction by hand across the era
+    boundary; None pins the classes that carry no reach date by definition
+    against a lag of zero, since a zero would read as 'reached at once'."""
+    import importlib.util
+    path = os.path.join(ROOT, "route-independence", "lag_count.py")
+    spec = importlib.util.spec_from_file_location("_lag_count", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.lag_years(approx_date, reach_date, reached)
+
+
+def _seed_lag_count():
+    register(
+        "route-independence/lag_count.py::lag_years",
+        _lag_years,
+        [
+            case("across the era boundary", (-200, 1821, "FULL"), 2021,
+                 "1821 - (-200) by hand; astronomical years"),
+            case("partial reach", (1450, 2000, "PARTIAL"), 550, "2000 - 1450 by hand"),
+            case("recovered, not rediscovered", (-125, None, "RECOVERED_NOT_REDISCOVERED"), None,
+                 "no reach date exists for the class; None, never 0"),
+            case("not reached with dates supplied", (500, 2006, "NOT_REACHED"), None,
+                 "the class carries no lag whatever dates are passed; None, never 1506"),
+        ],
+        note="FWO-11; the None cases pin absence against a zero lag.",
     )
 
 
