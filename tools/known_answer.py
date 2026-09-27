@@ -1488,6 +1488,70 @@ def seed():
     # and re-seeds, which is what tests/test_known_answer_gate.py
     # does. Found by adding the move-set entries to the manifest --
     # the coverage claim is what made the gap visible.
+    register(
+        "ledger/py_ledger/engine.py::quantize",
+        _ledger_quantize,
+        [
+            case("trailing zeros do not add digits", ("0.6250000", 3),
+                 "0.625",
+                 "2.5/4 is exactly 0.625, three significant digits. A "
+                 "value written with trailing zeros is the same value and "
+                 "a different string, which is the whole reason the ledger "
+                 "compares numerically"),
+            case("significant digits, not decimal places", ("1234.5", 2),
+                 "1.2E+3",
+                 "two SIGNIFICANT digits. Under the other reading of the "
+                 "word this is 1234.50, and the two disagree on every "
+                 "value that is not an integer"),
+            case("half-even rounds down from an even digit",
+                 ("0.125", 2), "0.12",
+                 "the digit before the 5 is 2, even, so nearest-even "
+                 "keeps it. Half-up would give 0.13"),
+            case("half-even rounds up from an odd digit",
+                 ("0.135", 2), "0.14",
+                 "the digit before the 5 is 3, odd, so nearest-even moves "
+                 "it. This case and the one above differ only in that "
+                 "digit, so a fixed rounding direction fails exactly one "
+                 "of them"),
+        ],
+        note=("The ledger's whole comparison rests on this. A quantize "
+              "reading precision as decimal places would report every "
+              "value in the repo as drifted on its first run, and a "
+              "quantize rounding half-up would report drift only "
+              "sometimes, which is worse."),
+    )
+    register(
+        "ledger/py_ledger/engine.py::recompute",
+        _ledger_recompute,
+        [
+            case("a division that closes", ("divide",), "RECOMPUTED 0.625",
+                 "2.5 / 4 = 0.625 by hand, at six significant digits"),
+            case("division by a measured zero",
+                 ("divide_by_measured_zero",), "UNDEFINED None",
+                 "a zero divisor returns UNDEFINED and no number. Not 0, "
+                 "which is a measurement, and not the numerator. This is "
+                 "the case where a ledger silently reporting a value "
+                 "would put a wrong number into EXPECTED and pin it"),
+            case("an operand that is not in the record set",
+                 ("operand_absent",), "UNRESOLVED_OPERAND None",
+                 "an absent operand is a third state, kept apart from a "
+                 "zero operand and from a claim that recomputed"),
+            case("a power, a literal, and precedence",
+                 ("power_and_precedence",), "RECOMPUTED 0.125",
+                 "0.5**3 = 0.125, times 4 divided by 4. Written so that "
+                 "left-to-right evaluation with no precedence gives "
+                 "0.125 as well but a wrong exponent does not"),
+            case("a recurring quotient", ("recurring",),
+                 "RECOMPUTED 0.333333",
+                 "1/3 at six significant digits. Recomputation carries "
+                 "guard digits and quantizes once at the end, so a "
+                 "per-step round would show here"),
+        ],
+        note=("Every outcome the ledger can reach on one claim, pinned "
+              "with its value in the same string: an UNDEFINED that "
+              "returned a number and a RECOMPUTED that returned the "
+              "wrong one are different failures."),
+    )
     _seed_move_set()
 
 
@@ -1558,6 +1622,54 @@ def _fmr_fraction_cap(n_other, fraction):
     finally:
         sys.path.pop(0)
 
+
+
+
+
+def _drc_count_relation(inner, outer, stated_total):
+    """deep-research-correction/check.py::count_relation, imported. The
+    C-2 classifier: given an inner count and an outer count and a stated
+    total, which arithmetic the total implies -- DISJOINT (inner+outer),
+    NESTED (outer, inner<outer) or NEITHER. Expected values are the
+    definitions, not the implementation."""
+    import importlib.util
+    path = os.path.join(ROOT, "deep-research-correction", "check.py")
+    sys.path.insert(0, os.path.join(ROOT, "measurand-partition"))
+    try:
+        spec = importlib.util.spec_from_file_location("_drc_check", path)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        return mod.count_relation(inner, outer, stated_total)
+    finally:
+        sys.path.pop(0)
+
+def _rcl_composed_bias(a, c):
+    """reporting-chain-loss/hop_compose.py::composed_bias, imported. The
+    WO-5 transit-loss metric: B = sum_k (prod_{j>k} a_j) * c_k, the incentive
+    stack composed across a linear-Gaussian hop chain. Expected values are the
+    closed form by hand, not the implementation; the all-zero-offset case is
+    an exact 0, and the missing-gain case is None, so a zero and an absence
+    are pinned apart."""
+    import importlib.util
+    path = os.path.join(ROOT, "reporting-chain-loss", "hop_compose.py")
+    spec = importlib.util.spec_from_file_location("_rcl_hop", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.composed_bias(a, c)
+
+def _cpd_stability_product(failure_probs):
+    """chain-position/load_class.py::stability_product, imported. WO-1's
+    reachable-controller compounding: P(all assumed stabilities hold) = product
+    of (1 - p), None if any factor is unassessed (the order's RULE -- an
+    unquantifiable probability cannot be propagated) or out of [0, 1]. Expected
+    values are the product by hand; the None cases pin the unassessed factor
+    apart from a factor of zero."""
+    import importlib.util
+    path = os.path.join(ROOT, "chain-position", "load_class.py")
+    spec = importlib.util.spec_from_file_location("_cpd_load", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.stability_product(failure_probs)
 
 
 def _msv_coverage(which):
