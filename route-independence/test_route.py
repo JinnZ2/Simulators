@@ -266,10 +266,23 @@ def t_fwo3():
     check(all(audits[n]["C1"] == uoa.ABSENT_FIELD for n in real), "no read record carries a first_cost_bearers slot")
     check(all(audits[n]["C2"] == uoa.ABSENT_FIELD for n in real), "no read record carries an authorizer_prior_exposure slot")
     with_slot = [n for n in real if c3[n] == uoa.YES]
-    check(set(with_slot) == {"pep-0572.txt", "rust-rfc-template.txt", "madr-template.txt", "seam-gaps-g05.txt"},
-          "record types WITH an untried-options slot exist: %s" % with_slot)
+    check(set(with_slot) == {"seam-gaps-g05.txt"},
+          "the council's untried-and-available slot is on one read record: %s" % with_slot)
+    considered = [n for n in real if audits[n]["C3c"] == uoa.YES]
+    check(set(considered) == {"pep-0572.txt", "rust-rfc-template.txt", "madr-template.txt"},
+          "the considered-and-rejected slot is on three engineering records: %s" % considered)
+    check(all(audits[n]["C3a"] == uoa.ABSENT_FIELD for n in real),
+          "no read record carries a slot for options tried in the world")
     check(c3["openai-model-spec.txt"] == uoa.ABSENT_FIELD and c3["design-basis-ai.txt"] == uoa.ABSENT_FIELD,
           "both AI documents read ABSENT_FIELD on C3")
+    check(not [n for n in real if audits[n]["C4"] == uoa.YES],
+          "no read record gives an independent reviewer authority to add options")
+    check(audits["pep-0572.txt"]["C4"] == uoa.NO, "PEP 572 reads C4 NO on PEP 1's stated authority")
+    check(not [n for n in real if audits[n]["C5"] == uoa.RETURN_FOR_REDO],
+          "RETURN_FOR_REDO fires on no read record")
+    # options_considered never counts toward C3 [CHOICE 4]
+    a = uoa.audit(rec("decision: d\noptions_considered: x; y\n"))
+    check(a["C3"] == uoa.ABSENT_FIELD and a["C3c"] == uoa.YES, "a considered-and-rejected list does not read as C3")
 
 
 # ============================================================ renders / headers

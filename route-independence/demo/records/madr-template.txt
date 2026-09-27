@@ -8,7 +8,6 @@ source_locator: raw.githubusercontent.com/adr/madr/develop/template/adr-template
 decision: "Decision Outcome" slot (line 30)
 proposer: no proposer slot; the metadata block (lines 2-9) names decision-makers, consulted and informed roles
 authorizer: "decision-makers" metadata slot (line 5)
-options_tried:
-options_not_tried: "Considered Options" slot (line 23) with "Pros and Cons of the Options" (line 47)
+options_considered: "Considered Options" slot (line 23) with "Pros and Cons of the Options" (line 47) -- evaluated on pros and cons; no slot says whether any was tried
 reviewer: "consulted" metadata slot (line 6: "with whom there is a two-way communication"); "Confirmation" (line 42) names how the decision is checked, not who may add options
 reviewer_added_options: UNKNOWN

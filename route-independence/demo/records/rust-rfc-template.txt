@@ -9,7 +9,9 @@ source_status: read
 source_locator: raw.githubusercontent.com/rust-lang/rfcs/master/0000-template.md; sha256 88423c4b...
 decision: Summary slot (line 6)
 proposer: RFC author slot (Feature Name / RFC PR metadata, lines 1-4)
-options_tried:
-options_not_tried: "Rationale and alternatives" slot (line 52): "What other designs have been considered and what is the rationale for not choosing them?" (line 56); "Drawbacks" slot (line 47); "Unresolved questions" slot (line 77)
+options_considered: "Rationale and alternatives" slot (line 52): "What other designs have been considered and what is the rationale for not choosing them?" (line 56); "Drawbacks" slot (line 47)
+# "Unresolved questions" (line 77) is the nearest slot to something still
+# open, and it holds questions, not options; it is not entered as
+# options_not_tried, so C3 reads ABSENT_FIELD for this type.
 reviewer: RFC PR review (line 3 names the PR); the template names no reviewer role
 reviewer_added_options: UNKNOWN

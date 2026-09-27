@@ -1,12 +1,14 @@
 # In-tree: seam-gaps/OPEN_QUESTIONS.md entry 5, a DECISION entry (which
 # record is the preindustrial ENSO baseline). Read in this session; lines
 # 278-334 of that file. Neither option has been run ("Blocked by: access",
-# line 312), so options_tried is present and empty.
+# line 312); the entry type has no slot for options tried in the world, so
+# that field is omitted. Its Options are two candidates still open, each
+# with a stated consequence and a discriminator to run -- the nearest thing
+# in the sample to the council's untried-and-available field.
 record_kind: instance
 source: seam-gaps/OPEN_QUESTIONS.md entry 5 (G-05)
 source_status: read
 source_locator: lines 278-334
 decision: which record is the preindustrial ENSO baseline (line 278)
 proposer: the render (the entry states it is "this render's call", line 331)
-options_tried:
 options_not_tried: A. the tree-ring index is the reference (line 292); B. the coral record is the reference (line 297)
