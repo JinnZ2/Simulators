@@ -129,7 +129,7 @@ def t_flags():
     check(D.audit_dependency(D.dependency("energy", [conv("a"), ind("b")]))["flag"] == ri.NOT_ENCLOSED, "one independent -> NOT_ENCLOSED")
     check(D.audit_dependency(D.dependency("energy", [conv("a"), unk("b")]))["flag"] == ri.UNKNOWN, "band straddles 0 -> UNKNOWN")
     check(D.audit_dependency(D.dependency("energy", [conv("a")]))["flag"] == ri.SINGLE_ROUTE, "one route -> SINGLE_ROUTE")
-    # a limit of the imported instrument, surfaced by wrapping it (RIN_024): route_count == 1
+    # a limit of the imported instrument, surfaced by wrapping it (RIN_028): route_count == 1
     # is tested before the band, so a single UNKNOWN route reads SINGLE_ROUTE, not UNKNOWN.
     row = D.audit_dependency(D.dependency("energy", [unk("a")]))
     check(row["flag"] == ri.SINGLE_ROUTE and row["unknown_count"] == 1 and row["independent_band"] == (0, 1),

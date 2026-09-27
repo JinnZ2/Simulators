@@ -442,7 +442,7 @@ def render(out=None):
     else:
         w("== FWO-6 register: conversion_register.json ABSENT; tally NOT_RUN\n")
     w("\nchoices in force: %s\n" % ", ".join("[CHOICE %d]" % k for k in sorted(CHOICES)))
-    w("execution note: authored unexecuted; run test_dependency_chain.py before quoting any line above\n")
+    w("execution note: test_dependency_chain.py prints the check count; samples/dependency_chain.sample.txt is one recorded render, compare before quoting\n")
 
 
 def main(argv):

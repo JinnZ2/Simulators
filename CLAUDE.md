@@ -13927,9 +13927,49 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   and `params/` left in place -- the source of two of the four root-suite
   failures, not repaired here (RIN_024). The instrument's own first run
   reported 1,400 phantom lines from a shallow clone and now refuses
-  `BASE_UNREACHABLE` (RIN_023). Twenty-four `RIN_*` claims; check count printed by
-  `python3 route-independence/test_route.py`. Stdlib only, parses under
-  3.9, phone-buildable, CC0.
+  `BASE_UNREACHABLE` (RIN_023). **The FABLE WORK ORDER of 2026-09-27**
+  (dependency chains, conversion points, single-medium detectability)
+  then landed verbatim beside the packet, `RIN_025..038` — first drafted
+  as `RIN_021..034` against `177d885` and renumbered before push, since
+  the packet had used those ids meanwhile. **FWO-5**
+  `dependency_chain_audit.py` EXTENDS FWO-2 and rebuilds none of it: each
+  dependency is one FWO-2 need, flags, bands and the
+  `effective-redundancy-audit` cross-check are `route_independence.py`'s,
+  asserted by AST (`RIN_025`); `status` is DERIVED from FWO-2's
+  `discharges_own_obligations` and `permitted` is read by nothing, which
+  is how "permitted is not independent" holds structurally (`RIN_026`);
+  absence is never a negative — undeclared settlement is UNKNOWN, the
+  result-level ratio is a band whenever an UNKNOWN route exists, silence
+  on a dependency is refused (`RIN_027`); and wrapping FWO-2 surfaced one
+  limit of its flag order, a single UNKNOWN route reading `SINGLE_ROUTE`,
+  carried beside rather than repaired (`RIN_028`). Three demo cases with
+  expectations REGISTERED before the first run, and **the run then made:
+  every prediction held** — household phenology band [0.750, 0.875]; an
+  open-access finding (instance named, not read) at 0.200 with the
+  order's own `enclosed_on_publication` reading MISMATCH, since a preprint
+  deposit incurs no obligation at one hop and an open dataset settles in
+  citation (`RIN_030`); a bitcoin exit band [0.500, 0.750], ENCLOSED on
+  legal compliance at `settlement`, `input_purchase` leading the ordered
+  conversion points 3 to 1 (`RIN_031`). **FWO-6** `conversion_register.json`:
+  eight exit attempts, every source CARRIED or UNKNOWN, no entry rated;
+  tally production 6 / settlement 4 / legal 1 / publication 1, so `SPREAD`
+  and the SETTLEMENT hypothesis `NOT_SUPPORTED_ON_THIS_REGISTER`, against
+  the coder's own hypothesis (`RIN_032`). **FWO-7** `FWO7_DESIGN.md`:
+  three control sources, each with scope, prediction, kill condition,
+  cheapest first run and its confound; nothing run (`RIN_033`). The four
+  carried items were answered against `177d885` and the packet's own
+  `RIN_021`/`RIN_022` answered three of them first; both readings stand —
+  the `57b9cdf` loss read as two files from API stats and as one from the
+  diff, `run_manifest.py`'s two lines being a replacement (`RIN_034`);
+  the considered-and-rejected coding and PEP 572's C4 already recoded by
+  `5b2c0f0`, with the trial marker and the propose/compel split still
+  unfielded (`RIN_035`, `RIN_036`); the C/NC tallies PARTIAL from search
+  fragments (`RIN_037`). The order's code was pushed unexecuted through
+  the API and run once afterwards, the render recorded as
+  `samples/dependency_chain.sample.txt` (`RIN_038`). Thirty-eight `RIN_*`
+  claims; check counts printed by `python3 route-independence/test_route.py`
+  and `python3 route-independence/test_dependency_chain.py`. Stdlib only,
+  parses under 3.9, phone-buildable, CC0.
 - `custody-verification-band/` — Marker under exploration. Criterion: a layer
   buffers a system iff its productive function is self-custodied AND locally
   verifiable, otherwise it is a transmission belt. Eleven cases from Late

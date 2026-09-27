@@ -164,3 +164,147 @@ instead. Details in the claim table.
 Claims `RIN_001..019` in `CLAIM_TABLE.md`; fetch and refusal record in
 `SOURCES.md`. Check count printed by `python3 route-independence/test_route.py`;
 the instruments refuse `--selftest` and name that file.
+
+
+---
+
+# Order of 2026-09-27 — dependency chains, conversion points, single-medium detectability
+
+`WORK_ORDER_2026-09-27.md`, verbatim. Extends FWO-2 and rebuilds none of
+it. Claims `RIN_025..038` in `CLAIM_TABLE.md` (first drafted as
+`RIN_021..034`; renumbered before push, since the packet had used those
+ids at `5b2c0f0`/`0a182ed` after this order was written against `177d885`).
+
+```
+python3 test_dependency_chain.py        checks; prints its count
+python3 dependency_chain_audit.py       three demo cases + the FWO-6 register tally
+python3 dependency_chain_audit.py --choices
+```
+
+## STATE, before any number
+
+```
+execution   the session that wrote this order's files had NO SHELL when it wrote
+            them; they were pushed through the GitHub API at 5159ba4 unexecuted.
+            A later turn of the same session regained a shell and ran the test
+            once on this branch before the claim table was pushed:
+            dependency-chain: 128 checks, 0 failed.  Every prediction registered
+            in EXPECTED before that run HELD; none was edited after it (RIN_038).
+FWO-2       PRESENT on this branch and REUSED: flags, bands, ratio and the
+            prior-art cross-check are route_independence.py's; the test asserts
+            by AST that nothing of it is redefined.  test_route.py stays green
+            under the wrapper (122 checks, 0 failed).
+samples/    dependency_chain.sample.txt is the recorded render of that run.
+```
+
+## FWO-5 -- `dependency_chain_audit.py`  (BUILT, RUN)
+
+One produced result, every dependency needed to produce it, and for each
+whether ANY route discharges its own obligations in its own medium. Each
+dependency is one FWO-2 need; a route is one FWO-2 row plus this order's
+fields.
+
+```
+result --> dependency (10 categories) --> routes
+   route   medium_of_account (= settles_in) / medium_of_settlement (= obligation_medium)
+           status DERIVED from FWO-2's discharges_own_obligations:
+             None -> UNKNOWN ; True -> INDEPENDENT ; False -> CONVERTED (+ converted_into)
+           conversion_point   required on CONVERTED, refused elsewhere; closed vocabulary
+           source             required, typed CONSTRUCTED | CARRIED | VERIFIED | READ
+           permitted          recorded in FWO-2's yes|no|UNKNOWN and read by nothing
+   dependency  NOT_NEEDED with a reason, or routes; silence is refused
+               flag = FWO-2's ; independent band ; converted_count ; unknown_count ;
+               cross-check = effective_redundancy n_eff via FWO-2, or PRIOR_ART_NOT_IMPORTED
+   result  independence band [lo, hi] over dependencies with routes
+             lo = dependencies certainly carrying an independent route
+             hi = dependencies possibly carrying one (an UNKNOWN route counts at the top)
+             None when nothing is routed
+           conversion points ordered by DISTINCT DEPENDENCIES routing through each
+           absent_field (category not in the map) apart from not_needed (declared)
+```
+
+**Prior art, checked first.** In-tree: FWO-2 itself, and through it
+`effective-redundancy-audit`'s `Case.n_eff`; `labor-instrument/labor_schema.py`
+refuses exposure conversion across classes (the same refusal one field
+over, cited not imported); `substrate-alternative/frame_audit.py` locates
+money-frame tokens in prose and is a different instrument. Out-of-tree
+(life-cycle inventory, bill-of-materials, full economic costing of
+research, open-hardware infrastructure, Ostrom-lineage commons):
+NOT_RUN, no host reachable. The ten categories are the order's minimum,
+unextended for want of a read alternative.
+
+**Two readings the order leaves open, taken as choices.** `[CHOICE 2]` a
+route is read at ONE hop, the obligation the producer incurs to obtain
+the dependency; tracing every route to its root makes every route
+CONVERTED by construction and the instrument cannot fail, which is what
+case (a) tests. `[CHOICE 3]` a route with no obligation is INDEPENDENT,
+which is FWO-2's own rule applied to the medium `none`. Seven choices in
+all, printed by `--choices`.
+
+**Demo, expectations REGISTERED in `EXPECTED` before the first run**
+(predictions computed by hand; the RUN column is the recorded render):
+
+| case | source | predicted | run |
+|---|---|---|---|
+| (a) household phenology | CONSTRUCTED; property tax CARRIED | band [6/8, 7/8]; publication the possibly-independent row; legal_compliance CONVERTED at `tax`; two NOT_NEEDED; nothing enclosed; 3 of 3 MATCH | [0.750, 0.875]; `['publication']`; `tax=1`; 3 of 3 MATCH — HELD |
+| (b) open-access finding | structure CARRIED; instance named (Kalai et al., Nature 653, 2026), NOT READ | 2/10, a point; ENCLOSED on instrument and labor; **publication NOT enclosed** (preprint deposit, no obligation at one hop) and data_access independent through an open dataset settling in citation, so the order's `enclosed_on_publication` reads MISMATCH | 0.200; `['instrument', 'labor']`; independent `['data_access', 'publication']`; MISMATCH on that one expectation, as predicted — HELD |
+| (c) bitcoin exit | CONSTRUCTED; IRS Notice 2014-21 CARRIED | band [4/8, 6/8]; ledger INDEPENDENT at account level; legal_compliance ENCLOSED at `settlement`; 2 of 2 MATCH; `input_purchase` leads the ordered conversion points 3 to 1 | [0.500, 0.750]; `['legal_compliance']`; `input_purchase=3, settlement=1`; 2 of 2 MATCH — HELD |
+
+One thing wrapping FWO-2 surfaced about FWO-2 (`RIN_028`): its flag order
+tests a single route before the band, so a dependency whose one route is
+UNKNOWN reads `SINGLE_ROUTE`; the wrapper prints `unknown_count` and the
+band beside the flag (case (a) publication, case (c) credential, both
+`SINGLE_ROUTE  0..1  unk 1` in the sample). Left as found.
+
+## FWO-6 -- `conversion_register.json`  (BUILT as data, tally RUN)
+
+Eight exit attempts, every source CARRIED or UNKNOWN, no entry rated.
+`register_tally()` counts distinct entries per mechanism and per layer.
+Hypothesis registered in the order before any tally (PROPOSED, Claude):
+conversion points cluster at SETTLEMENT. **Predicted as coded, and
+returned by the run:** production 6 / settlement 4 / legal 1 /
+publication 1, four entries with an UNKNOWN mechanism apart; `SPREAD`,
+hypothesis `NOT_SUPPORTED_ON_THIS_REGISTER`. Coded by the party that
+proposed the hypothesis, and running against it; `input_purchase` on six
+of eight is the production-layer conversion the order's candidate list
+names only by implication, and the same lead appears in FWO-5 case (c).
+Prior art NOT_RUN.
+
+## FWO-7 -- `FWO7_DESIGN.md`  (DESIGN_WRITTEN)
+
+Three control sources for a defect with no control world: historical
+parallel media; contemporaneous non-settling populations;
+divergence-then-contact. Each with scope, prediction, kill condition,
+cheapest first run and its own confound. Nothing run; prior art NOT_RUN.
+
+## Carried from the 2026-09-26 audit
+
+Answered against `177d885`; the packet moved under the build (`5b2c0f0`,
+`0a182ed`) and answered items 1-3 itself in `RIN_021`/`RIN_022`. Both
+readings are recorded; nothing of this order's was edited to agree.
+
+```
+1  57b9cdf merge loss   API stats read TWO files; the diff, read once a shell existed, shows
+                        run_manifest.py's two lines are a replacement, not a loss -- confined
+                        to known_answer.py alone, as the packet's RIN_022 found first    RIN_034
+2  options_not_tried    at 177d885, considered-and-rejected sat in options_not_tried and
+                        options_tried was present-empty; 5b2c0f0 (RIN_021) added
+                        options_considered / C3c and made those slots ABSENT_FIELD; what
+                        stands is that no field marks whether a rejected option was TRIED   RIN_035
+3  C5 authority         the one YES on C4 (PEP 572 line 676) was recoded to no by RIN_021;
+                        the field name still conflates propose with compel                 RIN_036
+4  C / NC tallies       partial, from search fragments of a repository outside scope   RIN_037
+```
+
+## Files added by this order
+
+```
+WORK_ORDER_2026-09-27.md            verbatim
+dependency_chain_audit.py           FWO-5
+test_dependency_chain.py            checks; prints its count
+conversion_register.json            FWO-6 data
+FWO7_DESIGN.md                      FWO-7
+samples/dependency_chain.sample.txt the recorded first render
+CLAIM_TABLE.md                      RIN_025..038 appended
+SOURCES.md                          a section appended; nothing fetched
+```

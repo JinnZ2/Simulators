@@ -54,3 +54,35 @@ to the create call. The packet lands here as a promotable folder, the
 imports across its own boundary except the FWO-2 prior-art cross-check,
 which is a file-path import that reports `PRIOR_ART_NOT_IMPORTED` when
 the sibling is absent.
+
+---
+
+## Order of 2026-09-27 (FWO-5, FWO-6, FWO-7)
+
+Built in a second session, later the same day, whose shell was blocked
+for the whole conversation. No host was probed and no fetch was made;
+there is no refused-host table for this order because nothing was
+attempted. Everything READ came through the GitHub API from this
+repository:
+
+| item | read through | used for |
+|---|---|---|
+| `route-independence/*` at `177d885` on `claude/coupling-check-disaster-twiklx` | contents API | FWO-2 reuse; carried items 2 and 3 (the eight `demo/records`) |
+| commit `57b9cdf` per-file stats; `tools/known_answer.py` at `57b9cdf` and `2fa8648` | commits / contents API | carried item 1 (RIN_030); line content of the two `run_manifest.py` lines not read |
+| `Noise-as-Information-Sensor/tools/CLAIM_TABLE.md` | code-search fragments only (repository outside session scope) | carried item 4 (RIN_033), partial |
+
+Carried, not read, in this order's files: property tax in dollars (case
+(a)); IRS Notice 2014-21 (case (c); already carried above); the generic
+open-access dependency structure (case (b)), whose named instance
+(Kalai, Nachum, Vempala & Zhang, Nature 653, 2026) was not read,
+`www.nature.com` being outside the allowlist; every entry of
+`conversion_register.json`, each marked CARRIED or UNKNOWN in place;
+the El Salvador legal-tender line in the bitcoin entry (from memory).
+
+Run record, same session, later turn: a shell became available; still
+no fetch and no host probed. `test_dependency_chain.py` and `test_route.py`
+were run once each on this branch (counts printed by the files, recorded
+in `CLAIM_TABLE.md` RIN_038), and `dependency_chain_audit.py` was
+rendered to `samples/dependency_chain.sample.txt`. Carried item 1 was
+re-read from the local clone (`git diff 57b9cdf^1 57b9cdf --
+tools/run_manifest.py`), the one item that moved from CARRIED to READ.
