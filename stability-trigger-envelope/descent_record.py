@@ -1,727 +1,754 @@
-#!/usr/bin/env python3
-"""
-descent_record.py -- the one instrument ESP-1 orders built.
+# stability-trigger-envelope/descent_record.py
+#
+# DISPATCH ESP-1, section 6. One instrument, built on CONSTRUCTED data.
+#
+# It reads a descent record and says WHICH BODY was carrying the motion --
+# the tractor the sensor is mounted on, or the trailer that carries the
+# at-risk mass. That is FAULT A: the measured body and the at-risk body can
+# come apart, and when they do, a correct reading of the wrong body is
+# indistinguishable from a finding about the right one.
+#
+# WHAT IT DOES NOT DO
+#   It does not evaluate the stability system. Which system the reference
+#   unit runs is UNREAD and no branch here depends on it.
+#   It does not score an operator. There is no field for one -- see the
+#   identity check in the selftest, which reads the schema rather than
+#   trusting this sentence.
+#   It does not claim any intervention caused any crash.
+#
+# TWO REFUSALS BUILT IN
+#   1. TRAILER_CHANNEL_ABSENT is an absence and is never inferred. A trailer
+#      that was not instrumented has not been shown to be quiet, and the
+#      whole of FAULT A turns on that difference.
+#   2. Where the amplitude ratio and the onset timing point opposite ways the
+#      verdict is NOT_EVALUABLE, not a verdict with a caveat. Two readings
+#      disagreeing is not a finding.
+#
+# ONSET, NOT PHASE
+#   An earlier design read the lead as a phase lead from a cross-correlation
+#   of the raw traces. On a serpentine descent the forcing is periodic, so a
+#   phase lead is fixed only modulo one curve-reversal period: a cab leading
+#   the trailer by exactly one reversal and a cab leading by nothing produce
+#   the same correlation peak. Since the case predicts a lead of about one
+#   reversal, that is precisely the value phase cannot read. Onset timing --
+#   first exceedance of the amplitude envelope, and the envelope lag inside
+#   one period of the event -- is well posed there. See RUN_NOTE.md CHOICE 1.
+#
+# Standard library only. Parses under Python 3.9.
 
-WORK_ORDER.md sec.6. A DESCENT_RECORD per loaded descent, three readings:
+from __future__ import annotations
 
-    classify(record)            which body was moving when the stability
-                                system fired: the cab, the trailer, or
-                                not readable from these traces
-    envelope_edge(recs, road)   the speed at which the trigger starts to
-                                fire on one road, with its spread
-    relocation_tally(recs)      what happened downstream of the slowdown,
-                                counted by kind and by access-road bin,
-                                never summed into one score
-
-EVERYTHING THIS FILE RUNS ON IS CONSTRUCTED. The fixtures below are
-authored by the same hand that wrote classify(), so F1-F5 firing is
-REGRESSION (the code still does what it was written to do), not
-VALIDATION (the code reads a real descent correctly). The real run --
-two phones on a loaded descent, WO T1 -- is NOT_RUN.
-
-Thresholds live in thresholds.json, append-only, every value PLACEHOLDER.
-Every reading carries that status so no output can be quoted without it.
-
-Trace format (cab_imu_file / trailer_imu_file). Either a path to a CSV:
-
-    # sync_ts=12.40            <- shared physical tap, this phone's clock
-    t_s,roll_dps
-    0.00,0.012
-    ...
-
-or, for constructed fixtures, a dict {"t": [...], "roll_dps": [...],
-"sync_ts": float or None}. roll_dps is roll rate about the phone's long
-axis, mounted fore-aft. A phone on a cab mount is not the frame-mounted
-OEM sensor (WO sec.7); T1 compares cab against trailer, not phone
-against OEM.
-
-Clock rule. Both phones log the same physical sync tap. If either mark
-is missing the alignment is unverified; if the marks disagree by more
-than clock_misalign_max_s the run is NOT_EVALUABLE. The instrument does
-NOT shift one trace by the offset: a single offset assumes zero drift
-over the run, and drift is not measured by one mark.
-
-CC0. stdlib only. Parses under Python 3.9. Phone-buildable.
-"""
-
-import csv
-import json
 import math
 import os
-import random
-import statistics
 import sys
-from collections import OrderedDict
-from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Sequence, Tuple, Union
+from typing import Dict, List, Optional, Sequence
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-THRESHOLDS_PATH = os.path.join(HERE, "thresholds.json")
+THRESHOLD_FILE = os.path.join(HERE, "thresholds.txt")
+CHAIN_FILE = os.path.join(HERE, "threshold_chain.txt")
+
+# --------------------------------------------------------------------------
+# closed vocabularies
+# --------------------------------------------------------------------------
+
+VERDICTS = (
+    "GEOMETRIC_CAB_MODE",      # cab high, trailer low, cab first
+    "TRAILER_ROLL_RISK",       # the trailer is the body moving
+    "TRAILER_CHANNEL_ABSENT",  # no trailer trace. NOT a quiet trailer.
+    "NOT_EVALUABLE",           # the record cannot answer the question asked
+    "OUT_OF_ENVELOPE",         # outside what this reader declares it can read
+)
 
 SURFACES = ("dry", "wet", "snow", "ice")
+
 DOWNSTREAM_EVENTS = ("none", "pass", "near_miss", "incident", "closure")
-STATUSES = ("PLACEHOLDER", "DERIVED", "MEASURED")
-MIN_RUNS = 3          # WO sec.6: INSUFFICIENT_RUNS below 3 runs on a road
 
-# classify() labels. The first five are the order's; NEITHER_MODE is an
-# addition, declared in README: a run where neither body reads high, or
-# the cab reads high but the lead is unresolved or reversed, is not one
-# of the order's five and is not forced into one.
-GEOMETRIC_CAB_MODE = "GEOMETRIC_CAB_MODE"
-TRAILER_ROLL_RISK = "TRAILER_ROLL_RISK"
-TRAILER_CHANNEL_ABSENT = "TRAILER_CHANNEL_ABSENT"
-NOT_EVALUABLE = "NOT_EVALUABLE"
-OUT_OF_ENVELOPE = "OUT_OF_ENVELOPE"
-NEITHER_MODE = "NEITHER_MODE"
-
-INSUFFICIENT_RUNS = "INSUFFICIENT_RUNS"
-NO_TRIGGER_OBSERVED = "NO_TRIGGER_OBSERVED"
-EDGE_BRACKETED = "EDGE_BRACKETED"
-ONSET_OVERLAP = "ONSET_OVERLAP"
-
-
-# ---------------------------------------------------------------------------
-# thresholds: append-only log, last entry per key is current
-# ---------------------------------------------------------------------------
-
-class ThresholdFileError(Exception):
-    """thresholds.json is unreadable or breaks the append-only form."""
-
-
-def load_thresholds(path=THRESHOLDS_PATH):
-    """
-    Read the append-only threshold log.
-
-    path : str, JSON file with a "log" list of entries
-           {seq, date, key, value, unit, status, basis}
-    returns: (current, log) -- current is {key: entry} holding the last
-             entry per key; log is the full list, oldest first
-    raises ThresholdFileError on a non-contiguous seq, an unknown status,
-           or a clock tolerance that would let an offset read as a lead
-    """
-    try:
-        with open(path) as fh:
-            data = json.load(fh)
-    except (OSError, ValueError) as exc:
-        raise ThresholdFileError("cannot read %s: %s" % (path, exc))
-    log = data.get("log")
-    if not isinstance(log, list) or not log:
-        raise ThresholdFileError("no log entries")
-    current = OrderedDict()
-    for i, e in enumerate(log, 1):
-        for k in ("seq", "date", "key", "value", "unit", "status", "basis"):
-            if k not in e:
-                raise ThresholdFileError("entry %d lacks %r" % (i, k))
-        if e["seq"] != i:
-            raise ThresholdFileError(
-                "seq %r at position %d: log must be contiguous from 1"
-                % (e["seq"], i))
-        if e["status"] not in STATUSES:
-            raise ThresholdFileError("entry %d status %r" % (i, e["status"]))
-        current[e["key"]] = e
-    need = ("analysis_pre_s", "analysis_post_s", "trigger_halfwidth_s",
-            "cab_high_rms_dps", "trailer_high_rms_dps", "amp_ratio_min",
-            "phase_window_min_s", "phase_window_max_s", "lead_corr_min",
-            "envelope_window_s", "grid_dt_s", "gap_max_s",
-            "clock_misalign_max_s", "grade_pct_declared",
-            "surfaces_declared", "v2_bin_edges")
-    missing = [k for k in need if k not in current]
-    if missing:
-        raise ThresholdFileError("missing keys: %s" % ", ".join(missing))
-    if (current["clock_misalign_max_s"]["value"]
-            >= current["phase_window_min_s"]["value"]):
-        raise ThresholdFileError(
-            "clock_misalign_max_s must sit below phase_window_min_s, "
-            "else a clock offset reads as a lead")
-    return current, log
-
-
-def thr(current, key):
-    """Current value of one threshold."""
-    return current[key]["value"]
-
-
-def threshold_status(current):
-    """One word for the status of every value in use."""
-    s = sorted(set(e["status"] for e in current.values()))
-    return s[0] if len(s) == 1 else "MIXED(" + ",".join(s) + ")"
-
-
-# ---------------------------------------------------------------------------
-# the record
-# ---------------------------------------------------------------------------
-
-TraceRef = Union[str, Dict, None]
-
-
-@dataclass
-class DescentRecord:
-    """
-    One loaded descent (WO sec.6 DESCENT_RECORD).
-
-    region, road_id        : str labels; never an operator, carrier or unit
-    grade_pct              : float, % grade of the descent          (V1)
-    curve_reversals        : int, reversals over the descent        (V1)
-    access_count_to_drop   : int or None, access roads to the drop  (V2)
-    alternate_route_hours  : float or None, reroute hours           (V3)
-    slow_users_present     : bool or None                           (V4)
-    surface_state          : 'dry' | 'wet' | 'snow' | 'ice'         (V5)
-    speed_mph              : float, speed on the grade at the trigger
-                             (or the run's holding speed if none fired)
-    esp_event_ts           : float s in the cab clock, or None when the
-                             system did not fire on this run
-    cab_imu_file           : CSV path or constructed dict, or None
-    trailer_imu_file       : CSV path or constructed dict, or None
-    downstream_event       : 'none' | 'pass' | 'near_miss' | 'incident'
-                             | 'closure'
-    tag                    : free label for fixtures and logs
-    """
-    region: str
-    road_id: str
-    grade_pct: float
-    curve_reversals: int
-    access_count_to_drop: Optional[int]
-    alternate_route_hours: Optional[float]
-    slow_users_present: Optional[bool]
-    surface_state: str
-    speed_mph: float
-    esp_event_ts: Optional[float]
-    cab_imu_file: TraceRef
-    trailer_imu_file: TraceRef
-    downstream_event: str = "none"
-    tag: str = ""
-
-    def __post_init__(self):
-        if self.surface_state not in SURFACES:
-            raise ValueError("surface_state %r not in %s"
-                             % (self.surface_state, SURFACES))
-        if self.downstream_event not in DOWNSTREAM_EVENTS:
-            raise ValueError("downstream_event %r not in %s"
-                             % (self.downstream_event, DOWNSTREAM_EVENTS))
-
-
-# ---------------------------------------------------------------------------
-# traces
-# ---------------------------------------------------------------------------
-
-@dataclass
-class Trace:
-    t: List[float]
-    roll_dps: List[float]
-    sync_ts: Optional[float]
-    source: str = ""
-
-
-def load_trace(ref):
-    """
-    Read one IMU trace.
-
-    ref : str path to a CSV (header t_s,roll_dps; optional '# sync_ts=' line)
-          or a dict {"t", "roll_dps", "sync_ts"}
-    returns: Trace, times ascending
-    raises ValueError on unequal lengths, non-ascending time, empty trace
-    """
-    if isinstance(ref, dict):
-        t = [float(x) for x in ref["t"]]
-        r = [float(x) for x in ref["roll_dps"]]
-        sync = ref.get("sync_ts")
-        src = ref.get("source", "constructed")
-    else:
-        t, r, sync = [], [], None
-        with open(ref) as fh:
-            rows = []
-            for line in fh:
-                s = line.strip()
-                if s.startswith("#"):
-                    body = s[1:].strip()
-                    if body.startswith("sync_ts="):
-                        sync = float(body.split("=", 1)[1])
-                    continue
-                if s:
-                    rows.append(s)
-        for row in csv.DictReader(rows):
-            t.append(float(row["t_s"]))
-            r.append(float(row["roll_dps"]))
-        src = str(ref)
-    if not t or len(t) != len(r):
-        raise ValueError("trace %s: empty or unequal columns" % src)
-    if any(b <= a for a, b in zip(t, t[1:])):
-        raise ValueError("trace %s: time not strictly ascending" % src)
-    return Trace(t, r, None if sync is None else float(sync), src)
-
-
-def _interp(tr, x):
-    """Linear interpolation of tr.roll_dps at time x (x inside tr.t)."""
-    t, y = tr.t, tr.roll_dps
-    lo, hi = 0, len(t) - 1
-    while hi - lo > 1:
-        mid = (lo + hi) // 2
-        if t[mid] <= x:
-            lo = mid
-        else:
-            hi = mid
-    if t[hi] == t[lo]:
-        return y[lo]
-    f = (x - t[lo]) / (t[hi] - t[lo])
-    return y[lo] + f * (y[hi] - y[lo])
-
-
-def _grid(tr, a, b, dt):
-    n = int(round((b - a) / dt)) + 1
-    xs = [a + i * dt for i in range(n)]
-    return xs, [_interp(tr, x) for x in xs]
-
-
-def _rms(v):
-    return math.sqrt(sum(x * x for x in v) / len(v)) if v else 0.0
-
-
-def _max_gap(tr, a, b):
-    """Longest gap between samples that falls inside [a, b]."""
-    g = 0.0
-    for p, q in zip(tr.t, tr.t[1:]):
-        if q >= a and p <= b:
-            g = max(g, q - p)
-    return g
-
-
-def _moving_rms(v, w):
-    """Centered moving RMS, window w samples."""
-    h = max(1, w // 2)
-    out = []
-    n = len(v)
-    for i in range(n):
-        seg = v[max(0, i - h):min(n, i + h + 1)]
-        out.append(_rms(seg))
-    return out
-
-
-def _pearson(a, b):
-    if len(a) < 3:
-        return None
-    ma, mb = statistics.fmean(a), statistics.fmean(b)
-    da = [x - ma for x in a]
-    db = [y - mb for y in b]
-    sa = math.sqrt(sum(x * x for x in da))
-    sb = math.sqrt(sum(y * y for y in db))
-    if sa == 0 or sb == 0:
-        return None
-    return sum(x * y for x, y in zip(da, db)) / (sa * sb)
-
-
-def trailer_lag(cab_env, trl_env, dt, max_lag_s):
-    """
-    Lag of the trailer envelope behind the cab envelope.
-
-    cab_env, trl_env : equal-length envelopes on a grid of step dt
-    max_lag_s        : search +/- this many seconds
-    returns: (lag_s, r) with lag_s > 0 meaning the trailer lags (cab
-             leads); (None, None) when no lag gives a defined correlation
-    """
-    best = (None, None)
-    k_max = int(round(max_lag_s / dt))
-    n = len(cab_env)
-    for k in range(-k_max, k_max + 1):
-        if k >= 0:
-            a, b = cab_env[:n - k], trl_env[k:]
-        else:
-            a, b = cab_env[-k:], trl_env[:n + k]
-        r = _pearson(a, b)
-        if r is not None and (best[1] is None or r > best[1]):
-            best = (k * dt, r)
-    return best
-
-
-# ---------------------------------------------------------------------------
-# classify
-# ---------------------------------------------------------------------------
-
-@dataclass
-class Reading:
-    label: str
-    reason: str = ""
-    evidence: Dict = field(default_factory=dict)
-    thresholds: str = "PLACEHOLDER"
-
-    def show(self):
-        if self.label == NOT_EVALUABLE:
-            return "NOT_EVALUABLE(%s)" % self.reason
-        if self.reason:
-            return "%s  [%s]" % (self.label, self.reason)
-        return self.label
-
-
-def classify(rec, current=None):
-    """
-    Which body was moving when the stability system fired.
-
-    rec     : DescentRecord
-    current : threshold dict from load_thresholds() (loaded if None)
-    returns : Reading, label one of GEOMETRIC_CAB_MODE, TRAILER_ROLL_RISK,
-              TRAILER_CHANNEL_ABSENT, NOT_EVALUABLE, OUT_OF_ENVELOPE,
-              NEITHER_MODE; evidence carries every number the label
-              rests on; thresholds carries their status
-    Order of gates: declared envelope, trigger present, cab channel,
-    trailer channel, clock agreement, coverage and gaps, then amplitudes
-    and lead. A later gate never runs on a run an earlier gate refused.
-    """
-    if current is None:
-        current, _ = load_thresholds()
-    st = threshold_status(current)
-
-    def out(label, reason="", **ev):
-        return Reading(label, reason, ev, st)
-
-    lo, hi = thr(current, "grade_pct_declared")
-    if rec.surface_state not in thr(current, "surfaces_declared"):
-        return out(OUT_OF_ENVELOPE,
-                   "surface %s: thresholds not declared there; "
-                   "unassessed, not clear" % rec.surface_state)
-    if not (lo <= rec.grade_pct <= hi):
-        return out(OUT_OF_ENVELOPE,
-                   "grade %.1f%% outside declared %.1f-%.1f%%"
-                   % (rec.grade_pct, lo, hi))
-    if rec.esp_event_ts is None:
-        return out(NOT_EVALUABLE, "no esp_event_ts: classify reads a trigger")
-    if rec.cab_imu_file is None:
-        return out(NOT_EVALUABLE, "no cab trace")
-    if rec.trailer_imu_file is None:
-        return out(TRAILER_CHANNEL_ABSENT,
-                   "no trailer trace; trailer state not inferred")
-
-    cab = load_trace(rec.cab_imu_file)
-    trl = load_trace(rec.trailer_imu_file)
-
-    if cab.sync_ts is None or trl.sync_ts is None:
-        return out(NOT_EVALUABLE, "sync mark missing: alignment unverified")
-    mis = abs(cab.sync_ts - trl.sync_ts)
-    if mis > thr(current, "clock_misalign_max_s"):
-        return out(NOT_EVALUABLE,
-                   "clocks misaligned %.2f s > %.2f s tolerance"
-                   % (mis, thr(current, "clock_misalign_max_s")),
-                   clock_misalign_s=round(mis, 3))
-
-    a = rec.esp_event_ts - thr(current, "analysis_pre_s")
-    b = rec.esp_event_ts + thr(current, "analysis_post_s")
-    for name, tr in (("cab", cab), ("trailer", trl)):
-        if tr.t[0] > a or tr.t[-1] < b:
-            return out(NOT_EVALUABLE,
-                       "%s trace does not cover %.1f-%.1f s" % (name, a, b))
-        g = _max_gap(tr, a, b)
-        if g > thr(current, "gap_max_s"):
-            return out(NOT_EVALUABLE,
-                       "gap %.2f s in %s trace > %.2f s"
-                       % (g, name, thr(current, "gap_max_s")))
-
-    dt = thr(current, "grid_dt_s")
-    _, cv = _grid(cab, a, b, dt)
-    _, tv = _grid(trl, a, b, dt)
-    cab_rms, trl_rms = _rms(cv), _rms(tv)
-    h = thr(current, "trigger_halfwidth_s")
-    _, tv_at = _grid(trl, rec.esp_event_ts - h, rec.esp_event_ts + h, dt)
-    trl_at = _rms(tv_at)
-    ratio = cab_rms / trl_rms if trl_rms > 0 else None
-
-    w = int(round(thr(current, "envelope_window_s") / dt))
-    lag, r = trailer_lag(_moving_rms(cv, w), _moving_rms(tv, w), dt,
-                         thr(current, "phase_window_max_s"))
-    if r is None or r < thr(current, "lead_corr_min"):
-        lead = "UNRESOLVED"
-    elif thr(current, "phase_window_min_s") <= lag \
-            <= thr(current, "phase_window_max_s"):
-        lead = "CAB_LEADS"
-    elif lag <= -thr(current, "phase_window_min_s"):
-        lead = "TRAILER_LEADS"
-    else:
-        lead = "SIMULTANEOUS"
-
-    ev = dict(cab_rms_dps=round(cab_rms, 3), trailer_rms_dps=round(trl_rms, 3),
-              trailer_rms_at_trigger_dps=round(trl_at, 3),
-              amp_ratio=None if ratio is None else round(ratio, 2),
-              trailer_lag_s=None if lag is None else round(lag, 2),
-              lag_corr=None if r is None else round(r, 3), lead=lead,
-              clock_misalign_s=round(mis, 3))
-
-    if trl_rms >= thr(current, "trailer_high_rms_dps"):
-        return out(TRAILER_ROLL_RISK, "trailer channel high", **ev)
-    cab_high = cab_rms >= thr(current, "cab_high_rms_dps")
-    ratio_ok = ratio is None or ratio >= thr(current, "amp_ratio_min")
-    if cab_high and ratio_ok and lead == "CAB_LEADS":
-        return out(GEOMETRIC_CAB_MODE, "", **ev)
-    if not cab_high:
-        why = "neither channel high"
-    elif not ratio_ok:
-        why = "cab/trailer ratio below amp_ratio_min"
-    else:
-        why = "cab high, lead %s" % lead
-    return out(NEITHER_MODE, why, **ev)
-
-
-# ---------------------------------------------------------------------------
-# envelope_edge
-# ---------------------------------------------------------------------------
-
-def envelope_edge(records, road_id):
-    """
-    Trigger-onset speed on one road (WO T2 primitive).
-
-    records : iterable of DescentRecord
-    road_id : the road to read
-    returns : dict with status one of INSUFFICIENT_RUNS, NO_TRIGGER_OBSERVED,
-              EDGE_BRACKETED, ONSET_OVERLAP, and the speeds behind it.
-              EDGE_BRACKETED: every quiet run is slower than every fired
-              run; the edge lies between the fastest quiet and slowest
-              fired speed. ONSET_OVERLAP: a quiet run is at or above a
-              fired speed -- the edge is not one speed on this road, and
-              something other than speed (grade, bank, surface, load)
-              moves it. mixed_conditions lists any grade/surface spread.
-    """
-    runs = [x for x in records if x.road_id == road_id]
-    n = len(runs)
-    base = dict(road_id=road_id, n_runs=n, min_runs=MIN_RUNS)
-    if n < MIN_RUNS:
-        base.update(status=INSUFFICIENT_RUNS)
-        return base
-    fired = sorted(x.speed_mph for x in runs if x.esp_event_ts is not None)
-    quiet = sorted(x.speed_mph for x in runs if x.esp_event_ts is None)
-    mixed = {}
-    grades = sorted(set(x.grade_pct for x in runs))
-    surfaces = sorted(set(x.surface_state for x in runs))
-    if len(grades) > 1:
-        mixed["grade_pct"] = grades
-    if len(surfaces) > 1:
-        mixed["surface_state"] = surfaces
-    base.update(n_fired=len(fired), n_quiet=len(quiet),
-                mixed_conditions=mixed)
-    if not fired:
-        base.update(status=NO_TRIGGER_OBSERVED,
-                    quiet_up_to_mph=quiet[-1])
-        return base
-    spread = dict(min=fired[0], max=fired[-1],
-                  stdev=round(statistics.stdev(fired), 2)
-                  if len(fired) > 1 else None)
-    base.update(onset_mph=fired[0], fired_spread_mph=spread)
-    below = [s for s in quiet if s < fired[0]]
-    if len(below) < len(quiet):
-        base.update(status=ONSET_OVERLAP,
-                    quiet_at_or_above_onset_mph=[s for s in quiet
-                                                 if s >= fired[0]])
-    else:
-        base.update(status=EDGE_BRACKETED,
-                    bracket_mph=(below[-1] if below else None, fired[0]))
-    return base
-
-
-# ---------------------------------------------------------------------------
-# relocation_tally
-# ---------------------------------------------------------------------------
-
-def v2_bin(count, edges):
-    """Bin an access-road count: edges [1,2,3] -> '0','1','2','3+'."""
-    if count is None:
-        return "UNMEASURED"
-    labels = []
-    prev = 0
-    for e in edges:
-        labels.append((prev, e, str(prev) if e - prev == 1
-                       else "%d-%d" % (prev, e - 1)))
-        prev = e
-    for lo, hi, lab in labels:
-        if lo <= count < hi:
-            return lab
-    return "%d+" % edges[-1]
-
-
-def relocation_tally(records, current=None):
-    """
-    Downstream events, counted two ways (WO T4 primitive).
-
-    records : iterable of DescentRecord
-    returns : dict with by_event, by_v2_bin, by_v2_bin_event (counts only).
-              There is no total and no score key: the order's point is
-              that orders 2-4 never enter a score, and adding one here
-              would rebuild the same collapse.
-    """
-    if current is None:
-        current, _ = load_thresholds()
-    edges = thr(current, "v2_bin_edges")
-    by_event = OrderedDict((e, 0) for e in DOWNSTREAM_EVENTS)
-    by_bin = OrderedDict()
-    cross = OrderedDict()
-    for x in records:
-        by_event[x.downstream_event] += 1
-        b = v2_bin(x.access_count_to_drop, edges)
-        by_bin[b] = by_bin.get(b, 0) + 1
-        cross.setdefault(b, OrderedDict((e, 0) for e in DOWNSTREAM_EVENTS))
-        cross[b][x.downstream_event] += 1
-    return dict(by_event=by_event, by_v2_bin=by_bin,
-                by_v2_bin_event=cross,
-                note="counts only; never summed into a single score")
-
-
-# ---------------------------------------------------------------------------
-# CONSTRUCTED fixtures -- REGRESSION, not validation
-# ---------------------------------------------------------------------------
-
-def _wave(t, amp, period, start, ramp):
-    """Sine at amp, envelope ramping 0->1 over [start, start+ramp]."""
-    if t < start:
-        return 0.0
-    g = min(1.0, (t - start) / ramp)
-    return amp * g * math.sin(2 * math.pi * (t - start) / period)
-
-
-def constructed_trace(amp, start, seed, period=8.0, ramp=6.0, span=40.0,
-                      dt=0.05, noise=0.05, sync_ts=2.0, gap=None):
-    """
-    A CONSTRUCTED roll-rate trace. Seeded, deterministic, no field data.
-
-    amp      : deg/s peak once the ramp completes
-    start    : s, oscillation onset
-    seed     : RNG seed for the noise
-    gap      : (t0, t1) to drop samples, or None
-    """
-    rng = random.Random(seed)
-    n = int(round(span / dt)) + 1
-    t, y = [], []
-    for i in range(n):
-        x = i * dt
-        if gap and gap[0] < x < gap[1]:
-            continue
-        t.append(round(x, 6))
-        y.append(_wave(x, amp, period, start, ramp) + rng.gauss(0, noise))
-    return {"t": t, "roll_dps": y, "sync_ts": sync_ts,
-            "source": "CONSTRUCTED seed=%d" % seed}
-
-
-def _rec(road, speed, cab, trl, ts=20.0, surface="wet", grade=11.0,
-         event="none", access=1, tag=""):
-    return DescentRecord(region="REGION_A", road_id=road, grade_pct=grade,
-                         curve_reversals=14, access_count_to_drop=access,
-                         alternate_route_hours=3.0, slow_users_present=True,
-                         surface_state=surface, speed_mph=speed,
-                         esp_event_ts=ts, cab_imu_file=cab,
-                         trailer_imu_file=trl, downstream_event=event,
-                         tag=tag)
-
-
-def fixtures():
-    """
-    The order's F1-F5 plus the other side of each gate (X-cases), so no
-    gate is shown only in the state it was written to reach.
-
-    returns: list of (fid, description, expected, record_or_records, road)
-    """
-    cab_osc = constructed_trace(6.0, 8.0, 1)
-    trl_lag = constructed_trace(0.6, 12.0, 2)            # 4 s behind, small
-    trl_roll = constructed_trace(5.0, 8.0, 3)            # trailer moving
-    cab_small = constructed_trace(3.0, 8.0, 4)
-    trl_off = constructed_trace(0.6, 12.0, 5, sync_ts=5.0)   # 3 s off
-    trl_gap = constructed_trace(0.6, 12.0, 6, gap=(15.0, 16.5))
-    quiet_cab = constructed_trace(0.2, 8.0, 7)
-    quiet_trl = constructed_trace(0.2, 8.0, 9)
-    trl_lead = constructed_trace(0.6, 4.0, 8)            # trailer first
-
-    f5 = [_rec("ROAD_2", 31.0, None, None, ts=None),
-          _rec("ROAD_2", 34.0, cab_osc, trl_lag)]
-    x5 = [_rec("ROAD_3", 24.0, None, None, ts=None, event="pass"),
-          _rec("ROAD_3", 27.0, None, None, ts=None, event="near_miss"),
-          _rec("ROAD_3", 30.0, cab_osc, trl_lag, event="none"),
-          _rec("ROAD_3", 33.0, cab_osc, trl_lag, event="closure",
-               access=2)]
-    return [
-        ("F1", "serpentine, cab-only oscillation", GEOMETRIC_CAB_MODE,
-         _rec("ROAD_1", 34.0, cab_osc, trl_lag), None),
-        ("F2", "real trailer roll", TRAILER_ROLL_RISK,
-         _rec("ROAD_1", 38.0, cab_small, trl_roll), None),
-        ("F3", "no trailer IMU", TRAILER_CHANNEL_ABSENT,
-         _rec("ROAD_1", 34.0, cab_osc, None), None),
-        ("F4", "clocks misaligned > window", NOT_EVALUABLE,
-         _rec("ROAD_1", 34.0, cab_osc, trl_off), None),
-        ("F5", "two runs on a road", INSUFFICIENT_RUNS, f5, "ROAD_2"),
-        ("X1", "gap in trailer trace", NOT_EVALUABLE,
-         _rec("ROAD_1", 34.0, cab_osc, trl_gap), None),
-        ("X2", "snow surface", OUT_OF_ENVELOPE,
-         _rec("ROAD_1", 30.0, cab_osc, trl_lag, surface="snow"), None),
-        ("X3", "both channels quiet", NEITHER_MODE,
-         _rec("ROAD_1", 30.0, quiet_cab, quiet_trl), None),
-        ("X4", "cab high but trailer leads", NEITHER_MODE,
-         _rec("ROAD_1", 34.0, cab_osc, trl_lead), None),
-        ("X5", "four runs on a road", EDGE_BRACKETED, x5, "ROAD_3"),
-    ]
-
-
-def run_fixtures(current=None):
-    """Run every fixture; returns list of (fid, desc, expected, got, detail)."""
-    if current is None:
-        current, _ = load_thresholds()
-    rows = []
-    for fid, desc, expected, obj, road in fixtures():
-        if road is None:
-            rd = classify(obj, current)
-            rows.append((fid, desc, expected, rd.label, rd))
-        else:
-            e = envelope_edge(obj, road)
-            rows.append((fid, desc, expected, e["status"], e))
+#: onset states. NO_EVENT and NO_RISE are kept apart from a measured onset and
+#: from each other: nothing moved, versus already moving when the record
+#: started, versus moved at a time we can name.
+ONSET_STATES = ("MEASURED", "NO_EVENT", "NO_RISE")
+
+
+class SchemaError(ValueError):
+    """Raised at the boundary on an undeclared value."""
+
+
+# --------------------------------------------------------------------------
+# thresholds
+# --------------------------------------------------------------------------
+
+def _read_thresholds() -> Dict[str, str]:
+    rows = {}
+    with open(THRESHOLD_FILE) as fh:
+        for line in fh:
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            if "=" not in line:
+                raise SchemaError("malformed threshold row: " + repr(line))
+            key, value = line.split("=", 1)
+            rows[key.strip()] = value.strip()
     return rows
 
 
-# ---------------------------------------------------------------------------
-# render
-# ---------------------------------------------------------------------------
-
-def render():
-    """The report, as text. CONSTRUCTED data only."""
-    current, log = load_thresholds()
-    L = []
-    L.append("descent_record -- ESP-1 instrument, CONSTRUCTED fixtures")
-    L.append("fixtures are implementation-authored: REGRESSION, not "
-             "validation. Real run: NOT_RUN.")
-    L.append("thresholds: %d log entries, %d keys, status %s"
-             % (len(log), len(current), threshold_status(current)))
-    L.append("")
-    L.append("fid  expected                got                     case")
-    for fid, desc, exp, got, det in run_fixtures(current):
-        mark = "ok " if exp == got else "MISS"
-        L.append("%-4s %-23s %-23s %s  %s" % (fid, exp, got, mark, desc))
-        if isinstance(det, Reading):
-            if det.reason:
-                L.append("       reason: %s" % det.reason)
-            if det.evidence:
-                ev = det.evidence
-                keys = ("cab_rms_dps", "trailer_rms_dps",
-                        "trailer_rms_at_trigger_dps", "amp_ratio",
-                        "trailer_lag_s", "lag_corr", "lead",
-                        "clock_misalign_s")
-                L.append("       " + "  ".join("%s=%s" % (k, ev[k])
-                                               for k in keys if k in ev))
-        else:
-            keep = ("n_runs", "n_fired", "n_quiet", "onset_mph",
-                    "bracket_mph", "fired_spread_mph", "mixed_conditions")
-            L.append("       " + "  ".join("%s=%s" % (k, det[k])
-                                           for k in keep if k in det))
-    L.append("")
-    x5 = [f for f in fixtures() if f[0] == "X5"][0][3]
-    t = relocation_tally(x5, current)
-    L.append("relocation_tally on X5 (counts only, no total):")
-    L.append("  by_event   " + "  ".join("%s=%d" % kv
-                                         for kv in t["by_event"].items()))
-    L.append("  by_v2_bin  " + "  ".join("%s=%d" % kv
-                                         for kv in t["by_v2_bin"].items()))
-    return "\n".join(L)
+def _chain_keys() -> List[str]:
+    keys = []
+    with open(CHAIN_FILE) as fh:
+        for line in fh:
+            line = line.strip()
+            if line.startswith("threshold:"):
+                spec = line.split(":", 1)[1].strip()
+                for part in spec.split("/"):
+                    keys.append(part.strip())
+    return keys
 
 
-def main(argv):
-    if "--selftest" in argv:
-        print("descent_record.py has no selftest; run test_descent_record.py")
-        return 2
+def threshold(key: str):
+    """One threshold, parsed. Raises on an undeclared key rather than
+    defaulting: a default is a value nobody can see they are relying on."""
+    rows = _read_thresholds()
+    if key not in rows:
+        raise SchemaError("threshold %r is not declared in thresholds.txt" % key)
+    raw = rows[key]
+    if "," in raw:
+        out = []
+        for part in raw.split(","):
+            part = part.strip()
+            try:
+                out.append(float(part))
+            except ValueError:
+                out.append(part)
+        return out
     try:
-        print(render())
-    except ThresholdFileError as exc:
-        print("could not run: %s" % exc)
-        return 3
+        return float(raw)
+    except ValueError:
+        return raw
+
+
+def threshold_report() -> List[str]:
+    """One line per declared threshold, printed by every render. A value that
+    never appears in an output is a stipulation nobody can see."""
+    rows = _read_thresholds()
+    chain = _chain_keys()
+    out = []
+    for key in sorted(rows):
+        mark = "provenanced" if key in chain else "UNPROVENANCED"
+        out.append("  %-24s %-14s %s" % (key, rows[key], mark))
+    return out
+
+
+# --------------------------------------------------------------------------
+# input
+# --------------------------------------------------------------------------
+
+def trace(t0_s: float, rate_hz: float, samples: Sequence[float],
+          gaps: int = 0) -> Dict[str, object]:
+    """One IMU channel.
+
+    gaps is the number of dropped segments the logger reported. A trace with
+    a gap is refused rather than interpolated: an interpolated sample is a
+    number the instrument made up, and onset timing is exactly the quantity
+    a made-up sample moves.
+    """
+    if rate_hz <= 0:
+        raise SchemaError("sample rate must be positive")
+    if gaps < 0:
+        raise SchemaError("gap count cannot be negative")
+    return {"t0_s": float(t0_s), "rate_hz": float(rate_hz),
+            "samples": [float(x) for x in samples], "gaps": int(gaps)}
+
+
+def descent_record(region: str, road_id: str, grade_pct: float,
+                   curve_reversals: int, access_count_to_drop: int,
+                   alternate_route_hours: float, slow_users_present: bool,
+                   surface_state: str, speed_mph: float,
+                   esp_event_ts: Optional[float],
+                   cab_imu: Optional[Dict[str, object]],
+                   trailer_imu: Optional[Dict[str, object]],
+                   downstream_event: str = "none",
+                   note: str = "") -> Dict[str, object]:
+    """One descent.
+
+    There is no field for the operator, the carrier or the unit, and none is
+    accepted. The schema is the guarantee; the selftest reads the field names
+    rather than trusting this docstring.
+
+    trailer_imu is None when the trailer was not instrumented. That is a
+    different state from an instrumented trailer that stayed quiet, and the
+    two return different verdicts.
+    """
+    if surface_state not in SURFACES:
+        raise SchemaError("surface_state %r is outside %r"
+                          % (surface_state, SURFACES))
+    if downstream_event not in DOWNSTREAM_EVENTS:
+        raise SchemaError("downstream_event %r is outside %r"
+                          % (downstream_event, DOWNSTREAM_EVENTS))
+    if curve_reversals < 0:
+        raise SchemaError("curve_reversals cannot be negative")
+    return {"region": region, "road_id": road_id,
+            "grade_pct": float(grade_pct),
+            "curve_reversals": int(curve_reversals),
+            "access_count_to_drop": int(access_count_to_drop),
+            "alternate_route_hours": float(alternate_route_hours),
+            "slow_users_present": bool(slow_users_present),
+            "surface_state": surface_state,
+            "speed_mph": float(speed_mph),
+            "esp_event_ts": esp_event_ts,
+            "cab_imu": cab_imu, "trailer_imu": trailer_imu,
+            "downstream_event": downstream_event, "note": note}
+
+
+#: field names the schema must never carry. Checked against the record's own
+#: keys by the selftest, so the promise is structural rather than editorial.
+IDENTITY_TOKENS = ("operator", "driver", "carrier", "fleet", "unit", "vin",
+                   "name", "employee", "cdl", "company")
+
+
+# --------------------------------------------------------------------------
+# envelope and onset
+# --------------------------------------------------------------------------
+
+def _mean(xs: Sequence[float]) -> Optional[float]:
+    xs = list(xs)
+    if not xs:
+        return None
+    return sum(xs) / len(xs)
+
+
+def _rms(xs: Sequence[float]) -> Optional[float]:
+    xs = list(xs)
+    if not xs:
+        return None
+    m = sum(xs) / len(xs)
+    total = 0.0
+    for x in xs:
+        total += (x - m) * (x - m)
+    return math.sqrt(total / len(xs))
+
+
+def envelope(samples: Sequence[float], window: int) -> List[float]:
+    """Moving RMS about the series mean. Centred, edges shortened rather than
+    padded -- a padded edge invents the quiet the onset is measured against."""
+    xs = list(samples)
+    n = len(xs)
+    if n == 0:
+        return []
+    if window < 1:
+        window = 1
+    m = sum(xs) / n
+    half = window // 2
+    out = []
+    for i in range(n):
+        lo = i - half
+        if lo < 0:
+            lo = 0
+        hi = i + half + 1
+        if hi > n:
+            hi = n
+        total = 0.0
+        for j in range(lo, hi):
+            total += (xs[j] - m) * (xs[j] - m)
+        out.append(math.sqrt(total / (hi - lo)))
+    return out
+
+
+def onset(env: Sequence[float], rate_hz: float, t0_s: float,
+          frac: float, floor: float) -> Dict[str, object]:
+    """First exceedance of `frac` of this body's OWN peak envelope.
+
+    Relative to itself on purpose: onset says WHEN a body started, never how
+    much it moved. Size is the amplitude ratio's job, and merging the two
+    would let a large late body and a small early one report the same.
+
+    Three states, kept apart:
+      MEASURED  a rise was found and can be timed
+      NO_EVENT  the envelope never clears the floor; nothing to time
+      NO_RISE   already above threshold at the first sample, so the record
+                started mid-event and the onset is outside it. Not t = 0.
+    """
+    env = list(env)
+    if not env:
+        return {"state": "NO_EVENT", "reason": "empty trace"}
+    peak = max(env)
+    if peak <= floor:
+        return {"state": "NO_EVENT",
+                "reason": "peak envelope %.3g is at or below the floor %.3g"
+                          % (peak, floor)}
+    thr = frac * peak
+    # The record has to START QUIET or there is no rise inside it to time.
+    # A steady oscillation is the case this catches: its envelope is flat, so
+    # the first sample is already near the peak and any index the scan
+    # returns is an artifact of the window shortening at the edge rather than
+    # an arrival. Half the threshold, so a genuine burst (whose envelope
+    # starts at zero) is unaffected.
+    if env[0] >= thr:
+        return {"state": "NO_RISE",
+                "reason": "already above threshold at the first sample; the "
+                          "record starts mid-event and the onset is outside it"}
+    if env[0] > 0.5 * thr:
+        return {"state": "NO_RISE",
+                "reason": "the record does not start quiet (first envelope "
+                          "sample %.3g against a threshold of %.3g), so the "
+                          "rise is not contained in it" % (env[0], thr)}
+    idx = None
+    for i, v in enumerate(env):
+        if v >= thr:
+            idx = i
+            break
+    if idx is None:
+        return {"state": "NO_EVENT", "reason": "threshold never reached"}
+    return {"state": "MEASURED", "index": idx, "t_s": t0_s + idx / rate_hz,
+            "threshold": thr, "peak": peak}
+
+
+def _pearson(xs: Sequence[float], ys: Sequence[float]) -> Optional[float]:
+    n = len(xs)
+    if n < 2 or len(ys) != n:
+        return None
+    mx = sum(xs) / n
+    my = sum(ys) / n
+    num = 0.0
+    dx = 0.0
+    dy = 0.0
+    for i in range(n):
+        a = xs[i] - mx
+        b = ys[i] - my
+        num += a * b
+        dx += a * a
+        dy += b * b
+    if dx <= 0 or dy <= 0:
+        return None
+    return num / math.sqrt(dx * dy)
+
+
+def envelope_lag(cab_env: Sequence[float], trl_env: Sequence[float],
+                 rate_hz: float, period_s: float,
+                 search_periods: float) -> Dict[str, object]:
+    """Lag at maximum cross-correlation of the two ENVELOPES, searched within
+    `search_periods` of the event.
+
+    Envelopes rather than raw traces, because an envelope is not periodic at
+    the forcing frequency -- which is the whole reason this replaces a phase
+    lead. Positive lead_s means the cab envelope rose first.
+    """
+    a = list(cab_env)
+    b = list(trl_env)
+    n = min(len(a), len(b))
+    if n < 4:
+        return {"state": "NOT_EVALUABLE", "reason": "trace too short"}
+    a = a[:n]
+    b = b[:n]
+    max_lag = int(round(search_periods * period_s * rate_hz))
+    if max_lag < 1:
+        return {"state": "NOT_EVALUABLE",
+                "reason": "the search window is under one sample"}
+    if max_lag >= n:
+        max_lag = n - 2
+    if max_lag < 1:
+        return {"state": "NOT_EVALUABLE",
+                "reason": "the record is shorter than the search window"}
+    best_lag = None
+    best_r = None
+    for lag in range(-max_lag, max_lag + 1):
+        if lag >= 0:
+            xs = a[lag:]
+            ys = b[:n - lag]
+        else:
+            xs = a[:n + lag]
+            ys = b[-lag:]
+        m = min(len(xs), len(ys))
+        if m < 3:
+            continue
+        r = _pearson(xs[:m], ys[:m])
+        if r is None:
+            continue
+        if best_r is None or r > best_r:
+            best_r = r
+            best_lag = lag
+    if best_r is None:
+        return {"state": "NOT_EVALUABLE",
+                "reason": "no lag produced a computable correlation"}
+    return {"state": "MEASURED", "lead_samples": -best_lag,
+            "lead_s": -best_lag / rate_hz, "peak_correlation": best_r,
+            "search_samples": max_lag}
+
+
+# --------------------------------------------------------------------------
+# classify
+# --------------------------------------------------------------------------
+
+def classify(record: Dict[str, object]) -> Dict[str, object]:
+    """Which body was carrying the motion. One of VERDICTS."""
+    surfaces = threshold("surfaces_in_envelope")
+    if not isinstance(surfaces, list):
+        surfaces = [surfaces]
+    g_min = threshold("grade_pct_min")
+    g_max = threshold("grade_pct_max")
+
+    # 1. is this record inside what the READER declares it can read?
+    #    This is not the vehicle's validation envelope and must not be read
+    #    as one: measuring that is T2 and T5, and neither has been run.
+    if record["surface_state"] not in surfaces:
+        return {"verdict": "OUT_OF_ENVELOPE",
+                "reason": "surface %r is outside the declared reading set %r; "
+                          "on snow or ice the margin and the sensor behaviour "
+                          "are different and this reader does not reach them"
+                          % (record["surface_state"], surfaces)}
+    if record["grade_pct"] < g_min or record["grade_pct"] > g_max:
+        return {"verdict": "OUT_OF_ENVELOPE",
+                "reason": "grade %.2f%% is outside the declared reading range "
+                          "%.2f..%.2f%%" % (record["grade_pct"], g_min, g_max)}
+
+    # 2. absence, never inferred
+    if record["trailer_imu"] is None:
+        return {"verdict": "TRAILER_CHANNEL_ABSENT",
+                "reason": "no trailer trace. The trailer has NOT been shown to "
+                          "be quiet, and fault A turns on that difference: a "
+                          "correct reading of the cab says nothing about the "
+                          "body carrying the at-risk mass."}
+    if record["cab_imu"] is None:
+        return {"verdict": "NOT_EVALUABLE",
+                "reason": "no cab trace; there is no measured body to compare"}
+
+    cab = record["cab_imu"]
+    trl = record["trailer_imu"]
+
+    # 3. can the two traces be compared at all?
+    if cab["gaps"] > 0 or trl["gaps"] > 0:
+        return {"verdict": "NOT_EVALUABLE",
+                "reason": "gap in a trace (cab %d, trailer %d); an "
+                          "interpolated sample is a number the instrument "
+                          "made up, and onset is what it would move"
+                          % (cab["gaps"], trl["gaps"])}
+    clock_tol = threshold("clock_tolerance_s")
+    offset = abs(cab["t0_s"] - trl["t0_s"])
+    if offset > clock_tol:
+        return {"verdict": "NOT_EVALUABLE",
+                "reason": "trace start times differ by %.4g s, above the %.4g s "
+                          "tolerance; a lead between two clocks is not a lead "
+                          "between two bodies" % (offset, clock_tol)}
+    rate_tol = threshold("rate_tolerance_frac")
+    hi_rate = max(cab["rate_hz"], trl["rate_hz"])
+    mismatch = abs(cab["rate_hz"] - trl["rate_hz"]) / hi_rate
+    if mismatch > rate_tol:
+        return {"verdict": "NOT_EVALUABLE",
+                "reason": "sample rates differ by %.2f%% (%g Hz vs %g Hz), "
+                          "above the %.2f%% tolerance"
+                          % (100 * mismatch, cab["rate_hz"], trl["rate_hz"],
+                             100 * rate_tol)}
+    n = min(len(cab["samples"]), len(trl["samples"]))
+    if n < 8:
+        return {"verdict": "NOT_EVALUABLE",
+                "reason": "%d overlapping samples is too few to read an "
+                          "envelope" % n}
+    if record["curve_reversals"] < 1:
+        return {"verdict": "NOT_EVALUABLE",
+                "reason": "no curve reversals declared, so there is no forcing "
+                          "period and no window to search within"}
+
+    rate = cab["rate_hz"]
+    duration_s = n / rate
+    period_s = duration_s / record["curve_reversals"]
+    win = int(round(threshold("envelope_window_frac") * period_s * rate))
+    if win < 1:
+        win = 1
+
+    cab_env = envelope(cab["samples"][:n], win)
+    trl_env = envelope(trl["samples"][:n], win)
+
+    cab_rms = _rms(cab["samples"][:n])
+    trl_rms = _rms(trl["samples"][:n])
+    if cab_rms is None or trl_rms is None:
+        return {"verdict": "NOT_EVALUABLE", "reason": "a trace is empty"}
+    if cab_rms == 0 and trl_rms == 0:
+        return {"verdict": "NOT_EVALUABLE",
+                "reason": "neither body moved; there is no motion to place"}
+    if trl_rms == 0:
+        ratio = float("inf")
+    else:
+        ratio = cab_rms / trl_rms
+
+    floor = threshold("onset_variance_floor")
+    frac = threshold("onset_frac")
+    cab_onset = onset(cab_env, rate, cab["t0_s"], frac, floor)
+    trl_onset = onset(trl_env, rate, trl["t0_s"], frac, floor)
+    lag = envelope_lag(cab_env, trl_env, rate, period_s,
+                       threshold("onset_search_periods"))
+
+    # onset lead: positive means the cab rose first
+    if cab_onset["state"] == "MEASURED" and trl_onset["state"] == "MEASURED":
+        onset_lead_s = trl_onset["t_s"] - cab_onset["t_s"]
+        onset_basis = "both bodies timed"
+    elif cab_onset["state"] == "MEASURED" and trl_onset["state"] == "NO_EVENT":
+        onset_lead_s = None
+        onset_basis = ("the cab has an onset and the trailer has none; the "
+                       "cab is first by default and the lead has no value")
+    elif trl_onset["state"] == "MEASURED" and cab_onset["state"] == "NO_EVENT":
+        onset_lead_s = None
+        onset_basis = ("the trailer has an onset and the cab has none")
+    else:
+        onset_lead_s = None
+        onset_basis = ("cab %s, trailer %s"
+                       % (cab_onset["state"], trl_onset["state"]))
+
+    hi = threshold("amplitude_ratio_hi")
+    lo = threshold("amplitude_ratio_lo")
+
+    common = {"amplitude_ratio": ratio, "cab_rms": cab_rms,
+              "trailer_rms": trl_rms, "cab_onset": cab_onset,
+              "trailer_onset": trl_onset, "onset_lead_s": onset_lead_s,
+              "onset_basis": onset_basis, "envelope_lag": lag,
+              "forcing_period_s": period_s, "envelope_window_samples": win,
+              "decided_by": "amplitude_ratio, checked against onset timing"}
+
+    if ratio >= hi:
+        candidate = "GEOMETRIC_CAB_MODE"
+        reason = ("cab rms is %.3gx the trailer, at or above the declared "
+                  "ratio %g" % (ratio, hi))
+    elif ratio <= lo:
+        candidate = "TRAILER_ROLL_RISK"
+        reason = ("cab rms is %.3gx the trailer, at or below the declared "
+                  "ratio %g" % (ratio, lo))
+    else:
+        out = dict(common)
+        out["verdict"] = "NOT_EVALUABLE"
+        out["reason"] = ("amplitude ratio %.3g sits between the declared "
+                         "bounds %g and %g; the two bodies move comparably "
+                         "and this record does not separate them"
+                         % (ratio, lo, hi))
+        return out
+
+    # onset agreement. Undetermined is not agreement and is not disagreement.
+    agrees = None
+    if onset_lead_s is not None and abs(onset_lead_s) > 1e-12:
+        if candidate == "GEOMETRIC_CAB_MODE":
+            agrees = onset_lead_s > 0
+        else:
+            agrees = onset_lead_s < 0
+    elif (candidate == "GEOMETRIC_CAB_MODE"
+          and cab_onset["state"] == "MEASURED"
+          and trl_onset["state"] == "NO_EVENT"):
+        agrees = True
+    elif (candidate == "TRAILER_ROLL_RISK"
+          and trl_onset["state"] == "MEASURED"
+          and cab_onset["state"] == "NO_EVENT"):
+        agrees = True
+
+    if agrees is False:
+        out = dict(common)
+        out["verdict"] = "NOT_EVALUABLE"
+        out["onset_agrees"] = False
+        out["reason"] = ("amplitude reads %s while onset has the other body "
+                         "moving first (lead %+.4g s); two readings pointing "
+                         "opposite ways is not a verdict"
+                         % (candidate, onset_lead_s))
+        return out
+
+    out = dict(common)
+    out["verdict"] = candidate
+    out["reason"] = reason
+    out["onset_agrees"] = agrees
+    return out
+
+
+# --------------------------------------------------------------------------
+# envelope_edge -- the measured edge of the validation envelope (T2)
+# --------------------------------------------------------------------------
+
+def envelope_edge(records: Sequence[Dict[str, object]],
+                  road_id: str) -> Dict[str, object]:
+    """Onset speed with spread for one road, or INSUFFICIENT_RUNS.
+
+    Runs where the trigger did NOT fire are kept and reported separately
+    rather than dropped. They bound the edge from below: a run at 40 mph with
+    no trigger is information about where the edge is not, and discarding it
+    leaves the edge looking tighter than the data supports.
+    """
+    on_road = [r for r in records if r["road_id"] == road_id]
+    fired = [r for r in on_road if r["esp_event_ts"] is not None]
+    quiet = [r for r in on_road if r["esp_event_ts"] is None]
+    need = int(threshold("min_runs_for_edge"))
+    if len(fired) < need:
+        return {"state": "INSUFFICIENT_RUNS", "road_id": road_id,
+                "runs_with_trigger": len(fired),
+                "runs_without_trigger": len(quiet),
+                "required": need,
+                "no_trigger_speeds": sorted(r["speed_mph"] for r in quiet),
+                "reason": ("%d run(s) with a trigger on this road against a "
+                           "declared minimum of %d. Two points give a speed "
+                           "and no spread, and an edge quoted without a "
+                           "spread is a point pretending to be a measurement."
+                           % (len(fired), need))}
+    speeds = sorted(r["speed_mph"] for r in fired)
+    mid = len(speeds) // 2
+    if len(speeds) % 2 == 1:
+        median = speeds[mid]
+    else:
+        median = 0.5 * (speeds[mid - 1] + speeds[mid])
+    return {"state": "MEASURED", "road_id": road_id,
+            "runs_with_trigger": len(fired),
+            "runs_without_trigger": len(quiet),
+            "onset_speed_min": speeds[0], "onset_speed_max": speeds[-1],
+            "onset_speed_median": median,
+            "spread_mph": speeds[-1] - speeds[0],
+            "speeds": speeds,
+            "no_trigger_speeds": sorted(r["speed_mph"] for r in quiet),
+            "note": ("the no-trigger speeds bound this edge from below and "
+                     "are reported beside it, not folded into it")}
+
+
+# --------------------------------------------------------------------------
+# relocation_tally -- ORDER 2..4, the cost the safety score does not see
+# --------------------------------------------------------------------------
+
+def _bin_label(value: int, edges: Sequence[float]) -> str:
+    edges = sorted(edges)
+    for e in edges:
+        if value <= e:
+            return "<=%g" % e
+    return ">%g" % edges[-1]
+
+
+def relocation_tally(records: Sequence[Dict[str, object]]) -> Dict[str, object]:
+    """Counts by downstream_event, and by V2 access-road bin.
+
+    Nothing here is summed into a single score, and no function in this module
+    returns one. A relocation index would be the same move the safety score
+    already makes -- collapsing several different costs into one number that
+    can then be compared against a number built a different way.
+    """
+    edges = threshold("access_bins")
+    if not isinstance(edges, list):
+        edges = [edges]
+    by_event = {}
+    for name in DOWNSTREAM_EVENTS:
+        by_event[name] = 0
+    by_bin = {}
+    for r in records:
+        by_event[r["downstream_event"]] = by_event[r["downstream_event"]] + 1
+        label = _bin_label(r["access_count_to_drop"], edges)
+        if label not in by_bin:
+            by_bin[label] = {}
+            for name in DOWNSTREAM_EVENTS:
+                by_bin[label][name] = 0
+        by_bin[label][r["downstream_event"]] += 1
+    return {"n_records": len(records), "by_event": by_event,
+            "by_access_bin": by_bin, "bin_edges": edges,
+            "score": None,
+            "score_note": ("no composite is emitted. The counts are the "
+                           "reading; collapsing them would repeat the move "
+                           "that lost orders 2 to 4 in the first place.")}
+
+
+# --------------------------------------------------------------------------
+# render
+# --------------------------------------------------------------------------
+
+def render_classify(result: Dict[str, object]) -> List[str]:
+    out = ["  VERDICT: %s" % result["verdict"], "    %s" % result["reason"]]
+    if "amplitude_ratio" not in result:
+        return out
+    out.append("    amplitude ratio cab/trailer: %.4g   (cab rms %.4g, "
+               "trailer rms %.4g)" % (result["amplitude_ratio"],
+                                      result["cab_rms"],
+                                      result["trailer_rms"]))
+    co = result["cab_onset"]
+    to = result["trailer_onset"]
+    if co["state"] == "MEASURED":
+        out.append("    cab onset:     t = %.4g s" % co["t_s"])
+    else:
+        out.append("    cab onset:     %s -- %s" % (co["state"], co["reason"]))
+    if to["state"] == "MEASURED":
+        out.append("    trailer onset: t = %.4g s" % to["t_s"])
+    else:
+        out.append("    trailer onset: %s -- %s" % (to["state"], to["reason"]))
+    if result["onset_lead_s"] is None:
+        out.append("    onset lead:    no value -- %s" % result["onset_basis"])
+    else:
+        out.append("    onset lead:    %+.4g s (positive = cab first)"
+                   % result["onset_lead_s"])
+    lag = result["envelope_lag"]
+    if lag["state"] == "MEASURED":
+        out.append("    envelope lag:  %+.4g s within %g period(s) of the "
+                   "event, peak r %.3f"
+                   % (lag["lead_s"], threshold("onset_search_periods"),
+                      lag["peak_correlation"]))
+    else:
+        out.append("    envelope lag:  NOT_EVALUABLE -- %s" % lag["reason"])
+    out.append("    forcing period: %.4g s   envelope window: %d samples"
+               % (result["forcing_period_s"],
+                  result["envelope_window_samples"]))
+    if "onset_agrees" in result:
+        out.append("    onset agrees with amplitude: %s"
+                   % result["onset_agrees"])
+    return out
+
+
+def render_edge(result: Dict[str, object]) -> List[str]:
+    if result["state"] == "INSUFFICIENT_RUNS":
+        return ["  %s on %s -- %s" % (result["state"], result["road_id"],
+                                      result["reason"]),
+                "    runs with a trigger: %d   without: %d   required: %d"
+                % (result["runs_with_trigger"],
+                   result["runs_without_trigger"], result["required"]),
+                "    no-trigger speeds kept: %s" % result["no_trigger_speeds"]]
+    return ["  %s on %s" % (result["state"], result["road_id"]),
+            "    onset speed  min %.4g  median %.4g  max %.4g  spread %.4g mph"
+            % (result["onset_speed_min"], result["onset_speed_median"],
+               result["onset_speed_max"], result["spread_mph"]),
+            "    speeds with a trigger: %s" % result["speeds"],
+            "    speeds without a trigger: %s" % result["no_trigger_speeds"],
+            "    %s" % result["note"]]
+
+
+def render_tally(result: Dict[str, object]) -> List[str]:
+    out = ["  records: %d" % result["n_records"], "  by downstream_event:"]
+    for name in DOWNSTREAM_EVENTS:
+        out.append("    %-12s %d" % (name, result["by_event"][name]))
+    out.append("  by access-road bin (V2), edges %s:" % result["bin_edges"])
+    for label in sorted(result["by_access_bin"]):
+        row = result["by_access_bin"][label]
+        parts = []
+        for name in DOWNSTREAM_EVENTS:
+            if row[name]:
+                parts.append("%s=%d" % (name, row[name]))
+        if not parts:
+            parts.append("empty")
+        out.append("    %-8s %s" % (label, "  ".join(parts)))
+    out.append("  score: %s" % result["score"])
+    out.append("  %s" % result["score_note"])
+    return out
+
+
+def main() -> int:
+    import cases
+    print("DISPATCH ESP-1 -- stability-trigger-envelope")
+    print("=" * 72)
+    print()
+    print(cases.FIXTURE_NOTE)
+    for name, builder, expected in cases.FIXTURES:
+        print("%s -> expected %s" % (name, expected))
+        rec = builder()
+        if name.startswith("F5"):
+            for line in render_edge(envelope_edge(rec, "constructed-road-5")):
+                print(line)
+        else:
+            for line in render_classify(classify(rec)):
+                print(line)
+        print()
+    print("RELOCATION TALLY over the constructed set")
+    for line in render_tally(relocation_tally(cases.tally_set())):
+        print(line)
+    print()
+    print("thresholds in force (every one PLACEHOLDER unless marked):")
+    for line in threshold_report():
+        print(line)
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main(sys.argv[1:]))
+    if "--selftest" in sys.argv:
+        print("descent_record.py is the instrument; its checks live in "
+              "test_envelope.py. Run: python3 test_envelope.py")
+        raise SystemExit(2)
+    raise SystemExit(main())
