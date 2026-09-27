@@ -97,14 +97,26 @@ present, empty) on every check. Six read records are coded in
 MADR template, the OpenAI Model Spec, and two in-tree documents), plus
 two constructed ones that reach `NO` and `RETURN_FOR_REDO`.
 
-The finding the order asked for prominently: record types WITH an
-untried-options slot exist and are common in engineering governance
-(PEP, Rust RFC, MADR, the in-tree DECISION entry). What no coded record
-type carries is a slot binding first cost to the proposer (C1) or
-recording the authorizer's prior exposure (C2): six of six read
-ABSENT_FIELD on both. Both AI documents read ABSENT_FIELD on C3, which is
-consistent with the order's PROPOSED reading and does not establish it
-at n = 2.
+Three option fields, kept apart, because the council's structure keeps
+them apart: `options_tried` (attempted in the world, consequences
+recorded, C3a), `options_not_tried` (still available; a third party
+could require one be tried first, C3), and `options_considered`
+(evaluated and rejected on argument, never tried, C3c). The first coding
+here mapped rejected-alternatives sections onto C3, which overstated it;
+the operator's reading corrected that (RIN_021).
+
+The finding, as recoded: engineering record types carry a
+considered-and-rejected slot (PEP `Rejected alternative proposals`, Rust
+`Rationale and alternatives`, MADR `Considered Options`: 3 of 6 read
+records on C3c). The council's untried-and-available slot is on 1 of 6,
+the in-tree DECISION entry. No coded type carries a slot for options
+tried in the world (C3a ABSENT_FIELD, 6 of 6), a slot binding first cost
+to the proposer (C1, 6 of 6), or the authorizer's prior exposure (C2,
+6 of 6). **No read record gives an independent reviewer authority to add
+options** (C4 YES on 0 of 6; PEP 572 reads NO on PEP 1's stated
+approve-or-reject authority) and RETURN_FOR_REDO fires on none (C5). Both
+AI documents read ABSENT_FIELD on C3 and C3c, which is consistent with
+the order's PROPOSED reading and does not establish it at n = 2.
 
 The structure's source line is carried verbatim in the module docstring.
 No name is attached.
@@ -119,6 +131,27 @@ condition matching in the Calhoun-citing literature (FWO-1 as the coding
 instrument). Each carries scope, a kill condition and a cheapest first
 run. Literature prior-art checks are NOT_RUN; in-tree adjacency is
 recorded per design.
+
+## Merge audit (RIN_020 corrected, RIN_022..RIN_024)
+
+The operator asked for the parent diff of the merge that cut the registry.
+Run over the whole history instead, with a standing instrument:
+
+```
+python3 tools/merge_silent_loss.py 57b9cdf dbf4cb0 7cf18f4     # the three registry cuts
+python3 tools/merge_silent_loss.py --all                        # every merge reachable from HEAD
+python3 tools/merge_silent_loss.py --selftest                   # constructed history, every state
+```
+
+Sample in `samples/merge_loss.sample.txt`. What it reads: 113 merges, 9 with
+a line a parent held that the merge dropped and the other parent had not
+deleted. The registry was cut three times (2026-09-09, 09-18, 09-19) and
+restored three times, because it is the one file that counts itself. Seven
+other files lost lines that are still absent at HEAD and carry no instrument;
+one folder (`substrate-alternative/`) is two builds under one name, with the
+discarded build's test left in place and crashing. The first run of the
+instrument reported 1,400 phantom lines from a shallow clone, and now refuses
+instead. Details in the claim table.
 
 ## What stayed UNKNOWN, and why
 

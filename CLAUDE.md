@@ -13745,6 +13745,26 @@ ship a `requirements.txt`. Each folder ships `samples/`.
     its name and a repo-wide scan would be `nonidentity-census` T1-1's
     word-list failure one level up. The manifest is the weak point and the
     test says so; enforcement is at test time, not at the callsite.
+  - `merge_silent_loss.py` — **lines a merge dropped that neither parent
+    dropped.** A three-way merge may remove a line only if a parent removed
+    it relative to the base; anything else is a decision taken inside the
+    merge commit, which git records nowhere. Per merge, per file: the lost
+    line count, which parent held it, a category (`BOTH_ADDED` the file was
+    created on both sides and one was taken; `CONFLICT` both sides changed
+    it; `ONE_SIDE` only the losing side changed it, so a hand edit inside the
+    merge is implied), how many lines are still absent from HEAD's copy, and
+    how many of a sample are found elsewhere in the tree (a rename, for the
+    reader). Written after `tools/known_answer.py` was cut by three merges in
+    ten days and repaired each time only because it counts itself
+    (`route-independence/` RIN_020..RIN_024); over the full history it reads
+    113 merges, 9 with loss. Refuses `BASE_UNREACHABLE` on a shallow clone
+    and `BASE_AMBIGUOUS(n)` on a criss-cross, because its own first run read
+    an unreachable base as an empty file and reported 1,400 lines that were
+    never lost. `--selftest` builds the whole history it needs in a temp
+    directory (clean merge, conflict resolved to one side, both-added,
+    `-s ours`, a moved line, a copied line, a `--depth 1` clone) and
+    `tests/test_merge_silent_loss.py` runs it in the suite; nothing pins
+    this repository's live history, which is the sample file's job.
   - `authority_scan.py` — one identifier-level scan for a declared forbidden
     vocabulary. Several orders here ban a class of field NAME rather than a
     value (`loop-weight/` the standing family, `return-path/` the same plus
@@ -13878,17 +13898,36 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   with `None` pinned against `0.0`. **FWO-3** `untried_options_audit.py`:
   five checks on a decision record, `ABSENT_FIELD` kept apart from `NO`
   on every one; six read records coded by line (PEP 572, Rust RFC and
-  MADR templates, the OpenAI Model Spec, two in-tree documents) — record
-  types WITH an untried-options slot are common in engineering
-  governance, the finding the order asked to report prominently
-  (`RIN_014`), while no coded type binds first cost to the proposer or
-  records the authorizer's prior exposure (`RIN_013`), and both AI
+  MADR templates, the OpenAI Model Spec, two in-tree documents) — three
+  option fields kept apart (tried in the world / still available /
+  considered-and-rejected on argument) after the operator's reading
+  caught the first coding mapping rejected-alternatives sections onto
+  the council's untried field (`RIN_021`): engineering types carry the
+  considered-and-rejected slot (3 of 6), the untried-and-available slot
+  is on the one in-tree DECISION entry, no coded type carries a slot for
+  options tried in the world, for first cost bound to the proposer, or
+  for the authorizer's prior exposure (`RIN_013`, `RIN_014`), and **no
+  read record gives an independent reviewer authority to add options**,
+  C4 YES on 0 of 6 and RETURN_FOR_REDO on none (`RIN_016`); both AI
   documents read ABSENT_FIELD on C3 at n = 2 (`RIN_015`); the structure's
   source line carried verbatim, no name attached. **FWO-4**
   `RESEARCH_DESIGNS.md`, four designs with scope, kill condition and
   cheapest first run, literature prior-art NOT_RUN and in-tree adjacency
   recorded. `SOURCES.md` records every fetch (sha256, timestamp) and every
-  refused host. Nineteen `RIN_*` claims; check count printed by
+  refused host. **The parent-diff audit the operator asked for on RIN_020**
+  became `tools/merge_silent_loss.py` and was run over every merge in the
+  history: 113 merges, 9 with silent loss, the registry cut three times
+  (`7cf18f4`, `dbf4cb0`, `57b9cdf`) and restored three times because it is the
+  one file that counts itself -- RIN_020's attribution of the ledger loss to
+  `57b9cdf` is corrected to `dbf4cb0` (RIN_022). Seven files lost lines still
+  absent at HEAD under no instrument (the root README's grounding-layers
+  table, the SPDX headers on both root specs, a `notes/README.md`
+  paragraph), and `substrate-alternative/` is two independent builds
+  resolved to one at `dbf4cb0` with the other build's `selftest_pilot.py`
+  and `params/` left in place -- the source of two of the four root-suite
+  failures, not repaired here (RIN_024). The instrument's own first run
+  reported 1,400 phantom lines from a shallow clone and now refuses
+  `BASE_UNREACHABLE` (RIN_023). Twenty-four `RIN_*` claims; check count printed by
   `python3 route-independence/test_route.py`. Stdlib only, parses under
   3.9, phone-buildable, CC0.
 - `custody-verification-band/` — Marker under exploration. Criterion: a layer
