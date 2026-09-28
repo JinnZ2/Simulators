@@ -123,3 +123,17 @@ field. The case-(b) token chain (citation → credential → funding) is CARRIED
 from the amendment's own text and is a declaration, not an observation of any
 conversion. The symmetry argument is arithmetic on the premise as the
 amendment states it and rests on no source.
+
+## Amendment A-2 of 2026-09-28
+
+Nothing fetched. The amendment's section 2 carries six sources at its author's
+grades (G-1 P; G-2 P/S; G-3 K; W-1, W-2, W-3 S) and three items marked NOT
+SOURCED. Every fixture row and every event in `gate_state.py` names one of the
+six by id and is CARRIED at that grade; this session read none of the texts
+behind them (statute, case-report and Wikisource hosts are off the egress
+allowlist; no CONNECT was attempted). Grade K (G-3) is stored and flagged and
+enters no hold. The HB 16-1005 effective date (2016-08-10) is carried as
+delivered, verification NOT_RUN. The G-2 court conflict is recorded in
+`SOURCES["G-2"]["conflict"]` with Common Pleas carried and `resolved: False`.
+The constructed all-OPEN fail fixture is labelled CONSTRUCTED_UNSOURCED in its
+source field and its tag.

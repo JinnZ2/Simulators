@@ -14029,11 +14029,37 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   the three-valued field has no member for an obligation-free route off the
   biological list (`RIN_061`); the one BOTH row is the property tax on the
   land one lives on, C2 as a record (`RIN_063`); section 2 as `net_positions`,
-  registered in `tools/known_answer.py` (`RIN_064`). Sixty-six `RIN_*` claims;
+  registered in `tools/known_answer.py` (`RIN_064`). **AMENDMENT A-2
+  (2026-09-28, gate state time- and jurisdiction-indexed)** then landed
+  verbatim, its section 5 committed alone at `251e12a`; `gate_state.py` gives
+  every route copy `jurisdiction`, `t_from`/`t_to`, a five-state `gate_state`
+  (UNKNOWN the default, blocking scoring; DISCRETIONARY the G-2 reclassification
+  — access at the gate-holder's pleasure), `gate_instrument`, `gate_source`
+  with the amendment's P/S/K grades, plus a `gate_change_events` table whose
+  direction comes from an enumerated transition table and whose closures and
+  loosenings are never netted, and A-1's missing fourth origin NONE. **One of
+  five expectation rows REFUTED, reported first**: E-A2-1's literal wording —
+  the amended F-W1/F-W2 records differ on five fields, only `gate_state` a
+  reading field (`RIN_067`); E-A2-2..4 HELD(S) — one CLOSURE event OPEN →
+  DISCRETIONARY at 1788 that a route count (1 → 1) misses and a removal count
+  finds (`RIN_068`); at 2026 rainwater CO METERED / TX OPEN / UT UNKNOWN and
+  gleaning England DISCRETIONARY, per jurisdiction never pooled, shelter
+  NOT_EVALUABLE (`RIN_069`); DISCRETIONARY never read as open, AST-asserted,
+  the scan having fired twice on the module's own assertion statements
+  (`RIN_071`). **The fixture table over-asserts its own sources twice**
+  (`RIN_070`): F-W3 declared PROHIBITED reads UNKNOWN under the amendment's own
+  3a because W-2 carries no date, and F-W4 reads OPEN only at year precision
+  from W-3's text, UNKNOWN under the strict reading. Section 3c: ten UNDECIDED
+  rows re-read, eight to NONE on stated grounds, two stay for an undeclared
+  medium, `RIN_061` narrowed (`RIN_072`); F-A3 retired, kept, tagged
+  CONSTRUCTED_UNSOURCED, reading UNKNOWN (`RIN_074`); every source CARRIED,
+  the HB 16-1005 date verification NOT_RUN, the G-2 court conflict carried open
+  (`RIN_073`). Seventy-six `RIN_*` claims;
   check counts printed by `python3 route-independence/test_route.py`,
-  `python3 route-independence/test_dependency_chain.py` and
-  `python3 route-independence/test_single_channel.py` and
-  `python3 route-independence/test_settlement_split.py`, the last two also
+  `python3 route-independence/test_dependency_chain.py`,
+  `python3 route-independence/test_single_channel.py`,
+  `python3 route-independence/test_settlement_split.py` and
+  `python3 route-independence/test_gate_state.py`, the last three also
   printing the fail-fixture line. Stdlib only,
   parses under 3.9, phone-buildable, CC0.
 - `custody-verification-band/` — Marker under exploration. Criterion: a layer

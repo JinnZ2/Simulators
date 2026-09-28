@@ -390,3 +390,42 @@ settlement_split.py                             the instrument
 test_settlement_split.py                        checks; prints its count
 samples/settlement_split.sample.txt             the recorded render
 ```
+
+# AMENDMENT A-2 of 2026-09-28 — gate state is time- and jurisdiction-indexed
+
+`AMENDMENT_A2_2026-09-28_gate-state.md` verbatim; its section 5 is the
+EXPECTED block and the file was committed alone at `251e12a` before any code.
+`gate_state.py` extends FWO-5, FWO-8 and A-1 and rebuilds none of them;
+`test_gate_state.py` prints its count. `CLAIM_TABLE.md` RIN_067..076.
+
+```
+STATE   built and run; render recorded under samples/
+        key-holder rules: 1 met (251e12a); 3 met (F-W1 vs F-W2 unamended, as
+        designated, plus a constructed all-OPEN set that enters no hold);
+        2 met at grade S by the amendment's author -- every source CARRIED
+        here unread, so every hold reads HELD(S) at most (section 7).
+        One of five expectation rows is a MISMATCH and is reported first.
+```
+
+| expectation | result | where |
+|---|---|---|
+| E-A2-1 (literal) amended records differ on gate_state ALONE | **REFUTED**: five fields differ; only `gate_state` is a reading field, t is the index the prediction names, the instrument is a label | RIN_067 |
+| E-A2-1 (reading) unamended code returns one record; the reading parts on gate_state alone | HELD(S) | RIN_067 |
+| E-A2-2 F-G1 → F-G2 is one change event OPEN → DISCRETIONARY, not route absence | HELD(S): route count England 1 → 1 across 1788, closure count 1; derived events reconcile with declared 2 of 2 | RIN_068 |
+| E-A2-3 no subsistence route OPEN in every sourced jurisdiction at 2026 | HELD(S), per jurisdiction: rainwater CO metered / TX open / UT unknown; gleaning England discretionary; shelter NOT_EVALUABLE | RIN_069 |
+| E-A2-4 DISCRETIONARY is not OPEN; no expression reads it as independent | HELD (AST); the scan fired twice on the module's own assertions, which were split | RIN_071 |
+
+What the fixtures showed about themselves: F-W3 is declared PROHIBITED and
+reads UNKNOWN because W-2 carries no date, and F-W4 reads OPEN only at a
+year precision taken from W-3's text — under the amendment's own 3a two of
+six delivered rows over-assert their source (RIN_070). Section 3c: ten
+UNDECIDED rows re-read, eight move to NONE on stated grounds, two stay for a
+different reason, an undeclared medium (RIN_072). F-A3 is retired and kept,
+tagged, reading UNKNOWN (RIN_074).
+
+```
+AMENDMENT_A2_2026-09-28_gate-state.md   verbatim (EXPECTED at 251e12a)
+gate_state.py                           the instrument
+test_gate_state.py                      checks; prints its count
+samples/gate_state.sample.txt           the recorded render
+```
