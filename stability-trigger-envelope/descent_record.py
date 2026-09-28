@@ -718,6 +718,63 @@ def render_tally(result: Dict[str, object]) -> List[str]:
     out.append("  score: %s" % result["score"])
     out.append("  %s" % result["score_note"])
     return out
+    returns: list of (fid, description, expected, record_or_records, road)
+    """
+    cab_osc = constructed_trace(6.0, 8.0, 1)
+    trl_lag = constructed_trace(0.6, 12.0, 2)            # 4 s behind, small
+    trl_roll = constructed_trace(5.0, 8.0, 3)            # trailer moving
+    cab_small = constructed_trace(3.0, 8.0, 4)
+    trl_off = constructed_trace(0.6, 12.0, 5, sync_ts=5.0)   # 3 s off
+    trl_gap = constructed_trace(0.6, 12.0, 6, gap=(15.0, 16.5))
+    quiet_cab = constructed_trace(0.2, 8.0, 7)
+    quiet_trl = constructed_trace(0.2, 8.0, 9)
+    trl_lead = constructed_trace(0.6, 4.0, 8)            # trailer first
+    trl_sub = constructed_trace(0.6, 6.0, 10)            # trailer first by 2 s: a quarter of the 8 s period
+
+    f5 = [_rec("ROAD_2", 31.0, None, None, ts=None),
+          _rec("ROAD_2", 34.0, cab_osc, trl_lag)]
+    x5 = [_rec("ROAD_3", 24.0, None, None, ts=None, event="pass"),
+          _rec("ROAD_3", 27.0, None, None, ts=None, event="near_miss"),
+          _rec("ROAD_3", 30.0, cab_osc, trl_lag, event="none"),
+          _rec("ROAD_3", 33.0, cab_osc, trl_lag, event="closure",
+               access=2)]
+    return [
+        ("F1", "serpentine, cab-only oscillation", GEOMETRIC_CAB_MODE,
+         _rec("ROAD_1", 34.0, cab_osc, trl_lag), None),
+        ("F2", "real trailer roll", TRAILER_ROLL_RISK,
+         _rec("ROAD_1", 38.0, cab_small, trl_roll), None),
+        ("F3", "no trailer IMU", TRAILER_CHANNEL_ABSENT,
+         _rec("ROAD_1", 34.0, cab_osc, None), None),
+        ("F4", "clocks misaligned > window", NOT_EVALUABLE,
+         _rec("ROAD_1", 34.0, cab_osc, trl_off), None),
+        ("F5", "two runs on a road", INSUFFICIENT_RUNS, f5, "ROAD_2"),
+        ("X1", "gap in trailer trace", NOT_EVALUABLE,
+         _rec("ROAD_1", 34.0, cab_osc, trl_gap), None),
+        ("X2", "snow surface", OUT_OF_ENVELOPE,
+         _rec("ROAD_1", 30.0, cab_osc, trl_lag, surface="snow"), None),
+        ("X3", "both channels quiet", NEITHER_MODE,
+         _rec("ROAD_1", 30.0, quiet_cab, quiet_trl), None),
+        ("X4", "cab high but trailer leads", NEITHER_MODE,
+         _rec("ROAD_1", 34.0, cab_osc, trl_lead), None),
+        ("X5", "four runs on a road", EDGE_BRACKETED, x5, "ROAD_3"),
+        ("X6", "cab high, trailer leads by a fraction of one period", NEITHER_MODE,
+         _rec("ROAD_1", 34.0, cab_osc, trl_sub), None),
+    ]
+
+
+def run_fixtures(current=None):
+    """Run every fixture; returns list of (fid, desc, expected, got, detail)."""
+    if current is None:
+        current, _ = load_thresholds()
+    rows = []
+    for fid, desc, expected, obj, road in fixtures():
+        if road is None:
+            rd = classify(obj, current)
+            rows.append((fid, desc, expected, rd.label, rd))
+        else:
+            e = envelope_edge(obj, road)
+            rows.append((fid, desc, expected, e["status"], e))
+    return rows
 
 
 def main() -> int:

@@ -1,0 +1,15 @@
+# SYNTHETIC. Constructed so every check has content and C5 fires
+# RETURN_FOR_REDO: the reviewer names an option the record omitted.
+record_kind: instance
+source:
+source_status: synthetic
+decision: constructed decision
+proposer: council_a
+first_cost_bearers: council_a; council_a's households
+authorizer: bearers_of_the_prior_cost
+authorizer_prior_exposure: bore the cost of the last instance (constructed)
+options_tried: option_x; option_y
+options_not_tried: option_w
+reviewer: third_party
+reviewer_can_add_options: yes
+reviewer_added_options: option_w; option_z

@@ -1,0 +1,60 @@
+gate_state_a21 -- AMENDMENT A-2.1 over A-2: source upgrades and fixture corrections
+every source CARRIED at the amendment author's grade; W-1a and W-2a read by the author, not here; EXPECTED registered at 09774de
+
+-- sources added or upgraded (section 1), and recorded-not-adopted (section 4)
+   W-1a       grade P  hold P    input True  Colorado HB 16-1005, signed bill text (content.leg.colorado.gov/sites/default/files/2016a_
+   W-2a       grade P  hold P    input True  Utah SB 32 (2010) enacting Utah Code 73-3-1.5 (le.utah.gov/~2010), YEAR precision, effecti
+   UT-73-2-27 grade S  hold S    input False Utah Code 73-2-27, criminal penalty (Class B misdemeanor default): the enforcement mechani
+   UT-73-1-1  grade S  hold S    input False Utah Code 73-1-1, waters declared property of the public: the root gate for W-2
+   HB 16-1005 effective date: RESOLVED at grade P by the amendment's author: signed bill text read, effective 2016-08-10 conditional on sine die 2016-05-11, condition confirmed by the CO Division of Real Estate 2016 Annual Report; CARRIED here, the PDF not read by this session
+
+-- corrected fixture rows (declared state, then what the row READS)
+   id     juris      t_from     t_to       declared            reads               src   grd hold  condition
+   F-W1a  Colorado   --         2009       PROHIBITED          PROHIBITED          W-1   S   True  --
+   F-W1b  Colorado   2009       2016-08-10 UNKNOWN             UNKNOWN             --    --  False --
+   F-W2   Colorado   2016-08-10 --         METERED_PERMISSION  METERED_PERMISSION  W-1a  P   True  --
+   F-W3a  Utah       2010       --         METERED_PERMISSION  METERED_PERMISSION  W-2a  P   True  unregistered; at most two covered containers, each <= 100 gal
+   F-W3b  Utah       2010       --         PROHIBITED          PROHIBITED          W-2a  P   True  unregistered; any container > 100 gal
+   F-W3c  Utah       --         2010       UNKNOWN             UNKNOWN             --    --  False --
+   F-W4   Texas      --         --         UNKNOWN             UNKNOWN             --    --  False --
+   F-G1 O England    --         1788       OPEN                OPEN                G-1   P   True  --
+   F-G2 D England    1788       --         DISCRETIONARY       DISCRETIONARY       G-2   P/S True  --
+   A-2 rows F-W1, F-W3, F-W4 stay in gate_state.py as the record of the authoring line; superseded here, not edited
+
+-- events under A-2.1
+   gleaning          England                      1788       OPEN                -> DISCRETIONARY       G-2   P/S CLOSURE           hold True
+   gleaning          Israel, codified provision   --         UNKNOWN             -> OPEN                G-3   K   UNKNOWN_DIRECTION hold False
+   rainwater_rooftop Colorado                     2016-08-10 UNKNOWN             -> METERED_PERMISSION  W-1a  P   UNKNOWN_DIRECTION hold True
+   rainwater_rooftop Utah                         2010       UNKNOWN             -> METERED_PERMISSION  W-2a  P   UNKNOWN_DIRECTION hold True
+   A-2's EV-2 read PROHIBITED -> METERED_PERMISSION on W-1 (S); with F-W1b UNKNOWN the from-state is unsourced and the direction is UNKNOWN_DIRECTION until the 2009 bill is attached
+   derived and declared: 3; derived with no declared row: [('rainwater_rooftop', 'Colorado', '2009', 'PROHIBITED', 'UNKNOWN')] (the 2009 boundary: its instrument is the unsourced bill, so no event is declared for it); declared dated with no derivation: []
+
+-- rainwater at t=2026, per jurisdiction (never pooled) [CHOICE 12]
+   water  rainwater_rooftop readings {'Colorado': 'METERED_PERMISSION', 'Texas': 'UNKNOWN', 'Utah': {'unregistered; at most two covered containers, each <= 100 gal': 'METERED_PERMISSION', 'unregistered; any container > 100 gal': 'PROHIBITED'}}
+            grade by jurisdiction {'Colorado': 'P', 'Texas': None, 'Utah': 'P'}; verdict OPEN_IN_NONE; open_status UNMEASURED_OPEN; hold True
+   food   gleaning          readings {'England': 'DISCRETIONARY'}
+            grade by jurisdiction {'England': 'S'}; verdict OPEN_IN_NONE; open_status OPEN_IN_NONE_MEASURED; hold True
+   shelter, air, warmth: NOT_EVALUABLE
+
+-- A-2's four expectations re-run over the corrected rows (pair F-W1a / F-W2)
+   MISMATCH FAILED                                 E-A2-1 (literal) the amended records differ on gate_state ALONE
+   MATCH    HELD(S)                                E-A2-1 (reading) unamended code returns one record for F-W1 and F-W2; the amende
+   MATCH    HELD(S)                                E-A2-2 F-G1 -> F-G2 registers as one change event OPEN -> DISCRETIONARY, not as 
+   MATCH    HELD(S)                                E-A2-3 at t=2026 no subsistence route reads OPEN in every sourced jurisdiction (
+   MATCH    HELD(S)                                E-A2-4 DISCRETIONARY is not OPEN; no expression reads a DISCRETIONARY route as i
+
+-- section 3, PROPOSED and NOT BUILT
+   fields ['access_is_right', 'revocable_by']; status NOT_BUILT
+   question: is METERED_PERMISSION with access_is_right = FALSE a sub-case of DISCRETIONARY? The G-2 transition (right -> charity) and the CO/UT grants (no right -> permission, not a right) may be one state reached from opposite directions. Test, do not assume.
+   what a test would read: who holds the revocation: on G-2 a private landowner with no office (no enforceable claim against anyone), on CO/UT a named public office acting under a statute. Whether that difference is a second axis or a label on one state is what a built field would let a case set answer; nothing here answers it.
+
+-- expected (section 5), MISMATCH rows first
+expected MATCH    HELD(P)                                E-A2.1-1 rainwater at 2026: CO METERED_PERMISSION (P), UT METERED_PERMISSION or PROHIBITED by container size (P), TX UNKNOWN; OPEN nowhere sourced, reported UNMEASURED_OPEN not closure
+         readings {'Colorado': 'METERED_PERMISSION', 'Texas': 'UNKNOWN', 'Utah': {'unregistered; at most two covered containers, each <= 100 gal': 'METERED_PERMISSION', 'unregistered; any container > 100 gal': 'PROHIBITED'}}; grades {'Colorado': 'P', 'Texas': None, 'Utah': 'P'}; open_status UNMEASURED_OPEN
+expected MATCH    HELD(S)                                E-A2.1-2 the E-A2-3 hold count does not change; its rainwater grade moves S -> P for CO and UT
+         E-A2-3 before HELD(S) after HELD(S); rainwater grade by jurisdiction before {'Colorado': 'S', 'Texas': 'S', 'Utah': None} after {'Colorado': 'P', 'Texas': None, 'Utah': 'P'} -- Utah reads S -> P from NO in-force row under A-2 (F-W3 had no t), not from S
+
+fail fixture: A-2's F-W3 as written reads UNKNOWN (no t); given A-2.1's year and no condition beside the two corrected rows it reads CONFLICT; the corrected pair alone reads BY_CONDITION
+holds: rule 1 met (09774de); rule 3 met; rule 2 met at grade P by the amendment's author for W-1a / W-2a and at S for the doctrine row, all CARRIED here
+choices in force: [CHOICE 9], [CHOICE 10], [CHOICE 11], [CHOICE 12], [CHOICE 13]
+execution note: test_gate_state_a21.py prints the check count; samples/gate_state_a21.sample.txt is one recorded render, compare before quoting

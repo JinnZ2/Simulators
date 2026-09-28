@@ -13806,7 +13806,9 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   UNMEASURED, sources NOT_FETCHED; the AEB cross-link is an inline
   definition (override of a false intervention logged as driver error).
   Render screens clean through `sheet-structure-scan/no_severity`.
-  Ten `STE_*` claims; test 47/47. Stdlib only, CC0.
+  Eleven `STE_*` claims (STE_011: X6, a trailer lead of a quarter
+  period, reads TRAILER_LEADS at -1.8 s against a constructed 2.0 s on the
+  first run, recorded before any repair); test 49/49. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
@@ -13901,6 +13903,26 @@ ship a `requirements.txt`. Each folder ships `samples/`.
     its name and a repo-wide scan would be `nonidentity-census` T1-1's
     word-list failure one level up. The manifest is the weak point and the
     test says so; enforcement is at test time, not at the callsite.
+  - `merge_silent_loss.py` — **lines a merge dropped that neither parent
+    dropped.** A three-way merge may remove a line only if a parent removed
+    it relative to the base; anything else is a decision taken inside the
+    merge commit, which git records nowhere. Per merge, per file: the lost
+    line count, which parent held it, a category (`BOTH_ADDED` the file was
+    created on both sides and one was taken; `CONFLICT` both sides changed
+    it; `ONE_SIDE` only the losing side changed it, so a hand edit inside the
+    merge is implied), how many lines are still absent from HEAD's copy, and
+    how many of a sample are found elsewhere in the tree (a rename, for the
+    reader). Written after `tools/known_answer.py` was cut by three merges in
+    ten days and repaired each time only because it counts itself
+    (`route-independence/` RIN_020..RIN_024); over the full history it reads
+    113 merges, 9 with loss. Refuses `BASE_UNREACHABLE` on a shallow clone
+    and `BASE_AMBIGUOUS(n)` on a criss-cross, because its own first run read
+    an unreachable base as an empty file and reported 1,400 lines that were
+    never lost. `--selftest` builds the whole history it needs in a temp
+    directory (clean merge, conflict resolved to one side, both-added,
+    `-s ours`, a moved line, a copied line, a `--depth 1` clone) and
+    `tests/test_merge_silent_loss.py` runs it in the suite; nothing pins
+    this repository's live history, which is the sample file's job.
   - `authority_scan.py` — one identifier-level scan for a declared forbidden
     vocabulary. Several orders here ban a class of field NAME rather than a
     value (`loop-weight/` the standing family, `return-path/` the same plus
@@ -14010,6 +14032,212 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `MECH` is assigned to no source and that is a gap rather than a decision,
   and nothing here addresses SP 800-90B or AIS 31 health testing. Stdlib only,
   selftest 33/33, CC0.
+- `route-independence/` — FABLE WORK ORDER PACKET 2026-09-26, three
+  instruments and four research designs, landed here because the named
+  repository could not be created from the session (403, the `SA_018`
+  outcome). **FWO-1** `entry_condition_match.py`: match a study's entry
+  conditions to a candidate population row by row (`DECOUPLED | COUPLED
+  | REMOVED | PRESENT | UNKNOWN`, the first two binary at the parser, a
+  gradient word refused as `INVALID_STATE`), returning `TRANSFERABLE |
+  PARTIAL(hold, fail) | NOT_TRANSFERABLE | NOT_EVALUABLE` with PARTIAL and
+  NOT_TRANSFERABLE kept apart and any UNKNOWN row blocking TRANSFERABLE;
+  on the Universe 25 demo the order's kill line does not fire — (c), the
+  paid-provision stratum, reads PARTIAL failing on `exit` and `disease`
+  (`RIN_002`), and every study row is CARRIED since the 1973 paper's hosts
+  refuse CONNECT (`RIN_006`). **FWO-2** `route_independence.py`: route
+  count beside whether each route discharges its obligations in its own
+  medium, `permitted` a separate column reaching no measure (AST and
+  behavioural, `RIN_008`); an UNKNOWN medium gives a band and an UNKNOWN
+  flag, so the demo's `food` need is NOT established as enclosed while
+  `water` reads `ENCLOSED_PLURALITY` (`RIN_009`); the prior instrument
+  `effective-redundancy-audit` is IMPORTED as a cross-check rather than a
+  STOP, its `n_nominal >= 2 and n_eff == 1` agreeing on every decided need
+  (`RIN_007`); `independence_ratio` registered in `tools/known_answer.py`
+  with `None` pinned against `0.0`. **FWO-3** `untried_options_audit.py`:
+  five checks on a decision record, `ABSENT_FIELD` kept apart from `NO`
+  on every one; six read records coded by line (PEP 572, Rust RFC and
+  MADR templates, the OpenAI Model Spec, two in-tree documents) — three
+  option fields kept apart (tried in the world / still available /
+  considered-and-rejected on argument) after the operator's reading
+  caught the first coding mapping rejected-alternatives sections onto
+  the council's untried field (`RIN_021`): engineering types carry the
+  considered-and-rejected slot (3 of 6), the untried-and-available slot
+  is on the one in-tree DECISION entry, no coded type carries a slot for
+  options tried in the world, for first cost bound to the proposer, or
+  for the authorizer's prior exposure (`RIN_013`, `RIN_014`), and **no
+  read record gives an independent reviewer authority to add options**,
+  C4 YES on 0 of 6 and RETURN_FOR_REDO on none (`RIN_016`); both AI
+  documents read ABSENT_FIELD on C3 at n = 2 (`RIN_015`); the structure's
+  source line carried verbatim, no name attached. **FWO-4**
+  `RESEARCH_DESIGNS.md`, four designs with scope, kill condition and
+  cheapest first run, literature prior-art NOT_RUN and in-tree adjacency
+  recorded. `SOURCES.md` records every fetch (sha256, timestamp) and every
+  refused host. **The parent-diff audit the operator asked for on RIN_020**
+  became `tools/merge_silent_loss.py` and was run over every merge in the
+  history: 113 merges, 9 with silent loss, the registry cut three times
+  (`7cf18f4`, `dbf4cb0`, `57b9cdf`) and restored three times because it is the
+  one file that counts itself -- RIN_020's attribution of the ledger loss to
+  `57b9cdf` is corrected to `dbf4cb0` (RIN_022). Seven files lost lines still
+  absent at HEAD under no instrument (the root README's grounding-layers
+  table, the SPDX headers on both root specs, a `notes/README.md`
+  paragraph), and `substrate-alternative/` is two independent builds
+  resolved to one at `dbf4cb0` with the other build's `selftest_pilot.py`
+  and `params/` left in place -- the source of two of the four root-suite
+  failures, not repaired here (RIN_024). The instrument's own first run
+  reported 1,400 phantom lines from a shallow clone and now refuses
+  `BASE_UNREACHABLE` (RIN_023). **The FABLE WORK ORDER of 2026-09-27**
+  (dependency chains, conversion points, single-medium detectability)
+  then landed verbatim beside the packet, `RIN_025..038` — first drafted
+  as `RIN_021..034` against `177d885` and renumbered before push, since
+  the packet had used those ids meanwhile. **FWO-5**
+  `dependency_chain_audit.py` EXTENDS FWO-2 and rebuilds none of it: each
+  dependency is one FWO-2 need, flags, bands and the
+  `effective-redundancy-audit` cross-check are `route_independence.py`'s,
+  asserted by AST (`RIN_025`); `status` is DERIVED from FWO-2's
+  `discharges_own_obligations` and `permitted` is read by nothing, which
+  is how "permitted is not independent" holds structurally (`RIN_026`);
+  absence is never a negative — undeclared settlement is UNKNOWN, the
+  result-level ratio is a band whenever an UNKNOWN route exists, silence
+  on a dependency is refused (`RIN_027`); and wrapping FWO-2 surfaced one
+  limit of its flag order, a single UNKNOWN route reading `SINGLE_ROUTE`,
+  carried beside rather than repaired (`RIN_028`). Three demo cases with
+  expectations REGISTERED before the first run, and **the run then made:
+  every prediction held** — household phenology band [0.750, 0.875]; an
+  open-access finding (instance named, not read) at 0.200 with the
+  order's own `enclosed_on_publication` reading MISMATCH, since a preprint
+  deposit incurs no obligation at one hop and an open dataset settles in
+  citation (`RIN_030`); a bitcoin exit band [0.500, 0.750], ENCLOSED on
+  legal compliance at `settlement`, `input_purchase` leading the ordered
+  conversion points 3 to 1 (`RIN_031`). **FWO-6** `conversion_register.json`:
+  eight exit attempts, every source CARRIED or UNKNOWN, no entry rated;
+  tally production 6 / settlement 4 / legal 1 / publication 1, so `SPREAD`
+  and the SETTLEMENT hypothesis `NOT_SUPPORTED_ON_THIS_REGISTER`, against
+  the coder's own hypothesis (`RIN_032`). **FWO-7** `FWO7_DESIGN.md`:
+  three control sources, each with scope, prediction, kill condition,
+  cheapest first run and its confound; nothing run (`RIN_033`). The four
+  carried items were answered against `177d885` and the packet's own
+  `RIN_021`/`RIN_022` answered three of them first; both readings stand —
+  the `57b9cdf` loss read as two files from API stats and as one from the
+  diff, `run_manifest.py`'s two lines being a replacement (`RIN_034`);
+  the considered-and-rejected coding and PEP 572's C4 already recoded by
+  `5b2c0f0`, with the trial marker and the propose/compel split still
+  unfielded (`RIN_035`, `RIN_036`); the C/NC tallies PARTIAL from search
+  fragments (`RIN_037`). The order's code was pushed unexecuted through
+  the API and run once afterwards, the render recorded as
+  `samples/dependency_chain.sample.txt` (`RIN_038`). **The order of 2026-09-27b (FWO-8..14, single-channel additions)** then
+  landed verbatim beside the other two, with `EXPECTED_2026-09-27b.md`
+  committed at `fd198aa` before any module, fixture or annotation existed
+  (the order's new key-holder rule: expected block first, inputs from an
+  external document, one fixture per instrument built to FAIL, a hold names
+  which rules it met). **FWO-8** `edge_taxonomy.py` extends FWO-5 without
+  redefining a name: `edge_class` (DIRECT / INSTITUTIONAL / ACCESS /
+  MEASUREMENT / TEMPORAL / RECURSIVE / UNKNOWN, carried) and `coupling_side`
+  (SURVIVAL / SELECTION / BOTH / UNKNOWN) on a copy of each route, a
+  SURVIVAL-only route INDEPENDENT at the selection layer and the two layer
+  readings never merged (AST); DIRECT is 0 across the three cases (`RIN_041`,
+  held under rules 1 and 3, rule 2 unmet since every class is the session's
+  reading), case (b)'s independent rows are `data_access` and `publication`
+  with the row-level registration REFUTED as the EXPECTED file predicted
+  (`RIN_043`), and in case (c) `input_purchase` is the point the
+  (account, settlement) pair cannot place, every one of its three USD/USD
+  routes colliding with the settlement penalty row and separated only by
+  `edge_class` (`RIN_044`). **FWO-9** `question_space.py` is a declared
+  column over FWO-5's six points plus FWO-13's `tax_step`, refusing a loss
+  estimate (`RIN_045`). **FWO-10** `standards_register.py` carries six
+  standards from memory with the applied-to-the-medium column
+  UNKNOWN_NOT_SEARCHED on every row, so the order's NOT_APPLIED expectation
+  is NOT_EVALUABLE rather than held, and the prior-art memory entries each
+  read as plumbing, not the medium (`RIN_046`). **FWO-11** `lag_count.py`
+  carries the six seeds with every date UNSOURCED, the survivor-filter line
+  in every header, Antikythera RECOVERED_NOT_REDISCOVERED with the
+  capability reading carried beside it, the unsourced lags [550, 1506, 1921,
+  2297] apart from an empty sourced distribution, no seed INDEPENDENT, a
+  reach before its production refused (`RIN_047`; `lag_years` registered in
+  `tools/known_answer.py`). **FWO-12** `unpaid_maintenance.py` is
+  DESIGN_WRITTEN: the three-party filter, a share that refuses to run without
+  a public dataset, the prediction NOT_RUN and a fixture on which it RISES
+  (`RIN_048`). **FWO-13** `tax_step.py` registers the tax step as its own row
+  type, refusing an FWO-6 entry shape and a PROPOSED row asking to be
+  REGISTERED; appearance 3 stays CANDIDATE, neither verified nor dropped
+  (`RIN_049`). **FWO-14** is DESIGN ONLY (`REFERENCE_INSTABILITY_DESIGN.md`,
+  twelve CANDIDATE_UNSOURCED rows, G(t) at seven dates with three falsifiable
+  directions, `RIN_050`). Carried questions: the Noise repository is outside
+  scope, but `origin/claude/noise-information-four-tools-5u0l4k` in this
+  repository carries a SECOND build of `stability-trigger-envelope/`
+  (`RIN_051`, RIN_024's shape again, not resolved); X6 added to ESP-1 with
+  its first run recorded before any repair (`RIN_053`, STE_011); the three
+  merge-lost blocks restored from the losing-parent blobs after the clone
+  was unshallowed, the superseded catalogue paragraph deliberately left
+  (`RIN_055`); RIN_024 untouched (`RIN_056`). **AMENDMENT A-1 (2026-09-28,
+  settlement vs gate-removal)** then landed verbatim, its section 5 the
+  EXPECTED block committed alone at `bacaeab`; `settlement_split.py` gives
+  every FWO-5 route copy `obligation_origin` (UNDECIDED unscorable) and the
+  settlement field SPLIT into `settles_claim` / `removes_gate`, never combined
+  (AST), plus FWO-8's `token_type` / `converts_to` / `hops_to_monetary` with a
+  per-horizon reading. **Two of three expectations FAILED, reported first**:
+  E-A2 — FWO-5 does NOT force a settlement reading on rainwater (none/none is
+  INDEPENDENT under its own choice); the meld sits on F-A1/F-A2, a fine and
+  metered water returning one identical record on every derived field and
+  parting only on an authored label (`RIN_058`); E-A3 — case (b) at two hops
+  still carries the preprint deposit INDEPENDENT (token NONE) while the
+  citation route converts at hop 2 on the carried chain (`RIN_059`). E-A1
+  HELD (1, 3): 23 of 24 decided rows CONSTRUCTED, ten routes UNDECIDED because
+  the three-valued field has no member for an obligation-free route off the
+  biological list (`RIN_061`); the one BOTH row is the property tax on the
+  land one lives on, C2 as a record (`RIN_063`); section 2 as `net_positions`,
+  registered in `tools/known_answer.py` (`RIN_064`). **AMENDMENT A-2
+  (2026-09-28, gate state time- and jurisdiction-indexed)** then landed
+  verbatim, its section 5 committed alone at `251e12a`; `gate_state.py` gives
+  every route copy `jurisdiction`, `t_from`/`t_to`, a five-state `gate_state`
+  (UNKNOWN the default, blocking scoring; DISCRETIONARY the G-2 reclassification
+  — access at the gate-holder's pleasure), `gate_instrument`, `gate_source`
+  with the amendment's P/S/K grades, plus a `gate_change_events` table whose
+  direction comes from an enumerated transition table and whose closures and
+  loosenings are never netted, and A-1's missing fourth origin NONE. **One of
+  five expectation rows REFUTED, reported first**: E-A2-1's literal wording —
+  the amended F-W1/F-W2 records differ on five fields, only `gate_state` a
+  reading field (`RIN_067`); E-A2-2..4 HELD(S) — one CLOSURE event OPEN →
+  DISCRETIONARY at 1788 that a route count (1 → 1) misses and a removal count
+  finds (`RIN_068`); at 2026 rainwater CO METERED / TX OPEN / UT UNKNOWN and
+  gleaning England DISCRETIONARY, per jurisdiction never pooled, shelter
+  NOT_EVALUABLE (`RIN_069`); DISCRETIONARY never read as open, AST-asserted,
+  the scan having fired twice on the module's own assertion statements
+  (`RIN_071`). **The fixture table over-asserts its own sources twice**
+  (`RIN_070`): F-W3 declared PROHIBITED reads UNKNOWN under the amendment's own
+  3a because W-2 carries no date, and F-W4 reads OPEN only at year precision
+  from W-3's text, UNKNOWN under the strict reading. Section 3c: ten UNDECIDED
+  rows re-read, eight to NONE on stated grounds, two stay for an undeclared
+  medium, `RIN_061` narrowed (`RIN_072`); F-A3 retired, kept, tagged
+  CONSTRUCTED_UNSOURCED, reading UNKNOWN (`RIN_074`); every source CARRIED,
+  the HB 16-1005 date verification NOT_RUN, the G-2 court conflict carried open
+  (`RIN_073`). **AMENDMENT A-2.1** then landed verbatim (EXPECTED at `09774de`),
+  upgrading W-1 and W-2 to P by the author's own read and correcting three of
+  A-2's fixture rows — F-W1's instrument (the prior appropriation doctrine,
+  not a statute; split at 2009 with the middle interval UNKNOWN until the 2009
+  bill is sourced), F-W3's content (100 gal is per container, not a total;
+  split into a `condition`-keyed pair reading BY_CONDITION rather than
+  CONFLICT), F-W4's OPEN (a claim of absence, UNKNOWN until an agency
+  statement is attached, superseding A-2's [CHOICE 6]). `gate_state_a21.py`
+  extends A-2 through additive parameters (`sources=`, `condition=`) and both
+  registered rows HELD: rainwater at 2026 CO METERED_PERMISSION (P) / UT by
+  container size (P) / TX UNKNOWN, reported **UNMEASURED_OPEN and not
+  closure** (`RIN_077`); the E-A2-3 hold unchanged with Colorado's grade S → P
+  and Utah's **None → P**, the amendment's own "S -> P for UT" corrected since
+  A-2 had no in-force Utah row (`RIN_078`). A corrected from-state removes a
+  direction — the Colorado event goes LOOSENING at S to UNKNOWN_DIRECTION at P
+  (`RIN_080`); section 3's `access_is_right` / `revocable_by` carried PROPOSED
+  and NOT BUILT with the amendment's question unanswered (`RIN_082`); section
+  4's statutes recorded and refused as gate sources (`RIN_083`); the A-2
+  sample moved by exactly one note line (`RIN_084`). Eighty-six `RIN_*`
+  claims;
+  check counts printed by `python3 route-independence/test_route.py`,
+  `python3 route-independence/test_dependency_chain.py`,
+  `python3 route-independence/test_single_channel.py`,
+  `python3 route-independence/test_settlement_split.py`,
+  `python3 route-independence/test_gate_state.py` and
+  `python3 route-independence/test_gate_state_a21.py`, the last four also
+  printing the fail-fixture line. Stdlib only,
+  parses under 3.9, phone-buildable, CC0.
 - `custody-verification-band/` — Marker under exploration. Criterion: a layer
   buffers a system iff its productive function is self-custodied AND locally
   verifiable, otherwise it is a transmission belt. Eleven cases from Late

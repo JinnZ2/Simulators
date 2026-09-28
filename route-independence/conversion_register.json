@@ -1,0 +1,82 @@
+{
+  "_what": "FWO-6 conversion-point register. A map of where each named exit attempt re-entered the single medium. No entry is evaluated; the tally counts.",
+  "_fields": "id; changed = which of account / ledger / exchange / production the attempt altered; reconversions = list of {mechanism, layer, source}; mechanism in tax / input_purchase / credential / legal_recognition / publication / settlement / UNKNOWN; layer in settlement / production / credential / legal / publication / UNKNOWN; source starts with CARRIED / VERIFIED / CONSTRUCTED / READ / UNKNOWN",
+  "_sampling_boundary": "every source is CARRIED from memory or from the order; no publisher, registry or agency host is reachable under the egress allowlist (github.com only). What that selects for: attempts prominent enough to be known without a search, in the United States, in English.",
+  "_prior_art": "complementary-currency literature and Ostrom-lineage commons scholarship: NOT_RUN (hosts unreachable). A failure-point taxonomy may exist there; if it does, this register is to be re-keyed to it, not kept beside it.",
+  "layer_of_mechanism": {"tax": "settlement", "settlement": "settlement", "input_purchase": "production", "credential": "credential", "legal_recognition": "legal", "publication": "publication"},
+  "entries": [
+    {
+      "id": "bitcoin_cryptocurrency",
+      "changed": ["account", "ledger", "exchange"],
+      "reconversions": [
+        {"mechanism": "tax", "layer": "settlement", "source": "CARRIED: IRS Notice 2014-21, virtual currency as property; gain or loss on disposal computed in dollars"},
+        {"mechanism": "input_purchase", "layer": "production", "source": "CARRIED: mining hardware and electricity are billed in dollars"},
+        {"mechanism": "legal_recognition", "layer": "legal", "source": "CARRIED: not legal tender in the US; a legal-tender designation elsewhere (El Salvador, 2021) and its later reversal are carried from memory, unread"}
+      ],
+      "source": "CARRIED"
+    },
+    {
+      "id": "amish_cooperative_barter",
+      "changed": ["exchange"],
+      "reconversions": [
+        {"mechanism": "tax", "layer": "settlement", "source": "VERIFIED by the order's author 2026-09-26, IRS Topic 420: barter income at fair market value in dollars; not re-verified here"},
+        {"mechanism": "input_purchase", "layer": "production", "source": "CARRIED: land tax, fuel, hardware and materials are bought in dollars"}
+      ],
+      "source": "CARRIED; the order names the cash-settlement case"
+    },
+    {
+      "id": "time_banks",
+      "changed": ["account"],
+      "reconversions": [
+        {"mechanism": "UNKNOWN", "layer": "UNKNOWN", "source": "UNKNOWN: the tax treatment of time-bank hours is not sourced here; candidate mechanism tax"},
+        {"mechanism": "input_purchase", "layer": "production", "source": "CARRIED: hosting and software for the ledger are bought in dollars"}
+      ],
+      "source": "CARRIED"
+    },
+    {
+      "id": "lets_local_currency",
+      "changed": ["account", "exchange"],
+      "reconversions": [
+        {"mechanism": "tax", "layer": "settlement", "source": "CARRIED: income in a local currency is reportable at fair market value in dollars"},
+        {"mechanism": "settlement", "layer": "settlement", "source": "CARRIED: a dollar-pegged local currency (BerkShares named from memory) defines its own unit by a fixed dollar rate, so the account is a conversion point by construction"}
+      ],
+      "source": "CARRIED"
+    },
+    {
+      "id": "mutual_aid_networks",
+      "changed": ["exchange"],
+      "reconversions": [
+        {"mechanism": "input_purchase", "layer": "production", "source": "CARRIED: goods moved through the network are first bought in dollars"},
+        {"mechanism": "UNKNOWN", "layer": "UNKNOWN", "source": "UNKNOWN: whether transfers are treated as gifts, income or neither is not sourced here"}
+      ],
+      "source": "CARRIED"
+    },
+    {
+      "id": "open_hardware_communities",
+      "changed": ["production", "publication"],
+      "reconversions": [
+        {"mechanism": "input_purchase", "layer": "production", "source": "CARRIED: components and fabrication are bought in dollars"},
+        {"mechanism": "publication", "layer": "publication", "source": "CARRIED: hosting of designs is paid in dollars by someone; the depositor's own obligation at one hop is nil"},
+        {"mechanism": "UNKNOWN", "layer": "UNKNOWN", "source": "UNKNOWN: whether a credential is required to contribute is community-specific and not sourced"}
+      ],
+      "source": "CARRIED"
+    },
+    {
+      "id": "gift_within_household",
+      "changed": ["exchange"],
+      "reconversions": [
+        {"mechanism": "input_purchase", "layer": "production", "source": "CARRIED: what is given inside the household was bought in dollars upstream"},
+        {"mechanism": "tax", "layer": "settlement", "source": "CARRIED: the household's land and dwelling carry property tax in dollars"}
+      ],
+      "source": "CARRIED; the exchange layer itself shows no reconversion point in this entry, which is the contrast the order asks for"
+    },
+    {
+      "id": "gift_across_households",
+      "changed": ["exchange"],
+      "reconversions": [
+        {"mechanism": "UNKNOWN", "layer": "UNKNOWN", "source": "UNKNOWN: gift-tax thresholds and reporting are not sourced here"}
+      ],
+      "source": "CARRIED"
+    }
+  ]
+}

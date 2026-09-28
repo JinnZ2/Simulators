@@ -1,0 +1,16 @@
+# (c) stratum paying others for all provision, holding multiple dwellings.
+# Provision rows are coded DECOUPLED as the work order stipulates for this
+# candidate (provision continues when the recipient's effort stops).
+# SYNTHETIC: no dataset backs the rows. The shelter row carries the
+# countable marker; the tool derives DECOUPLED from dwellings_held > 1.
+# OPEN and not resolved here: whether (c) is a partial match or whether
+# no human population meets the full condition.
+population: (c) paid provision, multiple dwellings
+food            | DECOUPLED |
+water           | DECOUPLED |
+shelter         | UNKNOWN   | | dwellings_held=3
+thermal         | DECOUPLED |
+predation       | REMOVED   |
+disease         | PRESENT   |
+waste_removal   | DECOUPLED |
+exit            | PRESENT   |

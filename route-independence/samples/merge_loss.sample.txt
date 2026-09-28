@@ -1,0 +1,32 @@
+merge_silent_loss -- lines a merge dropped that neither parent dropped
+test: exact-line multiset per file against the single merge base
+
+57b9cdf   1 file(s) with loss  -- 2026-09-19 Merge branch 'main' into claude/revision-survival-frame-d8s
+    tools/known_answer.py                                   lost   36 side=p1 CONFLICT   still_absent    0  elsewhere 0/0
+dbf4cb0   4 file(s) with loss  -- 2026-09-18 Merge branch 'main' into claude/agents-md-guidelines-n9drqg
+    substrate-alternative/README.md                         lost  102 side=p1 BOTH_ADDED still_absent  102  elsewhere 0/12
+    substrate-alternative/frame_audit.py                    lost  373 side=p1 BOTH_ADDED still_absent  372  elsewhere 0/12
+    substrate-alternative/pilot_loop.py                     lost  561 side=p1 BOTH_ADDED still_absent  557  elsewhere 1/12
+    tools/known_answer.py                                   lost   62 side=p1 CONFLICT   still_absent    0  elsewhere 0/0
+7cf18f4   3 file(s) with loss  -- 2026-09-09 Merge branch 'main' into claude/frame-instruments-pipeline-
+    CLAUDE.md                                               lost    1 side=p1 CONFLICT   still_absent    1  elsewhere 0/1
+    tests/test_known_answer_gate.py                         lost    1 side=p1 CONFLICT   still_absent    0  elsewhere 0/0
+    tools/known_answer.py                                   lost   45 side=p1 CONFLICT   still_absent    0  elsewhere 0/0
+e25f15c   1 file(s) with loss  -- 2026-09-01 Merge branch 'main' into claude/simulations-open-research-a
+    columbia-chain-cascade/README.md                        lost    1 side=p1 CONFLICT   still_absent    1  elsewhere 0/1
+83bb7d9   1 file(s) with loss  -- 2026-08-25 Merge branch 'main' into claude/instance-logs-schema-mappin
+    notes/README.md                                         lost   12 side=p1 CONFLICT   still_absent   12  elsewhere 0/12
+8d9b6c9   3 file(s) with loss  -- 2026-08-24 Merge branch 'main' into claude/instance-logs-schema-mappin
+    CLAUDE.md                                               lost    7 side=p2 CONFLICT   still_absent    7  elsewhere 0/6
+    METHOD_SPEC.md                                          lost    2 side=p2 BOTH_ADDED still_absent    2  elsewhere 2/2
+    SHAPE_SPEC.md                                           lost    2 side=p2 BOTH_ADDED still_absent    2  elsewhere 2/2
+2c68758   1 file(s) with loss  -- 2026-08-23 Merge branch 'main' into claude/new-folder-um2xra
+    README.md                                               lost   11 side=p1 CONFLICT   still_absent   11  elsewhere 0/11
+df3c871   1 file(s) with loss  -- 2026-08-05 Merge branch 'main' into claude/token-minimizer-emergence-s
+    relational/notes.md                                     lost  500 side=p1 BOTH_ADDED still_absent    1  elsewhere 0/1
+6a1aafa   1 file(s) with loss  -- 2026-07-03 Merge origin/main: LOG.md, ProbabilisticWorld, L5 rigor aud
+    grounding-layers/l0_physics_causality.py                lost    1 side=p2 ONE_SIDE   still_absent    1  elsewhere 0/0
+
+merges audited 9   with loss 9   refused 0
+a loss row is a decision the merge did not record; whether the dropped
+side to keep is not measured here

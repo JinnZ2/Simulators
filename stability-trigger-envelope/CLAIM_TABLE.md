@@ -58,3 +58,54 @@ python3 test_envelope.py    # the checks, total printed
   That is T1 and it is the cheapest unrun thing here.
 - **ESP_012** dies threshold by threshold as T1 and T2 produce measured
   values, each superseding its placeholder with a new append-only entry.
+### STE_009 — the envelope edge reports what the runs support, and no more
+
+`envelope_edge` returns INSUFFICIENT_RUNS below 3 runs on a road;
+NO_TRIGGER_OBSERVED with only a lower bound when nothing fired;
+EDGE_BRACKETED when every quiet run is slower than every fired run;
+ONSET_OVERLAP when a quiet run sits at or above a fired speed (the trigger is
+then being moved by something other than speed). Mixed grades or surfaces on
+one road are listed in `mixed_conditions`, not pooled silently.
+
+**Status: SUPPORTED on constructed runs.**
+
+---
+
+### STE_010 — nothing about the unit, the road or the faults is verified here
+
+```
+Fault A on the operator's unit      UNVERIFIED   T1 NOT_RUN
+Fault B (sign inversion)            UNVERIFIED   no instrument; DERIVED only
+Fault C (grade/bank offset)         UNVERIFIED   T2 NOT_RUN; bank unmeasured
+controller grade/bank estimation    UNREAD       proprietary
+Bendix sources, patents             NOT_FETCHED  SECONDARY, carried as given
+```
+
+**Status: UNVERIFIED.**
+
+---
+
+### STE_011 — a sub-period trailer lead is resolved, on the constructed fixture
+
+Added on the 2026-09-27b carried audit question 3 (a fixture to exercise the
+sibling repository's `NC_023`, the sub-period lead). X6 constructs the trailer
+starting 2.0 s before the cab, a quarter of the 8 s forcing period, so the
+lead is inside one period and a whole-period ambiguity (STE_006, the sibling's
+ESP_003 / NC_013) cannot rescue it. First-run result, recorded before any
+repair and with no threshold moved:
+
+```
+X6  cab high, trailer leads by 2.0 s   got NEITHER_MODE   lead TRAILER_LEADS
+    trailer_lag_s -1.8   lag_corr 0.979   cab_rms 3.347   trailer_rms 0.382
+```
+
+The envelope lag reads 1.8 s against a constructed 2.0 s: 0.2 s short, four
+grid steps, on a 4.0 s moving-RMS window. The sign and the class are right;
+the magnitude is not exact and is reported as read. Nothing is retuned; the
+expectation registered in `route-independence/EXPECTED_2026-09-27b.md` (Q3)
+held.
+
+**Falsifier:** a constructed sub-period lead that reads CAB_LEADS or
+SIMULTANEOUS, or a real paired trace where a hand-marked sub-period lead
+reads the other sign.
+**Status: SUPPORTED on the constructed fixture; UNVERIFIED on field data.**

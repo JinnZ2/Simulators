@@ -1,0 +1,86 @@
+settlement_split -- AMENDMENT A-1 over FWO-5 / FWO-8; the three cases re-scored under the split
+every declaration is this session's reading with its basis in the table; inputs CONSTRUCTED / CARRIED (key-holder rule 2 NOT met); EXPECTED registered at bacaeab
+
+== a_household_phenology
+   dependency               route                                          status      origin       claim  gate   split
+   instrument               eye and memory                                 INDEPENDENT UNDECIDED    --     --     UNDECIDED
+   instrument               paper notebook, bought                         CONVERTED   CONSTRUCTED  True   False  CLAIM_ONLY
+   facility_space           own land, occupancy                            INDEPENDENT BIOLOGICAL   False  False  NEITHER
+   energy                   daylight                                       INDEPENDENT UNDECIDED    --     --     UNDECIDED
+   transport                on foot                                        INDEPENDENT UNDECIDED    --     --     UNDECIDED
+   labor                    own time, no obligation                        INDEPENDENT UNDECIDED    --     --     UNDECIDED
+   data_access              own observation                                INDEPENDENT UNDECIDED    --     --     UNDECIDED
+   publication              notebook, unshared; whether it is ever dissemi UNKNOWN     UNDECIDED    --     --     UNDECIDED
+   legal_compliance         property tax on the land                       CONVERTED   CONSTRUCTED  True   True   BOTH
+   decided 3: CONSTRUCTED 2, BIOLOGICAL 1; UNDECIDED 6 ['eye and memory', 'daylight', 'on foot', 'own time, no obligation', 'own observation', 'notebook, unshared; whether it is ever disseminated is undeclared']
+   split over decided rows: {'CLAIM_ONLY': 1, 'NEITHER': 1, 'BOTH': 1}
+   BIOLOGICAL read as a claim (flagged): []
+
+== b_open_access_finding
+   dependency               route                                          status      origin       claim  gate   split
+   instrument               purchased on a grant                           CONVERTED   CONSTRUCTED  True   False  CLAIM_ONLY
+   instrument               core-facility recharge                         CONVERTED   CONSTRUCTED  True   False  CLAIM_ONLY
+   material_reagent         vendor purchase                                CONVERTED   CONSTRUCTED  True   False  CLAIM_ONLY
+   facility_space           institutional space via indirect costs         CONVERTED   CONSTRUCTED  True   False  CLAIM_ONLY
+   energy                   utility, billed                                CONVERTED   CONSTRUCTED  True   False  CLAIM_ONLY
+   transport                shipping                                       CONVERTED   CONSTRUCTED  True   False  CLAIM_ONLY
+   labor                    salary                                         CONVERTED   CONSTRUCTED  True   False  CLAIM_ONLY
+   labor                    stipend                                        CONVERTED   CONSTRUCTED  True   False  CLAIM_ONLY
+   data_access              open dataset; obligation is citation, discharg INDEPENDENT CONSTRUCTED  True   False  CLAIM_ONLY
+   data_access              licensed database                              CONVERTED   CONSTRUCTED  True   False  CLAIM_ONLY
+   publication              article processing charge                      CONVERTED   CONSTRUCTED  True   False  CLAIM_ONLY
+   publication              preprint deposit; no obligation at this hop    INDEPENDENT UNDECIDED    --     --     UNDECIDED
+   credential_authorization degree; tuition                                CONVERTED   CONSTRUCTED  True   False  CLAIM_ONLY
+   legal_compliance         grant reporting; tax on salary                 CONVERTED   CONSTRUCTED  True   False  CLAIM_ONLY
+   decided 13: CONSTRUCTED 13, BIOLOGICAL 0; UNDECIDED 1 ['preprint deposit; no obligation at this hop']
+   split over decided rows: {'CLAIM_ONLY': 13}
+   BIOLOGICAL read as a claim (flagged): []
+
+== c_bitcoin_exit
+   dependency               route                                          status      origin       claim  gate   split
+   instrument               own ledger / wallet; holding incurs no obligat INDEPENDENT UNDECIDED    --     --     UNDECIDED
+   material_reagent         the physical good, priced in dollars           CONVERTED   CONSTRUCTED  True   --     UNDECLARED_HALF
+   material_reagent         a vendor accepting bitcoin; what its obligatio UNKNOWN     CONSTRUCTED  --     --     UNDECLARED_HALF
+   energy                   network fee, paid in bitcoin to whoever includ INDEPENDENT CONSTRUCTED  True   False  CLAIM_ONLY
+   energy                   electricity for a node, billed                 CONVERTED   CONSTRUCTED  True   False  CLAIM_ONLY
+   transport                delivery of the good                           CONVERTED   CONSTRUCTED  True   False  CLAIM_ONLY
+   labor                    own time                                       INDEPENDENT UNDECIDED    --     --     UNDECIDED
+   data_access              public chain                                   INDEPENDENT UNDECIDED    --     --     UNDECIDED
+   credential_authorization identity check at acquisition; what it settles UNKNOWN     CONSTRUCTED  --     False  UNDECLARED_HALF
+   legal_compliance         disposal is a taxable event; gain or loss deno CONVERTED   CONSTRUCTED  True   False  CLAIM_ONLY
+   legal_compliance         penalty for non-reporting, denominated in doll CONVERTED   CONSTRUCTED  True   False  CLAIM_ONLY
+   decided 8: CONSTRUCTED 8, BIOLOGICAL 0; UNDECIDED 3 ['own ledger / wallet; holding incurs no obligation at this hop', 'own time', 'public chain']
+   split over decided rows: {'UNDECLARED_HALF': 3, 'CLAIM_ONLY': 5}
+   BIOLOGICAL read as a claim (flagged): []
+
+-- E-A2, the unamended FWO-5 reading of the amendment's fixtures
+   a fine, paid in dollars                  {'status': 'CONVERTED', 'settles_in': 'USD', 'obligation_medium': 'USD', 'converted_into': 'USD'}
+   metered water, billed in dollars         {'status': 'CONVERTED', 'settles_in': 'USD', 'obligation_medium': 'USD', 'converted_into': 'USD'}
+   rainwater on own land, no permit regime  {'status': 'INDEPENDENT', 'settles_in': 'none', 'obligation_medium': 'none', 'converted_into': None}
+   F-A3 forced to a settlement reading by FWO-5: False
+   F-A1 (a fine) and F-A2 (metered water) indistinguishable on every field FWO-5 derives: True
+   under the split: F-A1 CLAIM_ONLY, F-A2 GATE_ONLY, F-A3 NEITHER
+
+-- E-A3, case (b) at a horizon of two hops (chain CARRIED from the amendment [CHOICE 5])
+   horizon 1: independent rows ['data_access', 'publication']
+      data_access              open dataset; obligation is citation, discharg INDEPENDENT hop 2    token CITATION converts at hop 2, beyond the horizon 1
+      publication              preprint deposit; no obligation at this hop    INDEPENDENT hop None no token gates this route
+   horizon 2: independent rows ['publication']
+      data_access              open dataset; obligation is citation, discharg CONVERTED   hop 2    token CITATION converts to monetary at hop 2, inside the horizon 2
+      publication              preprint deposit; no obligation at this hop    INDEPENDENT hop None no token gates this route
+   alternative reading of the deposit [CHOICE 6], NOT taken: independent rows at two hops []
+   F-A4 citation route, hops UNMEASURED, horizon 2: ('UNKNOWN', None, 'token CITATION; hops to monetary UNMEASURED; not read as INDEPENDENT')
+
+-- section 2 as arithmetic
+   universal claim, 4 parties: net positions [0, 0, 0, 0]; parties on both sides [0, 1, 2, 3]; placing parties []
+   one party against three:    net positions [3, -1, -1, -1]; parties on both sides []; placing parties [0]
+
+expected E-A1 majority CONSTRUCTED over decided rows [CHOICE 4]                           MATCH
+expected E-A1 at least 2 of 3 cases carry zero declared BIOLOGICAL edges                  MATCH
+expected E-A2 unamended FWO-5 forces a settlement reading on F-A3                         MISMATCH
+expected E-A3 case (b) at two hops returns no INDEPENDENT route                           MISMATCH
+expected E-A3 the citation route itself is not INDEPENDENT at two hops                    MATCH
+
+fail fixture (CONSTRUCTED, three cases): E-A1 at least 2 of 3 cases carry zero declared BIOLOGICAL edges MISMATCH
+choices in force: [CHOICE 1], [CHOICE 2], [CHOICE 3], [CHOICE 4], [CHOICE 5], [CHOICE 6]
+execution note: test_settlement_split.py prints the check count; samples/settlement_split.sample.txt is one recorded render, compare before quoting

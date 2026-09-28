@@ -1,0 +1,58 @@
+{
+  "_what": "FWO-13 tax-step register: the tax step as a named conversion point with its own row type",
+  "_row_type": "tax_step",
+  "_fields": "id; route; converts_how; provenance in OBSERVED/DERIVED/PROPOSED; status in REGISTERED/CANDIDATE; source; memory_reading (UNVERIFIED where present)",
+  "consequence": "OBSERVED (carried, the operator's): the cheapest permitted recognition channel is the paycheck. People reachable only through other channels go flat or leave. The remaining population then confirms that money is what motivates people. Self-validating; the same shape as the melds in meld-as-error-class (named there; not in this tree).",
+  "prior_art": {
+    "status": "NOT_RUN (egress allowlist); entries CARRIED_FROM_MEMORY, unverified",
+    "entries": [
+      {
+        "what": "de minimis fringe-benefit exclusion (small, infrequent, hard-to-account-for items excluded from wages)",
+        "constrains": "non-monetary recognition: an item above the de minimis line is wages",
+        "framed_as": "compliance"
+      },
+      {
+        "what": "cash and cash-equivalents (gift cards) never de minimis, whatever the amount",
+        "constrains": "the gift card in appearance 2",
+        "framed_as": "compliance"
+      },
+      {
+        "what": "anyone treating these rules as CHANNEL REMOVAL rather than compliance",
+        "constrains": "NONE RECALLED",
+        "framed_as": "unbounded null: no corpus searched"
+      }
+    ]
+  },
+  "rows": [
+    {
+      "type": "tax_step",
+      "id": "barter_for_materials",
+      "route": "barter for materials",
+      "converts_how": "taxable event; settlement requires money",
+      "provenance": "OBSERVED",
+      "status": "REGISTERED",
+      "source": "CARRIED: the order's table row, OBSERVED there (a report from operation)",
+      "memory_reading": ""
+    },
+    {
+      "type": "tax_step",
+      "id": "non_monetary_recognition",
+      "route": "non-monetary recognition (gift, meal, gift card)",
+      "converts_how": "assigned dollar value, reported as compensation, employer pays to give it",
+      "provenance": "OBSERVED",
+      "status": "REGISTERED",
+      "source": "CARRIED: the order's table row, OBSERVED there (a report from operation)",
+      "memory_reading": ""
+    },
+    {
+      "type": "tax_step",
+      "id": "volunteer_unpaid_repair",
+      "route": "volunteer or unpaid repair",
+      "converts_how": "candidate only",
+      "provenance": "PROPOSED",
+      "status": "CANDIDATE",
+      "source": "CARRIED: the order's table row, PROPOSED there with 'verify or drop'; neither done (egress)",
+      "memory_reading": "UNVERIFIED: the value of a volunteer's services is not income to the volunteer, and a recipient of free services generally has no reportable income; if that holds, the route does not convert at the tax step and the row is dropped [CHOICE 2]"
+    }
+  ]
+}

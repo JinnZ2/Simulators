@@ -1,0 +1,79 @@
+edge_taxonomy -- FWO-8 over FWO-5; the three cases re-read under edge_class and coupling_side
+every annotation is this session's reading with its basis in the table; inputs CONSTRUCTED / CARRIED (key-holder rule 2 NOT met)
+
+== a_household_phenology
+   dependency               route                                          status      edge_class    side      sel-layer   surv-layer
+   instrument               eye and memory                                 INDEPENDENT --            --        INDEPENDENT INDEPENDENT
+   instrument               paper notebook, bought                         CONVERTED   ACCESS        SURVIVAL  INDEPENDENT CONVERTED
+   facility_space           own land, occupancy                            INDEPENDENT --            --        INDEPENDENT INDEPENDENT
+   energy                   daylight                                       INDEPENDENT --            --        INDEPENDENT INDEPENDENT
+   transport                on foot                                        INDEPENDENT --            --        INDEPENDENT INDEPENDENT
+   labor                    own time, no obligation                        INDEPENDENT --            --        INDEPENDENT INDEPENDENT
+   data_access              own observation                                INDEPENDENT --            --        INDEPENDENT INDEPENDENT
+   publication              notebook, unshared; whether it is ever dissemi UNKNOWN     UNKNOWN       UNKNOWN   UNKNOWN     UNKNOWN
+   legal_compliance         property tax on the land                       CONVERTED   INSTITUTIONAL SURVIVAL  INDEPENDENT CONVERTED
+   tally: DIRECT=0, INSTITUTIONAL=1, ACCESS=1, MEASUREMENT=0, TEMPORAL=0, RECURSIVE=0, UNKNOWN=1; not entering 6
+   DIRECT rows: []
+   independent at selection layer: ['instrument', 'facility_space', 'energy', 'transport', 'labor', 'data_access', 'legal_compliance']
+   independent at survival layer:  ['instrument', 'facility_space', 'energy', 'transport', 'labor', 'data_access']
+   two-layer schema: 2 CONVERTED routes; points the (account, settlement) pair cannot place: ['input_purchase', 'tax']
+      input_purchase   routes 1  media collide with another point 1  edge classes ACCESS
+      tax              routes 1  media collide with another point 1  edge classes INSTITUTIONAL
+
+== b_open_access_finding
+   dependency               route                                          status      edge_class    side      sel-layer   surv-layer
+   instrument               purchased on a grant                           CONVERTED   RECURSIVE     SELECTION CONVERTED   INDEPENDENT
+   instrument               core-facility recharge                         CONVERTED   ACCESS        SELECTION CONVERTED   INDEPENDENT
+   material_reagent         vendor purchase                                CONVERTED   ACCESS        SELECTION CONVERTED   INDEPENDENT
+   facility_space           institutional space via indirect costs         CONVERTED   INSTITUTIONAL SELECTION CONVERTED   INDEPENDENT
+   energy                   utility, billed                                CONVERTED   ACCESS        UNKNOWN   UNKNOWN     UNKNOWN
+   transport                shipping                                       CONVERTED   ACCESS        UNKNOWN   UNKNOWN     UNKNOWN
+   labor                    salary                                         CONVERTED   TEMPORAL      BOTH      CONVERTED   CONVERTED
+   labor                    stipend                                        CONVERTED   TEMPORAL      BOTH      CONVERTED   CONVERTED
+   data_access              open dataset; obligation is citation, discharg INDEPENDENT --            --        INDEPENDENT INDEPENDENT
+   data_access              licensed database                              CONVERTED   ACCESS        SELECTION CONVERTED   INDEPENDENT
+   publication              article processing charge                      CONVERTED   INSTITUTIONAL SELECTION CONVERTED   INDEPENDENT
+   publication              preprint deposit; no obligation at this hop    INDEPENDENT --            --        INDEPENDENT INDEPENDENT
+   credential_authorization degree; tuition                                CONVERTED   INSTITUTIONAL SELECTION CONVERTED   INDEPENDENT
+   legal_compliance         grant reporting; tax on salary                 CONVERTED   INSTITUTIONAL BOTH      CONVERTED   CONVERTED
+   tally: DIRECT=0, INSTITUTIONAL=4, ACCESS=5, MEASUREMENT=0, TEMPORAL=2, RECURSIVE=1, UNKNOWN=0; not entering 2
+   DIRECT rows: []
+   independent at selection layer: ['data_access', 'publication']
+   independent at survival layer:  ['instrument', 'material_reagent', 'facility_space', 'data_access', 'publication', 'credential_authorization']
+   two-layer schema: 12 CONVERTED routes; points the (account, settlement) pair cannot place: ['settlement', 'input_purchase', 'credential', 'publication', 'tax']
+      settlement       routes 4  media collide with another point 4  edge classes ACCESS,INSTITUTIONAL,TEMPORAL
+      input_purchase   routes 5  media collide with another point 5  edge classes ACCESS,RECURSIVE
+      credential       routes 1  media collide with another point 1  edge classes INSTITUTIONAL
+      publication      routes 1  media collide with another point 1  edge classes INSTITUTIONAL
+      tax              routes 1  media collide with another point 1  edge classes INSTITUTIONAL
+
+== c_bitcoin_exit
+   dependency               route                                          status      edge_class    side      sel-layer   surv-layer
+   instrument               own ledger / wallet; holding incurs no obligat INDEPENDENT --            --        INDEPENDENT INDEPENDENT
+   material_reagent         the physical good, priced in dollars           CONVERTED   ACCESS        SURVIVAL  INDEPENDENT CONVERTED
+   material_reagent         a vendor accepting bitcoin; what its obligatio UNKNOWN     UNKNOWN       UNKNOWN   UNKNOWN     UNKNOWN
+   energy                   network fee, paid in bitcoin to whoever includ INDEPENDENT --            --        INDEPENDENT INDEPENDENT
+   energy                   electricity for a node, billed                 CONVERTED   ACCESS        SURVIVAL  INDEPENDENT CONVERTED
+   transport                delivery of the good                           CONVERTED   ACCESS        SURVIVAL  INDEPENDENT CONVERTED
+   labor                    own time                                       INDEPENDENT --            --        INDEPENDENT INDEPENDENT
+   data_access              public chain                                   INDEPENDENT --            --        INDEPENDENT INDEPENDENT
+   credential_authorization identity check at acquisition; what it settles UNKNOWN     UNKNOWN       UNKNOWN   UNKNOWN     UNKNOWN
+   legal_compliance         disposal is a taxable event; gain or loss deno CONVERTED   INSTITUTIONAL SURVIVAL  INDEPENDENT CONVERTED
+   legal_compliance         penalty for non-reporting, denominated in doll CONVERTED   INSTITUTIONAL SURVIVAL  INDEPENDENT CONVERTED
+   tally: DIRECT=0, INSTITUTIONAL=2, ACCESS=3, MEASUREMENT=0, TEMPORAL=0, RECURSIVE=0, UNKNOWN=2; not entering 4
+   DIRECT rows: []
+   independent at selection layer: ['instrument', 'material_reagent', 'energy', 'transport', 'labor', 'data_access', 'legal_compliance']
+   independent at survival layer:  ['instrument', 'energy', 'labor', 'data_access']
+   two-layer schema: 5 CONVERTED routes; points the (account, settlement) pair cannot place: ['input_purchase']
+      settlement       routes 2  media collide with another point 1  edge classes INSTITUTIONAL
+      input_purchase   routes 3  media collide with another point 3  edge classes ACCESS
+
+expected E8.1 DIRECT at most one route across the cases [CHOICE 2]                                            MATCH
+expected E8.2 CONVERTED routes take INSTITUTIONAL/ACCESS/TEMPORAL; RECURSIVE at most once; no MEASUREMENT in (a) or (c) MATCH
+expected E8.4 row-level: case (b) independent rows == ['data_access']                                         MISMATCH
+expected E8.4 route-level: data_access and publication each carry an independent route                        MATCH
+expected E8.5 every case-(c) input_purchase row reads ACCESS and USD/USD                                      MATCH
+
+fail fixture (CONSTRUCTED): E8.1 DIRECT at most one route across the cases [CHOICE 2] MISMATCH
+choices in force: [CHOICE 1], [CHOICE 2], [CHOICE 3], [CHOICE 4]
+execution note: test_single_channel.py prints the check count; samples/edge_taxonomy.sample.txt is one recorded render, compare before quoting

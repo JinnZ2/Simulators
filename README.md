@@ -125,6 +125,24 @@ The layers, each with a deterministic and a probabilistic inspector:
 
 | layer | inspector | what bounds it |
 | --- | --- | --- |
+| L0 | `l0_physics_causality` | physics and causality |
+| L1 | `l1_thermodynamics_entropy` | thermodynamics, entropy |
+| L2 | `l2_planetary_mass_balance` | planetary mass balance |
+| L3 | `l3_ecological_homeostasis` | ecological homeostasis |
+| L4 | `l4_biomechanical_sensorimotor` | biomechanics; category-error guard on non-human scopes |
+| L5 | `l5_human_construct` | human constructs; pluralistic frames |
+| Lε | `l_epsilon_epistemic` | epistemic state; two-axis category-error guard |
+
+**Any layer above L0 is bounded by every layer below it.** SCOPE-annotated
+guards refuse to score a claim outside a layer's ontology rather than
+returning a number for it. Read
+[`grounding-layers/USAGE.md`](grounding-layers/USAGE.md) first.
+
+
+The layers, each with a deterministic and a probabilistic inspector:
+
+| layer | inspector | what bounds it |
+| --- | --- | --- |
 | `token-minimizer/` | natural-language queries | compressed energy_english + geometry refs |
 | `emergence-stability-simulator/` | multi-agent dynamics | Monte Carlo claims (`EMRG_*`, `SENS_*`) |
 | `research-stability-audit/` | published research + models | falsifiable claims about field-level drift |

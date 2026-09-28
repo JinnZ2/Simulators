@@ -1,0 +1,82 @@
+gate_state -- AMENDMENT A-2 over FWO-5 / FWO-8 / A-1; gate state indexed by (jurisdiction, t); removal events
+every source CARRIED from the amendment's section 2 at its stated grade; nothing behind it was read here; EXPECTED registered at 251e12a
+
+-- section 2, carried
+   G-1  grade P    hold P    England, gleaning before 1788: the customary license, Hale (Norfolk Summer Assizes 1668) as quoted i
+   G-2  grade P/S  hold S    Steel v Houghton et Uxor (1788) 1 H Bl 51; 126 ER 32: no right at common law to glean in the harvest
+        court conflict: wikipedia 'House of Lords' vs King (LHR, doi 10.2307/743812) 'Court of Common Pleas'; carried 'Court of Common Pleas'; resolved False
+   G-3  grade K    hold --   Leviticus 19:9-10, 23:22; Deuteronomy 24:19-21: codified gleaning provision
+   W-1  grade S    hold S    Colorado, HB 16-1005 (2016); C.R.S. 37-96.5-103: residential rooftop collection up to 110 gal combin
+   W-2  grade S    hold S    Utah: collection up to 2,500 gal with registration; 100 gal without [S]
+   W-3  grade S    hold S    States with no volume cap on residential collection, e.g. Texas; SB 769 (2011) bars HOA prohibition 
+   not sourced, no fixture: US public-land foraging prohibitions and permit regimes (unit and regulation unnamed); UK Theft Act 1968 s.4(3), wild-plant carve-out [K]; Colorado pre-2016 penalty schedule (fine amounts, confiscation) as statute text
+   HB 16-1005 effective date carried as 2016-08-10; verification NOT_RUN: the statute host is not on the egress allowlist; the delivered date is carried as delivered; a memory of the same date is grade K and is not a verification
+
+-- fixture rows (declared state, then what the row READS under 3a)
+   id     route_id          juris      t_from     t_to       declared            reads               src   grd  hold
+   F-W1   rainwater_rooftop Colorado   --         2016-08-10 PROHIBITED          PROHIBITED          W-1   S    True
+   F-W2   rainwater_rooftop Colorado   2016-08-10 --         METERED_PERMISSION  METERED_PERMISSION  W-1   S    True
+   F-W3   rainwater_rooftop Utah       --         --         PROHIBITED          UNKNOWN             W-2   S    True
+   F-W4   rainwater_rooftop Texas      2011       --         OPEN                OPEN                W-3   S    True
+   F-G1 O gleaning          England    --         1788       OPEN                OPEN                G-1   P    True
+   F-G2 D gleaning          England    1788       --         DISCRETIONARY       DISCRETIONARY       G-2   P/S  True
+   F-A3   RETIRED, tag CONSTRUCTED_UNSOURCED, reads UNKNOWN [CHOICE 1], hold False; A-1 F-A3, retired by A-2 section 4; the clause 'no permit re
+
+-- E-A2-1, the unamended reading of F-W1 and F-W2
+   FWO-5 + A-1 records identical: True ({'status': 'INDEPENDENT', 'settles_in': 'none', 'obligation_medium': 'none', 'converted_into': None})
+   amended records differ on: ['gate_instrument', 'gate_note', 'gate_state', 't_from', 't_to']
+
+-- gate_change_events, declared (3b) and derived from the rows
+   gleaning          England                      1788       OPEN                -> DISCRETIONARY       G-2  P/S  CLOSURE           flagged False undated False hold True
+   rainwater_rooftop Colorado                     2016-08-10 PROHIBITED          -> METERED_PERMISSION  W-1  S    LOOSENING         flagged False undated False hold True
+   gleaning          Israel, codified provision   --         UNKNOWN             -> OPEN                G-3  K    UNKNOWN_DIRECTION flagged True  undated True  hold False
+   derived and declared: 2; derived with no declared row: []; declared dated with no derivation: []
+   England   route count 1700 1, 2026 1; events: closures 1, loosenings 0, lateral 0, unknown-direction 0
+   Colorado  route count 1700 1, 2026 1; events: closures 0, loosenings 1, lateral 0, unknown-direction 0
+   excluded from every tally: grade K 1, unsourced 0, undated 0
+
+-- E-A2-3, per requirement, per route, per jurisdiction at t=2026 (never pooled)
+   F-W4 year-precision reading [CHOICE 6]
+      water    rainwater_rooftop {'Colorado': 'METERED_PERMISSION', 'Texas': 'OPEN', 'Utah': 'UNKNOWN'}; verdict OPEN_IN_SOME (over known jurisdictions OPEN_IN_SOME); hold True grade S
+      food     gleaning          {'England': 'DISCRETIONARY'}; verdict OPEN_IN_NONE (over known jurisdictions OPEN_IN_NONE); hold True grade S
+      air      NOT_EVALUABLE: no sourced row serves this requirement
+      shelter  NOT_EVALUABLE: no sourced row serves this requirement
+      warmth   NOT_EVALUABLE: no sourced row serves this requirement
+      falsifier (OPEN in every sourced jurisdiction) fired on: nothing
+   F-W4 strict (no t) reading [CHOICE 6]
+      water    rainwater_rooftop {'Colorado': 'METERED_PERMISSION', 'Texas': 'UNKNOWN', 'Utah': 'UNKNOWN'}; verdict OPEN_IN_NONE (over known jurisdictions OPEN_IN_NONE); hold True grade S
+      food     gleaning          {'England': 'DISCRETIONARY'}; verdict OPEN_IN_NONE (over known jurisdictions OPEN_IN_NONE); hold True grade S
+      air      NOT_EVALUABLE: no sourced row serves this requirement
+      shelter  NOT_EVALUABLE: no sourced row serves this requirement
+      warmth   NOT_EVALUABLE: no sourced row serves this requirement
+      falsifier (OPEN in every sourced jurisdiction) fired on: nothing
+
+-- section 3c, the re-read of A-1's UNDECIDED rows
+   UNDECIDED before: 10; moved to NONE: 8; stayed UNDECIDED: 2
+      a_household_phenology  instrument   eye and memory                                 NONE      the body's own instrument; no party holds a claim on its use and nothi
+      a_household_phenology  energy       daylight                                       NONE      no party holds a claim on daylight at the site and nothing is interpos
+      a_household_phenology  transport    on foot                                        NONE      walking on own land incurs no claim and nothing is interposed
+      a_household_phenology  labor        own time, no obligation                        NONE      the route's own FWO-5 name states the absence
+      a_household_phenology  data_access  own observation                                NONE      observing one's own land incurs no claim and nothing is interposed
+      a_household_phenology  publication  notebook, unshared; whether it is ever dissemi UNDECIDED whether dissemination ever occurs is undeclared and an obligation may 
+      b_open_access_finding  publication  preprint deposit; no obligation at this hop    NONE      the route's own FWO-5 name states the absence at this hop (A-1 [CHOICE
+      c_bitcoin_exit         instrument   own ledger / wallet; holding incurs no obligat NONE      the route's own FWO-5 name states the absence at this hop
+      c_bitcoin_exit         labor        own time                                       NONE      own time with no counterparty named on the route; nothing is interpose
+      c_bitcoin_exit         data_access  public chain                                   UNDECIDED whether access runs through a node one operates or a third party's is 
+
+-- expected (section 5), MISMATCH rows first
+expected MISMATCH FAILED                                 E-A2-1 (literal) the amended records differ on gate_state ALONE
+         they differ on ['gate_instrument', 'gate_note', 'gate_state', 't_from', 't_to']: t_from/t_to are the index the prediction itself names ('only t differs'), and the instrument label differs because the regime before HB 16-1005 and HB 16-1005 are two instruments
+expected MATCH    HELD(S)                                E-A2-1 (reading) unamended code returns one record for F-W1 and F-W2; the amended READING parts on gate_state alone
+         unamended: whole record identical True, every FWO-5-derived field identical True (provenance fields differing: []); reading fields that differ: ['gate_state']; fields outside reading/index/label/provenance: []
+expected MATCH    HELD(S)                                E-A2-2 F-G1 -> F-G2 registers as one change event OPEN -> DISCRETIONARY, not as route absence
+         route count England: 1700 -> 1, 2026 -> 1 (the count does not move); closures counted: 1
+expected MATCH    HELD(S)                                E-A2-3 at t=2026 no subsistence route reads OPEN in every sourced jurisdiction (per jurisdiction, not pooled)
+         falsifier fired on nothing; shelter NOT_EVALUABLE
+expected MATCH    HELD(S)                                E-A2-4 DISCRETIONARY is not OPEN; no expression reads a DISCRETIONARY route as independent (AST in the test)
+         OPEN_STATES = ('OPEN',)
+
+fail fixture: F-W1 vs F-W2 unamended identical True; constructed all-OPEN set: verdict OPEN_IN_ALL, hold-eligible False, falsifier fires on it [('water', 'rainwater_rooftop')], and over hold-eligible rows on nothing
+holds read HELD(S) at most: W-1..W-3 are secondary and G-2 carries S; rules 1 and 3 met; rule 2 met at grade S by the amendment's author, CARRIED here
+choices in force: [CHOICE 1], [CHOICE 2], [CHOICE 3], [CHOICE 4], [CHOICE 5], [CHOICE 6], [CHOICE 7], [CHOICE 8]
+execution note: test_gate_state.py prints the check count; samples/gate_state.sample.txt is one recorded render, compare before quoting

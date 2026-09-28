@@ -148,6 +148,18 @@ Added by the build, in the same spirit:
 - every threshold is PLACEHOLDER with no measurement behind it; the amplitude
   ratio that separates the two bodies is a round number, not a finding
 - the checks have run once and the render has not (see STATE, above)
+F1  serpentine, cab-only oscillation  GEOMETRIC_CAB_MODE      fires
+    (ratio 11.9, trailer lags 3.95 s, r 0.985)
+F2  real trailer roll                 TRAILER_ROLL_RISK       fires
+F3  no trailer IMU                    TRAILER_CHANNEL_ABSENT  fires
+F4  clocks misaligned 3.0 s           NOT_EVALUABLE           fires
+F5  two runs on a road                INSUFFICIENT_RUNS       fires
+X1  1.5 s gap in trailer trace        NOT_EVALUABLE
+X2  snow surface                      OUT_OF_ENVELOPE
+X3  both channels quiet               NEITHER_MODE
+X4  cab high, trailer leads           NEITHER_MODE
+X5  four runs, stepped speeds         EDGE_BRACKETED 27-30 mph
+X6  cab high, trailer leads by 2.0 s  NEITHER_MODE (lag reads -1.8 s; STE_011)
 ```
 
 ## Files
