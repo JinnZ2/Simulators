@@ -1,0 +1,71 @@
+chains_a4 -- AMENDMENT A-4 over A-2 / A-2.1 / A-3 / A-3.1: routes as chains
+EXPECTED registered at e0083e6; every gate K but C-1 (P, fragment, not hold-eligible); nothing here is a statement about the law of any jurisdiction
+
+-- expected (section 5), rows that do not hold first, then NOT_EVALUABLE
+expected UNMET_UNFALSIFIED E-A4-1 (own steps)         unamended 1 gate; amended 5 gates over 2 own steps
+         hold: INSTRUMENT (rule 1 met at e0083e6); coverage 0/5 gates sourced
+expected NOT_EVALUABLE     E-A4-2                     fragment reading: lawful_reach FALSE, physical_reach TRUE (not a health claim; T-10 not sourced)
+         hold: C-1 is a FRAGMENT; read 37-96.5-103 in full before any hold; coverage 0/5 gates sourced
+expected NOT_EVALUABLE     E-A4-3                     K reading: shared_by direct 6 chains ['CH-FUEL', 'CH-SAND', 'CH-SHELTER', 'F-R1', 'F-R2', 'F-R4'] (5 without the A-3 lifts), transitive 8; need ids ['FUEL', 'SAND', 'SHELTER', 'WATER']
+         hold: every gate K; coverage 0/11 chains sourced
+expected NOT_EVALUABLE     E-A4-4                     K reading: chains whose termini are all BODY [] (0 chains); falsifier silent
+         hold: every chain K; coverage 0/11 chains sourced
+expected NOT_EVALUABLE     E-A4-5                     K reading: closure_impact(LAND_TENURE) strict 2 ['CH-SAND', 'CH-SHELTER'], loose 4 ['CH-CHARCOAL', 'CH-FUEL', 'CH-SAND', 'CH-SHELTER']; largest statutory strict 1 (['G-T4', 'G-T4X', 'G-T5']), loose 1; prediction holds strict, holds loose
+         hold: every gate K; coverage 0/8 statutory gates sourced
+expected MATCH             E-A4-1 (transitive steps)  unamended 1 gate; amended 5 gates ['G-C1', 'G-LAND', 'G-T12', 'G-T2', 'G-T4'] over 7 steps counted through requires [CHOICE 45]
+         hold: INSTRUMENT; coverage 0/5 gates sourced
+
+-- chains (3b); lawful_reach and physical_reach never merged
+   chain        need      jurisdiction             lawful        physical  gates  steps       lifted from
+   CH-CHARCOAL  CHARCOAL  Colorado                 TRUE          TRUE      3      1/3         A-4 F-R1 ('burn (T-4 / T-13)')
+   CH-FUEL      FUEL      Colorado                 TRUE          TRUE      2      2/2         A-4 F-R1 ('charcoal requires FUEL; fuel requires LAND_TENURE or permit')
+   CH-GLEAN     FOOD      England                  NOT_RECORDED  TRUE      1      2/2         A-2 F-G2 [CHOICE 50]
+   CH-SAND      SAND      Colorado                 TRUE          TRUE      2      2/2         A-4 section 1 ('filtration media ... are themselves gated') and T-12
+   CH-SHELTER   SHELTER   US city X (public land)  TRUE          TRUE      2      3/3         A-3 F-T1 [CHOICE 50]
+   CH-T3        THERMAL   state A                  TRUE          TRUE      1      1/1         A-3 F-T3 [CHOICE 50]
+   CH-T4        THERMAL   county X                 TRUE          TRUE      3      3/3         A-3 F-T4 [CHOICE 50]
+   F-R1         WATER     Colorado                 FALSE         TRUE      5      2/7         A-4 section 4
+   F-R2         WATER     Colorado                 FALSE         TRUE      5      2/7         A-4 section 4
+   F-R3         WATER     municipality X           FALSE         TRUE      5      3/8         A-4 section 4
+   F-R4         WATER     Colorado                 FALSE         TRUE      3      2/4         A-4 section 4
+   (steps printed own/transitive; unit: gates, steps)
+
+-- 3d termini per chain (unit: leaves); ALL and ANY both expand
+   CH-CHARCOAL  BODY 0 TOKEN 1 NOT_RECORDED 1 CYCLE 0  cycles 0
+   CH-FUEL      BODY 0 TOKEN 1 NOT_RECORDED 1 CYCLE 0  cycles 0
+   CH-GLEAN     BODY 0 TOKEN 0 NOT_RECORDED 1 CYCLE 0  cycles 0
+   CH-SAND      BODY 1 TOKEN 1 NOT_RECORDED 0 CYCLE 0  cycles 0
+   CH-SHELTER   BODY 1 TOKEN 1 NOT_RECORDED 0 CYCLE 0  cycles 0
+   CH-T3        BODY 0 TOKEN 1 NOT_RECORDED 0 CYCLE 0  cycles 0
+   CH-T4        BODY 0 TOKEN 2 NOT_RECORDED 1 CYCLE 0  cycles 0
+   F-R1         BODY 1 TOKEN 3 NOT_RECORDED 1 CYCLE 0  cycles 0
+   F-R2         BODY 1 TOKEN 3 NOT_RECORDED 1 CYCLE 0  cycles 0
+   F-R3         BODY 2 TOKEN 2 NOT_RECORDED 1 CYCLE 0  cycles 0
+   F-R4         BODY 0 TOKEN 2 NOT_RECORDED 1 CYCLE 0  cycles 0
+
+-- 3c shared resources and closures [CHOICE 46] [CHOICE 47]
+   LAND_TENURE  shared_by direct 6 ['CH-FUEL', 'CH-SAND', 'CH-SHELTER', 'F-R1', 'F-R2', 'F-R4']; transitive 8; closure strict 2 ['CH-SAND', 'CH-SHELTER'], loose 4 ['CH-CHARCOAL', 'CH-FUEL', 'CH-SAND', 'CH-SHELTER']
+   PERMIT_T2    shared_by direct 2 ['CH-FUEL', 'CH-T4']; transitive 7; closure strict 0 [], loose 0 []
+   gate G-C1     closure strict 0 [], loose 0 []
+   gate G-T1     closure strict 0 [], loose 0 []
+   gate G-T11    closure strict 0 [], loose 0 []
+   gate G-T12    closure strict 0 [], loose 0 []
+   gate G-T2     closure strict 0 [], loose 0 []
+   gate G-T4     closure strict 1 ['CH-CHARCOAL'], loose 1 ['CH-CHARCOAL']
+   gate G-T4X    closure strict 1 ['CH-T4'], loose 1 ['CH-T4']
+   gate G-T5     closure strict 1 ['CH-T4'], loose 1 ['CH-T4']
+   gates F-R4 shares with the lifted thermal chain CH-T4: ['G-T2']
+
+-- A-3.1 on section 5
+   E-A4-1   GAP          (0, 4, 3), (0, 4, 4), (1, 4, 3), (2, 4, 3)
+   E-A4-2   GAP          'NOT_RECORDED'
+   E-A4-3   COMPLEMENT   
+   E-A4-4   COMPLEMENT   
+   E-A4-5   COMPLEMENT   
+   quotes found in the amendment: 10/10
+   unit lint: 7 of 9 count tokens outside the A-3.1 list; 4 with the '(unit: X)' annotations read; units declared ['chains', 'gates', 'leaves', 'steps'] [CHOICE 51]
+
+fail fixture: F-R1's water route through A-2 / A-2.1 as delivered reads 1 gate (['F-W2']); amended 5 gates
+holds: rule 1 met (e0083e6); rule 3 met; rule 2 unmet (C-1 a fragment, every other gate K)
+choices in force: [CHOICE 38], [CHOICE 39], [CHOICE 40], [CHOICE 41], [CHOICE 42], [CHOICE 43], [CHOICE 44], [CHOICE 45], [CHOICE 46], [CHOICE 47], [CHOICE 48], [CHOICE 49], [CHOICE 50], [CHOICE 51]
+execution note: test_chains_a456.py prints the check count; samples/chains_a4.sample.txt is one recorded render, compare before quoting

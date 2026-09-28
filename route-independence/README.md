@@ -550,3 +550,36 @@ repairs_a31.py                     the instrument
 test_repairs_a31.py                checks; prints its count and 2 of 2 fail fixtures
 samples/repairs_a31.sample.txt     the recorded render
 ```
+
+## AMENDMENTS A-4, A-5, A-6 of 2026-09-28 -- chains, termini, eligibility
+
+Three amendments, each landed verbatim and committed alone before any code
+(A-4 `e0083e6`, A-5 `488fe1a`, A-6 `f8f3135`), the A-3.1 complement check and
+unit lint run before each commit. A-4 makes a route a CHAIN of steps whose
+requirements resolve to termini (BODY / TOKEN / NOT_RECORDED / CYCLE), with
+lawful_reach and physical_reach never merged. A-5 resolves each terminus
+through its token hops and re-reads FWO-5's INDEPENDENT routes as possible
+branches. A-6 gates the terminus count by eligibility: case sets, constructed
+profiles, recognition as time-indexed events. Rows that do not hold first:
+
+```
+E-A4-1 (own steps)   UNMET_UNFALSIFIED  5 gates over 2 own steps; MATCH at 7 transitive
+E-A5-1               MISMATCH under 4 of 5 readings; holds only LAWFUL_STRICT
+E-A5-4 (with hops)   MISMATCH           0 of 12 reclassified; 1 of 12 declares a token
+E-A4-2..5, E-A5-2/3, E-A6-1..4   NOT_EVALUABLE, K reading printed beside each
+E-A4-5               holds on K, and the measure undercounts (FALSE chains cannot close)
+```
+
+Nothing is filled from memory: CS-R, CS-A and RA-1..RA-5 are unread (egress),
+C-1 is a fragment, and the exists-vs-reachable gap stays NOT_EVALUABLE rather
+than being copied from CS-G. Profiles are constructed; no real person is in the
+folder. Claims `RIN_108..RIN_123`.
+
+```
+AMENDMENT_A4_2026-09-28_route-chains.md               verbatim (EXPECTED at e0083e6)
+AMENDMENT_A5_2026-09-28_terminus-diversity.md         verbatim (EXPECTED at 488fe1a)
+AMENDMENT_A6_2026-09-28_eligibility-recognition.md    verbatim (EXPECTED at f8f3135)
+chains_a4.py / termini_a5.py / eligibility_a6.py      the instruments
+test_chains_a456.py                  checks; prints its count and 3 of 3 fail fixtures
+samples/{chains_a4,termini_a5,eligibility_a6}.sample.txt   recorded renders
+```
