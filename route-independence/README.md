@@ -514,3 +514,39 @@ thermal_gates.py                     the instrument
 test_thermal_gates.py                checks; prints its count and 2 of 2 fail fixtures
 samples/thermal_gates.sample.txt     the recorded render
 ```
+
+## AMENDMENT A-3.1 of 2026-09-28 -- definitional repairs
+
+The amendment is landed verbatim as
+`AMENDMENT_A3.1_2026-09-28_definitional-repairs.md`; its section 8 is the
+EXPECTED block and the file was committed ALONE at `beb0fc6` before
+`repairs_a31.py` existed. The module edits none of A-1..A-3: it reads their
+rows and functions by import and runs the eight sections over them.
+
+```
+STATE   built and run; render recorded under samples/
+        key-holder rules: 1 met (beb0fc6); 3 met (two fail fixtures);
+        2 unchanged: every thermal row is K, every source CARRIED.
+```
+
+| expectation | result | where |
+|---|---|---|
+| E-A3.1-1 (DECLARED_CHARITABLE reading) at least one mismatch besides E-A3-2a | **UNMET_UNFALSIFIED**: 0 others, and E-A3-2a is itself a mismatch, so P fails and F ("zero mismatches found") does not fire -- the prediction lands in its own gap | RIN_098 |
+| E-A3.1-1 (LITERAL_ALL / DECLARED_LITERAL) | HELD (instrument): 10 / 2 mismatches besides E-A3-2a | RIN_099 |
+| E-A3.1-2 section 4 changes the reading of at least one row | HELD (instrument) under both migration rules: 22 rows (EVIDENCE), 2 rows (SCHEMA_DEFAULT) | RIN_102 |
+
+Section by section: one market set, and E-A3-2a's gap lands on the metered
+utility (RIN_100); E-A3.1-2's P and F part on "reading" against "meaning", and
+A-1 E-A1's two predicates part on 39 of 216 worlds (RIN_101); every field
+migrated and every row whose meaning moved (RIN_103); the unit lint fails four
+of five EXPECTED blocks including A-3.1's own (RIN_104); E-A3-3 over
+non-market instruments (RIN_105); absence-bound falsifiers read
+NOT_TESTABLE_AS_POSED, and under the EVIDENCE rule E-A2-3's gleaning leg does
+too (RIN_106); coverage beside every hold and the execution record (RIN_107).
+
+```
+AMENDMENT_A3.1_2026-09-28_definitional-repairs.md   verbatim (EXPECTED at beb0fc6)
+repairs_a31.py                     the instrument
+test_repairs_a31.py                checks; prints its count and 2 of 2 fail fixtures
+samples/repairs_a31.sample.txt     the recorded render
+```
