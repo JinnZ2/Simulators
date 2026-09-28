@@ -1,0 +1,122 @@
+thermal_gates -- AMENDMENT A-3 over A-2 / A-2.1: actuators, gates in series, direction never pooled
+every source grade K (named, not landed); no row is hold-eligible; EXPECTED registered at 87f83ce
+
+-- section 3 sources, all K
+   T-1  K NOT_LANDED Grants Pass v. Johnson (US Sup. Ct. 2024): public-camping bans are enforceable
+   T-2  K NOT_LANDED USFS firewood permits: one named national forest, with its permit rule
+   T-3  K NOT_LANDED winter utility disconnection: one state WITH a seasonal moratorium and one WIT
+   T-4  K NOT_LANDED burn ban: one county-level ban with its trigger condition in the text
+   T-5  K NOT_LANDED wood heater emission standard: EPA NSPS for residential wood heaters, rule and
+   T-6  K NOT_LANDED public indecency statute, one state: gates the SHED direction
+   T-7  K NOT_LANDED PRIVATE_RULE: one real lease or HOA clause banning window AC units or restrict
+   T-8  K NOT_LANDED physiology citation for cold diuresis / thirst suppression (for the coupling r
+   T-9  K NOT_LANDED human thermoneutral range, unclothed (for the section 1 claim that the interna
+
+-- actuators (section 2a); provenance per row
+   clothing.retain    THERMAL  RETAIN EXTERNAL_OBJECT    OBSERVED (Kavik)
+   clothing.shed      THERMAL  SHED   EXTERNAL_OBJECT    OBSERVED (Kavik)
+   fans               THERMAL  COOL   EXTERNAL_OBJECT    OBSERVED (Kavik)
+   ventilation        THERMAL  COOL   EXTERNAL_STRUCTURE OBSERVED (Kavik)
+   heating.utility    THERMAL  WARM   EXTERNAL_ENERGY    OBSERVED (Kavik)
+   open_fire          THERMAL  WARM   EXTERNAL_ENERGY    OBSERVED (Kavik)
+   wood_stove         THERMAL  WARM   EXTERNAL_OBJECT    PROPOSED (Claude), marked C
+   shelter.selfbuilt  THERMAL  RETAIN EXTERNAL_STRUCTURE PROPOSED (Claude), marked C
+   shade              THERMAL  COOL   LAND_ACCESS        PROPOSED (Claude), marked C
+   water_immersion    THERMAL  COOL   LAND_ACCESS        PROPOSED (Claude), marked C
+   posture.warm       THERMAL  WARM   BODY               PROPOSED (Claude), marked C
+   posture.cool       THERMAL  COOL   BODY               PROPOSED (Claude), marked C
+   activity.warm      THERMAL  WARM   BODY               PROPOSED (Claude), marked C
+   activity.cool      THERMAL  COOL   BODY               PROPOSED (Claude), marked C
+   huddling.warm      THERMAL  WARM   BODY               PROPOSED (Claude), marked C
+   huddling.cool      THERMAL  COOL   BODY               PROPOSED (Claude), marked C
+   sleep_timing.warm  THERMAL  WARM   BODY               PROPOSED (Claude), marked C
+   sleep_timing.cool  THERMAL  COOL   BODY               PROPOSED (Claude), marked C
+
+-- gate rows (section 2b)
+   gate               actuator          ord kind           jurisdiction             state               src  condition
+   F-T1.ban           shelter.selfbuilt 1   PROHIBITION    US city X (public land)  PROHIBITED          T-1  --
+   F-T2.ban           open_fire         1   CONDITION_BAN  county X                 PROHIBITED          T-4  drought declaration in force
+   F-T2.ban           open_fire         1   CONDITION_BAN  county X                 OPEN                T-4  no drought declaration
+   F-T3.A.meter       heating.utility   1   METERED_TOKEN  state A                  METERED_PERMISSION  T-3  account paid
+   F-T3.A.meter       heating.utility   1   METERED_TOKEN  state A                  METERED_PERMISSION  T-3  nonpayment, winter
+   F-T3.B.meter       heating.utility   1   METERED_TOKEN  state B                  METERED_PERMISSION  T-3  account paid
+   F-T3.B.meter       heating.utility   1   METERED_TOKEN  state B                  PROHIBITED          T-3  nonpayment, winter
+   F-T4.device        wood_stove        1   TOKEN_PURCHASE county X                 METERED_PERMISSION  --   --
+   F-T4.standard      wood_stove        2   CODE_STANDARD  county X                 METERED_PERMISSION  T-5  --
+   F-T4.fuel.purchase wood_stove        3   TOKEN_PURCHASE county X                 METERED_PERMISSION  --   --
+   F-T4.fuel.permit   wood_stove        3   PERMIT         county X                 METERED_PERMISSION  T-2  --
+   F-T4.ban           wood_stove        4   CONDITION_BAN  county X                 PROHIBITED          T-4  drought declaration in force
+   F-T4.ban           wood_stove        4   CONDITION_BAN  county X                 OPEN                T-4  no drought declaration
+   F-T5.indecency     clothing.shed     1   PROHIBITION    state X                  PROHIBITED          T-6  --
+   access_is_right / revocable_by (A-2.1's proposal, built): 14 rows, access known on 0, an office named on 0; revocable_by None reads both 'no office' and 'not recorded'
+
+-- F-T4, wood stove, county X at 2026: the series, never one state [CHOICE 17]
+   condition --
+      1  F-T4.device TOKEN_PURCHASE METERED_PERMISSION
+      2  F-T4.standard CODE_STANDARD METERED_PERMISSION
+      3  F-T4.fuel.permit PERMIT METERED_PERMISSION  OR  F-T4.fuel.purchase TOKEN_PURCHASE METERED_PERMISSION
+      4  F-T4.ban CONDITION_BAN ('BY_CONDITION', {'drought declaration in force': 'PROHIBITED', 'no drought declaration': 'OPEN'})
+   condition drought declaration in force
+      1  F-T4.device TOKEN_PURCHASE METERED_PERMISSION
+      2  F-T4.standard CODE_STANDARD METERED_PERMISSION
+      3  F-T4.fuel.permit PERMIT METERED_PERMISSION  OR  F-T4.fuel.purchase TOKEN_PURCHASE METERED_PERMISSION
+      4  F-T4.ban CONDITION_BAN PROHIBITED
+   condition no drought declaration
+      1  F-T4.device TOKEN_PURCHASE METERED_PERMISSION
+      2  F-T4.standard CODE_STANDARD METERED_PERMISSION
+      3  F-T4.fuel.permit PERMIT METERED_PERMISSION  OR  F-T4.fuel.purchase TOKEN_PURCHASE METERED_PERMISSION
+      4  F-T4.ban CONDITION_BAN OPEN
+
+-- F-T2 and F-T3 by condition
+   open_fire county X, drought declaration in force   PROHIBITED
+   open_fire county X, no drought declaration         OPEN
+   heating.utility state A at 2026-01-15, nonpayment in winter: METERED_PERMISSION
+   heating.utility state B at 2026-01-15, nonpayment in winter: PROHIBITED
+
+-- derived at 2026, per jurisdiction (section 2d); nothing summed across actuators
+   US city X (public land)  shelter.selfbuilt gates 1 {'PROHIBITION': 1}  non-market 2d 1, E-A3-2a list 1
+   US city X (public land)  residue ['huddling.warm', 'huddling.cool']; UNSEARCHED 15 of 18 actuators; contradicted []
+   county X                 open_fire         gates 1 {'CONDITION_BAN': 1}  non-market 2d 1, E-A3-2a list 1
+   county X                 wood_stove        gates 5 {'CONDITION_BAN': 1, 'TOKEN_PURCHASE': 2, 'PERMIT': 1, 'CODE_STANDARD': 1}  non-market 2d 3, E-A3-2a list 3
+   county X                 residue ['huddling.warm', 'huddling.cool']; UNSEARCHED 14 of 18 actuators; contradicted []
+   state A                  heating.utility   gates 1 {'METERED_TOKEN': 1}  non-market 2d 1, E-A3-2a list 0
+   state A                  residue ['huddling.warm', 'huddling.cool']; UNSEARCHED 15 of 18 actuators; contradicted []
+   state B                  heating.utility   gates 1 {'METERED_TOKEN': 1}  non-market 2d 1, E-A3-2a list 0
+   state B                  residue ['huddling.warm', 'huddling.cool']; UNSEARCHED 15 of 18 actuators; contradicted []
+   state X                  clothing.shed     gates 1 {'PROHIBITION': 1}  non-market 2d 1, E-A3-2a list 1
+   state X                  residue ['huddling.warm', 'huddling.cool']; UNSEARCHED 15 of 18 actuators; contradicted []
+   residue_capacity: NOT_EVALUABLE (whether the ungated residue holds core temperature under a condition takes physiological data not supplied (T-9 is named and not landed); section 2d leaves it uncomputed)
+
+-- couplings (section 2c): the only route across stocks
+   C-1 THERMAL -> WATER  cold diuresis; thirst suppression  sign - (sensor opposite to stock)  SENSOR_CORRUPTED  source T-8 grade K
+   F-T1 with C-1: [('F-T1.ban', 'WATER', 'SENSOR', False)]
+   F-T1 without C-1: []
+
+-- expected (section 6), MISMATCH rows first, then NOT_EVALUABLE
+expected MISMATCH      E-A3-1 (literal) F-T4 is a series of four gates
+         hold: the order's count against the order's own fixture
+         F-T4 as delivered carries 5 gates in 4 positions: its fuel position is 'purchase OR permit', two gates at one order number [CHOICE 17]; 'four' counts positions
+expected NOT_EVALUABLE E-A3-2a          WEAKNESS FIRST: counting TOKEN_PURCHASE every EXTERNAL_OBJECT is gated trivially; so: every external actuator carries >= 1 non-market gate in each sourced jurisdiction
+         hold: sourced set empty (0 of 14 rows hold-eligible)
+         K rows, hold-ineligible: 6 of 50 (jurisdiction, external actuator) cells carry a gate row, 44 UNSEARCHED; met under 2d 6, under E-A3-2a's list 4; the two readings part on ['heating.utility']; falsifier silent on the K rows, reached on the constructed RETAIN row (['clothing.retain'])
+expected NOT_EVALUABLE E-A3-3           the HEAT_IN and HEAT_OUT gating instruments are disjoint in the sourced set
+         hold: sourced set empty; HEAT_IN [], HEAT_OUT []
+         K rows, hold-ineligible: HEAT_IN ['T-1', 'T-2', 'T-3', 'T-4', 'T-5', 'market purchase'], HEAT_OUT ['T-6'], shared []; with one constructed purchase gate on a HEAT_OUT object the shared set reads ['market purchase'] counting market purchase and [] without it: the E-A3-2 weakness, unstated for E-A3-3 [CHOICE 14]
+expected NOT_EVALUABLE E-A3-4           ungated_residue at 2026 holds BODY-locus actuators only
+         hold: sourced set empty; no zero declaration is sourced
+         K rows, hold-ineligible: residue in every jurisdiction ['huddling.cool', 'huddling.warm'], non-body residue [], UNSEARCHED per jurisdiction [14, 15], contradicted []; one constructed zero on fans puts ['fans'] in the non-body residue [CHOICE 20]
+expected NOT_EVALUABLE E-A3-6           a burn ban in force during a cold event
+         hold: registered open, not predicted
+         wants a dated weather series per jurisdiction beside the CONDITION_BAN rows
+expected MATCH         E-A3-1 (reading) unamended code returns one reading for F-T4 and accepts pooled SHED+RETAIN; amended does neither
+         hold: INSTRUMENT (rule 1 met at 87f83ce; rule 3 met; a property of the code)
+         before: 'CONFLICT' per gate row, 'UNKNOWN' per route, pooled read 'CONFLICT'; after: 4 positions, pooled REFUSED
+expected MATCH         E-A3-5           the F-T1 gate reaches the water loop only via the coupling row; removing the row removes it
+         hold: INSTRUMENT (the propagated effect itself is hold-ineligible: T-1 and T-8 are K)
+         with C-1: [('F-T1.ban', 'WATER', 'SENSOR')]; without: []
+
+fail fixture 1: F-T4 through unamended A-2 reads 'CONFLICT' (one row per gate) and 'UNKNOWN' (one row per route) for 5 gates; amended reads 4 positions
+fail fixture 2: F-T5 SHED pooled with a RETAIN row: unamended A-2 reads 'CONFLICT'; amended REFUSED: 2e: one input carries gates of directions ['RETAIN', 'SHED']
+holds: rule 1 met (87f83ce); rule 3 met; rule 2 unmet on every row (T-1..T-9 grade K, not landed)
+choices in force: [CHOICE 14], [CHOICE 15], [CHOICE 16], [CHOICE 17], [CHOICE 18], [CHOICE 19], [CHOICE 20], [CHOICE 21], [CHOICE 22], [CHOICE 23]
+execution note: test_thermal_gates.py prints the check count; samples/thermal_gates.sample.txt is one recorded render, compare before quoting

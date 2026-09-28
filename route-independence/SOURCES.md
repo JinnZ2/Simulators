@@ -150,3 +150,15 @@ recorded at S with `input: False` and refused as any row's gate_source until
 read: UT 73-2-27 and UT 73-1-1. The 2009 Colorado bill and the Texas
 agency/attorney-general statement are named as NOT sourced; the rows that
 would rest on them read UNKNOWN.
+
+## Amendment A-3 of 2026-09-28
+
+Nothing fetched. Section 3 names nine sources, T-1..T-9, and none has landed:
+each is stored in `SOURCES_A3` at grade K with status NOT_LANDED, so every
+fixture row resting on one is hold-ineligible (rule 2). The TOKEN_PURCHASE
+gates in F-T4 and the constructed rows used by the fail fixtures carry no
+source and are tagged CONSTRUCTED_UNSOURCED. Every jurisdiction is a
+constructed placeholder (US city X, county X, state A, state B, state X) and
+every gate_state is a constructed reading of an unread source. Grants Pass v.
+Johnson (2024) is named in the amendment and was not read here; its year is
+the order's.
