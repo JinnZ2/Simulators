@@ -1,0 +1,33 @@
+{
+  "_about": [
+    "Thresholds read by descent_record.py. APPEND-ONLY: an entry, once",
+    "written, is never edited or deleted. To change a value, append a new",
+    "entry with the next seq for the same key; the loader takes the last",
+    "entry per key as current and keeps the rest as the record of what the",
+    "instrument used before. test_descent_record.py pins a digest of the",
+    "shipped prefix (seq 1-16), so an in-place edit fails the check while an",
+    "append passes.",
+    "status: PLACEHOLDER = chosen to make the constructed fixtures readable,",
+    "not measured on any unit, road or trailer. Every value shipped here is",
+    "PLACEHOLDER. Upgrading one to MEASURED needs a T1/T2 run and a new entry",
+    "that names it."
+  ],
+  "log": [
+    {"seq": 1, "date": "2026-09-24", "key": "analysis_pre_s", "value": 15.0, "unit": "s", "status": "PLACEHOLDER", "basis": "window opens this long before esp_event_ts; long enough to hold several reversals at 25-35 mph"},
+    {"seq": 2, "date": "2026-09-24", "key": "analysis_post_s", "value": 5.0, "unit": "s", "status": "PLACEHOLDER", "basis": "window closes this long after esp_event_ts"},
+    {"seq": 3, "date": "2026-09-24", "key": "trigger_halfwidth_s", "value": 1.0, "unit": "s", "status": "PLACEHOLDER", "basis": "half-width of the at-trigger window for 'trailer quiet at trigger timestamp' (WO T1)"},
+    {"seq": 4, "date": "2026-09-24", "key": "cab_high_rms_dps", "value": 1.5, "unit": "deg/s roll rate RMS", "status": "PLACEHOLDER", "basis": "cab channel counts as oscillating at or above this"},
+    {"seq": 5, "date": "2026-09-24", "key": "trailer_high_rms_dps", "value": 1.5, "unit": "deg/s roll rate RMS", "status": "PLACEHOLDER", "basis": "trailer channel counts as rolling at or above this (FALSIFIER A reads this channel)"},
+    {"seq": 6, "date": "2026-09-24", "key": "amp_ratio_min", "value": 3.0, "unit": "cab RMS / trailer RMS", "status": "PLACEHOLDER", "basis": "WO sec.6 amplitude ratio; 'cab amplitude >> trailer' (WO T1)"},
+    {"seq": 7, "date": "2026-09-24", "key": "phase_window_min_s", "value": 1.0, "unit": "s", "status": "PLACEHOLDER", "basis": "smallest trailer lag read as 'cab leads'; to be replaced by a fraction of the measured reversal period once road geometry is measured"},
+    {"seq": 8, "date": "2026-09-24", "key": "phase_window_max_s", "value": 8.0, "unit": "s", "status": "PLACEHOLDER", "basis": "largest lag searched; WO T1 predicts ~one reversal"},
+    {"seq": 9, "date": "2026-09-24", "key": "lead_corr_min", "value": 0.5, "unit": "Pearson r of envelopes", "status": "PLACEHOLDER", "basis": "below this peak correlation the lead is UNRESOLVED, not assigned"},
+    {"seq": 10, "date": "2026-09-24", "key": "envelope_window_s", "value": 4.0, "unit": "s", "status": "PLACEHOLDER", "basis": "moving-RMS window for the envelopes the lead is read from; envelopes, not raw signal, because a quasi-periodic signal has a lead ambiguous by whole periods"},
+    {"seq": 11, "date": "2026-09-24", "key": "grid_dt_s", "value": 0.05, "unit": "s", "status": "PLACEHOLDER", "basis": "common resampling grid for both channels"},
+    {"seq": 12, "date": "2026-09-24", "key": "gap_max_s", "value": 0.5, "unit": "s", "status": "PLACEHOLDER", "basis": "a sample gap longer than this inside the window makes the run NOT_EVALUABLE"},
+    {"seq": 13, "date": "2026-09-24", "key": "clock_misalign_max_s", "value": 0.5, "unit": "s", "status": "PLACEHOLDER", "basis": "sync-mark disagreement allowed between the two phones; held below phase_window_min_s so a clock offset cannot read as a lead"},
+    {"seq": 14, "date": "2026-09-24", "key": "grade_pct_declared", "value": [0.0, 15.0], "unit": "% grade, [lo, hi]", "status": "PLACEHOLDER", "basis": "grade range the thresholds above are declared for; WO sec.1 observed 9-13%"},
+    {"seq": 15, "date": "2026-09-24", "key": "surfaces_declared", "value": ["dry", "wet"], "unit": "surface_state set", "status": "PLACEHOLDER", "basis": "snow/ice are V5 and are where margin is gone; the thresholds are not declared there, so those runs read OUT_OF_ENVELOPE (unassessed), never clear"},
+    {"seq": 16, "date": "2026-09-24", "key": "v2_bin_edges", "value": [1, 2, 3], "unit": "access roads to the drop", "status": "PLACEHOLDER", "basis": "bins 0 | 1 | 2 | 3+ for relocation_tally; WO sec.3 reports drops with 1-2 access roads"}
+  ]
+}

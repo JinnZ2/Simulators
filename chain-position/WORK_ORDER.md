@@ -164,3 +164,4 @@ be executed, not inspected.
 
 Post-graduate or industry researcher with agent-framework access and no
 requirement for proprietary vendor data. Steps 1 and 2 need no lab.
+requirement for proprietary vendor data. Steps 1 and 2 need no lab.

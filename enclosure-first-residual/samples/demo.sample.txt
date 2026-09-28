@@ -1,5 +1,5 @@
 enclosure_first_residual  population=F1_enclosure_only  windows=80  persons=40  method-layer=present
-choices: {"BOOT_DRAWS": 300, "CONFOUND_RATIO": 1.25, "CORRECTED_READING": true, "DELTA_THRESHOLD": 1, "DOMINANT_RATIO": 0.5, "MIN_WITHIN_PAIRS": 3, "NULL_BAND": [0.025, 0.975], "NULL_DRAWS": 300}
+choices: {"BOOT_DRAWS": 300, "CONFOUND_RATIO": 1.25, "CORRECTED_READING": true, "DELTA_THRESHOLD": 1, "DOMINANT_RATIO": 0.5, "MIN_WITHIN_PAIRS": 3, "NULL_BAND": [0.025, 0.975], "NULL_DRAWS": 300, "THRESHOLD_SOURCE": "thresholds.txt"}
 == latency_to_approach_novel
    operationalization: seconds from onset of a novel stimulus to first approach within one body length; ceiling at trial end
    envelope: 40 within pairs, 40 exogenous, 0 chosen (excluded), 0 unknown origin (excluded)
@@ -13,7 +13,7 @@ choices: {"BOOT_DRAWS": 300, "CONFOUND_RATIO": 1.25, "CORRECTED_READING": true, 
    -> ENCLOSURE_DOMINANT(fraction=0.571, CI=[0.414, 0.754])
 
 enclosure_first_residual  population=F2_trait_only  windows=80  persons=40  method-layer=present
-choices: {"BOOT_DRAWS": 300, "CONFOUND_RATIO": 1.25, "CORRECTED_READING": true, "DELTA_THRESHOLD": 1, "DOMINANT_RATIO": 0.5, "MIN_WITHIN_PAIRS": 3, "NULL_BAND": [0.025, 0.975], "NULL_DRAWS": 300}
+choices: {"BOOT_DRAWS": 300, "CONFOUND_RATIO": 1.25, "CORRECTED_READING": true, "DELTA_THRESHOLD": 1, "DOMINANT_RATIO": 0.5, "MIN_WITHIN_PAIRS": 3, "NULL_BAND": [0.025, 0.975], "NULL_DRAWS": 300, "THRESHOLD_SOURCE": "thresholds.txt"}
 == latency_to_approach_novel
    operationalization: seconds from onset of a novel stimulus to first approach within one body length; ceiling at trial end
    envelope: 40 within pairs, 40 exogenous, 0 chosen (excluded), 0 unknown origin (excluded)
@@ -24,7 +24,7 @@ choices: {"BOOT_DRAWS": 300, "CONFOUND_RATIO": 1.25, "CORRECTED_READING": true, 
    -> UNKNOWN_measurable(observed between residual 0.9807 inside null band [0.9143, 0.9995]; enclosure terms have no traction here, so no residual is a trait candidate)
 
 enclosure_first_residual  population=F3_trait_plus_enclosure  windows=80  persons=40  method-layer=present
-choices: {"BOOT_DRAWS": 300, "CONFOUND_RATIO": 1.25, "CORRECTED_READING": true, "DELTA_THRESHOLD": 1, "DOMINANT_RATIO": 0.5, "MIN_WITHIN_PAIRS": 3, "NULL_BAND": [0.025, 0.975], "NULL_DRAWS": 300}
+choices: {"BOOT_DRAWS": 300, "CONFOUND_RATIO": 1.25, "CORRECTED_READING": true, "DELTA_THRESHOLD": 1, "DOMINANT_RATIO": 0.5, "MIN_WITHIN_PAIRS": 3, "NULL_BAND": [0.025, 0.975], "NULL_DRAWS": 300, "THRESHOLD_SOURCE": "thresholds.txt"}
 == latency_to_approach_novel
    operationalization: seconds from onset of a novel stimulus to first approach within one body length; ceiling at trial end
    envelope: 40 within pairs, 40 exogenous, 0 chosen (excluded), 0 unknown origin (excluded)
@@ -38,7 +38,7 @@ choices: {"BOOT_DRAWS": 300, "CONFOUND_RATIO": 1.25, "CORRECTED_READING": true, 
    -> TRAIT_RESIDUAL(fraction=0.477, CI=[0.276, 0.669])
 
 enclosure_first_residual  population=F4_selection_into_windows  windows=80  persons=40  method-layer=present
-choices: {"BOOT_DRAWS": 300, "CONFOUND_RATIO": 1.25, "CORRECTED_READING": true, "DELTA_THRESHOLD": 1, "DOMINANT_RATIO": 0.5, "MIN_WITHIN_PAIRS": 3, "NULL_BAND": [0.025, 0.975], "NULL_DRAWS": 300}
+choices: {"BOOT_DRAWS": 300, "CONFOUND_RATIO": 1.25, "CORRECTED_READING": true, "DELTA_THRESHOLD": 1, "DOMINANT_RATIO": 0.5, "MIN_WITHIN_PAIRS": 3, "NULL_BAND": [0.025, 0.975], "NULL_DRAWS": 300, "THRESHOLD_SOURCE": "thresholds.txt"}
 == latency_to_approach_novel
    operationalization: seconds from onset of a novel stimulus to first approach within one body length; ceiling at trial end
    envelope: 40 within pairs, 40 exogenous, 0 chosen (excluded), 0 unknown origin (excluded)
@@ -52,7 +52,7 @@ choices: {"BOOT_DRAWS": 300, "CONFOUND_RATIO": 1.25, "CORRECTED_READING": true, 
    -> VARIABLE_UNIDENT(confound: between arm passed the null gate but within-person delta enclosure does not move behavior (residual 0.869, null band [0.801, 0.997]); selection into windows likely)
 
 enclosure_first_residual  population=F5_chosen_change  windows=80  persons=40  method-layer=present
-choices: {"BOOT_DRAWS": 300, "CONFOUND_RATIO": 1.25, "CORRECTED_READING": true, "DELTA_THRESHOLD": 1, "DOMINANT_RATIO": 0.5, "MIN_WITHIN_PAIRS": 3, "NULL_BAND": [0.025, 0.975], "NULL_DRAWS": 300}
+choices: {"BOOT_DRAWS": 300, "CONFOUND_RATIO": 1.25, "CORRECTED_READING": true, "DELTA_THRESHOLD": 1, "DOMINANT_RATIO": 0.5, "MIN_WITHIN_PAIRS": 3, "NULL_BAND": [0.025, 0.975], "NULL_DRAWS": 300, "THRESHOLD_SOURCE": "thresholds.txt"}
 == latency_to_approach_novel
    operationalization: seconds from onset of a novel stimulus to first approach within one body length; ceiling at trial end
    envelope: 40 within pairs, 0 exogenous, 40 chosen (excluded), 0 unknown origin (excluded)
@@ -63,13 +63,13 @@ choices: {"BOOT_DRAWS": 300, "CONFOUND_RATIO": 1.25, "CORRECTED_READING": true, 
    -> OUT_OF_ENVELOPE(every within-person enclosure change was chosen by the person; reverse causation unresolvable)
 
 enclosure_first_residual  population=F6_unoperationalized  windows=80  persons=40  method-layer=present
-choices: {"BOOT_DRAWS": 300, "CONFOUND_RATIO": 1.25, "CORRECTED_READING": true, "DELTA_THRESHOLD": 1, "DOMINANT_RATIO": 0.5, "MIN_WITHIN_PAIRS": 3, "NULL_BAND": [0.025, 0.975], "NULL_DRAWS": 300}
+choices: {"BOOT_DRAWS": 300, "CONFOUND_RATIO": 1.25, "CORRECTED_READING": true, "DELTA_THRESHOLD": 1, "DOMINANT_RATIO": 0.5, "MIN_WITHIN_PAIRS": 3, "NULL_BAND": [0.025, 0.975], "NULL_DRAWS": 300, "THRESHOLD_SOURCE": "thresholds.txt"}
 == latency_to_approach_novel
    schema gate: no operationalization string
    -> BLOCKED(unoperationalized_term)
 
 enclosure_first_residual  population=F7_single_windows  windows=40  persons=40  method-layer=present
-choices: {"BOOT_DRAWS": 300, "CONFOUND_RATIO": 1.25, "CORRECTED_READING": true, "DELTA_THRESHOLD": 1, "DOMINANT_RATIO": 0.5, "MIN_WITHIN_PAIRS": 3, "NULL_BAND": [0.025, 0.975], "NULL_DRAWS": 300}
+choices: {"BOOT_DRAWS": 300, "CONFOUND_RATIO": 1.25, "CORRECTED_READING": true, "DELTA_THRESHOLD": 1, "DOMINANT_RATIO": 0.5, "MIN_WITHIN_PAIRS": 3, "NULL_BAND": [0.025, 0.975], "NULL_DRAWS": 300, "THRESHOLD_SOURCE": "thresholds.txt"}
 == latency_to_approach_novel
    operationalization: seconds from onset of a novel stimulus to first approach within one body length; ceiling at trial end
    envelope: 0 within pairs, 0 exogenous, 0 chosen (excluded), 0 unknown origin (excluded)

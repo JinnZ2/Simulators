@@ -1,0 +1,12 @@
+# (a) effort-coupled households. Row states follow the work order's
+# binary definition: COUPLED = provision stops when effort stops.
+# No survey backs these rows; every one is SYNTHETIC by the standing rule.
+population: (a) effort-coupled households
+food            | COUPLED   |
+water           | COUPLED   |
+shelter         | COUPLED   |
+thermal         | COUPLED   |
+predation       | REMOVED   |
+disease         | PRESENT   |
+waste_removal   | COUPLED   |
+exit            | PRESENT   |

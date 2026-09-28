@@ -631,52 +631,77 @@ def _gxc_commit_specificity(which):
     raise ValueError(which)
 
 
-def _drc_count_relation(inner, outer, stated_total):
-    """deep-research-correction/check.py::count_relation, imported. The
-    C-2 classifier: given an inner count and an outer count and a stated
-    total, which arithmetic the total implies -- DISJOINT (inner+outer),
-    NESTED (outer, inner<outer) or NEITHER. Expected values are the
-    definitions, not the implementation."""
+def _ledger_quantize(value, precision):
+    """ledger/py_ledger/engine.py::quantize, imported.
+
+    `precision` is read as SIGNIFICANT DIGITS, which is [CHOICE 1] in that
+    module and the one place a reader could reasonably have expected decimal
+    places instead. These cases are chosen so the two readings disagree:
+    1234.5 at 2 is 1.2E+3 under significant digits and 1234.50 under decimal
+    places, and nothing about the name says which.
+    """
     import importlib.util
-    path = os.path.join(ROOT, "deep-research-correction", "check.py")
-    sys.path.insert(0, os.path.join(ROOT, "measurand-partition"))
+    from decimal import Decimal
+    path = os.path.join(ROOT, "ledger", "py_ledger", "engine.py")
+    spec = importlib.util.spec_from_file_location("_ledger_engine", path)
+    mod = importlib.util.module_from_spec(spec)
+    # Registered before exec: the module carries `from __future__ import
+    # annotations`, so @dataclass resolves its annotations through
+    # sys.modules and raises on a module that is not there yet.
+    sys.modules[spec.name] = mod
+    spec.loader.exec_module(mod)
+    return mod.quantize(Decimal(value), precision)
+
+
+def _ledger_recompute(which):
+    """ledger/py_ledger/engine.py::recompute, imported.
+
+    Imported through the normal machinery rather than twice by path.
+    Loading record.py and engine.py as two separate module objects gives
+    two distinct Provenance enums, engine's identity check against its own
+    then fails, and every case comes back NOT_DERIVED -- a metric reporting
+    that it had nothing to do, which is the quiet kind of wrong.
+
+    Returns "OUTCOME value" so a case pins the outcome and the number in
+    one string: an UNDEFINED that returned a number and a RECOMPUTED that
+    returned the wrong one are different failures.
+    """
+    base = os.path.join(ROOT, "ledger")
+    sys.path.insert(0, base)
+    saved = {k: sys.modules.pop(k, None)
+             for k in ("record", "py_ledger", "py_ledger.engine")}
     try:
-        spec = importlib.util.spec_from_file_location("_drc_check", path)
-        mod = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(mod)
-        return mod.count_relation(inner, outer, stated_total)
+        import record as recmod
+        from py_ledger import engine as mod
+
+        worlds = {
+            # expression, operands, precision, operand values
+            "divide": ("a / b", ["a", "b"], 6,
+                       {("s", "a"): "2.5", ("s", "b"): "4"}),
+            "divide_by_measured_zero": ("a / b", ["a", "b"], 6,
+                                        {("s", "a"): "2.5",
+                                         ("s", "b"): "0"}),
+            "operand_absent": ("a / b", ["a", "b"], 6,
+                               {("s", "a"): "2.5"}),
+            "power_and_precedence": ("0.5 ** 3 * b / b", ["b", "0.5"], 6,
+                                     {("s", "b"): "4"}),
+            "recurring": ("a / b", ["a", "b"], 6,
+                          {("s", "a"): "1", ("s", "b"): "3"}),
+        }
+        expr, ops, prec, values = worlds[which]
+        rec = recmod.ClaimRecord(
+            claim_id="K", sim="s", value="0", precision=prec, operands=ops,
+            falsifier="", status="", provenance=recmod.Provenance.DERIVED,
+            expression=expr)
+        res = mod.recompute(rec, values)
+        return "%s %s" % (res.outcome.value, res.value)
     finally:
         sys.path.pop(0)
-
-
-def _rcl_composed_bias(a, c):
-    """reporting-chain-loss/hop_compose.py::composed_bias, imported. The
-    WO-5 transit-loss metric: B = sum_k (prod_{j>k} a_j) * c_k, the incentive
-    stack composed across a linear-Gaussian hop chain. Expected values are the
-    closed form by hand, not the implementation; the all-zero-offset case is
-    an exact 0, and the missing-gain case is None, so a zero and an absence
-    are pinned apart."""
-    import importlib.util
-    path = os.path.join(ROOT, "reporting-chain-loss", "hop_compose.py")
-    spec = importlib.util.spec_from_file_location("_rcl_hop", path)
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    return mod.composed_bias(a, c)
-
-
-def _cpd_stability_product(failure_probs):
-    """chain-position/load_class.py::stability_product, imported. WO-1's
-    reachable-controller compounding: P(all assumed stabilities hold) = product
-    of (1 - p), None if any factor is unassessed (the order's RULE -- an
-    unquantifiable probability cannot be propagated) or out of [0, 1]. Expected
-    values are the product by hand; the None cases pin the unassessed factor
-    apart from a factor of zero."""
-    import importlib.util
-    path = os.path.join(ROOT, "chain-position", "load_class.py")
-    spec = importlib.util.spec_from_file_location("_cpd_load", path)
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    return mod.stability_product(failure_probs)
+        for k, v in saved.items():
+            if v is None:
+                sys.modules.pop(k, None)
+            else:
+                sys.modules[k] = v
 
 
 def _tcr_expected_crossings(rate, rate_unit, horizon_value, horizon_unit):
@@ -706,6 +731,7 @@ def _tcr_expected_crossings(rate, rate_unit, horizon_value, horizon_unit):
 EXPECTED_METRICS = (
     "agent-lifecycle-energy/phase_energy.py::integrate",
     "anchor-measurand-crossing/amc.py::crossing_band",
+    "automation-gap/driver_hours_evidence_register.py::p_uninterrupted",
     "anchor-position/normalize.py::crossing_count",
     "crediting-rate/crediting_rate_v2.py::position",
     "crediting-rate/crediting_rate.py::bin_gap",
@@ -714,6 +740,8 @@ EXPECTED_METRICS = (
     "frame-location-benchmark/score.py::false_positive_rate",
     "gap-existence-cases/commit_store.py::commit_specificity",
     "internal-reference-boundary/radials.py::effective_origins",
+    "ledger/py_ledger/engine.py::quantize",
+    "ledger/py_ledger/engine.py::recompute",
     "internal-reference-boundary/radials.py::sanction_ratio_point",
     "model-deprecation-backcast/null_check.py::lag_of_peak",
     "move-set/move_set_sim_v2.py::coverage",
@@ -732,10 +760,14 @@ EXPECTED_METRICS = (
     "reporting-chain-loss/hop_compose.py::composed_bias",
     "chain-position/load_class.py::stability_product",
     "measurand-partition/wo4_lumber.py::stiffness_ratio",
+    "route-independence/route_independence.py::independence_ratio",
+    "route-independence/lag_count.py::lag_years",
+    "route-independence/settlement_split.py::net_positions",
     "revision-survival/revision_survival.py::delta",
     "routing-data-layer/rate_form.py::sustained_excess",
     "shape-spec-audit/shadow_read.py::outline_area",
     "sheet-structure-scan/sheetmodel.py::rank",
+    "thwaites-risk-audit/audit.py::sle_to_sv",
     "sim-span/sim_span.py::quad_fit",
     "sim-span/three_column.py::ols",
     "trigger-geometry/trigger_geometry.py::accumulation_ratio",
@@ -858,6 +890,63 @@ def _cdc_routing_cost(external, downtime_hours):
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     return mod.routing_cost(external, downtime_hours)
+
+
+def _dhr_p_uninterrupted(lam_per_h, minutes):
+    """automation-gap/driver_hours_evidence_register.py::p_uninterrupted,
+    imported. P(no human-required interrupt in a window of `minutes`) under
+    a Poisson assumption: exp(-lam * minutes / 60). A zero rate and a zero
+    window are exact 1.0 and are real measurements, not defaults."""
+    import importlib.util
+    path = os.path.join(ROOT, "automation-gap",
+                        "driver_hours_evidence_register.py")
+    spec = importlib.util.spec_from_file_location("_dhr", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.p_uninterrupted(lam_per_h, minutes)
+
+
+def _rcl_composed_bias(a, c):
+    """reporting-chain-loss/hop_compose.py::composed_bias, imported.
+    B = sum_k (prod_{j>k} a_j) * c_k, the incentive stack composed across
+    the chain. All offsets zero returns an exact 0.0 -- a real zero, no
+    incentive at any hop -- and an unspecified gain or offset returns None,
+    which is the split a default would hide."""
+    import importlib.util
+    path = os.path.join(ROOT, "reporting-chain-loss", "hop_compose.py")
+    spec = importlib.util.spec_from_file_location("_rcl", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.composed_bias(a, c)
+
+
+def _cpd_stability_product(failure_probs):
+    """chain-position/load_class.py::stability_product, imported.
+    P(all assumed stabilities hold) = product of (1 - p). Returns None if
+    any factor is unassessed -- the work order's RULE, an unquantifiable
+    probability cannot be propagated -- and that None is the case a 1.0
+    default would turn into a reassuring number."""
+    import importlib.util
+    path = os.path.join(ROOT, "chain-position", "load_class.py")
+    spec = importlib.util.spec_from_file_location("_cpd", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.stability_product(failure_probs)
+
+
+def _drc_count_relation(inner, outer, stated_total):
+    """deep-research-correction/check.py::count_relation, imported.
+    Names which arithmetic a separately stated total implies: DISJOINT
+    when it equals inner + outer, NESTED when it equals the outer with the
+    inner strictly smaller, NEITHER otherwise. The equal-parts case is
+    where the inner<outer guard is the only thing standing between the two
+    readings, and the two readings are DRC_002's whole finding."""
+    import importlib.util
+    path = os.path.join(ROOT, "deep-research-correction", "check.py")
+    spec = importlib.util.spec_from_file_location("_drc", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.count_relation(inner, outer, stated_total)
 
 
 def _ai_interaction_ss(a, b, c, d):
@@ -1546,7 +1635,74 @@ def seed():
     # and re-seeds, which is what tests/test_known_answer_gate.py
     # does. Found by adding the move-set entries to the manifest --
     # the coverage claim is what made the gap visible.
+    register(
+        "ledger/py_ledger/engine.py::quantize",
+        _ledger_quantize,
+        [
+            case("trailing zeros do not add digits", ("0.6250000", 3),
+                 "0.625",
+                 "2.5/4 is exactly 0.625, three significant digits. A "
+                 "value written with trailing zeros is the same value and "
+                 "a different string, which is the whole reason the ledger "
+                 "compares numerically"),
+            case("significant digits, not decimal places", ("1234.5", 2),
+                 "1.2E+3",
+                 "two SIGNIFICANT digits. Under the other reading of the "
+                 "word this is 1234.50, and the two disagree on every "
+                 "value that is not an integer"),
+            case("half-even rounds down from an even digit",
+                 ("0.125", 2), "0.12",
+                 "the digit before the 5 is 2, even, so nearest-even "
+                 "keeps it. Half-up would give 0.13"),
+            case("half-even rounds up from an odd digit",
+                 ("0.135", 2), "0.14",
+                 "the digit before the 5 is 3, odd, so nearest-even moves "
+                 "it. This case and the one above differ only in that "
+                 "digit, so a fixed rounding direction fails exactly one "
+                 "of them"),
+        ],
+        note=("The ledger's whole comparison rests on this. A quantize "
+              "reading precision as decimal places would report every "
+              "value in the repo as drifted on its first run, and a "
+              "quantize rounding half-up would report drift only "
+              "sometimes, which is worse."),
+    )
+    register(
+        "ledger/py_ledger/engine.py::recompute",
+        _ledger_recompute,
+        [
+            case("a division that closes", ("divide",), "RECOMPUTED 0.625",
+                 "2.5 / 4 = 0.625 by hand, at six significant digits"),
+            case("division by a measured zero",
+                 ("divide_by_measured_zero",), "UNDEFINED None",
+                 "a zero divisor returns UNDEFINED and no number. Not 0, "
+                 "which is a measurement, and not the numerator. This is "
+                 "the case where a ledger silently reporting a value "
+                 "would put a wrong number into EXPECTED and pin it"),
+            case("an operand that is not in the record set",
+                 ("operand_absent",), "UNRESOLVED_OPERAND None",
+                 "an absent operand is a third state, kept apart from a "
+                 "zero operand and from a claim that recomputed"),
+            case("a power, a literal, and precedence",
+                 ("power_and_precedence",), "RECOMPUTED 0.125",
+                 "0.5**3 = 0.125, times 4 divided by 4. Written so that "
+                 "left-to-right evaluation with no precedence gives "
+                 "0.125 as well but a wrong exponent does not"),
+            case("a recurring quotient", ("recurring",),
+                 "RECOMPUTED 0.333333",
+                 "1/3 at six significant digits. Recomputation carries "
+                 "guard digits and quantizes once at the end, so a "
+                 "per-step round would show here"),
+        ],
+        note=("Every outcome the ledger can reach on one claim, pinned "
+              "with its value in the same string: an UNDEFINED that "
+              "returned a number and a RECOMPUTED that returned the "
+              "wrong one are different failures."),
+    )
     _seed_move_set()
+    _seed_route_independence()
+    _seed_lag_count()
+    _seed_settlement_split()
 
 
 def _irb_effective_origins(coupling):
@@ -1616,6 +1772,146 @@ def _fmr_fraction_cap(n_other, fraction):
     finally:
         sys.path.pop(0)
 
+
+
+def _ri_independence_ratio(independent_count, route_count):
+    """route-independence/route_independence.py::independence_ratio,
+    imported. Expected values are arithmetic on the two counts; the
+    zero-route case is where a default hides, since 0.0 would read as
+    'measured, and no route settles' where nothing was measured."""
+    import importlib.util
+    path = os.path.join(ROOT, "route-independence", "route_independence.py")
+    spec = importlib.util.spec_from_file_location("_ri", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.independence_ratio(independent_count, route_count)
+
+
+
+
+def _drc_count_relation(inner, outer, stated_total):
+    """deep-research-correction/check.py::count_relation, imported. The
+    C-2 classifier: given an inner count and an outer count and a stated
+    total, which arithmetic the total implies -- DISJOINT (inner+outer),
+    NESTED (outer, inner<outer) or NEITHER. Expected values are the
+    definitions, not the implementation."""
+    import importlib.util
+    path = os.path.join(ROOT, "deep-research-correction", "check.py")
+    sys.path.insert(0, os.path.join(ROOT, "measurand-partition"))
+    try:
+        spec = importlib.util.spec_from_file_location("_drc_check", path)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        return mod.count_relation(inner, outer, stated_total)
+    finally:
+        sys.path.pop(0)
+
+def _rcl_composed_bias(a, c):
+    """reporting-chain-loss/hop_compose.py::composed_bias, imported. The
+    WO-5 transit-loss metric: B = sum_k (prod_{j>k} a_j) * c_k, the incentive
+    stack composed across a linear-Gaussian hop chain. Expected values are the
+    closed form by hand, not the implementation; the all-zero-offset case is
+    an exact 0, and the missing-gain case is None, so a zero and an absence
+    are pinned apart."""
+    import importlib.util
+    path = os.path.join(ROOT, "reporting-chain-loss", "hop_compose.py")
+    spec = importlib.util.spec_from_file_location("_rcl_hop", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.composed_bias(a, c)
+
+def _cpd_stability_product(failure_probs):
+    """chain-position/load_class.py::stability_product, imported. WO-1's
+    reachable-controller compounding: P(all assumed stabilities hold) = product
+    of (1 - p), None if any factor is unassessed (the order's RULE -- an
+    unquantifiable probability cannot be propagated) or out of [0, 1]. Expected
+    values are the product by hand; the None cases pin the unassessed factor
+    apart from a factor of zero."""
+    import importlib.util
+    path = os.path.join(ROOT, "chain-position", "load_class.py")
+    spec = importlib.util.spec_from_file_location("_cpd_load", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.stability_product(failure_probs)
+
+
+def _seed_route_independence():
+    register(
+        "route-independence/route_independence.py::independence_ratio",
+        _ri_independence_ratio,
+        [
+            case("no route settles", (0, 4), 0.0,
+                 "0 of 4: a measured zero, distinct from the no-route case"),
+            case("half settle", (2, 4), 0.5, "2 of 4 by arithmetic"),
+            case("all settle", (3, 3), 1.0, "3 of 3 by arithmetic"),
+            case("no routes", (0, 0), None,
+                 "route_count 0 is NOT_EVALUABLE; a 0.0 here would report "
+                 "an enclosure nobody measured"),
+        ],
+        note="FWO-2; the zero-route case pins None against 0.0.",
+    )
+
+
+def _lag_years(approx_date, reach_date, reached):
+    """route-independence/lag_count.py::lag_years, imported. FWO-11: the lag a
+    funding-coupled system took to reach a result produced under direct
+    constraint. Expected values are subtraction by hand across the era
+    boundary; None pins the classes that carry no reach date by definition
+    against a lag of zero, since a zero would read as 'reached at once'."""
+    import importlib.util
+    path = os.path.join(ROOT, "route-independence", "lag_count.py")
+    spec = importlib.util.spec_from_file_location("_lag_count", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.lag_years(approx_date, reach_date, reached)
+
+
+def _seed_lag_count():
+    register(
+        "route-independence/lag_count.py::lag_years",
+        _lag_years,
+        [
+            case("across the era boundary", (-200, 1821, "FULL"), 2021,
+                 "1821 - (-200) by hand; astronomical years"),
+            case("partial reach", (1450, 2000, "PARTIAL"), 550, "2000 - 1450 by hand"),
+            case("recovered, not rediscovered", (-125, None, "RECOVERED_NOT_REDISCOVERED"), None,
+                 "no reach date exists for the class; None, never 0"),
+            case("not reached with dates supplied", (500, 2006, "NOT_REACHED"), None,
+                 "the class carries no lag whatever dates are passed; None, never 1506"),
+        ],
+        note="FWO-11; the None cases pin absence against a zero lag.",
+    )
+
+
+def _net_positions(claims):
+    """route-independence/settlement_split.py::net_positions, imported.
+    AMENDMENT A-1 section 2 as arithmetic: net[i] = held - owed on a claim
+    matrix. The universal case pins C1 (all zero); the one-against-all case
+    pins the placing party; None pins an empty matrix against a zero list,
+    since [] would read as 'no party owes' where nothing was declared."""
+    import importlib.util
+    path = os.path.join(ROOT, "route-independence", "settlement_split.py")
+    spec = importlib.util.spec_from_file_location("_settlement_split", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.net_positions(claims)
+
+
+def _seed_settlement_split():
+    register(
+        "route-independence/settlement_split.py::net_positions",
+        _net_positions,
+        [
+            case("universal, three parties", ([[0, 1, 1], [1, 0, 1], [1, 1, 0]],), [0, 0, 0],
+                 "held 2, owed 2 for every party by hand: C1"),
+            case("one against two", ([[0, 1, 1], [0, 0, 0], [0, 0, 0]],), [2, -1, -1],
+                 "party 0 holds 2 owes 0; the others hold 0 owe 1"),
+            case("two-way unequal", ([[0, 3], [1, 0]],), [2, -2],
+                 "3 - 1 and 1 - 3 by hand; a net that is not zero on a two-party instrument"),
+            case("empty", ([],), None, "no matrix, no positions; None never []"),
+        ],
+        note="AMENDMENT A-1; the empty case pins None against a zero-length list.",
+    )
 
 
 def _msv_coverage(which):
@@ -1812,6 +2108,34 @@ def _seed_move_set():
              "branch order; DISJOINT is tested before NESTED, so a total "
              "that satisfied both would read DISJOINT")
     register(
+        "automation-gap/driver_hours_evidence_register.py::p_uninterrupted",
+        _dhr_p_uninterrupted,
+        [case("no interrupter is an exact 1.0", (0.0, 125), 1.0,
+              "a rate of zero leaves every window clear. 1.0 here is a "
+              "measurement, not a default -- the case a shortcut on a "
+              "falsy rate would pass for the wrong reason"),
+         case("zero window is an exact 1.0", (0.33, 0), 1.0,
+              "a window of no length cannot contain an event"),
+         case("ln2 per hour over one hour is a half",
+              (0.6931471805599453, 60), 0.5,
+              "lam*t = ln 2 at t = 1 h, so exp(-ln 2) = 0.5 exactly. "
+              "Catches a dropped /60: the same inputs without it give "
+              "exp(-41.6), which is 0 to any tolerance", tol=1e-12),
+         case("the register's own binding row", (0.33, 125),
+              0.5028315779709409,
+              "the cycle_min / high-inertia window, 125 min at the "
+              "placeholder rate. Catches a dropped negation, which returns "
+              "1.99 -- above 1, from a function typed as a probability",
+              tol=1e-12),
+         case("three hours at one per hour", (1.0, 180),
+              0.049787068367863944,
+              "exp(-3). A scale error in either argument moves this by "
+              "more than an order of magnitude", tol=1e-12)],
+        note="argument ORDER cannot be caught by any expected value: the "
+             "product lam*minutes is symmetric, so a swap returns the same "
+             "number. Stated because a case set that cannot catch a class "
+             "of error should say so rather than look complete.")
+    register(
         "reporting-chain-loss/hop_compose.py::composed_bias",
         _rcl_composed_bias,
         [case("all offsets zero is an exact zero", ([0.9, 0.9], [0.0, 0.0]),
@@ -1894,6 +2218,41 @@ def _seed_move_set():
         note="the None cases are the order's RULE built into the metric: an "
              "unassessed factor is not a factor of zero, and a malformed one "
              "is not silently clamped")
+    register(
+        "thwaites-risk-audit/audit.py::sle_to_sv",
+        _tra_sle_to_sv,
+        [case("2.6 mm/yr, the figure the document converts", (2.6,),
+              0.029743049962493214,
+              "2.6e-3 m/yr * 3.61e14 m^2 / 31556952 s / 1e6 = 0.0297 Sv by "
+              "hand; the document states 0.030", tol=1e-9),
+         case("1 mm/yr", (1.0,), 0.011439634600958927,
+              "the same arithmetic at unit forcing; a factor-1000 unit slip "
+              "in either direction shows here and not in a ratio", tol=1e-9),
+         case("a measured zero is 0.0", (0.0,), 0.0,
+              "no flux is a measurement and converts to zero sverdrups",
+              tol=0.0),
+         case("an absent figure is None, not 0.0", (None,), None,
+              "the discriminating case: an unstated SLE must not read as a "
+              "measured zero flux, which is the reassuring direction")],
+        note="a unit conversion, registered because its two zero-shaped "
+             "returns mean opposite things and a wrong one is invisible in "
+             "the render")
+
+
+def _tra_sle_to_sv(mm_per_year):
+    """thwaites-risk-audit/audit.py::sle_to_sv, imported.
+
+    The expected values are computed from the stated constants by hand
+    (mm/yr * 1e-3 * 3.61e14 m^2 / 31556952 s / 1e6), not read off the
+    implementation.  The discriminating pair is None against 0.0: an
+    absent figure must not read as a measured zero flux.
+    """
+    import importlib.util
+    path = os.path.join(ROOT, "thwaites-risk-audit", "audit.py")
+    spec = importlib.util.spec_from_file_location("_tra_audit", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.sle_to_sv(mm_per_year)
 
 
     register(
@@ -2173,8 +2532,22 @@ def report():
         bad.extend((mid, c, w) for c, w in u)
         print()
     comp = completeness()
+    # Registered is not exercised. A metric can be registered, counted, and
+    # report COMPLETE while every one of its cases came back NOT_RUN: the
+    # registry counts call sites, and a case that raised on the way in is
+    # still a registered case. Both numbers are printed, because the second
+    # is the one that says whether anything ran.
+    exercised = [m for m in registry_ids()
+                 if any(r["status"] != NOT_RUN for r in _RESULTS.get(m, []))]
+    dead = sorted(set(registry_ids()) - set(exercised))
+    n_not_run = sum(1 for m in registry_ids()
+                    for r in _RESULTS.get(m, []) if r["status"] == NOT_RUN)
     print("metrics registered: %d   expected: %d   %s"
           % (comp["registered"], comp["expected"], comp["state"]))
+    print("metrics exercised:  %d   cases NOT_RUN: %d"
+          % (len(exercised), n_not_run))
+    for m in dead:
+        print("  !! registered and never exercised: %s" % m)
     for m in comp["missing"]:
         print("  !! expected and NOT registered: %s" % m)
     for m in comp["extra"]:

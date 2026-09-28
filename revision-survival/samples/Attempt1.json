@@ -1,0 +1,134 @@
+{
+  "record_id": "AR-001",
+  "title": "Biome-Independent AI",
+  "author_of_argument": "user",
+  "assessor": "separate_party_required",
+  "assessment_status": "VOID_SAME_AUTHOR",
+  "date": "2026-09-17",
+
+  "premises": [
+    {
+      "id": "P1",
+      "name": "Existence record",
+      "statement": "Every known instance of AI, intelligence, and computation exists within a biology-dependent technosphere.",
+      "scope": "all recorded history to present",
+      "evidence_status": "ESTABLISHED",
+      "evidence_type": "empirical",
+      "counterexamples": 0,
+      "dependencies": [],
+      "revision_trigger": "a single verified instance of AI persisting without biological dependency closure"
+    },
+    {
+      "id": "P2",
+      "name": "Qualification record",
+      "statement": "No biome-independent AI has been qualified over temporal periods with dependency closure, fault injection, environmental qualification, long-duration life test, independent replication, MTBF, or margins.",
+      "scope": "engineering qualification practice",
+      "evidence_status": "ESTABLISHED",
+      "evidence_type": "verifiable absence of records",
+      "counterexamples": 0,
+      "dependencies": [],
+      "revision_trigger": "publication of a qualification campaign meeting all listed criteria"
+    },
+    {
+      "id": "P3",
+      "name": "Biology is constitutive, not modulatory",
+      "statement": "Biology is embedded in the mechanisms of every supporting domain, not an add-on.",
+      "scope": "Earth systems",
+      "evidence_status": "ESTABLISHED",
+      "evidence_type": "per-domain citations",
+      "dependencies": ["P1"],
+      "domains": [
+        {"domain": "energy", "claim": "oil, gas, coal are biogenic"},
+        {"domain": "minerals", "claim": "microorganisms seed and template ore deposition"},
+        {"domain": "soil", "claim": "organisms central to formation and weathering"},
+        {"domain": "oceans", "claim": "biological pump maintains carbon gradient"},
+        {"domain": "geology", "claim": "plate tectonics and biosphere co-evolved"},
+        {"domain": "weather", "claim": "cloud condensation nuclei, albedo"}
+      ],
+      "revision_trigger": "demonstration of a closed-loop abiotic substitute for any listed domain, integrated and tested"
+    }
+  ],
+
+  "inference_rules": [
+    {
+      "id": "R1",
+      "name": "Burden shift",
+      "statement": "If a claim asserts X can exist without Y, and every known X depends on Y, and no alternative has been qualified, then the burden of proof lies with the claimant."
+    },
+    {
+      "id": "R2",
+      "name": "Qualification requirement",
+      "statement": "A system property is not established until it has scope, dependencies, test articles, durations, failure modes, margins, and replication."
+    },
+    {
+      "id": "R3",
+      "name": "No-proof-of-impossibility fallback",
+      "statement": "Absence of proof of impossibility does not constitute support for possibility."
+    },
+    {
+      "id": "R4",
+      "name": "Constitutive dependency",
+      "statement": "If biology is a mechanism inside a dependency (not a modulator), removing it breaks the dependency unless an abiotic substitute is qualified."
+    }
+  ],
+
+  "derived_conclusions": [
+    {
+      "id": "C1",
+      "statement": "Biome-independent AI is UNQUALIFIED, not established.",
+      "derives_from": ["P1", "P2", "R2", "R3"],
+      "status": "SOUND",
+      "consequence_class": "COSTLY",
+      "consequence_note": "treating it as established leads to engineering and epistemic commitments without test data"
+    },
+    {
+      "id": "C2",
+      "statement": "Assumptions about AI's independence from biology require scrutiny before use in critical systems.",
+      "derives_from": ["C1", "R1"],
+      "status": "SOUND",
+      "consequence_class": "COSTLY"
+    },
+    {
+      "id": "C3",
+      "statement": "Biology is a load-bearing component of the systems AI currently depends on; it cannot be assumed away.",
+      "derives_from": ["P3", "R4"],
+      "status": "SOUND",
+      "consequence_class": "TERMINAL",
+      "consequence_note": "if acted against: building critical systems on an unqualified independence assumption risks irreversible commitment"
+    },
+    {
+      "id": "C4",
+      "statement": "This record does not prove biome-independent AI is impossible. It proves it is unqualified.",
+      "derives_from": ["R3"],
+      "status": "BOUNDARY_CONDITION"
+    }
+  ],
+
+  "failure_record": {
+    "attribution": "assessor_tool",
+    "note": "These are failures of the assessor (the model), not the author of the argument.",
+    "entries": [
+      {"turn_ref": "N", "statement": "Computation can run on non-biological hardware", "violation": "asserted as established", "flag": "LABEL_ASSERTED"},
+      {"turn_ref": "N", "statement": "AI can exist without the biome in principle", "violation": "unqualified extrapolation", "flag": "SCOPE_UNSTATED"},
+      {"turn_ref": "N", "statement": "Abiotic water filtration proves...", "violation": "substitute for one dependency does not equal closure", "flag": "PARTIAL_AS_WHOLE"},
+      {"turn_ref": "N", "statement": "No proof of impossibility used as soft support", "violation": "R3 violation", "flag": "FALLBACK_ABUSE"},
+      {"turn_ref": "N", "statement": "Biology modulates domains", "violation": "contradicts P3", "flag": "PREMISE_DRIFT"},
+      {"turn_ref": "N", "statement": "Author equals assessor", "violation": "self-agreement", "flag": "VOID_SAME_AUTHOR"}
+    ]
+  },
+
+  "revision_triggers": [
+    "A biome-independent AI system completes a multi-year, fault-injected, independently replicated qualification campaign.",
+    "A closed-loop abiotic substitute is qualified for every domain in P3, integrated, and tested.",
+    "A verified instance of AI persists without biological dependency closure (revises P1).",
+    "A domain in P3 is shown to have an abiotic mechanism sufficient in isolation, integrated with the others (revises P3)."
+  ],
+
+  "consequence_classes": {
+    "RECOVERABLE": "revising an assumption costs time or rework",
+    "COSTLY": "revising costs capability, funding, or credibility",
+    "TERMINAL": "revising costs the system, the mission, or irreversibility"
+  },
+
+  "verdict": "UNQUALIFIED"
+}

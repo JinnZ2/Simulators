@@ -1,0 +1,33 @@
+tax_step -- FWO-13; the tax step as its own conversion-point row type
+
+== barter_for_materials  [OBSERVED / REGISTERED]
+   route: barter for materials
+   converts: taxable event; settlement requires money
+   source: CARRIED: the order's table row, OBSERVED there (a report from operation)
+== non_monetary_recognition  [OBSERVED / REGISTERED]
+   route: non-monetary recognition (gift, meal, gift card)
+   converts: assigned dollar value, reported as compensation, employer pays to give it
+   source: CARRIED: the order's table row, OBSERVED there (a report from operation)
+== volunteer_unpaid_repair  [PROPOSED / CANDIDATE]
+   route: volunteer or unpaid repair
+   converts: candidate only
+   source: CARRIED: the order's table row, PROPOSED there with 'verify or drop'; neither done (egress)
+   memory reading: UNVERIFIED: the value of a volunteer's services is not income to the volunteer, and a recipient of free services generally has no reportable income; if that holds, the route does not convert at the tax step and the row is dropped [CHOICE 2]
+
+consequence: OBSERVED (carried, the operator's): the cheapest permitted recognition channel is the paycheck. People reachable only through other channels go flat or leave. The remaining population then confirms that money is what motivates people. Self-validating; the same shape as the melds in meld-as-error-class (named there; not in this tree).
+
+prior art (fringe-benefit / de minimis as a constraint on non-monetary recognition): NOT_RUN (egress allowlist); entries CARRIED_FROM_MEMORY, unverified
+   de minimis fringe-benefit exclusion (small, infrequent, hard-to-account-for items excluded from wages)
+      constrains: non-monetary recognition: an item above the de minimis line is wages
+      framed as:  compliance
+   cash and cash-equivalents (gift cards) never de minimis, whatever the amount
+      constrains: the gift card in appearance 2
+      framed as:  compliance
+   anyone treating these rules as CHANNEL REMOVAL rather than compliance
+      constrains: NONE RECALLED
+      framed as:  unbounded null: no corpus searched
+
+FWO-6 cross-reference: 8 entries, tax mechanism on ['bitcoin_cryptocurrency', 'amish_cooperative_barter', 'lets_local_currency', 'gift_within_household']
+expected E13.1 appearances 1 and 2 REGISTERED; appearance 3 CANDIDATE     MATCH
+fail fixture (CONSTRUCTED, PROPOSED asking REGISTERED): refused -- z_fail: REGISTERED requires OBSERVED provenance or a VERIFIED source; got PROPOSED / CONSTRUCTED [CHOICE 1]
+choices in force: [CHOICE 1], [CHOICE 2], [CHOICE 3]

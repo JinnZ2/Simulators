@@ -1,0 +1,31 @@
+{
+  "scenario": "baseline",
+  "time_per_distance_unit": 1,
+  "default_span_limit": 5,
+  "nodes": [
+    {"id": "N-A", "span_limit": 5},
+    {"id": "N-B", "span_limit": 5},
+    {"id": "N-C", "span_limit": 5},
+    {"id": "N-D", "span_limit": 5}
+  ],
+  "typing_catalog": {
+    "potable_water": {"capability_required": true},
+    "shelter_space": {"capability_required": false},
+    "generator": {"capability_required": true}
+  },
+  "distances": {
+    "N-A|N-B": 2, "N-A|N-C": 5, "N-A|N-D": 9,
+    "N-B|N-C": 3, "N-B|N-D": 7, "N-C|N-D": 4
+  },
+  "capacities": [
+    {"node": "N-A", "kind": "potable_water", "capability": 2, "quantity": 300, "t_declared": 0},
+    {"node": "N-B", "kind": "shelter_space", "capability": 1, "quantity": 40, "t_declared": 0},
+    {"node": "N-C", "kind": "generator", "capability": 1, "quantity": 2, "t_declared": 0}
+  ],
+  "needs": [
+    {"node": "N-D", "kind": "potable_water", "capability": 2, "quantity": 200, "t_declared": 1, "priority": 1},
+    {"node": "N-C", "kind": "shelter_space", "capability": 1, "quantity": 25, "t_declared": 1, "priority": 2},
+    {"node": "N-B", "kind": "generator", "capability": 3, "quantity": 1, "t_declared": 2, "priority": 1},
+    {"node": "N-D", "kind": "translation_support", "capability": 1, "quantity": 1, "t_declared": 2, "priority": 3}
+  ]
+}

@@ -1,0 +1,41 @@
+======================================================================
+CREDITING RATE -- WORK ORDER L, REVISED
+======================================================================
+  the three revisions are model-authored and were sent
+  un-adjudicated; see the module docstring
+  prediction sha256[:16]  ec5e3319011920f5
+  method layer            present
+  item list model_authored False
+  items                   12
+
+RETURN  CONTRIBUTION_TRACKING
+  the gap is inside the N1 band and credit is flowing (mean attribution_depth 3.00 at or above the 1.50 cut), so the bin is not the variable  [CHOICE 6]
+
+N2/N4 CORRELATES, reported before the fit
+  first_attested_source    {'visible': 835.0, 'technical_only': 845.0, 'not_retained': 840.0}
+  intermediary_count       {'visible': 1.0, 'technical_only': 1.0, 'not_retained': 1.0}
+
+COUNTS PER BIN   {'visible': 4, 'technical_only': 4, 'not_retained': 4}
+EXCLUDED         {'ordering_unknown': 0, 'ordering_reversed': 0, 'ambiguous_bin': 0, 'unscored': 0, 'no_depth': 0}
+
+RATES BY BIN
+  visible          1.0000
+  technical_only   1.0000
+  not_retained     1.0000
+  gap (visible - not_retained)  0.0000
+  N1 shuffle band               [0.0000, 0.0000]  k=2000
+  mean attribution_depth        3.0000  (cut 1.50)  [CHOICE 6]
+
+THE DISCRIMINATING BIN  technical_only tracks UNDETERMINED
+  the two anchor bins do not differ
+
+N3 per domain
+  materials      n=6   gap 0.0000  clears False
+  numeracy       n=6   gap 0.0000  clears False
+
+NOTHING HERE IS A STATEMENT ABOUT ANY TECHNIQUE, TRADITION OR WORD.
+Every fixture is constructed and declares itself so.  The real run
+is NOT_RUN: the order's own open item is an unidentified
+technique-side transmission catalogue.
+
+======================================================================

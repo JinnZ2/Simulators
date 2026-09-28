@@ -1,0 +1,92 @@
+AUTOMATION-GAP DROP -- internal recomputation
+Every figure in the drop is CARRIED. Nothing below is evidence
+about the world; it is whether the documents agree with themselves.
+
+AGA_001  distribution table vs the matrix (16 records)
+    teleop disclosed upfront   teleop       agrees   total 16
+    metrics published          metrics      agrees   total 16
+    repetitions under variatio variation    agrees   total 16
+    envelope declared          envelope     agrees   total 16
+    independent evaluation     independent  agrees   total 16
+    sustained runtime          sustained    agrees   total 16
+    -> all six columns reconcile: True
+
+AGA_002  records passing all six: Komatsu FrontRunner AHS
+
+AGA_003  F1: every humanoid record fails at least three
+    humanoid records read: 12
+    -> DOES NOT HOLD. Records failing fewer than three:
+       Figure 02 @ BMW, 11 months           2 non-PASS
+       Digit @ GXO Spanx                    2 non-PASS
+
+AGA_004  F2 deployment class (4 records)
+    independent PASS: 0    variation PASS: 0
+    (both are PASS-counts; ABSENT is not a measured negative)
+
+AGA_005  Komatsu ledger, derived cells recomputed
+    hours gain %                     stated 12.0     recomputed 11.7674   agrees
+    throughput AHS                   stated 1.05     recomputed 1.0506    agrees
+    human hours per unit, manned     stated 1.37     recomputed 1.3736    agrees
+    human hours per unit, AHS        stated 0.26     recomputed 0.2616    agrees
+    drop %                           stated 81.0     recomputed 81.0219   agrees
+    tire factor                      stated 0.71     recomputed 0.7143    agrees
+    -> ledger is internally consistent: True
+
+AGA_006  tire life: stated +40%, range from its own hours [20.0, 40.0], midpoint +30%
+    stated figure is the top of that range: True
+    consumption factor  at stated 0.714   at midpoint 0.769
+
+AGA_007  field ledger: stated [2, 6]; headed entry records 6 (denominator agrees)
+    headings: 001, 002, 003 + 004, 005, 006, 007
+
+AGA_008  self-dates per document
+    corpus    latest 2026-09-24
+    field     latest 2026-09-24
+    gap       latest 2026-09-24
+    komatsu   latest 2026-09-24
+    ledger    latest 2026-09-24
+    seed      latest 2026-09-24
+
+AGA_009  objects cited as filed
+    WP1                      FILED in seed
+    WP2                      FILED in seed
+    trades-shortage ledger   ABSENT (cited in komatsu)
+    claim ledger             ABSENT (cited in field)
+    -> delivered 2 of 4; still absent: claim ledger, trades-shortage ledger
+
+AGA_013  seed WP1 tire cost: gravel 1.07 / asphalt 0.43 / concrete 0.29 cents-per-mile
+    stated ['2.5', '3.7']   recomputed [2.4884, 3.6897]   agrees True / True
+    tolerance is each figure's own shipped precision [0.05, 0.05]
+
+AGA_014  two rows of one table, 35.1x apart
+    maintenance FREQUENCY stated ~4x paved
+    county EXPENDITURE gravel $1887 vs paved $13.45 per mi/yr -> 140.3x
+    different quantities, so a tension and not a contradiction;
+    nothing here adjudicates either figure.
+
+AGA_015  provenance vocabulary: declared ['MEASURED', 'VENDOR', 'FORECAST', 'CONSTRUCTED']
+    used      {'FORECAST': 1, 'INDUSTRY-STATED': 7, 'MEASURED': 8, 'VENDOR': 1}
+    UNDECLARED ['INDUSTRY-STATED'] on 7 rows
+
+AGA_016  the seed's two citations into its siblings
+    Komatsu scaffold, V2.1                         resolves
+    demo-corpus audit (Aurora emergency procedures DOES NOT RESOLVE
+        the supporting text is in AUTOMATION_GAP_AUDIT.md, not the cited document
+
+AGA_017  THE COLLISION restates 3 WP1 figures
+    rainfall roughness     restated 1000.0         source row [970.0, 1100.0]  contained
+    tire cost ratio        restated [2.5, 3.7]     source row [2.5, 3.7]       contained
+    maintenance frequency  restated 4.0            source row [4.0]            contained
+    -> all contained: True
+
+AGA_018  Caltrans survey: 18 companies at 90% response
+    if the 18 were surveyed, respondents = 16.2  (integral: False)
+    if the 18 responded, population  = 20  (integral: True)
+    the 12/18 share therefore reads over respondents
+
+AGA_019  registered falsifiers: 11 defined, 2 prefixes
+    AUT   in corpus, gap, komatsu
+    RD    in seed
+    cited but not redefined elsewhere: AUT-F1
+    collisions: none
+

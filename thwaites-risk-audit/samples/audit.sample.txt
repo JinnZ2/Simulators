@@ -1,0 +1,185 @@
+==========================================================================
+CHECKS ON THE DELIVERED THWAITES x SIMULATORS AUDIT
+==========================================================================
+
+The document says its tools were cloned and run from this repository.
+Every tool it names is in the tree, so the TOOL claims are reproducible
+here and the PAPER claims are not.  Nothing below is a statement about
+Thwaites Glacier.
+
+1. THE TWO RENDERINGS  [TRA_001]
+   v1 747 lines / 46767 bytes   v2 768 lines / 49981 bytes   ratio 0.9426
+   opcodes {'equal': 714, 'insert': 16, 'delete': 0, 'replace': 38}
+   a REWRITE, not a pure insertion
+
+2. THE THIRD COPY  [TRA_002]
+   cited: f35e1f5:AMOC/research.md   resolves True
+   blob 27070 bytes of v1's 46767  (57.9%)   prefix of v1: True
+   names Kasuya True   names Nian True
+   prefix commits found by content: f35e1f5
+   VERDICT  REFUTED -- one document in two places, not two routes
+
+3. R1..R6, THE DOCUMENT'S OWN SIX-ROW TABLE  [TRA_003]
+   6 rows, 6 mechanically confirmed applied, 0 untested
+   R1  True     v1 names Bradley in the section-5 heading, v2 names Williams
+   R2  True     every line mentioning 2.6 mm/yr carries UNVERIFIED in v2 and none does in v1
+   R3  True     v2 retires THW-F1 and v1 does not
+   R4  True     v2 carries the token DEMONSTRATION and v1 does not
+   R5  True     v2 flags the DOI conflict and v1 does not
+   R6  True     v2 marks the kappa INVALID AS RELIABILITY and v1 does not
+
+4. DID R1 REACH THE DERIVED DOCUMENTS?  [TRA_026]
+   SOURCE_DROP.md                             Bradley 12  Williams 0
+   SOURCE_DROP_V2.md                          Bradley 4  Williams 16
+   OPERATIONS_REDUNDANCY_AUDIT_TEMPLATE.md    Bradley 0  Williams 0
+   WARNING_CARD_SPEC.md                       Bradley 0  Williams 0
+   WORKER_FIELD_BRIEF_DESIGN_LIFE.md          Bradley 2  Williams 0
+   UNREPAIRED: SOURCE_DROP.md, WORKER_FIELD_BRIEF_DESIGN_LIFE.md
+
+5. THE INPUTS THE RUNS USED  [TRA_004]
+   closure-cost case files    stated 2   named in method note True
+   declared-frame blocks      stated 5   named in method note True
+   measurement-fork spec      stated 1   named in method note True
+   chain driver               stated 1   named in method note True
+   data files in the delivery: none
+   reproducible from the delivery: False
+
+6. instrument-bias-sims S1, RUN  [TRA_005]
+   f=0.001   quoted (0.9989, 0.0)   computed (0.9989, 0.0)   match True
+   f=0.2     quoted (0.7984, 0.0)   computed (0.7984, 0.0)   match True
+   all quoted numbers reproduce: True
+   the quoted numbers are the module's own defaults -- sweep(f,
+   n_dyads=40, ticks=400, seed=11).  No Thwaites quantity enters.  R4
+   relabelled two blocks DEMONSTRATION and not this one.
+
+7. reservoir-chain-coupling, RUN  [TRA_006 / TRA_007 / TRA_008]
+   document label             doc (max,sum)  fixture node     identical
+   Thwaites_grounding_line    (4.2, 9.0)     A                True
+   Thwaites_eastern_shelf     (2.94, 12.0)   B                True
+   WAIS_interior_basins       (2.06, 15.0)   C                True
+   coastal_SLR_delivery       (1.44, 18.0)   D                True
+   every number identical to the shipped fixture: True
+   module column names ('independent', 'coupled')   document column names ('max', 'sum')
+   rows where sum > 2*max (impossible for two non-negatives): Thwaites_grounding_line, Thwaites_eastern_shelf, WAIS_interior_basins, coastal_SLR_delivery
+   null fixtures: {'high_freeboard': 'REFUTED', 'no_freeboard': 'REFUTED'}
+   detector always fires: False
+   the block is signal_chain()'s shipped fixture output with four node
+   names substituted.  Under the module's column names there is no
+   arithmetic difficulty; under the document's (max / sum) every row reads
+   as impossible, since a+b <= 2*max(a,b).
+
+8. measurement-fork  [TRA_009 / TRA_010 / TRA_012]
+   compare.py arms: ['conventional', 'coupling', 'widen']  (n=3)
+   a fourth arm is expressible: False
+   shipped spec probe counts   {'conventional': 7, 'coupling': 10, 'widen': 17}
+   document probe counts       {'conventional': 8, 'coupling': 12, 'widen': 14}
+   shipped spec's SAME QUANTITY cell empty too: True
+   the verdict sentence is a module constant: True
+   residual loop pools every arm (MF_004 unrepaired): True
+   the verdict sentence is compare.py's constant for an empty cell and is
+   what the SHIPPED spec returns too.  The probe counts differ, so a
+   Thwaites spec was run; it is not in the delivery.
+   the arm set is a hardcoded dict of three generators.  A fourth arm is
+   not expressible, so 'four-arm result' is not what compare.py computed.
+   MF_004 stands unrepaired: the residual loop still pools every arm, so a
+   widen PROPOSAL can mark a residual question COVERED.
+
+9. effective-redundancy-audit, the kappa  [TRA_013]
+   non-degenerate codings against a constant coder: 62
+   of those, kappa != 0: 0
+   both coders constant and equal -> kappa 1.0
+   N_eff = 1 is every channel collapsed, i.e. the second coder marked
+   every channel the same way.  Against a constant coder kappa is exactly
+   0 for every non-degenerate first coding, so 0.000 is forced by the
+   reported N_eff and carries no agreement information.  R6's reason (one
+   model coded twice) is the weaker one.
+
+10. AMOC StommelBox  [TRA_018 / TRA_019 / TRA_020]
+   range (0.0, 0.5)   n=80   step 0.00633 -> spinodal 0.2342
+   range (0.0, 1.0)   n=80   step 0.01266 -> spinodal 0.2278
+   range (0.0, 0.4)   n=80   step 0.00506 -> spinodal 0.2380
+   range (0.0, 0.5)   n=40   step 0.01282 -> spinodal 0.2308
+   range (0.0, 0.5)   n=160  step 0.00314 -> spinodal 0.2358
+   range (0.0, 0.3)   n=80   step 0.00380 -> spinodal 0.2354
+   spread over ordinary grids: 0.0102  (min 0.2278, max 0.2380)
+   the document's 0.228 is the lowest of these: True
+   hysteresis_band reports the last grid point at which both states
+   coexist, so every value is a LOWER bound and the reported figure moves
+   with the grid.  Three decimals state a precision the method does not
+   have.
+   sv_at_F0 0.15   sv_at_spinodal 0.50   spinodal_F 0.217
+   F_to_sv(0.228) = 0.5177 Sv   the document states 0.50 Sv
+   added flux at the anchor 0.35 Sv   literature cluster (0.1, 0.4) Sv
+   sv_at_spinodal = 0.50 is a DECLARED anchor, so 'F = 0.228 (= 0.50 Sv)'
+   is the anchor read back out.  Converting the document's own F through
+   the calibration gives 0.518 Sv, because the calibration hardcodes
+   spinodal_F = 0.217.  The docstring hands the document a published BAND
+   for the added-flux threshold and the document uses the single anchor --
+   against its own opening rule, 'report the band, plan against the short
+   end'.
+
+11. THE FLUX AND SEA-LEVEL ARITHMETIC  [TRA_021 / TRA_022]
+   2.6 mm/yr SLE -> 0.02974 Sv   document 0.030   match True
+   50-60 Gt as GROUNDED ice -> (0.1382, 0.1658) mm   document ~0.15   match True
+   50-60 Gt as FLOATING shelf melt -> (0.0148, 0.0178) mm  (9.3x smaller)
+   both conversions are exact AS WRITTEN.  The quantity named is ice-shelf
+   BASAL melt -- melt at the base of FLOATING ice, per the document's own
+   mechanism paragraph (CDW 'under the ice shelves') -- whose direct sea-
+   level contribution is the displacement residual, about 9.3x smaller.
+   The sea-level consequence of shelf melt is the downstream dynamic
+   response of grounded ice, a different quantity with a lag.  This is the
+   one arithmetic step in the document that runs toward overstating.
+
+12. THE GAP-MARKERS BLOCKS  [TRA_023 / TRA_024]
+   THW-01   fields 7/7  state unowned    in-vocab True  kinds 1 ['boundary-artifact']
+   THW-02   fields 7/7  state assembly   in-vocab True  kinds 2 ['knowledge', 'boundary-artifact']
+   THW-03   fields 7/7  state unasked    in-vocab True  kinds 1 ['boundary-artifact']
+   THW-04   fields 7/7  state unowned    in-vocab True  kinds 1 ['boundary-artifact']
+   composite KIND: THW-02
+   THW-02: STATE forces KIND boundary-artifact, entry declares ['knowledge', 'boundary-artifact']
+   fenced GAP_ID blocks in the document: 4
+   records the register's own reader sees AS DELIVERED: 0
+   THW-05 parsed as a block: False
+   the blocks carry the right FIELD NAMES and not the register's block
+   FORM: markers.FIELD_RE wants four leading spaces and the fenced blocks
+   have none, so the register's own reader ingests 0 of them.  THW-05 is
+   prose and is not a block at all, so 'schema-conformant' covers four of
+   five.  A composite KIND is GM_010's shape reached by an author who has
+   not read the register.
+
+13. declared-frame  [TRA_015 / TRA_016]
+   the checker emits the word 'flag': False
+   CORE (the only compared fields): "boundary", "horizon", "who_counts"
+   recorded but never compared: ['sign_source', 'observer_access']
+   flags asserted in the document: boundary, who_counts
+   on a single block the checker prints 'all six fields declared' plus any
+   unknowns.  It emits no frame flag, so the per-paper flags are authored
+   in a sentence whose first clause is the tool's.  And observer_access --
+   the field section 14 ranks the corpus by -- is one of the two DF_001
+   records but never compares.
+
+14. THREE SMALLER READS  [TRA_011 / TRA_014 / TRA_017]
+   fence annotations in the document: ['(unchanged with arm 4)']   present in compare.py: none
+   closure-cost labels all from the module: True   the document states its own caveat: True
+   OIR rates measured here: [(0.0, 0.0), (0.5, 0.0)]   reproduces the document's (0.5, 0.0): True
+
+15. climate-modeling  [TRA_025]
+   state NOT_RUN   absent in this environment: numpy, scipy
+   NOT_RUN is a measured state here, not an assumption.  The document's
+   own R4 already relabels the block a DEMONSTRATION.
+
+16. WHAT IS CARRIED  [TRA_027 / TRA_028]
+   DOIs named in the document: 15   verified here: 0
+   allowlist egress: only github.com answers.  No publisher, DOI resolver
+   or agency host is reachable, so every paper, date, figure and the R5
+   DOI conflict is CARRIED and enters no verdict.
+
+CHOICES IN FORCE
+   [CHOICE 1] both renderings land side by side; neither supersedes.
+   [CHOICE 2] ocean area 3.61e14 m^2 for the SLE -> Sv conversion.
+   [CHOICE 3] 1 mm global mean SLE = 361.8 Gt.
+   [CHOICE 4] rho_ice 917, rho_seawater 1027 for the floating-ice displacement residual.
+   [CHOICE 5] the StommelBox grid list is six ordinary (range, n) choices, not a convergence study.
+   [CHOICE 6] the gap blocks are re-indented IN MEMORY so the register's reader can see their fields; the delivered file is not touched, and the as-delivered count is reported beside it.
+
+==========================================================================

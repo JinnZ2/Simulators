@@ -1,0 +1,48 @@
+standards_register -- FWO-10; fields whose own written standard addresses single-path dependency
+every standard CARRIED_FROM_MEMORY (name recalled, text not read); applied column UNKNOWN_NOT_SEARCHED on every row
+
+== structural engineering
+   standard:  fracture-critical member designation and redundancy classification (US bridge practice; the federal bridge inspection standards); independent inspection at a fixed interval
+   requires:  a second load path, or a mandated inspection regime where there is none
+   applied to the medium: UNKNOWN_NOT_SEARCHED  (memory: none recalled; unbounded null)
+   OBSERVED (carried from the operator): the inspector is paid through the same path as the structure inspected
+== negotiation / mediation / diplomacy
+   standard:  durability of settlements; integrative bargaining over more than one dimension against single-dimension distributive bargaining
+   requires:  more than one channel of exchange; the exchange expanded past one dimension
+   applied to the medium: UNKNOWN_NOT_SEARCHED  (memory: none recalled; unbounded null)
+== ecology / agronomy
+   standard:  genetic vulnerability of major crops (the 1972 US national committee report after the 1970 corn leaf blight); crop diversity requirements
+   requires:  diversity at the dependency layer; no single genotype carrying the whole crop
+   applied to the medium: UNKNOWN_NOT_SEARCHED  (memory: none recalled; unbounded null)
+== reliability engineering
+   standard:  common-cause / common-mode failure treatment in functional-safety standards (beta-factor models)
+   requires:  independence of redundant channels demonstrated, not assumed; a shared cause counted once
+   applied to the medium: UNKNOWN_NOT_SEARCHED  (memory: none recalled; unbounded null)
+== power grid
+   standard:  N-1 contingency criterion in transmission planning standards
+   requires:  the system survives the loss of any single element
+   applied to the medium: UNKNOWN_NOT_SEARCHED  (memory: none recalled; unbounded null)
+== aviation
+   standard:  no single failure may prevent continued safe flight (transport-category airworthiness rules); dual / dissimilar systems
+   requires:  no single point of failure for a catastrophic outcome; dissimilar redundancy where common-mode is credible
+   applied to the medium: UNKNOWN_NOT_SEARCHED  (memory: none recalled; unbounded null)
+
+applied-column verdict: NOT_EVALUABLE
+expected E10.1 applied column reads NOT_APPLIED in every row          NOT_EVALUABLE
+
+prior art (common-mode / N-1 on a currency or payment system): NOT_RUN (egress allowlist); entries below CARRIED_FROM_MEMORY, unverified
+   principles for financial market infrastructures (international payment/settlement standards, 2012)
+      addresses: plumbing: operational continuity, business continuity, settlement finality of the SYSTEM
+      medium:    not the medium; the unit the system settles in is taken as given
+   central-bank payment-system resilience and cyber-resilience guidance
+      addresses: plumbing: recovery-time objectives for the settlement system
+      medium:    not the medium
+   payment-system exposure policies at central banks
+      addresses: plumbing: credit and liquidity exposure inside the settlement system
+      medium:    not the medium
+   a common-mode / N-1 criterion applied to the currency itself as a dependency
+      addresses: NONE RECALLED
+      medium:    unbounded null: no corpus searched
+
+fail fixture (CONSTRUCTED, column searched, one APPLIED): MISMATCH
+choices in force: [CHOICE 1], [CHOICE 2], [CHOICE 3]

@@ -436,3 +436,78 @@ NONZERO and 3 SOME_FAILED_UNCOUNTED. Those were the last forty lines, not the
 run. Caught before anything rested on them, and recorded because a truncated
 sweep reported as a sweep is the same defect class as everything above: a number
 whose stated source does not support it.
+
+---
+
+## 10. THIRD PASS — a correction to §9.4, from a defect in the manifest
+
+Appended per §7. §9.4 stands as written; this reads it a second time rather
+than replacing it.
+
+§9.4 joined census's 109 parsable `NONZERO_EXIT_NO_VERDICT` rows against
+`tools/run_manifest.py` and reported:
+
+```
+  REDIRECT      102
+  CLI             6
+  TEST_FILE       1     -> "seven genuinely uncharacterised rows"
+```
+
+**The six CLI rows were redirects the classifier could not see.** Recomputed on
+the repaired classifier, against the same census output:
+
+```
+  REDIRECT      108
+  TEST_FILE       1     -> ONE uncharacterised row
+```
+
+### 10.1 The defect
+
+`run_manifest.py` found a module's checks by looking for the literal
+`"--selftest"` inside an `if` test. A module that declares the flag through
+argparse and tests `args.selftest` carries the literal only in an
+`add_argument` call, so the classifier saw no selftest branch and filed the
+module as `CLI`.
+
+Found by writing two argparse-style modules in `substrate-alternative/` and
+reading their rows, not by reading the classifier. No fixture written by the
+same hand that wrote it would have caught this, for the same reason the earlier
+two defects in that file needed real input: the author writes one style.
+
+Blast radius across the tree:
+
+```
+SELFTEST   85 -> 130     45 modules carrying checks were filed as CLI
+REDIRECT  102 -> 108      6 redirects were missed entirely
+CLI       392 -> 342
+LIBRARY   240 -> 239
+```
+
+So the manifest was under-reporting the check surface it exists to enumerate by
+45 modules, in the file whose whole argument is that a sweep should know what it
+is choosing not to measure.
+
+### 10.2 What moves and what does not
+
+```
+§6  "biggest single open measurement"     110 -> 7 (§9.4) -> 1 (here)
+§9.4 join                                  superseded by the numbers above
+§9.2 census dirty-regex defect             unchanged, still unrepaired
+§9.3 §3 fully explained, 3 of 3            unchanged
+§9.5 R-2 blocked by §9.2                   unchanged
+§1  pinned anchors                         unchanged, 24/24 with 84 PASS 2 FAIL
+contract violations                        unchanged at one, normalize.py
+```
+
+The one remaining uncharacterised row is a `TEST_FILE`. Nobody has walked it.
+
+### 10.3 Recorded because the direction matters
+
+Every correction in this file so far has made a reported problem smaller: §3
+did not reproduce, §9.4 cut 110 to 7, this cuts 7 to 1. That is three
+consecutive findings shrinking under measurement, which is worth noticing as a
+pattern rather than as three separate reliefs. The instrument was wrong in the
+alarming direction each time.
+
+The one that did not shrink is §9.2, which was found rather than inherited and
+is still open.

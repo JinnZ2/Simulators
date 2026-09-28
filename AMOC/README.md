@@ -10,6 +10,16 @@ narrow. Where it can't know, it says so.
 
 ---
 
+## Contributed study audit
+
+The [Thwaites Glacier September 2026 risk audit](studies/thwaites-2026/README.md)
+is preserved with its original source archive and provenance notes. Its follow-up
+examines sustained loading, hysteresis, observing-system redundancy, and falsifiers.
+The Southern-Ocean-to-AMOC transfer path remains **UNMEASURED**; this documentation
+addition does not change the model or independently reproduce the supplied runs.
+
+---
+
 ## What it is / is not
 
 IS: a way to sweep a freshwater-loading control parameter, see where the

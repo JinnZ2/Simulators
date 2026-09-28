@@ -1,0 +1,109 @@
+
+== decomposition: parts parsed, classes reachable, absent kept from unsearched
+  ok    four parts parsed from the order
+  ok    a retyped copy holding three parts raises
+  ok    signalled, reported, unassigned -> SIGNALLED_UNJOINED
+  ok    join ASSIGNED -> SIGNALLED_JOINED (counter-case to part 3)
+  ok    signal ABSENT (searched) -> GENUINELY_UNSIGNALLED
+  ok    reported ABSENT -> REPORTED_NOWHERE, part 1 does not hold
+  ok    a missing signal_present reads UNSEARCHED -> NOT_EVALUABLE naming it, never ABSENT
+  ok    UNSEARCHED join -> NOT_EVALUABLE naming join_assigned
+  ok    ABSENT and UNSEARCHED on one field give different classes
+  ok    a value outside the vocabulary is MALFORMED
+  ok    non-dict is MALFORMED
+  ok    every class in CLASSES is reachable
+  ok    holder_count: int kept, missing UNDECLARED, bool MALFORMED, negative MALFORMED
+  ok    lead_time: a number with no unit is UNDECLARED, with a unit it is kept
+  ok    separation SEPARATES on the constructed corpus built to
+  ok    separation DOES_NOT_SEPARATE when a SUDDEN case is unsignalled
+  ok    separation NOT_EVALUABLE when the signal axis has one level (CONSTANT_FIRES guard)
+  ok    separation on an empty corpus is NOT_EVALUABLE, not a verdict
+  ok    NOT_EVALUABLE and MALFORMED cases are skipped and counted, not tabled
+  ok    an undeclared description is skipped and counted apart
+  ok    separation carries its rule and [CHOICE 1]
+  ok    base_rate REFUSES on any corpus, naming the frame and what lifts it
+  ok    base_rate divides nothing (AST: no Div in it)
+  ok    four cases parsed from the order, CARRIED
+  ok    case names parsed: SILVER BRIDGE, COLUMBIA, TACOMA NARROWS, QUIET FAILURE CLASS
+  ok    a text without the Cases section raises
+  ok    four codings, every one declares saw_decomposition True
+  ok    every basis span slices a non-empty phrase out of its own case body
+  ok    every coded signal/join field with a value carries a basis span
+  ok    the order's anchor case codes REPORTED_NOWHERE from its own sentence: part 1 does not hold on it
+  ok    the anchor's described_as is UNDECLARED: 'in under a minute' is an event duration, not a description
+  ok    the second case codes SIGNALLED_UNJOINED
+  ok    the third and fourth cases are NOT_EVALUABLE on the order's text
+  ok    holder count and lead time UNDECLARED on all four (the order states none)
+  ok    separation on the order's own cases is NOT_EVALUABLE: one signal level
+  ok    EGRESS carries a measured timestamp, four refused hosts and the control
+
+== evidence: parsed, carried, the flat reading split by clause
+  ok    three findings parsed, every one CARRIED_NOT_VERIFIED, the order's tag carried apart
+  ok    the one number as written slices out of its own body and is a percentage
+  ok    two of three bullets state an absence of RECORD; the third does not
+  ok    flat reading clause 1 (not recorded) is stated by 2 of 3 bullets
+  ok    flat reading clause 2 (no cost comparison) is in the flat sentence and stated by 0 bullets
+  ok    source parsed as written: author, venue, year; CARRIED
+  ok    the adjacent safety-economics sentence parses across its line break
+  ok    a text without the Evidence section raises
+  ok    record-absent markers are a word list, stated as one in the module
+
+== ownability: bounded nulls, role records, open question derived
+  ok    the order's null states 'two' searches and no corpus, terms or date
+  ok    the order's null is UNBOUNDED lacking all four fields
+  ok    a full null record is BOUNDED; hits 0 reads NULL_IN_STATED_CORPUS
+  ok    hits > 0 reads INVERSE_CASE_CANDIDATES
+  ok    a non-integer hit count is MALFORMED
+  ok    hits 0 is BOUNDED and hits absent is UNBOUNDED: zero is not absent
+  ok    inverse_search over unbounded nulls only is NOT_MEASURED, entering no count
+  ok    inverse_search: all bounded at 0 -> NULL_IN_STATED_CORPORA
+  ok    inverse_search: a bounded hit -> CANDIDATES_TO_READ, unbounded listed apart
+  ok    role records reach EXISTENCE_PROOF / ROLE_NOT_THE_JOIN / ROLE_WITHOUT_AUTHORITY / UNDECLARED
+  ok    a record missing a field is UNDECLARED naming it
+  ok    a value outside the vocabulary is MALFORMED
+  ok    the regulator and role NAME reach no branch (renamed, same state)
+  ok    ownability with one proof -> NEVER_ASSIGNED
+  ok    ownability with no records -> UNDETERMINED
+  ok    ownability with only non-proof roles -> UNDETERMINED, not UNOWNABLE
+  ok    UNOWNABLE is returned by no path (absence of a proof is not a proof of absence)
+  ok    the order's current read is carried with its tag
+
+== blind_coding: the gate refuses this session; agreement per field, no composite
+  ok    a coding that saw the decomposition is REFUSED
+  ok    an undeclared saw_decomposition is REFUSED, not admitted by default
+  ok    a coding with coder and case that did not see it is ADMITTED
+  ok    every one of this session's codings is REFUSED
+  ok    agreement per field: AGREE, DISAGREE and UNSEARCHED_ON_ONE_SIDE all reached
+  ok    agreement on different cases is NOT_EVALUABLE
+  ok    agreement with a refused coding is NOT_EVALUABLE
+  ok    corpus_agreement over no pairs is NOT_RUN
+  ok    no composite key in the agreement readout
+  ok    corpus_agreement with a refused pair lists it and evaluates 0
+
+== folder: constraints read from the files
+  ok    decomposition.py parses under 3.9, imports stdlib-or-local, no network module
+  ok    decomposition.py under 300 lines
+  ok    evidence.py parses under 3.9, imports stdlib-or-local, no network module
+  ok    evidence.py under 300 lines
+  ok    ownability.py parses under 3.9, imports stdlib-or-local, no network module
+  ok    ownability.py under 300 lines
+  ok    blind_coding.py parses under 3.9, imports stdlib-or-local, no network module
+  ok    blind_coding.py under 300 lines
+  ok    run_all.py parses under 3.9, imports stdlib-or-local, no network module
+  ok    run_all.py under 300 lines
+  ok    selftest.py parses under 3.9, imports stdlib-or-local, no network module
+  ok    selftest.py under 300 lines
+  ok    decomposition.py refuses --selftest with exit 2
+  ok    evidence.py refuses --selftest with exit 2
+  ok    ownability.py refuses --selftest with exit 2
+  ok    blind_coding.py refuses --selftest with exit 2
+  ok    no module inserts a parent path
+  ok    no authored file carries a company or site name the evidence section carries (parsed at call time only)
+  ok    the name scan fires on a plant
+  ok    no authored module carries a number the evidence section states as written
+  ok    run_all prints the declaration before the first part
+  ok    declaration names position, coding, parties, records, evidence, rate
+  ok    run_all renders every part
+  ok    WORK_ORDER.md carries the delivered title line
+
+checks: 97   failed: 0

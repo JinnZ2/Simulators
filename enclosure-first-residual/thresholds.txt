@@ -1,0 +1,9 @@
+# DATA ONLY. Never code. key = value, one per line. Read by
+# enclosure_first_residual.py at import, never written by it.
+#
+# Every value here is policy, not measurement. Why a value is what it is,
+# who set it, and when, is in threshold_chain.txt (append-only).
+DELTA_THRESHOLD  = 1
+MIN_WITHIN_PAIRS = 3
+DOMINANT_RATIO   = 0.5
+CONFOUND_RATIO   = 1.25

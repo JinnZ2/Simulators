@@ -1,0 +1,14 @@
+[
+  {"claim_id": "A_001", "sim": "gx", "value": "100", "precision": 6,
+   "operands": [], "provenance": "MEASURED",
+   "falsifier": "a rerun returns other than 100",
+   "falsifier_test": "none",
+   "status": "CONSTRUCTED: deliberately shares the claim_id A_001 with fx. In this repo CA_, RC_, MP_, SS_ and EMRG_ are each owned by two or three folders, every one numbering from 001, so a bare claim_id is not a key. This fixture is why operand references are qualified."},
+
+  {"claim_id": "B_001", "sim": "gx", "value": "102.5", "precision": 6,
+   "operands": ["A_001", "fx:A_001"], "expression": "A_001 + fx:A_001",
+   "provenance": "DERIVED",
+   "falsifier": "the sum is not 102.5",
+   "falsifier_test": "ledger INTERNAL diff",
+   "status": "CONSTRUCTED: a bare reference resolving locally beside a qualified one crossing sims. If the bare A_001 resolved to fx the value would be 5."}
+]

@@ -143,6 +143,39 @@ class TestRunsNothingItScans(unittest.TestCase):
         self.assertEqual(self._exec_hits('import re\nre.compile("x")'), [])
 
 
+class TestArgparseSelftestForm(unittest.TestCase):
+    """The flag can be declared through argparse and tested as an attribute.
+
+    A classifier looking only for the literal inside an `if` test files such a
+    module as CLI and under-reports the check surface the manifest exists to
+    enumerate. Pinned against real files so a regression is visible.
+    """
+
+    def _rec(self, path):
+        for r in RECORDS:
+            if r["path"] == path:
+                return r
+        self.fail("not in the manifest: %s" % path)
+
+    def test_argparse_declared_selftest_is_not_filed_as_cli(self):
+        for path in ("substrate-alternative/pilot_loop.py",
+                     "substrate-alternative/frame_audit.py"):
+            self.assertEqual(self._rec(path)["class"], "SELFTEST", path)
+
+    def test_those_modules_really_carry_checks(self):
+        # The classification is only worth pinning if it is true of the file.
+        for path in ("substrate-alternative/pilot_loop.py",
+                     "substrate-alternative/frame_audit.py"):
+            src = io.open(os.path.join(ROOT, path), encoding="utf-8").read()
+            self.assertIn('add_argument("--selftest"', src, path)
+
+    def test_the_attribute_form_needs_the_flag_declared(self):
+        rec = rm.classify(
+            'def main(cfg):\n    if cfg.selftest:\n        return 0\n'
+            '    return 1\n', "z.py")
+        self.assertNotEqual(rec["class"], "SELFTEST")
+
+
 class TestSelfReference(unittest.TestCase):
 
     def test_the_manifest_appears_in_its_own_manifest(self):

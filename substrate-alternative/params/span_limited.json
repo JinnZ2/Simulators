@@ -1,0 +1,19 @@
+{
+  "scenario": "span_limited",
+  "time_per_distance_unit": 1,
+  "default_span_limit": 1,
+  "nodes": [
+    {"id": "N-A", "span_limit": 1},
+    {"id": "N-B", "span_limit": 1},
+    {"id": "N-C", "span_limit": 1}
+  ],
+  "typing_catalog": {"potable_water": {"capability_required": false}},
+  "distances": {"N-A|N-B": 1, "N-A|N-C": 2, "N-B|N-C": 1},
+  "capacities": [
+    {"node": "N-A", "kind": "potable_water", "capability": 1, "quantity": 10, "t_declared": 0}
+  ],
+  "needs": [
+    {"node": "N-B", "kind": "potable_water", "capability": 1, "quantity": 5, "t_declared": 0, "priority": 1},
+    {"node": "N-C", "kind": "potable_water", "capability": 1, "quantity": 5, "t_declared": 0, "priority": 2}
+  ]
+}

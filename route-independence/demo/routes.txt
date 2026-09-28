@@ -1,0 +1,28 @@
+# Routes to a need, one per row. Format:
+#   need | route | settles_in | obligation_medium | permitted | source
+# settles_in: the medium the route's own exchanges use.
+# obligation_medium: the medium its external obligations (tax, fines,
+#   fees) must be paid in. UNKNOWN is a value; leave it when unsourced.
+# permitted: yes | no | UNKNOWN -- carried through, enters no measure.
+# An empty source marks the row SYNTHETIC in the output.
+# SOURCE STATUS: every named source below is CARRIED. irs.gov refuses
+# CONNECT from this environment (403, measured 2026-09-27T01:28Z); no
+# statute or notice was read here.
+dominant: USD
+
+food | barter                | goods_or_services | USD     | yes | IRS Topic 420 (bartering income at fair market value; Form 1099-B for barter exchanges) -- carried from the work order, not read
+food | cash_market           | USD               | USD     | yes | the dominant token by construction
+food | co-op                 | USD               | USD     | yes | patronage dividends reported on Form 1099-PATR -- carried from memory, unverified
+food | gift_mutual_aid       | reciprocity       | UNKNOWN | yes | gift tax attaches to a giver above the annual exclusion, in USD (carried); at mutual-aid scale the obligation medium is not sourced here, so it stays UNKNOWN
+food | household_production  | own_labor         | USD     | yes |
+food | crypto                | crypto            | USD     | yes | exchange taxed at dollar value, non-reporting fined in dollars -- carried from the work order (IRS Notice 2014-21 from memory, unverified)
+food | amish_community       | community_labor   | USD     | yes | settles obligations in cash -- carried from the work order
+
+water | municipal            | USD               | USD     | yes | the dominant token by construction
+water | private_well         | own_labor         | USD     | yes |
+
+# Constructed control, so the not-enclosed branch is shown reachable.
+# A commons whose fines are paid in labour-hours settles its obligations
+# in its own medium. No such community is named; SYNTHETIC.
+control_constructed | labor_commons | labor_hours | labor_hours | yes |
+control_constructed | cash_market   | USD         | USD         | yes | the dominant token by construction

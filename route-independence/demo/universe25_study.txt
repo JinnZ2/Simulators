@@ -1,0 +1,16 @@
+# Universe 25 entry conditions, as the work order transcribes them from
+# Calhoun 1973 "Death Squared" (Proc R Soc Med) and secondary
+# reconstructions (Emrick; Science History Institute; Ramsden).
+# STATUS: CARRIED. The 1973 paper could not be read from this environment
+# (pmc.ncbi.nlm.nih.gov and europepmc.org refuse CONNECT, 403, measured
+# 2026-09-27T01:28Z). Correct any row against the paper when it is in hand.
+# Format: condition | state | source [| key=value ...]
+study: Universe 25 (Calhoun 1973)
+food            | DECOUPLED | Calhoun 1973, carried via work order
+water           | DECOUPLED | Calhoun 1973, carried via work order
+shelter         | DECOUPLED | Calhoun 1973, carried via work order (nest boxes supplied)
+thermal         | DECOUPLED | Calhoun 1973, carried via work order (temperature held)
+predation       | REMOVED   | Calhoun 1973, carried via work order
+disease         | REMOVED   | Calhoun 1973, carried via work order (screened founders)
+waste_removal   | DECOUPLED | Calhoun 1973, carried via work order (experimenters cleaned)
+exit            | REMOVED   | Calhoun 1973, carried via work order (no emigration)

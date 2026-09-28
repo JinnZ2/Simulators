@@ -109,7 +109,61 @@ CLOSED_LABELS = (
 
 ORIGIN_PATTERN = "behavior attributed to individual trait"
 
+
+class ThresholdFileError(ValueError):
+    """thresholds.txt is present and cannot be read as declared. A typed refusal:
+    the run does not start on a half-read policy file."""
+
+
+THRESHOLD_KEYS = {"DELTA_THRESHOLD": int, "MIN_WITHIN_PAIRS": int,
+                  "DOMINANT_RATIO": float, "CONFOUND_RATIO": float}
+
+
+def _parse_thresholds(text):
+    """key = value, one per line, '#' comments. Every key must be a known
+    threshold and every known threshold must appear once; anything else refuses."""
+    out = {}
+    for ln, raw in enumerate(text.splitlines(), 1):
+        line = raw.split("#", 1)[0].strip()
+        if not line:
+            continue
+        if "=" not in line:
+            raise ThresholdFileError("thresholds.txt line %d: no '=': %r" % (ln, raw))
+        k, v = (s.strip() for s in line.split("=", 1))
+        if k not in THRESHOLD_KEYS:
+            raise ThresholdFileError("thresholds.txt line %d: unknown threshold %r" % (ln, k))
+        if k in out:
+            raise ThresholdFileError("thresholds.txt line %d: %s given twice" % (ln, k))
+        try:
+            out[k] = THRESHOLD_KEYS[k](v)
+        except ValueError:
+            raise ThresholdFileError("thresholds.txt line %d: %s=%r is not %s" % (ln, k, v, THRESHOLD_KEYS[k].__name__))
+    missing = [k for k in THRESHOLD_KEYS if k not in out]
+    if missing:
+        raise ThresholdFileError("thresholds.txt: missing %s" % ", ".join(missing))
+    return out
+
+
+def _load_thresholds():
+    """Dispatch K: 'threshold in data file, provenance chained'. The file wins
+    over the in-code defaults above when present; its provenance is
+    threshold_chain.txt. Absent file -> code defaults, and the record says so."""
+    path = os.path.join(HERE, "thresholds.txt")
+    if not os.path.isfile(path):
+        return "code_default", {}
+    with open(path, encoding="utf-8") as fh:
+        return "thresholds.txt", _parse_thresholds(fh.read())
+
+
+THRESHOLD_SOURCE, _FILE_THRESHOLDS = _load_thresholds()
+if _FILE_THRESHOLDS:
+    DELTA_THRESHOLD = _FILE_THRESHOLDS["DELTA_THRESHOLD"]
+    MIN_WITHIN_PAIRS = _FILE_THRESHOLDS["MIN_WITHIN_PAIRS"]
+    DOMINANT_RATIO = _FILE_THRESHOLDS["DOMINANT_RATIO"]
+    CONFOUND_RATIO = _FILE_THRESHOLDS["CONFOUND_RATIO"]
+
 CHOICES = {
+    "THRESHOLD_SOURCE": THRESHOLD_SOURCE,
     "DELTA_THRESHOLD": DELTA_THRESHOLD,
     "NULL_DRAWS": NULL_DRAWS,
     "BOOT_DRAWS": BOOT_DRAWS,
@@ -967,6 +1021,26 @@ def selftest():
                     "windows": [{"person_id": "a", "t0": 1, "t1": 2, "change_origin": "baseline",
                                  "enclosure": enc, "behavior": {"rigidity": 3}}]})
     check("rigidity" in schema_gate(p), "closed label not refused")
+    # thresholds: data file read, provenance chained, malformed file refused (EFR_012)
+    check(THRESHOLD_SOURCE == "thresholds.txt", "thresholds.txt present but not the source")
+    check(CHOICES["THRESHOLD_SOURCE"] == THRESHOLD_SOURCE, "THRESHOLD_SOURCE not in the printed choices")
+    with open(os.path.join(HERE, "thresholds.txt"), encoding="utf-8") as fh:
+        parsed = _parse_thresholds(fh.read())
+    check(parsed == {"DELTA_THRESHOLD": DELTA_THRESHOLD, "MIN_WITHIN_PAIRS": MIN_WITHIN_PAIRS,
+                     "DOMINANT_RATIO": DOMINANT_RATIO, "CONFOUND_RATIO": CONFOUND_RATIO},
+          "thresholds.txt values differ from the ones in force")
+    with open(os.path.join(HERE, "threshold_chain.txt"), encoding="utf-8") as fh:
+        chain = fh.read()
+    check(all(("threshold: %s" % k) in chain for k in THRESHOLD_KEYS), "a threshold has no provenance entry")
+    for bad in ("DELTA_THRESHOLD = 1\nMIN_WITHIN_PAIRS = 3\nDOMINANT_RATIO = 0.5",          # missing key
+                "DELTA_THRESHOLD = 1\nMIN_WITHIN_PAIRS = 3\nDOMINANT_RATIO = 0.5\nCONFOUND_RATIO = x",  # wrong type
+                "DELTA_THRESHOLD = 1\nDELTA_THRESHOLD = 2\nMIN_WITHIN_PAIRS = 3\nDOMINANT_RATIO = 0.5\nCONFOUND_RATIO = 1.25",  # duplicate
+                "DELTA_THRESHOLD = 1\nMIN_WITHIN_PAIRS = 3\nDOMINANT_RATIO = 0.5\nCONFOUND_RATIO = 1.25\nNULL_DRAWS = 5"):  # unknown key
+        try:
+            _parse_thresholds(bad)
+            check(False, "malformed thresholds text accepted: %r" % bad[:40])
+        except ThresholdFileError:
+            check(True, "")
     # branch set: four branches, round-trips through F when present
     d = branch_set_dict(runs["F1_enclosure_only"])
     check([b["id"] for b in d["branches"]] == ["enclosure_constraint", "trait_plain",

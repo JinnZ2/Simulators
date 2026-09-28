@@ -1,0 +1,12 @@
+{
+  "name": "cobol_ledger",
+  "authoritative_for": "PRECISION",
+  "language": "cobol",
+  "dependencies": ["gnucobol"],
+  "build_required": true,
+  "runs_on_phone": false,
+  "build": "cobc -x -free LEDGER.cob -o ledger_cob",
+  "arithmetic": "COMP-3 packed decimal, fixed scale, no binary floating point",
+  "NEVER_COMPILED": true,
+  "never_compiled_note": "GnuCOBOL is absent from the environment this source was written in. cobc and cobcrun both resolve to nothing. This source has never been compiled and has never been run. Treat it as UNVERIFIED until someone with a toolchain builds it. The ledger detects the absence and reports PRECISION_UNVERIFIED rather than assuming agreement."
+}
