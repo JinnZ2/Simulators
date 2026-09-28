@@ -14012,10 +14012,28 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   its first run recorded before any repair (`RIN_053`, STE_011); the three
   merge-lost blocks restored from the losing-parent blobs after the clone
   was unshallowed, the superseded catalogue paragraph deliberately left
-  (`RIN_055`); RIN_024 untouched (`RIN_056`). Fifty-seven `RIN_*` claims;
+  (`RIN_055`); RIN_024 untouched (`RIN_056`). **AMENDMENT A-1 (2026-09-28,
+  settlement vs gate-removal)** then landed verbatim, its section 5 the
+  EXPECTED block committed alone at `bacaeab`; `settlement_split.py` gives
+  every FWO-5 route copy `obligation_origin` (UNDECIDED unscorable) and the
+  settlement field SPLIT into `settles_claim` / `removes_gate`, never combined
+  (AST), plus FWO-8's `token_type` / `converts_to` / `hops_to_monetary` with a
+  per-horizon reading. **Two of three expectations FAILED, reported first**:
+  E-A2 — FWO-5 does NOT force a settlement reading on rainwater (none/none is
+  INDEPENDENT under its own choice); the meld sits on F-A1/F-A2, a fine and
+  metered water returning one identical record on every derived field and
+  parting only on an authored label (`RIN_058`); E-A3 — case (b) at two hops
+  still carries the preprint deposit INDEPENDENT (token NONE) while the
+  citation route converts at hop 2 on the carried chain (`RIN_059`). E-A1
+  HELD (1, 3): 23 of 24 decided rows CONSTRUCTED, ten routes UNDECIDED because
+  the three-valued field has no member for an obligation-free route off the
+  biological list (`RIN_061`); the one BOTH row is the property tax on the
+  land one lives on, C2 as a record (`RIN_063`); section 2 as `net_positions`,
+  registered in `tools/known_answer.py` (`RIN_064`). Sixty-six `RIN_*` claims;
   check counts printed by `python3 route-independence/test_route.py`,
   `python3 route-independence/test_dependency_chain.py` and
-  `python3 route-independence/test_single_channel.py`, the last also
+  `python3 route-independence/test_single_channel.py` and
+  `python3 route-independence/test_settlement_split.py`, the last two also
   printing the fail-fixture line. Stdlib only,
   parses under 3.9, phone-buildable, CC0.
 - `custody-verification-band/` — Marker under exploration. Criterion: a layer

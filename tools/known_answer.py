@@ -738,6 +738,7 @@ EXPECTED_METRICS = (
     "measurand-partition/wo4_lumber.py::stiffness_ratio",
     "route-independence/route_independence.py::independence_ratio",
     "route-independence/lag_count.py::lag_years",
+    "route-independence/settlement_split.py::net_positions",
     "revision-survival/revision_survival.py::delta",
     "routing-data-layer/rate_form.py::sustained_excess",
     "shape-spec-audit/shadow_read.py::outline_area",
@@ -1557,6 +1558,7 @@ def seed():
     _seed_move_set()
     _seed_route_independence()
     _seed_lag_count()
+    _seed_settlement_split()
 
 
 def _irb_effective_origins(coupling):
@@ -1734,6 +1736,37 @@ def _seed_lag_count():
                  "the class carries no lag whatever dates are passed; None, never 1506"),
         ],
         note="FWO-11; the None cases pin absence against a zero lag.",
+    )
+
+
+def _net_positions(claims):
+    """route-independence/settlement_split.py::net_positions, imported.
+    AMENDMENT A-1 section 2 as arithmetic: net[i] = held - owed on a claim
+    matrix. The universal case pins C1 (all zero); the one-against-all case
+    pins the placing party; None pins an empty matrix against a zero list,
+    since [] would read as 'no party owes' where nothing was declared."""
+    import importlib.util
+    path = os.path.join(ROOT, "route-independence", "settlement_split.py")
+    spec = importlib.util.spec_from_file_location("_settlement_split", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.net_positions(claims)
+
+
+def _seed_settlement_split():
+    register(
+        "route-independence/settlement_split.py::net_positions",
+        _net_positions,
+        [
+            case("universal, three parties", ([[0, 1, 1], [1, 0, 1], [1, 1, 0]],), [0, 0, 0],
+                 "held 2, owed 2 for every party by hand: C1"),
+            case("one against two", ([[0, 1, 1], [0, 0, 0], [0, 0, 0]],), [2, -1, -1],
+                 "party 0 holds 2 owes 0; the others hold 0 owe 1"),
+            case("two-way unequal", ([[0, 3], [1, 0]],), [2, -2],
+                 "3 - 1 and 1 - 3 by hand; a net that is not zero on a two-party instrument"),
+            case("empty", ([],), None, "no matrix, no positions; None never []"),
+        ],
+        note="AMENDMENT A-1; the empty case pins None against a zero-length list.",
     )
 
 

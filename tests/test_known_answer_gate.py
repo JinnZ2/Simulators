@@ -69,6 +69,7 @@ MANIFEST = (
     "move-set/move_set_sim_v2.py::_halfwidth",
     "route-independence/route_independence.py::independence_ratio",
     "route-independence/lag_count.py::lag_years",
+    "route-independence/settlement_split.py::net_positions",
     "revision-survival/revision_survival.py::delta",
     "additivity-inheritance/additivity_inheritance.py::interaction_ss",
     "credential-channel/credential_channel.py::routing_cost",

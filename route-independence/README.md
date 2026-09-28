@@ -353,3 +353,40 @@ Commands:
 python3 route-independence/test_single_channel.py     # prints the count and the fail-fixture line
 python3 route-independence/edge_taxonomy.py           # and each of the other five modules; --choices on each
 ```
+
+# AMENDMENT A-1 of 2026-09-28 — settlement vs gate-removal
+
+`AMENDMENT_A1_2026-09-28_settlement-vs-gate.md` verbatim; its section 5 is
+the EXPECTED block and the file was committed alone at `bacaeab` before any
+code. `settlement_split.py` extends FWO-5 and FWO-8 and rebuilds neither;
+`test_settlement_split.py` prints its count. `CLAIM_TABLE.md` RIN_058..066.
+
+```
+STATE   built and run; render recorded under samples/
+        key-holder rules: 1 met (bacaeab); 3 met (F-A3 as designated, and a
+        constructed three-case fail fixture); 2 unmet everywhere -- every
+        origin, split and token declaration is this session's reading.
+        Two of three registered expectations FAILED and are reported first.
+```
+
+| expectation | result | where |
+|---|---|---|
+| E-A2 unamended FWO-5 forces a settlement reading on F-A3 | **REFUTED**: none/none reads INDEPENDENT, obligation `none`. The meld is real and sits on F-A1 / F-A2, which FWO-5 reads identically on every derived field | RIN_058 |
+| E-A3 case (b) at two hops returns no INDEPENDENT | **REFUTED on the case**: the preprint deposit survives (token NONE); HELD on the citation route, which converts at hop 2 by the carried chain | RIN_059 |
+| E-A1 majority CONSTRUCTED; 2 of 3 cases with zero BIOLOGICAL | HELD (1, 3) — 23 of 24 decided rows CONSTRUCTED; a 1, b 0, c 0; ten routes UNDECIDED because the vocabulary has no member for a route with no obligation off the biological list | RIN_060, RIN_061 |
+
+What the split adds: `obligation_origin`, `settles_claim`, `removes_gate` on a
+copy of every FWO-5 route, UNDECIDED unscorable, the two halves never combined
+(AST-asserted); `token_type` / `converts_to` / `hops_to_monetary` with a
+per-horizon reading where UNMEASURED hops never read INDEPENDENT (F-A4);
+section 2's symmetry argument as `net_positions`, registered in
+`tools/known_answer.py`. The one BOTH row in the corpus is the property tax
+on the land one lives on — a placed claim standing on shelter — which is the
+amendment's C2 as a record.
+
+```
+AMENDMENT_A1_2026-09-28_settlement-vs-gate.md   verbatim (EXPECTED at bacaeab)
+settlement_split.py                             the instrument
+test_settlement_split.py                        checks; prints its count
+samples/settlement_split.sample.txt             the recorded render
+```

@@ -114,3 +114,12 @@ carries instead:
 Carried question 5 was answered from this clone's own history after
 `git fetch --unshallow origin` (236 → 894 commits), which is the one fetch
 made: the losing-parent blobs at `8d9b6c9^2`, `2c68758^1` and `83bb7d9^1`.
+
+## Amendment A-1 of 2026-09-28
+
+Nothing fetched. Inputs are FWO-5's three cases (CONSTRUCTED / CARRIED, above)
+and the amendment's own fixtures, each labelled CONSTRUCTED in its source
+field. The case-(b) token chain (citation → credential → funding) is CARRIED
+from the amendment's own text and is a declaration, not an observation of any
+conversion. The symmetry argument is arithmetic on the premise as the
+amendment states it and rests on no source.
