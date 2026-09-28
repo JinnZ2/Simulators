@@ -429,3 +429,40 @@ gate_state.py                           the instrument
 test_gate_state.py                      checks; prints its count
 samples/gate_state.sample.txt           the recorded render
 ```
+
+# AMENDMENT A-2.1 of 2026-09-28 — source upgrades and fixture corrections
+
+`AMENDMENT_A2.1_2026-09-28_source-upgrades.md` verbatim; its section 5 is the
+EXPECTED block and the file was committed alone at `09774de` before any code.
+`gate_state_a21.py` extends `gate_state.py` and rebuilds nothing: every row goes
+through A-2's `gate()` with A-2.1's source table passed in, and A-2's four
+expectations are re-run over the corrected rows. `CLAIM_TABLE.md` RIN_077..086.
+
+```
+STATE   built and run; render recorded under samples/
+        key-holder rules: 1 met (09774de); 3 met (A-2's F-W3 row as written,
+        CONFLICT beside the corrected Utah pair); 2 met at grade P by the
+        amendment's author for W-1a / W-2a, CARRIED here unread.
+        Both registered rows MATCH; one clause of E-A2.1-2 corrected (Utah
+        moves None -> P, not S -> P).
+```
+
+| expectation | result | where |
+|---|---|---|
+| E-A2.1-1 rainwater at 2026: CO METERED_PERMISSION (P), UT by container size (P), TX UNKNOWN; OPEN nowhere sourced, reported UNMEASURED_OPEN | HELD(P) | RIN_077 |
+| E-A2.1-2 E-A2-3 hold count unchanged; rainwater grade S → P for CO and UT | HELD(S): CO S → P; UT None → P (no in-force row under A-2) | RIN_078 |
+
+What the corrections showed: a corrected from-state removes a direction — the
+Colorado event goes from LOOSENING at S to UNKNOWN_DIRECTION at P (RIN_080);
+the `condition` field is what separates BY_CONDITION from CONFLICT (RIN_081);
+section 3's fields are carried PROPOSED and not built (RIN_082); section 4's
+statutes are in the table and refused as gate sources (RIN_083). The A-2
+module took additive parameters only and its sample moved by one note line
+(RIN_084).
+
+```
+AMENDMENT_A2.1_2026-09-28_source-upgrades.md   verbatim (EXPECTED at 09774de)
+gate_state_a21.py                               the instrument
+test_gate_state_a21.py                          checks; prints its count
+samples/gate_state_a21.sample.txt               the recorded render
+```

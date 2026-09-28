@@ -176,9 +176,10 @@ def at(row, t):
 
 # ---------------------------------------------------------------- sources ---
 
-def hold_grade(source_id):
-    """P or S for a source a hold may rest on; None for grade K (excluded) or unknown."""
-    src = SOURCES.get(source_id)
+def hold_grade(source_id, sources=None):
+    """P or S for a source a hold may rest on; None for grade K (excluded) or unknown.
+    `sources` is the table to read (default SOURCES); A-2.1 passes its upgraded one."""
+    src = (SOURCES if sources is None else sources).get(source_id)
     if src is None:
         return None
     g = src["grade"]
@@ -201,13 +202,17 @@ def weakest(grades):
 # ------------------------------------------------------------------- rows ---
 
 def gate(route, route_id, jurisdiction, t_from, t_to, gate_state, gate_instrument, gate_source,
-         requirement=None, tag=None, note=""):
+         requirement=None, tag=None, note="", condition=None, sources=None):
     """Give a COPY of an FWO-5 / A-1 route the amendment's gate fields.
 
     jurisdiction is required; a row tagged CONSTRUCTED_UNSOURCED or declared UNKNOWN may
-    carry gate_source None; every other row names a section-2 source.
+    carry gate_source None; every other row names a source in `sources` (default the
+    section-2 table).  A source carrying `input: False` is refused as a gate_source.
+    `condition` (A-2.1) names a sub-condition under which the row holds, so two rows of
+    one route may be in force at once and read BY_CONDITION rather than CONFLICT.
     """
     name = route["route"]
+    table = SOURCES if sources is None else sources
     if not isinstance(route_id, str) or not route_id:
         raise GateError("route_id is required on %r" % name)
     if not isinstance(jurisdiction, str) or not jurisdiction.strip():
@@ -223,8 +228,13 @@ def gate(route, route_id, jurisdiction, t_from, t_to, gate_state, gate_instrumen
         if gate_state != UNKNOWN_STATE and tag != CONSTRUCTED_UNSOURCED:
             raise GateError("gate_source is required on %r unless gate_state is UNKNOWN or the row is tagged %s"
                             % (name, CONSTRUCTED_UNSOURCED))
-    elif gate_source not in SOURCES:
-        raise GateError("gate_source on %r is a section-2 id %s; got %r" % (name, sorted(SOURCES), gate_source))
+    elif gate_source not in table:
+        raise GateError("gate_source on %r is a section-2 id %s; got %r" % (name, sorted(table), gate_source))
+    elif table[gate_source].get("input") is False:
+        raise GateError("gate_source %r on %r is recorded and NOT adopted as input; read the text before a fixture uses it"
+                        % (gate_source, name))
+    if condition is not None and (not isinstance(condition, str) or not condition.strip()):
+        raise GateError("condition on %r is a non-empty string or None" % name)
     if requirement is not None and requirement not in REQUIREMENTS:
         raise GateError("requirement on %r is one of %s or None; got %r" % (name, REQUIREMENTS, requirement))
     out = dict(route)
@@ -234,11 +244,12 @@ def gate(route, route_id, jurisdiction, t_from, t_to, gate_state, gate_instrumen
     out["gate_state"] = gate_state
     out["gate_instrument"] = gate_instrument
     out["gate_source"] = gate_source
-    out["gate_grade"] = None if gate_source is None else SOURCES[gate_source]["grade"]
+    out["gate_grade"] = None if gate_source is None else table[gate_source]["grade"]
     out["gate_tag"] = tag
     out["requirement"] = requirement
     out["gate_note"] = note
-    out["hold_eligible"] = (tag is None and gate_source is not None and hold_grade(gate_source) is not None)
+    out["condition"] = condition
+    out["hold_eligible"] = (tag is None and gate_source is not None and hold_grade(gate_source, table) is not None)
     return out
 
 
@@ -270,6 +281,9 @@ def reading_at(rows, route_id, jurisdiction, t):
             return (gate_reading(no_t[0]), no_t[0])   # 3a: a row with no t reads UNKNOWN, at every t
         return ("NO_ROW_AT_T", None)
     if len(hits) > 1:
+        conds = [r.get("condition") for r in hits]
+        if all(c is not None for c in conds) and len(set(conds)) == len(conds):
+            return ("BY_CONDITION", dict((r["condition"], gate_reading(r)) for r in hits))
         return ("CONFLICT", hits)
     return (gate_reading(hits[0]), hits[0])
 
@@ -280,8 +294,17 @@ def separating_fields(a, b):
 
 
 READING_FIELDS = ("gate_state",)
-INDEX_FIELDS = ("t_from", "t_to", "jurisdiction")
+INDEX_FIELDS = ("t_from", "t_to", "jurisdiction", "condition")
 LABEL_FIELDS = ("gate_instrument", "gate_source", "gate_grade", "gate_note", "hold_eligible", "route_id")
+PROVENANCE_FIELDS = ("source", "origin_basis")   # FWO-5 / A-1 provenance strings; not a reading
+GATE_KEYS = ("route_id", "jurisdiction", "t_from", "t_to", "gate_state", "gate_instrument", "gate_source",
+             "gate_grade", "gate_tag", "requirement", "gate_note", "condition", "hold_eligible")
+
+
+def ungated(row):
+    """The row as FWO-5 + A-1 returned it, the gate fields removed: what the unamended
+    code holds for it."""
+    return dict((k, v) for k, v in row.items() if k not in GATE_KEYS)
 
 
 # ----------------------------------------------------------------- events ---
@@ -302,9 +325,10 @@ def direction(from_state, to_state):
     return "LATERAL"
 
 
-def event(route_id, jurisdiction, date, instrument, from_state, to_state, source, note=""):
+def event(route_id, jurisdiction, date, instrument, from_state, to_state, source, note="", sources=None):
     """One gate_change_events row.  Grade is read from the source table; K is stored and
     flagged and never enters a hold.  date None is an UNDATED event, flagged."""
+    table = SOURCES if sources is None else sources
     for nm, v in (("route_id", route_id), ("jurisdiction", jurisdiction)):
         if not isinstance(v, str) or not v:
             raise GateError("%s is required on an event" % nm)
@@ -316,8 +340,8 @@ def event(route_id, jurisdiction, date, instrument, from_state, to_state, source
     d = _date(date, "date", route_id)
     if source == CONSTRUCTED_UNSOURCED:
         grade = None
-    elif source in SOURCES:
-        grade = SOURCES[source]["grade"]
+    elif source in table:
+        grade = table[source]["grade"]
     else:
         raise GateError("source on event %r is a section-2 id or %s; got %r" % (route_id, CONSTRUCTED_UNSOURCED, source))
     return {
@@ -587,24 +611,60 @@ def per_jurisdiction(rows, t, requirements=REQUIREMENTS):
         routes = {}
         for rid in sorted(set(r["route_id"] for r in rs)):
             jurs = sorted(set(r["jurisdiction"] for r in rs if r["route_id"] == rid))
-            readings = dict((j, reading_at(rs, rid, j, t)[0]) for j in jurs)
-            opens = [j for j in jurs if is_open(readings[j])]
-            known = [j for j in jurs if readings[j] not in (UNKNOWN_STATE, "NO_ROW", "NO_ROW_AT_T", "CONFLICT")]
+            readings = {}
+            for j in jurs:
+                st, payload = reading_at(rs, rid, j, t)
+                readings[j] = payload if st == "BY_CONDITION" else st   # a dict per sub-condition (A-2.1)
+            opens = [j for j in jurs if _reading_open(readings[j])]
+            known = [j for j in jurs if _reading_known(readings[j])]
             if len(opens) == len(jurs):
                 v = "OPEN_IN_ALL"
             elif opens:
                 v = "OPEN_IN_SOME"
             else:
                 v = "OPEN_IN_NONE"
+            # grade per jurisdiction is read off the rows IN FORCE at t (A-2.1: a row that
+            # governed an earlier interval does not set the grade of a later reading)
+            gbj = {}
+            for j in jurs:
+                inforce = [r for r in rs if r["route_id"] == rid and r["jurisdiction"] == j and at(r, t) and r["hold_eligible"]]
+                gbj[j] = weakest([hold_grade(r["gate_source"], _table_of(r)) for r in inforce])
+            # A-2.1: no sourced OPEN row is not evidence of closure
+            if v == "OPEN_IN_NONE":
+                open_status = "OPEN_IN_NONE_MEASURED" if len(known) == len(jurs) else "UNMEASURED_OPEN"
+            else:
+                open_status = v
             routes[rid] = {"readings": readings, "verdict": v, "open_in": opens,
                            "known_jurisdictions": known,
                            "verdict_over_known": ("OPEN_IN_ALL" if known and len(opens) == len(known)
                                                   else ("OPEN_IN_SOME" if opens else "OPEN_IN_NONE")),
-                           "hold_eligible": all(r["hold_eligible"] for r in rs if r["route_id"] == rid),
-                           "grade": weakest([hold_grade(r["gate_source"]) for r in rs
-                                             if r["route_id"] == rid and r["hold_eligible"]])}
+                           "hold_eligible": all(r["hold_eligible"] for r in rs if r["route_id"] == rid and at(r, t)),
+                           "grade": weakest([g for g in gbj.values() if g]),
+                           "grade_by_jurisdiction": gbj, "open_status": open_status}
         out[req] = {"verdict": "EVALUATED", "routes": routes}
     return out
+
+
+def _table_of(row):
+    """The source table a row was built against: the default unless the row's source id is
+    absent from it, in which case the row carries its grade and the grade decides."""
+    if row.get("gate_source") in SOURCES:
+        return None
+    return {row["gate_source"]: {"grade": row["gate_grade"]}}
+
+
+def _reading_open(reading):
+    """A jurisdiction reads open only when its reading is OPEN, or every sub-condition of a
+    BY_CONDITION reading is OPEN."""
+    if isinstance(reading, dict):
+        return bool(reading) and all(is_open(v) for v in reading.values())
+    return is_open(reading)
+
+
+def _reading_known(reading):
+    if isinstance(reading, dict):
+        return any(v != UNKNOWN_STATE for v in reading.values())
+    return reading not in (UNKNOWN_STATE, "NO_ROW", "NO_ROW_AT_T", "CONFLICT")
 
 
 def open_in_every_sourced(pj, include_ineligible=False):
@@ -629,31 +689,36 @@ def hold(ok, grades, eligible):
     return "HELD(%s)" % g if ok else "FAILED"
 
 
-def check_expectations(t="2026", strict_w4=False):
+def check_expectations(t="2026", strict_w4=False, rows_in=None, pair=None):
     """The amendment's section 5, computed.  Returns rows (label, verdict, hold, note);
-    the render prints MISMATCH rows first (rule 4)."""
+    the render prints MISMATCH rows first (rule 4).  rows_in / pair let A-2.1 re-run the
+    same four checks over its corrected fixtures; the defaults are A-2's own."""
     rows = []
     # E-A2-1
-    a, b = unamended_pair()
-    w1, w2 = fixture_f_w1(), fixture_f_w2()
+    w1, w2 = pair if pair is not None else (fixture_f_w1(), fixture_f_w2())
+    a, b = ungated(w1), ungated(w2)
+    derived_same = S.unamended_reading(a) == S.unamended_reading(b)
     sep = separating_fields(w1, w2)
     on_reading = [k for k in sep if k in READING_FIELDS]
-    outside = [k for k in sep if k not in READING_FIELDS + INDEX_FIELDS + LABEL_FIELDS]
+    outside = [k for k in sep if k not in READING_FIELDS + INDEX_FIELDS + LABEL_FIELDS + PROVENANCE_FIELDS]
+    prov = [k for k in sep if k in PROVENANCE_FIELDS]
     elig = w1["hold_eligible"] and w2["hold_eligible"]
+    grades = [hold_grade(w1["gate_source"], _table_of(w1)), hold_grade(w2["gate_source"], _table_of(w2))]
     ok1_literal = (a == b) and sep == ["gate_state"]
     rows.append(("E-A2-1 (literal) the amended records differ on gate_state ALONE",
-                 ok1_literal, hold(ok1_literal, [hold_grade("W-1")], elig),
+                 ok1_literal, hold(ok1_literal, grades, elig),
                  "they differ on %s: t_from/t_to are the index the prediction itself names ('only t differs'), and the "
                  "instrument label differs because the regime before HB 16-1005 and HB 16-1005 are two instruments" % sep))
-    ok1 = (a == b) and on_reading == ["gate_state"] and not outside and gate_reading(w1) != gate_reading(w2)
+    ok1 = derived_same and on_reading == ["gate_state"] and not outside and gate_reading(w1) != gate_reading(w2)
     rows.append(("E-A2-1 (reading) unamended code returns one record for F-W1 and F-W2; the amended READING parts on gate_state alone",
-                 ok1, hold(ok1, [hold_grade("W-1")], elig),
-                 "unamended identical %s; reading fields that differ: %s; fields outside reading/index/label: %s"
-                 % (a == b, on_reading, outside or "[]")))
+                 ok1, hold(ok1, grades, elig),
+                 "unamended: whole record identical %s, every FWO-5-derived field identical %s (provenance fields differing: %s); "
+                 "reading fields that differ: %s; fields outside reading/index/label/provenance: %s"
+                 % (a == b, derived_same, prov or "[]", on_reading, outside or "[]")))
     # E-A2-2
     ev = events_declared()
     g_ev = [e for e in ev if e["route_id"] == "gleaning" and e["jurisdiction"] == "England"]
-    frow = fixture_rows(strict_w4)
+    frow = fixture_rows(strict_w4) if rows_in is None else rows_in
     rc_before, rc_after = route_count(frow, "England", "1700"), route_count(frow, "England", t)
     tl = tally_events(ev, jurisdiction="England")
     one_event = len(g_ev) == 1

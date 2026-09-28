@@ -68,7 +68,7 @@ every source CARRIED from the amendment's section 2 at its stated grade; nothing
 expected MISMATCH FAILED                                 E-A2-1 (literal) the amended records differ on gate_state ALONE
          they differ on ['gate_instrument', 'gate_note', 'gate_state', 't_from', 't_to']: t_from/t_to are the index the prediction itself names ('only t differs'), and the instrument label differs because the regime before HB 16-1005 and HB 16-1005 are two instruments
 expected MATCH    HELD(S)                                E-A2-1 (reading) unamended code returns one record for F-W1 and F-W2; the amended READING parts on gate_state alone
-         unamended identical True; reading fields that differ: ['gate_state']; fields outside reading/index/label: []
+         unamended: whole record identical True, every FWO-5-derived field identical True (provenance fields differing: []); reading fields that differ: ['gate_state']; fields outside reading/index/label/provenance: []
 expected MATCH    HELD(S)                                E-A2-2 F-G1 -> F-G2 registers as one change event OPEN -> DISCRETIONARY, not as route absence
          route count England: 1700 -> 1, 2026 -> 1 (the count does not move); closures counted: 1
 expected MATCH    HELD(S)                                E-A2-3 at t=2026 no subsistence route reads OPEN in every sourced jurisdiction (per jurisdiction, not pooled)

@@ -14054,12 +14054,32 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   medium, `RIN_061` narrowed (`RIN_072`); F-A3 retired, kept, tagged
   CONSTRUCTED_UNSOURCED, reading UNKNOWN (`RIN_074`); every source CARRIED,
   the HB 16-1005 date verification NOT_RUN, the G-2 court conflict carried open
-  (`RIN_073`). Seventy-six `RIN_*` claims;
+  (`RIN_073`). **AMENDMENT A-2.1** then landed verbatim (EXPECTED at `09774de`),
+  upgrading W-1 and W-2 to P by the author's own read and correcting three of
+  A-2's fixture rows — F-W1's instrument (the prior appropriation doctrine,
+  not a statute; split at 2009 with the middle interval UNKNOWN until the 2009
+  bill is sourced), F-W3's content (100 gal is per container, not a total;
+  split into a `condition`-keyed pair reading BY_CONDITION rather than
+  CONFLICT), F-W4's OPEN (a claim of absence, UNKNOWN until an agency
+  statement is attached, superseding A-2's [CHOICE 6]). `gate_state_a21.py`
+  extends A-2 through additive parameters (`sources=`, `condition=`) and both
+  registered rows HELD: rainwater at 2026 CO METERED_PERMISSION (P) / UT by
+  container size (P) / TX UNKNOWN, reported **UNMEASURED_OPEN and not
+  closure** (`RIN_077`); the E-A2-3 hold unchanged with Colorado's grade S → P
+  and Utah's **None → P**, the amendment's own "S -> P for UT" corrected since
+  A-2 had no in-force Utah row (`RIN_078`). A corrected from-state removes a
+  direction — the Colorado event goes LOOSENING at S to UNKNOWN_DIRECTION at P
+  (`RIN_080`); section 3's `access_is_right` / `revocable_by` carried PROPOSED
+  and NOT BUILT with the amendment's question unanswered (`RIN_082`); section
+  4's statutes recorded and refused as gate sources (`RIN_083`); the A-2
+  sample moved by exactly one note line (`RIN_084`). Eighty-six `RIN_*`
+  claims;
   check counts printed by `python3 route-independence/test_route.py`,
   `python3 route-independence/test_dependency_chain.py`,
   `python3 route-independence/test_single_channel.py`,
-  `python3 route-independence/test_settlement_split.py` and
-  `python3 route-independence/test_gate_state.py`, the last three also
+  `python3 route-independence/test_settlement_split.py`,
+  `python3 route-independence/test_gate_state.py` and
+  `python3 route-independence/test_gate_state_a21.py`, the last four also
   printing the fail-fixture line. Stdlib only,
   parses under 3.9, phone-buildable, CC0.
 - `custody-verification-band/` — Marker under exploration. Criterion: a layer

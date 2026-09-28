@@ -137,3 +137,16 @@ delivered, verification NOT_RUN. The G-2 court conflict is recorded in
 `SOURCES["G-2"]["conflict"]` with Common Pleas carried and `resolved: False`.
 The constructed all-OPEN fail fixture is labelled CONSTRUCTED_UNSOURCED in its
 source field and its tag.
+
+## Amendment A-2.1 of 2026-09-28
+
+Nothing fetched. Two sources are upgraded to P by the amendment's author and
+CARRIED here at P unread: W-1a (the signed HB 16-1005 text at
+content.leg.colorado.gov, effective 2016-08-10 conditional on sine die
+2016-05-11, the condition confirmed by the CO Division of Real Estate 2016
+Annual Report) and W-2a (UT SB 32 (2010) enacting Utah Code 73-3-1.5 at year
+precision, plus the 2022 codification's container rule). Two sources are
+recorded at S with `input: False` and refused as any row's gate_source until
+read: UT 73-2-27 and UT 73-1-1. The 2009 Colorado bill and the Texas
+agency/attorney-general statement are named as NOT sourced; the rows that
+would rest on them read UNKNOWN.
