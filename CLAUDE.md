@@ -14393,14 +14393,36 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   (`RIN_080`); section 3's `access_is_right` / `revocable_by` carried PROPOSED
   and NOT BUILT with the amendment's question unanswered (`RIN_082`); section
   4's statutes recorded and refused as gate sources (`RIN_083`); the A-2
-  sample moved by exactly one note line (`RIN_084`). Eighty-six `RIN_*`
-  claims;
+  sample moved by exactly one note line (`RIN_084`). **AMENDMENT A-3
+  (2026-09-28, thermal regulation)** then landed verbatim (EXPECTED at
+  `87f83ce`); `thermal_gates.py` extends A-2 and A-2.1 by import and makes the
+  ACTUATOR the unit, its state the ordered SERIES of its gates (same order
+  number = alternatives), never one state; direction is never pooled
+  (`DirectionPooled` at run time, an AST scan with a planted violation), and a
+  gate reaches another stock only through a declared coupling row, the ACTUATOR
+  and SENSOR fault classes kept apart. **One prediction REFUTED, reported
+  first**: E-A3-1's literal "4-gate series" — F-T4's fuel position is
+  "purchase OR permit", 5 gates in 4 positions (`RIN_087`); its reading and
+  E-A3-5 HELD as instrument properties (`RIN_088`, `RIN_093`). E-A3-2a, -3, -4
+  and -6 are NOT_EVALUABLE: T-1..T-9 are named and not landed, every fixture is
+  grade K, the sourced set is empty. Over the K rows 6 of 50 (jurisdiction,
+  external actuator) cells carry a gate and 44 are UNSEARCHED, clothing RETAIN
+  (the order's likely falsifier) has no fixture, and each falsifier is shown
+  reachable on a constructed row (`RIN_089`, `RIN_091`, `RIN_092`); section 2d
+  and E-A3-2a's own list define non-market differently and part on
+  METERED_TOKEN, a third state neither the prediction nor its falsifier names
+  (`RIN_090`); E-A3-2's market-purchase weakness recurs unstated in E-A3-3
+  (`RIN_091`); the seed's BOTH is not a direction and would itself be a pooled
+  value (`RIN_095`); A-2.1's fields are BUILT and filled on 0 of 14 rows, with
+  `revocable_by None` reading both "no office" and "not recorded" (`RIN_096`).
+  Ninety-seven `RIN_*` claims;
   check counts printed by `python3 route-independence/test_route.py`,
   `python3 route-independence/test_dependency_chain.py`,
   `python3 route-independence/test_single_channel.py`,
   `python3 route-independence/test_settlement_split.py`,
-  `python3 route-independence/test_gate_state.py` and
-  `python3 route-independence/test_gate_state_a21.py`, the last four also
+  `python3 route-independence/test_gate_state.py`,
+  `python3 route-independence/test_gate_state_a21.py` and
+  `python3 route-independence/test_thermal_gates.py`, the last five also
   printing the fail-fixture line. Stdlib only,
   parses under 3.9, phone-buildable, CC0.
 - `custody-verification-band/` — Marker under exploration. Criterion: a layer

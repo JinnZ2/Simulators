@@ -466,3 +466,51 @@ gate_state_a21.py                               the instrument
 test_gate_state_a21.py                          checks; prints its count
 samples/gate_state_a21.sample.txt               the recorded render
 ```
+
+# AMENDMENT A-3 of 2026-09-28 — thermal regulation: actuators, stacked gates, direction, condition index, cross-stock coupling
+
+`AMENDMENT_A3_2026-09-28_thermal.md` verbatim; its section 6 is the EXPECTED
+block and the file was committed alone at `87f83ce` before any code.
+`thermal_gates.py` extends A-2 and A-2.1 by import: dates, in-force intervals,
+gate states and the hold rule are A-2's, and A-2.1's PROPOSED `access_is_right`
+/ `revocable_by` are built here. The unit is the ACTUATOR, and its state at
+(jurisdiction, t, condition) is the ordered SERIES of its gates, never one
+state. `CLAIM_TABLE.md` RIN_087..097.
+
+```
+actuator ---- gate(order 1) -- gate(order 2) -- ... -- gate(order n)
+               same order number = alternatives; different orders = in series
+stock A ---- coupling row ----> stock B      (the only route across stocks)
+gate  = ACTUATOR fault        coupling SENSOR_CORRUPTED = SENSOR fault   (never merged)
+direction: one input = one direction; DirectionPooled otherwise; AST-scanned (2e)
+```
+
+```
+STATE   built and run; render recorded under samples/
+        key-holder rules: 1 met (87f83ce); 3 met (two fail fixtures);
+        2 UNMET on every row: T-1..T-9 named, not landed, grade K.
+        Every expectation about the sourced set reads NOT_EVALUABLE on an
+        empty set; the K-row reading is printed beside it, hold-ineligible.
+```
+
+| expectation | result | where |
+|---|---|---|
+| E-A3-1 (literal) F-T4 is a 4-gate series | **REFUTED**: 5 gates in 4 positions (the fuel position is purchase OR permit) | RIN_087 |
+| E-A3-2a every external actuator carries >= 1 non-market gate | NOT_EVALUABLE; K: 6 of 50 cells gated, 44 UNSEARCHED, clothing RETAIN has no fixture; 2d and E-A3-2a's list part on METERED_TOKEN | RIN_089, RIN_090 |
+| E-A3-3 HEAT_IN and HEAT_OUT instruments disjoint | NOT_EVALUABLE; K disjoint; market purchase would sit on both sides by definition (weakness unstated in the order) | RIN_091 |
+| E-A3-4 residue holds BODY actuators only | NOT_EVALUABLE; K: huddling only, residue entered only by declaration | RIN_092 |
+| E-A3-6 burn ban during a cold event | NOT_EVALUABLE, registered open | RIN_094 |
+| E-A3-1 (reading) unamended collapses F-T4 and accepts pooled input; amended does neither | HELD (instrument) | RIN_088 |
+| E-A3-5 F-T1 reaches WATER only via the coupling row | HELD (instrument) | RIN_093 |
+
+Also recorded: the seed's BOTH is not a direction and would itself be a pooled
+value (RIN_095); A-2.1's fields are built and filled on 0 of 14 rows, and
+`revocable_by None` reads both "no office" and "not recorded" (RIN_096); locus
+remapping moves no verdict (RIN_097).
+
+```
+AMENDMENT_A3_2026-09-28_thermal.md   verbatim (EXPECTED at 87f83ce)
+thermal_gates.py                     the instrument
+test_thermal_gates.py                checks; prints its count and 2 of 2 fail fixtures
+samples/thermal_gates.sample.txt     the recorded render
+```
