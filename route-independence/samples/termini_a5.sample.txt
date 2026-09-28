@@ -1,0 +1,82 @@
+termini_a5 -- AMENDMENT A-5 over FWO-5 / FWO-8 / A-4: resolved termini, branch re-read, layers
+EXPECTED registered at 488fe1a; CS-R and CS-A NOT_EVALUABLE (no source read); CS-G is K throughout
+
+-- expected (section 5), MISMATCH rows first, then NOT_EVALUABLE
+expected MISMATCH      E-A5-1 (LITERAL)             falsifier fires on ['FOOD', 'SHELTER', 'THERMAL', 'WATER']; per need {'WATER': 4, 'FOOD': 1, 'THERMAL': 1, 'SHELTER': 1}
+         hold: K rows, hold-ineligible; coverage 0/11 chains sourced
+expected MISMATCH      E-A5-1 (PATH_STRICT)         falsifier fires on ['SHELTER']; per need {'WATER': 0, 'FOOD': 0, 'THERMAL': 0, 'SHELTER': 1}
+         hold: K rows, hold-ineligible; coverage 0/11 chains sourced
+expected MISMATCH      E-A5-1 (PATH_UPPER)          falsifier fires on ['FOOD', 'SHELTER', 'WATER']; per need {'WATER': 1, 'FOOD': 1, 'THERMAL': 0, 'SHELTER': 1}
+         hold: K rows, hold-ineligible; coverage 0/11 chains sourced
+expected MISMATCH      E-A5-1 (LAWFUL_UPPER)        falsifier fires on ['FOOD']; per need {'WATER': 0, 'FOOD': 1, 'THERMAL': 0, 'SHELTER': 0}
+         hold: K rows, hold-ineligible; coverage 0/11 chains sourced
+expected MISMATCH      E-A5-4 (with hops)           0 of 12 FWO-5 INDEPENDENT routes reclassified: []
+         hold: INSTRUMENT; coverage 1/12 INDEPENDENT routes carry a declared token
+expected NOT_EVALUABLE E-A5-2                       CS-R: 3 sources named, none read (no source read; CONNECT refused at 2026-09-28T13:14:37Z (ecfr.gov, leg.colorado.gov, law.cornell.edu)); beside it, uninterpreted, CS-G steps per chain {'WATER': [7, 7, 8, 4], 'FOOD': [2], 'THERMAL': [1, 3], 'SHELTER': [3]} and layer mix {'WATER': {'COUNTY': 3, 'FEDERAL': 4, 'MUNICIPAL': 1, 'NOT_RECORDED': 7, 'STATE': 3}, 'FOOD': {'NOT_RECORDED': 1}, 'THERMAL': {'COUNTY': 1, 'FEDERAL': 2, 'STATE': 1}, 'SHELTER': {'MUNICIPAL': 1, 'NOT_RECORDED': 1}}
+         hold: coverage 0/3 CS-R sources read
+expected NOT_EVALUABLE E-A5-3                       CS-A: 4 sources named, none read (no source read; CONNECT refused at 2026-09-28T13:14:37Z (ecfr.gov, leg.colorado.gov, law.cornell.edu)); beside it, uninterpreted, CS-G steps per chain {'WATER': [7, 7, 8, 4], 'FOOD': [2], 'THERMAL': [1, 3], 'SHELTER': [3]} and layer mix {'WATER': {'COUNTY': 3, 'FEDERAL': 4, 'MUNICIPAL': 1, 'NOT_RECORDED': 7, 'STATE': 3}, 'FOOD': {'NOT_RECORDED': 1}, 'THERMAL': {'COUNTY': 1, 'FEDERAL': 2, 'STATE': 1}, 'SHELTER': {'MUNICIPAL': 1, 'NOT_RECORDED': 1}}
+         hold: coverage 0/4 CS-A sources read
+expected MATCH         E-A5-1 (LAWFUL_STRICT)       falsifier silent; per need {'WATER': 0, 'FOOD': 0, 'THERMAL': 0, 'SHELTER': 0}
+         hold: K rows, hold-ineligible; coverage 0/11 chains sourced
+expected MATCH         E-A5-4 (without hops)        1 of 12 FWO-5 INDEPENDENT routes reclassified: [('open dataset; obligation', 'BRANCH_OF(licensed database)')]
+         hold: INSTRUMENT; coverage 1/12 INDEPENDENT routes carry a declared token
+
+-- CS-G terminus kinds per need (unit: kinds) [CHOICE 52]
+   WATER    3 with hops [('BODY', None, None), ('NOT_RECORDED', None, None), ('TOKEN', 'MONETARY', 0)]; 3 without
+   FOOD     1 with hops [('NOT_RECORDED', None, None)]; 1 without
+   THERMAL  2 with hops [('NOT_RECORDED', None, None), ('TOKEN', 'MONETARY', 0)]; 2 without
+   SHELTER  2 with hops [('BODY', None, None), ('TOKEN', 'MONETARY', 0)]; 2 without
+
+-- nonmonetary_chains per need, five readings [CHOICE 54]
+   WATER    of 4 chains: LITERAL ['F-R1', 'F-R2', 'F-R3', 'F-R4']; PATH_STRICT []; PATH_UPPER ['F-R3']; LAWFUL_STRICT []; LAWFUL_UPPER []; cycles apart []
+   FOOD     of 1 chains: LITERAL ['CH-GLEAN']; PATH_STRICT []; PATH_UPPER ['CH-GLEAN']; LAWFUL_STRICT []; LAWFUL_UPPER ['CH-GLEAN']; cycles apart []
+   THERMAL  of 2 chains: LITERAL ['CH-T4']; PATH_STRICT []; PATH_UPPER []; LAWFUL_STRICT []; LAWFUL_UPPER []; cycles apart []
+   SHELTER  of 1 chains: LITERAL ['CH-SHELTER']; PATH_STRICT ['CH-SHELTER']; PATH_UPPER ['CH-SHELTER']; LAWFUL_STRICT []; LAWFUL_UPPER []; cycles apart []
+   with F-B3 and F-B4 (constructed): FOOD LITERAL ['CH-GLEAN', 'F-B3']; PATH_STRICT ['F-B3']; cycles apart ['F-B4']
+
+-- 2a resolution: F-B2 CRED -> ('TOKEN', 'MONETARY', 2); the cycle pair -> ('CYCLE', ('CYC_A', 'CYC_B', 'CYC_A'))
+
+-- 2c re-read of FWO-5 INDEPENDENT routes [CHOICE 55]
+   with hops     a_household_phenology  instrument         eye and memory                               INDEPENDENT
+   with hops     a_household_phenology  facility_space     own land, occupancy                          INDEPENDENT
+   with hops     a_household_phenology  energy             daylight                                     INDEPENDENT
+   with hops     a_household_phenology  transport          on foot                                      INDEPENDENT
+   with hops     a_household_phenology  labor              own time, no obligation                      INDEPENDENT
+   with hops     a_household_phenology  data_access        own observation                              INDEPENDENT
+   with hops     b_open_access_finding  data_access        open dataset; obligation is citation, discha INDEPENDENT
+   with hops     b_open_access_finding  publication        preprint deposit; no obligation at this hop  INDEPENDENT
+   with hops     c_bitcoin_exit         instrument         own ledger / wallet; holding incurs no oblig INDEPENDENT
+   with hops     c_bitcoin_exit         energy             network fee, paid in bitcoin to whoever incl INDEPENDENT
+   with hops     c_bitcoin_exit         labor              own time                                     INDEPENDENT
+   with hops     c_bitcoin_exit         data_access        public chain                                 INDEPENDENT
+   without hops  a_household_phenology  instrument         eye and memory                               INDEPENDENT
+   without hops  a_household_phenology  facility_space     own land, occupancy                          INDEPENDENT
+   without hops  a_household_phenology  energy             daylight                                     INDEPENDENT
+   without hops  a_household_phenology  transport          on foot                                      INDEPENDENT
+   without hops  a_household_phenology  labor              own time, no obligation                      INDEPENDENT
+   without hops  a_household_phenology  data_access        own observation                              INDEPENDENT
+   without hops  b_open_access_finding  data_access        open dataset; obligation is citation, discha BRANCH_OF(licensed database)
+   without hops  b_open_access_finding  publication        preprint deposit; no obligation at this hop  INDEPENDENT
+   without hops  c_bitcoin_exit         instrument         own ledger / wallet; holding incurs no oblig INDEPENDENT
+   without hops  c_bitcoin_exit         energy             network fee, paid in bitcoin to whoever incl INDEPENDENT
+   without hops  c_bitcoin_exit         labor              own time                                     INDEPENDENT
+   without hops  c_bitcoin_exit         data_access        public chain                                 INDEPENDENT
+
+-- 2d layer mix per need [CHOICE 56]; COMMUNITY_RULE P reads S
+   WATER    {'COUNTY': 3, 'FEDERAL': 4, 'MUNICIPAL': 1, 'NOT_RECORDED': 7, 'STATE': 3}
+   FOOD     {'NOT_RECORDED': 1}
+   THERMAL  {'COUNTY': 1, 'FEDERAL': 2, 'STATE': 1}
+   SHELTER  {'MUNICIPAL': 1, 'NOT_RECORDED': 1}
+
+-- A-3.1 on section 5
+   E-A5-1   COMPLEMENT   
+   E-A5-2   GAP          ('EQUAL', False), ('NOT_EVALUABLE', False), ('NOT_EVALUABLE', True)
+   E-A5-3   GAP          ('EQUAL', False), ('NOT_EVALUABLE', False), ('NOT_EVALUABLE', True)
+   E-A5-4   COMPLEMENT   
+   quotes found in the amendment: 8/8
+   unit lint: 5 of 5 count tokens outside the A-3.1 list; 3 with '(unit: X)' read; units declared ['chains', 'routes']
+
+fail fixture: F-B1 reads ['INDEPENDENT', 'INDEPENDENT'] under FWO-5 and ['BRANCH_OF(route two: certify, then practise)', 'BRANCH_OF(route one: deposit, then cite)'] under section 2c
+holds: rule 1 met (488fe1a); rule 3 met; rule 2 unmet (CS-G K, CS-R and CS-A unread)
+choices in force: [CHOICE 52], [CHOICE 53], [CHOICE 54], [CHOICE 55], [CHOICE 56], [CHOICE 57], [CHOICE 58]
+execution note: test_chains_a456.py prints the check count; samples/termini_a5.sample.txt is one recorded render, compare before quoting

@@ -172,3 +172,27 @@ EVIDENCE migration rule reads OPEN_ENDED on a t field only where a source text
 records it, and the only such text in the tree is W-2a's "current text (Justia
 2022 codification)", carried from A-2.1 and read by that amendment's author,
 not by this session.
+
+## Amendments A-4, A-5, A-6 of 2026-09-28
+
+Egress probe at 2026-09-28T13:14:37Z: ecfr.gov, leg.colorado.gov and
+law.cornell.edu refused CONNECT (curl exit 56); github.com connected as the
+control. Nothing named in the three amendments was read by this session.
+
+```
+C-1      P, FRAGMENT   Colorado 37-96.5-103 as quoted in A-4; read in part by the
+                       amendment's author; not hold-eligible until read in full
+C-2      S             named by A-4; not an input to any computed reading
+T-10..13 NOT_SOURCED   gates named by A-4; carried as K rows
+A4-1     K             A-4's own statement (STATED_BY_AMENDMENT)
+CS-R     unread        3 sources named by A-5 (enrollment-based set)
+CS-A     unread        4 sources named by A-5 (admission-based set)
+RA-1..5  K NOT_LANDED  25 CFR 83.11, the other-tribe criterion, one
+                       Termination-era act and its restoration act, one nation's
+                       enrollment criteria, one ethnographic conversion figure
+A6-4     K             A-6's own fixture text (STATED_BY_AMENDMENT)
+```
+
+E-A6-3 is not filled from memory, per the amendment. The recognition events on
+CS-R4 (1954 TERMINATED, 1973 RESTORED) are RA-3's structure as the order
+states it, grade K, flagged.

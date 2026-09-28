@@ -1,0 +1,59 @@
+eligibility_a6 -- AMENDMENT A-6 over A-4 / A-5: eligible sets, reachable termini, recognition
+EXPECTED registered at f8f3135; profiles are CONSTRUCTED; every entry rule and every recognition event K
+
+-- expected (section 5); every row NOT_EVALUABLE, the K reading beside it
+expected NOT_EVALUABLE E-A6-1   K reading: eligible_sets(P-3) = 1 case set ['CS-G'], undetermined []; matches the prediction by construction of the fixture
+         hold: entry rules unsourced (RA-4, A-3s not read); coverage 0/4 entry chains sourced
+expected NOT_EVALUABLE E-A6-2   the gap is NOT_EVALUABLE for 5 of 5 profiles on every need: ['CS-A', 'CS-R', 'CS-R4'] carry no kinds until sourced; not filled from CS-G
+         hold: coverage 1/4 case sets built (CS-G)
+expected NOT_EVALUABLE E-A6-3   RA-1 (25 CFR 83.11) not read in full; CONNECT refused 2026-09-28T13:14:37Z (ecfr.gov, law.cornell.edu); github.com connected as the control; not filled from memory
+         hold: coverage 0/1 RA-1 read
+expected NOT_EVALUABLE E-A6-4   K reading at the order's dates [CHOICE 63]: ['CS-G'] at 1954, ['CS-G', 'CS-R4'] at 1973; differ
+         hold: RA-3 grade K; coverage 0/2 events sourced
+
+-- case sets (2a) [CHOICE 61]
+   CS-A   basis COMMUNITY_ADMISSION   entry_condition NOT_RECORDED  acquirable_by_outsider NOT_RECORDED  revocable_by NOT_RECORDED
+   CS-G   basis DEFAULT_RESIDENT      entry_condition NOT_RECORDED  acquirable_by_outsider NOT_RECORDED  revocable_by NOT_RECORDED
+   CS-R   basis ENROLLMENT_BY_NATION  entry_condition NOT_RECORDED  acquirable_by_outsider NOT_RECORDED  revocable_by NOT_RECORDED
+   CS-R4  basis ENROLLMENT_BY_NATION  entry_condition NOT_RECORDED  acquirable_by_outsider NOT_RECORDED  revocable_by Congress (RA-3 structure, K)
+
+-- eligible_sets per constructed profile at 2026 (unit: case sets)
+   P-0  eligible ['CS-G']; undetermined []
+   P-1  eligible ['CS-G', 'CS-R']; undetermined []
+   P-2  eligible ['CS-A', 'CS-G']; undetermined []
+   P-3  eligible ['CS-G']; undetermined []
+   P-4  eligible ['CS-G', 'CS-R4']; undetermined []
+   P-4 at 1954: ['CS-G']; at 1973: ['CS-G', 'CS-R4'] [CHOICE 63]
+
+-- recognition events (A-2 event keys; RA-3, K)
+   recognition:CS-R4 nation 1954 RECOGNIZED->TERMINATED  source RA-3 grade K flagged True
+   recognition:CS-R4 nation 1973 TERMINATED->RESTORED  source RA-3 grade K flagged True
+   2d: NOT_RECORDED
+
+-- section 3: residence_presuming_criteria NOT_EVALUABLE (RA-1 (25 CFR 83.11) not read in full; CONNECT refused 2026-09-28T13:14:37Z (ecfr.gov, law.cornell.edu); github.com connected as the control; not filled from memory)
+   A6-4  K STATED_BY_AMENDMENT A-6 section 4 fixture text
+   RA-1  K NOT_LANDED          25 CFR Part 83, the federal acknowledgment criteria (83.11), to be read in full
+   RA-2  K NOT_LANDED          the criterion on members predominantly members of another acknowledged tribe
+   RA-3  K NOT_LANDED          one Termination-era act and its restoration act (the order's candidate pair: ter
+   RA-4  K NOT_LANDED          one nation's published enrollment criteria
+   RA-5  K NOT_LANDED          an Amish-conversion rate or count from published ethnography
+
+-- consistency check (asserted, not scored)
+   LITERAL        E-A5-1 holds False P-3 reachable nonmonetary per need [4, 1, 1, 1]; implication holds True
+   PATH_STRICT    E-A5-1 holds False P-3 reachable nonmonetary per need [0, 0, 0, 1]; implication holds True
+   PATH_UPPER     E-A5-1 holds False P-3 reachable nonmonetary per need [1, 1, 0, 1]; implication holds True
+   LAWFUL_STRICT  E-A5-1 holds True  P-3 reachable nonmonetary per need [0, 0, 0, 0]; implication holds True
+   LAWFUL_UPPER   E-A5-1 holds False P-3 reachable nonmonetary per need [0, 1, 0, 0]; implication holds True
+
+-- A-3.1 on section 5
+   E-A6-1   GAP          0
+   E-A6-2   GAP          'NOT_EVALUABLE'
+   E-A6-3   GAP          'NOT_EVALUABLE'
+   E-A6-4   COMPLEMENT   
+   quotes found in the amendment: 8/8
+   unit lint: 6 of 6 count tokens outside the A-3.1 list; 3 with '(unit: X)' read; units declared ['case sets', 'criteria', 'profiles']
+
+fail fixture: A-5's pooled FOOD kinds [('NOT_RECORDED', None), ('TOKEN', 'CITATION')]; P-3's reachable kinds [('NOT_RECORDED', None)]; the gap [('TOKEN', 'CITATION')] [CHOICE 64]
+holds: rule 1 met (f8f3135); rule 3 met; rule 2 unmet (RA-1..RA-5 not read)
+choices in force: [CHOICE 59], [CHOICE 60], [CHOICE 61], [CHOICE 62], [CHOICE 63], [CHOICE 64], [CHOICE 65]
+execution note: test_chains_a456.py prints the check count; samples/eligibility_a6.sample.txt is one recorded render, compare before quoting

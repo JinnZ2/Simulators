@@ -14118,15 +14118,37 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   (`RIN_103`). E-A3-3 over non-market instruments (`RIN_105`); absence-bound
   falsifiers read NOT_TESTABLE_AS_POSED, and under EVIDENCE E-A2-3's
   gleaning leg does too (`RIN_106`); coverage beside every hold (`RIN_107`).
-  One hundred and seven `RIN_*` claims;
+  **AMENDMENTS A-4, A-5, A-6 (2026-09-28: routes as chains, terminus
+  diversity, eligibility)** then landed verbatim, each committed alone before
+  code (`e0083e6`, `488fe1a`, `f8f3135`) with the A-3.1 complement check and
+  unit lint recorded in its commit message; `chains_a4.py`, `termini_a5.py`
+  and `eligibility_a6.py` extend the prior modules by import. A route becomes a
+  chain of steps whose requirements resolve to termini (BODY / TOKEN /
+  NOT_RECORDED / CYCLE), lawful and physical reach never merged. **Rows that do
+  not hold, first:** E-A4-1 on own steps is UNMET_UNFALSIFIED (5 gates over 2
+  own steps, land a held resource rather than a step; MATCH at 7 counted
+  through requires; the unamended A-2 route reads 1 gate, the fail fixture,
+  `RIN_108`); E-A5-1's falsifier fires under 4 of 5 declared readings, holding
+  only LAWFUL_STRICT (`RIN_115`); E-A5-4 reclassifies 0 of 12 FWO-5
+  INDEPENDENT routes with hops and 1 without, with 1 of 12 routes declaring a
+  token at all (`RIN_116`). C-1 is a fragment, so E-A4-2 is NOT_EVALUABLE, its
+  lawful FALSE decided by one drinking-water restriction (`RIN_109`); E-A4-5
+  holds on K rows and its closure measure undercounts, since a chain already
+  lawful FALSE cannot register a closure (`RIN_112`); E-A5-2/3 and E-A6-1..4
+  are NOT_EVALUABLE with CS-R, CS-A and RA-1..RA-5 unread (egress), the
+  exists-vs-reachable gap left unfilled rather than copied from the one built
+  set, and E-A6-3 not filled from memory (`RIN_117`, `RIN_119`). Profiles are
+  constructed and no real person is described (`RIN_122`, `RIN_123`).
+  One hundred and twenty-three `RIN_*` claims;
   check counts printed by `python3 route-independence/test_route.py`,
   `python3 route-independence/test_dependency_chain.py`,
   `python3 route-independence/test_single_channel.py`,
   `python3 route-independence/test_settlement_split.py`,
   `python3 route-independence/test_gate_state.py`,
   `python3 route-independence/test_gate_state_a21.py`,
-  `python3 route-independence/test_thermal_gates.py` and
-  `python3 route-independence/test_repairs_a31.py`, the last six also
+  `python3 route-independence/test_thermal_gates.py`,
+  `python3 route-independence/test_repairs_a31.py` and
+  `python3 route-independence/test_chains_a456.py`, the last seven also
   printing the fail-fixture line. Stdlib only,
   parses under 3.9, phone-buildable, CC0.
 - `custody-verification-band/` — Marker under exploration. Criterion: a layer
