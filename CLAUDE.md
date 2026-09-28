@@ -14415,14 +14415,39 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   (`RIN_091`); the seed's BOTH is not a direction and would itself be a pooled
   value (`RIN_095`); A-2.1's fields are BUILT and filled on 0 of 14 rows, with
   `revocable_by None` reading both "no office" and "not recorded" (`RIN_096`).
-  Ninety-seven `RIN_*` claims;
+  **AMENDMENT A-3.1 (2026-09-28, definitional repairs)** then landed verbatim
+  (EXPECTED at `beb0fc6`); `repairs_a31.py` edits none of A-1..A-3 and runs
+  its eight sections over their rows by import. One market set,
+  `MARKET_GATES` = {TOKEN_PURCHASE, METERED_TOKEN}, equal to E-A3-2a's own
+  list: the re-run moves the metered utility from MET into E-A3-2a's gap
+  (UNMET_UNFALSIFIED, states A and B), the prior 6-vs-4 two-definition
+  result beside (`RIN_100`). Section 2 quotes every EXPECTED entry's P and F
+  from its amendment (29 of 29 found) and checks F == NOT P over every world
+  of up to two cells: 8 entries have no falsifier sentence, E-A3-2a and
+  E-A3-4 (literal) are GAPs, E-A3-3 (literal) an OVERSHOOT, five are
+  complements (`RIN_099`); applied to A-3.1 itself, both of its own
+  expectations are GAPs, and **E-A3.1-1 under the declared-falsifier,
+  charitable reading lands in its own gap** — zero mismatches besides
+  E-A3-2a, while E-A3-2a is found, so P fails and "zero mismatches found"
+  does not fire, printed first (`RIN_098`, `RIN_101`). The unit lint fails
+  four of five EXPECTED blocks including A-3.1's own, and A-3's "four gates"
+  passes it while miscounting (`RIN_104`). Null semantics under two declared
+  rules: E-A3.1-2 holds under both, 22 rows' readings move under EVIDENCE
+  and 2 under SCHEMA_DEFAULT — the two rows with no t, where A-2's `at()`
+  had collapsed "not recorded" into "not in force" (`RIN_102`); every field
+  migrated is listed, access_is_right refusing NONE as a synonym of FALSE
+  (`RIN_103`). E-A3-3 over non-market instruments (`RIN_105`); absence-bound
+  falsifiers read NOT_TESTABLE_AS_POSED, and under EVIDENCE E-A2-3's
+  gleaning leg does too (`RIN_106`); coverage beside every hold (`RIN_107`).
+  One hundred and seven `RIN_*` claims;
   check counts printed by `python3 route-independence/test_route.py`,
   `python3 route-independence/test_dependency_chain.py`,
   `python3 route-independence/test_single_channel.py`,
   `python3 route-independence/test_settlement_split.py`,
   `python3 route-independence/test_gate_state.py`,
-  `python3 route-independence/test_gate_state_a21.py` and
-  `python3 route-independence/test_thermal_gates.py`, the last five also
+  `python3 route-independence/test_gate_state_a21.py`,
+  `python3 route-independence/test_thermal_gates.py` and
+  `python3 route-independence/test_repairs_a31.py`, the last six also
   printing the fail-fixture line. Stdlib only,
   parses under 3.9, phone-buildable, CC0.
 - `custody-verification-band/` — Marker under exploration. Criterion: a layer

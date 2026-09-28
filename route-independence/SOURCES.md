@@ -162,3 +162,13 @@ constructed placeholder (US city X, county X, state A, state B, state X) and
 every gate_state is a constructed reading of an unread source. Grants Pass v.
 Johnson (2024) is named in the amendment and was not read here; its year is
 the order's.
+
+## Amendment A-3.1 of 2026-09-28
+
+Nothing fetched. The one added source id is `A31-6`, the amendment's own
+section-6 sentence instructing a clothing RETAIN fixture row, stored at grade K
+with status STATED_BY_AMENDMENT; the row resting on it is hold-ineligible. The
+EVIDENCE migration rule reads OPEN_ENDED on a t field only where a source text
+records it, and the only such text in the tree is W-2a's "current text (Justia
+2022 codification)", carried from A-2.1 and read by that amendment's author,
+not by this session.

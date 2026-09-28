@@ -1,0 +1,153 @@
+repairs_a31 -- AMENDMENT A-3.1 over A-1 / A-2 / A-2.1 / A-3: one market definition, complement check, unit lint, null semantics
+EXPECTED registered at beb0fc6; every source CARRIED; no row read here is a statement about any jurisdiction
+
+-- expected (section 8), MISMATCH rows first, then UNMET_UNFALSIFIED
+expected UNMET_UNFALSIFIED E-A3.1-1 (DECLARED_CHARITABLE)    mismatches besides E-A3-2a: 0; E-A3-2a itself a mismatch: True
+         hold: INSTRUMENT (rule 1 met at beb0fc6); coverage 16/16 registry entries A-1..A-3 checked
+expected MATCH             E-A3.1-1 (LITERAL_ALL)            mismatches besides E-A3-2a: 10; E-A3-2a itself a mismatch: True
+         hold: INSTRUMENT (rule 1 met at beb0fc6); coverage 16/16 registry entries A-1..A-3 checked
+expected MATCH             E-A3.1-1 (DECLARED_LITERAL)       mismatches besides E-A3-2a: 2; E-A3-2a itself a mismatch: True
+         hold: INSTRUMENT (rule 1 met at beb0fc6); coverage 16/16 registry entries A-1..A-3 checked
+expected MATCH             E-A3.1-2 (EVIDENCE)               rows whose reading moved 22; rows whose meaning moved (reading or disambiguation) 29
+         hold: INSTRUMENT; coverage 63/63 existing rows examined, 31 carry a nullable value
+expected MATCH             E-A3.1-2 (SCHEMA_DEFAULT)         rows whose reading moved 2; rows whose meaning moved (reading or disambiguation) 4
+         hold: INSTRUMENT; coverage 63/63 existing rows examined, 31 carry a nullable value
+
+-- section 1: MARKET_GATES ['TOKEN_PURCHASE', 'METERED_TOKEN']; NON_MARKET ['PERMIT', 'PROHIBITION', 'CONDITION_BAN', 'CODE_STANDARD', 'PRIVATE_RULE']
+   A-3's E-A3-2a list reads the same market set: True
+   E-A3-2a re-run, K rows as delivered: cells 6/50 covered, sourced rows 0
+      MET                [('US city X (public land)', 'shelter.selfbuilt'), ('county X', 'open_fire'), ('county X', 'wood_stove'), ('state X', 'clothing.shed')]
+      FALSIFIER          []
+      UNMET_UNFALSIFIED  [('state A', 'heating.utility'), ('state B', 'heating.utility')]
+      UNSEARCHED         44 cells
+      prior two-definition result: met under 2d 6, under E-A3-2a's list 4, parted on ['heating.utility']
+   E-A3-2a re-run, K rows + the section-6 RETAIN row: cells 7/50 covered, sourced rows 0
+      MET                [('US city X (public land)', 'shelter.selfbuilt'), ('county X', 'open_fire'), ('county X', 'wood_stove'), ('state X', 'clothing.shed')]
+      FALSIFIER          [('state X', 'clothing.retain')]
+      UNMET_UNFALSIFIED  [('state A', 'heating.utility'), ('state B', 'heating.utility')]
+      UNSEARCHED         43 cells
+      prior two-definition result: met under 2d 6, under E-A3-2a's list 4, parted on ['heating.utility']
+
+-- section 2: complement check, P and F quoted from each amendment [CHOICE 24]
+   A-1      A-1 E-A1   -                          FALSIFIER_UNDECLARED  F UNDECLARED   requires CODE_BEHAVIOUR
+            UNMET_UNFALSIFIED at one-cell worlds: 0, 1
+   A-1      A-1 E-A2   -                          COMPLEMENT            F CONDITIONAL  requires CODE_BEHAVIOUR
+   A-1      A-1 E-A3   -                          COMPLEMENT            F CONDITIONAL  requires CODE_BEHAVIOUR
+   A-2      E-A2-1     -                          FALSIFIER_UNDECLARED  F UNDECLARED   requires CODE_BEHAVIOUR
+            UNMET_UNFALSIFIED at one-cell worlds: 'FAILS'
+   A-2      E-A2-2     -                          FALSIFIER_UNDECLARED  F UNDECLARED   requires CODE_BEHAVIOUR
+            UNMET_UNFALSIFIED at one-cell worlds: 'FAILS'
+   A-2      E-A2-3     -                          COMPLEMENT            F STATED       requires MIXED
+   A-2      E-A2-4     -                          FALSIFIER_UNDECLARED  F UNDECLARED   requires CODE_BEHAVIOUR
+            UNMET_UNFALSIFIED at one-cell worlds: 'FAILS'
+   A-2.1    E-A2.1-1   -                          FALSIFIER_UNDECLARED  F UNDECLARED   requires MIXED
+            UNMET_UNFALSIFIED at one-cell worlds: 'FAILS'
+   A-2.1    E-A2.1-2   -                          FALSIFIER_UNDECLARED  F UNDECLARED   requires CODE_BEHAVIOUR
+            UNMET_UNFALSIFIED at one-cell worlds: 'FAILS'
+   A-3      E-A3-1     -                          FALSIFIER_UNDECLARED  F UNDECLARED   requires CODE_BEHAVIOUR
+            UNMET_UNFALSIFIED at one-cell worlds: 'FAILS'
+   A-3      E-A3-2a    -                          GAP                   F STATED       requires ABSENCE
+            UNMET_UNFALSIFIED at one-cell worlds: {METERED_TOKEN,TOKEN_PURCHASE}, {METERED_TOKEN}, {}
+   A-3      E-A3-3     literal [CHOICE 28]        OVERSHOOT             F STATED       requires PRESENCE
+            OVERSHOOT at one-cell worlds: {COOL,RETAIN,SHED}, {COOL,RETAIN}, {RETAIN,SHED,WARM}, {RETAIN,SHED}, {SHED,WARM}
+   A-3      E-A3-3     side [CHOICE 28]           COMPLEMENT            F STATED       requires PRESENCE
+   A-3      E-A3-4     literal [CHOICE 29]        GAP                   F STATED       requires ABSENCE
+            UNMET_UNFALSIFIED at one-cell worlds: ('NON_BODY', False, True)
+   A-3      E-A3-4     R2-scoped [CHOICE 29]      COMPLEMENT            F STATED       requires ABSENCE
+   A-3      E-A3-5     -                          FALSIFIER_UNDECLARED  F UNDECLARED   requires CODE_BEHAVIOUR
+            UNMET_UNFALSIFIED at one-cell worlds: 'FAILS'
+   A-3      E-A3-6     -                          NOT_A_PREDICTION      F NOT_A_PREDICTION requires --
+   A-3.1    E-A3.1-1   -                          GAP                   F STATED       requires CODE_BEHAVIOUR
+            UNMET_UNFALSIFIED at one-cell worlds: (True, 0)
+   A-3.1    E-A3.1-2   -                          GAP                   F STATED       requires CODE_BEHAVIOUR
+            UNMET_UNFALSIFIED at one-cell worlds: (False, True)
+   quotes found in their amendments: 29/29
+   A-1 E-A1's two predicates ('a MAJORITY as CONSTRUCTED' vs 'at least 2 of 3 cases carry zero BIOLOGICAL edges') part on 39 of 216 three-case worlds, e.g. (('C',), ('C',), ('B', 'B'))
+
+-- section 3: count words carry units [CHOICE 30]
+   A-1    LINT_FAIL              three->UNIT_OUTSIDE_LIST cases; 2->UNIT_OUTSIDE_LIST cases; 3->UNIT_OUTSIDE_LIST cases; zero->UNIT_OUTSIDE_LIST BIOLOGICAL; TWO->UNIT_OUTSIDE_LIST hops
+   A-2    LINT_FAIL              one->UNIT_OUTSIDE_LIST change; one->UNIT_OUTSIDE_LIST pooled
+   A-2.1  PASS (no count token)  -
+   A-3    LINT_FAIL              four->OK gates; one->UNIT_OUTSIDE_LIST state; 1->OK gate; one->UNIT_OUTSIDE_LIST instrument; zero->OK gates
+   A-3.1  LINT_FAIL              one->UNIT_OUTSIDE_LIST mismatch; zero->UNIT_OUTSIDE_LIST mismatches; one->OK row; zero->OK rows
+   A-3's 'four gates' carries a listed unit and passes the lint; the fixture it counts holds 5 gates in 4 positions (RIN_087): the lint reads that a unit is named, not that the count holds
+
+-- section 4: null semantics, two migration rules [CHOICE 31]
+   EVIDENCE: 63 existing rows, 31 carry a nullable value on the named fields
+      field revocable_by       {'NOT_RECORDED': 14}
+      field access_is_right    {'NOT_RECORDED': 14}
+      field t_from             {'NOT_RECORDED': 6}
+      field t_to               {'NOT_RECORDED': 22, 'OPEN_ENDED': 2}
+      field trigger_condition  {'NOT_RECORDED': 6}
+      field gate_instrument    {'NOT_RECORDED': 4}
+      field obligation_origin  {'NOT_RECORDED': 2}
+      READING_CHANGED 22 rows
+      DISAMBIGUATED   7 rows
+      RENAMED         2 rows
+         A-2:F-W2                                     (None, '2026', None): IN_FORCE -> UNDETERMINED; (None, '2026-01-15', None): IN_FORCE -> UNDETERMINED
+         A-2:F-W3                                     (None, '2026', None): NOT_IN_FORCE -> UNDETERMINED; (None, '2026-01-15', None): NOT_IN_FORCE -> UNDETERMINED
+         A-2:F-W4                                     (None, '2026', None): IN_FORCE -> UNDETERMINED; (None, '2026-01-15', None): IN_FORCE -> UNDETERMINED
+         A-2:F-G2                                     (None, '2026', None): IN_FORCE -> UNDETERMINED; (None, '2026-01-15', None): IN_FORCE -> UNDETERMINED
+         A-2.1:F-W2                                   (None, '2026', None): IN_FORCE -> UNDETERMINED; (None, '2026-01-15', None): IN_FORCE -> UNDETERMINED
+         A-2.1:F-W4                                   (None, '2026', None): NOT_IN_FORCE -> UNDETERMINED; (None, '2026-01-15', None): NOT_IN_FORCE -> UNDETERMINED
+         A-3:F-T1.ban|None                            ('US city X (public land)', '2026', None): APPLIES -> UNDETERMINED; ('US city X (public land)', '2026-01-15', None): APPLIES -> UNDETERMINED
+         A-3:F-T2.ban|drought declaration in force    ('county X', '2026', None): APPLIES -> UNDETERMINED; ('county X', '2026', 'drought declaration in force'): APPLIES -> UNDETERMINED
+         A-3:F-T2.ban|no drought declaration          ('county X', '2026', None): APPLIES -> UNDETERMINED; ('county X', '2026', 'no drought declaration'): APPLIES -> UNDETERMINED
+         A-3:F-T3.A.meter|account paid                ('state A', '2026', None): APPLIES -> UNDETERMINED; ('state A', '2026', 'account paid'): APPLIES -> UNDETERMINED
+         A-3:F-T3.A.meter|nonpayment, winter          ('state A', '2026', None): APPLIES -> UNDETERMINED; ('state A', '2026', 'nonpayment, winter'): APPLIES -> UNDETERMINED
+         A-3:F-T3.B.meter|account paid                ('state B', '2026', None): APPLIES -> UNDETERMINED; ('state B', '2026', 'account paid'): APPLIES -> UNDETERMINED
+         A-3:F-T3.B.meter|nonpayment, winter          ('state B', '2026', None): APPLIES -> UNDETERMINED; ('state B', '2026', 'nonpayment, winter'): APPLIES -> UNDETERMINED
+         A-3:F-T4.device|None                         ('county X', '2026', None): APPLIES -> UNDETERMINED; ('county X', '2026', 'drought declaration in force'): APPLIES -> UNDETERMINED
+         A-3:F-T4.standard|None                       ('county X', '2026', None): APPLIES -> UNDETERMINED; ('county X', '2026', 'drought declaration in force'): APPLIES -> UNDETERMINED
+         A-3:F-T4.fuel.purchase|None                  ('county X', '2026', None): APPLIES -> UNDETERMINED; ('county X', '2026', 'drought declaration in force'): APPLIES -> UNDETERMINED
+         A-3:F-T4.fuel.permit|None                    ('county X', '2026', None): APPLIES -> UNDETERMINED; ('county X', '2026', 'drought declaration in force'): APPLIES -> UNDETERMINED
+         A-3:F-T4.ban|drought declaration in force    ('county X', '2026', None): APPLIES -> UNDETERMINED; ('county X', '2026', 'drought declaration in force'): APPLIES -> UNDETERMINED
+         A-3:F-T4.ban|no drought declaration          ('county X', '2026', None): APPLIES -> UNDETERMINED; ('county X', '2026', 'no drought declaration'): APPLIES -> UNDETERMINED
+         A-3:F-T5.indecency|None                      ('state X', '2026', None): APPLIES -> UNDETERMINED; ('state X', '2026-01-15', None): APPLIES -> UNDETERMINED
+         A-3:F-T6.huddling.warm                       (None, '2026', None): IN_FORCE -> UNDETERMINED; (None, '2026-01-15', None): IN_FORCE -> UNDETERMINED
+         A-3:F-T6.huddling.cool                       (None, '2026', None): IN_FORCE -> UNDETERMINED; (None, '2026-01-15', None): IN_FORCE -> UNDETERMINED
+         A-2:F-W1                                     meaning set, reading unmoved: t_from -- -> NOT_RECORDED
+         A-2:F-G1                                     meaning set, reading unmoved: t_from -- -> NOT_RECORDED
+         A-2.1:F-W1a                                  meaning set, reading unmoved: t_from -- -> NOT_RECORDED
+         A-2.1:F-W1b                                  meaning set, reading unmoved: gate_instrument -- -> NOT_RECORDED
+         A-2.1:F-W3a                                  meaning set, reading unmoved: t_to -- -> OPEN_ENDED
+         A-2.1:F-W3b                                  meaning set, reading unmoved: t_to -- -> OPEN_ENDED
+         A-2.1:F-W3c                                  meaning set, reading unmoved: t_from -- -> NOT_RECORDED, gate_instrument -- -> NOT_RECORDED
+   SCHEMA_DEFAULT: 63 existing rows, 31 carry a nullable value on the named fields
+      field revocable_by       {'NONE': 14}
+      field access_is_right    {'NOT_RECORDED': 14}
+      field t_from             {'OPEN_ENDED': 4, 'NOT_RECORDED': 2}
+      field t_to               {'OPEN_ENDED': 22, 'NOT_RECORDED': 2}
+      field trigger_condition  {'NONE': 6}
+      field gate_instrument    {'NOT_RECORDED': 4}
+      field obligation_origin  {'NOT_RECORDED': 2}
+      READING_CHANGED 2 rows
+      DISAMBIGUATED   2 rows
+      RENAMED         27 rows
+         A-2:F-W3                                     (None, '2026', None): NOT_IN_FORCE -> UNDETERMINED; (None, '2026-01-15', None): NOT_IN_FORCE -> UNDETERMINED
+         A-2.1:F-W4                                   (None, '2026', None): NOT_IN_FORCE -> UNDETERMINED; (None, '2026-01-15', None): NOT_IN_FORCE -> UNDETERMINED
+         A-2.1:F-W1b                                  meaning set, reading unmoved: gate_instrument -- -> NOT_RECORDED
+         A-2.1:F-W3c                                  meaning set, reading unmoved: t_from -- -> OPEN_ENDED, gate_instrument -- -> NOT_RECORDED
+
+-- section 5: E-A3-3 over NON_MARKET instruments, the literal beside
+   K rows                                   shared non-market []; shared literal (all instruments) []
+   K rows + one constructed fan purchase    shared non-market []; shared literal (all instruments) ['market purchase']
+   on the sourced set: 0 rows, NOT_EVALUABLE; coverage 16/90 (sourced 0/90)
+
+-- section 6: ABSENCE_BOUND falsifiers [CHOICE 37]; sourced set only
+   EVIDENCE       E-A3-2a  NOT_TESTABLE_AS_POSED  sourced external cells 0; on the K rows the falsifier is reached at [('state X', 'clothing.retain')], hold-ineligible
+   EVIDENCE       E-A3-4   NOT_TESTABLE_AS_POSED  sourced zero declarations 0
+   EVIDENCE       E-A2-3   NOT_TESTABLE_AS_POSED  gleaning NOT_TESTABLE_AS_POSED (no sourced known reading at 2026 (['England'])); rainwater_rooftop DECIDED_BY_PRESENCE (sourced non-OPEN reading in ['Utah'])
+   SCHEMA_DEFAULT E-A3-2a  NOT_TESTABLE_AS_POSED  sourced external cells 0; on the K rows the falsifier is reached at [('state X', 'clothing.retain')], hold-ineligible
+   SCHEMA_DEFAULT E-A3-4   NOT_TESTABLE_AS_POSED  sourced zero declarations 0
+   SCHEMA_DEFAULT E-A2-3   DECIDED_BY_PRESENCE    gleaning DECIDED_BY_PRESENCE (sourced non-OPEN reading in ['England']); rainwater_rooftop DECIDED_BY_PRESENCE (sourced non-OPEN reading in ['Colorado', 'Utah'])
+
+-- section 7: coverage beside every result [CHOICE 36]
+   E-A3-2a  external (jurisdiction, actuator) grid 6/50 (sourced 0/50)
+   E-A3-3/4 all-actuator grid 16/90 (sourced 0/90)
+
+fail fixture 1: heating.utility in state A counts 1 non-market gate under section 2d as delivered; under MARKET_GATES the cell reads UNMET_UNFALSIFIED
+fail fixture 2: A-2's F-W3 (no t) reads NOT_IN_FORCE under A-2's at(); UNDETERMINED under at3
+holds: rule 1 met (beb0fc6); rule 3 met; rule 2 unmet on every thermal row (all K)
+choices in force: [CHOICE 24], [CHOICE 25], [CHOICE 26], [CHOICE 27], [CHOICE 28], [CHOICE 29], [CHOICE 30], [CHOICE 31], [CHOICE 32], [CHOICE 33], [CHOICE 34], [CHOICE 35], [CHOICE 36], [CHOICE 37]
+execution note: test_repairs_a31.py prints the check count; samples/repairs_a31.sample.txt is one recorded render, compare before quoting
