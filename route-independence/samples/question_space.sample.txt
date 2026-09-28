@@ -1,0 +1,24 @@
+question_space -- FWO-9; per conversion point, the classes of question that stop being askable there
+records where the door is; no quantity of questions is estimated [CHOICE 3]; every cell this session's declaration
+
+classes:
+   Q1  instrument needing no funder                                                         PROPOSED
+   Q2  result with no product downstream                                                    PROPOSED
+   Q3  timescale longer than any grant or contract cycle                                    PROPOSED
+   Q4  question whose answer would reduce demand for the funder's output                    PROPOSED
+   Q5  question arising only from a constraint the funded population does not live under    OBSERVED (carried from the operator's material: what gets experimented on is set by which constraints the person has actually run)
+
+point            closes           basis
+account          Q1               a question needing an instrument with no funder is not askable where the unit of account is what the instrument is bought in; the other classes are not closed at the account step itself
+settlement       Q1,Q3            settlement in the dominant token is where a funder becomes necessary and where the cycle it funds on sets the longest answerable timescale
+input_purchase   Q2               an input bought against a line item has to lead to the deliverable the line was opened for; a result with nothing downstream has no line
+credential       Q4,Q5            the credential selects for a population that lived under the credentialing constraints; a question from a constraint that population did not run has no one credentialed to ask it, and a question reducing demand for the credential's issuer is not on the syllabus
+publication      Q2,Q4,Q5         a venue takes a product; a result with none is not a submission; the venue's reviewers are the funded population; a result reducing demand for the venue's field is refereed by that field
+tax              Q1               the tax step converts a non-monetary route into a monetary obligation, so an instrument that needed no funder acquires one at the tax step
+tax_step         UNKNOWN          the tax step's own row type is registered in FWO-13 with two OBSERVED appearances and one candidate; which question classes it closes beyond 'tax' above is not declared here
+
+expected E9.2 Q5 attaches to credential and publication               MATCH
+expected E9.2 tax closes Q1                                           MATCH
+expected E9.2 input_purchase closes Q2                                MATCH
+fail fixture (CONSTRUCTED): MISMATCH
+choices in force: [CHOICE 1], [CHOICE 2], [CHOICE 3]

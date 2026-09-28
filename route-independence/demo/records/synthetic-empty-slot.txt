@@ -1,0 +1,14 @@
+# SYNTHETIC. Constructed so C3 reads NO (slot present, empty) rather than
+# ABSENT_FIELD, and C1 reads NO (proposer names others as cost bearers).
+record_kind: instance
+source:
+source_status: synthetic
+decision: constructed decision
+proposer: council_a
+first_cost_bearers: council_b
+authorizer: council_c
+authorizer_prior_exposure:
+options_tried: option_x
+options_not_tried:
+reviewer: council_a
+reviewer_added_options:

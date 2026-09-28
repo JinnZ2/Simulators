@@ -1,0 +1,36 @@
+lag_count -- FWO-11; the seed cases and the lag distribution
+SURVIVOR-FILTERED (DERIVED): only what lasted or was recovered can be counted; this is a lag distribution over survivors, not an impossibility claim
+every seed date UNSOURCED (recalled; the order says verify, nothing was verified)
+
+case               approx   reach    reached                      lag    independence
+terra_preta        500      2006     PARTIAL                      1506   CANDIDATE
+   by: pre-Columbian Amazon-basin agricultural populations
+   produced: anthropogenic dark earth: durable soil fertility from charcoal, bone and organic amendment
+willow_bark        -400     1897     FULL                         2297   CANDIDATE
+   by: folk-medicine populations across several regions; a written clinical report in 1763
+   produced: salicylate analgesic and antipyretic from willow bark
+antikythera        -125     --       RECOVERED_NOT_REDISCOVERED   --     CANDIDATE
+   by: a Hellenistic workshop tradition
+   produced: geared astronomical calculator with epicyclic gearing
+   also fits: FULL at about 1350 on the CAPABILITY reading (astronomical clocks with comparable gearing); the DEVICE was not rebuilt from within the coupled tradition and was recovered in 1901 [CHOICE 4]
+aqueducts          -312     --       UNKNOWN                      --     CANDIDATE
+   by: Roman state builders; Persian and Arabian qanat-digging communities
+   produced: gravity-fed long-distance water conveyance (Roman aqueducts; qanats earlier)
+bamboo_gas_piping  -100     1821     FULL                         1921   CANDIDATE
+   by: Sichuan salt-well communities
+   produced: natural gas conveyed by bamboo pipe to brine-boiling works
+machu_picchu       1450     2000     PARTIAL                      550    CANDIDATE
+   by: Inca builders and the agricultural population that maintained it
+   produced: hillside terracing with subsurface drainage layers
+
+by reached: FULL=2, PARTIAL=2, NOT_REACHED=0, RECOVERED_NOT_REDISCOVERED=1, UNKNOWN=1
+sourced lags (years):   [] (no seed is sourced)
+unsourced lags (years): [('machu_picchu', 550), ('terra_preta', 1506), ('bamboo_gas_piping', 1921), ('willow_bark', 2297)]
+unknown reach date: ['aqueducts']
+
+expected E11.1 antikythera reads RECOVERED_NOT_REDISCOVERED                       MATCH
+expected E11.2 at most two FULL with a dated reach; at least one UNKNOWN reach date MATCH
+expected E11.3 sourced distribution empty; unsourced apart                        MATCH
+expected E11.5 no seed reads INDEPENDENT                                          MATCH
+fail fixture (CONSTRUCTED, reach before production): refused -- z_fail_negative_lag: NEGATIVE_LAG: reach 1800 precedes production 1900
+choices in force: [CHOICE 1], [CHOICE 2], [CHOICE 3], [CHOICE 4]

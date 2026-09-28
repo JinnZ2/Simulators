@@ -1,0 +1,71 @@
+dependency_chain_audit -- FWO-5 over FWO-2; demo on CONSTRUCTED / CARRIED values, nothing read from a source
+dominant token USD; flags and bands are route_independence.py's; cross-check is effective_redundancy n_eff
+
+== a_household_phenology
+   source: CONSTRUCTED: one declared household observation record; no person, no site
+   dependency                 routes ind band conv  unk  flag                 cross-check            conversion points
+   instrument                      2        1    1    0  NOT_ENCLOSED         AGREE n_eff=2          input_purchase
+   material_reagent                0        0    0    0  NOT_NEEDED           NOT_RUN                --
+   facility_space                  1        1    0    0  SINGLE_ROUTE         AGREE n_eff=1          --
+   energy                          1        1    0    0  SINGLE_ROUTE         AGREE n_eff=1          --
+   transport                       1        1    0    0  SINGLE_ROUTE         AGREE n_eff=1          --
+   labor                           1        1    0    0  SINGLE_ROUTE         AGREE n_eff=1          --
+   data_access                     1        1    0    0  SINGLE_ROUTE         AGREE n_eff=1          --
+   publication                     1     0..1    0    1  SINGLE_ROUTE         NOT_EVALUABLE          --
+   credential_authorization        0        0    0    0  NOT_NEEDED           NOT_RUN                --
+   legal_compliance                1        0    1    0  SINGLE_ROUTE         AGREE n_eff=1          tax
+   independence band [0.750, 0.875] over 8 routed dependencies; absent_field []; not_needed ['material_reagent', 'credential_authorization']
+   enclosed_plurality []; independent rows ['instrument', 'facility_space', 'energy', 'transport', 'labor', 'data_access']; possibly independent (UNKNOWN routes) ['publication']
+   conversion points by dependency count: input_purchase=1, tax=1
+   expected ratio_low_end_at_least_0.5           MATCH
+   expected publication_not_independent          MATCH
+   expected not_fully_converted                  MATCH
+
+== b_open_access_finding
+   source: CARRIED: instance Kalai, Nachum, Vempala & Zhang, Nature 653:1047-1051 (2026), DOI 10.1038/s41586-026-10549-w; already cited in this tree (publication-loop-work-orders, WO-11 T-6a); NOT READ here: www.nature.com refuses CONNECT under the egress allowlist
+   dependency                 routes ind band conv  unk  flag                 cross-check            conversion points
+   instrument                      2        0    2    0  ENCLOSED_PLURALITY   AGREE n_eff=1          input_purchase,settlement
+   material_reagent                1        0    1    0  SINGLE_ROUTE         AGREE n_eff=1          input_purchase
+   facility_space                  1        0    1    0  SINGLE_ROUTE         AGREE n_eff=1          settlement
+   energy                          1        0    1    0  SINGLE_ROUTE         AGREE n_eff=1          input_purchase
+   transport                       1        0    1    0  SINGLE_ROUTE         AGREE n_eff=1          input_purchase
+   labor                           2        0    2    0  ENCLOSED_PLURALITY   AGREE n_eff=1          settlement
+   data_access                     2        1    1    0  NOT_ENCLOSED         AGREE n_eff=2          input_purchase
+   publication                     2        1    1    0  NOT_ENCLOSED         AGREE n_eff=2          publication
+   credential_authorization        1        0    1    0  SINGLE_ROUTE         AGREE n_eff=1          credential
+   legal_compliance                1        0    1    0  SINGLE_ROUTE         AGREE n_eff=1          tax
+   independence band 0.200 over 10 routed dependencies; absent_field []; not_needed []
+   enclosed_plurality ['instrument', 'labor']; independent rows ['data_access', 'publication']; possibly independent (UNKNOWN routes) []
+   conversion points by dependency count: input_purchase=5, settlement=3, credential=1, publication=1, tax=1
+   expected ratio_at_most_0.25                   MATCH
+   expected enclosed_on_instrument               MATCH
+   expected enclosed_on_labor                    MATCH
+   expected enclosed_on_publication              MISMATCH
+
+== c_bitcoin_exit
+   source: CONSTRUCTED: one physical need met by acquiring and disposing of bitcoin; no person, no exchange named
+   dependency                 routes ind band conv  unk  flag                 cross-check            conversion points
+   instrument                      1        1    0    0  SINGLE_ROUTE         AGREE n_eff=1          --
+   material_reagent                2     0..1    1    1  UNKNOWN              NOT_EVALUABLE          input_purchase
+   facility_space                  0        0    0    0  NOT_NEEDED           NOT_RUN                --
+   energy                          2        1    1    0  NOT_ENCLOSED         AGREE n_eff=2          input_purchase
+   transport                       1        0    1    0  SINGLE_ROUTE         AGREE n_eff=1          input_purchase
+   labor                           1        1    0    0  SINGLE_ROUTE         AGREE n_eff=1          --
+   data_access                     1        1    0    0  SINGLE_ROUTE         AGREE n_eff=1          --
+   publication                     0        0    0    0  NOT_NEEDED           NOT_RUN                --
+   credential_authorization        1     0..1    0    1  SINGLE_ROUTE         NOT_EVALUABLE          --
+   legal_compliance                2        0    2    0  ENCLOSED_PLURALITY   AGREE n_eff=1          settlement
+   independence band [0.500, 0.750] over 8 routed dependencies; absent_field []; not_needed ['facility_space', 'publication']
+   enclosed_plurality ['legal_compliance']; independent rows ['instrument', 'energy', 'labor', 'data_access']; possibly independent (UNKNOWN routes) ['material_reagent', 'credential_authorization']
+   conversion points by dependency count: input_purchase=3, settlement=1
+   expected ledger_route_independent             MATCH
+   expected legal_conversion_point_is_settlement MATCH
+
+== FWO-6 conversion-point register: counts, no verdict on any attempt
+   entries 8; with an UNKNOWN mechanism ['time_banks', 'mutual_aid_networks', 'open_hardware_communities', 'gift_across_households']
+   by mechanism: input_purchase=6, legal_recognition=1, publication=1, settlement=1, tax=4
+   by layer:     production=6, settlement=4, legal=1, publication=1
+   reading SPREAD; hypothesis (PROPOSED, Claude, stated before tally) top layer = settlement -> NOT_SUPPORTED_ON_THIS_REGISTER
+
+choices in force: [CHOICE 1], [CHOICE 2], [CHOICE 3], [CHOICE 4], [CHOICE 5], [CHOICE 6], [CHOICE 7]
+execution note: test_dependency_chain.py prints the check count; samples/dependency_chain.sample.txt is one recorded render, compare before quoting

@@ -43,6 +43,19 @@ checker's output and the entry stays as written — same arrangement
   tree and zero times in the note's sense. Every dataset fact is carried,
   not checked — the egress gate refuses the sources.
 
+- `datasets/uploads_2026_08_25.md` — four dataset files delivered "to file
+  for future". The bytes are not here and the reason is in the entry;
+  what is here is a per-file index with a sha256, so a re-obtained copy is
+  checkable. Checked by `check_uploads.py`; six readings in
+  `FINDINGS_UPLOADS.md`. Twenty-six workbooks in one of them carry zero
+  formulas and a naive scan returns three, all of them listing titles
+  beginning with `=` (SSS_061). The UCI archive carries a repeat-measure
+  pair, which is the null `triad-playground` TP_010 says this tree has
+  never had. The World Bank catalogue is a target list for the third
+  workbook `sheet-structure-scan` WO7 could not reach, and a clock corpus
+  that needs no egress at all. On its first run the checker caught an
+  error in its own record, which is the same thing `check_d2.py` did.
+
 - `memory-export/` — backup of a memory set exported out of session.
   `SCRUB_RULES.md` carries the scrub rules and tier assignment: 57 files
   exported unchanged, 7 scrubbed, 12 held back, with a cost note saying that a

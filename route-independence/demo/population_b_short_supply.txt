@@ -1,0 +1,12 @@
+# (b) population lacking reliable food, water and heat. SYNTHETIC rows.
+# waste_removal is left UNKNOWN on purpose: nobody in this session can
+# source it, and the rule is that an unsourced row stays UNKNOWN.
+population: (b) population short on food, water, heat
+food            | COUPLED   |
+water           | COUPLED   |
+shelter         | COUPLED   |
+thermal         | COUPLED   |
+predation       | REMOVED   |
+disease         | PRESENT   |
+waste_removal   | UNKNOWN   |
+exit            | PRESENT   |

@@ -737,6 +737,9 @@ EXPECTED_METRICS = (
     "reporting-chain-loss/hop_compose.py::composed_bias",
     "chain-position/load_class.py::stability_product",
     "measurand-partition/wo4_lumber.py::stiffness_ratio",
+    "route-independence/route_independence.py::independence_ratio",
+    "route-independence/lag_count.py::lag_years",
+    "route-independence/settlement_split.py::net_positions",
     "revision-survival/revision_survival.py::delta",
     "routing-data-layer/rate_form.py::sustained_excess",
     "shape-spec-audit/shadow_read.py::outline_area",
@@ -1547,7 +1550,74 @@ def seed():
     # and re-seeds, which is what tests/test_known_answer_gate.py
     # does. Found by adding the move-set entries to the manifest --
     # the coverage claim is what made the gap visible.
+    register(
+        "ledger/py_ledger/engine.py::quantize",
+        _ledger_quantize,
+        [
+            case("trailing zeros do not add digits", ("0.6250000", 3),
+                 "0.625",
+                 "2.5/4 is exactly 0.625, three significant digits. A "
+                 "value written with trailing zeros is the same value and "
+                 "a different string, which is the whole reason the ledger "
+                 "compares numerically"),
+            case("significant digits, not decimal places", ("1234.5", 2),
+                 "1.2E+3",
+                 "two SIGNIFICANT digits. Under the other reading of the "
+                 "word this is 1234.50, and the two disagree on every "
+                 "value that is not an integer"),
+            case("half-even rounds down from an even digit",
+                 ("0.125", 2), "0.12",
+                 "the digit before the 5 is 2, even, so nearest-even "
+                 "keeps it. Half-up would give 0.13"),
+            case("half-even rounds up from an odd digit",
+                 ("0.135", 2), "0.14",
+                 "the digit before the 5 is 3, odd, so nearest-even moves "
+                 "it. This case and the one above differ only in that "
+                 "digit, so a fixed rounding direction fails exactly one "
+                 "of them"),
+        ],
+        note=("The ledger's whole comparison rests on this. A quantize "
+              "reading precision as decimal places would report every "
+              "value in the repo as drifted on its first run, and a "
+              "quantize rounding half-up would report drift only "
+              "sometimes, which is worse."),
+    )
+    register(
+        "ledger/py_ledger/engine.py::recompute",
+        _ledger_recompute,
+        [
+            case("a division that closes", ("divide",), "RECOMPUTED 0.625",
+                 "2.5 / 4 = 0.625 by hand, at six significant digits"),
+            case("division by a measured zero",
+                 ("divide_by_measured_zero",), "UNDEFINED None",
+                 "a zero divisor returns UNDEFINED and no number. Not 0, "
+                 "which is a measurement, and not the numerator. This is "
+                 "the case where a ledger silently reporting a value "
+                 "would put a wrong number into EXPECTED and pin it"),
+            case("an operand that is not in the record set",
+                 ("operand_absent",), "UNRESOLVED_OPERAND None",
+                 "an absent operand is a third state, kept apart from a "
+                 "zero operand and from a claim that recomputed"),
+            case("a power, a literal, and precedence",
+                 ("power_and_precedence",), "RECOMPUTED 0.125",
+                 "0.5**3 = 0.125, times 4 divided by 4. Written so that "
+                 "left-to-right evaluation with no precedence gives "
+                 "0.125 as well but a wrong exponent does not"),
+            case("a recurring quotient", ("recurring",),
+                 "RECOMPUTED 0.333333",
+                 "1/3 at six significant digits. Recomputation carries "
+                 "guard digits and quantizes once at the end, so a "
+                 "per-step round would show here"),
+        ],
+        note=("Every outcome the ledger can reach on one claim, pinned "
+              "with its value in the same string: an UNDEFINED that "
+              "returned a number and a RECOMPUTED that returned the "
+              "wrong one are different failures."),
+    )
     _seed_move_set()
+    _seed_route_independence()
+    _seed_lag_count()
+    _seed_settlement_split()
 
 
 def _irb_effective_origins(coupling):
@@ -1617,6 +1687,146 @@ def _fmr_fraction_cap(n_other, fraction):
     finally:
         sys.path.pop(0)
 
+
+
+def _ri_independence_ratio(independent_count, route_count):
+    """route-independence/route_independence.py::independence_ratio,
+    imported. Expected values are arithmetic on the two counts; the
+    zero-route case is where a default hides, since 0.0 would read as
+    'measured, and no route settles' where nothing was measured."""
+    import importlib.util
+    path = os.path.join(ROOT, "route-independence", "route_independence.py")
+    spec = importlib.util.spec_from_file_location("_ri", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.independence_ratio(independent_count, route_count)
+
+
+
+
+def _drc_count_relation(inner, outer, stated_total):
+    """deep-research-correction/check.py::count_relation, imported. The
+    C-2 classifier: given an inner count and an outer count and a stated
+    total, which arithmetic the total implies -- DISJOINT (inner+outer),
+    NESTED (outer, inner<outer) or NEITHER. Expected values are the
+    definitions, not the implementation."""
+    import importlib.util
+    path = os.path.join(ROOT, "deep-research-correction", "check.py")
+    sys.path.insert(0, os.path.join(ROOT, "measurand-partition"))
+    try:
+        spec = importlib.util.spec_from_file_location("_drc_check", path)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        return mod.count_relation(inner, outer, stated_total)
+    finally:
+        sys.path.pop(0)
+
+def _rcl_composed_bias(a, c):
+    """reporting-chain-loss/hop_compose.py::composed_bias, imported. The
+    WO-5 transit-loss metric: B = sum_k (prod_{j>k} a_j) * c_k, the incentive
+    stack composed across a linear-Gaussian hop chain. Expected values are the
+    closed form by hand, not the implementation; the all-zero-offset case is
+    an exact 0, and the missing-gain case is None, so a zero and an absence
+    are pinned apart."""
+    import importlib.util
+    path = os.path.join(ROOT, "reporting-chain-loss", "hop_compose.py")
+    spec = importlib.util.spec_from_file_location("_rcl_hop", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.composed_bias(a, c)
+
+def _cpd_stability_product(failure_probs):
+    """chain-position/load_class.py::stability_product, imported. WO-1's
+    reachable-controller compounding: P(all assumed stabilities hold) = product
+    of (1 - p), None if any factor is unassessed (the order's RULE -- an
+    unquantifiable probability cannot be propagated) or out of [0, 1]. Expected
+    values are the product by hand; the None cases pin the unassessed factor
+    apart from a factor of zero."""
+    import importlib.util
+    path = os.path.join(ROOT, "chain-position", "load_class.py")
+    spec = importlib.util.spec_from_file_location("_cpd_load", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.stability_product(failure_probs)
+
+
+def _seed_route_independence():
+    register(
+        "route-independence/route_independence.py::independence_ratio",
+        _ri_independence_ratio,
+        [
+            case("no route settles", (0, 4), 0.0,
+                 "0 of 4: a measured zero, distinct from the no-route case"),
+            case("half settle", (2, 4), 0.5, "2 of 4 by arithmetic"),
+            case("all settle", (3, 3), 1.0, "3 of 3 by arithmetic"),
+            case("no routes", (0, 0), None,
+                 "route_count 0 is NOT_EVALUABLE; a 0.0 here would report "
+                 "an enclosure nobody measured"),
+        ],
+        note="FWO-2; the zero-route case pins None against 0.0.",
+    )
+
+
+def _lag_years(approx_date, reach_date, reached):
+    """route-independence/lag_count.py::lag_years, imported. FWO-11: the lag a
+    funding-coupled system took to reach a result produced under direct
+    constraint. Expected values are subtraction by hand across the era
+    boundary; None pins the classes that carry no reach date by definition
+    against a lag of zero, since a zero would read as 'reached at once'."""
+    import importlib.util
+    path = os.path.join(ROOT, "route-independence", "lag_count.py")
+    spec = importlib.util.spec_from_file_location("_lag_count", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.lag_years(approx_date, reach_date, reached)
+
+
+def _seed_lag_count():
+    register(
+        "route-independence/lag_count.py::lag_years",
+        _lag_years,
+        [
+            case("across the era boundary", (-200, 1821, "FULL"), 2021,
+                 "1821 - (-200) by hand; astronomical years"),
+            case("partial reach", (1450, 2000, "PARTIAL"), 550, "2000 - 1450 by hand"),
+            case("recovered, not rediscovered", (-125, None, "RECOVERED_NOT_REDISCOVERED"), None,
+                 "no reach date exists for the class; None, never 0"),
+            case("not reached with dates supplied", (500, 2006, "NOT_REACHED"), None,
+                 "the class carries no lag whatever dates are passed; None, never 1506"),
+        ],
+        note="FWO-11; the None cases pin absence against a zero lag.",
+    )
+
+
+def _net_positions(claims):
+    """route-independence/settlement_split.py::net_positions, imported.
+    AMENDMENT A-1 section 2 as arithmetic: net[i] = held - owed on a claim
+    matrix. The universal case pins C1 (all zero); the one-against-all case
+    pins the placing party; None pins an empty matrix against a zero list,
+    since [] would read as 'no party owes' where nothing was declared."""
+    import importlib.util
+    path = os.path.join(ROOT, "route-independence", "settlement_split.py")
+    spec = importlib.util.spec_from_file_location("_settlement_split", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.net_positions(claims)
+
+
+def _seed_settlement_split():
+    register(
+        "route-independence/settlement_split.py::net_positions",
+        _net_positions,
+        [
+            case("universal, three parties", ([[0, 1, 1], [1, 0, 1], [1, 1, 0]],), [0, 0, 0],
+                 "held 2, owed 2 for every party by hand: C1"),
+            case("one against two", ([[0, 1, 1], [0, 0, 0], [0, 0, 0]],), [2, -1, -1],
+                 "party 0 holds 2 owes 0; the others hold 0 owe 1"),
+            case("two-way unequal", ([[0, 3], [1, 0]],), [2, -2],
+                 "3 - 1 and 1 - 3 by hand; a net that is not zero on a two-party instrument"),
+            case("empty", ([],), None, "no matrix, no positions; None never []"),
+        ],
+        note="AMENDMENT A-1; the empty case pins None against a zero-length list.",
+    )
 
 
 def _msv_coverage(which):
