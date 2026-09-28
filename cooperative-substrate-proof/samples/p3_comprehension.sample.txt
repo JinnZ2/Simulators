@@ -1,0 +1,22 @@
+P3 COMPREHENSION CHECK
+
+  corpus: fixtures/corpus
+  documents: 3
+  [CHOICE 1] zlib level 9   [CHOICE 2] delta >= 0.020
+
+  A                B                    gain ciphered    delta  verdict
+  ---------------------------------------------------------------------
+  a_units.txt      b_protocol.txt     0.2507   0.0156   0.2350  SHARED_TERMS
+  a_units.txt      c_ciphered.txt     0.0174   0.0226  -0.0052  SHARED_FORM_ONLY
+  b_protocol.txt   c_ciphered.txt     0.0205   0.0271  -0.0066  SHARED_FORM_ONLY
+
+  corpus verdict: SHARED_FORM_ONLY
+
+  Reading: gain measures shared FORM. The drop under a
+  substitution cipher is what the terms carry. A
+  SHARED_TERMS verdict is evidence the parts do not
+  contest each other's terms; it is not proof that they
+  agree about any one of them.
+
+  scope coding (C1-C4): OUTSIDE_FRAME_SCOPE
+  outside the competitive frame's coverage: C2, C3, C4 does not hold. The frame does not cover this observation; the observation stands.

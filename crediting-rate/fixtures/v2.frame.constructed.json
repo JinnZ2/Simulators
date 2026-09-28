@@ -1,0 +1,7 @@
+{
+  "corpus": "CONSTRUCTED general-reference corpus",
+  "date": "CONSTRUCTED",
+  "edition": "CONSTRUCTED edition 1",
+  "kind": "general-reference (not specialist history of science)",
+  "note": "A constructed frame so the frame gate can be passed in a test. The folder's own frame.json stays UNDECLARED, which is what a real run has to replace."
+}

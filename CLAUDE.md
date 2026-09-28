@@ -243,6 +243,7 @@ last three; read in order:
 - `corpus-input-gaps/` — input-side gaps + a response-loop sim
 - `coinage-log/` — naming gaps; is the absent word the finding
 - `falsifier-survey/` — Run 1 of a delivered falsifier survey; Run 2 split to its two repos
+- `crediting-rate/` — credit tracks the loanword or the contribution; BLOCKED until ordered; rev 2: three visibility bins, a same-side frame gate and a model-authorship gate, crediting mechanical, the return enum local and marked G_ABSENT
 - `crediting-rate/` — credit tracks the loanword or the contribution; BLOCKED until ordered; v2 the same order REVISED beside v1, three model-authored revisions sent un-adjudicated, one removing the input its own RETURN block keeps a class for
 - `gate-check/` — four structural presence checks, file+line, no FAIL label; thresholds in data
 - `anchor-measurand-crossing/` — crossing given a target; prompts parsed from the order, scorer's judgement as data, no run
@@ -366,6 +367,7 @@ last three; read in order:
 - `assessor-coupling/` — WO-6 (the second document under that ordinal), assessor-assessed coupling as a recurrent failure mode; hop-1 kept structurally out of the independence vector, the record's summary sentence refuted by its own scope limit at a negative arm of zero, no organization named and no field for one
 - `unowned-join/` — WO-4, the shape with seven faces and a registered term gap; A1-A4 stated formally and made checkable, face 6 NOT_EVALUABLE on the order's own reason, the order's "no term means no code" refuted by the folder building it and no term coined
 - `instrument-index/` — a REBUILD from a lost original: 13 fields, two renderings from one pass, a 0.70 axis falsifier that cannot fire where nothing is rated
+- `cooperative-substrate-proof/` — P1-P5, each standalone; the cooperative substrate the competitive frame runs on, as a coverage argument; C1-C4 coded into the parts
 - `stability-trigger-envelope/` — DISPATCH ESP-1, a stability trigger outside its validation envelope (cab sensor vs trailer mass on serpentine downgrades); one instrument `descent_record.py` on CONSTRUCTED data, F1-F5 firing as regression, NEITHER_MODE added to the dispatch's five labels, clock offsets detected never corrected, relocation counted never scored; real run NOT_RUN, T3/T6 NOT_BUILT, T4/T5 UNMEASURED
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
@@ -11140,6 +11142,78 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   excluded and counted, never estimated (`CRD_002`); two constructed worlds
   return `ETYMOLOGY_TRACKING` and `CONTRIBUTION_TRACKING`, so the return is
   not constant (`CRD_001`). `bin_gap` registered in `tools/known_answer.py`.
+  **REVISION 2 then landed** (`WORK_ORDER_V2.md`, verbatim beside v1;
+  `crediting_rate_v2.py` beside the v1 module, which is unedited) — three
+  visibility bins (`visible` / `technical_only` / `not_retained`, plus
+  `ambiguous`, a bin and never an assignment), two hard gates in front of the
+  comparison, and crediting made MECHANICAL. **`CRD_009`, the finding: the
+  revision deletes the input `CONTRIBUTION_TRACKING` was read off.** v1 gated
+  it on a misattribution rate — narrative naming the receiving tradition as
+  originator against the attested ordering — and rev 2 codes
+  `origination_vs_absorption` *"from attested dates only, never from
+  narrative"*, removing the narrative half and with it the comparison, so the
+  revised schema carries **no contribution proxy at all** while fixture F2
+  requires that return on a contribution-tracking world; the replacement built
+  here is the attested **priority margin** read as a Spearman correlation, the
+  only contribution-shaped quantity the schema still carries, declared
+  `[CHOICE 8]` and not in the order. **`CRD_010`, stated before any run:** the
+  pre-stated ordering `visible > technical_only >= not_retained` ALREADY
+  ENCODES the visibility hypothesis, so the discriminator's two branches are
+  not symmetric — *tracks not_retained* sits inside the ordering, *tracks
+  visible* violates `visible > technical_only` and refutes it — and they are
+  not two outcomes of one neutral test. **`CRD_011`/`CRD_012`:** the second
+  comparison is non-strict, so the ordering holds across a continuum and
+  cannot locate the middle bin; `position = (r_tech - r_not)/(r_vis - r_not)`
+  is reported for that with a stipulated cut, and is **UNDEFINED — never 0.5
+  — when the outer bins do not separate**, registered in
+  `tools/known_answer.py` with 0.0 / 1.0 / a measured 0.5 / two `None`s, since
+  a midpoint on a denominator near zero is indistinguishable from the measured
+  halfway case. **`CRD_013`:** `model_authored` is three-valued and **absent
+  is not false** — a header without it is refused at load and a `null` blocks,
+  because an absent provenance field read as false is the contamination going
+  unreported. **`CRD_014`:** `FRAME_ASYMMETRIC` has two readings and the order
+  states one — a list that is *uniformly* `language_side` passes the stated
+  same-side rule and still cannot have produced its own `not_retained` bin,
+  since no linguistic index enumerates a word that did not survive; both fire
+  with distinct reasons. **`CRD_015`:** the blind moved with the revision and
+  stayed structural — v1 kept the BIN off the coding file, rev 2 says the item
+  name carries its own bin, so the NAME is refused and the join is on
+  `entry_id`. **`CRD_016`/`CRD_017`, the mechanical measure's two judgements:**
+  the alias list is the one judgement inside the match (a tradition named by a
+  word the list lacks reads as uncredited, and the render prints the
+  per-tradition count), and the sentence splitter is the sharper one — *first
+  N sentences* needs a splitter, an unguarded one breaks on date abbreviations,
+  and those are commoner in older entries, so **the measurement error is
+  correlated with N2's own control variable**; both splitters ship, the moved
+  set is reported by antiquity band, and on the splitter fixture 8 of 16 items
+  move with **all 8 in the older band** while F1 reads 0 of 17, a property of
+  that corpus and not evidence the failure mode is absent. **`CRD_018`:** the
+  order's NOTE is structural — the bin's correlation with antiquity and with
+  path length prints ABOVE the rate table, before any fit, reading −0.598 on
+  F5. **`CRD_019`:** all seven returns occur in the selftest, including both
+  asymmetry readings and both confound controls. **`CRD_022` UNVERIFIED:** the
+  real run is NOT RUN on the order's own open item — a technique-side
+  transmission catalogue to draw ALL bins from, unidentified — and until one
+  exists there is no admissible item list at all, since a language-side list
+  fails the frame gate by construction and a model-drafted one fails the
+  contamination gate by declaration, which is why **no item list was authored
+  here**. **`CRD_024`, a correction from outside the folder:** `CRD_006` and
+  `CRD_021` recorded the method layer as absent and the F half is REFUTED —
+  the branch set EXISTS at `JinnZ2/method-layer` beside four other tools, so
+  `branch_set.json` is a **cross-repo pointer, not a missing build** (carried,
+  that repository being outside this session's GitHub scope, so recorded
+  rather than checked). The same report settles the G half the other way:
+  **none of the five is a return envelope**, so G is genuinely absent and the
+  order's instruction for that state — define the enum locally, mark
+  `G_ABSENT` — is what the build owed and did not ship; it ships now, declared
+  beside `RETURNS` with the five carried tool names, printed in every render
+  above the numbers, asserted four ways, and the three false strings corrected
+  in place rather than deleted so the misreading stays on the record. Every
+  `v2.` fixture is CONSTRUCTED with invented tradition names and
+  nothing is a statement about any technique, tradition or person. Twenty-four
+  claims `CRD_001..024`; check counts printed by `python3
+  crediting-rate/crediting_rate.py --selftest` and `--selftest` on the v2
+  module. Stdlib only, parses under 3.9, CC0.
   **The same order then arrived REVISED** (`WORK_ORDER_V2.md`, verbatim
   beside the first, neither superseding and `crediting_rate.py` unedited),
   with `crediting_rate_v2.py` importing v1 for every piece the revision
@@ -13775,10 +13849,101 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   strings verbatim and screening them meaning rewording delivered text.
   **`II_012` UNVERIFIED and it covers the folder:** every `[RECOVERED]`
   label is a claim about fragments this session did not read; what is
-  established is that the build implements the text as delivered. Fourteen
+  established is that the build implements the text as delivered.
+  **`II_015`, a defect it surfaced elsewhere:** this is the first folder in
+  the tree to put its test file in a subdirectory, and
+  `tools/run_manifest.py` captured only the basename out of a redirect
+  message and resolved it beside the module, so a live target read as
+  missing and the folder landed red on two tree-level checks -- a flat
+  layout hides it because the basename happens to resolve; repaired in the
+  extractor with both cases pinned in that module's selftest. Fifteen
   `II_*` claims; check count printed by
   `python3 instrument-index/tests/test_build_index.py`. Stdlib only, parses
   under 3.9, phone-buildable, CC0.
+- `cooperative-substrate-proof/` — A work order delivered verbatim and
+  built to: a four-part self-verifiable artifact (P1-P5), each part
+  standalone, showing **the cooperative substrate the competitive frame
+  requires in order to be possible at all** — a **coverage** argument,
+  not a values argument, with the order's instruction *do not strip the
+  competition frame, add the layer underneath it* carried in
+  `FRAMING.md`. Landed here rather than at the repo the order names:
+  `add_repo` answered *not found* and a create call answered *403
+  Resource not accessible by integration*, the `substrate-alternative/`
+  `SA_018` precedent exactly, so it is a self-contained folder with its
+  own LICENSE and suite importing nothing across its boundary
+  (`PRF_001`). **`PRF_002`, the framing made structural:** `scope.py` has
+  no return member meaning *the competitive frame is wrong* and none
+  meaning another frame is preferable — the three are
+  `WITHIN_COMPETITIVE_FRAME`, `OUTSIDE_FRAME_SCOPE` naming the condition
+  that failed, and `UNDECLARED` naming the one not coded — and an AST
+  scan over every module refuses a declared ranking-and-values
+  vocabulary, null-tested with a plant. **`PRF_004`: that scan fired on
+  this folder's own code and the repair was a better reading of the
+  order** — P3's corpus verdict was a majority rule over pair readings
+  carrying a local `best`, which is a vote among pairs; replaced by
+  `weakest_link`, the order's own first sentence for P3 (*every link must
+  transmit faithfully*), since a majority rule reports SHARED_TERMS on a
+  corpus holding one pair that shares no terms at all. **`PRF_005`, the
+  null that had to be rebuilt:** P3 measures `gain = 1 - C(A+B)/(C(A) +
+  C(B))` and gain alone is evidence of shared FORM, so every pair is
+  re-measured against a control — first a token rename, which is **not**
+  a null, since renaming tokens to fresh strings destroys B's own
+  compressibility, moves the denominator, and returned a near-constant
+  `-0.025` offset that read the ciphered fixture as SHARED_TERMS; a
+  **monoalphabetic substitution cipher** is the control, leaving every
+  repeat inside B at the same length and distance while removing every
+  substring shared with A, and the shipped fixtures separate 0.2350
+  against -0.0052, forty times the threshold on either side of it.
+  **`PRF_006`:** the corpus carries its own null (`c_ciphered.txt` IS
+  `b_protocol.txt` under the permutation), and the b-c pair — identical
+  structure, no shared terms — reads `SHARED_FORM_ONLY`, which is the
+  reading. **`PRF_007`/`PRF_008`, P4:** the first settler had `accepts`
+  and `contests` and nothing else, and with every contest unbounded the
+  *corrective* chain ran to the budget exactly as the mutual-sabotage
+  pair did, both returning `NO_ANSWER budget_exhausted` — the two
+  outcomes the order asks to be separated coming back identical; the
+  `contest_limit` field (integer = bounded refusal, null = unbounded) is
+  the cut and is DECLARED, never inferred from a step's content, and the
+  turf-war chain now returns `NO_ANSWER` for a **structural** reason (a
+  cycle in the re-settle graph, both steps named) rather than by running
+  out of budget, with `SETTLES_WITH_REWORK` the load-bearing middle
+  member — without it every contest reads as failure and *no answer, not
+  a worse answer* has nothing to be distinguished from. **`PRF_009`:**
+  P2's `unverified_fraction` is a **ceiling on verification, not a
+  measurement of trust** — `LOCALLY_CHECKED` bounds one clause of a
+  contract with at least three, so 0.9900 on its own source understates
+  the unverified surface; `None` on a file with no call sites, never 0.0.
+  **`PRF_010`:** the existence proof is the narrow checkable one — this
+  output exists, producing it required every contract listed, the sha256
+  of the analysed file is printed beside the reading, scope stated as
+  this run, this machine, this digest, with no claim that any layer is
+  trustworthy. **`PRF_011`/`PRF_012`:** P1's source rule is a REFUSAL
+  (`Requirement` raises `SourceMissing` at construction, since an
+  admitted-but-flagged entry can be cited with the flag dropped) with its
+  limit stated — nothing checks whether the source says what the entry
+  says — and the PIPELINE is **ABSENT**, egress being an allowlist that
+  refuses every publisher and preprint host, with no methods section
+  paraphrased from memory and the shipped record declaring CONSTRUCTED in
+  its own provenance field. **`PRF_013`:** an undeclared `t_visible`
+  gives an UNDEFINED ratio and never a small one, which is the whole of
+  the antibiotic anchor — correct per patient for fifty years not because
+  the resistance signal was measured absent but because the interval it
+  becomes visible on was not a variable anyone was scored against — with
+  all four verdicts occurring on the shipped anchors. **`PRF_003`:**
+  C1-C4 are conjunctive and `UNDECLARED` outranks `OUTSIDE_FRAME_SCOPE`,
+  so a silence is never read as a failure; both WITHIN and OUTSIDE occur
+  across the parts, and the one chain coded WITHIN is the one with no
+  answer. **`PRF_014`:** one operation is a declared COPY of
+  `tools/authority_scan.py` with the drift cost stated, forced by the
+  folder having to be able to leave whole. **`PRF_016` UNVERIFIED and it
+  covers the folder:** every record, chain, action and document is
+  CONSTRUCTED, no methods section was read, no model was run, and nothing
+  is a statement about any published result, organisation or person.
+  `gain_from_sizes` and `lag_ratio` are registered in
+  `tools/known_answer.py` with the `None`-vs-`0.0` cases as the pin;
+  every module refuses `--selftest`; check count printed by `python3
+  cooperative-substrate-proof/test_proof.py`. Stdlib only, parses under
+  3.9, phone-buildable, CC0.
 - `stability-trigger-envelope/` — DISPATCH ESP-1, landed verbatim in
   `WORK_ORDER.md`. A tractor stability system reads rollover and brakes on
   9-13% serpentine descents while the at-risk trailer is quiet: FAULT A

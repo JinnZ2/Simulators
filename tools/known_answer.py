@@ -191,6 +191,28 @@ def _crediting_bin_gap(which):
               "empty_bin": {1: [0.5], 0: []}}
     return mod.bin_gap(worlds[which])
 
+def _crediting_position(which):
+    """crediting-rate/crediting_rate_v2.py::position, imported. Where the
+    technical_only bin sits between the two outer bins, 0.0 at not_retained
+    and 1.0 at visible. The cases that matter are the ones with no
+    denominator: a midpoint computed on outer bins that do not separate is a
+    number about the noise, so it is None."""
+    import importlib.util
+    path = os.path.join(ROOT, "crediting-rate", "crediting_rate_v2.py")
+    spec = importlib.util.spec_from_file_location("_crediting_rate_v2", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    V, T, N = mod.VISIBLE, mod.TECHNICAL_ONLY, mod.NOT_RETAINED
+    worlds = {
+        "at_not_retained": {V: [1.0, 1.0], T: [0.0], N: [0.0, 0.0]},
+        "at_visible": {V: [1.0, 1.0], T: [1.0], N: [0.0, 0.0]},
+        "halfway": {V: [1.0], T: [0.5], N: [0.0]},
+        "no_spread": {V: [0.5, 0.5], T: [0.5], N: [0.5, 0.5]},
+        "empty_middle": {V: [1.0], T: [], N: [0.0]},
+    }
+    return mod.position(worlds[which])
+
+
 def _amc_crossing_band(which):
     """anchor-measurand-crossing/amc.py::crossing_band, imported. Grouped ids
     and an ungrouped count are hand-built so the band can be counted off."""
@@ -711,6 +733,7 @@ EXPECTED_METRICS = (
     "anchor-measurand-crossing/amc.py::crossing_band",
     "automation-gap/driver_hours_evidence_register.py::p_uninterrupted",
     "anchor-position/normalize.py::crossing_count",
+    "crediting-rate/crediting_rate_v2.py::position",
     "crediting-rate/crediting_rate.py::bin_gap",
     "failure-mode-register/register.py::fraction_cap",
     "failure-mode-register/register_v2.py::joint_survival",
@@ -752,6 +775,8 @@ EXPECTED_METRICS = (
     "unowned-join/invariant.py::join_coverage",
     "assessor-coupling/conditions.py::pool_fraction",
     "instrument-index/build_index.py::claim_only_fraction",
+    "cooperative-substrate-proof/p3_comprehension.py::gain_from_sizes",
+    "cooperative-substrate-proof/p5_lag.py::lag_ratio",
 )
 
 
@@ -807,6 +832,39 @@ def _ii_claim_only_fraction(shapes):
     spec.loader.exec_module(mod)
     rows = [{"input_shape": sh} for sh in shapes]
     return mod.claim_only_fraction(rows)
+
+
+def _csp_gain_from_sizes(ca, cb, cab):
+    """cooperative-substrate-proof/p3_comprehension.py::gain_from_sizes,
+    imported. The compressibility gain 1 - cab / (ca + cb), kept separate
+    from the compressor so the arithmetic has a known answer that does not
+    move with the zlib build. The pin is the 0.0 against the Nones: a pair
+    that compressed no better together than apart is a MEASUREMENT of no
+    shared form, while an absent size is nothing measured, and a part whose
+    whole claim is about transmission must not read the second as the
+    first."""
+    import importlib.util
+    path = os.path.join(ROOT, "cooperative-substrate-proof",
+                        "p3_comprehension.py")
+    spec = importlib.util.spec_from_file_location("_csp_p3", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.gain_from_sizes(ca, cb, cab)
+
+
+def _csp_lag_ratio(t_visible, t_scored):
+    """cooperative-substrate-proof/p5_lag.py::lag_ratio, imported. The
+    order's gate quantity, t_visible / t_scored. The pin is that a
+    t_visible of exactly 0.0 -- a failure visible immediately -- returns
+    0.0, while an UNDECLARED t_visible returns None. Collapsing them is
+    the order's own worst case: an undeclared failure interval reads as a
+    short one, and a clean score over it reads as success."""
+    import importlib.util
+    path = os.path.join(ROOT, "cooperative-substrate-proof", "p5_lag.py")
+    spec = importlib.util.spec_from_file_location("_csp_p5", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.lag_ratio(t_visible, t_scored)
 
 
 def _rs_delta(acc_open, acc_blind):
@@ -1244,6 +1302,33 @@ def seed():
               "falsifiable. hit counts ONLY against a falsifiable EXPECT, so "
               "a vague commit that matches anything is voided by this "
               "denominator, not by trust."),
+    )
+    register(
+        "crediting-rate/crediting_rate_v2.py::position",
+        _crediting_position,
+        [
+            case("at not_retained", ("at_not_retained",), 0.0,
+                 "technical_only sits on the lower outer bin -> 0.0; this is "
+                 "the reading that leaves the pre-stated ordering intact",
+                 tol=1e-9),
+            case("at visible", ("at_visible",), 1.0,
+                 "technical_only sits on the upper outer bin -> 1.0; this "
+                 "reading refutes the pre-stated ordering rather than "
+                 "confirming a second branch of it", tol=1e-9),
+            case("halfway", ("halfway",), 0.5,
+                 "0.5 between 0.0 and 1.0 -> 0.5; a third distinct value, so "
+                 "the set can detect a constant metric", tol=1e-9),
+            case("no spread", ("no_spread",), None,
+                 "the outer bins do not separate, so there is no denominator "
+                 "worth dividing by. A 0.5 here would be indistinguishable "
+                 "from the measured halfway case above, on no signal"),
+            case("empty middle bin", ("empty_middle",), None,
+                 "no technical_only item -> None, absent not a midpoint"),
+        ],
+        note=("revision 2's discriminating quantity. The order names two "
+              "readings of the technical_only bin and no boundary between "
+              "them; the cut is a declared CHOICE in the module and the "
+              "UNDEFINED state is what keeps a noise midpoint out of it."),
     )
     register(
         "crediting-rate/crediting_rate.py::bin_gap",
@@ -2262,6 +2347,48 @@ def _tra_sle_to_sv(mm_per_year):
              "returns 'axis holds at this build' while None returns "
              "'UNRATED: check not run' -- opposite readings of the same "
              "build, separated only by this field")
+
+    register(
+        "cooperative-substrate-proof/p3_comprehension.py::gain_from_sizes",
+        _csp_gain_from_sizes,
+        [case("a pair compressing to 120 of 200", (100, 100, 120), 0.4,
+              "1 - 120/200 by hand", tol=1e-12),
+         case("no gain is a measured 0.0", (100, 100, 200), 0.0,
+              "the pair compressed together exactly as well as apart. A "
+              "measurement of no shared form, and NOT the same state as "
+              "an absent size below"),
+         case("a negative gain is returned as measured",
+              (100, 100, 220), -0.1,
+              "1 - 220/200; the concatenation compressed WORSE than the "
+              "parts. Clamping it at zero would hide the one direction "
+              "that says the documents interfere", tol=1e-12),
+         case("an absent compressed size is None", (100, None, 120), None,
+              "nothing was measured; not a gain of zero"),
+         case("a zero denominator is None", (0, 0, 0), None,
+              "two empty documents have no gain to report")],
+        note="the 0.0 against the Nones is the pin, and the negative case "
+             "is the second: a metric that clamped or defaulted would pass "
+             "the first three cases and fail these two")
+
+    register(
+        "cooperative-substrate-proof/p5_lag.py::lag_ratio",
+        _csp_lag_ratio,
+        [case("fifty times the scoring interval", (50.0, 5.0), 10.0,
+              "50/5 by hand; exactly at the order's gate", tol=1e-12),
+         case("failure visible faster than scoring", (1.0, 10.0), 0.1,
+              "1/10 by hand; the reachable negative", tol=1e-12),
+         case("a failure visible immediately is 0.0", (0.0, 10.0), 0.0,
+              "a MEASUREMENT: t_visible was declared and it is zero"),
+         case("an undeclared t_visible is None", (None, 10.0), None,
+              "the pin. You cannot get a null signal out of a variable "
+              "nobody declared, so this must not read as the 0.0 above"),
+         case("an absent scoring interval is None", (10.0, None), None,
+              "no denominator, no reading"),
+         case("a zero scoring interval is None", (10.0, 0.0), None,
+              "not a division by zero and not an infinite ratio")],
+        note="the 0.0 against the four Nones is the pin: a declared "
+             "immediate failure and an undeclared failure interval are "
+             "the two states the order's gate exists to keep apart")
 
 
 def seed_reachable(src=None, path=None):

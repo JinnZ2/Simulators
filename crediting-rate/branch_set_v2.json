@@ -6,9 +6,11 @@
     {"id": "genuine_contribution_difference"},
     {"id": "citation_convention_artifact"}
   ],
-  "discriminator": "crediting rate across loanword bins with ordering held",
-  "cost": "low -- published reference sources only",
+  "discriminator": "crediting rate across three visibility bins with the attested ordering held, behind a same-side sampling gate and a model-authorship gate",
+  "discriminating_bin": "technical_only -- word survived, general reader cannot see it. Tracking not_retained makes visibility the variable; tracking visible makes retention the variable.",
+  "cost": "low once the item list exists -- published reference sources only. The item list is the cost, and it is the open item.",
   "predicts_elsewhere": "proxy archive siting (different domain, same preservation-weighting mechanism)",
-  "emitted_by": "crediting-rate/crediting_rate.py",
+  "emitted_by": "crediting-rate/crediting_rate_v2.py",
+  "supersedes": "branch_set.json, v1's emission, which stays in place; its one false line about the method layer was corrected alongside this one and the correction is recorded at CRD_024",
   "method_layer": "F EXISTS at JinnZ2/method-layer (out of this session's GitHub scope; CARRIED, verified against nothing here), so this file is an emission in F's shape pointing at a real consumer, not a stand-in for a missing build. G is ABSENT -- none of method-layer's five tools (branch_set, preference_free_rank, rank_detector, frame_probe, observer_position_control) is a return envelope -- so the return enum is defined locally and marked G_ABSENT in crediting_rate_v2.py."
 }
