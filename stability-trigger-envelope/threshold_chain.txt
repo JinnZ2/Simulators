@@ -1,0 +1,128 @@
+APPEND-ONLY. One entry per threshold change. Superseded entries are never
+removed or edited; a new value is a new entry below the old one.
+
+Every entry below was set by a builder, not by an operator. None is a policy
+anyone adopted. An operator entry below supersedes it.
+
+---
+threshold: amplitude_ratio_hi
+value:     3.0
+who:       builder (Claude Code session, DISPATCH ESP-1), not an operator
+when:      2026-09-24
+reasoning: a round number. Nothing measured sets it. It is the point at which
+           the cab's motion is called large enough relative to the trailer's
+           to read as a mode of the cab rather than of the combination. On a
+           real rig this comes from paired-IMU runs (T1), which have not been
+           made.
+
+---
+threshold: amplitude_ratio_lo
+value:     0.3333
+who:       builder (Claude Code session, DISPATCH ESP-1), not an operator
+when:      2026-09-24
+reasoning: the reciprocal of amplitude_ratio_hi, so the two verdicts are
+           symmetric and neither body is privileged by the arithmetic. Between
+           the two bounds the record does not separate the bodies and the
+           instrument says so rather than picking one.
+
+---
+threshold: envelope_window_frac
+value:     0.25
+who:       builder (Claude Code session, DISPATCH ESP-1), not an operator
+when:      2026-09-24
+reasoning: the moving-RMS window, as a fraction of one curve-reversal period.
+           A quarter period is short enough to keep the onset edge and long
+           enough to average the carrier out of it. Nothing measured sets it.
+
+---
+threshold: onset_frac
+value:     0.5
+who:       builder (Claude Code session, DISPATCH ESP-1), not an operator
+when:      2026-09-24
+reasoning: onset is the first exceedance of this fraction of a body's OWN peak
+           envelope. Relative to itself on purpose: onset then measures WHEN a
+           body started moving and never how much it moved, which is the
+           amplitude ratio's job. Mixing the two into one number would let a
+           large late body and a small early one report the same.
+
+---
+threshold: onset_search_periods
+value:     1.0
+who:       builder (Claude Code session, DISPATCH ESP-1), not an operator
+when:      2026-09-24
+reasoning: the dispatch's own wording -- the envelope cross-correlation lag is
+           read within one forcing period of the event. Declared rather than
+           placeholder: it is a statement of scope taken from the order, not a
+           number chosen here.
+
+---
+threshold: onset_variance_floor
+value:     1e-06
+who:       builder (Claude Code session, DISPATCH ESP-1), not an operator
+when:      2026-09-24
+reasoning: a trace whose envelope never rises above this has no onset to time.
+           Its onset is reported absent rather than placed at t=0, because a
+           flat trace crossing a threshold at sample zero is not an arrival.
+           Arbitrary; a real value comes from the logger's own noise floor.
+
+---
+threshold: clock_tolerance_s
+value:     0.05
+who:       builder (Claude Code session, DISPATCH ESP-1), not an operator
+when:      2026-09-24
+reasoning: two phone clocks are not one clock. Past this offset a lead between
+           the traces is a lead between the loggers and the instrument refuses
+           rather than reporting it. Arbitrary; a real value comes from how the
+           two devices were synchronised, which is a procedure nobody has
+           written yet.
+
+---
+threshold: rate_tolerance_frac
+value:     0.01
+who:       builder (Claude Code session, DISPATCH ESP-1), not an operator
+when:      2026-09-24
+reasoning: same argument on the sample rate rather than the offset. Arbitrary.
+
+---
+threshold: grade_pct_min / grade_pct_max
+value:     0.0 / 20.0
+who:       builder (Claude Code session, DISPATCH ESP-1), not an operator
+when:      2026-09-24
+reasoning: the range over which THIS INSTRUMENT claims to be able to read a
+           trace. It is not the vehicle's validation envelope and must not be
+           read as one -- measuring that is T2 and T5, neither of which has
+           been run. 20% is above any public road grade the case describes,
+           so the bound is loose on purpose: an OUT_OF_ENVELOPE verdict should
+           mean the record is outside what the reader can handle, not outside
+           what a road can be.
+
+---
+threshold: surfaces_in_envelope
+value:     dry,wet
+who:       builder (Claude Code session, DISPATCH ESP-1), not an operator
+when:      2026-09-24
+reasoning: snow and ice are excluded because V5 says the margin is gone and
+           the sensor degrades there, so a reading taken on them is a reading
+           of a different system. Excluding them is a refusal to report, not a
+           finding that nothing happens on them -- the opposite: the case says
+           that is where it matters most, and this instrument cannot reach it.
+
+---
+threshold: min_runs_for_edge
+value:     3
+who:       builder (Claude Code session, DISPATCH ESP-1), not an operator
+when:      2026-09-24
+reasoning: the dispatch's own F5 fixture sets it: two runs on a road returns
+           INSUFFICIENT_RUNS. Two points give an onset speed and no spread,
+           and an edge quoted without a spread is a point pretending to be a
+           measurement.
+
+---
+threshold: access_bins
+value:     1,2,4
+who:       builder (Claude Code session, DISPATCH ESP-1), not an operator
+when:      2026-09-24
+reasoning: V2 bin edges. 1 and 2 because the case names drops with one or two
+           access roads as the trap; 4 as an upper bin so the low bins are not
+           the only ones. Arbitrary and load-bearing on nothing: the tally
+           reports every bin separately and sums none of them.
