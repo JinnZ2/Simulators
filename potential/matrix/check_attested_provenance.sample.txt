@@ -1,0 +1,27 @@
+check_attested_provenance -- matrix/FUNCTIONALITY_MATRIX_COMPLETE.txt
+
+  [A] cells:                 16
+  carry standing note:       0
+  carry a year (date test):  0   (upper bound on 'when'; see STATED LIMIT)
+  carry NEITHER:             16
+
+  line   cell      section                            field                  provenance
+  55     54-55     F1  RATIONING / ALLOCATION         breaks when            NEITHER
+  67     66-67     F1  RATIONING / ALLOCATION         cost bearer            NEITHER
+  84     82-84     F2  ANTI-FRAUD / UNIQUENESS / ACCO breaks when            NEITHER
+  86     85-90     F2  ANTI-FRAUD / UNIQUENESS / ACCO vertex dep             NEITHER
+  92     92-92     F2  ANTI-FRAUD / UNIQUENESS / ACCO cost bearer            NEITHER
+  106    104-106   F3  COORDINATION AT SCALE AMONG ST breaks when            NEITHER
+  114    114-114   F3  COORDINATION AT SCALE AMONG ST cost bearer            NEITHER
+  135    135-137   F4  CONCENTRATED-CAPITAL PROVISION vertex dep             NEITHER
+  165    165-165   F5  INFORMATION AGGREGATION        vertex dep             NEITHER
+  204    204-204   F7  INTERTEMPORAL TRANSFER / SAVIN vertex dep             NEITHER
+  230    230-230   F8  STATE FISCAL ANCHOR            vertex dep             NEITHER
+  241    239-242   F9  LEGIBILITY / IDENTITY PROXY    purpose                NEITHER
+  250    243-250   F9  LEGIBILITY / IDENTITY PROXY    beneficiary            NEITHER
+  253    252-253   F9  LEGIBILITY / IDENTITY PROXY    breaks when            NEITHER
+  254    254-254   F9  LEGIBILITY / IDENTITY PROXY    vertex dep             NEITHER
+  260    259-260   F9  LEGIBILITY / IDENTITY PROXY    cost bearer            NEITHER
+
+  no cell rewritten. a count is what the rule permits a scanner to produce;
+  whose action, which seat, and whether the date is the provenance are readings.

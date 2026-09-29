@@ -25,9 +25,9 @@ from typing import Optional
 # deliberate duplication: a registry that imports a folder cannot
 # record entries from a folder that has been renamed or removed",.
 MECHANISMS = (
-    "DELETE "",
+    "DELETE",
     "MERGE",
-    "GfENERALIZE",
+    "GENERALIZE",
     "SUBSTITUTE",
     "RESOLVE",
     "TERMINATE",
@@ -38,7 +38,7 @@ MECHANISMS = (
 )
 
 SHAPE_PAIRS = (
-    ("unresolvedamiliar"),
+    ("unresolved", "familiar"),
     ("recursive", "terminal"),
     ("scoped", "universal"),
     ("plural", "singular"),

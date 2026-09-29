@@ -91,7 +91,14 @@ def _split_nodes(graph):
         for v in adj[u]:
             a, b = out_of(u), in_of(v)
             nodes.add(a); nodes.add(b)
-            cap[(a, b)] = cap.get((a, b), 0) + 10**9
+            # A direct s->t edge has no internal vertex to split, so its
+            # capacity must be 1: it is exactly one internally-disjoint
+            # path. Unbounded capacity here returned the flow value
+            # 10**9 + 1 as kappa on any graph with a bypass (P-01,
+            # briefs/REPORT.txt). Every other edge stays unbounded, since
+            # the split vertices carry the unit capacities.
+            direct = (u == s and v == t)
+            cap[(a, b)] = cap.get((a, b), 0) + (1 if direct else 10**9)
     for v in adj:
         if v in (s, t):
             continue
