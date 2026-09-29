@@ -196,3 +196,25 @@ A6-4     K             A-6's own fixture text (STATED_BY_AMENDMENT)
 E-A6-3 is not filled from memory, per the amendment. The recognition events on
 CS-R4 (1954 TERMINATED, 1973 RESTORED) are RA-3's structure as the order
 states it, grade K, flagged.
+
+## Amendment A-6.1 of 2026-09-28
+
+Nothing was fetched. The amendment text was recovered from the chat transcript with
+entities decoded, not re-typed, and the user's re-paste matched it. Every CE line is
+CARRIED at the amendment author's grade and was read by nobody in this session. The
+egress record from A-4..A-6 stands.
+
+```
+CE-1a  P             Indian Removal Act, 4 Stat. 411 (citation)
+CE-1b  S             history.state.gov scope: ~70 treaties, nearly 50,000 by end of Jackson's presidency
+CE-1c  NOT_RECORDED  NPS scope: about 100,000 across five nations (the amendment states no grade)
+CE-2   S             Worcester v. Georgia (1832)
+CE-3   S             ANCSA, PL 92-203 (several); CE-3f Kodiak ANCSA history PDF, S
+CE-3k  K             Prudhoe Bay / pipeline link (Grokipedia only); not an input
+CE-4   P             25 CFR 83.11(b), retrieved TRUNCATED; total evidence paths NOT_RECORDED
+CE-5   S             1994 rule 83.7(f) and 83.1; retention in the current rule NOT_RECORDED
+S-1..S-5             still to source
+```
+
+The one IMPOSED_SCARCITY row is constructed. Its source gate, G-T3, is A-3's T-3:
+grade K, NOT_LANDED.

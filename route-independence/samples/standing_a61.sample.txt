@@ -1,0 +1,88 @@
+standing_a61 -- AMENDMENT A-6.1 over A-6: standing pairs, imposed scarcity, consolidation chains
+EXPECTED registered at 7729a07; profiles and routes CONSTRUCTED; every CE line carried, none read here
+
+-- expected (section 5); the row not holding first
+expected NOT_EVALUABLE     E-A6.1-2        band [0, 1] (unit: chains) [CHOICE 73]; counting links only reads 1 (MATCH); reading the unsourced join as absent reads 0 and the falsifier fires (MISMATCH)
+         hold: none; the join is unsourced (S-2, S-3); coverage 0/1 joins sourced
+expected MATCH             E-A6.1-1        with the constructed row: gap 1 ['CS-R:fuel_allotment'], band [1, 2]; without it: gap 0, band [0, 1] (the falsifier cell is reachable)
+         hold: INSTRUMENT (rule 1 met at 7729a07); coverage 0/3 routes sourced, 0/1 couplings sourced
+expected MATCH             E-A6.1-3        0 of 1 non-control cases carry another mechanism; the aggregate's mechanism is the amendment's reading of the act
+         hold: HELD(S) on the aggregate case; coverage: 1 aggregate case; 0 of the 200+ village corporations enumerated; S-4 unsourced
+expected MATCH             E-A6-3 REVISED  1 (unit: evidence paths), a lower bound over a TRUNCATED list; no falsifier sentence in the amendment
+         hold: HELD(P) carried from the amendment author's read; coverage 4 of NOT_RECORDED paths read
+
+-- 2a standing pairs at 2026 (unit: case sets) [CHOICE 67]
+   P-0        CS-A:EXCLUDED CS-G:MEMBER CS-R:EXCLUDED CS-R4:EXCLUDED
+   P-1        CS-A:EXCLUDED CS-G:MEMBER CS-R:MEMBER CS-R4:EXCLUDED
+   P-2        CS-A:MEMBER CS-G:MEMBER CS-R:EXCLUDED CS-R4:EXCLUDED
+   P-3        CS-A:EXCLUDED CS-G:MEMBER CS-R:EXCLUDED CS-R4:EXCLUDED
+   P-4        CS-A:EXCLUDED CS-G:MEMBER CS-R:EXCLUDED CS-R4:MEMBER
+   P-ADMITTED CS-A:EXCLUDED CS-G:MEMBER CS-R:ADMITTED_NOT_MEMBER CS-R4:EXCLUDED
+   P-NR       CS-A:EXCLUDED CS-G:MEMBER CS-R:NOT_RECORDED CS-R4:EXCLUDED
+
+-- 2b/2c CS-R routes [CHOICE 71]
+   CS-R:water               min ADMITTED_NOT_MEMBER effective ADMITTED_NOT_MEMBER allocation_limited FALSE
+   CS-R:fuel_allotment      min ADMITTED_NOT_MEMBER effective MEMBER              allocation_limited TRUE
+   CS-R:housing_assignment  min NOT_RECORDED        effective NOT_RECORDED        allocation_limited TRUE
+   coupling IMPOSED_SCARCITY: G-T3 (layer STATE) -> CS-R:fuel_allotment raises_to MEMBER flags none
+   flag CS-R:water               allocation_limited FALSE
+   flag CS-R:fuel_allotment      IMPOSED_SCARCITY from G-T3
+   flag CS-R:housing_assignment  SCARCITY_UNATTRIBUTED
+
+-- standing_gap on CS-R (unit: routes) [CHOICE 68]
+   P-0        standing EXCLUDED            gap 2 band [2, 3] reachable [] undetermined ['CS-R:housing_assignment']
+   P-1        standing MEMBER              gap 0 band [0, 1] reachable ['CS-R:water', 'CS-R:fuel_allotment'] undetermined ['CS-R:housing_assignment']
+   P-2        standing EXCLUDED            gap 2 band [2, 3] reachable [] undetermined ['CS-R:housing_assignment']
+   P-3        standing EXCLUDED            gap 2 band [2, 3] reachable [] undetermined ['CS-R:housing_assignment']
+   P-4        standing EXCLUDED            gap 2 band [2, 3] reachable [] undetermined ['CS-R:housing_assignment']
+   P-ADMITTED standing ADMITTED_NOT_MEMBER gap 1 band [1, 2] reachable ['CS-R:water'] undetermined ['CS-R:housing_assignment']
+   P-NR       standing NOT_RECORDED        gap 0 band [0, 3] reachable [] undetermined ['CS-R:water', 'CS-R:fuel_allotment', 'CS-R:housing_assignment']
+
+-- 2d consolidation events
+   CE-1 1830-05-28 Indian Removal Act, 4 Stat. 411 grade P mechanism REMOVAL peoples_in NOT_RECORDED prior_mode NOT_RECORDED
+      unit_out destination intended: what became eastern Oklahoma (S)
+   CE-3 1971-12-18 ANCSA, PL 92-203 grade S mechanism CONVERSION_TO_CORPORATE peoples_in NOT_RECORDED prior_mode NOT_RECORDED
+      unit_out 12 regional and 200+ village corporations
+   CE-1 figure nearly 50,000  people moved   scope: removal treaties under the Act, to the end of Jackson's presidency (grade S)
+   CE-1 figure about 100,000  people removed scope: removed in total across five nations (grade NOT_RECORDED)
+   CE-1 figures pooled: refused (ScopePooled) [CHOICE 75]
+   CE-2 lawful_reach FALSE / physical outcome: removal proceeded (S); diverge True (grade S)
+   CE-3 ANCSA aggregate (all reservations revoked except Metlakatla) mechanism CONVERSION_TO_CORPORATE control False
+   CE-3 Metlakatla                                                 mechanism None                    control True
+   CE-3 forcing link (S, CE-3f): Kodiak ANCSA history PDF (1971): leasing / state selection frozen by unresolved Native title
+   CE-3 pipeline link: K (CE-3k), not an input
+   chain RPC-1: ('CE-1', 'S') -> ('CE-4(i)', 'P'); join NOT_RECORDED; missing: join: same peoples, same unit (S-2 / S-3 unsourced)
+
+-- CE-4 evidence paths (83.11(b)(2), list TRUNCATED, total NOT_RECORDED) [CHOICE 74]
+   (i)   names residence True  >50% reside in an area almost exclusively of members
+   (ii)  names residence False >=50% married within the entity
+   (iii) names residence False >=50% keep distinct cultural patterns
+   (iv)  names residence False distinct social institutions covering >=50%
+   flexibility clause: distinct community from 1900 to present, "understood flexibly" in context of history, geography, culture, social organization
+   the residence path is one route to sufficiency, not a requirement
+   CE-5: 1994 83.7(f) retention in the current rule NOT_RECORDED; E-A6-3 scored on current text only
+
+-- sources: nothing: every CE line is carried at the amendment author's grade; CONNECT to ecfr.gov, law.cornell.edu and leg.colorado.gov refused 2026-09-28T13:14:37Z, github.com the control
+   CE-1a  P            input True  Indian Removal Act, May 28 1830, 4 Stat. 411 (citation)
+   CE-1b  S            input True  history.state.gov: removal treaties approached seventy; nearly 50,000 moved by
+   CE-1c  NOT_RECORDED input True  NPS: about 100,000 removed in total across five nations (the amendment states 
+   CE-2   S            input True  Worcester v. Georgia (1832)
+   CE-3   S            input True  ANCSA, PL 92-203, Dec 18 1971 (several sources)
+   CE-3f  S            input True  Kodiak ANCSA history PDF (1971): leasing / state selection frozen by unresolve
+   CE-3k  K            input False the Prudhoe Bay / pipeline link (Grokipedia only); pull an agency or congressi
+   CE-4   P            input True  25 CFR 83.11(b), current (eCFR), retrieved TRUNCATED
+   CE-5   S            input True  1994 rule 83.7(f) and 83.1; retention in the current rule NOT_RECORDED
+   still to source: S-1, S-2, S-3, S-4, S-5
+
+-- A-3.1 on section 5
+   E-A6.1-1        COMPLEMENT   
+   E-A6.1-2        GAP          'NOT_EVALUABLE'
+   E-A6.1-3        COMPLEMENT   
+   E-A6-3 REVISED  FALSIFIER_UNDECLARED 'NOT_EVALUABLE'
+   quotes found in the amendment: 7/7
+   unit lint: 8 of 8 count tokens outside the A-3.1 list; 4 with '(unit: X)' read; units declared ['chains', 'evidence paths', 'routes']
+
+fail fixture: A-6 eligible sets P-0 ['CS-G'], P-ADMITTED ['CS-G'] (identical); A-6.1 CS-R standing P-0 EXCLUDED, P-ADMITTED ADMITTED_NOT_MEMBER
+holds: rule 1 met (7729a07); rule 3 met; rule 2 unmet (S-1..S-5 unsourced; nothing read here)
+choices in force: [CHOICE 66], [CHOICE 67], [CHOICE 68], [CHOICE 69], [CHOICE 70], [CHOICE 71], [CHOICE 72], [CHOICE 73], [CHOICE 74], [CHOICE 75], [CHOICE 76], [CHOICE 77]
+execution note: test_standing_a61.py prints the check count; samples/standing_a61.sample.txt is one recorded render, compare before quoting

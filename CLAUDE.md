@@ -14139,7 +14139,30 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   exists-vs-reachable gap left unfilled rather than copied from the one built
   set, and E-A6-3 not filled from memory (`RIN_117`, `RIN_119`). Profiles are
   constructed and no real person is described (`RIN_122`, `RIN_123`).
-  One hundred and twenty-three `RIN_*` claims;
+  **AMENDMENT A-6.1 (2026-09-28, standing, imposed scarcity, consolidation
+  chain)** then landed verbatim, recovered from the chat transcript with
+  entities decoded rather than re-typed, and committed alone at `7729a07`;
+  `standing_a61.py` extends `eligibility_a6.py` by import. A-6's boolean
+  becomes a (case_set, standing) pair (MEMBER / ADMITTED_NOT_MEMBER / EXCLUDED
+  / NOT_RECORDED) acting per route through min_standing, and an allocation
+  limit with no IMPOSED_SCARCITY row from an external gate is flagged
+  SCARCITY_UNATTRIBUTED. **Row not holding, first:** E-A6.1-2 is
+  NOT_EVALUABLE at band [0, 1] chains — counting links only reads 1 and
+  MATCHES, reading the unsourced join as absent reads 0 and fires the
+  falsifier, and the definition's "that unit" makes the join part of the chain
+  (`RIN_124`). E-A6.1-1 MATCHES by construction on a constructed G-T3 row
+  (itself K, NOT_LANDED), and without the row the band stays open at [0, 1]
+  because a SCARCITY_UNATTRIBUTED route keeps an unrecorded minimum
+  (`RIN_126`, `RIN_129`); E-A6.1-3 MATCHES over one aggregate ANCSA case
+  (`RIN_130`); E-A6-3 REVISED MATCHES at 1 evidence path, a lower bound a
+  truncated list can only raise, with no falsifier sentence (`RIN_125`,
+  `RIN_131`). The fail fixture: A-6 reads P-0 and P-ADMITTED identically while
+  2a separates them (`RIN_127`); a NOT_RECORDED standing reads band [0, 3]
+  where its bare gap would equal a MEMBER's 0 (`RIN_128`); CE-1's two scoped
+  figures are never pooled and the ungraded NPS line stays NOT_RECORDED
+  (`RIN_132`); the root suite's four failures are all in
+  `tests/test_run_manifest.py`, none a `potential/` P-id (`RIN_134`).
+  One hundred and thirty-four `RIN_*` claims;
   check counts printed by `python3 route-independence/test_route.py`,
   `python3 route-independence/test_dependency_chain.py`,
   `python3 route-independence/test_single_channel.py`,
@@ -14147,8 +14170,9 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `python3 route-independence/test_gate_state.py`,
   `python3 route-independence/test_gate_state_a21.py`,
   `python3 route-independence/test_thermal_gates.py`,
-  `python3 route-independence/test_repairs_a31.py` and
-  `python3 route-independence/test_chains_a456.py`, the last seven also
+  `python3 route-independence/test_repairs_a31.py`,
+  `python3 route-independence/test_chains_a456.py` and
+  `python3 route-independence/test_standing_a61.py`, the last eight also
   printing the fail-fixture line. Stdlib only,
   parses under 3.9, phone-buildable, CC0.
 - `custody-verification-band/` — Marker under exploration. Criterion: a layer

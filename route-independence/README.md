@@ -583,3 +583,34 @@ chains_a4.py / termini_a5.py / eligibility_a6.py      the instruments
 test_chains_a456.py                  checks; prints its count and 3 of 3 fail fixtures
 samples/{chains_a4,termini_a5,eligibility_a6}.sample.txt   recorded renders
 ```
+
+## AMENDMENT A-6.1 of 2026-09-28 -- standing, imposed scarcity, consolidation
+
+Landed verbatim and committed alone at `7729a07`, before any code. The text was
+recovered from the chat transcript with entities decoded, not re-typed. The
+boolean eligibility from A-6 becomes a (case_set, standing) pair:
+MEMBER, ADMITTED_NOT_MEMBER, EXCLUDED or NOT_RECORDED. Standing then acts per
+route, through min_standing. Allocation limits must name an external gate
+(an IMPOSED_SCARCITY row); otherwise the route is flagged
+SCARCITY_UNATTRIBUTED. Consolidation events and residence-presumption chains
+are carried at the amendment's grades, and a missing link is named. The row
+that does not hold comes first:
+
+```
+E-A6.1-2        NOT_EVALUABLE  band [0, 1] chains; links-only reads 1, absent-join reads 0 (F fires)
+E-A6.1-1        MATCH          by construction: gap 1 with the G-T3 row, 0 without (band [0, 1])
+E-A6.1-3        MATCH          over 1 aggregate ANCSA case; village corporations not enumerated
+E-A6-3 REVISED  MATCH          1 evidence path, a lower bound over a TRUNCATED list; no falsifier
+```
+
+Fail fixture: A-6's boolean reads P-0 and P-ADMITTED identically, while 2a
+separates EXCLUDED from ADMITTED_NOT_MEMBER. CE-1's two figures are never
+pooled. Profiles, routes and the coupling row are constructed, and no person
+is described. Claims `RIN_124..RIN_134`.
+
+```
+AMENDMENT_A6.1_2026-09-28_standing-scarcity-consolidation.md   verbatim (EXPECTED at 7729a07)
+standing_a61.py                     the instrument (extends eligibility_a6.py by import)
+test_standing_a61.py                checks; prints its count and 1 of 1 fail fixture
+samples/standing_a61.sample.txt     recorded render
+```
