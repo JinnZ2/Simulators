@@ -13,6 +13,32 @@ institutions; the instruments sit on the risk-mitigation side — they
 report where a single removal disconnects a requirement, and they do
 not recommend removing or adding anything.
 
+## What these are, and are not (operator's section, folded in 2026-09-29)
+
+```
+WHAT THESE ARE
+Instruments. Each one takes something you bring and
+returns a reading, with its scope stated.
+
+WHAT THEY DO NOT DO
+They do not return a decision, a recommendation, or a
+verdict. Absence of a prescription is not an incomplete
+tool — it is the tool working as specified.
+
+A reading that comes back empty is a result. "Nothing
+found under this vocabulary" is information about where
+the boundary sits, not a failed run.
+
+WHY
+What the reading is for depends on who picked it up and
+what they are doing. A prescription fits the instrument
+to one use and hides that narrowing.
+```
+
+The null line above is what `check_attested_provenance.py` returns
+`None` for, what `test_domains.py`'s empty collision set means, and why
+`gate/` reports κ per θ and stops.
+
 ## Layers
 
 | layer      | what it is                                                                 | state |
