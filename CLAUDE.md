@@ -14162,7 +14162,26 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   figures are never pooled and the ungraded NPS line stays NOT_RECORDED
   (`RIN_132`); the root suite's four failures are all in
   `tests/test_run_manifest.py`, none a `potential/` P-id (`RIN_134`).
-  One hundred and thirty-four `RIN_*` claims;
+  **The erratum of 2026-09-29** was landed verbatim and committed alone at
+  `a2f6ec2`, since it moves a threshold. It revises four readings, each keeping
+  its id and gaining a status:
+  - **E-A6-3 is NOT_EVALUABLE.** The erratum puts the path list at >= 11 paths,
+    >= 3 of them residence-presuming; 4 paths were retrieved and 1 presumes
+    residence, so the truncated list is not scored under either threshold.
+    RIN_131, the row that carried the pass, is REVISED by `RIN_135`.
+  - **A status gate [CHOICE 81].** A MATCH whose falsifier cases are not
+    enumerated reads UNFALSIFIABLE_AS_RUN, and a MATCH on any input below S
+    reads CONSTRUCTED_PASS. So E-A6.1-1 reads CONSTRUCTED_PASS and E-A6.1-3
+    reads UNFALSIFIABLE_AS_RUN (`RIN_136`), and no A-6.1 row reads MATCH.
+    Applied read-only to A-1..A-5, 9 of 17 prior MATCH rows read
+    CONSTRUCTED_PASS, and 5 more would under a read-here meaning of "sourced"
+    (`RIN_137`).
+  - **Unit-lint attachment [CHOICE 78].** An annotation now attaches only to
+    the nearest preceding count. The A-4 window credited "one" in "one route,
+    ... >= 1 (unit: routes)"; the new rule does not. No uncredited count moves
+    on any landed amendment, and in A-6.1 two tokens trade places (`RIN_138`).
+  - **Open sourcing targets** are recorded as data (`RIN_139`).
+  One hundred and thirty-nine `RIN_*` claims;
   check counts printed by `python3 route-independence/test_route.py`,
   `python3 route-independence/test_dependency_chain.py`,
   `python3 route-independence/test_single_channel.py`,

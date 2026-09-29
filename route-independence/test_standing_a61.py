@@ -153,8 +153,25 @@ def t_consolidation():
     check(S.SOURCES_A61["CE-3k"]["grade"] == "K" and S.SOURCES_A61["CE-3k"]["input"] is False,
           "pipeline link K, not an input")
     rp = S.residence_presuming_paths()
-    check((rp["count"], rp["total_paths"], rp["list"]) == (1, S.NOT_RECORDED, "TRUNCATED"),
-          "E-A6-3 revised: 1 path, lower bound [CHOICE 74]")
+    check((rp["count"], rp["retrieved"], rp["list"]) == (1, 4, "TRUNCATED"),
+          "E-A6-3: 1 of 4 retrieved paths, list truncated [CHOICE 74]")
+    check((rp["carried_bounds"]["residence_presuming"], rp["carried_bounds"]["total"],
+           rp["carried_bounds"]["grade"]) == (">= 3", ">= 11", S.NOT_RECORDED),
+          "erratum bounds carried, grade not borrowed [CHOICE 79]")
+    check((rp["outside_retrieved_text"]["residence_presuming"], rp["outside_retrieved_text"]["total"]) ==
+          (">= 2", ">= 7"), "the bounds place paths outside the retrieved text")
+    sc = S.score_e_a6_3()
+    check(sc["status"] == {"E-A6-3 REVISED": S.NOT_EVALUABLE, "E-A6-3 ERRATUM": S.NOT_EVALUABLE},
+          "truncated list: NOT_EVALUABLE under both thresholds [CHOICE 80] %s" % sc["status"])
+    one = [{"names_residence": i == 0} for i in range(11)]
+    three = [{"names_residence": i < 3} for i in range(11)]
+    c1, c3 = S.score_e_a6_3(one, complete=True)["status"], S.score_e_a6_3(three, complete=True)["status"]
+    check(c1 == {"E-A6-3 REVISED": S.CONSTRUCTED_PASS, "E-A6-3 ERRATUM": R.UNMET_UNFALSIFIED},
+          "complete list with 1: >= 3 not met %s" % c1)
+    check(c3 == {"E-A6-3 REVISED": S.CONSTRUCTED_PASS, "E-A6-3 ERRATUM": S.CONSTRUCTED_PASS},
+          "complete constructed list with 3: a pass, gated as constructed %s" % c3)
+    check(S.score_e_a6_3(three, complete=False)["status"]["E-A6-3 ERRATUM"] == S.NOT_EVALUABLE,
+          "the same paths undeclared-complete stay NOT_EVALUABLE")
     check("understood flexibly" in rp["flexibility_clause"] and "not a requirement" in rp["sufficiency"],
           "flexibility clause recorded beside the paths")
     check(E6.residence_presuming_criteria()["status"] == S.NOT_EVALUABLE, "A-6's criteria reading kept, unedited")
@@ -172,24 +189,80 @@ def t_expected():
     rows = S.check_expectations()
     st = dict((r["id"], r["status"]) for r in rows)
     check(rows[0]["id"] == "E-A6.1-2" and rows[0]["status"] == S.NOT_EVALUABLE, "the row not holding is first")
-    check(st == {"E-A6.1-1": "MATCH", "E-A6.1-2": S.NOT_EVALUABLE, "E-A6.1-3": "MATCH", "E-A6-3 REVISED": "MATCH"},
-          "statuses %s" % st)
+    check(st == {"E-A6.1-1": S.CONSTRUCTED_PASS, "E-A6.1-2": S.NOT_EVALUABLE, "E-A6.1-3": S.UNFALSIFIABLE_AS_RUN,
+                 "E-A6-3": S.NOT_EVALUABLE}, "statuses after the erratum %s" % st)
+    raw = dict((r["id"], r["raw"]) for r in rows)
+    check(raw["E-A6.1-1"] == "MATCH" and raw["E-A6.1-3"] == "MATCH", "raw readings kept beside the gated status")
+    check([r["id"] for r in rows] == ["E-A6.1-2", "E-A6-3", "E-A6.1-3", "E-A6.1-1"], "order: not holding first")
+    check(S.unsourced_matches(rows) == [], "no row reads MATCH on input below S [CHOICE 81]")
+    check(S.gate_status("MATCH", ["S", "P"], True) == "MATCH", "the gate is not constant: sourced input keeps MATCH")
+    check(S.gate_status("MATCH", ["S", "K"], True) == S.CONSTRUCTED_PASS, "one K input -> CONSTRUCTED_PASS")
+    check(S.gate_status("MATCH", ["P"], False) == S.UNFALSIFIABLE_AS_RUN, "unenumerated falsifier cases")
+    check(S.gate_status("MISMATCH", ["K"], False) == "MISMATCH", "a failed row is never relabelled")
+    check(S.unsourced_matches([{"id": "x", "status": "MATCH"}]) == ["x"], "the MATCH check fires on a planted row")
     check(S._v("E-A6.1-2", 1) == "MATCH" and S._v("E-A6.1-2", 0) == "MISMATCH",
           "E-A6.1-2 literal and absent readings both reachable")
     comp = dict((x["id"], R.complement(x)["status"]) for x in S.registry())
     check(comp["E-A6.1-1"] == "COMPLEMENT" and comp["E-A6.1-3"] == "COMPLEMENT", "two complements")
     check(comp["E-A6.1-2"] == "GAP", "E-A6.1-2 GAP at NOT_EVALUABLE")
     check(comp["E-A6-3 REVISED"] != "COMPLEMENT", "E-A6-3 revised: no falsifier sentence (%s)" % comp["E-A6-3 REVISED"])
-    q = S.C.quotes_present(S.registry(), S.AMENDMENT_FILE)
+    q = S.C.quotes_present([x for x in S.registry() if "source_file" not in x], S.AMENDMENT_FILE)
     check(all(x[2] for x in q) and len(q) == 7, "7 quotes found verbatim")
+    qe = S.C.quotes_present([x for x in S.registry() if "source_file" in x], S.ERRATUM_FILE)
+    check(all(x[2] for x in qe) and len(qe) == 1, "erratum quote found verbatim")
+    check(comp["E-A6-3 ERRATUM"] == R.FALSIFIER_UNDECLARED, "erratum: no falsifier sentence")
     lt = S.C.lint_two_ways(S.AMENDMENT_FILE)
     check((lt["fail_a31_list"], lt["fail_with_annotation"], len(lt["tokens"])) == (8, 4, 8), "A-6.1 lint 8, then 4")
+    ln = S.lint_nearest(S.AMENDMENT_FILE)
+    check(ln["fail_with_annotation"] == 4, "nearest-count rule: 4 recovered, same count [CHOICE 78]")
+    own = [t["context"][:10] for t in ln["tokens"] if t["owns"]]
+    check(not any(c.startswith("one route") for c in own), "'one route' owns no annotation: %s" % own)
+    check(any(c.startswith("one reside") for c in own), "'one residence_presumption_chain' owns '(unit: chains)'")
     ff = S.fail_fixture()
     FAIL_FIXTURE[0] = (ff["a6_P-0"] == ff["a6_P-ADMITTED"] and ff["a61_P-0"] != ff["a61_P-ADMITTED"])
     check(FAIL_FIXTURE[0], "A-6's boolean reads P-0 and P-ADMITTED identically; 2a separates them")
 
 
 # ---------------------------------------------------------------- hygiene ---
+
+def t_annotation():
+    """Erratum item 4."""
+    fx = dict((f["fixture"], f) for f in S.annotation_fixture())
+    a = fx["adjacent_other_count"]
+    check(a["window_credits"] == ["one", "1"], "the A-4 window credits the other count: %s" % a["window_credits"])
+    check(a["nearest_credits"] == ["1"], "the nearest-count rule does not attach it: %s" % a["nearest_credits"])
+    b = fx["two_counts_one_unit"]
+    check(b["window_credits"] == ["3", "2"] and b["nearest_credits"] == ["2"], "two counts, one annotation: %s" % b)
+    cmp_ = dict((r["file"], r) for r in S.lint_comparison())
+    check(len(cmp_) == 4, "four landed amendments carry an annotation")
+    for f, r in cmp_.items():
+        check(r["window"] == r["nearest"], "%s: uncredited count unchanged (%d)" % (f, r["nearest"]))
+        if not f.startswith("AMENDMENT_A6.1"):
+            check(r["moved"] == [], "%s: no token moves" % f)
+    m = cmp_[S.AMENDMENT_FILE]["moved"]
+    check(len(m) == 2 and m[0][1:] == (True, False) and m[1][1:] == (False, True), "A-6.1: two tokens move %s" % m)
+    far = "Expected: 5 %s (unit: routes)." % ("x " * 50)
+    check(not any(t["annotated"] for t in S.attach_nearest(S.R._norm(far))), "beyond 80 characters: not attached")
+    check([t["target"] for t in S.OPEN_TARGETS][:4] == [
+        "same-peoples / same-unit join (S-2, S-3)", "A-3 statute text for T-3 (the G-T3 gate)", "S-4",
+        "individual ANCSA village corporations (200+)"], "erratum item 5 recorded [CHOICE 82]")
+
+
+def t_prior():
+    """[CHOICE 83] the gate over prior MATCH rows, read-only."""
+    ps = S.prior_sweep()
+    check(ps["undeclared_matches"] == [], "every prior MATCH row is declared: %s" % ps["undeclared_matches"])
+    check(all(x["raw"] == "MATCH" for x in ps["rows"]), "no declared prior row drifted: %s"
+          % [x["row"] for x in ps["rows"] if x["raw"] != "MATCH"])
+    gated = dict((x["row"], x["gated"]) for x in ps["rows"])
+    cp = sorted(k for k, v in gated.items() if v == S.CONSTRUCTED_PASS)
+    check(len(ps["rows"]) == 17 and len(cp) == 9, "17 prior MATCH rows, 9 constructed: %s" % cp)
+    check(gated["E-A2.1-1"] == "MATCH" and gated["E-A4-1 (transitive steps)"] == S.CONSTRUCTED_PASS,
+          "both gate outcomes reached on prior rows")
+    for mod in ("chains_a4.py", "termini_a5.py", "thermal_gates.py", "repairs_a31.py", "settlement_split.py"):
+        log = subprocess.run(["git", "diff", "--quiet", "HEAD", "--", mod], cwd=HERE).returncode
+        check(log == 0, "%s not edited by the sweep" % mod)
+
 
 def t_hygiene():
     r = render()
@@ -209,7 +282,7 @@ def t_hygiene():
     check(p.returncode == 2, "refuses --selftest")
     p = subprocess.run([sys.executable, src, "--choices"], capture_output=True, text=True)
     check(len([l for l in p.stdout.splitlines() if l.startswith("[CHOICE")]) == len(S.CHOICES), "--choices")
-    check(sorted(S.CHOICES) == list(range(66, 78)), "choices numbered 66..77")
+    check(sorted(S.CHOICES) == list(range(66, 84)), "choices numbered 66..83")
     text = open(src).read()
     body = text.split('"""', 2)[2]
     start = body.index("CHOICES = {")
@@ -227,6 +300,10 @@ def t_hygiene():
                          capture_output=True, text=True).stdout.strip()
     if log:
         check(log == S.EXPECTED_COMMIT_A61, "the amendment's last commit is the EXPECTED commit (%s)" % log)
+    elog = subprocess.run(["git", "log", "--format=%h", "-n", "1", "--", S.ERRATUM_FILE], cwd=HERE,
+                          capture_output=True, text=True).stdout.strip()
+    if elog:
+        check(elog == S.EXPECTED_COMMIT_ERRATUM, "the erratum's last commit is its registration commit (%s)" % elog)
     amend = open(os.path.join(HERE, S.AMENDMENT_FILE), encoding="utf-8").read()
     check(amend.startswith("# FWO AMENDMENT A-6.1") and "&gt;" not in amend and "&amp;" not in amend,
           "amendment landed with entities decoded")
@@ -237,7 +314,7 @@ def t_hygiene():
     check(p.returncode == 0, "test_chains_a456.py still green")
 
 
-for fn in (t_standing, t_routes, t_gap, t_consolidation, t_expected, t_hygiene):
+for fn in (t_standing, t_routes, t_gap, t_consolidation, t_expected, t_annotation, t_prior, t_hygiene):
     fn()
 
 n = 1 if FAIL_FIXTURE[0] else 0

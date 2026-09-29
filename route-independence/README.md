@@ -614,3 +614,30 @@ standing_a61.py                     the instrument (extends eligibility_a6.py by
 test_standing_a61.py                checks; prints its count and 1 of 1 fail fixture
 samples/standing_a61.sample.txt     recorded render
 ```
+
+## Erratum to A-6.1, 2026-09-29
+
+The operator's five items are landed verbatim as `ERRATUM_A6.1_2026-09-29.md` and
+committed alone at `a2f6ec2`, before code, because item 1 changes a threshold.
+`standing_a61.py` absorbs them. No prior module is edited.
+
+- **E-A6-3 is NOT_EVALUABLE** (RIN_135, superseding RIN_131's MATCH). The
+  erratum puts 25 CFR 83.11(b)(2) at >= 11 paths, >= 3 of them
+  residence-presuming. Four paths were retrieved and one presumes residence.
+  A list not declared complete is not scored under either threshold; the
+  retrieved count is printed beside the status.
+- **The status gate** [CHOICE 81]. A raw MATCH whose falsifier cases are not
+  enumerated reads UNFALSIFIABLE_AS_RUN. A raw MATCH on any input below grade
+  S reads CONSTRUCTED_PASS. So E-A6.1-3 reads UNFALSIFIABLE_AS_RUN and
+  E-A6.1-1 reads CONSTRUCTED_PASS. No A-6.1 row reads MATCH.
+- The same gate is applied read-only to A-1..A-5 (RIN_137): 9 of 17 prior
+  MATCH rows read CONSTRUCTED_PASS.
+- **Unit-lint attachment** [CHOICE 78]. An annotation belongs to the nearest
+  count before it. The A-4 window rule credits "one" in "one route, ... >= 1
+  (unit: routes)"; the new rule does not. Uncredited counts on the landed
+  amendments do not move, and in A-6.1 two tokens trade places (RIN_138).
+- **Open sourcing targets** (RIN_139):
+  - the same-peoples/same-unit join (E-A6.1-2)
+  - the A-3 statute text for G-T3 (E-A6.1-1)
+  - S-4 and the individual ANCSA village corporations (E-A6.1-3)
+  - the complete path list (E-A6-3)

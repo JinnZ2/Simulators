@@ -33,6 +33,10 @@ import repairs_a31 as R        # noqa: E402  A-3.1
 
 EXPECTED_COMMIT_A61 = "7729a07"
 AMENDMENT_FILE = "AMENDMENT_A6.1_2026-09-28_standing-scarcity-consolidation.md"
+EXPECTED_COMMIT_ERRATUM = "a2f6ec2"
+ERRATUM_FILE = "ERRATUM_A6.1_2026-09-29.md"
+CONSTRUCTED_PASS = "CONSTRUCTED_PASS"
+UNFALSIFIABLE_AS_RUN = "UNFALSIFIABLE_AS_RUN"
 NOT_EVALUABLE = F.NOT_EVALUABLE
 TRUE, FALSE, NOT_RECORDED = C.TRUE, C.FALSE, C.NOT_RECORDED
 MEMBER, ADMITTED, EXCLUDED = "MEMBER", "ADMITTED_NOT_MEMBER", "EXCLUDED"
@@ -66,13 +70,32 @@ CHOICES = {
     73: "E-A6.1-2 counts a candidate chain whose join (same peoples, same unit) is unsourced as NOT_RECORDED, "
         "not as absent: the count is a band [0, candidates] (unit: chains) and the row is NOT_EVALUABLE",
     74: "a CE-4 evidence path presumes residence if its own text names residence; of (i)..(iv) only (i) does; "
-        "the list is TRUNCATED, so the count is a lower bound that further paths can only raise",
+        "the list is TRUNCATED, so the count is a lower bound that further paths can only raise; since the "
+        "erratum, [CHOICE 80] prints that bound beside the status and does not score it",
     75: "CE-1's two figures are stored per scope and never summed or averaged; the NPS line carries no grade in "
         "the amendment, so its grade is recorded NOT_RECORDED rather than borrowed from the S line above it",
     76: "Metlakatla is the amendment's control: recorded with mechanism None (no ANCSA conversion event) and "
         "excluded from E-A6.1-3's count by the amendment's own clause; the rest of ANCSA is one aggregate case",
     77: "P-ADMITTED is a CONSTRUCTED profile: resident, admitted to CS-R, not enrolled; every other attribute "
         "as A-6's base; P-NR has CS-R admission NOT_RECORDED so the fourth standing is reachable",
+    78: "a '(unit: X)' annotation attaches to ONE count token: the nearest one ending before it, and only if the "
+        "gap between that token's end and the annotation is at most 80 characters; a token is credited only by "
+        "an annotation it owns.  Token positions are recovered by searching each token's own 40-character "
+        "context forward from the previous token, and a recovered position must start with the token",
+    79: "the erratum's '>= 3' and '>= 11' are carried from the operator (grade NOT_RECORDED, not borrowed from "
+        "CE-4's P); they are read two ways, as bounds on the source and as the threshold E-A6-3 is scored "
+        "against, and both readings give NOT_EVALUABLE on the retrieved list, so neither is picked",
+    80: "a list is complete only if it is declared complete by the caller; the retrieved (i)..(iv) is declared "
+        "TRUNCATED, so E-A6-3 is NOT_EVALUABLE on it under either threshold; the retrieved count is printed "
+        "beside the status and is not scored",
+    81: "status gate over a raw MATCH: if the cases that could fire the falsifier are not enumerated in the run, "
+        "UNFALSIFIABLE_AS_RUN; else if any input is below grade S (K, CONSTRUCTED_UNSOURCED, NOT_LANDED), "
+        "CONSTRUCTED_PASS; carried grades count as sourced, because the amendment's own E-A6.1-2 uses '>= S'",
+    82: "open sourcing targets are recorded as data: target, the row it blocks, the state now; none is sourced "
+        "here and none is filled from memory",
+    83: "the gate is applied READ-ONLY to every prior MATCH row (A-1..A-5): each row's input grade is a declared "
+        "reading in PRIOR_INPUTS, not inferred from its hold text; an input that is this repository's own text or "
+        "code, read here, is graded P; the prior modules are not edited and their own renders are unchanged",
 }
 
 
@@ -251,6 +274,8 @@ SOURCES_A61 = {
     "CE-3k": {"grade": "K", "input": False, "text": "the Prudhoe Bay / pipeline link (Grokipedia only); pull an "
                                                     "agency or congressional source before any hold"},
     "CE-4": {"grade": "P", "input": True, "text": "25 CFR 83.11(b), current (eCFR), retrieved TRUNCATED"},
+    "CE-4e": {"grade": NOT_RECORDED, "input": True, "text": "erratum 2026-09-29 (operator, carried): >= 3 residence-"
+                                                             "presuming paths, >= 11 paths in total [CHOICE 79]"},
     "CE-5": {"grade": "S", "input": True, "text": "1994 rule 83.7(f) and 83.1; retention in the current rule "
                                                   "NOT_RECORDED"},
 }
@@ -331,13 +356,36 @@ FLEXIBILITY_CLAUSE = ('distinct community from 1900 to present, "understood flex
                       'geography, culture, social organization')
 
 
-def residence_presuming_paths():
-    """E-A6-3 REVISED [CHOICE 74]: a lower bound over a TRUNCATED list."""
-    n = len([x for x in EVIDENCE_PATHS_83_11_B2 if x["names_residence"]])
-    return {"count": n, "unit": "evidence paths", "list": "TRUNCATED", "total_paths": NOT_RECORDED,
-            "bound": "lower (further paths can only raise it)", "flexibility_clause": FLEXIBILITY_CLAUSE,
+ERRATUM_BOUNDS = {"residence_presuming_paths": 3, "total_paths": 11, "was": 1, "source": "CE-4e",
+                  "grade": NOT_RECORDED}
+
+
+def residence_presuming_paths(paths=None, complete=False):
+    """E-A6-3 under the erratum [CHOICE 79] [CHOICE 80]: the retrieved count over the paths
+    supplied; the list is scored only if the caller declares it complete."""
+    paths = EVIDENCE_PATHS_83_11_B2 if paths is None else paths
+    n = len([x for x in paths if x["names_residence"]])
+    return {"count": n, "unit": "evidence paths", "retrieved": len(paths),
+            "list": "COMPLETE" if complete else "TRUNCATED",
+            "carried_bounds": {"residence_presuming": ">= %d" % ERRATUM_BOUNDS["residence_presuming_paths"],
+                               "total": ">= %d" % ERRATUM_BOUNDS["total_paths"], "source": "CE-4e",
+                               "grade": ERRATUM_BOUNDS["grade"]},
+            "outside_retrieved_text": {"residence_presuming": ">= %d" % max(
+                0, ERRATUM_BOUNDS["residence_presuming_paths"] - n),
+                "total": ">= %d" % max(0, ERRATUM_BOUNDS["total_paths"] - len(paths))},
+            "flexibility_clause": FLEXIBILITY_CLAUSE,
             "sufficiency": "the residence path is one route to sufficiency, not a requirement", "source": "CE-4",
             "grade": SOURCES_A61["CE-4"]["grade"]}
+
+
+def score_e_a6_3(paths=None, complete=False):
+    """[CHOICE 80] Both readings of the erratum; NOT_EVALUABLE on any list not declared complete."""
+    rp = residence_presuming_paths(paths, complete)
+    out = {}
+    grades = ["K"] if paths is not None else [SOURCES_A61["CE-4"]["grade"]]    # supplied lists are constructed
+    for eid in ("E-A6-3 REVISED", "E-A6-3 ERRATUM"):
+        out[eid] = gate_status(_v(eid, rp["count"]), grades, True) if complete else NOT_EVALUABLE
+    return {"rp": rp, "status": out}
 
 
 def presumption_chains():
@@ -377,6 +425,9 @@ def registry():
     e("E-A6-3 REVISED", "residence_presuming_paths >= 1 (unit: evidence paths) HELD(P) on current text.", None,
       (0, 1, 2, NOT_EVALUABLE), lambda w: w[0] != NOT_EVALUABLE and w[0] >= 1, lambda w: w[0] == 0,
       form=R.UNDECLARED)
+    e("E-A6-3 ERRATUM", "residence_presuming_paths >= 3", None, (0, 1, 2, 3, 4, NOT_EVALUABLE),
+      lambda w: w[0] != NOT_EVALUABLE and w[0] >= 3, lambda w: False, form=R.UNDECLARED)
+    E[-1]["source_file"] = ERRATUM_FILE
     return E
 
 
@@ -386,35 +437,207 @@ def _v(eid, cell):
     return "MATCH" if p and not f else "MISMATCH" if f and not p else (R.UNMET_UNFALSIFIED if not p else R.OVERSHOOT)
 
 
+def gate_status(raw, input_grades, falsifier_cases_enumerated):
+    """[CHOICE 81] No prediction reads MATCH without sourced input."""
+    if raw != "MATCH":
+        return raw
+    if not falsifier_cases_enumerated:
+        return UNFALSIFIABLE_AS_RUN
+    if any(GRADE_RANK.get(g, -1) < GRADE_RANK["S"] for g in input_grades):
+        return CONSTRUCTED_PASS
+    return raw
+
+
 def check_expectations():
     rows = []
     cc = chain_count()
-    rows.append({"id": "E-A6.1-2", "status": NOT_EVALUABLE,
+    rows.append({"id": "E-A6.1-2", "status": NOT_EVALUABLE, "raw": NOT_EVALUABLE,
                  "hold": "none; the join is unsourced (S-2, S-3); coverage 0/1 joins sourced",
                  "detail": "band %s (unit: chains) [CHOICE 73]; counting links only reads %d (%s); reading the "
                            "unsourced join as absent reads 0 and the falsifier fires (%s)"
                            % (list(cc["band"]), cc["literal_links_only"], _v("E-A6.1-2", cc["literal_links_only"]),
                               _v("E-A6.1-2", cc["admitted"]))})
+    sc = score_e_a6_3()
+    rp = sc["rp"]
+    rows.append({"id": "E-A6-3", "status": NOT_EVALUABLE, "raw": NOT_EVALUABLE,
+                 "hold": "none; list TRUNCATED (%d retrieved of %s total, erratum %s at %s) [CHOICE 80]"
+                         % (rp["retrieved"], rp["carried_bounds"]["total"], ERRATUM_FILE, EXPECTED_COMMIT_ERRATUM),
+                 "detail": "retrieved %d residence-presuming path (unit: evidence paths), not scored; carried bound "
+                           "%s puts %s residence-presuming paths outside the retrieved text; threshold >= 1 "
+                           "(as delivered) %s, threshold >= 3 (erratum) %s; supersedes RIN_131's MATCH"
+                           % (rp["count"], rp["carried_bounds"]["residence_presuming"],
+                              rp["outside_retrieved_text"]["residence_presuming"],
+                              sc["status"]["E-A6-3 REVISED"], sc["status"]["E-A6-3 ERRATUM"])})
+    o = ce3_other_mechanism()
+    raw3 = _v("E-A6.1-3", o["count"])
+    rows.append({"id": "E-A6.1-3", "status": gate_status(raw3, ["S"], falsifier_cases_enumerated=False),
+                 "raw": raw3,
+                 "hold": "none until S-4 is sourced; coverage: %s" % o["coverage"],
+                 "detail": "%d of %d non-control cases carry another mechanism; the one case is the aggregate, whose "
+                           "mechanism is the amendment's reading of the act, so no enumerated case can fire the "
+                           "falsifier [CHOICE 81]" % (o["count"], o["over"])})
     p = get_profile("P-ADMITTED")
     g = standing_gap(p, "CS-R")
     g0 = standing_gap(p, "CS-R", couplings=[])
-    rows.append({"id": "E-A6.1-1", "status": _v("E-A6.1-1", g["gap"]),
-                 "hold": "INSTRUMENT (rule 1 met at %s); coverage 0/%d routes sourced, 0/1 couplings sourced"
-                         % (EXPECTED_COMMIT_A61, len(seed_routes())),
+    raw1 = _v("E-A6.1-1", g["gap"])
+    grades1 = [r["grade"] for r in seed_routes()] + ["K"]            # G-T3: A-3's T-3, K, NOT_LANDED
+    rows.append({"id": "E-A6.1-1", "status": gate_status(raw1, grades1, falsifier_cases_enumerated=True),
+                 "raw": raw1,
+                 "hold": "none on sourced input; INSTRUMENT only (rule 1 met at %s); coverage 0/%d routes sourced, "
+                         "0/1 couplings sourced (G-T3 unsourced)" % (EXPECTED_COMMIT_A61, len(seed_routes())),
                  "detail": "with the constructed row: gap %d %s, band %s; without it: gap %d, band %s (the falsifier "
-                           "cell is reachable)" % (g["gap"], g["gap_routes"], list(g["band"]), g0["gap"],
-                                                   list(g0["band"]))})
-    o = ce3_other_mechanism()
-    rows.append({"id": "E-A6.1-3", "status": _v("E-A6.1-3", o["count"]),
-                 "hold": "HELD(S) on the aggregate case; coverage: %s" % o["coverage"],
-                 "detail": "%d of %d non-control cases carry another mechanism; the aggregate's mechanism is the "
-                           "amendment's reading of the act" % (o["count"], o["over"])})
-    rp = residence_presuming_paths()
-    rows.append({"id": "E-A6-3 REVISED", "status": _v("E-A6-3 REVISED", rp["count"]),
-                 "hold": "HELD(P) carried from the amendment author's read; coverage 4 of NOT_RECORDED paths read",
-                 "detail": "%d (unit: evidence paths), a lower bound over a TRUNCATED list; no falsifier sentence in "
-                           "the amendment" % rp["count"]})
+                           "cell is reachable) [CHOICE 81]" % (g["gap"], g["gap_routes"], list(g["band"]), g0["gap"],
+                                                               list(g0["band"]))})
     return rows
+
+
+def unsourced_matches(rows=None):
+    """The check behind the erratum's item 3: rows reading MATCH with any input below S."""
+    rows = check_expectations() if rows is None else rows
+    return [r["id"] for r in rows if r["status"] == "MATCH"]
+
+
+# ------------------------------------------------------ erratum item 4 ---
+
+_ANN = __import__("re").compile(r"\(unit:\s*([A-Za-z ]+?)\)")
+
+
+def _positions(text, toks):
+    """[CHOICE 78]"""
+    cur, out = 0, []
+    for t in toks:
+        pos = text.find(t["context"], cur)
+        if pos < 0 or text[pos:pos + len(t["token"])] != t["token"]:
+            raise StandingError("token %r not recovered at its own context" % (t["token"],))
+        out.append(pos)
+        cur = pos + 1
+    return out
+
+
+def attach_nearest(text):
+    """[CHOICE 78] each annotation owned by the nearest preceding count token."""
+    toks = R.count_tokens(text)
+    pos = _positions(text, toks)
+    owner = {}
+    for m in _ANN.finditer(text):
+        prev = [i for i, q in enumerate(pos) if q + len(toks[i]["token"]) <= m.start()]
+        if prev and m.start() - (pos[prev[-1]] + len(toks[prev[-1]]["token"])) <= 80:
+            owner[prev[-1]] = m.group(1).strip().lower()
+    return [dict(t, pos=pos[i], owns=owner.get(i), annotated=(t["status"] == R.OK or i in owner))
+            for i, t in enumerate(toks)]
+
+
+def lint_nearest(fname):
+    ann = attach_nearest(C.expected_block(fname))
+    return {"tokens": ann, "fail_a31_list": len([x for x in ann if x["status"] != R.OK]),
+            "fail_with_annotation": len([x for x in ann if not x["annotated"]]),
+            "credited": [x["context"][:24] for x in ann if x["status"] != R.OK and x["annotated"]]}
+
+
+ANNOTATION_FIXTURES = (
+    ("adjacent_other_count", "Expected: one route, standing_gap(P-ADMITTED) >= 1 (unit: routes).", "1"),
+    ("two_counts_one_unit", "Expected: 3 cases held and 2 (unit: routes) open.", "2"),
+)
+
+
+def annotation_fixture():
+    """Erratum item 4: the adjacent annotation belongs to a different count.  Run through the
+    A-4 window rule (chains_a4.lint_two_ways, [CHOICE 51]) and through [CHOICE 78]."""
+    import tempfile
+    out = []
+    d = tempfile.mkdtemp()
+    try:
+        for name, body, owner in ANNOTATION_FIXTURES:
+            path = os.path.join(d, name + ".md")
+            with open(path, "w") as fh:
+                fh.write("## EXPECTED\n\n%s\n" % body)
+            old = C.lint_two_ways(path)
+            new = attach_nearest(C.expected_block(path))
+            out.append({"fixture": name, "owner": owner,
+                        "window_credits": [t["token"] for t in old["tokens"] if t["annotated"]],
+                        "nearest_credits": [t["token"] for t in new if t["annotated"]]})
+            os.remove(path)
+    finally:
+        os.rmdir(d)
+    return out
+
+
+def lint_comparison():
+    """Both attachment rules over every landed amendment carrying an annotation."""
+    import glob
+    rows = []
+    for f in sorted(glob.glob(os.path.join(HERE, "AMENDMENT_A*.md"))):
+        f = os.path.basename(f)
+        if "(unit:" not in C.expected_block(f):
+            continue
+        a, b = C.lint_two_ways(f), lint_nearest(f)
+        moved = [(y["context"][:30], x["annotated"], y["annotated"]) for x, y in zip(a["tokens"], b["tokens"])
+                 if x["annotated"] != y["annotated"]]
+        rows.append({"file": f, "window": a["fail_with_annotation"], "nearest": b["fail_with_annotation"],
+                     "of": len(b["tokens"]), "moved": moved})
+    return rows
+
+
+PRIOR_INPUTS = (   # [CHOICE 83] module, row id prefix, input grades, basis
+    ("settlement_split", "E-A1 majority CONSTRUCTED", ["K"], "the coded route rows are CONSTRUCTED"),
+    ("settlement_split", "E-A1 at least 2 of 3", ["K"], "the three cases' edges are CONSTRUCTED"),
+    ("gate_state", "E-A2-1 (reading)", ["S"], "F-W1/F-W2 carried at S (W-1)"),
+    ("gate_state", "E-A2-2", ["S"], "F-G1/F-G2 carried at S"),
+    ("gate_state", "E-A2-3", ["S", "P"], "sourced jurisdictions only"),
+    ("gate_state", "E-A2-4", ["P"], "this repository's code, read here (AST)"),
+    ("gate_state_a21", "E-A2.1-1", ["P"], "W-1, W-2 at P by the author's read"),
+    ("gate_state_a21", "E-A2.1-2", ["S", "P"], "the E-A2-3 rows, S and P"),
+    ("thermal_gates", "E-A3-1 (reading)", ["K"], "F-T4 fixture K"),
+    ("thermal_gates", "E-A3-5", ["K"], "T-1 and T-8 K"),
+    ("repairs_a31", "E-A3.1-1 (LITERAL_ALL)", ["P"], "the landed EXPECTED blocks, read here"),
+    ("repairs_a31", "E-A3.1-1 (DECLARED_LITERAL)", ["P"], "the landed EXPECTED blocks, read here"),
+    ("repairs_a31", "E-A3.1-2 (EVIDENCE)", ["K"], "63 prior rows, CONSTRUCTED"),
+    ("repairs_a31", "E-A3.1-2 (SCHEMA_DEFAULT)", ["K"], "63 prior rows, CONSTRUCTED"),
+    ("chains_a4", "E-A4-1 (transitive steps)", ["K"], "0/5 gates sourced"),
+    ("termini_a5", "E-A5-1 (LAWFUL_STRICT)", ["K"], "K rows"),
+    ("termini_a5", "E-A5-4 (without hops)", ["K"], "FWO-5 routes CONSTRUCTED"),
+)
+
+
+def _prior_rows(modname):
+    import importlib
+    mod = importlib.import_module(modname)
+    rows = mod.check_expectations(mod.declared_cases()) if modname == "settlement_split" else mod.check_expectations()
+    out = []
+    for r in rows:
+        if isinstance(r, dict):
+            out.append((r["id"], r["status"]))
+        else:
+            out.append((r[0], r[1]))
+    return out
+
+
+def prior_sweep():
+    """[CHOICE 83] every prior MATCH row, gated; DRIFT if a declared row no longer reads as declared."""
+    live = {}
+    for mod in sorted(set(x[0] for x in PRIOR_INPUTS) | {"eligibility_a6"}):
+        live[mod] = _prior_rows(mod)
+    out = []
+    for mod, prefix, grades, basis in PRIOR_INPUTS:
+        hit = [st for rid, st in live[mod] if rid.startswith(prefix)]
+        raw = hit[0] if len(hit) == 1 else "DRIFT"
+        out.append({"module": mod, "row": prefix, "raw": raw, "gated": gate_status(raw, grades, True),
+                    "grades": grades, "basis": basis})
+    declared = set((x[0], x[1]) for x in PRIOR_INPUTS)
+    undeclared = [(m, rid) for m, rows in sorted(live.items()) for rid, st in rows
+                  if st == "MATCH" and not any(m == d[0] and rid.startswith(d[1]) for d in declared)]
+    return {"rows": out, "undeclared_matches": undeclared}
+
+
+# ------------------------------------------------------ erratum item 5 ---
+
+OPEN_TARGETS = (
+    {"target": "same-peoples / same-unit join (S-2, S-3)", "blocks": "E-A6.1-2", "now": "NOT_RECORDED"},
+    {"target": "A-3 statute text for T-3 (the G-T3 gate)", "blocks": "E-A6.1-1", "now": "K, NOT_LANDED"},
+    {"target": "S-4", "blocks": "E-A6.1-3", "now": "unsourced"},
+    {"target": "individual ANCSA village corporations (200+)", "blocks": "E-A6.1-3", "now": "0 enumerated"},
+    {"target": "complete 25 CFR 83.11(b)(2) path list", "blocks": "E-A6-3", "now": "4 of >= 11 retrieved"},
+)
 
 
 def fail_fixture():
@@ -434,8 +657,10 @@ def render(out=None):
        % EXPECTED_COMMIT_A61)
     wr("-- expected (section 5); the row not holding first\n")
     for r in check_expectations():
-        wr("expected %-17s %-15s %s\n" % (r["status"], r["id"], r["detail"]))
-        wr("         hold: %s\n" % r["hold"])
+        wr("expected %-20s %-9s %s\n" % (r["status"], r["id"], r["detail"]))
+        wr("         raw %s; hold: %s\n" % (r["raw"], r["hold"]))
+    um = unsourced_matches()
+    wr("rows reading MATCH on input below S: %d%s [CHOICE 81]\n" % (len(um), " %s" % um if um else ""))
     wr("\n-- 2a standing pairs at 2026 (unit: case sets) [CHOICE 67]\n")
     for p in profiles():
         wr("   %-10s %s\n" % (p["profile_id"], " ".join("%s:%s" % x for x in eligible_sets(p)["pairs"])))
@@ -473,9 +698,19 @@ def render(out=None):
         wr("   chain %s: %s -> %s; join %s; missing: %s\n" % (c["chain_id"], c["consolidation_link"],
                                                             c["recognition_link"], c["join"], c["missing"]))
     rp = residence_presuming_paths()
-    wr("\n-- CE-4 evidence paths (83.11(b)(2), list %s, total %s) [CHOICE 74]\n" % (rp["list"], rp["total_paths"]))
+    wr("\n-- CE-4 evidence paths (83.11(b)(2), list %s, %d retrieved; erratum: total %s, residence-presuming %s, "
+       "grade %s) [CHOICE 74] [CHOICE 79]\n" % (rp["list"], rp["retrieved"], rp["carried_bounds"]["total"],
+                                              rp["carried_bounds"]["residence_presuming"],
+                                              rp["carried_bounds"]["grade"]))
     for x in EVIDENCE_PATHS_83_11_B2:
         wr("   %-5s names residence %-5s %s\n" % (x["path"], x["names_residence"], x["text"]))
+    wr("   outside the retrieved text: >= %s paths, of them >= %s residence-presuming\n"
+       % (rp["outside_retrieved_text"]["total"][3:], rp["outside_retrieved_text"]["residence_presuming"][3:]))
+    for label, cnt in (("1 of 11, residence in (i) only", 1), ("3 of 11, residence in three", 3)):
+        paths = [{"names_residence": i < cnt} for i in range(11)]
+        sc = score_e_a6_3(paths, complete=True)
+        wr("   complete constructed list, %s: >= 1 %s, >= 3 %s\n"
+           % (label, sc["status"]["E-A6-3 REVISED"], sc["status"]["E-A6-3 ERRATUM"]))
     wr("   flexibility clause: %s\n   %s\n" % (rp["flexibility_clause"], rp["sufficiency"]))
     wr("   CE-5: 1994 83.7(f) retention in the current rule %s; E-A6-3 scored on current text only\n"
        % NOT_RECORDED)
@@ -488,16 +723,40 @@ def render(out=None):
     for x in registry():
         cc = R.complement(x)
         wr("   %-15s %-12s %s\n" % (x["id"], cc["status"], ", ".join(cc["gap_cells"][:4])))
-    q = C.quotes_present(registry(), AMENDMENT_FILE)
-    wr("   quotes found in the amendment: %d/%d\n" % (len([1 for x in q if x[2]]), len(q)))
+    q = C.quotes_present([x for x in registry() if "source_file" not in x], AMENDMENT_FILE)
+    qe = C.quotes_present([x for x in registry() if "source_file" in x], ERRATUM_FILE)
+    wr("   quotes found in the amendment: %d/%d; in the erratum: %d/%d\n"
+       % (len([1 for x in q if x[2]]), len(q), len([1 for x in qe if x[2]]), len(qe)))
     lt = C.lint_two_ways(AMENDMENT_FILE)
-    wr("   unit lint: %d of %d count tokens outside the A-3.1 list; %d with '(unit: X)' read; units declared %s\n"
-       % (lt["fail_a31_list"], len(lt["tokens"]), lt["fail_with_annotation"], lt["declared_units"]))
+    ln = lint_nearest(AMENDMENT_FILE)
+    wr("   unit lint: %d of %d count tokens outside the A-3.1 list; %d with '(unit: X)' read by the A-4 window "
+       "[CHOICE 51]; %d by the nearest-count rule [CHOICE 78]; units declared %s\n"
+       % (lt["fail_a31_list"], len(lt["tokens"]), lt["fail_with_annotation"], ln["fail_with_annotation"],
+          lt["declared_units"]))
+    wr("\n-- erratum item 4: an annotation adjacent to a different count [CHOICE 78]\n")
+    for fx in annotation_fixture():
+        wr("   %-21s owner %-2s window credits %-10s nearest credits %s\n"
+           % (fx["fixture"], fx["owner"], fx["window_credits"], fx["nearest_credits"]))
+    for row in lint_comparison():
+        wr("   %-62s uncredited window %d, nearest %d of %d\n" % (row["file"], row["window"], row["nearest"], row["of"]))
+        for ctx, a, b in row["moved"]:
+            wr("      moved %-32r %s -> %s\n" % (ctx, a, b))
+    ps = prior_sweep()
+    wr("\n-- prior MATCH rows under the gate, read-only; A-1..A-5 modules not edited [CHOICE 83]\n")
+    for x in ps["rows"]:
+        wr("   %-16s %-28s raw %-6s gated %-17s input %s (%s)\n"
+           % (x["module"], x["row"], x["raw"], x["gated"], "/".join(x["grades"]), x["basis"]))
+    wr("   of %d prior MATCH rows, %d read CONSTRUCTED_PASS under the gate; undeclared MATCH rows: %d\n"
+       % (len(ps["rows"]), len([x for x in ps["rows"] if x["gated"] == CONSTRUCTED_PASS]),
+          len(ps["undeclared_matches"])))
+    wr("\n-- open sourcing targets (erratum item 5) [CHOICE 82]\n")
+    for t in OPEN_TARGETS:
+        wr("   %-46s blocks %-9s now %s\n" % (t["target"], t["blocks"], t["now"]))
     ff = fail_fixture()
     wr("\nfail fixture: A-6 eligible sets P-0 %s, P-ADMITTED %s (identical); A-6.1 CS-R standing P-0 %s, "
        "P-ADMITTED %s\n" % (ff["a6_P-0"], ff["a6_P-ADMITTED"], ff["a61_P-0"], ff["a61_P-ADMITTED"]))
-    wr("holds: rule 1 met (%s); rule 3 met; rule 2 unmet (S-1..S-5 unsourced; nothing read here)\n"
-       % EXPECTED_COMMIT_A61)
+    wr("holds: rule 1 met (%s; erratum %s); rule 3 met; rule 2 unmet (S-1..S-5 unsourced; nothing read here)\n"
+       % (EXPECTED_COMMIT_A61, EXPECTED_COMMIT_ERRATUM))
     wr("choices in force: %s\n" % ", ".join("[CHOICE %d]" % k for k in sorted(CHOICES)))
     wr("execution note: test_standing_a61.py prints the check count; samples/standing_a61.sample.txt is one "
        "recorded render, compare before quoting\n")

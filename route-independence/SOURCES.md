@@ -218,3 +218,15 @@ S-1..S-5             still to source
 
 The one IMPOSED_SCARCITY row is constructed. Its source gate, G-T3, is A-3's T-3:
 grade K, NOT_LANDED.
+
+## Erratum to A-6.1, 2026-09-29
+
+- **CE-4e** (operator, carried; grade NOT_RECORDED, not borrowed from CE-4's P):
+  25 CFR 83.11(b)(2) has >= 11 evidence paths, >= 3 of them residence-presuming.
+  The retrieved text carries (i)..(iv), so at least 7 paths are unread.
+- **Open targets.** None of these was read here:
+  - the same-peoples/same-unit join (S-2, S-3)
+  - the A-3 statute text for T-3 (G-T3)
+  - S-4
+  - the individual ANCSA village corporations
+  - the complete 83.11(b)(2) path list
