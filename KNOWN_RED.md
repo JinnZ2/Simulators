@@ -511,3 +511,55 @@ alarming direction each time.
 
 The one that did not shrink is §9.2, which was found rather than inherited and
 is still open.
+
+---
+
+## 11. FOURTH PASS — 2026-09-29, baseline taken for PR #101 (potential/)
+
+`python3 -m unittest discover tests` on `main @ 5b727ca`: 133 run, 8 FAIL. Run
+again on the PR head with the same command: 133 run, 8 FAIL, the same eight by id.
+None of the eight is in §1–§10 above. Every one is on a path PR #101 does not touch.
+
+```
+test_known_answer_gate.ManifestIsCovered.test_every_manifest_entry_is_registered
+     pre-existing, byte-identical across this PR
+     five MANIFEST ids never registered: unowned-join/invariant.py::join_coverage,
+     assessor-coupling/conditions.py::pool_fraction,
+     instrument-index/build_index.py::claim_only_fraction,
+     cooperative-substrate-proof/p3_comprehension.py::gain_from_sizes,
+     cooperative-substrate-proof/p5_lag.py::lag_ratio
+test_known_answer_gate.SeedReachability.test_every_registration_is_reachable_from_seed
+     pre-existing, byte-identical across this PR
+     five register() sites in _tra_sle_to_sv (thwaites-risk-audit) that seed() does
+     not reach — the MSV_024 shape, fifth instance
+test_known_answer_gate.TheGateFires.test_the_registry_is_complete
+     pre-existing, byte-identical across this PR
+     registered 43 / expected 48 before; 45 / 50 after (PR adds two ids to both lists)
+test_known_answer_gate.ToolRuns.test_tool_exits_clean
+     pre-existing, byte-identical across this PR
+     tools/known_answer.py exits 1 on the two rows above; 0 cases disagree either run
+test_run_manifest.TestArgparseSelftestForm.test_argparse_declared_selftest_is_not_filed_as_cli
+     pre-existing, byte-identical across this PR
+test_run_manifest.TestArgparseSelftestForm.test_those_modules_really_carry_checks
+     pre-existing, byte-identical across this PR
+test_run_manifest.TestRedirectContract.test_no_redirect_names_a_target_that_is_missing
+     pre-existing, byte-identical across this PR
+test_run_manifest.TestRedirectContract.test_the_one_known_violation_is_pinned
+     pre-existing, byte-identical across this PR
+     the four test_run_manifest rows are §10's subject, not yet repaired
+```
+
+Beside them, not new: `discover -s grounding-layers` returns 215 run, 18 ERROR
+(import failures), the state CLAUDE.md records for that folder.
+
+Two failures NEW to the tree in this pass, both INSIDE potential/ and both found by
+running after two masking defects were repaired (P-03, P-04); recorded in
+`potential/INVENTORY.md` as P-17 and P-18, listed and not repaired because the
+order that landed them did not name them:
+
+```
+potential/test_perturbation.py            UnboundLocalError: PERTURBATIONS (re-import
+                                          inside the function that first reads it)
+potential/tools/registry_sourced.py       --selftest asserts verified != unverified on
+                                          a fixture that yields 1 and 1
+```
