@@ -143,6 +143,15 @@ python3 tools/merge_silent_loss.py --all                        # every merge re
 python3 tools/merge_silent_loss.py --selftest                   # constructed history, every state
 ```
 
+A second reading, `BOTH_KEPT`, was added 2026-09-30: a file both sides added
+where the merge holds every distinct line of BOTH parents and equals neither --
+two builds spliced, nothing lost, so the loss test is silent on it by
+construction. It was found the other way round: `tests/test_compile_gate.py`
+read eight modules that did not compile, all in merges b57c625, 1a9c09b and
+e167a67, and the instrument was then taught the shape (20 files across those
+three merges, 11 of them `.py`; the run is appended to the sample). A row
+here is not a loss row and is counted apart.
+
 Sample in `samples/merge_loss.sample.txt`. What it reads: 113 merges, 9 with
 a line a parent held that the merge dropped and the other parent had not
 deleted. The registry was cut three times (2026-09-09, 09-18, 09-19) and

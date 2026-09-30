@@ -1,0 +1,14 @@
+{
+  "origin_pattern": "single-origin account of scientific method",
+  "branches": [
+    {"id": "etymology_retention_artifact"},
+    {"id": "volume_of_record_artifact", "same_structure_as": "archive-siting-bias", "note": "same signed-bias structure; archive-siting-bias is not in this tree"},
+    {"id": "genuine_contribution_difference"},
+    {"id": "citation_convention_artifact"}
+  ],
+  "discriminator": "crediting rate across loanword bins with ordering held",
+  "cost": "low -- published reference sources only",
+  "predicts_elsewhere": "proxy archive siting (different domain, same preservation-weighting mechanism)",
+  "emitted_by": "crediting-rate/crediting_rate.py",
+  "method_layer": "F branch set NOT IN TREE; this file is the emission in the order's shape, to be lifted when F exists"
+}
