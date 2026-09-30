@@ -641,3 +641,50 @@ committed alone at `a2f6ec2`, before code, because item 1 changes a threshold.
   - the A-3 statute text for G-T3 (E-A6.1-1)
   - S-4 and the individual ANCSA village corporations (E-A6.1-3)
   - the complete path list (E-A6-3)
+
+## Work order standing/A-6.2, 2026-09-29: the physical sourcing rule
+
+The order is landed verbatim as `WORK_ORDER_A6.2_2026-09-29_physical-sourcing.md`
+and committed alone at `0fdeda9`, before code, because item 0 changes what
+every status gate reads as sourced. `sourcing_a62.py` extends `standing_a61.py`
+by import. The only edit to an earlier module adds a grade to A-6.1's two
+derived counts (item 2).
+
+What did not hold, first:
+
+- **No row reads MATCH under rule 0.** The erratum's sweep kept 8 rows at MATCH
+  on carried grades (RIN_137); none of them stays MATCH (RIN_141). The span
+  store holds no records, so no carried input has a span.
+- **Rule 0 as worded has no slot for this repository's own text** (RIN_142).
+  E-A2-4 and E-A3.1-1 x2 rest on files in this tree, with span and hash but no
+  http(s) url. They read UNSOURCED_PASS as worded and MATCH under a
+  `repo:<commit>:<path>` reading. The operator decides which reading holds.
+- The A-6.1 render at `37c8e58` printed 2 derived counts with no grade
+  (RIN_143). It now prints them with the grade.
+- The agreement signal flags one credited count, A-6's "1 of P-0..P-4 for
+  some need (unit: profiles)" (RIN_145).
+- Under LITERAL coding, E-A6-3's erratum threshold (>= 3) is not met on either
+  path definition (RIN_148).
+- Rule 0 checks reproducibility, not authenticity. A constructed span at the
+  declared url passes it (RIN_150).
+
+Per item:
+
+- **0.** `rule0` reads url, retrieval_date, span and sha256, and nothing else
+  [CHOICE 84]. The gate [CHOICE 87] replaces [CHOICE 81] (RIN_140).
+- **1.** 19 rows re-gated; span N and hash N on every input of the five named
+  rows (RIN_141).
+- **2.** A derived value inherits its weakest parent's grade [CHOICE 88].
+- **3.** Identity pins (position, token, unit): only A-6.1 changes identity
+  under an unchanged total (RIN_144).
+- **4.** The fixture "3 routes via 2 chains (unit: routes)" is a FLAG and is
+  never assigned (RIN_145).
+- **5.** The erratum's sweep hard-coded the aggregate condition as not firing.
+  Run now, 0 of 9 rows change label (RIN_146).
+- **6.** E-A6-3 is rescoped to the enumerated forms of 83.11(b)(1)-(2): ITEM
+  counts 16 forms, COMBINATION 2041 paths (2036 + 5). The open remainder
+  reads NOT_EVALUABLE_BY_CONSTRUCTION (RIN_147).
+- **7.** LITERAL gives 1 vs GEOGRAPHIC 3 under ITEM, and 1 vs 1535 under
+  COMBINATION. The erratum's ">= 3" is the GEOGRAPHIC ITEM count (RIN_148).
+- **8.** `python3 route-independence/sourcing_a62.py intake LII-83.11 <date>
+  <span_file>` stores the span, and the re-evaluation reads it (RIN_149).

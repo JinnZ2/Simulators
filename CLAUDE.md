@@ -14502,7 +14502,40 @@ ship a `requirements.txt`. Each folder ships `samples/`.
     ... >= 1 (unit: routes)"; the new rule does not. No uncredited count moves
     on any landed amendment, and in A-6.1 two tokens trade places (`RIN_138`).
   - **Open sourcing targets** are recorded as data (`RIN_139`).
-  One hundred and thirty-nine `RIN_*` claims;
+  **WORK ORDER standing/A-6.2 (2026-09-29, the physical sourcing rule)** was
+  landed verbatim, recovered from the chat transcript, and committed alone at
+  `0fdeda9`, since item 0 changes what every gate reads as sourced.
+  `sourcing_a62.py` extends `standing_a61.py` by import.
+  - **Rule 0** [CHOICE 84]: SOURCED iff a url, a retrieval date, the verbatim
+    span and its sha256 are all stored. Neither reader nor grade is a field.
+    The gate [CHOICE 87] replaces [CHOICE 81] (`RIN_140`).
+  - **What did not hold, first:**
+    - **No MATCH row survives.** Re-gated read-only, 19 MATCH rows
+      (A-1..A-6.1) read no MATCH. The store holds 0 spans, and the five rows
+      the old reading turned on (E-A2-1, E-A2-2, E-A2-3, E-A2.1-1, E-A2.1-2)
+      read UNSOURCED_PASS with span N and hash N (`RIN_141`).
+    - **Rule 0 as worded has no slot for this repository's own files.**
+      E-A2-4 and E-A3.1-1 x2 have span and hash but no url, so they read MATCH
+      only under a `repo:<commit>:<path>` reading, left to the operator
+      (`RIN_142`).
+    - The A-6.1 render at `37c8e58` printed 2 derived counts without their
+      grade; the grade is now propagated and printed (`RIN_143`).
+    - Unit/noun agreement FLAGs A-6's "1 of P-0..P-4 ... (unit: profiles)"
+      (`RIN_145`).
+    - Rule 0 checks reproducibility, not authenticity: a constructed span at
+      the declared url passes it (`RIN_150`).
+  - **Identity pins:** only A-6.1 changes identity under an unchanged total
+    (`RIN_144`).
+  - **Aggregate condition:** the erratum's sweep never ran it (a constant
+    `True`); run now, 0 of 9 rows change label (`RIN_146`).
+  - **E-A6-3 rescoped** to the enumerated forms of 83.11(b)(1)-(2): ITEM 16,
+    COMBINATION 2041 (2036 + 5), the open remainder
+    NOT_EVALUABLE_BY_CONSTRUCTION (`RIN_147`).
+  - **Residence coding:** LITERAL 1 vs GEOGRAPHIC 3 (1 vs 1535 by
+    combination); the erratum's ">= 3" is the GEOGRAPHIC count (`RIN_148`).
+  - `span_store.json` ships empty, and `intake` is ready for the 83.11 span
+    (`RIN_149`).
+  One hundred and fifty `RIN_*` claims;
   check counts printed by `python3 route-independence/test_route.py`,
   `python3 route-independence/test_dependency_chain.py`,
   `python3 route-independence/test_single_channel.py`,
@@ -14511,8 +14544,9 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `python3 route-independence/test_gate_state_a21.py`,
   `python3 route-independence/test_thermal_gates.py`,
   `python3 route-independence/test_repairs_a31.py`,
-  `python3 route-independence/test_chains_a456.py` and
-  `python3 route-independence/test_standing_a61.py`, the last eight also
+  `python3 route-independence/test_chains_a456.py`,
+  `python3 route-independence/test_standing_a61.py` and
+  `python3 route-independence/test_sourcing_a62.py`, the last nine also
   printing the fail-fixture line. Stdlib only,
   parses under 3.9, phone-buildable, CC0.
 - `custody-verification-band/` — Marker under exploration. Criterion: a layer

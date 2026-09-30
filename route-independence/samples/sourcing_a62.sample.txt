@@ -1,0 +1,124 @@
+sourcing_a62 -- WORK ORDER standing/A-6.2: the physical sourcing rule over A-1..A-6.1
+order registered at 0fdeda9; span store records: 0; nothing read here
+
+-- what did not hold, first
+   the erratum's sweep kept 8 rows at MATCH on carried grades; under rule 0 0 of them read MATCH
+   rows whose every input has a span and a matching hash: 3 of 19, all this repository's own files; none has a url; the other 16 rest on carried or constructed inputs with no span stored (span store records: 0) [CHOICE 84] [CHOICE 85]
+   rule 0's 'url' has no slot for this repository's own text: 3 rows read MATCH under REPO_ADDRESS and UNSOURCED_PASS under URL_RULE; status uses URL_RULE [CHOICE 86]
+   the A-6.1 render at 37c8e58 printed 2 derived counts without a grade: FAIL [CHOICE 88]
+   agreement flags 1 count(s) the nearest rule credits: ["AMENDMENT_: '1 of P-0..P-4 for some need (unit: profiles)'"] [CHOICE 90]
+   under LITERAL coding E-A6-3 (erratum, >= 3) reads ['UNMET_UNFALSIFIED'] on both path definitions
+   rule 0 checks reproducibility, not authenticity: a constructed span with the declared url passes it (test_sourcing_a62.py, a temp store)
+   A-3.1 lint on the order: 42 count tokens, 2 OK; 2036 seen: False ([CHOICE 30] drops a four-digit token in 1000..2999); OK tokens [('9', 'rows', '9 rows, all\n   C'), ('0', 'rows', '0 these\n    rows')]
+
+-- item 0: rule 0 [CHOICE 84]; the gate [CHOICE 87] replaces [CHOICE 81]
+   fields read: url, retrieval_date, span, sha256; reader: not a field; grade: not a field
+
+-- item 1: every MATCH row A-1..A-6.1, read-only (old = [CHOICE 81], new = rule 0)
+   row                            raw    old               new                  url    span   hash   repo_address
+   E-A1 majority CONSTRUCTED      MATCH  CONSTRUCTED_PASS  CONSTRUCTED_PASS     N 0/1  N 0/1  N 0/1  CONSTRUCTED_PASS
+   E-A1 at least 2 of 3           MATCH  CONSTRUCTED_PASS  CONSTRUCTED_PASS     N 0/1  N 0/1  N 0/1  CONSTRUCTED_PASS
+   E-A2-1 (reading)               MATCH  MATCH             UNSOURCED_PASS       N 0/1  N 0/1  N 0/1  UNSOURCED_PASS <- named in item 1
+   E-A2-2                         MATCH  MATCH             UNSOURCED_PASS       N 0/2  N 0/2  N 0/2  UNSOURCED_PASS <- named in item 1
+   E-A2-3                         MATCH  MATCH             UNSOURCED_PASS       N 0/4  N 0/4  N 0/4  UNSOURCED_PASS <- named in item 1
+   E-A2-4                         MATCH  MATCH             UNSOURCED_PASS       N 0/1  Y 1/1  Y 1/1  MATCH
+   E-A2.1-1                       MATCH  MATCH             UNSOURCED_PASS       N 0/2  N 0/2  N 0/2  UNSOURCED_PASS <- named in item 1
+   E-A2.1-2                       MATCH  MATCH             UNSOURCED_PASS       N 0/4  N 0/4  N 0/4  UNSOURCED_PASS <- named in item 1
+   E-A3-1 (reading)               MATCH  CONSTRUCTED_PASS  CONSTRUCTED_PASS     N 0/1  N 0/1  N 0/1  CONSTRUCTED_PASS
+   E-A3-5                         MATCH  CONSTRUCTED_PASS  CONSTRUCTED_PASS     N 0/1  N 0/1  N 0/1  CONSTRUCTED_PASS
+   E-A3.1-1 (LITERAL_ALL)         MATCH  MATCH             UNSOURCED_PASS       N 0/4  Y 4/4  Y 4/4  MATCH
+   E-A3.1-1 (DECLARED_LITERAL)    MATCH  MATCH             UNSOURCED_PASS       N 0/4  Y 4/4  Y 4/4  MATCH
+   E-A3.1-2 (EVIDENCE)            MATCH  CONSTRUCTED_PASS  CONSTRUCTED_PASS     N 0/1  N 0/1  N 0/1  CONSTRUCTED_PASS
+   E-A3.1-2 (SCHEMA_DEFAULT)      MATCH  CONSTRUCTED_PASS  CONSTRUCTED_PASS     N 0/1  N 0/1  N 0/1  CONSTRUCTED_PASS
+   E-A4-1 (transitive steps)      MATCH  CONSTRUCTED_PASS  CONSTRUCTED_PASS     N 0/1  N 0/1  N 0/1  CONSTRUCTED_PASS
+   E-A5-1 (LAWFUL_STRICT)         MATCH  CONSTRUCTED_PASS  CONSTRUCTED_PASS     N 0/1  N 0/1  N 0/1  CONSTRUCTED_PASS
+   E-A5-4 (without hops)          MATCH  CONSTRUCTED_PASS  CONSTRUCTED_PASS     N 0/1  N 0/1  N 0/1  CONSTRUCTED_PASS
+   E-A6.1-3                       MATCH  UNFALSIFIABLE_AS_ UNFALSIFIABLE_AS_RUN N 0/2  N 0/2  N 0/2  UNFALSIFIABLE_AS_RUN
+   E-A6.1-1                       MATCH  CONSTRUCTED_PASS  CONSTRUCTED_PASS     N 0/2  N 0/2  N 0/2  CONSTRUCTED_PASS
+   an IN_REPO span is the committed file at its last commit, its hash computed here, not stored [CHOICE 86]
+   E-A2-1    W-1    url False date False span False hash False locator in text False missing ['url', 'retrieval_date', 'span', 'sha256']
+   E-A2-2    G-1    url False date False span False hash False locator in text False missing ['url', 'retrieval_date', 'span', 'sha256']
+   E-A2-2    G-2    url False date False span False hash False locator in text False missing ['url', 'retrieval_date', 'span', 'sha256']
+   E-A2-3    W-1    url False date False span False hash False locator in text False missing ['url', 'retrieval_date', 'span', 'sha256']
+   E-A2-3    W-2    url False date False span False hash False locator in text False missing ['url', 'retrieval_date', 'span', 'sha256']
+   E-A2-3    W-3    url False date False span False hash False locator in text False missing ['url', 'retrieval_date', 'span', 'sha256']
+   E-A2-3    G-2    url False date False span False hash False locator in text False missing ['url', 'retrieval_date', 'span', 'sha256']
+   E-A2.1-1  W-1a   url False date False span False hash False locator in text True  missing ['url', 'retrieval_date', 'span', 'sha256']
+   E-A2.1-1  W-2a   url False date False span False hash False locator in text True  missing ['url', 'retrieval_date', 'span', 'sha256']
+   E-A2.1-2  W-1a   url False date False span False hash False locator in text True  missing ['url', 'retrieval_date', 'span', 'sha256']
+   E-A2.1-2  W-2a   url False date False span False hash False locator in text True  missing ['url', 'retrieval_date', 'span', 'sha256']
+   E-A2.1-2  W-3    url False date False span False hash False locator in text False missing ['url', 'retrieval_date', 'span', 'sha256']
+   E-A2.1-2  G-2    url False date False span False hash False locator in text False missing ['url', 'retrieval_date', 'span', 'sha256']
+   rows reading MATCH under rule 0: 0
+
+-- item 2: derived counts carry their parent's grade [CHOICE 88]
+   derived: unread paths outside the retrieved text (erratum bound) >= 7 [grade NOT_RECORDED via CE-4e, CE-4]
+   derived: residence-presuming outside the retrieved text (erratum bound) >= 2 [grade NOT_RECORDED via CE-4e, CE-4]
+   derived: enumerated forms outside the retrieved text (ITEM) 12 [grade NOT_RECORDED via LII-83.11, CE-4]
+   derived: residence-presuming enumerated forms outside the retrieved text (LITERAL) 0 [grade NOT_RECORDED via LII-83.11, CE-4]
+   derived: residence-presuming enumerated forms outside the retrieved text (GEOGRAPHIC) 2 [grade NOT_RECORDED via LII-83.11, CE-4]
+   derived: COMBINATION paths from (b)(1) alone 2036 [grade NOT_RECORDED via LII-83.11]
+   check on the A-6.1 render at 37c8e58: FAIL (2 lines); on the current A-6.1 render: PASS
+
+-- item 3: identity pins (position, token, unit) [CHOICE 89]
+   AMENDMENT_A4_2026-09-28_route-chains.md                        credited window 5, nearest 5, agree 5
+   AMENDMENT_A5_2026-09-28_terminus-diversity.md                  credited window 2, nearest 2, agree 2
+   AMENDMENT_A6_2026-09-28_eligibility-recognition.md             credited window 3, nearest 3, agree 2
+      nearest -> agree  - (136, '1', 'profiles')
+   AMENDMENT_A6.1_2026-09-28_standing-scarcity-consolidation.md   credited window 4, nearest 4, agree 4
+      window -> nearest - (52, 'one', 'routes')
+      window -> nearest + (171, 'one', 'chains')
+
+-- item 4: non-nearest fixture '3 routes via 2 chains (unit: routes)' [CHOICE 90]
+   nearest rule assigns to ['2']; agreement rule assigns to []; flags [('2', ['3'], 'routes')]
+
+-- item 5: the single-aggregate-case condition [CHOICE 91]
+   run in the erratum's sweep: False (standing_a61.prior_sweep calls gate_status(raw, grades, [True]) on every row)
+   of the 9 prior rows A-1..A-5 at CONSTRUCTED_PASS, 0 change label under the condition: []; of all 19 rows only E-A6.1-3 is a single aggregate case, and it already read UNFALSIFIABLE_AS_RUN
+   E-A1 majority CONSTRUCTED      single aggregate False 24 decided rows, each enumerated
+   E-A1 at least 2 of 3           single aggregate False three cases, each one instance
+   E-A2-1 (reading)               single aggregate False two fixture rows
+   E-A2-2                         single aggregate False one England event from two rows
+   E-A2-3                         single aggregate False four jurisdictions, each one rule
+   E-A2-4                         single aggregate False the module's expressions
+   E-A2.1-1                       single aggregate False three jurisdictions
+   E-A2.1-2                       single aggregate False the E-A2-3 rows
+   E-A3-1 (reading)               single aggregate False one fixture, F-T4, enumerated
+   E-A3-5                         single aggregate False one coupling, with and without
+   E-A3.1-1 (LITERAL_ALL)         single aggregate False 16 registry entries
+   E-A3.1-1 (DECLARED_LITERAL)    single aggregate False 16 registry entries
+   E-A3.1-2 (EVIDENCE)            single aggregate False 63 rows
+   E-A3.1-2 (SCHEMA_DEFAULT)      single aggregate False 63 rows
+   E-A4-1 (transitive steps)      single aggregate False 5 gates over 7 steps
+   E-A5-1 (LAWFUL_STRICT)         single aggregate False 11 chains
+   E-A5-4 (without hops)          single aggregate False 12 routes
+   E-A6.1-3                       single aggregate True  1 aggregate case; 0 of the 200+ village corporations enumerated
+   E-A6.1-1                       single aggregate False 3 routes, one coupling
+
+-- items 6 and 7: E-A6-3 rescoped to 'enumerated forms, 83.11(b)(1)-(2)' [CHOICE 92] [CHOICE 93]
+   structure (LII-83.11, in chat 2026-09-29 (work order item 6); span NOT stored): (b)(1) 11 forms + open catch-all, >= 2 required; (b)(2) 5 forms, 1 sufficient, also satisfies (c); cross-links (b)(1)(xi), (b)(2)(v), (c)(1)(iv), (c)(2)(ii)
+   E-A6-3 REVISED  [path=ITEM coding=LITERAL] derived: residence-presuming of 1 of 16 [grade NOT_RECORDED via LII-83.11]; raw MATCH             status UNSOURCED_PASS
+   E-A6-3 ERRATUM  [path=ITEM coding=LITERAL] derived: residence-presuming of 1 of 16 [grade NOT_RECORDED via LII-83.11]; raw UNMET_UNFALSIFIED status UNMET_UNFALSIFIED
+   E-A6-3 REVISED  [path=ITEM coding=GEOGRAPHIC] derived: residence-presuming of 3 of 16 [grade NOT_RECORDED via LII-83.11]; raw MATCH             status UNSOURCED_PASS
+   E-A6-3 ERRATUM  [path=ITEM coding=GEOGRAPHIC] derived: residence-presuming of 3 of 16 [grade NOT_RECORDED via LII-83.11]; raw MATCH             status UNSOURCED_PASS
+   E-A6-3 REVISED  [path=COMBINATION coding=LITERAL] derived: residence-presuming of 1 of 2041 [grade NOT_RECORDED via LII-83.11]; raw MATCH             status UNSOURCED_PASS
+   E-A6-3 ERRATUM  [path=COMBINATION coding=LITERAL] derived: residence-presuming of 1 of 2041 [grade NOT_RECORDED via LII-83.11]; raw UNMET_UNFALSIFIED status UNMET_UNFALSIFIED
+   E-A6-3 REVISED  [path=COMBINATION coding=GEOGRAPHIC] derived: residence-presuming of 1535 of 2041 [grade NOT_RECORDED via LII-83.11]; raw MATCH             status UNSOURCED_PASS
+   E-A6-3 ERRATUM  [path=COMBINATION coding=GEOGRAPHIC] derived: residence-presuming of 1535 of 2041 [grade NOT_RECORDED via LII-83.11]; raw MATCH             status UNSOURCED_PASS
+   E-A6-3 open remainder  NOT_EVALUABLE_BY_CONSTRUCTION: (b)(1) closes on 'or by other evidence'; no complete path list can exist
+   previous reason (erratum, retrieved (b)(2)(i)..(iv)): NOT_EVALUABLE_TRUNCATED_RETRIEVAL; this reason: NOT_EVALUABLE_BY_CONSTRUCTION
+
+-- item 8: span intake [CHOICE 94]
+   LII-83.11 at https://www.law.cornell.edu/cfr/text/25/83.11: NO_SPAN_STORED
+   run: python3 route-independence/sourcing_a62.py intake LII-83.11 <retrieval_date> <span_file>
+
+-- open sourcing targets
+   LII span of 25 CFR 83.11, stored (url, date, span, sha256)         blocks E-A6-3 rescoped (item 8)       now no record in span_store.json
+   official edition check: govinfo annual CFR, 25 CFR 83.11           blocks LII read as the regulation     now unsourced; LII is not the official edition
+   enumerated forms, 83.11(b)(1)-(2)                                  blocks E-A6-3 (was: complete 25 CFR 8 now structure from chat
+   a stored span for every carried source (W-*, G-*, CE-*)            blocks every row item 1 re-gated      now 0 records
+   operator decision: does a repo:<commit>:<path> address meet rule 0 blocks E-A2-4, E-A3.1-1 x2            now URL_RULE applied; REPO_ADDRESS printed beside
+
+fail fixture: the erratum's gate reads MATCH on a carried-S row with no stored span; rule 0 reads UNSOURCED_PASS
+choices in force: [CHOICE 84], [CHOICE 85], [CHOICE 86], [CHOICE 87], [CHOICE 88], [CHOICE 89], [CHOICE 90], [CHOICE 91], [CHOICE 92], [CHOICE 93], [CHOICE 94]
+execution note: test_sourcing_a62.py prints the check count; samples/sourcing_a62.sample.txt is one recorded render, compare before quoting
