@@ -777,6 +777,8 @@ EXPECTED_METRICS = (
     "instrument-index/build_index.py::claim_only_fraction",
     "cooperative-substrate-proof/p3_comprehension.py::gain_from_sizes",
     "cooperative-substrate-proof/p5_lag.py::lag_ratio",
+    "potential/gate/cut.py::vertex_connectivity",
+    "potential/matrix/check_attested_provenance.py::unprovenanced_attested",
 )
 
 
@@ -1700,6 +1702,7 @@ def seed():
               "wrong one are different failures."),
     )
     _seed_move_set()
+    _seed_potential()
     _seed_route_independence()
     _seed_lag_count()
     _seed_settlement_split()
@@ -1957,6 +1960,110 @@ def _msv_halfwidth(text):
         return None if out is None else float(out)
     finally:
         sys.path.pop(0)
+
+
+def _potential_vertex_connectivity(which):
+    """potential/gate/cut.py::vertex_connectivity, imported. Menger's kappa
+    on hand-built graphs; the expected values are graph theory, fixed before
+    the function was read. P-01 (potential/briefs/REPORT.txt): a direct S->T
+    edge carried unbounded capacity in the split graph, so max-flow returned
+    10**9 + 1 as kappa on any graph with a bypass -- the shipped
+    test_gate.py failed at that case and nothing outside the folder noticed.
+    'token_bypass' is that pin. The gate README had said this function
+    needed no registration because it is a theorem; P-01 is the reason it
+    now has one."""
+    import importlib.util
+    gate = os.path.join(ROOT, "potential", "gate")
+    sys.path.insert(0, gate)
+    try:
+        def load(name):
+            spec = importlib.util.spec_from_file_location(
+                "_pot_" + name, os.path.join(gate, name + ".py"))
+            mod = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(mod)
+            return mod
+        graph = load("graph")
+        cut = load("cut")
+        G, C = graph.Graph, graph.Channel
+        phys = frozenset({"physical"})
+        g = G(which, "S", "T")
+        if which == "chain":
+            g.add_channel(C("S", "X", phys)); g.add_channel(C("X", "T", phys))
+        elif which == "diamond":
+            for m in ("X", "Y"):
+                g.add_channel(C("S", m, phys)); g.add_channel(C(m, "T", phys))
+        elif which == "triple":
+            for m in ("A0", "A1", "A2"):
+                g.add_channel(C("S", m, phys)); g.add_channel(C(m, "T", phys))
+        elif which == "token_bypass":
+            g.add_channel(C("S", "T", phys, requires_token=True, label="via token"))
+            g.add_channel(C("S", "T", phys, label="direct"))
+        elif which == "disconnected":
+            g.add_channel(C("S", "X", phys))
+        else:
+            raise ValueError(which)
+        return int(cut.vertex_connectivity(g))
+    finally:
+        sys.path.pop(0)
+
+
+def _potential_unprovenanced(which):
+    """potential/matrix/check_attested_provenance.py::unprovenanced_attested,
+    imported. The count of [A]-tagged matrix cells carrying neither the
+    standing note nor a date (P-16). The three worlds separate None (no [A]
+    cell: nothing to check) from 0 (every cell provenanced) from a count,
+    so a scanner returning 0 on an empty document -- the reassuring
+    reading -- fails the set."""
+    import importlib.util
+    path = os.path.join(ROOT, "potential", "matrix", "check_attested_provenance.py")
+    spec = importlib.util.spec_from_file_location("_pot_cap", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    worlds = {
+        "fixture": mod.CONSTRUCTED,
+        "all_provenanced": mod.CONSTRUCTED.replace(
+            "nobody named, no seat, no date", "done 2021 by the author at the desk"),
+        "no_attested": mod.NO_ATTESTED,
+    }
+    out = mod.unprovenanced_attested(worlds[which])
+    return None if out is None else int(out)
+
+
+def _seed_potential():
+    """Called BY seed(), not from the module tail (MSV_024)."""
+    register(
+        "potential/gate/cut.py::vertex_connectivity",
+        _potential_vertex_connectivity,
+        [case("chain S-X-T", ("chain",), 1,
+              "one internal vertex on the only path: kappa 1"),
+         case("diamond", ("diamond",), 2,
+              "two internally disjoint paths: kappa 2"),
+         case("triple", ("triple",), 3,
+              "three internally disjoint paths: kappa 3"),
+         case("token bypass (P-01 pin)", ("token_bypass",), 2,
+              "one path through the token vertex plus one direct edge: "
+              "kappa 2. The shipped code returned 1000000001 here, the "
+              "max-flow value on an unbounded direct edge"),
+         case("disconnected", ("disconnected",), 0,
+              "no S-T path at all: kappa 0, distinct from every other case")],
+        note="Menger kappa on hand-built graphs. Expected values are graph "
+             "theory, which is why the registration was skipped and why "
+             "P-01 got through: a theorem is not what a test checks, a "
+             "function is.",
+    )
+    register(
+        "potential/matrix/check_attested_provenance.py::unprovenanced_attested",
+        _potential_unprovenanced,
+        [case("constructed fixture", ("fixture",), 1,
+              "three [A] cells: one standing note, one dated, one neither"),
+         case("every cell provenanced", ("all_provenanced",), 0,
+              "the neither cell given a date: 0, a measured zero"),
+         case("no [A] cell at all", ("no_attested",), None,
+              "None, not 0: a document with nothing to check did not pass")],
+        note="P-16: the matrix's own [A] provenance rule as a count. On the "
+             "landed matrix it reads 16 of 16 NEITHER; that figure lives in "
+             "the sample file, not here, because the matrix is data.",
+    )
 
 
 def _seed_move_set():

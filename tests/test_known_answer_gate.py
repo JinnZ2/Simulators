@@ -83,6 +83,8 @@ MANIFEST = (
     "chain-position/load_class.py::stability_product",
     "measurand-partition/wo4_lumber.py::stiffness_ratio",
     "thwaites-risk-audit/audit.py::sle_to_sv",
+    "potential/gate/cut.py::vertex_connectivity",
+    "potential/matrix/check_attested_provenance.py::unprovenanced_attested",
 )
 
 # Cases known to fail today. A case that starts passing turns this red so

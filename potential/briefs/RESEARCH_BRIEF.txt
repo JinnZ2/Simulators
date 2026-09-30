@@ -1,0 +1,97 @@
+# Research brief: token-gate -> bandwidth tax -> capability ratio
+
+Companion to the uploaded document ("The mechanisms are documented. The
+causal claim is testable."). Verifies the documented layer, upgrades three
+claims with current evidence, runs the cross-jurisdictional sketch, and
+implements the ratio schema.
+
+## 1. Documented layer — VERIFIED (with one citation sharpening)
+
+* Bandwidth tax: primary source is Mani, Mullainathan, Shafir & Zhao,
+  "Poverty impedes cognitive function," Science 341(6149):976-980 (2013) —
+  NJ mall experiment + Tamil Nadu sugarcane farmers; ~13-IQ-point
+  equivalent; survives controls for stress, nutrition, time, effort.
+  "Mullainathan & Shafir, Scarcity (2013)" is the book version; cite Mani
+  et al. for the effect itself.
+* Chronic stress substrate (McEwen allostatic load; Sapolsky
+  glucocorticoid/hippocampal): standard, uncontested. Not re-litigated here.
+* Stagnation trends: Bloom, Jones, Van Reenen & Webb, "Are Ideas Getting
+  Harder to Find?", AER 110(4):1104-44 (2020) — VERIFIED: research
+  productivity falls ~5%/yr economy-wide (half-life ~13 yrs); 18x more
+  researchers per Moore doubling; semiconductors -7%/yr.
+  CONTESTED: Fort et al. (Census CES WP 25-21, 2025) argue "Growth Is
+  Getting Harder to Find, Not Ideas" — patent-based innovation measures
+  hold up; the leakage is translation/commercialization, not idea
+  production. The stagnation fact is solid; its cause is not assigned.
+
+## 2. Trials — the open question is HALF-closed
+
+The document says trials show bandwidth effects but "haven't shown whether
+the freed bandwidth goes to invention, care work, creative production, or
+rest." Hours-allocation IS now measured in several trials; invention is not.
+
+* Kenya general-equilibrium cash transfers (Egger et al., Econometrica
+  2022): overall labor supply did NOT fall; hours shifted away from wage
+  work toward recipients' own businesses/livestock; $1,000 transfer ->
+  ~$2,500 local economic activity; recipients +0.26 SD psychological
+  well-being. Freed hours went to OWN-PRODUCTION, not rest.
+* Uganda Youth Opportunities Program, 12-year follow-up: recipients +22%
+  earnings, more likely in skilled trades, more businesses, more savings.
+* Stockton SEED ($500/mo): full-time employment 28% -> 40% vs +5pp
+  control (pre-pandemic); spending on training/coursework; catching up on
+  deferred health needs (dental). Peer-reviewed follow-up: employment
+  shift positive but not statistically significant.
+* Finland 2017-18: well-being up, mild positive employment effect;
+  freelancers/artists reported starting businesses.
+* Kenya 12-year UBI study (Banerjee et al.): long-run transfers ->
+  food security, assets, own-enterprise revenue; wage-labor hours down.
+
+Direction of the evidence: freed bandwidth goes disproportionately to
+production, enterprise, care, and health catch-up. Nothing yet measures
+invention/creative output directly. Nearest proxy: new-business formation.
+
+## 3. Cross-jurisdictional sketch (World Bank, latest available, executed)
+
+x = out-of-pocket health expenditure share (% of current health spending)
+    = inverse proxy for uncompensated provisioning of one compulsory input
+y1 = new business density (formal registrations / 1,000 adults), n = 55
+y2 = researchers in R&D per million (log), n = 42
+
+    y1: Pearson r = -0.36 (p=0.006), Spearman rho = -0.46 (p<0.001)
+    y2: Pearson r = -0.40 (p=0.009), Spearman rho = -0.33 (p=0.031)
+    OOP < 12%  (n=8):  median new-business density 5.0
+    OOP > 30% (n=16): median 1.0
+
+Direction is the prediction's direction. Confounds, stated: income level
+drives both axes; new-business density counts only FORMAL registrations
+(systematically undercounts informal economies, which correlates with
+high-OOP countries — bias direction unclear); OOP is one of eight
+compulsory inputs, not the gate itself. Status: consistent-with, not
+causal. See wb_gates_scatter.png.
+
+## 4. Ratio schema — IMPLEMENTED (ratio_model.py)
+
+Adds hours_cost and capability_yield per channel of the eight domains.
+Every number [ASSUMED]; the structure is the contribution:
+
+  token-seeking hours return token, not capability -> gated yield 0.
+  direct-production hours return capability > 0 by construction.
+  a gate converting the second bucket into the first is pure deadweight
+  BEFORE counting the bandwidth tax.
+
+Illustrative run: total capability yield under gate = 0.014 units/hr;
+if all compulsory-input hours were freed = 1.20 units/hr; deadweight
+factor 84x. Two domains (defecation, sleep) have gated capability yield
+of EXACTLY zero — the ratchet is not a small ratio, it is division by
+zero: effort in, nothing out, next payment still due.
+
+## 5. Honest state after this pass
+
+Mechanisms: DOCUMENTED (primary sources verified).
+Trends: DOCUMENTED, cause CONTESTED (Bloom vs. Fort).
+Bandwidth -> hours-allocation: MEASURED, leans production/enterprise/care.
+Bandwidth -> invention/creative output: STILL OPEN. This is the test the
+document calls for and nobody has run: guaranteed-availability trial with
+invention/creative-output instruments, not just employment and wellbeing.
+The ratio schema now makes the individual-level version computable; what
+it needs to become evidence is field time-use data per channel.

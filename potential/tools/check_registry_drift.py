@@ -19,11 +19,16 @@ import importlib.util
 import sys
 from pathlib import Path
 
-HERE = Path(__file__).resolve().parent
-ROOT = HERE.parent
+HERE = Path(__file__).resolve().parent      # potential/tools
+FOLDER = HERE.parent                         # potential/
 
+# This tool lives in potential/tools/, not the repo-root tools/. The first
+# version resolved ROOT/potential/transformation.py from here, which is
+# potential/potential/transformation.py -- a path that never existed --
+# and the real-tree selftest arm then skipped on it silently (P-05,
+# briefs/REPORT.txt). The path is now the sibling of this directory.
 SOURCES = (
-    ("transformation", ROOT / "potential" / "transformation.py"),
+    ("transformation", FOLDER / "transformation.py"),
     ("registry",       HERE / "registry.py"),
 )
 
@@ -84,7 +89,7 @@ def run():
     for name, path in SOURCES:
         if not path.exists():
             print(f"missing: {path}", file=sys.stderr)
-            return 2
+            return 3  # could not run (EXIT_CONTRACT), not a redirect
         mods[name] = load_by_path(name, path)
     report = compare(
         mods["transformation"].MECHANISMS,
@@ -132,15 +137,16 @@ def selftest():
     check(not r["mechanisms_match"], "planted divergence missed")
     check("PLANTED" in r["mechanisms_only_in_second"], "plant not named")
 
-    # real tree, when run from the repo
-    tx = ROOT / "potential" / "transformation.py"
-    reg = HERE / "registry.py"
-    if tx.exists() and reg.exists():
-        a = load_by_path("transformation", tx)
-        b = load_by_path("registry", reg)
-        r = compare(a.MECHANISMS, a.SHAPE_PAIRS, b.MECHANISMS, b.SHAPE_PAIRS)
-        check(r["mechanisms_match"], f"real tree mechanism drift: {r}")
-        check(r["pairs_match"], f"real tree pair drift: {r}")
+    # real tree. A missing file is a hard FAIL naming the path, never a
+    # skip: the arm that skipped was the arm that would have caught the
+    # typo'd filename and the corrupted registry (P-03, P-04, P-05).
+    for name, path in SOURCES:
+        check(path.exists(), f"real tree: {name} missing at {path}")
+    a = load_by_path("transformation", SOURCES[0][1])
+    b = load_by_path("registry", SOURCES[1][1])
+    r = compare(a.MECHANISMS, a.SHAPE_PAIRS, b.MECHANISMS, b.SHAPE_PAIRS)
+    check(r["mechanisms_match"], f"real tree mechanism drift: {r}")
+    check(r["pairs_match"], f"real tree pair drift: {r}")
 
     print(f"checks: {checks}")
     print("PASS")

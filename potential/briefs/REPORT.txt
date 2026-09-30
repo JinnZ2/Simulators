@@ -1,0 +1,71 @@
+# Fold-in report: "the 19 token-free avenues aren't free"
+
+Companion to the critique document (uploaded). Encodes the critique's
+per-avenue annotations as gate tags on the shipped gate/domains.py channels
+and recomputes what the instrument can then claim.
+
+## Results (executed, domains_gated.py)
+
+Cumulative survival of the 19 token-free avenues as the critique's gate
+classes are applied in its own cross-cutting order:
+
+    layer                        surviving
+    0  no token node only             19
+    + legal                           12
+    + movement                         6
+    + time                             4
+    + token_pre                        1   (only medical/self-care)
+    + capacity                         1
+    + conformity                       1
+    + envelope                         0   (self-care: "works for minor things")
+
+No single gate class kills all 19 (intersection of tag sets is empty), but
+every avenue carries at least one gate, and the union covers all 11 tags.
+Widest-net single gate: envelope (10 of 19), then token_pre (8).
+
+## Corrections to the critique's factual frame
+
+* Martin v. Boise: panel decision Sept 2018 (902 F.3d 1031), amended on
+  denial of rehearing en banc April 2019 (920 F.3d 584), cert denied
+  Dec 16, 2019 — "2019" is defensible. BUT City of Grants Pass v. Johnson
+  (June 2024) reversed it: the Eighth Amendment no longer limits
+  criminalization of public camping anywhere in the US. The critique's
+  shelter/rough-sleeping entries lean on Martin as the live constraint;
+  the constraint is gone, so those avenues' legal gate is HARDER than
+  stated, not softer.
+* Steel v Houghton (1788) confirmed: gleaning held a privilege, not a
+  right — "English legal right ended in 1788" is accurate.
+
+## Schema recommendation
+
+Add `preconditions: frozenset` to Channel (done in domains_gated.py).
+Booleans re-create the overclaim one level down; production tags should be
+parameterized by jurisdiction/season/severity, because most gates are
+regional and temporal (rain-harvest bans, Grants Pass vs. Martin-era
+9th Circuit, winter closure).
+
+## Epistemic status (the critique's item 12, applied recursively)
+
+The tags are AUTHORED claims, same status as the channels they annotate.
+The fold-in lets the instrument say something true and modest:
+
+    "Of 19 edges without a token node, 0 carry none of the 11 documented
+    gate classes; weakest single additional gate removes 10."
+
+It cannot say "0 free avenues exist in the world" — the tags are readings,
+not measurements. That claim would need a falsifier and field data, in the
+repo's own claim-table discipline (suggested entry: POT_021, HYPOTHESIZED).
+
+## Also carried over from the prior research pass (executed)
+
+* gate/_max_vertex_disjoint_paths returns a flow value, not a path count:
+  a direct NEED->SATISFIED edge yields kappa = 1,000,000,001; shipped
+  test_gate.py fails at test_token_not_cut_when_bypass_exists.
+* gate README's water example table disagrees with shipped code in 3/5
+  rows (token channels carry all three kinds, so projection never removes
+  them).
+* Top-level folder dead on arrival: traformation.py typo breaks every
+  `from transformation import ...`; tools/registry.py has corrupted
+  vocabulary literals ("DELETE " trailing space, "GfENERALIZE",
+  ("unresolvedamiliar") a string not a tuple); check_registry_drift points
+  at the missing filename and its real-tree selftest arm silently skips.

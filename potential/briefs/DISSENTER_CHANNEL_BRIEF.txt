@@ -1,0 +1,116 @@
+DISSENTER-CHANNEL BRIEF: the office, the edge, and the typing move
+Companion to the uploaded document ("The role has a name in each culture...").
+
+================================================================
+1. VERIFICATION
+================================================================
+
+Promotor Fidei, 1587-1983
+  CONFIRMED and sharpened. Established by Sixtus V (1587), first
+  attested under Leo X (1513-1521). The 1983 reform (John Paul II,
+  Divini Perfectionis Magister) technically RETAINED the office as
+  "Prelate Theologian" - while removing every channel property: the
+  obligation to actively seek out problems, the veto, and the
+  requirement that objections be answered. What was cut was not the
+  person but the edge. Canonizations: 98 saints 1900-1978 (~1.2/yr)
+  -> 480 under John Paul II (~17.7/yr, a ~1000% increase, more than
+  all his predecessors combined). The document says "abolished" and
+  "increased by an order of magnitude" - both defensible; the precise
+  version is better for the argument: reclassification from channel
+  to reputation, executed in a single legal document, throughput
+  response on the same timeline.
+
+Haudenosaunee - CORRECTION on office identity
+  The Fire Keepers are the ONONDAGA (14 Good Men), a distinct third
+  bench - not "the Younger Brothers." The Younger Brothers are the
+  Oneida and Cayuga; the Elder Brothers are the Mohawk and Seneca.
+  The function described in the document (question, test, raise what
+  deliberation missed) does belong to the Fire Keepers, in two
+  specific powers: they confirm OR send the issue back to both
+  benches ("ask the Elder Brothers and Younger Brothers to
+  reconsider"), and this can repeat up to three times; they may raise
+  objections on Great-Law inconsistency. Consensus structure
+  confirmed: benches must reach unanimity internally; the process
+  loops until "one mind"; a bench that disagrees must give good
+  reason. Seventh generation: confirmed as a standing duty of the
+  Good Men ("decisions... will benefit the Seventh Generation yet
+  unborn").
+
+Talmudic minority preservation      CONFIRMED (canonical; not re-
+  re-verified this pass: Eduyot 1:4-6 - the minority opinion is
+  recorded so a later court may rely on it).
+Quaker sense of the meeting          CONFIRMED (canonical; clerk
+  holds for unity, a meeting can be laid over rather than minute).
+Tribune of the plebs                 CONFIRMED (canonical; 494 BC;
+  intercessio over Senate and magistrates; sacrosanct).
+Danish consensus conferences         CONFIRMED (canonical; first
+  held 1987; lay panel cross-examines opposing experts).
+Red teams                            CONFIRMED (canonical; formalized
+  widely post-2001; older lineage in Team B, 1976).
+
+================================================================
+2. THE GRAPH READ: FOUR ATTACKS ON ONE EDGE
+================================================================
+
+The office is a feedback edge from the counter-signal to the
+decision node. Ashby, again: the sitting deliberation's model of
+the world is a compression; the office exists to inject variety
+the compression lacks. The four failure modes named in the
+document are four distinct attacks on that single edge:
+
+  capture          edge intact, rerouted to the defended point;
+                   signal flows, direction wrong
+  ritualization    edge throttled: objection heard, filed, never
+                   reaches the decision node (dead-end node inserted)
+  fiat removal     edge cut (1983: veto and mandatory-answer
+                   obligations removed; occupant retained as
+                   consultant - the channel properties, not the
+                   person)
+  reclassification edge physically intact; the receiver's decoder
+                   is retrained: objections discounted BECAUSE they
+                   come from that source. Signal still transmitted;
+                   SNR degraded at the receiver. The only attack
+                   invisible on an org chart.
+
+Reclassification is the one worth the most attention, because it
+preserves every appearance of the channel: the objection is heard,
+recorded, sometimes even praised - and weighted to zero because it
+is expected. A community that labels its highest-hit-rate sensor
+"the one who always objects" is updating its prior against its own
+best instrument.
+
+================================================================
+3. TIE TO THE INSTRUMENT STACK BUILT EARLIER
+================================================================
+
+The reclassification move, in the audit vocabulary of the repo
+this whole series began with, is one of the five baseline
+signatures: VERDICT_IN_PLACE_OF_READING - a judgment substituted
+where a reading was called for, with the person filed as a type
+instead of an observation being weighed. The channel vocabulary
+and the signature vocabulary are the same object seen from two
+sides: baseline.py detects the move in text; the edge taxonomy
+describes it in an org chart.
+
+The full stack, all one question:
+  domains.py   how many disjoint paths does a NEED have to SATISFIED
+  token vertex one vertex couples all eight requirement networks
+  Vehrencamp   when outside connectivity = 0, extraction is total
+  HOT/Buldyrev defending one point concentrates the failure
+  THIS DOC     how many disjoint paths does the counter-signal
+               have to the decision point before the failure arrives
+
+================================================================
+4. THE CLOSING CLAIM
+================================================================
+
+"The role doesn't require the seat." Verified against the record:
+every tradition that kept the role gave it duties and standing;
+every system that lost it kept (or typed) the person and cut the
+edge properties. The Promotor Fidei timeline is the controlled
+observation: edge properties removed 1983, throughput response
+immediate and sustained. The findings of a seatless channel remain
+true whether or not anyone heard them; what the seat bought was
+timing - the failure used to arrive as a question, and after the
+edge was cut it arrived as an event. That is all "on schedule" has
+ever meant.

@@ -38,8 +38,10 @@ Two, both exact:
   split graph. By Menger's theorem this equals the minimum number of
   vertices whose removal disconnects s from t.
 - **`cut_vertices(G, s, t)`** — for κ=1, the set of vertices whose
-  removal disconnects; for κ≥2, empty; for κ=0, raises (already
-  disconnected, nothing to cut).
+  removal disconnects; for κ≥2, empty; for κ=0, returns `(0, set())`
+  (already disconnected, nothing to cut). An earlier version of this
+  sentence said "raises"; the code has always returned, and the
+  sentence was corrected to the code, not the other way.
 
 `κ = 1` means a single vertex is a cut vertex. Whether that vertex is
 the token is a property of `G_θ`, not a status of the token.
@@ -53,7 +55,7 @@ the token is a property of `G_θ`, not a status of the token.
 - `projections.py` — `project_all`, which runs the cut computation
   across the five default admissibilities, and the renderers.
 - `gate_cli.py` — `list`, `show`, `project`, `all`.
-- `test_gate.py` — 26 checks.
+- `test_gate.py` — check count printed by the run (a stated count is the object `self-scan/` measures).
 
 Stdlib only. Parses under 3.9. Phone-buildable. No network.
 
@@ -96,22 +98,26 @@ Stdlib only. Parses under 3.9. Phone-buildable. No network.
 ## How to run
 
     cd potential/gate
-    python3 test_gate.py         # 26 checks
+    python3 test_gate.py         # prints its own check count
     python3 gate_cli.py list
     python3 gate_cli.py show water
     python3 gate_cli.py project water
     python3 gate_cli.py all
 
-`project` and `all` print one row per θ:
+`project` and `all` print one row per θ. The block below is
+REGENERATED from `projections.render` and pinned by
+`test_readme_water_table_matches_render` in `test_gate.py`; a hand
+edit to a number here turns that test red (P-02, `briefs/REPORT.txt`:
+the first version disagreed with the code in 3 of 5 rows).
 
     domain: water
 
     theta               conn kappa  token_cut  cuts
-    all                  yes     2         no  -
+    all                  yes     1        yes  __TOKEN__
     legal                yes     1        yes  __TOKEN__
     legal+practical      yes     1        yes  __TOKEN__
-    physical             yes     1         no  FOUNTAIN,RAIN
-    practical            yes     1        yes  __TOKEN__
+    physical             yes     3         no  -
+    practical            yes     2         no  -
 
 The reading: under `physical`, water is reachable via two physical
 channels that do not require a token. Under `legal`, only the

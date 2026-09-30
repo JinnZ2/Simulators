@@ -144,6 +144,44 @@ def test_no_composite_key():
     for bad in ("score", "verdict", "rank", "priority"):
         check(bad not in d, f"projection carries {bad!r}")
 
+# --- README pin (P-02) --------------------------------------------------
+
+def test_readme_water_table_matches_render():
+    """The water table in README.md is generated from projections.render,
+    not typed. P-02: the typed version disagreed with the code in 3 of 5
+    rows, and nothing noticed until a second party ran the CLI."""
+    from pathlib import Path
+    from domains import DOMAINS
+    from projections import project_all, render
+    readme = (Path(__file__).resolve().parent / "README.md").read_text().split("\n")
+    start = readme.index("    domain: water")
+    got = []
+    i = start
+    while i < len(readme) and (readme[i].startswith("    ") or readme[i] == ""):
+        if readme[i] == "" and not (i + 1 < len(readme) and readme[i + 1].startswith("    ")):
+            break
+        got.append(readme[i][4:] if readme[i] else "")
+        i += 1
+    want = render("water", project_all(DOMAINS["water"]())).split("\n")
+    check(got == want, "README water table differs from render():\n  README: %r\n  render: %r" % (got, want))
+
+# --- P-01 regression pin -------------------------------------------------
+
+def test_direct_edge_counts_as_one_path():
+    """P-01: with unbounded capacity on a direct S->T edge, max-flow
+    returned 10**9 + 1 as kappa. A direct edge is one path."""
+    g = Graph("direct-only", "S", "T")
+    g.add_channel(Channel("S", "T", frozenset({"physical"}), label="direct"))
+    check(vertex_connectivity(g) == 1, "a lone direct edge is exactly one path")
+    kappa, cuts = cut_vertices(g)
+    check(kappa == 1 and cuts == set(), "direct edge: kappa 1, no cut VERTEX (no internal vertex exists)")
+    # two direct channels between the same pair collapse in _adj to one
+    # adjacency edge: recorded limit, asserted so a change is visible.
+    g2 = Graph("two-direct", "S", "T")
+    g2.add_channel(Channel("S", "T", frozenset({"physical"}), label="a"))
+    g2.add_channel(Channel("S", "T", frozenset({"physical"}), label="b"))
+    check(vertex_connectivity(g2) == 1, "parallel direct channels collapse to one adjacency edge (limit, stated)")
+
 def main():
     tests = [
         test_channel_validates,
@@ -158,6 +196,8 @@ def main():
         test_projections_have_token_reading,
         test_projections_disagree_or_agree,
         test_no_composite_key,
+        test_readme_water_table_matches_render,
+        test_direct_edge_counts_as_one_path,
     ]
     for t in tests:
         t()
