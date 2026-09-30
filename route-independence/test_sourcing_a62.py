@@ -152,10 +152,15 @@ def t_rerun():
     # A-6.3 item 8 moved both addresses into the url field; the A-6.2 finding (W-1a, W-2a) is the before state
     check(set(loc) == set(), "no locator left in any carried text after A-6.3 item 8 [CHOICE 85] %s" % set(loc))
     check(A.load_store() == [], "the span store is empty")
-    d = subprocess.run(["git", "diff", "--quiet", "HEAD", "--"] + [m + ".py" for m in
-                       ("settlement_split", "gate_state", "gate_state_a21", "thermal_gates", "repairs_a31",
-                        "chains_a4", "termini_a5", "eligibility_a6")], cwd=HERE)
-    check(d.returncode == 0, "A-1..A-6 modules not edited")
+    # follow-up 2026-09-30 item 3: blob hashes pinned at a named commit replace git diff --quiet HEAD,
+    # which read clean once an edit was committed; every later edit is declared (RIN_163)
+    import followup_a63 as FU
+    pins = [r for r in FU.pin_check() if r["module"] in [m + ".py" for m in
+            ("settlement_split", "gate_state", "gate_state_a21", "thermal_gates", "repairs_a31",
+             "chains_a4", "termini_a5", "eligibility_a6")]]
+    check(len(pins) == 8 and all(r["state"] in (FU.PINNED, FU.DECLARED_EDIT) for r in pins),
+          "A-1..A-6 modules match their %s pins or a declared edit %s"
+          % (FU.PIN_COMMIT, [(r["module"], r["state"]) for r in pins if r["state"] != FU.PINNED]))
     d = subprocess.run(["git", "diff", "--quiet", "HEAD", "--", "AMENDMENT_*.md", "ERRATUM_*.md", A.ORDER_FILE],
                        cwd=HERE)
     check(d.returncode == 0, "no amendment, erratum or order file edited")

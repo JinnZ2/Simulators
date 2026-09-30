@@ -1,0 +1,51 @@
+{
+ "note": "resolution attempts [CHOICE 106] [CHOICE 107]; append-only; the address is copied from the source table as written",
+ "records": [
+  {
+   "source_id": "W-1a",
+   "address": "content.leg.colorado.gov/sites/default/files/2016a_1005_signed.pdf",
+   "attempts": [
+    {
+     "status": null,
+     "n_bytes": null,
+     "sha256": null,
+     "failure": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
+     "url": "https://content.leg.colorado.gov/sites/default/files/2016a_1005_signed.pdf"
+    },
+    {
+     "status": 403,
+     "n_bytes": null,
+     "sha256": null,
+     "failure": "HTTP 403",
+     "url": "http://content.leg.colorado.gov/sites/default/files/2016a_1005_signed.pdf"
+    }
+   ],
+   "resolved_url": null,
+   "attempted_at": "2026-09-30T18:56:49Z",
+   "fetched_by": "followup_a63 resolve (urllib, environment proxy)"
+  },
+  {
+   "source_id": "W-2a",
+   "address": "le.utah.gov/~2010",
+   "attempts": [
+    {
+     "status": null,
+     "n_bytes": null,
+     "sha256": null,
+     "failure": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
+     "url": "https://le.utah.gov/~2010"
+    },
+    {
+     "status": 403,
+     "n_bytes": null,
+     "sha256": null,
+     "failure": "HTTP 403",
+     "url": "http://le.utah.gov/~2010"
+    }
+   ],
+   "resolved_url": null,
+   "attempted_at": "2026-09-30T18:56:49Z",
+   "fetched_by": "followup_a63 resolve (urllib, environment proxy)"
+  }
+ ]
+}

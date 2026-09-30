@@ -14255,7 +14255,37 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   - **Limit** (`RIN_160`): VERIFIED shows the commit is on the remote and the
     path resolves to the stored bytes; it is not a second reading of the
     claim.
-  One hundred and sixty `RIN_*` claims;
+  **The operator follow-up of 2026-09-30** (five items) was landed verbatim
+  and committed alone at `d2f35e7`. `followup_a63.py` edits no earlier
+  module.
+  - **Item 1, resolved_url** (`RIN_161`):
+    - W-1a / W-2a keep their addresses as written (NO_SCHEME).
+    - `resolved_url` lives in the append-only `resolve_store.json`. It is
+      filled only when a fetch returns HTTP 200 with bytes, and the fetch
+      tries https then http [CHOICE 106, 107].
+    - The live attempt got https refused at CONNECT (403) and http 403 on
+      both addresses. So `resolved_url` is None and both inputs read NO_SPAN.
+  - **Item 2, Part B** (`RIN_162`):
+    - The branch's INVENTORY now reads P-17 / P-18 `FIXED at 63ca5ce`, with
+      re-runs recorded, at `5999856`.
+    - The PR already existed (#105, open). It carries the commit.
+  - **Item 3, module pins** (`RIN_163`):
+    - Blob hashes are pinned at `f6d385c`: 8 PINNED, 2 DECLARED_EDIT (both at
+      `b10392f`), 12 of 12 matching git.
+    - Without the declaration the pin check fires, while the replaced
+      diff-against-HEAD check reads clean.
+    - The same-shaped order-file check in `test_sourcing_a62` is still there.
+  - **Item 4, caller constants** (`RIN_164`):
+    - The AST scan finds 19 module FLAGs, all disposed, and 9 test FLAGs.
+    - Flipping the `enumerated=True` constant in `rerun_a63` / `rerun` moves
+      18 of 19 verdicts, and in `prior_sweep` 17 of 17.
+    - So per-row falsifier enumeration is asserted by the caller and recorded
+      nowhere.
+  - **Item 5, sample shifts** (`RIN_165`):
+    - Lines 5-6 of the `gate_state_a21` sample and lines 46-49 of the
+      `sourcing_a62` sample are the item 8 move.
+    - They are checked against the `f6d385c..b10392f` diff.
+  One hundred and sixty-five `RIN_*` claims;
   check counts printed by `python3 route-independence/test_route.py`,
   `python3 route-independence/test_dependency_chain.py`,
   `python3 route-independence/test_single_channel.py`,
@@ -14266,8 +14296,9 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `python3 route-independence/test_repairs_a31.py`,
   `python3 route-independence/test_chains_a456.py`,
   `python3 route-independence/test_standing_a61.py`,
-  `python3 route-independence/test_sourcing_a62.py` and
-  `python3 route-independence/test_verification_a63.py`, the last ten also
+  `python3 route-independence/test_sourcing_a62.py`,
+  `python3 route-independence/test_verification_a63.py` and
+  `python3 route-independence/test_followup_a63.py`, the last eleven also
   printing the fail-fixture line. Stdlib only,
   parses under 3.9, phone-buildable, CC0.
 - `custody-verification-band/` — Marker under exploration. Criterion: a layer

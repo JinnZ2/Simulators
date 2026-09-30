@@ -263,3 +263,18 @@ grade K, NOT_LANDED.
   field, verbatim, with no scheme. There is no span, so both read NO_SPAN.
 - **Web spans.** None is stored and none is fetched here (egress
   allowlist). A web span would stay STORED_UNVERIFIED.
+
+## Operator follow-up, 2026-09-30
+
+- **Resolution attempts** (`resolve_store.json`, 2 records, append-only).
+  At 2026-09-30T18:56:49Z `followup_a63.py resolve` (urllib through the
+  environment proxy) tried each address as written, first with https and
+  then with http:
+  - W-1a `content.leg.colorado.gov/sites/default/files/2016a_1005_signed.pdf`:
+    https refused at CONNECT (403), http 403.
+  - W-2a `le.utah.gov/~2010`: https refused at CONNECT (403), http 403.
+  - No attempt returned bytes, so `resolved_url` is None for both and no
+    scheme was added to the source table. Both still read NO_SPAN.
+- **Pins.** Blob hashes of ten modules are pinned at `f6d385c`. Two declared
+  edits are at `b10392f`. All twelve are read from this repository's own
+  history; nothing outside the repository is read.

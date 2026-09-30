@@ -1,0 +1,76 @@
+Operator follow-up 2026-09-30 after A-6.3; order landed at d2f35e7; nothing edited in earlier modules
+
+1  resolved_url [CHOICE 106] [CHOICE 107]
+   W-1a  address 'content.leg.colorado.gov/sites/default/files/2016a_1005_signed.pdf' (as written, form NO_SCHEME)  resolved_url None  attempts on file 1  status NO_SPAN
+        last attempt 2026-09-30T18:56:49Z by followup_a63 resolve (urllib, environment proxy):
+          https://content.leg.colorado.gov/sites/default/files/2016a_1005_signed.pdf status None  bytes None  proxy refused CONNECT (403)
+          http://content.leg.colorado.gov/sites/default/files/2016a_1005_signed.pdf status 403  bytes None  HTTP 403
+   W-2a  address 'le.utah.gov/~2010' (as written, form NO_SCHEME)  resolved_url None  attempts on file 1  status NO_SPAN
+        last attempt 2026-09-30T18:56:49Z by followup_a63 resolve (urllib, environment proxy):
+          https://le.utah.gov/~2010                                              status None  bytes None  proxy refused CONNECT (403)
+          http://le.utah.gov/~2010                                               status 403  bytes None  HTTP 403
+
+3  module pins at f6d385c [CHOICE 110]
+   settlement_split.py  PINNED           
+   gate_state.py        PINNED           
+   gate_state_a21.py    DECLARED_EDIT    edit at b10392f: A-6.3 item 8: W-1a / W-2a address moved from the text into a url field
+   thermal_gates.py     PINNED           
+   repairs_a31.py       PINNED           
+   chains_a4.py         PINNED           
+   termini_a5.py        PINNED           
+   eligibility_a6.py    PINNED           
+   standing_a61.py      DECLARED_EDIT    edit at b10392f: A-6.3 item 3: CE-4e status note (coding rule GEOGRAPHIC, undeclared when delivered)
+   sourcing_a62.py      PINNED           
+   history: CHECKED, every pin and declared blob matches git at its commit: True
+   fail fixture: declared edit removed -> UNDECLARED_EDIT; the replaced diff-against-HEAD check reads clean: True
+
+4  caller constants [CHOICE 108] [CHOICE 109]
+   flags: 19 in modules, 9 in tests, 0 undisposed
+   FLAG followup_a63.py:336 consequence -> gate_core(enumerated=False)
+        this module: the flipped constant is the measurement
+   FLAG followup_a63.py:342 consequence -> gate_a62(enumerated=False)
+        this module: the flipped constant is the measurement
+   FLAG followup_a63.py:346 consequence -> gate_status(falsifier_cases_enumerated=False)
+        this module: the flipped constant is the measurement
+   FLAG sourcing_a62.py:568 fail_fixture -> gate_status(falsifier_cases_enumerated=True)
+        fail fixture: holds the gate's other inputs fixed
+   FLAG sourcing_a62.py:569 fail_fixture -> gate_a62(enumerated=True)
+        fail fixture: holds the gate's other inputs fixed
+   FLAG sourcing_a62.py:569 fail_fixture -> gate_a62(single_aggregate=False)
+        fail fixture: holds the gate's other inputs fixed
+   FLAG sourcing_a62.py:268 rerun -> gate_a62(enumerated=True)
+        every re-gated row passes enumerated=True; the enumeration state is not read per row
+   FLAG sourcing_a62.py:269 rerun -> gate_a62(enumerated=True)
+        every re-gated row passes enumerated=True; the enumeration state is not read per row
+   FLAG sourcing_a62.py:277 rerun -> gate_a62(enumerated=True)
+        every re-gated row passes enumerated=True; the enumeration state is not read per row
+   FLAG sourcing_a62.py:278 rerun -> gate_a62(enumerated=True)
+        every re-gated row passes enumerated=True; the enumeration state is not read per row
+   FLAG sourcing_a62.py:468 score_rescoped -> gate_a62(enumerated=True)
+        E-A6-3 over the enumerated forms of 83.11(b)(1)-(2): enumerated by construction (RIN_147)
+   FLAG sourcing_a62.py:468 score_rescoped -> gate_a62(single_aggregate=False)
+        E-A6-3 is scored per form, not over one aggregate case
+   FLAG standing_a61.py:408 score_e_a6_3 -> gate_status(falsifier_cases_enumerated=True)
+        reached only when the caller declares the list complete (complete=True)
+   FLAG standing_a61.py:494 check_expectations -> gate_status(falsifier_cases_enumerated=False)
+        E-A6.1-3: no enumerated case can fire the falsifier (RIN_136) [CHOICE 81]
+   FLAG standing_a61.py:505 check_expectations -> gate_status(falsifier_cases_enumerated=True)
+        E-A6.1-1: the falsifier cell is reachable on the constructed row (RIN_136)
+   FLAG standing_a61.py:645 prior_sweep -> gate_status(falsifier_cases_enumerated=True)
+        RIN_146: the erratum sweep's aggregate condition was a constant here
+   FLAG verification_a63.py:342 placeholder_fixture -> gate_a62(enumerated=True)
+        fail fixture: holds the gate's other inputs fixed
+   FLAG verification_a63.py:342 placeholder_fixture -> gate_a62(single_aggregate=False)
+        fail fixture: holds the gate's other inputs fixed
+   FLAG verification_a63.py:312 rerun_a63 -> gate_core(enumerated=True)
+        every re-gated row passes enumerated=True; the enumeration state is not read per row
+   consequence rerun_a63: flip to False moves 18 of 19 rows ['E-A1 majority CONSTRUCTED', 'E-A1 at least 2 of 3', 'E-A2-1 (reading)', 'E-A2-2', 'E-A2-3', 'E-A2-4', 'E-A2.1-1', 'E-A2.1-2', 'E-A3-1 (reading)', 'E-A3-5', 'E-A3.1-1 (LITERAL_ALL)', 'E-A3.1-1 (DECLARED_LITERAL)', 'E-A3.1-2 (EVIDENCE)', 'E-A3.1-2 (SCHEMA_DEFAULT)', 'E-A4-1 (transitive steps)', 'E-A5-1 (LAWFUL_STRICT)', 'E-A5-4 (without hops)', 'E-A6.1-1']
+   consequence rerun_a62: flip to False moves 18 of 19 rows ['E-A1 majority CONSTRUCTED', 'E-A1 at least 2 of 3', 'E-A2-1 (reading)', 'E-A2-2', 'E-A2-3', 'E-A2-4', 'E-A2.1-1', 'E-A2.1-2', 'E-A3-1 (reading)', 'E-A3-5', 'E-A3.1-1 (LITERAL_ALL)', 'E-A3.1-1 (DECLARED_LITERAL)', 'E-A3.1-2 (EVIDENCE)', 'E-A3.1-2 (SCHEMA_DEFAULT)', 'E-A4-1 (transitive steps)', 'E-A5-1 (LAWFUL_STRICT)', 'E-A5-4 (without hops)', 'E-A6.1-1']
+   consequence prior_sweep: flip to False moves 17 of 17 rows ['E-A1 majority CONSTRUCTED', 'E-A1 at least 2 of 3', 'E-A2-1 (reading)', 'E-A2-2', 'E-A2-3', 'E-A2-4', 'E-A2.1-1', 'E-A2.1-2', 'E-A3-1 (reading)', 'E-A3-5', 'E-A3.1-1 (LITERAL_ALL)', 'E-A3.1-1 (DECLARED_LITERAL)', 'E-A3.1-2 (EVIDENCE)', 'E-A3.1-2 (SCHEMA_DEFAULT)', 'E-A4-1 (transitive steps)', 'E-A5-1 (LAWFUL_STRICT)', 'E-A5-4 (without hops)']
+   null: planted source, 3 flags at [(4, 'enumerated', False), (6, 'enumerated', None), (7, 'enumerated', True)]
+
+5  sample shifts f6d385c -> b10392f
+   samples/gate_state_a21.sample.txt    declared lines [5, 6]  diff matches True  live sample equals b10392f's True
+        A-6.3 item 8: the W-1a and W-2a text columns no longer carry the address; it moved to the url field
+   samples/sourcing_a62.sample.txt      declared lines [46, 47, 48, 49]  diff matches True  live sample equals b10392f's True
+        A-6.3 item 8: 'locator in text' reads False on E-A2.1-1 / E-A2.1-2 for W-1a and W-2a; the address left the text; url, date, span, hash unchanged (all False)

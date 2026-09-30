@@ -755,3 +755,48 @@ Per item:
 - **Limit** (RIN_160). VERIFIED shows that the commit is on the remote and
   its path resolves to the stored bytes. It is not a second reading of what
   the row claims.
+
+## Operator follow-up, 2026-09-30
+
+The follow-up is landed verbatim as `FOLLOWUP_2026-09-30.md` and committed
+alone at `d2f35e7`. `followup_a63.py` reads the earlier modules by import and
+edits none of them. Only one test changes: `test_sourcing_a62.py`'s module
+check.
+
+What did not hold, first:
+
+- **The caller asserts falsifier enumeration for every row** (RIN_164).
+  `rerun_a63` and `sourcing_a62.rerun` pass `enumerated=True` on every row,
+  and `standing_a61.prior_sweep` passes the constant `True`. Flipping the
+  constant moves 18 of 19, 18 of 19 and 17 of 17 verdicts. No per-row
+  enumeration record exists to read instead, so this is recorded, not
+  repaired.
+- **The replaced check has a sibling** (RIN_163).
+  `test_sourcing_a62.py` still runs `git diff --quiet HEAD` over the order
+  files, which has the same shape.
+
+Per item:
+
+- **1. resolved_url** (RIN_161). The W-1a and W-2a addresses stay as written,
+  with no scheme. `resolved_url` sits in `resolve_store.json`, filled only
+  when a fetch returns HTTP 200 with bytes [CHOICE 106]. The fetch tries
+  https, then http [CHOICE 107]. The live attempt got https refused at
+  CONNECT (403) and http 403 for both, so `resolved_url` is None and both
+  inputs read NO_SPAN.
+- **2. Part B** (RIN_162). On `claude/potential-part-b-k7Qm`, INVENTORY now
+  reads P-17 and P-18 as `FIXED at 63ca5ce`, with re-runs at the branch head,
+  committed at `5999856`. A PR already exists for that branch (#105, open)
+  and carries the commit.
+- **3. Pins** (RIN_163). The ten A-1..A-6.2 modules are pinned by blob hash
+  at `f6d385c` [CHOICE 110]: 8 are PINNED and 2 are DECLARED_EDIT (both at
+  `b10392f`, reasons stated). All 12 hashes match git. Without the
+  `gate_state_a21` declaration the pin check reads UNDECLARED_EDIT, while the
+  old check reads the committed edit as clean.
+- **4. Caller constants** (RIN_164) [CHOICE 108] [CHOICE 109]. The scan finds
+  28 FLAGs: 19 in modules, all with a declared disposition, and 9 in test
+  fixtures. The null test flags a planted literal and does not flag a
+  variable.
+- **5. Sample shifts** (RIN_165). Lines 5-6 of
+  `samples/gate_state_a21.sample.txt` and lines 46-49 of
+  `samples/sourcing_a62.sample.txt` are the A-6.3 item 8 move. They equal
+  the `f6d385c..b10392f` diff, and both live samples equal `b10392f`'s.
