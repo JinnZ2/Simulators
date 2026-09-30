@@ -782,3 +782,145 @@ module by file path with the folder not on `sys.path`. Not repaired here.
 compiled 1129, 0 red, 1 skipped. `tools/known_answer.py`: registered 50 /
 expected 50 COMPLETE, 48 exercised, the two `import scope` rows above the
 only never-exercised ones, 0 disagreeing.
+
+## 14. SEVENTH PASS — 2026-09-30, build separation and gate extensions
+
+Order: archive the losing builds (RIN_024 decided: archive, don't delete),
+hold the archived suites at a declared state, extend the compile gate with a
+duplicate-definition check and the interpreter version, list the spliced
+docs and the loader mismatches. Branch `claude/potential-part-b-k7Qm`, PR #105
+(subscribed; CI and review comments on it are the only things authorized
+there).
+
+### 14.1 What did not hold
+
+- **"each of the 11 folders"** — the eleven restored modules live in **six**
+  folders. Six archives, six commits.
+- **"EXPECTED_RED"** — three of five archived suites run **GREEN** from their
+  archive (cooperative-substrate-proof `selftest.py` 82/0, chain-position
+  `selftest.py` 96/0, stability-trigger-envelope `test_envelope.py` 217/0),
+  because the losing build moved whole and its suite needs nothing the live
+  folder kept. Two are RED for a reason the test names (assessor-coupling
+  reads `WORK_ORDER.md` from its own directory, which stayed live;
+  crediting-rate imports the shared `crediting_rate.py`, which stayed live);
+  instrument-index's losing build shipped no suite. The test declares the
+  observed state per suite and fails on a change in either direction; it does
+  not declare RED where the tree runs GREEN.
+- **The duplicate-definition check is RED on the tree it landed in**: five
+  modules besides `build_index.py` trip it (14.4). Recorded; nothing repaired.
+
+### 14.2 The archive (order item 1)
+
+`archive/<folder>/` holds the build the restore commits did not pick, whole:
+files that were only ever that build's moved with `git mv`, files both builds
+had under one name written from the losing parent's blob byte-for-byte, files
+identical in both parents left in place. No file content edited. Each carries
+`PROVENANCE.md` (merge sha, both parents, blob per file, the pick rule, the
+losing suite's last state). The live folder keeps one build; the spliced
+`.md`/LICENSE files stay in it unedited (14.5).
+
+```
+247f4cc archive/assessor-coupling            b57c625^2   mv 7   wr 4   shared 1
+a2882ca archive/crediting-rate               e167a67^2   mv 32  wr 6   shared 15
+9243bcd archive/cooperative-substrate-proof  e167a67^2   mv 7   wr 8   shared 0
+4684e40 archive/instrument-index             b57c625^2   mv 4   wr 2   shared 0
+c656081 archive/chain-position               1a9c09b^1   mv 8   wr 5   shared 0
+a7bef9b archive/stability-trigger-envelope   803ffd5^1   mv 6   wr 5   shared 2
+```
+
+Live suites after the move, unchanged: test_assessor 98/0, crediting_rate_v2
+--selftest 55/0, test_proof 194/0, test_chain 54/0, test_descent_record 49/0,
+instrument-index tests 125/0.
+
+### 14.3 Archived suites, held by `tests/test_archive_expected_red.py`
+
+```
+archive/assessor-coupling/selftest.py               RED    FileNotFoundError: WORK_ORDER.md
+archive/crediting-rate/test_crediting_v2.py         RED    No module named 'crediting_rate'
+archive/cooperative-substrate-proof/selftest.py     GREEN  checks: 82   failed: 0
+archive/instrument-index/                           NO_SUITE
+archive/chain-position/selftest.py                  GREEN  checks: 96   failed: 0
+archive/stability-trigger-envelope/test_envelope.py GREEN  217 checks, 0 failed
+```
+
+The eleven modules those builds carry: `conditions.py`, `precedent.py`
+(assessor-coupling); `crediting_rate_v2.py`; `scope.py`, `p2_substrate.py`,
+`p3_comprehension.py`, `run_all.py` (cooperative-substrate-proof);
+`build_index.py`; `load_class.py`, `trust_provenance.py` (chain-position);
+`descent_record.py` — each present in its archive at the losing parent's
+blob, each present live at the winner's. A folder under `archive/` missing
+from the test's table, or lacking `PROVENANCE.md`, also fails it.
+
+### 14.4 Gate extensions (order items 3, 4)
+
+`tests/test_compile_gate.py` now also fails on a top-level `def`/`class`
+name bound twice in one module (direct module-body children only; a
+try/except redefinition is not read), listed by path, name and lines, with a
+planted-duplicate fixture and a clean control; the interpreter version prints
+on every run and the PEP 701 skip names it. First run, python 3.11.15:
+**compiled 1140, 0 red, 1 skipped, 8 duplicate names in 5 modules** — five
+modules besides `build_index.py` trip it:
+
+```
+earth_economics/asteroid_mining_audit.py             main 157/476, run_asteroid_fermi 124/437
+grounding-layers/cultural_lens.py                    CulturalLens 14/149
+grounding-layers/run_grounding_pipeline.py           run_pipeline 57/261
+play-sims/atmospheric-heating/meteor_heating_bins.py density 30/281
+tools/known_answer.py                                _rcl_composed_bias 911/1813,
+                                                     _cpd_stability_product 925/1827,
+                                                     _drc_count_relation 939/1796
+```
+
+The four delivered-drop hits all enter at merge `04d16d0` (PR #71), bodies
+differing — the same class of merge artifact as §13, four merges earlier,
+in files that parse. The three in `tools/known_answer.py` are dead earlier
+copies of helpers redefined by the registry restorations of 2026-09-23/27
+(`d0325d7`, `881c636`); code identical ignoring docstrings, and the later
+copy is the one `seed()` reaches, so no registered value moves. **Not
+repaired in this pass** (the order asked whether anything else trips it, not
+for the trips to be closed); `test_no_module_binds_a_toplevel_name_twice`
+stays RED until they are.
+
+### 14.5 The spliced docs (order item 5) — list only, no edits
+
+Every one differs between its two sides; the live copy is the splice.
+
+```
+file                                                winner side (build)        loser side (build)         live splice
+assessor-coupling/CLAIM_TABLE.md                    b57c625^1 6ee102a 137 ln   b57c625^2 0e77d9a 29 ln    164 ln
+assessor-coupling/README.md                         b57c625^1 6ee102a 105      b57c625^2 0e77d9a 159      262
+instrument-index/INDEX-SPEC.md                      b57c625^1 209af6d 253      b57c625^2 1d71e9f 166      419
+crediting-rate/CLAIM_TABLE.md                       e167a67^1 311              e167a67^2 289              507
+crediting-rate/PREDICTION_V2.md                     e167a67^1 ad56177 38       e167a67^2 f168f79 26       64
+crediting-rate/README.md                            e167a67^1 236              e167a67^2 179              342
+cooperative-substrate-proof/CLAIM_TABLE.md          e167a67^1 f5339f9 366      e167a67^2 8264356 26       392
+cooperative-substrate-proof/LICENSE                 e167a67^1 f5339f9 9        e167a67^2 8264356 121      130
+cooperative-substrate-proof/README.md               e167a67^1 f5339f9 130      e167a67^2 8264356 142      270
+cooperative-substrate-proof/samples/run_all.sample.txt  e167a67^1 f5339f9 20   e167a67^2 8264356 89       104 (the one loss row)
+chain-position/CLAIM_TABLE.md                       1a9c09b^2 781fb5d 40       1a9c09b^1 84935a2 28       68
+chain-position/README.md                            1a9c09b^2 781fb5d 83       1a9c09b^1 84935a2 179      260
+chain-position/WORK_ORDER.md                        1a9c09b^2 781fb5d 166      1a9c09b^1 84935a2 166      167 (same order delivered twice)
+stability-trigger-envelope/CLAIM_TABLE.md           803ffd5^2 bc2b315 172      803ffd5^1 bc2b315 60       111
+stability-trigger-envelope/README.md                803ffd5^2 bc2b315 352      803ffd5^1 bc2b315 204      216
+```
+
+Fifteen, not nine: §13.3 counted the nine in the four §13 folders and missed
+instrument-index's `INDEX-SPEC.md` and the crediting-rate/chain-position
+docs it listed by name only. The loser side's version of each is now in
+`archive/<folder>/` byte-for-byte; the live splice is the separate decision.
+
+### 14.6 Loader mismatches (order item 6) — unchanged
+
+```
+cooperative-substrate-proof/p3_comprehension.py::gain_from_sizes   NOT_RUN  ModuleNotFoundError: scope
+cooperative-substrate-proof/p5_lag.py::lag_ratio                  NOT_RUN  ModuleNotFoundError: scope
+```
+
+### 14.7 State after this pass
+
+`tests/test_compile_gate.py`: compiled 1140 / 0 red / 1 skipped / 8
+duplicate names (RED on that check). `tests/test_archive_expected_red.py`:
+2 RED as declared, 3 GREEN as declared, 1 NO_SUITE, passing.
+`python3 -m unittest discover tests`: 139 run, 5 FAIL — the four
+`test_run_manifest` rows of §12 plus the duplicate-name check.
+`tools/known_answer.py`: 50/50 COMPLETE, 0 disagreeing.
