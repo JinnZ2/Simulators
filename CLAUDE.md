@@ -14597,3 +14597,17 @@ on that branch.
 - Each simulator subfolder is intended to be promotable to its own repo
   later (e.g. `emergence-stability-simulator` is sketched as a standalone
   CC0 repo in its notes).
+
+<!-- clone-refspec-note v1 -->
+## Cloning and pushing
+Shallow clones are single-branch by default.
+Before pushing any branch other than main, run:
+
+    git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
+    git fetch --depth 1
+
+Or clone with: git clone --depth 1 --no-single-branch <url>
+Without this, the first push of a new branch
+fails the tracking-ref check even when the
+commit landed.
+<!-- /clone-refspec-note v1 -->
