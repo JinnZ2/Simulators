@@ -688,3 +688,70 @@ Per item:
   COMBINATION. The erratum's ">= 3" is the GEOGRAPHIC ITEM count (RIN_148).
 - **8.** `python3 route-independence/sourcing_a62.py intake LII-83.11 <date>
   <span_file>` stores the span, and the re-evaluation reads it (RIN_149).
+
+## Work order standing/A-6.3, 2026-09-30: verification split
+
+The order is landed verbatim as
+`WORK_ORDER_A6.3_2026-09-30_verification-split.md` and committed alone at
+`ea0d379`, before code, because item 2 changes what lets a row read MATCH.
+`verification_a63.py` extends `sourcing_a62.py` by import. Two earlier data
+rows move because the order names them: W-1a and W-2a in
+`gate_state_a21.py` (item 8) and CE-4e in `standing_a61.py` (item 3).
+
+Part B status, first (RIN_151):
+
+- A-6.2 items 9-14 were not in the A-6.2 text delivered to this session,
+  which holds items 0-8. Items 9-13 were done by another session on
+  `claude/potential-part-b-k7Qm`, which is not merged into main:
+  - 9 P-17, done at `63ca5ce`. The branch was the inner re-import of
+    PERTURBATIONS inside `test_verdict_supported_synthetic`.
+  - 10 P-18, done at `63ca5ce`.
+  - 11 the reading-order line, done at `63ca5ce`. The order is a dependency.
+  - 12 the root CLAUDE.md `potential/` paragraph, done at `63ca5ce`.
+  - 13 KNOWN_RED section 11 bounded half, done at `1803391` (KNOWN_RED section 12).
+  - 14 holding items: no commit on any branch.
+- Re-run here in a worktree of that branch, P-17's file and P-18's selftest
+  both pass. That branch's INVENTORY still lists P-17 and P-18 as OPEN.
+- The 4 `tests/test_run_manifest.py` failures are a subset of section 11's 8. They
+  are exactly section 12's list of what is left, by id.
+
+What did not hold:
+
+- **Item 8's "stays STORED_UNVERIFIED".** W-1a and W-2a have a url now and
+  no span. Under item 2's own definition they read NO_SPAN (RIN_154). The
+  moved addresses carry no scheme, and none was added.
+- **Item 4's rule reads the order's "1000-2999" as a year range** (RIN_156).
+  Neither number is credited either way.
+- The first mutation grid for `gate_a62` had no in-repo input, so
+  `reading` read as dead. That was a gap in the grid (RIN_159).
+- A-6.2's "modules not edited" check reads only uncommitted diffs. It turns
+  green once this commit lands, although `gate_state_a21.py` was edited
+  (RIN_154).
+
+Per item:
+
+- **1.** A repo source is `repo:<full commit>:<path>` plus a clone url
+  [CHOICE 95]. Five repo spans are on file in `repo_span_store.json`
+  (RIN_152).
+- **2.** Only VERIFIED inputs let a row read MATCH [CHOICE 99]. The five
+  repo spans were verified by a fetch from the remote into a fresh
+  repository; all 5 hashes match (RIN_153). E-A2-4 and E-A3.1-1 (both
+  readings) now read MATCH. The RIN_150 placeholder reads STORED_UNVERIFIED
+  and is the fail fixture.
+- **Counts over the 19 re-gated rows** (VERIFIED / STORED_UNVERIFIED /
+  NO_SPAN / CONSTRUCTED):
+  - by reference (n 35): 9 / 0 / 15 / 11
+  - by distinct source (n 17): 5 / 0 / 9 / 3
+  - no row reads MATCH on a non-VERIFIED input
+- **3.** CE-4e declares its coding rule: GEOGRAPHIC, undeclared at issue.
+  Its origin is the chat handover (Claude) (RIN_155).
+- **4-5.** In the new count function, "2036 paths" is counted and flagged,
+  "since 1971" is a year, and "rule 0 these rows" is a label. There is no
+  identity change on A-4..A-6.1 from labels or years (RIN_156, RIN_157).
+- **6.** With `P-` declared as profiles, A-6 returns to 3. That is the only
+  identity change (RIN_158).
+- **7.** Every status gate this module defines or reads moves under
+  mutation, with no dead argument. A constant gate FAILs (RIN_159).
+- **Limit** (RIN_160). VERIFIED shows that the commit is on the remote and
+  its path resolves to the stored bytes. It is not a second reading of what
+  the row claims.

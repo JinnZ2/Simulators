@@ -1,0 +1,81 @@
+A-6.3 verification split (work order landed verbatim at ea0d379; web sources CARRIED, not read here)
+
+0  Part B status: see README 'Work order standing/A-6.3' and RIN_151 (not computed here)
+
+what did not hold
+   item 8: W-1a, W-2a carry a url now and no span, so they read NO_SPAN, not STORED_UNVERIFIED as item 8 words it
+   item 8: the moved url field carries no scheme: W-1a NO_SCHEME, W-2a NO_SCHEME (the scheme is left to the operator)
+   RIN_150 placeholder: A-6.2 gate MATCH, A-6.3 input STORED_UNVERIFIED, gate UNVERIFIED_PASS (the fail fixture)
+
+1-2  rows re-gated (A-6.2 gate -> A-6.3 gate) [CHOICE 99]
+   E-A1 majority CONSTRUCTED    raw MATCH  a62 CONSTRUCTED_PASS       -> CONSTRUCTED_PASS      
+   E-A1 at least 2 of 3         raw MATCH  a62 CONSTRUCTED_PASS       -> CONSTRUCTED_PASS      
+   E-A2-1 (reading)             raw MATCH  a62 UNSOURCED_PASS         -> UNSOURCED_PASS        
+      W-1                                                CARRIED   NO_SPAN            form NONE     
+   E-A2-2                       raw MATCH  a62 UNSOURCED_PASS         -> UNSOURCED_PASS        
+      G-1                                                CARRIED   NO_SPAN            form NONE     
+      G-2                                                CARRIED   NO_SPAN            form NONE     
+   E-A2-3                       raw MATCH  a62 UNSOURCED_PASS         -> UNSOURCED_PASS        
+      W-1                                                CARRIED   NO_SPAN            form NONE     
+      W-2                                                CARRIED   NO_SPAN            form NONE     
+      W-3                                                CARRIED   NO_SPAN            form NONE     
+      G-2                                                CARRIED   NO_SPAN            form NONE     
+   E-A2-4                       raw MATCH  a62 UNSOURCED_PASS         -> MATCH                 
+      gate_state.py                                      IN_REPO   VERIFIED           form REPO      via REMOTE_FETCH 2026-09-30
+   E-A2.1-1                     raw MATCH  a62 UNSOURCED_PASS         -> UNSOURCED_PASS        
+      W-1a                                               CARRIED   NO_SPAN            form NO_SCHEME
+      W-2a                                               CARRIED   NO_SPAN            form NO_SCHEME
+   E-A2.1-2                     raw MATCH  a62 UNSOURCED_PASS         -> UNSOURCED_PASS        
+      W-1a                                               CARRIED   NO_SPAN            form NO_SCHEME
+      W-2a                                               CARRIED   NO_SPAN            form NO_SCHEME
+      W-3                                                CARRIED   NO_SPAN            form NONE     
+      G-2                                                CARRIED   NO_SPAN            form NONE     
+   E-A3-1 (reading)             raw MATCH  a62 CONSTRUCTED_PASS       -> CONSTRUCTED_PASS      
+   E-A3-5                       raw MATCH  a62 CONSTRUCTED_PASS       -> CONSTRUCTED_PASS      
+   E-A3.1-1 (LITERAL_ALL)       raw MATCH  a62 UNSOURCED_PASS         -> MATCH                 
+      AMENDMENT_A1_2026-09-28_settlement-vs-gate.md      IN_REPO   VERIFIED           form REPO      via REMOTE_FETCH 2026-09-30
+      AMENDMENT_A2_2026-09-28_gate-state.md              IN_REPO   VERIFIED           form REPO      via REMOTE_FETCH 2026-09-30
+      AMENDMENT_A2.1_2026-09-28_source-upgrades.md       IN_REPO   VERIFIED           form REPO      via REMOTE_FETCH 2026-09-30
+      AMENDMENT_A3_2026-09-28_thermal.md                 IN_REPO   VERIFIED           form REPO      via REMOTE_FETCH 2026-09-30
+   E-A3.1-1 (DECLARED_LITERAL)  raw MATCH  a62 UNSOURCED_PASS         -> MATCH                 
+      AMENDMENT_A1_2026-09-28_settlement-vs-gate.md      IN_REPO   VERIFIED           form REPO      via REMOTE_FETCH 2026-09-30
+      AMENDMENT_A2_2026-09-28_gate-state.md              IN_REPO   VERIFIED           form REPO      via REMOTE_FETCH 2026-09-30
+      AMENDMENT_A2.1_2026-09-28_source-upgrades.md       IN_REPO   VERIFIED           form REPO      via REMOTE_FETCH 2026-09-30
+      AMENDMENT_A3_2026-09-28_thermal.md                 IN_REPO   VERIFIED           form REPO      via REMOTE_FETCH 2026-09-30
+   E-A3.1-2 (EVIDENCE)          raw MATCH  a62 CONSTRUCTED_PASS       -> CONSTRUCTED_PASS      
+   E-A3.1-2 (SCHEMA_DEFAULT)    raw MATCH  a62 CONSTRUCTED_PASS       -> CONSTRUCTED_PASS      
+   E-A4-1 (transitive steps)    raw MATCH  a62 CONSTRUCTED_PASS       -> CONSTRUCTED_PASS      
+   E-A5-1 (LAWFUL_STRICT)       raw MATCH  a62 CONSTRUCTED_PASS       -> CONSTRUCTED_PASS      
+   E-A5-4 (without hops)        raw MATCH  a62 CONSTRUCTED_PASS       -> CONSTRUCTED_PASS      
+   E-A6.1-3                     raw MATCH  a62 UNFALSIFIABLE_AS_RUN   -> UNFALSIFIABLE_AS_RUN  
+      CE-3                                               CARRIED   NO_SPAN            form NONE     
+      CE-3f                                              CARRIED   NO_SPAN            form NONE     
+   E-A6.1-1                     raw MATCH  a62 CONSTRUCTED_PASS       -> CONSTRUCTED_PASS      
+   counts, references (unit: row inputs, n 35 over 19 rows): VERIFIED 9 / STORED_UNVERIFIED 0 / NO_SPAN 15 / CONSTRUCTED 11 / INCONSISTENT 0 / VERIFICATION_MISMATCH 0 / WORKTREE_DRIFT 0
+   counts, distinct sources (unit: sources, n 17): VERIFIED 5 / STORED_UNVERIFIED 0 / NO_SPAN 9 / CONSTRUCTED 3 / INCONSISTENT 0 / VERIFICATION_MISMATCH 0 / WORKTREE_DRIFT 0
+   rows reading MATCH: ['E-A2-4', 'E-A3.1-1 (LITERAL_ALL)', 'E-A3.1-1 (DECLARED_LITERAL)']; MATCH on a non-VERIFIED input: none
+
+3  CE-4e status note on file (standing_a61.SOURCES_A61, 265 chars): coding rule GEOGRAPHIC True; origin the chat handover (Claude) True
+
+4-5  lint fixtures [CHOICE 101] [CHOICE 102]
+   '2036 paths'         token 2036  A-3.1 credited False -> kind COUNT  credited True  flag YEAR_SHAPED
+   'since 1971'         token 1971  A-3.1 credited False -> kind YEAR   credited False flag YEAR_SHAPED
+   'rule 0 these rows'  token 0     A-3.1 credited True  -> kind LABEL  credited False flag None
+   this order: A-3.1 32 tokens, OK ['0 these rows" cr']; A-6.3 30 counted, OK [], 3 labels, years ['1000', '2999', '1971'], year-shaped counted ['2036']
+
+5-6  identity pins A-4..A-6.1, A-6.2 agree rule -> A-6.3 (labels, years, alias map) [CHOICE 103]
+   AMENDMENT_A4_2026-09-28_route-chains.md                    5 -> 5  removed [] added []  flags 0 -> 0
+   AMENDMENT_A5_2026-09-28_terminus-diversity.md              2 -> 2  removed [] added []  flags 0 -> 0
+   AMENDMENT_A6_2026-09-28_eligibility-recognition.md         2 -> 3  removed [] added [(136, '1', 'profiles')]  flags 1 -> 0
+   AMENDMENT_A6.1_2026-09-28_standing-scarcity-consolidation.md 4 -> 4  removed [] added []  flags 0 -> 0
+   A-6 returns to 3 credited counts (A-6.1 erratum read 3; A-6.2 agreement read 2)
+
+7  mutation over every status gate [CHOICE 104]
+   verification_a63.gate_core       PASS cells  84 outputs 8 dead args none
+   verification_a63.input_status    PASS cells  32 outputs 5 dead args none
+   verification_a63.consistent      PASS cells   4 outputs 2 dead args none
+   sourcing_a62.gate_a62            PASS cells 240 outputs 6 dead args none
+   standing_a61.gate_status         PASS cells  24 outputs 5 dead args none
+   fixture: a gate returning one value on every input reads FAIL
+
+execution note: test_verification_a63.py prints the check count; samples/verification_a63.sample.txt is one render, pinned

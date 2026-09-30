@@ -149,7 +149,8 @@ def t_rerun():
     full_rows = [r["row"] for r in rows if all(s["span_stored"] and s["hash"] for s in r["sources"])]
     check(sorted(full_rows) == rep, "span and hash present exactly on the in-repo rows")
     loc = [(s["source_id"]) for r in rows for s in r["sources"] if s["locator_in_text"]]
-    check(set(loc) == {"W-1a", "W-2a"}, "a locator sits in the text of W-1a and W-2a only [CHOICE 85] %s" % set(loc))
+    # A-6.3 item 8 moved both addresses into the url field; the A-6.2 finding (W-1a, W-2a) is the before state
+    check(set(loc) == set(), "no locator left in any carried text after A-6.3 item 8 [CHOICE 85] %s" % set(loc))
     check(A.load_store() == [], "the span store is empty")
     d = subprocess.run(["git", "diff", "--quiet", "HEAD", "--"] + [m + ".py" for m in
                        ("settlement_split", "gate_state", "gate_state_a21", "thermal_gates", "repairs_a31",

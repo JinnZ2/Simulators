@@ -275,7 +275,11 @@ SOURCES_A61 = {
                                                     "agency or congressional source before any hold"},
     "CE-4": {"grade": "P", "input": True, "text": "25 CFR 83.11(b), current (eCFR), retrieved TRUNCATED"},
     "CE-4e": {"grade": NOT_RECORDED, "input": True, "text": "erratum 2026-09-29 (operator, carried): >= 3 residence-"
-                                                             "presuming paths, >= 11 paths in total [CHOICE 79]"},
+                                                             "presuming paths, >= 11 paths in total [CHOICE 79]",
+              "status_note": "A-6.3 item 3 (2026-09-30): coding rule = GEOGRAPHIC, undeclared at issue; the >= 3 "
+                             "and >= 2 bounds match GEOGRAPHIC coding exactly (RIN_148), so 1 -> 3 was a coding-rule "
+                             "change, not new paths; origin of the undeclared rule: the chat handover (Claude), "
+                             "not the agent"},
     "CE-5": {"grade": "S", "input": True, "text": "1994 rule 83.7(f) and 83.1; retention in the current rule "
                                                   "NOT_RECORDED"},
 }

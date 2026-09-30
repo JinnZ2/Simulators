@@ -247,3 +247,19 @@ grade K, NOT_LANDED.
   - a stored span for every carried source (W-*, G-*, CE-*)
   - the operator's decision on whether a `repo:<commit>:<path>` address
     meets rule 0
+
+## Work order standing/A-6.3, 2026-09-30
+
+- **Repo spans** (`repo_span_store.json`, 5 records). `gate_state.py` and
+  the A-1, A-2, A-2.1 and A-3 amendment files are stored as
+  `repo:<full commit>:route-independence/<path>` with clone url
+  https://github.com/JinnZ2/Simulators. They were stored from this
+  session's local object store.
+- **Verification** (`verification_store.json`, 5 records, all REMOTE_FETCH
+  on 2026-09-30, all hashes matching). Each is a `--depth 1` fetch of the
+  commit from the repository remote into a fresh repository, a checkout,
+  and a hash of the bytes read. No remote address is written.
+- **W-1a, W-2a.** The address moved from the description text to a `url`
+  field, verbatim, with no scheme. There is no span, so both read NO_SPAN.
+- **Web spans.** None is stored and none is fetched here (egress
+  allowlist). A web span would stay STORED_UNVERIFIED.
