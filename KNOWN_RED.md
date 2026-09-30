@@ -924,3 +924,26 @@ duplicate names (RED on that check). `tests/test_archive_expected_red.py`:
 `python3 -m unittest discover tests`: 139 run, 5 FAIL — the four
 `test_run_manifest` rows of §12 plus the duplicate-name check.
 `tools/known_answer.py`: 50/50 COMPLETE, 0 disagreeing.
+
+### 14.8 Correction to 14.4 and to commit 7f5ac2a's message, same pass
+
+Both say the three duplicate helpers in `tools/known_answer.py` are "code
+identical ignoring docstrings". They are not — diffed with the docstrings
+stripped, after the sentence was already pushed:
+
+```
+_rcl_composed_bias      dead@911  loads under module name "_rcl";      live@1813 "_rcl_hop"
+_cpd_stability_product  dead@925  loads under "_cpd";                  live@1827 "_cpd_load"
+_drc_count_relation     dead@939  no sys.path insert;                  live@1796 inserts
+                        measurand-partition/ on sys.path around the load, in try/finally
+```
+
+The third difference is load-bearing: `deep-research-correction/check.py`
+imports `common` from `measurand-partition/`, so the dead copy would raise
+ModuleNotFoundError where the live copy runs. The conclusion in 14.4 stands
+for the wrong reason: no registered value moves because the LIVE copy is
+the later one and the correct one, not because the copies are the same.
+The dead copies are still not removed here. The wrong sentence was a check
+written as a claim — the identity was asserted from a diff that showed only
+docstring lines because the diff was truncated to six lines — and the
+test that caught it was re-running the comparison on the whole body.
