@@ -1706,6 +1706,7 @@ def seed():
     _seed_route_independence()
     _seed_lag_count()
     _seed_settlement_split()
+    _seed_work_order_metrics()
 
 
 def _irb_effective_origins(coupling):
@@ -2362,6 +2363,17 @@ def _tra_sle_to_sv(mm_per_year):
     return mod.sle_to_sv(mm_per_year)
 
 
+def _seed_work_order_metrics():
+    """Five metrics from the WO-4/WO-6/instrument-index/DISPATCH-3 folders.
+
+    These five register() calls were committed (79800d3, 6ee102a,
+    209af6d, f5339f9) after the `return` of _tra_sle_to_sv, dead code
+    inside a helper seed() never calls -- so the CLI read them as
+    unreachable AND as expected-and-not-registered, two halves of one
+    defect (KNOWN_RED section 11). Moved here, under seed(), unchanged.
+    The fourth occurrence of the shape seed_reachable() was written
+    against, and the first it caught by itself.
+    """
     register(
         "unowned-join/invariant.py::join_coverage",
         _uj_join_coverage,
