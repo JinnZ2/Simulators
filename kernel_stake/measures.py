@@ -19,10 +19,21 @@ def git(args, tag=None):
 
 
 def interval(prev, tag):
-    """One log pass. -> [(sha, name, email, [files])]"""
+    """One log pass. -> [(sha, name, email, [files])]
+
+    [D4] The pathspec is not an optimisation, it is the difference
+    between 8 seconds and 4 minutes per interval.  Without it
+    --name-only computes a diff for all ~69k commits in the range; with
+    it, git prunes trees and diffs only the ~10k that touch a subsystem.
+    The first run of this file had no pathspec, ran past the 30-minute
+    background limit, was killed, and -- because it wrote its output
+    only at the end -- produced nothing.  Hence also the per-interval
+    checkpoint in __main__.
+    """
     raw = git(["log", "--no-merges",
                "--pretty=format:%s%%H%s%%aN%s%%aE" % (SEP1, SEP2, SEP2),
-               "--name-only", "%s..%s" % (prev, tag)], tag=tag)
+               "--name-only", "%s..%s" % (prev, tag),
+               "--"] + [p for p in S.PATHS], tag=tag)
     out = []
     for blk in raw.split(SEP1):
         if not blk.strip():
@@ -60,11 +71,11 @@ def concentration(counter):
 
 def first_commit_date(path):
     """Maturity confound: first commit anywhere in history touching path."""
-    out = git(["log", "--reverse", "--format=%cs", "--max-count=1",
-               "--diff-filter=A", "--", path]).strip()
-    if not out:
-        out = git(["log", "--format=%cs", "--", path]).strip().split("\n")[-1]
-    return out or None
+    # [D5] --diff-filter=A forces a diff over full history and is far
+    # slower than letting the pathspec prune; the last line of a plain
+    # pathspec log is the oldest commit touching the path.
+    out = git(["log", "--format=%cs", "--no-merges", "--", path]).strip()
+    return out.split("\n")[-1] if out else None
 
 
 def selftest():
@@ -98,19 +109,30 @@ def selftest():
 if __name__ == "__main__":
     if "--selftest" in sys.argv:
         selftest(); sys.exit(0)
-    res = {}
+    # checkpoint after every interval, and resume from it
+    CK = "measures.partial.json"
+    state = json.load(open(CK)) if os.path.exists(CK) else {
+        "intervals": {}, "first_commit": {}}
     tags = [t for t, _d in S.TAGS]
     for i in range(1, len(tags)):
         prev, tag = tags[i - 1], tags[i]
+        key = "%s..%s" % (prev, tag)
+        if key in state["intervals"]:
+            print("%s  cached" % key, file=sys.stderr); continue
         acc = attribute(interval(prev, tag))
         cell = {}
         for p in S.PATHS:
             t1, t3, k = concentration(acc[p]["authors"])
             cell[p] = {"commits": acc[p]["commits"], "top1": t1,
                        "top3": t3, "authors": k}
-        res["%s..%s" % (prev, tag)] = cell
-        print("%s..%s  done" % (prev, tag), file=sys.stderr)
-    age = {p: first_commit_date(p) for p in S.PATHS}
-    json.dump({"intervals": res, "first_commit": age},
-              open("measures.json", "w"), indent=1, sort_keys=True)
+        state["intervals"][key] = cell
+        json.dump(state, open(CK, "w"), indent=1, sort_keys=True)
+        print("%s  done" % key, file=sys.stderr)
+    for p in S.PATHS:
+        if p in state["first_commit"]:
+            continue
+        state["first_commit"][p] = first_commit_date(p)
+        json.dump(state, open(CK, "w"), indent=1, sort_keys=True)
+    json.dump(state, open("measures.json", "w"), indent=1, sort_keys=True)
+    os.remove(CK)
     print("wrote measures.json")
