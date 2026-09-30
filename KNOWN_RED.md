@@ -563,3 +563,72 @@ potential/test_perturbation.py            UnboundLocalError: PERTURBATIONS (re-i
 potential/tools/registry_sourced.py       --selftest asserts verified != unverified on
                                           a fixture that yields 1 and 1
 ```
+
+## 12. FIFTH PASS — 2026-09-30, PART B item 13: the §11 known-answer half, closed
+
+Bounded to the two §11 rows the order named — the five `register()` sites in
+`_tra_sle_to_sv` that `seed()` could not reach, and the five MANIFEST ids never
+registered — and they were one defect: the five blocks had been committed
+(79800d3, 6ee102a, 209af6d, f5339f9) after the `return` of `_tra_sle_to_sv`,
+dead code inside a helper `seed()` never calls, so each id was unreachable AND
+absent from the registry at once. Moved unchanged into `_seed_work_order_metrics()`,
+called from `seed()`. `seed_reachable()` was written against exactly this shape
+(fourth occurrence) and this is the first instance it caught by itself.
+
+`python3 -m unittest discover tests` on `claude/potential-part-b-k7Qm`: 133 run,
+4 FAIL (was 8). `python3 tools/known_answer.py` exits 0: registered 50 / expected
+50 COMPLETE, 0 call sites unreachable, 0 cases disagreeing. CLOSED, by id:
+
+```
+test_known_answer_gate.ManifestIsCovered.test_every_manifest_entry_is_registered
+test_known_answer_gate.SeedReachability.test_every_registration_is_reachable_from_seed
+test_known_answer_gate.TheGateFires.test_the_registry_is_complete
+test_known_answer_gate.ToolRuns.test_tool_exits_clean
+```
+
+EXACTLY WHAT IS LEFT of §11, red and untouched, §10's subject:
+
+```
+test_run_manifest.TestArgparseSelftestForm.test_argparse_declared_selftest_is_not_filed_as_cli
+test_run_manifest.TestArgparseSelftestForm.test_those_modules_really_carry_checks
+test_run_manifest.TestRedirectContract.test_no_redirect_names_a_target_that_is_missing
+test_run_manifest.TestRedirectContract.test_the_one_known_violation_is_pinned
+```
+
+Beside them, not new but newly VISIBLE — reaching the five registrations ran their
+cases for the first time, and `metrics exercised: 44 of 50, cases NOT_RUN: 33`.
+The gate does not fail on NOT_RUN (a case that raised on the way in is recorded,
+not scored), so these are on no red test; they are listed here because a registry
+reading COMPLETE with six metrics never exercised is the state `SS_008` names.
+Outside item 13's bound; nothing below was touched:
+
+```
+assessor-coupling/conditions.py::pool_fraction
+     IndentationError, conditions.py line 504 — an unclosed `sys.stderr.write(`
+     spliced between two copies of main()'s tail. Compiles in BOTH parents of
+     merge b57c625 and not in the merge: a decision taken inside the merge
+     commit, tools/merge_silent_loss.py's subject.
+crediting-rate/crediting_rate_v2.py::position
+     SyntaxError, `{` never closed at line 625. Compiles in BOTH parents of merge
+     e167a67 and not in the merge — same shape as the row above.
+chain-position/load_class.py::stability_product
+     SyntaxError, `from __future__` after a third stacked module docstring
+     (line 156). Broken on the second parent of b57c625 (1a9c09b side) and
+     carried through the merge, not introduced by it.
+cooperative-substrate-proof/p3_comprehension.py::gain_from_sizes
+cooperative-substrate-proof/p5_lag.py::lag_ratio
+     ModuleNotFoundError: `scope` — both modules `import scope`, a sibling, and
+     the registry loads them by file path with the folder not on sys.path.
+     A property of the helper's loader, not of the modules.
+instrument-index/build_index.py::claim_only_fraction
+     KeyError 'path' / KeyError 3 — the registry's cases hand the function a list
+     of shape strings and the function reads row dicts; helper and callee
+     disagree on the argument shape.
+```
+
+The three syntax rows are the load-bearing ones: three modules on `main` do not
+compile, two of them since a merge commit that neither side asked for, and no
+suite in `tests/` or in CI reads them, so the registry running them is the only
+instrument that noticed. Each is a separate repair on its own folder and none is
+authorized by PART B; recorded so the next `--selftest` sweep does not read
+`COMPLETE` as `ran`.
