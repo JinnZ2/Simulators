@@ -20,6 +20,16 @@ not delivered to the session that filed this. The notice carries the zip name.
 | `DYED_FUEL_LEDGER_SETTLE.md` | CC-4 | column A settled against 26 CFR 48.4082-1; B and E/F NOT_EVALUABLE |
 | `DESIGN_frame-substitution-eval.md` | CC-5 | the rebuilt benchmark, design only, PROPOSED |
 | `check.py` | — | reads the five records back; edits none |
+| `RECONCILIATION.md` | — | this dispatch was also run by another session (`law-as-unvalidated-measurement/`, `60152f7`); row-by-row differences |
+
+## Second pass of the same dispatch
+
+Another session ran this dispatch first, with the report zip and the ledger
+rows in hand, into `law-as-unvalidated-measurement/` on branch
+`claude/law-measurement-correction`. This folder was pushed to a separate
+branch and overwrites nothing. Two copies of sections A-G now exist; which
+folder merges is the owner's decision. `RECONCILIATION.md` lists where the two
+passes differ.
 
 ## Depth, stated once
 
