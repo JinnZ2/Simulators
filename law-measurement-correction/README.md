@@ -19,8 +19,10 @@ not delivered to the session that filed this. The notice carries the zip name.
 | `VERIFICATION_2026-10-04.md` | CC-3 | the F/UNVERIFIED items, one of VERIFIED / CONTRADICTED / NOT_FOUND each |
 | `DYED_FUEL_LEDGER_SETTLE.md` | CC-4 | column A settled against 26 CFR 48.4082-1; B and E/F NOT_EVALUABLE |
 | `DESIGN_frame-substitution-eval.md` | CC-5 | the rebuilt benchmark, design only, PROPOSED |
-| `check.py` | — | reads the five records back; edits none |
+| `check.py` | — | reads the seven records back; edits none |
 | `RECONCILIATION.md` | — | this dispatch was also run by another session (`law-as-unvalidated-measurement/`, `60152f7`); row-by-row differences |
+| `CC3b_PRIMARY_RERUN_2026-10-04.md` | CC-3b | the eight rows rerun on primary pages: host check OPEN 0 / REFUSED 6, so all 8 PRIMARY_UNREACHABLE; prior columns from both passes carried unedited; R1 paragraph letter stays UNCONFIRMED, R2's second read was not performed |
+| `CC4_MERGED.md` | CC-4 merge | pass 1's CC-4 adopted (it read the ledger rows), with provenance; columns B and E/F are a byte copy of blob `b22e599`; the column A unit follows R1, unchanged |
 
 ## Second pass of the same dispatch
 
