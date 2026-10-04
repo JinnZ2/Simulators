@@ -1,0 +1,17 @@
+  PASS  notice carries A..G in order and the provenance block
+  PASS  every CC-3 row carries one of the three states
+  PASS  the CC-3 counts line matches the rows
+  PASS  both named instruments resolve to no path
+  PASS  ledger: A settled with unit, liquid field unfilled, B and E/F not evaluable
+  PASS  design: four cells incl. REFUSED, key-holder rule stated
+  PASS  a notice missing B is caught
+  PASS  a fourth state is caught as out of vocabulary
+  PASS  a counts line that disagrees with the rows is caught
+  PASS  a planted why-recovery/ directory resolves
+  PASS  a planted parks.py resolves
+  PASS  a file that only MENTIONS the names does not resolve (a mention is not the instrument)
+  PASS  an empty tree resolves nothing (no default hit)
+  PASS  the move-set phrase 'pre-split ledgers' is not a path stem the absence check uses
+  PASS  a ledger record that fills nothing for the liquid field is caught
+  PASS  a design dropping the REFUSED cell is caught
+selftest: 16/16 passed

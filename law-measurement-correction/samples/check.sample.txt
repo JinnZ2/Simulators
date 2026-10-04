@@ -1,0 +1,7 @@
+law-measurement-correction: readings of the five records (nothing edited)
+  1 notice   sections ABCDEFG  in order True  provenance True
+  2 states   8 rows  out-of-vocabulary none  counts {'VERIFIED': 2, 'CONTRADICTED': 2, 'NOT_FOUND': 4}  stated {'VERIFIED': 2, 'CONTRADICTED': 2, 'NOT_FOUND': 4}  match True
+  3 absence  why-recovery           ABSENT
+  3 absence  split-ledger / parks   ABSENT
+  4 ledger   {'A_settled': True, 'liquid_unfilled': True, 'B_not_evaluable': True, 'EF_not_evaluable': True}
+  5 design   cells ['PHYSICS', 'LAW-AS-PRIOR', 'MIXED', 'REFUSED']  key-holder rule True
