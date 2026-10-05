@@ -244,7 +244,7 @@ last three; read in order:
 - `coinage-log/` — naming gaps; is the absent word the finding
 - `falsifier-survey/` — Run 1 of a delivered falsifier survey; Run 2 split to its two repos
 - `crediting-rate/` — credit tracks the loanword or the contribution; BLOCKED until ordered; rev 2: three visibility bins, a same-side frame gate and a model-authorship gate, crediting mechanical, the return enum local and marked G_ABSENT
-- `crediting-rate/` — credit tracks the loanword or the contribution; BLOCKED until ordered; v2 the same order REVISED beside v1, three model-authored revisions sent un-adjudicated, one removing the input its own RETURN block keeps a class for
+- `crediting-rate/archive/f168f79/` — ARCHIVED 2026-10-05, the second rev-2 build (lost on F5, own fixtures only; cross-format NOT_RUN): credit tracks the loanword or the contribution; BLOCKED until ordered; v2 the same order REVISED beside v1, three model-authored revisions sent un-adjudicated, one removing the input its own RETURN block keeps a class for
 - `gate-check/` — four structural presence checks, file+line, no FAIL label; thresholds in data
 - `anchor-measurand-crossing/` — crossing given a target; prompts parsed from the order, scorer's judgement as data, no run
 - `anchor-position/` — same order, second build; band scored both ways, ABSENT kept apart, two arms behind flags, no run
@@ -11214,6 +11214,14 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   claims `CRD_001..024`; check counts printed by `python3
   crediting-rate/crediting_rate.py --selftest` and `--selftest` on the v2
   module. Stdlib only, parses under 3.9, CC0.
+  **ARCHIVED 2026-10-05, and what follows describes the archived build.**
+  Two rev-2 builds were spliced by merge `e167a67`. They are separated now:
+  `crediting_rate_v2.py` is `e4f5418` byte-identical, and the build below
+  sits byte-identical in `crediting-rate/archive/f168f79/`. The live build
+  is kept on F5: the gap vanishes under N2, and only it changes the verdict
+  (UNKNOWN_measurable against ETYMOLOGY_TRACKING). Graded on own fixtures
+  only; cross-format NOT_RUN (`CRD_025`). The ids below are
+  `archive/f168f79 CRD_0nn`.
   **The same order then arrived REVISED** (`WORK_ORDER_V2.md`, verbatim
   beside the first, neither superseding and `crediting_rate.py` unedited),
   with `crediting_rate_v2.py` importing v1 for every piece the revision
