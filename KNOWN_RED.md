@@ -780,3 +780,71 @@ All of them resolve today except the two in 15.2.
     this branch       2 failed, 132 passed   (134 tests: one added in the
                                               repin; the 2 are the redirect
                                               tests, 15.3)
+
+## 16. 2026-10-05 — the known-answer gate fails on skipped cases; parked items
+
+### 16.1 The change
+
+`tools/known_answer.py` exits nonzero when any case is NOT_RUN. Its summary
+ends in a block that cannot be missed:
+
+    SKIPPED (NOT_RUN): 33 cases in 6 metrics   -- GATE RED: a skipped case is not a passing case
+
+Each metric is listed with its skip count and the first error.
+
+Old check: exit 0 unless a case disagreed with the registry, a metric was
+missing, a registration was unreachable, or a registration sat outside seed().
+NOT_RUN counted toward none of these.
+
+New check: all of the above, plus any NOT_RUN case. This tightens the gate and
+weakens nothing. Section 15.4 said the gate's green carried 6 never-exercised
+metrics. That green is gone.
+
+    tools/known_answer.py   skipped(), exit_code(), the SKIPPED block
+    tests/test_known_answer_gate.py
+        test_a_skipped_case_turns_the_gate_red             planted raising callable -> listed, exit 1
+        test_the_skipped_count_is_printed_in_the_summary   the line is present; nonzero exit whenever the count > 0
+
+Consequence: `ToolRuns::test_tool_exits_clean` is RED again. It is red for the
+33 skipped cases below and for nothing else. Suite (tests/, pytest):
+
+    3 failed, 133 passed
+      test_known_answer_gate::ToolRuns::test_tool_exits_clean   (16.2: the 33 skips)
+      test_run_manifest::TestRedirectContract x2                (16.2: the two redirects)
+
+### 16.2 OPEN — awaiting Kavik (parked; nothing below was changed)
+
+    1  sense_as_match.py -> test_sense.py
+       The redirect names a file that has never been committed. Deliver
+       test_sense.py, or say what the redirect should name. The redirect
+       tests stay RED. Not pinned as a known violation.
+
+    2  instrument-index/coverage.py -> test_index.py
+       The fate of the file: losing build of merge b57c625, landed 1d71e9f.
+       The pointer names a file that has never been committed.
+       Archiving the file (4684e40 on claude/potential-part-b-k7Qm) keeps
+       the pointer and does not close this. The redirect tests stay RED.
+
+    3  chain-position/load_class.py and crediting-rate/crediting_rate_v2.py
+       Neither compiles; each is a merge splice of two builds. No winning
+       build picked.
+         load_class.py          SyntaxError: from __future__ imports must
+                                occur at the beginning of the file
+                                -> stability_product, 5 cases skipped
+         crediting_rate_v2.py   SyntaxError: '{' was never closed (line 625)
+                                -> position, 5 cases skipped
+
+### 16.3 OPEN, not in the parked three, and with the same shape
+
+The remaining four skipped metrics also go through files that section 13 (on
+claude/potential-part-b-k7Qm) lists as spliced builds. Repairing any of them is
+a build pick, so they are parked with the three above rather than fixed under
+"safe parts only".
+
+    assessor-coupling/conditions.py::pool_fraction         IndentationError line 504   6 skipped
+    cooperative-substrate-proof/p3_comprehension.py::gain_from_sizes
+                                                           ModuleNotFoundError 'scope' 5 skipped
+    cooperative-substrate-proof/p5_lag.py::lag_ratio       ModuleNotFoundError 'scope' 6 skipped
+    instrument-index/build_index.py::claim_only_fraction   KeyError: 'path'            6 skipped
+
+The gate stays RED until all six skipped metrics run.

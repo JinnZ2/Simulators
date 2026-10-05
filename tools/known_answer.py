@@ -157,6 +157,28 @@ def unexpected(metric_id):
     return out
 
 
+def skipped(metric_ids=None):
+    """Every NOT_RUN case among the metrics run so far, as
+    (metric, case, detail).
+
+    A skipped case is not a passing case. NOT_RUN is a state, not a verdict:
+    the case raised on the way in, or its callable was unavailable, so
+    nothing was compared to anything. Before 2026-10-05 the gate exited 0
+    with 33 such cases across six metrics, and its green read as "every
+    case agrees". It now exits nonzero on any of them (KNOWN_RED 16).
+    """
+    ids = registry_ids() if metric_ids is None else metric_ids
+    return [(m, r["case"], r["detail"] or "")
+            for m in ids for r in _RESULTS.get(m, [])
+            if r["status"] == NOT_RUN]
+
+
+def exit_code(bad, comp_ok, reach_ok, outside, skips):
+    """0 only when nothing disagrees, nothing is missing or unreachable,
+    and nothing was skipped."""
+    return 1 if (bad or not comp_ok or not reach_ok or outside or skips) else 0
+
+
 def registry_ids():
     return sorted(_REGISTRY)
 
@@ -2682,7 +2704,21 @@ def report():
     print("register() call sites in other files: %d" % len(outside))
     for rel, ln in outside:
         print("  !! %s line %d registers outside seed()" % (rel, ln))
-    return 1 if (bad or not comp["ok"] or not reach["ok"] or outside) else 0
+    skips = skipped()
+    skip_metrics = sorted(set(m for m, _, _ in skips))
+    print()
+    print("=" * 72)
+    print("SKIPPED (NOT_RUN): %d cases in %d metrics%s"
+          % (len(skips), len(skip_metrics),
+             "   -- GATE RED: a skipped case is not a passing case"
+             if skips else ""))
+    for m in skip_metrics:
+        n = sum(1 for mm, _, _ in skips if mm == m)
+        first = next(d for mm, _, d in skips if mm == m)
+        print("  SKIPPED %2d  %s" % (n, m))
+        print("             %s" % first.splitlines()[0][:100] if first else "")
+    print("=" * 72)
+    return exit_code(bad, comp["ok"], reach["ok"], outside, skips)
 
 
 if __name__ == "__main__":
