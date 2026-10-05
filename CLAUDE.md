@@ -13974,6 +13974,10 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   Eleven `STE_*` claims (STE_011: X6, a trailer lead of a quarter
   period, reads TRAILER_LEADS at -1.8 s against a constructed 2.0 s on the
   first run, recorded before any repair); test 49/49. Stdlib only, CC0.
+- `human-sensing-prior/` — one-file CC0 instrument against the AI prior that human
+  multi-channel sensing is costly: full-array parallel sensing is the energy basin, forced
+  single-channel processing the deviation; the invariant-verdict tell, the projection
+  mechanism, an animal evidence base, gaps marked in-line, three PROPOSED tests. No code.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
