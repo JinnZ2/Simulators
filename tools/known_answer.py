@@ -784,6 +784,7 @@ EXPECTED_METRICS = (
     "measurand-partition/wo4_lumber.py::stiffness_ratio",
     "route-independence/route_independence.py::independence_ratio",
     "route-independence/lag_count.py::lag_years",
+    "route-independence/enclosure_caveat_register.py::caveat_rate",
     "route-independence/settlement_split.py::net_positions",
     "revision-survival/revision_survival.py::delta",
     "routing-data-layer/rate_form.py::sustained_excess",
@@ -1727,6 +1728,7 @@ def seed():
     _seed_potential()
     _seed_route_independence()
     _seed_lag_count()
+    _seed_enclosure_caveat()
     _seed_settlement_split()
     _seed_work_order_metrics()
 
@@ -1906,6 +1908,34 @@ def _seed_lag_count():
                  "the class carries no lag whatever dates are passed; None, never 1506"),
         ],
         note="FWO-11; the None cases pin absence against a zero lag.",
+    )
+
+
+def _caveat_rate(yes, no):
+    """route-independence/enclosure_caveat_register.py::caveat_rate, imported.
+    FWO-15 Build A: YES / (YES + NO). E4 = ABSENT never enters the denominator,
+    so an arm with only ABSENT codings has no rate; None pins that against a
+    measured zero, since 0.0 would read as 'no study caveats' where nothing
+    was coded."""
+    import importlib.util
+    path = os.path.join(ROOT, "route-independence", "enclosure_caveat_register.py")
+    spec = importlib.util.spec_from_file_location("_enclosure_caveat_register", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.caveat_rate(yes, no)
+
+
+def _seed_enclosure_caveat():
+    register(
+        "route-independence/enclosure_caveat_register.py::caveat_rate",
+        _caveat_rate,
+        [
+            case("two of thirty", (2, 28), 2 / 30, "2 / (2 + 28) by hand"),
+            case("all caveat", (5, 0), 1.0, "5 / 5 by hand"),
+            case("measured zero", (0, 7), 0.0, "0 / 7: coded, none caveat"),
+            case("nothing coded YES or NO", (0, 0), None, "empty denominator; None, never 0"),
+        ],
+        note="FWO-15; the None case pins an all-ABSENT arm against a measured zero.",
     )
 
 

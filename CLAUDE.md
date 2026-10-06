@@ -14543,7 +14543,32 @@ ship a `requirements.txt`. Each folder ships `samples/`.
     combination); the erratum's ">= 3" is the GEOGRAPHIC count (`RIN_148`).
   - `span_store.json` ships empty, and `intake` is ready for the 83.11 span
     (`RIN_149`).
-  One hundred and fifty `RIN_*` claims;
+  **FWO-15 (2026-10-04, enclosure as corpus validity limit)** landed with its
+  order marked RECONSTRUCTED from a memory object not in this tree, and
+  `EXPECTED_FWO-15.md` committed with it at `b279bdf` before any module.
+  Terms ("enclosure", "captive", "domesticated") are stated at the top of
+  the folder README in their animal-science external-validity sense.
+  - **Prior art, run first, search snippets only** (`FWO-15_PRIOR_ART.md`):
+    the WEIRD paper's axis is cultural sampling, but the same group measured
+    market integration as the share of purchased calories, so the food leg
+    of the provision regime is a measured covariate in one human
+    sub-literature (`RIN_152`). ARRIVE 2.0 item 15 is the animal-arm
+    declaration standard, and that literature calls the caveat rarely
+    assessed (`RIN_153`).
+  - `enclosure_caveat_register.py` is DESIGN_WRITTEN: E1-E5 schema, a
+    frame-before-coding gate, caveat rate per arm with its frame, and the
+    order's branches plus INDETERMINATE. With no corpus the real run reads
+    UNMEASURED (`RIN_156`). `caveat_rate` is registered in
+    `tools/known_answer.py`.
+  - `coupling_gradient.py` is BUILT and was run on the order's five seed
+    rows: one entered (US barter exchanges, TEFRA 1982) and four HELD for an
+    undated instrument (`RIN_157`). The located barter instrument added
+    third-party reporting, not dollar accounting, since barter was already
+    taxable at fair market value (`RIN_158`). The case schema cannot record a
+    de-coupling (`RIN_159`).
+  - The scope assertion registered in EXPECTED failed as written on
+    `render`/`main` and was narrowed on the record (`RIN_155`).
+  One hundred and sixty `RIN_*` claims;
   check counts printed by `python3 route-independence/test_route.py`,
   `python3 route-independence/test_dependency_chain.py`,
   `python3 route-independence/test_single_channel.py`,
@@ -14553,8 +14578,9 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `python3 route-independence/test_thermal_gates.py`,
   `python3 route-independence/test_repairs_a31.py`,
   `python3 route-independence/test_chains_a456.py`,
-  `python3 route-independence/test_standing_a61.py` and
-  `python3 route-independence/test_sourcing_a62.py`, the last nine also
+  `python3 route-independence/test_standing_a61.py`,
+  `python3 route-independence/test_sourcing_a62.py` and
+  `python3 route-independence/test_fwo15.py`, the last ten also
   printing the fail-fixture line. Stdlib only,
   parses under 3.9, phone-buildable, CC0.
 - `custody-verification-band/` — Marker under exploration. Criterion: a layer
