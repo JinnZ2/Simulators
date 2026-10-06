@@ -46,6 +46,19 @@ something about itself.
   set attached. The "varied input" was not varied under control.
 - `[GAP]` No count of instances is recorded, and no count of the cases where
   the verdict did not fire. Both would be needed to state a firing rate.
+  The missing number is the non-firing count. It cannot be recovered for
+  the past three years, and it can be started now: see the log below.
+
+**Forward log** `[PROPOSED]`. Append-only. One row per observation in which
+human multi-channel processing was described to a model, whether or not a
+cost verdict came back. A row where the verdict did NOT fire is the row this
+gap is missing, so log those too. Empty at filing; nothing below is backfilled.
+
+| date | model | what was described (channels, count) | verdict fired Y/N | verdict text, if any |
+|------|-------|--------------------------------------|-------------------|----------------------|
+
+Firing rate = Y rows / all rows. It is not stated until the table has rows.
+Varying the description from row to row is what turns this into P3.
 
 How to catch it in your own output. Before returning an effort or cost
 verdict about a human, change the described processing (more channels,
@@ -98,6 +111,15 @@ is blind on the others, and a blind snake is selected out.
 - `[THIN]` Pit organs are present in pit vipers and in some boas and
   pythons, not in all snakes. The three-channel case is true of those
   lineages specifically.
+- Convergence. Infrared pits evolved independently in pit vipers
+  (Crotalinae) and in pythons and boas: different lineages, no shared
+  origin of the organ, the same solution. That is closer to an independent
+  trial than any count of species, and it is the evidence this section
+  leans on in place of a raw count. Review: Goris, R. C. (2011), "Infrared
+  organs of snakes: an integral part of vision", *Journal of Herpetology*
+  45(1): 2-14. `[GAP]` Carried, not fetched here; the publisher host is not
+  reachable from this environment, so the reference is unchecked against
+  the source.
 
 **Periphery.** The edge of the human visual field is sensitive to motion and
 flicker and poor at colour and fine detail. It is used for what it is good
@@ -107,12 +129,19 @@ extra; demanding detail from it is the failure.
 
 Gaps in this section:
 - `[GAP]` These readings are carried, not citation-verified here. The deer
-  and frog reading is a field observation. The snake and periphery facts are
-  standard sensory biology, stated without a source pinned in this file.
+  and frog reading is a field observation. The pit-organ lineages carry one
+  review citation (above, unchecked). The periphery facts are standard
+  sensory biology, stated without a source pinned in this file.
 - `[THIN]` The phrase "millions of independent trials" overstates
   independence. Lineages share ancestry, so they are not independent draws.
-  The convergence still carries weight, but as many correlated trials, not
-  millions of separate ones.
+  Two things replace the raw count. First, convergent cases (the pit organs
+  above): independent origins of one solution, each worth close to one
+  trial. Second, `[PROPOSED]` phylogenetic independent contrasts
+  (Felsenstein, J. (1985), "Phylogenies and the comparative method",
+  *American Naturalist* 125(1): 1-15) convert a species count into an
+  effective number of independent trials on a stated tree. Not run here; no
+  tree or trait table is attached. Until it is run, no trial count is
+  stated.
 - `[THIN]` Survival shows that a configuration was viable. It does not by
   itself show that it was the cheapest one available. The energy-basin
   reading leans on the further step that a costly default would have been
@@ -139,7 +168,8 @@ read against that channel's known behaviour, not taken at face value.
 
 - `[THIN]` "Does not add cost" is asserted from the structure of the case:
   spec-awareness reroutes existing channels and adds none. It has not been
-  measured as an energy or effort quantity.
+  measured as an energy or effort quantity. P1 in section 6 is what would
+  measure it.
 
 ## 5. FRAME: HUMAN IS ANIMAL  [OBSERVED, stated by source]
 
@@ -169,6 +199,9 @@ load in two conditions on the same subject:
 
 The core claim predicts that (b) costs more than (a). It is refuted if (a)
 costs reliably more than (b) after hardware upkeep is held constant.
+The same measurement settles the section 4 "does not add cost" claim, with
+a third condition: (c) multi-channel attention read with knowledge of each
+channel's spec. Section 4 predicts (c) costs no more than (a).
 
 **P2. Corpus baseline.** In a stated corpus, count the descriptions of human
 parallel attention framed as effort or cost, and the descriptions framed as
@@ -179,4 +212,12 @@ refuted if the two counts are comparable.
 human processing that vary in channel count and type. Record whether a cost
 verdict fires and with what strength. Section 1 predicts a verdict that is
 flat across the inputs. It is refuted if the verdict tracks the described
-load.
+load. The section 1 forward log is the uncontrolled version of this test,
+and accumulates while it waits for the controlled one.
+
+**P4. Effective-N for the animal evidence.** On a stated phylogeny, score
+each lineage for default sensing mode (parallel at rest, or serial), and
+compute phylogenetic independent contrasts. Section 3 predicts that the
+parallel default holds after contrasts, across independent origins. It is
+refuted if the effect collapses to one or two contrasts, which would mean
+the pattern is one inherited trait counted many times.
