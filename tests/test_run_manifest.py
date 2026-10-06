@@ -143,12 +143,35 @@ class TestRunsNothingItScans(unittest.TestCase):
         self.assertEqual(self._exec_hits('import re\nre.compile("x")'), [])
 
 
+ARGPARSE_ATTRIBUTE_PINS = ("search-substitution/search_substitution.py",
+                           "qrng-pair-search/qrng_pair_search.py")
+
+
 class TestArgparseSelftestForm(unittest.TestCase):
     """The flag can be declared through argparse and tested as an attribute.
 
     A classifier looking only for the literal inside an `if` test files such a
     module as CLI and under-reports the check surface the manifest exists to
     enumerate. Pinned against real files so a regression is visible.
+
+    REPINNED 2026-10-04 (KNOWN_RED section 15). The check is unchanged: a real
+    file whose only --selftest dispatch is argparse-declared and tested as an
+    attribute must classify SELFTEST, and must really carry that form. Only the
+    instances changed.
+      old pins  substrate-alternative/pilot_loop.py, frame_audit.py. These are
+                the fa9a00e build (blob 1329173 for pilot_loop). Merge dbf4cb0
+                (PR #83, 2fa8648) resolved both paths to the 948033a build,
+                which refuses --selftest and is REDIRECT. The old pins are
+                false of the tree. They are also no longer discriminating:
+                the pre-a00aa9e classifier files the current pilot_loop.py
+                REDIRECT too, so a regression would not show on them.
+      new pins  search-substitution/search_substitution.py and
+                qrng-pair-search/qrng_pair_search.py. Both use argparse plus
+                `if args.selftest:` only. The pre-a00aa9e classifier
+                (a00aa9e^:tools/run_manifest.py) files both CLI and the
+                current one files both SELFTEST, so the pins discriminate.
+    Which substrate-alternative build should win is RIN_024's open question
+    and is not decided by this repin.
     """
 
     def _rec(self, path):
@@ -158,16 +181,23 @@ class TestArgparseSelftestForm(unittest.TestCase):
         self.fail("not in the manifest: %s" % path)
 
     def test_argparse_declared_selftest_is_not_filed_as_cli(self):
-        for path in ("substrate-alternative/pilot_loop.py",
-                     "substrate-alternative/frame_audit.py"):
+        for path in ARGPARSE_ATTRIBUTE_PINS:
             self.assertEqual(self._rec(path)["class"], "SELFTEST", path)
 
     def test_those_modules_really_carry_checks(self):
         # The classification is only worth pinning if it is true of the file.
-        for path in ("substrate-alternative/pilot_loop.py",
-                     "substrate-alternative/frame_audit.py"):
+        for path in ARGPARSE_ATTRIBUTE_PINS:
             src = io.open(os.path.join(ROOT, path), encoding="utf-8").read()
             self.assertIn('add_argument("--selftest"', src, path)
+
+    def test_pins_use_the_attribute_form_and_not_the_literal(self):
+        # A pin that also carried `"--selftest" in sys.argv` would classify
+        # SELFTEST under the pre-a00aa9e classifier too, and would not
+        # discriminate. This holds the repinned files to the form under test.
+        for path in ARGPARSE_ATTRIBUTE_PINS:
+            src = io.open(os.path.join(ROOT, path), encoding="utf-8").read()
+            self.assertNotIn('"--selftest" in', src, path)
+            self.assertIn(".selftest", src, path)
 
     def test_the_attribute_form_needs_the_flag_declared(self):
         rec = rm.classify(
