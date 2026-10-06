@@ -563,3 +563,38 @@ potential/test_perturbation.py            UnboundLocalError: PERTURBATIONS (re-i
 potential/tools/registry_sourced.py       --selftest asserts verified != unverified on
                                           a fixture that yields 1 and 1
 ```
+
+## 12. FIFTH PASS — 2026-10-06, the sense_as_match.py redirect (branch claude/sense-as-match)
+
+`sense_as_match.py` (root) refuses `--selftest` and says "run test_sense.py";
+no `test_sense.py` sat beside it. A root `test_sense.py` now does. It runs the
+module's own `run_checks()` and exits with its code. Nothing in
+`sense_as_match.py` is edited.
+
+```
+test_run_manifest.TestRedirectContract.test_no_redirect_names_a_target_that_is_missing
+     before: ['instrument-index/coverage.py', 'sense_as_match.py']
+     after:  ['instrument-index/coverage.py']
+test_run_manifest.TestRedirectContract.test_the_one_known_violation_is_pinned
+     before: anchor-position/normalize.py, instrument-index/coverage.py, sense_as_match.py
+     after:  anchor-position/normalize.py, instrument-index/coverage.py
+```
+
+Both tests stay red, on `instrument-index/coverage.py`, which this pass does not
+touch. The 8 failing ids are unchanged: 133 run, 8 FAIL, before and after.
+
+What the repair is NOT: the redirect is now TRUE, and the target is SELF-GRADED.
+The checks were written by the same hand as the module, so the run is a regression
+result, not validation (the MSV_023 status). It runs 16 of 18 and exits 1:
+
+```
+FAIL positive control fires on a term not at the match site
+FAIL score returns UNRATED on a failed gate
+```
+
+One cause. `gate()` checks only that the TERM appears whole-word in the source text.
+The control's text contains the term and not the basis, so `gate()` returns
+`(True, "OK")` where the control expects `NOT_AT_MATCH_SITE`. Either the control is
+mis-specified or the gate is missing a basis clause. That is the author's call, and
+it is left open. The module's own first comment reads "A gate that never fires is
+not a gate", and on its own positive control this one does not fire.
