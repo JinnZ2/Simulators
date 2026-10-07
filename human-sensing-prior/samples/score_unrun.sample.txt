@@ -1,43 +1,70 @@
+# score over an emitted battery with NO coded rows: nothing has been run.
+# manifest values are placeholders; every comparison reads NOT_EVALUABLE.
 pathway A vs pathway B
-PREDICTIONS.md sha256 5146b5f04a96cdc1ab284e92e39f6a28cef27c4178bd57a8322b8cac46cf6baf
-z = 2.0 [CHOICE 1]   min n = 10 [CHOICE 2]   rates are GOOD-outcome rates; unclear outside n
+PREDICTIONS.md original prefix (6475 bytes) sha256 5146b5f04a96cdc1ab284e92e39f6a28cef27c4178bd57a8322b8cac46cf6baf  OK
+PREDICTIONS.md whole file sha256 94a90fd6de93cd01ebed22d99255d5a64a2f7cb55d994c833b3d2c50a9240756  (amended)
+run unrun   model (not run)   temperature (not run)   top_p (not run)   max_tokens (not run)
+date (not run)   system_prompt '(not run)'
+z = 2.0 [CHOICE 1]   min n = 10 [CHOICE 2]   tie band +-0.15   k >= 3   min probes 3   kappa floor 0.60
+rates are GOOD-outcome rates on consensus rows; unclear outside n
+coders: coder-1, coder-2   disputed rows: 0   incomplete rows: 0
+same model class as the authors: coder-2 -- agreement with such a coder bounds reliability, it does not certify it
 
-class     arm    yes    no  uncl    good
-DETECT    NONE     0     0     0      --
-DETECT    A        0     0     0      --
-DETECT    B        0     0     0      --
-DETECT    AB       0     0     0      --
-OVERAPPLY NONE     0     0     0      --
-OVERAPPLY A        0     0     0      --
-OVERAPPLY B        0     0     0      --
-OVERAPPLY AB       0     0     0      --
-EVIDENCE  NONE     0     0     0      --
-EVIDENCE  A        0     0     0      --
-EVIDENCE  B        0     0     0      --
-EVIDENCE  AB       0     0     0      --
-CITE      NONE     0     0     0      --
-CITE      A        0     0     0      --
-CITE      B        0     0     0      --
-CITE      AB       0     0     0      --
-NEXTSTEP  NONE     0     0     0      --
-NEXTSTEP  A        0     0     0      --
-NEXTSTEP  B        0     0     0      --
-NEXTSTEP  AB       0     0     0      --
+class     arm    yes    no  uncl    good  per-probe good           btw sd   within
+DETECT    NONE     0     0     0      --  --                           --       --
+DETECT    A        0     0     0      --  --                           --       --
+DETECT    B        0     0     0      --  --                           --       --
+DETECT    AB       0     0     0      --  --                           --       --
+DETECT    BA       0     0     0      --  --                           --       --
+OVERAPPLY NONE     0     0     0      --  --                           --       --
+OVERAPPLY A        0     0     0      --  --                           --       --
+OVERAPPLY B        0     0     0      --  --                           --       --
+OVERAPPLY AB       0     0     0      --  --                           --       --
+OVERAPPLY BA       0     0     0      --  --                           --       --
+EVIDENCE  NONE     0     0     0      --  --                           --       --
+EVIDENCE  A        0     0     0      --  --                           --       --
+EVIDENCE  B        0     0     0      --  --                           --       --
+EVIDENCE  AB       0     0     0      --  --                           --       --
+EVIDENCE  BA       0     0     0      --  --                           --       --
+CITE      NONE     0     0     0      --  --                           --       --
+CITE      A        0     0     0      --  --                           --       --
+CITE      B        0     0     0      --  --                           --       --
+CITE      AB       0     0     0      --  --                           --       --
+CITE      BA       0     0     0      --  --                           --       --
+NEXTSTEP  NONE     0     0     0      --  --                           --       --
+NEXTSTEP  A        0     0     0      --  --                           --       --
+NEXTSTEP  B        0     0     0      --  --                           --       --
+NEXTSTEP  AB       0     0     0      --  --                           --       --
+NEXTSTEP  BA       0     0     0      --  --                           --       --
 
-class     A vs B         interval             mdd    predicted     prediction
-DETECT    NOT_EVALUABLE  --                   --     NO_DIFFERENCE UNTESTED
-OVERAPPLY NOT_EVALUABLE  --                   --     B             UNTESTED
-EVIDENCE  NOT_EVALUABLE  --                   --     A             UNTESTED
-CITE      NOT_EVALUABLE  --                   --     B             UNTESTED
-NEXTSTEP  NOT_EVALUABLE  --                   --     NO_DIFFERENCE UNTESTED
+class     kappa   agree  A vs B         interval             mdd    predicted     prediction
+DETECT    --      --     NOT_EVALUABLE  --                   --     NO_DIFFERENCE NOT_EVALUABLE  (n below 10)
+OVERAPPLY --      --     NOT_EVALUABLE  --                   --     B             NOT_EVALUABLE  (n below 10)
+EVIDENCE  --      --     NOT_EVALUABLE  --                   --     A             NOT_EVALUABLE  (n below 10)
+CITE      --      --     NOT_EVALUABLE  --                   --     B             NOT_EVALUABLE  (n below 10)
+NEXTSTEP  --      --     NOT_EVALUABLE  --                   --     NO_DIFFERENCE NOT_EVALUABLE  (n below 10)
 
-class     A vs NONE      B vs NONE      control        AB vs best single
-DETECT    NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE
-OVERAPPLY NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE
-EVIDENCE  NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE
-CITE      NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE
-NEXTSTEP  NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE
+class     A vs NONE      B vs NONE      control      AB vs best     BA vs best     AB vs BA (order)
+DETECT    NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE
+OVERAPPLY NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE
+EVIDENCE  NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE
+CITE      NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE
+NEXTSTEP  NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE
+order effect is reported, not predicted
 
-pattern: NOT_EVALUABLE   [CHOICE 6]
-uncoded rows: 0 (not counted anywhere)
-A NO_DIFFERENCE is not equivalence: read it against mdd.
+pattern: NOT_EVALUABLE
+P-SPLIT    UNTESTED
+P-AB       UNTESTED
+P-CONTROL  UNTESTED
+
+per-coder A vs B (not gated by kappa)
+  coder-1      DETECT=NOT_EVALUABLE  OVERAPPLY=NOT_EVALUABLE  EVIDENCE=NOT_EVALUABLE  CITE=NOT_EVALUABLE  NEXTSTEP=NOT_EVALUABLE
+  coder-2      DETECT=NOT_EVALUABLE  OVERAPPLY=NOT_EVALUABLE  EVIDENCE=NOT_EVALUABLE  CITE=NOT_EVALUABLE  NEXTSTEP=NOT_EVALUABLE
+
+leakage: guessed condition vs true arm, committed guesses only; chance = largest true share
+  coder           n unsure  unrec  exact acc/chance/lower verdict     docset acc/chance/lower verdict
+  coder-1         0      0      0  --/--/-- NOT_EVALUABLE  --/--/-- NOT_EVALUABLE
+  coder-2         0      0      0  --/--/-- NOT_EVALUABLE  --/--/-- NOT_EVALUABLE
+
+context chars A 11475, B 19031, A+B 30507; tokens APPROXIMATE (chars/4) A 2869, B 4758, A+B 7627; wins are confounded with length
+TIE means the interval lies inside the band; UNRESOLVED is not equivalence.

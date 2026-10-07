@@ -370,7 +370,7 @@ last three; read in order:
 - `instrument-index/` — a REBUILD from a lost original: 13 fields, two renderings from one pass, a 0.70 axis falsifier that cannot fire where nothing is rated
 - `cooperative-substrate-proof/` — P1-P5, each standalone; the cooperative substrate the competitive frame runs on, as a coverage argument; C1-C4 coded into the parts
 - `stability-trigger-envelope/` — DISPATCH ESP-1, a stability trigger outside its validation envelope (cab sensor vs trailer mass on serpentine downgrades); one instrument `descent_record.py` on CONSTRUCTED data, F1-F5 firing as regression, NEITHER_MODE added to the dispatch's five labels, clock offsets detected never corrected, relocation counted never scored; real run NOT_RUN, T3/T6 NOT_BUILT, T4/T5 UNMEASURED
-- `human-sensing-prior/` — one-file CC0 instrument against the prior that human multi-channel sensing is costly; the invariant cost verdict as a CONSTANT_FIRES tell with a self-check a model runs on its own draft, the animal convergence as evidence, intake-vs-decision scope limit stated, F1-F3 not run; two pathways kept (A `human-sensing-prior.md`, B `PATHWAY_B.md`), predictions committed before `pathways.py`, a four-arm per-class harness (NONE/A/B/AB, opaque ids, arm withheld from the sheet), nothing run
+- `human-sensing-prior/` — one-file CC0 instrument against the prior that human multi-channel sensing is costly; the invariant cost verdict as a CONSTANT_FIRES tell with a self-check a model runs on its own draft, the animal convergence as evidence, intake-vs-decision scope limit stated, F1-F3 not run; two pathways kept (A `human-sensing-prior.md`, B `PATHWAY_B.md`), predictions committed before `pathways.py`, a five-arm per-class harness (NONE/A/B/AB/BA, opaque ids, arm withheld from the sheet) under a dated amendment fixing the tie band, kappa floor and leakage check, nothing run
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -13991,11 +13991,20 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   pathways: A (`human-sensing-prior.md`: convergence, effective-N, P1-P4) and B (`PATHWAY_B.md`:
   cessation-as-cue, scope limits, F1-F3). `PREDICTIONS.md` was committed before any harness code
   and predicts a SPLIT: B wins OVERAPPLY and CITE, A wins EVIDENCE, DETECT and NEXTSTEP tie.
-  `pathways.py` locates each prediction's feature by line (19 markers, 0 mismatches), emits the
-  probe battery and a separate arm key, builds a coding sheet with no arm on it, and scores
-  Agresti-Caffo intervals per class with the minimum detectable difference, NONE control and AB
-  interference check; `test_pathways.py` shows every verdict reachable on constructed worlds.
-  No model has been run and no response coded; a run needs a model and a coder without the key.
+  AMENDMENT 1 (2026-10-07, appended before any run; the original 6475-byte prefix is hashed on
+  every report): B's "very long run of independent trials" FROZEN as a known defect under test;
+  tie band 0.15 (TIE only when the whole interval sits inside it, about 87 coded rows per arm, so
+  k = 30), a win also needing 2 of 3 probes to agree in sign; SPLIT / DOMINATES /
+  LEADS_INCOMPLETE / ALL_TIE / UNRESOLVED rules; arms NONE / A / B / AB / BA with the order effect
+  reported and not predicted; a run manifest (model and settings fixed) refused if incomplete;
+  >= 2 coders with Cohen's kappa imported from `effective-redundancy-audit`, floor 0.60 or the
+  class is NOT_READABLE; coders record a guessed condition and accuracy is scored against chance
+  at two grains; `--strip` silently deletes 8-word verbatim runs from A or B with the log kept
+  apart; lengths reported with tokens APPROXIMATE (chars / 4; B is 1.66x A).
+  `pathways.py` locates each prediction's feature by line (19 markers, 0 mismatches);
+  `test_pathways.py` reaches every verdict on constructed worlds. Baseline: the root suite fails
+  the same 3 ids under unittest and pytest here; the earlier 8 pytest ids were never recorded,
+  so no id-level comparison is possible. No model has been run and no response coded.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
