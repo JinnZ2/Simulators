@@ -1,29 +1,5 @@
-test_M_minus_tol_is_redundant_and_below_is_antagonistic (__main__.Boundaries.test_M_minus_tol_is_redundant_and_below_is_antagonistic) ... ok
-test_M_plus_tol_is_redundant_and_above_is_enhanced (__main__.Boundaries.test_M_plus_tol_is_redundant_and_above_is_enhanced) ... ok
-test_S_minus_M_equal_2tol_is_below_resolution (__main__.Boundaries.test_S_minus_M_equal_2tol_is_below_resolution) ... ok
-test_S_minus_M_just_above_2tol_resolves (__main__.Boundaries.test_S_minus_M_just_above_2tol_resolves) ... ok
-test_S_minus_tol_is_additive_and_below_is_enhanced (__main__.Boundaries.test_S_minus_tol_is_additive_and_below_is_enhanced) ... ok
-test_S_plus_tol_is_additive_and_above_is_resonant (__main__.Boundaries.test_S_plus_tol_is_additive_and_above_is_resonant) ... ok
-test_additive_has_I_near_zero (__main__.Correction.test_additive_has_I_near_zero) ... ok
-test_joint_equal_S_is_additive_not_subadditive (__main__.Correction.test_joint_equal_S_is_additive_not_subadditive) ... ok
-test_sweep_every_point_gets_one_row_and_every_row_occurs (__main__.DisjointAndExhaustive.test_sweep_every_point_gets_one_row_and_every_row_occurs) ... ok
-test_antagonistic_is_the_open_class (__main__.NotRelations.test_antagonistic_is_the_open_class) ... ok
-test_undeclared_tol_is_unrated_not_zero (__main__.NotRelations.test_undeclared_tol_is_unrated_not_zero) ... ok
-test_unrated_precedes_step0 (__main__.NotRelations.test_unrated_precedes_step0) ... ok
-test_decimal_and_fraction_are_accepted (__main__.NumberTypes.test_decimal_and_fraction_are_accepted) ... ok
-test_row0_below_resolution (__main__.OnePerRow.test_row0_below_resolution) ... ok
-test_row1_redundant (__main__.OnePerRow.test_row1_redundant) ... ok
-test_row2_additive (__main__.OnePerRow.test_row2_additive) ... ok
-test_row3_resonant (__main__.OnePerRow.test_row3_resonant) ... ok
-test_row4_enhanced_subadditive (__main__.OnePerRow.test_row4_enhanced_subadditive) ... ok
-test_row5_antagonistic (__main__.OnePerRow.test_row5_antagonistic) ... ok
-test_step_numbers (__main__.OnePerRow.test_step_numbers) ... ok
-test_bad_inputs_raise (__main__.Refusals.test_bad_inputs_raise) ... ok
-test_module_refuses_selftest (__main__.Refusals.test_module_refuses_selftest) ... ok
-test_tol_zero_one_cue_silent_is_below_resolution (__main__.ZeroTolerance.test_tol_zero_one_cue_silent_is_below_resolution) ... ok
-test_tol_zero_rows (__main__.ZeroTolerance.test_tol_zero_rows) ... ok
-
+.............................................
 ----------------------------------------------------------------------
-Ran 24 tests
+Ran 45 tests in 0.365s
 
 OK
