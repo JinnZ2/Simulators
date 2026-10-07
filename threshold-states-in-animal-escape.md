@@ -440,12 +440,13 @@ pass labelled it CONTRADICTS_CLASS.)
 
 Two-reference test (DERIVED, operator-supplied 2026-10-07; precedence
 operator-supplied the same day). Built and tested as
-`threshold-states/interaction.py` (`test_interaction.py`, 24 checks).
+`threshold-states/interaction.py` (`test_interaction.py`).
 
 ```text
 S   = sum of the separate (unimodal) responses
 M   = the largest single (unimodal) response
-tol = declared parameter; an undeclared tol returns UNRATED
+tol = {value, mode}, mode absolute | relative_to_M (see Tolerance below);
+      an undeclared tol returns UNRATED
 I   = joint - S  (the measurand of the RESONANT enum)
 
 step  condition                    relation
@@ -481,8 +482,8 @@ raises if anything other than exactly one holds. A sweep over five
 Correction: joint = S is ADDITIVE, not ENHANCED_SUBADDITIVE. The earlier
 row read `M < joint <= S` and put the sum itself in the subadditive row.
 
-Cue sign (operator-supplied 2026-10-07, after outside case OC-2; built in
-`threshold-states/interaction.py`):
+Cue sign (operator-supplied 2026-10-07, after outside case OC-2; status
+PROPOSED; built in `threshold-states/interaction.py`):
 
 ```text
 facilitating cues (>= 0)  S+ = sum, M = max; step 0 reads S+ - M only
@@ -505,14 +506,36 @@ Suppression borders the open ANTAGONISTIC class. This split is arithmetic
 and does not define antagonism; that definition stays with the enum's
 author.
 
+Tolerance (operator-decided 2026-10-07, after outside case OC-1):
+
+```text
+tol = {value, mode}
+  mode absolute        tol_eff = value, in the response's own units
+  mode relative_to_M   tol_eff = value * M
+  mode undeclared      REFUSE  (a bare number has no declared mode)
+  tol undeclared       UNRATED
+```
+
+OC-1 (S = 10, M = 9, joint 9.5, value 0.1) reads ENHANCED_SUBADDITIVE as
+absolute and BELOW_RESOLUTION as relative_to_M, which is why the mode has
+to be declared. Recorded: outside cases OC-3, OC-4 and OC-5 give tol as a
+bare number and so refuse under this rule. That is a case-author error
+(underspecified), not a module failure. With either mode declared they
+read what their author expected.
+
+Outside-case status. OC-1 and OC-2 are NON-INDEPENDENT: the tol rule and
+the cue-sign split were written in answer to them. Fresh outside cases
+are to be written from the spec text alone, before the fix code is seen;
+only those count toward lifting the SELF-GRADED flag.
+
 ADDITIVE is a class the target enum does not carry. It sits at I ~ 0, between
 RESONANT (I > 0) and the subadditive rows, so cues that act independently
 no longer fall into either.
 
-Canonical module: `threshold-states/interaction.py`. The root
-`interaction_class.py` (built separately the same day) is consolidated onto
-it and only imports it; its checks in `test_interaction_class.py` run
-against the canonical module.
+Canonical module: `threshold-states/interaction.py` (operator,
+2026-10-07). The root build of the same day (`interaction_class.py`, the
+pre-split rule with a bare-number tol) is archived whole in
+`archive/interaction_class/`; the root `interaction_class.py` is a redirect.
 
 2024 candidate: the reference the paper uses, S or M, is UNRATED until the
 paper is seen.

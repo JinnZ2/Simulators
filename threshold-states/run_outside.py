@@ -13,23 +13,22 @@ Expectation kinds (as delivered):
                it is no reading)
     REFUSE     classify() raises InteractionError
 
-STATE is SELF-GRADED unless every case AGREEs; then OUTSIDE-AGREED. That is
-the author's lift rule, stated in the file.
+Each case also carries a status, recorded after delivery (outside_cases.json
+status_rule): INDEPENDENT, NON_INDEPENDENT (seen before the code change it
+answers), or CASE_AUTHOR_ERROR (underspecified). Only INDEPENDENT cases
+count toward the lift. STATE is OUTSIDE-AGREED when at least one case
+counts and every counted case AGREEs; otherwise SELF-GRADED.
 
-A second build of the same precedence exists at the repo root
-(interaction_class.py, another session, merged the same day). Its verdicts
-on the same cases are printed beside the first and also decide nothing:
-they show whether a disagreement belongs to the spec or to one build.
-The two builds agreed on all five cases (sample @ bd7d055). The root build
-was then consolidated onto interaction.py and is now an import shim, so
-that column reads the canonical module and is no longer independent.
+Two further columns are informational and decide nothing: the case read with
+its bare tol declared absolute, and declared relative_to_M. OC-1 turns on
+that difference.
 
-One further column is informational and decides nothing: the reading with tol taken
-relative (tol * M) beside the absolute one, because OC-1 turns on that
-question. It does not change any AGREE / DISAGREE.
+Before the root build was archived (archive/interaction_class/), a column
+here read the same cases through it; the two builds agreed on all five
+(samples/run_outside.sample.txt @ bd7d055).
 
-Exit 0 when all agree, 1 otherwise. Refuses --selftest (exit 2); the checks
-are in test_outside.py. Stdlib only.
+Exit 0 when STATE is OUTSIDE-AGREED, 1 otherwise. Refuses --selftest
+(exit 2); the checks are in test_outside.py. Stdlib only.
 """
 from __future__ import annotations
 
@@ -43,23 +42,7 @@ sys.path.insert(0, HERE)
 import interaction as ix  # noqa: E402
 
 CASES = os.path.join(HERE, "outside_cases.json")
-ROOT = os.path.dirname(HERE)
-
-
-def second_build(case):
-    """interaction_class.py at the repo root, or None if it is absent."""
-    sys.path.insert(0, ROOT)
-    try:
-        import interaction_class as ic
-    except ImportError:
-        return None
-    finally:
-        sys.path.remove(ROOT)
-    try:
-        return ("RELATION", ic.classify(case["joint"], case["separate"],
-                                        case["tol"])["relation"])
-    except ValueError as e:
-        return ("REFUSE", str(e))
+STATUSES = ("INDEPENDENT", "NON_INDEPENDENT", "CASE_AUTHOR_ERROR")
 
 
 def load(path=CASES):
@@ -67,12 +50,16 @@ def load(path=CASES):
         return json.load(f)
 
 
-def outcome(case, tol_scale=None):
-    """('RELATION', r) or ('REFUSE', message). tol_scale multiplies tol."""
+def outcome(case, mode=None):
+    """('RELATION', r) or ('REFUSE', message).
+
+    mode None runs the case as authored. 'absolute' / 'relative_to_M' wrap a
+    bare-number tol in that declared mode (informational only).
+    """
     tol = case["tol"]
+    if mode is not None and tol is not None and not isinstance(tol, dict):
+        tol = {"value": tol, "mode": mode}
     try:
-        if tol_scale is not None:
-            tol = tol * ix.references(case["separate"])[1]
         r = ix.classify(case["joint"], case["separate"], tol)
     except ix.InteractionError as e:
         return ("REFUSE", str(e))
@@ -97,43 +84,50 @@ def run(data=None):
     data = data or load()
     rows = []
     for c in data["cases"]:
+        status = c.get("status", "INDEPENDENT")
+        if status not in STATUSES:
+            raise ValueError("case %s: unknown status %r" % (c["id"], status))
         got = outcome(c)
-        rel = outcome(c, tol_scale="M")
         rows.append({
             "id": c["id"], "expect": c["expect"], "got": got,
             "verdict": "AGREE" if judge(c["expect"], got) else "DISAGREE",
-            "relative_reading": rel,
-            "readings_agree": rel == got,
-            "second_build": second_build(c),
+            "status": status, "counts": status == "INDEPENDENT",
+            "as_absolute": outcome(c, "absolute"),
+            "as_relative": outcome(c, "relative_to_M"),
         })
     agree = sum(r["verdict"] == "AGREE" for r in rows)
-    state = "OUTSIDE-AGREED" if agree == len(rows) else "SELF-GRADED"
-    return {"rows": rows, "agree": agree, "n": len(rows), "state": state,
-            "authored_against": data.get("authored_against"), "author": data.get("author")}
+    counted = [r for r in rows if r["counts"]]
+    lifted = bool(counted) and all(r["verdict"] == "AGREE" for r in counted)
+    return {"rows": rows, "agree": agree, "n": len(rows),
+            "counted": len(counted),
+            "counted_agree": sum(r["verdict"] == "AGREE" for r in counted),
+            "state": "OUTSIDE-AGREED" if lifted else "SELF-GRADED",
+            "authored_against": data.get("authored_against"),
+            "author": data.get("author")}
 
 
 def _fmt_expect(e):
     return e["kind"] if e["kind"] == "REFUSE" else "%s %s" % (e["kind"], e["relation"])
 
 
+def _short(o):
+    return o[1] if o[0] == "RELATION" else "REFUSE"
+
+
 def render(res):
     out = ["outside cases (author: %s), cases authored against %s"
            % (res["author"], res["authored_against"]), ""]
-    out.append("%-5s %-26s %-22s %-9s %-18s %s" % (
-        "id", "expected", "got", "verdict", "tol x M reading",
-        "interaction_class.py"))
+    fmt = "%-5s %-25s %-21s %-9s %-18s %-21s %s"
+    out.append(fmt % ("id", "expected", "got", "verdict", "status",
+                      "as absolute", "as relative_to_M"))
     for r in res["rows"]:
-        g = r["got"][1] if r["got"][0] == "RELATION" else "REFUSE"
-        rr = r["relative_reading"]
-        rr = rr[1] if rr[0] == "RELATION" else "REFUSE"
-        sb = r["second_build"]
-        sb = "ABSENT" if sb is None else (sb[1] if sb[0] == "RELATION" else "REFUSE")
-        out.append("%-5s %-26s %-22s %-9s %-18s %s" % (
-            r["id"], _fmt_expect(r["expect"]), g, r["verdict"], rr, sb))
-    out += ["", "agree %d of %d" % (res["agree"], res["n"]),
+        out.append(fmt % (r["id"], _fmt_expect(r["expect"]), _short(r["got"]),
+                          r["verdict"], r["status"], _short(r["as_absolute"]),
+                          _short(r["as_relative"])))
+    out += ["", "agree %d of %d; counted toward the lift %d (agree %d)"
+            % (res["agree"], res["n"], res["counted"], res["counted_agree"]),
             "STATE: %s" % res["state"],
-            "(the last two columns are informational and decide no verdict;",
-            " tol x M differs from the absolute reading on OC-1 only)"]
+            "(the last two columns are informational and decide no verdict)"]
     return "\n".join(out)
 
 

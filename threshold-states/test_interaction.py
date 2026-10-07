@@ -25,8 +25,17 @@ import interaction as ix  # noqa: E402
 SEP, TOL = [3, 7], 1
 
 
+def cls(joint, sep, tol):
+    """classify() with a bare-number tol read as absolute. The tests below
+    were written in the response's own units; the module itself refuses a
+    bare number (see Tolerance)."""
+    if tol is not None and not isinstance(tol, dict):
+        tol = ix.absolute(tol)
+    return ix.classify(joint, sep, tol)
+
+
 def rel(joint, sep=SEP, tol=TOL):
-    return ix.classify(joint, sep, tol)["relation"]
+    return cls(joint, sep, tol)["relation"]
 
 
 class OnePerRow(unittest.TestCase):
@@ -50,9 +59,9 @@ class OnePerRow(unittest.TestCase):
         self.assertEqual(rel(4), ix.ANTAGONISTIC)
 
     def test_step_numbers(self):
-        got = [ix.classify(j, SEP, TOL)["step"] for j in (7, 10, 12, 8.5, 4)]
+        got = [cls(j, SEP, TOL)["step"] for j in (7, 10, 12, 8.5, 4)]
         self.assertEqual(got, [1, 2, 3, 4, 5])
-        self.assertEqual(ix.classify(8, [1, 7], 1)["step"], 0)
+        self.assertEqual(cls(8, [1, 7], 1)["step"], 0)
 
 
 class Boundaries(unittest.TestCase):
@@ -92,7 +101,7 @@ class Correction(unittest.TestCase):
         self.assertEqual(rel(10, tol=0), ix.ADDITIVE)
 
     def test_additive_has_I_near_zero(self):
-        r = ix.classify(10, SEP, TOL)
+        r = cls(10, SEP, TOL)
         self.assertEqual(r["I"], 0)
 
 
@@ -117,7 +126,7 @@ class DisjointAndExhaustive(unittest.TestCase):
             S, M = ix.references(sep)
             j = F(-5)
             while j <= 20:
-                r = ix.classify(j, sep, tol)            # raises if 0 or 2+ rows
+                r = cls(j, sep, tol)            # raises if 0 or 2+ rows
                 seen.add(r["relation"])
                 j += F(1, 8)
         self.assertEqual(seen, set(ix.RELATIONS))
@@ -135,13 +144,13 @@ class NumberTypes(unittest.TestCase):
 class NotRelations(unittest.TestCase):
 
     def test_undeclared_tol_is_unrated_not_zero(self):
-        r = ix.classify(10, SEP, None)
+        r = cls(10, SEP, None)
         self.assertEqual(r["relation"], ix.UNRATED)
         self.assertIsNone(r["step"])
         self.assertNotEqual(rel(10, tol=0), ix.UNRATED)
 
     def test_unrated_precedes_step0(self):
-        self.assertEqual(ix.classify(8, [1, 7], None)["relation"], ix.UNRATED)
+        self.assertEqual(cls(8, [1, 7], None)["relation"], ix.UNRATED)
 
     def test_antagonistic_is_the_open_class(self):
         self.assertEqual(ix.OPEN_CLASSES, (ix.ANTAGONISTIC,))
@@ -149,8 +158,8 @@ class NotRelations(unittest.TestCase):
 
 def pre_split(joint, sep, tol):
     """The rule before the cue-sign split: S = sum of all cues, M = max of
-    all cues, step 0 on S - M. Same rows. The root interaction_class.py
-    implemented this rule before it became a shim over this module."""
+    all cues, step 0 on S - M. Same rows. The archived root build
+    (archive/interaction_class/) implements this rule."""
     S, M = sum(sep), max(sep)
     if S - M <= 2 * tol:
         return ix.BELOW_RESOLUTION
@@ -184,7 +193,7 @@ class CueSign(unittest.TestCase):
         self.assertEqual((r["n_facilitating"], r["n_suppressive"]), (2, 1))
 
     def test_classify_carries_N(self):
-        r = ix.classify(9, [3, 7, -2], F(1, 2))
+        r = cls(9, [3, 7, -2], F(1, 2))
         self.assertEqual((r["N"], r["S_plus"], r["S"], r["I"]), (-2, 10, 8, 1))
 
     def test_zero_is_facilitating(self):
@@ -192,7 +201,7 @@ class CueSign(unittest.TestCase):
 
     def test_no_facilitating_cue(self):
         for tol in (1, 0, None):            # [CHOICE 3]: before the tol check
-            r = ix.classify(-3, [-1, -2], tol)
+            r = cls(-3, [-1, -2], tol)
             self.assertEqual(r["relation"], ix.NO_FACILITATING_CUE)
             self.assertIsNone(r["M"])
             self.assertEqual(r["N"], -3)
@@ -213,7 +222,7 @@ class CueSign(unittest.TestCase):
     def test_touching_bands_raise_at_the_shared_point(self):
         # S = 9, M = 7, tol = 1: [6, 8] and [8, 10] share 8
         with self.assertRaises(ix.BandsOverlap) as cm:
-            ix.classify(8, [3, 7, -1], 1)
+            cls(8, [3, 7, -1], 1)
         self.assertEqual(cm.exception.rows, [(1, ix.REDUNDANT), (2, ix.ADDITIVE)])
 
     def test_S_below_M_unique_and_overlap(self):
@@ -223,7 +232,7 @@ class CueSign(unittest.TestCase):
         for j, rows in ((7, [(1, ix.REDUNDANT), (3, ix.RESONANT)]),
                         (5, [(2, ix.ADDITIVE), (5, ix.ANTAGONISTIC)])):
             with self.assertRaises(ix.BandsOverlap) as cm:
-                ix.classify(j, sep, 1)
+                cls(j, sep, 1)
             self.assertEqual(cm.exception.rows, rows)
 
     def test_overlap_only_where_S_minus_M_within_2tol(self):
@@ -233,7 +242,7 @@ class CueSign(unittest.TestCase):
                 S, M = ix.references(sep)
                 for j in sweep(sep, tol):
                     try:
-                        ix.classify(j, sep, tol)        # never zero rows
+                        cls(j, sep, tol)        # never zero rows
                     except ix.BandsOverlap:
                         hits += 1
                         self.assertLessEqual(S - M, 2 * tol, (sep, tol, j))
@@ -248,7 +257,7 @@ class CueSign(unittest.TestCase):
                 for j in sweep(sep, tol):
                     old = pre_split(j, sep, tol)
                     try:
-                        new = ix.classify(j, sep, tol)["relation"]
+                        new = cls(j, sep, tol)["relation"]
                     except ix.BandsOverlap:
                         new = "OVERLAP"
                     if gap:
@@ -265,6 +274,59 @@ class CueSign(unittest.TestCase):
                     self.assertEqual(rel(j, sep, tol), pre_split(j, sep, tol))
 
 
+class Tolerance(unittest.TestCase):
+    """Operator spec 2026-10-07 after OC-1: tol = {value, mode}, mode
+    absolute | relative_to_M; mode undeclared -> refuse."""
+
+    def test_bare_number_refuses(self):
+        for tol in (1, 0, F(1, 10), 0.1):
+            with self.assertRaises(ix.ToleranceModeUndeclared):
+                ix.classify(10, SEP, tol)
+
+    def test_missing_or_unknown_mode_refuses(self):
+        for tol in ({"value": 1}, {"value": 1, "mode": None},
+                    {"value": 1, "mode": "relative"}, {"value": 1, "mode": "ABSOLUTE"}):
+            with self.assertRaises(ix.ToleranceModeUndeclared, msg=repr(tol)):
+                ix.classify(10, SEP, tol)
+
+    def test_unknown_key_refuses(self):
+        with self.assertRaises(ix.InteractionError):
+            ix.classify(10, SEP, {"value": 1, "mode": "absolute", "units": "s"})
+
+    def test_refusal_is_an_interaction_error(self):
+        self.assertTrue(issubclass(ix.ToleranceModeUndeclared, ix.InteractionError))
+
+    def test_relative_scales_by_M(self):
+        r = ix.classify(F(17, 2), SEP, ix.relative_to_M(F(1, 7)))   # M = 7
+        self.assertEqual((r["tol"], r["tol_value"], r["tol_mode"]),
+                         (1, F(1, 7), "relative_to_M"))
+        self.assertEqual(r["relation"], ix.ENHANCED_SUBADDITIVE)
+
+    def test_absolute_is_unscaled(self):
+        r = ix.classify(F(17, 2), SEP, ix.absolute(1))
+        self.assertEqual((r["tol"], r["tol_mode"]), (1, "absolute"))
+
+    def test_oc1_modes_give_different_readings(self):
+        # S = 10, M = 9, joint 9.5, value 0.1: OC-1 as authored
+        a = ix.classify(F(19, 2), [9, 1], ix.absolute(F(1, 10)))["relation"]
+        r = ix.classify(F(19, 2), [9, 1], ix.relative_to_M(F(1, 10)))["relation"]
+        self.assertEqual((a, r), (ix.ENHANCED_SUBADDITIVE, ix.BELOW_RESOLUTION))
+
+    def test_value_none_is_unrated_after_mode_check(self):          # [CHOICE 4]
+        r = ix.classify(10, SEP, {"value": None, "mode": "absolute"})
+        self.assertEqual(r["relation"], ix.UNRATED)
+        with self.assertRaises(ix.ToleranceModeUndeclared):
+            ix.classify(10, SEP, {"value": None})
+
+    def test_relative_with_M_zero_is_zero_tol(self):
+        r = ix.classify(0, [0, 0], ix.relative_to_M(5))
+        self.assertEqual((r["tol"], r["relation"]), (0, ix.BELOW_RESOLUTION))
+
+    def test_no_facilitating_cue_precedes_the_mode_check(self):     # [CHOICE 3]
+        self.assertEqual(ix.classify(-1, [-1, -2], 1)["relation"],
+                         ix.NO_FACILITATING_CUE)
+
+
 class Refusals(unittest.TestCase):
 
     def test_bad_inputs_raise(self):
@@ -273,7 +335,7 @@ class Refusals(unittest.TestCase):
                ("10", SEP, 1), (10, SEP, True)]
         for args in bad:
             with self.assertRaises(ix.InteractionError, msg=repr(args)):
-                ix.classify(*args)
+                cls(*args)
 
     def test_module_refuses_selftest(self):
         p = subprocess.run([sys.executable, os.path.join(HERE, "interaction.py"),

@@ -4,11 +4,10 @@
 Section 8 of threshold-states-in-animal-escape.md (repo root). A joint
 (multimodal) response is read against two references: S, the additive
 expectation from the separate (unimodal) responses, and M, the largest
-single facilitating one. tol is a declared tolerance in the response's own
-units.
+single facilitating one. tol is declared as {value, mode}; see TOLERANCE.
 
 PRECEDENCE (operator, 2026-10-07; resolves THIN T-7)
-CUE SIGN (operator, 2026-10-07, after outside case OC-2)
+CUE SIGN (operator, 2026-10-07, after outside case OC-2; status PROPOSED)
 
     facilitating cues (>= 0): S+ = their sum, M = their max
     suppressive cues  (< 0):  N  = their sum, recorded as its own term
@@ -52,6 +51,23 @@ it does not by itself give every suppressive case a reading. With one
 facilitating cue S+ - M = 0, so step 0 fires at any tol >= 0 whatever N is
 (outside case OC-2 still reads BELOW_RESOLUTION).
 
+TOLERANCE (operator, 2026-10-07, after outside case OC-1)
+
+    tol = {"value": v, "mode": "absolute" | "relative_to_M"}
+        absolute        tol_eff = v, in the response's own units
+        relative_to_M   tol_eff = v * M
+    tol None                        -> UNRATED (no tolerance declared)
+    mode undeclared or not one of
+    the two (a bare number included) -> ToleranceModeUndeclared (REFUSE)
+    value None, mode declared        -> UNRATED                  [CHOICE 4]
+
+    absolute(v) and relative_to_M(v) build the dict. The rows read tol_eff;
+    the returned dict carries tol (tol_eff), tol_value and tol_mode.
+
+    Recorded consequence: under this rule outside cases OC-3, OC-4 and
+    OC-5, which give tol as a bare number, refuse. That is a case-author
+    error (the cases were underspecified), not a module failure.
+
 Correction recorded: joint = S is ADDITIVE, not ENHANCED_SUBADDITIVE. The
 earlier table read "M < joint <= S" and put the sum itself in the
 subadditive row.
@@ -59,7 +75,8 @@ subadditive row.
 STATES THAT ARE NOT RELATIONS
     NO_FACILITATING_CUE  every cue < 0, so M is undefined. Checked before
                          tol, since it is a property of the cues.  [CHOICE 3]
-    UNRATED              tol undeclared (None). Not a zero tolerance.
+    UNRATED              tol undeclared (None), or its value None. Not a
+                         zero tolerance.
     BELOW_RESOLUTION     step 0. A reading, not a relation between the cues.
 
 CHOICES (made here, not in the operator's text)
@@ -71,6 +88,8 @@ CHOICES (made here, not in the operator's text)
                 N alone, so the flag is taken.
     [CHOICE 3]  NO_FACILITATING_CUE is returned before the tol check, so
                 such a case reads NO_FACILITATING_CUE even with tol None.
+    [CHOICE 4]  A tol with a declared mode and value None reads UNRATED
+                (the value is undeclared; the mode check runs first).
     A cue of exactly 0 is facilitating (>= 0), per the operator's text.
 
 WHAT IT DOES NOT DO
@@ -108,6 +127,37 @@ OPEN_CLASSES = (ANTAGONISTIC,)
 
 class InteractionError(ValueError):
     pass
+
+
+class ToleranceModeUndeclared(InteractionError):
+    """tol given without a declared mode (absolute | relative_to_M)."""
+
+
+TOL_MODES = ("absolute", "relative_to_M")
+
+
+def absolute(value):
+    return {"value": value, "mode": "absolute"}
+
+
+def relative_to_M(value):
+    return {"value": value, "mode": "relative_to_M"}
+
+
+def _tol_spec(tol):
+    """(value, mode) from a declared tol. Refuses a missing or unknown mode."""
+    if not isinstance(tol, dict):
+        raise ToleranceModeUndeclared(
+            "tol mode undeclared: give {'value': v, 'mode': 'absolute' | "
+            "'relative_to_M'}, got %r" % (tol,))
+    mode = tol.get("mode")
+    if mode not in TOL_MODES:
+        raise ToleranceModeUndeclared(
+            "tol mode must be one of %r, got %r" % (TOL_MODES, mode))
+    extra = set(tol) - {"value", "mode"}
+    if extra:
+        raise InteractionError("tol carries unknown keys %r" % sorted(extra))
+    return tol.get("value"), mode
 
 
 class BandsOverlap(InteractionError):
@@ -178,25 +228,33 @@ def rows(joint, S, M, tol):
 
 
 def classify(joint, separate, tol):
-    """Return a dict: relation, step, S, M, I, tol, S_plus, N,
-    n_facilitating, n_suppressive.
+    """Return a dict: relation, step, S, M, I, tol (effective), tol_value,
+    tol_mode, S_plus, N, n_facilitating, n_suppressive.
 
     relation is one of RELATIONS, or NO_FACILITATING_CUE / UNRATED /
-    BELOW_RESOLUTION. Raises BandsOverlap where two rows hold.
+    BELOW_RESOLUTION. Raises ToleranceModeUndeclared when tol has no
+    declared mode, and BandsOverlap where two rows hold.
     """
     r = split(separate)
     _finite(joint, "joint")
     S, M = r["S"], r["M"]
-    out = dict(r, I=joint - S, tol=tol)
+    out = dict(r, I=joint - S, tol=None, tol_value=None, tol_mode=None)
     if M is None:
         out.update(relation=NO_FACILITATING_CUE, step=None)
         return out
     if tol is None:
         out.update(relation=UNRATED, step=None)
         return out
-    _finite(tol, "tol")
-    if tol < 0:
-        raise InteractionError("tol must be >= 0, got %r" % (tol,))
+    value, mode = _tol_spec(tol)
+    out.update(tol_value=value, tol_mode=mode)
+    if value is None:
+        out.update(relation=UNRATED, step=None)
+        return out
+    _finite(value, "tol value")
+    if value < 0:
+        raise InteractionError("tol value must be >= 0, got %r" % (value,))
+    tol = value if mode == "absolute" else value * M
+    out["tol"] = tol
     if r["S_plus"] - M <= 2 * tol:
         out.update(relation=BELOW_RESOLUTION, step=0)
         return out

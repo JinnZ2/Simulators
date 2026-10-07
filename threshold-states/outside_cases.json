@@ -18,7 +18,9 @@
         "kind": "REFUSE"
       },
       "author_text": "absolute -> row 4; relative(xM) -> tol=0.9 -> S-M=1 <= 1.8 -> BELOW_RESOLUTION. EXPECT: spec must declare units; ambiguity -> refuse.",
-      "separate_note": "The author stated S=10, M=9 and no vector. [9, 1] is this folder's entry; classify() reads only S and M, so every vector with S=10, M=9 gives the same verdict."
+      "separate_note": "The author stated S=10, M=9 and no vector. [9, 1] is this folder's entry; classify() reads only S and M, so every vector with S=10, M=9 gives the same verdict.",
+      "status": "NON_INDEPENDENT",
+      "status_note": "Seen before the tol-mode rule (operator, 2026-10-07) was written; the rule was written in answer to this case."
     },
     {
       "id": "OC-2",
@@ -33,7 +35,9 @@
         "kind": "NOT",
         "relation": "BELOW_RESOLUTION"
       },
-      "author_text": "S=2, M=5, S<M -> S-M <= 2*tol -> BELOW_RESOLUTION. EXPECT: not BELOW_RESOLUTION; suppressive cue is real signal. Spec assumes all responses >= 0; undeclared. LIKELY FAIL -> decide: refuse negatives, or redefine S/M."
+      "author_text": "S=2, M=5, S<M -> S-M <= 2*tol -> BELOW_RESOLUTION. EXPECT: not BELOW_RESOLUTION; suppressive cue is real signal. Spec assumes all responses >= 0; undeclared. LIKELY FAIL -> decide: refuse negatives, or redefine S/M.",
+      "status": "NON_INDEPENDENT",
+      "status_note": "Seen before the cue-sign split (operator, 2026-10-07, PROPOSED) was written; the split was written in answer to this case."
     },
     {
       "id": "OC-3",
@@ -48,7 +52,9 @@
         "kind": "EQUALS",
         "relation": "BELOW_RESOLUTION"
       },
-      "author_text": "-> BELOW_RESOLUTION"
+      "author_text": "-> BELOW_RESOLUTION",
+      "status": "CASE_AUTHOR_ERROR",
+      "status_note": "tol given as a bare number; under the tol-mode rule a tol with no declared mode refuses. Recorded per operator, 2026-10-07: the case is underspecified."
     },
     {
       "id": "OC-4",
@@ -64,7 +70,9 @@
         "kind": "EQUALS",
         "relation": "ADDITIVE"
       },
-      "author_text": "S=6, M=3 -> ADDITIVE"
+      "author_text": "S=6, M=3 -> ADDITIVE",
+      "status": "CASE_AUTHOR_ERROR",
+      "status_note": "tol given as a bare number; under the tol-mode rule a tol with no declared mode refuses. Recorded per operator, 2026-10-07: the case is underspecified."
     },
     {
       "id": "OC-5",
@@ -79,7 +87,10 @@
         "kind": "EQUALS",
         "relation": "RESONANT"
       },
-      "author_text": "-> RESONANT"
+      "author_text": "-> RESONANT",
+      "status": "CASE_AUTHOR_ERROR",
+      "status_note": "tol given as a bare number; under the tol-mode rule a tol with no declared mode refuses. Recorded per operator, 2026-10-07: the case is underspecified."
     }
-  ]
+  ],
+  "status_rule": "A case counts toward lifting the flag only with status INDEPENDENT: authored from the spec text alone, before the code it tests was seen. Statuses are records added after delivery; no expectation was edited."
 }

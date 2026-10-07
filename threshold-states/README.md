@@ -4,8 +4,9 @@ Code for `threshold-states-in-animal-escape.md` (repo root). The document
 is the instrument; this folder holds the one part of it that computes.
 
 - `interaction.py` is the two-reference interaction test from section 8. It
-  reads a joint (multimodal) response against S, the sum of the separate
-  responses, and M, the largest single one, at a declared tolerance.
+  reads a joint (multimodal) response against S, the additive expectation,
+  and M, the largest single facilitating response, at a declared
+  tolerance.
   Precedence, step 0 first:
 
       0  S - M <= 2*tol            BELOW_RESOLUTION
@@ -15,7 +16,7 @@ is the instrument; this folder holds the one part of it that computes.
       4  M + tol < joint < S - tol ENHANCED_SUBADDITIVE
       5  joint < M - tol           ANTAGONISTIC (OPEN class)
 
-  Cue sign (operator, after outside case OC-2): S+ and M are taken over the
+  Cue sign (operator, after outside case OC-2; PROPOSED): S+ and M are taken over the
   facilitating cues (>= 0), N is the sum of the suppressive cues (< 0) and
   is recorded as its own term, and S = S+ + N. Step 0 reads S+ - M.
   - No facilitating cue: NO_FACILITATING_CUE.
@@ -26,8 +27,11 @@ is the instrument; this folder holds the one part of it that computes.
     the old rule said BELOW_RESOLUTION. Pinned by test.
   - Suppression is arithmetic here. It does not define ANTAGONISTIC.
 
-  An undeclared tol is UNRATED, not zero. All five rows are evaluated
-  every time.
+  Tolerance (operator, after outside case OC-1): tol = {value, mode},
+  mode `absolute` or `relative_to_M` (value × M). A tol with no declared
+  mode, a bare number included, refuses (`ToleranceModeUndeclared`). An
+  undeclared tol is UNRATED, not zero. All five rows are evaluated every
+  time.
 - `test_interaction.py` has one case per row, the edges at M±tol and
   S±tol, the S - M = 2·tol edge, a Fraction sweep, the cue-sign split
   (against the old rule), and refusals.
@@ -40,24 +44,21 @@ is the instrument; this folder holds the one part of it that computes.
   `test_outside.py` pins the result.
   - Run: `python3 threshold-states/run_outside.py` (exit 1 while any case
     disagrees)
-  - Result, before and after the cue-sign split: **3 of 5 agree** (OC-3,
-    OC-4, OC-5). OC-1 expects a refusal when tol units are undeclared
-    and gets ENHANCED_SUBADDITIVE. OC-2 expects a suppressive (negative)
-    cue not to read BELOW_RESOLUTION. Before the split it did, because the
-    negative cue pulled S - M below 2·tol. After the split it still does,
-    because with one facilitating cue S+ - M = 0. OC-1 and OC-2 are spent:
-    they were seen before the split was written.
+  - Result now: **0 of 5 count toward the lift**, so the flag stays
+    SELF-GRADED. All five refuse, since each gives tol as a bare number.
+    OC-1 expected that refusal (AGREE). OC-1 and OC-2 are NON_INDEPENDENT:
+    the tol rule and the cue-sign split were written in answer to them.
+    OC-3, OC-4, OC-5 are CASE_AUTHOR_ERROR: underspecified tol. With either
+    mode declared they read what their author expected (pinned).
+  - Before both changes: 3 of 5 agreed (OC-3, OC-4, OC-5); sample @ bd7d055.
+  - Fresh outside cases are to be written from the spec text alone, before
+    the fix code is seen. Only status INDEPENDENT counts.
   - Samples: `samples/run_outside.sample.txt`, `samples/test_outside.sample.txt`
-- Two builds of the same precedence were built: this folder's
-  `interaction.py` and `interaction_class.py` at the repo root (another
-  session, same day). Before the cue-sign split they returned the same
-  verdict on all five outside cases, so the two disagreements belong to
-  the spec, not to one build.
-- Consolidated (operator, 2026-10-07): canonical module is
-  `threshold-states/interaction.py`. The root `interaction_class.py` is an
-  import shim with no logic, so it carries the cue-sign split too;
-  `test_interaction_class.py` runs against the canonical module through
-  it. Both suites run in CI (`simulator-smoke`).
+- Canonical module (operator, 2026-10-07): `threshold-states/interaction.py`.
+  A second build of the same day (`interaction_class.py`, repo root) is
+  archived whole in `archive/interaction_class/` with its PROVENANCE; the
+  root file is now a redirect. Before the split the two builds agreed on
+  all five outside cases.
 
 SELF-GRADED: the tests and the module share an author. Nothing here
 describes any animal or any paper. Stdlib only, CC0.
