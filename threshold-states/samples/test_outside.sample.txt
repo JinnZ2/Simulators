@@ -11,8 +11,16 @@ test_informational_columns (__main__.Run.test_informational_columns) ... ok
 test_nothing_counts_and_state_is_self_graded (__main__.Run.test_nothing_counts_and_state_is_self_graded) ... ok
 test_oc2_is_below_resolution_for_every_joint_in_either_mode (__main__.Run.test_oc2_is_below_resolution_for_every_joint_in_either_mode) ... ok
 test_pinned_verdicts (__main__.Run.test_pinned_verdicts) ... ok
+test_a_failing_case_does_not_lift (__main__.V2.test_a_failing_case_does_not_lift) ... ok
+test_all_pass_and_state (__main__.V2.test_all_pass_and_state) ... ok
+test_an_edited_file_does_not_lift (__main__.V2.test_an_edited_file_does_not_lift) ... ok
+test_decode (__main__.V2.test_decode) ... ok
+test_expectations_as_committed (__main__.V2.test_expectations_as_committed) ... ok
+test_file_is_the_committed_blob (__main__.V2.test_file_is_the_committed_blob) ... ok
+test_oc2_20_reports_I (__main__.V2.test_oc2_20_reports_I) ... ok
+test_unknown_commit_is_not_a_pass_in_a_full_clone (__main__.V2.test_unknown_commit_is_not_a_pass_in_a_full_clone) ... ok
 
 ----------------------------------------------------------------------
-Ran 13 tests in 0.047s
+Ran 21 tests in 0.174s
 
 OK

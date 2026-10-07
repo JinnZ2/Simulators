@@ -1,11 +1,15 @@
 # SPDX-License-Identifier: CC0-1.0
-"""Pins the outside-case run after the tol-mode rule and the cue-sign split.
+"""Pins the outside-case runs after the Q1-Q4 build.
 
-As run now: OC-1 AGREE (refused), OC-2..OC-5 DISAGREE (refused). None of the
-five counts toward the lift: OC-1 and OC-2 are NON_INDEPENDENT (the code
-changes answer them), OC-3..OC-5 are CASE_AUTHOR_ERROR (tol with no mode).
-STATE SELF-GRADED until fresh cases, written from the spec text alone,
-run as authored.
+v1 (outside_cases.json): OC-1 AGREE (MODE_UNDECLARED, a refusal verdict),
+OC-2..OC-5 DISAGREE. None of the five counts: OC-1 and OC-2 are
+NON_INDEPENDENT, OC-3..OC-5 CASE_AUTHOR_ERROR (tol with no mode). v1 STATE
+SELF-GRADED.
+
+v2 (outside_cases_v2.json, committed alone at run_outside.V2_CASE_COMMIT,
+before the build): 30 of 30 PASS, file blob equal to the committed blob,
+STATE OUTSIDE-AGREED. These are pins of a run, not the run: the run is
+run_outside.py against the file as committed.
 
 History these pins replace: before both changes, 3 of 5 agreed (OC-3..5),
 recorded in samples/run_outside.sample.txt @ bd7d055.
@@ -123,12 +127,90 @@ class Judge(unittest.TestCase):
             ro.run(dict(d, cases=[dict(d["cases"][0], status="MAYBE")]))
 
 
+V2_EXPECT = {
+    "OC2-01": "MALFORMED_INPUT", "OC2-02": "MALFORMED_INPUT",
+    "OC2-03": "MALFORMED_INPUT", "OC2-04": "MALFORMED_INPUT",
+    "OC2-05": "MALFORMED_INPUT", "OC2-06": "INSUFFICIENT_CUES",
+    "OC2-07": "UNRATED", "OC2-08": "UNRATED", "OC2-09": "UNRATED",
+    "OC2-10": "MODE_UNDECLARED", "OC2-11": "MODE_UNDECLARED",
+    "OC2-12": "MALFORMED_INPUT", "OC2-13": "MALFORMED_INPUT",
+    "OC2-14": "MALFORMED_INPUT", "OC2-15": "MALFORMED_INPUT",
+    "OC2-16": "NO_FACILITATING_CUE", "OC2-17": "UNRATED",
+    "OC2-18": "BELOW_RESOLUTION", "OC2-19": "BELOW_RESOLUTION",
+    "OC2-20": "SUPPRESSION_OVERLAP", "OC2-21": "ADDITIVE",
+    "OC2-22": "RESONANT", "OC2-23": "ADDITIVE", "OC2-24": "REDUNDANT",
+    "OC2-25": "ENHANCED_SUBADDITIVE", "OC2-26": "ANTAGONISTIC",
+    "OC2-27": "BELOW_RESOLUTION", "OC2-28": "ENHANCED_SUBADDITIVE",
+    "OC2-29": "ADDITIVE", "OC2-30": "ADDITIVE",
+}
+
+
+class V2(unittest.TestCase):
+    def setUp(self):
+        self.res = ro.run_v2()
+
+    def test_file_is_the_committed_blob(self):
+        self.assertTrue(self.res["blob_ok"])
+        self.assertEqual(ro.blob_id(ro.CASES_V2), ro.V2_CASE_BLOB)
+
+    def test_expectations_as_committed(self):
+        self.assertEqual({r["id"]: r["expect"] for r in self.res["rows"]}, V2_EXPECT)
+
+    def test_all_pass_and_state(self):
+        self.assertEqual((self.res["pass"], self.res["n"]), (30, 30))
+        self.assertNotEqual(self.res["precedes"], False)
+        self.assertEqual(self.res["state"], "OUTSIDE-AGREED")
+
+    def test_oc2_20_reports_I(self):
+        r = {x["id"]: x for x in self.res["rows"]}["OC2-20"]
+        self.assertEqual((r["got"], r["I"], r["step"]),
+                         ("SUPPRESSION_OVERLAP", 2, "0b"))
+
+    def test_decode(self):
+        import math
+        self.assertTrue(math.isnan(ro.decode({"$special": "NaN"})))
+        self.assertEqual(ro.decode([{"$special": "+inf"}, None, "1", True]),
+                         [float("inf"), None, "1", True])
+
+    def test_an_edited_file_does_not_lift(self):
+        import json
+        import tempfile
+        d = ro.load(ro.CASES_V2)
+        with tempfile.TemporaryDirectory() as td:
+            p = os.path.join(td, "v2.json")
+            with open(p, "w") as f:
+                json.dump(d, f)                 # same cases, other bytes
+            res = ro.run_v2(p)
+            self.assertEqual(res["pass"], 30)
+            self.assertFalse(res["blob_ok"])
+            self.assertEqual(res["state"], "SELF-GRADED")
+
+    def test_a_failing_case_does_not_lift(self):
+        import json
+        import tempfile
+        with open(ro.CASES_V2) as f:
+            d = json.load(f)
+        d["cases"][20]["expect"] = "RESONANT"   # OC2-21 is ADDITIVE
+        with tempfile.TemporaryDirectory() as td:
+            p = os.path.join(td, "v2.json")
+            with open(p, "w") as f:
+                json.dump(d, f)
+            res = ro.run_v2(p)
+            self.assertEqual(res["pass"], 29)
+            self.assertEqual(res["state"], "SELF-GRADED")
+
+    def test_unknown_commit_is_not_a_pass_in_a_full_clone(self):
+        got = ro.cases_precede_head("0" * 40)
+        self.assertIn(got, (False, None))       # None only if shallow / no git
+
+
 class Cli(unittest.TestCase):
     def test_exit_codes(self):
         p = subprocess.run([sys.executable, os.path.join(HERE, "run_outside.py")],
                            capture_output=True, text=True)
-        self.assertEqual(p.returncode, 1)
-        self.assertIn("STATE: SELF-GRADED", p.stdout)
+        self.assertEqual(p.returncode, 0)          # v2 decides the exit code
+        self.assertIn("STATE: SELF-GRADED", p.stdout)        # v1
+        self.assertIn("STATE: OUTSIDE-AGREED", p.stdout)     # v2
         p = subprocess.run([sys.executable, os.path.join(HERE, "run_outside.py"),
                             "--selftest"], capture_output=True, text=True)
         self.assertEqual(p.returncode, 2)

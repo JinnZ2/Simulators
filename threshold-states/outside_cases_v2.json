@@ -1,0 +1,429 @@
+{
+ "author": "chat-side (operator), from threshold-states-in-animal-escape.md \u00a78 text only, before the Q1-Q4 build was seen",
+ "authored_against": "\u00a78 at 9c32922 plus the OPEN resolution at 13860e6 (dispatch STEP 1)",
+ "status": "INDEPENDENT -- written before the build; transcribed verbatim from the dispatch table, not edited to match any code",
+ "encoding": {
+  "absent_tol": "the key 'tol' is omitted from the case object (OC2-07, OC2-17)",
+  "None": "JSON null (OC2-04 joint, OC2-08 tol, OC2-09 tol.value, OC2-11 tol.mode)",
+  "NaN": "{\"$special\": \"NaN\"} -- strict JSON has no NaN literal; the runner decodes the tag to float('nan')",
+  "+inf": "{\"$special\": \"+inf\"} -- decoded to float('inf')",
+  "string_and_bool": "\"1\" and \"5\" are JSON strings, true is a JSON boolean; both stay non-numbers after loading",
+  "abs": "{mode: absolute} in the dispatch is written out as \"mode\": \"absolute\"",
+  "values": "binary-exact (0.25, 0.5, 0.0625) so boundary cases test the rule, not float rounding; OC2-19/23/24 are deliberate edge cases"
+ },
+ "cases": [
+  {
+   "id": "OC2-01",
+   "cues": [
+    2,
+    "1"
+   ],
+   "joint": 3,
+   "tol": {
+    "value": 0.1,
+    "mode": "absolute"
+   },
+   "expect": "MALFORMED_INPUT",
+   "note": ""
+  },
+  {
+   "id": "OC2-02",
+   "cues": [
+    2,
+    true
+   ],
+   "joint": 3,
+   "tol": {
+    "value": 0.1,
+    "mode": "absolute"
+   },
+   "expect": "MALFORMED_INPUT",
+   "note": ""
+  },
+  {
+   "id": "OC2-03",
+   "cues": [
+    2,
+    1
+   ],
+   "joint": {
+    "$special": "NaN"
+   },
+   "tol": {
+    "value": 0.1,
+    "mode": "absolute"
+   },
+   "expect": "MALFORMED_INPUT",
+   "note": ""
+  },
+  {
+   "id": "OC2-04",
+   "cues": [
+    2,
+    1
+   ],
+   "joint": null,
+   "tol": {
+    "value": 0.1,
+    "mode": "absolute"
+   },
+   "expect": "MALFORMED_INPUT",
+   "note": ""
+  },
+  {
+   "id": "OC2-05",
+   "cues": [
+    "5"
+   ],
+   "joint": 5,
+   "tol": {
+    "value": 0.1,
+    "mode": "absolute"
+   },
+   "expect": "MALFORMED_INPUT",
+   "note": "1 beats 2"
+  },
+  {
+   "id": "OC2-06",
+   "cues": [
+    5
+   ],
+   "joint": 5,
+   "tol": {
+    "value": 0.1,
+    "mode": "absolute"
+   },
+   "expect": "INSUFFICIENT_CUES",
+   "note": ""
+  },
+  {
+   "id": "OC2-07",
+   "cues": [
+    3,
+    2
+   ],
+   "joint": 5,
+   "expect": "UNRATED",
+   "note": ""
+  },
+  {
+   "id": "OC2-08",
+   "cues": [
+    3,
+    2
+   ],
+   "joint": 5,
+   "tol": null,
+   "expect": "UNRATED",
+   "note": "step 1"
+  },
+  {
+   "id": "OC2-09",
+   "cues": [
+    3,
+    2
+   ],
+   "joint": 5,
+   "tol": {
+    "value": null,
+    "mode": "absolute"
+   },
+   "expect": "UNRATED",
+   "note": "step 1"
+  },
+  {
+   "id": "OC2-10",
+   "cues": [
+    3,
+    2
+   ],
+   "joint": 5,
+   "tol": 0.1,
+   "expect": "MODE_UNDECLARED",
+   "note": "bare number"
+  },
+  {
+   "id": "OC2-11",
+   "cues": [
+    3,
+    2
+   ],
+   "joint": 5,
+   "tol": {
+    "value": 0.1,
+    "mode": null
+   },
+   "expect": "MODE_UNDECLARED",
+   "note": "step 1"
+  },
+  {
+   "id": "OC2-12",
+   "cues": [
+    3,
+    2
+   ],
+   "joint": 5,
+   "tol": {
+    "value": 0.1,
+    "mode": "absolute",
+    "mdoe": "x"
+   },
+   "expect": "MALFORMED_INPUT",
+   "note": "extra key"
+  },
+  {
+   "id": "OC2-13",
+   "cues": [
+    3,
+    2
+   ],
+   "joint": 5,
+   "tol": {
+    "value": 0.1,
+    "mode": "relative"
+   },
+   "expect": "MALFORMED_INPUT",
+   "note": ""
+  },
+  {
+   "id": "OC2-14",
+   "cues": [
+    3,
+    2
+   ],
+   "joint": 5,
+   "tol": {
+    "value": -0.1,
+    "mode": "absolute"
+   },
+   "expect": "MALFORMED_INPUT",
+   "note": ""
+  },
+  {
+   "id": "OC2-15",
+   "cues": [
+    3,
+    2
+   ],
+   "joint": 5,
+   "tol": {
+    "value": {
+     "$special": "+inf"
+    },
+    "mode": "absolute"
+   },
+   "expect": "MALFORMED_INPUT",
+   "note": ""
+  },
+  {
+   "id": "OC2-16",
+   "cues": [
+    -2,
+    -3
+   ],
+   "joint": -4,
+   "tol": {
+    "value": 0.1,
+    "mode": "absolute"
+   },
+   "expect": "NO_FACILITATING_CUE",
+   "note": ""
+  },
+  {
+   "id": "OC2-17",
+   "cues": [
+    -2,
+    -3
+   ],
+   "joint": -4,
+   "expect": "UNRATED",
+   "note": "3 beats 5"
+  },
+  {
+   "id": "OC2-18",
+   "cues": [
+    0,
+    0
+   ],
+   "joint": 0,
+   "tol": {
+    "value": 0.1,
+    "mode": "absolute"
+   },
+   "expect": "BELOW_RESOLUTION",
+   "note": "0 counts as facilitating; not NFC"
+  },
+  {
+   "id": "OC2-19",
+   "cues": [
+    4,
+    0.5
+   ],
+   "joint": 7,
+   "tol": {
+    "value": 0.25,
+    "mode": "absolute"
+   },
+   "expect": "BELOW_RESOLUTION",
+   "note": "S+-M = 0.5 = 2*tol exactly, <="
+  },
+  {
+   "id": "OC2-20",
+   "cues": [
+    4,
+    2,
+    -3
+   ],
+   "joint": 5,
+   "tol": {
+    "value": 0.25,
+    "mode": "absolute"
+   },
+   "expect": "SUPPRESSION_OVERLAP",
+   "expect_I": 2,
+   "note": "S+=6,M=4 pass 0a; S=3, S-M=-1"
+  },
+  {
+   "id": "OC2-21",
+   "cues": [
+    4,
+    3,
+    -1
+   ],
+   "joint": 6,
+   "tol": {
+    "value": 0.25,
+    "mode": "absolute"
+   },
+   "expect": "ADDITIVE",
+   "note": "S=6"
+  },
+  {
+   "id": "OC2-22",
+   "cues": [
+    4,
+    3
+   ],
+   "joint": 8,
+   "tol": {
+    "value": 0.25,
+    "mode": "absolute"
+   },
+   "expect": "RESONANT",
+   "note": ""
+  },
+  {
+   "id": "OC2-23",
+   "cues": [
+    4,
+    3
+   ],
+   "joint": 7.25,
+   "tol": {
+    "value": 0.25,
+    "mode": "absolute"
+   },
+   "expect": "ADDITIVE",
+   "note": "edge -> ADDITIVE"
+  },
+  {
+   "id": "OC2-24",
+   "cues": [
+    4,
+    3
+   ],
+   "joint": 4.25,
+   "tol": {
+    "value": 0.25,
+    "mode": "absolute"
+   },
+   "expect": "REDUNDANT",
+   "note": "edge -> REDUNDANT"
+  },
+  {
+   "id": "OC2-25",
+   "cues": [
+    4,
+    3
+   ],
+   "joint": 5.5,
+   "tol": {
+    "value": 0.25,
+    "mode": "absolute"
+   },
+   "expect": "ENHANCED_SUBADDITIVE",
+   "note": ""
+  },
+  {
+   "id": "OC2-26",
+   "cues": [
+    4,
+    3
+   ],
+   "joint": 3.5,
+   "tol": {
+    "value": 0.25,
+    "mode": "absolute"
+   },
+   "expect": "ANTAGONISTIC",
+   "note": ""
+  },
+  {
+   "id": "OC2-27",
+   "cues": [
+    8,
+    1
+   ],
+   "joint": 8.5,
+   "tol": {
+    "value": 0.0625,
+    "mode": "relative_to_M"
+   },
+   "expect": "BELOW_RESOLUTION",
+   "note": "tol_abs=0.5; S+-M=1 <= 1.0"
+  },
+  {
+   "id": "OC2-28",
+   "cues": [
+    8,
+    1
+   ],
+   "joint": 8.5,
+   "tol": {
+    "value": 0.0625,
+    "mode": "absolute"
+   },
+   "expect": "ENHANCED_SUBADDITIVE",
+   "note": "pair with 27: mode changes verdict"
+  },
+  {
+   "id": "OC2-29",
+   "cues": [
+    4,
+    3
+   ],
+   "joint": 7,
+   "tol": {
+    "value": 0,
+    "mode": "absolute"
+   },
+   "expect": "ADDITIVE",
+   "note": "tol=0 exact"
+  },
+  {
+   "id": "OC2-30",
+   "cues": [
+    2,
+    2,
+    2
+   ],
+   "joint": 6,
+   "tol": {
+    "value": 0.25,
+    "mode": "absolute"
+   },
+   "expect": "ADDITIVE",
+   "note": "n=3"
+  }
+ ]
+}

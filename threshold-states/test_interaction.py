@@ -15,6 +15,7 @@ import os
 import subprocess
 import sys
 import unittest
+from decimal import Decimal
 from fractions import Fraction as F
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -26,10 +27,11 @@ SEP, TOL = [3, 7], 1
 
 
 def cls(joint, sep, tol):
-    """classify() with a bare-number tol read as absolute. The tests below
-    were written in the response's own units; the module itself refuses a
-    bare number (see Tolerance)."""
-    if tol is not None and not isinstance(tol, dict):
+    """classify() with a bare finite-number tol read as absolute. The tests
+    below were written in the response's own units; the module itself reads
+    a bare number as MODE_UNDECLARED (see Tolerance)."""
+    if (tol is not None and not isinstance(tol, (dict, bool, str))
+            and isinstance(tol, (int, float, F, Decimal))):
         tol = ix.absolute(tol)
     return ix.classify(joint, sep, tol)
 
@@ -61,7 +63,7 @@ class OnePerRow(unittest.TestCase):
     def test_step_numbers(self):
         got = [cls(j, SEP, TOL)["step"] for j in (7, 10, 12, 8.5, 4)]
         self.assertEqual(got, [1, 2, 3, 4, 5])
-        self.assertEqual(cls(8, [1, 7], 1)["step"], 0)
+        self.assertEqual(cls(8, [1, 7], 1)["step"], "0a")
 
 
 class Boundaries(unittest.TestCase):
@@ -200,9 +202,10 @@ class CueSign(unittest.TestCase):
         self.assertEqual(ix.split([0, -1])["M"], 0)
 
     def test_no_facilitating_cue(self):
-        for tol in (1, 0, None):            # [CHOICE 3]: before the tol check
+        for tol in (1, 0):
             r = cls(-3, [-1, -2], tol)
             self.assertEqual(r["relation"], ix.NO_FACILITATING_CUE)
+            self.assertEqual(r["order"], 5)
             self.assertIsNone(r["M"])
             self.assertEqual(r["N"], -3)
 
@@ -211,61 +214,49 @@ class CueSign(unittest.TestCase):
         for j in sweep([5, -3], F(1, 10), -20, 20, 1):
             self.assertEqual(rel(j, [5, -3], F(1, 10)), ix.BELOW_RESOLUTION)
 
-    def test_step0_reads_S_plus_not_S(self):
-        # S+ - M = 3 > 2; S - M = 2: pre-split read BELOW_RESOLUTION
+    def test_step0a_reads_S_plus_not_S(self):
+        # S+ - M = 3 > 2 passes 0a; S - M = 2 <= 2 fires 0b
         sep = [3, 7, -1]
         self.assertEqual(pre_split(9, sep, 1), ix.BELOW_RESOLUTION)
-        self.assertEqual(rel(F(19, 2), sep, 1), ix.ADDITIVE)
-        self.assertEqual(rel(7, sep, 1), ix.REDUNDANT)
-        self.assertEqual(rel(F(23, 2), sep, 1), ix.RESONANT)
+        r = cls(F(19, 2), sep, 1)
+        self.assertEqual((r["relation"], r["step"], r["I"]),
+                         (ix.SUPPRESSION_OVERLAP, "0b", F(1, 2)))
 
-    def test_touching_bands_raise_at_the_shared_point(self):
-        # S = 9, M = 7, tol = 1: [6, 8] and [8, 10] share 8
-        with self.assertRaises(ix.BandsOverlap) as cm:
-            cls(8, [3, 7, -1], 1)
-        self.assertEqual(cm.exception.rows, [(1, ix.REDUNDANT), (2, ix.ADDITIVE)])
+    def test_0b_reports_I_and_no_class(self):
+        sep = [3, 7, -5]                    # S+ 10, M 7, S 5: S < M
+        for j in (0, 5, 7, 20):
+            r = cls(j, sep, 1)
+            self.assertEqual(r["relation"], ix.SUPPRESSION_OVERLAP)
+            self.assertNotIn(r["relation"], ix.RELATIONS)
+            self.assertEqual(r["I"], j - 5)
 
-    def test_S_below_M_unique_and_overlap(self):
-        sep = [3, 7, -5]                    # S+ 10, M 7, S 5
-        self.assertEqual(rel(20, sep, 1), ix.RESONANT)
-        self.assertEqual(rel(0, sep, 1), ix.ANTAGONISTIC)
-        for j, rows in ((7, [(1, ix.REDUNDANT), (3, ix.RESONANT)]),
-                        (5, [(2, ix.ADDITIVE), (5, ix.ANTAGONISTIC)])):
-            with self.assertRaises(ix.BandsOverlap) as cm:
-                cls(j, sep, 1)
-            self.assertEqual(cm.exception.rows, rows)
-
-    def test_overlap_only_where_S_minus_M_within_2tol(self):
-        hits = 0
-        for sep in SIGNED:
-            for tol in (0, F(1, 2), 1):
-                S, M = ix.references(sep)
-                for j in sweep(sep, tol):
-                    try:
-                        cls(j, sep, tol)        # never zero rows
-                    except ix.BandsOverlap:
-                        hits += 1
-                        self.assertLessEqual(S - M, 2 * tol, (sep, tol, j))
-        self.assertGreater(hits, 0)
-
-    def test_split_changes_readings_only_in_the_gap_region(self):
+    def test_0b_fires_exactly_on_the_gap(self):
+        # The split changes a reading only where S - M <= 2*tol < S+ - M,
+        # and there the new reading is SUPPRESSION_OVERLAP. Elsewhere the
+        # pre-split rule and this build agree point for point.
         changed = 0
         for sep in SIGNED:
             r0 = ix.split(sep)
             for tol in (0, F(1, 2), 1):
                 gap = r0["S"] - r0["M"] <= 2 * tol < r0["S_plus"] - r0["M"]
                 for j in sweep(sep, tol):
+                    new = cls(j, sep, tol)["relation"]
                     old = pre_split(j, sep, tol)
-                    try:
-                        new = cls(j, sep, tol)["relation"]
-                    except ix.BandsOverlap:
-                        new = "OVERLAP"
                     if gap:
                         self.assertEqual(old, ix.BELOW_RESOLUTION)
-                        changed += new != old
+                        self.assertEqual(new, ix.SUPPRESSION_OVERLAP)
+                        changed += 1
                     else:
                         self.assertEqual(new, old, (sep, tol, j))
         self.assertGreater(changed, 0)
+
+    def test_rows_never_overlap_after_0b(self):
+        # classify() raises only if rows 1-5 are not disjoint once 0a and
+        # 0b pass; no signed vector reaches that.
+        for sep in SIGNED:
+            for tol in (0, F(1, 2), 1):
+                for j in sweep(sep, tol):
+                    self.assertIn(cls(j, sep, tol)["relation"], ix.VERDICTS)
 
     def test_without_suppression_nothing_changes(self):
         for sep in ([3, 7], [1, 2, 7], [0, 7], [F(5, 2), 7]):
@@ -275,26 +266,45 @@ class CueSign(unittest.TestCase):
 
 
 class Tolerance(unittest.TestCase):
-    """Operator spec 2026-10-07 after OC-1: tol = {value, mode}, mode
-    absolute | relative_to_M; mode undeclared -> refuse."""
+    """tol = {value, mode}, mode absolute | relative_to_M (after OC-1), with
+    the Q3/Q4 edge inputs and the OPEN resolution (operator, 2026-10-07)."""
 
-    def test_bare_number_refuses(self):
+    def v(self, tol, joint=10, sep=SEP):
+        return ix.classify(joint, sep, tol)["relation"]
+
+    def test_bare_number_is_mode_undeclared(self):
         for tol in (1, 0, F(1, 10), 0.1):
-            with self.assertRaises(ix.ToleranceModeUndeclared):
-                ix.classify(10, SEP, tol)
+            self.assertEqual(self.v(tol), ix.MODE_UNDECLARED, tol)
 
-    def test_missing_or_unknown_mode_refuses(self):
-        for tol in ({"value": 1}, {"value": 1, "mode": None},
-                    {"value": 1, "mode": "relative"}, {"value": 1, "mode": "ABSOLUTE"}):
-            with self.assertRaises(ix.ToleranceModeUndeclared, msg=repr(tol)):
-                ix.classify(10, SEP, tol)
+    def test_mode_absent_is_mode_undeclared(self):
+        for tol in ({"value": 1}, {"value": 1, "mode": None}):
+            self.assertEqual(self.v(tol), ix.MODE_UNDECLARED, tol)
 
-    def test_unknown_key_refuses(self):
-        with self.assertRaises(ix.InteractionError):
-            ix.classify(10, SEP, {"value": 1, "mode": "absolute", "units": "s"})
+    def test_unknown_mode_is_malformed(self):
+        for tol in ({"value": 1, "mode": "relative"},
+                    {"value": 1, "mode": "ABSOLUTE"}):
+            self.assertEqual(self.v(tol), ix.MALFORMED_INPUT, tol)
 
-    def test_refusal_is_an_interaction_error(self):
-        self.assertTrue(issubclass(ix.ToleranceModeUndeclared, ix.InteractionError))
+    def test_unknown_key_is_malformed(self):
+        self.assertEqual(self.v({"value": 1, "mode": "absolute", "units": "s"}),
+                         ix.MALFORMED_INPUT)
+
+    def test_bad_value_is_malformed(self):
+        for val in (-1, F(-1, 10), "1", True, float("nan"), float("inf"),
+                    float("-inf")):
+            self.assertEqual(self.v(ix.absolute(val)), ix.MALFORMED_INPUT, val)
+        for tol in (-1, "0.1", True, float("nan"), [1]):
+            self.assertEqual(self.v(tol), ix.MALFORMED_INPUT, tol)
+
+    def test_open_resolution(self):
+        # tol None, value None (or no value key), mode None with a value
+        self.assertEqual(self.v(None), ix.UNRATED)
+        self.assertEqual(ix.classify(10, SEP)["relation"], ix.UNRATED)
+        self.assertEqual(self.v({"value": None, "mode": "absolute"}), ix.UNRATED)
+        self.assertEqual(self.v({"value": None, "mode": None}), ix.UNRATED)
+        self.assertEqual(self.v({"mode": "absolute"}), ix.UNRATED)   # [CHOICE 5]
+        self.assertEqual(self.v({}), ix.UNRATED)
+        self.assertEqual(self.v({"value": 1, "mode": None}), ix.MODE_UNDECLARED)
 
     def test_relative_scales_by_M(self):
         r = ix.classify(F(17, 2), SEP, ix.relative_to_M(F(1, 7)))   # M = 7
@@ -312,30 +322,73 @@ class Tolerance(unittest.TestCase):
         r = ix.classify(F(19, 2), [9, 1], ix.relative_to_M(F(1, 10)))["relation"]
         self.assertEqual((a, r), (ix.ENHANCED_SUBADDITIVE, ix.BELOW_RESOLUTION))
 
-    def test_value_none_is_unrated_after_mode_check(self):          # [CHOICE 4]
-        r = ix.classify(10, SEP, {"value": None, "mode": "absolute"})
-        self.assertEqual(r["relation"], ix.UNRATED)
-        with self.assertRaises(ix.ToleranceModeUndeclared):
-            ix.classify(10, SEP, {"value": None})
-
     def test_relative_with_M_zero_is_zero_tol(self):
         r = ix.classify(0, [0, 0], ix.relative_to_M(5))
         self.assertEqual((r["tol"], r["relation"]), (0, ix.BELOW_RESOLUTION))
 
-    def test_no_facilitating_cue_precedes_the_mode_check(self):     # [CHOICE 3]
-        self.assertEqual(ix.classify(-1, [-1, -2], 1)["relation"],
-                         ix.NO_FACILITATING_CUE)
+
+class Precedence(unittest.TestCase):
+    """Q2: first match wins. Each pair below carries the condition of two
+    orders at once; the lower order must be returned."""
+
+    PAIRS = [
+        # (joint, cues, tol, expected, also satisfies)
+        (5, ["5"], ix.absolute(1), ix.MALFORMED_INPUT, ix.INSUFFICIENT_CUES),
+        (5, [5], None, ix.INSUFFICIENT_CUES, ix.UNRATED),
+        (5, [5], 1, ix.INSUFFICIENT_CUES, ix.MODE_UNDECLARED),
+        (5, [3, 2], {"value": None, "mode": None}, ix.UNRATED, ix.MODE_UNDECLARED),
+        (-4, [-2, -3], None, ix.UNRATED, ix.NO_FACILITATING_CUE),
+        (-4, [-2, -3], 1, ix.MODE_UNDECLARED, ix.NO_FACILITATING_CUE),
+        (-4, [-2, -3], ix.relative_to_M(1), ix.NO_FACILITATING_CUE, None),
+        (5, [5, -3], ix.absolute(1), ix.BELOW_RESOLUTION, ix.SUPPRESSION_OVERLAP),
+        (None, [3, 2], None, ix.MALFORMED_INPUT, ix.UNRATED),
+        (5, [3, 2], {"value": -1}, ix.MALFORMED_INPUT, ix.MODE_UNDECLARED),
+    ]
+
+    def test_first_match_wins(self):
+        for joint, cues, tol, want, _ in self.PAIRS:
+            r = ix.classify(joint, cues, tol)
+            self.assertEqual(r["relation"], want, (joint, cues, tol))
+            self.assertEqual(r["order"], ix.STATES.index(want) + 1)
+
+    def test_states_in_order(self):
+        self.assertEqual(ix.STATES, (
+            ix.MALFORMED_INPUT, ix.INSUFFICIENT_CUES, ix.UNRATED,
+            ix.MODE_UNDECLARED, ix.NO_FACILITATING_CUE, ix.BELOW_RESOLUTION,
+            ix.SUPPRESSION_OVERLAP))
+
+    def test_every_verdict_has_a_distinct_next_action(self):
+        self.assertEqual(set(ix.NEXT_ACTION), set(ix.VERDICTS))
+        acts = list(ix.NEXT_ACTION.values())
+        self.assertEqual(len(acts), len(set(acts)))
+        r = ix.classify(5, [3, 2])
+        self.assertEqual(r["next_action"], ix.NEXT_ACTION[ix.UNRATED])
 
 
 class Refusals(unittest.TestCase):
+    """Bad input is returned as a verdict, never raised."""
 
-    def test_bad_inputs_raise(self):
-        bad = [(10, SEP, -1), (float("nan"), SEP, 1), (10, [7], 1),
-               (10, [], 1), (10, [3, float("inf")], 1), (10, SEP, "1"),
-               ("10", SEP, 1), (10, SEP, True)]
+    def test_bad_inputs_return_malformed(self):
+        bad = [(float("nan"), SEP, 1), (10, [3, float("inf")], 1),
+               ("10", SEP, 1), (None, SEP, 1), (True, SEP, 1),
+               (10, [3, None], 1), (10, [3, "7"], 1), (10, [3, False], 1),
+               (10, "37", 1), (10, None, 1), (10, SEP, -1), (10, SEP, "1"),
+               (10, SEP, True)]
         for args in bad:
-            with self.assertRaises(ix.InteractionError, msg=repr(args)):
-                cls(*args)
+            self.assertEqual(cls(*args)["relation"], ix.MALFORMED_INPUT, args)
+
+    def test_too_few_cues_is_insufficient(self):
+        for sep in ([7], []):
+            self.assertEqual(cls(10, sep, 1)["relation"], ix.INSUFFICIENT_CUES)
+
+    def test_classify_never_raises_on_input(self):
+        weird = [None, "x", True, float("nan"), float("inf"), -1, 0, 1, [1],
+                 {"value": "x"}, {"value": 1, "mode": 7}, object()]
+        for joint in weird[:8]:
+            for tol in weird:
+                for cues in ([1, 2], [None], [], [-1, -2], "ab", None):
+                    r = ix.classify(joint, cues, tol)
+                    self.assertIn(r["relation"], ix.VERDICTS)
 
     def test_module_refuses_selftest(self):
         p = subprocess.run([sys.executable, os.path.join(HERE, "interaction.py"),
