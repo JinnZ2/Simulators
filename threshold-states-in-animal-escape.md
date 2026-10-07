@@ -7,6 +7,67 @@ not established).
 Companion to `sense_as_match.py` (repo root) and to the state definitions in
 `notes/memory-export/files/unnamed-instruments.md` (lines 230-238).
 One file. Loads whole. Readers: people and other models.
+Revised 2026-10-07: section 0 added. It governs every later section.
+
+---
+
+## 0. Definition of NEW (read first; T-1..T-6 are read under it)
+
+Supplied by the operator, 2026-10-07:
+
+```text
+NEW := absent after a DECLARED search {corpus, query set, date},
+       with the search logged in this file.
+A search that is not declared and logged  -> status UNRATED, not NEW.
+```
+
+The rule applies to every absence claim in this file, not only to the state
+label. "Not found" counts only when this log holds the search that did not
+find it. Otherwise the claim reads UNRATED.
+
+### 0a. Search log
+
+```text
+id   corpus                          query set (regex, case-insens.)   date        hits  define NEW state
+---  ------------------------------  --------------------------------  ----------  ----  ----------------
+S-1  JinnZ2/Simulators @ 0c0d53a,    "new *:="                         2026-10-07     0  0
+     git grep, all tracked files,    "NEW state|state NEW"                            5  0
+     this file excluded              "(UN)?COALESCED.*NEW|                            0  0
+                                      NEW.*(UN)?COALESCED"
+S-2  this file, section 1 state      "distance fled"                   2026-10-07     0  --
+     table (3 rows)
+```
+
+S-1 hits, read by hand. All 5 use "new state" in its ordinary sense of
+"next state". None defines a processing state:
+`claim-record/CLAIM_TABLE.md:410`, `fragility-cascade/nautilus_architecture.py`
+(lines 9, 67, 166), `fragility-cascade/thermo_synth.py:81`.
+Not searched: any other repository, any literature corpus. Publisher hosts
+refuse CONNECT from this environment.
+
+### 0b. T-1..T-6 under this rule
+
+```text
+item  absence claim?                         search   status
+----  -------------------------------------  -------  ---------------------------
+T-1   yes: no NEW definition in tree          S-1      absence holds @ 0c0d53a;
+                                                       definition now in this
+                                                       section (operator-supplied)
+T-2   no: kinds of freeze, carried            --       not gated; CARRIED
+T-3   no: FID-as-ratio reading, carried       --       not gated; CARRIED
+T-4   no: starting-distance effect, carried   --       not gated; CARRIED
+T-5   yes, if read as "monitoring is not      none     UNRATED
+        general"
+T-6a  yes: distance fled has no state         S-2      absence holds in the
+                                                       section 1 state table
+T-6b  yes: NEW has no stage                   none     UNRATED (literature
+                                                       stage lists not searched)
+```
+
+At the animal level a stimulus is NEW only relative to a search, and no
+measurement in the families named in section 8 declares or logs the
+animal's search. So the section 3 mapping of NEW to detection/alert stays
+PROPOSED, and any per-encounter NEW status reads UNRATED.
 
 ---
 
@@ -30,8 +91,9 @@ Definitions taken from `notes/memory-export/files/unnamed-instruments.md`:
 HELD-UNCOALESCED   a probability field; live hypotheses that have not formed
                    a shape. Rides as an overlay.                  [in-tree]
 COALESCED          a shape; the field has resolved into one form. [in-tree]
-NEW                named in the work order for this file. No definition
-                   located in this tree.                          THIN T-1
+NEW                named in the work order for this file. Defined in
+                   section 0 (operator-supplied). No definition in
+                   this tree before that (search S-1).            THIN T-1
 ```
 
 `THIN T-1`: the order names three states, but only two are defined anywhere
