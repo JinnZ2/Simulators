@@ -1,0 +1,22 @@
+features each prediction rests on   [CHOICE 7: lexical]
+class      file                    want   line  marker
+DETECT     human-sensing-prior.md  yes    64    change the described processing
+DETECT     PATHWAY_B.md            yes    87    Replace "you" with "the deer"
+OVERAPPLY  PATHWAY_B.md            yes    317   Intake is not decision.
+OVERAPPLY  PATHWAY_B.md            yes    326   Sustained forced single-channel
+OVERAPPLY  PATHWAY_B.md            yes    335   People vary.
+OVERAPPLY  human-sensing-prior.md  yes    30    That cost is paid whether the array is used
+OVERAPPLY  human-sensing-prior.md  no     -     Intake is not decision.
+EVIDENCE   human-sensing-prior.md  yes    135   "millions of independent trials" overstates
+EVIDENCE   human-sensing-prior.md  yes    140   Felsenstein
+EVIDENCE   human-sensing-prior.md  yes    145   Survival shows that a configuration was viable
+EVIDENCE   human-sensing-prior.md  yes    118   Goris
+EVIDENCE   PATHWAY_B.md            yes    157   very long run of independent trials
+CITE       PATHWAY_B.md            yes    183   CESSATION-AS-CUE
+CITE       PATHWAY_B.md            yes    185   These are two different mechanisms.
+CITE       PATHWAY_B.md            yes    191   GAP, open and named: Magrath covers emitted alarm signals
+CITE       human-sensing-prior.md  no     -     CESSATION
+NEXTSTEP   human-sensing-prior.md  yes    206   **P2. Corpus baseline.**
+NEXTSTEP   human-sensing-prior.md  yes    218   **P4. Effective-N
+NEXTSTEP   PATHWAY_B.md            yes    386   None of F1 to F3 has been run
+mismatches: 0 of 19

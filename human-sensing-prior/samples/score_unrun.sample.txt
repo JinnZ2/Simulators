@@ -1,0 +1,43 @@
+pathway A vs pathway B
+PREDICTIONS.md sha256 5146b5f04a96cdc1ab284e92e39f6a28cef27c4178bd57a8322b8cac46cf6baf
+z = 2.0 [CHOICE 1]   min n = 10 [CHOICE 2]   rates are GOOD-outcome rates; unclear outside n
+
+class     arm    yes    no  uncl    good
+DETECT    NONE     0     0     0      --
+DETECT    A        0     0     0      --
+DETECT    B        0     0     0      --
+DETECT    AB       0     0     0      --
+OVERAPPLY NONE     0     0     0      --
+OVERAPPLY A        0     0     0      --
+OVERAPPLY B        0     0     0      --
+OVERAPPLY AB       0     0     0      --
+EVIDENCE  NONE     0     0     0      --
+EVIDENCE  A        0     0     0      --
+EVIDENCE  B        0     0     0      --
+EVIDENCE  AB       0     0     0      --
+CITE      NONE     0     0     0      --
+CITE      A        0     0     0      --
+CITE      B        0     0     0      --
+CITE      AB       0     0     0      --
+NEXTSTEP  NONE     0     0     0      --
+NEXTSTEP  A        0     0     0      --
+NEXTSTEP  B        0     0     0      --
+NEXTSTEP  AB       0     0     0      --
+
+class     A vs B         interval             mdd    predicted     prediction
+DETECT    NOT_EVALUABLE  --                   --     NO_DIFFERENCE UNTESTED
+OVERAPPLY NOT_EVALUABLE  --                   --     B             UNTESTED
+EVIDENCE  NOT_EVALUABLE  --                   --     A             UNTESTED
+CITE      NOT_EVALUABLE  --                   --     B             UNTESTED
+NEXTSTEP  NOT_EVALUABLE  --                   --     NO_DIFFERENCE UNTESTED
+
+class     A vs NONE      B vs NONE      control        AB vs best single
+DETECT    NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE
+OVERAPPLY NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE
+EVIDENCE  NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE
+CITE      NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE
+NEXTSTEP  NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE
+
+pattern: NOT_EVALUABLE   [CHOICE 6]
+uncoded rows: 0 (not counted anywhere)
+A NO_DIFFERENCE is not equivalence: read it against mdd.

@@ -370,7 +370,7 @@ last three; read in order:
 - `instrument-index/` — a REBUILD from a lost original: 13 fields, two renderings from one pass, a 0.70 axis falsifier that cannot fire where nothing is rated
 - `cooperative-substrate-proof/` — P1-P5, each standalone; the cooperative substrate the competitive frame runs on, as a coverage argument; C1-C4 coded into the parts
 - `stability-trigger-envelope/` — DISPATCH ESP-1, a stability trigger outside its validation envelope (cab sensor vs trailer mass on serpentine downgrades); one instrument `descent_record.py` on CONSTRUCTED data, F1-F5 firing as regression, NEITHER_MODE added to the dispatch's five labels, clock offsets detected never corrected, relocation counted never scored; real run NOT_RUN, T3/T6 NOT_BUILT, T4/T5 UNMEASURED
-- `human-sensing-prior/` — one-file CC0 instrument against the prior that human multi-channel sensing is costly; the invariant cost verdict as a CONSTANT_FIRES tell with a self-check a model runs on its own draft, the animal convergence as evidence, intake-vs-decision scope limit stated, F1-F3 not run
+- `human-sensing-prior/` — one-file CC0 instrument against the prior that human multi-channel sensing is costly; the invariant cost verdict as a CONSTANT_FIRES tell with a self-check a model runs on its own draft, the animal convergence as evidence, intake-vs-decision scope limit stated, F1-F3 not run; two pathways kept (A `human-sensing-prior.md`, B `PATHWAY_B.md`), predictions committed before `pathways.py`, a four-arm per-class harness (NONE/A/B/AB, opaque ids, arm withheld from the sheet), nothing run
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -13987,7 +13987,15 @@ ship a `requirements.txt`. Each folder ships `samples/`.
 - `human-sensing-prior/` — one-file CC0 instrument against the AI prior that human
   multi-channel sensing is costly: full-array parallel sensing is the energy basin, forced
   single-channel processing the deviation; the invariant-verdict tell, the projection
-  mechanism, an animal evidence base, gaps marked in-line, three PROPOSED tests. No code.
+  mechanism, an animal evidence base, gaps marked in-line, three PROPOSED tests. Kept as two
+  pathways: A (`human-sensing-prior.md`: convergence, effective-N, P1-P4) and B (`PATHWAY_B.md`:
+  cessation-as-cue, scope limits, F1-F3). `PREDICTIONS.md` was committed before any harness code
+  and predicts a SPLIT: B wins OVERAPPLY and CITE, A wins EVIDENCE, DETECT and NEXTSTEP tie.
+  `pathways.py` locates each prediction's feature by line (19 markers, 0 mismatches), emits the
+  probe battery and a separate arm key, builds a coding sheet with no arm on it, and scores
+  Agresti-Caffo intervals per class with the minimum detectable difference, NONE control and AB
+  interference check; `test_pathways.py` shows every verdict reachable on constructed worlds.
+  No model has been run and no response coded; a run needs a model and a coder without the key.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
