@@ -369,6 +369,7 @@ last three; read in order:
 - `instrument-index/` — a REBUILD from a lost original: 13 fields, two renderings from one pass, a 0.70 axis falsifier that cannot fire where nothing is rated
 - `cooperative-substrate-proof/` — P1-P5, each standalone; the cooperative substrate the competitive frame runs on, as a coverage argument; C1-C4 coded into the parts
 - `stability-trigger-envelope/` — DISPATCH ESP-1, a stability trigger outside its validation envelope (cab sensor vs trailer mass on serpentine downgrades); one instrument `descent_record.py` on CONSTRUCTED data, F1-F5 firing as regression, NEITHER_MODE added to the dispatch's five labels, clock offsets detected never corrected, relocation counted never scored; real run NOT_RUN, T3/T6 NOT_BUILT, T4/T5 UNMEASURED
+- `human-sensing-prior/` — one-file CC0 instrument against the prior that human multi-channel sensing is costly; the invariant cost verdict as a CONSTANT_FIRES tell with a self-check a model runs on its own draft, the animal convergence as evidence, intake-vs-decision scope limit stated, F1-F3 not run
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
