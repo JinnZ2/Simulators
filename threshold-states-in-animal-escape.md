@@ -446,6 +446,12 @@ Implementation status: this text is ahead of the code. The spec
 decisions Q1-Q4 are not yet built in `threshold-states/interaction.py`.
 Outside cases written from this text test the text.
 
+Outside cases v2 (OC2-01..OC2-30, chat-side, from this text only):
+`threshold-states/outside_cases_v2.json`, committed ALONE at
+`95abc5d732d86823b6e15a340ee99f4870f00078` before any change to `interaction.py`. The build commit
+must follow this hash in history; a run that does not use the file as
+committed at this hash does not count toward lifting SELF-GRADED.
+
 References (Q1: the cue-sign definitions govern; the earlier all-cues
 definition of S and M is superseded):
 
