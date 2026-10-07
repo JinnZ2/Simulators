@@ -564,6 +564,146 @@ potential/tools/registry_sourced.py       --selftest asserts verified != unverif
                                           a fixture that yields 1 and 1
 ```
 
+
+## 17. FIFTH PASS — 2026-10-06, the sense_as_match.py redirect (branch claude/sense-as-match)
+
+Renumbered 2026-10-07. This section and the next were §12 and §13 on this
+branch. `main` already holds a §12 (cherry-picked from PR #105), §15 and §16,
+and reserves §13/§14 for `claude/potential-part-b-k7Qm`. Merging this branch
+as numbered would put two different §12s and two §13s in one file. 17 and 18
+are free on every branch. Content is unchanged except where §18 says so.
+
+`sense_as_match.py` (root) refuses `--selftest` and says "run test_sense.py";
+no `test_sense.py` sat beside it. A root `test_sense.py` now does. It runs the
+module's own `run_checks()` and exits with its code. Nothing in
+`sense_as_match.py` is edited.
+
+```
+test_run_manifest.TestRedirectContract.test_no_redirect_names_a_target_that_is_missing
+     before: ['instrument-index/coverage.py', 'sense_as_match.py']
+     after:  ['instrument-index/coverage.py']
+test_run_manifest.TestRedirectContract.test_the_one_known_violation_is_pinned
+     before: anchor-position/normalize.py, instrument-index/coverage.py, sense_as_match.py
+     after:  anchor-position/normalize.py, instrument-index/coverage.py
+```
+
+Both tests stay red, on `instrument-index/coverage.py`, which this pass does not
+touch. The 8 failing ids are unchanged: 133 run, 8 FAIL, before and after.
+
+What the repair is NOT: the redirect is now TRUE, and the target is SELF-GRADED.
+The checks were written by the same hand as the module, so the run is a regression
+result, not validation (the MSV_023 status). It runs 16 of 18 and exits 1:
+
+```
+FAIL positive control fires on a term not at the match site
+FAIL score returns UNRATED on a failed gate
+```
+
+One cause. `gate()` checks only that the TERM appears whole-word in the source text.
+The control's text contains the term and not the basis, so `gate()` returns
+`(True, "OK")` where the control expects `NOT_AT_MATCH_SITE`. Either the control is
+mis-specified or the gate is missing a basis clause. That is the author's call, and
+it is left open. The module's own first comment reads "A gate that never fires is
+not a gate", and on its own positive control this one does not fire.
+
+## 18. SIXTH PASS — 2026-10-07, gate() gains the basis clause (branch claude/sense-as-match)
+
+The author's call on §17 is in: the positive control is correct, and `gate()` is missing a basis check. The work was done in order.
+
+1. **Case written first.** Before `gate()` was touched, one case was added to the root `test_sense.py`, outside the module's `run_checks()`:
+   - the term is present;
+   - the basis is present;
+   - the basis sits in a different paragraph;
+   - the expected result is `NOT_AT_MATCH_SITE`.
+2. **Unpatched run recorded.** The case was then run against the unpatched gate.
+3. **Gate patched.** `gate()` then gained [CHOICE 6]: the basis must occur, whole-word, inside at least one match site. A match site is the blank-line-delimited paragraph that holds a whole-word occurrence of the term.
+
+| control | before | after |
+|---|---|---|
+| positive control fires on a term not at the match site | FAIL | PASS |
+| score returns UNRATED on a failed gate | FAIL | PASS |
+| other 16 module checks (incl. "a located record passes", declared corpus_default) | PASS | PASS |
+| [added] fixture: term present in text | PASS | PASS |
+| [added] fixture: basis present in text | PASS | PASS |
+| [added] basis present but not at match site -> NOT_AT_MATCH_SITE | FAIL | PASS |
+| totals | 16/18 + 2/3, exit 1 | 18/18 + 3/3, exit 0 |
+
+**The patch does not refuse everything.** The two passing cases still pass. These are the located record and the declared corpus_default. A term used in two paragraphs passes when either paragraph holds the basis. This was spot-checked here and is now pinned (§18.1).
+
+**Stated cost of [CHOICE 6].** A paragraph is a layout unit, not a semantic one. A sense stated across a paragraph break therefore reads `NOT_AT_MATCH_SITE`.
+
+**Root suite unchanged:** 133 run, 8 FAIL. The failing ids are identical to §17's.
+
+**The self-graded flag stays.** The added case is by the same hand as the gate it tests. A pass here is a regression result, not validation (the MSV_023 status). The flag lifts when a case authored outside this module passes against `gate()` as it stands.
+
+### 18.1 Pinned since — the hand-checked cases, and the limit
+
+Three cases were hand-checked only and are now pinned in `test_sense.py`:
+
+| case | gate() | pinned as |
+|---|---|---|
+| term in two paragraphs, basis in the second | `(True, "OK")` | correct |
+| term in two paragraphs, basis in the first | `(True, "OK")` | correct |
+| basis present, term absent | `(False, "NOT_AT_MATCH_SITE")` | correct |
+
+**LIMIT, pinned as current behaviour: a false NOT_AT_MATCH_SITE.** A sense stated across a paragraph break reads `NOT_AT_MATCH_SITE`, and the reading is correct. The pinned text:
+
+    His disrespect was not ethical.
+
+    It was taking for granted, and thereby missing information.
+
+This is the cost of [CHOICE 6]. A paragraph is a layout unit, and the author's sense is not bounded by layout.
+
+The text has the same shape as the §18 added case: term in paragraph 1, basis in paragraph 2. In one, the basis is the author's statement of the sense; in the other, it is an unrelated sentence. `gate()` reads layout and not intent, so it cannot separate them. Any repair has to do one of three things:
+
+- read something other than paragraph boundaries; or
+- admit both cases; or
+- refuse both cases, as it does now.
+
+**A repair turns this pin red.** This section must then be corrected, not the pin quietly flipped.
+
+### 18.2 Outside cases — the only flag-lifter
+
+`test_sense.py` loads `sense_outside_cases.json` when that file sits beside it. The cases are authored outside this module (the chat side), and this branch authors none.
+
+**Admissible file** [CHOICE T1], [CHOICE T2]:
+
+- a declared `author`;
+- a declared `provenance`;
+- `authored_outside_module: true`;
+- 3 to 5 cases, each with:
+  - a record;
+  - a text;
+  - an expected `(ok, reason)`;
+  - a `why`;
+- at least one expected refusal (`ok: false`);
+- at least one expected pass.
+
+The expected-pass requirement is added here. It is not in the request. A set of refusals alone passes a gate that refuses everything, which is the constant-output failure `tools/known_answer.py` refuses for the same reason.
+
+**What is not verified.** The author fields are declared. Nothing here can check who wrote a case.
+
+**States:**
+
+| state | when |
+|---|---|
+| `SELF-GRADED` | no file |
+| `NOT_ADMISSIBLE` | the file fails a rule above |
+| `OUTSIDE_DISAGREES` | the file is admissible, and some case disagrees with `gate()` |
+| `OUTSIDE_AGREES` | the file is admissible, and every case agrees |
+
+- **Only `OUTSIDE_AGREES` lifts the self-graded flag.** A disagreement exits nonzero. It is reported as a finding, and the case is never edited to match.
+- **The file's sha256 is printed with the result.** Editing a case after the run therefore shows in the next run's output.
+- **All four states are reachable.** Six intake checks show this on constructed files in a temp dir. Those files lift nothing.
+- **A real file moves the exit code.** A planted file carrying the §18.1 limit case with `expect OK` read `OUTSIDE_DISAGREES` and exited 1. It was removed, not committed.
+
+**State as committed:**
+
+- 18/18 module checks;
+- 13/13 added checks (7 cases, 6 intake);
+- 0 outside cases;
+- `STATE: SELF-GRADED`;
+- exit 0.
 ## 12. FIFTH PASS — 2026-09-30, PART B item 13: the §11 known-answer half, closed
 
 Bounded to the two §11 rows the order named — the five `register()` sites in

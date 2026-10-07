@@ -79,9 +79,40 @@ def locate(text, term):
     return None
 
 
+def _occurrences(text, term):
+    """Every whole-word occurrence of term, by the same rule as locate()."""
+    out = []
+    start = 0
+    while True:
+        hit = locate(text[start:], term)
+        if hit is None:
+            return out
+        out.append((start + hit[0], start + hit[1]))
+        start += hit[1]
+
+
+def match_sites(text, term):
+    """[CHOICE 6] The match site of an occurrence is the paragraph holding
+    it: the span between the nearest blank lines on either side. One site
+    per occurrence; a term used in three paragraphs has three sites."""
+    sites = []
+    for (a, b) in _occurrences(text, term):
+        lo = text.rfind("\n\n", 0, a)
+        lo = 0 if lo < 0 else lo + 2
+        hi = text.find("\n\n", b)
+        hi = len(text) if hi < 0 else hi
+        sites.append((lo, hi))
+    return sites
+
+
 def gate(record, source_text):
     """Returns (ok, reason). source_text is required: a caller who does not
-    have the text the sense came from does not have a sense to score with."""
+    have the text the sense came from does not have a sense to score with.
+
+    NOT_AT_MATCH_SITE is returned when the term does not occur, AND when it
+    occurs but no match site holding it also holds the basis [CHOICE 6]. A
+    basis elsewhere in the document is a basis for some other use of the
+    term, not for this one."""
     if not isinstance(record, SenseRecord):
         return (False, "NO_RECORD")
     missing = record.missing()
@@ -91,9 +122,13 @@ def gate(record, source_text):
         return (False, "UNDECLARED_SENSE")
     if source_text is None:
         return (False, "NO_SOURCE_TEXT")
-    if locate(source_text, record.term) is None:
+    sites = match_sites(source_text, record.term)
+    if not sites:
         return (False, "NOT_AT_MATCH_SITE")
-    return (True, "OK")
+    for (lo, hi) in sites:
+        if locate(source_text[lo:hi], record.basis) is not None:
+            return (True, "OK")
+    return (False, "NOT_AT_MATCH_SITE")
 
 
 def score(value, record, source_text):
@@ -116,6 +151,13 @@ _CHOICES = (
     ("5", "source_text is a required positional argument to gate() and "
           "score(). A caller who does not have the text the sense came "
           "from does not have a sense to score with."),
+    ("6", "The match site is the paragraph (blank-line delimited) holding "
+          "a whole-word occurrence of the term, and gate() requires the "
+          "basis, whole-word, inside at least one such site. Not the "
+          "sentence: a basis is often stated one sentence after the term. "
+          "Not the document: a basis elsewhere is a basis for another use. "
+          "A paragraph is a layout unit, not a semantic one -- a sense "
+          "stated across a paragraph break reads NOT_AT_MATCH_SITE."),
 )
 
 
