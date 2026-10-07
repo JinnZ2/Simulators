@@ -3,11 +3,14 @@
 Instrument. CC0 -- No Rights Reserved. Dated 2026-10-05.
 Tags: OBSERVED (measured in the literature named) / DERIVED (follows from
 the observed by a stated step) / PROPOSED (a reading offered here, testable,
-not established).
+not established) / PROXY_AVAILABLE, UNRUN (a measurable proxy for the
+quantity exists in a named paper; nothing here has run it).
 Companion to `sense_as_match.py` (repo root) and to the state definitions in
 `notes/memory-export/files/unnamed-instruments.md` (lines 230-238).
 One file. Loads whole. Readers: people and other models.
 Revised 2026-10-07: section 0 added. It governs every later section.
+Revised 2026-10-07 (second pass): literature checked chat-side by the
+operator; results applied in sections 0, 2, 3, 5 and 8.
 
 ---
 
@@ -36,7 +39,16 @@ S-1  JinnZ2/Simulators @ 0c0d53a,    "new *:="                         2026-10-0
                                       NEW.*(UN)?COALESCED"
 S-2  this file, section 1 state      "distance fled"                   2026-10-07     0  --
      table (3 rows)
+S-3  JinnZ2/Simulators @ 243a773     "narrow watching|watching is      2026-10-07     0  --
+     and branch                       costly" (whole word)
+     claude/human-sensing-prior      "RESONANT" (whole word)                          5  0 define a
+     @ c3578c8, this file excluded                                                       sensing class
 ```
+
+S-3 RESONANT hits are all other senses: `fragility-cascade/homeostasis_kernel.py:69`
+and its sample (3 lines), damping; `qrng-pair-search/qrng_pair_search.py:100`,
+tunnelling. The S-3 phrases were supplied with the 2026-10-07 literature
+check as cross-link targets. Neither target was located (section 8).
 
 S-1 hits, read by hand. All 5 use "new state" in its ordinary sense of
 "next state". None defines a processing state:
@@ -64,10 +76,22 @@ T-6b  yes: NEW has no stage                   none     UNRATED (literature
                                                        stage lists not searched)
 ```
 
-At the animal level a stimulus is NEW only relative to a search, and no
-measurement in the families named in section 8 declares or logs the
-animal's search. So the section 3 mapping of NEW to detection/alert stays
-PROPOSED, and any per-encounter NEW status reads UNRATED.
+At the animal level a stimulus is NEW only relative to the animal's own
+search. That search state has measurable proxies (chat-side check,
+2026-10-07):
+
+```text
+proxy                                   source
+--------------------------------------  ------------------------------------
+attentive immobility + bradycardia      Roelofs & Dayan 2022: freezing is an
+                                        evidence-gathering state; bradycardia
+                                        is its marker
+alert distance (AD)                     Blumstein 2010, FEAR (section 2b)
+```
+
+Status of the NEW -> detection/alert mapping: PROXY_AVAILABLE, UNRUN
+(was PROPOSED). No measurement in this file declares or logs the animal's
+search, so any per-encounter NEW status still reads UNRATED.
 
 ---
 
@@ -99,7 +123,8 @@ NEW                named in the work order for this file. Defined in
 `THIN T-1`: the order names three states, but only two are defined anywhere
 in this repository. Section 2 maps the order's three transitions to
 measured quantities. The labels COALESCED and NEW are attached to stages
-there as PROPOSED, not as found.
+there as PROPOSED, not as found. NEW is now PROXY_AVAILABLE, UNRUN
+(section 0).
 
 ---
 
@@ -137,17 +162,19 @@ ends in either staying frozen or bolting, has the structure of a
 probability field that has not yet coalesced.
 
 `THIN T-2`: "freeze" covers more than one state. Attentive immobility early
-in an encounter is the one that maps here. TONIC IMMOBILITY, the late,
-contact-stage collapse in the defense-cascade literature, is a different
-state. It is closer to shutdown and does NOT map to held-uncoalesced. A
+in an encounter is the one that maps here. TONIC IMMOBILITY, the last-resort
+response to inescapable threat (circa-strike) in the defense-cascade
+literature, is a different state. It is closer to shutdown and does NOT map to held-uncoalesced. A
 reading that cites freeze without saying which kind cannot be scored.
 Under `sense_as_match.py` it returns UNRATED.
 
 ### 2b. FID is the reserve made numeric
 
 OBSERVED: FID is among the most measured quantities in escape behaviour.
-There is a large literature across birds, lizards and mammals, summarised
-in the Stankowich and Blumstein meta-analysis of risk assessment.
+There is a large literature across fish, birds, lizards and mammals,
+summarised in the Stankowich and Blumstein meta-analysis of risk
+assessment (2005). The group-size effect REVERSES in fish (chat-side check,
+2026-10-07): the direction of a confound is taxon-dependent.
 
 DERIVED: FID turns into a number how much uncertainty the animal tolerates
 before acting.
@@ -162,9 +189,22 @@ cost, not uncertainty tolerance alone. Food density shifting FID (section
 fleeing fixed or measure it alongside FID.
 
 `THIN T-4`: FID also correlates with the distance at which the approach
-began (the starting-distance effect; Blumstein, "flush early and avoid the
-rush"). A FID taken without the starting distance recorded mixes the
-threshold with the approach geometry.
+began (the starting-distance effect; Blumstein 2003). A FID taken without
+the starting distance recorded mixes the threshold with the approach
+geometry.
+
+The stronger form is FEAR ("flush early and avoid the rush"; Blumstein
+2010): FID rises with ALERT DISTANCE, because monitoring an approaching
+predator has a cost. The key variable is AD, not starting distance.
+Support, carried from the chat-side check: Samia et al. 2013, a
+phylogenetic meta-analysis; Samia & Blumstein 2015, 178 species, FEAR fits
+79%. A FID taken without AD recorded mixes the threshold with the cost of
+watching.
+
+Cross-link: the monitoring cost in FEAR is the animal-level form of
+"narrow watching is costly", from an independent literature. The in-tree
+target of that phrase was not located (search S-3); the link is recorded
+here and points at nothing in this repository yet.
 
 ### 2c. The held state outlasts the action
 
@@ -183,25 +223,27 @@ contexts. This file does not establish how general it is.
 
 ## 3. Why the sequence matters
 
-OBSERVED: older work often scored escape as one binary event (fled / did
+CARRIED (the book is verified to exist; its sequence content was NOT
+checked): older work often scored escape as one binary event (fled / did
 not flee). The "integrated view" of escape decisions (Cooper and Blumstein,
-edited volume) measures a SEQUENCE:
+edited volume, 2015) measures a SEQUENCE:
 
 ```text
 detection -> alert latency -> FID -> distance fled -> resume latency
              (held)            (threshold)  (?)       (resolving)
 ```
 
-DERIVED: that sequence is the state model measured. The held-uncoalesced
-state is not a claim offered without support. It sits on stages with
-published distributions behind them.
+DERIVED, conditional on the carried sequence: that sequence is the state
+model measured. If the book's content matches, the held-uncoalesced state
+sits on stages with published distributions behind them. Until it is
+checked, this paragraph rests on the CARRIED line above.
 
 `THIN T-6`: the sequence has more measured stages than the order has
 states. DISTANCE FLED has no state assigned to it. NEW has no stage
 assigned to it.
 
-PROPOSED: NEW maps to detection or alert, the moment a stimulus enters
-the field. DISTANCE FLED is a property of the act, not a state. Both
+PROXY_AVAILABLE, UNRUN (section 0): NEW maps to detection or alert, the
+moment a stimulus enters the field. DISTANCE FLED is a property of the act, not a state. Both
 readings are open.
 
 ---
@@ -239,10 +281,11 @@ that a second party can dispute.
 ## 5. Confounds   [OBSERVED -- stated, not hidden]
 
 ```text
-group size          shifts FID
+group size          shifts FID          (direction reverses in fish)
 refuge distance     shifts FID
 food density        shifts FID          (the cost term in THIN T-3)
-starting distance   shifts FID          (THIN T-4)
+starting distance   shifts FID          (THIN T-4; Blumstein 2003)
+alert distance      shifts FID          (THIN T-4; FEAR, Blumstein 2010)
 ```
 
 A single reading does not isolate the variable. Repeated observation in the
@@ -285,24 +328,66 @@ share of escapes with monitoring during flight    UNRATED
 
 ---
 
-## 8. Sources (literature families, named; none opened here)
+## 8. Sources (literature families; checked chat-side 2026-10-07)
 
 Egress from the environment that wrote this file is an allowlist that
-refuses publisher hosts. No source was opened. Names are given so a reader
-can find them. Author names and titles are CARRIED (from the work order and
-from general knowledge) and are not verified here. No figure is taken from
-any of them.
+refuses publisher hosts. No source was opened from here. The operator
+checked the list from a different environment on 2026-10-07. The statuses
+below are that check, carried. No figure in this file comes from these
+sources except the two the check supplied (Samia & Blumstein 2015, section
+2b).
 
 ```text
-freeze as preparation       "freeze for action" (Roelofs and colleagues)
-defense cascade             tonic vs attentive immobility (THIN T-2)
-FID meta-analysis           Stankowich & Blumstein, risk assessment
-economic escape theory      Ydenberg & Dill (THIN T-3)
-starting-distance effect    Blumstein, "flush early and avoid the rush"
-disturbance as predation    Frid & Dill
-integrated escape sequence  Cooper & Blumstein, "Escaping from Predators:
-                            an integrative view of escape decisions"
+status      meaning
+----------  -----------------------------------------------------------
+VERIFIED    citation and anchor claim checked (chat-side, 2026-10-07)
+EXISTS      the work is verified to exist; the anchor content is not
+CHECK       cited from memory; the primary was not opened
+CANDIDATE   named; full citation not yet seen
 ```
+
+```text
+family / work                                           status
+------------------------------------------------------  ----------
+freeze as preparation
+  Roelofs K 2017. Phil Trans R Soc B 372(1718):20160206 VERIFIED
+  Roelofs K, Dayan P 2022. Nat Rev Neurosci.            VERIFIED
+    doi 10.1038/s41583-022-00608-2. Freezing as an
+    evidence-gathering state; bradycardia as marker.
+defense cascade (tonic vs attentive; THIN T-2)
+  Kozlowska K, Walker P, McLean L, Carrive P 2015.      VERIFIED
+    Harv Rev Psychiatry 23(4):263-287
+FID meta-analysis
+  Stankowich T, Blumstein DT 2005. Proc R Soc B         VERIFIED
+    272(1581):2627-2634. doi 10.1098/rspb.2005.3251
+economic escape theory (THIN T-3)
+  Ydenberg RC, Dill LM 1986. Adv Study Behav            CHECK
+    16:229-249. The anchor matches the theory as
+    restated in later literature.
+starting-distance effect (THIN T-4)
+  Blumstein DT 2003. Full citation not given.           CHECK
+FEAR, alert distance (THIN T-4)
+  Blumstein DT 2010. Behav Ecol 21(3):440-442.          VERIFIED
+    doi 10.1093/beheco/arq030
+  Samia et al. 2013. Biol Lett. Phylogenetic            CARRIED
+    meta-analysis.
+  Samia & Blumstein 2015. PLoS ONE. 178 species,        CARRIED
+    FEAR fits 79%.
+disturbance as predation
+  Frid A, Dill LM 2002. Conservation Ecology 6(1):11    VERIFIED
+integrated escape sequence (section 3)
+  Cooper WE Jr, Blumstein DT (eds) 2015. Escaping From  EXISTS
+    Predators. Cambridge University Press.
+multimodal risk assessment
+  2024 Nat Commun meta-analysis, uni- vs multimodal     CANDIDATE
+    predation risk assessment in birds. Authors not
+    seen. Models redundancy / enhancement / antagonism.
+```
+
+CANDIDATE mapping, PROPOSED (carried from the check): redundancy and
+enhancement map to a RESONANT class, and antagonism to an open
+antagonistic class. RESONANT is not defined in this file or in this tree
+(search S-3).
 
 Cross-links:
 `sense_as_match.py` (its module docstring names itself `sense_at_match.py`;
