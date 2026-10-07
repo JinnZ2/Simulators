@@ -33,6 +33,11 @@ is the instrument; this folder holds the one part of it that computes.
     OC-2 expects a suppressive (negative) cue not to read BELOW_RESOLUTION,
     and it does at every joint, because S - M is the sum of the non-max cues.
   - Samples: `samples/run_outside.sample.txt`, `samples/test_outside.sample.txt`
+- Two builds of the same precedence now sit in the tree: this folder's
+  `interaction.py` and `interaction_class.py` at the repo root (another
+  session, same day). They return the same verdict on all five outside
+  cases, so the two disagreements belong to the spec, not to one build.
+  Which build stays is not decided here.
 
 SELF-GRADED: the tests and the module share an author. Nothing here
 describes any animal or any paper. Stdlib only, CC0.

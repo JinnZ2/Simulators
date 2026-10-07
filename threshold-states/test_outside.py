@@ -76,6 +76,15 @@ class Run(unittest.TestCase):
                              ix.BELOW_RESOLUTION)
 
 
+    def test_second_build_gives_the_same_outcomes(self):
+        # interaction_class.py (repo root, another session) implements the
+        # same precedence; on these five cases it matches this build, so
+        # both disagreements belong to the spec, not to one build.
+        for k, r in self.by.items():
+            self.assertEqual(r["second_build"][0], "RELATION", k)
+            self.assertEqual(r["second_build"][1], r["got"][1], k)
+
+
 class Judge(unittest.TestCase):
     def test_a_refusal_is_not_a_NOT(self):
         e = {"kind": "NOT", "relation": "BELOW_RESOLUTION"}

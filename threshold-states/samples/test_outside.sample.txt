@@ -7,9 +7,10 @@ test_refuse_expectation (__main__.Judge.test_refuse_expectation) ... ok
 test_oc2_is_below_resolution_for_every_joint (__main__.Run.test_oc2_is_below_resolution_for_every_joint) ... ok
 test_pinned_outcomes (__main__.Run.test_pinned_outcomes) ... ok
 test_pinned_verdicts (__main__.Run.test_pinned_verdicts) ... ok
+test_second_build_gives_the_same_outcomes (__main__.Run.test_second_build_gives_the_same_outcomes) ... ok
 test_units_readings_differ_on_oc1_only (__main__.Run.test_units_readings_differ_on_oc1_only) ... ok
 
 ----------------------------------------------------------------------
-Ran 10 tests in 0.050s
+Ran 11 tests in 0.045s
 
 OK

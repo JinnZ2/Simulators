@@ -16,7 +16,12 @@ Expectation kinds (as delivered):
 STATE is SELF-GRADED unless every case AGREEs; then OUTSIDE-AGREED. That is
 the author's lift rule, stated in the file.
 
-One column is informational and decides nothing: the reading with tol taken
+A second build of the same precedence exists at the repo root
+(interaction_class.py, another session, merged the same day). Its verdicts
+on the same cases are printed beside the first and also decide nothing:
+they show whether a disagreement belongs to the spec or to one build.
+
+One further column is informational and decides nothing: the reading with tol taken
 relative (tol * M) beside the absolute one, because OC-1 turns on that
 question. It does not change any AGREE / DISAGREE.
 
@@ -35,6 +40,23 @@ sys.path.insert(0, HERE)
 import interaction as ix  # noqa: E402
 
 CASES = os.path.join(HERE, "outside_cases.json")
+ROOT = os.path.dirname(HERE)
+
+
+def second_build(case):
+    """interaction_class.py at the repo root, or None if it is absent."""
+    sys.path.insert(0, ROOT)
+    try:
+        import interaction_class as ic
+    except ImportError:
+        return None
+    finally:
+        sys.path.remove(ROOT)
+    try:
+        return ("RELATION", ic.classify(case["joint"], case["separate"],
+                                        case["tol"])[0])
+    except ValueError as e:
+        return ("REFUSE", str(e))
 
 
 def load(path=CASES):
@@ -79,6 +101,7 @@ def run(data=None):
             "verdict": "AGREE" if judge(c["expect"], got) else "DISAGREE",
             "relative_reading": rel,
             "readings_agree": rel == got,
+            "second_build": second_build(c),
         })
     agree = sum(r["verdict"] == "AGREE" for r in rows)
     state = "OUTSIDE-AGREED" if agree == len(rows) else "SELF-GRADED"
@@ -93,18 +116,21 @@ def _fmt_expect(e):
 def render(res):
     out = ["outside cases (author: %s), run against %s"
            % (res["author"], res["run_against"]), ""]
-    out.append("%-5s %-26s %-22s %-9s %s" % ("id", "expected", "got", "verdict",
-                                            "tol x M reading"))
+    out.append("%-5s %-26s %-22s %-9s %-18s %s" % (
+        "id", "expected", "got", "verdict", "tol x M reading",
+        "interaction_class.py"))
     for r in res["rows"]:
         g = r["got"][1] if r["got"][0] == "RELATION" else "REFUSE"
         rr = r["relative_reading"]
         rr = rr[1] if rr[0] == "RELATION" else "REFUSE"
-        mark = "" if r["readings_agree"] else "  (readings differ)"
-        out.append("%-5s %-26s %-22s %-9s %s%s" % (
-            r["id"], _fmt_expect(r["expect"]), g, r["verdict"], rr, mark))
+        sb = r["second_build"]
+        sb = "ABSENT" if sb is None else (sb[1] if sb[0] == "RELATION" else "REFUSE")
+        out.append("%-5s %-26s %-22s %-9s %-18s %s" % (
+            r["id"], _fmt_expect(r["expect"]), g, r["verdict"], rr, sb))
     out += ["", "agree %d of %d" % (res["agree"], res["n"]),
             "STATE: %s" % res["state"],
-            "(the tol x M column is informational and decides no verdict)"]
+            "(the last two columns are informational and decide no verdict;",
+            " tol x M differs from the absolute reading on OC-1 only)"]
     return "\n".join(out)
 
 
