@@ -1254,14 +1254,12 @@ PIN ka.skipped.cases - 11 @59a5e5d
 PIN ka.skipped.metrics - 2 @59a5e5d
 PIN ka.skipped.metric cooperative-substrate-proof/p3_comprehension.py::gain_from_sizes 5 @59a5e5d
 PIN ka.skipped.metric cooperative-substrate-proof/p5_lag.py::lag_ratio 6 @59a5e5d
-PIN rm.redirect_missing archive/crediting-rate/crediting_rate_v2.py - @59a5e5d
 PIN rm.redirect_missing archive/instrument-index/build_index.py - @59a5e5d
 PIN rm.redirect_missing archive/instrument-index/coverage.py - @59a5e5d
 PIN rm.redirect_missing crediting-rate/archive/f168f79/crediting_rate_v2.py - @9262516
 PIN rm.redirect_missing instrument-index/coverage.py - @9262516
 PIN rm.redirect_missing sense_as_match.py - @9262516
 PIN rm.violation anchor-position/normalize.py - @9262516
-PIN rm.violation archive/crediting-rate/crediting_rate_v2.py - @59a5e5d
 PIN rm.violation archive/instrument-index/build_index.py - @59a5e5d
 PIN rm.violation archive/instrument-index/coverage.py - @59a5e5d
 PIN rm.violation crediting-rate/archive/f168f79/crediting_rate_v2.py - @9262516
@@ -1271,6 +1269,17 @@ PIN suite.failing test_tool_exits_clean INTENDED @9262516
 PIN suite.failing test_no_redirect_names_a_target_that_is_missing UNINTENDED @9262516
 PIN suite.failing test_the_one_known_violation_is_pinned UNINTENDED @9262516
 PIN suite.failing test_no_module_binds_a_toplevel_name_twice UNINTENDED @59a5e5d
+PIN rm.archived_target_missing archive/instrument-index/build_index.py - @d19c52c
+PIN rm.archived_target_missing archive/instrument-index/coverage.py - @d19c52c
+PIN rm.archived_target_missing crediting-rate/archive/f168f79/crediting_rate_v2.py - @d19c52c
+PIN cg.duplicate earth_economics/asteroid_mining_audit.py::main - @59a5e5d
+PIN cg.duplicate earth_economics/asteroid_mining_audit.py::run_asteroid_fermi - @59a5e5d
+PIN cg.duplicate grounding-layers/cultural_lens.py::CulturalLens - @59a5e5d
+PIN cg.duplicate grounding-layers/run_grounding_pipeline.py::run_pipeline - @59a5e5d
+PIN cg.duplicate play-sims/atmospheric-heating/meteor_heating_bins.py::density - @59a5e5d
+PIN cg.duplicate tools/known_answer.py::_cpd_stability_product - @59a5e5d
+PIN cg.duplicate tools/known_answer.py::_drc_count_relation - @59a5e5d
+PIN cg.duplicate tools/known_answer.py::_rcl_composed_bias - @59a5e5d
 <!-- known-red-pins: end -->
 
 To re-pin: change the figure and its commit together, in the same commit
@@ -1322,4 +1331,59 @@ option to 19.3's two. Not taken:
 Under (c), one of the three new violations would resolve. Under (b), all
 four archived redirects would leave the contract. Either way, the two live
 redirects (instrument-index/coverage.py, sense_as_match.py) remain.
+
+### 19.6 Archived redirects: rule (c) adopted, (b) rejected (d19c52c)
+
+Operator decision, 2026-10-07:
+
+    (c) ADOPTED. A file under archive/<folder>/ that names a ROOT-relative
+        target "<folder>/<rest>" resolves it as archive/<folder>/<rest>. The
+        copy archived with the file is checked, never the live file at the
+        old path (selftest: a live copy at the old path does NOT satisfy it).
+    (b) REJECTED. A blanket exclusion of archive/ is an undeclared cut.
+        Archives must still resolve; that is custody.
+
+Effect @d19c52c:
+
+    archive/crediting-rate/crediting_rate_v2.py   cleared: archive/crediting-rate/test_crediting_v2.py exists
+    missing redirect targets                      6 -> 5
+    contract violations                           7 -> 6
+
+The three archived redirects whose targets are genuinely absent stay
+violations. Each is tagged target_state ARCHIVED_TARGET_MISSING and pinned
+by id (rm.archived_target_missing):
+
+    archive/instrument-index/build_index.py               -> archive/instrument-index/test_index.py
+    archive/instrument-index/coverage.py                  -> archive/instrument-index/test_index.py
+        test_index.py was never committed (16.2 item 2)
+    crediting-rate/archive/f168f79/crediting_rate_v2.py   -> crediting-rate/test_crediting_v2.py
+        <folder>/archive/<sha>/ layout; rule (c) covers top-level archive/
+        only. The target exists only at commit f168f79.
+
+The live files stay red, as stated: instrument-index/coverage.py ->
+test_index.py and sense_as_match.py -> test_sense.py (target_state
+MISSING). test_no_redirect_names_a_target_that_is_missing and
+test_the_one_known_violation_is_pinned stay UNINTENDED red for 5 missing
+targets and 5 unpinned violations.
+
+### 19.7 Duplicate top-level names (14.4): parked, pinned by name
+
+test_no_module_binds_a_toplevel_name_twice stays UNINTENDED red. Each
+duplicate is pinned as cg.duplicate <path>::<name>, read from the compile
+gate's own sweep(). That is 8 pins, not 5: the 3 dead helper copies in
+tools/known_answer.py are still there.
+
+    delivered drops (merge 04d16d0, PR #71) -- the 5 that remain parked
+      earth_economics/asteroid_mining_audit.py              main                 157, 476
+      earth_economics/asteroid_mining_audit.py              run_asteroid_fermi   124, 437
+      grounding-layers/cultural_lens.py                     CulturalLens          14, 149
+      grounding-layers/run_grounding_pipeline.py            run_pipeline          57, 261
+      play-sims/atmospheric-heating/meteor_heating_bins.py  density               30, 281
+    tools/known_answer.py -- dead earlier copies; the later copy is the one seed() reaches
+      _cpd_stability_product, _drc_count_relation, _rcl_composed_bias
+
+SUGGESTED, the author's call, not done: remove the three dead helper copies
+in tools/known_answer.py. 14.4 says no registered value moves, since seed()
+reaches the later copy. Doing so turns their three cg.duplicate pins
+MISMATCH, and the re-pin leaves exactly the 5 delivered-drop names.
 
