@@ -1,0 +1,1746 @@
+{
+ "v4.14": {
+  "arch/arm/mach-rockchip/": {
+   "n_maintainers": 2,
+   "n_maintainers_literal": 3,
+   "tenure_median": 4.01,
+   "tenure_unresolved": 0
+  },
+  "block/": {
+   "n_maintainers": 7,
+   "n_maintainers_literal": 8,
+   "tenure_median": 1.75,
+   "tenure_unresolved": 0
+  },
+  "drivers/gpu/drm/amd/": {
+   "n_maintainers": 7,
+   "n_maintainers_literal": 8,
+   "tenure_median": 5.39,
+   "tenure_unresolved": 0
+  },
+  "drivers/gpu/drm/i915/": {
+   "n_maintainers": 9,
+   "n_maintainers_literal": 10,
+   "tenure_median": 4.3,
+   "tenure_unresolved": 0
+  },
+  "drivers/gpu/drm/nouveau/": {
+   "n_maintainers": 5,
+   "n_maintainers_literal": 6,
+   "tenure_median": 5.82,
+   "tenure_unresolved": 0
+  },
+  "drivers/gpu/drm/radeon/": {
+   "n_maintainers": 7,
+   "n_maintainers_literal": 8,
+   "tenure_median": 5.39,
+   "tenure_unresolved": 0
+  },
+  "drivers/infiniband/hw/hfi1/": {
+   "n_maintainers": 5,
+   "n_maintainers_literal": 6,
+   "tenure_median": 10.28,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/broadcom/bnxt/": {
+   "n_maintainers": 1,
+   "n_maintainers_literal": 2,
+   "tenure_median": 1.72,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/chelsio/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 4.67,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/hisilicon/hns3/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 1.74,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/intel/i40e/": {
+   "n_maintainers": 1,
+   "n_maintainers_literal": 2,
+   "tenure_median": 11.92,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/intel/ixgbe/": {
+   "n_maintainers": 1,
+   "n_maintainers_literal": 2,
+   "tenure_median": 11.92,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/mellanox/mlx5/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 3.33,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/wireless/ath/ath10k/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 5.55,
+   "tenure_unresolved": 0
+  },
+  "drivers/nvme/": {
+   "n_maintainers": 7,
+   "n_maintainers_literal": 8,
+   "tenure_median": 3.75,
+   "tenure_unresolved": 0
+  },
+  "drivers/scsi/lpfc/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 1.63,
+   "tenure_unresolved": 0
+  },
+  "drivers/scsi/qla2xxx/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 6.17,
+   "tenure_unresolved": 1
+  },
+  "drivers/soc/qcom/": {
+   "n_maintainers": 2,
+   "n_maintainers_literal": 3,
+   "tenure_median": 1.72,
+   "tenure_unresolved": 0
+  },
+  "drivers/usb/core/": {
+   "n_maintainers": 1,
+   "n_maintainers_literal": 2,
+   "tenure_median": 5.78,
+   "tenure_unresolved": 0
+  },
+  "fs/btrfs/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 3.87,
+   "tenure_unresolved": 0
+  },
+  "fs/ext4/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 12.19,
+   "tenure_unresolved": 0
+  },
+  "fs/f2fs/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 3.46,
+   "tenure_unresolved": 0
+  },
+  "fs/xfs/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 8.6,
+   "tenure_unresolved": 1
+  },
+  "kernel/cgroup/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 8.85,
+   "tenure_unresolved": 0
+  },
+  "kernel/irq/": {
+   "n_maintainers": 2,
+   "n_maintainers_literal": 3,
+   "tenure_median": 9.56,
+   "tenure_unresolved": 0
+  },
+  "kernel/locking/": {
+   "n_maintainers": 2,
+   "n_maintainers_literal": 3,
+   "tenure_median": 11.14,
+   "tenure_unresolved": 0
+  },
+  "kernel/printk/": {
+   "n_maintainers": 2,
+   "n_maintainers_literal": 3,
+   "tenure_median": 5.16,
+   "tenure_unresolved": 0
+  },
+  "kernel/rcu/": {
+   "n_maintainers": 7,
+   "n_maintainers_literal": 8,
+   "tenure_median": 10.75,
+   "tenure_unresolved": 0
+  },
+  "kernel/sched/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 10.59,
+   "tenure_unresolved": 0
+  },
+  "kernel/time/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 12.47,
+   "tenure_unresolved": 0
+  },
+  "kernel/trace/": {
+   "n_maintainers": 7,
+   "n_maintainers_literal": 8,
+   "tenure_median": 11.12,
+   "tenure_unresolved": 0
+  },
+  "lib/": {
+   "n_maintainers": 22,
+   "n_maintainers_literal": 23,
+   "tenure_median": 10.6,
+   "tenure_unresolved": 0
+  },
+  "mm/": {
+   "n_maintainers": 22,
+   "n_maintainers_literal": 23,
+   "tenure_median": 8.09,
+   "tenure_unresolved": 0
+  },
+  "net/core/": {
+   "n_maintainers": 8,
+   "n_maintainers_literal": 9,
+   "tenure_median": 10.71,
+   "tenure_unresolved": 0
+  },
+  "net/ipv4/": {
+   "n_maintainers": 12,
+   "n_maintainers_literal": 13,
+   "tenure_median": 12.48,
+   "tenure_unresolved": 2
+  },
+  "security/selinux/": {
+   "n_maintainers": 5,
+   "n_maintainers_literal": 6,
+   "tenure_median": 9.65,
+   "tenure_unresolved": 0
+  }
+ },
+ "v4.19": {
+  "arch/arm/mach-rockchip/": {
+   "n_maintainers": 2,
+   "n_maintainers_literal": 3,
+   "tenure_median": 4.96,
+   "tenure_unresolved": 0
+  },
+  "block/": {
+   "n_maintainers": 6,
+   "n_maintainers_literal": 7,
+   "tenure_median": 3.38,
+   "tenure_unresolved": 1
+  },
+  "drivers/gpu/drm/amd/": {
+   "n_maintainers": 12,
+   "n_maintainers_literal": 13,
+   "tenure_median": 3.42,
+   "tenure_unresolved": 0
+  },
+  "drivers/gpu/drm/i915/": {
+   "n_maintainers": 9,
+   "n_maintainers_literal": 10,
+   "tenure_median": 4.36,
+   "tenure_unresolved": 0
+  },
+  "drivers/gpu/drm/nouveau/": {
+   "n_maintainers": 5,
+   "n_maintainers_literal": 6,
+   "tenure_median": 6.6,
+   "tenure_unresolved": 0
+  },
+  "drivers/gpu/drm/radeon/": {
+   "n_maintainers": 7,
+   "n_maintainers_literal": 8,
+   "tenure_median": 6.34,
+   "tenure_unresolved": 0
+  },
+  "drivers/infiniband/hw/hfi1/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 9.26,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/broadcom/bnxt/": {
+   "n_maintainers": 2,
+   "n_maintainers_literal": 3,
+   "tenure_median": 8.09,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/chelsio/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 6.97,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/hisilicon/hns3/": {
+   "n_maintainers": 5,
+   "n_maintainers_literal": 6,
+   "tenure_median": 2.88,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/intel/i40e/": {
+   "n_maintainers": 2,
+   "n_maintainers_literal": 3,
+   "tenure_median": 13.19,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/intel/ixgbe/": {
+   "n_maintainers": 2,
+   "n_maintainers_literal": 3,
+   "tenure_median": 13.19,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/mellanox/mlx5/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 6.95,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/wireless/ath/ath10k/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 3.23,
+   "tenure_unresolved": 0
+  },
+  "drivers/nvme/": {
+   "n_maintainers": 7,
+   "n_maintainers_literal": 8,
+   "tenure_median": 4.69,
+   "tenure_unresolved": 0
+  },
+  "drivers/scsi/lpfc/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 2.57,
+   "tenure_unresolved": 0
+  },
+  "drivers/scsi/qla2xxx/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 7.11,
+   "tenure_unresolved": 1
+  },
+  "drivers/soc/qcom/": {
+   "n_maintainers": 2,
+   "n_maintainers_literal": 3,
+   "tenure_median": 2.66,
+   "tenure_unresolved": 0
+  },
+  "drivers/usb/core/": {
+   "n_maintainers": 1,
+   "n_maintainers_literal": 2,
+   "tenure_median": 6.72,
+   "tenure_unresolved": 0
+  },
+  "fs/btrfs/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 4.81,
+   "tenure_unresolved": 0
+  },
+  "fs/ext4/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 13.14,
+   "tenure_unresolved": 0
+  },
+  "fs/f2fs/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 4.4,
+   "tenure_unresolved": 0
+  },
+  "fs/xfs/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 9.54,
+   "tenure_unresolved": 1
+  },
+  "kernel/cgroup/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 8.18,
+   "tenure_unresolved": 0
+  },
+  "kernel/irq/": {
+   "n_maintainers": 2,
+   "n_maintainers_literal": 3,
+   "tenure_median": 10.5,
+   "tenure_unresolved": 0
+  },
+  "kernel/locking/": {
+   "n_maintainers": 6,
+   "n_maintainers_literal": 7,
+   "tenure_median": 11.53,
+   "tenure_unresolved": 0
+  },
+  "kernel/printk/": {
+   "n_maintainers": 2,
+   "n_maintainers_literal": 3,
+   "tenure_median": 6.1,
+   "tenure_unresolved": 0
+  },
+  "kernel/rcu/": {
+   "n_maintainers": 8,
+   "n_maintainers_literal": 9,
+   "tenure_median": 11.69,
+   "tenure_unresolved": 0
+  },
+  "kernel/sched/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 11.53,
+   "tenure_unresolved": 0
+  },
+  "kernel/time/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 13.42,
+   "tenure_unresolved": 0
+  },
+  "kernel/trace/": {
+   "n_maintainers": 7,
+   "n_maintainers_literal": 8,
+   "tenure_median": 12.06,
+   "tenure_unresolved": 0
+  },
+  "lib/": {
+   "n_maintainers": 20,
+   "n_maintainers_literal": 21,
+   "tenure_median": 11.59,
+   "tenure_unresolved": 0
+  },
+  "mm/": {
+   "n_maintainers": 22,
+   "n_maintainers_literal": 23,
+   "tenure_median": 8.94,
+   "tenure_unresolved": 0
+  },
+  "net/core/": {
+   "n_maintainers": 6,
+   "n_maintainers_literal": 7,
+   "tenure_median": 3.57,
+   "tenure_unresolved": 0
+  },
+  "net/ipv4/": {
+   "n_maintainers": 13,
+   "n_maintainers_literal": 14,
+   "tenure_median": 13.34,
+   "tenure_unresolved": 2
+  },
+  "security/selinux/": {
+   "n_maintainers": 5,
+   "n_maintainers_literal": 6,
+   "tenure_median": 13.15,
+   "tenure_unresolved": 0
+  }
+ },
+ "v5.10": {
+  "arch/arm/mach-rockchip/": {
+   "n_maintainers": 2,
+   "n_maintainers_literal": 3,
+   "tenure_median": 7.1,
+   "tenure_unresolved": 0
+  },
+  "block/": {
+   "n_maintainers": 8,
+   "n_maintainers_literal": 9,
+   "tenure_median": 9.01,
+   "tenure_unresolved": 0
+  },
+  "drivers/gpu/drm/amd/": {
+   "n_maintainers": 11,
+   "n_maintainers_literal": 12,
+   "tenure_median": 8.48,
+   "tenure_unresolved": 0
+  },
+  "drivers/gpu/drm/i915/": {
+   "n_maintainers": 10,
+   "n_maintainers_literal": 11,
+   "tenure_median": 6.94,
+   "tenure_unresolved": 0
+  },
+  "drivers/gpu/drm/nouveau/": {
+   "n_maintainers": 6,
+   "n_maintainers_literal": 7,
+   "tenure_median": 9.17,
+   "tenure_unresolved": 0
+  },
+  "drivers/gpu/drm/radeon/": {
+   "n_maintainers": 7,
+   "n_maintainers_literal": 8,
+   "tenure_median": 8.92,
+   "tenure_unresolved": 0
+  },
+  "drivers/infiniband/hw/hfi1/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 12.07,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/broadcom/bnxt/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 5.03,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/chelsio/": {
+   "n_maintainers": 8,
+   "n_maintainers_literal": 9,
+   "tenure_median": 4.28,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/hisilicon/hns3/": {
+   "n_maintainers": 6,
+   "n_maintainers_literal": 7,
+   "tenure_median": 5.03,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/intel/i40e/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 10.05,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/intel/ixgbe/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 10.05,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/mellanox/mlx5/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 7.06,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/wireless/ath/ath10k/": {
+   "n_maintainers": 5,
+   "n_maintainers_literal": 6,
+   "tenure_median": 5.37,
+   "tenure_unresolved": 0
+  },
+  "drivers/nvme/": {
+   "n_maintainers": 8,
+   "n_maintainers_literal": 9,
+   "tenure_median": 4.65,
+   "tenure_unresolved": 0
+  },
+  "drivers/scsi/lpfc/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 4.67,
+   "tenure_unresolved": 1
+  },
+  "drivers/scsi/qla2xxx/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 7.63,
+   "tenure_unresolved": 2
+  },
+  "drivers/soc/qcom/": {
+   "n_maintainers": 1,
+   "n_maintainers_literal": 2,
+   "tenure_median": 6.33,
+   "tenure_unresolved": 0
+  },
+  "drivers/usb/core/": {
+   "n_maintainers": 1,
+   "n_maintainers_literal": 2,
+   "tenure_median": 8.87,
+   "tenure_unresolved": 0
+  },
+  "fs/btrfs/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 6.11,
+   "tenure_unresolved": 0
+  },
+  "fs/ext4/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 15.28,
+   "tenure_unresolved": 0
+  },
+  "fs/f2fs/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 8.01,
+   "tenure_unresolved": 0
+  },
+  "fs/xfs/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 11.68,
+   "tenure_unresolved": 1
+  },
+  "kernel/cgroup/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 10.32,
+   "tenure_unresolved": 0
+  },
+  "kernel/irq/": {
+   "n_maintainers": 2,
+   "n_maintainers_literal": 3,
+   "tenure_median": 12.65,
+   "tenure_unresolved": 0
+  },
+  "kernel/locking/": {
+   "n_maintainers": 6,
+   "n_maintainers_literal": 7,
+   "tenure_median": 13.99,
+   "tenure_unresolved": 0
+  },
+  "kernel/printk/": {
+   "n_maintainers": 2,
+   "n_maintainers_literal": 3,
+   "tenure_median": 8.25,
+   "tenure_unresolved": 0
+  },
+  "kernel/rcu/": {
+   "n_maintainers": 8,
+   "n_maintainers_literal": 9,
+   "tenure_median": 14.46,
+   "tenure_unresolved": 0
+  },
+  "kernel/sched/": {
+   "n_maintainers": 9,
+   "n_maintainers_literal": 10,
+   "tenure_median": 11.93,
+   "tenure_unresolved": 0
+  },
+  "kernel/time/": {
+   "n_maintainers": 7,
+   "n_maintainers_literal": 8,
+   "tenure_median": 15.56,
+   "tenure_unresolved": 0
+  },
+  "kernel/trace/": {
+   "n_maintainers": 8,
+   "n_maintainers_literal": 9,
+   "tenure_median": 12.56,
+   "tenure_unresolved": 0
+  },
+  "lib/": {
+   "n_maintainers": 46,
+   "n_maintainers_literal": 47,
+   "tenure_median": 8.37,
+   "tenure_unresolved": 0
+  },
+  "mm/": {
+   "n_maintainers": 30,
+   "n_maintainers_literal": 31,
+   "tenure_median": 11.0,
+   "tenure_unresolved": 0
+  },
+  "net/core/": {
+   "n_maintainers": 20,
+   "n_maintainers_literal": 21,
+   "tenure_median": 7.6,
+   "tenure_unresolved": 0
+  },
+  "net/ipv4/": {
+   "n_maintainers": 18,
+   "n_maintainers_literal": 19,
+   "tenure_median": 10.92,
+   "tenure_unresolved": 1
+  },
+  "security/selinux/": {
+   "n_maintainers": 5,
+   "n_maintainers_literal": 6,
+   "tenure_median": 12.73,
+   "tenure_unresolved": 0
+  }
+ },
+ "v5.15": {
+  "arch/arm/mach-rockchip/": {
+   "n_maintainers": 2,
+   "n_maintainers_literal": 3,
+   "tenure_median": 7.98,
+   "tenure_unresolved": 0
+  },
+  "block/": {
+   "n_maintainers": 8,
+   "n_maintainers_literal": 9,
+   "tenure_median": 9.89,
+   "tenure_unresolved": 0
+  },
+  "drivers/gpu/drm/amd/": {
+   "n_maintainers": 12,
+   "n_maintainers_literal": 13,
+   "tenure_median": 7.96,
+   "tenure_unresolved": 0
+  },
+  "drivers/gpu/drm/i915/": {
+   "n_maintainers": 10,
+   "n_maintainers_literal": 11,
+   "tenure_median": 7.83,
+   "tenure_unresolved": 0
+  },
+  "drivers/gpu/drm/nouveau/": {
+   "n_maintainers": 6,
+   "n_maintainers_literal": 7,
+   "tenure_median": 10.05,
+   "tenure_unresolved": 0
+  },
+  "drivers/gpu/drm/radeon/": {
+   "n_maintainers": 8,
+   "n_maintainers_literal": 9,
+   "tenure_median": 9.58,
+   "tenure_unresolved": 0
+  },
+  "drivers/infiniband/hw/hfi1/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 8.08,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/broadcom/bnxt/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 5.91,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/chelsio/": {
+   "n_maintainers": 8,
+   "n_maintainers_literal": 9,
+   "tenure_median": 5.16,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/hisilicon/hns3/": {
+   "n_maintainers": 6,
+   "n_maintainers_literal": 7,
+   "tenure_median": 5.91,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/intel/i40e/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 10.93,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/intel/ixgbe/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 10.93,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/mellanox/mlx5/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 7.94,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/wireless/ath/ath10k/": {
+   "n_maintainers": 5,
+   "n_maintainers_literal": 6,
+   "tenure_median": 6.25,
+   "tenure_unresolved": 0
+  },
+  "drivers/nvme/": {
+   "n_maintainers": 8,
+   "n_maintainers_literal": 9,
+   "tenure_median": 6.64,
+   "tenure_unresolved": 0
+  },
+  "drivers/scsi/lpfc/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 5.56,
+   "tenure_unresolved": 1
+  },
+  "drivers/scsi/qla2xxx/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 8.51,
+   "tenure_unresolved": 2
+  },
+  "drivers/soc/qcom/": {
+   "n_maintainers": 1,
+   "n_maintainers_literal": 2,
+   "tenure_median": 7.21,
+   "tenure_unresolved": 0
+  },
+  "drivers/usb/core/": {
+   "n_maintainers": 1,
+   "n_maintainers_literal": 2,
+   "tenure_median": 9.75,
+   "tenure_unresolved": 0
+  },
+  "fs/btrfs/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 6.99,
+   "tenure_unresolved": 0
+  },
+  "fs/ext4/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 16.16,
+   "tenure_unresolved": 0
+  },
+  "fs/f2fs/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 8.89,
+   "tenure_unresolved": 0
+  },
+  "fs/xfs/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 8.45,
+   "tenure_unresolved": 1
+  },
+  "kernel/cgroup/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 6.8,
+   "tenure_unresolved": 0
+  },
+  "kernel/irq/": {
+   "n_maintainers": 2,
+   "n_maintainers_literal": 3,
+   "tenure_median": 13.53,
+   "tenure_unresolved": 0
+  },
+  "kernel/locking/": {
+   "n_maintainers": 6,
+   "n_maintainers_literal": 7,
+   "tenure_median": 14.87,
+   "tenure_unresolved": 0
+  },
+  "kernel/printk/": {
+   "n_maintainers": 2,
+   "n_maintainers_literal": 3,
+   "tenure_median": 3.75,
+   "tenure_unresolved": 0
+  },
+  "kernel/rcu/": {
+   "n_maintainers": 8,
+   "n_maintainers_literal": 9,
+   "tenure_median": 15.34,
+   "tenure_unresolved": 0
+  },
+  "kernel/sched/": {
+   "n_maintainers": 9,
+   "n_maintainers_literal": 10,
+   "tenure_median": 11.59,
+   "tenure_unresolved": 0
+  },
+  "kernel/time/": {
+   "n_maintainers": 7,
+   "n_maintainers_literal": 8,
+   "tenure_median": 16.44,
+   "tenure_unresolved": 0
+  },
+  "kernel/trace/": {
+   "n_maintainers": 10,
+   "n_maintainers_literal": 11,
+   "tenure_median": 13.44,
+   "tenure_unresolved": 0
+  },
+  "lib/": {
+   "n_maintainers": 54,
+   "n_maintainers_literal": 55,
+   "tenure_median": 8.12,
+   "tenure_unresolved": 0
+  },
+  "mm/": {
+   "n_maintainers": 33,
+   "n_maintainers_literal": 34,
+   "tenure_median": 11.71,
+   "tenure_unresolved": 0
+  },
+  "net/core/": {
+   "n_maintainers": 20,
+   "n_maintainers_literal": 21,
+   "tenure_median": 8.48,
+   "tenure_unresolved": 0
+  },
+  "net/ipv4/": {
+   "n_maintainers": 18,
+   "n_maintainers_literal": 19,
+   "tenure_median": 11.2,
+   "tenure_unresolved": 1
+  },
+  "security/selinux/": {
+   "n_maintainers": 5,
+   "n_maintainers_literal": 6,
+   "tenure_median": 13.62,
+   "tenure_unresolved": 0
+  }
+ },
+ "v5.4": {
+  "arch/arm/mach-rockchip/": {
+   "n_maintainers": 2,
+   "n_maintainers_literal": 3,
+   "tenure_median": 6.05,
+   "tenure_unresolved": 0
+  },
+  "block/": {
+   "n_maintainers": 8,
+   "n_maintainers_literal": 9,
+   "tenure_median": 7.95,
+   "tenure_unresolved": 0
+  },
+  "drivers/gpu/drm/amd/": {
+   "n_maintainers": 13,
+   "n_maintainers_literal": 14,
+   "tenure_median": 4.63,
+   "tenure_unresolved": 0
+  },
+  "drivers/gpu/drm/i915/": {
+   "n_maintainers": 10,
+   "n_maintainers_literal": 11,
+   "tenure_median": 5.89,
+   "tenure_unresolved": 0
+  },
+  "drivers/gpu/drm/nouveau/": {
+   "n_maintainers": 6,
+   "n_maintainers_literal": 7,
+   "tenure_median": 8.12,
+   "tenure_unresolved": 0
+  },
+  "drivers/gpu/drm/radeon/": {
+   "n_maintainers": 8,
+   "n_maintainers_literal": 9,
+   "tenure_median": 7.64,
+   "tenure_unresolved": 0
+  },
+  "drivers/infiniband/hw/hfi1/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 10.35,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/broadcom/bnxt/": {
+   "n_maintainers": 2,
+   "n_maintainers_literal": 3,
+   "tenure_median": 9.18,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/chelsio/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 5.12,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/hisilicon/hns3/": {
+   "n_maintainers": 5,
+   "n_maintainers_literal": 6,
+   "tenure_median": 3.97,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/intel/i40e/": {
+   "n_maintainers": 2,
+   "n_maintainers_literal": 3,
+   "tenure_median": 14.28,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/intel/ixgbe/": {
+   "n_maintainers": 2,
+   "n_maintainers_literal": 3,
+   "tenure_median": 14.28,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/mellanox/mlx5/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 8.04,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/wireless/ath/ath10k/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 4.32,
+   "tenure_unresolved": 0
+  },
+  "drivers/nvme/": {
+   "n_maintainers": 7,
+   "n_maintainers_literal": 8,
+   "tenure_median": 3.62,
+   "tenure_unresolved": 0
+  },
+  "drivers/scsi/lpfc/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 3.62,
+   "tenure_unresolved": 1
+  },
+  "drivers/scsi/qla2xxx/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 12.71,
+   "tenure_unresolved": 2
+  },
+  "drivers/soc/qcom/": {
+   "n_maintainers": 0,
+   "n_maintainers_literal": 1,
+   "tenure_median": null,
+   "tenure_unresolved": 0
+  },
+  "drivers/usb/core/": {
+   "n_maintainers": 1,
+   "n_maintainers_literal": 2,
+   "tenure_median": 7.81,
+   "tenure_unresolved": 0
+  },
+  "fs/btrfs/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 5.05,
+   "tenure_unresolved": 0
+  },
+  "fs/ext4/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 14.23,
+   "tenure_unresolved": 0
+  },
+  "fs/f2fs/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 6.95,
+   "tenure_unresolved": 0
+  },
+  "fs/xfs/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 10.63,
+   "tenure_unresolved": 1
+  },
+  "kernel/cgroup/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 9.27,
+   "tenure_unresolved": 0
+  },
+  "kernel/irq/": {
+   "n_maintainers": 2,
+   "n_maintainers_literal": 3,
+   "tenure_median": 11.59,
+   "tenure_unresolved": 0
+  },
+  "kernel/locking/": {
+   "n_maintainers": 6,
+   "n_maintainers_literal": 7,
+   "tenure_median": 12.47,
+   "tenure_unresolved": 1
+  },
+  "kernel/printk/": {
+   "n_maintainers": 2,
+   "n_maintainers_literal": 3,
+   "tenure_median": 7.19,
+   "tenure_unresolved": 0
+  },
+  "kernel/rcu/": {
+   "n_maintainers": 8,
+   "n_maintainers_literal": 9,
+   "tenure_median": 13.4,
+   "tenure_unresolved": 3
+  },
+  "kernel/sched/": {
+   "n_maintainers": 8,
+   "n_maintainers_literal": 9,
+   "tenure_median": 8.69,
+   "tenure_unresolved": 1
+  },
+  "kernel/time/": {
+   "n_maintainers": 6,
+   "n_maintainers_literal": 7,
+   "tenure_median": 11.74,
+   "tenure_unresolved": 0
+  },
+  "kernel/trace/": {
+   "n_maintainers": 7,
+   "n_maintainers_literal": 8,
+   "tenure_median": 13.15,
+   "tenure_unresolved": 0
+  },
+  "lib/": {
+   "n_maintainers": 30,
+   "n_maintainers_literal": 31,
+   "tenure_median": 12.68,
+   "tenure_unresolved": 0
+  },
+  "mm/": {
+   "n_maintainers": 30,
+   "n_maintainers_literal": 31,
+   "tenure_median": 9.86,
+   "tenure_unresolved": 0
+  },
+  "net/core/": {
+   "n_maintainers": 16,
+   "n_maintainers_literal": 17,
+   "tenure_median": 8.41,
+   "tenure_unresolved": 0
+  },
+  "net/ipv4/": {
+   "n_maintainers": 15,
+   "n_maintainers_literal": 16,
+   "tenure_median": 12.44,
+   "tenure_unresolved": 1
+  },
+  "security/selinux/": {
+   "n_maintainers": 5,
+   "n_maintainers_literal": 6,
+   "tenure_median": 14.24,
+   "tenure_unresolved": 0
+  }
+ },
+ "v6.1": {
+  "arch/arm/mach-rockchip/": {
+   "n_maintainers": 2,
+   "n_maintainers_literal": 3,
+   "tenure_median": 9.09,
+   "tenure_unresolved": 0
+  },
+  "block/": {
+   "n_maintainers": 8,
+   "n_maintainers_literal": 9,
+   "tenure_median": 10.09,
+   "tenure_unresolved": 0
+  },
+  "drivers/gpu/drm/amd/": {
+   "n_maintainers": 13,
+   "n_maintainers_literal": 14,
+   "tenure_median": 7.68,
+   "tenure_unresolved": 0
+  },
+  "drivers/gpu/drm/i915/": {
+   "n_maintainers": 11,
+   "n_maintainers_literal": 12,
+   "tenure_median": 9.38,
+   "tenure_unresolved": 0
+  },
+  "drivers/gpu/drm/nouveau/": {
+   "n_maintainers": 8,
+   "n_maintainers_literal": 9,
+   "tenure_median": 9.3,
+   "tenure_unresolved": 0
+  },
+  "drivers/gpu/drm/radeon/": {
+   "n_maintainers": 8,
+   "n_maintainers_literal": 9,
+   "tenure_median": 10.69,
+   "tenure_unresolved": 0
+  },
+  "drivers/infiniband/hw/hfi1/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 11.09,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/broadcom/bnxt/": {
+   "n_maintainers": 5,
+   "n_maintainers_literal": 6,
+   "tenure_median": 7.17,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/chelsio/": {
+   "n_maintainers": 8,
+   "n_maintainers_literal": 9,
+   "tenure_median": 6.65,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/hisilicon/hns3/": {
+   "n_maintainers": 8,
+   "n_maintainers_literal": 9,
+   "tenure_median": 7.02,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/intel/i40e/": {
+   "n_maintainers": 6,
+   "n_maintainers_literal": 7,
+   "tenure_median": 8.91,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/intel/ixgbe/": {
+   "n_maintainers": 6,
+   "n_maintainers_literal": 7,
+   "tenure_median": 8.91,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/mellanox/mlx5/": {
+   "n_maintainers": 6,
+   "n_maintainers_literal": 7,
+   "tenure_median": 8.91,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/wireless/ath/ath10k/": {
+   "n_maintainers": 7,
+   "n_maintainers_literal": 8,
+   "tenure_median": 7.36,
+   "tenure_unresolved": 0
+  },
+  "drivers/nvme/": {
+   "n_maintainers": 12,
+   "n_maintainers_literal": 13,
+   "tenure_median": 7.75,
+   "tenure_unresolved": 0
+  },
+  "drivers/scsi/lpfc/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 6.67,
+   "tenure_unresolved": 1
+  },
+  "drivers/scsi/qla2xxx/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 9.62,
+   "tenure_unresolved": 2
+  },
+  "drivers/soc/qcom/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 8.44,
+   "tenure_unresolved": 0
+  },
+  "drivers/usb/core/": {
+   "n_maintainers": 1,
+   "n_maintainers_literal": 2,
+   "tenure_median": 10.86,
+   "tenure_unresolved": 0
+  },
+  "fs/btrfs/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 8.1,
+   "tenure_unresolved": 0
+  },
+  "fs/ext4/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 17.27,
+   "tenure_unresolved": 0
+  },
+  "fs/f2fs/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 10.0,
+   "tenure_unresolved": 0
+  },
+  "fs/xfs/": {
+   "n_maintainers": 2,
+   "n_maintainers_literal": 3,
+   "tenure_median": 9.56,
+   "tenure_unresolved": 0
+  },
+  "kernel/cgroup/": {
+   "n_maintainers": 5,
+   "n_maintainers_literal": 6,
+   "tenure_median": 6.05,
+   "tenure_unresolved": 0
+  },
+  "kernel/irq/": {
+   "n_maintainers": 2,
+   "n_maintainers_literal": 3,
+   "tenure_median": 14.64,
+   "tenure_unresolved": 0
+  },
+  "kernel/locking/": {
+   "n_maintainers": 6,
+   "n_maintainers_literal": 7,
+   "tenure_median": 15.98,
+   "tenure_unresolved": 0
+  },
+  "kernel/printk/": {
+   "n_maintainers": 2,
+   "n_maintainers_literal": 3,
+   "tenure_median": 4.86,
+   "tenure_unresolved": 0
+  },
+  "kernel/rcu/": {
+   "n_maintainers": 10,
+   "n_maintainers_literal": 11,
+   "tenure_median": 16.45,
+   "tenure_unresolved": 0
+  },
+  "kernel/sched/": {
+   "n_maintainers": 10,
+   "n_maintainers_literal": 11,
+   "tenure_median": 12.22,
+   "tenure_unresolved": 0
+  },
+  "kernel/time/": {
+   "n_maintainers": 7,
+   "n_maintainers_literal": 8,
+   "tenure_median": 17.55,
+   "tenure_unresolved": 0
+  },
+  "kernel/trace/": {
+   "n_maintainers": 15,
+   "n_maintainers_literal": 16,
+   "tenure_median": 9.18,
+   "tenure_unresolved": 0
+  },
+  "lib/": {
+   "n_maintainers": 67,
+   "n_maintainers_literal": 68,
+   "tenure_median": 9.29,
+   "tenure_unresolved": 0
+  },
+  "mm/": {
+   "n_maintainers": 42,
+   "n_maintainers_literal": 43,
+   "tenure_median": 10.14,
+   "tenure_unresolved": 0
+  },
+  "net/core/": {
+   "n_maintainers": 24,
+   "n_maintainers_literal": 25,
+   "tenure_median": 9.59,
+   "tenure_unresolved": 0
+  },
+  "net/ipv4/": {
+   "n_maintainers": 18,
+   "n_maintainers_literal": 19,
+   "tenure_median": 10.66,
+   "tenure_unresolved": 1
+  },
+  "security/selinux/": {
+   "n_maintainers": 6,
+   "n_maintainers_literal": 7,
+   "tenure_median": 10.71,
+   "tenure_unresolved": 0
+  }
+ },
+ "v6.12": {
+  "arch/arm/mach-rockchip/": {
+   "n_maintainers": 2,
+   "n_maintainers_literal": 3,
+   "tenure_median": 11.03,
+   "tenure_unresolved": 0
+  },
+  "block/": {
+   "n_maintainers": 8,
+   "n_maintainers_literal": 9,
+   "tenure_median": 12.03,
+   "tenure_unresolved": 0
+  },
+  "drivers/gpu/drm/amd/": {
+   "n_maintainers": 15,
+   "n_maintainers_literal": 16,
+   "tenure_median": 9.04,
+   "tenure_unresolved": 0
+  },
+  "drivers/gpu/drm/i915/": {
+   "n_maintainers": 13,
+   "n_maintainers_literal": 14,
+   "tenure_median": 11.32,
+   "tenure_unresolved": 0
+  },
+  "drivers/gpu/drm/nouveau/": {
+   "n_maintainers": 8,
+   "n_maintainers_literal": 9,
+   "tenure_median": 8.83,
+   "tenure_unresolved": 0
+  },
+  "drivers/gpu/drm/radeon/": {
+   "n_maintainers": 8,
+   "n_maintainers_literal": 9,
+   "tenure_median": 12.86,
+   "tenure_unresolved": 0
+  },
+  "drivers/infiniband/hw/hfi1/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 13.02,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/broadcom/bnxt/": {
+   "n_maintainers": 6,
+   "n_maintainers_literal": 7,
+   "tenure_median": 10.85,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/chelsio/": {
+   "n_maintainers": 9,
+   "n_maintainers_literal": 10,
+   "tenure_median": 8.96,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/hisilicon/hns3/": {
+   "n_maintainers": 10,
+   "n_maintainers_literal": 11,
+   "tenure_median": 8.96,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/intel/i40e/": {
+   "n_maintainers": 7,
+   "n_maintainers_literal": 8,
+   "tenure_median": 9.1,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/intel/ixgbe/": {
+   "n_maintainers": 7,
+   "n_maintainers_literal": 8,
+   "tenure_median": 9.1,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/mellanox/mlx5/": {
+   "n_maintainers": 8,
+   "n_maintainers_literal": 9,
+   "tenure_median": 10.85,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/wireless/ath/ath10k/": {
+   "n_maintainers": 9,
+   "n_maintainers_literal": 10,
+   "tenure_median": 9.3,
+   "tenure_unresolved": 0
+  },
+  "drivers/nvme/": {
+   "n_maintainers": 12,
+   "n_maintainers_literal": 13,
+   "tenure_median": 10.46,
+   "tenure_unresolved": 0
+  },
+  "drivers/scsi/lpfc/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 13.15,
+   "tenure_unresolved": 0
+  },
+  "drivers/scsi/qla2xxx/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 17.69,
+   "tenure_unresolved": 1
+  },
+  "drivers/soc/qcom/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 7.25,
+   "tenure_unresolved": 0
+  },
+  "drivers/usb/core/": {
+   "n_maintainers": 1,
+   "n_maintainers_literal": 2,
+   "tenure_median": 12.79,
+   "tenure_unresolved": 0
+  },
+  "fs/btrfs/": {
+   "n_maintainers": 5,
+   "n_maintainers_literal": 6,
+   "tenure_median": 9.11,
+   "tenure_unresolved": 0
+  },
+  "fs/ext4/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 18.93,
+   "tenure_unresolved": 0
+  },
+  "fs/f2fs/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 11.54,
+   "tenure_unresolved": 0
+  },
+  "fs/xfs/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 7.24,
+   "tenure_unresolved": 0
+  },
+  "kernel/cgroup/": {
+   "n_maintainers": 6,
+   "n_maintainers_literal": 7,
+   "tenure_median": 6.73,
+   "tenure_unresolved": 0
+  },
+  "kernel/irq/": {
+   "n_maintainers": 2,
+   "n_maintainers_literal": 3,
+   "tenure_median": 19.49,
+   "tenure_unresolved": 0
+  },
+  "kernel/locking/": {
+   "n_maintainers": 6,
+   "n_maintainers_literal": 7,
+   "tenure_median": 17.92,
+   "tenure_unresolved": 0
+  },
+  "kernel/printk/": {
+   "n_maintainers": 1,
+   "n_maintainers_literal": 2,
+   "tenure_median": 9.19,
+   "tenure_unresolved": 0
+  },
+  "kernel/rcu/": {
+   "n_maintainers": 13,
+   "n_maintainers_literal": 14,
+   "tenure_median": 10.25,
+   "tenure_unresolved": 0
+  },
+  "kernel/sched/": {
+   "n_maintainers": 10,
+   "n_maintainers_literal": 11,
+   "tenure_median": 14.16,
+   "tenure_unresolved": 0
+  },
+  "kernel/time/": {
+   "n_maintainers": 11,
+   "n_maintainers_literal": 12,
+   "tenure_median": 8.69,
+   "tenure_unresolved": 0
+  },
+  "kernel/trace/": {
+   "n_maintainers": 15,
+   "n_maintainers_literal": 16,
+   "tenure_median": 11.11,
+   "tenure_unresolved": 0
+  },
+  "lib/": {
+   "n_maintainers": 78,
+   "n_maintainers_literal": 79,
+   "tenure_median": 12.03,
+   "tenure_unresolved": 0
+  },
+  "mm/": {
+   "n_maintainers": 48,
+   "n_maintainers_literal": 49,
+   "tenure_median": 11.05,
+   "tenure_unresolved": 0
+  },
+  "net/core/": {
+   "n_maintainers": 23,
+   "n_maintainers_literal": 24,
+   "tenure_median": 12.59,
+   "tenure_unresolved": 0
+  },
+  "net/ipv4/": {
+   "n_maintainers": 17,
+   "n_maintainers_literal": 18,
+   "tenure_median": 14.21,
+   "tenure_unresolved": 1
+  },
+  "security/selinux/": {
+   "n_maintainers": 5,
+   "n_maintainers_literal": 6,
+   "tenure_median": 18.16,
+   "tenure_unresolved": 0
+  }
+ },
+ "v6.6": {
+  "arch/arm/mach-rockchip/": {
+   "n_maintainers": 2,
+   "n_maintainers_literal": 3,
+   "tenure_median": 9.97,
+   "tenure_unresolved": 0
+  },
+  "block/": {
+   "n_maintainers": 8,
+   "n_maintainers_literal": 9,
+   "tenure_median": 10.97,
+   "tenure_unresolved": 0
+  },
+  "drivers/gpu/drm/amd/": {
+   "n_maintainers": 13,
+   "n_maintainers_literal": 14,
+   "tenure_median": 8.56,
+   "tenure_unresolved": 0
+  },
+  "drivers/gpu/drm/i915/": {
+   "n_maintainers": 11,
+   "n_maintainers_literal": 12,
+   "tenure_median": 10.26,
+   "tenure_unresolved": 0
+  },
+  "drivers/gpu/drm/nouveau/": {
+   "n_maintainers": 8,
+   "n_maintainers_literal": 9,
+   "tenure_median": 7.78,
+   "tenure_unresolved": 0
+  },
+  "drivers/gpu/drm/radeon/": {
+   "n_maintainers": 8,
+   "n_maintainers_literal": 9,
+   "tenure_median": 11.57,
+   "tenure_unresolved": 0
+  },
+  "drivers/infiniband/hw/hfi1/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 11.97,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/broadcom/bnxt/": {
+   "n_maintainers": 5,
+   "n_maintainers_literal": 6,
+   "tenure_median": 8.05,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/chelsio/": {
+   "n_maintainers": 8,
+   "n_maintainers_literal": 9,
+   "tenure_median": 7.53,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/hisilicon/hns3/": {
+   "n_maintainers": 8,
+   "n_maintainers_literal": 9,
+   "tenure_median": 7.9,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/intel/i40e/": {
+   "n_maintainers": 6,
+   "n_maintainers_literal": 7,
+   "tenure_median": 9.79,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/intel/ixgbe/": {
+   "n_maintainers": 6,
+   "n_maintainers_literal": 7,
+   "tenure_median": 9.79,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/ethernet/mellanox/mlx5/": {
+   "n_maintainers": 6,
+   "n_maintainers_literal": 7,
+   "tenure_median": 9.79,
+   "tenure_unresolved": 0
+  },
+  "drivers/net/wireless/ath/ath10k/": {
+   "n_maintainers": 8,
+   "n_maintainers_literal": 9,
+   "tenure_median": 8.25,
+   "tenure_unresolved": 0
+  },
+  "drivers/nvme/": {
+   "n_maintainers": 12,
+   "n_maintainers_literal": 13,
+   "tenure_median": 9.4,
+   "tenure_unresolved": 0
+  },
+  "drivers/scsi/lpfc/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 7.07,
+   "tenure_unresolved": 0
+  },
+  "drivers/scsi/qla2xxx/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 4.36,
+   "tenure_unresolved": 1
+  },
+  "drivers/soc/qcom/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 9.44,
+   "tenure_unresolved": 0
+  },
+  "drivers/usb/core/": {
+   "n_maintainers": 1,
+   "n_maintainers_literal": 2,
+   "tenure_median": 11.74,
+   "tenure_unresolved": 0
+  },
+  "fs/btrfs/": {
+   "n_maintainers": 5,
+   "n_maintainers_literal": 6,
+   "tenure_median": 8.06,
+   "tenure_unresolved": 0
+  },
+  "fs/ext4/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 17.88,
+   "tenure_unresolved": 0
+  },
+  "fs/f2fs/": {
+   "n_maintainers": 4,
+   "n_maintainers_literal": 5,
+   "tenure_median": 10.49,
+   "tenure_unresolved": 0
+  },
+  "fs/xfs/": {
+   "n_maintainers": 3,
+   "n_maintainers_literal": 4,
+   "tenure_median": 6.18,
+   "tenure_unresolved": 0
+  },
+  "kernel/cgroup/": {
+   "n_maintainers": 5,
+   "n_maintainers_literal": 6,
+   "tenure_median": 6.94,
+   "tenure_unresolved": 0
+  },
+  "kernel/irq/": {
+   "n_maintainers": 2,
+   "n_maintainers_literal": 3,
+   "tenure_median": 18.43,
+   "tenure_unresolved": 0
+  },
+  "kernel/locking/": {
+   "n_maintainers": 6,
+   "n_maintainers_literal": 7,
+   "tenure_median": 16.86,
+   "tenure_unresolved": 0
+  },
+  "kernel/printk/": {
+   "n_maintainers": 1,
+   "n_maintainers_literal": 2,
+   "tenure_median": 8.14,
+   "tenure_unresolved": 0
+  },
+  "kernel/rcu/": {
+   "n_maintainers": 12,
+   "n_maintainers_literal": 13,
+   "tenure_median": 13.26,
+   "tenure_unresolved": 0
+  },
+  "kernel/sched/": {
+   "n_maintainers": 10,
+   "n_maintainers_literal": 11,
+   "tenure_median": 13.1,
+   "tenure_unresolved": 0
+  },
+  "kernel/time/": {
+   "n_maintainers": 7,
+   "n_maintainers_literal": 8,
+   "tenure_median": 18.43,
+   "tenure_unresolved": 0
+  },
+  "kernel/trace/": {
+   "n_maintainers": 15,
+   "n_maintainers_literal": 16,
+   "tenure_median": 10.06,
+   "tenure_unresolved": 0
+  },
+  "lib/": {
+   "n_maintainers": 68,
+   "n_maintainers_literal": 69,
+   "tenure_median": 11.91,
+   "tenure_unresolved": 0
+  },
+  "mm/": {
+   "n_maintainers": 42,
+   "n_maintainers_literal": 43,
+   "tenure_median": 10.0,
+   "tenure_unresolved": 0
+  },
+  "net/core/": {
+   "n_maintainers": 23,
+   "n_maintainers_literal": 24,
+   "tenure_median": 10.06,
+   "tenure_unresolved": 0
+  },
+  "net/ipv4/": {
+   "n_maintainers": 18,
+   "n_maintainers_literal": 19,
+   "tenure_median": 12.22,
+   "tenure_unresolved": 1
+  },
+  "security/selinux/": {
+   "n_maintainers": 6,
+   "n_maintainers_literal": 7,
+   "tenure_median": 11.59,
+   "tenure_unresolved": 0
+  }
+ }
+}

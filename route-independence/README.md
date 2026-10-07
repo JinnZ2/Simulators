@@ -1,5 +1,11 @@
 # route-independence
 
+> **FWO-15 terms.** In this folder "enclosure", "captive" and "domesticated"
+> are used in their animal-science external-validity sense. No political
+> position is advanced. The FWO-15 order is RECONSTRUCTED (2026-10-04) from
+> a memory object not in this tree; if the original 2026-09-27 text
+> surfaces, it supersedes the order and the FWO-15 section below.
+
 Three instruments and four research designs from the FABLE WORK ORDER
 PACKET of 2026-09-26 (`WORK_ORDER.md`, verbatim). Instruments, not
 arguments: each reports what was found, its scope, and what stayed
@@ -650,3 +656,98 @@ committed alone at `a2f6ec2`, before code, because item 1 changes a threshold.
   - the A-3 statute text for G-T3 (E-A6.1-1)
   - S-4 and the individual ANCSA village corporations (E-A6.1-3)
   - the complete path list (E-A6-3)
+
+## Work order standing/A-6.2, 2026-09-29: the physical sourcing rule
+
+The order is landed verbatim as `WORK_ORDER_A6.2_2026-09-29_physical-sourcing.md`
+and committed alone at `0fdeda9`, before code, because item 0 changes what
+every status gate reads as sourced. `sourcing_a62.py` extends `standing_a61.py`
+by import. The only edit to an earlier module adds a grade to A-6.1's two
+derived counts (item 2).
+
+What did not hold, first:
+
+- **No row reads MATCH under rule 0.** The erratum's sweep kept 8 rows at MATCH
+  on carried grades (RIN_137); none of them stays MATCH (RIN_141). The span
+  store holds no records, so no carried input has a span.
+- **Rule 0 as worded has no slot for this repository's own text** (RIN_142).
+  E-A2-4 and E-A3.1-1 x2 rest on files in this tree, with span and hash but no
+  http(s) url. They read UNSOURCED_PASS as worded and MATCH under a
+  `repo:<commit>:<path>` reading. The operator decides which reading holds.
+- The A-6.1 render at `37c8e58` printed 2 derived counts with no grade
+  (RIN_143). It now prints them with the grade.
+- The agreement signal flags one credited count, A-6's "1 of P-0..P-4 for
+  some need (unit: profiles)" (RIN_145).
+- Under LITERAL coding, E-A6-3's erratum threshold (>= 3) is not met on either
+  path definition (RIN_148).
+- Rule 0 checks reproducibility, not authenticity. A constructed span at the
+  declared url passes it (RIN_150).
+
+Per item:
+
+- **0.** `rule0` reads url, retrieval_date, span and sha256, and nothing else
+  [CHOICE 84]. The gate [CHOICE 87] replaces [CHOICE 81] (RIN_140).
+- **1.** 19 rows re-gated; span N and hash N on every input of the five named
+  rows (RIN_141).
+- **2.** A derived value inherits its weakest parent's grade [CHOICE 88].
+- **3.** Identity pins (position, token, unit): only A-6.1 changes identity
+  under an unchanged total (RIN_144).
+- **4.** The fixture "3 routes via 2 chains (unit: routes)" is a FLAG and is
+  never assigned (RIN_145).
+- **5.** The erratum's sweep hard-coded the aggregate condition as not firing.
+  Run now, 0 of 9 rows change label (RIN_146).
+- **6.** E-A6-3 is rescoped to the enumerated forms of 83.11(b)(1)-(2): ITEM
+  counts 16 forms, COMBINATION 2041 paths (2036 + 5). The open remainder
+  reads NOT_EVALUABLE_BY_CONSTRUCTION (RIN_147).
+- **7.** LITERAL gives 1 vs GEOGRAPHIC 3 under ITEM, and 1 vs 1535 under
+  COMBINATION. The erratum's ">= 3" is the GEOGRAPHIC ITEM count (RIN_148).
+- **8.** `python3 route-independence/sourcing_a62.py intake LII-83.11 <date>
+  <span_file>` stores the span, and the re-evaluation reads it (RIN_149).
+
+## FWO-15, 2026-10-04 -- enclosure as corpus validity limit (RECONSTRUCTED)
+
+`WORK_ORDER_FWO-15_2026-10-04.md` is the order, verbatim. It is marked
+RECONSTRUCTED: the original 2026-09-27 text was not recovered. It was
+rebuilt from a memory object that is not in this tree, and the original
+supersedes it if found. `EXPECTED_FWO-15.md` was committed with the order
+and before any module, as at `fd198aa`. The lag count is FWO-11's
+`lag_count.py` and question selection is FWO-9's `question_space.py`;
+neither is rebuilt, and the test asserts no name is shared beyond the
+`render` / `main` CLI convention.
+
+| module | state | what it does |
+|---|---|---|
+| `enclosure_caveat_register.py` | DESIGN_WRITTEN | E1-E5 schema, frame-before-coding gate, caveat rate per arm with its frame, five branches. No corpus is in hand, so the real run reads UNMEASURED. |
+| `coupling_gradient.py` | BUILT, run on the order's seed rows | case rows with a required CONFOUNDS column, HELD list for undated coupling, CONTROL label, survivor-filter line, shared treatment dates. |
+
+Checks are printed by `python3 test_fwo15.py`, with constructed fixtures,
+one fixture per module built to fail, and REGRESSION on the summary line,
+since the same agent wrote fixtures and expected verdicts. `caveat_rate`
+is registered in `tools/known_answer.py`, with an all-ABSENT arm returning
+`None` against a measured zero.
+
+**Prior art** (`FWO-15_PRIOR_ART.md`, run first, search snippets only):
+the WEIRD paper's axis is cultural sampling, but the same group measured
+market integration as the share of purchased calories and found it
+covaries with fairness. So the food leg of the provision regime is a
+MEASURED covariate in one human sub-literature, and is not wholly absent.
+ARRIVE 2.0 item 15 is the animal-arm declaration standard. The
+animal-arm caveat is described in its own literature as rarely assessed.
+
+**Seed rows** (Build B): one entered, four HELD.
+
+```
+ENTERED  members of US organized barter exchanges | barter-accounting rule 1982
+         (TEFRA: exchanges report members on Form 1099-B)
+         verdict NOT_EVALUABLE (no before/after record)
+         would_read_if_filled CONFOUNDED_BEYOND_READ (three coincident confounds)
+HELD     Amish                  coupling instrument undated (dispute dates located, not coupling dates)
+HELD     German village groups  coupling instrument undated (not searched: population not unit-named)
+HELD     Dutch                  coupling instrument undated (not searched: population not unit-named)
+HELD     Indigenous peoples     coupling instrument undated (not searched: population not unit-named)
+```
+
+The located barter instrument does not match the order's line "barter
+less constrained 1950s-1970s, then accounted in dollars". Barter income
+was already taxable at fair market value before 1982; what the 1982 rule
+added was third-party reporting. Claims `RIN_151..RIN_160`.

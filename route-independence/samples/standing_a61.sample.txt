@@ -4,7 +4,7 @@ EXPECTED registered at 7729a07; profiles and routes CONSTRUCTED; every CE line c
 -- expected (section 5); the row not holding first
 expected NOT_EVALUABLE        E-A6.1-2  band [0, 1] (unit: chains) [CHOICE 73]; counting links only reads 1 (MATCH); reading the unsourced join as absent reads 0 and the falsifier fires (MISMATCH)
          raw NOT_EVALUABLE; hold: none; the join is unsourced (S-2, S-3); coverage 0/1 joins sourced
-expected NOT_EVALUABLE        E-A6-3    retrieved 1 residence-presuming path (unit: evidence paths), not scored; carried bound >= 3 puts >= 2 residence-presuming paths outside the retrieved text; threshold >= 1 (as delivered) NOT_EVALUABLE, threshold >= 3 (erratum) NOT_EVALUABLE; supersedes RIN_131's MATCH
+expected NOT_EVALUABLE        E-A6-3    retrieved 1 residence-presuming path (unit: evidence paths), not scored; carried bound >= 3 puts >= 2 residence-presuming paths outside the retrieved text [grade NOT_RECORDED via CE-4e, CE-4]; threshold >= 1 (as delivered) NOT_EVALUABLE, threshold >= 3 (erratum) NOT_EVALUABLE; supersedes RIN_131's MATCH
          raw NOT_EVALUABLE; hold: none; list TRUNCATED (4 retrieved of >= 11 total, erratum ERRATUM_A6.1_2026-09-29.md at a2f6ec2) [CHOICE 80]
 expected UNFALSIFIABLE_AS_RUN E-A6.1-3  0 of 1 non-control cases carry another mechanism; the one case is the aggregate, whose mechanism is the amendment's reading of the act, so no enumerated case can fire the falsifier [CHOICE 81]
          raw MATCH; hold: none until S-4 is sourced; coverage: 1 aggregate case; 0 of the 200+ village corporations enumerated; S-4 unsourced
@@ -59,7 +59,7 @@ rows reading MATCH on input below S: 0 [CHOICE 81]
    (ii)  names residence False >=50% married within the entity
    (iii) names residence False >=50% keep distinct cultural patterns
    (iv)  names residence False distinct social institutions covering >=50%
-   outside the retrieved text: >= 7 paths, of them >= 2 residence-presuming
+   outside the retrieved text: >= 7 paths, of them >= 2 residence-presuming [grade NOT_RECORDED via CE-4e, CE-4]
    complete constructed list, 1 of 11, residence in (i) only: >= 1 CONSTRUCTED_PASS, >= 3 UNMET_UNFALSIFIED
    complete constructed list, 3 of 11, residence in three: >= 1 CONSTRUCTED_PASS, >= 3 CONSTRUCTED_PASS
    flexibility clause: distinct community from 1900 to present, "understood flexibly" in context of history, geography, culture, social organization
@@ -98,7 +98,7 @@ rows reading MATCH on input below S: 0 [CHOICE 81]
       moved 'one residence_presumption_chai' False -> True
    AMENDMENT_A6_2026-09-28_eligibility-recognition.md             uncredited window 3, nearest 3 of 6
 
--- prior MATCH rows under the gate, read-only; A-1..A-5 modules not edited [CHOICE 83]
+-- prior MATCH rows under the gate, read-only; A-1..A-5 modules not edited [CHOICE 83]; the gate here is [CHOICE 81], superseded by rule 0 (sourcing_a62.py)
    settlement_split E-A1 majority CONSTRUCTED    raw MATCH  gated CONSTRUCTED_PASS  input K (the coded route rows are CONSTRUCTED)
    settlement_split E-A1 at least 2 of 3         raw MATCH  gated CONSTRUCTED_PASS  input K (the three cases' edges are CONSTRUCTED)
    gate_state       E-A2-1 (reading)             raw MATCH  gated MATCH             input S (F-W1/F-W2 carried at S (W-1))

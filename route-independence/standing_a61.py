@@ -360,6 +360,22 @@ ERRATUM_BOUNDS = {"residence_presuming_paths": 3, "total_paths": 11, "was": 1, "
                   "grade": NOT_RECORDED}
 
 
+DERIVED_VIA = ("CE-4e", "CE-4")
+
+
+def derived_grade(parents):
+    """A-6.2 item 2: a derived value inherits its weakest parent's grade; a parent off the
+    grade order (NOT_RECORDED) makes the derived value NOT_RECORDED, as in [CHOICE 66]."""
+    gs = [SOURCES_A61[x]["grade"] for x in parents]
+    if any(g not in GRADE_RANK for g in gs):
+        return NOT_RECORDED
+    return min(gs, key=lambda g: GRADE_RANK[g])
+
+
+def derived_tag(parents=DERIVED_VIA):
+    return "[grade %s via %s]" % (derived_grade(parents), ", ".join(parents))
+
+
 def residence_presuming_paths(paths=None, complete=False):
     """E-A6-3 under the erratum [CHOICE 79] [CHOICE 80]: the retrieved count over the paths
     supplied; the list is scored only if the caller declares it complete."""
@@ -372,7 +388,8 @@ def residence_presuming_paths(paths=None, complete=False):
                                "grade": ERRATUM_BOUNDS["grade"]},
             "outside_retrieved_text": {"residence_presuming": ">= %d" % max(
                 0, ERRATUM_BOUNDS["residence_presuming_paths"] - n),
-                "total": ">= %d" % max(0, ERRATUM_BOUNDS["total_paths"] - len(paths))},
+                "total": ">= %d" % max(0, ERRATUM_BOUNDS["total_paths"] - len(paths)),
+                "grade": derived_grade(DERIVED_VIA), "via": DERIVED_VIA},
             "flexibility_clause": FLEXIBILITY_CLAUSE,
             "sufficiency": "the residence path is one route to sufficiency, not a requirement", "source": "CE-4",
             "grade": SOURCES_A61["CE-4"]["grade"]}
@@ -463,10 +480,10 @@ def check_expectations():
                  "hold": "none; list TRUNCATED (%d retrieved of %s total, erratum %s at %s) [CHOICE 80]"
                          % (rp["retrieved"], rp["carried_bounds"]["total"], ERRATUM_FILE, EXPECTED_COMMIT_ERRATUM),
                  "detail": "retrieved %d residence-presuming path (unit: evidence paths), not scored; carried bound "
-                           "%s puts %s residence-presuming paths outside the retrieved text; threshold >= 1 "
+                           "%s puts %s residence-presuming paths outside the retrieved text %s; threshold >= 1 "
                            "(as delivered) %s, threshold >= 3 (erratum) %s; supersedes RIN_131's MATCH"
                            % (rp["count"], rp["carried_bounds"]["residence_presuming"],
-                              rp["outside_retrieved_text"]["residence_presuming"],
+                              rp["outside_retrieved_text"]["residence_presuming"], derived_tag(),
                               sc["status"]["E-A6-3 REVISED"], sc["status"]["E-A6-3 ERRATUM"])})
     o = ce3_other_mechanism()
     raw3 = _v("E-A6.1-3", o["count"])
@@ -704,8 +721,9 @@ def render(out=None):
                                               rp["carried_bounds"]["grade"]))
     for x in EVIDENCE_PATHS_83_11_B2:
         wr("   %-5s names residence %-5s %s\n" % (x["path"], x["names_residence"], x["text"]))
-    wr("   outside the retrieved text: >= %s paths, of them >= %s residence-presuming\n"
-       % (rp["outside_retrieved_text"]["total"][3:], rp["outside_retrieved_text"]["residence_presuming"][3:]))
+    wr("   outside the retrieved text: >= %s paths, of them >= %s residence-presuming %s\n"
+       % (rp["outside_retrieved_text"]["total"][3:], rp["outside_retrieved_text"]["residence_presuming"][3:],
+          derived_tag()))
     for label, cnt in (("1 of 11, residence in (i) only", 1), ("3 of 11, residence in three", 3)):
         paths = [{"names_residence": i < cnt} for i in range(11)]
         sc = score_e_a6_3(paths, complete=True)
@@ -742,7 +760,8 @@ def render(out=None):
         for ctx, a, b in row["moved"]:
             wr("      moved %-32r %s -> %s\n" % (ctx, a, b))
     ps = prior_sweep()
-    wr("\n-- prior MATCH rows under the gate, read-only; A-1..A-5 modules not edited [CHOICE 83]\n")
+    wr("\n-- prior MATCH rows under the gate, read-only; A-1..A-5 modules not edited [CHOICE 83]; the gate here is "
+       "[CHOICE 81], superseded by rule 0 (sourcing_a62.py)\n")
     for x in ps["rows"]:
         wr("   %-16s %-28s raw %-6s gated %-17s input %s (%s)\n"
            % (x["module"], x["row"], x["raw"], x["gated"], "/".join(x["grades"]), x["basis"]))

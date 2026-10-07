@@ -230,3 +230,20 @@ grade K, NOT_LANDED.
   - S-4
   - the individual ANCSA village corporations
   - the complete 83.11(b)(2) path list
+
+## Work order standing/A-6.2, 2026-09-29
+
+- **Rule 0.** A source is SOURCED only when its record stores a url, a
+  retrieval date, the verbatim span and the span's sha256. By that rule no
+  source in this folder is sourced: `span_store.json` holds 0 records.
+- **LII-83.11**, https://www.law.cornell.edu/cfr/text/25/83.11: the structure
+  of 25 CFR 83.11(b) as read in chat on 2026-09-29 (work order item 6). Its
+  span is not stored, so its grade is recorded NOT_RECORDED. It arrives
+  separately, since egress is blocked.
+- **Open targets.** None of these was read here:
+  - the LII span of 83.11, to be stored with `sourcing_a62.py intake`
+  - the official edition, the govinfo annual CFR (LII is not the official
+    edition)
+  - a stored span for every carried source (W-*, G-*, CE-*)
+  - the operator's decision on whether a `repo:<commit>:<path>` address
+    meets rule 0
