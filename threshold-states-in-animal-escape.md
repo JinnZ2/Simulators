@@ -439,94 +439,127 @@ class. It is REDUNDANT, not RESONANT. (Revised 2026-10-07; the previous
 pass labelled it CONTRADICTS_CLASS.)
 
 Two-reference test (DERIVED, operator-supplied 2026-10-07; precedence
-operator-supplied the same day). Built and tested as
-`threshold-states/interaction.py` (`test_interaction.py`).
+operator-supplied the same day; restated in cue-sign terms by operator
+spec decisions Q1-Q4, 2026-10-07, status PROPOSED).
+
+Implementation status: this text is ahead of the code. The spec
+decisions Q1-Q4 are not yet built in `threshold-states/interaction.py`.
+Outside cases written from this text test the text.
+
+References (Q1: the cue-sign definitions govern; the earlier all-cues
+definition of S and M is superseded):
 
 ```text
-S   = sum of the separate (unimodal) responses
-M   = the largest single (unimodal) response
-tol = {value, mode}, mode absolute | relative_to_M (see Tolerance below);
-      an undeclared tol returns UNRATED
-I   = joint - S  (the measurand of the RESONANT enum)
-
-step  condition                    relation
-0     S - M <= 2*tol               BELOW_RESOLUTION
-1     |joint - M| <= tol           REDUNDANT
-2     |joint - S| <= tol           ADDITIVE              NEW: I ~ 0, independent
-3     joint > S + tol              RESONANT
-4     M + tol < joint < S - tol    ENHANCED_SUBADDITIVE
-5     joint < M - tol              ANTAGONISTIC          OPEN class: boundary
-                                                         proposed, definition
-                                                         pending the enum's author
+S+  = sum of the cues >= 0           (facilitating)
+M   = max of the cues >= 0           (undefined when no cue is >= 0)
+N   = sum of the cues < 0            (suppressive; recorded as its own term)
+S   = S+ + N                         (full additive expectation)
+I   = joint - S                      (the measurand of the RESONANT enum)
+tol = {value, mode}, mode absolute | relative_to_M
+      absolute        tol_abs = value, in the response's own units
+      relative_to_M   tol_abs = value * M
 ```
 
-`THIN T-7` RESOLVED (2026-10-07). The earlier four rows overlapped once
-`tol > 0`, and the overlaps came from two sources:
+A cue of exactly 0 is facilitating (>= 0). With N = 0, S = S+ and every
+row below reduces to the earlier all-cues table.
 
-- REDUNDANT's band met its neighbours.
-- With S - M small, the REDUNDANT band reached the sum.
+Precedence (Q2): first match wins. Input validity, then declaration
+validity, then data sufficiency, then resolution, then classification.
 
-Step 0 removes the second: when S - M <= 2*tol the bands [M-tol, M+tol] and
-[S-tol, S+tol] touch, so the weaker cues sum to less than the instrument
-resolves. With S - M > 2*tol, rows 1-5 are disjoint and exhaustive:
+```text
+order  verdict               condition                           next action
+1      MALFORMED_INPUT       see Edge inputs                     fix the input
+2      INSUFFICIENT_CUES     fewer than 2 cues                   add cues
+3      UNRATED               no tol, or tol with no value        declare tol
+4      MODE_UNDECLARED       tol value present, mode absent      declare mode
+5      NO_FACILITATING_CUE   no cue >= 0, so M is undefined      separate suppression study
+6      BELOW_RESOLUTION      0a  S+ - M <= 2*tol_abs              tighten tol / more samples
+                                 (facilitating cues not resolvable)
+7      SUPPRESSION_OVERLAP   0b  S - M <= 2*tol_abs               model suppression explicitly
+                                 (suppression pulls S to or below
+                                 M + 2*tol_abs; report I; no class)
+8      rows 1-5 below
+```
+
+tol_abs is computed after order 5. relative_to_M needs M, so
+NO_FACILITATING_CUE precedes its use. No two verdicts share a next action.
+
+Rows 1-5 (reached only when S - M > 2*tol_abs):
+
+```text
+row  condition                          relation
+1    |joint - M| <= tol_abs             REDUNDANT
+2    |joint - S| <= tol_abs             ADDITIVE              NEW: I ~ 0, independent
+3    joint > S + tol_abs                RESONANT
+4    M + tol_abs < joint < S - tol_abs  ENHANCED_SUBADDITIVE
+5    joint < M - tol_abs                ANTAGONISTIC          OPEN class: boundary
+                                                              proposed, definition
+                                                              pending the enum's author
+```
+
+Once 0a and 0b have not fired, S - M > 2*tol_abs, so the bands are
+disjoint and exhaustive:
 
 ```text
 (-inf, M-tol)  [M-tol, M+tol]  (M+tol, S-tol)  [S-tol, S+tol]  (S+tol, inf)
  ANTAGONISTIC    REDUNDANT      ENH_SUBADDITIVE    ADDITIVE       RESONANT
 ```
 
-The module does not rely on that argument. It evaluates all five rows and
-raises if anything other than exactly one holds. A sweep over five
-(cues, tol) settings never raises and reaches every row.
+Why step 0 splits (Q1). With N < 0, suppression can pull S down to or
+below M, collapsing the M and S bands, even though the facilitating cues
+resolve (0a passes). 0b names that case SUPPRESSION_OVERLAP: it reports
+I = joint - S and assigns no class. The next action is a separate
+suppression analysis, not a reading from these rows. With N = 0, 0b
+cannot fire after 0a passes, because S = S+.
+
+Edge inputs (Q3, Q4):
+
+```text
+input                                         verdict
+fewer than 2 cues                             INSUFFICIENT_CUES
+tol absent                                    UNRATED
+tol with a mode and no value                  UNRATED   (a tol with no value is
+                                                          an undeclared tol)
+tol given as a bare number                    MODE_UNDECLARED (value present,
+                                                          mode absent)
+tol value < 0                                 MALFORMED_INPUT
+tol value = 0                                 allowed: exact comparison; must be
+                                                          explicitly declared
+a non-number anywhere: str, bool, None, NaN,  MALFORMED_INPUT (bool is refused
+  +inf, -inf                                              even though Python
+                                                          treats it as an int)
+extra keys in tol                             MALFORMED_INPUT (strict schema;
+                                                          catches a misspelled
+                                                          "mode")
+mode not in {absolute, relative_to_M}         MALFORMED_INPUT
+negative cues                                 allowed (they are N)
+```
+
+OPEN (not decided by Q1-Q4; flagged before cases are written). Q3 says a
+tol with no value is UNRATED, and Q2 lists "no tol" as UNRATED. Q4 says
+None anywhere is MALFORMED_INPUT, and MALFORMED_INPUT is matched first.
+These conflict for two inputs:
+
+- tol given as None.
+- A tol whose value is given as None (key present, value None).
+
+The text does not yet say which verdict each of the two gets.
 
 Correction: joint = S is ADDITIVE, not ENHANCED_SUBADDITIVE. The earlier
 row read `M < joint <= S` and put the sum itself in the subadditive row.
 
-Cue sign (operator-supplied 2026-10-07, after outside case OC-2; status
-PROPOSED; built in `threshold-states/interaction.py`):
+Suppression borders the open ANTAGONISTIC class. The cue-sign split is
+arithmetic and does not define antagonism; that definition stays with the
+enum's author.
 
-```text
-facilitating cues (>= 0)  S+ = sum, M = max; step 0 reads S+ - M only
-suppressive cues  (< 0)   N  = sum, recorded as its own term
-additive expectation      S  = S+ + N; rows 1-5 read joint against this S
-no facilitating cue       M undefined -> NO_FACILITATING_CUE
-```
-
-Computed consequences, pinned in `threshold-states/test_interaction.py`:
-
-- With N < 0, step 0 on S+ - M can pass while S - M <= 2*tol, so the M and
-  S bands touch, overlap or swap order. A joint in one band gets that row;
-  a joint in two raises BandsOverlap (a refusal, not a reading).
-- The split changes a reading only where S - M <= 2*tol < S+ - M. There the
-  rule before the split read BELOW_RESOLUTION.
-- With one facilitating cue S+ - M = 0, so step 0 fires whatever N is.
-  OC-2 (cues 5 and -3) still reads BELOW_RESOLUTION.
-
-Suppression borders the open ANTAGONISTIC class. This split is arithmetic
-and does not define antagonism; that definition stays with the enum's
-author.
-
-Tolerance (operator-decided 2026-10-07, after outside case OC-1):
-
-```text
-tol = {value, mode}
-  mode absolute        tol_eff = value, in the response's own units
-  mode relative_to_M   tol_eff = value * M
-  mode undeclared      REFUSE  (a bare number has no declared mode)
-  tol undeclared       UNRATED
-```
-
-OC-1 (S = 10, M = 9, joint 9.5, value 0.1) reads ENHANCED_SUBADDITIVE as
-absolute and BELOW_RESOLUTION as relative_to_M, which is why the mode has
-to be declared. Recorded: outside cases OC-3, OC-4 and OC-5 give tol as a
-bare number and so refuse under this rule. That is a case-author error
-(underspecified), not a module failure. With either mode declared they
-read what their author expected.
-
-Outside-case status. OC-1 and OC-2 are NON-INDEPENDENT: the tol rule and
-the cue-sign split were written in answer to them. Fresh outside cases
-are to be written from the spec text alone, before the fix code is seen;
-only those count toward lifting the SELF-GRADED flag.
+Outside cases. OC-1 (S = 10, M = 9, joint 9.5, value 0.1) reads
+ENHANCED_SUBADDITIVE as absolute and BELOW_RESOLUTION as relative_to_M,
+which is why the mode has to be declared. OC-3, OC-4 and OC-5 give tol as
+a bare number. That is a case-author error (underspecified), not a module
+failure. OC-1 and OC-2 are NON-INDEPENDENT: the tol rule and the
+cue-sign split were written in answer to them. Fresh outside cases are to
+be written from this text alone, before any code built from it is seen.
+Only those count toward lifting the SELF-GRADED flag.
 
 ADDITIVE is a class the target enum does not carry. It sits at I ~ 0, between
 RESONANT (I > 0) and the subadditive rows, so cues that act independently
