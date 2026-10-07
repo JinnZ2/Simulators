@@ -23,6 +23,11 @@ PIN GRAMMAR (inside the block delimited by the two marker comments)
     ka.skipped.metric     <metric id>          int          tools/known_answer.py
     rm.redirect_missing   <path>               -            tools/run_manifest.py
     rm.violation          <path>               -            tools/run_manifest.py
+    rm.archived_target_missing
+                          <path>               -            tools/run_manifest.py
+                                                            (target_state tag)
+    cg.duplicate          <path>::<name>       -            tests/test_compile_gate.py
+                                                            sweep(), run in-process
     suite.failing         <test method name>   INTENDED |   python3 -m unittest
                                                UNINTENDED   discover -s tests
                                                             (only with --suite)
@@ -77,7 +82,7 @@ END = "<!-- known-red-pins: end -->"
 
 SCALAR_KINDS = ("ka.skipped.cases", "ka.skipped.metrics")
 SET_KINDS = ("ka.skipped.metric", "rm.redirect_missing", "rm.violation",
-             "suite.failing")
+             "rm.archived_target_missing", "cg.duplicate", "suite.failing")
 KINDS = SCALAR_KINDS + SET_KINDS
 SUITE_VALUES = ("INTENDED", "UNINTENDED")
 
@@ -184,7 +189,28 @@ def run_manifest_state():
     missing = sorted(r["path"] for r in records
                      if r["class"] == "REDIRECT" and r["target_resolves"] is False)
     viol = sorted(r["path"] for r in rm.violations(records))
-    return {"redirect_missing": missing, "violation": viol}
+    archived = sorted(r["path"] for r in records
+                      if r.get("target_state") == "ARCHIVED_TARGET_MISSING")
+    return {"redirect_missing": missing, "violation": viol,
+            "archived_target_missing": archived}
+
+
+def run_compile_dupes():
+    """path::name for every top-level name bound twice, from the compile gate.
+
+    Imported from tests/test_compile_gate.py by path rather than copied, so
+    the pin and the red test read one function. None if it cannot load.
+    """
+    import importlib.util
+    path = os.path.join(ROOT, "tests", "test_compile_gate.py")
+    try:
+        spec = importlib.util.spec_from_file_location("_cg_for_pins", path)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        _n, _red, _skipped, dupes = mod.sweep()
+    except Exception:
+        return None
+    return sorted("%s::%s" % (rel, name) for rel, name, _lines in dupes)
 
 
 _FAILLINE = re.compile(r"^(FAIL|ERROR): (\S+)")
@@ -228,7 +254,7 @@ def reachable(commit):
 # comparison
 # ----------------------------------------------------------------------------
 
-def compare(pins, ka, rm_state, suite):
+def compare(pins, ka, rm_state, suite, cg=None):
     """One row per pin, plus one row per produced-but-unpinned subject.
 
     ka / rm_state / suite may be None. A source that did not run turns its
@@ -284,6 +310,13 @@ def compare(pins, ka, rm_state, suite):
     set_rows("rm.violation",
              None if rm_state is None else set(rm_state["violation"]),
              lambda s: "-")
+    set_rows("rm.archived_target_missing",
+             None if rm_state is None
+             else set(rm_state.get("archived_target_missing", [])),
+             lambda s: "-")
+    if cg is not None or "cg.duplicate" in by_kind:
+        set_rows("cg.duplicate", None if cg is None else set(cg),
+                 lambda s: "-")
     set_rows("suite.failing", None if suite is None else set(suite),
              lambda s: "FAILING")
     return rows
@@ -322,7 +355,8 @@ def check(text, with_suite=False):
     ka = run_known_answer()
     rm_state = run_manifest_state()
     suite = run_suite() if with_suite else None
-    rows = compare(pins, ka, rm_state, suite)
+    cg = run_compile_dupes()
+    rows = compare(pins, ka, rm_state, suite, cg)
     reach = {p["commit"]: reachable(p["commit"]) for p in pins}
     return rows, reach
 
@@ -439,6 +473,25 @@ def selftest():
             "the same figure pinned twice is refused")
     refuses("no block here", "a file with no block is refused")
     refuses(BEGIN + "\nPIN\n" + END, "a bare PIN line is refused")
+
+    # archived tag and compile dupes
+    p2 = parse(BEGIN + "\nPIN rm.archived_target_missing archive/f/x.py - @abcdef1"
+               "\nPIN cg.duplicate f/y.py::main - @abcdef1\n" + END)
+    rm2 = {"redirect_missing": [], "violation": [],
+           "archived_target_missing": ["archive/f/x.py"]}
+    rows = compare(p2, None, rm2, None, ["f/y.py::main"])
+    ok(all(r["state"] == "MATCH" for r in rows), "archived tag and dupe pins MATCH")
+    rows = compare(p2, None, dict(rm2, archived_target_missing=[]), None,
+                   ["f/y.py::main", "tools/k.py::_h"])
+    ok(sum(r["state"] == "MISMATCH" for r in rows) == 2,
+       "a cleared archived tag and an unpinned new dupe both mismatch")
+    rows = compare(p2, None, rm2, None, None)
+    ok(any(r["kind"] == "cg.duplicate" and r["state"] == "MISMATCH" for r in rows),
+       "compile gate not loading fails its pins rather than reading as zero")
+    rows = compare(pins, ka, dict(rmst, archived_target_missing=["a/b.py"]),
+                   ["test_x"])
+    ok(any(r["subject"] == "a/b.py" and r["state"] == "MISMATCH" for r in rows),
+       "an archived miss nobody pinned is reported")
 
     print("known_red_check selftest: checks: %d   failed: %d"
           % (n[0], len(fails)))
