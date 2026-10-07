@@ -156,3 +156,17 @@ established: in this container, both runners fail the same 3 ids.
 Nothing has been run. No model was called, no response coded. A world in
 `test_pathways.py` returning the verdict it was built for shows the
 verdict is reachable and says nothing about either file.
+
+## Still open (operator, 2026-10-07; recorded, not built)
+
+- AMENDMENT 2 (optional, dated if taken): a length-matched arm A_PAD,
+  pathway A padded to B's length, to separate content from context length.
+  Not written. PREDICTIONS.md carries amendment 1 only.
+- Pilot at k = 3 before the full run. Pilot rows are excluded from the
+  headline.
+- The merge of main (79e6374) brought #116's edits into pathway A. A is
+  now 15318 chars (it was 11475 when the predictions were registered),
+  and the NEXTSTEP feature marker `**P4. Effective-N` no longer occurs in
+  A (#116 split P4 into P4a/P4b). test_pathways.py reads 96/2 for that
+  reason. Repoint the marker, or pin A to its registered text: the
+  operator's call, not made here.
