@@ -598,3 +598,33 @@ The control's text contains the term and not the basis, so `gate()` returns
 mis-specified or the gate is missing a basis clause. That is the author's call, and
 it is left open. The module's own first comment reads "A gate that never fires is
 not a gate", and on its own positive control this one does not fire.
+
+## 13. SIXTH PASS — 2026-10-07, gate() gains the basis clause (branch claude/sense-as-match)
+
+The author's call on §12 is in: the positive control is correct, and `gate()` is missing a basis check. The work was done in order.
+
+1. **Case written first.** Before `gate()` was touched, one case was added to the root `test_sense.py`, outside the module's `run_checks()`:
+   - the term is present;
+   - the basis is present;
+   - the basis sits in a different paragraph;
+   - the expected result is `NOT_AT_MATCH_SITE`.
+2. **Unpatched run recorded.** The case was then run against the unpatched gate.
+3. **Gate patched.** `gate()` then gained [CHOICE 6]: the basis must occur, whole-word, inside at least one match site. A match site is the blank-line-delimited paragraph that holds a whole-word occurrence of the term.
+
+| control | before | after |
+|---|---|---|
+| positive control fires on a term not at the match site | FAIL | PASS |
+| score returns UNRATED on a failed gate | FAIL | PASS |
+| other 16 module checks (incl. "a located record passes", declared corpus_default) | PASS | PASS |
+| [added] fixture: term present in text | PASS | PASS |
+| [added] fixture: basis present in text | PASS | PASS |
+| [added] basis present but not at match site -> NOT_AT_MATCH_SITE | FAIL | PASS |
+| totals | 16/18 + 2/3, exit 1 | 18/18 + 3/3, exit 0 |
+
+**The patch does not refuse everything.** The two passing cases still pass. These are the located record and the declared corpus_default. A term used in two paragraphs passes when either paragraph holds the basis (spot-checked, not pinned).
+
+**Stated cost of [CHOICE 6].** A paragraph is a layout unit, not a semantic one. A sense stated across a paragraph break therefore reads `NOT_AT_MATCH_SITE`.
+
+**Root suite unchanged:** 133 run, 8 FAIL. The failing ids are identical to §12's.
+
+**The self-graded flag stays.** The added case is by the same hand as the gate it tests. A pass here is a regression result, not validation (the MSV_023 status). The flag lifts when a case authored outside this module passes against `gate()` as it stands.
