@@ -2,7 +2,7 @@
   "_note": "Cases authored outside the module (chat-side author, 2026-10-07), landed as delivered. Expectations are the author's, not this folder's. Do not edit an expectation after a run; a revised expectation is a new case with a new id.",
   "author": "chat-side",
   "authored_outside_module": true,
-  "run_against": "threshold-states/interaction.py @ 697023e",
+  "authored_against": "threshold-states/interaction.py @ 697023e",
   "lift_rule": "The SELF-GRADED flag lifts only if every case runs as authored.",
   "cases": [
     {

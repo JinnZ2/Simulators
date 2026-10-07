@@ -1,4 +1,4 @@
-outside cases (author: chat-side), run against threshold-states/interaction.py @ 697023e
+outside cases (author: chat-side), cases authored against threshold-states/interaction.py @ 697023e
 
 id    expected                   got                    verdict   tol x M reading    interaction_class.py
 OC-1  REFUSE                     ENHANCED_SUBADDITIVE   DISAGREE  BELOW_RESOLUTION   ENHANCED_SUBADDITIVE

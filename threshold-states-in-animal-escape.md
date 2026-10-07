@@ -560,6 +560,30 @@ raises if anything other than exactly one holds. A sweep over five
 Correction: joint = S is ADDITIVE, not ENHANCED_SUBADDITIVE. The earlier
 row read `M < joint <= S` and put the sum itself in the subadditive row.
 
+Cue sign (operator-supplied 2026-10-07, after outside case OC-2; built in
+`threshold-states/interaction.py`, the root build not updated):
+
+```text
+facilitating cues (>= 0)  S+ = sum, M = max; step 0 reads S+ - M only
+suppressive cues  (< 0)   N  = sum, recorded as its own term
+additive expectation      S  = S+ + N; rows 1-5 read joint against this S
+no facilitating cue       M undefined -> NO_FACILITATING_CUE
+```
+
+Computed consequences, pinned in `threshold-states/test_interaction.py`:
+
+- With N < 0, step 0 on S+ - M can pass while S - M <= 2*tol, so the M and
+  S bands touch, overlap or swap order. A joint in one band gets that row;
+  a joint in two raises BandsOverlap (a refusal, not a reading).
+- The split changes a reading only where S - M <= 2*tol < S+ - M. There the
+  rule before the split read BELOW_RESOLUTION.
+- With one facilitating cue S+ - M = 0, so step 0 fires whatever N is.
+  OC-2 (cues 5 and -3) still reads BELOW_RESOLUTION.
+
+Suppression borders the open ANTAGONISTIC class. This split is arithmetic
+and does not define antagonism; that definition stays with the enum's
+author.
+
 ADDITIVE is a class the target enum does not carry. It sits at I ~ 0, between
 RESONANT (I > 0) and the subadditive rows, so cues that act independently
 no longer fall into either.

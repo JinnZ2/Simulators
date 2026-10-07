@@ -106,7 +106,7 @@ def run(data=None):
     agree = sum(r["verdict"] == "AGREE" for r in rows)
     state = "OUTSIDE-AGREED" if agree == len(rows) else "SELF-GRADED"
     return {"rows": rows, "agree": agree, "n": len(rows), "state": state,
-            "run_against": data.get("run_against"), "author": data.get("author")}
+            "authored_against": data.get("authored_against"), "author": data.get("author")}
 
 
 def _fmt_expect(e):
@@ -114,8 +114,8 @@ def _fmt_expect(e):
 
 
 def render(res):
-    out = ["outside cases (author: %s), run against %s"
-           % (res["author"], res["run_against"]), ""]
+    out = ["outside cases (author: %s), cases authored against %s"
+           % (res["author"], res["authored_against"]), ""]
     out.append("%-5s %-26s %-22s %-9s %-18s %s" % (
         "id", "expected", "got", "verdict", "tol x M reading",
         "interaction_class.py"))

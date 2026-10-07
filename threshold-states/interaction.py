@@ -2,13 +2,20 @@
 """interaction.py -- the two-reference interaction test, with its precedence.
 
 Section 8 of threshold-states-in-animal-escape.md (repo root). A joint
-(multimodal) response is read against two references: S, the sum of the
-separate (unimodal) responses, and M, the largest single one. tol is a
-declared tolerance in the response's own units.
+(multimodal) response is read against two references: S, the additive
+expectation from the separate (unimodal) responses, and M, the largest
+single facilitating one. tol is a declared tolerance in the response's own
+units.
 
 PRECEDENCE (operator, 2026-10-07; resolves THIN T-7)
+CUE SIGN (operator, 2026-10-07, after outside case OC-2)
 
-    0.  S - M <= 2*tol             BELOW_RESOLUTION
+    facilitating cues (>= 0): S+ = their sum, M = their max
+    suppressive cues  (< 0):  N  = their sum, recorded as its own term
+    additive expectation:     S  = S+ + N; rows 1-5 read joint against S
+    no facilitating cue:      M undefined -> NO_FACILITATING_CUE  [CHOICE 2]
+
+    0.  S+ - M <= 2*tol            BELOW_RESOLUTION
     1.  |joint - M| <= tol         REDUNDANT
     2.  |joint - S| <= tol         ADDITIVE              (I ~ 0, independent)
     3.  joint > S + tol            RESONANT
@@ -20,29 +27,60 @@ PRECEDENCE (operator, 2026-10-07; resolves THIN T-7)
 
 Why step 0 exists. When S - M <= 2*tol the bands [M-tol, M+tol] and
 [S-tol, S+tol] touch or overlap, so REDUNDANT and ADDITIVE cannot be told
-apart: the weaker cues sum to less than the instrument resolves. Given
-S - M > 2*tol, rows 1-5 are disjoint and exhaustive over the real line:
+apart. With no suppressive cue S = S+, step 0 is exactly that test, and
+given it rows 1-5 are disjoint and exhaustive over the real line:
 
     (-inf, M-tol)  [M-tol, M+tol]  (M+tol, S-tol)  [S-tol, S+tol]  (S+tol, inf)
       ANTAG.         REDUNDANT       ENH_SUBADD      ADDITIVE        RESONANT
 
-classify() does not trust that argument. It evaluates all five predicates
-and raises if anything other than exactly one holds.
+With a suppressive cue (N < 0) step 0 tests S+ - M, as specified, and S - M
+can still be <= 2*tol. Then the M band and the S band touch, overlap, or
+swap order (S < M), and some joints satisfy two rows. The rows stay
+exhaustive. Where exactly one row holds, that row is returned. Where more
+than one holds, classify() raises BandsOverlap naming the rows: an
+ambiguous reading is refused, not resolved by order.  [CHOICE 1]
+
+classify() evaluates all five rows every time and does not rely on the
+band argument.
+
+Consequence, computed and pinned in test_interaction.py: the split changes
+a reading only where S - M <= 2*tol < S+ - M (plus NO_FACILITATING_CUE).
+There the pre-split rule (S = sum of all cues, step 0 on S - M) read
+BELOW_RESOLUTION; the split gives the one row that holds, or BandsOverlap.
+Everywhere else the two rules agree. The split adds N as a recorded term;
+it does not by itself give every suppressive case a reading. With one
+facilitating cue S+ - M = 0, so step 0 fires at any tol >= 0 whatever N is
+(outside case OC-2 still reads BELOW_RESOLUTION).
 
 Correction recorded: joint = S is ADDITIVE, not ENHANCED_SUBADDITIVE. The
 earlier table read "M < joint <= S" and put the sum itself in the
 subadditive row.
 
 STATES THAT ARE NOT RELATIONS
-    UNRATED            tol undeclared (None). Not a zero tolerance.
-    BELOW_RESOLUTION   step 0. A reading, not a relation between the cues.
+    NO_FACILITATING_CUE  every cue < 0, so M is undefined. Checked before
+                         tol, since it is a property of the cues.  [CHOICE 3]
+    UNRATED              tol undeclared (None). Not a zero tolerance.
+    BELOW_RESOLUTION     step 0. A reading, not a relation between the cues.
+
+CHOICES (made here, not in the operator's text)
+    [CHOICE 1]  Overlap after step 0: pointwise. A unique row is returned;
+                two or more rows raise BandsOverlap. The alternative,
+                refusing the whole case once S - M <= 2*tol, was not taken.
+    [CHOICE 2]  No facilitating cue: the operator offered "classify on N
+                alone, or flag NO_FACILITATING_CUE". No rows were given for
+                N alone, so the flag is taken.
+    [CHOICE 3]  NO_FACILITATING_CUE is returned before the tol check, so
+                such a case reads NO_FACILITATING_CUE even with tol None.
+    A cue of exactly 0 is facilitating (>= 0), per the operator's text.
 
 WHAT IT DOES NOT DO
     It does not choose tol. It does not define the ANTAGONISTIC class: it
     gives that open class a measurable boundary (joint < M - tol). The
-    definition stays with the enum's author. Boundaries are compared in the
-    caller's number type. Pass Fraction or Decimal where exact boundaries
-    matter, since a float M + tol can round across a band edge.
+    definition stays with the enum's author. Suppression (N < 0) borders
+    that class; the split above is arithmetic only and does not define
+    antagonism. Boundaries are compared in the caller's number type. Pass
+    Fraction or Decimal where exact boundaries matter, since a float
+    M + tol can round across a band edge.
 
 Stdlib only. Library module: refuses --selftest (exit 2); the checks are in
 test_interaction.py beside it.
@@ -62,12 +100,26 @@ RESONANT = "RESONANT"
 ENHANCED_SUBADDITIVE = "ENHANCED_SUBADDITIVE"
 ANTAGONISTIC = "ANTAGONISTIC"
 
+NO_FACILITATING_CUE = "NO_FACILITATING_CUE"
+
 RELATIONS = (REDUNDANT, ADDITIVE, RESONANT, ENHANCED_SUBADDITIVE, ANTAGONISTIC)
 OPEN_CLASSES = (ANTAGONISTIC,)
 
 
 class InteractionError(ValueError):
     pass
+
+
+class BandsOverlap(InteractionError):
+    """Two or more of rows 1-5 hold. Only reachable with N < 0 (see the
+    module docstring); carries the rows that held and the references."""
+
+    def __init__(self, rows, refs):
+        self.rows = rows
+        self.refs = refs
+        ValueError.__init__(self, "bands overlap after step 0 (S - M = %r, "
+                            "2*tol = %r); rows held: %r"
+                            % (refs["S"] - refs["M"], 2 * refs["tol"], rows))
 
 
 def _finite(x, what):
@@ -83,32 +135,53 @@ def _finite(x, what):
         raise InteractionError("%s must be a finite number, got %r" % (what, x))
 
 
-def references(separate):
-    """(S, M) from the separate responses. Two or more cues are required."""
+def split(separate):
+    """Cue-sign split: dict S_plus, M, N, S, n_facilitating, n_suppressive.
+
+    M is None when no cue is facilitating. Two or more cues are required.
+    """
     separate = list(separate)
     if len(separate) < 2:
         raise InteractionError("an interaction needs two or more separate "
                                "responses, got %d" % len(separate))
     for i, x in enumerate(separate):
         _finite(x, "separate[%d]" % i)
-    return sum(separate), max(separate)
+    fac = [x for x in separate if x >= 0]
+    sup = [x for x in separate if x < 0]
+    S_plus = sum(fac)
+    N = sum(sup)
+    return {"S_plus": S_plus, "M": max(fac) if fac else None, "N": N,
+            "S": S_plus + N, "n_facilitating": len(fac),
+            "n_suppressive": len(sup)}
+
+
+def references(separate):
+    """(S, M): S = S+ + N, M = max facilitating cue (None if there is none)."""
+    r = split(separate)
+    return r["S"], r["M"]
 
 
 def classify(joint, separate, tol):
-    """Return a dict: relation, step, S, M, I, tol.
+    """Return a dict: relation, step, S, M, I, tol, S_plus, N,
+    n_facilitating, n_suppressive.
 
-    relation is one of RELATIONS, or UNRATED / BELOW_RESOLUTION.
+    relation is one of RELATIONS, or NO_FACILITATING_CUE / UNRATED /
+    BELOW_RESOLUTION. Raises BandsOverlap where two rows hold.
     """
-    S, M = references(separate)
+    r = split(separate)
     _finite(joint, "joint")
-    out = {"S": S, "M": M, "I": joint - S, "tol": tol}
+    S, M = r["S"], r["M"]
+    out = dict(r, I=joint - S, tol=tol)
+    if M is None:
+        out.update(relation=NO_FACILITATING_CUE, step=None)
+        return out
     if tol is None:
         out.update(relation=UNRATED, step=None)
         return out
     _finite(tol, "tol")
     if tol < 0:
         raise InteractionError("tol must be >= 0, got %r" % (tol,))
-    if S - M <= 2 * tol:
+    if r["S_plus"] - M <= 2 * tol:
         out.update(relation=BELOW_RESOLUTION, step=0)
         return out
     rows = [
@@ -119,9 +192,11 @@ def classify(joint, separate, tol):
         (5, ANTAGONISTIC, joint < M - tol),
     ]
     hit = [(n, rel) for n, rel, cond in rows if cond]
-    if len(hit) != 1:
-        raise InteractionError("rows 1-5 must be disjoint and exhaustive "
-                               "given step 0; %d held: %r" % (len(hit), hit))
+    if len(hit) > 1:
+        raise BandsOverlap(hit, out)
+    if not hit:
+        raise InteractionError("rows 1-5 must be exhaustive; none held "
+                               "(S=%r M=%r tol=%r joint=%r)" % (S, M, tol, joint))
     out.update(relation=hit[0][1], step=hit[0][0])
     return out
 

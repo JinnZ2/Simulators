@@ -147,6 +147,124 @@ class NotRelations(unittest.TestCase):
         self.assertEqual(ix.OPEN_CLASSES, (ix.ANTAGONISTIC,))
 
 
+def pre_split(joint, sep, tol):
+    """The rule before the cue-sign split: S = sum of all cues, M = max of
+    all cues, step 0 on S - M. Same rows. interaction_class.py at the repo
+    root implements this rule."""
+    S, M = sum(sep), max(sep)
+    if S - M <= 2 * tol:
+        return ix.BELOW_RESOLUTION
+    for name, cond in ((ix.REDUNDANT, abs(joint - M) <= tol),
+                       (ix.ADDITIVE, abs(joint - S) <= tol),
+                       (ix.RESONANT, joint > S + tol),
+                       (ix.ENHANCED_SUBADDITIVE, M + tol < joint < S - tol),
+                       (ix.ANTAGONISTIC, joint < M - tol)):
+        if cond:
+            return name
+
+
+SIGNED = ([3, 7, -1], [3, 7, -2], [3, 7, -5], [3, 7, -F(1, 2)],
+          [2, 3, 7, -1, -1], [5, -3], [0, 7, -1], [3, 7], [1, 2, 7])
+
+
+def sweep(sep, tol, lo=-12, hi=20, step=F(1, 8)):
+    j = F(lo)
+    while j <= hi:
+        yield j
+        j += step
+
+
+class CueSign(unittest.TestCase):
+    """Operator spec 2026-10-07 after OC-2: S+ / M over cues >= 0, N over
+    cues < 0, S = S+ + N, step 0 on S+ - M."""
+
+    def test_split_values(self):
+        r = ix.split([3, 7, -2])
+        self.assertEqual((r["S_plus"], r["M"], r["N"], r["S"]), (10, 7, -2, 8))
+        self.assertEqual((r["n_facilitating"], r["n_suppressive"]), (2, 1))
+
+    def test_classify_carries_N(self):
+        r = ix.classify(9, [3, 7, -2], F(1, 2))
+        self.assertEqual((r["N"], r["S_plus"], r["S"], r["I"]), (-2, 10, 8, 1))
+
+    def test_zero_is_facilitating(self):
+        self.assertEqual(ix.split([0, -1])["M"], 0)
+
+    def test_no_facilitating_cue(self):
+        for tol in (1, 0, None):            # [CHOICE 3]: before the tol check
+            r = ix.classify(-3, [-1, -2], tol)
+            self.assertEqual(r["relation"], ix.NO_FACILITATING_CUE)
+            self.assertIsNone(r["M"])
+            self.assertEqual(r["N"], -3)
+
+    def test_oc2_still_below_resolution(self):
+        # one facilitating cue: S+ - M = 0 <= 2*tol, whatever N and joint
+        for j in sweep([5, -3], F(1, 10), -20, 20, 1):
+            self.assertEqual(rel(j, [5, -3], F(1, 10)), ix.BELOW_RESOLUTION)
+
+    def test_step0_reads_S_plus_not_S(self):
+        # S+ - M = 3 > 2; S - M = 2: pre-split read BELOW_RESOLUTION
+        sep = [3, 7, -1]
+        self.assertEqual(pre_split(9, sep, 1), ix.BELOW_RESOLUTION)
+        self.assertEqual(rel(F(19, 2), sep, 1), ix.ADDITIVE)
+        self.assertEqual(rel(7, sep, 1), ix.REDUNDANT)
+        self.assertEqual(rel(F(23, 2), sep, 1), ix.RESONANT)
+
+    def test_touching_bands_raise_at_the_shared_point(self):
+        # S = 9, M = 7, tol = 1: [6, 8] and [8, 10] share 8
+        with self.assertRaises(ix.BandsOverlap) as cm:
+            ix.classify(8, [3, 7, -1], 1)
+        self.assertEqual(cm.exception.rows, [(1, ix.REDUNDANT), (2, ix.ADDITIVE)])
+
+    def test_S_below_M_unique_and_overlap(self):
+        sep = [3, 7, -5]                    # S+ 10, M 7, S 5
+        self.assertEqual(rel(20, sep, 1), ix.RESONANT)
+        self.assertEqual(rel(0, sep, 1), ix.ANTAGONISTIC)
+        for j, rows in ((7, [(1, ix.REDUNDANT), (3, ix.RESONANT)]),
+                        (5, [(2, ix.ADDITIVE), (5, ix.ANTAGONISTIC)])):
+            with self.assertRaises(ix.BandsOverlap) as cm:
+                ix.classify(j, sep, 1)
+            self.assertEqual(cm.exception.rows, rows)
+
+    def test_overlap_only_where_S_minus_M_within_2tol(self):
+        hits = 0
+        for sep in SIGNED:
+            for tol in (0, F(1, 2), 1):
+                S, M = ix.references(sep)
+                for j in sweep(sep, tol):
+                    try:
+                        ix.classify(j, sep, tol)        # never zero rows
+                    except ix.BandsOverlap:
+                        hits += 1
+                        self.assertLessEqual(S - M, 2 * tol, (sep, tol, j))
+        self.assertGreater(hits, 0)
+
+    def test_split_changes_readings_only_in_the_gap_region(self):
+        changed = 0
+        for sep in SIGNED:
+            r0 = ix.split(sep)
+            for tol in (0, F(1, 2), 1):
+                gap = r0["S"] - r0["M"] <= 2 * tol < r0["S_plus"] - r0["M"]
+                for j in sweep(sep, tol):
+                    old = pre_split(j, sep, tol)
+                    try:
+                        new = ix.classify(j, sep, tol)["relation"]
+                    except ix.BandsOverlap:
+                        new = "OVERLAP"
+                    if gap:
+                        self.assertEqual(old, ix.BELOW_RESOLUTION)
+                        changed += new != old
+                    else:
+                        self.assertEqual(new, old, (sep, tol, j))
+        self.assertGreater(changed, 0)
+
+    def test_without_suppression_nothing_changes(self):
+        for sep in ([3, 7], [1, 2, 7], [0, 7], [F(5, 2), 7]):
+            for tol in (0, F(1, 2), 1):
+                for j in sweep(sep, tol):
+                    self.assertEqual(rel(j, sep, tol), pre_split(j, sep, tol))
+
+
 class Refusals(unittest.TestCase):
 
     def test_bad_inputs_raise(self):

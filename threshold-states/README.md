@@ -15,10 +15,22 @@ is the instrument; this folder holds the one part of it that computes.
       4  M + tol < joint < S - tol ENHANCED_SUBADDITIVE
       5  joint < M - tol           ANTAGONISTIC (OPEN class)
 
-  An undeclared tol is UNRATED, not zero. All five rows are evaluated, and
-  the call raises unless exactly one holds.
+  Cue sign (operator, after outside case OC-2): S+ and M are taken over the
+  facilitating cues (>= 0), N is the sum of the suppressive cues (< 0) and
+  is recorded as its own term, and S = S+ + N. Step 0 reads S+ - M.
+  - No facilitating cue: NO_FACILITATING_CUE.
+  - With N < 0 the M band and the S band can still touch or swap order
+    after step 0. A joint that satisfies one row gets it; one that
+    satisfies two raises `BandsOverlap` naming both.
+  - The split changes a reading only where S - M <= 2·tol < S+ - M; there
+    the old rule said BELOW_RESOLUTION. Pinned by test.
+  - Suppression is arithmetic here. It does not define ANTAGONISTIC.
+
+  An undeclared tol is UNRATED, not zero. All five rows are evaluated
+  every time.
 - `test_interaction.py` has one case per row, the edges at M±tol and
-  S±tol, the S - M = 2·tol edge, a Fraction sweep, and refusals.
+  S±tol, the S - M = 2·tol edge, a Fraction sweep, the cue-sign split
+  (against the old rule), and refusals.
   - Run: `python3 threshold-states/test_interaction.py`
   - Sample: `samples/test_interaction.sample.txt`
 
@@ -28,16 +40,20 @@ is the instrument; this folder holds the one part of it that computes.
   `test_outside.py` pins the result.
   - Run: `python3 threshold-states/run_outside.py` (exit 1 while any case
     disagrees)
-  - Result @ 697023e: **3 of 5 agree** (OC-3, OC-4, OC-5). OC-1 expects a
-    refusal when tol units are undeclared and gets ENHANCED_SUBADDITIVE.
-    OC-2 expects a suppressive (negative) cue not to read BELOW_RESOLUTION,
-    and it does at every joint, because S - M is the sum of the non-max cues.
+  - Result, before and after the cue-sign split: **3 of 5 agree** (OC-3,
+    OC-4, OC-5). OC-1 expects a refusal when tol units are undeclared
+    and gets ENHANCED_SUBADDITIVE. OC-2 expects a suppressive (negative)
+    cue not to read BELOW_RESOLUTION. Before the split it did, because the
+    negative cue pulled S - M below 2·tol. After the split it still does,
+    because with one facilitating cue S+ - M = 0. OC-1 and OC-2 are spent:
+    they were seen before the split was written.
   - Samples: `samples/run_outside.sample.txt`, `samples/test_outside.sample.txt`
-- Two builds of the same precedence now sit in the tree: this folder's
+- Two builds of the same precedence sit in the tree: this folder's
   `interaction.py` and `interaction_class.py` at the repo root (another
-  session, same day). They return the same verdict on all five outside
-  cases, so the two disagreements belong to the spec, not to one build.
-  Which build stays is not decided here.
+  session, same day). The root build has not taken the cue-sign split; it
+  is the old rule. On the five outside cases both builds give the same
+  verdicts, so both disagreements belong to the spec. Which build stays is
+  not decided here.
 
 SELF-GRADED: the tests and the module share an author. Nothing here
 describes any animal or any paper. Stdlib only, CC0.

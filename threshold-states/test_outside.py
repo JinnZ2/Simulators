@@ -69,8 +69,9 @@ class Run(unittest.TestCase):
                          ("RELATION", "BELOW_RESOLUTION"))
 
     def test_oc2_is_below_resolution_for_every_joint(self):
-        # S - M is the sum of the non-max cues; a negative cue makes it
-        # negative, so step 0 fires before joint is read at all.
+        # Before the cue-sign split: the negative cue made S - M negative.
+        # After it: one facilitating cue, so S+ - M = 0. Step 0 fires before
+        # joint is read either way.
         for joint in (-100, -3, 0, 2, 4, 5, 100):
             self.assertEqual(ix.classify(joint, [5, -3], 0.1)["relation"],
                              ix.BELOW_RESOLUTION)
