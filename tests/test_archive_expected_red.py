@@ -42,6 +42,7 @@ DECLARED = {
     "instrument-index": (None, "NO_SUITE", ""),
     "chain-position": ("selftest.py", "GREEN", "checks: 96   failed: 0"),
     "stability-trigger-envelope": ("test_envelope.py", "GREEN", "217 checks, 0 failed"),
+    "interaction_class": ("test_interaction_class.py", "GREEN", "33/33"),  # root build, pre-split rule
 }
 
 

@@ -1,7 +1,5 @@
 """
-test_interaction_class.py -- checks run against the canonical module
-threshold-states/interaction.py, reached through the root shim
-interaction_class.py. CC0.
+test_interaction_class.py -- checks for interaction_class.py. CC0.
 
 One case per row, the boundary cases at M +/- tol and S +/- tol, the
 step-0 edge at S - M = 2*tol exactly, and a sweep showing bands 1-5 are
@@ -29,7 +27,7 @@ def check(name, cond):
 
 
 def label(joint, separate, tol):
-    return ic.classify(joint, separate, tol)["relation"]
+    return ic.classify(joint, separate, tol)[0]
 
 
 # Reference case: separate = [2, 3] -> S = 5, M = 3; tol = 1/2.
@@ -91,32 +89,27 @@ check("tol 0, joint = M -> REDUNDANT",
       label(M, SEP, F(0)) == ic.REDUNDANT)
 check("tol 0, joint = S -> ADDITIVE",
       label(S, SEP, F(0)) == ic.ADDITIVE)
+check("tol 0, single response -> BELOW_RESOLUTION",
+      label(F(3), [F(3)], F(0)) == ic.BELOW_RESOLUTION)
 
 # --- absence and malformed input ---------------------------------------
 check("tol undeclared -> UNRATED, never a default",
       label(S, SEP, None) == ic.UNRATED)
-check("UNRATED is not a relation", ic.UNRATED not in ic.RELATIONS)
-check("BELOW_RESOLUTION is not a relation",
-      ic.BELOW_RESOLUTION not in ic.RELATIONS)
-# Canonical refusals (consolidation changed the first three; see shim).
-for bad_name, args in (("joint absent", (None, SEP, TOL)),
-                       ("single response", (F(3), [F(3)], F(0))),
-                       ("negative tol", (S, SEP, F(-1))),
-                       ("empty separate", (S, [], TOL))):
+check("joint absent -> UNRATED",
+      label(None, SEP, TOL) == ic.UNRATED)
+check("UNRATED is not a band label", ic.UNRATED not in ic.LABELS)
+for bad_name, args in (("negative tol", (S, SEP, F(-1))),
+                       ("empty separate", (S, [], TOL)),
+                       ("separate None", (S, None, TOL))):
     try:
         ic.classify(*args)
-        check("%s raises InteractionError" % bad_name, False)
-    except ic.InteractionError:
-        check("%s raises InteractionError" % bad_name, True)
-try:
-    ic.classify(S, None, TOL)
-    check("separate None refused", False)
-except TypeError:
-    check("separate None refused (TypeError, list(None))", True)
+        check("%s raises ValueError" % bad_name, False)
+    except ValueError:
+        check("%s raises ValueError" % bad_name, True)
 
 # --- step reported -----------------------------------------------------
 check("detail names step 2 for ADDITIVE",
-      ic.classify(S, SEP, TOL)["step"] == 2)
+      ic.classify(S, SEP, TOL)[1].get("step") == 2)
 
 # --- disjoint and exhaustive, by sweep ---------------------------------
 # For several (separate, tol) with step 0 not firing, every joint on a
@@ -141,7 +134,7 @@ for sep, tol in configs:
         grid += [b - EPS, b, b + EPS]
     for j in grid:
         points += 1
-        hits = sum(1 for _, _, h in ic.rows(j, s, m, tol) if h)
+        hits = sum(1 for _, h in ic.bands(j, s, m, tol) if h)
         if hits != 1:
             bad += 1
 check("bands 1-5 disjoint and exhaustive over %d points" % points, bad == 0)
@@ -149,24 +142,9 @@ check("bands 1-5 disjoint and exhaustive over %d points" % points, bad == 0)
 # The sweep can fail: on a config where step 0 SHOULD fire (S - M < 2*tol)
 # bands 1 and 2 overlap, and the same count finds a point with two hits.
 s0, m0, t0 = F(4), F(3), F(1)
-overlap = any(sum(1 for _, _, h in ic.rows(j, s0, m0, t0) if h) > 1
+overlap = any(sum(1 for _, h in ic.bands(j, s0, m0, t0) if h) > 1
               for j in (m0, s0, (m0 + s0) / 2))
 check("sweep detects overlap when step 0 is bypassed", overlap)
-
-# --- one module: the shim re-exports canonical objects -----------------
-import interaction as canon  # noqa: E402  (path set by the shim)
-check("shim classify is the canonical object", ic.classify is canon.classify)
-check("shim rows is the canonical object", ic.rows is canon.rows)
-check("shim InteractionError is canonical",
-      ic.InteractionError is canon.InteractionError)
-check("canonical path recorded",
-      ic.CANONICAL_PATH == "threshold-states/interaction.py"
-      and os.path.isfile(os.path.join(os.path.dirname(
-          os.path.abspath(__file__)), ic.CANONICAL_PATH)))
-src = open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                        "interaction_class.py")).read()
-check("shim defines no comparison logic",
-      "<=" not in src.split("def main")[0] and "abs(" not in src)
 
 # --- library refuses --selftest ----------------------------------------
 check("interaction_class.py refuses --selftest (exit 2)",

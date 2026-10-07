@@ -41,5 +41,3 @@ jobs:
         run: python -m unittest discover -s enclosure-first-residual/tests -p 'test_*.py'
       - name: threshold-states interaction (canonical)
         run: python -m unittest discover -s threshold-states -p 'test_*.py'
-      - name: interaction_class root checks (shim over threshold-states/interaction.py)
-        run: python test_interaction_class.py
