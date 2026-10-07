@@ -10981,8 +10981,7 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   confirmation from a **second trophic level** — a woodpecker whose
   face-specific foraging reads the prey distribution, so the
   aggregation is real not an observer artifact and you need the
-  woodpecker not the insects. `check_coinage.py` (selftest 22/22)
-  computes the structural facts (entry well-formed with no adopted
+  woodpecker not the insects. `check_coinage.py` computes the structural facts (entry well-formed with no adopted
   name, every rejected term reasoned, candidates raised none adopted,
   the woodpecker cross-check and the absence-set-on-behaviour instrument
   both named) and states the **null discipline on the page**: one
@@ -10996,7 +10995,25 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   surface does not afford it — the `uninstrumented/` absence set one
   substrate over, the omission the honest side. Provenance separated
   per `AUDIT_CONTRACT.md` (Kavik's lines marked, the cross-links the
-  render's). Stdlib only, parses under 3.9, phone-buildable, CC0.
+  render's). **The STATUS split of the operator's memory file** then
+  landed as a rebuild with the source absent:
+  - `/topics/coinage-log.md` is ~46.9k chars and the export truncates
+    at 8k. The chunk route is unavailable and chunk 1 was not provided.
+  - `coinage-log.md` (File A, coined terms) holds 0 entries, with its
+    count stated UNKNOWN and not 0.
+  - `vocabulary-gap-slots.md` (File B, unnamed slots / failure points /
+    status fields) holds one entry. It is seeded byte-identical from
+    the in-repo render and labelled NOT chunk 1.
+  - `MISSING_SOURCE.md` marks all 6 chunks MISSING_SOURCE, with 0 chars
+    received and nothing reconstructed.
+  - The checker's section 6 pins that state, so an arriving chunk
+    turns it red on purpose.
+  - Its seed-identity check failed on first run. The extractor matched
+    File B's prose MENTION of the `## ENTRY 001` heading before the
+    heading itself. It is repaired by anchoring at line start and
+    pinned both ways.
+  Check count printed by `python3 coinage-log/check_coinage.py
+  --selftest`. Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `frame-instruments/` — A bundle delivered as one file and written out
   verbatim (`README.md`, `liftable/five-state-grading.md`,
   `liftable/reconstruction-procedure.md`), then all three referenced
@@ -14657,6 +14674,41 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   verification port without proximity — remains the highest-priority open
   question and the one gap where recoverability from documents is not
   established. Stdlib only, selftests 19/19 and 13/13, CC0.
+- `potential/` — WORK ORDER 2026-09-29, five uploads landed verbatim and
+  built around one question: how many disjoint paths does a compulsory
+  requirement have to its satisfaction, and what happens to the count when
+  a single vertex — a token, a credential, a seat — is removed. Entry file
+  is `potential/INVENTORY.md` (the STEP 0 record and the RETURN block: every
+  delivered file, its state, every defect P-01..P-18 with what was done),
+  read beside `potential/README.md`. Five layers, each promotable alone.
+  The root transformation instrument (`transformation.py`, `perturbation.py`,
+  `baseline.py`, `ledger.py`, `perturb_cli.py`, `test_perturbation.py`)
+  reads a requirement's satisfaction paths before and after a perturbation
+  and returns a verdict with the ledger beside it, never a score. `gate/`
+  is the connectivity instrument the other layers are written over —
+  domains as graphs, channels, `NEED` → `SATISFIED`, the token vertex, κ
+  and cut vertices — the one dependency the files impose, stated in the
+  README rather than a reading order. `matrix/` is the delivered
+  functionality matrix and its lineage plus `check_attested_provenance.py`,
+  a mechanical check that every `[A]` cell names a source. `briefs/` holds
+  three of five briefs verbatim (DISSENTER_CHANNEL, REPORT, RESEARCH);
+  ENGINEERING_BRIEF and CONTINUITY_BRIEF were named and not delivered and
+  land verbatim on arrival. `tools/` is the cross-folder registry, its
+  sourced variant and a drift check. Claims `POT_021..025` in
+  `CLAIM_TABLE.md`. Sixteen defects P-01..P-16 repaired or recorded in the
+  landing; P-17 (an inner `from perturbation import PERTURBATIONS` making
+  the name function-local so the loop above it read it unassigned — fired
+  on every real invocation, masked only by P-03's earlier ImportError, now
+  pinned by an AST check that no function rebinds a module import) and
+  P-18 (a 1/1/1 fixture that could not tell verified from unverified —
+  rebuilt so the three states differ by construction and a collapsing
+  registry proves the assertion can still fail) repaired in PART B.
+  **Still blocked**: P-06..P-10 and P-13 wait on `ratio_model.py` and
+  `domains_gated.py`, both named by the delivery and not delivered — the
+  `ratio/` folder is deliberately not created and nothing is reconstructed
+  in their place; the gated schema is ABSENT. KNOWN_RED §11/§12 carry the
+  tree-level failures the landing found. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
 - `SYNTHESIS.md` — Top-level synthesis describing how the three folders
   fit together, how claims flow between them, and how to read the
   artifacts in order.

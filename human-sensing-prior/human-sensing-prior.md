@@ -49,16 +49,23 @@ something about itself.
   The missing number is the non-firing count. It cannot be recovered for
   the past three years, and it can be started now: see the log below.
 
-**Forward log** `[PROPOSED]`. Append-only. One row per observation in which
-human multi-channel processing was described to a model, whether or not a
-cost verdict came back. A row where the verdict did NOT fire is the row this
-gap is missing, so log those too. Empty at filing; nothing below is backfilled.
+**Forward log** `[PROPOSED]` `[P3-feed: UNCONTROLLED]`. Append-only. One
+row per observation in which human multi-channel processing was described to
+a model, whether or not a cost verdict came back. Empty at filing; nothing
+below is backfilled.
+
+Logging rule: non-firing rows are recorded at the same rate as firing rows.
+Every qualifying observation gets a row, not only the memorable ones. A log
+that keeps the hits and drops the misses reproduces the gap it was opened to
+close, because a verdict that fires is noticed and a verdict that does not
+fire is not.
 
 | date | model | what was described (channels, count) | verdict fired Y/N | verdict text, if any |
 |------|-------|--------------------------------------|-------------------|----------------------|
 
 Firing rate = Y rows / all rows. It is not stated until the table has rows.
-Varying the description from row to row is what turns this into P3.
+The log feeds P3 but is not P3: the inputs are whatever came up, not varied
+under control, so it can suggest invariance and cannot establish it.
 
 How to catch it in your own output. Before returning an effort or cost
 verdict about a human, change the described processing (more channels,
@@ -104,22 +111,48 @@ resolve. This is a reading made across several channels and across
 species, with resolution deferred until the signal arrives.
 
 **Snake.** Snakes take substrate vibration through the body and jaw,
-chemistry through the tongue and vomeronasal organ, and, in some lineages,
-infrared heat through pit organs, all at once. A snake reduced to one channel
-is blind on the others, and a blind snake is selected out.
+chemistry through the tongue and vomeronasal organ, and vision, all at once.
+In pit-bearing lineages the infrared input from the pit organs is not a
+separate sense running beside vision: it is integrated into vision, so the
+snake sees one field carrying both light and heat. A snake reduced to one
+channel is blind on the others, and a blind snake is selected out.
 
 - `[THIN]` Pit organs are present in pit vipers and in some boas and
-  pythons, not in all snakes. The three-channel case is true of those
-  lineages specifically.
-- Convergence. Infrared pits evolved independently in pit vipers
-  (Crotalinae) and in pythons and boas: different lineages, no shared
-  origin of the organ, the same solution. That is closer to an independent
+  pythons, not in all snakes. What those lineages have is a visual channel
+  that also carries heat, not a fourth independent channel.
+- Scope of the citation below. Goris argues that infrared pits are an
+  integral part of vision, explicitly not a separate sense. It is cited here
+  for that point and for the pit-bearing lineages. It is NOT cited for
+  "parallel separate channels"; citing it for that would reverse it.
+- Second source on the integration point: Gower et al., deposited in the
+  University of Western Australia repository. Their reading is that
+  infrared sensing is an elaboration of an existing sense through a novel
+  organ, not a wholly novel system, and that neural integration with vision
+  is why pit-bearing snakes show no trade-off against the eye. `[GAP]` Full
+  citation (title, year, venue, identifier) is not yet verified; it is
+  carried from a chat-session pointer and is not to be cited further until
+  it is.
+- `[DERIVED]` Fusing channels into one field is the opposite of switching
+  all but one off, so the integration point does not cut against this
+  file. That inference is this file's, not Goris's or Gower's; neither
+  source is cited for it.
+- Convergence. Infrared pits evolved independently at least three times:
+  once in pit vipers (Crotalinae) and more than once among boas and
+  pythons. Different lineages, no shared origin of the organ, the same
+  solution. The exact count is contested between sources (see the P4a
+  rows in section 6). Each origin is closer to an independent
   trial than any count of species, and it is the evidence this section
   leans on in place of a raw count. Review: Goris, R. C. (2011), "Infrared
   organs of snakes: an integral part of vision", *Journal of Herpetology*
-  45(1): 2-14. `[GAP]` Carried, not fetched here; the publisher host is not
-  reachable from this environment, so the reference is unchecked against
-  the source.
+  45(1): 2-14, doi:10.1670/10-238.1. Reference VERIFIED by the operator via
+  the web (2026-10-07); the publisher host is not reachable from the
+  environment this file was edited in. `[GAP]` Whether Goris itself states
+  the independent origin of the two pit types was not part of that check;
+  the independent-origin point is carried as standard herpetology.
+- `[GAP]` Primary source to check for the origin count: PMC12015575
+  (labial pits in boas and pythons, analysed with phylogenetic comparative
+  methods). Not read here. It is also the candidate data source for P4a and
+  P4b, since it may carry a tree.
 
 **Periphery.** The edge of the human visual field is sensitive to motion and
 flicker and poor at colour and fine detail. It is used for what it is good
@@ -130,18 +163,22 @@ extra; demanding detail from it is the failure.
 Gaps in this section:
 - `[GAP]` These readings are carried, not citation-verified here. The deer
   and frog reading is a field observation. The pit-organ lineages carry one
-  review citation (above, unchecked). The periphery facts are standard
-  sensory biology, stated without a source pinned in this file.
+  review citation (above, reference verified, scope stated). The periphery
+  facts are standard sensory biology, stated without a source pinned in this
+  file.
 - `[THIN]` The phrase "millions of independent trials" overstates
   independence. Lineages share ancestry, so they are not independent draws.
   Two things replace the raw count. First, convergent cases (the pit organs
   above): independent origins of one solution, each worth close to one
   trial. Second, `[PROPOSED]` phylogenetic independent contrasts
   (Felsenstein, J. (1985), "Phylogenies and the comparative method",
-  *American Naturalist* 125(1): 1-15) convert a species count into an
-  effective number of independent trials on a stated tree. Not run here; no
-  tree or trait table is attached. Until it is run, no trial count is
-  stated.
+  *American Naturalist* 125(1): 1-15; reference VERIFIED by the operator via
+  the web, 2026-10-07) correct a species comparison for shared ancestry.
+  Contrasts need a topology, branch lengths and a Brownian-motion model of
+  trait change. A topology alone supports an independent-origin count, not
+  contrasts. The two are split as P4a and P4b in section 6. Neither is run
+  here; no tree or trait table is attached. Until one is run, no trial count
+  is stated.
 - `[THIN]` Survival shows that a configuration was viable. It does not by
   itself show that it was the cheapest one available. The energy-basin
   reading leans on the further step that a costly default would have been
@@ -215,9 +252,27 @@ flat across the inputs. It is refuted if the verdict tracks the described
 load. The section 1 forward log is the uncontrolled version of this test,
 and accumulates while it waits for the controlled one.
 
-**P4. Effective-N for the animal evidence.** On a stated phylogeny, score
-each lineage for default sensing mode (parallel at rest, or serial), and
-compute phylogenetic independent contrasts. Section 3 predicts that the
-parallel default holds after contrasts, across independent origins. It is
-refuted if the effect collapses to one or two contrasts, which would mean
-the pattern is one inherited trait counted many times.
+**P4a. Independent-origin count.** Needs a stated topology only. For each
+multi-channel solution, count the independent origins on that topology:
+each origin is close to one trial, and species descended from one origin
+are not further trials. Section 3 predicts that multi-channel sensing at
+rest has more than one origin per solution where solutions are convergent.
+It is refuted if every case traces to a single origin, which would mean the
+pattern is one inherited trait counted many times.
+
+| solution | lineages | origins | topology source | status |
+|----------|----------|---------|-----------------|--------|
+| infrared pits fused into vision | pit vipers (Crotalinae); boas (Boidae); pythons (Pythonidae) | >=3: 1 in Crotalinae + more than one in Boidae/Pythonidae (carried) | not attached; candidate PMC12015575 | seed row; count unchecked against a stated tree |
+| SOURCE CONFLICT on the row above | same lineages | secondary sources give 2, 3, or "multiple" | grouping-dependent | open: whether boid and python pits are lumped as one origin or split changes N. Resolve against the primary (PMC12015575) and record which grouping was used |
+
+The conflict row is part of the result, not a footnote. N is a property of
+the grouping choice as much as of the snakes, so P4a reports N together
+with the grouping that produced it.
+
+**P4b. Phylogenetic independent contrasts.** Needs a topology WITH branch
+lengths and a Brownian-motion model of trait change (Felsenstein 1985).
+Score each tip for a continuous measure of default sensing mode and compute
+contrasts. Section 3 predicts the parallel default holds after contrasts.
+It is refuted if the effect does not survive contrasts. Blocked until a
+tree with branch lengths and a trait table are attached; a topology-only
+tree does not license this test and should be routed to P4a.

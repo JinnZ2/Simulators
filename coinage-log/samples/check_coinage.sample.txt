@@ -37,6 +37,14 @@ COINAGE LOG -- STRUCTURAL CHECK
    shown: True; missing-vs-unsearched still open: True;
    provenance separated: True
 
+6  STATUS SPLIT OF /topics/coinage-log.md (see MISSING_SOURCE.md)
+   File A coinage-log: frontmatter True, entries 0, count UNKNOWN-not-0 True
+   File B vocabulary-gap-slots: frontmatter True, entries 1 (seeded)
+   pointers A->B True, B->A True; seed identical to render True;
+   seed provenance says NOT chunk 1: True
+   chunks: 6 rows (expected 6), all MISSING_SOURCE True,
+   received 0 chars; no reconstruction declared True
+
 This module computes; it does not conclude, and it adjudicates
 no coinage. Whether the word is missing or merely unsearched is
 the log's open question -- see the STATE section.

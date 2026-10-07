@@ -1,0 +1,39 @@
+# DATA ONLY. Never code. key = value, one per line. Read by descent_record.py,
+# never written by it.
+#
+# Every value here is PLACEHOLDER: chosen so the instrument runs at all, with
+# no measurement behind it. Why a value is what it is, who set it and when is
+# in threshold_chain.txt (append-only).
+#
+# A threshold with no entry in that chain loads with provenanced = False and
+# every render prints the unprovenanced set, so the gap shows in the output
+# rather than in somebody else's traceback.
+
+# --- classify(): which body is carrying the motion --------------------------
+amplitude_ratio_hi = 3.0
+amplitude_ratio_lo = 0.3333
+
+# --- classify(): onset timing (replaces the phase window; see RUN_NOTE CHOICE 1)
+envelope_window_frac = 0.25
+onset_frac = 0.5
+onset_search_periods = 1.0
+onset_variance_floor = 1e-06
+
+# --- classify(): are the two traces on one clock ----------------------------
+clock_tolerance_s = 0.05
+rate_tolerance_frac = 0.01
+
+# --- classify(): declared reading envelope of THIS INSTRUMENT ---------------
+# Not the vehicle's validation envelope. This is the range over which the
+# instrument claims to be able to read a trace at all.
+grade_pct_min = 0.0
+grade_pct_max = 20.0
+surfaces_in_envelope = dry,wet
+
+# --- envelope_edge() --------------------------------------------------------
+min_runs_for_edge = 3
+
+# --- relocation_tally() -----------------------------------------------------
+# V2 bin edges: access roads to the drop. Bins are reported separately and are
+# never summed into one score.
+access_bins = 1,2,4

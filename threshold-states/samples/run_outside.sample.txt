@@ -1,0 +1,12 @@
+outside cases (author: chat-side), cases authored against threshold-states/interaction.py @ 697023e
+
+id    expected                  got                   verdict   status             as absolute           as relative_to_M
+OC-1  REFUSE                    REFUSE                AGREE     NON_INDEPENDENT    ENHANCED_SUBADDITIVE  BELOW_RESOLUTION
+OC-2  NOT BELOW_RESOLUTION      REFUSE                DISAGREE  NON_INDEPENDENT    BELOW_RESOLUTION      BELOW_RESOLUTION
+OC-3  EQUALS BELOW_RESOLUTION   REFUSE                DISAGREE  CASE_AUTHOR_ERROR  BELOW_RESOLUTION      BELOW_RESOLUTION
+OC-4  EQUALS ADDITIVE           REFUSE                DISAGREE  CASE_AUTHOR_ERROR  ADDITIVE              ADDITIVE
+OC-5  EQUALS RESONANT           REFUSE                DISAGREE  CASE_AUTHOR_ERROR  RESONANT              RESONANT
+
+agree 1 of 5; counted toward the lift 0 (agree 0)
+STATE: SELF-GRADED
+(the last two columns are informational and decide no verdict)

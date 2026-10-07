@@ -37,7 +37,9 @@ class TestRecordShape(unittest.TestCase):
     def test_every_record_carries_the_declared_fields(self):
         want = set(["path", "class", "invoke", "declared_exit",
                     "redirect_target", "target_resolves", "contract_ok",
-                    "reason"])
+                    "reason",
+                    # added by resolve_targets with rule (c), KNOWN_RED 19.6
+                    "target_state", "target_path"])
         for r in RECORDS:
             self.assertEqual(set(r.keys()), want, r["path"])
 

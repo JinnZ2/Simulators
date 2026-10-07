@@ -1,0 +1,8 @@
+[CHOICE 1] SHAPE = the readings linearly resampled to LENGTH points, mean removed, divided by the population standard deviation. This takes out offset, gain and sampling count, which are properties of the channel, and keeps the form.
+[CHOICE 2] distance in shape space is RMS difference between two shapes. For shapes reduced this way, RMS = sqrt(2 * (1 - r)), r the Pearson correlation, so RADIUS 0.5 means r >= 0.875.
+[CHOICE 3] an observation within RADIUS of more than one held shape splits its weight evenly between them. It is never given to the nearer one: that is the nearest-neighbour forcing the order refuses.
+[CHOICE 4] an observation within RADIUS of no held shape puts its weight on NEW, not on its nearest held shape.
+[CHOICE 5] COLLAPSE (default 0.8) must be > 0.5, so no two candidates can both reach it and a tie can never collapse.
+[CHOICE 6] MIN_OBS (default 2): a single observation carries no measure of its own dispersion, so by default it cannot be called settled. MIN_OBS 1 is allowed and declared; it still cannot produce NEW, because definiteness needs a spread and one observation has none.
+[CHOICE 7] DEFINITE = the observations weighting NEW have mean pairwise RMS distance <= SPREAD (default 0.35, r >= ~0.94). Spread of fewer than two observations is None, never 0.
+[CHOICE 8] the result of an UNCOALESCED match carries shape None. The nearest held shape is not reported, so no caller can read it as the answer.
