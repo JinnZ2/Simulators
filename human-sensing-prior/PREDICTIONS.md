@@ -365,3 +365,33 @@ it. `--emit` refuses an A or B whose sha256 differs from the pins above.
 After a merge, the registered A can be supplied with
 `--a-file`, e.g. `git show 7f780aa:human-sensing-prior/human-sensing-prior.md`.
 Testing main's A would need its own registration.
+
+## Amendment 2, note 1 (2026-10-07): the AF filler, recorded
+
+A dated note. It changes no prediction, rule, threshold or arm. It records
+what the AF filler in amendment 2 item 1 is, so the filler can be checked
+by hash.
+
+```text
+source     the standard lorem-ipsum placeholder word list (pseudo-Latin,
+           derived from Cicero, De finibus bonorum et malorum 1.32-33),
+           69 words, held in pathways.py as LOREM
+genre      typesetting placeholder text; it carries no claim, no sensing
+           vocabulary and no instruction
+build      words cycled from the first word, joined by single spaces,
+           cut to n = 1190 words; AF = A + "\n\n" + filler
+LOREM      " ".join(LOREM)       69 words     sha256 bfe69795f172797361fa75e5e335920249118ced773e2d8b308088882883e315
+filler     filler(1190)          7553 chars   sha256 1a39c66c65c72f1ab07b6f5cdd052abf19dc64e0927ea496df5102f4659fe99c
+AF text    af_text(A_reg, 1190)  18999 chars  sha256 e570b26d5659dba21c6feb791fc310c53f9d8a699035e7120485167a1179a745
+```
+
+A_reg is the registered A (sha256 1a42dc8c...cbd7). The AF arm block,
+with its arm framing, is 19030 chars against B's 19031.
+
+The P4 marker, checked against main's revision of A: P4 was split, not
+removed. The registered P4 ("Effective-N for the animal evidence",
+phylogenetic independent contrasts) now appears as P4b ("Phylogenetic
+independent contrasts", which now needs branch lengths), beside a new
+P4a ("Independent-origin count", topology only). These predictions and
+any results bind to the registered A only. Main's A is a different
+object; testing it needs its own registration before any run.
