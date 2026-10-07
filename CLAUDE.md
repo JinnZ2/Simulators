@@ -244,7 +244,7 @@ last three; read in order:
 - `coinage-log/` — naming gaps; is the absent word the finding
 - `falsifier-survey/` — Run 1 of a delivered falsifier survey; Run 2 split to its two repos
 - `crediting-rate/` — credit tracks the loanword or the contribution; BLOCKED until ordered; rev 2: three visibility bins, a same-side frame gate and a model-authorship gate, crediting mechanical, the return enum local and marked G_ABSENT
-- `crediting-rate/` — credit tracks the loanword or the contribution; BLOCKED until ordered; v2 the same order REVISED beside v1, three model-authored revisions sent un-adjudicated, one removing the input its own RETURN block keeps a class for
+- `crediting-rate/archive/f168f79/` — ARCHIVED 2026-10-05, the second rev-2 build (lost on F5, own fixtures only; cross-format NOT_RUN): credit tracks the loanword or the contribution; BLOCKED until ordered; v2 the same order REVISED beside v1, three model-authored revisions sent un-adjudicated, one removing the input its own RETURN block keeps a class for
 - `gate-check/` — four structural presence checks, file+line, no FAIL label; thresholds in data
 - `anchor-measurand-crossing/` — crossing given a target; prompts parsed from the order, scorer's judgement as data, no run
 - `anchor-position/` — same order, second build; band scored both ways, ABSENT kept apart, two arms behind flags, no run
@@ -275,6 +275,7 @@ last three; read in order:
 - `credential-channel/` — WO-10, five instruments from one field case: I-1 route rank correlation (imported) + objection coding, I-2 the routing-cost join (not procedure), I-3/I-4 gap and inventory vs exposure (imported ols), I-5 attribution at the wrong node; all constructed
 - `publication-loop-work-orders/` — WO-11/12/13, delivered verbatim as study designs and NOT built (the delivery's own line 3: "Not a code build. Do not route to a build model."); WO-11 transfers the measurand-partition designs onto model eval, WO-12 the health-utility anchor's definition-instrument mismatch, WO-13 introspective access as a training variable; documents only, no code
 - `deep-research-correction/` — an external deep-research report on the repo (Kimi) and the correction notice against it (both verbatim), plus a checker recomputing the mechanical items: C-1 forward-dated, C-2 the 157-vs-220 count, C-3 a jul-3026 URL, C-4 (load-bearing) commit-author read as contribution share scored UNPARTITIONED by imported attribution, C-5/C-6 present-in-doc, C-7 carried, U-1 the same-author void scope undeclared here
+- `law-measurement-correction/` — correction notice against an outside report (Kimi OKComputer, "Law as Unvalidated Measurement"), sections A-G verbatim, the report itself not delivered and not committed; CC-3 verification of its UNVERIFIED citations at search-index depth (every primary host egress-refused): VERIFIED 2, CONTRADICTED 2 (XSTest ran Llama-2-70b-chat-hf, not 7B; a 2005 IRS testimony published FY2004 dyed-diesel enforcement aggregates), NOT_FOUND 4; dyed-fuel column A settled as >= 3.9 lb SOLID SR26-equivalent per 1,000 bbl by spectral equivalence (26 CFR 48.4082-1), the ledger itself not located so site and zeroed/moved columns NOT_EVALUABLE; why-recovery and split-ledger/parks NAMED-AND-ABSENT; a frame-substitution eval designed (domain of answer, not refusal rate) and not built; a SECOND pass of the same dispatch, run without the report or the ledger rows after another session had landed `law-as-unvalidated-measurement/` with both, so the two folders duplicate one notice and only one should merge; the passes agree on 4 of 8 CC-3 rows and every disagreement is a NOT_FOUND against a located source, the located one reproducing on re-query in all 3 checkable cases (`RECONCILIATION.md`)
 - `reporting-chain-loss/` — WO-5, transit loss and pre-entry loss kept apart: a linear-Gaussian hop chain whose terminal is an estimator of the composed incentive stack not the ground (reader bias B/G amplifies with the chain, directed loss compounds where random cancels, the DPI floor used as null not re-derived), plus the pre-entry register (7 gates none logged) and Test B calibration with the delegation confound made a number and the proxy-undeclared refusal built in
 - `chain-position/` — WO-1, can a container detect it is a step in an unobservable chain; the OWASP clause audit returns the null the order predicts (lineage exists at the gateway, 0 clauses place position inside the agent) and the null is the finding, the reachable-controller compounding made a number (four factors 0.9035) with the unassessed-factor RULE built in as UNPROPAGATABLE, and the second-order gap UNEXAMINED vs NOT_AUDITABLE on the scorer's own provenance
 - `terminal-crossing/` — WO-3, is any system TERMINAL; the six conditions parsed from the order not retyped, the falsifier attacked and moved from UNSATISFIED to UNSATISFIABLE by an uncovered unshieldable medium, the three asymptotes returning three distinct shapes and none a zero, TERMINAL reachable only on a constructed control
@@ -10979,8 +10980,7 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   confirmation from a **second trophic level** — a woodpecker whose
   face-specific foraging reads the prey distribution, so the
   aggregation is real not an observer artifact and you need the
-  woodpecker not the insects. `check_coinage.py` (selftest 22/22)
-  computes the structural facts (entry well-formed with no adopted
+  woodpecker not the insects. `check_coinage.py` computes the structural facts (entry well-formed with no adopted
   name, every rejected term reasoned, candidates raised none adopted,
   the woodpecker cross-check and the absence-set-on-behaviour instrument
   both named) and states the **null discipline on the page**: one
@@ -10994,7 +10994,25 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   surface does not afford it — the `uninstrumented/` absence set one
   substrate over, the omission the honest side. Provenance separated
   per `AUDIT_CONTRACT.md` (Kavik's lines marked, the cross-links the
-  render's). Stdlib only, parses under 3.9, phone-buildable, CC0.
+  render's). **The STATUS split of the operator's memory file** then
+  landed as a rebuild with the source absent:
+  - `/topics/coinage-log.md` is ~46.9k chars and the export truncates
+    at 8k. The chunk route is unavailable and chunk 1 was not provided.
+  - `coinage-log.md` (File A, coined terms) holds 0 entries, with its
+    count stated UNKNOWN and not 0.
+  - `vocabulary-gap-slots.md` (File B, unnamed slots / failure points /
+    status fields) holds one entry. It is seeded byte-identical from
+    the in-repo render and labelled NOT chunk 1.
+  - `MISSING_SOURCE.md` marks all 6 chunks MISSING_SOURCE, with 0 chars
+    received and nothing reconstructed.
+  - The checker's section 6 pins that state, so an arriving chunk
+    turns it red on purpose.
+  - Its seed-identity check failed on first run. The extractor matched
+    File B's prose MENTION of the `## ENTRY 001` heading before the
+    heading itself. It is repaired by anchoring at line start and
+    pinned both ways.
+  Check count printed by `python3 coinage-log/check_coinage.py
+  --selftest`. Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `frame-instruments/` — A bundle delivered as one file and written out
   verbatim (`README.md`, `liftable/five-state-grading.md`,
   `liftable/reconstruction-procedure.md`), then all three referenced
@@ -11214,6 +11232,14 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   claims `CRD_001..024`; check counts printed by `python3
   crediting-rate/crediting_rate.py --selftest` and `--selftest` on the v2
   module. Stdlib only, parses under 3.9, CC0.
+  **ARCHIVED 2026-10-05, and what follows describes the archived build.**
+  Two rev-2 builds were spliced by merge `e167a67`. They are separated now:
+  `crediting_rate_v2.py` is `e4f5418` byte-identical, and the build below
+  sits byte-identical in `crediting-rate/archive/f168f79/`. The live build
+  is kept on F5: the gap vanishes under N2, and only it changes the verdict
+  (UNKNOWN_measurable against ETYMOLOGY_TRACKING). Graded on own fixtures
+  only; cross-format NOT_RUN (`CRD_025`). The ids below are
+  `archive/f168f79 CRD_0nn`.
   **The same order then arrived REVISED** (`WORK_ORDER_V2.md`, verbatim
   beside the first, neither superseding and `crediting_rate.py` unedited),
   with `crediting_rate_v2.py` importing v1 for every piece the revision
@@ -13974,6 +14000,10 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   Eleven `STE_*` claims (STE_011: X6, a trailer lead of a quarter
   period, reads TRAILER_LEADS at -1.8 s against a constructed 2.0 s on the
   first run, recorded before any repair); test 49/49. Stdlib only, CC0.
+- `human-sensing-prior/` — one-file CC0 instrument against the AI prior that human
+  multi-channel sensing is costly: full-array parallel sensing is the energy basin, forced
+  single-channel processing the deviation; the invariant-verdict tell, the projection
+  mechanism, an animal evidence base, gaps marked in-line, three PROPOSED tests. No code.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
@@ -14535,7 +14565,32 @@ ship a `requirements.txt`. Each folder ships `samples/`.
     combination); the erratum's ">= 3" is the GEOGRAPHIC count (`RIN_148`).
   - `span_store.json` ships empty, and `intake` is ready for the 83.11 span
     (`RIN_149`).
-  One hundred and fifty `RIN_*` claims;
+  **FWO-15 (2026-10-04, enclosure as corpus validity limit)** landed with its
+  order marked RECONSTRUCTED from a memory object not in this tree, and
+  `EXPECTED_FWO-15.md` committed with it at `b279bdf` before any module.
+  Terms ("enclosure", "captive", "domesticated") are stated at the top of
+  the folder README in their animal-science external-validity sense.
+  - **Prior art, run first, search snippets only** (`FWO-15_PRIOR_ART.md`):
+    the WEIRD paper's axis is cultural sampling, but the same group measured
+    market integration as the share of purchased calories, so the food leg
+    of the provision regime is a measured covariate in one human
+    sub-literature (`RIN_152`). ARRIVE 2.0 item 15 is the animal-arm
+    declaration standard, and that literature calls the caveat rarely
+    assessed (`RIN_153`).
+  - `enclosure_caveat_register.py` is DESIGN_WRITTEN: E1-E5 schema, a
+    frame-before-coding gate, caveat rate per arm with its frame, and the
+    order's branches plus INDETERMINATE. With no corpus the real run reads
+    UNMEASURED (`RIN_156`). `caveat_rate` is registered in
+    `tools/known_answer.py`.
+  - `coupling_gradient.py` is BUILT and was run on the order's five seed
+    rows: one entered (US barter exchanges, TEFRA 1982) and four HELD for an
+    undated instrument (`RIN_157`). The located barter instrument added
+    third-party reporting, not dollar accounting, since barter was already
+    taxable at fair market value (`RIN_158`). The case schema cannot record a
+    de-coupling (`RIN_159`).
+  - The scope assertion registered in EXPECTED failed as written on
+    `render`/`main` and was narrowed on the record (`RIN_155`).
+  One hundred and sixty `RIN_*` claims;
   check counts printed by `python3 route-independence/test_route.py`,
   `python3 route-independence/test_dependency_chain.py`,
   `python3 route-independence/test_single_channel.py`,
@@ -14545,8 +14600,9 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `python3 route-independence/test_thermal_gates.py`,
   `python3 route-independence/test_repairs_a31.py`,
   `python3 route-independence/test_chains_a456.py`,
-  `python3 route-independence/test_standing_a61.py` and
-  `python3 route-independence/test_sourcing_a62.py`, the last nine also
+  `python3 route-independence/test_standing_a61.py`,
+  `python3 route-independence/test_sourcing_a62.py` and
+  `python3 route-independence/test_fwo15.py`, the last ten also
   printing the fail-fixture line. Stdlib only,
   parses under 3.9, phone-buildable, CC0.
 - `custody-verification-band/` — Marker under exploration. Criterion: a layer
@@ -14600,6 +14656,41 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   verification port without proximity — remains the highest-priority open
   question and the one gap where recoverability from documents is not
   established. Stdlib only, selftests 19/19 and 13/13, CC0.
+- `potential/` — WORK ORDER 2026-09-29, five uploads landed verbatim and
+  built around one question: how many disjoint paths does a compulsory
+  requirement have to its satisfaction, and what happens to the count when
+  a single vertex — a token, a credential, a seat — is removed. Entry file
+  is `potential/INVENTORY.md` (the STEP 0 record and the RETURN block: every
+  delivered file, its state, every defect P-01..P-18 with what was done),
+  read beside `potential/README.md`. Five layers, each promotable alone.
+  The root transformation instrument (`transformation.py`, `perturbation.py`,
+  `baseline.py`, `ledger.py`, `perturb_cli.py`, `test_perturbation.py`)
+  reads a requirement's satisfaction paths before and after a perturbation
+  and returns a verdict with the ledger beside it, never a score. `gate/`
+  is the connectivity instrument the other layers are written over —
+  domains as graphs, channels, `NEED` → `SATISFIED`, the token vertex, κ
+  and cut vertices — the one dependency the files impose, stated in the
+  README rather than a reading order. `matrix/` is the delivered
+  functionality matrix and its lineage plus `check_attested_provenance.py`,
+  a mechanical check that every `[A]` cell names a source. `briefs/` holds
+  three of five briefs verbatim (DISSENTER_CHANNEL, REPORT, RESEARCH);
+  ENGINEERING_BRIEF and CONTINUITY_BRIEF were named and not delivered and
+  land verbatim on arrival. `tools/` is the cross-folder registry, its
+  sourced variant and a drift check. Claims `POT_021..025` in
+  `CLAIM_TABLE.md`. Sixteen defects P-01..P-16 repaired or recorded in the
+  landing; P-17 (an inner `from perturbation import PERTURBATIONS` making
+  the name function-local so the loop above it read it unassigned — fired
+  on every real invocation, masked only by P-03's earlier ImportError, now
+  pinned by an AST check that no function rebinds a module import) and
+  P-18 (a 1/1/1 fixture that could not tell verified from unverified —
+  rebuilt so the three states differ by construction and a collapsing
+  registry proves the assertion can still fail) repaired in PART B.
+  **Still blocked**: P-06..P-10 and P-13 wait on `ratio_model.py` and
+  `domains_gated.py`, both named by the delivery and not delivered — the
+  `ratio/` folder is deliberately not created and nothing is reconstructed
+  in their place; the gated schema is ABSENT. KNOWN_RED §11/§12 carry the
+  tree-level failures the landing found. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
 - `SYNTHESIS.md` — Top-level synthesis describing how the three folders
   fit together, how claims flow between them, and how to read the
   artifacts in order.
@@ -14632,10 +14723,11 @@ on that branch.
   later (e.g. `emergence-stability-simulator` is sketched as a standalone
   CC0 repo in its notes).
 
-<!-- clone-refspec-note v1 -->
+<!-- clone-refspec-note v1.1 -->
 ## Cloning and pushing
 Shallow clones are single-branch by default.
-Before pushing any branch other than main, run:
+Before pushing any branch other than the default
+branch, run:
 
     git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
     git fetch --depth 1
@@ -14644,4 +14736,4 @@ Or clone with: git clone --depth 1 --no-single-branch <url>
 Without this, the first push of a new branch
 fails the tracking-ref check even when the
 commit landed.
-<!-- /clone-refspec-note v1 -->
+<!-- /clone-refspec-note v1.1 -->
