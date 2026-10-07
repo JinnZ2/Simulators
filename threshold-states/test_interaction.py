@@ -149,8 +149,8 @@ class NotRelations(unittest.TestCase):
 
 def pre_split(joint, sep, tol):
     """The rule before the cue-sign split: S = sum of all cues, M = max of
-    all cues, step 0 on S - M. Same rows. interaction_class.py at the repo
-    root implements this rule."""
+    all cues, step 0 on S - M. Same rows. The root interaction_class.py
+    implemented this rule before it became a shim over this module."""
     S, M = sum(sep), max(sep)
     if S - M <= 2 * tol:
         return ix.BELOW_RESOLUTION

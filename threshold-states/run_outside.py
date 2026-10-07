@@ -20,6 +20,9 @@ A second build of the same precedence exists at the repo root
 (interaction_class.py, another session, merged the same day). Its verdicts
 on the same cases are printed beside the first and also decide nothing:
 they show whether a disagreement belongs to the spec or to one build.
+The two builds agreed on all five cases (sample @ bd7d055). The root build
+was then consolidated onto interaction.py and is now an import shim, so
+that column reads the canonical module and is no longer independent.
 
 One further column is informational and decides nothing: the reading with tol taken
 relative (tol * M) beside the absolute one, because OC-1 turns on that
@@ -54,7 +57,7 @@ def second_build(case):
         sys.path.remove(ROOT)
     try:
         return ("RELATION", ic.classify(case["joint"], case["separate"],
-                                        case["tol"])[0])
+                                        case["tol"])["relation"])
     except ValueError as e:
         return ("REFUSE", str(e))
 

@@ -161,6 +161,22 @@ def references(separate):
     return r["S"], r["M"]
 
 
+def rows(joint, S, M, tol):
+    """The five row predicates of steps 1-5, without step 0.
+
+    Returns [(step, relation, held)]. classify() is the only caller that
+    applies step 0; this exists so a check can show what the rows do when
+    step 0 is bypassed.
+    """
+    return [
+        (1, REDUNDANT, abs(joint - M) <= tol),
+        (2, ADDITIVE, abs(joint - S) <= tol),
+        (3, RESONANT, joint > S + tol),
+        (4, ENHANCED_SUBADDITIVE, M + tol < joint < S - tol),
+        (5, ANTAGONISTIC, joint < M - tol),
+    ]
+
+
 def classify(joint, separate, tol):
     """Return a dict: relation, step, S, M, I, tol, S_plus, N,
     n_facilitating, n_suppressive.
@@ -184,14 +200,7 @@ def classify(joint, separate, tol):
     if r["S_plus"] - M <= 2 * tol:
         out.update(relation=BELOW_RESOLUTION, step=0)
         return out
-    rows = [
-        (1, REDUNDANT, abs(joint - M) <= tol),
-        (2, ADDITIVE, abs(joint - S) <= tol),
-        (3, RESONANT, joint > S + tol),
-        (4, ENHANCED_SUBADDITIVE, M + tol < joint < S - tol),
-        (5, ANTAGONISTIC, joint < M - tol),
-    ]
-    hit = [(n, rel) for n, rel, cond in rows if cond]
+    hit = [(n, rel) for n, rel, cond in rows(joint, S, M, tol) if cond]
     if len(hit) > 1:
         raise BandsOverlap(hit, out)
     if not hit:

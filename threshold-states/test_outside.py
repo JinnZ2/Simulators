@@ -78,12 +78,24 @@ class Run(unittest.TestCase):
 
 
     def test_second_build_gives_the_same_outcomes(self):
-        # interaction_class.py (repo root, another session) implements the
-        # same precedence; on these five cases it matches this build, so
-        # both disagreements belong to the spec, not to one build.
+        # interaction_class.py (repo root, another session) implemented the
+        # same precedence; on these five cases it matched this build (sample
+        # @ bd7d055), so both disagreements belong to the spec, not to one
+        # build. It is now a shim over interaction.py, so this check no
+        # longer compares two builds; the identity check below says so.
         for k, r in self.by.items():
             self.assertEqual(r["second_build"][0], "RELATION", k)
             self.assertEqual(r["second_build"][1], r["got"][1], k)
+
+
+    def test_second_build_is_now_the_canonical_module(self):
+        root = os.path.dirname(HERE)
+        sys.path.insert(0, root)
+        try:
+            import interaction_class as ic
+        finally:
+            sys.path.remove(root)
+        self.assertIs(ic.classify, ix.classify)
 
 
 class Judge(unittest.TestCase):

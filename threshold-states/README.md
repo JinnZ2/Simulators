@@ -48,12 +48,16 @@ is the instrument; this folder holds the one part of it that computes.
     because with one facilitating cue S+ - M = 0. OC-1 and OC-2 are spent:
     they were seen before the split was written.
   - Samples: `samples/run_outside.sample.txt`, `samples/test_outside.sample.txt`
-- Two builds of the same precedence sit in the tree: this folder's
+- Two builds of the same precedence were built: this folder's
   `interaction.py` and `interaction_class.py` at the repo root (another
-  session, same day). The root build has not taken the cue-sign split; it
-  is the old rule. On the five outside cases both builds give the same
-  verdicts, so both disagreements belong to the spec. Which build stays is
-  not decided here.
+  session, same day). Before the cue-sign split they returned the same
+  verdict on all five outside cases, so the two disagreements belong to
+  the spec, not to one build.
+- Consolidated (operator, 2026-10-07): canonical module is
+  `threshold-states/interaction.py`. The root `interaction_class.py` is an
+  import shim with no logic, so it carries the cue-sign split too;
+  `test_interaction_class.py` runs against the canonical module through
+  it. Both suites run in CI (`simulator-smoke`).
 
 SELF-GRADED: the tests and the module share an author. Nothing here
 describes any animal or any paper. Stdlib only, CC0.
