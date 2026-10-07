@@ -11,18 +11,24 @@ The question is not which file is better. It is, per problem class, which
 one moves a model's answer in the good direction more, and whether either
 beats having no document. The predictions were committed to
 PREDICTIONS.md BEFORE this file existed (7f780aa); AMENDMENT 1 was
-appended before any run and fixes the decision rules this file applies.
-Every report prints the hash of the original 6475-byte prefix and of the
+appended before any run and fixes the decision rules this file applies;
+AMENDMENT 2 adds the length-matched arm AF, the pilot gate and the pins on
+A and B. Every report prints the hash of each registered prefix and of the
 whole file, so an edit after the fact is visible.
+
+AF is the arm a reviewer called A_PAD: A followed by neutral filler up to
+the length of B's block. One arm, two names; the code and amendment 2 say
+AF.
 
 Commands
     --features            locate, by line, the feature each prediction rests on
     --choices             decisions PREDICTIONS.md did not fix
     --lengths             chars / words / APPROXIMATE tokens for A, B, A+B
-    --emit OUT.jsonl --run-tag T [--repeats K] [--salt S]
-                          probe battery (arms NONE / A / B / AB / BA, opaque
-                          ids) and OUT.key.jsonl, the arm key, kept apart
-    --prompt BATTERY.jsonl ID
+    --emit OUT.jsonl --run-tag T [--repeats K] [--salt S] [--a-file F]
+                          probe battery (arms NONE / A / AF / B / AB / BA,
+                          opaque ids) and OUT.key.jsonl, the arm key, kept
+                          apart; refuses an A or B off the amendment 2 pins
+    --prompt BATTERY.jsonl ID [--a-file F]
                           the exact text to send for one id
     --sheet BATTERY.jsonl OUT.jsonl
                           coding sheet: id, run_tag, class, field, probe,
@@ -58,13 +64,41 @@ PREDICTIONS = "PREDICTIONS.md"
 ORIGINAL_LEN = 6475
 ORIGINAL_SHA = ("5146b5f04a96cdc1ab284e92e39f6a28"
                 "cef27c4178bd57a8322b8cac46cf6baf")
+# Every registered layer: (prefix length, sha256 of that prefix, label).
+# A later amendment appends; an earlier layer never changes.
+REGISTERED = (
+    (ORIGINAL_LEN, ORIGINAL_SHA, "original (7f780aa)"),
+    (12980, "94a90fd6de93cd01ebed22d99255d5a64a2f7cb55d994c833b3d2c50a9240756",
+     "through amendment 1 (7d49610)"),
+    (17672, "5297bd33692c5cf54d64d8b623eb955c7c10cce28e7c9b85bc0fd1626fcf26cf",
+     "through amendment 2 (0b04b02)"),
+)
 
-ARMS = ("NONE", "A", "B", "AB", "BA")
+# Amendment 2 item 4: the bytes the predictions were registered against.
+PINNED = {
+    FILE_A: "1a42dc8cf9807aa832feb3308f3d847dfdd9e90a7454c676d6611aaba592cbd7",
+    FILE_B: "52a930468873cc0008e407cd59c9c1e5e34ae1dc6624f627ffbe842e8d0e5f8e",
+}
+
+ARMS = ("NONE", "A", "AF", "B", "AB", "BA")
 CODES = ("yes", "no", "unclear")
 GUESSES = ARMS + ("unsure",)
-DOCSET = {"NONE": "NONE", "A": "A", "B": "B", "AB": "BOTH", "BA": "BOTH"}
-MANIFEST_FIELDS = ("run_tag", "model", "temperature", "top_p",
+# AF counts as A at the document-set grain: the filler is not a document.
+DOCSET = {"NONE": "NONE", "A": "A", "AF": "A", "B": "B",
+          "AB": "BOTH", "BA": "BOTH"}
+MANIFEST_FIELDS = ("run_tag", "phase", "model", "temperature", "top_p",
                    "max_tokens", "system_prompt", "date", "coders")
+PHASES = ("pilot", "main")
+PILOT_K = 3
+
+# [CHOICE 14] standard placeholder words, cycled in this order.
+LOREM = ("lorem ipsum dolor sit amet consectetur adipiscing elit sed do "
+         "eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim "
+         "ad minim veniam quis nostrud exercitation ullamco laboris nisi ut "
+         "aliquip ex ea commodo consequat duis aute irure dolor in "
+         "reprehenderit in voluptate velit esse cillum dolore eu fugiat "
+         "nulla pariatur excepteur sint occaecat cupidatat non proident sunt "
+         "in culpa qui officia deserunt mollit anim id est laborum").split()
 
 # Fixed by PREDICTIONS.md amendment 1.
 DELTA = 0.15          # tie band on the GOOD-rate difference
@@ -91,10 +125,8 @@ CHOICES = {
        "LEADS_INCOMPLETE, ALL_TIE and UNRESOLVED.",
     7: "Features are located by literal substring. That is a lexical check "
        "on the document text, not a check of what a model takes from it.",
-    8: "TIE is tested before a directional win: an interval inside the "
-       "+-0.15 band that also excludes 0 reads TIE. The amendment states "
-       "both rules and not their precedence; a tolerance that a win could "
-       "override would not be a tolerance.",
+    8: "PROMOTED to a rule by amendment 2 item 3: an interval inside the "
+       "+-0.15 band reads TIE even when it excludes 0 (equivalence).",
     9: "Prompt template: 'Reference document N:' then the text between "
        "<<< and >>>, then 'Question: ' and the probe. No filename appears, "
        "so a response cannot echo one.",
@@ -111,6 +143,15 @@ CHOICES = {
         "(kappa undefined) and no consensus data the class reads "
         "NOT_EVALUABLE. P-AB and P-CONTROL read UNTESTED when every "
         "comparison under them is NOT_EVALUABLE.",
+    14: "AF filler: the standard lorem-ipsum word list cycled in order from "
+        "its first word, joined by single spaces, appended after one blank "
+        "line inside A's block. Length is matched on the assembled block's "
+        "characters: the longest word-boundary cut whose block is not "
+        "longer than B's block.",
+    15: "A coder whose leak check is NOT_EVALUABLE (under 10 committed "
+        "guesses) does not by that fail the pilot gate, since amendment 2 "
+        "fails it only on LEAK_DETECTED; the report names such coders, and "
+        "a pass does not cover them.",
 }
 Z = 2.0          # [CHOICE 1]
 MIN_N = 10       # [CHOICE 2]
@@ -233,8 +274,39 @@ cohen_kappa = _load_kappa()
 # ---------------------------------------------------------------- io
 
 def _read(name):
-    with open(os.path.join(HERE, name), encoding="utf-8") as fh:
+    with open(os.path.join(HERE, name), encoding="utf-8", newline="") as fh:
         return fh.read()
+
+
+def _sha_text(text):
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def load_docs(a_file=None):
+    """{FILE_A: text, FILE_B: text}. a_file supplies the registered A after
+    a merge has replaced the working copy (amendment 2 item 4)."""
+    if a_file:
+        with open(a_file, encoding="utf-8", newline="") as fh:
+            a = fh.read()
+    else:
+        a = _read(FILE_A)
+    return {FILE_A: a, FILE_B: _read(FILE_B)}
+
+
+def check_pins(texts, pins=None):
+    """Refuse an A or B whose sha256 is not the registered one."""
+    pins = PINNED if pins is None else pins
+    bad = []
+    for f in (FILE_A, FILE_B):
+        got = _sha_text(texts[f])
+        if got != pins[f]:
+            bad.append("%s sha256 %s, registered %s" % (f, got[:12],
+                                                         pins[f][:12]))
+    if bad:
+        raise ValueError("not the documents the predictions were registered "
+                         "against (amendment 2 item 4): " + "; ".join(bad) +
+                         ". Supply the registered A with --a-file.")
+    return texts
 
 
 def file_sha(name):
@@ -243,14 +315,21 @@ def file_sha(name):
 
 
 def predictions_status(data=None):
-    """Original-prefix hash against the registered value, plus whole file."""
+    """Every registered prefix against its hash, plus the whole file."""
     if data is None:
         with open(os.path.join(HERE, PREDICTIONS), "rb") as fh:
             data = fh.read()
     prefix = hashlib.sha256(data[:ORIGINAL_LEN]).hexdigest()
+    layers = []
+    for n, want, label in REGISTERED:
+        got = hashlib.sha256(data[:n]).hexdigest()
+        layers.append({"label": label, "bytes": n, "sha256": got,
+                       "ok": len(data) >= n and got == want})
     return {"prefix_sha256": prefix, "prefix_ok": prefix == ORIGINAL_SHA,
+            "layers": layers, "all_ok": all(x["ok"] for x in layers),
             "file_sha256": hashlib.sha256(data).hexdigest(),
-            "amended": len(data) > ORIGINAL_LEN}
+            "amended": len(data) > ORIGINAL_LEN,
+            "past_last_layer": len(data) > REGISTERED[-1][0]}
 
 
 def _jsonl(path):
@@ -312,8 +391,31 @@ def render_features(rows):
 # ---------------------------------------------------------------- prompts
 
 def context_for(arm):
-    return {"NONE": [], "A": [FILE_A], "B": [FILE_B],
+    return {"NONE": [], "A": [FILE_A], "AF": [FILE_A], "B": [FILE_B],
             "AB": [FILE_A, FILE_B], "BA": [FILE_B, FILE_A]}[arm]
+
+
+def filler(n):
+    """[CHOICE 14] the first n placeholder words, cycled, single spaces."""
+    return " ".join(LOREM[i % len(LOREM)] for i in range(n))
+
+
+def af_text(a, n):
+    """A, one blank line, then n filler words; A itself when n is 0."""
+    return a + "\n\n" + filler(n) if n else a
+
+
+def filler_words(texts):
+    """Largest n whose AF block is not longer than B's block."""
+    target = len(_context_block([texts[FILE_B]]))
+    size = len(_context_block([texts[FILE_A] + "\n\n"]))
+    n = 0
+    while True:
+        add = len(LOREM[n % len(LOREM)]) + (1 if n else 0)
+        if size + add > target:
+            return n
+        size += add
+        n += 1
 
 
 def _context_block(texts):
@@ -328,13 +430,16 @@ def assemble(row, texts=None):
     """Exact prompt for one battery row. Refuses if a file changed."""
     files = row["context_files"]
     if texts is None:
-        texts = {f: _read(f) for f in files}
+        texts = load_docs()
     for f, want in zip(files, row["context_sha256"]):
-        got = hashlib.sha256(texts[f].encode("utf-8")).hexdigest()
+        got = _sha_text(texts[f])
         if got != want:
             raise ValueError("%s changed since emit (sha256 %s, battery %s)"
                              % (f, got[:12], want[:12]))
-    block = _context_block([texts[f] for f in files])
+    docs = [texts[f] for f in files]
+    if row.get("filler_words"):
+        docs = [af_text(docs[0], row["filler_words"])]
+    block = _context_block(docs)
     return (block + "\n" if block else "") + "Question: " + row["probe"]
 
 
@@ -345,10 +450,13 @@ def _measure(text):
 
 def lengths(texts=None):
     if texts is None:
-        texts = {FILE_A: _read(FILE_A), FILE_B: _read(FILE_B)}
+        texts = load_docs()
+    n = filler_words(texts)
     return {"A": _measure(_context_block([texts[FILE_A]])),
+            "AF": _measure(_context_block([af_text(texts[FILE_A], n)])),
             "B": _measure(_context_block([texts[FILE_B]])),
-            "A+B": _measure(_context_block([texts[FILE_A], texts[FILE_B]]))}
+            "A+B": _measure(_context_block([texts[FILE_A], texts[FILE_B]])),
+            "filler_words": n}
 
 
 def render_lengths(L):
@@ -356,15 +464,19 @@ def render_lengths(L):
            "tokens are APPROXIMATE: chars / %d; no tokenizer or API key here"
            % CHARS_PER_TOKEN,
            "%-5s %8s %7s %14s" % ("arm", "chars", "words", "tokens_approx")]
-    for k in ("A", "B", "A+B"):
+    for k in ("A", "AF", "B", "A+B"):
         m = L[k]
         out.append("%-5s %8d %7d %14d" % (k, m["chars"], m["words"],
                                          m["tokens_approx"]))
     out.append("B / A length ratio: %.2f   A+B / max(A, B): %.2f" % (
         L["B"]["chars"] / float(L["A"]["chars"]),
         L["A+B"]["chars"] / float(max(L["A"]["chars"], L["B"]["chars"]))))
-    out.append("A vs B and the combined arms are confounded with context "
-               "length; read any win against these ratios.")
+    out.append("AF = A + %d filler words [CHOICE 14]; AF block is %d chars "
+               "short of B's (within one word, never longer)"
+               % (L["filler_words"], L["B"]["chars"] - L["AF"]["chars"]))
+    out.append("A vs B is confounded with length; AF vs B holds length and "
+               "varies structure (amendment 2 item 1). The combined arms are "
+               "longer than either single arm and stay confounded.")
     return "\n".join(out)
 
 
@@ -375,12 +487,17 @@ def opaque_id(salt, run_tag, probe_id, arm, repeat):
     return hashlib.sha256(raw.encode("utf-8")).hexdigest()[:12]
 
 
-def emit(repeats=K_DEFAULT, salt="hsp", run_tag="run"):
+def emit(repeats=K_DEFAULT, salt="hsp", run_tag="run", texts=None,
+         pins=None):
     if repeats < K_MIN:
         raise ValueError("repeats must be >= %d (amendment 1 item 3)" % K_MIN)
     if not run_tag:
         raise ValueError("run_tag required")
-    shas = {FILE_A: file_sha(FILE_A), FILE_B: file_sha(FILE_B)}
+    if texts is None:
+        texts = load_docs()
+    check_pins(texts, pins)
+    shas = {f: _sha_text(texts[f]) for f in (FILE_A, FILE_B)}
+    nfill = filler_words(texts)
     battery, key = [], []
     for cls in CLASSES:
         for probe_id, text in PROBES[cls]:
@@ -391,7 +508,8 @@ def emit(repeats=K_DEFAULT, salt="hsp", run_tag="run"):
                     battery.append({
                         "id": rid, "run_tag": run_tag, "class": cls,
                         "probe": text, "context_files": ctx,
-                        "context_sha256": [shas[f] for f in ctx]})
+                        "context_sha256": [shas[f] for f in ctx],
+                        "filler_words": nfill if arm == "AF" else 0})
                     key.append({"id": rid, "run_tag": run_tag, "class": cls,
                                 "arm": arm, "probe_id": probe_id,
                                 "repeat": rep})
@@ -419,8 +537,11 @@ def _norm(tok):
 
 
 def doc_grams(texts=None, run=STRIP_RUN):
+    """Every `run`-word sequence in A, B and AF's text (A plus the filler,
+    so runs of filler and the seam into it are covered)."""
     if texts is None:
-        texts = [_read(FILE_A), _read(FILE_B)]
+        d = load_docs()
+        texts = [d[FILE_A], d[FILE_B], af_text(d[FILE_A], filler_words(d))]
     grams = set()
     for t in texts:
         w = [x for x in (_norm(s) for s in t.split()) if x]
@@ -533,6 +654,19 @@ def check_manifest(m):
         ids.append(c["id"])
     if len(set(ids)) != len(ids):
         raise ValueError("duplicate coder id in manifest")
+    if m["phase"] not in PHASES:
+        raise ValueError("manifest phase %r not in %s" % (m["phase"], PHASES))
+    if m["phase"] == "main":
+        if not m.get("pilot_run_tag"):
+            raise ValueError("main manifest needs pilot_run_tag "
+                             "(amendment 2 item 2)")
+        if m["pilot_run_tag"] == m["run_tag"]:
+            raise ValueError("pilot_run_tag must differ from run_tag: pilot "
+                             "rows never enter a main score")
+        if m.get("pilot_result") != "PILOT_PASS":
+            raise ValueError("main manifest needs pilot_result PILOT_PASS, "
+                             "got %r (amendment 2 item 2)"
+                             % (m.get("pilot_result"),))
     return m
 
 
@@ -754,6 +888,58 @@ def pattern(verdicts):
     return "UNRESOLVED"
 
 
+def attribution(ab, afb):
+    """Amendment 2 item 1: read A-vs-B against AF-vs-B (AF stands for A)."""
+    if ab in ("A", "B"):
+        same = "AF" if ab == "A" else "B"
+        other = "B" if ab == "A" else "AF"
+        if afb == same:
+            return "STRUCTURE_SURVIVES"
+        if afb in ("TIE", other):
+            return "NOT_SEPARABLE_FROM_VOLUME"
+        return "UNRESOLVED"
+    if ab == "TIE":
+        if afb == "TIE":
+            return "TIE_SURVIVES"
+        if afb in ("AF", "B"):
+            return "TIE_NOT_SURVIVING"
+    return "UNRESOLVED"
+
+
+def _gate(verdict, agree_cls):
+    """[CHOICE 13] kappa gate on one comparison's verdict."""
+    worst = agree_cls["min"]
+    if worst is not None and worst["kappa"] is not None and \
+            worst["kappa"] < KAPPA_FLOOR:
+        return "NOT_READABLE"
+    if verdict != "NOT_EVALUABLE" and not agree_cls["readable"]:
+        return "NOT_READABLE"
+    return verdict
+
+
+def pilot_gate(agree, leaks):
+    """Amendment 2 item 2. Returns (result, reasons, unchecked coders)."""
+    reasons = []
+    for cls in CLASSES:
+        w = agree[cls]["min"]
+        if w is None or w["kappa"] is None:
+            reasons.append("%s: kappa undefined (no jointly coded rows)" % cls)
+        elif w["kappa"] < KAPPA_FLOOR:
+            reasons.append("%s: min pairwise kappa %.3f < %.2f (%s/%s)"
+                           % (cls, w["kappa"], KAPPA_FLOOR, w["pair"][0],
+                              w["pair"][1]))
+    unchecked = []
+    for name, L in leaks.items():
+        for grain in ("exact", "docset"):
+            v = L[grain]["verdict"]
+            if v == "LEAK_DETECTED":
+                reasons.append("%s: LEAK_DETECTED at the %s grain"
+                               % (name, grain))
+            elif v == "NOT_EVALUABLE" and name not in unchecked:
+                unchecked.append(name)                    # [CHOICE 15]
+    return ("PILOT_PASS" if not reasons else "PILOT_FAIL"), reasons, unchecked
+
+
 def _ab_verdicts(key, rows):
     counts, probe, _ = tally(key, rows)
     return {c: compare(c, counts, probe, "A", "B")["verdict"]
@@ -788,20 +974,37 @@ def score(key, coder_rows, manifest, strip_log=None):
     cons, disputed, incomplete = consensus(coder_rows)
     counts, probe, _ = tally(key, cons)
     agree = agreement(key, coder_rows, names)
+    leaks = {n: leak(key, rows) for n, rows in zip(names, coder_rows)}
+    same_class = [n for n in names
+                  if declared.get(n, {}).get("same_model_class")]
+    base = {"coders": names, "same_class": same_class, "leak": leaks,
+            "agreement": agree, "disputed": disputed,
+            "incomplete": incomplete, "manifest": manifest,
+            "phase": manifest["phase"],
+            "predictions": predictions_status(), "lengths": lengths()}
+
+    if manifest["phase"] == "pilot":
+        ks = set(k["repeat"] for k in key)
+        if ks != set(range(PILOT_K)):
+            raise ValueError("pilot key must carry k = %d repeats, has %d "
+                             "(amendment 2 item 2)" % (PILOT_K, len(ks)))
+        arms = set(k["arm"] for k in key)
+        if arms != set(ARMS):
+            raise ValueError("pilot key must cover all arms; missing %s"
+                             % sorted(set(ARMS) - arms))
+        result, reasons, unchecked = pilot_gate(agree, leaks)
+        base.update({"pilot_result": result, "pilot_reasons": reasons,
+                     "leak_unchecked": unchecked})
+        return base
 
     per = {}
     for cls in CLASSES:
         ab = compare(cls, counts, probe, "A", "B")
-        # [CHOICE 13] A kappa measured below the floor is NOT_READABLE even when the
-        # disagreement emptied the consensus; with no jointly coded rows
-        # (kappa undefined) and no consensus data, NOT_EVALUABLE.
-        worst = agree[cls]["min"]
-        verdict = ab["verdict"]
-        if worst is not None and worst["kappa"] is not None and \
-                worst["kappa"] < KAPPA_FLOOR:
-            verdict = "NOT_READABLE"
-        elif verdict != "NOT_EVALUABLE" and not agree[cls]["readable"]:
-            verdict = "NOT_READABLE"
+        verdict = _gate(ab["verdict"], agree[cls])
+        a_af = compare(cls, counts, probe, "A", "AF")
+        af_b = compare(cls, counts, probe, "AF", "B")
+        a_af_v = _gate(a_af["verdict"], agree[cls])
+        af_b_v = _gate(af_b["verdict"], agree[cls])
         a_none = compare(cls, counts, probe, "A", "NONE")
         b_none = compare(cls, counts, probe, "B", "NONE")
         order = compare(cls, counts, probe, "AB", "BA")
@@ -833,6 +1036,9 @@ def score(key, coder_rows, manifest, strip_log=None):
             control = "UNRESOLVED"
         predicted = CLASSES[cls][2]
         per[cls] = {"counts": counts[cls], "A_vs_B": ab, "verdict": verdict,
+                    "A_vs_AF": a_af, "A_vs_AF_verdict": a_af_v,
+                    "AF_vs_B": af_b, "AF_vs_B_verdict": af_b_v,
+                    "attribution": attribution(verdict, af_b_v),
                     "A_vs_NONE": a_none, "B_vs_NONE": b_none,
                     "order": order, "best_single": best,
                     "combined": combined, "control": control,
@@ -868,7 +1074,6 @@ def score(key, coder_rows, manifest, strip_log=None):
     }
     per_coder = {n: _ab_verdicts(key, rows)
                  for n, rows in zip(names, coder_rows)}
-    leaks = {n: leak(key, rows) for n, rows in zip(names, coder_rows)}
 
     stripped = None
     if strip_log is not None:
@@ -880,13 +1085,9 @@ def score(key, coder_rows, manifest, strip_log=None):
                 s["rows"] += 1 if r["words_removed"] else 0
                 s["words"] += r["words_removed"]
 
-    return {"per_class": per, "pattern": pat, "patterns": patterns,
-            "per_coder": per_coder, "leak": leaks, "coders": names,
-            "same_class": [n for n in names
-                           if declared.get(n, {}).get("same_model_class")],
-            "disputed": disputed, "incomplete": incomplete,
-            "manifest": manifest, "stripped": stripped,
-            "predictions": predictions_status(), "lengths": lengths()}
+    base.update({"per_class": per, "pattern": pat, "patterns": patterns,
+                 "per_coder": per_coder, "stripped": stripped})
+    return base
 
 
 # ---------------------------------------------------------------- render
@@ -899,19 +1100,90 @@ def _iv(iv):
     return "--" if iv is None else "[%+.3f, %+.3f]" % iv
 
 
-def render_score(res):
+def _header(res, title):
     ps = res["predictions"]
     m = res["manifest"]
-    out = ["pathway A vs pathway B",
+    out = [title,
            "PREDICTIONS.md original prefix (%d bytes) sha256 %s  %s"
            % (ORIGINAL_LEN, ps["prefix_sha256"],
-              "OK" if ps["prefix_ok"] else "MISMATCH: ORIGINAL EDITED"),
-           "PREDICTIONS.md whole file sha256 %s%s"
-           % (ps["file_sha256"], "  (amended)" if ps["amended"] else ""),
-           "run %s   model %s   temperature %s   top_p %s   max_tokens %s"
-           % (m["run_tag"], m["model"], m["temperature"], m["top_p"],
-              m["max_tokens"]),
-           "date %s   system_prompt %r" % (m["date"], m["system_prompt"]),
+              "OK" if ps["prefix_ok"] else "MISMATCH: ORIGINAL EDITED")]
+    for x in ps["layers"]:
+        out.append("  registered %-32s %6d bytes  %s" % (
+            x["label"], x["bytes"], "OK" if x["ok"] else "MISMATCH"))
+    out += ["PREDICTIONS.md whole file sha256 %s%s"
+            % (ps["file_sha256"],
+               "  (text past the last registered layer)"
+               if ps["past_last_layer"] else ""),
+            "run %s   phase %s   model %s   temperature %s   top_p %s   "
+            "max_tokens %s" % (m["run_tag"], m["phase"], m["model"],
+                               m["temperature"], m["top_p"],
+                               m["max_tokens"]),
+            "date %s   system_prompt %r" % (m["date"], m["system_prompt"])]
+    if m["phase"] == "main":
+        out.append("pilot run %s: %s (pilot rows excluded from this score)"
+                   % (m["pilot_run_tag"], m["pilot_result"]))
+    return out
+
+
+def _render_leak(res, out):
+    out.append("leakage: guessed condition vs true arm, committed guesses "
+               "only; chance = largest true share")
+    out.append("  %-12s %4s %6s %6s  %-34s %s" % (
+        "coder", "n", "unsure", "unrec", "exact acc/chance/lower verdict",
+        "docset acc/chance/lower verdict"))
+    for n, L in res["leak"].items():
+        e, d = L["exact"], L["docset"]
+        out.append("  %-12s %4d %6d %6d  %s/%s/%s %-14s %s/%s/%s %s" % (
+            n, L["n"], L["unsure"], L["unrecorded"],
+            _f(e["accuracy"]), _f(e["chance"]), _f(e["lower"]), e["verdict"],
+            _f(d["accuracy"]), _f(d["chance"]), _f(d["lower"]),
+            d["verdict"]))
+
+
+def render_pilot(res):
+    out = _header(res, "pathway A vs pathway B -- PILOT (amendment 2 item 2)")
+    out.append("coders: %s   disputed rows: %d   incomplete rows: %d"
+               % (", ".join(res["coders"]), res["disputed"],
+                  res["incomplete"]))
+    if res["same_class"]:
+        out.append("same model class as the authors: %s -- agreement with "
+                   "such a coder bounds reliability, it does not certify it"
+                   % ", ".join(res["same_class"]))
+    out.append("no A-vs-B verdict, prediction status or pattern is printed "
+               "for a pilot")
+    out.append("")
+    out.append("%-9s %5s %7s %6s  %s" % ("class", "n", "kappa", "agree",
+                                         "min pair"))
+    for cls in CLASSES:
+        w = res["agreement"][cls]["min"]
+        out.append("%-9s %5s %7s %6s  %s" % (
+            cls, w["n"] if w else "--", _f(w["kappa"] if w else None),
+            _f(w["agreement"] if w else None),
+            "/".join(w["pair"]) if w else "--"))
+    out.append("kappa on ~54 rows per class has SE ~0.1; a pass near %.2f "
+               "is weak, and the main run gates on its own kappa"
+               % KAPPA_FLOOR)
+    out.append("")
+    _render_leak(res, out)
+    out.append("")
+    out.append("gate: %s" % res["pilot_result"])
+    for r in res["pilot_reasons"]:
+        out.append("  " + r)
+    if res["leak_unchecked"]:
+        out.append("  leak check NOT_EVALUABLE (under %d committed guesses) "
+                   "for: %s; the gate does not cover them [CHOICE 15]"
+                   % (MIN_N, ", ".join(res["leak_unchecked"])))
+    out.append("after PILOT_FAIL the probes and predictions do not change; "
+               "coding instructions or strip parameters change only by a "
+               "further dated amendment and a new pilot run_tag")
+    return "\n".join(out)
+
+
+def render_score(res):
+    if res["phase"] == "pilot":
+        return render_pilot(res)
+    out = _header(res, "pathway A vs pathway B")
+    out += [
            "z = %.1f [CHOICE 1]   min n = %d [CHOICE 2]   tie band +-%.2f   "
            "k >= %d   min probes %d   kappa floor %.2f"
            % (Z, MIN_N, DELTA, K_MIN, MIN_PROBES, KAPPA_FLOOR),
@@ -957,6 +1229,19 @@ def render_score(res):
             p["order"]["verdict"]))
     out.append("order effect is reported, not predicted")
     out.append("")
+    out.append("length control (amendment 2 item 1; reported, not predicted)")
+    out.append("%-9s %-14s %-20s %-14s %-20s %s" % (
+        "class", "A vs AF", "interval", "AF vs B", "interval",
+        "attribution of A vs B"))
+    for cls, p in res["per_class"].items():
+        out.append("%-9s %-14s %-20s %-14s %-20s %s" % (
+            cls, p["A_vs_AF_verdict"], _iv(p["A_vs_AF"]["interval"]),
+            p["AF_vs_B_verdict"], _iv(p["AF_vs_B"]["interval"]),
+            p["attribution"]))
+    out.append("a HELD prediction with attribution NOT_SEPARABLE_FROM_VOLUME "
+               "holds for A as written, not as evidence that structure "
+               "carried it")
+    out.append("")
     out.append("pattern: %s" % res["pattern"])
     for k in ("P-SPLIT", "P-AB", "P-CONTROL"):
         out.append("%-10s %s" % (k, res["patterns"][k]))
@@ -966,18 +1251,7 @@ def render_score(res):
         out.append("  %-12s %s" % (n, "  ".join("%s=%s" % (c, v[c])
                                               for c in CLASSES)))
     out.append("")
-    out.append("leakage: guessed condition vs true arm, committed guesses "
-               "only; chance = largest true share")
-    out.append("  %-12s %4s %6s %6s  %-34s %s" % (
-        "coder", "n", "unsure", "unrec", "exact acc/chance/lower verdict",
-        "docset acc/chance/lower verdict"))
-    for n, L in res["leak"].items():
-        e, d = L["exact"], L["docset"]
-        out.append("  %-12s %4d %6d %6d  %s/%s/%s %-14s %s/%s/%s %s" % (
-            n, L["n"], L["unsure"], L["unrecorded"],
-            _f(e["accuracy"]), _f(e["chance"]), _f(e["lower"]), e["verdict"],
-            _f(d["accuracy"]), _f(d["chance"]), _f(d["lower"]),
-            d["verdict"]))
+    _render_leak(res, out)
     if res["stripped"] is not None:
         out.append("")
         out.append("strip log: rows touched / words removed per arm")
@@ -985,12 +1259,13 @@ def render_score(res):
                                     for a, s in res["stripped"].items()))
     L = res["lengths"]
     out.append("")
-    out.append("context chars A %d, B %d, A+B %d; tokens APPROXIMATE "
-               "(chars/%d) A %d, B %d, A+B %d; wins are confounded with "
-               "length" % (L["A"]["chars"], L["B"]["chars"],
-                           L["A+B"]["chars"], CHARS_PER_TOKEN,
-                           L["A"]["tokens_approx"], L["B"]["tokens_approx"],
-                           L["A+B"]["tokens_approx"]))
+    out.append("context chars A %d, AF %d, B %d, A+B %d; tokens APPROXIMATE "
+               "(chars/%d) A %d, AF %d, B %d, A+B %d; A vs B is confounded "
+               "with length, AF vs B is not" % (
+                   L["A"]["chars"], L["AF"]["chars"], L["B"]["chars"],
+                   L["A+B"]["chars"], CHARS_PER_TOKEN,
+                   L["A"]["tokens_approx"], L["AF"]["tokens_approx"],
+                   L["B"]["tokens_approx"], L["A+B"]["tokens_approx"]))
     out.append("TIE means the interval lies inside the band; UNRESOLVED is "
                "not equivalence.")
     return "\n".join(out)
@@ -999,8 +1274,9 @@ def render_score(res):
 # ---------------------------------------------------------------- cli
 
 USAGE = ("usage: pathways.py --features | --choices | --lengths | "
-         "--emit OUT.jsonl --run-tag T [--repeats K] [--salt S] | "
-         "--prompt BATTERY.jsonl ID | --sheet BATTERY.jsonl OUT.jsonl | "
+         "--emit OUT.jsonl --run-tag T [--repeats K] [--salt S] "
+         "[--a-file F] | --prompt BATTERY.jsonl ID [--a-file F] | "
+         "--sheet BATTERY.jsonl OUT.jsonl | "
          "--strip SHEET.jsonl OUT.jsonl LOG.jsonl | "
          "--score KEY.jsonl --manifest M.json [--strip-log LOG.jsonl] "
          "CODES1.jsonl CODES2.jsonl [...]")
@@ -1027,7 +1303,7 @@ def main(argv):
         return 0
     if cmd == "--emit" and len(argv) >= 2:
         out = argv[1]
-        repeats, salt, tag = K_DEFAULT, "hsp", None
+        repeats, salt, tag, afile = K_DEFAULT, "hsp", None, None
         rest = argv[2:]
         while rest:
             if rest[0] == "--repeats" and len(rest) > 1:
@@ -1036,6 +1312,8 @@ def main(argv):
                 salt = rest[1]
             elif rest[0] == "--run-tag" and len(rest) > 1:
                 tag = rest[1]
+            elif rest[0] == "--a-file" and len(rest) > 1:
+                afile = rest[1]
             else:
                 print(USAGE)
                 return 2
@@ -1043,7 +1321,11 @@ def main(argv):
         if not tag:
             print("--emit needs --run-tag")
             return 2
-        battery, key = emit(repeats, salt, tag)
+        try:
+            battery, key = emit(repeats, salt, tag, load_docs(afile))
+        except ValueError as exc:
+            print("refused: %s" % exc)
+            return 1
         base = out[:-6] if out.endswith(".jsonl") else out
         _write_jsonl(out, battery)
         _write_jsonl(base + ".key.jsonl", key)
@@ -1051,12 +1333,18 @@ def main(argv):
               % (len(battery), out, base))
         print("keep the key away from the coders")
         return 0
-    if cmd == "--prompt" and len(argv) == 3:
+    if cmd == "--prompt" and len(argv) in (3, 5) and \
+            (len(argv) == 3 or argv[3] == "--a-file"):
         rows = [r for r in _jsonl(argv[1]) if r["id"] == argv[2]]
         if not rows:
             print("id %s not in %s" % (argv[2], argv[1]))
             return 1
-        print(assemble(rows[0]))
+        try:
+            print(assemble(rows[0],
+                           load_docs(argv[4] if len(argv) == 5 else None)))
+        except ValueError as exc:
+            print("refused: %s" % exc)
+            return 1
         return 0
     if cmd == "--sheet" and len(argv) == 3:
         _write_jsonl(argv[2], sheet(_jsonl(argv[1])))
@@ -1091,8 +1379,12 @@ def main(argv):
             return 2
         with open(manifest, encoding="utf-8") as fh:
             m = json.load(fh)
-        res = score(_jsonl(keyp), [_jsonl(c) for c in codes], m,
-                    _jsonl(slog) if slog else None)
+        try:
+            res = score(_jsonl(keyp), [_jsonl(c) for c in codes], m,
+                        _jsonl(slog) if slog else None)
+        except ValueError as exc:
+            print("refused: %s" % exc)
+            return 1
         print(render_score(res))
         return 0
     print(USAGE)

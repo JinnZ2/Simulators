@@ -1,0 +1,34 @@
+# pilot score (k = 3, all six arms) with NO coded rows: nothing has been run.
+# manifest values are placeholders; with no rows kappa is undefined, so the gate reads PILOT_FAIL.
+pathway A vs pathway B -- PILOT (amendment 2 item 2)
+PREDICTIONS.md original prefix (6475 bytes) sha256 5146b5f04a96cdc1ab284e92e39f6a28cef27c4178bd57a8322b8cac46cf6baf  OK
+  registered original (7f780aa)                 6475 bytes  OK
+  registered through amendment 1 (7d49610)     12980 bytes  OK
+  registered through amendment 2 (0b04b02)     17672 bytes  OK
+PREDICTIONS.md whole file sha256 5297bd33692c5cf54d64d8b623eb955c7c10cce28e7c9b85bc0fd1626fcf26cf
+run pilot-unrun   phase pilot   model (placeholder)   temperature 1.0   top_p 1.0   max_tokens 1024
+date 2026-10-07   system_prompt '(none)'
+coders: coder-1, coder-2   disputed rows: 0   incomplete rows: 0
+no A-vs-B verdict, prediction status or pattern is printed for a pilot
+
+class         n   kappa  agree  min pair
+DETECT        0      --     --  coder-1/coder-2
+OVERAPPLY     0      --     --  coder-1/coder-2
+EVIDENCE      0      --     --  coder-1/coder-2
+CITE          0      --     --  coder-1/coder-2
+NEXTSTEP      0      --     --  coder-1/coder-2
+kappa on ~54 rows per class has SE ~0.1; a pass near 0.60 is weak, and the main run gates on its own kappa
+
+leakage: guessed condition vs true arm, committed guesses only; chance = largest true share
+  coder           n unsure  unrec  exact acc/chance/lower verdict     docset acc/chance/lower verdict
+  coder-1         0      0      0  --/--/-- NOT_EVALUABLE  --/--/-- NOT_EVALUABLE
+  coder-2         0      0      0  --/--/-- NOT_EVALUABLE  --/--/-- NOT_EVALUABLE
+
+gate: PILOT_FAIL
+  DETECT: kappa undefined (no jointly coded rows)
+  OVERAPPLY: kappa undefined (no jointly coded rows)
+  EVIDENCE: kappa undefined (no jointly coded rows)
+  CITE: kappa undefined (no jointly coded rows)
+  NEXTSTEP: kappa undefined (no jointly coded rows)
+  leak check NOT_EVALUABLE (under 10 committed guesses) for: coder-1, coder-2; the gate does not cover them [CHOICE 15]
+after PILOT_FAIL the probes and predictions do not change; coding instructions or strip parameters change only by a further dated amendment and a new pilot run_tag

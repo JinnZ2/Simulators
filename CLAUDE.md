@@ -370,7 +370,7 @@ last three; read in order:
 - `instrument-index/` — a REBUILD from a lost original: 13 fields, two renderings from one pass, a 0.70 axis falsifier that cannot fire where nothing is rated
 - `cooperative-substrate-proof/` — P1-P5, each standalone; the cooperative substrate the competitive frame runs on, as a coverage argument; C1-C4 coded into the parts
 - `stability-trigger-envelope/` — DISPATCH ESP-1, a stability trigger outside its validation envelope (cab sensor vs trailer mass on serpentine downgrades); one instrument `descent_record.py` on CONSTRUCTED data, F1-F5 firing as regression, NEITHER_MODE added to the dispatch's five labels, clock offsets detected never corrected, relocation counted never scored; real run NOT_RUN, T3/T6 NOT_BUILT, T4/T5 UNMEASURED
-- `human-sensing-prior/` — one-file CC0 instrument against the prior that human multi-channel sensing is costly; the invariant cost verdict as a CONSTANT_FIRES tell with a self-check a model runs on its own draft, the animal convergence as evidence, intake-vs-decision scope limit stated, F1-F3 not run; two pathways kept (A `human-sensing-prior.md`, B `PATHWAY_B.md`), predictions committed before `pathways.py`, a five-arm per-class harness (NONE/A/B/AB/BA, opaque ids, arm withheld from the sheet) under a dated amendment fixing the tie band, kappa floor and leakage check, nothing run
+- `human-sensing-prior/` — one-file CC0 instrument against the prior that human multi-channel sensing is costly; the invariant cost verdict as a CONSTANT_FIRES tell with a self-check a model runs on its own draft, the animal convergence as evidence, intake-vs-decision scope limit stated, F1-F3 not run; two pathways kept (A `human-sensing-prior.md`, B `PATHWAY_B.md`), predictions committed before `pathways.py`, a six-arm per-class harness (NONE/A/AF/B/AB/BA, opaque ids, arm withheld from the sheet) under two dated amendments fixing the tie band, kappa floor and leakage check, then adding a length-matched arm AF, a k=3 pilot gate and sha pins on A and B; nothing run
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -14001,10 +14001,25 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   class is NOT_READABLE; coders record a guessed condition and accuracy is scored against chance
   at two grains; `--strip` silently deletes 8-word verbatim runs from A or B with the log kept
   apart; lengths reported with tokens APPROXIMATE (chars / 4; B is 1.66x A).
+  AMENDMENT 2 (2026-10-07, before any run; three registered prefixes now hashed on every report):
+  arm AF (= A_PAD) is A plus lorem-ipsum filler cut so its block is within one word of B's and
+  never longer (19030 against 19031 chars). A vs AF and AF vs B are reported, not predicted, and
+  each A-vs-B verdict gets an attribution (STRUCTURE_SURVIVES / NOT_SEPARABLE_FROM_VOLUME /
+  TIE_SURVIVES / TIE_NOT_SURVIVING / UNRESOLVED). A pilot at k = 3 over all six arms runs under
+  its own run_tag and passes only if kappa >= 0.60 in every class and no coder reads
+  LEAK_DETECTED; it prints the gate and no verdict. A main score is refused without
+  pilot_run_tag and PILOT_PASS, and pilot rows never reach it. CHOICE 8 (TIE inside the band
+  even when the interval excludes 0) is promoted to a rule. A and B are pinned by sha256:
+  main's later revision of A breaks the `**P4. Effective-N` marker, so `--emit` refuses an
+  unpinned A and `--a-file` supplies the registered one.
   `pathways.py` locates each prediction's feature by line (19 markers, 0 mismatches);
-  `test_pathways.py` reaches every verdict on constructed worlds. Baseline: the root suite fails
-  the same 3 ids under unittest and pytest here; the earlier 8 pytest ids were never recorded,
-  so no id-level comparison is possible. No model has been run and no response coded.
+  `test_pathways.py` reaches every verdict, attribution and gate state on constructed worlds.
+  Baseline: the earlier 8 pytest ids were never recorded and are not reconstructed. The
+  comparison point is the KNOWN_RED pins at 59a5e5d (4 failing, including the compile gate's
+  duplicate-names test). This branch predates #105 and #116 (merge base 9262516), lacks
+  `tests/test_compile_gate.py`, and fails the other 3 of those 4. Its count is not adopted as
+  main's baseline. 59a5e5d's compile gate run here finds 7 files that do not compile and 16
+  duplicate names, all outside this folder. No model has been run and no response coded.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

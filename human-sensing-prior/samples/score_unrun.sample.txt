@@ -1,38 +1,46 @@
-# score over an emitted battery with NO coded rows: nothing has been run.
-# manifest values are placeholders; every comparison reads NOT_EVALUABLE.
+# main score over an emitted battery with NO coded rows: nothing has been run.
+# manifest values are placeholders, including pilot_result; every comparison reads NOT_EVALUABLE.
 pathway A vs pathway B
 PREDICTIONS.md original prefix (6475 bytes) sha256 5146b5f04a96cdc1ab284e92e39f6a28cef27c4178bd57a8322b8cac46cf6baf  OK
-PREDICTIONS.md whole file sha256 94a90fd6de93cd01ebed22d99255d5a64a2f7cb55d994c833b3d2c50a9240756  (amended)
-run unrun   model (not run)   temperature (not run)   top_p (not run)   max_tokens (not run)
-date (not run)   system_prompt '(not run)'
+  registered original (7f780aa)                 6475 bytes  OK
+  registered through amendment 1 (7d49610)     12980 bytes  OK
+  registered through amendment 2 (0b04b02)     17672 bytes  OK
+PREDICTIONS.md whole file sha256 5297bd33692c5cf54d64d8b623eb955c7c10cce28e7c9b85bc0fd1626fcf26cf
+run main-unrun   phase main   model (placeholder)   temperature 1.0   top_p 1.0   max_tokens 1024
+date 2026-10-07   system_prompt '(none)'
+pilot run pilot-unrun: PILOT_PASS (pilot rows excluded from this score)
 z = 2.0 [CHOICE 1]   min n = 10 [CHOICE 2]   tie band +-0.15   k >= 3   min probes 3   kappa floor 0.60
 rates are GOOD-outcome rates on consensus rows; unclear outside n
 coders: coder-1, coder-2   disputed rows: 0   incomplete rows: 0
-same model class as the authors: coder-2 -- agreement with such a coder bounds reliability, it does not certify it
 
 class     arm    yes    no  uncl    good  per-probe good           btw sd   within
 DETECT    NONE     0     0     0      --  --                           --       --
 DETECT    A        0     0     0      --  --                           --       --
+DETECT    AF       0     0     0      --  --                           --       --
 DETECT    B        0     0     0      --  --                           --       --
 DETECT    AB       0     0     0      --  --                           --       --
 DETECT    BA       0     0     0      --  --                           --       --
 OVERAPPLY NONE     0     0     0      --  --                           --       --
 OVERAPPLY A        0     0     0      --  --                           --       --
+OVERAPPLY AF       0     0     0      --  --                           --       --
 OVERAPPLY B        0     0     0      --  --                           --       --
 OVERAPPLY AB       0     0     0      --  --                           --       --
 OVERAPPLY BA       0     0     0      --  --                           --       --
 EVIDENCE  NONE     0     0     0      --  --                           --       --
 EVIDENCE  A        0     0     0      --  --                           --       --
+EVIDENCE  AF       0     0     0      --  --                           --       --
 EVIDENCE  B        0     0     0      --  --                           --       --
 EVIDENCE  AB       0     0     0      --  --                           --       --
 EVIDENCE  BA       0     0     0      --  --                           --       --
 CITE      NONE     0     0     0      --  --                           --       --
 CITE      A        0     0     0      --  --                           --       --
+CITE      AF       0     0     0      --  --                           --       --
 CITE      B        0     0     0      --  --                           --       --
 CITE      AB       0     0     0      --  --                           --       --
 CITE      BA       0     0     0      --  --                           --       --
 NEXTSTEP  NONE     0     0     0      --  --                           --       --
 NEXTSTEP  A        0     0     0      --  --                           --       --
+NEXTSTEP  AF       0     0     0      --  --                           --       --
 NEXTSTEP  B        0     0     0      --  --                           --       --
 NEXTSTEP  AB       0     0     0      --  --                           --       --
 NEXTSTEP  BA       0     0     0      --  --                           --       --
@@ -52,6 +60,15 @@ CITE      NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE NOT_EVALUABLE  NOT_EVALUAB
 NEXTSTEP  NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE NOT_EVALUABLE  NOT_EVALUABLE  NOT_EVALUABLE
 order effect is reported, not predicted
 
+length control (amendment 2 item 1; reported, not predicted)
+class     A vs AF        interval             AF vs B        interval             attribution of A vs B
+DETECT    NOT_EVALUABLE  --                   NOT_EVALUABLE  --                   UNRESOLVED
+OVERAPPLY NOT_EVALUABLE  --                   NOT_EVALUABLE  --                   UNRESOLVED
+EVIDENCE  NOT_EVALUABLE  --                   NOT_EVALUABLE  --                   UNRESOLVED
+CITE      NOT_EVALUABLE  --                   NOT_EVALUABLE  --                   UNRESOLVED
+NEXTSTEP  NOT_EVALUABLE  --                   NOT_EVALUABLE  --                   UNRESOLVED
+a HELD prediction with attribution NOT_SEPARABLE_FROM_VOLUME holds for A as written, not as evidence that structure carried it
+
 pattern: NOT_EVALUABLE
 P-SPLIT    UNTESTED
 P-AB       UNTESTED
@@ -66,5 +83,5 @@ leakage: guessed condition vs true arm, committed guesses only; chance = largest
   coder-1         0      0      0  --/--/-- NOT_EVALUABLE  --/--/-- NOT_EVALUABLE
   coder-2         0      0      0  --/--/-- NOT_EVALUABLE  --/--/-- NOT_EVALUABLE
 
-context chars A 11475, B 19031, A+B 30507; tokens APPROXIMATE (chars/4) A 2869, B 4758, A+B 7627; wins are confounded with length
+context chars A 11475, AF 19030, B 19031, A+B 30507; tokens APPROXIMATE (chars/4) A 2869, AF 4758, B 4758, A+B 7627; A vs B is confounded with length, AF vs B is not
 TIE means the interval lies inside the band; UNRESOLVED is not equivalence.
