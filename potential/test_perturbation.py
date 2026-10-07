@@ -99,10 +99,12 @@ def test_verdict_supported_synthetic():
     # Build a baseline vector with 8 cells, and 8 signals all identical to it.
     # Real similarity = 1.0. Null will be less because shuffling breaks alignment.
     baseline = Vector()
-    for mech, _, _ in [(p[0].split("_")[0], None, None) for p in PERTURBATIONS]:
-        pass
-    # Simpler: use real mechanism/direction pairs from the perturbation set.
-    from perturbation import PERTURBATIONS
+    # P-17: this function once carried a vestigial loop over PERTURBATIONS
+    # (body `pass`, an abandoned first draft) ABOVE a redundant
+    # `from perturbation import PERTURBATIONS` inside the body. The inner
+    # import made the name a LOCAL for the whole function, so the loop
+    # read it before assignment and every run raised UnboundLocalError.
+    # Both are gone; the module-level import is the only binding.
     for name, src_t, tgt_t, _ in PERTURBATIONS:
         # map perturbation to a plausible mechanism
         mech = {
@@ -170,6 +172,53 @@ def test_render_does_not_raise():
     check("verdict:" in s, "render output missing verdict line")
     check("UNDETERMINED" in s, "render should show UNDETERMINED for incomplete")
 
+def test_no_function_rebinds_a_module_import():
+    """P-17 as a property of the file: no function body may import a name
+    that the module already binds at top level. An inner import of an
+    already-imported name makes it local to the whole function, so any
+    read above the inner import raises UnboundLocalError. That is exactly
+    what test_verdict_supported_synthetic did, on every run, until the
+    module-level import broke first (P-03) and hid it."""
+    import ast
+    src = Path(__file__).read_text()
+    check(not _shadowing_imports(src), f"function-level re-import of a module name: {_shadowing_imports(src)}")
+    # null test: the detector fires on a plant with the P-17 shape
+    plant = (
+        "from m import X\n"
+        "def f():\n"
+        "    for _ in X:\n"
+        "        pass\n"
+        "    from m import X\n"
+        "    return X\n"
+    )
+    check(_shadowing_imports(plant) == [("f", "X", 5)], "plant not caught: %r" % _shadowing_imports(plant))
+    clean = "from m import X\ndef f():\n    return X\n"
+    check(_shadowing_imports(clean) == [], "clean file misreported")
+
+
+def _shadowing_imports(src):
+    """[(function, name, lineno)] for every import inside a function body
+    that binds a name the module binds at top level."""
+    import ast
+    tree = ast.parse(src)
+    top = set()
+    for node in tree.body:
+        if isinstance(node, (ast.Import, ast.ImportFrom)):
+            for a in node.names:
+                top.add((a.asname or a.name).split(".")[0])
+    out = []
+    for fn in ast.walk(tree):
+        if not isinstance(fn, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            continue
+        for node in ast.walk(fn):
+            if isinstance(node, (ast.Import, ast.ImportFrom)):
+                for a in node.names:
+                    nm = (a.asname or a.name).split(".")[0]
+                    if nm in top:
+                        out.append((fn.name, nm, node.lineno))
+    return out
+
+
 def main():
     tests = [
         test_perturbation_set,
@@ -182,6 +231,7 @@ def main():
         test_shuffle_preserves_counts,
         test_verdict_undetermined_incomplete,
         test_verdict_supported_synthetic,
+        test_no_function_rebinds_a_module_import,
         test_verdict_not_supported_unrelated,
         test_save_load_roundtrip,
         test_vector_from_ledger,
