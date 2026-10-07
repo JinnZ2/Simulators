@@ -563,3 +563,288 @@ potential/test_perturbation.py            UnboundLocalError: PERTURBATIONS (re-i
 potential/tools/registry_sourced.py       --selftest asserts verified != unverified on
                                           a fixture that yields 1 and 1
 ```
+
+## 12. FIFTH PASS — 2026-09-30, PART B item 13: the §11 known-answer half, closed
+
+Bounded to the two §11 rows the order named — the five `register()` sites in
+`_tra_sle_to_sv` that `seed()` could not reach, and the five MANIFEST ids never
+registered — and they were one defect: the five blocks had been committed
+(79800d3, 6ee102a, 209af6d, f5339f9) after the `return` of `_tra_sle_to_sv`,
+dead code inside a helper `seed()` never calls, so each id was unreachable AND
+absent from the registry at once. Moved unchanged into `_seed_work_order_metrics()`,
+called from `seed()`. `seed_reachable()` was written against exactly this shape
+(fourth occurrence) and this is the first instance it caught by itself.
+
+`python3 -m unittest discover tests` on `claude/potential-part-b-k7Qm`: 133 run,
+4 FAIL (was 8). `python3 tools/known_answer.py` exits 0: registered 50 / expected
+50 COMPLETE, 0 call sites unreachable, 0 cases disagreeing. CLOSED, by id:
+
+```
+test_known_answer_gate.ManifestIsCovered.test_every_manifest_entry_is_registered
+test_known_answer_gate.SeedReachability.test_every_registration_is_reachable_from_seed
+test_known_answer_gate.TheGateFires.test_the_registry_is_complete
+test_known_answer_gate.ToolRuns.test_tool_exits_clean
+```
+
+EXACTLY WHAT IS LEFT of §11, red and untouched, §10's subject:
+
+```
+test_run_manifest.TestArgparseSelftestForm.test_argparse_declared_selftest_is_not_filed_as_cli
+test_run_manifest.TestArgparseSelftestForm.test_those_modules_really_carry_checks
+test_run_manifest.TestRedirectContract.test_no_redirect_names_a_target_that_is_missing
+test_run_manifest.TestRedirectContract.test_the_one_known_violation_is_pinned
+```
+
+Beside them, not new but newly VISIBLE — reaching the five registrations ran their
+cases for the first time, and `metrics exercised: 44 of 50, cases NOT_RUN: 33`.
+The gate does not fail on NOT_RUN (a case that raised on the way in is recorded,
+not scored), so these are on no red test; they are listed here because a registry
+reading COMPLETE with six metrics never exercised is the state `SS_008` names.
+Outside item 13's bound; nothing below was touched:
+
+```
+assessor-coupling/conditions.py::pool_fraction
+     IndentationError, conditions.py line 504 — an unclosed `sys.stderr.write(`
+     spliced between two copies of main()'s tail. Compiles in BOTH parents of
+     merge b57c625 and not in the merge: a decision taken inside the merge
+     commit, tools/merge_silent_loss.py's subject.
+crediting-rate/crediting_rate_v2.py::position
+     SyntaxError, `{` never closed at line 625. Compiles in BOTH parents of merge
+     e167a67 and not in the merge — same shape as the row above.
+chain-position/load_class.py::stability_product
+     SyntaxError, `from __future__` after a third stacked module docstring
+     (line 156). Broken on the second parent of b57c625 (1a9c09b side) and
+     carried through the merge, not introduced by it.
+cooperative-substrate-proof/p3_comprehension.py::gain_from_sizes
+cooperative-substrate-proof/p5_lag.py::lag_ratio
+     ModuleNotFoundError: `scope` — both modules `import scope`, a sibling, and
+     the registry loads them by file path with the folder not on sys.path.
+     A property of the helper's loader, not of the modules.
+instrument-index/build_index.py::claim_only_fraction
+     KeyError 'path' / KeyError 3 — the registry's cases hand the function a list
+     of shape strings and the function reads row dicts; helper and callee
+     disagree on the argument shape.
+```
+
+The three syntax rows are the load-bearing ones: three modules on `main` do not
+compile, two of them since a merge commit that neither side asked for, and no
+suite in `tests/` or in CI reads them, so the registry running them is the only
+instrument that noticed. Each is a separate repair on its own folder and none is
+authorized by PART B; recorded so the next `--selftest` sweep does not read
+`COMPLETE` as `ran`.
+
+## 15. TICKET — 2026-10-04, the eight main-branch failures
+
+Numbered 15 because sections 13 and 14 exist on the unmerged branch
+`claude/potential-part-b-k7Qm`, and reusing them would collide when it merges.
+This branch is `claude/fix-known-answer-run-manifest`, cut from `c03efc4`.
+
+### 15.1 Break commits (T1)
+
+Every first-parent commit from `1a6a129` to `c03efc4` was checked out and the
+8 node ids were run (108 commits; a linear scan, not a bisect, because a test
+can break, be repaired and break again). The break below is the commit after
+the last PASS, from which every later commit is FAIL.
+
+    test                                                         break    first-parent commit
+    TestRedirectContract::test_no_redirect_names_a_target_...    026d2fd  PR #89 (instrument-index)
+    TestRedirectContract::test_the_one_known_violation_...       026d2fd  PR #89
+    TestArgparseSelftestForm::test_argparse_declared_...         2fa8648  PR #83, red on arrival
+    TestArgparseSelftestForm::test_those_modules_really_...      2fa8648  PR #83, red on arrival
+    ToolRuns::test_tool_exits_clean                              2fa8648  PR #83
+    TheGateFires::test_the_registry_is_complete                  2fa8648  PR #83
+    ManifestIsCovered::test_every_manifest_entry_is_registered   d1d3c80  PR #85
+    SeedReachability::test_every_registration_is_reachable_...   3bfb65f  PR #95
+
+The known-answer tests have been red continuously since 2fa8648, but the cause
+has changed over that time:
+
+    2fa8648   ledger/py_ledger/engine.py::quantize and ::recompute expected
+              and not registered
+    d1d3c80   seed() raises NameError on _drc_count_relation
+    3bfb65f   onward: register() calls stranded after the `return` of
+              _tra_sle_to_sv (KNOWN_RED section 11)
+
+The cause at c03efc4 is the third one.
+
+### 15.2 Classification (T2)
+
+    GATE_BROKEN    the four known-answer tests. tools/known_answer.py is the
+                   gate. Five register() calls sat in dead code, so five
+                   metrics were expected and never registered, and the gate
+                   reported it correctly.
+    FIXTURE_DRIFT  the two argparse tests. They pin substrate-alternative/
+                   pilot_loop.py and frame_audit.py as written by fa9a00e.
+                   Merge dbf4cb0 resolved both paths to the 948033a build,
+                   which refuses --selftest. The classifier is correct.
+    FIXTURE_DRIFT  the two redirect tests. Their fixture is the live tree, and
+                   the tree gained two redirects naming files that have never
+                   been committed:
+                       instrument-index/coverage.py -> test_index.py
+                         (landed 1d71e9f, the losing build of merge b57c625)
+                       sense_as_match.py -> test_sense.py
+                         (delivered e884901)
+                   The gate fired correctly on real defects. None of the four
+                   offered classes says that directly; FIXTURE_DRIFT is the
+                   nearest.
+
+No failure is ENV and none is TEST_WRONG.
+
+### 15.3 What this branch changes (T4)
+
+    3f177fd   cherry-pick -x of 1803391 from claude/potential-part-b-k7Qm,
+              unchanged. It moves the five register() calls into
+              _seed_work_order_metrics(), which seed() calls. The check is
+              unchanged. The four known-answer tests close.
+    (repin)   tests/test_run_manifest.py TestArgparseSelftestForm.
+              OLD instances: pilot_loop.py, frame_audit.py.
+              NEW instances: search-substitution/search_substitution.py,
+              qrng-pair-search/qrng_pair_search.py.
+              The check is unchanged (an argparse-declared, attribute-tested
+              --selftest classifies SELFTEST, on real files that carry the
+              form). One assertion is added: a pin must not also carry the
+              `"--selftest" in` literal, because such a pin would pass under
+              the old classifier and would not discriminate.
+              Verified by hand: a00aa9e^:tools/run_manifest.py files both new
+              pins CLI, and the current one files both SELFTEST. The old
+              pilot_loop pin reads REDIRECT under both classifiers, so it no
+              longer discriminated either.
+    NOT CHANGED  the two redirect tests stay red. Repairing them requires
+              authoring a missing test file or editing a delivered file.
+              Pinning the two paths as known violations would weaken an
+              assertion whose own message says "if it is a new violation,
+              that is the finding". These are findings, left to the owner:
+                - sense_as_match.py: deliver test_sense.py, or say what the
+                  redirect should name
+                - instrument-index/coverage.py: RIN_024's archive decision
+                  (4684e40, unmerged) moves the file but keeps the pointer,
+                  so it does not close this either
+
+### 15.4 What green does not mean after this branch
+
+After the cherry-pick the known-answer gate exits 0 with 50 of 50 registered
+and 0 unreachable. Six metrics are registered and never exercised: 33 cases
+come back NOT_RUN, and the gate does not fail on NOT_RUN.
+
+    assessor-coupling/conditions.py::pool_fraction
+    chain-position/load_class.py::stability_product       load_class.py does not compile
+    cooperative-substrate-proof/p3_comprehension.py::gain_from_sizes
+    cooperative-substrate-proof/p5_lag.py::lag_ratio
+    crediting-rate/crediting_rate_v2.py::position         crediting_rate_v2.py does not compile
+    instrument-index/build_index.py::claim_only_fraction
+
+These are the merge splices that section 12 lists, and that section 13 on
+claude/potential-part-b-k7Qm restores file by file. They are not ported here.
+Each restore picks which build wins, and that decision is outside this ticket.
+
+### 15.5 Builds merged while a gate was red (T3), flag only, no re-score
+
+KEY_HOLDER_UNGUARDED (known-answer gate, red since 2fa8648). 23 metrics were
+added to EXPECTED_METRICS while the gate was red, at the first-parent commit
+shown. Any new defect in them was masked by the existing red.
+
+    PR #83 2fa8648   ledger/py_ledger/engine.py::quantize, ::recompute
+    PR #85 d1d3c80   additivity-inheritance::interaction_ss,
+                     credential-channel::routing_cost,
+                     criterion-externality::expected_rate,
+                     deep-research-correction::count_relation,
+                     reporting-chain-loss::composed_bias,
+                     chain-position::stability_product *,
+                     measurand-partition::stiffness_ratio
+    PR #88 7705cef   terminal-crossing::expected_crossings
+    PR #91 429f773   unowned-join::join_coverage,
+                     assessor-coupling::pool_fraction *,
+                     instrument-index::claim_only_fraction *
+    PR #95 3bfb65f   automation-gap::p_uninterrupted,
+                     thwaites-risk-audit::sle_to_sv
+    PR #94 724937f   crediting-rate::position *,
+                     cooperative-substrate-proof::gain_from_sizes *, ::lag_ratio *
+    PR #96 0c6f40e   route-independence::independence_ratio, ::lag_years,
+                     ::net_positions
+    PR #101 6470987  potential::vertex_connectivity, ::unprovenanced_attested
+
+    * = cases still NOT_RUN after this branch (15.4)
+
+KEY_HOLDER_UNGUARDED (run_manifest redirect contract, red since 026d2fd).
+30 REDIRECT records were added at or after 026d2fd:
+
+    route-independence 20, cooperative-substrate-proof 3,
+    instrument-index 2, unowned-join 2, thwaites-risk-audit 1,
+    undeclared-cuts 1, (root) 1
+
+All of them resolve today except the two in 15.2.
+
+### 15.6 Suite (tests/, pytest)
+
+    c03efc4 (main)    8 failed, 125 passed   (133 tests)
+    this branch       2 failed, 132 passed   (134 tests: one added in the
+                                              repin; the 2 are the redirect
+                                              tests, 15.3)
+
+## 16. 2026-10-05 — the known-answer gate fails on skipped cases; parked items
+
+### 16.1 The change
+
+`tools/known_answer.py` exits nonzero when any case is NOT_RUN. Its summary
+ends in a block that cannot be missed:
+
+    SKIPPED (NOT_RUN): 33 cases in 6 metrics   -- GATE RED: a skipped case is not a passing case
+
+Each metric is listed with its skip count and the first error.
+
+Old check: exit 0 unless a case disagreed with the registry, a metric was
+missing, a registration was unreachable, or a registration sat outside seed().
+NOT_RUN counted toward none of these.
+
+New check: all of the above, plus any NOT_RUN case. This tightens the gate and
+weakens nothing. Section 15.4 said the gate's green carried 6 never-exercised
+metrics. That green is gone.
+
+    tools/known_answer.py   skipped(), exit_code(), the SKIPPED block
+    tests/test_known_answer_gate.py
+        test_a_skipped_case_turns_the_gate_red             planted raising callable -> listed, exit 1
+        test_the_skipped_count_is_printed_in_the_summary   the line is present; nonzero exit whenever the count > 0
+
+Consequence: `ToolRuns::test_tool_exits_clean` is RED again. It is red for the
+33 skipped cases below and for nothing else. Suite (tests/, pytest):
+
+    3 failed, 133 passed
+      test_known_answer_gate::ToolRuns::test_tool_exits_clean   (16.2: the 33 skips)
+      test_run_manifest::TestRedirectContract x2                (16.2: the two redirects)
+
+### 16.2 OPEN — awaiting Kavik (parked; nothing below was changed)
+
+    1  sense_as_match.py -> test_sense.py
+       The redirect names a file that has never been committed. Deliver
+       test_sense.py, or say what the redirect should name. The redirect
+       tests stay RED. Not pinned as a known violation.
+
+    2  instrument-index/coverage.py -> test_index.py
+       The fate of the file: losing build of merge b57c625, landed 1d71e9f.
+       The pointer names a file that has never been committed.
+       Archiving the file (4684e40 on claude/potential-part-b-k7Qm) keeps
+       the pointer and does not close this. The redirect tests stay RED.
+
+    3  chain-position/load_class.py and crediting-rate/crediting_rate_v2.py
+       Neither compiles; each is a merge splice of two builds. No winning
+       build picked.
+         load_class.py          SyntaxError: from __future__ imports must
+                                occur at the beginning of the file
+                                -> stability_product, 5 cases skipped
+         crediting_rate_v2.py   SyntaxError: '{' was never closed (line 625)
+                                -> position, 5 cases skipped
+
+### 16.3 OPEN, not in the parked three, and with the same shape
+
+The remaining four skipped metrics also go through files that section 13 (on
+claude/potential-part-b-k7Qm) lists as spliced builds. Repairing any of them is
+a build pick, so they are parked with the three above rather than fixed under
+"safe parts only".
+
+    assessor-coupling/conditions.py::pool_fraction         IndentationError line 504   6 skipped
+    cooperative-substrate-proof/p3_comprehension.py::gain_from_sizes
+                                                           ModuleNotFoundError 'scope' 5 skipped
+    cooperative-substrate-proof/p5_lag.py::lag_ratio       ModuleNotFoundError 'scope' 6 skipped
+    instrument-index/build_index.py::claim_only_fraction   KeyError: 'path'            6 skipped
+
+The gate stays RED until all six skipped metrics run.
