@@ -260,3 +260,108 @@ shared priors agree for reasons other than the response.
 
 The five class predictions, the coded fields, the probes, and the
 contamination declarations above are unchanged.
+
+## AMENDMENT 2 -- 2026-10-07, before any run
+
+Appended, not rewritten. The original (first 6475 bytes) and amendment 1
+are unchanged. No model has been called and no response coded as of this
+amendment. No registered prediction changes. The rules below add one
+control arm, a pilot phase and a pin on the documents under test, and
+promote one harness choice to a rule.
+
+### 1. Length-matched control arm AF
+
+B's assembled block is 1.66x A's in characters. A-vs-B therefore compares
+structure and volume together. Arm AF is A's text followed, inside the
+same reference block, by neutral filler up to B's block length:
+
+```text
+filler     lorem-ipsum words from the standard placeholder list, generated
+           deterministically, after one blank line, cut at a word boundary
+           so AF's block is within one word of B's block, never longer
+position   inside A's block, so AF, A and B each present as one document
+arms       NONE / A / AF / B / AB / BA       (k = 30: 2700 responses)
+```
+
+No filler is perfectly neutral. A model can remark on placeholder text,
+which a coder could read as an arm cue. The guess check below covers AF.
+`--strip` also removes 8-word runs of the filler.
+
+Two comparisons are added per class. Both are REPORTED, and neither is
+predicted:
+
+```text
+A vs AF     volume at fixed content
+AF vs B     structure at matched length
+```
+
+Each class's A-vs-B verdict gets an attribution read from AF vs B (AF
+standing for A):
+
+```text
+A-vs-B          AF-vs-B                    attribution
+win for X       win for the same side      STRUCTURE_SURVIVES
+win for X       TIE or the other side      NOT_SEPARABLE_FROM_VOLUME
+TIE             TIE                        TIE_SURVIVES
+TIE             a win                      TIE_NOT_SURVIVING
+otherwise (UNRESOLVED / NOT_EVALUABLE / NOT_READABLE on either)   UNRESOLVED
+```
+
+The registered predictions are still scored on A vs B, as registered.
+The attribution is printed beside each one. A HELD prediction whose
+attribution is NOT_SEPARABLE_FROM_VOLUME is reported as held for A as
+written, but not as evidence that structure carried it.
+
+Leakage: AF is a sixth exact-arm category (chance 1/6). At the
+document-set grain AF counts as A, so the categories are NONE / A / B /
+both, and chance is the largest true share.
+
+### 2. Pilot phase
+
+```text
+pilot      k = 3, its own run_tag, manifest phase "pilot"
+gate       PILOT_PASS iff, in every class, min pairwise kappa >= 0.60
+           over all arms' rows (about 54 rows per class at k = 3), AND no
+           coder reads LEAK_DETECTED at either grain; else PILOT_FAIL with
+           the reasons named
+headline   a pilot score prints the gate, kappa, agreement and leakage
+           only; no A-vs-B verdict, prediction status or pattern
+main       manifest phase "main" must name pilot_run_tag (different from
+           run_tag) and pilot_result PILOT_PASS, or --score refuses.
+           Pilot rows never enter a main score: a row with another
+           run_tag is refused (amendment 1 item 3)
+after FAIL the probes and predictions do not change. Coding instructions
+           or strip parameters may change, but only by a further dated
+           amendment, followed by a new pilot under a new run_tag
+```
+
+The pilot kappa is a point estimate on about 54 rows per class. Its
+standard error is roughly 0.1, so a pass near the floor is weak. The
+main run recomputes kappa on all of its own rows and gates on that.
+
+### 3. CHOICE 8 becomes a rule
+
+If the difference interval lies inside [-0.15, +0.15], the class reads
+TIE, even when the interval also excludes 0. This is equivalence-testing
+logic: a difference that is real but smaller than the declared tolerance
+counts as equivalence.
+
+### 4. The documents under test are pinned by hash
+
+The predictions were registered (7f780aa) against these bytes:
+
+```text
+A  human-sensing-prior.md  sha256 1a42dc8cf9807aa832feb3308f3d847dfdd9e90a7454c676d6611aaba592cbd7
+B  PATHWAY_B.md            sha256 52a930468873cc0008e407cd59c9c1e5e34ae1dc6624f627ffbe842e8d0e5f8e
+```
+
+`main` carries a later revision of A, made by another session on another
+branch (e82e0cc, c3578c8; sha256
+a5c4b6cf6e0cb08989aa775b589e5cc98ade94c578df3c3a459bea18161db329). It
+splits P4 into P4a/P4b and narrows the Goris scope. On that revision the
+NEXTSTEP feature marker `**P4. Effective-N` no longer locates. That file
+is a different object, and these predictions were not registered against
+it. `--emit` refuses an A or B whose sha256 differs from the pins above.
+After a merge, the registered A can be supplied with
+`--a-file`, e.g. `git show 7f780aa:human-sensing-prior/human-sensing-prior.md`.
+Testing main's A would need its own registration.
