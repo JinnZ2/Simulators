@@ -1250,24 +1250,76 @@ so neither is taken here:
 ### 19.4 PIN block
 
 <!-- known-red-pins: begin -->
-PIN ka.skipped.cases - 28 @9262516
-PIN ka.skipped.metrics - 5 @9262516
-PIN ka.skipped.metric assessor-coupling/conditions.py::pool_fraction 6 @9262516
-PIN ka.skipped.metric chain-position/load_class.py::stability_product 5 @9262516
-PIN ka.skipped.metric cooperative-substrate-proof/p3_comprehension.py::gain_from_sizes 5 @9262516
-PIN ka.skipped.metric cooperative-substrate-proof/p5_lag.py::lag_ratio 6 @9262516
-PIN ka.skipped.metric instrument-index/build_index.py::claim_only_fraction 6 @9262516
+PIN ka.skipped.cases - 11 @59a5e5d
+PIN ka.skipped.metrics - 2 @59a5e5d
+PIN ka.skipped.metric cooperative-substrate-proof/p3_comprehension.py::gain_from_sizes 5 @59a5e5d
+PIN ka.skipped.metric cooperative-substrate-proof/p5_lag.py::lag_ratio 6 @59a5e5d
+PIN rm.redirect_missing archive/crediting-rate/crediting_rate_v2.py - @59a5e5d
+PIN rm.redirect_missing archive/instrument-index/build_index.py - @59a5e5d
+PIN rm.redirect_missing archive/instrument-index/coverage.py - @59a5e5d
 PIN rm.redirect_missing crediting-rate/archive/f168f79/crediting_rate_v2.py - @9262516
 PIN rm.redirect_missing instrument-index/coverage.py - @9262516
 PIN rm.redirect_missing sense_as_match.py - @9262516
 PIN rm.violation anchor-position/normalize.py - @9262516
+PIN rm.violation archive/crediting-rate/crediting_rate_v2.py - @59a5e5d
+PIN rm.violation archive/instrument-index/build_index.py - @59a5e5d
+PIN rm.violation archive/instrument-index/coverage.py - @59a5e5d
 PIN rm.violation crediting-rate/archive/f168f79/crediting_rate_v2.py - @9262516
 PIN rm.violation instrument-index/coverage.py - @9262516
 PIN rm.violation sense_as_match.py - @9262516
 PIN suite.failing test_tool_exits_clean INTENDED @9262516
 PIN suite.failing test_no_redirect_names_a_target_that_is_missing UNINTENDED @9262516
 PIN suite.failing test_the_one_known_violation_is_pinned UNINTENDED @9262516
+PIN suite.failing test_no_module_binds_a_toplevel_name_twice UNINTENDED @59a5e5d
 <!-- known-red-pins: end -->
 
 To re-pin: change the figure and its commit together, in the same commit
 as the change that moved it, and record the move as a new section here.
+
+### 19.5 Re-pin @59a5e5d — PR #105 merged
+
+The pins above were written @9262516. PR #105 (claude/potential-part-b-k7Qm,
+merge d675fc7) then landed on main, now @59a5e5d. Merging main into this
+branch made the checker exit 1 on 13 pins. That was the check working:
+the tree moved. Each pin now carries the commit where its figure was last
+verified. A pin whose figure did not move keeps @9262516.
+
+    figure                           @9262516    @59a5e5d   moved by
+    known-answer skipped cases       28          11         #105 builds pool_fraction, stability_product,
+    known-answer skipped metrics     5           2            claim_only_fraction (spliced builds separated)
+    redirects naming a missing file  3           6          #105 archives three spliced builds to
+    contract violations              4           7            archive/<folder>/; each archived copy keeps
+                                                            its redirect
+    suite                            136 / 3 red 145 / 4 red (main alone; 148 / 4 with this branch)
+
+Still skipped: gain_from_sizes 5 and lag_ratio 6, both ModuleNotFoundError
+'scope' (cooperative-substrate-proof). test_tool_exits_clean stays INTENDED
+red until those 11 run.
+
+The fourth failure, test_no_module_binds_a_toplevel_name_twice, is section
+14.4's: eight duplicate top-level names. Five are in delivered drops, from
+merge 04d16d0 (PR #71). Three are dead earlier helper copies in
+tools/known_answer.py. Section 14 recorded it "Not repaired in this pass"
+and it reached main with #105. It is UNINTENDED, known and parked, not by
+design.
+
+The three new redirects. Same shape as 19.3; none is the live code's:
+
+    archive/crediting-rate/crediting_rate_v2.py  -> crediting-rate/test_crediting_v2.py
+    archive/instrument-index/build_index.py      -> test_index.py
+    archive/instrument-index/coverage.py         -> test_index.py
+
+For the archive/crediting-rate/ copy, the target file does exist beside it:
+archive/crediting-rate/test_crediting_v2.py. The redirect names its
+pre-archive path, which run_manifest resolves from ROOT because it holds a
+"/". Moving the folder broke the pointer, not the file. That adds a third
+option to 19.3's two. Not taken:
+
+    (c) for a file under archive/<folder>/, resolve a ROOT-relative target
+        "<folder>/<rest>" as archive/<folder>/<rest>. The redirect is then
+        checked against the copy that was archived with it.
+
+Under (c), one of the three new violations would resolve. Under (b), all
+four archived redirects would leave the contract. Either way, the two live
+redirects (instrument-index/coverage.py, sense_as_match.py) remain.
+
