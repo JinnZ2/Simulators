@@ -633,6 +633,320 @@ instrument that noticed. Each is a separate repair on its own folder and none is
 authorized by PART B; recorded so the next `--selftest` sweep does not read
 `COMPLETE` as `ran`.
 
+## 13. SIXTH PASS — 2026-09-30, merge-scar repairs and the compile gate
+
+Order: compile gate first, then repairs one commit per module, then the merge
+instrument, then list the loader/argument mismatches. Branch
+`claude/potential-part-b-k7Qm`.
+
+### 13.1 The gate, and its first run
+
+`tests/test_compile_gate.py` — `compile()` over every `.py` in the tree
+(`ast.parse` does not enforce the `from __future__` placement rule, `compile()`
+does), every failure by path, line and message, one declared exemption
+(`relational/cartesian_vs_relational_demo.py`, PEP 701, compiled on 3.12+ and
+SKIPPED with its reason otherwise). Committed alone at `928b4e4`, before any
+repair, so the red run is on the record:
+
+```
+compiled 1129 files, 8 red, 1 skipped
+RED  assessor-coupling/conditions.py:504            unexpected indent
+RED  assessor-coupling/precedent.py:486             unexpected indent
+RED  chain-position/load_class.py:156               from __future__ after a stacked docstring
+RED  chain-position/trust_provenance.py:236         from __future__ after a stacked docstring
+RED  cooperative-substrate-proof/p2_substrate.py:479 unexpected indent
+RED  cooperative-substrate-proof/scope.py:182       '[' was never closed
+RED  crediting-rate/crediting_rate_v2.py:625        '{' was never closed
+RED  stability-trigger-envelope/descent_record.py:766 unterminated triple-quoted string
+```
+
+Eight, not the three §12 recorded. §12 was right that the registry caught
+those three "by accident of reach"; it reached three of eight.
+
+### 13.2 What the eight are — a correction to §12
+
+Every one of the eight first fails to compile in a MERGE commit whose two
+parents both compile, and every one is a file two independent builds of one
+folder ADDED under the same name. The merge kept both builds' distinct files
+side by side (`test_assessor.py` beside `selftest.py`, `p1_records.py` beside
+`p1_dependency_records.py`, and so on) and, for the files whose names collided,
+interleaved the two whole files into one: every distinct line of both parents
+present, nothing dropped, and nothing that parses. There is no "merged region"
+to restore; the unit is the file, and the pick is between two builds.
+
+```
+b57c625  (209af6d d23741d)  assessor-coupling/conditions.py, precedent.py
+                            instrument-index/build_index.py        (compiles; see 13.4)
+1a9c09b  (0e77d9a d1d3c80)  chain-position/load_class.py, trust_provenance.py
+e167a67  (e4f5418 4b1f21e)  crediting-rate/crediting_rate_v2.py
+                            cooperative-substrate-proof/scope.py, p2_substrate.py,
+                            p3_comprehension.py (compiles), run_all.py (compiles)
+803ffd5  (038a30f 0c6f40e)  stability-trigger-envelope/descent_record.py
+```
+
+§12 read `chain-position/load_class.py` as "broken on the second parent of
+b57c625 and carried through". True at b57c625; the break was introduced one
+merge earlier, at 1a9c09b, where both parents compile. §12's reading of
+`instrument-index/build_index.py::claim_only_fraction` as an argument-shape
+mismatch was also wrong: the file is a splice with five functions defined
+twice, the later definition winning, and the KeyError was the other build's
+`parse_header` receiving this build's rows.
+
+`803ffd5` is the one CONFLICT rather than both-added: one base (bc2b315),
+two divergent edits, the merge kept `038a30f`'s rewrite whole and pasted a
+54-line fragment of main's `fixtures()` tail (the X6 fixture, STE_011) without
+the function head — the unterminated string.
+
+### 13.3 The repairs, one commit per module, the pick stated in each
+
+Each of the eleven commits (`ff36bb0` .. `240425a`) restores the file to ONE
+parent's bytes (a diff against that parent for the path is empty), records the
+other parent's blob id so it can be checked out in one command, states the
+pick and the reason, and records that the other build's suite was red before
+(the module did not compile) and is red after (`AttributeError` on the other
+build's names). The rule applied uniformly, stated before any file was
+touched: **the build whose functions `tools/known_answer.py` registers**
+(the operator's own PART B item 13 ordered those registrations reached), and
+where no registry name exists (`descent_record.py`), the build the tree's
+own records point at (`samples/descent_record.sample.txt` byte-identical to
+main's, STE_011's X6 only in main's module, the root `CLAUDE.md` count
+"49/49" main's suite). Picks: assessor-coupling ^1 (6ee102a build),
+crediting-rate ^1 (ad56177), cooperative-substrate-proof ^1 (f5339f9),
+instrument-index ^1 (209af6d), chain-position ^2 (781fb5d, main),
+stability-trigger-envelope ^2 (main). The scratch-worktree runs behind the
+rule, both directions:
+
+```
+pick A (as committed)                      pick B (the other build)
+assessor    test_assessor.py 98/0          selftest.py       72 checks 1 FAIL (its own)
+crediting   crediting_rate_v2 --selftest 55/0   test_crediting_v2.py 124/0
+coop        test_proof.py 194/0            selftest.py       FAIL (its own)
+chain       test_chain.py 54/0             selftest.py       96/0
+instr-index tests/test_build_index.py 125/0   (^2 has no suite)
+ste         test_descent_record.py 49/0     test_envelope.py  217/0
+```
+
+Symmetric: each pick makes its own build's suite green and leaves the other
+build's suite red, exactly as the folders were red before, only now for a
+reason a traceback names. **Resolving each folder to one build — deleting
+or renaming the losing build's files — is the RIN_024 decision and is not
+taken here.** What this pass changes is that one build per folder now runs.
+
+The cost recorded per folder: `stability-trigger-envelope/test_envelope.py`
+(217 checks on the rewrite) is red under the pick, as `test_descent_record.py`
+was red under the rewrite before the merge; `chain-position/selftest.py`
+(CHP_ claims), `assessor-coupling/selftest.py`, `cooperative-substrate-proof/
+selftest.py`, `crediting-rate/test_crediting_v2.py` are the losing builds'
+suites and stay red. Nine spliced non-`.py` files are NOT repaired:
+`CLAIM_TABLE.md` and `README.md` in all four folders, `chain-position/
+WORK_ORDER.md` (the same delivered order twice, 166+166 -> 167 lines),
+`crediting-rate/PREDICTION_V2.md`, `cooperative-substrate-proof/LICENSE`,
+`instrument-index/INDEX-SPEC.md`, `cooperative-substrate-proof/samples/
+run_all.sample.txt` (the one real loss row). The root `CLAUDE.md` carries two
+entries for each of these folders, one per build, and is not edited.
+
+### 13.4 The merge instrument (order item 3)
+
+Run as delivered on `b57c625` and `e167a67`, `tools/merge_silent_loss.py`
+reports 0 and 1 files with loss (the sample file). Lines lost: none. The
+instrument's test is loss, and these merges lost nothing — they kept
+everything twice. So the cases are not filed against a reading that cannot
+hold them; the instrument gets the reading: `BOTH_KEPT` (file absent at base,
+present in both parents, merge equals neither, every distinct line of both
+parents in the merge), lost 0, counted apart from loss rows, with a fixture
+and selftest check (12 checks). Over the tree it reads 20 files across the
+three both-added merges, 11 of them `.py` — the eleventh,
+`instrument-index/build_index.py`, compiled and was invisible to the gate;
+this reading is what found it. Run appended to
+`route-independence/samples/merge_loss.sample.txt`. The clone here is
+shallow (41 merges reachable, 4 refused), so it is not a rerun of the sample's
+full-history audit.
+
+### 13.5 Order item 4 — the loader/argument mismatches, list only
+
+Three were named. One dissolved (13.2: `build_index.py` was a splice, now
+PASS). Two remain, both the registry loader's, not the modules':
+
+```
+cooperative-substrate-proof/p3_comprehension.py::gain_from_sizes   NOT_RUN  ModuleNotFoundError: scope
+cooperative-substrate-proof/p5_lag.py::lag_ratio                  NOT_RUN  ModuleNotFoundError: scope
+```
+
+Both `import scope`, a sibling; `tools/known_answer.py` loads a metric's
+module by file path with the folder not on `sys.path`. Not repaired here.
+
+### 13.6 State after this pass
+
+`python3 -m unittest discover tests`: 136 run, 4 FAIL — the same four
+`test_run_manifest` rows as §12, untouched. `tests/test_compile_gate.py`:
+compiled 1129, 0 red, 1 skipped. `tools/known_answer.py`: registered 50 /
+expected 50 COMPLETE, 48 exercised, the two `import scope` rows above the
+only never-exercised ones, 0 disagreeing.
+
+## 14. SEVENTH PASS — 2026-09-30, build separation and gate extensions
+
+Order: archive the losing builds (RIN_024 decided: archive, don't delete),
+hold the archived suites at a declared state, extend the compile gate with a
+duplicate-definition check and the interpreter version, list the spliced
+docs and the loader mismatches. Branch `claude/potential-part-b-k7Qm`, PR #105
+(subscribed; CI and review comments on it are the only things authorized
+there).
+
+### 14.1 What did not hold
+
+- **"each of the 11 folders"** — the eleven restored modules live in **six**
+  folders. Six archives, six commits.
+- **"EXPECTED_RED"** — three of five archived suites run **GREEN** from their
+  archive (cooperative-substrate-proof `selftest.py` 82/0, chain-position
+  `selftest.py` 96/0, stability-trigger-envelope `test_envelope.py` 217/0),
+  because the losing build moved whole and its suite needs nothing the live
+  folder kept. Two are RED for a reason the test names (assessor-coupling
+  reads `WORK_ORDER.md` from its own directory, which stayed live;
+  crediting-rate imports the shared `crediting_rate.py`, which stayed live);
+  instrument-index's losing build shipped no suite. The test declares the
+  observed state per suite and fails on a change in either direction; it does
+  not declare RED where the tree runs GREEN.
+- **The duplicate-definition check is RED on the tree it landed in**: five
+  modules besides `build_index.py` trip it (14.4). Recorded; nothing repaired.
+
+### 14.2 The archive (order item 1)
+
+`archive/<folder>/` holds the build the restore commits did not pick, whole:
+files that were only ever that build's moved with `git mv`, files both builds
+had under one name written from the losing parent's blob byte-for-byte, files
+identical in both parents left in place. No file content edited. Each carries
+`PROVENANCE.md` (merge sha, both parents, blob per file, the pick rule, the
+losing suite's last state). The live folder keeps one build; the spliced
+`.md`/LICENSE files stay in it unedited (14.5).
+
+```
+247f4cc archive/assessor-coupling            b57c625^2   mv 7   wr 4   shared 1
+a2882ca archive/crediting-rate               e167a67^2   mv 32  wr 6   shared 15
+9243bcd archive/cooperative-substrate-proof  e167a67^2   mv 7   wr 8   shared 0
+4684e40 archive/instrument-index             b57c625^2   mv 4   wr 2   shared 0
+c656081 archive/chain-position               1a9c09b^1   mv 8   wr 5   shared 0
+a7bef9b archive/stability-trigger-envelope   803ffd5^1   mv 6   wr 5   shared 2
+```
+
+Live suites after the move, unchanged: test_assessor 98/0, crediting_rate_v2
+--selftest 55/0, test_proof 194/0, test_chain 54/0, test_descent_record 49/0,
+instrument-index tests 125/0.
+
+### 14.3 Archived suites, held by `tests/test_archive_expected_red.py`
+
+```
+archive/assessor-coupling/selftest.py               RED    FileNotFoundError: WORK_ORDER.md
+archive/crediting-rate/test_crediting_v2.py         RED    No module named 'crediting_rate'
+archive/cooperative-substrate-proof/selftest.py     GREEN  checks: 82   failed: 0
+archive/instrument-index/                           NO_SUITE
+archive/chain-position/selftest.py                  GREEN  checks: 96   failed: 0
+archive/stability-trigger-envelope/test_envelope.py GREEN  217 checks, 0 failed
+```
+
+The eleven modules those builds carry: `conditions.py`, `precedent.py`
+(assessor-coupling); `crediting_rate_v2.py`; `scope.py`, `p2_substrate.py`,
+`p3_comprehension.py`, `run_all.py` (cooperative-substrate-proof);
+`build_index.py`; `load_class.py`, `trust_provenance.py` (chain-position);
+`descent_record.py` — each present in its archive at the losing parent's
+blob, each present live at the winner's. A folder under `archive/` missing
+from the test's table, or lacking `PROVENANCE.md`, also fails it.
+
+### 14.4 Gate extensions (order items 3, 4)
+
+`tests/test_compile_gate.py` now also fails on a top-level `def`/`class`
+name bound twice in one module (direct module-body children only; a
+try/except redefinition is not read), listed by path, name and lines, with a
+planted-duplicate fixture and a clean control; the interpreter version prints
+on every run and the PEP 701 skip names it. First run, python 3.11.15:
+**compiled 1140, 0 red, 1 skipped, 8 duplicate names in 5 modules** — five
+modules besides `build_index.py` trip it:
+
+```
+earth_economics/asteroid_mining_audit.py             main 157/476, run_asteroid_fermi 124/437
+grounding-layers/cultural_lens.py                    CulturalLens 14/149
+grounding-layers/run_grounding_pipeline.py           run_pipeline 57/261
+play-sims/atmospheric-heating/meteor_heating_bins.py density 30/281
+tools/known_answer.py                                _rcl_composed_bias 911/1813,
+                                                     _cpd_stability_product 925/1827,
+                                                     _drc_count_relation 939/1796
+```
+
+The four delivered-drop hits all enter at merge `04d16d0` (PR #71), bodies
+differing — the same class of merge artifact as §13, four merges earlier,
+in files that parse. The three in `tools/known_answer.py` are dead earlier
+copies of helpers redefined by the registry restorations of 2026-09-23/27
+(`d0325d7`, `881c636`); code identical ignoring docstrings, and the later
+copy is the one `seed()` reaches, so no registered value moves. **Not
+repaired in this pass** (the order asked whether anything else trips it, not
+for the trips to be closed); `test_no_module_binds_a_toplevel_name_twice`
+stays RED until they are.
+
+### 14.5 The spliced docs (order item 5) — list only, no edits
+
+Every one differs between its two sides; the live copy is the splice.
+
+```
+file                                                winner side (build)        loser side (build)         live splice
+assessor-coupling/CLAIM_TABLE.md                    b57c625^1 6ee102a 137 ln   b57c625^2 0e77d9a 29 ln    164 ln
+assessor-coupling/README.md                         b57c625^1 6ee102a 105      b57c625^2 0e77d9a 159      262
+instrument-index/INDEX-SPEC.md                      b57c625^1 209af6d 253      b57c625^2 1d71e9f 166      419
+crediting-rate/CLAIM_TABLE.md                       e167a67^1 311              e167a67^2 289              507
+crediting-rate/PREDICTION_V2.md                     e167a67^1 ad56177 38       e167a67^2 f168f79 26       64
+crediting-rate/README.md                            e167a67^1 236              e167a67^2 179              342
+cooperative-substrate-proof/CLAIM_TABLE.md          e167a67^1 f5339f9 366      e167a67^2 8264356 26       392
+cooperative-substrate-proof/LICENSE                 e167a67^1 f5339f9 9        e167a67^2 8264356 121      130
+cooperative-substrate-proof/README.md               e167a67^1 f5339f9 130      e167a67^2 8264356 142      270
+cooperative-substrate-proof/samples/run_all.sample.txt  e167a67^1 f5339f9 20   e167a67^2 8264356 89       104 (the one loss row)
+chain-position/CLAIM_TABLE.md                       1a9c09b^2 781fb5d 40       1a9c09b^1 84935a2 28       68
+chain-position/README.md                            1a9c09b^2 781fb5d 83       1a9c09b^1 84935a2 179      260
+chain-position/WORK_ORDER.md                        1a9c09b^2 781fb5d 166      1a9c09b^1 84935a2 166      167 (same order delivered twice)
+stability-trigger-envelope/CLAIM_TABLE.md           803ffd5^2 bc2b315 172      803ffd5^1 bc2b315 60       111
+stability-trigger-envelope/README.md                803ffd5^2 bc2b315 352      803ffd5^1 bc2b315 204      216
+```
+
+Fifteen, not nine: §13.3 counted the nine in the four §13 folders and missed
+instrument-index's `INDEX-SPEC.md` and the crediting-rate/chain-position
+docs it listed by name only. The loser side's version of each is now in
+`archive/<folder>/` byte-for-byte; the live splice is the separate decision.
+
+### 14.6 Loader mismatches (order item 6) — unchanged
+
+```
+cooperative-substrate-proof/p3_comprehension.py::gain_from_sizes   NOT_RUN  ModuleNotFoundError: scope
+cooperative-substrate-proof/p5_lag.py::lag_ratio                  NOT_RUN  ModuleNotFoundError: scope
+```
+
+### 14.7 State after this pass
+
+`tests/test_compile_gate.py`: compiled 1140 / 0 red / 1 skipped / 8
+duplicate names (RED on that check). `tests/test_archive_expected_red.py`:
+2 RED as declared, 3 GREEN as declared, 1 NO_SUITE, passing.
+`python3 -m unittest discover tests`: 139 run, 5 FAIL — the four
+`test_run_manifest` rows of §12 plus the duplicate-name check.
+`tools/known_answer.py`: 50/50 COMPLETE, 0 disagreeing.
+
+### 14.8 Correction to 14.4 and to commit 7f5ac2a's message, same pass
+
+Both say the three duplicate helpers in `tools/known_answer.py` are "code
+identical ignoring docstrings". They are not — diffed with the docstrings
+stripped, after the sentence was already pushed:
+
+```
+_rcl_composed_bias      dead@911  loads under module name "_rcl";      live@1813 "_rcl_hop"
+_cpd_stability_product  dead@925  loads under "_cpd";                  live@1827 "_cpd_load"
+_drc_count_relation     dead@939  no sys.path insert;                  live@1796 inserts
+                        measurand-partition/ on sys.path around the load, in try/finally
+```
+
+The third difference is load-bearing: `deep-research-correction/check.py`
+imports `common` from `measurand-partition/`, so the dead copy would raise
+ModuleNotFoundError where the live copy runs. The conclusion in 14.4 stands
+for the wrong reason: no registered value moves because the LIVE copy is
+the later one and the correct one, not because the copies are the same.
+The dead copies are still not removed here. The wrong sentence was a check
+written as a claim — the identity was asserted from a diff that showed only
+docstring lines because the diff was truncated to six lines — and the
+test that caught it was re-running the comparison on the whole body.
 ## 15. TICKET — 2026-10-04, the eight main-branch failures
 
 Numbered 15 because sections 13 and 14 exist on the unmerged branch

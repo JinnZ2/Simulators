@@ -1,0 +1,91 @@
+scope: C1-C4 coding pass
+  ok    all PRESENT -> ADMISSIBLE
+  ok    planted ABSENT C4 -> OUT_OF_SCOPE naming C4
+  ok    missing C3 -> UNDETERMINED, not OUT_OF_SCOPE
+  ok    ABSENT beats UNCODED
+  ok    value outside vocabulary -> MALFORMED, typed
+  ok    non-dict -> MALFORMED, not raised
+  ok    C1 from clocks: short window -> PRESENT
+  ok    C1 from clocks: long window -> ABSENT
+  ok    C1 from clocks: undeclared -> UNCODED, never ABSENT
+  ok    constructed corpus reaches three states
+P3: comprehension
+  ok    shared-vocabulary corpus -> CONVERGENT
+  ok    planted disjoint-vocabulary corpus -> INDISTINGUISHABLE_FROM_NULL
+  ok    disjoint corpus gap sits on zero (|gap/sd| < 3)
+  ok    one part -> NOT_EVALUABLE (null equals shared arm by construction)
+  ok    short -> TOO_SHORT; empty -> EMPTY
+  ok    both arms same length (letter-level control)
+  ok    shared arm maps a shared word identically across parts
+  ok    --self corpus -> CONVERGENT
+  ok    script share reported, not gated
+P4: goal coherence
+  ok    self chain -> COHERENT
+  ok    correction (replacement + reason) -> CORRECTED, terminates
+  ok    planted contest without replacement -> NO_ANSWER, final None
+  ok    dangling take -> DANGLING naming the id
+  ok    empty -> EMPTY; non-list -> MALFORMED
+  ok    contest with replacement but NO reason is a contest, not a correction
+  ok    sabotage cheaper -> 0 of 3 complete
+  ok    sabotage cheaper -> still 0 at budget 5000 (not a budget effect)
+  ok    sabotage not cheaper -> 3 of 3 complete at turn n
+  ok    single agent cannot sabotage -> completes
+  ok    malformed turf args -> typed
+  ok    turf war is deterministic (no random module)
+P2: substrate
+  ok    on itself -> SUBSTRATE_HOLDS, no layer violated
+  ok    second run reproduces sha256 and every count
+  ok    unverified floor > 0 on its own source (no call verifies its contract by default)
+  ok    proxy fires on tested-next and try-wrapped, not on bare
+  ok    planted non-IEEE float_info -> numeric VIOLATED
+  ok    real float_info -> IEEE_754_BINARY64
+  ok    faithful chain -> OUTPUT 7
+  ok    one planted adversarial link -> NO_OUTPUT, typed, not raised
+  ok    scheduler count exact under lock
+  ok    network layer is a socketpair: no connect() anywhere in P2
+P1: dependency records
+  ok    fixture declares itself CONSTRUCTED on line 1
+  ok    fixture: 15 sourced records, 0 unsourced
+  ok    fixture: exactly one argued (cores), ratio 14.0
+  ok    every class in CLASSES reached except PRIOR_RESULT (fixture has none; visible zero)
+  ok    METHOD head is the cited author
+  ok    planted wrong span -> UNSOURCED
+  ok    every span slices out its own text
+  ok    no dependency language -> EMPTY, ratio None
+  ok    empty methods -> EMPTY, typed
+  ok    nothing argued -> ratio undefined, never large
+  ok    no network module in P1
+P5: lag declaration
+  ok    antibiotic anchor -> DECLARED_UNKNOWN, ratio > 1000
+  ok    trial anchor -> DECLARED_UNKNOWN
+  ok    same-window -> TRACKED
+  ok    undeclared t_visible -> UNDECLARED with ratio None (not 0)
+  ok    planted zero t_scored -> UNDECLARED, no division
+  ok    threshold boundary: 10.0 -> DECLARED_UNKNOWN, 9.99 -> TRACKED
+  ok    C1 coded from clocks on anchors: PRESENT PRESENT ABSENT UNCODED
+  ok    gate blocks nothing: every action returns a state
+folder constraints
+  ok    p1_dependency_records.py: parses under 3.9, imports stdlib or this folder only
+  ok    p2_substrate.py: parses under 3.9, imports stdlib or this folder only
+  ok    p3_comprehension.py: parses under 3.9, imports stdlib or this folder only
+  ok    p4_goal_coherence.py: parses under 3.9, imports stdlib or this folder only
+  ok    p5_lag_declaration.py: parses under 3.9, imports stdlib or this folder only
+  ok    run_all.py: parses under 3.9, imports stdlib or this folder only
+  ok    scope.py: parses under 3.9, imports stdlib or this folder only
+  ok    selftest.py: parses under 3.9, imports stdlib or this folder only
+  ok    p1_dependency_records.py: under 300 lines
+  ok    p1_dependency_records.py refuses --selftest (exit 2)
+  ok    p2_substrate.py: under 300 lines
+  ok    p2_substrate.py refuses --selftest (exit 2)
+  ok    p3_comprehension.py: under 300 lines
+  ok    p3_comprehension.py refuses --selftest (exit 2)
+  ok    p4_goal_coherence.py: under 300 lines
+  ok    p4_goal_coherence.py refuses --selftest (exit 2)
+  ok    p5_lag_declaration.py: under 300 lines
+  ok    p5_lag_declaration.py refuses --selftest (exit 2)
+  ok    scope.py: under 300 lines
+  ok    scope.py refuses --selftest (exit 2)
+  ok    no cross-folder import (nothing from ../)
+  ok    run_all prints the contamination declaration before any part
+
+checks: 82   failed: 0

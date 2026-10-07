@@ -14639,6 +14639,41 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   verification port without proximity — remains the highest-priority open
   question and the one gap where recoverability from documents is not
   established. Stdlib only, selftests 19/19 and 13/13, CC0.
+- `potential/` — WORK ORDER 2026-09-29, five uploads landed verbatim and
+  built around one question: how many disjoint paths does a compulsory
+  requirement have to its satisfaction, and what happens to the count when
+  a single vertex — a token, a credential, a seat — is removed. Entry file
+  is `potential/INVENTORY.md` (the STEP 0 record and the RETURN block: every
+  delivered file, its state, every defect P-01..P-18 with what was done),
+  read beside `potential/README.md`. Five layers, each promotable alone.
+  The root transformation instrument (`transformation.py`, `perturbation.py`,
+  `baseline.py`, `ledger.py`, `perturb_cli.py`, `test_perturbation.py`)
+  reads a requirement's satisfaction paths before and after a perturbation
+  and returns a verdict with the ledger beside it, never a score. `gate/`
+  is the connectivity instrument the other layers are written over —
+  domains as graphs, channels, `NEED` → `SATISFIED`, the token vertex, κ
+  and cut vertices — the one dependency the files impose, stated in the
+  README rather than a reading order. `matrix/` is the delivered
+  functionality matrix and its lineage plus `check_attested_provenance.py`,
+  a mechanical check that every `[A]` cell names a source. `briefs/` holds
+  three of five briefs verbatim (DISSENTER_CHANNEL, REPORT, RESEARCH);
+  ENGINEERING_BRIEF and CONTINUITY_BRIEF were named and not delivered and
+  land verbatim on arrival. `tools/` is the cross-folder registry, its
+  sourced variant and a drift check. Claims `POT_021..025` in
+  `CLAIM_TABLE.md`. Sixteen defects P-01..P-16 repaired or recorded in the
+  landing; P-17 (an inner `from perturbation import PERTURBATIONS` making
+  the name function-local so the loop above it read it unassigned — fired
+  on every real invocation, masked only by P-03's earlier ImportError, now
+  pinned by an AST check that no function rebinds a module import) and
+  P-18 (a 1/1/1 fixture that could not tell verified from unverified —
+  rebuilt so the three states differ by construction and a collapsing
+  registry proves the assertion can still fail) repaired in PART B.
+  **Still blocked**: P-06..P-10 and P-13 wait on `ratio_model.py` and
+  `domains_gated.py`, both named by the delivery and not delivered — the
+  `ratio/` folder is deliberately not created and nothing is reconstructed
+  in their place; the gated schema is ABSENT. KNOWN_RED §11/§12 carry the
+  tree-level failures the landing found. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
 - `SYNTHESIS.md` — Top-level synthesis describing how the three folders
   fit together, how claims flow between them, and how to read the
   artifacts in order.
