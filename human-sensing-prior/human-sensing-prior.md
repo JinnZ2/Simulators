@@ -163,8 +163,8 @@ lineages independently.
 ```text
 species     channels run at once                    what it buys
 ----------  -------------------------------------   ---------------------------
-deer        hearing (incl. other species' calls     early warning of a predator
-            and their SILENCE), smell, wide-field   it cannot yet sense directly
+deer        hearing (incl. other species' SILENCE:  early warning of a predator
+            cessation-as-cue), smell, wide-field    it cannot yet sense directly
             motion vision
 snake       tongue-delivered chemistry (vomeronasal) a strike solution in the
             + substrate vibration + (pit vipers,    dark, from three partial
@@ -173,18 +173,25 @@ human       foveal detail + peripheral motion +     same as above: the field,
 periphery   hearing + smell + proprioception        not one point in it
 ```
 
-**Deer and the frog chorus.** OBSERVED (source: field observation by
-the operator; not a published study cited here): a deer reads the
+**Deer and the frog chorus.** OBSERVED (single observer; field
+observation, not a published study): a deer reads the
 sudden silence of a frog chorus as a borrowed null-detector for a
 predator it cannot yet sense with its own channels, and holds still,
 uncoalesced, until the field resolves. It does not force a guess. It
 waits at low cost until more channels report.
 
-- Supporting, carried not verified here: frog choruses do cease when a
-  predator approaches, and many vertebrates eavesdrop on other species'
-  alarm signals (heterospecific eavesdropping is a documented field of
-  study). GAP: no source for deer reading frog silence specifically is
-  checked in this file; that link rests on the field observation.
+- Mechanism: CESSATION-AS-CUE. The cue is an ABSENCE read across
+  species (a signal that was running stops), not an alarm call emitted
+  at the predator. These are two different mechanisms.
+- Adjacent literature, VERIFIED (chat env): Magrath RD et al. 2015,
+  Biol Rev 90(2):560-586, reviews heterospecific ALARM eavesdropping and
+  multi-species integration of alarm information. Related, in the
+  literature citing it: ungulate playback responses to baboon alarm
+  calls. Consistent with the section 3 claim; independent of it.
+- GAP, open and named: Magrath covers emitted alarm signals, not
+  cessation. No source for cessation-as-cue (deer reading frog silence,
+  or any species reading another's silence) is checked in this file.
+  That link rests on the single-observer field observation.
 - DERIVED: the frog chorus is an instrument the deer does not own and
   does not pay to run. Reading another species' output is the cheapest
   sensor there is. It only works if the deer's own intake stays wide
@@ -307,19 +314,24 @@ over-apply the correction the same way it over-applied the prior.
 ```text
 LIMIT                                    STATUS
 ---------------------------------------  ---------------------------------
-Intake is not decision.                  OBSERVED (dual-task research):
-Parallel SENSING is the basin.           two tasks that each need a choice
-Parallel DECIDING has a real             or response contend for a central
-bottleneck.                              stage; one waits. This file's
-                                         claim is about intake and
-                                         monitoring, not about making two
-                                         decisions at once.
-Sustained forced single-channel          OBSERVED (vigilance research,
-monitoring IS costly.                    carried): long narrow-watch tasks
-                                         are reported as effortful and
-                                         degrade over time. This SUPPORTS
-                                         the correction: the narrow
-                                         configuration is the costly one.
+Intake is not decision.                  OBSERVED (dual-task research;
+Parallel SENSING is the basin.           from memory, check before citing:
+Parallel DECIDING has a real             Pashler 1994, psychological
+bottleneck.                              refractory period): two tasks that
+                                         each need a choice or response
+                                         contend for a central stage; one
+                                         waits. This file's claim is about
+                                         intake and monitoring, not about
+                                         making two decisions at once.
+Sustained forced single-channel          OBSERVED (vigilance research;
+monitoring IS costly.                    from memory, check before citing:
+                                         Mackworth 1948, vigilance
+                                         decrement): long narrow-watch
+                                         tasks degrade over time.
+                                         Scope: lab rare-target monitoring.
+                                         Field transfer: UNRATED.
+                                         Consistent with the core claim
+                                         (header); independent of it.
 People vary.                             The correction does not say no
                                          person ever finds multi-channel
                                          intake loading. It says the load
@@ -334,9 +346,12 @@ Novel or hostile environments.           GAP: the basin claim is strongest
 The tell rests on one observer.          GAP: section 1 is n = 1 on the
                                          observer axis, transcripts not
                                          attached.
-Every literature fact here is carried.   GAP: no paper was opened while
-                                         writing this file. Each carried
-                                         fact is marked; none is load-
+Literature status is per item.           One item VERIFIED (chat env):
+                                         Magrath 2015, section 3. Two from
+                                         memory, check before citing:
+                                         Pashler 1994, Mackworth 1948.
+                                         Everything else carried, marked
+                                         where it sits. None is load-
                                          bearing alone. The animal
                                          convergence is the load.
 ```
