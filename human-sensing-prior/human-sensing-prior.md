@@ -123,12 +123,24 @@ channel is blind on the others, and a blind snake is selected out.
 - Scope of the citation below. Goris argues that infrared pits are an
   integral part of vision, explicitly not a separate sense. It is cited here
   for that point and for the pit-bearing lineages. It is NOT cited for
-  "parallel separate channels"; citing it for that would reverse it. The
-  integration point does not cut against this file: fusing channels into one
-  field is the opposite of switching all but one off.
-- Convergence. Infrared pits evolved independently in pit vipers
-  (Crotalinae) and in pythons and boas: different lineages, no shared
-  origin of the organ, the same solution. That is closer to an independent
+  "parallel separate channels"; citing it for that would reverse it.
+- Second source on the integration point: Gower et al., deposited in the
+  University of Western Australia repository. Their reading is that
+  infrared sensing is an elaboration of an existing sense through a novel
+  organ, not a wholly novel system, and that neural integration with vision
+  is why pit-bearing snakes show no trade-off against the eye. `[GAP]` Full
+  citation (title, year, venue, identifier) is not yet verified; it is
+  carried from a chat-session pointer and is not to be cited further until
+  it is.
+- `[DERIVED]` Fusing channels into one field is the opposite of switching
+  all but one off, so the integration point does not cut against this
+  file. That inference is this file's, not Goris's or Gower's; neither
+  source is cited for it.
+- Convergence. Infrared pits evolved independently at least three times:
+  once in pit vipers (Crotalinae) and more than once among boas and
+  pythons. Different lineages, no shared origin of the organ, the same
+  solution. The exact count is contested between sources (see the P4a
+  rows in section 6). Each origin is closer to an independent
   trial than any count of species, and it is the evidence this section
   leans on in place of a raw count. Review: Goris, R. C. (2011), "Infrared
   organs of snakes: an integral part of vision", *Journal of Herpetology*
@@ -137,6 +149,10 @@ channel is blind on the others, and a blind snake is selected out.
   environment this file was edited in. `[GAP]` Whether Goris itself states
   the independent origin of the two pit types was not part of that check;
   the independent-origin point is carried as standard herpetology.
+- `[GAP]` Primary source to check for the origin count: PMC12015575
+  (labial pits in boas and pythons, analysed with phylogenetic comparative
+  methods). Not read here. It is also the candidate data source for P4a and
+  P4b, since it may carry a tree.
 
 **Periphery.** The edge of the human visual field is sensitive to motion and
 flicker and poor at colour and fine detail. It is used for what it is good
@@ -246,7 +262,12 @@ pattern is one inherited trait counted many times.
 
 | solution | lineages | origins | topology source | status |
 |----------|----------|---------|-----------------|--------|
-| infrared pits fused into vision | pit vipers (Crotalinae) / boids and pythons | 2 (carried) | not attached | seed row; count unchecked against a stated tree |
+| infrared pits fused into vision | pit vipers (Crotalinae); boas (Boidae); pythons (Pythonidae) | >=3: 1 in Crotalinae + more than one in Boidae/Pythonidae (carried) | not attached; candidate PMC12015575 | seed row; count unchecked against a stated tree |
+| SOURCE CONFLICT on the row above | same lineages | secondary sources give 2, 3, or "multiple" | grouping-dependent | open: whether boid and python pits are lumped as one origin or split changes N. Resolve against the primary (PMC12015575) and record which grouping was used |
+
+The conflict row is part of the result, not a footnote. N is a property of
+the grouping choice as much as of the snakes, so P4a reports N together
+with the grouping that produced it.
 
 **P4b. Phylogenetic independent contrasts.** Needs a topology WITH branch
 lengths and a Brownian-motion model of trait change (Felsenstein 1985).
