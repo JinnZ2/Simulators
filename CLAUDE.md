@@ -10980,8 +10980,7 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   confirmation from a **second trophic level** — a woodpecker whose
   face-specific foraging reads the prey distribution, so the
   aggregation is real not an observer artifact and you need the
-  woodpecker not the insects. `check_coinage.py` (selftest 22/22)
-  computes the structural facts (entry well-formed with no adopted
+  woodpecker not the insects. `check_coinage.py` computes the structural facts (entry well-formed with no adopted
   name, every rejected term reasoned, candidates raised none adopted,
   the woodpecker cross-check and the absence-set-on-behaviour instrument
   both named) and states the **null discipline on the page**: one
@@ -10995,7 +10994,25 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   surface does not afford it — the `uninstrumented/` absence set one
   substrate over, the omission the honest side. Provenance separated
   per `AUDIT_CONTRACT.md` (Kavik's lines marked, the cross-links the
-  render's). Stdlib only, parses under 3.9, phone-buildable, CC0.
+  render's). **The STATUS split of the operator's memory file** then
+  landed as a rebuild with the source absent:
+  - `/topics/coinage-log.md` is ~46.9k chars and the export truncates
+    at 8k. The chunk route is unavailable and chunk 1 was not provided.
+  - `coinage-log.md` (File A, coined terms) holds 0 entries, with its
+    count stated UNKNOWN and not 0.
+  - `vocabulary-gap-slots.md` (File B, unnamed slots / failure points /
+    status fields) holds one entry. It is seeded byte-identical from
+    the in-repo render and labelled NOT chunk 1.
+  - `MISSING_SOURCE.md` marks all 6 chunks MISSING_SOURCE, with 0 chars
+    received and nothing reconstructed.
+  - The checker's section 6 pins that state, so an arriving chunk
+    turns it red on purpose.
+  - Its seed-identity check failed on first run. The extractor matched
+    File B's prose MENTION of the `## ENTRY 001` heading before the
+    heading itself. It is repaired by anchoring at line start and
+    pinned both ways.
+  Check count printed by `python3 coinage-log/check_coinage.py
+  --selftest`. Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `frame-instruments/` — A bundle delivered as one file and written out
   verbatim (`README.md`, `liftable/five-state-grading.md`,
   `liftable/reconstruction-procedure.md`), then all three referenced
