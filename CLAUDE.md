@@ -14027,16 +14027,18 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   LEAK_DETECTED; it prints the gate and no verdict. A main score is refused without
   pilot_run_tag and PILOT_PASS, and pilot rows never reach it. CHOICE 8 (TIE inside the band
   even when the interval excludes 0) is promoted to a rule. A and B are pinned by sha256:
-  main's later revision of A breaks the `**P4. Effective-N` marker, so `--emit` refuses an
-  unpinned A and `--a-file` supplies the registered one.
+  main's later revision of A, now merged onto this branch, breaks the `**P4. Effective-N`
+  marker. The harness reads A from a sha-checked byte copy, `registered/` (7f780aa), and
+  prints the working copy as LIVE without testing it. `--emit` refuses an unpinned A, and
+  `--a-file` overrides the default.
   `pathways.py` locates each prediction's feature by line (19 markers, 0 mismatches);
   `test_pathways.py` reaches every verdict, attribution and gate state on constructed worlds.
   Baseline: the earlier 8 pytest ids were never recorded and are not reconstructed. The
   comparison point is the KNOWN_RED pins at 59a5e5d (4 failing, including the compile gate's
-  duplicate-names test). This branch predates #105 and #116 (merge base 9262516), lacks
-  `tests/test_compile_gate.py`, and fails the other 3 of those 4. Its count is not adopted as
-  main's baseline. 59a5e5d's compile gate run here finds 7 files that do not compile and 16
-  duplicate names, all outside this folder. No model has been run and no response coded.
+  duplicate-names test). Before main was merged in (79e6374), this branch predated #105 and #116 (merge base
+  9262516), lacked `tests/test_compile_gate.py`, and failed the other 3 of those 4. That count
+  was not adopted as main's baseline. After the merge the branch fails exactly the 4 pinned
+  ids, and `tools/known_red_check.py --suite` reads 28 of 28 pins MATCH. No model has been run and no response coded.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

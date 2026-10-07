@@ -22,8 +22,13 @@ long run of independent trials" is FROZEN as a known defect under test
 Both are pinned by sha256 (amendment 2 item 4). `main` carries a later
 revision of A on which the NEXTSTEP marker `**P4. Effective-N` no longer
 locates; the predictions were not registered against it. `--emit` refuses
-an A or B off the pins; after a merge supply the registered A with
-`--a-file`.
+an A or B off the pins.
+
+A is read from `registered/human-sensing-prior.7f780aa.md`, a byte copy of
+A at 7f780aa. It matches the pin [CHOICE 16]. The merge of main (79e6374)
+replaced the working copy with main's revision (sha256 a5c4b6cf...). Every
+report prints the working copy as LIVE and does not test it. `--a-file`
+overrides the default.
 
 ## The length control arm AF (= A_PAD)
 
@@ -190,34 +195,38 @@ environment and its ids were never recorded. They are not reconstructed
 here. The comparison point is the KNOWN_RED pins at 59a5e5d (the merge
 of #116 on main).
 
-This branch does NOT contain #105 or #116. Its merge base with main is
-9262516 (#115, 2026-10-05); neither d675fc7 (the #105 merge) nor 59a5e5d
-is an ancestor of HEAD. So this branch's count is a count on an older
-tree. It is not adopted as main's baseline.
+Before main was merged in, this branch did not contain #105 or #116. Its
+merge base with main was 9262516 (#115, 2026-10-05), and neither d675fc7
+(the #105 merge) nor 59a5e5d was an ancestor of it. Its count was a
+count on an older tree and was not adopted as main's baseline. Another
+session then merged main into the branch (79e6374, see notes/queue/HOLDS.md).
+The branch now contains 59a5e5d, and its merge base with main is main.
 
 ```text
-tree                       runner               failed  passed
-59a5e5d (main, #116)       pytest               4       141
-this branch HEAD           pytest and unittest  3       133
+tree                               runner               failed  passed
+59a5e5d (main, #116)               pytest               4       141
+branch before the merge (0b04b02)  pytest and unittest  3       133
+branch after the merge             pytest               4       144
 ```
 
-The 3 failing here are the 3 pinned at 59a5e5d. The fourth at 59a5e5d is
-a test this branch does not have:
+Before the merge, the branch failed the 3 ids pinned at 59a5e5d. The
+fourth was a test the branch did not yet have. After the merge, it fails
+exactly the 4 pinned ids. `python3 tools/known_red_check.py --suite`
+reads 28 pins: 28 MATCH, 0 MISMATCH, VERDICT PASS.
 
 ```text
-tests/test_compile_gate.py::EveryModuleCompiles::test_no_module_binds_a_toplevel_name_twice   59a5e5d only
-tests/test_known_answer_gate.py::ToolRuns::test_tool_exits_clean                         both
-tests/test_run_manifest.py::TestRedirectContract::test_no_redirect_names_a_target_that_is_missing   both
-tests/test_run_manifest.py::TestRedirectContract::test_the_one_known_violation_is_pinned           both
+tests/test_compile_gate.py::EveryModuleCompiles::test_no_module_binds_a_toplevel_name_twice
+tests/test_known_answer_gate.py::ToolRuns::test_tool_exits_clean
+tests/test_run_manifest.py::TestRedirectContract::test_no_redirect_names_a_target_that_is_missing
+tests/test_run_manifest.py::TestRedirectContract::test_the_one_known_violation_is_pinned
 ```
 
-Running 59a5e5d's compile gate against this branch's tree fails 2 of its
-tests: 7 files do not compile (syntax errors) and 16 top-level names are
-bound twice. All of them are in
-other folders (assessor-coupling, chain-position,
-cooperative-substrate-proof, stability-trigger-envelope); none is in
-human-sensing-prior. A merge into main inherits them unless main has
-already repaired them.
+Before the merge, running 59a5e5d's compile gate on the branch failed 2
+of its tests: 7 files did not compile and 16 top-level names were bound
+twice, all outside human-sensing-prior. Main had repaired the 7 files by
+59a5e5d (archive moves and restores). After the merge, only the
+duplicate-names test fails, as pinned. Nothing in human-sensing-prior is
+on either list.
 
 ## State
 
@@ -239,3 +248,14 @@ verdict is reachable and says nothing about either file.
   A (#116 split P4 into P4a/P4b). test_pathways.py reads 96/2 for that
   reason. Repoint the marker, or pin A to its registered text: the
   operator's call, not made here.
+
+Resolution, same day, after the merge (b0c8795 and its follow-up):
+
+- AMENDMENT 2 is written (0b04b02), and the harness implements it. The arm
+  is named AF in the amendment and the code. AF is the A_PAD above.
+- The k = 3 pilot gate is built. A main score is refused without
+  PILOT_PASS from a pilot under another run_tag.
+- Pathway A drift: pinned, not repointed. Amendment 2 item 4 registered the
+  pin, and A is read from the registered copy [CHOICE 16]. The feature
+  marker `**P4. Effective-N` locates in the registered copy. Testing
+  main's revision of A would need its own registration.

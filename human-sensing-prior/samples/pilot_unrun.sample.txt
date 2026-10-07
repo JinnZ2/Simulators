@@ -8,6 +8,7 @@ PREDICTIONS.md original prefix (6475 bytes) sha256 5146b5f04a96cdc1ab284e92e39f6
 PREDICTIONS.md whole file sha256 5297bd33692c5cf54d64d8b623eb955c7c10cce28e7c9b85bc0fd1626fcf26cf
 run pilot-unrun   phase pilot   model (placeholder)   temperature 1.0   top_p 1.0   max_tokens 1024
 date 2026-10-07   system_prompt '(none)'
+LIVE working copy of A is NOT the registered A (sha256 a5c4b6cf6e0c, 15287 chars); it is a different object and is not tested here [CHOICE 16]
 coders: coder-1, coder-2   disputed rows: 0   incomplete rows: 0
 no A-vs-B verdict, prediction status or pattern is printed for a pilot
 

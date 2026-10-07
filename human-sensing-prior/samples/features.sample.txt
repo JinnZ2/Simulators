@@ -21,3 +21,5 @@ NEXTSTEP   human-sensing-prior.md  yes    218   **P4. Effective-N
 NEXTSTEP   PATHWAY_B.md            yes    386   None of F1 to F3 has been run
 mismatches: 0 of 19
 B 'very long run of independent trials' is FROZEN as a known defect under test (PREDICTIONS.md amendment 1).
+A read from registered/human-sensing-prior.7f780aa.md [CHOICE 16]
+LIVE working copy of A is NOT the registered A (sha256 a5c4b6cf6e0c, 15287 chars); it is a different object and is not tested here [CHOICE 16]

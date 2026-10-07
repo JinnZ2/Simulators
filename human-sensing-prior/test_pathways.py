@@ -144,7 +144,7 @@ def run():
           "Reference document" not in pn and pn.startswith("Question: "))
     check("prompt: AB carries two neutral headers, A first",
           pab.count("Reference document") == 2 and
-          pab.index(P._read(P.FILE_A)[:200]) <
+          pab.index(P.load_docs()[P.FILE_A][:200]) <
           pab.index(P._read(P.FILE_B)[:200]))
     check("prompt: no filename in any header",
           "PATHWAY_B" not in pab and ".md" not in
@@ -165,7 +165,7 @@ def run():
           all(r["filler_words"] == 0 for r in battery if by[r["id"]] != "AF"))
     check("AF: one neutral header, A's text then placeholder words",
           paf.count("Reference document") == 1 and
-          P._read(P.FILE_A) + "\n\nlorem ipsum dolor" in paf)
+          P.load_docs()[P.FILE_A] + "\n\nlorem ipsum dolor" in paf)
     gap = len(blk(P.assemble(b_row))) - len(blk(paf))
     nxt = len(P.LOREM[af["filler_words"] % len(P.LOREM)]) + 1
     check("AF: block not longer than B's, within one word",
@@ -188,8 +188,18 @@ def run():
     edited_b[P.FILE_B] = texts[P.FILE_B].replace("People vary.", "People.")
     check("pins: emit refuses a B off the registered sha",
           _raises(lambda: P.emit(repeats=3, run_tag=TAG, texts=edited_b)))
-    check("pins: working copies match the pins",
+    check("pins: default A (registered copy) and B match the pins",
           P.check_pins(texts) is texts)
+    check("pins: default A is the registered copy, not the working copy",
+          P.load_docs()[P.FILE_A] == P._read(P.REGISTERED_A))
+    live = {P.FILE_A: P._read(P.FILE_A), P.FILE_B: texts[P.FILE_B]}
+    st = P.live_status()
+    check("pins: live A reported; refused at emit iff off the pin",
+          st["is_registered"] ==
+          (not _raises(lambda: P.emit(repeats=3, run_tag=TAG, texts=live))))
+    check("pins: live A line printed in features, lengths and score",
+          "LIVE" in P.render_features(P.locate_features()) and
+          "LIVE" in P.render_lengths(P.lengths()))
     with tempfile.TemporaryDirectory() as d:
         good_a = os.path.join(d, "a.md")
         bad_a = os.path.join(d, "a2.md")
@@ -239,7 +249,7 @@ def run():
 
     # ---- strip
     g = P.doc_grams()
-    words = P._read(P.FILE_A).split()
+    words = P.load_docs()[P.FILE_A].split()
     quote = " ".join(words[100:112])
     s, n = P.strip_text("Before. " + quote + " after.", g)
     check("strip: 12-word verbatim run removed", n == 12 and

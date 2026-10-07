@@ -18,7 +18,7 @@ deleted; a finished row stays as the record.
 | claude/threshold-states-escape | threshold-states/*, interaction_class.py, test_interaction_class.py, .github/workflows/test.yml, threshold-states-in-animal-escape.md [a], archive/interaction_class/* [a], tests/test_archive_expected_red.py [a] | session_01Y4zVdoRHPDHpVwSPbqbeLR, session_014bxQGPgkmsJRWUx92REKSs | 2026-10-05 | MERGED #123 (c7aa5f2) |
 | claude/repin-sense-as-match | KNOWN_RED.md | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-07 | MERGED #124 (2cb6eca) |
 | claude/queue-holds | notes/queue/HOLDS.md | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-07 | MERGED #125 (731a94d) |
-| claude/human-sensing-prior-cc0-cbm411 | CLAUDE.md, README.md, human-sensing-prior/PATHWAYS.md, human-sensing-prior/PATHWAY_B.md, human-sensing-prior/PREDICTIONS.md, human-sensing-prior/pathways.py, human-sensing-prior/test_pathways.py, human-sensing-prior/samples/features.sample.txt, human-sensing-prior/samples/lengths.sample.txt, human-sensing-prior/samples/score_unrun.sample.txt, notes/queue/HOLDS.md | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-07 | HELD |
+| claude/human-sensing-prior-cc0-cbm411 | CLAUDE.md, README.md, human-sensing-prior/PATHWAYS.md, human-sensing-prior/PATHWAY_B.md, human-sensing-prior/PREDICTIONS.md, human-sensing-prior/pathways.py, human-sensing-prior/test_pathways.py, human-sensing-prior/samples/features.sample.txt, human-sensing-prior/samples/lengths.sample.txt, human-sensing-prior/samples/score_unrun.sample.txt, notes/queue/HOLDS.md, human-sensing-prior/samples/pilot_unrun.sample.txt [b], human-sensing-prior/registered/human-sensing-prior.7f780aa.md [b] | session_014bxQGPgkmsJRWUx92REKSs, session_01U4mRsfZAdaV1xWBmZSRbjK [b] | 2026-10-07 | HELD |
 
 [a] Backfilled after the fact. These paths are in #123's diff and not in
 the operator's backfill list: `threshold-states/*, interaction_class.py,
@@ -42,3 +42,19 @@ against main (merge-base 9262516) as it stood before any work, plus this
 file. The branch was opened by another session; this session took the
 hold to merge it, and its row was declared in the branch's first commit,
 before main was merged in.
+
+[b] Backfilled after the fact, 2026-10-07. Session
+session_01U4mRsfZAdaV1xWBmZSRbjK opened this branch. It continued work on
+the branch at the operator's direction, and it did not read this file
+before doing so. Its commit b0c8795 (amendment 2 harness) was made before
+it fetched the hold. Two paths in that commit and its follow-up are
+outside the declared list, and both are new files:
+- `samples/pilot_unrun.sample.txt` is the sample output of the pilot gate
+  that amendment 2 item 2 adds.
+- `registered/human-sensing-prior.7f780aa.md` is a byte copy of pathway A
+  at 7f780aa, sha256 1a42dc8c...cbd7, the pin in amendment 2 item 4.
+  It is needed because the merge of main (79e6374) moved the working copy
+  of A off the pin.
+
+Under the declared list alone, the scope check would fail on these 2
+files. They are recorded here, not hidden.

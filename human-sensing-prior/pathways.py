@@ -58,6 +58,9 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 FILE_A = "human-sensing-prior.md"
 FILE_B = "PATHWAY_B.md"
+# [CHOICE 16] byte copy of A as registered (git show 7f780aa:...); the
+# default A for every command. The working copy may move; this may not.
+REGISTERED_A = os.path.join("registered", "human-sensing-prior.7f780aa.md")
 PREDICTIONS = "PREDICTIONS.md"
 
 # The registered original: first 6475 bytes of PREDICTIONS.md at 7f780aa.
@@ -148,6 +151,12 @@ CHOICES = {
         "line inside A's block. Length is matched on the assembled block's "
         "characters: the longest word-boundary cut whose block is not "
         "longer than B's block.",
+    16: "A is read from registered/human-sensing-prior.7f780aa.md, a byte "
+        "copy of A at 7f780aa that matches the pin, not from the working "
+        "copy. The merge of main revised the working copy (e82e0cc, "
+        "c3578c8), and amendment 2 item 4 says that revision is a "
+        "different object. The working copy's sha256 is printed beside "
+        "the results as LIVE and is not tested. --a-file overrides.",
     15: "A coder whose leak check is NOT_EVALUABLE (under 10 committed "
         "guesses) does not by that fail the pilot gate, since amendment 2 "
         "fails it only on LEAK_DETECTED; the report names such coders, and "
@@ -289,8 +298,24 @@ def load_docs(a_file=None):
         with open(a_file, encoding="utf-8", newline="") as fh:
             a = fh.read()
     else:
-        a = _read(FILE_A)
+        a = _read(REGISTERED_A)                           # [CHOICE 16]
     return {FILE_A: a, FILE_B: _read(FILE_B)}
+
+
+def live_status():
+    """The working copy of A, reported and not tested."""
+    sha = _sha_text(_read(FILE_A))
+    return {"sha256": sha, "is_registered": sha == PINNED[FILE_A],
+            "chars": len(_read(FILE_A))}
+
+
+def _live_line():
+    L = live_status()
+    if L["is_registered"]:
+        return "LIVE working copy of A matches the registered bytes"
+    return ("LIVE working copy of A is NOT the registered A (sha256 %s, %d "
+            "chars); it is a different object and is not tested here "
+            "[CHOICE 16]" % (L["sha256"][:12], L["chars"]))
 
 
 def check_pins(texts, pins=None):
@@ -356,7 +381,7 @@ def _write_jsonl(path, rows):
 def locate_features(texts=None):
     """Return rows: class, file, marker, expected, line (or None), ok."""
     if texts is None:
-        texts = {FILE_A: _read(FILE_A), FILE_B: _read(FILE_B)}
+        texts = load_docs()
     rows = []
     for cls, feats in FEATURES.items():
         for fname, marker, expected in feats:
@@ -385,6 +410,8 @@ def render_features(rows):
     out.append("mismatches: %d of %d" % (bad, len(rows)))
     out.append("B 'very long run of independent trials' is FROZEN as a "
                "known defect under test (PREDICTIONS.md amendment 1).")
+    out.append("A read from %s [CHOICE 16]" % REGISTERED_A)
+    out.append(_live_line())
     return "\n".join(out)
 
 
@@ -474,6 +501,7 @@ def render_lengths(L):
     out.append("AF = A + %d filler words [CHOICE 14]; AF block is %d chars "
                "short of B's (within one word, never longer)"
                % (L["filler_words"], L["B"]["chars"] - L["AF"]["chars"]))
+    out.append(_live_line())
     out.append("A vs B is confounded with length; AF vs B holds length and "
                "varies structure (amendment 2 item 1). The combined arms are "
                "longer than either single arm and stay confounded.")
@@ -1118,7 +1146,8 @@ def _header(res, title):
             "max_tokens %s" % (m["run_tag"], m["phase"], m["model"],
                                m["temperature"], m["top_p"],
                                m["max_tokens"]),
-            "date %s   system_prompt %r" % (m["date"], m["system_prompt"])]
+            "date %s   system_prompt %r" % (m["date"], m["system_prompt"]),
+            _live_line()]
     if m["phase"] == "main":
         out.append("pilot run %s: %s (pilot rows excluded from this score)"
                    % (m["pilot_run_tag"], m["pilot_result"]))
