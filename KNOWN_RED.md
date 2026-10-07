@@ -1398,13 +1398,11 @@ PIN rm.redirect_missing archive/instrument-index/build_index.py - @59a5e5d
 PIN rm.redirect_missing archive/instrument-index/coverage.py - @59a5e5d
 PIN rm.redirect_missing crediting-rate/archive/f168f79/crediting_rate_v2.py - @9262516
 PIN rm.redirect_missing instrument-index/coverage.py - @9262516
-PIN rm.redirect_missing sense_as_match.py - @9262516
 PIN rm.violation anchor-position/normalize.py - @9262516
 PIN rm.violation archive/instrument-index/build_index.py - @59a5e5d
 PIN rm.violation archive/instrument-index/coverage.py - @59a5e5d
 PIN rm.violation crediting-rate/archive/f168f79/crediting_rate_v2.py - @9262516
 PIN rm.violation instrument-index/coverage.py - @9262516
-PIN rm.violation sense_as_match.py - @9262516
 PIN suite.failing test_tool_exits_clean INTENDED @9262516
 PIN suite.failing test_no_redirect_names_a_target_that_is_missing UNINTENDED @9262516
 PIN suite.failing test_the_one_known_violation_is_pinned UNINTENDED @9262516
@@ -1527,3 +1525,23 @@ in tools/known_answer.py. 14.4 says no registered value moves, since seed()
 reaches the later copy. Doing so turns their three cg.duplicate pins
 MISMATCH, and the re-pin leaves exactly the 5 delivered-drop names.
 
+### 19.8 Re-pin @6d4ff5c: sense-as-match merged (PR #122)
+
+As 19.2 required, merging claude/sense-as-match re-pins the rm.* pins it moved.
+PR #122 (merge 6d4ff5c) added root test_sense.py, so the redirect
+sense_as_match.py -> test_sense.py resolves. The checker reported the two
+sense_as_match.py pins MISMATCH (pinned present, run absent) on main @6d4ff5c.
+Both pins are removed; nothing else in the block moves.
+
+    figure                           before      @6d4ff5c   moved by
+    redirects naming a missing file  5           4          #122: test_sense.py lands at root
+    contract violations              6           5            (sense_as_match.py target RESOLVES)
+
+Removed:  PIN rm.redirect_missing sense_as_match.py - @9262516
+          PIN rm.violation sense_as_match.py - @9262516
+
+Still red, unchanged: test_no_redirect_names_a_target_that_is_missing (4
+missing targets: instrument-index/coverage.py live, three archived) and
+test_the_one_known_violation_is_pinned (5 violations, 1 pinned). The live
+instrument-index/coverage.py redirect is now the only live file whose target
+is MISSING.
