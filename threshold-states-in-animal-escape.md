@@ -438,40 +438,63 @@ asserts a class its own values rule out. A redundant response asserts no
 class. It is REDUNDANT, not RESONANT. (Revised 2026-10-07; the previous
 pass labelled it CONTRADICTS_CLASS.)
 
-Two-reference test (DERIVED, operator-supplied 2026-10-07).
+Two-reference test (DERIVED, operator-supplied 2026-10-07; precedence
+operator-supplied the same day). Built and tested as
+`threshold-states/interaction.py` (`test_interaction.py`, 24 checks).
 
 ```text
 S   = sum of the separate (unimodal) responses
 M   = the largest single (unimodal) response
 tol = declared parameter; an undeclared tol returns UNRATED
+I   = joint - S  (the measurand of the RESONANT enum)
 
-joint > S              RESONANT
-M < joint <= S         ENHANCED_SUBADDITIVE
-joint ~ M  (+/- tol)   REDUNDANT
-joint < M              ANTAGONISTIC   OPEN class: boundary proposed,
-                                      definition pending the enum's author
+step  condition                    relation
+0     S - M <= 2*tol               BELOW_RESOLUTION
+1     |joint - M| <= tol           REDUNDANT
+2     |joint - S| <= tol           ADDITIVE              NEW: I ~ 0, independent
+3     joint > S + tol              RESONANT
+4     M + tol < joint < S - tol    ENHANCED_SUBADDITIVE
+5     joint < M - tol              ANTAGONISTIC          OPEN class: boundary
+                                                         proposed, definition
+                                                         pending the enum's author
 ```
 
-`THIN T-7`: the four rows are not disjoint once `tol > 0`.
+`THIN T-7` RESOLVED (2026-10-07). The earlier four rows overlapped once
+`tol > 0`, and the overlaps came from two sources:
 
-- REDUNDANT's band `[M - tol, M + tol]` overlaps ENHANCED_SUBADDITIVE
-  above M and ANTAGONISTIC below M.
-- If `S - M <= tol` (the weaker cue alone is within tol of zero),
-  REDUNDANT also overlaps RESONANT.
+- REDUNDANT's band met its neighbours.
+- With S - M small, the REDUNDANT band reached the sum.
 
-The test needs a declared precedence. PROPOSED, not adopted: test
-REDUNDANT first (`|joint - M| <= tol`), then apply the other three rows
-with strict bounds outside that band. Precedence is the operator's call.
+Step 0 removes the second: when S - M <= 2*tol the bands [M-tol, M+tol] and
+[S-tol, S+tol] touch, so the weaker cues sum to less than the instrument
+resolves. With S - M > 2*tol, rows 1-5 are disjoint and exhaustive:
+
+```text
+(-inf, M-tol)  [M-tol, M+tol]  (M+tol, S-tol)  [S-tol, S+tol]  (S+tol, inf)
+ ANTAGONISTIC    REDUNDANT      ENH_SUBADDITIVE    ADDITIVE       RESONANT
+```
+
+The module does not rely on that argument. It evaluates all five rows and
+raises if anything other than exactly one holds. A sweep over five
+(cues, tol) settings never raises and reaches every row.
+
+Correction: joint = S is ADDITIVE, not ENHANCED_SUBADDITIVE. The earlier
+row read `M < joint <= S` and put the sum itself in the subadditive row.
+
+ADDITIVE is a class the target enum does not carry. It sits at I ~ 0, between
+RESONANT (I > 0) and the subadditive rows, so cues that act independently
+no longer fall into either.
 
 2024 candidate: the reference the paper uses, S or M, is UNRATED until the
 paper is seen.
 
 - If the paper reports against M only, its "enhancement" means joint > M.
-  That is ENHANCED_SUBADDITIVE or RESONANT, and the two cannot be separated
-  without S. RESONANT is undecidable from an M-only report.
+  That covers ENHANCED_SUBADDITIVE, ADDITIVE or RESONANT, and the three
+  cannot be separated without S. RESONANT is undecidable from an M-only
+  report.
 - The carried mapping above (redundancy and enhancement -> RESONANT) does
   not survive this test as stated. Redundancy is REDUNDANT. Enhancement is
-  RESONANT only above S.
+  RESONANT only above S + tol.
 
 Cross-links:
 `sense_as_match.py` (its module docstring names itself `sense_at_match.py`;
