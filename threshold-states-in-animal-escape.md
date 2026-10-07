@@ -430,26 +430,48 @@ antagonistic class.
 The target enum is in JinnZ2/Polyhedral-Intelligence,
 `ontology/relation_classes.json` @ 7387230, class `RESONANT` (search S-4).
 Only the enum is matched; the damping and tunnelling senses are excluded.
-The enum's measurand:
+The enum's measurand is `I = F(A,B) - [F(A) + F(B)]`, joint minus the SUM
+of separate, with RESONANT iff I > 0.
+
+CONTRADICTS_CLASS is not used here. That verdict is for a record that
+asserts a class its own values rule out. A redundant response asserts no
+class. It is REDUNDANT, not RESONANT. (Revised 2026-10-07; the previous
+pass labelled it CONTRADICTS_CLASS.)
+
+Two-reference test (DERIVED, operator-supplied 2026-10-07).
 
 ```text
-I = F(A,B) - [F(A) + F(B)]        joint minus the SUM of separate
-RESONANT        iff I > 0
-I <= 0          CONTRADICTS_CLASS
-I < 0           antagonistic, OPEN (not defined there; not invented here)
+S   = sum of the separate (unimodal) responses
+M   = the largest single (unimodal) response
+tol = declared parameter; an undeclared tol returns UNRATED
+
+joint > S              RESONANT
+M < joint <= S         ENHANCED_SUBADDITIVE
+joint ~ M  (+/- tol)   REDUNDANT
+joint < M              ANTAGONISTIC   OPEN class: boundary proposed,
+                                      definition pending the enum's author
 ```
 
-DERIVED, reading the enum against the three effect types:
+`THIN T-7`: the four rows are not disjoint once `tol > 0`.
 
-- Redundancy: joint is about equal to one cue alone, so I < 0.
-  CONTRADICTS_CLASS, not RESONANT.
-- Enhancement: meets RESONANT only if it is SUPERADDITIVE against the sum
-  of the separate cues. Enhancement measured against the strongest single
-  cue does not settle the sign of I.
-- Antagonism: I < 0, the OPEN class, unassigned.
+- REDUNDANT's band `[M - tol, M + tol]` overlaps ENHANCED_SUBADDITIVE
+  above M and ANTAGONISTIC below M.
+- If `S - M <= tol` (the weaker cue alone is within tol of zero),
+  REDUNDANT also overlaps RESONANT.
 
-Whether the candidate paper measures against the sum or the strongest
-single cue: UNRATED. The paper is unseen.
+The test needs a declared precedence. PROPOSED, not adopted: test
+REDUNDANT first (`|joint - M| <= tol`), then apply the other three rows
+with strict bounds outside that band. Precedence is the operator's call.
+
+2024 candidate: the reference the paper uses, S or M, is UNRATED until the
+paper is seen.
+
+- If the paper reports against M only, its "enhancement" means joint > M.
+  That is ENHANCED_SUBADDITIVE or RESONANT, and the two cannot be separated
+  without S. RESONANT is undecidable from an M-only report.
+- The carried mapping above (redundancy and enhancement -> RESONANT) does
+  not survive this test as stated. Redundancy is REDUNDANT. Enhancement is
+  RESONANT only above S.
 
 Cross-links:
 `sense_as_match.py` (its module docstring names itself `sense_at_match.py`;
