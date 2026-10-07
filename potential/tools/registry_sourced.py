@@ -246,20 +246,72 @@ def _selftest():
         source_slice=SliceRef(doc="gamma.txt", start=0, end=3, text="xyz"),
     )
 
+    # P-18: the first fixture yielded verified 1 / refused 1 / unverified 1
+    # and then asserted verified != unverified, which is false on its own
+    # fixture. The fixture now separates the counts BY CONSTRUCTION (two
+    # verified, one refused, one unverified) and the assertion is on
+    # IDENTITIES -- which document landed in which state -- not on counts
+    # alone. Nothing below is weaker than the original intent.
+    e1b = SourcedRegEntry(
+        folder="f", mechanism="DELETE", source_type="unresolved", target_type="familiar",
+        source_slice=SliceRef(doc="delta.txt", start=4, end=7, text="dog"),
+    )
     reg = SourcedRegistry()
-    reg.add(e1); reg.add(e2); reg.add(e3)
+    reg.add(e1); reg.add(e1b); reg.add(e2); reg.add(e3)
 
-    report = reg.verify({
+    DOCS = {
         "alpha.txt": b"the cat sat",
         "beta.txt":  b"the cat sat",  # slice says WRONG
+        "delta.txt": b"the dog sat",
         # gamma.txt missing
-    })
-    check(report.verified == 1, f"expected 1 verified, got {report.verified}")
+    }
+    EXPECT = {"verified": 2, "refused": 1, "unverified": 1,
+              "refused_doc": "beta.txt", "unverified_docs": {"gamma.txt"}}
+
+    def three_states_distinct(r):
+        """The discriminating predicate: counts differ by construction AND
+        each named state carries exactly the document built for it."""
+        return (
+            (r.verified, r.refused, r.unverified)
+                == (EXPECT["verified"], EXPECT["refused"], EXPECT["unverified"])
+            and r.verified != r.unverified
+            and r.unverified_docs == EXPECT["unverified_docs"]
+            and [s for s in r.refused_entries if EXPECT["refused_doc"] in s] == r.refused_entries
+            and not any(d in s for s in r.refused_entries for d in ("alpha", "delta", "gamma"))
+        )
+
+    report = reg.verify(DOCS)
+    check(report.verified == 2, f"expected 2 verified, got {report.verified}")
     check(report.refused == 1, f"expected 1 refused, got {report.refused}")
     check(report.unverified == 1, f"expected 1 unverified, got {report.unverified}")
-    check(report.verified != report.unverified, "verified and unverified must be distinct")
-    check("gamma.txt" in report.unverified_docs, "unverified doc not named")
-    check(any("beta.txt" in s for s in report.refused_entries), "refused entry not named")
+    check(report.verified != report.unverified, "verified and unverified differ by construction")
+    check(report.unverified_docs == {"gamma.txt"}, f"unverified docs: {report.unverified_docs}")
+    check(len(report.refused_entries) == 1 and "beta.txt" in report.refused_entries[0],
+          f"refused entries: {report.refused_entries}")
+    check(three_states_distinct(report), "three-state predicate fails on the honest report")
+
+    # The predicate must be able to reach FAIL. A verifier that collapses
+    # UNVERIFIED into VERIFIED (a missing document read as a pass) is the
+    # failure the three states exist to prevent; run it on the SAME fixture
+    # and require the predicate to refuse its report.
+    class _CollapsingRegistry(SourcedRegistry):
+        def verify(self, docs):
+            filled = dict(docs)
+            for e in self.entries:
+                for sr in (e.source_slice, e.target_slice):
+                    if sr is not None and sr.doc not in filled:
+                        # fabricate the document so the slice "verifies"
+                        filled[sr.doc] = b"\0" * sr.start + sr.text.encode("utf-8")
+            return super().verify(filled)
+
+    bad = _CollapsingRegistry()
+    for e in (e1, e1b, e2, e3):
+        bad.add(e)
+    collapsed = bad.verify(DOCS)
+    check(collapsed.unverified == 0 and collapsed.verified == 3,
+          f"collapsing fixture did not collapse: v={collapsed.verified} u={collapsed.unverified}")
+    check(three_states_distinct(collapsed) is False,
+          "the three-state predicate PASSED a report that read a missing document as verified")
 
     # round trip preserves slices
     d = e1.to_dict()

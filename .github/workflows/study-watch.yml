@@ -74,28 +74,28 @@ jobs:
           git add notes/watch
           git commit -m "study-watch ${stamp}: notification run" \
                      -m "Notification only. Nothing computed over what the
-queries returned. matches_would_measure is UNADJUDICATED for every
-candidate; a reviewer decides in this pull request.
+          queries returned. matches_would_measure is UNADJUDICATED for every
+          candidate; a reviewer decides in this pull request.
 
-Silence from this action is not evidence of absence. Anything the coarse
-query never returned is invisible here and the size of that set is not
-measurable from inside it."
+          Silence from this action is not evidence of absence. Anything the coarse
+          query never returned is invisible here and the size of that set is not
+          measurable from inside it."
           git push -u origin "$branch"
           gh pr create \
             --title "study-watch ${stamp}" \
             --body "Notification run. Merges nothing on its own.
 
-**Read before merging.** \`matches_would_measure\` is \`UNADJUDICATED\` on
-every row by design: an entry's WOULD MEASURE is a design and a candidate is
-a claim, so nothing here compares them mechanically. The \`decided_by\`
-column reports how each proposed reading was reached; a \`LEXICAL\` value
-means a word list decided it.
+          **Read before merging.** \`matches_would_measure\` is \`UNADJUDICATED\` on
+          every row by design: an entry's WOULD MEASURE is a design and a candidate is
+          a claim, so nothing here compares them mechanically. The \`decided_by\`
+          column reports how each proposed reading was reached; a \`LEXICAL\` value
+          means a word list decided it.
 
-**Not evidence of absence.** Anything the coarse query never returned is
-invisible to this pipeline, and the size of that set is not measurable from
-inside it.
+          **Not evidence of absence.** Anything the coarse query never returned is
+          invisible to this pipeline, and the size of that set is not measurable from
+          inside it.
 
-No auto-merge is configured and none should be added." \
+          No auto-merge is configured and none should be added." \
             --base "${{ github.event.repository.default_branch }}" \
             --head "$branch"
           # Deliberately nothing after this. No merge step exists.

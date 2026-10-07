@@ -438,56 +438,68 @@ asserts a class its own values rule out. A redundant response asserts no
 class. It is REDUNDANT, not RESONANT. (Revised 2026-10-07; the previous
 pass labelled it CONTRADICTS_CLASS.)
 
-Interaction test (DERIVED, operator-supplied 2026-10-07). Precedence is
-ordered, and steps are tried in turn:
+Two-reference test (DERIVED, operator-supplied 2026-10-07; precedence
+operator-supplied the same day). Built and tested as
+`threshold-states/interaction.py` (`test_interaction.py`, 24 checks).
 
 ```text
 S   = sum of the separate (unimodal) responses
 M   = the largest single (unimodal) response
-tol = declared; from sampling variance where available.
-      An undeclared tol returns UNRATED.
+tol = declared parameter; an undeclared tol returns UNRATED
+I   = joint - S  (the measurand of the RESONANT enum)
 
-0.  S - M <= 2*tol             BELOW_RESOLUTION
-1.  |joint - M| <= tol         REDUNDANT
-2.  |joint - S| <= tol         ADDITIVE              (I ~ 0)
-3.  joint > S + tol            RESONANT
-4.  M + tol < joint < S - tol  ENHANCED_SUBADDITIVE
-5.  joint < M - tol            ANTAGONISTIC   OPEN class: boundary proposed,
-                                              definition pending the enum's
-                                              author
+step  condition                    relation
+0     S - M <= 2*tol               BELOW_RESOLUTION
+1     |joint - M| <= tol           REDUNDANT
+2     |joint - S| <= tol           ADDITIVE              NEW: I ~ 0, independent
+3     joint > S + tol              RESONANT
+4     M + tol < joint < S - tol    ENHANCED_SUBADDITIVE
+5     joint < M - tol              ANTAGONISTIC          OPEN class: boundary
+                                                         proposed, definition
+                                                         pending the enum's author
 ```
 
-Once step 0 has not fired, `M + tol < S - tol`, so bands 1-5 are disjoint
-and exhaustive.
+`THIN T-7` RESOLVED (2026-10-07). The earlier four rows overlapped once
+`tol > 0`, and the overlaps came from two sources:
 
-Correction: the previous table put `joint = S` in ENHANCED_SUBADDITIVE.
-That was wrong. `joint ~ S` is ADDITIVE.
+- REDUNDANT's band met its neighbours.
+- With S - M small, the REDUNDANT band reached the sum.
 
-`THIN T-7` RESOLVED by the ordered precedence above. Step 0 removes the
-case where REDUNDANT can meet RESONANT, and the closed tol bands remove
-the remaining overlaps.
+Step 0 removes the second: when S - M <= 2*tol the bands [M-tol, M+tol] and
+[S-tol, S+tol] touch, so the weaker cues sum to less than the instrument
+resolves. With S - M > 2*tol, rows 1-5 are disjoint and exhaustive:
 
-Executable form: `interaction_class.py`, with checks in
-`test_interaction_class.py` (repo root). The checks cover:
+```text
+(-inf, M-tol)  [M-tol, M+tol]  (M+tol, S-tol)  [S-tol, S+tol]  (S+tol, inf)
+ ANTAGONISTIC    REDUNDANT      ENH_SUBADDITIVE    ADDITIVE       RESONANT
+```
 
-- one case per row;
-- the boundaries at M +/- tol and S +/- tol, plus eps either side;
-- the edge S - M = 2*tol exactly;
-- a sweep showing disjoint and exhaustive;
-- a null showing the sweep catches overlap when step 0 is bypassed.
+The module does not rely on that argument. It evaluates all five rows and
+raises if anything other than exactly one holds. A sweep over five
+(cues, tol) settings never raises and reaches every row.
 
-All checks run on exact rationals. The instrument text above still loads
-whole on its own; the classifier is a companion, not a dependency.
+Correction: joint = S is ADDITIVE, not ENHANCED_SUBADDITIVE. The earlier
+row read `M < joint <= S` and put the sum itself in the subadditive row.
+
+ADDITIVE is a class the target enum does not carry. It sits at I ~ 0, between
+RESONANT (I > 0) and the subadditive rows, so cues that act independently
+no longer fall into either.
+
+Canonical module: `threshold-states/interaction.py`. The root
+`interaction_class.py` (built separately the same day) is consolidated onto
+it and only imports it; its checks in `test_interaction_class.py` run
+against the canonical module.
 
 2024 candidate: the reference the paper uses, S or M, is UNRATED until the
 paper is seen.
 
 - If the paper reports against M only, its "enhancement" means joint > M.
-  That is ENHANCED_SUBADDITIVE, ADDITIVE or RESONANT, and the three cannot
-  be separated without S. RESONANT is undecidable from an M-only report.
+  That covers ENHANCED_SUBADDITIVE, ADDITIVE or RESONANT, and the three
+  cannot be separated without S. RESONANT is undecidable from an M-only
+  report.
 - The carried mapping above (redundancy and enhancement -> RESONANT) does
   not survive this test as stated. Redundancy is REDUNDANT. Enhancement is
-  RESONANT only above S + tol. At S +/- tol it is ADDITIVE.
+  RESONANT only above S + tol.
 
 Cross-links:
 `sense_as_match.py` (its module docstring names itself `sense_at_match.py`;

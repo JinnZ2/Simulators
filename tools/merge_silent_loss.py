@@ -11,6 +11,17 @@ such line, per file, with:
     side          which parent held the line (p1 = the branch merged into,
                   p2 = the branch merged in)
     category      BOTH_ADDED  file absent at base, present in both parents
+                  BOTH_KEPT   file absent at base, present in both parents,
+                              and the merge holds every distinct line of
+                              BOTH parents while equalling neither: two
+                              builds spliced into one file, nothing lost.
+                              The loss test is silent on this by
+                              construction (nothing was dropped); it was
+                              found by tests/test_compile_gate.py, which
+                              read eight such modules across four merges
+                              (b57c625, 1a9c09b, e167a67, 803ffd5) on
+                              2026-09-30, none of which compiled. A row
+                              here carries lost 0 and is not a loss row.
                   CONFLICT    both parents changed the file
                   ONE_SIDE    only the losing side changed the file; a plain
                               git merge keeps that side's version, so the
@@ -127,10 +138,27 @@ def audit_merge(merge, cwd=None, head="HEAD"):
         lost = collections.Counter(
             {k: v for k, v in (from_p1 + from_p2).items() if k.strip()})
         n_lost = sum(lost.values())
+        in_base = b is not None
+        if (not n_lost and not in_base and a1 is not None and a2 is not None
+                and m != a1 and m != a2
+                and not ((set(a1) | set(a2)) - set(m))):
+            # BOTH_KEPT: every distinct line of both parents survived into a
+            # file that is neither parent. Multiset would miss it (a blank
+            # line two parents share is merged once); the set test is the
+            # one that fires. `novel` counts merge lines from neither side.
+            hl = _show(head, f, cwd)
+            rec["files"][f] = {
+                "lost": 0, "side": "both", "category": "BOTH_KEPT",
+                "in_head_tree": hl is not None, "still_absent": 0,
+                "elsewhere_probed": 0, "elsewhere_found": 0, "sample": [],
+                "kept_p1": len(a1), "kept_p2": len(a2), "merge_lines": len(m),
+                "novel": len(set(m) - (set(a1) | set(a2))),
+                "head_is_p1": hl == a1, "head_is_p2": hl == a2,
+            }
+            continue
         if not n_lost:
             continue
         side = "p1" if sum(from_p1.values()) >= sum(from_p2.values()) else "p2"
-        in_base = b is not None
         ch1 = a1 != b
         ch2 = a2 != b
         if not in_base and a1 is not None and a2 is not None:
@@ -170,7 +198,7 @@ def render(records, cwd=None, verbose=False):
     w("merge_silent_loss -- lines a merge dropped that neither parent dropped")
     w("test: exact-line multiset per file against the single merge base")
     w("")
-    n_ok = n_loss = 0
+    n_ok = n_loss = n_kept = 0
     for r in records:
         subj = (_git(["log", "-1", "--format=%ad %s", "--date=short", r["merge"]], cwd)
                 or "").strip()
@@ -182,16 +210,25 @@ def render(records, cwd=None, verbose=False):
             if verbose:
                 w("%-9s 0 files with loss  -- %s" % (r["merge"][:9], subj[:70]))
             continue
-        n_loss += 1
-        w("%-9s %d file(s) with loss  -- %s" % (r["merge"][:9], len(r["files"]), subj[:70]))
-        for f, d in r["files"].items():
+        loss_rows = {f: d for f, d in r["files"].items() if d["category"] != "BOTH_KEPT"}
+        kept_rows = {f: d for f, d in r["files"].items() if d["category"] == "BOTH_KEPT"}
+        n_loss += bool(loss_rows)
+        n_kept += bool(kept_rows)
+        w("%-9s %d file(s) with loss, %d both-kept  -- %s"
+          % (r["merge"][:9], len(loss_rows), len(kept_rows), subj[:70]))
+        for f, d in kept_rows.items():
+            w("    %-55s BOTH_KEPT  merge %4d lines holds every distinct line of p1 (%d) and p2 (%d), lost 0, novel %d, HEAD is %s"
+              % (f, d["merge_lines"], d["kept_p1"], d["kept_p2"], d["novel"],
+                 "p1" if d["head_is_p1"] else "p2" if d["head_is_p2"] else
+                 ("the splice" if d["in_head_tree"] else "absent")))
+        for f, d in loss_rows.items():
             w("    %-55s lost %4d side=%s %-10s still_absent %4d  elsewhere %d/%d%s"
               % (f, d["lost"], d["side"], d["category"], d["still_absent"],
                  d["elsewhere_found"], d["elsewhere_probed"],
                  "" if d["in_head_tree"] else "  [file absent at HEAD]"))
     w("")
-    w("merges audited %d   with loss %d   refused %d"
-      % (n_ok, n_loss, len(records) - n_ok))
+    w("merges audited %d   with loss %d   both-kept %d   refused %d"
+      % (n_ok, n_loss, n_kept, len(records) - n_ok))
     w("a loss row is a decision the merge did not record; whether the dropped")
     w("side to keep is not measured here")
     return "\n".join(out)
@@ -216,8 +253,8 @@ def _write(cwd, name, lines):
 
 
 def build_fixture(root):
-    """Four merges: clean, conflict-resolved-to-p1, both-added-resolved-to-p1,
-    one-side loss by `-s ours`. Returns (repo, {name: sha})."""
+    """Five merges: clean, conflict-resolved-to-p1, both-added-resolved-to-p1,
+    one-side loss by `-s ours`, both-added-with-both-kept. Returns (repo, {name: sha})."""
     repo = os.path.join(root, "repo")
     os.makedirs(repo)
     _run(repo, "init", "-q", "-b", "main")
@@ -267,6 +304,21 @@ def build_fixture(root):
     _run(repo, "checkout", "-q", "main")
     _run(repo, "-c", "user.name=t", "-c", "user.email=t@t", "merge", "-q", "-s", "ours", "--no-edit", "oneB")
     shas["one_side"] = _run(repo, "rev-parse", "HEAD").stdout.strip()
+    # 5. both kept: a new file on each side, resolved by keeping both wholes
+    a_lines = ["# build A", "def build_a():", "    return 'A'"]
+    m_lines = ["# build MAIN", "def build_main():", "    return 'MAIN'"]
+    _run(repo, "checkout", "-q", "-b", "keepA")
+    _write(repo, "two.py", a_lines)
+    _commit(repo, "A adds two.py")
+    _run(repo, "checkout", "-q", "main")
+    _write(repo, "two.py", m_lines)
+    _commit(repo, "main adds two.py")
+    r = _run(repo, "merge", "--no-commit", "keepA")
+    assert r.returncode != 0, "fixture: expected an add/add conflict"
+    _write(repo, "two.py", m_lines[:1] + a_lines + m_lines[1:])
+    _run(repo, "add", "two.py")
+    _run(repo, "-c", "user.name=t", "-c", "user.email=t@t", "commit", "-q", "-m", "merge keepA, both kept")
+    shas["both_kept"] = _run(repo, "rev-parse", "HEAD").stdout.strip()
     return repo, shas
 
 
@@ -293,6 +345,14 @@ def selftest(verbose=True):
         d = ba["files"].get("new.py")
         ck(d is not None and d["category"] == "BOTH_ADDED" and d["lost"] == 2 and d["side"] == "p2",
            "a file both sides added, resolved to one, reads BOTH_ADDED with the other build lost")
+        bk = audit_merge(shas["both_kept"], repo)
+        d = bk["files"].get("two.py")
+        ck(d is not None and d["category"] == "BOTH_KEPT" and d["lost"] == 0
+           and d["kept_p1"] == 3 and d["kept_p2"] == 3 and d["merge_lines"] == 6
+           and d["novel"] == 0,
+           "a file both sides added, resolved by keeping both, reads BOTH_KEPT with lost 0 (the loss test alone is silent here)")
+        ck(bk["files"]["two.py"]["head_is_p1"] is False and bk["files"]["two.py"]["head_is_p2"] is False,
+           "HEAD still holds the splice, neither parent")
         one = audit_merge(shas["one_side"], repo)
         d = one["files"].get("z.txt")
         ck(d is not None and d["category"] == "ONE_SIDE" and d["side"] == "p2" and not d["in_head_tree"],
@@ -328,10 +388,11 @@ def selftest(verbose=True):
             ck(False, "shallow clone fixture could not be built: " + r.stderr.strip()[:80])
         ck(all(m in [x["merge"] for x in audit_all(repo)] for m in shas.values()),
            "audit_all walks every merge reachable from HEAD")
-        text = render([clean, conf, ba, one], repo)
+        text = render([clean, conf, ba, one, bk], repo)
         ck("CONFLICT" in text and "BOTH_ADDED" in text and "ONE_SIDE" in text
-           and "merges audited 4   with loss 3" in text,
-           "render carries every category and the audited/with-loss counts")
+           and "BOTH_KEPT" in text
+           and "merges audited 5   with loss 3   both-kept 1" in text,
+           "render carries every category and keeps the both-kept count apart from the loss count")
     failed = [l for ok, l in checks if not ok]
     print("merge_silent_loss selftest: %d checks, %d failed" % (len(checks), len(failed)))
     return 0 if not failed else 1
