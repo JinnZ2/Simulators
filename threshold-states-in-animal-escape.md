@@ -525,9 +525,14 @@ tol given as a bare number                    MODE_UNDECLARED (value present,
 tol value < 0                                 MALFORMED_INPUT
 tol value = 0                                 allowed: exact comparison; must be
                                                           explicitly declared
-a non-number anywhere: str, bool, None, NaN,  MALFORMED_INPUT (bool is refused
-  +inf, -inf                                              even though Python
+tol given as None                             UNRATED   (no declaration)
+tol with value None (key present)             UNRATED   (no value = undeclared)
+tol with a value and mode None                MODE_UNDECLARED (mode absent)
+a non-number in a NUMERIC DATA FIELD (cues,   MALFORMED_INPUT (bool is refused
+  joint): str, bool, None, NaN, +inf, -inf                even though Python
                                                           treats it as an int)
+a non-number tol value other than None:       MALFORMED_INPUT
+  str, bool, NaN, +inf, -inf
 extra keys in tol                             MALFORMED_INPUT (strict schema;
                                                           catches a misspelled
                                                           "mode")
@@ -535,15 +540,21 @@ mode not in {absolute, relative_to_M}         MALFORMED_INPUT
 negative cues                                 allowed (they are N)
 ```
 
-OPEN (not decided by Q1-Q4; flagged before cases are written). Q3 says a
-tol with no value is UNRATED, and Q2 lists "no tol" as UNRATED. Q4 says
-None anywhere is MALFORMED_INPUT, and MALFORMED_INPUT is matched first.
-These conflict for two inputs:
+OPEN resolved (operator, 2026-10-07, PROPOSED). Q4's "None anywhere ->
+MALFORMED_INPUT" is scoped to the NUMERIC DATA FIELDS, cues and joint. For
+the tol declaration, None means "not declared":
 
-- tol given as None.
-- A tol whose value is given as None (key present, value None).
+```text
+tol = None                      UNRATED          (order 3)
+tol = {value: None, mode: x}    UNRATED          (order 3: no value = undeclared)
+tol = {value: v, mode: None}    MODE_UNDECLARED  (order 4: mode absent)
+```
 
-The text does not yet say which verdict each of the two gets.
+This is consistent with Q3: absence of a declaration is not malformation.
+The scope of each rule is unchanged otherwise: a tol value that is present
+and is not a finite number >= 0 (a string, a bool, NaN, +inf, -inf, a
+negative number) is still MALFORMED_INPUT, and so is a mode that is present
+and is not one of the two names.
 
 Correction: joint = S is ADDITIVE, not ENHANCED_SUBADDITIVE. The earlier
 row read `M < joint <= S` and put the sum itself in the subadditive row.
