@@ -49,6 +49,30 @@ S-3 RESONANT hits are all other senses: `fragility-cascade/homeostasis_kernel.py
 and its sample (3 lines), damping; `qrng-pair-search/qrng_pair_search.py:100`,
 tunnelling. The S-3 phrases were supplied with the 2026-10-07 literature
 check as cross-link targets. Neither target was located (section 8).
+S-3 stands as run. S-4 relocates both targets from pointers the operator
+supplied afterward. "narrow watching is costly" was a chat paraphrase, not
+file text, so S-3 could not have found it.
+
+```text
+id   corpus                                  query (whole word,  date        hits
+                                             case-insensitive)
+---  --------------------------------------  ------------------  ----------  ----
+S-4  JinnZ2/Simulators, human-sensing-prior/ "monitoring"        2026-10-07     0
+     human-sensing-prior.md                  "vigilance"                        0
+     @ c3578c8 (branch claude/human-sensing-prior)
+     same file @ c9715a0 (branch             "monitoring"                       7
+     claude/human-sensing-prior-cc0-cbm411)  "vigilance"                        2
+     JinnZ2/Polyhedral-Intelligence,         file present?                   0 / 1
+     ontology/relation_classes.json
+     @ 1d477cf (main) / @ 7387230
+     (branch claude/glyph-as-compression)
+     same file @ 7387230                     class id == RESONANT            1
+```
+
+The operator named the branch `claude/human-sensing-prior`. That branch
+has no section 7 and no hit. Both hits are on `-cc0-cbm411`. The
+relation-class file is on the glyph branch, not on main. Recorded, not
+resolved.
 
 S-1 hits, read by hand. All 5 use "new state" in its ordinary sense of
 "next state". None defines a processing state:
@@ -201,10 +225,19 @@ phylogenetic meta-analysis; Samia & Blumstein 2015, 178 species, FEAR fits
 79%. A FID taken without AD recorded mixes the threshold with the cost of
 watching.
 
-Cross-link: the monitoring cost in FEAR is the animal-level form of
-"narrow watching is costly", from an independent literature. The in-tree
-target of that phrase was not located (search S-3); the link is recorded
-here and points at nothing in this repository yet.
+Cross-link: the monitoring cost in FEAR is the animal-level form of the
+single-channel monitoring cost in `human-sensing-prior/human-sensing-prior.md`,
+an independent literature. Location (search S-4): branch
+`claude/human-sensing-prior-cc0-cbm411` @ c9715a0.
+
+- Section 7, F1, is the test: whole-field monitoring against forced
+  single-channel focus, matched duration.
+- The supporting row is in its section 6 scope-limits table: "Sustained
+  forced single-channel monitoring IS costly", vigilance research, cited
+  there from memory.
+
+This link equates no mechanism. FEAR's cost is watching one approaching
+predator. The human file's cost is a forced narrow task.
 
 ### 2c. The held state outlasts the action
 
@@ -313,7 +346,13 @@ resume latency distribution                       UNRATED
 FID shift per unit group size / refuge distance /
   food density / starting distance                UNRATED
 share of escapes with monitoring during flight    UNRATED
+alert-distance distribution                       UNRATED
+FID slope per unit alert distance                 UNRATED
 ```
+
+Rows 9 and 10 (added 2026-10-07). Source pointers, not values:
+Samia et al. 2013, Biol Lett; Samia & Blumstein 2015, PLoS ONE (178 bird
+species). Not filled from memory.
 
 ---
 
@@ -385,9 +424,32 @@ multimodal risk assessment
 ```
 
 CANDIDATE mapping, PROPOSED (carried from the check): redundancy and
-enhancement map to a RESONANT class, and antagonism to an open
-antagonistic class. RESONANT is not defined in this file or in this tree
-(search S-3).
+enhancement map to the RESONANT class, and antagonism maps to the open
+antagonistic class.
+
+The target enum is in JinnZ2/Polyhedral-Intelligence,
+`ontology/relation_classes.json` @ 7387230, class `RESONANT` (search S-4).
+Only the enum is matched; the damping and tunnelling senses are excluded.
+The enum's measurand:
+
+```text
+I = F(A,B) - [F(A) + F(B)]        joint minus the SUM of separate
+RESONANT        iff I > 0
+I <= 0          CONTRADICTS_CLASS
+I < 0           antagonistic, OPEN (not defined there; not invented here)
+```
+
+DERIVED, reading the enum against the three effect types:
+
+- Redundancy: joint is about equal to one cue alone, so I < 0.
+  CONTRADICTS_CLASS, not RESONANT.
+- Enhancement: meets RESONANT only if it is SUPERADDITIVE against the sum
+  of the separate cues. Enhancement measured against the strongest single
+  cue does not settle the sign of I.
+- Antagonism: I < 0, the OPEN class, unassigned.
+
+Whether the candidate paper measures against the sum or the strongest
+single cue: UNRATED. The paper is unseen.
 
 Cross-links:
 `sense_as_match.py` (its module docstring names itself `sense_at_match.py`;
