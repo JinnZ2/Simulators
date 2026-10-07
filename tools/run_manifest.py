@@ -263,23 +263,65 @@ def _first_py_name(strings, relpath):
     return None
 
 
-def resolve_targets(records):
-    """Mark whether each redirect's named target exists beside it.
+def archived_folder(path):
+    """The <folder> of a file under the top-level archive/<folder>/, else None."""
+    parts = path.split("/")
+    if len(parts) >= 3 and parts[0] == "archive":
+        return parts[1]
+    return None
+
+
+def is_archived(path):
+    """Any path with an `archive` directory component.
+
+    Covers both layouts in the tree: archive/<folder>/... (PR #105) and
+    <folder>/archive/<sha>/... (crediting-rate, e167a67).
+    """
+    return "archive" in path.split("/")[:-1]
+
+
+def resolve_targets(records, root=None):
+    """Mark whether each redirect's named target exists, and where it was looked for.
 
     A redirect naming a file that is not there is D-4's shape one layer up: the
     pointer outlived the artifact.
+
+    Rule (c), adopted 2026-10-07 (KNOWN_RED section 19.6): a file under
+    archive/<folder>/ that names a ROOT-relative target "<folder>/<rest>"
+    resolves it as archive/<folder>/<rest> -- the copy archived with it,
+    never the live file at the old path. Archiving moves the folder; the
+    message inside the file still names the pre-archive path. Nothing else
+    is excluded: an archived redirect whose target is genuinely absent stays
+    a violation, tagged target_state ARCHIVED_TARGET_MISSING.
+
+    target_state: RESOLVES | MISSING | ARCHIVED_TARGET_MISSING | None (no
+    target named, or not a redirect).
     """
+    root = ROOT if root is None else root
     for r in records:
+        r.setdefault("target_state", None)
+        r.setdefault("target_path", None)
         if r["class"] != "REDIRECT" or not r["redirect_target"]:
             continue
         target = r["redirect_target"]
+        folder = archived_folder(r["path"])
         if "/" in target:
-            # A message naming a path names it from the repo root, which is
-            # how every redirect message in the tree is written.
-            cand = os.path.join(ROOT, target)
+            if folder is not None and target.startswith(folder + "/"):
+                rel = "archive/" + target                          # rule (c)
+            else:
+                # A message naming a path names it from the repo root, which
+                # is how every redirect message in the tree is written.
+                rel = target
         else:
-            cand = os.path.join(ROOT, os.path.dirname(r["path"]), target)
-        r["target_resolves"] = os.path.isfile(cand)
+            rel = os.path.join(os.path.dirname(r["path"]), target)
+        r["target_path"] = rel
+        r["target_resolves"] = os.path.isfile(os.path.join(root, rel))
+        if r["target_resolves"]:
+            r["target_state"] = "RESOLVES"
+        elif is_archived(r["path"]):
+            r["target_state"] = "ARCHIVED_TARGET_MISSING"
+        else:
+            r["target_state"] = "MISSING"
 
 
 def tracked_files():
@@ -356,7 +398,10 @@ def summary(records, source):
     if v:
         lines.append("CONTRACT VIOLATIONS: %d" % len(v))
         for r in v:
-            lines.append("  %s" % r["path"])
+            tag = ("   [%s -> %s]" % (r["target_state"], r["target_path"])
+                   if r.get("target_state") in ("MISSING", "ARCHIVED_TARGET_MISSING")
+                   else "")
+            lines.append("  %s%s" % (r["path"], tag))
             lines.append("      %s" % r["reason"])
     else:
         lines.append("CONTRACT VIOLATIONS: 0")
@@ -520,6 +565,38 @@ def selftest():
     ck(r5["redirect_target"] is None,
        "the own-name skip compares basenames, so a path form of the file's "
        "own name is still skipped")
+
+    print("\n-- rule (c): archived redirects resolve against their own archive")
+    import tempfile
+    with tempfile.TemporaryDirectory() as tmp:
+        for rel in ("archive/fold/test_a.py", "fold/test_live.py"):
+            os.makedirs(os.path.join(tmp, os.path.dirname(rel)), exist_ok=True)
+            io.open(os.path.join(tmp, rel), "w").write("x = 1\n")
+
+        def rec(path, target):
+            return {"path": path, "class": "REDIRECT",
+                    "redirect_target": target, "target_resolves": None,
+                    "contract_ok": True}
+        rs = [rec("archive/fold/m.py", "fold/test_a.py"),        # (c) resolves
+              rec("archive/fold/n.py", "fold/test_live.py"),     # live copy only
+              rec("archive/fold/o.py", "test_none.py"),          # beside, absent
+              rec("fold/archive/abc1234/p.py", "fold/test_a.py"),  # nested layout
+              rec("fold/q.py", "test_none.py"),                  # live, absent
+              rec("fold/r.py", "fold/test_live.py")]             # live, resolves
+        resolve_targets(rs, root=tmp)
+        st = [r["target_state"] for r in rs]
+        ck(st[0] == "RESOLVES" and rs[0]["target_path"] == "archive/fold/test_a.py",
+           "archive/<folder>/ names <folder>/x -> resolved as archive/<folder>/x")
+        ck(st[1] == "ARCHIVED_TARGET_MISSING",
+           "an archived redirect is NOT satisfied by the live file at the old path")
+        ck(st[2] == "ARCHIVED_TARGET_MISSING",
+           "an archived redirect with a genuinely absent target is tagged, not excluded")
+        ck(st[3] == "ARCHIVED_TARGET_MISSING",
+           "rule (c) is top-level archive/ only; <folder>/archive/<sha>/ is tagged")
+        ck(st[4] == "MISSING", "a live redirect with an absent target is MISSING")
+        ck(st[5] == "RESOLVES", "a live redirect is unchanged by rule (c)")
+        ck(len(violations(rs)) == 4,
+           "tagged archived misses stay violations (no blanket exclusion)")
 
     print("\n-- absent is not a bucket")
     ck(classify('x = 1\n', "z.py")["contract_ok"] is None,

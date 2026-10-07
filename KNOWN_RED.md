@@ -1104,6 +1104,13 @@ ends in a block that cannot be missed:
 
     SKIPPED (NOT_RUN): 33 cases in 6 metrics   -- GATE RED: a skipped case is not a passing case
 
+[PINNED 2026-10-07] "33 cases in 6 metrics" is the figure @85ce0d9, the commit
+that wrote this section. It is 28 cases in 5 metrics @5af0d47 and unchanged
+@9262516. Merge 5af0d47 (parents c95a1e5, 85ce0d9) brought in c95a1e5's
+crediting split, and crediting_rate_v2.py::position (5 cases) began to run.
+The prose here is left as written. Current figures live in the PIN block of
+section 19, which tools/known_red_check.py reads.
+
 Each metric is listed with its skip count and the first error.
 
 Old check: exit 0 unless a case disagreed with the registry, a metric was
@@ -1120,10 +1127,11 @@ metrics. That green is gone.
         test_the_skipped_count_is_printed_in_the_summary   the line is present; nonzero exit whenever the count > 0
 
 Consequence: `ToolRuns::test_tool_exits_clean` is RED again. It is red for the
-33 skipped cases below and for nothing else. Suite (tests/, pytest):
+33 skipped cases below and for nothing else (@85ce0d9; 28 @5af0d47 and
+@9262516). Suite (tests/, 136 tests):
 
-    3 failed, 133 passed
-      test_known_answer_gate::ToolRuns::test_tool_exits_clean   (16.2: the 33 skips)
+    3 failed, 133 passed   @85ce0d9, @5af0d47, @9262516 (same three each time)
+      test_known_answer_gate::ToolRuns::test_tool_exits_clean   (16.2: the 33 skips @85ce0d9; 28 @9262516)
       test_run_manifest::TestRedirectContract x2                (16.2: the two redirects)
 
 ### 16.2 OPEN — awaiting Kavik (parked; nothing below was changed)
@@ -1147,6 +1155,11 @@ Consequence: `ToolRuns::test_tool_exits_clean` is RED again. It is red for the
                                 -> stability_product, 5 cases skipped
          crediting_rate_v2.py   SyntaxError: '{' was never closed (line 625)
                                 -> position, 5 cases skipped
+       [PINNED 2026-10-07] Stale for crediting_rate_v2.py: true @85ce0d9,
+       false @5af0d47. The live crediting-rate/crediting_rate_v2.py compiles
+       and its --selftest reads 55 checks, 0 failed @9262516. The spliced
+       build is archived at crediting-rate/archive/f168f79/. load_class.py
+       still does not compile @9262516.
 
 ### 16.3 OPEN, not in the parked three, and with the same shape
 
@@ -1161,4 +1174,216 @@ a build pick, so they are parked with the three above rather than fixed under
     cooperative-substrate-proof/p5_lag.py::lag_ratio       ModuleNotFoundError 'scope' 6 skipped
     instrument-index/build_index.py::claim_only_fraction   KeyError: 'path'            6 skipped
 
-The gate stays RED until all six skipped metrics run.
+The gate stays RED until all six skipped metrics run. [PINNED 2026-10-07]
+Five @5af0d47 and @9262516: pool_fraction 6, stability_product 5,
+gain_from_sizes 5, lag_ratio 6, claim_only_fraction 6 = 28. The "remaining
+four" above total 23 @85ce0d9, and 23 + 5 (stability_product) + 5 (position)
+= 33.
+
+## 19. 2026-10-07 — baseline by id + cause @ commit; figures pinned and checked
+
+### 19.1 Why
+
+Section 16 said "33 cases in 6 metrics". That was true @85ce0d9 and false
+from 5af0d47 on (28 in 5; section 16 now carries the pins inline). Nothing
+noticed, because a prose figure is read by nobody. From here on the current
+figures sit in the PIN block below and `tools/known_red_check.py` reruns the
+instruments they came from. Any mismatch in either direction exits 1, and
+`tests/test_known_red_pins.py` puts that check in the suite.
+
+The baseline is adopted as a set of ids, each with a cause and a commit.
+A bare count is not adopted: "3 failing" would stay green while one red
+test was swapped for a different one.
+
+### 19.2 Baseline @9262516 (136 tests, 3 failed, 133 passed)
+
+    id                                            cause @ commit                                   intended
+    test_tool_exits_clean                         85ce0d9: known_answer exits nonzero on NOT_RUN   YES
+                                                  (28 cases, 5 metrics @9262516)
+    test_no_redirect_names_a_target_that_is_missing
+                                                  3 redirects name missing targets (below)         NO
+    test_the_one_known_violation_is_pinned        4 violations where 1 is pinned (below)           NO
+
+test_tool_exits_clean is INTENDED red. A clean exit with unrun cases would be
+a false pass. It clears when the 28 NOT_RUN cases run. It does not clear by
+loosening the gate, and any change that turns it green without the skip count
+reaching 0 is a regression of 85ce0d9.
+
+The two redirect tests are red for three files, not one:
+
+    crediting-rate/archive/f168f79/crediting_rate_v2.py -> crediting-rate/test_crediting_v2.py
+        The target exists only at commit f168f79.
+    instrument-index/coverage.py -> test_index.py
+        Section 16.2 item 2. Parked, awaiting Kavik. Never committed.
+    sense_as_match.py -> test_sense.py
+        Section 16.2 item 1. Clears when claude/sense-as-match merges; that
+        branch adds root test_sense.py.
+
+Merging sense-as-match leaves both tests red (2 missing, 3 violations, where
+anchor-position/normalize.py is the 1 pinned). It also makes the rm.* pins
+below MISMATCH. That is intended: the merge must re-pin them.
+
+### 19.3 The crediting redirect is in the archive, not the live module
+
+    crediting-rate/crediting_rate_v2.py      SELFTEST, 55 checks, 0 failed @9262516
+    crediting-rate/archive/f168f79/...       REDIRECT to crediting-rate/test_crediting_v2.py
+                                             (resolved from ROOT; present only @f168f79)
+
+The live module is not a redirect. A test that runs its 55 checks is real
+coverage of live code, and root `test_crediting_rate_v2.py` does exactly
+that. It does NOT clear the violation, because the violation is the
+archived copy's. The wrapper is deliberately not named
+crediting-rate/test_crediting_v2.py: that would resolve the archived
+redirect to a live test, and an archived contract would read as satisfied
+by a file it never named.
+
+Two ways to close the archived redirect. Both change the redirect contract,
+so neither is taken here:
+
+    (a) run_manifest resolves a redirect under archive/<sha>/ against that
+        commit (git cat-file -e <sha>:<target>). The target is checked to
+        exist where the archive says it does. It fails on a shallow clone,
+        which is reported, not passed.
+    (b) Files under */archive/<sha>/ are excluded from the redirect
+        contract. ARCHIVED.md already says "run at its own commit".
+
+### 19.4 PIN block
+
+<!-- known-red-pins: begin -->
+PIN ka.skipped.cases - 11 @59a5e5d
+PIN ka.skipped.metrics - 2 @59a5e5d
+PIN ka.skipped.metric cooperative-substrate-proof/p3_comprehension.py::gain_from_sizes 5 @59a5e5d
+PIN ka.skipped.metric cooperative-substrate-proof/p5_lag.py::lag_ratio 6 @59a5e5d
+PIN rm.redirect_missing archive/instrument-index/build_index.py - @59a5e5d
+PIN rm.redirect_missing archive/instrument-index/coverage.py - @59a5e5d
+PIN rm.redirect_missing crediting-rate/archive/f168f79/crediting_rate_v2.py - @9262516
+PIN rm.redirect_missing instrument-index/coverage.py - @9262516
+PIN rm.redirect_missing sense_as_match.py - @9262516
+PIN rm.violation anchor-position/normalize.py - @9262516
+PIN rm.violation archive/instrument-index/build_index.py - @59a5e5d
+PIN rm.violation archive/instrument-index/coverage.py - @59a5e5d
+PIN rm.violation crediting-rate/archive/f168f79/crediting_rate_v2.py - @9262516
+PIN rm.violation instrument-index/coverage.py - @9262516
+PIN rm.violation sense_as_match.py - @9262516
+PIN suite.failing test_tool_exits_clean INTENDED @9262516
+PIN suite.failing test_no_redirect_names_a_target_that_is_missing UNINTENDED @9262516
+PIN suite.failing test_the_one_known_violation_is_pinned UNINTENDED @9262516
+PIN suite.failing test_no_module_binds_a_toplevel_name_twice UNINTENDED @59a5e5d
+PIN rm.archived_target_missing archive/instrument-index/build_index.py - @d19c52c
+PIN rm.archived_target_missing archive/instrument-index/coverage.py - @d19c52c
+PIN rm.archived_target_missing crediting-rate/archive/f168f79/crediting_rate_v2.py - @d19c52c
+PIN cg.duplicate earth_economics/asteroid_mining_audit.py::main - @59a5e5d
+PIN cg.duplicate earth_economics/asteroid_mining_audit.py::run_asteroid_fermi - @59a5e5d
+PIN cg.duplicate grounding-layers/cultural_lens.py::CulturalLens - @59a5e5d
+PIN cg.duplicate grounding-layers/run_grounding_pipeline.py::run_pipeline - @59a5e5d
+PIN cg.duplicate play-sims/atmospheric-heating/meteor_heating_bins.py::density - @59a5e5d
+PIN cg.duplicate tools/known_answer.py::_cpd_stability_product - @59a5e5d
+PIN cg.duplicate tools/known_answer.py::_drc_count_relation - @59a5e5d
+PIN cg.duplicate tools/known_answer.py::_rcl_composed_bias - @59a5e5d
+<!-- known-red-pins: end -->
+
+To re-pin: change the figure and its commit together, in the same commit
+as the change that moved it, and record the move as a new section here.
+
+### 19.5 Re-pin @59a5e5d — PR #105 merged
+
+The pins above were written @9262516. PR #105 (claude/potential-part-b-k7Qm,
+merge d675fc7) then landed on main, now @59a5e5d. Merging main into this
+branch made the checker exit 1 on 13 pins. That was the check working:
+the tree moved. Each pin now carries the commit where its figure was last
+verified. A pin whose figure did not move keeps @9262516.
+
+    figure                           @9262516    @59a5e5d   moved by
+    known-answer skipped cases       28          11         #105 builds pool_fraction, stability_product,
+    known-answer skipped metrics     5           2            claim_only_fraction (spliced builds separated)
+    redirects naming a missing file  3           6          #105 archives three spliced builds to
+    contract violations              4           7            archive/<folder>/; each archived copy keeps
+                                                            its redirect
+    suite                            136 / 3 red 145 / 4 red (main alone; 148 / 4 with this branch)
+
+Still skipped: gain_from_sizes 5 and lag_ratio 6, both ModuleNotFoundError
+'scope' (cooperative-substrate-proof). test_tool_exits_clean stays INTENDED
+red until those 11 run.
+
+The fourth failure, test_no_module_binds_a_toplevel_name_twice, is section
+14.4's: eight duplicate top-level names. Five are in delivered drops, from
+merge 04d16d0 (PR #71). Three are dead earlier helper copies in
+tools/known_answer.py. Section 14 recorded it "Not repaired in this pass"
+and it reached main with #105. It is UNINTENDED, known and parked, not by
+design.
+
+The three new redirects. Same shape as 19.3; none is the live code's:
+
+    archive/crediting-rate/crediting_rate_v2.py  -> crediting-rate/test_crediting_v2.py
+    archive/instrument-index/build_index.py      -> test_index.py
+    archive/instrument-index/coverage.py         -> test_index.py
+
+For the archive/crediting-rate/ copy, the target file does exist beside it:
+archive/crediting-rate/test_crediting_v2.py. The redirect names its
+pre-archive path, which run_manifest resolves from ROOT because it holds a
+"/". Moving the folder broke the pointer, not the file. That adds a third
+option to 19.3's two. Not taken:
+
+    (c) for a file under archive/<folder>/, resolve a ROOT-relative target
+        "<folder>/<rest>" as archive/<folder>/<rest>. The redirect is then
+        checked against the copy that was archived with it.
+
+Under (c), one of the three new violations would resolve. Under (b), all
+four archived redirects would leave the contract. Either way, the two live
+redirects (instrument-index/coverage.py, sense_as_match.py) remain.
+
+### 19.6 Archived redirects: rule (c) adopted, (b) rejected (d19c52c)
+
+Operator decision, 2026-10-07:
+
+    (c) ADOPTED. A file under archive/<folder>/ that names a ROOT-relative
+        target "<folder>/<rest>" resolves it as archive/<folder>/<rest>. The
+        copy archived with the file is checked, never the live file at the
+        old path (selftest: a live copy at the old path does NOT satisfy it).
+    (b) REJECTED. A blanket exclusion of archive/ is an undeclared cut.
+        Archives must still resolve; that is custody.
+
+Effect @d19c52c:
+
+    archive/crediting-rate/crediting_rate_v2.py   cleared: archive/crediting-rate/test_crediting_v2.py exists
+    missing redirect targets                      6 -> 5
+    contract violations                           7 -> 6
+
+The three archived redirects whose targets are genuinely absent stay
+violations. Each is tagged target_state ARCHIVED_TARGET_MISSING and pinned
+by id (rm.archived_target_missing):
+
+    archive/instrument-index/build_index.py               -> archive/instrument-index/test_index.py
+    archive/instrument-index/coverage.py                  -> archive/instrument-index/test_index.py
+        test_index.py was never committed (16.2 item 2)
+    crediting-rate/archive/f168f79/crediting_rate_v2.py   -> crediting-rate/test_crediting_v2.py
+        <folder>/archive/<sha>/ layout; rule (c) covers top-level archive/
+        only. The target exists only at commit f168f79.
+
+The live files stay red, as stated: instrument-index/coverage.py ->
+test_index.py and sense_as_match.py -> test_sense.py (target_state
+MISSING). test_no_redirect_names_a_target_that_is_missing and
+test_the_one_known_violation_is_pinned stay UNINTENDED red for 5 missing
+targets and 5 unpinned violations.
+
+### 19.7 Duplicate top-level names (14.4): parked, pinned by name
+
+test_no_module_binds_a_toplevel_name_twice stays UNINTENDED red. Each
+duplicate is pinned as cg.duplicate <path>::<name>, read from the compile
+gate's own sweep(). That is 8 pins, not 5: the 3 dead helper copies in
+tools/known_answer.py are still there.
+
+    delivered drops (merge 04d16d0, PR #71) -- the 5 that remain parked
+      earth_economics/asteroid_mining_audit.py              main                 157, 476
+      earth_economics/asteroid_mining_audit.py              run_asteroid_fermi   124, 437
+      grounding-layers/cultural_lens.py                     CulturalLens          14, 149
+      grounding-layers/run_grounding_pipeline.py            run_pipeline          57, 261
+      play-sims/atmospheric-heating/meteor_heating_bins.py  density               30, 281
+    tools/known_answer.py -- dead earlier copies; the later copy is the one seed() reaches
+      _cpd_stability_product, _drc_count_relation, _rcl_composed_bias
+
+SUGGESTED, the author's call, not done: remove the three dead helper copies
+in tools/known_answer.py. 14.4 says no registered value moves, since seed()
+reaches the later copy. Doing so turns their three cg.duplicate pins
+MISMATCH, and the re-pin leaves exactly the 5 delivered-drop names.
+
