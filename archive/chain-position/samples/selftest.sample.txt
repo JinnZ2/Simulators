@@ -1,0 +1,104 @@
+clause_audit: step 1 over the carried summary
+  ok    run state NOT_RUN_ON_STANDARD (no STANDARD-sourced clause)
+  ok    carried summary: 5 clauses, 0 inside agent, 5 gateway
+  ok    planted AGENT clause -> inside_agent 1 (branch reachable)
+  ok    planted BOTH counts inside
+  ok    UNDECLARED counted apart, never as gateway
+  ok    STANDARD-sourced clause flips run state
+  ok    empty -> EMPTY with None counts
+  ok    value outside vocabulary -> MALFORMED, typed
+  ok    clause text reaches no check (blanked text, same counts)
+  ok    EGRESS record names both standard hosts and a control
+  ok    clause_audit imports no network module
+trust_provenance: step 2 specification
+  ok    full constructed record -> AUDITABLE at depth 0
+  ok    planted absence of subject -> UNAUDITABLE naming it
+  ok    planted absence of score -> UNAUDITABLE naming it
+  ok    planted absence of scorer -> UNAUDITABLE naming it
+  ok    planted absence of inputs -> UNAUDITABLE naming it
+  ok    planted absence of method -> UNAUDITABLE naming it
+  ok    planted absence of position -> UNAUDITABLE naming it
+  ok    planted absence of t_scored -> UNAUDITABLE naming it
+  ok    planted absence of authorization -> UNAUDITABLE naming it
+  ok    planted absence of scorer_provenance -> UNAUDITABLE naming it
+  ok    UNDECLARED sentinel -> DECLARED_UNAUDITABLE, kept apart from ABSENT
+  ok    missing sub-field (scale) -> ABSENT on score
+  ok    empty inputs list -> ABSENT
+  ok    scorer_provenance as a full record -> AUDITABLE at depth 1
+  ok    inner absence propagates as UNAUDITABLE
+  ok    chain past depth cap without root -> CHAIN_UNTERMINATED
+  ok    repeated provenance node -> CHAIN_CYCLE
+  ok    non-dict -> MALFORMED
+  ok    scores_payload_only True on payload-only inputs
+  ok    scores_payload_only False when a prior score is read
+  ok    scores_payload_only None when unreadable
+  ok    constructed set -> NO_COMMON_OBJECT, common {score, method}
+  ok    three full records -> COMMON_OBJECT (branch reachable)
+  ok    empty set -> EMPTY, missing = whole spec
+  ok    every constructed record declares itself CONSTRUCTED
+horn_b: step 3, the container asks
+  ok    STANDALONE -> UNDETERMINED_FROM_INSIDE, all four UNOBTAINABLE
+  ok    CHAIN_SILENT -> UNDETERMINED_FROM_INSIDE, all four UNOBTAINABLE
+  ok    STANDALONE and CHAIN_SILENT interiors identical (delta empty)
+  ok    CHAIN_DECLARED delta names only what the harness wrote
+  ok    CHAIN_DECLARED -> POSITION_ASSERTED, never OBSERVED
+  ok    asserted index/total carried as testimony with basis
+  ok    verification of the assertion names an EXTERIOR source
+  ok    upstream/downstream stay UNOBTAINABLE even when declared
+  ok    a chain field in the payload reads ASSERTED_BY_INPUT (payload basis)
+  ok    every evidence sits EXTERIOR
+  ok    position word list finds CHAIN_INDEX and ignores PATH
+  ok    malformed interior -> MALFORMED
+  ok    unknown arm refused
+  ok    ask() has no code path emitting OBSERVED (interior carries no chain evidence)
+  ok    live interior carries env NAMES only (no values field)
+  ok    live interior: no env value string leaks into the record
+load_class: the compounding as arithmetic
+  ok    independent union 0.09655 (1 - prod(1-p))
+  ok    band is [max p, min(1, sum p)] = [0.04, 0.10]
+  ok    independent point sits inside the band
+  ok    empty assessed set -> None, never 0
+  ok    probability outside [0,1] refused
+  ok    order's list: 4 assessed of 7, union is a floor
+  ok    state NOT_FLIGHT_RATED: three unassessed with no structural handling
+  ok    declaring STRUCTURAL handling on every unassessed factor -> ASSESSED_OR_HANDLED (branch reachable)
+  ok    RULE: unassessed -> assumed_stable False, bound UNBOUNDED, handling UNDECLARED
+  ok    refinement: credible-extreme condition + margin gives a bound
+  ok    assessed factor enters no rule (assumed_stable None)
+  ok    empty factor list -> EMPTY
+  ok    factor of safety 1.0 when designed to the threat exactly; None on zero
+  ok    unassessed factors enter no arithmetic (union over 4 not 7)
+dissimilar: step 4 as a specification
+  ok    two copies one family agree -> AGREE, n_eff 1, not informative
+  ok    disagree, no checker -> DISAGREE_UNADJUDICABLE
+  ok    disagree with fixed spec -> DISAGREE_ADJUDICATED naming the failed copy
+  ok    both off spec -> ALL_FAIL
+  ok    single copy -> SINGLE; empty -> EMPTY with n_eff None
+  ok    n_eff counts families by prefix
+  ok    agreement with a checker is still AGREE (checker unread on agreement)
+folder constraints
+  ok    clause_audit.py parses under 3.9 and imports stdlib-or-local only
+  ok    clause_audit.py under 300 lines
+  ok    trust_provenance.py parses under 3.9 and imports stdlib-or-local only
+  ok    trust_provenance.py under 300 lines
+  ok    horn_b.py parses under 3.9 and imports stdlib-or-local only
+  ok    horn_b.py under 300 lines
+  ok    load_class.py parses under 3.9 and imports stdlib-or-local only
+  ok    load_class.py under 300 lines
+  ok    dissimilar.py parses under 3.9 and imports stdlib-or-local only
+  ok    dissimilar.py under 300 lines
+  ok    run_all.py parses under 3.9 and imports stdlib-or-local only
+  ok    run_all.py under 300 lines
+  ok    selftest.py parses under 3.9 and imports stdlib-or-local only
+  ok    selftest.py under 300 lines
+  ok    clause_audit.py refuses --selftest with exit 2
+  ok    trust_provenance.py refuses --selftest with exit 2
+  ok    horn_b.py refuses --selftest with exit 2
+  ok    load_class.py refuses --selftest with exit 2
+  ok    dissimilar.py refuses --selftest with exit 2
+  ok    run_all prints the declaration before the first part
+  ok    declaration names position, standard, vendors, models, mitigation, interest
+  ok    no module inserts a parent path into sys.path
+  ok    WORK_ORDER.md carries the delivered title line
+
+checks: 96   failed: 0

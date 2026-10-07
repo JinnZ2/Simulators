@@ -1,0 +1,84 @@
+== the reduction takes out offset, gain and sampling, and keeps sign ==
+ok     offset + gain + 4x sampling leave distance < 0.1 (resampling residue)
+ok     a mirror image is distance 2 (r = -1)  [GAP 3]
+ok     identical shapes are distance 0
+ok     a reduced shape has mean 0 and population sd 1
+ok     a flat pattern does not reduce: None, never a zero shape  [GAP 1]
+ok     one reading does not reduce
+ok     a non-finite reading does not reduce
+ok     booleans are refused as readings
+ok     distance to an unreducible pattern is None
+ok     spread of one shape is None, never 0  [CHOICE 7]
+ok     RADIUS 0.5 corresponds to r = 0.875  [CHOICE 2]
+== known -> KNOWN ==
+ok     three sine observations return KNOWN
+ok     ... and name the held shape
+ok     ... with no `between`
+ok     ... and no pending field
+ok     ... and field share 1.0 on SINE
+ok     a KNOWN match registers nothing
+== definite novel -> NEW ==
+ok     two square waves return NEW
+ok     ... registered under a fresh name
+ok     ... the held set grew by exactly one
+ok     ... and the registered shape is the square
+ok     the same square arriving again now returns KNOWN on the new name
+== plastic -> UNCOALESCED (not forced) ==
+ok     a pattern inside both radii is split, not given to the nearer (d_sine 0.4332, d_lag 0.4348)
+ok     ... shape is None: the nearest is not reported  [CHOICE 8]
+ok     ... between names both candidates
+ok     ... with the field split 0.5 / 0.5  [CHOICE 3]
+ok     ... and carries a pending field to update
+ok     ... and registers nothing
+ok     two different novel patterns are UNCOALESCED, not NEW
+ok     ... reason names definiteness
+ok     ... and nothing is registered
+ok     one observation of a held shape is UNCOALESCED under MIN_OBS 2 [CHOICE 6]
+ok     ... with the whole field on SINE, still not collapsed
+ok     MIN_OBS 1 lets one observation of a held shape be KNOWN
+ok     MIN_OBS 1 still cannot make NEW from one observation (no spread)
+ok     only flat observations: UNCOALESCED, reason 'no reducible'
+ok     ... n_unreducible 2, n_obs 0
+ok     a flat observation beside two sines is excluded, not counted against
+ok     a flat pattern cannot be held
+== uncoalesced + evidence -> collapses ==
+ok     UNCOALESCED (MIN_OBS) + one more sine collapses to KNOWN
+ok     one sine + one novel: field 0.5 / 0.5, UNCOALESCED
+ok     +1 sine: share 0.667 < 0.8, still UNCOALESCED (field updated)
+ok     +2 more: share 0.8 >= COLLAPSE, KNOWN
+ok     one square (UNCOALESCED) + a second square collapses to NEW
+ok     ... and only then is a shape registered
+ok     the update's channel is appended to the audit trail
+ok     update refuses a collapsed result
+== NEGATIVE: uncoalesced never returns KNOWN by nearest neighbour ==
+ok     a near miss exists (nearest SINE, outside RADIUS)
+ok     near-miss observations (nearest SINE at 0.503) are not KNOWN SINE
+ok     ... their weight sits on NEW, not on the nearest held shape
+ok     evidence that keeps splitting never collapses (8 observations)
+ok     sweep: nearest neighbour would have answered in 322 UNCOALESCED cases (the negative is not vacuous)
+ok     sweep: every KNOWN has >= COLLAPSE of its observations inside RADIUS of the named shape (0 violations of 400)
+== same shape via two channels -> same state ==
+ok     KNOWN via two channels: same state, same shape
+ok     NEW via two channels: same state
+ok     UNCOALESCED via two channels: same state, same between, same field
+ok     identical observations under two channel dicts return identical results apart from audit
+ok     ... and the channel is carried in audit
+ok     all three deciding functions found in the AST
+ok     no deciding function names channel / audit / incoming / pending
+ok     the AST scan fires on a planted channel read
+== params and CLI ==
+ok     Params refuses COLLAPSE 0.5 would let a tie collapse
+ok     Params refuses COLLAPSE above 1
+ok     Params refuses RADIUS 0
+ok     Params refuses MIN_OBS 0
+ok     Params refuses SPREAD 0
+ok     Params refuses LENGTH 2
+ok     a held name 'NEW' is refused
+ok     a held name 'SINE' is refused
+ok     --selftest is refused (exit 2) and names test_sense.py
+ok     --choices prints all 8 choices
+ok     every [CHOICE n] is cited in the source outside CHOICES
+ok     every [GAP n] declared in the docstring
+ok     every [GAP n] that takes effect in code is cited where it does
+
+checks: 74   failed: 0

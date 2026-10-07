@@ -50,8 +50,14 @@ The null line above is what `check_attested_provenance.py` returns
 | `tools/`   | the cross-folder registry, its sourced variant, and the vocabulary drift check | built; two open defects (P-18, see `INVENTORY.md`) |
 | (root)     | the transformation instrument: mechanisms × shape-pairs, ledger, baseline signatures, attractor test | built; one open defect (P-17) |
 
-Reading order: `matrix/` → `gate/` → `ratio/` (absent; read the ratio
-row of `CLAIM_TABLE.md` instead) → `briefs/`.
+Dependency, stated instead of a reading order: `gate/` defines the
+terms every other layer is written over — channel, domain, `NEED` →
+`SATISFIED`, the token vertex, κ. `matrix/` F9 cites `domains.py` by
+name and its `vertex dep` rows use the vertex; `briefs/REPORT.txt` tags
+`gate/domains.py`'s channels; `briefs/RESEARCH_BRIEF.txt` §4 adds hours
+per channel of the eight domains. Nothing in `gate/` cites the matrix
+or a brief. That is the only order the files impose; a reading order
+beyond it was a preference and is not stated.
 
 `INVENTORY.md` is the 2026-09-29 order's STEP 0 record and its RETURN:
 every file, every path the order named resolved against the tree,

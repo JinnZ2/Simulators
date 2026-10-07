@@ -225,16 +225,24 @@ P-16  FIXED (as a check)  matrix/check_attested_provenance.py: 16 [A] cells,
                      Count and line numbers; no cell rewritten. Word-list limit
                      stated in the module. Registered in tools/known_answer.py
                      (None on no [A] cell, never 0).
-P-17  NEW, OPEN      test_perturbation.py: test_verdict_supported_synthetic reads
+P-17  FIXED at 63ca5ce  test_perturbation.py: test_verdict_supported_synthetic reads
                      the module-level PERTURBATIONS at line 102 and re-imports it at
                      line 105 inside the same function, which makes the name local
                      and raises UnboundLocalError at 102. Masked by P-03 until now.
-                     Not named by the order: listed, not repaired.
-P-18  NEW, OPEN      registry_sourced.py --selftest asserts
+                     Listed OPEN when found; closed by 63ca5ce (A-6.2 item 9): the
+                     inner import and the vestigial loop removed, plus
+                     test_no_function_rebinds_a_module_import (AST, null-tested).
+                     Re-run 2026-09-30 at the branch head: python3 -m unittest
+                     test_perturbation -> OK.
+P-18  FIXED at 63ca5ce  registry_sourced.py --selftest asserts
                      report.verified != report.unverified on a fixture that yields 1
                      and 1, so the selftest fails on its own fixture. Masked by P-04
-                     (registry.py would not import) until now. Not named by the
-                     order: listed, not repaired.
+                     (registry.py would not import) until now. Listed OPEN when
+                     found; closed by 63ca5ce (A-6.2 item 10): fixture rebuilt with
+                     two verified entries, exact counts and identities asserted, a
+                     collapsing subclass shown to reach FAIL; assertion not weakened.
+                     Re-run 2026-09-30 at the branch head: tools/registry_sourced.py
+                     --selftest -> checks: 24, PASS.
 ```
 
 ## Claim ids assigned

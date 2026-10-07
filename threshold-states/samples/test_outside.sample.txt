@@ -1,0 +1,18 @@
+test_exit_codes (__main__.Cli.test_exit_codes) ... ok
+test_expectations_are_as_authored (__main__.Intake.test_expectations_are_as_authored) ... ok
+test_oc1_vector_matches_the_stated_references (__main__.Intake.test_oc1_vector_matches_the_stated_references) ... ok
+test_statuses_recorded (__main__.Intake.test_statuses_recorded) ... ok
+test_a_refusal_is_not_a_NOT (__main__.Judge.test_a_refusal_is_not_a_NOT) ... ok
+test_lift_needs_an_independent_case_and_all_of_them_agreeing (__main__.Judge.test_lift_needs_an_independent_case_and_all_of_them_agreeing) ... ok
+test_refuse_expectation (__main__.Judge.test_refuse_expectation) ... ok
+test_unknown_status_raises (__main__.Judge.test_unknown_status_raises) ... ok
+test_case_author_errors_would_agree_with_a_declared_mode (__main__.Run.test_case_author_errors_would_agree_with_a_declared_mode) ... ok
+test_informational_columns (__main__.Run.test_informational_columns) ... ok
+test_nothing_counts_and_state_is_self_graded (__main__.Run.test_nothing_counts_and_state_is_self_graded) ... ok
+test_oc2_is_below_resolution_for_every_joint_in_either_mode (__main__.Run.test_oc2_is_below_resolution_for_every_joint_in_either_mode) ... ok
+test_pinned_verdicts (__main__.Run.test_pinned_verdicts) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.047s
+
+OK
