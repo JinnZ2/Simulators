@@ -517,21 +517,6 @@ multimodal risk assessment
     seen. Models redundancy / enhancement / antagonism.
 ```
 
-CANDIDATE mapping, PROPOSED (carried from the check): redundancy and
-enhancement map to the RESONANT class, and antagonism maps to the open
-antagonistic class.
-
-The target enum is in JinnZ2/Polyhedral-Intelligence,
-`ontology/relation_classes.json` @ 7387230, class `RESONANT` (search S-4).
-Only the enum is matched; the damping and tunnelling senses are excluded.
-The enum's measurand is `I = F(A,B) - [F(A) + F(B)]`, joint minus the SUM
-of separate, with RESONANT iff I > 0.
-
-CONTRADICTS_CLASS is not used here. That verdict is for a record that
-asserts a class its own values rule out. A redundant response asserts no
-class. It is REDUNDANT, not RESONANT. (Revised 2026-10-07; the previous
-pass labelled it CONTRADICTS_CLASS.)
-
 Two-reference test (DERIVED, operator-supplied 2026-10-07; precedence
 operator-supplied the same day). Built and tested as
 `threshold-states/interaction.py` (`test_interaction.py`, 24 checks).
@@ -588,12 +573,6 @@ paper is seen.
 - The carried mapping above (redundancy and enhancement -> RESONANT) does
   not survive this test as stated. Redundancy is REDUNDANT. Enhancement is
   RESONANT only above S + tol. At S +/- tol it is ADDITIVE.
-  That covers ENHANCED_SUBADDITIVE, ADDITIVE or RESONANT, and the three
-  cannot be separated without S. RESONANT is undecidable from an M-only
-  report.
-- The carried mapping above (redundancy and enhancement -> RESONANT) does
-  not survive this test as stated. Redundancy is REDUNDANT. Enhancement is
-  RESONANT only above S + tol.
 
 Cross-links:
 `sense_as_match.py` (its module docstring names itself `sense_at_match.py`;
