@@ -442,9 +442,11 @@ Two-reference test (DERIVED, operator-supplied 2026-10-07; precedence
 operator-supplied the same day; restated in cue-sign terms by operator
 spec decisions Q1-Q4, 2026-10-07, status PROPOSED).
 
-Implementation status: this text is ahead of the code. The spec
-decisions Q1-Q4 are not yet built in `threshold-states/interaction.py`.
-Outside cases written from this text test the text.
+Implementation status: built. Q1-Q4 and the OPEN resolution are
+implemented in `threshold-states/interaction.py`, in a commit that follows
+the outside-case commit below. `run_outside.py` ran the v2 file unmodified:
+30 of 30 PASS, the file blob equal to the committed blob, the case commit an
+ancestor of the build. SELF-GRADED is lifted for the module on these cases.
 
 Outside cases v2 (OC2-01..OC2-30, chat-side, from this text only):
 `threshold-states/outside_cases_v2.json`, committed ALONE at
