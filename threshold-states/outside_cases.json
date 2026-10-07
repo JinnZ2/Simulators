@@ -1,0 +1,85 @@
+{
+  "_note": "Cases authored outside the module (chat-side author, 2026-10-07), landed as delivered. Expectations are the author's, not this folder's. Do not edit an expectation after a run; a revised expectation is a new case with a new id.",
+  "author": "chat-side",
+  "authored_outside_module": true,
+  "run_against": "threshold-states/interaction.py @ 697023e",
+  "lift_rule": "The SELF-GRADED flag lifts only if every case runs as authored.",
+  "cases": [
+    {
+      "id": "OC-1",
+      "title": "tol units undeclared: absolute or relative?",
+      "separate": [
+        9,
+        1
+      ],
+      "joint": 9.5,
+      "tol": 0.1,
+      "expect": {
+        "kind": "REFUSE"
+      },
+      "author_text": "absolute -> row 4; relative(xM) -> tol=0.9 -> S-M=1 <= 1.8 -> BELOW_RESOLUTION. EXPECT: spec must declare units; ambiguity -> refuse.",
+      "separate_note": "The author stated S=10, M=9 and no vector. [9, 1] is this folder's entry; classify() reads only S and M, so every vector with S=10, M=9 gives the same verdict."
+    },
+    {
+      "id": "OC-2",
+      "title": "negative single response (cue suppresses)",
+      "separate": [
+        5,
+        -3
+      ],
+      "joint": 4,
+      "tol": 0.1,
+      "expect": {
+        "kind": "NOT",
+        "relation": "BELOW_RESOLUTION"
+      },
+      "author_text": "S=2, M=5, S<M -> S-M <= 2*tol -> BELOW_RESOLUTION. EXPECT: not BELOW_RESOLUTION; suppressive cue is real signal. Spec assumes all responses >= 0; undeclared. LIKELY FAIL -> decide: refuse negatives, or redefine S/M."
+    },
+    {
+      "id": "OC-3",
+      "title": "all zero",
+      "separate": [
+        0,
+        0
+      ],
+      "joint": 0,
+      "tol": 0.1,
+      "expect": {
+        "kind": "EQUALS",
+        "relation": "BELOW_RESOLUTION"
+      },
+      "author_text": "-> BELOW_RESOLUTION"
+    },
+    {
+      "id": "OC-4",
+      "title": "three cues (n > 2 handled)",
+      "separate": [
+        3,
+        2,
+        1
+      ],
+      "joint": 6.0,
+      "tol": 0.1,
+      "expect": {
+        "kind": "EQUALS",
+        "relation": "ADDITIVE"
+      },
+      "author_text": "S=6, M=3 -> ADDITIVE"
+    },
+    {
+      "id": "OC-5",
+      "title": "joint far above",
+      "separate": [
+        1,
+        1
+      ],
+      "joint": 10,
+      "tol": 0.1,
+      "expect": {
+        "kind": "EQUALS",
+        "relation": "RESONANT"
+      },
+      "author_text": "-> RESONANT"
+    }
+  ]
+}

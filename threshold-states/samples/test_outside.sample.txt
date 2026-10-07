@@ -1,0 +1,17 @@
+test_exit_codes (__main__.Cli.test_exit_codes) ... ok
+test_file_carries_the_authored_cases_unedited (__main__.Intake.test_file_carries_the_authored_cases_unedited) ... ok
+test_oc1_vector_matches_the_stated_references (__main__.Intake.test_oc1_vector_matches_the_stated_references) ... ok
+test_a_refusal_is_not_a_NOT (__main__.Judge.test_a_refusal_is_not_a_NOT) ... ok
+test_all_agree_lifts_state (__main__.Judge.test_all_agree_lifts_state) ... ok
+test_refuse_expectation (__main__.Judge.test_refuse_expectation) ... ok
+test_oc2_is_below_resolution_for_every_joint (__main__.Run.test_oc2_is_below_resolution_for_every_joint) ... ok
+test_pinned_outcomes (__main__.Run.test_pinned_outcomes) ... ok
+test_pinned_verdicts (__main__.Run.test_pinned_verdicts) ... ok
+test_second_build_gives_the_same_outcomes (__main__.Run.test_second_build_gives_the_same_outcomes) ... ok
+test_second_build_is_now_the_canonical_module (__main__.Run.test_second_build_is_now_the_canonical_module) ... ok
+test_units_readings_differ_on_oc1_only (__main__.Run.test_units_readings_differ_on_oc1_only) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.045s
+
+OK
