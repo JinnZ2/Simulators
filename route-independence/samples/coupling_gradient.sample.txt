@@ -1,0 +1,21 @@
+FWO-15 Build B -- coupling gradient
+STATUS RECONSTRUCTED 2026-10-04; BUILT, run on the order's seed rows
+TERMS: enclosure / captive / domesticated in the animal-science external-validity sense
+SURVIVOR FILTER: every case here is a population whose record survived to be read;
+a population that dissolved on coupling leaves no before/after pair and is absent
+by construction, not by measurement.
+
+entered 1   held 4   rejected 0
+  ENTERED members of US organized barter exchanges | barter-accounting rule 1982
+      CONTROL: ABSENT
+      treatment: ABSENT
+      verdict NOT_EVALUABLE   would_read_if_filled CONFOUNDED_BEYOND_READ
+      coincident confound: barter income already taxable at fair market value under 26 CFR 1.61-2(d)(1); the rule's adoption date was not located (govinfo CFR 2002 edition)
+      coincident confound: the exchange's own trade credit is a token: trade credits or scrip are credited at fair market value (irs.gov 1099-B instructions)
+      coincident confound: the population itself grew over the window: modern trade exchanges emerged in the US in the late 1970s (trade exchange overview, grokipedia)
+  HELD    Amish -- coupling instrument undated
+  HELD    German village groups -- coupling instrument undated
+  HELD    Dutch -- coupling instrument undated
+  HELD    Indigenous peoples -- coupling instrument undated
+  shared treatment dates: none with more than one population row
+not rebuilt: lag count -> FWO-11 lag_count.py; question selection -> FWO-9 question_space.py

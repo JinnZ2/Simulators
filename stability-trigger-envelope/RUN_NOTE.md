@@ -100,6 +100,21 @@ envelope rises. The `onset_variance_floor` is the only thing keeping a
 trace's own noise from being timed as an arrival, and that floor is a
 placeholder with nothing measured behind it.
 
+**A second cost, found on the sibling side and NOT repaired here
+(2026-09-27).** `envelope_window_frac` is 0.25, a quarter of the forcing
+period. A moving RMS over a window shorter than the carrier period is not
+stationary — over a quarter period of a sine it swings between roughly 0.43
+and 0.90 of the amplitude — so where two bodies start at different carrier
+phases the first-exceedance index can jitter by up to a quarter period, and a
+SUB-PERIOD lead can read with the wrong sign. Every lead in F1–F9 is zero or
+exactly one reversal, so the carrier phase at onset is identical on both bodies
+and the defect is unreached rather than absent. `Noise-as-Information-Sensor`
+`tools/two_body_source.py` sets its window to one full period for this reason
+and records it as `NC_023`, DERIVED and UNTESTED — the session that found it
+could not execute. The value here is left at 0.25 because changing a threshold
+without a run behind it is the retune this folder refuses; the append-only
+chain is where a measured value would land.
+
 ---
 
 ## CHOICE 5 — the forcing period is derived, not declared

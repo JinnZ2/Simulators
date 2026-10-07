@@ -1,5 +1,11 @@
 # route-independence
 
+> **FWO-15 terms.** In this folder "enclosure", "captive" and "domesticated"
+> are used in their animal-science external-validity sense. No political
+> position is advanced. The FWO-15 order is RECONSTRUCTED (2026-10-04) from
+> a memory object not in this tree; if the original 2026-09-27 text
+> surfaces, it supersedes the order and the FWO-15 section below.
+
 Three instruments and four research designs from the FABLE WORK ORDER
 PACKET of 2026-09-26 (`WORK_ORDER.md`, verbatim). Instruments, not
 arguments: each reports what was found, its scope, and what stayed
@@ -142,6 +148,15 @@ python3 tools/merge_silent_loss.py 57b9cdf dbf4cb0 7cf18f4     # the three regis
 python3 tools/merge_silent_loss.py --all                        # every merge reachable from HEAD
 python3 tools/merge_silent_loss.py --selftest                   # constructed history, every state
 ```
+
+A second reading, `BOTH_KEPT`, was added 2026-09-30: a file both sides added
+where the merge holds every distinct line of BOTH parents and equals neither --
+two builds spliced, nothing lost, so the loss test is silent on it by
+construction. It was found the other way round: `tests/test_compile_gate.py`
+read eight modules that did not compile, all in merges b57c625, 1a9c09b and
+e167a67, and the instrument was then taught the shape (20 files across those
+three merges, 11 of them `.py`; the run is appended to the sample). A row
+here is not a loss row and is counted apart.
 
 Sample in `samples/merge_loss.sample.txt`. What it reads: 113 merges, 9 with
 a line a parent held that the merge dropped and the other parent had not
@@ -688,3 +703,51 @@ Per item:
   COMBINATION. The erratum's ">= 3" is the GEOGRAPHIC ITEM count (RIN_148).
 - **8.** `python3 route-independence/sourcing_a62.py intake LII-83.11 <date>
   <span_file>` stores the span, and the re-evaluation reads it (RIN_149).
+
+## FWO-15, 2026-10-04 -- enclosure as corpus validity limit (RECONSTRUCTED)
+
+`WORK_ORDER_FWO-15_2026-10-04.md` is the order, verbatim. It is marked
+RECONSTRUCTED: the original 2026-09-27 text was not recovered. It was
+rebuilt from a memory object that is not in this tree, and the original
+supersedes it if found. `EXPECTED_FWO-15.md` was committed with the order
+and before any module, as at `fd198aa`. The lag count is FWO-11's
+`lag_count.py` and question selection is FWO-9's `question_space.py`;
+neither is rebuilt, and the test asserts no name is shared beyond the
+`render` / `main` CLI convention.
+
+| module | state | what it does |
+|---|---|---|
+| `enclosure_caveat_register.py` | DESIGN_WRITTEN | E1-E5 schema, frame-before-coding gate, caveat rate per arm with its frame, five branches. No corpus is in hand, so the real run reads UNMEASURED. |
+| `coupling_gradient.py` | BUILT, run on the order's seed rows | case rows with a required CONFOUNDS column, HELD list for undated coupling, CONTROL label, survivor-filter line, shared treatment dates. |
+
+Checks are printed by `python3 test_fwo15.py`, with constructed fixtures,
+one fixture per module built to fail, and REGRESSION on the summary line,
+since the same agent wrote fixtures and expected verdicts. `caveat_rate`
+is registered in `tools/known_answer.py`, with an all-ABSENT arm returning
+`None` against a measured zero.
+
+**Prior art** (`FWO-15_PRIOR_ART.md`, run first, search snippets only):
+the WEIRD paper's axis is cultural sampling, but the same group measured
+market integration as the share of purchased calories and found it
+covaries with fairness. So the food leg of the provision regime is a
+MEASURED covariate in one human sub-literature, and is not wholly absent.
+ARRIVE 2.0 item 15 is the animal-arm declaration standard. The
+animal-arm caveat is described in its own literature as rarely assessed.
+
+**Seed rows** (Build B): one entered, four HELD.
+
+```
+ENTERED  members of US organized barter exchanges | barter-accounting rule 1982
+         (TEFRA: exchanges report members on Form 1099-B)
+         verdict NOT_EVALUABLE (no before/after record)
+         would_read_if_filled CONFOUNDED_BEYOND_READ (three coincident confounds)
+HELD     Amish                  coupling instrument undated (dispute dates located, not coupling dates)
+HELD     German village groups  coupling instrument undated (not searched: population not unit-named)
+HELD     Dutch                  coupling instrument undated (not searched: population not unit-named)
+HELD     Indigenous peoples     coupling instrument undated (not searched: population not unit-named)
+```
+
+The located barter instrument does not match the order's line "barter
+less constrained 1950s-1970s, then accounted in dollars". Barter income
+was already taxable at fair market value before 1982; what the 1982 rule
+added was third-party reporting. Claims `RIN_151..RIN_160`.

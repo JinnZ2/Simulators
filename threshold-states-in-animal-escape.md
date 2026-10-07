@@ -479,6 +479,106 @@ Executable form: `interaction_class.py`, with checks in
 All checks run on exact rationals. The instrument text above still loads
 whole on its own; the classifier is a companion, not a dependency.
 
+```text
+family / work                                           status
+------------------------------------------------------  ----------
+freeze as preparation
+  Roelofs K 2017. Phil Trans R Soc B 372(1718):20160206 VERIFIED
+  Roelofs K, Dayan P 2022. Nat Rev Neurosci.            VERIFIED
+    doi 10.1038/s41583-022-00608-2. Freezing as an
+    evidence-gathering state; bradycardia as marker.
+defense cascade (tonic vs attentive; THIN T-2)
+  Kozlowska K, Walker P, McLean L, Carrive P 2015.      VERIFIED
+    Harv Rev Psychiatry 23(4):263-287
+FID meta-analysis
+  Stankowich T, Blumstein DT 2005. Proc R Soc B         VERIFIED
+    272(1581):2627-2634. doi 10.1098/rspb.2005.3251
+economic escape theory (THIN T-3)
+  Ydenberg RC, Dill LM 1986. Adv Study Behav            CHECK
+    16:229-249. The anchor matches the theory as
+    restated in later literature.
+starting-distance effect (THIN T-4)
+  Blumstein DT 2003. Full citation not given.           CHECK
+FEAR, alert distance (THIN T-4)
+  Blumstein DT 2010. Behav Ecol 21(3):440-442.          VERIFIED
+    doi 10.1093/beheco/arq030
+  Samia et al. 2013. Biol Lett. Phylogenetic            CARRIED
+    meta-analysis.
+  Samia & Blumstein 2015. PLoS ONE. 178 species,        CARRIED
+    FEAR fits 79%.
+disturbance as predation
+  Frid A, Dill LM 2002. Conservation Ecology 6(1):11    VERIFIED
+integrated escape sequence (section 3)
+  Cooper WE Jr, Blumstein DT (eds) 2015. Escaping From  EXISTS
+    Predators. Cambridge University Press.
+multimodal risk assessment
+  2024 Nat Commun meta-analysis, uni- vs multimodal     CANDIDATE
+    predation risk assessment in birds. Authors not
+    seen. Models redundancy / enhancement / antagonism.
+```
+
+CANDIDATE mapping, PROPOSED (carried from the check): redundancy and
+enhancement map to the RESONANT class, and antagonism maps to the open
+antagonistic class.
+
+The target enum is in JinnZ2/Polyhedral-Intelligence,
+`ontology/relation_classes.json` @ 7387230, class `RESONANT` (search S-4).
+Only the enum is matched; the damping and tunnelling senses are excluded.
+The enum's measurand is `I = F(A,B) - [F(A) + F(B)]`, joint minus the SUM
+of separate, with RESONANT iff I > 0.
+
+CONTRADICTS_CLASS is not used here. That verdict is for a record that
+asserts a class its own values rule out. A redundant response asserts no
+class. It is REDUNDANT, not RESONANT. (Revised 2026-10-07; the previous
+pass labelled it CONTRADICTS_CLASS.)
+
+Two-reference test (DERIVED, operator-supplied 2026-10-07; precedence
+operator-supplied the same day). Built and tested as
+`threshold-states/interaction.py` (`test_interaction.py`, 24 checks).
+
+```text
+S   = sum of the separate (unimodal) responses
+M   = the largest single (unimodal) response
+tol = declared parameter; an undeclared tol returns UNRATED
+I   = joint - S  (the measurand of the RESONANT enum)
+
+step  condition                    relation
+0     S - M <= 2*tol               BELOW_RESOLUTION
+1     |joint - M| <= tol           REDUNDANT
+2     |joint - S| <= tol           ADDITIVE              NEW: I ~ 0, independent
+3     joint > S + tol              RESONANT
+4     M + tol < joint < S - tol    ENHANCED_SUBADDITIVE
+5     joint < M - tol              ANTAGONISTIC          OPEN class: boundary
+                                                         proposed, definition
+                                                         pending the enum's author
+```
+
+`THIN T-7` RESOLVED (2026-10-07). The earlier four rows overlapped once
+`tol > 0`, and the overlaps came from two sources:
+
+- REDUNDANT's band met its neighbours.
+- With S - M small, the REDUNDANT band reached the sum.
+
+Step 0 removes the second: when S - M <= 2*tol the bands [M-tol, M+tol] and
+[S-tol, S+tol] touch, so the weaker cues sum to less than the instrument
+resolves. With S - M > 2*tol, rows 1-5 are disjoint and exhaustive:
+
+```text
+(-inf, M-tol)  [M-tol, M+tol]  (M+tol, S-tol)  [S-tol, S+tol]  (S+tol, inf)
+ ANTAGONISTIC    REDUNDANT      ENH_SUBADDITIVE    ADDITIVE       RESONANT
+```
+
+The module does not rely on that argument. It evaluates all five rows and
+raises if anything other than exactly one holds. A sweep over five
+(cues, tol) settings never raises and reaches every row.
+
+Correction: joint = S is ADDITIVE, not ENHANCED_SUBADDITIVE. The earlier
+row read `M < joint <= S` and put the sum itself in the subadditive row.
+
+ADDITIVE is a class the target enum does not carry. It sits at I ~ 0, between
+RESONANT (I > 0) and the subadditive rows, so cues that act independently
+no longer fall into either.
+
 2024 candidate: the reference the paper uses, S or M, is UNRATED until the
 paper is seen.
 
@@ -488,6 +588,12 @@ paper is seen.
 - The carried mapping above (redundancy and enhancement -> RESONANT) does
   not survive this test as stated. Redundancy is REDUNDANT. Enhancement is
   RESONANT only above S + tol. At S +/- tol it is ADDITIVE.
+  That covers ENHANCED_SUBADDITIVE, ADDITIVE or RESONANT, and the three
+  cannot be separated without S. RESONANT is undecidable from an M-only
+  report.
+- The carried mapping above (redundancy and enhancement -> RESONANT) does
+  not survive this test as stated. Redundancy is REDUNDANT. Enhancement is
+  RESONANT only above S + tol.
 
 Cross-links:
 `sense_as_match.py` (its module docstring names itself `sense_at_match.py`;
