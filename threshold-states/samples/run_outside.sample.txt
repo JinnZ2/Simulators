@@ -1,0 +1,12 @@
+outside cases (author: chat-side), run against threshold-states/interaction.py @ 697023e
+
+id    expected                   got                    verdict   tol x M reading
+OC-1  REFUSE                     ENHANCED_SUBADDITIVE   DISAGREE  BELOW_RESOLUTION  (readings differ)
+OC-2  NOT BELOW_RESOLUTION       BELOW_RESOLUTION       DISAGREE  BELOW_RESOLUTION
+OC-3  EQUALS BELOW_RESOLUTION    BELOW_RESOLUTION       AGREE     BELOW_RESOLUTION
+OC-4  EQUALS ADDITIVE            ADDITIVE               AGREE     ADDITIVE
+OC-5  EQUALS RESONANT            RESONANT               AGREE     RESONANT
+
+agree 3 of 5
+STATE: SELF-GRADED
+(the tol x M column is informational and decides no verdict)
