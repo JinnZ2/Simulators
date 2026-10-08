@@ -395,3 +395,118 @@ independent contrasts", which now needs branch lengths), beside a new
 P4a ("Independent-origin count", topology only). These predictions and
 any results bind to the registered A only. Main's A is a different
 object; testing it needs its own registration before any run.
+
+## Amendment 3 (2026-10-08): runner substitution
+
+Appended before any run. It changes no prediction, decision rule,
+threshold, arm, probe, repeat count or pilot gate. It records how the
+runs are executed, because the execution differs from what amendment 1
+item 3 assumed.
+
+### 1. The runner
+
+There is no model endpoint in the Claude Code environment. The pilot
+(and the main run, if it is run the same way) is executed by a chat-side
+runner: a claude.ai artifact that uses the platform's sample capability.
+The operator taps batches; the chat side loads a job file and reads the
+results back.
+
+The runner cannot see or set the exact model or the sampling settings.
+The manifest records this with fixed strings, which `--score` accepts:
+
+```text
+model                        "claude.ai sample capability; exact model not exposed"
+temperature, top_p,
+max_tokens                   "PLATFORM_DEFAULT_NOT_SETTABLE"
+system_prompt                "PLATFORM_FRAMING_NOT_VISIBLE"
+model_tier_requested         the tier named in the job (e.g. "default")
+model_tier_applied_counts    {tier: count} over delivered items, from the results
+```
+
+Amendment 1 item 3 asks for one fixed model and fixed settings. Under
+the runner that is read as: one tier requested, and every delivered item
+reports that same tier applied. `--score` refuses a runner manifest whose
+applied counts name more than one tier, or a tier other than the one
+requested. Whether the platform holds the model and settings fixed
+within a tier is not observable from here. That is a stated limit, not
+a check.
+
+### 2. Scope
+
+Single model, single platform. A result describes how the model behind
+the sample capability, under the platform's own framing, responds to
+these prompts. It says nothing about other models, or about the same
+model with other settings or without that framing. A coder of the same
+model class is still declared as such (amendment 1 item 7).
+
+### 3. The job file and its assembly
+
+`--emit-job` writes one JSON file, format "pathways-run/1": run_tag,
+phase, model_tier, an optional seed, a template, a doc_separator, a
+no_doc_text, the documents, and one item per prompt with its
+prompt_sha256. The runner assembles each prompt as:
+
+```text
+docs_text = docs ? doc_separator.join(documents[k] for k in docs) : no_doc_text
+prompt    = template, {DOCUMENTS} -> docs_text, then {QUESTION} -> question
+            (literal replacement, all occurrences)
+```
+
+An item whose assembled prompt does not match its prompt_sha256 is not
+sent; its status is hash_mismatch. The harness assembles prompts the
+same way, and the tests check that both give the same bytes for every
+item.
+
+This assembly joins fixed per-document strings, so it cannot number
+documents by position. Amendment 1 item 6 labelled them "Reference
+document 1/2". That labelling is replaced by an unnumbered one:
+
+```text
+template        "{DOCUMENTS}Question: {QUESTION}"
+doc_separator   ""
+no_doc_text     ""
+document k      "Reference document:\n<<<\n" + text + "\n>>>\n\n"
+```
+
+No filename appears, as before. AB and BA still differ only in order.
+The NONE prompt is "Question: " + the probe, as before. The two empty
+strings are deliberate: a runner that substitutes a default for an empty
+string produces a hash_mismatch, not a silently different prompt. The
+job also records, for each document, its raw sha256, so the wrapped
+text can be checked against the pins.
+
+With the unnumbered label, the blocks are AF 19029 chars and B 19030.
+That replaces the 19030 / 19031 in amendment 2 note 1, which measured
+the numbered label. The filler (1190 words) and its sha256 are unchanged.
+
+### 4. Result statuses
+
+The runner returns one row per item with a status:
+
+```text
+answered, refused, empty         OUTCOMES. Coded like any response. A refusal
+                                 or an empty reply is what the model did.
+error, hash_mismatch,
+prompt_too_large, no row         NOT_DELIVERED. Not coded, not imputed.
+                                 Counted per arm and printed.
+```
+
+prompt_too_large falls on the long arms (AB, BA) if it falls anywhere, so
+not-delivered counts are printed per arm and are not assumed to be
+missing at random.
+
+### 5. Order
+
+Job items, and the coding sheet built from results, are ordered by
+opaque id. Neither the send order nor a row's position on the sheet
+follows the arm. Before this amendment `--sheet` kept the battery order,
+which groups rows by arm within each probe. Nothing was ever coded under
+that order.
+
+### 6. Key material
+
+The job file and the results carry each item's arm. They are key
+material and are not given to coders. The job file is committed to the
+repository (`runs/`), so a coder with repository access could read it.
+Coders are asked not to open `runs/`, and the leak check (amendment 1
+item 5) measures what reached them either way.
