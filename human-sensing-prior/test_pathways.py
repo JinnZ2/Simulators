@@ -96,14 +96,14 @@ def run():
           "FROZEN as a known defect under test" in text)
     check("predictions: amendment declares delta 0.15",
           "delta = 0.15" in text)
-    check("predictions: five registered layers, all OK",
-          len(ps["layers"]) == 5 and ps["all_ok"])
+    check("predictions: six registered layers, all OK",
+          len(ps["layers"]) == 6 and ps["all_ok"])
     a1 = data[:8000] + b"X" + data[8001:]
     st = P.predictions_status(a1)
     check("predictions: an edit inside amendment 1 trips that layer only",
           st["layers"][0]["ok"] and not st["layers"][1]["ok"] and
-          not any(st["layers"][i]["ok"] for i in (2, 3, 4)))
-    check("predictions: text after amendment 3 is flagged past the last layer",
+          not any(st["layers"][i]["ok"] for i in (2, 3, 4, 5)))
+    check("predictions: text after amendment 4 is flagged past the last layer",
           P.predictions_status(data + b"\nmore\n")["past_last_layer"] and
           P.predictions_status(data + b"\nmore\n")["all_ok"])
     check("predictions: amendment 2 declares AF and the pilot",
@@ -755,19 +755,29 @@ def runner_checks():
         return ("answered", "response to %s" % it["id"])
 
     res = fake_results(job, plan)
-    sheet_rows, k2, rep = P.import_runner(job, res)
+    jsha = hashlib.sha256(json.dumps(job).encode("utf-8")).hexdigest()
+    sheet_rows, k2, rep = P.import_runner(job, res, jsha)
     check("import: 4 NOT_DELIVERED (error, hash_mismatch, too large, "
-          "no row), 266 on the sheet",
-          rep["not_delivered"] == 4 and len(sheet_rows) == 266 and
+          "no row), 266 delivered, 264 on the sheet (refused and empty off)",
+          rep["not_delivered"] == 4 and rep["delivered"] == 266 and
+          len(sheet_rows) == 264 and rep["on_sheet"] == 264 and
           rep["per_arm"]["AB"]["prompt_too_large"] == 1 and
           rep["per_arm"]["BA"]["no_row"] == 1 and
           rep["per_arm"]["A"]["error"] == 1 and
           rep["per_arm"]["B"]["hash_mismatch"] == 1)
     st = {r["runner_status"] for r in sheet_rows}
-    check("import: refused and empty are on the sheet as outcomes",
-          st == {"answered", "refused", "empty"} and
-          any(r["response"] == "" and r["runner_status"] == "empty"
-              for r in sheet_rows))
+    kst = {}
+    for k in k2:
+        kst[k["runner_status"]] = kst.get(k["runner_status"], 0) + 1
+    check("import: refused and empty are off the sheet; the key carries "
+          "every status (amendment 4 item 4)",
+          st == {"answered"} and kst == {
+              "answered": 264, "refused": 1, "empty": 1, "error": 1,
+              "hash_mismatch": 1, "prompt_too_large": 1, "no_row": 1} and
+          all(k["job_sha256"] == jsha for k in k2))
+    check("import: refused rows with text are counted",
+          rep["fixed_with_text"]["NONE"] == 1 and
+          sum(rep["fixed_with_text"].values()) == 1)
     check("import: sheet carries no arm and no context",
           all("arm" not in r and "docs" not in r and "context_files" not in r
               for r in sheet_rows))
@@ -819,9 +829,35 @@ def runner_checks():
           stub["date"] == "2026-10-08")
     check("manifest stub: refused until coders are filled",
           _raises(lambda: P.check_manifest(stub)))
+    check("manifest stub: job sha256 and blind from the job (default "
+          "salt -> COMPROMISED), size_check empty",
+          stub["job_sha256"] == jsha and stub["blind"] == "COMPROMISED" and
+          stub["size_check"] == {})
+    sc = P.size_check(job, 200000, 4096, "constructed for the test", jsha)
     full = dict(stub, coders=[{"id": "c1", "same_model_class": True},
-                              {"id": "c2", "same_model_class": False}])
-    check("runner manifest: accepted with coders", P.check_manifest(full))
+                              {"id": "c2", "same_model_class": False}],
+                size_check=sc)
+    check("runner manifest: accepted with coders and a PASS size check",
+          P.check_manifest(full))
+    check("runner manifest: missing job_sha256 refused",
+          _raises(lambda: P.check_manifest(dict(full, job_sha256=""))))
+    check("runner manifest: blind outside SEALED/COMPROMISED refused",
+          _raises(lambda: P.check_manifest(dict(full, blind="PARTIAL"))))
+    check("runner manifest: no size check refused",
+          _raises(lambda: P.check_manifest(dict(full, size_check={}))))
+    check("runner manifest: a REFUSED size check refused",
+          _raises(lambda: P.check_manifest(dict(
+              full, size_check=P.size_check(job, 20000, 0, "t", jsha)))))
+    check("runner manifest: a size check for another job refused",
+          _raises(lambda: P.check_manifest(dict(
+              full, size_check=dict(sc, job_sha256="0" * 64)))))
+    check("runner manifest: main run on a COMPROMISED job refused",
+          _raises(lambda: P.check_manifest(dict(
+              full, phase="main", pilot_run_tag="p0",
+              pilot_result="PILOT_PASS"))))
+    check("runner manifest: main run on a SEALED job accepted",
+          P.check_manifest(dict(full, phase="main", pilot_run_tag="p0",
+                                pilot_result="PILOT_PASS", blind="SEALED")))
     check("runner manifest: two applied tiers refused",
           _raises(lambda: P.check_manifest(dict(
               full, model_tier_applied_counts={"default": 200,
@@ -847,6 +883,119 @@ def runner_checks():
           "manifest",
           "runner: model tier requested 'default'" in out and
           "single platform" in out)
+    check("pilot on a COMPROMISED job cannot pass, and says why",
+          pres["pilot_result"] == "PILOT_FAIL" and
+          any("blind COMPROMISED" in r for r in pres["pilot_reasons"]) and
+          "delivery per class per arm" in out)
+    sres = P.score(k2, coded, dict(full, blind="SEALED"))
+    check("the same pilot on a SEALED job carries no blind reason",
+          not any("blind" in r for r in sres["pilot_reasons"]))
+    for bad_status in ("refused", "empty", "error"):
+        rid = [k["id"] for k in k2 if k["runner_status"] == bad_status][0]
+        bad = [rows + [{"id": rid, "run_tag": tag, "code": "no",
+                        "guess": "", "coder": rows[0]["coder"]}]
+               for rows in coded]
+        check("score refuses a coder code on a %s row" % bad_status,
+              _raises(lambda: P.score(k2, bad, full)))
+    other = [dict(k, job_sha256="1" * 64) for k in k2]
+    check("score refuses a key from another job",
+          _raises(lambda: P.score(other, coded, full)))
+    dl = P.delivery(k2)
+    check("delivery: per class per arm counts sum to the job",
+          sum(dl[c][a][f] for c in P.CLASSES for a in P.ARMS
+              for f in ("delivered", "not_delivered")) == 270 and
+          sum(dl[c][a]["fixed"] for c in P.CLASSES for a in P.ARMS) == 2)
+    check("delivery: None for a key not from the runner",
+          P.delivery([{k2[0]["id"]: 1, "class": "DETECT", "arm": "A"}])
+          is None)
+    zero = {"delivered": 9, "not_delivered": 0, "fixed": 0}
+    dlx = {c: {a: dict(zero) for a in P.ARMS} for c in P.CLASSES}
+    dlx["CITE"]["AB"] = {"delivered": 8, "not_delivered": 1, "fixed": 0}
+    dlx["CITE"]["A"] = {"delivered": 9, "not_delivered": 0, "fixed": 2}
+    check("flags: loss differs by one -> LOSS_DIFFERENTIAL",
+          P.contrast_flags(dlx, "CITE", "AB", "BA") == ["LOSS_DIFFERENTIAL"])
+    check("flags: fixed codes differ -> OUTCOME_DIFFERENTIAL",
+          P.contrast_flags(dlx, "CITE", "A", "B") ==
+          ["OUTCOME_DIFFERENTIAL"])
+    check("flags: equal arms carry none; another class carries none",
+          P.contrast_flags(dlx, "CITE", "B", "BA") == [] and
+          P.contrast_flags(dlx, "DETECT", "AB", "A") == [] and
+          P.contrast_flags(None, "CITE", "AB", "BA") == [])
+    mm = dict(full, phase="main", pilot_run_tag="p0",
+              pilot_result="PILOT_PASS", blind="SEALED")
+    mres = P.score(k2, coded, mm)
+    fixed_ids = {k["id"]: k for k in k2
+                 if k["runner_status"] in P.FIXED_STATUSES}
+    ok = True
+    for k in fixed_ids.values():
+        c = mres["per_class"][k["class"]]["counts"][k["arm"]]
+        if c["no"] < 1:
+            ok = False
+    check("main score: refused and empty enter the counts as 'no'", ok)
+    ok = True
+    for cls, p in mres["per_class"].items():
+        for r in (p["A_vs_B"], p["A_vs_AF"], p["AF_vs_B"], p["A_vs_NONE"],
+                  p["B_vs_NONE"], p["order"]):
+            if r["flags"] != P.contrast_flags(dl, cls, r["first"],
+                                              r["second"]):
+                ok = False
+    check("main score: every contrast carries its delivery flags", ok)
+    check("main score: a sensitivity verdict excludes fixed rows",
+          all(p["A_vs_B_excl_fixed"] is not None
+              for p in mres["per_class"].values()))
+    mout = P.render_score(mres)
+    check("main render: delivery table, sensitivity and blind line",
+          "delivery per class per arm" in mout and
+          "sensitivity (amendment 4 item 4)" in mout and
+          "blind SEALED" in mout and "size check PASS" in mout)
+
+    # ---- size check
+    und = P.size_check(job)
+    check("size check: no declared limit -> REFUSED_UNDECLARED",
+          und["verdict"] == "REFUSED_UNDECLARED" and
+          set(und["undeclared"]) == {"context_limit", "reserve_output",
+                                     "limit_source"})
+    check("size check: per-arm maximum bytes; AB and BA are the longest",
+          sc["per_arm"]["AB"]["max_bytes"] == sc["per_arm"]["BA"]["max_bytes"]
+          == sc["max_item_bytes"] and
+          sc["per_arm"]["NONE"]["max_bytes"] < sc["per_arm"]["A"]["max_bytes"]
+          < sc["per_arm"]["B"]["max_bytes"] < sc["max_item_bytes"])
+    tight = P.size_check(job, 20000, 0, "t", jsha)
+    check("size check: a limit between B and AB refuses exactly AB and BA",
+          tight["verdict"] == "REFUSED_ITEM_EXCEEDS" and
+          {e["arm"] for e in tight["exceeding"]} == {"AB", "BA"} and
+          len(tight["exceeding"]) == 90)
+    edge = P.size_check(job, sc["max_item_bytes"] + 10, 10, "t", jsha)
+    check("size check: reserve counts against the limit (exact fit passes, "
+          "one byte less refuses)",
+          edge["verdict"] == "PASS" and
+          P.size_check(job, sc["max_item_bytes"] + 9, 10, "t",
+                       jsha)["verdict"] == "REFUSED_ITEM_EXCEEDS")
+    check("size check: a non-integer limit is refused",
+          _raises(lambda: P.size_check(job, "200k", 0, "t", jsha)))
+    check("size check: render names the verdict",
+          "REFUSED_UNDECLARED" in P.render_size_check(und) and
+          "verdict PASS" in P.render_size_check(sc))
+
+    # ---- blind
+    check("blind: default salt -> COMPROMISED",
+          P.blind_default(job) == "COMPROMISED")
+    gen = P.emit_job(tag, "pilot", salt="f" * 32, salt_source="generated")
+    check("blind: generated salt -> SEALED; ids differ from the public salt",
+          P.blind_default(gen) == "SEALED" and
+          not ({it["id"] for it in gen["items"]} & set(ids)))
+    old = json.loads(json.dumps(job))
+    old["harness"].pop("salt_source")
+    check("blind: a job with no salt_source (e.g. 2026-10-08a) -> "
+          "COMPROMISED", P.blind_default(old) == "COMPROMISED")
+    check("blind: a generated label on the public salt is COMPROMISED",
+          P.blind_default(P.emit_job(tag, "pilot",
+                                     salt_source="generated"))
+          == "COMPROMISED")
+    gi = os.path.join(HERE, "runs", ".gitignore")
+    check("runs/.gitignore ignores everything but itself",
+          os.path.exists(gi) and
+          open(gi).read().split() == ["*", "!.gitignore"])
 
     with tempfile.TemporaryDirectory() as d:
         jp = os.path.join(d, "job.json")
@@ -856,6 +1005,36 @@ def runner_checks():
         cj = json.load(open(jp, encoding="utf-8"))
         check("cli: --emit-job writes a pilot job", rc == 0 and
               len(cj["items"]) == 270 and cj["run_tag"] == "cli-pilot")
+        check("cli: --emit-job generates a salt by default (SEALED) and "
+              "prints the job sha256",
+              cj["harness"]["salt_source"] == "generated" and
+              cj["harness"]["salt"] != "hsp" and
+              len(cj["harness"]["salt"]) == 32 and
+              P.job_bytes_sha(jp) in buf.getvalue() and
+              "Do not commit this file" in buf.getvalue())
+        jp2 = os.path.join(d, "job2.json")
+        with redirect_stdout(io.StringIO()):
+            P.main(["--emit-job", jp2, "--run-tag", "cli-pilot"])
+        check("cli: two default emissions do not share ids",
+              not ({it["id"] for it in cj["items"]} &
+                   {it["id"] for it in json.load(open(jp2))["items"]}))
+        recp = os.path.join(d, "size.json")
+        with redirect_stdout(io.StringIO()):
+            rc_u = P.main(["--size-check", jp])
+            rc_p = P.main(["--size-check", jp, "--context-limit", "200000",
+                           "--reserve-output", "4096", "--limit-source",
+                           "test", "--out", recp])
+        rec = json.load(open(recp))
+        check("cli: --size-check rc 1 undeclared, rc 0 PASS with --out",
+              rc_u == 1 and rc_p == 0 and rec["verdict"] == "PASS" and
+              rec["job_sha256"] == P.job_bytes_sha(jp))
+        buf = io.StringIO()
+        with redirect_stdout(buf):
+            rc_v = P.main(["--reveal", jp, "--expect", P.job_bytes_sha(jp)])
+            rc_m = P.main(["--reveal", jp, "--expect", "0" * 64])
+        check("cli: --reveal VERIFIED rc 0, MISMATCH rc 1",
+              rc_v == 0 and rc_m == 1 and "VERIFIED" in buf.getvalue() and
+              "MISMATCH" in buf.getvalue())
         rp = os.path.join(d, "res.jsonl")
         P._write_jsonl(rp, fake_results(
             cj, lambda it: ("answered", "r %s" % it["id"])))
@@ -865,10 +1044,13 @@ def runner_checks():
         with redirect_stdout(buf):
             rc = P.main(["--import-runner", rp, "--job", jp, "--sheet", sp,
                          "--key", kp, "--manifest-stub", mp])
-        check("cli: --import-runner writes sheet, key and stub",
+        st_ = json.load(open(mp))
+        check("cli: --import-runner writes sheet, key and stub; stub carries "
+              "the job file's sha256 and SEALED",
               rc == 0 and len(P._jsonl(sp)) == 270 and
-              json.load(open(mp))["model_tier_applied_counts"] ==
-              {"default": 270})
+              st_["model_tier_applied_counts"] == {"default": 270} and
+              st_["job_sha256"] == P.job_bytes_sha(jp) and
+              st_["blind"] == "SEALED")
         # A flag passed where a path belongs is refused and never becomes a
         # file name. Run from inside d so a stray "--out" would land here.
         cwd = os.getcwd()

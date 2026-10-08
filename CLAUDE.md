@@ -14053,8 +14053,20 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `--import-runner` maps result rows to a blind sheet: answered / refused / empty are coded
   outcomes, error / hash_mismatch / prompt_too_large / missing are NOT_DELIVERED, counted per arm.
   Job items and the sheet are ordered by opaque id (the old sheet grouped rows by arm; nothing was
-  coded under it). The pilot job `runs/pilot-2026-10-08a.json` (270 items) is committed; the pilot
-  is RUNNER_READY. No model has been run and no response coded.
+  coded under it). AMENDMENT 4 (2026-10-08, before any run; six registered prefixes, the sixth
+  31103 bytes, sha256 e6ec74bc...62ee) changes no prediction: pilot-2026-10-08a is COMPROMISED (its
+  job sat in public history and its ids use the public salt, so the arm map is recomputable) and is
+  retired unrun; jobs now carry a salt generated at emission, stay out of the tree (`runs/` is
+  git-ignored) until coding closes, and only their sha256 is committed; `--reveal` must read
+  VERIFIED. `--size-check` refuses a job unless every prompt's UTF-8 bytes plus the output reserve
+  fit a context limit the operator declares with its source (max item 30696 bytes, AB/BA); the
+  runner manifest must carry job_sha256, blind and a PASS size check. NOT_DELIVERED is counted per
+  class per arm and any arm difference flags the contrast LOSS_DIFFERENTIAL, nothing imputed;
+  refused and empty replies take the fixed code "no" from the key, off the sheet and outside kappa,
+  flagged OUTCOME_DIFFERENTIAL when arms differ, with an A-vs-B sensitivity excluding them. P4/P4b
+  branch lengths are declared (TimeTree times, Felsenstein contrasts, Garland-Harvey-Ives check,
+  CARRIED). The sealed replacement pilot-2026-10-08b (sha256 227bc386...b6a8) is emitted, not
+  loaded. No model has been run and no response coded.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

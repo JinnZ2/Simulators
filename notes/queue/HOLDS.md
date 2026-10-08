@@ -21,7 +21,7 @@ deleted; a finished row stays as the record.
 | claude/interaction-spec-q1-q4 | threshold-states-in-animal-escape.md, notes/queue/HOLDS.md, threshold-states/* [g] | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-07 | MERGED #127 (71df45c) |
 | claude/holds-relation-axes | notes/queue/HOLDS.md | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-07 | MERGED #128 (7397ebf) |
 | JinnZ2/Polyhedral-Intelligence: claude/relation-two-axes [h] | ontology/relation_classes.json, ontology/relation_class.py, ontology/relation_classes.md, tests/test_relation_class.py, CLAUDE.md | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-07 | MERGED Polyhedral-Intelligence #15 (fdd84ee) |
-| claude/human-sensing-prior-cc0-cbm411 | CLAUDE.md, README.md, human-sensing-prior/PATHWAYS.md, human-sensing-prior/PATHWAY_B.md, human-sensing-prior/PREDICTIONS.md, human-sensing-prior/pathways.py, human-sensing-prior/test_pathways.py, human-sensing-prior/samples/features.sample.txt, human-sensing-prior/samples/lengths.sample.txt, human-sensing-prior/samples/score_unrun.sample.txt, notes/queue/HOLDS.md, human-sensing-prior/samples/pilot_unrun.sample.txt [b], human-sensing-prior/registered/human-sensing-prior.7f780aa.md [b], human-sensing-prior/samples/size_check.sample.txt [i] | session_014bxQGPgkmsJRWUx92REKSs, session_01U4mRsfZAdaV1xWBmZSRbjK [b] | 2026-10-07 | HELD; amendment 4 in progress, no model run [c][e][f][i] |
+| claude/human-sensing-prior-cc0-cbm411 | CLAUDE.md, README.md, human-sensing-prior/PATHWAYS.md, human-sensing-prior/PATHWAY_B.md, human-sensing-prior/PREDICTIONS.md, human-sensing-prior/pathways.py, human-sensing-prior/test_pathways.py, human-sensing-prior/samples/features.sample.txt, human-sensing-prior/samples/lengths.sample.txt, human-sensing-prior/samples/score_unrun.sample.txt, notes/queue/HOLDS.md, human-sensing-prior/samples/pilot_unrun.sample.txt [b], human-sensing-prior/registered/human-sensing-prior.7f780aa.md [b], human-sensing-prior/samples/size_check.sample.txt [i] | session_014bxQGPgkmsJRWUx92REKSs, session_01U4mRsfZAdaV1xWBmZSRbjK [b] | 2026-10-07 | HELD; pilot-2026-10-08a COMPROMISED, retired unrun; pilot-2026-10-08b SEALED, emitted, not loaded [c][e][f][i][j] |
 
 [a] Backfilled after the fact. These paths are in #123's diff and not in
 the operator's backfill list: `threshold-states/*, interaction_class.py,
@@ -94,6 +94,24 @@ branch lengths) adds one path to this branch's allowed_paths:
 `human-sensing-prior/runs/.gitignore`, which `human-sensing-prior/runs/*`
 ([d]) already covers. Job files and runner results stop being committed
 to `runs/`; their sha256s are recorded here instead. No model is run.
+
+[j] 2026-10-08. Amendment 4 is f2745e4 (PREDICTIONS.md now 31103
+bytes, sha256
+e6ec74bc683a6d20fd273afed4456db96bca2b05ac40ff04c294aa891b2f62ee,
+registered as the sixth layer). pilot-2026-10-08a ([e], [f]) is
+COMPROMISED: its job file is in public history and its ids use the public
+salt "hsp". It is retired unrun and removed from the tree head; the seed
+recorded at its load ([f]) does not carry over. The replacement pilot job
+is pilot-2026-10-08b: 270 items, salt generated at emission, file NOT
+committed. Its sha256 is
+227bc386f8c5cd764fcd329aa6802b3ac7d40f78653f97a32dc87e609de0b6a8, the
+value `--reveal` must reproduce after coding closes. Its prompt hashes
+equal 10-08a's for every (class, probe, arm, repeat); only the ids and
+the salt differ. Before any call: load 10-08b in place of 10-08a, record
+a new order seed at load, and record a PASS size check against a declared
+context limit and its source (largest item 30696 bytes). The runner
+results and the key stay out of the tree until coding closes. No model
+has been run.
 
 Footnote letters: main's [b] and [c] were relabeled [g] and [h] when
 main was merged into claude/human-sensing-prior-cc0-cbm411 (2026-10-08).

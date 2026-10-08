@@ -175,9 +175,12 @@ python3 pathways.py --strip sheet.jsonl coder_sheet.jsonl strip_log.jsonl
 python3 pathways.py --score run.key.jsonl --manifest m.json \
         --strip-log strip_log.jsonl coder1.jsonl coder2.jsonl
 python3 pathways.py --emit-job runs/<tag>.json --run-tag <tag> [--phase pilot|main] \
-        [--repeats K] [--seed N] [--tier default]
+        [--repeats K] [--seed N] [--tier default]      # salt generated: SEALED
+python3 pathways.py --size-check runs/<tag>.json --context-limit N \
+        --reserve-output M --limit-source "<where N comes from>" --out size.json
 python3 pathways.py --import-runner results.jsonl --job runs/<tag>.json \
         --sheet sheet.jsonl --key key.jsonl --manifest-stub m.json
+python3 pathways.py --reveal runs/<tag>.json --expect <sha256 from HOLDS>
 python3 test_pathways.py                  # constructed worlds; every verdict reachable
 ```
 
@@ -199,15 +202,27 @@ uses the platform's sample capability; the operator taps batches.
 runner            docs_text = docs ? doc_separator.join(documents[k]) : no_doc_text
                   prompt = template, {DOCUMENTS} then {QUESTION}, literal
                   hash differs -> not sent, status hash_mismatch
---import-runner   answered / refused / empty  -> coding sheet (no arm), outcomes
+--import-runner   answered -> coding sheet (no arm)
+                  refused / empty -> outcomes, coded "no" by the harness from
+                  the key, off the sheet, outside kappa and the leak check
+                  (amendment 4 item 4)
                   error / hash_mismatch / prompt_too_large / no row -> NOT_DELIVERED,
-                  counted per arm, not coded, not imputed
-                  writes the key and a manifest stub (runner strings, tier counts;
-                  date from the results; coders left to fill)
+                  counted per class per arm, not coded, not imputed
+                  writes the key (with each item's runner status and the job
+                  sha256) and a manifest stub (runner strings, tier counts, job
+                  sha256, blind from the salt source; date from the results;
+                  coders and size_check left to fill)
 --score           accepts PLATFORM_DEFAULT_NOT_SETTABLE, PLATFORM_FRAMING_NOT_VISIBLE,
                   the runner model string, model_tier_requested and
                   model_tier_applied_counts; refuses more than one applied tier
                   or a tier other than the one requested
+                  amendment 4: refuses a runner manifest without job_sha256,
+                  blind (SEALED or COMPROMISED) and a PASS size_check for the
+                  same job; a COMPROMISED pilot cannot pass the gate, a
+                  COMPROMISED main run is refused; contrasts are flagged
+                  LOSS_DIFFERENTIAL / OUTCOME_DIFFERENTIAL when the two arms'
+                  NOT_DELIVERED or fixed-code counts differ; A vs B is also
+                  printed with fixed-code rows excluded (sensitivity only)
 ```
 
 The empty separator and no_doc_text are deliberate: a runner that swaps in
@@ -215,12 +230,38 @@ a default for an empty string breaks exactly the hashes it touched (all 45
 NONE items for no_doc_text), so the change shows as hash_mismatch.
 
 Scope: single model, single platform. Exact model and sampling settings
-are not visible; that is a limit, not a check. The job file and the
-results carry the arm. They are key material and go to no coder.
+are not visible; that is a limit, not a check. The job file, the results
+and the key carry the arm. They are key material and go to no coder.
 
-The pilot job is `runs/pilot-2026-10-08a.json` (commit 6f1544c): 270
-items (5 classes x 3 probes x 6 arms x k = 3), file sha256
-5e55685f8f8922186a843782c773456e5d72394550626114c123528382b86457.
+## Blinding, size check, missingness (amendment 4)
+
+```text
+job file           not committed until coding closes; runs/ is git-ignored;
+                   its sha256 goes in notes/queue/HOLDS.md and the manifest
+salt               generated at emission (32 hex), lives only in the job file
+reveal             after coding closes: commit the file, --reveal must say VERIFIED
+size check         bytes per prompt (>= 1 byte per token, assumed) + reserve
+                   <= declared context limit, or no run; limit and its source
+                   declared by the operator, none assumed
+NOT_DELIVERED      per class per arm; any arm difference flags the contrast;
+                   nothing imputed, nothing dropped to balance
+refused / empty    fixed code "no"; counts per class per arm; any arm
+                   difference flags the contrast
+```
+
+pilot-2026-10-08a (commit 6f1544c, file sha256
+5e55685f8f8922186a843782c773456e5d72394550626114c123528382b86457) is
+COMPROMISED: it is in public history and its ids use the public salt
+"hsp", so the arm map can be recomputed from the code. It is retired unrun
+and removed from the tree head. Its replacement is pilot-2026-10-08b, 270
+items, file sha256
+227bc386f8c5cd764fcd329aa6802b3ac7d40f78653f97a32dc87e609de0b6a8, salt
+generated, not committed. Every prompt hash equals 10-08a's prompt for the
+same (probe, arm, repeat); only the ids and the salt differ.
+
+`python3 pathways.py --size-check` on that job (samples/size_check.sample.txt)
+reads REFUSED_UNDECLARED: the largest item is 30696 bytes (AB and BA), so
+any declared limit of at least 30696 plus the output reserve passes.
 
 ## Coders
 
@@ -290,9 +331,10 @@ on either list.
 
 ## State
 
-Pilot: RUNNER_READY. It was BLOCKED_ON_RUNNER (no model endpoint here; the
-operator is on a phone). The chat-side runner exists, amendment 3 records
-it, and the pilot job is committed (runs/pilot-2026-10-08a.json). The
+Pilot: SEALED JOB EMITTED, NOT LOADED. pilot-2026-10-08a was loaded into
+the runner (HOLDS [f]) and retired unrun by amendment 4 (COMPROMISED).
+pilot-2026-10-08b replaces it. Before any call: load 10-08b, record a new
+order seed, and record a PASS size check against a declared limit. The
 pilot runs first under its own run_tag, as amendment 2 item 2 requires.
 
 Nothing has been run: no pilot and no main run. No model was called and

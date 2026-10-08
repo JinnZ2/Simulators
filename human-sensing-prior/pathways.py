@@ -54,6 +54,7 @@ import json
 import math
 import os
 import re
+import secrets
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -80,6 +81,8 @@ REGISTERED = (
      "through amendment 2 note 1 (fb42189)"),
     (24133, "b3ec41098471a13e2d082b73421d15421a48ee4af400a1ee3933614a140f7fc3",
      "through amendment 3 (6d186b9)"),
+    (31103, "e6ec74bc683a6d20fd273afed4456db96bca2b05ac40ff04c294aa891b2f62ee",
+     "through amendment 4 (f2745e4)"),
 )
 
 # Amendment 2 item 4: the bytes the predictions were registered against.
@@ -114,6 +117,12 @@ RUNNER_SYSTEM = "PLATFORM_FRAMING_NOT_VISIBLE"
 OUTCOME_STATUSES = ("answered", "refused", "empty")
 NOT_DELIVERED = ("error", "hash_mismatch", "prompt_too_large")
 STATUSES = OUTCOME_STATUSES + NOT_DELIVERED
+# Amendment 4.
+FIXED_STATUSES = ("refused", "empty")     # item 4: coded by the harness
+FIXED_CODE = "no"
+BLIND = ("SEALED", "COMPROMISED")         # item 1
+SIZE_VERDICTS = ("PASS", "REFUSED_ITEM_EXCEEDS", "REFUSED_UNDECLARED")
+_HEX64 = re.compile(r"^[0-9a-f]{64}$")
 RESULT_FIELDS = ("index", "item_id", "arm", "class", "probe", "repeat",
                  "status", "text", "truncated", "model_tier_applied",
                  "prompt_sha256", "started_at", "finished_at")
@@ -619,7 +628,8 @@ def sheet(battery):
 # ---------------------------------------------------------------- runner
 
 def emit_job(run_tag, phase="pilot", repeats=None, salt="hsp", seed=None,
-             model_tier="default", texts=None, pins=None, a_source=None):
+             model_tier="default", texts=None, pins=None, a_source=None,
+             salt_source="given"):
     """Amendment 3: one pathways-run/1 job. Every item's prompt is built by
     the harness (assemble) and checked against the runner's assembly
     (runner_prompt) before the job is returned."""
@@ -666,8 +676,10 @@ def emit_job(run_tag, phase="pilot", repeats=None, salt="hsp", seed=None,
                    "raw_sha256": _sha_text(af)}},
         "harness": {"predictions_sha256": file_sha(PREDICTIONS),
                     "repeats": repeats, "salt": salt,
+                    "salt_source": salt_source,
                     "note": "items carry the arm: key material, not for "
-                            "coders (amendment 3 item 6)"},
+                            "coders; do not commit before coding closes "
+                            "(amendment 4 item 1)"},
         "items": []})
     for k in sorted(key, key=lambda x: x["id"]):          # [CHOICE 17]
         row = by_id[k["id"]]
@@ -691,6 +703,102 @@ def job_key(job):
             for it in job["items"]]
 
 
+def job_bytes_sha(path):
+    """sha256 of a job file's raw bytes, the value recorded in HOLDS."""
+    with open(path, "rb") as fh:
+        return hashlib.sha256(fh.read()).hexdigest()
+
+
+def blind_default(job):
+    """Amendment 4 item 1. SEALED only for a salt generated at emission;
+    whether the file stayed private is a fact the operator confirms."""
+    h = job.get("harness", {})
+    if h.get("salt_source") == "generated" and h.get("salt") != "hsp":
+        return "SEALED"
+    return "COMPROMISED"
+
+
+def reveal(path, expect):
+    """Amendment 4 item 1: VERIFIED or MISMATCH, with the computed sha."""
+    got = job_bytes_sha(path)
+    return ("VERIFIED" if got == expect.strip().lower() else "MISMATCH"), got
+
+
+def size_check(job, context_limit=None, reserve_output=None,
+               limit_source=None, job_sha256=None):
+    """Amendment 4 item 2. Per item: chars, UTF-8 bytes, chars/4. The bound
+    is bytes (assumes every token covers at least one byte)."""
+    check_job(job)
+    per_arm = {}
+    worst = None
+    rows = []
+    for it in job["items"]:
+        p = runner_prompt(job, it)
+        b, c = len(p.encode("utf-8")), len(p)
+        rows.append((it["id"], it["arm"], c, b))
+        a = per_arm.setdefault(it["arm"], {"items": 0, "max_chars": 0,
+                                           "max_bytes": 0})
+        a["items"] += 1
+        a["max_chars"] = max(a["max_chars"], c)
+        a["max_bytes"] = max(a["max_bytes"], b)
+        if worst is None or b > worst[3]:
+            worst = (it["id"], it["arm"], c, b)
+    rec = {"job_sha256": job_sha256, "run_tag": job["run_tag"],
+           "items": len(rows), "max_item_bytes": worst[3],
+           "max_item_chars": worst[2], "max_item_arm": worst[1],
+           "max_item_approx_tokens": -(-worst[2] // CHARS_PER_TOKEN),
+           "per_arm": per_arm, "context_limit_tokens": context_limit,
+           "reserve_output_tokens": reserve_output,
+           "limit_source": limit_source, "exceeding": []}
+    undeclared = [n for n, v in (("context_limit", context_limit),
+                                 ("reserve_output", reserve_output),
+                                 ("limit_source", limit_source))
+                  if v is None or v == ""]
+    if undeclared:
+        rec["verdict"] = "REFUSED_UNDECLARED"
+        rec["undeclared"] = undeclared
+        return rec
+    if not isinstance(context_limit, int) or context_limit <= 0 or \
+            not isinstance(reserve_output, int) or reserve_output < 0:
+        raise ValueError("context limit must be an integer > 0 and reserve "
+                         "an integer >= 0")
+    room = context_limit - reserve_output
+    rec["exceeding"] = [{"id": i, "arm": a, "bytes": b}
+                        for i, a, c, b in rows if b > room]
+    rec["verdict"] = "PASS" if not rec["exceeding"] else \
+        "REFUSED_ITEM_EXCEEDS"
+    return rec
+
+
+def render_size_check(rec):
+    out = ["size check (amendment 4 item 2): run %s   job sha256 %s"
+           % (rec["run_tag"], rec["job_sha256"] or "--"),
+           "bound = UTF-8 bytes per prompt (assumes >= 1 byte per token; "
+           "an assumption, not checked); chars/%d printed, not used"
+           % CHARS_PER_TOKEN,
+           "%-5s %6s %10s %10s %14s" % ("arm", "items", "max chars",
+                                         "max bytes", "approx tokens")]
+    for a in ARMS:
+        x = rec["per_arm"].get(a)
+        if x:
+            out.append("%-5s %6d %10d %10d %14d" % (
+                a, x["items"], x["max_chars"], x["max_bytes"],
+                -(-x["max_chars"] // CHARS_PER_TOKEN)))
+    out.append("max item %d bytes (%s); context limit %s, reserve %s, "
+               "source %s" % (rec["max_item_bytes"], rec["max_item_arm"],
+                              rec["context_limit_tokens"],
+                              rec["reserve_output_tokens"],
+                              repr(rec["limit_source"])))
+    if rec["verdict"] == "REFUSED_UNDECLARED":
+        out.append("verdict REFUSED_UNDECLARED: not given %s; a limit of at "
+                   "least %d + reserve passes"
+                   % (", ".join(rec["undeclared"]), rec["max_item_bytes"]))
+    else:
+        out.append("verdict %s; %d items exceed" % (rec["verdict"],
+                                                   len(rec["exceeding"])))
+    return "\n".join(out)
+
+
 def check_job(job):
     """Refuses a job the harness did not write: format, every item's
     prompt_sha256 recomputed through the runner's assembly."""
@@ -705,8 +813,10 @@ def check_job(job):
     return job
 
 
-def import_runner(job, results):
-    """Amendment 3 item 4. Returns (sheet, key, report)."""
+def import_runner(job, results, job_sha256=None):
+    """Amendment 3 item 4, amendment 4 items 3 and 4. Returns (sheet, key,
+    report). The sheet carries answered rows only; refused and empty rows
+    take the fixed code from the key at scoring."""
     check_job(job)
     items = {it["id"]: it for it in job["items"]}
     seen = {}
@@ -747,21 +857,31 @@ def import_runner(job, results):
         seen[rid] = r
     per_arm = {a: {s: 0 for s in STATUSES + ("no_row",)} for a in ARMS}
     truncated = {a: 0 for a in ARMS}
+    fixed_text = {a: 0 for a in ARMS}
     tiers = {}
     sheet_rows = []
+    status = {}
+    delivered = 0
     for rid in sorted(items):                                # [CHOICE 19]
         it = items[rid]
         r = seen.get(rid)
         if r is None:
             per_arm[it["arm"]]["no_row"] += 1
+            status[rid] = "no_row"
             continue
         per_arm[it["arm"]][r["status"]] += 1
+        status[rid] = r["status"]
         if r["status"] not in OUTCOME_STATUSES:
             continue
+        delivered += 1
         tier = r["model_tier_applied"] or "UNREPORTED"
         tiers[tier] = tiers.get(tier, 0) + 1
         if r["truncated"]:
             truncated[it["arm"]] += 1
+        if r["status"] in FIXED_STATUSES:
+            if isinstance(r["text"], str) and r["text"].strip():
+                fixed_text[it["arm"]] += 1
+            continue
         cls = it["class"]
         sheet_rows.append({
             "id": rid, "run_tag": job["run_tag"], "class": cls,
@@ -769,17 +889,23 @@ def import_runner(job, results):
             "response": r["text"] if isinstance(r["text"], str) else "",
             "runner_status": r["status"], "truncated": r["truncated"],
             "code": "", "guess": "", "coder": ""})
-    delivered = len(sheet_rows)
     dates = sorted(str(r["started_at"])[:10] for r in seen.values()
                    if r.get("started_at"))
     report = {"run_tag": job["run_tag"], "phase": job["phase"],
               "items": len(items), "delivered": delivered,
               "not_delivered": len(items) - delivered,
+              "on_sheet": len(sheet_rows),
               "per_arm": per_arm, "truncated": truncated,
+              "fixed_with_text": fixed_text,
               "model_tier_requested": job["model_tier"],
               "model_tier_applied_counts": tiers,
-              "first_date": dates[0] if dates else ""}
-    return sheet_rows, job_key(job), report
+              "first_date": dates[0] if dates else "",
+              "job_sha256": job_sha256, "blind": blind_default(job)}
+    key = job_key(job)
+    for k in key:
+        k["runner_status"] = status[k["id"]]
+        k["job_sha256"] = job_sha256
+    return sheet_rows, key, report
 
 
 def manifest_stub(report):
@@ -791,7 +917,9 @@ def manifest_stub(report):
          "system_prompt": RUNNER_SYSTEM, "date": report["first_date"],
          "coders": [],
          "model_tier_requested": report["model_tier_requested"],
-         "model_tier_applied_counts": report["model_tier_applied_counts"]}
+         "model_tier_applied_counts": report["model_tier_applied_counts"],
+         "job_sha256": report["job_sha256"], "blind": report["blind"],
+         "size_check": {}}
     if report["phase"] == "main":
         m["pilot_run_tag"] = ""
         m["pilot_result"] = ""
@@ -801,9 +929,12 @@ def manifest_stub(report):
 def render_import(report):
     out = ["runner import: run %s   phase %s" % (report["run_tag"],
                                                  report["phase"]),
-           "items %d   delivered (coded outcomes) %d   NOT_DELIVERED %d"
+           "items %d   delivered (outcomes) %d   NOT_DELIVERED %d   "
+           "on the coding sheet %d"
            % (report["items"], report["delivered"],
-              report["not_delivered"]),
+              report["not_delivered"], report["on_sheet"]),
+           "job sha256 %s   blind (from salt source) %s"
+           % (report["job_sha256"] or "--", report["blind"]),
            "%-5s %9s %8s %6s %6s %14s %17s %7s %10s" % (
                "arm", "answered", "refused", "empty", "error",
                "hash_mismatch", "prompt_too_large", "no_row", "truncated")]
@@ -817,9 +948,14 @@ def render_import(report):
                % (report["model_tier_requested"],
                   json.dumps(report["model_tier_applied_counts"],
                              sort_keys=True)))
-    out.append("refused and empty are outcomes and are on the sheet; "
-               "NOT_DELIVERED rows are counted here, not coded, not imputed "
-               "(amendment 3 item 4)")
+    out.append("refused and empty are outcomes coded %r by the harness from "
+               "the key, not on the sheet (amendment 4 item 4); refused rows "
+               "with non-blank text per arm: %s"
+               % (FIXED_CODE, "  ".join("%s %d" % (a, report[
+                   "fixed_with_text"][a]) for a in ARMS)))
+    out.append("NOT_DELIVERED rows are counted, not coded, not imputed; a "
+               "contrast whose two arms differ in loss is flagged "
+               "LOSS_DIFFERENTIAL (amendment 4 item 3)")
     return "\n".join(out)
 
 
@@ -968,6 +1104,25 @@ def check_manifest(m):
             raise ValueError("model tier not fixed: requested %r, applied %s "
                              "(amendment 3 item 1)"
                              % (req, json.dumps(counts, sort_keys=True)))
+        sha = m.get("job_sha256")
+        if not isinstance(sha, str) or not _HEX64.match(sha):
+            raise ValueError("runner manifest needs job_sha256, the sha256 "
+                             "of the job file's bytes (amendment 4 item 1)")
+        if m.get("blind") not in BLIND:
+            raise ValueError("runner manifest needs blind in %s (amendment 4 "
+                             "item 1)" % (BLIND,))
+        sc = m.get("size_check")
+        if not isinstance(sc, dict) or sc.get("verdict") != "PASS":
+            raise ValueError("runner manifest needs a size_check record with "
+                             "verdict PASS (amendment 4 item 2), got %r"
+                             % ((sc or {}).get("verdict")
+                                if isinstance(sc, dict) else sc,))
+        if sc.get("job_sha256") != sha:
+            raise ValueError("size_check is for job %r, manifest job is %r"
+                             % (sc.get("job_sha256"), sha))
+        if m["phase"] == "main" and m["blind"] == "COMPROMISED":
+            raise ValueError("main run on a COMPROMISED job is refused "
+                             "(amendment 4 item 1)")
     if m["phase"] == "main":
         if not m.get("pilot_run_tag"):
             raise ValueError("main manifest needs pilot_run_tag "
@@ -1229,9 +1384,14 @@ def _gate(verdict, agree_cls):
     return verdict
 
 
-def pilot_gate(agree, leaks):
-    """Amendment 2 item 2. Returns (result, reasons, unchecked coders)."""
+def pilot_gate(agree, leaks, blind=None):
+    """Amendment 2 item 2, amendment 4 item 1. Returns (result, reasons,
+    unchecked coders)."""
     reasons = []
+    if blind == "COMPROMISED":
+        reasons.append("blind COMPROMISED: the arm map was readable, so the "
+                       "leak check cannot show the coders were blind "
+                       "(amendment 4 item 1)")
     for cls in CLASSES:
         w = agree[cls]["min"]
         if w is None or w["kappa"] is None:
@@ -1256,6 +1416,40 @@ def _ab_verdicts(key, rows):
     counts, probe, _ = tally(key, rows)
     return {c: compare(c, counts, probe, "A", "B")["verdict"]
             for c in CLASSES}
+
+
+def delivery(key):
+    """Amendment 4 items 3, 4: per class per arm delivered, NOT_DELIVERED
+    and fixed-code counts, from the key's runner_status. None for a key
+    that does not come from the runner."""
+    if not any("runner_status" in k for k in key):
+        return None
+    d = {c: {a: {"delivered": 0, "not_delivered": 0, "fixed": 0}
+             for a in ARMS} for c in CLASSES}
+    for k in key:
+        st = k.get("runner_status")
+        x = d[k["class"]][k["arm"]]
+        if st in OUTCOME_STATUSES:
+            x["delivered"] += 1
+            if st in FIXED_STATUSES:
+                x["fixed"] += 1
+        else:
+            x["not_delivered"] += 1
+    return d
+
+
+def contrast_flags(dlv, cls, first, second):
+    """LOSS_DIFFERENTIAL and OUTCOME_DIFFERENTIAL (amendment 4 items 3, 4):
+    any difference of one or more between the two arms in the class."""
+    if dlv is None:
+        return []
+    x, y = dlv[cls][first], dlv[cls][second]
+    flags = []
+    if x["not_delivered"] != y["not_delivered"]:
+        flags.append("LOSS_DIFFERENTIAL")
+    if x["fixed"] != y["fixed"]:
+        flags.append("OUTCOME_DIFFERENTIAL")
+    return flags
 
 
 def score(key, coder_rows, manifest, strip_log=None):
@@ -1283,8 +1477,30 @@ def score(key, coder_rows, manifest, strip_log=None):
     for rows in coder_rows:
         tally(key, rows)                      # validates ids and codes
 
+    dlv = delivery(key)
+    fixed_rows = []
+    if dlv is not None:
+        sha = manifest.get("job_sha256")
+        other = sorted(set(k.get("job_sha256") for k in key) - {sha})
+        if other:
+            raise ValueError("key rows from job %s, manifest job %s"
+                             % (other, sha))
+        status = {k["id"]: k["runner_status"] for k in key}
+        for i, rows in enumerate(coder_rows):
+            off = [r["id"] for r in rows
+                   if status.get(r["id"]) != "answered" and
+                   (r.get("code") or "").strip()]
+            if off:
+                raise ValueError("coder file %d codes %d rows that are not "
+                                 "for coders (refused, empty or not "
+                                 "delivered): %s" % (i + 1, len(off),
+                                                     ", ".join(off[:5])))
+        fixed_rows = [{"id": k["id"], "code": FIXED_CODE} for k in key
+                      if k["runner_status"] in FIXED_STATUSES]
+
     cons, disputed, incomplete = consensus(coder_rows)
-    counts, probe, _ = tally(key, cons)
+    counts, probe, _ = tally(key, cons + fixed_rows)
+    counts_x, probe_x, _ = tally(key, cons)
     agree = agreement(key, coder_rows, names)
     leaks = {n: leak(key, rows) for n, rows in zip(names, coder_rows)}
     same_class = [n for n in names
@@ -1292,7 +1508,8 @@ def score(key, coder_rows, manifest, strip_log=None):
     base = {"coders": names, "same_class": same_class, "leak": leaks,
             "agreement": agree, "disputed": disputed,
             "incomplete": incomplete, "manifest": manifest,
-            "phase": manifest["phase"],
+            "phase": manifest["phase"], "delivery": dlv,
+            "fixed_rows": len(fixed_rows),
             "predictions": predictions_status(), "lengths": lengths()}
 
     if manifest["phase"] == "pilot":
@@ -1304,22 +1521,33 @@ def score(key, coder_rows, manifest, strip_log=None):
         if arms != set(ARMS):
             raise ValueError("pilot key must cover all arms; missing %s"
                              % sorted(set(ARMS) - arms))
-        result, reasons, unchecked = pilot_gate(agree, leaks)
+        result, reasons, unchecked = pilot_gate(agree, leaks,
+                                                manifest.get("blind"))
         base.update({"pilot_result": result, "pilot_reasons": reasons,
                      "leak_unchecked": unchecked})
         return base
 
+    def cmp(cls, first, second, c=counts, pr=probe):
+        r = compare(cls, c, pr, first, second)
+        r["flags"] = contrast_flags(dlv, cls, first, second)
+        return r
+
     per = {}
     for cls in CLASSES:
-        ab = compare(cls, counts, probe, "A", "B")
+        ab = cmp(cls, "A", "B")
+        ab_x = None
+        if fixed_rows:
+            r = compare(cls, counts_x, probe_x, "A", "B")
+            ab_x = {"verdict": _gate(r["verdict"], agree[cls]),
+                    "interval": r["interval"], "n1": r["n1"], "n2": r["n2"]}
         verdict = _gate(ab["verdict"], agree[cls])
-        a_af = compare(cls, counts, probe, "A", "AF")
-        af_b = compare(cls, counts, probe, "AF", "B")
+        a_af = cmp(cls, "A", "AF")
+        af_b = cmp(cls, "AF", "B")
         a_af_v = _gate(a_af["verdict"], agree[cls])
         af_b_v = _gate(af_b["verdict"], agree[cls])
-        a_none = compare(cls, counts, probe, "A", "NONE")
-        b_none = compare(cls, counts, probe, "B", "NONE")
-        order = compare(cls, counts, probe, "AB", "BA")
+        a_none = cmp(cls, "A", "NONE")
+        b_none = cmp(cls, "B", "NONE")
+        order = cmp(cls, "AB", "BA")
         best = None
         if ab["rate1"] is not None and ab["rate2"] is not None:
             best = "A" if ab["rate1"] >= ab["rate2"] else "B"
@@ -1328,7 +1556,7 @@ def score(key, coder_rows, manifest, strip_log=None):
             if best is None:
                 combined[arm] = "NOT_EVALUABLE"
                 continue
-            r = compare(cls, counts, probe, arm, best)
+            r = cmp(cls, arm, best)
             if r["verdict"] == "NOT_EVALUABLE":
                 combined[arm] = "NOT_EVALUABLE"
             elif r["winner"] == best:
@@ -1348,6 +1576,7 @@ def score(key, coder_rows, manifest, strip_log=None):
             control = "UNRESOLVED"
         predicted = CLASSES[cls][2]
         per[cls] = {"counts": counts[cls], "A_vs_B": ab, "verdict": verdict,
+                    "A_vs_B_excl_fixed": ab_x,
                     "A_vs_AF": a_af, "A_vs_AF_verdict": a_af_v,
                     "AF_vs_B": af_b, "AF_vs_B_verdict": af_b_v,
                     "attribution": attribution(verdict, af_b_v),
@@ -1437,6 +1666,13 @@ def _header(res, title):
                    % (m["model_tier_requested"],
                       json.dumps(m["model_tier_applied_counts"],
                                  sort_keys=True)))
+        sc = m["size_check"]
+        out.append("job sha256 %s   blind %s   size check %s (limit %s, "
+                   "reserve %s, max item %s bytes, source %r)" % (
+                       m["job_sha256"], m["blind"], sc.get("verdict"),
+                       sc.get("context_limit_tokens"),
+                       sc.get("reserve_output_tokens"),
+                       sc.get("max_item_bytes"), sc.get("limit_source")))
     out.append(_live_line())
     if m["phase"] == "main":
         out.append("pilot run %s: %s (pilot rows excluded from this score)"
@@ -1457,6 +1693,22 @@ def _render_leak(res, out):
             _f(e["accuracy"]), _f(e["chance"]), _f(e["lower"]), e["verdict"],
             _f(d["accuracy"]), _f(d["chance"]), _f(d["lower"]),
             d["verdict"]))
+
+
+def _render_delivery(res, out):
+    d = res.get("delivery")
+    if d is None:
+        return
+    out.append("delivery per class per arm (amendment 4 items 3, 4): "
+               "delivered / NOT_DELIVERED / fixed code %r" % FIXED_CODE)
+    out.append("  %-9s %s" % ("class", "  ".join("%-12s" % a for a in ARMS)))
+    for cls in CLASSES:
+        out.append("  %-9s %s" % (cls, "  ".join(
+            "%-12s" % ("%d/%d/%d" % (d[cls][a]["delivered"],
+                                     d[cls][a]["not_delivered"],
+                                     d[cls][a]["fixed"])) for a in ARMS)))
+    out.append("  nothing imputed; fixed-code rows are outside kappa and the "
+               "leak check (%d rows)" % res.get("fixed_rows", 0))
 
 
 def render_pilot(res):
@@ -1484,6 +1736,9 @@ def render_pilot(res):
                % KAPPA_FLOOR)
     out.append("")
     _render_leak(res, out)
+    if res.get("delivery") is not None:
+        out.append("")
+        _render_delivery(res, out)
     out.append("")
     out.append("gate: %s" % res["pilot_result"])
     for r in res["pilot_reasons"]:
@@ -1532,11 +1787,34 @@ def render_score(res):
         "predicted", "prediction"))
     for cls, p in res["per_class"].items():
         r, a = p["A_vs_B"], p["agreement"]["min"]
-        out.append("%-9s %-7s %-6s %-14s %-20s %-6s %-13s %s%s" % (
+        out.append("%-9s %-7s %-6s %-14s %-20s %-6s %-13s %s%s%s" % (
             cls, _f(a["kappa"] if a else None),
             _f(a["agreement"] if a else None), p["verdict"],
             _iv(r["interval"]), _f(r["mdd"]), p["predicted"],
-            p["prediction"], ("  (%s)" % r["reason"]) if r["reason"] else ""))
+            p["prediction"], ("  (%s)" % r["reason"]) if r["reason"] else "",
+            ("  FLAGS %s" % ",".join(r.get("flags") or []))
+            if r.get("flags") else ""))
+    if any(p.get("A_vs_B_excl_fixed") for p in res["per_class"].values()):
+        out.append("sensitivity (amendment 4 item 4): A vs B with fixed-code "
+                   "rows excluded; the prediction is scored on the primary "
+                   "verdict only")
+        for cls, p in res["per_class"].items():
+            x = p.get("A_vs_B_excl_fixed")
+            if x:
+                out.append("  %-9s %-14s %s  n %d/%d" % (
+                    cls, x["verdict"], _iv(x["interval"]), x["n1"], x["n2"]))
+    flagged = ["%s %s vs %s: %s" % (cls, r["first"], r["second"],
+                                    ",".join(r["flags"]))
+               for cls, p in res["per_class"].items()
+               for r in (p["A_vs_B"], p["A_vs_AF"], p["AF_vs_B"],
+                         p["A_vs_NONE"], p["B_vs_NONE"], p["order"])
+               if r.get("flags")]
+    if flagged:
+        out.append("flagged contrasts (verdict computed on what was "
+                   "delivered; not read without the flag):")
+        for f in flagged:
+            out.append("  " + f)
+    _render_delivery(res, out)
     out.append("")
     out.append("%-9s %-14s %-14s %-12s %-14s %-14s %s" % (
         "class", "A vs NONE", "B vs NONE", "control", "AB vs best",
@@ -1598,6 +1876,9 @@ USAGE = ("usage: pathways.py --features | --choices | --lengths | "
          "--sheet BATTERY.jsonl OUT.jsonl | "
          "--emit-job OUT.json --run-tag T [--phase pilot|main] [--repeats K] "
          "[--salt S] [--seed N] [--tier T] [--a-file F] | "
+         "--size-check JOB.json --context-limit N --reserve-output M "
+         "--limit-source TEXT [--out REC.json] | "
+         "--reveal JOB.json --expect SHA256 | "
          "--import-runner RESULTS.jsonl --job JOB.json --sheet SHEET.jsonl "
          "--key KEY.jsonl [--manifest-stub M.json] | "
          "--strip SHEET.jsonl OUT.jsonl LOG.jsonl | "
@@ -1697,7 +1978,7 @@ def main(argv):
     if cmd == "--emit-job" and len(argv) >= 2:
         out = argv[1]
         opts = {"--run-tag": None, "--phase": "pilot", "--repeats": None,
-                "--salt": "hsp", "--seed": None, "--tier": "default",
+                "--salt": None, "--seed": None, "--tier": "default",
                 "--a-file": None}
         rest = argv[2:]
         while rest:
@@ -1710,14 +1991,18 @@ def main(argv):
         if not opts["--run-tag"]:
             print("--emit-job needs --run-tag")
             return 2
+        if opts["--salt"] is None:                 # amendment 4 item 1
+            salt, salt_source = secrets.token_hex(16), "generated"
+        else:
+            salt, salt_source = opts["--salt"], "given"
         try:
             job = emit_job(
                 opts["--run-tag"], opts["--phase"],
                 int(opts["--repeats"]) if opts["--repeats"] else None,
-                opts["--salt"],
+                salt,
                 int(opts["--seed"]) if opts["--seed"] else None,
                 opts["--tier"], load_docs(opts["--a-file"]),
-                a_source=opts["--a-file"])
+                a_source=opts["--a-file"], salt_source=salt_source)
         except ValueError as exc:
             print("refused: %s" % exc)
             return 1
@@ -1727,8 +2012,47 @@ def main(argv):
         print("wrote %s: %s job, %d items, run_tag %s, phase %s"
               % (out, JOB_FORMAT, len(job["items"]), job["run_tag"],
                  job["phase"]))
-        print("items carry the arm: key material, keep away from coders")
+        print("job sha256 %s   blind (from salt source) %s"
+              % (job_bytes_sha(out), blind_default(job)))
+        print("items carry the arm: key material. Do not commit this file "
+              "before coding closes; commit only its sha256 (amendment 4 "
+              "item 1)")
         return 0
+    if cmd == "--size-check":
+        ap = _QuietParser(prog="pathways.py --size-check", add_help=False)
+        ap.add_argument("job")
+        ap.add_argument("--context-limit", type=int, default=None)
+        ap.add_argument("--reserve-output", type=int, default=None)
+        ap.add_argument("--limit-source", default=None)
+        ap.add_argument("--out", default=None)
+        try:
+            a = ap.parse_args(argv[1:])
+        except _ArgRefused as exc:
+            print("refused: %s" % exc)
+            print(USAGE)
+            return 2
+        with open(a.job, encoding="utf-8") as fh:
+            job = json.load(fh)
+        try:
+            rec = size_check(job, a.context_limit, a.reserve_output,
+                             a.limit_source, job_bytes_sha(a.job))
+        except ValueError as exc:
+            print("refused: %s" % exc)
+            return 1
+        print(render_size_check(rec))
+        if a.out:
+            if a.out.startswith("--"):
+                print("refused: --out path starts with '--'")
+                return 2
+            with open(a.out, "w", encoding="utf-8") as fh:
+                json.dump(rec, fh, indent=1, sort_keys=True)
+                fh.write("\n")
+        return 0 if rec["verdict"] == "PASS" else 1
+    if cmd == "--reveal" and len(argv) == 4 and argv[2] == "--expect":
+        verdict, got = reveal(argv[1], argv[3])
+        print("reveal %s: %s (computed %s, expected %s)"
+              % (argv[1], verdict, got, argv[3]))
+        return 0 if verdict == "VERIFIED" else 1
     if cmd == "--import-runner":
         try:
             args = _import_runner_args(argv[1:])
@@ -1739,7 +2063,8 @@ def main(argv):
         with open(args.job, encoding="utf-8") as fh:
             job = json.load(fh)
         try:
-            rows, key, report = import_runner(job, _jsonl(args.results))
+            rows, key, report = import_runner(job, _jsonl(args.results),
+                                              job_bytes_sha(args.job))
         except ValueError as exc:
             print("refused: %s" % exc)
             return 1
@@ -1752,8 +2077,10 @@ def main(argv):
                 fh.write("\n")
         print(render_import(report))
         print("wrote sheet %s (no arm) and key %s%s" % (
-            args.sheet, args.key, "; manifest stub %s (fill date, coders)"
-            % stub if stub else ""))
+            args.sheet, args.key, "; manifest stub %s (fill date, coders, "
+            "size_check; confirm blind)" % stub if stub else ""))
+        print("the key and the results are key material: keep them out of "
+              "the public tree until coding closes (amendment 4 item 1)")
         return 0
     if cmd == "--prompt" and len(argv) in (3, 5) and \
             (len(argv) == 3 or argv[3] == "--a-file"):

@@ -1,0 +1,13 @@
+# size check of the sealed pilot job pilot-2026-10-08b with NO declared limit: nothing has been run.
+# the runner does not expose the model, so the operator declares --context-limit and --limit-source before any call.
+size check (amendment 4 item 2): run pilot-2026-10-08b   job sha256 227bc386f8c5cd764fcd329aa6802b3ac7d40f78653f97a32dc87e609de0b6a8
+bound = UTF-8 bytes per prompt (assumes >= 1 byte per token; an assumption, not checked); chars/4 printed, not used
+arm    items  max chars  max bytes  approx tokens
+NONE      45        192        192             48
+A         45      11666      11666           2917
+AF        45      19221      19221           4806
+B         45      19222      19222           4806
+AB        45      30696      30696           7674
+BA        45      30696      30696           7674
+max item 30696 bytes (BA); context limit None, reserve None, source None
+verdict REFUSED_UNDECLARED: not given context_limit, reserve_output, limit_source; a limit of at least 30696 + reserve passes
