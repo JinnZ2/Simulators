@@ -21,7 +21,8 @@ deleted; a finished row stays as the record.
 | claude/interaction-spec-q1-q4 | threshold-states-in-animal-escape.md, notes/queue/HOLDS.md, threshold-states/* [g] | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-07 | MERGED #127 (71df45c) |
 | claude/holds-relation-axes | notes/queue/HOLDS.md | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-07 | MERGED #128 (7397ebf) |
 | JinnZ2/Polyhedral-Intelligence: claude/relation-two-axes [h] | ontology/relation_classes.json, ontology/relation_class.py, ontology/relation_classes.md, tests/test_relation_class.py, CLAUDE.md | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-07 | MERGED Polyhedral-Intelligence #15 (fdd84ee) |
-| claude/human-sensing-prior-cc0-cbm411 | CLAUDE.md, README.md, human-sensing-prior/PATHWAYS.md, human-sensing-prior/PATHWAY_B.md, human-sensing-prior/PREDICTIONS.md, human-sensing-prior/pathways.py, human-sensing-prior/test_pathways.py, human-sensing-prior/samples/features.sample.txt, human-sensing-prior/samples/lengths.sample.txt, human-sensing-prior/samples/score_unrun.sample.txt, notes/queue/HOLDS.md, human-sensing-prior/samples/pilot_unrun.sample.txt [b], human-sensing-prior/registered/human-sensing-prior.7f780aa.md [b] | session_014bxQGPgkmsJRWUx92REKSs, session_01U4mRsfZAdaV1xWBmZSRbjK [b] | 2026-10-07 | HELD; pilot RUNNER_READY, job loaded [c][e][f] |
+| claude/human-sensing-prior-cc0-cbm411 | CLAUDE.md, README.md, human-sensing-prior/PATHWAYS.md, human-sensing-prior/PATHWAY_B.md, human-sensing-prior/PREDICTIONS.md, human-sensing-prior/pathways.py, human-sensing-prior/test_pathways.py, human-sensing-prior/samples/features.sample.txt, human-sensing-prior/samples/lengths.sample.txt, human-sensing-prior/samples/score_unrun.sample.txt, notes/queue/HOLDS.md, human-sensing-prior/samples/pilot_unrun.sample.txt [b], human-sensing-prior/registered/human-sensing-prior.7f780aa.md [b] | session_014bxQGPgkmsJRWUx92REKSs, session_01U4mRsfZAdaV1xWBmZSRbjK [b] | 2026-10-07 | MERGED #126 (a1ea7ae); pilot RUNNER_READY, job loaded, not run [c][e][f] |
+| claude/moving-mean-tracker | moving-mean-tracker/*, notes/queue/HOLDS.md, CLAUDE.md, README.md, tools/known_answer.py, tests/test_known_answer_gate.py [i] | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-08 | HELD |
 
 [a] Backfilled after the fact. These paths are in #123's diff and not in
 the operator's backfill list: `threshold-states/*, interaction_class.py,
@@ -102,3 +103,11 @@ HOLDS file, so the hold is declared here, before work, per the operator's
 dispatch "RELATION ONTOLOGY: split class into two axes" (2026-10-07).
 `CLAUDE.md` is listed because its Emotion Glyph Map note names the enum's
 members; it is touched only if that list must change.
+
+[i] 2026-10-08, declared before work, on the operator's dispatch "#126
+follow-up + MOVING-MEAN TRACKER build". The new folder is
+`moving-mean-tracker/` (stdlib, CC0, PROPOSED instrument, fixture provider
+only, no live data). `CLAUDE.md` and `README.md` carry the index entry.
+`tools/known_answer.py` and `tests/test_known_answer_gate.py` are listed
+because the repo's standing rule is that no metric ships without a
+known-answer run, and registering one touches both files.
