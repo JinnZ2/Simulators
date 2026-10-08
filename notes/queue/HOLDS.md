@@ -17,10 +17,11 @@ deleted; a finished row stays as the record.
 |---|---|---|---|---|
 | claude/threshold-states-escape | threshold-states/*, interaction_class.py, test_interaction_class.py, .github/workflows/test.yml, threshold-states-in-animal-escape.md [a], archive/interaction_class/* [a], tests/test_archive_expected_red.py [a] | session_01Y4zVdoRHPDHpVwSPbqbeLR, session_014bxQGPgkmsJRWUx92REKSs | 2026-10-05 | MERGED #123 (c7aa5f2) |
 | claude/repin-sense-as-match | KNOWN_RED.md | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-07 | MERGED #124 (2cb6eca) |
-| claude/queue-holds | notes/queue/HOLDS.md | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-07 | HELD |
-| claude/interaction-spec-q1-q4 | threshold-states-in-animal-escape.md, notes/queue/HOLDS.md, threshold-states/* [b] | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-07 | MERGED #127 (71df45c) |
-| claude/holds-relation-axes | notes/queue/HOLDS.md | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-07 | HELD |
-| JinnZ2/Polyhedral-Intelligence: claude/relation-two-axes [c] | ontology/relation_classes.json, ontology/relation_class.py, ontology/relation_classes.md, tests/test_relation_class.py, CLAUDE.md | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-07 | HELD |
+| claude/queue-holds | notes/queue/HOLDS.md | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-07 | MERGED #125 (731a94d) |
+| claude/interaction-spec-q1-q4 | threshold-states-in-animal-escape.md, notes/queue/HOLDS.md, threshold-states/* [g] | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-07 | MERGED #127 (71df45c) |
+| claude/holds-relation-axes | notes/queue/HOLDS.md | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-07 | MERGED #128 (7397ebf) |
+| JinnZ2/Polyhedral-Intelligence: claude/relation-two-axes [h] | ontology/relation_classes.json, ontology/relation_class.py, ontology/relation_classes.md, tests/test_relation_class.py, CLAUDE.md | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-07 | MERGED Polyhedral-Intelligence #15 (fdd84ee) |
+| claude/human-sensing-prior-cc0-cbm411 | CLAUDE.md, README.md, human-sensing-prior/PATHWAYS.md, human-sensing-prior/PATHWAY_B.md, human-sensing-prior/PREDICTIONS.md, human-sensing-prior/pathways.py, human-sensing-prior/test_pathways.py, human-sensing-prior/samples/features.sample.txt, human-sensing-prior/samples/lengths.sample.txt, human-sensing-prior/samples/score_unrun.sample.txt, notes/queue/HOLDS.md, human-sensing-prior/samples/pilot_unrun.sample.txt [b], human-sensing-prior/registered/human-sensing-prior.7f780aa.md [b] | session_014bxQGPgkmsJRWUx92REKSs, session_01U4mRsfZAdaV1xWBmZSRbjK [b] | 2026-10-07 | HELD; pilot RUNNER_READY, job loaded [c][e][f] |
 
 [a] Backfilled after the fact. These paths are in #123's diff and not in
 the operator's backfill list: `threshold-states/*, interaction_class.py,
@@ -35,13 +36,68 @@ test_interaction_class.py, .github/workflows/<ci file>`.
 Under the operator's list alone, #123's scope check would fail on these 5
 files. They are recorded here, not hidden.
 
-[b] Widened 2026-10-07 BEFORE the build work starts, in its own commit,
+Rule from 2026-10-07 on (operator): the session taking a hold declares
+allowed_paths here BEFORE starting work. A backfill written chat-side
+always lags the diff.
+
+claude/human-sensing-prior-cc0-cbm411: allowed_paths is the branch's diff
+against main (merge-base 9262516) as it stood before any work, plus this
+file. The branch was opened by another session; this session took the
+hold to merge it, and its row was declared in the branch's first commit,
+before main was merged in.
+
+[b] Backfilled after the fact, 2026-10-07. Session
+session_01U4mRsfZAdaV1xWBmZSRbjK opened this branch. It continued work on
+the branch at the operator's direction, and it did not read this file
+before doing so. Its commit b0c8795 (amendment 2 harness) was made before
+it fetched the hold. Two paths in that commit and its follow-up are
+outside the declared list, and both are new files:
+- `samples/pilot_unrun.sample.txt` is the sample output of the pilot gate
+  that amendment 2 item 2 adds.
+- `registered/human-sensing-prior.7f780aa.md` is a byte copy of pathway A
+  at 7f780aa, sha256 1a42dc8c...cbd7, the pin in amendment 2 item 4.
+  It is needed because the merge of main (79e6374) moved the working copy
+  of A off the pin.
+
+Under the declared list alone, the scope check would fail on these 2
+files. They are recorded here, not hidden.
+
+[c] 2026-10-07, operator. The human-sensing-prior pilot (amendment 2
+item 2) is BLOCKED_ON_RUNNER. There is no model endpoint in the Claude
+Code environment, and the operator is on a phone. A chat-side API runner
+artifact may be built; that decision is pending. The hold stays HELD.
+
+[d] 2026-10-08, declared before work. The runner dispatch (emit job,
+runner manifest, runner import) adds one path to this branch's
+allowed_paths: `human-sensing-prior/runs/*`, which holds the committed
+job files. The other files it touches are already in the list.
+
+[e] 2026-10-08. Pilot status BLOCKED_ON_RUNNER -> RUNNER_READY. The
+chat-side runner artifact exists; amendment 3 (6d186b9) records it, and
+the pilot job human-sensing-prior/runs/pilot-2026-10-08a.json (6f1544c,
+270 items) is committed. The hold stays HELD.
+
+[f] 2026-10-08, recorded chat-side, no Claude Code action. The pilot job
+was loaded into the runner. Job file sha256
+5e55685f8f8922186a843782c773456e5d72394550626114c123528382b86457, the raw
+bytes of human-sensing-prior/runs/pilot-2026-10-08a.json at 5a9642e
+(rechecked here against the committed blob). All 270 prompt hashes were
+recomputed under the runner's assembly rule: 0 mismatches. Order seed
+1114932034, recorded at load before any call. The job file carries no seed
+field, so this footnote is where the seed lives. No call had been made when
+these were recorded. The pilot's run record must cite both values.
+
+Footnote letters: main's [b] and [c] were relabeled [g] and [h] when
+main was merged into claude/human-sensing-prior-cc0-cbm411 (2026-10-08).
+That branch had used [b]..[f] for its own row. No footnote text changed.
+
+[g] Widened 2026-10-07 BEFORE the build work starts, in its own commit,
 on the operator's dispatch "§8 interaction precedence: resolve OPEN,
 commit cases, then build". `threshold-states/*` carries
 `outside_cases_v2.json` (committed alone, before any code change), the
 Q1-Q4 build of `interaction.py`, its tests, the runner and the samples.
 
-[c] A branch in another repository. Polyhedral-Intelligence carries no
+[h] A branch in another repository. Polyhedral-Intelligence carries no
 HOLDS file, so the hold is declared here, before work, per the operator's
 dispatch "RELATION ONTOLOGY: split class into two axes" (2026-10-07).
 `CLAUDE.md` is listed because its Emotion Glyph Map note names the enum's

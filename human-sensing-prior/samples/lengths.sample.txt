@@ -1,0 +1,11 @@
+context length per arm (assembled block, probe excluded)
+tokens are APPROXIMATE: chars / 4; no tokenizer or API key here
+arm      chars   words  tokens_approx
+A        11474    1907           2868
+AF       19029    3097           4757
+B        19030    2611           4758
+A+B      30504    4518           7626
+B / A length ratio: 1.66   A+B / max(A, B): 1.60
+AF = A + 1190 filler words [CHOICE 14]; AF block is 1 chars short of B's (within one word, never longer)
+LIVE working copy of A is NOT the registered A (sha256 a5c4b6cf6e0c, 15287 chars); it is a different object and is not tested here [CHOICE 16]
+A vs B is confounded with length; AF vs B holds length and varies structure (amendment 2 item 1). The combined arms are longer than either single arm and stay confounded.
