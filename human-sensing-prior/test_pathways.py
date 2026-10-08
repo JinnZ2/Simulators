@@ -9,6 +9,7 @@ either pathway.
 
 import hashlib
 import io
+import json
 import os
 import subprocess
 import sys
@@ -95,14 +96,14 @@ def run():
           "FROZEN as a known defect under test" in text)
     check("predictions: amendment declares delta 0.15",
           "delta = 0.15" in text)
-    check("predictions: four registered layers, all OK",
-          len(ps["layers"]) == 4 and ps["all_ok"])
+    check("predictions: five registered layers, all OK",
+          len(ps["layers"]) == 5 and ps["all_ok"])
     a1 = data[:8000] + b"X" + data[8001:]
     st = P.predictions_status(a1)
     check("predictions: an edit inside amendment 1 trips that layer only",
           st["layers"][0]["ok"] and not st["layers"][1]["ok"] and
-          not st["layers"][2]["ok"] and not st["layers"][3]["ok"])
-    check("predictions: text after amendment 2 note 1 is flagged past the last layer",
+          not any(st["layers"][i]["ok"] for i in (2, 3, 4)))
+    check("predictions: text after amendment 3 is flagged past the last layer",
           P.predictions_status(data + b"\nmore\n")["past_last_layer"] and
           P.predictions_status(data + b"\nmore\n")["all_ok"])
     check("predictions: amendment 2 declares AF and the pilot",
@@ -603,11 +604,274 @@ def run():
             rc = P.main(["--score", bp, "a.jsonl", "b.jsonl"])
         check("cli: --score without --manifest refused", rc == 2)
 
+    # ---- runner job (amendment 3)
+    runner_checks()
+
     # ---- source hygiene
     src = open(os.path.join(HERE, "pathways.py"), encoding="utf-8").read()
     check("source: pathways.py ASCII only", all(ord(c) < 128 for c in src))
     check("source: no cohen_kappa definition here (imported)",
           "def cohen_kappa" not in src)
+
+
+def dispatch_prompt(job, item):
+    """The dispatch's assembly, written here from its text, not imported."""
+    docs = item["docs"]
+    if docs:
+        docs_text = job["doc_separator"].join(job["documents"][k]
+                                              for k in docs)
+    else:
+        docs_text = job["no_doc_text"]
+    out = job["template"].replace("{DOCUMENTS}", docs_text)
+    return out.replace("{QUESTION}", item["question"])
+
+
+def sha(text):
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def fake_results(job, plan):
+    """plan(item) -> (status, text) or None for no row."""
+    rows = []
+    for i, it in enumerate(job["items"]):
+        p = plan(it)
+        if p is None:
+            continue
+        st, text = p
+        rows.append({"index": i, "item_id": it["id"], "arm": it["arm"],
+                     "class": it["class"], "probe": it["probe"],
+                     "repeat": it["repeat"], "status": st, "text": text,
+                     "truncated": False, "model_tier_applied": "default",
+                     "prompt_sha256": it["prompt_sha256"],
+                     "started_at": "2026-10-08T10:00:00Z",
+                     "finished_at": "2026-10-08T10:00:05Z"})
+    return rows
+
+
+def runner_checks():
+    tag = "pilot-test"
+    job = json.loads(json.dumps(P.emit_job(tag, "pilot")))   # round trip
+    items = job["items"]
+    check("job: format, run_tag, phase, tier, template fields",
+          job["format"] == "pathways-run/1" and job["run_tag"] == tag and
+          job["phase"] == "pilot" and job["model_tier"] == "default" and
+          job["template"] == "{DOCUMENTS}Question: {QUESTION}" and
+          job["doc_separator"] == "" and job["no_doc_text"] == "" and
+          "seed" not in job)
+    check("job: pilot has 5 classes x 3 probes x 6 arms x 3 = 270 items",
+          len(items) == 270 and
+          set(it["arm"] for it in items) == set(P.ARMS) and
+          set(it["repeat"] for it in items) == {1, 2, 3})
+    check("job: every item hashes to its prompt_sha256 under the "
+          "dispatch's assembly",
+          all(sha(dispatch_prompt(job, it)) == it["prompt_sha256"]
+              for it in items))
+    battery, key = P.emit(3, "hsp", tag)
+    by = {r["id"]: r for r in battery}
+    check("job: ids equal --emit's for the same salt and run_tag",
+          set(it["id"] for it in items) == set(by))
+    check("job: every prompt is byte-identical to the harness's assemble",
+          all(dispatch_prompt(job, it) == P.assemble(by[it["id"]])
+              for it in items))
+    check("job: key from the job equals --emit's key",
+          sorted(P.job_key(job), key=lambda k: k["id"]) ==
+          sorted(key, key=lambda k: k["id"]))
+    head = job["documents_source"]["wrap_head"]
+    tail = job["documents_source"]["wrap_tail"]
+    raw = {k: v[len(head):-len(tail)] for k, v in job["documents"].items()}
+    check("job: A and B unwrap to their pins",
+          sha(raw["A"]) == P.PINNED[P.FILE_A] and
+          sha(raw["B"]) == P.PINNED[P.FILE_B] and
+          all(v.startswith(head) and v.endswith(tail)
+              for v in job["documents"].values()))
+    check("job: AF unwraps to the af_text recorded in amendment 2 note 1",
+          sha(raw["AF"]) == "e570b26d5659dba21c6feb791fc310c53f9d8a699035e7"
+                            "120485167a1179a745" and
+          job["documents_source"]["AF"]["filler_words"] == 1190)
+    check("job: no document label carries a number or a filename",
+          all("Reference document:" in v and "Reference document 1" not in v
+              and "PATHWAY_B" not in v[:60] for v in job["documents"].values()))
+    none = next(it for it in items if it["arm"] == "NONE")
+    check("job: NONE prompt is 'Question: ' + the probe",
+          dispatch_prompt(job, none) == "Question: " + none["question"])
+    ab = next(it for it in items if it["arm"] == "AB")
+    ba = next(it for it in items if it["arm"] == "BA")
+    check("job: AB and BA list the documents in opposite order",
+          ab["docs"] == ["A", "B"] and ba["docs"] == ["B", "A"])
+    ids = [it["id"] for it in items]
+    check("job: items ordered by opaque id, not grouped by arm",
+          ids == sorted(ids) and
+          [it["arm"] for it in items[:6]] != list(P.ARMS))
+    check("job: a pilot with k != 3 is refused",
+          _raises(lambda: P.emit_job(tag, "pilot", repeats=4)))
+    check("job: an unknown phase is refused",
+          _raises(lambda: P.emit_job(tag, "warmup")))
+    check("job: a non-integer seed is refused",
+          _raises(lambda: P.emit_job(tag, "pilot", seed="7")))
+    check("job: an integer seed is recorded",
+          P.emit_job(tag, "pilot", seed=7)["seed"] == 7)
+    check("job: a main job at k = 3 is allowed",
+          len(P.emit_job("main-test", "main", repeats=3)["items"]) == 270)
+    texts = P.load_docs()
+    bad = {P.FILE_A: texts[P.FILE_A] + " {QUESTION}",
+           P.FILE_B: texts[P.FILE_B]}
+    pins = {f: P._sha_text(v) for f, v in bad.items()}
+    check("job: a document holding a placeholder is refused",
+          _raises(lambda: P.emit_job(tag, "pilot", texts=bad, pins=pins)))
+    check("job: --emit-job refuses an A off the pin",
+          _raises(lambda: P.emit_job(tag, "pilot", texts={
+              P.FILE_A: texts[P.FILE_A] + "x", P.FILE_B: texts[P.FILE_B]})))
+    tamper = json.loads(json.dumps(job))
+    tamper["documents"]["B"] = tamper["documents"]["B"].replace("e", "E", 1)
+    check("job: check_job refuses a job whose documents changed",
+          _raises(lambda: P.check_job(tamper)))
+    check("job: check_job passes the job as written", P.check_job(job))
+    tamper2 = json.loads(json.dumps(job))
+    tamper2["no_doc_text"] = "(no documents)"
+    n_none = sum(1 for it in items if it["arm"] == "NONE")
+    check("job: a runner default for an empty no_doc_text breaks exactly "
+          "the NONE hashes",
+          sum(1 for it in items if sha(dispatch_prompt(tamper2, it)) !=
+              it["prompt_sha256"]) == n_none == 45)
+
+    # ---- import
+    arms_seen = {}
+
+    def plan(it):
+        n = arms_seen.get(it["arm"], 0)
+        arms_seen[it["arm"]] = n + 1
+        if it["arm"] == "AB" and n == 0:
+            return ("prompt_too_large", "")
+        if it["arm"] == "BA" and n == 0:
+            return None
+        if it["arm"] == "A" and n == 0:
+            return ("error", "")
+        if it["arm"] == "B" and n == 0:
+            return ("hash_mismatch", "")
+        if it["arm"] == "NONE" and n == 0:
+            return ("refused", "I can't help with that.")
+        if it["arm"] == "AF" and n == 0:
+            return ("empty", "")
+        return ("answered", "response to %s" % it["id"])
+
+    res = fake_results(job, plan)
+    sheet_rows, k2, rep = P.import_runner(job, res)
+    check("import: 4 NOT_DELIVERED (error, hash_mismatch, too large, "
+          "no row), 266 on the sheet",
+          rep["not_delivered"] == 4 and len(sheet_rows) == 266 and
+          rep["per_arm"]["AB"]["prompt_too_large"] == 1 and
+          rep["per_arm"]["BA"]["no_row"] == 1 and
+          rep["per_arm"]["A"]["error"] == 1 and
+          rep["per_arm"]["B"]["hash_mismatch"] == 1)
+    st = {r["runner_status"] for r in sheet_rows}
+    check("import: refused and empty are on the sheet as outcomes",
+          st == {"answered", "refused", "empty"} and
+          any(r["response"] == "" and r["runner_status"] == "empty"
+              for r in sheet_rows))
+    check("import: sheet carries no arm and no context",
+          all("arm" not in r and "docs" not in r and "context_files" not in r
+              for r in sheet_rows))
+    check("import: sheet ordered by opaque id",
+          [r["id"] for r in sheet_rows] ==
+          sorted(r["id"] for r in sheet_rows))
+    check("import: key covers every job item",
+          len(k2) == 270 and {k["id"] for k in k2} == set(ids))
+    check("import: tier counts over delivered items",
+          rep["model_tier_applied_counts"] == {"default": 266})
+    check("import: render names NOT_DELIVERED",
+          "NOT_DELIVERED 4" in P.render_import(rep))
+
+    def mutate(fn):
+        rows = json.loads(json.dumps(res))
+        fn(rows)
+        return lambda: P.import_runner(job, rows)
+
+    ok = [r for r in res if r["status"] == "answered"]
+    i0 = res.index(ok[0])
+    check("import refuses: arm disagrees with the job",
+          _raises(mutate(lambda r: r[i0].update(arm="NONE" if
+                  r[i0]["arm"] != "NONE" else "A"))))
+    check("import refuses: duplicate item_id",
+          _raises(mutate(lambda r: r.append(dict(r[i0])))))
+    check("import refuses: unknown status",
+          _raises(mutate(lambda r: r[i0].update(status="timeout"))))
+    check("import refuses: answered with blank text",
+          _raises(mutate(lambda r: r[i0].update(text="  "))))
+    check("import refuses: empty with text",
+          _raises(mutate(lambda r: [x.update(text="hi") for x in r
+                                    if x["status"] == "empty"])))
+    check("import refuses: delivered under another prompt_sha256",
+          _raises(mutate(lambda r: r[i0].update(prompt_sha256="0" * 64))))
+    check("import refuses: item not in the job",
+          _raises(mutate(lambda r: r[i0].update(item_id="zzzzzzzzzzzz"))))
+    check("import refuses: a missing field",
+          _raises(mutate(lambda r: r[i0].pop("truncated"))))
+    check("import refuses: a job that fails its own hashes",
+          _raises(lambda: P.import_runner(tamper, res)))
+
+    # ---- runner manifest
+    stub = P.manifest_stub(rep)
+    check("manifest stub: runner strings, tier fields, date from results",
+          stub["model"] == P.RUNNER_MODEL and
+          stub["temperature"] == "PLATFORM_DEFAULT_NOT_SETTABLE" and
+          stub["system_prompt"] == "PLATFORM_FRAMING_NOT_VISIBLE" and
+          stub["model_tier_requested"] == "default" and
+          stub["date"] == "2026-10-08")
+    check("manifest stub: refused until coders are filled",
+          _raises(lambda: P.check_manifest(stub)))
+    full = dict(stub, coders=[{"id": "c1", "same_model_class": True},
+                              {"id": "c2", "same_model_class": False}])
+    check("runner manifest: accepted with coders", P.check_manifest(full))
+    check("runner manifest: two applied tiers refused",
+          _raises(lambda: P.check_manifest(dict(
+              full, model_tier_applied_counts={"default": 200,
+                                               "other": 66}))))
+    check("runner manifest: applied tier other than requested refused",
+          _raises(lambda: P.check_manifest(dict(
+              full, model_tier_applied_counts={"other": 266}))))
+    check("runner manifest: sentinel settings without tier fields refused",
+          _raises(lambda: P.check_manifest(dict(
+              manifest(), temperature="PLATFORM_DEFAULT_NOT_SETTABLE"))))
+    check("runner manifest: zero count refused",
+          _raises(lambda: P.check_manifest(dict(
+              full, model_tier_applied_counts={"default": 0}))))
+    check("non-runner manifest unchanged: numbers still accepted",
+          P.check_manifest(manifest()))
+    coded = []
+    for name in ("c1", "c2"):
+        coded.append([dict(r, code="yes", guess="unsure", coder=name)
+                      for r in sheet_rows])
+    pres = P.score(k2, coded, full)
+    out = P.render_pilot(pres)
+    check("end to end: imported sheet scores as a pilot under the runner "
+          "manifest",
+          "runner: model tier requested 'default'" in out and
+          "single platform" in out)
+
+    with tempfile.TemporaryDirectory() as d:
+        jp = os.path.join(d, "job.json")
+        buf = io.StringIO()
+        with redirect_stdout(buf):
+            rc = P.main(["--emit-job", jp, "--run-tag", "cli-pilot"])
+        cj = json.load(open(jp, encoding="utf-8"))
+        check("cli: --emit-job writes a pilot job", rc == 0 and
+              len(cj["items"]) == 270 and cj["run_tag"] == "cli-pilot")
+        rp = os.path.join(d, "res.jsonl")
+        P._write_jsonl(rp, fake_results(
+            cj, lambda it: ("answered", "r %s" % it["id"])))
+        sp, kp, mp = (os.path.join(d, x) for x in
+                      ("sheet.jsonl", "key.jsonl", "m.json"))
+        buf = io.StringIO()
+        with redirect_stdout(buf):
+            rc = P.main(["--import-runner", rp, "--job", jp, sp, kp,
+                         "--manifest-stub", mp])
+        check("cli: --import-runner writes sheet, key and stub",
+              rc == 0 and len(P._jsonl(sp)) == 270 and
+              json.load(open(mp))["model_tier_applied_counts"] ==
+              {"default": 270})
+        with redirect_stdout(io.StringIO()):
+            rc = P.main(["--emit-job", jp])
+        check("cli: --emit-job without --run-tag refused", rc == 2)
 
 
 if __name__ == "__main__":

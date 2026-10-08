@@ -6,7 +6,8 @@ PREDICTIONS.md original prefix (6475 bytes) sha256 5146b5f04a96cdc1ab284e92e39f6
   registered through amendment 1 (7d49610)     12980 bytes  OK
   registered through amendment 2 (0b04b02)     17672 bytes  OK
   registered through amendment 2 note 1 (fb42189)  19304 bytes  OK
-PREDICTIONS.md whole file sha256 a52409151762179ae971e346f22b138b95c751a641acba1063395f16c70e93b9
+  registered through amendment 3 (6d186b9)     24133 bytes  OK
+PREDICTIONS.md whole file sha256 b3ec41098471a13e2d082b73421d15421a48ee4af400a1ee3933614a140f7fc3
 run main-unrun   phase main   model (placeholder)   temperature 1.0   top_p 1.0   max_tokens 1024
 date 2026-10-07   system_prompt '(none)'
 LIVE working copy of A is NOT the registered A (sha256 a5c4b6cf6e0c, 15287 chars); it is a different object and is not tested here [CHOICE 16]
@@ -85,5 +86,5 @@ leakage: guessed condition vs true arm, committed guesses only; chance = largest
   coder-1         0      0      0  --/--/-- NOT_EVALUABLE  --/--/-- NOT_EVALUABLE
   coder-2         0      0      0  --/--/-- NOT_EVALUABLE  --/--/-- NOT_EVALUABLE
 
-context chars A 11475, AF 19030, B 19031, A+B 30507; tokens APPROXIMATE (chars/4) A 2869, AF 4758, B 4758, A+B 7627; A vs B is confounded with length, AF vs B is not
+context chars A 11474, AF 19029, B 19030, A+B 30504; tokens APPROXIMATE (chars/4) A 2868, AF 4757, B 4758, A+B 7626; A vs B is confounded with length, AF vs B is not
 TIE means the interval lies inside the band; UNRESOLVED is not equivalence.

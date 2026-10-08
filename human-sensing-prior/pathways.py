@@ -77,6 +77,8 @@ REGISTERED = (
      "through amendment 2 (0b04b02)"),
     (19304, "a52409151762179ae971e346f22b138b95c751a641acba1063395f16c70e93b9",
      "through amendment 2 note 1 (fb42189)"),
+    (24133, "b3ec41098471a13e2d082b73421d15421a48ee4af400a1ee3933614a140f7fc3",
+     "through amendment 3 (6d186b9)"),
 )
 
 # Amendment 2 item 4: the bytes the predictions were registered against.
@@ -95,6 +97,25 @@ MANIFEST_FIELDS = ("run_tag", "phase", "model", "temperature", "top_p",
                    "max_tokens", "system_prompt", "date", "coders")
 PHASES = ("pilot", "main")
 PILOT_K = 3
+
+# Amendment 3: the runner's assembly, used by the harness too.
+JOB_FORMAT = "pathways-run/1"
+TEMPLATE = "{DOCUMENTS}Question: {QUESTION}"
+DOC_SEPARATOR = ""
+NO_DOC_TEXT = ""
+WRAP_HEAD = "Reference document:\n<<<\n"
+WRAP_TAIL = "\n>>>\n\n"
+JOB_DOCS = {"NONE": [], "A": ["A"], "AF": ["AF"], "B": ["B"],
+            "AB": ["A", "B"], "BA": ["B", "A"]}
+RUNNER_MODEL = "claude.ai sample capability; exact model not exposed"
+RUNNER_SETTING = "PLATFORM_DEFAULT_NOT_SETTABLE"
+RUNNER_SYSTEM = "PLATFORM_FRAMING_NOT_VISIBLE"
+OUTCOME_STATUSES = ("answered", "refused", "empty")
+NOT_DELIVERED = ("error", "hash_mismatch", "prompt_too_large")
+STATUSES = OUTCOME_STATUSES + NOT_DELIVERED
+RESULT_FIELDS = ("index", "item_id", "arm", "class", "probe", "repeat",
+                 "status", "text", "truncated", "model_tier_applied",
+                 "prompt_sha256", "started_at", "finished_at")
 
 # [CHOICE 14] standard placeholder words, cycled in this order.
 LOREM = ("lorem ipsum dolor sit amet consectetur adipiscing elit sed do "
@@ -132,9 +153,8 @@ CHOICES = {
        "on the document text, not a check of what a model takes from it.",
     8: "PROMOTED to a rule by amendment 2 item 3: an interval inside the "
        "+-0.15 band reads TIE even when it excludes 0 (equivalence).",
-    9: "Prompt template: 'Reference document N:' then the text between "
-       "<<< and >>>, then 'Question: ' and the probe. No filename appears, "
-       "so a response cannot echo one.",
+    9: "SUPERSEDED by amendment 3 item 3: documents are labelled "
+       "'Reference document:' with no number (see CHOICE 17).",
     10: "Kappa is computed over the three-valued code (yes / no / unclear) "
         "on rows both coders coded; blank rows are left out. A class with "
         "no such rows has kappa undefined and is NOT_READABLE.",
@@ -159,6 +179,21 @@ CHOICES = {
         "c3578c8), and amendment 2 item 4 says that revision is a "
         "different object. The working copy's sha256 is printed beside "
         "the results as LIVE and is not tested. --a-file overrides.",
+    17: "Job file (amendment 3): each document is wrapped as "
+        "'Reference document:\\n<<<\\n' + text + '\\n>>>\\n\\n'; the template "
+        "is '{DOCUMENTS}Question: {QUESTION}', separator and no_doc_text are "
+        "empty strings. Items are ordered by opaque id. The job 'repeat' is "
+        "1-based; the key's is 0-based, so ids match --emit for the same "
+        "salt and run_tag. Pilot jobs are refused unless repeats = 3.",
+    18: "Runner import: answered, refused and empty rows go on the sheet "
+        "with their status and truncated flag (response properties, not "
+        "arm); error, hash_mismatch, prompt_too_large and missing rows are "
+        "NOT_DELIVERED, counted per arm, and not put on the sheet. A row "
+        "whose arm, class, probe, repeat or prompt_sha256 disagrees with "
+        "the job, an unknown status, a duplicate item_id, 'answered' with "
+        "blank text, or 'empty' with non-blank text refuses the import.",
+    19: "The coding sheet is ordered by opaque id (amendment 3 item 5), "
+        "so a row's position does not follow its arm.",
     15: "A coder whose leak check is NOT_EVALUABLE (under 10 committed "
         "guesses) does not by that fail the pilot gate, since amendment 2 "
         "fails it only on LEAK_DETECTED; the report names such coders, and "
@@ -447,12 +482,31 @@ def filler_words(texts):
         n += 1
 
 
+def _wrap(text):
+    """[CHOICE 17] one document, unnumbered, no filename."""
+    return WRAP_HEAD + text + WRAP_TAIL
+
+
 def _context_block(texts):
-    """[CHOICE 9] neutral headers, no filenames."""
-    parts = []
-    for i, t in enumerate(texts, 1):
-        parts.append("Reference document %d:\n<<<\n%s\n>>>\n" % (i, t))
-    return "\n".join(parts)
+    return DOC_SEPARATOR.join(_wrap(t) for t in texts)
+
+
+def fill_template(docs_text, question, template=TEMPLATE):
+    """Amendment 3 item 3: literal replacement, DOCUMENTS first."""
+    return template.replace("{DOCUMENTS}", docs_text).replace(
+        "{QUESTION}", question)
+
+
+def runner_prompt(job, item):
+    """The runner's assembly, read only from the job file."""
+    docs = item["docs"]
+    if docs:
+        docs_text = job["doc_separator"].join(job["documents"][k]
+                                              for k in docs)
+    else:
+        docs_text = job["no_doc_text"]
+    return job["template"].replace("{DOCUMENTS}", docs_text).replace(
+        "{QUESTION}", item["question"])
 
 
 def assemble(row, texts=None):
@@ -468,8 +522,8 @@ def assemble(row, texts=None):
     docs = [texts[f] for f in files]
     if row.get("filler_words"):
         docs = [af_text(docs[0], row["filler_words"])]
-    block = _context_block(docs)
-    return (block + "\n" if block else "") + "Question: " + row["probe"]
+    block = _context_block(docs) if docs else NO_DOC_TEXT
+    return fill_template(block, row["probe"])
 
 
 def _measure(text):
@@ -550,14 +604,222 @@ def emit(repeats=K_DEFAULT, salt="hsp", run_tag="run", texts=None,
 
 
 def sheet(battery):
-    """Coding sheet. Carries no arm and no context, by construction."""
+    """Coding sheet. Carries no arm and no context, by construction.
+    Ordered by opaque id [CHOICE 19]."""
     rows = []
-    for r in battery:
+    for r in sorted(battery, key=lambda x: x["id"]):
         cls = r["class"]
         rows.append({"id": r["id"], "run_tag": r["run_tag"], "class": cls,
                      "field": CLASSES[cls][0], "probe": r["probe"],
                      "response": "", "code": "", "guess": "", "coder": ""})
     return rows
+
+
+# ---------------------------------------------------------------- runner
+
+def emit_job(run_tag, phase="pilot", repeats=None, salt="hsp", seed=None,
+             model_tier="default", texts=None, pins=None, a_source=None):
+    """Amendment 3: one pathways-run/1 job. Every item's prompt is built by
+    the harness (assemble) and checked against the runner's assembly
+    (runner_prompt) before the job is returned."""
+    if phase not in PHASES:
+        raise ValueError("phase %r not in %s" % (phase, PHASES))
+    if repeats is None:
+        repeats = PILOT_K if phase == "pilot" else K_DEFAULT
+    if phase == "pilot" and repeats != PILOT_K:
+        raise ValueError("a pilot job has k = %d (amendment 2 item 2)"
+                         % PILOT_K)
+    if not model_tier:
+        raise ValueError("model_tier required")
+    if seed is not None and not isinstance(seed, int):
+        raise ValueError("seed must be an integer")
+    if texts is None:
+        texts = load_docs()
+    battery, key = emit(repeats, salt, run_tag, texts, pins)
+    a, b = texts[FILE_A], texts[FILE_B]
+    nfill = filler_words(texts)
+    af = af_text(a, nfill)
+    raw = {"A": a, "B": b, "AF": af}
+    for k, t in raw.items():
+        for tok in ("{DOCUMENTS}", "{QUESTION}"):
+            if tok in t:
+                raise ValueError("document %s contains %s; the literal "
+                                 "replacement would alter it" % (k, tok))
+    by_id = {r["id"]: r for r in battery}
+    job = {"format": JOB_FORMAT, "run_tag": run_tag, "phase": phase,
+           "model_tier": model_tier}
+    if seed is not None:
+        job["seed"] = seed
+    job.update({
+        "template": TEMPLATE, "doc_separator": DOC_SEPARATOR,
+        "no_doc_text": NO_DOC_TEXT,
+        "documents": {k: _wrap(raw[k]) for k in ("A", "B", "AF")},
+        "documents_source": {
+            "wrap_head": WRAP_HEAD, "wrap_tail": WRAP_TAIL,
+            "A": {"file": a_source or REGISTERED_A,
+                  "raw_sha256": _sha_text(a), "pin": PINNED[FILE_A]},
+            "B": {"file": FILE_B, "raw_sha256": _sha_text(b),
+                  "pin": PINNED[FILE_B]},
+            "AF": {"built_from": "A", "filler_words": nfill,
+                   "filler_sha256": _sha_text(filler(nfill)),
+                   "raw_sha256": _sha_text(af)}},
+        "harness": {"predictions_sha256": file_sha(PREDICTIONS),
+                    "repeats": repeats, "salt": salt,
+                    "note": "items carry the arm: key material, not for "
+                            "coders (amendment 3 item 6)"},
+        "items": []})
+    for k in sorted(key, key=lambda x: x["id"]):          # [CHOICE 17]
+        row = by_id[k["id"]]
+        prompt = assemble(row, texts)
+        item = {"id": k["id"], "arm": k["arm"], "class": k["class"],
+                "probe": k["probe_id"], "repeat": k["repeat"] + 1,
+                "docs": list(JOB_DOCS[k["arm"]]), "question": row["probe"],
+                "prompt_sha256": _sha_text(prompt)}
+        if runner_prompt(job, item) != prompt:
+            raise RuntimeError("runner assembly differs from the harness "
+                               "for item %s" % k["id"])
+        job["items"].append(item)
+    return job
+
+
+def job_key(job):
+    """The key for --score, derived from the job (0-based repeat)."""
+    return [{"id": it["id"], "run_tag": job["run_tag"],
+             "class": it["class"], "arm": it["arm"],
+             "probe_id": it["probe"], "repeat": it["repeat"] - 1}
+            for it in job["items"]]
+
+
+def check_job(job):
+    """Refuses a job the harness did not write: format, every item's
+    prompt_sha256 recomputed through the runner's assembly."""
+    if job.get("format") != JOB_FORMAT:
+        raise ValueError("job format %r, expected %r"
+                         % (job.get("format"), JOB_FORMAT))
+    bad = [it["id"] for it in job["items"]
+           if _sha_text(runner_prompt(job, it)) != it["prompt_sha256"]]
+    if bad:
+        raise ValueError("%d job items fail their own prompt_sha256: %s"
+                         % (len(bad), ", ".join(bad[:5])))
+    return job
+
+
+def import_runner(job, results):
+    """Amendment 3 item 4. Returns (sheet, key, report)."""
+    check_job(job)
+    items = {it["id"]: it for it in job["items"]}
+    seen = {}
+    for r in results:
+        miss = [f for f in RESULT_FIELDS if f not in r]
+        if miss:
+            raise ValueError("result row %r missing: %s"
+                             % (r.get("item_id"), ", ".join(miss)))
+        rid = r["item_id"]
+        if rid not in items:
+            raise ValueError("result for item not in job: %r" % rid)
+        if rid in seen:
+            raise ValueError("duplicate result for item %s" % rid)
+        it = items[rid]
+        for f, jf in (("arm", "arm"), ("class", "class"),
+                      ("probe", "probe"), ("repeat", "repeat")):
+            if r[f] != it[jf]:
+                raise ValueError("item %s: %s %r in result, %r in job"
+                                 % (rid, f, r[f], it[jf]))
+        st = r["status"]
+        if st not in STATUSES:
+            raise ValueError("item %s: status %r not in %s"
+                             % (rid, st, STATUSES))
+        text = r["text"] if isinstance(r["text"], str) else ""
+        if st in OUTCOME_STATUSES:
+            if r["prompt_sha256"] != it["prompt_sha256"]:
+                raise ValueError("item %s: delivered with prompt_sha256 %s, "
+                                 "job has %s" % (rid,
+                                                 str(r["prompt_sha256"])[:12],
+                                                 it["prompt_sha256"][:12]))
+            if st == "answered" and not text.strip():
+                raise ValueError("item %s: answered with blank text" % rid)
+            if st == "empty" and text.strip():
+                raise ValueError("item %s: empty with non-blank text" % rid)
+            if not isinstance(r["truncated"], bool):
+                raise ValueError("item %s: truncated must be true/false"
+                                 % rid)
+        seen[rid] = r
+    per_arm = {a: {s: 0 for s in STATUSES + ("no_row",)} for a in ARMS}
+    truncated = {a: 0 for a in ARMS}
+    tiers = {}
+    sheet_rows = []
+    for rid in sorted(items):                                # [CHOICE 19]
+        it = items[rid]
+        r = seen.get(rid)
+        if r is None:
+            per_arm[it["arm"]]["no_row"] += 1
+            continue
+        per_arm[it["arm"]][r["status"]] += 1
+        if r["status"] not in OUTCOME_STATUSES:
+            continue
+        tier = r["model_tier_applied"] or "UNREPORTED"
+        tiers[tier] = tiers.get(tier, 0) + 1
+        if r["truncated"]:
+            truncated[it["arm"]] += 1
+        cls = it["class"]
+        sheet_rows.append({
+            "id": rid, "run_tag": job["run_tag"], "class": cls,
+            "field": CLASSES[cls][0], "probe": it["question"],
+            "response": r["text"] if isinstance(r["text"], str) else "",
+            "runner_status": r["status"], "truncated": r["truncated"],
+            "code": "", "guess": "", "coder": ""})
+    delivered = len(sheet_rows)
+    dates = sorted(str(r["started_at"])[:10] for r in seen.values()
+                   if r.get("started_at"))
+    report = {"run_tag": job["run_tag"], "phase": job["phase"],
+              "items": len(items), "delivered": delivered,
+              "not_delivered": len(items) - delivered,
+              "per_arm": per_arm, "truncated": truncated,
+              "model_tier_requested": job["model_tier"],
+              "model_tier_applied_counts": tiers,
+              "first_date": dates[0] if dates else ""}
+    return sheet_rows, job_key(job), report
+
+
+def manifest_stub(report):
+    """A runner manifest with every value the results fix; date, coders
+    (and pilot fields for a main run) are left for the operator."""
+    m = {"run_tag": report["run_tag"], "phase": report["phase"],
+         "model": RUNNER_MODEL, "temperature": RUNNER_SETTING,
+         "top_p": RUNNER_SETTING, "max_tokens": RUNNER_SETTING,
+         "system_prompt": RUNNER_SYSTEM, "date": report["first_date"],
+         "coders": [],
+         "model_tier_requested": report["model_tier_requested"],
+         "model_tier_applied_counts": report["model_tier_applied_counts"]}
+    if report["phase"] == "main":
+        m["pilot_run_tag"] = ""
+        m["pilot_result"] = ""
+    return m
+
+
+def render_import(report):
+    out = ["runner import: run %s   phase %s" % (report["run_tag"],
+                                                 report["phase"]),
+           "items %d   delivered (coded outcomes) %d   NOT_DELIVERED %d"
+           % (report["items"], report["delivered"],
+              report["not_delivered"]),
+           "%-5s %9s %8s %6s %6s %14s %17s %7s %10s" % (
+               "arm", "answered", "refused", "empty", "error",
+               "hash_mismatch", "prompt_too_large", "no_row", "truncated")]
+    for a in ARMS:
+        c = report["per_arm"][a]
+        out.append("%-5s %9d %8d %6d %6d %14d %17d %7d %10d" % (
+            a, c["answered"], c["refused"], c["empty"], c["error"],
+            c["hash_mismatch"], c["prompt_too_large"], c["no_row"],
+            report["truncated"][a]))
+    out.append("model tier requested %r; applied over delivered items %s"
+               % (report["model_tier_requested"],
+                  json.dumps(report["model_tier_applied_counts"],
+                             sort_keys=True)))
+    out.append("refused and empty are outcomes and are on the sheet; "
+               "NOT_DELIVERED rows are counted here, not coded, not imputed "
+               "(amendment 3 item 4)")
+    return "\n".join(out)
 
 
 # ---------------------------------------------------------------- strip
@@ -686,6 +948,25 @@ def check_manifest(m):
         raise ValueError("duplicate coder id in manifest")
     if m["phase"] not in PHASES:
         raise ValueError("manifest phase %r not in %s" % (m["phase"], PHASES))
+    runner = (any(m.get(f) in (RUNNER_SETTING, RUNNER_SYSTEM, RUNNER_MODEL)
+                  for f in ("model", "temperature", "top_p", "max_tokens",
+                            "system_prompt"))
+              or "model_tier_requested" in m
+              or "model_tier_applied_counts" in m)
+    if runner:                                     # amendment 3 item 1
+        req = m.get("model_tier_requested")
+        counts = m.get("model_tier_applied_counts")
+        if not isinstance(req, str) or not req:
+            raise ValueError("runner manifest needs model_tier_requested")
+        if not isinstance(counts, dict) or not counts or not all(
+                isinstance(k, str) and k and isinstance(v, int) and v > 0
+                for k, v in counts.items()):
+            raise ValueError("runner manifest needs model_tier_applied_counts "
+                             "as {tier: count > 0}")
+        if list(counts) != [req]:
+            raise ValueError("model tier not fixed: requested %r, applied %s "
+                             "(amendment 3 item 1)"
+                             % (req, json.dumps(counts, sort_keys=True)))
     if m["phase"] == "main":
         if not m.get("pilot_run_tag"):
             raise ValueError("main manifest needs pilot_run_tag "
@@ -1148,8 +1429,14 @@ def _header(res, title):
             "max_tokens %s" % (m["run_tag"], m["phase"], m["model"],
                                m["temperature"], m["top_p"],
                                m["max_tokens"]),
-            "date %s   system_prompt %r" % (m["date"], m["system_prompt"]),
-            _live_line()]
+            "date %s   system_prompt %r" % (m["date"], m["system_prompt"])]
+    if m.get("model_tier_requested"):
+        out.append("runner: model tier requested %r, applied %s; single model, "
+                   "single platform (amendment 3)"
+                   % (m["model_tier_requested"],
+                      json.dumps(m["model_tier_applied_counts"],
+                                 sort_keys=True)))
+    out.append(_live_line())
     if m["phase"] == "main":
         out.append("pilot run %s: %s (pilot rows excluded from this score)"
                    % (m["pilot_run_tag"], m["pilot_result"]))
@@ -1308,6 +1595,10 @@ USAGE = ("usage: pathways.py --features | --choices | --lengths | "
          "--emit OUT.jsonl --run-tag T [--repeats K] [--salt S] "
          "[--a-file F] | --prompt BATTERY.jsonl ID [--a-file F] | "
          "--sheet BATTERY.jsonl OUT.jsonl | "
+         "--emit-job OUT.json --run-tag T [--phase pilot|main] [--repeats K] "
+         "[--salt S] [--seed N] [--tier T] [--a-file F] | "
+         "--import-runner RESULTS.jsonl --job JOB.json SHEET.jsonl KEY.jsonl "
+         "[--manifest-stub M.json] | "
          "--strip SHEET.jsonl OUT.jsonl LOG.jsonl | "
          "--score KEY.jsonl --manifest M.json [--strip-log LOG.jsonl] "
          "CODES1.jsonl CODES2.jsonl [...]")
@@ -1363,6 +1654,67 @@ def main(argv):
         print("wrote %d prompts to %s and the key to %s.key.jsonl"
               % (len(battery), out, base))
         print("keep the key away from the coders")
+        return 0
+    if cmd == "--emit-job" and len(argv) >= 2:
+        out = argv[1]
+        opts = {"--run-tag": None, "--phase": "pilot", "--repeats": None,
+                "--salt": "hsp", "--seed": None, "--tier": "default",
+                "--a-file": None}
+        rest = argv[2:]
+        while rest:
+            if rest[0] in opts and len(rest) > 1:
+                opts[rest[0]] = rest[1]
+                rest = rest[2:]
+            else:
+                print(USAGE)
+                return 2
+        if not opts["--run-tag"]:
+            print("--emit-job needs --run-tag")
+            return 2
+        try:
+            job = emit_job(
+                opts["--run-tag"], opts["--phase"],
+                int(opts["--repeats"]) if opts["--repeats"] else None,
+                opts["--salt"],
+                int(opts["--seed"]) if opts["--seed"] else None,
+                opts["--tier"], load_docs(opts["--a-file"]),
+                a_source=opts["--a-file"])
+        except ValueError as exc:
+            print("refused: %s" % exc)
+            return 1
+        with open(out, "w", encoding="utf-8") as fh:
+            json.dump(job, fh, indent=1, sort_keys=False, ensure_ascii=True)
+            fh.write("\n")
+        print("wrote %s: %s job, %d items, run_tag %s, phase %s"
+              % (out, JOB_FORMAT, len(job["items"]), job["run_tag"],
+                 job["phase"]))
+        print("items carry the arm: key material, keep away from coders")
+        return 0
+    if cmd == "--import-runner" and len(argv) >= 6 and argv[2] == "--job":
+        resp, jobp, sheetp, keyp = argv[1], argv[3], argv[4], argv[5]
+        stub = None
+        if len(argv) == 8 and argv[6] == "--manifest-stub":
+            stub = argv[7]
+        elif len(argv) != 6:
+            print(USAGE)
+            return 2
+        with open(jobp, encoding="utf-8") as fh:
+            job = json.load(fh)
+        try:
+            rows, key, report = import_runner(job, _jsonl(resp))
+        except ValueError as exc:
+            print("refused: %s" % exc)
+            return 1
+        _write_jsonl(sheetp, rows)
+        _write_jsonl(keyp, key)
+        if stub:
+            with open(stub, "w", encoding="utf-8") as fh:
+                json.dump(manifest_stub(report), fh, indent=1)
+                fh.write("\n")
+        print(render_import(report))
+        print("wrote sheet %s (no arm) and key %s%s" % (
+            sheetp, keyp, "; manifest stub %s (fill date, coders)" % stub
+            if stub else ""))
         return 0
     if cmd == "--prompt" and len(argv) in (3, 5) and \
             (len(argv) == 3 or argv[3] == "--a-file"):
