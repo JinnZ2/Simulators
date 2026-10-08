@@ -54,6 +54,12 @@ Four frames read over the same evidence:
 - **Hemispheric / logistic.** Corn exists somewhere in the Americas in
   every month; vectors move on weather systems.
 
+**Frame-cycle depth, added later.** This pass ran **2 of the move's 7
+components** (wording and focus). `FRAME_CYCLE.md` records the move as
+the operator states it, and `CSF_017` corrects the finding below: the
+frames' failure to decorrelate is a result about the stub, not about the
+move, because the five components that can decorrelate were not built.
+
 ## Dissonance rows
 
 | id | where two frames disagree | status |
