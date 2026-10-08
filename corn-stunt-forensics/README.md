@@ -77,6 +77,11 @@ is the same shape as the off-gas pre-arm problem in
 | D4 | — | NOT_RECOVERED |
 | D5 | — | NOT_RECOVERED |
 
+A second pass is in `PASS_2.md`. Its rows are numbered `D1'..D5'` /
+`G1'..G5'` and are **new output, not a recovery** of the rows above;
+pass 1's table is left as it stands. It is also **not** an independent
+trial of the method, having been run with D3 in hand.
+
 D3 is **a hypothesis the pass surfaced, not a conclusion**. Nothing here
 establishes that such a ladder exists at the scale required, that it was
 present in 2024, or that it carried the population. It is recorded
