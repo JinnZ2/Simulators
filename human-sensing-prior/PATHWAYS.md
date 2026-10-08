@@ -177,7 +177,7 @@ python3 pathways.py --score run.key.jsonl --manifest m.json \
 python3 pathways.py --emit-job runs/<tag>.json --run-tag <tag> [--phase pilot|main] \
         [--repeats K] [--seed N] [--tier default]
 python3 pathways.py --import-runner results.jsonl --job runs/<tag>.json \
-        sheet.jsonl key.jsonl --manifest-stub m.json
+        --sheet sheet.jsonl --key key.jsonl --manifest-stub m.json
 python3 test_pathways.py                  # constructed worlds; every verdict reachable
 ```
 

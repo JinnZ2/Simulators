@@ -47,6 +47,7 @@ it, and coders who do not hold the key fill `code` and `guess`.
 them.
 """
 
+import argparse
 import hashlib
 import importlib.util
 import json
@@ -1597,11 +1598,49 @@ USAGE = ("usage: pathways.py --features | --choices | --lengths | "
          "--sheet BATTERY.jsonl OUT.jsonl | "
          "--emit-job OUT.json --run-tag T [--phase pilot|main] [--repeats K] "
          "[--salt S] [--seed N] [--tier T] [--a-file F] | "
-         "--import-runner RESULTS.jsonl --job JOB.json SHEET.jsonl KEY.jsonl "
-         "[--manifest-stub M.json] | "
+         "--import-runner RESULTS.jsonl --job JOB.json --sheet SHEET.jsonl "
+         "--key KEY.jsonl [--manifest-stub M.json] | "
          "--strip SHEET.jsonl OUT.jsonl LOG.jsonl | "
          "--score KEY.jsonl --manifest M.json [--strip-log LOG.jsonl] "
          "CODES1.jsonl CODES2.jsonl [...]")
+
+
+class _ArgRefused(Exception):
+    pass
+
+
+class _QuietParser(argparse.ArgumentParser):
+    """argparse that raises instead of printing and exiting."""
+
+    def error(self, message):
+        raise _ArgRefused(message)
+
+
+def _import_runner_args(argv):
+    """Parse --import-runner arguments. Every path is a named option except
+    RESULTS; a path that starts with "--" is refused before anything is
+    written, so a misplaced flag can never become a file name."""
+    ap = _QuietParser(prog="pathways.py --import-runner", add_help=False)
+    ap.add_argument("results")
+    ap.add_argument("--job", required=True)
+    ap.add_argument("--sheet", required=True)
+    ap.add_argument("--key", required=True)
+    ap.add_argument("--manifest-stub", default=None)
+    try:
+        args = ap.parse_args(argv)
+    except _ArgRefused as exc:
+        raise ValueError(str(exc))
+    for name in ("results", "job", "sheet", "key", "manifest_stub"):
+        val = getattr(args, name)
+        if val is not None and val.startswith("--"):
+            raise ValueError("path for %s starts with '--': %r"
+                             % (name, val))
+    outs = [args.sheet, args.key] + ([args.manifest_stub]
+                                     if args.manifest_stub else [])
+    if len(set(outs)) != len(outs):
+        raise ValueError("sheet, key and manifest stub must be different "
+                         "paths")
+    return args
 
 
 def main(argv):
@@ -1690,31 +1729,31 @@ def main(argv):
                  job["phase"]))
         print("items carry the arm: key material, keep away from coders")
         return 0
-    if cmd == "--import-runner" and len(argv) >= 6 and argv[2] == "--job":
-        resp, jobp, sheetp, keyp = argv[1], argv[3], argv[4], argv[5]
-        stub = None
-        if len(argv) == 8 and argv[6] == "--manifest-stub":
-            stub = argv[7]
-        elif len(argv) != 6:
+    if cmd == "--import-runner":
+        try:
+            args = _import_runner_args(argv[1:])
+        except ValueError as exc:
+            print("refused: %s" % exc)
             print(USAGE)
             return 2
-        with open(jobp, encoding="utf-8") as fh:
+        with open(args.job, encoding="utf-8") as fh:
             job = json.load(fh)
         try:
-            rows, key, report = import_runner(job, _jsonl(resp))
+            rows, key, report = import_runner(job, _jsonl(args.results))
         except ValueError as exc:
             print("refused: %s" % exc)
             return 1
-        _write_jsonl(sheetp, rows)
-        _write_jsonl(keyp, key)
+        _write_jsonl(args.sheet, rows)
+        _write_jsonl(args.key, key)
+        stub = args.manifest_stub
         if stub:
             with open(stub, "w", encoding="utf-8") as fh:
                 json.dump(manifest_stub(report), fh, indent=1)
                 fh.write("\n")
         print(render_import(report))
         print("wrote sheet %s (no arm) and key %s%s" % (
-            sheetp, keyp, "; manifest stub %s (fill date, coders)" % stub
-            if stub else ""))
+            args.sheet, args.key, "; manifest stub %s (fill date, coders)"
+            % stub if stub else ""))
         return 0
     if cmd == "--prompt" and len(argv) in (3, 5) and \
             (len(argv) == 3 or argv[3] == "--a-file"):

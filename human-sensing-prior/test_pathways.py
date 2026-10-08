@@ -863,12 +863,49 @@ def runner_checks():
                       ("sheet.jsonl", "key.jsonl", "m.json"))
         buf = io.StringIO()
         with redirect_stdout(buf):
-            rc = P.main(["--import-runner", rp, "--job", jp, sp, kp,
-                         "--manifest-stub", mp])
+            rc = P.main(["--import-runner", rp, "--job", jp, "--sheet", sp,
+                         "--key", kp, "--manifest-stub", mp])
         check("cli: --import-runner writes sheet, key and stub",
               rc == 0 and len(P._jsonl(sp)) == 270 and
               json.load(open(mp))["model_tier_applied_counts"] ==
               {"default": 270})
+        # A flag passed where a path belongs is refused and never becomes a
+        # file name. Run from inside d so a stray "--out" would land here.
+        cwd = os.getcwd()
+        bad_calls = [
+            ["--import-runner", rp, "--job", jp, "--sheet", "--out",
+             "--key", kp],
+            ["--import-runner", rp, "--job", jp, "--sheet=--out",
+             "--key", kp],
+            ["--import-runner", rp, "--job", jp, "--sheet", sp,
+             "--key", kp, "--manifest-stub", "--out"],
+            ["--import-runner", rp, "--job", jp, sp, kp, "--out", mp],
+            ["--import-runner", rp, "--job", jp, "--sheet", sp,
+             "--key", sp],
+        ]
+        rcs = []
+        try:
+            os.chdir(d)
+            for call in bad_calls:
+                with redirect_stdout(io.StringIO()):
+                    rcs.append(P.main(call))
+        finally:
+            os.chdir(cwd)
+        check("cli: --import-runner refuses a path starting with '--' "
+              "(rc 2 on every form, no file named --out)",
+              rcs == [2] * len(bad_calls) and
+              not os.path.exists(os.path.join(d, "--out")) and
+              not os.path.exists(os.path.join(cwd, "--out")))
+        check("cli: --import-runner refuses the old positional SHEET KEY form",
+              rcs[3] == 2)
+        ok = True
+        try:
+            P._import_runner_args([rp, "--job", jp, "--sheet=--out",
+                                   "--key", kp])
+            ok = False
+        except ValueError:
+            pass
+        check("cli: _import_runner_args raises ValueError on '--' path", ok)
         with redirect_stdout(io.StringIO()):
             rc = P.main(["--emit-job", jp])
         check("cli: --emit-job without --run-tag refused", rc == 2)
