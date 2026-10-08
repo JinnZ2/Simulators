@@ -63,3 +63,8 @@ files. They are recorded here, not hidden.
 item 2) is BLOCKED_ON_RUNNER. There is no model endpoint in the Claude
 Code environment, and the operator is on a phone. A chat-side API runner
 artifact may be built; that decision is pending. The hold stays HELD.
+
+[d] 2026-10-08, declared before work. The runner dispatch (emit job,
+runner manifest, runner import) adds one path to this branch's
+allowed_paths: `human-sensing-prior/runs/*`, which holds the committed
+job files. The other files it touches are already in the list.
