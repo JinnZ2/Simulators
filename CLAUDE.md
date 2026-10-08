@@ -14055,6 +14055,32 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   Job items and the sheet are ordered by opaque id (the old sheet grouped rows by arm; nothing was
   coded under it). The pilot job `runs/pilot-2026-10-08a.json` (270 items) is committed; the pilot
   is RUNNER_READY. No model has been run and no response coded.
+- `moving-mean-tracker/` — PROPOSED instrument, SELF-GRADED, no data yet:
+  a mean anchored to a moving target (GDP, a wealth gap, skills or literacy)
+  drifts with it, and any norm, filter or loss tied to the mean inherits the
+  drift; tracked per segment, with per-record provenance (source, pull_date,
+  query, filters_applied, dropped + drop_rule), on a declared schedule, into
+  an append-only sha256-chained run log. Spec and dispatch landed verbatim
+  (`SPEC.md`, `WORK_ORDER.md`). The provider is dumb by construction (records
+  plus provenance, no stats import, AST-checked) and only `FixtureProvider`
+  (synthetic) ships. Per run, per segment: n, mean, median, p10, p90,
+  mean_minus_median; gauges G1 mean-median, G2 sample minus population share,
+  G3 dropped-as-noise share, G4 dollars per physical unit with a cross-run
+  token-drift ratio. States kept apart from zeros: UNRATED (no reference named
+  AND dated), INSUFFICIENT_SAMPLE (n < min_n), NOT_DECLARED (no physical
+  unit), CROSS_VERSION (no delta across a segment-rule or metric change, which
+  needs a new label and is refused under the old one). The dispatch's four
+  tests hold on fixtures (`MMT_001`, `MMT_002`, `MMT_005`, `MMT_006`); four
+  seeded mutations each turn the suite red (`MMT_008`). Three findings the
+  sample run surfaced: G3 localizes a filter only on the axis it is aligned
+  with, reading as a spread drop on a crossed axis (`MMT_003`); a cleaning
+  filter manufactures a G2 of exactly 0.000 on an untouched segment, so a zero
+  G2 is not representativeness evidence beside a non-zero G3 (`MMT_004`); G4
+  cannot separate price drift from a dollar-distribution change (`MMT_007`).
+  Per-record provenance grows the log linearly (`MMT_009`). `quantile` and
+  `share_gap` registered in `tools/known_answer.py`. Check count printed by
+  `python3 moving-mean-tracker/test_tracker.py`. Stdlib only, parses under
+  3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

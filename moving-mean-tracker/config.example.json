@@ -1,0 +1,37 @@
+{
+  "_note": "FIXTURE config. Every share, label and number is synthetic; nothing here describes a population.",
+  "config_version": "v1",
+  "declared": "2026-10-08",
+  "schedule": {"interval": "quarterly"},
+  "metrics": [
+    {"name": "consumption", "unit": "USD",
+     "physical": {"unit": "kcal/day", "field": "consumption_kcal"}}
+  ],
+  "min_n": 20,
+  "axes": {
+    "band": {
+      "version": "band-v1",
+      "dated": "2026-10-08",
+      "segments": {
+        "low":  {"field": "band_label", "equals": "low"},
+        "mid":  {"field": "band_label", "equals": "mid"},
+        "high": {"field": "band_label", "equals": "high"}
+      }
+    },
+    "region": {
+      "version": "region-v1",
+      "dated": "2026-10-08",
+      "segments": {
+        "north": {"field": "region", "equals": "north"},
+        "south": {"field": "region", "equals": "south"}
+      }
+    }
+  },
+  "population_reference": {
+    "band": {
+      "name": "FIXTURE population reference (synthetic)",
+      "date": "2026-10-01",
+      "shares": {"low": 0.40, "mid": 0.40, "high": 0.20}
+    }
+  }
+}
