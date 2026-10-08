@@ -1,0 +1,30 @@
+battery-offgas-prearm demo -- CONSTRUCTED fixtures, not data
+
+== breathing ==
+status   : ARMED
+detect   : none
+
+== runaway ramp (constructed runaway at t=2700s) ==
+status   : ARMED
+detect   : t=2015.0s on gas
+  t=2015.0   tier 0    OPEN_DISCONNECT    RATE_OF_RISE 3.287 >= 1 fixture-units/s for 3 evals (latched)
+  t=2015.0   tier 1    PASSIVE_RECORD     no actuation; PCM melt point fixture
+  t=2015.0   tier 2    DISCHARGE_COOLANT  armed; space VENTED
+lead     : 685.0s before the constructed runaway
+
+== single glitch ==
+status   : ARMED
+detect   : none
+
+== no threshold declared ==
+status   : UNRATED
+refusal  : refuse to arm: no rated channel
+unrated  : gas (contribute nothing)
+detect   : none
+
+co2: 1 kg into a 2 m3 closet -> 24% by volume (NIOSH IDLH is 4%)
+
+[CHOICE 1] some channels rated -> arm on those, list the rest UNRATED
+[CHOICE 2] rate of rise = Theil-Sen median slope over trailing window
+[CHOICE 3] slope needs >=3 samples spanning >=half the window
+[CHOICE 4] tier 0 latches; manual reset only
