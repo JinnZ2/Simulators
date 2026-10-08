@@ -77,6 +77,12 @@ is the same shape as the off-gas pre-arm problem in
 | D4 | — | NOT_RECOVERED |
 | D5 | — | NOT_RECOVERED |
 
+**Pass 1 was recovered.** The operator supplied it from the chat
+transcript after pass 2 had landed; it is verbatim in
+`PASS_1_RECOVERED.md`, and `COMPARISON.md` runs the two passes against
+each other. The table below is left as it stood, since the
+`NOT_RECOVERED` cells are what made pass 2 a clean re-run.
+
 A second pass is in `PASS_2.md`. Its rows are numbered `D1'..D5'` /
 `G1'..G5'` and are **new output, not a recovery** of the rows above;
 pass 1's table is left as it stands. It is also **not** an independent

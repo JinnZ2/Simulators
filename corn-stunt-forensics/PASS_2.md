@@ -1,5 +1,10 @@
 # PASS 2 — a second forensic pass, not a recovery
 
+**Pass 1 has since been recovered** from the operator's transcript
+(`PASS_1_RECOVERED.md`) and the two are compared in `COMPARISON.md`.
+This file is left exactly as written before that arrival, because its
+value is being uncontaminated.
+
 **This is not pass 1's output.** Pass 1's dissonance rows D1/D2/D4/D5 and
 gaps G1-G5 did not survive the context break and remain `NOT_RECOVERED`
 in `README.md`. Labelling the rows below as recovered would be the exact
