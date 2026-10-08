@@ -75,6 +75,8 @@ REGISTERED = (
      "through amendment 1 (7d49610)"),
     (17672, "5297bd33692c5cf54d64d8b623eb955c7c10cce28e7c9b85bc0fd1626fcf26cf",
      "through amendment 2 (0b04b02)"),
+    (19304, "a52409151762179ae971e346f22b138b95c751a641acba1063395f16c70e93b9",
+     "through amendment 2 note 1 (fb42189)"),
 )
 
 # Amendment 2 item 4: the bytes the predictions were registered against.

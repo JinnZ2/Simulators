@@ -5,7 +5,8 @@ PREDICTIONS.md original prefix (6475 bytes) sha256 5146b5f04a96cdc1ab284e92e39f6
   registered original (7f780aa)                 6475 bytes  OK
   registered through amendment 1 (7d49610)     12980 bytes  OK
   registered through amendment 2 (0b04b02)     17672 bytes  OK
-PREDICTIONS.md whole file sha256 5297bd33692c5cf54d64d8b623eb955c7c10cce28e7c9b85bc0fd1626fcf26cf
+  registered through amendment 2 note 1 (fb42189)  19304 bytes  OK
+PREDICTIONS.md whole file sha256 a52409151762179ae971e346f22b138b95c751a641acba1063395f16c70e93b9
 run main-unrun   phase main   model (placeholder)   temperature 1.0   top_p 1.0   max_tokens 1024
 date 2026-10-07   system_prompt '(none)'
 LIVE working copy of A is NOT the registered A (sha256 a5c4b6cf6e0c, 15287 chars); it is a different object and is not tested here [CHOICE 16]

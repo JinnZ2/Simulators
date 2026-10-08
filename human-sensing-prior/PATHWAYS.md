@@ -24,6 +24,14 @@ revision of A on which the NEXTSTEP marker `**P4. Effective-N` no longer
 locates; the predictions were not registered against it. `--emit` refuses
 an A or B off the pins.
 
+That marker was renamed, not removed. Main's A splits the registered P4
+("Effective-N for the animal evidence") into P4a ("Independent-origin
+count", a new test that needs a topology only) and P4b ("Phylogenetic
+independent contrasts", the registered P4's test, which now needs branch
+lengths). Recorded in PREDICTIONS.md, amendment 2 note 1 (fb42189).
+Results bind to the registered A only; main's A needs its own
+pre-registered run before it is tested.
+
 A is read from `registered/human-sensing-prior.7f780aa.md`, a byte copy of
 A at 7f780aa. It matches the pin [CHOICE 16]. The merge of main (79e6374)
 replaced the working copy with main's revision (sha256 a5c4b6cf...). Every
@@ -53,6 +61,12 @@ otherwise                        UNRESOLVED
 ```
 
 The predictions are still scored on A vs B, as registered.
+
+The filler is recorded by hash in PREDICTIONS.md, amendment 2 note 1
+(fb42189): source is the standard lorem-ipsum word list (69 words, pathways.py
+LOREM); genre is typesetting placeholder text. filler(1190) is 7553 chars,
+sha256 1a39c66c...9fe99c; af_text(A_reg, 1190) is 18999 chars, sha256
+e570b26d...79a745. test_pathways.py checks the filler hash against the note.
 
 ## Flow
 
@@ -229,6 +243,11 @@ duplicate-names test fails, as pinned. Nothing in human-sensing-prior is
 on either list.
 
 ## State
+
+Pilot: BLOCKED_ON_RUNNER. There is no model endpoint in this environment,
+and the operator is on a phone. A chat-side API runner artifact may be
+built; that decision is pending. When a runner exists, the pilot runs
+first under its own run_tag, as amendment 2 item 2 requires.
 
 Nothing has been run: no pilot and no main run. No model was called and
 no response was coded. A world in

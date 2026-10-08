@@ -18,7 +18,7 @@ deleted; a finished row stays as the record.
 | claude/threshold-states-escape | threshold-states/*, interaction_class.py, test_interaction_class.py, .github/workflows/test.yml, threshold-states-in-animal-escape.md [a], archive/interaction_class/* [a], tests/test_archive_expected_red.py [a] | session_01Y4zVdoRHPDHpVwSPbqbeLR, session_014bxQGPgkmsJRWUx92REKSs | 2026-10-05 | MERGED #123 (c7aa5f2) |
 | claude/repin-sense-as-match | KNOWN_RED.md | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-07 | MERGED #124 (2cb6eca) |
 | claude/queue-holds | notes/queue/HOLDS.md | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-07 | MERGED #125 (731a94d) |
-| claude/human-sensing-prior-cc0-cbm411 | CLAUDE.md, README.md, human-sensing-prior/PATHWAYS.md, human-sensing-prior/PATHWAY_B.md, human-sensing-prior/PREDICTIONS.md, human-sensing-prior/pathways.py, human-sensing-prior/test_pathways.py, human-sensing-prior/samples/features.sample.txt, human-sensing-prior/samples/lengths.sample.txt, human-sensing-prior/samples/score_unrun.sample.txt, notes/queue/HOLDS.md, human-sensing-prior/samples/pilot_unrun.sample.txt [b], human-sensing-prior/registered/human-sensing-prior.7f780aa.md [b] | session_014bxQGPgkmsJRWUx92REKSs, session_01U4mRsfZAdaV1xWBmZSRbjK [b] | 2026-10-07 | HELD |
+| claude/human-sensing-prior-cc0-cbm411 | CLAUDE.md, README.md, human-sensing-prior/PATHWAYS.md, human-sensing-prior/PATHWAY_B.md, human-sensing-prior/PREDICTIONS.md, human-sensing-prior/pathways.py, human-sensing-prior/test_pathways.py, human-sensing-prior/samples/features.sample.txt, human-sensing-prior/samples/lengths.sample.txt, human-sensing-prior/samples/score_unrun.sample.txt, notes/queue/HOLDS.md, human-sensing-prior/samples/pilot_unrun.sample.txt [b], human-sensing-prior/registered/human-sensing-prior.7f780aa.md [b] | session_014bxQGPgkmsJRWUx92REKSs, session_01U4mRsfZAdaV1xWBmZSRbjK [b] | 2026-10-07 | HELD; pilot BLOCKED_ON_RUNNER [c] |
 
 [a] Backfilled after the fact. These paths are in #123's diff and not in
 the operator's backfill list: `threshold-states/*, interaction_class.py,
@@ -58,3 +58,8 @@ outside the declared list, and both are new files:
 
 Under the declared list alone, the scope check would fail on these 2
 files. They are recorded here, not hidden.
+
+[c] 2026-10-07, operator. The human-sensing-prior pilot (amendment 2
+item 2) is BLOCKED_ON_RUNNER. There is no model endpoint in the Claude
+Code environment, and the operator is on a phone. A chat-side API runner
+artifact may be built; that decision is pending. The hold stays HELD.

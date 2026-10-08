@@ -7,6 +7,7 @@ built to return shows the verdict is reachable; it is no evidence about
 either pathway.
 """
 
+import hashlib
 import io
 import os
 import subprocess
@@ -94,18 +95,23 @@ def run():
           "FROZEN as a known defect under test" in text)
     check("predictions: amendment declares delta 0.15",
           "delta = 0.15" in text)
-    check("predictions: three registered layers, all OK",
-          len(ps["layers"]) == 3 and ps["all_ok"])
+    check("predictions: four registered layers, all OK",
+          len(ps["layers"]) == 4 and ps["all_ok"])
     a1 = data[:8000] + b"X" + data[8001:]
     st = P.predictions_status(a1)
     check("predictions: an edit inside amendment 1 trips that layer only",
           st["layers"][0]["ok"] and not st["layers"][1]["ok"] and
-          not st["layers"][2]["ok"])
-    check("predictions: text after amendment 2 is flagged past the last layer",
+          not st["layers"][2]["ok"] and not st["layers"][3]["ok"])
+    check("predictions: text after amendment 2 note 1 is flagged past the last layer",
           P.predictions_status(data + b"\nmore\n")["past_last_layer"] and
           P.predictions_status(data + b"\nmore\n")["all_ok"])
     check("predictions: amendment 2 declares AF and the pilot",
           "Length-matched control arm AF" in text and "PILOT_PASS" in text)
+    check("predictions: note 1 records the filler sha matching filler(1190)",
+          hashlib.sha256(P.filler(1190).encode("utf-8")).hexdigest() in text
+          and P.filler_words(P.load_docs()) == 1190)
+    check("predictions: note 1 records the P4 split",
+          "P4 was split, not removed" in " ".join(text.split()))
 
     # ---- features
     rows = P.locate_features()
