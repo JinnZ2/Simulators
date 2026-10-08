@@ -18,6 +18,9 @@ deleted; a finished row stays as the record.
 | claude/threshold-states-escape | threshold-states/*, interaction_class.py, test_interaction_class.py, .github/workflows/test.yml, threshold-states-in-animal-escape.md [a], archive/interaction_class/* [a], tests/test_archive_expected_red.py [a] | session_01Y4zVdoRHPDHpVwSPbqbeLR, session_014bxQGPgkmsJRWUx92REKSs | 2026-10-05 | MERGED #123 (c7aa5f2) |
 | claude/repin-sense-as-match | KNOWN_RED.md | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-07 | MERGED #124 (2cb6eca) |
 | claude/queue-holds | notes/queue/HOLDS.md | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-07 | MERGED #125 (731a94d) |
+| claude/interaction-spec-q1-q4 | threshold-states-in-animal-escape.md, notes/queue/HOLDS.md, threshold-states/* [g] | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-07 | MERGED #127 (71df45c) |
+| claude/holds-relation-axes | notes/queue/HOLDS.md | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-07 | MERGED #128 (7397ebf) |
+| JinnZ2/Polyhedral-Intelligence: claude/relation-two-axes [h] | ontology/relation_classes.json, ontology/relation_class.py, ontology/relation_classes.md, tests/test_relation_class.py, CLAUDE.md | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-07 | MERGED Polyhedral-Intelligence #15 (fdd84ee) |
 | claude/human-sensing-prior-cc0-cbm411 | CLAUDE.md, README.md, human-sensing-prior/PATHWAYS.md, human-sensing-prior/PATHWAY_B.md, human-sensing-prior/PREDICTIONS.md, human-sensing-prior/pathways.py, human-sensing-prior/test_pathways.py, human-sensing-prior/samples/features.sample.txt, human-sensing-prior/samples/lengths.sample.txt, human-sensing-prior/samples/score_unrun.sample.txt, notes/queue/HOLDS.md, human-sensing-prior/samples/pilot_unrun.sample.txt [b], human-sensing-prior/registered/human-sensing-prior.7f780aa.md [b] | session_014bxQGPgkmsJRWUx92REKSs, session_01U4mRsfZAdaV1xWBmZSRbjK [b] | 2026-10-07 | HELD; pilot RUNNER_READY, job loaded [c][e][f] |
 
 [a] Backfilled after the fact. These paths are in #123's diff and not in
@@ -83,3 +86,19 @@ recomputed under the runner's assembly rule: 0 mismatches. Order seed
 1114932034, recorded at load before any call. The job file carries no seed
 field, so this footnote is where the seed lives. No call had been made when
 these were recorded. The pilot's run record must cite both values.
+
+Footnote letters: main's [b] and [c] were relabeled [g] and [h] when
+main was merged into claude/human-sensing-prior-cc0-cbm411 (2026-10-08).
+That branch had used [b]..[f] for its own row. No footnote text changed.
+
+[g] Widened 2026-10-07 BEFORE the build work starts, in its own commit,
+on the operator's dispatch "§8 interaction precedence: resolve OPEN,
+commit cases, then build". `threshold-states/*` carries
+`outside_cases_v2.json` (committed alone, before any code change), the
+Q1-Q4 build of `interaction.py`, its tests, the runner and the samples.
+
+[h] A branch in another repository. Polyhedral-Intelligence carries no
+HOLDS file, so the hold is declared here, before work, per the operator's
+dispatch "RELATION ONTOLOGY: split class into two axes" (2026-10-07).
+`CLAUDE.md` is listed because its Emotion Glyph Map note names the enum's
+members; it is touched only if that list must change.
