@@ -370,7 +370,7 @@ last three; read in order:
 - `instrument-index/` — a REBUILD from a lost original: 13 fields, two renderings from one pass, a 0.70 axis falsifier that cannot fire where nothing is rated
 - `cooperative-substrate-proof/` — P1-P5, each standalone; the cooperative substrate the competitive frame runs on, as a coverage argument; C1-C4 coded into the parts
 - `stability-trigger-envelope/` — DISPATCH ESP-1, a stability trigger outside its validation envelope (cab sensor vs trailer mass on serpentine downgrades); one instrument `descent_record.py` on CONSTRUCTED data, F1-F5 firing as regression, NEITHER_MODE added to the dispatch's five labels, clock offsets detected never corrected, relocation counted never scored; real run NOT_RUN, T3/T6 NOT_BUILT, T4/T5 UNMEASURED
-- `human-sensing-prior/` — one-file CC0 instrument against the prior that human multi-channel sensing is costly; the invariant cost verdict as a CONSTANT_FIRES tell with a self-check a model runs on its own draft, the animal convergence as evidence, intake-vs-decision scope limit stated, F1-F3 not run; two pathways kept (A `human-sensing-prior.md`, B `PATHWAY_B.md`), predictions committed before `pathways.py`, a six-arm per-class harness (NONE/A/AF/B/AB/BA, opaque ids, arm withheld from the sheet) under two dated amendments fixing the tie band, kappa floor and leakage check, then adding a length-matched arm AF, a k=3 pilot gate and sha pins on A and B; nothing run
+- `human-sensing-prior/` — one-file CC0 instrument against the prior that human multi-channel sensing is costly; the invariant cost verdict as a CONSTANT_FIRES tell with a self-check a model runs on its own draft, the animal convergence as evidence, intake-vs-decision scope limit stated, F1-F3 not run; two pathways kept (A `human-sensing-prior.md`, B `PATHWAY_B.md`), predictions committed before `pathways.py`, a six-arm per-class harness (NONE/A/AF/B/AB/BA, opaque ids, arm withheld from the sheet) under three dated amendments fixing the tie band, kappa floor and leakage check, then adding a length-matched arm AF, a k=3 pilot gate and sha pins on A and B, then a chat-side runner job (pathways-run/1) and its import; pilot job committed, nothing run
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -14020,7 +14020,8 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   apart; lengths reported with tokens APPROXIMATE (chars / 4; B is 1.66x A).
   AMENDMENT 2 (2026-10-07, before any run; three registered prefixes now hashed on every report):
   arm AF (= A_PAD) is A plus lorem-ipsum filler cut so its block is within one word of B's and
-  never longer (19030 against 19031 chars). A vs AF and AF vs B are reported, not predicted, and
+  never longer (19030 against 19031 chars under the numbered label; 19029 against 19030
+  after amendment 3). A vs AF and AF vs B are reported, not predicted, and
   each A-vs-B verdict gets an attribution (STRUCTURE_SURVIVES / NOT_SEPARABLE_FROM_VOLUME /
   TIE_SURVIVES / TIE_NOT_SURVIVING / UNRESOLVED). A pilot at k = 3 over all six arms runs under
   its own run_tag and passes only if kappa >= 0.60 in every class and no coder reads
@@ -14028,7 +14029,9 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   pilot_run_tag and PILOT_PASS, and pilot rows never reach it. CHOICE 8 (TIE inside the band
   even when the interval excludes 0) is promoted to a rule. A and B are pinned by sha256:
   main's later revision of A, now merged onto this branch, breaks the `**P4. Effective-N`
-  marker. The harness reads A from a sha-checked byte copy, `registered/` (7f780aa), and
+  marker; it renamed P4 rather than removing it (P4a, a new independent-origin count; P4b, the
+  registered contrasts test, now needing branch lengths), recorded in amendment 2 note 1, which
+  also hashes the filler (lorem-ipsum placeholder, 1190 words). The harness reads A from a sha-checked byte copy, `registered/` (7f780aa), and
   prints the working copy as LIVE without testing it. `--emit` refuses an unpinned A, and
   `--a-file` overrides the default.
   `pathways.py` locates each prediction's feature by line (19 markers, 0 mismatches);
@@ -14038,7 +14041,20 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   duplicate-names test). Before main was merged in (79e6374), this branch predated #105 and #116 (merge base
   9262516), lacked `tests/test_compile_gate.py`, and failed the other 3 of those 4. That count
   was not adopted as main's baseline. After the merge the branch fails exactly the 4 pinned
-  ids, and `tools/known_red_check.py --suite` reads 28 of 28 pins MATCH. No model has been run and no response coded.
+  ids, and `tools/known_red_check.py --suite` reads 28 of 28 pins MATCH.
+  AMENDMENT 3 (2026-10-08, before any run; five registered prefixes): runner substitution, no
+  prediction change. Runs go through a chat-side claude.ai artifact (sample capability), so the
+  manifest carries PLATFORM_DEFAULT_NOT_SETTABLE / PLATFORM_FRAMING_NOT_VISIBLE, the runner model
+  string, model_tier_requested and model_tier_applied_counts, and `--score` refuses more than one
+  applied tier; scope is single model, single platform. `--emit-job` writes one pathways-run/1
+  JSON (template, empty separator and no_doc_text, wrapped documents with raw sha256s, items with
+  prompt_sha256), each prompt built by the harness and checked against the runner's literal
+  assembly; the runner's assembly cannot number documents, so the labels became unnumbered.
+  `--import-runner` maps result rows to a blind sheet: answered / refused / empty are coded
+  outcomes, error / hash_mismatch / prompt_too_large / missing are NOT_DELIVERED, counted per arm.
+  Job items and the sheet are ordered by opaque id (the old sheet grouped rows by arm; nothing was
+  coded under it). The pilot job `runs/pilot-2026-10-08a.json` (270 items) is committed; the pilot
+  is RUNNER_READY. No model has been run and no response coded.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

@@ -44,7 +44,7 @@ overrides the default.
 AF   A's text, one blank line, then lorem-ipsum words cycled from the first,
      inside A's single reference block, cut at a word boundary so the AF
      block is not longer than B's block and within one word of it
-     (19030 chars against 19031; 1190 filler words)        [CHOICE 14]
+     (19029 chars against 19030; 1190 filler words)        [CHOICE 14]
 ```
 
 Two comparisons are added per class. Both are reported, and neither is
@@ -155,8 +155,9 @@ strip            rows touched and words removed per arm, from the strip log
 length           chars, words, APPROXIMATE tokens (chars / 4) for A, AF, B, A+B
 ```
 
-`python3 pathways.py --lengths`: A 11475 chars (~2869 tokens), AF 19030
-(~4758), B 19031 (~4758), A+B 30507 (~7627). B is 1.66x A. A vs B is
+`python3 pathways.py --lengths`: A 11474 chars (~2868 tokens), AF 19029
+(~4757), B 19030 (~4758), A+B 30504 (~7626), with the unnumbered labels of
+amendment 3. B is 1.66x A. A vs B is
 confounded with context length; AF vs B is not. The combined arms are
 longer than either single arm and stay confounded.
 
@@ -173,8 +174,53 @@ python3 pathways.py --sheet run.jsonl sheet.jsonl
 python3 pathways.py --strip sheet.jsonl coder_sheet.jsonl strip_log.jsonl
 python3 pathways.py --score run.key.jsonl --manifest m.json \
         --strip-log strip_log.jsonl coder1.jsonl coder2.jsonl
+python3 pathways.py --emit-job runs/<tag>.json --run-tag <tag> [--phase pilot|main] \
+        [--repeats K] [--seed N] [--tier default]
+python3 pathways.py --import-runner results.jsonl --job runs/<tag>.json \
+        sheet.jsonl key.jsonl --manifest-stub m.json
 python3 test_pathways.py                  # constructed worlds; every verdict reachable
 ```
+
+## The chat-side runner (amendment 3)
+
+There is no model endpoint here. Runs go through a claude.ai artifact that
+uses the platform's sample capability; the operator taps batches.
+
+```text
+--emit-job        one JSON file, format pathways-run/1
+                  template "{DOCUMENTS}Question: {QUESTION}"
+                  doc_separator ""   no_doc_text ""
+                  documents A, B, AF, each "Reference document:\n<<<\n" + text + "\n>>>\n\n"
+                  documents_source: raw sha256 per document (A, B = the pins)
+                  items: id, arm, class, probe, repeat (1-based), docs, question,
+                         prompt_sha256; ordered by opaque id
+                  every prompt is built by the harness and checked against the
+                  runner assembly before the file is written
+runner            docs_text = docs ? doc_separator.join(documents[k]) : no_doc_text
+                  prompt = template, {DOCUMENTS} then {QUESTION}, literal
+                  hash differs -> not sent, status hash_mismatch
+--import-runner   answered / refused / empty  -> coding sheet (no arm), outcomes
+                  error / hash_mismatch / prompt_too_large / no row -> NOT_DELIVERED,
+                  counted per arm, not coded, not imputed
+                  writes the key and a manifest stub (runner strings, tier counts;
+                  date from the results; coders left to fill)
+--score           accepts PLATFORM_DEFAULT_NOT_SETTABLE, PLATFORM_FRAMING_NOT_VISIBLE,
+                  the runner model string, model_tier_requested and
+                  model_tier_applied_counts; refuses more than one applied tier
+                  or a tier other than the one requested
+```
+
+The empty separator and no_doc_text are deliberate: a runner that swaps in
+a default for an empty string breaks exactly the hashes it touched (all 45
+NONE items for no_doc_text), so the change shows as hash_mismatch.
+
+Scope: single model, single platform. Exact model and sampling settings
+are not visible; that is a limit, not a check. The job file and the
+results carry the arm. They are key material and go to no coder.
+
+The pilot job is `runs/pilot-2026-10-08a.json` (commit 6f1544c): 270
+items (5 classes x 3 probes x 6 arms x k = 3), file sha256
+5e55685f8f8922186a843782c773456e5d72394550626114c123528382b86457.
 
 ## Coders
 
@@ -189,7 +235,7 @@ per-coder guess accuracy measures.
 
 ```text
 arm on the coding sheet            never; ids are opaque, key kept apart
-filename in the prompt             never; neutral "Reference document N"
+filename in the prompt             never; neutral "Reference document:"
 marker where a quote was stripped  never; the deletion is silent, the log separate
 unclear                            counted, outside the denominator, never read as no
 k below 3                          refused at emit
@@ -244,10 +290,10 @@ on either list.
 
 ## State
 
-Pilot: BLOCKED_ON_RUNNER. There is no model endpoint in this environment,
-and the operator is on a phone. A chat-side API runner artifact may be
-built; that decision is pending. When a runner exists, the pilot runs
-first under its own run_tag, as amendment 2 item 2 requires.
+Pilot: RUNNER_READY. It was BLOCKED_ON_RUNNER (no model endpoint here; the
+operator is on a phone). The chat-side runner exists, amendment 3 records
+it, and the pilot job is committed (runs/pilot-2026-10-08a.json). The
+pilot runs first under its own run_tag, as amendment 2 item 2 requires.
 
 Nothing has been run: no pilot and no main run. No model was called and
 no response was coded. A world in
