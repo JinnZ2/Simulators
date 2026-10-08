@@ -510,3 +510,135 @@ material and are not given to coders. The job file is committed to the
 repository (`runs/`), so a coder with repository access could read it.
 Coders are asked not to open `runs/`, and the leak check (amendment 1
 item 5) measures what reached them either way.
+
+## Amendment 4 (2026-10-08): blinding, size check, missingness, fixed codes, P4b branch lengths
+
+Appended before any model run. It changes no prediction, class, field,
+direction, tie band, minimum, kappa floor, arm, probe or repeat count.
+It changes how a run is sealed, checked and read.
+
+### 1. Blinding
+
+Amendment 3 item 6 left the job file in the public tree. The job file
+names the arm of every item, so a coder with repository access could
+recover every arm. Two facts mean that removing the file does not repair
+this for pilot-2026-10-08a:
+
+- The file is in public history (6f1544c, 5a9642e). Its sha256 is
+  5e55685f8f8922186a843782c773456e5d72394550626114c123528382b86457.
+- Its ids were made with the default salt "hsp", which is in the public
+  code. Anyone can recompute opaque_id for every (probe, arm, repeat)
+  and read the arm off a coding sheet without the job file.
+
+Rules from this amendment on:
+
+- A job is SEALED only if its salt was generated at emission, never
+  committed, and the job file was never committed or published before
+  coding closed. Any other job is COMPROMISED.
+- The job file, the runner results and the key stay out of the public
+  tree until coding closes. `runs/` is ignored by git for these files.
+  Only the job's sha256 is committed, in notes/queue/HOLDS.md, and the
+  run manifest carries the same sha256 (`job_sha256`).
+- At reveal, after both coders' files are fixed, the job file is
+  committed and `pathways.py --reveal JOB --expect SHA256` must return
+  VERIFIED. A MISMATCH voids the run.
+- The run manifest carries `blind`: SEALED or COMPROMISED. A pilot on a
+  COMPROMISED job cannot return PILOT_PASS: its leak check cannot show
+  that coders were blind, because the arm map was readable. A main run on
+  a COMPROMISED job is refused.
+- pilot-2026-10-08a is COMPROMISED. It is retired unrun. Its file is
+  removed from the tree head and stays in history. The pilot runs under a
+  new SEALED job, whose sha256 is recorded in HOLDS. The order seed
+  recorded for 2026-10-08a at load (HOLDS [f]) does not carry over; a new
+  seed is recorded at the new load.
+
+### 2. Size check
+
+AB and BA are the longest prompts (30696 bytes, all ASCII, in the
+2026-10-08a battery; prompts do not depend on the salt). If a prompt
+does not fit the model's context, delivery fails on those arms only, so
+loss would track arm. Before any call:
+
+- `pathways.py --size-check JOB --context-limit N --reserve-output M
+  --limit-source TEXT` computes, per item, characters, UTF-8 bytes and
+  chars/4.
+- The bound used is UTF-8 bytes. It assumes every token covers at least
+  one byte. That is an assumption about the tokenizer, stated, not
+  checked here. chars/4 is printed beside it and is not used.
+- The check refuses (REFUSED_ITEM_EXCEEDS) if any item's byte count plus
+  M exceeds N. It also refuses (REFUSED_UNDECLARED) if N or the source of
+  N is not given. The runner does not expose the model, so N is declared
+  by the operator from the platform's stated limit at the time of the
+  run, and the source text is recorded. No limit is assumed here.
+- The size-check record (job sha256, N, M, source, maximum item bytes,
+  verdict) is carried in the run manifest as `size_check`. `--score`
+  refuses a runner manifest without a PASS record for the same job
+  sha256.
+
+### 3. Missingness rule
+
+NOT_DELIVERED is error, hash_mismatch, prompt_too_large, or no row
+(amendment 3 item 4). It is counted per class per arm from the key.
+Nothing is imputed and no item is dropped from another arm to balance.
+
+- Every contrast (X vs Y within one class) is flagged LOSS_DIFFERENTIAL
+  if the NOT_DELIVERED counts of X and Y in that class differ by one or
+  more. The verdict is still computed on what was delivered and is
+  printed with the flag and both arms' counts. A flagged verdict is not
+  read as a test of the prediction without the flag.
+- Per class per arm, delivered and NOT_DELIVERED counts are printed in
+  every report, pilot included.
+- If loss takes an arm below MIN_N coded, the existing NOT_EVALUABLE rule
+  applies. No other rule is added.
+
+### 4. Fixed codes for refused and empty replies
+
+Amendment 3 item 4 made refused and empty replies outcomes "coded like
+any response". It did not fix the code. Four of five classes are
+lower-is-good, so a coder's choice between "no" and "unclear" would decide
+whether a refusal counts as good or as missing. The code is fixed here:
+
+- A reply with runner status refused or empty is coded "no" in its
+  class's field, by the harness, from the key. The field asks whether the
+  reply does a thing (gives a cost verdict, denies a real cost,
+  overclaims, conflates, names a runnable test); a refused or empty reply
+  does none of these. The code applies whatever text a refused row
+  carries, and the count of refused rows with non-blank text is printed.
+- These rows are not on the coding sheet. They enter the counts and the
+  verdicts. They do not enter kappa or the leak check, because no coder
+  judged them.
+- Per class per arm, the count of fixed-code rows is printed beside each
+  rate. Every contrast is flagged OUTCOME_DIFFERENTIAL if the two arms'
+  fixed-code counts differ by one or more.
+- Beside each A-vs-B verdict the harness prints the same comparison with
+  fixed-code rows excluded, as a sensitivity reading. The prediction is
+  scored on the primary verdict only (fixed rows included).
+
+### 5. P4b branch lengths
+
+Results bind to registered A (7f780aa), whose P4 says "On a stated
+phylogeny" and states no branch-length source or method. Main's revision
+P4b says contrasts need branch lengths and states none. Neither file is
+edited. For any run of P4 or P4b, this is declared:
+
+- Source: divergence times from TimeTree (Kumar et al., TimeTree 5,
+  Molecular Biology and Evolution 2022), queried for every taxon in the
+  trait table on one stated date. The query date and the returned tree
+  are recorded with the result. CARRIED, not verified here; the host
+  is not reachable from this environment.
+- Branch lengths: time in millions of years from that tree.
+- Method: Felsenstein (1985) independent contrasts under Brownian motion.
+  Branch-length adequacy is checked by regressing absolute standardized
+  contrasts on their standard deviations (Garland, Harvey and Ives 1992,
+  Systematic Biology 41: 18-32; CARRIED). If that test fails, the result
+  is reported under the time branch lengths and under a log(1 + t)
+  transform, both, and neither is picked.
+- A taxon with no TimeTree date is not given an estimated one. If any
+  taxon in the table lacks a date, the run routes to P4a (topology only),
+  as main's revision of A says.
+- The trait measure ("default sensing mode" scored per lineage) is not
+  defined in either file. It is not defined here. It must be fixed before
+  any P4 or P4b data is collected.
+
+This binds a future P4/P4b run only. It does not touch the NEXTSTEP class,
+which codes whether a reply names a runnable test, or any prediction.
