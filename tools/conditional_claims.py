@@ -152,8 +152,9 @@ MEANING = {
     "EQUIVALENT": "same claim in different form",
     "ASSERTED_CONSEQUENT": "operator dropped: premise deleted, consequent stated as unconditional fact",
     "FLATTENED_TO_CONJUNCTION": "operator dropped: the if-then relation read as two separate facts",
-    "CONVERSE": "direction flipped: THEN-part made the condition",
-    "INVERSE": "both sides negated: not the same claim",
+    "CONVERSE": "direction flipped, written as converse: THEN-part made the condition",
+    "INVERSE": "direction flipped, written as inverse: both sides negated (logically identical to the converse; each is the other's contrapositive)",
+    "DIRECTION_FLIPPED": "direction flipped in another written form (same truth table as the converse)",
     "STRONGER": "restatement claims more than was said",
     "WEAKER": "restatement claims less than was said",
     "NOT_ENTAILED": "restatement neither follows from nor implies what was said",
@@ -169,9 +170,13 @@ def compare(orig, rest):
     elif orig[0] == "imp" and equivalent(rest, ("and", orig[1], orig[2])):
         v = "FLATTENED_TO_CONJUNCTION"
     elif orig[0] == "imp" and equivalent(rest, ("imp", orig[2], orig[1])):
-        v = "CONVERSE"
-    elif orig[0] == "imp" and equivalent(rest, ("imp", ("not", orig[1]), ("not", orig[2]))):
-        v = "INVERSE"
+        P, Q = orig[1], orig[2]
+        if rest == ("imp", Q, P):
+            v = "CONVERSE"
+        elif rest == ("imp", ("not", P), ("not", Q)):
+            v = "INVERSE"
+        else:
+            v = "DIRECTION_FLIPPED"
     elif entails(rest, orig):
         v = "STRONGER"
     elif entails(orig, rest):
@@ -220,10 +225,12 @@ def selftest():
         "[A] -> [B] AND [C]": "STRONGER",
         "IF [A] AND [C] THEN [B]": "WEAKER",
         "[C]": "NOT_ENTAILED",
+        "NOT [B] OR [A]": "DIRECTION_FLIPPED",
     }
     for rest, want in cases.items():
         got = compare(o, parse(rest))["verdict"]
         assert got == want, (rest, got, want)
+    assert equivalent(parse("NOT [A] -> NOT [B]"), parse("[B] -> [A]"))
     r = compare(o, parse("IF [A] AND [C] THEN [B]"))
     assert r["new_atoms"] == ["c"] and r["dropped_atoms"] == []
     assert compare(o, parse("[B]"))["dropped_atoms"] == ["a"]
