@@ -14261,6 +14261,19 @@ ship a `requirements.txt`. Each folder ships `samples/`.
     repos were not reachable. Primary rows also show tripwire tags, since a
     tool can carry two jobs; DYNAMICS sets no bin's tier. `selftest` 35
     checks, including that the role table matches `false_agree`'s bins.
+  - `provenance_marker.py` + `provenance_markers.jsonl` — per-tool marker:
+    ran before (the command, its exit and last printed line), the tool
+    file's sha256 at that run, and one line on how it works, in a
+    hash-chained append-only ledger. Each marker carries a slot for the
+    operator's five passes for finding semantic manipulation (P1 noun to
+    verb, P2 animacy, P3 logic puzzle, P4 round trip, P5 evidentiality),
+    each RUNS / PARTIAL / NOT_RUN / UNDECLARED. RUNS and PARTIAL need a
+    `path:line` basis that resolves, and PARTIAL needs a note naming the
+    missing half. Pass states are declarations, not inferred from text.
+    `check` reads CURRENT / STALE / MISSING by re-hashing. A tool that
+    edits its own file during the run gets no marker. Six tools stamped:
+    P2 is run by none of them, even in part. Check count printed by
+    `--selftest`.
 - `search-substitution/` — Three organisms that produce an answer without
   searching for it, priced against the search they do not perform. Physarum
   occupies the whole arena at once and prunes by throughput, so its cost
