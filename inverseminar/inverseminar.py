@@ -46,6 +46,28 @@ EXTS      = (".md", ".py", ".txt")
 # ---------------------------------------------------------------------
 # Proxy: overlay density. Where the model wrote most and you wrote least,
 # your reasoning is most buried.
+#
+# WHAT THIS DOES NOT MEASURE (recorded 2026-10-08, operator's call, after
+# the metric was run on a file it could not read):
+#
+#   The score detects BURIED overlay -- rhetorical padding, the registers
+#   below. It does not detect DECLARED overlay. A file that states plainly
+#   which sections the model wrote, in tables, with attribution markers,
+#   scores near zero AND may be entirely model-authored.
+#
+#   So a low score is not evidence of low model authorship. It is evidence
+#   that whatever authorship is there is not hidden. Those are different
+#   objects and the ranking only orders the first.
+#
+#   Worked case: corn-stunt-forensics/FRAME_CYCLE.md does not appear in
+#   the top 15. Two of its sections are model analysis. Both are marked as
+#   such in the text, so the metric reads them as substance.
+#
+#   Second limit, standing: OVERLAY is a word list, so a paraphrase steps
+#   around it (the UNI_009 / T1-1 shape elsewhere in this tree).
+#
+#   Neither limit is repaired here. A readout for declared overlay would
+#   be a different instrument, not a wider pattern list.
 
 OVERLAY = [
     r"this changes everything", r"neither .{0,30}could have (produced|created)",
@@ -107,6 +129,9 @@ def triage_dir(root=".", n=15):
     rows.sort(key=lambda r: -r["score"])
     done = _done_map()
     print("TRIAGE -- run inverseminar top-down (most buried reasoning first)")
+    print("  RANKS HIDDEN OVERLAY, NOT OVERLAY. A file that declares which")
+    print("  sections the model wrote scores near zero and may still be")
+    print("  entirely model-authored. Absence from this list is not evidence.")
     print("  %-38s %6s %5s %5s %6s %6s %s"
           % ("file", "words", "ovl", "sub", "ratio", "score", "done"))
     for r in rows[:n]:

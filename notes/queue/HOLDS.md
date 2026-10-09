@@ -23,6 +23,7 @@ deleted; a finished row stays as the record.
 | JinnZ2/Polyhedral-Intelligence: claude/relation-two-axes [h] | ontology/relation_classes.json, ontology/relation_class.py, ontology/relation_classes.md, tests/test_relation_class.py, CLAUDE.md | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-07 | MERGED Polyhedral-Intelligence #15 (fdd84ee) |
 | claude/human-sensing-prior-cc0-cbm411 | CLAUDE.md, README.md, human-sensing-prior/PATHWAYS.md, human-sensing-prior/PATHWAY_B.md, human-sensing-prior/PREDICTIONS.md, human-sensing-prior/pathways.py, human-sensing-prior/test_pathways.py, human-sensing-prior/samples/features.sample.txt, human-sensing-prior/samples/lengths.sample.txt, human-sensing-prior/samples/score_unrun.sample.txt, notes/queue/HOLDS.md, human-sensing-prior/samples/pilot_unrun.sample.txt [b], human-sensing-prior/registered/human-sensing-prior.7f780aa.md [b] | session_014bxQGPgkmsJRWUx92REKSs, session_01U4mRsfZAdaV1xWBmZSRbjK [b] | 2026-10-07 | HELD; pilot RUNNER_READY, job loaded [c][e][f] |
 | claude/battery-offgas-prearm | battery-offgas-prearm/*, notes/queue/HOLDS.md [i] | session_019vfUAFE1MxwGdZjKisbdba | 2026-10-08 | PR #130 (merged by its own session when failures == KNOWN_RED pins) |
+| claude/corn-stunt-forensics | corn-stunt-forensics/*, notes/queue/HOLDS.md [j] | session_019vfUAFE1MxwGdZjKisbdba | 2026-10-08 | HELD |
 
 [a] Backfilled after the fact. These paths are in #123's diff and not in
 the operator's backfill list: `threshold-states/*, interaction_class.py,
@@ -111,3 +112,9 @@ is not the operator's approval of anything outside these paths; the root
 `CLAUDE.md` index is NOT in scope and is not edited by this hold.
 `tools/known_answer.py` is not in scope either: the trigger module's
 known answers live in its own test file.
+
+[j] Declared 2026-10-08 BEFORE any file under `corn-stunt-forensics/` exists,
+in its own commit, on the operator's voice request to land the forensic-pass
+test on the 2024 corn stunt outbreak as a folder with a claim table, plus the
+insect-biology angle (thermal limits, evolution, vector competence, season
+temperature projections). Root `CLAUDE.md` index is not in scope.
