@@ -275,6 +275,8 @@ paradigm_sweep — contrast-then-obliques sweep; generates bearings off a named 
 
 false_agree - routes a dense agree-set by CAUSE of agreement (independent convergence vs shared-upstream vs definition/measure false-agree). Companion to paradigm_sweep. CC0, stdlib.
 
+provenance_graph - proves lineage independence of agreeing studies by common-ancestor reachability; emits the shared-ancestor witness. Formal check behind false_agree's INDEPENDENT_CONVERGENCE. CC0, stdlib.
+
 Individual folders self-test through their own modules, e.g.
 `python3 instrument-bias-sims/crosscutting.py --selftest`.
 
