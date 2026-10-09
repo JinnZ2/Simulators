@@ -277,6 +277,8 @@ false_agree - routes a dense agree-set by CAUSE of agreement (independent conver
 
 provenance_graph - proves lineage independence of agreeing studies by common-ancestor reachability; emits the shared-ancestor witness. Formal check behind false_agree's INDEPENDENT_CONVERGENCE. CC0, stdlib.
 
+conditional_claims — keeps if-then claims rigid; truth-table check names the collapse when a restatement drops, flips, or flattens the operator; verbatim ledger + conditional-cue extractor. CC0, stdlib.
+
 Individual folders self-test through their own modules, e.g.
 `python3 instrument-bias-sims/crosscutting.py --selftest`.
 
