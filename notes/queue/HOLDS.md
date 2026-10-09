@@ -24,7 +24,8 @@ deleted; a finished row stays as the record.
 | claude/human-sensing-prior-cc0-cbm411 | CLAUDE.md, README.md, human-sensing-prior/PATHWAYS.md, human-sensing-prior/PATHWAY_B.md, human-sensing-prior/PREDICTIONS.md, human-sensing-prior/pathways.py, human-sensing-prior/test_pathways.py, human-sensing-prior/samples/features.sample.txt, human-sensing-prior/samples/lengths.sample.txt, human-sensing-prior/samples/score_unrun.sample.txt, notes/queue/HOLDS.md, human-sensing-prior/samples/pilot_unrun.sample.txt [b], human-sensing-prior/registered/human-sensing-prior.7f780aa.md [b] | session_014bxQGPgkmsJRWUx92REKSs, session_01U4mRsfZAdaV1xWBmZSRbjK [b] | 2026-10-07 | MERGED #126 (a1ea7ae); pilot RUNNER_READY, job loaded, not run [c][e][f] |
 | claude/battery-offgas-prearm | battery-offgas-prearm/*, notes/queue/HOLDS.md [i] | session_019vfUAFE1MxwGdZjKisbdba | 2026-10-08 | PR #130 (merged by its own session when failures == KNOWN_RED pins) |
 | claude/corn-stunt-forensics | corn-stunt-forensics/*, notes/queue/HOLDS.md [j] | session_019vfUAFE1MxwGdZjKisbdba | 2026-10-08 | MERGED #131 (705cbca) |
-| claude/moving-mean-tracker | moving-mean-tracker/*, notes/queue/HOLDS.md, CLAUDE.md, README.md, tools/known_answer.py, tests/test_known_answer_gate.py [k] | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-08 | HELD |
+| claude/moving-mean-tracker | moving-mean-tracker/*, notes/queue/HOLDS.md, CLAUDE.md, README.md, tools/known_answer.py, tests/test_known_answer_gate.py [k] | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-08 | MERGED #129 (ad39ffb) |
+| claude/agree-router | tools/agree_router.py, tools/tool_inventory.json, notes/queue/HOLDS.md, CLAUDE.md [l] | session_018Dg8cJzPno1NDm7f5uPCDa | 2026-10-09 | HELD |
 
 [a] Backfilled after the fact. These paths are in #123's diff and not in
 the operator's backfill list: `threshold-states/*, interaction_class.py,
@@ -133,3 +134,9 @@ its own branch while main used [i] for claude/battery-offgas-prearm. When
 main was merged into the tracker branch (2026-10-09) the tracker's [i] was
 relabeled [k]. No footnote text changed. The same merge records two
 statuses from the PR record: #126 (a1ea7ae) and #131 (705cbca).
+
+[l] Declared 2026-10-09 BEFORE any router file exists, in its own commit, on
+the operator's voice go for the false-agree router: it reads
+`tools/false_agree.py`'s bin verdicts and a tool inventory, and lists which
+tools to run first per bin. `CLAUDE.md` is listed for the tools/ index line
+only.
