@@ -26,7 +26,8 @@ deleted; a finished row stays as the record.
 | claude/corn-stunt-forensics | corn-stunt-forensics/*, notes/queue/HOLDS.md [j] | session_019vfUAFE1MxwGdZjKisbdba | 2026-10-08 | MERGED #131 (705cbca) |
 | claude/moving-mean-tracker | moving-mean-tracker/*, notes/queue/HOLDS.md, CLAUDE.md, README.md, tools/known_answer.py, tests/test_known_answer_gate.py [k] | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-08 | MERGED #129 (ad39ffb) |
 | claude/agree-router | tools/agree_router.py, tools/tool_inventory.json, notes/queue/HOLDS.md, CLAUDE.md [l] | session_018Dg8cJzPno1NDm7f5uPCDa | 2026-10-09 | MERGED #139 (6e088ff) |
-| claude/grounded-work-stack | grounded-work-stack/*, notes/queue/HOLDS.md, CLAUDE.md | session_018Dg8cJzPno1NDm7f5uPCDa | 2026-10-09 | OPEN |
+| claude/grounded-work-stack | grounded-work-stack/*, notes/queue/HOLDS.md, CLAUDE.md | session_018Dg8cJzPno1NDm7f5uPCDa | 2026-10-09 | MERGED #141 (8f7fe9b) |
+| claude/provenance-markers | tools/provenance_marker.py, tools/provenance_markers.jsonl, tools/samples/provenance_marker.sample.txt, tests/test_provenance_marker.py, notes/queue/HOLDS.md, CLAUDE.md [m] | session_018Dg8cJzPno1NDm7f5uPCDa | 2026-10-09 | HELD |
 
 [a] Backfilled after the fact. These paths are in #123's diff and not in
 the operator's backfill list: `threshold-states/*, interaction_class.py,
@@ -141,3 +142,9 @@ the operator's voice go for the false-agree router: it reads
 `tools/false_agree.py`'s bin verdicts and a tool inventory, and lists which
 tools to run first per bin. `CLAUDE.md` is listed for the tools/ index line
 only.
+
+[m] Declared 2026-10-09 BEFORE any marker file exists, in its own commit,
+on the operator's voice go: a per-tool provenance marker (ran before, the
+file hash at that run, how it works) with a slot recording which of the
+operator's five passes the tool runs. `CLAUDE.md` is listed for the tools/
+index line only.
