@@ -1,0 +1,1 @@
+{"tail": {"band": "high", "top_fraction": 0.1, "factor": 10}, "drop": {"band": "low", "fraction": 0.5, "rule": "below_floor_as_noise"}}
