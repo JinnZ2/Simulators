@@ -22,7 +22,9 @@ deleted; a finished row stays as the record.
 | claude/holds-relation-axes | notes/queue/HOLDS.md | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-07 | MERGED #128 (7397ebf) |
 | JinnZ2/Polyhedral-Intelligence: claude/relation-two-axes [h] | ontology/relation_classes.json, ontology/relation_class.py, ontology/relation_classes.md, tests/test_relation_class.py, CLAUDE.md | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-07 | MERGED Polyhedral-Intelligence #15 (fdd84ee) |
 | claude/human-sensing-prior-cc0-cbm411 | CLAUDE.md, README.md, human-sensing-prior/PATHWAYS.md, human-sensing-prior/PATHWAY_B.md, human-sensing-prior/PREDICTIONS.md, human-sensing-prior/pathways.py, human-sensing-prior/test_pathways.py, human-sensing-prior/samples/features.sample.txt, human-sensing-prior/samples/lengths.sample.txt, human-sensing-prior/samples/score_unrun.sample.txt, notes/queue/HOLDS.md, human-sensing-prior/samples/pilot_unrun.sample.txt [b], human-sensing-prior/registered/human-sensing-prior.7f780aa.md [b] | session_014bxQGPgkmsJRWUx92REKSs, session_01U4mRsfZAdaV1xWBmZSRbjK [b] | 2026-10-07 | MERGED #126 (a1ea7ae); pilot RUNNER_READY, job loaded, not run [c][e][f] |
-| claude/moving-mean-tracker | moving-mean-tracker/*, notes/queue/HOLDS.md, CLAUDE.md, README.md, tools/known_answer.py, tests/test_known_answer_gate.py [i] | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-08 | HELD |
+| claude/battery-offgas-prearm | battery-offgas-prearm/*, notes/queue/HOLDS.md [i] | session_019vfUAFE1MxwGdZjKisbdba | 2026-10-08 | PR #130 (merged by its own session when failures == KNOWN_RED pins) |
+| claude/corn-stunt-forensics | corn-stunt-forensics/*, notes/queue/HOLDS.md [j] | session_019vfUAFE1MxwGdZjKisbdba | 2026-10-08 | MERGED #131 (705cbca) |
+| claude/moving-mean-tracker | moving-mean-tracker/*, notes/queue/HOLDS.md, CLAUDE.md, README.md, tools/known_answer.py, tests/test_known_answer_gate.py [k] | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-08 | HELD |
 
 [a] Backfilled after the fact. These paths are in #123's diff and not in
 the operator's backfill list: `threshold-states/*, interaction_class.py,
@@ -104,10 +106,30 @@ dispatch "RELATION ONTOLOGY: split class into two axes" (2026-10-07).
 `CLAUDE.md` is listed because its Emotion Glyph Map note names the enum's
 members; it is touched only if that list must change.
 
-[i] 2026-10-08, declared before work, on the operator's dispatch "#126
+[i] Declared 2026-10-08 BEFORE any file under `battery-offgas-prearm/`
+exists, in its own commit, on a peer session's relay of the operator's
+voice request ("mark that up for a buildable spec"). The peer's request
+is not the operator's approval of anything outside these paths; the root
+`CLAUDE.md` index is NOT in scope and is not edited by this hold.
+`tools/known_answer.py` is not in scope either: the trigger module's
+known answers live in its own test file.
+
+[j] Declared 2026-10-08 BEFORE any file under `corn-stunt-forensics/` exists,
+in its own commit, on the operator's voice request to land the forensic-pass
+test on the 2024 corn stunt outbreak as a folder with a claim table, plus the
+insect-biology angle (thermal limits, evolution, vector competence, season
+temperature projections). Root `CLAUDE.md` index is not in scope.
+
+[k] 2026-10-08, declared before work, on the operator's dispatch "#126
 follow-up + MOVING-MEAN TRACKER build". The new folder is
 `moving-mean-tracker/` (stdlib, CC0, PROPOSED instrument, fixture provider
 only, no live data). `CLAUDE.md` and `README.md` carry the index entry.
 `tools/known_answer.py` and `tests/test_known_answer_gate.py` are listed
 because the repo's standing rule is that no metric ships without a
 known-answer run, and registering one touches both files.
+
+Footnote letters: claude/moving-mean-tracker declared its hold as [i] on
+its own branch while main used [i] for claude/battery-offgas-prearm. When
+main was merged into the tracker branch (2026-10-09) the tracker's [i] was
+relabeled [k]. No footnote text changed. The same merge records two
+statuses from the PR record: #126 (a1ea7ae) and #131 (705cbca).

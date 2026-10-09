@@ -272,6 +272,18 @@ python3 tools/check_gate_drift.py        # one gate, no stale copies
 python3 tools/check_term_collision.py    # who uses the colliding terms
 ```
 
+paradigm_sweep — contrast-then-obliques sweep; generates bearings off a named paradigm, marks dense/empty/unjoined. CC0, stdlib.
+
+false_agree - routes a dense agree-set by CAUSE of agreement (independent convergence vs shared-upstream vs definition/measure false-agree). Companion to paradigm_sweep. CC0, stdlib.
+
+provenance_graph - proves lineage independence of agreeing studies by common-ancestor reachability; emits the shared-ancestor witness. Formal check behind false_agree's INDEPENDENT_CONVERGENCE. CC0, stdlib.
+
+system_efficiency — efficiency = floor change-in-state / whole-chain cost including joins; reports theater gap (self-reported success vs real completion) and join share. CC0, stdlib.
+
+conditional_claims — keeps if-then claims rigid; truth-table check names the collapse when a restatement drops, flips, or flattens the operator; verbatim ledger + conditional-cue extractor. CC0, stdlib.
+
+presignal_ledger — leading-indicator ledger; scores each early index by lead gain over the obvious (baseline) signal and lift over chance, so an early-but-noisy index cannot pass. CC0, stdlib.
+
 Individual folders self-test through their own modules, e.g.
 `python3 instrument-bias-sims/crosscutting.py --selftest`.
 
