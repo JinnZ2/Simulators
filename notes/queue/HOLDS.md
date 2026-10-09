@@ -26,6 +26,7 @@ deleted; a finished row stays as the record.
 | claude/corn-stunt-forensics | corn-stunt-forensics/*, notes/queue/HOLDS.md [j] | session_019vfUAFE1MxwGdZjKisbdba | 2026-10-08 | MERGED #131 (705cbca) |
 | claude/moving-mean-tracker | moving-mean-tracker/*, notes/queue/HOLDS.md, CLAUDE.md, README.md, tools/known_answer.py, tests/test_known_answer_gate.py [k] | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-08 | MERGED #129 (ad39ffb) |
 | claude/agree-router | tools/agree_router.py, tools/tool_inventory.json, notes/queue/HOLDS.md, CLAUDE.md [l] | session_018Dg8cJzPno1NDm7f5uPCDa | 2026-10-09 | MERGED #139 (6e088ff) |
+| claude/grounded-work-stack | grounded-work-stack/*, notes/queue/HOLDS.md, CLAUDE.md | session_018Dg8cJzPno1NDm7f5uPCDa | 2026-10-09 | OPEN |
 
 [a] Backfilled after the fact. These paths are in #123's diff and not in
 the operator's backfill list: `threshold-states/*, interaction_class.py,
