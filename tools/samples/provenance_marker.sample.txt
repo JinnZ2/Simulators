@@ -7,6 +7,7 @@ passes per tool, latest marker (R runs, p partial, . not run, ? undeclared)
   P5  evidentiality  witnessed / inferred / reported
 
   tool                                         P1 P2 P3 P4 P5  marker
+  animacy-pass/dependency_check.py              .   p   .   .   .   CURRENT
   claim-record/record.py                        R   .   .   R   p   CURRENT
   grounded-work-stack/check.py                  .   .   .   p   p   CURRENT
   move-set/move_set_sim_v2.py                   .   .   .   .   R   CURRENT
@@ -14,17 +15,20 @@ passes per tool, latest marker (R runs, p partial, . not run, ? undeclared)
   tools/conditional_claims.py                   .   .   R   .   .   CURRENT
   tools/sourced.py                              .   .   .   .   p   CURRENT
 
-  P1 noun->verb     RUNS 1  PARTIAL 1  NOT_RUN 4  UNDECLARED 0
-  P2 animacy        RUNS 0  PARTIAL 0  NOT_RUN 6  UNDECLARED 0
-     -> no stamped tool runs P2, even in part
-  P3 logic puzzle   RUNS 1  PARTIAL 0  NOT_RUN 5  UNDECLARED 0
-  P4 round trip     RUNS 1  PARTIAL 1  NOT_RUN 4  UNDECLARED 0
-  P5 evidentiality  RUNS 1  PARTIAL 3  NOT_RUN 2  UNDECLARED 0
+  P1 noun->verb     RUNS 1  PARTIAL 1  NOT_RUN 5  UNDECLARED 0
+  P2 animacy        RUNS 0  PARTIAL 1  NOT_RUN 6  UNDECLARED 0
+  P3 logic puzzle   RUNS 1  PARTIAL 0  NOT_RUN 6  UNDECLARED 0
+  P4 round trip     RUNS 1  PARTIAL 1  NOT_RUN 5  UNDECLARED 0
+  P5 evidentiality  RUNS 1  PARTIAL 3  NOT_RUN 3  UNDECLARED 0
 
   pass states are declarations (declared_by in each marker); only basis lines, hashes and the chain are checked here
 
-chain intact (6 lines)
+chain intact (8 lines)
 
+CURRENT       animacy-pass/dependency_check.py  sha 4988bf6ffd17  ran 2026-10-09T23:56:12Z  exit 0
+              how: for the thing a claim names, computes hop degree along a declared matter/energy prerequisite map and reports which prerequisites the claim names
+              cmd: python3 animacy-pass/dependency_check.py --selftest   -> checks: 12   failed: 0
+              P2 PARTIAL @ animacy-pass/dependency_check.py:58  (degree computed from a declared map; whether the claim accounts for each coupling is a word match)
 CURRENT       claim-record/record.py  sha 777a4a3bca49  ran 2026-10-09T23:31:36Z  exit 0
               how: seven-field claim record, no field optional; a sentinel must carry its reason; parents must resolve
               cmd: python3 claim-record/record.py --selftest   -> registered: days, sols, years

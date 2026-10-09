@@ -14271,9 +14271,20 @@ ship a `requirements.txt`. Each folder ships `samples/`.
     `path:line` basis that resolves, and PARTIAL needs a note naming the
     missing half. Pass states are declarations, not inferred from text.
     `check` reads CURRENT / STALE / MISSING by re-hashing. A tool that
-    edits its own file during the run gets no marker. Six tools stamped:
-    P2 is run by none of them, even in part. Check count printed by
-    `--selftest`.
+    edits its own file during the run gets no marker. Seven tools stamped:
+    of the first six, none ran P2 even in part, and the seventh,
+    `animacy-pass/dependency_check.py`, runs it in part. Check count
+    printed by `--selftest`.
+- `animacy-pass/` — The animacy pass from the operator's five-pass method,
+  as a dependency check. For the thing a claim names, it asks what matter
+  or energy is a prerequisite. Animacy here is degree of coupling, not
+  alive or dead. The prerequisite map is declared by someone who knows the
+  ground, and with no map the verdict is `UNDECLARED`. Degree is the hop
+  count along the map. Whether the claim names each prerequisite is a word
+  match: a paraphrase evades it, and a mention does not show the coupling
+  is accounted for. The verdict reads first degree only; deeper degrees
+  are reported per degree. The three demo cases are constructed and reach
+  all three verdicts. Check count printed by `--selftest`. Stdlib only, CC0.
 - `search-substitution/` — Three organisms that produce an answer without
   searching for it, priced against the search they do not perform. Physarum
   occupies the whole arena at once and prunes by throughput, so its cost

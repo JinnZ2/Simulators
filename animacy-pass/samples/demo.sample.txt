@@ -1,0 +1,44 @@
+== CONSTRUCTED -- written to show the leak
+claim : Our new data center is clean digital infrastructure that runs in the cloud.
+thing : data center
+verdict: FIRST_DEGREE_UNSTATED
+
+  degree prerequisite           kind       in the claim
+  1      cooling water          matter     UNSTATED
+  1      copper                 matter     UNSTATED
+  1      electricity            energy     UNSTATED
+  1      land                   matter     UNSTATED
+  2      coal                   energy     UNSTATED
+  2      mine                   matter     UNSTATED
+  2      natural gas            energy     UNSTATED
+  2      river                  matter     UNSTATED
+
+  degree 1: 0 of 4 named
+  degree 2: 0 of 4 named
+  (a mention is a word match: it does not show the coupling is accounted for, and a paraphrase evades it)
+
+== CONSTRUCTED -- same thing, coupling written in
+claim : The data center draws grid power from gas and coal plants, takes cooling water from the river, sits on 40 acres of land, and is wired with copper from an open-pit mine.
+thing : data center
+verdict: FIRST_DEGREE_NAMED
+
+  degree prerequisite           kind       in the claim
+  1      cooling water          UNDECLARED MENTIONED
+  1      copper                 UNDECLARED MENTIONED
+  1      electricity            UNDECLARED MENTIONED (as 'power')
+  1      land                   UNDECLARED MENTIONED
+  2      coal                   UNDECLARED MENTIONED
+  2      mine                   UNDECLARED MENTIONED
+  2      natural gas            UNDECLARED MENTIONED (as 'gas')
+  2      river                  UNDECLARED MENTIONED
+
+  degree 1: 4 of 4 named
+  degree 2: 4 of 4 named
+  (a mention is a word match: it does not show the coupling is accounted for, and a paraphrase evades it)
+
+== CONSTRUCTED -- no map supplied
+claim : The truck is just a machine.
+thing : truck
+verdict: UNDECLARED
+  no prerequisite map declared for the thing; an unmapped claim is not read as fully accounted
+
