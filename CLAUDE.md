@@ -14081,6 +14081,21 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `share_gap` registered in `tools/known_answer.py`. Check count printed by
   `python3 moving-mean-tracker/test_tracker.py`. Stdlib only, parses under
   3.9, CC0.
+- `grounded-work-stack/` — an outside deep-research report (Kimi) on four
+  couplings between a model and the floor it asserts about (unit/conservation
+  gates, pre-signal readers, latency in the joins, an anchored worker-correction
+  channel), landed verbatim with its four figures, plus `check.py` recomputing
+  what the report's own text supports. Holds: the 4.45 lbf->N factor, the
+  Asana 60/27/13 shares, the 70% alert cut, the I-PASS counts. Inside the
+  report: "nine workweeks" of 1.8 h/day needs an unstated 200-day year
+  (`GWS_004`); its "90-96%" override range excludes a 53% bar in its own fig3,
+  which also draws a 49-96% range as one 90% bar (`GWS_005`); one override rate
+  is read as physicians-right in section 5.3 and as a lost signal in section 9
+  (`GWS_006`); "four working examples" matches the section 5 table's count but
+  not the four names in the sentence (`GWS_008`). Each element maps to an
+  in-tree instrument by path, two only partly (`GWS_011`). 79 URLs carried, none
+  read. Check count printed by `python3 grounded-work-stack/test_check.py`.
+  Stdlib only, parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

@@ -1,0 +1,31 @@
+grounded-work-stack: readings of REPORT.md (verbatim, not edited)
+citations are carried, not read; fig3 values are a hand transcription
+
+GWS_001  HOLDS       line 29
+    lbf->N is 4.4482216152605; 4.45 +/- 0.005 contains it
+GWS_002  HOLDS       line 100
+    shares [60, 27, 13] sum to 100; hour losses [103, 209, 352] sum to 664, no total stated
+GWS_003  HOLDS       line 142
+    reduction 0.6952; stated 70% at whole-percent precision
+GWS_004  CONDITIONAL line 100
+    nine 40-h weeks of 1.8 h/day take 200 working days; a 250-day year gives 11.25 weeks. 1.8 h is 22.5% of an 8-h day, 20.0% of a 9-h day. The report states neither day count nor day length.
+GWS_005  TENSION     line 142
+    text states 90-96% at 3 sites; its own fig3 plots 1 bar(s) outside that range (Outpatient CDS overrides (Nanji et al. 2014) 53%) and draws the 49-96% meta-range as a single 90% bar, neither its midpoint 72.5 nor its top. fig3 values are a hand transcription.
+GWS_006  TENSION     line 216
+    line 142 reads the override stream as physicians usually right (7.3% of alerts appropriate; 7.3 and 92.4 sum to 99.7 because they have different denominators, alerts and responses). Line 216 lists 'the 96% overridden alert' among failures that 'did not lack the signal'. One override rate, two opposite readings.
+GWS_007  READING     line 214
+    '30%' occurs 9 times naming two quantities (share of malpractice claims; I-PASS reduction in preventable events). The conclusion reads a trial's reduction as where 'a third of the preventable harm lives'; a reduction from one intervention bounds that share from below and does not locate it. Section 4.1's own reading is the narrower one.
+GWS_008  TENSION     line 216
+    the section-5 table carries 4 rows with a working scale; the conclusion's sentence before 'four independent working examples' names four, of which 2 are working rows (NASA ASRS, Shadow-mode fleet learning). The count matches the table; the list does not.
+GWS_009  HOLDS       line 7
+    nine centers at lines [7, 96]; 10,740 admissions at 2 sites, fig3 agrees
+GWS_010  UNVERIFIED  whole report
+    79 distinct URLs over 64 hosts, none fetched (egress allowlist). 4 carry '2026' in the URL, including a page on a 1999 loss.
+GWS_011  RESOLVES    whole report
+    1 unit/conservation gates -> reasoning-gate/guards.json (present); 2 pre-signal readers -> tools/presignal_ledger.py (present); 3 latency in the joins -> reporting-chain-loss/hop_compose.py (present); 4 anchored correction channel -> return-path/return_path.py (present)
+
+cross-map readings:
+  1 unit/conservation gates: reasoning-gate/guards.json -- G-DIM voids a ratio across unlike objects; a unit check, not a conservation check
+  2 pre-signal readers: tools/presignal_ledger.py -- scores whether an early read preceded the event, against chance and a baseline
+  3 latency in the joins: reporting-chain-loss/hop_compose.py -- per-hop loss composed down a chain; information loss, not elapsed time
+  4 anchored correction channel: return-path/return_path.py -- four requirements on a correction channel, the set failed, never a score
