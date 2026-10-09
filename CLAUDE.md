@@ -14236,6 +14236,16 @@ ship a `requirements.txt`. Each folder ships `samples/`.
     `/OQ` / `/OR` tag only where the collision exists, so every
     single-document folder keeps its id, pinned in both directions
     plus a live-tree uniqueness check.
+  - `agree_router.py` + `tool_inventory.json` — given a `false_agree.py`
+    agree-set, lists the tools to run per bin in three tiers: PRIMARY (the
+    bin's own reason), TRIPWIRE (would show the bin mislabeled), ALSO
+    (everything else) — all claim tools run on every bin, the bin sets
+    order only. The inventory is 3469 modules across 81 reachable JinnZ2
+    repos (1446 claim tools), tagged by what each inspects from its
+    docstring; tags are model readings, nothing regenerates them, and 11
+    repos were not reachable. Primary rows also show tripwire tags, since a
+    tool can carry two jobs; DYNAMICS sets no bin's tier. `selftest` 35
+    checks, including that the role table matches `false_agree`'s bins.
 - `search-substitution/` — Three organisms that produce an answer without
   searching for it, priced against the search they do not perform. Physarum
   occupies the whole arena at once and prunes by throughput, so its cost
