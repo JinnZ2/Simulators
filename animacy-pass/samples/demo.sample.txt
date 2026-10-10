@@ -1,0 +1,75 @@
+== CONSTRUCTED -- derived from physics, no map supplied
+claim : Our new data center is clean digital infrastructure.
+thing : data center
+verdict: FIRST_DEGREE_UNSTATED
+derived from template 'data center': P_electric in = Q_heat out (compute dissipates its input as heat); hardware has mass and footprint
+
+  degree prerequisite           kind       map       in the claim
+  1      conductor              matter     DERIVED   UNSTATED
+  1      cooling                matter     DERIVED   UNSTATED
+  1      electricity            energy     DERIVED   UNSTATED
+  1      land                   matter     DERIVED   UNSTATED
+  2      cold sink              matter     DERIVED   UNSTATED
+  2      ore                    matter     DERIVED   UNSTATED
+  2      primary energy source  energy     DERIVED   UNSTATED
+  2      smelting energy        energy     DERIVED   UNSTATED
+  3      water                  matter     DERIVED   UNSTATED
+
+  degree 1: 0 of 4 named
+  degree 2: 0 of 4 named
+  degree 3: 0 of 1 named
+  (a mention is a word match: it does not show the coupling is accounted for, and a paraphrase evades it)
+
+== CONSTRUCTED -- same thing, coupling written in, no map
+claim : The data center draws grid electricity, rejects its heat through cooling water from the river, sits on 40 acres of land, and is wired with copper smelted from ore.
+thing : data center
+verdict: FIRST_DEGREE_NAMED
+derived from template 'data center': P_electric in = Q_heat out (compute dissipates its input as heat); hardware has mass and footprint
+
+  degree prerequisite           kind       map       in the claim
+  1      conductor              matter     DERIVED   MENTIONED (as 'copper')
+  1      cooling                matter     DERIVED   MENTIONED
+  1      electricity            energy     DERIVED   MENTIONED
+  1      land                   matter     DERIVED   MENTIONED
+  2      cold sink              matter     DERIVED   MENTIONED (as 'river')
+  2      ore                    matter     DERIVED   MENTIONED
+  2      primary energy source  energy     DERIVED   UNSTATED
+  2      smelting energy        energy     DERIVED   UNSTATED
+  3      water                  matter     DERIVED   MENTIONED
+
+  degree 1: 4 of 4 named
+  degree 2: 2 of 4 named
+  degree 3: 1 of 1 named
+  (a mention is a word match: it does not show the coupling is accounted for, and a paraphrase evades it)
+
+== CONSTRUCTED -- derived, augmented by a site-specific map
+claim : The data center runs on hydro power and cools with lake water.
+thing : data center
+verdict: FIRST_DEGREE_UNSTATED
+derived from template 'data center': P_electric in = Q_heat out (compute dissipates its input as heat); hardware has mass and footprint
+
+  degree prerequisite           kind       map       in the claim
+  1      conductor              matter     DERIVED   UNSTATED
+  1      cooling                matter     DERIVED   UNSTATED
+  1      electricity            energy     DERIVED   MENTIONED (as 'power')
+  1      land                   matter     DERIVED   UNSTATED
+  2      cold sink              matter     DERIVED   MENTIONED (as 'lake')
+  2      ore                    matter     DERIVED   UNSTATED
+  2      primary energy source  energy     DERIVED   MENTIONED (as 'hydro')
+  2      smelting energy        energy     DERIVED   UNSTATED
+  3      dam                    matter     DECLARED  UNSTATED
+  3      water                  matter     DERIVED   MENTIONED
+  4      river flow             energy     DECLARED  UNSTATED
+
+  degree 1: 1 of 4 named
+  degree 2: 2 of 4 named
+  degree 3: 1 of 2 named
+  degree 4: 0 of 1 named
+  (a mention is a word match: it does not show the coupling is accounted for, and a paraphrase evades it)
+
+== CONSTRUCTED -- no template, no map
+claim : The truck is just a machine.
+thing : truck
+verdict: UNDECLARED
+  no balance template and no supplied map for the thing; an unmapped claim is not read as fully accounted
+

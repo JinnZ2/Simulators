@@ -14271,9 +14271,42 @@ ship a `requirements.txt`. Each folder ships `samples/`.
     `path:line` basis that resolves, and PARTIAL needs a note naming the
     missing half. Pass states are declarations, not inferred from text.
     `check` reads CURRENT / STALE / MISSING by re-hashing. A tool that
-    edits its own file during the run gets no marker. Six tools stamped:
-    P2 is run by none of them, even in part. Check count printed by
-    `--selftest`.
+    edits its own file during the run gets no marker. Eight tools stamped:
+    of the first six, none ran P2 even in part. `animacy-pass/`'s
+    `dependency_check.py` and `unweld.py` run it in part. Check count
+    printed by `--selftest`.
+- `animacy-pass/` — The animacy pass from the operator's five-pass method,
+  as a dependency check. For the thing a claim names, it asks what matter
+  or energy is a prerequisite. Animacy here is degree of coupling, not
+  alive or dead. By default the prerequisite map is derived from physics.
+  `TEMPLATES` is a seed set of mass and energy balance templates, each
+  stating its balance, and `derive_map` walks them recursively. A supplied
+  map augments the derived one, for balances that cannot be closed from
+  standard inputs. Every prerequisite is tagged `DERIVED`, `DECLARED` or
+  `BOTH`. With neither a template nor a map the verdict is `UNDECLARED`.
+  Degree is the hop count along the map. Whether the claim names each prerequisite is a word
+  match: a paraphrase evades it, and a mention does not show the coupling
+  is accounted for. The verdict reads first degree only; deeper degrees
+  are reported per degree. The four demo cases are constructed and reach
+  all three verdicts, one derived with no map supplied. Check count printed by `--selftest`.
+  `unweld.py` takes welded evaluative claims (cheaper, efficient,
+  optimal, productive, better, scalable, clean). Each is one word fusing
+  buried terms. The check lists the terms each must declare (for
+  "cheaper": for whom, unit, boundary, time, inputs, outputs, compared to
+  what) and which are blank. The externality is the dependency chain
+  read backwards: `dependency_check.closure` checks every node the
+  balance requires (prerequisites and what each process produces)
+  against the stated boundary, and the unbooked nodes, tagged matter or
+  energy by the map, are the externality. There is no separate
+  mechanism. The verdicts are `GROUNDED`, `UNGROUNDED`
+  and `UNDETERMINED_NO_BALANCE`; the last is never read as grounded. In
+  the demo, one data center with identical physics is "cheap" with a
+  two-item boundary (`UNGROUNDED`, 11 of 13 nodes unaccounted, including
+  the copper's sulfur dioxide and tailings) and "expensive" with all 13
+  (`GROUNDED`), so the comparison returns
+  `LABEL_FLIPS_PHYSICS_IDENTICAL`. `unanimous()` encodes the operator's
+  standing challenge: a term earns its use only when every framing is
+  grounded and they agree on the label. Stdlib only, CC0.
 - `search-substitution/` — Three organisms that produce an answer without
   searching for it, priced against the search they do not perform. Physarum
   occupies the whole arena at once and prunes by throughput, so its cost
