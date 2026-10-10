@@ -43,3 +43,5 @@ claude/bin-self-test | tools/bin_self_test.md, tools/coupling_and_accumulation.m
 method-layer:claude/bin-self-test | tools/bin_self_test.md, tools/coupling_and_accumulation.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED method-layer#4 (1fb7f6f) | 2026-10-10
 claude/bin-self-test-fill | tools/bin_self_test.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD | 2026-10-10
 method-layer:claude/bin-self-test-fill | tools/bin_self_test.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD | 2026-10-10
+claude/bin-self-test-fill | tools/bin_self_test.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED #151 (04cd9f6) | 2026-10-10
+method-layer:claude/bin-self-test-fill | tools/bin_self_test.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED method-layer#5 (ecca94f) | 2026-10-10
