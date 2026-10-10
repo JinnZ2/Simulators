@@ -31,7 +31,7 @@ verdict: UNGROUNDED
     declared: for_whom, unit, boundary, time_span, inputs_counted, outputs_counted, compared_to
     BLANK   : -
   boundary: electricity, land
-  full balance for 'data center': 11 items
+  full balance for 'data center': 13 items
     conductor              matter  input  outside
     cooling                matter  input  outside
     electricity            energy  input  inside
@@ -43,7 +43,9 @@ verdict: UNGROUNDED
     water                  matter  input  outside
     waste heat             energy  output outside
     e-waste                matter  output outside
-  -> outside the stated boundary: conductor, cooling, cold sink, ore, primary energy source, smelting energy, water, waste heat, e-waste
+    sulfur dioxide         matter  output outside
+    tailings               matter  output outside
+  -> balance does not close inside the stated boundary; unaccounted: conductor [matter], cooling [matter], cold sink [matter], ore [matter], primary energy source [energy], smelting energy [energy], water [matter], waste heat [energy], e-waste [matter], sulfur dioxide [matter], tailings [matter]
 
 framing B (label 'expensive'):
 claim  : Running that data center there is expensive.
@@ -51,8 +53,8 @@ verdict: GROUNDED
   welded 'expensive' (cheaper): a cost comparison: who pays, in what unit, inside what boundary, over what time, counting which inputs and outputs, against what alternative
     declared: for_whom, unit, boundary, time_span, inputs_counted, outputs_counted, compared_to
     BLANK   : -
-  boundary: electricity, cooling, land, conductor, cold sink, ore, primary energy source, smelting energy, water, waste heat, e-waste
-  full balance for 'data center': 11 items
+  boundary: conductor, cooling, electricity, land, cold sink, ore, primary energy source, smelting energy, water, waste heat, e-waste, sulfur dioxide, tailings
+  full balance for 'data center': 13 items
     conductor              matter  input  inside
     cooling                matter  input  inside
     electricity            energy  input  inside
@@ -64,11 +66,13 @@ verdict: GROUNDED
     water                  matter  input  inside
     waste heat             energy  output inside
     e-waste                matter  output inside
+    sulfur dioxide         matter  output inside
+    tailings               matter  output inside
 
 comparison: LABEL_FLIPS_PHYSICS_IDENTICAL
   physical quantity, both framings: 1.2 GWh electricity per year, all leaving as heat
   counted only by A: -
-  counted only by B: cold sink, conductor, cooling, e-waste, ore, primary energy source, smelting energy, waste heat, water
+  counted only by B: cold sink, conductor, cooling, e-waste, ore, primary energy source, smelting energy, sulfur dioxide, tailings, waste heat, water
   the label moved with the boundary; the process and its balance did not
 
 standing challenge over these two framings: NOT_EARNED (1 of 2 framings not GROUNDED)

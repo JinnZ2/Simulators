@@ -13,6 +13,10 @@ energy the claim never names.
 
 `dependency_check.py` is stdlib only and CC0.
 
+- **Read backwards, the same map is the externality test.** Templates
+  also list what each process produces. `closure(thing, booked)` checks
+  every required node, inputs and outputs, against what a claim booked.
+  The unbooked nodes are the externality, tagged matter or energy.
 - **The map is derived from physics by default.** The prerequisites are
   whatever the thing's mass and energy balance needs in order to close:
   what has to happen for the equation to take place. `TEMPLATES` is a seed
@@ -71,18 +75,22 @@ For each welded term found in a claim, the check lists the buried terms
 it must declare. For "cheaper" these are for whom, in what unit, over what
 boundary, over what time, counting which inputs and which outputs, and
 compared to what. It reports which of those the claim's declarations fill
-and which are blank. For the named process it builds the **full balance**:
-every prerequisite `dependency_check` derives, plus the outputs the
-process has to put somewhere (a seed set). Anything in the full balance
-that the stated boundary leaves out is a candidate externality, the cost
-the word pushed outside its frame.
+and which are blank. It then reads the process's dependency chain **backwards, as a closure
+test** (`dependency_check.closure`). Every node the balance requires, both
+the derived prerequisites and what each process in the chain produces, is
+checked against the stated boundary. The required nodes left unbooked
+**are** the externality. It is not a separate mechanism: forward, the
+chain is what the thing needs; backward, it asks whether the claim
+accounted for all of it. Conservation guarantees the excluded matter and
+energy went somewhere, and each node keeps the matter or energy tag the
+map already carries.
 
 The verdicts:
 
-- `GROUNDED` means every buried term is declared and the full balance
-  falls inside the boundary.
-- `UNGROUNDED` means a buried term is blank, or a balance item lies
-  outside the boundary.
+- `GROUNDED` means every buried term is declared and the balance closes
+  inside the boundary.
+- `UNGROUNDED` means a buried term is blank, or the balance does not
+  close inside the boundary.
 - `UNDETERMINED_NO_BALANCE` means the terms are declared but there is no
   balance to check them against. This is never read as `GROUNDED`.
 - `NO_WELDED_TERM` means there was nothing to unweld.
@@ -91,9 +99,11 @@ The verdicts:
 balance. It does not say the label is true.
 
 The demo runs one data center under two framings, with the same 1.2 GWh a
-year and the same 11-item balance. Framing A counts electricity and land
-and calls it **cheap**: `UNGROUNDED`, with nine items outside. Framing B
-counts all eleven and calls it **expensive**: `GROUNDED`. The comparison
+year and the same 13-node balance. Read backwards, that balance includes
+the sulfur dioxide and tailings from refining its copper. Framing A counts
+electricity and land and calls it **cheap**: `UNGROUNDED`, with 11 nodes
+unaccounted. Framing B counts all 13 and calls it **expensive**:
+`GROUNDED`. The comparison
 returns `LABEL_FLIPS_PHYSICS_IDENTICAL`.
 
 **Standing challenge (the operator's).** If something can be found that
@@ -104,7 +114,7 @@ only when every framing supplied is `GROUNDED` and they all carry the same
 label.
 
 **Limit.** A filled buried term is a declaration. The tool checks for
-blanks and for balance items outside the boundary. It does not adjudicate
+blanks and for balance nodes the boundary leaves unbooked. It does not adjudicate
 the real-world numbers. It matches boundary items to balance items by name
 or alias, so a different word for the same input is reported as outside.
 The demo cases are CONSTRUCTED. See `samples/unweld.sample.txt`.

@@ -33,18 +33,19 @@ What the check does:
      DECLARATIONS fill or leave blank. A declaration is a field the
      claimant supplies -- this is the CSV row every headline should come
      with. The tool does not read buried terms out of prose.
-  3. For the named process, builds the full balance: every prerequisite
-     dependency_check.derive_map derives (all degrees), plus the outputs
-     the process must put somewhere (OUTPUTS, a seed set). Anything in the
-     full balance not covered by the declared boundary is a CANDIDATE
-     EXTERNALITY.
+  3. Reads the process's dependency chain BACKWARDS as a closure test
+     (dependency_check.closure): every node its balance requires -- the
+     derived prerequisites and what each process produces -- is checked
+     against the declared boundary. The required-but-unbooked nodes ARE
+     the externality, already tagged matter or energy by the map. Not a
+     separate mechanism: the same equation, asked "did you close it".
 
 Verdict:
   NO_WELDED_TERM           nothing to unweld
   GROUNDED                 every buried term declared, boundary stated,
                            and the full balance falls inside the boundary
-  UNGROUNDED               a buried term is blank, and/or a balance item
-                           falls outside the boundary (reasons listed)
+  UNGROUNDED               a buried term is blank, and/or the dependency
+                           balance does not close within the stated boundary
   UNDETERMINED_NO_BALANCE  terms declared but no balance for the process,
                            so what the boundary leaves out cannot be checked
                            -- never read as GROUNDED
@@ -126,17 +127,6 @@ WELDED = {
     },
 }
 
-# Outputs a process must put somewhere (mass and energy leave it). SEED SET.
-OUTPUTS = {
-    "data center": [("waste heat", "energy"), ("e-waste", "matter")],
-    "combustion": [("carbon dioxide", "matter"), ("water vapor", "matter"),
-                   ("heat", "energy")],
-    "thermal power": [("rejected heat", "energy"),
-                      ("carbon dioxide", "matter")],
-    "conductor": [("sulfur dioxide", "matter"), ("tailings", "matter")],
-}
-
-
 def find_terms(claim):
     """[(welded_key, form_matched)] in order of first appearance."""
     text = claim.lower()
@@ -153,34 +143,6 @@ def find_terms(claim):
 
 def _blank(v):
     return v is None or (isinstance(v, str) and not v.strip()) or v == []
-
-
-def full_balance(process, extra=None):
-    """[(item, kind, role)] -- all derived prerequisites and outputs."""
-    dmap = dc.derive_map(process) if process else {}
-    if not dmap and not extra:
-        return None
-    kinds = dc.derived_kinds(dmap)
-    items = []
-    if dmap:
-        for name, _deg in sorted(dc.degrees(process, dmap).items(),
-                                 key=lambda x: (x[1], x[0])):
-            items.append((name, kinds.get(name, "UNDECLARED"), "input"))
-        key = dc._template_for(process)
-        for name, kind in OUTPUTS.get(key, []):
-            items.append((name, kind, "output"))
-    for name, kind, role in (extra or []):
-        if name not in [i[0] for i in items]:
-            items.append((name, kind, role))
-    return items
-
-
-def covered(item, boundary):
-    names = {b.lower().strip() for b in boundary}
-    if item.lower() in names:
-        return True
-    al = dc.derived_aliases([item]).get(item, [])
-    return any(a.lower() in names for a in al)
 
 
 def unweld(case):
@@ -201,14 +163,18 @@ def unweld(case):
     boundary = decl.get("boundary") or []
     if isinstance(boundary, str):
         boundary = [boundary]
-    balance = full_balance(case.get("process"), case.get("extra_balance"))
-    outside = None
-    if balance is not None:
-        outside = [(n, k, r) for n, k, r in balance
-                   if not covered(n, boundary)]
+    # The externality is the dependency chain read backwards: every node the
+    # process's balance requires, checked against what the claim booked.
+    clo = dc.closure(case.get("process"), boundary)
+    balance = outside = None
+    if clo is not None:
+        balance = [(n, k, r) for n, k, r, _ in clo["required"]]
+        outside = [(n, k, r) for n, k, r, _ in clo["unaccounted"]]
         if outside and boundary:
-            reasons.append("outside the stated boundary: %s"
-                           % ", ".join(n for n, _, _ in outside))
+            reasons.append("balance does not close inside the stated "
+                           "boundary; unaccounted: %s"
+                           % ", ".join("%s [%s]" % (n, k)
+                                       for n, k, _ in outside))
     if reasons:
         verdict = "UNGROUNDED"
     elif balance is None:
@@ -313,9 +279,7 @@ def render_terms():
 
 # ---------------------------------------------------------------- demo
 
-_FULL_DC = ["electricity", "cooling", "land", "conductor", "cold sink",
-            "ore", "primary energy source", "smelting energy", "water",
-            "waste heat", "e-waste"]
+_FULL_DC = [n for n, _, _, _ in dc.required_nodes("data center")]
 
 FLIP_A = {
     "label_used": "cheap",
@@ -339,7 +303,7 @@ FLIP_B = {
                  "unit": "joules and kilograms",
                  "boundary": _FULL_DC,
                  "time_span": "hardware lifetime, ten years",
-                 "inputs_counted": "all eleven balance items",
+                 "inputs_counted": "every node the balance requires",
                  "outputs_counted": "waste heat into the river, e-waste",
                  "compared_to": "not building it"},
 }
@@ -382,7 +346,7 @@ def selftest():
 
     ra = unweld(FLIP_A)
     ok(ra["verdict"] == "UNGROUNDED", "narrow boundary UNGROUNDED")
-    ok(any("outside the stated boundary" in x for x in ra["reasons"]),
+    ok(any("does not close" in x for x in ra["reasons"]),
        "UNGROUNDED by externality")
     outs = [o[0] for o in ra["outside"]]
     ok("waste heat" in outs and "cooling" in outs, "pushed-out costs named")
@@ -392,7 +356,12 @@ def selftest():
     rb = unweld(FLIP_B)
     ok(rb["verdict"] == "GROUNDED" and rb["outside"] == [],
        "full boundary GROUNDED")
-    ok(covered("conductor", ["copper"]), "boundary alias covers balance item")
+    ok(dc.accounted_for("conductor", ["copper"]),
+       "boundary alias covers a required node")
+    ok(all(k in ("matter", "energy") for _, k, _ in ra["outside"]),
+       "externalities tagged matter/energy by the map, not re-tagged")
+    ok(not hasattr(sys.modules[__name__], "OUTPUTS"),
+       "no parallel output list: outputs live in the dependency map")
 
     cmp = compare_framings(FLIP_A, FLIP_B)
     ok(cmp["state"] == "LABEL_FLIPS_PHYSICS_IDENTICAL", "flip detected")

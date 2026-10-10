@@ -35,6 +35,11 @@ dependency map. So the default is to DERIVE the map:
     template edges), DECLARED (only by supplied edges), or BOTH.
   * A thing with neither a template nor a supplied map returns UNDECLARED,
     never "fully accounted for".
+  * READ BACKWARDS the same map is the externality test. Templates also
+    list what each process "produces" (outputs that must go somewhere).
+    closure(thing, booked) checks every required node -- inputs and
+    outputs -- against what a claim booked; whatever is required and not
+    booked is the externality, already tagged matter or energy.
 
 What is mechanical and what is not:
   * Degree is computed: hops from the thing along the map, breadth-first.
@@ -85,6 +90,8 @@ TEMPLATES = {
         "requires": [("fuel", "matter"), ("oxidizer", "matter"),
                      ("ignition energy", "energy")],
         "aliases": ["burning", "fire"],
+        "produces": [("carbon dioxide", "matter"), ("water vapor", "matter"),
+                     ("heat", "energy")],
     },
     "electricity": {
         "balance": "first law: electrical energy delivered = energy "
@@ -100,6 +107,7 @@ TEMPLATES = {
         "requires": [("combustion", "energy"), ("cold sink", "matter"),
                      ("conductor", "matter")],
         "aliases": ["power plant", "coal plant", "gas plant"],
+        "produces": [("rejected heat", "energy")],
     },
     "data center": {
         "balance": "P_electric in = Q_heat out (compute dissipates its "
@@ -107,6 +115,7 @@ TEMPLATES = {
         "requires": [("electricity", "energy"), ("cooling", "matter"),
                      ("land", "matter"), ("conductor", "matter")],
         "aliases": ["datacenter", "server farm", "the cloud"],
+        "produces": [("waste heat", "energy"), ("e-waste", "matter")],
     },
     "cooling": {
         "balance": "heat removed = mass flow x heat capacity x temperature "
@@ -119,6 +128,7 @@ TEMPLATES = {
                    "from ore is an energy input (e.g. Cu2S + O2 -> 2Cu + SO2)",
         "requires": [("ore", "matter"), ("smelting energy", "energy")],
         "aliases": ["copper", "wire", "wiring", "aluminum"],
+        "produces": [("sulfur dioxide", "matter"), ("tailings", "matter")],
     },
     "cold sink": {
         "balance": "a sink absorbs rejected heat; water or air at a lower "
@@ -179,6 +189,56 @@ def derived_aliases(names):
         if key:
             al[n] = [key] + list(TEMPLATES[key].get("aliases", []))
     return al
+
+
+def required_nodes(thing):
+    """Every node the thing's balance requires, from the derived map:
+    [(name, kind, role, degree)]. Inputs are the derived prerequisites at
+    their hop degree. Outputs are what each reached template "produces" --
+    mass and energy that leave and must go somewhere -- at the degree of
+    the node producing them (the thing itself is degree 0). None if no
+    template matches."""
+    dmap = derive_map(thing) if thing else {}
+    if not dmap:
+        return None
+    kinds = derived_kinds(dmap)
+    deg = degrees(thing, dmap)
+    out = [(n, kinds.get(n, "UNDECLARED"), "input", d)
+           for n, d in sorted(deg.items(), key=lambda x: (x[1], x[0]))]
+    seen = {n for n, _, _, _ in out}
+    producers = [(thing, 0)] + sorted(deg.items(), key=lambda x: (x[1], x[0]))
+    for node, d in producers:
+        key = _template_for(node)
+        for name, kind in (TEMPLATES[key].get("produces", []) if key else []):
+            if name not in seen:
+                seen.add(name)
+                out.append((name, kind, "output", d))
+    return out
+
+
+def accounted_for(name, booked):
+    """True if the booked list names this node or one of its aliases."""
+    names = {b.lower().strip() for b in booked}
+    if name.lower() in names:
+        return True
+    return any(a.lower() in names
+               for a in derived_aliases([name]).get(name, []))
+
+
+def closure(thing, booked):
+    """The dependency chain read BACKWARDS. Forward: what the thing's
+    balance requires. Backward: has the claim booked every required node?
+    Whatever is required and not booked is the externality -- conservation
+    says it did not vanish, it left the frame. Each node keeps the
+    matter/energy kind the map already carries, so externalities come out
+    tagged. None if there is no derived map (cannot be checked; never read
+    as closing)."""
+    req = required_nodes(thing)
+    if req is None:
+        return None
+    booked = list(booked or [])
+    unacc = [r for r in req if not accounted_for(r[0], booked)]
+    return {"required": req, "unaccounted": unacc, "closes": not unacc}
 
 
 # ---------------------------------------------------------------- the pass
@@ -397,6 +457,23 @@ def selftest():
     ok(r["by_degree"][2] == (0, 1), "second degree reported, not in verdict")
     r = check({"claim": "", "thing": "t", "deps": {"t": ["a"], "x": ["y"]}})
     ok(r["unreachable"] == ["x", "y"], "unreachable declared nodes listed")
+
+    # closure: the chain read backwards
+    req = required_nodes("data center")
+    ok(req is not None and ("waste heat", "energy", "output", 0) in req,
+       "thing's own outputs required at degree 0")
+    ok(("tailings", "matter", "output", 1) in req,
+       "a prerequisite's outputs required at its degree")
+    c = closure("data center", ["electricity", "land"])
+    ok(not c["closes"] and ("cooling", "matter", "input", 1)
+       in c["unaccounted"], "narrow booking does not close; kind carried")
+    ok(closure("data center", [r[0] for r in req])["closes"],
+       "booking every required node closes")
+    ok(closure("data center", ["copper"])["unaccounted"][0][0] != "conductor"
+       and not any(u[0] == "conductor" for u in
+                   closure("data center", ["copper"])["unaccounted"]),
+       "an alias books the node")
+    ok(closure("truck", ["x"]) is None, "no map: None, never closes")
 
     v = [check(c)["verdict"] for c in DEMO]
     ok(v == ["FIRST_DEGREE_UNSTATED", "FIRST_DEGREE_NAMED",

@@ -14293,13 +14293,17 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   optimal, productive, better, scalable, clean). Each is one word fusing
   buried terms. The check lists the terms each must declare (for
   "cheaper": for whom, unit, boundary, time, inputs, outputs, compared to
-  what) and which are blank. It builds the process's full balance from
-  the derived prerequisites plus a seed set of outputs, and flags what the
-  stated boundary leaves out. The verdicts are `GROUNDED`, `UNGROUNDED`
+  what) and which are blank. The externality is the dependency chain
+  read backwards: `dependency_check.closure` checks every node the
+  balance requires (prerequisites and what each process produces)
+  against the stated boundary, and the unbooked nodes, tagged matter or
+  energy by the map, are the externality. There is no separate
+  mechanism. The verdicts are `GROUNDED`, `UNGROUNDED`
   and `UNDETERMINED_NO_BALANCE`; the last is never read as grounded. In
   the demo, one data center with identical physics is "cheap" with a
-  two-item boundary (`UNGROUNDED`, nine items outside) and "expensive"
-  with the full eleven (`GROUNDED`), so the comparison returns
+  two-item boundary (`UNGROUNDED`, 11 of 13 nodes unaccounted, including
+  the copper's sulfur dioxide and tailings) and "expensive" with all 13
+  (`GROUNDED`), so the comparison returns
   `LABEL_FLIPS_PHYSICS_IDENTICAL`. `unanimous()` encodes the operator's
   standing challenge: a term earns its use only when every framing is
   grounded and they agree on the label. Stdlib only, CC0.

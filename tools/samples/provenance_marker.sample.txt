@@ -24,17 +24,17 @@ passes per tool, latest marker (R runs, p partial, . not run, ? undeclared)
 
   pass states are declarations (declared_by in each marker); only basis lines, hashes and the chain are checked here
 
-chain intact (10 lines)
+chain intact (12 lines)
 
-CURRENT       animacy-pass/dependency_check.py  sha c122ab111716  ran 2026-10-10T00:01:43Z  exit 0
-              how: derives the thing's matter/energy prerequisite map from balance templates (a supplied map augments it), computes hop degree, and reports which prerequisites the claim names
-              cmd: python3 animacy-pass/dependency_check.py --selftest   -> checks: 29   failed: 0
-              P2 PARTIAL @ animacy-pass/dependency_check.py:143  (degree derived from a seed set of balance templates; whether the claim accounts for each coupling is a word match)
-CURRENT       animacy-pass/unweld.py  sha 388f97dee9ac  ran 2026-10-10T00:14:30Z  exit 0
-              how: finds welded evaluative terms (cheaper, efficient, optimal, ...), lists the buried terms each must declare, and flags balance items the stated boundary leaves out
-              cmd: python3 animacy-pass/unweld.py --selftest   -> checks: 27   failed: 0
-              P1 RUNS @ animacy-pass/unweld.py:77
-              P2 PARTIAL @ animacy-pass/unweld.py:158  (full balance from a seed set of templates and outputs; boundary coverage is a name/alias match)
+CURRENT       animacy-pass/dependency_check.py  sha 1baeeab15309  ran 2026-10-10T00:16:40Z  exit 0
+              how: derives the thing's matter/energy prerequisite map from balance templates (a supplied map augments it); forward it lists what is required, backward (closure) it lists what a claim left unbooked
+              cmd: python3 animacy-pass/dependency_check.py --selftest   -> checks: 35   failed: 0
+              P2 PARTIAL @ animacy-pass/dependency_check.py:153  (degree and closure from a seed set of balance templates; whether a claim accounts for a node is a name/alias match)
+CURRENT       animacy-pass/unweld.py  sha 3a12b6d1ea57  ran 2026-10-10T00:16:40Z  exit 0
+              how: finds welded evaluative terms, lists the buried terms each must declare, and runs the process's dependency chain backwards as a closure test against the stated boundary
+              cmd: python3 animacy-pass/unweld.py --selftest   -> checks: 29   failed: 0
+              P1 RUNS @ animacy-pass/unweld.py:78
+              P2 PARTIAL @ animacy-pass/unweld.py:148  (closure via dependency_check on a seed set of templates; boundary coverage is a name/alias match)
 CURRENT       claim-record/record.py  sha 777a4a3bca49  ran 2026-10-09T23:31:36Z  exit 0
               how: seven-field claim record, no field optional; a sentinel must carry its reason; parents must resolve
               cmd: python3 claim-record/record.py --selftest   -> registered: days, sols, years
