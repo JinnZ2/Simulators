@@ -1,0 +1,54 @@
+passes per tool, latest marker (R runs, p partial, . not run, ? undeclared)
+
+  P1  noun->verb     exact condition + temporal scope
+  P2  animacy        relation both ways; coupled thing written as inert
+  P3  logic puzzle   entailment: quantifier, middle term
+  P4  round trip     every predicate place filled
+  P5  evidentiality  witnessed / inferred / reported
+
+  tool                                         P1 P2 P3 P4 P5  marker
+  claim-record/record.py                        R   .   .   R   p   CURRENT
+  grounded-work-stack/check.py                  .   .   .   p   p   CURRENT
+  move-set/move_set_sim_v2.py                   .   .   .   .   R   CURRENT
+  nonidentity-census/t1_verb_first.py           p   .   .   .   .   CURRENT
+  tools/conditional_claims.py                   .   .   R   .   .   CURRENT
+  tools/sourced.py                              .   .   .   .   p   CURRENT
+
+  P1 noun->verb     RUNS 1  PARTIAL 1  NOT_RUN 4  UNDECLARED 0
+  P2 animacy        RUNS 0  PARTIAL 0  NOT_RUN 6  UNDECLARED 0
+     -> no stamped tool runs P2, even in part
+  P3 logic puzzle   RUNS 1  PARTIAL 0  NOT_RUN 5  UNDECLARED 0
+  P4 round trip     RUNS 1  PARTIAL 1  NOT_RUN 4  UNDECLARED 0
+  P5 evidentiality  RUNS 1  PARTIAL 3  NOT_RUN 2  UNDECLARED 0
+
+  pass states are declarations (declared_by in each marker); only basis lines, hashes and the chain are checked here
+
+chain intact (6 lines)
+
+CURRENT       claim-record/record.py  sha 777a4a3bca49  ran 2026-10-09T23:31:36Z  exit 0
+              how: seven-field claim record, no field optional; a sentinel must carry its reason; parents must resolve
+              cmd: python3 claim-record/record.py --selftest   -> registered: days, sols, years
+              P1 RUNS @ claim-record/record.py:59
+              P4 RUNS @ claim-record/record.py:260
+              P5 PARTIAL @ claim-record/record.py:301  (requires instrument and derivation parents; no witnessed/inferred/reported grade)
+CURRENT       grounded-work-stack/check.py  sha 8a00870438c6  ran 2026-10-09T23:31:37Z  exit 0
+              how: recomputes the Kimi report's own figures from its text; a quoted figure not in the text raises
+              cmd: python3 grounded-work-stack/test_check.py   -> checks: 33   failed: 0
+              P4 PARTIAL @ grounded-work-stack/check.py:95  (finds one unstated variable (a 200-day year) by recomputation; does not round-trip predicates)
+              P5 PARTIAL @ grounded-work-stack/check.py:61  (requires the quote to be present; no evidential grade)
+CURRENT       move-set/move_set_sim_v2.py  sha 8eb0a640e33f  ran 2026-10-09T23:31:36Z  exit 0
+              how: every ledger entry checked against the artifact as QUOTE (sliced), DERIVED (recomputed) or ABSENT (span searched)
+              cmd: python3 move-set/test_move_set_v2.py   -> checks 157   failed 0
+              P5 RUNS @ move-set/move_set_sim_v2.py:218
+CURRENT       nonidentity-census/t1_verb_first.py  sha 4c7f2ba39267  ran 2026-10-09T23:31:36Z  exit 0
+              how: rewrites the main claim verb-first; a claim that needs a bearer supplied is identity-bearing, one that reads without is process
+              cmd: python3 nonidentity-census/t1_verb_first.py --selftest   -> SELFTEST PASS (0 checks failed)
+              P1 PARTIAL @ nonidentity-census/t1_verb_first.py:7  (fronts the verb; does not force the condition or the temporal scope)
+CURRENT       tools/conditional_claims.py  sha 947ab6935153  ran 2026-10-09T23:31:36Z  exit 0
+              how: parses IF/THEN/AND/OR/NOT over bracketed atoms; full truth table names the collapse when a restatement changes the logic
+              cmd: python3 tools/conditional_claims.py selftest   -> SELFTEST OK
+              P3 RUNS @ tools/conditional_claims.py:163
+CURRENT       tools/sourced.py  sha 2d26e764a17e  ran 2026-10-09T23:31:36Z  exit 0
+              how: value + literal source text + locator span travel together; anything short of all three is UNRATED
+              cmd: python3 tools/sourced.py --selftest   -> checks: 41   failed: 0
+              P5 PARTIAL @ tools/sourced.py:180  (binds a value to its source span; has no witnessed/inferred/reported grade)
