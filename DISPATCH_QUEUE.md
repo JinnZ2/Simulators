@@ -39,3 +39,5 @@ claude/human-sensing-prior | UNKNOWN | — | NOT_FOUND under this name; claude/h
 claude/dispatch-queue | DISPATCH_QUEUE.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED #145 (03cd312); line appended via claude/dispatch-queue-145 | 2026-10-10
 claude/bin-self-test | tools/bin_self_test.md, tools/coupling_and_accumulation.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD | 2026-10-10
 method-layer:claude/bin-self-test | tools/bin_self_test.md, tools/coupling_and_accumulation.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD | 2026-10-10
+claude/bin-self-test | tools/bin_self_test.md, tools/coupling_and_accumulation.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED #148 (3e18eb0) | 2026-10-10
+method-layer:claude/bin-self-test | tools/bin_self_test.md, tools/coupling_and_accumulation.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED method-layer#4 (1fb7f6f) | 2026-10-10
