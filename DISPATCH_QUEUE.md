@@ -36,3 +36,4 @@ claude/baseline-by-id | UNKNOWN | — | MERGED #119 (0a04bea); no remote branch 
 claude/sense-as-match | UNKNOWN | — | NOT_FOUND under this name; claude/repin-sense-as-match tip 948f508 in main | 2026-10-10
 claude/coinage-log-status-split | UNKNOWN | — | MERGED #121 (59b71f8); no remote branch | 2026-10-10
 claude/human-sensing-prior | UNKNOWN | — | NOT_FOUND under this name; claude/human-sensing-prior-cc0-cbm411 tip 9202714 open, not in main | 2026-10-10
+claude/dispatch-queue | DISPATCH_QUEUE.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED #145 (03cd312); line appended via claude/dispatch-queue-145 | 2026-10-10
