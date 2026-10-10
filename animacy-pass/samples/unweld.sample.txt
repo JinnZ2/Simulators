@@ -1,0 +1,74 @@
+== CONSTRUCTED -- welded term, nothing declared
+claim  : Remote compute is cheaper and more efficient.
+verdict: UNGROUNDED
+  welded 'cheaper' (cheaper): a cost comparison: who pays, in what unit, inside what boundary, over what time, counting which inputs and outputs, against what alternative
+    declared: -
+    BLANK   : for_whom, unit, boundary, time_span, inputs_counted, outputs_counted, compared_to
+  welded 'more efficient' (efficient): a ratio output/input: both quantities with units, and the boundary they are counted across
+    declared: -
+    BLANK   : output_quantity, input_quantity, boundary, time_span
+  boundary: (none)
+  balance : none for process None -- what the boundary leaves out cannot be checked
+  -> 'cheaper' leaves blank: for_whom, unit, boundary, time_span, inputs_counted, outputs_counted, compared_to
+  -> 'more efficient' leaves blank: output_quantity, input_quantity, boundary, time_span
+
+== CONSTRUCTED -- terms declared, no balance for the process
+claim  : The new rota is more efficient.
+verdict: UNDETERMINED_NO_BALANCE
+  welded 'more efficient' (efficient): a ratio output/input: both quantities with units, and the boundary they are counted across
+    declared: output_quantity, input_quantity, boundary, time_span
+    BLANK   : -
+  boundary: one ward
+  balance : none for process 'staff rota' -- what the boundary leaves out cannot be checked
+
+== CONSTRUCTED -- the expensive/cheap flip
+SAME PROCESS, TWO FRAMINGS
+
+framing A (label 'cheap'):
+claim  : Running our data center here is cheap.
+verdict: UNGROUNDED
+  welded 'cheap' (cheaper): a cost comparison: who pays, in what unit, inside what boundary, over what time, counting which inputs and outputs, against what alternative
+    declared: for_whom, unit, boundary, time_span, inputs_counted, outputs_counted, compared_to
+    BLANK   : -
+  boundary: electricity, land
+  full balance for 'data center': 11 items
+    conductor              matter  input  outside
+    cooling                matter  input  outside
+    electricity            energy  input  inside
+    land                   matter  input  inside
+    cold sink              matter  input  outside
+    ore                    matter  input  outside
+    primary energy source  energy  input  outside
+    smelting energy        energy  input  outside
+    water                  matter  input  outside
+    waste heat             energy  output outside
+    e-waste                matter  output outside
+  -> outside the stated boundary: conductor, cooling, cold sink, ore, primary energy source, smelting energy, water, waste heat, e-waste
+
+framing B (label 'expensive'):
+claim  : Running that data center there is expensive.
+verdict: GROUNDED
+  welded 'expensive' (cheaper): a cost comparison: who pays, in what unit, inside what boundary, over what time, counting which inputs and outputs, against what alternative
+    declared: for_whom, unit, boundary, time_span, inputs_counted, outputs_counted, compared_to
+    BLANK   : -
+  boundary: electricity, cooling, land, conductor, cold sink, ore, primary energy source, smelting energy, water, waste heat, e-waste
+  full balance for 'data center': 11 items
+    conductor              matter  input  inside
+    cooling                matter  input  inside
+    electricity            energy  input  inside
+    land                   matter  input  inside
+    cold sink              matter  input  inside
+    ore                    matter  input  inside
+    primary energy source  energy  input  inside
+    smelting energy        energy  input  inside
+    water                  matter  input  inside
+    waste heat             energy  output inside
+    e-waste                matter  output inside
+
+comparison: LABEL_FLIPS_PHYSICS_IDENTICAL
+  physical quantity, both framings: 1.2 GWh electricity per year, all leaving as heat
+  counted only by A: -
+  counted only by B: cold sink, conductor, cooling, e-waste, ore, primary energy source, smelting energy, waste heat, water
+  the label moved with the boundary; the process and its balance did not
+
+standing challenge over these two framings: NOT_EARNED (1 of 2 framings not GROUNDED)

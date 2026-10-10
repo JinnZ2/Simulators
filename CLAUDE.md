@@ -14271,9 +14271,9 @@ ship a `requirements.txt`. Each folder ships `samples/`.
     `path:line` basis that resolves, and PARTIAL needs a note naming the
     missing half. Pass states are declarations, not inferred from text.
     `check` reads CURRENT / STALE / MISSING by re-hashing. A tool that
-    edits its own file during the run gets no marker. Seven tools stamped:
-    of the first six, none ran P2 even in part, and the seventh,
-    `animacy-pass/dependency_check.py`, runs it in part. Check count
+    edits its own file during the run gets no marker. Eight tools stamped:
+    of the first six, none ran P2 even in part. `animacy-pass/`'s
+    `dependency_check.py` and `unweld.py` run it in part. Check count
     printed by `--selftest`.
 - `animacy-pass/` — The animacy pass from the operator's five-pass method,
   as a dependency check. For the thing a claim names, it asks what matter
@@ -14288,7 +14288,21 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   match: a paraphrase evades it, and a mention does not show the coupling
   is accounted for. The verdict reads first degree only; deeper degrees
   are reported per degree. The four demo cases are constructed and reach
-  all three verdicts, one derived with no map supplied. Check count printed by `--selftest`. Stdlib only, CC0.
+  all three verdicts, one derived with no map supplied. Check count printed by `--selftest`.
+  `unweld.py` takes welded evaluative claims (cheaper, efficient,
+  optimal, productive, better, scalable, clean). Each is one word fusing
+  buried terms. The check lists the terms each must declare (for
+  "cheaper": for whom, unit, boundary, time, inputs, outputs, compared to
+  what) and which are blank. It builds the process's full balance from
+  the derived prerequisites plus a seed set of outputs, and flags what the
+  stated boundary leaves out. The verdicts are `GROUNDED`, `UNGROUNDED`
+  and `UNDETERMINED_NO_BALANCE`; the last is never read as grounded. In
+  the demo, one data center with identical physics is "cheap" with a
+  two-item boundary (`UNGROUNDED`, nine items outside) and "expensive"
+  with the full eleven (`GROUNDED`), so the comparison returns
+  `LABEL_FLIPS_PHYSICS_IDENTICAL`. `unanimous()` encodes the operator's
+  standing challenge: a term earns its use only when every framing is
+  grounded and they agree on the label. Stdlib only, CC0.
 - `search-substitution/` — Three organisms that produce an answer without
   searching for it, priced against the search they do not perform. Physarum
   occupies the whole arena at once and prunes by throughput, so its cost

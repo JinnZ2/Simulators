@@ -56,3 +56,60 @@ To run:
     python3 dependency_check.py --templates
     python3 dependency_check.py CASE.json
     python3 dependency_check.py --selftest
+
+## unweld.py -- welded evaluative claims
+
+"Cheaper", "efficient", "optimal", "productive", "better", "scalable" and
+"clean" are **welded claims**. Each is one word fusing several buried
+terms, asserted as if it were one physical fact. The proof that they are
+not physical is that the identical process spending identical matter and
+energy can be called "expensive" by one company and "cheap" by another.
+The label is a property of the framing, so it has to be grounded to a
+common variable before it stands.
+
+For each welded term found in a claim, the check lists the buried terms
+it must declare. For "cheaper" these are for whom, in what unit, over what
+boundary, over what time, counting which inputs and which outputs, and
+compared to what. It reports which of those the claim's declarations fill
+and which are blank. For the named process it builds the **full balance**:
+every prerequisite `dependency_check` derives, plus the outputs the
+process has to put somewhere (a seed set). Anything in the full balance
+that the stated boundary leaves out is a candidate externality, the cost
+the word pushed outside its frame.
+
+The verdicts:
+
+- `GROUNDED` means every buried term is declared and the full balance
+  falls inside the boundary.
+- `UNGROUNDED` means a buried term is blank, or a balance item lies
+  outside the boundary.
+- `UNDETERMINED_NO_BALANCE` means the terms are declared but there is no
+  balance to check them against. This is never read as `GROUNDED`.
+- `NO_WELDED_TERM` means there was nothing to unweld.
+
+`GROUNDED` says the declarations are complete and the boundary covers the
+balance. It does not say the label is true.
+
+The demo runs one data center under two framings, with the same 1.2 GWh a
+year and the same 11-item balance. Framing A counts electricity and land
+and calls it **cheap**: `UNGROUNDED`, with nine items outside. Framing B
+counts all eleven and calls it **expensive**: `GROUNDED`. The comparison
+returns `LABEL_FLIPS_PHYSICS_IDENTICAL`.
+
+**Standing challenge (the operator's).** If something can be found that
+is unanimously cheaper, more efficient or optimal across every framing,
+staying grounded and keeping one label wherever the boundary is drawn,
+the term earns its use. `unanimous()` is that test. It returns `EARNED`
+only when every framing supplied is `GROUNDED` and they all carry the same
+label.
+
+**Limit.** A filled buried term is a declaration. The tool checks for
+blanks and for balance items outside the boundary. It does not adjudicate
+the real-world numbers. It matches boundary items to balance items by name
+or alias, so a different word for the same input is reported as outside.
+The demo cases are CONSTRUCTED. See `samples/unweld.sample.txt`.
+
+    python3 unweld.py --demo
+    python3 unweld.py --terms
+    python3 unweld.py CASE.json
+    python3 unweld.py --selftest

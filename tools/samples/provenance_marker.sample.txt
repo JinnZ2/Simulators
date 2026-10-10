@@ -8,6 +8,7 @@ passes per tool, latest marker (R runs, p partial, . not run, ? undeclared)
 
   tool                                         P1 P2 P3 P4 P5  marker
   animacy-pass/dependency_check.py              .   p   .   .   .   CURRENT
+  animacy-pass/unweld.py                        R   p   .   .   .   CURRENT
   claim-record/record.py                        R   .   .   R   p   CURRENT
   grounded-work-stack/check.py                  .   .   .   p   p   CURRENT
   move-set/move_set_sim_v2.py                   .   .   .   .   R   CURRENT
@@ -15,20 +16,25 @@ passes per tool, latest marker (R runs, p partial, . not run, ? undeclared)
   tools/conditional_claims.py                   .   .   R   .   .   CURRENT
   tools/sourced.py                              .   .   .   .   p   CURRENT
 
-  P1 noun->verb     RUNS 1  PARTIAL 1  NOT_RUN 5  UNDECLARED 0
-  P2 animacy        RUNS 0  PARTIAL 1  NOT_RUN 6  UNDECLARED 0
-  P3 logic puzzle   RUNS 1  PARTIAL 0  NOT_RUN 6  UNDECLARED 0
-  P4 round trip     RUNS 1  PARTIAL 1  NOT_RUN 5  UNDECLARED 0
-  P5 evidentiality  RUNS 1  PARTIAL 3  NOT_RUN 3  UNDECLARED 0
+  P1 noun->verb     RUNS 2  PARTIAL 1  NOT_RUN 5  UNDECLARED 0
+  P2 animacy        RUNS 0  PARTIAL 2  NOT_RUN 6  UNDECLARED 0
+  P3 logic puzzle   RUNS 1  PARTIAL 0  NOT_RUN 7  UNDECLARED 0
+  P4 round trip     RUNS 1  PARTIAL 1  NOT_RUN 6  UNDECLARED 0
+  P5 evidentiality  RUNS 1  PARTIAL 3  NOT_RUN 4  UNDECLARED 0
 
   pass states are declarations (declared_by in each marker); only basis lines, hashes and the chain are checked here
 
-chain intact (9 lines)
+chain intact (10 lines)
 
 CURRENT       animacy-pass/dependency_check.py  sha c122ab111716  ran 2026-10-10T00:01:43Z  exit 0
               how: derives the thing's matter/energy prerequisite map from balance templates (a supplied map augments it), computes hop degree, and reports which prerequisites the claim names
               cmd: python3 animacy-pass/dependency_check.py --selftest   -> checks: 29   failed: 0
               P2 PARTIAL @ animacy-pass/dependency_check.py:143  (degree derived from a seed set of balance templates; whether the claim accounts for each coupling is a word match)
+CURRENT       animacy-pass/unweld.py  sha 388f97dee9ac  ran 2026-10-10T00:14:30Z  exit 0
+              how: finds welded evaluative terms (cheaper, efficient, optimal, ...), lists the buried terms each must declare, and flags balance items the stated boundary leaves out
+              cmd: python3 animacy-pass/unweld.py --selftest   -> checks: 27   failed: 0
+              P1 RUNS @ animacy-pass/unweld.py:77
+              P2 PARTIAL @ animacy-pass/unweld.py:158  (full balance from a seed set of templates and outputs; boundary coverage is a name/alias match)
 CURRENT       claim-record/record.py  sha 777a4a3bca49  ran 2026-10-09T23:31:36Z  exit 0
               how: seven-field claim record, no field optional; a sentinel must carry its reason; parents must resolve
               cmd: python3 claim-record/record.py --selftest   -> registered: days, sols, years
