@@ -8,19 +8,23 @@ and boundary checks).
 
 This is a WORKED SPECIMEN of the isolation ledger, not a new law.
 
+Tags: OBSERVED = stated in a source; DERIVED = follows from what is
+stated here; PROPOSED = a reading not yet backed by a cited instance.
+
 ## 1. Principle
 
-Landauer's principle gives a real, tested minimum energy to erase one
-bit:
+[OBSERVED] Landauer: the minimum energy to erase one bit is kT ln 2,
+about 3e-21 J at room temperature. It was confirmed experimentally
+(Berut et al., Nature 2012).
 
-    kT ln 2  =  1.380649e-23 J/K x 300 K x 0.6931
-             =  2.87e-21 J per bit, about 3e-21 J at room temperature
+    kT ln 2 = 1.380649e-23 J/K x 300 K x 0.6931
+            = 2.87e-21 J = 17.9 meV        (recomputed here)
 
 It is an EQUILIBRIUM, quasi-static bound: the cost in the slow limit, at
 thermal equilibrium with the bath.
 
-It was imported into computer-science theory as if it were the cost to
-RUN computation. It is not.
+[PROPOSED] It gets used in CS energy-complexity reasoning as if it were
+the cost to RUN computation. Citation for specific misuse cases OWED.
 
 ## 2. The welded word: "cost"
 
@@ -29,73 +33,67 @@ One word, three referents:
     1. equilibrium floor     kT ln 2 per bit; slow limit, isolated bit
     2. actual run cost       what a real far-from-equilibrium machine
                              dissipates
-    3. in-principle bound    the lowest cost for a given computation
+    3. in-principle bound    the lower bound for a given whole computation
 
-The floor's authority (it is a real theorem) gets borrowed to anchor the
-run-cost claim.
+[DERIVED] The floor's authority (a real, tested theorem) gets borrowed
+to anchor the run-cost claim.
 
 ## 3. The isolation error
 
-The floor prices a single bit erased slowly, at equilibrium. Real
-computation holds the system far from equilibrium, drives it hard, and
-pays continuously to keep it there.
+[DERIVED] The floor prices one bit erased slowly, at equilibrium. Real
+computation is a coupled system driven fast and far from equilibrium,
+paying continuously to stay there. This is the same move as the
+thermos: true for a thing that is not real (the infinitely slow
+computer), false for every actual one.
 
-This is the same move as the thermos: true for a thing that is not real
-(the infinitely slow computer), false for every actual one.
+## 4. The gap, measured: the housekeeping term
 
-## 4. The gap, measured
+    [OBSERVED] 1970s transistor:    ~1e9 x the floor
+    [OBSERVED] current transistors: ~1e6 x the floor
+                                    (pJ to fJ per operation vs ~3e-21 J)
+    [OBSERVED] one first-principles estimate puts maximum CMOS
+               efficiency ~200x better than current chips, so even the
+               projected CMOS ceiling sits far above the floor
 
-This is the housekeeping cost, quantified. Ratios are actual dissipation
-per bit operation over the floor, carried as relayed and not checked
-here:
-
-    1970s silicon      ~1e9 x the floor
-    current CMOS       ~1e6 x the floor
-    3 nm (2025)        ~1e2 x the floor
-
-The sources name the gap as:
+[OBSERVED] Sources name the gap:
 
     parasitic resistance
-    capacitive switching losses
+    capacitive switching
     charge / discharge
     voltage overhead
+    interconnect
+    leakage
 
-All four are the price of running off equilibrium. The gap IS the
-housekeeping term (axis 3, THE HOLD) from the isolation ledger.
+[DERIVED] These are the costs of running off equilibrium: the
+housekeeping term (axis 3, THE HOLD) of the isolation ledger.
 
-## 5. Confessed in the literature: the keystone
+## 5. Keystone: stated in the literature
 
-There is a bound for the single bit in isolation (Landauer) and NO bound
-for the system as a whole while it runs. The field explicitly wishes for
-a Carnot-style limit for whole computers and states that it does not
-exist.
+[OBSERVED] A chapter on the minimum energy of computing states that
+there are no theoretical results characterizing the maximum efficiency
+of a computing system as a whole, and that a Carnot-style limit for
+computers would be important. A bound exists for the isolated bit; none
+exists for the coupled running system.
 
-That missing result is the wall. The coupled-system number cannot be
-obtained by pricing one decoupled component at equilibrium.
+[DERIVED] That missing result is the wall. The coupled-system number
+cannot be obtained by pricing one decoupled component at equilibrium.
 
-## 6. Checks applied (isolation ledger, four checks)
+## 6. Propagation note
 
-    1. boundary   one bit, cut out of the machine that holds it
-    2. lift       the energy that holds the machine far from equilibrium
-                  is not in the floor
-    3. hold       the continuous dissipation (section 4) is the uninvoiced
-                  term
-    4. observer   the readout and clocking that make the bit usable are
-                  couplings, not neutral
+[PROPOSED] A real theorem with the wrong scope is carried by its
+authority, so nobody checks which limit it lives in. This is the second
+propagation specimen, next to the isolated-system definition in
+`tools/uncounted_observer_isolation.md`.
 
-## 7. Propagation note
+OWED:
 
-A real theorem with the wrong scope was imported from the corpus and
-built on for years, until a correction had to be published (stochastic
-thermodynamics of computation). It travels because the floor LOOKS
-authoritative, so nobody checks which limit it lives in.
-
-This is the second documented propagation specimen, alongside the
-isolated-system definition in `tools/uncounted_observer_isolation.md`.
+    1. specific papers that use the floor as the run cost
+    2. the stochastic-thermodynamics-of-computation correction
+       literature (Wolpert et al.; verify before citing)
 
 ## Provenance
 
 Co-authored, written from a worked session. The kT ln 2 arithmetic is
-recomputed here; the gap ratios and literature statements are carried as
-relayed, not checked against sources. A split into smaller files is
-permitted if this one runs long.
+recomputed here. Sources tagged OBSERVED are carried as relayed and were
+not re-read in this render. A split into smaller files is permitted if
+this one runs long.
