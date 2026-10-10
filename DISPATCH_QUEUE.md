@@ -49,3 +49,5 @@ claude/uncounted-observer | tools/uncounted_observer_isolation.md | session_01Y4
 method-layer:claude/uncounted-observer | tools/uncounted_observer_isolation.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD | 2026-10-10
 claude/uncounted-observer | tools/uncounted_observer_isolation.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED #154 (795403e) | 2026-10-10
 method-layer:claude/uncounted-observer | tools/uncounted_observer_isolation.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED method-layer#6 (4692249) | 2026-10-10
+claude/contested-area | tools/contested_area_hidden_assumption.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD | 2026-10-10
+method-layer:claude/contested-area | tools/contested_area_hidden_assumption.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD | 2026-10-10
