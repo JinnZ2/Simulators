@@ -23,12 +23,12 @@ passes per tool, latest marker (R runs, p partial, . not run, ? undeclared)
 
   pass states are declarations (declared_by in each marker); only basis lines, hashes and the chain are checked here
 
-chain intact (8 lines)
+chain intact (9 lines)
 
-CURRENT       animacy-pass/dependency_check.py  sha 4988bf6ffd17  ran 2026-10-09T23:56:12Z  exit 0
-              how: for the thing a claim names, computes hop degree along a declared matter/energy prerequisite map and reports which prerequisites the claim names
-              cmd: python3 animacy-pass/dependency_check.py --selftest   -> checks: 12   failed: 0
-              P2 PARTIAL @ animacy-pass/dependency_check.py:58  (degree computed from a declared map; whether the claim accounts for each coupling is a word match)
+CURRENT       animacy-pass/dependency_check.py  sha c122ab111716  ran 2026-10-10T00:01:43Z  exit 0
+              how: derives the thing's matter/energy prerequisite map from balance templates (a supplied map augments it), computes hop degree, and reports which prerequisites the claim names
+              cmd: python3 animacy-pass/dependency_check.py --selftest   -> checks: 29   failed: 0
+              P2 PARTIAL @ animacy-pass/dependency_check.py:143  (degree derived from a seed set of balance templates; whether the claim accounts for each coupling is a word match)
 CURRENT       claim-record/record.py  sha 777a4a3bca49  ran 2026-10-09T23:31:36Z  exit 0
               how: seven-field claim record, no field optional; a sentinel must carry its reason; parents must resolve
               cmd: python3 claim-record/record.py --selftest   -> registered: days, sols, years

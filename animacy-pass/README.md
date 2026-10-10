@@ -13,9 +13,24 @@ energy the claim never names.
 
 `dependency_check.py` is stdlib only and CC0.
 
-- **The map is declared.** The prerequisite map comes from whoever knows
-  the ground, and the tool invents none. A claim with no map returns
-  `UNDECLARED`, never "fully accounted for".
+- **The map is derived from physics by default.** The prerequisites are
+  whatever the thing's mass and energy balance needs in order to close:
+  what has to happen for the equation to take place. `TEMPLATES` is a seed
+  set of balance templates, and each states its balance (for example,
+  data center: electrical power in equals heat out, and the hardware has
+  mass and a footprint). `derive_map` walks them recursively. A
+  prerequisite with more than one physical route, such as electricity from
+  heat, from falling water or from light, gets the route-independent
+  requirement (a primary energy source), not one route picked for it. A
+  prerequisite with no template of its own is a leaf. Run `--templates` to
+  list the set.
+- **A supplied map augments the derived one.** Use it for things whose
+  balance cannot be closed from standard inputs, such as site-conditioned
+  material or a worked process off the corpus. `"replace_derived": true`
+  uses the supplied map alone. Every prerequisite shows whether its place
+  in the map is `DERIVED`, `DECLARED` or `BOTH`. A thing with neither a
+  template nor a supplied map returns `UNDECLARED`, never "fully accounted
+  for".
 - **Degree is computed.** Degree is the hop count from the thing along the
   declared edges, found breadth-first. Cycles are allowed.
 - **Naming is a word match.** It searches with word boundaries over each
@@ -26,13 +41,18 @@ energy the claim never names.
   folded into the verdict. A degree with no prerequisites reads "none
   declared", not zero.
 
-The three demo cases are CONSTRUCTED: a data-center claim that names none
-of its eight declared prerequisites, the same thing with the couplings
-written in, and a claim with no map. See `samples/demo.sample.txt`. Nothing
+The four demo cases are CONSTRUCTED:
+
+- A data-center claim derived purely from physics, with no map supplied.
+  It names none of its nine prerequisites.
+- The same thing with the couplings written in.
+- A derived map augmented with a site-specific hydro chain.
+- A thing with neither a template nor a map. See `samples/demo.sample.txt`. Nothing
 here is a measurement of any real facility.
 
 To run:
 
     python3 dependency_check.py --demo
+    python3 dependency_check.py --templates
     python3 dependency_check.py CASE.json
     python3 dependency_check.py --selftest

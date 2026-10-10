@@ -14278,13 +14278,17 @@ ship a `requirements.txt`. Each folder ships `samples/`.
 - `animacy-pass/` — The animacy pass from the operator's five-pass method,
   as a dependency check. For the thing a claim names, it asks what matter
   or energy is a prerequisite. Animacy here is degree of coupling, not
-  alive or dead. The prerequisite map is declared by someone who knows the
-  ground, and with no map the verdict is `UNDECLARED`. Degree is the hop
-  count along the map. Whether the claim names each prerequisite is a word
+  alive or dead. By default the prerequisite map is derived from physics.
+  `TEMPLATES` is a seed set of mass and energy balance templates, each
+  stating its balance, and `derive_map` walks them recursively. A supplied
+  map augments the derived one, for balances that cannot be closed from
+  standard inputs. Every prerequisite is tagged `DERIVED`, `DECLARED` or
+  `BOTH`. With neither a template nor a map the verdict is `UNDECLARED`.
+  Degree is the hop count along the map. Whether the claim names each prerequisite is a word
   match: a paraphrase evades it, and a mention does not show the coupling
   is accounted for. The verdict reads first degree only; deeper degrees
-  are reported per degree. The three demo cases are constructed and reach
-  all three verdicts. Check count printed by `--selftest`. Stdlib only, CC0.
+  are reported per degree. The four demo cases are constructed and reach
+  all three verdicts, one derived with no map supplied. Check count printed by `--selftest`. Stdlib only, CC0.
 - `search-substitution/` — Three organisms that produce an answer without
   searching for it, priced against the search they do not perform. Physarum
   occupies the whole arena at once and prunes by throughput, so its cost
