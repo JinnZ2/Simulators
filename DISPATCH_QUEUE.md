@@ -55,3 +55,5 @@ claude/contested-area | tools/contested_area_hidden_assumption.md | session_01Y4
 method-layer:claude/contested-area | tools/contested_area_hidden_assumption.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED method-layer#7 (259d49b) | 2026-10-10
 claude/landauer-floor | tools/landauer_floor_vs_run_cost.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD | 2026-10-10
 method-layer:claude/landauer-floor | tools/landauer_floor_vs_run_cost.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD | 2026-10-10
+claude/landauer-floor | tools/landauer_floor_vs_run_cost.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED #160 (b4c2032) | 2026-10-10
+method-layer:claude/landauer-floor | tools/landauer_floor_vs_run_cost.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED method-layer#8 (a23f074) | 2026-10-10
