@@ -65,3 +65,5 @@ claude/landauer-floor-tags | tools/landauer_floor_vs_run_cost.md | session_01Y4z
 method-layer:claude/landauer-floor-tags | tools/landauer_floor_vs_run_cost.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED method-layer#9 (46c4859) | 2026-10-10
 claude/contested-area-observed | tools/contested_area_hidden_assumption.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED #164 (6bda958) | 2026-10-10
 method-layer:claude/contested-area-observed | tools/contested_area_hidden_assumption.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED method-layer#10 (29a845a) | 2026-10-10
+claude/natural-two-senses | tools/natural_two_senses.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD | 2026-10-10
+method-layer:claude/natural-two-senses | tools/natural_two_senses.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD | 2026-10-10
