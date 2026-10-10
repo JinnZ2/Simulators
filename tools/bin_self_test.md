@@ -149,11 +149,44 @@ Flip ("depth along the shared axis"): if the trades share constraints,
 breadth is repeated practice of the same constraints under different
 boundary conditions.
 
+#### scope-stripped title
+
+"Master <trade>" is a credential tag with the SCOPE removed.
+
+Field record, carried as relayed: after a code change, an RV pole box
+install needed certification. About 100 calls, mostly to master
+electricians, reached zero who did that grade; one was found two hours
+away. Licensed masters self-reported "not my specialty". Pole, wall,
+farm and industrial work is near-identical physics; the dividing line
+is administrative. The scarcity comes from administration, not from
+competence.
+
+Falsifiable, runnable by anyone or by a model:
+
+    (a) call 400 licensed plumbers about one specific architect's
+        industrial detailing;
+    (b) call 500 garages off any listing about one specific older or
+        classic vehicle;
+    count who self-scopes out.
+
+Model self-audit: a model that says "call a master X" routes by a map
+it never checked against the territory, and the territory is a phone
+call away.
+
+Specialist credit: a regional specialist's depth is real. "Couple to
+the region" bundles soil, detailing, conditions AND the social fit with
+specific clients. The social fit is the least transferable part. The
+title is scoped to a RELATIONSHIP.
+
 ### four-trade physics-first proof
 
 The procedure that tests the previous bin rather than asserting the flip:
 
-    1. Take four trades T1..T4.
+    1. Take four trades:
+         T1 plumbing
+         T2 electrical
+         T3 masonry
+         T4 diesel / fuel systems
     2. For each, list its working failure modes (what goes wrong on the job).
     3. Map each failure mode to the physics that governs it
        (energy balance, heat transfer, stress in material, fluid flow, ...).
@@ -166,10 +199,111 @@ disjointness the map refutes. If the map is many-to-many, the bin
 survives Check 2 for that set of trades. Either outcome is a result;
 the bin is not assumed in either direction.
 
+#### worked run
+
+T1 plumbing: no worked run supplied.
+
+T2 electrical.
+    Case:      480V delta service; control gear overheating.
+    Governing: harmonics.
+    Diagnose:  read the waveform SHAPE on an analog scope.
+    Fix:       move the gear off that box onto its own breaker, and
+               condition it on the same phase.
+
+T3 masonry.
+    Case:      Portland mortar in soft limestone. The joints are harder
+               than the stone, so the stone erodes out from behind the
+               joints.
+    Governing: relative hardness and moisture transport.
+    Fix:       lime/clay plus sand mix, de-acidified. The joint is
+               SACRIFICIAL: designed to fail before the unit.
+
+T4 diesel / fuel systems.
+    Case:      milky diesel.
+    Sequence:  by cost x spread.
+               1. Check the fuel first; contamination spreads.
+               2. On newer engines, run electronic diagnosis.
+               3. Split AIR from WATER:
+                  AIR:   froth from a suction-side leak; bounded.
+                  WATER: no lubricity at rail pressure; galling;
+                         possible teardown.
+    Governing: lubricity under pressure.
+
+Governing constraints across the three worked trades:
+
+    impedance / energy dissipation           (T2)
+    relative hardness + moisture transport   (T3)
+    lubricity / pressure                     (T4)
+
+Many failure modes map to few constraints. Map result: many-to-few.
+
+Scope: this shows the method transfers. It does NOT claim to match a
+deep specialist at their single grade.
+
+### idealistic
+
+Deletes: the mechanism. A stated physical constraint is read as a wish.
+Usually carried: the constraint, stated.
+Flip ("constraint-stated"): test the constraint, not the motive.
+
+### grandiose
+
+Deletes: the scope. Cross-domain reach is read as a claim of rank.
+Usually carried: the domains the claim was tested in, named.
+Flip ("range, not rank"): reach across domains says how far a method
+carries, not where its holder stands.
+
+### mystic
+
+Deletes: the observation. Anything without a current mechanism gets
+binned.
+Case: Semmelweis - handwashing reduced deaths before germ theory
+supplied the mechanism.
+Flip ("observed, mechanism pending"): an observation without a
+mechanism is an open mechanism, not a closed observation.
+
+### culture-as-museum-piece
+
+Deletes: the engineering. A practice is read as custom.
+Usually carried: what the practice does and what failed without it.
+Flip ("procedure with failure record"): read the practice as a
+procedure with failure records behind it, and ask which failure it
+prevents.
+
+### relational-as-social-only
+
+Deletes: the physical coupling. "Relational" is read as interpersonal.
+Usually carried: a coupling through material, heat, water or load.
+Frost heave is the floor refusing to be deleted: ground, water and
+temperature coupled, lifting what was built as if they were separate.
+Flip ("coupling, any substrate"): read "relational" as coupling, in
+whatever substrate the message names.
+
+### emotion-separation
+
+Deletes: the partition test. The bin assumes reason and emotion are
+separable, which has never been shown (cf. Damasio).
+Usually carried: emotions used as coupled sensor and consolidation
+channels.
+Flip ("one coupled instrument"): treat the report as one instrument
+with coupled channels; do not discard a channel on a partition that
+was never demonstrated.
+
+### efficient / deficient
+
+Deletes: the GOAL. Efficiency is a ratio against a NAMED goal. The lens
+supplies its own goal silently. Across a frame gap the label measures
+the distance to the lens's goal and reports it as a defect in the
+thing.
+Worked: one-finger phone input while driving is "deficient" against
+characters per minute and OPTIMAL against minimum manual footprint at
+the wheel. Same act, opposite label; only the unstated goal moved.
+Rule: name the goal and check whose it is. If the purpose is in
+dispute, the label cannot apply.
+
 ## Provenance
 
 Rendered from a relayed summary of a longer source that was not
-available to this render. Specimen bodies expand one-line names from the
-relay. Where the source carried specifics the relay did not (for
-example, which four trades the proof used), they are left as
-placeholders, not supplied.
+available to this render. T1..T4 and specimens below supplied in a
+follow-up relay. Where the source carried specifics no relay supplied
+(for example, a worked run for T1), they are left out, not invented.
