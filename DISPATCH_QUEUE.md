@@ -69,3 +69,5 @@ claude/natural-two-senses | tools/natural_two_senses.md | session_01Y4zVdoRHPDHp
 method-layer:claude/natural-two-senses | tools/natural_two_senses.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD | 2026-10-10
 claude/natural-two-senses | tools/natural_two_senses.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED #167 (aeb5a4b) | 2026-10-10
 method-layer:claude/natural-two-senses | tools/natural_two_senses.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED method-layer#11 (c24f353) | 2026-10-10
+claude/natural-two-senses-coupling | tools/natural_two_senses.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD | 2026-10-10
+method-layer:claude/natural-two-senses-coupling | tools/natural_two_senses.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD | 2026-10-10
