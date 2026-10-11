@@ -75,3 +75,5 @@ claude/natural-two-senses-coupling | tools/natural_two_senses.md | session_01Y4z
 method-layer:claude/natural-two-senses-coupling | tools/natural_two_senses.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED method-layer#12 (79bd44c) | 2026-10-10
 claude/held-tie-bin-slack | tools/held_tie_precision.md, tools/bin_slack_conservation.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD | 2026-10-11
 method-layer:claude/held-tie-bin-slack | tools/held_tie_precision.md, tools/bin_slack_conservation.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD | 2026-10-11
+claude/held-tie-bin-slack | tools/held_tie_precision.md, tools/bin_slack_conservation.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED #173 (6491f1e) | 2026-10-11
+method-layer:claude/held-tie-bin-slack | tools/held_tie_precision.md, tools/bin_slack_conservation.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED method-layer#13 (1ac1a8c) | 2026-10-11
