@@ -90,3 +90,4 @@ claude/funnel-governance-source | memory-archive/funnel-governance-precursor-mat
 claude/funnel-governance-source | memory-archive/funnel-governance-precursor-match.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED #188 (954ec1c; merge 61bc726) | 2026-10-12
 claude/corpus-as-sample-source | memory-archive/corpus-as-sample-not-reality.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD (awaiting 8 chunks) | 2026-10-12
 claude/corpus-as-sample-source | memory-archive/corpus-as-sample-not-reality.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED #191 (3ff325d; merge 7b374c4) | 2026-10-12
+claude/cross-layer-step-register-source | memory-archive/cross-layer-step-register.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD (awaiting 8 chunks) | 2026-10-12
