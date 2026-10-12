@@ -87,3 +87,4 @@ claude/human-sensing-prior-cc0-cbm411 | human-sensing-prior/*, CLAUDE.md, README
 claude/no-anchor-source | memory-archive/no-anchor-information-mismanagement.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD (awaiting 8 chunks) | 2026-10-12
 claude/no-anchor-source | memory-archive/no-anchor-information-mismanagement.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED #185 (258895c; merge d4e66ff) | 2026-10-12
 claude/funnel-governance-source | memory-archive/funnel-governance-precursor-match.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD (awaiting 7 chunks) | 2026-10-12
+claude/funnel-governance-source | memory-archive/funnel-governance-precursor-match.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED #188 (954ec1c; merge 61bc726) | 2026-10-12
