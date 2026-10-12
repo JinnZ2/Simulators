@@ -86,3 +86,4 @@ claude/coinage-log-source | coinage-log/source/coinage-log.full.md, coinage-log/
 claude/human-sensing-prior-cc0-cbm411 | human-sensing-prior/*, CLAUDE.md, README.md, notes/queue/HOLDS.md | session_01U4mRsfZAdaV1xWBmZSRbjK | MERGED #182 (e71df2c); amendment 4 | 2026-10-12
 claude/no-anchor-source | memory-archive/no-anchor-information-mismanagement.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD (awaiting 8 chunks) | 2026-10-12
 claude/no-anchor-source | memory-archive/no-anchor-information-mismanagement.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED #185 (258895c; merge d4e66ff) | 2026-10-12
+claude/funnel-governance-source | memory-archive/funnel-governance-precursor-match.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD (awaiting 7 chunks) | 2026-10-12
