@@ -16,10 +16,15 @@
 #   6  the STATUS split of the memory file /topics/coinage-log.md
 #      (coinage-log.md = File A, coined terms; vocabulary-gap-slots.md =
 #      File B, unnamed slots / failure points / status fields) is in the
-#      state MISSING_SOURCE.md declares: 0 of ~46.9k chars received, every
-#      chunk MISSING_SOURCE, File A empty, File B holding only the one
-#      entry seeded byte-identical from COINAGE_LOG.md. These checks PIN
-#      the unreceived state; a chunk arriving turns them red on purpose.
+#      state MISSING_SOURCE.md declares. Until 2026-10-11 that state was
+#      0 chars received and every chunk MISSING_SOURCE, and the checks
+#      pinned it; the source then arrived in 7 verified chunks and the
+#      checks now pin the RECEIVED state instead: the landed file
+#      source/coinage-log.full.md is 47474 bytes with the stated sha256,
+#      the manifest's 7 rows are all RECEIVED and sum to that size, and
+#      each row's sha256[:16] recomputes from the file at its offsets.
+#      File A and File B did not move in that landing (entries are not
+#      split into them yet), so their checks still read the seeded state.
 # It does not decide whether any word is genuinely missing or merely
 # unsearched -- that is the log's open question, not the checker's.
 
@@ -33,8 +38,12 @@ LOG = os.path.join(HERE, "COINAGE_LOG.md")
 FILE_A = os.path.join(HERE, "coinage-log.md")
 FILE_B = os.path.join(HERE, "vocabulary-gap-slots.md")
 MANIFEST = os.path.join(HERE, "MISSING_SOURCE.md")
-SOURCE_CHARS_APPROX = 46900      # operator-stated, not measured here
-EXPORT_CAP = 8000                # operator-stated
+SOURCE_CHARS_APPROX = 46900      # operator-stated estimate, superseded
+EXPORT_CAP = 8000                # operator-stated; the 6-chunk estimate
+SOURCE = os.path.join(HERE, "source", "coinage-log.full.md")
+SOURCE_BYTES = 47474             # measured on the landed file
+SOURCE_SHA256 = ("4822118f1f8bac45667f4fa2652e0c4b18bf4f2f"
+                 "2376ff7adf46a749d28b6757")
 
 # the five terms the entry says fail, each with the reason it gives
 REJECTED = {
@@ -174,16 +183,20 @@ def split_state():
     this checks the files SAY so, it does not supply the count."""
     present = {k: os.path.exists(v) for k, v in
                (("file_a", FILE_A), ("file_b", FILE_B),
-                ("manifest", MANIFEST))}
+                ("manifest", MANIFEST), ("source", SOURCE))}
     if not all(present.values()):
         return {"present": present}
     a, b, m = _txt(FILE_A), _txt(FILE_B), _txt(MANIFEST)
     fa, fb = _frontmatter(a), _frontmatter(b)
     keys = ("name", "description", "sources", "aliases")
-    rows = re.findall(r"(?m)^\|\s*(\d+)\s*\|[^|]*\|\s*(\S+)\s*\|"
-                      r"[^|]*\|\s*(\d+)\s*\|", m)
-    expected_chunks = -(-SOURCE_CHARS_APPROX // EXPORT_CAP)
+    # | chunk | bytes | sha256[:16] | status | received |
+    rows = re.findall(r"(?m)^\|\s*(\d+)\s*\|\s*(\d+)\s*\|\s*([0-9a-f]{16})"
+                      r"\s*\|\s*(\S+)\s*\|\s*(\d+)\s*\|", m)
+    estimated_chunks = -(-SOURCE_CHARS_APPROX // EXPORT_CAP)
     seed_b, seed_log = _entry_001(b), _entry_001(_read())
+    src = io.open(SOURCE, "rb").read() if present["source"] else b""
+    import hashlib
+    src_sha = hashlib.sha256(src).hexdigest() if src else None
     return {
         "present": present,
         "a_frontmatter_complete": all(fa.get(k) for k in keys),
@@ -203,14 +216,36 @@ def split_state():
         "seed_provenance_not_chunk1":
             "NOT chunk 1" in fb.get("sources", ""),
         "chunk_rows": len(rows),
-        "expected_chunks": expected_chunks,
-        "all_rows_missing":
-            bool(rows) and all(st == "MISSING_SOURCE" for _, st, _ in rows),
-        "received_total": sum(int(r) for _, _, r in rows),
-        "received_line_zero": "**Received:** 0 of" in m,
+        "estimated_chunks": estimated_chunks,
+        "all_rows_received":
+            bool(rows) and all(st == "RECEIVED" for _, _, _, st, _ in rows),
+        "received_total": sum(int(r) for _, _, _, _, r in rows),
+        "bytes_total": sum(int(b_) for _, b_, _, _, _ in rows),
+        "received_line_full":
+            "**Received:** %d of %d bytes" % (SOURCE_BYTES, SOURCE_BYTES) in m,
+        "source_bytes": len(src),
+        "source_sha256": src_sha,
+        "manifest_states_sha": SOURCE_SHA256 in m,
+        "chunk_hashes_match": _chunk_hashes_ok(src, rows),
         "no_reconstruction_declared":
             "No entry is reconstructed" in m,
     }
+
+
+def _chunk_hashes_ok(src, rows):
+    """Recompute each manifest row's sha256[:16] from the landed file at
+    the cumulative byte offsets the rows' byte counts imply. Reads the
+    file and the table; supplies no number of its own."""
+    import hashlib
+    if not rows or not src:
+        return False
+    off = 0
+    for _, b_, h16, _, _ in rows:
+        n = int(b_)
+        if hashlib.sha256(src[off:off + n]).hexdigest()[:16] != h16:
+            return False
+        off += n
+    return off == len(src)
 
 
 def render():
@@ -273,11 +308,17 @@ def render():
              sp["seed_identical_to_render"]))
         w("   seed provenance says NOT chunk 1: %s"
           % sp["seed_provenance_not_chunk1"])
-        w("   chunks: %d rows (expected %d), all MISSING_SOURCE %s,"
-          % (sp["chunk_rows"], sp["expected_chunks"],
-             sp["all_rows_missing"]))
-        w("   received %d chars; no reconstruction declared %s"
-          % (sp["received_total"], sp["no_reconstruction_declared"]))
+        w("   chunks: %d rows (6 was the superseded estimate), all"
+          " RECEIVED %s," % (sp["chunk_rows"], sp["all_rows_received"]))
+        w("   received %d of %d bytes (table); landed file %d bytes;"
+          % (sp["received_total"], sp["bytes_total"], sp["source_bytes"]))
+        w("   file sha256 == stated %s; manifest states it %s;"
+          % (sp["source_sha256"] == SOURCE_SHA256,
+             sp["manifest_states_sha"]))
+        w("   per-chunk sha256[:16] recompute from file %s;"
+          % sp["chunk_hashes_match"])
+        w("   no reconstruction declared %s; File A/B not yet split"
+          " (separate order)" % sp["no_reconstruction_declared"])
     w("")
     w("This module computes; it does not conclude, and it adjudicates")
     w("no coinage. Whether the word is missing or merely unsearched is")
@@ -320,7 +361,7 @@ def selftest():
     chk("missing-vs-unsearched open", nd["missing_vs_unsearched_open"])
     chk("provenance separated", nd["provenance_separated"])
 
-    split_paths = (FILE_A, FILE_B, MANIFEST)
+    split_paths = (FILE_A, FILE_B, MANIFEST, SOURCE)
     split_before = [hashlib.sha256(io.open(p, "rb").read()).hexdigest()
                     for p in split_paths]
     sp = split_state()
@@ -332,9 +373,9 @@ def selftest():
     chk("split: File B name", sp["b_name"] == "vocabulary-gap-slots")
     chk("split: A points to B", sp["a_points_to_b"])
     chk("split: B points to A", sp["b_points_to_a"])
-    chk("split: header slot in A is MISSING_SOURCE",
+    chk("split: header slot in A is MISSING_SOURCE (A not yet split)",
         sp["a_header_slot_missing_source"])
-    chk("split: File A holds 0 entries (none received)",
+    chk("split: File A holds 0 entries (not yet split from source)",
         sp["a_entries"] == 0)
     chk("split: File A states its count UNKNOWN, not 0",
         sp["a_count_unknown_not_zero"])
@@ -344,11 +385,31 @@ def selftest():
         sp["seed_identical_to_render"])
     chk("split: seed provenance says NOT chunk 1",
         sp["seed_provenance_not_chunk1"])
-    chk("split: manifest rows == ceil(46.9k/8000)",
-        sp["chunk_rows"] == sp["expected_chunks"] == 6)
-    chk("split: every chunk MISSING_SOURCE", sp["all_rows_missing"])
-    chk("split: 0 chars received (table)", sp["received_total"] == 0)
-    chk("split: 0 chars received (line)", sp["received_line_zero"])
+    chk("split: manifest rows == 7 delivered chunks (estimate was 6)",
+        sp["chunk_rows"] == 7 and sp["estimated_chunks"] == 6)
+    chk("split: every chunk RECEIVED", sp["all_rows_received"])
+    chk("split: source file present", sp["present"]["source"])
+    chk("split: source bytes == %d" % SOURCE_BYTES,
+        sp["source_bytes"] == SOURCE_BYTES)
+    chk("split: table bytes == received == file size",
+        sp["bytes_total"] == sp["received_total"] == sp["source_bytes"])
+    chk("split: received line states %d of %d bytes" % (SOURCE_BYTES,
+                                                         SOURCE_BYTES),
+        sp["received_line_full"])
+    chk("split: source sha256 == pinned constant",
+        sp["source_sha256"] == SOURCE_SHA256)
+    chk("split: manifest states the same sha256", sp["manifest_states_sha"])
+    chk("split: every row's sha256[:16] recomputes from the file",
+        sp["chunk_hashes_match"])
+    # the recompute must be able to fail: one byte shifted reads False
+    src_bytes = io.open(SOURCE, "rb").read()
+    rows_now = re.findall(r"(?m)^\|\s*(\d+)\s*\|\s*(\d+)\s*\|"
+                          r"\s*([0-9a-f]{16})\s*\|\s*(\S+)\s*\|\s*(\d+)\s*\|",
+                          _txt(MANIFEST))
+    chk("split: chunk recompute detects a one-byte shift",
+        not _chunk_hashes_ok(src_bytes[1:] + b"\n", rows_now))
+    chk("split: chunk recompute refuses an empty file",
+        not _chunk_hashes_ok(b"", rows_now))
     chk("split: no reconstruction declared",
         sp["no_reconstruction_declared"])
 

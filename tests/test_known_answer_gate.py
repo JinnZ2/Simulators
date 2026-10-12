@@ -86,6 +86,8 @@ MANIFEST = (
     "thwaites-risk-audit/audit.py::sle_to_sv",
     "potential/gate/cut.py::vertex_connectivity",
     "potential/matrix/check_attested_provenance.py::unprovenanced_attested",
+    "moving-mean-tracker/tracker.py::quantile",
+    "moving-mean-tracker/tracker.py::share_gap",
 )
 
 # Cases known to fail today. A case that starts passing turns this red so

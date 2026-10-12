@@ -21,7 +21,14 @@ deleted; a finished row stays as the record.
 | claude/interaction-spec-q1-q4 | threshold-states-in-animal-escape.md, notes/queue/HOLDS.md, threshold-states/* [g] | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-07 | MERGED #127 (71df45c) |
 | claude/holds-relation-axes | notes/queue/HOLDS.md | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-07 | MERGED #128 (7397ebf) |
 | JinnZ2/Polyhedral-Intelligence: claude/relation-two-axes [h] | ontology/relation_classes.json, ontology/relation_class.py, ontology/relation_classes.md, tests/test_relation_class.py, CLAUDE.md | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-07 | MERGED Polyhedral-Intelligence #15 (fdd84ee) |
-| claude/human-sensing-prior-cc0-cbm411 | CLAUDE.md, README.md, human-sensing-prior/PATHWAYS.md, human-sensing-prior/PATHWAY_B.md, human-sensing-prior/PREDICTIONS.md, human-sensing-prior/pathways.py, human-sensing-prior/test_pathways.py, human-sensing-prior/samples/features.sample.txt, human-sensing-prior/samples/lengths.sample.txt, human-sensing-prior/samples/score_unrun.sample.txt, notes/queue/HOLDS.md, human-sensing-prior/samples/pilot_unrun.sample.txt [b], human-sensing-prior/registered/human-sensing-prior.7f780aa.md [b], human-sensing-prior/samples/size_check.sample.txt [i] | session_014bxQGPgkmsJRWUx92REKSs, session_01U4mRsfZAdaV1xWBmZSRbjK [b] | 2026-10-07 | HELD; pilot-2026-10-08a COMPROMISED, retired unrun; pilot-2026-10-08b SEALED, emitted, not loaded [c][e][f][i][j] |
+| claude/human-sensing-prior-cc0-cbm411 | CLAUDE.md, README.md, human-sensing-prior/PATHWAYS.md, human-sensing-prior/PATHWAY_B.md, human-sensing-prior/PREDICTIONS.md, human-sensing-prior/pathways.py, human-sensing-prior/test_pathways.py, human-sensing-prior/samples/features.sample.txt, human-sensing-prior/samples/lengths.sample.txt, human-sensing-prior/samples/score_unrun.sample.txt, notes/queue/HOLDS.md, human-sensing-prior/samples/pilot_unrun.sample.txt [b], human-sensing-prior/registered/human-sensing-prior.7f780aa.md [b], human-sensing-prior/samples/size_check.sample.txt [o] | session_014bxQGPgkmsJRWUx92REKSs, session_01U4mRsfZAdaV1xWBmZSRbjK [b] | 2026-10-07 | HELD; pilot-2026-10-08a COMPROMISED, retired unrun; pilot-2026-10-08b SEALED, emitted, not loaded [c][e][f][o][p] |
+| claude/battery-offgas-prearm | battery-offgas-prearm/*, notes/queue/HOLDS.md [i] | session_019vfUAFE1MxwGdZjKisbdba | 2026-10-08 | PR #130 (merged by its own session when failures == KNOWN_RED pins) |
+| claude/corn-stunt-forensics | corn-stunt-forensics/*, notes/queue/HOLDS.md [j] | session_019vfUAFE1MxwGdZjKisbdba | 2026-10-08 | MERGED #131 (705cbca) |
+| claude/moving-mean-tracker | moving-mean-tracker/*, notes/queue/HOLDS.md, CLAUDE.md, README.md, tools/known_answer.py, tests/test_known_answer_gate.py [k] | session_014bxQGPgkmsJRWUx92REKSs | 2026-10-08 | MERGED #129 (ad39ffb) |
+| claude/agree-router | tools/agree_router.py, tools/tool_inventory.json, notes/queue/HOLDS.md, CLAUDE.md [l] | session_018Dg8cJzPno1NDm7f5uPCDa | 2026-10-09 | MERGED #139 (6e088ff) |
+| claude/grounded-work-stack | grounded-work-stack/*, notes/queue/HOLDS.md, CLAUDE.md | session_018Dg8cJzPno1NDm7f5uPCDa | 2026-10-09 | MERGED #141 (8f7fe9b) |
+| claude/provenance-markers | tools/provenance_marker.py, tools/provenance_markers.jsonl, tools/samples/provenance_marker.sample.txt, tests/test_provenance_marker.py, notes/queue/HOLDS.md, CLAUDE.md [m] | session_018Dg8cJzPno1NDm7f5uPCDa | 2026-10-09 | MERGED #142 (6d3f6fc) |
+| claude/animacy-dependency | animacy-pass/*, tools/provenance_markers.jsonl, tools/samples/provenance_marker.sample.txt, notes/queue/HOLDS.md, CLAUDE.md [n] | session_018Dg8cJzPno1NDm7f5uPCDa | 2026-10-09 | MERGED #143 (9e82f3d) |
 
 [a] Backfilled after the fact. These paths are in #123's diff and not in
 the operator's backfill list: `threshold-states/*, interaction_class.py,
@@ -87,7 +94,7 @@ recomputed under the runner's assembly rule: 0 mismatches. Order seed
 field, so this footnote is where the seed lives. No call had been made when
 these were recorded. The pilot's run record must cite both values.
 
-[i] 2026-10-08, declared before work. Amendment 4 (blinding, size
+[o] 2026-10-08, declared before work. Amendment 4 (blinding, size
 check, missingness rule, fixed codes for refused and empty replies, P4b
 branch lengths) adds one path to this branch's allowed_paths:
 `human-sensing-prior/samples/size_check.sample.txt`. It also adds
@@ -95,7 +102,7 @@ branch lengths) adds one path to this branch's allowed_paths:
 ([d]) already covers. Job files and runner results stop being committed
 to `runs/`; their sha256s are recorded here instead. No model is run.
 
-[j] 2026-10-08. Amendment 4 is f2745e4 (PREDICTIONS.md now 31103
+[p] 2026-10-08. Amendment 4 is f2745e4 (PREDICTIONS.md now 31103
 bytes, sha256
 e6ec74bc683a6d20fd273afed4456db96bca2b05ac40ff04c294aa891b2f62ee,
 registered as the sixth layer). pilot-2026-10-08a ([e], [f]) is
@@ -128,3 +135,48 @@ HOLDS file, so the hold is declared here, before work, per the operator's
 dispatch "RELATION ONTOLOGY: split class into two axes" (2026-10-07).
 `CLAUDE.md` is listed because its Emotion Glyph Map note names the enum's
 members; it is touched only if that list must change.
+
+[i] Declared 2026-10-08 BEFORE any file under `battery-offgas-prearm/`
+exists, in its own commit, on a peer session's relay of the operator's
+voice request ("mark that up for a buildable spec"). The peer's request
+is not the operator's approval of anything outside these paths; the root
+`CLAUDE.md` index is NOT in scope and is not edited by this hold.
+`tools/known_answer.py` is not in scope either: the trigger module's
+known answers live in its own test file.
+
+[j] Declared 2026-10-08 BEFORE any file under `corn-stunt-forensics/` exists,
+in its own commit, on the operator's voice request to land the forensic-pass
+test on the 2024 corn stunt outbreak as a folder with a claim table, plus the
+insect-biology angle (thermal limits, evolution, vector competence, season
+temperature projections). Root `CLAUDE.md` index is not in scope.
+
+[k] 2026-10-08, declared before work, on the operator's dispatch "#126
+follow-up + MOVING-MEAN TRACKER build". The new folder is
+`moving-mean-tracker/` (stdlib, CC0, PROPOSED instrument, fixture provider
+only, no live data). `CLAUDE.md` and `README.md` carry the index entry.
+`tools/known_answer.py` and `tests/test_known_answer_gate.py` are listed
+because the repo's standing rule is that no metric ships without a
+known-answer run, and registering one touches both files.
+
+Footnote letters: claude/moving-mean-tracker declared its hold as [i] on
+its own branch while main used [i] for claude/battery-offgas-prearm. When
+main was merged into the tracker branch (2026-10-09) the tracker's [i] was
+relabeled [k]. No footnote text changed. The same merge records two
+statuses from the PR record: #126 (a1ea7ae) and #131 (705cbca).
+
+[l] Declared 2026-10-09 BEFORE any router file exists, in its own commit, on
+the operator's voice go for the false-agree router: it reads
+`tools/false_agree.py`'s bin verdicts and a tool inventory, and lists which
+tools to run first per bin. `CLAUDE.md` is listed for the tools/ index line
+only.
+
+[m] Declared 2026-10-09 BEFORE any marker file exists, in its own commit,
+on the operator's voice go: a per-tool provenance marker (ran before, the
+file hash at that run, how it works) with a slot recording which of the
+operator's five passes the tool runs. `CLAUDE.md` is listed for the tools/
+index line only.
+
+[n] Declared 2026-10-09 BEFORE any animacy-pass file exists, on the
+operator's go: a sketch of the animacy pass as a dependency check (what
+matter or energy is a prerequisite for the thing). Stacked on
+claude/provenance-markers so the new tool can be stamped in its ledger.

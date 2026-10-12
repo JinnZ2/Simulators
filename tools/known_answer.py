@@ -802,6 +802,8 @@ EXPECTED_METRICS = (
     "cooperative-substrate-proof/p5_lag.py::lag_ratio",
     "potential/gate/cut.py::vertex_connectivity",
     "potential/matrix/check_attested_provenance.py::unprovenanced_attested",
+    "moving-mean-tracker/tracker.py::quantile",
+    "moving-mean-tracker/tracker.py::share_gap",
 )
 
 
@@ -1731,6 +1733,7 @@ def seed():
     _seed_enclosure_caveat()
     _seed_settlement_split()
     _seed_work_order_metrics()
+    _seed_moving_mean_tracker()
 
 
 def _irb_effective_origins(coupling):
@@ -2560,6 +2563,69 @@ def _seed_work_order_metrics():
         note="the 0.0 against the four Nones is the pin: a declared "
              "immediate failure and an undeclared failure interval are "
              "the two states the order's gate exists to keep apart")
+
+
+def _mmt(fn_name, *args):
+    """moving-mean-tracker/tracker.py, imported by path."""
+    import importlib.util
+    path = os.path.join(ROOT, "moving-mean-tracker", "tracker.py")
+    spec = importlib.util.spec_from_file_location("_mmt_tracker", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return getattr(mod, fn_name)(*args)
+
+
+def _mmt_quantile(values, q):
+    return _mmt("quantile", values, q)
+
+
+def _mmt_share_gap(sample_share, population_share):
+    return _mmt("share_gap", sample_share, population_share)
+
+
+def _seed_moving_mean_tracker():
+    """moving-mean-tracker: the quantile behind median, p10 and p90, and
+    the G2 gap whose undeclared case must read UNRATED and not 0."""
+    register(
+        "moving-mean-tracker/tracker.py::quantile",
+        _mmt_quantile,
+        [case("median of an even count", ([1, 2, 3, 4], 0.5), 2.5,
+              "halfway between the two middle order statistics, 2 and 3; "
+              "by hand"),
+         case("p90 of 1..5", ([1, 2, 3, 4, 5], 0.9), 4.6,
+              "position (5-1)*0.9 = 3.6, so 4 + 0.6*(5-4) = 4.6 by hand "
+              "under linear interpolation [CHOICE 1]", tol=1e-12),
+         case("p10 of 0..10", (list(range(11)), 0.1), 1.0,
+              "position 10*0.1 = 1 lands exactly on the second order "
+              "statistic, 1; no interpolation", tol=1e-12),
+         case("unsorted input", ([5, 1, 3], 0.5), 3.0,
+              "sorted it is 1,3,5 and the middle is 3; a quantile that did "
+              "not sort would return 1"),
+         case("empty is None", ([], 0.5), None,
+              "no values, no median; a 0 here would enter a gauge as a "
+              "measured value")],
+        note="the unsorted case catches an order-statistic read on raw "
+             "input; the empty case is where a default would hide")
+    register(
+        "moving-mean-tracker/tracker.py::share_gap",
+        _mmt_share_gap,
+        [case("over-represented segment", (0.5, 0.2), 0.3,
+              "sample share 0.5 against a population share 0.2; "
+              "0.5 - 0.2 by hand", tol=1e-12),
+         case("under-represented segment", (0.1, 0.4), -0.3,
+              "0.1 - 0.4 by hand; the sign carries the direction",
+              tol=1e-12),
+         case("shares equal", (0.25, 0.25), 0.0,
+              "a measured zero: the reference exists and the shares agree"),
+         case("no population share is UNRATED", (0.25, None), "UNRATED",
+              "an undeclared reference is not a zero gap; the dispatch's "
+              "rule, G2 UNRATED, never 0"),
+         case("no sample share is None", (None, 0.25), None,
+              "no kept, assigned records on the axis: the gap has no "
+              "value, which is a different state from UNRATED")],
+        note="the 0.0 against UNRATED against None is the pin: a measured "
+             "agreement, an absent reference, and an absent sample are "
+             "three states")
 
 
 def seed_reachable(src=None, path=None):

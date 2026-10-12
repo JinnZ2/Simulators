@@ -121,3 +121,25 @@ verdict), the status readout, and the `TACIT.md` `emit()` produces.
 ## License
 
 CC0 1.0 Universal. Public domain.
+
+## Triage: what the score does not measure
+
+Recorded 2026-10-08, after the metric was run on a file it could not
+read. The triage score detects **buried** overlay -- rhetorical padding
+per word. It does not detect **declared** overlay.
+
+A file that states plainly which sections the model wrote, in tables,
+with attribution markers, scores near zero and may be entirely
+model-authored. So **absence from the triage list is not evidence of low
+model authorship**; it is evidence that whatever authorship is present is
+not hidden. The ranking orders the first and is silent on the second.
+
+Worked case: `corn-stunt-forensics/FRAME_CYCLE.md` does not appear in the
+top 15. Two of its sections are model analysis, both marked as such in the
+text, which the metric reads as substance.
+
+Standing second limit: `OVERLAY` is a word list, so a paraphrase steps
+around it.
+
+Neither is repaired. A readout for declared overlay is a different
+instrument, not a longer pattern list.

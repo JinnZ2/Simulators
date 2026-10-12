@@ -1,0 +1,64 @@
+{
+  "_note": "FIXTURE config, band axis version 2: segment 'mid' renamed 'middle' under the same rule. The rule set's hash changes, so every delta across the change reads CROSS_VERSION. Synthetic.",
+  "config_version": "v1",
+  "declared": "2026-10-08",
+  "schedule": {
+    "interval": "quarterly"
+  },
+  "metrics": [
+    {
+      "name": "consumption",
+      "unit": "USD",
+      "physical": {
+        "unit": "kcal/day",
+        "field": "consumption_kcal"
+      }
+    }
+  ],
+  "min_n": 20,
+  "axes": {
+    "band": {
+      "version": "band-v2",
+      "dated": "2027-06-30",
+      "segments": {
+        "low": {
+          "field": "band_label",
+          "equals": "low"
+        },
+        "high": {
+          "field": "band_label",
+          "equals": "high"
+        },
+        "middle": {
+          "field": "band_label",
+          "equals": "mid"
+        }
+      }
+    },
+    "region": {
+      "version": "region-v1",
+      "dated": "2026-10-08",
+      "segments": {
+        "north": {
+          "field": "region",
+          "equals": "north"
+        },
+        "south": {
+          "field": "region",
+          "equals": "south"
+        }
+      }
+    }
+  },
+  "population_reference": {
+    "band": {
+      "name": "FIXTURE population reference (synthetic)",
+      "date": "2026-10-01",
+      "shares": {
+        "low": 0.4,
+        "high": 0.2,
+        "middle": 0.4
+      }
+    }
+  }
+}

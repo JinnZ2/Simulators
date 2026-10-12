@@ -14067,6 +14067,47 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   branch lengths are declared (TimeTree times, Felsenstein contrasts, Garland-Harvey-Ives check,
   CARRIED). The sealed replacement pilot-2026-10-08b (sha256 227bc386...b6a8) is emitted, not
   loaded. No model has been run and no response coded.
+- `moving-mean-tracker/` — PROPOSED instrument, SELF-GRADED, no data yet:
+  a mean anchored to a moving target (GDP, a wealth gap, skills or literacy)
+  drifts with it, and any norm, filter or loss tied to the mean inherits the
+  drift; tracked per segment, with per-record provenance (source, pull_date,
+  query, filters_applied, dropped + drop_rule), on a declared schedule, into
+  an append-only sha256-chained run log. Spec and dispatch landed verbatim
+  (`SPEC.md`, `WORK_ORDER.md`). The provider is dumb by construction (records
+  plus provenance, no stats import, AST-checked) and only `FixtureProvider`
+  (synthetic) ships. Per run, per segment: n, mean, median, p10, p90,
+  mean_minus_median; gauges G1 mean-median, G2 sample minus population share,
+  G3 dropped-as-noise share, G4 dollars per physical unit with a cross-run
+  token-drift ratio. States kept apart from zeros: UNRATED (no reference named
+  AND dated), INSUFFICIENT_SAMPLE (n < min_n), NOT_DECLARED (no physical
+  unit), CROSS_VERSION (no delta across a segment-rule or metric change, which
+  needs a new label and is refused under the old one). The dispatch's four
+  tests hold on fixtures (`MMT_001`, `MMT_002`, `MMT_005`, `MMT_006`); four
+  seeded mutations each turn the suite red (`MMT_008`). Three findings the
+  sample run surfaced: G3 localizes a filter only on the axis it is aligned
+  with, reading as a spread drop on a crossed axis (`MMT_003`); a cleaning
+  filter manufactures a G2 of exactly 0.000 on an untouched segment, so a zero
+  G2 is not representativeness evidence beside a non-zero G3 (`MMT_004`); G4
+  cannot separate price drift from a dollar-distribution change (`MMT_007`).
+  Per-record provenance grows the log linearly (`MMT_009`). `quantile` and
+  `share_gap` registered in `tools/known_answer.py`. Check count printed by
+  `python3 moving-mean-tracker/test_tracker.py`. Stdlib only, parses under
+  3.9, CC0.
+- `grounded-work-stack/` — an outside deep-research report (Kimi) on four
+  couplings between a model and the floor it asserts about (unit/conservation
+  gates, pre-signal readers, latency in the joins, an anchored worker-correction
+  channel), landed verbatim with its four figures, plus `check.py` recomputing
+  what the report's own text supports. Holds: the 4.45 lbf->N factor, the
+  Asana 60/27/13 shares, the 70% alert cut, the I-PASS counts. Inside the
+  report: "nine workweeks" of 1.8 h/day needs an unstated 200-day year
+  (`GWS_004`); its "90-96%" override range excludes a 53% bar in its own fig3,
+  which also draws a 49-96% range as one 90% bar (`GWS_005`); one override rate
+  is read as physicians-right in section 5.3 and as a lost signal in section 9
+  (`GWS_006`); "four working examples" matches the section 5 table's count but
+  not the four names in the sentence (`GWS_008`). Each element maps to an
+  in-tree instrument by path, two only partly (`GWS_011`). 79 URLs carried, none
+  read. Check count printed by `python3 grounded-work-stack/test_check.py`.
+  Stdlib only, parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
@@ -14222,6 +14263,62 @@ ship a `requirements.txt`. Each folder ships `samples/`.
     `/OQ` / `/OR` tag only where the collision exists, so every
     single-document folder keeps its id, pinned in both directions
     plus a live-tree uniqueness check.
+  - `agree_router.py` + `tool_inventory.json` — given a `false_agree.py`
+    agree-set, lists the tools to run per bin in three tiers: PRIMARY (the
+    bin's own reason), TRIPWIRE (would show the bin mislabeled), ALSO
+    (everything else) — all claim tools run on every bin, the bin sets
+    order only. The inventory is 3469 modules across 81 reachable JinnZ2
+    repos (1446 claim tools), tagged by what each inspects from its
+    docstring; tags are model readings, nothing regenerates them, and 11
+    repos were not reachable. Primary rows also show tripwire tags, since a
+    tool can carry two jobs; DYNAMICS sets no bin's tier. `selftest` 35
+    checks, including that the role table matches `false_agree`'s bins.
+  - `provenance_marker.py` + `provenance_markers.jsonl` — per-tool marker:
+    ran before (the command, its exit and last printed line), the tool
+    file's sha256 at that run, and one line on how it works, in a
+    hash-chained append-only ledger. Each marker carries a slot for the
+    operator's five passes for finding semantic manipulation (P1 noun to
+    verb, P2 animacy, P3 logic puzzle, P4 round trip, P5 evidentiality),
+    each RUNS / PARTIAL / NOT_RUN / UNDECLARED. RUNS and PARTIAL need a
+    `path:line` basis that resolves, and PARTIAL needs a note naming the
+    missing half. Pass states are declarations, not inferred from text.
+    `check` reads CURRENT / STALE / MISSING by re-hashing. A tool that
+    edits its own file during the run gets no marker. Eight tools stamped:
+    of the first six, none ran P2 even in part. `animacy-pass/`'s
+    `dependency_check.py` and `unweld.py` run it in part. Check count
+    printed by `--selftest`.
+- `animacy-pass/` — The animacy pass from the operator's five-pass method,
+  as a dependency check. For the thing a claim names, it asks what matter
+  or energy is a prerequisite. Animacy here is degree of coupling, not
+  alive or dead. By default the prerequisite map is derived from physics.
+  `TEMPLATES` is a seed set of mass and energy balance templates, each
+  stating its balance, and `derive_map` walks them recursively. A supplied
+  map augments the derived one, for balances that cannot be closed from
+  standard inputs. Every prerequisite is tagged `DERIVED`, `DECLARED` or
+  `BOTH`. With neither a template nor a map the verdict is `UNDECLARED`.
+  Degree is the hop count along the map. Whether the claim names each prerequisite is a word
+  match: a paraphrase evades it, and a mention does not show the coupling
+  is accounted for. The verdict reads first degree only; deeper degrees
+  are reported per degree. The four demo cases are constructed and reach
+  all three verdicts, one derived with no map supplied. Check count printed by `--selftest`.
+  `unweld.py` takes welded evaluative claims (cheaper, efficient,
+  optimal, productive, better, scalable, clean). Each is one word fusing
+  buried terms. The check lists the terms each must declare (for
+  "cheaper": for whom, unit, boundary, time, inputs, outputs, compared to
+  what) and which are blank. The externality is the dependency chain
+  read backwards: `dependency_check.closure` checks every node the
+  balance requires (prerequisites and what each process produces)
+  against the stated boundary, and the unbooked nodes, tagged matter or
+  energy by the map, are the externality. There is no separate
+  mechanism. The verdicts are `GROUNDED`, `UNGROUNDED`
+  and `UNDETERMINED_NO_BALANCE`; the last is never read as grounded. In
+  the demo, one data center with identical physics is "cheap" with a
+  two-item boundary (`UNGROUNDED`, 11 of 13 nodes unaccounted, including
+  the copper's sulfur dioxide and tailings) and "expensive" with all 13
+  (`GROUNDED`), so the comparison returns
+  `LABEL_FLIPS_PHYSICS_IDENTICAL`. `unanimous()` encodes the operator's
+  standing challenge: a term earns its use only when every framing is
+  grounded and they agree on the label. Stdlib only, CC0.
 - `search-substitution/` — Three organisms that produce an answer without
   searching for it, priced against the search they do not perform. Physarum
   occupies the whole arena at once and prunes by throughput, so its cost

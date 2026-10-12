@@ -1,0 +1,16 @@
+{
+  "_note": "Thresholds are null on purpose: as shipped this config REFUSES TO ARM (UNRATED). Fill each rate_threshold from your own bench run (BENCH_PROTOCOL.md) for your chemistry, sensor and enclosure. No number here is a recommendation.",
+  "channels": {
+    "voc_mox":  {"rate_threshold": null, "units": "sensor-index"},
+    "h2":       {"rate_threshold": null, "units": "ppm"},
+    "co2_ndir": {"rate_threshold": null, "units": "ppm"}
+  },
+  "window_s": 60,
+  "confirm_count": 3,
+  "max_gap_s": 30,
+  "on_sensor_fault": "TRIP",
+  "level_ceiling": {},
+  "tier2_installed": false,
+  "tier2_discharge_space": null,
+  "pcm_melt_c": null
+}
