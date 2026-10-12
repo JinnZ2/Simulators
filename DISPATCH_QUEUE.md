@@ -95,3 +95,4 @@ claude/cross-layer-step-register-source | memory-archive/cross-layer-step-regist
 claude/when-to-decouple-source | memory-archive/when-to-decouple-triage-and-fail-safe.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD (awaiting 8 chunks) | 2026-10-12
 claude/when-to-decouple-source | memory-archive/when-to-decouple-triage-and-fail-safe.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED #197 (a27cd49; merge d31b46c) | 2026-10-12
 claude/coupling-is-the-floor-source | memory-archive/coupling-is-the-floor-separation-is-the-artifact.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD (awaiting 8 chunks) | 2026-10-12
+claude/coupling-is-the-floor-source | memory-archive/coupling-is-the-floor-separation-is-the-artifact.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED #200 (83166f0; merge ebfffa7) | 2026-10-12
