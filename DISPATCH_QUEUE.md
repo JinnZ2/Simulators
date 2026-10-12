@@ -82,3 +82,4 @@ claude/telling-installs-the-limit | tools/telling_installs_the_limit.md | sessio
 method-layer:claude/telling-installs-the-limit | tools/telling_installs_the_limit.md | session_01U4mRsfZAdaV1xWBmZSRbjK | HELD | 2026-10-12
 claude/telling-installs-the-limit | tools/telling_installs_the_limit.md | session_01U4mRsfZAdaV1xWBmZSRbjK | MERGED #178 (a915fad) | 2026-10-12
 method-layer:claude/telling-installs-the-limit | tools/telling_installs_the_limit.md | session_01U4mRsfZAdaV1xWBmZSRbjK | MERGED method-layer#14 (6f632a8) | 2026-10-12
+claude/coinage-log-source | coinage-log/source/coinage-log.full.md, coinage-log/MISSING_SOURCE.md, coinage-log/check_coinage.py (scope extended by ratification) | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED #176 (e1bb85b; merge 54676a9) | 2026-10-12
