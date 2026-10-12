@@ -84,3 +84,4 @@ claude/telling-installs-the-limit | tools/telling_installs_the_limit.md | sessio
 method-layer:claude/telling-installs-the-limit | tools/telling_installs_the_limit.md | session_01U4mRsfZAdaV1xWBmZSRbjK | MERGED method-layer#14 (6f632a8) | 2026-10-12
 claude/coinage-log-source | coinage-log/source/coinage-log.full.md, coinage-log/MISSING_SOURCE.md, coinage-log/check_coinage.py (scope extended by ratification) | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED #176 (e1bb85b; merge 54676a9) | 2026-10-12
 claude/human-sensing-prior-cc0-cbm411 | human-sensing-prior/*, CLAUDE.md, README.md, notes/queue/HOLDS.md | session_01U4mRsfZAdaV1xWBmZSRbjK | MERGED #182 (e71df2c); amendment 4 | 2026-10-12
+claude/no-anchor-source | memory-archive/no-anchor-information-mismanagement.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD (awaiting 8 chunks) | 2026-10-12
