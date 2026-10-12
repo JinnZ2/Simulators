@@ -101,3 +101,4 @@ claude/measurand-stage-attribution-source | memory-archive/measurand-stage-attri
 claude/value-vocabulary-threshold-source | memory-archive/value-vocabulary-threshold-register.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD (awaiting 7 chunks) | 2026-10-12
 claude/value-vocabulary-threshold-source | memory-archive/value-vocabulary-threshold-register.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED #206 (2b1da47; merge 553940c) | 2026-10-12
 claude/unmarked-boundary-source | memory-archive/unmarked-boundary-as-root-error-class.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD (awaiting 7 chunks) | 2026-10-12
+claude/unmarked-boundary-source | memory-archive/unmarked-boundary-as-root-error-class.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED #209 (3765ffe; merge b9e14ec) | 2026-10-12
