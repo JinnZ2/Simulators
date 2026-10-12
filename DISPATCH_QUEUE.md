@@ -97,3 +97,4 @@ claude/when-to-decouple-source | memory-archive/when-to-decouple-triage-and-fail
 claude/coupling-is-the-floor-source | memory-archive/coupling-is-the-floor-separation-is-the-artifact.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD (awaiting 8 chunks) | 2026-10-12
 claude/coupling-is-the-floor-source | memory-archive/coupling-is-the-floor-separation-is-the-artifact.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED #200 (83166f0; merge ebfffa7) | 2026-10-12
 claude/measurand-stage-attribution-source | memory-archive/measurand-stage-attribution-failures.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD (awaiting 7 chunks) | 2026-10-12
+claude/measurand-stage-attribution-source | memory-archive/measurand-stage-attribution-failures.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED #203 (d8adf4d; merge 12fa2ff) | 2026-10-12
