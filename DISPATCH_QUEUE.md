@@ -93,3 +93,4 @@ claude/corpus-as-sample-source | memory-archive/corpus-as-sample-not-reality.md 
 claude/cross-layer-step-register-source | memory-archive/cross-layer-step-register.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD (awaiting 8 chunks) | 2026-10-12
 claude/cross-layer-step-register-source | memory-archive/cross-layer-step-register.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED #194 (bab1447; merge d71b789) | 2026-10-12
 claude/when-to-decouple-source | memory-archive/when-to-decouple-triage-and-fail-safe.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD (awaiting 8 chunks) | 2026-10-12
+claude/when-to-decouple-source | memory-archive/when-to-decouple-triage-and-fail-safe.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED #197 (a27cd49; merge d31b46c) | 2026-10-12
