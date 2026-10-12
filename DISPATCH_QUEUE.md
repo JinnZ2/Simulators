@@ -80,3 +80,5 @@ method-layer:claude/held-tie-bin-slack | tools/held_tie_precision.md, tools/bin_
 claude/coinage-log-source | coinage-log/source/coinage-log.full.md, coinage-log/MISSING_SOURCE.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD (awaiting 7 chunks) | 2026-10-11
 claude/telling-installs-the-limit | tools/telling_installs_the_limit.md | session_01U4mRsfZAdaV1xWBmZSRbjK | HELD | 2026-10-12
 method-layer:claude/telling-installs-the-limit | tools/telling_installs_the_limit.md | session_01U4mRsfZAdaV1xWBmZSRbjK | HELD | 2026-10-12
+claude/telling-installs-the-limit | tools/telling_installs_the_limit.md | session_01U4mRsfZAdaV1xWBmZSRbjK | MERGED #178 (a915fad) | 2026-10-12
+method-layer:claude/telling-installs-the-limit | tools/telling_installs_the_limit.md | session_01U4mRsfZAdaV1xWBmZSRbjK | MERGED method-layer#14 (6f632a8) | 2026-10-12
