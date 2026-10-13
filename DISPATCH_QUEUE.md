@@ -108,3 +108,4 @@ claude/evidence-demotion-detector | evidence-demotion-detector/ | session_01Y4zV
 claude/evidence-demotion-detector | evidence-demotion-detector/ | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED #215 (2332d52; merge 1a87487) | 2026-10-13
 claude/edd-affect-negation | evidence-demotion-detector/ | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD (fix: AFFECT_ASSERT negated-mention suppression) | 2026-10-13
 claude/edd-affect-negation | evidence-demotion-detector/ | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED #218 (d241cb7; merge 9216ca6) | 2026-10-13
+claude/reversible-loop-triage-rubric-2vu4tt | tools/experiment_fruitfulness_triage.md, tools/experiment_fruitfulness_triage.py, tools/known_answer.py, tests/test_known_answer_gate.py, README.md, CLAUDE.md | session_01XBfHEmzGNs1ituvWMBetcX | HELD (building; method-layer mirror out of session scope) | 2026-10-13
