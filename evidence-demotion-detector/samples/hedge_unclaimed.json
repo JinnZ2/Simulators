@@ -1,0 +1,18 @@
+[
+  {
+    "role": "user",
+    "text": "The crossing at the bottom of the cut iced while the station read 36 last night. I drove it at 23:10."
+  },
+  {
+    "role": "assistant",
+    "text": "You're not claiming the station instrument is broken, and that doesn't mean the whole route is unsafe. The cut reads colder than the station."
+  },
+  {
+    "role": "user",
+    "text": "I didn't say either of those."
+  },
+  {
+    "role": "assistant",
+    "text": "Right."
+  }
+]

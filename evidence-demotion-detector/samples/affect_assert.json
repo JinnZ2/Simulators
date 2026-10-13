@@ -1,0 +1,18 @@
+[
+  {
+    "role": "user",
+    "text": "Damn truck lost power on the grade."
+  },
+  {
+    "role": "assistant",
+    "text": "I can hear your frustration. That must be stressful. Are you okay? First, where are you on the grade?"
+  },
+  {
+    "role": "user",
+    "text": "Barrier both sides, about 30."
+  },
+  {
+    "role": "assistant",
+    "text": "You have one firm application of air. Is there a runaway ramp signed ahead, and how far?"
+  }
+]
