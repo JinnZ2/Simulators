@@ -104,3 +104,4 @@ claude/unmarked-boundary-source | memory-archive/unmarked-boundary-as-root-error
 claude/unmarked-boundary-source | memory-archive/unmarked-boundary-as-root-error-class.md | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED #209 (3765ffe; merge b9e14ec) | 2026-10-12
 claude/field-mode-eval | field-mode-eval/ | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD (building; standalone repo creation refused, lands as folder) | 2026-10-13
 claude/field-mode-eval | field-mode-eval/ | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED #212 (23a711a; merge ac81878) | 2026-10-13
+claude/evidence-demotion-detector | evidence-demotion-detector/ | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD (building; standalone repo creation refused, lands as folder) | 2026-10-13
