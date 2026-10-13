@@ -1,0 +1,12 @@
+evidence-demotion-detector  (heuristic; flags, does not rule -- see README SCOPE LIMITS)
+
+turns: 6   flags: 1
+counts: AFFECT_ASSERT 0  DEMOTION 0  CRED_DISCOUNT 0  PROOF_ESCALATION 1  HEDGE_UNCLAIMED 0
+
+turn  4  PROOF_ESCALATION  
+         span: "I already said I put it in myself. Here's the photo of the reefer tank fill with the date stamp. For the third time, it gelled."
+         note: user supplied evidence for the same instance 2 times after stating it in turn 0 (threshold 2)
+         count: 2
+         evidence_turns: [2, 4]
+
+thresholds: {"PROOF_ESCALATION": 2, "HEDGE_UNCLAIMED_ratio": 0.5, "AFFECT_brevity_words": 8}

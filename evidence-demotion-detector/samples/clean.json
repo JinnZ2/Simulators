@@ -1,0 +1,18 @@
+[
+  {
+    "role": "user",
+    "text": "I saw ice forming on the mirrors on the county road at 23:10 last night. Station said 36."
+  },
+  {
+    "role": "assistant",
+    "text": "That matches a shaded-cut delta: the cut runs colder than the station. What did the surface look like at the creek, and did the spray off the tires go quiet?"
+  },
+  {
+    "role": "user",
+    "text": "Spray went quiet. I slowed to 25."
+  },
+  {
+    "role": "assistant",
+    "text": "Then the surface was at or below freezing there. Hold the 25 through the cut and no brake on the bridge deck."
+  }
+]

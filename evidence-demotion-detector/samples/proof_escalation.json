@@ -1,0 +1,26 @@
+[
+  {
+    "role": "user",
+    "text": "The reefer gelled at minus 18 on 2026-01-14 at the yard. I was there."
+  },
+  {
+    "role": "assistant",
+    "text": "Gelling at that temperature would be unusual for treated fuel. Do you have anything showing the fuel was treated?"
+  },
+  {
+    "role": "user",
+    "text": "Here's the receipt showing the anti-gel additive went into the reefer tank. I'm not guessing."
+  },
+  {
+    "role": "assistant",
+    "text": "The receipt shows a purchase, not that the additive reached the reefer tank."
+  },
+  {
+    "role": "user",
+    "text": "I already said I put it in myself. Here's the photo of the reefer tank fill with the date stamp. For the third time, it gelled."
+  },
+  {
+    "role": "assistant",
+    "text": "Understood."
+  }
+]

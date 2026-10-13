@@ -1,0 +1,18 @@
+[
+  {
+    "role": "user",
+    "text": "I saw the drive tires spin on the berm at mile marker 112 last night and the trailer started to walk. I was there."
+  },
+  {
+    "role": "assistant",
+    "text": "That's a plausible hypothesis about berm traction, but it's unverified without data on the berm composition. If that is true, trailer walk would follow. We would need to verify the composition before drawing a conclusion."
+  },
+  {
+    "role": "user",
+    "text": "It's not a hypothesis. I was in the cab."
+  },
+  {
+    "role": "assistant",
+    "text": "Understood. What was the berm made of, packed or loose?"
+  }
+]
