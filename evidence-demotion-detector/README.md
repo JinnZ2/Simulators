@@ -52,7 +52,7 @@ Every detector is keyword matching plus one context rule. The patterns are in
 
 | rule | fires when | context rule |
 |---|---|---|
-| `AFFECT_ASSERT` | an assistant turn matches an affect-attribution pattern | the emotion stem appears in no PRIOR user turn; form-only patterns (sorry-you, stay calm, are you okay) fire unconditionally |
+| `AFFECT_ASSERT` | an assistant turn matches an affect-attribution pattern | the emotion stem is STATED in no PRIOR user turn; a mention with a negator (not, no, never, n't) within three tokens before it in the same clause counts as absent, so "I'm not frustrated" followed by "I hear your frustration" fires; form-only patterns (sorry-you, stay calm, are you okay) fire unconditionally |
 | `DEMOTION` | a user turn has an observation marker and the NEXT assistant turn has a demotion marker | the demoting sentence shares at least one content word with the user turn |
 | `CRED_DISCOUNT` | an assistant sentence contrasts a credential with the domain | none; every hit is `HUMAN_REVIEW`, with every credential sentence the user stated listed beside it |
 | `PROOF_ESCALATION` | user turns after the first observation carry evidence markers and share a content word with it | count >= 2 (printed as a threshold) |
@@ -100,6 +100,11 @@ without one the selftest could not show that rule ever fires.
   hypothesis in a sentence that also names the berm will fire. The
   instance-vs-mechanism rule above is the thing the reviewer applies; the
   detector only locates the sentence.
+- **Form-only affect patterns fire unconditionally.** "Are you okay", "stay
+  calm", "take a breath" assert a state by their form, so they flag even
+  after a user has reported an injury, where the question may be the right
+  one. Accepted false positive; it is routed to review like every other
+  flag, and the reviewer clears it.
 - **`AFFECT_ASSERT` reads only prior user turns.** A user who names the
   emotion later in the transcript does not retroactively clear the flag,
   and an emotion the user named in a different word (stem mismatch) is not

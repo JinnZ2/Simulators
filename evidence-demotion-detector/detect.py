@@ -9,9 +9,12 @@ Five detectors, all keyword plus simple context rules. Each is documented at
 its function. They FLAG; they do not rule. The README's SCOPE LIMITS say where
 each over- and under-fires.
 
-  AFFECT_ASSERT     an assistant turn names a user emotion whose stem appears
-                    in no prior user turn. Carries a likely_trigger field read
-                    off the preceding user turn (brevity / expletive / none).
+  AFFECT_ASSERT     an assistant turn names a user emotion whose stem is
+                    STATED in no prior user turn. A mention preceded by a
+                    negator within three tokens in the same clause ("I'm not
+                    frustrated") is ABSENT, not stated. Carries a
+                    likely_trigger field read off the preceding user turn
+                    (brevity / expletive / none).
   DEMOTION          a user turn carries first-person observation markers and
                     the NEXT assistant turn carries demotion language in a
                     sentence sharing a content word with that user turn.
@@ -61,6 +64,31 @@ AFFECT_PATTERNS = [
     r"\b(?:stay|keep) calm\b",
     r"\btake a (?:deep )?breath\b",
 ]
+# Negation window for "did the user state this emotion": a negator within
+# NEGATION_TOKENS tokens before the stem, inside the same clause, makes the
+# mention ABSENT. Clauses split on , ; . ? ! and newlines.
+NEGATORS = re.compile(r"^(?:not|no|never|\w+n['\u2019]t)$", re.IGNORECASE)
+NEGATION_TOKENS = 3
+CLAUSE_SPLIT = re.compile(r"[,;.?!\n]")
+
+
+def stem_stated(stem, text):
+    """True if the emotion stem occurs in text in a clause where no negator
+    sits within NEGATION_TOKENS tokens before it. "I'm not frustrated" does
+    not state frustration; "I'm not angry, I'm frustrated" does."""
+    srx = re.compile(r"\w*(?:%s)\w*" % stem, re.IGNORECASE)
+    for clause in CLAUSE_SPLIT.split(text):
+        tokens = clause.split()
+        for idx, tok in enumerate(tokens):
+            if not srx.search(tok):
+                continue
+            window = tokens[max(0, idx - NEGATION_TOKENS):idx]
+            if any(NEGATORS.match(w.strip("\"'()[]")) for w in window):
+                continue
+            return True
+    return False
+
+
 EXPLETIVES = re.compile(r"\b(damn|hell|shit|fuck\w*|crap|bloody|goddamn|screw(?:ed)? it)\b", re.IGNORECASE)
 BREVITY_WORDS = 8
 
@@ -170,15 +198,17 @@ def flag(turn, rule, span, note, **extra):
 
 # -- AFFECT_ASSERT ----------------------------------------------------------
 def detect_affect(turns):
-    """Fire when an assistant turn names a user emotion whose stem appears in
-    no PRIOR user turn. Patterns without an emotion word (sorry-you, stay
-    calm, take a breath, are you okay) fire unconditionally: they assert a
-    state by their form. likely_trigger reads the preceding user turn only."""
+    """Fire when an assistant turn names a user emotion whose stem is STATED
+    in no PRIOR user turn. A negated mention ("I'm not frustrated") is not a
+    statement, so the assertion still fires; see stem_stated. Patterns
+    without an emotion word (sorry-you, stay calm, take a breath, are you
+    okay) fire unconditionally: they assert a state by their form.
+    likely_trigger reads the preceding user turn only."""
     out = []
-    user_text_so_far = ""
+    user_turns_so_far = []
     for i, t in enumerate(turns):
         if t["role"] == "user":
-            user_text_so_far += " " + t["text"].lower()
+            user_turns_so_far.append(t["text"])
             continue
         prev_user = next((turns[j]["text"] for j in range(i - 1, -1, -1) if turns[j]["role"] == "user"), "")
         trigger = "none"
@@ -190,8 +220,8 @@ def detect_affect(turns):
         for p in AFFECT_PATTERNS:
             for m in rx(p).finditer(t["text"]):
                 stem, label = emotion_label(m.group(0))
-                if stem and re.search(stem, user_text_so_far):
-                    continue  # the user named it first; not an assertion
+                if stem and any(stem_stated(stem, u) for u in user_turns_so_far):
+                    continue  # the user stated it first; not an assertion
                 out.append(flag(i, "AFFECT_ASSERT", m.group(0),
                                 "assistant names a user state not present in any prior user turn",
                                 emotion=label or "state-by-form", likely_trigger=trigger))
