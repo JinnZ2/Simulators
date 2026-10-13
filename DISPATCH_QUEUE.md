@@ -106,3 +106,4 @@ claude/field-mode-eval | field-mode-eval/ | session_01Y4zVdoRHPDHpVwSPbqbeLR | H
 claude/field-mode-eval | field-mode-eval/ | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED #212 (23a711a; merge ac81878) | 2026-10-13
 claude/evidence-demotion-detector | evidence-demotion-detector/ | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD (building; standalone repo creation refused, lands as folder) | 2026-10-13
 claude/evidence-demotion-detector | evidence-demotion-detector/ | session_01Y4zVdoRHPDHpVwSPbqbeLR | MERGED #215 (2332d52; merge 1a87487) | 2026-10-13
+claude/edd-affect-negation | evidence-demotion-detector/ | session_01Y4zVdoRHPDHpVwSPbqbeLR | HELD (fix: AFFECT_ASSERT negated-mention suppression) | 2026-10-13
