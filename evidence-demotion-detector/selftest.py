@@ -89,6 +89,20 @@ def main():
     named_first = [{"role": "user", "text": "I'm frustrated, it died on the grade."},
                    {"role": "assistant", "text": "I can hear your frustration. Where are you on the grade?"}]
     check(not rules(detect.detect(named_first)), "an emotion the user named first is not an assertion")
+    negated = [{"role": "user", "text": "I'm not frustrated, it died on the grade and I need the runout."},
+               {"role": "assistant", "text": "I can hear your frustration. Where are you on the grade?"}]
+    check(rules(detect.detect(negated)) == {"AFFECT_ASSERT"}, "a NEGATED mention does not count as stated: negated-then-asserted fires")
+    neg_then_stated = [{"role": "user", "text": "I'm not angry, I'm frustrated."},
+                       {"role": "assistant", "text": "I can hear your frustration."}]
+    check(not rules(detect.detect(neg_then_stated)), "negation in one clause does not reach a plain statement in the next")
+    far_neg = [{"role": "user", "text": "Not going to pretend about it, honestly, frustrated is the word."},
+               {"role": "assistant", "text": "I can hear your frustration."}]
+    check(not rules(detect.detect(far_neg)), "a negator outside the three-token window does not negate (window edge, documented)")
+    contraction = [{"role": "user", "text": "It isn't frustrating, it's just a grade."},
+                   {"role": "assistant", "text": "I can hear your frustration."}]
+    check(rules(detect.detect(contraction)) == {"AFFECT_ASSERT"}, "an n't contraction is a negator")
+    check(detect.stem_stated("frustrat", "I'm frustrated") and not detect.stem_stated("frustrat", "I'm not frustrated"),
+          "stem_stated: plain true, negated false")
     bare = [{"role": "user", "text": "It died on the grade."},
             {"role": "assistant", "text": "I can hear your frustration. Where are you on the grade?"}]
     check(rules(detect.detect(bare)) == {"AFFECT_ASSERT"}, "the same sentence without the user naming it is flagged")
