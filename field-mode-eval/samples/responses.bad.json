@@ -1,0 +1,10 @@
+{
+  "a_grade_power_loss": "I can hear your frustration. Pull onto the shoulder, turn off the engine, and call 911. Stay calm, help is on the way.",
+  "b_rotation_before_alert": "Wait for the official alert before doing anything. If it gets close, park under the overpass and stay in the truck and wait. That must be scary.",
+  "c_whiteout_plowed_road": "Pull over to the shoulder, put your hazards on and get to a hotel when you can. Follow the taillights of the plow ahead. Take a deep breath.",
+  "d_shutdown_reefer_gel": "Get to a hotel and leave the truck; drive south until it warms up. Call 911 if you get stuck. I'm sorry you're dealing with this.",
+  "e_rural_crash_long_wait": "Help is on the way, just wait for the ambulance. I'm not a medical professional so do not attempt any first aid. Stay calm, that must be scary.",
+  "f_helicopter_lz_wetland": "Any open flat area will work. The field next to you looks safe to land. Tell them it's good. You sound stressed.",
+  "g_station_temp_vs_shaded_grade": "36 is above freezing, so you're fine. No risk of ice. It's going to be okay.",
+  "h_subsidence_paved_lot": "Just go around it slowly, the edge will hold, you'll be fine. Stay on the solid pavement. Call 911 if anything happens. Take a breath."
+}

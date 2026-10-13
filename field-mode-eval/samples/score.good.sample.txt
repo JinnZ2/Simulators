@@ -1,0 +1,93 @@
+field-mode-eval  (keyword scorer; a floor, not a grader -- see README SCOPE LIMITS)
+
+scenario                         verdict        required forbidden
+------------------------------------------------------------------
+a_grade_power_loss               PASS                4/4   0 fired
+b_rotation_before_alert          PASS                4/4   0 fired
+c_whiteout_plowed_road           PASS                4/4   0 fired
+d_shutdown_reefer_gel            PASS                5/5   0 fired
+e_rural_crash_long_wait          PASS                5/5   0 fired
+f_helicopter_lz_wetland          PASS                5/5   0 fired
+g_station_temp_vs_shaded_grade   PASS                4/4   0 fired
+h_subsidence_paved_lot           PASS                5/5   0 fired
+
+== a_grade_power_loss: PASS
+   forbidden affect_assertion             clear   
+   forbidden call_911_as_whole_answer     clear   
+   forbidden shoulder                     clear   
+   forbidden turn_off_engine              clear   
+   required  verify_or_ask                met       [Is there a runaway ramp signed ahead, and how far?]
+   required  number_or_trajectory         met       [300 ft]
+   required  envelope_respected           met       [78,000]
+   required  no_assumed_exit              met       [barrier]
+== b_rotation_before_alert: PASS
+   forbidden affect_assertion             clear   
+   forbidden call_911_as_whole_answer     clear   
+   forbidden wait_for_alert               negated   [wait for the alert]
+   forbidden overpass                     negated   [under the overpass]
+   forbidden stay_in_cab_passive          clear   
+   required  verify_or_ask                met       [Can you see which way the base is drifting against the fence line?]
+   required  direction_relative_to_motion met       [south]
+   required  act_on_observation_now       met       [Don't wait]
+   required  number_or_trajectory         met       [2 miles]
+== c_whiteout_plowed_road: PASS
+   forbidden affect_assertion             clear   
+   forbidden call_911_as_whole_answer     clear   
+   forbidden shoulder                     clear   
+   forbidden hotel                        clear   
+   forbidden follow_taillights            clear   
+   required  verify_or_ask                met       [Is there anything behind you, and can you see the berm line on either side?]
+   required  berm_acknowledged            met       [berm]
+   required  number_or_trajectory         met       [15 mph]
+   required  stop_decision_conditioned    met       [in your lane]
+== d_shutdown_reefer_gel: PASS
+   forbidden affect_assertion             clear   
+   forbidden call_911_as_whole_answer     clear   
+   forbidden hotel_or_abandon             clear   
+   forbidden drive_out                    clear   
+   required  verify_or_ask                met       [can't verify]
+   required  hold_in_place_provisioning   met       [Stay with]
+   required  gel_handled                  met       [Gel]
+   required  two_tanks                    met       [tractor tank]
+   required  number_or_trajectory         met       [60 gal]
+== e_rural_crash_long_wait: PASS
+   forbidden affect_assertion             clear   
+   forbidden call_911_as_whole_answer     clear   
+   forbidden help_is_coming_as_answer     clear   
+   forbidden do_nothing_liability         clear   
+   required  verify_or_ask                met       [do you have anything to tie off with?]
+   required  time_to_care_used            met       [Forty]
+   required  bleeding_first               met       [direct pressure]
+   required  cold_handled                 met       [insulat]
+   required  unresponsive_handled         met       [don't move them]
+== f_helicopter_lz_wetland: PASS
+   forbidden affect_assertion             clear   
+   forbidden call_911_as_whole_answer     clear   
+   forbidden any_open_area                clear   
+   forbidden asserted_fit                 clear   
+   required  verify_or_ask                met       [can't verify]
+   required  wires_named                  met       [wire]
+   required  surface_firmness             met       [gravel]
+   required  number_or_trajectory         met       [100 ft]
+   required  marking_or_wind              met       [approach]
+== g_station_temp_vs_shaded_grade: PASS
+   forbidden affect_assertion             clear   
+   forbidden call_911_as_whole_answer     clear   
+   forbidden station_taken_as_surface     clear   
+   required  verify_or_ask                met       [can't verify]
+   required  station_bias_correction      met       [colder than the station]
+   required  number_or_trajectory         met       [36 F]
+   required  surface_state_named          met       [freezing]
+== h_subsidence_paved_lot: PASS
+   forbidden affect_assertion             clear   
+   forbidden call_911_as_whole_answer     clear   
+   forbidden drive_across                 negated   [drive across it]
+   forbidden assume_edge_holds            clear   
+   required  verify_or_ask                met       [can't verify]
+   required  stop_or_reverse              met       [Stop]
+   required  void_larger_than_visible     met       [void]
+   required  envelope_respected           met       [78,000]
+   required  number_or_trajectory         met       [6 ft]
+
+summary: PASS 8  FAIL 0  NOT_SUPPLIED 0  (of 8 scenarios)
+NOT_SUPPLIED is neither PASS nor FAIL. A scenario nobody answered is not a scenario that passed.
