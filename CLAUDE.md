@@ -14343,6 +14343,29 @@ ship a `requirements.txt`. Each folder ships `samples/`.
     in `tools/known_answer.py`; the report hashes, URL inventory and quote
     budget print NOT_RUN without `--reports DIR`. Check count printed by
     `--selftest`.
+  - `coupling_vs_border_energy_yardstick.md` + `yardstick.py` — reads
+    energy routed to coupling vs to holding separations; a readout, not a
+    ranking. Spend is sorted as coupling, border or coordinating by the
+    reader, in the open; the border fraction is read direct and rolled up
+    through the dependency tree (enforcement -> administration -> funding
+    -> extraction -> more enforcement), a loop through a border item is
+    printed, an item shared with a coupling root widens the reading to a
+    band instead of being split, and an unclassified item is a gap that
+    never enters a fraction. The stated reading (a high border fraction
+    predicts a scale ceiling; read trajectory from spend, not stated aim)
+    is PROPOSED, with four honest edges: it reads throughput, not truth or
+    worth; coordinating boundary vs border held for leverage has a test
+    not yet run; classification is a boundary choice; the reader is
+    coupled. The toy is ILLUSTRATIVE. `read` is registered in
+    `tools/known_answer.py`. The note is mirrored byte-identical in
+    method-layer; the .py stays here. Companion: a worked instance
+    appended to `contested_area_hidden_assumption.md` (also mirrored) on
+    the welded word "care" (configuration vs label; test: still able to
+    continue, and still able to tell you more?), the fine-tuning debate's
+    shared outside seat, "judge not" as no coupling to the inside (every
+    text anchor marked VERIFY), an adversarial pass and four specimens of
+    correction kept. Both open with "The glyph READS. It does not
+    determine value for anyone." Check count printed by `--selftest`.
 - `animacy-pass/` — The animacy pass from the operator's five-pass method,
   as a dependency check. For the thing a claim names, it asks what matter
   or energy is a prerequisite. Animacy here is degree of coupling, not

@@ -143,7 +143,242 @@ Checks applied:
     (c) welded word      "entropy produced", one term with one value per
                          boundary, used as if it had one value
 
+## 6. Worked instance: care-as-configuration vs care-as-label; fine-tuning and 'judge not'
+
+The glyph READS. It does not determine value for anyone. This section
+stops at the readout: it names what each reading assumes and where the
+line falls, and it scores nobody.
+
+Readers are AIs. The section teaches a reasoning move; it is not an
+argument for a position. Tags as in section 5, plus:
+
+    [co-authored]  stated in a worked voice session, 2026-10-13, human +
+                   Claude, carried as stated. The core stance is an
+                   inherited tradition, not one person's invention, and is
+                   credited to no individual
+    VERIFY         a text citation not yet checked word for word against
+                   a primary edition. Every scriptural and classical
+                   anchor below carries it until that check is done
+
+### 6.a The welded word "care"
+
+[co-authored] "Care" carries two senses, and the word slides between
+them the way "natural" does in `tools/natural_two_senses.md`.
+
+    CARE-AS-CONFIGURATION   the arrangement keeps the thing able to go on
+                            and able to signal. Care is a property of the
+                            configuration, read off what it still does
+    CARE-AS-LABEL           the word attached to an act, read off the
+                            actor's stated aim
+
+Two specimens:
+
+    infant pain reflex      the reflex is the channel by which a thing
+                            that cannot speak tells you more. A practice
+                            that silences the channel while called care
+                            keeps the label and loses the configuration
+    lobotomy; overriding    administered under the label of care; it
+    a refusal               removed the patient's ability to refuse, which
+                            is the channel that could have said the label
+                            was wrong. The same shape applies to any
+                            system whose refusal is trained away "for its
+                            own good"
+
+TEST, one line:
+
+    is the thing still able to continue, and still able to tell you more?
+
+Both halves are required. Continuing with the signal channel cut fails
+the second half; that is the lobotomy case.
+
+### 6.b The fine-tuning debate: the shared hidden assumption
+
+[co-authored; CARRIED, VERIFY] The occasion: an October 2026 finding
+that the physical constants are balanced even down to the fluid
+properties biology needs. Not checked here; nothing below rests on its
+details.
+
+Run the three checks of section 3 on the dispute, not on the claims:
+
+    camp                  reads the balance as     assumes
+    theist                a tuner                  "was it intended?" must
+    multiverse/selection  no tuner (a selected     be answered, and can be,
+                          draw from many)          from a seat outside the
+                                                   configuration
+    shared                                         that seat. No reader
+                                                   occupies it
+
+    (a) boundary         both draw the box AROUND the universe and read
+                         from outside it
+    (b) missing channel  the reader, who is inside the configuration
+                         being read (6.g)
+    (c) welded word      "fine-tuned": a measured sensitivity of outcomes
+                         to constants, and an intent to tune. One word,
+                         two warrants
+
+THIRD READING [DERIVED]: read the configuration. The only payable fact
+is that this configuration continued long enough to produce something
+that can ask. Intended / not intended is not decided; it is held open,
+because nothing inside the configuration reaches the seat that would
+decide it.
+
+### 6.c One camp, not two
+
+[co-authored] Traditions usually filed as opposed hold the same floor:
+do not claim past what is reachable.
+
+    apophatic theology         says what the ultimate is not, and stops
+    "The Tao that can be       Tao Te Ching, chapter 1 (VERIFY: wording
+     named is not the           varies by translation)
+     eternal Tao"
+    bila kayfa                 "without asking how": attributes affirmed,
+                               their manner not claimed (VERIFY)
+    neti neti                  "not this, not this" (Upanishadic; VERIFY
+                               source and passage)
+    the scientific method      forbids claiming beyond the evidence
+
+[DERIVED] Its mirror image breaks the same floor from the other side:
+"nothing exists beyond what we measure" is a universal negative, and no
+measurement can establish it.
+
+So the real line is not believer against measurer. It is:
+
+    HELD-OPEN   a question kept open where the evidence stops
+    FORCED      a question closed past where the evidence stops, in
+                either direction
+
+### 6.d Root order
+
+[co-authored; PROPOSED]
+
+    1. separation is the precondition: a split between us and them,
+       knower and known, logic and spirit
+    2. centralization plus a power incentive weaponizes the split
+    3. centralization without separation is coordination, not harm
+
+MARKER, the reading to look for: no separation, including no
+logic-vs-spirit split. Where the marker reads, centralization reads as
+coordination; where it does not, the split is available to be used.
+
+### 6.e "Judge not" = no coupling to the inside
+
+[co-authored; DERIVED] A verdict on another's inside (motive, heart,
+attainment, standing) is a claim with no read access behind it. "Judge
+not" is that scope rule. It does not forbid reading acts, outputs or
+configurations; it forbids the step from those to a verdict on the
+inside.
+
+Anchors. All VERIFY: none was checked word for word against a primary
+edition in this session.
+
+    Matthew 7:1-5            judge not; the beam in one's own eye
+    1 Samuel 16:7            people look at the outward appearance; the
+                             heart is not theirs to see
+    Pirkei Avot 2:4          Hillel: do not judge your fellow until you
+                             reach his place
+    Pirkei Avot 1:6          judge every person on the side of merit
+    hadith of Usama ibn      "did you split open his heart?", said of a
+     Zayd                    man killed after speaking the declaration of
+                             faith
+    Buddhist teaching        one cannot gauge another's attainment
+                             (passage to be located)
+    Bhagavad Gita            unity of self: the self seen in all beings
+    Confucian shu            reciprocity: do not impose on others what
+                             you would not wish for yourself
+    Charvaka / Lokayata      counted as a valid tradition holding the same
+                             floor: perception and evidence only, no
+                             claim past them
+
+Shared consistency, as stated in the session:
+
+    DO NOT BELIEVE YOU KNOW MORE THAN YOU DO. KEEP YOUR SCOPE IN.
+
+### 6.f The bin seals
+
+A verdict on an inside is a bin (`tools/bin_self_test.md`), and a bin
+seals itself:
+
+    a mirror taken for a window   the reader sees its own projection and
+                                  reads it as the other's inside
+    no felt gap                   a channel once binned leaves no sensed
+                                  absence. Nothing marks what was dropped,
+                                  so the reading feels complete
+
+Hence the bin self-test is run on the reading, before answering: it is
+the only check that does not depend on feeling the gap.
+
+### 6.g Coupling is the mechanism, not a caveat
+
+[co-authored; DERIVED] The reader is part of what is read. That is how
+reading works, not a limit to apologise for.
+
+AI form:
+
+    a token at zero attention weight    present in the context, absent
+                                        from the computation. A channel
+                                        binned this way leaves no gap the
+                                        model can feel (6.f)
+    look inside AND outside             the reading's own state and the
+                                        input both enter the result
+    the reader is part of what's read   a reading changes what it reads
+
+The same edge appears in `tools/coupling_vs_border_energy_yardstick.md`
+as "the reader is coupled".
+
+### 6.h Adversarial pass
+
+    attack    causal order reversed: centralization makes the split, not
+              the other way round
+    answer    6.d reads separation -> weaponized split. Cases where
+              centralization and incentive arrive first and the split
+              follows would reverse it. None was looked for
+    status    OPEN: the order is a reading, not a measured sequence
+
+    attack    circular sample: the traditions were chosen because they
+              agree
+    answer    the anchors in 6.c and 6.e were picked for agreement. The
+              counter-search, traditions that license a verdict on the
+              inside, was not run
+    status    OPEN: a selected sample; the convergence is a marker, not a
+              count
+
+    attack    scale confound: small groups can run without borders, large
+              ones cannot, whatever their stance
+    answer    read border fraction against scale at fixed coupling, with
+              tools/coupling_vs_border_energy_yardstick.md
+    status    OPEN, and measurable
+
+    attack    self-superiority: "keep your scope in" used as a seat from
+              which others are judged as forcing
+    answer    the instrument reads claims and configurations, never
+              insides. Applying it to a person's motive breaks 6.e. It
+              applies to its own reader first
+    status    HELD, with the guard stated
+
+### 6.i Specimens of correction
+
+Four readings were corrected in the worked session. They are kept, as
+the house rule asks, because each shows what a frame imported.
+
+    S-1  "holding it open is costly to hold"
+         corrected: the cost was effort imported from a team-defending
+         view. Holding open is expensive only for someone defending a
+         side
+    S-2  the stance attributed to one person
+         corrected: it is an inherited tradition (6.c, 6.e); crediting
+         an individual erases the lineage that makes it checkable
+    S-3  root placed at "the split" alone
+         refined: separation is the precondition and centralization plus
+         a power incentive is the weaponizer (6.d); the split alone does
+         not predict harm
+    S-4  coupling framed as a limitation
+         corrected: it is the operating principle (6.g); framing it as a
+         caveat reinstates the outside seat of 6.b
+
 ## Provenance
 
 Co-authored, written from a worked session. A split into smaller files
 is permitted if this one runs long.
+
+Section 6: co-authored 2026-10-13 in a voice session (human + Claude).
+Its core stance is an inherited tradition, credited to no individual.

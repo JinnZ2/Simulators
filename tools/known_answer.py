@@ -807,6 +807,7 @@ EXPECTED_METRICS = (
     "tools/experiment_fruitfulness_triage.py::site_ratio",
     "tools/experiment_fruitfulness_triage.py::classify_first",
     "tools/check_citations.py::citation_state",
+    "tools/yardstick.py::read",
 )
 
 
@@ -1739,6 +1740,7 @@ def seed():
     _seed_moving_mean_tracker()
     _seed_fruitfulness_triage()
     _seed_check_citations()
+    _seed_yardstick()
 
 
 def _irb_effective_origins(coupling):
@@ -2735,6 +2737,57 @@ def _seed_check_citations():
          case("host refused", ("N", 2, "?", "UNSEEN"), "UNREACHABLE",
               "a channel that did not answer cannot show absence")],
         note="the one-search and two-search cases are the pin")
+
+
+def _ys_read(items):
+    """tools/yardstick.py::read, imported by path; the three fractions,
+    rounded to 6 places, None where there is no classified spend."""
+    import importlib.util
+    path = os.path.join(ROOT, "tools", "yardstick.py")
+    spec = importlib.util.spec_from_file_location("_yardstick", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    rd = mod.read(mod.load_items(items))
+    return tuple(None if rd[k] is None else round(rd[k], 6)
+                 for k in ("direct", "rolled_exclusive", "rolled_with_shared"))
+
+
+def _ys_item(name, spend, cls, deps=()):
+    return {"item": name, "spend": spend, "class": cls,
+            "depends_on": list(deps)}
+
+
+def _seed_yardstick():
+    """The coupling-vs-border yardstick. Two pins: an item shared between a
+    border item and a coupling root widens the rolled-up reading to a band
+    instead of being split by an assumed ratio, and an input with no
+    classified spend reads None, never 0.0 (which would read as "no border
+    spend at all")."""
+    i = _ys_item
+    register(
+        "tools/yardstick.py::read",
+        _ys_read,
+        [case("all coupling", ([i("a", 10, "coupling")],), (0.0, 0.0, 0.0),
+              "no border spend: every fraction is 0"),
+         case("30 coupling, 10 border", ([i("a", 30, "coupling"),
+                                          i("b", 10, "border")],),
+              (0.25, 0.25, 0.25), "10 / 40, nothing to roll up"),
+         case("admin held up only by the border rolls up",
+              ([i("b", 10, "border", ["adm"]), i("adm", 10, "coordinating"),
+                i("c", 20, "coupling")],), (0.25, 0.5, 0.5),
+              "direct 10/40; rolled (10 + 10)/40; nothing shared"),
+         case("a shared item is a band, never split",
+              ([i("b", 10, "border", ["rec"]), i("rec", 10, "coordinating"),
+                i("c", 20, "coupling", ["rec"])],), (0.25, 0.25, 0.5),
+              "rec serves both: lower end 10/40, upper (10 + 10)/40"),
+         case("a gap stays outside the fraction",
+              ([i("a", 30, "coupling"), i("b", 10, "border"),
+                i("g", 60, None)],), (0.25, 0.25, 0.25),
+              "the unclassified 60 enters no denominator"),
+         case("no classified spend", ([i("g", 5, None)],),
+              (None, None, None),
+              "nothing classified: no fraction exists, which is not 0")],
+        note="the shared band and the None-not-0.0 case are the pins")
 
 
 def seed_reachable(src=None, path=None):
