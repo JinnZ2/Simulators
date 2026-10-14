@@ -337,6 +337,138 @@ python3 tools/deceptive_maze_ga.py
 python3 tests/test_deceptive_maze_ga.py
 ```
 
+## WO-9 — swap the selector; keep WO-8's miss visible
+
+Note 2026-10-14: co-authored human + Claude. WO-8's **descriptor-dependent,
+INCONCLUSIVE** reading above is the motivating finding, not rewritten.
+PROPOSED: collapse lives in the space the selector scores. The following
+test can falsify that reading; it does not assert that convergence is a seal.
+
+### Declaration before the first selector-swap run
+
+Same maze, seeds 0–9, population 100, 150-generation budget, 60 moves,
+mutation 0.05, tournament 3, elite 2, 15 neighbors, three archive additions.
+No seed, objective parameter or decision threshold was tuned after output.
+
+| Condition | What selection reads |
+|---|---|
+| OBJ-F | Endpoint; negative Euclidean endpoint-to-goal distance. |
+| NOV-F | Endpoint; Euclidean k-NN novelty against population plus endpoint archive. |
+| OBJ-V | **The path, not the endpoint**; negative closest approach to the goal anywhere along the path. |
+| NOV-V | Visited-cell set; Jaccard k-NN novelty, same archive-addition rule. |
+
+Each generation measures **mean distance across all unordered population-slot
+pairs**, including duplicate zero-distance pairs: Euclidean in **F**, Jaccard
+in **V**. Half-collapse is the first value **strictly below 50% of that run's
+gen-0 mean**. **40% and 60%** are fixed sensitivity readings, never replacement
+thresholds. Distinct counts are also printed, but do not decide WO-9.
+
+OBJ-V compresses its path to a scalar. The order permits P2 in V “or in its
+path-derived input,” so **before running**, auxiliary **P** was declared as
+mean absolute distance between closest-approach scalars, measured for **all
+four conditions**. Both raw-V-only and V-or-P P2 readings are reported; P is
+not a post-result rescue descriptor. This distinction is material: the
+full visited set is not the same space as its scalar objective input.
+
+P1: OBJ-F halves in F. P2: OBJ-V halves in raw V or the declared scalar P.
+P3: NOV-F and NOV-V do not halve in their own selector spaces. A consistent
+prediction/cross-space falsifier gives FALSIFIED; mixed seed or sensitivity
+readings give INCONCLUSIVE. Report the stricter raw-V interpretation beside
+the permitted compressed-input interpretation, never silently swap them.
+
+### First-run 4×2 table at the unchanged 50% decision threshold
+
+`—` means no crossing **in the observed window**, not no future collapse.
+Lists are ordered by seed 0 through 9; every generation is retained in the
+[full first-run output](samples/fitness_bin_self_test_wo9_suite.sample.txt)
+and [structured per-generation record](samples/fitness_bin_self_test_wo9_summary.json).
+
+| Condition | F half-collapse generation, seeds 0–9 | V half-collapse generation, seeds 0–9 | Solve count |
+|---|---|---|---|
+| OBJ-F | 3, 3, 3, 3, 4, 3, 4, 3, 3, 3 | —, —, —, —, —, —, —, —, —, — | 1/10 |
+| NOV-F | —, —, —, —, —, —, —, —, —, — | —, —, —, —, —, —, —, —, —, — | 10/10 |
+| OBJ-V | —, —, 13, 55, 11, 89, —, —, —, 28 | —, —, —, —, —, —, —, —, —, — | 0/10 |
+| NOV-V | —, —, —, —, —, —, —, —, —, — | —, —, —, —, —, —, —, —, —, — | 9/10 |
+
+OBJ-V's **P** half-generations are **2, 1, 2, 2, 1, 1, 1, 2, 2, 2**. Thus its
+compressed input concentrates while its full visited-set distances do not
+halve. F concentration also varies by seed for OBJ-V; it is not a stable
+raw-space locator. Both F selectors reproduce all twenty WO-8 solve
+outcomes and first/final genotype-entropy values; the small-fixture control
+also compares the complete trajectories to the original search algorithm.
+
+OBJ-V **did not improve solving** in this run: 0/10 versus OBJ-F's 1/10.
+NOV-V solves seeds 0–5 and 7–9; seed 6 remains unsolved at the budget.
+This is a side finding about changing the objective/descriptor, not a
+general performance ranking or an independent-sample prevalence estimate.
+
+### Fixed sensitivity readings and verdict
+
+| Reading | 40% | 50% decision | 60% sensitivity |
+|---|---|---|---|
+| OBJ-F F crossing | 10/10, gens 3–5 | 10/10, gens 3–4 | 10/10, gens 2–3 |
+| OBJ-V V crossing | 0/10 | 0/10 | 1/10, seed 0 at gen 44 |
+| OBJ-V P crossing | 10/10, gens 1–3 | 10/10, gens 1–2 | 10/10, gens 1–2 |
+| NOV-F own F crossing | 0/10 observed | 0/10 observed | 0/10 observed |
+| NOV-V own V crossing | 0/10 observed | 0/10 observed | 0/10 observed |
+| P2 permits predeclared V **or P** | SUPPORTED, all ten | SUPPORTED, all ten | SUPPORTED, all ten |
+| Stricter raw-V-only P2 | FALSIFIED, all ten | FALSIFIED, all ten | SUPPORTED in seed 0; FALSIFIED in nine |
+
+**WO-9 verdict: SUPPORTED only for the predeclared compressed-input
+interpretation**, consistently across ten seeds and all three thresholds.
+**The raw visited-set-space claim is FALSIFIED at 50% in all ten seeds.**
+Its sensitivity aggregate is **INCONCLUSIVE**, because the 60% result
+changes for seed 0. Do not collapse those two readings into an unqualified
+“selection-space law.” The original broad raw-space intuition is not
+established by the scalar result. Jaccard distinct-count blindness has
+been replaced by a distance read, yet raw V still does not half-collapse
+at the declared threshold.
+
+### Rerun the WO-7 collapse–replay pairing
+
+WO-7 was actually run again. Genotype diversity half-collapse: A **5**, B
+**3**; final-cell T5B half-collapse: A **5**, B **5**. Each of A's five native
+winners scores 0 in LEAKY and −12 in the paired SEALED replay. B has wrap
+share **0**. Collapse says **converged**; replay identifies dependence on
+the declared wrapping channel. B's ordinary convergence is not that channel.
+T2 pairing qualifies the read; concentration alone cannot name a seal.
+
+### Honest edges still owed
+
+OBJ-V changes the objective, not only the descriptor. A scalar-input
+collapse could follow the objective change or compression; this probe
+does not disentangle them. Endpoints and complete visited sets retain
+variation the closest-approach scalar discards. Nor is the scalar objective
+the full path: order and repeated visits are not read by closest approach.
+Jaccard measures visitation membership, not path order or timing.
+
+One maze and ten fixed seeds are a **probe, not a law**. Successful runs
+stop at first ANYTIME goal visit, censoring later collapse. A zero gen-0
+distance has no baseline to halve and is reported as such; missing pairs
+are absent, not measured zero. Internal bit masks encode the same visited
+sets exactly; they are not approximate distances. The mutation/reproduction
+kernel, stable tie order and F novelty helper are unchanged. Novelty archives
+store the selected descriptors, not all discarded genomes. No joules,
+world-level causal conclusion or verdict about people is claimed.
+
+WO-9 validation: **75 module checks / 0 failed**; **19 fitness-tool tests
+and 23 maze tests, OK**; method-layer full suite **182 tests, OK**.
+Simulators root suite is **193 tests with exactly the same four baseline
+failure IDs**; no new failing test was hidden or repaired. Known-answer
+coverage is **71/71 complete**, same eleven NOT_RUN loader cases and zero
+unexpected disagreements. The one stale selftest-count assertion (67)
+was recorded before updating it to 75. Existing default output and all
+WO-7/T5+/WO-8 samples remain unchanged. `KNOWN_RED.md` is untouched.
+Same-seed controls cover all four selectors; handwritten controls cover
+Jaccard, both pairwise spaces, path versus endpoint and strict thresholds.
+These are synthetic calibration, not external validation.
+
+```sh
+python3 tools/fitness_bin_self_test.py --wo9
+python3 tools/fitness_bin_self_test.py --selftest
+python3 tests/test_deceptive_maze_ga.py
+```
+
 ## Honest edges
 
 Some exploits are only simulator bugs: they read the **instrument**, not the world. The toy's topology is exactly such a case. A readout can still be useful, but the system it describes must travel with it.

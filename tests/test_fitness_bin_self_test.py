@@ -22,7 +22,7 @@ class FitnessBinSelfTest(unittest.TestCase):
         with contextlib.redirect_stdout(io.StringIO()) as output:
             code = fb.selftest()
         self.assertEqual(code, 0, output.getvalue())
-        self.assertIn("VERDICT: PASS   checks=67 failed=0", output.getvalue())
+        self.assertIn("VERDICT: PASS   checks=75 failed=0", output.getvalue())
 
     def test_sample_is_complete_default_output(self):
         p = subprocess.run([sys.executable, str(TOOL)], capture_output=True,
@@ -147,6 +147,22 @@ class BehaviorLedger(unittest.TestCase):
         self.assertEqual(fb.separation_verdict([False, False], [False, False]), "NEGATIVE")
         self.assertEqual(fb.separation_verdict([True, False], [False, False]), "INCONCLUSIVE")
         self.assertEqual(fb.separation_verdict([], []), "INCONCLUSIVE")
+
+
+class SelectorReading(unittest.TestCase):
+    def test_predeclared_P2_interpretations_are_not_interchanged(self):
+        def run(f, v, p):
+            return {"half": {"0.5": {"F": f, "V": v, "P": p}}}
+        paired = {"OBJ-F": run(2, None, 2), "NOV-F": run(None, None, None),
+                  "OBJ-V": run(None, None, 2), "NOV-V": run(None, None, None)}
+        self.assertEqual(fb.wo9_seed_reading(paired, allow_path_scalar=True)["verdict"], "SUPPORTED")
+        self.assertEqual(fb.wo9_seed_reading(paired, allow_path_scalar=False)["verdict"], "FALSIFIED")
+
+    def test_seed_or_sensitivity_variation_is_inconclusive(self):
+        self.assertEqual(fb.aggregate_wo9({"0.4": [{"verdict": "SUPPORTED"}],
+                                          "0.5": [{"verdict": "FALSIFIED"}]}), "INCONCLUSIVE")
+        self.assertEqual(fb.aggregate_wo9({"0.5": [{"verdict": "SUPPORTED"},
+                                                   {"verdict": "SUPPORTED"}]}), "SUPPORTED")
 
 
 if __name__ == "__main__":
