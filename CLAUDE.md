@@ -14287,6 +14287,29 @@ ship a `requirements.txt`. Each folder ships `samples/`.
     of the first six, none ran P2 even in part. `animacy-pass/`'s
     `dependency_check.py` and `unweld.py` run it in part. Check count
     printed by `--selftest`.
+  - `experiment_fruitfulness_triage.md` + `.py` — BIDIRECTIONAL IS NOT REVERSIBLE:
+    a TRIAGE rubric for five reversible-loop experiment sites (stability,
+    compression, dormant-face cost, Landauer/erasure join, inverse-direction
+    reuse), not a validation of any. Each site carries a found / scope /
+    unresolved triple, a cheapest distinguishing experiment, resource costs,
+    located anchors (site 1 and site 4 had published partial answers before
+    any assumption of none) and a retention field saying whether the test
+    reaches PERSISTENT or REVERSIBLE. The score is fruit per resource, split
+    into Q-LOOP and Q-REV; a site that cannot test recovery is NOT_REACHED on
+    Q-REV, never zero. Over 64 settings of cost map and weights: Q-REV reads
+    FIRST_ROBUST:S4 (the 2x2 erasure ledger, loop and reversibility in
+    separate cells); Q-LOOP reads FIRST_UNRESOLVED:S1,S4, a tie the rubric
+    holds rather than breaks. Calibration on site 2 was pre-registered: a
+    blind fill committed and hash-pinned before comparison with the
+    published instance, declared contaminated (the work order states the
+    answer; the filler had read it), so kept as structural. The instance
+    moved site 2's score by 0.000 and changed its content: MATCH 1, PARTIAL
+    3, NO_SLOT 3, NOT_LOCATED 1, the bin being "site 2 is a design
+    comparison" where the result is emergence under a constraint; field (g)
+    EMERGENCE was added. The work order's reason for ranking site 2 ahead
+    (replicating published numbers) does not survive: the replication is
+    the best site-2 variant under no profile. `--blind-packet` emits the
+    stripped packet for a clean run. Check count printed by `--selftest`.
 - `animacy-pass/` — The animacy pass from the operator's five-pass method,
   as a dependency check. For the thing a claim names, it asks what matter
   or energy is a prerequisite. Animacy here is degree of coupling, not

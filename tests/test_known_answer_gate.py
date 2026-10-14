@@ -88,6 +88,8 @@ MANIFEST = (
     "potential/matrix/check_attested_provenance.py::unprovenanced_attested",
     "moving-mean-tracker/tracker.py::quantile",
     "moving-mean-tracker/tracker.py::share_gap",
+    "tools/experiment_fruitfulness_triage.py::site_ratio",
+    "tools/experiment_fruitfulness_triage.py::classify_first",
 )
 
 # Cases known to fail today. A case that starts passing turns this red so

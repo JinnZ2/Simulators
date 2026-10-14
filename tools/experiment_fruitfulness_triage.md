@@ -29,6 +29,8 @@ fill site 2 from that packet alone, hash the fill, then come back
 ```
 
 Scorer: `tools/experiment_fruitfulness_triage.py` (stdlib; section 8).
+It is the work order's optional `score.py`, named after the rubric
+so the pair sorts together in `tools/`.
 
 ## 0. Two things to carry, whatever else is dropped
 
@@ -1144,6 +1146,20 @@ discovery
 - A mirror in the `method-layer` repository, where earlier `tools/`
   reasoning notes were mirrored: not done; that repository is outside
   this session's scope.
+- No experiment in the table has been run. The scorer orders them; it
+  measures nothing about loops.
+- The clean calibration run (7.7) has not been done. The only fill on
+  record is contaminated (7.1) and is used structurally.
+- The (g) variants at sites 1, 3, 4 and 5 are unscored. A scored (g)
+  variant moves the first set only by beating the tied 2.500, which
+  takes all-low cost, d = 2 and u + k + x = 6 (ratio 3.000). Whether any
+  does is unchecked, not ruled out.
+- Profiles other than this-session are declared, not measured.
+- The components are ordinal judgments on 0..2 by the author of the
+  rubric, each with a stated reason. The sweep (CHOICE 4) bounds how far
+  the cost map and weights can move the ranking; nothing bounds a
+  different reader scoring the components differently. A second scorer
+  is the check.
 
 ## Appendix A - the work order, as delivered
 
@@ -1253,4 +1269,7 @@ OUTPUT
 
 Built from a work order delivered in session, carried verbatim in
 Appendix A. Anchors located by web search on 2026-10-13 at snippet
-depth. The R1 and R2 arithmetic was recomputed here.
+depth. The R1 and R2 arithmetic is recomputed by the scorer's selftest,
+which also holds the triage-result block, the calibration counts and the
+blind fill's hash to what it computes. Commits: d5f5c2a (pre-calibration,
+blind fill pinned), then the calibration and the scorer.

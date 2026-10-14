@@ -804,6 +804,8 @@ EXPECTED_METRICS = (
     "potential/matrix/check_attested_provenance.py::unprovenanced_attested",
     "moving-mean-tracker/tracker.py::quantile",
     "moving-mean-tracker/tracker.py::share_gap",
+    "tools/experiment_fruitfulness_triage.py::site_ratio",
+    "tools/experiment_fruitfulness_triage.py::classify_first",
 )
 
 
@@ -1734,6 +1736,7 @@ def seed():
     _seed_settlement_split()
     _seed_work_order_metrics()
     _seed_moving_mean_tracker()
+    _seed_fruitfulness_triage()
 
 
 def _irb_effective_origins(coupling):
@@ -2626,6 +2629,73 @@ def _seed_moving_mean_tracker():
         note="the 0.0 against UNRATED against None is the pin: a measured "
              "agreement, an absent reference, and an absent sample are "
              "three states")
+
+
+def _eft(fn_name, *args, **kw):
+    """tools/experiment_fruitfulness_triage.py, imported by path."""
+    import importlib.util
+    path = os.path.join(ROOT, "tools", "experiment_fruitfulness_triage.py")
+    spec = importlib.util.spec_from_file_location("_eft_scorer", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return getattr(mod, fn_name)(*args, **kw)
+
+
+def _eft_site_ratio(*args, **kw):
+    return _eft("site_ratio", *args, **kw)
+
+
+def _eft_classify_first(first_sets):
+    return _eft("classify_first", first_sets)
+
+
+def _seed_fruitfulness_triage():
+    """The triage scorer's ratio and its reading over the sweep. The REV
+    case at r = 0 must read NOT_REACHED and never 0; a tie held in every
+    setting must read UNRESOLVED and never pick a site."""
+    low = ("low", "low", "low", "low")
+    register(
+        "tools/experiment_fruitfulness_triage.py::site_ratio",
+        _eft_site_ratio,
+        [case("all components 2, all costs low, LOOP",
+              (2, 2, 2, 2, 2) + low, 3.0,
+              "fruit 2*(2+2+2) = 12 over cost 1+1+1+1 = 4; by hand",
+              tol=1e-12),
+         case("d = 0 returns no fruit", (0, 2, 2, 2, 2) + low, 0.0,
+              "an experiment that cannot separate (a) from (b) returns "
+              "nothing whatever else it has: 0 * (...) = 0"),
+         case("r = 0 on REV is NOT_REACHED", (2, 2, 2, 2, 0) + low,
+              "NOT_REACHED",
+              "no recovery readout, no Q-REV score; a 0 here would rank "
+              "an unreached site below a reached one that scored 0.1",
+              kwargs={"question": "REV"}),
+         case("r = 1 halves REV", (2, 2, 2, 2, 1) + low, 1.5,
+              "12 * 1/2 = 6 over cost 4; by hand",
+              kwargs={"question": "REV"}, tol=1e-12),
+         case("all costs high", (2, 2, 2, 2, 2,
+                                 "high", "high", "high", "high"),
+              12.0 / 36.0,
+              "fruit 12 over cost 9*4 = 36 under [CHOICE 2]; a metric "
+              "that ignored cost would return 3.0", tol=1e-12)],
+        note="the NOT_REACHED case is the pin: an absent Q-REV reading is "
+             "a state, and the high-cost case catches a ratio that drops "
+             "its denominator")
+    register(
+        "tools/experiment_fruitfulness_triage.py::classify_first",
+        _eft_classify_first,
+        [case("sole first everywhere", ([{"S1"}] * 4,), "FIRST_ROBUST:S1",
+              "S1 alone first in 4 of 4 settings"),
+         case("sole first in 3 of 4", ([{"S1"}] * 3 + [{"S2"}],),
+              "FIRST_SCOPED:S1", "3 of 4 is a strict majority, not all"),
+         case("split 2 and 2", ([{"S1"}] * 2 + [{"S2"}] * 2,),
+              "FIRST_UNRESOLVED:S1,S2",
+              "2 of 4 is no majority; the union is reported"),
+         case("tie in every setting", ([{"S1", "S4"}] * 4,),
+              "FIRST_UNRESOLVED:S1,S4",
+              "a tie held in all settings is not a win for either; "
+              "breaking it alphabetically would return FIRST_ROBUST:S1")],
+        note="the last case is the pin: a classifier that broke ties by "
+             "name would read the rubric's own S1 / S4 tie as a result")
 
 
 def seed_reachable(src=None, path=None):
