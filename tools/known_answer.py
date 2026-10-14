@@ -806,6 +806,7 @@ EXPECTED_METRICS = (
     "moving-mean-tracker/tracker.py::share_gap",
     "tools/experiment_fruitfulness_triage.py::site_ratio",
     "tools/experiment_fruitfulness_triage.py::classify_first",
+    "tools/check_citations.py::citation_state",
 )
 
 
@@ -1737,6 +1738,7 @@ def seed():
     _seed_work_order_metrics()
     _seed_moving_mean_tracker()
     _seed_fruitfulness_triage()
+    _seed_check_citations()
 
 
 def _irb_effective_origins(coupling):
@@ -2696,6 +2698,43 @@ def _seed_fruitfulness_triage():
               "breaking it alphabetically would return FIRST_ROBUST:S1")],
         note="the last case is the pin: a classifier that broke ties by "
              "name would read the rubric's own S1 / S4 tie as a result")
+
+
+def _cc_citation_state(*args):
+    """tools/check_citations.py::citation_state, imported by path."""
+    import importlib.util
+    path = os.path.join(ROOT, "tools", "check_citations.py")
+    spec = importlib.util.spec_from_file_location("_cc_checker", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.citation_state(*args)
+
+
+def _seed_check_citations():
+    """The four-state citation rule of the external-report audit. The pin
+    is the pair of empty searches: one search that finds nothing must read
+    UNREACHABLE, two must read NOT_FOUND. A rule that read one empty
+    search as absence would turn every unindexed source into a finding
+    against the report that cited it."""
+    register(
+        "tools/check_citations.py::citation_state",
+        _cc_citation_state,
+        [case("seen, and it says the same", ("Y", 1, "Y", "MATCH"),
+              "VERIFIED", "exists Y and says MATCH; by the rule"),
+         case("seen, and it says something else", ("Y", 1, "Y", "DIFFERS"),
+              "CORRECTED", "exists Y and says DIFFERS; by the rule"),
+         case("one empty search", ("Y", 1, "N", "UNSEEN"), "UNREACHABLE",
+              "absence on fewer than two searches is not a check"),
+         case("two empty searches", ("Y", 2, "N", "UNSEEN"), "NOT_FOUND",
+              "two searches on a searchable identifier, channel answered"),
+         case("ID resolves to another work", ("Y", 1, "OTHER", "UNSEEN"),
+              "NOT_FOUND", "the source is not at that ID"),
+         case("source there, figure unseen", ("Y", 5, "Y", "UNSEEN"),
+              "UNREACHABLE", "a source that exists is not missing because "
+              "one figure in it was not seen"),
+         case("host refused", ("N", 2, "?", "UNSEEN"), "UNREACHABLE",
+              "a channel that did not answer cannot show absence")],
+        note="the one-search and two-search cases are the pin")
 
 
 def seed_reachable(src=None, path=None):

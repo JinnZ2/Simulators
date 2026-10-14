@@ -14306,10 +14306,43 @@ ship a `requirements.txt`. Each folder ships `samples/`.
     moved site 2's score by 0.000 and changed its content: MATCH 1, PARTIAL
     3, NO_SLOT 3, NOT_LOCATED 1, the bin being "site 2 is a design
     comparison" where the result is emergence under a constraint; field (g)
-    EMERGENCE was added. The work order's reason for ranking site 2 ahead
-    (replicating published numbers) does not survive: the replication is
-    the best site-2 variant under no profile. `--blind-packet` emits the
-    stripped packet for a clean run. Check count printed by `--selftest`.
+    EMERGENCE was added. The contaminated fill stays as committed (d5f5c2a)
+    as a correction specimen; the clean run goes beside it. The (g)
+    variants at sites 1, 3, 4 and 5 were then scored (2026-10-14) and do not
+    break the S1/S4 tie: none is a site's best in any of 2304 site-cells, and
+    at the declared cost map none could, since training needs compute medium
+    and caps a (g) variant at 2.000 under the tied 2.500. The work order's
+    premise "start at site 2" (replicating published numbers) does not
+    survive: the replication costs 18 against 4 and is the best site-2
+    variant under no profile; section 9 keeps that line visible.
+    `--blind-packet` emits the stripped packet for a clean run, owed to a
+    reader who has not seen the paper. Check count printed by `--selftest`.
+  - `external_report_audit_okcomputer.md` + `check_citations.py` — an audit
+    of two outside research reports (OKComputer outputs, dated 2026-10-14),
+    kept with its mismatches on purpose; it endorses neither the reports nor
+    the glyph roles they propose, and the reports are not copied in (two
+    sha256 pins, quotes held to a word budget). PART A: 100 load-bearing
+    citations in four states derived from a ledger, never declared —
+    VERIFIED 66, CORRECTED 7 (each with the value the source gives),
+    NOT_FOUND 0, UNREACHABLE 27, the last kept apart from NOT_FOUND by rule:
+    NOT_FOUND needs two empty searches or a different object at the ID. The
+    figures are checked too (one plots a formula, not data; one
+    puts unlike quantities on one percent axis). PART B: verdict import
+    (`certif` occurs 41 times in the companion, `readout` 0; user decision
+    rules on a readout kept apart from rules baked into the instrument), the
+    outside seat, welded words (retention in four senses; one report slides
+    PERSISTENT into REVERSIBLE), bins read before binning. The convergence
+    with the operator's notes is read, not adopted: the reports were written
+    from those notes. PART C re-scores the WO-3 sites on anchors that passed
+    Part A, against all seven fields including (g), enforced by the checker
+    (a change resting on any other state is refused): one component moves,
+    no reading does, 0 of 7 of the reports' tests is (g)-shaped (the shared
+    bin is BUILT, the one the rubric's own blind fill had), and the sixth site (the
+    redundancy / generality / maintenance frontier) never takes first, its
+    question being answered before it is run. `citation_state` is registered
+    in `tools/known_answer.py`; the report hashes, URL inventory and quote
+    budget print NOT_RUN without `--reports DIR`. Check count printed by
+    `--selftest`.
 - `animacy-pass/` — The animacy pass from the operator's five-pass method,
   as a dependency check. For the thing a claim names, it asks what matter
   or energy is a prerequisite. Animacy here is degree of coupling, not

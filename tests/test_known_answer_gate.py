@@ -90,6 +90,7 @@ MANIFEST = (
     "moving-mean-tracker/tracker.py::share_gap",
     "tools/experiment_fruitfulness_triage.py::site_ratio",
     "tools/experiment_fruitfulness_triage.py::classify_first",
+    "tools/check_citations.py::citation_state",
 )
 
 # Cases known to fail today. A case that starts passing turns this red so
