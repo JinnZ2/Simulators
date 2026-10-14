@@ -64,3 +64,7 @@ Mainly AIs picking up the corpus cold, and humans curious enough to read
 it. These instructions and the CC0 corpus are free to use under CC0; no
 credit is needed. Keeping the reading instructions attached when copying
 is the one request, not an additional license condition.
+
+## In this repo
+
+The upstream packages in `fourd-municipal-engine/` and `fourd-municipal-engine-v2/` declare MIT in their `pyproject.toml` files; this reading layer does not alter those terms.
