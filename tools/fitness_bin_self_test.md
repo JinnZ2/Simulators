@@ -73,7 +73,7 @@ The [complete sample output](samples/fitness_bin_self_test.sample.txt) is the fi
 
 **Selftest:** 43 checks, 0 failed on its first run. It checks the handwritten `WS` wrapping genome, a wrap-free walking genome, known diversity, known replay loss, absent versus measured-zero cases, deterministic complete output, archive sizes and all experiment reading classes (including a planted broken control). These are SELF-GRADED synthetic regression checks, not outside validation. Four numerical metrics are also registered in Simulators' known-answer harness with nonconstant hand-known cases; the two historical pinned reds remain untouched.
 
-### Repository regression result
+### Repository regression result (original WO-7)
 
 New focused suite: **8 tests, OK**, including byte-identical regeneration of
 the committed sample, same initial population in both worlds, full archive
@@ -96,6 +96,114 @@ that the repository gate is green. The artifact gate's four checks were all
 HELD_RETRIEVABLE on the baseline. The method-layer mirror suite is **148
 tests, OK** (140 before). Tests were run; historical specimen experiments
 and world-facing CLAIM_TABLE falsifiers were not reproduced.
+
+## T5+ — erasure ledger and conditional rediscovery
+
+Added from the follow-up supplied on 2026-10-14. The [original first-run
+sample](samples/fitness_bin_self_test.sample.txt) remains byte-for-byte intact
+from [Simulators PR #220](https://github.com/JinnZ2/Simulators/pull/220).
+The [extended T5+ sample](samples/fitness_bin_self_test_t5plus.sample.txt)
+uses **the same seed, budget, selection and RNG draws**. Its winner genomes,
+replay scores, discard archive hashes and positive/control readings all
+match the original; only passive observations and output were added.
+
+The per-selection ledger holds `H_before_bits`, `H_survivors_bits`,
+`H_next_bits`, signed entropy changes, every locus/allele whose **last active
+breeding copy** was removed, whether mutation immediately restored it,
+conditional rediscovery generations and `rebuild_over_hold`. It also records
+`archive_retained: true`: loss from the active population is **not** loss
+from the archive, and neither is automatically a physical erasure.
+
+Entropy is `H = -sum_loci sum_alleles p log2(p)`. It measures marginal
+allele-distribution uncertainty, not missing-allele count, joint genotype
+entropy, computational work or joules. An entropy drop can occur while
+every allele survives. Entropy can also **increase** under selection:
+selecting `N,E` from `N,N,N,E` moves one-locus entropy from about 0.8113 to
+1 bit without losing support. The diagram's `H_(t+1) < H_t` is a possible
+observation, not an invariant. The ledger retains negative drops and
+recovery instead of clipping them into “bits erased”. It does not attribute
+changes uniquely to selection versus drift from one run.
+
+### Rediscovery column: use the mutation kernel that actually runs
+
+The supplied rough expression `(k-1)/(N*mu)` assumes mutation draws only
+different alleles and treats the per-generation event probability as small.
+This toy instead redraws uniformly from **all** `k=4` moves, including the old
+move. Only `C = population - retained = 32` offspring mutate; retained
+elites do not. Conditional on the target allele being absent from parents,
+independent offspring and a fixed budget:
+
+```text
+P(reappearance in one generation) = 1 - (1 - mu/k)^C
+E[generations until first reappearance] = 1 / P
+mu = 1/24; k = 4; C = 32  ->  about 3.512219 generations
+```
+
+That is a **model expectation**, not an observed waiting-time estimate. It
+does not establish that the allele will be useful, selected, kept, or part
+of a needed building block. Zero mutation has no finite waiting time, never
+zero waiting. Distinct-allele mutation would require a different kernel.
+Linkage is not measured: `NN,EE,NE,EN` → `NN,EE` keeps all marginal alleles
+and the same marginal entropy, while losing the NE/EN combinations. A
+generic product of single-allele waiting times is not a justified block
+waiting time; joint mutation, recombination and survival assumptions must
+be declared before computing one.
+
+### Archive-versus-rebuild ratio
+
+Default **UNRATED**: stored bytes and expected generations are unlike units,
+and no holding/retrieval cost or per-generation rebuild cost was supplied.
+With caller-declared costs on a common basis:
+
+```text
+rebuild_over_hold = E[rediscovery generations] * generation_cost / hold_cost
+```
+
+A value above 1 favors retention **under those supplied costs and the
+rediscovery assumptions**; it does not choose archive size or change the
+GA. `hold_cost` is per lost allele over a caller-declared holding horizon
+and must include the desired retrieval basis. Shared storage costs and
+multiple losses can overlap, so summing per-allele ratios would double-count
+without a cost-allocation model. Use, for example:
+
+```sh
+# Synthetic illustrative costs, not measured costs:
+python3 tools/fitness_bin_self_test.py --hold-cost 4 --generation-cost 3 --cost-unit work_units
+# Full discards plus both per-selection ledgers:
+python3 tools/fitness_bin_self_test.py --archive /tmp/wo7-discards.json
+```
+
+Nothing here claims physical Landauer joules or measured compute saved.
+The “rediscovery bill” and “erasure bought on credit” descriptions are
+information-cost analogies, not energy or financial measurements. Applying
+them to people would also be an analogy, **not a demonstrated identity of
+mathematical models**. Whether lost material would later help is conditional.
+
+### Extended run and checks
+
+Both runs start at **46.676956 marginal entropy bits**. A ends at
+**4.494360**, B at **12.758442**. There are **1,246** last-active-copy loss
+events in A and **1,014** in B; **369** and **297**, respectively, are restored
+in the very next population. These are **repeated event counts**, not unique
+alleles lost forever. Every event's old genome is held in the discard
+archive. Both default cost ratios remain **UNRATED**. The entropy and
+fitness curves are printed for every generation; no seal signature is
+assumed and no missing building block is inferred from a plateau.
+
+Current module selftest: **57 checks, 0 failed**. T5+ adds controls for
+entropy change without support loss, entropy increase, hidden linkage,
+the actual mutation kernel and incomparable costs. The historical eight
+regression tests first returned two stale-expectation failures (old count
+43 and old output); those were recorded before updating them to count 57
+and the separate extended sample. The original sample was not rewritten.
+The new combined instrument suite has **13 tests**; the method-layer full
+suite has **153 tests, OK**. Simulators' root suite now has **164 tests and
+the same four pre-existing failures**, with no added or removed failing IDs.
+Seven instrument metrics have **26 passing known-answer cases**;
+registry completeness is **60/60**, with the same eleven NOT_RUN cases and
+two pinned FAIL anchors. The bounded original whole-tree
+census hit its **600-second timeout**, exit 124, before reporting an
+aggregate: census is **INCOMPLETE / no verdict**, not passed or failed.
 
 ## Honest edges
 
