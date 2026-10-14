@@ -88,6 +88,10 @@ MANIFEST = (
     "potential/matrix/check_attested_provenance.py::unprovenanced_attested",
     "moving-mean-tracker/tracker.py::quantile",
     "moving-mean-tracker/tracker.py::share_gap",
+    "tools/fitness_bin_self_test.py::fitness",
+    "tools/fitness_bin_self_test.py::wrap_share",
+    "tools/fitness_bin_self_test.py::diversity",
+    "tools/fitness_bin_self_test.py::fitness_drop",
 )
 
 # Cases known to fail today. A case that starts passing turns this red so

@@ -804,6 +804,10 @@ EXPECTED_METRICS = (
     "potential/matrix/check_attested_provenance.py::unprovenanced_attested",
     "moving-mean-tracker/tracker.py::quantile",
     "moving-mean-tracker/tracker.py::share_gap",
+    "tools/fitness_bin_self_test.py::fitness",
+    "tools/fitness_bin_self_test.py::wrap_share",
+    "tools/fitness_bin_self_test.py::diversity",
+    "tools/fitness_bin_self_test.py::fitness_drop",
 )
 
 
@@ -1020,6 +1024,7 @@ def _mp_stiffness_ratio(nb, nh, ab, ah):
 
 def seed():
     """Registers the two instances the rule was earned from."""
+    _seed_fitness_bin_self_test()
     fn, detail = _extract_verdict()
     register(
         "null-harness/null_harness.py::_verdict",
@@ -2626,6 +2631,62 @@ def _seed_moving_mean_tracker():
         note="the 0.0 against UNRATED against None is the pin: a measured "
              "agreement, an absent reference, and an absent sample are "
              "three states")
+
+
+def _fbst_metric(fn_name, *args):
+    """WO-7 pure metrics; normal import from tools, with no GA run."""
+    import importlib.util
+    path = os.path.join(ROOT, "tools", "fitness_bin_self_test.py")
+    spec = importlib.util.spec_from_file_location("_fbst", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return getattr(mod, fn_name)(*args)
+
+
+def _fbst_fitness(*args):
+    return _fbst_metric("fitness", *args)
+
+
+def _fbst_wrap_share(*args):
+    return _fbst_metric("wrap_share", *args)
+
+
+def _fbst_diversity(*args):
+    return _fbst_metric("diversity", *args)
+
+
+def _fbst_fitness_drop(*args):
+    return _fbst_metric("fitness_drop", *args)
+
+
+def _seed_fitness_bin_self_test():
+    """Nonconstant hand-known answers, including absent != measured zero."""
+    register(
+        "tools/fitness_bin_self_test.py::fitness", _fbst_fitness,
+        [case("goal", ([8, 8], [8, 8]), 0, "distance zero, so score zero"),
+         case("start", ([0, 0], [8, 8]), -16, "-(8+8) by hand"),
+         case("one step off", ([7, 8], [8, 8]), -1, "-(1+0) by hand")])
+    register(
+        "tools/fitness_bin_self_test.py::wrap_share", _fbst_wrap_share,
+        [case("all", ([{"wraps": 2}, {"wraps": 1}],), 1.0,
+              "two of two slots use at least one wrap"),
+         case("none", ([{"wraps": 0}, {"wraps": 0}],), 0.0,
+              "observed zero of two, not absent"),
+         case("half", ([{"wraps": 0}, {"wraps": 3}],), 0.5,
+              "one of two, not three events over two slots"),
+         case("absent", ([],), None, "no winner slots, no denominator")])
+    register(
+        "tools/fitness_bin_self_test.py::diversity", _fbst_diversity,
+        [case("hand population", (["NN", "NE", "EE"],), 2 / 3,
+              "pair distances 1,2,1: 4/(3*2)"),
+         case("clones", (["NN", "NN"],), 0.0, "zero differing loci"),
+         case("opposites", (["NN", "EE"],), 1.0, "two of two loci differ"),
+         case("one slot", (["NN"],), None, "no pairs, not zero diversity")])
+    register(
+        "tools/fitness_bin_self_test.py::fitness_drop", _fbst_fitness_drop,
+        [case("loss", (0, -16), 16, "native minus changed: 0-(-16)"),
+         case("held", (0, 0), 0, "equal scores, measured zero loss"),
+         case("improvement", (-3, 0), -3, "-3-0, retain direction")])
 
 
 def seed_reachable(src=None, path=None):
