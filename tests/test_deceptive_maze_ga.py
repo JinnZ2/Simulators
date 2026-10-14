@@ -110,5 +110,50 @@ class MazeControls(unittest.TestCase):
         self.assertEqual(sum(line.startswith(" => solved ") for line in text.splitlines()), 2)
 
 
+class SelectorSwapControls(unittest.TestCase):
+    def test_jaccard_known_sets_and_masks(self):
+        self.assertEqual(maze.jaccard_distance({1}, {1}), 0.0)
+        self.assertEqual(maze.jaccard_distance({1}, {2}), 1.0)
+        self.assertAlmostEqual(maze.jaccard_distance({1, 2}, {2, 3}), 2 / 3)
+        self.assertEqual(maze.jaccard_distance(set(), set()), 0.0)
+        self.assertEqual(maze.jaccard_distance(1, 3), 0.5)
+
+    def test_mean_pairwise_population_slot_weighting(self):
+        self.assertAlmostEqual(maze.mean_pairwise([(0, 0), (3, 4), (0, 0)], "F"), 10 / 3)
+        self.assertAlmostEqual(maze.mean_pairwise([{1}, {1, 2}, {2}], "V"), 2 / 3)
+        self.assertEqual(maze.mean_pairwise([2, 2, 5], "P"), 2.0)
+        self.assertIsNone(maze.mean_pairwise([(0, 0)], "F"))
+
+    def test_threshold_and_sensitivity_are_separate(self):
+        self.assertEqual(maze.DISTANCE_THRESHOLD, 0.5)
+        self.assertEqual(maze.DISTANCE_SENSITIVITY, (0.4, 0.5, 0.6))
+        self.assertIsNone(maze.half_distance_gen([2.0, 1.0, 0.9], 0.4))
+        self.assertEqual(maze.half_distance_gen([2.0, 1.0, 0.9], 0.5), 2)
+        self.assertEqual(maze.half_distance_gen([2.0, 1.0, 0.9], 0.6), 1)
+
+    def test_path_input_differs_from_endpoint(self):
+        route = [2] * 11 + [0] * 12 + [3] * 11 + [1]
+        endpoint, mask, closest, hit = maze._path_observation(route)
+        self.assertEqual(endpoint, (2, 12))
+        self.assertEqual(closest, 0.0)
+        self.assertTrue(hit)
+        self.assertEqual(maze.objective(endpoint), -1.0)
+        self.assertTrue(mask & (1 << (13 * maze.W + 2)))
+
+    def test_all_selectors_seeded_small_fixture(self):
+        with mock.patch.multiple(maze, POP=20, GENS=4, K_NN=5):
+            for condition in maze.SELECTOR_CONDITIONS:
+                self.assertEqual(maze.selector_run(condition, 7), maze.selector_run(condition, 7))
+
+    def test_F_search_is_original_with_passive_observations(self):
+        with mock.patch.multiple(maze, POP=20, GENS=4, K_NN=5):
+            for condition, mode in [("OBJ-F", "objective"), ("NOV-F", "novelty")]:
+                original = maze.evolve(mode, 7)
+                observed = maze.selector_run(condition, 7)
+                self.assertEqual((observed["solved_gen"],
+                                  [r["genotype_entropy_bits_per_locus"] for r in observed["rows"]],
+                                  observed["archive_size"]), original)
+
+
 if __name__ == "__main__":
     unittest.main()

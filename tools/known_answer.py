@@ -819,6 +819,9 @@ EXPECTED_METRICS = (
     "tools/fitness_bin_self_test.py::behavior_metrics",
     "tools/fitness_bin_self_test.py::behavior_half_gen",
     "tools/fitness_bin_self_test.py::behavior_ledger",
+    "tools/deceptive_maze_ga.py::jaccard_distance",
+    "tools/deceptive_maze_ga.py::mean_pairwise",
+    "tools/deceptive_maze_ga.py::half_distance_gen",
 )
 
 
@@ -2729,6 +2732,18 @@ def _maze_half_gen(*args):
     return _maze_metric("half_gen", *args)
 
 
+def _maze_jaccard(*args):
+    return _maze_metric("jaccard_distance", *args)
+
+
+def _maze_pairwise(*args):
+    return _maze_metric("mean_pairwise", *args)
+
+
+def _maze_distance_half(*args):
+    return _maze_metric("half_distance_gen", *args)
+
+
 def _seed_fitness_maze():
     register(
         "tools/deceptive_maze_ga.py::dist", _maze_dist,
@@ -2768,6 +2783,33 @@ def _seed_fitness_maze():
               "equal to the half threshold is not strictly below"),
          case("below at one", ([2.0, 0.9, 0.8],), 1,
               "first below at index one, not last below")])
+    register(
+        "tools/deceptive_maze_ga.py::jaccard_distance", _maze_jaccard,
+        [case("identical sets", ({1, 2}, {1, 2}), 0.0,
+              "intersection equals union"),
+         case("disjoint", ({1}, {2}), 1.0, "empty intersection, nonempty union"),
+         case("one of three shared", ({1, 2}, {2, 3}), 2 / 3,
+              "one shared of three union cells: 1-1/3", tol=1e-12),
+         case("empty convention", (set(), set()), 0.0,
+              "explicitly identical empty sets, not division by zero")])
+    register(
+        "tools/deceptive_maze_ga.py::mean_pairwise", _maze_pairwise,
+        [case("F duplicate weighted slots", ([(0, 0), (3, 4), (0, 0)], "F"), 10 / 3,
+              "three unordered slot pairs: five, zero, five", tol=1e-12),
+         case("V hand population", ([{1}, {1, 2}, {2}], "V"), 2 / 3,
+              "three pairs: one half, one, one half", tol=1e-12),
+         case("P scalar hand population", ([2, 2, 5], "P"), 2.0,
+              "absolute distances zero, three, three; mean two"),
+         case("no pair", ([(0, 0)], "F"), None,
+              "one slot cannot supply a pair; absence not measured zero")])
+    register(
+        "tools/deceptive_maze_ga.py::half_distance_gen", _maze_distance_half,
+        [case("strict half at two", ([2.0, 1.0, 0.9],), 2,
+              "equal at one, strictly below half at two"),
+         case("40 percent no crossing", ([2.0, 1.0, 0.9], 0.4), None,
+              "nothing below eight tenths"),
+         case("60 percent at one", ([2.0, 1.0, 0.9], 0.6), 1,
+              "one is below twelve tenths at index one")])
 
 
 def _seed_fitness_bin_self_test():

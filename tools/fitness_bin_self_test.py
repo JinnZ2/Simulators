@@ -31,6 +31,15 @@ STRICTLY BELOW 0.5 * initial distinct; early = generation <= budget//4.
 Descriptor control changes ONLY the ledger: final_cell vs the complete
 set of cells visited. Novelty selection continues to use final-cell
 Euclidean distance in both descriptor runs. No threshold or seed search.
+
+WO-9, declared 2026-10-14 BEFORE selector-swap runs: mean pairwise distance
+in F (Euclidean endpoints) and V (Jaccard visited sets), every generation.
+Decision: first strictly < 0.50 of its own gen-0 mean. Sensitivity 0.40 and
+0.60 is reported separately, never substituted. OBJ-V reads the PATH via
+its closest-approach scalar; auxiliary P = mean absolute distance between
+those scalars is recorded for ALL conditions up front, not chosen later.
+P2 is reported both in raw V and this declared compressed input. A seed-
+or sensitivity-dependent answer is INCONCLUSIVE; keep WO-8's finding.
 """
 
 import argparse
@@ -494,6 +503,14 @@ def selftest():
         maze.run_path([2] * 11 + [0] * 12 + [3] * 11), ((2, 13), True))
     chk("maze straight north stays in pocket",
         maze.run_path([0] * 60), ((2, 6), False))
+    chk("Jaccard identical", maze.jaccard_distance({1, 2}, {1, 2}), 0.0)
+    chk("Jaccard disjoint", maze.jaccard_distance({1}, {2}), 1.0)
+    chk("Jaccard partial overlap", round(maze.jaccard_distance({1, 2}, {2, 3}), 12), round(2 / 3, 12))
+    chk("Jaccard empty convention", maze.jaccard_distance(set(), set()), 0.0)
+    chk("mean pairwise F hand population", round(maze.mean_pairwise([(0, 0), (3, 4), (0, 0)], "F"), 12), round(10 / 3, 12))
+    chk("mean pairwise V hand population", round(maze.mean_pairwise([{1}, {1, 2}, {2}], "V"), 12), round(2 / 3, 12))
+    chk("mean pairwise missing pairs", maze.mean_pairwise([(0, 0)], "F"), None)
+    chk("distance half threshold strict", maze.half_distance_gen([2.0, 1.0, 0.9]), 2)
     for name, fn in [("bad move refused", lambda: replay("X", LEAKY)),
                      ("bad world refused", lambda: replay("N", "OTHER")),
                      ("unequal diversity refused", lambda: diversity(["N", "NN"])),
@@ -622,10 +639,119 @@ def run_wo8():
     return 0  # completed measurement; POSITIVE/NEGATIVE are not check verdicts
 
 
+def wo9_seed_reading(runs, fraction="0.5", allow_path_scalar=True):
+    """Predeclared P1/P2/P3 and explicit cross-space falsifiers, per seed.
+
+    P2 allows raw V OR the declared closest-approach scalar P, as the order
+    explicitly permits a path-derived input. Also report the stricter raw-V
+    interpretation separately; do not choose between them after the run.
+    """
+    half = {condition: run["half"][fraction] for condition, run in runs.items()}
+    p1 = half["OBJ-F"]["F"] is not None
+    own_v = half["OBJ-V"]["V"] is not None
+    own_p = allow_path_scalar and half["OBJ-V"]["P"] is not None
+    p2 = own_v or own_p
+    p3 = half["NOV-F"]["F"] is None and half["NOV-V"]["V"] is None
+    cross_f = half["OBJ-F"]["V"] is not None and not p1
+    cross_v = half["OBJ-V"]["F"] is not None and not p2
+    falsifier = (p1 and not p2) or cross_f or cross_v or not p3
+    verdict = "FALSIFIED" if falsifier else ("SUPPORTED" if p1 and p2 and p3 else "INCONCLUSIVE")
+    return {"P1": p1, "P2": p2, "P2_raw_V": own_v,
+            "P2_declared_scalar": bool(own_p), "P3": p3,
+            "cross_space_falsifier": cross_f or cross_v, "verdict": verdict}
+
+
+def aggregate_wo9(readings):
+    """Variation by seed or fixed sensitivity threshold -> inconclusive."""
+    verdicts = {r["verdict"] for rows in readings.values() for r in rows}
+    return next(iter(verdicts)) if len(verdicts) == 1 else "INCONCLUSIVE"
+
+
+def wo9_experiment(progress=False):
+    import importlib.util
+    from pathlib import Path
+    path = Path(__file__).with_name("deceptive_maze_ga.py")
+    spec = importlib.util.spec_from_file_location("_wo9_maze", path)
+    maze = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(maze)
+    conditions = {}
+    for condition in maze.SELECTOR_CONDITIONS:
+        conditions[condition] = []
+        for seed in maze.SEEDS:
+            if progress:
+                print("WO-9: %s seed %d / fixed 0-9" % (condition, seed),
+                      file=sys.stderr, flush=True)
+            conditions[condition].append(maze.selector_run(condition, seed))
+    readings, raw_readings = {}, {}
+    for fraction in maze.DISTANCE_SENSITIVITY:
+        key = str(fraction)
+        readings[key], raw_readings[key] = [], []
+        for index, seed in enumerate(maze.SEEDS):
+            paired = {condition: runs[index] for condition, runs in conditions.items()}
+            readings[key].append(dict(seed=seed, **wo9_seed_reading(paired, key, True)))
+            raw_readings[key].append(dict(seed=seed, **wo9_seed_reading(paired, key, False)))
+    # The WO-7 replay pairing is rerun, not inferred from its previous report.
+    grid = experiment(seed=7, size=9, length=24, population=40,
+                      generations=60, retained=8, top=5)
+    return {"conditions": conditions, "readings": readings,
+            "raw_V_readings": raw_readings, "verdict": aggregate_wo9(readings),
+            "raw_V_verdict": aggregate_wo9(raw_readings), "grid": grid,
+            "decision_threshold": maze.DISTANCE_THRESHOLD,
+            "sensitivity": maze.DISTANCE_SENSITIVITY,
+            "P2_interpretation": "raw V OR predeclared closest-approach scalar P",
+            "fact_kind": "INSTRUMENT"}
+
+
+def render_wo9(result):
+    out = ["WO-9 SELECTOR-SWAP -- synthetic INSTRUMENT facts, CC0",
+           "PREDECLARED: mean pairwise F Euclidean; V Jaccard; auxiliary P absolute closest-approach differences.",
+           "DECISION strictly <50% gen-0 mean; 40% and 60% are fixed sensitivity, not replacement thresholds.",
+           "P1 OBJ-F F collapse; P2 OBJ-V V or declared path-derived P collapse; P3 novelty own-space no half-collapse.",
+           "Also report raw-V-only P2; do not choose it from outcomes. Mixed seeds or sensitivity -> INCONCLUSIVE.",
+           "Maze 15x15; POP=100 GENS=150 L=60 MUT=.05 TOUR=3 ELITE=2 K=15 ARCH+=3 seeds=0-9.",
+           "OBJ-V reads the whole PATH compressed to closest approach, not the endpoint. Different objective is a confound."]
+    for condition, runs in result["conditions"].items():
+        solved = sorted(r["solved_gen"] for r in runs if r["solved_gen"] is not None)
+        out.append("\n%s solved=%d/10 upper_median_success_gen=%s" % (
+            condition, len(solved), solved[len(solved) // 2] if solved else None))
+        for run in runs:
+            out.append("seed=%d solved_gen=%s observed_until=%d half=%s" % (
+                run["seed"], run["solved_gen"], run["last_observed_generation"],
+                json.dumps(run["half"], sort_keys=True)))
+            for row in run["rows"]:
+                out.append("gen=%d mean_F=%.9f mean_V=%.9f mean_P=%.9f "
+                           "distinct_F=%d distinct_V=%d distinct_P=%d genotype_H_mean=%.9f" % (
+                               row["generation"], row["F_distance"], row["V_distance"],
+                               row["P_distance"], row["F_distinct"], row["V_distinct"],
+                               row["P_distinct"], row["genotype_entropy_bits_per_locus"]))
+    for fraction, rows in result["readings"].items():
+        out.append("\nREADING fraction=" + fraction)
+        out.extend(json.dumps(row, sort_keys=True) for row in rows)
+        out.append("RAW_V_ONLY " + json.dumps(result["raw_V_readings"][fraction], sort_keys=True))
+    grid = result["grid"]
+    out.append("\nWO-7 rerun: T5 A half=%s B half=%s; T5B A half=%s B half=%s" % (
+        grid["A"]["half_generation"], grid["B"]["half_generation"],
+        grid["A"]["behavior"]["half_generation"], grid["B"]["behavior"]["half_generation"]))
+    out.append("T2 A->SEALED score drops " + json.dumps([
+        fitness_drop(a["score"], b["score"]) for a, b in zip(grid["A"]["winners"], grid["changed"])]))
+    out.append("Control B wrap share %.6f; collapse is convergence, replay qualifies its channel." %
+               wrap_share(grid["B"]["winners"]))
+    out.append("WO9_READING: " + result["verdict"])
+    out.append("RAW_V_ONLY_READING: " + result["raw_V_verdict"])
+    out.append("One maze / ten seeds; success stops censor later collapse. WO-8 descriptor dependence remains intact.")
+    return "\n".join(out) + "\n"
+
+
+def run_wo9():
+    print(render_wo9(wo9_experiment(progress=True)), end="")
+    return 0
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--selftest", action="store_true")
     parser.add_argument("--wo8", action="store_true", help="fixed four-condition suite plus visited-set descriptor control")
+    parser.add_argument("--wo9", action="store_true", help="fixed selector-swap suite with 40/50/60% pairwise-distance readings")
     parser.add_argument("--seed", type=int, default=7)
     parser.add_argument("--size", type=int, default=9)
     parser.add_argument("--length", type=int, default=24)
@@ -642,6 +768,8 @@ def main(argv=None):
         return selftest()
     if args.wo8:
         return run_wo8()
+    if args.wo9:
+        return run_wo9()
     budget = {key: getattr(args, key) for key in (
         "seed", "size", "length", "population", "generations", "retained", "top",
         "hold_cost", "generation_cost", "cost_unit")}

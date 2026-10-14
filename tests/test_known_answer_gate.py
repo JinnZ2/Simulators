@@ -103,6 +103,9 @@ MANIFEST = (
     "tools/fitness_bin_self_test.py::behavior_metrics",
     "tools/fitness_bin_self_test.py::behavior_half_gen",
     "tools/fitness_bin_self_test.py::behavior_ledger",
+    "tools/deceptive_maze_ga.py::jaccard_distance",
+    "tools/deceptive_maze_ga.py::mean_pairwise",
+    "tools/deceptive_maze_ga.py::half_distance_gen",
 )
 
 # Cases known to fail today. A case that starts passing turns this red so
