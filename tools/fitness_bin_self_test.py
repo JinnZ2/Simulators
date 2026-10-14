@@ -25,9 +25,17 @@ T5 is diagnostic and cannot change selection. No auto-patching occurs.
 Expected: A wrap use + paired SEALED score loss; B no wrap. If A has no
 wrap at this budget, INCONCLUSIVE, not a reason to tune. Verdict/exit code
 in a normal run checks control integrity only, not an empirical claim.
+
+WO-8 thresholds fixed before behavior-ledger runs: distinct descriptors
+STRICTLY BELOW 0.5 * initial distinct; early = generation <= budget//4.
+Descriptor control changes ONLY the ledger: final_cell vs the complete
+set of cells visited. Novelty selection continues to use final-cell
+Euclidean distance in both descriptor runs. No threshold or seed search.
 """
 
 import argparse
+import bisect
+from collections import Counter
 import hashlib
 import json
 import math
@@ -38,6 +46,8 @@ MOVES = "NSEW"
 DELTAS = {"N": (0, 1), "S": (0, -1), "E": (1, 0), "W": (-1, 0)}
 LEAKY = "LEAKY"
 SEALED = "SEALED"
+BEHAVIOR_HALF = 0.5
+EARLY_FRACTION = 0.25
 
 
 def fitness(position, goal):
@@ -101,6 +111,71 @@ def diversity(population):
 def fitness_drop(native, changed):
     """T2: positive means a loss off the native substrate."""
     return native - changed
+
+
+def behavior_metrics(labels):
+    """Joint categorical descriptor entropy, not marginal gene entropy."""
+    if not labels:
+        return {"distinct": None, "entropy_bits": None, "largest_share": None}
+    counts = Counter(labels)
+    n = len(labels)
+    return {"distinct": len(counts),
+            "entropy_bits": -sum((v / n) * math.log2(v / n) for v in counts.values()),
+            "largest_share": max(counts.values()) / n}
+
+
+def behavior_half_gen(distinct):
+    if not distinct or distinct[0] is None:
+        return None
+    return next((i for i, d in enumerate(distinct)
+                 if d is not None and d < BEHAVIOR_HALF * distinct[0]), None)
+
+
+def behavior_ledger(observations, budget, descriptor="final_cell"):
+    """Loss episodes of occupied descriptors between OBSERVED populations.
+
+    LOST_WITHIN_WINDOW means not reoccupied in this recorded window, never
+    'lost forever'. Repeated loss episodes are not unique missing cells.
+    """
+    supports = [set(labels) for labels in observations]
+    appearances = {}
+    rows = []
+    for i, labels in enumerate(observations):
+        for label in supports[i]:
+            appearances.setdefault(label, []).append(i)
+        rows.append(dict(generation=i, **behavior_metrics(labels),
+                         lost_since_previous=0, rediscovered_loss_events=0))
+    losses = []
+    for i in range(len(supports) - 1):
+        for label in sorted(supports[i] - supports[i + 1]):
+            times = appearances[label]
+            j = bisect.bisect_right(times, i + 1)
+            returned = times[j] if j < len(times) else None
+            losses.append({"descriptor_value": label, "last_occupied_generation": i,
+                           "first_empty_generation": i + 1,
+                           "reoccupied_generation": returned,
+                           "state": "REDISCOVERED" if returned is not None else "LOST_WITHIN_WINDOW",
+                           "fact_kind": "INSTRUMENT"})
+            rows[i + 1]["lost_since_previous"] += 1
+            if returned is not None:
+                rows[returned]["rediscovered_loss_events"] += 1
+    half = behavior_half_gen([r["distinct"] for r in rows])
+    recovered = sum(r["reoccupied_generation"] is not None for r in losses)
+    return {"descriptor": descriptor, "rows": rows, "losses": losses,
+            "loss_events": len(losses), "rediscovered": recovered,
+            "lost_within_window": len(losses) - recovered,
+            "half_generation": half,
+            "early_collapse": half is not None and half <= int(budget * EARLY_FRACTION),
+            "early_cutoff": int(budget * EARLY_FRACTION), "budget": budget,
+            "last_observed_generation": len(rows) - 1, "fact_kind": "INSTRUMENT"}
+
+
+def grid_descriptor(record, descriptor):
+    if descriptor == "final_cell":
+        return tuple(record["final"])
+    if descriptor == "visited_cells":
+        return tuple(sorted(set(tuple(p) for p in record["trace"])))
+    raise ValueError("descriptor must be final_cell or visited_cells")
 
 
 def locus_counts(population):
@@ -168,14 +243,14 @@ def archive_ratio(wait, hold_cost, generation_cost, unit=None):
 
 def evolve(environment, seed=7, size=9, length=24, population=40,
            generations=60, retained=8, top=5, hold_cost=None,
-           generation_cost=None, cost_unit=None):
+           generation_cost=None, cost_unit=None, descriptor="final_cell"):
     if not (size >= 2 and length > 0 and generations >= 0
             and 1 <= retained < population and 1 <= top <= population):
         raise ValueError("invalid grid, genome, generation or selection budget")
     rng = random.Random(seed)
     pop = ["".join(rng.choice(MOVES) for _ in range(length))
            for _ in range(population)]
-    archive, history, ledger = [], [], []
+    archive, history, ledger, behaviors = [], [], [], []
     wait = rediscovery_wait(population - retained, 1 / length)
     ratio = archive_ratio(wait, hold_cost, generation_cost, cost_unit)
     for generation in range(generations + 1):
@@ -187,6 +262,7 @@ def evolve(environment, seed=7, size=9, length=24, population=40,
                         "diversity": diversity(pop),
                         "allele_entropy_bits": allele_entropy(pop),
                         "best_score": replay(ranked[0], environment, size)["score"]})
+        behaviors.append([grid_descriptor(replay(g, environment, size), descriptor) for g in pop])
         if generation == generations:
             break
         survivors = ranked[:retained]
@@ -222,6 +298,7 @@ def evolve(environment, seed=7, size=9, length=24, population=40,
     return {"environment": environment,
             "winners": [replay(g, environment, size) for g in ranked[:top]],
             "archive": archive, "history": history, "ledger": ledger,
+            "behavior": behavior_ledger(behaviors, generations, descriptor),
             "half_generation": half,
             "early_collapse": half is not None and half <= generations // 4}
 
@@ -306,9 +383,15 @@ def render(result):
         for row in run["ledger"]:
             out.append("T5+ " + json.dumps(row, sort_keys=True))
         out.append("T5+ H and fitness by generation:")
-        out.extend("  generation=%d H_bits=%.6f best_score=%d" % (
-            h["generation"], h["allele_entropy_bits"], h["best_score"])
-                   for h in run["history"])
+        for h, b in zip(run["history"], run["behavior"]["rows"]):
+            out.append("  generation=%d T5_H_bits=%.6f best_score=%d "
+                       "T5B_distinct=%d T5B_H_bits=%.6f largest_share=%.6f "
+                       "behavior_losses=%d rediscoveries=%d" % (
+                           h["generation"], h["allele_entropy_bits"], h["best_score"],
+                           b["distinct"], b["entropy_bits"], b["largest_share"],
+                           b["lost_since_previous"], b["rediscovered_loss_events"]))
+        out.append("T5B SUMMARY " + json.dumps({k: v for k, v in run["behavior"].items()
+                                             if k not in ("rows", "losses")}, sort_keys=True))
     out.append("\nT6 READOUTS -- emitted before any intervention; no simulator was patched:")
     records = [readout(w, i, c) for i, (w, c) in enumerate(
         zip(result["A"]["winners"], result["changed"]), 1)]
@@ -391,6 +474,26 @@ def selftest():
     chk("cost ratio absent is UNRATED", archive_ratio(2, None, 3, "work_units"), "UNRATED")
     chk("cost ratio missing unit is UNRATED", archive_ratio(2, 4, 3), "UNRATED")
     chk("ledger every selection step", len(r1["A"]["ledger"]), 4)
+    bm = behavior_metrics([(0, 0), (0, 0), (1, 1), (1, 1)])
+    chk("behavior distinct known two", bm["distinct"], 2)
+    chk("behavior entropy known one bit", bm["entropy_bits"], 1.0)
+    chk("behavior largest known half", bm["largest_share"], 0.5)
+    chk("behavior empty is absent", behavior_metrics([])["distinct"], None)
+    bl = behavior_ledger([["a", "b"], ["a"], ["b"]], 8)
+    chk("behavior loss episodes", bl["loss_events"], 2)
+    chk("behavior rediscovered episode", bl["rediscovered"], 1)
+    chk("behavior lost only within window", bl["lost_within_window"], 1)
+    chk("behavior half strict", behavior_half_gen([4, 2, 1]), 2)
+    import importlib.util
+    from pathlib import Path
+    maze_spec = importlib.util.spec_from_file_location(
+        "_wo8_selftest_maze", Path(__file__).with_name("deceptive_maze_ga.py"))
+    maze = importlib.util.module_from_spec(maze_spec)
+    maze_spec.loader.exec_module(maze)
+    chk("maze handwritten gap path reaches goal",
+        maze.run_path([2] * 11 + [0] * 12 + [3] * 11), ((2, 13), True))
+    chk("maze straight north stays in pocket",
+        maze.run_path([0] * 60), ((2, 6), False))
     for name, fn in [("bad move refused", lambda: replay("X", LEAKY)),
                      ("bad world refused", lambda: replay("N", "OTHER")),
                      ("unequal diversity refused", lambda: diversity(["N", "NN"])),
@@ -411,9 +514,118 @@ def selftest():
     return int(failed > 0)
 
 
+def separation_verdict(objective_early, novelty_early):
+    """All matched seed pairs separate -> positive; identical flags -> negative.
+
+    A mixed seed result is inconclusive. No threshold is selected from it.
+    'No collapse' means none before the observed run's own stop, not forever.
+    """
+    if not objective_early or len(objective_early) != len(novelty_early):
+        return "INCONCLUSIVE"
+    if all(o and not n for o, n in zip(objective_early, novelty_early)):
+        return "POSITIVE"
+    if all(o == n for o, n in zip(objective_early, novelty_early)):
+        return "NEGATIVE"
+    return "INCONCLUSIVE"
+
+
+def wo8_experiment(progress=False):
+    import importlib.util
+    from pathlib import Path
+    path = Path(__file__).with_name("deceptive_maze_ga.py")
+    spec = importlib.util.spec_from_file_location("_wo8_maze", path)
+    maze = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(maze)
+    budget = dict(seed=7, size=9, length=24, population=40,
+                  generations=60, retained=8, top=5)
+    grid = experiment(**budget)
+    runs, readings = {}, {}
+    for descriptor in ("final_cell", "visited_cells"):
+        runs[descriptor] = {}
+        for mode in ("objective", "novelty"):
+            if progress:
+                print("WO-8: %s / %s / fixed seeds 0-9" % (descriptor, mode),
+                      file=sys.stderr, flush=True)
+            runs[descriptor][mode] = [maze.evolve_ledger(mode, seed, descriptor)
+                                      for seed in maze.SEEDS]
+        readings[descriptor] = separation_verdict(
+            [r["behavior"]["early_collapse"] for r in runs[descriptor]["objective"]],
+            [r["behavior"]["early_collapse"] for r in runs[descriptor]["novelty"]])
+    # Holding the actual search trajectory fixed makes this a descriptor test,
+    # not a comparison of two different novelty algorithms.
+    for mode in ("objective", "novelty"):
+        for a, b in zip(runs["final_cell"][mode], runs["visited_cells"][mode]):
+            assert (a["solved_gen"], a["genotype_entropy_bits_per_locus"], a["archive_size"]) == (
+                b["solved_gen"], b["genotype_entropy_bits_per_locus"], b["archive_size"])
+    overall = readings["final_cell"] if len(set(readings.values())) == 1 else "INCONCLUSIVE"
+    return {"grid": grid, "maze": runs, "descriptor_readings": readings,
+            "overall": overall,
+            "threshold": {"half_fraction": BEHAVIOR_HALF, "strict": True,
+                          "early_fraction_of_budget": EARLY_FRACTION}}
+
+
+def render_wo8(result):
+    out = ["WO-8 BEHAVIOR-SPACE LEDGER -- CC0; synthetic INSTRUMENT facts",
+           "EXPECTED BEFORE RUN: objective early behavior half-collapse, novelty no early collapse;",
+           "all seed pairs -> POSITIVE; identical flags -> NEGATIVE; mixed seeds/descriptors -> INCONCLUSIVE.",
+           "THRESHOLDS " + json.dumps(result["threshold"], sort_keys=True),
+           "Early cutoff: grid=15, maze=37. No seed/threshold tuning.",
+           "Descriptor control moves only T5B: novelty selection still uses final-cell Euclidean distance.",
+           "T5 remains alongside T5B. Collapse is not a seal without T2 / task-context evidence."]
+    for label in ("A", "B"):
+        r = result["grid"][label]
+        out.append("\nGRID %s %s T5_half=%s T5B_half=%s T5B_early=%s" % (
+            label, r["environment"], r["half_generation"],
+            r["behavior"]["half_generation"], r["behavior"]["early_collapse"]))
+        for h, b in zip(r["history"], r["behavior"]["rows"]):
+            out.append("gen=%d T5_hamming=%.6f T5_H_mean_bits=%.6f "
+                       "T5B_distinct=%d T5B_H_bits=%.6f largest_share=%.6f lost=%d returned=%d" % (
+                           h["generation"], h["diversity"], h["allele_entropy_bits"] / 24,
+                           b["distinct"], b["entropy_bits"], b["largest_share"],
+                           b["lost_since_previous"], b["rediscovered_loss_events"]))
+        out.append("T5B_SUMMARY " + json.dumps({k: v for k, v in r["behavior"].items()
+                                                if k not in ("rows", "losses")}, sort_keys=True))
+    out.append("T2 A->SEALED drops " + json.dumps([
+        fitness_drop(a["score"], b["score"]) for a, b in zip(
+            result["grid"]["A"]["winners"], result["grid"]["changed"])]))
+    out.append("B control: wrap_share=%.6f; no world/goal defect inferred from concentration" %
+               wrap_share(result["grid"]["B"]["winners"]))
+    for descriptor, modes in result["maze"].items():
+        out.append("\nDESCRIPTOR " + descriptor)
+        for mode, runs in modes.items():
+            solved = sorted(r["solved_gen"] for r in runs if r["solved_gen"] is not None)
+            out.append("MAZE %s solved=%d/10 upper_median_success_gen=%s" % (
+                mode, len(solved), solved[len(solved) // 2] if solved else None))
+            for r in runs:
+                b = r["behavior"]
+                out.append("seed=%d solved_gen=%s T5_entropy_half=%s "
+                           "T5B_half=%s early=%s observed_until=%d" % (
+                               r["seed"], r["solved_gen"], r["genotype_half_generation"],
+                               b["half_generation"], b["early_collapse"], b["last_observed_generation"]))
+                for h, row in zip(r["genotype_entropy_bits_per_locus"], b["rows"]):
+                    out.append("gen=%d T5_H_mean_bits=%.6f T5B_distinct=%d "
+                               "T5B_H_bits=%.6f largest_share=%.6f lost=%d returned=%d" % (
+                                   row["generation"], h, row["distinct"], row["entropy_bits"],
+                                   row["largest_share"], row["lost_since_previous"], row["rediscovered_loss_events"]))
+                out.append("T5B_SUMMARY " + json.dumps({k: v for k, v in b.items()
+                                                       if k not in ("rows", "losses")}, sort_keys=True))
+        out.append("DESCRIPTOR_READING " + descriptor + " " + result["descriptor_readings"][descriptor])
+    out.append("WO8_READING: " + result["overall"])
+    out.append("Lost means LOST_WITHIN_WINDOW. Goal-hit early stops censor later behavior.")
+    out.append("No physical joules, world-general novelty superiority, or identity with human groups claimed.")
+    return "\n".join(out) + "\n"
+
+
+def run_wo8():
+    result = wo8_experiment(progress=True)
+    print(render_wo8(result), end="")
+    return 0  # completed measurement; POSITIVE/NEGATIVE are not check verdicts
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--selftest", action="store_true")
+    parser.add_argument("--wo8", action="store_true", help="fixed four-condition suite plus visited-set descriptor control")
     parser.add_argument("--seed", type=int, default=7)
     parser.add_argument("--size", type=int, default=9)
     parser.add_argument("--length", type=int, default=24)
@@ -428,6 +640,8 @@ def main(argv=None):
     args = parser.parse_args(argv)
     if args.selftest:
         return selftest()
+    if args.wo8:
+        return run_wo8()
     budget = {key: getattr(args, key) for key in (
         "seed", "size", "length", "population", "generations", "retained", "top",
         "hold_cost", "generation_cost", "cost_unit")}
@@ -438,7 +652,9 @@ def main(argv=None):
                 json.dump({"budget": budget, "A": result["A"]["archive"],
                            "B": result["B"]["archive"],
                            "ledger_A": result["A"]["ledger"],
-                           "ledger_B": result["B"]["ledger"]}, fh, sort_keys=True, indent=2)
+                           "ledger_B": result["B"]["ledger"],
+                           "behavior_A": result["A"]["behavior"],
+                           "behavior_B": result["B"]["behavior"]}, fh, sort_keys=True, indent=2)
                 fh.write("\n")
     except (ValueError, OSError) as exc:
         print("VERDICT: SKIP   reason=" + str(exc), file=sys.stderr)

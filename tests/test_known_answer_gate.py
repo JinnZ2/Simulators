@@ -95,6 +95,14 @@ MANIFEST = (
     "tools/fitness_bin_self_test.py::allele_entropy",
     "tools/fitness_bin_self_test.py::rediscovery_wait",
     "tools/fitness_bin_self_test.py::archive_ratio",
+    "tools/deceptive_maze_ga.py::dist",
+    "tools/deceptive_maze_ga.py::objective",
+    "tools/deceptive_maze_ga.py::novelty",
+    "tools/deceptive_maze_ga.py::locus_entropy",
+    "tools/deceptive_maze_ga.py::half_gen",
+    "tools/fitness_bin_self_test.py::behavior_metrics",
+    "tools/fitness_bin_self_test.py::behavior_half_gen",
+    "tools/fitness_bin_self_test.py::behavior_ledger",
 )
 
 # Cases known to fail today. A case that starts passing turns this red so

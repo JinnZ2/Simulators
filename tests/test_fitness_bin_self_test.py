@@ -22,14 +22,14 @@ class FitnessBinSelfTest(unittest.TestCase):
         with contextlib.redirect_stdout(io.StringIO()) as output:
             code = fb.selftest()
         self.assertEqual(code, 0, output.getvalue())
-        self.assertIn("VERDICT: PASS   checks=57 failed=0", output.getvalue())
+        self.assertIn("VERDICT: PASS   checks=67 failed=0", output.getvalue())
 
     def test_sample_is_complete_default_output(self):
         p = subprocess.run([sys.executable, str(TOOL)], capture_output=True,
                            text=True, cwd=ROOT)
         self.assertEqual(p.returncode, 0, p.stderr)
         sample = (ROOT / "tools" / "samples" /
-                  "fitness_bin_self_test_t5plus.sample.txt").read_text()
+                  "fitness_bin_self_test_wo8.sample.txt").read_text()
         self.assertEqual(p.stdout, sample)
         for test in ("T1", "T2", "T3", "T4", "T5", "T6"):
             self.assertIn(test, sample)
@@ -120,6 +120,33 @@ class T5PlusLedger(unittest.TestCase):
         for line in original.splitlines():
             if line.startswith(("winner ", "  T2 ", "T5 archived", "RUN_A:", "CONTROL_B:")):
                 self.assertIn(line, extended)
+
+
+class BehaviorLedger(unittest.TestCase):
+    def test_handbuilt_population(self):
+        result = fb.behavior_metrics([(0, 0), (0, 0), (1, 1), (1, 1)])
+        self.assertEqual(result, {"distinct": 2, "entropy_bits": 1.0, "largest_share": 0.5})
+        self.assertIsNone(fb.behavior_metrics([])["entropy_bits"])
+
+    def test_last_copy_loss_and_rediscovery_are_windowed(self):
+        result = fb.behavior_ledger([["a", "b"], ["a"], ["b"]], 8)
+        self.assertEqual((result["loss_events"], result["rediscovered"], result["lost_within_window"]), (2, 1, 1))
+        states = {event["descriptor_value"]: event["state"] for event in result["losses"]}
+        self.assertEqual(states, {"a": "LOST_WITHIN_WINDOW", "b": "REDISCOVERED"})
+        self.assertEqual(result["rows"][2]["rediscovered_loss_events"], 1)
+
+    def test_half_threshold_strict_and_early_fixed(self):
+        self.assertIsNone(fb.behavior_half_gen([4, 2, 2]))
+        self.assertEqual(fb.behavior_half_gen([4, 2, 1]), 2)
+        result = fb.behavior_ledger([["a", "b", "c", "d"], ["a", "b"], ["a"]], 8)
+        self.assertTrue(result["early_collapse"])
+        self.assertEqual(result["early_cutoff"], 2)
+
+    def test_separation_verdict_controls(self):
+        self.assertEqual(fb.separation_verdict([True, True], [False, False]), "POSITIVE")
+        self.assertEqual(fb.separation_verdict([False, False], [False, False]), "NEGATIVE")
+        self.assertEqual(fb.separation_verdict([True, False], [False, False]), "INCONCLUSIVE")
+        self.assertEqual(fb.separation_verdict([], []), "INCONCLUSIVE")
 
 
 if __name__ == "__main__":
