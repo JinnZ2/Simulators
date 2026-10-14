@@ -8,14 +8,18 @@ choices  [2] cost low=1 medium=3 high=9   [3] weights u=1 k=1 x=1   [4] sweep 64
 
 variant  LOOP   REV          cost  d u k x r  needs c d l t  state
 S1a      2.500  1.250           4  2 1 2 2 1        L L L L  FEASIBLE
+S1g      1.000  0.500          10  2 1 2 2 1        M L M M  BLOCKED(compute,lit,time)
 S2a      2.000  2.000           4  2 1 2 1 2        L L L L  FEASIBLE
 S2b      1.000  1.000          10  2 2 1 2 2        M L M M  BLOCKED(compute,lit,time)
 S2c      0.556  0.278          18  2 1 2 2 1        M M H M  BLOCKED(compute,data,lit,time)
 S3a      1.500  NOT_REACHED     4  2 1 1 1 0        L L L L  FEASIBLE
+S3g      0.600  NOT_REACHED    10  2 1 1 1 0        M L M M  BLOCKED(compute,lit,time)
 S4a      2.500  2.500           4  2 1 2 2 2        L L L L  FEASIBLE
 S4b      0.227  0.227          22  1 2 1 2 2        M L H H  BLOCKED(compute,lit,time)
+S4g      0.600  0.600          10  1 2 2 2 2        M L M M  BLOCKED(compute,lit,time)
 S5a      1.000  1.000           4  1 1 2 1 2        L L L L  FEASIBLE
 S5b      0.800  0.800          10  2 1 2 1 2        M L M M  BLOCKED(compute,lit,time)
+S5g      0.500  0.500          10  1 2 2 1 2        M L M M  BLOCKED(compute,lit,time)
 
 Q-LOOP  ranked sites, best feasible variant each:
         S1 2.500(S1a)  S4 2.500(S4a)  S2 2.000(S2a)  S3 1.500(S3a)  S5 1.000(S5a)
@@ -27,11 +31,13 @@ Q-REV   ranked sites, best feasible variant each:
         first under declared choices: S4
         first across the sweep: {S4} x64
         reading: FIRST_ROBUST:S4
-NOT_REACHED on Q-REV (no recovery readout): S3a
+NOT_REACHED on Q-REV (no recovery readout): S3a, S3g
 
 discovery readout (highest openness u=2; read apart, never merged into the ratio):
-  S2b  BLOCKED(compute,lit,time)  small recurrent net, synthetic predictable sequence, L1 on pre-nonlinearity activity, nothing wired; roles by lesion and decoder; low-variance ablation
+  S2b  BLOCKED(compute,lit,time)  (g) small recurrent net, synthetic predictable sequence, L1 on pre-nonlinearity activity, nothing wired; roles by lesion and decoder; low-variance ablation
   S4b  BLOCKED(compute,lit,time)  finite-speed dissipation of the four cells on an overdamped double-well model
+  S4g  BLOCKED(compute,lit,time)  (g) charge the bits a step overwrites to the objective on a small enumerated domain, nothing wired; read structure by running the inverse, bits lost counted
+  S5g  BLOCKED(compute,lit,time)  (g) train one direction under a cost on total parameter count, in a family that can express invertible and non-invertible maps; numerical inverse, bits lost counted
 
 calibration on site 2 (rubric section 7)
   blind fill (7.2)         LOOP 2.000  REV 2.000

@@ -691,6 +691,43 @@ def calibration(st, have):
     return res
 
 
+def is_g(row):
+    """A field (g) EMERGENCE variant: its design opens with "(g)"."""
+    return row["design"].startswith("(g)")
+
+
+def g_readout(rows):
+    """What the (g) variants do to the readings, over every profile and
+    every sweep setting. Returns the per-variant ratios, the count of
+    cells in which a (g) variant is some site's best, whether any reading
+    changes when the (g) rows are removed, and the largest ratio of the
+    best (g) variant to the top site over all cells."""
+    g = [row for row in rows if is_g(row)]
+    gids = set(row["id"] for row in g)
+    plain = [row for row in rows if not is_g(row)]
+    cells = best_cells = 0
+    worst = {q: 0.0 for q in QUESTIONS}
+    changed = []
+    for name in sorted(PROFILES):
+        have = PROFILES[name]
+        for q in QUESTIONS:
+            if sweep(rows, have, q)[1] != sweep(plain, have, q)[1]:
+                changed.append("%s Q-%s" % (name, q))
+            for cm, w in sweep_settings():
+                best = best_by_site(rows, have, q, cm, w)
+                cells += len(best)
+                best_cells += sum(1 for _, vid in best.values()
+                                  if vid in gids)
+                top = max(v for v, _ in best.values())
+                gv = [variant_ratio(row, q, cm, w) for row in g
+                      if not shortfall(row, have)]
+                gv = [v for v in gv if v != NOT_REACHED]
+                if gv and top > 0:
+                    worst[q] = max(worst[q], max(gv) / top)
+    return {"rows": g, "cells": cells, "best_cells": best_cells,
+            "changed": changed, "worst": worst}
+
+
 def result_lines(rows, have=None):
     """The compact result the rubric prints in its triage-result block,
     under the phone profile and the declared choices. The selftest holds
@@ -722,6 +759,18 @@ def result_lines(rows, have=None):
             b = best_by_site(rows, PROFILES[name], q).get("S2")
             picks.append("%s %s" % (name, b[1] if b else "none"))
         out.append("best site-2 variant, Q-%s: %s" % (q, ", ".join(picks)))
+    gr = g_readout(rows)
+    out.append("(g) variants, LOOP/REV: %s" % "  ".join(
+        "%s %s/%s" % (row["id"], _fmt(variant_ratio(row, "LOOP")),
+                      _fmt(variant_ratio(row, "REV")))
+        for row in gr["rows"]))
+    out.append("(g) a site's best in %d of %d site-cells (%d profiles x "
+               "%d settings x 2 questions); readings changed by (g): %s"
+               % (gr["best_cells"], gr["cells"], len(PROFILES),
+                  len(sweep_settings()),
+                  ", ".join(gr["changed"]) or "none"))
+    out.append("(g) best over top, worst cell: LOOP %.3f  REV %.3f"
+               % (gr["worst"]["LOOP"], gr["worst"]["REV"]))
     return out
 
 
@@ -1017,6 +1066,24 @@ def selftest():
             got = "missing: %s" % ex
         check("triage-result block equals the recomputed result",
               got == want, "rerun and paste result_lines()")
+        gsites = set(row["site"] for row in rows if is_g(row))
+        check("every site carries a field (g) variant",
+              gsites == set(SITES), ",".join(sorted(set(SITES) - gsites)))
+        capped = {"id": "S9g", "site": "S1",
+                  "comp": {"d": 2, "u": 2, "k": 2, "x": 2, "r": 2},
+                  "need": {"compute": "medium", "data": "low", "lit": "low",
+                           "time": "low"}, "design": "(g) planted"}
+        top = max(v for v, _ in best_by_site(
+            rows, PROFILES["lab"], "LOOP").values())
+        check("a (g) variant at compute medium is capped below the top "
+              "(%.3f < %.3f) whatever its components"
+              % (variant_ratio(capped, "LOOP"), top),
+              variant_ratio(capped, "LOOP") < top - TOL)
+        check("the contaminated calibration stays pinned (d5f5c2a named "
+              "in section 9)", "d5f5c2a" in doc)
+        check("the start-at-site-2 premise and its failure stay visible",
+              '"Start at site 2" was the work order\'s premise' in doc
+              and "costs 18 against" in doc)
         a = "\n".join(report(st, "phone", PROFILES["phone"]))
         b = "\n".join(report(st, "phone", PROFILES["phone"]))
         check("report is deterministic", a == b)

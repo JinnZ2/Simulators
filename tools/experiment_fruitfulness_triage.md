@@ -386,7 +386,7 @@ Q-REV: partial.
 of setting them, under a cost on activity or on settling time, and read
 where the trained loop sits relative to g_c. A cost that alone places
 the loop near the edge would make the stability boundary an outcome of
-the constraint. Not scored; compute medium.
+the constraint. Scored as S1g (section 8): compute medium.
 
 ### Site 2 - COMPRESSION PAYOFF
 
@@ -556,7 +556,8 @@ the inverse and report how much of the previous fixed point survives
 
 **(g) EMERGENCE** (added by the calibration). Train under a cost on change
 (|dh| per update), not on activity, and read whether the units that go
-quiet are idle or carry the prediction (C6). Not scored; compute medium.
+quiet are idle or carry the prediction (C6). Scored as S3g (section 8):
+compute medium; NOT_REACHED on Q-REV, as S3a.
 
 ### Site 4 - LANDAUER / ERASURE JOIN
 
@@ -653,7 +654,7 @@ why. Q-REV: reached.
 overwrites to the training objective and read whether a coupling or
 stored-bit structure appears unasked. MacKay et al. store forget-bits
 by design; whether the structure falls out of an erasure cost was not
-located. Not scored; compute medium.
+located. Scored as S4g (section 8): compute medium.
 
 ### Site 5 - INVERSE-DIRECTION REUSE
 
@@ -722,7 +723,8 @@ reached.
 
 **(g) EMERGENCE** (added by the calibration). Train one network in one
 direction under a cost on total parameter count, and read whether an
-invertible structure appears unasked. Not scored; compute medium.
+invertible structure appears unasked. Scored as S5g (section 8): compute
+medium.
 
 ## 6. Cross-site couplings
 
@@ -1020,19 +1022,25 @@ Declared choices, each overridable in the scorer:
            held, not broken (tools/held_tie_precision.md)
 ```
 
-The table (S2b and S2c added by the calibration, 7.6):
+The table (S2b and S2c added by the calibration, 7.6; the (g) variants
+S1g, S3g, S4g and S5g scored 2026-10-14, after it). A design that opens
+with "(g)" is a field (g) variant:
 
 ```triage-table
 # id  site  d u k x r  compute data   lit    time   design
 S1a   S1    2 1 2 2 1  low     low    low    low    16-unit loop: gain x delay x input sweep; hysteresis, MC, recovery horizon k*
+S1g   S1    2 1 2 2 1  medium  low    medium medium (g) train gain (delay swept) under an activity or settling-time cost, nothing wired; trained loop's largest Lyapunov exponent against 0 and g against g_c; cost-free control
 S2a   S2    2 1 2 1 2  low     low    low    low    symbol stream: code length with and without context; top-down charged; shuffled control; round trip
-S2b   S2    2 2 1 2 2  medium  low    medium medium small recurrent net, synthetic predictable sequence, L1 on pre-nonlinearity activity, nothing wired; roles by lesion and decoder; low-variance ablation
+S2b   S2    2 2 1 2 2  medium  low    medium medium (g) small recurrent net, synthetic predictable sequence, L1 on pre-nonlinearity activity, nothing wired; roles by lesion and decoder; low-variance ablation
 S2c   S2    2 1 2 2 1  medium  medium high   medium replication of the published setup (784 units, ascending digit sequences, L1 on preactivation)
 S3a   S3    2 1 1 1 0  low     low    low    low    warm vs cold settling at four contraction rates; reset, adaptation and delta-coding controls; three cost models
+S3g   S3    2 1 1 1 0  medium  low    medium medium (g) train under a cost on change (|dh| per update), nothing wired; lesion the units that go quiet and decode the prediction from them; activity-cost and no-cost controls
 S4a   S4    2 1 2 2 2  low     low    low    low    2x2 erasure ledger (pass/loop x irreversible/reversible) by exact enumeration
 S4b   S4    1 2 1 2 2  medium  low    high   high   finite-speed dissipation of the four cells on an overdamped double-well model
+S4g   S4    1 2 2 2 2  medium  low    medium medium (g) charge the bits a step overwrites to the objective on a small enumerated domain, nothing wired; read structure by running the inverse, bits lost counted
 S5a   S5    1 1 2 1 2  low     low    low    low    integer coupling bijection: H(Z|Y) = H(X|Y) by enumeration; exact round trip
 S5b   S5    2 1 2 1 2  medium  low    medium medium small invertible net against classifier + generator at matched total parameters, 2-D toy
+S5g   S5    1 2 2 1 2  medium  low    medium medium (g) train one direction under a cost on total parameter count, in a family that can express invertible and non-invertible maps; numerical inverse, bits lost counted
 ```
 
 The basis, one reason per scored component:
@@ -1043,6 +1051,11 @@ S1a.u input statistics moving the chaos boundary is published for random network
 S1a.k exact: one unit has its pitchfork at g = 1 and a large random net its chaos transition at g = 1
 S1a.x rho sets site 3's warm-start saving (C1) and the merge rate and recovery horizon read at sites 4 and 5 (C2)
 S1a.r MC and k* read recoverability, but the success criterion (a stable fixed point) merges its basin (R1): partial
+S1g.d the trained loop's largest Lyapunov exponent against 0, beside a cost-free control, reads "the cost puts the loop at the edge" (a) or "it lands anywhere" (b) directly
+S1g.u partly answered: an imposed energy-information trade-off drives regime transitions in linear lateral predictive coding (Huang et al. 2024, site 1 (e)); for a trained nonlinear loop under an activity cost, no dedicated search was made
+S1g.k exact: the edge locator is checked at the one-unit pitchfork (g = 1) before any training run, as in S1a
+S1g.x the trained rho carries S1a's couplings: the warm-start saving at site 3 (C1) and the merge rate and recovery horizon at sites 4 and 5 (C2)
+S1g.r partial, as S1a: MC and k* read at the trained position; a trained fixed point still merges its basin (R1)
 S2a.d code length with and without context, top-down charged, against a shuffled control: the difference is (a) or (b)
 S2a.u the saving is bounded by I(x_t; context), which is textbook; open is whether the top-down charge leaves a net saving
 S2a.k exact: the source-coding bound fixes the expected code length of a stream of known statistics
@@ -1063,6 +1076,11 @@ S3a.u the warm-start law is fixed-point arithmetic; DEQ warm starts and sigma-de
 S3a.k qualitative: the law is exact only for a linear contraction; tanh gives it approximately
 S3a.x one coupling, C1 read backward: a measured saving at each rho tests the law that ties site 1's rho to site 3
 S3a.r persistence only; re-settling overwrites the previous fixed point (R1)
+S3g.d lesioning the units that go quiet either removes the prediction (they carry it) or does not (idle), against an activity-cost control
+S3g.u a cost on change is delta coding, whose temporal sparsity is published (O'Connor and Welling 2017, site 3 (e)); whether the quiet units carry the prediction under it was not searched; under an activity cost they did once (7.3, P4)
+S3g.k qualitative: the published roles under an activity cost (7.3, P4) are the only reference; no exact number
+S3g.x one coupling, C6 read backward: a change cost that does or does not recruit quiet units changes how site 2's low-variance finding (P4) reads
+S3g.r persistence only; the design adds no recovery readout (site 3 (f)), so NOT_REACHED
 S4a.d exact enumeration of all four cells decides "moved, not removed" at the floor
 S4a.u the floor answer is predicted (R2); open is which currency each design pays in
 S4a.k exact: H(X) = H(Y) + H(X|Y) and the telescoping sum, checked in R2
@@ -1073,6 +1091,11 @@ S4b.u no head-to-head erasure measurement of a retained-state loop against a pas
 S4b.k qualitative: the quasi-static limit returns the floor; finite-speed costs depend on the model
 S4b.x the substrate model decides whether a bit saving at sites 2, 3 and 5 reaches energy (C5)
 S4b.r compares the reversible and irreversible cells directly: the Q-REV question in energy currency
+S4g.d needs a further step: a differentiable count of overwritten bits, its bias declared against the exact ledger, before (a) separates from (b)
+S4g.u MacKay et al. 2018 store forget-bits by design; whether the structure falls out of an erasure cost was not located (site 4 (g))
+S4g.k exact: on an enumerated domain the overwrite count is checked against the S4a ledger (the H(X|Y) floor and the telescoping sum) before training
+S4g.x a structure that appears from an erasure cost changes how the savings at sites 2, 3 and 5 read (C3, C4, C5)
+S4g.r REVERSIBLE is read by running the inverse on the trained net and counting bits lost, never by inspecting weights
 S5a.d checks the information accounting, not learning; separating (a) from (b) needs S5b
 S5a.u invertible networks already show one parameter set serving both directions (flows; Ardizzone et al. 2019)
 S5a.k exact: H(Z|Y) = H(X|Y) for a bijection, by enumeration
@@ -1083,6 +1106,11 @@ S5b.u the per-direction cost of sharing at matched total parameters was not loca
 S5b.k exact: a 2-D toy distribution has a known density, so every likelihood has a reference
 S5b.x one other site: site 4, through C4
 S5b.r the round trip x -> forward -> backward -> x is required, with bits lost counted
+S5g.d needs a further step: an architecture family that can express invertible and non-invertible maps, declared before training, so that "invertible structure appears" has a test
+S5g.u one-way training of a network BUILT invertible yields the inverse (Ardizzone et al. 2019); invertibility appearing unasked under a parameter cost was not searched
+S5g.k exact: a 2-D toy with a known density gives every likelihood a reference, as in S5b
+S5g.x one other site: site 4, through C4
+S5g.r the round trip by numerical inverse is the readout, bits lost counted
 ```
 
 Result under the phone profile and the declared choices, held by the
@@ -1093,10 +1121,13 @@ Q-LOOP  S1 2.500 S1a | S4 2.500 S4a | S2 2.000 S2a | S3 1.500 S3a | S5 1.000 S5a
         FIRST_UNRESOLVED:S1,S4   first across 64 settings: {S1,S4} x64
 Q-REV   S4 2.500 S4a | S2 2.000 S2a | S1 1.250 S1a | S5 1.000 S5a
         FIRST_ROBUST:S4   first across 64 settings: {S4} x64
-not reached on Q-REV: S3a
+not reached on Q-REV: S3a, S3g
 profiles with these first sets: lab, laptop-online, phone, this-session
 best site-2 variant, Q-LOOP: lab S2a, laptop-online S2a, phone S2a, this-session S2a
 best site-2 variant, Q-REV: lab S2a, laptop-online S2a, phone S2a, this-session S2a
+(g) variants, LOOP/REV: S1g 1.000/0.500  S2b 1.000/1.000  S3g 0.600/NOT_REACHED  S4g 0.600/0.600  S5g 0.500/0.500
+(g) a site's best in 0 of 2304 site-cells (4 profiles x 64 settings x 2 questions); readings changed by (g): none
+(g) best over top, worst cell: LOOP 0.667  REV 0.667
 ```
 
 Run it:
@@ -1134,10 +1165,25 @@ discovery
          never merged into the ratio: a reader with a lab and an
          appetite for the open question should read that line, not the
          ranking.
+(g)      the emergence variants at sites 1, 3, 4 and 5, scored
+         2026-10-14, do not break the S1 / S4 tie. None is a site's best
+         variant in any of the 2304 site-cells, and no reading changes
+         when the (g) rows are removed. At the declared cost map none
+         could: a (g) variant trains, so it needs compute medium, its
+         cost is at least 6, and its ratio is at most 12 / 6 = 2.000,
+         below the tied 2.500, whatever its components. Over the sweep
+         that cap lifts (medium at 2, weights at 2) and the margin
+         becomes a scoring result: the best (g) variant reaches 0.667 of
+         the top site in its worst cell. The tie stays held.
 ```
 
 ## 9. Open / owed
 
+- "Start at site 2" was the work order's premise (its SCORING paragraph:
+  site 2 is partly checkable by replicating published numbers, so rank
+  it ahead). It did not survive: the replication S2c costs 18 against
+  S2a's 4 and is the best site-2 variant under no profile (7.4, section
+  8). Kept visible here so the premise is not imported back.
 - Full text of every SEARCH-DEPTH anchor. Full-text hosts refused at DNS
   from this environment on 2026-10-13 (pmc, biorxiv); web search
   snippets were reachable.
@@ -1149,17 +1195,24 @@ discovery
 - No experiment in the table has been run. The scorer orders them; it
   measures nothing about loops.
 - The clean calibration run (7.7) has not been done. The only fill on
-  record is contaminated (7.1) and is used structurally.
-- The (g) variants at sites 1, 3, 4 and 5 are unscored. A scored (g)
-  variant moves the first set only by beating the tied 2.500, which
-  takes all-low cost, d = 2 and u + k + x = 6 (ratio 3.000). Whether any
-  does is unchecked, not ruled out.
+  record is contaminated (7.1) and is used structurally; it stays as
+  committed (hash pinned, d5f5c2a) as a correction specimen: the work
+  order leaked the answer, and the miss found field (g). The clean run
+  goes beside it, never over it. It needs a reader who has not seen the
+  paper, so this session does not run it; it is to be dispatched as its
+  own order using `--blind-packet`.
+- The (g) variants at sites 1, 3, 4 and 5 were scored 2026-10-14 (S1g,
+  S3g, S4g, S5g; section 8). The S1 / S4 tie does not break, and at the
+  declared cost map it could not (section 8, "(g)"). The scores are the
+  rubric author's, as are all the others; the u scores of S1g, S3g and
+  S5g rest partly on searches not made, stated in their basis lines.
 - Profiles other than this-session are declared, not measured.
 - The components are ordinal judgments on 0..2 by the author of the
   rubric, each with a stated reason. The sweep (CHOICE 4) bounds how far
   the cost map and weights can move the ranking; nothing bounds a
   different reader scoring the components differently. A second scorer
-  is the check.
+  is the check; like the clean run, it needs a reader who has not seen
+  the paper and is to be dispatched as its own order.
 
 ## Appendix A - the work order, as delivered
 
