@@ -11,6 +11,10 @@ decides whether the reply answered the message or the category.
 Companion: `tools/coupling_and_accumulation.md` (the prior the specimens
 below point to).
 
+Sibling: [fitness-function bin self-test](fitness_bin_self_test.md) (WO-7):
+an objective's MEANT/MEASURED gap, with a seeded toy GA and missing-channel
+readouts recorded before any patch.
+
 ## Trigger
 
 The flag is category-assignment itself. Named forms:
