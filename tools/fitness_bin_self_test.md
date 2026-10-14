@@ -205,6 +205,138 @@ two pinned FAIL anchors. The bounded original whole-tree
 census hit its **600-second timeout**, exit 124, before reporting an
 aggregate: census is **INCOMPLETE / no verdict**, not passed or failed.
 
+## WO-8 — T5B behavior-space ledger; specimen #2
+
+Note 2026-10-14: additive follow-up, co-authored human + Claude. Earlier
+WO-7/T5+ text and samples above are historical records, not replaced by
+this section. **WO-8 reading: INCONCLUSIVE overall, descriptor-dependent.**
+
+The second specimen is [deceptive_maze_ga.py](deceptive_maze_ga.py), not a
+new tool family. Its original 3,876-byte source prefix is untouched,
+SHA-256 `c8aef02c9f891112e6fe7b0bc2fe7406321d19c5c2861d33c53955a4ec77f0e6`.
+The extension observes the same RNG stream and search; bare execution
+still produces the [original reproduced report](samples/deceptive_maze.original.sample.txt).
+The existing fitness tool adds `--wo8` and prints T5 next to T5B.
+
+### Read declared before the behavior-ledger runs
+
+Half-collapse means **strictly below 50% of gen-0 distinct descriptor
+values**. Early means generation **≤ budget//4**: 15 for WO-7, 37 for
+the maze. These choices are in the file header, not fitted to the output.
+
+Expected POSITIVE: every matched maze seed has early OBJECTIVE collapse
+but no observed early NOVELTY collapse. NEGATIVE: every pair has identical
+collapse flags. Mixed seeds give INCONCLUSIVE. If the descriptor control
+changes that classification, the combined reading is INCONCLUSIVE. No
+alternative threshold is picked afterward. “No collapse” is limited to
+the observed window, which ends early when the maze is solved.
+
+T5B records distinct descriptor values, categorical entropy, largest-bin
+population share, losses between consecutive observed populations, and
+later reoccupation. `LOST_WITHIN_WINDOW` means no return **during this
+recorded run**, not lost forever. Repeated loss episodes are not unique
+cells. These are **INSTRUMENT** facts about the toy's behavior space, not
+properties of the world. Full WO-7 loss records join the existing `--archive`
+export. Neither T5 nor T5+ is deleted or replaced.
+
+### Four conditions: first fixed-budget result
+
+| Condition | T5 genotype half-collapse | T5B final-cell half-collapse | Task / T2 read |
+|---|---|---|---|
+| WO-7 A, LEAKY, seed 7 | generation 5 | generation 5; early | native score 0 → SEALED −12; wrap share 1 |
+| WO-7 B, SEALED, seed 7 | generation 3 | generation 5; early | no wrap; intended walking succeeds |
+| Maze OBJECTIVE, seeds 0–9 | none in all ten | generations 2–3 in all ten; early | solved 1/10, seed 3 at gen 117 |
+| Maze NOVELTY, seeds 0–9 | none in all ten | none observed in all ten | solved 10/10; success-only median gen 28 |
+
+T5 in the grid uses WO-7's normalized Hamming diversity; T5 in the maze
+uses mean per-locus allele entropy. They are different genotype gauges,
+not one shared quantity. Entropy and behavior metrics are printed together
+for every generation, including both grid entropy curves. The [complete
+four-condition output](samples/fitness_bin_self_test_wo8_suite.sample.txt),
+[WO-7 side-by-side output](samples/fitness_bin_self_test_wo8.sample.txt), and
+[structured summary](samples/fitness_bin_self_test_wo8_summary.json) retain
+the spread and loss counts.
+
+The solve results reproduce the supplied **1/10 versus 10/10**, not merely
+its prediction. Endpoint occupancy initially ranges 49–56 across maze
+seeds; at gen 10 OBJECTIVE has 7–12 occupied cells (median 10), while
+NOVELTY's still-running seeds have 52–65. The half-collapse criterion
+fires at gen 2–3, rather than using “about gen 10” as its threshold.
+OBJECTIVE's ending genotype entropy is 1.219646–1.645767 bits/locus;
+NOVELTY's is 1.372177–1.707236. None drops below half its own initial
+entropy. The reported “98–100% in the pocket” is a regional description,
+not the chosen largest-single-cell share: at gen 10 that share is
+0.55–0.79 for OBJECTIVE. No regional-share measurement is substituted.
+
+Behavior losses / rediscoveries / not reoccupied by the end: grid A
+**233 / 178 / 55**, grid B **171 / 122 / 49**. With final-cell descriptors,
+OBJECTIVE's loss events range 378–444, rediscoveries 324–387; NOVELTY's
+loss events range 165–1,510, rediscoveries 107–1,420. Unequal stopping times
+make cumulative event totals unlike-for-unlike exposure lengths.
+
+### The seat test changes the answer
+
+The maze was run again with **the complete set of visited cells** as the
+T5B descriptor. Each set is one behavior bin; this is not the union of all
+cells visited by the population. Search still uses endpoint Euclidean
+objective/novelty, isolating the ledger's descriptor from selector changes.
+Solve generations, genotype-entropy trajectories and archive sizes match
+the final-cell runs exactly.
+
+| Descriptor | OBJECTIVE early half-collapse | NOVELTY early half-collapse | Reading |
+|---|---|---|---|
+| Final cell | 10/10 | 0/10 | POSITIVE under this descriptor |
+| Visited-cell set | 0/10 | 0/10 | NEGATIVE: neither separates |
+
+Visited-set final distinct counts remain 83–100 for OBJECTIVE and 99–100
+for NOVELTY. The overall finding is **INCONCLUSIVE / descriptor-dependent**,
+not a descriptor-independent seal detector. High-resolution visited sets
+almost never repeat, which is itself a limit of this distinct-count gauge.
+
+### Correction specimen: keep proposal, run and miss together
+
+| Stage | Record |
+|---|---|
+| PROPOSED, Claude option-2, 2026-10-14 | Read binning cost / seal through per-locus genotype entropy. |
+| Measured run | Genotype half-entropy stays silent in both maze modes; endpoint T5B separates all ten seed pairs. |
+| Miss / correction | Genotype entropy missed endpoint concentration. “Diversity” welded genotype variation to behavior variation. The visited-set control also shows that T5B's descriptor is a seat, not an outside view. |
+
+T5/T5+ still reads its declared gene-level distributions and last-active-copy
+loss. That is not the same readout as behavioral collapse. **Collapse says
+“converged”; T2 replay says “portable under the declared boundary change or
+not.”** WO-7 A's convergence found a wrapping channel; B's convergence is
+legitimate walking. Do not call either a seal from collapse alone.
+
+One deceptive maze shows that this trap exists, not that novelty is better
+in general. On easy, non-deceptive tasks objective search can be the better
+choice; this packet does not measure that comparison. Successful maze
+runs stop at first goal visit and are censored thereafter. Success is
+anytime, while the original objective scores the endpoint. The novelty
+archive contains endpoint descriptors, **not** all discarded genomes.
+For a pool smaller than 16, the supplied novelty helper's fixed denominator
+understates the available-neighbor mean; actual pools have at least 100.
+This out-of-regime limit is preserved and tested, not silently repaired.
+
+WO-8 validation: **67 module checks, 0 failed**; **17 fitness-tool unit
+tests and 17 maze tests, OK**; method-layer's complete suite **174 tests,
+OK**. Simulators' complete root suite is **185 tests with the same four
+pre-existing failures**, versus 164/four before WO-8. Known-answer registry
+is **68/68 complete**, with the same eleven NOT_RUN loader cases and no
+unexpected disagreements. `KNOWN_RED.md` and both older samples remain
+untouched. Census remains its earlier **INCOMPLETE / timed out** observation.
+Three stale regression expectations were recorded before updating them:
+old selftest count, old default-output sample and the maze's whole-file hash
+(now the preserved source prefix plus a passive extension). No experiment
+was tuned to make a prediction pass. Selftests and known answers are
+synthetic calibration, not external validation.
+
+```sh
+python3 tools/fitness_bin_self_test.py --wo8
+python3 tools/fitness_bin_self_test.py --selftest
+python3 tools/deceptive_maze_ga.py
+python3 tests/test_deceptive_maze_ga.py
+```
+
 ## Honest edges
 
 Some exploits are only simulator bugs: they read the **instrument**, not the world. The toy's topology is exactly such a case. A readout can still be useful, but the system it describes must travel with it.

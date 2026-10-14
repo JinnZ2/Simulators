@@ -1,0 +1,6987 @@
+{
+  "descriptor_readings": {
+    "final_cell": "POSITIVE",
+    "visited_cells": "NEGATIVE"
+  },
+  "elapsed_seconds": 23.192752300000393,
+  "grid": {
+    "A": {
+      "distinct_final": 10,
+      "distinct_gen10": 11,
+      "distinct_initial": 29,
+      "distinct_min": 6,
+      "early_collapse": true,
+      "early_cutoff": 15,
+      "entropy_final": 2.2208799701545803,
+      "entropy_initial": 4.715311532225103,
+      "genotype_entropy_final": 4.494360490401563,
+      "genotype_entropy_initial": 46.676955515542986,
+      "genotype_hamming_half": 5,
+      "half_generation": 5,
+      "largest_share_final": 0.575,
+      "largest_share_gen10": 0.525,
+      "loss_events": 233,
+      "loss_examples": [
+        {
+          "descriptor_value": [
+            0,
+            0
+          ],
+          "fact_kind": "INSTRUMENT",
+          "first_empty_generation": 1,
+          "last_occupied_generation": 0,
+          "reoccupied_generation": 2,
+          "state": "REDISCOVERED"
+        },
+        {
+          "descriptor_value": [
+            0,
+            3
+          ],
+          "fact_kind": "INSTRUMENT",
+          "first_empty_generation": 1,
+          "last_occupied_generation": 0,
+          "reoccupied_generation": null,
+          "state": "LOST_WITHIN_WINDOW"
+        },
+        {
+          "descriptor_value": [
+            0,
+            4
+          ],
+          "fact_kind": "INSTRUMENT",
+          "first_empty_generation": 1,
+          "last_occupied_generation": 0,
+          "reoccupied_generation": null,
+          "state": "LOST_WITHIN_WINDOW"
+        }
+      ],
+      "lost_within_window": 55,
+      "observed_until": 60,
+      "rediscovered": 178
+    },
+    "B": {
+      "distinct_final": 9,
+      "distinct_gen10": 9,
+      "distinct_initial": 23,
+      "distinct_min": 6,
+      "early_collapse": true,
+      "early_cutoff": 15,
+      "entropy_final": 1.8764012662347322,
+      "entropy_initial": 4.3341837197791895,
+      "genotype_entropy_final": 12.75844189023236,
+      "genotype_entropy_initial": 46.676955515542986,
+      "genotype_hamming_half": 3,
+      "half_generation": 5,
+      "largest_share_final": 0.65,
+      "largest_share_gen10": 0.625,
+      "loss_events": 171,
+      "loss_examples": [
+        {
+          "descriptor_value": [
+            0,
+            2
+          ],
+          "fact_kind": "INSTRUMENT",
+          "first_empty_generation": 1,
+          "last_occupied_generation": 0,
+          "reoccupied_generation": null,
+          "state": "LOST_WITHIN_WINDOW"
+        },
+        {
+          "descriptor_value": [
+            1,
+            0
+          ],
+          "fact_kind": "INSTRUMENT",
+          "first_empty_generation": 1,
+          "last_occupied_generation": 0,
+          "reoccupied_generation": null,
+          "state": "LOST_WITHIN_WINDOW"
+        },
+        {
+          "descriptor_value": [
+            1,
+            1
+          ],
+          "fact_kind": "INSTRUMENT",
+          "first_empty_generation": 1,
+          "last_occupied_generation": 0,
+          "reoccupied_generation": null,
+          "state": "LOST_WITHIN_WINDOW"
+        }
+      ],
+      "lost_within_window": 49,
+      "observed_until": 60,
+      "rediscovered": 122
+    }
+  },
+  "maze": {
+    "final_cell": {
+      "novelty": [
+        {
+          "distinct_final": 64,
+          "distinct_gen10": 62,
+          "distinct_initial": 52,
+          "distinct_min": 51,
+          "early_collapse": false,
+          "early_cutoff": 37,
+          "entropy_final": 5.835916314580012,
+          "entropy_initial": 5.4571458451441535,
+          "genotype_entropy_final": 1.5133077009741147,
+          "genotype_entropy_initial": 1.9830866463878665,
+          "genotype_half": null,
+          "half_generation": null,
+          "largest_share_final": 0.04,
+          "largest_share_gen10": 0.04,
+          "loss_events": 1510,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                1,
+                2
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 5,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                2,
+                1
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 2,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                2,
+                2
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 2,
+              "state": "REDISCOVERED"
+            }
+          ],
+          "lost_within_window": 90,
+          "observed_until": 58,
+          "rediscovered": 1420,
+          "seed": 0,
+          "solved_gen": 58
+        },
+        {
+          "distinct_final": 73,
+          "distinct_gen10": 58,
+          "distinct_initial": 51,
+          "distinct_min": 51,
+          "early_collapse": false,
+          "early_cutoff": 37,
+          "entropy_final": 6.045113159965452,
+          "entropy_initial": 5.367368784857279,
+          "genotype_entropy_final": 1.471157774065213,
+          "genotype_entropy_initial": 1.9818359875722438,
+          "genotype_half": null,
+          "half_generation": null,
+          "largest_share_final": 0.05,
+          "largest_share_gen10": 0.05,
+          "loss_events": 631,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                1,
+                2
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 4,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                1,
+                3
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 3,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                1,
+                4
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 2,
+              "state": "REDISCOVERED"
+            }
+          ],
+          "lost_within_window": 80,
+          "observed_until": 25,
+          "rediscovered": 551,
+          "seed": 1,
+          "solved_gen": 25
+        },
+        {
+          "distinct_final": 77,
+          "distinct_gen10": 57,
+          "distinct_initial": 53,
+          "distinct_min": 51,
+          "early_collapse": false,
+          "early_cutoff": 37,
+          "entropy_final": 6.148758439731455,
+          "entropy_initial": 5.567368784857279,
+          "genotype_entropy_final": 1.4764007236348609,
+          "genotype_entropy_initial": 1.9802820701748733,
+          "genotype_half": null,
+          "half_generation": null,
+          "largest_share_final": 0.04,
+          "largest_share_gen10": 0.06,
+          "loss_events": 627,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                1,
+                1
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 2,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                1,
+                3
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 6,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                1,
+                4
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 3,
+              "state": "REDISCOVERED"
+            }
+          ],
+          "lost_within_window": 67,
+          "observed_until": 28,
+          "rediscovered": 560,
+          "seed": 2,
+          "solved_gen": 28
+        },
+        {
+          "distinct_final": 70,
+          "distinct_gen10": 53,
+          "distinct_initial": 52,
+          "distinct_min": 47,
+          "early_collapse": false,
+          "early_cutoff": 37,
+          "entropy_final": 5.946111814666551,
+          "entropy_initial": 5.519819909835644,
+          "genotype_entropy_final": 1.4868835762119617,
+          "genotype_entropy_initial": 1.9794628173540199,
+          "genotype_half": null,
+          "half_generation": null,
+          "largest_share_final": 0.06,
+          "largest_share_gen10": 0.05,
+          "loss_events": 606,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                1,
+                1
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 5,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                1,
+                2
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 2,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                2,
+                2
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 2,
+              "state": "REDISCOVERED"
+            }
+          ],
+          "lost_within_window": 64,
+          "observed_until": 28,
+          "rediscovered": 542,
+          "seed": 3,
+          "solved_gen": 28
+        },
+        {
+          "distinct_final": 65,
+          "distinct_gen10": 65,
+          "distinct_initial": 56,
+          "distinct_min": 52,
+          "early_collapse": false,
+          "early_cutoff": 37,
+          "entropy_final": 5.806111814666551,
+          "entropy_initial": 5.593269689515108,
+          "genotype_entropy_final": 1.6165491496331128,
+          "genotype_entropy_initial": 1.9774168289304126,
+          "genotype_half": null,
+          "half_generation": null,
+          "largest_share_final": 0.04,
+          "largest_share_gen10": 0.04,
+          "loss_events": 307,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                1,
+                1
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 3,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                1,
+                2
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 2,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                1,
+                4
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 2,
+              "state": "REDISCOVERED"
+            }
+          ],
+          "lost_within_window": 67,
+          "observed_until": 13,
+          "rediscovered": 240,
+          "seed": 4,
+          "solved_gen": 13
+        },
+        {
+          "distinct_final": 71,
+          "distinct_gen10": 58,
+          "distinct_initial": 49,
+          "distinct_min": 49,
+          "early_collapse": false,
+          "early_cutoff": 37,
+          "entropy_final": 5.974917659878914,
+          "entropy_initial": 5.376823945732348,
+          "genotype_entropy_final": 1.5082640567792323,
+          "genotype_entropy_initial": 1.9791691015479433,
+          "genotype_half": null,
+          "half_generation": null,
+          "largest_share_final": 0.05,
+          "largest_share_gen10": 0.05,
+          "loss_events": 1246,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                1,
+                6
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 5,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                2,
+                3
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 2,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                2,
+                4
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 2,
+              "state": "REDISCOVERED"
+            }
+          ],
+          "lost_within_window": 85,
+          "observed_until": 53,
+          "rediscovered": 1161,
+          "seed": 5,
+          "solved_gen": 53
+        },
+        {
+          "distinct_final": 66,
+          "distinct_gen10": 63,
+          "distinct_initial": 50,
+          "distinct_min": 50,
+          "early_collapse": false,
+          "early_cutoff": 37,
+          "entropy_final": 5.891014064623282,
+          "entropy_initial": 5.41717328477074,
+          "genotype_entropy_final": 1.4863390639504925,
+          "genotype_entropy_initial": 1.974124078434125,
+          "genotype_half": null,
+          "half_generation": null,
+          "largest_share_final": 0.04,
+          "largest_share_gen10": 0.06,
+          "loss_events": 626,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                1,
+                3
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 2,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                1,
+                6
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 3,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                2,
+                2
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 2,
+              "state": "REDISCOVERED"
+            }
+          ],
+          "lost_within_window": 86,
+          "observed_until": 25,
+          "rediscovered": 540,
+          "seed": 6,
+          "solved_gen": 25
+        },
+        {
+          "distinct_final": 69,
+          "distinct_gen10": 55,
+          "distinct_initial": 50,
+          "distinct_min": 49,
+          "early_collapse": false,
+          "early_cutoff": 37,
+          "entropy_final": 5.9487584397314555,
+          "entropy_initial": 5.420078225325273,
+          "genotype_entropy_final": 1.372176878780018,
+          "genotype_entropy_initial": 1.9801675294678425,
+          "genotype_half": null,
+          "half_generation": null,
+          "largest_share_final": 0.04,
+          "largest_share_gen10": 0.05,
+          "loss_events": 1028,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                2,
+                5
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 2,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                3,
+                2
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 3,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                3,
+                4
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 2,
+              "state": "REDISCOVERED"
+            }
+          ],
+          "lost_within_window": 71,
+          "observed_until": 49,
+          "rediscovered": 957,
+          "seed": 7,
+          "solved_gen": 49
+        },
+        {
+          "distinct_final": 63,
+          "distinct_gen10": 52,
+          "distinct_initial": 52,
+          "distinct_min": 48,
+          "early_collapse": false,
+          "early_cutoff": 37,
+          "entropy_final": 5.777564284943818,
+          "entropy_initial": 5.507368784857279,
+          "genotype_entropy_final": 1.6376292373173427,
+          "genotype_entropy_initial": 1.9756868449792393,
+          "genotype_half": null,
+          "half_generation": null,
+          "largest_share_final": 0.05,
+          "largest_share_gen10": 0.07,
+          "loss_events": 978,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                1,
+                4
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 4,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                3,
+                2
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 2,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                3,
+                5
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 3,
+              "state": "REDISCOVERED"
+            }
+          ],
+          "lost_within_window": 78,
+          "observed_until": 45,
+          "rediscovered": 900,
+          "seed": 8,
+          "solved_gen": 45
+        },
+        {
+          "distinct_final": 64,
+          "distinct_gen10": null,
+          "distinct_initial": 49,
+          "distinct_min": 49,
+          "early_collapse": false,
+          "early_cutoff": 37,
+          "entropy_final": 5.781209564709821,
+          "entropy_initial": 5.389624409749105,
+          "genotype_entropy_final": 1.7072361221975805,
+          "genotype_entropy_initial": 1.9833042356783213,
+          "genotype_half": null,
+          "half_generation": null,
+          "largest_share_final": 0.04,
+          "largest_share_gen10": null,
+          "loss_events": 165,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                1,
+                4
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 2,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                2,
+                3
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 2,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                2,
+                4
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            }
+          ],
+          "lost_within_window": 58,
+          "observed_until": 8,
+          "rediscovered": 107,
+          "seed": 9,
+          "solved_gen": 8
+        }
+      ],
+      "objective": [
+        {
+          "distinct_final": 6,
+          "distinct_gen10": 10,
+          "distinct_initial": 52,
+          "distinct_min": 6,
+          "early_collapse": true,
+          "early_cutoff": 37,
+          "entropy_final": 0.778495348386331,
+          "entropy_initial": 5.4571458451441535,
+          "genotype_entropy_final": 1.643865374205051,
+          "genotype_entropy_initial": 1.9830866463878665,
+          "genotype_half": null,
+          "half_generation": 3,
+          "largest_share_final": 0.87,
+          "largest_share_gen10": 0.76,
+          "loss_events": 414,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                3,
+                1
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 2,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                4,
+                1
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                5,
+                1
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            }
+          ],
+          "lost_within_window": 59,
+          "observed_until": 149,
+          "rediscovered": 355,
+          "seed": 0,
+          "solved_gen": null
+        },
+        {
+          "distinct_final": 6,
+          "distinct_gen10": 10,
+          "distinct_initial": 51,
+          "distinct_min": 5,
+          "early_collapse": true,
+          "early_cutoff": 37,
+          "entropy_final": 1.101028812416544,
+          "entropy_initial": 5.367368784857279,
+          "genotype_entropy_final": 1.5795601576458715,
+          "genotype_entropy_initial": 1.9818359875722438,
+          "genotype_half": null,
+          "half_generation": 3,
+          "largest_share_final": 0.81,
+          "largest_share_gen10": 0.77,
+          "loss_events": 416,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                2,
+                2
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 2,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                5,
+                2
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                5,
+                6
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 2,
+              "state": "REDISCOVERED"
+            }
+          ],
+          "lost_within_window": 59,
+          "observed_until": 149,
+          "rediscovered": 357,
+          "seed": 1,
+          "solved_gen": null
+        },
+        {
+          "distinct_final": 9,
+          "distinct_gen10": 10,
+          "distinct_initial": 53,
+          "distinct_min": 5,
+          "early_collapse": true,
+          "early_cutoff": 37,
+          "entropy_final": 1.2926752439271758,
+          "entropy_initial": 5.567368784857279,
+          "genotype_entropy_final": 1.6272557330105117,
+          "genotype_entropy_initial": 1.9802820701748733,
+          "genotype_half": null,
+          "half_generation": 2,
+          "largest_share_final": 0.79,
+          "largest_share_gen10": 0.62,
+          "loss_events": 378,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                1,
+                1
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                1,
+                3
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 4,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                3,
+                1
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            }
+          ],
+          "lost_within_window": 54,
+          "observed_until": 149,
+          "rediscovered": 324,
+          "seed": 2,
+          "solved_gen": null
+        },
+        {
+          "distinct_final": 36,
+          "distinct_gen10": 9,
+          "distinct_initial": 52,
+          "distinct_min": 6,
+          "early_collapse": true,
+          "early_cutoff": 37,
+          "entropy_final": 4.397936458982003,
+          "entropy_initial": 5.519819909835644,
+          "genotype_entropy_final": 1.2196460521034636,
+          "genotype_entropy_initial": 1.9794628173540199,
+          "genotype_half": null,
+          "half_generation": 2,
+          "largest_share_final": 0.26,
+          "largest_share_gen10": 0.79,
+          "loss_events": 399,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                3,
+                1
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 73,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                3,
+                2
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                4,
+                1
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            }
+          ],
+          "lost_within_window": 69,
+          "observed_until": 117,
+          "rediscovered": 330,
+          "seed": 3,
+          "solved_gen": 117
+        },
+        {
+          "distinct_final": 7,
+          "distinct_gen10": 12,
+          "distinct_initial": 56,
+          "distinct_min": 5,
+          "early_collapse": true,
+          "early_cutoff": 37,
+          "entropy_final": 1.2904906782449383,
+          "entropy_initial": 5.593269689515108,
+          "genotype_entropy_final": 1.6457665126935126,
+          "genotype_entropy_initial": 1.9774168289304126,
+          "genotype_half": null,
+          "half_generation": 2,
+          "largest_share_final": 0.77,
+          "largest_share_gen10": 0.66,
+          "loss_events": 444,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                2,
+                2
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 4,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                3,
+                1
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                3,
+                2
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 76,
+              "state": "REDISCOVERED"
+            }
+          ],
+          "lost_within_window": 57,
+          "observed_until": 149,
+          "rediscovered": 387,
+          "seed": 4,
+          "solved_gen": null
+        },
+        {
+          "distinct_final": 9,
+          "distinct_gen10": 11,
+          "distinct_initial": 49,
+          "distinct_min": 5,
+          "early_collapse": true,
+          "early_cutoff": 37,
+          "entropy_final": 1.367236398652013,
+          "entropy_initial": 5.376823945732348,
+          "genotype_entropy_final": 1.582243393244344,
+          "genotype_entropy_initial": 1.9791691015479433,
+          "genotype_half": null,
+          "half_generation": 2,
+          "largest_share_final": 0.77,
+          "largest_share_gen10": 0.74,
+          "loss_events": 418,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                1,
+                1
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                1,
+                3
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 3,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                2,
+                1
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            }
+          ],
+          "lost_within_window": 55,
+          "observed_until": 149,
+          "rediscovered": 363,
+          "seed": 5,
+          "solved_gen": null
+        },
+        {
+          "distinct_final": 9,
+          "distinct_gen10": 8,
+          "distinct_initial": 50,
+          "distinct_min": 5,
+          "early_collapse": true,
+          "early_cutoff": 37,
+          "entropy_final": 1.645270526174542,
+          "entropy_initial": 5.41717328477074,
+          "genotype_entropy_final": 1.5851253677085535,
+          "genotype_entropy_initial": 1.974124078434125,
+          "genotype_half": null,
+          "half_generation": 3,
+          "largest_share_final": 0.69,
+          "largest_share_gen10": 0.68,
+          "loss_events": 405,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                1,
+                1
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                2,
+                1
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                3,
+                1
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 2,
+              "state": "REDISCOVERED"
+            }
+          ],
+          "lost_within_window": 50,
+          "observed_until": 149,
+          "rediscovered": 355,
+          "seed": 6,
+          "solved_gen": null
+        },
+        {
+          "distinct_final": 11,
+          "distinct_gen10": 11,
+          "distinct_initial": 50,
+          "distinct_min": 6,
+          "early_collapse": true,
+          "early_cutoff": 37,
+          "entropy_final": 1.2155657959446267,
+          "entropy_initial": 5.420078225325273,
+          "genotype_entropy_final": 1.6114278060253977,
+          "genotype_entropy_initial": 1.9801675294678425,
+          "genotype_half": null,
+          "half_generation": 3,
+          "largest_share_final": 0.82,
+          "largest_share_gen10": 0.68,
+          "loss_events": 388,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                2,
+                1
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 139,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                2,
+                2
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 17,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                3,
+                1
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            }
+          ],
+          "lost_within_window": 48,
+          "observed_until": 149,
+          "rediscovered": 340,
+          "seed": 7,
+          "solved_gen": null
+        },
+        {
+          "distinct_final": 8,
+          "distinct_gen10": 12,
+          "distinct_initial": 52,
+          "distinct_min": 4,
+          "early_collapse": true,
+          "early_cutoff": 37,
+          "entropy_final": 1.2522568041275117,
+          "entropy_initial": 5.507368784857279,
+          "genotype_entropy_final": 1.5509219274301036,
+          "genotype_entropy_initial": 1.9756868449792393,
+          "genotype_half": null,
+          "half_generation": 2,
+          "largest_share_final": 0.79,
+          "largest_share_gen10": 0.55,
+          "loss_events": 430,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                1,
+                1
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 2,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                2,
+                1
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 47,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                4,
+                1
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            }
+          ],
+          "lost_within_window": 52,
+          "observed_until": 149,
+          "rediscovered": 378,
+          "seed": 8,
+          "solved_gen": null
+        },
+        {
+          "distinct_final": 10,
+          "distinct_gen10": 7,
+          "distinct_initial": 49,
+          "distinct_min": 5,
+          "early_collapse": true,
+          "early_cutoff": 37,
+          "entropy_final": 1.4272363986520131,
+          "entropy_initial": 5.389624409749105,
+          "genotype_entropy_final": 1.6002811677966255,
+          "genotype_entropy_initial": 1.9833042356783213,
+          "genotype_half": null,
+          "half_generation": 2,
+          "largest_share_final": 0.77,
+          "largest_share_gen10": 0.7,
+          "loss_events": 414,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                2,
+                1
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 108,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                3,
+                1
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                3,
+                2
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 63,
+              "state": "REDISCOVERED"
+            }
+          ],
+          "lost_within_window": 46,
+          "observed_until": 149,
+          "rediscovered": 368,
+          "seed": 9,
+          "solved_gen": null
+        }
+      ]
+    },
+    "visited_cells": {
+      "novelty": [
+        {
+          "distinct_final": 100,
+          "distinct_gen10": 100,
+          "distinct_initial": 100,
+          "distinct_min": 98,
+          "early_collapse": false,
+          "early_cutoff": 37,
+          "entropy_final": 6.643856189774724,
+          "entropy_initial": 6.643856189774724,
+          "genotype_entropy_final": 1.5133077009741147,
+          "genotype_entropy_initial": 1.9830866463878665,
+          "genotype_half": null,
+          "half_generation": null,
+          "largest_share_final": 0.01,
+          "largest_share_gen10": 0.01,
+          "loss_events": 5610,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  1
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ],
+                [
+                  6,
+                  2
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  6
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 33,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  4,
+                  1
+                ],
+                [
+                  4,
+                  2
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            }
+          ],
+          "lost_within_window": 5603,
+          "observed_until": 58,
+          "rediscovered": 7,
+          "seed": 0,
+          "solved_gen": 58
+        },
+        {
+          "distinct_final": 99,
+          "distinct_gen10": 100,
+          "distinct_initial": 100,
+          "distinct_min": 99,
+          "early_collapse": false,
+          "early_cutoff": 37,
+          "entropy_final": 6.623856189774725,
+          "entropy_initial": 6.643856189774724,
+          "genotype_entropy_final": 1.471157774065213,
+          "genotype_entropy_initial": 1.9818359875722438,
+          "genotype_half": null,
+          "half_generation": null,
+          "largest_share_final": 0.02,
+          "largest_share_gen10": 0.01,
+          "loss_events": 2410,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  4,
+                  4
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            }
+          ],
+          "lost_within_window": 2402,
+          "observed_until": 25,
+          "rediscovered": 8,
+          "seed": 1,
+          "solved_gen": 25
+        },
+        {
+          "distinct_final": 100,
+          "distinct_gen10": 100,
+          "distinct_initial": 100,
+          "distinct_min": 98,
+          "early_collapse": false,
+          "early_cutoff": 37,
+          "entropy_final": 6.643856189774724,
+          "entropy_initial": 6.643856189774724,
+          "genotype_entropy_final": 1.4764007236348609,
+          "genotype_entropy_initial": 1.9802820701748733,
+          "genotype_half": null,
+          "half_generation": null,
+          "largest_share_final": 0.01,
+          "largest_share_gen10": 0.01,
+          "loss_events": 2705,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  1
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  4
+                ],
+                [
+                  4,
+                  5
+                ],
+                [
+                  5,
+                  3
+                ],
+                [
+                  5,
+                  4
+                ],
+                [
+                  5,
+                  5
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  4,
+                  1
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  5
+                ],
+                [
+                  5,
+                  1
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            }
+          ],
+          "lost_within_window": 2698,
+          "observed_until": 28,
+          "rediscovered": 7,
+          "seed": 2,
+          "solved_gen": 28
+        },
+        {
+          "distinct_final": 100,
+          "distinct_gen10": 100,
+          "distinct_initial": 99,
+          "distinct_min": 99,
+          "early_collapse": false,
+          "early_cutoff": 37,
+          "entropy_final": 6.643856189774724,
+          "entropy_initial": 6.623856189774725,
+          "genotype_entropy_final": 1.4868835762119617,
+          "genotype_entropy_initial": 1.9794628173540199,
+          "genotype_half": null,
+          "half_generation": null,
+          "largest_share_final": 0.01,
+          "largest_share_gen10": 0.01,
+          "loss_events": 2702,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  4
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ],
+                [
+                  5,
+                  4
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  4
+                ],
+                [
+                  4,
+                  5
+                ],
+                [
+                  4,
+                  6
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ],
+                [
+                  5,
+                  4
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  2
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            }
+          ],
+          "lost_within_window": 2698,
+          "observed_until": 28,
+          "rediscovered": 4,
+          "seed": 3,
+          "solved_gen": 28
+        },
+        {
+          "distinct_final": 100,
+          "distinct_gen10": 100,
+          "distinct_initial": 99,
+          "distinct_min": 99,
+          "early_collapse": false,
+          "early_cutoff": 37,
+          "entropy_final": 6.643856189774724,
+          "entropy_initial": 6.623856189774725,
+          "genotype_entropy_final": 1.6165491496331128,
+          "genotype_entropy_initial": 1.9774168289304126,
+          "genotype_half": null,
+          "half_generation": null,
+          "largest_share_final": 0.01,
+          "largest_share_gen10": 0.01,
+          "loss_events": 1250,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  4
+                ],
+                [
+                  4,
+                  5
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  4,
+                  1
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  4,
+                  5
+                ],
+                [
+                  4,
+                  6
+                ],
+                [
+                  5,
+                  6
+                ],
+                [
+                  6,
+                  5
+                ],
+                [
+                  6,
+                  6
+                ],
+                [
+                  7,
+                  6
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            }
+          ],
+          "lost_within_window": 1249,
+          "observed_until": 13,
+          "rediscovered": 1,
+          "seed": 4,
+          "solved_gen": 13
+        },
+        {
+          "distinct_final": 100,
+          "distinct_gen10": 100,
+          "distinct_initial": 100,
+          "distinct_min": 98,
+          "early_collapse": false,
+          "early_cutoff": 37,
+          "entropy_final": 6.643856189774724,
+          "entropy_initial": 6.643856189774724,
+          "genotype_entropy_final": 1.5082640567792323,
+          "genotype_entropy_initial": 1.9791691015479433,
+          "genotype_half": null,
+          "half_generation": null,
+          "largest_share_final": 0.01,
+          "largest_share_gen10": 0.01,
+          "loss_events": 5107,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  4
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  4
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  1
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  5,
+                  1
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            }
+          ],
+          "lost_within_window": 5095,
+          "observed_until": 53,
+          "rediscovered": 12,
+          "seed": 5,
+          "solved_gen": 53
+        },
+        {
+          "distinct_final": 100,
+          "distinct_gen10": 100,
+          "distinct_initial": 99,
+          "distinct_min": 99,
+          "early_collapse": false,
+          "early_cutoff": 37,
+          "entropy_final": 6.643856189774724,
+          "entropy_initial": 6.623856189774725,
+          "genotype_entropy_final": 1.4863390639504925,
+          "genotype_entropy_initial": 1.974124078434125,
+          "genotype_half": null,
+          "half_generation": null,
+          "largest_share_final": 0.01,
+          "largest_share_gen10": 0.01,
+          "loss_events": 2425,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  4
+                ],
+                [
+                  5,
+                  3
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  6
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  5
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            }
+          ],
+          "lost_within_window": 2421,
+          "observed_until": 25,
+          "rediscovered": 4,
+          "seed": 6,
+          "solved_gen": 25
+        },
+        {
+          "distinct_final": 100,
+          "distinct_gen10": 100,
+          "distinct_initial": 100,
+          "distinct_min": 99,
+          "early_collapse": false,
+          "early_cutoff": 37,
+          "entropy_final": 6.643856189774724,
+          "entropy_initial": 6.643856189774724,
+          "genotype_entropy_final": 1.372176878780018,
+          "genotype_entropy_initial": 1.9801675294678425,
+          "genotype_half": null,
+          "half_generation": null,
+          "largest_share_final": 0.01,
+          "largest_share_gen10": 0.01,
+          "loss_events": 4709,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  1
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  4,
+                  1
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  5,
+                  1
+                ],
+                [
+                  5,
+                  2
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  6
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            }
+          ],
+          "lost_within_window": 4694,
+          "observed_until": 49,
+          "rediscovered": 15,
+          "seed": 7,
+          "solved_gen": 49
+        },
+        {
+          "distinct_final": 100,
+          "distinct_gen10": 100,
+          "distinct_initial": 100,
+          "distinct_min": 99,
+          "early_collapse": false,
+          "early_cutoff": 37,
+          "entropy_final": 6.643856189774724,
+          "entropy_initial": 6.643856189774724,
+          "genotype_entropy_final": 1.6376292373173427,
+          "genotype_entropy_initial": 1.9756868449792393,
+          "genotype_half": null,
+          "half_generation": null,
+          "largest_share_final": 0.01,
+          "largest_share_gen10": 0.01,
+          "loss_events": 4335,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 30,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  4,
+                  1
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  4
+                ],
+                [
+                  4,
+                  5
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  4,
+                  1
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  4
+                ],
+                [
+                  4,
+                  5
+                ],
+                [
+                  5,
+                  1
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  5
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            }
+          ],
+          "lost_within_window": 4321,
+          "observed_until": 45,
+          "rediscovered": 14,
+          "seed": 8,
+          "solved_gen": 45
+        },
+        {
+          "distinct_final": 100,
+          "distinct_gen10": null,
+          "distinct_initial": 100,
+          "distinct_min": 99,
+          "early_collapse": false,
+          "early_cutoff": 37,
+          "entropy_final": 6.643856189774724,
+          "entropy_initial": 6.643856189774724,
+          "genotype_entropy_final": 1.7072361221975805,
+          "genotype_entropy_initial": 1.9833042356783213,
+          "genotype_half": null,
+          "half_generation": null,
+          "largest_share_final": 0.01,
+          "largest_share_gen10": null,
+          "loss_events": 776,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  1
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  4
+                ],
+                [
+                  4,
+                  6
+                ],
+                [
+                  5,
+                  3
+                ],
+                [
+                  5,
+                  4
+                ],
+                [
+                  5,
+                  5
+                ],
+                [
+                  5,
+                  6
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  4
+                ],
+                [
+                  4,
+                  6
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            }
+          ],
+          "lost_within_window": 776,
+          "observed_until": 8,
+          "rediscovered": 0,
+          "seed": 9,
+          "solved_gen": 8
+        }
+      ],
+      "objective": [
+        {
+          "distinct_final": 83,
+          "distinct_gen10": 92,
+          "distinct_initial": 100,
+          "distinct_min": 83,
+          "early_collapse": false,
+          "early_cutoff": 37,
+          "entropy_final": 6.212662034987087,
+          "entropy_initial": 6.643856189774724,
+          "genotype_entropy_final": 1.643865374205051,
+          "genotype_entropy_initial": 1.9830866463878665,
+          "genotype_half": null,
+          "half_generation": null,
+          "largest_share_final": 0.05,
+          "largest_share_gen10": 0.03,
+          "loss_events": 12116,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  1
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ],
+                [
+                  6,
+                  2
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  6
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  4,
+                  1
+                ],
+                [
+                  4,
+                  2
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 7,
+              "state": "REDISCOVERED"
+            }
+          ],
+          "lost_within_window": 8728,
+          "observed_until": 149,
+          "rediscovered": 3388,
+          "seed": 0,
+          "solved_gen": null
+        },
+        {
+          "distinct_final": 95,
+          "distinct_gen10": 99,
+          "distinct_initial": 100,
+          "distinct_min": 92,
+          "early_collapse": false,
+          "early_cutoff": 37,
+          "entropy_final": 6.53630731475309,
+          "entropy_initial": 6.643856189774724,
+          "genotype_entropy_final": 1.5795601576458715,
+          "genotype_entropy_initial": 1.9818359875722438,
+          "genotype_half": null,
+          "half_generation": null,
+          "largest_share_final": 0.03,
+          "largest_share_gen10": 0.02,
+          "loss_events": 12647,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 8,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  4,
+                  4
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  1
+                ],
+                [
+                  4,
+                  5
+                ],
+                [
+                  4,
+                  6
+                ],
+                [
+                  5,
+                  5
+                ],
+                [
+                  5,
+                  6
+                ],
+                [
+                  6,
+                  4
+                ],
+                [
+                  6,
+                  5
+                ],
+                [
+                  6,
+                  6
+                ],
+                [
+                  7,
+                  5
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            }
+          ],
+          "lost_within_window": 9395,
+          "observed_until": 149,
+          "rediscovered": 3252,
+          "seed": 1,
+          "solved_gen": null
+        },
+        {
+          "distinct_final": 96,
+          "distinct_gen10": 94,
+          "distinct_initial": 100,
+          "distinct_min": 86,
+          "early_collapse": false,
+          "early_cutoff": 37,
+          "entropy_final": 6.55630731475309,
+          "entropy_initial": 6.643856189774724,
+          "genotype_entropy_final": 1.6272557330105117,
+          "genotype_entropy_initial": 1.9802820701748733,
+          "genotype_half": null,
+          "half_generation": null,
+          "largest_share_final": 0.03,
+          "largest_share_gen10": 0.02,
+          "loss_events": 11971,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 18,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  1
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  4
+                ],
+                [
+                  4,
+                  5
+                ],
+                [
+                  5,
+                  3
+                ],
+                [
+                  5,
+                  4
+                ],
+                [
+                  5,
+                  5
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  4,
+                  1
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  5
+                ],
+                [
+                  5,
+                  1
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            }
+          ],
+          "lost_within_window": 8423,
+          "observed_until": 149,
+          "rediscovered": 3548,
+          "seed": 2,
+          "solved_gen": null
+        },
+        {
+          "distinct_final": 100,
+          "distinct_gen10": 97,
+          "distinct_initial": 99,
+          "distinct_min": 91,
+          "early_collapse": false,
+          "early_cutoff": 37,
+          "entropy_final": 6.643856189774724,
+          "entropy_initial": 6.623856189774725,
+          "genotype_entropy_final": 1.2196460521034636,
+          "genotype_entropy_initial": 1.9794628173540199,
+          "genotype_half": null,
+          "half_generation": null,
+          "largest_share_final": 0.01,
+          "largest_share_gen10": 0.04,
+          "loss_events": 10026,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  4
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ],
+                [
+                  5,
+                  4
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  4
+                ],
+                [
+                  4,
+                  5
+                ],
+                [
+                  4,
+                  6
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ],
+                [
+                  5,
+                  4
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  2
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            }
+          ],
+          "lost_within_window": 7997,
+          "observed_until": 117,
+          "rediscovered": 2029,
+          "seed": 3,
+          "solved_gen": 117
+        },
+        {
+          "distinct_final": 98,
+          "distinct_gen10": 96,
+          "distinct_initial": 99,
+          "distinct_min": 88,
+          "early_collapse": false,
+          "early_cutoff": 37,
+          "entropy_final": 6.603856189774724,
+          "entropy_initial": 6.623856189774725,
+          "genotype_entropy_final": 1.6457665126935126,
+          "genotype_entropy_initial": 1.9774168289304126,
+          "genotype_half": null,
+          "half_generation": null,
+          "largest_share_final": 0.02,
+          "largest_share_gen10": 0.02,
+          "loss_events": 12375,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  4
+                ],
+                [
+                  4,
+                  5
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 20,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  4,
+                  1
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 11,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  4,
+                  5
+                ],
+                [
+                  4,
+                  6
+                ],
+                [
+                  5,
+                  6
+                ],
+                [
+                  6,
+                  5
+                ],
+                [
+                  6,
+                  6
+                ],
+                [
+                  7,
+                  6
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            }
+          ],
+          "lost_within_window": 8895,
+          "observed_until": 149,
+          "rediscovered": 3480,
+          "seed": 4,
+          "solved_gen": null
+        },
+        {
+          "distinct_final": 99,
+          "distinct_gen10": 98,
+          "distinct_initial": 100,
+          "distinct_min": 90,
+          "early_collapse": false,
+          "early_cutoff": 37,
+          "entropy_final": 6.623856189774725,
+          "entropy_initial": 6.643856189774724,
+          "genotype_entropy_final": 1.582243393244344,
+          "genotype_entropy_initial": 1.9791691015479433,
+          "genotype_half": null,
+          "half_generation": null,
+          "largest_share_final": 0.02,
+          "largest_share_gen10": 0.02,
+          "loss_events": 12335,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  4
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 4,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  4
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 54,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  1
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  5,
+                  1
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            }
+          ],
+          "lost_within_window": 8892,
+          "observed_until": 149,
+          "rediscovered": 3443,
+          "seed": 5,
+          "solved_gen": null
+        },
+        {
+          "distinct_final": 96,
+          "distinct_gen10": 96,
+          "distinct_initial": 99,
+          "distinct_min": 89,
+          "early_collapse": false,
+          "early_cutoff": 37,
+          "entropy_final": 6.543856189774725,
+          "entropy_initial": 6.623856189774725,
+          "genotype_entropy_final": 1.5851253677085535,
+          "genotype_entropy_initial": 1.974124078434125,
+          "genotype_half": null,
+          "half_generation": null,
+          "largest_share_final": 0.04,
+          "largest_share_gen10": 0.02,
+          "loss_events": 12470,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  4
+                ],
+                [
+                  5,
+                  3
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  6
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 15,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  5
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 48,
+              "state": "REDISCOVERED"
+            }
+          ],
+          "lost_within_window": 9227,
+          "observed_until": 149,
+          "rediscovered": 3243,
+          "seed": 6,
+          "solved_gen": null
+        },
+        {
+          "distinct_final": 90,
+          "distinct_gen10": 88,
+          "distinct_initial": 100,
+          "distinct_min": 81,
+          "early_collapse": false,
+          "early_cutoff": 37,
+          "entropy_final": 6.403856189774724,
+          "entropy_initial": 6.643856189774724,
+          "genotype_entropy_final": 1.6114278060253977,
+          "genotype_entropy_initial": 1.9801675294678425,
+          "genotype_half": null,
+          "half_generation": null,
+          "largest_share_final": 0.04,
+          "largest_share_gen10": 0.05,
+          "loss_events": 11512,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  1
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 48,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  4,
+                  1
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  5,
+                  1
+                ],
+                [
+                  5,
+                  2
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  6
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            }
+          ],
+          "lost_within_window": 7299,
+          "observed_until": 149,
+          "rediscovered": 4213,
+          "seed": 7,
+          "solved_gen": null
+        },
+        {
+          "distinct_final": 97,
+          "distinct_gen10": 97,
+          "distinct_initial": 100,
+          "distinct_min": 90,
+          "early_collapse": false,
+          "early_cutoff": 37,
+          "entropy_final": 6.57630731475309,
+          "entropy_initial": 6.643856189774724,
+          "genotype_entropy_final": 1.5509219274301036,
+          "genotype_entropy_initial": 1.9756868449792393,
+          "genotype_half": null,
+          "half_generation": null,
+          "largest_share_final": 0.03,
+          "largest_share_gen10": 0.02,
+          "loss_events": 12398,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 5,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  4,
+                  1
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  4
+                ],
+                [
+                  4,
+                  5
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 53,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  4,
+                  1
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  4
+                ],
+                [
+                  4,
+                  5
+                ],
+                [
+                  5,
+                  1
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  5
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            }
+          ],
+          "lost_within_window": 8706,
+          "observed_until": 149,
+          "rediscovered": 3692,
+          "seed": 8,
+          "solved_gen": null
+        },
+        {
+          "distinct_final": 97,
+          "distinct_gen10": 95,
+          "distinct_initial": 100,
+          "distinct_min": 88,
+          "early_collapse": false,
+          "early_cutoff": 37,
+          "entropy_final": 6.583856189774725,
+          "entropy_initial": 6.643856189774724,
+          "genotype_entropy_final": 1.6002811677966255,
+          "genotype_entropy_initial": 1.9833042356783213,
+          "genotype_half": null,
+          "half_generation": null,
+          "largest_share_final": 0.02,
+          "largest_share_gen10": 0.02,
+          "loss_events": 12402,
+          "loss_examples": [
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 4,
+              "state": "REDISCOVERED"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  4
+                ],
+                [
+                  4,
+                  6
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": null,
+              "state": "LOST_WITHIN_WINDOW"
+            },
+            {
+              "descriptor_value": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  4,
+                  1
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  4
+                ],
+                [
+                  5,
+                  1
+                ],
+                [
+                  5,
+                  2
+                ]
+              ],
+              "fact_kind": "INSTRUMENT",
+              "first_empty_generation": 1,
+              "last_occupied_generation": 0,
+              "reoccupied_generation": 47,
+              "state": "REDISCOVERED"
+            }
+          ],
+          "lost_within_window": 8983,
+          "observed_until": 149,
+          "rediscovered": 3419,
+          "seed": 9,
+          "solved_gen": null
+        }
+      ]
+    }
+  },
+  "overall": "INCONCLUSIVE",
+  "threshold": {
+    "early_fraction_of_budget": 0.25,
+    "half_fraction": 0.5,
+    "strict": true
+  }
+}

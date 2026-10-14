@@ -811,6 +811,14 @@ EXPECTED_METRICS = (
     "tools/fitness_bin_self_test.py::allele_entropy",
     "tools/fitness_bin_self_test.py::rediscovery_wait",
     "tools/fitness_bin_self_test.py::archive_ratio",
+    "tools/deceptive_maze_ga.py::dist",
+    "tools/deceptive_maze_ga.py::objective",
+    "tools/deceptive_maze_ga.py::novelty",
+    "tools/deceptive_maze_ga.py::locus_entropy",
+    "tools/deceptive_maze_ga.py::half_gen",
+    "tools/fitness_bin_self_test.py::behavior_metrics",
+    "tools/fitness_bin_self_test.py::behavior_half_gen",
+    "tools/fitness_bin_self_test.py::behavior_ledger",
 )
 
 
@@ -1028,6 +1036,7 @@ def _mp_stiffness_ratio(nb, nh, ab, ah):
 def seed():
     """Registers the two instances the rule was earned from."""
     _seed_fitness_bin_self_test()
+    _seed_fitness_maze()
     fn, detail = _extract_verdict()
     register(
         "null-harness/null_harness.py::_verdict",
@@ -2674,6 +2683,93 @@ def _fbst_archive_ratio(*args):
     return _fbst_metric("archive_ratio", *args)
 
 
+def _fbst_behavior_metrics(*args):
+    return _fbst_metric("behavior_metrics", *args)
+
+
+def _fbst_behavior_half(*args):
+    return _fbst_metric("behavior_half_gen", *args)
+
+
+def _fbst_behavior_losses(observations):
+    result = _fbst_metric("behavior_ledger", observations, 8)
+    return result["loss_events"], result["rediscovered"], result["lost_within_window"]
+
+
+def _maze_metric(fn_name, *args):
+    """Import the untouched supplied maze; no evolutionary run at import."""
+    import importlib.util
+    path = os.path.join(ROOT, "tools", "deceptive_maze_ga.py")
+    spec = importlib.util.spec_from_file_location("_fitness_maze", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return getattr(mod, fn_name)(*args)
+
+
+def _maze_dist(*args):
+    return _maze_metric("dist", *args)
+
+
+def _maze_objective(*args):
+    return _maze_metric("objective", *args)
+
+
+def _maze_novelty(*args):
+    return _maze_metric("novelty", *args)
+
+
+def _maze_entropy(which):
+    populations = {"clones": [[0] * 60] * 4,
+                   "two": [[0] * 60, [2] * 60],
+                   "four": [[i] * 60 for i in range(4)]}
+    return _maze_metric("locus_entropy", populations[which])
+
+
+def _maze_half_gen(*args):
+    return _maze_metric("half_gen", *args)
+
+
+def _seed_fitness_maze():
+    register(
+        "tools/deceptive_maze_ga.py::dist", _maze_dist,
+        [case("same point", ((3, 4), (3, 4)), 0.0, "zero displacement"),
+         case("3-4-5 triangle", ((0, 0), (3, 4)), 5.0,
+              "sqrt(3^2+4^2)=5"),
+         case("axis", ((2, 1), (2, 13)), 12.0, "13-1, same x")])
+    register(
+        "tools/deceptive_maze_ga.py::objective", _maze_objective,
+        [case("goal", ((2, 13),), 0.0, "negative distance zero"),
+         case("start", ((2, 1),), -12.0, "negative twelve vertical cells"),
+         case("pocket", ((2, 6),), -7.0,
+              "negative seven cells; wall prevents straight passage")])
+    register(
+        "tools/deceptive_maze_ga.py::novelty", _maze_novelty,
+        [case("fifteen at distance five",
+              ((0, 0), [(0, 0)] + [(3, 4)] * 15), 5.0,
+              "remove one self-distance then average fifteen fives"),
+         case("all duplicate", ((0, 0), [(0, 0)] * 16), 0.0,
+              "duplicates remain peers, every distance zero"),
+         case("seven duplicates and eight fives",
+              ((0, 0), [(0, 0)] * 8 + [(3, 4)] * 8), 8 / 3,
+              "remove one self: sum 8*5 over 15 neighbors", tol=1e-12)])
+    register(
+        "tools/deceptive_maze_ga.py::locus_entropy", _maze_entropy,
+        [case("clones", ("clones",), 0.0,
+              "every locus fixed: mean entropy zero"),
+         case("balanced two", ("two",), 1.0,
+              "one bit at every locus, mean one (not sum sixty)"),
+         case("balanced four", ("four",), 2.0,
+              "two bits at every locus, mean two")])
+    register(
+        "tools/deceptive_maze_ga.py::half_gen", _maze_half_gen,
+        [case("below at two", ([2.0, 1.0, 0.99],), 2,
+              "strictly below one only at zero-based index two"),
+         case("half never below", ([2.0, 1.0, 1.0],), None,
+              "equal to the half threshold is not strictly below"),
+         case("below at one", ([2.0, 0.9, 0.8],), 1,
+              "first below at index one, not last below")])
+
+
 def _seed_fitness_bin_self_test():
     """Nonconstant hand-known answers, including absent != measured zero."""
     register(
@@ -2731,6 +2827,33 @@ def _seed_fitness_bin_self_test():
               "bytes and generations cannot be divided into a cost ratio"),
          case("zero denominator", (2, 0, 3, "work_units"), "UNRATED",
               "refuses a zero holding-cost denominator, never infinite ratio")])
+    register(
+        "tools/fitness_bin_self_test.py::behavior_metrics", _fbst_behavior_metrics,
+        [case("two balanced cells", (["a", "a", "b", "b"],),
+              {"distinct": 2, "entropy_bits": 1.0, "largest_share": 0.5},
+              "two cells at one half each: one bit, largest half"),
+         case("one occupied cell", (["a", "a"],),
+              {"distinct": 1, "entropy_bits": 0.0, "largest_share": 1.0},
+              "one cell certain, zero entropy, largest all"),
+         case("absent population", ([],),
+              {"distinct": None, "entropy_bits": None, "largest_share": None},
+              "absence is not measured zero diversity")])
+    register(
+        "tools/fitness_bin_self_test.py::behavior_half_gen", _fbst_behavior_half,
+        [case("below at two", ([4, 2, 1],), 2,
+              "equal to half at one, strictly below at two"),
+         case("half held", ([4, 2, 2],), None,
+              "strict threshold, equality does not fire"),
+         case("below at one", ([4, 1, 1],), 1,
+              "first below at index one")])
+    register(
+        "tools/fitness_bin_self_test.py::behavior_ledger", _fbst_behavior_losses,
+        [case("one recovered one windowed loss", ([["a", "b"], ["a"], ["b"]],),
+              (2, 1, 1), "b disappears then returns; a disappears at last observed step"),
+         case("no support loss", ([["a", "b"], ["a", "b"]],),
+              (0, 0, 0), "both occupied in both generations"),
+         case("two lost in window", ([["a", "b", "c"], ["a"]],),
+              (2, 0, 2), "b and c disappear with no later observation")])
 
 
 def seed_reachable(src=None, path=None):
