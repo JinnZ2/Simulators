@@ -1,0 +1,28 @@
+params POP=100 GENS=150 L=60 MUT=0.05 TOUR=3 ELITE=2 K=15 ARCH+=3 seeds=10
+
+--- objective ---
+ seed 0: solved_gen=None  entropy start=1.98 end=1.64 bits/locus  half-entropy gen=None
+ seed 1: solved_gen=None  entropy start=1.98 end=1.58 bits/locus  half-entropy gen=None
+ seed 2: solved_gen=None  entropy start=1.98 end=1.63 bits/locus  half-entropy gen=None
+ seed 3: solved_gen=117  entropy start=1.98 end=1.22 bits/locus  half-entropy gen=None
+ seed 4: solved_gen=None  entropy start=1.98 end=1.65 bits/locus  half-entropy gen=None
+ seed 5: solved_gen=None  entropy start=1.98 end=1.58 bits/locus  half-entropy gen=None
+ seed 6: solved_gen=None  entropy start=1.97 end=1.59 bits/locus  half-entropy gen=None
+ seed 7: solved_gen=None  entropy start=1.98 end=1.61 bits/locus  half-entropy gen=None
+ seed 8: solved_gen=None  entropy start=1.98 end=1.55 bits/locus  half-entropy gen=None
+ seed 9: solved_gen=None  entropy start=1.98 end=1.60 bits/locus  half-entropy gen=None
+ => solved 1/10   median solve gen=117
+
+--- novelty ---
+ seed 0: solved_gen=58  entropy start=1.98 end=1.51 bits/locus  half-entropy gen=None
+ seed 1: solved_gen=25  entropy start=1.98 end=1.47 bits/locus  half-entropy gen=None
+ seed 2: solved_gen=28  entropy start=1.98 end=1.48 bits/locus  half-entropy gen=None
+ seed 3: solved_gen=28  entropy start=1.98 end=1.49 bits/locus  half-entropy gen=None
+ seed 4: solved_gen=13  entropy start=1.98 end=1.62 bits/locus  half-entropy gen=None
+ seed 5: solved_gen=53  entropy start=1.98 end=1.51 bits/locus  half-entropy gen=None
+ seed 6: solved_gen=25  entropy start=1.97 end=1.49 bits/locus  half-entropy gen=None
+ seed 7: solved_gen=49  entropy start=1.98 end=1.37 bits/locus  half-entropy gen=None
+ seed 8: solved_gen=45  entropy start=1.98 end=1.64 bits/locus  half-entropy gen=None
+ seed 9: solved_gen=8  entropy start=1.98 end=1.71 bits/locus  half-entropy gen=None
+ => solved 10/10   median solve gen=28
+

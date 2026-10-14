@@ -808,6 +808,24 @@ EXPECTED_METRICS = (
     "tools/experiment_fruitfulness_triage.py::classify_first",
     "tools/check_citations.py::citation_state",
     "tools/yardstick.py::read",
+    "tools/fitness_bin_self_test.py::fitness",
+    "tools/fitness_bin_self_test.py::wrap_share",
+    "tools/fitness_bin_self_test.py::diversity",
+    "tools/fitness_bin_self_test.py::fitness_drop",
+    "tools/fitness_bin_self_test.py::allele_entropy",
+    "tools/fitness_bin_self_test.py::rediscovery_wait",
+    "tools/fitness_bin_self_test.py::archive_ratio",
+    "tools/deceptive_maze_ga.py::dist",
+    "tools/deceptive_maze_ga.py::objective",
+    "tools/deceptive_maze_ga.py::novelty",
+    "tools/deceptive_maze_ga.py::locus_entropy",
+    "tools/deceptive_maze_ga.py::half_gen",
+    "tools/fitness_bin_self_test.py::behavior_metrics",
+    "tools/fitness_bin_self_test.py::behavior_half_gen",
+    "tools/fitness_bin_self_test.py::behavior_ledger",
+    "tools/deceptive_maze_ga.py::jaccard_distance",
+    "tools/deceptive_maze_ga.py::mean_pairwise",
+    "tools/deceptive_maze_ga.py::half_distance_gen",
 )
 
 
@@ -1024,6 +1042,8 @@ def _mp_stiffness_ratio(nb, nh, ab, ah):
 
 def seed():
     """Registers the two instances the rule was earned from."""
+    _seed_fitness_bin_self_test()
+    _seed_fitness_maze()
     fn, detail = _extract_verdict()
     register(
         "null-harness/null_harness.py::_verdict",
@@ -2788,6 +2808,256 @@ def _seed_yardstick():
               (None, None, None),
               "nothing classified: no fraction exists, which is not 0")],
         note="the shared band and the None-not-0.0 case are the pins")
+
+
+def _fbst_metric(fn_name, *args):
+    """WO-7 pure metrics; normal import from tools, with no GA run."""
+    import importlib.util
+    path = os.path.join(ROOT, "tools", "fitness_bin_self_test.py")
+    spec = importlib.util.spec_from_file_location("_fbst", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return getattr(mod, fn_name)(*args)
+
+
+def _fbst_fitness(*args):
+    return _fbst_metric("fitness", *args)
+
+
+def _fbst_wrap_share(*args):
+    return _fbst_metric("wrap_share", *args)
+
+
+def _fbst_diversity(*args):
+    return _fbst_metric("diversity", *args)
+
+
+def _fbst_fitness_drop(*args):
+    return _fbst_metric("fitness_drop", *args)
+
+
+def _fbst_allele_entropy(*args):
+    return _fbst_metric("allele_entropy", *args)
+
+
+def _fbst_rediscovery_wait(*args):
+    return _fbst_metric("rediscovery_wait", *args)
+
+
+def _fbst_archive_ratio(*args):
+    return _fbst_metric("archive_ratio", *args)
+
+
+def _fbst_behavior_metrics(*args):
+    return _fbst_metric("behavior_metrics", *args)
+
+
+def _fbst_behavior_half(*args):
+    return _fbst_metric("behavior_half_gen", *args)
+
+
+def _fbst_behavior_losses(observations):
+    result = _fbst_metric("behavior_ledger", observations, 8)
+    return result["loss_events"], result["rediscovered"], result["lost_within_window"]
+
+
+def _maze_metric(fn_name, *args):
+    """Import the untouched supplied maze; no evolutionary run at import."""
+    import importlib.util
+    path = os.path.join(ROOT, "tools", "deceptive_maze_ga.py")
+    spec = importlib.util.spec_from_file_location("_fitness_maze", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return getattr(mod, fn_name)(*args)
+
+
+def _maze_dist(*args):
+    return _maze_metric("dist", *args)
+
+
+def _maze_objective(*args):
+    return _maze_metric("objective", *args)
+
+
+def _maze_novelty(*args):
+    return _maze_metric("novelty", *args)
+
+
+def _maze_entropy(which):
+    populations = {"clones": [[0] * 60] * 4,
+                   "two": [[0] * 60, [2] * 60],
+                   "four": [[i] * 60 for i in range(4)]}
+    return _maze_metric("locus_entropy", populations[which])
+
+
+def _maze_half_gen(*args):
+    return _maze_metric("half_gen", *args)
+
+
+def _maze_jaccard(*args):
+    return _maze_metric("jaccard_distance", *args)
+
+
+def _maze_pairwise(*args):
+    return _maze_metric("mean_pairwise", *args)
+
+
+def _maze_distance_half(*args):
+    return _maze_metric("half_distance_gen", *args)
+
+
+def _seed_fitness_maze():
+    register(
+        "tools/deceptive_maze_ga.py::dist", _maze_dist,
+        [case("same point", ((3, 4), (3, 4)), 0.0, "zero displacement"),
+         case("3-4-5 triangle", ((0, 0), (3, 4)), 5.0,
+              "sqrt(3^2+4^2)=5"),
+         case("axis", ((2, 1), (2, 13)), 12.0, "13-1, same x")])
+    register(
+        "tools/deceptive_maze_ga.py::objective", _maze_objective,
+        [case("goal", ((2, 13),), 0.0, "negative distance zero"),
+         case("start", ((2, 1),), -12.0, "negative twelve vertical cells"),
+         case("pocket", ((2, 6),), -7.0,
+              "negative seven cells; wall prevents straight passage")])
+    register(
+        "tools/deceptive_maze_ga.py::novelty", _maze_novelty,
+        [case("fifteen at distance five",
+              ((0, 0), [(0, 0)] + [(3, 4)] * 15), 5.0,
+              "remove one self-distance then average fifteen fives"),
+         case("all duplicate", ((0, 0), [(0, 0)] * 16), 0.0,
+              "duplicates remain peers, every distance zero"),
+         case("seven duplicates and eight fives",
+              ((0, 0), [(0, 0)] * 8 + [(3, 4)] * 8), 8 / 3,
+              "remove one self: sum 8*5 over 15 neighbors", tol=1e-12)])
+    register(
+        "tools/deceptive_maze_ga.py::locus_entropy", _maze_entropy,
+        [case("clones", ("clones",), 0.0,
+              "every locus fixed: mean entropy zero"),
+         case("balanced two", ("two",), 1.0,
+              "one bit at every locus, mean one (not sum sixty)"),
+         case("balanced four", ("four",), 2.0,
+              "two bits at every locus, mean two")])
+    register(
+        "tools/deceptive_maze_ga.py::half_gen", _maze_half_gen,
+        [case("below at two", ([2.0, 1.0, 0.99],), 2,
+              "strictly below one only at zero-based index two"),
+         case("half never below", ([2.0, 1.0, 1.0],), None,
+              "equal to the half threshold is not strictly below"),
+         case("below at one", ([2.0, 0.9, 0.8],), 1,
+              "first below at index one, not last below")])
+    register(
+        "tools/deceptive_maze_ga.py::jaccard_distance", _maze_jaccard,
+        [case("identical sets", ({1, 2}, {1, 2}), 0.0,
+              "intersection equals union"),
+         case("disjoint", ({1}, {2}), 1.0, "empty intersection, nonempty union"),
+         case("one of three shared", ({1, 2}, {2, 3}), 2 / 3,
+              "one shared of three union cells: 1-1/3", tol=1e-12),
+         case("empty convention", (set(), set()), 0.0,
+              "explicitly identical empty sets, not division by zero")])
+    register(
+        "tools/deceptive_maze_ga.py::mean_pairwise", _maze_pairwise,
+        [case("F duplicate weighted slots", ([(0, 0), (3, 4), (0, 0)], "F"), 10 / 3,
+              "three unordered slot pairs: five, zero, five", tol=1e-12),
+         case("V hand population", ([{1}, {1, 2}, {2}], "V"), 2 / 3,
+              "three pairs: one half, one, one half", tol=1e-12),
+         case("P scalar hand population", ([2, 2, 5], "P"), 2.0,
+              "absolute distances zero, three, three; mean two"),
+         case("no pair", ([(0, 0)], "F"), None,
+              "one slot cannot supply a pair; absence not measured zero")])
+    register(
+        "tools/deceptive_maze_ga.py::half_distance_gen", _maze_distance_half,
+        [case("strict half at two", ([2.0, 1.0, 0.9],), 2,
+              "equal at one, strictly below half at two"),
+         case("40 percent no crossing", ([2.0, 1.0, 0.9], 0.4), None,
+              "nothing below eight tenths"),
+         case("60 percent at one", ([2.0, 1.0, 0.9], 0.6), 1,
+              "one is below twelve tenths at index one")])
+
+
+def _seed_fitness_bin_self_test():
+    """Nonconstant hand-known answers, including absent != measured zero."""
+    register(
+        "tools/fitness_bin_self_test.py::fitness", _fbst_fitness,
+        [case("goal", ([8, 8], [8, 8]), 0, "distance zero, so score zero"),
+         case("start", ([0, 0], [8, 8]), -16, "-(8+8) by hand"),
+         case("one step off", ([7, 8], [8, 8]), -1, "-(1+0) by hand")])
+    register(
+        "tools/fitness_bin_self_test.py::wrap_share", _fbst_wrap_share,
+        [case("all", ([{"wraps": 2}, {"wraps": 1}],), 1.0,
+              "two of two slots use at least one wrap"),
+         case("none", ([{"wraps": 0}, {"wraps": 0}],), 0.0,
+              "observed zero of two, not absent"),
+         case("half", ([{"wraps": 0}, {"wraps": 3}],), 0.5,
+              "one of two, not three events over two slots"),
+         case("absent", ([],), None, "no winner slots, no denominator")])
+    register(
+        "tools/fitness_bin_self_test.py::diversity", _fbst_diversity,
+        [case("hand population", (["NN", "NE", "EE"],), 2 / 3,
+              "pair distances 1,2,1: 4/(3*2)"),
+         case("clones", (["NN", "NN"],), 0.0, "zero differing loci"),
+         case("opposites", (["NN", "EE"],), 1.0, "two of two loci differ"),
+         case("one slot", (["NN"],), None, "no pairs, not zero diversity")])
+    register(
+        "tools/fitness_bin_self_test.py::fitness_drop", _fbst_fitness_drop,
+        [case("loss", (0, -16), 16, "native minus changed: 0-(-16)"),
+         case("held", (0, 0), 0, "equal scores, measured zero loss"),
+         case("improvement", (-3, 0), -3, "-3-0, retain direction")])
+    register(
+        "tools/fitness_bin_self_test.py::allele_entropy", _fbst_allele_entropy,
+        [case("balanced two", (["N", "E"],), 1.0,
+              "two equally likely alleles: -2*(1/2)*log2(1/2)=1"),
+         case("balanced four", (["N", "S", "E", "W"],), 2.0,
+              "four equally likely alleles, log2(4)=2"),
+         case("clones", (["NN", "NN"],), 0.0,
+              "every locus has one allele, log2(1)=0"),
+         case("absent", ([],), None, "no population is not zero entropy")])
+    register(
+        "tools/fitness_bin_self_test.py::rediscovery_wait", _fbst_rediscovery_wait,
+        [case("one half-probability child", (1, 1.0, 2), 2.0,
+              "redraw from both alleles, success 1/2, geometric wait 2"),
+         case("two independent children", (2, 1.0, 2), 4 / 3,
+              "failure (1/2)^2, success 3/4, geometric wait 4/3", tol=1e-12),
+         case("zero mutation", (2, 0.0, 4), None,
+              "absent parental support plus zero mutation has no finite wait")])
+    register(
+        "tools/fitness_bin_self_test.py::archive_ratio", _fbst_archive_ratio,
+        [case("rebuild dearer", (2, 4, 3, "work_units"), 1.5,
+              "two generations times three units / four holding units"),
+         case("rebuild free", (2, 4, 0, "work_units"), 0.0,
+              "declared zero per-generation cost gives measured zero"),
+         case("no holding cost", (2, None, 3, "work_units"), "UNRATED",
+              "no denominator cost declared, no preference inferred"),
+         case("no common unit", (2, 4, 3, None), "UNRATED",
+              "bytes and generations cannot be divided into a cost ratio"),
+         case("zero denominator", (2, 0, 3, "work_units"), "UNRATED",
+              "refuses a zero holding-cost denominator, never infinite ratio")])
+    register(
+        "tools/fitness_bin_self_test.py::behavior_metrics", _fbst_behavior_metrics,
+        [case("two balanced cells", (["a", "a", "b", "b"],),
+              {"distinct": 2, "entropy_bits": 1.0, "largest_share": 0.5},
+              "two cells at one half each: one bit, largest half"),
+         case("one occupied cell", (["a", "a"],),
+              {"distinct": 1, "entropy_bits": 0.0, "largest_share": 1.0},
+              "one cell certain, zero entropy, largest all"),
+         case("absent population", ([],),
+              {"distinct": None, "entropy_bits": None, "largest_share": None},
+              "absence is not measured zero diversity")])
+    register(
+        "tools/fitness_bin_self_test.py::behavior_half_gen", _fbst_behavior_half,
+        [case("below at two", ([4, 2, 1],), 2,
+              "equal to half at one, strictly below at two"),
+         case("half held", ([4, 2, 2],), None,
+              "strict threshold, equality does not fire"),
+         case("below at one", ([4, 1, 1],), 1,
+              "first below at index one")])
+    register(
+        "tools/fitness_bin_self_test.py::behavior_ledger", _fbst_behavior_losses,
+        [case("one recovered one windowed loss", ([["a", "b"], ["a"], ["b"]],),
+              (2, 1, 1), "b disappears then returns; a disappears at last observed step"),
+         case("no support loss", ([["a", "b"], ["a", "b"]],),
+              (0, 0, 0), "both occupied in both generations"),
+         case("two lost in window", ([["a", "b", "c"], ["a"]],),
+              (2, 0, 2), "b and c disappear with no later observation")])
 
 
 def seed_reachable(src=None, path=None):
