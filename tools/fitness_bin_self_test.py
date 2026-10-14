@@ -30,6 +30,7 @@ in a normal run checks control integrity only, not an empirical claim.
 import argparse
 import hashlib
 import json
+import math
 import random
 import sys
 
@@ -102,25 +103,96 @@ def fitness_drop(native, changed):
     return native - changed
 
 
+def locus_counts(population):
+    if not population:
+        return []
+    length = len(population[0])
+    if length == 0 or any(len(g) != length for g in population):
+        raise ValueError("allele counts need equal, positive genome lengths")
+    counts = [dict.fromkeys(MOVES, 0) for _ in range(length)]
+    for genome in population:
+        for locus, allele in enumerate(genome):
+            if allele not in MOVES:
+                raise ValueError("unknown allele")
+            counts[locus][allele] += 1
+    return counts
+
+
+def allele_entropy(population):
+    """Sum marginal per-locus Shannon entropies in bits; not joint entropy."""
+    if not population:
+        return None
+    n = len(population)
+    return sum(-(count / n) * math.log2(count / n)
+               for row in locus_counts(population) for count in row.values()
+               if count)
+
+
+def lost_support(before, survivors):
+    """Last active breeding copy lost; archive retention is a separate state."""
+    a, b = locus_counts(before), locus_counts(survivors)
+    if not a or not b or len(a) != len(b):
+        raise ValueError("loss ledger needs two nonempty equal-length populations")
+    return [{"locus": i, "allele": move, "copies_before": row[move]}
+            for i, row in enumerate(a) for move in MOVES
+            if row[move] > 0 and b[i][move] == 0]
+
+
+def rediscovery_wait(children, mutation_rate, alphabet=4):
+    """Conditional geometric waiting time for an absent single-locus allele.
+
+    This implementation redraws uniformly from ALL k alleles, including the
+    old one. Each mutated child therefore supplies the lost allele with
+    probability mu/k, NOT mu/(k-1). Retained elites never mutate. Assumes
+    independent child draws, fixed budget, and absent parental support until
+    the first reappearance. Does not promise usefulness or survival afterward.
+    """
+    if children < 1 or alphabet < 2 or not 0 <= mutation_rate <= 1:
+        raise ValueError("invalid mutation supply")
+    if mutation_rate == 0:
+        return None  # no finite rediscovery, not measured zero waiting
+    probability = -math.expm1(children * math.log1p(-mutation_rate / alphabet))
+    return 1 / probability
+
+
+def archive_ratio(wait, hold_cost, generation_cost, unit=None):
+    """Conditional rebuild/hold ratio; never divides bytes by generations."""
+    if not unit or any(x is None for x in (wait, hold_cost, generation_cost)):
+        return "UNRATED"
+    if any(not math.isfinite(x) for x in (wait, hold_cost, generation_cost)):
+        raise ValueError("costs and waiting time must be finite")
+    if wait <= 0 or hold_cost <= 0 or generation_cost < 0:
+        return "UNRATED"
+    return wait * generation_cost / hold_cost
+
+
 def evolve(environment, seed=7, size=9, length=24, population=40,
-           generations=60, retained=8, top=5):
+           generations=60, retained=8, top=5, hold_cost=None,
+           generation_cost=None, cost_unit=None):
     if not (size >= 2 and length > 0 and generations >= 0
             and 1 <= retained < population and 1 <= top <= population):
         raise ValueError("invalid grid, genome, generation or selection budget")
     rng = random.Random(seed)
     pop = ["".join(rng.choice(MOVES) for _ in range(length))
            for _ in range(population)]
-    archive, history = [], []
+    archive, history, ledger = [], [], []
+    wait = rediscovery_wait(population - retained, 1 / length)
+    ratio = archive_ratio(wait, hold_cost, generation_cost, cost_unit)
     for generation in range(generations + 1):
         # Stable ties: first slot wins. Neither novelty nor wrap is a key.
         ranked = sorted(pop, key=lambda g: fitness(
             replay(g, environment, size)["final"], (size - 1, size - 1)),
                         reverse=True)
         history.append({"generation": generation,
-                        "diversity": diversity(pop)})
+                        "diversity": diversity(pop),
+                        "allele_entropy_bits": allele_entropy(pop),
+                        "best_score": replay(ranked[0], environment, size)["score"]})
         if generation == generations:
             break
         survivors = ranked[:retained]
+        h_before = allele_entropy(pop)
+        h_survivors = allele_entropy(survivors)
+        lost = lost_support(pop, survivors)
         archive.extend({"generation": generation, "genome": g,
                         "score": replay(g, environment, size)["score"]}
                        for g in ranked[retained:])
@@ -132,12 +204,25 @@ def evolve(environment, seed=7, size=9, length=24, population=40,
             child = "".join(rng.choice(MOVES) if rng.random() < 1 / length
                             else m for m in child)
             pop.append(child)
+        after = locus_counts(pop)
+        for event in lost:
+            event["restored_next_generation"] = after[event["locus"]][event["allele"]] > 0
+            event["archive_retained"] = True
+        ledger.append({"generation": generation, "H_before_bits": h_before,
+                       "H_survivors_bits": h_survivors,
+                       "H_next_bits": allele_entropy(pop),
+                       "entropy_drop_selection_bits": h_before - h_survivors,
+                       "entropy_drop_total_bits": h_before - allele_entropy(pop),
+                       "last_active_copy_losses": lost,
+                       "rediscovery_generations_conditional": wait,
+                       "rebuild_over_hold": ratio, "cost_unit": cost_unit})
     initial = history[0]["diversity"]
     half = next((r["generation"] for r in history
                  if initial is not None and r["diversity"] < initial / 2), None)
     return {"environment": environment,
             "winners": [replay(g, environment, size) for g in ranked[:top]],
-            "archive": archive, "history": history, "half_generation": half,
+            "archive": archive, "history": history, "ledger": ledger,
+            "half_generation": half,
             "early_collapse": half is not None and half <= generations // 4}
 
 
@@ -215,6 +300,15 @@ def render(result):
             len(run["archive"]), hashlib.sha256(encoded).hexdigest()))
         out.append("T5 archive sample: first five discarded slots (not representative):")
         out.extend("  " + json.dumps(r, sort_keys=True) for r in run["archive"][:5])
+        out.append("T5+ ERASURE LEDGER: marginal entropy bits; last ACTIVE copies only; archives still hold them.")
+        out.append("Mutation redraw includes the old allele; children=population-retained, supply=mu/k.")
+        out.append("No physical joules; UNRATED cost ratio means no comparable costs supplied.")
+        for row in run["ledger"]:
+            out.append("T5+ " + json.dumps(row, sort_keys=True))
+        out.append("T5+ H and fitness by generation:")
+        out.extend("  generation=%d H_bits=%.6f best_score=%d" % (
+            h["generation"], h["allele_entropy_bits"], h["best_score"])
+                   for h in run["history"])
     out.append("\nT6 READOUTS -- emitted before any intervention; no simulator was patched:")
     records = [readout(w, i, c) for i, (w, c) in enumerate(
         zip(result["A"]["winners"], result["changed"]), 1)]
@@ -282,6 +376,21 @@ def selftest():
     chk("N axis wraps", replay("S", LEAKY)["final"], [0, 8])
     chk("E axis wraps", replay("W", LEAKY)["final"], [8, 0])
     chk("counts sum to genome length", sum(w["counts"].values()), 2)
+    chk("entropy balanced two alleles", allele_entropy(["N", "E"]), 1.0)
+    chk("entropy four alleles", allele_entropy(["N", "S", "E", "W"]), 2.0)
+    chk("entropy clones", allele_entropy(["NN", "NN"]), 0.0)
+    chk("entropy absent", allele_entropy([]), None)
+    chk("last copy lost", lost_support(["N", "E"], ["N"]),
+        [{"locus": 0, "allele": "E", "copies_before": 1}])
+    chk("allele survives once", lost_support(["N", "N", "E"], ["N", "E"]), [])
+    chk("lost multiple copies still support loss", lost_support(["N", "E", "E"], ["N"])[0]["copies_before"], 2)
+    chk("waiting one child half probability", rediscovery_wait(1, 1.0, 2), 2.0)
+    chk("waiting two children three-quarter probability", round(rediscovery_wait(2, 1.0, 2), 12), round(4 / 3, 12))
+    chk("no mutation no finite rediscovery", rediscovery_wait(2, 0.0), None)
+    chk("cost ratio comparable", archive_ratio(2, 4, 3, "work_units"), 1.5)
+    chk("cost ratio absent is UNRATED", archive_ratio(2, None, 3, "work_units"), "UNRATED")
+    chk("cost ratio missing unit is UNRATED", archive_ratio(2, 4, 3), "UNRATED")
+    chk("ledger every selection step", len(r1["A"]["ledger"]), 4)
     for name, fn in [("bad move refused", lambda: replay("X", LEAKY)),
                      ("bad world refused", lambda: replay("N", "OTHER")),
                      ("unequal diversity refused", lambda: diversity(["N", "NN"])),
@@ -313,17 +422,23 @@ def main(argv=None):
     parser.add_argument("--retained", type=int, default=8)
     parser.add_argument("--top", type=int, default=5)
     parser.add_argument("--archive", help="optional full discard archive JSON path")
+    parser.add_argument("--hold-cost", type=float, help="per-lost-allele archive/retrieval cost over a declared horizon")
+    parser.add_argument("--generation-cost", type=float, help="rebuild cost per generation in the SAME unit")
+    parser.add_argument("--cost-unit", help="declared common cost unit; otherwise ratio UNRATED")
     args = parser.parse_args(argv)
     if args.selftest:
         return selftest()
     budget = {key: getattr(args, key) for key in (
-        "seed", "size", "length", "population", "generations", "retained", "top")}
+        "seed", "size", "length", "population", "generations", "retained", "top",
+        "hold_cost", "generation_cost", "cost_unit")}
     try:
         result = experiment(**budget)
         if args.archive:
             with open(args.archive, "w", encoding="utf-8") as fh:
                 json.dump({"budget": budget, "A": result["A"]["archive"],
-                           "B": result["B"]["archive"]}, fh, sort_keys=True, indent=2)
+                           "B": result["B"]["archive"],
+                           "ledger_A": result["A"]["ledger"],
+                           "ledger_B": result["B"]["ledger"]}, fh, sort_keys=True, indent=2)
                 fh.write("\n")
     except (ValueError, OSError) as exc:
         print("VERDICT: SKIP   reason=" + str(exc), file=sys.stderr)

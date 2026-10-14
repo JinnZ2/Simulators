@@ -92,6 +92,9 @@ MANIFEST = (
     "tools/fitness_bin_self_test.py::wrap_share",
     "tools/fitness_bin_self_test.py::diversity",
     "tools/fitness_bin_self_test.py::fitness_drop",
+    "tools/fitness_bin_self_test.py::allele_entropy",
+    "tools/fitness_bin_self_test.py::rediscovery_wait",
+    "tools/fitness_bin_self_test.py::archive_ratio",
 )
 
 # Cases known to fail today. A case that starts passing turns this red so

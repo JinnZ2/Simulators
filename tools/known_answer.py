@@ -808,6 +808,9 @@ EXPECTED_METRICS = (
     "tools/fitness_bin_self_test.py::wrap_share",
     "tools/fitness_bin_self_test.py::diversity",
     "tools/fitness_bin_self_test.py::fitness_drop",
+    "tools/fitness_bin_self_test.py::allele_entropy",
+    "tools/fitness_bin_self_test.py::rediscovery_wait",
+    "tools/fitness_bin_self_test.py::archive_ratio",
 )
 
 
@@ -2659,6 +2662,18 @@ def _fbst_fitness_drop(*args):
     return _fbst_metric("fitness_drop", *args)
 
 
+def _fbst_allele_entropy(*args):
+    return _fbst_metric("allele_entropy", *args)
+
+
+def _fbst_rediscovery_wait(*args):
+    return _fbst_metric("rediscovery_wait", *args)
+
+
+def _fbst_archive_ratio(*args):
+    return _fbst_metric("archive_ratio", *args)
+
+
 def _seed_fitness_bin_self_test():
     """Nonconstant hand-known answers, including absent != measured zero."""
     register(
@@ -2687,6 +2702,35 @@ def _seed_fitness_bin_self_test():
         [case("loss", (0, -16), 16, "native minus changed: 0-(-16)"),
          case("held", (0, 0), 0, "equal scores, measured zero loss"),
          case("improvement", (-3, 0), -3, "-3-0, retain direction")])
+    register(
+        "tools/fitness_bin_self_test.py::allele_entropy", _fbst_allele_entropy,
+        [case("balanced two", (["N", "E"],), 1.0,
+              "two equally likely alleles: -2*(1/2)*log2(1/2)=1"),
+         case("balanced four", (["N", "S", "E", "W"],), 2.0,
+              "four equally likely alleles, log2(4)=2"),
+         case("clones", (["NN", "NN"],), 0.0,
+              "every locus has one allele, log2(1)=0"),
+         case("absent", ([],), None, "no population is not zero entropy")])
+    register(
+        "tools/fitness_bin_self_test.py::rediscovery_wait", _fbst_rediscovery_wait,
+        [case("one half-probability child", (1, 1.0, 2), 2.0,
+              "redraw from both alleles, success 1/2, geometric wait 2"),
+         case("two independent children", (2, 1.0, 2), 4 / 3,
+              "failure (1/2)^2, success 3/4, geometric wait 4/3", tol=1e-12),
+         case("zero mutation", (2, 0.0, 4), None,
+              "absent parental support plus zero mutation has no finite wait")])
+    register(
+        "tools/fitness_bin_self_test.py::archive_ratio", _fbst_archive_ratio,
+        [case("rebuild dearer", (2, 4, 3, "work_units"), 1.5,
+              "two generations times three units / four holding units"),
+         case("rebuild free", (2, 4, 0, "work_units"), 0.0,
+              "declared zero per-generation cost gives measured zero"),
+         case("no holding cost", (2, None, 3, "work_units"), "UNRATED",
+              "no denominator cost declared, no preference inferred"),
+         case("no common unit", (2, 4, 3, None), "UNRATED",
+              "bytes and generations cannot be divided into a cost ratio"),
+         case("zero denominator", (2, 0, 3, "work_units"), "UNRATED",
+              "refuses a zero holding-cost denominator, never infinite ratio")])
 
 
 def seed_reachable(src=None, path=None):

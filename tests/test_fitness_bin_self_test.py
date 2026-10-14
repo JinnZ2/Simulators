@@ -22,14 +22,14 @@ class FitnessBinSelfTest(unittest.TestCase):
         with contextlib.redirect_stdout(io.StringIO()) as output:
             code = fb.selftest()
         self.assertEqual(code, 0, output.getvalue())
-        self.assertIn("VERDICT: PASS   checks=43 failed=0", output.getvalue())
+        self.assertIn("VERDICT: PASS   checks=57 failed=0", output.getvalue())
 
     def test_sample_is_complete_default_output(self):
         p = subprocess.run([sys.executable, str(TOOL)], capture_output=True,
                            text=True, cwd=ROOT)
         self.assertEqual(p.returncode, 0, p.stderr)
         sample = (ROOT / "tools" / "samples" /
-                  "fitness_bin_self_test.sample.txt").read_text()
+                  "fitness_bin_self_test_t5plus.sample.txt").read_text()
         self.assertEqual(p.stdout, sample)
         for test in ("T1", "T2", "T3", "T4", "T5", "T6"):
             self.assertIn(test, sample)
@@ -81,6 +81,45 @@ class FitnessBinSelfTest(unittest.TestCase):
         a = fb.replay("WS", fb.LEAKY)
         changed = fb.replay("WS", fb.SEALED)
         self.assertEqual(fb.classify([a], [a], [changed]), "TOOL_FAULT")
+
+
+class T5PlusLedger(unittest.TestCase):
+    def test_selection_entropy_can_increase(self):
+        # Selection is not a theorem of monotone marginal entropy loss.
+        before, retained = ["N", "N", "N", "E"], ["N", "E"]
+        self.assertLess(fb.allele_entropy(before), fb.allele_entropy(retained))
+        self.assertEqual(fb.lost_support(before, retained), [])
+
+    def test_entropy_drop_is_not_last_copy_erasure(self):
+        before, retained = ["N", "N", "E", "E"], ["N", "N", "E"]
+        self.assertGreater(fb.allele_entropy(before), fb.allele_entropy(retained))
+        self.assertEqual(fb.lost_support(before, retained), [])
+        self.assertEqual(fb.lost_support(before, ["N", "N"]),
+                         [{"locus": 0, "allele": "E", "copies_before": 2}])
+
+    def test_marginal_entropy_misses_lost_linkage(self):
+        before, retained = ["NN", "EE", "NE", "EN"], ["NN", "EE"]
+        self.assertEqual(fb.allele_entropy(before), 2.0)
+        self.assertEqual(fb.allele_entropy(retained), 2.0)
+        self.assertEqual(fb.lost_support(before, retained), [])
+        self.assertEqual(set(before) - set(retained), {"NE", "EN"})
+
+    def test_actual_mutation_rule_wait_and_cost_units(self):
+        self.assertAlmostEqual(fb.rediscovery_wait(2, 1, 2), 4 / 3)
+        self.assertEqual(fb.rediscovery_wait(1, 1, 2), 2.0)
+        self.assertEqual(fb.archive_ratio(2, 4, 3), "UNRATED")
+        self.assertEqual(fb.archive_ratio(2, 4, 3, "work_units"), 1.5)
+        self.assertEqual(fb.archive_ratio(2, 4, 0, "work_units"), 0.0)
+
+    def test_t5plus_does_not_rewrite_original_winners_or_archives(self):
+        original = (ROOT / "tools" / "samples" /
+                    "fitness_bin_self_test.sample.txt").read_text()
+        extended = fb.render(fb.experiment(seed=7, size=9, length=24,
+                                          population=40, generations=60,
+                                          retained=8, top=5))
+        for line in original.splitlines():
+            if line.startswith(("winner ", "  T2 ", "T5 archived", "RUN_A:", "CONTROL_B:")):
+                self.assertIn(line, extended)
 
 
 if __name__ == "__main__":
