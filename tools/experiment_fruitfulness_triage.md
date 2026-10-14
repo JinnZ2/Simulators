@@ -17,10 +17,18 @@ SEARCH-DEPTH = located by web search on 2026-10-13, abstract or snippet
 only, full text not reachable from this environment.
 
 ```
-STATUS OF THIS REVISION: pre-calibration.
-Section 7.2 is a blind fill of site 2, committed before any comparison.
-The comparison, the revisions it causes, and the scorer land next.
+STATUS OF THIS REVISION: post-calibration.
+Section 7.2 is the blind fill of site 2, committed before any comparison
+(commit d5f5c2a) and pinned by sha256 in the scorer. Sections 7.3 to 7.7
+compare it with the published instance and record what changed.
+
+TO RUN THE CALIBRATION CLEAN, STOP READING HERE. Run
+    python3 tools/experiment_fruitfulness_triage.py --blind-packet
+fill site 2 from that packet alone, hash the fill, then come back
+(protocol: section 7.7). Below this block the published answer is named.
 ```
+
+Scorer: `tools/experiment_fruitfulness_triage.py` (stdlib; section 8).
 
 ## 0. Two things to carry, whatever else is dropped
 
@@ -265,10 +273,17 @@ named.
                   assuming there are none
 (f)  RETENTION    which of BIDIRECTIONAL / PERSISTENT / REVERSIBLE the
                   MDE reaches; whether it reaches Q-REV
+(g)  EMERGENCE    ADDED BY THE CALIBRATION (section 7.6). Impose only the
+                  constraint (an objective, a budget, a noise level),
+                  wire nothing, and ask whether the site's mechanism
+                  appears and where. Fields (a)-(f) ask what a designed
+                  experiment returns; (g) asks what a constraint
+                  generates
 ```
 
 found / scope / unresolved is the work order's convention, kept as three
-outcomes.
+outcomes. Fields (a)-(f) are the work order's; (g) is not, and is marked
+where it appears.
 
 Cost levels, declared:
 
@@ -365,11 +380,90 @@ its basin (R1). Reaches REVERSIBLE partially through two readouts: MC
 which states how far back a given stability margin lets recovery reach.
 Q-REV: partial.
 
+**(g) EMERGENCE** (added by the calibration). Train gain and delay instead
+of setting them, under a cost on activity or on settling time, and read
+where the trained loop sits relative to g_c. A cost that alone places
+the loop near the edge would make the stability boundary an outcome of
+the constraint. Not scored; compute medium.
+
 ### Site 2 - COMPRESSION PAYOFF
 
-Filled blind in section 7.2, before the published instance is compared.
-The informed entry replaces this paragraph in the revision that adds the
-comparison.
+The blind fill is section 7.2 and stands as committed. This is the
+informed entry, written after section 7.3; section 7.6 lists what the
+comparison changed.
+
+Restated [DERIVED]: with bits = -log2 p(arrived), "better prediction ->
+fewer bits" holds by definition. The falsifiable step is "fewer bits ->
+lower cost", and it needs the top-down channel charged its own bits:
+
+```
+rate(top-down) + rate(residual)  <  rate(input)
+
+saving per symbol <= I(x_t ; context)      no context, no saving
+```
+
+A residual can also shrink because input was thrown away, so the round
+trip (rebuild x from residual plus prediction) is part of the test.
+
+**(a) FOUND.** On a stream with predictable structure, the loop that
+predicts top-down and sends the residual pays fewer total bits (residual
+plus top-down, both counted) than the pass that sends the input; the
+input is rebuilt exactly; the saving tracks I(x_t ; context) and is near
+zero on a shuffled control. Emergence form, field (g): a loop given only
+an activity or code-length cost, with nothing wired, develops units that
+carry the prediction and units that carry the mismatch.
+
+**(b) SCOPE.** Total bits do not fall once the top-down channel is
+charged; or the residual shrinks only because input is lost (the round
+trip fails); or, in the emergence form, the roles fail to appear when
+the low-variance region is removed or when the penalty moves after the
+nonlinearity. Each bounds the claim to "a code-length saving that the
+round trip and the top-down charge leave standing".
+
+**(b') UNRESOLVED.** A saving inside the seed-to-seed spread; a stream with
+no context dependence; an emergence result read from activity maps with
+no lesion and no decoder.
+
+**(c) MDE.**
+
+```
+S2a [stdlib, minutes]   the blind fill's design (7.2): a symbol stream
+    with tunable context dependence; ideal code length without context
+    (the pass) and with it (the loop); the top-down channel charged;
+    a shuffled control; the lossless round trip
+S2b [numpy-class, days]  field (g): a small recurrent net on a synthetic
+    predictable sequence, trained with an L1 cost on pre-nonlinearity
+    activity and nothing wired; roles identified by lesion and by a
+    linear decoder; then the flip: remove the low-variance units and
+    retrain
+S2c [replication]        the published setup (section 7.3)
+```
+
+**(d) COST.** S2a: compute low | data low | literature low | time low.
+S2b: compute medium | data low | literature medium | time medium. S2c:
+compute medium | data medium | literature high | time medium.
+
+**(e) ANCHOR.** Two, of different kinds.
+
+- Source coding: the expected code length of a stream of known
+  statistics is fixed (Shannon), and arithmetic coding comes within a
+  few bits of it. The known answer for S2a. CARRIED, textbook.
+- The published instance, section 7.3. SEARCH-DEPTH. The known answer
+  for S2c, and a qualitative one for S2b.
+
+**(f) RETENTION.** S2a and S2b reach REVERSIBLE through the round trip:
+the input is rebuilt from the residual plus the receiver's own copy of
+the prediction (or from the state, by the decoder), or the bits lost are
+counted. ADDED BY THE CALIBRATION: the cost measure must be a lossless
+code length or a pre-nonlinearity activity, never a post-nonlinearity
+output alone. [DERIVED] An output penalty can be met by driving units
+into the flat part of the nonlinearity, which makes a smaller number by
+destroying input; the published comparison of the two placements is
+section 7.3, P7. Q-REV: reached (S2a, S2b); partial (S2c: the reported
+quantities include no reconstruction test, P8).
+
+**(g) EMERGENCE.** S2b. The published instance is an emergence result,
+and the blind fill had no field it could land in (section 7.4, P1).
 
 ### Site 3 - DORMANT-FACE COST
 

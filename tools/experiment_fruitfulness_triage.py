@@ -691,6 +691,40 @@ def calibration(st, have):
     return res
 
 
+def result_lines(rows, have=None):
+    """The compact result the rubric prints in its triage-result block,
+    under the phone profile and the declared choices. The selftest holds
+    the block to this function, so the printed numbers cannot drift."""
+    have = PROFILES["phone"] if have is None else have
+    rd = readings(rows, have)
+    out = []
+    for q in QUESTIONS:
+        r = rd[q]
+        order = sorted(r["best"].items(), key=lambda kv: (-kv[1][0], kv[0]))
+        out.append("Q-%-4s  %s" % (q, " | ".join(
+            "%s %.3f %s" % (s, v, vid) for s, (v, vid) in order)))
+        dist = {}
+        for s in r["sets"]:
+            key = ",".join(sorted(s)) or "none"
+            dist[key] = dist.get(key, 0) + 1
+        out.append("        %s   first across %d settings: %s" % (
+            r["class"], len(r["sets"]), "  ".join(
+                "{%s} x%d" % (k, v) for k, v in sorted(dist.items()))))
+    unreached = [row["id"] for row in rows if row["comp"]["r"] == 0]
+    out.append("not reached on Q-REV: %s" % (", ".join(unreached) or "none"))
+    same = [name for name in sorted(PROFILES)
+            if all(first_set(best_by_site(rows, PROFILES[name], q))
+                   == rd[q]["first"] for q in QUESTIONS)]
+    out.append("profiles with these first sets: %s" % ", ".join(same))
+    for q in QUESTIONS:
+        picks = []
+        for name in sorted(PROFILES):
+            b = best_by_site(rows, PROFILES[name], q).get("S2")
+            picks.append("%s %s" % (name, b[1] if b else "none"))
+        out.append("best site-2 variant, Q-%s: %s" % (q, ", ".join(picks)))
+    return out
+
+
 def report(st, profile_name, have):
     rows = st["rows"]
     L = []
@@ -976,6 +1010,13 @@ def selftest():
             check("%s under phone is stated in the rubric (%s)"
                   % (stated, rd[q]["class"]),
                   rd[q]["class"] in doc, rd[q]["class"])
+        want = "".join(ln + "\n" for ln in result_lines(rows))
+        try:
+            got = fenced(doc, "triage-result")
+        except RubricError as ex:
+            got = "missing: %s" % ex
+        check("triage-result block equals the recomputed result",
+              got == want, "rerun and paste result_lines()")
         a = "\n".join(report(st, "phone", PROFILES["phone"]))
         b = "\n".join(report(st, "phone", PROFILES["phone"]))
         check("report is deterministic", a == b)
