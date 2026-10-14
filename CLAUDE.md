@@ -14287,6 +14287,85 @@ ship a `requirements.txt`. Each folder ships `samples/`.
     of the first six, none ran P2 even in part. `animacy-pass/`'s
     `dependency_check.py` and `unweld.py` run it in part. Check count
     printed by `--selftest`.
+  - `experiment_fruitfulness_triage.md` + `.py` — BIDIRECTIONAL IS NOT REVERSIBLE:
+    a TRIAGE rubric for five reversible-loop experiment sites (stability,
+    compression, dormant-face cost, Landauer/erasure join, inverse-direction
+    reuse), not a validation of any. Each site carries a found / scope /
+    unresolved triple, a cheapest distinguishing experiment, resource costs,
+    located anchors (site 1 and site 4 had published partial answers before
+    any assumption of none) and a retention field saying whether the test
+    reaches PERSISTENT or REVERSIBLE. The score is fruit per resource, split
+    into Q-LOOP and Q-REV; a site that cannot test recovery is NOT_REACHED on
+    Q-REV, never zero. Over 64 settings of cost map and weights: Q-REV reads
+    FIRST_ROBUST:S4 (the 2x2 erasure ledger, loop and reversibility in
+    separate cells); Q-LOOP reads FIRST_UNRESOLVED:S1,S4, a tie the rubric
+    holds rather than breaks. Calibration on site 2 was pre-registered: a
+    blind fill committed and hash-pinned before comparison with the
+    published instance, declared contaminated (the work order states the
+    answer; the filler had read it), so kept as structural. The instance
+    moved site 2's score by 0.000 and changed its content: MATCH 1, PARTIAL
+    3, NO_SLOT 3, NOT_LOCATED 1, the bin being "site 2 is a design
+    comparison" where the result is emergence under a constraint; field (g)
+    EMERGENCE was added. The contaminated fill stays as committed (d5f5c2a)
+    as a correction specimen; the clean run goes beside it. The (g)
+    variants at sites 1, 3, 4 and 5 were then scored (2026-10-14) and do not
+    break the S1/S4 tie: none is a site's best in any of 2304 site-cells, and
+    at the declared cost map none could, since training needs compute medium
+    and caps a (g) variant at 2.000 under the tied 2.500. The work order's
+    premise "start at site 2" (replicating published numbers) does not
+    survive: the replication costs 18 against 4 and is the best site-2
+    variant under no profile; section 9 keeps that line visible.
+    `--blind-packet` emits the stripped packet for a clean run, owed to a
+    reader who has not seen the paper. Check count printed by `--selftest`.
+  - `external_report_audit_okcomputer.md` + `check_citations.py` — an audit
+    of two outside research reports (OKComputer outputs, dated 2026-10-14),
+    kept with its mismatches on purpose; it endorses neither the reports nor
+    the glyph roles they propose, and the reports are not copied in (two
+    sha256 pins, quotes held to a word budget). PART A: 100 load-bearing
+    citations in four states derived from a ledger, never declared —
+    VERIFIED 66, CORRECTED 7 (each with the value the source gives),
+    NOT_FOUND 0, UNREACHABLE 27, the last kept apart from NOT_FOUND by rule:
+    NOT_FOUND needs two empty searches or a different object at the ID. The
+    figures are checked too (one plots a formula, not data; one
+    puts unlike quantities on one percent axis). PART B: verdict import
+    (`certif` occurs 41 times in the companion, `readout` 0; user decision
+    rules on a readout kept apart from rules baked into the instrument), the
+    outside seat, welded words (retention in four senses; one report slides
+    PERSISTENT into REVERSIBLE), bins read before binning. The convergence
+    with the operator's notes is read, not adopted: the reports were written
+    from those notes. PART C re-scores the WO-3 sites on anchors that passed
+    Part A, against all seven fields including (g), enforced by the checker
+    (a change resting on any other state is refused): one component moves,
+    no reading does, 0 of 7 of the reports' tests is (g)-shaped (the shared
+    bin is BUILT, the one the rubric's own blind fill had), and the sixth site (the
+    redundancy / generality / maintenance frontier) never takes first, its
+    question being answered before it is run. `citation_state` is registered
+    in `tools/known_answer.py`; the report hashes, URL inventory and quote
+    budget print NOT_RUN without `--reports DIR`. Check count printed by
+    `--selftest`.
+  - `coupling_vs_border_energy_yardstick.md` + `yardstick.py` — reads
+    energy routed to coupling vs to holding separations; a readout, not a
+    ranking. Spend is sorted as coupling, border or coordinating by the
+    reader, in the open; the border fraction is read direct and rolled up
+    through the dependency tree (enforcement -> administration -> funding
+    -> extraction -> more enforcement), a loop through a border item is
+    printed, an item shared with a coupling root widens the reading to a
+    band instead of being split, and an unclassified item is a gap that
+    never enters a fraction. The stated reading (a high border fraction
+    predicts a scale ceiling; read trajectory from spend, not stated aim)
+    is PROPOSED, with four honest edges: it reads throughput, not truth or
+    worth; coordinating boundary vs border held for leverage has a test
+    not yet run; classification is a boundary choice; the reader is
+    coupled. The toy is ILLUSTRATIVE. `read` is registered in
+    `tools/known_answer.py`. The note is mirrored byte-identical in
+    method-layer; the .py stays here. Companion: a worked instance
+    appended to `contested_area_hidden_assumption.md` (also mirrored) on
+    the welded word "care" (configuration vs label; test: still able to
+    continue, and still able to tell you more?), the fine-tuning debate's
+    shared outside seat, "judge not" as no coupling to the inside (every
+    text anchor marked VERIFY), an adversarial pass and four specimens of
+    correction kept. Both open with "The glyph READS. It does not
+    determine value for anyone." Check count printed by `--selftest`.
 - `animacy-pass/` — The animacy pass from the operator's five-pass method,
   as a dependency check. For the thing a claim names, it asks what matter
   or energy is a prerequisite. Animacy here is degree of coupling, not

@@ -1,0 +1,14 @@
+ILLUSTRATIVE toy: made-up round numbers
+items 12   classified spend 420   gap spend 50
+border fraction, direct           0.190
+border fraction, rolled up        [0.310, 0.333]  (band: shared items are not split)
+  rolled up, exclusive support    enforcement_admin, enforcement_funding
+  rolled up, shared (not split)   records_office
+gaps (never assumed; outside every fraction):
+  extraction_levy              40  no class  [holds up a border item]
+  unlabelled_line              10  no class
+if the gaps were classified, over all spend: direct [0.170, 0.277], rolled up [0.277, 0.404]
+loops through a border item:
+  border_enforcement -> enforcement_admin -> enforcement_funding -> extraction_levy -> border_enforcement
+This is a readout, not a ranking. It reads throughput and trajectory, not truth or worth.
+VERDICT: READOUT
