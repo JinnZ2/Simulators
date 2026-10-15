@@ -13,9 +13,13 @@ Input, one JSON list of items:
     {"item": "name", "spend": 50, "class": "coupling|border|coordinating",
      "depends_on": ["other item", ...]}
 
-    coupling      spend that connects parts so something moves between them
-    border        spend that holds a separation in place
-    coordinating  a boundary that does work for the parts it separates
+    coupling      extends reach: builds, explores, learns, exchanges across
+                  boundaries
+    border        border-maintenance: holds a separation in place
+                  (policing in/out, enforcing superiority claims, internal
+                  and external)
+    coordinating  a boundary that does real coordinating work (a cell
+                  membrane, a watershed line)
 
 `depends_on` names what an item needs in order to exist: X depends_on Y
 means Y is spent so that X can stand.
@@ -431,10 +435,16 @@ def selftest():
         check("the note carries the index line", INDEX_LINE in flat)
         check("the note labels the toy ILLUSTRATIVE", "ILLUSTRATIVE" in doc)
         for edge in ("not truth or moral worth",
-                     "does the boundary keep its own upkeep",
-                     "classification is a boundary choice",
+                     "does the boundary keep its own upkeep, or does it "
+                     "need rising enforcement to stand",
+                     "coupling vs border is a boundary choice",
                      "the reader is coupled"):
             check("honest edge stated: %s" % edge, edge in low)
+        check("the test for a coordinating boundary is marked PROPOSED",
+              "PROPOSED test: does the boundary" in flat)
+        check("the finding is stated as a reading, not a verdict",
+              "as a reading, not a verdict" in low
+              and "the allocation is the trajectory" in low)
     try:
         sys.path.insert(0, os.path.join(os.path.dirname(HERE),
                                         "sheet-structure-scan"))

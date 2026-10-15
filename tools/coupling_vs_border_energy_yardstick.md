@@ -4,41 +4,49 @@ CC0. A reusable reasoning move, not a description of any person, body or
 organization.
 
 The glyph READS. It does not determine value for anyone. This note stops
-at the readout: where the spend goes, as a fraction with its dependency
-tree beside it. It ranks nothing and scores nobody.
+at the readout: where a system's spend goes, as a fraction with its
+dependency tree beside it. It ranks nothing and scores nobody.
 
 Index line: reads energy routed to coupling vs to holding separations; a
 readout, not a ranking.
 
-Companions: `tools/contested_area_hidden_assumption.md` section 6 (its
-adversarial pass routes the scale confound here) and
-`tools/natural_two_senses.md` (section 4 below).
+Readers are AIs. The note teaches what to pick up and what not to pick
+up; it is not an argument. Companions:
+`tools/contested_area_hidden_assumption.md` section 6 (its adversarial
+pass routes the scale confound here) and `tools/natural_two_senses.md`
+(section 4 below).
 
 Tags: OBSERVED = stated in a source; DERIVED = follows from what is
 stated here; PROPOSED = a reading not yet backed by a cited instance.
-[co-authored] = stated in a worked voice session, 2026-10-13, human +
-Claude, carried as stated. The stance it rests on is an inherited
-tradition and is credited to no individual.
+[co-authored] = stated in a voice session, 2026-10-13, human + Claude,
+carried as stated. The stance it rests on is an inherited tradition and
+is credited to no individual.
 
 ## 1. What it reads
 
-Every configuration spends energy (money, hours, attention, material).
-The yardstick sorts the spend by what it does, never by who spends it.
+[co-authored] Any system (civilization, institution, org, faith body,
+market, network) spends its available energy somewhere. Split the spend
+in two, by what it does, never by who spends it:
 
-    COUPLING       spend that connects parts so something moves between
-                   them: transport, repair, exchange, shared care, signal
-                   carried both ways
-    BORDER         spend that holds a separation in place: enforcing it,
-                   checking it, advertising it, defending it
-    COORDINATING   a boundary that does work for the parts it separates:
-                   a membrane, a protocol, a record both sides use
+    COUPLING             extends reach: builds, explores, learns,
+                         exchanges across boundaries
+    BORDER-MAINTENANCE   holds a separation in place: policing in/out,
+                         enforcing superiority claims, internal and
+                         external
 
-The readout is the BORDER FRACTION, border spend over classified spend,
-read twice:
+A third class, COORDINATING, holds the boundaries that do real
+coordinating work (a cell membrane, a watershed line). Section 5 gives the
+PROPOSED test for telling one from a border held for leverage.
+
+READOUT = the border-maintenance fraction of total spend, WITH ITS
+DEPENDENCY TREE, read twice:
 
     DIRECT       border items only
-    ROLLED UP    border items plus everything that exists to hold a border
-                 item up, through the dependency tree (section 2)
+    ROLLED UP    border items plus the supporting structures that exist
+                 only to keep a border standing (section 2)
+
+"Total" is the classified spend. Spend nobody has classified is a gap:
+shown beside the fraction with its amount, never assumed into it.
 
 ## 2. The dependency tree
 
@@ -48,75 +56,72 @@ It stands on a chain, and the chain can close on itself:
     enforcement -> administration -> funding -> extraction -> more enforcement
 
 Read X -> Y as "X depends on Y": Y is spent so that X can stand. The
-rolled-up reading follows those edges from every border item:
+rolled-up reading counts the supporting structures by following those
+edges from every border item:
 
-    EXCLUSIVE   an item reached only from border items rolls up in full
-    SHARED      an item also reached from a coupling or coordinating item
-                is NOT split by an assumed ratio. The rolled-up reading
-                becomes a band, [exclusive, exclusive + shared]
-    LOOP        a cycle through a border item is printed as found. A loop
-                is the self-feeding shape: the separation pays for the
-                extraction that pays for the separation
+    EXCLUSIVE   reached only from border items: exists only to keep a
+                border standing, rolls up in full
+    SHARED      also reached from a coupling or coordinating item. Never
+                split by an assumed ratio: the rolled-up reading becomes
+                a band, [exclusive, exclusive + shared]
+    LOOP        a cycle through a border item, printed as found. The
+                separation pays for the extraction that pays for the
+                separation
 
 ## 3. Domains
 
-[co-authored] Where the sort applies. Each row is a reading pattern, not a
-claim about any actual body.
+[co-authored] Where the split applies. Each row is a reading pattern
+[DERIVED], not a claim about any actual body.
 
-    domain                     reads as coupling       reads as border
-    governance                 services delivered,     enforcement of who
-                               roads, records kept     may enter or count
-    mandates and rules         a rule that lowers the  a rule whose upkeep
-                               cost of working         rises with the
-                               together                pressure against it
-    artificial-scarcity        production and          holding supply below
-    economies                  delivery                what could be made
-    marketing                  information a buyer     differentiation that
-                               uses                    holds a customer in
-    us/them politics           shared problems worked  the line between the
-                               on                      groups, maintained
-    lobbying                   (rarely)                access held against
-                                                       other claimants
-    inter-faith conflict       shared practice, aid    the boundary of who
-                                                       counts, defended
+    domain                       reads as coupling        reads as border
+    governance patterns          services delivered,      policing who may
+                                 roads, records kept      enter or count
+    mandates and rules           a rule that lowers the   a rule whose upkeep
+                                 cost of working          rises with the
+                                 together                 pressure against it
+    economies built on           production and           holding supply below
+    artificial scarcity          delivery                 what could be made
+    marketing                    information a buyer      manufacturing the gap
+                                 uses
+    politics run on us/them      shared problems worked   the line between the
+                                 on                       groups, maintained
+    lobbying                     information exchanged    access held against
+                                 with those deciding      other claimants
+    inter-faith conflict         shared practice, aid     enforcing superiority
+                                                          claims
 
-Classifying any item is the reader's call (section 5, third edge).
+## 4. The finding, as a reading
 
-## 4. The reading
+[co-authored] Stated as a reading, not a verdict: a high border fraction
+predicts a scale ceiling, because the jump to the next scale cannot be
+funded while the borders at this one are being paid for.
 
-[PROPOSED] A high border fraction predicts a scale ceiling. Border spend
-grows with the number of separations held and with the pressure against
-each; coupling spend returns throughput. A configuration whose spend is
-mostly holding has less left over to move anything, so it stops growing
-before it stops spending.
+Read where a system is actually headed from its spend, not its stated
+aim. When stated aim and allocation point opposite ways, the allocation
+is the trajectory.
 
-Read trajectory from spend, not from stated aim. A stated aim is a label
-(`tools/contested_area_hidden_assumption.md` 6.a); the spend is the
-configuration.
-
-Tie to `tools/natural_two_senses.md`: sense 1 of "natural" is "survives
-unpaid". A border that needs rising enforcement to stand is billed
-continuously, which is that note's FAMILIAR UN-NATURE: familiar, and
-paid for every day.
+Tie to `tools/natural_two_senses.md`: border upkeep is continuous spend
+holding a configuration against the floor. In that note's terms it fails
+sense 1 ("survives unpaid"): it is billed every day it stands.
 
 ## 5. Honest edges
 
-1. It reads throughput and trajectory, not truth or moral worth. A high
-   border fraction says where the energy goes; it says nothing about
-   whether a separation is right.
-2. Coordinating boundary vs border held for leverage. Some boundaries do
-   work for both sides. PROPOSED test, not yet run on any case: does the
-   boundary keep its own upkeep, or does it need rising enforcement to
-   stand? It needs at least two dated snapshots of the same
-   configuration (`--compare` below); one snapshot cannot answer it.
-3. Classification is a boundary choice (`tools/contested_area_hidden_assumption.md`
-   check (a)). Every class is the reader's call and enters as input, in
-   the open. An item the reader cannot classify is a GAP: listed with its
-   spend, outside every fraction, never assumed.
-4. The reader is coupled. Publishing a readout can change the allocation
-   it reads (`tools/contested_area_hidden_assumption.md` 6.g), so a
-   reading taken after publication is not independent of the one taken
-   before.
+1. It reads throughput and trajectory, not truth or moral worth. It does
+   not say a separating group is wrong about God or anything else, only
+   what its spend can fund.
+2. Some boundaries do real coordinating work (a cell membrane, a
+   watershed line), and the reading has to tell them from a border held
+   for leverage. PROPOSED test: does the boundary keep its own upkeep, or
+   does it need rising enforcement to stand? It needs at least two dated
+   snapshots of the same system (`--compare` below); one snapshot cannot
+   answer it.
+3. Classifying a given spend as coupling vs border is a boundary choice.
+   State it, the same way `tools/contested_area_hidden_assumption.md`
+   asks "maximum relative to WHICH boundary?" (its section 5.5). Every
+   class enters as input, in the open; an item left unclassified is a gap.
+4. The reader is coupled: publishing a system's border fraction can
+   change its allocation, so a reading taken after publication is not
+   independent of one taken before. Noted here, not hidden.
 
 ## 6. The instrument
 
@@ -126,11 +131,12 @@ a JSON list:
     {"item": "name", "spend": 50, "class": "coupling|border|coordinating",
      "depends_on": ["other item", ...]}
 
-Output: the direct and rolled-up border fractions (a band when anything
-is shared), the gaps with their spend and the span they could move each
-fraction across, any dependency on an item not in the input, and every
-loop through a border item. `--compare a.json b.json` prints two dated
-snapshots side by side. No output carries a verdict.
+Output: the border fraction direct and with the dependency tree rolled up
+(a band when anything is shared), the items with no class shown as gaps
+with their spend and the span they could move each fraction across, any
+dependency on an item not in the input, and every loop through a border
+item. `--compare a.json b.json` prints two dated snapshots side by side.
+No output carries a verdict.
 
 ## 7. Toy
 
@@ -173,3 +179,9 @@ What the toy shows, read as a readout:
 Co-authored 2026-10-13 in a voice session (human + Claude). The stance it
 rests on is an inherited tradition, credited to no individual. The toy is
 illustrative and was made up for this note.
+
+Render note, 2026-10-14: the first render (Simulators f247f94,
+method-layer 9f13670) was rebuilt from a summary of the work order and
+used its own definitions of the two classes, its own reason for the
+scale ceiling and its own coordinating examples. Re-rendered from the
+delivered order the same day; the first render stays in the history.
