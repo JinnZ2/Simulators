@@ -1,0 +1,69 @@
+CLEAN CALIBRATION, SECOND SCORER, PROPOSED GA (g)  (tools/triage_clean_run.py)
+comparison, stage 1:   MATCH 1  PARTIAL 3  NO_SLOT 3  NOT_LOCATED 1
+comparison, stages 1-2: MATCH 2  PARTIAL 4  NO_SLOT 1  NOT_LOCATED 1
+# reader row -> rubric row (after the Part C delta), 12 pairs
+# field     same  1 step  2 steps   (2 steps = more than one step apart)
+d             6       6        0
+u             8       4        0
+k             8       4        0
+x             7       5        0
+r             6       6        0
+compute       6       6        0
+data         12       0        0
+lit           6       6        0
+time          6       6        0
+all          65      43        0   of 108 cells
+# site      same  1 step  2 steps   (2 rows x 9 fields)
+S1           11       7        0
+S2           10       8        0
+S3           11       7        0
+S4           14       4        0
+S5            8      10        0
+S6           11       7        0
+# more than one step apart
+none
+# rows   d u k x r  cost   |  rubric row  d u k x r  cost   (cost: compute data lit time, L M H)
+S1a    2 1 2 2 0  LLLL   |  S1a         2 1 2 2 1  LLLL
+S1g    1 1 1 2 0  LLLL   |  S1g         2 1 2 2 1  MLMM
+S2a    2 1 2 2 1  LLLL   |  S2a         2 1 2 1 2  LLLL
+S2g    1 1 1 2 1  LLLL   |  S2b         2 2 1 2 2  MLMM
+S3a    1 1 1 2 0  LLLL   |  S3a         2 1 1 1 0  LLLL
+S3g    1 1 1 2 0  LLLL   |  S3g         2 1 1 1 0  MLMM
+S4a    2 1 2 2 2  LLML   |  S4a         2 1 2 2 2  LLLL
+S4g    1 2 1 2 2  LLML   |  S4g         1 2 2 2 2  MLMM
+S5a    2 1 2 2 1  LLLL   |  S5a         1 1 2 1 2  LLLL
+S5g    1 1 1 2 1  LLLL   |  S5g         1 2 2 1 2  MLMM
+S6a    1 1 1 2 1  LLMM   |  S6b         2 0 2 2 1  LLLL
+S6g    1 1 1 2 1  LLMM   |  S6g         1 2 1 2 1  MLMM
+# site rank by the better of its two paired rows, declared choices, no profile gate
+Q-LOOP site  reader      rank  rubric      rank
+       S1    2.500       1     2.500       1
+       S2    2.500       1     2.000       3     moved 2
+       S3    1.000       5     1.500       5
+       S4    1.667       4     2.500       1     moved 3
+       S5    2.500       1     1.000       6     moved 5
+       S6    0.500       6     2.000       3     moved 3
+Q-REV  site  reader      rank  rubric      rank
+       S1    NOT_REACHED -     1.250       3     reached by one only
+       S2    1.250       2     2.000       2
+       S3    NOT_REACHED -     NOT_REACHED -
+       S4    1.667       1     2.500       1
+       S5    1.250       2     1.000       4     moved 2
+       S6    0.250       4     1.000       4
+# PROPOSED rows; LOOP / REV at the declared choices; cost
+S1e  2.500 / 1.250  cost 4
+S2e  1.667 / 1.667  cost 6
+S3e  1.000 / NOT_REACHED  cost 6
+S4e  3.000 / 3.000  cost 4
+S5e  2.500 / 2.500  cost 4
+S6e  2.500 / 1.250  cost 4
+# profile       question  without PROPOSED          with PROPOSED
+lab            Q-LOOP    FIRST_UNRESOLVED:S1,S4    FIRST_ROBUST:S4
+lab            Q-REV     FIRST_ROBUST:S4           FIRST_ROBUST:S4
+laptop-online  Q-LOOP    FIRST_UNRESOLVED:S1,S4    FIRST_ROBUST:S4
+laptop-online  Q-REV     FIRST_ROBUST:S4           FIRST_ROBUST:S4
+phone          Q-LOOP    FIRST_UNRESOLVED:S1,S4    FIRST_ROBUST:S4
+phone          Q-REV     FIRST_ROBUST:S4           FIRST_ROBUST:S4
+this-session   Q-LOOP    FIRST_UNRESOLVED:S1,S4    FIRST_ROBUST:S4
+this-session   Q-REV     FIRST_ROBUST:S4           FIRST_ROBUST:S4
+VERDICT: PASS   checks=26 failed=0

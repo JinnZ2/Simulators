@@ -92,6 +92,7 @@ MANIFEST = (
     "tools/experiment_fruitfulness_triage.py::classify_first",
     "tools/check_citations.py::citation_state",
     "tools/yardstick.py::read",
+    "tools/triage_clean_run.py::field_agreement",
     "tools/fitness_bin_self_test.py::fitness",
     "tools/fitness_bin_self_test.py::wrap_share",
     "tools/fitness_bin_self_test.py::diversity",

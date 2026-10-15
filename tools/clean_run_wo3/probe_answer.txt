@@ -1,0 +1,56 @@
+Yes, I know this paper. Everything below is from memory, and I've marked how confident I am in each part.
+
+```
+PAPER
+  Ali, Ahmad, de Groot, van Gerven, Kietzmann (2022)
+  "Predictive coding is a consequence of energy efficiency
+   in recurrent neural networks"
+  Journal: Patterns (Cell Press)          [fairly confident]
+  Lab: Donders Institute / Kietzmann group [fairly confident]
+
+CORE CLAIM
+  Predictive coding doesn't have to be built in.
+  It emerges when a network is pushed to use less energy.
+
+SETUP                                     [moderately confident]
+  input stream ──► RNN (no built-in PC wiring)
+                    │
+                    ├─ training cost: activity / synaptic
+                    │  transmission (an L1-type penalty
+                    │  on unit drive)
+                    │
+                    └─ inputs: predictable sequences of
+                       MNIST digits in a fixed order
+
+ENERGY FLOW
+  predictable input ──► costs energy if fully transmitted
+                         │
+                         ▼
+  network learns to send inhibitory predictions
+  that cancel the expected input
+                         │
+                         ▼
+  only the surprise (error) passes through ──► lowest activity
+
+EMERGENT STRUCTURE                        [moderately confident]
+  ┌───────────────────┐      inhibit     ┌──────────────────┐
+  │ prediction units  │ ───────────────► │ error-like units │
+  │ (carry context)   │                  │ (residual drive) │
+  └───────────────────┘                  └──────────────────┘
+  - the two populations separate on their own
+  - lesioning prediction units → activity rises,
+    which shows they were doing the suppressing
+  - unpredictable sequences → this advantage disappears
+
+LEVERAGE POINT
+  An energy-efficiency constraint alone is enough to
+  produce predictive-coding-like dynamics.
+```
+
+**What I'm unsure of:**
+- the exact form of the loss
+- the network sizes
+- whether lesion results were reported per unit or per population
+- the specific figures
+
+If you need precise details, I can check the paper itself.

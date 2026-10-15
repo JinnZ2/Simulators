@@ -1,0 +1,16 @@
+FILL   site 2, from the packet only; each SRC quotes the packet
+(a)    FOUND: coding the input as residual against a top-down prediction spends fewer total bits than a no-prediction baseline, and bits fall as the probability assigned to the actual input rises
+SRC    "predict the input top-down, transmit only the mismatch (residual) upward" | "Bits spent = -log2(probability the model assigned to what actually arrived)" | "Better prediction -> fewer bits -> lower cost"
+(b)    SCOPE: with top-down prediction on, total bits spent are equal to or higher than the baseline; prediction buys no savings on this input class
+SRC    "the savings are the point, not a side effect" | "a clean negative is itself information"
+(b')   UNRESOLVED: a bit difference appears but cannot be attributed to prediction (e.g. within run-to-run noise, or the baseline is not matched); recorded apart from (b)
+SRC    "found / scope / unresolved are different outcomes, don't blur them"
+(c)    MDE: stdlib-only Python over a synthetic structured sequence: sum -log2 p(actual) under (1) a uniform/no-prediction coder, (2) an adaptive top-down predictor that keeps state, (3) the same predictor with its state wiped every step; also decode residual+prediction back to the input and check it matches exactly
+SRC    "stdlib-only Python where possible" | "the cheapest test" | "Bits spent = -log2(probability the model assigned to what actually arrived)"
+(d)    COST: compute low, data low (synthetic), literature low, time low  [the ratings are my judgment; the packet gives only the scale]
+SRC    "rated roughly low/medium/high" | "compute, data, literature access, time"
+(e)    ANCHOR: the packet names the field but cites no specific published result for site 2; its only citation (Bennett 1982) supports the reversibility point, not the compression payoff
+SRC    "This is the predictive-coding/arithmetic-coding frontier" | "Bennett 1982: measurement can run without erasure cost"
+(f)    RETENTION: a bare bits-vs-baseline comparison could pass with only a pass-through predictor, so it does NOT test retain+recover on its own; arms (3) (state wiped) and the exact-decode check are what test retain (savings need carried state) and recover (input rebuilt from residual)
+SRC    "The payoff on sites 2-5 only lands if the loop actually RETAINS and CAN RECOVER state" | "A net can pass signals both ways and still erase information at every step" | "check for this distinction explicitly, not assume it"
+SHAPE  total bits fall as prediction quality rises, decode is exact, and the gap below baseline collapses when retained state is wiped
