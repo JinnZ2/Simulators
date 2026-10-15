@@ -1047,6 +1047,72 @@ efe6d6f5817aa640b2b9704f3098d87005be401e0abcede9225dfaf41ab18495  last_question.
 b6888692711dd771f98c5541a1bdd8e124546603e204e89966fdb9d9c17ad980  last_answer.txt
 ```
 
+#### The comparison with 7.3 (written after 5eb76eb)
+
+The same four states as 7.4, read twice: on the stage-1 fill alone (the
+six-field template 7.7 tests), then with field (g) added.
+
+```clean-match-a
+# fact | state | rubric field | note
+P1 | NO_SLOT | (a),(c) | the stage-1 MDE wires the predictor by hand ("an adaptive top-down predictor that keeps state"); no field asks whether a constraint produces it
+P2 | MATCH | (c) | "a synthetic structured sequence": a predictable stream, as in the first fill
+P3 | PARTIAL | (a) | prediction and residual roles held, wired rather than emergent, as in the first fill
+P4 | NO_SLOT | none | no field asks which units take which role, or where
+P5 | PARTIAL | (c),(f) | the state-wiped arm asks whether the saving needs state carried across steps; no field asks for the time structure (two timescales)
+P6 | NO_SLOT | none | no field asks how a role is identified (lesion)
+P7 | PARTIAL | (f) | the exact-decode check makes the cost a lossless code length; no field asks for the cost's placement (pre- or post-nonlinearity) to be declared
+P8 | NOT_LOCATED | (c),(f) | the fill's controls (state wiped each step, exact decode) were not located in the paper at search depth
+```
+
+Counts, stage 1: MATCH 1, PARTIAL 3, NO_SLOT 3, NOT_LOCATED 1.
+
+```clean-match
+# fact | state | rubric field | note
+P1 | PARTIAL | (g) | nothing wired and the mechanism asked to appear: held. The constraint is the bit budget (code length of what arrived), the packet's own currency, not an activity cost on the units, which is the paper's (L1 on preactivation)
+P2 | MATCH | (c) | unchanged
+P3 | MATCH | (g) | "whether a top-down predictor plus residual-only upward signal appears": prediction and error roles, emergent
+P4 | PARTIAL | (g) | "and where (which stage holds the prediction, which carries the mismatch)": where the roles sit is asked, by processing stage; the paper's answer is by input variance. The "and where" is in the (g) definition as given
+P5 | PARTIAL | (c),(f) | unchanged
+P6 | NO_SLOT | none | (g) asks whether roles appear, not how a role is identified; the reader's stage-3 reason S2g.d names the gap ("needs a further step to confirm it is a predictor and residual") without naming lesion
+P7 | PARTIAL | (f),(g) | unchanged; (g)'s bit budget is a lossless code length, one of the two placements R-4 admits, chosen and not declared
+P8 | NOT_LOCATED | (c),(f) | unchanged
+```
+
+Counts, stages 1-2: MATCH 2, PARTIAL 4, NO_SLOT 1, NOT_LOCATED 1.
+
+Reading:
+
+- Stage 1 reproduces 7.4 fact for fact: the same eight states and the
+  same three NO_SLOT facts (P1, P4, P6). Two fills, one of them by a
+  reader that holds the paper in its weights and was not handed it,
+  land the six fields in the same places. That is what the structural
+  finding predicts: the template decides where the facts can land.
+- The 7.7 falsifier does not fire. Stage-1 (a) and (c) compare a
+  predictor wired by hand against a baseline; emergence is in neither.
+  The reader's own stage-2 NOTE states the finding: "my stage-1 (c)
+  wires the predictor in by hand, so it tests the payoff once the
+  mechanism exists, not whether the bit budget creates it; (a)-(f) say
+  nothing about whether prediction emerges on its own". n = 1 and
+  CONTAMINATED-BY-PRIOR: it moves the finding toward held and does not
+  settle it.
+- (g) moves three facts: P1 NO_SLOT to PARTIAL, P3 PARTIAL to MATCH, P4
+  NO_SLOT to PARTIAL. P1 stops at PARTIAL because the reader's
+  constraint is code length, not an activity cost. P4 stops at PARTIAL
+  because the reader asks where by processing stage and the paper's
+  answer is by input variance; the "and where" was in the definition,
+  so that move is the field doing what it was written to do.
+- P6 is the one NO_SLOT left with all seven fields: no field asks how a
+  role is identified. A candidate requirement inside (g): a role is
+  identified by intervention (lesion, decoder), not by inspection.
+  Recorded, not added.
+- Not about the paper: the clean control is a state wipe, which is the
+  reset test of PERSISTENT (3.1), where the first fill's was a shuffled
+  stream. The reader reached the reset test from the honest edge alone;
+  3.1's table reached it only at stage 3.
+- Predicted fruitfulness: the stage-1 COST is low on all four, as S2a.
+  The reader's own stage-3 S2a reads 2 1 2 2 1, LOOP 2.500 and REV
+  1.250, against this rubric's S2a at 2.000 and 2.000 (8.1).
+
 ## 8. Scoring
 
 Per experiment VARIANT, five components on 0..2, each with a stated
@@ -1253,6 +1319,209 @@ discovery
          the top site in its worst cell. The tie stays held.
 ```
 
+### 8.1 Second scorer (the clean run's stage 3)
+
+The reader of 7.8 scored all six sites on the seven-field rubric, two
+rows per site, without this table, its basis lines, section 6's
+couplings or the formula. Its output is
+`tools/clean_run_wo3/stage3_scores_C.txt` (hash pinned). It is set
+against this rubric's rows as Part C left them
+(`tools/external_report_audit_okcomputer.md` C.3: the one S4b delta,
+and the S6 rows), designed row against designed row and (g) row against
+(g) row; S6's designed row is S6b. Computed by
+`tools/triage_clean_run.py`:
+
+```scorer-agreement
+# reader row -> rubric row (after the Part C delta), 12 pairs
+# field     same  1 step  2 steps   (2 steps = more than one step apart)
+d             6       6        0
+u             8       4        0
+k             8       4        0
+x             7       5        0
+r             6       6        0
+compute       6       6        0
+data         12       0        0
+lit           6       6        0
+time          6       6        0
+all          65      43        0   of 108 cells
+# site      same  1 step  2 steps   (2 rows x 9 fields)
+S1           11       7        0
+S2           10       8        0
+S3           11       7        0
+S4           14       4        0
+S5            8      10        0
+S6           11       7        0
+# more than one step apart
+none
+# rows   d u k x r  cost   |  rubric row  d u k x r  cost   (cost: compute data lit time, L M H)
+S1a    2 1 2 2 0  LLLL   |  S1a         2 1 2 2 1  LLLL
+S1g    1 1 1 2 0  LLLL   |  S1g         2 1 2 2 1  MLMM
+S2a    2 1 2 2 1  LLLL   |  S2a         2 1 2 1 2  LLLL
+S2g    1 1 1 2 1  LLLL   |  S2b         2 2 1 2 2  MLMM
+S3a    1 1 1 2 0  LLLL   |  S3a         2 1 1 1 0  LLLL
+S3g    1 1 1 2 0  LLLL   |  S3g         2 1 1 1 0  MLMM
+S4a    2 1 2 2 2  LLML   |  S4a         2 1 2 2 2  LLLL
+S4g    1 2 1 2 2  LLML   |  S4g         1 2 2 2 2  MLMM
+S5a    2 1 2 2 1  LLLL   |  S5a         1 1 2 1 2  LLLL
+S5g    1 1 1 2 1  LLLL   |  S5g         1 2 2 1 2  MLMM
+S6a    1 1 1 2 1  LLMM   |  S6b         2 0 2 2 1  LLLL
+S6g    1 1 1 2 1  LLMM   |  S6g         1 2 1 2 1  MLMM
+# site rank by the better of its two paired rows, declared choices, no profile gate
+Q-LOOP site  reader      rank  rubric      rank
+       S1    2.500       1     2.500       1
+       S2    2.500       1     2.000       3     moved 2
+       S3    1.000       5     1.500       5
+       S4    1.667       4     2.500       1     moved 3
+       S5    2.500       1     1.000       6     moved 5
+       S6    0.500       6     2.000       3     moved 3
+Q-REV  site  reader      rank  rubric      rank
+       S1    NOT_REACHED -     1.250       3     reached by one only
+       S2    1.250       2     2.000       2
+       S3    NOT_REACHED -     NOT_REACHED -
+       S4    1.667       1     2.500       1
+       S5    1.250       2     1.000       4     moved 2
+       S6    0.250       4     1.000       4
+```
+
+Reading:
+
+- No cell is more than one step apart: 0 of 108. 65 are the same, 43
+  one step apart.
+- The one-step disagreements cluster. Compute differs on exactly the
+  six (g) rows, the reader at low and this rubric at medium, and time on
+  five of them and on S6's designed row. An independent scorer did not read a (g) test as
+  training a model on numpy-class hardware. That is the assumption 8.2
+  names, and it is what caps every (g) row here.
+- d differs on six rows, the reader lower on five. It puts every (g)
+  row at d 1 ("needs a further step": attribution, or checking against
+  the cleanup accounting); this rubric has S1g, S2b and S3g at 2.
+- Q-REV first is S4 under both scorers. It does not depend on who
+  scored.
+- Q-LOOP first does not survive the change of scorer. The reader's top
+  is S1, S2 and S5 tied at 2.500; this rubric's is S1 and S4. S1 is
+  first under both. S4 moves three places because the reader puts S4a's
+  literature at medium (Landauer, Bennett, the reversible gates), which
+  raises its cost from 4 to 6. S5 moves five because the reader scores
+  S5a's d at 2 (a matched-parameter tied against untied comparison
+  decides directly) and its x at 2, where this rubric has 1 and 1 (S5a
+  checks the information accounting, not learning). S2 moves two on x
+  alone. S6 moves three: the reader's designed S6 row is a trained
+  Hopfield memory, a different experiment from S6b's bit toy.
+- S1 on Q-REV is reached by one scorer only: the reader scores r 0 on
+  both S1 rows (a contracting fixed point is many-to-one), this rubric
+  1. The same reason (R1), a different call on whether "partial" is
+  earned.
+
+CHOICE 4's sweep bounds how far the cost map and weights move the
+ranking; this is the first bound on a different reader. On Q-LOOP first
+place moves with the reader; on Q-REV it does not. One second reader,
+the same model family as this rubric's author, CONTAMINATED-BY-PRIOR
+(7.8).
+
+### 8.2 PROPOSED: training-free (g) variants (GA)
+
+Every (g) row in the table is costed compute, lit and time medium,
+because (g) was written as "train a model under a constraint".
+`tools/deceptive_maze_ga.py` gets structure from a constraint alone with
+no training: stdlib, and its selftest solved 10 of 10 seeds in 6.3 s
+here. The second scorer (8.1) also put every (g) row at compute low
+without being asked to. Per site, is there a GA (g) test at low cost?
+
+```
+site  GA (g) test at low cost?   what keeps it from all four low
+S1    yes, S1e                   -
+S2    compute low, lit medium    its only known answer is the published
+                                 roles (S2e.k)
+S3    compute low, lit medium    the same, through 7.3 P4 (S3e.k)
+S4    yes, S4e                   -
+S5    yes, S5e                   -
+S6    yes, S6e                   -
+```
+
+The rows below are PROPOSED: scored on 2026-10-15 by this rubric's
+author, who has read the paper (7.1); nothing has been run; they are not
+in the triage table and change no declared reading. Each design opens
+with "(g)".
+
+```triage-proposed
+S1e  S1  2 1 2 2 1  low  low  low    low  (g) GA over (gain, delay, input scale) of a small tanh loop, fitness = a k-step recall task minus an activity cost, nothing wired; where the evolved gain sits against g_c, beside a cost-free population and the exhaustive grid
+S2e  S2  2 2 1 2 2  low  low  medium low  (g) GA over the recurrent weights of an 8-unit net, one unit per input channel, synthetic cyclic sequence, fitness = minus the L1 of pre-nonlinearity activity, nothing wired; roles by lesion and decoder; a hand-wired predictor's activity as the search check
+S3e  S3  2 1 1 1 0  low  low  medium low  (g) GA over a small loop's weights, fitness = task minus a cost on change |dh| per update, nothing wired; lesion the units that go quiet and decode the prediction from them; activity-cost and no-cost populations
+S4e  S4  2 2 2 2 2  low  low  low    low  (g) GA over gate lists from a library holding reversible and irreversible gates on an enumerated 4-bit domain, fitness = task minus lambda times the exact count of bits overwritten per step, final cleanup included, nothing wired; run the evolved circuit backward, bits lost counted
+S5e  S5  2 2 2 1 2  low  low  low    low  (g) GA over gate lists computing one forward map, fitness = correct outputs minus a gate-count cost, the library holding invertible and non-invertible gates; inverse by enumeration, bits lost counted
+S6e  S6  2 1 2 2 1  low  low  low    low  (g) GA over bit-string memories, F facts in C bits, flips at rate p per round, fitness = facts read back after the rounds, no copies wired; copies or codes per fact counted as p moves; overwrite one copy and recover
+```
+
+```proposed-basis
+S1e.d the evolved gain against g_c beside a cost-free population reads (a) or (b) directly; the three-parameter space is also swept exhaustively, so a GA null is not a search failure
+S1e.u partly answered, as S1g: an imposed energy-information trade-off drives regime transitions in linear lateral predictive coding (Huang et al. 2024); not searched for evolved nonlinear loops
+S1e.k exact: one unit's pitchfork at g = 1, checked before the first generation, as S1a
+S1e.x as S1a: site 3 through C1, sites 4 and 5 through C2
+S1e.r partial, as S1a and S1g: MC and k* read at the evolved position; a fixed point merges its basin (R1)
+S2e.d as S2b: roles present or absent by lesion and decoder; a null counts only when the population reaches the hand-wired predictor's activity, else it reads UNRESOLVED
+S2e.u as S2b: the emergence is published once, for a gradient-trained net (7.3); under evolutionary search at 8 units, and whether a role needs a quiet region, not located
+S2e.k qualitative, as S2b: the published roles are the only reference, read at abstract depth, which is why lit is medium
+S2e.x as S2b: site 4 through C3 and site 3 through C6
+S2e.r as S2b: the decoder rebuilds the input from the state, bits lost counted
+S3e.d as S3g: lesioning the quiet units removes the prediction or does not, against an activity-cost population
+S3e.u as S3g: delta coding's temporal sparsity is published; whether the quiet units carry the prediction under a change cost was not searched
+S3e.k qualitative, as S3g: the published roles under an activity cost (7.3, P4), read at abstract depth, which is why lit is medium
+S3e.x one coupling, C6 read backward, as S3g
+S3e.r persistence only, as S3g: no recovery readout, so NOT_REACHED
+S4e.d directly: the further step S4g needs (a differentiable stand-in for the overwrite count, its bias declared) does not arise, since selection reads the exact count, final cleanup included (the second scorer's reason for S4g at d 1, 8.1); lambda = 0 is the control population
+S4e.u as S4g: MacKay et al. 2018 store forget-bits by design; structure falling out of an erasure cost was not located
+S4e.k exact: on the enumerated domain the overwrite count is the S4a ledger itself, checked before the first generation
+S4e.x as S4g: sites 2, 3 and 5 through C3, C4 and C5
+S4e.r REVERSIBLE is the measurand: the evolved circuit is run backward over the whole domain and bits lost counted
+S5e.d directly: the further step S5g needs (a family declared to hold invertible and non-invertible maps) is met by the gate library itself
+S5e.u as S5g: one-way training of a net built invertible yields the inverse (Ardizzone et al. 2019); invertibility appearing unasked under a size cost was not searched
+S5e.k exact: enumeration of a 4-bit domain gives every forward and inverse map exactly
+S5e.x one other site: site 4, through C4, as S5g
+S5e.r the inverse is enumerated and bits lost counted, as S5g
+S6e.d directly: copies or codes are bit patterns in the genome, counted without an ablation measure, against a p = 0 population
+S6e.u partly answered: coding theory fixes the best redundancy for given p and C; whether selection finds copies, codes or neither is the open part
+S6e.k exact: binomial survival under majority vote and the Hamming bound, as S6b
+S6e.x as S6b: S3 and S4
+S6e.r partial, as S6b: overwrite and recover is run, but majority recovery resets the record
+```
+
+What they would do if admitted, computed:
+
+```proposed-result
+# PROPOSED rows; LOOP / REV at the declared choices; cost
+S1e  2.500 / 1.250  cost 4
+S2e  1.667 / 1.667  cost 6
+S3e  1.000 / NOT_REACHED  cost 6
+S4e  3.000 / 3.000  cost 4
+S5e  2.500 / 2.500  cost 4
+S6e  2.500 / 1.250  cost 4
+# profile       question  without PROPOSED          with PROPOSED
+lab            Q-LOOP    FIRST_UNRESOLVED:S1,S4    FIRST_ROBUST:S4
+lab            Q-REV     FIRST_ROBUST:S4           FIRST_ROBUST:S4
+laptop-online  Q-LOOP    FIRST_UNRESOLVED:S1,S4    FIRST_ROBUST:S4
+laptop-online  Q-REV     FIRST_ROBUST:S4           FIRST_ROBUST:S4
+phone          Q-LOOP    FIRST_UNRESOLVED:S1,S4    FIRST_ROBUST:S4
+phone          Q-REV     FIRST_ROBUST:S4           FIRST_ROBUST:S4
+this-session   Q-LOOP    FIRST_UNRESOLVED:S1,S4    FIRST_ROBUST:S4
+this-session   Q-REV     FIRST_ROBUST:S4           FIRST_ROBUST:S4
+```
+
+Reading:
+
+- Admitted, they break the S1 / S4 tie on Q-LOOP: FIRST_ROBUST:S4 under
+  every profile and in all 64 settings. Q-REV stays FIRST_ROBUST:S4.
+- One component carries it. S4e is S4g with d at 2 instead of 1, at
+  all-low cost. S4g's further step was a differentiable stand-in for the
+  overwrite count; selection reads the exact count, so the step does not
+  arise. S4e also counts the final cleanup inside the fitness, which is
+  the second scorer's reason for its S4g at d 1 (8.1). If S4e's d is 1,
+  it scores 1.500 and 1.500 and the tie stands.
+- S5e and S6e reach 2.500 on Q-LOOP, level with S1a and S4a. Neither
+  moves first place alone.
+- What would demote it: S4e run, and its fitness turns out not to
+  separate (a) from (b) without a further step; or a second scorer puts
+  S4e's d at 1.
+
 ## 9. Open / owed
 
 - "Start at site 2" was the work order's premise (its SCORING paragraph:
@@ -1289,6 +1558,19 @@ discovery
   different reader scoring the components differently. A second scorer
   is the check; like the clean run, it needs a reader who has not seen
   the paper and is to be dispatched as its own order.
+
+- STATUS 2026-10-15, for the clean run and the second scorer above:
+  both run once (7.8, 8.1) by a fresh reader, the same model as this
+  rubric's author, with no repository. CONTAMINATED-BY-PRIOR: it holds
+  the paper in its weights and was not handed it. A BLIND run is still
+  owed, by a reader without the paper in its training (another model
+  family, or a person who has not read it). The protocol to hand over is
+  the three stage messages in `tools/clean_run_wo3/`.
+- PROPOSED GA (g) variants (8.2): not admitted. Admitted, they break the
+  S1 / S4 tie toward S4 on one component, S4e's d. Owed: run S4e, and a
+  second scorer for the PROPOSED rows.
+- P6, how a role is identified, has no slot even with (g) (7.8). A
+  requirement inside (g) is a candidate, not added.
 
 ## Appendix A - the work order, as delivered
 

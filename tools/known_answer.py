@@ -808,6 +808,7 @@ EXPECTED_METRICS = (
     "tools/experiment_fruitfulness_triage.py::classify_first",
     "tools/check_citations.py::citation_state",
     "tools/yardstick.py::read",
+    "tools/triage_clean_run.py::field_agreement",
     "tools/fitness_bin_self_test.py::fitness",
     "tools/fitness_bin_self_test.py::wrap_share",
     "tools/fitness_bin_self_test.py::diversity",
@@ -1761,6 +1762,7 @@ def seed():
     _seed_fruitfulness_triage()
     _seed_check_citations()
     _seed_yardstick()
+    _seed_triage_clean_run()
 
 
 def _irb_effective_origins(coupling):
@@ -2808,6 +2810,37 @@ def _seed_yardstick():
               (None, None, None),
               "nothing classified: no fraction exists, which is not 0")],
         note="the shared band and the None-not-0.0 case are the pins")
+
+
+
+def _tcr_field_agreement(pairs):
+    """tools/triage_clean_run.py::field_agreement, imported by path."""
+    import importlib.util
+    path = os.path.join(ROOT, "tools", "triage_clean_run.py")
+    spec = importlib.util.spec_from_file_location("_tcr", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.field_agreement(pairs)
+
+
+def _seed_triage_clean_run():
+    """The second scorer's agreement count: (same, one step, two steps)
+    on a three-step scale. Pin: 0 against 2 is two steps, the only cell
+    the report lists as more than one step apart."""
+    register(
+        "tools/triage_clean_run.py::field_agreement",
+        _tcr_field_agreement,
+        [case("all the same", ([(0, 0), (1, 1), (2, 2)],), (3, 0, 0),
+              "every pair equal"),
+         case("one step each", ([(0, 1), (2, 1)],), (0, 2, 0),
+              "0 against 1 and 2 against 1"),
+         case("two steps", ([(0, 2)],), (0, 0, 1),
+              "0 against 2 is more than one step apart"),
+         case("one of each", ([(0, 0), (0, 1), (2, 0)],), (1, 1, 1),
+              "same, one step, two steps"),
+         case("no pairs", ([],), (0, 0, 0),
+              "nothing compared: three zero counts")],
+        note="the 0-against-2 case is the pin")
 
 
 def _fbst_metric(fn_name, *args):

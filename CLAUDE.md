@@ -14317,6 +14317,30 @@ ship a `requirements.txt`. Each folder ships `samples/`.
     variant under no profile; section 9 keeps that line visible.
     `--blind-packet` emits the stripped packet for a clean run, owed to a
     reader who has not seen the paper. Check count printed by `--selftest`.
+    The clean run (section 7.8, 2026-10-15) went to a fresh session with no
+    repository and no conversation, given only the packet and the rubric,
+    and is CONTAMINATED-BY-PRIOR rather than BLIND: a separate probe session
+    answered the prior-knowledge question "Yes, I know this paper" (asked
+    of a separate session first and of the reader last, since the title
+    states the site-2 result). The reader's inputs and outputs sit in
+    `tools/clean_run_wo3/`, hashed in its own session and recomputed here.
+    Stage 1 alone reproduces the first calibration fact for fact (MATCH 1,
+    PARTIAL 3, NO_SLOT 3, NOT_LOCATED 1), so the bin is not an artifact of
+    the first filler having read the paper; with (g), given after the
+    stage-1 hash, it reads MATCH 2, PARTIAL 4, NO_SLOT 1 (P6), NOT_LOCATED
+    1. The first calibration stays as committed beside it. A second scorer
+    (section 8.1, the same reader) scored all six sites: of 108 cells 65
+    agree, 43 differ by one step, none by two; compute differs on exactly
+    the six (g) rows (the reader puts emergence at low compute). Q-REV
+    first is S4 under both scorers; Q-LOOP first is scorer-dependent.
+    Section 8.2 scores PROPOSED training-free (g) variants (a GA over the
+    site's own constraint, `deceptive_maze_ga.py` the precedent): low-cost
+    at S1, S4, S5 and S6, lit medium at S2 and S3. Admitted, S4e's exact
+    erasure count breaks the Q-LOOP tie to FIRST_ROBUST:S4 in every
+    profile; not admitted, since none has run. `triage_clean_run.py`
+    re-checks the ten pinned hashes and recomputes the comparison counts,
+    the agreement table and the PROPOSED readout; `field_agreement` is
+    registered in `tools/known_answer.py`.
   - `external_report_audit_okcomputer.md` + `check_citations.py` — an audit
     of two outside research reports (OKComputer outputs, dated 2026-10-14),
     kept with its mismatches on purpose; it endorses neither the reports nor
