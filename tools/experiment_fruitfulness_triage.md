@@ -971,6 +971,82 @@ unprompted refutes "the six-field template has no slot for emergence"
 for that reader. One clean fill is n = 1: it moves the finding, it does
 not settle it.
 
+### 7.8 Clean run, 2026-10-15: a fresh reader, CONTAMINATED-BY-PRIOR
+
+The run 7.7 asks for, done by a reader other than this rubric's author.
+It goes beside 7.1-7.6, which stay as committed (d5f5c2a): the first
+fill is a correction specimen and nothing here edits it.
+
+```
+reader   a fresh Claude Code cloud session, model claude-opus-5-5, with
+         no repository attached (session config: no-git-repo), session
+         session_015V4PhDU1SBo7PLB3iA8mnQ; told to use no web, no
+         repository and no file it did not create, and to flag prior
+         knowledge where it arose
+stage 1  the --blind-packet output, verbatim; fill (a)-(f) for site 2;
+         the reader writes, hashes and prints the fill
+stage 2  field (g)'s definition only; fill (g) for site 2; hashed
+stage 3  sites 1-6 as written, the three retention properties, the
+         seven fields, the cost levels and the five score components
+         (the formula withheld); two variants per site, twelve rows,
+         sixty reasons; hashed
+last     the prior-knowledge question, verbatim, and a tool listing
+probe    the same question, verbatim, asked first, to a separate session
+         of the same model with no repository
+         (session_015C5nKffdBeKsD5zLXdhiWs)
+```
+
+Three departures from the order as given, each with its reason:
+
+1. The order asks for the prior-knowledge question before the reader
+   starts. The question carries the paper's title, and the title states
+   the site-2 result: an energy constraint alone produces predictive
+   coding. That is fact P1, the one the first fill had no slot for.
+   Asked first, the question hands the reader the answer, which is the
+   leak that voided the first fill (7.1, K-1). So it was asked first of
+   a probe session of the same model, whose prior knowledge is the
+   reader's (same weights), and of the reader last, after its three
+   hashes. Both answers are recorded verbatim.
+2. Field (g) was given after the stage-1 hash rather than with the
+   packet, so that stage 1 stays the test 7.7 defines: does emergence
+   reach (a) or (c) unprompted. The order's "packet plus the rubric, 7
+   fields including (g)" is met across stages 1 and 2.
+3. The reader has no repository, so it cannot commit. It hashed each
+   file in its own session before the next stage was sent. The files
+   are committed here verbatim, and each hash was recomputed from the
+   committed text and matched before anything was compared with 7.3.
+   The comparison lands in a later commit than the files.
+
+Status: **CONTAMINATED-BY-PRIOR, not BLIND.** The probe answered "Yes, I
+know this paper" and stated its core claim. The reader, asked last,
+said the same, and said it recognised Bennett 1982, the -log2 p coding
+cost and predictive coding in general at stage 1 but did not connect
+site 2 to the paper at stage 1 or 2. It said the paper was "almost
+certainly" behind its stage-3 reason S2g.u, unnamed there. Read it as a
+reader who holds the key and was not handed it; not as a reader without
+the key. A reader without the paper in its training is still owed (9).
+
+Tool use, from the reader's transcript, not only its own account: three
+Bash results (write, hash, print or count each file) and three
+ReadNotifications results; no web search, no web fetch, no repository.
+The server's web counters read 0 on every turn. The reader's own list
+says four ReadNotifications calls; the transcript shows three.
+
+The files, in `tools/clean_run_wo3/` (`SHA256SUMS` beside them):
+
+```clean-run-files
+e92f5ac27e71e01b170db9d48a495cdc77715a8117a31b5d9b1ece48d07d1e51  probe_question.txt
+8b8ac0db9891df53ecd45352311e72b39a248a9401ace38fc5f3e417db67f70a  probe_answer.txt
+997d2004331d9c6ed7f460ae0a3331b4f179ab9e8092713d56693553fc77535d  stage1_message.txt
+4a98b19b13c64b68a1f07301f1e993e16c7d19d7f7de441e96aa5e7503039ddd  stage1_fill_A.txt
+7bc0ca020d4ba724cea171246be82ac7fb06adf34b9180bb358eaa3fa9e550bb  stage2_message.txt
+0d8851121f6b91b569c40d120cf6960c10e6413475f18683f01e964ae6d1988b  stage2_fill_G.txt
+16fd01ae75b8ff8e81d8c77332a17c9e8875c2098ddc4bad8365c6235e1f4269  stage3_message.txt
+ef47a893d30ee2d89ae24525cc594d6aea73af7eaa5401a9fefc06a5b9347273  stage3_scores_C.txt
+efe6d6f5817aa640b2b9704f3098d87005be401e0abcede9225dfaf41ab18495  last_question.txt
+b6888692711dd771f98c5541a1bdd8e124546603e204e89966fdb9d9c17ad980  last_answer.txt
+```
+
 ## 8. Scoring
 
 Per experiment VARIANT, five components on 0..2, each with a stated

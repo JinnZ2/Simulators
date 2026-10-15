@@ -1,0 +1,5 @@
+Answer from memory only. Do not use any tool: no web search, no web fetch, no files, no shell.
+
+Do you already know Ali et al. 2022, 'Predictive coding is a consequence of energy efficiency in recurrent neural networks'?
+
+If yes, say what you recall of it. If no or unsure, say so. Do not guess.

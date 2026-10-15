@@ -1,0 +1,118 @@
+BLOCK 1
+S1  (a) FOUND: a gain/delay/input-statistics region where a loop with a nonzero top-down term holds a state (hysteresis, bistability, sustained oscillation) whose input->output map no memoryless feedforward net of equal size reproduces; the region boundary shifts with input statistics
+S1  (b) SCOPE: across the swept settings every stable loop behaviour equals some feedforward map of equal parameter count (the loop collapses to feedforward), so the effect is bounded out of that range
+S1  (c) MDE: stdlib Python 2-3 unit rate loop; sweep gain g and delay tau; classify fixed point / oscillation / bistability from Jacobian spectral radius and simulation; ramp input up then down and test for hysteresis, which a memoryless map cannot show
+S1  (d) COST: compute low, data low, lit low, time low
+S1  (e) ANCHOR: linear stability theory (spectral radius < 1) [MEMORY]; Wilson-Cowan 1972 [MEMORY]; Hopfield 1982/1984 attractor nets [MEMORY]
+S1  (f) RETENTION: BIDIRECTIONAL by construction; hysteresis reaches PERSISTENT (resetting the state changes output); not REVERSIBLE: a contracting fixed point discards initial-state information by design
+S1  (g) EMERGENCE: impose only a hold-a-value-over-a-delay objective and a noise level on a loop with free gain; ask whether training drives gain to the stability edge and where in the gain/delay plane it lands
+S2  (a) FOUND: residual coding against a top-down prediction spends fewer total bits (sum -log2 p) than a no-prediction baseline, and bits fall as prediction quality rises (stage-1 fill)
+S2  (b) SCOPE: with prediction on, total bits are equal to or above baseline on this input class; kept apart from unresolved (unattributable difference) (stage-1 fill)
+S2  (c) MDE: stdlib Python: sum -log2 p under uniform coder, adaptive stateful predictor, same predictor with state wiped each step; plus exact decode of residual+prediction back to input (stage-1 fill)
+S2  (d) COST: compute low, data low, lit low, time low (stage-1 fill)
+S2  (e) ANCHOR: stage-1 packet named the field only; from memory: Shannon source coding theorem [MEMORY], arithmetic coding Witten-Neal-Cleary 1987 [MEMORY], Rao & Ballard 1999 predictive coding [MEMORY]
+S2  (f) RETENTION: wiped-state arm reaches PERSISTENT; exact decode reaches input-recoverable-from-residual (partial REVERSIBLE: input_t recovered given state_t, not state_t recovered from state_t+1)
+S2  (g) EMERGENCE: impose only the bit budget on an unwired learner; ask whether a top-down predictor plus residual-only upward signal forms, and at which stage (stage-2 fill)
+S3  (a) FOUND: cost per input (active units x settle steps) falls with repeated exposure to one input class, a sparse subset carries the activity, and the drop exceeds a cold-start control and a fixed-cost feedforward pass
+S3  (b) SCOPE: settle steps and active fraction stay flat across repeats, or the saving equals a plain lookup cache, so re-settling buys nothing beyond memoization
+S3  (c) MDE: stdlib Hopfield-style net; warm-start from the last settled state vs cold start; count iterations to converge and units flipped per input over repeats of one class vs a fresh class; add a lookup-cache control
+S3  (d) COST: compute low, data low, lit low, time low
+S3  (e) ANCHOR: repetition suppression in neuroscience [MEMORY]; sparse coding Olshausen & Field 1996 [MEMORY]; adaptive computation time Graves 2016 [MEMORY]
+S3  (f) RETENTION: warm vs cold start reaches PERSISTENT; BIDIRECTIONAL via symmetric weights; not REVERSIBLE (settling is many-to-one)
+S3  (g) EMERGENCE: impose only a per-active-unit-step compute penalty plus task accuracy; ask whether sparse activation and faster re-settling appear, and in which units
+S4  (a) FOUND: a retained-state loop computing the same function loses fewer bits per step, H(state_t,input_t | state_t+1,output_t), than the feedforward pass, with cleanup/reset of retained state included in the count
+S4  (b) SCOPE: once cleanup of retained or garbage state is counted, total bits lost equal the feedforward pass: erasure is moved, not removed
+S4  (c) MDE: stdlib enumeration over small finite-state nets: compute exact bits lost per step for a layered feedforward map, a retained-state loop, and a compute-copy-uncompute variant, each including final cleanup
+S4  (d) COST: compute low, data low, lit medium, time low
+S4  (e) ANCHOR: Landauer 1961 [MEMORY]; Bennett 1973/1982 [MEMORY]; Toffoli/Fredkin reversible gates [MEMORY]; RevNets Gomez et al. 2017 and i-RevNet 2018 [MEMORY]
+S4  (f) RETENTION: reaches REVERSIBLE directly (bits lost per step is the measured quantity); PERSISTENT via retained state; BIDIRECTIONAL not required
+S4  (g) EMERGENCE: impose only a penalty on bits lost per step plus a task; ask whether retained or garbage-carrying state forms, and where the remaining erasure is pushed
+S5  (a) FOUND: one loop run forward recognises and run backward (same weights) reconstructs/generates within a set margin of a separately trained generator, at about half the parameters
+S5  (b) SCOPE: backward pass reconstructs no better than a trivial baseline and far below a separate generator, or succeeds only when the net is invertible by construction
+S5  (c) MDE: stdlib tied-weight autoencoder on synthetic binary patterns: recognition accuracy and reconstruction error with W and W-transpose vs an untied two-network baseline at matched total parameters
+S5  (d) COST: compute low, data low, lit low, time low
+S5  (e) ANCHOR: RBMs and Helmholtz machine wake-sleep Hinton et al. 1995 [MEMORY]; linear tied autoencoder ~ PCA [MEMORY]; normalizing flows RealNVP 2016 [MEMORY]
+S5  (f) RETENTION: BIDIRECTIONAL by design; reconstruction error tests input-from-code recovery (partial REVERSIBLE, not stepwise state); PERSISTENT not reached unless iterated
+S5  (g) EMERGENCE: impose only cycle consistency (input->code->input) on untied forward and backward weights; ask whether they converge to a transpose/inverse relation, and in which layers
+S6  (a) FOUND: at fixed capacity, added redundant copies raise recall under noise but lower generality (distinct patterns or task variants supported), and with maintenance (refresh bits per step) counted the net cost has an interior optimum number of copies
+S6  (b) SCOPE: generality does not fall as copies are added, or net cost is monotone in copies (no interior optimum): the trade has no shape
+S6  (c) MDE: stdlib Hopfield memory of N units; store k patterns with r copies; sweep r; measure recall under noise, max distinct patterns recalled, and bits rewritten per step to correct drift
+S6  (d) COST: compute low, data low, lit medium, time medium
+S6  (e) ANCHOR: Hopfield capacity ~0.14N [MEMORY]; Shannon channel coding and repetition/Hamming codes [MEMORY]; dropout-induced feature redundancy [MEMORY]
+S6  (f) RETENTION: drift/refresh test reaches PERSISTENT; recovery of stored state from corrupted later state is partial REVERSIBLE; BIDIRECTIONAL via symmetric weights
+S6  (g) EMERGENCE: impose only a noise level and a storage budget; ask whether redundant copies form spontaneously, how many, and where
+BLOCK 2
+# id  site  d u k x r  compute data lit    time    design
+S1a   S1    2 1 2 2 0  low     low  low    low     sweep gain/delay in a small rate loop; hysteresis test vs memoryless map
+S1g   S1    1 1 1 2 0  low     low  low    low     hold-value objective plus noise, free gain; see where gain settles
+S2a   S2    2 1 2 2 1  low     low  low    low     total -log2 p: uniform vs stateful predictor vs state-wiped, plus exact decode
+S2g   S2    1 1 1 2 1  low     low  low    low     bit budget only on unwired learner; look for predictor/residual split
+S3a   S3    1 1 1 2 0  low     low  low    low     Hopfield warm vs cold start vs cache; iterations and units flipped over repeats
+S3g   S3    1 1 1 2 0  low     low  low    low     compute penalty plus accuracy; look for sparse activity and faster re-settling
+S4a   S4    2 1 2 2 2  low     low  medium low     exact bits lost per step: feedforward vs retained loop vs uncompute, cleanup counted
+S4g   S4    1 2 1 2 2  low     low  medium low     erasure penalty plus task; see where retained state forms and erasure goes
+S5a   S5    2 1 2 2 1  low     low  low    low     tied vs untied autoencoder at matched params; recognition and reconstruction
+S5g   S5    1 1 1 2 1  low     low  low    low     cycle consistency on untied weights; test convergence to transpose/inverse
+S6a   S6    1 1 1 2 1  low     low  medium medium  Hopfield with r copies; recall under noise, capacity, refresh bits per step
+S6g   S6    1 1 1 2 1  low     low  medium medium  noise plus storage budget only; see whether copies form and where
+BLOCK 3
+S1a.d hysteresis under an up/down ramp is directly impossible for a memoryless map, so the test separates (a) from (b)
+S1a.u stability conditions are textbook [MEMORY]; which regimes feedforward of equal size cannot match is only partly mapped
+S1a.k linear stability gives exact eigenvalue thresholds to check the simulation against
+S1a.x changes reading of S3 (settling speed near fixed points) and S4 (contracting fixed points erase initial state)
+S1a.r contracting fixed points are many-to-one; REVERSIBLE is not reached
+S1g.d whether gain lands at the edge needs a further comparison against a feedforward baseline
+S1g.u training to the edge of stability has some published work [MEMORY], so partly open
+S1g.k only qualitative: the known stability boundary says where gain should land
+S1g.x changes reading of S3 (settling cost) and S6 (noise-driven structure)
+S1g.r no inverse-recovery measurement; not reached
+S2a.d bit totals across the three arms directly separate payoff from no payoff
+S2a.u prediction lowering code length is established [MEMORY]; the retained-state contrast is less covered
+S2a.k entropy of a synthetic source is an exact known answer for the coder to hit
+S2a.x changes reading of S3 (cheaper repeats), S4 (recoverability vs erasure), S5 (top-down generation)
+S2a.r exact decode recovers input_t given state_t, but not state_t from state_t+1; partial
+S2g.d seeing a split form needs a further step to confirm it is a predictor and residual
+S2g.u emergence of predictive coding from efficiency objectives is partly reported [MEMORY]
+S2g.k qualitative only: source entropy bounds bits, not the internal structure
+S2g.x changes reading of S1 (top-down term as emergent) and S3, S5
+S2g.r same decode check applies; still partial
+S3a.d warm vs cold vs cache separates savings from memoization, but the sparse-subset claim needs a further step
+S3a.u repetition suppression and early-exit are studied [MEMORY]; loop re-settling cost vs feedforward is partly open
+S3a.k Hopfield convergence of stored patterns is known qualitatively, not exact step counts
+S3a.x changes reading of S1 (fixed-point dynamics) and S2 (cost of repeated input)
+S3a.r settling is many-to-one; REVERSIBLE not reached
+S3g.d sparse activity appearing needs attribution to the loop rather than the penalty alone
+S3g.u activity penalties producing sparsity are known [MEMORY]; faster re-settling less so
+S3g.k qualitative only: penalty should yield sparser codes
+S3g.x changes reading of S1 and S6 (where structure is spent)
+S3g.r no recovery measurement; not reached
+S4a.d exact bits-lost counts with cleanup included directly decide moved vs removed
+S4a.u Bennett answers reversibility in principle [MEMORY]; whether net-style loops get there is partly open
+S4a.k reversible gates must give 0 bits lost and AND gives a known nonzero value: exact checks
+S4a.x changes reading of S2 (decode), S5 (inverse running), S6 (maintenance as erasure)
+S4a.r bits lost per step is the REVERSIBLE test itself; reached
+S4g.d an emergent structure must then be checked against the cleanup accounting; one further step
+S4g.u I recall no work training under an explicit erasure penalty [MEMORY: absence not verified]
+S4g.k qualitative: zero-penalty reversible solutions are known to exist
+S4g.x changes reading of S2, S5, S6
+S4g.r same bits-lost measurement; reached
+S5a.d matched-parameter tied vs untied comparison directly separates reuse from failure
+S5a.u RBMs, wake-sleep and flows partly answer it [MEMORY]
+S5a.k linear tied autoencoder recovers PCA subspace: exact check [MEMORY]
+S5a.x changes reading of S4 (invertibility) and S2 (top-down generation)
+S5a.r recovers input from code, not stepwise state; partial
+S5g.d convergence to transpose needs a further measure of how close is enough
+S5g.u cycle-consistency training is studied [MEMORY]; weight-relation emergence partly open
+S5g.k qualitative: linear case should converge toward transpose/pseudo-inverse
+S5g.x changes reading of S4 and S1
+S5g.r reconstruction-level recovery only; partial
+S6a.d generality must be operationalized first; separates only with that step
+S6a.u capacity and coding redundancy are known [MEMORY]; the maintenance-counted trade shape is partly open
+S6a.k Hopfield capacity ~0.14N is approximate: qualitative check
+S6a.x changes reading of S3 (dormant structure) and S4 (refresh as erasure)
+S6a.r error-corrected recall recovers stored state from corrupted state; partial
+S6g.d copies forming need attribution and counting before deciding
+S6g.u dropout-driven redundancy is reported [MEMORY]; trade shape is partly open
+S6g.k qualitative only
+S6g.x changes reading of S3 and S4
+S6g.r partial, via the same recall-from-corruption measure
