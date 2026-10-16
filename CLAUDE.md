@@ -14332,7 +14332,7 @@ ship a `requirements.txt`. Each folder ships `samples/`.
     (section 8.1, the same reader) scored all six sites: of 108 cells 65
     agree, 43 differ by one step, none by two; compute differs on exactly
     the six (g) rows (the reader puts emergence at low compute). Q-REV
-    first is S4 under both scorers; Q-LOOP first is scorer-dependent.
+    first is S4 under both of that pair; Q-LOOP first is scorer-dependent.
     Section 8.2 scores PROPOSED training-free (g) variants (a GA over the
     site's own constraint, `deceptive_maze_ga.py` the precedent): low-cost
     at S1, S4, S5 and S6, lit medium at S2 and S3. Admitted, S4e's exact
@@ -14340,7 +14340,40 @@ ship a `requirements.txt`. Each folder ships `samples/`.
     profile; not admitted, since none has run. `triage_clean_run.py`
     re-checks the ten pinned hashes and recomputes the comparison counts,
     the agreement table and the PROPOSED readout; `field_agreement` is
-    registered in `tools/known_answer.py`.
+    registered in `tools/known_answer.py`. Asked first, that reader had
+    recalled the site-2 paper in detail, so 7.8 is kept as a STRUCTURE
+    CHECK ONLY beside 7.1, and section 9 keeps the line that a blind
+    calibration on a widely known paper is not possible with current
+    models: blindness depends on the reader's training cutoff. The blind
+    run (section 7.9, 2026-10-16) went to a post-cutoff anchor instead, a
+    fall-2026 result VERIFIED in the WO-4 audit with an emergence shape
+    (site T: where a temporal pattern is learned). Facts T1-T7, the
+    stripped packet and every message were pinned at 58016a4 before any
+    session opened; a separate probe answered "NOT RECOGNIZED" and the
+    reader "No", before the packet and again with the title in hand
+    (title withheld at first, since it states the result). Status BLIND,
+    for this anchor. Stage 1 reads MATCH 1, PARTIAL 4, NO_SLOT 1,
+    NOT_LOCATED 1; with (g), MATCH 2, PARTIAL 3, NO_SLOT 1, NOT_LOCATED 1.
+    The reader predicted a fixed stage and named the published finding (no
+    fixed stage) as its clean negative (b); (g) moved it to a finding. The
+    slot exists with the wrong sign, so the 7.7 falsifier did not fire;
+    the site question presupposes one stage (K-P3) and the packet's
+    word-list screen missed "not a fixed fact" (K-P2), so n = 1 settles
+    nothing. The independent second scorer (section 8.3), a separate
+    session asked the same question first, recognised the paper:
+    CONTAMINATED-BY-PRIOR. On the rubric's own 23 rows it agrees on 144 of
+    207 cells, 61 one step apart, 2 two steps (S2b r, S2e r, whose design
+    line names a decoder without saying it rebuilds the input); u is lower
+    on 14 rows and never higher. Admitted rows: Q-LOOP reads
+    FIRST_UNRESOLVED:S1,S3 against the rubric's S1,S4, and Q-REV
+    FIRST_UNRESOLVED:S2,S4,S5 against FIRST_ROBUST:S4, so S4 stays in the
+    first set and is no longer first alone. With the PROPOSED rows, S4e's
+    d is 2 under both, but u 1 against 2 undoes the tie-break toward S4.
+    A scorer that does not hold the paper is still owed.
+    `triage_blind_run.py` re-checks the eighteen pinned hashes in
+    `tools/blind_run_wo3/`, every fill quote against the packet, every
+    strip target, both comparison tables and the agreement and readings
+    blocks.
   - `external_report_audit_okcomputer.md` + `check_citations.py` — an audit
     of two outside research reports (OKComputer outputs, dated 2026-10-14),
     kept with its mismatches on purpose; it endorses neither the reports nor

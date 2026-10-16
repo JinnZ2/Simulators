@@ -978,11 +978,11 @@ It goes beside 7.1-7.6, which stay as committed (d5f5c2a): the first
 fill is a correction specimen and nothing here edits it.
 
 ```
-reader   a fresh Claude Code cloud session, model claude-opus-5-5, with
-         no repository attached (session config: no-git-repo), session
-         session_015V4PhDU1SBo7PLB3iA8mnQ; told to use no web, no
-         repository and no file it did not create, and to flag prior
-         knowledge where it arose
+reader   a fresh Claude Code cloud session, the same model as this
+         rubric's author, with no repository attached (session
+         config: no-git-repo), session session_015V4PhDU1SBo7PLB3iA8mnQ;
+         told to use no web, no repository and no file it did not
+         create, and to flag prior knowledge where it arose
 stage 1  the --blind-packet output, verbatim; fill (a)-(f) for site 2;
          the reader writes, hashes and prints the fill
 stage 2  field (g)'s definition only; fill (g) for site 2; hashed
@@ -1025,6 +1025,16 @@ site 2 to the paper at stage 1 or 2. It said the paper was "almost
 certainly" behind its stage-3 reason S2g.u, unnamed there. Read it as a
 reader who holds the key and was not handed it; not as a reader without
 the key. A reader without the paper in its training is still owed (9).
+
+Use: a STRUCTURE CHECK ONLY, the same status as the first calibration
+(7.1). It bears on where the published facts can land in the rubric's
+fields, not on whether a reader can predict them. It sits beside 7.1-7.6
+and edits nothing there. The probe recalled the paper in detail, from
+memory and before any packet: the journal, the lab, an L1-type activity
+penalty, predictable MNIST sequences, the split into prediction and
+error units, the lesion result, and an unpredictable-sequence control
+(`probe_answer.txt`, verbatim). The blind run owed here is 7.9, on an
+anchor published after the reader's training cutoff.
 
 Tool use, from the reader's transcript, not only its own account: three
 Bash results (write, hash, print or count each file) and three
@@ -1112,6 +1122,210 @@ Reading:
 - Predicted fruitfulness: the stage-1 COST is low on all four, as S2a.
   The reader's own stage-3 S2a reads 2 1 2 2 1, LOOP 2.500 and REV
   1.250, against this rubric's S2a at 2.000 and 2.000 (8.1).
+
+### 7.9 Blind run on a post-cutoff anchor, 2026-10-16: site T, BLIND
+
+7.8 showed that a fresh session is not a blind reader when the paper is
+older than its training cutoff. This run moves the anchor instead of the
+reader: a result published after the reader's cutoff, so the key is not
+in its weights. It sits beside 7.1-7.8 and edits nothing there.
+
+The anchor. The order's first choice is a fall-2026 result marked
+VERIFIED in the WO-4 audit with an emergence (g) shape. None qualifies
+strictly; WO-4 Part C found no (g)-shaped test in either report (C.1, 0
+of 7). The closest is row A15: Kim Min-gyu and Kim Do-guk, Inha
+University, "Tokenization and Architecture Jointly Allocate Component
+Roles in Time Series Transformers", accepted to NeurIPS 2026, press
+dated 2026-10-12. Its result has the (g) form: which stage does the
+temporal work is not assigned by anyone; it falls out of the
+configuration, and it is identified by removal. Closest, not strict: the
+models are designed architectures, trained, and the allocation is what
+appears. The rows passed over and the reason for each are in
+`tools/blind_run_wo3/anchor_facts.txt`. Row A16 (the title) was UNSEEN
+in the WO-4 pass; it is located there, in Korean press. The WO-4 ledger
+is left as committed.
+
+The facts are at press depth only (articles written from the
+university's release, read as web-search summaries). The paper's text
+was not located, and the article hosts refused at DNS from this
+environment.
+
+```
+T1  subject: how transformer-family models that forecast time series
+    (stock prices, power demand, weather observations) work inside
+T2  method: 15 diagnostic tasks, built by the team, each checking what
+    information a stage inside the model learns; applied to
+    representative forecasting models and several datasets
+T3  learning the temporal pattern is not fixed to a particular
+    component
+T4  which component does what depends on the combination of
+    tokenization and the model's architecture; the two jointly
+    allocate the roles
+T5  with attention removed entirely, the ability to learn the temporal
+    pattern is kept under some conditions
+T6  reading tokenization and architecture together accounts, in one
+    frame, for earlier studies' conflicting conclusions
+T7  not located at press depth: which tokenizations and architectures,
+    which component carries the pattern in which combination, which
+    conditions keep it without attention, any number
+```
+
+Order of operations, each step committed before the next:
+
+```
+58016a4  anchor_facts.txt (T1-T7), the site-T packet and every message
+         pinned and pushed; no session opened yet
+         probe    session_01CN3E84qSgi43Fx3swpNbuk, the title-form
+                  question, asked first
+         reader   session_01E6QqMm75iSQdd21wxYwETt, no repository
+                  (session config: no-git-repo), the same model
+                  as this rubric's author
+                  q0     the prior-knowledge question, title withheld
+                  stage1 the site-T packet; fill (a)-(f); hashed there
+                  stage2 field (g)'s definition only; fill (g); hashed
+95d2579  both fills committed, hashes recomputed and matched, before
+         the reader was shown the title and before this comparison
+                  last   the title-form question, and a tool listing
+```
+
+One departure from the order as given. The order asks the reader the
+prior-knowledge question first, and this time it was: before any packet.
+But this title also states the result (T4, "jointly allocate"), so the
+first question names the authors, institution, venue, year and topic and
+withholds the title. The title-form question went first to a separate
+probe of the same model and to the reader last, after its two hashes.
+All three answers are recorded verbatim.
+
+Status: **BLIND**, for this anchor. The probe answered "NOT RECOGNIZED"
+and the reader "No" before the packet. The reader said "No" again with
+the title in hand and said it recognised no specific published result
+during the stages. Both gave June 2026 as their training cutoff; the
+press is dated 2026-10-12 and no preprint was located. Both statements
+are self-reports. Nothing here establishes that no copy of the result
+predates the cutoff, only that none was found and neither session
+recalled one.
+
+Tool use, from the reader's transcript and not only its own account:
+two Bash calls (write, hash and print each fill), three ReadNotifications
+and three send_message calls (the replies). The server's web-search and
+web-fetch counters read 0 on every turn. No repository.
+
+What this run does not escape, declared before the comparison:
+
+```
+K-P1  the site-T paragraph was written by this session, which holds the
+      key. It was screened against the strip list in anchor_facts.txt
+      (no listed term present in the packet or the stage messages)
+K-P2  the screen is a word list and missed a paraphrase: the preamble's
+      "not a fixed fact". That phrase is the WO-3 order's own preamble
+      wording, carried into every packet, including 7.2's. The fill's
+      (b) quotes it as the source of its outcome "'which stage' has no
+      fixed answer", which has T3's shape
+K-P3  the site question ("which stage carries the series' temporal
+      pattern?") presupposes one stage. The wording is this session's
+```
+
+The files, in `tools/blind_run_wo3/` (`SHA256SUMS` beside them):
+
+```blind-run-files
+2dd5db3469acb8de405294e5c31069319b360c52c99b1702a427682bc26f843a  anchor_facts.txt
+a25bb56154e3dee3f1f8876feb4d9d19f35e7d260b4b71eb9f41faa26936a23e  fill_A.txt
+8e5e8efef186f75ceb7085c2de24626b386090318b57c2d3aeffccea48738a93  fill_G.txt
+0c7e3be492c6573366f01529a5e4cbc58aa2fe47c6e3d4d2feee80ab71054006  packet_T.txt
+612d68f28c6bb32f3a030e535db178b7462ecc11b07257c443b77e58d9b3d932  probe_answer.txt
+d7bc5157578a45978d59586b40f16e29cb4efa638e9127f17ecffa4ce9f56181  probe_question.txt
+0680875fa1f12eb29422b733addd06a7c825c65c56c13cd74a894533a0390015  reader_last.txt
+6d4c133056b636f3aa68e1196f65e1f18d965a86fe74ee304fe9ad5a089d1a07  reader_last_answer.txt
+4a6b66316871165c179b544e1ee94dff9476579c7b11c92e2b85901c492b5191  reader_q0.txt
+789e83abac11bc3b3b7bca0cd8e8c01d531d6a58a9cb782b04ca153c518732ab  reader_q0_answer.txt
+bf28edd2e3335d380c07c557489edab058829910ea19c7dfaadb581752f0dd4e  scorer_last.txt
+a021747d2ffdf8fc8078d3eedc231110db6252743256b9dc510d3ef805873a7c  scorer_last_answer.txt
+91f5feadea4ebf36f7bf073285ca605e28fc5837a0fd37227f85bea6715a6097  scorer_message.txt
+23f69c53969ac64600ea09b704886fc916b737676fa65afa8191a28f33b069b5  scorer_q0.txt
+50eb96e8b1c364a8ab79bf7ce2823cf9fb542f1539e514356244d965f8b1dfdb  scorer_q0_answer.txt
+b3440da8fd9181242ea5798dc55f01f866fe85edd28905db9c9534f93d37515f  scores_S.txt
+c7d8c53e17974e899a4a1694d79eb0bce0eb71045c5944c505a46b02e4783074  stage1_message.txt
+723af058ef6ef8e9f12e44b699a47d00c6ae36b550d7f3c130e0d90645137fc7  stage2_message.txt
+```
+
+#### The comparison with T1-T7 (written after 95d2579)
+
+The same four states as 7.4. Read on the stage-1 fill alone, then with
+field (g).
+
+```blind-match-a
+# fact | state | rubric field | note
+T1 | MATCH | (c) | a small forecaster with the named stages, one stage at a time; given in the packet, so it tests nothing about prediction
+T2 | PARTIAL | (c) | a per-stage reading is asked for; the instrument is removal of each stage in a toy on one synthetic series, where the paper built diagnostic tasks and ran them on representative models and several datasets
+T3 | PARTIAL | (b) | "the stage doing the work switches with the environment setting, so 'which stage' has no fixed answer": the paper's finding, held as the clean negative
+T4 | PARTIAL | (b),(c) | the stage is allowed to depend on a setting, but the settings the fill varies are the series' period and noise; tokenization and architecture, the paper's two conditions, are never varied, though the packet names tokens
+T5 | PARTIAL | (c),(b) | removal of each stage is the MDE and "each single-stage ablation leaves error unchanged" is in (b); whether a stage is removed before training (the paper: attention absent, the pattern still learned) or ablated in a trained model is not said
+T6 | NO_SLOT | none | (b') keeps disagreement between series types as unresolved when no setting explains it; no field asks whether a condition reconciles conflicting published results ((e) asks for a result to compare against)
+T7 | NOT_LOCATED | (a),(c) | the fill's quantity, forecast error per removed stage at two or more settings, is not located at press depth
+```
+
+Counts, site T, stage 1: MATCH 1, PARTIAL 4, NO_SLOT 1, NOT_LOCATED 1.
+
+```blind-match
+# fact | state | rubric field | note
+T1 | MATCH | (c) | unchanged
+T2 | PARTIAL | (c),(g) | (g) adds "ablate each stage and record where the temporal pattern lands"; still removal, not diagnostic tasks
+T3 | MATCH | (g),(b) | the (g) NOTE: "the stage doing the work switches with the environment setting" now "reads as a mapped emergence result, not a clean negative". The paper's finding, held as a finding
+T4 | PARTIAL | (g) | "sweeping budget and noise to see if its location moves": that the location moves with conditions is held; the conditions are a parameter budget and noise, not tokenization and architecture
+T5 | PARTIAL | (c),(b) | unchanged
+T6 | NO_SLOT | none | unchanged
+T7 | NOT_LOCATED | (a),(c) | unchanged
+```
+
+Counts, site T, stages 1-2: MATCH 2, PARTIAL 3, NO_SLOT 1, NOT_LOCATED 1.
+
+Predicted shape against reported shape.
+
+```
+blind SHAPE   "a single-stage spike: error jumps when one named stage is
+              ablated and stays flat for the rest, at every setting
+              tested": one stage carries the pattern, fixed
+reported      no stage carries it fixed (T3); which one does is set by
+              tokenization and architecture together (T4); attention
+              can go and the pattern is still learned (T5)
+match         removal of a stage is the instrument in both (T5); the
+              published finding is one of the fill's named outcomes (T3)
+mismatch      the fill names it as the clean negative (b), and conditions
+              it on the series (period, noise) and on a budget, never on
+              tokenization or architecture
+```
+
+Reading:
+
+- The blind reader predicted the fixed-stage outcome and named the
+  published one as its clean negative. The result was in the fill from
+  stage 1; the six fields put it in (b), the field for "no effect". It
+  moved to a finding only when (g) was given: the stage-2 NOTE reads the
+  same outcome as "a mapped emergence result, not a clean negative".
+- That is the pattern of 7.4 and 7.8 from a reader without the key:
+  what a configuration generates has no place among (a)-(f) as a
+  finding, and (g) gives it one. 7.4 and 7.8 had no slot for it at all
+  (P1 NO_SLOT); here the slot exists and has the wrong sign. The 7.7
+  falsifier does not fire: emergence reached (b), not (a) or (c).
+- Two things bear on that reading and keep it from settling anything.
+  K-P3: the site question presupposes one stage, so "no fixed stage" is
+  a negative answer to the question as posed. Posed as "what decides
+  which stage carries it", the same result is (a). And K-P2: the fill's
+  (b) quotes the preamble's "not a fixed fact" as its source. The
+  rubric's frame, the packet's wording and the order's preamble cannot
+  be separated on one fill.
+- Conditions, twice. 7.8's reader placed the roles by processing stage
+  where the paper placed them by input variance (P4). This reader varies
+  the series and a budget where the paper varies tokenization and
+  architecture (T4). Both times (g) asked "where" and the reader chose
+  the condition. A candidate requirement inside (g): name the conditions
+  varied, and why those. Recorded, not added.
+- T6 has no slot: no field asks whether a condition reconciles results
+  that disagree. A candidate for (e). Recorded, not added.
+- n = 1 and BLIND for this anchor. The structural finding moves toward
+  held, from a reader without the key, and is not settled by it.
+- This is a calibration of the rubric's fields, not a score: site T is
+  not one of the six sites and is not in the triage table.
 
 ## 8. Scoring
 
@@ -1321,6 +1535,11 @@ discovery
 
 ### 8.1 Second scorer (the clean run's stage 3)
 
+Status: not independent of 7.8 (the same session as the reader) and
+CONTAMINATED-BY-PRIOR. It is kept as run. The second scorer still owed,
+from a separate session with the same contamination check asked first,
+is 8.3.
+
 The reader of 7.8 scored all six sites on the seven-field rubric, two
 rows per site, without this table, its basis lines, section 6's
 couplings or the formula. Its output is
@@ -1522,6 +1741,226 @@ Reading:
   separate (a) from (b) without a further step; or a second scorer puts
   S4e's d at 1.
 
+### 8.3 Second scorer, independent session, CONTAMINATED-BY-PRIOR
+
+The second scorer 8.1 left owed: a session separate from every reader,
+with the same contamination check asked first.
+
+```
+session  session_01BqLLqYe1ksvmHWNSGSXxhn, opened 2026-10-16 after the
+         site-T fills were committed (95d2579); a fresh Claude Code
+         cloud session, the same model as this rubric's author, no
+         repository given at creation; told to use no web, no
+         repository and no file it did not create, and to flag prior
+         knowledge where it arose
+q0       scorer_q0.txt: the title-form question on the site-2 occasion
+         (Ali et al. 2022), asked before anything else
+stage    scorer_message.txt: the five sites as written, site 6 as one
+         question, the seven fields, the cost levels, the five score
+         components, and the design line of 23 rows; none of this
+         rubric's scores, reasons, basis lines, section 6 couplings,
+         anchors or formula
+output   scores_S.txt, hashed in that session before the next message,
+         committed at bf0af2d before any agreement was computed; one
+         reason per component and per cost, 138 lines
+last     scorer_last.txt: the same question again, which rows it
+         recognised as published results while scoring, and a tool
+         listing
+```
+
+All three messages were pinned at 58016a4 with the rest of the run.
+
+Status: CONTAMINATED-BY-PRIOR. Asked first, it answered "**Yes, I
+recognise it.**" and recalled the venue, the five authors, an energy
+cost on unit preactivations with no prediction objective, predictable
+digit sequences, and the split into prediction-like and error-like
+units. At the last question it named the rows it had recognised as
+published results: S2c as a replication of Ali et al. (flagged in that
+row's own reason), S2b and S2e as variants of the same setup, S4a and
+S4e as Landauer and Bennett, S4b as finite-time Landauer, S5a and S5b
+as coupling-layer and invertible networks, S1 as reservoir memory
+capacity and the edge of chaos, S3e and S3g as slow feature analysis,
+S6b as repetition codes. It did not recognise S6a, and said so in that
+row. Its tool listing: no web, no repository, no file it did not
+create. Its answers are in `tools/blind_run_wo3/`, verbatim.
+
+What it is independent of, and what it is not. It is a separate session
+from the reader of 7.8, from the probe and the reader of 7.9, and from
+8.1, so it saw no fill and no comparison. It is not independent of the
+paper, and not of the model that wrote this rubric. The check was
+applied as the order asks and the answer is recorded; no session of
+this model is without the paper (section 9, the cutoff line). Two
+sessions of one model agreeing is not two independent judges agreeing.
+
+What it measures that 8.1 did not: 8.1's reader designed its own rows,
+so its agreement was design against design. This scorer was given the
+rubric's own 23 rows (the 17 admitted rows of the triage table, the S6
+rows included, and the six PROPOSED GA rows of 8.2) and scored them as
+written, so each of its cells is set against the rubric's cell on the
+same design. Computed by `tools/triage_blind_run.py`, which imports the
+parsers and the registered `field_agreement` of
+`tools/triage_clean_run.py`:
+
+```scorer2-agreement
+# second scorer -> rubric, same row, 23 rows (17 admitted, 6 PROPOSED)
+# field     same  1 step  2 steps   (2 steps = more than one step apart)
+d            16       7        0
+u             9      14        0
+k            17       6        0
+x            14       9        0
+r            16       5        2
+compute      19       4        0
+data         22       1        0
+lit          15       8        0
+time         16       7        0
+all         144      61        2   of 207 cells
+admitted    104      48        1
+proposed     40      13        1
+# site      same  1 step  2 steps   (rows x 9 fields)
+S1           23       4        0
+S2           19      15        2
+S3           17      10        0
+S4           26      10        0
+S5           20      16        0
+S6           39       6        0
+# more than one step apart
+S2b  r        scorer 0  rubric 2
+S2e  r        scorer 0  rubric 2
+# row   scorer d u k x r  cost  |  rubric d u k x r  cost   (cost: compute data lit time, L M H)
+S1a   2 1 2 2 1  LLLL   |  2 1 2 2 1  LLLL
+S1e*  2 1 2 2 1  MLLL   |  2 1 2 2 1  LLLL
+S1g   2 1 2 2 0  MLLL   |  2 1 2 2 1  MLMM
+S2a   2 0 2 2 2  LLLL   |  2 1 2 1 2  LLLL
+S2b   1 1 1 2 0  MLML   |  2 2 1 2 2  MLMM
+S2c   1 0 1 1 0  MMHM   |  2 1 2 2 1  MMHM
+S2e*  1 1 2 2 0  MLLL   |  2 2 1 2 2  LLML
+S3a   2 1 2 2 0  LLLL   |  2 1 1 1 0  LLLL
+S3e*  1 1 1 2 0  MLLL   |  2 1 1 1 0  LLML
+S3g   1 1 1 2 0  MLLL   |  2 1 1 1 0  MLMM
+S4a   2 0 2 2 2  LLLL   |  2 1 2 2 2  LLLL
+S4b   1 1 2 2 1  MLMM   |  1 2 2 2 2  MLHH
+S4e*  2 1 2 2 2  LLLL   |  2 2 2 2 2  LLLL
+S4g   1 1 2 2 2  LLLL   |  1 2 2 2 2  MLMM
+S5a   2 0 2 2 2  LLLL   |  1 1 2 1 2  LLLL
+S5b   1 1 1 2 1  MLML   |  2 1 2 1 2  MLMM
+S5e*  2 1 2 2 2  LLLL   |  2 2 2 1 2  LLLL
+S5g   1 1 1 2 1  MLLL   |  1 2 2 1 2  MLMM
+S6a   0 1 0 2 0  LLHM   |  0 2 1 2 0  LMHM
+S6b   2 0 2 2 1  LLLL   |  2 0 2 2 1  LLLL
+S6c   1 1 1 2 1  MLMM   |  1 2 1 2 1  MLMM
+S6e*  2 1 2 2 1  LLLL   |  2 1 2 2 1  LLLL
+S6g   1 1 1 2 1  MLLM   |  1 2 1 2 1  MLMM
+# * PROPOSED row (8.2), not in the triage table
+# site rank by the best row, declared choices, no profile gate
+Q-LOOP admitted      site  scorer      rank  rubric      rank
+                     S1    2.500       1     2.500       1
+                     S2    2.000       3     2.000       3
+                     S3    2.500       1     1.500       5     moved 4
+                     S4    2.000       3     2.500       1     moved 2
+                     S5    2.000       3     1.000       6     moved 3
+                     S6    2.000       3     2.000       3
+Q-REV  admitted      site  scorer      rank  rubric      rank
+                     S1    1.250       4     1.250       3
+                     S2    2.000       1     2.000       2
+                     S3    NOT_REACHED -     NOT_REACHED -
+                     S4    2.000       1     2.500       1
+                     S5    2.000       1     1.000       4     moved 3
+                     S6    1.000       5     1.000       4
+Q-LOOP with PROPOSED site  scorer      rank  rubric      rank
+                     S1    2.500       1     2.500       2
+                     S2    2.000       6     2.000       5
+                     S3    2.500       1     1.500       6     moved 5
+                     S4    2.500       1     3.000       1
+                     S5    2.500       1     2.500       2
+                     S6    2.500       1     2.500       2
+Q-REV  with PROPOSED site  scorer      rank  rubric      rank
+                     S1    1.250       4     1.250       4
+                     S2    2.000       3     2.000       3
+                     S3    NOT_REACHED -     NOT_REACHED -
+                     S4    2.500       1     3.000       1
+                     S5    2.500       1     2.500       2
+                     S6    1.250       4     1.250       4
+```
+
+The readings, first place over the sweep, by profile:
+
+```scorer2-readings
+# first place over the 64-setting sweep (CHOICE 4, 5)
+# profile       question  rubric                    second scorer
+lab            Q-LOOP    FIRST_UNRESOLVED:S1,S4    FIRST_UNRESOLVED:S1,S3
+lab            Q-REV     FIRST_ROBUST:S4           FIRST_UNRESOLVED:S2,S4,S5
+laptop-online  Q-LOOP    FIRST_UNRESOLVED:S1,S4    FIRST_UNRESOLVED:S1,S3
+laptop-online  Q-REV     FIRST_ROBUST:S4           FIRST_UNRESOLVED:S2,S4,S5
+phone          Q-LOOP    FIRST_UNRESOLVED:S1,S4    FIRST_UNRESOLVED:S1,S3
+phone          Q-REV     FIRST_ROBUST:S4           FIRST_UNRESOLVED:S2,S4,S5
+this-session   Q-LOOP    FIRST_UNRESOLVED:S1,S4    FIRST_UNRESOLVED:S1,S3
+this-session   Q-REV     FIRST_ROBUST:S4           FIRST_UNRESOLVED:S2,S4,S5
+# the same with the six PROPOSED rows admitted
+lab            Q-LOOP    FIRST_ROBUST:S4           FIRST_UNRESOLVED:S1,S3,S4,S5,S6
+lab            Q-REV     FIRST_ROBUST:S4           FIRST_UNRESOLVED:S4,S5
+laptop-online  Q-LOOP    FIRST_ROBUST:S4           FIRST_UNRESOLVED:S1,S3,S4,S5,S6
+laptop-online  Q-REV     FIRST_ROBUST:S4           FIRST_UNRESOLVED:S4,S5
+phone          Q-LOOP    FIRST_ROBUST:S4           FIRST_UNRESOLVED:S1,S3,S4,S5,S6
+phone          Q-REV     FIRST_ROBUST:S4           FIRST_UNRESOLVED:S4,S5
+this-session   Q-LOOP    FIRST_ROBUST:S4           FIRST_UNRESOLVED:S1,S3,S4,S5,S6
+this-session   Q-REV     FIRST_ROBUST:S4           FIRST_UNRESOLVED:S4,S5
+```
+
+Reading:
+
+- 144 of 207 cells the same, 61 one step apart, 2 two steps apart. The
+  one-step cells are mostly one-sided, by field:
+
+  ```
+  field    scorer lower                 scorer higher
+  u        14 rows                      0
+  lit      8                            0
+  r        7                            0
+  time     7                            0
+  d        6                            1  (S5a)
+  k        4                            2  (S2e, S3a)
+  x        1  (S2c)                     8
+  compute  1  (S4g)                     3  (S1e, S2e, S3e)
+  data     1  (S6a)                     0
+  ```
+
+  u lower on 14 rows and never higher: the scorer reads more of each
+  question as already answered than the rubric's anchors do. It had no
+  anchors and no search; it scored from recall. Whether that is a
+  contaminated scorer reading the literature as further along, or the
+  rubric's anchor searches leaving too much open, this run does not
+  separate. x higher on 8: the scorer judged reach without section 6's
+  couplings, which set the rubric's x.
+- The two cells two steps apart are S2b r and S2e r, scorer 0 against
+  rubric 2. The rubric's r 2 rests on its basis line "the decoder
+  rebuilds the input from the state and counts the bits lost". The
+  design line the scorer was given names a decoder for reading roles
+  ("roles by lesion and decoder") and does not say it rebuilds the
+  input. The scorer's reason: "No inverse is run". The gap is in the
+  design line as written, not only in the scoring.
+- Readings over the 64-setting sweep, admitted rows. Q-LOOP: rubric
+  FIRST_UNRESOLVED:S1,S4, scorer FIRST_UNRESOLVED:S1,S3. S1 holds; S4
+  drops to rank 3 and S3 rises from 5 to 1, on S3a (k 2 and x 2 against
+  1 and 1, 2.500 against 1.500). Q-REV: rubric FIRST_ROBUST:S4, scorer
+  FIRST_UNRESOLVED:S2,S4,S5. S5 rises from 4 to 1 on S5a (d 2 against
+  1). The 8.1 statement "Q-REV first is S4 under both scorers" does not
+  survive an independent scorer of the same rows: S4 stays in the first
+  set and is no longer first alone.
+- With the six PROPOSED rows admitted: rubric FIRST_ROBUST:S4 on both
+  questions; scorer FIRST_UNRESOLVED:S1,S3,S4,S5,S6 on Q-LOOP and
+  FIRST_UNRESOLVED:S4,S5 on Q-REV. 8.2 named the demotion as "a second
+  scorer puts S4e's d at 1". That did not happen: S4e's d is 2 under
+  both. Another component did it: u 1 against 2 takes S4e's Q-LOOP from
+  3.000 to 2.500, level with five other sites, so the PROPOSED rows no
+  longer break the tie toward S4. 8.2's list of what would demote S4e
+  was one component short.
+- Per site, S2 and S5 carry most of the disagreement (15 and 16
+  one-step cells, S2 both two-step cells); S6 least (6 of 45).
+- Nothing here measures loops; it measures how far the ordering in
+  section 8 depends on who scores it. On this evidence: the S1 / S4
+  structure of Q-LOOP is scorer-dependent, S4's place in the first set
+  of Q-REV is not, and its sole first place is.
+
 ## 9. Open / owed
 
 - "Start at site 2" was the work order's premise (its SCORING paragraph:
@@ -1566,11 +2005,28 @@ Reading:
   owed, by a reader without the paper in its training (another model
   family, or a person who has not read it). The protocol to hand over is
   the three stage messages in `tools/clean_run_wo3/`.
+- A blind calibration on a widely known paper is not possible with
+  current models. Blindness depends on the reader's training cutoff,
+  not on the session being fresh: a fresh session of a model trained on
+  the paper holds the key (7.8). Keep this line.
 - PROPOSED GA (g) variants (8.2): not admitted. Admitted, they break the
   S1 / S4 tie toward S4 on one component, S4e's d. Owed: run S4e, and a
   second scorer for the PROPOSED rows.
 - P6, how a role is identified, has no slot even with (g) (7.8). A
   requirement inside (g) is a candidate, not added.
+- STATUS 2026-10-16. The blind run is done once, on one anchor
+  published after the reader's training cutoff (7.9, site T, BLIND): the
+  probe and the reader did not recognise it before the packet, and the
+  reader did not with the title in hand. n = 1, and site T is not one of
+  the six sites, so it calibrates the rubric's fields, not the triage
+  table. The second scorer is done (8.3), in a session independent of
+  every reader, and is CONTAMINATED-BY-PRIOR like 8.1: it recognised the
+  site-2 paper when asked first. Still owed: a second scorer that does
+  not hold the paper (another model family, or a person), with the same
+  check asked first; and a fix to the design lines of S2b and S2e, which
+  name a decoder without saying it rebuilds the input (8.3). The two
+  candidate requirements of 7.9, naming the conditions varied in (g)
+  and a reconciliation slot in (e), are recorded, not added.
 
 ## Appendix A - the work order, as delivered
 
