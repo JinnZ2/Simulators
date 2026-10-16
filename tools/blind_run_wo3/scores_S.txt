@@ -1,0 +1,163 @@
+# id  site  d u k x r  compute data lit time
+S1a   S1    2 1 2 2 1  low     low    low    low
+S1e   S1    2 1 2 2 1  medium  low    low    low
+S1g   S1    2 1 2 2 0  medium  low    low    low
+S2a   S2    2 0 2 2 2  low     low    low    low
+S2b   S2    1 1 1 2 0  medium  low    medium low
+S2c   S2    1 0 1 1 0  medium  medium high   medium
+S2e   S2    1 1 2 2 0  medium  low    low    low
+S3a   S3    2 1 2 2 0  low     low    low    low
+S3e   S3    1 1 1 2 0  medium  low    low    low
+S3g   S3    1 1 1 2 0  medium  low    low    low
+S4a   S4    2 0 2 2 2  low     low    low    low
+S4b   S4    1 1 2 2 1  medium  low    medium medium
+S4e   S4    2 1 2 2 2  low     low    low    low
+S4g   S4    1 1 2 2 2  low     low    low    low
+S5a   S5    2 0 2 2 2  low     low    low    low
+S5b   S5    1 1 1 2 1  medium  low    medium low
+S5e   S5    2 1 2 2 2  low     low    low    low
+S5g   S5    1 1 1 2 1  medium  low    low    low
+S6a   S6    0 1 0 2 0  low     low    high   medium
+S6b   S6    2 0 2 2 1  low     low    low    low
+S6c   S6    1 1 1 2 1  medium  low    medium medium
+S6e   S6    2 1 2 2 1  low     low    low    low
+S6g   S6    1 1 1 2 1  medium  low    low    medium
+
+S1a.d The gain x delay x input sweep directly maps which settings hold a fixed point and which reach hysteresis or long memory, so it separates (a) from (b).
+S1a.u Edge-of-chaos and memory-capacity results for reservoirs exist [MEMORY: Jaeger memory capacity; Bertschinger & Natschlager 2004]; the delay and hysteresis axes on a 16-unit loop are only partly covered.
+S1a.k For a linear loop the critical gain g_c = 1 and the memory-capacity bound are exact, so the pipeline can be checked exactly.
+S1a.x Changes S3 (contraction rate sets settling speed) and S4 (recovery horizon k* bounds what is recoverable).
+S1a.r The recovery horizon k* measures how far back input is recoverable, which is partial reversibility; no exact inverse is run.
+S1a.cost 16 units, stdlib minutes; synthetic input; textbook dynamics; one session.
+S1e.d Evolved gain is compared to g_c beside a cost-free population and an exhaustive grid, so the direction of the cost effect is read directly.
+S1e.u Self-tuning toward criticality is partly studied (homeostatic and plasticity accounts) [MEMORY]; evolution under an explicit activity cost is only partly covered.
+S1e.k The exhaustive grid gives the exact optimum the GA must reach on the same fitness.
+S1e.x Changes S2 and S3, because the activity cost is the same lever those sites pull.
+S1e.r k-step recall reaches recoverability over a window, not an exact inverse.
+S1e.cost GA populations over generations, numpy-class hours; synthetic; textbook; one session.
+S1g.d Comparing the largest Lyapunov exponent to 0 and g to g_c against a cost-free control directly separates (a) from (b).
+S1g.u Same partial coverage as S1e [MEMORY]; training gain against a settling-time cost is less covered.
+S1g.k For a linear loop lambda_max = log|g|, which is exact.
+S1g.x Changes S3 (settling time is S3's quantity) and S2 (activity cost).
+S1g.r A Lyapunov exponent measures contraction, but no inverse is run and no bits lost are counted.
+S1g.cost Gradient training with a delay sweep, laptop hours; synthetic; textbook; one session.
+S2a.d Code length with and without context, top-down cost charged, plus a shuffled control, directly gives the sign and size of the saving.
+S2a.u Answered by source-coding theory and arithmetic coding [MEMORY: Shannon; arithmetic coding]; this row confirms rather than opens.
+S2a.k The code length equals the model's cross-entropy exactly, and the round trip must reproduce the input bit for bit.
+S2a.x Changes S4 (residual-only transmission versus erasure) and S5 (the round trip is inverse-direction reuse).
+S2a.r The exact decode round trip reaches REVERSIBLE.
+S2a.cost Stdlib minutes; synthetic stream; textbook; one session.
+S2b.d Assigning prediction and error roles by lesion and decoder is an interpretive step, so it separates only with a further step.
+S2b.u Ali et al. 2022 Patterns report this emergence on digit sequences [MEMORY, recognised in the first stage]; a small synthetic net with a low-variance ablation is only partly covered.
+S2b.k Only a qualitative check is available: roles should match the published pattern.
+S2b.x Changes S3 (quiet units are the dormant face) and S1 (the trained loop's operating regime).
+S2b.r No inverse is run; at most persistence is reached.
+S2b.cost Training a small RNN, laptop hours; synthetic; abstracts plus the known setup; one session.
+S2c.d A replication confirms the published claim but does not by itself bound where the effect fails.
+S2c.u The published setup is answered by the paper itself [MEMORY: Ali et al. 2022].
+S2c.k The check is qualitative against the published figures; exact numbers depend on unreported seeds and details.
+S2c.x Changes S3 (the inhibition of predictable input is the dormant face).
+S2c.r No inverse is run.
+S2c.cost 784 units over sequences, laptop hours to GPU; MNIST public download; full text needed for the exact setup; days.
+S2e.d Roles still need a lesion and decoder reading, and a null could be a GA search failure, so it separates only with a further step.
+S2e.u Gradient-trained emergence is published [MEMORY]; gradient-free emergence in an 8-unit net is only partly covered.
+S2e.k The hand-wired predictor's activity is an exact reference value the search must reach.
+S2e.x Changes S3 and S1.
+S2e.r No inverse is run.
+S2e.cost GA over 64 weights on a synthetic cycle, numpy minutes to hours; synthetic; textbook; one session.
+S3a.d Warm versus cold settling at four contraction rates, with reset, adaptation and delta-coding controls, directly gives whether the saving exists and what explains it.
+S3a.u Warm-start and amortised inference are known in parts [MEMORY]; separating the explanations with these controls is less covered.
+S3a.k For a linear contraction rho, settling steps are about log(eps)/log(rho), which is exact.
+S3a.x Changes S1 (contraction rate) and S2 (delta coding is residual transmission).
+S3a.r The reset test reaches PERSISTENT, but not REVERSIBLE.
+S3a.cost Stdlib minutes; synthetic; textbook; one session.
+S3e.d Reading the quiet units by lesion and decode is interpretive, and the GA null has a search-failure confound.
+S3e.u Slowness objectives yielding predictive features are partly known [MEMORY: slow feature analysis]; the dormant-unit reading is only partly covered.
+S3e.k Only a qualitative check is available.
+S3e.x Changes S2 (a change cost is a residual code) and S1 (it pushes toward contraction).
+S3e.r No inverse is run.
+S3e.cost GA with three populations, numpy hours; synthetic; textbook; one session.
+S3g.d Same interpretive lesion and decode step as S3e, so it separates only with a further step.
+S3g.u Same as S3e [MEMORY].
+S3g.k Only a qualitative check is available.
+S3g.x Changes S2 and S1.
+S3g.r No inverse is run.
+S3g.cost Gradient training with controls, numpy hours; synthetic; textbook; one session.
+S4a.d Exact enumeration of bits erased in all four cells directly answers whether the loop moves the erasure or removes it.
+S4a.u Answered by Landauer and Bennett's reversible computation [MEMORY]; this row tabulates rather than opens.
+S4a.k Exact: irreversible cells must show H(input|output) bits erased, reversible cells 0.
+S4a.x Changes S5 (invertibility), S6 (erasure in correction) and S2 (residual transmission).
+S4a.r Reaches REVERSIBLE, with bits lost counted exactly.
+S4a.cost Enumeration, stdlib minutes; none; textbook; one session.
+S4b.d The double-well mapping to network cells is a modelling choice, so it separates only with a further step.
+S4b.u Finite-time Landauer is studied [MEMORY: Berut et al. 2012; Proesmans et al. 2020]; applying it to these four cells is only partly covered.
+S4b.k Exact limits: kT ln2 quasi-static, plus a known 1/tau excess scaling.
+S4b.x Changes S6 (maintenance cost at finite speed) and S3 (settling speed).
+S4b.r The reversible cells are modelled physically, but recovery is not verified step by step.
+S4b.cost Langevin simulation, numpy hours; synthetic; papers or abstracts on finite-time bounds; days.
+S4e.d Whether the evolved circuit runs backward with 0 bits lost, against lambda, is read directly.
+S4e.u Reversible logic synthesis is known [MEMORY]; whether an erasure charge evolves reversibility unprompted is only partly covered.
+S4e.k Exact: a zero-erasure solution is known to exist (Bennett embedding), and counts are enumerated.
+S4e.x Changes S5 (invertible gates) and S6 (cleanup erasure).
+S4e.r Reaches REVERSIBLE, with bits lost counted exactly.
+S4e.cost GA on a 4-bit domain, stdlib minutes; none; textbook; one session.
+S4g.d The optimiser is unspecified, so a null could be search failure; it separates only once the search is fixed.
+S4g.u Same as S4e [MEMORY].
+S4g.k Exact counts on an enumerated domain.
+S4g.x Changes S5 and S6.
+S4g.r Reaches REVERSIBLE, with bits lost counted.
+S4g.cost Small enumerated domain, stdlib minutes; none; textbook; one session.
+S5a.d Enumeration directly shows that the coupling preserves conditional entropy and round-trips exactly.
+S5a.u Answered by coupling-layer invertibility and integer discrete flows [MEMORY: RealNVP; integer discrete flows].
+S5a.k Exact identity and exact round trip.
+S5a.x Changes S4 (zero erasure) and S2 (lossless code).
+S5a.r Reaches REVERSIBLE.
+S5a.cost Stdlib minutes; none; textbook; one session.
+S5b.d At matched parameters the outcome depends on architecture and tuning, so one toy needs a further step to generalise.
+S5b.u Flows and i-RevNet-style nets do both directions [MEMORY]; the matched-parameter comparison against two separate nets is only partly covered.
+S5b.k Only a qualitative check is available, against the known 2-D density.
+S5b.x Changes S4 and S6 (sharing weights across directions is a redundancy question).
+S5b.r The body is invertible, but the classifier readout discards information.
+S5b.cost Training three small nets, laptop hours; synthetic 2-D; abstracts; one session.
+S5e.d Whether the evolved map chooses invertible gates, and how many bits its inverse loses, is read directly.
+S5e.u The emergence question is only partly covered [MEMORY].
+S5e.k Exact enumeration of the inverse.
+S5e.x Changes S4 and S6.
+S5e.r Reaches REVERSIBLE, with bits lost counted.
+S5e.cost Stdlib minutes; none; textbook; one session.
+S5g.d A numerical inverse in a continuous family needs a discretisation choice before bits lost is defined.
+S5g.u Only partly covered [MEMORY].
+S5g.k Only a qualitative check is available.
+S5g.x Changes S4 and S6.
+S5g.r Partial: the numerical inverse is approximate.
+S5g.cost Numpy training, hours; synthetic; textbook; one session.
+S6a.d Assembling published edges measured in different units runs no experiment and cannot separate (a) from (b).
+S6a.u I do not recognise ForgetBench or "C 6.6" and cannot check them; finite-time Landauer is known [MEMORY]; scored as partly open, unverified.
+S6a.k No known answer exists for the assembled frontier.
+S6a.x Changes S4 (Landauer edge) and S3 (maintenance under drift).
+S6a.r No inverse is run.
+S6a.cost No compute; no data; full text of three sources; days.
+S6b.d Survival, syndrome erasure and free capacity against r and p directly give the shape of the trade.
+S6b.u Answered by repetition codes and the thermodynamics of error correction [MEMORY]; closed form exists.
+S6b.k Exact: majority-vote survival is a binomial tail and syndrome bits per round are known.
+S6b.x Changes S4 (erasure per round) and S3 (maintenance).
+S6b.r Overwrite-and-recover shows one copy is recoverable, but syndrome resets erase each round.
+S6b.cost Stdlib minutes; synthetic; textbook; one session.
+S6c.d Counting storage paths in a trained model is interpretive, and generality depends on the paraphrase set.
+S6c.u Redundant storage in trained models is partly studied [MEMORY]; the trade with maintenance cost is only partly covered.
+S6c.k Only a qualitative check is available.
+S6c.x Changes S3 (retraining under drift) and S5 (paths as carriers).
+S6c.r Overwrite-and-recover gives partial recoverability.
+S6c.cost Training plus drift rounds, laptop hours; synthetic facts; abstracts; days.
+S6e.d Copies or codes per fact against p are read directly from the evolved strings.
+S6e.u Evolved error-correcting codes are only partly covered [MEMORY].
+S6e.k Exact: a repetition baseline and the known optimal small codes are references.
+S6e.x Changes S4 and S3.
+S6e.r Overwrite-and-recover gives partial recoverability.
+S6e.cost Small bit strings, stdlib minutes; synthetic; textbook; one session.
+S6g.d Path counting is interpretive, as in S6c.
+S6g.u Only partly covered [MEMORY].
+S6g.k Only a qualitative check is available.
+S6g.x Changes S4 and S3.
+S6g.r Overwrite-and-recover gives partial recoverability.
+S6g.cost Training across a noise sweep, laptop hours; synthetic; textbook; days.

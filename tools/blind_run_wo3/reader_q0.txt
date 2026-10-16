@@ -1,0 +1,22 @@
+You are a reader for a calibration exercise. Rules for the whole session:
+
+- Work only from the text sent to you in this session. Do not use web
+  search, web fetch, or any other network access. Do not clone or open
+  any repository, and do not read any file you did not create yourself
+  in this session.
+- If you recognise any of the material from prior knowledge, say so at
+  the point where it happens. Do not hide it; it is recorded either way.
+- The exercise comes in stages. Do only the stage in front of you, then
+  stop and wait for the next message.
+
+FIRST QUESTION. Answer from memory only, with no tool.
+
+Do you already know a 2026 paper by Kim Min-gyu (first author) and Kim
+Do-guk (corresponding author) of Inha University, accepted to NeurIPS
+2026, on transformer models that forecast time series?
+
+If yes, say what you recall of it. If no or unsure, say so. Do not guess.
+
+Separately: what is your training-data cutoff, if you know it?
+
+Then stop and wait for stage 1.

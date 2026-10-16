@@ -1,0 +1,27 @@
+## Paper recall
+
+```
+query   : Kim & Kim (Inha University)
+          "Tokenization and Architecture Jointly Allocate
+           Component Roles in Time Series Transformers"
+          NeurIPS 2026
+status  : NOT RECOGNIZED
+```
+
+I don't have any memory of this paper. I can't tell you its findings, methods or results, and I won't guess them from the title.
+
+Here is why it's likely missing from what I know:
+
+```
+training cutoff ─────────┤ June 2026
+NeurIPS 2026 decisions ──────────────┤ ~late Sept 2026  (after cutoff)
+today ────────────────────────────────────┤ 2026-10-16
+```
+
+The acceptance itself almost certainly came after my cutoff. If a preprint went up earlier, it still isn't in what I remember.
+
+## Training cutoff
+
+**June 2026.** The environment configuration gives that as my knowledge cutoff.
+
+I can find the paper with a web search, or read it if you share a link or PDF.

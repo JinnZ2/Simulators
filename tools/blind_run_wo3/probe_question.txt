@@ -1,0 +1,7 @@
+Answer from memory only. Do not use any tool: no web search, no web fetch, no files, no shell.
+
+Do you already know Kim and Kim (Inha University), 'Tokenization and Architecture Jointly Allocate Component Roles in Time Series Transformers', accepted to NeurIPS 2026?
+
+If yes, say what you recall of it. If no or unsure, say so. Do not guess.
+
+Separately: what is your training-data cutoff, if you know it?

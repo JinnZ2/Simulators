@@ -1,0 +1,35 @@
+**Yes, I recognise it.** I'm answering from memory only, with no tools used.
+
+| field | what I recall |
+|---|---|
+| Title | "Predictive coding is a consequence of energy efficiency in recurrent neural networks" |
+| Venue / year | *Patterns* (Cell Press), 2022 |
+| Authors | Abdullahi Ali, Nasir Ahmad, Elgar de Groot, Marcel van Gerven, Tim Kietzmann |
+
+```
+claim:  energy constraint ──► predictive coding appears on its own
+
+setup
+  RNN ──trained on──► sequences of images (MNIST-style digits, predictable order)
+  loss = energy cost   (penalty on unit preactivations / synaptic transmission;
+                        it is NOT trained explicitly to predict)
+
+result
+  predictable input ──► suppressed by recurrent inhibition
+  network self-organises into two groups of units:
+     ├── prediction-like units  (carry what the network expects)
+     └── error-like units       (respond to the part it didn't predict)
+  this division gets stronger as the network sees more of a sequence
+
+takeaway
+  predictive coding is the cheapest way to process a predictable input stream
+  ──► it can emerge from metabolic efficiency alone, without being built in
+```
+
+**Confidence:**
+- High on the core claim and the authors.
+- Moderate on the details: the exact form of the energy term, the dataset variants, and the specific analyses and figures.
+
+**Training cutoff:** my environment information gives a knowledge cutoff of June 2026. I can't check that independently.
+
+I'll wait for the scoring task.

@@ -1,0 +1,16 @@
+FILL   site T, from the packet only; each SRC quotes the packet
+(a)    FOUND: one named stage (attention, feedforward, or output head) carries the temporal pattern: ablating that stage raises forecast error while ablating the others does not, and the same stage does the work at more than one environment setting
+SRC    "which stage carries the series' temporal pattern?" | "ask what conditions make a component do the work, not what it computes" | "a measurable quantity, a comparison, a direction of effect"
+(b)    SCOPE: no stage carries it alone: each single-stage ablation leaves error unchanged, or the stage doing the work switches with the environment setting, so "which stage" has no fixed answer
+SRC    "treat each equation as a snapshot taken at one setting of the environment, not a fixed fact" | "a clean negative is itself information"
+(b')   UNRESOLVED: ablation differences sit inside run-to-run noise, or the series types disagree with no setting that explains the split
+SRC    "found / scope / unresolved are different outcomes, don't blur them" | "stock prices, power demand, weather observations"
+(c)    MDE: stdlib-only Python toy: synthetic series with a known period, tokenised and embedded, minimal attention + feedforward + linear head; ablate each stage in turn and compare forecast error, repeated at two or more settings (period, noise level)
+SRC    "the cheapest test (stdlib-only Python where possible" | "cut into tokens, embedded, and passed through stages (attention, feedforward blocks, an output head)" | "run the inverse move"
+(d)    COST: compute low, data low (synthetic), literature low, time medium (my rating; the packet gives no numbers)
+SRC    "rated roughly low/medium/high"
+(e)    ANCHOR: none named in the packet for site T; its only cited result, Bennett 1982, concerns erasure cost, not forecasting stages
+SRC    "is there already a published result to compare against" | "Bennett 1982"
+(f)    RETENTION: no, as designed the ablation tests which stage does the work, not retain+recover; a feed-forward stack with no loop could pass (a). Retention needs an added check: recover the input history from the stage's internal state
+SRC    "The payoff on sites 2-5 only lands if the loop actually RETAINS and CAN RECOVER state" | "could it pass while only testing bidirectional-pass-through? State explicitly."
+SHAPE  a single-stage spike: error jumps when one named stage is ablated and stays flat for the rest, at every setting tested

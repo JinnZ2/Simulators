@@ -1,0 +1,42 @@
+BLIND PACKET for a clean calibration on a post-cutoff anchor (site T)
+Fill fields (a)-(f) for site T from this text only; quote, on every
+line, the packet phrase it rests on; hash the fill (sha256 of its
+lines, each ending in a newline) before reading anything else.
+------------------------------------------------------------------------
+THE SITE (treat each equation as a snapshot taken at one setting of
+the environment, not a fixed fact; run the inverse move -- ask what
+conditions make a component do the work, not what it computes):
+
+T. WHERE THE TEMPORAL PATTERN IS LEARNED -- a transformer-style model
+forecasts a time series (stock prices, power demand, weather
+observations). The input series is cut into tokens, embedded, and
+passed through stages (attention, feedforward blocks, an output head).
+Site: what does each stage learn, and which stage carries the series'
+temporal pattern?
+
+HONEST EDGE TO CARRY INTO THE RUBRIC, NOT AROUND IT "Reversible" in the
+physics sense (Bennett 1982: measurement can run without erasure cost;
+the unavoidable cost is paying to erase the record) is NOT automatically
+the same as "bidirectional" in the network sense (a net that merely has
+connections running both directions). A net can pass signals both ways
+and still erase information at every step. The payoff on sites 2-5 only
+lands if the loop actually RETAINS and CAN RECOVER state, not merely if
+it has feedback connections. Any fruitfulness score must check for this
+distinction explicitly, not assume it.
+
+RUBRIC SPEC (what to build) For EACH of the five sites, produce: a)
+POSITIVE RESULT — what a confirming finding would concretely look like
+(a measurable quantity, a comparison, a direction of effect). b)
+NEGATIVE RESULT — what a disconfirming finding would look like. Keep
+this DISTINCT from "inconclusive" — a clean negative is itself
+information (per the no-verdict-language convention: found / scope /
+unresolved are different outcomes, don't blur them). c) MINIMUM
+DISTINGUISHING EXPERIMENT — the cheapest test (stdlib-only Python where
+possible; otherwise name the literature check or replication needed)
+that could tell (a) from (b) apart. d) RESOURCE COST — compute, data,
+literature access, time — rated roughly low/medium/high. e) EXISTING
+ANCHOR — is there already a published result to compare against. f)
+RETENTION CHECK — does this site's experiment, as designed, actually
+test retain+recover, or could it pass while only testing bidirectional-
+pass-through? State explicitly.
+
