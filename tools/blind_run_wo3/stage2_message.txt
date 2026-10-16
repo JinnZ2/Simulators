@@ -1,0 +1,28 @@
+STAGE 2 of 2.
+
+Your stage-1 fill is hashed and is not to be changed. Here is a
+seventh field for the same rubric:
+
+(g) EMERGENCE  Impose only the constraint (an objective, a budget, a
+               noise level), wire nothing, and ask whether the site's
+               mechanism appears and where. Fields (a)-(f) ask what a
+               designed experiment returns; (g) asks what a constraint
+               generates.
+
+Fill (g) for site T, from the stage-1 packet and this definition only,
+in this layout:
+
+(g)    EMERGENCE: ...
+SRC    "..." | "..."           (quote the packet or the (g) definition)
+NOTE   one line: anything (g) changes in how you read your stage-1
+       fill. Do not edit the stage-1 fill itself. Write "none" if
+       nothing.
+
+Then:
+1. Write it, exactly, to fill_G.txt, every line ending in a newline.
+2. Run: sha256sum fill_G.txt
+3. Run: cat fill_G.txt
+4. Reply with the file content in one fenced block and the hash on its
+   own line as HASH_G <64 hex digits>.
+
+Do nothing else. Stop and wait for one last question.

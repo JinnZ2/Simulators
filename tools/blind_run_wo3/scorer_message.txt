@@ -1,0 +1,156 @@
+SCORING TASK.
+
+Score the experiment rows listed below. Each row is a fixed design;
+score it as written. Do not redesign a row and do not add rows. Each
+component on its own reason. Sites 1-5 are given as written in the work
+order; site 6 is a later addition, given as one question.
+
+THE FIVE SITES (unfreeze the zero top-down term in the standard
+feedforward update; treat the feedforward equation as a snapshot taken
+at one setting of the environment, not a fixed fact; run the inverse
+move — ask what conditions make the loop do work, not what it computes):
+
+1. STABILITY CONDITIONS — which gain / timing / input-statistics
+   settings hold a feedback loop at a fixed point vs. push it into a
+   regime pure feedforward cannot reach. Gradient as a design variable,
+   not a given.
+
+2. COMPRESSION PAYOFF — predict the input top-down, transmit only the
+   mismatch (residual) upward. Bits spent = -log2(probability the model
+   assigned to what actually arrived). Better prediction -> fewer bits
+   -> lower cost. This is the predictive-coding/arithmetic-coding
+   frontier; the savings are the point, not a side effect.
+
+3. DORMANT-FACE COST — a loop that has settled near a fixed point can
+   leave most of its structure quiet and only activate the parts the
+   current input actually couples to. Repeated exposure to the same
+   input class should get cheaper over time as the loop re-settles
+   faster.
+
+4. LANDAUER / ERASURE JOIN — standard feedforward nets discard (erase)
+   intermediate activations at every stage; that erasure is where the
+   Landauer bound bites. A loop that retains its state and can recover
+   earlier values is not standing on that erasure floor. Site: does a
+   retained-state loop actually show measurably lower erasure cost than
+   an equivalent feedforward pass, or does it just move the erasure
+   elsewhere?
+
+5. INVERSE-DIRECTION REUSE — a relation has no privileged direction. Can
+   one trained loop run forward as recognition and backward as
+   generation, instead of requiring two separately trained networks?
+   What is lost/gained running the same weights both ways?
+
+6. REDUNDANCY / GENERALITY / MAINTENANCE FRONTIER — does adding a
+   second carrier (a redundant copy of stored information) cost
+   generality, and does the trade have a shape once the cost of
+   maintaining the copies is counted?
+
+RETENTION, three properties kept apart (a net can pass signals both
+ways and still erase information at every step):
+
+  BIDIRECTIONAL  signals run both ways           test: connectivity
+  PERSISTENT     state survives across steps     test: reset the state
+                 or inputs                       between inputs; does
+                                                 behaviour change?
+  REVERSIBLE     earlier state is recoverable    test: run the inverse
+                 from later state                from (state_t+1,
+                                                 output_t) to (state_t,
+                                                 input_t); report bits
+                                                 lost per step (0 means
+                                                 reversible)
+
+THE SEVEN FIELDS
+
+  (a)  FOUND        a confirming result: a quantity, a comparison, a
+                    direction of effect
+  (b)  SCOPE        a clean negative; it bounds where the effect can
+                    live (keep inconclusive apart from it)
+  (c)  MDE          the cheapest test that separates (a) from (b)
+  (d)  COST         compute / data / literature / time
+  (e)  ANCHOR       published results to compare against
+  (f)  RETENTION    which of BIDIRECTIONAL / PERSISTENT / REVERSIBLE
+                    the MDE reaches
+  (g)  EMERGENCE    impose only the constraint, wire nothing, and ask
+                    whether the site's mechanism appears and where
+
+COST LEVELS
+
+            low                   medium                high
+  compute   stdlib, minutes;      laptop, hours;        GPU or cluster,
+            a phone runs it       numpy-class           days
+  data      none or synthetic     a public download     collected or
+                                                        private
+  lit       none or textbook      abstracts, snippets   full text
+  time      one session, hours    days                  weeks
+
+SCORE COMPONENTS, each 0, 1 or 2, each with a one-line reason
+
+  d  DECISIVE  does the experiment separate (a) from (b)?
+               0 no; 1 only with a further step; 2 directly
+  u  OPEN      how much of the question published work leaves open
+               0 answered; 1 partly answered; 2 open
+               (you have no web access: mark anything you cite from
+               memory as [MEMORY])
+  k  KNOWN     can the pipeline be checked against a known answer
+               before it is trusted? 0 no; 1 qualitative; 2 exact
+  x  REACH     how many OTHER of the six sites a result here changes
+               the reading of: 0 none; 1 one; 2 two or more (name them)
+  r  RETAIN    does the experiment reach REVERSIBLE?
+               0 not reached; 1 partial; 2 reached
+
+The components are combined later by a fixed formula you do not need.
+Score each one on its own reason.
+
+THE ROWS TO SCORE (23 rows; id, site, design; a design that opens
+with "(g)" is a field-(g) variant):
+
+S1a  S1  16-unit loop: gain x delay x input sweep; hysteresis, MC, recovery horizon k*
+S1e  S1  (g) GA over (gain, delay, input scale) of a small tanh loop, fitness = a k-step recall task minus an activity cost, nothing wired; where the evolved gain sits against g_c, beside a cost-free population and the exhaustive grid
+S1g  S1  (g) train gain (delay swept) under an activity or settling-time cost, nothing wired; trained loop's largest Lyapunov exponent against 0 and g against g_c; cost-free control
+S2a  S2  symbol stream: code length with and without context; top-down charged; shuffled control; round trip
+S2b  S2  (g) small recurrent net, synthetic predictable sequence, L1 on pre-nonlinearity activity, nothing wired; roles by lesion and decoder; low-variance ablation
+S2c  S2  replication of the published setup (784 units, ascending digit sequences, L1 on preactivation)
+S2e  S2  (g) GA over the recurrent weights of an 8-unit net, one unit per input channel, synthetic cyclic sequence, fitness = minus the L1 of pre-nonlinearity activity, nothing wired; roles by lesion and decoder; a hand-wired predictor's activity as the search check
+S3a  S3  warm vs cold settling at four contraction rates; reset, adaptation and delta-coding controls; three cost models
+S3e  S3  (g) GA over a small loop's weights, fitness = task minus a cost on change |dh| per update, nothing wired; lesion the units that go quiet and decode the prediction from them; activity-cost and no-cost populations
+S3g  S3  (g) train under a cost on change (|dh| per update), nothing wired; lesion the units that go quiet and decode the prediction from them; activity-cost and no-cost controls
+S4a  S4  2x2 erasure ledger (pass/loop x irreversible/reversible) by exact enumeration
+S4b  S4  finite-speed dissipation of the four cells on an overdamped double-well model
+S4e  S4  (g) GA over gate lists from a library holding reversible and irreversible gates on an enumerated 4-bit domain, fitness = task minus lambda times the exact count of bits overwritten per step, final cleanup included, nothing wired; run the evolved circuit backward, bits lost counted
+S4g  S4  (g) charge the bits a step overwrites to the objective on a small enumerated domain, nothing wired; read structure by running the inverse, bits lost counted
+S5a  S5  integer coupling bijection: H(Z|Y) = H(X|Y) by enumeration; exact round trip
+S5b  S5  small invertible net against classifier + generator at matched total parameters, 2-D toy
+S5e  S5  (g) GA over gate lists computing one forward map, fitness = correct outputs minus a gate-count cost, the library holding invertible and non-invertible gates; inverse by enumeration, bits lost counted
+S5g  S5  (g) train one direction under a cost on total parameter count, in a family that can express invertible and non-invertible maps; numerical inverse, bits lost counted
+S6a  S6  assemble the three published edges (ForgetBench, redundant retrieval, finite-time Landauer) into one frontier, as C 6.6 proposes
+S6b  S6  bits-only toy: facts at redundancy r, flips at rate p, majority-vote correction; survival, syndrome bits erased per round, free capacity; overwrite one copy and recover
+S6c  S6  small trained associative model: storage paths per fact, paraphrase recall, retraining cost under drift; overwrite one path and recover
+S6e  S6  (g) GA over bit-string memories, F facts in C bits, flips at rate p per round, fitness = facts read back after the rounds, no copies wired; copies or codes per fact counted as p moves; overwrite one copy and recover
+S6g  S6  (g) small associative model trained under a capacity budget and a weight-noise rate, no copies wired; count storage paths per fact as the noise rate moves; overwrite one path and recover
+
+Layout, two blocks in this order:
+
+BLOCK 1, the table, one row per id above, in the same order, columns
+separated by spaces (cost words: low, medium, high):
+# id  site  d u k x r  compute data lit time
+S1a   S1    . . . . .  .       .    .   .
+... through the last id
+
+BLOCK 2, the reasons, one line per component per row:
+S1a.d <reason>
+S1a.u <reason>
+S1a.k <reason>
+S1a.x <reason>
+S1a.r <reason>
+S1a.cost <one line on the four cost levels>
+... through the last id
+
+Then:
+1. Write the two blocks, exactly, to scores_S.txt, every line ending
+   in a newline.
+2. Run: sha256sum scores_S.txt
+3. Run: cat scores_S.txt
+4. Reply with the file content in one fenced block and the hash on its
+   own line as HASH_S <64 hex digits>.
+
+Do nothing else. Stop and wait for one last question.
