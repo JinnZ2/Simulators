@@ -1,0 +1,3 @@
+(g)    EMERGENCE: impose only a next-step forecast objective, a parameter budget and a noise level on the series; assign no stage a temporal role; then ablate each stage and record where the temporal pattern lands, sweeping budget and noise to see if its location moves
+SRC    "Impose only the constraint (an objective, a budget, a noise level), wire nothing, and ask whether the site's mechanism appears and where" | "which stage carries the series' temporal pattern?" | "ask what conditions make a component do the work, not what it computes"
+NOTE   under (g), my stage-1 (b) outcome "the stage doing the work switches with the environment setting" reads as a mapped emergence result, not a clean negative
