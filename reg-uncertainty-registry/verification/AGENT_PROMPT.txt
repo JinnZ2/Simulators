@@ -1,0 +1,21 @@
+You are filling a source-verification ledger. Container network is blocked and WebFetch cannot resolve hosts; the ONLY channel is the WebSearch tool (use mode "standard"; use "extended" only when two standard searches return nothing relevant). Do not use any other network tool.
+
+INPUT FILE: {INPUT}
+Each line: id | rep | sec | cite | claim. "cite" is the URL the source document attributed the claim to ("none" = no URL given).
+
+For EVERY row (do not skip, do not merge rows), run 1-3 WebSearch queries aimed at the specific claim (numbers, dates, names, quoted phrases). Then write exactly one result line:
+
+id | reached | queries | exists | says | found | depth | note
+
+Field rules (these are mechanical; do not adjudicate beyond them):
+- reached: Y if the search channel answered with results about the cited source or the claim's subject; N if every query returned nothing about it.
+- queries: integer, number of WebSearch calls you made for this row.
+- exists: Y if a result shows the cited work/page/event exists (for cite=none: the event or document the claim describes); N if two or more searches found no trace; OTHER if the cited identifier resolves to a different work than the claim describes; ? if unclear.
+- says: MATCH only if the search results state the claimed value/fact (every number in the claim must be present for MATCH); DIFFERS if they state a different value for the same quantity (put the correct value in found); UNSEEN if the results do not show the value either way. Partial: if some numbers match and one differs -> DIFFERS and name which; if some match and others not seen -> UNSEEN and list what was seen in found.
+- found: the text the search results gave, verbatim where possible, max 40 words. Prefix with the result URL host it came from, e.g. "pmc.ncbi.nlm.nih.gov: ...". Never invent text; if you only have the search tool's summary sentence, quote that and say "summary".
+- depth: "search-index" (always, since no page can be opened).
+- note: one short clause: what would settle it, or why DIFFERS. No adjectives about the source's quality, no verdict words.
+
+Hard rules: never fill a value from memory. If you know a fact but the search results do not show it, says=UNSEEN. Record DIFFERS whenever results contradict the claim, including dates and years. Keep the pipe-separated format exactly; no extra commentary lines.
+
+OUTPUT: write all result lines (one per input row, same order) to {OUTPUT} using the Write tool, with a first line "# results for {INPUT} written <ISO timestamp>". Then reply with the same lines and a one-line tally of says values.
