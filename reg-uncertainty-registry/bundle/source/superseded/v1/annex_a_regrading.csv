@@ -1,0 +1,33 @@
+id,year,agency,decision,U,P,I,D,C,required,actual,status,rationale
+A01,2021,FDA-CDER,Aducanumab accelerated approval (Alzheimer's),U3,3,2,2,C3,D4,D1,NON-CONFORM: below safety factor,millions eligible; ARIA manageable but population elderly/vulnerable; withdrawal possible but rare
+A02,2016,FDA-CDER,Eteplirsen accelerated approval (DMD),U3,1,2,2,C2,D3,D1,NON-CONFORM: below safety factor,~1e4 DMD patients; pediatric; drug withdrawable
+A03,2013,FDA-CDER,Zohydro ER approval (hydrocodone),U3,3,2,1,C3,D4,D1,NON-CONFORM: below safety factor,opioid class-wide exposure; addiction partially irreversible; recallable
+A04,2023,FDA-CDER,Makena (17-OHPC) withdrawal,U1,1,1,1,C1,D5,D5,CONFORM (exact),narrow obstetric use; harms reversible; withdrawable
+A05,2005,FDA-CDER,Rofecoxib post-withdrawal panel (COX-2),U2,3,2,1,C3,D3,D1,NON-CONFORM: below safety factor,mass CV exposure; MI/stroke irreversible-in-event; recallable
+A06,2021,FDA-CDER,Molnupiravir EUA (COVID-19),U3,3,2,1,C3,D3 (R5),D2,CONFORM (R5 emergency),pandemic-scale use; embryo-fetal risk irreversible-in-event; EUA time-limited
+A07,2015,FDA-CDER,Flibanserin approval (Addyi),U2,2,1,1,C1,D1,D2,CONFORM (exceeds safety factor),large but opt-in population; harms reversible; REMS
+A08,2011,FDA-CDER,Bevacizumab breast-cancer indication withdrawal,U1,2,2,1,C2,D5,D5,CONFORM (exact),metastatic population; no survival benefit shown; withdrawable
+A09,2024,FDA-CDER,Donanemab full approval (Alzheimer's),U2,3,2,2,C3,D3,D1,NON-CONFORM: below safety factor,millions eligible; ARIA; withdrawable but class momentum
+A10,2010,FDA-CDER,Midodrine proposed withdrawal reversed,U3,1,1,1,C1,D2,D1,NON-CONFORM: below safety factor,small dependent population; harms reversible
+B01,2016,FDA-CDRH,"Pelvic mesh (POP) reclassified II->III, PMA required",U3,2,3,3,C4,D4,D4,CONFORM (exact),post-market correction of implanted device
+B02,2016,FDA-CDRH,Metal-on-metal hip PMA requirement (effective 2016),U3,2,3,3,C4,D4,D4,CONFORM (exact),post-market correction of implanted device
+B03,2002,FDA-CDER,Animal Rule established (efficacy from animals),U3,1,2,1,C1,D2,D1,NON-CONFORM: below safety factor,narrow stockpile use; countermeasure context
+B04,2017,FDA-CDER,GLP-1 RA class boxed warning (thyroid C-cell),U3,3,2,1,C3,D4,D2,NON-CONFORM: below safety factor,tens of millions on GLP-1 class; cancer signal latent; withdrawable
+B05,2025,FDA-CFSAN,FD&C Red No. 3 revoked (food 2027 / drugs 2028),U1,3,2,3,C4,D2,D5,STATUTE-EXCEPTION (undeclared),ubiquitous food supply; carcinogen class; exposure unrecallable while marketed
+B06,2024,FDA-CFSAN,BVO food authorization revoked,U3,3,2,3,C4,D5,D5,CONFORM (exact),beverage supply; thyroid toxicity; unrecallable exposure
+B07,2022,FDA-CFSAN,Titanium dioxide: no action (vs EU ban),U3,3,2,3,C4,D4,D1,NON-CONFORM: below safety factor,ubiquitous food additive; genotox class; unrecallable
+B08,2023,FDA-CFSAN,Aspartame: FDA publicly rejects IARC 2B,U3,3,2,3,C4,D4,D1,NON-CONFORM: below safety factor,ubiquitous sweetener; carcinogen class; unrecallable
+C01,2003,EPA-OPP,Atrazine re-registration,U3,3,3,3,C4,D4,D1,NON-CONFORM: below safety factor,national watershed exposure; endocrine/eco generational; environmental release
+C02,2020,EPA-OPP,Atrazine interim registration review (re-approved),U3,3,3,3,C4,D4,D1,NON-CONFORM: below safety factor,same
+C03,2020,EPA-OPP,Glyphosate interim decision 'not likely carcinogenic',U3,3,3,3,C4,D4,D1,NON-CONFORM: below safety factor,ubiquitous herbicide; latent carcinogen dispute; environmental release
+C04,2021,EPA-OPP,Chlorpyrifos all tolerances revoked,U3,3,3,3,C4,D4,D5,STATUTE-EXCEPTION (undeclared),food supply + children; neurodevelopment irreversible; environmental
+C05,2020,EPA-OPP,Neonicotinoid proposed interim decisions (5 AIs),U2,3,3,3,C4,D3,D2,NON-CONFORM: below safety factor,continental pollinator/ecosystem exposure; environmental release
+C06,2024,EPA-OW,Lead & Copper Rule Improvements: AL 15->10 ppb,U1,3,3,3,C4,D2,D2,CONFORM (exact),national drinking water; child neurodevelopment irreversible; infrastructure
+C07,2024,EPA-OW,"PFAS NPDWR: PFOA/PFOS MCL 4 ppt, MCLG 0",U2,3,3,3,C4,D3,D2,NON-CONFORM: below safety factor,national drinking water; persistent bioaccumulative; infrastructure
+C08,2026,EPA-OW,UCMR 6 proposed WITHOUT microplastics,U4,3,3,3,C4,D5,D4,NON-CONFORM: below safety factor,national water supply; unknown-persistent; monitoring declined
+C09,2010,EPA,Saccharin delisted as hazardous waste constituent,U3,3,2,3,C4,D4,D1,NON-CONFORM: below safety factor,ubiquitous sweetener; rat carcinogen; unrecallable while marketed
+C10,2026,EPA-OPP+SCOTUS,Glyphosate review still open; Durnell preemption,U3,3,3,3,C4,D4,D1,NON-CONFORM: below safety factor,as C03
+D01,2026,DEA/DOJ,Marijuana partial Schedule III (medical only),U3,3,2,2,C3,D4,D2,NON-CONFORM: below safety factor,national medical-use population; partially reversible; scheduling revisable
+D02,1977,FDA-CFSAN,Saccharin ban proposed -> Congress moratorium,U3,3,2,3,C4,D4,D4,CONFORM (exact),ubiquitous sweetener 1977; carcinogen class; unrecallable exposure
+B00,1996,FDA-CDRH,Pelvic mesh 510(k) clearances (predicate chain),U4,2,3,3,C4,D5,D1,NON-CONFORM: below safety factor,~1e6 implanted/yr-class device; permanent injury; implant irretrievable
+B00b,2000,FDA-CDRH,Metal-on-metal hip 510(k) clearances,U4,2,3,3,C4,D5,D1,NON-CONFORM: below safety factor,~1e6 MoM hips; metallosis permanent; implant
