@@ -1,0 +1,42 @@
+E001 | A | authority | none | FD&C Act section 506(c) (21 U.S.C. 356(c)) authorizes accelerated approval on a surrogate endpoint reasonably likely to predict clinical benefit
+E002 | A | authority | none | 21 CFR Part 314 Subpart H (314.500-314.560) is the accelerated approval regulation for drugs; 314.530 provides withdrawal procedures
+E003 | A | authority | none | 21 CFR Part 601 Subpart E (601.40-601.46) is the accelerated approval regulation for biologics; 601.43 withdrawal procedures
+E004 | A | authority | none | FDA guidance "Expedited Programs for Serious Conditions - Drugs and Biologics" issued May 2014
+E005 | A | authority | none | FDORA (Consolidated Appropriations Act 2023, Dec 2022) section 3210 added expedited withdrawal procedures for accelerated approvals
+E006 | A | authority | none | FD&C Act section 505(d) substantial evidence standard; 21 CFR 314.126 adequate and well-controlled studies
+E007 | A | authority | none | FD&C Act section 505-1 (FDAAA 2007) authorizes REMS
+E008 | A | authority | none | FD&C Act section 564 (21 U.S.C. 360bbb-3) Emergency Use Authorization; HHS COVID-19 EUA declaration March 27, 2020
+E009 | A | authority | none | molnupiravir EUA issued December 23, 2021
+E010 | A | authority | none | 21 CFR Part 14 governs FDA public advisory committees; advisory committee votes are non-binding recommendations
+E011 | A | authority | none | midodrine (ProAmatine) approved 1996 under accelerated approval (Subpart H); FDA proposed withdrawal August 2010
+E012 | A | authority | none | Animal Rule codified at 21 CFR 314.600-314.650 (drugs) and 601.90-601.95 (biologics), final rule May 31, 2002 (67 FR 37988)
+E013 | A | authority | none | FDA guidance "Product Development Under the Animal Rule" final October 2015
+E014 | A | authority | none | FD&C Act section 505(o)(4) safety labeling changes; boxed warning content at 21 CFR 201.57(c)(1)
+E015 | A | authority | none | FD&C Act section 510(k) premarket notification; 21 CFR 807 Subpart E; substantial equivalence standard
+E016 | A | authority | none | FD&C Act section 513 device classification; FDASIA 2012 section 608 changed reclassification to administrative order
+E017 | A | authority | none | FDA final order January 2016 reclassified surgical mesh for transvaginal pelvic organ prolapse repair from class II to class III (21 CFR 884.5980)
+E018 | A | authority | none | FDA final order February 2016 required PMA for metal-on-metal total hip systems (21 CFR 888.3330)
+E019 | A | authority | none | FD&C Act section 721 color additives; Delaney Clause for color additives at section 721(b)(5)(B); FD&C Red No. 3 listed at 21 CFR 74.303 and 81.10/82 provisional listing history
+E020 | A | authority | none | FD&C Act section 409 food additives; Delaney Clause at section 409(c)(3)(A)
+E021 | A | authority | none | BVO listed as interim food additive at 21 CFR 180.30; revocation final rule July 2024
+E022 | A | authority | none | titanium dioxide color additive listing 21 CFR 73.575; EU Commission Regulation (EU) 2022/63 removed E171
+E023 | A | authority | none | aspartame food additive regulation 21 CFR 172.804
+E024 | A | authority | none | saccharin interim food additive 21 CFR 180.37; Saccharin Study and Labeling Act (Pub. L. 95-203, November 1977)
+E025 | A | authority | none | FIFRA section 3(g) registration review; 40 CFR Part 155 Subpart C; interim registration review decisions
+E026 | A | authority | none | atrazine Interim Reregistration Eligibility Decision (IRED) January 2003 under FIFRA section 4
+E027 | A | authority | none | FFDCA section 408 (21 U.S.C. 346a) pesticide tolerances; FQPA 1996 standard "reasonable certainty that no harm will result"
+E028 | A | authority | none | chlorpyrifos tolerance revocation final rule August 30, 2021 (86 FR 48315)
+E029 | A | authority | none | Ninth Circuit LULAC v. Regan decided April 29, 2021 ordered EPA to act on chlorpyrifos tolerances
+E030 | A | authority | none | Eighth Circuit Red River Valley Sugarbeet Growers Association v. Regan decided November 2, 2023 vacated the chlorpyrifos tolerance revocation
+E031 | A | authority | none | Ninth Circuit NRDC v. EPA decided June 17, 2022 vacated human health portion of glyphosate interim decision
+E032 | A | authority | none | FIFRA section 24(b) uniformity of labeling (state labeling requirements in addition to or different from federal)
+E033 | A | authority | none | SDWA section 1412 national primary drinking water regulations; Lead and Copper Rule Improvements final rule October 2024 (89 FR 86418)
+E034 | A | authority | none | PFAS NPDWR final rule April 2024 (89 FR 32532)
+E035 | A | authority | none | SDWA section 1445(a)(2) unregulated contaminant monitoring (UCMR); 40 CFR 141.40; Contaminant Candidate List under SDWA section 1412(b)(1)
+E036 | A | authority | none | saccharin removed from RCRA hazardous waste lists (U202) and CERCLA hazardous substances, final rule December 17, 2010 (75 FR 78918)
+E037 | A | authority | none | Controlled Substances Act section 201 (21 U.S.C. 811) scheduling; 21 CFR 1308
+E038 | A | authority | none | OSH Act 1970 section 6(b) (29 U.S.C. 655) standard setting; section 5(a)(1) general duty clause
+E039 | A | authority | none | Denmark Act on Workers' Compensation and the Occupational Diseases Committee recognized breast cancer after night work
+E040 | A | authority | none | Germany SGB VII section 9 occupational disease list (Berufskrankheiten-Verordnung); Medical Expert Advisory Board (Aerztlicher Sachverstaendigenbeirat)
+E041 | A | funding | none | FDA human drug review funded in part by PDUFA user fees (since 1992); devices by MDUFA fees (since 2002); food program has no comparable user fee
+E042 | A | funding | none | EPA pesticide registration funded in part by PRIA fees (since 2004) and FIFRA maintenance fees

@@ -1,0 +1,35 @@
+F001 | A | actor | none | aducanumab approved June 7, 2021 by FDA CDER; Peripheral and Central Nervous System Drugs (PCNS) Advisory Committee met November 6, 2020; Patrizia Cavazzoni was CDER director; Janet Woodcock acting FDA commissioner
+F002 | A | conflict | none | aducanumab: House Oversight and Energy & Commerce committees report (December 2022) found FDA-Biogen collaboration "atypical"; FDA official Billy Dunn worked closely with Biogen
+F003 | A | conflict | none | three PCNS advisory committee members resigned after the aducanumab approval (Aaron Kesselheim, David Knopman, Joel Perlmutter)
+F004 | A | actor | none | eteplirsen approved September 19, 2016; CDER director Janet Woodcock overruled the review team; FDA Commissioner Robert Califf decided the scientific dispute appeal in favor of approval; advisory committee met April 25, 2016 and voted 7-6 that the evidence did not establish effectiveness
+F005 | A | conflict | none | eteplirsen: Woodcock memo or statements referenced Sarepta's financial need ("Sarepta needed to be capitalized") in the approval dispute
+F006 | A | actor | none | Zohydro ER approved October 25, 2013 by FDA; Anesthetic and Analgesic Drug Products Advisory Committee voted 11-2 against in December 2012; sponsor Zogenix
+F007 | A | actor | none | Makena: Commissioner Robert Califf and Chief Scientist Namandje Bumpus issued final decision to withdraw April 6, 2023 after an October 2022 hearing at which an advisory committee voted 14-1 for withdrawal; sponsor Covis
+F008 | A | actor | none | rofecoxib: February 2005 joint meeting of Arthritis Advisory Committee and Drug Safety and Risk Management Advisory Committee voted 17-15 that Vioxx could return to market
+F009 | A | conflict | none | rofecoxib/Vioxx 2005 panel: Center for Science in the Public Interest analysis found 10 of 32 panelists had industry ties; without them the Vioxx vote would have been against return
+F010 | A | actor | none | molnupiravir: FDA Antimicrobial Drugs Advisory Committee met November 30, 2021 (13-10); EUA issued December 23, 2021; sponsors Merck and Ridgeback
+F011 | A | actor | none | flibanserin approved August 18, 2015; joint advisory committee June 4, 2015 voted 18-6; sponsor Sprout Pharmaceuticals; CDER director Janet Woodcock
+F012 | A | conflict | none | flibanserin: "Even the Score" advocacy campaign was funded in part by Sprout Pharmaceuticals
+F013 | A | actor | none | bevacizumab breast indication: FDA Commissioner Margaret Hamburg revoked the indication November 18, 2011 after a June 2011 hearing; ODAC voted 12-1 in July 2010 (and 6-0 at the 2011 hearing); sponsor Genentech
+F014 | A | actor | none | donanemab: PCNS Advisory Committee June 10, 2024 voted 11-0; FDA approved July 2, 2024; sponsor Eli Lilly
+F015 | A | actor | none | midodrine: FDA CDER proposed withdrawal August 2010 (Shire's ProAmatine and generics) and reversed course in September 2010
+F016 | A | actor | none | pelvic mesh: FDA Obstetrics and Gynecology Devices Panel met September 2011 and recommended reclassification; FDA ordered manufacturers (Boston Scientific, Coloplast) to stop selling transvaginal POP mesh April 16, 2019
+F017 | A | actor | none | metal-on-metal hips: FDA Orthopaedic and Rehabilitation Devices Panel met June 27-28, 2012 on metal-on-metal hips; DePuy ASR recall August 2010
+F018 | A | actor | none | GLP-1 thyroid C-cell boxed warning first required for liraglutide (Victoza) at approval January 25, 2010
+F019 | A | actor | none | Red No. 3: FDA revoked authorization January 15, 2025 in response to a 2022 color additive petition led by Center for Science in the Public Interest
+F020 | A | actor | none | BVO: FDA final rule published July 3, 2024, effective August 2, 2024; California banned BVO in 2023 (AB 418)
+F021 | A | actor | none | atrazine: Center for Regulatory Effectiveness filed Data Quality Act / Information Quality Act petition (2002) challenging Hayes frog studies; registrant Syngenta
+F022 | A | conflict | none | atrazine: Syngenta funded the atrazine ecological risk assessment panel / EcoRisk studies used by EPA; Hayes had been a Syngenta-funded researcher
+F023 | A | conflict | none | glyphosate: EPA official Jess Rowland (chair of Cancer Assessment Review Committee) communications with Monsanto disclosed in Monsanto Papers litigation
+F024 | A | actor | none | chlorpyrifos revocation signed by EPA Administrator Michael Regan August 2021; registrant Corteva (Dow) stopped producing chlorpyrifos 2020
+F025 | A | actor | none | neonicotinoid proposed interim decisions issued by EPA Office of Pesticide Programs January 30, 2020; registrants Bayer, Syngenta, Valent
+F026 | A | actor | none | Lead and Copper Rule Improvements signed by EPA Administrator Michael Regan October 8, 2024
+F027 | A | actor | none | PFAS NPDWR announced April 10, 2024 by EPA Administrator Michael Regan; EPA Administrator Lee Zeldin announced May 2025 intent to rescind PFHxS, PFNA, HFPO-DA and hazard-index limits and extend PFOA/PFOS compliance to 2031
+F028 | A | actor | none | UCMR 6 proposal July 2026 signed by EPA Administrator Lee Zeldin; seven governors petitioned EPA to monitor microplastics
+F029 | A | actor | none | saccharin 1977: FDA Commissioner Donald Kennedy proposed the ban March 9, 1977; Congress passed Saccharin Study and Labeling Act November 1977
+F030 | A | actor | none | marijuana Schedule III order 2026: Attorney General and DEA Administrator; executive order by President Trump (December 2025) directed expedited rescheduling
+F031 | A | actor | none | glyphosate review 2026: EPA-HHS partnership announced; Bayer sought Supreme Court review in Monsanto v. Durnell; Solicitor General supported Bayer's position
+F032 | A | conflict | none | FDA advisory committee members' conflict-of-interest waivers under 18 U.S.C. 208 are posted per meeting on fda.gov; check for the November 6, 2020 PCNS aducanumab meeting whether any waiver was granted
+F033 | A | funding | none | PDUFA user fees fund a majority of FDA human drug review costs (about two-thirds of the human drug review program)
+F034 | A | actor | none | night shift: OSHA has not issued a standard on shift work; NIOSH publishes guidance on shift work and long hours
+F035 | A | actor | none | Denmark National Board of Industrial Injuries (Arbejdsskadestyrelsen) awarded compensation to 38 women with breast cancer after night work (2008-2009)
