@@ -75,3 +75,5 @@ END | hsdd_efficacy | hypoactive sexual desire disorder | MONDO
 END | covid_outcomes | COVID-19 hospitalization or death | MONDO; NCIT
 END | nerve_agent_survival | survival after nerve agent exposure (animal efficacy) | any
 END | pain_mmj | chronic pain (medical marijuana indication) | HPO; MONDO
+SUB | pentachlorophenol | pentachlorophenol | DTXSID; CAS
+SUB | psilocybin | psilocybin | DTXSID; UNII
