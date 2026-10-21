@@ -234,7 +234,7 @@ ACTORS += [
 AUTHORITIES += [
     ("AUTH-21CFR314.530", "regulation", "21 CFR 314.530", "withdrawal of accelerated approval (drugs)", "G010"),
     ("AUTH-CSA-201B", "statute", "Controlled Substances Act sec. 201(b), 21 U.S.C. 811(b)", "HHS scientific and medical evaluation binding on scientific matters", None),
-    ("AUTH-81FR53767", "order", "81 FR 53767 (August 12, 2016)", "denial of petition to reschedule marijuana", "G018"),
+    ("AUTH-81FR53767", "order", "81 FR 53767 (August 12, 2016)", "denial of petition to reschedule marijuana", "G036"),
     ("AUTH-DOJ-2026-SCHIII", "order", "DOJ final order, April 23, 2026", "marijuana in FDA-approved products and under state medical license to Schedule III", "G019"),
     ("AUTH-87FR6535", "regulation", "87 FR 6535 (February 4, 2022)", "registration review interim decisions and final decision (pentachlorophenol)", "G002"),
     ("AUTH-87FR5815", "regulation", "87 FR 5815 (February 2, 2022)", "registration review interim decisions", "G003"),

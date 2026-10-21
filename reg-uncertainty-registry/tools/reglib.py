@@ -5,7 +5,9 @@ reglib.py -- shared loader for the regulatory uncertainty registry.
 
 Everything every tool needs, in one place, so no tool re-implements it:
 
-    pins          source/PINS.json (verbatim bundle) and registry/MANIFEST.json
+    pins          source/PINS.json (first landing), bundle/MANIFEST.sha256
+                  (consolidated bundle, itself pinned in bundle_pins.json) and
+                  registry/MANIFEST.json
                   (registry files) are re-hashed on every load; a mismatch is
                   returned, never silently ignored
     vocabulary    schema/vocabulary.json, the one source of every enum
@@ -34,11 +36,15 @@ FOLDER = os.path.dirname(HERE)
 REPO = os.path.dirname(FOLDER)
 
 PINS = os.path.join(FOLDER, "source", "PINS.json")
+BUNDLE_PINS = os.path.join(FOLDER, "bundle_pins.json")
+BUNDLE = os.path.join(FOLDER, "bundle")
+BUNDLE_MANIFEST = os.path.join(BUNDLE, "MANIFEST.sha256")
 MANIFEST = os.path.join(FOLDER, "registry", "MANIFEST.json")
 VOCAB = os.path.join(FOLDER, "schema", "vocabulary.json")
 SCHEMA = os.path.join(FOLDER, "schema", "registry.schema.json")
 REGDIR = os.path.join(FOLDER, "registry")
-SRCDIR = os.path.join(FOLDER, "source", "kimmy_v1")
+SRCDIR = os.path.join(BUNDLE, "source", "current")
+OLDDIR = os.path.join(BUNDLE, "source", "superseded")
 
 
 class RegistryError(Exception):
@@ -114,17 +120,53 @@ def cohen_kappa(c1, c2):
 
 # ---------------------------------------------------------------- pins
 
-def check_pins(pins_path=PINS, base=FOLDER):
-    """Return a list of (path, want, got) for every pinned file whose hash
-    differs or that is missing. Empty list = every pin holds."""
-    pins = load_json(pins_path)
+def check_pins(pins_path=PINS, base=FOLDER, bundle_pins=BUNDLE_PINS,
+               bundle_manifest=BUNDLE_MANIFEST):
+    """Return (path, want, got) for every pinned input whose hash differs or
+    that is missing. Three pin families: source/PINS.json (the first
+    landing, kept as configuration history), bundle/MANIFEST.sha256 (the
+    consolidated bundle's own manifest; entries bundle_pins.json lists as
+    not_in_tree are skipped), and bundle_pins.json's pin of the manifest
+    itself. Empty list = every pin holds."""
     bad = []
+    pins = load_json(pins_path)
     for relpath, want in sorted(pins["files"].items()):
         p = os.path.join(base, relpath)
         got = sha256_file(p) if os.path.exists(p) else "MISSING"
         if got != want:
             bad.append((relpath, want, got))
+    bp = load_json(bundle_pins)
+    mrel = bp["manifest"]["path"]
+    got = sha256_file(bundle_manifest) if os.path.exists(bundle_manifest) else "MISSING"
+    if got != bp["manifest"]["sha256"]:
+        bad.append((mrel, bp["manifest"]["sha256"], got))
+    for relpath, want in bundle_manifest_entries(bundle_manifest):
+        if relpath in bp["not_in_tree"]:
+            continue
+        p = os.path.join(os.path.dirname(bundle_manifest), relpath)
+        got = sha256_file(p) if os.path.exists(p) else "MISSING"
+        if got != want:
+            bad.append(("bundle/" + relpath, want, got))
     return bad
+
+
+def bundle_manifest_entries(path=BUNDLE_MANIFEST):
+    out = []
+    with open(path, "r", encoding="utf-8") as fh:
+        for line in fh:
+            line = line.strip()
+            if not line:
+                continue
+            want, relpath = line.split(None, 1)
+            out.append((relpath[2:] if relpath.startswith("./") else relpath, want))
+    return out
+
+
+def pinned_count():
+    pins = load_json(PINS)
+    bp = load_json(BUNDLE_PINS)
+    n_b = sum(1 for r, _ in bundle_manifest_entries() if r not in bp["not_in_tree"])
+    return len(pins["files"]) + 1 + n_b
 
 
 def check_manifest(manifest_path=MANIFEST, base=FOLDER):
@@ -146,10 +188,10 @@ def pin_report():
     """One line per pin family, for every tool's header."""
     sp = check_pins()
     mp = check_manifest()
-    pins = load_json(PINS)
+    n_in = pinned_count()
     man = load_json(MANIFEST) if os.path.exists(MANIFEST) else {"files": {}}
-    lines = ["pins   source %d/%d hold   registry %d/%d hold"
-             % (len(pins["files"]) - len(sp), len(pins["files"]),
+    lines = ["pins   inputs %d/%d hold   registry %d/%d hold"
+             % (n_in - len(sp), n_in,
                 len(man["files"]) - len(mp), len(man["files"]))]
     for relpath, want, got in sp + mp:
         lines.append("PIN MISMATCH  %s  want %s  got %s"

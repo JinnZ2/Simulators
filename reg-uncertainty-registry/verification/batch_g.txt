@@ -29,3 +29,7 @@ G032 | R | R14 | none | FDA final order published February 18, 2016 requiring PM
 G033 | R | R14 | none | glyphosate interim registration review decision signed January 22, 2020 (released January 2020)
 G034 | R | R8 | none | psilocybin is in Schedule I under the Controlled Substances Act (1970) and remained there as of 2025; a rescheduling petition (Aggarwal) was denied and the Ninth Circuit asked DEA to explain
 G035 | R | R14 | none | FDA cleared the first surgical mesh for SUI in 1996 (ProteGen) and the first surgical mesh specifically for POP in 2002
+G036 | R | R8 | none | DEA denied the petition to reschedule marijuana by letter dated July 19, 2016, published at 81 FR 53767 (August 12, 2016); the HHS scientific and medical evaluation was performed by FDA in consultation with NIDA
+G037 | R | R8 | none | FDA granted breakthrough therapy designation to COMPASS Pathways' psilocybin program (treatment-resistant depression) in October 2018 and to Usona Institute's (major depressive disorder) in 2019; psilocybin was in Schedule I at those dates
+G038 | R | R14 | none | bevacizumab (Avastin) metastatic breast cancer accelerated approval February 2008; indication withdrawn November 18, 2011 after an ODAC 6-0 vote
+G039 | R | R14 | none | FDA final order effective February 18, 2016 requiring premarket approval for metal-on-metal total hip systems (Docket FDA-2011-N-0661); PMAs due May 18, 2016
