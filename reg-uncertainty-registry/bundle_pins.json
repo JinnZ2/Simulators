@@ -1,0 +1,53 @@
+{
+ "_note": "Pins for the consolidated WO-REG-1 bundle (WO-REG-1 + 1a + 1b), landed 2026-10-20 beside the earlier inputs (source/, pinned by source/PINS.json). bundle/MANIFEST.sha256 is the bundle's own manifest and is re-checked on every run; it is pinned here so an edit to it is also caught. PNGs are not checked in (text-only folder, same decision as the first landing); their hashes are carried and the charts are renderings of the CSVs the registry reads.",
+ "bundle": {
+  "in_tree": false,
+  "landed": "2026-10-20",
+  "landed_at": "bundle/",
+  "name": "WO-REG-1_bundle.zip",
+  "sha256": "f6265e9e2a513f5166740ab60f260392e307221c1cefcde4f2d2445a29d7a0ed"
+ },
+ "identical_to_earlier_landing": {
+  "bundle/reviews/REVIEW_v1.md": "source/REVIEW_v1.md",
+  "bundle/source/superseded/v1/annex_a_regrading.csv": "source/kimmy_v1/annex_a_regrading.csv",
+  "bundle/source/superseded/v1/coded_decisions.csv": "source/kimmy_v1/coded_decisions.csv",
+  "bundle/source/superseded/v1/direction_of_uncertainty_report.md": "source/kimmy_v1/direction_of_uncertainty_report.md",
+  "bundle/source/superseded/v1/regulatory_uncertainty_standard_draft.md": "source/kimmy_v1/regulatory_uncertainty_standard_draft.md"
+ },
+ "manifest": {
+  "entries": 23,
+  "path": "bundle/MANIFEST.sha256",
+  "sha256": "4dc584bdfa4e89fb61cb1a74c830e4d3c65c101cf99ad44af07cfc7c908a3898"
+ },
+ "not_in_tree": {
+  "source/current/img/chart1_asymmetry.png": {
+   "bytes": 46269,
+   "sha256": "d7175c0439e1bb211c7ffbe2ed11c8d3bd6a2d69bfb422cda26a326ddc00b184"
+  },
+  "source/current/img/chart2_costbearer.png": {
+   "bytes": 44484,
+   "sha256": "319ae931aeb70937f8313b9aeca6eb8c3c70654193eafcd52ff0b560ac21cd81"
+  },
+  "source/current/img/chart3_dumbbell.png": {
+   "bytes": 59240,
+   "sha256": "4f847591ea2a9e7183c6eb0b1b355453fbb71a1967d054e773990985d1f6683c"
+  },
+  "source/current/img/chart4_forcing.png": {
+   "bytes": 71690,
+   "sha256": "592e4bbca333a069217bc9038e777c224ace6ca6442effed5f710ffc8e816352"
+  },
+  "source/current/img/chart5_conformity.png": {
+   "bytes": 43946,
+   "sha256": "2dd230ca0356abe31b82b983b424978f7df278ba2a742e3eb767cd8ef2db6db8"
+  },
+  "source/current/img/chart6_sweep.png": {
+   "bytes": 46538,
+   "sha256": "e4625c2196b8d87a14ecf51c1843c897fa759c0ebcc171942c036df034ef3ac1"
+  }
+ },
+ "supersedes": {
+  "bundle_sha256": "dcaa6d8bb90eb09e541de498a1baad329de3bb272470527298a484ccf58e5aca",
+  "change": "CHG-INPUT-01",
+  "pins": "source/PINS.json"
+ }
+}

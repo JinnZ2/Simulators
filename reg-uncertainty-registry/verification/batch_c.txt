@@ -1,0 +1,30 @@
+V054 | X | 6 | none | EU non-renewal of chlorpyrifos approval (decision 2020, approval expired Jan 2020)
+V055 | K | 5.1 | https://www.epa.gov/pollinator-protection/epa-actions-protect-pollinators | 2020 EPA proposed interim decisions for five neonicotinoids (imidacloprid, clothianidin, thiamethoxam, dinotefuran, acetamiprid) with mitigation
+V056 | X | 5.1 | https://food.ec.europa.eu/plants/pesticides/approval-active-substances-safeners-and-synergists/renewal-approval/neonicotinoids_en | EU 2018 full outdoor ban on imidacloprid, clothianidin, thiamethoxam
+V057 | K | 5.1 | https://www.epa.gov/ground-water-and-drinking-water/lead-and-copper-rule-improvements | LCRI (Oct 2024): lead action level 15 -> 10 ppb; lead service line replacement within 10 years; MCLG remains zero
+V058 | K | 5.1 | https://crystalquest.com/blogs/contaminants/lead-and-copper-rule-explained | secondary summary of LCRI
+V059 | K | 5.1 | https://www.epa.gov/sdwa/and-polyfluoroalkyl-substances-pfas | April 2024 PFAS NPDWR: PFOA and PFOS MCL 4.0 ppt, MCLG zero; MCLs for six PFAS
+V060 | C | C07 | none | EPA proposed (2025-2026) rescinding the limits for four of six PFAS (PFHxS, PFNA, HFPO-DA, mixture hazard index) while keeping PFOA/PFOS
+V061 | K | 5.1 | https://www.crowell.com/en/insights/client-alerts/ucmr-6-epa-sidesteps-microplastics-for-now | Crowell: UCMR 6 sidesteps microplastics
+V062 | K | 5.1 | https://www.lowenstein.com/news-insights/publications/client-alerts/multistate-petition-to-usepa-to-monitor-for-microplastics-in-drinking-water-may-elevate-regulatory-focus-environmental | multistate (seven-governor) petition to EPA to monitor microplastics in drinking water
+V063 | K | 5.1 | https://www.newslow.com/post/history-and-pros-cons-of-saccharin | 1977 FDA proposed saccharin ban after Canadian rat bladder study; Congress passed moratorium (Saccharin Study and Labeling Act) with warning label; NTP removed saccharin from Report on Carcinogens in 2000; warning label requirement repealed 2000; EPA delisted saccharin as hazardous constituent 2010
+V064 | K | 5.1 | https://www.law.cornell.edu/supremecourt/text/24-1068 | LII copy of Monsanto v. Durnell opinion
+V065 | K | 5.1 | https://pmc.ncbi.nlm.nih.gov/articles/PMC8783595/ | Schedule I research barriers: single domestic (NIDA/University of Mississippi) source, DEA Schedule I registration, FDA IND
+V066 | K | 5.1 | https://www.gibsondunn.com/dea-downschedules-state-medical-marijuana-to-schedule-iii-expedited-hearing-set-to-consider-broader-rescheduling/ | DEA down-scheduled state medical marijuana to Schedule III; expedited hearing set for broader rescheduling
+V067 | K | 7 | https://microplasticsapp.com/blog/epa-microplastics-drinking-water | blog analysis of EPA microplastics drinking-water decision
+V068 | S | 2 | https://www.iec.ch/functionalsafety/explained/ | IEC 61508 safety integrity levels scale assurance with consequence
+V069 | S | 2 | https://www.gradeworkinggroup.org/ | GRADE approach rates certainty of evidence
+V070 | S | 2 | https://www.ipcc.ch/site/assets/uploads/2017/08/AR5_Uncertainty_Guidance_Note.pdf | Mastrandrea et al. 2010 IPCC AR5 guidance note on consistent treatment of uncertainties
+V071 | S | 2 | https://www.nrc.gov/reading-rm/doc-collections/cfr/part050/part050-appb.html | 10 CFR Part 50 Appendix B quality assurance criteria
+V072 | S | 2 | https://www.nature.com/articles/sdata201618 | Wilkinson et al. 2016 FAIR Guiding Principles, Scientific Data
+V073 | C | A02 | none | eteplirsen 2016: advisory committee 7-6 against; Woodcock overrode review team; quote about Sarepta needing to be capitalized
+V074 | C | A10 | none | midodrine: FDA proposed withdrawal in 2010 for missing post-market confirmatory studies, reversed after patient/prescriber outcry
+V075 | C | A03 | none | Zohydro ER 2013 advisory committee voted 11-2 against; FDA approved anyway
+V076 | C | A07 | none | flibanserin rejected twice (2010, 2013) before 2015 approval
+V077 | C | D01 | none | partial Schedule III move for medical marijuana proceeded via executive order
+V110 | X | 6 | none | IARC 2023 classified aspartame Group 2B; JECFA kept ADI 40 mg/kg bw
+V111 | X | 6 | none | EU Red No. 3 (E127 erythrosine) permitted only in cocktail and candied cherries
+V112 | X | 6 | none | EU Drinking Water Directive 2020/2184 PFAS parametric values: sum of 20 PFAS 0.1 ug/L and PFAS total 0.5 ug/L
+V113 | X | 6 | none | EU drinking water directive includes a watch-list mechanism and microplastics methodology
+V114 | X | 6 | none | EU permits saccharin (E954) with an ADI
+V115 | X | 6 | none | EU banned atrazine 2004 (non-inclusion decision 2004/248/EC)

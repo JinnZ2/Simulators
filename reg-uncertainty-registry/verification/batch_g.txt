@@ -1,0 +1,26 @@
+G001 | R | R6 | https://epa.gov/pesticides/epa-requires-cancellation-pentachlorophenol-protect-human-health | EPA release titled "EPA Requires Cancellation of Pentachlorophenol to Protect Human Health" (2022): cancellation of all pentachlorophenol uses with a phase-out over about 5 years
+G002 | K | C2 | none | Federal Register 87 FR 6535 (February 4, 2022) announced registration review decisions including a final decision for pentachlorophenol plus interim decisions for creosote and chromated arsenicals
+G003 | K | C2 | none | Federal Register 87 FR 5815 (February 2, 2022) announced registration review interim decisions for about 15 pesticides including amitraz, metaldehyde, rotenone, sodium cyanide, sodium fluoroacetate
+G004 | K | C2 | none | Federal Register 87 FR 25266 (April 28, 2022) announced registration review interim/final decisions including chlormequat chloride, difenoconazole, oxadiazon, and amended interim decisions for clopyralid and permethrin
+G005 | K | C2 | none | Federal Register 87 FR 48018 (August 5, 2022) and 87 FR 64484 (October 25, 2022) announced registration review decisions (laminarin, linalool; Pasteuria, Pseudomonas syringae, trimethylamine) and case closures (e.g. nabam, cryolite, furfural)
+G006 | R | R14 | none | glyphosate: EPA interim registration review decision January 2020; Ninth Circuit (NRDC v. EPA) June 17, 2022 vacated the human-health portion; EPA withdrew the glyphosate interim decision in September 2022
+G007 | R | R14 | none | glyphosate Ninth Circuit 2022 petitioners included Natural Resources Defense Council, Rural Coalition, Pesticide Action Network, Center for Food Safety
+G008 | K | 2 | none | chlorpyrifos: EPA final rule revoking all food tolerances published August 30, 2021 (effective February 28, 2022), following the Ninth Circuit order in LULAC v. Regan (April 29, 2021)
+G009 | K | 2 | none | chlorpyrifos: Eighth Circuit Red River Valley Sugarbeet Growers Association v. Regan, November 2, 2023, vacated the tolerance revocation; petitioners were grower and farm groups
+G010 | K | 2 | none | midodrine: FDA proposed withdrawal of approval in August 2010 because required post-approval (subpart H) studies were not completed, then in September 2010 allowed continued marketing after patient and physician objections
+G011 | K | 2 | none | saccharin: FDA proposed ban announced March 9, 1977; Saccharin Study and Labeling Act enacted November 23, 1977 imposed a moratorium and warning label
+G012 | R | R11 | none | Denmark: National Board of Industrial Injuries (Arbejdsskadestyrelsen) recognised breast cancer after long-term night work as an occupational disease and paid compensation (2008 onward; e.g. 38 women)
+G013 | R | R11 | none | Dtsch Arztebl review "Shift Work and Cancer: The Evidence and the Challenge" states "Monetary compensation has already been paid for such cases in at least one country (Denmark)"
+G014 | R | R14 | none | pelvic mesh: FDA final orders January 2016 reclassified surgical mesh for transvaginal pelvic organ prolapse repair to class III; FDA ordered manufacturers to stop selling it April 16, 2019
+G015 | R | R14 | none | pelvic mesh: FDA 2011 safety communication reported 2,874 adverse event reports for urogynecologic mesh 2008-2010 (1,503 associated with pelvic organ prolapse repair)
+G016 | R | R14 | none | pelvic mesh for POP first cleared via 510(k) in 2002 (sling for SUI 1996)
+G017 | R | R14 | none | metal-on-metal hip: FDA final order February 18, 2016 requiring premarket approval applications for metal-on-metal total hip systems; DePuy ASR recall August 2010 of about 93,000 implants worldwide
+G018 | R | R8 | none | cannabis: DEA denied petitions to reschedule marijuana in 2001, July 2011, and August 2016, keeping it in Schedule I
+G019 | R | R8 | none | cannabis: HHS recommended Schedule III in August 2023; DEA proposed rule May 2024; a 2026 order placed FDA-approved marijuana products in Schedule III and the rescheduling was subsequently paused or stayed
+G020 | R | R8 | none | psilocybin has been in Schedule I since the Controlled Substances Act (1970); FDA granted breakthrough therapy designation to COMPASS Pathways (2018) and Usona Institute (2019) psilocybin programs
+G021 | R | R8 | none | FDA publicly released more than 200 complete response letters (CRLs) issued 2020-2024 in July 2025
+G022 | R | R8 | none | FDA does not publicly disclose clinical hold decisions under 21 CFR 312.42; disclosure is by sponsors
+G023 | R | R9 | none | PFOA replacement GenX (HFPO-DA): EPA 2021 human health toxicity assessment found GenX chemicals toxic at low doses; 2024 PFAS drinking water rule set HFPO-DA MCL at 10 ppt
+G024 | R | R6 | none | BVO: California AB 418 (2023, California Food Safety Act) banned brominated vegetable oil in food effective 2027, before FDA's July 2024 final rule revoking BVO authorization
+G025 | K | 2 | none | Red No. 3: FDA revoked authorization January 15, 2025 under the Delaney Clause in response to a 2022 petition (CSPI and others); food deadline January 15, 2027, ingested drugs January 18, 2028
+G026 | R | R14 | none | aducanumab: Biogen discontinued Aduhelm in 2024 (January 31, 2024 announcement)

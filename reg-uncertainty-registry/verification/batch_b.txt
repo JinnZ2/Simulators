@@ -1,0 +1,22 @@
+V032 | K | 5.1 | https://www.fda.gov/emergency-preparedness-and-response/preparedness-research/animal-rule-summary | FDA Animal Rule (2002) allows approval based on animal efficacy when human efficacy trials are not ethical or feasible
+V033 | C | B03 | https://www.fda.gov/drugs/nda-and-bla-approvals/animal-rule-approvals | first Animal Rule approval: pyridostigmine bromide (2003) for soman nerve agent pretreatment
+V034 | K | 5.1 | https://ro.co/safety-info/glp1/ | GLP-1 RA boxed warning for thyroid C-cell tumors in rodents, human relevance not determined; contraindicated in MTC/MEN2
+V035 | C | B04 | https://acibademinternational.com/blog/ozempic-and-thyroid-cancer-what-the-boxed-warning-says-and-what-human-data-show/ | GLP-1 class boxed warning year: coded 2017 in the dataset (check when the class boxed warning first issued; liraglutide 2010?)
+V036 | C | B04 | none | EMA PRAC 2023 found no causal link between GLP-1 RAs and thyroid cancer
+V037 | K | 5.1 | https://www.fda.gov/food/food-ingredients-packaging/fda-encourages-food-manufacturers-accelerate-phasing-out-use-fdc-red-no-3-foods-2027-deadline | FD&C Red No. 3 authorization revoked (Jan 2025) under the Delaney Clause; food deadline January 2027, ingested drugs January 2028; "causes cancer in male laboratory rats"
+V038 | C | B05 | https://www.fda.gov/food/food-ingredients-packaging/fda-encourages-food-manufacturers-accelerate-phasing-out-use-fdc-red-no-3-foods-2027-deadline | FDA states the rat mechanism does not occur in humans / not human-relevant
+V039 | K | 5.1 | https://www.fda.gov/food/food-additives-petitions/brominated-vegetable-oil-bvo | BVO authorization revoked 2024 (final rule effective August 2, 2024) on FDA's own rodent thyroid studies
+V040 | C | B06 | none | BVO banned in UK/EU/Japan decades before the US revocation
+V041 | K | 5.1 | https://usrtk.org/chemicals/titanium-dioxide/ | EFSA 2021 could not exclude genotoxicity of E171; EU banned E171 in food 2022; FDA no action
+V042 | K | 6 | https://www.sciencedirect.com/science/article/abs/pii/S0300483X25000459 | Toxicology 2025 article on titanium dioxide genotoxicity / regulatory divergence
+V043 | K | 5.1 | https://www.fda.gov/food/food-additives-petitions/aspartame-and-other-sweeteners-food | FDA disagreed with IARC 2B classification of aspartame (2023), citing "significant shortcomings" in studies IARC relied on; JECFA kept ADI unchanged
+V044 | K | 5.1 | https://www.fdli.org/2024/01/the-curious-case-of-aspartame-how-the-same-evidence-can-yield-seemingly-different-conclusions/ | FDLI article on aspartame IARC vs JECFA vs FDA divergence (Jan 2024)
+V045 | K | 5.1 | https://www.epa.gov/ingredients-used-pesticide-products/atrazine | atrazine re-registered (2003 IRED); 2020 interim registration review decision; aquatic level of concern revised to 9.7 ug/L in 2024
+V046 | K | 5.1 | https://usrtk.org/pesticides/atrazine/ | EU banned atrazine in 2004 over groundwater; Hayes frog endocrine data excluded via Data Quality Act petition (CSV note)
+V047 | K | 5.1 | https://www.goldbergsegalla.com/blog/environmental-law-monitor/epa/green-groups-urge-ninth-circuit-to-push-epa-on-atrazine-re-evaluation/ | litigation over atrazine re-evaluation in the Ninth Circuit
+V048 | K | 5.1 | https://www.iarc.who.int/fr/news-events/glyphosate-monograph-now-available-2/ | IARC classified glyphosate Group 2A in 2015 (Monograph Vol 112)
+V049 | K | 5.1 | https://www.verdantlaw.com/epa-seeks-scientific-input-as-glyphosate-review-moves-forward/ | Ninth Circuit (2022, NRDC v. EPA) vacated the human-health portion of EPA's 2020 glyphosate interim decision as inconsistent with EPA's own record and Cancer Guidelines
+V050 | C | C10 | none | EPA's glyphosate registration review open since 2009 and still incomplete in 2026
+V051 | C | C10 | none | EPA-HHS partnership on glyphosate review (2026)
+V052 | K | 5.1 | https://www.epa.gov/ingredients-used-pesticide-products/chlorpyrifos | chlorpyrifos tolerances revoked 2021; Eighth Circuit vacated revocation 2023 (Red River Valley Sugarbeet Growers v. Regan); tolerances reinstated; EPA proposed keeping 11 crop uses
+V053 | K | 5.5 | https://www.epa.gov/pesticide-worker-safety/epa-update-use-pesticide-chlorpyrifos-food | revocation followed Ninth Circuit April 2021 order (LULAC v. Regan) directing EPA to act within 60 days without further fact-finding

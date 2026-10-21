@@ -1,0 +1,11 @@
+V090 | Q | QA | none | 10 CFR 50 App B introduction: QA program applies to structures, systems, components "to an extent consistent with their importance to safety"
+V091 | Q | QA | none | 10 CFR 50 App B Criterion III: design verification "performed by individuals or groups other than those who performed the original design"
+V092 | Q | QA | none | 10 CFR 50 App B Criterion III: design changes subject to design control measures commensurate with those applied to the original design
+V093 | Q | QA | none | 10 CFR 50 App B Criterion XV Nonconforming Materials, Parts, or Components: identification, documentation, segregation, disposition, notification; nonconforming items reviewed and accepted, rejected, repaired or reworked
+V094 | Q | QA | none | 10 CFR 50 App B Criterion XVI Corrective Action: conditions adverse to quality promptly identified and corrected; significant conditions: cause determined and corrective action to preclude repetition
+V095 | Q | QA | none | 10 CFR 50 App B Criterion VI Document Control and Criterion XVII Quality Assurance Records
+V096 | Q | QA | none | ASME NQA-1 is a paid consensus standard; NRC Regulatory Guide 1.28 endorses NQA-1 as acceptable method for Appendix B
+V097 | Q | QA | none | single-failure criterion is defined in 10 CFR 50 Appendix A (General Design Criteria, Definitions), not Appendix B
+V098 | Q | QA | none | NQA-1 nonconformance dispositions: use-as-is, reject, repair, rework
+V099 | Q | QA | none | "graded approach" defined in DOE 10 CFR 830.3 as the process of ensuring the level of analysis, documentation and actions is commensurate with the relative importance to safety
+V100 | Q | QA | none | "configuration management" is not one of the 18 Appendix B criteria by that name

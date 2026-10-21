@@ -1,0 +1,108 @@
+# Verification claims, one row per checkable claim. Written 2026-10-18 before any search.
+# rep: K = kimmy_v1 report, S = RUS-0.1 standard, C = coded_decisions.csv note, R = REVIEW_v1, Q = QA mapping (work order), X = comparator decision
+# id | rep | sec | cite | claim
+V001 | K | 1,3.1 | https://pmc.ncbi.nlm.nih.gov/articles/PMC10329213/ | Daval, Teng, Russo, Kesselheim (JAMA Health Forum 2023): census of 409 FDA human-drug advisory committee meetings 2010-2021; 314 with votes; 298 analyzable votes
+V002 | K | 5.2 | https://pmc.ncbi.nlm.nih.gov/articles/PMC10329213/ | initial-approval votes: positive n=147 with 142 approved (96.6%); negative n=60 with 20 approved (33.3%); FDA action measured as of November 30, 2022
+V003 | K | 5.2 | https://pmc.ncbi.nlm.nih.gov/articles/PMC10329213/ | of 25 discordant initial-approval votes, 20 (80%) were approvals after a negative vote; quote "discordance between FDA actions and advisory committee votes was most frequently an approval after a negative vote"
+V004 | K | 3.1 | https://pmc.ncbi.nlm.nih.gov/articles/PMC10329213/ | committee meetings declined from 50 in 2012 to 18 in 2020 and 2021
+V005 | K | 5.1 | https://pmc.ncbi.nlm.nih.gov/articles/PMC10329213/ | the census lists hydrocodone bitartrate (Zohydro) among approvals that followed negative votes (20 approvals after negative votes)
+V006 | K | 5.2 | https://www.medpagetoday.com/publichealthpolicy/fdageneral/105370 | positive vote associated with hazard ratio 9.42 (95% CI 5.99-14.80) for approval; median time to approval 74 days after positive vs 700 days after negative vote
+V007 | K | 5.2 | https://pubmed.ncbi.nlm.nih.gov/37418271/ | Kanter editorial, JAMA Health Forum: the asymmetry "says something very important about the agency's view of advisory committees"
+V008 | K | 5.2 | https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0267134 | FDA device panels, 49 meetings: panelists expressing uncertainty voted against approval 55.9% vs 12.2% for certain panelists; 31.6% of uncertain panelists voted to approve
+V009 | K | 2 | https://www.supremecourt.gov/opinions/25pdf/24-1068_n7ip.pdf | Monsanto v. Durnell (No. 24-1068) decided June 25, 2026: FIFRA preempts state failure-to-warn claims on Roundup's EPA-approved label
+V010 | C | C10 | https://www.law.cornell.edu/supremecourt/text/24-1068 | Monsanto v. Durnell vote was 7-2
+V011 | K | 2 | https://www.federalregister.gov/documents/2026/07/01/2026-13263/revisions-to-establish-the-sixth-unregulated-contaminant-monitoring-rule-ucmr-6-for-public-water | UCMR 6 proposed July 1, 2026 covering 30 contaminants; microplastics not among them
+V012 | K | 2 | https://www.hklaw.com/en/insights/publications/2026/07/epa-proposes-ucmr-6-for-pfas-and-other-contaminants | microplastics added to draft Sixth Contaminant Candidate List (CCL 6) in April 2026
+V013 | K | 2 | https://www.justice.gov/opa/pr/justice-department-places-fda-approved-marijuana-products-and-products-containing-marijuana | April 23-28, 2026: DOJ/DEA placed FDA-approved and state-licensed medical marijuana products in Schedule III; broader rescheduling sent to expedited hearing
+V014 | K | 2 | https://ogletree.com/insights-resources/blog-posts/marijuana-rescheduling-temporarily-paused/ | the expedited rescheduling hearing was stayed/paused in October 2026
+V015 | K | 5.1 | https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/2782122 | aducanumab advisory committee voted 0 yes / 10 no / 1 uncertain; FDA approved (2021) on the amyloid surrogate
+V016 | K | 5.1 | https://pmc.ncbi.nlm.nih.gov/articles/PMC10869173/ | aducanumab accelerated approval on amyloid surrogate the panel had not been asked to evaluate
+V017 | K | 5.1 | https://jamanetwork.com/journals/jama/fullarticle/2803999 | Makena (17-OHPC) withdrawn 2023, about 12 years after accelerated approval, after confirmatory trial failed
+V018 | K | 5.1 | https://pmc.ncbi.nlm.nih.gov/articles/PMC10842149/ | 2019 Makena advisory committee voted 9-7 to withdraw
+V019 | K | 5.1 | https://pmc.ncbi.nlm.nih.gov/articles/PMC549650/ | 2005 joint FDA panel voted 17-15 that rofecoxib could return to market with warnings
+V020 | K | 5.1 | https://www.fda.gov/media/74279/download | FDA decisional memo on COX-2 (2005); Merck never relaunched rofecoxib
+V021 | K | 5.1 | https://www.nbcnews.com/health/health-news/fda-advisory-panel-recommends-mercks-covid-pill-emergency-use-rcna7107 | molnupiravir EUA advisory committee vote 13-10 (Nov 30, 2021)
+V022 | K | 5.1 | https://www.statnews.com/2021/11/30/fda-panel-narrowly-recommends-authorization-of-merck-covid-pill-after-day-of-tense-discussion/ | molnupiravir: rodent embryo-fetal and mutagenicity concerns; authorization with pregnancy restrictions
+V023 | K | 5.1 | https://www.nejm.org/doi/full/10.1056/NEJMp1513686 | flibanserin 2015 advisory committee 18-6 vote contingent on risk mitigation; approved with REMS after two prior rejections
+V024 | K | 5.1 | https://www.accessdata.fda.gov/drugsatfda_docs/nda/2015/022526Orig1s000Approv.pdf | flibanserin NDA 022526 approval letter 2015 with REMS
+V025 | K | 5.1 | https://pmc.ncbi.nlm.nih.gov/articles/PMC3744967/ | 2011 ODAC voted 12-1 to withdraw bevacizumab breast-cancer indication; Commissioner withdrew it
+V026 | K | 5.1 | https://www.onclive.com/view/fda-says-avastin-not-safe-or-effective-for-patients-with-breast-cancer | FDA (Hamburg, Nov 2011) said Avastin not shown safe and effective for breast cancer
+V027 | K | 5.1 | https://www.fda.gov/media/180111/download | donanemab advisory committee (June 10, 2024) voted 11-0 on effectiveness and benefit-risk
+V028 | K | 5.1 | https://www.npr.org/sections/shots-health-news/2024/06/10/g-s1-3818/fda-advisors-back-alzheimer-drug-donanemab-despite-risks | donanemab panel backed despite ARIA risk and low/no-tau questions
+V029 | K | 5.1 | https://www.drugwatch.com/transvaginal-mesh/recall/ | first pelvic-organ-prolapse mesh cleared via 510(k) in 1996 on substantial equivalence; FDA reclassified POP mesh to class III in 2016; FDA ordered remaining makers to stop selling POP mesh in 2019
+V030 | K | 5.1 | https://pmc.ncbi.nlm.nih.gov/articles/PMC6727911/ | metal-on-metal hips "expedited to market ... using the 510(k) process, which only requires substantial equivalence"; FDA rule effective February 18, 2016 requiring PMA for MoM hips
+V031 | K | 5.1 | https://jamanetwork.com/journals/jama/fullarticle/2799172 | JAMA article documents pelvic mesh reclassification after a decade of adverse events (the article's actual subject unknown; check)
+V032 | K | 5.1 | https://www.fda.gov/emergency-preparedness-and-response/preparedness-research/animal-rule-summary | FDA Animal Rule (2002) allows approval based on animal efficacy when human efficacy trials are not ethical or feasible
+V033 | C | B03 | https://www.fda.gov/drugs/nda-and-bla-approvals/animal-rule-approvals | first Animal Rule approval: pyridostigmine bromide (2003) for soman nerve agent pretreatment
+V034 | K | 5.1 | https://ro.co/safety-info/glp1/ | GLP-1 RA boxed warning for thyroid C-cell tumors in rodents, human relevance not determined; contraindicated in MTC/MEN2
+V035 | C | B04 | https://acibademinternational.com/blog/ozempic-and-thyroid-cancer-what-the-boxed-warning-says-and-what-human-data-show/ | GLP-1 class boxed warning year: coded 2017 in the dataset (check when the class boxed warning first issued; liraglutide 2010?)
+V036 | C | B04 | none | EMA PRAC 2023 found no causal link between GLP-1 RAs and thyroid cancer
+V037 | K | 5.1 | https://www.fda.gov/food/food-ingredients-packaging/fda-encourages-food-manufacturers-accelerate-phasing-out-use-fdc-red-no-3-foods-2027-deadline | FD&C Red No. 3 authorization revoked (Jan 2025) under the Delaney Clause; food deadline January 2027, ingested drugs January 2028; "causes cancer in male laboratory rats"
+V038 | C | B05 | https://www.fda.gov/food/food-ingredients-packaging/fda-encourages-food-manufacturers-accelerate-phasing-out-use-fdc-red-no-3-foods-2027-deadline | FDA states the rat mechanism does not occur in humans / not human-relevant
+V039 | K | 5.1 | https://www.fda.gov/food/food-additives-petitions/brominated-vegetable-oil-bvo | BVO authorization revoked 2024 (final rule effective August 2, 2024) on FDA's own rodent thyroid studies
+V040 | C | B06 | none | BVO banned in UK/EU/Japan decades before the US revocation
+V041 | K | 5.1 | https://usrtk.org/chemicals/titanium-dioxide/ | EFSA 2021 could not exclude genotoxicity of E171; EU banned E171 in food 2022; FDA no action
+V042 | K | 6 | https://www.sciencedirect.com/science/article/abs/pii/S0300483X25000459 | Toxicology 2025 article on titanium dioxide genotoxicity / regulatory divergence
+V043 | K | 5.1 | https://www.fda.gov/food/food-additives-petitions/aspartame-and-other-sweeteners-food | FDA disagreed with IARC 2B classification of aspartame (2023), citing "significant shortcomings" in studies IARC relied on; JECFA kept ADI unchanged
+V044 | K | 5.1 | https://www.fdli.org/2024/01/the-curious-case-of-aspartame-how-the-same-evidence-can-yield-seemingly-different-conclusions/ | FDLI article on aspartame IARC vs JECFA vs FDA divergence (Jan 2024)
+V045 | K | 5.1 | https://www.epa.gov/ingredients-used-pesticide-products/atrazine | atrazine re-registered (2003 IRED); 2020 interim registration review decision; aquatic level of concern revised to 9.7 ug/L in 2024
+V046 | K | 5.1 | https://usrtk.org/pesticides/atrazine/ | EU banned atrazine in 2004 over groundwater; Hayes frog endocrine data excluded via Data Quality Act petition (CSV note)
+V047 | K | 5.1 | https://www.goldbergsegalla.com/blog/environmental-law-monitor/epa/green-groups-urge-ninth-circuit-to-push-epa-on-atrazine-re-evaluation/ | litigation over atrazine re-evaluation in the Ninth Circuit
+V048 | K | 5.1 | https://www.iarc.who.int/fr/news-events/glyphosate-monograph-now-available-2/ | IARC classified glyphosate Group 2A in 2015 (Monograph Vol 112)
+V049 | K | 5.1 | https://www.verdantlaw.com/epa-seeks-scientific-input-as-glyphosate-review-moves-forward/ | Ninth Circuit (2022, NRDC v. EPA) vacated the human-health portion of EPA's 2020 glyphosate interim decision as inconsistent with EPA's own record and Cancer Guidelines
+V050 | C | C10 | none | EPA's glyphosate registration review open since 2009 and still incomplete in 2026
+V051 | C | C10 | none | EPA-HHS partnership on glyphosate review (2026)
+V052 | K | 5.1 | https://www.epa.gov/ingredients-used-pesticide-products/chlorpyrifos | chlorpyrifos tolerances revoked 2021; Eighth Circuit vacated revocation 2023 (Red River Valley Sugarbeet Growers v. Regan); tolerances reinstated; EPA proposed keeping 11 crop uses
+V053 | K | 5.5 | https://www.epa.gov/pesticide-worker-safety/epa-update-use-pesticide-chlorpyrifos-food | revocation followed Ninth Circuit April 2021 order (LULAC v. Regan) directing EPA to act within 60 days without further fact-finding
+V054 | X | 6 | none | EU non-renewal of chlorpyrifos approval (decision 2020, approval expired Jan 2020)
+V055 | K | 5.1 | https://www.epa.gov/pollinator-protection/epa-actions-protect-pollinators | 2020 EPA proposed interim decisions for five neonicotinoids (imidacloprid, clothianidin, thiamethoxam, dinotefuran, acetamiprid) with mitigation
+V056 | X | 5.1 | https://food.ec.europa.eu/plants/pesticides/approval-active-substances-safeners-and-synergists/renewal-approval/neonicotinoids_en | EU 2018 full outdoor ban on imidacloprid, clothianidin, thiamethoxam
+V057 | K | 5.1 | https://www.epa.gov/ground-water-and-drinking-water/lead-and-copper-rule-improvements | LCRI (Oct 2024): lead action level 15 -> 10 ppb; lead service line replacement within 10 years; MCLG remains zero
+V058 | K | 5.1 | https://crystalquest.com/blogs/contaminants/lead-and-copper-rule-explained | secondary summary of LCRI
+V059 | K | 5.1 | https://www.epa.gov/sdwa/and-polyfluoroalkyl-substances-pfas | April 2024 PFAS NPDWR: PFOA and PFOS MCL 4.0 ppt, MCLG zero; MCLs for six PFAS
+V060 | C | C07 | none | EPA proposed (2025-2026) rescinding the limits for four of six PFAS (PFHxS, PFNA, HFPO-DA, mixture hazard index) while keeping PFOA/PFOS
+V061 | K | 5.1 | https://www.crowell.com/en/insights/client-alerts/ucmr-6-epa-sidesteps-microplastics-for-now | Crowell: UCMR 6 sidesteps microplastics
+V062 | K | 5.1 | https://www.lowenstein.com/news-insights/publications/client-alerts/multistate-petition-to-usepa-to-monitor-for-microplastics-in-drinking-water-may-elevate-regulatory-focus-environmental | multistate (seven-governor) petition to EPA to monitor microplastics in drinking water
+V063 | K | 5.1 | https://www.newslow.com/post/history-and-pros-cons-of-saccharin | 1977 FDA proposed saccharin ban after Canadian rat bladder study; Congress passed moratorium (Saccharin Study and Labeling Act) with warning label; NTP removed saccharin from Report on Carcinogens in 2000; warning label requirement repealed 2000; EPA delisted saccharin as hazardous constituent 2010
+V064 | K | 5.1 | https://www.law.cornell.edu/supremecourt/text/24-1068 | LII copy of Monsanto v. Durnell opinion
+V065 | K | 5.1 | https://pmc.ncbi.nlm.nih.gov/articles/PMC8783595/ | Schedule I research barriers: single domestic (NIDA/University of Mississippi) source, DEA Schedule I registration, FDA IND
+V066 | K | 5.1 | https://www.gibsondunn.com/dea-downschedules-state-medical-marijuana-to-schedule-iii-expedited-hearing-set-to-consider-broader-rescheduling/ | DEA down-scheduled state medical marijuana to Schedule III; expedited hearing set for broader rescheduling
+V067 | K | 7 | https://microplasticsapp.com/blog/epa-microplastics-drinking-water | blog analysis of EPA microplastics drinking-water decision
+V068 | S | 2 | https://www.iec.ch/functionalsafety/explained/ | IEC 61508 safety integrity levels scale assurance with consequence
+V069 | S | 2 | https://www.gradeworkinggroup.org/ | GRADE approach rates certainty of evidence
+V070 | S | 2 | https://www.ipcc.ch/site/assets/uploads/2017/08/AR5_Uncertainty_Guidance_Note.pdf | Mastrandrea et al. 2010 IPCC AR5 guidance note on consistent treatment of uncertainties
+V071 | S | 2 | https://www.nrc.gov/reading-rm/doc-collections/cfr/part050/part050-appb.html | 10 CFR Part 50 Appendix B quality assurance criteria
+V072 | S | 2 | https://www.nature.com/articles/sdata201618 | Wilkinson et al. 2016 FAIR Guiding Principles, Scientific Data
+V073 | C | A02 | none | eteplirsen 2016: advisory committee 7-6 against; Woodcock overrode review team; quote about Sarepta needing to be capitalized
+V074 | C | A10 | none | midodrine: FDA proposed withdrawal in 2010 for missing post-market confirmatory studies, reversed after patient/prescriber outcry
+V075 | C | A03 | none | Zohydro ER 2013 advisory committee voted 11-2 against; FDA approved anyway
+V076 | C | A07 | none | flibanserin rejected twice (2010, 2013) before 2015 approval
+V077 | C | D01 | none | partial Schedule III move for medical marijuana proceeded via executive order
+# REVIEW R5 night shift
+V080 | R | R5 | none | IARC 2007 (Monograph Vol 98): shift work that involves circadian disruption classified Group 2A
+V081 | R | R5 | none | IARC Monographs Vol 124 (meeting June 2019): night shift work Group 2A; limited evidence in humans for cancers of breast, prostate, colon and rectum; sufficient evidence in experimental animals; strong mechanistic evidence in experimental animals
+V082 | R | R5 | none | Travis et al. 2016 JNCI: Million Women Study, EPIC-Oxford, UK Biobank plus meta-analysis of 10 prospective studies, ~1.4 million women; night shift work and breast cancer RR 0.99 (95% CI 0.95-1.03)
+V083 | R | R5 | none | Denmark paid workers' compensation to women with breast cancer after long-term night shift work (from 2008)
+V084 | R | R5 | none | Germany: occupational disease recognition requires generally accepted scientific findings (allgemeine wissenschaftliche Erkenntnisse, SGB VII section 9); breast cancer from night shift work not recognized
+V085 | R | R5 | none | no OSHA standard specific to shift work or night work in the United States
+V086 | R | R5 | none | cohort studies on night work and cancer typically code exposure as ever/never or duration, not rotation direction (forward vs backward) or permanent night
+V087 | R | R5 | none | any study coding night-shift rotation direction (forward vs backward rotation) or permanent night vs rotating for cancer or circadian outcomes
+# QA mapping (work order asks to verify, not assume)
+V090 | Q | QA | none | 10 CFR 50 App B introduction: QA program applies to structures, systems, components "to an extent consistent with their importance to safety"
+V091 | Q | QA | none | 10 CFR 50 App B Criterion III: design verification "performed by individuals or groups other than those who performed the original design"
+V092 | Q | QA | none | 10 CFR 50 App B Criterion III: design changes subject to design control measures commensurate with those applied to the original design
+V093 | Q | QA | none | 10 CFR 50 App B Criterion XV Nonconforming Materials, Parts, or Components: identification, documentation, segregation, disposition, notification; nonconforming items reviewed and accepted, rejected, repaired or reworked
+V094 | Q | QA | none | 10 CFR 50 App B Criterion XVI Corrective Action: conditions adverse to quality promptly identified and corrected; significant conditions: cause determined and corrective action to preclude repetition
+V095 | Q | QA | none | 10 CFR 50 App B Criterion VI Document Control and Criterion XVII Quality Assurance Records
+V096 | Q | QA | none | ASME NQA-1 is a paid consensus standard; NRC Regulatory Guide 1.28 endorses NQA-1 as acceptable method for Appendix B
+V097 | Q | QA | none | single-failure criterion is defined in 10 CFR 50 Appendix A (General Design Criteria, Definitions), not Appendix B
+V098 | Q | QA | none | NQA-1 nonconformance dispositions: use-as-is, reject, repair, rework
+V099 | Q | QA | none | "graded approach" defined in DOE 10 CFR 830.3 as the process of ensuring the level of analysis, documentation and actions is commensurate with the relative importance to safety
+V100 | Q | QA | none | "configuration management" is not one of the 18 Appendix B criteria by that name
+# comparator decisions (mirrors) cited in report section 6
+V110 | X | 6 | none | IARC 2023 classified aspartame Group 2B; JECFA kept ADI 40 mg/kg bw
+V111 | X | 6 | none | EU Red No. 3 (E127 erythrosine) permitted only in cocktail and candied cherries
+V112 | X | 6 | none | EU Drinking Water Directive 2020/2184 PFAS parametric values: sum of 20 PFAS 0.1 ug/L and PFAS total 0.5 ug/L
+V113 | X | 6 | none | EU drinking water directive includes a watch-list mechanism and microplastics methodology
+V114 | X | 6 | none | EU permits saccharin (E954) with an ADI
+V115 | X | 6 | none | EU banned atrazine 2004 (non-inclusion decision 2004/248/EC)
