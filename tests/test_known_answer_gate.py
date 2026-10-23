@@ -111,6 +111,9 @@ MANIFEST = (
     "tools/deceptive_maze_ga.py::jaccard_distance",
     "tools/deceptive_maze_ga.py::mean_pairwise",
     "tools/deceptive_maze_ga.py::half_distance_gen",
+    "reg-uncertainty-registry/tools/stats.py::mann_whitney_exact",
+    "reg-uncertainty-registry/tools/stats.py::one_directional",
+    "reg-uncertainty-registry/tools/grade.py::floor",
 )
 
 # Cases known to fail today. A case that starts passing turns this red so
