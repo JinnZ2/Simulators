@@ -140,7 +140,37 @@ def grade_one(obj, basis, side, variant):
     case = grade_input(obj, basis, side)
     if case is None:
         return None
+    if variant.get("r1_literal"):
+        # NCR-N06's literal reading: R1 wherever a row carries an R1 flag,
+        # level-setting rows included
+        case["r1"] = val(obj, "r1") != "none"
     return grade.grade_case(case, dict(variant, basis=basis))
+
+
+# RUS-0.3 taken apart: each switch alone and combined, so the reading of
+# one-directional non-conformity can be attributed to a switch (Part D)
+RUS03_PARTS = [
+    ("RUS-0.2", {"columns": "published"}),
+    ("+M7", {"columns": "published", "symmetric": True}),
+    ("+S", {"columns": "published", "substitution": True}),
+    ("+R6", {"columns": "published", "r6": True}),
+    ("+R1L", {"columns": "published", "r1_literal": True}),
+    ("+M7+S", {"columns": "published", "symmetric": True, "substitution": True}),
+    ("RUS-0.3", RUS03),
+    ("RUS-0.3+R1L", dict(RUS03, r1_literal=True)),
+]
+
+
+def components(objects, side="src"):
+    rows = []
+    sample = coded_sample(objects)
+    for basis in ("action", "outcome"):
+        for name, variant in RUS03_PARTS:
+            t = tally_of(sample, basis, side, variant)
+            r6 = sum(1 for o in sample
+                     if (grade_one(o, basis, side, variant) or {}).get("r6") == grade.R6_SELF_SEALING)
+            rows.append({"basis": basis, "variant": name, "tally": t, "r6_self_sealing": r6})
+    return rows
 
 
 def stored_grades(obj):
@@ -537,6 +567,13 @@ def report(objects, section=None):
                 out.append("%-4s %-17s U %s gap %+d floor %s actual %s  %s%s" % (
                     o["id"], k, g["U"], g["gap"], g["floor"], g["actual"], g["status"],
                     ("  " + g["r6"]) if "r6" in g else ""))
+    if sec("components"):
+        out.append("== RUS-0.3 by switch (coded sample, source C_restrict)   below conform exceeds over statute | over_possible reading r6_self_sealing")
+        for r in components(objects):
+            t = r["tally"]
+            out.append("%-7s %-12s %s | %d %s %d" % (r["basis"], r["variant"],
+                       " ".join("%2d" % t[k] for k in KEYS), t["over_possible"], t["reading"],
+                       r["r6_self_sealing"]))
     if sec("sweep"):
         out.append("== Calibration sweep (annex basis)   published -> computed | over_reachable over_possible reading")
         for r in sweep(objects):

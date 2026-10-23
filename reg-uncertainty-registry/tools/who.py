@@ -107,7 +107,10 @@ def main(argv):
         roles, up, down, funds, confl = by_actor(reg, aid)
         print("== %s" % name(reg, aid))
         for r, ids in sorted(roles.items()):
-            print("%-15s %s" % (r, ", ".join(ids)))
+            print("%-15s %s" % (r, ", ".join(
+                "%s(%s)" % (i, (reg.get(i)["claims"].get("action_direction")
+                                or reg.get(i)["claims"].get("direction") or {}).get("value", "-"))
+                for i in ids)))
         print("delegated from  %s" % (", ".join(up) or "-"))
         print("delegates to    %s" % (", ".join(down) or "-"))
         print("funded by       %s" % (", ".join(funds) or "-"))

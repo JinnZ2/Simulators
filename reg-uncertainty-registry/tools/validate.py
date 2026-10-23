@@ -297,13 +297,12 @@ def c_rebuild(reg):
 
 # ---------------------------------------------------------------- report
 
-PLACEHOLDER = re.compile(r"\{[a-z][a-z0-9_.]*\}")
-ALLOWED_NUMBER = re.compile(
-    r"(?:[A-Z][A-Za-z]*-?\d+[a-z]?(?:-\d+)*"          # ids: A10, NCR-R6, CHG-N04-01, G036, U3, D5, M7
-    r"|\b(?:1[89]|20)\d\d(?:-\d\d){0,2}\b"            # years and dates
-    r"|\b\d+ FR \d+|Pub\. L\. \d+-\d+|\d+ U\.S\.C\. \d+|\d+ CFR [\d.]+|\d+ F\.4th \d+"
-    r"|RUS-0\.\d|v\d|\bR\d+[a-z]?\b|\b\d+(?:st|nd|rd|th)\b"
-    r"|section \d+|§\s?\d+|Part [A-E]\b|Rule [LS]\b)")
+PLACEHOLDER = re.compile(r"\{[a-z][A-Za-z0-9_.+\-]*\}")
+ALLOWED_NUMBER = re.compile(  # specific forms first: alternation is leftmost-first
+    r"(?:RUS-0\.\d+|NQA-1|RG \d+\.\d+|\bAB \d+\b|\b\d+ FR \d+|Pub\. L\. \d+-\d+|\d+ U\.S\.C\. \d+|\d+ CFR [\d.]+"
+    r"|\d+ F\.4th \d+|\bv\d\b|section \d+|\u00a7\s?\d+|\b\d+(?:st|nd|rd|th)\b"
+    r"|\b(?:1[89]|20)\d\d(?:-\d\d){0,2}\b"             # years and dates
+    r"|[A-Z][A-Za-z_]*-?\d+[a-z]?(?:-\d+)*(?:\.\d+)?)")  # ids: A10, NCR-R6, CHG-N04-01, G036, U3, D5, M7, RG 1.28
 
 
 def report_lint(text):
@@ -313,7 +312,8 @@ def report_lint(text):
     for i, line in enumerate(text.splitlines(), 1):
         if line.lstrip().startswith("<!--"):
             continue
-        s = PLACEHOLDER.sub("", line)
+        s = re.sub(r"^#{1,6} \d+\.", "", line)          # section numbers in headings
+        s = PLACEHOLDER.sub("", s)
         s = ALLOWED_NUMBER.sub("", s)
         for m in re.finditer(r"\d+(?:\.\d+)?", s):
             errs.append("template line %d: bare number %s" % (i, m.group()))
@@ -326,10 +326,13 @@ def c_report(reg):
     import report
     tmpl = open(TEMPLATE, "r", encoding="utf-8").read()
     errs = report_lint(tmpl)
-    want = report.render(reg, tmpl)
-    got = open(REPORT, "r", encoding="utf-8").read() if os.path.exists(REPORT) else None
-    if got != want:
-        errs.append("REVISED_REPORT.md is not its template rendered from stats")
+    for path, want in ((report.REPORT, report.render(reg, tmpl)),
+                       (report.CHANGELOG, report.render_changelog(reg)),
+                       (report.QA, report.render_qa(reg))):
+        got = open(path, "r", encoding="utf-8").read() if os.path.exists(path) else None
+        if got != want:
+            errs.append("%s is not what tools/report.py renders from the registry"
+                        % reglib.rel(path))
     return len(tmpl.splitlines()), errs
 
 

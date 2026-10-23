@@ -4806,15 +4806,15 @@
   "type": "EVIDENCE",
   "verification": {
    "corrected_value": null,
-   "depth": "none",
-   "exists": "?",
-   "found": "",
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "nrc.gov ML13330B518, ML14113A410 and other NRC documents quoting Criterion XV: \"identification, documentation, segregation, disposition, and notification\"; \"nonconforming items shall be reviewed and accepted, rejected, repaired or reworked in accordance with documented procedures\"",
    "ledger_row": "V093",
-   "queries": 0,
-   "reached": "N",
-   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
-   "says": "UNSEEN",
-   "state": "UNREACHABLE"
+   "queries": 1,
+   "reached": "Y",
+   "reason": "quoted by NRC documents, not the eCFR page; disposition set is accept/reject/repair/rework, not ACCEPT/REJECT/MODIFY",
+   "says": "MATCH",
+   "state": "VERIFIED"
   }
  },
  {
@@ -4828,15 +4828,15 @@
   "type": "EVIDENCE",
   "verification": {
    "corrected_value": null,
-   "depth": "none",
-   "exists": "?",
-   "found": "",
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "nrc.gov ML16054A816, ML15190A242 and others quoting Criterion XVI: conditions adverse to quality \"promptly identified and corrected\"; for significant conditions \"the cause of the condition is determined and corrective action taken to preclude repetition\"",
    "ledger_row": "V094",
-   "queries": 0,
-   "reached": "N",
-   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
-   "says": "UNSEEN",
-   "state": "UNREACHABLE"
+   "queries": 1,
+   "reached": "Y",
+   "reason": "quoted by NRC documents; the documentation-and-reporting clause also appears",
+   "says": "MATCH",
+   "state": "VERIFIED"
   }
  },
  {
@@ -4850,15 +4850,15 @@
   "type": "EVIDENCE",
   "verification": {
    "corrected_value": null,
-   "depth": "none",
-   "exists": "?",
-   "found": "",
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "nrc.gov RIS 2000-18: \"Criteria VI and XVII ... establish requirements for issuing, identifying, and retrieving QA records\"",
    "ledger_row": "V095",
-   "queries": 0,
-   "reached": "N",
-   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
-   "says": "UNSEEN",
-   "state": "UNREACHABLE"
+   "queries": 1,
+   "reached": "Y",
+   "reason": "criterion titles inferred from the RIS wording; eCFR not opened",
+   "says": "MATCH",
+   "state": "VERIFIED"
   }
  },
  {
@@ -4872,15 +4872,15 @@
   "type": "EVIDENCE",
   "verification": {
    "corrected_value": null,
-   "depth": "none",
-   "exists": "?",
-   "found": "",
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "nrc.gov quality-assurance page; 88 FR (Sept 11, 2023): RG 1.28 Rev 6 endorses NQA-1-2017, -2019, -2022 with exceptions as meeting Appendix B",
    "ledger_row": "V096",
-   "queries": 0,
-   "reached": "N",
-   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
-   "says": "UNSEEN",
-   "state": "UNREACHABLE"
+   "queries": 1,
+   "reached": "Y",
+   "reason": "endorsement seen; \"paid consensus standard\" not checked",
+   "says": "MATCH",
+   "state": "VERIFIED"
   }
  },
  {
@@ -4894,15 +4894,15 @@
   "type": "EVIDENCE",
   "verification": {
    "corrected_value": null,
-   "depth": "none",
-   "exists": "?",
-   "found": "",
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "law.cornell.edu 10 CFR Appendix A to Part 50, Definitions: \"A single failure means an occurrence which results in the loss of capability of a component to perform its intended safety functions\"",
    "ledger_row": "V097",
-   "queries": 0,
-   "reached": "N",
-   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
-   "says": "UNSEEN",
-   "state": "UNREACHABLE"
+   "queries": 1,
+   "reached": "Y",
+   "reason": "definition sits in Appendix A, not Appendix B",
+   "says": "MATCH",
+   "state": "VERIFIED"
   }
  },
  {
@@ -4916,13 +4916,13 @@
   "type": "EVIDENCE",
   "verification": {
    "corrected_value": null,
-   "depth": "none",
+   "depth": "search-index",
    "exists": "?",
-   "found": "",
+   "found": "results were general nonconformance guidance (PPPL, vendors) using use-as-is/rework/repair/reject; no NQA-1 text in results",
    "ledger_row": "V098",
-   "queries": 0,
-   "reached": "N",
-   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "NQA-1 is not public; its own wording not seen",
    "says": "UNSEEN",
    "state": "UNREACHABLE"
   }
@@ -4938,15 +4938,15 @@
   "type": "EVIDENCE",
   "verification": {
    "corrected_value": null,
-   "depth": "none",
-   "exists": "?",
-   "found": "",
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "law.cornell.edu 10 CFR 830.3: graded approach \"the process of ensuring that the level of analysis, documentation, and actions used to comply with a requirement in this part are commensurate with\" seven factors incl. relative importance to safety",
    "ledger_row": "V099",
-   "queries": 0,
-   "reached": "N",
-   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
-   "says": "UNSEEN",
-   "state": "UNREACHABLE"
+   "queries": 1,
+   "reached": "Y",
+   "reason": "DOE rule (10 CFR 830), not an NRC Appendix B term",
+   "says": "MATCH",
+   "state": "VERIFIED"
   }
  },
  {
@@ -4960,13 +4960,13 @@
   "type": "EVIDENCE",
   "verification": {
    "corrected_value": null,
-   "depth": "none",
+   "depth": "search-index",
    "exists": "?",
-   "found": "",
+   "found": "results listed some criteria (VI, XVII, III) but not all eighteen",
    "ledger_row": "V100",
-   "queries": 0,
-   "reached": "N",
-   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "absence of the term from the eighteen titles not confirmed",
    "says": "UNSEEN",
    "state": "UNREACHABLE"
   }

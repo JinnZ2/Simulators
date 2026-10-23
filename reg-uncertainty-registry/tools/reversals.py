@@ -15,6 +15,9 @@ restrictive ones.
     D01         one reversal measured from two anchors (REV-D01-2016, the
                 2016 denial D03; REV-D01-1970, the original placement); each
                 reading counts one of them and says which
+    from-group  Rule S cost group of the decision reversed (PRIOR anchors carry
+                none: 'not coded'), the branch the work order names: does the
+                bias live at the reversal stage?
     harm        harm count at reversal: the value with its basis, or
                 NOT_FOUND -- never zero
 
@@ -38,9 +41,10 @@ def table(reg):
     rows = []
     for r in sorted(reg.of("REVERSAL"), key=lambda x: (x["initiator_type"], x["id"])):
         h = r["harm_at_reversal"]
-        rows.append("%-14s %-24s %-8s->%-8s %6.2fy  %-21s harm %s%s" % (
+        fc = reg.get(r["from_case"])["claims"].get("cost_group_S")
+        rows.append("%-14s %-24s %-8s->%-8s %6.2fy  %-21s from-group %-12s harm %s%s" % (
             r["id"], r["initiator_type"], r["from_direction"], r["to_direction"],
-            r["time_to_reversal_years"], r["mechanism"],
+            r["time_to_reversal_years"], r["mechanism"], fc["value"] if fc else "not coded",
             h["state"] if h["value"] is None else h["value"][:40],
             ("  [alias of %s]" % r["alias_of"]) if r.get("alias_of") else ""))
     return rows
