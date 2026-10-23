@@ -41,6 +41,10 @@
  "rigor_tier": {"values": ["T1", "T2", "T3"]},
  "source_kind": {"values": ["primary_record", "peer_reviewed", "agency_page", "court", "law_firm", "news", "secondary", "standard", "blog", "none_given", "bundle_file"]},
  "id_state": {"values": ["EXTERNAL_VERIFIED", "EXTERNAL_UNVERIFIED", "LOCAL_ONLY"]},
+ "r6_justification": {"values": ["none", "self_sealed_only", "independent"]},
+ "yes_no": {"values": ["yes", "no"]},
+ "source_verified_flag": {"values": ["S", "K"]},
+ "flag01": {"values": ["0", "1"]},
  "extensions": {
   "_note": "values beyond the work order's lists, each with its reason",
   "values": [
@@ -61,6 +65,10 @@
    {"list": "evidence_kind", "value": "statement", "reason": "a source statement an NCR corrects (curation_ncr.STATEMENTS)"},
    {"list": "evidence_kind", "value": "population_statistic", "reason": "Frame A: the advisory-vote census"},
    {"list": "verification_depth", "value": "file", "reason": "a bundle file read in full and pinned by hash"},
+   {"list": "r6_justification", "value": "none|self_sealed_only|independent", "reason": "RUS-0.3 R6a: only an independent justification stops a self-sealing restriction from reading R6_SELF_SEALING; a justification resting on the evidence the restriction blocks is self_sealed_only"},
+   {"list": "yes_no", "value": "yes|no", "reason": "the source's mirror flag"},
+   {"list": "source_verified_flag", "value": "S|K", "reason": "the source's verified column: S sourced, K K-flagged by the originator"},
+   {"list": "flag01", "value": "0|1", "reason": "the source's statute_compelled column, kept as a string because the source writes it so"},
    {"list": "change_kind", "value": "drop_vocab", "reason": "FINDING dropped from object_types: findings are computed by tools/stats.py from the registry, so a stored copy could drift"}
   ]
  }
