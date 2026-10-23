@@ -47,7 +47,7 @@ switch so every combination is computed:
             (U one class lower, declared per case)
     BASIS   "action" grades every row on the agency's own move, "outcome"
             on legal status at the coding date; the published Annex mixes
-            them (NCR-A05)
+            them (NCR-N02)
 
 Library; refuses --selftest (checks run in tools/validate.py --selftest).
 Stdlib only.
@@ -230,25 +230,9 @@ def tally(statuses):
     return out
 
 
-def one_directional(t):
-    """'Non-conformity is one-directional', read on a tally. Returns one of
-    HOLDS (below > 0, over = 0, and an over-restrictive row was possible),
-    HOLDS_UNTESTABLE (over = 0 but no row could produce it), FAILS
-    (non-conformity in both directions), NO_NONCONFORMITY."""
-    if t["below"] == 0 and t["over_restrictive"] == 0:
-        return "NO_NONCONFORMITY"
-    if t["below"] > 0 and t["over_restrictive"] > 0:
-        return "FAILS"
-    if t.get("over_possible", 0) == 0:
-        return "HOLDS_UNTESTABLE"
-    return "HOLDS"
-
-
-def over_possible(cases):
-    """Rows on which R2's over-restrictive branch can fire at all: a
-    restrictive actual (D4/D5) with C_restrict > C_permit."""
-    return sum(1 for c in cases if c["cr_eff"] > c["cp"]
-               and d_index(c["actual"]) >= 4)
+# one_directional() and the over_possible count live in tools/stats.py,
+# which has the case objects (R3 compulsion is a property of the case, not
+# of a graded row).
 
 
 def main():

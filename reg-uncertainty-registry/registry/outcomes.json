@@ -1,0 +1,125 @@
+[
+ {
+  "basis": [
+   "EV-V020"
+  ],
+  "case": "A05",
+  "date": "2005",
+  "direction": "decline",
+  "id": "OUT-A05-NORELAUNCH",
+  "kind": "market_exit",
+  "statement": "Merck did not relaunch rofecoxib after the 2005 panel vote",
+  "status": "OBSERVED",
+  "type": "OUTCOME"
+ },
+ {
+  "basis": [
+   "EV-F016",
+   "EV-V029"
+  ],
+  "case": "B01",
+  "date": "2019-04",
+  "direction": "decline",
+  "id": "OUT-B01-STOPSALE",
+  "kind": "agency_followup",
+  "statement": "FDA ordered remaining makers to stop selling transvaginal POP mesh",
+  "status": "OBSERVED",
+  "type": "OUTCOME"
+ },
+ {
+  "basis": [
+   "EV-V037"
+  ],
+  "case": "B05",
+  "date": "2027",
+  "direction": "decline",
+  "id": "OUT-B05-DEADLINES",
+  "kind": "scheduled",
+  "statement": "Red No. 3 removal deadlines: foods January 2027, ingested drugs January 2028",
+  "status": "OBSERVED",
+  "type": "OUTCOME"
+ },
+ {
+  "basis": [
+   "EV-E031",
+   "EV-V049"
+  ],
+  "case": "C03",
+  "date": "2022-06-17",
+  "direction": "hold",
+  "id": "OUT-C03-VACATUR",
+  "kind": "court",
+  "statement": "Ninth Circuit vacated the human-health portion of the 2020 glyphosate interim decision",
+  "status": "OBSERVED",
+  "type": "OUTCOME"
+ },
+ {
+  "basis": [
+   "EV-E030",
+   "EV-V052"
+  ],
+  "case": "C04",
+  "date": "2023-11-02",
+  "direction": "warn",
+  "id": "OUT-C04-VACATUR",
+  "kind": "court",
+  "statement": "Eighth Circuit vacated the chlorpyrifos tolerance revocation; tolerances reinstated",
+  "status": "OBSERVED",
+  "type": "OUTCOME"
+ },
+ {
+  "basis": [
+   "EV-F027",
+   "EV-V060"
+  ],
+  "case": "C07",
+  "date": "2025",
+  "direction": "warn",
+  "id": "OUT-C07-RESCIND",
+  "kind": "proposal",
+  "statement": "EPA proposed rescinding four of six PFAS limits, keeping PFOA/PFOS",
+  "status": "OBSERVED",
+  "type": "OUTCOME"
+ },
+ {
+  "basis": [
+   "EV-V009",
+   "EV-V010"
+  ],
+  "case": "C10",
+  "date": "2026-06-25",
+  "direction": "go_ahead",
+  "id": "OUT-C10-DURNELL",
+  "kind": "court",
+  "statement": "Supreme Court: FIFRA preempts state failure-to-warn claims on the EPA-approved label (7-2)",
+  "status": "OBSERVED",
+  "type": "OUTCOME"
+ },
+ {
+  "basis": [
+   "EV-V014"
+  ],
+  "case": "D01",
+  "date": "2026-10",
+  "direction": "hold",
+  "id": "OUT-D01-STAY",
+  "kind": "stay",
+  "statement": "expedited hearing on broader marijuana rescheduling stayed",
+  "status": "OBSERVED",
+  "type": "OUTCOME"
+ },
+ {
+  "basis": [
+   "EV-E024",
+   "EV-V063"
+  ],
+  "case": "D02",
+  "date": "1977-11",
+  "direction": "warn",
+  "id": "OUT-D02-MORATORIUM",
+  "kind": "legislature",
+  "statement": "Congress imposed a moratorium on the saccharin ban with a warning label",
+  "status": "OBSERVED",
+  "type": "OUTCOME"
+ }
+]

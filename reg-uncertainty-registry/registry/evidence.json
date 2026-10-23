@@ -1,0 +1,5592 @@
+[
+ {
+  "id": "EV-E001",
+  "kind": "statute",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "FD&C Act section 506(c) (21 U.S.C. 356(c)) authorizes accelerated approval on a surrogate endpoint reasonably likely to predict clinical benefit",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E001",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E002",
+  "kind": "regulation",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "21 CFR Part 314 Subpart H (314.500-314.560) is the accelerated approval regulation for drugs; 314.530 provides withdrawal procedures",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E002",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E003",
+  "kind": "regulation",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "21 CFR Part 601 Subpart E (601.40-601.46) is the accelerated approval regulation for biologics; 601.43 withdrawal procedures",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E003",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E004",
+  "kind": "regulation",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "FDA guidance \"Expedited Programs for Serious Conditions - Drugs and Biologics\" issued May 2014",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E004",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E005",
+  "kind": "statute",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "FDORA (Consolidated Appropriations Act 2023, Dec 2022) section 3210 added expedited withdrawal procedures for accelerated approvals",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E005",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E006",
+  "kind": "regulation",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "FD&C Act section 505(d) substantial evidence standard; 21 CFR 314.126 adequate and well-controlled studies",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E006",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E007",
+  "kind": "statute",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "FD&C Act section 505-1 (FDAAA 2007) authorizes REMS",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E007",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E008",
+  "kind": "regulation",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "FD&C Act section 564 (21 U.S.C. 360bbb-3) Emergency Use Authorization; HHS COVID-19 EUA declaration March 27, 2020",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E008",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E009",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "molnupiravir EUA issued December 23, 2021",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E009",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E010",
+  "kind": "regulation",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "21 CFR Part 14 governs FDA public advisory committees; advisory committee votes are non-binding recommendations",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E010",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E011",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "midodrine (ProAmatine) approved 1996 under accelerated approval (Subpart H); FDA proposed withdrawal August 2010",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E011",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E012",
+  "kind": "regulation",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "Animal Rule codified at 21 CFR 314.600-314.650 (drugs) and 601.90-601.95 (biologics), final rule May 31, 2002 (67 FR 37988)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E012",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E013",
+  "kind": "regulation",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "FDA guidance \"Product Development Under the Animal Rule\" final October 2015",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E013",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E014",
+  "kind": "regulation",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "FD&C Act section 505(o)(4) safety labeling changes; boxed warning content at 21 CFR 201.57(c)(1)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E014",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E015",
+  "kind": "regulation",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "FD&C Act section 510(k) premarket notification; 21 CFR 807 Subpart E; substantial equivalence standard",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E015",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E016",
+  "kind": "statute",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "FD&C Act section 513 device classification; FDASIA 2012 section 608 changed reclassification to administrative order",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E016",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E017",
+  "kind": "regulation",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "FDA final order January 2016 reclassified surgical mesh for transvaginal pelvic organ prolapse repair from class II to class III (21 CFR 884.5980)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E017",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E018",
+  "kind": "regulation",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "FDA final order February 2016 required PMA for metal-on-metal total hip systems (21 CFR 888.3330)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E018",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E019",
+  "kind": "regulation",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "FD&C Act section 721 color additives; Delaney Clause for color additives at section 721(b)(5)(B); FD&C Red No. 3 listed at 21 CFR 74.303 and 81.10/82 provisional listing history",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E019",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E020",
+  "kind": "statute",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "FD&C Act section 409 food additives; Delaney Clause at section 409(c)(3)(A)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E020",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E021",
+  "kind": "regulation",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "BVO listed as interim food additive at 21 CFR 180.30; revocation final rule July 2024",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E021",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E022",
+  "kind": "regulation",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "titanium dioxide color additive listing 21 CFR 73.575; EU Commission Regulation (EU) 2022/63 removed E171",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E022",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E023",
+  "kind": "regulation",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "aspartame food additive regulation 21 CFR 172.804",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E023",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E024",
+  "kind": "regulation",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "saccharin interim food additive 21 CFR 180.37; Saccharin Study and Labeling Act (Pub. L. 95-203, November 1977)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E024",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E025",
+  "kind": "regulation",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "FIFRA section 3(g) registration review; 40 CFR Part 155 Subpart C; interim registration review decisions",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E025",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E026",
+  "kind": "statute",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "atrazine Interim Reregistration Eligibility Decision (IRED) January 2003 under FIFRA section 4",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E026",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E027",
+  "kind": "statute",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "FFDCA section 408 (21 U.S.C. 346a) pesticide tolerances; FQPA 1996 standard \"reasonable certainty that no harm will result\"",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E027",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E028",
+  "kind": "regulation",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "chlorpyrifos tolerance revocation final rule August 30, 2021 (86 FR 48315)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E028",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E029",
+  "kind": "court_order",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "Ninth Circuit LULAC v. Regan decided April 29, 2021 ordered EPA to act on chlorpyrifos tolerances",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E029",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E030",
+  "kind": "court_order",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "Eighth Circuit Red River Valley Sugarbeet Growers Association v. Regan decided November 2, 2023 vacated the chlorpyrifos tolerance revocation",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E030",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E031",
+  "kind": "court_order",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "Ninth Circuit NRDC v. EPA decided June 17, 2022 vacated human health portion of glyphosate interim decision",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E031",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E032",
+  "kind": "statute",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "FIFRA section 24(b) uniformity of labeling (state labeling requirements in addition to or different from federal)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E032",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E033",
+  "kind": "regulation",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "SDWA section 1412 national primary drinking water regulations; Lead and Copper Rule Improvements final rule October 2024 (89 FR 86418)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E033",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E034",
+  "kind": "regulation",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "PFAS NPDWR final rule April 2024 (89 FR 32532)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E034",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E035",
+  "kind": "regulation",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "SDWA section 1445(a)(2) unregulated contaminant monitoring (UCMR); 40 CFR 141.40; Contaminant Candidate List under SDWA section 1412(b)(1)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E035",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E036",
+  "kind": "regulation",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "saccharin removed from RCRA hazardous waste lists (U202) and CERCLA hazardous substances, final rule December 17, 2010 (75 FR 78918)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E036",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E037",
+  "kind": "regulation",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "Controlled Substances Act section 201 (21 U.S.C. 811) scheduling; 21 CFR 1308",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E037",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E038",
+  "kind": "statute",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "OSH Act 1970 section 6(b) (29 U.S.C. 655) standard setting; section 5(a)(1) general duty clause",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E038",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E039",
+  "kind": "statute",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "Denmark Act on Workers' Compensation and the Occupational Diseases Committee recognized breast cancer after night work",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E039",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E040",
+  "kind": "statute",
+  "rep": "A",
+  "section": "authority",
+  "sources": [],
+  "statement": "Germany SGB VII section 9 occupational disease list (Berufskrankheiten-Verordnung); Medical Expert Advisory Board (Aerztlicher Sachverstaendigenbeirat)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E040",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E041",
+  "kind": "statute",
+  "rep": "A",
+  "section": "funding",
+  "sources": [],
+  "statement": "FDA human drug review funded in part by PDUFA user fees (since 1992); devices by MDUFA fees (since 2002); food program has no comparable user fee",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E041",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-E042",
+  "kind": "statute",
+  "rep": "A",
+  "section": "funding",
+  "sources": [],
+  "statement": "EPA pesticide registration funded in part by PRIA fees (since 2004) and FIFRA maintenance fees",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E042",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F001",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "actor",
+  "sources": [],
+  "statement": "aducanumab approved June 7, 2021 by FDA CDER; Peripheral and Central Nervous System Drugs (PCNS) Advisory Committee met November 6, 2020; Patrizia Cavazzoni was CDER director; Janet Woodcock acting FDA commissioner",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F001",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F002",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "conflict",
+  "sources": [],
+  "statement": "aducanumab: House Oversight and Energy & Commerce committees report (December 2022) found FDA-Biogen collaboration \"atypical\"; FDA official Billy Dunn worked closely with Biogen",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F002",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F003",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "conflict",
+  "sources": [],
+  "statement": "three PCNS advisory committee members resigned after the aducanumab approval (Aaron Kesselheim, David Knopman, Joel Perlmutter)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F003",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F004",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "actor",
+  "sources": [],
+  "statement": "eteplirsen approved September 19, 2016; CDER director Janet Woodcock overruled the review team; FDA Commissioner Robert Califf decided the scientific dispute appeal in favor of approval; advisory committee met April 25, 2016 and voted 7-6 that the evidence did not establish effectiveness",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F004",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F005",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "conflict",
+  "sources": [],
+  "statement": "eteplirsen: Woodcock memo or statements referenced Sarepta's financial need (\"Sarepta needed to be capitalized\") in the approval dispute",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F005",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F006",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "actor",
+  "sources": [],
+  "statement": "Zohydro ER approved October 25, 2013 by FDA; Anesthetic and Analgesic Drug Products Advisory Committee voted 11-2 against in December 2012; sponsor Zogenix",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F006",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F007",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "actor",
+  "sources": [],
+  "statement": "Makena: Commissioner Robert Califf and Chief Scientist Namandje Bumpus issued final decision to withdraw April 6, 2023 after an October 2022 hearing at which an advisory committee voted 14-1 for withdrawal; sponsor Covis",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F007",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F008",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "actor",
+  "sources": [],
+  "statement": "rofecoxib: February 2005 joint meeting of Arthritis Advisory Committee and Drug Safety and Risk Management Advisory Committee voted 17-15 that Vioxx could return to market",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F008",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F009",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "conflict",
+  "sources": [],
+  "statement": "rofecoxib/Vioxx 2005 panel: Center for Science in the Public Interest analysis found 10 of 32 panelists had industry ties; without them the Vioxx vote would have been against return",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F009",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F010",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "actor",
+  "sources": [],
+  "statement": "molnupiravir: FDA Antimicrobial Drugs Advisory Committee met November 30, 2021 (13-10); EUA issued December 23, 2021; sponsors Merck and Ridgeback",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F010",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F011",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "actor",
+  "sources": [],
+  "statement": "flibanserin approved August 18, 2015; joint advisory committee June 4, 2015 voted 18-6; sponsor Sprout Pharmaceuticals; CDER director Janet Woodcock",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F011",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F012",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "conflict",
+  "sources": [],
+  "statement": "flibanserin: \"Even the Score\" advocacy campaign was funded in part by Sprout Pharmaceuticals",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F012",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F013",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "actor",
+  "sources": [],
+  "statement": "bevacizumab breast indication: FDA Commissioner Margaret Hamburg revoked the indication November 18, 2011 after a June 2011 hearing; ODAC voted 12-1 in July 2010 (and 6-0 at the 2011 hearing); sponsor Genentech",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F013",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F014",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "actor",
+  "sources": [],
+  "statement": "donanemab: PCNS Advisory Committee June 10, 2024 voted 11-0; FDA approved July 2, 2024; sponsor Eli Lilly",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F014",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F015",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "actor",
+  "sources": [],
+  "statement": "midodrine: FDA CDER proposed withdrawal August 2010 (Shire's ProAmatine and generics) and reversed course in September 2010",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F015",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F016",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "actor",
+  "sources": [],
+  "statement": "pelvic mesh: FDA Obstetrics and Gynecology Devices Panel met September 2011 and recommended reclassification; FDA ordered manufacturers (Boston Scientific, Coloplast) to stop selling transvaginal POP mesh April 16, 2019",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F016",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F017",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "actor",
+  "sources": [],
+  "statement": "metal-on-metal hips: FDA Orthopaedic and Rehabilitation Devices Panel met June 27-28, 2012 on metal-on-metal hips; DePuy ASR recall August 2010",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F017",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F018",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "actor",
+  "sources": [],
+  "statement": "GLP-1 thyroid C-cell boxed warning first required for liraglutide (Victoza) at approval January 25, 2010",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F018",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F019",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "actor",
+  "sources": [],
+  "statement": "Red No. 3: FDA revoked authorization January 15, 2025 in response to a 2022 color additive petition led by Center for Science in the Public Interest",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F019",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F020",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "actor",
+  "sources": [],
+  "statement": "BVO: FDA final rule published July 3, 2024, effective August 2, 2024; California banned BVO in 2023 (AB 418)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F020",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F021",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "actor",
+  "sources": [],
+  "statement": "atrazine: Center for Regulatory Effectiveness filed Data Quality Act / Information Quality Act petition (2002) challenging Hayes frog studies; registrant Syngenta",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F021",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F022",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "conflict",
+  "sources": [],
+  "statement": "atrazine: Syngenta funded the atrazine ecological risk assessment panel / EcoRisk studies used by EPA; Hayes had been a Syngenta-funded researcher",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F022",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F023",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "conflict",
+  "sources": [],
+  "statement": "glyphosate: EPA official Jess Rowland (chair of Cancer Assessment Review Committee) communications with Monsanto disclosed in Monsanto Papers litigation",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F023",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F024",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "actor",
+  "sources": [],
+  "statement": "chlorpyrifos revocation signed by EPA Administrator Michael Regan August 2021; registrant Corteva (Dow) stopped producing chlorpyrifos 2020",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F024",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F025",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "actor",
+  "sources": [],
+  "statement": "neonicotinoid proposed interim decisions issued by EPA Office of Pesticide Programs January 30, 2020; registrants Bayer, Syngenta, Valent",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F025",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F026",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "actor",
+  "sources": [],
+  "statement": "Lead and Copper Rule Improvements signed by EPA Administrator Michael Regan October 8, 2024",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F026",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F027",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "actor",
+  "sources": [],
+  "statement": "PFAS NPDWR announced April 10, 2024 by EPA Administrator Michael Regan; EPA Administrator Lee Zeldin announced May 2025 intent to rescind PFHxS, PFNA, HFPO-DA and hazard-index limits and extend PFOA/PFOS compliance to 2031",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F027",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F028",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "actor",
+  "sources": [],
+  "statement": "UCMR 6 proposal July 2026 signed by EPA Administrator Lee Zeldin; seven governors petitioned EPA to monitor microplastics",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F028",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F029",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "actor",
+  "sources": [],
+  "statement": "saccharin 1977: FDA Commissioner Donald Kennedy proposed the ban March 9, 1977; Congress passed Saccharin Study and Labeling Act November 1977",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F029",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F030",
+  "kind": "regulation",
+  "rep": "A",
+  "section": "actor",
+  "sources": [],
+  "statement": "marijuana Schedule III order 2026: Attorney General and DEA Administrator; executive order by President Trump (December 2025) directed expedited rescheduling",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F030",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F031",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "actor",
+  "sources": [],
+  "statement": "glyphosate review 2026: EPA-HHS partnership announced; Bayer sought Supreme Court review in Monsanto v. Durnell; Solicitor General supported Bayer's position",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F031",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F032",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "conflict",
+  "sources": [],
+  "statement": "FDA advisory committee members' conflict-of-interest waivers under 18 U.S.C. 208 are posted per meeting on fda.gov; check for the November 6, 2020 PCNS aducanumab meeting whether any waiver was granted",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F032",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F033",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "funding",
+  "sources": [],
+  "statement": "PDUFA user fees fund a majority of FDA human drug review costs (about two-thirds of the human drug review program)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F033",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F034",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "actor",
+  "sources": [],
+  "statement": "night shift: OSHA has not issued a standard on shift work; NIOSH publishes guidance on shift work and long hours",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F034",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-F035",
+  "kind": "record_fact",
+  "rep": "A",
+  "section": "actor",
+  "sources": [],
+  "statement": "Denmark National Board of Industrial Injuries (Arbejdsskadestyrelsen) awarded compensation to 38 women with breast cancer after night work (2008-2009)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F035",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-FR-C2-DOCS",
+  "kind": "gap",
+  "note": "rows: none",
+  "sources": [],
+  "statement": "the 34 Frame C2 decision documents coded at document level (mitigation, use cancellations)",
+  "status": "PROPOSED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "notice-level coding only in the source; document-level coding not run (NCR-R6)",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-FR-CLINHOLD",
+  "kind": "gap",
+  "note": "rows: G022",
+  "sources": [],
+  "statement": "FDA clinical holds in a stated window",
+  "status": "PROPOSED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "no public FDA listing located; disclosure is by sponsors (G022 not searched)",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-FR-CRL-2025",
+  "kind": "gap",
+  "note": "rows: G021",
+  "sources": [],
+  "statement": "FDA complete response letters published July 10 2025 (200+ letters, 2020-2024)",
+  "status": "PROPOSED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "exists (G021 VERIFIED); restrictive-side decisions, mostly for products later approved; openFDA database not reachable from here (egress)",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-FR-USDA",
+  "kind": "gap",
+  "note": "rows: none",
+  "sources": [],
+  "statement": "USDA decisions",
+  "status": "PROPOSED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "unenumerated in the source and here",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-G001",
+  "kind": "record_fact",
+  "rep": "R",
+  "section": "R6",
+  "sources": [
+   "SRC-U-ad9cc7be"
+  ],
+  "statement": "EPA release titled \"EPA Requires Cancellation of Pentachlorophenol to Protect Human Health\" (2022): cancellation of all pentachlorophenol uses with a phase-out over about 5 years",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "epa.gov (summary, release Feb 4 2022): \"EPA issued a final registration review decision requiring the cancellation of pentachlorophenol\"; \"The complete phase-out of pentachlorophenol will be conducted over five years\"; alternatives named copper naphthenate, DCOIT, chromated arsenicals, creosote",
+   "ledger_row": "G001",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "release dated Feb 4 2022, same day as 87 FR 6535; proposal March 2021",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "id": "EV-G002",
+  "kind": "regulation",
+  "rep": "K",
+  "section": "C2",
+  "sources": [],
+  "statement": "Federal Register 87 FR 6535 (February 4, 2022) announced registration review decisions including a final decision for pentachlorophenol plus interim decisions for creosote and chromated arsenicals",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "govinfo.gov FR-2022-02-04 doc 2022-02418 (summary): \"Pesticide Registration Review; Interim Decisions and Final Decision for Several Pesticides\"; interim decisions for creosote and chromated arsenicals with dichromic acid; \"the final registration review decision for pentachlorophenol\" (Case 2505)",
+   "ledger_row": "G002",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "notice text says nothing about voluntary request in the snippet seen",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "id": "EV-G003",
+  "kind": "regulation",
+  "rep": "K",
+  "section": "C2",
+  "sources": [],
+  "statement": "Federal Register 87 FR 5815 (February 2, 2022) announced registration review interim decisions for about 15 pesticides including amitraz, metaldehyde, rotenone, sodium cyanide, sodium fluoroacetate",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "?",
+   "found": "govinfo.gov (summary): no Feb 2 2022 notice found in results; only a Jan 2 2020 revised interim decision for sodium cyanide and a July 30 2021 batch",
+   "ledger_row": "G003",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "one query only; 87 FR 5815 not located",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-G004",
+  "kind": "regulation",
+  "rep": "K",
+  "section": "C2",
+  "sources": [],
+  "statement": "Federal Register 87 FR 25266 (April 28, 2022) announced registration review interim/final decisions including chlormequat chloride, difenoconazole, oxadiazon, and amended interim decisions for clopyralid and permethrin",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "G004",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-G005",
+  "kind": "regulation",
+  "rep": "K",
+  "section": "C2",
+  "sources": [],
+  "statement": "Federal Register 87 FR 48018 (August 5, 2022) and 87 FR 64484 (October 25, 2022) announced registration review decisions (laminarin, linalool; Pasteuria, Pseudomonas syringae, trimethylamine) and case closures (e.g. nabam, cryolite, furfural)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "G005",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-G006",
+  "kind": "record_fact",
+  "rep": "R",
+  "section": "R14",
+  "sources": [],
+  "statement": "glyphosate: EPA interim registration review decision January 2020; Ninth Circuit (NRDC v. EPA) June 17, 2022 vacated the human-health portion; EPA withdrew the glyphosate interim decision in September 2022",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "epa.gov/agencyiq (summary): EPA withdrew the glyphosate interim decision Sept 23 2022 \"in consideration of the Ninth Circuit's June 17, 2022, decision\"; court \"vacated the human health portion\"; products \"continue to remain on the market\"",
+   "ledger_row": "G006",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "Jan 2020 ID date not shown in these results",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "id": "EV-G007",
+  "kind": "record_fact",
+  "rep": "R",
+  "section": "R14",
+  "sources": [],
+  "statement": "glyphosate Ninth Circuit 2022 petitioners included Natural Resources Defense Council, Rural Coalition, Pesticide Action Network, Center for Food Safety",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "aglaw.psu.edu/govinfo.gov (summary, opinion caption 20-70787, 20-70801, June 17 2022): petitioners \"NATURAL RESOURCES DEFENSE COUNCIL; PESTICIDE ACTION NETWORK NORTH AMERICA\"; consolidated \"RURAL COALITION; ... BEYOND PESTICIDES; CENTER FOR FOOD SAFETY\"",
+   "ledger_row": "G007",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "public-interest litigants and farmworker groups",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "id": "EV-G008",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "2",
+  "sources": [],
+  "statement": "chlorpyrifos: EPA final rule revoking all food tolerances published August 30, 2021 (effective February 28, 2022), following the Ninth Circuit order in LULAC v. Regan (April 29, 2021)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": "effective date Oct 29 2021, Feb 28 2022 is tolerance expiry; April 29 day not shown",
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "govinfo.gov FR-2021-08-30 doc 2021-18091 (summary): \"This final rule is effective October 29, 2021. The tolerances for all commodities expire on February 28, 2022\"; Ninth Circuit 996 F.3d 673 (9th Cir. 2021)",
+   "ledger_row": "G008",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "effective date Oct 29 2021, Feb 28 2022 is tolerance expiry; April 29 day not shown",
+   "says": "DIFFERS",
+   "state": "CORRECTED"
+  }
+ },
+ {
+  "id": "EV-G009",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "2",
+  "sources": [],
+  "statement": "chlorpyrifos: Eighth Circuit Red River Valley Sugarbeet Growers Association v. Regan, November 2, 2023, vacated the tolerance revocation; petitioners were grower and farm groups",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "lawbc.com/govinfo.gov (summary): Nov 2 2023 unanimous Eighth Circuit opinion in \"Red River Valley Sugarbeet Growers Association et al.\"; revocation \"arbitrary and capricious\"; tolerances \"legally currently in effect\" (89 FR, Feb 5 2024); 85 F.4th 881",
+   "ledger_row": "G009",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "petitioners named as grower association et al.; full party list not shown",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "id": "EV-G010",
+  "kind": "regulation",
+  "rep": "K",
+  "section": "2",
+  "sources": [],
+  "statement": "midodrine: FDA proposed withdrawal of approval in August 2010 because required post-approval (subpart H) studies were not completed, then in September 2010 allowed continued marketing after patient and physician objections",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": "Sept 2010 was a clarification, not a reversal; withdrawal deferred 2012 by agreement with sponsor",
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "drugs.com/pharmatimes (summary): Aug 2010 FDA issued Proposal to Withdraw (first under accelerated-approval rules); Sept 2010 FDA \"clarified that its proposal was part of the regulatory process and that midodrine could remain on the market\"; Feb 2012 FDA \"deferred the withdrawal\" after Shire agreed to 2 more studies; deadline later March 31 2015",
+   "ledger_row": "G010",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "Sept 2010 was a clarification, not a reversal; withdrawal deferred 2012 by agreement with sponsor",
+   "says": "DIFFERS",
+   "state": "CORRECTED"
+  }
+ },
+ {
+  "id": "EV-G011",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "2",
+  "sources": [],
+  "statement": "saccharin: FDA proposed ban announced March 9, 1977; Saccharin Study and Labeling Act enacted November 23, 1977 imposed a moratorium and warning label",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "americanheritage.com (summary): \"On March 9, 1977 ... FDA announced its intention to ban saccharin\"; en.wikipedia.org/govinfo.gov (summary): Public Law 95-203, 91 Stat. 1451, \"signed into law by President Jimmy Carter on November 23, 1977\"; 18-month bar on restricting saccharin plus required warning label",
+   "ledger_row": "G011",
+   "queries": 2,
+   "reached": "Y",
+   "reason": "signing date from a secondary source (Wikipedia), statute PDF not opened",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "id": "EV-G012",
+  "kind": "record_fact",
+  "rep": "R",
+  "section": "R11",
+  "sources": [],
+  "statement": "Denmark: National Board of Industrial Injuries (Arbejdsskadestyrelsen) recognised breast cancer after long-term night work as an occupational disease and paid compensation (2008 onward; e.g. 38 women)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "hrreporter.com/eurogip.fr (summary): 2008 Danish Department of Occupational Injuries and Diseases \"decided to recognise cases of breast cancer on certain conditions\"; \"38 Danish women have receive payments ... according to the Danish National Board of Industrial Injuries\"; EUROGIP gives 37, BBC-based coverage about 40; criteria later revised (2014)",
+   "ledger_row": "G012",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "count varies 37/38/40 across secondary sources; no Danish primary document seen",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-G013",
+  "kind": "record_fact",
+  "rep": "R",
+  "section": "R11",
+  "sources": [],
+  "statement": "Dtsch Arztebl review \"Shift Work and Cancer: The Evidence and the Challenge\" states \"Monetary compensation has already been paid for such cases in at least one country (Denmark)\"",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "pmc.ncbi.nlm.nih.gov PMC2954516 (summary): Erren et al., Dtsch Arztebl Int 2010;107(38):657-662: \"Monetary compensation has already been paid for such cases in at least one country (Denmark)\"",
+   "ledger_row": "G013",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "quote seen at search depth; secondary review, not the Danish primary",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "id": "EV-G014",
+  "kind": "record_fact",
+  "rep": "R",
+  "section": "R14",
+  "sources": [],
+  "statement": "pelvic mesh: FDA final orders January 2016 reclassified surgical mesh for transvaginal pelvic organ prolapse repair to class III; FDA ordered manufacturers to stop selling it April 16, 2019",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "aorn.org/wcpo.com (summary): FDA \"reclassified them in class III (high risk) in 2016\" requiring PMA; FDA ordered Boston Scientific and Coloplast \"to stop selling and distributing\"; article dated April 2019",
+   "ledger_row": "G014",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "year 2016 and April 2019 seen; January 2016 and April 16 2019 day not shown",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-G015",
+  "kind": "record_fact",
+  "rep": "R",
+  "section": "R14",
+  "sources": [],
+  "statement": "pelvic mesh: FDA 2011 safety communication reported 2,874 adverse event reports for urogynecologic mesh 2008-2010 (1,503 associated with pelvic organ prolapse repair)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "fda.gov media/81123 (summary): MAUDE search Jan 1 2008 - Dec 31 2010 \"identified 2,874 Medical Device Reports\"; \"1,503 were associated with pelvic organ prolapse (POP) repairs\"",
+   "ledger_row": "G015",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "counts are MDRs (injury, death, malfunction), not confirmed injuries",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "id": "EV-G016",
+  "kind": "record_fact",
+  "rep": "R",
+  "section": "R14",
+  "sources": [],
+  "statement": "pelvic mesh for POP first cleared via 510(k) in 2002 (sling for SUI 1996)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "G016",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-G017",
+  "kind": "record_fact",
+  "rep": "R",
+  "section": "R14",
+  "sources": [],
+  "statement": "metal-on-metal hip: FDA final order February 18, 2016 requiring premarket approval applications for metal-on-metal total hip systems; DePuy ASR recall August 2010 of about 93,000 implants worldwide",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "carabinshaw.com/drugwatch.com (summary): DePuy ASR recall 2010; \"implanted in 93,000 patients\"; Feb 2016 PMA final order not in results",
+   "ledger_row": "G017",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "recall and 93,000 seen; February 18 2016 final order not seen",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-G018",
+  "kind": "record_fact",
+  "rep": "R",
+  "section": "R8",
+  "sources": [],
+  "statement": "cannabis: DEA denied petitions to reschedule marijuana in 2001, July 2011, and August 2016, keeping it in Schedule I",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "regulations.vlex.com/thefdalawblog.com (summary): 81 FR 53767, August 12 2016, denial \"by letter dated July 19, 2016\"; two petitions (2009 New Mexico citizen; 2011 governors of Rhode Island and Washington)",
+   "ledger_row": "G018",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "2016 denial seen; 2001 and July 2011 denials not seen (see G036)",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-G019",
+  "kind": "regulation",
+  "rep": "R",
+  "section": "R8",
+  "sources": [],
+  "statement": "cannabis: HHS recommended Schedule III in August 2023; DEA proposed rule May 2024; a 2026 order placed FDA-approved marijuana products in Schedule III and the rescheduling was subsequently paused or stayed",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "ropesgray.com/cannabisbusinesstimes.com (summary): DOJ final order released April 23 2026 placing marijuana in FDA-approved products and under state medical license in Schedule III; D.C. Circuit challenges SAM v. DOJ Nos. 26-1106, 26-1130, 26-1136; petitioner statement indicates interim stay not granted; DEA hearing on separate proposed rule set June 29 2026",
+   "ledger_row": "G019",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "HHS 2023 and DEA May 2024 not shown; \"stayed\" not confirmed, status contested",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-G020",
+  "kind": "record_fact",
+  "rep": "R",
+  "section": "R8",
+  "sources": [],
+  "statement": "psilocybin has been in Schedule I since the Controlled Substances Act (1970); FDA granted breakthrough therapy designation to COMPASS Pathways (2018) and Usona Institute (2019) psilocybin programs",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "pharmaphorum.com/reason.com (summary): COMPASS breakthrough therapy designation October 2018; Usona 2019; psilocybin \"Schedule I\" at that time",
+   "ledger_row": "G020",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "1970 placement not shown (see G037)",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-G021",
+  "kind": "record_fact",
+  "rep": "R",
+  "section": "R8",
+  "sources": [],
+  "statement": "FDA publicly released more than 200 complete response letters (CRLs) issued 2020-2024 in July 2025",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "fda.gov press announcement (summary): FDA published \"more than 200 decision letters, known as complete response letters (CRLs)\" on July 10 2025, for applications \"between 2020 and 2024\", centralized on openFDA; most relate to products later approved",
+   "ledger_row": "G021",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "restrictive-side frame exists (CRLs); mostly later-approved products, so not denials on the merits",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "id": "EV-G022",
+  "kind": "record_fact",
+  "rep": "R",
+  "section": "R8",
+  "sources": [],
+  "statement": "FDA does not publicly disclose clinical hold decisions under 21 CFR 312.42; disclosure is by sponsors",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "G022",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-G023",
+  "kind": "record_fact",
+  "rep": "R",
+  "section": "R9",
+  "sources": [],
+  "statement": "PFOA replacement GenX (HFPO-DA): EPA 2021 human health toxicity assessment found GenX chemicals toxic at low doses; 2024 PFAS drinking water rule set HFPO-DA MCL at 10 ppt",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "epa.gov/chemistryworld.com (summary): HFPO-DA \"manufactured as a replacement ... for PFOA since 2009\"; EPA 2021 assessment reported effects on kidneys, blood, immune system, liver, developing fetuses; April 10 2024 rule set MCLs incl. HFPO-DA; \"10ppt\" seen only as reference value phrasing",
+   "ledger_row": "G023",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "HFPO-DA MCL 10 ppt not confirmed; one review calls HFPO-DA \"less toxic\"; sources disagree on regrettable framing",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-G024",
+  "kind": "statute",
+  "rep": "R",
+  "section": "R6",
+  "sources": [],
+  "statement": "BVO: California AB 418 (2023, California Food Safety Act) banned brominated vegetable oil in food effective 2027, before FDA's July 2024 final rule revoking BVO authorization",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "foodsafetynews.com/natlawreview.com/ewg.org (summary): Newsom signed AB 418 October 7, 2023, banning BVO and three other additives; FDA proposed revocation late 2023 (comments to January 17, 2024); final rule July 2024, effective August 2",
+   "ledger_row": "G024",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "final-rule date stated by secondary sources only; Federal Register not opened",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "id": "EV-G025",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "2",
+  "sources": [],
+  "statement": "Red No. 3: FDA revoked authorization January 15, 2025 under the Delaney Clause in response to a 2022 petition (CSPI and others); food deadline January 15, 2027, ingested drugs January 18, 2028",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "G025",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-G026",
+  "kind": "record_fact",
+  "rep": "R",
+  "section": "R14",
+  "sources": [],
+  "statement": "aducanumab: Biogen discontinued Aduhelm in 2024 (January 31, 2024 announcement)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "G026",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-G031",
+  "kind": "record_fact",
+  "rep": "R",
+  "section": "R14",
+  "sources": [],
+  "statement": "prior approvals: bevacizumab breast-cancer accelerated approval February 2008; Makena accelerated approval February 2011; Avastin indication withdrawn November 18, 2011; Makena withdrawal final decision April 5-6, 2023",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "managedhealthcareexecutive.com/raps.org (summary): Avastin accelerated approval February 2008; breast indication withdrawn November 18, 2011; Makena not in results",
+   "ledger_row": "G031",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "Makena February 2011 approval not seen (Avastin half split out as G038)",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-G032",
+  "kind": "record_fact",
+  "rep": "R",
+  "section": "R14",
+  "sources": [],
+  "statement": "FDA final order published February 18, 2016 requiring PMA for total metal-on-metal semi-constrained hip joint systems (21 CFR 888.3320/888.3330), PMAs due May 18, 2016",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "govinfo.gov FR-2016-02-18 doc 2016-03331 (summary): \"Effective Date of Requirement for Premarket Approval for Total Metal-on-Metal Semi-Constrained Hip Joint Systems\", effective February 18 2016, PMAs due \"by May 18, 2016\"",
+   "ledger_row": "G032",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "final order",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "id": "EV-G033",
+  "kind": "record_fact",
+  "rep": "R",
+  "section": "R14",
+  "sources": [],
+  "statement": "glyphosate interim registration review decision signed January 22, 2020 (released January 2020)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "epa.gov/aglaw.psu.edu (summary): \"The challenged final order was signed and dated January 22, 2020\"; date of entry Feb 5 2020 per NRDC petition; EPA released it \"in January 2020\"",
+   "ledger_row": "G033",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "the dataset's 2020 year holds; day differs from a Jan 30 report",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "id": "EV-G034",
+  "kind": "record_fact",
+  "rep": "R",
+  "section": "R8",
+  "sources": [],
+  "statement": "psilocybin is in Schedule I under the Controlled Substances Act (1970) and remained there as of 2025; a rescheduling petition (Aggarwal) was denied and the Ninth Circuit asked DEA to explain",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "erowid.org/abq.news (summary): under the CSA \"which Congress passed in 1970, psilocybin is classified as a Schedule I substance\"; Aggarwal petition denied, Ninth Circuit directed DEA to explain; newsletter: Aug 11 2025 DEA forwarded petition to HHS/FDA",
+   "ledger_row": "G034",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "Schedule I status seen in secondary sources; no DEA primary seen",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-G035",
+  "kind": "record_fact",
+  "rep": "R",
+  "section": "R14",
+  "sources": [],
+  "statement": "FDA cleared the first surgical mesh for SUI in 1996 (ProteGen) and the first surgical mesh specifically for POP in 2002",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "fda.gov media/81123 (summary): \"in 1996, the FDA cleared the first surgical mesh product specifically for use in SUI, and in 2002, the FDA cleared the first surgical mesh product specifically for use in POP\"",
+   "ledger_row": "G035",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "the dataset's B00 year 1996 is the SUI clearance; first POP clearance 2002",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "id": "EV-G036",
+  "kind": "regulation",
+  "rep": "R",
+  "section": "R8",
+  "sources": [],
+  "statement": "DEA denied the petition to reschedule marijuana by letter dated July 19, 2016, published at 81 FR 53767 (August 12, 2016); the HHS scientific and medical evaluation was performed by FDA in consultation with NIDA",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "regulations.vlex.com (summary): Federal Register Vol. 81 No. 156, August 12, 2016, pp. 53767-53845; DEA denied the petition \"by letter dated July 19, 2016\"; HHS evaluation \"carried out by the FDA in consultation with NIDA\" (thefdalawblog.com)",
+   "ledger_row": "G036",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "Federal Register PDF not opened",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "id": "EV-G037",
+  "kind": "record_fact",
+  "rep": "R",
+  "section": "R8",
+  "sources": [],
+  "statement": "FDA granted breakthrough therapy designation to COMPASS Pathways' psilocybin program (treatment-resistant depression) in October 2018 and to Usona Institute's (major depressive disorder) in 2019; psilocybin was in Schedule I at those dates",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "pharmaphorum.com/reason.com/tellurideinside.com (summary): COMPASS Pathways breakthrough therapy designation October 2018 (treatment-resistant depression); Usona Institute 2019 (major depressive disorder); psilocybin a Schedule I controlled substance",
+   "ledger_row": "G037",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "designation letters not opened",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "id": "EV-G038",
+  "kind": "record_fact",
+  "rep": "R",
+  "section": "R14",
+  "sources": [],
+  "statement": "bevacizumab (Avastin) metastatic breast cancer accelerated approval February 2008; indication withdrawn November 18, 2011 after an ODAC 6-0 vote",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "contemporaryobgyn.net/medthority.com (summary): accelerated approval for metastatic breast cancer February 2008; ODAC \"voted 6-0 to withdraw\"; withdrawal \"took effect on November 18, 2011\"",
+   "ledger_row": "G038",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "FDA decision memo not opened",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "id": "EV-G039",
+  "kind": "record_fact",
+  "rep": "R",
+  "section": "R14",
+  "sources": [],
+  "statement": "FDA final order effective February 18, 2016 requiring premarket approval for metal-on-metal total hip systems (Docket FDA-2011-N-0661); PMAs due May 18, 2016",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "govinfo.gov FR-2016-02-18 2016-03331 / mddionline.com (summary): final order requiring PMA for metal/metal semi-constrained hip systems, Docket FDA-2011-N-0661, effective February 18, 2016; PMAs due May 18, 2016",
+   "ledger_row": "G039",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "Federal Register PDF listed, not opened",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "id": "EV-H001",
+  "kind": "absence",
+  "rep": "W",
+  "section": "EA-01",
+  "sources": [],
+  "statement": "EPA's glyphosate human-health risk assessment and 2020 interim decision do not assess effects on the gut microbiome (absence claim; settled only by EPA's own text)",
+  "status": "PROPOSED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "beyondpesticides.org/usrtk.org (summary): critics state EPA and Health Canada \"dismiss emerging areas of concern like impacts on the gut microbiome\"; mealeys.com (summary): EPA's January 2020 interim decision \"did not identify any human health risks\"",
+   "ledger_row": "H001",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "EPA's own text on microbiome endpoints not seen; absence carried as PROPOSED",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "evidence_class": [
+   "sponsor_unpub"
+  ],
+  "id": "EV-U01",
+  "kind": "unlocated_input",
+  "sources": [],
+  "statement": "Biogen trial data and analyses submitted to FDA (EMERGE/ENGAGE post-hoc analyses) relied on for the approval",
+  "status": "PROPOSED",
+  "type": "EVIDENCE",
+  "unlocated_reason": "sponsor-submitted; full analyses not public",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "sponsor-submitted; full analyses not public",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "evidence_class": [
+   "sponsor_unpub"
+  ],
+  "id": "EV-U02",
+  "kind": "unlocated_input",
+  "sources": [],
+  "statement": "Sarepta dystrophin measurements submitted to FDA",
+  "status": "PROPOSED",
+  "type": "EVIDENCE",
+  "unlocated_reason": "sponsor-submitted; underlying data not public",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "sponsor-submitted; underlying data not public",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "evidence_class": [
+   "sponsor_unpub"
+  ],
+  "id": "EV-U03",
+  "kind": "unlocated_input",
+  "sources": [],
+  "statement": "registrant-submitted glyphosate studies relied on by EPA",
+  "status": "PROPOSED",
+  "type": "EVIDENCE",
+  "unlocated_reason": "confidential business information under FIFRA",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "confidential business information under FIFRA",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "evidence_class": [
+   "sponsor_unpub"
+  ],
+  "id": "EV-U04",
+  "kind": "unlocated_input",
+  "sources": [],
+  "statement": "Syngenta model used to reduce the atrazine protection factor (coded_decisions.csv C02 note)",
+  "status": "PROPOSED",
+  "type": "EVIDENCE",
+  "unlocated_reason": "registrant model; not located in a public docket from here",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "registrant model; not located in a public docket from here",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "evidence_class": [],
+  "id": "EV-U05",
+  "kind": "absence",
+  "sources": [],
+  "statement": "clinical data for the 1996 mesh clearance",
+  "status": "PROPOSED",
+  "type": "EVIDENCE",
+  "unlocated_reason": "none required under 510(k) substantial equivalence",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "none required under 510(k) substantial equivalence",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "evidence_class": [],
+  "id": "EV-U06",
+  "kind": "absence",
+  "sources": [],
+  "statement": "clinical data for the metal-on-metal hip clearances",
+  "status": "PROPOSED",
+  "type": "EVIDENCE",
+  "unlocated_reason": "none required under 510(k) substantial equivalence",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "none required under 510(k) substantial equivalence",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V001",
+  "kind": "population_statistic",
+  "rep": "K",
+  "section": "1,3.1",
+  "sources": [
+   "SRC-U-31a141de"
+  ],
+  "statement": "Daval, Teng, Russo, Kesselheim (JAMA Health Forum 2023): census of 409 FDA human-drug advisory committee meetings 2010-2021; 314 with votes; 298 analyzable votes",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "raps.org/jamanetwork.com (summary): \"409 human drug advisory committee meetings from 2010 to 2021\"; \"aligned with 262 of 298 advisory committee votes\"; 314 not shown",
+   "ledger_row": "V001",
+   "queries": 2,
+   "reached": "Y",
+   "reason": "314 meetings-with-votes count needs full-text Methods/Results",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V002",
+  "kind": "population_statistic",
+  "rep": "K",
+  "section": "5.2",
+  "sources": [
+   "SRC-U-31a141de"
+  ],
+  "statement": "initial-approval votes: positive n=147 with 142 approved (96.6%); negative n=60 with 20 approved (33.3%); FDA action measured as of November 30, 2022",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "pmc.ncbi.nlm.nih.gov (summary): \"Approval followed 142 of 147 positive votes for initial approvals (97%)\"; nonapproval followed \"40 of 60\" negative votes; \"as of November 30, 2022\"; 20 approved and 33.3% not stated",
+   "ledger_row": "V002",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "20 and 33.3% are complements of 40/60, not stated; 96.6% shown rounded as 97%",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V003",
+  "kind": "population_statistic",
+  "rep": "K",
+  "section": "5.2",
+  "sources": [
+   "SRC-U-31a141de"
+  ],
+  "statement": "of 25 discordant initial-approval votes, 20 (80%) were approvals after a negative vote; quote \"discordance between FDA actions and advisory committee votes was most frequently an approval after a negative vote\"",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "pmc.ncbi.nlm.nih.gov (summary): \"Discordance between FDA actions and advisory committee votes was most frequently an approval after a negative vote.\"; 25 discordant and 20 (80%) not shown",
+   "ledger_row": "V003",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "quote seen; the 25 and 80% counts need full-text Results",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V004",
+  "kind": "population_statistic",
+  "rep": "K",
+  "section": "3.1",
+  "sources": [
+   "SRC-U-31a141de"
+  ],
+  "statement": "committee meetings declined from 50 in 2012 to 18 in 2020 and 2021",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "center4research.org (summary, Endpoints News reprint): \"fell over that period, from a peak of 50 in 2012 to a low of 18 in 2020 and 2021\"",
+   "ledger_row": "V004",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "value seen in secondary coverage; primary text not opened",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "id": "EV-V005",
+  "kind": "population_statistic",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-31a141de"
+  ],
+  "statement": "the census lists hydrocodone bitartrate (Zohydro) among approvals that followed negative votes (20 approvals after negative votes)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "nbcnews.com (summary): Zohydro approved though \"the advisory committee voted 11-2 against\"; pmc.ncbi.nlm.nih.gov (summary): of 60 negative votes, \"the remaining 20 were decisions that went against the panel\"; Zohydro not shown in census",
+   "ledger_row": "V005",
+   "queries": 2,
+   "reached": "Y",
+   "reason": "census list of negative-vote approvals in full text would settle",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V006",
+  "kind": "population_statistic",
+  "rep": "K",
+  "section": "5.2",
+  "sources": [
+   "SRC-U-4d7f0a25"
+  ],
+  "statement": "positive vote associated with hazard ratio 9.42 (95% CI 5.99-14.80) for approval; median time to approval 74 days after positive vs 700 days after negative vote",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "saludyfarmacos.org (summary, citing the MedPage Today piece): FDA took \"a median of 74 days to approve, versus 700 days when the committee rejected\"; HR 9.42 (5.99-14.80) not shown",
+   "ledger_row": "V006",
+   "queries": 2,
+   "reached": "Y",
+   "reason": "hazard ratio needs the MedPage article or the PMC Results text",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V007",
+  "kind": "population_statistic",
+  "rep": "K",
+  "section": "5.2",
+  "sources": [
+   "SRC-U-5e3bf64b"
+  ],
+  "statement": "Kanter editorial, JAMA Health Forum: the asymmetry \"says something very important about the agency's view of advisory committees\"",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "?",
+   "found": "jamahealthforumeditorssummary.libsyn.com (summary): July 2023 JAMA Health Forum conversation with \"Aaron S. Kesselheim ... and Genevieve P. Kanter\"; editorial and quoted phrase not shown",
+   "ledger_row": "V007",
+   "queries": 2,
+   "reached": "Y",
+   "reason": "PubMed record 37418271 would show whether it is a Kanter editorial and its wording",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V008",
+  "kind": "population_statistic",
+  "rep": "K",
+  "section": "5.2",
+  "sources": [
+   "SRC-U-fd139695"
+  ],
+  "statement": "FDA device panels, 49 meetings: panelists expressing uncertainty voted against approval 55.9% vs 12.2% for certain panelists; 31.6% of uncertain panelists voted to approve",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "doaj.org (summary): PLoS ONE 17(6): e0267134, \"658,954 words spoken by 536 members during 49 meetings of 11 Panels\"; 55.9%, 12.2%, 31.6% not shown",
+   "ledger_row": "V008",
+   "queries": 2,
+   "reached": "Y",
+   "reason": "uncertainty-vote percentages need the paper's Results",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V009",
+  "kind": "court_order",
+  "rep": "K",
+  "section": "2",
+  "sources": [
+   "SRC-U-570a3f06"
+  ],
+  "statement": "Monsanto v. Durnell (No. 24-1068) decided June 25, 2026: FIFRA preempts state failure-to-warn claims on Roundup's EPA-approved label",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "mayerbrown.com/faegredrinker.com (summary): decided \"on June 25, 2026, holding 7-2 that FIFRA preempts a state failure-to-warn claim seeking a cancer warning on Roundup's label\"",
+   "ledger_row": "V009",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "slip opinion text not opened",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "id": "EV-V010",
+  "kind": "record_fact",
+  "rep": "C",
+  "section": "C10",
+  "sources": [
+   "SRC-U-c857ca99"
+  ],
+  "statement": "Monsanto v. Durnell vote was 7-2",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "thenewlede.org (summary, SCOTUSblog quote): \"the court ruled, by a vote of 7-2\"; dissent by Jackson joined by Gorsuch",
+   "ledger_row": "V010",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "slip opinion text not opened",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "id": "EV-V011",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "2",
+  "sources": [
+   "SRC-U-8e2e7aec"
+  ],
+  "statement": "UCMR 6 proposed July 1, 2026 covering 30 contaminants; microplastics not among them",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V011",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V012",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "2",
+  "sources": [
+   "SRC-U-06d18892"
+  ],
+  "statement": "microplastics added to draft Sixth Contaminant Candidate List (CCL 6) in April 2026",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V012",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V013",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "2",
+  "sources": [
+   "SRC-U-d265167f"
+  ],
+  "statement": "April 23-28, 2026: DOJ/DEA placed FDA-approved and state-licensed medical marijuana products in Schedule III; broader rescheduling sent to expedited hearing",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V013",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V014",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "2",
+  "sources": [
+   "SRC-U-008790ef"
+  ],
+  "statement": "the expedited rescheduling hearing was stayed/paused in October 2026",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V014",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V015",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-c2e1249f"
+  ],
+  "statement": "aducanumab advisory committee voted 0 yes / 10 no / 1 uncertain; FDA approved (2021) on the amyloid surrogate",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V015",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V016",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-54d14204"
+  ],
+  "statement": "aducanumab accelerated approval on amyloid surrogate the panel had not been asked to evaluate",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V016",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V017",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-0e9a1481"
+  ],
+  "statement": "Makena (17-OHPC) withdrawn 2023, about 12 years after accelerated approval, after confirmatory trial failed",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V017",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V018",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-fcbf9612"
+  ],
+  "statement": "2019 Makena advisory committee voted 9-7 to withdraw",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V018",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V019",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-d8364bcf"
+  ],
+  "statement": "2005 joint FDA panel voted 17-15 that rofecoxib could return to market with warnings",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V019",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V020",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-431d5925"
+  ],
+  "statement": "FDA decisional memo on COX-2 (2005); Merck never relaunched rofecoxib",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V020",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V021",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-bd62495f"
+  ],
+  "statement": "molnupiravir EUA advisory committee vote 13-10 (Nov 30, 2021)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V021",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V022",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-241cec15"
+  ],
+  "statement": "molnupiravir: rodent embryo-fetal and mutagenicity concerns; authorization with pregnancy restrictions",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V022",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V023",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-a85bc387"
+  ],
+  "statement": "flibanserin 2015 advisory committee 18-6 vote contingent on risk mitigation; approved with REMS after two prior rejections",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V023",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V024",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-bbf43c04"
+  ],
+  "statement": "flibanserin NDA 022526 approval letter 2015 with REMS",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V024",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V025",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-80849c8c"
+  ],
+  "statement": "2011 ODAC voted 12-1 to withdraw bevacizumab breast-cancer indication; Commissioner withdrew it",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V025",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V026",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-0b264dff"
+  ],
+  "statement": "FDA (Hamburg, Nov 2011) said Avastin not shown safe and effective for breast cancer",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V026",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V027",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-614feb7a"
+  ],
+  "statement": "donanemab advisory committee (June 10, 2024) voted 11-0 on effectiveness and benefit-risk",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V027",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V028",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-eba7b2b4"
+  ],
+  "statement": "donanemab panel backed despite ARIA risk and low/no-tau questions",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V028",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V029",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-581cdedb"
+  ],
+  "statement": "first pelvic-organ-prolapse mesh cleared via 510(k) in 1996 on substantial equivalence; FDA reclassified POP mesh to class III in 2016; FDA ordered remaining makers to stop selling POP mesh in 2019",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V029",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V030",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-e00da6bd"
+  ],
+  "statement": "metal-on-metal hips \"expedited to market ... using the 510(k) process, which only requires substantial equivalence\"; FDA rule effective February 18, 2016 requiring PMA for MoM hips",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V030",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V031",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-817d0065"
+  ],
+  "statement": "JAMA article documents pelvic mesh reclassification after a decade of adverse events (the article's actual subject unknown; check)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V031",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V032",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-4375d259"
+  ],
+  "statement": "FDA Animal Rule (2002) allows approval based on animal efficacy when human efficacy trials are not ethical or feasible",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V032",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V033",
+  "kind": "record_fact",
+  "rep": "C",
+  "section": "B03",
+  "sources": [
+   "SRC-U-ab801822"
+  ],
+  "statement": "first Animal Rule approval: pyridostigmine bromide (2003) for soman nerve agent pretreatment",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V033",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V034",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-753e81fb"
+  ],
+  "statement": "GLP-1 RA boxed warning for thyroid C-cell tumors in rodents, human relevance not determined; contraindicated in MTC/MEN2",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V034",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V035",
+  "kind": "record_fact",
+  "rep": "C",
+  "section": "B04",
+  "sources": [
+   "SRC-U-498639a4"
+  ],
+  "statement": "GLP-1 class boxed warning year: coded 2017 in the dataset (check when the class boxed warning first issued; liraglutide 2010?)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V035",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V036",
+  "kind": "record_fact",
+  "rep": "C",
+  "section": "B04",
+  "sources": [],
+  "statement": "EMA PRAC 2023 found no causal link between GLP-1 RAs and thyroid cancer",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V036",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V037",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-846d90d6"
+  ],
+  "statement": "FD&C Red No. 3 authorization revoked (Jan 2025) under the Delaney Clause; food deadline January 2027, ingested drugs January 2028; \"causes cancer in male laboratory rats\"",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V037",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V038",
+  "kind": "record_fact",
+  "rep": "C",
+  "section": "B05",
+  "sources": [
+   "SRC-U-846d90d6"
+  ],
+  "statement": "FDA states the rat mechanism does not occur in humans / not human-relevant",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V038",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V039",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-ddb9ad4a"
+  ],
+  "statement": "BVO authorization revoked 2024 (final rule effective August 2, 2024) on FDA's own rodent thyroid studies",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V039",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V040",
+  "kind": "record_fact",
+  "rep": "C",
+  "section": "B06",
+  "sources": [],
+  "statement": "BVO banned in UK/EU/Japan decades before the US revocation",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V040",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V041",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-dc2028a8"
+  ],
+  "statement": "EFSA 2021 could not exclude genotoxicity of E171; EU banned E171 in food 2022; FDA no action",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V041",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V042",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "6",
+  "sources": [
+   "SRC-U-4ff95d35"
+  ],
+  "statement": "Toxicology 2025 article on titanium dioxide genotoxicity / regulatory divergence",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V042",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V043",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-95c72b18"
+  ],
+  "statement": "FDA disagreed with IARC 2B classification of aspartame (2023), citing \"significant shortcomings\" in studies IARC relied on; JECFA kept ADI unchanged",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V043",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V044",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-cb3d0a2c"
+  ],
+  "statement": "FDLI article on aspartame IARC vs JECFA vs FDA divergence (Jan 2024)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V044",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V045",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-aa2a8a37"
+  ],
+  "statement": "atrazine re-registered (2003 IRED); 2020 interim registration review decision; aquatic level of concern revised to 9.7 ug/L in 2024",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V045",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V046",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-ae832db7"
+  ],
+  "statement": "EU banned atrazine in 2004 over groundwater; Hayes frog endocrine data excluded via Data Quality Act petition (CSV note)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V046",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V047",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-5b8227d1"
+  ],
+  "statement": "litigation over atrazine re-evaluation in the Ninth Circuit",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V047",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V048",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-c4207fa4"
+  ],
+  "statement": "IARC classified glyphosate Group 2A in 2015 (Monograph Vol 112)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V048",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V049",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-0d5adb58"
+  ],
+  "statement": "Ninth Circuit (2022, NRDC v. EPA) vacated the human-health portion of EPA's 2020 glyphosate interim decision as inconsistent with EPA's own record and Cancer Guidelines",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V049",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V050",
+  "kind": "record_fact",
+  "rep": "C",
+  "section": "C10",
+  "sources": [],
+  "statement": "EPA's glyphosate registration review open since 2009 and still incomplete in 2026",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V050",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V051",
+  "kind": "record_fact",
+  "rep": "C",
+  "section": "C10",
+  "sources": [],
+  "statement": "EPA-HHS partnership on glyphosate review (2026)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V051",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V052",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-eb04742b"
+  ],
+  "statement": "chlorpyrifos tolerances revoked 2021; Eighth Circuit vacated revocation 2023 (Red River Valley Sugarbeet Growers v. Regan); tolerances reinstated; EPA proposed keeping 11 crop uses",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V052",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V053",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.5",
+  "sources": [
+   "SRC-U-04b82c17"
+  ],
+  "statement": "revocation followed Ninth Circuit April 2021 order (LULAC v. Regan) directing EPA to act within 60 days without further fact-finding",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V053",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V054",
+  "kind": "record_fact",
+  "rep": "X",
+  "section": "6",
+  "sources": [],
+  "statement": "EU non-renewal of chlorpyrifos approval (decision 2020, approval expired Jan 2020)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V054",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V055",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-146b8d5c"
+  ],
+  "statement": "2020 EPA proposed interim decisions for five neonicotinoids (imidacloprid, clothianidin, thiamethoxam, dinotefuran, acetamiprid) with mitigation",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V055",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V056",
+  "kind": "record_fact",
+  "rep": "X",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-c2d472e1"
+  ],
+  "statement": "EU 2018 full outdoor ban on imidacloprid, clothianidin, thiamethoxam",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V056",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V057",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-f808859e"
+  ],
+  "statement": "LCRI (Oct 2024): lead action level 15 -> 10 ppb; lead service line replacement within 10 years; MCLG remains zero",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V057",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V058",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-545bf3b7"
+  ],
+  "statement": "secondary summary of LCRI",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V058",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V059",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-af98f2fe"
+  ],
+  "statement": "April 2024 PFAS NPDWR: PFOA and PFOS MCL 4.0 ppt, MCLG zero; MCLs for six PFAS",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V059",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V060",
+  "kind": "record_fact",
+  "rep": "C",
+  "section": "C07",
+  "sources": [],
+  "statement": "EPA proposed (2025-2026) rescinding the limits for four of six PFAS (PFHxS, PFNA, HFPO-DA, mixture hazard index) while keeping PFOA/PFOS",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V060",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V061",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-d5223d7e"
+  ],
+  "statement": "Crowell: UCMR 6 sidesteps microplastics",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V061",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V062",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-38d59ff0"
+  ],
+  "statement": "multistate (seven-governor) petition to EPA to monitor microplastics in drinking water",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V062",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V063",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-37cc003b"
+  ],
+  "statement": "1977 FDA proposed saccharin ban after Canadian rat bladder study; Congress passed moratorium (Saccharin Study and Labeling Act) with warning label; NTP removed saccharin from Report on Carcinogens in 2000; warning label requirement repealed 2000; EPA delisted saccharin as hazardous constituent 2010",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V063",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V064",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-c857ca99"
+  ],
+  "statement": "LII copy of Monsanto v. Durnell opinion",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V064",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V065",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-12d5506d"
+  ],
+  "statement": "Schedule I research barriers: single domestic (NIDA/University of Mississippi) source, DEA Schedule I registration, FDA IND",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V065",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V066",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "5.1",
+  "sources": [
+   "SRC-U-d72a37c3"
+  ],
+  "statement": "DEA down-scheduled state medical marijuana to Schedule III; expedited hearing set for broader rescheduling",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V066",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V067",
+  "kind": "record_fact",
+  "rep": "K",
+  "section": "7",
+  "sources": [
+   "SRC-U-566b612f"
+  ],
+  "statement": "blog analysis of EPA microplastics drinking-water decision",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V067",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V068",
+  "kind": "record_fact",
+  "rep": "S",
+  "section": "2",
+  "sources": [
+   "SRC-U-c533bcfd"
+  ],
+  "statement": "IEC 61508 safety integrity levels scale assurance with consequence",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V068",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V069",
+  "kind": "record_fact",
+  "rep": "S",
+  "section": "2",
+  "sources": [
+   "SRC-U-e57a1c8c"
+  ],
+  "statement": "GRADE approach rates certainty of evidence",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V069",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V070",
+  "kind": "record_fact",
+  "rep": "S",
+  "section": "2",
+  "sources": [
+   "SRC-U-f79f6310"
+  ],
+  "statement": "Mastrandrea et al. 2010 IPCC AR5 guidance note on consistent treatment of uncertainties",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V070",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V071",
+  "kind": "record_fact",
+  "rep": "S",
+  "section": "2",
+  "sources": [
+   "SRC-U-476ea009"
+  ],
+  "statement": "10 CFR Part 50 Appendix B quality assurance criteria",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V071",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V072",
+  "kind": "record_fact",
+  "rep": "S",
+  "section": "2",
+  "sources": [
+   "SRC-U-6af51e02"
+  ],
+  "statement": "Wilkinson et al. 2016 FAIR Guiding Principles, Scientific Data",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V072",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V073",
+  "kind": "record_fact",
+  "rep": "C",
+  "section": "A02",
+  "sources": [],
+  "statement": "eteplirsen 2016: advisory committee 7-6 against; Woodcock overrode review team; quote about Sarepta needing to be capitalized",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V073",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V074",
+  "kind": "record_fact",
+  "rep": "C",
+  "section": "A10",
+  "sources": [],
+  "statement": "midodrine: FDA proposed withdrawal in 2010 for missing post-market confirmatory studies, reversed after patient/prescriber outcry",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V074",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V075",
+  "kind": "record_fact",
+  "rep": "C",
+  "section": "A03",
+  "sources": [],
+  "statement": "Zohydro ER 2013 advisory committee voted 11-2 against; FDA approved anyway",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V075",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V076",
+  "kind": "record_fact",
+  "rep": "C",
+  "section": "A07",
+  "sources": [],
+  "statement": "flibanserin rejected twice (2010, 2013) before 2015 approval",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V076",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V077",
+  "kind": "record_fact",
+  "rep": "C",
+  "section": "D01",
+  "sources": [],
+  "statement": "partial Schedule III move for medical marijuana proceeded via executive order",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V077",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V080",
+  "kind": "record_fact",
+  "note": "E01 evidence: the source codes exposure ever/never or by duration, not by rotation pattern (EA-05)",
+  "rep": "R",
+  "rotation_pattern": "not_coded",
+  "section": "R5",
+  "sources": [],
+  "statement": "IARC 2007 (Monograph Vol 98): shift work that involves circadian disruption classified Group 2A",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "summary (pmc.ncbi.nlm.nih.gov / publications.iarc.fr): \"Shiftwork that involves circadian disruption is probably carcinogenic to humans (Group 2A)\"; Volume 98 working group met in Lyon, 2-9 October 2007, publication dated 2010",
+   "ledger_row": "V080",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "2007 is the evaluation meeting; the volume itself is dated 2010",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "id": "EV-V081",
+  "kind": "record_fact",
+  "note": "E01 evidence: the source codes exposure ever/never or by duration, not by rotation pattern (EA-05)",
+  "rep": "R",
+  "rotation_pattern": "not_coded",
+  "section": "R5",
+  "sources": [],
+  "statement": "IARC Monographs Vol 124 (meeting June 2019): night shift work Group 2A; limited evidence in humans for cancers of breast, prostate, colon and rectum; sufficient evidence in experimental animals; strong mechanistic evidence in experimental animals",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "summary (iarc.who.int / publications.iarc.fr): Working Group met in Lyon 4-11 June 2019; Group 2A; limited evidence in humans, breast, prostate, colon, rectum; \"sufficient evidence of cancer in experimental animals, and strong mechanistic evidence in experimental animals\"",
+   "ledger_row": "V081",
+   "queries": 2,
+   "reached": "Y",
+   "reason": "monograph text says animal evidence concerns alteration in the light-dark schedule",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "id": "EV-V082",
+  "kind": "record_fact",
+  "note": "E01 evidence: the source codes exposure ever/never or by duration, not by rotation pattern (EA-05)",
+  "rep": "R",
+  "rotation_pattern": "not_coded",
+  "section": "R5",
+  "sources": [],
+  "statement": "Travis et al. 2016 JNCI: Million Women Study, EPIC-Oxford, UK Biobank plus meta-analysis of 10 prospective studies, ~1.4 million women; night shift work and breast cancer RR 0.99 (95% CI 0.95-1.03)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "summary (pmc.ncbi.nlm.nih.gov / ukbiobank.ac.uk): Million Women Study, EPIC-Oxford, UK Biobank; \"The 10 studies together covered 1.4 million women\"; pooled RR for any night shift work 0.99 (95% CI 0.95 to 1.03)",
+   "ledger_row": "V082",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "the 10 studies include the three new cohorts; full text would confirm the count",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "id": "EV-V083",
+  "kind": "record_fact",
+  "note": "E01 evidence: the source codes exposure ever/never or by duration, not by rotation pattern (EA-05)",
+  "rep": "R",
+  "rotation_pattern": "not_coded",
+  "section": "R5",
+  "sources": [],
+  "statement": "Denmark paid workers' compensation to women with breast cancer after long-term night shift work (from 2008)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "summary (hrreporter.com / ncbi.nlm.nih.gov): \"In 2008, Denmark's National Board of Industrial Injuries began compensating women whose breast cancer followed long periods of night work\"; scheme provisional pending IARC report",
+   "ledger_row": "V083",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "later status of the provisional scheme not seen",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "id": "EV-V084",
+  "kind": "record_fact",
+  "note": "E01 evidence: the source codes exposure ever/never or by duration, not by rotation pattern (EA-05)",
+  "rep": "R",
+  "rotation_pattern": "not_coded",
+  "section": "R5",
+  "sources": [],
+  "statement": "Germany: occupational disease recognition requires generally accepted scientific findings (allgemeine wissenschaftliche Erkenntnisse, SGB VII section 9); breast cancer from night shift work not recognized",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "summary (aerzteblatt.de): \"In Deutschland wurde dies mit dem Hinweis abgelehnt, dass die Kausalbeziehung nicht zweifelsfrei belegt sei\"; summary (haufe.de): Sachverstaendigenbeirat prueft \"medizinisch-wissenschaftliche Erkenntnisse\"",
+   "ledger_row": "V084",
+   "queries": 2,
+   "reached": "Y",
+   "reason": "non-recognition seen; the quoted s.9 SGB VII wording not seen; statute text would settle it",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V085",
+  "kind": "record_fact",
+  "note": "E01 evidence: the source codes exposure ever/never or by duration, not by rotation pattern (EA-05)",
+  "rep": "R",
+  "rotation_pattern": "not_coded",
+  "section": "R5",
+  "sources": [],
+  "statement": "no OSHA standard specific to shift work or night work in the United States",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "summary (osha.gov): \"there is not a specific OSHA Standard for extended or unusual work shifts\"; 2014 interpretation letter: \"no specific OSHA regulations or standards\" addressing risks of shift work",
+   "ledger_row": "V085",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "general duty clause 5(a)(1) remains the route",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "id": "EV-V086",
+  "kind": "record_fact",
+  "note": "E01 evidence: the source codes exposure ever/never or by duration, not by rotation pattern (EA-05)",
+  "rep": "R",
+  "rotation_pattern": "not_coded",
+  "section": "R5",
+  "sources": [],
+  "statement": "cohort studies on night work and cancer typically code exposure as ever/never or duration, not rotation direction (forward vs backward) or permanent night",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "?",
+   "found": "summary (pmc.ncbi.nlm.nih.gov): NHS compared women against those who \"never worked rotating nightshifts\" and by duration; NHS II 2001 item included \"permanent night shifts for 6 or more months\"; no result addressed forward vs backward rotation",
+   "ledger_row": "V086",
+   "queries": 2,
+   "reached": "Y",
+   "reason": "studies seen coding rotation pattern: Hansen & Stevens 2011 Danish nurses case-control (permanent night; day-night rotating); MCC-Spain (permanent vs rotating, year not shown); EPICAP (permanent night, prostate, year not shown); NHS II 2001 questionnaire item (permanent night); forward/backward rotation: none seen; weekly day/night alternation: none seen; a systematic review of cohort exposure coding would settle \"typically\"",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V087",
+  "kind": "record_fact",
+  "note": "E01 evidence: the source codes exposure ever/never or by duration, not by rotation pattern (EA-05)",
+  "rep": "R",
+  "rotation_pattern": "not_coded",
+  "section": "R5",
+  "sources": [],
+  "statement": "any study coding night-shift rotation direction (forward vs backward rotation) or permanent night vs rotating for cancer or circadian outcomes",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "summary (iris.uniroma1.it / pmc.ncbi.nlm.nih.gov): 144 nurses, 80 forward and 64 backward rotation, \"attributes it to Di Muzio et al., 2021\"; electronics workers: \"backward rotation ... OR 1.95\" for poor sleep quality vs forward",
+   "ledger_row": "V087",
+   "queries": 2,
+   "reached": "Y",
+   "reason": "studies seen: Di Muzio et al. 2021 (forward vs backward, sleepiness, nurses); electronics-worker study (forward vs backward, sleep quality; result list had pmc PMC5011337 and aoemj.org; authors/year not shown); Hansen & Stevens 2011 (permanent night + day-night rotating, breast cancer); EPICAP (permanent night, prostate, year not shown); MCC-Spain (permanent vs rotating, year not shown); weekly day/night alternation: none seen; rotation direction for cancer outcomes: none seen",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "id": "EV-V090",
+  "kind": "regulation",
+  "rep": "Q",
+  "section": "QA",
+  "sources": [],
+  "statement": "10 CFR 50 App B introduction: QA program applies to structures, systems, components \"to an extent consistent with their importance to safety\"",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": "location: results place the phrase in Criterion II, not the introduction; OCR garbled, eCFR Criterion II text would settle",
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "summary (nrc.gov ML2005 doc): \"Criterion II of Appendix B which states, 'The quality assurance program shall provide control over activities affecting the quality of the identified structures...'\" reflects the \"consistent with their importance to safety\" language; introduction snippet (law.cornell.edu) did not reach the phrase",
+   "ledger_row": "V090",
+   "queries": 2,
+   "reached": "Y",
+   "reason": "location: results place the phrase in Criterion II, not the introduction; OCR garbled, eCFR Criterion II text would settle",
+   "says": "DIFFERS",
+   "state": "CORRECTED"
+  }
+ },
+ {
+  "id": "EV-V091",
+  "kind": "regulation",
+  "rep": "Q",
+  "section": "QA",
+  "sources": [],
+  "statement": "10 CFR 50 App B Criterion III: design verification \"performed by individuals or groups other than those who performed the original design\"",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "summary (law.cornell.edu): \"The verifying or checking process shall be performed by individuals or groups other than those who performed the original design, but who may be from the same organization.\"",
+   "ledger_row": "V091",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "eCFR text would confirm current wording",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "id": "EV-V092",
+  "kind": "regulation",
+  "rep": "Q",
+  "section": "QA",
+  "sources": [],
+  "statement": "10 CFR 50 App B Criterion III: design changes subject to design control measures commensurate with those applied to the original design",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "summary (nrc.gov Watts Bar NOV): Criterion III \"requires that design changes including field changes, shall be subject to design control measures commensurate with those applied to the original design and approved by the organization that performed the original design\"",
+   "ledger_row": "V092",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "quoted in enforcement documents, not the regulation page",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "id": "EV-V093",
+  "kind": "regulation",
+  "rep": "Q",
+  "section": "QA",
+  "sources": [],
+  "statement": "10 CFR 50 App B Criterion XV Nonconforming Materials, Parts, or Components: identification, documentation, segregation, disposition, notification; nonconforming items reviewed and accepted, rejected, repaired or reworked",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V093",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V094",
+  "kind": "regulation",
+  "rep": "Q",
+  "section": "QA",
+  "sources": [],
+  "statement": "10 CFR 50 App B Criterion XVI Corrective Action: conditions adverse to quality promptly identified and corrected; significant conditions: cause determined and corrective action to preclude repetition",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V094",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V095",
+  "kind": "regulation",
+  "rep": "Q",
+  "section": "QA",
+  "sources": [],
+  "statement": "10 CFR 50 App B Criterion VI Document Control and Criterion XVII Quality Assurance Records",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V095",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V096",
+  "kind": "regulation",
+  "rep": "Q",
+  "section": "QA",
+  "sources": [],
+  "statement": "ASME NQA-1 is a paid consensus standard; NRC Regulatory Guide 1.28 endorses NQA-1 as acceptable method for Appendix B",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V096",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V097",
+  "kind": "regulation",
+  "rep": "Q",
+  "section": "QA",
+  "sources": [],
+  "statement": "single-failure criterion is defined in 10 CFR 50 Appendix A (General Design Criteria, Definitions), not Appendix B",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V097",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V098",
+  "kind": "regulation",
+  "rep": "Q",
+  "section": "QA",
+  "sources": [],
+  "statement": "NQA-1 nonconformance dispositions: use-as-is, reject, repair, rework",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V098",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V099",
+  "kind": "regulation",
+  "rep": "Q",
+  "section": "QA",
+  "sources": [],
+  "statement": "\"graded approach\" defined in DOE 10 CFR 830.3 as the process of ensuring the level of analysis, documentation and actions is commensurate with the relative importance to safety",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V099",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V100",
+  "kind": "regulation",
+  "rep": "Q",
+  "section": "QA",
+  "sources": [],
+  "statement": "\"configuration management\" is not one of the 18 Appendix B criteria by that name",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V100",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V110",
+  "kind": "record_fact",
+  "rep": "X",
+  "section": "6",
+  "sources": [],
+  "statement": "IARC 2023 classified aspartame Group 2B; JECFA kept ADI 40 mg/kg bw",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V110",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V111",
+  "kind": "record_fact",
+  "rep": "X",
+  "section": "6",
+  "sources": [],
+  "statement": "EU Red No. 3 (E127 erythrosine) permitted only in cocktail and candied cherries",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V111",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V112",
+  "kind": "regulation",
+  "rep": "X",
+  "section": "6",
+  "sources": [],
+  "statement": "EU Drinking Water Directive 2020/2184 PFAS parametric values: sum of 20 PFAS 0.1 ug/L and PFAS total 0.5 ug/L",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V112",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V113",
+  "kind": "record_fact",
+  "rep": "X",
+  "section": "6",
+  "sources": [],
+  "statement": "EU drinking water directive includes a watch-list mechanism and microplastics methodology",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V113",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V114",
+  "kind": "record_fact",
+  "rep": "X",
+  "section": "6",
+  "sources": [],
+  "statement": "EU permits saccharin (E954) with an ADI",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V114",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "EV-V115",
+  "kind": "regulation",
+  "rep": "X",
+  "section": "6",
+  "sources": [],
+  "statement": "EU banned atrazine 2004 (non-inclusion decision 2004/248/EC)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V115",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "id": "ST-01",
+  "kind": "statement",
+  "located": {
+   "line": 17,
+   "path": "bundle/source/current/direction_of_uncertainty_report_v2.md"
+  },
+  "registry_value": "33 of 34 merit decisions permissive, 1 restrictive (pentachlorophenol, cancellation required); 6 case closures coded NA",
+  "sources": [
+   "SRC-K2-REPORT"
+  ],
+  "statement": "**34/34 permissive**",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": "33 of 34 merit decisions permissive, 1 restrictive (pentachlorophenol, cancellation required); 6 case closures coded NA",
+   "depth": "file",
+   "exists": "Y",
+   "found": "**34/34 permissive**",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "corrected by NCR-R6; value computed by tools/stats.py",
+   "says": "DIFFERS",
+   "state": "CORRECTED"
+  }
+ },
+ {
+  "id": "ST-02",
+  "kind": "statement",
+  "located": {
+   "line": 106,
+   "path": "bundle/source/current/direction_of_uncertainty_report_v2.md"
+  },
+  "registry_value": "33 of 34 continued registration; pentachlorophenol cancellation required (87 FR 6535; G001, G002)",
+  "sources": [
+   "SRC-K2-REPORT"
+  ],
+  "statement": "**all 34 continued registration**",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": "33 of 34 continued registration; pentachlorophenol cancellation required (87 FR 6535; G001, G002)",
+   "depth": "file",
+   "exists": "Y",
+   "found": "**all 34 continued registration**",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "corrected by NCR-R6; value computed by tools/stats.py",
+   "says": "DIFFERS",
+   "state": "CORRECTED"
+  }
+ },
+ {
+  "id": "ST-03",
+  "kind": "statement",
+  "located": {
+   "line": 52,
+   "path": "bundle/source/current/sensitivity_upgrades_v3.md"
+  },
+  "registry_value": "33/34 continuations; pentachlorophenol restrictive and discretionary",
+  "sources": [
+   "SRC-K3-SENS"
+  ],
+  "statement": "in the unselected EPA frame (34/34 continuations)",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": "33/34 continuations; pentachlorophenol restrictive and discretionary",
+   "depth": "file",
+   "exists": "Y",
+   "found": "in the unselected EPA frame (34/34 continuations)",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "corrected by NCR-R6; value computed by tools/stats.py",
+   "says": "DIFFERS",
+   "state": "CORRECTED"
+  }
+ },
+ {
+  "id": "ST-04",
+  "kind": "statement",
+  "located": {
+   "line": 18,
+   "path": "bundle/source/current/direction_of_uncertainty_report_v2.md"
+  },
+  "registry_value": "two discretionary restrictive actions across the coded sample and Frame C2 (BVO, pentachlorophenol); BVO's discretionary status contested by the earlier California statute (G024)",
+  "sources": [
+   "SRC-K2-REPORT"
+  ],
+  "statement": "**BVO is the lone discretionary restrictive action**",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": "two discretionary restrictive actions across the coded sample and Frame C2 (BVO, pentachlorophenol); BVO's discretionary status contested by the earlier California statute (G024)",
+   "depth": "file",
+   "exists": "Y",
+   "found": "**BVO is the lone discretionary restrictive action**",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "corrected by NCR-R6; value computed by tools/stats.py",
+   "says": "DIFFERS",
+   "state": "CORRECTED"
+  }
+ },
+ {
+  "id": "ST-05",
+  "kind": "statement",
+  "located": {
+   "line": 135,
+   "path": "bundle/source/current/direction_of_uncertainty_report_v2.md"
+  },
+  "registry_value": "8 of 9 restrictive agency actions in the coded sample carry a forcing event (A10 coded as an unmet post-market requirement); 8 of 10 with Frame C2's pentachlorophenol",
+  "sources": [
+   "SRC-K2-REPORT"
+  ],
+  "statement": "Corrected finding: **7 of 8 restrictive agency actions ride an external forcing event; BVO is the lone discretionary exception.**",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": "8 of 9 restrictive agency actions in the coded sample carry a forcing event (A10 coded as an unmet post-market requirement); 8 of 10 with Frame C2's pentachlorophenol",
+   "depth": "file",
+   "exists": "Y",
+   "found": "Corrected finding: **7 of 8 restrictive agency actions ride an external forcing event; BVO is the lone discretionary exception.**",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "corrected by NCR-R14; value computed by tools/stats.py",
+   "says": "DIFFERS",
+   "state": "CORRECTED"
+  }
+ },
+ {
+  "id": "ST-06",
+  "kind": "statement",
+  "located": {
+   "line": 102,
+   "path": "bundle/source/current/direction_of_uncertainty_report_v2.md"
+  },
+  "registry_value": "not testable at this n under Rule S (diffuse cell n=2); the v2 recode removed information, it did not strengthen a null",
+  "sources": [
+   "SRC-K2-REPORT"
+  ],
+  "statement": "**The naive hypothesis is not supported bivariately, and v2 strengthens that null.**",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": "not testable at this n under Rule S (diffuse cell n=2); the v2 recode removed information, it did not strengthen a null",
+   "depth": "file",
+   "exists": "Y",
+   "found": "**The naive hypothesis is not supported bivariately, and v2 strengthens that null.**",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "corrected by NCR-R11; value computed by tools/stats.py",
+   "says": "DIFFERS",
+   "state": "CORRECTED"
+  }
+ },
+ {
+  "id": "ST-07",
+  "kind": "statement",
+  "located": {
+   "line": 19,
+   "path": "bundle/source/current/change_log_v2.md"
+  },
+  "registry_value": "a weaker test (diffuse cell 5 -> 2), not a stronger null",
+  "sources": [
+   "SRC-K-CHANGELOG"
+  ],
+  "statement": "The bivariate \"pattern absent\" result **strengthens**.",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": "a weaker test (diffuse cell 5 -> 2), not a stronger null",
+   "depth": "file",
+   "exists": "Y",
+   "found": "The bivariate \"pattern absent\" result **strengthens**.",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "corrected by NCR-R11; value computed by tools/stats.py",
+   "says": "DIFFERS",
+   "state": "CORRECTED"
+  }
+ },
+ {
+  "id": "ST-08",
+  "kind": "statement",
+  "located": {
+   "line": 141,
+   "path": "bundle/source/current/direction_of_uncertainty_report_v2.md"
+  },
+  "registry_value": "10 of 10 divergent, 7 by two or more points, recomputed from the v1 Section 6 table the sentence summarizes",
+  "sources": [
+   "SRC-K2-REPORT"
+  ],
+  "statement": "8 of 10 divergent, six by two or more points",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": "10 of 10 divergent, 7 by two or more points, recomputed from the v1 Section 6 table the sentence summarizes",
+   "depth": "file",
+   "exists": "Y",
+   "found": "8 of 10 divergent, six by two or more points",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "corrected by NCR-N10; value computed by tools/stats.py",
+   "says": "DIFFERS",
+   "state": "CORRECTED"
+  }
+ },
+ {
+  "id": "ST-09",
+  "kind": "statement",
+  "located": {
+   "line": 30,
+   "path": "bundle/source/current/sensitivity_upgrades_v3.md"
+  },
+  "registry_value": "on action: 1 permissive action vacated within its lifetime (C03, court, on petition of public-interest litigants); on legal status: 0 moved to restrictive",
+  "sources": [
+   "SRC-K3-SENS"
+  ],
+  "statement": "Of 24 permissive actions, **zero** were reversed toward restrictive within their decision's lifetime.",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": "on action: 1 permissive action vacated within its lifetime (C03, court, on petition of public-interest litigants); on legal status: 0 moved to restrictive",
+   "depth": "file",
+   "exists": "Y",
+   "found": "Of 24 permissive actions, **zero** were reversed toward restrictive within their decision's lifetime.",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "corrected by NCR-R14; value computed by tools/stats.py",
+   "says": "DIFFERS",
+   "state": "CORRECTED"
+  }
+ },
+ {
+  "id": "ST-10",
+  "kind": "statement",
+  "located": {
+   "line": 30,
+   "path": "bundle/source/current/sensitivity_upgrades_v3.md"
+  },
+  "registry_value": "13.5-15.6 years: the POP mesh clearance chain starts 2002, not 1996 (1996 is the first SUI sling clearance; G035)",
+  "sources": [
+   "SRC-K3-SENS"
+  ],
+  "statement": "16–20 years later",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": "13.5-15.6 years: the POP mesh clearance chain starts 2002, not 1996 (1996 is the first SUI sling clearance; G035)",
+   "depth": "file",
+   "exists": "Y",
+   "found": "16–20 years later",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "corrected by NCR-N20; value computed by tools/stats.py",
+   "says": "DIFFERS",
+   "state": "CORRECTED"
+  }
+ },
+ {
+  "id": "ST-11",
+  "kind": "statement",
+  "located": {
+   "line": 27,
+   "path": "bundle/source/current/sensitivity_upgrades_v3.md"
+  },
+  "registry_value": "August 2010 proposal; September 2010 clarification that the drug could stay on the market; February 2012 withdrawal deferred by agreement with the sponsor for two further studies (G010)",
+  "sources": [
+   "SRC-K3-SENS"
+  ],
+  "statement": "Agency reversed after prescriber/patient outcry; proposal never effectuated",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": "August 2010 proposal; September 2010 clarification that the drug could stay on the market; February 2012 withdrawal deferred by agreement with the sponsor for two further studies (G010)",
+   "depth": "file",
+   "exists": "Y",
+   "found": "Agency reversed after prescriber/patient outcry; proposal never effectuated",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "corrected by NCR-N19; value computed by tools/stats.py",
+   "says": "DIFFERS",
+   "state": "CORRECTED"
+  }
+ },
+ {
+  "id": "ST-12",
+  "kind": "statement",
+  "located": {
+   "line": 48,
+   "path": "bundle/source/current/sensitivity_upgrades_v3.md"
+  },
+  "registry_value": "14-23 of 33 across the variants the registry reproduces (M0-M5) and M7; 14-25 if M6's published 25 is taken as stated, though no U3 row reproduces it (NCR-N07)",
+  "sources": [
+   "SRC-K3-SENS"
+  ],
+  "statement": "the below-floor count ranges from 15 to 25 of 33",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": "14-23 of 33 across the variants the registry reproduces (M0-M5) and M7; 14-25 if M6's published 25 is taken as stated, though no U3 row reproduces it (NCR-N07)",
+   "depth": "file",
+   "exists": "Y",
+   "found": "the below-floor count ranges from 15 to 25 of 33",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "corrected by NCR-R13; value computed by tools/stats.py",
+   "says": "DIFFERS",
+   "state": "CORRECTED"
+  }
+ },
+ {
+  "id": "ST-13",
+  "kind": "statement",
+  "located": {
+   "line": 48,
+   "path": "bundle/source/current/sensitivity_upgrades_v3.md"
+  },
+  "registry_value": "zero over-restrictive in the source sample on the annex basis is untestable (0 rows could produce it); on the action basis A10 grades over-restrictive; with the R8 rows D03, D04 the branch fires",
+  "sources": [
+   "SRC-K3-SENS"
+  ],
+  "statement": "**over-restrictive violations are zero in every variant**",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": "zero over-restrictive in the source sample on the annex basis is untestable (0 rows could produce it); on the action basis A10 grades over-restrictive; with the R8 rows D03, D04 the branch fires",
+   "depth": "file",
+   "exists": "Y",
+   "found": "**over-restrictive violations are zero in every variant**",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "corrected by NCR-R13; value computed by tools/stats.py",
+   "says": "DIFFERS",
+   "state": "CORRECTED"
+  }
+ },
+ {
+  "id": "ST-14",
+  "kind": "statement",
+  "located": {
+   "line": 62,
+   "path": "bundle/source/current/change_log_v2.md"
+  },
+  "registry_value": "one direction: where denial harm dominates, decisions came in one class more permissive than the floor; no restricting row with C_restrict > C_permit in the source sample",
+  "sources": [
+   "SRC-K-CHANGELOG"
+  ],
+  "statement": "Corpus is permissive in **both** error directions",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": "one direction: where denial harm dominates, decisions came in one class more permissive than the floor; no restricting row with C_restrict > C_permit in the source sample",
+   "depth": "file",
+   "exists": "Y",
+   "found": "Corpus is permissive in **both** error directions",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "corrected by NCR-R12; value computed by tools/stats.py",
+   "says": "DIFFERS",
+   "state": "CORRECTED"
+  }
+ },
+ {
+  "id": "ST-15",
+  "kind": "statement",
+  "located": {
+   "line": 162,
+   "path": "bundle/source/current/direction_of_uncertainty_report_v2.md"
+  },
+  "registry_value": "reliability figure for direction is pass 1, kappa 0.45 (70% agreement); pass 2 (kappa 0.76) followed a rule adopted after pass-1 disagreements were inspected and is a codebook revision",
+  "sources": [
+   "SRC-K2-REPORT"
+  ],
+  "statement": "Read flat: direction and cost-bearer coding are reasonably robust to an instrument change",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": "reliability figure for direction is pass 1, kappa 0.45 (70% agreement); pass 2 (kappa 0.76) followed a rule adopted after pass-1 disagreements were inspected and is a codebook revision",
+   "depth": "file",
+   "exists": "Y",
+   "found": "Read flat: direction and cost-bearer coding are reasonably robust to an instrument change",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "corrected by NCR-R10; value computed by tools/stats.py",
+   "says": "DIFFERS",
+   "state": "CORRECTED"
+  }
+ },
+ {
+  "id": "ST-16",
+  "kind": "statement",
+  "located": {
+   "line": 52,
+   "path": "bundle/source/current/sensitivity_upgrades_v3.md"
+  },
+  "registry_value": "one list: 8 of 9 carry a forcing event and 3 of 9 were reversed toward permissive",
+  "sources": [
+   "SRC-K3-SENS"
+  ],
+  "statement": "gated by external forcing in 7 of 8 cases, reversed toward permissive in 3 of 9",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": "one list: 8 of 9 carry a forcing event and 3 of 9 were reversed toward permissive",
+   "depth": "file",
+   "exists": "Y",
+   "found": "gated by external forcing in 7 of 8 cases, reversed toward permissive in 3 of 9",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "corrected by NCR-R14; value computed by tools/stats.py",
+   "says": "DIFFERS",
+   "state": "CORRECTED"
+  }
+ },
+ {
+  "id": "ST-18",
+  "kind": "statement",
+  "located": {
+   "line": 41,
+   "path": "bundle/source/current/change_log_v2.md"
+  },
+  "registry_value": "zero on the annex's mixed basis; on the action basis A10 is over-restrictive (C_restrict 5 > C_permit 3, decline D5 against floor D2)",
+  "sources": [
+   "SRC-K-CHANGELOG"
+  ],
+  "statement": "**zero over-restrictive non-conformities. One-directional non-conformity survives the two-sided re-grade.**",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": "zero on the annex's mixed basis; on the action basis A10 is over-restrictive (C_restrict 5 > C_permit 3, decline D5 against floor D2)",
+   "depth": "file",
+   "exists": "Y",
+   "found": "**zero over-restrictive non-conformities. One-directional non-conformity survives the two-sided re-grade.**",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "corrected by NCR-N02; value computed by tools/stats.py",
+   "says": "DIFFERS",
+   "state": "CORRECTED"
+  }
+ },
+ {
+  "id": "ST-19",
+  "kind": "statement",
+  "located": {
+   "line": 98,
+   "path": "bundle/source/current/regulatory_uncertainty_standard_v02.md"
+  },
+  "registry_value": "the delivered annex carries axis sums only; per-axis C_permit recovered from the superseded v1 annex for 32 of 33 rows; per-axis C_restrict coded by the registry",
+  "sources": [
+   "SRC-K2-STD"
+  ],
+  "statement": "Full audit trail with per-axis scores and rationales: `annex_a_regrading_v2.csv`.",
+  "status": "OBSERVED",
+  "type": "EVIDENCE",
+  "verification": {
+   "corrected_value": "the delivered annex carries axis sums only; per-axis C_permit recovered from the superseded v1 annex for 32 of 33 rows; per-axis C_restrict coded by the registry",
+   "depth": "file",
+   "exists": "Y",
+   "found": "Full audit trail with per-axis scores and rationales: `annex_a_regrading_v2.csv`.",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "corrected by NCR-N01; value computed by tools/stats.py",
+   "says": "DIFFERS",
+   "state": "CORRECTED"
+  }
+ }
+]

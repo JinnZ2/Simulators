@@ -1,0 +1,974 @@
+[
+ {
+  "actor_type": "advisory_committee",
+  "basis": [
+   "EV-F008",
+   "EV-V019"
+  ],
+  "date_range": "2005",
+  "id": "ACT-AC-AAC-DSARM",
+  "name": "FDA Arthritis and Drug Safety and Risk Management Advisory Committees (joint)",
+  "role_at_time": "advised on COX-2 inhibitors (2005)",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "advisory_committee",
+  "basis": [
+   "EV-F006",
+   "EV-V075"
+  ],
+  "date_range": "2012",
+  "id": "ACT-AC-AADPAC",
+  "name": "FDA Anesthetic and Analgesic Drug Products Advisory Committee",
+  "role_at_time": "advised on Zohydro ER (2012)",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "advisory_committee",
+  "basis": [
+   "EV-F010",
+   "EV-V021"
+  ],
+  "date_range": "2021",
+  "id": "ACT-AC-AMDAC",
+  "name": "FDA Antimicrobial Drugs Advisory Committee",
+  "role_at_time": "advised on molnupiravir (2021)",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "advisory_committee",
+  "basis": [
+   "EV-F011",
+   "EV-V018"
+  ],
+  "date_range": "-",
+  "id": "ACT-AC-BRUDAC",
+  "name": "FDA Bone, Reproductive and Urologic Drugs Advisory Committee",
+  "role_at_time": "advised on Makena (2019) and flibanserin (2015, joint)",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "advisory_committee",
+  "basis": [
+   "EV-F007"
+  ],
+  "date_range": "2022",
+  "id": "ACT-AC-MAKENA-HEARING",
+  "name": "advisory committee at the October 2022 Makena withdrawal hearing",
+  "role_at_time": "advised withdrawal",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "advisory_committee",
+  "basis": [
+   "EV-F016"
+  ],
+  "date_range": "2011",
+  "id": "ACT-AC-OBGYN",
+  "name": "FDA Obstetrics and Gynecology Devices Panel",
+  "role_at_time": "advised on transvaginal mesh (2011)",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "advisory_committee",
+  "basis": [
+   "EV-F013",
+   "EV-V025"
+  ],
+  "date_range": "-",
+  "id": "ACT-AC-ODAC",
+  "name": "FDA Oncologic Drugs Advisory Committee",
+  "role_at_time": "advised on bevacizumab breast indication (2010, 2011)",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "advisory_committee",
+  "basis": [
+   "EV-F017"
+  ],
+  "date_range": "2012",
+  "id": "ACT-AC-ORTHO",
+  "name": "FDA Orthopaedic and Rehabilitation Devices Panel",
+  "role_at_time": "advised on metal-on-metal hips (2012)",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "advisory_committee",
+  "basis": [
+   "EV-F001",
+   "EV-F004",
+   "EV-F014"
+  ],
+  "date_range": "-",
+  "id": "ACT-AC-PCNS",
+  "name": "FDA Peripheral and Central Nervous System Drugs Advisory Committee",
+  "role_at_time": "advised on aducanumab (2020), eteplirsen (2016), donanemab (2024)",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "legislature",
+  "basis": [
+   "EV-G024"
+  ],
+  "date_range": "2023",
+  "id": "ACT-CA-LEG",
+  "name": "California Legislature (AB 418, California Food Safety Act)",
+  "role_at_time": "state ban on BVO and three other additives effective 2027",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "court",
+  "basis": [
+   "EV-E030"
+  ],
+  "date_range": "2023",
+  "id": "ACT-CA8",
+  "name": "U.S. Court of Appeals for the Eighth Circuit",
+  "role_at_time": "Red River Valley Sugarbeet Growers v. Regan (2023)",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "court",
+  "basis": [
+   "EV-E029",
+   "EV-E031"
+  ],
+  "date_range": "2021-2022",
+  "id": "ACT-CA9",
+  "name": "U.S. Court of Appeals for the Ninth Circuit",
+  "role_at_time": "LULAC v. Regan (2021); NRDC v. EPA (2022)",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "court",
+  "basis": [
+   "EV-G019"
+  ],
+  "date_range": "2026",
+  "id": "ACT-CADC",
+  "name": "U.S. Court of Appeals for the D.C. Circuit",
+  "role_at_time": "SAM v. DOJ (2026), challenges to the Schedule III order",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "coder",
+  "basis": [],
+  "date_range": "2026-10-19",
+  "id": "ACT-CODER2",
+  "name": "second coder (fresh session, no repository, no conversation)",
+  "role_at_time": "codes a 10-row subset blind to every prior value; independence set by its contamination probe",
+  "status": "PROPOSED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "legislature",
+  "basis": [
+   "EV-E024",
+   "EV-V063"
+  ],
+  "date_range": "1977",
+  "id": "ACT-CONGRESS",
+  "name": "U.S. Congress",
+  "role_at_time": "enacted the 1977 saccharin moratorium",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "trade_group",
+  "basis": [
+   "EV-F021"
+  ],
+  "date_range": "2002",
+  "id": "ACT-CRE",
+  "name": "Center for Regulatory Effectiveness",
+  "role_at_time": "information-quality petitioner, atrazine",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "public_interest_litigant",
+  "basis": [
+   "EV-F009",
+   "EV-F019"
+  ],
+  "date_range": "2022-2025",
+  "id": "ACT-CSPI",
+  "name": "Center for Science in the Public Interest",
+  "role_at_time": "petitioner, Red No. 3",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "advisory_committee",
+  "basis": [
+   "EV-E040",
+   "EV-V084"
+  ],
+  "date_range": "-",
+  "id": "ACT-DE-ASB",
+  "name": "German Medical Expert Advisory Board on Occupational Diseases",
+  "role_at_time": "occupational disease list advice",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "agency",
+  "basis": [
+   "EV-F030"
+  ],
+  "date_range": "-",
+  "id": "ACT-DEA",
+  "name": "Drug Enforcement Administration",
+  "role_at_time": "scheduling",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "agency",
+  "basis": [
+   "EV-F035",
+   "EV-V083"
+  ],
+  "date_range": "2008-",
+  "id": "ACT-DK-AES",
+  "name": "Danish National Board of Industrial Injuries (Arbejdsskadestyrelsen)",
+  "role_at_time": "occupational disease compensation",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "agency",
+  "basis": [
+   "EV-V013"
+  ],
+  "date_range": "-",
+  "id": "ACT-DOJ",
+  "name": "U.S. Department of Justice",
+  "role_at_time": "scheduling order",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "international_body",
+  "basis": [
+   "EV-E022",
+   "EV-V056",
+   "EV-V115"
+  ],
+  "date_range": "-",
+  "id": "ACT-EC",
+  "name": "European Commission",
+  "role_at_time": "EU approvals and bans",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "international_body",
+  "basis": [
+   "EV-V041"
+  ],
+  "date_range": "-",
+  "id": "ACT-EFSA",
+  "name": "European Food Safety Authority",
+  "role_at_time": "E171 opinion 2021",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "international_body",
+  "basis": [
+   "EV-V036"
+  ],
+  "date_range": "2023",
+  "id": "ACT-EMA-PRAC",
+  "name": "EMA Pharmacovigilance Risk Assessment Committee",
+  "role_at_time": "GLP-1 thyroid review 2023",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "agency",
+  "basis": [],
+  "date_range": "1970-",
+  "id": "ACT-EPA",
+  "name": "U.S. Environmental Protection Agency",
+  "role_at_time": "regulator",
+  "status": "PROPOSED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "office",
+  "basis": [
+   "EV-F025"
+  ],
+  "date_range": "-",
+  "id": "ACT-EPA-OPP",
+  "name": "EPA Office of Pesticide Programs",
+  "role_at_time": "pesticide registration office",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "office",
+  "basis": [
+   "EV-V063"
+  ],
+  "date_range": "-",
+  "id": "ACT-EPA-ORCR",
+  "name": "EPA Office of Resource Conservation and Recovery",
+  "role_at_time": "hazardous waste listing office",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "office",
+  "basis": [],
+  "date_range": "-",
+  "id": "ACT-EPA-OW",
+  "name": "EPA Office of Water",
+  "role_at_time": "drinking water office",
+  "status": "PROPOSED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "advocacy_group",
+  "basis": [
+   "EV-F012"
+  ],
+  "date_range": "2014-2015",
+  "id": "ACT-ETS",
+  "name": "Even the Score (advocacy campaign)",
+  "role_at_time": "advocacy for flibanserin approval",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "agency",
+  "basis": [],
+  "date_range": "1906-",
+  "id": "ACT-FDA",
+  "name": "U.S. Food and Drug Administration",
+  "role_at_time": "regulator",
+  "status": "PROPOSED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "office",
+  "basis": [],
+  "date_range": "-",
+  "id": "ACT-FDA-CDER",
+  "name": "FDA Center for Drug Evaluation and Research",
+  "role_at_time": "drug review office",
+  "status": "PROPOSED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "office",
+  "basis": [],
+  "date_range": "-",
+  "id": "ACT-FDA-CDRH",
+  "name": "FDA Center for Devices and Radiological Health",
+  "role_at_time": "device review office",
+  "status": "PROPOSED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "office",
+  "basis": [],
+  "date_range": "-",
+  "id": "ACT-FDA-FOOD",
+  "name": "FDA food program (CFSAN; Human Foods Program from 2024)",
+  "role_at_time": "food and color additive office",
+  "status": "PROPOSED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "office",
+  "basis": [
+   "EV-F004"
+  ],
+  "date_range": "2016",
+  "id": "ACT-FDA-REVIEWTEAM-A02",
+  "name": "CDER review team for eteplirsen",
+  "role_at_time": "review team whose recommendation was set aside",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "agency",
+  "basis": [
+   "EV-G019"
+  ],
+  "date_range": "-",
+  "id": "ACT-HHS",
+  "name": "U.S. Department of Health and Human Services",
+  "role_at_time": "scientific and medical evaluation for scheduling (CSA 201(b))",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "international_body",
+  "basis": [
+   "EV-V048",
+   "EV-V080",
+   "EV-V081",
+   "EV-V110"
+  ],
+  "date_range": "-",
+  "id": "ACT-IARC",
+  "name": "International Agency for Research on Cancer",
+  "role_at_time": "hazard classification",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "injured_class",
+  "basis": [
+   "EV-G015"
+  ],
+  "date_range": "2008-2019",
+  "id": "ACT-IC-MESH",
+  "name": "women injured by transvaginal mesh (MDR reporters and litigants)",
+  "role_at_time": "harm reporters and plaintiffs",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "injured_class",
+  "basis": [
+   "EV-G010"
+  ],
+  "date_range": "2010",
+  "id": "ACT-IC-MIDODRINE",
+  "name": "patients and prescribers objecting to the midodrine withdrawal proposal",
+  "role_at_time": "objectors",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "injured_class",
+  "basis": [
+   "EV-G017"
+  ],
+  "date_range": "2008-2016",
+  "id": "ACT-IC-MOM",
+  "name": "patients injured by metal-on-metal hips (registry cases and litigants)",
+  "role_at_time": "harm reporters and plaintiffs",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "international_body",
+  "basis": [
+   "EV-V110"
+  ],
+  "date_range": "-",
+  "id": "ACT-JECFA",
+  "name": "Joint FAO/WHO Expert Committee on Food Additives",
+  "role_at_time": "aspartame ADI",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "coder",
+  "basis": [],
+  "date_range": "2026-10-18/2026-10-19",
+  "id": "ACT-KIMI",
+  "name": "Kimi deep research (kimmy v1-v3)",
+  "role_at_time": "originator of the coded sample, Annex A, RUS-0.1 and RUS-0.2, the sensitivity addendum",
+  "status": "PROPOSED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "agency",
+  "basis": [
+   "EV-V085"
+  ],
+  "date_range": "1970-",
+  "id": "ACT-OSHA",
+  "name": "Occupational Safety and Health Administration",
+  "role_at_time": "workplace standards; no shift-work standard",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "person",
+  "basis": [
+   "EV-F007"
+  ],
+  "date_range": "2023",
+  "id": "ACT-P-BUMPUS",
+  "name": "Namandje Bumpus",
+  "role_at_time": "FDA chief scientist (2023)",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "person",
+  "basis": [
+   "EV-F004",
+   "EV-F007"
+  ],
+  "date_range": "2016;2022-2025",
+  "id": "ACT-P-CALIFF",
+  "name": "Robert Califf",
+  "role_at_time": "FDA commissioner (2016; 2022-2025)",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "person",
+  "basis": [
+   "EV-F001"
+  ],
+  "date_range": "2019-2025",
+  "id": "ACT-P-CAVAZZONI",
+  "name": "Patrizia Cavazzoni",
+  "role_at_time": "CDER director (2021)",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "person",
+  "basis": [
+   "EV-F002"
+  ],
+  "date_range": "2021",
+  "id": "ACT-P-DUNN",
+  "name": "Billy Dunn",
+  "role_at_time": "director, CDER Office of Neuroscience (2021)",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "person",
+  "basis": [
+   "EV-F013"
+  ],
+  "date_range": "2009-2015",
+  "id": "ACT-P-HAMBURG",
+  "name": "Margaret Hamburg",
+  "role_at_time": "FDA commissioner (2011)",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "person",
+  "basis": [
+   "EV-F029"
+  ],
+  "date_range": "1977-1979",
+  "id": "ACT-P-KENNEDY",
+  "name": "Donald Kennedy",
+  "role_at_time": "FDA commissioner (1977)",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "person",
+  "basis": [
+   "EV-F024",
+   "EV-F026",
+   "EV-F027"
+  ],
+  "date_range": "2021-2025",
+  "id": "ACT-P-REGAN",
+  "name": "Michael Regan",
+  "role_at_time": "EPA administrator (2021-2024)",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "person",
+  "basis": [
+   "EV-F023"
+  ],
+  "date_range": "2015-2016",
+  "id": "ACT-P-ROWLAND",
+  "name": "Jess Rowland",
+  "role_at_time": "chair, EPA Cancer Assessment Review Committee (glyphosate)",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "person",
+  "basis": [
+   "EV-F001",
+   "EV-F004"
+  ],
+  "date_range": "2007-2021",
+  "id": "ACT-P-WOODCOCK",
+  "name": "Janet Woodcock",
+  "role_at_time": "CDER director (2016); acting FDA commissioner (2021)",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "person",
+  "basis": [
+   "EV-F027",
+   "EV-F028"
+  ],
+  "date_range": "2025-",
+  "id": "ACT-P-ZELDIN",
+  "name": "Lee Zeldin",
+  "role_at_time": "EPA administrator (2025-)",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "public_interest_litigant",
+  "basis": [
+   "EV-E029",
+   "EV-G008"
+  ],
+  "date_range": "2007-2021",
+  "id": "ACT-PIL-LULAC",
+  "name": "League of United Latin American Citizens et al.",
+  "role_at_time": "petitioners, LULAC v. Regan (9th Cir. 2021)",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "public_interest_litigant",
+  "basis": [
+   "EV-G007"
+  ],
+  "date_range": "2020-2022",
+  "id": "ACT-PIL-NRDC",
+  "name": "Natural Resources Defense Council; Pesticide Action Network North America",
+  "role_at_time": "petitioners, NRDC v. EPA (9th Cir. 2022)",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "public_interest_litigant",
+  "basis": [
+   "EV-G007"
+  ],
+  "date_range": "2020-2022",
+  "id": "ACT-PIL-RURAL",
+  "name": "Rural Coalition; Lideres Campesinas; Farmworker Association of Florida; Beyond Pesticides; Center for Food Safety",
+  "role_at_time": "consolidated petitioners, NRDC v. EPA (9th Cir. 2022)",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "office",
+  "basis": [
+   "EV-F030",
+   "EV-V077"
+  ],
+  "date_range": "2025-2026",
+  "id": "ACT-PRESIDENT",
+  "name": "President of the United States",
+  "role_at_time": "executive order on marijuana rescheduling",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "coder",
+  "basis": [],
+  "date_range": "2026-10-18/2026-10-21",
+  "id": "ACT-REGISTRY",
+  "name": "registry coder (this session)",
+  "role_at_time": "adjudicator of NCRs; coder of the per-axis C_restrict scores (second coding beside the source sums), the R8 candidate rows, and every PROPOSED field in tools/curation_*.py",
+  "status": "PROPOSED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "coder",
+  "basis": [],
+  "date_range": "2026-10-18/2026-10-19",
+  "id": "ACT-REVIEWER",
+  "name": "REVIEW_v1-v3 reviewer (chat session)",
+  "role_at_time": "originator of findings R1-R14",
+  "status": "PROPOSED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "court",
+  "basis": [
+   "EV-V009",
+   "EV-V010"
+  ],
+  "date_range": "2026",
+  "id": "ACT-SCOTUS",
+  "name": "Supreme Court of the United States",
+  "role_at_time": "Monsanto v. Durnell",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "sponsor",
+  "basis": [
+   "EV-F025",
+   "EV-F031"
+  ],
+  "date_range": "-",
+  "id": "ACT-SP-BAYER",
+  "name": "Bayer (Monsanto)",
+  "role_at_time": "registrant, glyphosate; neonicotinoids",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "sponsor",
+  "basis": [
+   "EV-F001"
+  ],
+  "date_range": "-",
+  "id": "ACT-SP-BIOGEN",
+  "name": "Biogen",
+  "role_at_time": "sponsor, aducanumab",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "sponsor",
+  "basis": [
+   "EV-G020"
+  ],
+  "date_range": "2018-",
+  "id": "ACT-SP-COMPASS",
+  "name": "COMPASS Pathways",
+  "role_at_time": "psilocybin breakthrough designation holder",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "sponsor",
+  "basis": [
+   "EV-F024"
+  ],
+  "date_range": "-",
+  "id": "ACT-SP-CORTEVA",
+  "name": "Corteva (Dow)",
+  "role_at_time": "registrant, chlorpyrifos",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "sponsor",
+  "basis": [
+   "EV-F007"
+  ],
+  "date_range": "-",
+  "id": "ACT-SP-COVIS",
+  "name": "Covis Pharma",
+  "role_at_time": "sponsor, Makena",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "sponsor",
+  "basis": [
+   "EV-F013"
+  ],
+  "date_range": "-",
+  "id": "ACT-SP-GENENTECH",
+  "name": "Genentech",
+  "role_at_time": "sponsor, bevacizumab",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "sponsor",
+  "basis": [
+   "EV-F014"
+  ],
+  "date_range": "-",
+  "id": "ACT-SP-LILLY",
+  "name": "Eli Lilly",
+  "role_at_time": "sponsor, donanemab",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "sponsor",
+  "basis": [
+   "EV-F010",
+   "EV-V020"
+  ],
+  "date_range": "-",
+  "id": "ACT-SP-MERCK",
+  "name": "Merck",
+  "role_at_time": "sponsor, rofecoxib; molnupiravir (with Ridgeback)",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "sponsor",
+  "basis": [
+   "EV-F016"
+  ],
+  "date_range": "-",
+  "id": "ACT-SP-MESH",
+  "name": "transvaginal mesh manufacturers (incl. Boston Scientific, Coloplast)",
+  "role_at_time": "device sponsors",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "sponsor",
+  "basis": [
+   "EV-F017"
+  ],
+  "date_range": "-",
+  "id": "ACT-SP-MOM",
+  "name": "metal-on-metal hip manufacturers (incl. DePuy)",
+  "role_at_time": "device sponsors",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "sponsor",
+  "basis": [
+   "EV-F018"
+  ],
+  "date_range": "-",
+  "id": "ACT-SP-NOVO",
+  "name": "Novo Nordisk",
+  "role_at_time": "sponsor, liraglutide and semaglutide",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "sponsor",
+  "basis": [
+   "EV-G001",
+   "EV-G002"
+  ],
+  "date_range": "-",
+  "id": "ACT-SP-PENTA",
+  "name": "pentachlorophenol registrants",
+  "role_at_time": "registrants",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "sponsor",
+  "basis": [
+   "EV-G002",
+   "EV-G003",
+   "EV-G004",
+   "EV-G005"
+  ],
+  "date_range": "2022",
+  "id": "ACT-SP-REG2022",
+  "name": "registrants of the 2022 registration-review chemicals",
+  "role_at_time": "registrants (one actor for the frame)",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "sponsor",
+  "basis": [
+   "EV-F004",
+   "EV-V073"
+  ],
+  "date_range": "-",
+  "id": "ACT-SP-SAREPTA",
+  "name": "Sarepta Therapeutics",
+  "role_at_time": "sponsor, eteplirsen",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "sponsor",
+  "basis": [
+   "EV-F015"
+  ],
+  "date_range": "-",
+  "id": "ACT-SP-SHIRE",
+  "name": "Shire",
+  "role_at_time": "sponsor, ProAmatine (midodrine)",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "sponsor",
+  "basis": [
+   "EV-F011",
+   "EV-F012"
+  ],
+  "date_range": "-",
+  "id": "ACT-SP-SPROUT",
+  "name": "Sprout Pharmaceuticals",
+  "role_at_time": "sponsor, flibanserin",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "sponsor",
+  "basis": [
+   "EV-F021",
+   "EV-F025"
+  ],
+  "date_range": "-",
+  "id": "ACT-SP-SYNGENTA",
+  "name": "Syngenta",
+  "role_at_time": "registrant, atrazine; neonicotinoids",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "sponsor",
+  "basis": [
+   "EV-G020"
+  ],
+  "date_range": "2019-",
+  "id": "ACT-SP-USONA",
+  "name": "Usona Institute",
+  "role_at_time": "psilocybin breakthrough designation holder",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "sponsor",
+  "basis": [
+   "EV-F006"
+  ],
+  "date_range": "-",
+  "id": "ACT-SP-ZOGENIX",
+  "name": "Zogenix",
+  "role_at_time": "sponsor, Zohydro ER",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "trade_group",
+  "basis": [
+   "EV-G009"
+  ],
+  "date_range": "2021-2023",
+  "id": "ACT-TG-RRVSGA",
+  "name": "Red River Valley Sugarbeet Growers Association et al. (grower and farm groups)",
+  "role_at_time": "petitioners, Eighth Circuit chlorpyrifos case",
+  "status": "OBSERVED",
+  "type": "ACTOR"
+ },
+ {
+  "actor_type": "office",
+  "basis": [],
+  "date_range": "-",
+  "id": "ACT-UNKNOWN",
+  "name": "decision-makers and advisers not individually identified",
+  "role_at_time": "placeholder for an unsearched disclosure record",
+  "status": "PROPOSED",
+  "type": "ACTOR"
+ }
+]

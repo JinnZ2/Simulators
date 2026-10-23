@@ -1,0 +1,353 @@
+[
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-alzheimer_cognition",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "alzheimer cognition",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-amphibian_endocrine",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "amphibian endocrine",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-amyloid_pet",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "amyloid pet",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-aquatic_toxicity",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "aquatic toxicity",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-aria",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "aria",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-bladder_tumor_rodent",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "bladder tumor rodent",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-blood_lead",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "blood lead",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-breast_cancer",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "breast cancer",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-circadian_disruption",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "circadian disruption",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-colorectal_cancer",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "colorectal cancer",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-covid_outcomes",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "covid outcomes",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-depression",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "depression",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-dystrophin",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "dystrophin",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-embryo_fetal_toxicity",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "embryo fetal toxicity",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-genotoxicity",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "genotoxicity",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-gut_microbiome",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "gut microbiome",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-hepatocellular_carcinoma",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "hepatocellular carcinoma",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-hsdd_efficacy",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "hsdd efficacy",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-immune_response",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "immune response",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-kidney_cancer",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "kidney cancer",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-mesh_erosion",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "mesh erosion",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-metallosis",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "metallosis",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-microplastic_occurrence",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "microplastic occurrence",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-mutagenicity",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "mutagenicity",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-myocardial_infarction",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "myocardial infarction",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-nerve_agent_survival",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "nerve agent survival",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-neurodevelopment",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "neurodevelopment",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-nhl",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "nhl",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-opioid_use_disorder",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "opioid use disorder",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-orthostatic_hypotension",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "orthostatic hypotension",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-overall_survival",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "overall survival",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-pain_mmj",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "pain mmj",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-pollinator_colony",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "pollinator colony",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-preterm_birth",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "preterm birth",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-prostate_cancer",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "prostate cancer",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-stroke",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "stroke",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-thyroid_c_cell_tumor",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "thyroid c cell tumor",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-thyroid_follicular_tumor_rodent",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "thyroid follicular tumor rodent",
+  "type": "ENDPOINT"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "END-thyroid_function",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "label": "thyroid function",
+  "type": "ENDPOINT"
+ }
+]

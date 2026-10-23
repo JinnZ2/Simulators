@@ -1,0 +1,1947 @@
+[
+ {
+  "cite": "change_log_v2.md (v1->v2, v2->v3)",
+  "id": "SRC-K-CHANGELOG",
+  "kind": "bundle_file",
+  "path": "bundle/source/current/change_log_v2.md",
+  "rows": [],
+  "sha256": "0c8e2c7b5fe98aa30de366bb72306eaa642f2a6c95d44e6695c0c8792d017644",
+  "superseded": false,
+  "type": "SOURCE",
+  "url": null,
+  "verification": {
+   "corrected_value": null,
+   "depth": "file",
+   "exists": "Y",
+   "found": "pinned file, read in full",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "bundle file pinned by sha256 (bundle/MANIFEST.sha256)",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "cite": "annex_a_regrading.csv (v1, superseded)",
+  "id": "SRC-K1-ANNEX",
+  "kind": "bundle_file",
+  "path": "bundle/source/superseded/v1/annex_a_regrading.csv",
+  "rows": [],
+  "sha256": "f68ea71bf5801c6a232333ae1d3af84771247fa3a9db1b06afb77a8651bd0fef",
+  "superseded": true,
+  "type": "SOURCE",
+  "url": null,
+  "verification": {
+   "corrected_value": null,
+   "depth": "file",
+   "exists": "Y",
+   "found": "pinned file, read in full",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "bundle file pinned by sha256 (bundle/MANIFEST.sha256)",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "cite": "coded_decisions.csv (v1, superseded)",
+  "id": "SRC-K1-CSV",
+  "kind": "bundle_file",
+  "path": "bundle/source/superseded/v1/coded_decisions.csv",
+  "rows": [],
+  "sha256": "8f7c931dcc0fae4f417b49d76354adced938dbb4661aa134287d0afe1475c923",
+  "superseded": true,
+  "type": "SOURCE",
+  "url": null,
+  "verification": {
+   "corrected_value": null,
+   "depth": "file",
+   "exists": "Y",
+   "found": "pinned file, read in full",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "bundle file pinned by sha256 (bundle/MANIFEST.sha256)",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "cite": "direction_of_uncertainty_report.md (v1, superseded)",
+  "id": "SRC-K1-REPORT",
+  "kind": "bundle_file",
+  "path": "bundle/source/superseded/v1/direction_of_uncertainty_report.md",
+  "rows": [],
+  "sha256": "50c38ad47bea27a379d2b20737f4398b3395841791c11b41c7f8021a5a5aebd9",
+  "superseded": true,
+  "type": "SOURCE",
+  "url": null,
+  "verification": {
+   "corrected_value": null,
+   "depth": "file",
+   "exists": "Y",
+   "found": "pinned file, read in full",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "bundle file pinned by sha256 (bundle/MANIFEST.sha256)",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "cite": "regulatory_uncertainty_standard_draft.md (RUS-0.1, superseded)",
+  "id": "SRC-K1-STD",
+  "kind": "bundle_file",
+  "path": "bundle/source/superseded/v1/regulatory_uncertainty_standard_draft.md",
+  "rows": [],
+  "sha256": "f81f44a40fc915368049f92a6da3fb3e9693bd7d74e73959ed9f21b431f0420f",
+  "superseded": true,
+  "type": "SOURCE",
+  "url": null,
+  "verification": {
+   "corrected_value": null,
+   "depth": "file",
+   "exists": "Y",
+   "found": "pinned file, read in full",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "bundle file pinned by sha256 (bundle/MANIFEST.sha256)",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "cite": "annex_a_regrading_v2.csv",
+  "id": "SRC-K2-ANNEX",
+  "kind": "bundle_file",
+  "path": "bundle/source/current/annex_a_regrading_v2.csv",
+  "rows": [],
+  "sha256": "844a1a9798a3394817ebfe224e6d61de27ab366c119ee713ea6a4f326d759faf",
+  "superseded": false,
+  "type": "SOURCE",
+  "url": null,
+  "verification": {
+   "corrected_value": null,
+   "depth": "file",
+   "exists": "Y",
+   "found": "pinned file, read in full",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "bundle file pinned by sha256 (bundle/MANIFEST.sha256)",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "cite": "coded_decisions_v2.csv (superseded)",
+  "id": "SRC-K2-CSV",
+  "kind": "bundle_file",
+  "path": "bundle/source/superseded/coded_decisions_v2.csv",
+  "rows": [],
+  "sha256": "1595b554c9ced84e45b7bf6050a0bd7191322210cbb9c40db231246feaa20643",
+  "superseded": true,
+  "type": "SOURCE",
+  "url": null,
+  "verification": {
+   "corrected_value": null,
+   "depth": "file",
+   "exists": "Y",
+   "found": "pinned file, read in full",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "bundle file pinned by sha256 (bundle/MANIFEST.sha256)",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "cite": "epa_frame_2022.csv",
+  "id": "SRC-K2-FRAME",
+  "kind": "bundle_file",
+  "path": "bundle/source/current/epa_frame_2022.csv",
+  "rows": [],
+  "sha256": "21dd243b55ed3f24955c04e6685f75229f9d48450b9fcb30f3b880b53db73da8",
+  "superseded": false,
+  "type": "SOURCE",
+  "url": null,
+  "verification": {
+   "corrected_value": null,
+   "depth": "file",
+   "exists": "Y",
+   "found": "pinned file, read in full",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "bundle file pinned by sha256 (bundle/MANIFEST.sha256)",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "cite": "direction_of_uncertainty_report_v2.md",
+  "id": "SRC-K2-REPORT",
+  "kind": "bundle_file",
+  "path": "bundle/source/current/direction_of_uncertainty_report_v2.md",
+  "rows": [],
+  "sha256": "2a22063e29d4b481f1b71881606ecea9b9a63d6efe20bcaf8a9977c92b9d4640",
+  "superseded": false,
+  "type": "SOURCE",
+  "url": null,
+  "verification": {
+   "corrected_value": null,
+   "depth": "file",
+   "exists": "Y",
+   "found": "pinned file, read in full",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "bundle file pinned by sha256 (bundle/MANIFEST.sha256)",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "cite": "regulatory_uncertainty_standard_v02.md (RUS-0.2)",
+  "id": "SRC-K2-STD",
+  "kind": "bundle_file",
+  "path": "bundle/source/current/regulatory_uncertainty_standard_v02.md",
+  "rows": [],
+  "sha256": "91946a0cde571a8e71562caab664676702e9617758540719e90a641071c48d95",
+  "superseded": false,
+  "type": "SOURCE",
+  "url": null,
+  "verification": {
+   "corrected_value": null,
+   "depth": "file",
+   "exists": "Y",
+   "found": "pinned file, read in full",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "bundle file pinned by sha256 (bundle/MANIFEST.sha256)",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "cite": "coded_decisions_v3.csv",
+  "id": "SRC-K3-CSV",
+  "kind": "bundle_file",
+  "path": "bundle/source/current/coded_decisions_v3.csv",
+  "rows": [],
+  "sha256": "f45c60ae321872047aeb38863d2fda1a693df36f43cd5e3eaa87896f18f3096b",
+  "superseded": false,
+  "type": "SOURCE",
+  "url": null,
+  "verification": {
+   "corrected_value": null,
+   "depth": "file",
+   "exists": "Y",
+   "found": "pinned file, read in full",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "bundle file pinned by sha256 (bundle/MANIFEST.sha256)",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "cite": "sensitivity_upgrades_v3.md",
+  "id": "SRC-K3-SENS",
+  "kind": "bundle_file",
+  "path": "bundle/source/current/sensitivity_upgrades_v3.md",
+  "rows": [],
+  "sha256": "4b52c0f578501c6f12b69889aa0aa9298dd38f7c10c755b8d10f7de32a002ba7",
+  "superseded": false,
+  "type": "SOURCE",
+  "url": null,
+  "verification": {
+   "corrected_value": null,
+   "depth": "file",
+   "exists": "Y",
+   "found": "pinned file, read in full",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "bundle file pinned by sha256 (bundle/MANIFEST.sha256)",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "cite": "calibration_sweep_v3.csv",
+  "id": "SRC-K3-SWEEP",
+  "kind": "bundle_file",
+  "path": "bundle/source/current/calibration_sweep_v3.csv",
+  "rows": [],
+  "sha256": "2976ede2c824310150e73fbc58b5350b83efadeae6965728f73bf345dbe4ebc0",
+  "superseded": false,
+  "type": "SOURCE",
+  "url": null,
+  "verification": {
+   "corrected_value": null,
+   "depth": "file",
+   "exists": "Y",
+   "found": "pinned file, read in full",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "bundle file pinned by sha256 (bundle/MANIFEST.sha256)",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "cite": "REVIEW_v1.md",
+  "id": "SRC-REVIEW-1",
+  "kind": "bundle_file",
+  "path": "bundle/reviews/REVIEW_v1.md",
+  "rows": [],
+  "sha256": "3a5f4f3c119224412b459691cf28964a102095a1e3af8aa43cd80a572d7066f9",
+  "superseded": false,
+  "type": "SOURCE",
+  "url": null,
+  "verification": {
+   "corrected_value": null,
+   "depth": "file",
+   "exists": "Y",
+   "found": "pinned file, read in full",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "bundle file pinned by sha256 (bundle/MANIFEST.sha256)",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "cite": "REVIEW_v2.md",
+  "id": "SRC-REVIEW-2",
+  "kind": "bundle_file",
+  "path": "bundle/reviews/REVIEW_v2.md",
+  "rows": [],
+  "sha256": "a51fbfd27781f8e9676d09db0ccff0c6309f7384cebf1400d1f5dc1ff4e206b5",
+  "superseded": false,
+  "type": "SOURCE",
+  "url": null,
+  "verification": {
+   "corrected_value": null,
+   "depth": "file",
+   "exists": "Y",
+   "found": "pinned file, read in full",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "bundle file pinned by sha256 (bundle/MANIFEST.sha256)",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "cite": "REVIEW_v3.md",
+  "id": "SRC-REVIEW-3",
+  "kind": "bundle_file",
+  "path": "bundle/reviews/REVIEW_v3.md",
+  "rows": [],
+  "sha256": "0af0e6a73d4bb9d96f317cd31bdd9103878fedfc0dccc5d533c60d8156174124",
+  "superseded": false,
+  "type": "SOURCE",
+  "url": null,
+  "verification": {
+   "corrected_value": null,
+   "depth": "file",
+   "exists": "Y",
+   "found": "pinned file, read in full",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "bundle file pinned by sha256 (bundle/MANIFEST.sha256)",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "cite": "https://ogletree.com/insights-resources/blog-posts/marijuana-rescheduling-temporarily-paused/",
+  "id": "SRC-U-008790ef",
+  "kind": "law_firm",
+  "path": null,
+  "rows": [
+   "V014"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://ogletree.com/insights-resources/blog-posts/marijuana-rescheduling-temporarily-paused/",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V014): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.epa.gov/pesticide-worker-safety/epa-update-use-pesticide-chlorpyrifos-food",
+  "id": "SRC-U-04b82c17",
+  "kind": "agency_page",
+  "path": null,
+  "rows": [
+   "V053"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.epa.gov/pesticide-worker-safety/epa-update-use-pesticide-chlorpyrifos-food",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V053): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.hklaw.com/en/insights/publications/2026/07/epa-proposes-ucmr-6-for-pfas-and-other-contaminants",
+  "id": "SRC-U-06d18892",
+  "kind": "law_firm",
+  "path": null,
+  "rows": [
+   "V012"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.hklaw.com/en/insights/publications/2026/07/epa-proposes-ucmr-6-for-pfas-and-other-contaminants",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V012): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.onclive.com/view/fda-says-avastin-not-safe-or-effective-for-patients-with-breast-cancer",
+  "id": "SRC-U-0b264dff",
+  "kind": "news",
+  "path": null,
+  "rows": [
+   "V026"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.onclive.com/view/fda-says-avastin-not-safe-or-effective-for-patients-with-breast-cancer",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V026): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.verdantlaw.com/epa-seeks-scientific-input-as-glyphosate-review-moves-forward/",
+  "id": "SRC-U-0d5adb58",
+  "kind": "law_firm",
+  "path": null,
+  "rows": [
+   "V049"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.verdantlaw.com/epa-seeks-scientific-input-as-glyphosate-review-moves-forward/",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V049): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://jamanetwork.com/journals/jama/fullarticle/2803999",
+  "id": "SRC-U-0e9a1481",
+  "kind": "peer_reviewed",
+  "path": null,
+  "rows": [
+   "V017"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://jamanetwork.com/journals/jama/fullarticle/2803999",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V017): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8783595/",
+  "id": "SRC-U-12d5506d",
+  "kind": "peer_reviewed",
+  "path": null,
+  "rows": [
+   "V065"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8783595/",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V065): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.epa.gov/pollinator-protection/epa-actions-protect-pollinators",
+  "id": "SRC-U-146b8d5c",
+  "kind": "agency_page",
+  "path": null,
+  "rows": [
+   "V055"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.epa.gov/pollinator-protection/epa-actions-protect-pollinators",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V055): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.statnews.com/2021/11/30/fda-panel-narrowly-recommends-authorization-of-merck-covid-pill-after-day-of-tense-discussion/",
+  "id": "SRC-U-241cec15",
+  "kind": "news",
+  "path": null,
+  "rows": [
+   "V022"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.statnews.com/2021/11/30/fda-panel-narrowly-recommends-authorization-of-merck-covid-pill-after-day-of-tense-discussion/",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V022): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10329213/",
+  "id": "SRC-U-31a141de",
+  "kind": "peer_reviewed",
+  "path": null,
+  "rows": [
+   "V001",
+   "V002",
+   "V003",
+   "V004",
+   "V005"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10329213/",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "raps.org/jamanetwork.com (summary): \"409 human drug advisory committee meetings from 2010 to 2021\"; \"aligned with 262 of 298 advisory committee votes\"; 314 not shown",
+   "ledger_row": null,
+   "queries": 2,
+   "reached": "Y",
+   "reason": "aggregate over 5 ledger rows (V001, V002, V003, V004, V005): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.newslow.com/post/history-and-pros-cons-of-saccharin",
+  "id": "SRC-U-37cc003b",
+  "kind": "blog",
+  "path": null,
+  "rows": [
+   "V063"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.newslow.com/post/history-and-pros-cons-of-saccharin",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V063): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.lowenstein.com/news-insights/publications/client-alerts/multistate-petition-to-usepa-to-monitor-for-microplastics-in-drinking-water-may-elevate-regulatory-focus-environmental",
+  "id": "SRC-U-38d59ff0",
+  "kind": "law_firm",
+  "path": null,
+  "rows": [
+   "V062"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.lowenstein.com/news-insights/publications/client-alerts/multistate-petition-to-usepa-to-monitor-for-microplastics-in-drinking-water-may-elevate-regulatory-focus-environmental",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V062): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.fda.gov/media/74279/download",
+  "id": "SRC-U-431d5925",
+  "kind": "agency_page",
+  "path": null,
+  "rows": [
+   "V020"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.fda.gov/media/74279/download",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V020): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.fda.gov/emergency-preparedness-and-response/preparedness-research/animal-rule-summary",
+  "id": "SRC-U-4375d259",
+  "kind": "agency_page",
+  "path": null,
+  "rows": [
+   "V032"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.fda.gov/emergency-preparedness-and-response/preparedness-research/animal-rule-summary",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V032): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.nrc.gov/reading-rm/doc-collections/cfr/part050/part050-appb.html",
+  "id": "SRC-U-476ea009",
+  "kind": "standard",
+  "path": null,
+  "rows": [
+   "V071"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.nrc.gov/reading-rm/doc-collections/cfr/part050/part050-appb.html",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V071): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://acibademinternational.com/blog/ozempic-and-thyroid-cancer-what-the-boxed-warning-says-and-what-human-data-show/",
+  "id": "SRC-U-498639a4",
+  "kind": "blog",
+  "path": null,
+  "rows": [
+   "V035"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://acibademinternational.com/blog/ozempic-and-thyroid-cancer-what-the-boxed-warning-says-and-what-human-data-show/",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V035): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.medpagetoday.com/publichealthpolicy/fdageneral/105370",
+  "id": "SRC-U-4d7f0a25",
+  "kind": "news",
+  "path": null,
+  "rows": [
+   "V006"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.medpagetoday.com/publichealthpolicy/fdageneral/105370",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "saludyfarmacos.org (summary, citing the MedPage Today piece): FDA took \"a median of 74 days to approve, versus 700 days when the committee rejected\"; HR 9.42 (5.99-14.80) not shown",
+   "ledger_row": null,
+   "queries": 2,
+   "reached": "Y",
+   "reason": "aggregate over 1 ledger rows (V006): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.sciencedirect.com/science/article/abs/pii/S0300483X25000459",
+  "id": "SRC-U-4ff95d35",
+  "kind": "peer_reviewed",
+  "path": null,
+  "rows": [
+   "V042"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.sciencedirect.com/science/article/abs/pii/S0300483X25000459",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V042): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://crystalquest.com/blogs/contaminants/lead-and-copper-rule-explained",
+  "id": "SRC-U-545bf3b7",
+  "kind": "blog",
+  "path": null,
+  "rows": [
+   "V058"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://crystalquest.com/blogs/contaminants/lead-and-copper-rule-explained",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V058): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10869173/",
+  "id": "SRC-U-54d14204",
+  "kind": "peer_reviewed",
+  "path": null,
+  "rows": [
+   "V016"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10869173/",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V016): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://microplasticsapp.com/blog/epa-microplastics-drinking-water",
+  "id": "SRC-U-566b612f",
+  "kind": "blog",
+  "path": null,
+  "rows": [
+   "V067"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://microplasticsapp.com/blog/epa-microplastics-drinking-water",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V067): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.supremecourt.gov/opinions/25pdf/24-1068_n7ip.pdf",
+  "id": "SRC-U-570a3f06",
+  "kind": "court",
+  "path": null,
+  "rows": [
+   "V009"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.supremecourt.gov/opinions/25pdf/24-1068_n7ip.pdf",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "mayerbrown.com/faegredrinker.com (summary): decided \"on June 25, 2026, holding 7-2 that FIFRA preempts a state failure-to-warn claim seeking a cancer warning on Roundup's label\"",
+   "ledger_row": null,
+   "queries": 1,
+   "reached": "Y",
+   "reason": "aggregate over 1 ledger rows (V009): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "cite": "https://www.drugwatch.com/transvaginal-mesh/recall/",
+  "id": "SRC-U-581cdedb",
+  "kind": "secondary",
+  "path": null,
+  "rows": [
+   "V029"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.drugwatch.com/transvaginal-mesh/recall/",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V029): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.goldbergsegalla.com/blog/environmental-law-monitor/epa/green-groups-urge-ninth-circuit-to-push-epa-on-atrazine-re-evaluation/",
+  "id": "SRC-U-5b8227d1",
+  "kind": "law_firm",
+  "path": null,
+  "rows": [
+   "V047"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.goldbergsegalla.com/blog/environmental-law-monitor/epa/green-groups-urge-ninth-circuit-to-push-epa-on-atrazine-re-evaluation/",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V047): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://pubmed.ncbi.nlm.nih.gov/37418271/",
+  "id": "SRC-U-5e3bf64b",
+  "kind": "peer_reviewed",
+  "path": null,
+  "rows": [
+   "V007"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://pubmed.ncbi.nlm.nih.gov/37418271/",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "?",
+   "found": "jamahealthforumeditorssummary.libsyn.com (summary): July 2023 JAMA Health Forum conversation with \"Aaron S. Kesselheim ... and Genevieve P. Kanter\"; editorial and quoted phrase not shown",
+   "ledger_row": null,
+   "queries": 2,
+   "reached": "Y",
+   "reason": "aggregate over 1 ledger rows (V007): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.fda.gov/media/180111/download",
+  "id": "SRC-U-614feb7a",
+  "kind": "agency_page",
+  "path": null,
+  "rows": [
+   "V027"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.fda.gov/media/180111/download",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V027): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.nature.com/articles/sdata201618",
+  "id": "SRC-U-6af51e02",
+  "kind": "peer_reviewed",
+  "path": null,
+  "rows": [
+   "V072"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.nature.com/articles/sdata201618",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V072): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://ro.co/safety-info/glp1/",
+  "id": "SRC-U-753e81fb",
+  "kind": "secondary",
+  "path": null,
+  "rows": [
+   "V034"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://ro.co/safety-info/glp1/",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V034): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3744967/",
+  "id": "SRC-U-80849c8c",
+  "kind": "peer_reviewed",
+  "path": null,
+  "rows": [
+   "V025"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3744967/",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V025): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://jamanetwork.com/journals/jama/fullarticle/2799172",
+  "id": "SRC-U-817d0065",
+  "kind": "peer_reviewed",
+  "path": null,
+  "rows": [
+   "V031"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://jamanetwork.com/journals/jama/fullarticle/2799172",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V031): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.fda.gov/food/food-ingredients-packaging/fda-encourages-food-manufacturers-accelerate-phasing-out-use-fdc-red-no-3-foods-2027-deadline",
+  "id": "SRC-U-846d90d6",
+  "kind": "agency_page",
+  "path": null,
+  "rows": [
+   "V037",
+   "V038"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.fda.gov/food/food-ingredients-packaging/fda-encourages-food-manufacturers-accelerate-phasing-out-use-fdc-red-no-3-foods-2027-deadline",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 2 ledger rows (V037, V038): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.federalregister.gov/documents/2026/07/01/2026-13263/revisions-to-establish-the-sixth-unregulated-contaminant-monitoring-rule-ucmr-6-for-public-water",
+  "id": "SRC-U-8e2e7aec",
+  "kind": "primary_record",
+  "path": null,
+  "rows": [
+   "V011"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.federalregister.gov/documents/2026/07/01/2026-13263/revisions-to-establish-the-sixth-unregulated-contaminant-monitoring-rule-ucmr-6-for-public-water",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V011): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.fda.gov/food/food-additives-petitions/aspartame-and-other-sweeteners-food",
+  "id": "SRC-U-95c72b18",
+  "kind": "agency_page",
+  "path": null,
+  "rows": [
+   "V043"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.fda.gov/food/food-additives-petitions/aspartame-and-other-sweeteners-food",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V043): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.nejm.org/doi/full/10.1056/NEJMp1513686",
+  "id": "SRC-U-a85bc387",
+  "kind": "peer_reviewed",
+  "path": null,
+  "rows": [
+   "V023"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.nejm.org/doi/full/10.1056/NEJMp1513686",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V023): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.epa.gov/ingredients-used-pesticide-products/atrazine",
+  "id": "SRC-U-aa2a8a37",
+  "kind": "agency_page",
+  "path": null,
+  "rows": [
+   "V045"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.epa.gov/ingredients-used-pesticide-products/atrazine",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V045): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.fda.gov/drugs/nda-and-bla-approvals/animal-rule-approvals",
+  "id": "SRC-U-ab801822",
+  "kind": "agency_page",
+  "path": null,
+  "rows": [
+   "V033"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.fda.gov/drugs/nda-and-bla-approvals/animal-rule-approvals",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V033): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://epa.gov/pesticides/epa-requires-cancellation-pentachlorophenol-protect-human-health",
+  "id": "SRC-U-ad9cc7be",
+  "kind": "agency_page",
+  "path": null,
+  "rows": [
+   "G001"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://epa.gov/pesticides/epa-requires-cancellation-pentachlorophenol-protect-human-health",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "epa.gov (summary, release Feb 4 2022): \"EPA issued a final registration review decision requiring the cancellation of pentachlorophenol\"; \"The complete phase-out of pentachlorophenol will be conducted over five years\"; alternatives named copper naphthenate, DCOIT, chromated arsenicals, creosote",
+   "ledger_row": null,
+   "queries": 1,
+   "reached": "Y",
+   "reason": "aggregate over 1 ledger rows (G001): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "cite": "https://usrtk.org/pesticides/atrazine/",
+  "id": "SRC-U-ae832db7",
+  "kind": "secondary",
+  "path": null,
+  "rows": [
+   "V046"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://usrtk.org/pesticides/atrazine/",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V046): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.epa.gov/sdwa/and-polyfluoroalkyl-substances-pfas",
+  "id": "SRC-U-af98f2fe",
+  "kind": "agency_page",
+  "path": null,
+  "rows": [
+   "V059"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.epa.gov/sdwa/and-polyfluoroalkyl-substances-pfas",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V059): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.accessdata.fda.gov/drugsatfda_docs/nda/2015/022526Orig1s000Approv.pdf",
+  "id": "SRC-U-bbf43c04",
+  "kind": "primary_record",
+  "path": null,
+  "rows": [
+   "V024"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.accessdata.fda.gov/drugsatfda_docs/nda/2015/022526Orig1s000Approv.pdf",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V024): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.nbcnews.com/health/health-news/fda-advisory-panel-recommends-mercks-covid-pill-emergency-use-rcna7107",
+  "id": "SRC-U-bd62495f",
+  "kind": "news",
+  "path": null,
+  "rows": [
+   "V021"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.nbcnews.com/health/health-news/fda-advisory-panel-recommends-mercks-covid-pill-emergency-use-rcna7107",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V021): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://food.ec.europa.eu/plants/pesticides/approval-active-substances-safeners-and-synergists/renewal-approval/neonicotinoids_en",
+  "id": "SRC-U-c2d472e1",
+  "kind": "agency_page",
+  "path": null,
+  "rows": [
+   "V056"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://food.ec.europa.eu/plants/pesticides/approval-active-substances-safeners-and-synergists/renewal-approval/neonicotinoids_en",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V056): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/2782122",
+  "id": "SRC-U-c2e1249f",
+  "kind": "peer_reviewed",
+  "path": null,
+  "rows": [
+   "V015"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/2782122",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V015): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.iarc.who.int/fr/news-events/glyphosate-monograph-now-available-2/",
+  "id": "SRC-U-c4207fa4",
+  "kind": "agency_page",
+  "path": null,
+  "rows": [
+   "V048"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.iarc.who.int/fr/news-events/glyphosate-monograph-now-available-2/",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V048): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.iec.ch/functionalsafety/explained/",
+  "id": "SRC-U-c533bcfd",
+  "kind": "standard",
+  "path": null,
+  "rows": [
+   "V068"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.iec.ch/functionalsafety/explained/",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V068): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.law.cornell.edu/supremecourt/text/24-1068",
+  "id": "SRC-U-c857ca99",
+  "kind": "court",
+  "path": null,
+  "rows": [
+   "V010",
+   "V064"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.law.cornell.edu/supremecourt/text/24-1068",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "thenewlede.org (summary, SCOTUSblog quote): \"the court ruled, by a vote of 7-2\"; dissent by Jackson joined by Gorsuch",
+   "ledger_row": null,
+   "queries": 1,
+   "reached": "Y",
+   "reason": "aggregate over 2 ledger rows (V010, V064): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "MATCH",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.fdli.org/2024/01/the-curious-case-of-aspartame-how-the-same-evidence-can-yield-seemingly-different-conclusions/",
+  "id": "SRC-U-cb3d0a2c",
+  "kind": "secondary",
+  "path": null,
+  "rows": [
+   "V044"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.fdli.org/2024/01/the-curious-case-of-aspartame-how-the-same-evidence-can-yield-seemingly-different-conclusions/",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V044): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.justice.gov/opa/pr/justice-department-places-fda-approved-marijuana-products-and-products-containing-marijuana",
+  "id": "SRC-U-d265167f",
+  "kind": "agency_page",
+  "path": null,
+  "rows": [
+   "V013"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.justice.gov/opa/pr/justice-department-places-fda-approved-marijuana-products-and-products-containing-marijuana",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V013): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.crowell.com/en/insights/client-alerts/ucmr-6-epa-sidesteps-microplastics-for-now",
+  "id": "SRC-U-d5223d7e",
+  "kind": "law_firm",
+  "path": null,
+  "rows": [
+   "V061"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.crowell.com/en/insights/client-alerts/ucmr-6-epa-sidesteps-microplastics-for-now",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V061): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.gibsondunn.com/dea-downschedules-state-medical-marijuana-to-schedule-iii-expedited-hearing-set-to-consider-broader-rescheduling/",
+  "id": "SRC-U-d72a37c3",
+  "kind": "law_firm",
+  "path": null,
+  "rows": [
+   "V066"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.gibsondunn.com/dea-downschedules-state-medical-marijuana-to-schedule-iii-expedited-hearing-set-to-consider-broader-rescheduling/",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V066): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://pmc.ncbi.nlm.nih.gov/articles/PMC549650/",
+  "id": "SRC-U-d8364bcf",
+  "kind": "peer_reviewed",
+  "path": null,
+  "rows": [
+   "V019"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC549650/",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V019): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://usrtk.org/chemicals/titanium-dioxide/",
+  "id": "SRC-U-dc2028a8",
+  "kind": "secondary",
+  "path": null,
+  "rows": [
+   "V041"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://usrtk.org/chemicals/titanium-dioxide/",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V041): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.fda.gov/food/food-additives-petitions/brominated-vegetable-oil-bvo",
+  "id": "SRC-U-ddb9ad4a",
+  "kind": "agency_page",
+  "path": null,
+  "rows": [
+   "V039"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.fda.gov/food/food-additives-petitions/brominated-vegetable-oil-bvo",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V039): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6727911/",
+  "id": "SRC-U-e00da6bd",
+  "kind": "peer_reviewed",
+  "path": null,
+  "rows": [
+   "V030"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6727911/",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V030): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.gradeworkinggroup.org/",
+  "id": "SRC-U-e57a1c8c",
+  "kind": "standard",
+  "path": null,
+  "rows": [
+   "V069"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.gradeworkinggroup.org/",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V069): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.epa.gov/ingredients-used-pesticide-products/chlorpyrifos",
+  "id": "SRC-U-eb04742b",
+  "kind": "agency_page",
+  "path": null,
+  "rows": [
+   "V052"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.epa.gov/ingredients-used-pesticide-products/chlorpyrifos",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V052): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.npr.org/sections/shots-health-news/2024/06/10/g-s1-3818/fda-advisors-back-alzheimer-drug-donanemab-despite-risks",
+  "id": "SRC-U-eba7b2b4",
+  "kind": "news",
+  "path": null,
+  "rows": [
+   "V028"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.npr.org/sections/shots-health-news/2024/06/10/g-s1-3818/fda-advisors-back-alzheimer-drug-donanemab-despite-risks",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V028): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.ipcc.ch/site/assets/uploads/2017/08/AR5_Uncertainty_Guidance_Note.pdf",
+  "id": "SRC-U-f79f6310",
+  "kind": "standard",
+  "path": null,
+  "rows": [
+   "V070"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.ipcc.ch/site/assets/uploads/2017/08/AR5_Uncertainty_Guidance_Note.pdf",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V070): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://www.epa.gov/ground-water-and-drinking-water/lead-and-copper-rule-improvements",
+  "id": "SRC-U-f808859e",
+  "kind": "agency_page",
+  "path": null,
+  "rows": [
+   "V057"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://www.epa.gov/ground-water-and-drinking-water/lead-and-copper-rule-improvements",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V057): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10842149/",
+  "id": "SRC-U-fcbf9612",
+  "kind": "peer_reviewed",
+  "path": null,
+  "rows": [
+   "V018"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10842149/",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "aggregate over 1 ledger rows (V018): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0267134",
+  "id": "SRC-U-fd139695",
+  "kind": "peer_reviewed",
+  "path": null,
+  "rows": [
+   "V008"
+  ],
+  "sha256": null,
+  "superseded": false,
+  "type": "SOURCE",
+  "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0267134",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "doaj.org (summary): PLoS ONE 17(6): e0267134, \"658,954 words spoken by 536 members during 49 meetings of 11 Panels\"; 55.9%, 12.2%, 31.6% not shown",
+   "ledger_row": null,
+   "queries": 2,
+   "reached": "Y",
+   "reason": "aggregate over 1 ledger rows (V008): VERIFIED only if every row is; else CORRECTED if any; else NOT_FOUND if any; else UNREACHABLE",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "cite": "WO-REG-1 (consolidated, with 1a and 1b)",
+  "id": "SRC-WO",
+  "kind": "bundle_file",
+  "path": "bundle/WORK_ORDER.md",
+  "rows": [],
+  "sha256": "3dd3ff9d0493f728926300429c5f514541011feb68c94167ac51bbdcd19a363e",
+  "superseded": false,
+  "type": "SOURCE",
+  "url": null,
+  "verification": {
+   "corrected_value": null,
+   "depth": "file",
+   "exists": "Y",
+   "found": "pinned file, read in full",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "bundle file pinned by sha256 (bundle/MANIFEST.sha256)",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "cite": "WO-REG-1 and WO-REG-1a as first delivered (superseded by SRC-WO)",
+  "id": "SRC-WO-OLD",
+  "kind": "bundle_file",
+  "path": "WORK_ORDER.md",
+  "rows": [],
+  "sha256": "04dd6588f09d3bc39014ff3b7852b53f8b8c007ed7a8ccbab0e202d127d3e7e1",
+  "superseded": true,
+  "type": "SOURCE",
+  "url": null,
+  "verification": {
+   "corrected_value": null,
+   "depth": "file",
+   "exists": "Y",
+   "found": "pinned file, read in full",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "Y",
+   "reason": "bundle file pinned by sha256 (bundle/MANIFEST.sha256)",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ }
+]
