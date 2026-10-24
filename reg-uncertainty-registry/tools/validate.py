@@ -324,16 +324,22 @@ def c_report(reg):
     if not os.path.exists(TEMPLATE):
         return 0, []
     import report
-    tmpl = open(TEMPLATE, "r", encoding="utf-8").read()
-    errs = report_lint(tmpl)
-    for path, want in ((report.REPORT, report.render(reg, tmpl)),
-                       (report.CHANGELOG, report.render_changelog(reg)),
-                       (report.QA, report.render_qa(reg))):
+    pairs, errs, n = [], [], 0
+    for path, tpath in report.TEMPLATED:
+        if not os.path.exists(tpath):
+            errs.append("%s missing" % reglib.rel(tpath))
+            continue
+        tmpl = open(tpath, "r", encoding="utf-8").read()
+        n += len(tmpl.splitlines())
+        errs.extend("%s: %s" % (os.path.basename(tpath), e) for e in report_lint(tmpl))
+        pairs.append((path, report.render(reg, tmpl, os.path.basename(tpath))))
+    pairs += [(report.CHANGELOG, report.render_changelog(reg)), (report.QA, report.render_qa(reg))]
+    for path, want in pairs:
         got = open(path, "r", encoding="utf-8").read() if os.path.exists(path) else None
         if got != want:
             errs.append("%s is not what tools/report.py renders from the registry"
                         % reglib.rel(path))
-    return len(tmpl.splitlines()), errs
+    return n, errs
 
 
 def c_tools(reg):

@@ -180,7 +180,7 @@ NCRS = [
      ["CHG-R8-01", "CHG-R8-02"], "OPEN", "T1", "open on a stated-window frame of FDA restrictive actions"),
     ("NCR-R9", "REVIEW_v2", "R9", ["C07"], ["G023"],
      "C_restrict is lowered wherever 'alternatives exist' without scoring the alternative.",
-     "MODIFY", "Rule S in RUS-0.3: the alternatives credit stands only when the alternative is named AND graded with a C_permit grade below the case's own; otherwise C_restrict + 1. No alternative is graded anywhere in the bundle, so every credited row loses the credit under S. Reference case PFOA -> HFPO-DA (GenX), recorded on C07 (G023 UNSEEN at search depth).",
+     "MODIFY", "Rule SUB in RUS-0.3: the alternatives credit stands only when the alternative is named AND graded with a C_permit grade below the case's own; otherwise C_restrict + 1. No alternative is graded anywhere in the bundle, so every credited row loses the credit under SUB. Reference case PFOA -> HFPO-DA (GenX), recorded on C07 (G023 UNSEEN at search depth).",
      ["CHG-R9-01"], "CLOSED", "T1", None),
     ("NCR-R10", "REVIEW_v2", "R10", ["SECOND-CODER-B"], [],
      "Coder B pass 2 used a rule adopted after inspecting pass-1 disagreements.",
@@ -288,6 +288,10 @@ NCRS = [
      "Every PROPOSED field in tools/curation_*.py, every audit NCR and both R8 rows rest on one coder.",
      "ACCEPT", "chain.py flags each such node single-failure; a 10-row second coding (ACT-CODER2) is reported with kappa per field.",
      [], "OPEN", "T1", "open until a second party checks the audit NCRs"),
+    ("NCR-N25", "AUDIT_WO-REG-1", "one letter, two rules", ["RULE-S", "RUS-0.3"], [],
+     "'Rule S' named the work order's cost-bearer rule (Part A) and, in this registry's first RUS-0.3 draft, the substitution rule (REVIEW_v2 R9): one label, two rules, in the same report.",
+     "MODIFY", "The substitution rule is SUB everywhere (tools/grade.py, tools/stats.py, NCR-R9, the report); Rule S keeps its work-order meaning. A label, not a recorded value: no CHANGE.",
+     [], "CLOSED", "T3", "closed by the rename; validate.py's report check re-renders the report from the renamed labels"),
 ]
 
 # ---------------------------------------------------------------- CHANGES

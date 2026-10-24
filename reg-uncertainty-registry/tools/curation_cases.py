@@ -250,7 +250,7 @@ ABSENCES = [
 #   alt        (claimed, named, grade): does the source's C_restrict
 #              rationale credit "alternatives exist"; the alternative it
 #              names (None = unnamed); the alternative's own C_permit grade
-#              (None = not graded anywhere in the bundle). Rule S (NCR-R9)
+#              (None = not graded anywhere in the bundle). Rule SUB (NCR-R9)
 #              reads these three and nothing else.
 #   forced     (action_forced, outcome_forced): was the agency's action /
 #              the legal outcome compelled by statute or court (RUS-0.2 R3)

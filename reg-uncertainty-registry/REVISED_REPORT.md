@@ -25,9 +25,9 @@ output of RUS-0.2 or RUS-0.3 applied to recorded inputs; it carries the standard
 | REVERSAL | 10 | | ACTOR | 80 |
 | OUTCOME | 9 | | AUTHORITY | 72 |
 | ENDPOINT_ABSENCE | 8 | | CONFLICT | 43 |
-| SUBSTANCE | 42 | | NCR | 35 |
+| SUBSTANCE | 42 | | NCR | 36 |
 | ENDPOINT | 39 | | CHANGE | 29 |
-| all objects | 781 | | edges | 813 |
+| all objects | 782 | | edges | 813 |
 
 Pinned inputs re-hashed on every run: 24.
 
@@ -105,24 +105,24 @@ reading          HOLDS needs over_possible above zero; at zero the absence of ov
 |---|---|---|---|---|---|---|---|---|---|
 | action | RUS-0.2 | 20 | 7 | 2 | 1 | 3 | 1 | FAILS | 0 |
 | action | +M7 | 13 | 14 | 2 | 1 | 3 | 1 | FAILS | 0 |
-| action | +S | 20 | 7 | 2 | 1 | 3 | 1 | FAILS | 0 |
+| action | +SUB | 20 | 7 | 2 | 1 | 3 | 1 | FAILS | 0 |
 | action | +R6 | 19 | 8 | 2 | 1 | 3 | 1 | FAILS | 0 |
 | action | +R1L | 21 | 6 | 2 | 1 | 3 | 1 | FAILS | 0 |
-| action | +M7+S | 11 | 16 | 2 | 1 | 3 | 1 | FAILS | 0 |
+| action | +M7+SUB | 11 | 16 | 2 | 1 | 3 | 1 | FAILS | 0 |
 | action | RUS-0.3 | 11 | 16 | 2 | 1 | 3 | 1 | FAILS | 0 |
 | action | RUS-0.3+R1L | 13 | 14 | 2 | 1 | 3 | 1 | FAILS | 0 |
 | outcome | RUS-0.2 | 21 | 7 | 2 | 0 | 3 | 0 | HOLDS_UNTESTABLE | 0 |
 | outcome | +M7 | 13 | 15 | 2 | 0 | 3 | 0 | HOLDS_UNTESTABLE | 0 |
-| outcome | +S | 21 | 7 | 2 | 0 | 3 | 0 | HOLDS_UNTESTABLE | 0 |
+| outcome | +SUB | 21 | 7 | 2 | 0 | 3 | 0 | HOLDS_UNTESTABLE | 0 |
 | outcome | +R6 | 20 | 8 | 2 | 0 | 3 | 0 | HOLDS_UNTESTABLE | 0 |
 | outcome | +R1L | 22 | 6 | 2 | 0 | 3 | 0 | HOLDS_UNTESTABLE | 0 |
-| outcome | +M7+S | 11 | 17 | 2 | 0 | 3 | 0 | HOLDS_UNTESTABLE | 0 |
+| outcome | +M7+SUB | 11 | 17 | 2 | 0 | 3 | 0 | HOLDS_UNTESTABLE | 0 |
 | outcome | RUS-0.3 | 11 | 17 | 2 | 0 | 3 | 0 | HOLDS_UNTESTABLE | 0 |
 | outcome | RUS-0.3+R1L | 13 | 15 | 2 | 0 | 3 | 0 | HOLDS_UNTESTABLE | 0 |
 
 ```text
 +M7     symmetric tolerance: one class below the floor conforms by margin (REVIEW_v2 R7)
-+S      substitution rule: an "alternatives exist" credit stands only for a named alternative graded below
++SUB    substitution rule (not the cost-bearer Rule S of F6; NCR-N25): an "alternatives exist" credit stands only for a named alternative graded below
         the case's own C_permit grade; otherwise C_restrict is raised one point (REVIEW_v2 R9)
 +R6     self-sealing overlay; R6b lowers U one class for a loosening of a self-sealing restriction (D01)
 +R1L    NCR-N06's literal reading of R1 (level-setting rows included)
@@ -131,8 +131,10 @@ reading          HOLDS needs over_possible above zero; at zero the absence of ov
 The action-basis reading is `FAILS` under RUS-0.3 and `FAILS`
 under RUS-0.2: the over-restrictive row is A10 on both. On the outcome basis every variant reads
 `HOLDS_UNTESTABLE`. Below-floor counts under RUS-0.3: action 11,
-outcome 11; the drop from RUS-0.2 comes from M7, and S moves the count only in
-combination with M7.
+outcome 11; the drop from RUS-0.2 comes from M7. SUB alone changes
+0 statuses but lowers 4 floors one class (A03, A05, B00, B00b); those rows sit
+two classes below their RUS-0.2 floor and one below the SUB floor, so they conform only with M7 on.
+A tally that does not move is not a rule that does nothing.
 
 ### F5. Restrictive-side candidates (R8) [scope-limited: selected on direction, one coder]
 
@@ -267,9 +269,9 @@ phrases found once each (`tools/stats.py` TEXT_CHECKS).
 
 ST-17 is withdrawn, not corrected: NCR-N09 is REJECT, because the pinned sweep table lists M0 once.
 
-## 4. NCR register (14 review items, 21 audit items)
+## 4. NCR register (14 review items, 22 audit items)
 
-Dispositions: ACCEPT 17, MODIFY 16, REJECT 2. Open: NCR-N23, NCR-N24, NCR-R11, NCR-R5, NCR-R8.
+Dispositions: ACCEPT 17, MODIFY 17, REJECT 2. Open: NCR-N23, NCR-N24, NCR-R11, NCR-R5, NCR-R8.
 
 | NCR | origin | items | disposition | state | changes |
 |---|---|---|---|---|---|
@@ -294,6 +296,7 @@ Dispositions: ACCEPT 17, MODIFY 16, REJECT 2. Open: NCR-N23, NCR-N24, NCR-R11, N
 | NCR-N22 | AUDIT_WO-REG-1 | E01 | ACCEPT | CLOSED | - |
 | NCR-N23 | AUDIT_WO-REG-1 | QA_MAPPING | MODIFY | OPEN | - |
 | NCR-N24 | AUDIT_WO-REG-1 | ACT-REGISTRY | ACCEPT | OPEN | - |
+| NCR-N25 | AUDIT_WO-REG-1 | RULE-S, RUS-0.3 | MODIFY | CLOSED | - |
 | NCR-R1 | REVIEW_v1 | FRAME-A | ACCEPT | CLOSED | - |
 | NCR-R2 | REVIEW_v1 | C10, A06, B03, C08, D02 | ACCEPT | CLOSED | - |
 | NCR-R3 | REVIEW_v1 | B06 | ACCEPT | CLOSED | - |

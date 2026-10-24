@@ -9,7 +9,7 @@ statement_values(), so a statement and the registry cannot disagree.
     grading     stored_grades(obj): RUS-0.2 on the annex's mixed basis, the
                 action basis and the outcome basis, each with the source
                 C_restrict ("src") and the registry's second coding ("reg");
-                RUS-0.3 (M7 + rule S + R6, R1 scoped) on action and outcome
+                RUS-0.3 (M7 + SUB + R6, R1 scoped) on action and outcome
     sweep       M0-M6 as published in calibration_sweep_v3.csv, recomputed;
                 M4 and M6 U3 rows searched over all non-decreasing rows; M7
     one-dir     per variant: below, over, and the rows on which the
@@ -152,13 +152,30 @@ def grade_one(obj, basis, side, variant):
 RUS03_PARTS = [
     ("RUS-0.2", {"columns": "published"}),
     ("+M7", {"columns": "published", "symmetric": True}),
-    ("+S", {"columns": "published", "substitution": True}),
+    ("+SUB", {"columns": "published", "substitution": True}),
     ("+R6", {"columns": "published", "r6": True}),
     ("+R1L", {"columns": "published", "r1_literal": True}),
-    ("+M7+S", {"columns": "published", "symmetric": True, "substitution": True}),
+    ("+M7+SUB", {"columns": "published", "symmetric": True, "substitution": True}),
     ("RUS-0.3", RUS03),
     ("RUS-0.3+R1L", dict(RUS03, r1_literal=True)),
 ]
+
+
+def sub_alone(objects, basis, side="src"):
+    """Rows of the coded sample whose floor or status moves when SUB is the
+    only switch on: SUB can lower a floor without changing a status, so the
+    two are counted apart."""
+    base, sub = dict(RUS03_PARTS)["RUS-0.2"], dict(RUS03_PARTS)["+SUB"]
+    floors, statuses = [], []
+    for o in coded_sample(objects):
+        a, b = grade_one(o, basis, side, base), grade_one(o, basis, side, sub)
+        if a is None or b is None:
+            continue
+        if a["floor"] != b["floor"]:
+            floors.append(o["id"])
+        if a["status"] != b["status"]:
+            statuses.append(o["id"])
+    return {"floors": floors, "statuses": statuses}
 
 
 def components(objects, side="src"):

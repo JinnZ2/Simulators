@@ -1,0 +1,17 @@
+== RUS-0.3 by switch (coded sample, source C_restrict)   below conform exceeds over statute | over_possible reading r6_self_sealing
+action  RUS-0.2      20  7  2  1  3 | 1 FAILS 0
+action  +M7          13 14  2  1  3 | 1 FAILS 0
+action  +SUB         20  7  2  1  3 | 1 FAILS 0
+action  +R6          19  8  2  1  3 | 1 FAILS 0
+action  +R1L         21  6  2  1  3 | 1 FAILS 0
+action  +M7+SUB      11 16  2  1  3 | 1 FAILS 0
+action  RUS-0.3      11 16  2  1  3 | 1 FAILS 0
+action  RUS-0.3+R1L  13 14  2  1  3 | 1 FAILS 0
+outcome RUS-0.2      21  7  2  0  3 | 0 HOLDS_UNTESTABLE 0
+outcome +M7          13 15  2  0  3 | 0 HOLDS_UNTESTABLE 0
+outcome +SUB         21  7  2  0  3 | 0 HOLDS_UNTESTABLE 0
+outcome +R6          20  8  2  0  3 | 0 HOLDS_UNTESTABLE 0
+outcome +R1L         22  6  2  0  3 | 0 HOLDS_UNTESTABLE 0
+outcome +M7+SUB      11 17  2  0  3 | 0 HOLDS_UNTESTABLE 0
+outcome RUS-0.3      11 17  2  0  3 | 0 HOLDS_UNTESTABLE 0
+outcome RUS-0.3+R1L  13 15  2  0  3 | 0 HOLDS_UNTESTABLE 0

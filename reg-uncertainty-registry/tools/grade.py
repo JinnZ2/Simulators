@@ -35,7 +35,8 @@ RUS-0.3 (this registry's PROPOSED revision, RUS-0.3.md) adds, each as a
 switch so every combination is computed:
     M7      symmetric tolerance: below the floor by exactly one class is
             conforming by margin (REVIEW_v2 R7, REVIEW_v3 R13)
-    S       substitution rule (REVIEW_v2 R9): a C_restrict lowered because
+    SUB     substitution rule (REVIEW_v2 R9; named SUB because Rule S is
+            the work order's cost-bearer rule, NCR-N25): a C_restrict lowered because
             "alternatives exist" keeps that credit only when the alternative
             is named AND graded with a C_permit grade below the case's own;
             otherwise C_restrict + 1 (capped at 9)
@@ -149,7 +150,7 @@ def status(fl, actual, cp, cr, forced=False, r5=False, symmetric=False):
 
 
 def substitution_adjust(cr, alt_claimed, alt_named, alt_grade, cp_grade):
-    """Rule S. Returns (cr_effective, rule)."""
+    """Rule SUB. Returns (cr_effective, rule)."""
     if not alt_claimed:
         return cr, "no alternatives credit claimed"
     if alt_named and alt_grade is not None and int(alt_grade[1]) < int(cp_grade[1]):

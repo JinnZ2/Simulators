@@ -1,0 +1,139 @@
+== absences: 8
+   EA-01  SUB-glyphosate x END-gut_microbiome  NOT_ASSESSED  work-order example (consolidated WO Part A); state from ledger row H001
+   EA-02  SUB-microplastics x END-microplastic_occurrence  NOT_ASSESSED  national occurrence data will not be generated
+   EA-03  SUB-polypropylene x END-mesh_erosion  NOT_REQUIRED  substantial equivalence requires no clinical data
+   EA-04  SUB-cobalt x END-metallosis  NOT_REQUIRED  substantial equivalence requires no clinical data
+   EA-05  SUB-night_shift_work x END-breast_cancer  NOT_RESOLVED  exposure coded ever/never or duration; rotation pattern not resolved for cancer endpoints
+   EA-06  SUB-aducanumab x END-alzheimer_cognition  NOT_RESOLVED  clinical benefit unconfirmed at approval; surrogate basis
+   EA-07  SUB-eteplirsen x END-dystrophin  NOT_RESOLVED  clinical benefit unconfirmed at approval; surrogate basis
+   EA-08  SUB-titanium_dioxide x END-genotoxicity  NOT_LOCATED  an FDA reassessment was not located; the absence is the source's statement
+== non_decisions: 6
+   B07  B  Titanium dioxide: no action (vs EU ban)
+   B08  B  Aspartame: FDA publicly rejects IARC 2B
+   C08  C  UCMR 6 proposed WITHOUT microplastics
+   C10  C  Glyphosate review still open; Durnell preemption
+   D04  R8  Psilocybin held in Schedule I through 2025 despite FDA breakthrough designations (2018, 2019)
+   E01  E  Night shift work: no US occupational standard (exposure unregulated)
+== unmapped_ids: 81
+   (list with --section unmapped_ids)
+== authority_gaps: 66
+   AUTH-21CFR1308  regulation  21 CFR 1308  used by D01, D03, D04
+   AUTH-21CFR14  regulation  21 CFR Part 14  used by A01, A02, A03, A04, A05, A06, A07, A08, A09
+   AUTH-21CFR172.804  regulation  21 CFR 172.804  used by B08
+   AUTH-21CFR180.30  regulation  21 CFR 180.30  used by B06
+   AUTH-21CFR180.37  regulation  21 CFR 180.37  used by D02
+   AUTH-21CFR201.57  regulation  21 CFR 201.57(c)(1)  used by B04
+   AUTH-21CFR314.126  regulation  21 CFR 314.126  used by A03
+   AUTH-21CFR314.600  regulation  21 CFR 314.600-314.650; 601.90-601.95 (67 FR 37988)  used by B03
+   AUTH-21CFR314H  regulation  21 CFR 314 Subpart H (314.500-314.560)  used by A02, A04, A10
+   AUTH-21CFR601E  regulation  21 CFR 601 Subpart E (601.40-601.46)  used by A01, A08
+   AUTH-21CFR73.575  regulation  21 CFR 73.575  used by B07
+   AUTH-21CFR74.303  regulation  21 CFR 74.303  used by B05
+   AUTH-21CFR807E  regulation  21 CFR 807 Subpart E  used by B00, B00b
+   AUTH-21CFR884.5980  regulation  21 CFR 884.5980 (final order, January 2016)  used by B01
+   AUTH-21CFR888.3330  regulation  21 CFR 888.3330 (final order, February 2016)  used by B02
+   AUTH-40CFR141.40  regulation  40 CFR 141.40  used by C08
+   AUTH-40CFR155C  regulation  40 CFR 155 Subpart C  used by C02, C03, C05, C2-19
+   AUTH-75FR78918  regulation  75 FR 78918 (December 17, 2010)  used by C09
+   AUTH-86FR48315  regulation  86 FR 48315 (August 30, 2021)  used by C04
+   AUTH-87FR25266  regulation  87 FR 25266 (April 28, 2022)  used by no case
+   AUTH-87FR48018  regulation  87 FR 48018 (August 5, 2022)  used by no case
+   AUTH-87FR5815  regulation  87 FR 5815 (February 2, 2022)  used by no case
+   AUTH-87FR64484  regulation  87 FR 64484 (October 25, 2022)  used by no case
+   AUTH-89FR32532  regulation  89 FR 32532 (April 2024)  used by C07
+   AUTH-89FR86418  regulation  89 FR 86418 (October 2024)  used by C06
+   AUTH-APPROP  statute  annual appropriations  used by no case
+   AUTH-CA8-RRV-2023  court_decision  Red River Valley Sugarbeet Growers v. Regan (8th Cir. Nov. 2, 2023)  used by no case
+   AUTH-CA9-LULAC-2021  court_decision  LULAC v. Regan (9th Cir. Apr. 29, 2021)  used by C04
+   AUTH-CA9-NRDC-2022  court_decision  NRDC v. EPA (9th Cir. June 17, 2022)  used by no case
+   AUTH-CSA-201  statute  Controlled Substances Act sec. 201, 21 U.S.C. 811  used by D01, D03, D04
+   AUTH-CSA-201B  statute  Controlled Substances Act sec. 201(b), 21 U.S.C. 811(b)  used by D01, D03
+   AUTH-DE-SGB7-9  statute  SGB VII sec. 9; Berufskrankheiten-Verordnung  used by no case
+   AUTH-DK-WCA  statute  Danish Act on Workers' Compensation; Occupational Diseases Committee  used by no case
+   AUTH-DOJ-2026-SCHIII  order  DOJ final order, April 23, 2026  used by D01
+   AUTH-EO-MARIJUANA  order  executive order directing marijuana rescheduling  used by D01
+   AUTH-EU-2004-248  international_instrument  Commission Decision 2004/248/EC  used by no case
+   AUTH-EU-2022-63  international_instrument  Commission Regulation (EU) 2022/63  used by no case
+   AUTH-EU-DWD-2020-2184  international_instrument  Directive (EU) 2020/2184  used by no case
+   AUTH-FDCA-409  statute  FD&C Act sec. 409, 21 U.S.C. 348; Delaney clause 409(c)(3)(A)  used by B06, B08, D02
+   AUTH-FDCA-505  statute  FD&C Act sec. 505(d), 21 U.S.C. 355(d)  used by A03, A05, A07, B03
+   AUTH-FDCA-505-1  statute  FD&C Act sec. 505-1  used by A07
+   AUTH-FDCA-505O4  statute  FD&C Act sec. 505(o)(4)  used by B04
+   AUTH-FDCA-506C  statute  FD&C Act sec. 506(c), 21 U.S.C. 356(c)  used by A01, A02, A04, A08, A10
+   AUTH-FDCA-510K  statute  FD&C Act sec. 510(k)  used by B00, B00b
+   AUTH-FDCA-513  statute  FD&C Act sec. 513; FDASIA 2012 sec. 608  used by B01, B02
+   AUTH-FDCA-564  statute  FD&C Act sec. 564, 21 U.S.C. 360bbb-3  used by A06
+   AUTH-FDCA-721  statute  FD&C Act sec. 721, 21 U.S.C. 379e; Delaney clause 721(b)(5)(B)  used by B05, B07
+   AUTH-FDORA-3210  statute  FDORA (Consolidated Appropriations Act 2023) sec. 3210  used by no case
+   AUTH-FFDCA-408  statute  FFDCA sec. 408, 21 U.S.C. 346a (FQPA 1996)  used by C04
+   AUTH-FIFRA-24B  statute  FIFRA sec. 24(b)  used by C10
+   AUTH-FIFRA-3G  statute  FIFRA sec. 3(g)  used by C02, C03, C05, C10, C2-19
+   AUTH-FIFRA-4  statute  FIFRA sec. 4  used by C01
+   AUTH-GD-ANIMALRULE  guidance  FDA, Product Development Under the Animal Rule (October 2015)  used by B03
+   AUTH-GD-EXPEDITED  guidance  FDA, Expedited Programs for Serious Conditions (May 2014)  used by A01, A02
+   AUTH-HHS-EUA-2020  order  HHS sec. 564 declaration, March 27, 2020  used by A06
+   AUTH-MDUFA  statute  Medical Device User Fee Amendments (2002-)  used by no case
+   AUTH-OSHA-5A1  statute  OSH Act sec. 5(a)(1)  used by E01
+   AUTH-OSHA-6B  statute  OSH Act sec. 6(b), 29 U.S.C. 655  used by E01
+   AUTH-PDUFA  statute  Prescription Drug User Fee Act (1992-)  used by no case
+   AUTH-PHSA-351  statute  Public Health Service Act sec. 351  used by A01, A08, A09
+   AUTH-PRIA  statute  Pesticide Registration Improvement Act (2004-)  used by no case
+   AUTH-RCRA  statute  RCRA sec. 3001, 42 U.S.C. 6921  used by C09
+   AUTH-SDWA-1412  statute  SDWA sec. 1412  used by C06, C07
+   AUTH-SDWA-1445  statute  SDWA sec. 1445(a)(2)  used by C08
+   AUTH-SSLA-1977  statute  Saccharin Study and Labeling Act, Pub. L. 95-203  used by D02
+   AUTH-STOCKHOLM-PCP  international_instrument  Stockholm Convention, pentachlorophenol listing (2015)  used by no case
+== unlocated_inputs: 6
+   EV-U01  unlocated_input  Biogen trial data and analyses submitted to FDA (EMERGE/ENGA  sponsor-submitted; full analyses not public
+   EV-U02  unlocated_input  Sarepta dystrophin measurements submitted to FDA  sponsor-submitted; underlying data not public
+   EV-U03  unlocated_input  registrant-submitted glyphosate studies relied on by EPA  confidential business information under FIFRA
+   EV-U04  unlocated_input  Syngenta model used to reduce the atrazine protection factor  registrant model; not located in a public docket from here
+   EV-U05  absence  clinical data for the 1996 mesh clearance  none required under 510(k) substantial equivalence
+   EV-U06  absence  clinical data for the metal-on-metal hip clearances  none required under 510(k) substantial equivalence
+== frames: 4
+   EV-FR-C2-DOCS  gap  the 34 Frame C2 decision documents coded at document level (  notice-level coding only in the source; document-level coding not run (NCR-R6)
+   EV-FR-CLINHOLD  gap  FDA clinical holds in a stated window  no public FDA listing located; disclosure is by sponsors (G022 not searched)
+   EV-FR-CRL-2025  gap  FDA complete response letters published July 10 2025 (200+ l  exists (G021 VERIFIED); restrictive-side decisions, mostly for products later approved; openFDA database not reachable from here (egress)
+   EV-FR-USDA  gap  USDA decisions  unenumerated in the source and here
+== disclosure: 35
+   CF-A01-WAIVER  A01  UNREACHABLE
+   CF-A02-DISCLOSURE  A02  UNREACHABLE
+   CF-A03-DISCLOSURE  A03  UNREACHABLE
+   CF-A04-DISCLOSURE  A04  UNREACHABLE
+   CF-A05-DISCLOSURE  A05  UNREACHABLE
+   CF-A06-DISCLOSURE  A06  UNREACHABLE
+   CF-A07-DISCLOSURE  A07  UNREACHABLE
+   CF-A08-DISCLOSURE  A08  UNREACHABLE
+   CF-A09-DISCLOSURE  A09  UNREACHABLE
+   CF-A10-DISCLOSURE  A10  UNREACHABLE
+   CF-B00-DISCLOSURE  B00  UNREACHABLE
+   CF-B00b-DISCLOSURE  B00b  UNREACHABLE
+   CF-B01-DISCLOSURE  B01  UNREACHABLE
+   CF-B02-DISCLOSURE  B02  UNREACHABLE
+   CF-B03-DISCLOSURE  B03  UNREACHABLE
+   CF-B04-DISCLOSURE  B04  UNREACHABLE
+   CF-B05-DISCLOSURE  B05  UNREACHABLE
+   CF-B06-DISCLOSURE  B06  UNREACHABLE
+   CF-B07-DISCLOSURE  B07  UNREACHABLE
+   CF-B08-DISCLOSURE  B08  UNREACHABLE
+   CF-C01-DISCLOSURE  C01  UNREACHABLE
+   CF-C02-DISCLOSURE  C02  UNREACHABLE
+   CF-C03-DISCLOSURE  C03  UNREACHABLE
+   CF-C04-DISCLOSURE  C04  UNREACHABLE
+   CF-C05-DISCLOSURE  C05  UNREACHABLE
+   CF-C06-DISCLOSURE  C06  UNREACHABLE
+   CF-C07-DISCLOSURE  C07  UNREACHABLE
+   CF-C08-DISCLOSURE  C08  UNREACHABLE
+   CF-C09-DISCLOSURE  C09  UNREACHABLE
+   CF-C10-DISCLOSURE  C10  UNREACHABLE
+   CF-D01-DISCLOSURE  D01  UNREACHABLE
+   CF-D02-DISCLOSURE  D02  UNREACHABLE
+   CF-D03-DISCLOSURE  D03  UNREACHABLE
+   CF-D04-DISCLOSURE  D04  UNREACHABLE
+   CF-E01-DISCLOSURE  E01  UNREACHABLE
+== ledger_unsearched: 156
+   (list with --section ledger_unsearched)
+== ledger_corrected: 3
+   EV-G008  CORRECTED  chlorpyrifos: EPA final rule revoking all food tolerances pu  effective date Oct 29 2021, Feb 28 2022 is tolerance expiry; April 29 day not sh
+   EV-G010  CORRECTED  midodrine: FDA proposed withdrawal of approval in August 201  Sept 2010 was a clarification, not a reversal; withdrawal deferred 2012 by agree
+   EV-V090  CORRECTED  10 CFR 50 App B introduction: QA program applies to structur  location: results place the phrase in Criterion II, not the introduction; OCR ga

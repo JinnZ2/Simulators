@@ -1,0 +1,5 @@
+== Bivariate: restrictive/total by cost group (Fisher exact, two-sided)
+source_frame   Rule L  concentrated 7/28  diffuse 0/5  p=0.5591  testable
+source_frame   Rule S  concentrated 7/31  diffuse 0/2  p=1.0000  not testable at this n (smallest margin 2 < 5)
+decision_only  Rule L  concentrated 7/24  diffuse 0/4  p=0.5453  not testable at this n (smallest margin 4 < 5)
+decision_only  Rule S  concentrated 7/26  diffuse 0/2  p=1.0000  not testable at this n (smallest margin 2 < 5)

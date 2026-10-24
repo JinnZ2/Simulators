@@ -537,6 +537,29 @@
  {
   "adjudicator": "ACT-REGISTRY",
   "changes": [],
+  "disposition": "MODIFY",
+  "evidence": [],
+  "finding": "'Rule S' named the work order's cost-bearer rule (Part A) and, in this registry's first RUS-0.3 draft, the substitution rule (REVIEW_v2 R9): one label, two rules, in the same report.",
+  "id": "NCR-N25",
+  "independence": "NOT_INDEPENDENT",
+  "item": [
+   "RULE-S",
+   "RUS-0.3"
+  ],
+  "note": "closed by the rename; validate.py's report check re-renders the report from the renamed labels",
+  "origin": "AUDIT_WO-REG-1",
+  "originator": "ACT-REGISTRY",
+  "reason": "The substitution rule is SUB everywhere (tools/grade.py, tools/stats.py, NCR-R9, the report); Rule S keeps its work-order meaning. A label, not a recorded value: no CHANGE.",
+  "ref": "one letter, two rules",
+  "rigor_tier": "T3",
+  "single_failure": true,
+  "state": "CLOSED",
+  "statements": [],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [],
   "disposition": "ACCEPT",
   "evidence": [
    "EV-V002"
@@ -935,7 +958,7 @@
   "note": null,
   "origin": "REVIEW_v2",
   "originator": "ACT-REVIEWER",
-  "reason": "Rule S in RUS-0.3: the alternatives credit stands only when the alternative is named AND graded with a C_permit grade below the case's own; otherwise C_restrict + 1. No alternative is graded anywhere in the bundle, so every credited row loses the credit under S. Reference case PFOA -> HFPO-DA (GenX), recorded on C07 (G023 UNSEEN at search depth).",
+  "reason": "Rule SUB in RUS-0.3: the alternatives credit stands only when the alternative is named AND graded with a C_permit grade below the case's own; otherwise C_restrict + 1. No alternative is graded anywhere in the bundle, so every credited row loses the credit under SUB. Reference case PFOA -> HFPO-DA (GenX), recorded on C07 (G023 UNSEEN at search depth).",
   "ref": "R9",
   "rigor_tier": "T1",
   "single_failure": false,

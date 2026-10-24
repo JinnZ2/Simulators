@@ -84,7 +84,7 @@ reading          HOLDS needs over_possible above zero; at zero the absence of ov
 
 ```text
 +M7     symmetric tolerance: one class below the floor conforms by margin (REVIEW_v2 R7)
-+S      substitution rule: an "alternatives exist" credit stands only for a named alternative graded below
++SUB    substitution rule (not the cost-bearer Rule S of F6; NCR-N25): an "alternatives exist" credit stands only for a named alternative graded below
         the case's own C_permit grade; otherwise C_restrict is raised one point (REVIEW_v2 R9)
 +R6     self-sealing overlay; R6b lowers U one class for a loosening of a self-sealing restriction (D01)
 +R1L    NCR-N06's literal reading of R1 (level-setting rows included)
@@ -93,8 +93,10 @@ reading          HOLDS needs over_possible above zero; at zero the absence of ov
 The action-basis reading is `{cmp.action.RUS-0.3.reading}` under RUS-0.3 and `{cmp.action.RUS-0.2.reading}`
 under RUS-0.2: the over-restrictive row is A10 on both. On the outcome basis every variant reads
 `{cmp.outcome.RUS-0.3.reading}`. Below-floor counts under RUS-0.3: action {cmp.action.RUS-0.3.below},
-outcome {cmp.outcome.RUS-0.3.below}; the drop from RUS-0.2 comes from M7, and S moves the count only in
-combination with M7.
+outcome {cmp.outcome.RUS-0.3.below}; the drop from RUS-0.2 comes from M7. SUB alone changes
+{sub.action.statuses} statuses but lowers {sub.action.floors} floors one class ({sub.action.floor_rows}); those rows sit
+two classes below their RUS-0.2 floor and one below the SUB floor, so they conform only with M7 on.
+A tally that does not move is not a rule that does nothing.
 
 ### F5. Restrictive-side candidates (R8) [scope-limited: selected on direction, one coder]
 
