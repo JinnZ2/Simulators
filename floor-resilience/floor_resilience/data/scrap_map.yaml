@@ -1,0 +1,19 @@
+# Scrap code -> the human catch that was missing.            Tag: OBSERVED
+# Edit freely. A code not listed here is reported as "unmapped": it is left
+# out of the catchable share and lowers that number's confidence.
+codes:
+  calibration_drift:
+    catchable: true
+    missing_catch: operator who notices dimension creep
+  belt_drive_failure:
+    catchable: true
+    missing_catch: operator who hears or feels the change before failure
+  material_jam:
+    catchable: true
+    missing_catch: setup knowledge of feed and material behavior
+  sudden_fracture:
+    catchable: false
+    missing_catch: none (not catchable)
+  power_event:
+    catchable: false
+    missing_catch: none (not catchable)

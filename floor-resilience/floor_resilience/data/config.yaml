@@ -1,0 +1,34 @@
+# Indicator weights and score cut points. Override any of these with
+#   floorres assess site.yaml --config my.yaml
+#
+# weights: PROPOSED (equal by default).
+# cuts:    ASSUMED. Four ascending numbers per indicator. Score 0-4, 4 = healthiest.
+#          higher_better: score = how many cuts the value reaches.
+#          lower_better:  score = how many cuts the value stays at or under.
+weights:
+  I1: 1
+  I2: 1
+  I3: 1
+  I4: 1
+  I5: 1
+  I6: 1
+  I7: 1
+  I8: 1
+  I9: 1
+  I10: 1
+  I11: 1
+  I12: 1
+cuts:
+  # catchable share of scrap. An all-veteran floor in the drain model sits
+  # near 0.5, so 0.5 is the healthiest cut.
+  I1: {lower_better: [0.5, 0.6, 0.7, 0.8]}
+  I2: {higher_better: [0.2, 0.4, 0.6, 0.8]}       # worker-reported share
+  I3: {higher_better: [-0.06, -0.03, -0.01, 0.0]} # in-house share change per year
+  I4: {lower_better: [1.0, 1.25, 1.5, 2.0]}       # replacement rate / expected
+  I5: {higher_better: [0.2, 0.3, 0.4, 0.5]}       # staying veterans / operators
+  I6: {lower_better: [0, 1, 3, 5]}                # sole-knower items
+  I7: {lower_better: [0.5, 1, 2, 3]}              # new hires per veteran (model cliff: 3)
+  I9: {lower_better: [0.05, 0.15, 0.3, 0.5]}      # fixer != writer share
+  I10: {lower_better: [0.0, 0.005, 0.01, 0.02]}   # oversight ratio change per year
+  I11: {higher_better: [0.25, 0.5, 0.75, 1.0]}    # projects with veterans in
+  I12: {higher_better: [0.2, 0.4, 0.6, 0.8]}      # fallback-ready share
