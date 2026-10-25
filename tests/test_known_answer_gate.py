@@ -114,6 +114,9 @@ MANIFEST = (
     "reg-uncertainty-registry/tools/stats.py::mann_whitney_exact",
     "reg-uncertainty-registry/tools/stats.py::one_directional",
     "reg-uncertainty-registry/tools/grade.py::floor",
+    "floor-capability/floor_capability.py::life_ratio",
+    "floor-capability/floor_capability.py::catchable_share_low",
+    "floor-capability/floor_capability.py::handoff_overlap",
 )
 
 # Cases known to fail today. A case that starts passing turns this red so

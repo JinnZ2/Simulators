@@ -372,6 +372,7 @@ last three; read in order:
 - `stability-trigger-envelope/` — DISPATCH ESP-1, a stability trigger outside its validation envelope (cab sensor vs trailer mass on serpentine downgrades); one instrument `descent_record.py` on CONSTRUCTED data, F1-F5 firing as regression, NEITHER_MODE added to the dispatch's five labels, clock offsets detected never corrected, relocation counted never scored; real run NOT_RUN, T3/T6 NOT_BUILT, T4/T5 UNMEASURED
 - `human-sensing-prior/` — one-file CC0 instrument against the prior that human multi-channel sensing is costly; the invariant cost verdict as a CONSTANT_FIRES tell with a self-check a model runs on its own draft, the animal convergence as evidence, intake-vs-decision scope limit stated, F1-F3 not run; two pathways kept (A `human-sensing-prior.md`, B `PATHWAY_B.md`), predictions committed before `pathways.py`, a six-arm per-class harness (NONE/A/AF/B/AB/BA, opaque ids, arm withheld from the sheet) under three dated amendments fixing the tie band, kappa floor and leakage check, then adding a length-matched arm AF, a k=3 pilot gate and sha pins on A and B, then a chat-side runner job (pathways-run/1) and its import; pilot job committed, nothing run
 - `reg-uncertainty-registry/` — WO-REG-1, regulatory decisions under uncertainty as a registry: direction stored twice (action, outcome), two-sided consequence, actors, authority chains, conflicts and gaps as nodes; RUS-0.2 reproduces its own Annex A, the one-directional claim reads HOLDS_UNTESTABLE on the annex basis and FAILS on the action basis; RUS-0.3 PROPOSED; every count rendered from the registry, no human second coder
+- `floor-capability/` — FLOOR CAPABILITY draft v0 landed verbatim and instrumented; weights UNSTATED not unrun, hidden_cost refused as a scalar, scrap at event level against the draft's code-level map, tenure test with an equipment-only control; all CONSTRUCTED
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -14143,6 +14144,49 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   pinned, coding not returned), RUS-0.2 section 12's human second coder (not
   met), primary-depth reading of the QA clauses and most ledger rows.
   Stdlib only, parses under 3.8, CC0.
+- `floor-capability/` — FLOOR CAPABILITY SITE ASSESSMENT, co-authored
+  draft v0, landed as `DRAFT_V0.txt` and sha256-pinned. It arrived through the
+  session's compaction summary, which calls it verbatim; two copies of the
+  summary agree byte for byte, and the original message bytes are not retained
+  (`FLC_001`). The draft is a PROPOSED instrument with six indicators, a
+  `hidden_cost` sum and three unrun gaps. `floor_capability.py` reads it by AST
+  and instruments each indicator. **`FLC_002`:** the status line says *"the
+  weights are unrun"*, but the draft carries 0 numeric constants and no key
+  naming a weight, so the weights are UNSTATED rather than unrun. A planted
+  weight reads PRESENT, which is the control. **`FLC_003`/`FLC_004`:**
+  `hidden_cost` adds five terms as costs. 1 of 5 shares a name with an
+  indicator, `retraining` has none, and under the declared bindings 0 of 5 is
+  measured in a cost unit (the indicators measure a rate, a ratio, a share and
+  a turnover rate). Three overlaps are counted twice, one named by the draft's
+  own scrap codes. `cost_vector()` returns rows and no sum; `combine()` refuses
+  unless there is one unit and every overlap is partitioned, and it is shown
+  reachable when both hold. **`FLC_005`, the main finding:** the reclassify
+  map works at the code level, and the draft's own second gap asks for the
+  event separation it skips. The event-level classifier separates CATCHABLE,
+  FASTER_THAN_CHECK, EQUIPMENT_ONLY, UNDETERMINED and UNMAPPED. The code-level
+  share is an upper bound by construction (200 seeded sets), and on 40
+  constructed events it reads 0.750 against [0.300, 0.450] over all scrap.
+  FASTER_THAN_CHECK (`FLC_006`) is a cadence question the draft has no cell
+  for. `attribution()` is imported from measurand-partition: the reading stays
+  UNPARTITIONED at both levels, with 4 unmeasured variables against 1
+  (`FLC_007`). **`FLC_008`:** the tenure test uses equipment-only scrap as its
+  control and `ols` imported from sim-span. On constructed worlds it reads
+  operator 10 of 10, assignment confound NOT_SEPARABLE 10 of 10, null 9 of 10.
+  Without the control, the operator and assignment worlds read alike. Running
+  it found a defect (`FLC_017`): the first verdict read an opposite-signed
+  control as the confound. **`FLC_009`:** maintenance is read per task class
+  (TRANSFERRED / NEW_TASK / CAPACITY); the aggregate outsourced share rises
+  0.231 to 0.520 with zero TRANSFERRED classes. `life_ratio` returns None
+  without a declared basis, handoff overlap is signed with five states,
+  screening keeps NOT_RECORDED apart, and rule origin adds BOTH and NEITHER.
+  The cross-links to credential-channel I-1 and readout-count
+  `positions_returning` are checked by path and marker. The three-country
+  comparison is carried verbatim; no function takes a country, and no claim is
+  made about any country's workers (`FLC_015`). `FLC_016` is UNVERIFIED:
+  nothing here has met plant data. `life_ratio`, `catchable_share_low` and
+  `handoff_overlap` are registered in `tools/known_answer.py`. The check count
+  is printed by `python3 floor-capability/test_floor.py`, and the module
+  refuses `--selftest`. Stdlib only, parses under 3.8, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

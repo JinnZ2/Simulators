@@ -830,6 +830,9 @@ EXPECTED_METRICS = (
     "reg-uncertainty-registry/tools/stats.py::mann_whitney_exact",
     "reg-uncertainty-registry/tools/stats.py::one_directional",
     "reg-uncertainty-registry/tools/grade.py::floor",
+    "floor-capability/floor_capability.py::life_ratio",
+    "floor-capability/floor_capability.py::catchable_share_low",
+    "floor-capability/floor_capability.py::handoff_overlap",
 )
 
 
@@ -1779,6 +1782,7 @@ def seed():
     _seed_yardstick()
     _seed_triage_clean_run()
     _seed_reg_uncertainty()
+    _seed_floor_capability()
 
 
 def _reg_mod(name):
@@ -1846,6 +1850,66 @@ def _seed_reg_uncertainty():
               "U3 column G=1-2 is D4; R5 moves one column toward permissive: D3")],
         note="RUS-0.2 section 8 as printed in the pinned standard")
 
+
+
+def _flc_mod():
+    """floor-capability/floor_capability.py, imported by path under a
+    private name; the module imports its own siblings by path."""
+    import importlib.util
+    path = os.path.join(ROOT, "floor-capability", "floor_capability.py")
+    spec = importlib.util.spec_from_file_location("_flc", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def _flc_life_ratio(observed, expected, basis):
+    return _flc_mod().life_ratio(observed, expected, basis)
+
+
+def _flc_catchable_share_low(states):
+    return _flc_mod().catchable_share_low(states)
+
+
+def _flc_handoff_overlap(leaver_last, successor_first):
+    return _flc_mod().handoff_overlap(leaver_last, successor_first)
+
+
+def _seed_floor_capability():
+    """FLOOR CAPABILITY draft v0. life_ratio's None cases are where an
+    undeclared reference hides; catchable_share_low's empty-denominator case
+    is where a zero hides; handoff_overlap's back-to-back 0 is the case an
+    off-by-one moves to 1 or -1. Expected values are computed by hand from
+    the definitions in the module docstrings."""
+    register(
+        "floor-capability/floor_capability.py::life_ratio",
+        _flc_life_ratio,
+        [case("early failure", (8000, 10000, "OEM_RATED"), 0.8, "8000 / 10000"),
+         case("outlasts rating", (12000, 10000, "PLANT_HISTORY"), 1.2, "12000 / 10000"),
+         case("half life", (5000, 10000, "DUTY_ADJUSTED"), 0.5, "5000 / 10000"),
+         case("no basis", (8000, 10000, None), None,
+              "an expected life with no declared basis is not a reference"),
+         case("zero expected", (8000, 0, "OEM_RATED"), None, "no denominator")],
+        note="observed / expected service life with a declared basis")
+    register(
+        "floor-capability/floor_capability.py::catchable_share_low",
+        _flc_catchable_share_low,
+        [case("one of four mapped", (["CATCHABLE", "EQUIPMENT_ONLY", "UNDETERMINED",
+                                      "FASTER_THAN_CHECK", "UNMAPPED"],), 0.25,
+              "UNMAPPED leaves the denominator: 1 / 4"),
+         case("all catchable", (["CATCHABLE", "CATCHABLE"],), 1.0, "2 / 2"),
+         case("none catchable", (["EQUIPMENT_ONLY"],), 0.0, "0 / 1, a measured zero"),
+         case("nothing mapped", (["UNMAPPED"],), None,
+              "an empty denominator is not a share of zero")],
+        note="CATCHABLE over mapped scrap events")
+    register(
+        "floor-capability/floor_capability.py::handoff_overlap",
+        _flc_handoff_overlap,
+        [case("ten days overlap", (100, 91), 10, "days 91..100 inclusive"),
+         case("back to back", (100, 101), 0, "successor starts the day after"),
+         case("five-day gap", (100, 106), -5, "days 101..105 uncovered"),
+         case("date missing", (None, 5), None, "no leaver date, no overlap")],
+        note="leaver_last - successor_first + 1, signed")
 
 def _irb_effective_origins(coupling):
     """internal-reference-boundary/radials.py::effective_origins,
