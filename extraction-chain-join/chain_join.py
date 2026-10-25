@@ -289,7 +289,7 @@ def _groups(diffs):
 
 
 def g1_core(diffs, seed=7):
-    """Raw and price-controlled slopes with permutation p. The controlled
+    """Raw and price-controlled slopes with permutation p (CHOICE 3). The controlled
     slope is the partial regression slope (residuals on residuals), which
     equals the multiple-regression coefficient; the identity is checked
     against the imported ols."""
@@ -438,7 +438,8 @@ def trace(firm, record, entities, juris, cut=SECRECY_CUT, depth_limit=DEPTH_LIMI
     or at a break. Traced share plus break shares is 1 for every firm: the
     shares are conserved, so the unattributed part is a measured fraction
     even where its owner is not known. A NOMINEE is a break because a
-    disclosed name is not a beneficial owner."""
+    disclosed name is not a beneficial owner. Depth limit and cycles:
+    CHOICE 6."""
     traced = []
     breaks = []
 
@@ -485,7 +486,7 @@ def traced_fraction(firm, record, entities, juris):
 def disclose(truth, entities, threshold=THRESHOLD, undisclosed=(), absent=(),
              unflag_nominees=False):
     """The observed record a register would publish from a true ownership
-    graph: owners under the threshold are not listed, entities in
+    graph: owners under the threshold (CHOICE 5) are not listed, entities in
     `undisclosed` publish no owners, entities in `absent` have no record.
     unflag_nominees records a nominee as an ordinary person."""
     rec = {}
@@ -773,7 +774,7 @@ def g5_filter_world(seed=5, n=400, gate=0.5):
 
 def g5_compare(rows, seed=11, n_boot=N_DRAWS):
     """AUC of tie and of pref for vote_post on the rows where both exist,
-    and a bootstrap band of the difference."""
+    and a bootstrap band of the difference (CHOICE 9)."""
     common = [r for r in rows if r["pref"] is not None and r["tie"] is not None
               and r["vote_post"] is not None]
     a_tie = auc([r["tie"] for r in common], [r["vote_post"] for r in common])
@@ -882,6 +883,8 @@ def reserve_share_band(rev, other, d_reserves):
 
 
 def adequacy(reserves, imports, short_debt):
+    """Months of import cover and the Greenspan-Guidotti ratio against the
+    declared norms (CHOICE 10). An absent denominator gives None."""
     months = None if not imports else reserves / (imports / 12.0)
     gg = None if not short_debt else reserves / short_debt
     return {"months": months, "gg": gg,
