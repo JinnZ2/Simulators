@@ -138,7 +138,7 @@ def checks(reg):
 
 def main(argv):
     if "--selftest" in argv:
-        sys.stderr.write("chain.py: checks run in tools/validate.py --selftest\n")
+        sys.stderr.write("chain.py: checks run in reg-uncertainty-registry/tools/validate.py --selftest\n")
         return 2
     reg = reglib.Registry()
     ids = [a for a in argv if not a.startswith("--")]

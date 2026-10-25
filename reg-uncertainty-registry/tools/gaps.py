@@ -115,7 +115,7 @@ def checks(reg):
 
 def main(argv):
     if "--selftest" in argv:
-        sys.stderr.write("gaps.py: checks run in tools/validate.py --selftest\n")
+        sys.stderr.write("gaps.py: checks run in reg-uncertainty-registry/tools/validate.py --selftest\n")
         return 2
     section = argv[argv.index("--section") + 1] if "--section" in argv else None
     print("\n".join(render(reglib.Registry(), section)))

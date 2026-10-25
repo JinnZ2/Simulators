@@ -357,7 +357,7 @@ CHANGES = [
 def main():
     import sys
     sys.stderr.write("curation_ncr.py is data; checks run in "
-                     "tools/validate.py --selftest\n")
+                     "reg-uncertainty-registry/tools/validate.py --selftest\n")
     return 2
 
 

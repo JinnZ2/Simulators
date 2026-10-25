@@ -878,7 +878,7 @@ def check(files, regdir=reglib.REGDIR):
 
 def main(argv):
     if "--selftest" in argv:
-        sys.stderr.write("build.py: checks run in tools/validate.py --selftest\n")
+        sys.stderr.write("build.py: checks run in reg-uncertainty-registry/tools/validate.py --selftest\n")
         return 2
     bad = reglib.check_pins()
     if bad:

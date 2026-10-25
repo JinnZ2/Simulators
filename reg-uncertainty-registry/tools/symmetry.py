@@ -137,7 +137,7 @@ def checks(reg):
 
 def main(argv):
     if "--selftest" in argv:
-        sys.stderr.write("symmetry.py: checks run in tools/validate.py --selftest\n")
+        sys.stderr.write("symmetry.py: checks run in reg-uncertainty-registry/tools/validate.py --selftest\n")
         return 2
     print("\n".join(render(reglib.Registry(), include_r8="--all" in argv)))
     return 0

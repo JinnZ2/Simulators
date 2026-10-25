@@ -157,7 +157,7 @@ def render(led):
 
 def main(argv):
     if "--selftest" in argv:
-        sys.stderr.write("ledger.py: checks run in tools/validate.py "
+        sys.stderr.write("ledger.py: checks run in reg-uncertainty-registry/tools/validate.py "
                          "--selftest\n")
         return 2
     print("\n".join(render(ledger())))

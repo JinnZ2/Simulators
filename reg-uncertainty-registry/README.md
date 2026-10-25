@@ -51,7 +51,7 @@ python3 tools/gaps.py                  # absences, non-decisions, unmapped ids, 
 python3 tools/reversals.py             # REVERSAL objects by initiator; exact Mann-Whitney on both D01 anchors
 ```
 
-Each library refuses `--selftest` (exit 2) and names `validate.py`. Everything is standard library
+Each library refuses `--selftest` (exit 2) and names `reg-uncertainty-registry/tools/validate.py`, written from the repo root so `tools/run_manifest.py` resolves it. Everything is standard library
 only. Run with `python3 -I` when the inputs are not your own. Outputs are pinned in `samples/`.
 
 ## Rules the registry keeps

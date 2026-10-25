@@ -358,7 +358,7 @@ def write_all(reg=None):
 
 def main(argv):
     if "--selftest" in argv:
-        sys.stderr.write("report.py: checks run in tools/validate.py --selftest\n")
+        sys.stderr.write("report.py: checks run in reg-uncertainty-registry/tools/validate.py --selftest\n")
         return 2
     reg = reglib.Registry()
     if "--keys" in argv:

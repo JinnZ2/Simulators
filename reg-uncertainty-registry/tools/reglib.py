@@ -361,7 +361,7 @@ class Registry(object):
 
 def main():
     sys.stderr.write("reglib.py is a library; checks run in "
-                     "tools/validate.py --selftest\n")
+                     "reg-uncertainty-registry/tools/validate.py --selftest\n")
     return 2
 
 

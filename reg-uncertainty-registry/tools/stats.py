@@ -651,7 +651,7 @@ def report(objects, section=None):
 
 def main(argv):
     if "--selftest" in argv:
-        sys.stderr.write("stats.py: checks run in tools/validate.py --selftest\n")
+        sys.stderr.write("stats.py: checks run in reg-uncertainty-registry/tools/validate.py --selftest\n")
         return 2
     section = None
     if "--section" in argv:

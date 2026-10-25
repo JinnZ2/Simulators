@@ -99,7 +99,7 @@ def checks(reg):
 
 def main(argv):
     if "--selftest" in argv:
-        sys.stderr.write("who.py: checks run in tools/validate.py --selftest\n")
+        sys.stderr.write("who.py: checks run in reg-uncertainty-registry/tools/validate.py --selftest\n")
         return 2
     reg = reglib.Registry()
     if "--actor" in argv:
