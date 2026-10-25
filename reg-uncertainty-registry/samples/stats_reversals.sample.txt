@@ -1,0 +1,12 @@
+== Reversals (D01 from 2016)
+other                      REV-C03 2.40y (public_interest_litigant)
+permissive_to_restrictive  REV-A04 12.17y (agency_new_evidence), REV-A08 3.79y (agency_new_evidence), REV-B00-B01 13.50y (injured_class), REV-B00b-B02 15.63y (injured_class)
+restrictive_to_permissive  REV-A10 1.50y (agency_under_pressure), REV-C04 2.17y (trade_group), REV-D01-2016 9.76y (executive), REV-D02 0.71y (legislature)
+exact Mann-Whitney U=1.0 n=4,4 p(two-sided)=0.0571 over 70 arrangements
+restrictive-list cases reversed toward permissive: ['A10', 'C04', 'D02']
+== Reversals (D01 from 1970)
+other                      REV-C03 2.40y (public_interest_litigant)
+permissive_to_restrictive  REV-A04 12.17y (agency_new_evidence), REV-A08 3.79y (agency_new_evidence), REV-B00-B01 13.50y (injured_class), REV-B00b-B02 15.63y (injured_class)
+restrictive_to_permissive  REV-A10 1.50y (agency_under_pressure), REV-C04 2.17y (trade_group), REV-D01-1970 55.49y (executive), REV-D02 0.71y (legislature)
+exact Mann-Whitney U=4.0 n=4,4 p(two-sided)=0.3429 over 70 arrangements
+restrictive-list cases reversed toward permissive: ['A10', 'C04', 'D02']

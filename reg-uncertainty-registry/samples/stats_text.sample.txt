@@ -1,0 +1,4 @@
+== Text checks in the pinned sources
+SRC-K2-REPORT  NCR-R1   found 1  followed the committee 66.7% of the time** (40 of 60 not approved)
+SRC-K2-REPORT  NCR-R1   found 1  permissive skew, no contrast group
+SRC-K2-REPORT  NCR-R1   found 1  there is no within-frame variation in cost-bearer

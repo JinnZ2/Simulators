@@ -1,0 +1,2 @@
+== Annex A reproduction (RUS-0.2 on the annex's own basis, source C_restrict)
+rows 33   mismatches 0

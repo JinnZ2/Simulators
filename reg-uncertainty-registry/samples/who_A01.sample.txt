@@ -1,0 +1,9 @@
+== A01  Aducanumab accelerated approval (Alzheimer's)
+decided         FDA Center for Drug Evaluation and Research (office)
+decided         Patrizia Cavazzoni (person)
+decided         Janet Woodcock (person)
+overruled       FDA Peripheral and Central Nervous System Drugs Advisory Committee (advisory_committee)
+sponsored       Biogen (sponsor)
+conflict        CF-A01-COLLAB reputational_institutional ACT-P-DUNN [UNREACHABLE]
+conflict        CF-A01-RESIGN reputational_institutional ACT-AC-PCNS [UNREACHABLE]
+conflict        CF-A01-WAIVER disclosure_record ACT-AC-PCNS [UNREACHABLE]

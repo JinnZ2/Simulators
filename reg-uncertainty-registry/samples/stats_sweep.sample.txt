@@ -1,0 +1,9 @@
+== Calibration sweep (annex basis)   published -> computed | over_reachable over_possible reading
+M0  (22, 7, 2, 0, 2) (22, 7, 2, 0, 2) same  | 6 0 HOLDS_UNTESTABLE
+M1  (22, 7, 2, 0, 2) (22, 7, 2, 0, 2) same  | 6 0 HOLDS_UNTESTABLE
+M2  (23, 7, 1, 0, 2) (23, 7, 1, 0, 2) same  | 6 0 HOLDS_UNTESTABLE
+M3  (21, 6, 4, 0, 2) (21, 6, 4, 0, 2) same  | 6 0 HOLDS_UNTESTABLE
+M4  (16, 11, 4, 0, 2) (16, 11, 4, 0, 2) same  | 6 0 HOLDS_UNTESTABLE  U3 row not stated in the bundle; unique reconstruction ['D1', 'D2', 'D3', 'D3']
+M5  (15, 12, 4, 0, 2) (15, 12, 4, 0, 2) same  | 6 0 HOLDS_UNTESTABLE
+M6  (25, 6, 0, 0, 2) (24, 6, 1, 0, 2) DIFF  | 6 0 HOLDS_UNTESTABLE  U3 row not stated; no non-decreasing row reproduces the published counts; closest ['D3', 'D3', 'D3', 'D4'] gives (24, 6, 1, 0, 2)
+M7  None            (14, 15, 2, 0, 2) -     | 6 0 HOLDS_UNTESTABLE  registry variant (NCR-R7, NCR-R13)

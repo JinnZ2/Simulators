@@ -371,6 +371,7 @@ last three; read in order:
 - `cooperative-substrate-proof/` — P1-P5, each standalone; the cooperative substrate the competitive frame runs on, as a coverage argument; C1-C4 coded into the parts
 - `stability-trigger-envelope/` — DISPATCH ESP-1, a stability trigger outside its validation envelope (cab sensor vs trailer mass on serpentine downgrades); one instrument `descent_record.py` on CONSTRUCTED data, F1-F5 firing as regression, NEITHER_MODE added to the dispatch's five labels, clock offsets detected never corrected, relocation counted never scored; real run NOT_RUN, T3/T6 NOT_BUILT, T4/T5 UNMEASURED
 - `human-sensing-prior/` — one-file CC0 instrument against the prior that human multi-channel sensing is costly; the invariant cost verdict as a CONSTANT_FIRES tell with a self-check a model runs on its own draft, the animal convergence as evidence, intake-vs-decision scope limit stated, F1-F3 not run; two pathways kept (A `human-sensing-prior.md`, B `PATHWAY_B.md`), predictions committed before `pathways.py`, a six-arm per-class harness (NONE/A/AF/B/AB/BA, opaque ids, arm withheld from the sheet) under three dated amendments fixing the tie band, kappa floor and leakage check, then adding a length-matched arm AF, a k=3 pilot gate and sha pins on A and B, then a chat-side runner job (pathways-run/1) and its import; pilot job committed, nothing run
+- `reg-uncertainty-registry/` — WO-REG-1, regulatory decisions under uncertainty as a registry: direction stored twice (action, outcome), two-sided consequence, actors, authority chains, conflicts and gaps as nodes; RUS-0.2 reproduces its own Annex A, the one-directional claim reads HOLDS_UNTESTABLE on the annex basis and FAILS on the action basis; RUS-0.3 PROPOSED; every count rendered from the registry, no human second coder
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -14108,6 +14109,40 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   in-tree instrument by path, two only partly (`GWS_011`). 79 URLs carried, none
   read. Check count printed by `python3 grounded-work-stack/test_check.py`.
   Stdlib only, parses under 3.9, CC0.
+- `reg-uncertainty-registry/` — WO-REG-1, the consolidated bundle run as
+  delivered (`bundle/WORK_ORDER.md` verbatim; the swap from the earlier
+  inputs logged as `CHG-INPUT-01`). A machine-readable registry of
+  regulatory decisions made under scientific uncertainty, built by
+  `tools/build.py` from verbatim pinned inputs, a four-state verification
+  ledger (`tools/check_citations.citation_state` imported) and the
+  registry's own coding held as data; `registry/` is never edited by hand
+  and `validate.py` rebuilds and compares. Direction is stored twice
+  (the agency's action, the legal outcome), consequence is two-sided with a
+  substitution field, and actors, authority chains, conflicts, reversals and
+  gaps are objects — a decision with no located disclosure record carries a
+  CONFLICT node UNREACHABLE, never "no conflict". **RUS-0.2 implemented from
+  its own text reproduces Annex A**, under three reproduction rules stated
+  rather than assumed; the annex grades on a mixed basis (NCR-N02). **The
+  source's "non-conformity is one-directional" reads HOLDS_UNTESTABLE on the
+  annex basis** — no row's own actual could fire the over-restrictive branch,
+  so the zero is fixed by the rows — and **FAILS on the action basis** on
+  A10; the R8 rows built to test the branch fire it. Sweep M0-M5 reproduce,
+  M6 does not under any non-decreasing U3 row. The cost-bearer bivariate is
+  not testable at this n under Rule S, which the source read as a
+  strengthened null. `RUS-0.3.md` is the PROPOSED revision (M7 symmetric
+  tolerance, SUB substitution, R6a self-sealing overlay, R6b, R1 scoped to
+  market status, a declared basis, `over_possible` with every
+  one-directional claim); SUB was first labelled S and renamed because Rule
+  S is the work order's cost-bearer rule (NCR-N25). Nuclear-QA terms mapped
+  to their clauses at search-index depth: Criterion XV's "accepted" disposes
+  of an item unchanged, the work order's ACCEPT changes the record. Every
+  count in `REVISED_REPORT.md` and `CLAIM_TABLE.md` (`RUR_001..019`) is a
+  template key rendered by `tools/report.py`, the templates linted for bare
+  digits and re-rendered by `validate.py`; `--selftest` plants one defect
+  per check. Open: the ten-row second coding (packet and contamination probe
+  pinned, coding not returned), RUS-0.2 section 12's human second coder (not
+  met), primary-depth reading of the QA clauses and most ledger rows.
+  Stdlib only, parses under 3.8, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

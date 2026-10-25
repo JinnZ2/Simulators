@@ -1,0 +1,4 @@
+== Restrictive-action list (action_direction hold/decline)
+list ['A04', 'A08', 'A10', 'B01', 'B02', 'B05', 'B06', 'C04', 'D02']
+external forcing 8 of 9; not external: ['B06']
+with Frame C2 restrictive rows ['C2-19']: 8 of 10

@@ -827,6 +827,9 @@ EXPECTED_METRICS = (
     "tools/deceptive_maze_ga.py::jaccard_distance",
     "tools/deceptive_maze_ga.py::mean_pairwise",
     "tools/deceptive_maze_ga.py::half_distance_gen",
+    "reg-uncertainty-registry/tools/stats.py::mann_whitney_exact",
+    "reg-uncertainty-registry/tools/stats.py::one_directional",
+    "reg-uncertainty-registry/tools/grade.py::floor",
 )
 
 
@@ -884,6 +887,29 @@ def _ii_claim_only_fraction(shapes):
     return mod.claim_only_fraction(rows)
 
 
+def _csp_load(fname, modname):
+    """A cooperative-substrate-proof module, imported by path with its own
+    folder on sys.path for the duration, since each part imports the
+    folder's scope.py by name. Without it every case was NOT_RUN on
+    ModuleNotFoundError ('scope'), which left the gate red for a loader
+    reason, not a metric one. A 'scope' cached from another folder is set
+    aside and restored, so the part sees its own."""
+    import importlib.util
+    folder = os.path.join(ROOT, "cooperative-substrate-proof")
+    saved = sys.modules.pop("scope", None)
+    sys.path.insert(0, folder)
+    try:
+        spec = importlib.util.spec_from_file_location(modname, os.path.join(folder, fname))
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        return mod
+    finally:
+        sys.path.remove(folder)
+        sys.modules.pop("scope", None)
+        if saved is not None:
+            sys.modules["scope"] = saved
+
+
 def _csp_gain_from_sizes(ca, cb, cab):
     """cooperative-substrate-proof/p3_comprehension.py::gain_from_sizes,
     imported. The compressibility gain 1 - cab / (ca + cb), kept separate
@@ -893,13 +919,7 @@ def _csp_gain_from_sizes(ca, cb, cab):
     shared form, while an absent size is nothing measured, and a part whose
     whole claim is about transmission must not read the second as the
     first."""
-    import importlib.util
-    path = os.path.join(ROOT, "cooperative-substrate-proof",
-                        "p3_comprehension.py")
-    spec = importlib.util.spec_from_file_location("_csp_p3", path)
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    return mod.gain_from_sizes(ca, cb, cab)
+    return _csp_load("p3_comprehension.py", "_csp_p3").gain_from_sizes(ca, cb, cab)
 
 
 def _csp_lag_ratio(t_visible, t_scored):
@@ -909,12 +929,7 @@ def _csp_lag_ratio(t_visible, t_scored):
     0.0, while an UNDECLARED t_visible returns None. Collapsing them is
     the order's own worst case: an undeclared failure interval reads as a
     short one, and a clean score over it reads as success."""
-    import importlib.util
-    path = os.path.join(ROOT, "cooperative-substrate-proof", "p5_lag.py")
-    spec = importlib.util.spec_from_file_location("_csp_p5", path)
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    return mod.lag_ratio(t_visible, t_scored)
+    return _csp_load("p5_lag.py", "_csp_p5").lag_ratio(t_visible, t_scored)
 
 
 def _rs_delta(acc_open, acc_blind):
@@ -1763,6 +1778,73 @@ def seed():
     _seed_check_citations()
     _seed_yardstick()
     _seed_triage_clean_run()
+    _seed_reg_uncertainty()
+
+
+def _reg_mod(name):
+    """reg-uncertainty-registry/tools/<name>.py, imported by path; the
+    module puts its own directory on sys.path for its sibling imports."""
+    import importlib.util
+    path = os.path.join(ROOT, "reg-uncertainty-registry", "tools", name + ".py")
+    spec = importlib.util.spec_from_file_location("_reg_" + name, path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def _reg_mann_whitney(x, y):
+    r = _reg_mod("stats").mann_whitney_exact(x, y)
+    return (r["U"], round(r["p_two_sided"], 6))
+
+
+def _reg_one_directional(below, over, over_possible):
+    return _reg_mod("stats").one_directional(
+        {"below": below, "over_restrictive": over, "over_possible": over_possible})
+
+
+def _reg_floor(U, gap, r1, r5):
+    return _reg_mod("grade").floor(U, gap, r1=r1, r5=r5)[0]
+
+
+def _seed_reg_uncertainty():
+    """WO-REG-1 registry. The exact Mann-Whitney test is checked against
+    enumerations done by hand; one_directional against its five branches,
+    where HOLDS_UNTESTABLE is the pin (a zero no row could produce is not
+    a finding); floor against the RUS-0.2 section 8 matrix as printed."""
+    register(
+        "reg-uncertainty-registry/tools/stats.py::mann_whitney_exact",
+        _reg_mann_whitney,
+        [case("separated pair", ([1, 2], [3, 4]), (0.0, 0.333333),
+              "C(4,2) = 6 arrangements; |U - 2| >= 2 holds for U = 0 and U = 4: 2/6"),
+         case("one each", ([1], [2]), (0.0, 1.0),
+              "two arrangements, both as extreme as the observed"),
+         case("three above three", ([5, 6, 7], [1, 2, 3]), (9.0, 0.1),
+              "C(6,3) = 20; only U = 0 and U = 9 are as extreme: 2/20"),
+         case("identical samples", ([1, 2], [1, 2]), (2.0, 1.0),
+              "ties count one half; U = mean, every arrangement is as extreme")],
+        note="two-sided p is P(|U - mean| >= |U_obs - mean|) over all arrangements")
+    register(
+        "reg-uncertainty-registry/tools/stats.py::one_directional",
+        _reg_one_directional,
+        [case("below only, over reachable at the actual", (22, 0, 1), "HOLDS",
+              "the over branch could fire on a row and did not"),
+         case("below only, no row could produce over", (22, 0, 0), "HOLDS_UNTESTABLE",
+              "the zero is fixed by the rows (REVIEW_v3 R13)"),
+         case("both directions", (20, 1, 1), "FAILS", "non-conformity both ways"),
+         case("over only", (0, 2, 2), "REVERSED", "one-directional the other way"),
+         case("none", (0, 0, 3), "NO_NONCONFORMITY", "nothing to read")],
+        note="HOLDS_UNTESTABLE against HOLDS is the pin")
+    register(
+        "reg-uncertainty-registry/tools/grade.py::floor",
+        _reg_floor,
+        [case("U3, G = -1", ("U3", -1, False, False), "D2", "matrix row U3, column G<=-1"),
+         case("U3, G = 0", ("U3", 0, False, False), "D3", "matrix row U3, column G=0"),
+         case("U4, G = 3", ("U4", 3, False, False), "D5", "matrix row U4, column G>=3"),
+         case("U1, G = 2", ("U1", 2, False, False), "D2", "matrix row U1, column G=1-2"),
+         case("R1 overrides", ("U1", -2, True, False), "D5", "R1: actual harm or absent benefit"),
+         case("R5 one column permissive", ("U3", 1, False, True), "D3",
+              "U3 column G=1-2 is D4; R5 moves one column toward permissive: D3")],
+        note="RUS-0.2 section 8 as printed in the pinned standard")
 
 
 def _irb_effective_origins(coupling):

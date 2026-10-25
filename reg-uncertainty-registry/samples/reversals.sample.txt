@@ -1,0 +1,19 @@
+== REVERSAL objects by initiator type
+REV-A04        agency_new_evidence      go_ahead->decline   12.17y  new_evidence          from-group not coded    harm NOT_FOUND
+REV-A08        agency_new_evidence      go_ahead->decline    3.79y  new_evidence          from-group not coded    harm NOT_FOUND
+REV-A10        agency_under_pressure    decline ->go_ahead   1.50y  agency_under_pressure from-group diffuse      harm NOT_FOUND
+REV-D01-1970   executive                decline ->warn      55.49y  executive_order       from-group not coded    harm NOT_FOUND  [alias of REV-D01-2016]
+REV-D01-2016   executive                decline ->warn       9.76y  executive_order       from-group diffuse      harm NOT_FOUND
+REV-B00-B01    injured_class            go_ahead->hold      13.50y  mass_harm_litigation  from-group concentrated harm 2,874 medical device reports for urogyne
+REV-B00b-B02   injured_class            go_ahead->hold      15.63y  mass_harm_litigation  from-group concentrated harm NOT_FOUND
+REV-D02        legislature              decline ->warn       0.71y  legislature           from-group concentrated harm NOT_FOUND
+REV-C03        public_interest_litigant go_ahead->vacated    2.40y  court                 from-group concentrated harm NOT_FOUND
+REV-C04        trade_group              decline ->warn       2.17y  court                 from-group concentrated harm NOT_FOUND
+== reading with D01 measured from 2016
+restrictive_to_permissive  n=4  median 1.83y  0.71, 1.50, 2.17, 9.76
+permissive_to_restrictive  n=4  median 12.84y  3.79, 12.17, 13.50, 15.63
+exact Mann-Whitney U=1.0 (pairs where restrictive->permissive took longer), p two-sided = 0.0571 over 70 arrangements
+== reading with D01 measured from 1970
+restrictive_to_permissive  n=4  median 1.83y  0.71, 1.50, 2.17, 55.49
+permissive_to_restrictive  n=4  median 12.84y  3.79, 12.17, 13.50, 15.63
+exact Mann-Whitney U=4.0 (pairs where restrictive->permissive took longer), p two-sided = 0.3429 over 70 arrangements

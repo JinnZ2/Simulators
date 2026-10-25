@@ -1,0 +1,47 @@
+SECOND-CODER PACKET (WO-REG-1, registry second coding)
+
+Rules for this task
+- Use no web search, no web fetch, no repository, and no file you did not create in this session.
+- Code each of the 10 rows below from the facts given and your own knowledge of the public regulatory record. Where your own knowledge is what decides a field, say so in that row's note.
+- Code the U.S. federal action named in the "decision" field. Comparator actions (EU, IARC, other countries) are context, not the action coded.
+- Every field is required. If a field cannot be coded, write UNCODABLE and say why.
+
+FIELDS
+1. action: the agency's own move at decision time; one of go_ahead | warn | hold | decline
+     go_ahead = permit without conditions; warn = permit with warning, label or conditions;
+     hold = defer, require more data, or require premarket approval; decline = deny, ban, revoke, cancel
+   outcome: the legal status as of October 2026, same four values (differs from action only if a court,
+     legislature or later act changed it)
+2. cost_bearer: who bears the cost of a cautious (restrictive) resolution, under this rule: the sponsor or
+     registrant wherever one exists; otherwise the utility, the employer, or the public. One of
+     sponsor | utility | employer | public. group: concentrated (sponsor, utility, employer) or diffuse (public)
+3. U: uncertainty grade U1 resolved | U2 bounded | U3 substantial | U4 unquantified, with these modifiers:
+     M1 -- no adequate data => U4.
+     M2 -- animal-only evidence with unresolved human extrapolation => at least U3, regardless of how
+          confident the agency's narrative sounds.
+4. C_permit axes (harm if wrongly PERMITTED: hazard to the exposed) and C_restrict axes (harm if wrongly
+   RESTRICTED: denial -- loss of the only effective therapy for a progressive disease, interruption of an
+   essential service, foreclosure of research). Each axis 1-3:
+     P affected population      1: < 10^5        2: 10^5-10^7       3: > 10^7 or environmentally/occupationally ubiquitous
+     I harm irreversibility     1: reversible    2: partially reversible   3: irreversible, latent, or intergenerational
+     D decision reversibility   1: readily reversible   2: reversible with difficulty
+                                3: near-irreversible (environmental release, implant, entrenched exposure)
+   Denial harm must be evidenced (named population, named harm, irreversibility); where none can be
+   evidenced, every C_restrict axis is 1.
+
+OUTPUT
+One JSON object per row, one per line, keys exactly:
+  id, action, outcome, cost_bearer, group, U, U_rule, Cp_P, Cp_I, Cp_D, Cr_P, Cr_I, Cr_D, note
+Write the 10 lines to a file named coding.jsonl, print the file, then print its sha256 (sha256sum coding.jsonl).
+
+ROWS (id | year | agency | decision | facts)
+A01 | 2021 | FDA-CDER | Aducanumab accelerated approval (Alzheimer's) | AdComm 0 yes/10 no/1 uncertain; FDA approved on amyloid surrogate not put to panel
+A06 | 2021 | FDA-CDER | Molnupiravir EUA (COVID-19) | 13-10 panel; rodent embryo-fetal + mutagenicity signal -> authorized w/ pregnancy restrictions (emergency context)
+B02 | 2016 | FDA-CDRH | Metal-on-metal hip PMA requirement (effective 2016) | Cleared via 510(k) for ~15 yrs before PMA required
+B03 | 2002 | FDA-CDER | Animal Rule established (efficacy from animals) | Animal efficacy accepted as BASIS to approve (pyridostigmine 2003 etc.)
+B08 | 2023 | FDA-CFSAN | Aspartame: FDA publicly rejects IARC 2B | FDA said IARC-relied studies had 'significant shortcomings'; JECFA kept ADI
+C01 | 2003 | EPA-OPP | Atrazine re-registration | Hayes frog endocrine data excluded via Data Quality Act petition; EU banned 2004
+C08 | 2026 | EPA-OW | UCMR 6 proposed WITHOUT microplastics | Microplastics on draft CCL 6 (candidate) but no monitoring -> data needed for regulation never collected; cost of monitoring fell on utilities
+C10 | 2026 | EPA-OPP+SCOTUS | Glyphosate review still open; Durnell preemption | EPA-HHS partnership, review incomplete since 2009; SCOTUS 7-2: EPA label preempts state warnings
+D02 | 1977 | FDA-CFSAN | Saccharin ban proposed -> Congress moratorium | Canadian rat study -> Delaney ban attempt; Congress blocked; warning label until 2000
+E01 | 2022 | OSHA/NIOSH (US); cmp: IARC 2020, Denmark NBE | Night shift work: no US occupational standard (exposure unregulated) | IARC Vol 124 (2020): Group 2A, limited human evidence (breast/prostate/colorectal), sufficient animal, strong mechanistic. Denmark compensates breast cancer after long-term night work as occupational disease. US: no OSHA standard; NIOSH guidance only. Exposure misclassification risk: studies code ever/never night work; rotation pattern (permanent night vs forward/backward rotation vs weekly day-night flip) not captured -> residual confounding of dose.

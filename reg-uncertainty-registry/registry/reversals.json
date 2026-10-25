@@ -1,0 +1,285 @@
+[
+ {
+  "alias_of": null,
+  "coder": "ACT-REGISTRY",
+  "date_basis": [
+   "EV-G031",
+   "EV-V017"
+  ],
+  "date_from": "2011-02",
+  "date_to": "2023-04-05",
+  "from_case": "A04P",
+  "from_direction": "go_ahead",
+  "harm_at_reversal": {
+   "basis": [],
+   "state": "NOT_FOUND",
+   "value": null
+  },
+  "id": "REV-A04",
+  "initiator": "ACT-FDA-CDER",
+  "initiator_type": "agency_new_evidence",
+  "mechanism": "new_evidence",
+  "note": "accelerated approval withdrawn after the confirmatory trial failed; approval month not verified here",
+  "status": "PROPOSED",
+  "time_to_reversal_years": 12.17,
+  "to": "A04",
+  "to_case": "A04",
+  "to_direction": "decline",
+  "type": "REVERSAL"
+ },
+ {
+  "alias_of": null,
+  "coder": "ACT-REGISTRY",
+  "date_basis": [
+   "EV-G038",
+   "EV-V025",
+   "EV-V026"
+  ],
+  "date_from": "2008-02",
+  "date_to": "2011-11-18",
+  "from_case": "A08P",
+  "from_direction": "go_ahead",
+  "harm_at_reversal": {
+   "basis": [],
+   "state": "NOT_FOUND",
+   "value": null
+  },
+  "id": "REV-A08",
+  "initiator": "ACT-FDA-CDER",
+  "initiator_type": "agency_new_evidence",
+  "mechanism": "new_evidence",
+  "note": "accelerated approval withdrawn after confirmatory trials; ODAC voted 6-0 to withdraw (G038)",
+  "status": "PROPOSED",
+  "time_to_reversal_years": 3.79,
+  "to": "A08",
+  "to_case": "A08",
+  "to_direction": "decline",
+  "type": "REVERSAL"
+ },
+ {
+  "alias_of": null,
+  "coder": "ACT-REGISTRY",
+  "date_basis": [
+   "EV-G010"
+  ],
+  "date_from": "2010-08",
+  "date_to": "2012-02",
+  "from_case": "A10",
+  "from_direction": "decline",
+  "harm_at_reversal": {
+   "basis": [],
+   "state": "NOT_FOUND",
+   "value": null
+  },
+  "id": "REV-A10",
+  "initiator": "ACT-FDA-CDER",
+  "initiator_type": "agency_under_pressure",
+  "mechanism": "agency_under_pressure",
+  "note": "Sept 2010 was a clarification that the drug could stay on the market while the proposal proceeded, not a reversal (G010 DIFFERS); patient and prescriber objections; Shire agreed to two further studies",
+  "status": "PROPOSED",
+  "time_to_reversal_years": 1.5,
+  "to": "FDA deferral by agreement with the sponsor (February 2012)",
+  "to_case": null,
+  "to_direction": "go_ahead",
+  "type": "REVERSAL"
+ },
+ {
+  "alias_of": null,
+  "coder": "ACT-REGISTRY",
+  "date_basis": [
+   "EV-G014",
+   "EV-G035"
+  ],
+  "date_from": "2002",
+  "date_to": "2016-01",
+  "from_case": "B00",
+  "from_direction": "go_ahead",
+  "harm_at_reversal": {
+   "basis": [
+    "EV-G015"
+   ],
+   "state": "FOUND",
+   "value": "2,874 medical device reports for urogynecologic mesh 2008-2010, 1,503 for POP repair (MDRs, not confirmed injuries)"
+  },
+  "id": "REV-B00-B01",
+  "initiator": "ACT-IC-MESH",
+  "initiator_type": "injured_class",
+  "mechanism": "mass_harm_litigation",
+  "note": "the dataset's B00 year 1996 is the first SUI sling clearance; the first POP mesh clearance was 2002 (G035)",
+  "status": "PROPOSED",
+  "time_to_reversal_years": 13.5,
+  "to": "B01",
+  "to_case": "B01",
+  "to_direction": "hold",
+  "type": "REVERSAL"
+ },
+ {
+  "alias_of": null,
+  "coder": "ACT-REGISTRY",
+  "date_basis": [
+   "EV-G032",
+   "EV-G039"
+  ],
+  "date_from": "2000",
+  "date_to": "2016-02-18",
+  "from_case": "B00b",
+  "from_direction": "go_ahead",
+  "harm_at_reversal": {
+   "basis": [
+    "EV-G017"
+   ],
+   "state": "NOT_FOUND",
+   "value": null
+  },
+  "id": "REV-B00b-B02",
+  "initiator": "ACT-IC-MOM",
+  "initiator_type": "injured_class",
+  "mechanism": "mass_harm_litigation",
+  "note": "harm count at reversal not documented here; ASR recall covered about 93,000 implants worldwide (an implant count, not a harm count)",
+  "status": "PROPOSED",
+  "time_to_reversal_years": 15.63,
+  "to": "B02",
+  "to_case": "B02",
+  "to_direction": "hold",
+  "type": "REVERSAL"
+ },
+ {
+  "alias_of": null,
+  "coder": "ACT-REGISTRY",
+  "date_basis": [
+   "EV-G006",
+   "EV-G007",
+   "EV-G033"
+  ],
+  "date_from": "2020-01-22",
+  "date_to": "2022-06-17",
+  "from_case": "C03",
+  "from_direction": "go_ahead",
+  "harm_at_reversal": {
+   "basis": [],
+   "state": "NOT_FOUND",
+   "value": null
+  },
+  "id": "REV-C03",
+  "initiator": "ACT-PIL-NRDC",
+  "initiator_type": "public_interest_litigant",
+  "mechanism": "court",
+  "note": "a permissive action vacated within its lifetime; products remain on the market (G006), so the legal status of the substance did not move toward restriction",
+  "status": "PROPOSED",
+  "time_to_reversal_years": 2.4,
+  "to": "NRDC v. EPA (9th Cir. June 17, 2022); EPA withdrawal of the interim decision (Sept 23, 2022)",
+  "to_case": null,
+  "to_direction": "vacated",
+  "type": "REVERSAL"
+ },
+ {
+  "alias_of": null,
+  "coder": "ACT-REGISTRY",
+  "date_basis": [
+   "EV-G008",
+   "EV-G009"
+  ],
+  "date_from": "2021-08-30",
+  "date_to": "2023-11-02",
+  "from_case": "C04",
+  "from_direction": "decline",
+  "harm_at_reversal": {
+   "basis": [],
+   "state": "NOT_FOUND",
+   "value": null
+  },
+  "id": "REV-C04",
+  "initiator": "ACT-TG-RRVSGA",
+  "initiator_type": "trade_group",
+  "mechanism": "court",
+  "note": "court on petition of grower and farm groups; tolerances legally in effect again (89 FR, Feb 5 2024)",
+  "status": "PROPOSED",
+  "time_to_reversal_years": 2.17,
+  "to": "Red River Valley Sugarbeet Growers v. Regan, 85 F.4th 881 (8th Cir. 2023)",
+  "to_case": null,
+  "to_direction": "warn",
+  "type": "REVERSAL"
+ },
+ {
+  "alias_of": "REV-D01-2016",
+  "coder": "ACT-REGISTRY",
+  "date_basis": [
+   "EV-G019"
+  ],
+  "date_from": "1970-10-27",
+  "date_to": "2026-04-23",
+  "from_case": "SCH1-1970",
+  "from_direction": "decline",
+  "harm_at_reversal": {
+   "basis": [],
+   "state": "NOT_FOUND",
+   "value": null
+  },
+  "id": "REV-D01-1970",
+  "initiator": "ACT-PRESIDENT",
+  "initiator_type": "executive",
+  "mechanism": "executive_order",
+  "note": "same reversal measured from the original placement; carried beside REV-D01-2016, never both counted",
+  "status": "PROPOSED",
+  "time_to_reversal_years": 55.49,
+  "to": "D01",
+  "to_case": "D01",
+  "to_direction": "warn",
+  "type": "REVERSAL"
+ },
+ {
+  "alias_of": null,
+  "coder": "ACT-REGISTRY",
+  "date_basis": [
+   "EV-G019",
+   "EV-G036"
+  ],
+  "date_from": "2016-07-19",
+  "date_to": "2026-04-23",
+  "from_case": "D03",
+  "from_direction": "decline",
+  "harm_at_reversal": {
+   "basis": [],
+   "state": "NOT_FOUND",
+   "value": null
+  },
+  "id": "REV-D01-2016",
+  "initiator": "ACT-PRESIDENT",
+  "initiator_type": "executive",
+  "mechanism": "executive_order",
+  "note": "partial: two categories to Schedule III; contested in the D.C. Circuit (SAM v. DOJ)",
+  "status": "PROPOSED",
+  "time_to_reversal_years": 9.76,
+  "to": "D01",
+  "to_case": "D01",
+  "to_direction": "warn",
+  "type": "REVERSAL"
+ },
+ {
+  "alias_of": null,
+  "coder": "ACT-REGISTRY",
+  "date_basis": [
+   "EV-G011"
+  ],
+  "date_from": "1977-03-09",
+  "date_to": "1977-11-23",
+  "from_case": "D02",
+  "from_direction": "decline",
+  "harm_at_reversal": {
+   "basis": [],
+   "state": "NOT_FOUND",
+   "value": null
+  },
+  "id": "REV-D02",
+  "initiator": "ACT-CONGRESS",
+  "initiator_type": "legislature",
+  "mechanism": "legislature",
+  "note": "moratorium plus warning label; industry lobbying recorded in the source note",
+  "status": "PROPOSED",
+  "time_to_reversal_years": 0.71,
+  "to": "Saccharin Study and Labeling Act (Pub. L. 95-203)",
+  "to_case": null,
+  "to_direction": "warn",
+  "type": "REVERSAL"
+ }
+]
