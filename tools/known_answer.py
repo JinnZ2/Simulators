@@ -833,6 +833,10 @@ EXPECTED_METRICS = (
     "floor-capability/floor_capability.py::life_ratio",
     "floor-capability/floor_capability.py::catchable_share_low",
     "floor-capability/floor_capability.py::handoff_overlap",
+    "extraction-chain-join/chain_join.py::coverage",
+    "extraction-chain-join/chain_join.py::traced_fraction",
+    "extraction-chain-join/chain_join.py::consumption_based",
+    "extraction-chain-join/chain_join.py::reserve_share_band",
 )
 
 
@@ -1783,6 +1787,7 @@ def seed():
     _seed_triage_clean_run()
     _seed_reg_uncertainty()
     _seed_floor_capability()
+    _seed_extraction_chain()
 
 
 def _reg_mod(name):
@@ -1910,6 +1915,87 @@ def _seed_floor_capability():
          case("five-day gap", (100, 106), -5, "days 101..105 uncovered"),
          case("date missing", (None, 5), None, "no leaver date, no overlap")],
         note="leaver_last - successor_first + 1, signed")
+
+def _ecj_mod():
+    """extraction-chain-join/chain_join.py, imported by path under a private
+    name; the module imports its own siblings by path."""
+    import importlib.util
+    path = os.path.join(ROOT, "extraction-chain-join", "chain_join.py")
+    spec = importlib.util.spec_from_file_location("_ecj", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def _ecj_coverage(covered, total):
+    return _ecj_mod().coverage(covered, total)
+
+
+def _ecj_traced_fraction(firm, record, entities, juris):
+    return _ecj_mod().traced_fraction(firm, record, entities, juris)
+
+
+def _ecj_consumption_based(pb, eex, eem):
+    return _ecj_mod().consumption_based(pb, eex, eem)
+
+
+def _ecj_reserve_share_mid(rev, other, d_reserves):
+    band = _ecj_mod().reserve_share_band(rev, other, d_reserves)
+    return None if band is None else band[1]
+
+
+def _seed_extraction_chain():
+    """extraction-chain-join. coverage's empty-denominator case is where a
+    zero hides; traced_fraction's undisclosed and below-threshold cases are
+    where an untraced owner would read as traced; consumption_based's absent
+    term is where a default of zero would hide; the reserve band is checked
+    at its proportional reading. Expected values are computed by hand from
+    the definitions in the module docstrings."""
+    register(
+        "extraction-chain-join/chain_join.py::coverage",
+        _ecj_coverage,
+        [case("three of four", (3, 4), 0.75, "3 / 4"),
+         case("measured zero", (0, 5), 0.0, "0 / 5 is a coverage of zero"),
+         case("empty frame", (0, 0), None, "an empty denominator is not a zero"),
+         case("absent count", (None, 5), None, "no count, no coverage")],
+        note="covered / total, None when the total is absent or zero")
+    ents = {"F": {"kind": "FIRM", "jurisdiction": "J1", "operating": True},
+            "H": {"kind": "FIRM", "jurisdiction": "J5", "operating": False},
+            "P": {"kind": "PERSON", "jurisdiction": "J1"},
+            "Q": {"kind": "PERSON", "jurisdiction": "J2"}}
+    juris = {"J1": 20, "J2": 30, "J5": 75}
+    full = {"F": {"state": "DISCLOSED", "owners": [("P", 0.6), ("H", 0.4)]},
+            "H": {"state": "DISCLOSED", "owners": [("Q", 1.0)]}}
+    shut = {"F": {"state": "DISCLOSED", "owners": [("P", 0.6), ("H", 0.4)]},
+            "H": {"state": "UNDISCLOSED", "owners": []}}
+    thin = {"F": {"state": "DISCLOSED", "owners": [("P", 0.3)]},
+            "H": {"state": "DISCLOSED", "owners": [("Q", 1.0)]}}
+    register(
+        "extraction-chain-join/chain_join.py::traced_fraction",
+        _ecj_traced_fraction,
+        [case("all disclosed", ("F", full, ents, juris), 1.0, "0.6 + 0.4 x 1.0", tol=1e-12),
+         case("holding undisclosed", ("F", shut, ents, juris), 0.6,
+              "0.6 direct; the 0.4 behind H stops at H", tol=1e-12),
+         case("holders below threshold unlisted", ("F", thin, ents, juris), 0.3,
+              "the unlisted 0.7 is a residual, not an owner", tol=1e-12)],
+        note="share of a firm traced to persons; effective shares multiply")
+    register(
+        "extraction-chain-join/chain_join.py::consumption_based",
+        _ecj_consumption_based,
+        [case("net exporter", (100.0, 20.0, 5.0), 85.0, "100 - 20 + 5"),
+         case("net importer", (100.0, 5.0, 20.0), 115.0, "100 - 5 + 20"),
+         case("absent export term", (100.0, None, 5.0), None,
+              "an absent term is not zero")],
+        note="production-based - export-embodied + import-embodied")
+    register(
+        "extraction-chain-join/chain_join.py::reserve_share_band",
+        _ecj_reserve_share_mid,
+        [case("small accumulation", (10.0, 5.0, 3.0), 0.2, "3 / (10 + 5)", tol=1e-12),
+         case("large accumulation", (10.0, 5.0, 12.0), 0.8, "12 / (10 + 5)", tol=1e-12),
+         case("reserves fall", (10.0, 5.0, -1.0), 0.0, "no accumulation, a measured zero"),
+         case("no revenue", (0.0, 5.0, 3.0), None, "no revenue, no share")],
+        note="proportional reading of the reserve share band")
+
 
 def _irb_effective_origins(coupling):
     """internal-reference-boundary/radials.py::effective_origins,
