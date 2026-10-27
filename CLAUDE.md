@@ -373,6 +373,10 @@ last three; read in order:
 - `human-sensing-prior/` — one-file CC0 instrument against the prior that human multi-channel sensing is costly; the invariant cost verdict as a CONSTANT_FIRES tell with a self-check a model runs on its own draft, the animal convergence as evidence, intake-vs-decision scope limit stated, F1-F3 not run; two pathways kept (A `human-sensing-prior.md`, B `PATHWAY_B.md`), predictions committed before `pathways.py`, a six-arm per-class harness (NONE/A/AF/B/AB/BA, opaque ids, arm withheld from the sheet) under three dated amendments fixing the tie band, kappa floor and leakage check, then adding a length-matched arm AF, a k=3 pilot gate and sha pins on A and B, then a chat-side runner job (pathways-run/1) and its import; pilot job committed, nothing run
 - `skill-drain-simulator/` — single-file browser model: veterans leave, scrap climbs, the log blames machines; all constants assumed
 - `floor-resilience/` — toolkit *(non-stdlib)*: where floor skill lives, how fast it drains, what runs when power/software/vendors fail; drain sim replays the JS model exactly; published 14-mo lead is one draw (converged 15-19)
+- `reg-uncertainty-registry/` — WO-REG-1, regulatory decisions under uncertainty as a registry: direction stored twice (action, outcome), two-sided consequence, actors, authority chains, conflicts and gaps as nodes; RUS-0.2 reproduces its own Annex A, the one-directional claim reads HOLDS_UNTESTABLE on the annex basis and FAILS on the action basis; RUS-0.3 PROPOSED; every count rendered from the registry, no human second coder
+- `floor-capability/` — FLOOR CAPABILITY draft v0 landed verbatim and instrumented; weights UNSTATED not unrun, hidden_cost refused as a scalar, scrap at event level against the draft's code-level map, tenure test with an equipment-only control; all CONSTRUCTED
+- `gap-instruments/` — evidence notation for coordination systems, physical limits, discrepancies and abstentions; MEASURED/ESTIMATED/UNKNOWN/GAP per field, no verdict; two supplied files verbatim in `source/`, eight marked fixes in the working copy, mirrored byte-identical in `tools/` here and in method-layer
+- `extraction-chain-join/` — the extraction-money-power-emissions chain, G1..G7 as instruments not verdicts; order RECONSTRUCTED from the session summary; coverage on every reading, NO_PATTERN added to the four branches, end-to-end effect refused; all CONSTRUCTED
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -14113,6 +14117,135 @@ ship a `requirements.txt`. Each folder ships `samples/`.
 - `habitat-lag-dependency/` — delivered record (CC0, verbatim) chaining the 2026 ESA "harm" rescission and Moffett et al. 2026 (no redundancy plateau) through extinction-debt lag to AI's physical and knowledge dependencies; `check.py` finds tags on 18 of 44 claim lines (none in section 6), two verify-marked figures tagged two ways, and the "more than two-thirds" private-land figure fitting neither GAO 1994 row (91.2% some / 66.1% >60%, nonfederal not private); both 2026 anchors exist at search depth. Claims `HLD_001..008`. Stdlib only, CC0.
 - `optical-switching-constraint-chain/` — Kimi (OKComputer) deep-research report on all-optical magnetic recording (Khalid et al. 2026), landed verbatim; `check.py` reproduces its stripe-period table and Delta=60 crossings exactly, finds the energy ledger implies an unstated absorbed fraction (0.35/0.35/0.60), the UCSD row's 7.6 uJ/cm2 sits 250-2,237x below the report's own Co/Pt threshold, and the model crosses the spot band at N=11 against the claimed N=9-10. Claims `OSC_001..010`, work-order candidates in `WORKORDER_ASSESSMENT.md`. Stdlib only, CC0.
 - `scope-audit-lab/` — two Kimi (OKComputer) drops, landed verbatim: continuation reports V1/V2 and Scope Audit Lab 0.2/0.3 (31 and 56 tests, both pass). `check.py`: the ESA row links the April 2025 proposed rule as the July 2026 final rule; the null baseline equals its analytic 8.91 (generator, not instrument); the demo plants three steps and two paragraphs name different "planted" pairs; the demo stream is doubled; the Anthropic-attributed preprint is NOT_LOCATED and not adjudicated. Claims `SAL_001..010`. Stdlib only, CC0.
+- `reg-uncertainty-registry/` — WO-REG-1, the consolidated bundle run as
+  delivered (`bundle/WORK_ORDER.md` verbatim; the swap from the earlier
+  inputs logged as `CHG-INPUT-01`). A machine-readable registry of
+  regulatory decisions made under scientific uncertainty, built by
+  `tools/build.py` from verbatim pinned inputs, a four-state verification
+  ledger (`tools/check_citations.citation_state` imported) and the
+  registry's own coding held as data; `registry/` is never edited by hand
+  and `validate.py` rebuilds and compares. Direction is stored twice
+  (the agency's action, the legal outcome), consequence is two-sided with a
+  substitution field, and actors, authority chains, conflicts, reversals and
+  gaps are objects — a decision with no located disclosure record carries a
+  CONFLICT node UNREACHABLE, never "no conflict". **RUS-0.2 implemented from
+  its own text reproduces Annex A**, under three reproduction rules stated
+  rather than assumed; the annex grades on a mixed basis (NCR-N02). **The
+  source's "non-conformity is one-directional" reads HOLDS_UNTESTABLE on the
+  annex basis** — no row's own actual could fire the over-restrictive branch,
+  so the zero is fixed by the rows — and **FAILS on the action basis** on
+  A10; the R8 rows built to test the branch fire it. Sweep M0-M5 reproduce,
+  M6 does not under any non-decreasing U3 row. The cost-bearer bivariate is
+  not testable at this n under Rule S, which the source read as a
+  strengthened null. `RUS-0.3.md` is the PROPOSED revision (M7 symmetric
+  tolerance, SUB substitution, R6a self-sealing overlay, R6b, R1 scoped to
+  market status, a declared basis, `over_possible` with every
+  one-directional claim); SUB was first labelled S and renamed because Rule
+  S is the work order's cost-bearer rule (NCR-N25). Nuclear-QA terms mapped
+  to their clauses at search-index depth: Criterion XV's "accepted" disposes
+  of an item unchanged, the work order's ACCEPT changes the record. Every
+  count in `REVISED_REPORT.md` and `CLAIM_TABLE.md` (`RUR_001..019`) is a
+  template key rendered by `tools/report.py`, the templates linted for bare
+  digits and re-rendered by `validate.py`; `--selftest` plants one defect
+  per check. Open: the ten-row second coding (packet and contamination probe
+  pinned, coding not returned), RUS-0.2 section 12's human second coder (not
+  met), primary-depth reading of the QA clauses and most ledger rows.
+  Stdlib only, parses under 3.8, CC0.
+- `floor-capability/` — FLOOR CAPABILITY SITE ASSESSMENT, co-authored
+  draft v0, landed as `DRAFT_V0.txt` and sha256-pinned. It arrived through the
+  session's compaction summary, which calls it verbatim; two copies of the
+  summary agree byte for byte, and the original message bytes are not retained
+  (`FLC_001`). The draft is a PROPOSED instrument with six indicators, a
+  `hidden_cost` sum and three unrun gaps. `floor_capability.py` reads it by AST
+  and instruments each indicator. **`FLC_002`:** the status line says *"the
+  weights are unrun"*, but the draft carries 0 numeric constants and no key
+  naming a weight, so the weights are UNSTATED rather than unrun. A planted
+  weight reads PRESENT, which is the control. **`FLC_003`/`FLC_004`:**
+  `hidden_cost` adds five terms as costs. 1 of 5 shares a name with an
+  indicator, `retraining` has none, and under the declared bindings 0 of 5 is
+  measured in a cost unit (the indicators measure a rate, a ratio, a share and
+  a turnover rate). Three overlaps are counted twice, one named by the draft's
+  own scrap codes. `cost_vector()` returns rows and no sum; `combine()` refuses
+  unless there is one unit and every overlap is partitioned, and it is shown
+  reachable when both hold. **`FLC_005`, the main finding:** the reclassify
+  map works at the code level, and the draft's own second gap asks for the
+  event separation it skips. The event-level classifier separates CATCHABLE,
+  FASTER_THAN_CHECK, EQUIPMENT_ONLY, UNDETERMINED and UNMAPPED. The code-level
+  share is an upper bound by construction (200 seeded sets), and on 40
+  constructed events it reads 0.750 against [0.300, 0.450] over all scrap.
+  FASTER_THAN_CHECK (`FLC_006`) is a cadence question the draft has no cell
+  for. `attribution()` is imported from measurand-partition: the reading stays
+  UNPARTITIONED at both levels, with 4 unmeasured variables against 1
+  (`FLC_007`). **`FLC_008`:** the tenure test uses equipment-only scrap as its
+  control and `ols` imported from sim-span. On constructed worlds it reads
+  operator 10 of 10, assignment confound NOT_SEPARABLE 10 of 10, null 9 of 10.
+  Without the control, the operator and assignment worlds read alike. Running
+  it found a defect (`FLC_017`): the first verdict read an opposite-signed
+  control as the confound. **`FLC_009`:** maintenance is read per task class
+  (TRANSFERRED / NEW_TASK / CAPACITY); the aggregate outsourced share rises
+  0.231 to 0.520 with zero TRANSFERRED classes. `life_ratio` returns None
+  without a declared basis, handoff overlap is signed with five states,
+  screening keeps NOT_RECORDED apart, and rule origin adds BOTH and NEITHER.
+  The cross-links to credential-channel I-1 and readout-count
+  `positions_returning` are checked by path and marker. The three-country
+  comparison is carried verbatim; no function takes a country, and no claim is
+  made about any country's workers (`FLC_015`). `FLC_016` is UNVERIFIED:
+  nothing here has met plant data. `life_ratio`, `catchable_share_low` and
+  `handoff_overlap` are registered in `tools/known_answer.py`. The check count
+  is printed by `python3 floor-capability/test_floor.py`, and the module
+  refuses `--selftest`. Stdlib only, parses under 3.8, CC0.
+- `extraction-chain-join/` — Work order: joining the
+  extraction-money-power-emissions chain (debt / reserve need -> extraction
+  -> emissions -> firm -> beneficial owner -> funding of leaders -> policy),
+  whose pieces sit with separate custodians and have not been joined end to
+  end. The order asks for instruments and joined datasets, not verdicts, with
+  coverage reported on every result. **The order's bytes were lost in
+  compaction**, so `WORK_ORDER.md` is the session summary's restatement,
+  labelled RECONSTRUCTED and sha256-pinned (`ECJ_001`). `chain_join.py` has one
+  reader per gap and one for the joined chain. **Coverage is structural**:
+  `result()` refuses a reading with no covered count, total or unit, and an
+  empty frame is None, never 0 (`ECJ_002`). The order's four branches have no
+  cell for a measured null, so NO_PATTERN and NOT_EVALUABLE are added (CHOICE 1,
+  `ECJ_003`). **G1**: one constructed world read through three samples gives
+  three readings (dependent-only HOLDS, rest NO_PATTERN, pooled SCOPE_LIMITED),
+  so a mixed literature can be a property of each study's sample frame
+  (`ECJ_004`); a price confound reads MISSED_VARIABLE with the column and
+  PATTERN_HOLDS without it (`ECJ_005`); over 10 seeds 37 of 40 read as built and
+  the three misses are one seed (`ECJ_006`). **G2**: traced share plus break
+  shares is 1 for every firm, so the unattributed part is a measured fraction
+  even where its owner is unknown; 7 breaks listed by type and tag (`ECJ_007`);
+  a 25% disclosure threshold traces five 20% holders to nobody under full
+  compliance (`ECJ_008`). **G3** has country-level prior art: Zhang et al. 2020
+  (*Nature Climate Change* 10, 1096-1101, record verified at search-index
+  depth) assign multinationals' foreign-affiliate emissions to the investing
+  country (`ECJ_009`); parent-level targets put 7.4% of constructed emissions in
+  a holding company's secrecy jurisdiction, so parent-level accounting can turn
+  a G4 gap into an attribution to a shell (`ECJ_010`). **G4**: the gap is
+  computable from the record (0.543 unattributable, 0.420 at secrecy breaks at
+  cut 60, 0.074 at cut 80), a secrecy index as a per-chain weight is refused
+  (`ECJ_011`), and an unflagged nominee makes the measured gap a lower bound
+  (`ECJ_012`). **G5**: "predicts better than voter preference" does not separate
+  influence from selection — the selection world reads PATTERN_HOLDS (AUC 1.000
+  against 0.789) with no vote moved, the influence world NO_PATTERN with votes
+  moved — while a timing split does (`ECJ_013`); a funding filter on who sits
+  raises the chamber's yes share 0.527 -> 0.820 and reads below chance (0.459)
+  among the seated, so legislators are a sample selected on the filter
+  (`ECJ_014`). **G6**: the reserve share of extraction revenue is a band under
+  fungibility, it reads lower where extraction answers the reserve need, and a
+  driven-by share is refused (`ECJ_015`). **G7**: a production plateau with
+  consumption-based still rising, and plateau years past a consumption-series
+  lag cannot be read (GAP, `ECJ_016`). **The chain**: two correlational arrows
+  make an end-to-end claim an inference of an inference, the record's unit
+  changes at all five joints, an end-to-end effect is refused, and joined
+  coverage read on unit records (0.310) exceeds the independence product
+  (0.242) when one secrecy flag fails several links (`ECJ_018`). Davis &
+  Caldeira's ~23% and the China plateau are carried (`ECJ_017`, `ECJ_019`);
+  nothing has met a custodian's records (`ECJ_020`). `ols` imported from
+  `sim-span`; `coverage`, `traced_fraction`, `consumption_based` and
+  `reserve_share_band` registered in `tools/known_answer.py`. Check count
+  printed by `python3 extraction-chain-join/test_chain.py`; the module refuses
+  `--selftest`. Stdlib only, parses under 3.8, CC0.
+- `held-gaps/` — four open questions (default drift from a constant regime, obligation bundled with title, restore-before-detection law, burden-of-proof inversion in building code), field form for `GAP_INDEX.md`, delivered text verbatim, all UNSEARCHED; the glyph-as-relation procedure (E1-E4) and the inward-turn instrument from the same block are in `tools/glyph_reasoning.md` and `tools/inward_turn.md`, mirrored in method-layer
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

@@ -1,0 +1,536 @@
+[
+ {
+  "actor_id": "ACT-P-DUNN",
+  "basis": [
+   "EV-F002"
+  ],
+  "conflict_type": "reputational_institutional",
+  "decision": "A01",
+  "id": "CF-A01-COLLAB",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "congressional committees reported an atypical FDA-sponsor collaboration before the aducanumab approval",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-AC-PCNS",
+  "basis": [
+   "EV-F003"
+  ],
+  "conflict_type": "reputational_institutional",
+  "decision": "A01",
+  "id": "CF-A01-RESIGN",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "three committee members resigned after the approval set their advice aside",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-AC-PCNS",
+  "basis": [
+   "EV-F032"
+  ],
+  "conflict_type": "disclosure_record",
+  "decision": "A01",
+  "id": "CF-A01-WAIVER",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "18 U.S.C. 208 waiver record for the November 6, 2020 meeting",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "A02",
+  "id": "CF-A02-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of A02; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-P-WOODCOCK",
+  "basis": [
+   "EV-F005"
+  ],
+  "conflict_type": "reputational_institutional",
+  "decision": "A02",
+  "id": "CF-A02-SPONSORFIN",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "the approval dispute record refers to the sponsor's financial condition",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "A03",
+  "id": "CF-A03-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of A03; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "A04",
+  "id": "CF-A04-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of A04; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "A05",
+  "id": "CF-A05-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of A05; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-AC-AAC-DSARM",
+  "basis": [
+   "EV-F009"
+  ],
+  "conflict_type": "financial",
+  "decision": "A05",
+  "id": "CF-A05-PANELTIES",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "panelists with industry ties; vote outcome depended on them",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "A06",
+  "id": "CF-A06-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of A06; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-ETS",
+  "basis": [
+   "EV-F012"
+  ],
+  "conflict_type": "funding_source",
+  "decision": "A07",
+  "id": "CF-A07-ADVOCACY",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "advocacy for approval funded in part by the sponsor",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "A07",
+  "id": "CF-A07-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of A07; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "A08",
+  "id": "CF-A08-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of A08; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "A09",
+  "id": "CF-A09-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of A09; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "A10",
+  "id": "CF-A10-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of A10; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "B00",
+  "id": "CF-B00-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of B00; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "B00b",
+  "id": "CF-B00b-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of B00b; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "B01",
+  "id": "CF-B01-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of B01; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "B02",
+  "id": "CF-B02-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of B02; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "B03",
+  "id": "CF-B03-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of B03; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "B04",
+  "id": "CF-B04-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of B04; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "B05",
+  "id": "CF-B05-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of B05; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "B06",
+  "id": "CF-B06-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of B06; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "B07",
+  "id": "CF-B07-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of B07; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "B08",
+  "id": "CF-B08-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of B08; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "C01",
+  "id": "CF-C01-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of C01; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-CRE",
+  "basis": [
+   "EV-F021"
+  ],
+  "conflict_type": "funding_source",
+  "decision": "C01",
+  "id": "CF-C01-DQA",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "information-quality petition against the frog studies",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-SP-SYNGENTA",
+  "basis": [
+   "EV-F022"
+  ],
+  "conflict_type": "funding_source",
+  "decision": "C01",
+  "id": "CF-C01-FUNDING",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "registrant-funded studies in the record",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "C02",
+  "id": "CF-C02-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of C02; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "C03",
+  "id": "CF-C03-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of C03; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-P-ROWLAND",
+  "basis": [
+   "EV-F023"
+  ],
+  "conflict_type": "reputational_institutional",
+  "decision": "C03",
+  "id": "CF-C03-ROWLAND",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "EPA review chair's communications with the registrant disclosed in litigation",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "C04",
+  "id": "CF-C04-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of C04; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "C05",
+  "id": "CF-C05-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of C05; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "C06",
+  "id": "CF-C06-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of C06; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "C07",
+  "id": "CF-C07-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of C07; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "C08",
+  "id": "CF-C08-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of C08; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "C09",
+  "id": "CF-C09-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of C09; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "C10",
+  "id": "CF-C10-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of C10; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "D01",
+  "id": "CF-D01-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of D01; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "D02",
+  "id": "CF-D02-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of D02; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "D03",
+  "id": "CF-D03-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of D03; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "D04",
+  "id": "CF-D04-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of D04; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ },
+ {
+  "actor_id": "ACT-UNKNOWN",
+  "basis": [],
+  "conflict_type": "disclosure_record",
+  "decision": "E01",
+  "id": "CF-E01-DISCLOSURE",
+  "record_state": "UNREACHABLE",
+  "recusal": null,
+  "statement": "no disclosure record located for the decision-makers or advisers of E01; not searched (egress); this is NOT 'no conflict'",
+  "status": "PROPOSED",
+  "type": "CONFLICT"
+ }
+]

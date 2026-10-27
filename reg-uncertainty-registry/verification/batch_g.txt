@@ -24,3 +24,12 @@ G023 | R | R9 | none | PFOA replacement GenX (HFPO-DA): EPA 2021 human health to
 G024 | R | R6 | none | BVO: California AB 418 (2023, California Food Safety Act) banned brominated vegetable oil in food effective 2027, before FDA's July 2024 final rule revoking BVO authorization
 G025 | K | 2 | none | Red No. 3: FDA revoked authorization January 15, 2025 under the Delaney Clause in response to a 2022 petition (CSPI and others); food deadline January 15, 2027, ingested drugs January 18, 2028
 G026 | R | R14 | none | aducanumab: Biogen discontinued Aduhelm in 2024 (January 31, 2024 announcement)
+G031 | R | R14 | none | prior approvals: bevacizumab breast-cancer accelerated approval February 2008; Makena accelerated approval February 2011; Avastin indication withdrawn November 18, 2011; Makena withdrawal final decision April 5-6, 2023
+G032 | R | R14 | none | FDA final order published February 18, 2016 requiring PMA for total metal-on-metal semi-constrained hip joint systems (21 CFR 888.3320/888.3330), PMAs due May 18, 2016
+G033 | R | R14 | none | glyphosate interim registration review decision signed January 22, 2020 (released January 2020)
+G034 | R | R8 | none | psilocybin is in Schedule I under the Controlled Substances Act (1970) and remained there as of 2025; a rescheduling petition (Aggarwal) was denied and the Ninth Circuit asked DEA to explain
+G035 | R | R14 | none | FDA cleared the first surgical mesh for SUI in 1996 (ProteGen) and the first surgical mesh specifically for POP in 2002
+G036 | R | R8 | none | DEA denied the petition to reschedule marijuana by letter dated July 19, 2016, published at 81 FR 53767 (August 12, 2016); the HHS scientific and medical evaluation was performed by FDA in consultation with NIDA
+G037 | R | R8 | none | FDA granted breakthrough therapy designation to COMPASS Pathways' psilocybin program (treatment-resistant depression) in October 2018 and to Usona Institute's (major depressive disorder) in 2019; psilocybin was in Schedule I at those dates
+G038 | R | R14 | none | bevacizumab (Avastin) metastatic breast cancer accelerated approval February 2008; indication withdrawn November 18, 2011 after an ODAC 6-0 vote
+G039 | R | R14 | none | FDA final order effective February 18, 2016 requiring premarket approval for metal-on-metal total hip systems (Docket FDA-2011-N-0661); PMAs due May 18, 2016

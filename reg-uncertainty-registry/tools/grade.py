@@ -35,7 +35,8 @@ RUS-0.3 (this registry's PROPOSED revision, RUS-0.3.md) adds, each as a
 switch so every combination is computed:
     M7      symmetric tolerance: below the floor by exactly one class is
             conforming by margin (REVIEW_v2 R7, REVIEW_v3 R13)
-    S       substitution rule (REVIEW_v2 R9): a C_restrict lowered because
+    SUB     substitution rule (REVIEW_v2 R9; named SUB because Rule S is
+            the work order's cost-bearer rule, NCR-N25): a C_restrict lowered because
             "alternatives exist" keeps that credit only when the alternative
             is named AND graded with a C_permit grade below the case's own;
             otherwise C_restrict + 1 (capped at 9)
@@ -47,7 +48,7 @@ switch so every combination is computed:
             (U one class lower, declared per case)
     BASIS   "action" grades every row on the agency's own move, "outcome"
             on legal status at the coding date; the published Annex mixes
-            them (NCR-A05)
+            them (NCR-N02)
 
 Library; refuses --selftest (checks run in tools/validate.py --selftest).
 Stdlib only.
@@ -149,7 +150,7 @@ def status(fl, actual, cp, cr, forced=False, r5=False, symmetric=False):
 
 
 def substitution_adjust(cr, alt_claimed, alt_named, alt_grade, cp_grade):
-    """Rule S. Returns (cr_effective, rule)."""
+    """Rule SUB. Returns (cr_effective, rule)."""
     if not alt_claimed:
         return cr, "no alternatives credit claimed"
     if alt_named and alt_grade is not None and int(alt_grade[1]) < int(cp_grade[1]):
@@ -230,30 +231,14 @@ def tally(statuses):
     return out
 
 
-def one_directional(t):
-    """'Non-conformity is one-directional', read on a tally. Returns one of
-    HOLDS (below > 0, over = 0, and an over-restrictive row was possible),
-    HOLDS_UNTESTABLE (over = 0 but no row could produce it), FAILS
-    (non-conformity in both directions), NO_NONCONFORMITY."""
-    if t["below"] == 0 and t["over_restrictive"] == 0:
-        return "NO_NONCONFORMITY"
-    if t["below"] > 0 and t["over_restrictive"] > 0:
-        return "FAILS"
-    if t.get("over_possible", 0) == 0:
-        return "HOLDS_UNTESTABLE"
-    return "HOLDS"
-
-
-def over_possible(cases):
-    """Rows on which R2's over-restrictive branch can fire at all: a
-    restrictive actual (D4/D5) with C_restrict > C_permit."""
-    return sum(1 for c in cases if c["cr_eff"] > c["cp"]
-               and d_index(c["actual"]) >= 4)
+# one_directional() and the over_possible count live in tools/stats.py,
+# which has the case objects (R3 compulsion is a property of the case, not
+# of a graded row).
 
 
 def main():
     sys.stderr.write("grade.py is a library; checks run in "
-                     "tools/validate.py --selftest\n")
+                     "reg-uncertainty-registry/tools/validate.py --selftest\n")
     return 2
 
 

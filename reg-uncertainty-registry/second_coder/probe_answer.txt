@@ -1,0 +1,25 @@
+session  session_016jQG9xtztopHUkqRyfoovx (config: no-git-repo), created 2026-10-21T20:22:46Z
+answer   2026-10-21T20:22:54Z, verbatim:
+
+Q1  Seen before this message?
+    ├─ "The Direction of Uncertainty in U.S. Regulatory Decisions"   → NO
+    ├─ "Regulatory Uncertainty Standard" (RUS-0.1 / RUS-0.2)          → NO
+    ├─ ~33-decision dataset with direction, cost_bearer,
+    │   C_permit, C_restrict columns                                   → NO
+    └─ REVIEW_v1 / v2 / v3                                             → NO
+
+Q2  Recall
+    └─ Nothing. This session has no earlier messages, files or tool output.
+       I also have no memory that carries over between sessions, so if
+       these came up in another conversation, I can't see it from here.
+
+Q3  Training cutoff
+    └─ My environment info gives June 2026.
+       Coverage is usually thinner in the last few months before a cutoff.
+
+Note: no human message has arrived yet in this session. This reply answers the automated notice only.
+
+reading  BLIND to every prior coding of these rows (the source and the reviews postdate the
+         reader's cutoff and were never shown to it). NOT blind to the decisions themselves:
+         the cases are public regulatory history the reader may know. Same model as the
+         originator's reviewer and as this registry's coder.

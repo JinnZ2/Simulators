@@ -1,0 +1,15 @@
+Facts are coded_decisions_v3.csv `note` verbatim (pinned, bundle/MANIFEST.sha256), with these strips and
+nothing else. Each strip removes a coder's reading of a field the second coder codes.
+A06  strip "; cost of caution borne by public in pandemic" (cost_bearer reading)
+B02  strip "; users bore uncertainty cost || RECODE: same pattern as mesh" (bearer reading; recode note)
+B03  strip " when no sponsor bears the caution cost; contrast rodent cancer data" (bearer reading)
+D02  strip " || RECODE: diet-drinks industry + consumers; industry lobbied; Congress imposed moratorium" (recode note)
+E01  strip " (K-flag, search backend unavailable at revision)" (source-status note)
+E01  strip " Cost-bearer: employers (scheduling/compensation costs)." (bearer reading)
+kept C08 "cost of monitoring fell on utilities": a fact about who pays for UCMR monitoring, not a coding;
+     it does decide cost_bearer for C08, declared here.
+Subset: C10, A06, B03, C08, D02 named by the reviews; B08, B02, C01, E01, A01 drawn by
+random.Random(20261021).sample(sorted(remaining 28 ids), 5).
+Codebook text: field definitions follow RUS-0.2 sections 5-6 and coded_decisions_v3 column meanings;
+RUS-0.2's matrix, floors and grades are not shown (the coder codes inputs, not grades).
+Not shown: every prior coding (v1-v3 CSVs, annex, reviews, this registry's curation).

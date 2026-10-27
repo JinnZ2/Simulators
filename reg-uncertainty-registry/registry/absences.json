@@ -1,0 +1,270 @@
+[
+ {
+  "basis": [
+   "EV-H001"
+  ],
+  "corpus": "EPA glyphosate human-health risk assessment and interim decision (2017-2020)",
+  "decisions": [
+   "C03",
+   "C10"
+  ],
+  "endpoint": "END-gut_microbiome",
+  "id": "EA-01",
+  "note": "work-order example (consolidated WO Part A); state from ledger row H001",
+  "state": "NOT_ASSESSED",
+  "status": "PROPOSED",
+  "substance": "SUB-glyphosate",
+  "terms": [
+   "glyphosate",
+   "microbiome",
+   "EPA"
+  ],
+  "type": "ENDPOINT_ABSENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "beyondpesticides.org/usrtk.org (summary): critics state EPA and Health Canada \"dismiss emerging areas of concern like impacts on the gut microbiome\"; mealeys.com (summary): EPA's January 2020 interim decision \"did not identify any human health risks\"",
+   "ledger_row": "H001",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "EPA's own text on microbiome endpoints not seen; absence carried as PROPOSED",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "basis": [
+   "EV-V011",
+   "EV-V061"
+  ],
+  "corpus": "UCMR 6 proposal (July 2026)",
+  "decisions": [
+   "C08"
+  ],
+  "endpoint": "END-microplastic_occurrence",
+  "id": "EA-02",
+  "note": "national occurrence data will not be generated",
+  "state": "NOT_ASSESSED",
+  "status": "PROPOSED",
+  "substance": "SUB-microplastics",
+  "terms": [
+   "UCMR 6",
+   "microplastics"
+  ],
+  "type": "ENDPOINT_ABSENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V011",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "basis": [
+   "EV-E015",
+   "EV-V029"
+  ],
+  "corpus": "510(k) clearance file",
+  "decisions": [
+   "B00"
+  ],
+  "endpoint": "END-mesh_erosion",
+  "id": "EA-03",
+  "note": "substantial equivalence requires no clinical data",
+  "state": "NOT_REQUIRED",
+  "status": "PROPOSED",
+  "substance": "SUB-polypropylene",
+  "terms": [
+   "510(k)",
+   "clinical data"
+  ],
+  "type": "ENDPOINT_ABSENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V029",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "basis": [
+   "EV-E015",
+   "EV-V030"
+  ],
+  "corpus": "510(k) clearance files",
+  "decisions": [
+   "B00b"
+  ],
+  "endpoint": "END-metallosis",
+  "id": "EA-04",
+  "note": "substantial equivalence requires no clinical data",
+  "state": "NOT_REQUIRED",
+  "status": "PROPOSED",
+  "substance": "SUB-cobalt",
+  "terms": [
+   "510(k)",
+   "clinical data"
+  ],
+  "type": "ENDPOINT_ABSENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V030",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "basis": [
+   "EV-V082",
+   "EV-V086",
+   "EV-V087"
+  ],
+  "corpus": "Travis et al. 2016 pooled cohorts; IARC Vol 124",
+  "decisions": [
+   "E01"
+  ],
+  "endpoint": "END-breast_cancer",
+  "id": "EA-05",
+  "note": "exposure coded ever/never or duration; rotation pattern not resolved for cancer endpoints",
+  "state": "NOT_RESOLVED",
+  "status": "PROPOSED",
+  "substance": "SUB-night_shift_work",
+  "terms": [
+   "night shift",
+   "rotation",
+   "forward",
+   "backward",
+   "permanent night"
+  ],
+  "type": "ENDPOINT_ABSENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "summary (pmc.ncbi.nlm.nih.gov / ukbiobank.ac.uk): Million Women Study, EPIC-Oxford, UK Biobank; \"The 10 studies together covered 1.4 million women\"; pooled RR for any night shift work 0.99 (95% CI 0.95 to 1.03)",
+   "ledger_row": "V082",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "the 10 studies include the three new cohorts; full text would confirm the count",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "basis": [
+   "EV-V015",
+   "EV-V016"
+  ],
+  "corpus": "approval record, June 2021",
+  "decisions": [
+   "A01"
+  ],
+  "endpoint": "END-alzheimer_cognition",
+  "id": "EA-06",
+  "note": "clinical benefit unconfirmed at approval; surrogate basis",
+  "state": "NOT_RESOLVED",
+  "status": "PROPOSED",
+  "substance": "SUB-aducanumab",
+  "terms": [
+   "clinical benefit",
+   "confirmatory"
+  ],
+  "type": "ENDPOINT_ABSENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V015",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "basis": [
+   "EV-F004"
+  ],
+  "corpus": "approval record, September 2016",
+  "decisions": [
+   "A02"
+  ],
+  "endpoint": "END-dystrophin",
+  "id": "EA-07",
+  "note": "clinical benefit unconfirmed at approval; surrogate basis",
+  "state": "NOT_RESOLVED",
+  "status": "PROPOSED",
+  "substance": "SUB-eteplirsen",
+  "terms": [
+   "clinical benefit",
+   "confirmatory"
+  ],
+  "type": "ENDPOINT_ABSENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F004",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "basis": [
+   "EV-V041"
+  ],
+  "corpus": "FDA reassessment of E171 after EFSA 2021",
+  "decisions": [
+   "B07"
+  ],
+  "endpoint": "END-genotoxicity",
+  "id": "EA-08",
+  "note": "an FDA reassessment was not located; the absence is the source's statement",
+  "state": "NOT_LOCATED",
+  "status": "PROPOSED",
+  "substance": "SUB-titanium_dioxide",
+  "terms": [
+   "FDA",
+   "titanium dioxide",
+   "genotoxicity"
+  ],
+  "type": "ENDPOINT_ABSENCE",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V041",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ }
+]

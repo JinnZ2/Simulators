@@ -1,0 +1,380 @@
+[
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-acetamiprid",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "acetamiprid",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-aducanumab",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "aducanumab",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-aspartame",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "aspartame",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-atrazine",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "atrazine",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-bevacizumab",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "bevacizumab",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-bvo",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "bvo",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-cannabis",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "cannabis",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-chlorpyrifos",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "chlorpyrifos",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-chromium",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "chromium",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-clothianidin",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "clothianidin",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-cobalt",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "cobalt",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-dinotefuran",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "dinotefuran",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-donanemab",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "donanemab",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-erythrosine",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "erythrosine",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-eteplirsen",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "eteplirsen",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-flibanserin",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "flibanserin",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-glyphosate",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "glyphosate",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-hfpo_da",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "hfpo da",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-hydrocodone_bitartrate",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "hydrocodone bitartrate",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-hydroxyprogesterone_caproate",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "hydroxyprogesterone caproate",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-imidacloprid",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "imidacloprid",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-lead",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "lead",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-liraglutide",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "liraglutide",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-microplastics",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "microplastics",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-midodrine",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "midodrine",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-molnupiravir",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "molnupiravir",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-night_shift_work",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "night shift work",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-pentachlorophenol",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "pentachlorophenol",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-pfbs",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "pfbs",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-pfhxs",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "pfhxs",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-pfna",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "pfna",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-pfoa",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "pfoa",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-pfos",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "pfos",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-polypropylene",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "polypropylene",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-psilocybin",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "psilocybin",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-pyridostigmine_bromide",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "pyridostigmine bromide",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-rofecoxib",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "rofecoxib",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-saccharin",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "saccharin",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-semaglutide",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "semaglutide",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-thc",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "thc",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-thiamethoxam",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "thiamethoxam",
+  "type": "SUBSTANCE"
+ },
+ {
+  "basis": [],
+  "gap": "external id lookup not run: EPA CompTox (DTXSID) and the endpoint ontologies are not reachable from this container (DNS refuses the hosts); local id minted (verification/ids_input.txt lists the lookups owed)",
+  "id": "SUB-titanium_dioxide",
+  "id_state": "LOCAL_ONLY",
+  "ids": {},
+  "name": "titanium dioxide",
+  "type": "SUBSTANCE"
+ }
+]
