@@ -12,6 +12,12 @@ manager, grant reviewer or co-op can read.
 
 Built to `WORK_ORDER.md` (issued 2026-10-23, Kavik + Claude). CC0.
 
+**Provenance.** The work order came with an upload,
+`OKComputer_Dyslexia_Spatial_Gap.zip`. OKComputer is Kimi, an open-source
+model. That material is a diagnosis and a set of notes from work done with
+Kimi. It is read as notes to check, not as findings, and nothing in the zip
+was used as a measured input.
+
 ## Quick start
 
 ```
