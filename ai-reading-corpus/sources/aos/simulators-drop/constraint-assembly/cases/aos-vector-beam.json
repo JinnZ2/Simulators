@@ -1,0 +1,80 @@
+{
+  "case": "aos-vector-beam",
+  "description": "Deterministic all-optical switching in [Pt/Co]N multilayers assembled from components each insufficient alone. The composed option (field-free, helicity-independent reversal in nine-bilayer stacks) did not exist in the environment before 2026; every component was known, and the composition was not.",
+  "components": [
+    {
+      "name": "pulse fluence above the AOS threshold",
+      "constraint_class": "consumable",
+      "law": "heat capacity and the Curie point; heating toward Tc is a hard law",
+      "sufficient_alone": false,
+      "used": true,
+      "partial_use_destroys": true
+    },
+    {
+      "name": "lateral confinement of the excitation to wavelength scale (spot below ~1.36 um at N=3)",
+      "constraint_class": "invariant",
+      "law": "vectorial diffraction (Richards-Wolf); spot diameter set by NA and beam topology",
+      "sufficient_alone": false,
+      "used": true,
+      "partial_use_destroys": false
+    },
+    {
+      "name": "dipolar stabilization from the surrounding unheated film (Bz ~ mu0*Ms/2)",
+      "constraint_class": "invariant",
+      "law": "magnetostatics; scales with magnetic thickness N",
+      "sufficient_alone": false,
+      "used": true,
+      "partial_use_destroys": false
+    },
+    {
+      "name": "pulse accumulation (~200+ pulses per illuminated area at 1 kHz)",
+      "constraint_class": "consumable",
+      "law": "thermal cycling and cumulative domain growth; ferromagnet lacks single-pulse sublattice dynamics",
+      "sufficient_alone": false,
+      "used": true,
+      "partial_use_destroys": false
+    },
+    {
+      "name": "suppressed longitudinal field at focus (Ez(0)=0 by azimuthal symmetry)",
+      "constraint_class": "invariant",
+      "law": "electromagnetic symmetry under tight focusing; holds at any NA for azimuthally symmetric beams",
+      "sufficient_alone": false,
+      "used": true,
+      "partial_use_destroys": false
+    },
+    {
+      "name": "MCD helicity bias",
+      "constraint_class": "soft",
+      "law": "magnetic circular dichroism; does not hold under load - overwhelmed by thermal gradients at confined spots",
+      "sufficient_alone": false,
+      "used": true,
+      "partial_use_destroys": false
+    }
+  ],
+  "rejected": [
+    {
+      "option": "circularly polarized Gaussian beam",
+      "ruled_out_by": "confinement: same fluence, larger spot - permanent sample damage for N=3-5 and nondeterministic multidomain formation for N=6-9 (supplement section 11)"
+    },
+    {
+      "option": "single-pulse toggle switching",
+      "ruled_out_by": "sublattice dynamics: a purely ferromagnetic stack lacks the ferrimagnetic two-sublattice mechanism; single pulses demagnetize and nucleate without deterministic reversal"
+    }
+  ],
+  "budget_terms": [
+    "pulse count per illuminated area (time budget at fixed repetition rate)",
+    "fluence window between AOS threshold and damage threshold"
+  ],
+  "diagnostic": {
+    "cause_known": true,
+    "deferred": false,
+    "note": "the control experiment discriminates: same fluence through a Gaussian beam damages the film; through the vector beam it switches deterministically. The binding constraint was confinement, not energy"
+  },
+  "source_class": "collected - published experiment (Khalid et al., Nat Commun 17, 10843 (2026), supplementary sections 10-11)",
+  "open": [
+    "RESOLVED-BY-SCOPE (2026-10-27): stripe-domain formation at N>=10 was filed here as 'a magnetostatic law, no beam geometry composes around it.' That filing carried the same undeclared scope condition it accused the field of: the law is a law of continuous exchange-coupled films, not of thickness per se. The recording-media tradition froze the opposite topology decades ago (Iwasaki 1976; CoCrPt-oxide granular media), and AO-HDS was demonstrated in 15-nm granular FePt by Lambert et al., Science 345, 1337 (2014) - inside the same collaboration network as this study (Mangin, Fullerton, Salah El Hadri are co-authors of both). The constraint moved rather than vanished: in granular media it reappears as per-grain stochastic switching (Lambert 2014: net induced magnetization only 10-20% of saturation; 1100 Oe insufficient to saturate after excitation). The 2026 paper cites this route (its ref 18) but files it as an 'indirect mechanism' with 'limited control' - which is correct inside the continuous-film frame and is the moved constraint seen from outside it. Scope analysis in scope-bound-shapes/aos_topology_scope.py.",
+    "minimum pulse count for deterministic reversal not measured; the time budget term is unquantified (see uninstrumented case 024)",
+    "whether near-field or photonic confinement can substitute for far-field NA in the confinement term",
+    "whether the dipolar term survives bit isolation: stabilization is borrowed from the surrounding film, so an isolated bit loses part of the composition"
+  ]
+}

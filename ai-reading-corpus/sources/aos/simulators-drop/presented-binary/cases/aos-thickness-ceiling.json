@@ -1,0 +1,18 @@
+{
+  "case": "aos-thickness-ceiling",
+  "presented_as": "A magnetic multilayer can be thin enough for all-optical switching (three bilayers or fewer) or thick enough for long-term data retention. Not both.",
+  "source": "Khalid et al., Nat Commun 17, 10843 (2026), introduction; the binary as presented by the AOS literature 2007-2026 (Stanciu 2007 through Mangin 2014, Chatterjee 2022)",
+  "checks": {
+    "O1": {"state": "documented", "answer": "four families of alternatives on the record, all inside the material frame", "record": "rare-earth ferrimagnets (GdFeCo, TbFeCo); exchange-coupled ferromagnet/ferrimagnet stacks; compositional tuning; domain-size matching. The alternative that worked - redesign the light - was not among them", "count": 4},
+    "O2": {"state": "asserted", "answer": "roughly two decades of field effort, no stated budget per alternative", "record": "AOS literature 2007-2026; the thickness ceiling was treated as a material property for that entire span"},
+    "O3": {"state": "documented", "answer": "the magnetic-materials community; the optics community was not in the loop", "record": "UCSD Today: the two fields 'do not typically overlap'; the paper needed an optics group and a magnetics group to find the answer"},
+    "O4": {"state": "documented", "answer": "yes, published literature", "record": "the failed and partial attempts are all citable (Stanciu 2007; Mangin 2014; Chatterjee 2022; Medapalli 2017)"},
+    "O5": {"state": "documented", "answer": "the search was widened once, in 2026, by this study", "record": "the widening moved the control point from the material to the optics; press quote: 'Instead of designing a new material to enable optical switching, we redesigned the light itself'"},
+    "O6": {"state": "documented", "answer": "the constraint did not hold under direct push - it broke", "record": "the 'three-layer ceiling' was never tested against beam geometry until this study; confined spots (below ~1.36 um at N=3) restored switching through N=9. It was a presented constraint, not a pushed one"},
+    "S1": {"state": "asserted", "answer": "researchers selecting thin stacks; the sacrificed set is the retention capacity of the storage medium and the future users of it, not the selectors", "record": "Ndao: thickness constraint 'put a constraint on the overall thickness of the magnetic material and thus, its ability to retain memory in the long term'"},
+    "S2": {"state": "asserted", "answer": "functional position, but carried by a proxy", "record": "weld present: 'thick vs thin' carries retention as a layer count, but the load-bearing quantity is the energy barrier per bit - never measured inside the frame"},
+    "S3": {"state": "absent", "answer": "", "record": "the no-sacrifice case (thick AND optically switchable) is this study's result, but it was not specified in advance as a comparison"},
+    "S4": {"state": "absent", "answer": "", "record": "no post-audit with a date and owner; the paper names future work without a schedule"},
+    "S5": {"state": "absent", "answer": "", "record": "no pre-registered failure criterion. The paper's own control shows why this matters: the same fluence through a Gaussian beam permanently damages the films - a failed attempt reads as 'physics forbids it' and as 'wrong beam' identically"}
+  }
+}

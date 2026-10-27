@@ -1,0 +1,37 @@
+{
+  "term": "optical switching speed",
+  "domain": "ultrafast magnetism / memory devices",
+  "tracked_by_label": "pulse_duration",
+  "note": "The headline speed of all-optical switching is read off the femtosecond pulse duration. Write latency, pulse count, repetition-rate ceiling and thermal recovery ride along and are assumed to travel with it.",
+  "components": [
+    {"id": "pulse_duration", "name": "duration of a single excitation pulse", "unit": "femtoseconds"},
+    {"id": "pulse_count", "name": "pulses needed for deterministic reversal of one region", "unit": "count"},
+    {"id": "repetition_ceiling", "name": "maximum pulse rate the source and the material can sustain", "unit": "pulses per second"},
+    {"id": "thermal_recovery", "name": "time for the heated region to cool below the switching-relevant temperature between pulses", "unit": "seconds"},
+    {"id": "write_latency", "name": "elapsed time from write command to stable reversed domain", "unit": "seconds"}
+  ],
+  "divergences": [
+    {
+      "id": "single-pulse-vs-cumulative",
+      "note": "The 120 fs pulse duration is the excitation width; the reversal in [Pt/Co]N is cumulative over many pulses. The ferromagnet lacks the ferrimagnetic sublattice dynamics that permit single-pulse toggle reversal, so no component of the write is actually 120 fs long.",
+      "readings": {
+        "pulse_duration": {"before": 120, "after": 120, "unit": "fs, Ti:sapphire pulse width, 800 nm", "source": "Khalid et al., Nat Commun 17, 10843 (2026), Methods"},
+        "pulse_count": {"before": 200, "after": 2000, "unit": "pulses per illuminated area, estimated from sweep speed and 1 kHz rate", "source": "supplementary section 10 (~200 pulses per um^2 at 5 um/s) and sweep arithmetic (1 um/s over 1-2 um spots)"}
+      }
+    },
+    {
+      "id": "source-ceiling-not-material",
+      "note": "The 1 kHz repetition rate is a property of the benchtop amplifier, not of the material's thermal recovery. Even if recovery were sub-nanosecond, the term as used would still read fast because it is read off the pulse, not off the clock that gates the next pulse.",
+      "readings": {
+        "repetition_ceiling": {"before": 1000, "after": 1000, "unit": "Hz, regenerative amplifier", "source": "Khalid et al. 2026, Methods"}
+      }
+    },
+    {
+      "id": "unmeasured-write-latency",
+      "note": "No instrument in the study measured total write time. The 1000x figure is a prospective estimate extrapolated from pulse duration; the load-bearing component of the term is the one with no reading.",
+      "readings": {
+        "write_latency": {"before": null, "after": null, "source": "not measured; XenoSpectrum analysis of the study, 2026-09-28"}
+      }
+    }
+  ]
+}

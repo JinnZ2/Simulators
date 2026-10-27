@@ -1,0 +1,37 @@
+{
+  "term": "deterministic switching",
+  "domain": "granular magnetic recording media / all-optical switching",
+  "tracked_by_label": "ensemble_alignment",
+  "note": "In granular media the term is read off the final ensemble state. Per-grain reversal probability, the bias-to-noise ratio that produces it, and the pulse count that buys the ensemble's confidence ride along.",
+  "components": [
+    {"id": "per_grain_probability", "name": "probability that one grain reverses in one pulse", "unit": "probability, approaches 0.5 at full demagnetization"},
+    {"id": "ensemble_alignment", "name": "net magnetization of the grain ensemble after N pulses", "unit": "fraction of saturation"},
+    {"id": "bias_to_noise_ratio", "name": "helicity-selective bias (MCD) against the thermal coin flip", "unit": "ratio, ~0.02-0.05"},
+    {"id": "pulse_count", "name": "pulses needed for the ensemble to approach its steady state", "unit": "count"},
+    {"id": "switching_latency", "name": "elapsed time to a stable written state", "unit": "seconds"}
+  ],
+  "divergences": [
+    {
+      "id": "ensemble-vs-grain",
+      "note": "The ensemble can be called 'switched' while every grain remains a coin flip. Lambert 2014 granular FePt reached 10-20% of saturation; the reptation model's steady state m_inf = (P_- - P_+)/(P_- + P_+) is a probability ratio, not a guarantee. Determinism at the ensemble level is a statistical approach with time constant ~1/(delta P), purchased with pulse count.",
+      "readings": {
+        "ensemble_alignment": {"before": 0.1, "after": 0.2, "unit": "fraction of saturation, Lambert et al. 2014 granular FePtAgC under circular polarization", "source": "Lambert et al., Science 345, 1337 (2014)"},
+        "per_grain_probability": {"before": 0.5, "after": 0.5, "unit": "probability at full demagnetization (~14 mJ/cm2 in FePt), John et al. 2017", "source": "John et al., Sci. Rep. 7, 4114 (2017)"}
+      }
+    },
+    {
+      "id": "pulses-as-confidence",
+      "note": "Lambert's 1 kHz sweeps excited each grain ~1,000-10,000 times. 'Deterministic' reads as guaranteed, but the guarantee is a statistical confidence that costs 3-4 orders of magnitude more pulses than a single write event. The speed claim inherits the weld: the number that travels is the pulse duration, the number that decides is the pulse count.",
+      "readings": {
+        "pulse_count": {"before": 1000, "after": 10000, "unit": "excitations per grain, Lambert 1 kHz sweeps", "source": "Ellis et al., arXiv:1605.00835 (reptation model, 2016)"}
+      }
+    },
+    {
+      "id": "constraint-is-a-ratio",
+      "note": "John et al. 2017 conclude 'single shot will never be achieved with MCD.' Read as a law, this closes the question; read as a ratio, it states that a 2% bias cannot beat a 50% coin flip in one trial. The noise floor is thermodynamic, but the bias term is optical and engineerable - IFE enhanced by microcavities or plasmonic antennas, dual-pulse ps steering (4 pulse pairs deterministic in continuous Pt/Co/Pt). The weld hides which term is the wall.",
+      "readings": {
+        "bias_to_noise_ratio": {"before": 0.02, "after": 0.05, "unit": "MCD ratio, Ellis 2016: ~2% sufficient, ~3% matches experiment", "source": "Ellis et al., arXiv:1605.00835 (2016)"}
+      }
+    }
+  ]
+}

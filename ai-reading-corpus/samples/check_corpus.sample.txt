@@ -1,0 +1,27 @@
+PASS         ledgers               67 claims, 21 conflicts, 26 gaps; all ids unique, all references resolve
+PASS         manifest              98 files, every sha256 matches, nothing unlisted
+PASS         lab_tests             ran 90, stated 90, exit 0
+PASS         maxwell_residual      residual -6.497e-06 m/s (stated -6.5e-6), u 0.0316 (stated 0.032), |z| 2.06e-04 (stated 2e-4)
+PASS         waves_counts          Malus 24 / longitudinal 0 / spectrum 23 / sound 12
+PASS         physics_counts        sweep 32/24/8/0; EIT rel 0.3842 x19, abs 0.03-163; gravity 18 vs null mean 9.56 max 14; coupling 4/0/0; doppler max 4 of 26
+PASS         v01_stream_validates  v0.5 validator on v0.1 demo stream: exit 0
+PASS         instruments_selftest  physical_discrepancy.py: ok, physical_limits_suite.py: ok
+PASS         landauer_300K         k_B * 300 K * ln 2 = 2.8710e-21 J/bit (stated ~2.87e-21); experimental claims NOT_CHECKED
+FLAG         esa_60_days           2026-07-14 + 60 d = 2026-09-12; H1 states Sept 14 as 60 days; R4 states Sept 12 (X-01)
+FLAG         r4_fr_url             R4 cites a 2025-04-17 FR URL for the 2026-07-14 final rule (X-02)
+FLAG         h1_gap_count          H1 §9 lists 7 items while saying 'add an eighth' (X-05)
+FLAG         lab_readme_stale      v0.5 README still carries ['## Not implemented in 0.3', '`stopped_light`'] (X-07)
+FLAG         missing_instruments   named in R4 §1, absent from bundle: ['gating_diagnostic.py', 'physical_bounds.py', 'limit_detection.py'] (X-08)
+FLAG         aos_kaplan            R5 table N=3..12 reproduces within 5 pct (N=9 2.69 um); T0's '2.7 mm (N=1) / 0.9 um (N=9)' does not come from these parameters, N=1 gives 1.7e+15 m (X-09)
+PASS         aos_delta             Delta=60 at 6.44/9.59/12.39/2.52 nm (stated 6.4/9.6/12.4/2.5); Delta@30nm 352-1304 (stated 350-1300); 0.95 eV -> Delta 36.7 (stated 38+/-8)
+PASS         aos_pulse_arithmetic  1 kHz x (1 um / 5 um/s) = 200 pulses; x (2 um / 1 um/s) = 2000 (stated 200-2,000)
+FLAG         aos_energy            R5 states 12 pJ / 640 pJ / 4.9 pJ / 120 aJ; stated inputs give 34.5 pJ / 1815 pJ / 8.2 pJ / 192 aJ; 12 and 640 equal fluence x (0.4 um)^2 x pulses without pi (X-10)
+FLAG         aos_latency           8 pulses @3 GHz = 2.67 ns is the dual-pulse record; AO-HDS 100 pulses = 33 ns; same-protocol kHz gap = 6.5 orders, R5 says ~9 (X-11)
+FLAG         aos_crpt_carried      R5 voids arXiv:2104.11820 as a simulation; still carried as shown in ['granular-reptation.json', 'ife-amplifier-scaling.json'] (X-12)
+FLAG         aos_ez_contradiction  T0 and the case file: Ez(0)=0 at focus; R5 §1.1: 'strong longitudinal E_z ... is what confines' (X-17)
+FLAG         aos_weld_encoding     spreads {'optical_switching_speed.json': 10.0, 'deterministic_switching.json': 2.0} come from low/high range ends stored as before/after, not from a field movement (X-15)
+PASS         aos_sim_instruments   against simulators: weld.py ok, assemble.py ok, binary_audit 5/3/3 share 0.46 ok
+FLAG         aos_scope_verdict     tool verdict UNDECLARED_OVERLAP, corroborate None, infer_frozen REFUSED_BY_CONSTRAINT; T1 reports 'corroborating' (X-16)
+PASS         aos_case_number       landed as ['025aoswritelatency.md']; 024 held by ['024refusalfalsepositiverate.md']; the file's own header and aos-vector-beam open[1] still say 024 (delivered text, X-20)
+
+25 checks: {'PASS': 13, 'FLAG': 12, 'NOT_TESTABLE': 0, 'FAIL': 0}
