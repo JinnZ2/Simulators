@@ -1,0 +1,7 @@
+CLAIM: AI will replace human work
+  anchor           : ? What invariant forces revision of this claim?
+  bound            : ? What external limit cannot be exceeded by relabeling?
+  coupling         : ? Does consequence reach the party that decided?
+  update           : ? What forces revision, on what timescale?
+  error_visibility : ? Can the system detect its own decoupling?
+  if not audited  : record an Abstention with review_trigger

@@ -371,8 +371,11 @@ last three; read in order:
 - `cooperative-substrate-proof/` — P1-P5, each standalone; the cooperative substrate the competitive frame runs on, as a coverage argument; C1-C4 coded into the parts
 - `stability-trigger-envelope/` — DISPATCH ESP-1, a stability trigger outside its validation envelope (cab sensor vs trailer mass on serpentine downgrades); one instrument `descent_record.py` on CONSTRUCTED data, F1-F5 firing as regression, NEITHER_MODE added to the dispatch's five labels, clock offsets detected never corrected, relocation counted never scored; real run NOT_RUN, T3/T6 NOT_BUILT, T4/T5 UNMEASURED
 - `human-sensing-prior/` — one-file CC0 instrument against the prior that human multi-channel sensing is costly; the invariant cost verdict as a CONSTANT_FIRES tell with a self-check a model runs on its own draft, the animal convergence as evidence, intake-vs-decision scope limit stated, F1-F3 not run; two pathways kept (A `human-sensing-prior.md`, B `PATHWAY_B.md`), predictions committed before `pathways.py`, a six-arm per-class harness (NONE/A/AF/B/AB/BA, opaque ids, arm withheld from the sheet) under three dated amendments fixing the tie band, kappa floor and leakage check, then adding a length-matched arm AF, a k=3 pilot gate and sha pins on A and B, then a chat-side runner job (pathways-run/1) and its import; pilot job committed, nothing run
+- `skill-drain-simulator/` — single-file browser model: veterans leave, scrap climbs, the log blames machines; all constants assumed
+- `floor-resilience/` — toolkit *(non-stdlib)*: where floor skill lives, how fast it drains, what runs when power/software/vendors fail; drain sim replays the JS model exactly; published 14-mo lead is one draw (converged 15-19)
 - `reg-uncertainty-registry/` — WO-REG-1, regulatory decisions under uncertainty as a registry: direction stored twice (action, outcome), two-sided consequence, actors, authority chains, conflicts and gaps as nodes; RUS-0.2 reproduces its own Annex A, the one-directional claim reads HOLDS_UNTESTABLE on the annex basis and FAILS on the action basis; RUS-0.3 PROPOSED; every count rendered from the registry, no human second coder
 - `floor-capability/` — FLOOR CAPABILITY draft v0 landed verbatim and instrumented; weights UNSTATED not unrun, hidden_cost refused as a scalar, scrap at event level against the draft's code-level map, tenure test with an equipment-only control; all CONSTRUCTED
+- `gap-instruments/` — evidence notation for coordination systems, physical limits, discrepancies and abstentions; MEASURED/ESTIMATED/UNKNOWN/GAP per field, no verdict; two supplied files verbatim in `source/`, eight marked fixes in the working copy, mirrored byte-identical in `tools/` here and in method-layer
 - `extraction-chain-join/` — the extraction-money-power-emissions chain, G1..G7 as instruments not verdicts; order RECONSTRUCTED from the session summary; coverage on every reading, NO_PATTERN added to the four branches, end-to-end effect refused; all CONSTRUCTED
 - `ai-reading-corpus/` — three delivered research lines (habitat lag, scope-audit lab v0.1-v0.5, all-optical switching) as one AI-readable bundle: sources verbatim + sha256 MANIFEST, 67 atomic claims each keeping its source's own tag, 21 conflicts, 26 gaps; `tools/check_corpus.py` recomputes every stated number it can (R5's energy-per-bit does not reproduce, X-10) and reads this tree as its sibling; the eight AOS artifacts it carries are landed in their folders (ARC_001..006)
 - `legacy/` — archived drops; `Organize.md` is the
@@ -14112,6 +14115,7 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   in-tree instrument by path, two only partly (`GWS_011`). 79 URLs carried, none
   read. Check count printed by `python3 grounded-work-stack/test_check.py`.
   Stdlib only, parses under 3.9, CC0.
+- `habitat-lag-dependency/` — delivered record (CC0, verbatim) chaining the 2026 ESA "harm" rescission and Moffett et al. 2026 (no redundancy plateau) through extinction-debt lag to AI's physical and knowledge dependencies; `check.py` finds tags on 18 of 44 claim lines (none in section 6), two verify-marked figures tagged two ways, and the "more than two-thirds" private-land figure fitting neither GAO 1994 row (91.2% some / 66.1% >60%, nonfederal not private); both 2026 anchors exist at search depth. Claims `HLD_001..008`. Stdlib only, CC0.
 - `reg-uncertainty-registry/` — WO-REG-1, the consolidated bundle run as
   delivered (`bundle/WORK_ORDER.md` verbatim; the swap from the earlier
   inputs logged as `CHG-INPUT-01`). A machine-readable registry of
@@ -14240,6 +14244,7 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `reserve_share_band` registered in `tools/known_answer.py`. Check count
   printed by `python3 extraction-chain-join/test_chain.py`; the module refuses
   `--selftest`. Stdlib only, parses under 3.8, CC0.
+- `held-gaps/` — four open questions (default drift from a constant regime, obligation bundled with title, restore-before-detection law, burden-of-proof inversion in building code), field form for `GAP_INDEX.md`, delivered text verbatim, all UNSEARCHED; the glyph-as-relation procedure (E1-E4) and the inward-turn instrument from the same block are in `tools/glyph_reasoning.md` and `tools/inward_turn.md`, mirrored in method-layer
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

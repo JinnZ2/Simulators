@@ -1,0 +1,29 @@
+
+=== PHYSICAL LIMIT ===
+evidence fields: {'MEASURED': 0, 'ESTIMATED': 0, 'UNKNOWN': 0, 'GAP': 7, 'filled_fraction': 0.0}
+unevaluated fraction: UNKNOWN
+  UNRESOLVED: system_instance unspecified
+  UNRESOLVED: operating_condition unspecified
+  UNRESOLVED: physical_quantity unspecified
+  NOTE: template only — nothing measured; a clean schema is not a result
+  verdict: NOT ASSIGNED
+
+=== DISCREPANCY ===
+evidence fields: {'MEASURED': 0, 'ESTIMATED': 0, 'UNKNOWN': 0, 'GAP': 2, 'filled_fraction': 0.0}
+  NOTE: template only — nothing measured; a clean schema is not a result
+  verdict: NOT ASSIGNED
+
+=== DISCREPANCY HANDLING ===
+evidence fields: {'MEASURED': 0, 'ESTIMATED': 0, 'UNKNOWN': 0, 'GAP': 4, 'filled_fraction': 0.0}
+  NOTE: template only — nothing measured; a clean schema is not a result
+  verdict: NOT ASSIGNED
+
+=== COORDINATION SYSTEM ===
+evidence fields: {'MEASURED': 0, 'ESTIMATED': 2, 'UNKNOWN': 2, 'GAP': 3, 'NOT_RECORDED': 0, 'filled_fraction': 0.286}
+unevaluated fraction: UNKNOWN
+  UNRESOLVED: instance_of unspecified: label without dated instance
+  verdict: NOT ASSIGNED
+
+=== INSTANCE CHANGES (label held, configuration changed) ===
+  1979-80  capitalism (US): Chrysler loan guarantees | after: state carries failure risk
+  2008     capitalism (US): TARP, AIG, GM/Chrysler | after: losses socialized, gains private
