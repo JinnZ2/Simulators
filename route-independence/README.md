@@ -751,3 +751,120 @@ The located barter instrument does not match the order's line "barter
 less constrained 1950s-1970s, then accounted in dollars". Barter income
 was already taxable at fair market value before 1982; what the 1982 rule
 added was third-party reporting. Claims `RIN_151..RIN_160`.
+## Work order standing/A-6.3, 2026-09-30: verification split
+
+The order is landed verbatim as
+`WORK_ORDER_A6.3_2026-09-30_verification-split.md` and committed alone at
+`ea0d379`, before code, because item 2 changes what lets a row read MATCH.
+`verification_a63.py` extends `sourcing_a62.py` by import. Two earlier data
+rows move because the order names them: W-1a and W-2a in
+`gate_state_a21.py` (item 8) and CE-4e in `standing_a61.py` (item 3).
+
+Renumbered 2026-10-27, before landing on main: this section was written on its
+branch as RIN_151..RIN_165. Main had meanwhile published RIN_151..RIN_160 for
+FWO-15, and ids are permanent, so these claims land as RIN_161..RIN_175 (old id
++ 10). The delivered `FOLLOWUP_2026-09-30.md` is not edited; its "from RIN_159"
+means this section's RIN_169.
+
+Part B status, first (RIN_161):
+
+- A-6.2 items 9-14 were not in the A-6.2 text delivered to this session,
+  which holds items 0-8. Items 9-13 were done by another session on
+  `claude/potential-part-b-k7Qm`, which is not merged into main:
+  - 9 P-17, done at `63ca5ce`. The branch was the inner re-import of
+    PERTURBATIONS inside `test_verdict_supported_synthetic`.
+  - 10 P-18, done at `63ca5ce`.
+  - 11 the reading-order line, done at `63ca5ce`. The order is a dependency.
+  - 12 the root CLAUDE.md `potential/` paragraph, done at `63ca5ce`.
+  - 13 KNOWN_RED section 11 bounded half, done at `1803391` (KNOWN_RED section 12).
+  - 14 holding items: no commit on any branch.
+- Re-run here in a worktree of that branch, P-17's file and P-18's selftest
+  both pass. That branch's INVENTORY still lists P-17 and P-18 as OPEN.
+- The 4 `tests/test_run_manifest.py` failures are a subset of section 11's 8. They
+  are exactly section 12's list of what is left, by id.
+
+What did not hold:
+
+- **Item 8's "stays STORED_UNVERIFIED".** W-1a and W-2a have a url now and
+  no span. Under item 2's own definition they read NO_SPAN (RIN_164). The
+  moved addresses carry no scheme, and none was added.
+- **Item 4's rule reads the order's "1000-2999" as a year range** (RIN_166).
+  Neither number is credited either way.
+- The first mutation grid for `gate_a62` had no in-repo input, so
+  `reading` read as dead. That was a gap in the grid (RIN_169).
+- A-6.2's "modules not edited" check reads only uncommitted diffs. It turns
+  green once this commit lands, although `gate_state_a21.py` was edited
+  (RIN_164).
+
+Per item:
+
+- **1.** A repo source is `repo:<full commit>:<path>` plus a clone url
+  [CHOICE 95]. Five repo spans are on file in `repo_span_store.json`
+  (RIN_162).
+- **2.** Only VERIFIED inputs let a row read MATCH [CHOICE 99]. The five
+  repo spans were verified by a fetch from the remote into a fresh
+  repository; all 5 hashes match (RIN_163). E-A2-4 and E-A3.1-1 (both
+  readings) now read MATCH. The RIN_150 placeholder reads STORED_UNVERIFIED
+  and is the fail fixture.
+- **Counts over the 19 re-gated rows** (VERIFIED / STORED_UNVERIFIED /
+  NO_SPAN / CONSTRUCTED):
+  - by reference (n 35): 9 / 0 / 15 / 11
+  - by distinct source (n 17): 5 / 0 / 9 / 3
+  - no row reads MATCH on a non-VERIFIED input
+- **3.** CE-4e declares its coding rule: GEOGRAPHIC, undeclared at issue.
+  Its origin is the chat handover (Claude) (RIN_165).
+- **4-5.** In the new count function, "2036 paths" is counted and flagged,
+  "since 1971" is a year, and "rule 0 these rows" is a label. There is no
+  identity change on A-4..A-6.1 from labels or years (RIN_166, RIN_167).
+- **6.** With `P-` declared as profiles, A-6 returns to 3. That is the only
+  identity change (RIN_168).
+- **7.** Every status gate this module defines or reads moves under
+  mutation, with no dead argument. A constant gate FAILs (RIN_169).
+- **Limit** (RIN_170). VERIFIED shows that the commit is on the remote and
+  its path resolves to the stored bytes. It is not a second reading of what
+  the row claims.
+
+## Operator follow-up, 2026-09-30
+
+The follow-up is landed verbatim as `FOLLOWUP_2026-09-30.md` and committed
+alone at `d2f35e7`. `followup_a63.py` reads the earlier modules by import and
+edits none of them. Only one test changes: `test_sourcing_a62.py`'s module
+check.
+
+What did not hold, first:
+
+- **The caller asserts falsifier enumeration for every row** (RIN_174).
+  `rerun_a63` and `sourcing_a62.rerun` pass `enumerated=True` on every row,
+  and `standing_a61.prior_sweep` passes the constant `True`. Flipping the
+  constant moves 18 of 19, 18 of 19 and 17 of 17 verdicts. No per-row
+  enumeration record exists to read instead, so this is recorded, not
+  repaired.
+- **The replaced check has a sibling** (RIN_173).
+  `test_sourcing_a62.py` still runs `git diff --quiet HEAD` over the order
+  files, which has the same shape.
+
+Per item:
+
+- **1. resolved_url** (RIN_171). The W-1a and W-2a addresses stay as written,
+  with no scheme. `resolved_url` sits in `resolve_store.json`, filled only
+  when a fetch returns HTTP 200 with bytes [CHOICE 106]. The fetch tries
+  https, then http [CHOICE 107]. The live attempt got https refused at
+  CONNECT (403) and http 403 for both, so `resolved_url` is None and both
+  inputs read NO_SPAN.
+- **2. Part B** (RIN_172). On `claude/potential-part-b-k7Qm`, INVENTORY now
+  reads P-17 and P-18 as `FIXED at 63ca5ce`, with re-runs at the branch head,
+  committed at `5999856`. A PR already exists for that branch (#105, open)
+  and carries the commit.
+- **3. Pins** (RIN_173). The ten A-1..A-6.2 modules are pinned by blob hash
+  at `f6d385c` [CHOICE 110]: 8 are PINNED and 2 are DECLARED_EDIT (both at
+  `b10392f`, reasons stated). All 12 hashes match git. Without the
+  `gate_state_a21` declaration the pin check reads UNDECLARED_EDIT, while the
+  old check reads the committed edit as clean.
+- **4. Caller constants** (RIN_174) [CHOICE 108] [CHOICE 109]. The scan finds
+  28 FLAGs: 19 in modules, all with a declared disposition, and 9 in test
+  fixtures. The null test flags a planted literal and does not flag a
+  variable.
+- **5. Sample shifts** (RIN_175). Lines 5-6 of
+  `samples/gate_state_a21.sample.txt` and lines 46-49 of
+  `samples/sourcing_a62.sample.txt` are the A-6.3 item 8 move. They equal
+  the `f6d385c..b10392f` diff, and both live samples equal `b10392f`'s.

@@ -15,11 +15,11 @@ statement from a gap having no discipline or needing no data.
 Nothing here is inferred from wording.
 
 ```
-entries        255
-folders        24
-of type GAP    252
+entries        259
+folders        25
+of type GAP    256
 of type DECISION 3
-entries missing at least one of the five core fields   9
+entries missing at least one of the five core fields   13
 ```
 
 ---
@@ -244,6 +244,10 @@ left empty.
 | `emergence-stability-simulator#9` | `emergence-stability-simulator` | GAP | EMPIRICAL | Resource economics | Agent._mark_exhausted() and Agent.regenerate() in sim_engine.py | `NOT_STUDIED` |
 | `emergence-stability-simulator#10` | `emergence-stability-simulator` | GAP | EMPIRICAL | Computational modelling | sensitivity_analysis.py implementation | `UNDEFINED` |
 | `emergence-stability-simulator#11` | `emergence-stability-simulator` | GAP | USER GUIDE | Science communication | The framework itself | `NOT_STUDIED` |
+| `held-gaps#1` | `held-gaps` | GAP | unrecorded | unrecorded | unrecorded | `OBSERVED (Kavik, co-authored)` |
+| `held-gaps#2` | `held-gaps` | GAP | unrecorded | unrecorded | unrecorded | `DERIVED` |
+| `held-gaps#3` | `held-gaps` | GAP | unrecorded | unrecorded | unrecorded | `OBSERVED (her culture)` |
+| `held-gaps#4` | `held-gaps` | GAP | unrecorded | unrecorded | unrecorded | `OBSERVED (one instance)` |
 | `held-open-uncertainty#1` | `held-open-uncertainty` | GAP | unrecorded | unrecorded | unrecorded | `yes, and it runs against the assumption.` |
 | `held-open-uncertainty#2` | `held-open-uncertainty` | GAP | unrecorded | unrecorded | unrecorded | `no. Large literature, different question.` |
 | `held-open-uncertainty#3` | `held-open-uncertainty` | GAP | unrecorded | unrecorded | unrecorded | `inference. Unmeasured. Claude's, not the user's.` |
@@ -306,6 +310,7 @@ sums past the entry count.
 | research methodology | 19 |
 | policy | 18 |
 | education | 15 |
+| unrecorded | 13 |
 | dynamical systems | 12 |
 | emergency management | 12 |
 | human factors | 12 |
@@ -321,7 +326,6 @@ sums past the entry count.
 | computational modelling | 9 |
 | ecology | 9 |
 | epistemology | 9 |
-| unrecorded | 9 |
 | experimental design | 8 |
 | measurement theory | 8 |
 | public administration | 8 |
@@ -426,14 +430,14 @@ rows here. Only the repeated ones are listed above.
 Grouped on the first declared data source, verbatim and lowercased.
 This is a string grouping and not a taxonomy: `RESEARCH_RENDER.md`
 §3 specifies three source kinds — EXISTING RECORD, YOUR OWN DATA,
-SOMEONE'S HANDS — and **7 of 255 entries declare one**; the rest
+SOMEONE'S HANDS — and **7 of 259 entries declare one**; the rest
 declare sources with no kind, so above the raw line there is
 nothing to group them on.
 
 | first declared source | entries |
 |---|---|
 | the framework itself | 18 |
-| unrecorded | 9 |
+| unrecorded | 13 |
 | stub docstring | 8 |
 | hec-ras 2d (windows | 2 |
 | incident databases (aviation | 2 |
@@ -463,6 +467,7 @@ vocabulary is reported as written rather than mapped into it.
 | `no slot (decision)` | 3 |
 | `unknown_atm (site-specific)` | 3 |
 | `candidate. held open deliberately. see ../domain-ledger/a2.md.` | 1 |
+| `derived` | 1 |
 | `inference. unmeasured. claude's, not the user's.` | 1 |
 | `instrument exists, series not taken on this question.` | 1 |
 | `least instrumented item here. most likely genuinely unasked.` | 1 |
@@ -474,6 +479,9 @@ vocabulary is reported as written rather than mapped into it.
 | `not_studied (the field's own review says so)` | 1 |
 | `not_studied (zero located climate or` | 1 |
 | `not_studied — and held at one program: the lag` | 1 |
+| `observed (her culture)` | 1 |
+| `observed (kavik, co-authored)` | 1 |
+| `observed (one instance)` | 1 |
 | `open` | 1 |
 | `undefined (no agreed threshold)` | 1 |
 | `undefined (the marker exists as a concept, not an implementation)` | 1 |
@@ -489,8 +497,8 @@ vocabulary is reported as written rather than mapped into it.
 | `verified (analytic)` | 1 |
 | `yes, and it runs against the assumption.` | 1 |
 
-**240 of 255** entries state one of the six §5 values, alone or with a
-parenthetical. The remaining 15 carry something else — a sentence, a
+**240 of 259** entries state one of the six §5 values, alone or with a
+parenthetical. The remaining 19 carry something else — a sentence, a
 verdict, `no slot (DECISION)` (a fork has no knowledge-state field),
 or nothing. They are listed as written above rather than sorted into
 the vocabulary, because deciding which of the six a sentence means

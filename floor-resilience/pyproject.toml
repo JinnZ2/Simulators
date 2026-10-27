@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "floor-resilience"
+version = "0.1.0"
+description = "Measures tacit floor skill, where it lives, how fast it drains, and what keeps running when power, software or vendors fail."
+readme = "README.md"
+license = {text = "CC0-1.0"}
+requires-python = ">=3.11"
+dependencies = ["numpy", "pydantic>=2", "pyyaml", "matplotlib"]
+
+[project.optional-dependencies]
+test = ["pytest", "pytest-cov"]
+
+[project.scripts]
+floorres = "floor_resilience.cli:main"
+
+[tool.setuptools]
+packages = ["floor_resilience", "floor_resilience.stress"]
+
+[tool.setuptools.package-data]
+floor_resilience = ["data/*.yaml", "intake/*.html"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

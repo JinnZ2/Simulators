@@ -1,0 +1,33 @@
+WO-3 READER A NOTE (the stage 1-3 reader; files stage*_fill_A/G, scores_C, last_answer)
+Added after the run. Changes no hashed file. Status: CONTAMINATED-BY-PRIOR, STRUCTURE CHECK ONLY.
+
+TWO READERS, ONE PAPER (Ali et al. 2022)
+                              reader A (last_answer.txt)    reader B (probe_answer.txt)
+  asked                       after stages 1-3              before any stage
+  journal / authors           yes, hedged                   yes, "fairly confident"
+  lab                         not named                     Donders / Kietzmann group
+  energy cost                 "total activity or            "L1-type penalty on unit drive"
+                               synaptic transmission"
+  predictable MNIST sequence  yes                           yes
+  prediction / error split    yes                           yes
+  lesion result               no                            yes
+  unpredictable control       no                            yes
+  self-rated confidence       "moderate"                    per-part tags
+
+READING
+  Both readers know the paper; neither is blind to it. A recalled less detail than B,
+  so the work-order summary describes B, not A.
+  For A the contamination is inside the hashed files, not only in the answer:
+    stage3_scores_C.txt  S2g.u "emergence of predictive coding from efficiency
+    objectives is partly reported [MEMORY]" rests on this paper, unnamed.
+  Stage 2 (g) matches the paper's shape; A did not register or flag the match.
+  Supports the §9 line: blindness depends on the reader's training cutoff.
+
+CORRECTION TO last_answer.txt (file left as hashed)
+  It says "ReadNotifications (4 calls)". At the time of the answer A had made 3 calls
+  (stage 2, stage 3, last question). The three messages it lists are correct.
+
+FOR THE REAL BLIND RUN (WO-3 item 3) AND THE SECOND SCORER (item 4)
+  A is not eligible for either: A has seen the rubric, its own scores, and now this
+  record. The anchor pick and the reader must be different sessions; whoever reads the
+  WO-4 audit to pick the anchor must not be the reader.
