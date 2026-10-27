@@ -751,6 +751,7 @@ def _tcr_expected_crossings(rate, rate_unit, horizon_value, horizon_unit):
 # counted. An expected set can. Adding a metric means adding a line here --
 # deliberately, so the addition is visible in a diff.
 EXPECTED_METRICS = (
+    "scope-audit-lab/null_expectation.py::from_generator",
     "agent-lifecycle-energy/phase_energy.py::integrate",
     "anchor-measurand-crossing/amc.py::crossing_band",
     "automation-gap/driver_hours_evidence_register.py::p_uninterrupted",
@@ -1788,6 +1789,7 @@ def seed():
     _seed_reg_uncertainty()
     _seed_floor_capability()
     _seed_extraction_chain()
+    _seed_null_expectation()
 
 
 def _reg_mod(name):
@@ -3237,6 +3239,43 @@ def _seed_fitness_maze():
               "nothing below eight tenths"),
          case("60 percent at one", ([2.0, 1.0, 0.9], 0.6), 1,
               "one is below twelve tenths at index one")])
+
+
+def _ne_from_generator(distribution, parameters, threshold, n_cases, kind="absolute"):
+    """scope-audit-lab/null_expectation.py::from_generator, imported by path;
+    returns the value only (None for NOT_DERIVED and NO_DENOMINATOR)."""
+    import importlib.util
+    path = os.path.join(ROOT, "scope-audit-lab", "null_expectation.py")
+    spec = importlib.util.spec_from_file_location("_null_expectation", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.from_generator(distribution, parameters, threshold, n_cases, kind)[0]
+
+
+def _seed_null_expectation():
+    """SAL-WO1. The expected null flag count of a thresholded adjacent-delta
+    scan, (n-1) * P(|delta| > th). The None cases are the pins: a relative
+    threshold has no closed form here and one case has no pair, and reading
+    either as 0 would claim the scan flags nothing."""
+    u = {"low": 0.0, "high": 100.0}
+    register(
+        "scope-audit-lab/null_expectation.py::from_generator",
+        _ne_from_generator,
+        [case("shipped demo", ("uniform", u, 10.0, 12), 8.91,
+              "11 pairs x (1 - 10/100)^2 = 11 x 0.81", tol=1e-9),
+         case("threshold at width", ("uniform", u, 100.0, 12), 0.0,
+              "no uniform difference exceeds the full width"),
+         case("threshold zero", ("uniform", u, 0.0, 5), 4.0,
+              "every one of 4 pairs exceeds zero almost surely"),
+         case("normal at 2 sd", ("normal", {"mean": 0.0, "sd": 1.0}, 2.0, 3),
+              2 * 0.15729920705028513, "2 pairs x erfc(1), erfc by hand table",
+              tol=1e-12),
+         case("relative threshold", ("uniform", u, 0.1, 12, "relative"), None,
+              "ratio of noise values: no closed form derived, not 0"),
+         case("one case", ("uniform", u, 10.0, 1), None,
+              "no adjacent pair, no denominator, not 0")],
+        note="checked against the lab's own null_baseline_scan at 4000 "
+             "replications in scope-audit-lab/test_null_expectation.py")
 
 
 def _seed_fitness_bin_self_test():

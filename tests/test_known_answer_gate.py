@@ -121,6 +121,7 @@ MANIFEST = (
     "extraction-chain-join/chain_join.py::traced_fraction",
     "extraction-chain-join/chain_join.py::consumption_based",
     "extraction-chain-join/chain_join.py::reserve_share_band",
+    "scope-audit-lab/null_expectation.py::from_generator",
 )
 
 # Cases known to fail today. A case that starts passing turns this red so
