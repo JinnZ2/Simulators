@@ -1,0 +1,5 @@
+CONSTRUCTED FIXTURE. Not a published methods section. Authored in this folder so the known answer is known.
+METHODS
+Soil cores were collected with a 5 cm split-tube sampler at 10 cm depth. Samples were dried at 105 C for 24 h in a laboratory oven and weighed on an analytical balance calibrated against a 100 g reference mass traceable to NIST. Organic carbon was measured by loss on ignition following Heiri et al. (2001). Elevation was taken from the USGS 3DEP 1 m DEM. Bulk density was calculated using the core volume. Sample identifiers were assigned using the site database maintained by the field station.
+RESULTS
+Organic carbon declined with elevation across the transect (r = -0.62); cores from the upper sites held half the carbon of the lowest. The decline was steeper on north-facing slopes than on south-facing slopes.

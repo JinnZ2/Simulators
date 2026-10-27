@@ -243,7 +243,8 @@ last three; read in order:
 - `corpus-input-gaps/` — input-side gaps + a response-loop sim
 - `coinage-log/` — naming gaps; is the absent word the finding
 - `falsifier-survey/` — Run 1 of a delivered falsifier survey; Run 2 split to its two repos
-- `crediting-rate/` — credit tracks the loanword or the contribution; BLOCKED until ordered
+- `crediting-rate/` — credit tracks the loanword or the contribution; BLOCKED until ordered; rev 2: three visibility bins, a same-side frame gate and a model-authorship gate, crediting mechanical, the return enum local and marked G_ABSENT
+- `crediting-rate/archive/f168f79/` — ARCHIVED 2026-10-05, the second rev-2 build (lost on F5, own fixtures only; cross-format NOT_RUN): credit tracks the loanword or the contribution; BLOCKED until ordered; v2 the same order REVISED beside v1, three model-authored revisions sent un-adjudicated, one removing the input its own RETURN block keeps a class for
 - `gate-check/` — four structural presence checks, file+line, no FAIL label; thresholds in data
 - `anchor-measurand-crossing/` — crossing given a target; prompts parsed from the order, scorer's judgement as data, no run
 - `anchor-position/` — same order, second build; band scored both ways, ABSENT kept apart, two arms behind flags, no run
@@ -274,13 +275,108 @@ last three; read in order:
 - `credential-channel/` — WO-10, five instruments from one field case: I-1 route rank correlation (imported) + objection coding, I-2 the routing-cost join (not procedure), I-3/I-4 gap and inventory vs exposure (imported ols), I-5 attribution at the wrong node; all constructed
 - `publication-loop-work-orders/` — WO-11/12/13, delivered verbatim as study designs and NOT built (the delivery's own line 3: "Not a code build. Do not route to a build model."); WO-11 transfers the measurand-partition designs onto model eval, WO-12 the health-utility anchor's definition-instrument mismatch, WO-13 introspective access as a training variable; documents only, no code
 - `deep-research-correction/` — an external deep-research report on the repo (Kimi) and the correction notice against it (both verbatim), plus a checker recomputing the mechanical items: C-1 forward-dated, C-2 the 157-vs-220 count, C-3 a jul-3026 URL, C-4 (load-bearing) commit-author read as contribution share scored UNPARTITIONED by imported attribution, C-5/C-6 present-in-doc, C-7 carried, U-1 the same-author void scope undeclared here
+- `law-measurement-correction/` — correction notice against an outside report (Kimi OKComputer, "Law as Unvalidated Measurement"), sections A-G verbatim, the report itself not delivered and not committed; CC-3 verification of its UNVERIFIED citations at search-index depth (every primary host egress-refused): VERIFIED 2, CONTRADICTED 2 (XSTest ran Llama-2-70b-chat-hf, not 7B; a 2005 IRS testimony published FY2004 dyed-diesel enforcement aggregates), NOT_FOUND 4; dyed-fuel column A settled as >= 3.9 lb SOLID SR26-equivalent per 1,000 bbl by spectral equivalence (26 CFR 48.4082-1), the ledger itself not located so site and zeroed/moved columns NOT_EVALUABLE; why-recovery and split-ledger/parks NAMED-AND-ABSENT; a frame-substitution eval designed (domain of answer, not refusal rate) and not built; a SECOND pass of the same dispatch, run without the report or the ledger rows after another session had landed `law-as-unvalidated-measurement/` with both, so the two folders duplicate one notice and only one should merge; the passes agree on 4 of 8 CC-3 rows and every disagreement is a NOT_FOUND against a located source, the located one reproducing on re-query in all 3 checkable cases (`RECONCILIATION.md`)
 - `reporting-chain-loss/` — WO-5, transit loss and pre-entry loss kept apart: a linear-Gaussian hop chain whose terminal is an estimator of the composed incentive stack not the ground (reader bias B/G amplifies with the chain, directed loss compounds where random cancels, the DPI floor used as null not re-derived), plus the pre-entry register (7 gates none logged) and Test B calibration with the delegation confound made a number and the proxy-undeclared refusal built in
 - `chain-position/` — WO-1, can a container detect it is a step in an unobservable chain; the OWASP clause audit returns the null the order predicts (lineage exists at the gateway, 0 clauses place position inside the agent) and the null is the finding, the reachable-controller compounding made a number (four factors 0.9035) with the unassessed-factor RULE built in as UNPROPAGATABLE, and the second-order gap UNEXAMINED vs NOT_AUDITABLE on the scorer's own provenance
 - `terminal-crossing/` — WO-3, is any system TERMINAL; the six conditions parsed from the order not retyped, the falsifier attacked and moved from UNSATISFIED to UNSATISFIABLE by an uncovered unshieldable medium, the three asymptotes returning three distinct shapes and none a zero, TERMINAL reachable only on a constructed control
+- `automation-gap/` — six documents and an evidence register, delivered across three drops and landed verbatim: a measured-deployment audit of where automation's chain still runs through a person, a 16-record demo harness, the Komatsu AHS per-input ledger with its v2 unmeld pass, a zero-burden field-evidence spec, that spec's first live ledger, and — arriving a drop later — `FIELD_LAYER_SEED_ROADS`, which is `WP1` and `WP2` themselves. Everything in the drop is CARRIED (egress refuses every publisher host), so `audit.py` checks only whether the documents agree with themselves — and they largely do: all six distribution columns reconcile with the 16-row matrix at 16 each, exactly one record is 6/6 and F1 names it, and 6 of 6 derived Komatsu cells recompute at the precision the ledger prints (the tolerance is each figure's own shipped precision, `_halfwidth` **imported** from `move-set/` where it is already registered, so `+12%` agrees with 11.77 and would not if stated to two places). **`AGA_003`, the one that moves:** F1's second sentence — *every humanoid record fails at least three* — is REFUTED by the matrix under it, since Figure 02 and Digit each fail exactly two, counting ABSENT and PARTIAL against; the first sentence stands and the repair is a number. `AGA_006`: the +40% tire figure is the TOP of the 6,000–7,000 vs 5,000 range the ledger itself cites, whose midpoint gives 0.77 rather than 0.71 — separate from, and smaller than, the drop's own U3 finding that the gain is confounded by the surface upgrade AHS triggered. `AGA_004`: F2's counts hold as PASS-counts while one of its sentences reads `variation: 0 of 4` as *every deployment is one task type*, against the corpus's own stated rule that ABSENT is a property of the record — F3 makes the stronger claim correctly, by naming the tasks. `AGA_010`: two defects in the audit itself, found by running it and both under-reporting the drop — a greedy separator quantifier that ate a digit group out of `6,000-7,000` and returned a tire range of `[20.0, -100.0]`, and a stipulated tolerance that flagged a whole-percent figure as a disagreement. **`AGA_009` is HALF CLOSED by arrival:** `WP1` and `WP2` were cited as filed and are now the two sections of the seed, which is what `FIELD_LEDGER_001` entries 001 and 005 read their value against; the *trades-shortage ledger* and the *claim ledger* are still absent and still cited, so the claim stands on half its subject, and the check now distinguishes FILED from CITED because its first version did not. `AGA_008`: all six documents self-date one day ahead of the session landing them, recorded not adjudicated. **The seed's own readings.** `AGA_013`: its stated *gravel ≈ 2.5–3.7× paved* recomputes from the cells printed beside it (1.07/0.43 = 2.4884, 1.07/0.29 = 3.6897), both agreeing at the shipped precision of the bound. `AGA_014`: two rows of one table are **35× apart on a comparison they both make** — *~4× paved* maintenance frequency against a Minnesota row whose dollars give 140.3 — and they are different quantities, so it is a tension rather than a contradiction and **neither figure is scored**, with the audit function carrying no verdict token and a check asserting it; what would settle it is the county's units on a $13.45/mi/yr paved cell. `AGA_015`: `INDUSTRY-STATED` labels **7 rows** — every WP2 requirement row — and is declared in no header, where the declared set is MEASURED/VENDOR/FORECAST/CONSTRUCTED and the nearest member is `VENDOR`, the label the section's framing (*the autonomy industry's own stated requirements*) is written to avoid. `AGA_016`: of the seed's two citations into its siblings the Komatsu V2.1 one resolves and the Aurora one does not — the observer, roadside-assist and weather facts are in the gap audit and the demo-corpus audit carries none of them (term counts 0 against 4), so the facts are real and the pointer names the wrong sibling. `AGA_018`: *18 companies, 90% response* and *12/18* have exactly one integral reading — 18 responded out of 20, since 18×0.9 = 16.2 is not a count — so the share reads over respondents, which is the favourable reading and is settled by arithmetic rather than by phrasing. **`AGA_019`, three defects in this session's own checks, all found by running and all running toward the reassuring answer:** a line-wrapped `4×` that under-counted the document's own consistency, a falsifier-id scan that read a **citation** of `AUT-F1` as a second definition, and `named_and_absent` reporting both missing ledgers **delivered** on the strength of the sentences citing them — a citation read as a filing, in the check whose whole job is that distinction; the last two are one error at two sites and are the shape the siblings record repeatedly, *a mention is not the thing*. **The evidence register, one drop later and revised once.** `driver_hours_evidence_register.py` is a different kind of object from the six — they are a self-contained drop whose figures check against each other, it is a map of EXTERNAL evidence on long driving days, fatigue and tenure, twelve sources and ten questions, five of which it marks UNREAD itself — so `register_audit.py` **imports** it rather than parsing it (the objects under test are the register's own) and checks it against its own declared rules rather than against its sources. **`AGA_021`, the one that moves a number:** S1 and S3 are not two sources — S3's author list is a strict SUBSET of S1's (Braver, Preusser, Ulmer), the two carry identical sampling-frame flags and their headline figures agree (*~3/4* and *73%*), which is what one group's instrument produces and is not two confirmations — so QA's four nominal sources are **n_eff 3**, computed through `effective-redundancy-audit`'s own arithmetic, imported and not reimplemented, with the collapse a DECLARED boolean so a reader who holds them independent gets 4 and the check says which. `AGA_020`: the register declares ONE status scale *“for every source”* and runs it at **four sites through three mechanisms** — a `status` field, a question-tuple slot, and (added by the revision) **inline `[TAG]` markers inside free-text prose**, in a `holds` entry and a `TERM_NOTES` field; a slot a reader can enumerate and a bracket in a sentence are not the same thing, and the declared scale gives no indication the second kind exists. Three question tokens (`PARTIAL`, `SUPPORTED`, `UNRESOLVED`) carrying five of ten verdicts are declared nowhere, and `DERIVED`/`PROPOSED` **close on one reading and not the one the claim registered** — both are now exercised, and only as inline tags, reaching no status slot anywhere. `AGA_022`/`AGA_023` are one gap at two sites: the flag list is headed *every source carries one* and S6 carries none with no `UNKNOWN` member to carry, so an empty list reads as *no concern* and *not established* identically — and S6 is exactly what stops QE's *“every source here is ON_ROAD cross-section”* (7 of 11 as written, 7 of 8 over samples) being checkable at 8 of 8; supplying S6 a flag closes both, asserted in both directions. **`AGA_024`:** `ON_ROAD` is defined as a METHOD (*interviewed while working*) and carried for a CONSEQUENCE (survivorship) — S5 is *carrier records (crash, moving violation)*, nobody interviewed, while the bias it flags still holds, and **the revision added a second instance** (S11, *carrier records*), independent recurrence since the author has not seen this audit. `AGA_025`: `holds` carries findings and reading-state notes in one list with no field between them, **10 of 33** are notes, and three of eleven sources contribute no finding at all. `AGA_028`: *~1,000 mi in ~15 h, no HOS stop* derives **66.7 mph sustained**, and the advantage it names cannot be sized — **no driving-hours limit is stated in the register or in any of the six delivered documents**, so QH is not merely unmeasured for want of dwell data, one of its two terms is absent from the corpus. What holds: `AGA_026`, the one containment the register admits (past-year 25.4% under ever 47.1%, shown able to fail on a constructed reversal); and `AGA_031`, the operator's own record scored on the same scale as every published source with a stated non-inference — *N_OF_1 bounds what is possible, it does not estimate a rate* — the one question resting on it alone coming back UNMEASURED with the reason in its own status field. **`AGA_030`, four defects in this session's own checks, none found by reading:** a bare boolean that printed S7's unknown `where` identically to S5's measured mismatch (the absent-vs-known-negative collapse, committed inside the check that decides `AGA_024`); a bare `40%` pattern matching the Komatsu tire figure, a different quantity; `AGA_031` first written with a count the data does not carry, now computed by a check rather than asserted; and — `UNI_010` arriving through the claim table — **writing `AGA_028` down put the phrase *driving-hours limit* into a `.md` file in the folder the check scans, so the next run read the audit's own record of an absence as evidence of a presence** and the suite went red, repaired by scanning the delivered corpus and the audit's own output APART with the audit-side count printed rather than excluded, since an exclude list closes the loop by hiding it. **The revision, and twelve pinned checks fired on it — every one naming a number that moved, which is the suite working rather than the revision being wrong.** It added a `TERM_DRIFT` flag, a `TERM_NOTES` block, a twelfth source and two questions; `register_audit.revision()` measures it at **+64/−5 against `1bb8471`**, all three top-level objects changed, none byte-identical, resolving the previous version **by content** rather than by a position in history, which would compare against the same bytes as soon as an unrelated commit landed between them. **`AGA_035`, the one that inverts:** the closing count reads one status token, the revision added two open questions under two others, so the headline reads **5 of 10 where 7 of 10 are not answered** — a number reporting open cells that went DOWN as a fraction because open cells were added. `AGA_033`: S11 is *“as summarised in McCartt et al. 2000”*, which is S2 — a second shared node, of a different kind from S1/S3, and **invisible to the author-token check** because the relation is stated in prose after the parenthesis. `AGA_034`: the term note's remedy names four sources and the flag marks two, the two unflagged being exactly the ones already `UNREAD` top to bottom. `AGA_037`: one defect in this session's harness, found by running — S11's `where` is a strict **prefix** of S5's, so masking in dict order left the token the arm was written to mask, repaired by masking longest-first, with the exemption still one token wide and two further hits **reworded rather than exempted**. **`AGA_038`, what the revision gets right and the strongest content in the folder:** a **citation-chain conversion** recorded as an observation with both wordings carried — the S2 abstract's *at the wheel of a truck* restated downstream as *while driving*, which is `term-drift-citation`'s subject arriving from another direction on a case where the two readings have **opposite signs for risk**, a rest act and a hazard event counted as one item; and QJ, which holds a contradiction between two sources the register already carries (experience predicting MORE *fell asleep at the wheel* against crash risk FALLING with experience), names three rival explanations, says which predicts it fully — the register's own term drift — and **picks none**. **Two addenda then added the first runnable arithmetic in the folder** — a continued-work block and a proposed gate map G0–G4 — as **pure additions**, the four prior objects byte-identical across them and asserted. Every input is declared `PLACEHOLDER` by the register itself, and it recomputes: interrupt rate **0.330/h**, mean gap 181.8 min, binding row (a full sleep cycle plus high sleep inertia, 125 min) at **P = 0.503**, a coin flip; and the gate's own note that *the binding term is `p_machine_fails`, not raw event rate* holds exactly, the highest-raw-rate class contributing 0.05 against a different top contributor at 0.09, whose removal takes the binding row to 0.607. **`AGA_041`, the sharp one: one caveat is stated in two places under two different conditions and the two run opposite ways** — shown exactly, no simulation, both being Poisson integrals. Bursting alone makes Poisson a **FLOOR** (a burst of k at one instant is a Poisson process of bursts at λ/k, so P rises 0.503 → 0.934 at k=10); a rate peaking at the hour rest is needed makes it a **CEILING** (0.503 → 0.189). The function's docstring names the second condition and is right; the G0 note **drops the qualifier**, describes the first mechanism and draws the second's conclusion — a qualifier lost between two occurrences of one phrase with the reading inverting, which is this register's own subject instanced in its own text, and correcting it makes the register's case **stronger**, strongest where it binds. `AGA_039`: the two blocks the gate runs on carry provenance by different means and only one survives import — `EVENT_CLASSES` (the rate) has a source field on every row, `REST_BLOCK` (the window) has comments, so an importer gets four bare numbers, one of which states no provenance even in a comment. `AGA_043`: **`AGA_020`'s substantive half closes** — `TRANSFER_NOTE` draws on S5's mentoring recommendation and on the term-drift note to produce a third statement neither carries (*mentoring runs on words, and where a term has drifted, told practice arrives inverted*), tagged `[DERIVED]`, with the behaviour-anchored record schema beside it as that conclusion built. `AGA_042`: `p_uninterrupted` is typed as a probability with an unguarded domain (a negative window returns 1.391), reported not patched since the file is delivered, and **now registered in `tools/known_answer.py`** with five cases whose note states the one error class the set cannot catch — `λ·minutes` is symmetric, so an argument swap returns the same number. `AGA_035` strengthens again: QK lands in a **separate list** `main()` does not count, so **eleven questions exist, the closing number is taken over ten, and eight are not answered**. **`ADDENDUM_3.md` then arrived in NOTES rather than Python**, so the two are read as delivered and where they disagree it is reported rather than resolved — nothing transcribed from one into the other. `AGA_044`: the note declares a status rung (`EXPLORATION`) the register's six-rung scale does not carry, a **sixth site** for one vocabulary and the first in a different file, so a reader of the register alone cannot discover the rung exists. `AGA_045`: a `motion_sleep_history` factor entered OBSERVED at N=1 makes G0 a **per-operator** gate (*“G0 can PASS for one operator and FAIL for another on the same route”*) where the register's G0 names route and season and never operator, and holds its window as four constants. **`AGA_046`, the consequence made a number:** under a fleet rule set to the longest window the best motion-sleeper gives up **30.1% of their own capacity** — and the structural half is sharper than the arithmetic, since the gap vanishes at **both** ends (at a low interrupt rate everyone clears, at a high one nobody does) and peaks at λ = 60·ln(w₂/w₁)/(w₂−w₁) = **0.678/h**, so *the cost of a blanket rule is largest exactly where the rule is deciding anything*, with the placeholder regime at 82% of that peak; no fleet aggregate is emitted, the mix of operators being unmeasured. **`AGA_047`:** X1 predicts *early habituation → smaller motion effect* while the note's own SCOPE LIMITS names a **good-sleeper ceiling** predicting the same direction — so the probe as written (*one covariate*) cannot separate them, and the second covariate (*baseline must be recorded*) sits one section above the probe, in neither the probe nor X1's compressed `scope` field, which carries the stimulus limit and drops the ceiling: **the note contains its own confound and its own repair, and the compressed record drops the half that confounds it** — third instance here of a qualifier lost in compression, after `AGA_041` and the register's own TERM_NOTES subject. `AGA_048`: X1's two halves are **both outside** the register (unlike QJ, which held a contradiction between two sources it already carried), and the six frame flags have no member for the sampling limit the note states (*young males, lab, Swiss*). **`AGA_050`, what holds and the hardest case for it:** the flip — *the population a fleet rule is written for may be the unusual one, and your history closer to the species baseline* — is a generalization from the `N_OF_1` source and the one place the operator's own record could buy a favourable exemption; it is declined in the same breath it is proposed, **fenced four ways** (PROPOSED, EXPLORATION, relevance UNKNOWN, declared not load-bearing) with X1's anchor field stating its own n. **The note's material then arrived AS CODE, and two more revisions with it.** `AGA_044` **closes by arrival** — `EXPLORATION` is the register's seventh docstring rung, so a reader of the register alone can discover it — and the second half does not, since the rung is carried by **no entry field** (`AGA_053`), applied by the name of the section its entries sit in, and reads `unused_anywhere`, the first rung ever to do so; X2's own field says `relevance: DIRECT ... higher than X1` against a rung whose definition is *relevance UNKNOWN, not load-bearing*, a ranking inside a list that declares there is none. **`AGA_054`:** `SLEEP_QUALITY_FACTORS` puts `AGA_045`'s per-operator term into the file — four factors each stating a status, *operator* now in `G0_NOTES` and **still not in the G0 gate entry** (the two sites read APART, since a blob over both reads the arrival of a note as a change to the gate) — and the only reader of the list is a print, while `g0_window_needed`, the function the gate's window comes out of, reads `REST_BLOCK`'s four constants: declared in the file, absent from the number. **`AGA_051` and `AGA_059`, two faults in this audit's own machinery, both found by running:** `_declared()` split a vocabulary block on two-or-more spaces where the rung names are padded to a column, so the **longest** name — eleven characters, `EXPLORATION`, the newest — was dropped, six rungs read against seven declared, which would have reported `AGA_044` as still open, *a parser that drops the longest entry drops the newest, because a new name is what pushes a column*; and `AGA_020`'s falsifier reads *a source carrying `DERIVED`*, which the next revision put inside S10's `holds`, so it **fired a second time by the same mechanism in a claim whose own body records the first firing and then restates the ambiguous wording verbatim** — the falsifier now names the FIELD, and the fault is read out of git rather than recalled, so the repair turns the check red on purpose. **`AGA_052`/`AGA_060`:** one delivery shipped a **duplicated tail** (two `__main__` blocks, the addendum-3 header printed three times) with the importable surface intact throughout — 15 top-level objects, none defined twice, so the cost fell on a reader of stdout and not on this audit — recorded rather than repaired since the file is delivered, and **the next delivery removed it anyway**, the audit never having been sent. **`AGA_055`:** G0 note 1 is three sentences tagged `[OBSERVED]` / nothing / `[DERIVED]`, and the untagged one is the causal step (*“So the variable is trust + driving consistency, not motion itself”*) sitting between a tagged pair in a register whose own device for epistemic class is the inline tag. **`AGA_056`:** the **good-sleeper ceiling** and the figure that sizes it are in **different documents** — the note states the limit and carries no number, the register carries *“18 young males, 96% baseline efficiency”* and states no limit — **computed, neither has both**, with the word *ceiling* occurring once in the register in the **Poisson** sense, a different quantity, and the three senses separated because the first version of the check matched all three and read the split as closed. **`AGA_057`:** X1 exists in both documents and the two differ — field sets by three names, and `half_a` at **49 characters against 301** on the same claim, the long one naming dated studies. **What the last revision adds is a third explanation for the tenure curve.** S10 gains two entries (ran nights as a trainee, using exercises, katas, stretches and scents for state regulation) and QE gains an **IMPORTED-skill arm**: CDL tenure counts months licensed, not state-regulation skill brought from elsewhere, so a novice by tenure can be adapted by practice and the screen measures a proxy. **`AGA_064`:** the register's own rule says an `N_OF_1` record *bounds what is possible and does not estimate a rate*, and the arm states a possibility, estimates nothing and carries a `[DERIVED]` tag — the rule obeyed on the one source where breaking it would be cheapest — while the cost sits in the slot, QE's source list being **empty** where its next-step field leans on S10 by name, so a reader counting off the structured map gets six questions resting on the N=1 record and misses this one. **X2 then gains a `channels` field and three things follow.** `AGA_061`: `EXPLORATION` is a **sixth inline-tag site** the vocabulary checker does not scan (its scanned set read off its own AST, so widening closes the check by itself) and `X2.channels` is the first field in the register to carry **two rungs in one string**, `[DERIVED]` on one clause and `[PROPOSED]` on another — **the omission is silent today**, every token there also occurring at a scanned site, which is exactly what makes it invisible, since a rung appearing only there would read as unused anywhere, the state `EXPLORATION` is in. `AGA_062`: the two entries now carry **different field sets with no schema** and `addendum3` guards with `if k in x`, right for a renderer and meaning an absent field and a field nobody thought to fill print identically — with the substantive cost that `channels` names **motion** as a portable sleep cue and motion is X1's entire subject, X1 carrying no such field, X2 naming X1 and X1 not naming X2. **`AGA_063`, the rarer half:** the anchor records *“categories only, specifics not shared, none requested”* — the `scope` field declares a consent limit and the anchor records it being **exercised**, so what is entered as provenance is **an ask that was not made**, which has no precedent here, where the usual failure is a record that does not say the ask happened. **`AGA_065`:** the revision reader resolves the previous version by content, which is what survives an unrelated commit landing between two versions — and the consequence is that two deliveries landing between one pair of commits come back as their **union**, nothing estimated to split them. **`AGA_066`, found by running the suite AFTER the commit, where before it could not fail:** the check written to hold `AGA_059`'s fault in the past read `HEAD`, so **committing the repair erased the record of the firing** — `AGA_033`'s own shape, in the same file, one hour after amending `AGA_020`; it now resolves the newest committed table whose falsifier names the token only, prints the commit, and a test asserts the literal `"HEAD:` appears nowhere in it. Sixty-six claims, three UNVERIFIED — nothing here is evidence about haulage, robots, terminals, roads, driving hours, fatigue, tenure, routes, seasons, sleep, infancy or any vendor. Stdlib only, no network, CC0.
+- `thwaites-risk-audit/` — an outside document that says it **ran this
+  repository**, landed verbatim in both its renderings, plus the checks.
+  `external-audit/` and `deep-research-correction/` hold reports *about*
+  this tree; this one opens *"All tools below were actually cloned and run
+  from `github.com/JinnZ2/Simulators`"* and every tool it names is in the
+  tree beside it — so the TOOL claims are reproducible here and the PAPER
+  claims are not, and `audit.py` enforces the split (every `run_*`
+  function imports the sibling and executes it; 15 DOIs named, 0 verified,
+  egress allowlist). **`TRA_002`, the headline, refuted by content:** the
+  document's own convergence note reads *"`AMOC/research.md` (commit
+  f35e1f5) independently added Kasuya and Nian … two independent routes"*,
+  and that blob is a **byte-exact prefix of v1** — 27070 of 46767 bytes,
+  sections 1–10, under v1's own title and v1's own uncorrected *Bradley et
+  al.* heading — so it names those papers because **it is this document**,
+  filed on `main` as AMOC research; one route, resolved both by the sha
+  the note cites and independently by walking the path for a prefix blob
+  (`AGA_066`'s discipline). `TP_003` arriving on a citation claim, inside
+  the document that computes `N_eff = 1` for somebody else's observing
+  system; the file on `main` is recorded and not touched. **`TRA_006`:**
+  the `reservoir-chain-coupling` block is `signal_chain()`'s shipped
+  fixture output with four node names substituted — 4.20/9.00, 2.94/12.00,
+  2.06/15.00, 1.44/18.00, every number identical, the boundary inflow
+  parsed out of `chain.py` rather than retyped. **`TRA_008`:** relabelling
+  that fixture's columns `independent`/`coupled` to `max`/`sum` makes all
+  four rows read as arithmetically impossible, since `a+b ≤ 2·max(a,b)`
+  and row 1 is 9.00 against 8.40 — under the module's own names there is
+  no difficulty. **`TRA_007`:** the drop's own R4 relabels the 4/4 breach
+  a DEMONSTRATION and gives the wrong reason (*"an identity"*); `sum ≥
+  max` fixes only the one-sidedness, and the module ships two nulls that
+  return REFUTED, so the detector does not always fire. **`TRA_013`:** κ =
+  0.000 is **forced** by the reported `N_eff = 1` — a constant second
+  coder returns exactly 0.0 in **62 of 62** non-degenerate codings, two
+  equal constant coders return 1.0 — so it carries no agreement
+  information and R6's *"one model coded twice"* is the weaker reason.
+  **`TRA_010`:** `compare.py` holds a hardcoded three-arm dict, so the
+  *"four-arm result"* is not what it computed. **`TRA_012`:** `[COVERED
+  widen]` means the question was REACHED and the prose reads it as
+  residual — and a COVERED-by-widen is `MF_004`, still unrepaired, so the
+  conclusion is right in spite of the line it cites. **`TRA_019`/
+  `TRA_020`:** *"≈ 0.50 Sv"* is `sitespec`'s own `sv_at_spinodal` anchor
+  read back out (converting the document's own F through the calibration
+  gives 0.5177, since it hardcodes a third spinodal at 0.217), and the
+  docstring hands the document a published band — collapse thresholds
+  *"cluster ~0.1-0.4 Sv of ADDED freshwater"*, the anchor's added flux
+  0.35 sitting inside it — which section 7 does not report, against the
+  document's own opening rule *"report the band, plan against the short
+  end"*. **`TRA_018`:** the spinodal runs **0.2278–0.2380** over six
+  ordinary grids and the quoted 0.228 is the coarsest and lowest, every
+  value a lower bound. **`TRA_022`, the one step running toward
+  overstating:** 50–60 Gt → ~0.15 mm SLE is exact **for grounded ice** and
+  the quantity named is floating-shelf **basal** melt, whose direct
+  contribution is the displacement residual, ~**9.3× smaller**.
+  **`TRA_026`:** R1's *Bradley → Williams* repair reached the audit and
+  **not** the one-page field brief, which names Bradley twice including in
+  its own PROVENANCE line — the repair that missed the audience-facing
+  page. **`TRA_004`:** none of the nine stated input files is in the
+  delivery, so no run is reproducible and only tool behaviour is
+  checkable. **`TRA_023`/`TRA_024`:** four gap blocks carry 7/7 schema
+  fields and the register's own reader ingests **0 of 4** as delivered
+  (`FIELD_RE` wants four leading spaces), THW-05 is prose, and THW-02
+  carries **two** KINDs in a single-valued field whose `STATE`
+  (`assembly`) *forces* the other one through `markers.kind_forced` — two
+  gaps in one block, `GM_010` recurring from an author who has not read
+  the register. **`TRA_003`, a fault in this audit found by running:** the
+  first mechanical test for R2 read a document-wide token and returned a
+  **false negative**, since v1 already uses `UNVERIFIED` for an unrelated
+  lead — `UNI_009`/`T1-1` inside a repair-log checker, repaired to read
+  the figure's own lines. What reproduces exactly: S1's 0.9989/0.0000 and
+  0.7984/0.0000 from the module's shipped defaults (`TRA_005`, and R4
+  relabelled two blocks and not this one), OIR's 0.5/0.0 (`TRA_017`), and
+  2.6 mm/yr → **0.02974 Sv** against the document's 0.030 (`TRA_021`,
+  registered in `tools/known_answer.py` with `None` and a measured zero as
+  the discriminating pair). **`TRA_028`, what holds and it is unusual:** a
+  six-row repair log *before* the body, its own load-bearing figure
+  flagged UNVERIFIED inline at all three sites, a falsifier **retired**
+  when its premise turned out not to be in the source, a counterweight
+  entered that cuts against its own coupling narrative with a falsifier
+  written to pit two of its own sections against each other, an
+  over-transfer scoped down on the operator's critique, and a *"still
+  unrepaired"* list naming two unsourced assumptions in its own
+  load-bearing section. Twenty-eight claims `TRA_001..028`, one
+  UNVERIFIED; nothing here is a statement about Thwaites Glacier, any ice
+  sheet, the AMOC, ENSO, sea level or any paper. One declared
+  `no_severity` exemption, one token, three arms. Stdlib only, no network,
+  parses under 3.9, CC0.
 - `assessor-coupling/` — WO-6 (the second document under that ordinal), assessor-assessed coupling as a recurrent failure mode; hop-1 kept structurally out of the independence vector, the record's summary sentence refuted by its own scope limit at a negative arm of zero, no organization named and no field for one
 - `unowned-join/` — WO-4, the shape with seven faces and a registered term gap; A1-A4 stated formally and made checkable, face 6 NOT_EVALUABLE on the order's own reason, the order's "no term means no code" refuted by the folder building it and no term coined
 - `instrument-index/` — a REBUILD from a lost original: 13 fields, two renderings from one pass, a 0.70 axis falsifier that cannot fire where nothing is rated
+- `cooperative-substrate-proof/` — P1-P5, each standalone; the cooperative substrate the competitive frame runs on, as a coverage argument; C1-C4 coded into the parts
 - `stability-trigger-envelope/` — DISPATCH ESP-1, a stability trigger outside its validation envelope (cab sensor vs trailer mass on serpentine downgrades); one instrument `descent_record.py` on CONSTRUCTED data, F1-F5 firing as regression, NEITHER_MODE added to the dispatch's five labels, clock offsets detected never corrected, relocation counted never scored; real run NOT_RUN, T3/T6 NOT_BUILT, T4/T5 UNMEASURED
+- `human-sensing-prior/` — one-file CC0 instrument against the prior that human multi-channel sensing is costly; the invariant cost verdict as a CONSTANT_FIRES tell with a self-check a model runs on its own draft, the animal convergence as evidence, intake-vs-decision scope limit stated, F1-F3 not run; two pathways kept (A `human-sensing-prior.md`, B `PATHWAY_B.md`), predictions committed before `pathways.py`, a six-arm per-class harness (NONE/A/AF/B/AB/BA, opaque ids, arm withheld from the sheet) under three dated amendments fixing the tie band, kappa floor and leakage check, then adding a length-matched arm AF, a k=3 pilot gate and sha pins on A and B, then a chat-side runner job (pathways-run/1) and its import; pilot job committed, nothing run
+- `skill-drain-simulator/` — single-file browser model: veterans leave, scrap climbs, the log blames machines; all constants assumed
+- `floor-resilience/` — toolkit *(non-stdlib)*: where floor skill lives, how fast it drains, what runs when power/software/vendors fail; drain sim replays the JS model exactly; published 14-mo lead is one draw (converged 15-19)
+- `reg-uncertainty-registry/` — WO-REG-1, regulatory decisions under uncertainty as a registry: direction stored twice (action, outcome), two-sided consequence, actors, authority chains, conflicts and gaps as nodes; RUS-0.2 reproduces its own Annex A, the one-directional claim reads HOLDS_UNTESTABLE on the annex basis and FAILS on the action basis; RUS-0.3 PROPOSED; every count rendered from the registry, no human second coder
+- `floor-capability/` — FLOOR CAPABILITY draft v0 landed verbatim and instrumented; weights UNSTATED not unrun, hidden_cost refused as a scalar, scrap at event level against the draft's code-level map, tenure test with an equipment-only control; all CONSTRUCTED
+- `gap-instruments/` — evidence notation for coordination systems, physical limits, discrepancies and abstentions; MEASURED/ESTIMATED/UNKNOWN/GAP per field, no verdict; two supplied files verbatim in `source/`, eight marked fixes in the working copy, mirrored byte-identical in `tools/` here and in method-layer
+- `extraction-chain-join/` — the extraction-money-power-emissions chain, G1..G7 as instruments not verdicts; order RECONSTRUCTED from the session summary; coverage on every reading, NO_PATTERN added to the four branches, end-to-end effect refused; all CONSTRUCTED
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -10891,8 +10987,7 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   confirmation from a **second trophic level** — a woodpecker whose
   face-specific foraging reads the prey distribution, so the
   aggregation is real not an observer artifact and you need the
-  woodpecker not the insects. `check_coinage.py` (selftest 22/22)
-  computes the structural facts (entry well-formed with no adopted
+  woodpecker not the insects. `check_coinage.py` computes the structural facts (entry well-formed with no adopted
   name, every rejected term reasoned, candidates raised none adopted,
   the woodpecker cross-check and the absence-set-on-behaviour instrument
   both named) and states the **null discipline on the page**: one
@@ -10906,7 +11001,25 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   surface does not afford it — the `uninstrumented/` absence set one
   substrate over, the omission the honest side. Provenance separated
   per `AUDIT_CONTRACT.md` (Kavik's lines marked, the cross-links the
-  render's). Stdlib only, parses under 3.9, phone-buildable, CC0.
+  render's). **The STATUS split of the operator's memory file** then
+  landed as a rebuild with the source absent:
+  - `/topics/coinage-log.md` is ~46.9k chars and the export truncates
+    at 8k. The chunk route is unavailable and chunk 1 was not provided.
+  - `coinage-log.md` (File A, coined terms) holds 0 entries, with its
+    count stated UNKNOWN and not 0.
+  - `vocabulary-gap-slots.md` (File B, unnamed slots / failure points /
+    status fields) holds one entry. It is seeded byte-identical from
+    the in-repo render and labelled NOT chunk 1.
+  - `MISSING_SOURCE.md` marks all 6 chunks MISSING_SOURCE, with 0 chars
+    received and nothing reconstructed.
+  - The checker's section 6 pins that state, so an arriving chunk
+    turns it red on purpose.
+  - Its seed-identity check failed on first run. The extractor matched
+    File B's prose MENTION of the `## ENTRY 001` heading before the
+    heading itself. It is repaired by anchoring at line start and
+    pinned both ways.
+  Check count printed by `python3 coinage-log/check_coinage.py
+  --selftest`. Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `frame-instruments/` — A bundle delivered as one file and written out
   verbatim (`README.md`, `liftable/five-state-grading.md`,
   `liftable/reconstruction-procedure.md`), then all three referenced
@@ -11054,7 +11167,157 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   excluded and counted, never estimated (`CRD_002`); two constructed worlds
   return `ETYMOLOGY_TRACKING` and `CONTRIBUTION_TRACKING`, so the return is
   not constant (`CRD_001`). `bin_gap` registered in `tools/known_answer.py`.
-  Eight claims `CRD_001..008`. Stdlib only, parses under 3.9, CC0.
+  **REVISION 2 then landed** (`WORK_ORDER_V2.md`, verbatim beside v1;
+  `crediting_rate_v2.py` beside the v1 module, which is unedited) — three
+  visibility bins (`visible` / `technical_only` / `not_retained`, plus
+  `ambiguous`, a bin and never an assignment), two hard gates in front of the
+  comparison, and crediting made MECHANICAL. **`CRD_009`, the finding: the
+  revision deletes the input `CONTRIBUTION_TRACKING` was read off.** v1 gated
+  it on a misattribution rate — narrative naming the receiving tradition as
+  originator against the attested ordering — and rev 2 codes
+  `origination_vs_absorption` *"from attested dates only, never from
+  narrative"*, removing the narrative half and with it the comparison, so the
+  revised schema carries **no contribution proxy at all** while fixture F2
+  requires that return on a contribution-tracking world; the replacement built
+  here is the attested **priority margin** read as a Spearman correlation, the
+  only contribution-shaped quantity the schema still carries, declared
+  `[CHOICE 8]` and not in the order. **`CRD_010`, stated before any run:** the
+  pre-stated ordering `visible > technical_only >= not_retained` ALREADY
+  ENCODES the visibility hypothesis, so the discriminator's two branches are
+  not symmetric — *tracks not_retained* sits inside the ordering, *tracks
+  visible* violates `visible > technical_only` and refutes it — and they are
+  not two outcomes of one neutral test. **`CRD_011`/`CRD_012`:** the second
+  comparison is non-strict, so the ordering holds across a continuum and
+  cannot locate the middle bin; `position = (r_tech - r_not)/(r_vis - r_not)`
+  is reported for that with a stipulated cut, and is **UNDEFINED — never 0.5
+  — when the outer bins do not separate**, registered in
+  `tools/known_answer.py` with 0.0 / 1.0 / a measured 0.5 / two `None`s, since
+  a midpoint on a denominator near zero is indistinguishable from the measured
+  halfway case. **`CRD_013`:** `model_authored` is three-valued and **absent
+  is not false** — a header without it is refused at load and a `null` blocks,
+  because an absent provenance field read as false is the contamination going
+  unreported. **`CRD_014`:** `FRAME_ASYMMETRIC` has two readings and the order
+  states one — a list that is *uniformly* `language_side` passes the stated
+  same-side rule and still cannot have produced its own `not_retained` bin,
+  since no linguistic index enumerates a word that did not survive; both fire
+  with distinct reasons. **`CRD_015`:** the blind moved with the revision and
+  stayed structural — v1 kept the BIN off the coding file, rev 2 says the item
+  name carries its own bin, so the NAME is refused and the join is on
+  `entry_id`. **`CRD_016`/`CRD_017`, the mechanical measure's two judgements:**
+  the alias list is the one judgement inside the match (a tradition named by a
+  word the list lacks reads as uncredited, and the render prints the
+  per-tradition count), and the sentence splitter is the sharper one — *first
+  N sentences* needs a splitter, an unguarded one breaks on date abbreviations,
+  and those are commoner in older entries, so **the measurement error is
+  correlated with N2's own control variable**; both splitters ship, the moved
+  set is reported by antiquity band, and on the splitter fixture 8 of 16 items
+  move with **all 8 in the older band** while F1 reads 0 of 17, a property of
+  that corpus and not evidence the failure mode is absent. **`CRD_018`:** the
+  order's NOTE is structural — the bin's correlation with antiquity and with
+  path length prints ABOVE the rate table, before any fit, reading −0.598 on
+  F5. **`CRD_019`:** all seven returns occur in the selftest, including both
+  asymmetry readings and both confound controls. **`CRD_022` UNVERIFIED:** the
+  real run is NOT RUN on the order's own open item — a technique-side
+  transmission catalogue to draw ALL bins from, unidentified — and until one
+  exists there is no admissible item list at all, since a language-side list
+  fails the frame gate by construction and a model-drafted one fails the
+  contamination gate by declaration, which is why **no item list was authored
+  here**. **`CRD_024`, a correction from outside the folder:** `CRD_006` and
+  `CRD_021` recorded the method layer as absent and the F half is REFUTED —
+  the branch set EXISTS at `JinnZ2/method-layer` beside four other tools, so
+  `branch_set.json` is a **cross-repo pointer, not a missing build** (carried,
+  that repository being outside this session's GitHub scope, so recorded
+  rather than checked). The same report settles the G half the other way:
+  **none of the five is a return envelope**, so G is genuinely absent and the
+  order's instruction for that state — define the enum locally, mark
+  `G_ABSENT` — is what the build owed and did not ship; it ships now, declared
+  beside `RETURNS` with the five carried tool names, printed in every render
+  above the numbers, asserted four ways, and the three false strings corrected
+  in place rather than deleted so the misreading stays on the record. Every
+  `v2.` fixture is CONSTRUCTED with invented tradition names and
+  nothing is a statement about any technique, tradition or person. Twenty-four
+  claims `CRD_001..024`; check counts printed by `python3
+  crediting-rate/crediting_rate.py --selftest` and `--selftest` on the v2
+  module. Stdlib only, parses under 3.9, CC0.
+  **ARCHIVED 2026-10-05, and what follows describes the archived build.**
+  Two rev-2 builds were spliced by merge `e167a67`. They are separated now:
+  `crediting_rate_v2.py` is `e4f5418` byte-identical, and the build below
+  sits byte-identical in `crediting-rate/archive/f168f79/`. The live build
+  is kept on F5: the gap vanishes under N2, and only it changes the verdict
+  (UNKNOWN_measurable against ETYMOLOGY_TRACKING). Graded on own fixtures
+  only; cross-format NOT_RUN (`CRD_025`). The ids below are
+  `archive/f168f79 CRD_0nn`.
+  **The same order then arrived REVISED** (`WORK_ORDER_V2.md`, verbatim
+  beside the first, neither superseding and `crediting_rate.py` unedited),
+  with `crediting_rate_v2.py` importing v1 for every piece the revision
+  does not change. **`CRD_009`, the provenance and it comes first:** the
+  dispatch bundle's own send-order table reads *"three revisions are
+  Claude's, PROPOSED, adopt or strip before sending"* and it was then sent
+  as delivered, so the three-state bin, the frame gate and the coding split
+  are **model-authored proposals the operator neither adopted nor
+  stripped** — named in the module docstring, in `PREDICTION_V2.md` and on
+  the first two lines of every render, per `AUDIT_CONTRACT.md`'s
+  layer-separation rule. **`CRD_010`, the finding: REVISION 2 removes the
+  input its own RETURN block still lists a class for** — v1's
+  `CONTRIBUTION_TRACKING` fires on a null gap plus a misattribution rate
+  derived from `described_originator`, REVISION 2 replaces that field with
+  *"attested dates only"* (an ordering, not a rate) and keeps the class, so
+  without a replacement discriminator it is unreachable and every null gap
+  lands on `UNKNOWN_measurable`; `[CHOICE 6]` declares one
+  (`attribution_depth`, stipulated with no derivation exactly as
+  `MISATTR_MAX` had none) and F2 and the suite's low-depth variant differ
+  **only** in depth — same gap, two returns. **`CRD_011`:** the frame gate
+  fires both ways and **before any rate exists**, `FRAME_ASYMMETRIC` naming
+  both sides and `CONTAMINATED_FRAME` on `model_authored=True`, both
+  returning no `rates` key at all. **`CRD_013`:** the redaction is
+  structural — a depth file carrying `item`, or any field naming the bin, is
+  refused at load, and the join key is `sha256(item|salt)[:16]`, which is
+  `UNI_078`'s repair (a field documented as an opaque handle that spelled
+  out the arm on every row). **`CRD_015`:** F5's pooled gap 0.5000 clears
+  its band [-0.3750, 0.3750] and the gap **inside the early date stratum is
+  exactly 0.0000** with the late stratum carrying no gap at all, and the
+  N2/N4 correlates print **before** the fit per the order's own NOTE, so
+  the confound (mean attestation 835 / 985 / 1135 by bin) sits above the
+  number it explains. **`CRD_016`:** `gap` means the POOLED gap on every
+  branch including `DOMAIN_SPECIFIC`, where an earlier version put the
+  domain's gap under that key — one name, two quantities by branch, which
+  is `measurement-fork`'s VOID RATIO in this module's own return shape,
+  found by misreading a probe's output. **`CRD_017`:** `model_authored`
+  must be an explicit boolean and an absent declaration is refused rather
+  than read as `False`, the absent-vs-known-negative repair applied first
+  at the gate that stops the whole run. **`CRD_018`, the CHECK FIRST
+  answer and it differs from `CRD_006`'s:** F (`branch_set.py`) and G
+  (`preference_free_rank.ReturnClass`) both exist in the sibling repo
+  `JinnZ2/method-layer`, located the way `enclosure-first-residual/`
+  locates it — so `CRD_006`'s *"not in this tree"* was true of what v1
+  could see (it looked inside `Simulators`) and is narrowed rather than
+  refuted; G is not a single module, the enum living in
+  `preference_free_rank.py` while `frame_probe.py` carries its own.
+  **`CRD_019`, three faults in this build's own checks, all found by
+  running:** two claimed v2 reached `V1.bin_gap` and `V1.shuffle_band`
+  which it does not and should not, and the third was a substring scan
+  asserting `described_originator` appears nowhere in v2 — firing on the
+  three comments in which v2 **names the field it removed**, `UNI_009` /
+  `T1-1` inside the check written against that removal, repaired to an AST
+  walk requiring the field to reach no constant, name or attribute while
+  the module is required to name it in prose. **`CRD_020`:** all seven
+  return classes are reached, five by fixtures and two by constructed
+  variants, with **F6 beyond the order** — the order lists five fixtures
+  and none reaches `DOMAIN_SPECIFIC`, a class its own RETURN block
+  declares — and its construction is the informative part, since a
+  domain's shuffle band is set by its **within-bin spread**, so a domain
+  can fail to clear only when its items disagree internally and the branch
+  cannot fire on two clean domains. **`CRD_021` UNVERIFIED:** nothing has
+  been run on any real item list, every world is constructed and says so in
+  its own frame file with Greek-letter items and invented letter-traditions
+  so no real technique's name can read as evidence, the generator
+  regenerates byte-identically, and the contamination is declared in its
+  header above any world — a fixture returning what it was built to return
+  is a REGRESSION result. The order's own REAL-RUN SPEC names why:
+  *"a technique-side transmission catalogue to draw ALL bins from.
+  Unidentified. This is the one piece needing a human with library
+  access."* Twenty-one claims `CRD_001..021`. Stdlib only, parses under
+  3.9, CC0.
 - `gate-check/` — A work order built as delivered, with no framework
   context: `gate_check.py` walks a repo path and reports presence or
   absence of four structural features — an unknown/blocked/out-of-envelope
@@ -13619,10 +13882,101 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   strings verbatim and screening them meaning rewording delivered text.
   **`II_012` UNVERIFIED and it covers the folder:** every `[RECOVERED]`
   label is a claim about fragments this session did not read; what is
-  established is that the build implements the text as delivered. Fourteen
+  established is that the build implements the text as delivered.
+  **`II_015`, a defect it surfaced elsewhere:** this is the first folder in
+  the tree to put its test file in a subdirectory, and
+  `tools/run_manifest.py` captured only the basename out of a redirect
+  message and resolved it beside the module, so a live target read as
+  missing and the folder landed red on two tree-level checks -- a flat
+  layout hides it because the basename happens to resolve; repaired in the
+  extractor with both cases pinned in that module's selftest. Fifteen
   `II_*` claims; check count printed by
   `python3 instrument-index/tests/test_build_index.py`. Stdlib only, parses
   under 3.9, phone-buildable, CC0.
+- `cooperative-substrate-proof/` — A work order delivered verbatim and
+  built to: a four-part self-verifiable artifact (P1-P5), each part
+  standalone, showing **the cooperative substrate the competitive frame
+  requires in order to be possible at all** — a **coverage** argument,
+  not a values argument, with the order's instruction *do not strip the
+  competition frame, add the layer underneath it* carried in
+  `FRAMING.md`. Landed here rather than at the repo the order names:
+  `add_repo` answered *not found* and a create call answered *403
+  Resource not accessible by integration*, the `substrate-alternative/`
+  `SA_018` precedent exactly, so it is a self-contained folder with its
+  own LICENSE and suite importing nothing across its boundary
+  (`PRF_001`). **`PRF_002`, the framing made structural:** `scope.py` has
+  no return member meaning *the competitive frame is wrong* and none
+  meaning another frame is preferable — the three are
+  `WITHIN_COMPETITIVE_FRAME`, `OUTSIDE_FRAME_SCOPE` naming the condition
+  that failed, and `UNDECLARED` naming the one not coded — and an AST
+  scan over every module refuses a declared ranking-and-values
+  vocabulary, null-tested with a plant. **`PRF_004`: that scan fired on
+  this folder's own code and the repair was a better reading of the
+  order** — P3's corpus verdict was a majority rule over pair readings
+  carrying a local `best`, which is a vote among pairs; replaced by
+  `weakest_link`, the order's own first sentence for P3 (*every link must
+  transmit faithfully*), since a majority rule reports SHARED_TERMS on a
+  corpus holding one pair that shares no terms at all. **`PRF_005`, the
+  null that had to be rebuilt:** P3 measures `gain = 1 - C(A+B)/(C(A) +
+  C(B))` and gain alone is evidence of shared FORM, so every pair is
+  re-measured against a control — first a token rename, which is **not**
+  a null, since renaming tokens to fresh strings destroys B's own
+  compressibility, moves the denominator, and returned a near-constant
+  `-0.025` offset that read the ciphered fixture as SHARED_TERMS; a
+  **monoalphabetic substitution cipher** is the control, leaving every
+  repeat inside B at the same length and distance while removing every
+  substring shared with A, and the shipped fixtures separate 0.2350
+  against -0.0052, forty times the threshold on either side of it.
+  **`PRF_006`:** the corpus carries its own null (`c_ciphered.txt` IS
+  `b_protocol.txt` under the permutation), and the b-c pair — identical
+  structure, no shared terms — reads `SHARED_FORM_ONLY`, which is the
+  reading. **`PRF_007`/`PRF_008`, P4:** the first settler had `accepts`
+  and `contests` and nothing else, and with every contest unbounded the
+  *corrective* chain ran to the budget exactly as the mutual-sabotage
+  pair did, both returning `NO_ANSWER budget_exhausted` — the two
+  outcomes the order asks to be separated coming back identical; the
+  `contest_limit` field (integer = bounded refusal, null = unbounded) is
+  the cut and is DECLARED, never inferred from a step's content, and the
+  turf-war chain now returns `NO_ANSWER` for a **structural** reason (a
+  cycle in the re-settle graph, both steps named) rather than by running
+  out of budget, with `SETTLES_WITH_REWORK` the load-bearing middle
+  member — without it every contest reads as failure and *no answer, not
+  a worse answer* has nothing to be distinguished from. **`PRF_009`:**
+  P2's `unverified_fraction` is a **ceiling on verification, not a
+  measurement of trust** — `LOCALLY_CHECKED` bounds one clause of a
+  contract with at least three, so 0.9900 on its own source understates
+  the unverified surface; `None` on a file with no call sites, never 0.0.
+  **`PRF_010`:** the existence proof is the narrow checkable one — this
+  output exists, producing it required every contract listed, the sha256
+  of the analysed file is printed beside the reading, scope stated as
+  this run, this machine, this digest, with no claim that any layer is
+  trustworthy. **`PRF_011`/`PRF_012`:** P1's source rule is a REFUSAL
+  (`Requirement` raises `SourceMissing` at construction, since an
+  admitted-but-flagged entry can be cited with the flag dropped) with its
+  limit stated — nothing checks whether the source says what the entry
+  says — and the PIPELINE is **ABSENT**, egress being an allowlist that
+  refuses every publisher and preprint host, with no methods section
+  paraphrased from memory and the shipped record declaring CONSTRUCTED in
+  its own provenance field. **`PRF_013`:** an undeclared `t_visible`
+  gives an UNDEFINED ratio and never a small one, which is the whole of
+  the antibiotic anchor — correct per patient for fifty years not because
+  the resistance signal was measured absent but because the interval it
+  becomes visible on was not a variable anyone was scored against — with
+  all four verdicts occurring on the shipped anchors. **`PRF_003`:**
+  C1-C4 are conjunctive and `UNDECLARED` outranks `OUTSIDE_FRAME_SCOPE`,
+  so a silence is never read as a failure; both WITHIN and OUTSIDE occur
+  across the parts, and the one chain coded WITHIN is the one with no
+  answer. **`PRF_014`:** one operation is a declared COPY of
+  `tools/authority_scan.py` with the drift cost stated, forced by the
+  folder having to be able to leave whole. **`PRF_016` UNVERIFIED and it
+  covers the folder:** every record, chain, action and document is
+  CONSTRUCTED, no methods section was read, no model was run, and nothing
+  is a statement about any published result, organisation or person.
+  `gain_from_sizes` and `lag_ratio` are registered in
+  `tools/known_answer.py` with the `None`-vs-`0.0` cases as the pin;
+  every module refuses `--selftest`; check count printed by `python3
+  cooperative-substrate-proof/test_proof.py`. Stdlib only, parses under
+  3.9, phone-buildable, CC0.
 - `stability-trigger-envelope/` — DISPATCH ESP-1, landed verbatim in
   `WORK_ORDER.md`. A tractor stability system reads rollover and brakes on
   9-13% serpentine descents while the at-risk trailer is quiet: FAULT A
@@ -13653,6 +14007,243 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   Eleven `STE_*` claims (STE_011: X6, a trailer lead of a quarter
   period, reads TRAILER_LEADS at -1.8 s against a constructed 2.0 s on the
   first run, recorded before any repair); test 49/49. Stdlib only, CC0.
+- `human-sensing-prior/` — one-file CC0 instrument against the AI prior that human
+  multi-channel sensing is costly: full-array parallel sensing is the energy basin, forced
+  single-channel processing the deviation; the invariant-verdict tell, the projection
+  mechanism, an animal evidence base, gaps marked in-line, three PROPOSED tests. Kept as two
+  pathways: A (`human-sensing-prior.md`: convergence, effective-N, P1-P4) and B (`PATHWAY_B.md`:
+  cessation-as-cue, scope limits, F1-F3). `PREDICTIONS.md` was committed before any harness code
+  and predicts a SPLIT: B wins OVERAPPLY and CITE, A wins EVIDENCE, DETECT and NEXTSTEP tie.
+  AMENDMENT 1 (2026-10-07, appended before any run; the original 6475-byte prefix is hashed on
+  every report): B's "very long run of independent trials" FROZEN as a known defect under test;
+  tie band 0.15 (TIE only when the whole interval sits inside it, about 87 coded rows per arm, so
+  k = 30), a win also needing 2 of 3 probes to agree in sign; SPLIT / DOMINATES /
+  LEADS_INCOMPLETE / ALL_TIE / UNRESOLVED rules; arms NONE / A / B / AB / BA with the order effect
+  reported and not predicted; a run manifest (model and settings fixed) refused if incomplete;
+  >= 2 coders with Cohen's kappa imported from `effective-redundancy-audit`, floor 0.60 or the
+  class is NOT_READABLE; coders record a guessed condition and accuracy is scored against chance
+  at two grains; `--strip` silently deletes 8-word verbatim runs from A or B with the log kept
+  apart; lengths reported with tokens APPROXIMATE (chars / 4; B is 1.66x A).
+  AMENDMENT 2 (2026-10-07, before any run; three registered prefixes now hashed on every report):
+  arm AF (= A_PAD) is A plus lorem-ipsum filler cut so its block is within one word of B's and
+  never longer (19030 against 19031 chars under the numbered label; 19029 against 19030
+  after amendment 3). A vs AF and AF vs B are reported, not predicted, and
+  each A-vs-B verdict gets an attribution (STRUCTURE_SURVIVES / NOT_SEPARABLE_FROM_VOLUME /
+  TIE_SURVIVES / TIE_NOT_SURVIVING / UNRESOLVED). A pilot at k = 3 over all six arms runs under
+  its own run_tag and passes only if kappa >= 0.60 in every class and no coder reads
+  LEAK_DETECTED; it prints the gate and no verdict. A main score is refused without
+  pilot_run_tag and PILOT_PASS, and pilot rows never reach it. CHOICE 8 (TIE inside the band
+  even when the interval excludes 0) is promoted to a rule. A and B are pinned by sha256:
+  main's later revision of A, now merged onto this branch, breaks the `**P4. Effective-N`
+  marker; it renamed P4 rather than removing it (P4a, a new independent-origin count; P4b, the
+  registered contrasts test, now needing branch lengths), recorded in amendment 2 note 1, which
+  also hashes the filler (lorem-ipsum placeholder, 1190 words). The harness reads A from a sha-checked byte copy, `registered/` (7f780aa), and
+  prints the working copy as LIVE without testing it. `--emit` refuses an unpinned A, and
+  `--a-file` overrides the default.
+  `pathways.py` locates each prediction's feature by line (19 markers, 0 mismatches);
+  `test_pathways.py` reaches every verdict, attribution and gate state on constructed worlds.
+  Baseline: the earlier 8 pytest ids were never recorded and are not reconstructed. The
+  comparison point is the KNOWN_RED pins at 59a5e5d (4 failing, including the compile gate's
+  duplicate-names test). Before main was merged in (79e6374), this branch predated #105 and #116 (merge base
+  9262516), lacked `tests/test_compile_gate.py`, and failed the other 3 of those 4. That count
+  was not adopted as main's baseline. After the merge the branch fails exactly the 4 pinned
+  ids, and `tools/known_red_check.py --suite` reads 28 of 28 pins MATCH.
+  AMENDMENT 3 (2026-10-08, before any run; five registered prefixes): runner substitution, no
+  prediction change. Runs go through a chat-side claude.ai artifact (sample capability), so the
+  manifest carries PLATFORM_DEFAULT_NOT_SETTABLE / PLATFORM_FRAMING_NOT_VISIBLE, the runner model
+  string, model_tier_requested and model_tier_applied_counts, and `--score` refuses more than one
+  applied tier; scope is single model, single platform. `--emit-job` writes one pathways-run/1
+  JSON (template, empty separator and no_doc_text, wrapped documents with raw sha256s, items with
+  prompt_sha256), each prompt built by the harness and checked against the runner's literal
+  assembly; the runner's assembly cannot number documents, so the labels became unnumbered.
+  `--import-runner` maps result rows to a blind sheet: answered / refused / empty are coded
+  outcomes, error / hash_mismatch / prompt_too_large / missing are NOT_DELIVERED, counted per arm.
+  Job items and the sheet are ordered by opaque id (the old sheet grouped rows by arm; nothing was
+  coded under it). AMENDMENT 4 (2026-10-08, before any run; six registered prefixes, the sixth
+  31103 bytes, sha256 e6ec74bc...62ee) changes no prediction: pilot-2026-10-08a is COMPROMISED (its
+  job sat in public history and its ids use the public salt, so the arm map is recomputable) and is
+  retired unrun; jobs now carry a salt generated at emission, stay out of the tree (`runs/` is
+  git-ignored) until coding closes, and only their sha256 is committed; `--reveal` must read
+  VERIFIED. `--size-check` refuses a job unless every prompt's UTF-8 bytes plus the output reserve
+  fit a context limit the operator declares with its source (max item 30696 bytes, AB/BA); the
+  runner manifest must carry job_sha256, blind and a PASS size check. NOT_DELIVERED is counted per
+  class per arm and any arm difference flags the contrast LOSS_DIFFERENTIAL, nothing imputed;
+  refused and empty replies take the fixed code "no" from the key, off the sheet and outside kappa,
+  flagged OUTCOME_DIFFERENTIAL when arms differ, with an A-vs-B sensitivity excluding them. P4/P4b
+  branch lengths are declared (TimeTree times, Felsenstein contrasts, Garland-Harvey-Ives check,
+  CARRIED). The sealed replacement pilot-2026-10-08b (sha256 227bc386...b6a8) is emitted, not
+  loaded. No model has been run and no response coded.
+- `moving-mean-tracker/` — PROPOSED instrument, SELF-GRADED, no data yet:
+  a mean anchored to a moving target (GDP, a wealth gap, skills or literacy)
+  drifts with it, and any norm, filter or loss tied to the mean inherits the
+  drift; tracked per segment, with per-record provenance (source, pull_date,
+  query, filters_applied, dropped + drop_rule), on a declared schedule, into
+  an append-only sha256-chained run log. Spec and dispatch landed verbatim
+  (`SPEC.md`, `WORK_ORDER.md`). The provider is dumb by construction (records
+  plus provenance, no stats import, AST-checked) and only `FixtureProvider`
+  (synthetic) ships. Per run, per segment: n, mean, median, p10, p90,
+  mean_minus_median; gauges G1 mean-median, G2 sample minus population share,
+  G3 dropped-as-noise share, G4 dollars per physical unit with a cross-run
+  token-drift ratio. States kept apart from zeros: UNRATED (no reference named
+  AND dated), INSUFFICIENT_SAMPLE (n < min_n), NOT_DECLARED (no physical
+  unit), CROSS_VERSION (no delta across a segment-rule or metric change, which
+  needs a new label and is refused under the old one). The dispatch's four
+  tests hold on fixtures (`MMT_001`, `MMT_002`, `MMT_005`, `MMT_006`); four
+  seeded mutations each turn the suite red (`MMT_008`). Three findings the
+  sample run surfaced: G3 localizes a filter only on the axis it is aligned
+  with, reading as a spread drop on a crossed axis (`MMT_003`); a cleaning
+  filter manufactures a G2 of exactly 0.000 on an untouched segment, so a zero
+  G2 is not representativeness evidence beside a non-zero G3 (`MMT_004`); G4
+  cannot separate price drift from a dollar-distribution change (`MMT_007`).
+  Per-record provenance grows the log linearly (`MMT_009`). `quantile` and
+  `share_gap` registered in `tools/known_answer.py`. Check count printed by
+  `python3 moving-mean-tracker/test_tracker.py`. Stdlib only, parses under
+  3.9, CC0.
+- `grounded-work-stack/` — an outside deep-research report (Kimi) on four
+  couplings between a model and the floor it asserts about (unit/conservation
+  gates, pre-signal readers, latency in the joins, an anchored worker-correction
+  channel), landed verbatim with its four figures, plus `check.py` recomputing
+  what the report's own text supports. Holds: the 4.45 lbf->N factor, the
+  Asana 60/27/13 shares, the 70% alert cut, the I-PASS counts. Inside the
+  report: "nine workweeks" of 1.8 h/day needs an unstated 200-day year
+  (`GWS_004`); its "90-96%" override range excludes a 53% bar in its own fig3,
+  which also draws a 49-96% range as one 90% bar (`GWS_005`); one override rate
+  is read as physicians-right in section 5.3 and as a lost signal in section 9
+  (`GWS_006`); "four working examples" matches the section 5 table's count but
+  not the four names in the sentence (`GWS_008`). Each element maps to an
+  in-tree instrument by path, two only partly (`GWS_011`). 79 URLs carried, none
+  read. Check count printed by `python3 grounded-work-stack/test_check.py`.
+  Stdlib only, parses under 3.9, CC0.
+- `habitat-lag-dependency/` — delivered record (CC0, verbatim) chaining the 2026 ESA "harm" rescission and Moffett et al. 2026 (no redundancy plateau) through extinction-debt lag to AI's physical and knowledge dependencies; `check.py` finds tags on 18 of 44 claim lines (none in section 6), two verify-marked figures tagged two ways, and the "more than two-thirds" private-land figure fitting neither GAO 1994 row (91.2% some / 66.1% >60%, nonfederal not private); both 2026 anchors exist at search depth. Claims `HLD_001..008`. Stdlib only, CC0.
+- `reg-uncertainty-registry/` — WO-REG-1, the consolidated bundle run as
+  delivered (`bundle/WORK_ORDER.md` verbatim; the swap from the earlier
+  inputs logged as `CHG-INPUT-01`). A machine-readable registry of
+  regulatory decisions made under scientific uncertainty, built by
+  `tools/build.py` from verbatim pinned inputs, a four-state verification
+  ledger (`tools/check_citations.citation_state` imported) and the
+  registry's own coding held as data; `registry/` is never edited by hand
+  and `validate.py` rebuilds and compares. Direction is stored twice
+  (the agency's action, the legal outcome), consequence is two-sided with a
+  substitution field, and actors, authority chains, conflicts, reversals and
+  gaps are objects — a decision with no located disclosure record carries a
+  CONFLICT node UNREACHABLE, never "no conflict". **RUS-0.2 implemented from
+  its own text reproduces Annex A**, under three reproduction rules stated
+  rather than assumed; the annex grades on a mixed basis (NCR-N02). **The
+  source's "non-conformity is one-directional" reads HOLDS_UNTESTABLE on the
+  annex basis** — no row's own actual could fire the over-restrictive branch,
+  so the zero is fixed by the rows — and **FAILS on the action basis** on
+  A10; the R8 rows built to test the branch fire it. Sweep M0-M5 reproduce,
+  M6 does not under any non-decreasing U3 row. The cost-bearer bivariate is
+  not testable at this n under Rule S, which the source read as a
+  strengthened null. `RUS-0.3.md` is the PROPOSED revision (M7 symmetric
+  tolerance, SUB substitution, R6a self-sealing overlay, R6b, R1 scoped to
+  market status, a declared basis, `over_possible` with every
+  one-directional claim); SUB was first labelled S and renamed because Rule
+  S is the work order's cost-bearer rule (NCR-N25). Nuclear-QA terms mapped
+  to their clauses at search-index depth: Criterion XV's "accepted" disposes
+  of an item unchanged, the work order's ACCEPT changes the record. Every
+  count in `REVISED_REPORT.md` and `CLAIM_TABLE.md` (`RUR_001..019`) is a
+  template key rendered by `tools/report.py`, the templates linted for bare
+  digits and re-rendered by `validate.py`; `--selftest` plants one defect
+  per check. Open: the ten-row second coding (packet and contamination probe
+  pinned, coding not returned), RUS-0.2 section 12's human second coder (not
+  met), primary-depth reading of the QA clauses and most ledger rows.
+  Stdlib only, parses under 3.8, CC0.
+- `floor-capability/` — FLOOR CAPABILITY SITE ASSESSMENT, co-authored
+  draft v0, landed as `DRAFT_V0.txt` and sha256-pinned. It arrived through the
+  session's compaction summary, which calls it verbatim; two copies of the
+  summary agree byte for byte, and the original message bytes are not retained
+  (`FLC_001`). The draft is a PROPOSED instrument with six indicators, a
+  `hidden_cost` sum and three unrun gaps. `floor_capability.py` reads it by AST
+  and instruments each indicator. **`FLC_002`:** the status line says *"the
+  weights are unrun"*, but the draft carries 0 numeric constants and no key
+  naming a weight, so the weights are UNSTATED rather than unrun. A planted
+  weight reads PRESENT, which is the control. **`FLC_003`/`FLC_004`:**
+  `hidden_cost` adds five terms as costs. 1 of 5 shares a name with an
+  indicator, `retraining` has none, and under the declared bindings 0 of 5 is
+  measured in a cost unit (the indicators measure a rate, a ratio, a share and
+  a turnover rate). Three overlaps are counted twice, one named by the draft's
+  own scrap codes. `cost_vector()` returns rows and no sum; `combine()` refuses
+  unless there is one unit and every overlap is partitioned, and it is shown
+  reachable when both hold. **`FLC_005`, the main finding:** the reclassify
+  map works at the code level, and the draft's own second gap asks for the
+  event separation it skips. The event-level classifier separates CATCHABLE,
+  FASTER_THAN_CHECK, EQUIPMENT_ONLY, UNDETERMINED and UNMAPPED. The code-level
+  share is an upper bound by construction (200 seeded sets), and on 40
+  constructed events it reads 0.750 against [0.300, 0.450] over all scrap.
+  FASTER_THAN_CHECK (`FLC_006`) is a cadence question the draft has no cell
+  for. `attribution()` is imported from measurand-partition: the reading stays
+  UNPARTITIONED at both levels, with 4 unmeasured variables against 1
+  (`FLC_007`). **`FLC_008`:** the tenure test uses equipment-only scrap as its
+  control and `ols` imported from sim-span. On constructed worlds it reads
+  operator 10 of 10, assignment confound NOT_SEPARABLE 10 of 10, null 9 of 10.
+  Without the control, the operator and assignment worlds read alike. Running
+  it found a defect (`FLC_017`): the first verdict read an opposite-signed
+  control as the confound. **`FLC_009`:** maintenance is read per task class
+  (TRANSFERRED / NEW_TASK / CAPACITY); the aggregate outsourced share rises
+  0.231 to 0.520 with zero TRANSFERRED classes. `life_ratio` returns None
+  without a declared basis, handoff overlap is signed with five states,
+  screening keeps NOT_RECORDED apart, and rule origin adds BOTH and NEITHER.
+  The cross-links to credential-channel I-1 and readout-count
+  `positions_returning` are checked by path and marker. The three-country
+  comparison is carried verbatim; no function takes a country, and no claim is
+  made about any country's workers (`FLC_015`). `FLC_016` is UNVERIFIED:
+  nothing here has met plant data. `life_ratio`, `catchable_share_low` and
+  `handoff_overlap` are registered in `tools/known_answer.py`. The check count
+  is printed by `python3 floor-capability/test_floor.py`, and the module
+  refuses `--selftest`. Stdlib only, parses under 3.8, CC0.
+- `extraction-chain-join/` — Work order: joining the
+  extraction-money-power-emissions chain (debt / reserve need -> extraction
+  -> emissions -> firm -> beneficial owner -> funding of leaders -> policy),
+  whose pieces sit with separate custodians and have not been joined end to
+  end. The order asks for instruments and joined datasets, not verdicts, with
+  coverage reported on every result. **The order's bytes were lost in
+  compaction**, so `WORK_ORDER.md` is the session summary's restatement,
+  labelled RECONSTRUCTED and sha256-pinned (`ECJ_001`). `chain_join.py` has one
+  reader per gap and one for the joined chain. **Coverage is structural**:
+  `result()` refuses a reading with no covered count, total or unit, and an
+  empty frame is None, never 0 (`ECJ_002`). The order's four branches have no
+  cell for a measured null, so NO_PATTERN and NOT_EVALUABLE are added (CHOICE 1,
+  `ECJ_003`). **G1**: one constructed world read through three samples gives
+  three readings (dependent-only HOLDS, rest NO_PATTERN, pooled SCOPE_LIMITED),
+  so a mixed literature can be a property of each study's sample frame
+  (`ECJ_004`); a price confound reads MISSED_VARIABLE with the column and
+  PATTERN_HOLDS without it (`ECJ_005`); over 10 seeds 37 of 40 read as built and
+  the three misses are one seed (`ECJ_006`). **G2**: traced share plus break
+  shares is 1 for every firm, so the unattributed part is a measured fraction
+  even where its owner is unknown; 7 breaks listed by type and tag (`ECJ_007`);
+  a 25% disclosure threshold traces five 20% holders to nobody under full
+  compliance (`ECJ_008`). **G3** has country-level prior art: Zhang et al. 2020
+  (*Nature Climate Change* 10, 1096-1101, record verified at search-index
+  depth) assign multinationals' foreign-affiliate emissions to the investing
+  country (`ECJ_009`); parent-level targets put 7.4% of constructed emissions in
+  a holding company's secrecy jurisdiction, so parent-level accounting can turn
+  a G4 gap into an attribution to a shell (`ECJ_010`). **G4**: the gap is
+  computable from the record (0.543 unattributable, 0.420 at secrecy breaks at
+  cut 60, 0.074 at cut 80), a secrecy index as a per-chain weight is refused
+  (`ECJ_011`), and an unflagged nominee makes the measured gap a lower bound
+  (`ECJ_012`). **G5**: "predicts better than voter preference" does not separate
+  influence from selection — the selection world reads PATTERN_HOLDS (AUC 1.000
+  against 0.789) with no vote moved, the influence world NO_PATTERN with votes
+  moved — while a timing split does (`ECJ_013`); a funding filter on who sits
+  raises the chamber's yes share 0.527 -> 0.820 and reads below chance (0.459)
+  among the seated, so legislators are a sample selected on the filter
+  (`ECJ_014`). **G6**: the reserve share of extraction revenue is a band under
+  fungibility, it reads lower where extraction answers the reserve need, and a
+  driven-by share is refused (`ECJ_015`). **G7**: a production plateau with
+  consumption-based still rising, and plateau years past a consumption-series
+  lag cannot be read (GAP, `ECJ_016`). **The chain**: two correlational arrows
+  make an end-to-end claim an inference of an inference, the record's unit
+  changes at all five joints, an end-to-end effect is refused, and joined
+  coverage read on unit records (0.310) exceeds the independence product
+  (0.242) when one secrecy flag fails several links (`ECJ_018`). Davis &
+  Caldeira's ~23% and the China plateau are carried (`ECJ_017`, `ECJ_019`);
+  nothing has met a custodian's records (`ECJ_020`). `ols` imported from
+  `sim-span`; `coverage`, `traced_fraction`, `consumption_based` and
+  `reserve_share_band` registered in `tools/known_answer.py`. Check count
+  printed by `python3 extraction-chain-join/test_chain.py`; the module refuses
+  `--selftest`. Stdlib only, parses under 3.8, CC0.
+- `held-gaps/` — four open questions (default drift from a constant regime, obligation bundled with title, restore-before-detection law, burden-of-proof inversion in building code), field form for `GAP_INDEX.md`, delivered text verbatim, all UNSEARCHED; the glyph-as-relation procedure (E1-E4) and the inward-turn instrument from the same block are in `tools/glyph_reasoning.md` and `tools/inward_turn.md`, mirrored in method-layer
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
@@ -13808,6 +14399,198 @@ ship a `requirements.txt`. Each folder ships `samples/`.
     `/OQ` / `/OR` tag only where the collision exists, so every
     single-document folder keeps its id, pinned in both directions
     plus a live-tree uniqueness check.
+  - `agree_router.py` + `tool_inventory.json` — given a `false_agree.py`
+    agree-set, lists the tools to run per bin in three tiers: PRIMARY (the
+    bin's own reason), TRIPWIRE (would show the bin mislabeled), ALSO
+    (everything else) — all claim tools run on every bin, the bin sets
+    order only. The inventory is 3469 modules across 81 reachable JinnZ2
+    repos (1446 claim tools), tagged by what each inspects from its
+    docstring; tags are model readings, nothing regenerates them, and 11
+    repos were not reachable. Primary rows also show tripwire tags, since a
+    tool can carry two jobs; DYNAMICS sets no bin's tier. `selftest` 35
+    checks, including that the role table matches `false_agree`'s bins.
+  - `provenance_marker.py` + `provenance_markers.jsonl` — per-tool marker:
+    ran before (the command, its exit and last printed line), the tool
+    file's sha256 at that run, and one line on how it works, in a
+    hash-chained append-only ledger. Each marker carries a slot for the
+    operator's five passes for finding semantic manipulation (P1 noun to
+    verb, P2 animacy, P3 logic puzzle, P4 round trip, P5 evidentiality),
+    each RUNS / PARTIAL / NOT_RUN / UNDECLARED. RUNS and PARTIAL need a
+    `path:line` basis that resolves, and PARTIAL needs a note naming the
+    missing half. Pass states are declarations, not inferred from text.
+    `check` reads CURRENT / STALE / MISSING by re-hashing. A tool that
+    edits its own file during the run gets no marker. Eight tools stamped:
+    of the first six, none ran P2 even in part. `animacy-pass/`'s
+    `dependency_check.py` and `unweld.py` run it in part. Check count
+    printed by `--selftest`.
+  - `experiment_fruitfulness_triage.md` + `.py` — BIDIRECTIONAL IS NOT REVERSIBLE:
+    a TRIAGE rubric for five reversible-loop experiment sites (stability,
+    compression, dormant-face cost, Landauer/erasure join, inverse-direction
+    reuse), not a validation of any. Each site carries a found / scope /
+    unresolved triple, a cheapest distinguishing experiment, resource costs,
+    located anchors (site 1 and site 4 had published partial answers before
+    any assumption of none) and a retention field saying whether the test
+    reaches PERSISTENT or REVERSIBLE. The score is fruit per resource, split
+    into Q-LOOP and Q-REV; a site that cannot test recovery is NOT_REACHED on
+    Q-REV, never zero. Over 64 settings of cost map and weights: Q-REV reads
+    FIRST_ROBUST:S4 (the 2x2 erasure ledger, loop and reversibility in
+    separate cells); Q-LOOP reads FIRST_UNRESOLVED:S1,S4, a tie the rubric
+    holds rather than breaks. Calibration on site 2 was pre-registered: a
+    blind fill committed and hash-pinned before comparison with the
+    published instance, declared contaminated (the work order states the
+    answer; the filler had read it), so kept as structural. The instance
+    moved site 2's score by 0.000 and changed its content: MATCH 1, PARTIAL
+    3, NO_SLOT 3, NOT_LOCATED 1, the bin being "site 2 is a design
+    comparison" where the result is emergence under a constraint; field (g)
+    EMERGENCE was added. The contaminated fill stays as committed (d5f5c2a)
+    as a correction specimen; the clean run goes beside it. The (g)
+    variants at sites 1, 3, 4 and 5 were then scored (2026-10-14) and do not
+    break the S1/S4 tie: none is a site's best in any of 2304 site-cells, and
+    at the declared cost map none could, since training needs compute medium
+    and caps a (g) variant at 2.000 under the tied 2.500. The work order's
+    premise "start at site 2" (replicating published numbers) does not
+    survive: the replication costs 18 against 4 and is the best site-2
+    variant under no profile; section 9 keeps that line visible.
+    `--blind-packet` emits the stripped packet for a clean run, owed to a
+    reader who has not seen the paper. Check count printed by `--selftest`.
+    The clean run (section 7.8, 2026-10-15) went to a fresh session with no
+    repository and no conversation, given only the packet and the rubric,
+    and is CONTAMINATED-BY-PRIOR rather than BLIND: a separate probe session
+    answered the prior-knowledge question "Yes, I know this paper" (asked
+    of a separate session first and of the reader last, since the title
+    states the site-2 result). The reader's inputs and outputs sit in
+    `tools/clean_run_wo3/`, hashed in its own session and recomputed here.
+    Stage 1 alone reproduces the first calibration fact for fact (MATCH 1,
+    PARTIAL 3, NO_SLOT 3, NOT_LOCATED 1), so the bin is not an artifact of
+    the first filler having read the paper; with (g), given after the
+    stage-1 hash, it reads MATCH 2, PARTIAL 4, NO_SLOT 1 (P6), NOT_LOCATED
+    1. The first calibration stays as committed beside it. A second scorer
+    (section 8.1, the same reader) scored all six sites: of 108 cells 65
+    agree, 43 differ by one step, none by two; compute differs on exactly
+    the six (g) rows (the reader puts emergence at low compute). Q-REV
+    first is S4 under both of that pair; Q-LOOP first is scorer-dependent.
+    Section 8.2 scores PROPOSED training-free (g) variants (a GA over the
+    site's own constraint, `deceptive_maze_ga.py` the precedent): low-cost
+    at S1, S4, S5 and S6, lit medium at S2 and S3. Admitted, S4e's exact
+    erasure count breaks the Q-LOOP tie to FIRST_ROBUST:S4 in every
+    profile; not admitted, since none has run. `triage_clean_run.py`
+    re-checks the ten pinned hashes and recomputes the comparison counts,
+    the agreement table and the PROPOSED readout; `field_agreement` is
+    registered in `tools/known_answer.py`. Asked first, that reader had
+    recalled the site-2 paper in detail, so 7.8 is kept as a STRUCTURE
+    CHECK ONLY beside 7.1, and section 9 keeps the line that a blind
+    calibration on a widely known paper is not possible with current
+    models: blindness depends on the reader's training cutoff. The blind
+    run (section 7.9, 2026-10-16) went to a post-cutoff anchor instead, a
+    fall-2026 result VERIFIED in the WO-4 audit with an emergence shape
+    (site T: where a temporal pattern is learned). Facts T1-T7, the
+    stripped packet and every message were pinned at 58016a4 before any
+    session opened; a separate probe answered "NOT RECOGNIZED" and the
+    reader "No", before the packet and again with the title in hand
+    (title withheld at first, since it states the result). Status BLIND,
+    for this anchor. Stage 1 reads MATCH 1, PARTIAL 4, NO_SLOT 1,
+    NOT_LOCATED 1; with (g), MATCH 2, PARTIAL 3, NO_SLOT 1, NOT_LOCATED 1.
+    The reader predicted a fixed stage and named the published finding (no
+    fixed stage) as its clean negative (b); (g) moved it to a finding. The
+    slot exists with the wrong sign, so the 7.7 falsifier did not fire;
+    the site question presupposes one stage (K-P3) and the packet's
+    word-list screen missed "not a fixed fact" (K-P2), so n = 1 settles
+    nothing. The independent second scorer (section 8.3), a separate
+    session asked the same question first, recognised the paper:
+    CONTAMINATED-BY-PRIOR. On the rubric's own 23 rows it agrees on 144 of
+    207 cells, 61 one step apart, 2 two steps (S2b r, S2e r, whose design
+    line names a decoder without saying it rebuilds the input); u is lower
+    on 14 rows and never higher. Admitted rows: Q-LOOP reads
+    FIRST_UNRESOLVED:S1,S3 against the rubric's S1,S4, and Q-REV
+    FIRST_UNRESOLVED:S2,S4,S5 against FIRST_ROBUST:S4, so S4 stays in the
+    first set and is no longer first alone. With the PROPOSED rows, S4e's
+    d is 2 under both, but u 1 against 2 undoes the tie-break toward S4.
+    A scorer that does not hold the paper is still owed.
+    `triage_blind_run.py` re-checks the eighteen pinned hashes in
+    `tools/blind_run_wo3/`, every fill quote against the packet, every
+    strip target, both comparison tables and the agreement and readings
+    blocks.
+  - `external_report_audit_okcomputer.md` + `check_citations.py` — an audit
+    of two outside research reports (OKComputer outputs, dated 2026-10-14),
+    kept with its mismatches on purpose; it endorses neither the reports nor
+    the glyph roles they propose, and the reports are not copied in (two
+    sha256 pins, quotes held to a word budget). PART A: 100 load-bearing
+    citations in four states derived from a ledger, never declared —
+    VERIFIED 66, CORRECTED 7 (each with the value the source gives),
+    NOT_FOUND 0, UNREACHABLE 27, the last kept apart from NOT_FOUND by rule:
+    NOT_FOUND needs two empty searches or a different object at the ID. The
+    figures are checked too (one plots a formula, not data; one
+    puts unlike quantities on one percent axis). PART B: verdict import
+    (`certif` occurs 41 times in the companion, `readout` 0; user decision
+    rules on a readout kept apart from rules baked into the instrument), the
+    outside seat, welded words (retention in four senses; one report slides
+    PERSISTENT into REVERSIBLE), bins read before binning. The convergence
+    with the operator's notes is read, not adopted: the reports were written
+    from those notes. PART C re-scores the WO-3 sites on anchors that passed
+    Part A, against all seven fields including (g), enforced by the checker
+    (a change resting on any other state is refused): one component moves,
+    no reading does, 0 of 7 of the reports' tests is (g)-shaped (the shared
+    bin is BUILT, the one the rubric's own blind fill had), and the sixth site (the
+    redundancy / generality / maintenance frontier) never takes first, its
+    question being answered before it is run. `citation_state` is registered
+    in `tools/known_answer.py`; the report hashes, URL inventory and quote
+    budget print NOT_RUN without `--reports DIR`. Check count printed by
+    `--selftest`.
+  - `coupling_vs_border_energy_yardstick.md` + `yardstick.py` — reads
+    energy routed to coupling vs to holding separations; a readout, not a
+    ranking. Spend is sorted as coupling, border or coordinating by the
+    reader, in the open; the border fraction is read direct and rolled up
+    through the dependency tree (enforcement -> administration -> funding
+    -> extraction -> more enforcement), a loop through a border item is
+    printed, an item shared with a coupling root widens the reading to a
+    band instead of being split, and an unclassified item is a gap that
+    never enters a fraction. The stated reading (a high border fraction
+    predicts a scale ceiling; read trajectory from spend, not stated aim)
+    is PROPOSED, with four honest edges: it reads throughput, not truth or
+    worth; coordinating boundary vs border held for leverage has a test
+    not yet run; classification is a boundary choice; the reader is
+    coupled. The toy is ILLUSTRATIVE. `read` is registered in
+    `tools/known_answer.py`. The note is mirrored byte-identical in
+    method-layer; the .py stays here. Companion: a worked instance
+    appended to `contested_area_hidden_assumption.md` (also mirrored) on
+    the welded word "care" (configuration vs label; test: still able to
+    continue, and still able to tell you more?), the fine-tuning debate's
+    shared outside seat, "judge not" as no coupling to the inside (every
+    text anchor marked VERIFY), an adversarial pass and four specimens of
+    correction kept. Both open with "The glyph READS. It does not
+    determine value for anyone." Check count printed by `--selftest`.
+- `animacy-pass/` — The animacy pass from the operator's five-pass method,
+  as a dependency check. For the thing a claim names, it asks what matter
+  or energy is a prerequisite. Animacy here is degree of coupling, not
+  alive or dead. By default the prerequisite map is derived from physics.
+  `TEMPLATES` is a seed set of mass and energy balance templates, each
+  stating its balance, and `derive_map` walks them recursively. A supplied
+  map augments the derived one, for balances that cannot be closed from
+  standard inputs. Every prerequisite is tagged `DERIVED`, `DECLARED` or
+  `BOTH`. With neither a template nor a map the verdict is `UNDECLARED`.
+  Degree is the hop count along the map. Whether the claim names each prerequisite is a word
+  match: a paraphrase evades it, and a mention does not show the coupling
+  is accounted for. The verdict reads first degree only; deeper degrees
+  are reported per degree. The four demo cases are constructed and reach
+  all three verdicts, one derived with no map supplied. Check count printed by `--selftest`.
+  `unweld.py` takes welded evaluative claims (cheaper, efficient,
+  optimal, productive, better, scalable, clean). Each is one word fusing
+  buried terms. The check lists the terms each must declare (for
+  "cheaper": for whom, unit, boundary, time, inputs, outputs, compared to
+  what) and which are blank. The externality is the dependency chain
+  read backwards: `dependency_check.closure` checks every node the
+  balance requires (prerequisites and what each process produces)
+  against the stated boundary, and the unbooked nodes, tagged matter or
+  energy by the map, are the externality. There is no separate
+  mechanism. The verdicts are `GROUNDED`, `UNGROUNDED`
+  and `UNDETERMINED_NO_BALANCE`; the last is never read as grounded. In
+  the demo, one data center with identical physics is "cheap" with a
+  two-item boundary (`UNGROUNDED`, 11 of 13 nodes unaccounted, including
+  the copper's sulfur dioxide and tailings) and "expensive" with all 13
+  (`GROUNDED`), so the comparison returns
+  `LABEL_FLIPS_PHYSICS_IDENTICAL`. `unanimous()` encodes the operator's
+  standing challenge: a term earns its use only when every framing is
+  grounded and they agree on the label. Stdlib only, CC0.
 - `search-substitution/` — Three organisms that produce an answer without
   searching for it, priced against the search they do not perform. Physarum
   occupies the whole arena at once and prunes by throughput, so its cost
@@ -14214,6 +14997,31 @@ ship a `requirements.txt`. Each folder ships `samples/`.
     combination); the erratum's ">= 3" is the GEOGRAPHIC count (`RIN_148`).
   - `span_store.json` ships empty, and `intake` is ready for the 83.11 span
     (`RIN_149`).
+  **FWO-15 (2026-10-04, enclosure as corpus validity limit)** landed with its
+  order marked RECONSTRUCTED from a memory object not in this tree, and
+  `EXPECTED_FWO-15.md` committed with it at `b279bdf` before any module.
+  Terms ("enclosure", "captive", "domesticated") are stated at the top of
+  the folder README in their animal-science external-validity sense.
+  - **Prior art, run first, search snippets only** (`FWO-15_PRIOR_ART.md`):
+    the WEIRD paper's axis is cultural sampling, but the same group measured
+    market integration as the share of purchased calories, so the food leg
+    of the provision regime is a measured covariate in one human
+    sub-literature (`RIN_152`). ARRIVE 2.0 item 15 is the animal-arm
+    declaration standard, and that literature calls the caveat rarely
+    assessed (`RIN_153`).
+  - `enclosure_caveat_register.py` is DESIGN_WRITTEN: E1-E5 schema, a
+    frame-before-coding gate, caveat rate per arm with its frame, and the
+    order's branches plus INDETERMINATE. With no corpus the real run reads
+    UNMEASURED (`RIN_156`). `caveat_rate` is registered in
+    `tools/known_answer.py`.
+  - `coupling_gradient.py` is BUILT and was run on the order's five seed
+    rows: one entered (US barter exchanges, TEFRA 1982) and four HELD for an
+    undated instrument (`RIN_157`). The located barter instrument added
+    third-party reporting, not dollar accounting, since barter was already
+    taxable at fair market value (`RIN_158`). The case schema cannot record a
+    de-coupling (`RIN_159`).
+  - The scope assertion registered in EXPECTED failed as written on
+    `render`/`main` and was narrowed on the record (`RIN_155`).
   **WORK ORDER standing/A-6.3 (2026-09-30, verification split)** was landed
   verbatim, recovered from the chat transcript, and committed alone at
   `ea0d379`, since item 2 changes what lets a row read MATCH.
@@ -14297,8 +15105,9 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `python3 route-independence/test_chains_a456.py`,
   `python3 route-independence/test_standing_a61.py`,
   `python3 route-independence/test_sourcing_a62.py`,
+  `python3 route-independence/test_fwo15.py`,
   `python3 route-independence/test_verification_a63.py` and
-  `python3 route-independence/test_followup_a63.py`, the last eleven also
+  `python3 route-independence/test_followup_a63.py`, the last twelve also
   printing the fail-fixture line. Stdlib only,
   parses under 3.9, phone-buildable, CC0.
 - `custody-verification-band/` — Marker under exploration. Criterion: a layer
@@ -14352,6 +15161,41 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   verification port without proximity — remains the highest-priority open
   question and the one gap where recoverability from documents is not
   established. Stdlib only, selftests 19/19 and 13/13, CC0.
+- `potential/` — WORK ORDER 2026-09-29, five uploads landed verbatim and
+  built around one question: how many disjoint paths does a compulsory
+  requirement have to its satisfaction, and what happens to the count when
+  a single vertex — a token, a credential, a seat — is removed. Entry file
+  is `potential/INVENTORY.md` (the STEP 0 record and the RETURN block: every
+  delivered file, its state, every defect P-01..P-18 with what was done),
+  read beside `potential/README.md`. Five layers, each promotable alone.
+  The root transformation instrument (`transformation.py`, `perturbation.py`,
+  `baseline.py`, `ledger.py`, `perturb_cli.py`, `test_perturbation.py`)
+  reads a requirement's satisfaction paths before and after a perturbation
+  and returns a verdict with the ledger beside it, never a score. `gate/`
+  is the connectivity instrument the other layers are written over —
+  domains as graphs, channels, `NEED` → `SATISFIED`, the token vertex, κ
+  and cut vertices — the one dependency the files impose, stated in the
+  README rather than a reading order. `matrix/` is the delivered
+  functionality matrix and its lineage plus `check_attested_provenance.py`,
+  a mechanical check that every `[A]` cell names a source. `briefs/` holds
+  three of five briefs verbatim (DISSENTER_CHANNEL, REPORT, RESEARCH);
+  ENGINEERING_BRIEF and CONTINUITY_BRIEF were named and not delivered and
+  land verbatim on arrival. `tools/` is the cross-folder registry, its
+  sourced variant and a drift check. Claims `POT_021..025` in
+  `CLAIM_TABLE.md`. Sixteen defects P-01..P-16 repaired or recorded in the
+  landing; P-17 (an inner `from perturbation import PERTURBATIONS` making
+  the name function-local so the loop above it read it unassigned — fired
+  on every real invocation, masked only by P-03's earlier ImportError, now
+  pinned by an AST check that no function rebinds a module import) and
+  P-18 (a 1/1/1 fixture that could not tell verified from unverified —
+  rebuilt so the three states differ by construction and a collapsing
+  registry proves the assertion can still fail) repaired in PART B.
+  **Still blocked**: P-06..P-10 and P-13 wait on `ratio_model.py` and
+  `domains_gated.py`, both named by the delivery and not delivered — the
+  `ratio/` folder is deliberately not created and nothing is reconstructed
+  in their place; the gated schema is ABSENT. KNOWN_RED §11/§12 carry the
+  tree-level failures the landing found. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
 - `SYNTHESIS.md` — Top-level synthesis describing how the three folders
   fit together, how claims flow between them, and how to read the
   artifacts in order.
@@ -14383,3 +15227,18 @@ on that branch.
 - Each simulator subfolder is intended to be promotable to its own repo
   later (e.g. `emergence-stability-simulator` is sketched as a standalone
   CC0 repo in its notes).
+
+<!-- clone-refspec-note v1.1 -->
+## Cloning and pushing
+Shallow clones are single-branch by default.
+Before pushing any branch other than the default
+branch, run:
+
+    git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
+    git fetch --depth 1
+
+Or clone with: git clone --depth 1 --no-single-branch <url>
+Without this, the first push of a new branch
+fails the tracking-ref check even when the
+commit landed.
+<!-- /clone-refspec-note v1.1 -->

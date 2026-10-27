@@ -1,0 +1,31 @@
+V001 | K | 1,3.1 | https://pmc.ncbi.nlm.nih.gov/articles/PMC10329213/ | Daval, Teng, Russo, Kesselheim (JAMA Health Forum 2023): census of 409 FDA human-drug advisory committee meetings 2010-2021; 314 with votes; 298 analyzable votes
+V002 | K | 5.2 | https://pmc.ncbi.nlm.nih.gov/articles/PMC10329213/ | initial-approval votes: positive n=147 with 142 approved (96.6%); negative n=60 with 20 approved (33.3%); FDA action measured as of November 30, 2022
+V003 | K | 5.2 | https://pmc.ncbi.nlm.nih.gov/articles/PMC10329213/ | of 25 discordant initial-approval votes, 20 (80%) were approvals after a negative vote; quote "discordance between FDA actions and advisory committee votes was most frequently an approval after a negative vote"
+V004 | K | 3.1 | https://pmc.ncbi.nlm.nih.gov/articles/PMC10329213/ | committee meetings declined from 50 in 2012 to 18 in 2020 and 2021
+V005 | K | 5.1 | https://pmc.ncbi.nlm.nih.gov/articles/PMC10329213/ | the census lists hydrocodone bitartrate (Zohydro) among approvals that followed negative votes (20 approvals after negative votes)
+V006 | K | 5.2 | https://www.medpagetoday.com/publichealthpolicy/fdageneral/105370 | positive vote associated with hazard ratio 9.42 (95% CI 5.99-14.80) for approval; median time to approval 74 days after positive vs 700 days after negative vote
+V007 | K | 5.2 | https://pubmed.ncbi.nlm.nih.gov/37418271/ | Kanter editorial, JAMA Health Forum: the asymmetry "says something very important about the agency's view of advisory committees"
+V008 | K | 5.2 | https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0267134 | FDA device panels, 49 meetings: panelists expressing uncertainty voted against approval 55.9% vs 12.2% for certain panelists; 31.6% of uncertain panelists voted to approve
+V009 | K | 2 | https://www.supremecourt.gov/opinions/25pdf/24-1068_n7ip.pdf | Monsanto v. Durnell (No. 24-1068) decided June 25, 2026: FIFRA preempts state failure-to-warn claims on Roundup's EPA-approved label
+V010 | C | C10 | https://www.law.cornell.edu/supremecourt/text/24-1068 | Monsanto v. Durnell vote was 7-2
+V011 | K | 2 | https://www.federalregister.gov/documents/2026/07/01/2026-13263/revisions-to-establish-the-sixth-unregulated-contaminant-monitoring-rule-ucmr-6-for-public-water | UCMR 6 proposed July 1, 2026 covering 30 contaminants; microplastics not among them
+V012 | K | 2 | https://www.hklaw.com/en/insights/publications/2026/07/epa-proposes-ucmr-6-for-pfas-and-other-contaminants | microplastics added to draft Sixth Contaminant Candidate List (CCL 6) in April 2026
+V013 | K | 2 | https://www.justice.gov/opa/pr/justice-department-places-fda-approved-marijuana-products-and-products-containing-marijuana | April 23-28, 2026: DOJ/DEA placed FDA-approved and state-licensed medical marijuana products in Schedule III; broader rescheduling sent to expedited hearing
+V014 | K | 2 | https://ogletree.com/insights-resources/blog-posts/marijuana-rescheduling-temporarily-paused/ | the expedited rescheduling hearing was stayed/paused in October 2026
+V015 | K | 5.1 | https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/2782122 | aducanumab advisory committee voted 0 yes / 10 no / 1 uncertain; FDA approved (2021) on the amyloid surrogate
+V016 | K | 5.1 | https://pmc.ncbi.nlm.nih.gov/articles/PMC10869173/ | aducanumab accelerated approval on amyloid surrogate the panel had not been asked to evaluate
+V017 | K | 5.1 | https://jamanetwork.com/journals/jama/fullarticle/2803999 | Makena (17-OHPC) withdrawn 2023, about 12 years after accelerated approval, after confirmatory trial failed
+V018 | K | 5.1 | https://pmc.ncbi.nlm.nih.gov/articles/PMC10842149/ | 2019 Makena advisory committee voted 9-7 to withdraw
+V019 | K | 5.1 | https://pmc.ncbi.nlm.nih.gov/articles/PMC549650/ | 2005 joint FDA panel voted 17-15 that rofecoxib could return to market with warnings
+V020 | K | 5.1 | https://www.fda.gov/media/74279/download | FDA decisional memo on COX-2 (2005); Merck never relaunched rofecoxib
+V021 | K | 5.1 | https://www.nbcnews.com/health/health-news/fda-advisory-panel-recommends-mercks-covid-pill-emergency-use-rcna7107 | molnupiravir EUA advisory committee vote 13-10 (Nov 30, 2021)
+V022 | K | 5.1 | https://www.statnews.com/2021/11/30/fda-panel-narrowly-recommends-authorization-of-merck-covid-pill-after-day-of-tense-discussion/ | molnupiravir: rodent embryo-fetal and mutagenicity concerns; authorization with pregnancy restrictions
+V023 | K | 5.1 | https://www.nejm.org/doi/full/10.1056/NEJMp1513686 | flibanserin 2015 advisory committee 18-6 vote contingent on risk mitigation; approved with REMS after two prior rejections
+V024 | K | 5.1 | https://www.accessdata.fda.gov/drugsatfda_docs/nda/2015/022526Orig1s000Approv.pdf | flibanserin NDA 022526 approval letter 2015 with REMS
+V025 | K | 5.1 | https://pmc.ncbi.nlm.nih.gov/articles/PMC3744967/ | 2011 ODAC voted 12-1 to withdraw bevacizumab breast-cancer indication; Commissioner withdrew it
+V026 | K | 5.1 | https://www.onclive.com/view/fda-says-avastin-not-safe-or-effective-for-patients-with-breast-cancer | FDA (Hamburg, Nov 2011) said Avastin not shown safe and effective for breast cancer
+V027 | K | 5.1 | https://www.fda.gov/media/180111/download | donanemab advisory committee (June 10, 2024) voted 11-0 on effectiveness and benefit-risk
+V028 | K | 5.1 | https://www.npr.org/sections/shots-health-news/2024/06/10/g-s1-3818/fda-advisors-back-alzheimer-drug-donanemab-despite-risks | donanemab panel backed despite ARIA risk and low/no-tau questions
+V029 | K | 5.1 | https://www.drugwatch.com/transvaginal-mesh/recall/ | first pelvic-organ-prolapse mesh cleared via 510(k) in 1996 on substantial equivalence; FDA reclassified POP mesh to class III in 2016; FDA ordered remaining makers to stop selling POP mesh in 2019
+V030 | K | 5.1 | https://pmc.ncbi.nlm.nih.gov/articles/PMC6727911/ | metal-on-metal hips "expedited to market ... using the 510(k) process, which only requires substantial equivalence"; FDA rule effective February 18, 2016 requiring PMA for MoM hips
+V031 | K | 5.1 | https://jamanetwork.com/journals/jama/fullarticle/2799172 | JAMA article documents pelvic mesh reclassification after a decade of adverse events (the article's actual subject unknown; check)

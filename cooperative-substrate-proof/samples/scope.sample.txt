@@ -1,0 +1,17 @@
+SCOPE CONDITIONS C1-C4 (conjunctive)
+
+  C1  time-scoped: observation window short vs coupling-formation rate
+  C2  outcome-bound: win condition externally imposed
+  C3  narrow metric: a single scalar
+  C4  enclosed: fixed resource set, no exit
+
+  [CHOICE 1] C1 holds when window / coupling_time <= 1.0
+
+  label                        C1   C2   C3   C4    verdict
+  ---------------------------------------------------------
+  tournament (constructed)     yes  yes  yes  yes   WITHIN_COMPETITIVE_FRAME
+  open field (constructed)     no   no   no   no    OUTSIDE_FRAME_SCOPE
+  uncoded study (constructed)  --   yes  yes  --    UNDECLARED
+
+  A verdict is a statement about coverage. No frame is
+  ranked here and none is ranked anywhere in this folder.

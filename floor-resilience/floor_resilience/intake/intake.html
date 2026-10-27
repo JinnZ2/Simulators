@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Floor Intake</title>
+<style>
+/* Large-format intake: big type, big touch targets, every field skippable.
+   No network: no fonts, no scripts from elsewhere. Output is a site file
+   (JSON, which the toolkit reads as YAML). */
+:root{--bg:#f6f4ef;--ink:#16202a;--muted:#4f5b66;--line:#b9c2c9;--card:#fff;--go:#1f6f8b;--on:#16202a;--onink:#f6f4ef}
+@media (prefers-color-scheme:dark){:root{--bg:#11171c;--ink:#e6eaed;--muted:#a3aeb7;--line:#34414b;--card:#1a2228;--go:#5fb3cf;--on:#e6eaed;--onink:#11171c}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:21px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:760px;margin:0 auto;padding:20px 16px 120px}
+h1{font-size:32px;margin:8px 0}h2{font-size:26px;margin:32px 0 8px}
+p.note{color:var(--muted);margin:4px 0 16px}
+.card{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:16px;margin:12px 0}
+label{display:block;font-weight:600;margin:14px 0 6px}
+input,select{font:inherit;width:100%;min-height:60px;padding:10px 14px;border:2px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
+button{font:inherit;min-height:60px;padding:10px 20px;border:2px solid var(--ink);border-radius:10px;background:transparent;color:var(--ink);cursor:pointer;margin:4px 6px 4px 0}
+button[aria-pressed=true]{background:var(--on);color:var(--onink)}
+button.big{background:var(--go);border-color:var(--go);color:#fff;width:100%;font-weight:700}
+.row{display:flex;flex-wrap:wrap;gap:6px}
+.skip{color:var(--muted);font-size:17px}
+textarea{width:100%;min-height:200px;font:15px/1.4 ui-monospace,Menlo,monospace;background:var(--card);color:var(--ink);border:2px solid var(--line);border-radius:10px;padding:10px}
+button:focus-visible,input:focus-visible{outline:4px solid var(--go);outline-offset:2px}
+</style>
+</head>
+<body>
+<main>
+<h1>Floor intake</h1>
+<p class="note">Fill in what you know. Every question can be skipped. Nothing leaves this page until you press Save.
+Voice memos and photos are kept as file names only, so the files stay with you.</p>
+
+<label for="site">Plant or line name</label>
+<input id="site" placeholder="skip if you like">
+
+<h2>How people are hired</h2>
+<div class="row" data-choice="screen">
+  <button data-v="written">Written test</button><button data-v="interview">Interview</button>
+  <button data-v="hands_on_trial">Hands-on trial</button><button data-v="working_shift">Working shift</button>
+</div>
+
+<h2>People on the floor</h2>
+<p class="note">One card per person. Names only if the owner of this site wants them recorded.</p>
+<div id="people"></div>
+<button onclick="addPerson()">+ Add a person</button>
+
+<h2>Repairs</h2>
+<p class="note">Who found it, who fixed it, and whose name went on the paper. Talk or take a photo instead of typing.</p>
+<div id="repairs"></div>
+<button onclick="addRepair()">+ Add a repair</button>
+
+<h2>Scrap</h2>
+<div id="scrap"></div>
+<button onclick="addScrap()">+ Add scrap</button>
+
+<h2>Save</h2>
+<button class="big" onclick="save()">Save site file</button>
+<p class="note">Then run: floorres assess site.yaml</p>
+<textarea id="out" readonly aria-label="site file preview"></textarea>
+</main>
+<script>
+const $=s=>document.querySelector(s);
+function choice(root){root.querySelectorAll('button').forEach(b=>{b.setAttribute('aria-pressed','false');
+  b.onclick=()=>{const on=b.getAttribute('aria-pressed')==='true';root.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed','false'));
+  if(!on)b.setAttribute('aria-pressed','true');};});}
+function picked(root){const b=root.querySelector('button[aria-pressed=true]');return b?b.dataset.v:undefined;}
+document.querySelectorAll('[data-choice]').forEach(choice);
+const YN='<button data-v="yes">Yes</button><button data-v="no">No</button>';
+function card(html){const d=document.createElement('div');d.className='card';d.innerHTML=html+
+  '<button class="skip" onclick="this.parentNode.remove()">Remove this card</button>';d.querySelectorAll('[data-choice]').forEach(choice);return d;}
+function addPerson(){$('#people').append(card(`
+  <label>Name or ID</label><input data-k="name">
+  <label>Years on the job</label><input data-k="years" type="number" inputmode="decimal" min="0">
+  <label>Has a mechanic or tech title?</label><div class="row" data-choice="titled">${YN}</div>
+  <label>Retiring within how many months?</label><input data-k="retire" type="number" inputmode="numeric" min="0">
+  <label>Machines they run</label><input data-k="machines" placeholder="lathe-1, mill-1">
+  <label>Machines they can run by hand if power or software is down</label><input data-k="manual">
+  <label>Things only they know how to do</label><input data-k="sole">`));}
+function addRepair(){$('#repairs').append(card(`
+  <label>Date</label><input data-k="date" type="date">
+  <label>Machine</label><input data-k="machine">
+  <label>Who first noticed the problem?</label><input data-k="diag">
+  <label>Who fixed it?</label><input data-k="fixed">
+  <label>Whose name went on the write-up?</label><input data-k="wrote">
+  <label>Hours of warning before it failed</label><input data-k="lead" type="number" inputmode="decimal" min="0">
+  <label>Fixed on the first try?</label><div class="row" data-choice="ff">${YN}</div>
+  <label>Called in after a titled mechanic could not fix it?</label><div class="row" data-choice="called">${YN}</div>
+  <label>Voice memo</label><input data-k="memo" type="file" accept="audio/*" capture>
+  <label>Photo</label><input data-k="photo" type="file" accept="image/*" capture="environment">`));}
+function addScrap(){$('#scrap').append(card(`
+  <label>Date</label><input data-k="date" type="date">
+  <label>Machine</label><input data-k="machine">
+  <label>Cause written in the log</label><div class="row" data-choice="code">
+    <button data-v="calibration_drift">Drift</button><button data-v="belt_drive_failure">Belt / drive</button>
+    <button data-v="material_jam">Jam</button><button data-v="sudden_fracture">Sudden break</button>
+    <button data-v="power_event">Power</button></div>
+  <label>Parts scrapped</label><input data-k="units" type="number" inputmode="numeric" min="0">`));}
+const v=(c,k)=>{const el=c.querySelector(`[data-k="${k}"]`);if(!el)return;
+  if(el.type==='file')return el.files[0]?el.files[0].name:undefined;return el.value.trim()||undefined;};
+const list=s=>s?s.split(',').map(x=>x.trim()).filter(Boolean):undefined;
+const yn=c=>c===undefined?undefined:c==='yes';
+const n=s=>s===undefined?undefined:Number(s);
+function clean(o){return Object.fromEntries(Object.entries(o).filter(([,x])=>x!==undefined&&!(Array.isArray(x)&&!x.length)));}
+function save(){
+  const site=clean({name:$('#site').value.trim()||undefined,
+    hiring:clean({screen_type:picked(document.querySelector('[data-choice=screen]'))})});
+  site.operators=[...$('#people').children].map(c=>clean({name:v(c,'name'),
+    tenure_months:v(c,'years')!==undefined?Math.round(n(v(c,'years'))*12):undefined,
+    titled:yn(picked(c.querySelector('[data-choice=titled]'))),retiring_within_months:n(v(c,'retire')),
+    machines:list(v(c,'machines')),can_run_manual:list(v(c,'manual')),sole_knower_of:list(v(c,'sole'))}));
+  site.repair_attribution=[...$('#repairs').children].map(c=>clean({date:v(c,'date'),machine:v(c,'machine'),
+    who_diagnosed:v(c,'diag'),who_fixed:v(c,'fixed'),who_wrote_up:v(c,'wrote'),detection_lead_hours:n(v(c,'lead')),
+    first_fix:yn(picked(c.querySelector('[data-choice=ff]'))),called_after_titled_failed:yn(picked(c.querySelector('[data-choice=called]'))),
+    voice_memo:v(c,'memo'),photo:v(c,'photo')}));
+  // scrap rows need a date to be read; undated rows are left out and said so
+  const scrap=[...$('#scrap').children].map(c=>clean({date:v(c,'date'),machine:v(c,'machine'),
+    logged_cause_code:picked(c.querySelector('[data-choice=code]')),units:n(v(c,'units'))}));
+  site.scrap=scrap.filter(r=>r.date);
+  const dropped=scrap.length-site.scrap.length;
+  for(const k of ['operators','repair_attribution'])site[k]=site[k].filter(o=>Object.keys(o).length);  // blank cards
+  for(const k of ['operators','repair_attribution','scrap','hiring'])
+    if(!site[k]||(Array.isArray(site[k])?!site[k].length:!Object.keys(site[k]).length))delete site[k];
+  let text='# Floor intake site file. JSON is valid YAML; floorres reads it as is.\n'+JSON.stringify(site,null,2)+'\n';
+  if(dropped)text='# '+dropped+' scrap card(s) had no date and were left out.\n'+text;
+  $('#out').value=text;
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:'text/yaml'}));
+  a.download='site.yaml';a.click();URL.revokeObjectURL(a.href);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+======================================================================
+CREDITING RATE -- WORK ORDER L, REVISED
+======================================================================
+  the three revisions are model-authored and were sent
+  un-adjudicated; see the module docstring
+  prediction sha256[:16]  ec5e3319011920f5
+  method layer            present
+  item list model_authored False
+  items                   12
+
+RETURN  ETYMOLOGY_TRACKING
+
+N2/N4 CORRELATES, reported before the fit
+  first_attested_source    {'visible': 835.0, 'technical_only': 845.0, 'not_retained': 840.0}
+  intermediary_count       {'visible': 1.0, 'technical_only': 1.0, 'not_retained': 1.0}
+
+COUNTS PER BIN   {'visible': 4, 'technical_only': 4, 'not_retained': 4}
+EXCLUDED         {'ordering_unknown': 0, 'ordering_reversed': 0, 'ambiguous_bin': 0, 'unscored': 0, 'no_depth': 0}
+
+RATES BY BIN
+  visible          1.0000
+  technical_only   0.9167
+  not_retained     0.0833
+  gap (visible - not_retained)  0.9167
+  N1 shuffle band               [-0.5833, 0.5833]  k=2000
+  mean attribution_depth        1.5833  (cut 1.50)  [CHOICE 6]
+
+THE DISCRIMINATING BIN  technical_only tracks visible
+  retention is the variable: the credit follows the surviving word whether or not a reader can see it
+
+N2 antiquity strata
+  pre-1200   n=12  gap 0.9167  band [-0.5833, 0.5833]
+
+N4 path-length strata
+  via_1      n=12  gap 0.9167  band [-0.5833, 0.5833]
+
+N3 per domain
+  materials      n=6   gap 0.8333  clears False
+  numeracy       n=6   gap 1.0000  clears False
+
+NOTHING HERE IS A STATEMENT ABOUT ANY TECHNIQUE, TRADITION OR WORD.
+Every fixture is constructed and declares itself so.  The real run
+is NOT_RUN: the order's own open item is an unidentified
+technique-side transmission catalogue.
+
+======================================================================

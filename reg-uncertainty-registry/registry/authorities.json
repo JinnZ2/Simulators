@@ -1,0 +1,1370 @@
+[
+ {
+  "citation": "21 CFR 1308",
+  "id": "AUTH-21CFR1308",
+  "level": "regulation",
+  "title": "schedules of controlled substances",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E037",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "21 CFR Part 14",
+  "id": "AUTH-21CFR14",
+  "level": "regulation",
+  "title": "public advisory committees",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E010",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "21 CFR 172.804",
+  "id": "AUTH-21CFR172.804",
+  "level": "regulation",
+  "title": "aspartame",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E023",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "21 CFR 180.30",
+  "id": "AUTH-21CFR180.30",
+  "level": "regulation",
+  "title": "BVO interim food additive",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E021",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "21 CFR 180.37",
+  "id": "AUTH-21CFR180.37",
+  "level": "regulation",
+  "title": "saccharin interim food additive",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E024",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "21 CFR 201.57(c)(1)",
+  "id": "AUTH-21CFR201.57",
+  "level": "regulation",
+  "title": "boxed warning",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E014",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "21 CFR 314.126",
+  "id": "AUTH-21CFR314.126",
+  "level": "regulation",
+  "title": "adequate and well-controlled studies",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E006",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "21 CFR 314.530",
+  "id": "AUTH-21CFR314.530",
+  "level": "regulation",
+  "title": "withdrawal of accelerated approval (drugs)",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": "Sept 2010 was a clarification, not a reversal; withdrawal deferred 2012 by agreement with sponsor",
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "drugs.com/pharmatimes (summary): Aug 2010 FDA issued Proposal to Withdraw (first under accelerated-approval rules); Sept 2010 FDA \"clarified that its proposal was part of the regulatory process and that midodrine could remain on the market\"; Feb 2012 FDA \"deferred the withdrawal\" after Shire agreed to 2 more studies; deadline later March 31 2015",
+   "ledger_row": "G010",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "Sept 2010 was a clarification, not a reversal; withdrawal deferred 2012 by agreement with sponsor",
+   "says": "DIFFERS",
+   "state": "CORRECTED"
+  }
+ },
+ {
+  "citation": "21 CFR 314.600-314.650; 601.90-601.95 (67 FR 37988)",
+  "id": "AUTH-21CFR314.600",
+  "level": "regulation",
+  "title": "Animal Rule",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E012",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "21 CFR 314 Subpart H (314.500-314.560)",
+  "id": "AUTH-21CFR314H",
+  "level": "regulation",
+  "title": "accelerated approval, drugs; 314.530 withdrawal",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E002",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "21 CFR 601 Subpart E (601.40-601.46)",
+  "id": "AUTH-21CFR601E",
+  "level": "regulation",
+  "title": "accelerated approval, biologics; 601.43 withdrawal",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E003",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "21 CFR 73.575",
+  "id": "AUTH-21CFR73.575",
+  "level": "regulation",
+  "title": "titanium dioxide color additive",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E022",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "21 CFR 74.303",
+  "id": "AUTH-21CFR74.303",
+  "level": "regulation",
+  "title": "FD&C Red No. 3 listing",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E019",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "21 CFR 807 Subpart E",
+  "id": "AUTH-21CFR807E",
+  "level": "regulation",
+  "title": "510(k) procedures",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E015",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "21 CFR 884.5980 (final order, January 2016)",
+  "id": "AUTH-21CFR884.5980",
+  "level": "regulation",
+  "title": "transvaginal POP mesh class III",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E017",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "21 CFR 888.3330 (final order, February 2016)",
+  "id": "AUTH-21CFR888.3330",
+  "level": "regulation",
+  "title": "metal-on-metal hip PMA call",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E018",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "40 CFR 141.40",
+  "id": "AUTH-40CFR141.40",
+  "level": "regulation",
+  "title": "UCMR",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E035",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "40 CFR 155 Subpart C",
+  "id": "AUTH-40CFR155C",
+  "level": "regulation",
+  "title": "registration review procedures",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E025",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "75 FR 78918 (December 17, 2010)",
+  "id": "AUTH-75FR78918",
+  "level": "regulation",
+  "title": "saccharin delisting, RCRA and CERCLA",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E036",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "81 FR 53767 (August 12, 2016)",
+  "id": "AUTH-81FR53767",
+  "level": "order",
+  "title": "denial of petition to reschedule marijuana",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "regulations.vlex.com (summary): Federal Register Vol. 81 No. 156, August 12, 2016, pp. 53767-53845; DEA denied the petition \"by letter dated July 19, 2016\"; HHS evaluation \"carried out by the FDA in consultation with NIDA\" (thefdalawblog.com)",
+   "ledger_row": "G036",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "Federal Register PDF not opened",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "citation": "86 FR 48315 (August 30, 2021)",
+  "id": "AUTH-86FR48315",
+  "level": "regulation",
+  "title": "chlorpyrifos tolerance revocation",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E028",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "87 FR 25266 (April 28, 2022)",
+  "id": "AUTH-87FR25266",
+  "level": "regulation",
+  "title": "registration review interim and final decisions",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "G004",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "87 FR 48018 (August 5, 2022)",
+  "id": "AUTH-87FR48018",
+  "level": "regulation",
+  "title": "registration review decisions and case closures",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "G005",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "87 FR 5815 (February 2, 2022)",
+  "id": "AUTH-87FR5815",
+  "level": "regulation",
+  "title": "registration review interim decisions",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "?",
+   "found": "govinfo.gov (summary): no Feb 2 2022 notice found in results; only a Jan 2 2020 revised interim decision for sodium cyanide and a July 30 2021 batch",
+   "ledger_row": "G003",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "one query only; 87 FR 5815 not located",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "87 FR 64484 (October 25, 2022)",
+  "id": "AUTH-87FR64484",
+  "level": "regulation",
+  "title": "registration review decisions and case closures",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "G005",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "87 FR 6535 (February 4, 2022)",
+  "id": "AUTH-87FR6535",
+  "level": "regulation",
+  "title": "registration review interim decisions and final decision (pentachlorophenol)",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "govinfo.gov FR-2022-02-04 doc 2022-02418 (summary): \"Pesticide Registration Review; Interim Decisions and Final Decision for Several Pesticides\"; interim decisions for creosote and chromated arsenicals with dichromic acid; \"the final registration review decision for pentachlorophenol\" (Case 2505)",
+   "ledger_row": "G002",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "notice text says nothing about voluntary request in the snippet seen",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "citation": "89 FR 32532 (April 2024)",
+  "id": "AUTH-89FR32532",
+  "level": "regulation",
+  "title": "PFAS NPDWR",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E034",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "89 FR 86418 (October 2024)",
+  "id": "AUTH-89FR86418",
+  "level": "regulation",
+  "title": "Lead and Copper Rule Improvements",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E033",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "annual appropriations",
+  "id": "AUTH-APPROP",
+  "level": "statute",
+  "title": "regulator funding by appropriation",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "no ledger row: authority named by the registry, citation not searched",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "California Health and Safety Code (AB 418, 2023)",
+  "id": "AUTH-CA-AB418",
+  "level": "statute",
+  "title": "state ban on BVO, potassium bromate, propylparaben, Red No. 3 from 2027",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "foodsafetynews.com/natlawreview.com/ewg.org (summary): Newsom signed AB 418 October 7, 2023, banning BVO and three other additives; FDA proposed revocation late 2023 (comments to January 17, 2024); final rule July 2024, effective August 2",
+   "ledger_row": "G024",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "final-rule date stated by secondary sources only; Federal Register not opened",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "citation": "Red River Valley Sugarbeet Growers v. Regan (8th Cir. Nov. 2, 2023)",
+  "id": "AUTH-CA8-RRV-2023",
+  "level": "court_decision",
+  "title": "vacatur of chlorpyrifos revocation",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E030",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "LULAC v. Regan (9th Cir. Apr. 29, 2021)",
+  "id": "AUTH-CA9-LULAC-2021",
+  "level": "court_decision",
+  "title": "order to act on chlorpyrifos",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E029",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "NRDC v. EPA (9th Cir. June 17, 2022)",
+  "id": "AUTH-CA9-NRDC-2022",
+  "level": "court_decision",
+  "title": "vacatur of glyphosate human-health finding",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E031",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "Controlled Substances Act sec. 201, 21 U.S.C. 811",
+  "id": "AUTH-CSA-201",
+  "level": "statute",
+  "title": "scheduling",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E037",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "Controlled Substances Act sec. 201(b), 21 U.S.C. 811(b)",
+  "id": "AUTH-CSA-201B",
+  "level": "statute",
+  "title": "HHS scientific and medical evaluation binding on scientific matters",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "no ledger row: authority named by the registry, citation not searched",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "SGB VII sec. 9; Berufskrankheiten-Verordnung",
+  "id": "AUTH-DE-SGB7-9",
+  "level": "statute",
+  "title": "occupational disease list",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E040",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "Danish Act on Workers' Compensation; Occupational Diseases Committee",
+  "id": "AUTH-DK-WCA",
+  "level": "statute",
+  "title": "occupational disease recognition",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E039",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "DOJ final order, April 23, 2026",
+  "id": "AUTH-DOJ-2026-SCHIII",
+  "level": "order",
+  "title": "marijuana in FDA-approved products and under state medical license to Schedule III",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "ropesgray.com/cannabisbusinesstimes.com (summary): DOJ final order released April 23 2026 placing marijuana in FDA-approved products and under state medical license in Schedule III; D.C. Circuit challenges SAM v. DOJ Nos. 26-1106, 26-1130, 26-1136; petitioner statement indicates interim stay not granted; DEA hearing on separate proposed rule set June 29 2026",
+   "ledger_row": "G019",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "HHS 2023 and DEA May 2024 not shown; \"stayed\" not confirmed, status contested",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "executive order directing marijuana rescheduling",
+  "id": "AUTH-EO-MARIJUANA",
+  "level": "order",
+  "title": "executive direction",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "F030",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "Commission Decision 2004/248/EC",
+  "id": "AUTH-EU-2004-248",
+  "level": "international_instrument",
+  "title": "atrazine non-inclusion",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V115",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "Commission Regulation (EU) 2022/63",
+  "id": "AUTH-EU-2022-63",
+  "level": "international_instrument",
+  "title": "E171 removed",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E022",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "Directive (EU) 2020/2184",
+  "id": "AUTH-EU-DWD-2020-2184",
+  "level": "international_instrument",
+  "title": "drinking water, PFAS parameters, watch list",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "V112",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "FD&C Act sec. 409, 21 U.S.C. 348; Delaney clause 409(c)(3)(A)",
+  "id": "AUTH-FDCA-409",
+  "level": "statute",
+  "title": "food additives",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E020",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "FD&C Act sec. 505(d), 21 U.S.C. 355(d)",
+  "id": "AUTH-FDCA-505",
+  "level": "statute",
+  "title": "drug approval: substantial evidence",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E006",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "FD&C Act sec. 505-1",
+  "id": "AUTH-FDCA-505-1",
+  "level": "statute",
+  "title": "REMS",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E007",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "FD&C Act sec. 505(o)(4)",
+  "id": "AUTH-FDCA-505O4",
+  "level": "statute",
+  "title": "safety labeling changes",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E014",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "FD&C Act sec. 506(c), 21 U.S.C. 356(c)",
+  "id": "AUTH-FDCA-506C",
+  "level": "statute",
+  "title": "accelerated approval",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E001",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "FD&C Act sec. 510(k)",
+  "id": "AUTH-FDCA-510K",
+  "level": "statute",
+  "title": "premarket notification",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E015",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "FD&C Act sec. 513; FDASIA 2012 sec. 608",
+  "id": "AUTH-FDCA-513",
+  "level": "statute",
+  "title": "device classification by order",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E016",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "FD&C Act sec. 564, 21 U.S.C. 360bbb-3",
+  "id": "AUTH-FDCA-564",
+  "level": "statute",
+  "title": "emergency use authorization",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E008",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "FD&C Act sec. 721, 21 U.S.C. 379e; Delaney clause 721(b)(5)(B)",
+  "id": "AUTH-FDCA-721",
+  "level": "statute",
+  "title": "color additives",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E019",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "FDORA (Consolidated Appropriations Act 2023) sec. 3210",
+  "id": "AUTH-FDORA-3210",
+  "level": "statute",
+  "title": "expedited withdrawal of accelerated approvals",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E005",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "FFDCA sec. 408, 21 U.S.C. 346a (FQPA 1996)",
+  "id": "AUTH-FFDCA-408",
+  "level": "statute",
+  "title": "pesticide tolerances: reasonable certainty of no harm",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E027",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "FIFRA sec. 24(b)",
+  "id": "AUTH-FIFRA-24B",
+  "level": "statute",
+  "title": "uniformity of labeling",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E032",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "FIFRA sec. 3(g)",
+  "id": "AUTH-FIFRA-3G",
+  "level": "statute",
+  "title": "registration review",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E025",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "FIFRA sec. 4",
+  "id": "AUTH-FIFRA-4",
+  "level": "statute",
+  "title": "reregistration",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E026",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "FDA, Product Development Under the Animal Rule (October 2015)",
+  "id": "AUTH-GD-ANIMALRULE",
+  "level": "guidance",
+  "title": "Animal Rule guidance",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E013",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "FDA, Expedited Programs for Serious Conditions (May 2014)",
+  "id": "AUTH-GD-EXPEDITED",
+  "level": "guidance",
+  "title": "expedited programs guidance",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E004",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "HHS sec. 564 declaration, March 27, 2020",
+  "id": "AUTH-HHS-EUA-2020",
+  "level": "order",
+  "title": "COVID-19 EUA declaration",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E008",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "Medical Device User Fee Amendments (2002-)",
+  "id": "AUTH-MDUFA",
+  "level": "statute",
+  "title": "device review user fees",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E041",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "OSH Act sec. 5(a)(1)",
+  "id": "AUTH-OSHA-5A1",
+  "level": "statute",
+  "title": "general duty clause",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E038",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "OSH Act sec. 6(b), 29 U.S.C. 655",
+  "id": "AUTH-OSHA-6B",
+  "level": "statute",
+  "title": "standard setting",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E038",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "Prescription Drug User Fee Act (1992-)",
+  "id": "AUTH-PDUFA",
+  "level": "statute",
+  "title": "drug review user fees",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E041",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "Public Health Service Act sec. 351",
+  "id": "AUTH-PHSA-351",
+  "level": "statute",
+  "title": "biologics licensing",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "no ledger row: authority named by the registry, citation not searched",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "Pesticide Registration Improvement Act (2004-)",
+  "id": "AUTH-PRIA",
+  "level": "statute",
+  "title": "pesticide registration fees",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E042",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "RCRA sec. 3001, 42 U.S.C. 6921",
+  "id": "AUTH-RCRA",
+  "level": "statute",
+  "title": "hazardous waste listing",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "no ledger row: authority named by the registry, citation not searched",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "Monsanto Co. v. Durnell, No. 24-1068 (June 25, 2026)",
+  "id": "AUTH-SCOTUS-DURNELL",
+  "level": "court_decision",
+  "title": "FIFRA preemption of state failure-to-warn claims",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "mayerbrown.com/faegredrinker.com (summary): decided \"on June 25, 2026, holding 7-2 that FIFRA preempts a state failure-to-warn claim seeking a cancer warning on Roundup's label\"",
+   "ledger_row": "V009",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "slip opinion text not opened",
+   "says": "MATCH",
+   "state": "VERIFIED"
+  }
+ },
+ {
+  "citation": "SDWA sec. 1412",
+  "id": "AUTH-SDWA-1412",
+  "level": "statute",
+  "title": "national primary drinking water regulations; CCL 1412(b)(1)",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E033",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "SDWA sec. 1445(a)(2)",
+  "id": "AUTH-SDWA-1445",
+  "level": "statute",
+  "title": "unregulated contaminant monitoring",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E035",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "Saccharin Study and Labeling Act, Pub. L. 95-203",
+  "id": "AUTH-SSLA-1977",
+  "level": "statute",
+  "title": "saccharin moratorium and warning label",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": "E024",
+   "queries": 0,
+   "reached": "N",
+   "reason": "not searched in this session: the container's DNS refuses publisher hosts (WebFetch fails) and the search agents hit their session limit; WebSearch from the main session was spent on load-bearing rows",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "Stockholm Convention, pentachlorophenol listing (2015)",
+  "id": "AUTH-STOCKHOLM-PCP",
+  "level": "international_instrument",
+  "title": "POP listing; not binding on the US",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": null,
+   "depth": "none",
+   "exists": "?",
+   "found": "",
+   "ledger_row": null,
+   "queries": 0,
+   "reached": "N",
+   "reason": "no ledger row: authority named by the registry, citation not searched",
+   "says": "UNSEEN",
+   "state": "UNREACHABLE"
+  }
+ },
+ {
+  "citation": "FDA-Shire agreement and deferral of midodrine withdrawal (February 2012)",
+  "id": "AUTH-SUBPART-H-AGREEMENT",
+  "level": "order",
+  "title": "deferral pending two further studies",
+  "type": "AUTHORITY",
+  "verification": {
+   "corrected_value": "Sept 2010 was a clarification, not a reversal; withdrawal deferred 2012 by agreement with sponsor",
+   "depth": "search-index",
+   "exists": "Y",
+   "found": "drugs.com/pharmatimes (summary): Aug 2010 FDA issued Proposal to Withdraw (first under accelerated-approval rules); Sept 2010 FDA \"clarified that its proposal was part of the regulatory process and that midodrine could remain on the market\"; Feb 2012 FDA \"deferred the withdrawal\" after Shire agreed to 2 more studies; deadline later March 31 2015",
+   "ledger_row": "G010",
+   "queries": 1,
+   "reached": "Y",
+   "reason": "Sept 2010 was a clarification, not a reversal; withdrawal deferred 2012 by agreement with sponsor",
+   "says": "DIFFERS",
+   "state": "CORRECTED"
+  }
+ }
+]

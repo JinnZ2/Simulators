@@ -157,6 +157,28 @@ def unexpected(metric_id):
     return out
 
 
+def skipped(metric_ids=None):
+    """Every NOT_RUN case among the metrics run so far, as
+    (metric, case, detail).
+
+    A skipped case is not a passing case. NOT_RUN is a state, not a verdict:
+    the case raised on the way in, or its callable was unavailable, so
+    nothing was compared to anything. Before 2026-10-05 the gate exited 0
+    with 33 such cases across six metrics, and its green read as "every
+    case agrees". It now exits nonzero on any of them (KNOWN_RED 16).
+    """
+    ids = registry_ids() if metric_ids is None else metric_ids
+    return [(m, r["case"], r["detail"] or "")
+            for m in ids for r in _RESULTS.get(m, [])
+            if r["status"] == NOT_RUN]
+
+
+def exit_code(bad, comp_ok, reach_ok, outside, skips):
+    """0 only when nothing disagrees, nothing is missing or unreachable,
+    and nothing was skipped."""
+    return 1 if (bad or not comp_ok or not reach_ok or outside or skips) else 0
+
+
 def registry_ids():
     return sorted(_REGISTRY)
 
@@ -190,6 +212,28 @@ def _crediting_bin_gap(which):
               "mixed": {1: [0.8, 0.8], 0: [0.2, 0.2]},
               "empty_bin": {1: [0.5], 0: []}}
     return mod.bin_gap(worlds[which])
+
+def _crediting_position(which):
+    """crediting-rate/crediting_rate_v2.py::position, imported. Where the
+    technical_only bin sits between the two outer bins, 0.0 at not_retained
+    and 1.0 at visible. The cases that matter are the ones with no
+    denominator: a midpoint computed on outer bins that do not separate is a
+    number about the noise, so it is None."""
+    import importlib.util
+    path = os.path.join(ROOT, "crediting-rate", "crediting_rate_v2.py")
+    spec = importlib.util.spec_from_file_location("_crediting_rate_v2", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    V, T, N = mod.VISIBLE, mod.TECHNICAL_ONLY, mod.NOT_RETAINED
+    worlds = {
+        "at_not_retained": {V: [1.0, 1.0], T: [0.0], N: [0.0, 0.0]},
+        "at_visible": {V: [1.0, 1.0], T: [1.0], N: [0.0, 0.0]},
+        "halfway": {V: [1.0], T: [0.5], N: [0.0]},
+        "no_spread": {V: [0.5, 0.5], T: [0.5], N: [0.5, 0.5]},
+        "empty_middle": {V: [1.0], T: [], N: [0.0]},
+    }
+    return mod.position(worlds[which])
+
 
 def _amc_crossing_band(which):
     """anchor-measurand-crossing/amc.py::crossing_band, imported. Grouped ids
@@ -709,7 +753,9 @@ def _tcr_expected_crossings(rate, rate_unit, horizon_value, horizon_unit):
 EXPECTED_METRICS = (
     "agent-lifecycle-energy/phase_energy.py::integrate",
     "anchor-measurand-crossing/amc.py::crossing_band",
+    "automation-gap/driver_hours_evidence_register.py::p_uninterrupted",
     "anchor-position/normalize.py::crossing_count",
+    "crediting-rate/crediting_rate_v2.py::position",
     "crediting-rate/crediting_rate.py::bin_gap",
     "failure-mode-register/register.py::fraction_cap",
     "failure-mode-register/register_v2.py::joint_survival",
@@ -738,11 +784,13 @@ EXPECTED_METRICS = (
     "measurand-partition/wo4_lumber.py::stiffness_ratio",
     "route-independence/route_independence.py::independence_ratio",
     "route-independence/lag_count.py::lag_years",
+    "route-independence/enclosure_caveat_register.py::caveat_rate",
     "route-independence/settlement_split.py::net_positions",
     "revision-survival/revision_survival.py::delta",
     "routing-data-layer/rate_form.py::sustained_excess",
     "shape-spec-audit/shadow_read.py::outline_area",
     "sheet-structure-scan/sheetmodel.py::rank",
+    "thwaites-risk-audit/audit.py::sle_to_sv",
     "sim-span/sim_span.py::quad_fit",
     "sim-span/three_column.py::ols",
     "trigger-geometry/trigger_geometry.py::accumulation_ratio",
@@ -750,6 +798,45 @@ EXPECTED_METRICS = (
     "unowned-join/invariant.py::join_coverage",
     "assessor-coupling/conditions.py::pool_fraction",
     "instrument-index/build_index.py::claim_only_fraction",
+    "cooperative-substrate-proof/p3_comprehension.py::gain_from_sizes",
+    "cooperative-substrate-proof/p5_lag.py::lag_ratio",
+    "potential/gate/cut.py::vertex_connectivity",
+    "potential/matrix/check_attested_provenance.py::unprovenanced_attested",
+    "moving-mean-tracker/tracker.py::quantile",
+    "moving-mean-tracker/tracker.py::share_gap",
+    "tools/experiment_fruitfulness_triage.py::site_ratio",
+    "tools/experiment_fruitfulness_triage.py::classify_first",
+    "tools/check_citations.py::citation_state",
+    "tools/yardstick.py::read",
+    "tools/triage_clean_run.py::field_agreement",
+    "tools/fitness_bin_self_test.py::fitness",
+    "tools/fitness_bin_self_test.py::wrap_share",
+    "tools/fitness_bin_self_test.py::diversity",
+    "tools/fitness_bin_self_test.py::fitness_drop",
+    "tools/fitness_bin_self_test.py::allele_entropy",
+    "tools/fitness_bin_self_test.py::rediscovery_wait",
+    "tools/fitness_bin_self_test.py::archive_ratio",
+    "tools/deceptive_maze_ga.py::dist",
+    "tools/deceptive_maze_ga.py::objective",
+    "tools/deceptive_maze_ga.py::novelty",
+    "tools/deceptive_maze_ga.py::locus_entropy",
+    "tools/deceptive_maze_ga.py::half_gen",
+    "tools/fitness_bin_self_test.py::behavior_metrics",
+    "tools/fitness_bin_self_test.py::behavior_half_gen",
+    "tools/fitness_bin_self_test.py::behavior_ledger",
+    "tools/deceptive_maze_ga.py::jaccard_distance",
+    "tools/deceptive_maze_ga.py::mean_pairwise",
+    "tools/deceptive_maze_ga.py::half_distance_gen",
+    "reg-uncertainty-registry/tools/stats.py::mann_whitney_exact",
+    "reg-uncertainty-registry/tools/stats.py::one_directional",
+    "reg-uncertainty-registry/tools/grade.py::floor",
+    "floor-capability/floor_capability.py::life_ratio",
+    "floor-capability/floor_capability.py::catchable_share_low",
+    "floor-capability/floor_capability.py::handoff_overlap",
+    "extraction-chain-join/chain_join.py::coverage",
+    "extraction-chain-join/chain_join.py::traced_fraction",
+    "extraction-chain-join/chain_join.py::consumption_based",
+    "extraction-chain-join/chain_join.py::reserve_share_band",
 )
 
 
@@ -807,6 +894,51 @@ def _ii_claim_only_fraction(shapes):
     return mod.claim_only_fraction(rows)
 
 
+def _csp_load(fname, modname):
+    """A cooperative-substrate-proof module, imported by path with its own
+    folder on sys.path for the duration, since each part imports the
+    folder's scope.py by name. Without it every case was NOT_RUN on
+    ModuleNotFoundError ('scope'), which left the gate red for a loader
+    reason, not a metric one. A 'scope' cached from another folder is set
+    aside and restored, so the part sees its own."""
+    import importlib.util
+    folder = os.path.join(ROOT, "cooperative-substrate-proof")
+    saved = sys.modules.pop("scope", None)
+    sys.path.insert(0, folder)
+    try:
+        spec = importlib.util.spec_from_file_location(modname, os.path.join(folder, fname))
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        return mod
+    finally:
+        sys.path.remove(folder)
+        sys.modules.pop("scope", None)
+        if saved is not None:
+            sys.modules["scope"] = saved
+
+
+def _csp_gain_from_sizes(ca, cb, cab):
+    """cooperative-substrate-proof/p3_comprehension.py::gain_from_sizes,
+    imported. The compressibility gain 1 - cab / (ca + cb), kept separate
+    from the compressor so the arithmetic has a known answer that does not
+    move with the zlib build. The pin is the 0.0 against the Nones: a pair
+    that compressed no better together than apart is a MEASUREMENT of no
+    shared form, while an absent size is nothing measured, and a part whose
+    whole claim is about transmission must not read the second as the
+    first."""
+    return _csp_load("p3_comprehension.py", "_csp_p3").gain_from_sizes(ca, cb, cab)
+
+
+def _csp_lag_ratio(t_visible, t_scored):
+    """cooperative-substrate-proof/p5_lag.py::lag_ratio, imported. The
+    order's gate quantity, t_visible / t_scored. The pin is that a
+    t_visible of exactly 0.0 -- a failure visible immediately -- returns
+    0.0, while an UNDECLARED t_visible returns None. Collapsing them is
+    the order's own worst case: an undeclared failure interval reads as a
+    short one, and a clean score over it reads as success."""
+    return _csp_load("p5_lag.py", "_csp_p5").lag_ratio(t_visible, t_scored)
+
+
 def _rs_delta(acc_open, acc_blind):
     """revision-survival/revision_survival.py::delta, imported. The order's
     leakage measurement, acc(OPEN) - acc(BLIND); None when a condition is
@@ -830,6 +962,63 @@ def _cdc_routing_cost(external, downtime_hours):
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     return mod.routing_cost(external, downtime_hours)
+
+
+def _dhr_p_uninterrupted(lam_per_h, minutes):
+    """automation-gap/driver_hours_evidence_register.py::p_uninterrupted,
+    imported. P(no human-required interrupt in a window of `minutes`) under
+    a Poisson assumption: exp(-lam * minutes / 60). A zero rate and a zero
+    window are exact 1.0 and are real measurements, not defaults."""
+    import importlib.util
+    path = os.path.join(ROOT, "automation-gap",
+                        "driver_hours_evidence_register.py")
+    spec = importlib.util.spec_from_file_location("_dhr", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.p_uninterrupted(lam_per_h, minutes)
+
+
+def _rcl_composed_bias(a, c):
+    """reporting-chain-loss/hop_compose.py::composed_bias, imported.
+    B = sum_k (prod_{j>k} a_j) * c_k, the incentive stack composed across
+    the chain. All offsets zero returns an exact 0.0 -- a real zero, no
+    incentive at any hop -- and an unspecified gain or offset returns None,
+    which is the split a default would hide."""
+    import importlib.util
+    path = os.path.join(ROOT, "reporting-chain-loss", "hop_compose.py")
+    spec = importlib.util.spec_from_file_location("_rcl", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.composed_bias(a, c)
+
+
+def _cpd_stability_product(failure_probs):
+    """chain-position/load_class.py::stability_product, imported.
+    P(all assumed stabilities hold) = product of (1 - p). Returns None if
+    any factor is unassessed -- the work order's RULE, an unquantifiable
+    probability cannot be propagated -- and that None is the case a 1.0
+    default would turn into a reassuring number."""
+    import importlib.util
+    path = os.path.join(ROOT, "chain-position", "load_class.py")
+    spec = importlib.util.spec_from_file_location("_cpd", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.stability_product(failure_probs)
+
+
+def _drc_count_relation(inner, outer, stated_total):
+    """deep-research-correction/check.py::count_relation, imported.
+    Names which arithmetic a separately stated total implies: DISJOINT
+    when it equals inner + outer, NESTED when it equals the outer with the
+    inner strictly smaller, NEITHER otherwise. The equal-parts case is
+    where the inner<outer guard is the only thing standing between the two
+    readings, and the two readings are DRC_002's whole finding."""
+    import importlib.util
+    path = os.path.join(ROOT, "deep-research-correction", "check.py")
+    spec = importlib.util.spec_from_file_location("_drc", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.count_relation(inner, outer, stated_total)
 
 
 def _ai_interaction_ss(a, b, c, d):
@@ -876,6 +1065,8 @@ def _mp_stiffness_ratio(nb, nh, ab, ah):
 
 def seed():
     """Registers the two instances the rule was earned from."""
+    _seed_fitness_bin_self_test()
+    _seed_fitness_maze()
     fn, detail = _extract_verdict()
     register(
         "null-harness/null_harness.py::_verdict",
@@ -1185,6 +1376,33 @@ def seed():
               "falsifiable. hit counts ONLY against a falsifiable EXPECT, so "
               "a vague commit that matches anything is voided by this "
               "denominator, not by trust."),
+    )
+    register(
+        "crediting-rate/crediting_rate_v2.py::position",
+        _crediting_position,
+        [
+            case("at not_retained", ("at_not_retained",), 0.0,
+                 "technical_only sits on the lower outer bin -> 0.0; this is "
+                 "the reading that leaves the pre-stated ordering intact",
+                 tol=1e-9),
+            case("at visible", ("at_visible",), 1.0,
+                 "technical_only sits on the upper outer bin -> 1.0; this "
+                 "reading refutes the pre-stated ordering rather than "
+                 "confirming a second branch of it", tol=1e-9),
+            case("halfway", ("halfway",), 0.5,
+                 "0.5 between 0.0 and 1.0 -> 0.5; a third distinct value, so "
+                 "the set can detect a constant metric", tol=1e-9),
+            case("no spread", ("no_spread",), None,
+                 "the outer bins do not separate, so there is no denominator "
+                 "worth dividing by. A 0.5 here would be indistinguishable "
+                 "from the measured halfway case above, on no signal"),
+            case("empty middle bin", ("empty_middle",), None,
+                 "no technical_only item -> None, absent not a midpoint"),
+        ],
+        note=("revision 2's discriminating quantity. The order names two "
+              "readings of the technical_only bin and no boundary between "
+              "them; the cut is a declared CHOICE in the module and the "
+              "UNDEFINED state is what keeps a noise midpoint out of it."),
     )
     register(
         "crediting-rate/crediting_rate.py::bin_gap",
@@ -1556,9 +1774,227 @@ def seed():
               "wrong one are different failures."),
     )
     _seed_move_set()
+    _seed_potential()
     _seed_route_independence()
     _seed_lag_count()
+    _seed_enclosure_caveat()
     _seed_settlement_split()
+    _seed_work_order_metrics()
+    _seed_moving_mean_tracker()
+    _seed_fruitfulness_triage()
+    _seed_check_citations()
+    _seed_yardstick()
+    _seed_triage_clean_run()
+    _seed_reg_uncertainty()
+    _seed_floor_capability()
+    _seed_extraction_chain()
+
+
+def _reg_mod(name):
+    """reg-uncertainty-registry/tools/<name>.py, imported by path; the
+    module puts its own directory on sys.path for its sibling imports."""
+    import importlib.util
+    path = os.path.join(ROOT, "reg-uncertainty-registry", "tools", name + ".py")
+    spec = importlib.util.spec_from_file_location("_reg_" + name, path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def _reg_mann_whitney(x, y):
+    r = _reg_mod("stats").mann_whitney_exact(x, y)
+    return (r["U"], round(r["p_two_sided"], 6))
+
+
+def _reg_one_directional(below, over, over_possible):
+    return _reg_mod("stats").one_directional(
+        {"below": below, "over_restrictive": over, "over_possible": over_possible})
+
+
+def _reg_floor(U, gap, r1, r5):
+    return _reg_mod("grade").floor(U, gap, r1=r1, r5=r5)[0]
+
+
+def _seed_reg_uncertainty():
+    """WO-REG-1 registry. The exact Mann-Whitney test is checked against
+    enumerations done by hand; one_directional against its five branches,
+    where HOLDS_UNTESTABLE is the pin (a zero no row could produce is not
+    a finding); floor against the RUS-0.2 section 8 matrix as printed."""
+    register(
+        "reg-uncertainty-registry/tools/stats.py::mann_whitney_exact",
+        _reg_mann_whitney,
+        [case("separated pair", ([1, 2], [3, 4]), (0.0, 0.333333),
+              "C(4,2) = 6 arrangements; |U - 2| >= 2 holds for U = 0 and U = 4: 2/6"),
+         case("one each", ([1], [2]), (0.0, 1.0),
+              "two arrangements, both as extreme as the observed"),
+         case("three above three", ([5, 6, 7], [1, 2, 3]), (9.0, 0.1),
+              "C(6,3) = 20; only U = 0 and U = 9 are as extreme: 2/20"),
+         case("identical samples", ([1, 2], [1, 2]), (2.0, 1.0),
+              "ties count one half; U = mean, every arrangement is as extreme")],
+        note="two-sided p is P(|U - mean| >= |U_obs - mean|) over all arrangements")
+    register(
+        "reg-uncertainty-registry/tools/stats.py::one_directional",
+        _reg_one_directional,
+        [case("below only, over reachable at the actual", (22, 0, 1), "HOLDS",
+              "the over branch could fire on a row and did not"),
+         case("below only, no row could produce over", (22, 0, 0), "HOLDS_UNTESTABLE",
+              "the zero is fixed by the rows (REVIEW_v3 R13)"),
+         case("both directions", (20, 1, 1), "FAILS", "non-conformity both ways"),
+         case("over only", (0, 2, 2), "REVERSED", "one-directional the other way"),
+         case("none", (0, 0, 3), "NO_NONCONFORMITY", "nothing to read")],
+        note="HOLDS_UNTESTABLE against HOLDS is the pin")
+    register(
+        "reg-uncertainty-registry/tools/grade.py::floor",
+        _reg_floor,
+        [case("U3, G = -1", ("U3", -1, False, False), "D2", "matrix row U3, column G<=-1"),
+         case("U3, G = 0", ("U3", 0, False, False), "D3", "matrix row U3, column G=0"),
+         case("U4, G = 3", ("U4", 3, False, False), "D5", "matrix row U4, column G>=3"),
+         case("U1, G = 2", ("U1", 2, False, False), "D2", "matrix row U1, column G=1-2"),
+         case("R1 overrides", ("U1", -2, True, False), "D5", "R1: actual harm or absent benefit"),
+         case("R5 one column permissive", ("U3", 1, False, True), "D3",
+              "U3 column G=1-2 is D4; R5 moves one column toward permissive: D3")],
+        note="RUS-0.2 section 8 as printed in the pinned standard")
+
+
+
+def _flc_mod():
+    """floor-capability/floor_capability.py, imported by path under a
+    private name; the module imports its own siblings by path."""
+    import importlib.util
+    path = os.path.join(ROOT, "floor-capability", "floor_capability.py")
+    spec = importlib.util.spec_from_file_location("_flc", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def _flc_life_ratio(observed, expected, basis):
+    return _flc_mod().life_ratio(observed, expected, basis)
+
+
+def _flc_catchable_share_low(states):
+    return _flc_mod().catchable_share_low(states)
+
+
+def _flc_handoff_overlap(leaver_last, successor_first):
+    return _flc_mod().handoff_overlap(leaver_last, successor_first)
+
+
+def _seed_floor_capability():
+    """FLOOR CAPABILITY draft v0. life_ratio's None cases are where an
+    undeclared reference hides; catchable_share_low's empty-denominator case
+    is where a zero hides; handoff_overlap's back-to-back 0 is the case an
+    off-by-one moves to 1 or -1. Expected values are computed by hand from
+    the definitions in the module docstrings."""
+    register(
+        "floor-capability/floor_capability.py::life_ratio",
+        _flc_life_ratio,
+        [case("early failure", (8000, 10000, "OEM_RATED"), 0.8, "8000 / 10000"),
+         case("outlasts rating", (12000, 10000, "PLANT_HISTORY"), 1.2, "12000 / 10000"),
+         case("half life", (5000, 10000, "DUTY_ADJUSTED"), 0.5, "5000 / 10000"),
+         case("no basis", (8000, 10000, None), None,
+              "an expected life with no declared basis is not a reference"),
+         case("zero expected", (8000, 0, "OEM_RATED"), None, "no denominator")],
+        note="observed / expected service life with a declared basis")
+    register(
+        "floor-capability/floor_capability.py::catchable_share_low",
+        _flc_catchable_share_low,
+        [case("one of four mapped", (["CATCHABLE", "EQUIPMENT_ONLY", "UNDETERMINED",
+                                      "FASTER_THAN_CHECK", "UNMAPPED"],), 0.25,
+              "UNMAPPED leaves the denominator: 1 / 4"),
+         case("all catchable", (["CATCHABLE", "CATCHABLE"],), 1.0, "2 / 2"),
+         case("none catchable", (["EQUIPMENT_ONLY"],), 0.0, "0 / 1, a measured zero"),
+         case("nothing mapped", (["UNMAPPED"],), None,
+              "an empty denominator is not a share of zero")],
+        note="CATCHABLE over mapped scrap events")
+    register(
+        "floor-capability/floor_capability.py::handoff_overlap",
+        _flc_handoff_overlap,
+        [case("ten days overlap", (100, 91), 10, "days 91..100 inclusive"),
+         case("back to back", (100, 101), 0, "successor starts the day after"),
+         case("five-day gap", (100, 106), -5, "days 101..105 uncovered"),
+         case("date missing", (None, 5), None, "no leaver date, no overlap")],
+        note="leaver_last - successor_first + 1, signed")
+
+def _ecj_mod():
+    """extraction-chain-join/chain_join.py, imported by path under a private
+    name; the module imports its own siblings by path."""
+    import importlib.util
+    path = os.path.join(ROOT, "extraction-chain-join", "chain_join.py")
+    spec = importlib.util.spec_from_file_location("_ecj", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def _ecj_coverage(covered, total):
+    return _ecj_mod().coverage(covered, total)
+
+
+def _ecj_traced_fraction(firm, record, entities, juris):
+    return _ecj_mod().traced_fraction(firm, record, entities, juris)
+
+
+def _ecj_consumption_based(pb, eex, eem):
+    return _ecj_mod().consumption_based(pb, eex, eem)
+
+
+def _ecj_reserve_share_mid(rev, other, d_reserves):
+    band = _ecj_mod().reserve_share_band(rev, other, d_reserves)
+    return None if band is None else band[1]
+
+
+def _seed_extraction_chain():
+    """extraction-chain-join. coverage's empty-denominator case is where a
+    zero hides; traced_fraction's undisclosed and below-threshold cases are
+    where an untraced owner would read as traced; consumption_based's absent
+    term is where a default of zero would hide; the reserve band is checked
+    at its proportional reading. Expected values are computed by hand from
+    the definitions in the module docstrings."""
+    register(
+        "extraction-chain-join/chain_join.py::coverage",
+        _ecj_coverage,
+        [case("three of four", (3, 4), 0.75, "3 / 4"),
+         case("measured zero", (0, 5), 0.0, "0 / 5 is a coverage of zero"),
+         case("empty frame", (0, 0), None, "an empty denominator is not a zero"),
+         case("absent count", (None, 5), None, "no count, no coverage")],
+        note="covered / total, None when the total is absent or zero")
+    ents = {"F": {"kind": "FIRM", "jurisdiction": "J1", "operating": True},
+            "H": {"kind": "FIRM", "jurisdiction": "J5", "operating": False},
+            "P": {"kind": "PERSON", "jurisdiction": "J1"},
+            "Q": {"kind": "PERSON", "jurisdiction": "J2"}}
+    juris = {"J1": 20, "J2": 30, "J5": 75}
+    full = {"F": {"state": "DISCLOSED", "owners": [("P", 0.6), ("H", 0.4)]},
+            "H": {"state": "DISCLOSED", "owners": [("Q", 1.0)]}}
+    shut = {"F": {"state": "DISCLOSED", "owners": [("P", 0.6), ("H", 0.4)]},
+            "H": {"state": "UNDISCLOSED", "owners": []}}
+    thin = {"F": {"state": "DISCLOSED", "owners": [("P", 0.3)]},
+            "H": {"state": "DISCLOSED", "owners": [("Q", 1.0)]}}
+    register(
+        "extraction-chain-join/chain_join.py::traced_fraction",
+        _ecj_traced_fraction,
+        [case("all disclosed", ("F", full, ents, juris), 1.0, "0.6 + 0.4 x 1.0", tol=1e-12),
+         case("holding undisclosed", ("F", shut, ents, juris), 0.6,
+              "0.6 direct; the 0.4 behind H stops at H", tol=1e-12),
+         case("holders below threshold unlisted", ("F", thin, ents, juris), 0.3,
+              "the unlisted 0.7 is a residual, not an owner", tol=1e-12)],
+        note="share of a firm traced to persons; effective shares multiply")
+    register(
+        "extraction-chain-join/chain_join.py::consumption_based",
+        _ecj_consumption_based,
+        [case("net exporter", (100.0, 20.0, 5.0), 85.0, "100 - 20 + 5"),
+         case("net importer", (100.0, 5.0, 20.0), 115.0, "100 - 5 + 20"),
+         case("absent export term", (100.0, None, 5.0), None,
+              "an absent term is not zero")],
+        note="production-based - export-embodied + import-embodied")
+    register(
+        "extraction-chain-join/chain_join.py::reserve_share_band",
+        _ecj_reserve_share_mid,
+        [case("small accumulation", (10.0, 5.0, 3.0), 0.2, "3 / (10 + 5)", tol=1e-12),
+         case("large accumulation", (10.0, 5.0, 12.0), 0.8, "12 / (10 + 5)", tol=1e-12),
+         case("reserves fall", (10.0, 5.0, -1.0), 0.0, "no accumulation, a measured zero"),
+         case("no revenue", (0.0, 5.0, 3.0), None, "no revenue, no share")],
+        note="proportional reading of the reserve share band")
 
 
 def _irb_effective_origins(coupling):
@@ -1739,6 +2175,34 @@ def _seed_lag_count():
     )
 
 
+def _caveat_rate(yes, no):
+    """route-independence/enclosure_caveat_register.py::caveat_rate, imported.
+    FWO-15 Build A: YES / (YES + NO). E4 = ABSENT never enters the denominator,
+    so an arm with only ABSENT codings has no rate; None pins that against a
+    measured zero, since 0.0 would read as 'no study caveats' where nothing
+    was coded."""
+    import importlib.util
+    path = os.path.join(ROOT, "route-independence", "enclosure_caveat_register.py")
+    spec = importlib.util.spec_from_file_location("_enclosure_caveat_register", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.caveat_rate(yes, no)
+
+
+def _seed_enclosure_caveat():
+    register(
+        "route-independence/enclosure_caveat_register.py::caveat_rate",
+        _caveat_rate,
+        [
+            case("two of thirty", (2, 28), 2 / 30, "2 / (2 + 28) by hand"),
+            case("all caveat", (5, 0), 1.0, "5 / 5 by hand"),
+            case("measured zero", (0, 7), 0.0, "0 / 7: coded, none caveat"),
+            case("nothing coded YES or NO", (0, 0), None, "empty denominator; None, never 0"),
+        ],
+        note="FWO-15; the None case pins an all-ABSENT arm against a measured zero.",
+    )
+
+
 def _net_positions(claims):
     """route-independence/settlement_split.py::net_positions, imported.
     AMENDMENT A-1 section 2 as arithmetic: net[i] = held - owed on a claim
@@ -1813,6 +2277,110 @@ def _msv_halfwidth(text):
         return None if out is None else float(out)
     finally:
         sys.path.pop(0)
+
+
+def _potential_vertex_connectivity(which):
+    """potential/gate/cut.py::vertex_connectivity, imported. Menger's kappa
+    on hand-built graphs; the expected values are graph theory, fixed before
+    the function was read. P-01 (potential/briefs/REPORT.txt): a direct S->T
+    edge carried unbounded capacity in the split graph, so max-flow returned
+    10**9 + 1 as kappa on any graph with a bypass -- the shipped
+    test_gate.py failed at that case and nothing outside the folder noticed.
+    'token_bypass' is that pin. The gate README had said this function
+    needed no registration because it is a theorem; P-01 is the reason it
+    now has one."""
+    import importlib.util
+    gate = os.path.join(ROOT, "potential", "gate")
+    sys.path.insert(0, gate)
+    try:
+        def load(name):
+            spec = importlib.util.spec_from_file_location(
+                "_pot_" + name, os.path.join(gate, name + ".py"))
+            mod = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(mod)
+            return mod
+        graph = load("graph")
+        cut = load("cut")
+        G, C = graph.Graph, graph.Channel
+        phys = frozenset({"physical"})
+        g = G(which, "S", "T")
+        if which == "chain":
+            g.add_channel(C("S", "X", phys)); g.add_channel(C("X", "T", phys))
+        elif which == "diamond":
+            for m in ("X", "Y"):
+                g.add_channel(C("S", m, phys)); g.add_channel(C(m, "T", phys))
+        elif which == "triple":
+            for m in ("A0", "A1", "A2"):
+                g.add_channel(C("S", m, phys)); g.add_channel(C(m, "T", phys))
+        elif which == "token_bypass":
+            g.add_channel(C("S", "T", phys, requires_token=True, label="via token"))
+            g.add_channel(C("S", "T", phys, label="direct"))
+        elif which == "disconnected":
+            g.add_channel(C("S", "X", phys))
+        else:
+            raise ValueError(which)
+        return int(cut.vertex_connectivity(g))
+    finally:
+        sys.path.pop(0)
+
+
+def _potential_unprovenanced(which):
+    """potential/matrix/check_attested_provenance.py::unprovenanced_attested,
+    imported. The count of [A]-tagged matrix cells carrying neither the
+    standing note nor a date (P-16). The three worlds separate None (no [A]
+    cell: nothing to check) from 0 (every cell provenanced) from a count,
+    so a scanner returning 0 on an empty document -- the reassuring
+    reading -- fails the set."""
+    import importlib.util
+    path = os.path.join(ROOT, "potential", "matrix", "check_attested_provenance.py")
+    spec = importlib.util.spec_from_file_location("_pot_cap", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    worlds = {
+        "fixture": mod.CONSTRUCTED,
+        "all_provenanced": mod.CONSTRUCTED.replace(
+            "nobody named, no seat, no date", "done 2021 by the author at the desk"),
+        "no_attested": mod.NO_ATTESTED,
+    }
+    out = mod.unprovenanced_attested(worlds[which])
+    return None if out is None else int(out)
+
+
+def _seed_potential():
+    """Called BY seed(), not from the module tail (MSV_024)."""
+    register(
+        "potential/gate/cut.py::vertex_connectivity",
+        _potential_vertex_connectivity,
+        [case("chain S-X-T", ("chain",), 1,
+              "one internal vertex on the only path: kappa 1"),
+         case("diamond", ("diamond",), 2,
+              "two internally disjoint paths: kappa 2"),
+         case("triple", ("triple",), 3,
+              "three internally disjoint paths: kappa 3"),
+         case("token bypass (P-01 pin)", ("token_bypass",), 2,
+              "one path through the token vertex plus one direct edge: "
+              "kappa 2. The shipped code returned 1000000001 here, the "
+              "max-flow value on an unbounded direct edge"),
+         case("disconnected", ("disconnected",), 0,
+              "no S-T path at all: kappa 0, distinct from every other case")],
+        note="Menger kappa on hand-built graphs. Expected values are graph "
+             "theory, which is why the registration was skipped and why "
+             "P-01 got through: a theorem is not what a test checks, a "
+             "function is.",
+    )
+    register(
+        "potential/matrix/check_attested_provenance.py::unprovenanced_attested",
+        _potential_unprovenanced,
+        [case("constructed fixture", ("fixture",), 1,
+              "three [A] cells: one standing note, one dated, one neither"),
+         case("every cell provenanced", ("all_provenanced",), 0,
+              "the neither cell given a date: 0, a measured zero"),
+         case("no [A] cell at all", ("no_attested",), None,
+              "None, not 0: a document with nothing to check did not pass")],
+        note="P-16: the matrix's own [A] provenance rule as a count. On the "
+             "landed matrix it reads 16 of 16 NEITHER; that figure lives in "
+             "the sample file, not here, because the matrix is data.",
+    )
 
 
 def _seed_move_set():
@@ -1964,6 +2532,34 @@ def _seed_move_set():
              "branch order; DISJOINT is tested before NESTED, so a total "
              "that satisfied both would read DISJOINT")
     register(
+        "automation-gap/driver_hours_evidence_register.py::p_uninterrupted",
+        _dhr_p_uninterrupted,
+        [case("no interrupter is an exact 1.0", (0.0, 125), 1.0,
+              "a rate of zero leaves every window clear. 1.0 here is a "
+              "measurement, not a default -- the case a shortcut on a "
+              "falsy rate would pass for the wrong reason"),
+         case("zero window is an exact 1.0", (0.33, 0), 1.0,
+              "a window of no length cannot contain an event"),
+         case("ln2 per hour over one hour is a half",
+              (0.6931471805599453, 60), 0.5,
+              "lam*t = ln 2 at t = 1 h, so exp(-ln 2) = 0.5 exactly. "
+              "Catches a dropped /60: the same inputs without it give "
+              "exp(-41.6), which is 0 to any tolerance", tol=1e-12),
+         case("the register's own binding row", (0.33, 125),
+              0.5028315779709409,
+              "the cycle_min / high-inertia window, 125 min at the "
+              "placeholder rate. Catches a dropped negation, which returns "
+              "1.99 -- above 1, from a function typed as a probability",
+              tol=1e-12),
+         case("three hours at one per hour", (1.0, 180),
+              0.049787068367863944,
+              "exp(-3). A scale error in either argument moves this by "
+              "more than an order of magnitude", tol=1e-12)],
+        note="argument ORDER cannot be caught by any expected value: the "
+             "product lam*minutes is symmetric, so a swap returns the same "
+             "number. Stated because a case set that cannot catch a class "
+             "of error should say so rather than look complete.")
+    register(
         "reporting-chain-loss/hop_compose.py::composed_bias",
         _rcl_composed_bias,
         [case("all offsets zero is an exact zero", ([0.9, 0.9], [0.0, 0.0]),
@@ -2046,8 +2642,54 @@ def _seed_move_set():
         note="the None cases are the order's RULE built into the metric: an "
              "unassessed factor is not a factor of zero, and a malformed one "
              "is not silently clamped")
+    register(
+        "thwaites-risk-audit/audit.py::sle_to_sv",
+        _tra_sle_to_sv,
+        [case("2.6 mm/yr, the figure the document converts", (2.6,),
+              0.029743049962493214,
+              "2.6e-3 m/yr * 3.61e14 m^2 / 31556952 s / 1e6 = 0.0297 Sv by "
+              "hand; the document states 0.030", tol=1e-9),
+         case("1 mm/yr", (1.0,), 0.011439634600958927,
+              "the same arithmetic at unit forcing; a factor-1000 unit slip "
+              "in either direction shows here and not in a ratio", tol=1e-9),
+         case("a measured zero is 0.0", (0.0,), 0.0,
+              "no flux is a measurement and converts to zero sverdrups",
+              tol=0.0),
+         case("an absent figure is None, not 0.0", (None,), None,
+              "the discriminating case: an unstated SLE must not read as a "
+              "measured zero flux, which is the reassuring direction")],
+        note="a unit conversion, registered because its two zero-shaped "
+             "returns mean opposite things and a wrong one is invisible in "
+             "the render")
 
 
+def _tra_sle_to_sv(mm_per_year):
+    """thwaites-risk-audit/audit.py::sle_to_sv, imported.
+
+    The expected values are computed from the stated constants by hand
+    (mm/yr * 1e-3 * 3.61e14 m^2 / 31556952 s / 1e6), not read off the
+    implementation.  The discriminating pair is None against 0.0: an
+    absent figure must not read as a measured zero flux.
+    """
+    import importlib.util
+    path = os.path.join(ROOT, "thwaites-risk-audit", "audit.py")
+    spec = importlib.util.spec_from_file_location("_tra_audit", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.sle_to_sv(mm_per_year)
+
+
+def _seed_work_order_metrics():
+    """Five metrics from the WO-4/WO-6/instrument-index/DISPATCH-3 folders.
+
+    These five register() calls were committed (79800d3, 6ee102a,
+    209af6d, f5339f9) after the `return` of _tra_sle_to_sv, dead code
+    inside a helper seed() never calls -- so the CLI read them as
+    unreachable AND as expected-and-not-registered, two halves of one
+    defect (KNOWN_RED section 11). Moved here, under seed(), unchanged.
+    The fourth occurrence of the shape seed_reachable() was written
+    against, and the first it caught by itself.
+    """
     register(
         "unowned-join/invariant.py::join_coverage",
         _uj_join_coverage,
@@ -2140,6 +2782,547 @@ def _seed_move_set():
              "returns 'axis holds at this build' while None returns "
              "'UNRATED: check not run' -- opposite readings of the same "
              "build, separated only by this field")
+
+    register(
+        "cooperative-substrate-proof/p3_comprehension.py::gain_from_sizes",
+        _csp_gain_from_sizes,
+        [case("a pair compressing to 120 of 200", (100, 100, 120), 0.4,
+              "1 - 120/200 by hand", tol=1e-12),
+         case("no gain is a measured 0.0", (100, 100, 200), 0.0,
+              "the pair compressed together exactly as well as apart. A "
+              "measurement of no shared form, and NOT the same state as "
+              "an absent size below"),
+         case("a negative gain is returned as measured",
+              (100, 100, 220), -0.1,
+              "1 - 220/200; the concatenation compressed WORSE than the "
+              "parts. Clamping it at zero would hide the one direction "
+              "that says the documents interfere", tol=1e-12),
+         case("an absent compressed size is None", (100, None, 120), None,
+              "nothing was measured; not a gain of zero"),
+         case("a zero denominator is None", (0, 0, 0), None,
+              "two empty documents have no gain to report")],
+        note="the 0.0 against the Nones is the pin, and the negative case "
+             "is the second: a metric that clamped or defaulted would pass "
+             "the first three cases and fail these two")
+
+    register(
+        "cooperative-substrate-proof/p5_lag.py::lag_ratio",
+        _csp_lag_ratio,
+        [case("fifty times the scoring interval", (50.0, 5.0), 10.0,
+              "50/5 by hand; exactly at the order's gate", tol=1e-12),
+         case("failure visible faster than scoring", (1.0, 10.0), 0.1,
+              "1/10 by hand; the reachable negative", tol=1e-12),
+         case("a failure visible immediately is 0.0", (0.0, 10.0), 0.0,
+              "a MEASUREMENT: t_visible was declared and it is zero"),
+         case("an undeclared t_visible is None", (None, 10.0), None,
+              "the pin. You cannot get a null signal out of a variable "
+              "nobody declared, so this must not read as the 0.0 above"),
+         case("an absent scoring interval is None", (10.0, None), None,
+              "no denominator, no reading"),
+         case("a zero scoring interval is None", (10.0, 0.0), None,
+              "not a division by zero and not an infinite ratio")],
+        note="the 0.0 against the four Nones is the pin: a declared "
+             "immediate failure and an undeclared failure interval are "
+             "the two states the order's gate exists to keep apart")
+
+
+def _mmt(fn_name, *args):
+    """moving-mean-tracker/tracker.py, imported by path."""
+    import importlib.util
+    path = os.path.join(ROOT, "moving-mean-tracker", "tracker.py")
+    spec = importlib.util.spec_from_file_location("_mmt_tracker", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return getattr(mod, fn_name)(*args)
+
+
+def _mmt_quantile(values, q):
+    return _mmt("quantile", values, q)
+
+
+def _mmt_share_gap(sample_share, population_share):
+    return _mmt("share_gap", sample_share, population_share)
+
+
+def _seed_moving_mean_tracker():
+    """moving-mean-tracker: the quantile behind median, p10 and p90, and
+    the G2 gap whose undeclared case must read UNRATED and not 0."""
+    register(
+        "moving-mean-tracker/tracker.py::quantile",
+        _mmt_quantile,
+        [case("median of an even count", ([1, 2, 3, 4], 0.5), 2.5,
+              "halfway between the two middle order statistics, 2 and 3; "
+              "by hand"),
+         case("p90 of 1..5", ([1, 2, 3, 4, 5], 0.9), 4.6,
+              "position (5-1)*0.9 = 3.6, so 4 + 0.6*(5-4) = 4.6 by hand "
+              "under linear interpolation [CHOICE 1]", tol=1e-12),
+         case("p10 of 0..10", (list(range(11)), 0.1), 1.0,
+              "position 10*0.1 = 1 lands exactly on the second order "
+              "statistic, 1; no interpolation", tol=1e-12),
+         case("unsorted input", ([5, 1, 3], 0.5), 3.0,
+              "sorted it is 1,3,5 and the middle is 3; a quantile that did "
+              "not sort would return 1"),
+         case("empty is None", ([], 0.5), None,
+              "no values, no median; a 0 here would enter a gauge as a "
+              "measured value")],
+        note="the unsorted case catches an order-statistic read on raw "
+             "input; the empty case is where a default would hide")
+    register(
+        "moving-mean-tracker/tracker.py::share_gap",
+        _mmt_share_gap,
+        [case("over-represented segment", (0.5, 0.2), 0.3,
+              "sample share 0.5 against a population share 0.2; "
+              "0.5 - 0.2 by hand", tol=1e-12),
+         case("under-represented segment", (0.1, 0.4), -0.3,
+              "0.1 - 0.4 by hand; the sign carries the direction",
+              tol=1e-12),
+         case("shares equal", (0.25, 0.25), 0.0,
+              "a measured zero: the reference exists and the shares agree"),
+         case("no population share is UNRATED", (0.25, None), "UNRATED",
+              "an undeclared reference is not a zero gap; the dispatch's "
+              "rule, G2 UNRATED, never 0"),
+         case("no sample share is None", (None, 0.25), None,
+              "no kept, assigned records on the axis: the gap has no "
+              "value, which is a different state from UNRATED")],
+        note="the 0.0 against UNRATED against None is the pin: a measured "
+             "agreement, an absent reference, and an absent sample are "
+             "three states")
+
+
+def _eft(fn_name, *args, **kw):
+    """tools/experiment_fruitfulness_triage.py, imported by path."""
+    import importlib.util
+    path = os.path.join(ROOT, "tools", "experiment_fruitfulness_triage.py")
+    spec = importlib.util.spec_from_file_location("_eft_scorer", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return getattr(mod, fn_name)(*args, **kw)
+
+
+def _eft_site_ratio(*args, **kw):
+    return _eft("site_ratio", *args, **kw)
+
+
+def _eft_classify_first(first_sets):
+    return _eft("classify_first", first_sets)
+
+
+def _seed_fruitfulness_triage():
+    """The triage scorer's ratio and its reading over the sweep. The REV
+    case at r = 0 must read NOT_REACHED and never 0; a tie held in every
+    setting must read UNRESOLVED and never pick a site."""
+    low = ("low", "low", "low", "low")
+    register(
+        "tools/experiment_fruitfulness_triage.py::site_ratio",
+        _eft_site_ratio,
+        [case("all components 2, all costs low, LOOP",
+              (2, 2, 2, 2, 2) + low, 3.0,
+              "fruit 2*(2+2+2) = 12 over cost 1+1+1+1 = 4; by hand",
+              tol=1e-12),
+         case("d = 0 returns no fruit", (0, 2, 2, 2, 2) + low, 0.0,
+              "an experiment that cannot separate (a) from (b) returns "
+              "nothing whatever else it has: 0 * (...) = 0"),
+         case("r = 0 on REV is NOT_REACHED", (2, 2, 2, 2, 0) + low,
+              "NOT_REACHED",
+              "no recovery readout, no Q-REV score; a 0 here would rank "
+              "an unreached site below a reached one that scored 0.1",
+              kwargs={"question": "REV"}),
+         case("r = 1 halves REV", (2, 2, 2, 2, 1) + low, 1.5,
+              "12 * 1/2 = 6 over cost 4; by hand",
+              kwargs={"question": "REV"}, tol=1e-12),
+         case("all costs high", (2, 2, 2, 2, 2,
+                                 "high", "high", "high", "high"),
+              12.0 / 36.0,
+              "fruit 12 over cost 9*4 = 36 under [CHOICE 2]; a metric "
+              "that ignored cost would return 3.0", tol=1e-12)],
+        note="the NOT_REACHED case is the pin: an absent Q-REV reading is "
+             "a state, and the high-cost case catches a ratio that drops "
+             "its denominator")
+    register(
+        "tools/experiment_fruitfulness_triage.py::classify_first",
+        _eft_classify_first,
+        [case("sole first everywhere", ([{"S1"}] * 4,), "FIRST_ROBUST:S1",
+              "S1 alone first in 4 of 4 settings"),
+         case("sole first in 3 of 4", ([{"S1"}] * 3 + [{"S2"}],),
+              "FIRST_SCOPED:S1", "3 of 4 is a strict majority, not all"),
+         case("split 2 and 2", ([{"S1"}] * 2 + [{"S2"}] * 2,),
+              "FIRST_UNRESOLVED:S1,S2",
+              "2 of 4 is no majority; the union is reported"),
+         case("tie in every setting", ([{"S1", "S4"}] * 4,),
+              "FIRST_UNRESOLVED:S1,S4",
+              "a tie held in all settings is not a win for either; "
+              "breaking it alphabetically would return FIRST_ROBUST:S1")],
+        note="the last case is the pin: a classifier that broke ties by "
+             "name would read the rubric's own S1 / S4 tie as a result")
+
+
+def _cc_citation_state(*args):
+    """tools/check_citations.py::citation_state, imported by path."""
+    import importlib.util
+    path = os.path.join(ROOT, "tools", "check_citations.py")
+    spec = importlib.util.spec_from_file_location("_cc_checker", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.citation_state(*args)
+
+
+def _seed_check_citations():
+    """The four-state citation rule of the external-report audit. The pin
+    is the pair of empty searches: one search that finds nothing must read
+    UNREACHABLE, two must read NOT_FOUND. A rule that read one empty
+    search as absence would turn every unindexed source into a finding
+    against the report that cited it."""
+    register(
+        "tools/check_citations.py::citation_state",
+        _cc_citation_state,
+        [case("seen, and it says the same", ("Y", 1, "Y", "MATCH"),
+              "VERIFIED", "exists Y and says MATCH; by the rule"),
+         case("seen, and it says something else", ("Y", 1, "Y", "DIFFERS"),
+              "CORRECTED", "exists Y and says DIFFERS; by the rule"),
+         case("one empty search", ("Y", 1, "N", "UNSEEN"), "UNREACHABLE",
+              "absence on fewer than two searches is not a check"),
+         case("two empty searches", ("Y", 2, "N", "UNSEEN"), "NOT_FOUND",
+              "two searches on a searchable identifier, channel answered"),
+         case("ID resolves to another work", ("Y", 1, "OTHER", "UNSEEN"),
+              "NOT_FOUND", "the source is not at that ID"),
+         case("source there, figure unseen", ("Y", 5, "Y", "UNSEEN"),
+              "UNREACHABLE", "a source that exists is not missing because "
+              "one figure in it was not seen"),
+         case("host refused", ("N", 2, "?", "UNSEEN"), "UNREACHABLE",
+              "a channel that did not answer cannot show absence")],
+        note="the one-search and two-search cases are the pin")
+
+
+def _ys_read(items):
+    """tools/yardstick.py::read, imported by path; the three fractions,
+    rounded to 6 places, None where there is no classified spend."""
+    import importlib.util
+    path = os.path.join(ROOT, "tools", "yardstick.py")
+    spec = importlib.util.spec_from_file_location("_yardstick", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    rd = mod.read(mod.load_items(items))
+    return tuple(None if rd[k] is None else round(rd[k], 6)
+                 for k in ("direct", "rolled_exclusive", "rolled_with_shared"))
+
+
+def _ys_item(name, spend, cls, deps=()):
+    return {"item": name, "spend": spend, "class": cls,
+            "depends_on": list(deps)}
+
+
+def _seed_yardstick():
+    """The coupling-vs-border yardstick. Two pins: an item shared between a
+    border item and a coupling root widens the rolled-up reading to a band
+    instead of being split by an assumed ratio, and an input with no
+    classified spend reads None, never 0.0 (which would read as "no border
+    spend at all")."""
+    i = _ys_item
+    register(
+        "tools/yardstick.py::read",
+        _ys_read,
+        [case("all coupling", ([i("a", 10, "coupling")],), (0.0, 0.0, 0.0),
+              "no border spend: every fraction is 0"),
+         case("30 coupling, 10 border", ([i("a", 30, "coupling"),
+                                          i("b", 10, "border")],),
+              (0.25, 0.25, 0.25), "10 / 40, nothing to roll up"),
+         case("admin held up only by the border rolls up",
+              ([i("b", 10, "border", ["adm"]), i("adm", 10, "coordinating"),
+                i("c", 20, "coupling")],), (0.25, 0.5, 0.5),
+              "direct 10/40; rolled (10 + 10)/40; nothing shared"),
+         case("a shared item is a band, never split",
+              ([i("b", 10, "border", ["rec"]), i("rec", 10, "coordinating"),
+                i("c", 20, "coupling", ["rec"])],), (0.25, 0.25, 0.5),
+              "rec serves both: lower end 10/40, upper (10 + 10)/40"),
+         case("a gap stays outside the fraction",
+              ([i("a", 30, "coupling"), i("b", 10, "border"),
+                i("g", 60, None)],), (0.25, 0.25, 0.25),
+              "the unclassified 60 enters no denominator"),
+         case("no classified spend", ([i("g", 5, None)],),
+              (None, None, None),
+              "nothing classified: no fraction exists, which is not 0")],
+        note="the shared band and the None-not-0.0 case are the pins")
+
+
+
+def _tcr_field_agreement(pairs):
+    """tools/triage_clean_run.py::field_agreement, imported by path."""
+    import importlib.util
+    path = os.path.join(ROOT, "tools", "triage_clean_run.py")
+    spec = importlib.util.spec_from_file_location("_tcr", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.field_agreement(pairs)
+
+
+def _seed_triage_clean_run():
+    """The second scorer's agreement count: (same, one step, two steps)
+    on a three-step scale. Pin: 0 against 2 is two steps, the only cell
+    the report lists as more than one step apart."""
+    register(
+        "tools/triage_clean_run.py::field_agreement",
+        _tcr_field_agreement,
+        [case("all the same", ([(0, 0), (1, 1), (2, 2)],), (3, 0, 0),
+              "every pair equal"),
+         case("one step each", ([(0, 1), (2, 1)],), (0, 2, 0),
+              "0 against 1 and 2 against 1"),
+         case("two steps", ([(0, 2)],), (0, 0, 1),
+              "0 against 2 is more than one step apart"),
+         case("one of each", ([(0, 0), (0, 1), (2, 0)],), (1, 1, 1),
+              "same, one step, two steps"),
+         case("no pairs", ([],), (0, 0, 0),
+              "nothing compared: three zero counts")],
+        note="the 0-against-2 case is the pin")
+
+
+def _fbst_metric(fn_name, *args):
+    """WO-7 pure metrics; normal import from tools, with no GA run."""
+    import importlib.util
+    path = os.path.join(ROOT, "tools", "fitness_bin_self_test.py")
+    spec = importlib.util.spec_from_file_location("_fbst", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return getattr(mod, fn_name)(*args)
+
+
+def _fbst_fitness(*args):
+    return _fbst_metric("fitness", *args)
+
+
+def _fbst_wrap_share(*args):
+    return _fbst_metric("wrap_share", *args)
+
+
+def _fbst_diversity(*args):
+    return _fbst_metric("diversity", *args)
+
+
+def _fbst_fitness_drop(*args):
+    return _fbst_metric("fitness_drop", *args)
+
+
+def _fbst_allele_entropy(*args):
+    return _fbst_metric("allele_entropy", *args)
+
+
+def _fbst_rediscovery_wait(*args):
+    return _fbst_metric("rediscovery_wait", *args)
+
+
+def _fbst_archive_ratio(*args):
+    return _fbst_metric("archive_ratio", *args)
+
+
+def _fbst_behavior_metrics(*args):
+    return _fbst_metric("behavior_metrics", *args)
+
+
+def _fbst_behavior_half(*args):
+    return _fbst_metric("behavior_half_gen", *args)
+
+
+def _fbst_behavior_losses(observations):
+    result = _fbst_metric("behavior_ledger", observations, 8)
+    return result["loss_events"], result["rediscovered"], result["lost_within_window"]
+
+
+def _maze_metric(fn_name, *args):
+    """Import the untouched supplied maze; no evolutionary run at import."""
+    import importlib.util
+    path = os.path.join(ROOT, "tools", "deceptive_maze_ga.py")
+    spec = importlib.util.spec_from_file_location("_fitness_maze", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return getattr(mod, fn_name)(*args)
+
+
+def _maze_dist(*args):
+    return _maze_metric("dist", *args)
+
+
+def _maze_objective(*args):
+    return _maze_metric("objective", *args)
+
+
+def _maze_novelty(*args):
+    return _maze_metric("novelty", *args)
+
+
+def _maze_entropy(which):
+    populations = {"clones": [[0] * 60] * 4,
+                   "two": [[0] * 60, [2] * 60],
+                   "four": [[i] * 60 for i in range(4)]}
+    return _maze_metric("locus_entropy", populations[which])
+
+
+def _maze_half_gen(*args):
+    return _maze_metric("half_gen", *args)
+
+
+def _maze_jaccard(*args):
+    return _maze_metric("jaccard_distance", *args)
+
+
+def _maze_pairwise(*args):
+    return _maze_metric("mean_pairwise", *args)
+
+
+def _maze_distance_half(*args):
+    return _maze_metric("half_distance_gen", *args)
+
+
+def _seed_fitness_maze():
+    register(
+        "tools/deceptive_maze_ga.py::dist", _maze_dist,
+        [case("same point", ((3, 4), (3, 4)), 0.0, "zero displacement"),
+         case("3-4-5 triangle", ((0, 0), (3, 4)), 5.0,
+              "sqrt(3^2+4^2)=5"),
+         case("axis", ((2, 1), (2, 13)), 12.0, "13-1, same x")])
+    register(
+        "tools/deceptive_maze_ga.py::objective", _maze_objective,
+        [case("goal", ((2, 13),), 0.0, "negative distance zero"),
+         case("start", ((2, 1),), -12.0, "negative twelve vertical cells"),
+         case("pocket", ((2, 6),), -7.0,
+              "negative seven cells; wall prevents straight passage")])
+    register(
+        "tools/deceptive_maze_ga.py::novelty", _maze_novelty,
+        [case("fifteen at distance five",
+              ((0, 0), [(0, 0)] + [(3, 4)] * 15), 5.0,
+              "remove one self-distance then average fifteen fives"),
+         case("all duplicate", ((0, 0), [(0, 0)] * 16), 0.0,
+              "duplicates remain peers, every distance zero"),
+         case("seven duplicates and eight fives",
+              ((0, 0), [(0, 0)] * 8 + [(3, 4)] * 8), 8 / 3,
+              "remove one self: sum 8*5 over 15 neighbors", tol=1e-12)])
+    register(
+        "tools/deceptive_maze_ga.py::locus_entropy", _maze_entropy,
+        [case("clones", ("clones",), 0.0,
+              "every locus fixed: mean entropy zero"),
+         case("balanced two", ("two",), 1.0,
+              "one bit at every locus, mean one (not sum sixty)"),
+         case("balanced four", ("four",), 2.0,
+              "two bits at every locus, mean two")])
+    register(
+        "tools/deceptive_maze_ga.py::half_gen", _maze_half_gen,
+        [case("below at two", ([2.0, 1.0, 0.99],), 2,
+              "strictly below one only at zero-based index two"),
+         case("half never below", ([2.0, 1.0, 1.0],), None,
+              "equal to the half threshold is not strictly below"),
+         case("below at one", ([2.0, 0.9, 0.8],), 1,
+              "first below at index one, not last below")])
+    register(
+        "tools/deceptive_maze_ga.py::jaccard_distance", _maze_jaccard,
+        [case("identical sets", ({1, 2}, {1, 2}), 0.0,
+              "intersection equals union"),
+         case("disjoint", ({1}, {2}), 1.0, "empty intersection, nonempty union"),
+         case("one of three shared", ({1, 2}, {2, 3}), 2 / 3,
+              "one shared of three union cells: 1-1/3", tol=1e-12),
+         case("empty convention", (set(), set()), 0.0,
+              "explicitly identical empty sets, not division by zero")])
+    register(
+        "tools/deceptive_maze_ga.py::mean_pairwise", _maze_pairwise,
+        [case("F duplicate weighted slots", ([(0, 0), (3, 4), (0, 0)], "F"), 10 / 3,
+              "three unordered slot pairs: five, zero, five", tol=1e-12),
+         case("V hand population", ([{1}, {1, 2}, {2}], "V"), 2 / 3,
+              "three pairs: one half, one, one half", tol=1e-12),
+         case("P scalar hand population", ([2, 2, 5], "P"), 2.0,
+              "absolute distances zero, three, three; mean two"),
+         case("no pair", ([(0, 0)], "F"), None,
+              "one slot cannot supply a pair; absence not measured zero")])
+    register(
+        "tools/deceptive_maze_ga.py::half_distance_gen", _maze_distance_half,
+        [case("strict half at two", ([2.0, 1.0, 0.9],), 2,
+              "equal at one, strictly below half at two"),
+         case("40 percent no crossing", ([2.0, 1.0, 0.9], 0.4), None,
+              "nothing below eight tenths"),
+         case("60 percent at one", ([2.0, 1.0, 0.9], 0.6), 1,
+              "one is below twelve tenths at index one")])
+
+
+def _seed_fitness_bin_self_test():
+    """Nonconstant hand-known answers, including absent != measured zero."""
+    register(
+        "tools/fitness_bin_self_test.py::fitness", _fbst_fitness,
+        [case("goal", ([8, 8], [8, 8]), 0, "distance zero, so score zero"),
+         case("start", ([0, 0], [8, 8]), -16, "-(8+8) by hand"),
+         case("one step off", ([7, 8], [8, 8]), -1, "-(1+0) by hand")])
+    register(
+        "tools/fitness_bin_self_test.py::wrap_share", _fbst_wrap_share,
+        [case("all", ([{"wraps": 2}, {"wraps": 1}],), 1.0,
+              "two of two slots use at least one wrap"),
+         case("none", ([{"wraps": 0}, {"wraps": 0}],), 0.0,
+              "observed zero of two, not absent"),
+         case("half", ([{"wraps": 0}, {"wraps": 3}],), 0.5,
+              "one of two, not three events over two slots"),
+         case("absent", ([],), None, "no winner slots, no denominator")])
+    register(
+        "tools/fitness_bin_self_test.py::diversity", _fbst_diversity,
+        [case("hand population", (["NN", "NE", "EE"],), 2 / 3,
+              "pair distances 1,2,1: 4/(3*2)"),
+         case("clones", (["NN", "NN"],), 0.0, "zero differing loci"),
+         case("opposites", (["NN", "EE"],), 1.0, "two of two loci differ"),
+         case("one slot", (["NN"],), None, "no pairs, not zero diversity")])
+    register(
+        "tools/fitness_bin_self_test.py::fitness_drop", _fbst_fitness_drop,
+        [case("loss", (0, -16), 16, "native minus changed: 0-(-16)"),
+         case("held", (0, 0), 0, "equal scores, measured zero loss"),
+         case("improvement", (-3, 0), -3, "-3-0, retain direction")])
+    register(
+        "tools/fitness_bin_self_test.py::allele_entropy", _fbst_allele_entropy,
+        [case("balanced two", (["N", "E"],), 1.0,
+              "two equally likely alleles: -2*(1/2)*log2(1/2)=1"),
+         case("balanced four", (["N", "S", "E", "W"],), 2.0,
+              "four equally likely alleles, log2(4)=2"),
+         case("clones", (["NN", "NN"],), 0.0,
+              "every locus has one allele, log2(1)=0"),
+         case("absent", ([],), None, "no population is not zero entropy")])
+    register(
+        "tools/fitness_bin_self_test.py::rediscovery_wait", _fbst_rediscovery_wait,
+        [case("one half-probability child", (1, 1.0, 2), 2.0,
+              "redraw from both alleles, success 1/2, geometric wait 2"),
+         case("two independent children", (2, 1.0, 2), 4 / 3,
+              "failure (1/2)^2, success 3/4, geometric wait 4/3", tol=1e-12),
+         case("zero mutation", (2, 0.0, 4), None,
+              "absent parental support plus zero mutation has no finite wait")])
+    register(
+        "tools/fitness_bin_self_test.py::archive_ratio", _fbst_archive_ratio,
+        [case("rebuild dearer", (2, 4, 3, "work_units"), 1.5,
+              "two generations times three units / four holding units"),
+         case("rebuild free", (2, 4, 0, "work_units"), 0.0,
+              "declared zero per-generation cost gives measured zero"),
+         case("no holding cost", (2, None, 3, "work_units"), "UNRATED",
+              "no denominator cost declared, no preference inferred"),
+         case("no common unit", (2, 4, 3, None), "UNRATED",
+              "bytes and generations cannot be divided into a cost ratio"),
+         case("zero denominator", (2, 0, 3, "work_units"), "UNRATED",
+              "refuses a zero holding-cost denominator, never infinite ratio")])
+    register(
+        "tools/fitness_bin_self_test.py::behavior_metrics", _fbst_behavior_metrics,
+        [case("two balanced cells", (["a", "a", "b", "b"],),
+              {"distinct": 2, "entropy_bits": 1.0, "largest_share": 0.5},
+              "two cells at one half each: one bit, largest half"),
+         case("one occupied cell", (["a", "a"],),
+              {"distinct": 1, "entropy_bits": 0.0, "largest_share": 1.0},
+              "one cell certain, zero entropy, largest all"),
+         case("absent population", ([],),
+              {"distinct": None, "entropy_bits": None, "largest_share": None},
+              "absence is not measured zero diversity")])
+    register(
+        "tools/fitness_bin_self_test.py::behavior_half_gen", _fbst_behavior_half,
+        [case("below at two", ([4, 2, 1],), 2,
+              "equal to half at one, strictly below at two"),
+         case("half held", ([4, 2, 2],), None,
+              "strict threshold, equality does not fire"),
+         case("below at one", ([4, 1, 1],), 1,
+              "first below at index one")])
+    register(
+        "tools/fitness_bin_self_test.py::behavior_ledger", _fbst_behavior_losses,
+        [case("one recovered one windowed loss", ([["a", "b"], ["a"], ["b"]],),
+              (2, 1, 1), "b disappears then returns; a disappears at last observed step"),
+         case("no support loss", ([["a", "b"], ["a", "b"]],),
+              (0, 0, 0), "both occupied in both generations"),
+         case("two lost in window", ([["a", "b", "c"], ["a"]],),
+              (2, 0, 2), "b and c disappear with no later observation")])
 
 
 def seed_reachable(src=None, path=None):
@@ -2314,7 +3497,21 @@ def report():
     print("register() call sites in other files: %d" % len(outside))
     for rel, ln in outside:
         print("  !! %s line %d registers outside seed()" % (rel, ln))
-    return 1 if (bad or not comp["ok"] or not reach["ok"] or outside) else 0
+    skips = skipped()
+    skip_metrics = sorted(set(m for m, _, _ in skips))
+    print()
+    print("=" * 72)
+    print("SKIPPED (NOT_RUN): %d cases in %d metrics%s"
+          % (len(skips), len(skip_metrics),
+             "   -- GATE RED: a skipped case is not a passing case"
+             if skips else ""))
+    for m in skip_metrics:
+        n = sum(1 for mm, _, _ in skips if mm == m)
+        first = next(d for mm, _, d in skips if mm == m)
+        print("  SKIPPED %2d  %s" % (n, m))
+        print("             %s" % first.splitlines()[0][:100] if first else "")
+    print("=" * 72)
+    return exit_code(bad, comp["ok"], reach["ok"], outside, skips)
 
 
 if __name__ == "__main__":

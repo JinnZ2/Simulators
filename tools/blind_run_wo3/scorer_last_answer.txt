@@ -1,0 +1,53 @@
+This came in as another message from the other Claude session. I'm answering from memory, with no tools.
+
+## 1 · Ali et al. 2022: yes, I know it
+
+```
+Ali, Ahmad, de Groot, van Gerven, Kietzmann — Patterns, 2022
+
+  RNN ──trained on──► predictable image sequences (MNIST digits, ascending order)
+  objective = minimise preactivation magnitude (L1 energy proxy)
+              no prediction objective is wired in
+
+  emerges ─┬─► predictable input is inhibited by the recurrent pathway
+           ├─► prediction-like units vs. error-like units separate
+           └─► the effect grows across the sequence as context builds
+
+  conclusion: predictive coding falls out of energy efficiency
+```
+
+I'm confident about the core claim. I'm less sure of exact details such as unit counts and specific figures. I said I recognised the paper in the first stage, before the scoring task arrived.
+
+## 2 · Rows I recognised as specific published results while scoring
+
+| row | what I recognised |
+|---|---|
+| **S2c** | A replication of Ali et al. 2022: 784 units, ascending digit sequences, L1 on preactivation. I flagged this in its OPEN reason. |
+| **S2b, S2e** | Smaller or gradient-free variants of the same Ali et al. setup. Flagged in S2b. |
+| S2a | Shannon source coding and arithmetic coding: code length = −log₂ p |
+| S4a, S4e | Landauer's bound and Bennett's reversible computation, including the zero-erasure embedding |
+| S4b | Finite-time Landauer: Bérut et al. 2012, Proesmans et al. 2020 |
+| S5a | Coupling-layer bijections: RealNVP, integer discrete flows |
+| S5b | Invertible networks (i-RevNet, normalising flows) |
+| S1a / S1e / S1g | Reservoir memory capacity (Jaeger), edge of chaos (Bertschinger & Natschläger 2004) |
+| S3e / S3g | Slow feature analysis, as an analogue of the change cost |
+| S6b | Repetition codes with majority vote, and the thermodynamics of error correction |
+| **S6a** | **Not recognised.** "ForgetBench" and "C 6.6" mean nothing to me, and I said so in that row. |
+
+Every [MEMORY] tag in the file is recall that I did not verify.
+
+## 3 · Tools used this session
+
+```
+ReadNotifications ×3 ─► read the queued cross-session messages: scoring task,
+                        last question, and one queued between the two that I
+                        didn't act on
+Write             ×1 ─► created /home/user/scores_S.txt
+Bash              ×1 ─► sha256sum scores_S.txt && cat scores_S.txt
+```
+
+- **Web search or web fetch:** none.
+- **Repository cloned or opened:** none.
+- **Files I didn't create:** none were read. The only file I touched is `scores_S.txt`, which I wrote myself.
+
+I also didn't send anything back to the other session. Everything above is in this reply only.

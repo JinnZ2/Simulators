@@ -1,0 +1,1568 @@
+{
+ "first_commit": {
+  "arch/arm/mach-rockchip/": "2013-06-21",
+  "block/": "2005-11-04",
+  "drivers/gpu/drm/amd/": "2014-07-15",
+  "drivers/gpu/drm/i915/": "2008-07-14",
+  "drivers/gpu/drm/nouveau/": "2009-12-11",
+  "drivers/gpu/drm/radeon/": "2008-07-14",
+  "drivers/infiniband/hw/hfi1/": "2016-05-26",
+  "drivers/net/ethernet/broadcom/bnxt/": "2015-10-22",
+  "drivers/net/ethernet/chelsio/": "2011-08-10",
+  "drivers/net/ethernet/hisilicon/hns3/": "2017-08-03",
+  "drivers/net/ethernet/intel/i40e/": "2013-09-11",
+  "drivers/net/ethernet/intel/ixgbe/": "2011-08-10",
+  "drivers/net/ethernet/mellanox/mlx5/": "2013-07-08",
+  "drivers/net/wireless/ath/ath10k/": "2013-06-12",
+  "drivers/nvme/": "2015-10-09",
+  "drivers/scsi/lpfc/": "2005-04-18",
+  "drivers/scsi/qla2xxx/": "2005-04-16",
+  "drivers/soc/qcom/": "2014-05-23",
+  "drivers/usb/core/": "2005-04-16",
+  "fs/btrfs/": "2007-01-26",
+  "fs/ext4/": "2006-10-11",
+  "fs/f2fs/": "2012-12-11",
+  "fs/xfs/": "2005-04-16",
+  "kernel/cgroup/": "2016-12-27",
+  "kernel/irq/": "2005-04-16",
+  "kernel/locking/": "2013-11-06",
+  "kernel/printk/": "2013-07-31",
+  "kernel/rcu/": "2013-10-15",
+  "kernel/sched/": "2011-11-17",
+  "kernel/time/": "2006-06-26",
+  "kernel/trace/": "2008-05-23",
+  "lib/": "2005-04-16",
+  "mm/": "2005-04-16",
+  "net/core/": "2005-04-16",
+  "net/ipv4/": "2005-04-16",
+  "security/selinux/": "2005-04-16"
+ },
+ "intervals": {
+  "v4.14..v4.19": {
+   "arch/arm/mach-rockchip/": {
+    "authors": 3,
+    "commits": 3,
+    "top1": 0.3333333333333333,
+    "top3": 1.0
+   },
+   "block/": {
+    "authors": 87,
+    "commits": 462,
+    "top1": 0.14502164502164502,
+    "top3": 0.3593073593073593
+   },
+   "drivers/gpu/drm/amd/": {
+    "authors": 219,
+    "commits": 3959,
+    "top1": 0.07754483455418035,
+    "top3": 0.2237938873452892
+   },
+   "drivers/gpu/drm/i915/": {
+    "authors": 151,
+    "commits": 2497,
+    "top1": 0.30356427713255907,
+    "top3": 0.4633560272326792
+   },
+   "drivers/gpu/drm/nouveau/": {
+    "authors": 38,
+    "commits": 450,
+    "top1": 0.76,
+    "top3": 0.8377777777777777
+   },
+   "drivers/gpu/drm/radeon/": {
+    "authors": 37,
+    "commits": 76,
+    "top1": 0.14473684210526316,
+    "top3": 0.3684210526315789
+   },
+   "drivers/infiniband/hw/hfi1/": {
+    "authors": 39,
+    "commits": 155,
+    "top1": 0.21935483870967742,
+    "top3": 0.4774193548387097
+   },
+   "drivers/net/ethernet/broadcom/bnxt/": {
+    "authors": 40,
+    "commits": 162,
+    "top1": 0.46296296296296297,
+    "top3": 0.6049382716049383
+   },
+   "drivers/net/ethernet/chelsio/": {
+    "authors": 34,
+    "commits": 210,
+    "top1": 0.2857142857142857,
+    "top3": 0.6142857142857143
+   },
+   "drivers/net/ethernet/hisilicon/hns3/": {
+    "authors": 18,
+    "commits": 305,
+    "top1": 0.1901639344262295,
+    "top3": 0.5475409836065573
+   },
+   "drivers/net/ethernet/intel/i40e/": {
+    "authors": 55,
+    "commits": 240,
+    "top1": 0.2708333333333333,
+    "top3": 0.45
+   },
+   "drivers/net/ethernet/intel/ixgbe/": {
+    "authors": 34,
+    "commits": 132,
+    "top1": 0.25757575757575757,
+    "top3": 0.5075757575757576
+   },
+   "drivers/net/ethernet/mellanox/mlx5/": {
+    "authors": 73,
+    "commits": 514,
+    "top1": 0.13424124513618677,
+    "top3": 0.2918287937743191
+   },
+   "drivers/net/wireless/ath/ath10k/": {
+    "authors": 58,
+    "commits": 169,
+    "top1": 0.10059171597633136,
+    "top3": 0.21893491124260356
+   },
+   "drivers/nvme/": {
+    "authors": 58,
+    "commits": 398,
+    "top1": 0.15829145728643215,
+    "top3": 0.40703517587939697
+   },
+   "drivers/scsi/lpfc/": {
+    "authors": 10,
+    "commits": 160,
+    "top1": 0.76875,
+    "top3": 0.925
+   },
+   "drivers/scsi/qla2xxx/": {
+    "authors": 34,
+    "commits": 174,
+    "top1": 0.4540229885057471,
+    "top3": 0.6206896551724138
+   },
+   "drivers/soc/qcom/": {
+    "authors": 19,
+    "commits": 53,
+    "top1": 0.20754716981132076,
+    "top3": 0.5283018867924528
+   },
+   "drivers/usb/core/": {
+    "authors": 50,
+    "commits": 102,
+    "top1": 0.09803921568627451,
+    "top3": 0.28431372549019607
+   },
+   "fs/btrfs/": {
+    "authors": 68,
+    "commits": 895,
+    "top1": 0.22905027932960895,
+    "top3": 0.5050279329608939
+   },
+   "fs/ext4/": {
+    "authors": 59,
+    "commits": 170,
+    "top1": 0.2823529411764706,
+    "top3": 0.4294117647058823
+   },
+   "fs/f2fs/": {
+    "authors": 48,
+    "commits": 388,
+    "top1": 0.46649484536082475,
+    "top3": 0.6907216494845361
+   },
+   "fs/xfs/": {
+    "authors": 48,
+    "commits": 677,
+    "top1": 0.4032496307237814,
+    "top3": 0.7725258493353028
+   },
+   "kernel/cgroup/": {
+    "authors": 16,
+    "commits": 45,
+    "top1": 0.5111111111111111,
+    "top3": 0.6444444444444445
+   },
+   "kernel/irq/": {
+    "authors": 24,
+    "commits": 74,
+    "top1": 0.4189189189189189,
+    "top3": 0.527027027027027
+   },
+   "kernel/locking/": {
+    "authors": 27,
+    "commits": 66,
+    "top1": 0.25757575757575757,
+    "top3": 0.42424242424242425
+   },
+   "kernel/printk/": {
+    "authors": 17,
+    "commits": 32,
+    "top1": 0.25,
+    "top3": 0.5
+   },
+   "kernel/rcu/": {
+    "authors": 20,
+    "commits": 209,
+    "top1": 0.7894736842105263,
+    "top3": 0.8660287081339713
+   },
+   "kernel/sched/": {
+    "authors": 70,
+    "commits": 272,
+    "top1": 0.19117647058823528,
+    "top3": 0.34191176470588236
+   },
+   "kernel/time/": {
+    "authors": 45,
+    "commits": 164,
+    "top1": 0.1524390243902439,
+    "top3": 0.4024390243902439
+   },
+   "kernel/trace/": {
+    "authors": 64,
+    "commits": 256,
+    "top1": 0.2734375,
+    "top3": 0.51171875
+   },
+   "lib/": {
+    "authors": 143,
+    "commits": 390,
+    "top1": 0.12307692307692308,
+    "top3": 0.2
+   },
+   "mm/": {
+    "authors": 194,
+    "commits": 752,
+    "top1": 0.05452127659574468,
+    "top3": 0.12898936170212766
+   },
+   "net/core/": {
+    "authors": 150,
+    "commits": 570,
+    "top1": 0.06842105263157895,
+    "top3": 0.15789473684210525
+   },
+   "net/ipv4/": {
+    "authors": 136,
+    "commits": 687,
+    "top1": 0.17903930131004367,
+    "top3": 0.2954876273653566
+   },
+   "security/selinux/": {
+    "authors": 29,
+    "commits": 67,
+    "top1": 0.19402985074626866,
+    "top3": 0.34328358208955223
+   }
+  },
+  "v4.19..v5.4": {
+   "arch/arm/mach-rockchip/": {
+    "authors": 4,
+    "commits": 7,
+    "top1": 0.42857142857142855,
+    "top3": 0.8571428571428571
+   },
+   "block/": {
+    "authors": 86,
+    "commits": 584,
+    "top1": 0.14554794520547945,
+    "top3": 0.4041095890410959
+   },
+   "drivers/gpu/drm/amd/": {
+    "authors": 274,
+    "commits": 3803,
+    "top1": 0.062319221667104914,
+    "top3": 0.17591375230081516
+   },
+   "drivers/gpu/drm/i915/": {
+    "authors": 152,
+    "commits": 3012,
+    "top1": 0.28320053120849936,
+    "top3": 0.49269588313413015
+   },
+   "drivers/gpu/drm/nouveau/": {
+    "authors": 42,
+    "commits": 332,
+    "top1": 0.4789156626506024,
+    "top3": 0.6506024096385542
+   },
+   "drivers/gpu/drm/radeon/": {
+    "authors": 34,
+    "commits": 79,
+    "top1": 0.13924050632911392,
+    "top3": 0.31645569620253167
+   },
+   "drivers/infiniband/hw/hfi1/": {
+    "authors": 43,
+    "commits": 189,
+    "top1": 0.41798941798941797,
+    "top3": 0.671957671957672
+   },
+   "drivers/net/ethernet/broadcom/bnxt/": {
+    "authors": 30,
+    "commits": 206,
+    "top1": 0.5679611650485437,
+    "top3": 0.7815533980582524
+   },
+   "drivers/net/ethernet/chelsio/": {
+    "authors": 38,
+    "commits": 113,
+    "top1": 0.1415929203539823,
+    "top3": 0.37168141592920356
+   },
+   "drivers/net/ethernet/hisilicon/hns3/": {
+    "authors": 35,
+    "commits": 534,
+    "top1": 0.2340823970037453,
+    "top3": 0.5674157303370787
+   },
+   "drivers/net/ethernet/intel/i40e/": {
+    "authors": 68,
+    "commits": 191,
+    "top1": 0.10471204188481675,
+    "top3": 0.2198952879581152
+   },
+   "drivers/net/ethernet/intel/ixgbe/": {
+    "authors": 49,
+    "commits": 84,
+    "top1": 0.10714285714285714,
+    "top3": 0.23809523809523808
+   },
+   "drivers/net/ethernet/mellanox/mlx5/": {
+    "authors": 112,
+    "commits": 902,
+    "top1": 0.07982261640798226,
+    "top3": 0.2073170731707317
+   },
+   "drivers/net/wireless/ath/ath10k/": {
+    "authors": 55,
+    "commits": 217,
+    "top1": 0.10599078341013825,
+    "top3": 0.2672811059907834
+   },
+   "drivers/nvme/": {
+    "authors": 77,
+    "commits": 442,
+    "top1": 0.167420814479638,
+    "top3": 0.36425339366515835
+   },
+   "drivers/scsi/lpfc/": {
+    "authors": 29,
+    "commits": 248,
+    "top1": 0.7459677419354839,
+    "top3": 0.8145161290322581
+   },
+   "drivers/scsi/qla2xxx/": {
+    "authors": 46,
+    "commits": 332,
+    "top1": 0.3704819277108434,
+    "top3": 0.5873493975903614
+   },
+   "drivers/soc/qcom/": {
+    "authors": 34,
+    "commits": 85,
+    "top1": 0.1411764705882353,
+    "top3": 0.36470588235294116
+   },
+   "drivers/usb/core/": {
+    "authors": 56,
+    "commits": 95,
+    "top1": 0.12631578947368421,
+    "top3": 0.23157894736842105
+   },
+   "fs/btrfs/": {
+    "authors": 59,
+    "commits": 930,
+    "top1": 0.23333333333333334,
+    "top3": 0.5064516129032258
+   },
+   "fs/ext4/": {
+    "authors": 59,
+    "commits": 172,
+    "top1": 0.20930232558139536,
+    "top3": 0.37209302325581395
+   },
+   "fs/f2fs/": {
+    "authors": 53,
+    "commits": 303,
+    "top1": 0.46534653465346537,
+    "top3": 0.6765676567656765
+   },
+   "fs/xfs/": {
+    "authors": 43,
+    "commits": 384,
+    "top1": 0.4244791666666667,
+    "top3": 0.7578125
+   },
+   "kernel/cgroup/": {
+    "authors": 36,
+    "commits": 88,
+    "top1": 0.1590909090909091,
+    "top3": 0.4090909090909091
+   },
+   "kernel/irq/": {
+    "authors": 39,
+    "commits": 81,
+    "top1": 0.12345679012345678,
+    "top3": 0.345679012345679
+   },
+   "kernel/locking/": {
+    "authors": 27,
+    "commits": 159,
+    "top1": 0.3081761006289308,
+    "top3": 0.6226415094339622
+   },
+   "kernel/printk/": {
+    "authors": 14,
+    "commits": 28,
+    "top1": 0.14285714285714285,
+    "top3": 0.39285714285714285
+   },
+   "kernel/rcu/": {
+    "authors": 24,
+    "commits": 339,
+    "top1": 0.48672566371681414,
+    "top3": 0.8997050147492626
+   },
+   "kernel/sched/": {
+    "authors": 71,
+    "commits": 272,
+    "top1": 0.10294117647058823,
+    "top3": 0.27205882352941174
+   },
+   "kernel/time/": {
+    "authors": 44,
+    "commits": 141,
+    "top1": 0.45390070921985815,
+    "top3": 0.5957446808510638
+   },
+   "kernel/trace/": {
+    "authors": 79,
+    "commits": 280,
+    "top1": 0.22857142857142856,
+    "top3": 0.525
+   },
+   "lib/": {
+    "authors": 165,
+    "commits": 532,
+    "top1": 0.12218045112781954,
+    "top3": 0.2349624060150376
+   },
+   "mm/": {
+    "authors": 229,
+    "commits": 1165,
+    "top1": 0.048068669527897,
+    "top3": 0.12446351931330472
+   },
+   "net/core/": {
+    "authors": 163,
+    "commits": 650,
+    "top1": 0.07692307692307693,
+    "top3": 0.18615384615384614
+   },
+   "net/ipv4/": {
+    "authors": 142,
+    "commits": 643,
+    "top1": 0.20373250388802489,
+    "top3": 0.4261275272161742
+   },
+   "security/selinux/": {
+    "authors": 29,
+    "commits": 105,
+    "top1": 0.24761904761904763,
+    "top3": 0.4857142857142857
+   }
+  },
+  "v5.10..v5.15": {
+   "arch/arm/mach-rockchip/": {
+    "authors": 0,
+    "commits": 0,
+    "top1": null,
+    "top3": null
+   },
+   "block/": {
+    "authors": 79,
+    "commits": 456,
+    "top1": 0.4232456140350877,
+    "top3": 0.5635964912280702
+   },
+   "drivers/gpu/drm/amd/": {
+    "authors": 339,
+    "commits": 3612,
+    "top1": 0.07419712070874862,
+    "top3": 0.17358803986710963
+   },
+   "drivers/gpu/drm/i915/": {
+    "authors": 139,
+    "commits": 1968,
+    "top1": 0.15701219512195122,
+    "top3": 0.3490853658536585
+   },
+   "drivers/gpu/drm/nouveau/": {
+    "authors": 27,
+    "commits": 248,
+    "top1": 0.5,
+    "top3": 0.7096774193548387
+   },
+   "drivers/gpu/drm/radeon/": {
+    "authors": 42,
+    "commits": 217,
+    "top1": 0.4009216589861751,
+    "top3": 0.6221198156682027
+   },
+   "drivers/infiniband/hw/hfi1/": {
+    "authors": 25,
+    "commits": 64,
+    "top1": 0.3125,
+    "top3": 0.5625
+   },
+   "drivers/net/ethernet/broadcom/bnxt/": {
+    "authors": 25,
+    "commits": 153,
+    "top1": 0.40522875816993464,
+    "top3": 0.6535947712418301
+   },
+   "drivers/net/ethernet/chelsio/": {
+    "authors": 34,
+    "commits": 84,
+    "top1": 0.14285714285714285,
+    "top3": 0.38095238095238093
+   },
+   "drivers/net/ethernet/hisilicon/hns3/": {
+    "authors": 29,
+    "commits": 289,
+    "top1": 0.17301038062283736,
+    "top3": 0.4740484429065744
+   },
+   "drivers/net/ethernet/intel/i40e/": {
+    "authors": 39,
+    "commits": 91,
+    "top1": 0.14285714285714285,
+    "top3": 0.2857142857142857
+   },
+   "drivers/net/ethernet/intel/ixgbe/": {
+    "authors": 23,
+    "commits": 32,
+    "top1": 0.125,
+    "top3": 0.28125
+   },
+   "drivers/net/ethernet/mellanox/mlx5/": {
+    "authors": 86,
+    "commits": 701,
+    "top1": 0.10841654778887304,
+    "top3": 0.29386590584878747
+   },
+   "drivers/net/wireless/ath/ath10k/": {
+    "authors": 28,
+    "commits": 53,
+    "top1": 0.20754716981132076,
+    "top3": 0.3584905660377358
+   },
+   "drivers/nvme/": {
+    "authors": 75,
+    "commits": 361,
+    "top1": 0.21329639889196675,
+    "top3": 0.4487534626038781
+   },
+   "drivers/scsi/lpfc/": {
+    "authors": 23,
+    "commits": 200,
+    "top1": 0.575,
+    "top3": 0.815
+   },
+   "drivers/scsi/qla2xxx/": {
+    "authors": 33,
+    "commits": 130,
+    "top1": 0.27692307692307694,
+    "top3": 0.4846153846153846
+   },
+   "drivers/soc/qcom/": {
+    "authors": 38,
+    "commits": 89,
+    "top1": 0.12359550561797752,
+    "top3": 0.25842696629213485
+   },
+   "drivers/usb/core/": {
+    "authors": 25,
+    "commits": 47,
+    "top1": 0.1276595744680851,
+    "top3": 0.3191489361702128
+   },
+   "fs/btrfs/": {
+    "authors": 46,
+    "commits": 821,
+    "top1": 0.20341047503045068,
+    "top3": 0.5310596833130329
+   },
+   "fs/ext4/": {
+    "authors": 63,
+    "commits": 188,
+    "top1": 0.13829787234042554,
+    "top3": 0.2978723404255319
+   },
+   "fs/f2fs/": {
+    "authors": 41,
+    "commits": 219,
+    "top1": 0.3789954337899543,
+    "top3": 0.6073059360730594
+   },
+   "fs/xfs/": {
+    "authors": 34,
+    "commits": 489,
+    "top1": 0.3312883435582822,
+    "top3": 0.7034764826175869
+   },
+   "kernel/cgroup/": {
+    "authors": 35,
+    "commits": 50,
+    "top1": 0.12,
+    "top3": 0.26
+   },
+   "kernel/irq/": {
+    "authors": 33,
+    "commits": 69,
+    "top1": 0.21739130434782608,
+    "top3": 0.4927536231884058
+   },
+   "kernel/locking/": {
+    "authors": 30,
+    "commits": 129,
+    "top1": 0.2868217054263566,
+    "top3": 0.6356589147286822
+   },
+   "kernel/printk/": {
+    "authors": 14,
+    "commits": 44,
+    "top1": 0.5909090909090909,
+    "top3": 0.7272727272727273
+   },
+   "kernel/rcu/": {
+    "authors": 29,
+    "commits": 208,
+    "top1": 0.4855769230769231,
+    "top3": 0.7644230769230769
+   },
+   "kernel/sched/": {
+    "authors": 74,
+    "commits": 267,
+    "top1": 0.24719101123595505,
+    "top3": 0.3707865168539326
+   },
+   "kernel/time/": {
+    "authors": 36,
+    "commits": 107,
+    "top1": 0.2523364485981308,
+    "top3": 0.4485981308411215
+   },
+   "kernel/trace/": {
+    "authors": 68,
+    "commits": 245,
+    "top1": 0.3020408163265306,
+    "top3": 0.4448979591836735
+   },
+   "lib/": {
+    "authors": 142,
+    "commits": 424,
+    "top1": 0.08018867924528301,
+    "top3": 0.2028301886792453
+   },
+   "mm/": {
+    "authors": 262,
+    "commits": 1378,
+    "top1": 0.08925979680696662,
+    "top3": 0.18359941944847605
+   },
+   "net/core/": {
+    "authors": 131,
+    "commits": 435,
+    "top1": 0.08275862068965517,
+    "top3": 0.1724137931034483
+   },
+   "net/ipv4/": {
+    "authors": 112,
+    "commits": 377,
+    "top1": 0.11671087533156499,
+    "top3": 0.2625994694960212
+   },
+   "security/selinux/": {
+    "authors": 28,
+    "commits": 52,
+    "top1": 0.3076923076923077,
+    "top3": 0.46153846153846156
+   }
+  },
+  "v5.15..v6.1": {
+   "arch/arm/mach-rockchip/": {
+    "authors": 3,
+    "commits": 3,
+    "top1": 0.3333333333333333,
+    "top3": 1.0
+   },
+   "block/": {
+    "authors": 98,
+    "commits": 688,
+    "top1": 0.3430232558139535,
+    "top3": 0.5479651162790697
+   },
+   "drivers/gpu/drm/amd/": {
+    "authors": 447,
+    "commits": 4021,
+    "top1": 0.07286744590897787,
+    "top3": 0.13951753295200198
+   },
+   "drivers/gpu/drm/i915/": {
+    "authors": 185,
+    "commits": 2558,
+    "top1": 0.24120406567630961,
+    "top3": 0.43979671618451915
+   },
+   "drivers/gpu/drm/nouveau/": {
+    "authors": 57,
+    "commits": 181,
+    "top1": 0.2265193370165746,
+    "top3": 0.430939226519337
+   },
+   "drivers/gpu/drm/radeon/": {
+    "authors": 41,
+    "commits": 78,
+    "top1": 0.21794871794871795,
+    "top3": 0.3333333333333333
+   },
+   "drivers/infiniband/hw/hfi1/": {
+    "authors": 24,
+    "commits": 46,
+    "top1": 0.32608695652173914,
+    "top3": 0.5
+   },
+   "drivers/net/ethernet/broadcom/bnxt/": {
+    "authors": 32,
+    "commits": 127,
+    "top1": 0.18110236220472442,
+    "top3": 0.41732283464566927
+   },
+   "drivers/net/ethernet/chelsio/": {
+    "authors": 27,
+    "commits": 49,
+    "top1": 0.10204081632653061,
+    "top3": 0.2653061224489796
+   },
+   "drivers/net/ethernet/hisilicon/hns3/": {
+    "authors": 22,
+    "commits": 170,
+    "top1": 0.27058823529411763,
+    "top3": 0.6235294117647059
+   },
+   "drivers/net/ethernet/intel/i40e/": {
+    "authors": 43,
+    "commits": 100,
+    "top1": 0.1,
+    "top3": 0.29
+   },
+   "drivers/net/ethernet/intel/ixgbe/": {
+    "authors": 26,
+    "commits": 43,
+    "top1": 0.13953488372093023,
+    "top3": 0.3023255813953488
+   },
+   "drivers/net/ethernet/mellanox/mlx5/": {
+    "authors": 93,
+    "commits": 870,
+    "top1": 0.11724137931034483,
+    "top3": 0.2735632183908046
+   },
+   "drivers/net/wireless/ath/ath10k/": {
+    "authors": 41,
+    "commits": 65,
+    "top1": 0.09230769230769231,
+    "top3": 0.26153846153846155
+   },
+   "drivers/nvme/": {
+    "authors": 90,
+    "commits": 348,
+    "top1": 0.22413793103448276,
+    "top3": 0.3879310344827586
+   },
+   "drivers/scsi/lpfc/": {
+    "authors": 20,
+    "commits": 179,
+    "top1": 0.8324022346368715,
+    "top3": 0.8770949720670391
+   },
+   "drivers/scsi/qla2xxx/": {
+    "authors": 29,
+    "commits": 139,
+    "top1": 0.3669064748201439,
+    "top3": 0.5899280575539568
+   },
+   "drivers/soc/qcom/": {
+    "authors": 53,
+    "commits": 128,
+    "top1": 0.1328125,
+    "top3": 0.28125
+   },
+   "drivers/usb/core/": {
+    "authors": 41,
+    "commits": 66,
+    "top1": 0.10606060606060606,
+    "top3": 0.24242424242424243
+   },
+   "fs/btrfs/": {
+    "authors": 80,
+    "commits": 1085,
+    "top1": 0.19078341013824884,
+    "top3": 0.535483870967742
+   },
+   "fs/ext4/": {
+    "authors": 71,
+    "commits": 301,
+    "top1": 0.08970099667774087,
+    "top3": 0.2558139534883721
+   },
+   "fs/f2fs/": {
+    "authors": 48,
+    "commits": 237,
+    "top1": 0.21940928270042195,
+    "top3": 0.47257383966244726
+   },
+   "fs/xfs/": {
+    "authors": 59,
+    "commits": 448,
+    "top1": 0.3325892857142857,
+    "top3": 0.6785714285714286
+   },
+   "kernel/cgroup/": {
+    "authors": 38,
+    "commits": 92,
+    "top1": 0.1956521739130435,
+    "top3": 0.42391304347826086
+   },
+   "kernel/irq/": {
+    "authors": 22,
+    "commits": 75,
+    "top1": 0.3466666666666667,
+    "top3": 0.6
+   },
+   "kernel/locking/": {
+    "authors": 29,
+    "commits": 54,
+    "top1": 0.14814814814814814,
+    "top3": 0.3333333333333333
+   },
+   "kernel/printk/": {
+    "authors": 14,
+    "commits": 51,
+    "top1": 0.35294117647058826,
+    "top3": 0.7058823529411765
+   },
+   "kernel/rcu/": {
+    "authors": 43,
+    "commits": 321,
+    "top1": 0.5794392523364486,
+    "top3": 0.7819314641744548
+   },
+   "kernel/sched/": {
+    "authors": 86,
+    "commits": 285,
+    "top1": 0.08070175438596491,
+    "top3": 0.20350877192982456
+   },
+   "kernel/time/": {
+    "authors": 24,
+    "commits": 45,
+    "top1": 0.15555555555555556,
+    "top3": 0.3333333333333333
+   },
+   "kernel/trace/": {
+    "authors": 121,
+    "commits": 385,
+    "top1": 0.14025974025974025,
+    "top3": 0.2753246753246753
+   },
+   "lib/": {
+    "authors": 155,
+    "commits": 557,
+    "top1": 0.059245960502693,
+    "top3": 0.1615798922800718
+   },
+   "mm/": {
+    "authors": 316,
+    "commits": 2196,
+    "top1": 0.17759562841530055,
+    "top3": 0.33060109289617484
+   },
+   "net/core/": {
+    "authors": 159,
+    "commits": 594,
+    "top1": 0.1531986531986532,
+    "top3": 0.30134680134680136
+   },
+   "net/ipv4/": {
+    "authors": 119,
+    "commits": 540,
+    "top1": 0.2537037037037037,
+    "top3": 0.48148148148148145
+   },
+   "security/selinux/": {
+    "authors": 24,
+    "commits": 75,
+    "top1": 0.30666666666666664,
+    "top3": 0.6133333333333333
+   }
+  },
+  "v5.4..v5.10": {
+   "arch/arm/mach-rockchip/": {
+    "authors": 2,
+    "commits": 2,
+    "top1": 0.5,
+    "top3": 1.0
+   },
+   "block/": {
+    "authors": 97,
+    "commits": 536,
+    "top1": 0.31529850746268656,
+    "top3": 0.4832089552238806
+   },
+   "drivers/gpu/drm/amd/": {
+    "authors": 334,
+    "commits": 4114,
+    "top1": 0.0904229460379193,
+    "top3": 0.19834710743801653
+   },
+   "drivers/gpu/drm/i915/": {
+    "authors": 152,
+    "commits": 3202,
+    "top1": 0.37101811367895066,
+    "top3": 0.5593379138038725
+   },
+   "drivers/gpu/drm/nouveau/": {
+    "authors": 46,
+    "commits": 479,
+    "top1": 0.5532359081419624,
+    "top3": 0.7056367432150313
+   },
+   "drivers/gpu/drm/radeon/": {
+    "authors": 52,
+    "commits": 138,
+    "top1": 0.16666666666666666,
+    "top3": 0.38405797101449274
+   },
+   "drivers/infiniband/hw/hfi1/": {
+    "authors": 34,
+    "commits": 77,
+    "top1": 0.15584415584415584,
+    "top3": 0.42857142857142855
+   },
+   "drivers/net/ethernet/broadcom/bnxt/": {
+    "authors": 29,
+    "commits": 227,
+    "top1": 0.41409691629955947,
+    "top3": 0.7973568281938326
+   },
+   "drivers/net/ethernet/chelsio/": {
+    "authors": 51,
+    "commits": 180,
+    "top1": 0.26666666666666666,
+    "top3": 0.48333333333333334
+   },
+   "drivers/net/ethernet/hisilicon/hns3/": {
+    "authors": 24,
+    "commits": 219,
+    "top1": 0.3013698630136986,
+    "top3": 0.547945205479452
+   },
+   "drivers/net/ethernet/intel/i40e/": {
+    "authors": 44,
+    "commits": 77,
+    "top1": 0.1038961038961039,
+    "top3": 0.2597402597402597
+   },
+   "drivers/net/ethernet/intel/ixgbe/": {
+    "authors": 33,
+    "commits": 50,
+    "top1": 0.12,
+    "top3": 0.28
+   },
+   "drivers/net/ethernet/mellanox/mlx5/": {
+    "authors": 121,
+    "commits": 752,
+    "top1": 0.08244680851063829,
+    "top3": 0.21941489361702127
+   },
+   "drivers/net/wireless/ath/ath10k/": {
+    "authors": 58,
+    "commits": 162,
+    "top1": 0.24691358024691357,
+    "top3": 0.35802469135802467
+   },
+   "drivers/nvme/": {
+    "authors": 75,
+    "commits": 427,
+    "top1": 0.17330210772833723,
+    "top3": 0.3957845433255269
+   },
+   "drivers/scsi/lpfc/": {
+    "authors": 22,
+    "commits": 185,
+    "top1": 0.5837837837837838,
+    "top3": 0.8216216216216217
+   },
+   "drivers/scsi/qla2xxx/": {
+    "authors": 41,
+    "commits": 221,
+    "top1": 0.18552036199095023,
+    "top3": 0.4434389140271493
+   },
+   "drivers/soc/qcom/": {
+    "authors": 34,
+    "commits": 98,
+    "top1": 0.20408163265306123,
+    "top3": 0.37755102040816324
+   },
+   "drivers/usb/core/": {
+    "authors": 46,
+    "commits": 96,
+    "top1": 0.14583333333333334,
+    "top3": 0.34375
+   },
+   "fs/btrfs/": {
+    "authors": 64,
+    "commits": 1026,
+    "top1": 0.19395711500974658,
+    "top3": 0.5175438596491229
+   },
+   "fs/ext4/": {
+    "authors": 88,
+    "commits": 354,
+    "top1": 0.12429378531073447,
+    "top3": 0.3361581920903955
+   },
+   "fs/f2fs/": {
+    "authors": 58,
+    "commits": 293,
+    "top1": 0.43686006825938567,
+    "top3": 0.658703071672355
+   },
+   "fs/xfs/": {
+    "authors": 55,
+    "commits": 790,
+    "top1": 0.3189873417721519,
+    "top3": 0.7113924050632912
+   },
+   "kernel/cgroup/": {
+    "authors": 28,
+    "commits": 51,
+    "top1": 0.19607843137254902,
+    "top3": 0.4117647058823529
+   },
+   "kernel/irq/": {
+    "authors": 28,
+    "commits": 55,
+    "top1": 0.2545454545454545,
+    "top3": 0.41818181818181815
+   },
+   "kernel/locking/": {
+    "authors": 23,
+    "commits": 88,
+    "top1": 0.3068181818181818,
+    "top3": 0.6136363636363636
+   },
+   "kernel/printk/": {
+    "authors": 20,
+    "commits": 51,
+    "top1": 0.37254901960784315,
+    "top3": 0.5882352941176471
+   },
+   "kernel/rcu/": {
+    "authors": 40,
+    "commits": 321,
+    "top1": 0.6635514018691588,
+    "top3": 0.7601246105919003
+   },
+   "kernel/sched/": {
+    "authors": 98,
+    "commits": 302,
+    "top1": 0.1423841059602649,
+    "top3": 0.33774834437086093
+   },
+   "kernel/time/": {
+    "authors": 37,
+    "commits": 126,
+    "top1": 0.12698412698412698,
+    "top3": 0.35714285714285715
+   },
+   "kernel/trace/": {
+    "authors": 119,
+    "commits": 396,
+    "top1": 0.23484848484848486,
+    "top3": 0.4292929292929293
+   },
+   "lib/": {
+    "authors": 174,
+    "commits": 540,
+    "top1": 0.040740740740740744,
+    "top3": 0.11481481481481481
+   },
+   "mm/": {
+    "authors": 271,
+    "commits": 1386,
+    "top1": 0.05772005772005772,
+    "top3": 0.14935064935064934
+   },
+   "net/core/": {
+    "authors": 176,
+    "commits": 657,
+    "top1": 0.0502283105022831,
+    "top3": 0.1385083713850837
+   },
+   "net/ipv4/": {
+    "authors": 142,
+    "commits": 536,
+    "top1": 0.11567164179104478,
+    "top3": 0.2537313432835821
+   },
+   "security/selinux/": {
+    "authors": 49,
+    "commits": 115,
+    "top1": 0.2608695652173913,
+    "top3": 0.4434782608695652
+   }
+  },
+  "v6.1..v6.6": {
+   "arch/arm/mach-rockchip/": {
+    "authors": 2,
+    "commits": 2,
+    "top1": 0.5,
+    "top3": 1.0
+   },
+   "block/": {
+    "authors": 85,
+    "commits": 499,
+    "top1": 0.3066132264529058,
+    "top3": 0.4729458917835671
+   },
+   "drivers/gpu/drm/amd/": {
+    "authors": 377,
+    "commits": 3129,
+    "top1": 0.048577820389900925,
+    "top3": 0.13550655161393416
+   },
+   "drivers/gpu/drm/i915/": {
+    "authors": 142,
+    "commits": 1882,
+    "top1": 0.23751328374070138,
+    "top3": 0.422422954303932
+   },
+   "drivers/gpu/drm/nouveau/": {
+    "authors": 35,
+    "commits": 246,
+    "top1": 0.5772357723577236,
+    "top3": 0.7154471544715447
+   },
+   "drivers/gpu/drm/radeon/": {
+    "authors": 32,
+    "commits": 90,
+    "top1": 0.3111111111111111,
+    "top3": 0.5666666666666667
+   },
+   "drivers/infiniband/hw/hfi1/": {
+    "authors": 20,
+    "commits": 44,
+    "top1": 0.3409090909090909,
+    "top3": 0.5454545454545454
+   },
+   "drivers/net/ethernet/broadcom/bnxt/": {
+    "authors": 27,
+    "commits": 85,
+    "top1": 0.18823529411764706,
+    "top3": 0.4470588235294118
+   },
+   "drivers/net/ethernet/chelsio/": {
+    "authors": 19,
+    "commits": 25,
+    "top1": 0.16,
+    "top3": 0.36
+   },
+   "drivers/net/ethernet/hisilicon/hns3/": {
+    "authors": 22,
+    "commits": 53,
+    "top1": 0.20754716981132076,
+    "top3": 0.5283018867924528
+   },
+   "drivers/net/ethernet/intel/i40e/": {
+    "authors": 30,
+    "commits": 63,
+    "top1": 0.19047619047619047,
+    "top3": 0.36507936507936506
+   },
+   "drivers/net/ethernet/intel/ixgbe/": {
+    "authors": 22,
+    "commits": 30,
+    "top1": 0.1,
+    "top3": 0.26666666666666666
+   },
+   "drivers/net/ethernet/mellanox/mlx5/": {
+    "authors": 96,
+    "commits": 801,
+    "top1": 0.09363295880149813,
+    "top3": 0.25593008739076156
+   },
+   "drivers/net/wireless/ath/ath10k/": {
+    "authors": 23,
+    "commits": 33,
+    "top1": 0.12121212121212122,
+    "top3": 0.2727272727272727
+   },
+   "drivers/nvme/": {
+    "authors": 68,
+    "commits": 270,
+    "top1": 0.26296296296296295,
+    "top3": 0.48148148148148145
+   },
+   "drivers/scsi/lpfc/": {
+    "authors": 19,
+    "commits": 86,
+    "top1": 0.7790697674418605,
+    "top3": 0.813953488372093
+   },
+   "drivers/scsi/qla2xxx/": {
+    "authors": 29,
+    "commits": 96,
+    "top1": 0.3854166666666667,
+    "top3": 0.59375
+   },
+   "drivers/soc/qcom/": {
+    "authors": 61,
+    "commits": 154,
+    "top1": 0.12987012987012986,
+    "top3": 0.23376623376623376
+   },
+   "drivers/usb/core/": {
+    "authors": 24,
+    "commits": 43,
+    "top1": 0.20930232558139536,
+    "top3": 0.4418604651162791
+   },
+   "fs/btrfs/": {
+    "authors": 58,
+    "commits": 1001,
+    "top1": 0.22877122877122877,
+    "top3": 0.6013986013986014
+   },
+   "fs/ext4/": {
+    "authors": 63,
+    "commits": 392,
+    "top1": 0.14285714285714285,
+    "top3": 0.3622448979591837
+   },
+   "fs/f2fs/": {
+    "authors": 44,
+    "commits": 308,
+    "top1": 0.21103896103896103,
+    "top3": 0.5422077922077922
+   },
+   "fs/xfs/": {
+    "authors": 35,
+    "commits": 380,
+    "top1": 0.5684210526315789,
+    "top3": 0.8289473684210527
+   },
+   "kernel/cgroup/": {
+    "authors": 36,
+    "commits": 86,
+    "top1": 0.20930232558139536,
+    "top3": 0.4418604651162791
+   },
+   "kernel/irq/": {
+    "authors": 22,
+    "commits": 80,
+    "top1": 0.4,
+    "top3": 0.625
+   },
+   "kernel/locking/": {
+    "authors": 17,
+    "commits": 29,
+    "top1": 0.1724137931034483,
+    "top3": 0.3793103448275862
+   },
+   "kernel/printk/": {
+    "authors": 13,
+    "commits": 44,
+    "top1": 0.6818181818181818,
+    "top3": 0.7727272727272727
+   },
+   "kernel/rcu/": {
+    "authors": 20,
+    "commits": 152,
+    "top1": 0.506578947368421,
+    "top3": 0.7171052631578947
+   },
+   "kernel/sched/": {
+    "authors": 67,
+    "commits": 178,
+    "top1": 0.1797752808988764,
+    "top3": 0.29213483146067415
+   },
+   "kernel/time/": {
+    "authors": 26,
+    "commits": 76,
+    "top1": 0.4473684210526316,
+    "top3": 0.5657894736842105
+   },
+   "kernel/trace/": {
+    "authors": 87,
+    "commits": 321,
+    "top1": 0.16822429906542055,
+    "top3": 0.35514018691588783
+   },
+   "lib/": {
+    "authors": 157,
+    "commits": 509,
+    "top1": 0.10412573673870335,
+    "top3": 0.19646365422396855
+   },
+   "mm/": {
+    "authors": 262,
+    "commits": 1636,
+    "top1": 0.05745721271393643,
+    "top3": 0.1332518337408313
+   },
+   "net/core/": {
+    "authors": 135,
+    "commits": 401,
+    "top1": 0.19451371571072318,
+    "top3": 0.33665835411471323
+   },
+   "net/ipv4/": {
+    "authors": 89,
+    "commits": 317,
+    "top1": 0.31230283911671924,
+    "top3": 0.43217665615141954
+   },
+   "security/selinux/": {
+    "authors": 16,
+    "commits": 75,
+    "top1": 0.4666666666666667,
+    "top3": 0.72
+   }
+  },
+  "v6.6..v6.12": {
+   "arch/arm/mach-rockchip/": {
+    "authors": 0,
+    "commits": 0,
+    "top1": null,
+    "top3": null
+   },
+   "block/": {
+    "authors": 78,
+    "commits": 430,
+    "top1": 0.26744186046511625,
+    "top3": 0.44883720930232557
+   },
+   "drivers/gpu/drm/amd/": {
+    "authors": 389,
+    "commits": 4304,
+    "top1": 0.05855018587360595,
+    "top3": 0.12802044609665428
+   },
+   "drivers/gpu/drm/i915/": {
+    "authors": 141,
+    "commits": 2100,
+    "top1": 0.26,
+    "top3": 0.5566666666666666
+   },
+   "drivers/gpu/drm/nouveau/": {
+    "authors": 53,
+    "commits": 298,
+    "top1": 0.29194630872483224,
+    "top3": 0.5369127516778524
+   },
+   "drivers/gpu/drm/radeon/": {
+    "authors": 36,
+    "commits": 109,
+    "top1": 0.3119266055045872,
+    "top3": 0.45871559633027525
+   },
+   "drivers/infiniband/hw/hfi1/": {
+    "authors": 17,
+    "commits": 21,
+    "top1": 0.14285714285714285,
+    "top3": 0.3333333333333333
+   },
+   "drivers/net/ethernet/broadcom/bnxt/": {
+    "authors": 35,
+    "commits": 249,
+    "top1": 0.42168674698795183,
+    "top3": 0.6506024096385542
+   },
+   "drivers/net/ethernet/chelsio/": {
+    "authors": 20,
+    "commits": 34,
+    "top1": 0.17647058823529413,
+    "top3": 0.35294117647058826
+   },
+   "drivers/net/ethernet/hisilicon/hns3/": {
+    "authors": 21,
+    "commits": 66,
+    "top1": 0.16666666666666666,
+    "top3": 0.4090909090909091
+   },
+   "drivers/net/ethernet/intel/i40e/": {
+    "authors": 34,
+    "commits": 112,
+    "top1": 0.4642857142857143,
+    "top3": 0.5892857142857143
+   },
+   "drivers/net/ethernet/intel/ixgbe/": {
+    "authors": 25,
+    "commits": 36,
+    "top1": 0.1388888888888889,
+    "top3": 0.3055555555555556
+   },
+   "drivers/net/ethernet/mellanox/mlx5/": {
+    "authors": 78,
+    "commits": 411,
+    "top1": 0.11192214111922141,
+    "top3": 0.26034063260340634
+   },
+   "drivers/net/wireless/ath/ath10k/": {
+    "authors": 26,
+    "commits": 52,
+    "top1": 0.28846153846153844,
+    "top3": 0.4807692307692308
+   },
+   "drivers/nvme/": {
+    "authors": 75,
+    "commits": 338,
+    "top1": 0.14497041420118342,
+    "top3": 0.35502958579881655
+   },
+   "drivers/scsi/lpfc/": {
+    "authors": 12,
+    "commits": 93,
+    "top1": 0.8602150537634409,
+    "top3": 0.9032258064516129
+   },
+   "drivers/scsi/qla2xxx/": {
+    "authors": 22,
+    "commits": 39,
+    "top1": 0.28205128205128205,
+    "top3": 0.46153846153846156
+   },
+   "drivers/soc/qcom/": {
+    "authors": 54,
+    "commits": 142,
+    "top1": 0.11971830985915492,
+    "top3": 0.3028169014084507
+   },
+   "drivers/usb/core/": {
+    "authors": 33,
+    "commits": 52,
+    "top1": 0.11538461538461539,
+    "top3": 0.28846153846153844
+   },
+   "fs/btrfs/": {
+    "authors": 56,
+    "commits": 952,
+    "top1": 0.2552521008403361,
+    "top3": 0.569327731092437
+   },
+   "fs/ext4/": {
+    "authors": 57,
+    "commits": 288,
+    "top1": 0.2013888888888889,
+    "top3": 0.5034722222222222
+   },
+   "fs/f2fs/": {
+    "authors": 50,
+    "commits": 284,
+    "top1": 0.4507042253521127,
+    "top3": 0.6302816901408451
+   },
+   "fs/xfs/": {
+    "authors": 58,
+    "commits": 830,
+    "top1": 0.5108433734939759,
+    "top3": 0.8506024096385543
+   },
+   "kernel/cgroup/": {
+    "authors": 25,
+    "commits": 100,
+    "top1": 0.27,
+    "top3": 0.63
+   },
+   "kernel/irq/": {
+    "authors": 29,
+    "commits": 75,
+    "top1": 0.25333333333333335,
+    "top3": 0.4666666666666667
+   },
+   "kernel/locking/": {
+    "authors": 26,
+    "commits": 51,
+    "top1": 0.1568627450980392,
+    "top3": 0.3333333333333333
+   },
+   "kernel/printk/": {
+    "authors": 18,
+    "commits": 86,
+    "top1": 0.5697674418604651,
+    "top3": 0.7441860465116279
+   },
+   "kernel/rcu/": {
+    "authors": 26,
+    "commits": 202,
+    "top1": 0.3712871287128713,
+    "top3": 0.7326732673267327
+   },
+   "kernel/sched/": {
+    "authors": 101,
+    "commits": 412,
+    "top1": 0.279126213592233,
+    "top3": 0.5169902912621359
+   },
+   "kernel/time/": {
+    "authors": 43,
+    "commits": 164,
+    "top1": 0.27439024390243905,
+    "top3": 0.5487804878048781
+   },
+   "kernel/trace/": {
+    "authors": 77,
+    "commits": 333,
+    "top1": 0.32432432432432434,
+    "top3": 0.47147147147147145
+   },
+   "lib/": {
+    "authors": 180,
+    "commits": 583,
+    "top1": 0.07890222984562607,
+    "top3": 0.16638078902229847
+   },
+   "mm/": {
+    "authors": 335,
+    "commits": 2047,
+    "top1": 0.08549096238397655,
+    "top3": 0.19296531509526135
+   },
+   "net/core/": {
+    "authors": 129,
+    "commits": 502,
+    "top1": 0.2450199203187251,
+    "top3": 0.3745019920318725
+   },
+   "net/ipv4/": {
+    "authors": 109,
+    "commits": 557,
+    "top1": 0.28545780969479356,
+    "top3": 0.4578096947935368
+   },
+   "security/selinux/": {
+    "authors": 30,
+    "commits": 115,
+    "top1": 0.41739130434782606,
+    "top3": 0.6086956521739131
+   }
+  }
+ }
+}

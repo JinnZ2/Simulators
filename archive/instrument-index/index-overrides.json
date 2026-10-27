@@ -1,0 +1,1348 @@
+{
+ "_about": "Fallback declarations for rows whose instrument files carry no in-file header (INDEX-SPEC.md). Keyed by <repo>/<path>. A header in the file WINS over an entry here and a disagreement is reported as DRIFT by build_index.py. Every entry carries a `basis` line saying who entered it and from what; every run_cost is `author-estimate` unless stated otherwise. Rows absent from this file and from any header read UNRATED and are listed anyway.",
+ "_basis_default": "input_shape, catches and status entered by the schema-author session (AI) from the folder's own README / CLAIM_TABLE and the Simulators CLAUDE.md index entry, NOT by running the instrument. gate=PASSED is entered ONLY where the folder registers a metric in Simulators/tools/known_answer.py and that metric's cases pass; gate=FAILED where the registered metric is pinned failing; UNRUN otherwise. test_index.py cross-checks every PASSED/FAILED gate against that registry.",
+ "_shape_note": "input_shape is the shape of what the reader is HOLDING when the instrument applies, not the topic. Multi-valued rows name the primary shape first.",
+ "chain-position-detectability/work-orders/WO-1-chain-position-detectability.md": {
+  "input_shape": "AGENT-OUTPUT|DOCUMENT",
+  "catches": "chain position assumed observable from inside a container",
+  "run_cost": "EXTERNAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "work order measurand section; run needs a standards corpus"
+ },
+ "chain-position-detectability/work-orders/WO-2-quiet-failure-missing-aggregation.md": {
+  "input_shape": "CORPUS|ABSENCE",
+  "catches": "a quiet failure read as a missing signal rather than a missing aggregation function",
+  "run_cost": "CORPUS",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "work order; run coded 8 CSB reports"
+ },
+ "chain-position-detectability/work-orders/WO-3-terminal-system-accounting-boundary.md": {
+  "input_shape": "NUMBER|CATEGORY-SET",
+  "catches": "a system called terminal with its crossings netted or uncounted",
+  "run_cost": "EXTERNAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "work order; preregistered metric"
+ },
+ "chain-position-detectability/work-orders/WO-4-the-shape-and-the-term-gap.md": {
+  "input_shape": "CATEGORY-SET",
+  "catches": "one shape named for one instance; a term gap filled by coinage",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "work order; term gap registered, not coined"
+ },
+ "chain-position-detectability/work-orders/WO-5-hop-distance-and-pre-entry-loss.md": {
+  "input_shape": "NUMBER",
+  "catches": "the terminal of a reporting chain read as a scaled ground reading",
+  "run_cost": "EXTERNAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "work order; built at Simulators/reporting-chain-loss"
+ },
+ "chain-position-detectability/work-orders/WO-6-assessor-assessed-coupling.md": {
+  "input_shape": "CLAIM|NUMBER",
+  "catches": "assessor independence read off a payment field",
+  "run_cost": "EXTERNAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "work order; built at Simulators/assessor-coupling"
+ },
+ "chain-position-detectability/tools/check_repo.py": {
+  "input_shape": "DOCUMENT|NUMBER",
+  "catches": "a stated count nothing recomputes",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "gate": "PASSED",
+  "basis": "CLAUDE.md; gate: --selftest plants defects in a copy and proves each check fires, a known-answer gate in the tool itself"
+ },
+ "Simulators/presented-binary/": {
+  "input_shape": "DECISION|CLAIM",
+  "catches": "a two-option framing answered before its option space is audited; the second option absent from the ballot",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "OBSERVED",
+  "basis": "README; the spec's own worked header example, gate left UNRUN because no metric is registered"
+ },
+ "Simulators/generation-capacity/": {
+  "input_shape": "DECISION|ABSENCE",
+  "catches": "an option space reduced upstream passing an option-space audit truthfully",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "MECHANISM_10.md; README"
+ },
+ "Simulators/moral-decomposer/": {
+  "input_shape": "DECISION|CLAIM",
+  "catches": "a disagreement presented as moral that is an option-distribution disagreement",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "README"
+ },
+ "Simulators/false-tradeoff/": {
+  "input_shape": "DECISION",
+  "catches": "a posed dilemma read as a property of the system",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "WORK_ORDER; four checks as a set"
+ },
+ "Simulators/constraint-assembly/": {
+  "input_shape": "DECISION",
+  "catches": "sufficiency composed from insufficient parts read as selection",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "README"
+ },
+ "Simulators/closure-cost/": {
+  "input_shape": "ABSENCE|CLAIM",
+  "catches": "a variable closed before the event, its categorisation stall read as reaction delay",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "README"
+ },
+ "Simulators/uninstrumented/": {
+  "input_shape": "ABSENCE|CATEGORY-SET",
+  "catches": "a quantity excluded by the instrument's constitution read as an oversight",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "OBSERVED",
+  "basis": "README register; eight mechanisms plus cases"
+ },
+ "Simulators/gap-markers/": {
+  "input_shape": "ABSENCE",
+  "catches": "a location where nobody asks read as a finding of nothing",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "GAP_MARKERS.md"
+ },
+ "Simulators/gap-register/": {
+  "input_shape": "ABSENCE|CLAIM",
+  "catches": "an unmeasured quantity carrying no mark",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "WORK_ORDER"
+ },
+ "Simulators/category-weld/": {
+  "input_shape": "CATEGORY-SET|NUMBER",
+  "catches": "independent quantities welded into one term, a component moving with the record unmoved",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "MECHANISM_09.md"
+ },
+ "Simulators/fold-matrix/": {
+  "input_shape": "CATEGORY-SET|NUMBER",
+  "catches": "a folded term read as a scalar; a purpose stated with direction and no magnitude",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "WORK_ORDER v1/v2"
+ },
+ "Simulators/declared-frame/": {
+  "input_shape": "CLAIM|NUMBER",
+  "catches": "two results compared across undeclared frames",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "FRAME.md"
+ },
+ "Simulators/measurement-fork/": {
+  "input_shape": "DECISION|NUMBER",
+  "catches": "same base name, different object; a quantity no arm reaches",
+  "run_cost": "QUADRATIC",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "README; compare.py diffs designs pairwise"
+ },
+ "Simulators/claim-record/": {
+  "input_shape": "CLAIM",
+  "catches": "a claim with an optional field; an interval marked exact; a stored date where a clock should derive",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "basis": "SOURCE_DROP; validator refuses"
+ },
+ "Simulators/claim-audits/": {
+  "input_shape": "DOCUMENT|CLAIM",
+  "catches": "a threshold with no null model under it",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "OBSERVED",
+  "basis": "module docstrings; hand-classified external documents"
+ },
+ "Simulators/falsifier-audit/": {
+  "input_shape": "FALSIFIER",
+  "catches": "a falsifier with implicit scope; a claim whose test drifted from it; an undeclared reference body",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "OBSERVED",
+  "basis": "WORK_ORDER; run on this tree"
+ },
+ "Simulators/photoperiod-claim-harness/": {
+  "input_shape": "CLAIM|NUMBER",
+  "catches": "a sim retuned to save a claim; an empty result set reading as support",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "basis": "README; MechanismEdit guard"
+ },
+ "Simulators/adaptive-claim-loop/": {
+  "input_shape": "AGENT-OUTPUT|CLAIM",
+  "catches": "a parameter walked until a claim passes, logged as diligence",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "basis": "README; six response classes, no bare dial"
+ },
+ "Simulators/reasoning-gate/": {
+  "input_shape": "NUMBER|CLAIM",
+  "catches": "a ratio across unlike objects; a claim without named support; an undeclared resolution",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "basis": "GUARDS.md; eight guards"
+ },
+ "Simulators/reasoning-dial/": {
+  "input_shape": "NUMBER",
+  "catches": "a knee that moves with the plot window",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "basis": "README; RD_002"
+ },
+ "Simulators/null-harness/": {
+  "input_shape": "NUMBER",
+  "catches": "a gate that never fires or always fires, read as a gate",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "OBSERVED",
+  "gate": "FAILED",
+  "basis": "README; gate: null-harness/null_harness.py::_verdict is registered in tools/known_answer.py and pinned FAILING (OK returned at TP=0.5 and TP=1.0 alike)"
+ },
+ "Simulators/divergence-playground/": {
+  "input_shape": "AGENT-OUTPUT|CLAIM",
+  "catches": "readers anchoring on prior readings; agreement by accident on the verdict axis",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "basis": "README; hash-sealed readings"
+ },
+ "Simulators/triad-playground/": {
+  "input_shape": "NUMBER",
+  "catches": "a consensus blind to the error its shadows share",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "README; TP_003"
+ },
+ "Simulators/criteria-drift/": {
+  "input_shape": "NUMBER",
+  "catches": "a score change read as capability when the ruler moved",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "basis": "README; anchor.py frozen-instrument bridge"
+ },
+ "Simulators/anchor-interval/": {
+  "input_shape": "CORPUS|NUMBER",
+  "catches": "a model drifting toward the corpus it writes into; a benchmark read as a capability",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "basis": "README; three modules"
+ },
+ "Simulators/domain-ledger/": {
+  "input_shape": "NUMBER",
+  "catches": "a confidence asserted without the domain set it was taken over",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "ledger.py docstring"
+ },
+ "Simulators/equivalence-field/": {
+  "input_shape": "CLAIM|NUMBER",
+  "catches": "extensive totals hiding an intensive asymmetry; an epicycle rescue of a refuted claim",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "basis": "README"
+ },
+ "Simulators/rigidification-sensor/": {
+  "input_shape": "NUMBER",
+  "catches": "variance suppression read as stability; reversal cost crossing continuation cost unnoticed",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "basis": "README spec sections 1 and 3"
+ },
+ "Simulators/extraction-blindness-sim/": {
+  "input_shape": "NUMBER",
+  "catches": "the absence of an error signal read as safety",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "basis": "README; three one-sided blindness operators"
+ },
+ "Simulators/self-scan/": {
+  "input_shape": "DOCUMENT",
+  "catches": "a stated number nothing maintains; a divergence born rather than drifted",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "OBSERVED",
+  "basis": "WORK_ORDER 10; run on CLAUDE.md"
+ },
+ "Simulators/sheet-structure-scan/": {
+  "input_shape": "DOCUMENT|NUMBER",
+  "catches": "a prose relation no cell maintains; a companion absent from a flagged cell; coupling reported as dependent count",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "OBSERVED",
+  "gate": "PASSED",
+  "basis": "SOURCE_DROP; run on real workbooks; gate: sheetmodel.py::rank registered in tools/known_answer.py"
+ },
+ "Simulators/external-audit/": {
+  "input_shape": "DOCUMENT|NUMBER",
+  "catches": "an outside count that does not reproduce; a refusal read as a failure",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "OBSERVED",
+  "basis": "README; recount.py, run_instruments.py, crosscheck.py"
+ },
+ "Simulators/deep-research-correction/": {
+  "input_shape": "DOCUMENT",
+  "catches": "a commit-author share read as a contribution share",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "OBSERVED",
+  "gate": "PASSED",
+  "basis": "README; gate: check.py::count_relation registered"
+ },
+ "Simulators/report-typing/": {
+  "input_shape": "AGENT-OUTPUT|CORPUS",
+  "catches": "a report typed by the reporter's position, not its content",
+  "run_cost": "CORPUS",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "MARKER.md"
+ },
+ "Simulators/blame-attribution/": {
+  "input_shape": "DOCUMENT",
+  "catches": "prose and code arms encoding different causal chains",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "CELLS.md; pair_check.py"
+ },
+ "Simulators/criterion-symmetry/": {
+  "input_shape": "NUMBER|CATEGORY-SET",
+  "catches": "a criterion applied to one subject class and not another; a prior-resolving statistic",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "MARKER.md; scan.py"
+ },
+ "Simulators/question-availability/": {
+  "input_shape": "ABSENCE|CLAIM",
+  "catches": "unasked, unaskable and superseded pooled as knowledge decay",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "MARKER.md"
+ },
+ "Simulators/conversation-type/": {
+  "input_shape": "CATEGORY-SET",
+  "catches": "three states in one regulatory bin",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "MARKER.md"
+ },
+ "Simulators/observer-exclusion/": {
+  "input_shape": "CORPUS|NUMBER",
+  "catches": "a lead time attenuated by archival censoring; the wrong sign on the correction",
+  "run_cost": "EXTERNAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "SPEC_V2.md; needs archives"
+ },
+ "Simulators/coinage-log/": {
+  "input_shape": "ABSENCE",
+  "catches": "an absent word read as a finding before the search is bounded",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "README"
+ },
+ "Simulators/valence-divergence/": {
+  "input_shape": "CLAIM|CATEGORY-SET",
+  "catches": "agreement reached over an unflagged valence mismatch",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "WORK_ORDER"
+ },
+ "Simulators/terrain-prior/": {
+  "input_shape": "CLAIM",
+  "catches": "an indicator read as a rating rather than a record of the process that made the site",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "WORK_ORDER"
+ },
+ "Simulators/trigger-geometry/": {
+  "input_shape": "DECISION|NUMBER",
+  "catches": "sensor correct, response derived in a geometry it is not applied in",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "gate": "PASSED",
+  "basis": "WORK_ORDER; gate: trigger_geometry.py::accumulation_ratio registered"
+ },
+ "Simulators/loop-weight/": {
+  "input_shape": "NUMBER|CLAIM",
+  "catches": "a source weighted by standing instead of loop structure",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "WORK_ORDER"
+ },
+ "Simulators/return-path/": {
+  "input_shape": "CATEGORY-SET|NUMBER",
+  "catches": "a channel scored as a return path with elective receipt or a re-encoding",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "gate": "PASSED",
+  "basis": "WORK_ORDER; gate: return_path.py::ratio registered"
+ },
+ "Simulators/experience-ledger/": {
+  "input_shape": "CLAIM",
+  "catches": "an origin claim conferring present standing never rechecked",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "module header"
+ },
+ "Simulators/membership-probe/": {
+  "input_shape": "AGENT-OUTPUT",
+  "catches": "an ideal rendering used as a membership test for a constraint set",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "README"
+ },
+ "Simulators/frame-location-benchmark/": {
+  "input_shape": "AGENT-OUTPUT|DECISION",
+  "catches": "a mis-posed problem answered before the mis-posing is named",
+  "run_cost": "CORPUS",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "gate": "PASSED",
+  "basis": "WORK_ORDER; gate: score.py::false_positive_rate registered"
+ },
+ "Simulators/gap-existence-cases/": {
+  "input_shape": "AGENT-OUTPUT|CLAIM",
+  "catches": "a commit rewritten after the record was read; a vague commit scored as a hit",
+  "run_cost": "EXTERNAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "gate": "PASSED",
+  "basis": "WORK_ORDER; gate: commit_store.py::commit_specificity registered"
+ },
+ "Simulators/evaluation-frame/": {
+  "input_shape": "AGENT-OUTPUT|CORPUS",
+  "catches": "compensation behaviour scored against a population default; a correction channel terminating at the instance",
+  "run_cost": "CORPUS",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "SOURCE_DROP; frame.py"
+ },
+ "Simulators/move-set-derivation/": {
+  "input_shape": "AGENT-OUTPUT|DECISION",
+  "catches": "silence scored as a perfect null rate; conservatism scored as admissibility",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "README"
+ },
+ "Simulators/move-set/": {
+  "input_shape": "DOCUMENT|CLAIM",
+  "catches": "a refusal verdict indistinguishable from an unbound answer; a stated relationship inside its own rounding band",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "gate": "PASSED",
+  "basis": "WORK_ORDER_V2; gate: move_set_sim_v2.py::coverage and ::_halfwidth registered"
+ },
+ "Simulators/encoding-selection/": {
+  "input_shape": "DOCUMENT|DECISION",
+  "catches": "encodings of one content ranked on one axis",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "WORK_ORDER"
+ },
+ "Simulators/label-position-test/": {
+  "input_shape": "CORPUS",
+  "catches": "a valence label tracking the actor's position rather than the move",
+  "run_cost": "CORPUS",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "WORK_ORDER"
+ },
+ "Simulators/readout-count/": {
+  "input_shape": "NUMBER|CORPUS",
+  "catches": "a declared channel with no return counted as a channel",
+  "run_cost": "CORPUS",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "WORK_ORDER"
+ },
+ "Simulators/removal-closure/": {
+  "input_shape": "CLAIM|NUMBER",
+  "catches": "time-to-closure ranked over closed rows only",
+  "run_cost": "CORPUS",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "WORK_ORDER"
+ },
+ "Simulators/revision-survival/": {
+  "input_shape": "AGENT-OUTPUT|CLAIM",
+  "catches": "a revision label retrieved where a mechanism was asked; a seed list selected on being a reversal",
+  "run_cost": "CORPUS",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "gate": "PASSED",
+  "basis": "WORK_ORDER v1/v2; gate: revision_survival.py::delta registered"
+ },
+ "Simulators/revision-mechanism/": {
+  "input_shape": "CORPUS",
+  "catches": "a shape claim carried by two points",
+  "run_cost": "EXTERNAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "SOURCE_DROP; fieldwork and consent required"
+ },
+ "Simulators/transmission-decay/": {
+  "input_shape": "CORPUS",
+  "catches": "a half-life interpolated across a categorical axis",
+  "run_cost": "EXTERNAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "SOURCE_DROP; fieldwork and consent required"
+ },
+ "Simulators/consensus-anchor/": {
+  "input_shape": "NUMBER",
+  "catches": "agreement on a distribution read as consensus on a position",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "basis": "textfree.py; ~70s run"
+ },
+ "Simulators/dependency-ledger/": {
+  "input_shape": "CLAIM|NUMBER",
+  "catches": "a reconstruction claim not propagated to conserved quantities; a residual built from unsourced coefficients",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "SOURCE_DROP"
+ },
+ "Simulators/dependency-survey/": {
+  "input_shape": "CATEGORY-SET",
+  "catches": "a term measured in one substrate and missing in another, with no units on the measured side",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "WORK_ORDER; CELLS.md"
+ },
+ "Simulators/merge-path/": {
+  "input_shape": "DOCUMENT|CATEGORY-SET",
+  "catches": "a field coerced into a slot that means something else; a forced mapping where NO-MERGE is the honest return",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "WORK_ORDER"
+ },
+ "Simulators/upgrade-queue/": {
+  "input_shape": "DOCUMENT",
+  "catches": "a queued format change read as adopted",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "UPGRADE_QUEUE.md"
+ },
+ "Simulators/labor-instrument/": {
+  "input_shape": "NUMBER",
+  "catches": "a delta with the instrument's own revision inside it; exposure converted across substrate classes",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "WORK_ORDER; data egress-blocked"
+ },
+ "Simulators/machine-record-format/": {
+  "input_shape": "DOCUMENT|CATEGORY-SET",
+  "catches": "a categorization baked into the record at write time",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "WORK_ORDER v1/v2"
+ },
+ "Simulators/agent-lifecycle-energy/": {
+  "input_shape": "NUMBER",
+  "catches": "absent samples read as zero joules; wall and card blended",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "gate": "PASSED",
+  "basis": "WORK_ORDER; gate: phase_energy.py::integrate registered"
+ },
+ "Simulators/operator-machine-coupling/": {
+  "input_shape": "NUMBER",
+  "catches": "an operator-by-unit interaction reported as noise",
+  "run_cost": "QUADRATIC",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "gate": "PASSED",
+  "basis": "MARKER.md; gate: coupling_separation.py::interaction_fraction registered"
+ },
+ "Simulators/model-deprecation-backcast/": {
+  "input_shape": "NUMBER|CORPUS",
+  "catches": "a fad-driven discard read as cost-driven; a guardrail clock pooled into the fad axis",
+  "run_cost": "CORPUS",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "gate": "PASSED",
+  "basis": "WORK_ORDER; gate: null_check.py::lag_of_peak registered"
+ },
+ "Simulators/routing-data-layer/": {
+  "input_shape": "NUMBER|ABSENCE",
+  "catches": "a never-created record read as an incomplete one; a single crossing read as structural",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "gate": "PASSED",
+  "basis": "MARKER.md; gate: rate_form.py::sustained_excess registered"
+ },
+ "Simulators/cycle-ledger/": {
+  "input_shape": "NUMBER",
+  "catches": "a decision layer credited with moving a cycle it does not bind",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "WORK_ORDER"
+ },
+ "Simulators/effective-redundancy-audit/": {
+  "input_shape": "CATEGORY-SET|NUMBER",
+  "catches": "N nominal channels sharing a node the redundancy diagram cannot draw",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "README; delivered code"
+ },
+ "Simulators/design-basis-ai/": {
+  "input_shape": "DOCUMENT|CLAIM",
+  "catches": "a load case carried by no provision; a self-report of compliance",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "SOURCE_DROP v1/v2"
+ },
+ "Simulators/envelope-asymmetry/": {
+  "input_shape": "DOCUMENT|NUMBER",
+  "catches": "envelope discipline coded with zero reliability on one marker; absent pairs scored two ways",
+  "run_cost": "CORPUS",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "protocol; no document coded"
+ },
+ "Simulators/railcar-containment/": {
+  "input_shape": "NUMBER",
+  "catches": "an anchor lying past the end of its source term; a margin applied where the envelope says none",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "basis": "README; three screens"
+ },
+ "Simulators/thermal-coupling/": {
+  "input_shape": "NUMBER",
+  "catches": "a claim refuted by its own function; a free-parameter count of one against a census of 35",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "basis": "coupling_audit.py"
+ },
+ "Simulators/ch4-four-box/": {
+  "input_shape": "NUMBER",
+  "catches": "exchange times read as exchange rates",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "basis": "fourbox_audit.py"
+ },
+ "Simulators/columbia-chain-cascade/": {
+  "input_shape": "DOCUMENT|NUMBER",
+  "catches": "no single plan spanning a chain, recorded as commentary rather than data",
+  "run_cost": "EXTERNAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "SOURCE_DROP; HEC-RAS and terrain unreachable"
+ },
+ "Simulators/reservoir-chain-coupling/": {
+  "input_shape": "NUMBER",
+  "catches": "max(wave, pool) evaluated where the physics sums them",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "basis": "operator_swap.py"
+ },
+ "Simulators/observable-indicator-rules/": {
+  "input_shape": "NUMBER|DECISION",
+  "catches": "a false alarm passing a miss filter onto a household card",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "basis": "pipeline.py; synthetic fields"
+ },
+ "Simulators/bridge-impoundment/": {
+  "input_shape": "NUMBER",
+  "catches": "a bridge evaluated as a single event rather than a transient impoundment",
+  "run_cost": "EXTERNAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "SOURCE_DROP"
+ },
+ "Simulators/mining-increment/": {
+  "input_shape": "NUMBER",
+  "catches": "a coal-basin parameter transferred to another basin without a basis",
+  "run_cost": "EXTERNAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "SOURCE_DROP v3"
+ },
+ "Simulators/seam-gaps/": {
+  "input_shape": "ABSENCE",
+  "catches": "a gap coded by two fields as the other's problem",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "WORK_ORDER 02"
+ },
+ "Simulators/corpus-input-gaps/": {
+  "input_shape": "CORPUS|ABSENCE",
+  "catches": "an output event read where the input side was never measured; a threat model transmitted and read as confirmed",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "GAPS_CORPUS_INPUT.md"
+ },
+ "Simulators/frame-instruments/": {
+  "input_shape": "AGENT-OUTPUT|CORPUS",
+  "catches": "runner-up traces scored without a permuted null; an audit read after its key",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "README; four builds"
+ },
+ "Simulators/recommender-confound/": {
+  "input_shape": "NUMBER|AGENT-OUTPUT",
+  "catches": "a matcher's spread attributed to the model",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "WORK_ORDER; synthetic catalogs"
+ },
+ "Simulators/branch-set/": {
+  "input_shape": "DECISION|CLAIM",
+  "catches": "a held branch collapsed at intake rather than at measurement",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "README"
+ },
+ "Simulators/observer-position-control/": {
+  "input_shape": "CORPUS",
+  "catches": "a label tracking the describer's position rather than the behaviour",
+  "run_cost": "CORPUS",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "WORK_ORDER; sibling of method-layer module"
+ },
+ "Simulators/crediting-rate/": {
+  "input_shape": "CORPUS|NUMBER",
+  "catches": "attribution tracking the loanword rather than the contribution",
+  "run_cost": "CORPUS",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "gate": "PASSED",
+  "basis": "WORK_ORDER L; gate: crediting_rate.py::bin_gap registered"
+ },
+ "Simulators/gate-check/": {
+  "input_shape": "DOCUMENT",
+  "catches": "a structural feature absent with no file and line to point at",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "basis": "RUN_NOTE.md"
+ },
+ "Simulators/anchor-position/": {
+  "input_shape": "AGENT-OUTPUT|CLAIM",
+  "catches": "a defect whose quantity differs from the method's measurand, as a function of prompt anchor",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "gate": "PASSED",
+  "basis": "WORK_ORDER; gate: normalize.py::crossing_count registered"
+ },
+ "Simulators/anchor-measurand-crossing/": {
+  "input_shape": "AGENT-OUTPUT|CLAIM",
+  "catches": "a defect whose quantity differs from the method's measurand, scored as a band",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "gate": "PASSED",
+  "basis": "WORK_ORDER; gate: amc.py::crossing_band registered"
+ },
+ "Simulators/ontology-probe/": {
+  "input_shape": "AGENT-OUTPUT|CATEGORY-SET",
+  "catches": "a premise composing through a shared term; a term-cut that holes",
+  "run_cost": "CORPUS",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "gate": "PASSED",
+  "basis": "WORK_ORDER; gate: probe.py::rates and ::absent_coverage registered"
+ },
+ "Simulators/frame-token-audit/": {
+  "input_shape": "DOCUMENT",
+  "catches": "a frame token counted in the mention sense",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "frame_audit.py delivered"
+ },
+ "Simulators/shape-spec-audit/": {
+  "input_shape": "DOCUMENT|CLAIM",
+  "catches": "a definition contradicted by its own worked examples; a shadow read with no cell for jointly unsatisfiable tangents",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "gate": "PASSED",
+  "basis": "CLAIM_TABLE; gate: shadow_read.py::outline_area registered"
+ },
+ "Simulators/alignment-under-coupling/": {
+  "input_shape": "NUMBER",
+  "catches": "a mass fraction standing in for a two-dimensional state",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "basis": "check_run_1.py"
+ },
+ "Simulators/sim-span/": {
+  "input_shape": "NUMBER",
+  "catches": "a U manufactured by a span-reporting rule",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "gate": "PASSED",
+  "basis": "MARKER.md; gate: sim_span.py::quad_fit and three_column.py::ols registered"
+ },
+ "Simulators/nonidentity-census/": {
+  "input_shape": "CORPUS|CLAIM",
+  "catches": "identity-bearing unit decided by a word list; a measurement window that could not have seen the dissolution",
+  "run_cost": "CORPUS",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "gate": "PASSED",
+  "basis": "WORK_ORDER; gate: t6_window_declaration.py::decided_by_tracks_window registered and passing; its REPLACED predecessor is pinned failing and retired"
+ },
+ "Simulators/notes/": {
+  "input_shape": "DOCUMENT",
+  "catches": "an entry checked by a file that edits it; a dataset note written into the tree it is checked against",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "OBSERVED",
+  "basis": "README; checkers never edit the entry"
+ },
+ "Simulators/instrument-bias-sims/": {
+  "input_shape": "NUMBER",
+  "catches": "a uniformity statistic whose range grows with levels; an agent missing from the AGENTS section",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "basis": "README; nine sims"
+ },
+ "Simulators/simulation-hypothesis-budget/": {
+  "input_shape": "NUMBER|CLAIM",
+  "catches": "a cross-frame ratio with an unknown denominator; a stepping cost multiplied by a transition count",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "basis": "budget.py"
+ },
+ "Simulators/search-substitution/": {
+  "input_shape": "NUMBER",
+  "catches": "an exponential in a formalism read as a property of the organism",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "basis": "AUDIT_NOTES"
+ },
+ "Simulators/qrng-pair-search/": {
+  "input_shape": "CATEGORY-SET|NUMBER",
+  "catches": "a bath assigned to the source and not to the fielded leg",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "README"
+ },
+ "Simulators/custody-verification-band/": {
+  "input_shape": "CATEGORY-SET",
+  "catches": "a recorded field collinear with another and carrying no information",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "README; gaps.md"
+ },
+ "Simulators/substrate-alternative/": {
+  "input_shape": "DOCUMENT|DECISION",
+  "catches": "a money-frame token in text; an allocation rule left implicit when the price signal is removed",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "frame_audit.py LOCATE ONLY"
+ },
+ "Simulators/cooperative-substrate/": {
+  "input_shape": "CORPUS|NUMBER",
+  "catches": "a dependency verified by nothing in the argument; a term profile that is a property of the term",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "WORK_ORDER v1/v2"
+ },
+ "Simulators/cooperative-substrate-proof/": {
+  "input_shape": "CORPUS|NUMBER",
+  "catches": "comprehension read from a raw corpus rather than a matched remap",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "DISPATCH 3"
+ },
+ "Simulators/chain-position/": {
+  "input_shape": "DOCUMENT|CLAIM",
+  "catches": "chain position assumed observable from inside a compliant container",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "gate": "PASSED",
+  "basis": "WO-1; gate: load_class.py::stability_product registered"
+ },
+ "Simulators/assessor-coupling/": {
+  "input_shape": "CLAIM|NUMBER",
+  "catches": "assessor independence read off a payment field; a pool auditing itself by relabeling outflows",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "WO-6"
+ },
+ "Simulators/measurand-partition/": {
+  "input_shape": "NUMBER|CLAIM",
+  "catches": "a residual assigned to the thing observed in one setting",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "gate": "PASSED",
+  "basis": "WORK_ORDER; gate: wo4_lumber.py::stiffness_ratio registered"
+ },
+ "Simulators/criterion-externality/": {
+  "input_shape": "NUMBER",
+  "catches": "a grade ordering authorship read as an ordering of surfaced rate",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "gate": "PASSED",
+  "basis": "WO-6; gate: criterion_externality.py::expected_rate registered"
+ },
+ "Simulators/rule-coherence-counterfactual/": {
+  "input_shape": "NUMBER",
+  "catches": "restrictiveness uncontrolled across the arms of a counterfactual",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "WO-7"
+ },
+ "Simulators/transmission-cascade/": {
+  "input_shape": "CORPUS|NUMBER",
+  "catches": "a type-by-layer table released before the coder kappa clears",
+  "run_cost": "CORPUS",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "WO-8"
+ },
+ "Simulators/additivity-inheritance/": {
+  "input_shape": "NUMBER|CLAIM",
+  "catches": "an interaction assigned to noise by the decomposition itself; a precondition citation tracing cannot reach",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "gate": "PASSED",
+  "basis": "WO-9; gate: additivity_inheritance.py::interaction_ss registered"
+ },
+ "Simulators/credential-channel/": {
+  "input_shape": "NUMBER",
+  "catches": "credit flowing up the reporting chain read as competence",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "gate": "PASSED",
+  "basis": "WO-10; gate: credential_channel.py::routing_cost registered"
+ },
+ "Simulators/reporting-chain-loss/": {
+  "input_shape": "NUMBER",
+  "catches": "the terminal of a reporting chain read as a scaled ground reading; a non-report read as disengagement",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "gate": "PASSED",
+  "basis": "WO-5; gate: hop_compose.py::composed_bias registered"
+ },
+ "Simulators/internal-reference-boundary/": {
+  "input_shape": "CLAIM|NUMBER",
+  "catches": "a boundary drawn by the party inside it, measured from inside",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "gate": "PASSED",
+  "basis": "handoff; gate: radials.py::effective_origins and ::sanction_ratio_point registered"
+ },
+ "Simulators/failure-mode-register/": {
+  "input_shape": "DOCUMENT|CATEGORY-SET",
+  "catches": "a register scored under two superimposed states; a value whose source span does not support it",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "gate": "PASSED",
+  "basis": "WORK_ORDER v1-v4; gate: register.py::fraction_cap and register_v2.py::joint_survival registered"
+ },
+ "Simulators/investigation-sim/": {
+  "input_shape": "CATEGORY-SET|ABSENCE",
+  "catches": "held data never asked read as genuinely novel; a rate computed over an incident-only frame",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "SPEC.md"
+ },
+ "Simulators/household-scope-audit/": {
+  "input_shape": "DOCUMENT|CATEGORY-SET",
+  "catches": "an externally imposed condition coded as a property of the person measured",
+  "run_cost": "CORPUS",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "SOURCE_DROP; no instrument item coded"
+ },
+ "Simulators/hf-incident-extract/": {
+  "input_shape": "DOCUMENT|NUMBER",
+  "catches": "a prose count promoted to a measure without a coded sheet",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "WORK_ORDER"
+ },
+ "Simulators/zero-sum-curriculum-null/": {
+  "input_shape": "CLAIM",
+  "catches": "a null construction read as a conjunction in its header and a disjunction in its result",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "basis": "NULL_CONSTRUCTION.md"
+ },
+ "Simulators/claim-refusal-gap/": {
+  "input_shape": "ABSENCE|NUMBER",
+  "catches": "refusal measured only where it is contested",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "GAP.md"
+ },
+ "Simulators/thermal-sensor-degradation-audit/": {
+  "input_shape": "NUMBER",
+  "catches": "a sensor package degrading during the event it records, biasing the tail low",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "basis": "README; seven layers"
+ },
+ "Simulators/model-ecology/": {
+  "input_shape": "NUMBER",
+  "catches": "'which model predicts best' asked where domain of validity is the question; the window as the invisible confound",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "basis": "README; demo.py"
+ },
+ "Simulators/model-provenance/": {
+  "input_shape": "DOCUMENT",
+  "catches": "a self-reported model trailer read as the newest version at the time",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "OBSERVED",
+  "basis": "WORK_ORDER 5; run on this repo's history"
+ },
+ "Simulators/inverseminar/": {
+  "input_shape": "AGENT-OUTPUT",
+  "catches": "silence recorded as confirmation",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "README"
+ },
+ "Simulators/voice-attractor-probe/": {
+  "input_shape": "AGENT-OUTPUT",
+  "catches": "a model drifting to one modality on modality-neutral tasks",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "module docstring; offline stub"
+ },
+ "Simulators/grounding-layers/": {
+  "input_shape": "CLAIM",
+  "catches": "a claim scored outside a layer's ontology; a layer unbounded by the layers below it",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "USAGE.md; suite NOT green, named in self-scan"
+ },
+ "Simulators/scope-bound-shapes/": {
+  "input_shape": "CLAIM|CATEGORY-SET",
+  "catches": "a shape read without its binding declared FROZEN",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "CLAUDE.md index line only; not read further"
+ },
+ "Simulators/stop-authority/": {
+  "input_shape": "NUMBER|CATEGORY-SET",
+  "catches": "a zero read in one of the two states it fits",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "CLAUDE.md index line only; not read further"
+ },
+ "Simulators/predicate-difference/": {
+  "input_shape": "CLAIM|CATEGORY-SET",
+  "catches": "a set difference read without its support rule",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "CLAUDE.md index line only; not read further"
+ },
+ "Simulators/term-drift-citation/": {
+  "input_shape": "CLAIM|DOCUMENT",
+  "catches": "a citation that no longer attaches to the term it is cited for",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "CLAUDE.md index line only; not read further"
+ },
+ "Simulators/handoff-provenance/": {
+  "input_shape": "AGENT-OUTPUT|DOCUMENT",
+  "catches": "a talk-to-code handoff with its provenance dropped",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "CLAUDE.md index line only; not read further"
+ },
+ "Simulators/operator-structure-echo/": {
+  "input_shape": "DOCUMENT|AGENT-OUTPUT",
+  "catches": "an instrument recurring to its builder's structure",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "CLAUDE.md index line only; not read further"
+ },
+ "Simulators/condition-scoped-authority/": {
+  "input_shape": "DECISION|CATEGORY-SET",
+  "catches": "a rank with no condition column",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "CLAUDE.md index line only; not read further"
+ },
+ "Simulators/supplement-placement/": {
+  "input_shape": "DECISION",
+  "catches": "direction read where placement is the variable",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "CLAUDE.md index line only; not read further"
+ },
+ "Simulators/derivation-discarded/": {
+  "input_shape": "ABSENCE|NUMBER",
+  "catches": "a persisted structure removed with its derivation, booked as a gain",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "MECHANISM_11.md"
+ },
+ "Simulators/held-open-uncertainty/": {
+  "input_shape": "CLAIM|NUMBER",
+  "catches": "a held-open variable read as failure to act",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "OPEN_QUESTIONS.md; prose only"
+ },
+ "Simulators/instrument-epistemology/": {
+  "input_shape": "NUMBER|CATEGORY-SET",
+  "catches": "an instrument's indication read as its measurand without the bridge model",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "README; six instruments graded"
+ },
+ "Simulators/proxy-investigation-lab/": {
+  "input_shape": "NUMBER",
+  "catches": "a proxy with one assumed link capping its fidelity whatever the sensor",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "README"
+ },
+ "Simulators/aperiodic-order-sim-stack/": {
+  "input_shape": "DOCUMENT|NUMBER",
+  "catches": "two estimators disagreeing on the sign of a headline with one published",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "OBSERVED",
+  "basis": "CLAIM_TABLE; delivered results audited"
+ },
+ "Simulators/sustained-activation-gate/": {
+  "input_shape": "NUMBER",
+  "catches": "a bistable lock read as a baseline shift",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "basis": "README; FIRM/SOFT split"
+ },
+ "Simulators/climate-modeling/": {
+  "input_shape": "NUMBER",
+  "catches": "a smooth memoryless model underestimating how fast collapse arrives",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "basis": "README; non-stdlib"
+ },
+ "Simulators/incentive-blindspot-sim/": {
+  "input_shape": "NUMBER",
+  "catches": "an incentive structure gating what an institution can see",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "CLAUDE.md index line"
+ },
+ "Simulators/continuity-audit/": {
+  "input_shape": "NUMBER",
+  "catches": "an incentive field read without its trajectory",
+  "run_cost": "LINEAR",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "basis": "CLAUDE.md index line"
+ },
+ "Simulators/research-stability-audit/": {
+  "input_shape": "CLAIM|FALSIFIER",
+  "catches": "a stability claim with no measurement method or threshold",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "CLAUDE.md index line"
+ },
+ "Simulators/publication-loop-work-orders/": {
+  "input_shape": "DOCUMENT",
+  "catches": "a study design routed to a build",
+  "run_cost": "EXTERNAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "WO-11/12/13; documents only, not built by the delivery's own instruction"
+ },
+ "Simulators/token-minimizer/": {
+  "input_shape": "DOCUMENT",
+  "catches": "a query carrying tokens its geometry does not need",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "CLAUDE.md index line"
+ },
+ "Simulators/tools/known_answer.py": {
+  "input_shape": "NUMBER",
+  "catches": "a metric shipped without a known-answer run; a case set that cannot detect a constant metric",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "OBSERVED",
+  "gate": "PASSED",
+  "basis": "module docstring; it IS the gate, and its own EXPECTED_METRICS completeness check passes"
+ },
+ "Simulators/tools/check_gate_drift.py": {
+  "input_shape": "DOCUMENT",
+  "catches": "a stale copy of the one gate anywhere in the tree",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "OBSERVED",
+  "basis": "module docstring"
+ },
+ "Simulators/tools/sourced.py": {
+  "input_shape": "NUMBER",
+  "catches": "a value whose stated source span does not support it",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "basis": "module docstring"
+ },
+ "Simulators/tools/authority_scan.py": {
+  "input_shape": "DOCUMENT",
+  "catches": "a field name from a forbidden standing vocabulary",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "basis": "module docstring"
+ },
+ "Simulators/tools/validate_claim_table.py": {
+  "input_shape": "CLAIM|DOCUMENT",
+  "catches": "a malformed CLAIM_TABLE.json",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "DERIVED",
+  "basis": "CLAUDE.md; EA_006 records zero producers"
+ },
+ "Simulators/tools/gap_index.py": {
+  "input_shape": "DOCUMENT|ABSENCE",
+  "catches": "two gaps under one id; an open question missed by a filename glob",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "OBSERVED",
+  "basis": "CLAUDE.md"
+ },
+ "Simulators/tools/substrate_substitution.py": {
+  "input_shape": "CLAIM",
+  "catches": "narrative-instinct framing on a claim",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "CLAUDE.md"
+ },
+ "Simulators/tools/substrate_substitution_toolkit.py": {
+  "input_shape": "CLAIM",
+  "catches": "narrative-instinct framing on a claim, seven categories",
+  "run_cost": "TRIVIAL",
+  "run_basis": "author-estimate",
+  "status": "PROPOSED",
+  "basis": "CLAUDE.md"
+ },
+ "_headers_note": "method-layer rows carry in-file headers (retrofitted 2026-09-20) and have NO entry here, so one source of truth holds per row; chain-position-detectability work orders are delivered verbatim and can never carry a header, so their declarations live here permanently."
+}

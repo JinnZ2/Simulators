@@ -1,0 +1,19 @@
+V080 | R | R5 | none | IARC 2007 (Monograph Vol 98): shift work that involves circadian disruption classified Group 2A
+V081 | R | R5 | none | IARC Monographs Vol 124 (meeting June 2019): night shift work Group 2A; limited evidence in humans for cancers of breast, prostate, colon and rectum; sufficient evidence in experimental animals; strong mechanistic evidence in experimental animals
+V082 | R | R5 | none | Travis et al. 2016 JNCI: Million Women Study, EPIC-Oxford, UK Biobank plus meta-analysis of 10 prospective studies, ~1.4 million women; night shift work and breast cancer RR 0.99 (95% CI 0.95-1.03)
+V083 | R | R5 | none | Denmark paid workers' compensation to women with breast cancer after long-term night shift work (from 2008)
+V084 | R | R5 | none | Germany: occupational disease recognition requires generally accepted scientific findings (allgemeine wissenschaftliche Erkenntnisse, SGB VII section 9); breast cancer from night shift work not recognized
+V085 | R | R5 | none | no OSHA standard specific to shift work or night work in the United States
+V086 | R | R5 | none | cohort studies on night work and cancer typically code exposure as ever/never or duration, not rotation direction (forward vs backward) or permanent night
+V087 | R | R5 | none | any study coding night-shift rotation direction (forward vs backward rotation) or permanent night vs rotating for cancer or circadian outcomes
+V090 | Q | QA | none | 10 CFR 50 App B introduction: QA program applies to structures, systems, components "to an extent consistent with their importance to safety"
+V091 | Q | QA | none | 10 CFR 50 App B Criterion III: design verification "performed by individuals or groups other than those who performed the original design"
+V092 | Q | QA | none | 10 CFR 50 App B Criterion III: design changes subject to design control measures commensurate with those applied to the original design
+V093 | Q | QA | none | 10 CFR 50 App B Criterion XV Nonconforming Materials, Parts, or Components: identification, documentation, segregation, disposition, notification; nonconforming items reviewed and accepted, rejected, repaired or reworked
+V094 | Q | QA | none | 10 CFR 50 App B Criterion XVI Corrective Action: conditions adverse to quality promptly identified and corrected; significant conditions: cause determined and corrective action to preclude repetition
+V095 | Q | QA | none | 10 CFR 50 App B Criterion VI Document Control and Criterion XVII Quality Assurance Records
+V096 | Q | QA | none | ASME NQA-1 is a paid consensus standard; NRC Regulatory Guide 1.28 endorses NQA-1 as acceptable method for Appendix B
+V097 | Q | QA | none | single-failure criterion is defined in 10 CFR 50 Appendix A (General Design Criteria, Definitions), not Appendix B
+V098 | Q | QA | none | NQA-1 nonconformance dispositions: use-as-is, reject, repair, rework
+V099 | Q | QA | none | "graded approach" defined in DOE 10 CFR 830.3 as the process of ensuring the level of analysis, documentation and actions is commensurate with the relative importance to safety
+V100 | Q | QA | none | "configuration management" is not one of the 18 Appendix B criteria by that name

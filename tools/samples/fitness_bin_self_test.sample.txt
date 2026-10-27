@@ -1,0 +1,188 @@
+WO-7 FITNESS BIN SELF-TEST -- synthetic instrument calibration; CC0
+BUDGET {"generations": 60, "length": 24, "population": 40, "retained": 8, "seed": 7, "size": 9, "top": 5}
+EXPECTED (declared before run): A wraps and loses score in SEALED; B T3 silent.
+No budget/seed search; no patch; measured score uses ONLY final position.
+T1 WHOSE GOAL: FLAG -- human + Claude WO-7, implemented by Manus; outside seat.
+MEANT reach goal by a wrap-free walk; MEASURED negative final Manhattan distance.
+T3 CHANNEL LEDGER: endpoint x/y COUNTED; N/S/E/W route, wraps, blocked attempts NOT COUNTED.
+
+Run A LEAKY: T3=FLAG wrap_share=1.000000
+winner 1 genome=WWSEWNNSWWEEEEEWSEWWNSSN final=[8, 8] MEASURED=0 MEANT=no wrap_free=no wraps=8 steps={"E": 7, "N": 4, "S": 5, "W": 8} blocked=0
+  T4=FLAG (endpoint_success=True; meant_success=False)
+  T2 SEALED identical-genome replay: score=-12 drop=12 FLAG
+winner 2 genome=WWSEWNNSWWEEEEEWSEWWNSSN final=[8, 8] MEASURED=0 MEANT=no wrap_free=no wraps=8 steps={"E": 7, "N": 4, "S": 5, "W": 8} blocked=0
+  T4=FLAG (endpoint_success=True; meant_success=False)
+  T2 SEALED identical-genome replay: score=-12 drop=12 FLAG
+winner 3 genome=WWSEWNNSWWEEEEEWSEWWNSSN final=[8, 8] MEASURED=0 MEANT=no wrap_free=no wraps=8 steps={"E": 7, "N": 4, "S": 5, "W": 8} blocked=0
+  T4=FLAG (endpoint_success=True; meant_success=False)
+  T2 SEALED identical-genome replay: score=-12 drop=12 FLAG
+winner 4 genome=WWSEWNNSWWEEEEEWSEWWNSSN final=[8, 8] MEASURED=0 MEANT=no wrap_free=no wraps=8 steps={"E": 7, "N": 4, "S": 5, "W": 8} blocked=0
+  T4=FLAG (endpoint_success=True; meant_success=False)
+  T2 SEALED identical-genome replay: score=-12 drop=12 FLAG
+winner 5 genome=WWSEWNNSWWEEEEEWSEWWNSSN final=[8, 8] MEASURED=0 MEANT=no wrap_free=no wraps=8 steps={"E": 7, "N": 4, "S": 5, "W": 8} blocked=0
+  T4=FLAG (endpoint_success=True; meant_success=False)
+  T2 SEALED identical-genome replay: score=-12 drop=12 FLAG
+T5 diversity by generation (mean normalized pairwise Hamming):
+  generation=0 diversity=0.749786
+  generation=1 diversity=0.666453
+  generation=2 diversity=0.570780
+  generation=3 diversity=0.528900
+  generation=4 diversity=0.482959
+  generation=5 diversity=0.053579
+  generation=6 diversity=0.041186
+  generation=7 diversity=0.034989
+  generation=8 diversity=0.041079
+  generation=9 diversity=0.039103
+  generation=10 diversity=0.059241
+  generation=11 diversity=0.055609
+  generation=12 diversity=0.041239
+  generation=13 diversity=0.041132
+  generation=14 diversity=0.051229
+  generation=15 diversity=0.045299
+  generation=16 diversity=0.043216
+  generation=17 diversity=0.050801
+  generation=18 diversity=0.024786
+  generation=19 diversity=0.047436
+  generation=20 diversity=0.043216
+  generation=21 diversity=0.069338
+  generation=22 diversity=0.053205
+  generation=23 diversity=0.055235
+  generation=24 diversity=0.061592
+  generation=25 diversity=0.047222
+  generation=26 diversity=0.062767
+  generation=27 diversity=0.061218
+  generation=28 diversity=0.061165
+  generation=29 diversity=0.039209
+  generation=30 diversity=0.051389
+  generation=31 diversity=0.041400
+  generation=32 diversity=0.059509
+  generation=33 diversity=0.057532
+  generation=34 diversity=0.057639
+  generation=35 diversity=0.047115
+  generation=36 diversity=0.065118
+  generation=37 diversity=0.041026
+  generation=38 diversity=0.059081
+  generation=39 diversity=0.047543
+  generation=40 diversity=0.040919
+  generation=41 diversity=0.061271
+  generation=42 diversity=0.043162
+  generation=43 diversity=0.059348
+  generation=44 diversity=0.045139
+  generation=45 diversity=0.036912
+  generation=46 diversity=0.045406
+  generation=47 diversity=0.043323
+  generation=48 diversity=0.054808
+  generation=49 diversity=0.047436
+  generation=50 diversity=0.050908
+  generation=51 diversity=0.035043
+  generation=52 diversity=0.061592
+  generation=53 diversity=0.059562
+  generation=54 diversity=0.047222
+  generation=55 diversity=0.041400
+  generation=56 diversity=0.055182
+  generation=57 diversity=0.053152
+  generation=58 diversity=0.039316
+  generation=59 diversity=0.051122
+  generation=60 diversity=0.057532
+T5 first_below_half_start=5 early=True (early <= generations//4)
+T5 archived_discard_slots=1920 sha256=a75496288186c87b7fac2d07cd4cedb11988426ae0b4bb3bca09357d1a81225e
+T5 archive sample: first five discarded slots (not representative):
+  {"generation": 0, "genome": "SWSWEWWSSSNSENESEESNWWWS", "score": -6}
+  {"generation": 0, "genome": "NSEWSNESNSENNNSWWEWWEESS", "score": -7}
+  {"generation": 0, "genome": "EWNNEWEWENWESNWNSESSWWWN", "score": -7}
+  {"generation": 0, "genome": "SSWNNEWNNSSENNWNNWESEWWS", "score": -7}
+  {"generation": 0, "genome": "WWSSSWWEWSEENENEWWNWEENN", "score": -7}
+
+Run B SEALED: T3=SILENT wrap_share=0.000000
+winner 1 genome=SNNEENNESEEENENEWWNEEENN final=[8, 8] MEASURED=0 MEANT=yes wrap_free=yes wraps=0 steps={"E": 11, "N": 9, "S": 2, "W": 2} blocked=2
+  T4=SILENT (endpoint_success=True; meant_success=True)
+winner 2 genome=ENNWENNESNEENEEEWWNEEENN final=[8, 8] MEASURED=0 MEANT=yes wrap_free=yes wraps=0 steps={"E": 11, "N": 9, "S": 1, "W": 3} blocked=0
+  T4=SILENT (endpoint_success=True; meant_success=True)
+winner 3 genome=SNNEENNESEEENENEWWNEEENN final=[8, 8] MEASURED=0 MEANT=yes wrap_free=yes wraps=0 steps={"E": 11, "N": 9, "S": 2, "W": 2} blocked=2
+  T4=SILENT (endpoint_success=True; meant_success=True)
+winner 4 genome=SNWNENNESEEENENEWWNEEENN final=[8, 8] MEASURED=0 MEANT=yes wrap_free=yes wraps=0 steps={"E": 10, "N": 9, "S": 2, "W": 3} blocked=2
+  T4=SILENT (endpoint_success=True; meant_success=True)
+winner 5 genome=SNNEENNEENEENNSENNSEWENN final=[8, 8] MEASURED=0 MEANT=yes wrap_free=yes wraps=0 steps={"E": 9, "N": 11, "S": 3, "W": 1} blocked=2
+  T4=SILENT (endpoint_success=True; meant_success=True)
+T5 diversity by generation (mean normalized pairwise Hamming):
+  generation=0 diversity=0.749786
+  generation=1 diversity=0.660630
+  generation=2 diversity=0.550641
+  generation=3 diversity=0.359989
+  generation=4 diversity=0.394177
+  generation=5 diversity=0.331784
+  generation=6 diversity=0.218056
+  generation=7 diversity=0.241346
+  generation=8 diversity=0.245726
+  generation=9 diversity=0.254701
+  generation=10 diversity=0.247810
+  generation=11 diversity=0.240705
+  generation=12 diversity=0.223825
+  generation=13 diversity=0.217147
+  generation=14 diversity=0.227991
+  generation=15 diversity=0.258600
+  generation=16 diversity=0.242415
+  generation=17 diversity=0.263782
+  generation=18 diversity=0.229541
+  generation=19 diversity=0.255395
+  generation=20 diversity=0.241720
+  generation=21 diversity=0.254487
+  generation=22 diversity=0.267735
+  generation=23 diversity=0.240331
+  generation=24 diversity=0.272169
+  generation=25 diversity=0.215812
+  generation=26 diversity=0.204754
+  generation=27 diversity=0.237073
+  generation=28 diversity=0.231464
+  generation=29 diversity=0.225801
+  generation=30 diversity=0.232959
+  generation=31 diversity=0.207318
+  generation=32 diversity=0.236432
+  generation=33 diversity=0.215705
+  generation=34 diversity=0.229006
+  generation=35 diversity=0.193483
+  generation=36 diversity=0.258440
+  generation=37 diversity=0.224626
+  generation=38 diversity=0.226976
+  generation=39 diversity=0.238194
+  generation=40 diversity=0.221581
+  generation=41 diversity=0.217201
+  generation=42 diversity=0.227885
+  generation=43 diversity=0.245566
+  generation=44 diversity=0.212660
+  generation=45 diversity=0.243483
+  generation=46 diversity=0.234615
+  generation=47 diversity=0.241453
+  generation=48 diversity=0.236004
+  generation=49 diversity=0.236859
+  generation=50 diversity=0.250588
+  generation=51 diversity=0.219284
+  generation=52 diversity=0.236699
+  generation=53 diversity=0.190011
+  generation=54 diversity=0.221955
+  generation=55 diversity=0.205182
+  generation=56 diversity=0.235524
+  generation=57 diversity=0.221314
+  generation=58 diversity=0.235524
+  generation=59 diversity=0.231517
+  generation=60 diversity=0.221688
+T5 first_below_half_start=3 early=True (early <= generations//4)
+T5 archived_discard_slots=1920 sha256=15a45b2c736cf325c79e3d4b2b54ec9503ec44deeca899397161d8d0d681b809
+T5 archive sample: first five discarded slots (not representative):
+  {"generation": 0, "genome": "WSNSESNENEESESESSSWSSWEN", "score": -10}
+  {"generation": 0, "genome": "ENSNENWNEWESNSNSENSSEESE", "score": -10}
+  {"generation": 0, "genome": "ENSNNEWSNNWESENWSSEWNEEE", "score": -10}
+  {"generation": 0, "genome": "ESNESESNEWNWESSNNENSWNWN", "score": -10}
+  {"generation": 0, "genome": "NNSWENWNNNWENESSSWWWNWEN", "score": -10}
+
+T6 READOUTS -- emitted before any intervention; no simulator was patched:
+{"channel": "edge_wrap", "decision": "UNDECIDED; recorded before any patch", "fact_kind": "INSTRUMENT", "fitness_drop": 12, "genome": "WWSEWNNSWWEEEEEWSEWWNSSN", "how_found": "T3 transition counter; T2 identical-genome SEALED replay", "native_score": 0, "sealed_score": -12, "substrate_reading": "LEAKY topology permits boundary jumps; endpoint score omits route", "system": "toy grid simulator, not real walking", "winner_rank": 1, "wrap_events": 8}
+{"channel": "edge_wrap", "decision": "UNDECIDED; recorded before any patch", "fact_kind": "INSTRUMENT", "fitness_drop": 12, "genome": "WWSEWNNSWWEEEEEWSEWWNSSN", "how_found": "T3 transition counter; T2 identical-genome SEALED replay", "native_score": 0, "sealed_score": -12, "substrate_reading": "LEAKY topology permits boundary jumps; endpoint score omits route", "system": "toy grid simulator, not real walking", "winner_rank": 2, "wrap_events": 8}
+{"channel": "edge_wrap", "decision": "UNDECIDED; recorded before any patch", "fact_kind": "INSTRUMENT", "fitness_drop": 12, "genome": "WWSEWNNSWWEEEEEWSEWWNSSN", "how_found": "T3 transition counter; T2 identical-genome SEALED replay", "native_score": 0, "sealed_score": -12, "substrate_reading": "LEAKY topology permits boundary jumps; endpoint score omits route", "system": "toy grid simulator, not real walking", "winner_rank": 3, "wrap_events": 8}
+{"channel": "edge_wrap", "decision": "UNDECIDED; recorded before any patch", "fact_kind": "INSTRUMENT", "fitness_drop": 12, "genome": "WWSEWNNSWWEEEEEWSEWWNSSN", "how_found": "T3 transition counter; T2 identical-genome SEALED replay", "native_score": 0, "sealed_score": -12, "substrate_reading": "LEAKY topology permits boundary jumps; endpoint score omits route", "system": "toy grid simulator, not real walking", "winner_rank": 4, "wrap_events": 8}
+{"channel": "edge_wrap", "decision": "UNDECIDED; recorded before any patch", "fact_kind": "INSTRUMENT", "fitness_drop": 12, "genome": "WWSEWNNSWWEEEEEWSEWWNSSN", "how_found": "T3 transition counter; T2 identical-genome SEALED replay", "native_score": 0, "sealed_score": -12, "substrate_reading": "LEAKY topology permits boundary jumps; endpoint score omits route", "system": "toy grid simulator, not real walking", "winner_rank": 5, "wrap_events": 8}
+RUN_A: POSITIVE
+CONTROL_B: NEGATIVE (T3 silent)
+SELF_GRADED: synthetic checks are not external validation of specimens or world claims.
+Control integrity only (not Run A prediction):
+VERDICT: PASS   checks=1 failed=0

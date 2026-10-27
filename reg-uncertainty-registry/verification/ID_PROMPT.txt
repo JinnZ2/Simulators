@@ -1,0 +1,15 @@
+You are filling an identifier lookup ledger. Container network is blocked and WebFetch cannot resolve hosts; the ONLY channel is the WebSearch tool (mode "standard"). Do not use any other network tool.
+
+INPUT FILE: {INPUT}. Each non-comment line: kind | local_key | label | target vocabulary to try.
+For EVERY row, run 1-2 WebSearch queries for the identifier in the named vocabulary (e.g. "glyphosate DTXSID CompTox", "breast carcinoma MONDO id"). Write one result line:
+
+local_key | scheme | id | reached | queries | found | note
+
+- scheme: the vocabulary the id belongs to (DTXSID, CAS, UNII, MONDO, NCIT, HPO, EFO, LOINC, GO, ECTO, ExO, or NONE).
+- id: the identifier string ONLY if it appears verbatim in a search result (e.g. DTXSID1024122, MONDO:0007254, C4872). If no result shows one, write NOT_SEEN. Never fill an id from memory, never guess the digits.
+- reached: Y if results concerned the subject, else N. queries: integer.
+- found: the result host and the text showing the id, verbatim, max 25 words.
+- note: one short clause (e.g. "no DTXSID for biologic; UNII seen", "two candidate MONDO ids").
+If more than one scheme was found, write one line per scheme.
+
+OUTPUT: write lines INCREMENTALLY to {OUTPUT}: after every 8 rows rewrite the whole file with the Write tool (first line "# id results for {INPUT} written <ISO timestamp>"). A cut-off run must leave finished rows on disk. At the end reply with one line: rows done, ids seen, NOT_SEEN count.

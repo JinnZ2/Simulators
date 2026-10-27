@@ -1,0 +1,3 @@
+# H rows: endpoint-absence searches (gaps.py), written 2026-10-21 before the search
+# id | rep | sec | cite | claim
+H001 | W | EA-01 | none | EPA's glyphosate human-health risk assessment and 2020 interim decision do not assess effects on the gut microbiome (absence claim; settled only by EPA's own text)

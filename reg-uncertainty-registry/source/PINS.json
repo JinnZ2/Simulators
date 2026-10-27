@@ -1,0 +1,39 @@
+{
+ "_note": "Pinned at intake 2026-10-18. Every tool in tools/ re-checks these on every run; a mismatch is a FAIL. The source files are verbatim and never edited; findings go in registry/ncr.json.",
+ "bundle": {
+  "in_tree": false,
+  "name": "reg_uncertainty_bundle.zip",
+  "sha256": "dcaa6d8bb90eb09e541de498a1baad329de3bb272470527298a484ccf58e5aca"
+ },
+ "files": {
+  "WORK_ORDER.md": "04dd6588f09d3bc39014ff3b7852b53f8b8c007ed7a8ccbab0e202d127d3e7e1",
+  "source/REVIEW_v1.md": "3a5f4f3c119224412b459691cf28964a102095a1e3af8aa43cd80a572d7066f9",
+  "source/kimmy_v1/annex_a_regrading.csv": "f68ea71bf5801c6a232333ae1d3af84771247fa3a9db1b06afb77a8651bd0fef",
+  "source/kimmy_v1/coded_decisions.csv": "8f7c931dcc0fae4f417b49d76354adced938dbb4661aa134287d0afe1475c923",
+  "source/kimmy_v1/direction_of_uncertainty_report.md": "50c38ad47bea27a379d2b20737f4398b3395841791c11b41c7f8021a5a5aebd9",
+  "source/kimmy_v1/regulatory_uncertainty_standard_draft.md": "f81f44a40fc915368049f92a6da3fb3e9693bd7d74e73959ed9f21b431f0420f"
+ },
+ "not_in_tree": {
+  "source/kimmy_v1/img/chart1_asymmetry.png": {
+   "bytes": 46269,
+   "sha256": "d7175c0439e1bb211c7ffbe2ed11c8d3bd6a2d69bfb422cda26a326ddc00b184"
+  },
+  "source/kimmy_v1/img/chart2_costbearer.png": {
+   "bytes": 46315,
+   "sha256": "31c74ffcffe3a8e6bc03dafe15b70b351dd2b37dc3b831665467e5f0da8b4397"
+  },
+  "source/kimmy_v1/img/chart3_dumbbell.png": {
+   "bytes": 59240,
+   "sha256": "4f847591ea2a9e7183c6eb0b1b355453fbb71a1967d054e773990985d1f6683c"
+  },
+  "source/kimmy_v1/img/chart4_forcing.png": {
+   "bytes": 65474,
+   "sha256": "d5df06bb8614d73482d2a4b800249465aa53a2e8c83100b4eda0a21f42ef5643"
+  },
+  "source/kimmy_v1/img/chart5_conformity.png": {
+   "bytes": 38876,
+   "sha256": "bfb303be21021749f2465936deff903c70d57c5e8c1868f781fd5259efce43b2"
+  }
+ },
+ "not_in_tree_reason": "binary charts; this repository is text-only by convention (deep-research-correction/CHARTS.md precedent). Each chart was read and its numbers checked; findings in registry/ncr.json."
+}

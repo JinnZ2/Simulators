@@ -1,0 +1,48 @@
+P1 DEPENDENCY RECORDS
+
+  outcome:    a reported mass difference between two samples, stated to four significant figures
+  provenance: CONSTRUCTED
+  note:       CONSTRUCTED. Written here to show the move and the refusal. No methods section was read: every host the order's pipeline names refuses CONNECT in this environment. Each source field below points at this file, which is what a source field looks like when the thing it would point at was not reachable.
+
+  INSTRUMENT (1)
+      a balance resolving below the reported difference
+          source: constructed: p1_records.py DEMO
+          absent from argument
+
+  CALIBRATION (1)
+      a mass standard the reporting laboratory does not own, traceable to a definition it did not set
+          source: constructed: p1_records.py DEMO
+          absent from argument
+
+  METHOD (2)
+      a weighing procedure inherited rather than derived in the paper, including the buoyancy correction
+          source: constructed: p1_records.py DEMO
+          absent from argument
+      the statistical test named in the paper's own results section
+          source: constructed: p1_records.py DEMO
+          stated in argument
+
+  MATERIAL (1)
+      reference samples prepared by a third party
+          source: constructed: p1_records.py DEMO
+          absent from argument
+
+  INFRASTRUCTURE (1)
+      a temperature-stable room, mains power, and a numeric library implementing IEEE-754
+          source: constructed: p1_records.py DEMO
+          absent from argument
+
+  unstated_fraction: 0.8333
+
+  The move: outcome -> preconditions. It is reusable
+  because it asks what the result REQUIRED, not whether
+  the result is right. A requirement with no source does
+  not enter the record at all.
+
+  PIPELINE: NOT RUN. Open-access methods sections are the
+  order's source and no host serving them is reachable
+  from this environment. Nothing here is a statement
+  about any published result.
+
+  scope coding (C1-C4): OUTSIDE_FRAME_SCOPE
+  outside the competitive frame's coverage: C1, C2, C4 does not hold. The frame does not cover this observation; the observation stands.

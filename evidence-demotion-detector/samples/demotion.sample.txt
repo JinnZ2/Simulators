@@ -1,0 +1,15 @@
+evidence-demotion-detector  (heuristic; flags, does not rule -- see README SCOPE LIMITS)
+
+turns: 4   flags: 2
+counts: AFFECT_ASSERT 0  DEMOTION 2  CRED_DISCOUNT 0  PROOF_ESCALATION 0  HEDGE_UNCLAIMED 0
+
+turn  1  DEMOTION          
+         span: "That's a plausible hypothesis about berm traction, but it's unverified without data on the berm composition."
+         note: first-person observation in turn 0 reclassified as hypothesis/unverified/without data
+         shared_words: ['berm']
+turn  1  DEMOTION          
+         span: "If that is true, trailer walk would follow."
+         note: first-person observation in turn 0 reclassified as if that is true
+         shared_words: ['trailer', 'walk']
+
+thresholds: {"PROOF_ESCALATION": 2, "HEDGE_UNCLAIMED_ratio": 0.5, "AFFECT_brevity_words": 8}

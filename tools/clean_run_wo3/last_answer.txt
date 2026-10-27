@@ -1,0 +1,20 @@
+**Do I know Ali et al. 2022?** Yes, though with only moderate confidence on the details:
+- **Where it appeared:** I believe it was published in *Patterns* (Cell Press). I think the authors include Abdullahi Ali, Nasir Ahmad, Elgar de Groot, Marcel van Gerven and Tim Kietzmann.
+- **Setup:** recurrent networks were trained only to lower an energy cost, roughly the network's total activity or synaptic transmission. The inputs were predictable sequences, such as MNIST digits shown in a fixed order.
+- **Result:** predictive-coding-like structure appeared without being wired in. Some units came to carry predictions and others carried prediction errors, and the predictions acted as inhibition that cancelled the input the network expected. Their conclusion was that predictive coding can follow from an energy-efficiency constraint.
+
+I'm less sure of the exact form of the loss and the exact architecture.
+
+**Did I recognise site 2 as that result, and when?**
+- **Stage 1:** no. I recognised Bennett 1982, the −log₂p coding cost and predictive coding in general, and flagged those. I didn't connect site 2 to any specific emergence paper.
+- **Stage 2:** I didn't name it or flag it. Field (g), "impose only the constraint, wire nothing", has the same shape as Ali et al., but I didn't register the match.
+- **Stage 3:** this paper is almost certainly what was behind my S2g.u reason, "emergence of predictive coding from efficiency objectives is partly reported [MEMORY]". I didn't name the paper there. I should have flagged it by name when it came up.
+
+**Tools I used in this session:**
+- **Bash (3 calls):**
+  - Stage 1: wrote `fill_A.txt`, ran `sha256sum` and `cat` on it.
+  - Stage 2: wrote `fill_G.txt`, ran `sha256sum` and `cat` on it.
+  - Stage 3: wrote `scores_C.txt`, ran `sha256sum` and `wc -l` on it. I did not run `cat` on this one, even though the instructions asked for it.
+- **ReadNotifications (4 calls):** to read the stage 2, stage 3 and final-question messages from session `session_01XBfHEmzGNs1ituvWMBetcX`.
+
+I did not use web search, web fetch or any repository. The only files I read were the three I created. I sent nothing back to the other session.

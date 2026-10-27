@@ -1,0 +1,77 @@
+ANCHOR FACTS, pinned 2026-10-16 before any reader saw the site-T packet.
+The reader never sees this file. It is committed and its hash recorded
+before the reader session is opened.
+
+ANCHOR   Kim Min-gyu (first author, undergraduate) and Kim Do-guk
+         (corresponding author), Inha University, "Tokenization and
+         Architecture Jointly Allocate Component Roles in Time Series
+         Transformers", accepted to NeurIPS 2026, to be presented in
+         December 2026. Press dated 2026-10-12.
+WO-4     row A15 VERIFIED (search-index: attention removed, temporal
+         learning kept; NeurIPS 2026; 15 diagnostic tasks). Row A16
+         (the title) was UNSEEN in the WO-4 pass; it is located here,
+         2026-10-16, in Korean press. The WO-4 ledger is left as
+         committed; this file records the location.
+DEPTH    press only: articles written from the university's release,
+         read as web-search summaries on 2026-10-16. The paper's text
+         was not located. The article hosts refused at DNS from this
+         environment (www.newstnt.com, www.dailian.co.kr).
+SOURCES  dhinsight.co.kr articleView idxno=26032
+         gukjenews.com articleView idxno=3718255
+         incheonnews.com articleView idxno=441563
+         dailian.co.kr news/view/1700274
+         newstnt.com articleView idxno=722320
+         news.ifm.kr articleView idxno=481373
+         jungbunews.com articleView idxno=2755869
+         dhtoday.com articleView idxno=254020
+         m.sedaily.com article 20100316
+
+WHY THIS ANCHOR. The order's first choice is a fall-2026 result marked
+VERIFIED in the WO-4 audit with an emergence (g) shape. None qualifies
+strictly: WO-4 Part C found no (g)-shaped test in either report (C.1,
+0 of 7). Of the fall-2026 VERIFIED rows, this one is closest. Its result
+has the (g) form: which stage does the temporal work is not assigned by
+anyone; it falls out of the configuration (T3, T4), and it is
+identified by removal (T5), as the 2022 anchor identified roles by
+lesion. Closest, not strict: the models are designed architectures,
+trained, and the allocation is what appears.
+
+Passed over:
+A21-A24  arXiv 2609.06986 (Sept 2026): mechanisms built and combined;
+         super-additive composition, the BUILT bin, not (g)
+A50-A51  arXiv 2609.03825 (Sept 2026): a derived lower bound
+A32-A33  arXiv 2610.07207 (Oct 2026): robustness trained for, so
+         nothing appears unasked (Part C, S1 row)
+A01-A07  arXiv 2609.13478 (Sept 2026): an attack on a designed gate
+A36-A40  arXiv 2607.26455 (July 2026): a benchmark
+A44-A47  arXiv 2606.21345 (June 2026): (g)-shaped (redundant paths
+         appear unasked), but dated at or before the reader's stated
+         training cutoff (June 2026), so it fails the post-cutoff
+         condition
+
+FACTS, as read at press depth:
+T1  subject: how transformer-family models that forecast time series
+    (stock prices, power demand, weather observations) work inside
+T2  method: 15 diagnostic tasks, built by the team, each checking what
+    information a stage inside the model learns; applied to
+    representative forecasting models and several datasets
+T3  learning the temporal pattern is not fixed to a particular
+    component
+T4  which component does what depends on the combination of
+    tokenization (how the series is split into tokens) and the model's
+    architecture; the two jointly allocate the roles (the title)
+T5  with attention removed entirely, the ability to learn the temporal
+    pattern is kept under some conditions
+T6  reading tokenization and architecture together accounts, in one
+    frame, for earlier studies' conflicting conclusions
+T7  not located at press depth: which tokenizations and architectures
+    were compared, which component carries the pattern in which
+    combination, which conditions keep it without attention, and any
+    number. Not located is not absent.
+
+FRAMING, not a fact of the result: the press says the work can serve as
+a design criterion for models in finance, energy and manufacturing.
+
+STRIP TARGETS. None of these may appear in the packet the reader gets:
+joint, allocat, role, combination, remov, conflict, diagnostic, 15,
+NeurIPS, Inha, Kim, "not fixed", "fixed to", 2026, ablat, lesion.

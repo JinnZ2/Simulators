@@ -32,3 +32,7 @@ Statements that tools were cloned and run, and the numerical outputs quoted in t
 The chain example uses explicitly synthetic, arbitrary-unit values; it is not a calibrated glacier forecast. Repository smoke tests and import-integrity checks, when reported in the pull request, test the repository or the import, not the scientific claims in the supplied audit. The source's gap entries and falsifier watch list remain research proposals; adding these files does not implement a watcher or close a research gap.
 
 Section 9 carries the source date **2026-09-24**, preserved as supplied. Its time-sensitive ENSO statements and illustrative melt arithmetic have not been independently validated in this import; the source itself labels the arithmetic as declared, not a result.
+
+## Further reading to investigate
+
+The [multilingual citation backlog](CITATION_BACKLOG.md) adds three September 2026 papers and three older 2026 references with specific follow-up questions. All six papers are English-language; non-English discovery sources are labeled separately. No qualifying original non-English paper was verified in the bounded 1–23 September search. These citations are a reading queue, not completed simulator analyses.

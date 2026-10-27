@@ -1,0 +1,1170 @@
+{
+ "v4.14": {
+  "arch/arm/mach-rockchip/": {
+   "files": 9,
+   "lines": 1041
+  },
+  "block/": {
+   "files": 99,
+   "lines": 58064
+  },
+  "drivers/gpu/drm/amd/": {
+   "files": 591,
+   "lines": 1361115
+  },
+  "drivers/gpu/drm/i915/": {
+   "files": 244,
+   "lines": 192950
+  },
+  "drivers/gpu/drm/nouveau/": {
+   "files": 995,
+   "lines": 169989
+  },
+  "drivers/gpu/drm/radeon/": {
+   "files": 206,
+   "lines": 204166
+  },
+  "drivers/infiniband/hw/hfi1/": {
+   "files": 71,
+   "lines": 68156
+  },
+  "drivers/net/ethernet/broadcom/bnxt/": {
+   "files": 20,
+   "lines": 22802
+  },
+  "drivers/net/ethernet/chelsio/": {
+   "files": 97,
+   "lines": 87143
+  },
+  "drivers/net/ethernet/hisilicon/hns3/": {
+   "files": 15,
+   "lines": 12003
+  },
+  "drivers/net/ethernet/intel/i40e/": {
+   "files": 36,
+   "lines": 52403
+  },
+  "drivers/net/ethernet/intel/ixgbe/": {
+   "files": 32,
+   "lines": 43983
+  },
+  "drivers/net/ethernet/mellanox/mlx5/": {
+   "files": 89,
+   "lines": 45891
+  },
+  "drivers/net/wireless/ath/ath10k/": {
+   "files": 54,
+   "lines": 62606
+  },
+  "drivers/nvme/": {
+   "files": 25,
+   "lines": 23175
+  },
+  "drivers/scsi/lpfc/": {
+   "files": 35,
+   "lines": 101334
+  },
+  "drivers/scsi/qla2xxx/": {
+   "files": 37,
+   "lines": 79587
+  },
+  "drivers/soc/qcom/": {
+   "files": 12,
+   "lines": 3931
+  },
+  "drivers/usb/core/": {
+   "files": 26,
+   "lines": 24553
+  },
+  "fs/btrfs/": {
+   "files": 92,
+   "lines": 126866
+  },
+  "fs/ext4/": {
+   "files": 43,
+   "lines": 52456
+  },
+  "fs/f2fs/": {
+   "files": 29,
+   "lines": 29083
+  },
+  "fs/xfs/": {
+   "files": 182,
+   "lines": 125766
+  },
+  "kernel/cgroup/": {
+   "files": 10,
+   "lines": 12054
+  },
+  "kernel/irq/": {
+   "files": 26,
+   "lines": 12121
+  },
+  "kernel/locking/": {
+   "files": 30,
+   "lines": 15749
+  },
+  "kernel/printk/": {
+   "files": 7,
+   "lines": 3753
+  },
+  "kernel/rcu/": {
+   "files": 17,
+   "lines": 15095
+  },
+  "kernel/sched/": {
+   "files": 33,
+   "lines": 33139
+  },
+  "kernel/time/": {
+   "files": 34,
+   "lines": 19509
+  },
+  "kernel/trace/": {
+   "files": 48,
+   "lines": 53092
+  },
+  "lib/": {
+   "files": 334,
+   "lines": 139902
+  },
+  "mm/": {
+   "files": 116,
+   "lines": 131691
+  },
+  "net/core/": {
+   "files": 46,
+   "lines": 54447
+  },
+  "net/ipv4/": {
+   "files": 140,
+   "lines": 96381
+  },
+  "security/selinux/": {
+   "files": 51,
+   "lines": 25345
+  }
+ },
+ "v4.19": {
+  "arch/arm/mach-rockchip/": {
+   "files": 9,
+   "lines": 1042
+  },
+  "block/": {
+   "files": 103,
+   "lines": 61367
+  },
+  "drivers/gpu/drm/amd/": {
+   "files": 986,
+   "lines": 1541554
+  },
+  "drivers/gpu/drm/i915/": {
+   "files": 300,
+   "lines": 221808
+  },
+  "drivers/gpu/drm/nouveau/": {
+   "files": 1135,
+   "lines": 185733
+  },
+  "drivers/gpu/drm/radeon/": {
+   "files": 204,
+   "lines": 202690
+  },
+  "drivers/infiniband/hw/hfi1/": {
+   "files": 73,
+   "lines": 69446
+  },
+  "drivers/net/ethernet/broadcom/bnxt/": {
+   "files": 26,
+   "lines": 27077
+  },
+  "drivers/net/ethernet/chelsio/": {
+   "files": 114,
+   "lines": 98614
+  },
+  "drivers/net/ethernet/hisilicon/hns3/": {
+   "files": 26,
+   "lines": 20578
+  },
+  "drivers/net/ethernet/intel/i40e/": {
+   "files": 34,
+   "lines": 55523
+  },
+  "drivers/net/ethernet/intel/ixgbe/": {
+   "files": 34,
+   "lines": 45002
+  },
+  "drivers/net/ethernet/mellanox/mlx5/": {
+   "files": 114,
+   "lines": 57534
+  },
+  "drivers/net/wireless/ath/ath10k/": {
+   "files": 58,
+   "lines": 70689
+  },
+  "drivers/nvme/": {
+   "files": 30,
+   "lines": 27464
+  },
+  "drivers/scsi/lpfc/": {
+   "files": 35,
+   "lines": 103839
+  },
+  "drivers/scsi/qla2xxx/": {
+   "files": 37,
+   "lines": 82862
+  },
+  "drivers/soc/qcom/": {
+   "files": 24,
+   "lines": 9567
+  },
+  "drivers/usb/core/": {
+   "files": 28,
+   "lines": 25264
+  },
+  "fs/btrfs/": {
+   "files": 95,
+   "lines": 128995
+  },
+  "fs/ext4/": {
+   "files": 43,
+   "lines": 52339
+  },
+  "fs/f2fs/": {
+   "files": 29,
+   "lines": 32636
+  },
+  "fs/xfs/": {
+   "files": 216,
+   "lines": 137560
+  },
+  "kernel/cgroup/": {
+   "files": 11,
+   "lines": 12722
+  },
+  "kernel/irq/": {
+   "files": 27,
+   "lines": 12703
+  },
+  "kernel/locking/": {
+   "files": 30,
+   "lines": 15316
+  },
+  "kernel/printk/": {
+   "files": 7,
+   "lines": 3907
+  },
+  "kernel/rcu/": {
+   "files": 17,
+   "lines": 15489
+  },
+  "kernel/sched/": {
+   "files": 34,
+   "lines": 35075
+  },
+  "kernel/time/": {
+   "files": 34,
+   "lines": 20265
+  },
+  "kernel/trace/": {
+   "files": 52,
+   "lines": 58787
+  },
+  "lib/": {
+   "files": 345,
+   "lines": 141181
+  },
+  "mm/": {
+   "files": 117,
+   "lines": 135158
+  },
+  "net/core/": {
+   "files": 49,
+   "lines": 62572
+  },
+  "net/ipv4/": {
+   "files": 143,
+   "lines": 96477
+  },
+  "security/selinux/": {
+   "files": 51,
+   "lines": 26654
+  }
+ },
+ "v5.10": {
+  "arch/arm/mach-rockchip/": {
+   "files": 9,
+   "lines": 994
+  },
+  "block/": {
+   "files": 93,
+   "lines": 62007
+  },
+  "drivers/gpu/drm/amd/": {
+   "files": 1503,
+   "lines": 2534148
+  },
+  "drivers/gpu/drm/i915/": {
+   "files": 532,
+   "lines": 299911
+  },
+  "drivers/gpu/drm/nouveau/": {
+   "files": 1232,
+   "lines": 202631
+  },
+  "drivers/gpu/drm/radeon/": {
+   "files": 204,
+   "lines": 202708
+  },
+  "drivers/infiniband/hw/hfi1/": {
+   "files": 90,
+   "lines": 81308
+  },
+  "drivers/net/ethernet/broadcom/bnxt/": {
+   "files": 26,
+   "lines": 35205
+  },
+  "drivers/net/ethernet/chelsio/": {
+   "files": 136,
+   "lines": 115842
+  },
+  "drivers/net/ethernet/hisilicon/hns3/": {
+   "files": 34,
+   "lines": 36135
+  },
+  "drivers/net/ethernet/intel/i40e/": {
+   "files": 37,
+   "lines": 54181
+  },
+  "drivers/net/ethernet/intel/ixgbe/": {
+   "files": 36,
+   "lines": 46695
+  },
+  "drivers/net/ethernet/mellanox/mlx5/": {
+   "files": 219,
+   "lines": 99584
+  },
+  "drivers/net/wireless/ath/ath10k/": {
+   "files": 62,
+   "lines": 83540
+  },
+  "drivers/nvme/": {
+   "files": 38,
+   "lines": 39109
+  },
+  "drivers/scsi/lpfc/": {
+   "files": 34,
+   "lines": 111484
+  },
+  "drivers/scsi/qla2xxx/": {
+   "files": 38,
+   "lines": 87257
+  },
+  "drivers/soc/qcom/": {
+   "files": 30,
+   "lines": 15485
+  },
+  "drivers/usb/core/": {
+   "files": 28,
+   "lines": 26061
+  },
+  "fs/btrfs/": {
+   "files": 107,
+   "lines": 138746
+  },
+  "fs/ext4/": {
+   "files": 48,
+   "lines": 59948
+  },
+  "fs/f2fs/": {
+   "files": 31,
+   "lines": 41948
+  },
+  "fs/xfs/": {
+   "files": 227,
+   "lines": 141701
+  },
+  "kernel/cgroup/": {
+   "files": 12,
+   "lines": 14549
+  },
+  "kernel/irq/": {
+   "files": 27,
+   "lines": 14790
+  },
+  "kernel/locking/": {
+   "files": 31,
+   "lines": 17869
+  },
+  "kernel/printk/": {
+   "files": 9,
+   "lines": 6543
+  },
+  "kernel/rcu/": {
+   "files": 20,
+   "lines": 19079
+  },
+  "kernel/sched/": {
+   "files": 36,
+   "lines": 40996
+  },
+  "kernel/time/": {
+   "files": 36,
+   "lines": 21504
+  },
+  "kernel/trace/": {
+   "files": 64,
+   "lines": 69263
+  },
+  "lib/": {
+   "files": 448,
+   "lines": 188865
+  },
+  "mm/": {
+   "files": 127,
+   "lines": 148494
+  },
+  "net/core/": {
+   "files": 53,
+   "lines": 79180
+  },
+  "net/ipv4/": {
+   "files": 138,
+   "lines": 104292
+  },
+  "security/selinux/": {
+   "files": 53,
+   "lines": 28048
+  }
+ },
+ "v5.15": {
+  "arch/arm/mach-rockchip/": {
+   "files": 9,
+   "lines": 994
+  },
+  "block/": {
+   "files": 97,
+   "lines": 63758
+  },
+  "drivers/gpu/drm/amd/": {
+   "files": 1736,
+   "lines": 3333155
+  },
+  "drivers/gpu/drm/i915/": {
+   "files": 599,
+   "lines": 325611
+  },
+  "drivers/gpu/drm/nouveau/": {
+   "files": 1244,
+   "lines": 204607
+  },
+  "drivers/gpu/drm/radeon/": {
+   "files": 220,
+   "lines": 202885
+  },
+  "drivers/infiniband/hw/hfi1/": {
+   "files": 90,
+   "lines": 78248
+  },
+  "drivers/net/ethernet/broadcom/bnxt/": {
+   "files": 30,
+   "lines": 39163
+  },
+  "drivers/net/ethernet/chelsio/": {
+   "files": 136,
+   "lines": 115963
+  },
+  "drivers/net/ethernet/hisilicon/hns3/": {
+   "files": 42,
+   "lines": 44610
+  },
+  "drivers/net/ethernet/intel/i40e/": {
+   "files": 37,
+   "lines": 58134
+  },
+  "drivers/net/ethernet/intel/ixgbe/": {
+   "files": 36,
+   "lines": 46697
+  },
+  "drivers/net/ethernet/mellanox/mlx5/": {
+   "files": 282,
+   "lines": 123807
+  },
+  "drivers/net/wireless/ath/ath10k/": {
+   "files": 62,
+   "lines": 84051
+  },
+  "drivers/nvme/": {
+   "files": 39,
+   "lines": 40020
+  },
+  "drivers/scsi/lpfc/": {
+   "files": 34,
+   "lines": 118795
+  },
+  "drivers/scsi/qla2xxx/": {
+   "files": 41,
+   "lines": 93566
+  },
+  "drivers/soc/qcom/": {
+   "files": 30,
+   "lines": 16009
+  },
+  "drivers/usb/core/": {
+   "files": 28,
+   "lines": 26413
+  },
+  "fs/btrfs/": {
+   "files": 112,
+   "lines": 146862
+  },
+  "fs/ext4/": {
+   "files": 50,
+   "lines": 61529
+  },
+  "fs/f2fs/": {
+   "files": 31,
+   "lines": 44530
+  },
+  "fs/xfs/": {
+   "files": 227,
+   "lines": 144616
+  },
+  "kernel/cgroup/": {
+   "files": 13,
+   "lines": 15208
+  },
+  "kernel/irq/": {
+   "files": 27,
+   "lines": 15084
+  },
+  "kernel/locking/": {
+   "files": 32,
+   "lines": 19143
+  },
+  "kernel/printk/": {
+   "files": 10,
+   "lines": 6595
+  },
+  "kernel/rcu/": {
+   "files": 21,
+   "lines": 21006
+  },
+  "kernel/sched/": {
+   "files": 37,
+   "lines": 44942
+  },
+  "kernel/time/": {
+   "files": 39,
+   "lines": 22557
+  },
+  "kernel/trace/": {
+   "files": 68,
+   "lines": 74807
+  },
+  "lib/": {
+   "files": 460,
+   "lines": 196822
+  },
+  "mm/": {
+   "files": 152,
+   "lines": 162128
+  },
+  "net/core/": {
+   "files": 55,
+   "lines": 83353
+  },
+  "net/ipv4/": {
+   "files": 136,
+   "lines": 107323
+  },
+  "security/selinux/": {
+   "files": 55,
+   "lines": 28513
+  }
+ },
+ "v5.4": {
+  "arch/arm/mach-rockchip/": {
+   "files": 9,
+   "lines": 994
+  },
+  "block/": {
+   "files": 102,
+   "lines": 57946
+  },
+  "drivers/gpu/drm/amd/": {
+   "files": 1280,
+   "lines": 2252406
+  },
+  "drivers/gpu/drm/i915/": {
+   "files": 449,
+   "lines": 259532
+  },
+  "drivers/gpu/drm/nouveau/": {
+   "files": 1164,
+   "lines": 192071
+  },
+  "drivers/gpu/drm/radeon/": {
+   "files": 204,
+   "lines": 202733
+  },
+  "drivers/infiniband/hw/hfi1/": {
+   "files": 84,
+   "lines": 78937
+  },
+  "drivers/net/ethernet/broadcom/bnxt/": {
+   "files": 26,
+   "lines": 32097
+  },
+  "drivers/net/ethernet/chelsio/": {
+   "files": 116,
+   "lines": 100339
+  },
+  "drivers/net/ethernet/hisilicon/hns3/": {
+   "files": 31,
+   "lines": 33024
+  },
+  "drivers/net/ethernet/intel/i40e/": {
+   "files": 38,
+   "lines": 59470
+  },
+  "drivers/net/ethernet/intel/ixgbe/": {
+   "files": 36,
+   "lines": 46897
+  },
+  "drivers/net/ethernet/mellanox/mlx5/": {
+   "files": 180,
+   "lines": 85369
+  },
+  "drivers/net/wireless/ath/ath10k/": {
+   "files": 62,
+   "lines": 79787
+  },
+  "drivers/nvme/": {
+   "files": 34,
+   "lines": 34549
+  },
+  "drivers/scsi/lpfc/": {
+   "files": 35,
+   "lines": 108847
+  },
+  "drivers/scsi/qla2xxx/": {
+   "files": 38,
+   "lines": 84848
+  },
+  "drivers/soc/qcom/": {
+   "files": 28,
+   "lines": 11687
+  },
+  "drivers/usb/core/": {
+   "files": 28,
+   "lines": 25534
+  },
+  "fs/btrfs/": {
+   "files": 102,
+   "lines": 133947
+  },
+  "fs/ext4/": {
+   "files": 44,
+   "lines": 55036
+  },
+  "fs/f2fs/": {
+   "files": 30,
+   "lines": 35846
+  },
+  "fs/xfs/": {
+   "files": 223,
+   "lines": 140606
+  },
+  "kernel/cgroup/": {
+   "files": 12,
+   "lines": 14401
+  },
+  "kernel/irq/": {
+   "files": 27,
+   "lines": 14326
+  },
+  "kernel/locking/": {
+   "files": 31,
+   "lines": 16849
+  },
+  "kernel/printk/": {
+   "files": 7,
+   "lines": 3970
+  },
+  "kernel/rcu/": {
+   "files": 18,
+   "lines": 15784
+  },
+  "kernel/sched/": {
+   "files": 35,
+   "lines": 38595
+  },
+  "kernel/time/": {
+   "files": 35,
+   "lines": 20672
+  },
+  "kernel/trace/": {
+   "files": 57,
+   "lines": 62291
+  },
+  "lib/": {
+   "files": 380,
+   "lines": 155675
+  },
+  "mm/": {
+   "files": 122,
+   "lines": 141591
+  },
+  "net/core/": {
+   "files": 54,
+   "lines": 75625
+  },
+  "net/ipv4/": {
+   "files": 134,
+   "lines": 99670
+  },
+  "security/selinux/": {
+   "files": 50,
+   "lines": 26595
+  }
+ },
+ "v6.1": {
+  "arch/arm/mach-rockchip/": {
+   "files": 9,
+   "lines": 997
+  },
+  "block/": {
+   "files": 102,
+   "lines": 66233
+  },
+  "drivers/gpu/drm/amd/": {
+   "files": 2056,
+   "lines": 4848809
+  },
+  "drivers/gpu/drm/i915/": {
+   "files": 714,
+   "lines": 354908
+  },
+  "drivers/gpu/drm/nouveau/": {
+   "files": 1167,
+   "lines": 201934
+  },
+  "drivers/gpu/drm/radeon/": {
+   "files": 213,
+   "lines": 200910
+  },
+  "drivers/infiniband/hw/hfi1/": {
+   "files": 90,
+   "lines": 78222
+  },
+  "drivers/net/ethernet/broadcom/bnxt/": {
+   "files": 31,
+   "lines": 41519
+  },
+  "drivers/net/ethernet/chelsio/": {
+   "files": 136,
+   "lines": 115808
+  },
+  "drivers/net/ethernet/hisilicon/hns3/": {
+   "files": 44,
+   "lines": 45789
+  },
+  "drivers/net/ethernet/intel/i40e/": {
+   "files": 37,
+   "lines": 59198
+  },
+  "drivers/net/ethernet/intel/ixgbe/": {
+   "files": 36,
+   "lines": 47203
+  },
+  "drivers/net/ethernet/mellanox/mlx5/": {
+   "files": 331,
+   "lines": 139663
+  },
+  "drivers/net/wireless/ath/ath10k/": {
+   "files": 62,
+   "lines": 84875
+  },
+  "drivers/nvme/": {
+   "files": 47,
+   "lines": 46627
+  },
+  "drivers/scsi/lpfc/": {
+   "files": 35,
+   "lines": 118922
+  },
+  "drivers/scsi/qla2xxx/": {
+   "files": 41,
+   "lines": 94663
+  },
+  "drivers/soc/qcom/": {
+   "files": 33,
+   "lines": 18381
+  },
+  "drivers/usb/core/": {
+   "files": 28,
+   "lines": 26632
+  },
+  "fs/btrfs/": {
+   "files": 113,
+   "lines": 154839
+  },
+  "fs/ext4/": {
+   "files": 51,
+   "lines": 63309
+  },
+  "fs/f2fs/": {
+   "files": 31,
+   "lines": 45629
+  },
+  "fs/xfs/": {
+   "files": 233,
+   "lines": 148878
+  },
+  "kernel/cgroup/": {
+   "files": 13,
+   "lines": 16006
+  },
+  "kernel/irq/": {
+   "files": 27,
+   "lines": 15522
+  },
+  "kernel/locking/": {
+   "files": 32,
+   "lines": 19517
+  },
+  "kernel/printk/": {
+   "files": 11,
+   "lines": 6985
+  },
+  "kernel/rcu/": {
+   "files": 21,
+   "lines": 22753
+  },
+  "kernel/sched/": {
+   "files": 39,
+   "lines": 46972
+  },
+  "kernel/time/": {
+   "files": 39,
+   "lines": 22808
+  },
+  "kernel/trace/": {
+   "files": 85,
+   "lines": 83553
+  },
+  "lib/": {
+   "files": 533,
+   "lines": 229532
+  },
+  "mm/": {
+   "files": 176,
+   "lines": 182734
+  },
+  "net/core/": {
+   "files": 58,
+   "lines": 88084
+  },
+  "net/ipv4/": {
+   "files": 135,
+   "lines": 108583
+  },
+  "security/selinux/": {
+   "files": 55,
+   "lines": 28476
+  }
+ },
+ "v6.12": {
+  "arch/arm/mach-rockchip/": {
+   "files": 9,
+   "lines": 993
+  },
+  "block/": {
+   "files": 100,
+   "lines": 69558
+  },
+  "drivers/gpu/drm/amd/": {
+   "files": 2520,
+   "lines": 5812429
+  },
+  "drivers/gpu/drm/i915/": {
+   "files": 830,
+   "lines": 397746
+  },
+  "drivers/gpu/drm/nouveau/": {
+   "files": 1252,
+   "lines": 221479
+  },
+  "drivers/gpu/drm/radeon/": {
+   "files": 213,
+   "lines": 200526
+  },
+  "drivers/infiniband/hw/hfi1/": {
+   "files": 92,
+   "lines": 78538
+  },
+  "drivers/net/ethernet/broadcom/bnxt/": {
+   "files": 33,
+   "lines": 46636
+  },
+  "drivers/net/ethernet/chelsio/": {
+   "files": 136,
+   "lines": 115670
+  },
+  "drivers/net/ethernet/hisilicon/hns3/": {
+   "files": 48,
+   "lines": 47589
+  },
+  "drivers/net/ethernet/intel/i40e/": {
+   "files": 39,
+   "lines": 59343
+  },
+  "drivers/net/ethernet/intel/ixgbe/": {
+   "files": 36,
+   "lines": 47313
+  },
+  "drivers/net/ethernet/mellanox/mlx5/": {
+   "files": 387,
+   "lines": 177345
+  },
+  "drivers/net/wireless/ath/ath10k/": {
+   "files": 64,
+   "lines": 85144
+  },
+  "drivers/nvme/": {
+   "files": 52,
+   "lines": 49965
+  },
+  "drivers/scsi/lpfc/": {
+   "files": 35,
+   "lines": 119551
+  },
+  "drivers/scsi/qla2xxx/": {
+   "files": 41,
+   "lines": 96086
+  },
+  "drivers/soc/qcom/": {
+   "files": 44,
+   "lines": 20275
+  },
+  "drivers/usb/core/": {
+   "files": 28,
+   "lines": 27526
+  },
+  "fs/btrfs/": {
+   "files": 140,
+   "lines": 158525
+  },
+  "fs/ext4/": {
+   "files": 52,
+   "lines": 65306
+  },
+  "fs/f2fs/": {
+   "files": 31,
+   "lines": 47989
+  },
+  "fs/xfs/": {
+   "files": 323,
+   "lines": 201203
+  },
+  "kernel/cgroup/": {
+   "files": 15,
+   "lines": 17563
+  },
+  "kernel/irq/": {
+   "files": 28,
+   "lines": 16535
+  },
+  "kernel/locking/": {
+   "files": 32,
+   "lines": 20249
+  },
+  "kernel/printk/": {
+   "files": 12,
+   "lines": 10437
+  },
+  "kernel/rcu/": {
+   "files": 21,
+   "lines": 25663
+  },
+  "kernel/sched/": {
+   "files": 42,
+   "lines": 58513
+  },
+  "kernel/time/": {
+   "files": 41,
+   "lines": 26201
+  },
+  "kernel/trace/": {
+   "files": 88,
+   "lines": 94188
+  },
+  "lib/": {
+   "files": 568,
+   "lines": 250300
+  },
+  "mm/": {
+   "files": 196,
+   "lines": 201178
+  },
+  "net/core/": {
+   "files": 71,
+   "lines": 83395
+  },
+  "net/ipv4/": {
+   "files": 138,
+   "lines": 114035
+  },
+  "security/selinux/": {
+   "files": 55,
+   "lines": 28153
+  }
+ },
+ "v6.6": {
+  "arch/arm/mach-rockchip/": {
+   "files": 9,
+   "lines": 993
+  },
+  "block/": {
+   "files": 101,
+   "lines": 67614
+  },
+  "drivers/gpu/drm/amd/": {
+   "files": 2173,
+   "lines": 5034437
+  },
+  "drivers/gpu/drm/i915/": {
+   "files": 790,
+   "lines": 381772
+  },
+  "drivers/gpu/drm/nouveau/": {
+   "files": 1173,
+   "lines": 208662
+  },
+  "drivers/gpu/drm/radeon/": {
+   "files": 213,
+   "lines": 200742
+  },
+  "drivers/infiniband/hw/hfi1/": {
+   "files": 92,
+   "lines": 78562
+  },
+  "drivers/net/ethernet/broadcom/bnxt/": {
+   "files": 31,
+   "lines": 41527
+  },
+  "drivers/net/ethernet/chelsio/": {
+   "files": 136,
+   "lines": 115705
+  },
+  "drivers/net/ethernet/hisilicon/hns3/": {
+   "files": 48,
+   "lines": 46446
+  },
+  "drivers/net/ethernet/intel/i40e/": {
+   "files": 36,
+   "lines": 59340
+  },
+  "drivers/net/ethernet/intel/ixgbe/": {
+   "files": 36,
+   "lines": 47358
+  },
+  "drivers/net/ethernet/mellanox/mlx5/": {
+   "files": 348,
+   "lines": 154804
+  },
+  "drivers/net/wireless/ath/ath10k/": {
+   "files": 62,
+   "lines": 84842
+  },
+  "drivers/nvme/": {
+   "files": 49,
+   "lines": 47319
+  },
+  "drivers/scsi/lpfc/": {
+   "files": 35,
+   "lines": 119410
+  },
+  "drivers/scsi/qla2xxx/": {
+   "files": 41,
+   "lines": 96010
+  },
+  "drivers/soc/qcom/": {
+   "files": 36,
+   "lines": 17934
+  },
+  "drivers/usb/core/": {
+   "files": 28,
+   "lines": 26986
+  },
+  "fs/btrfs/": {
+   "files": 136,
+   "lines": 155354
+  },
+  "fs/ext4/": {
+   "files": 51,
+   "lines": 64218
+  },
+  "fs/f2fs/": {
+   "files": 31,
+   "lines": 47056
+  },
+  "fs/xfs/": {
+   "files": 248,
+   "lines": 158319
+  },
+  "kernel/cgroup/": {
+   "files": 13,
+   "lines": 16296
+  },
+  "kernel/irq/": {
+   "files": 28,
+   "lines": 16084
+  },
+  "kernel/locking/": {
+   "files": 32,
+   "lines": 19926
+  },
+  "kernel/printk/": {
+   "files": 11,
+   "lines": 7429
+  },
+  "kernel/rcu/": {
+   "files": 21,
+   "lines": 24413
+  },
+  "kernel/sched/": {
+   "files": 39,
+   "lines": 49356
+  },
+  "kernel/time/": {
+   "files": 39,
+   "lines": 23543
+  },
+  "kernel/trace/": {
+   "files": 88,
+   "lines": 89236
+  },
+  "lib/": {
+   "files": 560,
+   "lines": 244364
+  },
+  "mm/": {
+   "files": 183,
+   "lines": 189049
+  },
+  "net/core/": {
+   "files": 61,
+   "lines": 77962
+  },
+  "net/ipv4/": {
+   "files": 138,
+   "lines": 108707
+  },
+  "security/selinux/": {
+   "files": 55,
+   "lines": 28066
+  }
+ }
+}

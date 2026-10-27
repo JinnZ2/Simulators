@@ -1,0 +1,969 @@
+[
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [
+   "CHG-N01-01"
+  ],
+  "disposition": "MODIFY",
+  "evidence": [],
+  "finding": "The standard says the annex carries per-axis scores and rationales; the delivered CSV carries C_permit and C_restrict sums only.",
+  "id": "NCR-N01",
+  "independence": "NOT_INDEPENDENT",
+  "item": [
+   "ANNEX"
+  ],
+  "note": null,
+  "origin": "AUDIT_WO-REG-1",
+  "originator": "ACT-REGISTRY",
+  "reason": "Per-axis C_permit recovered from the superseded v1 annex where its sums equal the v2 sums; E01 has no per-axis source (gap). Per-axis C_restrict coded by the registry as a second coding beside the source sums; grading runs on both (single-failure check).",
+  "ref": "RUS-0.2 Annex A",
+  "rigor_tier": "T1",
+  "single_failure": true,
+  "state": "CLOSED",
+  "statements": [
+   "ST-19"
+  ],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [],
+  "disposition": "MODIFY",
+  "evidence": [],
+  "finding": "The annex grades D02 and A10 on the legal outcome and C04 on the agency action.",
+  "id": "NCR-N02",
+  "independence": "NOT_INDEPENDENT",
+  "item": [
+   "A10",
+   "C04",
+   "D02"
+  ],
+  "note": null,
+  "origin": "AUDIT_WO-REG-1",
+  "originator": "ACT-REGISTRY",
+  "reason": "Every row is graded on both bases and on the annex's own mixed basis; on the action basis A10 grades over-restrictive with denial harm (C_restrict 5 > C_permit 3, actual D5, floor D2).",
+  "ref": "Annex A actual column",
+  "rigor_tier": "T1",
+  "single_failure": true,
+  "state": "CLOSED",
+  "statements": [
+   "ST-18"
+  ],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [
+   "CHG-N03-01"
+  ],
+  "disposition": "MODIFY",
+  "evidence": [
+   "EV-G024",
+   "EV-V039"
+  ],
+  "finding": "statute_compelled = 1 on B06 while the report and the annex treat BVO as discretionary.",
+  "id": "NCR-N03",
+  "independence": "NOT_INDEPENDENT",
+  "item": [
+   "B06"
+  ],
+  "note": null,
+  "origin": "AUDIT_WO-REG-1",
+  "originator": "ACT-REGISTRY",
+  "reason": "No federal statute or court compelled the revocation; the source flag is kept as the source's claim and the registry's statute_compelled is 0. The California statute (AB 418, 2023) preceded FDA's final rule and is recorded as a contested candidate forcing event, not as compulsion.",
+  "ref": "coded_decisions_v3.csv B06",
+  "rigor_tier": "T1",
+  "single_failure": true,
+  "state": "CLOSED",
+  "statements": [],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [
+   "CHG-N04-01",
+   "CHG-N04-02"
+  ],
+  "disposition": "MODIFY",
+  "evidence": [
+   "EV-G011",
+   "EV-V063"
+  ],
+  "finding": "D02 carries statute_compelled = 1 (v1, v2 and v3 alike) and its coded direction (warn) is the outcome compelled by Pub. L. 95-203, yet the annex grades it NON-CONFORM: below floor rather than under R3. The source's flag and its own annex disagree.",
+  "id": "NCR-N04",
+  "independence": "NOT_INDEPENDENT",
+  "item": [
+   "D02"
+  ],
+  "note": null,
+  "origin": "AUDIT_WO-REG-1",
+  "originator": "ACT-REGISTRY",
+  "reason": "statute_compelled kept (the source's value is right); the R3 flags the registry grades on (forced_action: the 1977 proposal under the Delaney clause; forced_outcome: Pub. L. 95-203) recoded True. The annex value is reproduced as published beside the registry's.",
+  "ref": "Annex A D02",
+  "rigor_tier": "T1",
+  "single_failure": true,
+  "state": "CLOSED",
+  "statements": [],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [],
+  "disposition": "ACCEPT",
+  "evidence": [
+   "EV-V038"
+  ],
+  "finding": "B05 carries two uncertainty values: record-stated low in the dataset, U3 by M2 in grading.",
+  "id": "NCR-N05",
+  "independence": "NOT_INDEPENDENT",
+  "item": [
+   "B05"
+  ],
+  "note": null,
+  "origin": "AUDIT_WO-REG-1",
+  "originator": "ACT-REGISTRY",
+  "reason": "Both stored, as uncertainty (source) and U_grade (derived by M2); R1 needs U1-U2 and is not reachable at U3.",
+  "ref": "B05 uncertainty",
+  "rigor_tier": "T3",
+  "single_failure": true,
+  "state": "CLOSED",
+  "statements": [],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [],
+  "disposition": "MODIFY",
+  "evidence": [],
+  "finding": "R1 reads 'evidence at U1-U2 of actual harm or absent benefit => D5'. C06 (U1) and C07 (U2) carry established harm and no claimed benefit; the annex does not apply R1 to them. For a contaminant level, D5 (decline) has no referent.",
+  "id": "NCR-N06",
+  "independence": "NOT_INDEPENDENT",
+  "item": [
+   "C06",
+   "C07",
+   "A05"
+  ],
+  "note": null,
+  "origin": "AUDIT_WO-REG-1",
+  "originator": "ACT-REGISTRY",
+  "reason": "RUS-0.3 scopes R1 to decisions that set market status ([CHOICE] r1_scope); level-setting rows (C06, C07, C08, E01) are graded by the matrix. The literal reading is published as variant R1L. A05 (harm established, benefit claimed) is the boundary case and is graded without R1 under both readings.",
+  "ref": "RUS-0.2 R1",
+  "rigor_tier": "T1",
+  "single_failure": true,
+  "state": "CLOSED",
+  "statements": [],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [],
+  "disposition": "REJECT",
+  "evidence": [],
+  "finding": "M6 ('M2 + U3 strict') states no U3 row; no U3 row under any of four column rules reproduces 25/6/0/0/2 (closest 24/6/1/0/2).",
+  "id": "NCR-N07",
+  "independence": "NOT_INDEPENDENT",
+  "item": [
+   "SWEEP"
+  ],
+  "note": null,
+  "origin": "AUDIT_WO-REG-1",
+  "originator": "ACT-REGISTRY",
+  "reason": "Not reproducible from the delivered definitions; M6 is reported as published and marked not reproducible; ranges computed by the registry exclude it and say so.",
+  "ref": "calibration_sweep_v3.csv M6",
+  "rigor_tier": "T1",
+  "single_failure": true,
+  "state": "CLOSED",
+  "statements": [],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [],
+  "disposition": "MODIFY",
+  "evidence": [],
+  "finding": "M4 ('U3 row relaxed') states no U3 row.",
+  "id": "NCR-N08",
+  "independence": "NOT_INDEPENDENT",
+  "item": [
+   "SWEEP"
+  ],
+  "note": null,
+  "origin": "AUDIT_WO-REG-1",
+  "originator": "ACT-REGISTRY",
+  "reason": "Reconstructed: U3 = [D1, D2, D3, D3] is the unique row (exhaustive search) that reproduces 16/11/4/0/2; marked reconstructed.",
+  "ref": "calibration_sweep_v3.csv M4",
+  "rigor_tier": "T2",
+  "single_failure": true,
+  "state": "CLOSED",
+  "statements": [],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [],
+  "disposition": "REJECT",
+  "evidence": [],
+  "finding": "The sweep table lists M0 twice.",
+  "id": "NCR-N09",
+  "independence": "NOT_INDEPENDENT",
+  "item": [
+   "SWEEP"
+  ],
+  "note": "withdrawn finding kept under its id (ids are permanent)",
+  "origin": "AUDIT_WO-REG-1",
+  "originator": "ACT-REGISTRY",
+  "reason": "Not reproduced against the pinned file: sensitivity_upgrades_v3.md section 3 lists each of M0-M6 once (one occurrence of the M0 row). The duplicate was read in a rendering of the document before it was landed and pinned; the finding and its statement node (ST-17) are withdrawn before the first build. The two M3 labels agree once 'col2' is counted from 1: 'floor minimized (uniform column)' and '(all G->col2)' both put every row in the G = 0 column, which reproduces 21/6/4/0/2; counted from 0 (the G = 1-2 column) it gives 25/5/1/0/2.",
+  "ref": "sensitivity_upgrades_v3.md section 3",
+  "rigor_tier": "T3",
+  "single_failure": true,
+  "state": "CLOSED",
+  "statements": [],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [],
+  "disposition": "MODIFY",
+  "evidence": [],
+  "finding": "'8 of 10 divergent, six by two or more points' does not follow from the v1 table it summarizes.",
+  "id": "NCR-N10",
+  "independence": "NOT_INDEPENDENT",
+  "item": [
+   "M01",
+   "M02",
+   "M03",
+   "M04",
+   "M05",
+   "M06",
+   "M07",
+   "M08",
+   "M09",
+   "M10"
+  ],
+  "note": null,
+  "origin": "AUDIT_WO-REG-1",
+  "originator": "ACT-REGISTRY",
+  "reason": "Recomputed from the pair scores: every pair diverges by at least one point, seven by two or more. Statement superseded (ST-08).",
+  "ref": "report v2 section 7",
+  "rigor_tier": "T1",
+  "single_failure": true,
+  "state": "CLOSED",
+  "statements": [
+   "ST-08"
+  ],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [
+   "CHG-N11-01"
+  ],
+  "disposition": "MODIFY",
+  "evidence": [],
+  "finding": "E01 cost_bearer is coded sponsor; the annex rationale names employers.",
+  "id": "NCR-N11",
+  "independence": "NOT_INDEPENDENT",
+  "item": [
+   "E01"
+  ],
+  "note": null,
+  "origin": "AUDIT_WO-REG-1",
+  "originator": "ACT-REGISTRY",
+  "reason": "Source value kept (cost_group concentrated either way, so no statistic moves); cost_bearer_detail 'employer' added.",
+  "ref": "coded_decisions_v3.csv E01",
+  "rigor_tier": "T2",
+  "single_failure": true,
+  "state": "CLOSED",
+  "statements": [],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [],
+  "disposition": "ACCEPT",
+  "evidence": [],
+  "finding": "E01 is a non-decision dated 2022 with no stated basis for the year.",
+  "id": "NCR-N12",
+  "independence": "NOT_INDEPENDENT",
+  "item": [
+   "E01"
+  ],
+  "note": null,
+  "origin": "AUDIT_WO-REG-1",
+  "originator": "ACT-REGISTRY",
+  "reason": "Year kept as the source's claim; its basis is NOT_FOUND (gap). A non-decision has no decision date.",
+  "ref": "coded_decisions_v3.csv E01",
+  "rigor_tier": "T3",
+  "single_failure": true,
+  "state": "CLOSED",
+  "statements": [],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [],
+  "disposition": "ACCEPT",
+  "evidence": [],
+  "finding": "Rule L and Rule S tables state restrictive/permissive counts; the review restates them as restrictive/n.",
+  "id": "NCR-N13",
+  "independence": "NOT_INDEPENDENT",
+  "item": [
+   "RULE-L",
+   "RULE-S"
+  ],
+  "note": null,
+  "origin": "AUDIT_WO-REG-1",
+  "originator": "ACT-REGISTRY",
+  "reason": "Both forms are the same counts (7/21 = 7 of 28); stats.py recomputes the four cells and p from coded_decisions_v3.csv.",
+  "ref": "sensitivity_upgrades_v3.md section 1",
+  "rigor_tier": "T3",
+  "single_failure": true,
+  "state": "CLOSED",
+  "statements": [],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [],
+  "disposition": "ACCEPT",
+  "evidence": [
+   "EV-G008"
+  ],
+  "finding": "Chlorpyrifos: the tolerance revocation's effective date (October 29, 2021) and the tolerance expiry (February 28, 2022) are distinct dates.",
+  "id": "NCR-N14",
+  "independence": "NOT_INDEPENDENT",
+  "item": [
+   "G008"
+  ],
+  "note": null,
+  "origin": "AUDIT_WO-REG-1",
+  "originator": "ACT-REGISTRY",
+  "reason": "Ledger row CORRECTED; REV-C04 dates from the August 30, 2021 rule.",
+  "ref": "verification ledger",
+  "rigor_tier": "T3",
+  "single_failure": true,
+  "state": "CLOSED",
+  "statements": [],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [
+   "CHG-N18-01",
+   "CHG-N18-02",
+   "CHG-N18-03",
+   "CHG-N18-04",
+   "CHG-N18-05"
+  ],
+  "disposition": "MODIFY",
+  "evidence": [],
+  "finding": "Five rows record no agency decision on the question they are coded for (no reassessment, no action on a classification, a monitoring list without the item, an open review, no standard).",
+  "id": "NCR-N18",
+  "independence": "NOT_INDEPENDENT",
+  "item": [
+   "B07",
+   "B08",
+   "C08",
+   "C10",
+   "E01"
+  ],
+  "note": null,
+  "origin": "AUDIT_WO-REG-1",
+  "originator": "ACT-REGISTRY",
+  "reason": "Retyped NON_DECISION. They stay in every count the source makes, with the type visible, so a reader can drop them.",
+  "ref": "coded_decisions_v3.csv",
+  "rigor_tier": "T2",
+  "single_failure": true,
+  "state": "CLOSED",
+  "statements": [],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [],
+  "disposition": "MODIFY",
+  "evidence": [
+   "EV-G010"
+  ],
+  "finding": "A10 'agency reversed after prescriber/patient outcry; proposal never effectuated': the September 2010 step was a clarification and the February 2012 step a deferral by agreement with the sponsor.",
+  "id": "NCR-N19",
+  "independence": "NOT_INDEPENDENT",
+  "item": [
+   "A10"
+  ],
+  "note": null,
+  "origin": "AUDIT_WO-REG-1",
+  "originator": "ACT-REGISTRY",
+  "reason": "Outcome direction kept (the drug stayed on the market); REV-A10 dated to February 2012 with mechanism 'agency under pressure' marked contested. Statement superseded (ST-11).",
+  "ref": "sensitivity_upgrades_v3.md section 2",
+  "rigor_tier": "T2",
+  "single_failure": true,
+  "state": "CLOSED",
+  "statements": [
+   "ST-11"
+  ],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [],
+  "disposition": "MODIFY",
+  "evidence": [
+   "EV-G014",
+   "EV-G035"
+  ],
+  "finding": "B00's year 1996 is the first stress-urinary-incontinence sling clearance; the POP mesh chain that B01 reclassified starts 2002.",
+  "id": "NCR-N20",
+  "independence": "NOT_INDEPENDENT",
+  "item": [
+   "B00",
+   "B01"
+  ],
+  "note": null,
+  "origin": "AUDIT_WO-REG-1",
+  "originator": "ACT-REGISTRY",
+  "reason": "B00.year kept (the pelvic mesh predicate chain does start 1996); REV-B00-B01 runs from 2002. '16-20 years later' superseded (ST-10).",
+  "ref": "coded_decisions_v3.csv B00",
+  "rigor_tier": "T2",
+  "single_failure": true,
+  "state": "CLOSED",
+  "statements": [
+   "ST-10"
+  ],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [],
+  "disposition": "ACCEPT",
+  "evidence": [],
+  "finding": "The coded sample was drawn from permissive anchors; reversal and forcing tables are counted inside it.",
+  "id": "NCR-N21",
+  "independence": "NOT_INDEPENDENT",
+  "item": [
+   "SAMPLE"
+  ],
+  "note": null,
+  "origin": "AUDIT_WO-REG-1",
+  "originator": "ACT-REGISTRY",
+  "reason": "Carried as a scope limit on every statistic that reads the coded sample; the R8 rows and Frame C2 are reported apart and never pooled.",
+  "ref": "coded sample frame",
+  "rigor_tier": "T2",
+  "single_failure": true,
+  "state": "CLOSED",
+  "statements": [],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [],
+  "disposition": "ACCEPT",
+  "evidence": [
+   "EV-G012"
+  ],
+  "finding": "The Danish compensation count varies 37/38/40 across secondary sources.",
+  "id": "NCR-N22",
+  "independence": "NOT_INDEPENDENT",
+  "item": [
+   "E01"
+  ],
+  "note": null,
+  "origin": "AUDIT_WO-REG-1",
+  "originator": "ACT-REGISTRY",
+  "reason": "No count is stated by the registry; the evidence node says compensation exists (secondary) and the count is NOT_FOUND at primary depth.",
+  "ref": "verification ledger",
+  "rigor_tier": "T3",
+  "single_failure": true,
+  "state": "CLOSED",
+  "statements": [],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [],
+  "disposition": "MODIFY",
+  "evidence": [
+   "EV-V090",
+   "EV-V091",
+   "EV-V092",
+   "EV-V093",
+   "EV-V094",
+   "EV-V095",
+   "EV-V096",
+   "EV-V097",
+   "EV-V098",
+   "EV-V099",
+   "EV-V100"
+  ],
+  "finding": "The work order asks that the nuclear-QA mapping be verified, not assumed.",
+  "id": "NCR-N23",
+  "independence": "NOT_INDEPENDENT",
+  "item": [
+   "QA_MAPPING"
+  ],
+  "note": "open on primary-depth reading of 10 CFR 50 Appendix B and NQA-1",
+  "origin": "AUDIT_WO-REG-1",
+  "originator": "ACT-REGISTRY",
+  "reason": "schema/QA_MAPPING.md maps each borrowed term to its source clause with the ledger state of that clause; unverified clauses are carried as UNREACHABLE.",
+  "ref": "WO Part A (QA semantics)",
+  "rigor_tier": "T2",
+  "single_failure": true,
+  "state": "OPEN",
+  "statements": [],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [],
+  "disposition": "ACCEPT",
+  "evidence": [],
+  "finding": "Every PROPOSED field in tools/curation_*.py, every audit NCR and both R8 rows rest on one coder.",
+  "id": "NCR-N24",
+  "independence": "NOT_INDEPENDENT",
+  "item": [
+   "ACT-REGISTRY"
+  ],
+  "note": "open until a second party checks the audit NCRs",
+  "origin": "AUDIT_WO-REG-1",
+  "originator": "ACT-REGISTRY",
+  "reason": "chain.py flags each such node single-failure; a 10-row second coding (ACT-CODER2) is reported with kappa per field.",
+  "ref": "registry coding",
+  "rigor_tier": "T1",
+  "single_failure": true,
+  "state": "OPEN",
+  "statements": [],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [],
+  "disposition": "MODIFY",
+  "evidence": [],
+  "finding": "'Rule S' named the work order's cost-bearer rule (Part A) and, in this registry's first RUS-0.3 draft, the substitution rule (REVIEW_v2 R9): one label, two rules, in the same report.",
+  "id": "NCR-N25",
+  "independence": "NOT_INDEPENDENT",
+  "item": [
+   "RULE-S",
+   "RUS-0.3"
+  ],
+  "note": "closed by the rename; validate.py's report check re-renders the report from the renamed labels",
+  "origin": "AUDIT_WO-REG-1",
+  "originator": "ACT-REGISTRY",
+  "reason": "The substitution rule is SUB everywhere (tools/grade.py, tools/stats.py, NCR-R9, the report); Rule S keeps its work-order meaning. A label, not a recorded value: no CHANGE.",
+  "ref": "one letter, two rules",
+  "rigor_tier": "T3",
+  "single_failure": true,
+  "state": "CLOSED",
+  "statements": [],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [],
+  "disposition": "ACCEPT",
+  "evidence": [
+   "EV-V002"
+  ],
+  "finding": "Executive-summary wording ('followed only 33.3%'); Frame A has no cost-bearer variation, so 'pattern holds' overstates.",
+  "id": "NCR-R1",
+  "independence": "CONTAMINATED-BY-PRIOR",
+  "item": [
+   "FRAME-A"
+  ],
+  "note": null,
+  "origin": "REVIEW_v1",
+  "originator": "ACT-REVIEWER",
+  "reason": "v2 Fix 1 and Fix 2 applied: the report states FDA followed 40/60 negative votes and approved 20/60 anyway, and reports Frame A as 'permissive skew, no contrast group' with four rival explanations; both checked in the pinned v2 text by stats.py.",
+  "ref": "R1",
+  "rigor_tier": "T3",
+  "single_failure": false,
+  "state": "CLOSED",
+  "statements": [],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [],
+  "disposition": "ACCEPT",
+  "evidence": [],
+  "finding": "Coder B pass 2 used a rule adopted after inspecting pass-1 disagreements.",
+  "id": "NCR-R10",
+  "independence": "CONTAMINATED-BY-PRIOR",
+  "item": [
+   "SECOND-CODER-B"
+  ],
+  "note": null,
+  "origin": "REVIEW_v2",
+  "originator": "ACT-REVIEWER",
+  "reason": "Reliability figure for direction is pass 1, kappa 0.45. Pass 2 (0.76) is reported as codebook revision. The registry's own second coder (ACT-CODER2) is a separate exercise with its own contamination probe.",
+  "ref": "R10",
+  "rigor_tier": "T2",
+  "single_failure": false,
+  "state": "CLOSED",
+  "statements": [
+   "ST-15"
+  ],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [],
+  "disposition": "ACCEPT",
+  "evidence": [
+   "EV-G012",
+   "EV-G013"
+  ],
+  "finding": "'Null strengthens' framing; Denmark K-flag.",
+  "id": "NCR-R11",
+  "independence": "CONTAMINATED-BY-PRIOR",
+  "item": [
+   "CHANGELOG",
+   "E01"
+  ],
+  "note": "open on the Danish primary record",
+  "origin": "REVIEW_v2",
+  "originator": "ACT-REVIEWER",
+  "reason": "Wording superseded (ST-06, ST-07). Denmark: secondary quote seen (G013); primary not located; the K-flag stays as an UNREACHABLE evidence node, not as a verified fact.",
+  "ref": "R11",
+  "rigor_tier": "T3",
+  "single_failure": false,
+  "state": "OPEN",
+  "statements": [
+   "ST-06",
+   "ST-07"
+  ],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [],
+  "disposition": "ACCEPT",
+  "evidence": [],
+  "finding": "'Permissive in both error directions' is a logic error.",
+  "id": "NCR-R12",
+  "independence": "CONTAMINATED-BY-PRIOR",
+  "item": [
+   "A01",
+   "A02",
+   "A06",
+   "A09"
+  ],
+  "note": null,
+  "origin": "REVIEW_v3",
+  "originator": "ACT-REVIEWER",
+  "reason": "Going ahead where denial harm dominates avoids the denial error; an error in the second direction needs a restricting row with C_restrict > C_permit, which the source sample does not hold. Statement superseded (ST-14). On the action basis A10 is such a row (NCR-N02).",
+  "ref": "R12",
+  "rigor_tier": "T3",
+  "single_failure": false,
+  "state": "CLOSED",
+  "statements": [
+   "ST-14"
+  ],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [],
+  "disposition": "ACCEPT",
+  "evidence": [],
+  "finding": "The sweep changes the matrix, not the rows, so 'zero over-restrictive in every variant' is structurally guaranteed; add M7; 15-25 should read 14-25.",
+  "id": "NCR-R13",
+  "independence": "CONTAMINATED-BY-PRIOR",
+  "item": [
+   "SWEEP"
+  ],
+  "note": null,
+  "origin": "REVIEW_v3",
+  "originator": "ACT-REVIEWER",
+  "reason": "stats.py reports, per variant, the count of rows on which the over-restrictive branch can fire at all; on the annex basis it is zero in every variant (the sweep holds the actuals, and no row whose own actual is D3 or above has C_restrict > C_permit), so the zero is reported HOLDS_UNTESTABLE. Six rows could produce it had the agency restricted (over_reachable). Below-floor range with M7: 14-23 over the reproduced variants, 14-25 with M6's published value (M6 not reproducible, NCR-N07).",
+  "ref": "R13",
+  "rigor_tier": "T1",
+  "single_failure": false,
+  "state": "CLOSED",
+  "statements": [
+   "ST-12",
+   "ST-13"
+  ],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [
+   "CHG-R14-01",
+   "CHG-R14-02",
+   "CHG-R14-03"
+  ],
+  "disposition": "ACCEPT",
+  "evidence": [
+   "EV-G006",
+   "EV-G007",
+   "EV-G010",
+   "EV-G014",
+   "EV-G015",
+   "EV-G032",
+   "EV-G033",
+   "EV-G035"
+  ],
+  "finding": "Reversals encoded inside rows; C03 is a permissive action vacated by a court; one restrictive-action list with A10's forcing coded; test reversal speed by initiator.",
+  "id": "NCR-R14",
+  "independence": "CONTAMINATED-BY-PRIOR",
+  "item": [
+   "C03",
+   "A10",
+   "B00",
+   "B00b",
+   "B01",
+   "B02"
+  ],
+  "note": null,
+  "origin": "REVIEW_v3",
+  "originator": "ACT-REVIEWER",
+  "reason": "REVERSAL objects link decisions (WO-REG-1b); C03 coded as a permissive action vacated within its lifetime with the products remaining on the market; A10 forcing coded unmet_postmarket_requirement (inference: the requirement dates from the 1996 approval); one list from action_direction; reversals.py tests time-to-reversal by direction with an exact Mann-Whitney test.",
+  "ref": "R14",
+  "rigor_tier": "T1",
+  "single_failure": false,
+  "state": "CLOSED",
+  "statements": [
+   "ST-05",
+   "ST-09",
+   "ST-16"
+  ],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [],
+  "disposition": "ACCEPT",
+  "evidence": [
+   "EV-V009",
+   "EV-V011",
+   "EV-V021",
+   "EV-V033",
+   "EV-V063"
+  ],
+  "finding": "Diffuse bin holds sponsored products; C08 sign flipped (verb vs cost-bearer); D02 final outcome permissive; result is not testable at this n.",
+  "id": "NCR-R2",
+  "independence": "CONTAMINATED-BY-PRIOR",
+  "item": [
+   "C10",
+   "A06",
+   "B03",
+   "C08",
+   "D02"
+  ],
+  "note": null,
+  "origin": "REVIEW_v1",
+  "originator": "ACT-REVIEWER",
+  "reason": "v2 recodes present in coded_decisions_v3.csv (C10/A06/B03 cost_bearer sponsor; C08 go_ahead; D02 warn). The registry stores direction twice: direction_verb (the v1 coding, which coded the verb) and direction (relative to the bearer of the cost of caution). 'Not testable' wording carried to NCR-R11.",
+  "ref": "R2",
+  "rigor_tier": "T1",
+  "single_failure": false,
+  "state": "CLOSED",
+  "statements": [],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [],
+  "disposition": "ACCEPT",
+  "evidence": [
+   "EV-V039"
+  ],
+  "finding": "'11 of 11' against 9 restrictive rows; BVO discretionary.",
+  "id": "NCR-R3",
+  "independence": "CONTAMINATED-BY-PRIOR",
+  "item": [
+   "B06"
+  ],
+  "note": null,
+  "origin": "REVIEW_v1",
+  "originator": "ACT-REVIEWER",
+  "reason": "v2 Fix 5 restricted the forcing count to agency actions and reclassified BVO. Residuals: the 7-of-8 / 3-of-9 denominator drift (NCR-R14) and a second discretionary restriction (NCR-R6).",
+  "ref": "R3",
+  "rigor_tier": "T1",
+  "single_failure": false,
+  "state": "CLOSED",
+  "statements": [],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [],
+  "disposition": "ACCEPT",
+  "evidence": [],
+  "finding": "RUS-0.1 scores only the harm of a wrong permit; B05 graded U1 against M2; Annex A called an independent replication.",
+  "id": "NCR-R4",
+  "independence": "CONTAMINATED-BY-PRIOR",
+  "item": [
+   "RUS-0.1",
+   "B05"
+  ],
+  "note": null,
+  "origin": "REVIEW_v1",
+  "originator": "ACT-REVIEWER",
+  "reason": "v2 Fix 6 (two-sided consequence), Fix 7 (B05 U3 by M2) and Fix 8 (replication claim withdrawn) present. Residual: the R2 margin rule stays asymmetric (NCR-R7).",
+  "ref": "R4",
+  "rigor_tier": "T1",
+  "single_failure": false,
+  "state": "CLOSED",
+  "statements": [],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [
+   "CHG-INPUT-03",
+   "CHG-N18-05",
+   "CHG-N11-01"
+  ],
+  "disposition": "MODIFY",
+  "evidence": [
+   "EV-G012",
+   "EV-G013",
+   "EV-V080",
+   "EV-V081",
+   "EV-V082",
+   "EV-V083",
+   "EV-V084",
+   "EV-V085",
+   "EV-V086",
+   "EV-V087"
+  ],
+  "finding": "Add night shift work; code exposure by rotation pattern, never ever/never.",
+  "id": "NCR-R5",
+  "independence": "CONTAMINATED-BY-PRIOR",
+  "item": [
+   "E01"
+  ],
+  "note": "open on the Danish primary record",
+  "origin": "REVIEW_v1",
+  "originator": "ACT-REVIEWER",
+  "reason": "Loaded as E01 from the bundle (the earlier registry's C11; CHG-INPUT-03). Exposure is typed by rotation pattern; no located source codes it that way, so every E01 evidence node carries rotation_pattern 'not_coded' and the gap is EA-05. Retyped NON_DECISION (NCR-N18). Denmark compensation: a secondary review quote is seen (G013), the Danish primary is not located and the count varies 37/38/40 across secondary sources (G012).",
+  "ref": "R5",
+  "rigor_tier": "T2",
+  "single_failure": false,
+  "state": "OPEN",
+  "statements": [],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [
+   "CHG-R6-01",
+   "CHG-R6-02",
+   "CHG-R6-03",
+   "CHG-R6-04",
+   "CHG-R6-05",
+   "CHG-R6-06",
+   "CHG-R6-07"
+  ],
+  "disposition": "ACCEPT",
+  "evidence": [
+   "EV-G001",
+   "EV-G002"
+  ],
+  "finding": "Pentachlorophenol is a required cancellation, coded go_ahead; case closures coded go_ahead; notice-level coding; Frame C2 has no cost-bearer variation.",
+  "id": "NCR-R6",
+  "independence": "CONTAMINATED-BY-PRIOR",
+  "item": [
+   "FRAME-C2",
+   "C2:Pentachlorophenol"
+  ],
+  "note": "document-level coding of the 34 decisions not run (gap FR-C2-DOCS)",
+  "origin": "REVIEW_v2",
+  "originator": "ACT-REVIEWER",
+  "reason": "EPA release and 87 FR 6535 seen at search-index depth (G001, G002 MATCH). Pentachlorophenol recoded decline, discretionary (no statute or court forcing located); six case closures recoded NA and excluded from direction counts; sponsor exit logged as a gap, not as permissive. The '34/34' statements (ST-01, ST-02, ST-03) and 'lone discretionary' (ST-04, ST-05) are superseded by computed values.",
+  "ref": "R6",
+  "rigor_tier": "T1",
+  "single_failure": false,
+  "state": "CLOSED",
+  "statements": [
+   "ST-01",
+   "ST-02",
+   "ST-03",
+   "ST-04"
+  ],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [],
+  "disposition": "MODIFY",
+  "evidence": [],
+  "finding": "R2 tolerance is -1 on one side and +1 (with C_restrict > C_permit) on the other.",
+  "id": "NCR-R7",
+  "independence": "CONTAMINATED-BY-PRIOR",
+  "item": [
+   "RUS-0.2 R2"
+  ],
+  "note": null,
+  "origin": "REVIEW_v2",
+  "originator": "ACT-REVIEWER",
+  "reason": "Published as variant M7 (symmetric: one class below the floor conforms by margin) in RUS-0.3, beside, not replacing, R2 as published. Reviewer's 14 below floor under M0+M7 reproduces (stats.py).",
+  "ref": "R7",
+  "rigor_tier": "T1",
+  "single_failure": false,
+  "state": "CLOSED",
+  "statements": [],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [
+   "CHG-R8-01",
+   "CHG-R8-02"
+  ],
+  "disposition": "MODIFY",
+  "evidence": [
+   "EV-G018",
+   "EV-G019",
+   "EV-G020",
+   "EV-G021",
+   "EV-G034"
+  ],
+  "finding": "No restrictive row has C_restrict > C_permit, so R2's over-restrictive test cannot fire; add restrictive-side candidates.",
+  "id": "NCR-R8",
+  "independence": "CONTAMINATED-BY-PRIOR",
+  "item": [
+   "D03",
+   "D04",
+   "D01"
+  ],
+  "note": "open on a stated-window frame of FDA restrictive actions",
+  "origin": "REVIEW_v2",
+  "originator": "ACT-REVIEWER",
+  "reason": "Added D03 (2016 denial of marijuana rescheduling petitions) and D04 (psilocybin held in Schedule I through 2025) as PROPOSED rows, one coder, selected on direction, never pooled into a test of the sample. D01 is the loosening of a self-sealing restriction (R6b). FDA clinical holds: no public FDA listing located (FR-CLINHOLD). Refuse-to-file / complete response letters: the July 2025 CRL release exists (G021) and was not loaded (egress; FR-CRL-2025).",
+  "ref": "R8",
+  "rigor_tier": "T1",
+  "single_failure": false,
+  "state": "OPEN",
+  "statements": [],
+  "type": "NCR"
+ },
+ {
+  "adjudicator": "ACT-REGISTRY",
+  "changes": [
+   "CHG-R9-01"
+  ],
+  "disposition": "MODIFY",
+  "evidence": [
+   "EV-G023"
+  ],
+  "finding": "C_restrict is lowered wherever 'alternatives exist' without scoring the alternative.",
+  "id": "NCR-R9",
+  "independence": "CONTAMINATED-BY-PRIOR",
+  "item": [
+   "C07"
+  ],
+  "note": null,
+  "origin": "REVIEW_v2",
+  "originator": "ACT-REVIEWER",
+  "reason": "Rule SUB in RUS-0.3: the alternatives credit stands only when the alternative is named AND graded with a C_permit grade below the case's own; otherwise C_restrict + 1. No alternative is graded anywhere in the bundle, so every credited row loses the credit under SUB. Reference case PFOA -> HFPO-DA (GenX), recorded on C07 (G023 UNSEEN at search depth).",
+  "ref": "R9",
+  "rigor_tier": "T1",
+  "single_failure": false,
+  "state": "CLOSED",
+  "statements": [],
+  "type": "NCR"
+ }
+]

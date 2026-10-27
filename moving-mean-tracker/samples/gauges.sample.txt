@@ -1,0 +1,48 @@
+moving-mean-tracker: gauges over 4 run(s)
+STATUS: PROPOSED instrument. Fixture data is synthetic; nothing here measures a population.
+UNRATED, INSUFFICIENT_SAMPLE, NOT_DECLARED and CROSS_VERSION are states, not zeros.
+
+axis band   population reference: FIXTURE population reference (synthetic) (2026-10-01)
+  segment high
+    run      ver             n         G1     median         G2         G3         G4
+    2026Q4   band-v1        60      837.6   140976.9      0.133      0.000      54.73
+    2027Q1   band-v1        60   171843.3   140976.9      0.133      0.000     120.72
+    2027Q2   band-v1        60   171843.3   140976.9      0.200      0.000     120.72
+    2027Q4   band-v2        60   171843.3   140976.9      0.200      0.000     120.72
+             delta: CROSS_VERSION (segment definitions band-v1 -> band-v2), not compared
+  segment low
+    run      ver             n         G1     median         G2         G3         G4
+    2026Q4   band-v1        60     -402.9    21849.2     -0.067      0.000      10.12
+    2027Q1   band-v1        60     -402.9    21849.2     -0.067      0.000      10.12
+    2027Q2   band-v1        30       68.1    25043.0     -0.200      0.500      11.79
+    2027Q4   band-v2        30       68.1    25043.0     -0.200      0.500      11.79
+             delta: CROSS_VERSION (segment definitions band-v1 -> band-v2), not compared
+  segment mid
+    run      ver             n         G1     median         G2         G3         G4
+    2026Q4   band-v1        60      603.2    52528.7     -0.067      0.000      22.24
+    2027Q1   band-v1        60      603.2    52528.7     -0.067      0.000      22.24
+    2027Q2   band-v1        60      603.2    52528.7      0.000      0.000      22.24
+  segment middle
+    run      ver             n         G1     median         G2         G3         G4
+    2027Q4   band-v2        60      603.2    52528.7      0.000      0.000      22.24
+             delta: CROSS_VERSION (segment definitions band-v1 -> band-v2), not compared
+
+axis region   population reference: none named and dated -> G2 UNRATED
+  segment north
+    run      ver             n         G1     median         G2         G3         G4
+    2026Q4   region-v1      90    20725.5    50957.2    UNRATED      0.000      30.41
+    2027Q1   region-v1      90    77712.3    50957.2    UNRATED      0.000      54.59
+    2027Q2   region-v1      73    93787.3    60855.9    UNRATED      0.189      64.12
+    2027Q4   region-v1      73    93787.3    60855.9    UNRATED      0.189      64.12
+  segment south
+    run      ver             n         G1     median         G2         G3         G4
+    2026Q4   region-v1      90    16787.0    55792.1    UNRATED      0.000      30.54
+    2027Q1   region-v1      90    73804.0    55792.1    UNRATED      0.000      54.54
+    2027Q2   region-v1      77    83406.8    64924.4    UNRATED      0.144      61.18
+    2027Q4   region-v1      77    83406.8    64924.4    UNRATED      0.144      61.18
+
+schedule:
+  2026Q4   FIRST_RUN
+  2027Q1   ON_SCHEDULE
+  2027Q2   ON_SCHEDULE
+  2027Q4   OFF_SCHEDULE  expected 2027Q3

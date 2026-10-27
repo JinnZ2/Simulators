@@ -1,0 +1,24 @@
+CONSTRUCTED. Not a measurement of any real corpus.
+
+A measurement carries a unit, and a unit means the same thing to two
+parties only because both trace it to a standard neither of them owns.
+The metre is not the property of the laboratory that reports a length in
+metres. The second is not the property of the laboratory that reports a
+duration in seconds. A laboratory that redefined the metre privately
+would still be able to report lengths, and every other laboratory would
+be unable to read them, because the unit would no longer trace to a
+shared standard.
+
+The same holds for the script the report is written in. A report written
+in a private script transmits nothing, not because the script is worse
+than another script, but because reading it requires a convergence that
+was never established. The convergence is the substrate; the report
+rides on it.
+
+A protocol is a standard of the same kind. Two parties exchange a
+message only when both parties agree in advance about what the fields
+of the message mean. Neither party owns the agreement. Either party can
+defect from it, and a party that defects can still emit messages, and
+the messages will not be read. Transmission requires that the parts do
+not contest each other's terms, and the requirement holds whether or not
+the parties intend to cooperate.

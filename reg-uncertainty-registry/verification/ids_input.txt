@@ -1,0 +1,79 @@
+# kind | local_key | label | target vocabulary to try
+SUB | glyphosate | glyphosate | DTXSID (EPA CompTox); also CAS RN
+SUB | atrazine | atrazine | DTXSID; CAS
+SUB | chlorpyrifos | chlorpyrifos | DTXSID; CAS
+SUB | imidacloprid | imidacloprid | DTXSID; CAS
+SUB | clothianidin | clothianidin | DTXSID; CAS
+SUB | thiamethoxam | thiamethoxam | DTXSID; CAS
+SUB | dinotefuran | dinotefuran | DTXSID; CAS
+SUB | acetamiprid | acetamiprid | DTXSID; CAS
+SUB | saccharin | saccharin | DTXSID; CAS
+SUB | aspartame | aspartame | DTXSID; CAS
+SUB | titanium_dioxide | titanium dioxide (E171) | DTXSID; CAS
+SUB | erythrosine | FD&C Red No. 3 (erythrosine B / erythrosine sodium) | DTXSID; CAS
+SUB | bvo | brominated vegetable oil | DTXSID; CAS
+SUB | lead | lead | DTXSID; CAS
+SUB | pfoa | perfluorooctanoic acid (PFOA) | DTXSID; CAS
+SUB | pfos | perfluorooctanesulfonic acid (PFOS) | DTXSID; CAS
+SUB | pfhxs | perfluorohexanesulfonic acid (PFHxS) | DTXSID; CAS
+SUB | pfna | perfluorononanoic acid (PFNA) | DTXSID; CAS
+SUB | hfpo_da | HFPO-DA (GenX) | DTXSID; CAS
+SUB | pfbs | perfluorobutanesulfonic acid (PFBS) | DTXSID; CAS
+SUB | hydrocodone_bitartrate | hydrocodone bitartrate | DTXSID; UNII
+SUB | hydroxyprogesterone_caproate | 17-alpha-hydroxyprogesterone caproate | DTXSID; UNII
+SUB | rofecoxib | rofecoxib | DTXSID; UNII
+SUB | molnupiravir | molnupiravir | DTXSID; UNII
+SUB | flibanserin | flibanserin | DTXSID; UNII
+SUB | midodrine | midodrine hydrochloride | DTXSID; UNII
+SUB | pyridostigmine_bromide | pyridostigmine bromide | DTXSID; UNII
+SUB | liraglutide | liraglutide | UNII (peptide; DTXSID may not exist)
+SUB | semaglutide | semaglutide | UNII
+SUB | bevacizumab | bevacizumab | UNII (antibody; DTXSID likely none)
+SUB | aducanumab | aducanumab | UNII
+SUB | donanemab | donanemab | UNII
+SUB | eteplirsen | eteplirsen | UNII
+SUB | thc | delta-9-tetrahydrocannabinol (dronabinol) | DTXSID; UNII
+SUB | cannabis | cannabis / marijuana (plant material) | any identifier (likely none)
+SUB | microplastics | microplastics | any identifier (likely none)
+SUB | polypropylene | polypropylene (pelvic mesh material) | DTXSID; CAS
+SUB | cobalt | cobalt (metal-on-metal hip wear ion) | DTXSID; CAS
+SUB | chromium | chromium | DTXSID; CAS
+EXP | night_shift_work | night shift work (exposure circumstance) | ECTO, ExO, or NCIT term id
+END | breast_cancer | breast cancer / breast carcinoma | MONDO; NCIT; EFO
+END | prostate_cancer | prostate cancer | MONDO; NCIT
+END | colorectal_cancer | colorectal cancer | MONDO; NCIT
+END | nhl | non-Hodgkin lymphoma | MONDO; NCIT
+END | hepatocellular_carcinoma | hepatocellular carcinoma | MONDO; NCIT
+END | bladder_tumor_rodent | urinary bladder neoplasm (rodent) | NCIT; MA/ontology for rodent pathology
+END | thyroid_follicular_tumor_rodent | thyroid follicular cell neoplasm (rodent) | NCIT
+END | thyroid_c_cell_tumor | thyroid C-cell tumor / medullary thyroid carcinoma | MONDO; NCIT
+END | genotoxicity | genotoxicity | NCIT; OBI; ToxCast/ OECD test guideline
+END | mutagenicity | mutagenicity | NCIT
+END | embryo_fetal_toxicity | embryo-fetal toxicity / developmental toxicity | NCIT; HPO
+END | neurodevelopment | neurodevelopmental impairment / cognitive deficit in children (IQ) | HPO; NCIT
+END | blood_lead | blood lead level | NCIT; LOINC
+END | amphibian_endocrine | endocrine disruption in amphibians (gonadal abnormality) | any (ECOTOX endpoint?)
+END | pollinator_colony | pollinator / honey bee colony effects | any (ECOTOX endpoint?)
+END | myocardial_infarction | myocardial infarction | MONDO; HPO
+END | stroke | stroke | MONDO; HPO
+END | opioid_use_disorder | opioid use disorder / addiction | MONDO
+END | preterm_birth | preterm birth | MONDO; HPO
+END | alzheimer_cognition | Alzheimer disease cognitive decline | MONDO
+END | amyloid_pet | amyloid PET (biomarker/surrogate) | NCIT; LOINC
+END | aria | amyloid-related imaging abnormalities (ARIA) | any
+END | dystrophin | dystrophin expression (surrogate) | NCIT
+END | orthostatic_hypotension | orthostatic hypotension | HPO; MONDO
+END | overall_survival | overall survival / progression-free survival | NCIT
+END | mesh_erosion | mesh erosion / exposure after pelvic organ prolapse repair | any
+END | metallosis | metallosis / adverse reaction to metal debris | any
+END | gut_microbiome | gut microbiome composition (dysbiosis) | NCIT; OBA; EFO
+END | microplastic_occurrence | microplastics occurrence in drinking water | any
+END | circadian_disruption | circadian rhythm disruption / melatonin suppression | GO; HPO; NCIT
+END | thyroid_function | thyroid hormone disruption / thyroid toxicity | HPO; NCIT
+END | aquatic_toxicity | aquatic ecosystem effects | any
+END | hsdd_efficacy | hypoactive sexual desire disorder | MONDO
+END | covid_outcomes | COVID-19 hospitalization or death | MONDO; NCIT
+END | nerve_agent_survival | survival after nerve agent exposure (animal efficacy) | any
+END | pain_mmj | chronic pain (medical marijuana indication) | HPO; MONDO
+SUB | pentachlorophenol | pentachlorophenol | DTXSID; CAS
+SUB | psilocybin | psilocybin | DTXSID; UNII

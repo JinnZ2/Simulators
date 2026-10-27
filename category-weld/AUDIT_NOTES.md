@@ -57,6 +57,7 @@ Update the claim, never retune the scorer to preserve a claim.
 | CW_015 | The new `open` field carries a pre-registration guard (fix the read-vs-imposed criterion before any series is run), and `TEMPLATE` has no `open` key, so `--new` never prompts for it | `open` appearing in `TEMPLATE` | SUPPORTED |
 | CW_016 | `hierarchy`'s `naturalness-argument` case states C4's directional-weld point structurally — support and application land on different components of one term with no handle marking the switch — and names the folder's first concrete data source (fire-service credential requirements, documented and dated) | a handle in general use that marks the switch | SUPPORTED, unmeasured |
 | CW_017 | `tracked_by_label` is declared a judgment call in `hierarchy`'s own `open` list, with the competing candidate and its condition named; nothing in the schema records the choice or its alternative, so two terms with the same structure and different label choices are indistinguishable to the scorer | a field carrying the choice and its reason | SUPPORTED |
+| CW_018 | The valence is baked in and undeclared. A weld is compression, and compression is why a term is usable; the defect is fusion with **no inventory**, not fusion. So `max_spread` is a CAPACITY for loss (an upper bound), realized only when the bundling is unrecorded at the site of use -- and the schema has no field for that second condition. The folder welds *fusion* and *loss* into one handle without recording that they separate, which is the mechanism it exists to detect | a field carrying whether the bundling is declared where the term is used, so useful-compression and silent-lossiness score apart | SUPPORTED, operator's finding |
 
 ## 1 — CW_001, closed by delivery
 
@@ -378,6 +379,60 @@ reason, so two terms with the same structure and different label choices
 are indistinguishable to the scorer — the same declaration-not-a-check
 shape as `generation-capacity/` `GC_003`'s `scored_against`.
 
+## 15 — CW_018, the valence is a field and is hardcoded
+
+**Operator's finding, 2026-10-08.** Stated as: each tool can be judged
+good or bad depending on who is judging, so the weld can be useful and
+can cause lossiness, depending on whether it is recorded.
+
+`MECHANISM_09.md` and every readout in `weld.py` treat a weld as a
+defect. But a weld is **compression**, and compression is why a term is
+usable at all: `rural`, `capital`, `hierarchy` are handles *because*
+they bundle, and a vocabulary with no welds cannot be spoken, let alone
+operated. Nobody unwelds `capital` before using it.
+
+So fusion is not the defect. The defect is fusion with no inventory. If
+the components and the bundling are on the record, a reader unwelds when
+the components diverge. If not, the divergence happens and the record
+does not move -- which is the mechanism's own sentence, and it has a
+second clause the schema does not carry.
+
+**What this does to the readout.** `max_spread` measures how far the
+components *could* diverge. That is a CAPACITY for loss, an upper bound,
+not loss. Realized lossiness needs two conditions:
+
+1. the components diverge -- `max_spread` measures this
+2. nothing recorded the bundling at the site of use -- **no field**
+
+`welds/*.json` carries `term`, `domain`, `components`, `divergences`,
+`tracked_by_label`, `note`, `open`. `tracked_by_label` is the nearest
+field and asks a different question (which component the LABEL tracks),
+not whether the fusion is declared where the term is used. So a term
+whose bundling is stated in every document that uses it and a term whose
+bundling is stated nowhere score identically on every live readout.
+
+**The folder commits its own mechanism.** It fuses *fusion* and *loss*
+into one handle -- the word "weld" carries both the structure and the
+verdict -- and records nowhere that they separate. The auditor's valence
+is a component of the term and is not inventoried, which is condition 1
+of the mechanism's own test, applied to the mechanism.
+
+The repair is a field, not a rewrite: a declared `bundling_declared`
+per term (or per case), with the valence read off the pair rather than
+assumed. `max_spread` keeps its meaning and gains its denominator.
+
+**Recorded where.** One caveat on condition 2, from the same exchange: a
+weld declared in a glossary no reader opens is undeclared in effect.
+That is `readout-count/`'s return-path condition -- a declaration that
+does not reach the reader is not one -- so the field wants to be about
+the site of use, not about the existence of a definition somewhere.
+
+**Convergence.** Three instruments in this tree now turn out to measure
+one variable rather than the thing in their own name:
+`declared-frame/` (is the position declared), `corn-stunt-forensics/`
+`CSF_020` (is it declarable at all), and this (is the bundling
+recorded). The object in each case is whether the record carries it.
+
 ## Relation to the rest of the repo
 
 - `uninstrumented/` — this is a proposed ninth mechanism for that
@@ -395,6 +450,10 @@ shape as `generation-capacity/` `GC_003`'s `scored_against`.
 - `aperiodic-order-sim-stack/` — §2 has the same shape as `AOS_006`: an
   audit finding that turned out to be an artifact of the instrument the
   auditor chose, corrected from the same paragraph's own numbers.
+- `corn-stunt-forensics/` — `CSF_019` records the consolidation step of
+  that folder's frame-cycle as this mechanism run deliberately: deciding
+  two frames' variables are one variable IS welding, and `CW_018` is why
+  that is not automatically a loss.
 - `criteria-drift/` — `CD_002` found drift primitives returning unsigned
   distances where a sign was needed; §5 is the mirror, a sign convention
   that is right in the body and backwards in the documentation.

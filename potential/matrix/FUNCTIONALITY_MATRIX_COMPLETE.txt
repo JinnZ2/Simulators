@@ -1,0 +1,374 @@
+FUNCTIONALITY MATRIX - COMPLETE
+The token layer's functions, scope-defined, every cell marked, all
+disputes folded in.
+
+LINEAGE
+  1. FUNCTIONALITY_MATRIX.txt          (unmarked, original)
+  2. assumption audit                  (catches: unmarked ease table,
+                                       solved-contradiction, overclaims)
+  3. FUNCTIONALITY_MATRIX_MARKED.txt   (four-tier repair [F]/[P]/[J]/[U])
+  4. annotated counter-audit           (adds [A] attested + three-axis
+                                       epistemology; overclaims corrected)
+  5. FOOTING_MERGED.txt                (six-tier scheme; who-is-constrained;
+                                       [A] provenance rule)
+  6. this document                     (complete)
+
+FOOTING KEY (merged scheme)
+  [F] FINDING     sourced, reproducible; constrains everyone
+  [P] POSITION    one side of a live dispute; constrains the author
+                  to honesty about the dispute
+  [A] ATTESTED    first-person action in the system; constrains the
+                  attester absolutely, the reader not at all
+  [H] HYPOTHESIS  mechanism claim awaiting test
+  [J] JUDGMENT    the author's reading, stated as a reading
+  [U] UNMARKED    no footing claimed; default state of all prose
+
+[A] PROVENANCE RULE: every [A] cell ships with whose action, which
+seat, when - or carries the standing note: "attested by the matrix
+author's direct observation; single witness; survivorship applies;
+not independently reproduced."
+
+THE THREE AXES (from the counter-audit, adopted)
+  TOKEN VALUE   a representation. Writing about it is unconstrained
+                by it.
+  ACTION VALUE  what a move costs. Writing about it is constrained if
+                the writer is the one who moved.
+  WRITING ABOUT a third-order object; constrained only by the writer's
+  EITHER        honesty about which axis they track.
+
+================================================================
+F1  RATIONING / ALLOCATION
+================================================================
+  purpose       allocate scarce goods without violence or permanent
+                queue                                        [J]
+                (structural-violence literature reads price itself
+                as violence - Galtung, Graeber               [P])
+  beneficiary   everyone, in genuine scarcity                [J]
+  holds when    supply < demand AND prices are informative   [H]
+                (informative-price threshold                 [U])
+  genuine vs manufactured scarcity: decidable by the
+  constraint-survival test [J]: does the scarcity survive
+  removal of the gate? (housing: vacancy vs homelessness;
+  food: waste vs hunger). Test offered, not run              [H]
+  "theater" when manufactured                                [J]
+  breaks when   money channel blocked for a class ->
+                reverts to queue / authority / favor  [A][F]
+  vertex dep    instantiated: price is read at the vertex in
+                current implementations                      [F-as-
+                description]
+                per-se: NOT required - non-token rationing
+                (labor credit, seniority, lottery, commons)
+                documented (Amana, kibbutz, Ostrom regimes)  [F]
+  on failure    queue, seniority, violence, favor.
+                "Always exists" universal withdrawn; standing
+                as documented regularity over scarcity
+                regimes without price channels               [F]
+  cost bearer   whoever is priced out AND whoever is
+                queued out                                   [A]
+
+================================================================
+F2  ANTI-FRAUD / UNIQUENESS / ACCOUNTABILITY
+================================================================
+  purpose       claims uniquely owned, non-forgeable at the
+                ledger layer, traceable                    [F]
+                "the double-spend problem, solved" -
+                withdrawn: fraud persists above and below
+                the ledger (identity theft, synthetic-identity
+                fraud documented)                          [F]
+  beneficiary   transactors at distance; states; victims of
+                counterfeiting                               [F][J]
+  holds when    ledger infrastructure and identity
+                verification operate                       [F]
+  breaks when   verified classes are a subset of the honest;
+                the undocumented are read as risk instead of
+                as people                                  [A][J]
+  vertex dep    instantiated: verification IS a vertex
+                service                                    [A]
+                per-se: reputation systems extend radius
+                within bounded information communities
+                with collective enforcement (Greif's
+                Maghribi traders) - extended, not unbounded [P]
+  on failure    reputation, kin vouching, face-to-face trust [J]
+  cost bearer   the unverified                             [A]
+
+================================================================
+F3  COORDINATION AT SCALE AMONG STRANGERS
+================================================================
+  purpose       trustless cooperation                      [P - North:
+                institutions cut transaction costs]
+                price compresses dispersed knowledge       [P - Hayek,
+                contested by market-failure / asymmetric-
+                information / externality literature]
+  beneficiary   the entire network of specialization       [J]
+  holds when    "dense, connected, enforceable"            [H]
+  breaks when   a population segment is outside the
+                enforceable set - radius collapses to kin
+                and barter                                 [H][A]
+  vertex dep    instantiated: the enforcement fiction is the
+                load-bearing member                        [J]
+                per-se: large pre-monetary societies
+                existed for long durations - scope limit
+                not engaged                                [F, noted]
+  on failure    gift economy, kin networks, barter;
+                "real but thin"                            [J]
+  cost bearer   the excluded segment                       [A]
+
+================================================================
+F4  CONCENTRATED-CAPITAL PROVISIONING   [revised per addendum]
+================================================================
+  purpose       revenue signal that justifies the grid, the
+                MRI, the fab, the water treatment plant    [P]
+                "justifies"                                [J]
+  COUNTEREXAMPLE engaged: public and cooperative provision
+  (REA, TVA, interstate highways, municipal water) provided
+  concentrated infrastructure without the described
+  per-transaction revenue signal                           [F existence;
+                J interpretation: public provision moves the
+                vertex to the funding layer - taxation - rather
+                than removing it; Mondragon restructures further]
+  beneficiary   everyone downstream of concentrated
+                infrastructure                             [J]
+  holds when    long horizons, stable rules, functioning
+                revenue channel                            [H]
+  breaks when   revenue channel degrades - deferred
+                maintenance, underinvestment               [F]
+  vertex dep    instantiated                               [A]
+                "this row and the HOT row of the engineering
+                brief are the SAME row"                    [J]
+  on failure    "NO SUBSTITUTE exists at scale" - WITHDRAWN.
+                Residual per-se claim: the concentrated-
+                capability TAIL at anonymous-population
+                scale                                    [J, contested
+                by the public/cooperative record]
+                Even the tail is carried by durable communities
+                as occasional boundary transactions with
+                mutual-aid pooling (Amish aid fund)        [F pattern;
+                J interpretation]
+                "Buldyrev: first-order collapse, not
+                degradation"                               [F for
+                interdependent-network math; J application -
+                an inference the paper does not draw]
+  cost bearer   everyone, simultaneously                   [J]
+
+================================================================
+F5  INFORMATION AGGREGATION
+================================================================
+  purpose       a single number carries the summed knowledge of
+                millions of transactors (Hayek 1945)        [P]
+  beneficiary   producers and consumers making allocation
+                decisions                                    [J]
+  holds when    prices float with real scarcity            [H]
+                (real-vs-nominal test                      [U])
+  breaks when   prices are administered or gated - the
+                number stops representing the world and
+                starts representing the gate               [H]
+  vertex dep    instantiated                               [A]
+  on failure    planning by committee; local knowledge
+                goes unread                                [J]
+  cost bearer   everyone deciding on a corrupted signal    [J]
+
+================================================================
+F6  UNIT OF ACCOUNT / STANDARDIZATION
+================================================================
+  purpose       value in commensurable units - bookkeeping,
+                contracts, debt, comparison                [F]
+  beneficiary   anyone who owes or is owed across time     [J, scoped]
+  holds when    the unit is stable                         [H]
+                (stability threshold                      [U])
+  breaks when   the unit drifts: inflation                 [F]
+                plus demonetization (India 2016),
+                redenomination, administrative
+                revaluation                                [F]
+  vertex dep    yes - standard issued and enforced
+                centrally                                  [F]
+  on failure    barter ratios, unit drift, contract
+                erosion                                    [H]
+  cost bearer   savers, wage-earners on fixed schedules    [F]
+
+================================================================
+F7  INTERTEMPORAL TRANSFER / SAVING
+================================================================
+  purpose       move effort across time                    [F]
+                delay of gratification via token exchange
+                (Beran & Evans)                            [F]
+                named "intertemporal transfer"             [J;
+                "chose exactly this" withdrawn]
+  beneficiary   anyone with a surplus and a future         [J]
+  holds when    representation holds over time (F6) and
+                custody is safe                            [H]
+  breaks when   confiscation risk, inflation, freezes:
+                "the saving exists until access is
+                revoked"                                   [F - Cyprus
+                2013, documented freezes; agency attribution
+                "the vertex decides" withdrawn]
+  vertex dep    yes - custody is a vertex service          [A]
+  on failure    physical stores (livestock, tools, canned
+                goods)                                     [F existence]
+                reservation / prepper / subsistence as
+                "analogous patterns"                       [J; identity
+                claim softened - comparison not run]
+  cost bearer   whoever cannot hold physical stores        [J]
+                (assumes stores are the only alternative;
+                other channels exist - noted)
+
+================================================================
+F8  STATE FISCAL ANCHOR
+================================================================
+  purpose       taxes payable only in the token drive
+                universal demand (Chartal)                 [P - MMT
+                lineage; historical record mixed: in-kind
+                settlement regimes documented]
+                "self-reinforcing in equilibrium"          [J;
+                "by design" intent attribution withdrawn]
+  beneficiary   the state; indirectly, token-holders       [P]
+  holds when    the jurisdiction is closed enough that
+                exit is costly                             [H]
+                (exit-cost threshold                      [U])
+  breaks when   exit is cheap - currency substitution,
+                informalization                            [F - documented
+                dollarization cases]
+  vertex dep    yes - it IS the vertex                   [A][F definitional]
+  on failure    gray economies; eroded tax base;
+                enforcement ratchet                        [F][J]
+  cost bearer   the state's other priorities; the enforced
+                population                                 [J]
+
+================================================================
+F9  LEGIBILITY / IDENTITY PROXY          [the viewpoint-relative row]
+================================================================
+  purpose       possession makes the holder readable -
+                addressable, creditable, insurable,
+                locatable                                  [A - attested;
+                "readable" is a metaphor, marked]
+  beneficiary   SYSTEM'S SEAT: banks, states, platforms -
+                KYC works; risk is priced; services flow   [P]
+                ("the system's seat" presupposes a single
+                vantage; banks, states, platforms conflict;
+                the seat is a modeled aggregate            [J])
+                PERSON'S SEAT: not a function. The cost.
+                Being readable is the condition of being
+                gated.                                     [A]
+  holds when    legibility is voluntary and revocable      [J]
+  breaks when   legibility is the precondition for the
+                compulsory inputs (domains.py)             [A]
+  vertex dep    yes                                        [A]
+  on failure    the system loses visibility exactly where
+                the person gains opacity - same event,
+                two sign conventions                       [J framing;
+                no mechanism stated]
+  cost bearer   the person, permanently; the system, on
+                failure                                    [A][J]
+
+================================================================
+THE EASE-OF-USE SUB-MATRIX
+================================================================
+Ease(whom, when, where). Cells are [A]-eligible ONLY with per-cell
+provenance (whose action, which seat, when). No single witness has
+sat in all six cells; whole-table [A] is therefore not claimed.
+
+  banked, documented, urban, online, normal ops ....... (~zero)
+  same, during infrastructure failure ................. (HIGH)
+  unbanked, urban, normal ops ......................... (HIGH)
+  unbanked, rural / low-connectivity .................. (SEVERE)
+  emergency, any ...................................... (worst)
+  elderly, disabled, low-literacy ..................... (chronic)
+
+  labels HIGH/SEVERE/worst                                [J - ordinals,
+                no units]
+  "the ease gradient is the inclusion gradient" restated  [J]
+  THE COUNT (adopted from the counter-audit): ease =
+  "how many workarounds must a party at this seat run per
+  compulsory input, per day"                               [H]
+  Conversion instrument - VALIDATED, EXISTS:
+    * Portfolios of the Poor (Collins, Morduch, Rutherford,
+      Ruthven 2009): year-long financial diaries, every
+      transaction, 250 households, Bangladesh/India/
+      South Africa                                        [F]
+    * US Financial Diaries (Morduch & Schneider): one
+      continuous year, 235 low/moderate-income households,
+      four US regions                                     [F]
+  NOT yet done: that instrument run on these six seats,
+  with the workaround-per-input-per-day count scored       [H]
+
+================================================================
+VERTEX-DEPENDENCE: THE THREE-WAY SPLIT (repair of Reconciliation 1)
+================================================================
+  (a) DEFINITIONAL    F8 depends on the vertex by construction  [F]
+  (b) INSTANTIATED    every function, AS CURRENTLY IMPLEMENTED,
+                      routes through the monetary vertex  [F-as-
+                      description of current systems]
+  (c) PER-SE          the function per se requires the vertex:
+                      WITHDRAWN for F1, F2, F3, F5, F6, F7, F9
+                      per the addendum record (Amana 1855-1932;
+                      kibbutz ~60 yr; Amish; Hutterites; Twin Oaks;
+                      prehistory)                         [F]
+                      retained, contested, only for the F4 tail  [J]
+
+================================================================
+THE BOUNDARY THEOREM (from the addendum, marked)
+================================================================
+  Token-free interiors at community scale (hundreds to ~1-2k
+  people) provision all eight compulsory inputs for decades
+  to generations, carrying high internal connectivity, and
+  connect to the token world through ONE OR TWO boundary
+  channels.                                               [F cases]
+  Retreat mechanism documented twice: Amana 1932 (narrow
+  boundary squeezed on several fronts + demand beyond the
+  austere bundle -> dissolution into joint-stock); kibbutz
+  1985-2001 (outside-currency debt -> interior tokenized
+  with differential wages -> population decline halted).   [F]
+  Interpretation: the gate is not abolished by token-free
+  interiors; it migrates to the boundary and narrows.       [J]
+  Depression detail: Amana members were shielded through
+  the 1930s while the Society died of trade debts - the
+  interior out-survived the token economy around it; the
+  failure was at the boundary, not the provisioning.        [F]
+  Binding frame: durable token-free coordination requires
+  religion/kinship and pays its gate in belonging - exit
+  costs, conformity, austere-bundle scope limits.
+  "conformity_required" was one of the eleven gate tags in
+  the earlier collapse analysis: the gate structure
+  persists; its currency changes.                          [F existence;
+                J interpretation]
+
+================================================================
+CORRECTED DESIGN STANDARD [J synthesis; standard itself cited [F]]
+================================================================
+  1. Re-intern the compulsory inputs at community scale -
+     documented, generations-deep precedent.
+  2. Keep TWO OR MORE boundary channels (single-boundary
+     failure mode documented in Amana).
+  3. Carry the capability tail collectively (mutual-aid
+     pooling), not by per-person credentialing gates.
+  4. N-1 and decoupled fallback at every intolerable vertex
+     (reliability-engineering standard; HOT consequence).
+  5. Restore the cash fallback: its deletion removes
+     fallback rows across F1, F2, F5, F7.
+
+================================================================
+OPEN CONVERSIONS - what would promote each row to [F]
+================================================================
+  C1  Workaround-count diary study on the six ease seats
+      -> ease table moves [A]/[J] -> [F]
+  C2  Constraint-survival test on housing/food scarcity
+      -> F1 manufactured-vs-genuine [J] -> [F]
+  C3  Informative-price threshold defined and measured
+      -> F5 [U] resolved
+  C4  Exit-cost threshold defined and measured
+      -> F8 [U] resolved
+  C5  Tail test: can public/cooperative forms provision the
+      concentrated-capability tail at population scale
+      without the per-person gate? -> F4 per-se claim settled
+  C6  The invention-endpoint study (guaranteed-availability
+      arm + creative-output instruments) from the research
+      brief - the still-open causal question
+
+================================================================
+STATUS
+================================================================
+This matrix is complete and marked. It is not measured. The
+marking states, for every sentence, who it constrains. The
+open conversions above are the path from here to measurement.
+Every one of them is a study design, not a metaphor - and
+C1 has a validated instrument waiting to be pointed at six
+seats nobody has sat in with a diary.

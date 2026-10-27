@@ -19,11 +19,28 @@ naming gap as the unasked question.
   each fail for a named reason; two candidates (`load-sharing`,
   `phase-locking`) were raised and none adopted. Left unnamed rather
   than forced.
-- **`check_coinage.py`** — `--selftest`. Computes the structural facts
+- **`check_coinage.py`** — `--selftest` (count printed by the run). Computes the structural facts
   (entry well-formed with no adopted name, every rejected term
   reasoned, candidates raised none adopted, the woodpecker second-
   trophic-level cross-check and the absence-set-on-behaviour instrument
   both named) and states the null discipline. Adjudicates no coinage.
+
+- **`coinage-log.md`** / **`vocabulary-gap-slots.md`** / **`MISSING_SOURCE.md`**
+  are the STATUS split of the operator's memory file `/topics/coinage-log.md`.
+  - **The source is absent.** It is ~46.9k chars, the export truncates
+    at 8k, and the chunk route is unavailable.
+  - **File A** (coined terms) holds 0 entries. Its count is stated
+    UNKNOWN, not 0.
+  - **File B** (unnamed slots, failure points, status fields) holds one
+    entry, seeded byte-identical from `COINAGE_LOG.md`'s ENTRY 001 and
+    labelled NOT chunk 1.
+  - **The manifest** marks all 6 chunks MISSING_SOURCE. Nothing is
+    reconstructed.
+  - **`check_coinage.py` section 6** pins this state, so an arriving
+    chunk turns it red on purpose.
+  - **Found by running:** the first seed-identity check failed. Its
+    extractor matched File B's prose *mention* of the heading before
+    the heading itself. It is now anchored at line start and pinned.
 
 ## Why it is a register and not a finding
 

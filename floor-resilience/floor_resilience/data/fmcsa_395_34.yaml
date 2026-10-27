@@ -1,0 +1,33 @@
+# 49 CFR 395.34, ELD malfunctions. Read by eld.py for display only; no
+# logic depends on these numbers.
+#
+# Verification depth: SEARCH RESULT TEXT ONLY (2026-10-23). ecfr.gov and
+# law.cornell.edu did not resolve from the build sandbox, so the regulation
+# text itself was not opened. The work order says to verify against the
+# current regulation before shipping. Status below says that has NOT been done.
+status: NOT_VERIFIED_AGAINST_PRIMARY_TEXT
+checked: 2026-10-23
+primary: https://www.ecfr.gov/current/title-49/subtitle-B/chapter-III/subchapter-B/part-395/subpart-B/section-395.34
+rules:
+  - id: driver_notice
+    text: Driver notes the malfunction and gives the carrier written notice within 24 hours.
+    cite: 395.34(a)
+  - id: reconstruct
+    text: Driver reconstructs records of duty status for the current 24-hour period and the previous 7 consecutive days on graph-grid paper, unless they are already in hand or retrievable from the ELD.
+    cite: 395.34(a)
+  - id: keep_paper
+    text: Driver keeps paper logs until the ELD is serviced and back in compliance.
+    cite: 395.34(a)
+  - id: carrier_repair
+    text: Carrier corrects, repairs, replaces or services the ELD within 8 days of discovering it or of the driver's notice, whichever comes first.
+    cite: 395.34(c)
+  - id: extension
+    text: Carrier may request an extension within 5 days after the driver's notice, to the FMCSA Division Administrator for the state of its principal place of business.
+    cite: 395.34(d) per FMCSA FAQ (cite letter not confirmed)
+mandate:
+  compliance_date: 2017-12-18     # ELD or grandfathered AOBRD required
+  full_compliance_date: 2019-12-16  # AOBRD grandfathering ended
+  source: https://www.fmcsa.dot.gov/sites/fmcsa.dot.gov/files/docs/regulations/hours-service/elds/81576/usdot-fmcsaeld-brochureen.pdf
+sources:
+  - https://www.fmcsa.dot.gov/hours-service/elds/eld-malfunctions-and-data-diagnostic-events-faqs
+  - https://jjkellercompliancenetwork.com/regsense/39534-eld-malfunctions-and-data-diagnostic-events

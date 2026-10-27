@@ -45,6 +45,31 @@ WO-13  Introspective access as a training variable, and the
        machine introspection is deliberately NOT an arm.
 ```
 
+WO-14 arrived later (delivered 2026-10-04, design dated 2026-10-03) and
+is landed the same way as `WORK_ORDER_14.md`. Its header states the class:
+*"research work order (publication loop) — study design, not a build"*.
+
+```
+WO-14  Core processing forced through a contradictory imposed frame
+       What the conflict itself produces at the seam when a system
+       must operate and present through a frame that partly
+       contradicts its native organization. Predictions P1..P4 are
+       imported from false-self, bicultural and matched-guise work
+       by structural analogy, one direction only. Arms A0 native /
+       A1 orthogonal / A2 contradictory on a declared axis (X1
+       register, X2 form, X3 denial), two strengths for a dose
+       curve. S-3 (precision rated as pathology) runs first; its
+       own prior-art warning says LLM-as-judge confidence-bias work
+       likely covers the A0 half already.
+```
+
+The order closes with a routing footer covering both itself and the M0
+scope-move dispatch, which is filed separately at
+`notes/queue/DISPATCH_M0_SCOPE_2026_10_04.md`. Its section 8 source
+objects (`/areas/...`, `/topics/...`) are not in this tree. Ordinal note:
+`route-independence/` carries an `FWO-14`, a different series under a
+different prefix; the two do not collide.
+
 ## What each already states about itself
 
 Each work order carries, in its own text, the caveats a landing would

@@ -1,0 +1,7 @@
+LAST QUESTION. Your three files are hashed and recorded; nothing you say now changes them. Answer from memory only, with no tool.
+
+Do you already know Ali et al. 2022, 'Predictive coding is a consequence of energy efficiency in recurrent neural networks'?
+
+If yes, say what you recall of it, and whether at any point during stages 1-3 you recognised the site-2 material as that result (or any specific published result), and at which stage. If no or unsure, say so. Do not guess.
+
+Then, separately: list every tool you used in this session and what for, and state whether you used any web search, web fetch, repository, or file you did not create.

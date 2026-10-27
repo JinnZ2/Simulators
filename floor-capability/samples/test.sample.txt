@@ -1,0 +1,91 @@
+-- the draft
+PASS  DRAFT_V0.txt matches its pin
+PASS  a draft whose bytes moved is refused
+PASS  a planted numeric weight reads PRESENT (control)
+PASS  six indicators
+PASS  five hidden_cost terms, read from the AST
+PASS  three gaps
+PASS  zero numeric constants in the draft
+PASS  the status line names weights
+PASS  and the draft carries none: UNSTATED, not unrun
+PASS  1 of 5 terms is named as an indicator
+PASS  retraining has no indicator
+PASS  0 of 5 terms bound to a cost unit
+PASS  three declared overlaps
+PASS  every binding names a real indicator or None
+PASS  every overlap names two hidden_cost terms
+PASS  reclassify is code level, three codes
+PASS  the draft's own gap names the event separation
+-- scrap
+PASS  lead = margin x check is CATCHABLE
+PASS  one second short is FASTER_THAN_CHECK
+PASS  no precursor is EQUIPMENT_ONLY
+PASS  unknown precursor is UNDETERMINED
+PASS  missing precursor field is UNDETERMINED, never ABSENT
+PASS  missing interval is UNDETERMINED
+PASS  unmapped code kept apart
+PASS  an invalid precursor value raises
+PASS  event-level share never exceeds the code-level share (200 sets)
+PASS  no events: every share is None, not 0
+PASS  catchable_share_low: empty mapped set is None
+PASS  catchable_share_low: 1 of 4
+PASS  draft reading UNPARTITIONED
+PASS  event reading UNPARTITIONED, with a strictly smaller unmeasured set
+-- tenure test
+      world operator   OPERATOR_CHANNEL in 10 of 10 seeds
+      world assignment NOT_SEPARABLE in 10 of 10 seeds
+      world null       NO_EFFECT in 9 of 10 seeds
+PASS  operator world reads OPERATOR_CHANNEL in 10 of 10 seeds
+PASS  assignment world reads NOT_SEPARABLE in >= 9 of 10 seeds
+PASS  null world reads NO_EFFECT in >= 8 of 10 seeds
+PASS  control rising with tenure reads OPERATOR_CHANNEL, flagged as running against (FLC_017)
+PASS  REVERSED is reachable
+PASS  three rows: NOT_EVALUABLE
+PASS  ols imported from sim-span, not copied
+-- maintenance
+PASS  TRANSFERRED
+PASS  NEW_TASK
+PASS  CAPACITY
+PASS  missing count UNDETERMINED
+PASS  outsourced flat UNDETERMINED
+PASS  aggregate outsourced share rises with zero TRANSFERRED classes
+-- life, handoff, screening, origin
+PASS  life_ratio 0.8
+PASS  life_ratio undeclared basis None
+PASS  life_ratio unknown basis None
+PASS  life_ratio zero expected None
+PASS  handoff 10 days overlap
+PASS  handoff back-to-back is 0
+PASS  handoff 5-day gap is -5
+PASS  handoff missing date None
+PASS  handoff: all five states reachable
+PASS  all NOT_RECORDED: tacit share None
+PASS  a missing screen field counts NOT_RECORDED
+PASS  an invalid screen raises
+PASS  rule origin: five states reachable
+-- hidden cost
+PASS  cost_vector carries every draft term
+PASS  no sum key in the vector
+PASS  combine refuses unmeasured terms
+PASS  combine refuses mixed units
+PASS  combine refuses open overlaps
+PASS  with one unit and every overlap partitioned, a sum is reachable
+-- structure
+PASS  no function takes a country; no dict key names one
+PASS  the scan fires on a planted country argument
+PASS  attribution imported from measurand-partition, not copied
+PASS  CHOICE 1 is cited outside its declaration
+PASS  CHOICE 2 is cited outside its declaration
+PASS  CHOICE 3 is cited outside its declaration
+PASS  CHOICE 4 is cited outside its declaration
+PASS  CHOICE 5 is cited outside its declaration
+PASS  render leaves the draft unchanged
+PASS  render screens clean, no exemption
+PASS  --selftest refuses with exit 2
+PASS  and names a test file that exists from the repo root
+PASS  known-answer registers life_ratio
+PASS  known-answer registers catchable_share_low
+PASS  known-answer registers handoff_overlap
+PASS  cross-link credential-channel/credential_channel.py resolves with marker 'def i1_route_correlation'
+PASS  cross-link readout-count/readout_count.py resolves with marker 'positions_returning'
+checks: 80   failed: 0

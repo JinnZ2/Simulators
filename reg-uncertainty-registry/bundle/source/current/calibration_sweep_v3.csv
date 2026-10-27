@@ -1,0 +1,8 @@
+variant,below,conform,exceeds,over_restrictive_violations,statute
+"M0 published (G>=3,1-2,0,-1)",22,7,2,0,2
+"M1 lenient gap (>=4,2-3,0-1)",22,7,2,0,2
+"M2 strict gap (>=2,0-1,-2..-1)",23,7,1,0,2
+M3 floor minimized (all G->col2),21,6,4,0,2
+M4 U3 row relaxed,16,11,4,0,2
+M5 max-lenient (M1+M4),15,12,4,0,2
+M6 max-strict (M2+U3strict),25,6,0,0,2

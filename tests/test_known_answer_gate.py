@@ -36,6 +36,7 @@ import known_answer as ka  # noqa: E402
 
 # Hand-kept. Every entry must be registered with a known-answer case.
 MANIFEST = (
+    "automation-gap/driver_hours_evidence_register.py::p_uninterrupted",
     "null-harness/null_harness.py::_verdict",
     "nonidentity-census/t6_window_declaration.py::decided_by_tracks_window",
     "nonidentity-census/t6_window_declaration.py::"
@@ -51,6 +52,7 @@ MANIFEST = (
     "frame-location-benchmark/score.py::false_positive_rate",
     "gap-existence-cases/commit_store.py::commit_specificity",
     "crediting-rate/crediting_rate.py::bin_gap",
+    "crediting-rate/crediting_rate_v2.py::position",
     "anchor-measurand-crossing/amc.py::crossing_band",
     "anchor-position/normalize.py::crossing_count",
     "ontology-probe/probe.py::rates",
@@ -61,6 +63,8 @@ MANIFEST = (
     "unowned-join/invariant.py::join_coverage",
     "assessor-coupling/conditions.py::pool_fraction",
     "instrument-index/build_index.py::claim_only_fraction",
+    "cooperative-substrate-proof/p3_comprehension.py::gain_from_sizes",
+    "cooperative-substrate-proof/p5_lag.py::lag_ratio",
     "failure-mode-register/register.py::fraction_cap",
     "failure-mode-register/register_v2.py::joint_survival",
     "internal-reference-boundary/radials.py::effective_origins",
@@ -69,6 +73,7 @@ MANIFEST = (
     "move-set/move_set_sim_v2.py::_halfwidth",
     "route-independence/route_independence.py::independence_ratio",
     "route-independence/lag_count.py::lag_years",
+    "route-independence/enclosure_caveat_register.py::caveat_rate",
     "route-independence/settlement_split.py::net_positions",
     "revision-survival/revision_survival.py::delta",
     "additivity-inheritance/additivity_inheritance.py::interaction_ss",
@@ -78,6 +83,44 @@ MANIFEST = (
     "reporting-chain-loss/hop_compose.py::composed_bias",
     "chain-position/load_class.py::stability_product",
     "measurand-partition/wo4_lumber.py::stiffness_ratio",
+    "thwaites-risk-audit/audit.py::sle_to_sv",
+    "potential/gate/cut.py::vertex_connectivity",
+    "potential/matrix/check_attested_provenance.py::unprovenanced_attested",
+    "moving-mean-tracker/tracker.py::quantile",
+    "moving-mean-tracker/tracker.py::share_gap",
+    "tools/experiment_fruitfulness_triage.py::site_ratio",
+    "tools/experiment_fruitfulness_triage.py::classify_first",
+    "tools/check_citations.py::citation_state",
+    "tools/yardstick.py::read",
+    "tools/triage_clean_run.py::field_agreement",
+    "tools/fitness_bin_self_test.py::fitness",
+    "tools/fitness_bin_self_test.py::wrap_share",
+    "tools/fitness_bin_self_test.py::diversity",
+    "tools/fitness_bin_self_test.py::fitness_drop",
+    "tools/fitness_bin_self_test.py::allele_entropy",
+    "tools/fitness_bin_self_test.py::rediscovery_wait",
+    "tools/fitness_bin_self_test.py::archive_ratio",
+    "tools/deceptive_maze_ga.py::dist",
+    "tools/deceptive_maze_ga.py::objective",
+    "tools/deceptive_maze_ga.py::novelty",
+    "tools/deceptive_maze_ga.py::locus_entropy",
+    "tools/deceptive_maze_ga.py::half_gen",
+    "tools/fitness_bin_self_test.py::behavior_metrics",
+    "tools/fitness_bin_self_test.py::behavior_half_gen",
+    "tools/fitness_bin_self_test.py::behavior_ledger",
+    "tools/deceptive_maze_ga.py::jaccard_distance",
+    "tools/deceptive_maze_ga.py::mean_pairwise",
+    "tools/deceptive_maze_ga.py::half_distance_gen",
+    "reg-uncertainty-registry/tools/stats.py::mann_whitney_exact",
+    "reg-uncertainty-registry/tools/stats.py::one_directional",
+    "reg-uncertainty-registry/tools/grade.py::floor",
+    "floor-capability/floor_capability.py::life_ratio",
+    "floor-capability/floor_capability.py::catchable_share_low",
+    "floor-capability/floor_capability.py::handoff_overlap",
+    "extraction-chain-join/chain_join.py::coverage",
+    "extraction-chain-join/chain_join.py::traced_fraction",
+    "extraction-chain-join/chain_join.py::consumption_based",
+    "extraction-chain-join/chain_join.py::reserve_share_band",
 )
 
 # Cases known to fail today. A case that starts passing turns this red so
@@ -96,7 +139,8 @@ class ToolRuns(unittest.TestCase):
         self.assertTrue(os.path.exists(TOOL))
 
     def test_tool_exits_clean(self):
-        """rc 0 means every case agrees with what the registry expects."""
+        """rc 0 means every case agrees with what the registry expects,
+        and no case was skipped (NOT_RUN). A skipped case turns this red."""
         p = subprocess.run([sys.executable, TOOL], cwd=ROOT,
                            stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         self.assertEqual(p.returncode, 0, p.stdout.decode()[-2000:])
@@ -179,6 +223,34 @@ class TheGateFires(unittest.TestCase):
     def test_empty_case_set_is_refused(self):
         with self.assertRaises(ka.BadCaseSet):
             ka.register("planted::no_cases", lambda x: x, [])
+
+    def test_a_skipped_case_turns_the_gate_red(self):
+        """A case whose callable raises comes back NOT_RUN. The gate must
+        list it and exit nonzero; before KNOWN_RED 16 it exited 0."""
+        ka._REGISTRY.clear()
+        ka._RESULTS.clear()
+
+        def broken(x):
+            raise SyntaxError("planted: target module does not compile")
+        ka.register("planted::skips", broken,
+                    [ka.case("a", (1,), 1, "identity"),
+                     ka.case("b", (2,), 2, "identity")])
+        ka.run("planted::skips")
+        skips = ka.skipped()
+        self.assertEqual([(m, c) for m, c, _ in skips],
+                         [("planted::skips", "a"), ("planted::skips", "b")])
+        self.assertIn("SyntaxError", skips[0][2])
+        self.assertEqual(ka.exit_code([], True, True, [], skips), 1)
+        self.assertEqual(ka.exit_code([], True, True, [], []), 0)
+
+    def test_the_skipped_count_is_printed_in_the_summary(self):
+        p = subprocess.run([sys.executable, TOOL], cwd=ROOT,
+                           stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        out = p.stdout.decode()
+        self.assertRegex(out, r"SKIPPED \(NOT_RUN\): \d+ cases in \d+ metrics")
+        if "SKIPPED (NOT_RUN): 0 cases" not in out:
+            self.assertIn("GATE RED", out)
+            self.assertNotEqual(p.returncode, 0)
 
     def test_the_registry_is_complete(self):
         """Expected against registered. A register(...) call shadowed by a

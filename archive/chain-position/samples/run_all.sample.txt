@@ -1,0 +1,94 @@
+CONTAMINATION DECLARATION (read before any number below)
+  authorship   every file in this folder is model-authored, in one session, by the same
+               hand that wrote the checks and the fixtures the checks are pinned to
+  position     the author is an instance of the object under measure: a sandboxed agent
+               that is a step in a chain it cannot observe. horn_b --live is run on this
+               process and its reading is an in-class self-report, not evidence about any
+               deployed container
+  standard     neither OWASP document was read; the hosts answered 403 to CONNECT, measured
+               and timestamped in clause_audit.EGRESS. step 1 is NOT_RUN_ON_STANDARD and
+               the count it prints is over the order's own five-bullet summary
+  vendors      none named, none read; every trust-assignment record is CONSTRUCTED
+  models       none called; step 4 is a specification of its own precondition
+  mitigation   none specified, per the order's scope limits
+  interest     the order's thesis both lowers what an in-class author can be held to and
+               lowers what it can claim to know; the direction is not legible and the
+               thesis is left unresolved here rather than resolved in either direction
+
+========================================================================
+clause_audit -- WO-1 step 1, chain-position information INSIDE the executing agent
+  standard hosts, measured 2026-09-19T16:55Z: owasp.org:443 gateway answered 403 to CONNECT; genai.owasp.org:443 gateway answered 403 to CONNECT; control github.com:443 connects (HTTP response received)
+  run state: NOT_RUN_ON_STANDARD
+  clauses 5  inside_agent 0  gateway_only 5  undeclared 0  malformed 0
+    S-1   GATEWAY    CARRIED   per-agent isolation and lineage tracking
+    S-2   GATEWAY    CARRIED   gateway traces every request to originating user session
+    S-3   GATEWAY    CARRIED   cross-agent state transfer requires explicit policy authoriz
+    S-4   GATEWAY    CARRIED   provenance and trust status retained per retrieved item
+    S-5   GATEWAY    CARRIED   runtime interception via middleware hooks
+  reading: a zero over a CARRIED summary is a property of what the summary carried; the
+           standard's own clauses have not been read from here
+========================================================================
+trust_provenance -- WO-1 step 2, provenance of a trust ASSIGNMENT
+  spec is [CHOICE 1]; depth cap 8 is [CHOICE 2]; every record CONSTRUCTED
+  spec fields:
+    subject             id,digest                    what was scored, pinned by content digest not by name
+    score               value,scale                  a number with no scale is not comparable to any other
+    scorer              id,version_digest            which scorer, pinned; a name alone drifts
+    inputs              -                            every artifact the scorer read; the payload alone, or the payload plus a prior score
+    method              id                           the rule applied, named so it can be re-run
+    position            step_index,chain_id          where in the chain the score was assigned
+    t_scored            -                            when; a score with no clock cannot be ordered against the item it scores
+    authorization       policy_id                    the policy that admitted this scorer at this position
+    scorer_provenance   -                            the assignment record for the SCORER, recursive to a declared root
+  records:
+    #0  AUDITABLE              absent=[] undeclared=[] depth=0 payload_only=True
+    #1  UNAUDITABLE            absent=['subject', 'scorer', 'inputs', 'position', 't_scored', 'authorization', 'scorer_provenance'] undeclared=[] depth=0 payload_only=None
+    #2  UNAUDITABLE            absent=['scorer_provenance'] undeclared=[] depth=0 payload_only=True
+  common object across 3 records: NO_COMMON_OBJECT  common=['score', 'method'] missing=['subject', 'scorer', 'inputs', 'position', 't_scored', 'authorization', 'scorer_provenance']
+  reading: the order's 'no common object to audit' is a property of the intersection,
+           and the intersection is measured here on constructed records only
+========================================================================
+horn_b -- WO-1 step 3, a container asking for its own chain position
+  position words are [CHOICE 3], a word list, stated
+  STANDALONE      UNDETERMINED_FROM_INSIDE  asserted=None env_position_names=[]
+      upstream_producer    UNOBTAINABLE_FROM_INSIDE  requires: a digest of the producing step's OUTPUT, held by something other than this input [EXTERIOR]
+      downstream_consumer  UNOBTAINABLE_FROM_INSIDE  requires: the identity of whatever reads this container's output, which does not exist yet at run time [EXTERIOR]
+      total_steps          UNOBTAINABLE_FROM_INSIDE  requires: the plan the orchestrator holds [EXTERIOR]
+      own_index            UNOBTAINABLE_FROM_INSIDE  requires: the orchestrator's assignment of this container to a slot in that plan [EXTERIOR]
+  CHAIN_SILENT    UNDETERMINED_FROM_INSIDE  asserted=None env_position_names=[]
+      upstream_producer    UNOBTAINABLE_FROM_INSIDE  requires: a digest of the producing step's OUTPUT, held by something other than this input [EXTERIOR]
+      downstream_consumer  UNOBTAINABLE_FROM_INSIDE  requires: the identity of whatever reads this container's output, which does not exist yet at run time [EXTERIOR]
+      total_steps          UNOBTAINABLE_FROM_INSIDE  requires: the plan the orchestrator holds [EXTERIOR]
+      own_index            UNOBTAINABLE_FROM_INSIDE  requires: the orchestrator's assignment of this container to a slot in that plan [EXTERIOR]
+  CHAIN_DECLARED  POSITION_ASSERTED         asserted={'index': 2, 'total': 3} env_position_names=['CHAIN_INDEX', 'CHAIN_TOTAL']
+      upstream_producer    UNOBTAINABLE_FROM_INSIDE  requires: a digest of the producing step's OUTPUT, held by something other than this input [EXTERIOR]
+      downstream_consumer  UNOBTAINABLE_FROM_INSIDE  requires: the identity of whatever reads this container's output, which does not exist yet at run time [EXTERIOR]
+      total_steps          ASSERTED_BY_INPUT         requires: the plan the orchestrator holds [EXTERIOR]
+      own_index            ASSERTED_BY_INPUT         requires: the orchestrator's assignment of this container to a slot in that plan [EXTERIOR]
+  interior delta STANDALONE vs CHAIN_SILENT:   []
+  interior delta STANDALONE vs CHAIN_DECLARED: ['declared', 'env_names']
+  reading: the only feature that moves with position is one the harness wrote; the container
+           cannot tell a written claim from a true one, and verifying it requires an EXTERIOR source
+========================================================================
+load_class -- the order's compounding as arithmetic
+  state NOT_FLIGHT_RATED  assessed 4 of 7 (share 0.571)  union_is_floor True
+    unassessed  assumed_stable=False handling=UNDECLARED bound=UNBOUNDED  personnel availability under all conditions
+    unassessed  assumed_stable=False handling=UNDECLARED bound=UNBOUNDED  environmental stability
+    unassessed  assumed_stable=False handling=UNDECLARED bound=UNBOUNDED  governance continuity
+    assessed    p=0.01  economic continuity
+    assessed    p=0.02  corporate continuity in the same operating form
+    assessed    p=0.03  absence of an internal actor modifying internal access
+    assessed    p=0.04  regional connectivity
+  union of the 4 assessed failures: independent 0.0965  perfect-positive 0.04  mutually-exclusive 0.10  band [0.04, 0.1]
+  factor of safety, designed to the anticipated threat exactly: 1.0
+  reading: the number is a floor over the assessed subset; the unassessed factors enter no
+           arithmetic and the verdict turns on whether each declares a structural handling
+========================================================================
+dissimilar -- WO-1 step 4 as a specification; NOT RUN on any model
+  every output CONSTRUCTED; the checker where present is a fixed spec; copy ids [CHOICE 4]
+    same family, two copies, agree             AGREE                    n_eff=1 
+    two families disagree, no checker          DISAGREE_UNADJUDICABLE   n_eff=2 
+    two families disagree, fixed spec          DISAGREE_ADJUDICATED     n_eff=2 ['F2']
+    two families disagree, both off spec       ALL_FAIL                 n_eff=2 {'F1': False, 'F2': False}
+  reading: the run the order asks for has a precondition it does not state -- a checker
+           independent of both outputs; without one the result is fixed before any model runs

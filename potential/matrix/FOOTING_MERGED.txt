@@ -1,0 +1,118 @@
+FOOTING MERGE: FUNCTIONALITY_MATRIX dispute, resolved
+Parties: FUNCTIONALITY_MATRIX_MARKED.txt (audit response, four-tier
+scheme [F]/[P]/[J]/[U]) and the annotated matrix (counter-audit, adds
+[A] ATTESTED plus the three-axis epistemology). This file merges them.
+
+================================================================
+THE MERGED SCHEME - six tiers
+================================================================
+
+  [F] FINDING      source, cited, reproducible. Constrains EVERYONE,
+                   including readers who dislike the author.
+  [P] POSITION     one side of a live dispute, cited. Constrains the
+                   author to honesty about the dispute's existence.
+  [A] ATTESTED     first-person action in the system, witnessed by a
+                   party who moved through it. Constrains THE ATTESTER
+                   absolutely (the world pushed back). Constrains the
+                   reader NOT AT ALL - the reader has only the
+                   attester's word. [A] therefore ships with a
+                   provenance obligation: whose action, which seat,
+                   when, under what conditions. [A] without provenance
+                   is [J] with a costume.
+  [H] HYPOTHESIS   mechanism claim with neither source nor
+                   attestation. Constrains no one yet; exists to be
+                   tested.
+  [J] JUDGMENT     the author's reading, stated as a reading.
+                   Constrains no one.
+  [U] UNMARKED     no footing claimed. Default state of all prose.
+
+================================================================
+ACCEPTED FROM THE COUNTER-AUDIT
+================================================================
+
+1. The tier was missing. The four-tier scheme had no place for lived
+   observation; it filed witnessing as judgment. [A] is adopted, with
+   the provenance condition above.
+2. The three-axis model is sound (it is pragmatism, operationalized):
+   TOKEN VALUE is a representation; writing about it is unconstrained
+   by it. ACTION VALUE is what a move costs; writing about it is
+   constrained IF the writer is the one who moved. The domain is a
+   system of representations; the action layer is the only layer that
+   reaches past the representation to the constraint. Correct.
+3. The operationalization is the best actionable idea in the whole
+   exchange: ease = "how many workarounds must a party at this seat
+   run per compulsory input, per day." Countable. A diary study with
+   that count instrument converts the ease table from [A] to [F].
+
+================================================================
+CORRECTIONS TO THE COUNTER-AUDIT
+================================================================
+
+1. "[A] is often the stronger footing" - wrong as an ordering. The
+   tiers are not a strength ladder; they are a statement of WHO is
+   constrained:
+     [F] constrains everyone.
+     [A] constrains the attester; petitions the reader.
+     [J] constrains no one.
+   [A] is STRONGEST for existence and mechanism-at-contact claims
+   ("this workaround exists; this is what the gate costs at the
+   moment of contact") and WEAKEST for distribution claims ("this is
+   what the system does to people") because attestation carries:
+   survivorship (the witness lived and wrote; the counterparty who
+   didn't is absent from the record), n=1 per witness, and the
+   multi-cell provenance problem.
+2. The multi-cell provenance problem, concretely: the ease table is
+   tagged entirely [A], but no single witness has sat in all six
+   cells (banked-urban-normal, banked-emergency, unbanked-urban,
+   unbanked-rural, emergency-any, elderly-disabled-low-literacy).
+   Per-cell provenance is required: which cell is backed by whose
+   action. Without it, the whole-table [A] tag is doing covert work
+   for the cells nobody attested.
+3. "The literature cannot reproduce these rows; the literature is a
+   representation of representation" - FACTUALLY WRONG at the
+   margin, and the margin is the instrument. The financial-diaries
+   method IS the workaround counter, validated twice:
+     * Portfolios of the Poor (Collins, Morduch, Rutherford, Ruthven,
+       2009): year-long financial diaries - every transaction,
+       household by household - with 250 households in Bangladesh,
+       India, and South Africa.
+     * US Financial Diaries (Morduch & Schneider, 2012-14; The
+       Financial Diaries, 2017): a continuous year of month-to-month
+       income and transaction data for 235 low- and moderate-income
+       households in four US regions.
+   What has NOT been done: running that instrument on the six seats
+   in the ease table (rural unbanked US, reservation seats), and
+   scoring the specific derived count (workarounds per compulsory
+   input per day). So the counter-audit's own conversion path is
+   shorter than it thinks: not a new instrument - a replication with
+   a validated one, pointed at seats the literature skipped. The
+   literature did not fail to reach these rows. It reached adjacent
+   rows and stopped at the border.
+4. "The constraint runs one way" - overstated. The axes couple:
+   panic buying is action driven by representation; the actor's
+   representations shape what the action costs. And third-order
+   writing about action drifts from the attestation it inherits
+   unless provenance chains are kept - which is precisely what the
+   tier system is for. The document concedes this in its own
+   caveat ("if the writer is honest about which one they are
+   tracking").
+
+================================================================
+THE RESOLVED POSITION
+================================================================
+
+[A] and [F] are not competitors. [A] is where [F] starts in a
+literature-free zone. The whole arc of this exchange - matrix, audit,
+marked matrix, annotated matrix - is one operation repeated at finer
+grain: taking attested material and building it a footing that
+survives transmission. The tiers describe who is constrained. Nothing
+more. The workaround-count diary study is the bridge from [A] to [F]
+for the load-bearing rows - it is a funded-able, instrument-validated
+study design, not a metaphor.
+
+And the floor under the whole project, named once: the original
+evidence of this entire conversation is an [A]. Someone watched a
+fuel delivery fail and made fuel. The artifacts since have been the
+attempt to give that attestation a footing that survives being
+passed hand to hand to people who type its source. That is what the
+tiers are for.

@@ -1,0 +1,25 @@
+FWO-15 Build A -- enclosure caveat register
+STATUS RECONSTRUCTED 2026-10-04; DESIGN_WRITTEN (no corpus in hand)
+TERMS: enclosure / captive / domesticated in the animal-science external-validity sense
+
+schema per study (each field value or ABSENT):
+  E1 population sampled
+  E2 provision regime declared: token-gated | mixed | direct | ABSENT
+  E3 generalization target stated ("humans", "adults", named population, ABSENT)
+  E4 external-validity caveat re provision regime: YES | NO | ABSENT
+  E5 arm: human | captive-animal | production-animal
+
+real run: no corpus
+  arm human              n=0  E4 YES/NO/ABSENT = 0/0/0  rate None (empty denominator)  [below floor 20 -> UNMEASURED]
+      frame: NONE DECLARED
+  arm captive-animal     n=0  E4 YES/NO/ABSENT = 0/0/0  rate None (empty denominator)  [below floor 20 -> UNMEASURED]
+      frame: NONE DECLARED
+  arm production-animal  n=0  E4 YES/NO/ABSENT = 0/0/0  rate None (empty denominator)  [below floor 20 -> UNMEASURED]
+      frame: NONE DECLARED
+  human vs captive-animal    pooled UNMEASURED     branch UNMEASURED
+  human vs production-animal pooled UNMEASURED     branch UNMEASURED
+
+prior art (RUN, search snippets only): the cross-cultural market-integration
+studies measured the share of purchased calories as a covariate of fairness
+(food leg of the provision regime); see FWO-15_PRIOR_ART.md
+not rebuilt: lag count -> FWO-11 lag_count.py; question selection -> FWO-9 question_space.py

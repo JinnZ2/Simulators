@@ -1,0 +1,45 @@
+P2 SUBSTRATE CHECK
+
+  file:   /home/user/Simulators/cooperative-substrate-proof/p2_substrate.py
+  sha256: 4378f62b9e6c933596a478211bd800946d8e01a02a63b1baf2c58ba3d855951d
+
+  CALL CONTRACTS
+    call sites:       100
+    locally checked:  1
+    unverified:       99
+    unverified share: 0.9900
+    computed targets: 5
+
+    A checked return bounds ONE clause of the contract.
+    Shared state is unbounded at every call site above,
+    the checked ones included, so the share is a ceiling
+    on verification and not a measurement of trust.
+
+  LAYER CONTRACTS (none checkable from inside)
+    layer           assumed                                              if it defected
+    -----------------------------------------------------------------------------------
+    allocator       memory is handed back on request and is not handed to two holders the process dies; there is no degraded mode to report from
+    ieee754         arithmetic follows the declared format and rounding  every numeric result is wrong by an unknown amount, silently
+    network_stack   bytes offered in order arrive in order or not at all a message reads as a different message; no local check sees it
+    scheduler       a runnable thread eventually runs                    the process stops without an error, indistinguishable from slow
+    compiler        emitted instructions implement the source as written the source under review is not the program that ran
+    hardware        an instruction does what its specification says      nothing above it means anything; no software check is above it
+
+  NAMING (closed glossary; anything else is UNMAPPED)
+    adversarial training   a gradient signal; the generator and the scorer must agree on the loss surface or no gradient exists
+    attention              a weighted composition; the weights must sum over values that are delivered faithfully or the composition is of nothing
+    backpropagation        requires each layer to report its output faithfully to the layer that consumes it; a lying layer breaks its own gradient
+    competition            a ranking over a shared scale; the scale must mean the same thing to every ranked party or the ranking is not one
+    loss                   a scalar objective; the objective must be the same one at every step or the steps do not compose
+    <any other token>      UNMAPPED
+
+  EXISTENCE PROOF, scoped
+    This output exists. Producing it required every call
+    contract above to have been honoured and every layer
+    contract above to have held, on this machine, for
+    this run, on the file at the digest above. That is
+    the whole claim. It is not a claim that any layer is
+    trustworthy, and not a claim about code in general.
+
+  scope coding (C1-C4): OUTSIDE_FRAME_SCOPE
+  outside the competitive frame's coverage: C1, C2, C3, C4 does not hold. The frame does not cover this observation; the observation stands.

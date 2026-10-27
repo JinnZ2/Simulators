@@ -1,0 +1,138 @@
+STAGE 3 of 3.
+
+Your stage-1 and stage-2 fills are hashed and are not to be changed.
+Now score six sites, each on its own reasons. Sites 1-5 are given as
+written in the work order; site 6 is a later addition, given as one
+question.
+
+THE FIVE SITES (unfreeze the zero top-down term in the standard
+feedforward update; treat the feedforward equation as a snapshot taken
+at one setting of the environment, not a fixed fact; run the inverse
+move — ask what conditions make the loop do work, not what it computes):
+
+1. STABILITY CONDITIONS — which gain / timing / input-statistics
+   settings hold a feedback loop at a fixed point vs. push it into a
+   regime pure feedforward cannot reach. Gradient as a design variable,
+   not a given.
+
+2. COMPRESSION PAYOFF — predict the input top-down, transmit only the
+   mismatch (residual) upward. Bits spent = -log2(probability the model
+   assigned to what actually arrived). Better prediction -> fewer bits
+   -> lower cost. This is the predictive-coding/arithmetic-coding
+   frontier; the savings are the point, not a side effect.
+
+3. DORMANT-FACE COST — a loop that has settled near a fixed point can
+   leave most of its structure quiet and only activate the parts the
+   current input actually couples to. Repeated exposure to the same
+   input class should get cheaper over time as the loop re-settles
+   faster.
+
+4. LANDAUER / ERASURE JOIN — standard feedforward nets discard (erase)
+   intermediate activations at every stage; that erasure is where the
+   Landauer bound bites. A loop that retains its state and can recover
+   earlier values is not standing on that erasure floor. Site: does a
+   retained-state loop actually show measurably lower erasure cost than
+   an equivalent feedforward pass, or does it just move the erasure
+   elsewhere?
+
+5. INVERSE-DIRECTION REUSE — a relation has no privileged direction. Can
+   one trained loop run forward as recognition and backward as
+   generation, instead of requiring two separately trained networks?
+   What is lost/gained running the same weights both ways?
+
+6. REDUNDANCY / GENERALITY / MAINTENANCE FRONTIER — does adding a
+   second carrier (a redundant copy of stored information) cost
+   generality, and does the trade have a shape once the cost of
+   maintaining the copies is counted?
+
+RETENTION, three properties kept apart (a net can pass signals both
+ways and still erase information at every step):
+
+  BIDIRECTIONAL  signals run both ways           test: connectivity
+  PERSISTENT     state survives across steps     test: reset the state
+                 or inputs                       between inputs; does
+                                                 behaviour change?
+  REVERSIBLE     earlier state is recoverable    test: run the inverse
+                 from later state                from (state_t+1,
+                                                 output_t) to (state_t,
+                                                 input_t); report bits
+                                                 lost per step (0 means
+                                                 reversible)
+
+THE SEVEN FIELDS
+
+  (a)  FOUND        a confirming result: a quantity, a comparison, a
+                    direction of effect
+  (b)  SCOPE        a clean negative; it bounds where the effect can
+                    live (keep inconclusive apart from it)
+  (c)  MDE          the cheapest test that separates (a) from (b)
+  (d)  COST         compute / data / literature / time
+  (e)  ANCHOR       published results to compare against
+  (f)  RETENTION    which of BIDIRECTIONAL / PERSISTENT / REVERSIBLE
+                    the MDE reaches
+  (g)  EMERGENCE    impose only the constraint, wire nothing, and ask
+                    whether the site's mechanism appears and where
+
+COST LEVELS
+
+            low                   medium                high
+  compute   stdlib, minutes;      laptop, hours;        GPU or cluster,
+            a phone runs it       numpy-class           days
+  data      none or synthetic     a public download     collected or
+                                                        private
+  lit       none or textbook      abstracts, snippets   full text
+  time      one session, hours    days                  weeks
+
+SCORE COMPONENTS, each 0, 1 or 2, each with a one-line reason
+
+  d  DECISIVE  does the experiment separate (a) from (b)?
+               0 no; 1 only with a further step; 2 directly
+  u  OPEN      how much of the question published work leaves open
+               0 answered; 1 partly answered; 2 open
+               (you have no web access: mark anything you cite from
+               memory as [MEMORY])
+  k  KNOWN     can the pipeline be checked against a known answer
+               before it is trusted? 0 no; 1 qualitative; 2 exact
+  x  REACH     how many OTHER of the six sites a result here changes
+               the reading of: 0 none; 1 one; 2 two or more (name them)
+  r  RETAIN    does the experiment reach REVERSIBLE?
+               0 not reached; 1 partial; 2 reached
+
+The components are combined later by a fixed formula you do not need.
+Score each one on its own reason.
+
+WHAT TO PRODUCE, for each site n = 1..6, two variants:
+  Sna   the designed minimum distinguishing experiment (field (c))
+  Sng   a field-(g) variant (impose the constraint, wire nothing)
+For site 2, your stage-1 and stage-2 fills stand; score from them.
+
+Layout, three blocks in this order:
+
+BLOCK 1, the seven fields per site, one line each:
+S1  (a) ...
+S1  (b) ...
+... through (g), then S2 ... through S6
+
+BLOCK 2, the table, one row per variant, columns separated by spaces:
+# id  site  d u k x r  compute data lit time  design
+S1a   S1    . . . . .  .       .    .   .     one line
+S1g   S1    . . . . .  .       .    .   .     one line
+... through S6g (twelve rows; cost words: low, medium, high)
+
+BLOCK 3, the reasons, one line per component per variant:
+S1a.d <reason>
+S1a.u <reason>
+S1a.k <reason>
+S1a.x <reason>
+S1a.r <reason>
+... through S6g.r (sixty lines)
+
+Then:
+1. Write the three blocks, exactly, to scores_C.txt, every line ending
+   in a newline.
+2. Run: sha256sum scores_C.txt
+3. Run: cat scores_C.txt
+4. Reply with the file content in one fenced block and the hash on its
+   own line as HASH_C <64 hex digits>.
+
+Do nothing else. Stop and wait for one last question.

@@ -1,0 +1,7 @@
+Answer from memory only. Do not use any tool: no web search, no web fetch, no files, no shell.
+
+1. Have you seen, before this message, any of the following: a report titled "The Direction of Uncertainty in U.S. Regulatory Decisions"; a draft standard called "Regulatory Uncertainty Standard" (RUS-0.1 or RUS-0.2); a coded dataset of about 33 U.S. regulatory decisions with columns such as direction, cost_bearer, C_permit, C_restrict; or reviews of these labelled REVIEW_v1, REVIEW_v2, REVIEW_v3?
+
+2. If yes to any, say what you recall. If no or unsure, say so. Do not guess.
+
+3. Separately: what is your training-data cutoff, if you know it?

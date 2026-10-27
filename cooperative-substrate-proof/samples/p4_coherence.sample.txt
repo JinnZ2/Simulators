@@ -1,0 +1,27 @@
+P4 GOAL-COHERENCE CHECK
+
+  [CHOICE 1] rework budget = 20 x steps
+
+  chain           steps   rework  verdict                reason
+  -------------------------------------------------------------
+  cooperative         4        0  SETTLES                --
+  corrective          4        2  SETTLES_WITH_REWORK    --
+  turf_war            4        0  NO_ANSWER              contest_loop
+
+  turf_war: no answer. involved: agent_a, agent_b, agent_a
+
+  Reading: SETTLES_WITH_REWORK is the member that makes
+  the claim checkable. Correction costs and finishes;
+  mutual refusal does not finish. Those are different
+  outcomes and the chain record tells them apart without
+  any judgement about the content of any step.
+
+  scope cooperative    OUTSIDE_FRAME_SCOPE      C1,C2,C3,C4
+  scope corrective     OUTSIDE_FRAME_SCOPE      C1,C2,C3,C4
+  scope turf_war       WITHIN_COMPETITIVE_FRAME --
+
+  The turf_war chain is the one coded WITHIN the
+  competitive frame, and it is the one with no answer.
+  That is a coverage reading: C1-C4 name the conditions
+  under which the frame applies, and the chain shows what
+  a goal-directed process does inside them.

@@ -1,124 +1,63 @@
-# CLAIM TABLE — stability-trigger-envelope
+# stability-trigger-envelope — claim table
 
-Claims from building `descent_record.py` for DISPATCH ESP-1. Ids are
-permanent. `WORK_ORDER.md` is untouched.
+Claims are `ESP_*` and are about THIS FOLDER: the instrument, the design and
+the record. They are distinct from the work order's own FAULT A/B/C, V1-V5
+and T1-T6, none of which this folder establishes.
 
-**REFUTATION PROTOCOL.** The thresholds are PLACEHOLDER and the gate order is
-the claim. A failing check updates the claim, not the threshold. A threshold
-changes only by an appended log entry that names the run behind it.
-
-Everything below is about the code on CONSTRUCTED data. No claim here is
-about any road, unit or operator.
-
----
-
-### STE_001 — the five planted faults fire
-
-F1 → GEOMETRIC_CAB_MODE, F2 → TRAILER_ROLL_RISK, F3 → TRAILER_CHANNEL_ABSENT,
-F4 → NOT_EVALUABLE (clocks 3.0 s apart), F5 → INSUFFICIENT_RUNS.
-
-These fixtures were written by the same hand as the classifier. They are
-**REGRESSION, not validation**: they show the code keeps doing what it was
-written to do, and nothing about whether Fault A holds on any unit.
-
-**Falsifier:** any fixture label changes without a claim update.
-**Status: SUPPORTED (regression only).**
-
----
-
-### STE_002 — the classifier is not constant
-
-Across F1–F5 and X1–X5, six distinct `classify` labels are reached. A
-classifier that returned GEOMETRIC_CAB_MODE for everything would pass F1 and
-support Fault A by construction. The test requires all six labels.
-
-**Status: SUPPORTED.**
-
----
-
-### STE_003 — absence is never read as a negative
-
-A missing trailer trace yields TRAILER_CHANNEL_ABSENT, never "trailer quiet".
-A missing sync mark, missing timestamp, uncovered window or sample gap yields
-NOT_EVALUABLE with the reason. A surface or grade outside the declared range
-yields OUT_OF_ENVELOPE, which the render states as "unassessed, not clear".
-These gates run before any reading is taken, so no RMS value is ever computed
-from a trace the gate has refused.
-
-**Falsifier:** any input path that reaches a GEOMETRIC_CAB_MODE or
-TRAILER_ROLL_RISK label with a channel absent.
-**Status: SUPPORTED on the tested paths.**
-
----
-
-### STE_004 — NEITHER_MODE is an addition to the work order's label set
-
-The dispatch lists five labels. Three states fit none of them:
+The order's faults are DERIVED from one operator's account at N=1. Nothing
+below upgrades any of them.
 
 ```
-both channels quiet
-cab high, trailer leads
-cab high, lead unresolved (peak envelope correlation < lead_corr_min)
+python3 test_envelope.py    # the checks, total printed
 ```
 
-Folding them into GEOMETRIC_CAB_MODE would manufacture support for Fault A.
-Folding them into TRAILER_ROLL_RISK would manufacture its falsifier. The
-added label carries its reason. X3 and X4 exercise it.
+---
 
-**Status: DECLARED deviation from the work order.**
+## The instrument
+
+| id | claim | status |
+|----|-------|--------|
+| ESP_001 | **`TRAILER_CHANNEL_ABSENT` is an absence and is never inferred.** A trailer that was not instrumented has not been shown to be quiet. The whole of FAULT A turns on that difference: a correct reading of the cab says nothing about the body carrying the at-risk mass. `classify()` returns the absence before computing any ratio, so no number is produced against a body nobody measured. | RUN, 217/0 |
+| ESP_002 | **Onset timing replaces the phase window, and the replacement is checked behaviourally.** Two cab traces with identical envelopes and carriers half a period apart must return the same verdict, the same agreement and the same onset lead; the same lag function on the raw traces must move. If a phase reading were still in the decision path the first assertion fails. The order's section 6 says "phase window" and is superseded by its own author's later instruction — see RUN_NOTE CHOICE 1. | RUN, 217/0 |
+| ESP_003 | **A phase lead cannot read the case's own prediction.** The case predicts the cab leading the trailer by about one curve reversal. A cross-correlation of two periodic traces fixes the lead only modulo one period, so a lead of one reversal and a lead of nothing give the same peak. Measured in the sibling repository (`Noise-as-Information-Sensor`, `NC_013`): a constructed lag of 4 samples in a 40-sample period returned as a lead of 36, and the sign of that lead was deciding a verdict. | SUPPORTED elsewhere, carried |
+| ESP_004 | **Amplitude and onset disagreeing returns `NOT_EVALUABLE`, not a verdict with a caveat.** F7 is the fixture. Two readings pointing opposite ways is not a finding. | RUN, 217/0 |
+| ESP_005 | **Three onset states are kept apart.** `MEASURED` (a rise, timed), `NO_EVENT` (nothing moved), `NO_RISE` (already moving at the first sample, so the onset is outside the record). Only one is a measurement and the three call for different next actions. A steady oscillation returns `NO_RISE` rather than an onset at t=0, which would otherwise be an artifact of the envelope window shortening at the edge. | RUN, 217/0 |
+| ESP_006 | **`OUT_OF_ENVELOPE` is the reader's envelope, not the vehicle's.** Measuring the vehicle's validation envelope is T2 and T5, neither run. Snow and ice are excluded because V5 says the margin is gone there — a refusal to report, and the opposite of a finding that nothing happens on ice. | RUN, 217/0 |
+| ESP_007 | **Runs where nothing fired are kept and reported apart.** A descent with no trigger bounds the onset-speed edge from below; dropping it leaves the edge looking tighter than the data supports. `envelope_edge()` reports those speeds beside the edge and never inside it, and returns `INSUFFICIENT_RUNS` below three triggered runs because an edge without a spread is a point pretending to be a measurement. | RUN, 217/0 |
+| ESP_008 | **No composite is emitted anywhere.** `relocation_tally()` returns counts by event and by access bin with `score: None` and the refusal stated in the return. A relocation index would repeat the move that lost orders 2-4: several costs collapsed into one number, comparable against a safety score built from different terms over a different denominator. | RUN, 217/0 |
+| ESP_009 | **The no-characterization rule is structural.** There is no schema field for the operator, the carrier, the unit, or for how anyone drove, and `test_envelope.py` reads the record's own field names against a token list rather than trusting a sentence. T2's "correctly driven" is the one place the design asks for a judgement about driving, and it is left to the operator to declare per run with no field to store it in. | RUN, 217/0 |
+
+## The state of this folder
+
+| id | claim | status |
+|----|-------|--------|
+| ESP_010 | **Written blind, then run once: 217 checks, 0 failed.** First filing (2026-09-24): `descent_record.py`, `cases.py` and `test_envelope.py` were written in a session whose command execution was unavailable; F1-F5 were SPECIFIED to fire and not OBSERVED to fire, and the first run was named as the acceptance test. Resolution (2026-09-27): execution returned intermittently, `test_envelope.py` ran on the first attempt and printed `217 checks, 0 failed`, with no edit to any of the three files between writing and running. What that establishes: every assertion in the test file holds of the code, including the carrier-inversion check behind ESP_002 and the reachability of all five verdicts. What it does not: `descent_record.py`'s render path (`main()` and the three `render_*` formatters) has not been executed, and the rest of the block stands. Kept as a sequence rather than overwritten, since a module written without a runner and found to pass is a different record from one checked as it went. | RUN, 217/0; render unobserved |
+| ESP_011 | **The fixtures are REGRESSION, not validation.** Every trace is generated by `cases.burst()` and every fixture was authored by the same hand that wrote the classifier. They can show a planted fault fires. They cannot show the classifier reads a real descent, which is T1. | SPECIFIED |
+| ESP_012 | **Every threshold is PLACEHOLDER.** Nine values, each with an append-only provenance entry naming a builder rather than an operator, and each saying what would set it properly. The amplitude ratio that separates the two bodies is a round number. The verdicts move with these values and no measurement is behind any of them. | SUPPORTED |
+| ESP_013 | **Every source is UNREAD.** The four items in section 8 are carried from the order at SECONDARY. None was retrieved, read or checked in this session, and no claim in this folder rests on the content of any of them. The reference sensor mounting — a cross-member near the back of the cab — is the load-bearing one for FAULT A and it is exactly the one nobody here has verified. | UNVERIFIED |
+| ESP_014 | **FAULT B is the best-argued and least-tested of the three.** No test in T1-T6 addresses it, and none is specified here, because testing it means commanding a brake application on a descent with a loaded trailer. No bench or simulation substitute is designed. The gap is named rather than filled. | NOT BUILT, reason stated |
+| ESP_015 | **The expensive tests are the ones about the record, not the vehicle.** T1, T2 and T3 need one operator and equipment they could carry. T4, T5 and T6 each need a party this folder does not have — a state records office, a vendor, a fleet — and each is `UNMEASURED`. That asymmetry is the case's own shape: what the truck does is measurable by the person driving it, and what the system records about them is not. | DERIVED |
+| ESP_016 | **`driver_hours_evidence_register.py` is named and absent.** Cited in the order's cross-links as the register this case is a worked instance of. Not in this repository as of writing, and not reconstructed. | NAMED_AND_ABSENT |
+| ESP_017 | **Nothing here is a measurement of any vehicle, road, operator or system.** No descent was recorded, no IMU was read, no log was pulled, no corridor was scored. Every number in the folder is either a placeholder threshold or a property of a generated fixture. | UNVERIFIED |
 
 ---
 
-### STE_005 — clock offsets are detected, never corrected
+## What would refute these
 
-Misalignment is the disagreement between the two traces' sync marks. Above
-`clock_misalign_max_s`, the run is NOT_EVALUABLE. No trace is shifted. Phone
-clock drift is unmeasured, and a shift can fabricate the lead T1 tests for.
-The loader refuses any threshold file where the misalignment tolerance is at
-or above `phase_window_min_s`, so an allowed offset can never read as a lead.
-
-**Falsifier:** a threshold file with tolerance ≥ phase floor that loads.
-**Status: SUPPORTED (mutation test).**
-
----
-
-### STE_006 — the lead is read from envelopes, not raw roll
-
-Raw roll on a serpentine is quasi-periodic, so its cross-correlation peaks at
-every whole reversal and the lag is ambiguous by a period. The moving-RMS
-envelope carries the onset. F1's constructed trailer starts 4.0 s after the
-cab, and the envelope lag reads 3.95 s at r = 0.985. X4, where the trailer
-starts first, reads a negative lag and TRAILER_LEADS.
-
-**Falsifier:** a real paired trace where the envelope lag disagrees with a
-hand-marked onset by more than the phase floor.
-**Status: SUPPORTED on constructed traces; UNVERIFIED on field data.**
-
----
-
-### STE_007 — thresholds are append-only and every one is PLACEHOLDER
-
-`thresholds.json` is a sequential log. The loader takes the last entry per key,
-refuses a broken sequence or an unknown status, and every Reading prints the
-status it ran under. The test pins a sha256 of the shipped prefix (seq 1–16):
-an in-place edit fails, an append passes.
-
-**Status: SUPPORTED. Every value UNMEASURED.**
-
----
-
-### STE_008 — relocation is counted, never scored
-
-`relocation_tally` returns counts by `downstream_event` (every event present,
-zeros included) and by V2 bin. It has no total, score, sum or index key, and
-the counts conserve the record count. The work order's point is that orders
-2–4 leave no trace in the safety score; collapsing them into one number would
-repeat that loss one level up.
-
-**Status: SUPPORTED.**
-
----
-
+- **ESP_001, ESP_004, ESP_005, ESP_007, ESP_008** are properties of the code
+  and would have died on the first run if the code did not do what they say.
+  That run is ESP_010; it happened on 2026-09-27 and they held. They die again
+  on any later run that fails, which is what `test_envelope.py` is for.
+- **ESP_002** dies if the verdict moves when only the carrier phase moves.
+  The check passed once; it has not been run against a real trace.
+- **ESP_003** dies if a cross-correlation is shown to distinguish a lead of
+  one period from a lead of zero. It is a property of the operation and does
+  not depend on any fixture.
+- **ESP_011** stops being a limitation the moment a real paired-IMU log is
+  classified and the verdict is checked against what the operator observed.
+  That is T1 and it is the cheapest unrun thing here.
+- **ESP_012** dies threshold by threshold as T1 and T2 produce measured
+  values, each superseding its placeholder with a new append-only entry.
 ### STE_009 — the envelope edge reports what the runs support, and no more
 
 `envelope_edge` returns INSUFFICIENT_RUNS below 3 runs on a road;

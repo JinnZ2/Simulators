@@ -1,0 +1,101 @@
+BLIND CALIBRATION ON SITE T, INDEPENDENT SECOND SCORER  (tools/triage_blind_run.py)
+comparison, stage 1:   MATCH 1  PARTIAL 4  NO_SLOT 1  NOT_LOCATED 1
+comparison, stages 1-2: MATCH 2  PARTIAL 3  NO_SLOT 1  NOT_LOCATED 1
+# second scorer -> rubric, same row, 23 rows (17 admitted, 6 PROPOSED)
+# field     same  1 step  2 steps   (2 steps = more than one step apart)
+d            16       7        0
+u             9      14        0
+k            17       6        0
+x            14       9        0
+r            16       5        2
+compute      19       4        0
+data         22       1        0
+lit          15       8        0
+time         16       7        0
+all         144      61        2   of 207 cells
+admitted    104      48        1
+proposed     40      13        1
+# site      same  1 step  2 steps   (rows x 9 fields)
+S1           23       4        0
+S2           19      15        2
+S3           17      10        0
+S4           26      10        0
+S5           20      16        0
+S6           39       6        0
+# more than one step apart
+S2b  r        scorer 0  rubric 2
+S2e  r        scorer 0  rubric 2
+# row   scorer d u k x r  cost  |  rubric d u k x r  cost   (cost: compute data lit time, L M H)
+S1a   2 1 2 2 1  LLLL   |  2 1 2 2 1  LLLL
+S1e*  2 1 2 2 1  MLLL   |  2 1 2 2 1  LLLL
+S1g   2 1 2 2 0  MLLL   |  2 1 2 2 1  MLMM
+S2a   2 0 2 2 2  LLLL   |  2 1 2 1 2  LLLL
+S2b   1 1 1 2 0  MLML   |  2 2 1 2 2  MLMM
+S2c   1 0 1 1 0  MMHM   |  2 1 2 2 1  MMHM
+S2e*  1 1 2 2 0  MLLL   |  2 2 1 2 2  LLML
+S3a   2 1 2 2 0  LLLL   |  2 1 1 1 0  LLLL
+S3e*  1 1 1 2 0  MLLL   |  2 1 1 1 0  LLML
+S3g   1 1 1 2 0  MLLL   |  2 1 1 1 0  MLMM
+S4a   2 0 2 2 2  LLLL   |  2 1 2 2 2  LLLL
+S4b   1 1 2 2 1  MLMM   |  1 2 2 2 2  MLHH
+S4e*  2 1 2 2 2  LLLL   |  2 2 2 2 2  LLLL
+S4g   1 1 2 2 2  LLLL   |  1 2 2 2 2  MLMM
+S5a   2 0 2 2 2  LLLL   |  1 1 2 1 2  LLLL
+S5b   1 1 1 2 1  MLML   |  2 1 2 1 2  MLMM
+S5e*  2 1 2 2 2  LLLL   |  2 2 2 1 2  LLLL
+S5g   1 1 1 2 1  MLLL   |  1 2 2 1 2  MLMM
+S6a   0 1 0 2 0  LLHM   |  0 2 1 2 0  LMHM
+S6b   2 0 2 2 1  LLLL   |  2 0 2 2 1  LLLL
+S6c   1 1 1 2 1  MLMM   |  1 2 1 2 1  MLMM
+S6e*  2 1 2 2 1  LLLL   |  2 1 2 2 1  LLLL
+S6g   1 1 1 2 1  MLLM   |  1 2 1 2 1  MLMM
+# * PROPOSED row (8.2), not in the triage table
+# site rank by the best row, declared choices, no profile gate
+Q-LOOP admitted      site  scorer      rank  rubric      rank
+                     S1    2.500       1     2.500       1
+                     S2    2.000       3     2.000       3
+                     S3    2.500       1     1.500       5     moved 4
+                     S4    2.000       3     2.500       1     moved 2
+                     S5    2.000       3     1.000       6     moved 3
+                     S6    2.000       3     2.000       3
+Q-REV  admitted      site  scorer      rank  rubric      rank
+                     S1    1.250       4     1.250       3
+                     S2    2.000       1     2.000       2
+                     S3    NOT_REACHED -     NOT_REACHED -
+                     S4    2.000       1     2.500       1
+                     S5    2.000       1     1.000       4     moved 3
+                     S6    1.000       5     1.000       4
+Q-LOOP with PROPOSED site  scorer      rank  rubric      rank
+                     S1    2.500       1     2.500       2
+                     S2    2.000       6     2.000       5
+                     S3    2.500       1     1.500       6     moved 5
+                     S4    2.500       1     3.000       1
+                     S5    2.500       1     2.500       2
+                     S6    2.500       1     2.500       2
+Q-REV  with PROPOSED site  scorer      rank  rubric      rank
+                     S1    1.250       4     1.250       4
+                     S2    2.000       3     2.000       3
+                     S3    NOT_REACHED -     NOT_REACHED -
+                     S4    2.500       1     3.000       1
+                     S5    2.500       1     2.500       2
+                     S6    1.250       4     1.250       4
+# first place over the 64-setting sweep (CHOICE 4, 5)
+# profile       question  rubric                    second scorer
+lab            Q-LOOP    FIRST_UNRESOLVED:S1,S4    FIRST_UNRESOLVED:S1,S3
+lab            Q-REV     FIRST_ROBUST:S4           FIRST_UNRESOLVED:S2,S4,S5
+laptop-online  Q-LOOP    FIRST_UNRESOLVED:S1,S4    FIRST_UNRESOLVED:S1,S3
+laptop-online  Q-REV     FIRST_ROBUST:S4           FIRST_UNRESOLVED:S2,S4,S5
+phone          Q-LOOP    FIRST_UNRESOLVED:S1,S4    FIRST_UNRESOLVED:S1,S3
+phone          Q-REV     FIRST_ROBUST:S4           FIRST_UNRESOLVED:S2,S4,S5
+this-session   Q-LOOP    FIRST_UNRESOLVED:S1,S4    FIRST_UNRESOLVED:S1,S3
+this-session   Q-REV     FIRST_ROBUST:S4           FIRST_UNRESOLVED:S2,S4,S5
+# the same with the six PROPOSED rows admitted
+lab            Q-LOOP    FIRST_ROBUST:S4           FIRST_UNRESOLVED:S1,S3,S4,S5,S6
+lab            Q-REV     FIRST_ROBUST:S4           FIRST_UNRESOLVED:S4,S5
+laptop-online  Q-LOOP    FIRST_ROBUST:S4           FIRST_UNRESOLVED:S1,S3,S4,S5,S6
+laptop-online  Q-REV     FIRST_ROBUST:S4           FIRST_UNRESOLVED:S4,S5
+phone          Q-LOOP    FIRST_ROBUST:S4           FIRST_UNRESOLVED:S1,S3,S4,S5,S6
+phone          Q-REV     FIRST_ROBUST:S4           FIRST_UNRESOLVED:S4,S5
+this-session   Q-LOOP    FIRST_ROBUST:S4           FIRST_UNRESOLVED:S1,S3,S4,S5,S6
+this-session   Q-REV     FIRST_ROBUST:S4           FIRST_UNRESOLVED:S4,S5
+VERDICT: PASS   checks=44 failed=0

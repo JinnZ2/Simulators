@@ -1,0 +1,10 @@
+== A01  Aducanumab accelerated approval (Alzheimer's) (FDA-CDER, 2021, frame A)
+authority  AUTH-FDCA-506C[statute UNREACHABLE] -> AUTH-PHSA-351[statute UNREACHABLE] -> AUTH-21CFR601E[regulation UNREACHABLE] -> AUTH-21CFR14[regulation UNREACHABLE] -> AUTH-GD-EXPEDITED[guidance UNREACHABLE]
+evidence   EV-F001   UNREACHABLE  record_fact          -
+evidence   EV-U01    UNREACHABLE  unlocated_input      -
+evidence   EV-V015   UNREACHABLE  record_fact          SRC-U-c2e1249f
+evidence   EV-V016   UNREACHABLE  record_fact          SRC-U-54d14204
+decided    ACT-FDA-CDER, ACT-P-CAVAZZONI, ACT-P-WOODCOCK
+overruled  ACT-AC-PCNS
+sponsored  ACT-SP-BIOGEN
+flags      NO_LOCATED_SOURCE; AUTHORITY_GAP (AUTH-FDCA-506C, AUTH-PHSA-351, AUTH-21CFR601E, AUTH-21CFR14, AUTH-GD-EXPEDITED); ORIGINATOR_ONLY (action direction)

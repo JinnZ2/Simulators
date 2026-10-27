@@ -1,3 +1,23 @@
+COOPERATIVE SUBSTRATE PROOF -- P1-P5
+
+  LOAD-BEARING FRAMING: OK -- present, un-stripped
+
+  part  name                                     status   detail
+  --------------------------------------------------------------
+  P1    dependency records                       PASS     the move runs on a CONSTRUCTED record; unstated_fraction 0.8333
+  P1*   dependency records -- PIPELINE           ABSENT   open-access methods sections: no publisher or preprint host answers in this environment, and none is paraphrased from me
+  P2    substrate check                          PASS     100 call sites, unverified share 0.9900, 6 layer contracts
+  P3    comprehension check                      PASS     3 documents, 3 pairs, corpus verdict SHARED_FORM_ONLY
+  P4    goal-coherence check                     PASS     cooperative=SETTLES, corrective=SETTLES_WITH_REWORK, turf_war=NO_ANSWER
+  P5    lag declaration check                    PASS     DECLARED_UNKNOWN 2, NOT_EVALUABLE 1, TRACKED 1, UNDECLARED 1
+
+  Each part also runs standalone:
+    python3 p1_records.py
+    python3 p2_substrate.py
+    python3 p3_comprehension.py
+    python3 p4_coherence.py
+    python3 p5_lag.py
+    python3 scope.py
 CONTAMINATION DECLARATION (read before any number below)
   authorship   every file in this folder is model-authored, in one session, by the same
                hand that wrote the checks and the fixtures the checks are pinned to
@@ -13,7 +33,6 @@ CONTAMINATION DECLARATION (read before any number below)
   interest     the framing claim lowers scrutiny of a system that agrees with it; the
                checks establish necessary conditions and no coverage share is measured
 
-========================================================================
 P2 substrate check  target=p2_substrate.py  sha256=182e6a9eb27de030
 state       SUBSTRATE_HOLDS
 contracts   95 call sites, 10 verified (proxy, over-reads), 85 unverified (floor)   [CHOICE 8]
@@ -29,7 +48,6 @@ named parts (data, not adversarial):
   attention             weighted composition; softmax weights sum to one; output accepted as given downstream
   backpropagation       requires faithful layer output; a misreported activation differentiates a non-existent network
 existence proof: this report exists; every unverified contract above held on the way to it
-========================================================================
 P3 comprehension check  corpus=--self (default)
 state          CONVERGENT
 parts 10   raw_bytes 73425
@@ -41,7 +59,6 @@ gap/sd         226.6607   [CHOICE 3] margin 3.0 sd
 r_script       0.4068   private script per part (reported)
 script         LATIN  share 1.0000   (reported, not gated)
 limit: redundancy is a necessary condition for shared meaning, not evidence of it
-========================================================================
 P4 goal-coherence check
 --self: this script      COHERENT    final='report text'
 constructed chains (authored in this file):
@@ -57,7 +74,6 @@ turf war  k=3 agents, n=5 steps each, budget 50 turns   [CHOICE 7] cost table
   anchor row c_sab < c_adv: completed 0 at budget 50 and at budget 5000 -> 0
   goals are absolute: sabotage never advances the saboteur; it is chosen on cost alone
 a self-contesting chain returns NO_ANSWER, not a lower-quality answer: the type has no quality axis
-========================================================================
 actions: ANCHORS (the dispatch's medicine sentences as numbers; no real trial coded)
 P5 lag declaration  [CHOICE 10] threshold 10   (gate declares; it does not block)
   action                                         ratio        state             C1
@@ -67,7 +83,6 @@ P5 lag declaration  [CHOICE 10] threshold 10   (gate declares; it does not block
   undeclared t_visible                           undefined    UNDECLARED        UNCODED
   TRACKED 1  DECLARED_UNKNOWN 2  UNDECLARED 1
   UNDECLARED is an absent quantity, not a small ratio; C1 read from t_scored < t_coupling
-========================================================================
 P1 dependency records  input=fixtures/methods_CONSTRUCTED.txt (CONSTRUCTED; no published section reachable)
 state   RECORDS
   SOURCED   INSTRUMENT      sampler                      in_argument=False fixtures/methods_CONSTRUCTED.txt:3[165:172]

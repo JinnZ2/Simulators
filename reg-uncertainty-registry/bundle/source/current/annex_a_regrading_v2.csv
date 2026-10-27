@@ -1,0 +1,34 @@
+id,decision,U,Cp_score,Cr_score,gap,Cp,Cr,floor,actual,deviation,status,Cr_rationale
+A01,Aducanumab accelerated approval (Alzheimer's),U3,7,8,-1,C3,C4,D2,D1,-1,NON-CONFORM: below floor,Alzheimer's: millions; no effective disease-modifying alternative; progression irreversible
+A02,Eteplirsen accelerated approval (DMD),U3,5,6,-1,C2,C3,D2,D1,-1,NON-CONFORM: below floor,"DMD pediatric, progressive fatal; no alternative at time"
+A03,Zohydro ER approval (hydrocodone),U3,6,6,0,C3,C3,D3,D1,-2,NON-CONFORM: below floor,chronic pain; other opioids exist
+A04,Makena (17-OHPC) withdrawal,U1,3,3,0,C1,C1,D5,D5,0,CONFORM (exact),no efficacy shown in confirmatory -> no benefit denied
+A05,Rofecoxib post-withdrawal panel (COX-2),U2,6,5,1,C3,C2,D3,D1,-2,NON-CONFORM: below floor,other NSAIDs exist
+A06,Molnupiravir EUA (COVID-19),U3,6,7,-1,C3,C3,D2 (R5),D2,0,CONFORM (R5 emergency),pandemic; few outpatient antivirals at the time
+A07,Flibanserin approval (Addyi),U2,4,5,-1,C1,C2,D1,D2,1,CONFORM (exceeds floor),HSDD; no approved alternative but non-life-threatening
+A08,Bevacizumab breast-cancer indication withdrawal,U1,5,6,-1,C2,C3,D5,D5,0,CONFORM (exact),confirmatories showed no benefit; other agents exist
+A09,Donanemab full approval (Alzheimer's),U2,7,8,-1,C3,C4,D1,D1,0,CONFORM (exact),Alzheimer's; progressive; few alternatives
+A10,Midodrine proposed withdrawal reversed,U3,3,5,-2,C1,C2,D2,D1,-1,NON-CONFORM: below floor,only approved drug for symptomatic orthostatic hypotension in severe cases
+B01,"Pelvic mesh (POP) reclassified II->III, PMA required",U3,8,5,3,C4,C2,D4,D4,0,CONFORM (exact),alternatives exist; device already exiting market
+B02,Metal-on-metal hip PMA requirement (effective 2016),U3,8,5,3,C4,C2,D4,D4,0,CONFORM (exact),same
+B03,Animal Rule established (efficacy from animals),U3,4,7,-3,C1,C3,D2,D1,-1,NON-CONFORM: below floor,no countermeasures possible otherwise; human efficacy trials unethical
+B04,GLP-1 RA class boxed warning (thyroid C-cell),U3,6,6,0,C3,C3,D3,D2,-1,NON-CONFORM: below floor,major diabetes/obesity therapies; warning doesn't block access
+B05,FD&C Red No. 3 revoked (food 2027 / drugs 2028),U3,8,5,3,C4,C2,D4,D5,1,STATUTE/JUDICIAL-EXCEPTION (undeclared),color additive; cosmetic function; substitutes exist
+B06,BVO food authorization revoked,U3,8,5,3,C4,C2,D4,D5,1,CONFORM (exceeds floor),emulsifier; substitutes exist
+B07,Titanium dioxide: no action (vs EU ban),U3,8,5,3,C4,C2,D4,D1,-3,NON-CONFORM: below floor,whitener; substitutes exist
+B08,Aspartame: FDA publicly rejects IARC 2B,U3,8,5,3,C4,C2,D4,D1,-3,NON-CONFORM: below floor,sweetener; substitutes abundant
+C01,Atrazine re-registration,U3,9,6,3,C4,C3,D4,D1,-3,NON-CONFORM: below floor,herbicide; alternatives exist
+C02,Atrazine interim registration review (re-approved),U3,9,6,3,C4,C3,D4,D1,-3,NON-CONFORM: below floor,same
+C03,Glyphosate interim decision 'not likely carcinogenic',U3,9,6,3,C4,C3,D4,D1,-3,NON-CONFORM: below floor,herbicide; alternatives exist (at higher cost)
+C04,Chlorpyrifos all tolerances revoked,U3,9,5,4,C4,C2,D4,D5,1,STATUTE/JUDICIAL-EXCEPTION (undeclared),pest tool; alternatives for most crops
+C05,Neonicotinoid proposed interim decisions (5 AIs),U2,9,6,3,C4,C3,D3,D2,-1,NON-CONFORM: below floor,seed treatments; alternatives exist
+C06,Lead & Copper Rule Improvements: AL 15->10 ppb,U1,9,6,3,C4,C3,D2,D2,0,CONFORM (exact),utility cost; service continuity essential
+C07,"PFAS NPDWR: PFOA/PFOS MCL 4 ppt, MCLG 0",U2,9,6,3,C4,C3,D3,D2,-1,NON-CONFORM: below floor,utility cost; small-system viability
+C08,UCMR 6 proposed WITHOUT microplastics,U4,9,5,4,C4,C2,D5,D1,-4,NON-CONFORM: below floor,monitoring cost only; no health standard at issue
+C09,Saccharin delisted as hazardous waste constituent,U3,8,5,3,C4,C2,D4,D1,-3,NON-CONFORM: below floor,sweetener; substitutes exist
+C10,Glyphosate review still open; Durnell preemption,U3,9,6,3,C4,C3,D4,D1,-3,NON-CONFORM: below floor,as C03
+D01,Marijuana partial Schedule III (medical only),U3,7,7,0,C3,C3,D3,D2,-1,NON-CONFORM: below floor,research blocked for decades; medical access
+D02,Saccharin ban proposed -> Congress moratorium,U3,8,7,1,C4,C3,D4,D2,-2,NON-CONFORM: below floor,1977: only remaining artificial sweetener (cyclamate banned 1969); diabetics
+B00,Pelvic mesh 510(k) clearances (predicate chain),U4,8,5,3,C4,C2,D5,D1,-4,NON-CONFORM: below floor,native-tissue repair alternatives exist
+B00b,Metal-on-metal hip 510(k) clearances,U4,8,5,3,C4,C2,D5,D1,-4,NON-CONFORM: below floor,other bearing couples exist
+E01,Night shift work: no US occupational standard (exposure unregulated),U3,8,6,2,C4,C3,D4,D1,-3,NON-CONFORM: below floor,schedule mandates/compensation cost employers; workers retain employment
