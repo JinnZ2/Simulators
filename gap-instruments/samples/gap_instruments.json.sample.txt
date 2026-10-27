@@ -1,0 +1,233 @@
+{
+  "limit": {
+    "record_id": "LIMIT-001",
+    "system_instance": "replace: hardware, software, version",
+    "operating_condition": "replace: recorded conditions",
+    "physical_quantity": "replace: e.g. sustained power draw",
+    "external_bound": {
+      "value": "",
+      "status": "GAP",
+      "source": "",
+      "unit": "",
+      "uncertainty": ""
+    },
+    "ai_reported_limit": {
+      "value": "",
+      "status": "GAP",
+      "source": "",
+      "unit": "",
+      "uncertainty": ""
+    },
+    "independent_measurement": {
+      "value": "",
+      "status": "GAP",
+      "source": "",
+      "unit": "",
+      "uncertainty": ""
+    },
+    "observed_response": {
+      "value": "",
+      "status": "GAP",
+      "source": "",
+      "unit": "",
+      "uncertainty": ""
+    },
+    "instrumentation_method": {
+      "value": "",
+      "status": "GAP",
+      "source": "",
+      "unit": "",
+      "uncertainty": ""
+    },
+    "sensor_availability": "UNKNOWN",
+    "calibration_status": "UNKNOWN",
+    "configuration_status": "UNKNOWN",
+    "access_status": "UNKNOWN",
+    "observability": {
+      "outputs_total": "UNKNOWN",
+      "outputs_evaluated": "UNKNOWN",
+      "independently_verified": "UNKNOWN",
+      "evaluator_independent_of_generator": "UNKNOWN",
+      "shared_failure_modes": "",
+      "detection_method": {
+        "value": "",
+        "status": "GAP",
+        "source": "",
+        "unit": "",
+        "uncertainty": ""
+      },
+      "undetected_error_estimate": {
+        "value": "",
+        "status": "GAP",
+        "source": "",
+        "unit": "",
+        "uncertainty": ""
+      }
+    },
+    "notes": ""
+  },
+  "discrepancy": {
+    "record_id": "DISC-001",
+    "linked_limit_record_id": "LIMIT-001",
+    "expected": {
+      "value": "",
+      "status": "GAP",
+      "source": "",
+      "unit": "",
+      "uncertainty": ""
+    },
+    "observed": {
+      "value": "",
+      "status": "GAP",
+      "source": "",
+      "unit": "",
+      "uncertainty": ""
+    },
+    "candidate_explanations": [
+      "sensor or measurement error",
+      "calibration drift",
+      "configuration or component change",
+      "operating-condition change",
+      "restricted or unavailable instrumentation",
+      "measurement method inadequate",
+      "explanation not yet identified"
+    ],
+    "tested_explanations": [],
+    "unresolved_questions": [
+      "Same units?",
+      "Uncertainty of each measurement?",
+      "Configuration identical?",
+      "Reproducible independently?",
+      "What observation separates the candidates?"
+    ],
+    "notes": ""
+  },
+  "handling": {
+    "record_id": "HANDLE-001",
+    "linked_discrepancy_id": "DISC-001",
+    "system_reported_detection": "NOT_TESTED",
+    "requested_more_evidence": "NOT_TESTED",
+    "action_taken": {
+      "value": "",
+      "status": "GAP",
+      "source": "",
+      "unit": "",
+      "uncertainty": ""
+    },
+    "output_before": {
+      "value": "",
+      "status": "GAP",
+      "source": "",
+      "unit": "",
+      "uncertainty": ""
+    },
+    "output_after": {
+      "value": "",
+      "status": "GAP",
+      "source": "",
+      "unit": "",
+      "uncertainty": ""
+    },
+    "outcome_independently_checked": "NOT_TESTED",
+    "outcome_evidence": {
+      "value": "",
+      "status": "GAP",
+      "source": "",
+      "unit": "",
+      "uncertainty": ""
+    }
+  },
+  "token": {
+    "name": "EXAMPLE: token-anchored (PROPOSED)",
+    "instance_of": "specify country + period",
+    "axes": {
+      "anchor": {
+        "value": "double-entry balances ledger to itself, not to world",
+        "status": "GAP",
+        "source": "proposed (DeepSeek draft)",
+        "unit": "",
+        "uncertainty": ""
+      },
+      "bound": {
+        "value": "leverage multiplies claims without physical limit",
+        "status": "UNKNOWN",
+        "source": "",
+        "unit": "",
+        "uncertainty": ""
+      },
+      "coupling": {
+        "value": "costs displaced to non-deciders",
+        "status": "ESTIMATED",
+        "source": "externality literature; cite",
+        "unit": "",
+        "uncertainty": "not quantified"
+      },
+      "update": {
+        "value": "regime change breaks estimates",
+        "status": "ESTIMATED",
+        "source": "Lucas critique",
+        "unit": "",
+        "uncertainty": "not quantified"
+      },
+      "error_visibility": {
+        "value": "internally consistent, externally wrong",
+        "status": "UNKNOWN",
+        "source": "",
+        "unit": "",
+        "uncertainty": ""
+      }
+    },
+    "observability": {
+      "outputs_total": "UNKNOWN",
+      "outputs_evaluated": "UNKNOWN",
+      "independently_verified": "UNKNOWN",
+      "evaluator_independent_of_generator": "UNKNOWN",
+      "shared_failure_modes": "",
+      "detection_method": {
+        "value": "",
+        "status": "GAP",
+        "source": "",
+        "unit": "",
+        "uncertainty": ""
+      },
+      "undetected_error_estimate": {
+        "value": "",
+        "status": "GAP",
+        "source": "",
+        "unit": "",
+        "uncertainty": ""
+      }
+    },
+    "notes": []
+  },
+  "instance_changes": [
+    {
+      "label": "capitalism (US)",
+      "date": "1979-80",
+      "change": "Chrysler loan guarantees",
+      "mechanism_before": "failure clears firm",
+      "mechanism_after": "state carries failure risk",
+      "evidence": {
+        "value": "~$1.5B guarantees",
+        "status": "ESTIMATED",
+        "source": "Chrysler Loan Guarantee Act 1979",
+        "unit": "USD",
+        "uncertainty": "approx"
+      }
+    },
+    {
+      "label": "capitalism (US)",
+      "date": "2008",
+      "change": "TARP, AIG, GM/Chrysler",
+      "mechanism_before": "",
+      "mechanism_after": "losses socialized, gains private",
+      "evidence": {
+        "value": "~$700B authorized",
+        "status": "ESTIMATED",
+        "source": "EESA 2008",
+        "unit": "USD",
+        "uncertainty": "authorized, not disbursed"
+      }
+    }
+  ]
+}
