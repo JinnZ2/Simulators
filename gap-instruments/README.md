@@ -92,6 +92,13 @@ A2  CalibrationRecord          predict, then measure. target_match first; a
                                n / scored / MAE as a (least, greatest) band.
                                A quantity with no numeric scored row reads
                                None, never 0.
+A2r CalibrationRecord          operator correction, same day: error has a
+    .safe_side                 direction. OVER | UNDER | SYMMETRIC | UNSTATED
+                               (default; scored symmetric and reported). Under
+                               OVER an overestimate of any size is a HIT and its
+                               size is the realized buffer (signed_error, mean
+                               signed error per quantity); an underestimate
+                               beyond tolerance is a MISS.
 A3  ConfoundRecord             name, present (True | False | "UNKNOWN"), size
                                (Evidence or None), control_used,
                                interpretation (default GAP). An
@@ -107,18 +114,26 @@ existing five.
 ### Seed run
 
 ```text
-record            target           outcome     abs_error  tolerance  method
-----------------  ---------------  ----------  ---------  ---------  ----------
-CAL-MILES-GPS     TARGET_MISMATCH  NOT_SCORED  --         --         NOT_TESTED
-CAL-MILES-ACTUAL  MATCH            HIT         0-1        0.5        NOT_TESTED
-CAL-FUEL          MATCH            HIT         --         --         NO (categorical)
-CAL-TIME          MATCH            HIT         0.9667     1.0        NOT_TESTED
+record            target           outcome     signed     safe      method
+----------------  ---------------  ----------  ---------  --------  ----------
+CAL-MILES-GPS     TARGET_MISMATCH  NOT_SCORED  --         OVER      NOT_TESTED
+CAL-MILES-ACTUAL  MATCH            HIT         0 to +1    OVER      NOT_TESTED
+CAL-FUEL          MATCH            HIT         --         UNSTATED  NO (categorical)
+CAL-TIME          MATCH            HIT         +0.9667    OVER      NOT_TESTED
 
 summary   n 4, hits 3, target mismatches 1
 MAE       miles 0-1 (one row), on-duty time 0.9667, fuel None (categorical)
+signed    miles 0 to +1, on-duty time +0.9667: both overestimates, the buffer
 LIMIT-EAST-2026   limit_basis empirical_rule; not in gap_fields
 confounds 12 seeded; target_mismatch present, size 2.7-3.7 mi, meaning GAP
 ```
+
+The operator's correction (2026-10-27), entered as stated: a driver relying on
+gauges, dashboard and GPS adds buffer for each instrument's deviation plus
+environment, construction, traffic and road wear, and overestimating still
+arrives on time where underestimating does not. The trip rows carry goal
+"arrive on time", safe_side OVER and that buffer. The fuel row states neither
+and is left UNSTATED.
 
 The three dictated verdicts (miles vs actual hit, fuel hit, time hit) and the
 miles-vs-GPS mismatch come out of the rules. They are the verdicts the rules
@@ -136,15 +151,22 @@ A2-1    instrument_quantity added: the quantity     a field beyond the order's
         thing target_match compares
 A2-2    target_match = equality after case and      two names for one quantity
         whitespace normalisation                    read as a mismatch
-A2-3    tolerance declared, else half a unit in     the time HIT rests on it:
-        the last written digit; a leading "~"       ~15 against 14:02 is 0.9667
-        doubles it                                  off, a MISS at +/-0.5
-A2-4    "14:02" read as minutes:seconds             read as h:mm it is 842 min
+A2-3    tolerance declared, else half a unit in     scored symmetric, the time
+        the last written digit; a leading "~"       HIT rested on it (a MISS at
+        doubles it                                  +/-0.5); under OVER it rests
+                                                    on direction, and the "~"
+                                                    only widens the costly side
+A2-4    "14:02" read as minutes:seconds             CONFIRMED by the operator
+                                                    2026-10-27
 A2-5    HIT when some value the measurement         a range measurement scores
         allows is within tolerance (low end of      on its nearest end
         the band)
 A2-6    the standard method is the instrument's     fuel: inferred from memory
         own reading                                 = NO, outcome still HIT
+A2-7    safe_side is declared, never inferred from  a goal whose wording names a
+        the goal's wording. OVER: HIT unless short  direction still scores
+        of every value the measurement allows by    symmetric until safe_side is
+        more than the tolerance                     written
 A3-1    the target_mismatch confound is logged      its meaning stays GAP: no
         present, sized from the two miles rows      control separates anything
 ```
