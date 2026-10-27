@@ -374,6 +374,7 @@ last three; read in order:
 - `reg-uncertainty-registry/` — WO-REG-1, regulatory decisions under uncertainty as a registry: direction stored twice (action, outcome), two-sided consequence, actors, authority chains, conflicts and gaps as nodes; RUS-0.2 reproduces its own Annex A, the one-directional claim reads HOLDS_UNTESTABLE on the annex basis and FAILS on the action basis; RUS-0.3 PROPOSED; every count rendered from the registry, no human second coder
 - `floor-capability/` — FLOOR CAPABILITY draft v0 landed verbatim and instrumented; weights UNSTATED not unrun, hidden_cost refused as a scalar, scrap at event level against the draft's code-level map, tenure test with an equipment-only control; all CONSTRUCTED
 - `extraction-chain-join/` — the extraction-money-power-emissions chain, G1..G7 as instruments not verdicts; order RECONSTRUCTED from the session summary; coverage on every reading, NO_PATTERN added to the four branches, end-to-end effect refused; all CONSTRUCTED
+- `gap-instruments/` — evidence notation for coordination systems, physical limits, discrepancies and abstentions; MEASURED/ESTIMATED/UNKNOWN/GAP per field, no verdict; two supplied files verbatim in `source/`, eight marked fixes in the working copy, mirrored byte-identical in `tools/` here and in method-layer
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
