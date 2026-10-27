@@ -94,3 +94,19 @@ Stdlib only, parses under 3.9, CC0. Sample output: `samples/check.sample.txt`.
    but its file is `fig6`. The other five figures are offset by one.
 
 Nothing here measures a barrier, rates a material, or ranks a technology.
+
+## Held, to return to (2026-10-27)
+
+Marked by the operator as a question to return to, not started. Primary-source
+check of the three citations the OSC-WO4 sweep could not settle at search
+depth:
+
+1. The depinning paper behind the report's ~100× discount (NOT_FOUND).
+2. 5.1 eV in a sibling paper vs 7.6 eV in the report, which one the barrier
+   rests on.
+3. Pt/Co/Pt switching field near 10 T in another source, against the
+   report's 0.3 T vs 10 T split between material classes.
+
+Blocked here on arxiv.org egress; the operator wants it allowed (environment
+network setting, Custom allowlist). Nothing about these three is assumed
+meanwhile: the rows keep their OSC-WO4 states.
