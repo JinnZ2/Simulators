@@ -42,3 +42,12 @@
 
 No verdict follows from any of these. The records are appended with
 `interpretation: unassigned`, as the lab requires.
+
+## Amendment 1 (committed before any scan ran)
+
+The pin's full hash above is wrong: it was typed, not copied. The
+7-character prefix `5e75eb6` is right. The real commit is
+`5e75eb6e74a74046049af9bc01fc94d42f0bcd9b`. Nothing else changes, and the
+original line is left as written so the error stays on the record. The run
+script resolves the pin by `git rev-parse 5e75eb6` and checks it against
+this full hash.
