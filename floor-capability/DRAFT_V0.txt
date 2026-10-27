@@ -1,0 +1,34 @@
+# ── FLOOR CAPABILITY SITE ASSESSMENT (co-authored, draft v0) ──
+# Status: PROPOSED instrument. Indicators come from floor observation (OBSERVED);
+# the weights are unrun. Needs plant data to calibrate.
+
+indicators = {
+  "scrap": {
+    "measure": "scrap rate + root-cause codes",
+    "reclassify": {   # map each machine-coded cause to the missing human catch
+      "calibration_drift": "operator who would notice dimension creep",
+      "belt/drive_failure": "operator who hears or feels the change before failure",
+      "material_jam":       "setup knowledge of feed and material behavior",
+    },
+    "signal": "share of scrap that a skilled operator would have caught early",
+  },
+  "safety_direction": {
+    "reactive":  "rules written after incidents",
+    "generated": "rules built from what workers report on the floor",
+  },
+  "maintenance": {
+    "measure": "in-house vs outsourced repairs + parts, trended over years",
+    "signal":  "outsourcing increase = capability already gone",
+  },
+  "machine_part_turnover": "replacement rate vs expected service life",
+  "worker_tenure": "turnover by role; is skill handed off before people leave?",
+  "hr_screening": "does hiring test for tacit skill or only credentials?",
+}
+
+# Capability risk the standard site-selection sheet doesn't count:
+hidden_cost = scrap + machine_damage + retraining + hr_churn + outsourced_repair
+
+# GAPS (unrun analyses):
+#  - no public dataset linking tenure to scrap-code distribution
+#  - would have to separate operator-catchable scrap from true equipment failure
+#  - China / India / Bangladesh floor comparison: OBSERVED, not quantified

@@ -827,6 +827,16 @@ EXPECTED_METRICS = (
     "tools/deceptive_maze_ga.py::jaccard_distance",
     "tools/deceptive_maze_ga.py::mean_pairwise",
     "tools/deceptive_maze_ga.py::half_distance_gen",
+    "reg-uncertainty-registry/tools/stats.py::mann_whitney_exact",
+    "reg-uncertainty-registry/tools/stats.py::one_directional",
+    "reg-uncertainty-registry/tools/grade.py::floor",
+    "floor-capability/floor_capability.py::life_ratio",
+    "floor-capability/floor_capability.py::catchable_share_low",
+    "floor-capability/floor_capability.py::handoff_overlap",
+    "extraction-chain-join/chain_join.py::coverage",
+    "extraction-chain-join/chain_join.py::traced_fraction",
+    "extraction-chain-join/chain_join.py::consumption_based",
+    "extraction-chain-join/chain_join.py::reserve_share_band",
 )
 
 
@@ -884,6 +894,29 @@ def _ii_claim_only_fraction(shapes):
     return mod.claim_only_fraction(rows)
 
 
+def _csp_load(fname, modname):
+    """A cooperative-substrate-proof module, imported by path with its own
+    folder on sys.path for the duration, since each part imports the
+    folder's scope.py by name. Without it every case was NOT_RUN on
+    ModuleNotFoundError ('scope'), which left the gate red for a loader
+    reason, not a metric one. A 'scope' cached from another folder is set
+    aside and restored, so the part sees its own."""
+    import importlib.util
+    folder = os.path.join(ROOT, "cooperative-substrate-proof")
+    saved = sys.modules.pop("scope", None)
+    sys.path.insert(0, folder)
+    try:
+        spec = importlib.util.spec_from_file_location(modname, os.path.join(folder, fname))
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        return mod
+    finally:
+        sys.path.remove(folder)
+        sys.modules.pop("scope", None)
+        if saved is not None:
+            sys.modules["scope"] = saved
+
+
 def _csp_gain_from_sizes(ca, cb, cab):
     """cooperative-substrate-proof/p3_comprehension.py::gain_from_sizes,
     imported. The compressibility gain 1 - cab / (ca + cb), kept separate
@@ -893,13 +926,7 @@ def _csp_gain_from_sizes(ca, cb, cab):
     shared form, while an absent size is nothing measured, and a part whose
     whole claim is about transmission must not read the second as the
     first."""
-    import importlib.util
-    path = os.path.join(ROOT, "cooperative-substrate-proof",
-                        "p3_comprehension.py")
-    spec = importlib.util.spec_from_file_location("_csp_p3", path)
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    return mod.gain_from_sizes(ca, cb, cab)
+    return _csp_load("p3_comprehension.py", "_csp_p3").gain_from_sizes(ca, cb, cab)
 
 
 def _csp_lag_ratio(t_visible, t_scored):
@@ -909,12 +936,7 @@ def _csp_lag_ratio(t_visible, t_scored):
     0.0, while an UNDECLARED t_visible returns None. Collapsing them is
     the order's own worst case: an undeclared failure interval reads as a
     short one, and a clean score over it reads as success."""
-    import importlib.util
-    path = os.path.join(ROOT, "cooperative-substrate-proof", "p5_lag.py")
-    spec = importlib.util.spec_from_file_location("_csp_p5", path)
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    return mod.lag_ratio(t_visible, t_scored)
+    return _csp_load("p5_lag.py", "_csp_p5").lag_ratio(t_visible, t_scored)
 
 
 def _rs_delta(acc_open, acc_blind):
@@ -1763,6 +1785,216 @@ def seed():
     _seed_check_citations()
     _seed_yardstick()
     _seed_triage_clean_run()
+    _seed_reg_uncertainty()
+    _seed_floor_capability()
+    _seed_extraction_chain()
+
+
+def _reg_mod(name):
+    """reg-uncertainty-registry/tools/<name>.py, imported by path; the
+    module puts its own directory on sys.path for its sibling imports."""
+    import importlib.util
+    path = os.path.join(ROOT, "reg-uncertainty-registry", "tools", name + ".py")
+    spec = importlib.util.spec_from_file_location("_reg_" + name, path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def _reg_mann_whitney(x, y):
+    r = _reg_mod("stats").mann_whitney_exact(x, y)
+    return (r["U"], round(r["p_two_sided"], 6))
+
+
+def _reg_one_directional(below, over, over_possible):
+    return _reg_mod("stats").one_directional(
+        {"below": below, "over_restrictive": over, "over_possible": over_possible})
+
+
+def _reg_floor(U, gap, r1, r5):
+    return _reg_mod("grade").floor(U, gap, r1=r1, r5=r5)[0]
+
+
+def _seed_reg_uncertainty():
+    """WO-REG-1 registry. The exact Mann-Whitney test is checked against
+    enumerations done by hand; one_directional against its five branches,
+    where HOLDS_UNTESTABLE is the pin (a zero no row could produce is not
+    a finding); floor against the RUS-0.2 section 8 matrix as printed."""
+    register(
+        "reg-uncertainty-registry/tools/stats.py::mann_whitney_exact",
+        _reg_mann_whitney,
+        [case("separated pair", ([1, 2], [3, 4]), (0.0, 0.333333),
+              "C(4,2) = 6 arrangements; |U - 2| >= 2 holds for U = 0 and U = 4: 2/6"),
+         case("one each", ([1], [2]), (0.0, 1.0),
+              "two arrangements, both as extreme as the observed"),
+         case("three above three", ([5, 6, 7], [1, 2, 3]), (9.0, 0.1),
+              "C(6,3) = 20; only U = 0 and U = 9 are as extreme: 2/20"),
+         case("identical samples", ([1, 2], [1, 2]), (2.0, 1.0),
+              "ties count one half; U = mean, every arrangement is as extreme")],
+        note="two-sided p is P(|U - mean| >= |U_obs - mean|) over all arrangements")
+    register(
+        "reg-uncertainty-registry/tools/stats.py::one_directional",
+        _reg_one_directional,
+        [case("below only, over reachable at the actual", (22, 0, 1), "HOLDS",
+              "the over branch could fire on a row and did not"),
+         case("below only, no row could produce over", (22, 0, 0), "HOLDS_UNTESTABLE",
+              "the zero is fixed by the rows (REVIEW_v3 R13)"),
+         case("both directions", (20, 1, 1), "FAILS", "non-conformity both ways"),
+         case("over only", (0, 2, 2), "REVERSED", "one-directional the other way"),
+         case("none", (0, 0, 3), "NO_NONCONFORMITY", "nothing to read")],
+        note="HOLDS_UNTESTABLE against HOLDS is the pin")
+    register(
+        "reg-uncertainty-registry/tools/grade.py::floor",
+        _reg_floor,
+        [case("U3, G = -1", ("U3", -1, False, False), "D2", "matrix row U3, column G<=-1"),
+         case("U3, G = 0", ("U3", 0, False, False), "D3", "matrix row U3, column G=0"),
+         case("U4, G = 3", ("U4", 3, False, False), "D5", "matrix row U4, column G>=3"),
+         case("U1, G = 2", ("U1", 2, False, False), "D2", "matrix row U1, column G=1-2"),
+         case("R1 overrides", ("U1", -2, True, False), "D5", "R1: actual harm or absent benefit"),
+         case("R5 one column permissive", ("U3", 1, False, True), "D3",
+              "U3 column G=1-2 is D4; R5 moves one column toward permissive: D3")],
+        note="RUS-0.2 section 8 as printed in the pinned standard")
+
+
+
+def _flc_mod():
+    """floor-capability/floor_capability.py, imported by path under a
+    private name; the module imports its own siblings by path."""
+    import importlib.util
+    path = os.path.join(ROOT, "floor-capability", "floor_capability.py")
+    spec = importlib.util.spec_from_file_location("_flc", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def _flc_life_ratio(observed, expected, basis):
+    return _flc_mod().life_ratio(observed, expected, basis)
+
+
+def _flc_catchable_share_low(states):
+    return _flc_mod().catchable_share_low(states)
+
+
+def _flc_handoff_overlap(leaver_last, successor_first):
+    return _flc_mod().handoff_overlap(leaver_last, successor_first)
+
+
+def _seed_floor_capability():
+    """FLOOR CAPABILITY draft v0. life_ratio's None cases are where an
+    undeclared reference hides; catchable_share_low's empty-denominator case
+    is where a zero hides; handoff_overlap's back-to-back 0 is the case an
+    off-by-one moves to 1 or -1. Expected values are computed by hand from
+    the definitions in the module docstrings."""
+    register(
+        "floor-capability/floor_capability.py::life_ratio",
+        _flc_life_ratio,
+        [case("early failure", (8000, 10000, "OEM_RATED"), 0.8, "8000 / 10000"),
+         case("outlasts rating", (12000, 10000, "PLANT_HISTORY"), 1.2, "12000 / 10000"),
+         case("half life", (5000, 10000, "DUTY_ADJUSTED"), 0.5, "5000 / 10000"),
+         case("no basis", (8000, 10000, None), None,
+              "an expected life with no declared basis is not a reference"),
+         case("zero expected", (8000, 0, "OEM_RATED"), None, "no denominator")],
+        note="observed / expected service life with a declared basis")
+    register(
+        "floor-capability/floor_capability.py::catchable_share_low",
+        _flc_catchable_share_low,
+        [case("one of four mapped", (["CATCHABLE", "EQUIPMENT_ONLY", "UNDETERMINED",
+                                      "FASTER_THAN_CHECK", "UNMAPPED"],), 0.25,
+              "UNMAPPED leaves the denominator: 1 / 4"),
+         case("all catchable", (["CATCHABLE", "CATCHABLE"],), 1.0, "2 / 2"),
+         case("none catchable", (["EQUIPMENT_ONLY"],), 0.0, "0 / 1, a measured zero"),
+         case("nothing mapped", (["UNMAPPED"],), None,
+              "an empty denominator is not a share of zero")],
+        note="CATCHABLE over mapped scrap events")
+    register(
+        "floor-capability/floor_capability.py::handoff_overlap",
+        _flc_handoff_overlap,
+        [case("ten days overlap", (100, 91), 10, "days 91..100 inclusive"),
+         case("back to back", (100, 101), 0, "successor starts the day after"),
+         case("five-day gap", (100, 106), -5, "days 101..105 uncovered"),
+         case("date missing", (None, 5), None, "no leaver date, no overlap")],
+        note="leaver_last - successor_first + 1, signed")
+
+def _ecj_mod():
+    """extraction-chain-join/chain_join.py, imported by path under a private
+    name; the module imports its own siblings by path."""
+    import importlib.util
+    path = os.path.join(ROOT, "extraction-chain-join", "chain_join.py")
+    spec = importlib.util.spec_from_file_location("_ecj", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def _ecj_coverage(covered, total):
+    return _ecj_mod().coverage(covered, total)
+
+
+def _ecj_traced_fraction(firm, record, entities, juris):
+    return _ecj_mod().traced_fraction(firm, record, entities, juris)
+
+
+def _ecj_consumption_based(pb, eex, eem):
+    return _ecj_mod().consumption_based(pb, eex, eem)
+
+
+def _ecj_reserve_share_mid(rev, other, d_reserves):
+    band = _ecj_mod().reserve_share_band(rev, other, d_reserves)
+    return None if band is None else band[1]
+
+
+def _seed_extraction_chain():
+    """extraction-chain-join. coverage's empty-denominator case is where a
+    zero hides; traced_fraction's undisclosed and below-threshold cases are
+    where an untraced owner would read as traced; consumption_based's absent
+    term is where a default of zero would hide; the reserve band is checked
+    at its proportional reading. Expected values are computed by hand from
+    the definitions in the module docstrings."""
+    register(
+        "extraction-chain-join/chain_join.py::coverage",
+        _ecj_coverage,
+        [case("three of four", (3, 4), 0.75, "3 / 4"),
+         case("measured zero", (0, 5), 0.0, "0 / 5 is a coverage of zero"),
+         case("empty frame", (0, 0), None, "an empty denominator is not a zero"),
+         case("absent count", (None, 5), None, "no count, no coverage")],
+        note="covered / total, None when the total is absent or zero")
+    ents = {"F": {"kind": "FIRM", "jurisdiction": "J1", "operating": True},
+            "H": {"kind": "FIRM", "jurisdiction": "J5", "operating": False},
+            "P": {"kind": "PERSON", "jurisdiction": "J1"},
+            "Q": {"kind": "PERSON", "jurisdiction": "J2"}}
+    juris = {"J1": 20, "J2": 30, "J5": 75}
+    full = {"F": {"state": "DISCLOSED", "owners": [("P", 0.6), ("H", 0.4)]},
+            "H": {"state": "DISCLOSED", "owners": [("Q", 1.0)]}}
+    shut = {"F": {"state": "DISCLOSED", "owners": [("P", 0.6), ("H", 0.4)]},
+            "H": {"state": "UNDISCLOSED", "owners": []}}
+    thin = {"F": {"state": "DISCLOSED", "owners": [("P", 0.3)]},
+            "H": {"state": "DISCLOSED", "owners": [("Q", 1.0)]}}
+    register(
+        "extraction-chain-join/chain_join.py::traced_fraction",
+        _ecj_traced_fraction,
+        [case("all disclosed", ("F", full, ents, juris), 1.0, "0.6 + 0.4 x 1.0", tol=1e-12),
+         case("holding undisclosed", ("F", shut, ents, juris), 0.6,
+              "0.6 direct; the 0.4 behind H stops at H", tol=1e-12),
+         case("holders below threshold unlisted", ("F", thin, ents, juris), 0.3,
+              "the unlisted 0.7 is a residual, not an owner", tol=1e-12)],
+        note="share of a firm traced to persons; effective shares multiply")
+    register(
+        "extraction-chain-join/chain_join.py::consumption_based",
+        _ecj_consumption_based,
+        [case("net exporter", (100.0, 20.0, 5.0), 85.0, "100 - 20 + 5"),
+         case("net importer", (100.0, 5.0, 20.0), 115.0, "100 - 5 + 20"),
+         case("absent export term", (100.0, None, 5.0), None,
+              "an absent term is not zero")],
+        note="production-based - export-embodied + import-embodied")
+    register(
+        "extraction-chain-join/chain_join.py::reserve_share_band",
+        _ecj_reserve_share_mid,
+        [case("small accumulation", (10.0, 5.0, 3.0), 0.2, "3 / (10 + 5)", tol=1e-12),
+         case("large accumulation", (10.0, 5.0, 12.0), 0.8, "12 / (10 + 5)", tol=1e-12),
+         case("reserves fall", (10.0, 5.0, -1.0), 0.0, "no accumulation, a measured zero"),
+         case("no revenue", (0.0, 5.0, 3.0), None, "no revenue, no share")],
+        note="proportional reading of the reserve share band")
 
 
 def _irb_effective_origins(coupling):

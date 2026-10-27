@@ -1,0 +1,56 @@
+FLOOR CAPABILITY -- draft v0, read and instrumented
+draft: floor-capability/DRAFT_V0.txt  sha256 7eb3ec711223386c...
+every record below is CONSTRUCTED; nothing here describes a plant or a workforce
+
+1. what the draft states (computed from the draft)
+   indicators                  6: scrap, safety_direction, maintenance, machine_part_turnover, worker_tenure, hr_screening
+   numeric constants           0
+   'weights' in the status     True; weights in the draft: UNSTATED
+   hidden_cost terms           5: scrap + machine_damage + retraining + hr_churn + outsourced_repair
+   term named as an indicator  1 of 5 (scrap)
+   term with no indicator      retraining   [CHOICE 5 binding]
+   term bound to a cost unit   0 of 5
+   overlaps a sum counts twice 3: scrap/machine_damage; machine_damage/outsourced_repair; hr_churn/retraining
+   reclassify map              level CODE, codes 3: calibration_drift, belt/drive_failure, material_jam
+   gap naming event separation True
+
+2. scrap at event level (40 CONSTRUCTED events)   [CHOICE 1 margin 2.0, CHOICE 2]
+   CATCHABLE          12
+   FASTER_THAN_CHECK  6
+   EQUIPMENT_ONLY     6
+   UNDETERMINED       6
+   UNMAPPED           10
+   share of all 40 scrap events:
+     code level (the draft)    0.750   every mapped event counted; an upper bound
+     event level               [0.300, 0.450]   CATCHABLE, plus UNDETERMINED at the top
+   over the 30 mapped events only  [0.400, 0.600]   a different denominator, printed apart
+   attribution, draft (code level) UNPARTITIONED  unmeasured: precursor existence, precursor lead time, cue check cadence, operator staffing on the station
+   attribution, event level        UNPARTITIONED  unmeasured: operator staffing on the station
+
+3. tenure x scrap, equipment-only scrap as the control   [CHOICE 4]
+   world operator   catchable slope -0.155  equipment slope +0.012  -> OPERATOR_CHANNEL
+   world assignment catchable slope -0.083  equipment slope -0.084  -> NOT_SEPARABLE
+   world null       catchable slope -0.005  equipment slope +0.012  -> NO_EFFECT
+
+4. maintenance per task class (CONSTRUCTED)
+   TRANSFERRED   -
+   NEW_TASK      PLC upgrade, spindle rebuild
+   CAPACITY      drive belts
+   UNDETERMINED  -
+   aggregate outsourced share  0.231 -> 0.520   rises with no TRANSFERRED class
+
+5. part life, handoff, screening, rule origin (CONSTRUCTED)
+   life_ratio 8000/10000 OEM_RATED 0.800   no basis --
+   handoff  OVERLAP 1  BACK_TO_BACK 1  GAP 1  NO_SUCCESSOR 1  UNKNOWN 1
+   screening tacit share 0.333 over recorded; NOT_RECORDED 1
+   rule origin  REACTIVE 1  GENERATED 0  BOTH 1  NEITHER 1  UNKNOWN 1   generated share 0.333
+
+6. hidden_cost
+   scrap:MEASURED  machine_damage:UNMEASURED  retraining:UNMEASURED  hr_churn:UNMEASURED  outsourced_repair:MEASURED
+   scalar sum refused: unmeasured terms: machine_damage, retraining, hr_churn
+
+7. carried, not quantified
+   - no public dataset linking tenure to scrap-code distribution
+   - would have to separate operator-catchable scrap from true equipment failure
+   - China / India / Bangladesh floor comparison: OBSERVED, not quantified
+   no function here takes a country; no claim about any country's workers

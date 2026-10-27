@@ -1,0 +1,5058 @@
+[
+ {
+  "from": "A01",
+  "order": 3,
+  "status": "PROPOSED",
+  "to": "AUTH-21CFR14",
+  "type": "authorized_by"
+ },
+ {
+  "from": "A01",
+  "order": 2,
+  "status": "PROPOSED",
+  "to": "AUTH-21CFR601E",
+  "type": "authorized_by"
+ },
+ {
+  "from": "A01",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-FDCA-506C",
+  "type": "authorized_by"
+ },
+ {
+  "from": "A01",
+  "order": 4,
+  "status": "PROPOSED",
+  "to": "AUTH-GD-EXPEDITED",
+  "type": "authorized_by"
+ },
+ {
+  "from": "A01",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-PHSA-351",
+  "type": "authorized_by"
+ },
+ {
+  "from": "A02",
+  "order": 2,
+  "status": "PROPOSED",
+  "to": "AUTH-21CFR14",
+  "type": "authorized_by"
+ },
+ {
+  "from": "A02",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-21CFR314H",
+  "type": "authorized_by"
+ },
+ {
+  "from": "A02",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-FDCA-506C",
+  "type": "authorized_by"
+ },
+ {
+  "from": "A02",
+  "order": 3,
+  "status": "PROPOSED",
+  "to": "AUTH-GD-EXPEDITED",
+  "type": "authorized_by"
+ },
+ {
+  "from": "A03",
+  "order": 2,
+  "status": "PROPOSED",
+  "to": "AUTH-21CFR14",
+  "type": "authorized_by"
+ },
+ {
+  "from": "A03",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-21CFR314.126",
+  "type": "authorized_by"
+ },
+ {
+  "from": "A03",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-FDCA-505",
+  "type": "authorized_by"
+ },
+ {
+  "from": "A04",
+  "order": 2,
+  "status": "PROPOSED",
+  "to": "AUTH-21CFR14",
+  "type": "authorized_by"
+ },
+ {
+  "from": "A04",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-21CFR314H",
+  "type": "authorized_by"
+ },
+ {
+  "from": "A04",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-FDCA-506C",
+  "type": "authorized_by"
+ },
+ {
+  "from": "A05",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-21CFR14",
+  "type": "authorized_by"
+ },
+ {
+  "from": "A05",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-FDCA-505",
+  "type": "authorized_by"
+ },
+ {
+  "from": "A06",
+  "order": 2,
+  "status": "PROPOSED",
+  "to": "AUTH-21CFR14",
+  "type": "authorized_by"
+ },
+ {
+  "from": "A06",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-FDCA-564",
+  "type": "authorized_by"
+ },
+ {
+  "from": "A06",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-HHS-EUA-2020",
+  "type": "authorized_by"
+ },
+ {
+  "from": "A07",
+  "order": 2,
+  "status": "PROPOSED",
+  "to": "AUTH-21CFR14",
+  "type": "authorized_by"
+ },
+ {
+  "from": "A07",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-FDCA-505",
+  "type": "authorized_by"
+ },
+ {
+  "from": "A07",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-FDCA-505-1",
+  "type": "authorized_by"
+ },
+ {
+  "from": "A08",
+  "order": 3,
+  "status": "PROPOSED",
+  "to": "AUTH-21CFR14",
+  "type": "authorized_by"
+ },
+ {
+  "from": "A08",
+  "order": 2,
+  "status": "PROPOSED",
+  "to": "AUTH-21CFR601E",
+  "type": "authorized_by"
+ },
+ {
+  "from": "A08",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-FDCA-506C",
+  "type": "authorized_by"
+ },
+ {
+  "from": "A08",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-PHSA-351",
+  "type": "authorized_by"
+ },
+ {
+  "from": "A09",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-21CFR14",
+  "type": "authorized_by"
+ },
+ {
+  "from": "A09",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-PHSA-351",
+  "type": "authorized_by"
+ },
+ {
+  "from": "A10",
+  "order": 2,
+  "status": "PROPOSED",
+  "to": "AUTH-21CFR314.530",
+  "type": "authorized_by"
+ },
+ {
+  "from": "A10",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-21CFR314H",
+  "type": "authorized_by"
+ },
+ {
+  "from": "A10",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-FDCA-506C",
+  "type": "authorized_by"
+ },
+ {
+  "from": "B00",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-21CFR807E",
+  "type": "authorized_by"
+ },
+ {
+  "from": "B00",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-FDCA-510K",
+  "type": "authorized_by"
+ },
+ {
+  "from": "B00b",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-21CFR807E",
+  "type": "authorized_by"
+ },
+ {
+  "from": "B00b",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-FDCA-510K",
+  "type": "authorized_by"
+ },
+ {
+  "from": "B01",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-21CFR884.5980",
+  "type": "authorized_by"
+ },
+ {
+  "from": "B01",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-FDCA-513",
+  "type": "authorized_by"
+ },
+ {
+  "from": "B02",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-21CFR888.3330",
+  "type": "authorized_by"
+ },
+ {
+  "from": "B02",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-FDCA-513",
+  "type": "authorized_by"
+ },
+ {
+  "from": "B03",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-21CFR314.600",
+  "type": "authorized_by"
+ },
+ {
+  "from": "B03",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-FDCA-505",
+  "type": "authorized_by"
+ },
+ {
+  "from": "B03",
+  "order": 2,
+  "status": "PROPOSED",
+  "to": "AUTH-GD-ANIMALRULE",
+  "type": "authorized_by"
+ },
+ {
+  "from": "B04",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-21CFR201.57",
+  "type": "authorized_by"
+ },
+ {
+  "from": "B04",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-FDCA-505O4",
+  "type": "authorized_by"
+ },
+ {
+  "from": "B05",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-21CFR74.303",
+  "type": "authorized_by"
+ },
+ {
+  "from": "B05",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-FDCA-721",
+  "type": "authorized_by"
+ },
+ {
+  "from": "B06",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-21CFR180.30",
+  "type": "authorized_by"
+ },
+ {
+  "from": "B06",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-FDCA-409",
+  "type": "authorized_by"
+ },
+ {
+  "from": "B07",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-21CFR73.575",
+  "type": "authorized_by"
+ },
+ {
+  "from": "B07",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-FDCA-721",
+  "type": "authorized_by"
+ },
+ {
+  "from": "B08",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-21CFR172.804",
+  "type": "authorized_by"
+ },
+ {
+  "from": "B08",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-FDCA-409",
+  "type": "authorized_by"
+ },
+ {
+  "from": "C01",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-FIFRA-4",
+  "type": "authorized_by"
+ },
+ {
+  "from": "C02",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-40CFR155C",
+  "type": "authorized_by"
+ },
+ {
+  "from": "C02",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-FIFRA-3G",
+  "type": "authorized_by"
+ },
+ {
+  "from": "C03",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-40CFR155C",
+  "type": "authorized_by"
+ },
+ {
+  "from": "C03",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-FIFRA-3G",
+  "type": "authorized_by"
+ },
+ {
+  "from": "C04",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-86FR48315",
+  "type": "authorized_by"
+ },
+ {
+  "from": "C04",
+  "order": 2,
+  "status": "PROPOSED",
+  "to": "AUTH-CA9-LULAC-2021",
+  "type": "authorized_by"
+ },
+ {
+  "from": "C04",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-FFDCA-408",
+  "type": "authorized_by"
+ },
+ {
+  "from": "C05",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-40CFR155C",
+  "type": "authorized_by"
+ },
+ {
+  "from": "C05",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-FIFRA-3G",
+  "type": "authorized_by"
+ },
+ {
+  "from": "C06",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-89FR86418",
+  "type": "authorized_by"
+ },
+ {
+  "from": "C06",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-SDWA-1412",
+  "type": "authorized_by"
+ },
+ {
+  "from": "C07",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-89FR32532",
+  "type": "authorized_by"
+ },
+ {
+  "from": "C07",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-SDWA-1412",
+  "type": "authorized_by"
+ },
+ {
+  "from": "C08",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-40CFR141.40",
+  "type": "authorized_by"
+ },
+ {
+  "from": "C08",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-SDWA-1445",
+  "type": "authorized_by"
+ },
+ {
+  "from": "C09",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-75FR78918",
+  "type": "authorized_by"
+ },
+ {
+  "from": "C09",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-RCRA",
+  "type": "authorized_by"
+ },
+ {
+  "from": "C10",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-FIFRA-24B",
+  "type": "authorized_by"
+ },
+ {
+  "from": "C10",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-FIFRA-3G",
+  "type": "authorized_by"
+ },
+ {
+  "from": "C10",
+  "order": 2,
+  "status": "PROPOSED",
+  "to": "AUTH-SCOTUS-DURNELL",
+  "type": "authorized_by"
+ },
+ {
+  "from": "C2-19",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-40CFR155C",
+  "type": "authorized_by"
+ },
+ {
+  "from": "C2-19",
+  "order": 2,
+  "status": "PROPOSED",
+  "to": "AUTH-87FR6535",
+  "type": "authorized_by"
+ },
+ {
+  "from": "C2-19",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-FIFRA-3G",
+  "type": "authorized_by"
+ },
+ {
+  "from": "D01",
+  "order": 2,
+  "status": "PROPOSED",
+  "to": "AUTH-21CFR1308",
+  "type": "authorized_by"
+ },
+ {
+  "from": "D01",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-CSA-201",
+  "type": "authorized_by"
+ },
+ {
+  "from": "D01",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-CSA-201B",
+  "type": "authorized_by"
+ },
+ {
+  "from": "D01",
+  "order": 4,
+  "status": "PROPOSED",
+  "to": "AUTH-DOJ-2026-SCHIII",
+  "type": "authorized_by"
+ },
+ {
+  "from": "D01",
+  "order": 3,
+  "status": "PROPOSED",
+  "to": "AUTH-EO-MARIJUANA",
+  "type": "authorized_by"
+ },
+ {
+  "from": "D02",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-21CFR180.37",
+  "type": "authorized_by"
+ },
+ {
+  "from": "D02",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-FDCA-409",
+  "type": "authorized_by"
+ },
+ {
+  "from": "D02",
+  "order": 2,
+  "status": "PROPOSED",
+  "to": "AUTH-SSLA-1977",
+  "type": "authorized_by"
+ },
+ {
+  "from": "D03",
+  "order": 2,
+  "status": "PROPOSED",
+  "to": "AUTH-21CFR1308",
+  "type": "authorized_by"
+ },
+ {
+  "from": "D03",
+  "order": 3,
+  "status": "PROPOSED",
+  "to": "AUTH-81FR53767",
+  "type": "authorized_by"
+ },
+ {
+  "from": "D03",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-CSA-201",
+  "type": "authorized_by"
+ },
+ {
+  "from": "D03",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-CSA-201B",
+  "type": "authorized_by"
+ },
+ {
+  "from": "D04",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-21CFR1308",
+  "type": "authorized_by"
+ },
+ {
+  "from": "D04",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-CSA-201",
+  "type": "authorized_by"
+ },
+ {
+  "from": "E01",
+  "order": 1,
+  "status": "PROPOSED",
+  "to": "AUTH-OSHA-5A1",
+  "type": "authorized_by"
+ },
+ {
+  "from": "E01",
+  "order": 0,
+  "status": "PROPOSED",
+  "to": "AUTH-OSHA-6B",
+  "type": "authorized_by"
+ },
+ {
+  "from": "EV-G001",
+  "status": "OBSERVED",
+  "to": "SRC-U-ad9cc7be",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V001",
+  "status": "OBSERVED",
+  "to": "SRC-U-31a141de",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V002",
+  "status": "OBSERVED",
+  "to": "SRC-U-31a141de",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V003",
+  "status": "OBSERVED",
+  "to": "SRC-U-31a141de",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V004",
+  "status": "OBSERVED",
+  "to": "SRC-U-31a141de",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V005",
+  "status": "OBSERVED",
+  "to": "SRC-U-31a141de",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V006",
+  "status": "OBSERVED",
+  "to": "SRC-U-4d7f0a25",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V007",
+  "status": "OBSERVED",
+  "to": "SRC-U-5e3bf64b",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V008",
+  "status": "OBSERVED",
+  "to": "SRC-U-fd139695",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V009",
+  "status": "OBSERVED",
+  "to": "SRC-U-570a3f06",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V010",
+  "status": "OBSERVED",
+  "to": "SRC-U-c857ca99",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V011",
+  "status": "OBSERVED",
+  "to": "SRC-U-8e2e7aec",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V012",
+  "status": "OBSERVED",
+  "to": "SRC-U-06d18892",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V013",
+  "status": "OBSERVED",
+  "to": "SRC-U-d265167f",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V014",
+  "status": "OBSERVED",
+  "to": "SRC-U-008790ef",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V015",
+  "status": "OBSERVED",
+  "to": "SRC-U-c2e1249f",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V016",
+  "status": "OBSERVED",
+  "to": "SRC-U-54d14204",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V017",
+  "status": "OBSERVED",
+  "to": "SRC-U-0e9a1481",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V018",
+  "status": "OBSERVED",
+  "to": "SRC-U-fcbf9612",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V019",
+  "status": "OBSERVED",
+  "to": "SRC-U-d8364bcf",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V020",
+  "status": "OBSERVED",
+  "to": "SRC-U-431d5925",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V021",
+  "status": "OBSERVED",
+  "to": "SRC-U-bd62495f",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V022",
+  "status": "OBSERVED",
+  "to": "SRC-U-241cec15",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V023",
+  "status": "OBSERVED",
+  "to": "SRC-U-a85bc387",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V024",
+  "status": "OBSERVED",
+  "to": "SRC-U-bbf43c04",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V025",
+  "status": "OBSERVED",
+  "to": "SRC-U-80849c8c",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V026",
+  "status": "OBSERVED",
+  "to": "SRC-U-0b264dff",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V027",
+  "status": "OBSERVED",
+  "to": "SRC-U-614feb7a",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V028",
+  "status": "OBSERVED",
+  "to": "SRC-U-eba7b2b4",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V029",
+  "status": "OBSERVED",
+  "to": "SRC-U-581cdedb",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V030",
+  "status": "OBSERVED",
+  "to": "SRC-U-e00da6bd",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V031",
+  "status": "OBSERVED",
+  "to": "SRC-U-817d0065",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V032",
+  "status": "OBSERVED",
+  "to": "SRC-U-4375d259",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V033",
+  "status": "OBSERVED",
+  "to": "SRC-U-ab801822",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V034",
+  "status": "OBSERVED",
+  "to": "SRC-U-753e81fb",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V035",
+  "status": "OBSERVED",
+  "to": "SRC-U-498639a4",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V037",
+  "status": "OBSERVED",
+  "to": "SRC-U-846d90d6",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V038",
+  "status": "OBSERVED",
+  "to": "SRC-U-846d90d6",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V039",
+  "status": "OBSERVED",
+  "to": "SRC-U-ddb9ad4a",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V041",
+  "status": "OBSERVED",
+  "to": "SRC-U-dc2028a8",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V042",
+  "status": "OBSERVED",
+  "to": "SRC-U-4ff95d35",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V043",
+  "status": "OBSERVED",
+  "to": "SRC-U-95c72b18",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V044",
+  "status": "OBSERVED",
+  "to": "SRC-U-cb3d0a2c",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V045",
+  "status": "OBSERVED",
+  "to": "SRC-U-aa2a8a37",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V046",
+  "status": "OBSERVED",
+  "to": "SRC-U-ae832db7",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V047",
+  "status": "OBSERVED",
+  "to": "SRC-U-5b8227d1",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V048",
+  "status": "OBSERVED",
+  "to": "SRC-U-c4207fa4",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V049",
+  "status": "OBSERVED",
+  "to": "SRC-U-0d5adb58",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V052",
+  "status": "OBSERVED",
+  "to": "SRC-U-eb04742b",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V053",
+  "status": "OBSERVED",
+  "to": "SRC-U-04b82c17",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V055",
+  "status": "OBSERVED",
+  "to": "SRC-U-146b8d5c",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V056",
+  "status": "OBSERVED",
+  "to": "SRC-U-c2d472e1",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V057",
+  "status": "OBSERVED",
+  "to": "SRC-U-f808859e",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V058",
+  "status": "OBSERVED",
+  "to": "SRC-U-545bf3b7",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V059",
+  "status": "OBSERVED",
+  "to": "SRC-U-af98f2fe",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V061",
+  "status": "OBSERVED",
+  "to": "SRC-U-d5223d7e",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V062",
+  "status": "OBSERVED",
+  "to": "SRC-U-38d59ff0",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V063",
+  "status": "OBSERVED",
+  "to": "SRC-U-37cc003b",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V064",
+  "status": "OBSERVED",
+  "to": "SRC-U-c857ca99",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V065",
+  "status": "OBSERVED",
+  "to": "SRC-U-12d5506d",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V066",
+  "status": "OBSERVED",
+  "to": "SRC-U-d72a37c3",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V067",
+  "status": "OBSERVED",
+  "to": "SRC-U-566b612f",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V068",
+  "status": "OBSERVED",
+  "to": "SRC-U-c533bcfd",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V069",
+  "status": "OBSERVED",
+  "to": "SRC-U-e57a1c8c",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V070",
+  "status": "OBSERVED",
+  "to": "SRC-U-f79f6310",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V071",
+  "status": "OBSERVED",
+  "to": "SRC-U-476ea009",
+  "type": "cites"
+ },
+ {
+  "from": "EV-V072",
+  "status": "OBSERVED",
+  "to": "SRC-U-6af51e02",
+  "type": "cites"
+ },
+ {
+  "from": "ST-01",
+  "status": "OBSERVED",
+  "to": "SRC-K2-REPORT",
+  "type": "cites"
+ },
+ {
+  "from": "ST-02",
+  "status": "OBSERVED",
+  "to": "SRC-K2-REPORT",
+  "type": "cites"
+ },
+ {
+  "from": "ST-03",
+  "status": "OBSERVED",
+  "to": "SRC-K3-SENS",
+  "type": "cites"
+ },
+ {
+  "from": "ST-04",
+  "status": "OBSERVED",
+  "to": "SRC-K2-REPORT",
+  "type": "cites"
+ },
+ {
+  "from": "ST-05",
+  "status": "OBSERVED",
+  "to": "SRC-K2-REPORT",
+  "type": "cites"
+ },
+ {
+  "from": "ST-06",
+  "status": "OBSERVED",
+  "to": "SRC-K2-REPORT",
+  "type": "cites"
+ },
+ {
+  "from": "ST-07",
+  "status": "OBSERVED",
+  "to": "SRC-K-CHANGELOG",
+  "type": "cites"
+ },
+ {
+  "from": "ST-08",
+  "status": "OBSERVED",
+  "to": "SRC-K2-REPORT",
+  "type": "cites"
+ },
+ {
+  "from": "ST-09",
+  "status": "OBSERVED",
+  "to": "SRC-K3-SENS",
+  "type": "cites"
+ },
+ {
+  "from": "ST-10",
+  "status": "OBSERVED",
+  "to": "SRC-K3-SENS",
+  "type": "cites"
+ },
+ {
+  "from": "ST-11",
+  "status": "OBSERVED",
+  "to": "SRC-K3-SENS",
+  "type": "cites"
+ },
+ {
+  "from": "ST-12",
+  "status": "OBSERVED",
+  "to": "SRC-K3-SENS",
+  "type": "cites"
+ },
+ {
+  "from": "ST-13",
+  "status": "OBSERVED",
+  "to": "SRC-K3-SENS",
+  "type": "cites"
+ },
+ {
+  "from": "ST-14",
+  "status": "OBSERVED",
+  "to": "SRC-K-CHANGELOG",
+  "type": "cites"
+ },
+ {
+  "from": "ST-15",
+  "status": "OBSERVED",
+  "to": "SRC-K2-REPORT",
+  "type": "cites"
+ },
+ {
+  "from": "ST-16",
+  "status": "OBSERVED",
+  "to": "SRC-K3-SENS",
+  "type": "cites"
+ },
+ {
+  "from": "ST-18",
+  "status": "OBSERVED",
+  "to": "SRC-K-CHANGELOG",
+  "type": "cites"
+ },
+ {
+  "from": "ST-19",
+  "status": "OBSERVED",
+  "to": "SRC-K2-STD",
+  "type": "cites"
+ },
+ {
+  "from": "CHG-INPUT-03",
+  "status": "PROPOSED",
+  "to": "NCR-R5",
+  "type": "closes"
+ },
+ {
+  "from": "CHG-N01-01",
+  "status": "PROPOSED",
+  "to": "NCR-N01",
+  "type": "closes"
+ },
+ {
+  "from": "CHG-N03-01",
+  "status": "PROPOSED",
+  "to": "NCR-N03",
+  "type": "closes"
+ },
+ {
+  "from": "CHG-N04-01",
+  "status": "PROPOSED",
+  "to": "NCR-N04",
+  "type": "closes"
+ },
+ {
+  "from": "CHG-N04-02",
+  "status": "PROPOSED",
+  "to": "NCR-N04",
+  "type": "closes"
+ },
+ {
+  "from": "CHG-N11-01",
+  "status": "PROPOSED",
+  "to": "NCR-N11",
+  "type": "closes"
+ },
+ {
+  "from": "CHG-N18-01",
+  "status": "PROPOSED",
+  "to": "NCR-N18",
+  "type": "closes"
+ },
+ {
+  "from": "CHG-N18-02",
+  "status": "PROPOSED",
+  "to": "NCR-N18",
+  "type": "closes"
+ },
+ {
+  "from": "CHG-N18-03",
+  "status": "PROPOSED",
+  "to": "NCR-N18",
+  "type": "closes"
+ },
+ {
+  "from": "CHG-N18-04",
+  "status": "PROPOSED",
+  "to": "NCR-N18",
+  "type": "closes"
+ },
+ {
+  "from": "CHG-N18-05",
+  "status": "PROPOSED",
+  "to": "NCR-N18",
+  "type": "closes"
+ },
+ {
+  "from": "CHG-R14-01",
+  "status": "PROPOSED",
+  "to": "NCR-R14",
+  "type": "closes"
+ },
+ {
+  "from": "CHG-R14-02",
+  "status": "PROPOSED",
+  "to": "NCR-R14",
+  "type": "closes"
+ },
+ {
+  "from": "CHG-R14-03",
+  "status": "PROPOSED",
+  "to": "NCR-R14",
+  "type": "closes"
+ },
+ {
+  "from": "CHG-R6-01",
+  "status": "PROPOSED",
+  "to": "NCR-R6",
+  "type": "closes"
+ },
+ {
+  "from": "CHG-R6-02",
+  "status": "PROPOSED",
+  "to": "NCR-R6",
+  "type": "closes"
+ },
+ {
+  "from": "CHG-R6-03",
+  "status": "PROPOSED",
+  "to": "NCR-R6",
+  "type": "closes"
+ },
+ {
+  "from": "CHG-R6-04",
+  "status": "PROPOSED",
+  "to": "NCR-R6",
+  "type": "closes"
+ },
+ {
+  "from": "CHG-R6-05",
+  "status": "PROPOSED",
+  "to": "NCR-R6",
+  "type": "closes"
+ },
+ {
+  "from": "CHG-R6-06",
+  "status": "PROPOSED",
+  "to": "NCR-R6",
+  "type": "closes"
+ },
+ {
+  "from": "CHG-R6-07",
+  "status": "PROPOSED",
+  "to": "NCR-R6",
+  "type": "closes"
+ },
+ {
+  "from": "CHG-R8-01",
+  "status": "PROPOSED",
+  "to": "NCR-R8",
+  "type": "closes"
+ },
+ {
+  "from": "CHG-R8-02",
+  "status": "PROPOSED",
+  "to": "NCR-R8",
+  "type": "closes"
+ },
+ {
+  "from": "CHG-R9-01",
+  "status": "PROPOSED",
+  "to": "NCR-R9",
+  "type": "closes"
+ },
+ {
+  "from": "OUT-A05-NORELAUNCH",
+  "status": "PROPOSED",
+  "to": "A05",
+  "type": "closes"
+ },
+ {
+  "from": "OUT-B01-STOPSALE",
+  "status": "PROPOSED",
+  "to": "B01",
+  "type": "closes"
+ },
+ {
+  "from": "OUT-B05-DEADLINES",
+  "status": "PROPOSED",
+  "to": "B05",
+  "type": "closes"
+ },
+ {
+  "from": "OUT-C07-RESCIND",
+  "status": "PROPOSED",
+  "to": "C07",
+  "type": "closes"
+ },
+ {
+  "from": "OUT-D01-STAY",
+  "status": "PROPOSED",
+  "to": "D01",
+  "type": "closes"
+ },
+ {
+  "from": "CF-A01-COLLAB",
+  "status": "PROPOSED",
+  "to": "A01",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-A01-RESIGN",
+  "status": "PROPOSED",
+  "to": "A01",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-A01-WAIVER",
+  "status": "PROPOSED",
+  "to": "A01",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-A02-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "A02",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-A02-SPONSORFIN",
+  "status": "PROPOSED",
+  "to": "A02",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-A03-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "A03",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-A04-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "A04",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-A05-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "A05",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-A05-PANELTIES",
+  "status": "PROPOSED",
+  "to": "A05",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-A06-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "A06",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-A07-ADVOCACY",
+  "status": "PROPOSED",
+  "to": "A07",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-A07-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "A07",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-A08-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "A08",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-A09-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "A09",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-A10-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "A10",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-B00-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "B00",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-B00b-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "B00b",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-B01-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "B01",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-B02-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "B02",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-B03-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "B03",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-B04-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "B04",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-B05-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "B05",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-B06-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "B06",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-B07-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "B07",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-B08-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "B08",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-C01-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "C01",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-C01-DQA",
+  "status": "PROPOSED",
+  "to": "C01",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-C01-FUNDING",
+  "status": "PROPOSED",
+  "to": "C01",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-C02-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "C02",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-C03-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "C03",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-C03-ROWLAND",
+  "status": "PROPOSED",
+  "to": "C03",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-C04-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "C04",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-C05-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "C05",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-C06-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "C06",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-C07-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "C07",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-C08-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "C08",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-C09-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "C09",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-C10-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "C10",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-D01-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "D01",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-D02-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "D02",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-D03-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "D03",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-D04-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "D04",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-E01-DISCLOSURE",
+  "status": "PROPOSED",
+  "to": "E01",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N01",
+  "status": "PROPOSED",
+  "to": "ST-19",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N02",
+  "status": "PROPOSED",
+  "to": "A10",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N02",
+  "status": "PROPOSED",
+  "to": "C04",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N02",
+  "status": "PROPOSED",
+  "to": "D02",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N02",
+  "status": "PROPOSED",
+  "to": "ST-18",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N03",
+  "status": "PROPOSED",
+  "to": "B06",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N04",
+  "status": "PROPOSED",
+  "to": "D02",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N05",
+  "status": "PROPOSED",
+  "to": "B05",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N06",
+  "status": "PROPOSED",
+  "to": "A05",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N06",
+  "status": "PROPOSED",
+  "to": "C06",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N06",
+  "status": "PROPOSED",
+  "to": "C07",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N10",
+  "status": "PROPOSED",
+  "to": "M01",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N10",
+  "status": "PROPOSED",
+  "to": "M02",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N10",
+  "status": "PROPOSED",
+  "to": "M03",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N10",
+  "status": "PROPOSED",
+  "to": "M04",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N10",
+  "status": "PROPOSED",
+  "to": "M05",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N10",
+  "status": "PROPOSED",
+  "to": "M06",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N10",
+  "status": "PROPOSED",
+  "to": "M07",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N10",
+  "status": "PROPOSED",
+  "to": "M08",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N10",
+  "status": "PROPOSED",
+  "to": "M09",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N10",
+  "status": "PROPOSED",
+  "to": "M10",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N10",
+  "status": "PROPOSED",
+  "to": "ST-08",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N11",
+  "status": "PROPOSED",
+  "to": "E01",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N12",
+  "status": "PROPOSED",
+  "to": "E01",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N18",
+  "status": "PROPOSED",
+  "to": "B07",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N18",
+  "status": "PROPOSED",
+  "to": "B08",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N18",
+  "status": "PROPOSED",
+  "to": "C08",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N18",
+  "status": "PROPOSED",
+  "to": "C10",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N18",
+  "status": "PROPOSED",
+  "to": "E01",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N19",
+  "status": "PROPOSED",
+  "to": "A10",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N19",
+  "status": "PROPOSED",
+  "to": "ST-11",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N20",
+  "status": "PROPOSED",
+  "to": "B00",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N20",
+  "status": "PROPOSED",
+  "to": "B01",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N20",
+  "status": "PROPOSED",
+  "to": "ST-10",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N22",
+  "status": "PROPOSED",
+  "to": "E01",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-N24",
+  "status": "PROPOSED",
+  "to": "ACT-REGISTRY",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R10",
+  "status": "PROPOSED",
+  "to": "ST-15",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R11",
+  "status": "PROPOSED",
+  "to": "E01",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R11",
+  "status": "PROPOSED",
+  "to": "ST-06",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R11",
+  "status": "PROPOSED",
+  "to": "ST-07",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R12",
+  "status": "PROPOSED",
+  "to": "A01",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R12",
+  "status": "PROPOSED",
+  "to": "A02",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R12",
+  "status": "PROPOSED",
+  "to": "A06",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R12",
+  "status": "PROPOSED",
+  "to": "A09",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R12",
+  "status": "PROPOSED",
+  "to": "ST-14",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R13",
+  "status": "PROPOSED",
+  "to": "ST-12",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R13",
+  "status": "PROPOSED",
+  "to": "ST-13",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R14",
+  "status": "PROPOSED",
+  "to": "A10",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R14",
+  "status": "PROPOSED",
+  "to": "B00",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R14",
+  "status": "PROPOSED",
+  "to": "B00b",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R14",
+  "status": "PROPOSED",
+  "to": "B01",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R14",
+  "status": "PROPOSED",
+  "to": "B02",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R14",
+  "status": "PROPOSED",
+  "to": "C03",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R14",
+  "status": "PROPOSED",
+  "to": "ST-05",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R14",
+  "status": "PROPOSED",
+  "to": "ST-09",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R14",
+  "status": "PROPOSED",
+  "to": "ST-16",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R2",
+  "status": "PROPOSED",
+  "to": "A06",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R2",
+  "status": "PROPOSED",
+  "to": "B03",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R2",
+  "status": "PROPOSED",
+  "to": "C08",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R2",
+  "status": "PROPOSED",
+  "to": "C10",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R2",
+  "status": "PROPOSED",
+  "to": "D02",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R3",
+  "status": "PROPOSED",
+  "to": "B06",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R4",
+  "status": "PROPOSED",
+  "to": "B05",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R5",
+  "status": "PROPOSED",
+  "to": "E01",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R6",
+  "status": "PROPOSED",
+  "to": "C2-19",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R6",
+  "status": "PROPOSED",
+  "to": "ST-01",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R6",
+  "status": "PROPOSED",
+  "to": "ST-02",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R6",
+  "status": "PROPOSED",
+  "to": "ST-03",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R6",
+  "status": "PROPOSED",
+  "to": "ST-04",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R8",
+  "status": "PROPOSED",
+  "to": "D01",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R8",
+  "status": "PROPOSED",
+  "to": "D03",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R8",
+  "status": "PROPOSED",
+  "to": "D04",
+  "type": "concerns"
+ },
+ {
+  "from": "NCR-R9",
+  "status": "PROPOSED",
+  "to": "C07",
+  "type": "concerns"
+ },
+ {
+  "from": "CF-A01-COLLAB",
+  "status": "PROPOSED",
+  "to": "ACT-P-DUNN",
+  "type": "conflict_of"
+ },
+ {
+  "from": "CF-A01-RESIGN",
+  "status": "PROPOSED",
+  "to": "ACT-AC-PCNS",
+  "type": "conflict_of"
+ },
+ {
+  "from": "CF-A01-WAIVER",
+  "status": "PROPOSED",
+  "to": "ACT-AC-PCNS",
+  "type": "conflict_of"
+ },
+ {
+  "from": "CF-A02-SPONSORFIN",
+  "status": "PROPOSED",
+  "to": "ACT-P-WOODCOCK",
+  "type": "conflict_of"
+ },
+ {
+  "from": "CF-A05-PANELTIES",
+  "status": "PROPOSED",
+  "to": "ACT-AC-AAC-DSARM",
+  "type": "conflict_of"
+ },
+ {
+  "from": "CF-A07-ADVOCACY",
+  "status": "PROPOSED",
+  "to": "ACT-ETS",
+  "type": "conflict_of"
+ },
+ {
+  "from": "CF-C01-DQA",
+  "status": "PROPOSED",
+  "to": "ACT-CRE",
+  "type": "conflict_of"
+ },
+ {
+  "from": "CF-C01-FUNDING",
+  "status": "PROPOSED",
+  "to": "ACT-SP-SYNGENTA",
+  "type": "conflict_of"
+ },
+ {
+  "from": "CF-C03-ROWLAND",
+  "status": "PROPOSED",
+  "to": "ACT-P-ROWLAND",
+  "type": "conflict_of"
+ },
+ {
+  "from": "A01",
+  "status": "PROPOSED",
+  "to": "ACT-FDA-CDER",
+  "type": "decided_by"
+ },
+ {
+  "from": "A01",
+  "status": "PROPOSED",
+  "to": "ACT-P-CAVAZZONI",
+  "type": "decided_by"
+ },
+ {
+  "from": "A01",
+  "status": "PROPOSED",
+  "to": "ACT-P-WOODCOCK",
+  "type": "decided_by"
+ },
+ {
+  "from": "A02",
+  "status": "PROPOSED",
+  "to": "ACT-P-CALIFF",
+  "type": "decided_by"
+ },
+ {
+  "from": "A02",
+  "status": "PROPOSED",
+  "to": "ACT-P-WOODCOCK",
+  "type": "decided_by"
+ },
+ {
+  "from": "A03",
+  "status": "PROPOSED",
+  "to": "ACT-FDA-CDER",
+  "type": "decided_by"
+ },
+ {
+  "from": "A04",
+  "status": "PROPOSED",
+  "to": "ACT-P-BUMPUS",
+  "type": "decided_by"
+ },
+ {
+  "from": "A04",
+  "status": "PROPOSED",
+  "to": "ACT-P-CALIFF",
+  "type": "decided_by"
+ },
+ {
+  "from": "A04P",
+  "status": "PROPOSED",
+  "to": "ACT-FDA-CDER",
+  "type": "decided_by"
+ },
+ {
+  "from": "A05",
+  "status": "PROPOSED",
+  "to": "ACT-FDA-CDER",
+  "type": "decided_by"
+ },
+ {
+  "from": "A06",
+  "status": "PROPOSED",
+  "to": "ACT-FDA-CDER",
+  "type": "decided_by"
+ },
+ {
+  "from": "A07",
+  "status": "PROPOSED",
+  "to": "ACT-FDA-CDER",
+  "type": "decided_by"
+ },
+ {
+  "from": "A07",
+  "status": "PROPOSED",
+  "to": "ACT-P-WOODCOCK",
+  "type": "decided_by"
+ },
+ {
+  "from": "A08",
+  "status": "PROPOSED",
+  "to": "ACT-P-HAMBURG",
+  "type": "decided_by"
+ },
+ {
+  "from": "A08P",
+  "status": "PROPOSED",
+  "to": "ACT-FDA-CDER",
+  "type": "decided_by"
+ },
+ {
+  "from": "A09",
+  "status": "PROPOSED",
+  "to": "ACT-FDA-CDER",
+  "type": "decided_by"
+ },
+ {
+  "from": "A10",
+  "status": "PROPOSED",
+  "to": "ACT-FDA-CDER",
+  "type": "decided_by"
+ },
+ {
+  "from": "B00",
+  "status": "PROPOSED",
+  "to": "ACT-FDA-CDRH",
+  "type": "decided_by"
+ },
+ {
+  "from": "B00b",
+  "status": "PROPOSED",
+  "to": "ACT-FDA-CDRH",
+  "type": "decided_by"
+ },
+ {
+  "from": "B01",
+  "status": "PROPOSED",
+  "to": "ACT-FDA-CDRH",
+  "type": "decided_by"
+ },
+ {
+  "from": "B02",
+  "status": "PROPOSED",
+  "to": "ACT-FDA-CDRH",
+  "type": "decided_by"
+ },
+ {
+  "from": "B03",
+  "status": "PROPOSED",
+  "to": "ACT-FDA",
+  "type": "decided_by"
+ },
+ {
+  "from": "B04",
+  "status": "PROPOSED",
+  "to": "ACT-FDA-CDER",
+  "type": "decided_by"
+ },
+ {
+  "from": "B05",
+  "status": "PROPOSED",
+  "to": "ACT-FDA-FOOD",
+  "type": "decided_by"
+ },
+ {
+  "from": "B06",
+  "status": "PROPOSED",
+  "to": "ACT-FDA-FOOD",
+  "type": "decided_by"
+ },
+ {
+  "from": "B07",
+  "status": "PROPOSED",
+  "to": "ACT-FDA-FOOD",
+  "type": "decided_by"
+ },
+ {
+  "from": "B08",
+  "status": "PROPOSED",
+  "to": "ACT-FDA-FOOD",
+  "type": "decided_by"
+ },
+ {
+  "from": "C01",
+  "status": "PROPOSED",
+  "to": "ACT-EPA-OPP",
+  "type": "decided_by"
+ },
+ {
+  "from": "C02",
+  "status": "PROPOSED",
+  "to": "ACT-EPA-OPP",
+  "type": "decided_by"
+ },
+ {
+  "from": "C03",
+  "status": "PROPOSED",
+  "to": "ACT-EPA-OPP",
+  "type": "decided_by"
+ },
+ {
+  "from": "C04",
+  "status": "PROPOSED",
+  "to": "ACT-EPA",
+  "type": "decided_by"
+ },
+ {
+  "from": "C04",
+  "status": "PROPOSED",
+  "to": "ACT-P-REGAN",
+  "type": "decided_by"
+ },
+ {
+  "from": "C05",
+  "status": "PROPOSED",
+  "to": "ACT-EPA-OPP",
+  "type": "decided_by"
+ },
+ {
+  "from": "C06",
+  "status": "PROPOSED",
+  "to": "ACT-P-REGAN",
+  "type": "decided_by"
+ },
+ {
+  "from": "C07",
+  "status": "PROPOSED",
+  "to": "ACT-P-REGAN",
+  "type": "decided_by"
+ },
+ {
+  "from": "C08",
+  "status": "PROPOSED",
+  "to": "ACT-EPA-OW",
+  "type": "decided_by"
+ },
+ {
+  "from": "C08",
+  "status": "PROPOSED",
+  "to": "ACT-P-ZELDIN",
+  "type": "decided_by"
+ },
+ {
+  "from": "C09",
+  "status": "PROPOSED",
+  "to": "ACT-EPA-ORCR",
+  "type": "decided_by"
+ },
+ {
+  "from": "C10",
+  "status": "PROPOSED",
+  "to": "ACT-EPA-OPP",
+  "type": "decided_by"
+ },
+ {
+  "from": "C10",
+  "status": "PROPOSED",
+  "to": "ACT-SCOTUS",
+  "type": "decided_by"
+ },
+ {
+  "from": "C2-19",
+  "status": "PROPOSED",
+  "to": "ACT-EPA-OPP",
+  "type": "decided_by"
+ },
+ {
+  "from": "D01",
+  "status": "PROPOSED",
+  "to": "ACT-DEA",
+  "type": "decided_by"
+ },
+ {
+  "from": "D01",
+  "status": "PROPOSED",
+  "to": "ACT-DOJ",
+  "type": "decided_by"
+ },
+ {
+  "from": "D01",
+  "status": "PROPOSED",
+  "to": "ACT-PRESIDENT",
+  "type": "decided_by"
+ },
+ {
+  "from": "D02",
+  "status": "PROPOSED",
+  "to": "ACT-CONGRESS",
+  "type": "decided_by"
+ },
+ {
+  "from": "D02",
+  "status": "PROPOSED",
+  "to": "ACT-P-KENNEDY",
+  "type": "decided_by"
+ },
+ {
+  "from": "D03",
+  "status": "PROPOSED",
+  "to": "ACT-DEA",
+  "type": "decided_by"
+ },
+ {
+  "from": "D04",
+  "status": "PROPOSED",
+  "to": "ACT-DEA",
+  "type": "decided_by"
+ },
+ {
+  "from": "E01",
+  "status": "PROPOSED",
+  "to": "ACT-OSHA",
+  "type": "decided_by"
+ },
+ {
+  "from": "SCH1-1970",
+  "status": "PROPOSED",
+  "to": "ACT-CONGRESS",
+  "type": "decided_by"
+ },
+ {
+  "from": "ACT-DEA",
+  "status": "PROPOSED",
+  "to": "ACT-DOJ",
+  "type": "delegated_from"
+ },
+ {
+  "from": "ACT-EPA-OPP",
+  "status": "PROPOSED",
+  "to": "ACT-EPA",
+  "type": "delegated_from"
+ },
+ {
+  "from": "ACT-EPA-ORCR",
+  "status": "PROPOSED",
+  "to": "ACT-EPA",
+  "type": "delegated_from"
+ },
+ {
+  "from": "ACT-EPA-OW",
+  "status": "PROPOSED",
+  "to": "ACT-EPA",
+  "type": "delegated_from"
+ },
+ {
+  "from": "ACT-FDA-CDER",
+  "status": "PROPOSED",
+  "to": "ACT-FDA",
+  "type": "delegated_from"
+ },
+ {
+  "from": "ACT-FDA-CDRH",
+  "status": "PROPOSED",
+  "to": "ACT-FDA",
+  "type": "delegated_from"
+ },
+ {
+  "from": "ACT-FDA-FOOD",
+  "status": "PROPOSED",
+  "to": "ACT-FDA",
+  "type": "delegated_from"
+ },
+ {
+  "from": "ACT-FDA-REVIEWTEAM-A02",
+  "status": "PROPOSED",
+  "to": "ACT-FDA-CDER",
+  "type": "delegated_from"
+ },
+ {
+  "from": "A04",
+  "kind": "failed_confirmatory_trial",
+  "status": "PROPOSED",
+  "to": "EV-V017",
+  "type": "forced_by"
+ },
+ {
+  "from": "A08",
+  "kind": "failed_confirmatory_trial",
+  "status": "PROPOSED",
+  "to": "EV-V025",
+  "type": "forced_by"
+ },
+ {
+  "from": "B01",
+  "kind": "litigation_post_market_harm",
+  "status": "PROPOSED",
+  "to": "EV-V029",
+  "type": "forced_by"
+ },
+ {
+  "from": "B01",
+  "kind": "litigation_post_market_harm",
+  "status": "PROPOSED",
+  "to": "EV-V031",
+  "type": "forced_by"
+ },
+ {
+  "from": "B02",
+  "kind": "litigation_post_market_harm",
+  "status": "PROPOSED",
+  "to": "EV-V030",
+  "type": "forced_by"
+ },
+ {
+  "from": "B05",
+  "kind": "statute",
+  "status": "PROPOSED",
+  "to": "EV-E019",
+  "type": "forced_by"
+ },
+ {
+  "from": "B05",
+  "kind": "statute",
+  "status": "PROPOSED",
+  "to": "EV-V037",
+  "type": "forced_by"
+ },
+ {
+  "from": "B06",
+  "kind": "agency_own_study",
+  "status": "PROPOSED",
+  "to": "EV-V039",
+  "type": "forced_by"
+ },
+ {
+  "from": "C04",
+  "kind": "court_order",
+  "status": "PROPOSED",
+  "to": "EV-E029",
+  "type": "forced_by"
+ },
+ {
+  "from": "C04",
+  "kind": "court_order",
+  "status": "PROPOSED",
+  "to": "EV-V053",
+  "type": "forced_by"
+ },
+ {
+  "from": "C06",
+  "kind": "new_data_scheduled_rule",
+  "status": "PROPOSED",
+  "to": "EV-V057",
+  "type": "forced_by"
+ },
+ {
+  "from": "C07",
+  "kind": "new_data_scheduled_rule",
+  "status": "PROPOSED",
+  "to": "EV-V059",
+  "type": "forced_by"
+ },
+ {
+  "from": "D02",
+  "kind": "statute",
+  "status": "PROPOSED",
+  "to": "EV-E020",
+  "type": "forced_by"
+ },
+ {
+  "from": "D02",
+  "kind": "statute",
+  "status": "PROPOSED",
+  "to": "EV-V063",
+  "type": "forced_by"
+ },
+ {
+  "basis": [
+   "EV-E042"
+  ],
+  "from": "ACT-EPA-OPP",
+  "status": "OBSERVED",
+  "to": "AUTH-PRIA",
+  "type": "funded_by"
+ },
+ {
+  "from": "ACT-EPA-OW",
+  "status": "PROPOSED",
+  "to": "AUTH-APPROP",
+  "type": "funded_by"
+ },
+ {
+  "basis": [
+   "EV-E041",
+   "EV-F033"
+  ],
+  "from": "ACT-FDA-CDER",
+  "status": "OBSERVED",
+  "to": "AUTH-PDUFA",
+  "type": "funded_by"
+ },
+ {
+  "basis": [
+   "EV-E041"
+  ],
+  "from": "ACT-FDA-CDRH",
+  "status": "OBSERVED",
+  "to": "AUTH-MDUFA",
+  "type": "funded_by"
+ },
+ {
+  "basis": [
+   "EV-E041"
+  ],
+  "from": "ACT-FDA-FOOD",
+  "status": "OBSERVED",
+  "to": "AUTH-APPROP",
+  "type": "funded_by"
+ },
+ {
+  "from": "ACT-OSHA",
+  "status": "PROPOSED",
+  "to": "AUTH-APPROP",
+  "type": "funded_by"
+ },
+ {
+  "basis": [
+   "EV-V036"
+  ],
+  "from": "B04",
+  "status": "PROPOSED",
+  "to": "M14",
+  "type": "mirrors"
+ },
+ {
+  "basis": [
+   "EV-V111"
+  ],
+  "from": "B05",
+  "status": "PROPOSED",
+  "to": "M08",
+  "type": "mirrors"
+ },
+ {
+  "basis": [
+   "EV-E022",
+   "EV-V041"
+  ],
+  "from": "B07",
+  "status": "PROPOSED",
+  "to": "M05",
+  "type": "mirrors"
+ },
+ {
+  "basis": [
+   "EV-V110"
+  ],
+  "from": "B08",
+  "status": "PROPOSED",
+  "to": "M06",
+  "type": "mirrors"
+ },
+ {
+  "basis": [
+   "EV-V046",
+   "EV-V115"
+  ],
+  "from": "C01",
+  "status": "PROPOSED",
+  "to": "M02",
+  "type": "mirrors"
+ },
+ {
+  "basis": [
+   "EV-V048"
+  ],
+  "from": "C03",
+  "status": "PROPOSED",
+  "to": "M01",
+  "type": "mirrors"
+ },
+ {
+  "basis": [
+   "EV-V054"
+  ],
+  "from": "C04",
+  "status": "PROPOSED",
+  "to": "M04",
+  "type": "mirrors"
+ },
+ {
+  "basis": [
+   "EV-V056"
+  ],
+  "from": "C05",
+  "status": "PROPOSED",
+  "to": "M03",
+  "type": "mirrors"
+ },
+ {
+  "basis": [
+   "EV-V112"
+  ],
+  "from": "C07",
+  "status": "PROPOSED",
+  "to": "M09",
+  "type": "mirrors"
+ },
+ {
+  "basis": [
+   "EV-V113"
+  ],
+  "from": "C08",
+  "status": "PROPOSED",
+  "to": "M07",
+  "type": "mirrors"
+ },
+ {
+  "basis": [
+   "EV-V114"
+  ],
+  "from": "C09",
+  "status": "PROPOSED",
+  "to": "M10",
+  "type": "mirrors"
+ },
+ {
+  "basis": [
+   "EV-V080",
+   "EV-V081"
+  ],
+  "from": "E01",
+  "status": "PROPOSED",
+  "to": "M11",
+  "type": "mirrors"
+ },
+ {
+  "basis": [
+   "EV-F035",
+   "EV-V083"
+  ],
+  "from": "E01",
+  "status": "PROPOSED",
+  "to": "M12",
+  "type": "mirrors"
+ },
+ {
+  "basis": [
+   "EV-V084"
+  ],
+  "from": "E01",
+  "status": "PROPOSED",
+  "to": "M13",
+  "type": "mirrors"
+ },
+ {
+  "from": "A01",
+  "status": "PROPOSED",
+  "to": "ACT-AC-PCNS",
+  "type": "overruled"
+ },
+ {
+  "from": "A02",
+  "status": "PROPOSED",
+  "to": "ACT-AC-PCNS",
+  "type": "overruled"
+ },
+ {
+  "from": "A02",
+  "status": "PROPOSED",
+  "to": "ACT-FDA-REVIEWTEAM-A02",
+  "type": "overruled"
+ },
+ {
+  "from": "A03",
+  "status": "PROPOSED",
+  "to": "ACT-AC-AADPAC",
+  "type": "overruled"
+ },
+ {
+  "from": "A04",
+  "status": "PROPOSED",
+  "to": "ACT-AC-BRUDAC",
+  "type": "recommended_by"
+ },
+ {
+  "from": "A04",
+  "status": "PROPOSED",
+  "to": "ACT-AC-MAKENA-HEARING",
+  "type": "recommended_by"
+ },
+ {
+  "from": "A05",
+  "status": "PROPOSED",
+  "to": "ACT-AC-AAC-DSARM",
+  "type": "recommended_by"
+ },
+ {
+  "from": "A06",
+  "status": "PROPOSED",
+  "to": "ACT-AC-AMDAC",
+  "type": "recommended_by"
+ },
+ {
+  "from": "A07",
+  "status": "PROPOSED",
+  "to": "ACT-AC-BRUDAC",
+  "type": "recommended_by"
+ },
+ {
+  "from": "A08",
+  "status": "PROPOSED",
+  "to": "ACT-AC-ODAC",
+  "type": "recommended_by"
+ },
+ {
+  "from": "A09",
+  "status": "PROPOSED",
+  "to": "ACT-AC-PCNS",
+  "type": "recommended_by"
+ },
+ {
+  "from": "B01",
+  "status": "PROPOSED",
+  "to": "ACT-AC-OBGYN",
+  "type": "recommended_by"
+ },
+ {
+  "from": "B02",
+  "status": "PROPOSED",
+  "to": "ACT-AC-ORTHO",
+  "type": "recommended_by"
+ },
+ {
+  "from": "B05",
+  "status": "PROPOSED",
+  "to": "ACT-CSPI",
+  "type": "recommended_by"
+ },
+ {
+  "from": "D03",
+  "status": "PROPOSED",
+  "to": "ACT-HHS",
+  "type": "recommended_by"
+ },
+ {
+  "from": "REV-A04",
+  "kind": "to",
+  "status": "PROPOSED",
+  "to": "A04",
+  "type": "reverses"
+ },
+ {
+  "from": "REV-A04",
+  "status": "PROPOSED",
+  "to": "A04P",
+  "type": "reverses"
+ },
+ {
+  "from": "REV-A08",
+  "kind": "to",
+  "status": "PROPOSED",
+  "to": "A08",
+  "type": "reverses"
+ },
+ {
+  "from": "REV-A08",
+  "status": "PROPOSED",
+  "to": "A08P",
+  "type": "reverses"
+ },
+ {
+  "from": "REV-A10",
+  "status": "PROPOSED",
+  "to": "A10",
+  "type": "reverses"
+ },
+ {
+  "from": "REV-B00-B01",
+  "status": "PROPOSED",
+  "to": "B00",
+  "type": "reverses"
+ },
+ {
+  "from": "REV-B00-B01",
+  "kind": "to",
+  "status": "PROPOSED",
+  "to": "B01",
+  "type": "reverses"
+ },
+ {
+  "from": "REV-B00b-B02",
+  "status": "PROPOSED",
+  "to": "B00b",
+  "type": "reverses"
+ },
+ {
+  "from": "REV-B00b-B02",
+  "kind": "to",
+  "status": "PROPOSED",
+  "to": "B02",
+  "type": "reverses"
+ },
+ {
+  "from": "REV-C03",
+  "status": "PROPOSED",
+  "to": "C03",
+  "type": "reverses"
+ },
+ {
+  "from": "REV-C04",
+  "status": "PROPOSED",
+  "to": "C04",
+  "type": "reverses"
+ },
+ {
+  "from": "REV-D01-1970",
+  "kind": "to",
+  "status": "PROPOSED",
+  "to": "D01",
+  "type": "reverses"
+ },
+ {
+  "from": "REV-D01-1970",
+  "status": "PROPOSED",
+  "to": "SCH1-1970",
+  "type": "reverses"
+ },
+ {
+  "from": "REV-D01-2016",
+  "kind": "to",
+  "status": "PROPOSED",
+  "to": "D01",
+  "type": "reverses"
+ },
+ {
+  "from": "REV-D01-2016",
+  "status": "PROPOSED",
+  "to": "D03",
+  "type": "reverses"
+ },
+ {
+  "from": "REV-D02",
+  "status": "PROPOSED",
+  "to": "D02",
+  "type": "reverses"
+ },
+ {
+  "from": "A01",
+  "status": "PROPOSED",
+  "to": "ACT-SP-BIOGEN",
+  "type": "sponsored_by"
+ },
+ {
+  "from": "A02",
+  "status": "PROPOSED",
+  "to": "ACT-SP-SAREPTA",
+  "type": "sponsored_by"
+ },
+ {
+  "from": "A03",
+  "status": "PROPOSED",
+  "to": "ACT-SP-ZOGENIX",
+  "type": "sponsored_by"
+ },
+ {
+  "from": "A04",
+  "status": "PROPOSED",
+  "to": "ACT-SP-COVIS",
+  "type": "sponsored_by"
+ },
+ {
+  "from": "A04P",
+  "status": "PROPOSED",
+  "to": "ACT-SP-COVIS",
+  "type": "sponsored_by"
+ },
+ {
+  "from": "A05",
+  "status": "PROPOSED",
+  "to": "ACT-SP-MERCK",
+  "type": "sponsored_by"
+ },
+ {
+  "from": "A06",
+  "status": "PROPOSED",
+  "to": "ACT-SP-MERCK",
+  "type": "sponsored_by"
+ },
+ {
+  "from": "A07",
+  "status": "PROPOSED",
+  "to": "ACT-SP-SPROUT",
+  "type": "sponsored_by"
+ },
+ {
+  "from": "A08",
+  "status": "PROPOSED",
+  "to": "ACT-SP-GENENTECH",
+  "type": "sponsored_by"
+ },
+ {
+  "from": "A08P",
+  "status": "PROPOSED",
+  "to": "ACT-SP-GENENTECH",
+  "type": "sponsored_by"
+ },
+ {
+  "from": "A09",
+  "status": "PROPOSED",
+  "to": "ACT-SP-LILLY",
+  "type": "sponsored_by"
+ },
+ {
+  "from": "A10",
+  "status": "PROPOSED",
+  "to": "ACT-SP-SHIRE",
+  "type": "sponsored_by"
+ },
+ {
+  "from": "B00",
+  "status": "PROPOSED",
+  "to": "ACT-SP-MESH",
+  "type": "sponsored_by"
+ },
+ {
+  "from": "B00b",
+  "status": "PROPOSED",
+  "to": "ACT-SP-MOM",
+  "type": "sponsored_by"
+ },
+ {
+  "from": "B01",
+  "status": "PROPOSED",
+  "to": "ACT-SP-MESH",
+  "type": "sponsored_by"
+ },
+ {
+  "from": "B02",
+  "status": "PROPOSED",
+  "to": "ACT-SP-MOM",
+  "type": "sponsored_by"
+ },
+ {
+  "from": "B04",
+  "status": "PROPOSED",
+  "to": "ACT-SP-NOVO",
+  "type": "sponsored_by"
+ },
+ {
+  "from": "C01",
+  "status": "PROPOSED",
+  "to": "ACT-SP-SYNGENTA",
+  "type": "sponsored_by"
+ },
+ {
+  "from": "C02",
+  "status": "PROPOSED",
+  "to": "ACT-SP-SYNGENTA",
+  "type": "sponsored_by"
+ },
+ {
+  "from": "C03",
+  "status": "PROPOSED",
+  "to": "ACT-SP-BAYER",
+  "type": "sponsored_by"
+ },
+ {
+  "from": "C04",
+  "status": "PROPOSED",
+  "to": "ACT-SP-CORTEVA",
+  "type": "sponsored_by"
+ },
+ {
+  "from": "C05",
+  "status": "PROPOSED",
+  "to": "ACT-SP-BAYER",
+  "type": "sponsored_by"
+ },
+ {
+  "from": "C10",
+  "status": "PROPOSED",
+  "to": "ACT-SP-BAYER",
+  "type": "sponsored_by"
+ },
+ {
+  "from": "C2-19",
+  "status": "PROPOSED",
+  "to": "ACT-SP-PENTA",
+  "type": "sponsored_by"
+ },
+ {
+  "from": "D04",
+  "status": "PROPOSED",
+  "to": "ACT-SP-COMPASS",
+  "type": "sponsored_by"
+ },
+ {
+  "from": "OUT-C03-VACATUR",
+  "status": "PROPOSED",
+  "to": "C03",
+  "type": "supersedes"
+ },
+ {
+  "from": "OUT-C04-VACATUR",
+  "status": "PROPOSED",
+  "to": "C04",
+  "type": "supersedes"
+ },
+ {
+  "from": "OUT-C10-DURNELL",
+  "status": "PROPOSED",
+  "to": "C10",
+  "type": "supersedes"
+ },
+ {
+  "from": "OUT-D02-MORATORIUM",
+  "status": "PROPOSED",
+  "to": "D02",
+  "type": "supersedes"
+ },
+ {
+  "from": "EV-E001",
+  "status": "OBSERVED",
+  "to": "AUTH-FDCA-506C",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E002",
+  "status": "OBSERVED",
+  "to": "AUTH-21CFR314H",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E003",
+  "status": "OBSERVED",
+  "to": "AUTH-21CFR601E",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E004",
+  "status": "OBSERVED",
+  "to": "AUTH-GD-EXPEDITED",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E005",
+  "status": "OBSERVED",
+  "to": "AUTH-FDORA-3210",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E006",
+  "status": "OBSERVED",
+  "to": "AUTH-21CFR314.126",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E006",
+  "status": "OBSERVED",
+  "to": "AUTH-FDCA-505",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E007",
+  "status": "OBSERVED",
+  "to": "AUTH-FDCA-505-1",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E008",
+  "status": "OBSERVED",
+  "to": "A06",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E008",
+  "status": "OBSERVED",
+  "to": "AUTH-FDCA-564",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E008",
+  "status": "OBSERVED",
+  "to": "AUTH-HHS-EUA-2020",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E009",
+  "status": "OBSERVED",
+  "to": "A06",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E010",
+  "status": "OBSERVED",
+  "to": "AUTH-21CFR14",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E011",
+  "status": "OBSERVED",
+  "to": "A10",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E012",
+  "status": "OBSERVED",
+  "to": "AUTH-21CFR314.600",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E012",
+  "status": "OBSERVED",
+  "to": "B03",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E013",
+  "status": "OBSERVED",
+  "to": "AUTH-GD-ANIMALRULE",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E013",
+  "status": "OBSERVED",
+  "to": "B03",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E014",
+  "status": "OBSERVED",
+  "to": "AUTH-21CFR201.57",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E014",
+  "status": "OBSERVED",
+  "to": "AUTH-FDCA-505O4",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E014",
+  "status": "OBSERVED",
+  "to": "B04",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E015",
+  "status": "OBSERVED",
+  "to": "AUTH-21CFR807E",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E015",
+  "status": "OBSERVED",
+  "to": "AUTH-FDCA-510K",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E015",
+  "status": "OBSERVED",
+  "to": "B00",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E015",
+  "status": "OBSERVED",
+  "to": "B00b",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E015",
+  "status": "OBSERVED",
+  "to": "EA-03",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E015",
+  "status": "OBSERVED",
+  "to": "EA-04",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E016",
+  "status": "OBSERVED",
+  "to": "AUTH-FDCA-513",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E016",
+  "status": "OBSERVED",
+  "to": "B01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E017",
+  "status": "OBSERVED",
+  "to": "AUTH-21CFR884.5980",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E017",
+  "status": "OBSERVED",
+  "to": "B01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E018",
+  "status": "OBSERVED",
+  "to": "AUTH-21CFR888.3330",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E018",
+  "status": "OBSERVED",
+  "to": "B02",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E019",
+  "status": "OBSERVED",
+  "to": "AUTH-21CFR74.303",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E019",
+  "status": "OBSERVED",
+  "to": "AUTH-FDCA-721",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E019",
+  "status": "OBSERVED",
+  "to": "B05",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E020",
+  "status": "OBSERVED",
+  "to": "AUTH-FDCA-409",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E020",
+  "status": "OBSERVED",
+  "to": "D02",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E021",
+  "status": "OBSERVED",
+  "to": "AUTH-21CFR180.30",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E021",
+  "status": "OBSERVED",
+  "to": "B06",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E022",
+  "status": "OBSERVED",
+  "to": "AUTH-21CFR73.575",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E022",
+  "status": "OBSERVED",
+  "to": "AUTH-EU-2022-63",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E022",
+  "status": "OBSERVED",
+  "to": "B07",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E022",
+  "status": "OBSERVED",
+  "to": "M05",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E023",
+  "status": "OBSERVED",
+  "to": "AUTH-21CFR172.804",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E023",
+  "status": "OBSERVED",
+  "to": "B08",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E024",
+  "status": "OBSERVED",
+  "to": "AUTH-21CFR180.37",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E024",
+  "status": "OBSERVED",
+  "to": "AUTH-SSLA-1977",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E024",
+  "status": "OBSERVED",
+  "to": "D02",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E025",
+  "status": "OBSERVED",
+  "to": "AUTH-40CFR155C",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E025",
+  "status": "OBSERVED",
+  "to": "AUTH-FIFRA-3G",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E025",
+  "status": "OBSERVED",
+  "to": "C02",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E025",
+  "status": "OBSERVED",
+  "to": "C03",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E025",
+  "status": "OBSERVED",
+  "to": "C05",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E026",
+  "status": "OBSERVED",
+  "to": "AUTH-FIFRA-4",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E026",
+  "status": "OBSERVED",
+  "to": "C01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E027",
+  "status": "OBSERVED",
+  "to": "AUTH-FFDCA-408",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E027",
+  "status": "OBSERVED",
+  "to": "C04",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E028",
+  "status": "OBSERVED",
+  "to": "AUTH-86FR48315",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E028",
+  "status": "OBSERVED",
+  "to": "C04",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E029",
+  "status": "OBSERVED",
+  "to": "AUTH-CA9-LULAC-2021",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E029",
+  "status": "OBSERVED",
+  "to": "C04",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E030",
+  "status": "OBSERVED",
+  "to": "AUTH-CA8-RRV-2023",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E030",
+  "status": "OBSERVED",
+  "to": "C04",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E031",
+  "status": "OBSERVED",
+  "to": "AUTH-CA9-NRDC-2022",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E031",
+  "status": "OBSERVED",
+  "to": "C03",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E032",
+  "status": "OBSERVED",
+  "to": "AUTH-FIFRA-24B",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E032",
+  "status": "OBSERVED",
+  "to": "C10",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E033",
+  "status": "OBSERVED",
+  "to": "AUTH-89FR86418",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E033",
+  "status": "OBSERVED",
+  "to": "AUTH-SDWA-1412",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E033",
+  "status": "OBSERVED",
+  "to": "C06",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E034",
+  "status": "OBSERVED",
+  "to": "AUTH-89FR32532",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E034",
+  "status": "OBSERVED",
+  "to": "C07",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E035",
+  "status": "OBSERVED",
+  "to": "AUTH-40CFR141.40",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E035",
+  "status": "OBSERVED",
+  "to": "AUTH-SDWA-1445",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E035",
+  "status": "OBSERVED",
+  "to": "C08",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E036",
+  "status": "OBSERVED",
+  "to": "AUTH-75FR78918",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E036",
+  "status": "OBSERVED",
+  "to": "C09",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E037",
+  "status": "OBSERVED",
+  "to": "AUTH-21CFR1308",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E037",
+  "status": "OBSERVED",
+  "to": "AUTH-CSA-201",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E037",
+  "status": "OBSERVED",
+  "to": "D01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E038",
+  "status": "OBSERVED",
+  "to": "AUTH-OSHA-5A1",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E038",
+  "status": "OBSERVED",
+  "to": "AUTH-OSHA-6B",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E038",
+  "status": "OBSERVED",
+  "to": "E01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E039",
+  "status": "OBSERVED",
+  "to": "AUTH-DK-WCA",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E040",
+  "status": "OBSERVED",
+  "to": "AUTH-DE-SGB7-9",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E041",
+  "status": "OBSERVED",
+  "to": "AUTH-MDUFA",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E041",
+  "status": "OBSERVED",
+  "to": "AUTH-PDUFA",
+  "type": "supports"
+ },
+ {
+  "from": "EV-E042",
+  "status": "OBSERVED",
+  "to": "AUTH-PRIA",
+  "type": "supports"
+ },
+ {
+  "from": "EV-F001",
+  "status": "OBSERVED",
+  "to": "A01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-F004",
+  "status": "OBSERVED",
+  "to": "A02",
+  "type": "supports"
+ },
+ {
+  "from": "EV-F004",
+  "status": "OBSERVED",
+  "to": "EA-07",
+  "type": "supports"
+ },
+ {
+  "from": "EV-F005",
+  "status": "OBSERVED",
+  "to": "A02",
+  "type": "supports"
+ },
+ {
+  "from": "EV-F006",
+  "status": "OBSERVED",
+  "to": "A03",
+  "type": "supports"
+ },
+ {
+  "from": "EV-F007",
+  "status": "OBSERVED",
+  "to": "A04",
+  "type": "supports"
+ },
+ {
+  "from": "EV-F008",
+  "status": "OBSERVED",
+  "to": "A05",
+  "type": "supports"
+ },
+ {
+  "from": "EV-F010",
+  "status": "OBSERVED",
+  "to": "A06",
+  "type": "supports"
+ },
+ {
+  "from": "EV-F011",
+  "status": "OBSERVED",
+  "to": "A07",
+  "type": "supports"
+ },
+ {
+  "from": "EV-F012",
+  "status": "OBSERVED",
+  "to": "A07",
+  "type": "supports"
+ },
+ {
+  "from": "EV-F013",
+  "status": "OBSERVED",
+  "to": "A08",
+  "type": "supports"
+ },
+ {
+  "from": "EV-F014",
+  "status": "OBSERVED",
+  "to": "A09",
+  "type": "supports"
+ },
+ {
+  "from": "EV-F015",
+  "status": "OBSERVED",
+  "to": "A10",
+  "type": "supports"
+ },
+ {
+  "from": "EV-F016",
+  "status": "OBSERVED",
+  "to": "B01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-F017",
+  "status": "OBSERVED",
+  "to": "B02",
+  "type": "supports"
+ },
+ {
+  "from": "EV-F018",
+  "status": "OBSERVED",
+  "to": "B04",
+  "type": "supports"
+ },
+ {
+  "from": "EV-F019",
+  "status": "OBSERVED",
+  "to": "B05",
+  "type": "supports"
+ },
+ {
+  "from": "EV-F020",
+  "status": "OBSERVED",
+  "to": "B06",
+  "type": "supports"
+ },
+ {
+  "from": "EV-F021",
+  "status": "OBSERVED",
+  "to": "C01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-F022",
+  "status": "OBSERVED",
+  "to": "C01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-F023",
+  "status": "OBSERVED",
+  "to": "C03",
+  "type": "supports"
+ },
+ {
+  "from": "EV-F024",
+  "status": "OBSERVED",
+  "to": "C04",
+  "type": "supports"
+ },
+ {
+  "from": "EV-F025",
+  "status": "OBSERVED",
+  "to": "C05",
+  "type": "supports"
+ },
+ {
+  "from": "EV-F026",
+  "status": "OBSERVED",
+  "to": "C06",
+  "type": "supports"
+ },
+ {
+  "from": "EV-F027",
+  "status": "OBSERVED",
+  "to": "C07",
+  "type": "supports"
+ },
+ {
+  "from": "EV-F028",
+  "status": "OBSERVED",
+  "to": "C08",
+  "type": "supports"
+ },
+ {
+  "from": "EV-F029",
+  "status": "OBSERVED",
+  "to": "D02",
+  "type": "supports"
+ },
+ {
+  "from": "EV-F030",
+  "status": "OBSERVED",
+  "to": "AUTH-EO-MARIJUANA",
+  "type": "supports"
+ },
+ {
+  "from": "EV-F030",
+  "status": "OBSERVED",
+  "to": "D01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-F031",
+  "status": "OBSERVED",
+  "to": "C10",
+  "type": "supports"
+ },
+ {
+  "from": "EV-F034",
+  "status": "OBSERVED",
+  "to": "E01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-F035",
+  "status": "OBSERVED",
+  "to": "M12",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G001",
+  "status": "OBSERVED",
+  "to": "C2-19",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G001",
+  "status": "OBSERVED",
+  "to": "NCR-R6",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G002",
+  "status": "OBSERVED",
+  "to": "AUTH-87FR6535",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G002",
+  "status": "OBSERVED",
+  "to": "C2-19",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G002",
+  "status": "OBSERVED",
+  "to": "NCR-R6",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G003",
+  "status": "OBSERVED",
+  "to": "AUTH-87FR5815",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G004",
+  "status": "OBSERVED",
+  "to": "AUTH-87FR25266",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G005",
+  "status": "OBSERVED",
+  "to": "AUTH-87FR48018",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G005",
+  "status": "OBSERVED",
+  "to": "AUTH-87FR64484",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G006",
+  "status": "OBSERVED",
+  "to": "NCR-R14",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G006",
+  "status": "OBSERVED",
+  "to": "REV-C03",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G007",
+  "status": "OBSERVED",
+  "to": "NCR-R14",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G007",
+  "status": "OBSERVED",
+  "to": "REV-C03",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G008",
+  "status": "OBSERVED",
+  "to": "NCR-N14",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G008",
+  "status": "OBSERVED",
+  "to": "REV-C04",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G009",
+  "status": "OBSERVED",
+  "to": "REV-C04",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G010",
+  "status": "OBSERVED",
+  "to": "AUTH-21CFR314.530",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G010",
+  "status": "OBSERVED",
+  "to": "AUTH-SUBPART-H-AGREEMENT",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G010",
+  "status": "OBSERVED",
+  "to": "NCR-N19",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G010",
+  "status": "OBSERVED",
+  "to": "NCR-R14",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G010",
+  "status": "OBSERVED",
+  "to": "REV-A10",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G011",
+  "status": "OBSERVED",
+  "to": "NCR-N04",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G011",
+  "status": "OBSERVED",
+  "to": "REV-D02",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G012",
+  "status": "OBSERVED",
+  "to": "NCR-N22",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G012",
+  "status": "OBSERVED",
+  "to": "NCR-R11",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G012",
+  "status": "OBSERVED",
+  "to": "NCR-R5",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G013",
+  "status": "OBSERVED",
+  "to": "NCR-R11",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G013",
+  "status": "OBSERVED",
+  "to": "NCR-R5",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G014",
+  "status": "OBSERVED",
+  "to": "NCR-N20",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G014",
+  "status": "OBSERVED",
+  "to": "NCR-R14",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G014",
+  "status": "OBSERVED",
+  "to": "REV-B00-B01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G015",
+  "status": "OBSERVED",
+  "to": "NCR-R14",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G018",
+  "status": "OBSERVED",
+  "to": "D03",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G018",
+  "status": "OBSERVED",
+  "to": "NCR-R8",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G019",
+  "status": "OBSERVED",
+  "to": "AUTH-DOJ-2026-SCHIII",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G019",
+  "status": "OBSERVED",
+  "to": "NCR-R8",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G019",
+  "status": "OBSERVED",
+  "to": "REV-D01-1970",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G019",
+  "status": "OBSERVED",
+  "to": "REV-D01-2016",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G019",
+  "status": "OBSERVED",
+  "to": "SCH1-1970",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G020",
+  "status": "OBSERVED",
+  "to": "D04",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G020",
+  "status": "OBSERVED",
+  "to": "NCR-R8",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G021",
+  "status": "OBSERVED",
+  "to": "NCR-R8",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G023",
+  "status": "OBSERVED",
+  "to": "NCR-R9",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G024",
+  "status": "OBSERVED",
+  "to": "AUTH-CA-AB418",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G024",
+  "status": "OBSERVED",
+  "to": "NCR-N03",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G031",
+  "status": "OBSERVED",
+  "to": "A04P",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G031",
+  "status": "OBSERVED",
+  "to": "REV-A04",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G032",
+  "status": "OBSERVED",
+  "to": "NCR-R14",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G032",
+  "status": "OBSERVED",
+  "to": "REV-B00b-B02",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G033",
+  "status": "OBSERVED",
+  "to": "NCR-R14",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G033",
+  "status": "OBSERVED",
+  "to": "REV-C03",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G034",
+  "status": "OBSERVED",
+  "to": "D04",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G034",
+  "status": "OBSERVED",
+  "to": "NCR-R8",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G035",
+  "status": "OBSERVED",
+  "to": "NCR-N20",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G035",
+  "status": "OBSERVED",
+  "to": "NCR-R14",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G035",
+  "status": "OBSERVED",
+  "to": "REV-B00-B01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G036",
+  "status": "OBSERVED",
+  "to": "AUTH-81FR53767",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G036",
+  "status": "OBSERVED",
+  "to": "D03",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G036",
+  "status": "OBSERVED",
+  "to": "REV-D01-2016",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G037",
+  "status": "OBSERVED",
+  "to": "D04",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G038",
+  "status": "OBSERVED",
+  "to": "A08P",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G038",
+  "status": "OBSERVED",
+  "to": "REV-A08",
+  "type": "supports"
+ },
+ {
+  "from": "EV-G039",
+  "status": "OBSERVED",
+  "to": "REV-B00b-B02",
+  "type": "supports"
+ },
+ {
+  "from": "EV-H001",
+  "status": "OBSERVED",
+  "to": "EA-01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-U01",
+  "note": "input relied on, not located",
+  "status": "PROPOSED",
+  "to": "A01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-U02",
+  "note": "input relied on, not located",
+  "status": "PROPOSED",
+  "to": "A02",
+  "type": "supports"
+ },
+ {
+  "from": "EV-U03",
+  "note": "input relied on, not located",
+  "status": "PROPOSED",
+  "to": "C03",
+  "type": "supports"
+ },
+ {
+  "from": "EV-U04",
+  "note": "input relied on, not located",
+  "status": "PROPOSED",
+  "to": "C02",
+  "type": "supports"
+ },
+ {
+  "from": "EV-U05",
+  "note": "input relied on, not located",
+  "status": "PROPOSED",
+  "to": "B00",
+  "type": "supports"
+ },
+ {
+  "from": "EV-U06",
+  "note": "input relied on, not located",
+  "status": "PROPOSED",
+  "to": "B00b",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V002",
+  "status": "OBSERVED",
+  "to": "NCR-R1",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V005",
+  "status": "OBSERVED",
+  "to": "A03",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V009",
+  "status": "OBSERVED",
+  "to": "AUTH-SCOTUS-DURNELL",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V009",
+  "status": "OBSERVED",
+  "to": "C10",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V009",
+  "status": "OBSERVED",
+  "to": "NCR-R2",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V010",
+  "status": "OBSERVED",
+  "to": "C10",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V011",
+  "status": "OBSERVED",
+  "to": "C08",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V011",
+  "status": "OBSERVED",
+  "to": "EA-02",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V011",
+  "status": "OBSERVED",
+  "to": "NCR-R2",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V012",
+  "status": "OBSERVED",
+  "to": "C08",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V013",
+  "status": "OBSERVED",
+  "to": "D01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V014",
+  "status": "OBSERVED",
+  "to": "D01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V015",
+  "status": "OBSERVED",
+  "to": "A01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V015",
+  "status": "OBSERVED",
+  "to": "EA-06",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V016",
+  "status": "OBSERVED",
+  "to": "A01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V016",
+  "status": "OBSERVED",
+  "to": "EA-06",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V017",
+  "status": "OBSERVED",
+  "to": "A04",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V017",
+  "status": "OBSERVED",
+  "to": "A04P",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V017",
+  "status": "OBSERVED",
+  "to": "REV-A04",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V018",
+  "status": "OBSERVED",
+  "to": "A04",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V019",
+  "status": "OBSERVED",
+  "to": "A05",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V020",
+  "status": "OBSERVED",
+  "to": "A05",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V021",
+  "status": "OBSERVED",
+  "to": "A06",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V021",
+  "status": "OBSERVED",
+  "to": "NCR-R2",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V022",
+  "status": "OBSERVED",
+  "to": "A06",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V023",
+  "status": "OBSERVED",
+  "to": "A07",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V024",
+  "status": "OBSERVED",
+  "to": "A07",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V025",
+  "status": "OBSERVED",
+  "to": "A08",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V025",
+  "status": "OBSERVED",
+  "to": "REV-A08",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V026",
+  "status": "OBSERVED",
+  "to": "A08",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V026",
+  "status": "OBSERVED",
+  "to": "REV-A08",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V027",
+  "status": "OBSERVED",
+  "to": "A09",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V028",
+  "status": "OBSERVED",
+  "to": "A09",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V029",
+  "status": "OBSERVED",
+  "to": "B00",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V029",
+  "status": "OBSERVED",
+  "to": "B01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V029",
+  "status": "OBSERVED",
+  "to": "EA-03",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V030",
+  "status": "OBSERVED",
+  "to": "B00b",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V030",
+  "status": "OBSERVED",
+  "to": "B02",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V030",
+  "status": "OBSERVED",
+  "to": "EA-04",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V031",
+  "status": "OBSERVED",
+  "to": "B01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V032",
+  "status": "OBSERVED",
+  "to": "B03",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V033",
+  "status": "OBSERVED",
+  "to": "B03",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V033",
+  "status": "OBSERVED",
+  "to": "NCR-R2",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V034",
+  "status": "OBSERVED",
+  "to": "B04",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V035",
+  "status": "OBSERVED",
+  "to": "B04",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V036",
+  "status": "OBSERVED",
+  "to": "B04",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V036",
+  "status": "OBSERVED",
+  "to": "M14",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V037",
+  "status": "OBSERVED",
+  "to": "B05",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V038",
+  "status": "OBSERVED",
+  "to": "B05",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V038",
+  "status": "OBSERVED",
+  "to": "NCR-N05",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V039",
+  "status": "OBSERVED",
+  "to": "B06",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V039",
+  "status": "OBSERVED",
+  "to": "NCR-N03",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V039",
+  "status": "OBSERVED",
+  "to": "NCR-R3",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V040",
+  "status": "OBSERVED",
+  "to": "B06",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V041",
+  "status": "OBSERVED",
+  "to": "B07",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V041",
+  "status": "OBSERVED",
+  "to": "EA-08",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V041",
+  "status": "OBSERVED",
+  "to": "M05",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V042",
+  "status": "OBSERVED",
+  "to": "B07",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V043",
+  "status": "OBSERVED",
+  "to": "B08",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V044",
+  "status": "OBSERVED",
+  "to": "B08",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V045",
+  "status": "OBSERVED",
+  "to": "C01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V045",
+  "status": "OBSERVED",
+  "to": "C02",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V046",
+  "status": "OBSERVED",
+  "to": "C01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V046",
+  "status": "OBSERVED",
+  "to": "M02",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V047",
+  "status": "OBSERVED",
+  "to": "C02",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V048",
+  "status": "OBSERVED",
+  "to": "C03",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V048",
+  "status": "OBSERVED",
+  "to": "M01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V049",
+  "status": "OBSERVED",
+  "to": "C03",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V050",
+  "status": "OBSERVED",
+  "to": "C10",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V051",
+  "status": "OBSERVED",
+  "to": "C10",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V052",
+  "status": "OBSERVED",
+  "to": "C04",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V053",
+  "status": "OBSERVED",
+  "to": "C04",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V054",
+  "status": "OBSERVED",
+  "to": "M04",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V055",
+  "status": "OBSERVED",
+  "to": "C05",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V056",
+  "status": "OBSERVED",
+  "to": "M03",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V057",
+  "status": "OBSERVED",
+  "to": "C06",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V058",
+  "status": "OBSERVED",
+  "to": "C06",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V059",
+  "status": "OBSERVED",
+  "to": "C07",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V060",
+  "status": "OBSERVED",
+  "to": "C07",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V061",
+  "status": "OBSERVED",
+  "to": "C08",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V061",
+  "status": "OBSERVED",
+  "to": "EA-02",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V062",
+  "status": "OBSERVED",
+  "to": "C08",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V063",
+  "status": "OBSERVED",
+  "to": "C09",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V063",
+  "status": "OBSERVED",
+  "to": "D02",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V063",
+  "status": "OBSERVED",
+  "to": "NCR-N04",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V063",
+  "status": "OBSERVED",
+  "to": "NCR-R2",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V064",
+  "status": "OBSERVED",
+  "to": "C10",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V065",
+  "status": "OBSERVED",
+  "to": "D01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V066",
+  "status": "OBSERVED",
+  "to": "D01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V067",
+  "status": "OBSERVED",
+  "to": "C08",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V073",
+  "status": "OBSERVED",
+  "to": "A02",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V074",
+  "status": "OBSERVED",
+  "to": "A10",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V075",
+  "status": "OBSERVED",
+  "to": "A03",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V076",
+  "status": "OBSERVED",
+  "to": "A07",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V077",
+  "status": "OBSERVED",
+  "to": "D01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V080",
+  "status": "OBSERVED",
+  "to": "E01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V080",
+  "status": "OBSERVED",
+  "to": "M11",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V080",
+  "status": "OBSERVED",
+  "to": "NCR-R5",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V081",
+  "status": "OBSERVED",
+  "to": "E01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V081",
+  "status": "OBSERVED",
+  "to": "M11",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V081",
+  "status": "OBSERVED",
+  "to": "NCR-R5",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V082",
+  "status": "OBSERVED",
+  "to": "E01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V082",
+  "status": "OBSERVED",
+  "to": "EA-05",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V082",
+  "status": "OBSERVED",
+  "to": "NCR-R5",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V083",
+  "status": "OBSERVED",
+  "to": "E01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V083",
+  "status": "OBSERVED",
+  "to": "M12",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V083",
+  "status": "OBSERVED",
+  "to": "NCR-R5",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V084",
+  "status": "OBSERVED",
+  "to": "E01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V084",
+  "status": "OBSERVED",
+  "to": "M13",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V084",
+  "status": "OBSERVED",
+  "to": "NCR-R5",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V085",
+  "status": "OBSERVED",
+  "to": "E01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V085",
+  "status": "OBSERVED",
+  "to": "NCR-R5",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V086",
+  "status": "OBSERVED",
+  "to": "E01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V086",
+  "status": "OBSERVED",
+  "to": "EA-05",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V086",
+  "status": "OBSERVED",
+  "to": "NCR-R5",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V087",
+  "status": "OBSERVED",
+  "to": "E01",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V087",
+  "status": "OBSERVED",
+  "to": "EA-05",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V087",
+  "status": "OBSERVED",
+  "to": "NCR-R5",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V090",
+  "status": "OBSERVED",
+  "to": "NCR-N23",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V091",
+  "status": "OBSERVED",
+  "to": "NCR-N23",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V092",
+  "status": "OBSERVED",
+  "to": "NCR-N23",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V093",
+  "status": "OBSERVED",
+  "to": "NCR-N23",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V094",
+  "status": "OBSERVED",
+  "to": "NCR-N23",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V095",
+  "status": "OBSERVED",
+  "to": "NCR-N23",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V096",
+  "status": "OBSERVED",
+  "to": "NCR-N23",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V097",
+  "status": "OBSERVED",
+  "to": "NCR-N23",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V098",
+  "status": "OBSERVED",
+  "to": "NCR-N23",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V099",
+  "status": "OBSERVED",
+  "to": "NCR-N23",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V100",
+  "status": "OBSERVED",
+  "to": "NCR-N23",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V110",
+  "status": "OBSERVED",
+  "to": "B08",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V110",
+  "status": "OBSERVED",
+  "to": "M06",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V111",
+  "status": "OBSERVED",
+  "to": "M08",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V112",
+  "status": "OBSERVED",
+  "to": "AUTH-EU-DWD-2020-2184",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V112",
+  "status": "OBSERVED",
+  "to": "M09",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V113",
+  "status": "OBSERVED",
+  "to": "M07",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V114",
+  "status": "OBSERVED",
+  "to": "M10",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V115",
+  "status": "OBSERVED",
+  "to": "AUTH-EU-2004-248",
+  "type": "supports"
+ },
+ {
+  "from": "EV-V115",
+  "status": "OBSERVED",
+  "to": "M02",
+  "type": "supports"
+ }
+]

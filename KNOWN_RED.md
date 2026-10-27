@@ -1390,10 +1390,8 @@ so neither is taken here:
 ### 19.4 PIN block
 
 <!-- known-red-pins: begin -->
-PIN ka.skipped.cases - 11 @59a5e5d
-PIN ka.skipped.metrics - 2 @59a5e5d
-PIN ka.skipped.metric cooperative-substrate-proof/p3_comprehension.py::gain_from_sizes 5 @59a5e5d
-PIN ka.skipped.metric cooperative-substrate-proof/p5_lag.py::lag_ratio 6 @59a5e5d
+PIN ka.skipped.cases - 0 @46a849f
+PIN ka.skipped.metrics - 0 @46a849f
 PIN rm.redirect_missing archive/instrument-index/build_index.py - @59a5e5d
 PIN rm.redirect_missing archive/instrument-index/coverage.py - @59a5e5d
 PIN rm.redirect_missing crediting-rate/archive/f168f79/crediting_rate_v2.py - @9262516
@@ -1403,7 +1401,6 @@ PIN rm.violation archive/instrument-index/build_index.py - @59a5e5d
 PIN rm.violation archive/instrument-index/coverage.py - @59a5e5d
 PIN rm.violation crediting-rate/archive/f168f79/crediting_rate_v2.py - @9262516
 PIN rm.violation instrument-index/coverage.py - @9262516
-PIN suite.failing test_tool_exits_clean INTENDED @9262516
 PIN suite.failing test_no_redirect_names_a_target_that_is_missing UNINTENDED @9262516
 PIN suite.failing test_the_one_known_violation_is_pinned UNINTENDED @9262516
 PIN suite.failing test_no_module_binds_a_toplevel_name_twice UNINTENDED @59a5e5d
@@ -1545,3 +1542,35 @@ missing targets: instrument-index/coverage.py live, three archived) and
 test_the_one_known_violation_is_pinned (5 violations, 1 pinned). The live
 instrument-index/coverage.py redirect is now the only live file whose target
 is MISSING.
+
+### 19.9 Re-pin @46a849f: the 11 skipped known-answer cases run
+
+46a849f fixed the known-answer loader for cooperative-substrate-proof. That
+folder is now put on sys.path for the import, so gain_from_sizes and
+lag_ratio no longer stop on ModuleNotFoundError 'scope'. All their cases run,
+and the gate reads 79 of 79 metrics exercised, 0 NOT_RUN, 0 disagreeing.
+46a849f should have re-pinned in the same commit (19.4). It did not, and
+the checker caught it here as 6 MISMATCH rows. The re-pin lands with the
+next commit on the branch, and this section records the lag.
+
+    figure                           @59a5e5d    @46a849f   moved by
+    known-answer skipped cases       11          0          46a849f: loader puts
+    known-answer skipped metrics     2           0            cooperative-substrate-proof on sys.path
+    test_tool_exits_clean            INTENDED    passes     the 11 cases run (section 16.1's condition)
+
+Removed:  PIN ka.skipped.metric cooperative-substrate-proof/p3_comprehension.py::gain_from_sizes 5 @59a5e5d
+          PIN ka.skipped.metric cooperative-substrate-proof/p5_lag.py::lag_ratio 6 @59a5e5d
+          PIN suite.failing test_tool_exits_clean INTENDED @9262516
+
+The scalar pins stay at 0 rather than being removed, so a new skip shows up
+as a MISMATCH and does not pass silently. 19.5 said test_tool_exits_clean
+would stay INTENDED red "until those 11 run". They run now, so it is no
+longer red.
+
+The same branch added nine redirect stubs under reg-uncertainty-registry/tools/.
+Their message named tools/validate.py, which resolves beside the module as
+tools/tools/validate.py, so for one commit run_manifest reported 9 MISSING
+targets. The messages now name reg-uncertainty-registry/tools/validate.py,
+and that resolves from the repo root. Nothing is pinned for them, and the
+rm.* pins above are unchanged.
+
