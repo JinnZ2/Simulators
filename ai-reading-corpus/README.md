@@ -65,9 +65,12 @@ MANIFEST.json                      every file: sha256, role (canonical/supersede
                                    provenance, upload origin; identical-content groups; upload containers
 ledger/claims.jsonl                67 atomic claims: HB-* habitat, SA-* scope audit, LB-* lab,
                                    AO-* all-optical switching, MT-* method
-ledger/conflicts.jsonl             21 cross-source or internal inconsistencies, X-01..X-21
-ledger/gaps.jsonl                  26 open items: H0/H1 gaps, threads A-D, lab, AOS, method, bundle
-tools/check_corpus.py              25 checks; recomputes every stated number it can + the FLAG findings
+ledger/conflicts.jsonl             22 cross-source or internal inconsistencies, X-01..X-22
+ledger/gaps.jsonl                  27 open items: H0/H1 gaps, threads A-D, lab, AOS, method, bundle
+tools/check_corpus.py              27 checks; recomputes every stated number it can + the FLAG findings
+boundary/                          the biomimicry boundary: 6 axes, 15 cases, 6 candidate lines, none
+                                   adopted; changelog.jsonl is append-only and hash-chained
+tools/boundary.py                  render / verify / log a change / --selftest (19 checks)
 sources/habitat/H0_basis.md                    Kavik + Claude, 2026-10-26          canonical
 sources/habitat/H1_deep_research_report.md     OKComputer run, verifies H0          canonical
 sources/scope-audit/report/R4_v0.5.md          OKComputer run, R1->R4 accreted     canonical
@@ -139,13 +142,15 @@ Python >= 3.8 for the checker; the lab README states 3.10+. Standard library onl
 
 ```text
 in Simulators (ai-reading-corpus/, the tree is its own sibling):
-PASS 13  ledgers, manifest, lab_tests (90/90), maxwell_residual, waves_counts, physics_counts,
+PASS 14  ledgers, manifest, lab_tests (90/90), maxwell_residual, waves_counts, physics_counts,
          v01_stream_validates, instruments_selftest, landauer_300K,
-         aos_delta, aos_pulse_arithmetic, aos_sim_instruments, aos_case_number (landed as 025)
-FLAG 12  esa_60_days (X-01)  r4_fr_url (X-02)  h1_gap_count (X-05)  lab_readme_stale (X-07)
+         aos_delta, aos_pulse_arithmetic, aos_sim_instruments, aos_case_number (landed as 025),
+         boundary_log
+FLAG 13  esa_60_days (X-01)  r4_fr_url (X-02)  h1_gap_count (X-05)  lab_readme_stale (X-07)
          missing_instruments (X-08)
          aos_kaplan (X-09)  aos_energy (X-10)  aos_latency (X-11)  aos_crpt_carried (X-12)
          aos_weld_encoding (X-15)  aos_scope_verdict (X-16)  aos_ez_contradiction (X-17)
+         boundary_hb24 (X-22)
 FAIL 0
 standalone, no Simulators checkout: aos_sim_instruments, aos_scope_verdict, aos_case_number
          read NOT_TESTABLE, never PASS
@@ -155,6 +160,20 @@ Every lab number in R4 reproduced. R5's Kaplan table and Delta crossings reprodu
 energy-per-bit numbers do not. Every claim about the outside world in H1, R4, R5, T0, T1 is
 NOT_CHECKED: no source was re-fetched for this bundle (G-B3). Landing notes: `AUDIT_NOTES.md`.
 
+## Biomimicry boundary (boundary/)
+
+```text
+where does learning from nature stop?   UNSETTLED; adopted_line = null
+L1 organism  L2 species  L3 evolved design  L4 self-organized  L5 non-human  L6 no copy
+7 of 15 cases read the same under every line (animals, single cells)
+8 of 15 depend on the line: termite mound, Roman concrete, crystal, nacre, virus,
+          BZ reaction, river delta, autocatalytic set
+Roman concrete is IN under no line (X-22); termite mound is OUT of 'species', IN of 'no copy'
+to move the line: edit boundary.json, then tools/boundary.py log; unlogged edits FAIL the check
+```
+
+Read `boundary/BOUNDARY.md` for the axes, the rules and the change procedure.
+
 ## Extending
 
 ```text
@@ -162,5 +181,6 @@ new source        -> sources/<line>/, add to MANIFEST (sha256, role, lineage, pr
 new claim         -> next free id in its chain; origin_tag copied verbatim
 claim re-verified -> change bundle_status only; record the source in a new field "bundle_source"
 conflict repaired -> its check goes PASS; set the conflict's "resolution" and keep the row
+boundary moved    -> edit boundary/boundary.json, run tools/boundary.py log (never edit changelog.jsonl)
 stated number     -> gets a check in tools/check_corpus.py before any other file cites it
 ```

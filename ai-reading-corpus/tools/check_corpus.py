@@ -447,6 +447,45 @@ def sibling(fn, name):
     return run
 
 
+# --- biomimicry boundary -------------------------------------------------------
+
+def _boundary():
+    sys.dont_write_bytecode = True
+    sys.path.insert(0, str(ROOT / "tools"))
+    import boundary
+    return boundary
+
+
+def check_boundary_log():
+    b = _boundary()
+    problems = b.verify()
+    data = b.load()
+    if problems:
+        row("boundary_log", "FAIL", "; ".join(problems[:3]))
+    else:
+        n = len(b.read_log())
+        row("boundary_log", "PASS", f"table {b.table_sha256(data)[:12]} matches changelog entry {n}; "
+                                    f"chain intact; render current; adopted_line {data['adopted_line']}")
+
+
+def check_boundary_hb24():
+    """X-22: a HB-24 row that is IN under no candidate line."""
+    b = _boundary()
+    data = b.load()
+    m = b.matrix(data)
+    hb = [c for c in data["cases"] if c["in_hb24"]]
+    h0 = text(H0)
+    missing = [c["id"] for c in hb if c["name"].split()[0].lower() not in h0.lower()]
+    if len(hb) != 6 or missing:
+        row("boundary_hb24", "FAIL", f"{len(hb)} HB-24 rows; not found in H0: {missing}")
+        return
+    nowhere = [c["id"] for c in hb if "IN" not in m[c["id"]].values()]
+    if nowhere:
+        row("boundary_hb24", "FLAG", f"HB-24 rows IN under no candidate line: {nowhere} (X-22)")
+    else:
+        row("boundary_hb24", "PASS", "every HB-24 row is IN under at least one line")
+
+
 CHECKS = {
     "manifest": check_manifest,
     "lab_tests": check_lab_tests,
@@ -472,6 +511,8 @@ CHECKS = {
     "aos_sim_instruments": sibling(check_aos_sim_instruments, "aos_sim_instruments"),
     "aos_scope_verdict": sibling(check_aos_scope_verdict, "aos_scope_verdict"),
     "aos_case_number": sibling(check_aos_case_number, "aos_case_number"),
+    "boundary_log": check_boundary_log,
+    "boundary_hb24": check_boundary_hb24,
 }
 
 

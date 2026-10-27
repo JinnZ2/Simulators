@@ -1,0 +1,64 @@
+BIOMIMICRY BOUNDARY  status UNSETTLED  adopted line: None
+table sha256 9e586455ced0ab27
+
+LINES (candidate; none adopted)
+  L1_ORGANISM          living
+                       reads as: biomimicry = copying organisms
+  L2_SPECIES           living AND evolved AND heredity
+                       reads as: H0 §6's word: 'Each lost species is a lost source of science'
+  L3_EVOLVED_DESIGN    evolved
+                       reads as: copying anything selection designed, including what organisms build
+  L4_SELF_ORGANIZED    self_organized
+                       reads as: copying any structure that builds itself (crystals, reaction fronts, landforms)
+  L5_NON_HUMAN         NOT human_made
+                       reads as: copying anything humans did not design
+  L6_NO_COPY           NOT regenerable
+                       reads as: what H0 §6's argument needs: 'A species has no copy anywhere' -- the source can be lost with nothing left to regrow it
+
+AXES (per case; Y / N / PARTIAL / CONTESTED / UNKNOWN)
+  id   case                                                    living    evolve    heredi    self_o    human_    regene
+  C01 *locust LGMD neuron                                           Y         Y         Y         Y         N         N
+  C02 *mantis shrimp polarization vision                            Y         Y         Y         Y         N         N
+  C03 *kingfisher beak                                              Y         Y         Y         Y         N         N
+  C04 *gecko dry adhesion                                           Y         Y         Y         Y         N         N
+  C05 *termite mound                                        CONTESTED   PARTIAL         N         Y         N         N
+  C06 *Roman concrete lime clasts                                   N         N         N   PARTIAL         Y         Y
+  C07  crystal growth (snowflake, quartz)                           N         N         N         Y         N         Y
+  C08  nacre (mollusc shell)                                  PARTIAL         Y         N   PARTIAL         N         N
+  C09  diatom frustule                                              Y         Y         Y         Y         N         N
+  C10  magnetotactic bacterium (magnetosome chain)                  Y         Y         Y         Y         N         N
+  C11  Physarum slime mould network                                 Y         Y         Y         Y         N         N
+  C12  virus capsid                                         CONTESTED         Y   PARTIAL         Y         N         N
+  C13  Belousov-Zhabotinsky reaction waves                          N         N         N         Y   PARTIAL         Y
+  C14  river delta / braided channel network                        N         N         N         Y         N         Y
+  C15  autocatalytic chemical set (origin-of-life candidate CONTESTED CONTESTED   PARTIAL         Y         N   UNKNOWN
+  (* = one of the six HB-24 rows in H0 §6)
+
+MEMBERSHIP (IN / OUT / BORDER)
+  id   case                                                      L1      L2      L3      L4      L5      L6
+  C01 *locust LGMD neuron                                        IN      IN      IN      IN      IN      IN
+  C02 *mantis shrimp polarization vision                         IN      IN      IN      IN      IN      IN
+  C03 *kingfisher beak                                           IN      IN      IN      IN      IN      IN
+  C04 *gecko dry adhesion                                        IN      IN      IN      IN      IN      IN
+  C05 *termite mound                                         BORDER     OUT  BORDER      IN      IN      IN
+  C06 *Roman concrete lime clasts                               OUT     OUT     OUT  BORDER     OUT     OUT
+  C07  crystal growth (snowflake, quartz)                       OUT     OUT     OUT      IN      IN     OUT
+  C08  nacre (mollusc shell)                                 BORDER     OUT      IN  BORDER      IN      IN
+  C09  diatom frustule                                           IN      IN      IN      IN      IN      IN
+  C10  magnetotactic bacterium (magnetosome chain)               IN      IN      IN      IN      IN      IN
+  C11  Physarum slime mould network                              IN      IN      IN      IN      IN      IN
+  C12  virus capsid                                          BORDER  BORDER      IN      IN      IN      IN
+  C13  Belousov-Zhabotinsky reaction waves                      OUT     OUT     OUT      IN  BORDER     OUT
+  C14  river delta / braided channel network                    OUT     OUT     OUT      IN      IN     OUT
+  C15  autocatalytic chemical set (origin-of-life candidate  BORDER  BORDER  BORDER      IN      IN  BORDER
+
+PER LINE                 IN  BORDER  OUT   HB-24 rows not IN
+  L1_ORGANISM             7       4    4   C05, C06
+  L2_SPECIES              7       2    6   C05, C06
+  L3_EVOLVED_DESIGN       9       2    4   C05, C06
+  L4_SELF_ORGANIZED      13       2    0   C06
+  L5_NON_HUMAN           13       1    1   C06
+  L6_NO_COPY             10       1    4   C06
+
+cases with one reading under every line: C01, C02, C03, C04, C09, C10, C11
+cases whose membership depends on the line: 8 of 15

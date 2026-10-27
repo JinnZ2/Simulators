@@ -1,4 +1,4 @@
-PASS         ledgers               67 claims, 21 conflicts, 26 gaps; all ids unique, all references resolve
+PASS         ledgers               67 claims, 22 conflicts, 27 gaps; all ids unique, all references resolve
 PASS         manifest              98 files, every sha256 matches, nothing unlisted
 PASS         lab_tests             ran 90, stated 90, exit 0
 PASS         maxwell_residual      residual -6.497e-06 m/s (stated -6.5e-6), u 0.0316 (stated 0.032), |z| 2.06e-04 (stated 2e-4)
@@ -23,5 +23,7 @@ FLAG         aos_weld_encoding     spreads {'optical_switching_speed.json': 10.0
 PASS         aos_sim_instruments   against simulators: weld.py ok, assemble.py ok, binary_audit 5/3/3 share 0.46 ok
 FLAG         aos_scope_verdict     tool verdict UNDECLARED_OVERLAP, corroborate None, infer_frozen REFUSED_BY_CONSTRAINT; T1 reports 'corroborating' (X-16)
 PASS         aos_case_number       landed as ['025aoswritelatency.md']; 024 held by ['024refusalfalsepositiverate.md']; the file's own header and aos-vector-beam open[1] still say 024 (delivered text, X-20)
+PASS         boundary_log          table 9e586455ced0 matches changelog entry 1; chain intact; render current; adopted_line None
+FLAG         boundary_hb24         HB-24 rows IN under no candidate line: ['C06'] (X-22)
 
-25 checks: {'PASS': 13, 'FLAG': 12, 'NOT_TESTABLE': 0, 'FAIL': 0}
+27 checks: {'PASS': 14, 'FLAG': 13, 'NOT_TESTABLE': 0, 'FAIL': 0}
