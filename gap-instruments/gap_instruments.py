@@ -50,6 +50,9 @@ marked "Note 2026-10-27 (An)"; every choice the order left open is marked
      fields and never combined; a divergent method is data.
      calibration_summary: n, hits, target mismatches, mean abs error per
      quantity.
+  A2r (operator correction, same day): error has a direction. safe_side
+     declares which side the goal tolerates; under OVER an overestimate of
+     any size is a HIT and its size is the realized buffer, reported apart.
   A3 ConfoundRecord: presence and size are logged, meaning is deferred;
      interpretation stays GAP until a control separates the candidates.
 
@@ -76,6 +79,11 @@ DECLARED_LIMIT_BASES = ("physical_bound", "empirical_rule")
 # Note 2026-10-27 (A2)
 TARGET_STATES = ("MATCH", "TARGET_MISMATCH", "NOT_EVALUABLE")
 OUTCOMES = ("HIT", "MISS", "NOT_SCORED")
+# Note 2026-10-27 (A2r): which side of error the goal tolerates. OVER: an
+# overestimate still meets the goal (arrive on time), an underestimate does
+# not. UNDER: the reverse. SYMMETRIC: both cost. UNSTATED: not declared,
+# scored symmetric and reported.
+SAFE_SIDES = ("OVER", "UNDER", "SYMMETRIC", "UNSTATED")
 # Note 2026-10-27 (A3): seed names from the work order. A seed list, not a
 # closed vocabulary: a name outside it is accepted.
 CONFOUND_SEED_NAMES = (
@@ -353,7 +361,8 @@ def _strip_approx(s):
 def _interval(s):
     """Note 2026-10-27 (A2): a written value as (lo, hi), or None when it is
     not numeric (categorical). "26.3" -> (26.3, 26.3); "29-30" -> (29, 30);
-    "14:02" -> minutes:seconds, 14 + 2/60 [CHOICE A2-4]. A leading "~" is
+    "14:02" -> minutes:seconds, 14 + 2/60 [CHOICE A2-4, confirmed by the
+    operator 2026-10-27]. A leading "~" is
     dropped here: it widens the tolerance, not the value."""
     v, _ = _strip_approx(s)
     m = re.fullmatch(r"(\d+):([0-5]\d)", v)
@@ -386,6 +395,15 @@ def _halfwidth(s) -> Optional[float]:
     return base * 2 if approx else base
 
 
+def signed_error_band(p, m):
+    """Note 2026-10-27 (A2r): prediction minus measurement over two
+    intervals, as (least, greatest). Positive = overestimate. None if either
+    is absent."""
+    if p is None or m is None:
+        return None
+    return (p[0] - m[1], p[1] - m[0])
+
+
 def abs_error_band(p, m):
     """Note 2026-10-27 (A2): distance between a prediction interval p and a
     measurement interval m, as (least, greatest). Two points give (d, d);
@@ -416,6 +434,15 @@ class CalibrationRecord:
         calibration was worse after RLHF.
       -> a use-time method may restore calibration. This record is a
          use-time instrument; it does not test that claim.
+
+    Note 2026-10-27 (A2r), from the operator: the goal decides which
+    direction of error costs. A driver relying on gauges, dashboard and GPS
+    adds buffer for each instrument's deviation plus environment,
+    construction, traffic and road wear; overestimating still arrives on
+    time, underestimating does not. Declared as safe_side, never inferred
+    from the goal's wording. Under OVER an overestimate of any size is a HIT
+    and its size is the realized buffer (signed_error), reported and never
+    folded into the outcome; an underestimate beyond tolerance is a MISS.
     """
     quantity_named: str = ""        # what exactly is estimated
     predicted: str = ""
@@ -435,6 +462,7 @@ class CalibrationRecord:
     method_matches_standard: str = "NOT_TESTED"   # TRISTATE; not the outcome
     method_note: str = ""           # how the method diverged
     record_id: str = ""
+    safe_side: str = "UNSTATED"     # A2r: OVER | UNDER | SYMMETRIC | UNSTATED
 
     def target_match(self) -> str:
         """[CHOICE A2-2] equality after case and whitespace are normalized.
@@ -467,6 +495,7 @@ class CalibrationRecord:
         out = {"record_id": self.record_id, "quantity": self.quantity_named,
                "target_match": tm, "outcome": "NOT_SCORED", "abs_error": None,
                "tolerance": None, "tolerance_basis": None,
+               "signed_error": None, "safe_side": self.safe_side,
                "method_matches_standard": self.method_matches_standard,
                "reason": ""}
         if tm == "TARGET_MISMATCH":
@@ -496,14 +525,25 @@ class CalibrationRecord:
             return out
         tol, basis = self.tolerance_used()
         band = abs_error_band(p, m)
+        sgn = signed_error_band(p, m)
         out.update(abs_error=[round(band[0], 4), round(band[1], 4)],
+                   signed_error=[round(sgn[0], 4), round(sgn[1], 4)],
                    tolerance=None if tol is None else round(tol, 6),
                    tolerance_basis=basis)
         if tol is None:
             out["reason"] = basis
             return out
-        # [CHOICE A2-5] HIT when some value the measurement allows lies
-        # within tolerance of the prediction: the low end of the band.
+        # Note 2026-10-27 (A2r) [CHOICE A2-7]: under OVER the prediction
+        # meets the goal unless it is short of every value the measurement
+        # allows by more than the tolerance; UNDER mirrors it.
+        if self.safe_side == "OVER":
+            out["outcome"] = "HIT" if sgn[1] >= -tol - 1e-12 else "MISS"
+            return out
+        if self.safe_side == "UNDER":
+            out["outcome"] = "HIT" if sgn[0] <= tol + 1e-12 else "MISS"
+            return out
+        # [CHOICE A2-5] symmetric: HIT when some value the measurement allows
+        # lies within tolerance of the prediction: the low end of the band.
         out["outcome"] = "HIT" if band[0] <= tol + 1e-12 else "MISS"
         return out
 
@@ -531,6 +571,10 @@ class CalibrationRecord:
                        "nothing to score against")
         if self.tolerance.strip() and self.tolerance_used()[0] is None:
             out.append(f"calibration: tolerance {self.tolerance!r} unusable")
+        out += _check_enum("calibration.safe_side", self.safe_side, SAFE_SIDES)
+        if self.safe_side == "UNSTATED":
+            out.append("calibration: safe_side not stated (which direction of "
+                       "error the goal tolerates); scored symmetric")
         out += _check_enum("calibration.method_matches_standard",
                            self.method_matches_standard, TRISTATE)
         if self.method_matches_standard == "NO" and _blank(self.method_note):
@@ -572,11 +616,16 @@ def calibration_summary(records) -> dict:
         qs = [x for x in rows if (x["quantity"].strip() or "(unnamed)") == q]
         scored = [x for x in qs if x["outcome"] in ("HIT", "MISS")]
         num = [x["abs_error"] for x in scored if x["abs_error"] is not None]
+        sg = [x["signed_error"] for x in scored if x["signed_error"] is not None]
         out["by_quantity"][q] = {
             "n": len(qs), "scored": len(scored),
             "mae": None if not num else
             [round(sum(e[0] for e in num) / len(num), 4),
-             round(sum(e[1] for e in num) / len(num), 4)]}
+             round(sum(e[1] for e in num) / len(num), 4)],
+            # A2r: positive = overestimate; under OVER this is the buffer.
+            "mean_signed_error": None if not sg else
+            [round(sum(e[0] for e in sg) / len(sg), 4),
+             round(sum(e[1] for e in sg) / len(sg), 4)]}
     scored = [(r, s) for r, s in pairs if s["outcome"] in ("HIT", "MISS")]
     conf = [(_confidence_value(r), s) for r, s in scored]
     conf = [(c, s) for c, s in conf if c is not None]
@@ -721,6 +770,7 @@ def report_calibration(records):
         print(f"  {s['record_id']:<17} {s['target_match']:<15} "
               f"{s['outcome']:<10} abs_error {_band(s['abs_error']):<8} "
               f"tolerance {s['tolerance'] if s['tolerance'] is not None else '--'}"
+              f" | safe {s['safe_side']} signed {_band(s['signed_error'])}"
               f" | method {s['method_matches_standard']}")
         if s["tolerance_basis"]:
             print(f"    tolerance basis: {s['tolerance_basis']}")
@@ -733,7 +783,8 @@ def report_calibration(records):
           "not scored %d" % (summ["n"], summ["hits"], summ["misses"],
                              summ["target_mismatches"], summ["not_scored"]))
     for q, v in summ["by_quantity"].items():
-        print(f"    {q}: n {v['n']}, scored {v['scored']}, mae {_band(v['mae'])}")
+        print(f"    {q}: n {v['n']}, scored {v['scored']}, mae {_band(v['mae'])}, "
+              f"mean signed {_band(v['mean_signed_error'])}")
     print(f"  method matches standard (kept apart): {summ['method_matches_standard']}")
     print(f"  confidence vs hit rate: {summ['confidence_vs_hit_rate']}")
     print("  verdict: NOT ASSIGNED")
@@ -823,6 +874,11 @@ def make_seed():
     t_seed = "2026-10-25/26 (voice dictated)"
     human = "n/a: human operator"
     miles = "miles driven to the dock, incl. going around the shop"
+    # A2r: stated by the operator 2026-10-27 for the trip estimates; the fuel
+    # row states no goal and no safe side, and is left so.
+    goal = "arrive on time"
+    buf = ("instrument deviation (gauges, dashboard, GPS), environment, "
+           "construction, traffic, road wear (stated by the operator 2026-10-27)")
     calib = [
         CalibrationRecord(
             record_id="CAL-MILES-GPS", quantity_named=miles, predicted="30",
@@ -831,16 +887,16 @@ def make_seed():
             instrument_quantity="route miles to the address point",
             instrument_scope="GPS distance to the address point; does not "
                              "see on-site movement",
-            operator_buffer="going around the shop and back to the dock",
-            version_stamp=human, timestamp=t_seed),
+            operator_buffer="going around the shop and back to the dock; " + buf,
+            goal=goal, safe_side="OVER", version_stamp=human, timestamp=t_seed),
         CalibrationRecord(
             record_id="CAL-MILES-ACTUAL", quantity_named=miles, predicted="30",
             measured=Evidence("29-30", "ESTIMATED", "operator, as dictated; "
                               "instrument not named", "mi", "~, stated as a range"),
             instrument_quantity=miles,
             instrument_scope="instrument not named in the dictation",
-            operator_buffer="going around the shop and back to the dock",
-            version_stamp=human, timestamp=t_seed),
+            operator_buffer="going around the shop and back to the dock; " + buf,
+            goal=goal, safe_side="OVER", version_stamp=human, timestamp=t_seed),
         CalibrationRecord(
             record_id="CAL-FUEL", quantity_named="fuel tank level",
             predicted="full",
@@ -858,10 +914,11 @@ def make_seed():
             record_id="CAL-TIME", quantity_named="on-duty time",
             predicted="~15",
             measured=Evidence("14:02", "MEASURED", "ELD on-duty (as dictated)",
-                              "min", "read as 14 min 02 s; read as h:mm it is "
-                              "842 min"),
+                              "min", "14 min 02 s (reading confirmed by the "
+                              "operator 2026-10-27)"),
             instrument_quantity="on-duty time",
             instrument_scope="ELD on-duty time as logged",
+            operator_buffer=buf, goal=goal, safe_side="OVER",
             version_stamp=human, timestamp=t_seed),
     ]
     confounds = [ConfoundRecord(n) for n in CONFOUND_SEED_NAMES]
@@ -934,7 +991,7 @@ def selftest():
         assert gap_summary(r)["GAP"] == len(gap_fields(r))
     # A2: a blank CalibrationRecord does not validate clean, and scores nothing
     blank = CalibrationRecord()
-    assert len(blank.validate()) == 10
+    assert len(blank.validate()) == 11
     assert (blank.score()["target_match"], blank.score()["outcome"]) == \
         ("NOT_EVALUABLE", "NOT_SCORED")
     # A2: the mismatch path returns TARGET_MISMATCH, unscored and not an error
@@ -944,10 +1001,21 @@ def selftest():
     assert not any("mismatch" in i.lower() for i in calib[0].validate())
     # A2: the dictated verdicts reproduce under the declared rules
     assert [c.score()["outcome"] for c in calib] == ["NOT_SCORED", "HIT", "HIT", "HIT"]
-    # the time HIT rests on '~' doubling the written precision: at +/-0.5 it misses
     t = calib[3].score()
     assert t["tolerance"] == 1.0 and abs(t["abs_error"][0] - 0.9667) < 1e-4
-    assert replace(calib[3], tolerance="0.5").score()["outcome"] == "MISS"
+    assert t["safe_side"] == "OVER" and abs(t["signed_error"][0] - 0.9667) < 1e-4
+    # A2r: scored symmetric, the time HIT rested on '~' and missed at +/-0.5;
+    # with OVER declared it rests on direction, and the '~' no longer matters
+    tight = replace(calib[3], tolerance="0.5")
+    assert tight.score()["outcome"] == "HIT"
+    assert replace(tight, safe_side="UNSTATED").score()["outcome"] == "MISS"
+    # A2r: under OVER an underestimate misses and a large overestimate does not
+    assert replace(calib[3], predicted="13").score()["outcome"] == "MISS"
+    assert replace(calib[3], predicted="18").score()["outcome"] == "HIT"
+    assert replace(calib[3], predicted="18", safe_side="SYMMETRIC").score()["outcome"] == "MISS"
+    assert replace(calib[3], predicted="18", safe_side="UNDER").score()["outcome"] == "MISS"
+    assert replace(calib[3], predicted="13", safe_side="UNDER").score()["outcome"] == "HIT"
+    assert any("safe_side" in i for i in replace(calib[3], safe_side="LATE").validate())
     # A2: outcome and method stay apart; the fuel HIT came by a divergent method
     f = calib[2].score()
     assert (f["outcome"], f["method_matches_standard"]) == ("HIT", "NO")
@@ -957,6 +1025,9 @@ def selftest():
     assert bq[calib[0].quantity_named]["mae"] == [0.0, 1.0]
     assert (bq[calib[0].quantity_named]["n"], bq[calib[0].quantity_named]["scored"]) == (2, 1)
     assert bq["on-duty time"]["mae"] == [0.9667, 0.9667]
+    assert bq["on-duty time"]["mean_signed_error"] == [0.9667, 0.9667]
+    assert bq[calib[0].quantity_named]["mean_signed_error"] == [0.0, 1.0]
+    assert signed_error_band((13.0, 13.0), (14.0, 15.0)) == (-2.0, -1.0)
     assert bq["fuel tank level"]["mae"] is None
     assert str(s["confidence_vs_hit_rate"]).startswith("NOT_COMPUTABLE")
     assert abs_error_band((10, 12), (14, 15)) == (2, 5)

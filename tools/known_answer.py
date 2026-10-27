@@ -838,6 +838,7 @@ EXPECTED_METRICS = (
     "extraction-chain-join/chain_join.py::consumption_based",
     "extraction-chain-join/chain_join.py::reserve_share_band",
     "gap-instruments/gap_instruments.py::abs_error_band",
+    "gap-instruments/gap_instruments.py::signed_error_band",
 )
 
 
@@ -1999,15 +2000,23 @@ def _seed_extraction_chain():
         note="proportional reading of the reserve share band")
 
 
-def _gi_abs_error_band(p, m):
-    """gap-instruments/gap_instruments.py::abs_error_band, imported by path
-    under a private name."""
+def _gi_mod():
+    """gap-instruments/gap_instruments.py, imported by path under a private
+    name."""
     import importlib.util
     path = os.path.join(ROOT, "gap-instruments", "gap_instruments.py")
     spec = importlib.util.spec_from_file_location("_gi", path)
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
-    return mod.abs_error_band(p, m)
+    return mod
+
+
+def _gi_abs_error_band(p, m):
+    return _gi_mod().abs_error_band(p, m)
+
+
+def _gi_signed_error_band(p, m):
+    return _gi_mod().signed_error_band(p, m)
 
 
 def _seed_gap_instruments():
@@ -2028,6 +2037,18 @@ def _seed_gap_instruments():
          case("absent measurement", ((30.0, 30.0), None), None,
               "no measurement, no error; not zero")],
         note="(least, greatest) |prediction - measurement| over two intervals")
+    register(
+        "gap-instruments/gap_instruments.py::signed_error_band",
+        _gi_signed_error_band,
+        [case("overestimate", ((15.0, 15.0), (14.0, 14.0)), (1.0, 1.0),
+              "15 - 14; positive is an overestimate, the buffer under OVER"),
+         case("underestimate", ((13.0, 13.0), (14.0, 15.0)), (-2.0, -1.0),
+              "13 - 15 and 13 - 14; the sign is what a symmetric error drops"),
+         case("point inside a range", ((30.0, 30.0), (29.0, 30.0)), (0.0, 1.0),
+              "30 - 30 and 30 - 29"),
+         case("absent prediction", (None, (1.0, 1.0)), None,
+              "no prediction, no error; not zero")],
+        note="(least, greatest) prediction - measurement; sign kept (A2r)")
 
 
 def _irb_effective_origins(coupling):

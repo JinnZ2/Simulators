@@ -312,15 +312,16 @@
         "uncertainty": "display 0.1 mi"
       },
       "instrument_scope": "GPS distance to the address point; does not see on-site movement",
-      "operator_buffer": "going around the shop and back to the dock",
-      "goal": "",
+      "operator_buffer": "going around the shop and back to the dock; instrument deviation (gauges, dashboard, GPS), environment, construction, traffic, road wear (stated by the operator 2026-10-27)",
+      "goal": "arrive on time",
       "version_stamp": "n/a: human operator",
       "timestamp": "2026-10-25/26 (voice dictated)",
       "instrument_quantity": "route miles to the address point",
       "tolerance": "",
       "method_matches_standard": "NOT_TESTED",
       "method_note": "",
-      "record_id": "CAL-MILES-GPS"
+      "record_id": "CAL-MILES-GPS",
+      "safe_side": "OVER"
     },
     {
       "quantity_named": "miles driven to the dock, incl. going around the shop",
@@ -334,15 +335,16 @@
         "uncertainty": "~, stated as a range"
       },
       "instrument_scope": "instrument not named in the dictation",
-      "operator_buffer": "going around the shop and back to the dock",
-      "goal": "",
+      "operator_buffer": "going around the shop and back to the dock; instrument deviation (gauges, dashboard, GPS), environment, construction, traffic, road wear (stated by the operator 2026-10-27)",
+      "goal": "arrive on time",
       "version_stamp": "n/a: human operator",
       "timestamp": "2026-10-25/26 (voice dictated)",
       "instrument_quantity": "miles driven to the dock, incl. going around the shop",
       "tolerance": "",
       "method_matches_standard": "NOT_TESTED",
       "method_note": "",
-      "record_id": "CAL-MILES-ACTUAL"
+      "record_id": "CAL-MILES-ACTUAL",
+      "safe_side": "OVER"
     },
     {
       "quantity_named": "fuel tank level",
@@ -364,7 +366,8 @@
       "tolerance": "",
       "method_matches_standard": "NO",
       "method_note": "inferred full from memory of the fill-up; the gauge then confirmed it",
-      "record_id": "CAL-FUEL"
+      "record_id": "CAL-FUEL",
+      "safe_side": "UNSTATED"
     },
     {
       "quantity_named": "on-duty time",
@@ -375,18 +378,19 @@
         "status": "MEASURED",
         "source": "ELD on-duty (as dictated)",
         "unit": "min",
-        "uncertainty": "read as 14 min 02 s; read as h:mm it is 842 min"
+        "uncertainty": "14 min 02 s (reading confirmed by the operator 2026-10-27)"
       },
       "instrument_scope": "ELD on-duty time as logged",
-      "operator_buffer": "",
-      "goal": "",
+      "operator_buffer": "instrument deviation (gauges, dashboard, GPS), environment, construction, traffic, road wear (stated by the operator 2026-10-27)",
+      "goal": "arrive on time",
       "version_stamp": "n/a: human operator",
       "timestamp": "2026-10-25/26 (voice dictated)",
       "instrument_quantity": "on-duty time",
       "tolerance": "",
       "method_matches_standard": "NOT_TESTED",
       "method_note": "",
-      "record_id": "CAL-TIME"
+      "record_id": "CAL-TIME",
+      "safe_side": "OVER"
     }
   ],
   "calibration_scores": [
@@ -398,6 +402,8 @@
       "abs_error": null,
       "tolerance": null,
       "tolerance_basis": null,
+      "signed_error": null,
+      "safe_side": "OVER",
       "method_matches_standard": "NOT_TESTED",
       "reason": "TARGET_MISMATCH: the prediction names 'miles driven to the dock, incl. going around the shop', the instrument measured 'route miles to the address point'; logged, not an error"
     },
@@ -412,6 +418,11 @@
       ],
       "tolerance": 0.5,
       "tolerance_basis": "written precision",
+      "signed_error": [
+        0.0,
+        1.0
+      ],
+      "safe_side": "OVER",
       "method_matches_standard": "NOT_TESTED",
       "reason": ""
     },
@@ -423,6 +434,8 @@
       "abs_error": null,
       "tolerance": null,
       "tolerance_basis": "categorical: exact match",
+      "signed_error": null,
+      "safe_side": "UNSTATED",
       "method_matches_standard": "NO",
       "reason": ""
     },
@@ -437,6 +450,11 @@
       ],
       "tolerance": 1.0,
       "tolerance_basis": "written precision, doubled by '~'",
+      "signed_error": [
+        0.9667,
+        0.9667
+      ],
+      "safe_side": "OVER",
       "method_matches_standard": "NOT_TESTED",
       "reason": ""
     }
@@ -461,17 +479,26 @@
         "mae": [
           0.0,
           1.0
+        ],
+        "mean_signed_error": [
+          0.0,
+          1.0
         ]
       },
       "fuel tank level": {
         "n": 1,
         "scored": 1,
-        "mae": null
+        "mae": null,
+        "mean_signed_error": null
       },
       "on-duty time": {
         "n": 1,
         "scored": 1,
         "mae": [
+          0.9667,
+          0.9667
+        ],
+        "mean_signed_error": [
           0.9667,
           0.9667
         ]
