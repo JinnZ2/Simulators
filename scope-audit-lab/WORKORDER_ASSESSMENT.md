@@ -9,7 +9,7 @@ proposals for the operator to accept, change or drop. None is started.
 | SAL-WO2 (DONE) | **`confound_record` type** (the report's own top recommendation). One record per alternative explanation: test applied, result, status, version stamp. Same no-verdict schema. | yes | Thread B's ten-confound list is still prose. The record makes "which explanations were tested" countable. | schema, validator and tests, kept apart from the coupling scan as the report asks |
 | SAL-WO3 (DONE) | **First real-data scan.** Run all four 0.3 procedures unchanged on one documented real series, append the records, and read them against WO1's expectation. | yes, if a series is chosen | SAL_010: nothing has touched real data. The series must be one whose bytes are in the tree: `notes/datasets/` indexes the UCI `mechanical-analysis` set, but its bytes are not checked in. | one appended stream plus a short reading note |
 | SAL-WO4 (DONE) | **ETH live-claim registry.** The report's three-record tracking protocol (UNKNOWN status, appended events, nothing edited in place), started now with today's anchors. | yes (records only); updates need egress | The claim is one day old. The time each claim spends in each state is the measurement, and it can only be recorded going forward. | `claims/eth.jsonl` with the first `audit_event` per claim, Anthropic item marked NOT_LOCATED |
-| SAL-WO5 | **Fold the lab into the repo's tools rather than run it beside them.** The transition engine overlaps `null-harness` (null runs), `claim-record` (append-only, no-verdict) and `criteria-drift` (versioned rulers). | assessment only | Two record schemas with one rule invite drift. | a mapping table, then a decision for the operator: keep separate, adapt, or merge |
+| SAL-WO5 (DONE, decision open) | **Fold the lab into the repo's tools rather than run it beside them.** The transition engine overlaps `null-harness` (null runs), `claim-record` (append-only, no-verdict) and `criteria-drift` (versioned rulers). | assessment only | Two record schemas with one rule invite drift. | a mapping table, then a decision for the operator: keep separate, adapt, or merge |
 
 Suggested order: WO1 (small, fixes the shipped null), then WO2, then WO3.
 WO4 is time-sensitive if the operator wants the ETH case tracked from day one.
@@ -61,3 +61,11 @@ WO4 is time-sensitive if the operator wants the ETH case tracked from day one.
   The stream is append-only, validated on every append, and keeps two
   clocks apart: the date the source reports and the date the registry
   recorded it. Updates need egress.
+- **SAL-WO5 done, decision open.** `FOLD_ASSESSMENT.md` maps every lab
+  piece onto its nearest repo tool, sets out three options, and recommends
+  the adapter route.
+  - Evidence: `fold_probe.py` runs the repo's `null-harness` on the lab
+    engine, unmodified. It grades CONSTANT_FIRES in the demo's regime
+    (FP 1.000, TP 1.000) and OK in a quiet one (FP 0.000, TP 1.000).
+  - Keeping the families separate, adapting, or merging is the operator's
+    decision.

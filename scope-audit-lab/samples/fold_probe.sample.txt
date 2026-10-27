@@ -1,0 +1,10 @@
+scope-audit-lab / fold_probe.py (null-harness grading the lab engine)
+======================================================================
+gate: scan flags >= 1 region; 12 cases; positive control adds a +30 step
+
+demo regime: uniform[0,100], th 10       FP 1.000  TP 1.000  -> CONSTANT_FIRES  (always says yes; not a gate)
+quiet regime: normal sd 1, th 10         FP 0.000  TP 1.000  -> OK
+
+the same engine grades CONSTANT_FIRES or OK depending only on the noise
+width against the threshold: the grade is a property of the regime, which
+is the SAL_004 reading, here produced by the repo's own grader.
