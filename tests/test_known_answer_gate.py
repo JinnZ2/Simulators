@@ -122,6 +122,8 @@ MANIFEST = (
     "extraction-chain-join/chain_join.py::consumption_based",
     "extraction-chain-join/chain_join.py::reserve_share_band",
     "scope-audit-lab/null_expectation.py::from_generator",
+    "optical-switching-constraint-chain/barrier_per_bit.py::energy_per_bit",
+    "optical-switching-constraint-chain/barrier_per_bit.py::retention_line",
 )
 
 # Cases known to fail today. A case that starts passing turns this red so

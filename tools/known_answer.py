@@ -751,6 +751,8 @@ def _tcr_expected_crossings(rate, rate_unit, horizon_value, horizon_unit):
 # counted. An expected set can. Adding a metric means adding a line here --
 # deliberately, so the addition is visible in a diff.
 EXPECTED_METRICS = (
+    "optical-switching-constraint-chain/barrier_per_bit.py::energy_per_bit",
+    "optical-switching-constraint-chain/barrier_per_bit.py::retention_line",
     "scope-audit-lab/null_expectation.py::from_generator",
     "agent-lifecycle-energy/phase_energy.py::integrate",
     "anchor-measurand-crossing/amc.py::crossing_band",
@@ -1790,6 +1792,7 @@ def seed():
     _seed_floor_capability()
     _seed_extraction_chain()
     _seed_null_expectation()
+    _seed_barrier_per_bit()
 
 
 def _reg_mod(name):
@@ -3276,6 +3279,69 @@ def _seed_null_expectation():
               "no adjacent pair, no denominator, not 0")],
         note="checked against the lab's own null_baseline_scan at 4000 "
              "replications in scope-audit-lab/test_null_expectation.py")
+
+
+def _bpb_mod():
+    import importlib.util
+    path = os.path.join(ROOT, "optical-switching-constraint-chain", "barrier_per_bit.py")
+    spec = importlib.util.spec_from_file_location("_barrier_per_bit", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def _bpb_energy_pj(fluence, d_um, shape, pulses, ledger, frac=None):
+    """optical-switching-constraint-chain/barrier_per_bit.py::energy_per_bit,
+    in pJ; an undeclared term returns None (refused), never a default."""
+    m = _bpb_mod()
+    try:
+        return round(m.energy_per_bit(fluence=fluence, spot_diameter=d_um, spot_shape=shape,
+                                      pulses=pulses, ledger=ledger, absorbed_fraction=frac) * 1e12, 6)
+    except m.UndeclaredTerm:
+        return None
+
+
+def _bpb_retention(criterion, years, tau0, value=None, basis=None):
+    m = _bpb_mod()
+    try:
+        return m.retention_line(criterion=criterion, years=years, tau0=tau0,
+                                population_value=value, basis=basis)
+    except m.UndeclaredTerm:
+        return None
+
+
+def _seed_barrier_per_bit():
+    """OSC-WO1. Energy per bit and the retention line with every term
+    declared. The None cases are the pins: an absorbed ledger with no
+    absorbed fraction, and a population line with no basis, are refused;
+    defaulting either reproduces the report's unstated term."""
+    register(
+        "optical-switching-constraint-chain/barrier_per_bit.py::energy_per_bit",
+        _bpb_energy_pj,
+        [case("square 1 um, 1 mJ/cm2, 1 pulse, incident", (1e-3, 1.0, "square", 1, "incident"),
+              10.0, "1e-3 J/cm2 x (1e-4 cm)^2 = 1e-11 J = 10 pJ"),
+         case("same, absorbed half", (1e-3, 1.0, "square", 1, "absorbed", 0.5), 5.0,
+              "half of 10 pJ"),
+         case("measured zero absorption", (1e-3, 1.0, "square", 1, "absorbed", 0.0), 0.0,
+              "a declared zero is a measurement, not a refusal"),
+         case("absorbed, fraction undeclared", (1e-3, 1.0, "square", 1, "absorbed"), None,
+              "the report's case: refused, not filled with any fraction"),
+         case("disc is pi/4 of square", (1e-3, 1.0, "disc", 4, "incident"), 31.415927,
+              "4 pulses x 10 pJ x pi/4", tol=1e-5)],
+        note="the report's rows imply fractions 0.35/0.35/0.60 it never states (OSC_004)")
+    register(
+        "optical-switching-constraint-chain/barrier_per_bit.py::retention_line",
+        _bpb_retention,
+        [case("single bit, t/tau0 = e^10", ("single_bit", 2.718281828459045 ** 10 / 3.15576e7, 1.0),
+              10.0, "tau0 = 1 s and t = e^10 s, so ln(t/tau0) = 10", tol=1e-9),
+         case("single bit, 10 years at 1 ns", ("single_bit", 10, 1e-9),
+              40.2931759, "ln(3.15576e17) = ln 3.15576 + 17 ln 10 = 1.1492293 + 39.1439466 "
+              "(Julian year)", tol=1e-6),
+         case("population with basis", ("population", 10, 1e-9, 60, "stated"), 60.0,
+              "declared value returned as declared"),
+         case("population without basis", ("population", 10, 1e-9, 60), None,
+              "a population line with no basis is refused")],
+        note="the report's 60 is a population line; one bit lasts ten years at ~40 (OSC_008)")
 
 
 def _seed_fitness_bin_self_test():

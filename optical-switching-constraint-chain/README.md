@@ -36,6 +36,8 @@ text-only); `FIGURES.md` records them by name, size and sha256.
 
     python3 check.py              # recompute the report's derived numbers
     python3 check.py --selftest   # prints its own check count
+    python3 citations.py          # OSC-WO4 citation ledger (test_citations.py)
+    python3 barrier_per_bit.py    # OSC-WO1 calculator, undeclared terms refused (test_barrier_per_bit.py)
 
 Stdlib only, parses under 3.9, CC0. Sample output: `samples/check.sample.txt`.
 
