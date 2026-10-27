@@ -88,16 +88,17 @@ EXPECTED_COMMIT_A21 = "09774de"
 
 SOURCES21 = dict(G.SOURCES)   # [CHOICE 9]
 SOURCES21.update({
-    "W-1a": {"grade": "P", "text": "Colorado HB 16-1005, signed bill text (content.leg.colorado.gov/sites/default/files/"
-                                   "2016a_1005_signed.pdf); effective 2016-08-10, CONDITIONAL on sine die 2016-05-11; "
+    "W-1a": {"grade": "P", "text": "Colorado HB 16-1005, signed bill text; effective 2016-08-10, CONDITIONAL on sine die 2016-05-11; "
                                    "condition confirmed by the CO Division of Real Estate 2016 Annual Report [P, read by "
                                    "the amendment's author]",
-             "upgrades": "W-1"},
-    "W-2a": {"grade": "P", "text": "Utah SB 32 (2010) enacting Utah Code 73-3-1.5 (le.utah.gov/~2010), YEAR precision, "
+             "upgrades": "W-1",
+             "url": "content.leg.colorado.gov/sites/default/files/2016a_1005_signed.pdf"},   # moved A-6.3 item 8
+    "W-2a": {"grade": "P", "text": "Utah SB 32 (2010) enacting Utah Code 73-3-1.5, YEAR precision, "
                                    "effective date not read; current text (Justia 2022 codification): unregistered = at "
                                    "most two covered containers EACH <= 100 gal; registered = <= 2,500 gal aggregate per "
                                    "parcel [P, read by the amendment's author]",
-             "upgrades": "W-2", "precision": "year"},
+             "upgrades": "W-2", "precision": "year",
+             "url": "le.utah.gov/~2010"},   # moved A-6.3 item 8
     "UT-73-2-27": {"grade": "S", "text": "Utah Code 73-2-27, criminal penalty (Class B misdemeanor default): the "
                                          "enforcement mechanism for W-2", "input": False},
     "UT-73-1-1": {"grade": "S", "text": "Utah Code 73-1-1, waters declared property of the public: the root gate for "

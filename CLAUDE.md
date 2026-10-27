@@ -15022,7 +15022,78 @@ ship a `requirements.txt`. Each folder ships `samples/`.
     de-coupling (`RIN_159`).
   - The scope assertion registered in EXPECTED failed as written on
     `render`/`main` and was narrowed on the record (`RIN_155`).
-  One hundred and sixty `RIN_*` claims;
+  **WORK ORDER standing/A-6.3 (2026-09-30, verification split)** was landed
+  verbatim, recovered from the chat transcript, and committed alone at
+  `ea0d379`, since item 2 changes what lets a row read MATCH.
+  `verification_a63.py` extends `sourcing_a62.py` by import; two data rows
+  move because the order names them (W-1a/W-2a in `gate_state_a21.py`, CE-4e
+  in `standing_a61.py`).
+  - **Part B status, first** (`RIN_161`): A-6.2 items 9-14 never reached this
+    session, whose A-6.2 text holds items 0-8. Items 9-13 were done by another
+    session on `claude/potential-part-b-k7Qm` (`63ca5ce`, `1803391`), which is
+    not merged into main; item 14 has no commit. The 4
+    `tests/test_run_manifest.py` failures are a subset of KNOWN_RED §11's 8
+    and exactly §12's remainder.
+  - **What did not hold, first:**
+    - Item 8's "stays STORED_UNVERIFIED": W-1a/W-2a have a url (verbatim, no
+      scheme) and no span, so they read NO_SPAN under item 2's own definition
+      (`RIN_164`).
+    - Item 4's rule reads the order's own "1000-2999" as a year range
+      (`RIN_166`).
+    - A-6.2's "modules not edited" check reads only uncommitted diffs
+      (`RIN_164`).
+  - **Items 1-2:** a repo source is `repo:<full commit>:<path>` plus a clone
+    url, and only VERIFIED inputs let a row read MATCH. The 5 repo spans were
+    verified by a `--depth 1` fetch from the remote into a fresh repository,
+    5 of 5 matching. E-A2-4 and E-A3.1-1 x2 read MATCH (`RIN_162`,
+    `RIN_163`). The RIN_150 placeholder reads STORED_UNVERIFIED and is the
+    fail fixture.
+  - **Counts over the 19 re-gated rows** (VERIFIED / STORED_UNVERIFIED /
+    NO_SPAN / CONSTRUCTED): 9 / 0 / 15 / 11 by reference, 5 / 0 / 9 / 3 by
+    distinct source. No row reads MATCH on a non-VERIFIED input.
+  - **Items 3-7:**
+    - CE-4e declares GEOGRAPHIC, undeclared at issue (`RIN_165`).
+    - "2036 paths" is counted and flagged, "since 1971" is a year, "rule 0
+      these rows" is a label; the identifier list is data (`RIN_166`,
+      `RIN_167`).
+    - With `P-` declared as profiles, A-6 returns to 3; that is the only
+      identity change on A-4..A-6.1 (`RIN_168`).
+    - Every status gate moves under mutation, with no dead argument
+      (`RIN_169`).
+  - **Limit** (`RIN_170`): VERIFIED shows the commit is on the remote and the
+    path resolves to the stored bytes; it is not a second reading of the
+    claim.
+  **The operator follow-up of 2026-09-30** (five items) was landed verbatim
+  and committed alone at `d2f35e7`. `followup_a63.py` edits no earlier
+  module.
+  - **Item 1, resolved_url** (`RIN_171`):
+    - W-1a / W-2a keep their addresses as written (NO_SCHEME).
+    - `resolved_url` lives in the append-only `resolve_store.json`. It is
+      filled only when a fetch returns HTTP 200 with bytes, and the fetch
+      tries https then http [CHOICE 106, 107].
+    - The live attempt got https refused at CONNECT (403) and http 403 on
+      both addresses. So `resolved_url` is None and both inputs read NO_SPAN.
+  - **Item 2, Part B** (`RIN_172`):
+    - The branch's INVENTORY now reads P-17 / P-18 `FIXED at 63ca5ce`, with
+      re-runs recorded, at `5999856`.
+    - The PR already existed (#105, open). It carries the commit.
+  - **Item 3, module pins** (`RIN_173`):
+    - Blob hashes are pinned at `f6d385c`: 8 PINNED, 2 DECLARED_EDIT (both at
+      `b10392f`), 12 of 12 matching git.
+    - Without the declaration the pin check fires, while the replaced
+      diff-against-HEAD check reads clean.
+    - The same-shaped order-file check in `test_sourcing_a62` is still there.
+  - **Item 4, caller constants** (`RIN_174`):
+    - The AST scan finds 19 module FLAGs, all disposed, and 9 test FLAGs.
+    - Flipping the `enumerated=True` constant in `rerun_a63` / `rerun` moves
+      18 of 19 verdicts, and in `prior_sweep` 17 of 17.
+    - So per-row falsifier enumeration is asserted by the caller and recorded
+      nowhere.
+  - **Item 5, sample shifts** (`RIN_175`):
+    - Lines 5-6 of the `gate_state_a21` sample and lines 46-49 of the
+      `sourcing_a62` sample are the item 8 move.
+    - They are checked against the `f6d385c..b10392f` diff.
+  One hundred and seventy-five `RIN_*` claims;
   check counts printed by `python3 route-independence/test_route.py`,
   `python3 route-independence/test_dependency_chain.py`,
   `python3 route-independence/test_single_channel.py`,
@@ -15033,8 +15104,10 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `python3 route-independence/test_repairs_a31.py`,
   `python3 route-independence/test_chains_a456.py`,
   `python3 route-independence/test_standing_a61.py`,
-  `python3 route-independence/test_sourcing_a62.py` and
-  `python3 route-independence/test_fwo15.py`, the last ten also
+  `python3 route-independence/test_sourcing_a62.py`,
+  `python3 route-independence/test_fwo15.py`,
+  `python3 route-independence/test_verification_a63.py` and
+  `python3 route-independence/test_followup_a63.py`, the last twelve also
   printing the fail-fixture line. Stdlib only,
   parses under 3.9, phone-buildable, CC0.
 - `custody-verification-band/` — Marker under exploration. Criterion: a layer

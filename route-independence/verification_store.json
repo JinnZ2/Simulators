@@ -1,0 +1,50 @@
+{
+ "note": "A-6.3 verification records [CHOICE 97] [CHOICE 100]; append-only",
+ "records": [
+  {
+   "source_id": "AMENDMENT_A1_2026-09-28_settlement-vs-gate.md",
+   "location": "repo:bacaeaba400d512e68109b95e87fa4d4dffabf1a:route-independence/AMENDMENT_A1_2026-09-28_settlement-vs-gate.md",
+   "method": "REMOTE_FETCH",
+   "fetched_by": "git fetch --depth 1 of the commit from the repository remote into a fresh repository, checkout, bytes read from the checkout (this session)",
+   "date": "2026-09-30",
+   "hash_obtained": "d3ce748791ddd8c6a9590bf68ff64600174233ec54ac44d510f5a875ab565a0c",
+   "matches_stored": true
+  },
+  {
+   "source_id": "AMENDMENT_A2.1_2026-09-28_source-upgrades.md",
+   "location": "repo:09774de607760bacddafd4e4e477108b14b1e712:route-independence/AMENDMENT_A2.1_2026-09-28_source-upgrades.md",
+   "method": "REMOTE_FETCH",
+   "fetched_by": "git fetch --depth 1 of the commit from the repository remote into a fresh repository, checkout, bytes read from the checkout (this session)",
+   "date": "2026-09-30",
+   "hash_obtained": "1c8c389b4799afa29466dec1742ed915e7efe2c9adcec020e155f93ba96593ec",
+   "matches_stored": true
+  },
+  {
+   "source_id": "AMENDMENT_A2_2026-09-28_gate-state.md",
+   "location": "repo:251e12a8244347f0a4589aeb3d66384148bcb95f:route-independence/AMENDMENT_A2_2026-09-28_gate-state.md",
+   "method": "REMOTE_FETCH",
+   "fetched_by": "git fetch --depth 1 of the commit from the repository remote into a fresh repository, checkout, bytes read from the checkout (this session)",
+   "date": "2026-09-30",
+   "hash_obtained": "1b853b96530c827dc09ef7d05ff0d5d4ab570fda25a4bd976b23eaaa2a3a210d",
+   "matches_stored": true
+  },
+  {
+   "source_id": "AMENDMENT_A3_2026-09-28_thermal.md",
+   "location": "repo:87f83ceebd47a6421348b3a38b77f554a013dc2f:route-independence/AMENDMENT_A3_2026-09-28_thermal.md",
+   "method": "REMOTE_FETCH",
+   "fetched_by": "git fetch --depth 1 of the commit from the repository remote into a fresh repository, checkout, bytes read from the checkout (this session)",
+   "date": "2026-09-30",
+   "hash_obtained": "a7f6a71d033ed0d87da519c48481f9f6125b1d4bdef479203c4990c2d17cb7ac",
+   "matches_stored": true
+  },
+  {
+   "source_id": "gate_state.py",
+   "location": "repo:6fd9f74b6cf797127421af70873128ca1ecf7ad2:route-independence/gate_state.py",
+   "method": "REMOTE_FETCH",
+   "fetched_by": "git fetch --depth 1 of the commit from the repository remote into a fresh repository, checkout, bytes read from the checkout (this session)",
+   "date": "2026-09-30",
+   "hash_obtained": "e20cb73a00126dc79fd8b1cb5c81c0f0050c8aef5b6aec59f118309a831c37e9",
+   "matches_stored": true
+  }
+ ]
+}
