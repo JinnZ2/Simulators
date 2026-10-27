@@ -49,6 +49,7 @@ issue a verdict the evidence does not force.
     python3 test_null_expectation.py      # checks, incl. against the lab's own generator
     python3 confound_record.py            # SAL-WO2 thread-B confound ledger (test_confound_record.py)
     python3 real_scan/run_scan.py --check # SAL-WO3 first real-data scan reproduces from git
+    python3 claims/claim_tracker.py       # SAL-WO4 live claim registry (claims/README.md)
 
 `check.py` is stdlib only and parses under 3.9. The lab's README asks for
 3.10+, but its `X | None` annotations sit behind
