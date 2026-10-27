@@ -55,6 +55,6 @@ SOURCE_DROP.md sha256 6f1b4c3ea468a320...  pinned: True
 6. ANCHORS (search-result depth, carried)
    FOUND_IN_SEARCH  Khalid et al., Nat. Commun. 2026, 'Optical beam shaping induced reconfigurable magnetic domains', 15 Sep 2026, DOI 10.1038/s41467-026-77572-3
    NOT_LOCATED      arXiv:1312.7301, Co nano-square depinning 0.95 eV
-   NOT_CHECKED      all other citations
+   SWEPT            load-bearing citations: see citations.py (OSC-WO4 ledger)
 
 Nothing above measures a barrier, rates a material, or ranks a technology.

@@ -165,7 +165,7 @@ ANCHORS = [
     ("Khalid et al., Nat. Commun. 2026, 'Optical beam shaping induced reconfigurable "
      "magnetic domains', 15 Sep 2026, DOI 10.1038/s41467-026-77572-3", "FOUND_IN_SEARCH"),
     ("arXiv:1312.7301, Co nano-square depinning 0.95 eV", "NOT_LOCATED"),
-    ("all other citations", "NOT_CHECKED"),
+    ("load-bearing citations: see citations.py (OSC-WO4 ledger)", "SWEPT"),
 ]
 
 
