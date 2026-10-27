@@ -19,6 +19,12 @@ ESA "harm" definition rescinded (2026)      Moffett et al. 2026: no redundancy p
   → grid / water / data centers     → narrower corpus → narrower AI
 ```
 
+**Provenance.** The document's own byline reads Kavik + Claude. The operator
+states it came out of work attempted with other AI systems and is a
+diagnosis and set of things to note, not a finding. It is read that way here:
+the checks below grade what the notes say against sources, and nothing in
+this folder upgrades a note to a result.
+
 The document is not edited. Disagreements go in `check.py`'s output and
 in `CLAIM_TABLE.md`. Sources consulted are in `SOURCES.md`, all at
 search-result depth (no primary text was read).
