@@ -1,0 +1,60 @@
+optical-switching-constraint-chain / check.py
+==================================================================
+SOURCE_DROP.md sha256 6f1b4c3ea468a320...  pinned: True
+
+1. STRIPE PERIOD (Kaplan-Gehring form, report's parameters)
+     N  computed um  stated um
+     3     2.46e+05     250000
+     5          224        224
+     7         12.5       12.5
+     9         2.69        2.7
+    10          1.6        1.6
+    12        0.751       0.75
+   first N below the spot band top (1.5 um) at report parameters: N = 11  (N=11 period 1.06 um)
+   report: the period 'crashes through the focused-spot scale precisely at N = 9-10';
+   experiment: stripes at N >= 10. The model at the report's own parameters crosses at N = 11.
+   over Ms 0.8-1.0 MA/m, Keff 0.3-0.7 MJ/m3, A 10-20 pJ/m: N = 5..21 (0 corners never cross below N = 60; spot 1.36 um)
+   -> reproduces exactly; the 'confirmed by experiment' crossover is a property
+      of the chosen parameters, which the report's own caveat says span 4 decades
+
+2. DELTA = 60 CROSSINGS (nm)
+   FePt K5 t10        computed  2.52  stated 2.5
+   CoPt 12nm K0.5     computed  6.44  stated 6.4
+   CoPt 5.4nm K0.5    computed  9.59  stated 9.6
+   CoPt 5.4nm K0.3    computed 12.39  stated 12.4
+   Delta at 30 nm: CoPt 12nm K0.5 1304, CoPt 5.4nm K0.5 587, CoPt 5.4nm K0.3 352
+   FePt cylinder at 30 nm: 8533
+   -> 'every configuration sits at 350-1300' holds for the three Co/Pt curves only
+
+3. ENERGY LEDGER (stated 'absorbed' pJ vs fluence x disc spot x pulses)
+   UCSD vector beam   incident     34.5  stated   12.0  implied fraction 0.35
+   classic AO-HDS     incident   1814.6  stated  640.0  implied fraction 0.35
+   plasmonic TbFeCo   incident      8.2  stated    4.9  implied fraction 0.60
+   -> no absorbed fraction is stated; the stated values imply ~0.35, 0.35, 0.60
+   report's own Co/Pt switching threshold: 1.9-17 mJ/cm2;
+   the UCSD row uses 7.6 uJ/cm2, 250-2237x below it
+   GdFeCo limit: 6 J/cm3 x 40x40x20 nm3 = 192 aJ; stated 120 aJ
+
+4. OTHER ARITHMETIC (computed, stated)
+   8 pulses at 3 GHz (ns)          2.67  2.7
+   300 ps spacing -> GHz           3.33  3
+   1e3 pulses at 1 kHz (s)            1  1
+   500 pulses at 1 kHz (s)          0.5  0.5
+   HAMR 4 mW / 2 Gb/s (pJ)            2  2
+   0.95 eV / kT                    36.7  38
+   100 eV / kT                 3.87e+03  4000
+   350/100 .. 1300/100              3.5  4
+   ten-year survival of ONE bit needs Delta = ln(t/tau0) = 40.3..42.6
+   -> Delta >= 60 is a population/dispersion criterion, as the report notes;
+      the 40-60 'marginal' band is where a single bit already lasts ten years
+
+5. FIGURE REFERENCES
+   files in reading order: ['fig6', 'fig1', 'fig2', 'fig3', 'fig4', 'fig5']
+   text calls them Figure 1..6; the phase map (text Figure 1) is fig6, the rest shift by one
+
+6. ANCHORS (search-result depth, carried)
+   FOUND_IN_SEARCH  Khalid et al., Nat. Commun. 2026, 'Optical beam shaping induced reconfigurable magnetic domains', 15 Sep 2026, DOI 10.1038/s41467-026-77572-3
+   NOT_LOCATED      arXiv:1312.7301, Co nano-square depinning 0.95 eV
+   NOT_CHECKED      all other citations
+
+Nothing above measures a barrier, rates a material, or ranks a technology.

@@ -1,0 +1,50 @@
+scope-audit-lab / check.py
+================================================================
+delivered-file digest 1a1de4c7933a709a...  pinned: True
+
+1. REPORT V1 -> V2 (Deep Research Continuation -> Creative Scope Audit)
+   lines 179 -> 199; non-equal blocks {'replace': 15, 'insert': 2}
+   -> a revision, not a pure insertion: v1 lines are rewritten, not only added to
+
+2. TEST COUNTS (static count of def test_*)
+   lab 0.2: counted 31, report states 31
+   lab 0.3: counted 56, report states 56
+
+3. experiments_demo.jsonl
+   10 records = 2 copies of the five-record demo; copies identical (ids removed): True
+   -> the report describes a five-record stream; the shipped file is the demo appended twice
+
+4. NULL BASELINE
+   recorded per-replication regions: min 7, max 11, mean 8.88
+   analytic (n-1)(1 - threshold/width)^2 = 8.91
+   -> the 'copious' null count is fixed by uniform[0,100] against threshold 10;
+      it measures the generator's width/threshold ratio, computable without a run
+
+5. 'PLANTED STEPS' IN THE v0.3 DEMO
+   series [5.0, 6.0, 4.0, 31.0, 30.0, 8.0, 9.0, 60.0]
+   crossings with |delta| >= 20: step_2-step_3 +27, step_4-step_5 -22, step_6-step_7 +51
+   permutation appearances of those pairs: step_2-step_3 9/26, step_4-step_5 8/26, step_6-step_7 4/26
+   report, sweep paragraph: two planted steps of ~26 and ~51 (pairs 2-3, 6-7)
+   report, permutation paragraph: planted pairs appear 9 and 8 times (pairs 2-3, 4-5)
+   -> the two paragraphs name different pairs as 'planted'; the ~51 step appears 4/26
+
+6. v0.2 TRANSITION DEMO
+   regions: vis_050->vis_025 27, vis_025->vis_000 61  (report: 27, 61)
+   pairs with a zero left output: 1; of those, right side missing: 1
+   -> the demo's labelled zero-output case is never a computed pair; the tests cover it
+
+7. ESA ROW OF THE FACT-CHECK TABLE
+   row says: final rule published July 14, 2026
+   Federal Register link it cites: 2025/04/17  document 2025-06746
+   -> the cited document is dated April 2025 (the proposed rule), not the July 2026 final rule
+
+8. EXTERNAL ANCHORS (search-result depth, carried)
+   FOUND_IN_SEARCH  OpenAI ETH announcement, Oct 26 2026, Impagliazzo/Paturi/Williams review
+   FOUND_IN_SEARCH  Navier-Stokes lost in translation, arXiv 2610.08144 (Bastounis, Circelli, Hansen)
+   FOUND_IN_SEARCH  Palomar registry opened 2026-08-18, Tao among maintainers
+   FOUND_IN_SEARCH  IEA data-centre demand +17% in 2025, ~950 TWh by 2030
+   SECONDARY_ONLY   IEA 485 TWh 2025 baseline
+   NOT_LOCATED      Anthropic-attributed #3-SAT preprint, hexagonmath 2610.00577
+   FOUND_IN_SEARCH (FR 2026-14195; see habitat-lag-dependency/) ESA harm rescission final rule, July 14 2026
+
+Nothing above is a verdict on ETH, on any lab, or on the lab's design.
