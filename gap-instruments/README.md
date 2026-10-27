@@ -118,10 +118,10 @@ record            target           outcome     signed     safe      method
 ----------------  ---------------  ----------  ---------  --------  ----------
 CAL-MILES-GPS     TARGET_MISMATCH  NOT_SCORED  --         OVER      NOT_TESTED
 CAL-MILES-ACTUAL  MATCH            HIT         0 to +1    OVER      NOT_TESTED
-CAL-FUEL          MATCH            HIT         --         UNSTATED  NO (categorical)
+CAL-FUEL          TARGET_MISMATCH  NOT_SCORED  --         OVER      NO (categorical)
 CAL-TIME          MATCH            HIT         +0.9667    OVER      NOT_TESTED
 
-summary   n 4, hits 3, target mismatches 1
+summary   n 4, hits 2, target mismatches 2
 MAE       miles 0-1 (one row), on-duty time 0.9667, fuel None (categorical)
 signed    miles 0 to +1, on-duty time +0.9667: both overestimates, the buffer
 LIMIT-EAST-2026   limit_basis empirical_rule; not in gap_fields
@@ -132,10 +132,22 @@ The operator's correction (2026-10-27), entered as stated: a driver relying on
 gauges, dashboard and GPS adds buffer for each instrument's deviation plus
 environment, construction, traffic and road wear, and overestimating still
 arrives on time where underestimating does not. The trip rows carry goal
-"arrive on time", safe_side OVER and that buffer. The fuel row states neither
-and is left UNSTATED.
+"arrive on time", safe_side OVER and that buffer.
 
-The three dictated verdicts (miles vs actual hit, fuel hit, time hit) and the
+Second operator correction (2026-10-27, later), verbatim: "risk is
+underestimate same as drive time, unload time, mileage etc". The fuel row
+is renamed from "fuel tank level" to "fuel needed for the trip", with
+safe_side OVER and the same buffer. The dictated reading is still a tank
+LEVEL from the gauge, so the renamed row is TARGET_MISMATCH: the gauge does
+not measure what the trip will burn. It is logged, not scored, and not a
+miss. Scoring it needs a measured burn for the trip (for example fill-to-fill
+gallons), and that has not been dictated. The method divergence (full
+inferred from memory, then confirmed on the gauge) is still pinned in the
+selftest on the pre-rename row. Unload time is named as an OVER-safe
+quantity and has no row yet.
+
+The dictated verdicts (miles vs actual hit, time hit; fuel hit on the
+tank-level reading, before the rename) and the
 miles-vs-GPS mismatch come out of the rules. They are the verdicts the rules
 were checked against, so the seed is a regression fixture and not an
 independent check.

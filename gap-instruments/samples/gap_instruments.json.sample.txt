@@ -347,7 +347,7 @@
       "safe_side": "OVER"
     },
     {
-      "quantity_named": "fuel tank level",
+      "quantity_named": "fuel needed for the trip",
       "predicted": "full",
       "confidence": "",
       "measured": {
@@ -357,9 +357,9 @@
         "unit": "",
         "uncertainty": "gauge resolution not stated"
       },
-      "instrument_scope": "fuel gauge reading",
-      "operator_buffer": "",
-      "goal": "",
+      "instrument_scope": "fuel gauge reading; does not see what the trip will burn",
+      "operator_buffer": "instrument deviation (gauges, dashboard, GPS), environment, construction, traffic, road wear (stated by the operator 2026-10-27)",
+      "goal": "do not run short before the dock (operator 2026-10-27: underestimate is the risk, as for time and miles)",
       "version_stamp": "n/a: human operator",
       "timestamp": "2026-10-25/26 (voice dictated)",
       "instrument_quantity": "fuel tank level",
@@ -367,7 +367,7 @@
       "method_matches_standard": "NO",
       "method_note": "inferred full from memory of the fill-up; the gauge then confirmed it",
       "record_id": "CAL-FUEL",
-      "safe_side": "UNSTATED"
+      "safe_side": "OVER"
     },
     {
       "quantity_named": "on-duty time",
@@ -428,16 +428,16 @@
     },
     {
       "record_id": "CAL-FUEL",
-      "quantity": "fuel tank level",
-      "target_match": "MATCH",
-      "outcome": "HIT",
+      "quantity": "fuel needed for the trip",
+      "target_match": "TARGET_MISMATCH",
+      "outcome": "NOT_SCORED",
       "abs_error": null,
       "tolerance": null,
-      "tolerance_basis": "categorical: exact match",
+      "tolerance_basis": null,
       "signed_error": null,
-      "safe_side": "UNSTATED",
+      "safe_side": "OVER",
       "method_matches_standard": "NO",
-      "reason": ""
+      "reason": "TARGET_MISMATCH: the prediction names 'fuel needed for the trip', the instrument measured 'fuel tank level'; logged, not an error"
     },
     {
       "record_id": "CAL-TIME",
@@ -461,11 +461,11 @@
   ],
   "calibration_summary": {
     "n": 4,
-    "hits": 3,
+    "hits": 2,
     "misses": 0,
-    "target_mismatches": 1,
+    "target_mismatches": 2,
     "target_not_evaluable": 0,
-    "not_scored": 1,
+    "not_scored": 2,
     "method_matches_standard": {
       "YES": 0,
       "NO": 1,
@@ -485,9 +485,9 @@
           1.0
         ]
       },
-      "fuel tank level": {
+      "fuel needed for the trip": {
         "n": 1,
-        "scored": 1,
+        "scored": 0,
         "mae": null,
         "mean_signed_error": null
       },
@@ -504,7 +504,7 @@
         ]
       }
     },
-    "confidence_vs_hit_rate": "NOT_COMPUTABLE: 0 of 3 scored rows state a confidence"
+    "confidence_vs_hit_rate": "NOT_COMPUTABLE: 0 of 2 scored rows state a confidence"
   },
   "confounds": [
     {

@@ -874,8 +874,12 @@ def make_seed():
     t_seed = "2026-10-25/26 (voice dictated)"
     human = "n/a: human operator"
     miles = "miles driven to the dock, incl. going around the shop"
-    # A2r: stated by the operator 2026-10-27 for the trip estimates; the fuel
-    # row states no goal and no safe side, and is left so.
+    # A2r: stated by the operator 2026-10-27 for the trip estimates.
+    # A2r-2 (operator, 2026-10-27, later): "risk is underestimate same as drive
+    # time, unload time, mileage". The fuel row is renamed to the requirement
+    # (fuel needed) with safe_side OVER. The dictated reading is still a tank
+    # LEVEL from the gauge, so the row is now TARGET_MISMATCH: the gauge does
+    # not measure what the trip needs. Logged, not scored, not a miss.
     goal = "arrive on time"
     buf = ("instrument deviation (gauges, dashboard, GPS), environment, "
            "construction, traffic, road wear (stated by the operator 2026-10-27)")
@@ -898,12 +902,17 @@ def make_seed():
             operator_buffer="going around the shop and back to the dock; " + buf,
             goal=goal, safe_side="OVER", version_stamp=human, timestamp=t_seed),
         CalibrationRecord(
-            record_id="CAL-FUEL", quantity_named="fuel tank level",
+            record_id="CAL-FUEL", quantity_named="fuel needed for the trip",
             predicted="full",
             measured=Evidence("full", "MEASURED", "fuel gauge (as dictated)",
                               "", "gauge resolution not stated"),
             instrument_quantity="fuel tank level",
-            instrument_scope="fuel gauge reading",
+            instrument_scope="fuel gauge reading; does not see what the "
+                             "trip will burn",
+            operator_buffer=buf,
+            goal="do not run short before the dock (operator 2026-10-27: "
+                 "underestimate is the risk, as for time and miles)",
+            safe_side="OVER",
             version_stamp=human, timestamp=t_seed,
             # [CHOICE A2-6] the standard method is taken as the instrument's
             # own reading; inferring from memory diverges from it.
@@ -1000,7 +1009,7 @@ def selftest():
     assert g["abs_error"] is None
     assert not any("mismatch" in i.lower() for i in calib[0].validate())
     # A2: the dictated verdicts reproduce under the declared rules
-    assert [c.score()["outcome"] for c in calib] == ["NOT_SCORED", "HIT", "HIT", "HIT"]
+    assert [c.score()["outcome"] for c in calib] == ["NOT_SCORED", "HIT", "NOT_SCORED", "HIT"]
     t = calib[3].score()
     assert t["tolerance"] == 1.0 and abs(t["abs_error"][0] - 0.9667) < 1e-4
     assert t["safe_side"] == "OVER" and abs(t["signed_error"][0] - 0.9667) < 1e-4
@@ -1017,10 +1026,15 @@ def selftest():
     assert replace(calib[3], predicted="13", safe_side="UNDER").score()["outcome"] == "HIT"
     assert any("safe_side" in i for i in replace(calib[3], safe_side="LATE").validate())
     # A2: outcome and method stay apart; the fuel HIT came by a divergent method
-    f = calib[2].score()
+    # (still true of the tank-level reading, checked on the pre-rename row)
+    f = replace(calib[2], quantity_named="fuel tank level").score()
     assert (f["outcome"], f["method_matches_standard"]) == ("HIT", "NO")
+    # A2r-2: renamed to the requirement, the gauge no longer reads the target
+    f2 = calib[2].score()
+    assert (f2["target_match"], f2["outcome"]) == ("TARGET_MISMATCH", "NOT_SCORED")
+    assert calib[2].safe_side == "OVER"
     s = calibration_summary(calib)
-    assert (s["n"], s["hits"], s["target_mismatches"]) == (4, 3, 1)
+    assert (s["n"], s["hits"], s["target_mismatches"]) == (4, 2, 2)
     bq = s["by_quantity"]
     assert bq[calib[0].quantity_named]["mae"] == [0.0, 1.0]
     assert (bq[calib[0].quantity_named]["n"], bq[calib[0].quantity_named]["scored"]) == (2, 1)
@@ -1028,7 +1042,7 @@ def selftest():
     assert bq["on-duty time"]["mean_signed_error"] == [0.9667, 0.9667]
     assert bq[calib[0].quantity_named]["mean_signed_error"] == [0.0, 1.0]
     assert signed_error_band((13.0, 13.0), (14.0, 15.0)) == (-2.0, -1.0)
-    assert bq["fuel tank level"]["mae"] is None
+    assert bq["fuel needed for the trip"]["mae"] is None
     assert str(s["confidence_vs_hit_rate"]).startswith("NOT_COMPUTABLE")
     assert abs_error_band((10, 12), (14, 15)) == (2, 5)
     # A3: meaning deferred until a control separates candidates

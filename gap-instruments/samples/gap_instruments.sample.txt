@@ -43,21 +43,18 @@ limit_basis: empirical_rule
   CAL-MILES-ACTUAL  MATCH           HIT        abs_error 0-1      tolerance 0.5 | safe OVER signed 0-1 | method NOT_TESTED
     tolerance basis: written precision
     UNRESOLVED: calibration: confidence not stated
-  CAL-FUEL          MATCH           HIT        abs_error --       tolerance -- | safe UNSTATED signed -- | method NO
-    tolerance basis: categorical: exact match
-    UNRESOLVED: calibration: goal not stated
-    UNRESOLVED: calibration: operator_buffer not recorded ('none' if none)
+  CAL-FUEL          TARGET_MISMATCH NOT_SCORED abs_error --       tolerance -- | safe OVER signed -- | method NO
+    TARGET_MISMATCH: the prediction names 'fuel needed for the trip', the instrument measured 'fuel tank level'; logged, not an error
     UNRESOLVED: calibration: confidence not stated
-    UNRESOLVED: calibration: safe_side not stated (which direction of error the goal tolerates); scored symmetric
   CAL-TIME          MATCH           HIT        abs_error 0.9667   tolerance 1.0 | safe OVER signed 0.9667 | method NOT_TESTED
     tolerance basis: written precision, doubled by '~'
     UNRESOLVED: calibration: confidence not stated
-  summary: n 4, hits 3, misses 0, target mismatches 1, not scored 1
+  summary: n 4, hits 2, misses 0, target mismatches 2, not scored 2
     miles driven to the dock, incl. going around the shop: n 2, scored 1, mae 0-1, mean signed 0-1
-    fuel tank level: n 1, scored 1, mae --, mean signed --
+    fuel needed for the trip: n 1, scored 0, mae --, mean signed --
     on-duty time: n 1, scored 1, mae 0.9667, mean signed 0.9667
   method matches standard (kept apart): {'YES': 0, 'NO': 1, 'UNKNOWN': 0, 'NOT_TESTED': 3}
-  confidence vs hit rate: NOT_COMPUTABLE: 0 of 3 scored rows state a confidence
+  confidence vs hit rate: NOT_COMPUTABLE: 0 of 2 scored rows state a confidence
   verdict: NOT ASSIGNED
 
 === CONFOUNDS (presence and size logged; meaning deferred) ===
