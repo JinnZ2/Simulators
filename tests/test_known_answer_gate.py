@@ -117,6 +117,10 @@ MANIFEST = (
     "floor-capability/floor_capability.py::life_ratio",
     "floor-capability/floor_capability.py::catchable_share_low",
     "floor-capability/floor_capability.py::handoff_overlap",
+    "extraction-chain-join/chain_join.py::coverage",
+    "extraction-chain-join/chain_join.py::traced_fraction",
+    "extraction-chain-join/chain_join.py::consumption_based",
+    "extraction-chain-join/chain_join.py::reserve_share_band",
 )
 
 # Cases known to fail today. A case that starts passing turns this red so

@@ -374,6 +374,7 @@ last three; read in order:
 - `reg-uncertainty-registry/` — WO-REG-1, regulatory decisions under uncertainty as a registry: direction stored twice (action, outcome), two-sided consequence, actors, authority chains, conflicts and gaps as nodes; RUS-0.2 reproduces its own Annex A, the one-directional claim reads HOLDS_UNTESTABLE on the annex basis and FAILS on the action basis; RUS-0.3 PROPOSED; every count rendered from the registry, no human second coder
 - `floor-capability/` — FLOOR CAPABILITY draft v0 landed verbatim and instrumented; weights UNSTATED not unrun, hidden_cost refused as a scalar, scrap at event level against the draft's code-level map, tenure test with an equipment-only control; all CONSTRUCTED
 - `gap-instruments/` — evidence notation for coordination systems, physical limits, discrepancies and abstentions; MEASURED/ESTIMATED/UNKNOWN/GAP per field, no verdict; two supplied files verbatim in `source/`, eight marked fixes in the working copy, mirrored byte-identical in `tools/` here and in method-layer
+- `extraction-chain-join/` — the extraction-money-power-emissions chain, G1..G7 as instruments not verdicts; order RECONSTRUCTED from the session summary; coverage on every reading, NO_PATTERN added to the four branches, end-to-end effect refused; all CONSTRUCTED
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -14188,6 +14189,57 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `handoff_overlap` are registered in `tools/known_answer.py`. The check count
   is printed by `python3 floor-capability/test_floor.py`, and the module
   refuses `--selftest`. Stdlib only, parses under 3.8, CC0.
+- `extraction-chain-join/` — Work order: joining the
+  extraction-money-power-emissions chain (debt / reserve need -> extraction
+  -> emissions -> firm -> beneficial owner -> funding of leaders -> policy),
+  whose pieces sit with separate custodians and have not been joined end to
+  end. The order asks for instruments and joined datasets, not verdicts, with
+  coverage reported on every result. **The order's bytes were lost in
+  compaction**, so `WORK_ORDER.md` is the session summary's restatement,
+  labelled RECONSTRUCTED and sha256-pinned (`ECJ_001`). `chain_join.py` has one
+  reader per gap and one for the joined chain. **Coverage is structural**:
+  `result()` refuses a reading with no covered count, total or unit, and an
+  empty frame is None, never 0 (`ECJ_002`). The order's four branches have no
+  cell for a measured null, so NO_PATTERN and NOT_EVALUABLE are added (CHOICE 1,
+  `ECJ_003`). **G1**: one constructed world read through three samples gives
+  three readings (dependent-only HOLDS, rest NO_PATTERN, pooled SCOPE_LIMITED),
+  so a mixed literature can be a property of each study's sample frame
+  (`ECJ_004`); a price confound reads MISSED_VARIABLE with the column and
+  PATTERN_HOLDS without it (`ECJ_005`); over 10 seeds 37 of 40 read as built and
+  the three misses are one seed (`ECJ_006`). **G2**: traced share plus break
+  shares is 1 for every firm, so the unattributed part is a measured fraction
+  even where its owner is unknown; 7 breaks listed by type and tag (`ECJ_007`);
+  a 25% disclosure threshold traces five 20% holders to nobody under full
+  compliance (`ECJ_008`). **G3** has country-level prior art: Zhang et al. 2020
+  (*Nature Climate Change* 10, 1096-1101, record verified at search-index
+  depth) assign multinationals' foreign-affiliate emissions to the investing
+  country (`ECJ_009`); parent-level targets put 7.4% of constructed emissions in
+  a holding company's secrecy jurisdiction, so parent-level accounting can turn
+  a G4 gap into an attribution to a shell (`ECJ_010`). **G4**: the gap is
+  computable from the record (0.543 unattributable, 0.420 at secrecy breaks at
+  cut 60, 0.074 at cut 80), a secrecy index as a per-chain weight is refused
+  (`ECJ_011`), and an unflagged nominee makes the measured gap a lower bound
+  (`ECJ_012`). **G5**: "predicts better than voter preference" does not separate
+  influence from selection — the selection world reads PATTERN_HOLDS (AUC 1.000
+  against 0.789) with no vote moved, the influence world NO_PATTERN with votes
+  moved — while a timing split does (`ECJ_013`); a funding filter on who sits
+  raises the chamber's yes share 0.527 -> 0.820 and reads below chance (0.459)
+  among the seated, so legislators are a sample selected on the filter
+  (`ECJ_014`). **G6**: the reserve share of extraction revenue is a band under
+  fungibility, it reads lower where extraction answers the reserve need, and a
+  driven-by share is refused (`ECJ_015`). **G7**: a production plateau with
+  consumption-based still rising, and plateau years past a consumption-series
+  lag cannot be read (GAP, `ECJ_016`). **The chain**: two correlational arrows
+  make an end-to-end claim an inference of an inference, the record's unit
+  changes at all five joints, an end-to-end effect is refused, and joined
+  coverage read on unit records (0.310) exceeds the independence product
+  (0.242) when one secrecy flag fails several links (`ECJ_018`). Davis &
+  Caldeira's ~23% and the China plateau are carried (`ECJ_017`, `ECJ_019`);
+  nothing has met a custodian's records (`ECJ_020`). `ols` imported from
+  `sim-span`; `coverage`, `traced_fraction`, `consumption_based` and
+  `reserve_share_band` registered in `tools/known_answer.py`. Check count
+  printed by `python3 extraction-chain-join/test_chain.py`; the module refuses
+  `--selftest`. Stdlib only, parses under 3.8, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
