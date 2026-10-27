@@ -39,6 +39,7 @@ text-only); `FIGURES.md` records them by name, size and sha256.
     python3 citations.py          # OSC-WO4 citation ledger (test_citations.py)
     python3 barrier_per_bit.py    # OSC-WO1 calculator, undeclared terms refused (test_barrier_per_bit.py)
     python3 decision.py           # OSC-WO2 decision readout, UNMEASURED first-class (test_decision.py)
+    python3 sharrock.py           # OSC-WO3 fit helper for PROTOCOL_CARD.md (test_sharrock.py)
 
 Stdlib only, parses under 3.9, CC0. Sample output: `samples/check.sample.txt`.
 

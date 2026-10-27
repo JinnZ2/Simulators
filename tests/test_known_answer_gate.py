@@ -124,6 +124,7 @@ MANIFEST = (
     "scope-audit-lab/null_expectation.py::from_generator",
     "optical-switching-constraint-chain/barrier_per_bit.py::energy_per_bit",
     "optical-switching-constraint-chain/barrier_per_bit.py::retention_line",
+    "optical-switching-constraint-chain/sharrock.py::fit_delta",
 )
 
 # Cases known to fail today. A case that starts passing turns this red so

@@ -751,6 +751,7 @@ def _tcr_expected_crossings(rate, rate_unit, horizon_value, horizon_unit):
 # counted. An expected set can. Adding a metric means adding a line here --
 # deliberately, so the addition is visible in a diff.
 EXPECTED_METRICS = (
+    "optical-switching-constraint-chain/sharrock.py::fit_delta",
     "optical-switching-constraint-chain/barrier_per_bit.py::energy_per_bit",
     "optical-switching-constraint-chain/barrier_per_bit.py::retention_line",
     "scope-audit-lab/null_expectation.py::from_generator",
@@ -1793,6 +1794,7 @@ def seed():
     _seed_extraction_chain()
     _seed_null_expectation()
     _seed_barrier_per_bit()
+    _seed_sharrock()
 
 
 def _reg_mod(name):
@@ -3342,6 +3344,39 @@ def _seed_barrier_per_bit():
          case("population without basis", ("population", 10, 1e-9, 60), None,
               "a population line with no basis is refused")],
         note="the report's 60 is a population line; one bit lasts ten years at ~40 (OSC_008)")
+
+
+def _sharrock_delta(delta, f0_true, f0_fit):
+    """optical-switching-constraint-chain/sharrock.py::fit_delta on data built
+    by hand from the Sharrock form with a planted Delta; None if f0 undeclared."""
+    import importlib.util
+    import math as _m
+    path = os.path.join(ROOT, "optical-switching-constraint-chain", "sharrock.py")
+    spec = importlib.util.spec_from_file_location("_sharrock", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    ts = [1.0, 10.0, 100.0, 1e3, 1e4]
+    hs = [1 - _m.sqrt(_m.log(f0_true * t / _m.log(2)) / delta) for t in ts]
+    try:
+        return mod.fit_delta(ts, hs, f0=f0_fit)
+    except mod.UndeclaredTerm:
+        return None
+
+
+def _seed_sharrock():
+    """OSC-WO3. The Sharrock line H_c = a + b sqrt(ln(f0 t/ln2)) gives
+    Delta = (a/b)^2 exactly when f0 is right. The pins: a planted Delta comes
+    back exactly, and an undeclared f0 is refused rather than assumed."""
+    register(
+        "optical-switching-constraint-chain/sharrock.py::fit_delta",
+        _sharrock_delta,
+        [case("planted 50, f0 right", (50.0, 1e9, 1e9), 50.0,
+              "data built from the form itself; the line is exact", tol=1e-9),
+         case("planted 80, f0 right", (80.0, 1e9, 1e9), 80.0,
+              "a different planted value, so a constant fit fails", tol=1e-9),
+         case("f0 undeclared", (50.0, 1e9, None), None,
+              "the attempt frequency is not fitted; refusing it is the point")],
+        note="a wrong f0 shifts Delta by about 2 per decade at Delta ~ 50 (test_sharrock.py)")
 
 
 def _seed_fitness_bin_self_test():
