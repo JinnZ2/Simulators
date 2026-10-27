@@ -14110,6 +14110,7 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   in-tree instrument by path, two only partly (`GWS_011`). 79 URLs carried, none
   read. Check count printed by `python3 grounded-work-stack/test_check.py`.
   Stdlib only, parses under 3.9, CC0.
+- `habitat-lag-dependency/` — delivered record (CC0, verbatim) chaining the 2026 ESA "harm" rescission and Moffett et al. 2026 (no redundancy plateau) through extinction-debt lag to AI's physical and knowledge dependencies; `check.py` finds tags on 18 of 44 claim lines (none in section 6), two verify-marked figures tagged two ways, and the "more than two-thirds" private-land figure fitting neither GAO 1994 row (91.2% some / 66.1% >60%, nonfederal not private); both 2026 anchors exist at search depth. Claims `HLD_001..008`. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
