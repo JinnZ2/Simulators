@@ -1,0 +1,327 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Skill Drain Simulator</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: work-order tag header, control strip, A/B readout table, four small-multiple charts, log panel, assumptions. */
+:root{
+  --bg:#eef1f3; --panel:#ffffff; --ink:#17222b; --muted:#5b6872; --rule:#cfd6db;
+  --a:#b86a00; --b:#1f6f8b; --alarm:#b3261e; --tag:#f4c430;
+  --f-display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#12181d; --panel:#1a2228; --ink:#e3e8eb; --muted:#93a0a9; --rule:#2c373f;
+  --a:#f0a33a; --b:#5fb3cf; --alarm:#ef6a5f; --tag:#d9ab1f; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12181d; --panel:#1a2228; --ink:#e3e8eb; --muted:#93a0a9; --rule:#2c373f;
+  --a:#f0a33a; --b:#5fb3cf; --alarm:#ef6a5f; --tag:#d9ab1f; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5}
+.wrap{max-width:1080px;margin:0 auto;padding-block:28px 56px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:28px}
+header{display:flex;flex-direction:column;gap:8px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+  display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.eyebrow .tagchip{background:var(--tag);color:#17222b;padding:2px 8px;border-radius:2px;font-weight:500}
+h1{font-family:var(--f-display);font-weight:700;font-size:clamp(34px,6vw,54px);line-height:1;margin:0;letter-spacing:.01em;text-wrap:balance}
+.lede{max-width:68ch;color:var(--muted);margin:0}
+h2{font-family:var(--f-display);font-weight:600;font-size:22px;letter-spacing:.02em;margin:0;text-transform:uppercase}
+.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px 28px;
+  border-top:2px solid var(--ink);border-bottom:1px solid var(--rule);padding-block:16px}
+.ctl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.ctl label{font-size:13px;font-weight:600;display:flex;justify-content:space-between;gap:8px}
+.ctl label output{font-family:var(--f-mono);font-weight:500}
+.ctl small{color:var(--muted);font-size:12px}
+input[type=range]{width:100%;accent-color:var(--ink)}
+.scen{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.scenbox{display:flex;flex-direction:column;gap:8px;padding:12px;border:1px solid var(--rule);border-radius:3px;background:var(--panel);min-width:0}
+.scenbox h3{margin:0;font-family:var(--f-display);font-size:18px;font-weight:600;display:flex;align-items:center;gap:8px}
+.swatch{width:22px;height:0;border-top:3px solid var(--a)}
+.swatch.b{border-top:3px dashed var(--b)}
+.seg{display:flex;border:1px solid var(--rule);border-radius:3px;overflow:hidden}
+.seg button{flex:1;font:inherit;font-size:13px;padding:6px 8px;border:0;background:transparent;color:var(--ink);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.seg button:focus-visible,input:focus-visible{outline:2px solid var(--b);outline-offset:2px}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;min-width:520px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--rule);font-size:14px}
+th{font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+td.num{font-family:var(--f-mono);text-align:right}
+th.num{text-align:right}
+td.a{color:var(--a)} td.b{color:var(--b)}
+.bad{color:var(--alarm);font-weight:600}
+.charts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:20px}
+.chart{display:flex;flex-direction:column;gap:6px;min-width:0}
+.chart .hd{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.chart .hd span{font-size:12px;color:var(--muted);font-family:var(--f-mono)}
+.chart h4{margin:0;font-size:15px;font-weight:600}
+canvas{width:100%;height:220px;display:block;background:var(--panel);border:1px solid var(--rule);border-radius:3px}
+.log{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+.slip{background:var(--panel);border:1px solid var(--rule);border-left:6px solid var(--tag);padding:14px 16px;font-family:var(--f-mono);font-size:13px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.slip .row{display:flex;justify-content:space-between;gap:12px}
+.slip .ttl{font-family:var(--f-display);font-size:17px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.bar{height:14px;background:var(--rule);border-radius:2px;overflow:hidden;display:flex}
+.bar i{display:block;height:100%}
+.note{color:var(--muted);font-size:13px;max-width:72ch;margin:0}
+details{border-top:1px solid var(--rule);padding-top:12px}
+summary{cursor:pointer;font-weight:600}
+details ul{color:var(--muted);font-size:14px;max-width:76ch}
+@media (max-width:640px){.scen,.log{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow"><span class="tagchip">MODEL</span><span>20 operators · 60 months · 40-run average</span></div>
+    <h1>Skill Drain Simulator</h1>
+    <p class="lede">A plant loses its veterans to retirement and turnover. Scrap climbs, the log blames the machines, and inspectors get added to cover it. Change the settings and compare two versions of the same plant.</p>
+  </header>
+
+  <section class="controls" aria-label="Plant settings">
+    <div class="ctl">
+      <label for="turn">Monthly turnover <output id="turnO"></output></label>
+      <input id="turn" type="range" min="0.5" max="6" step="0.5" value="2.5">
+      <small>Chance any operator quits in a given month</small>
+    </div>
+    <div class="ctl">
+      <label for="wave">Veteran retirement wave <output id="waveO"></output></label>
+      <input id="wave" type="range" min="0" max="100" step="5" value="60">
+      <small>Share of veterans retiring over the next 3 years</small>
+    </div>
+    <div class="ctl">
+      <label for="tau">Years to tacit skill <output id="tauO"></output></label>
+      <input id="tau" type="range" min="1" max="6" step="0.5" value="3">
+      <small>Time to learn a machine by sound and feel, with mentors around</small>
+    </div>
+  </section>
+
+  <section class="scen" aria-label="Scenarios">
+    <div class="scenbox">
+      <h3><span class="swatch"></span>Plant A</h3>
+      <div class="seg" role="group" aria-label="Plant A hiring screen">
+        <button id="aW" aria-pressed="true">Written screen</button><button id="aH" aria-pressed="false">Hands-on trial</button>
+      </div>
+      <div class="ctl"><label for="aR">Reserve line veterans <output id="aRO"></output></label>
+        <input id="aR" type="range" min="0" max="6" step="1" value="0"></div>
+    </div>
+    <div class="scenbox">
+      <h3><span class="swatch b"></span>Plant B</h3>
+      <div class="seg" role="group" aria-label="Plant B hiring screen">
+        <button id="bW" aria-pressed="false">Written screen</button><button id="bH" aria-pressed="true">Hands-on trial</button>
+      </div>
+      <div class="ctl"><label for="bR">Reserve line veterans <output id="bRO"></output></label>
+        <input id="bR" type="range" min="0" max="6" step="1" value="3"></div>
+    </div>
+  </section>
+
+  <section aria-label="Readout">
+    <div class="tablewrap"><table>
+      <thead><tr><th>At month 60</th><th class="num">Plant A</th><th class="num">Plant B</th></tr></thead>
+      <tbody id="tb"></tbody>
+    </table></div>
+  </section>
+
+  <section class="charts" aria-label="Charts">
+    <div class="chart"><div class="hd"><h4>Scrap</h4><span>parts / month</span></div><canvas id="c0" role="img" aria-label="Scrap per month, Plant A and B"></canvas></div>
+    <div class="chart"><div class="hd"><h4>Veterans on the floor</h4><span>skill ≥ 0.7</span></div><canvas id="c1" role="img" aria-label="Veterans on the floor"></canvas></div>
+    <div class="chart"><div class="hd"><h4>Inspectors and supervisors</h4><span>headcount</span></div><canvas id="c2" role="img" aria-label="Oversight headcount"></canvas></div>
+    <div class="chart"><div class="hd"><h4>Repairs sent outside</h4><span>jobs / month</span></div><canvas id="c3" role="img" aria-label="Outsourced repairs per month"></canvas></div>
+  </section>
+
+  <section class="log" aria-label="What the scrap log says">
+    <div class="slip">
+      <div class="ttl">Scrap log · Plant A · month 36</div>
+      <div class="row"><span>Belt / drive failure</span><span id="l1"></span></div>
+      <div class="row"><span>Calibration drift</span><span id="l2"></span></div>
+      <div class="row"><span>Material jam</span><span id="l3"></span></div>
+      <div class="row"><span>Operator-related</span><span>0</span></div>
+      <div class="bar" aria-hidden="true"><i id="lb1" style="background:var(--muted)"></i></div>
+      <small>Logged cause: 100% equipment</small>
+    </div>
+    <div class="slip">
+      <div class="ttl">What actually happened</div>
+      <div class="row"><span>Drift a skilled operator catches early</span><span id="r1" class="bad"></span></div>
+      <div class="row"><span>True equipment failure</span><span id="r2"></span></div>
+      <div class="bar" aria-hidden="true"><i id="rb1" style="background:var(--alarm)"></i><i id="rb2" style="background:var(--muted)"></i></div>
+      <small id="rnote"></small>
+    </div>
+  </section>
+
+  <p class="note" id="lead"></p>
+
+  <details>
+    <summary>How the model works</summary>
+    <ul>
+      <li>This is an illustrative model with assumed numbers, not plant data. It shows the shape of the mechanism, not a forecast.</li>
+      <li>Each machine drifts about 3 times a month. The operator catches a drift early with probability equal to their skill (0 to 1). A missed drift becomes a fault and 40 scrapped parts.</li>
+      <li>Machines also fail outright about 0.3 times a month regardless of who runs them. Nobody could have caught those.</li>
+      <li>Skill grows toward 1 with time on the machine. Learning slows when there are too few veterans to mentor the new hires (fewer than 1 per 3).</li>
+      <li>Written screen: new hires start near zero skill and quit twice as often in their first year. Hands-on trial: new hires start with some mechanical skill and stay at the normal rate.</li>
+      <li>Reserve line: that many senior veterans don't quit, always mentor, and hand off to their replacement before retiring (the replacement starts at skill 0.5).</li>
+      <li>Repairs stay in-house in proportion to veterans on site (4 covers every shift). Inspectors are added for each 400 extra scrapped parts a month above the starting level.</li>
+      <li>Early-warning indicator: veterans on the floor down 30% from the start. Scrap alarm: scrap 50% above its starting level.</li>
+    </ul>
+  </details>
+</div>
+
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const N=20, T=60, RUNS=40, DRIFT=3, FAIL=0.3, PARTS=40, VET=0.7;
+const st={a:{screen:'W'},b:{screen:'H'}};
+
+function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function pois(r,l){let L=Math.exp(-l),k=0,p=1;do{k++;p*=r()}while(p>L);return k-1}
+
+function run(cfg,seed){
+  const r=rng(seed);
+  const q=cfg.turn/100, tau=cfg.tau*12;
+  // initial floor: 12 veterans, 8 mid-tenure
+  let ops=[];
+  for(let i=0;i<N;i++){
+    const vet=i<12;
+    const s=vet?0.85+0.12*r():0.25+0.4*r();
+    const retire=(vet && r()<cfg.wave/100)?1+Math.floor(r()*36):Infinity;
+    ops.push({s,retire,age:vet?999:24,reserve:false});
+  }
+  ops.slice(0,cfg.reserve).forEach(o=>o.reserve=true); // most senior
+  const out={scrap:[],vets:[],insp:[],outs:[],catch:[],fail:[],ratio:[]};
+  let scrap0=null;
+  for(let m=1;m<=T;m++){
+    // departures
+    for(let i=0;i<N;i++){
+      const o=ops[i];
+      let leave=false, handoff=false;
+      if(m>=o.retire){leave=true; handoff=o.reserve;}
+      else if(!o.reserve){
+        const mult=(o.age<12 && cfg.screen==='W')?2:1;
+        if(r()<q*mult) leave=true;
+      }
+      if(leave){
+        const s0=handoff?0.5:(cfg.screen==='H'?0.22+0.1*r():0.02+0.04*r());
+        ops[i]={s:s0,retire:Infinity,age:0,reserve:o.reserve};
+      }
+    }
+    // mentoring and learning
+    const vets=ops.filter(o=>o.s>=VET||o.reserve&&o.age>=999).length;
+    const newbies=ops.filter(o=>o.s<0.4).length;
+    const need=Math.max(1,newbies/3);
+    const mf=Math.min(1,vets/need);
+    const tauEff=tau/(0.3+0.7*mf);
+    ops.forEach(o=>{o.s+= (1-o.s)/tauEff; o.age++;});
+    // faults
+    let caughtMiss=0, fails=0;
+    ops.forEach(o=>{
+      const d=pois(r,DRIFT);
+      for(let k=0;k<d;k++) if(r()>o.s) caughtMiss++;
+      fails+=pois(r,FAIL);
+    });
+    const scrap=(caughtMiss+fails)*PARTS;
+    if(scrap0===null) scrap0=scrap;
+    const vetsNow=ops.filter(o=>o.s>=VET).length;
+    const inhouse=Math.min(1,vetsNow/4);
+    out.scrap.push(scrap); out.vets.push(vetsNow);
+    out.catch.push(caughtMiss); out.fail.push(fails);
+    out.outs.push((caughtMiss+fails)*(1-inhouse));
+    out.ratio.push(newbies/Math.max(vetsNow,0.5));
+    out.base=scrap0;
+  }
+  return out;
+}
+function sim(cfg){
+  const acc={scrap:new Array(T).fill(0),vets:new Array(T).fill(0),outs:new Array(T).fill(0),catch:new Array(T).fill(0),fail:new Array(T).fill(0),ratio:new Array(T).fill(0)};
+  let base=0;
+  for(let k=0;k<RUNS;k++){
+    const o=run(cfg,1000+k*7919);
+    for(const key in acc) for(let m=0;m<T;m++) acc[key][m]+=o[key][m]/RUNS;
+  }
+  // baseline from first 3 months average, then oversight headcount
+  base=(acc.scrap[0]+acc.scrap[1]+acc.scrap[2])/3;
+  acc.base=base;
+  acc.insp=acc.scrap.map(s=>2+Math.max(0,Math.ceil((s-base)/400)));
+  return acc;
+}
+function firstCross(arr,th){for(let m=0;m<arr.length;m++) if(arr[m]>th) return m+1; return null}
+
+function css(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim()}
+function draw(id,A,B){
+  const c=$(id), dpr=window.devicePixelRatio||1, w=c.clientWidth, h=c.clientHeight;
+  c.width=w*dpr; c.height=h*dpr; const g=c.getContext('2d'); g.setTransform(dpr,0,0,dpr,0,0);
+  g.clearRect(0,0,w,h);
+  const pl=44,pr=30,pt=14,pb=26, iw=w-pl-pr, ih=h-pt-pb;
+  const step=niceStep(Math.max(...A,...B)*1.08/4); const mx=step*4;
+  const x=m=>pl+iw*(m/(T-1)), y=v=>pt+ih*(1-v/mx);
+  g.font='11px '+css('--f-mono'); g.fillStyle=css('--muted'); g.strokeStyle=css('--rule'); g.lineWidth=1;
+  for(let i=0;i<=4;i++){const v=mx*i/4, yy=Math.round(y(v))+.5; g.beginPath(); g.moveTo(pl,yy); g.lineTo(w-pr,yy); g.stroke();
+    g.textAlign='right'; g.textBaseline='middle'; g.fillText(fmt(v),pl-6,yy);}
+  g.textAlign='center'; g.textBaseline='top';
+  [0,12,24,36,48,59].forEach(m=>g.fillText(m===59?'mo 60':'mo '+(m+1),x(m),h-pb+7));
+  line(g,A,x,y,css('--a'),[]); line(g,B,x,y,css('--b'),[6,4]);
+  dot(g,x(T-1),y(A[T-1]),css('--a')); dot(g,x(T-1),y(B[T-1]),css('--b'));
+}
+function line(g,arr,x,y,col,dash){g.strokeStyle=col; g.lineWidth=2.25; g.setLineDash(dash); g.beginPath();
+  arr.forEach((v,m)=>m?g.lineTo(x(m),y(v)):g.moveTo(x(m),y(v))); g.stroke(); g.setLineDash([]);}
+function dot(g,cx,cy,col){g.fillStyle=col; g.beginPath(); g.arc(cx,cy,3.5,0,Math.PI*2); g.fill();}
+function niceStep(v){if(v<=0) return 1; const p=Math.pow(10,Math.floor(Math.log10(v))); const n=v/p; return (n<=1?1:n<=2?2:n<=5?5:10)*p}
+function fmt(v){return v>=1000?(v/1000).toFixed(v%1000?1:0)+'k':(v<10&&v%1?v.toFixed(1):Math.round(v))}
+const r0=v=>Math.round(v), r1=v=>(Math.round(v*10)/10).toFixed(1);
+
+let A,B;
+function update(){
+  const shared={turn:+$('turn').value,wave:+$('wave').value,tau:+$('tau').value};
+  $('turnO').textContent=shared.turn+'%'; $('waveO').textContent=shared.wave+'%'; $('tauO').textContent=shared.tau+' yr';
+  $('aRO').textContent=$('aR').value; $('bRO').textContent=$('bR').value;
+  A=sim({...shared,screen:st.a.screen,reserve:+$('aR').value});
+  B=sim({...shared,screen:st.b.screen,reserve:+$('bR').value});
+  const L=T-1;
+  const lastVet=s=>{const m=s.vets.findIndex(v=>v<1); return m<0?'never':'month '+(m+1)};
+  const rows=[
+    ['Scrap, parts per month',r0(A.scrap[L]),r0(B.scrap[L]), A.scrap[L]>1.5*A.base, B.scrap[L]>1.5*B.base],
+    ['Change in scrap since month 1',pct(A.scrap[L]/A.base-1),pct(B.scrap[L]/B.base-1)],
+    ['Veterans on the floor',r1(A.vets[L]),r1(B.vets[L]), A.vets[L]<2, B.vets[L]<2],
+    ['Inspectors and supervisors',A.insp[L],B.insp[L], A.insp[L]>4, B.insp[L]>4],
+    ['Repairs sent outside per month',r1(A.outs[L]),r1(B.outs[L])],
+    ['Floor down to under 1 veteran (average)',lastVet(A),lastVet(B)],
+    ['Scrap from missed drift (catchable by skill)',share(A.catch[L]/(A.catch[L]+A.fail[L])),share(B.catch[L]/(B.catch[L]+B.fail[L]))],
+  ];
+  $('tb').innerHTML=rows.map(r=>`<tr><td>${r[0]}</td><td class="num a${r[3]?' bad':''}">${r[1]}</td><td class="num b${r[4]?' bad':''}">${r[2]}</td></tr>`).join('');
+  draw('c0',A.scrap,B.scrap); draw('c1',A.vets,B.vets); draw('c2',A.insp,B.insp); draw('c3',A.outs,B.outs);
+  // log panel, Plant A month 36
+  const m=35, miss=A.catch[m], fail=A.fail[m], tot=miss+fail, parts=tot*PARTS;
+  $('l1').textContent=r0(parts*0.4); $('l2').textContent=r0(parts*0.35); $('l3').textContent=r0(parts*0.25);
+  $('lb1').style.width='100%';
+  $('r1').textContent=r0(miss*PARTS); $('r2').textContent=r0(fail*PARTS);
+  $('rb1').style.width=(100*miss/tot)+'%'; $('rb2').style.width=(100*fail/tot)+'%';
+  $('rnote').textContent=share(miss/tot)+' of the scrap came from drift a skilled operator catches early';
+  // lead time
+  const v0=A.vets[0], ind=(()=>{for(let m=0;m<T;m++) if(A.vets[m]<0.7*v0) return m+1; return null})(), alarm=firstCross(A.scrap,1.5*A.base);
+  let txt='Plant A: ';
+  if(ind&&alarm&&ind<alarm) txt+=`the veteran indicator (veterans on the floor down 30%) trips in month ${ind}. The scrap alarm (scrap 50% above start) trips in month ${alarm}. That's ${alarm-ind} months of warning before the scrap numbers show it.`;
+  else if(ind&&alarm) txt+=`the veteran indicator trips in month ${ind} and the scrap alarm in month ${alarm}.`;
+  else if(alarm) txt+=`the scrap alarm trips in month ${alarm}; the veteran indicator never crossed its threshold.`;
+  else if(ind) txt+=`the veteran indicator trips in month ${ind}; scrap never reached the alarm level in 60 months.`;
+  else txt+='neither the veteran indicator nor the scrap alarm tripped in 60 months at these settings.';
+  $('lead').textContent=txt;
+}
+function pct(v){return (v>=0?'+':'')+Math.round(v*100)+'%'}
+function share(v){return Math.round(v*100)+'%'}
+
+function seg(prefix,key){
+  const w=$(prefix+'W'), hh=$(prefix+'H');
+  const set=s=>{st[key].screen=s; w.setAttribute('aria-pressed',s==='W'); hh.setAttribute('aria-pressed',s==='H'); update();};
+  w.onclick=()=>set('W'); hh.onclick=()=>set('H');
+}
+seg('a','a'); seg('b','b');
+['turn','wave','tau','aR','bR'].forEach(id=>$(id).addEventListener('input',update));
+let rt; window.addEventListener('resize',()=>{clearTimeout(rt); rt=setTimeout(()=>{if(A){draw('c0',A.scrap,B.scrap);draw('c1',A.vets,B.vets);draw('c2',A.insp,B.insp);draw('c3',A.outs,B.outs);}},120)});
+if(window.matchMedia) matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change',update);
+new MutationObserver(update).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+update();
+})();
+</script>
+
+</body></html>

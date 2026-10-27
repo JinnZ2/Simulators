@@ -1,0 +1,29 @@
+# PHP2Shell, used as the "PHP layer down" scenario (work order 6b).
+# Verification depth: SEARCH RESULT TEXT ONLY (2026-10-23). The PHP project's
+# own advisory page was not opened from the build sandbox. Re-check against
+# php.net before relying on any version number below.
+name: PHP2Shell
+cves: [CVE-2026-109618, CVE-2026-109619]
+cvss_v4: 9.2
+authentication_needed: false
+summary: >-
+  Two PHP core flaws allowing unauthenticated remote code execution on PHP
+  installs that serve web requests. Risk stated as highest for mod_php.
+dates:
+  claims_circulated: 2026-10-20   # unverified claim and PHP advance notice
+  patches_released: 2026-10-21
+# The work order says "disclosed 2026-10-20". Sources put the patch release
+# on 2026-10-21, with claims and an advance notice on 10-20. Both kept.
+fixed_versions:
+  "8.2": "8.2.35"
+  "8.3": "8.3.36"
+  "8.4": "8.4.27"
+  "8.5": "8.5.12"
+no_upstream_patch_below: "8.2"   # 8.1 and older: no PHP-project update
+exploitation_reported: true
+sources:
+  - https://helpnetsecurity.com/2026/10/21/php2shell-php-vulnerabilities-patched-cve-2026-109618-cve-2026-109619
+  - https://bleepingcomputer.com/news/security/php-ships-emergency-patches-for-critical-php2shell-flaws
+  - https://www.bitsight.com/blog/critical-vulnerability-alert-cve-2026-109618-and-cve-2026-109619-php2shell
+  - https://www.tanium.com/blog/php2shell-responding-to-cve-2026-109618-and-cve-2026-109619
+verification: search_result_text

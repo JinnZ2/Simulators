@@ -1,0 +1,38 @@
+habitat-lag-dependency / check.py
+============================================================
+SOURCE_DROP.md sha256 3861c9faf2d1fc92...  pinned: True
+declared tags: OBSERVED, DERIVED, PROPOSED, GAP
+
+1. TAG CENSUS (leading tag only)
+section                                    lines tagged
+Purpose                                        1      0
+1. Regulatory change                           4      4
+2. Ecology finding                             4      3
+3. Lag                                         3      3
+4. Chain to AI infrastructure                  4      4
+5. Chain to knowledge                          5      4
+6. What we're losing                          13      0
+7. Gaps                                        7      0
+8. Related records                             3      0
+TOTAL                                         44     18
+
+   sections with no tagged line at all:
+     - Purpose  (1 lines)
+     - 6. What we're losing  (13 lines)
+     - 7. Gaps  (7 lines)
+     - 8. Related records  (3 lines)
+
+2. LINES THE DOCUMENT MARKS 'verify', AND THEIR TAG
+   PROPOSED  - PROPOSED / verify: more than two-thirds of listed species have at leas
+   OBSERVED  - OBSERVED (general knowledge, verify): a large share of approved small-
+   -> two unchecked general-knowledge figures, two different tags
+
+3. ARITHMETIC ON CHECKED FIGURES (search-result depth)
+   GAO/RCED-95-16 (1994): 712/781 = 0.912 have SOME habitat on nonfederal land
+                          516/781 = 0.661 have OVER 60% of habitat on nonfederal land
+   document: 'more than two-thirds ... at least some habitat on private land'
+   -> 'two-thirds' matches the >60%-of-habitat row, not the 'some' row;
+      that row is 0.661, just UNDER two-thirds, so 'more than' fails on it too;
+      and GAO counts NONFEDERAL (state, tribal, private), not private alone.
+
+Nothing above is a statement about any species, parcel or rule's effect.
