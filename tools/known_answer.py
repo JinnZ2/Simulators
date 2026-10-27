@@ -837,6 +837,8 @@ EXPECTED_METRICS = (
     "extraction-chain-join/chain_join.py::traced_fraction",
     "extraction-chain-join/chain_join.py::consumption_based",
     "extraction-chain-join/chain_join.py::reserve_share_band",
+    "gap-instruments/gap_instruments.py::abs_error_band",
+    "gap-instruments/gap_instruments.py::signed_error_band",
 )
 
 
@@ -1788,6 +1790,7 @@ def seed():
     _seed_reg_uncertainty()
     _seed_floor_capability()
     _seed_extraction_chain()
+    _seed_gap_instruments()
 
 
 def _reg_mod(name):
@@ -1995,6 +1998,57 @@ def _seed_extraction_chain():
          case("reserves fall", (10.0, 5.0, -1.0), 0.0, "no accumulation, a measured zero"),
          case("no revenue", (0.0, 5.0, 3.0), None, "no revenue, no share")],
         note="proportional reading of the reserve share band")
+
+
+def _gi_mod():
+    """gap-instruments/gap_instruments.py, imported by path under a private
+    name."""
+    import importlib.util
+    path = os.path.join(ROOT, "gap-instruments", "gap_instruments.py")
+    spec = importlib.util.spec_from_file_location("_gi", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def _gi_abs_error_band(p, m):
+    return _gi_mod().abs_error_band(p, m)
+
+
+def _gi_signed_error_band(p, m):
+    return _gi_mod().signed_error_band(p, m)
+
+
+def _seed_gap_instruments():
+    """gap-instruments CalibrationRecord. The error band is (least,
+    greatest) distance between a prediction interval and a measurement
+    interval; the inside-a-range case is where a point reading would hide
+    the 1-mile spread, and the absent case is where a default of zero would
+    hide. Expected values are computed by hand from the definition."""
+    register(
+        "gap-instruments/gap_instruments.py::abs_error_band",
+        _gi_abs_error_band,
+        [case("two points", ((15.0, 15.0), (14.0, 14.0)), (1.0, 1.0),
+              "|15 - 14| at both ends"),
+         case("point inside a range", ((30.0, 30.0), (29.0, 30.0)), (0.0, 1.0),
+              "30 lies in [29, 30]; the far end is 1 away"),
+         case("disjoint ranges", ((10.0, 12.0), (14.0, 15.0)), (2.0, 5.0),
+              "nearest ends 12 and 14, farthest 10 and 15"),
+         case("absent measurement", ((30.0, 30.0), None), None,
+              "no measurement, no error; not zero")],
+        note="(least, greatest) |prediction - measurement| over two intervals")
+    register(
+        "gap-instruments/gap_instruments.py::signed_error_band",
+        _gi_signed_error_band,
+        [case("overestimate", ((15.0, 15.0), (14.0, 14.0)), (1.0, 1.0),
+              "15 - 14; positive is an overestimate, the buffer under OVER"),
+         case("underestimate", ((13.0, 13.0), (14.0, 15.0)), (-2.0, -1.0),
+              "13 - 15 and 13 - 14; the sign is what a symmetric error drops"),
+         case("point inside a range", ((30.0, 30.0), (29.0, 30.0)), (0.0, 1.0),
+              "30 - 30 and 30 - 29"),
+         case("absent prediction", (None, (1.0, 1.0)), None,
+              "no prediction, no error; not zero")],
+        note="(least, greatest) prediction - measurement; sign kept (A2r)")
 
 
 def _irb_effective_origins(coupling):

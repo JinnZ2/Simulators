@@ -18,6 +18,7 @@ python3 gap_instruments.py --selftest
 
 ```text
 gap_instruments.py                      working copy: supplied text + eight marked fixes
+                                        + three additions A1-A3 (2026-10-27)
 source/gap_instruments.as_supplied.py   delivered 2026-10-25, verbatim
 source/gating_diagnostic.as_supplied.py delivered 2026-10-25, verbatim (merged into the above)
 source/PINS.sha256                      sha256 of both supplied files
@@ -37,7 +38,10 @@ method-layer/tools/gap_instruments.py
 
 `method-layer/gap_instruments.py` is a different file: the same instrument
 reshaped to method-layer's conventions (str Enums, frozen records,
-`to_dict`/`from_dict`). It ships without the PROPOSED example instances.
+`to_dict`/`from_dict`). It ships without the PROPOSED example instances,
+and it does not carry A1-A3: the work order names the four modes of this
+form (report, `--claim`, `--json`, `--selftest`), and the reshaped form has
+`--claim` only.
 
 ## Fixes applied (F1-F8)
 
@@ -64,6 +68,124 @@ F8  main                     --claim with no text ran the demo           usage o
 The selftest keeps every supplied assertion and adds one check per fix, plus
 a negative case showing a correctly filled Abstention passes clean.
 
+## Additions 2026-10-27 (A1-A3)
+
+Work order "gap_instruments.py extension". Every existing behaviour is kept
+and the selftest keeps every prior assertion. Each change is marked
+`Note 2026-10-27 (An)`.
+
+```text
+id  what                       rule
+--  -------------------------  ----------------------------------------------
+A1  PhysicalLimitRecord        limit_basis: physical_bound | empirical_rule |
+    .limit_basis               unknown (default). "unknown" is one GAP in
+                               gap_summary and is named by gap_fields(); the
+                               report prints the basis. A value outside the
+                               three is reported by validate().
+A2  CalibrationRecord          predict, then measure. target_match first; a
+                               mismatch is TARGET_MISMATCH, logged, not an
+                               error, not a miss, and enters no MAE. Outcome
+                               (HIT / MISS) and method_matches_standard are
+                               separate fields, never combined.
+    calibration_summary        n, hits, misses, target mismatches, not scored,
+                               method counts kept apart, and per quantity
+                               n / scored / MAE as a (least, greatest) band.
+                               A quantity with no numeric scored row reads
+                               None, never 0.
+A2r CalibrationRecord          operator correction, same day: error has a
+    .safe_side                 direction. OVER | UNDER | SYMMETRIC | UNSTATED
+                               (default; scored symmetric and reported). Under
+                               OVER an overestimate of any size is a HIT and its
+                               size is the realized buffer (signed_error, mean
+                               signed error per quantity); an underestimate
+                               beyond tolerance is a MISS.
+A3  ConfoundRecord             name, present (True | False | "UNKNOWN"), size
+                               (Evidence or None), control_used,
+                               interpretation (default GAP). An
+                               interpretation with no control is reported;
+                               present without a size is reported.
+```
+
+The only change to existing output is the one A1 mandates: the demo
+PHYSICAL LIMIT reads `GAP: 8` where it read 7, plus the `limit_basis` line.
+`--claim` output is byte-identical. `--json` gains five keys after the
+existing five.
+
+### Seed run
+
+```text
+record            target           outcome     signed     safe      method
+----------------  ---------------  ----------  ---------  --------  ----------
+CAL-MILES-GPS     TARGET_MISMATCH  NOT_SCORED  --         OVER      NOT_TESTED
+CAL-MILES-ACTUAL  MATCH            HIT         0 to +1    OVER      NOT_TESTED
+CAL-FUEL          TARGET_MISMATCH  NOT_SCORED  --         OVER      NO (categorical)
+CAL-TIME          MATCH            HIT         +0.9667    OVER      NOT_TESTED
+
+summary   n 4, hits 2, target mismatches 2
+MAE       miles 0-1 (one row), on-duty time 0.9667, fuel None (categorical)
+signed    miles 0 to +1, on-duty time +0.9667: both overestimates, the buffer
+LIMIT-EAST-2026   limit_basis empirical_rule; not in gap_fields
+confounds 12 seeded; target_mismatch present, size 2.7-3.7 mi, meaning GAP
+```
+
+The operator's correction (2026-10-27), entered as stated: a driver relying on
+gauges, dashboard and GPS adds buffer for each instrument's deviation plus
+environment, construction, traffic and road wear, and overestimating still
+arrives on time where underestimating does not. The trip rows carry goal
+"arrive on time", safe_side OVER and that buffer.
+
+Second operator correction (2026-10-27, later), verbatim: "risk is
+underestimate same as drive time, unload time, mileage etc". The fuel row
+is renamed from "fuel tank level" to "fuel needed for the trip", with
+safe_side OVER and the same buffer. The dictated reading is still a tank
+LEVEL from the gauge, so the renamed row is TARGET_MISMATCH: the gauge does
+not measure what the trip will burn. It is logged, not scored, and not a
+miss. Scoring it needs a measured burn for the trip (for example fill-to-fill
+gallons), and that has not been dictated. The method divergence (full
+inferred from memory, then confirmed on the gauge) is still pinned in the
+selftest on the pre-rename row. Unload time is named as an OVER-safe
+quantity and has no row yet.
+
+The dictated verdicts (miles vs actual hit, time hit; fuel hit on the
+tank-level reading, before the rename) and the
+miles-vs-GPS mismatch come out of the rules. They are the verdicts the rules
+were checked against, so the seed is a regression fixture and not an
+independent check.
+
+### Choices the order left open
+
+```text
+id      choice                                      cost
+------  ------------------------------------------  ---------------------------
+A2-1    instrument_quantity added: the quantity     a field beyond the order's
+        the instrument measured. instrument_scope   list
+        also carries edges, so it cannot be the
+        thing target_match compares
+A2-2    target_match = equality after case and      two names for one quantity
+        whitespace normalisation                    read as a mismatch
+A2-3    tolerance declared, else half a unit in     scored symmetric, the time
+        the last written digit; a leading "~"       HIT rested on it (a MISS at
+        doubles it                                  +/-0.5); under OVER it rests
+                                                    on direction, and the "~"
+                                                    only widens the costly side
+A2-4    "14:02" read as minutes:seconds             CONFIRMED by the operator
+                                                    2026-10-27
+A2-5    HIT when some value the measurement         a range measurement scores
+        allows is within tolerance (low end of      on its nearest end
+        the band)
+A2-6    the standard method is the instrument's     fuel: inferred from memory
+        own reading                                 = NO, outcome still HIT
+A2-7    safe_side is declared, never inferred from  a goal whose wording names a
+        the goal's wording. OVER: HIT unless short  direction still scores
+        of every value the measurement allows by    symmetric until safe_side is
+        more than the tolerance                     written
+A3-1    the target_mismatch confound is logged      its meaning stays GAP: no
+        present, sized from the two miles rows      control separates anything
+```
+
+The A2 docstring carries the baseline note as supplied (Barkan, Black &
+Sourbut 2025; GPT-4 technical report 2023). Neither was checked here.
+
 ## Recorded, not repaired
 
 ```text
@@ -82,6 +204,16 @@ a negative case showing a correctly filled Abstention passes clean.
 - Every example instance (token-anchored system, Chrysler 1979-80, TARP 2008,
   "DeepSeek draft" sources) is PROPOSED and carried as delivered. None was
   checked against a source here.
+- A1: limit_basis has no source slot. Declaring `physical_bound` with no
+  support repeats the error the field exists to catch, and nothing checks it.
+- A2: the seed states no confidence, so confidence against hit rate reads
+  NOT_COMPUTABLE. No goal is stated either; both read UNRESOLVED rather than
+  being filled in.
+- A2: the miles reference "actual ~29-30" names no instrument. It is entered
+  ESTIMATED from the dictation.
+- The EAST 2026 figures (1.3-1.65 x the Greenwald limit) and the two
+  calibration citations are carried as supplied and were not checked; the
+  publisher hosts are outside this environment's egress allowlist.
 ```
 
 ## Neighbours
