@@ -47,6 +47,7 @@ issue a verdict the evidence does not force.
     python3 check.py --selftest           # prints its own check count
     python3 null_expectation.py           # closed-form null beside the shipped null record
     python3 test_null_expectation.py      # checks, incl. against the lab's own generator
+    python3 confound_record.py            # SAL-WO2 thread-B confound ledger (test_confound_record.py)
 
 `check.py` is stdlib only and parses under 3.9. The lab's README asks for
 3.10+, but its `X | None` annotations sit behind
