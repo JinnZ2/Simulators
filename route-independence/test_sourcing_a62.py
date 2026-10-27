@@ -153,7 +153,7 @@ def t_rerun():
     check(set(loc) == set(), "no locator left in any carried text after A-6.3 item 8 [CHOICE 85] %s" % set(loc))
     check(A.load_store() == [], "the span store is empty")
     # follow-up 2026-09-30 item 3: blob hashes pinned at a named commit replace git diff --quiet HEAD,
-    # which read clean once an edit was committed; every later edit is declared (RIN_163)
+    # which read clean once an edit was committed; every later edit is declared (RIN_173)
     import followup_a63 as FU
     pins = [r for r in FU.pin_check() if r["module"] in [m + ".py" for m in
             ("settlement_split", "gate_state", "gate_state_a21", "thermal_gates", "repairs_a31",

@@ -1,6 +1,6 @@
 A-6.3 verification split (work order landed verbatim at ea0d379; web sources CARRIED, not read here)
 
-0  Part B status: see README 'Work order standing/A-6.3' and RIN_151 (not computed here)
+0  Part B status: see README 'Work order standing/A-6.3' and RIN_161 (not computed here)
 
 what did not hold
    item 8: W-1a, W-2a carry a url now and no span, so they read NO_SPAN, not STORED_UNVERIFIED as item 8 words it

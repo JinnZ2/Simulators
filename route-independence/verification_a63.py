@@ -7,7 +7,7 @@ import.  Two prior data rows move, both because the order names them: gate_state
 W-1a / W-2a (item 8, the address leaves the text for a url field) and standing_a61.SOURCES_A61
 CE-4e (item 3, a status note).
 
-  0  Part B status: reported in the README and CLAIM_TABLE (RIN_151), not computed here
+  0  Part B status: reported in the README and CLAIM_TABLE (RIN_161), not computed here
   1  repo files as sources: location repo:<commit>:<path> plus a remote clone url
   2  consistency is not verification: STORED_UNVERIFIED vs VERIFIED; only VERIFIED lets a
      row read MATCH; a verification record names who/what fetched, the date, the hash obtained
@@ -612,7 +612,7 @@ def render(out=None):
     cn = counts(rows)
     wr("A-6.3 verification split (work order landed verbatim at %s; web sources CARRIED, not read here)\n\n"
        % EXPECTED_COMMIT_A63)
-    wr("0  Part B status: see README 'Work order standing/A-6.3' and RIN_151 (not computed here)\n\n")
+    wr("0  Part B status: see README 'Work order standing/A-6.3' and RIN_161 (not computed here)\n\n")
     wr("what did not hold\n")
     wr("   item 8: W-1a, W-2a carry a url now and no span, so they read %s, not %s as item 8 words it\n"
        % (input_status("W-1a", P.CARRIED)["status"], STORED_UNVERIFIED))
