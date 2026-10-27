@@ -47,6 +47,13 @@ ARC_006  root suite before and after the landing: same 3 failures, none new
          test_compile_gate ... binds_a_toplevel_name_twice
          test_run_manifest ... redirect_names_a_target_that_is_missing
          test_run_manifest ... the_one_known_violation_is_pinned
+
+ARC_007  H0 is byte-identical (sha256 3861c9fa...) to habitat-lag-dependency/SOURCE_DROP.md,
+         landed on main the same day by another session. Both copies are kept: this one
+         belongs to a bundle whose MANIFEST pins it. The two folders read the same document
+         independently; their CLAIM_TABLE rows HLD_003 (private-land share vs GAO),
+         HLD_004 and HLD_005 (biomimicry rows) bear on claims HB-06 and HB-24 here and
+         are linked from them as see_also. Neither reading is merged into the other.
 ```
 
 What is not claimed here: nothing in this folder re-fetched a source. Every claim about
