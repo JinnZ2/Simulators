@@ -25,6 +25,32 @@ Both reports are kept so the revision stays inspectable. The inner zips
 duplicate the extracted trees and are not landed. Figures are recorded in
 `FIGURES.md` (the repo is text-only).
 
+## Lab 0.1 (GPT), landed later
+
+`lab_0_1/` is the GPT-built prototype both Kimi drops continue. It was
+referenced by `CONTINUATION_REPORT_V1.md` and not in the tree until the
+operator supplied it on 2026-10-27. Landed verbatim:
+
+| file | sha256 |
+|---|---|
+| `README.md` | `1b901253…` |
+| `demo_output.jsonl` | `194c07a6…` |
+| `scope_audit_lab/__init__.py` | `e8a61bfc…` |
+| `scope_audit_lab/__main__.py` | `12d182a9…` |
+| `scope_audit_lab/core.py` | `e7b30e82…` |
+| `tests/test_core.py` | `faa89d3c…` |
+
+What it shows about the relay (SAL_015, SAL_016):
+
+```
+GPT 0.1  --spec + core (209 lines, 11 tests)-->  Kimi 0.2  --+engine-->  Kimi 0.3
+          core.py: 206 of 209 lines kept verbatim; 3 changed, all
+          version handling (0.1 and 0.2 both accepted); tests/test_core.py
+          byte-identical; the 0.1 demo stream validates under 0.2 (4 of 4)
+```
+
+Run: `cd lab_0_1 && python3 -m unittest discover -s tests` (11 pass).
+
 ## What the lab is
 
 ```
