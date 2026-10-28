@@ -249,3 +249,13 @@ reports count and duration **separately**, so both axes are available.
 `WITHIN_SD = 0.7 h` and `FRAG_BETWEEN_SD = 1.2` are invented, and the
 attenuation figures move with them. What does not move with them is the
 direction and the mechanism.
+
+
+Note 2026-10-28: co-authored human + Claude. Seed re-draw readout (study-aperture ADDENDUM C2).
+
+- Mono floor >= 10 h (the paragraph near line 36): holds at 10/20 seeds; the floors run 9.79-10.25 h, straddling the paragraph's own 10. "None inside the 6-9 h window" holds 20/20.
+- Lowest vertex at mixture p 0.5-0.75 (near line 91): 17/20. The mixture sitting lower than p = 1.0 holds 20/20.
+- SPAN_003 (flat produces fewer U's than frag_driven): 19/20; at seed 20 flat has 11 U's (11 in window) against frag_driven's 6 (4 in window). The original count of 4 flat U's is the lowest of the 21 draws.
+- The headline grid (4 / 124 / 63 of 360) is one run per combination at seed 1000; the 40 seeds in this file's header apply to the U-rate figures, not to the grid.
+
+Rerun commands, data and the full method: JinnZ2/study-aperture, `audits/simulators-run-count/` (Simulators at `0655e8b`, run in a copy, nothing here edited).

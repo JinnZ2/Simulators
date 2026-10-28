@@ -55,3 +55,10 @@ Two standing rules, carried from the rest of the repo:
   traceability rung: a benchmark with unknown gain and offset is an
   instrument without reference standards, and what it buys is a shape.
 - `../inverseminar/` — the instrument named in `ANC_011`.
+
+
+Note 2026-10-28: co-authored human + Claude. Seed re-draw readout (study-aperture ADDENDUM C2).
+
+- ANC_003 ("FP >= TP at every threshold"): holds at 6/20 seeds with all randomness varied and 7/20 with the substrate fixed and only the injection noise varied. The weaker reading, no discrimination, holds 20/20: the falsifier TP - FP > 0.5 never fires (max 0.042). `corpus_loop.py:309` prints "on this run"; the row does not carry that qualifier.
+
+Rerun commands, data and the full method: JinnZ2/study-aperture, `audits/simulators-run-count/` (Simulators at `0655e8b`, run in a copy, nothing here edited).

@@ -910,3 +910,12 @@ Sweep sample: [`samples/test_refutations.sample.txt`](samples/test_refutations.s
 | **C29-v2** | A claim with quantitative physical content can be refuted by computing the horizon at which its own compounding rate crosses a named conservation bound. Effective physical growth `g_eff = growth_rate − decoupling_rate`; when `g_eff ≤ 0` the module returns `UNBOUNDED_ROUTE_OPEN` (this route does not refute the claim; R1 is satisfied). The output is a horizon in years + the identity of the binding bound — *not* a truth verdict scalar. Propagation state and thermodynamic horizon are held as separate objects and never recombined. | `case_studies/refutation_protocol.py` v2 (was v1 with `C = A·γ/ω` truth verdict scoring propagation as truth; retired to `legacy/`) | (bring your own claim + rate) | (R1) A sustained `d ≥ g` over a multi-decade window with the physical bound never binding refutes C29-v2 for that claim. (R2) Attack the bound itself (is 1.74e17 W the right ceiling?), the rate, or the coupling — each separately refutable. (R3) If a claim refuted here is observed to hold past its computed horizon, the bound or the coupling is wrong; update the claim, do not retune. |
 
 Note: the pre-C11 duplicate of C12 (an earlier phrasing that sat above the "Revised" block) has been retired to Git history — the revised phrasing above is canonical.
+
+
+Note 2026-10-28: co-authored human + Claude. Seed re-draw readout (study-aperture ADDENDUM C2).
+
+- CGT-1 (`coupling_gap_test.py`, seed 11): the module's own C1 evaluator passes at 18/20 consecutive seeds (1000-1019) and 16/20 spaced seeds (2000+997k). Failing draws cross the row's own thresholds: decoupled accuracy >= 0.5 (seed 11 sits at 0.493) or coupled gap >= 0.2.
+- CGT-4 v2 ("robustly negative" accuracy slope): 14/20 on consecutive base seeds, **6/20 on spaced seeds**; slope -0.0061 to +0.0089. Consecutive base seeds are not independent here: E3 draws generation g at `SEED+g`, so seeds n and n+1 share 11 of 12 generation draws.
+- `collapse_predictor.py:66`: `random.seed(123)` sits inside `phi_spiral_transition`, which runs on every predict call, so C12, C13, C14 and C16 - described as 50-trial sweeps - rest on 1-2 distinct draws. Their verdicts are unchanged across 20 reseeds; what the count of 50 reports is not 50 draws.
+
+Rerun commands, data and the full method: JinnZ2/study-aperture, `audits/simulators-run-count/` (Simulators at `0655e8b`, run in a copy, nothing here edited).

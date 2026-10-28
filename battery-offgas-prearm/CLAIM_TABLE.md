@@ -21,3 +21,10 @@ fixtures to rescue the claim.
 | BOP_009 | `MARGIN_TOO_SHORT` points at geometry (spacing), not at a faster relay | DERIVED | cascade_margin: both slacks <= 0 means actuation cannot fit inside lead + propagation | a pack where shortening actuation alone moves it out of MARGIN_TOO_SHORT with lead + propagation unchanged (that is NEIGHBOURS_ONLY by definition, so this is near-definitional; the empirical part is whether spacing raises propagation_s) |
 | BOP_010 | At window 60 s and 5 s sampling, a 30 s square step does not fire and a 35 s one does; past about half the window, a step and an onset are the same to a rate rule | SUPPORTED on fixture | pinned in tests | n/a: a property of the estimator and window |
 | BOP_011 | Nothing here is a statement about any real cell, chemistry, sensor or product | UNVERIFIED covers the folder | fixtures CONSTRUCTED; every external number tagged [CARRIED] | n/a |
+
+
+Note 2026-10-28: co-authored human + Claude. Seed re-draw readout (study-aperture ADDENDUM C2).
+
+- BOP_010 ("a 30 s square step does not fire"): holds at 19/20 noise seeds (101-120; fires at seed 111, t = 925) and 973/1000 over seeds 1-1000. The 35 s step fires every time. The claim names the boundary a property of estimator and window, so the noise draw is in scope.
+
+Rerun commands, data and the full method: JinnZ2/study-aperture, `audits/simulators-run-count/` (Simulators at `0655e8b`, run in a copy, nothing here edited).

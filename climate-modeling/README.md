@@ -128,3 +128,10 @@ favored audit. The audit is the witness, not the defendant.
 ## License
 
 CC0. See the repo root [`LICENSE`](../LICENSE).
+
+
+Note 2026-10-28: co-authored human + Claude. Seed re-draw readout (study-aperture ADDENDUM C2).
+
+- `audits/cascade_speed.py:5` says the audited model "consistently underestimates how fast collapse arrives". The committed `samples/audit_report.json` shows `collapse_time_true_h` 240.0 and `collapse_time_audited_h` 240.0 - the window end, so neither crosses the biomass < 10 marker - and `true_final` 754402.28 against `audited_final` 479.71: the true system runs away upward. The FAIL fires on `rmse` 307017.87 > 15, i.e. on that divergence, not on collapse timing. Not reproduced at its own seed (42), nor at 10 others. Separately, only 2 of the 7 FAIL verdicts depend on a noise draw (Data Aggregation, rmse 6.93-8.45 over 20 seeds; Cascade Speed); both stay FAIL at every seed.
+
+Rerun commands, data and the full method: JinnZ2/study-aperture, `audits/simulators-run-count/` (Simulators at `0655e8b`, run in a copy, nothing here edited).

@@ -411,3 +411,11 @@ But rather:
 If the answer is that the instrument's construction shapes the report, the report is not a measurement of the system; it is a measurement of the instrument. End of story.
 
 This framework does not pretend otherwise.
+
+
+Note 2026-10-28: co-authored human + Claude. Seed re-draw readout (study-aperture ADDENDUM C2).
+
+- IBS_011 (S9 content correlation "under 0.2 at every mix"): 16/20 seeds, with all randomness varied and with the population fixed; peaks reach 0.200-0.229.
+- IBS_001 (S1, > 95% null plus the product ordering): 19/20. The one failing draw (seed 16) has zero ESCALATE ticks, so the ordering is untestable there rather than reversed; varying only the observer seed gives 20/20.
+
+Rerun commands, data and the full method: JinnZ2/study-aperture, `audits/simulators-run-count/` (Simulators at `0655e8b`, run in a copy, nothing here edited).

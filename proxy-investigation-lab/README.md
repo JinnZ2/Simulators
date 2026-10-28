@@ -139,3 +139,10 @@ Files byte-identical to the drop apart from the upstream `README.md`
 → `PACKAGE_README.md` rename.
 
 CC0.
+
+
+Note 2026-10-28: co-authored human + Claude. Seed re-draw readout (study-aperture ADDENDUM C2).
+
+- "inflates top-decile variance" (Goodhart red-team): the shipped statistic `variance_ratio_top_decile` is var(top decile) / var(all) = 0.091 and is not compared against an ungamed population, so on its own it cannot show inflation. Comparing it with gaming (adapt_rate 0.35) against without (adapt_rate 0), same seed: gamed is higher at 17/20 seeds, medians 0.092 vs 0.083. The fidelity collapse (0.191 at seed 99) runs 0.176-0.199 across seeds.
+
+Rerun commands, data and the full method: JinnZ2/study-aperture, `audits/simulators-run-count/` (Simulators at `0655e8b`, run in a copy, nothing here edited).
