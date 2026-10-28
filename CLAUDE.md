@@ -377,6 +377,7 @@ last three; read in order:
 - `floor-capability/` — FLOOR CAPABILITY draft v0 landed verbatim and instrumented; weights UNSTATED not unrun, hidden_cost refused as a scalar, scrap at event level against the draft's code-level map, tenure test with an equipment-only control; all CONSTRUCTED
 - `gap-instruments/` — evidence notation for coordination systems, physical limits, discrepancies and abstentions; MEASURED/ESTIMATED/UNKNOWN/GAP per field, no verdict; two supplied files verbatim in `source/`, eight marked fixes in the working copy, mirrored byte-identical in `tools/` here and in method-layer
 - `extraction-chain-join/` — the extraction-money-power-emissions chain, G1..G7 as instruments not verdicts; order RECONSTRUCTED from the session summary; coverage on every reading, NO_PATTERN added to the four branches, end-to-end effect refused; all CONSTRUCTED
+- `model-relay/` — one row per model drop (GPT, Kimi, Perplexity, DeepSeek, Claude): built on or rebuilt, outside claims traced; a map, no ranking
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 

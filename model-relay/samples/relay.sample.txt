@@ -1,0 +1,12 @@
+model-relay: 6 rows
+  R001  OK        
+  R002  OK        
+  R003  OK        
+  R004  OK        
+  R005  OK        
+  R006  OK        
+relay by model (counts, no ranking):
+  DeepSeek   UNASSESSED 1
+  GPT        INDEPENDENT 1, SPEC_ONLY 1
+  Kimi       EXTENDED 2
+  Perplexity INDEPENDENT 1
