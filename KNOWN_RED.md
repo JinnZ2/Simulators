@@ -1574,3 +1574,18 @@ targets. The messages now name reg-uncertainty-registry/tools/validate.py,
 and that resolves from the repo root. Nothing is pinned for them, and the
 rm.* pins above are unchanged.
 
+
+---
+
+## 20. 2026-10-28 — a listed pass now red (co-authored human + Claude)
+
+Found while re-drawing seeds for study-aperture ADDENDUM C2 (Simulators at `0655e8b`, run in a copy).
+
+```
+cooperative-substrate-proof/selftest.py:40
+  AttributeError: module 'scope' has no attribute 'code_case'
+```
+
+§14 records this selftest at 82/0. `cooperative-substrate-proof/scope.py` defines `code`, not
+`code_case`. By the table at the top of this file (a listed result that moved) this is NEW. Not repaired here; whether the
+test or the module carries the intended name is the folder's call.

@@ -35,3 +35,10 @@ entered. On the two constructed worlds the type-null coefficient is about
 it, so the floor is exactly what separates them. Without it R4 is
 `null-harness` `CONSTANT_FIRES` -- a competing-explanation test that never
 credits the competitor.
+
+
+Note 2026-10-28: co-authored human + Claude. Seed re-draw readout (study-aperture ADDENDUM C2).
+
+- TC_005: the real-type half holds 20/20; the null-type half (type coefficient under the 0.10 floor) holds 17/20 at seeds 13+100k and 1746/2000 over seeds 1-2000 - it crosses the floor about 13% of the time. At n = 240 the null coefficient's standard error is about 0.075. TC_006 ("on the two constructed worlds") holds as worded: -0.022 vs -0.417.
+
+Rerun commands, data and the full method: JinnZ2/study-aperture, `audits/simulators-run-count/` (Simulators at `0655e8b`, run in a copy, nothing here edited).

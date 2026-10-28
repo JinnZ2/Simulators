@@ -265,3 +265,11 @@ for exactly this reason.
 property rather than choosing it, or show the branching rule is
 constrained by physics the report states. Either would promote the
 cascade numbers a layer.
+
+
+Note 2026-10-28: co-authored human + Claude. Seed re-draw readout (study-aperture ADDENDUM C2).
+
+- AOS_003 (`finite_n_control.py`, SEED=20260815, one Poisson / Line / Cantor draw per N): over 20 other seeds the residual runs 0.004-0.116 (original 0.082). Residual > 0.021 holds 19/20; about 4x the baseline 13/20; literally >= 4x 8/20 - the original seed itself is 3.91x.
+- `finite_n_control.py:254-256` prints "still well above the 0.021 matched-N baseline" whenever budget < gap, without comparing the residual to 0.021. At seed 16 the residual is 0.004 and the sentence still prints.
+
+Rerun commands, data and the full method: JinnZ2/study-aperture, `audits/simulators-run-count/` (Simulators at `0655e8b`, run in a copy, nothing here edited).
