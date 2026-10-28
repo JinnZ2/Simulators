@@ -51,6 +51,24 @@ GPT 0.1  --spec + core (209 lines, 11 tests)-->  Kimi 0.2  --+engine-->  Kimi 0.
 
 Run: `cd lab_0_1 && python3 -m unittest discover -s tests` (11 pass).
 
+## GPT spec 0.2 (proposed, not built)
+
+`GPT_SPEC_0_2.md` is GPT's requirements spec for its own next version,
+delivered 2026-10-27 and landed verbatim (sha256 `5178eef7…`). It takes 0.1 as
+the baseline and does not know Kimi's 0.2 and 0.3 exist, so two different
+things are called "0.2" here. Checks in SAL_017..019.
+
+Nearest existing pieces in this tree for its new parts (located by path,
+not checked against the spec's acceptance tests):
+
+| spec item | nearest in tree |
+|---|---|
+| FR-01 claims, FR-02 artifacts | `tools/sourced.py` (value + source text + locator, UNRATED otherwise) |
+| FR-03 version and staleness | `tools/provenance_marker.py` (CURRENT/STALE by file hash), `model-provenance/` |
+| FR-04 execution vs verification | `tools/provenance_marker.py` (command, exit, last line) |
+| FR-08 transition probing | `lab_0_2/scope_audit_lab/transitions.py` (built as `transition_scan`) |
+| section 4 voice experiment | none; `voice-attractor-probe/` is text output, not turn-taking |
+
 ## What the lab is
 
 ```
