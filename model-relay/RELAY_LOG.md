@@ -23,3 +23,4 @@ Fields:
 | R004 | 2026-10-27 | GPT | ChatGPT | scope-audit-lab/GPT_SPEC_0_2.md | 5178eef79b75 | R001 | SPEC_ONLY | baseline 0.1; does not reference R002 or R003 | none | SAL_017..019 |
 | R005 | unrecorded | Perplexity | Perplexity | dependency-survey/RESULT_taxonomy_crossmodel.md | 04691acb5018 | - | INDEPENDENT | blind sort, no repo access | UNASSESSED | DS_011..013 |
 | R006 | unrecorded | DeepSeek | DeepSeek | dependency-survey/RESULT_repair_adjacency.md | 7e3e1735b917 | R005 | UNASSESSED | sorts the same 19 records as R005; whether it saw R005 is not recorded | UNASSESSED | DS_014..017 |
+| R007 | 2026-10-27 | DeepSeek | DeepSeek | dependency-survey/RESULT_repair_adjacency.md | 7e3e1735b917 | R006 | INDEPENDENT | corrects R006: operator states DeepSeek did not see R005; the two share only the 19 input records | UNASSESSED | operator, 2026-10-27 |
