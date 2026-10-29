@@ -751,6 +751,10 @@ def _tcr_expected_crossings(rate, rate_unit, horizon_value, horizon_unit):
 # counted. An expected set can. Adding a metric means adding a line here --
 # deliberately, so the addition is visible in a diff.
 EXPECTED_METRICS = (
+    "optical-switching-constraint-chain/sharrock.py::fit_delta",
+    "optical-switching-constraint-chain/barrier_per_bit.py::energy_per_bit",
+    "optical-switching-constraint-chain/barrier_per_bit.py::retention_line",
+    "scope-audit-lab/null_expectation.py::from_generator",
     "agent-lifecycle-energy/phase_energy.py::integrate",
     "anchor-measurand-crossing/amc.py::crossing_band",
     "automation-gap/driver_hours_evidence_register.py::p_uninterrupted",
@@ -1788,6 +1792,9 @@ def seed():
     _seed_reg_uncertainty()
     _seed_floor_capability()
     _seed_extraction_chain()
+    _seed_null_expectation()
+    _seed_barrier_per_bit()
+    _seed_sharrock()
 
 
 def _reg_mod(name):
@@ -3237,6 +3244,139 @@ def _seed_fitness_maze():
               "nothing below eight tenths"),
          case("60 percent at one", ([2.0, 1.0, 0.9], 0.6), 1,
               "one is below twelve tenths at index one")])
+
+
+def _ne_from_generator(distribution, parameters, threshold, n_cases, kind="absolute"):
+    """scope-audit-lab/null_expectation.py::from_generator, imported by path;
+    returns the value only (None for NOT_DERIVED and NO_DENOMINATOR)."""
+    import importlib.util
+    path = os.path.join(ROOT, "scope-audit-lab", "null_expectation.py")
+    spec = importlib.util.spec_from_file_location("_null_expectation", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.from_generator(distribution, parameters, threshold, n_cases, kind)[0]
+
+
+def _seed_null_expectation():
+    """SAL-WO1. The expected null flag count of a thresholded adjacent-delta
+    scan, (n-1) * P(|delta| > th). The None cases are the pins: a relative
+    threshold has no closed form here and one case has no pair, and reading
+    either as 0 would claim the scan flags nothing."""
+    u = {"low": 0.0, "high": 100.0}
+    register(
+        "scope-audit-lab/null_expectation.py::from_generator",
+        _ne_from_generator,
+        [case("shipped demo", ("uniform", u, 10.0, 12), 8.91,
+              "11 pairs x (1 - 10/100)^2 = 11 x 0.81", tol=1e-9),
+         case("threshold at width", ("uniform", u, 100.0, 12), 0.0,
+              "no uniform difference exceeds the full width"),
+         case("threshold zero", ("uniform", u, 0.0, 5), 4.0,
+              "every one of 4 pairs exceeds zero almost surely"),
+         case("normal at 2 sd", ("normal", {"mean": 0.0, "sd": 1.0}, 2.0, 3),
+              2 * 0.15729920705028513, "2 pairs x erfc(1), erfc by hand table",
+              tol=1e-12),
+         case("relative threshold", ("uniform", u, 0.1, 12, "relative"), None,
+              "ratio of noise values: no closed form derived, not 0"),
+         case("one case", ("uniform", u, 10.0, 1), None,
+              "no adjacent pair, no denominator, not 0")],
+        note="checked against the lab's own null_baseline_scan at 4000 "
+             "replications in scope-audit-lab/test_null_expectation.py")
+
+
+def _bpb_mod():
+    import importlib.util
+    path = os.path.join(ROOT, "optical-switching-constraint-chain", "barrier_per_bit.py")
+    spec = importlib.util.spec_from_file_location("_barrier_per_bit", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def _bpb_energy_pj(fluence, d_um, shape, pulses, ledger, frac=None):
+    """optical-switching-constraint-chain/barrier_per_bit.py::energy_per_bit,
+    in pJ; an undeclared term returns None (refused), never a default."""
+    m = _bpb_mod()
+    try:
+        return round(m.energy_per_bit(fluence=fluence, spot_diameter=d_um, spot_shape=shape,
+                                      pulses=pulses, ledger=ledger, absorbed_fraction=frac) * 1e12, 6)
+    except m.UndeclaredTerm:
+        return None
+
+
+def _bpb_retention(criterion, years, tau0, value=None, basis=None):
+    m = _bpb_mod()
+    try:
+        return m.retention_line(criterion=criterion, years=years, tau0=tau0,
+                                population_value=value, basis=basis)
+    except m.UndeclaredTerm:
+        return None
+
+
+def _seed_barrier_per_bit():
+    """OSC-WO1. Energy per bit and the retention line with every term
+    declared. The None cases are the pins: an absorbed ledger with no
+    absorbed fraction, and a population line with no basis, are refused;
+    defaulting either reproduces the report's unstated term."""
+    register(
+        "optical-switching-constraint-chain/barrier_per_bit.py::energy_per_bit",
+        _bpb_energy_pj,
+        [case("square 1 um, 1 mJ/cm2, 1 pulse, incident", (1e-3, 1.0, "square", 1, "incident"),
+              10.0, "1e-3 J/cm2 x (1e-4 cm)^2 = 1e-11 J = 10 pJ"),
+         case("same, absorbed half", (1e-3, 1.0, "square", 1, "absorbed", 0.5), 5.0,
+              "half of 10 pJ"),
+         case("measured zero absorption", (1e-3, 1.0, "square", 1, "absorbed", 0.0), 0.0,
+              "a declared zero is a measurement, not a refusal"),
+         case("absorbed, fraction undeclared", (1e-3, 1.0, "square", 1, "absorbed"), None,
+              "the report's case: refused, not filled with any fraction"),
+         case("disc is pi/4 of square", (1e-3, 1.0, "disc", 4, "incident"), 31.415927,
+              "4 pulses x 10 pJ x pi/4", tol=1e-5)],
+        note="the report's rows imply fractions 0.35/0.35/0.60 it never states (OSC_004)")
+    register(
+        "optical-switching-constraint-chain/barrier_per_bit.py::retention_line",
+        _bpb_retention,
+        [case("single bit, t/tau0 = e^10", ("single_bit", 2.718281828459045 ** 10 / 3.15576e7, 1.0),
+              10.0, "tau0 = 1 s and t = e^10 s, so ln(t/tau0) = 10", tol=1e-9),
+         case("single bit, 10 years at 1 ns", ("single_bit", 10, 1e-9),
+              40.2931759, "ln(3.15576e17) = ln 3.15576 + 17 ln 10 = 1.1492293 + 39.1439466 "
+              "(Julian year)", tol=1e-6),
+         case("population with basis", ("population", 10, 1e-9, 60, "stated"), 60.0,
+              "declared value returned as declared"),
+         case("population without basis", ("population", 10, 1e-9, 60), None,
+              "a population line with no basis is refused")],
+        note="the report's 60 is a population line; one bit lasts ten years at ~40 (OSC_008)")
+
+
+def _sharrock_delta(delta, f0_true, f0_fit):
+    """optical-switching-constraint-chain/sharrock.py::fit_delta on data built
+    by hand from the Sharrock form with a planted Delta; None if f0 undeclared."""
+    import importlib.util
+    import math as _m
+    path = os.path.join(ROOT, "optical-switching-constraint-chain", "sharrock.py")
+    spec = importlib.util.spec_from_file_location("_sharrock", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    ts = [1.0, 10.0, 100.0, 1e3, 1e4]
+    hs = [1 - _m.sqrt(_m.log(f0_true * t / _m.log(2)) / delta) for t in ts]
+    try:
+        return mod.fit_delta(ts, hs, f0=f0_fit)
+    except mod.UndeclaredTerm:
+        return None
+
+
+def _seed_sharrock():
+    """OSC-WO3. The Sharrock line H_c = a + b sqrt(ln(f0 t/ln2)) gives
+    Delta = (a/b)^2 exactly when f0 is right. The pins: a planted Delta comes
+    back exactly, and an undeclared f0 is refused rather than assumed."""
+    register(
+        "optical-switching-constraint-chain/sharrock.py::fit_delta",
+        _sharrock_delta,
+        [case("planted 50, f0 right", (50.0, 1e9, 1e9), 50.0,
+              "data built from the form itself; the line is exact", tol=1e-9),
+         case("planted 80, f0 right", (80.0, 1e9, 1e9), 80.0,
+              "a different planted value, so a constant fit fails", tol=1e-9),
+         case("f0 undeclared", (50.0, 1e9, None), None,
+              "the attempt frequency is not fitted; refusing it is the point")],
+        note="a wrong f0 shifts Delta by about 2 per decade at Delta ~ 50 (test_sharrock.py)")
 
 
 def _seed_fitness_bin_self_test():

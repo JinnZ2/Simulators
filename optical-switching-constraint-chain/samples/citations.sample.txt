@@ -1,0 +1,56 @@
+optical-switching-constraint-chain / citations.py
+======================================================================
+searched 2026-10-27, search-result depth only (arxiv.org unresolvable here)
+states derived by tools/check_citations.citation_state
+
+C01  VERIFIED     Khalid et al. 2026, Nat. Commun., title/date/DOI
+      claim: published 15 Sep 2026, DOI 10.1038/s41467-026-77572-3
+      note:  title 'Optical beam shaping induced reconfigurable magnetic domains'
+C02  NOT_FOUND    arXiv:1312.7301 (Co nano-squares on Pt)
+      claim: depinning barrier 0.95 +/- 0.2 eV, Delta = 38, nucleus < 37 nm
+      note:  two searches, no record with this id or these values; nearest is Yun et al. 2014, ~1.0e-19 J (0.62 eV) in nanostructured Pt/Co/Pt
+C03  VERIFIED     Vomir et al. 2017, arXiv:1710.10341
+      claim: record exists; single-shot Pt/Co/Pt, sub-micron spot
+      note:  spot 0.8 um, Pt(1.5)/Co(0.7)/Pt(1.5)
+C04  UNREACHABLE  Vomir et al. 2017 (as cited in sec. 1.2)
+      claim: ~1100 K electron temperature at ~7.6 uJ/cm2
+      note:  value not in search text; a sibling Pt/Co/Pt single-shot paper (arXiv 2508.05460) works at 4 mJ/cm2
+C05  VERIFIED     Kimel & Li 2019, Nat. Rev. Mater.
+      claim: toggle heat load < 6 J/cm3
+      note:  abstract; origin is the garnet photomagnetic study
+C06  UNREACHABLE  Kimel & Li 2019, Nat. Rev. Mater.
+      claim: ~120 aJ for a 40 x 40 x 20 nm3 cell
+      note:  no aJ figure in search text; 6 J/cm3 x that cell is 192 aJ (OSC_006)
+C07  UNREACHABLE  Zhang et al. 2011, FePtAg-C (NTU pdf, JAP 109 07B703)
+      claim: Sharrock barrier E_b = 7.6 eV ~ 300 k_BT
+      note:  value not in search text; the same group's IEEE TMag 47, 4062 (2011) reports E_b = 5.1 eV ~ 200 k_BT for FePtAg-C
+C08  VERIFIED     Takahashi et al. 2016, Phys. Rev. Applied 6, 054004
+      claim: per-pulse switching probability below 1% (report: P1 = 0.0048)
+      note:  'very small, less than 1%'
+C09  UNREACHABLE  Takahashi et al. 2016
+      claim: ~500 pulses to converge, ~66% of saturation
+      note:  search text gives 80 pulses at 1.00 mW plus a small field for full switching, and ~75% alignment in a later review; 500 and 66% not found
+C10  UNREACHABLE  Cheng et al. 2023 (PMC10621044)
+      claim: ~0.3 T effective field for >90% AO-HDS in Pt/Co/Pt
+      note:  one search; counter-source: Li et al. 2023 (Rare Metals) state the IFE field must be ~10 T in ultrafast simulations of Pt/Co/Pt
+C11  UNREACHABLE  Gonzalez-Alcalde et al. 2024, Nanophotonics 13, 1993
+      claim: plasmonic IFE amplification 7-15x
+      note:  search text: 'an order-of-magnitude enhancement' vs a 20 nm Au film; no 7-15 range found
+C12  VERIFIED     Wang et al. 2021, Light Sci. Appl. 10, 8
+      claim: second shot re-writes after ~300 ps; ~3 GHz ceiling
+      note:  3 GHz is the authors' forecast; the report calls it a 'hard measured floor'
+C13  VERIFIED     Verges et al. 2023, Adv. Sci. 10(4)
+      claim: ~400% lower switching energy; Faraday up to 5000%
+      note:  '400% smaller' read literally is impossible; a seminar abstract says ~4x
+C14  VERIFIED     Seagate 2025
+      claim: over one million Mozaic HAMR drives shipped by mid-2025
+      note:  company statement, not an independent count
+
+counts: VERIFIED 7, CORRECTED 0, NOT_FOUND 1, UNREACHABLE 6
+
+what moves:
+  OSC_005 (7.6 uJ/cm2): its source value is UNREACHABLE (C04); sibling work is mJ-class
+  OSC_006 (120 aJ): only the 6 J/cm3 half is VERIFIED (C05); 120 aJ UNREACHABLE (C06)
+  sec. 6.3 depinning precedent: NOT_FOUND (C02); the ~100x discount rests on it
+  sec. 4.1 FePt barrier: 7.6 eV UNREACHABLE; a sibling paper says 5.1 eV (C07)
+  sec. 5 class split: 0.3 T NOT reached, and a counter-source puts Pt/Co/Pt at ~10 T (C10)

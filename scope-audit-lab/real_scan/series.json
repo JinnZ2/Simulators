@@ -1,0 +1,796 @@
+{
+ "pin": "5e75eb6e74a74046049af9bc01fc94d42f0bcd9b",
+ "commits": 1424,
+ "series": [
+  {
+   "day": "2026-05-23",
+   "commits": 8,
+   "weekday": 6
+  },
+  {
+   "day": "2026-05-24",
+   "commits": 14,
+   "weekday": 7
+  },
+  {
+   "day": "2026-05-25",
+   "commits": 2,
+   "weekday": 1
+  },
+  {
+   "day": "2026-05-26",
+   "commits": 0,
+   "weekday": 2
+  },
+  {
+   "day": "2026-05-27",
+   "commits": 0,
+   "weekday": 3
+  },
+  {
+   "day": "2026-05-28",
+   "commits": 0,
+   "weekday": 4
+  },
+  {
+   "day": "2026-05-29",
+   "commits": 0,
+   "weekday": 5
+  },
+  {
+   "day": "2026-05-30",
+   "commits": 0,
+   "weekday": 6
+  },
+  {
+   "day": "2026-05-31",
+   "commits": 0,
+   "weekday": 7
+  },
+  {
+   "day": "2026-06-01",
+   "commits": 0,
+   "weekday": 1
+  },
+  {
+   "day": "2026-06-02",
+   "commits": 0,
+   "weekday": 2
+  },
+  {
+   "day": "2026-06-03",
+   "commits": 0,
+   "weekday": 3
+  },
+  {
+   "day": "2026-06-04",
+   "commits": 0,
+   "weekday": 4
+  },
+  {
+   "day": "2026-06-05",
+   "commits": 0,
+   "weekday": 5
+  },
+  {
+   "day": "2026-06-06",
+   "commits": 0,
+   "weekday": 6
+  },
+  {
+   "day": "2026-06-07",
+   "commits": 0,
+   "weekday": 7
+  },
+  {
+   "day": "2026-06-08",
+   "commits": 0,
+   "weekday": 1
+  },
+  {
+   "day": "2026-06-09",
+   "commits": 0,
+   "weekday": 2
+  },
+  {
+   "day": "2026-06-10",
+   "commits": 0,
+   "weekday": 3
+  },
+  {
+   "day": "2026-06-11",
+   "commits": 0,
+   "weekday": 4
+  },
+  {
+   "day": "2026-06-12",
+   "commits": 0,
+   "weekday": 5
+  },
+  {
+   "day": "2026-06-13",
+   "commits": 0,
+   "weekday": 6
+  },
+  {
+   "day": "2026-06-14",
+   "commits": 0,
+   "weekday": 7
+  },
+  {
+   "day": "2026-06-15",
+   "commits": 0,
+   "weekday": 1
+  },
+  {
+   "day": "2026-06-16",
+   "commits": 0,
+   "weekday": 2
+  },
+  {
+   "day": "2026-06-17",
+   "commits": 0,
+   "weekday": 3
+  },
+  {
+   "day": "2026-06-18",
+   "commits": 0,
+   "weekday": 4
+  },
+  {
+   "day": "2026-06-19",
+   "commits": 1,
+   "weekday": 5
+  },
+  {
+   "day": "2026-06-20",
+   "commits": 0,
+   "weekday": 6
+  },
+  {
+   "day": "2026-06-21",
+   "commits": 1,
+   "weekday": 7
+  },
+  {
+   "day": "2026-06-22",
+   "commits": 0,
+   "weekday": 1
+  },
+  {
+   "day": "2026-06-23",
+   "commits": 7,
+   "weekday": 2
+  },
+  {
+   "day": "2026-06-24",
+   "commits": 0,
+   "weekday": 3
+  },
+  {
+   "day": "2026-06-25",
+   "commits": 0,
+   "weekday": 4
+  },
+  {
+   "day": "2026-06-26",
+   "commits": 0,
+   "weekday": 5
+  },
+  {
+   "day": "2026-06-27",
+   "commits": 4,
+   "weekday": 6
+  },
+  {
+   "day": "2026-06-28",
+   "commits": 0,
+   "weekday": 7
+  },
+  {
+   "day": "2026-06-29",
+   "commits": 0,
+   "weekday": 1
+  },
+  {
+   "day": "2026-06-30",
+   "commits": 2,
+   "weekday": 2
+  },
+  {
+   "day": "2026-07-01",
+   "commits": 4,
+   "weekday": 3
+  },
+  {
+   "day": "2026-07-02",
+   "commits": 89,
+   "weekday": 4
+  },
+  {
+   "day": "2026-07-03",
+   "commits": 21,
+   "weekday": 5
+  },
+  {
+   "day": "2026-07-04",
+   "commits": 4,
+   "weekday": 6
+  },
+  {
+   "day": "2026-07-05",
+   "commits": 0,
+   "weekday": 7
+  },
+  {
+   "day": "2026-07-06",
+   "commits": 0,
+   "weekday": 1
+  },
+  {
+   "day": "2026-07-07",
+   "commits": 0,
+   "weekday": 2
+  },
+  {
+   "day": "2026-07-08",
+   "commits": 33,
+   "weekday": 3
+  },
+  {
+   "day": "2026-07-09",
+   "commits": 2,
+   "weekday": 4
+  },
+  {
+   "day": "2026-07-10",
+   "commits": 18,
+   "weekday": 5
+  },
+  {
+   "day": "2026-07-11",
+   "commits": 11,
+   "weekday": 6
+  },
+  {
+   "day": "2026-07-12",
+   "commits": 6,
+   "weekday": 7
+  },
+  {
+   "day": "2026-07-13",
+   "commits": 0,
+   "weekday": 1
+  },
+  {
+   "day": "2026-07-14",
+   "commits": 0,
+   "weekday": 2
+  },
+  {
+   "day": "2026-07-15",
+   "commits": 45,
+   "weekday": 3
+  },
+  {
+   "day": "2026-07-16",
+   "commits": 27,
+   "weekday": 4
+  },
+  {
+   "day": "2026-07-17",
+   "commits": 15,
+   "weekday": 5
+  },
+  {
+   "day": "2026-07-18",
+   "commits": 0,
+   "weekday": 6
+  },
+  {
+   "day": "2026-07-19",
+   "commits": 0,
+   "weekday": 7
+  },
+  {
+   "day": "2026-07-20",
+   "commits": 0,
+   "weekday": 1
+  },
+  {
+   "day": "2026-07-21",
+   "commits": 0,
+   "weekday": 2
+  },
+  {
+   "day": "2026-07-22",
+   "commits": 8,
+   "weekday": 3
+  },
+  {
+   "day": "2026-07-23",
+   "commits": 7,
+   "weekday": 4
+  },
+  {
+   "day": "2026-07-24",
+   "commits": 16,
+   "weekday": 5
+  },
+  {
+   "day": "2026-07-25",
+   "commits": 1,
+   "weekday": 6
+  },
+  {
+   "day": "2026-07-26",
+   "commits": 2,
+   "weekday": 7
+  },
+  {
+   "day": "2026-07-27",
+   "commits": 2,
+   "weekday": 1
+  },
+  {
+   "day": "2026-07-28",
+   "commits": 2,
+   "weekday": 2
+  },
+  {
+   "day": "2026-07-29",
+   "commits": 0,
+   "weekday": 3
+  },
+  {
+   "day": "2026-07-30",
+   "commits": 0,
+   "weekday": 4
+  },
+  {
+   "day": "2026-07-31",
+   "commits": 0,
+   "weekday": 5
+  },
+  {
+   "day": "2026-08-01",
+   "commits": 1,
+   "weekday": 6
+  },
+  {
+   "day": "2026-08-02",
+   "commits": 0,
+   "weekday": 7
+  },
+  {
+   "day": "2026-08-03",
+   "commits": 0,
+   "weekday": 1
+  },
+  {
+   "day": "2026-08-04",
+   "commits": 10,
+   "weekday": 2
+  },
+  {
+   "day": "2026-08-05",
+   "commits": 21,
+   "weekday": 3
+  },
+  {
+   "day": "2026-08-06",
+   "commits": 1,
+   "weekday": 4
+  },
+  {
+   "day": "2026-08-07",
+   "commits": 2,
+   "weekday": 5
+  },
+  {
+   "day": "2026-08-08",
+   "commits": 0,
+   "weekday": 6
+  },
+  {
+   "day": "2026-08-09",
+   "commits": 0,
+   "weekday": 7
+  },
+  {
+   "day": "2026-08-10",
+   "commits": 0,
+   "weekday": 1
+  },
+  {
+   "day": "2026-08-11",
+   "commits": 4,
+   "weekday": 2
+  },
+  {
+   "day": "2026-08-12",
+   "commits": 2,
+   "weekday": 3
+  },
+  {
+   "day": "2026-08-13",
+   "commits": 0,
+   "weekday": 4
+  },
+  {
+   "day": "2026-08-14",
+   "commits": 0,
+   "weekday": 5
+  },
+  {
+   "day": "2026-08-15",
+   "commits": 6,
+   "weekday": 6
+  },
+  {
+   "day": "2026-08-16",
+   "commits": 16,
+   "weekday": 7
+  },
+  {
+   "day": "2026-08-17",
+   "commits": 13,
+   "weekday": 1
+  },
+  {
+   "day": "2026-08-18",
+   "commits": 29,
+   "weekday": 2
+  },
+  {
+   "day": "2026-08-19",
+   "commits": 5,
+   "weekday": 3
+  },
+  {
+   "day": "2026-08-20",
+   "commits": 0,
+   "weekday": 4
+  },
+  {
+   "day": "2026-08-21",
+   "commits": 21,
+   "weekday": 5
+  },
+  {
+   "day": "2026-08-22",
+   "commits": 3,
+   "weekday": 6
+  },
+  {
+   "day": "2026-08-23",
+   "commits": 35,
+   "weekday": 7
+  },
+  {
+   "day": "2026-08-24",
+   "commits": 26,
+   "weekday": 1
+  },
+  {
+   "day": "2026-08-25",
+   "commits": 83,
+   "weekday": 2
+  },
+  {
+   "day": "2026-08-26",
+   "commits": 8,
+   "weekday": 3
+  },
+  {
+   "day": "2026-08-27",
+   "commits": 0,
+   "weekday": 4
+  },
+  {
+   "day": "2026-08-28",
+   "commits": 2,
+   "weekday": 5
+  },
+  {
+   "day": "2026-08-29",
+   "commits": 10,
+   "weekday": 6
+  },
+  {
+   "day": "2026-08-30",
+   "commits": 39,
+   "weekday": 7
+  },
+  {
+   "day": "2026-08-31",
+   "commits": 14,
+   "weekday": 1
+  },
+  {
+   "day": "2026-09-01",
+   "commits": 12,
+   "weekday": 2
+  },
+  {
+   "day": "2026-09-02",
+   "commits": 7,
+   "weekday": 3
+  },
+  {
+   "day": "2026-09-03",
+   "commits": 3,
+   "weekday": 4
+  },
+  {
+   "day": "2026-09-04",
+   "commits": 13,
+   "weekday": 5
+  },
+  {
+   "day": "2026-09-05",
+   "commits": 20,
+   "weekday": 6
+  },
+  {
+   "day": "2026-09-06",
+   "commits": 12,
+   "weekday": 7
+  },
+  {
+   "day": "2026-09-07",
+   "commits": 6,
+   "weekday": 1
+  },
+  {
+   "day": "2026-09-08",
+   "commits": 5,
+   "weekday": 2
+  },
+  {
+   "day": "2026-09-09",
+   "commits": 10,
+   "weekday": 3
+  },
+  {
+   "day": "2026-09-10",
+   "commits": 13,
+   "weekday": 4
+  },
+  {
+   "day": "2026-09-11",
+   "commits": 1,
+   "weekday": 5
+  },
+  {
+   "day": "2026-09-12",
+   "commits": 6,
+   "weekday": 6
+  },
+  {
+   "day": "2026-09-13",
+   "commits": 8,
+   "weekday": 7
+  },
+  {
+   "day": "2026-09-14",
+   "commits": 11,
+   "weekday": 1
+  },
+  {
+   "day": "2026-09-15",
+   "commits": 6,
+   "weekday": 2
+  },
+  {
+   "day": "2026-09-16",
+   "commits": 9,
+   "weekday": 3
+  },
+  {
+   "day": "2026-09-17",
+   "commits": 6,
+   "weekday": 4
+  },
+  {
+   "day": "2026-09-18",
+   "commits": 4,
+   "weekday": 5
+  },
+  {
+   "day": "2026-09-19",
+   "commits": 12,
+   "weekday": 6
+  },
+  {
+   "day": "2026-09-20",
+   "commits": 4,
+   "weekday": 7
+  },
+  {
+   "day": "2026-09-21",
+   "commits": 0,
+   "weekday": 1
+  },
+  {
+   "day": "2026-09-22",
+   "commits": 6,
+   "weekday": 2
+  },
+  {
+   "day": "2026-09-23",
+   "commits": 20,
+   "weekday": 3
+  },
+  {
+   "day": "2026-09-24",
+   "commits": 9,
+   "weekday": 4
+  },
+  {
+   "day": "2026-09-25",
+   "commits": 0,
+   "weekday": 5
+  },
+  {
+   "day": "2026-09-26",
+   "commits": 1,
+   "weekday": 6
+  },
+  {
+   "day": "2026-09-27",
+   "commits": 9,
+   "weekday": 7
+  },
+  {
+   "day": "2026-09-28",
+   "commits": 41,
+   "weekday": 1
+  },
+  {
+   "day": "2026-09-29",
+   "commits": 11,
+   "weekday": 2
+  },
+  {
+   "day": "2026-09-30",
+   "commits": 34,
+   "weekday": 3
+  },
+  {
+   "day": "2026-10-01",
+   "commits": 0,
+   "weekday": 4
+  },
+  {
+   "day": "2026-10-02",
+   "commits": 0,
+   "weekday": 5
+  },
+  {
+   "day": "2026-10-03",
+   "commits": 0,
+   "weekday": 6
+  },
+  {
+   "day": "2026-10-04",
+   "commits": 16,
+   "weekday": 7
+  },
+  {
+   "day": "2026-10-05",
+   "commits": 15,
+   "weekday": 1
+  },
+  {
+   "day": "2026-10-06",
+   "commits": 2,
+   "weekday": 2
+  },
+  {
+   "day": "2026-10-07",
+   "commits": 73,
+   "weekday": 3
+  },
+  {
+   "day": "2026-10-08",
+   "commits": 25,
+   "weekday": 4
+  },
+  {
+   "day": "2026-10-09",
+   "commits": 41,
+   "weekday": 5
+  },
+  {
+   "day": "2026-10-10",
+   "commits": 54,
+   "weekday": 6
+  },
+  {
+   "day": "2026-10-11",
+   "commits": 20,
+   "weekday": 7
+  },
+  {
+   "day": "2026-10-12",
+   "commits": 64,
+   "weekday": 1
+  },
+  {
+   "day": "2026-10-13",
+   "commits": 14,
+   "weekday": 2
+  },
+  {
+   "day": "2026-10-14",
+   "commits": 21,
+   "weekday": 3
+  },
+  {
+   "day": "2026-10-15",
+   "commits": 10,
+   "weekday": 4
+  },
+  {
+   "day": "2026-10-16",
+   "commits": 10,
+   "weekday": 5
+  },
+  {
+   "day": "2026-10-17",
+   "commits": 0,
+   "weekday": 6
+  },
+  {
+   "day": "2026-10-18",
+   "commits": 2,
+   "weekday": 7
+  },
+  {
+   "day": "2026-10-19",
+   "commits": 0,
+   "weekday": 1
+  },
+  {
+   "day": "2026-10-20",
+   "commits": 5,
+   "weekday": 2
+  },
+  {
+   "day": "2026-10-21",
+   "commits": 7,
+   "weekday": 3
+  },
+  {
+   "day": "2026-10-22",
+   "commits": 0,
+   "weekday": 4
+  },
+  {
+   "day": "2026-10-23",
+   "commits": 6,
+   "weekday": 5
+  },
+  {
+   "day": "2026-10-24",
+   "commits": 6,
+   "weekday": 6
+  },
+  {
+   "day": "2026-10-25",
+   "commits": 13,
+   "weekday": 7
+  },
+  {
+   "day": "2026-10-26",
+   "commits": 0,
+   "weekday": 1
+  },
+  {
+   "day": "2026-10-27",
+   "commits": 18,
+   "weekday": 2
+  }
+ ]
+}
