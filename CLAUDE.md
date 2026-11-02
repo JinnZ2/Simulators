@@ -378,7 +378,7 @@ last three; read in order:
 - `gap-instruments/` — evidence notation for coordination systems, physical limits, discrepancies and abstentions; MEASURED/ESTIMATED/UNKNOWN/GAP per field, no verdict; two supplied files verbatim in `source/`, eight marked fixes in the working copy, mirrored byte-identical in `tools/` here and in method-layer
 - `extraction-chain-join/` — the extraction-money-power-emissions chain, G1..G7 as instruments not verdicts; order RECONSTRUCTED from the session summary; coverage on every reading, NO_PATTERN added to the four branches, end-to-end effect refused; all CONSTRUCTED
 - `legacy/` — archived drops; `Organize.md` is the
-- `tools/` — gate-drift and term-collision checks
+- `tools/` — gate-drift and term-collision checks; `narrative_check.py` (12 structural markers, structure never a verdict; moved 2026-11-02 from AI-Consciousness-Sensors, mirrored in method-layer)
 
 ## Reconciliation and conventions
 
