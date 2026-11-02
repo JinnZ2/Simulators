@@ -41,3 +41,7 @@ jobs:
         run: python -m unittest discover -s enclosure-first-residual/tests -p 'test_*.py'
       - name: threshold-states interaction (canonical)
         run: python -m unittest discover -s threshold-states -p 'test_*.py'
+      - name: tools/narrative_check (moved from AI-Consciousness-Sensors healing/)
+        run: |
+          python tools/narrative_check.py --selftest
+          python -m unittest tests.test_narrative_check -v
