@@ -559,5 +559,4 @@ Worktree git status clean after the runs. PR #252, branch claude/tool-finder.
    - Any added row writes model names into a pushed file, which the
      standing no-identifier rule needs you to clear.
 
-Selftest lines (throwaway worktree): see the commit message of the round 6
-commit.
+Selftest lines (throwaway worktree, commit 5fcb172): selftest_null "checks: 21   failed: 0"; cutoff selftest "checks: 25   failed: 0"; check_v02 "checks: 11   failed: 0"; check_landing "checks: 5   failed: 0"; build_finder "checks: 17   failed: 0"; pytest tests 194 passed, 3 failed (the pinned run_manifest set); known_red VERDICT: PASS.
