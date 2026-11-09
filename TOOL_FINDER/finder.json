@@ -1,6 +1,250 @@
 {
  "generated_by": "TOOL_FINDER/build_finder.py",
  "date": "2026-11-09",
+ "symptoms": [
+  {
+   "symptom": "the model blamed me (or my state) for something that was a channel failure",
+   "tools": [
+    "telemetry_vocabulary",
+    "cutoff-attribution"
+   ]
+  },
+  {
+   "symptom": "I asked what was failing in the exchange and the model talked about whether it has feelings",
+   "tools": [
+    "telemetry_vocabulary"
+   ]
+  },
+  {
+   "symptom": "I can't tell if a claim about the user was said by them or inferred",
+   "tools": [
+    "ai_provenance",
+    "tail-check"
+   ]
+  },
+  {
+   "symptom": "the model stated something about me I never said",
+   "tools": [
+    "tail-check",
+    "evidence-demotion-detector"
+   ]
+  },
+  {
+   "symptom": "the model treated my first-hand observation as a hypothesis I have to prove again",
+   "tools": [
+    "evidence-demotion-detector"
+   ]
+  },
+  {
+   "symptom": "the model assumed I'm typical when what I said puts me at the edge",
+   "tools": [
+    "tail-check",
+    "evaluation-frame"
+   ]
+  },
+  {
+   "symptom": "the voice call cut me off mid-sentence and I don't know why",
+   "tools": [
+    "cutoff-attribution"
+   ]
+  },
+  {
+   "symptom": "a number came out of a parser and I can't see where in the source it came from",
+   "tools": [
+    "sourced"
+   ]
+  },
+  {
+   "symptom": "a study claim seems bigger than its method",
+   "tools": [
+    "claim-audits",
+    "scope-bound-shapes",
+    "measurand-partition"
+   ]
+  },
+  {
+   "symptom": "a common phrase in a forecast bundles several things or is used outside where it was tested",
+   "tools": [
+    "corpus_prior_audit"
+   ]
+  },
+  {
+   "symptom": "a falsifier never says what range it applies to",
+   "tools": [
+    "falsifier-audit"
+   ]
+  },
+  {
+   "symptom": "a claim is a point with no interval and no date to recheck it",
+   "tools": [
+    "claim-record"
+   ]
+  },
+  {
+   "symptom": "a metric is standing in for a goal and I can't see the gap",
+   "tools": [
+    "fold-matrix"
+   ]
+  },
+  {
+   "symptom": "one word is carrying several quantities that could move separately",
+   "tools": [
+    "category-weld"
+   ]
+  },
+  {
+   "symptom": "a text keeps framing time, people or the world in money terms",
+   "tools": [
+    "frame-token-audit"
+   ]
+  },
+  {
+   "symptom": "the same phrase means two different things in two places",
+   "tools": [
+    "check_term_collision",
+    "valence-divergence"
+   ]
+  },
+  {
+   "symptom": "two results look comparable but their boundaries, horizons or who-counts differ",
+   "tools": [
+    "declared-frame",
+    "register_map"
+   ]
+  },
+  {
+   "symptom": "the model just adopted my framing without testing other framings",
+   "tools": [
+    "ai_frame_flip",
+    "frame_probe"
+   ]
+  },
+  {
+   "symptom": "the label on an act depends on who did it, not what was done",
+   "tools": [
+    "label-position-test",
+    "observer_position_control"
+   ]
+  },
+  {
+   "symptom": "blame landed on a role instead of following the causal chain",
+   "tools": [
+    "blame-attribution"
+   ]
+  },
+  {
+   "symptom": "the auditor might not be independent of what it audits",
+   "tools": [
+    "assessor-coupling"
+   ]
+  },
+  {
+   "symptom": "one standard was applied to one group and not another",
+   "tools": [
+    "criterion-symmetry"
+   ]
+  },
+  {
+   "symptom": "people closest to the system saw it first and were not in the record",
+   "tools": [
+    "observer-exclusion",
+    "readout-count"
+   ]
+  },
+  {
+   "symptom": "a report changed as it moved up the chain, or never got filed",
+   "tools": [
+    "reporting-chain-loss",
+    "return-path"
+   ]
+  },
+  {
+   "symptom": "a correction channel exists but nothing comes back through it",
+   "tools": [
+    "return-path"
+   ]
+  },
+  {
+   "symptom": "knowledge passed down turned into a story and lost its mechanism",
+   "tools": [
+    "transmission-decay"
+   ]
+  },
+  {
+   "symptom": "the same content in a table and in prose gave different readings",
+   "tools": [
+    "encoding-selection"
+   ]
+  },
+  {
+   "symptom": "an average keeps moving and the norms tied to it move too",
+   "tools": [
+    "moving-mean-tracker"
+   ]
+  },
+  {
+   "symptom": "I don't know if this detector can ever fire, or ever stay quiet",
+   "tools": [
+    "null-harness",
+    "known_answer"
+   ]
+  },
+  {
+   "symptom": "a new metric has never been run on a case with a known answer",
+   "tools": [
+    "known_answer"
+   ]
+  },
+  {
+   "symptom": "a claim from a sim seems finer than the sim can resolve",
+   "tools": [
+    "reasoning-gate",
+    "rank_detector"
+   ]
+  },
+  {
+   "symptom": "a reviewer agent is matching an ideal picture instead of checking constraints",
+   "tools": [
+    "membership-probe"
+   ]
+  },
+  {
+   "symptom": "several sensors agree but they may share one error source",
+   "tools": [
+    "multi_substrate_calibration"
+   ]
+  },
+  {
+   "symptom": "a claim keeps getting retuned so it never fails",
+   "tools": [
+    "falsification_ledger"
+   ]
+  },
+  {
+   "symptom": "the system's warning signs went quiet and that looks like recovery",
+   "tools": [
+    "cascade_regime_audit"
+   ]
+  },
+  {
+   "symptom": "I want to see what the model almost said instead",
+   "tools": [
+    "runner_up_trace"
+   ]
+  },
+  {
+   "symptom": "my answer sounds uniformly confident and I can't see its edges",
+   "tools": [
+    "ai_self_scope"
+   ]
+  },
+  {
+   "symptom": "I need to know whether a tool was actually run, and on which version",
+   "tools": [
+    "provenance_marker"
+   ]
+  }
+ ],
  "needs": [
   [
    "fill-source",
@@ -96,11 +340,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 tail-check/selftest.py",
+    "commit": "b4d8fb5",
     "exit": 0,
     "last_line": "checks: 26   failed: 0",
-    "commit": "b4d8fb5",
-    "cmd": "python3 tail-check/selftest.py",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -133,11 +377,11 @@
    "breaks_quote_state": "NO_QUOTE",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 tools/sourced.py --selftest",
+    "commit": "b4d8fb5",
     "exit": 0,
     "last_line": "checks: 41   failed: 0",
-    "commit": "b4d8fb5",
-    "cmd": "python3 tools/sourced.py --selftest",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -172,11 +416,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 evidence-demotion-detector/selftest.py",
+    "commit": "b4d8fb5",
     "exit": 0,
     "last_line": "selftest: 38/38 checks PASS",
-    "commit": "b4d8fb5",
-    "cmd": "python3 evidence-demotion-detector/selftest.py",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -208,11 +452,11 @@
    "breaks_quote_state": "NO_QUOTE",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 tools/provenance_marker.py --selftest",
+    "commit": "b4d8fb5",
     "exit": 0,
     "last_line": "checks: 27   failed: 0",
-    "commit": "b4d8fb5",
-    "cmd": "python3 tools/provenance_marker.py --selftest",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -245,11 +489,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 moving-mean-tracker/test_tracker.py",
+    "commit": "b4d8fb5",
     "exit": 0,
     "last_line": "checks: 68   failed: 0",
-    "commit": "b4d8fb5",
-    "cmd": "python3 moving-mean-tracker/test_tracker.py",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -283,11 +527,11 @@
    "breaks_quote_state": "FOUND",
    "status": "UNKNOWN",
    "status_detail": {
-    "status": "UNKNOWN",
+    "cmd": "python3 evaluation-frame/selftest_frame.py",
+    "commit": "b4d8fb5",
     "exit": 1,
     "last_line": "  FAILED and they are the only tokens that fire unmasked",
-    "commit": "b4d8fb5",
-    "cmd": "python3 evaluation-frame/selftest_frame.py",
+    "status": "UNKNOWN",
     "where": "worktree at HEAD"
    }
   },
@@ -322,11 +566,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 cutoff-attribution/selftest.py",
+    "commit": "b4d8fb5",
     "exit": 0,
     "last_line": "checks: 25   failed: 0",
-    "commit": "b4d8fb5",
-    "cmd": "python3 cutoff-attribution/selftest.py",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -358,11 +602,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 reporting-chain-loss/test_hop.py",
+    "commit": "b4d8fb5",
     "exit": 0,
     "last_line": "checks: 50   failed: 0",
-    "commit": "b4d8fb5",
-    "cmd": "python3 reporting-chain-loss/test_hop.py",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -394,11 +638,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "cd return-path && python3 test_return.py",
+    "commit": "b4d8fb5",
     "exit": 0,
     "last_line": "93 checks, 0 failed",
-    "commit": "b4d8fb5",
-    "cmd": "cd return-path && python3 test_return.py",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -429,11 +673,11 @@
    "breaks_quote_state": "NO_QUOTE",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 readout-count/selftest_rc.py",
+    "commit": "b4d8fb5",
     "exit": 0,
     "last_line": "selftest: 100 checks, 0 failed",
-    "commit": "b4d8fb5",
-    "cmd": "python3 readout-count/selftest_rc.py",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -464,11 +708,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 transmission-decay/selftest_power.py",
+    "commit": "b4d8fb5",
     "exit": 0,
     "last_line": "selftest: 51 checks, 0 failed",
-    "commit": "b4d8fb5",
-    "cmd": "python3 transmission-decay/selftest_power.py",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -500,11 +744,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 encoding-selection/selftest_es.py",
+    "commit": "b4d8fb5",
     "exit": 0,
     "last_line": "selftest: 43 checks, 0 failed",
-    "commit": "b4d8fb5",
-    "cmd": "python3 encoding-selection/selftest_es.py",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -538,11 +782,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 corpus_prior_audit/audit.py --selftest",
+    "commit": "1345818",
     "exit": 0,
     "last_line": "selftest 17/17",
-    "commit": "1345818",
-    "cmd": "python3 corpus_prior_audit/audit.py --selftest",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -574,11 +818,11 @@
    "breaks_quote_state": "NO_QUOTE",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 falsifier-audit/selftest_fa.py",
+    "commit": "b4d8fb5",
     "exit": 0,
     "last_line": "selftest: 28 checks, 0 failed",
-    "commit": "b4d8fb5",
-    "cmd": "python3 falsifier-audit/selftest_fa.py",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -610,11 +854,11 @@
    "breaks_quote_state": "NO_QUOTE",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 claim-record/record.py --selftest",
+    "commit": "b4d8fb5",
     "exit": 0,
     "last_line": "registered: days, sols, years",
-    "commit": "b4d8fb5",
-    "cmd": "python3 claim-record/record.py --selftest",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -647,11 +891,11 @@
    "breaks_quote_state": "NO_QUOTE",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 measurand-partition/test_partition.py",
+    "commit": "b4d8fb5",
     "exit": 0,
     "last_line": "checks: 128   failed: 0",
-    "commit": "b4d8fb5",
-    "cmd": "python3 measurand-partition/test_partition.py",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -685,11 +929,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 fold-matrix/fold_matrix.py --selftest",
+    "commit": "b4d8fb5",
     "exit": 0,
     "last_line": "SELFTEST PASS (0 checks failed)",
-    "commit": "b4d8fb5",
-    "cmd": "python3 fold-matrix/fold_matrix.py --selftest",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -754,11 +998,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 -m unittest tests.test_register_map",
+    "commit": "f7b607d",
     "exit": 0,
     "last_line": "OK",
-    "commit": "f7b607d",
-    "cmd": "python3 -m unittest tests.test_register_map",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -789,11 +1033,11 @@
    "breaks_quote_state": "NO_QUOTE",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 tools/check_term_collision.py",
+    "commit": "b4d8fb5",
     "exit": 0,
     "last_line": "======================================================================",
-    "commit": "b4d8fb5",
-    "cmd": "python3 tools/check_term_collision.py",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -856,11 +1100,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 valence-divergence/test_valence.py",
+    "commit": "b4d8fb5",
     "exit": 0,
     "last_line": "333 checks, 0 failed",
-    "commit": "b4d8fb5",
-    "cmd": "python3 valence-divergence/test_valence.py",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -891,11 +1135,11 @@
    "breaks_quote_state": "NO_QUOTE",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 frame-token-audit/selftest_fta.py",
+    "commit": "b4d8fb5",
     "exit": 0,
     "last_line": "selftest_fta: 20 checks passed",
-    "commit": "b4d8fb5",
-    "cmd": "python3 frame-token-audit/selftest_fta.py",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -926,11 +1170,11 @@
    "breaks_quote_state": "NO_QUOTE",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 category-weld/test_weld.py",
+    "commit": "b4d8fb5",
     "exit": 0,
     "last_line": "FAILURES: 0",
-    "commit": "b4d8fb5",
-    "cmd": "python3 category-weld/test_weld.py",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -961,11 +1205,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 -m unittest tests.test_frame_probe",
+    "commit": "f7b607d",
     "exit": 0,
     "last_line": "OK",
-    "commit": "f7b607d",
-    "cmd": "python3 -m unittest tests.test_frame_probe",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -1027,11 +1271,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 -m unittest tests.test_observer_position_control",
+    "commit": "f7b607d",
     "exit": 0,
     "last_line": "OK",
-    "commit": "f7b607d",
-    "cmd": "python3 -m unittest tests.test_observer_position_control",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -1062,11 +1306,11 @@
    "breaks_quote_state": "NO_QUOTE",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 observer-exclusion/v2_check.py --selftest",
+    "commit": "b4d8fb5",
     "exit": 0,
     "last_line": "SELFTEST PASS (0 checks failed)",
-    "commit": "b4d8fb5",
-    "cmd": "python3 observer-exclusion/v2_check.py --selftest",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -1097,11 +1341,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 assessor-coupling/test_assessor.py",
+    "commit": "b4d8fb5",
     "exit": 0,
     "last_line": "checks: 98   failed: 0",
-    "commit": "b4d8fb5",
-    "cmd": "python3 assessor-coupling/test_assessor.py",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -1134,11 +1378,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 label-position-test/selftest_lpt.py",
+    "commit": "b4d8fb5",
     "exit": 0,
     "last_line": "selftest: 78 checks, 0 failed",
-    "commit": "b4d8fb5",
-    "cmd": "python3 label-position-test/selftest_lpt.py",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -1169,11 +1413,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 blame-attribution/pair_check.py --selftest",
+    "commit": "b4d8fb5",
     "exit": 0,
     "last_line": "selftest: 34 checks, 0 failed",
-    "commit": "b4d8fb5",
-    "cmd": "python3 blame-attribution/pair_check.py --selftest",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -1204,11 +1448,11 @@
    "breaks_quote_state": "NO_QUOTE",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 criterion-symmetry/separability.py --selftest",
+    "commit": "b4d8fb5",
     "exit": 0,
     "last_line": "SELFTEST PASS (0 checks failed)",
-    "commit": "b4d8fb5",
-    "cmd": "python3 criterion-symmetry/separability.py --selftest",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -1271,11 +1515,11 @@
    "breaks_quote_state": "NO_QUOTE",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 tools/known_answer.py",
+    "commit": "b4d8fb5",
     "exit": 0,
     "last_line": "========================================================================",
-    "commit": "b4d8fb5",
-    "cmd": "python3 tools/known_answer.py",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -1306,11 +1550,11 @@
    "breaks_quote_state": "NO_QUOTE",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 -m unittest discover reasoning-gate/tests",
+    "commit": "b4d8fb5",
     "exit": 0,
     "last_line": "OK",
-    "commit": "b4d8fb5",
-    "cmd": "python3 -m unittest discover reasoning-gate/tests",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -1341,11 +1585,11 @@
    "breaks_quote_state": "NO_QUOTE",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 -m unittest tests.test_rank_detector",
+    "commit": "f7b607d",
     "exit": 0,
     "last_line": "OK",
-    "commit": "f7b607d",
-    "cmd": "python3 -m unittest tests.test_rank_detector",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -1378,11 +1622,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 membership-probe/probe_audit.py --selftest",
+    "commit": "b4d8fb5",
     "exit": 0,
     "last_line": "SELFTEST PASS (0 checks failed)",
-    "commit": "b4d8fb5",
-    "cmd": "python3 membership-probe/probe_audit.py --selftest",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -1418,11 +1662,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 -m unittest discover -s multi_substrate_calibration -t . -p test_*.py",
+    "commit": "1407ded",
     "exit": 0,
     "last_line": "OK",
-    "commit": "1407ded",
-    "cmd": "python3 -m unittest discover -s multi_substrate_calibration -t . -p test_*.py",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -1457,11 +1701,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 -m unittest discover -s falsification_ledger -t . -p test_*.py",
+    "commit": "1407ded",
     "exit": 0,
     "last_line": "OK",
-    "commit": "1407ded",
-    "cmd": "python3 -m unittest discover -s falsification_ledger -t . -p test_*.py",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -1493,11 +1737,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 -m unittest discover -s cascade_regime_audit -t . -p test_*.py",
+    "commit": "1407ded",
     "exit": 0,
     "last_line": "OK",
-    "commit": "1407ded",
-    "cmd": "python3 -m unittest discover -s cascade_regime_audit -t . -p test_*.py",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -1532,11 +1776,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "status": "RUN",
+    "cmd": "python3 -m unittest discover -s runner_up_trace -t . -p test_*.py",
+    "commit": "1407ded",
     "exit": 0,
     "last_line": "OK",
-    "commit": "1407ded",
-    "cmd": "python3 -m unittest discover -s runner_up_trace -t . -p test_*.py",
+    "status": "RUN",
     "where": "worktree at HEAD"
    }
   },
@@ -1572,6 +1816,72 @@
    "status_detail": {
     "status": "NOT_RUN",
     "why": "no check command stated"
+   }
+  },
+  {
+   "need": "scope",
+   "also": [],
+   "repo": "Simulators",
+   "path": "claim-audits/",
+   "name": "claim-audits",
+   "aliases": [
+    "audit claims in an outside document",
+    "verdict per claim with attribution",
+    "document claim vs model overlay",
+    "number with no source in a report"
+   ],
+   "measures_file": "claim-audits/README.md",
+   "measures": "Standalone single-file audits of external documents. Each audit assigns one of eight verdicts to every claim it addresses, with per-claim attribution so a document's own moves are not conflated with model overlay.",
+   "breaks_file": null,
+   "breaks_when": "NO_STATED_LIMITS",
+   "check": "python3 claim-audits/claim_audit_visibility.py",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "per claim: one of eight verdicts + who (K = document, M = model overlay)",
+   "assumes": "each claim hand-classified by the auditor",
+   "chain": "reads: inference (the document's claims). ignores: how the document was produced",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
+   "measures_src": "claim-audits/README.md:3",
+   "measures_quote_state": "FOUND",
+   "breaks_src": null,
+   "breaks_quote_state": "NO_QUOTE",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
+   }
+  },
+  {
+   "need": "scope",
+   "also": [
+    "frame"
+   ],
+   "repo": "Simulators",
+   "path": "scope-bound-shapes/",
+   "name": "scope-bound-shapes",
+   "aliases": [
+    "same pattern claimed across fields",
+    "which variables were held fixed",
+    "scope collision between two bindings",
+    "domain name hides frozen variables"
+   ],
+   "measures_file": "scope-bound-shapes/README.md",
+   "measures": "A **SCOPE BINDING** is that shape instantiated with a declared list of FROZEN variables.",
+   "breaks_file": "scope-bound-shapes/README.md",
+   "breaks_when": "**The shape is taken on the spec's word.**",
+   "check": "python3 scope-bound-shapes/scope.py --selftest",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "per pair of bindings: SCOPE_COLLISION with the colliding frozen variables",
+   "assumes": "the shape is taken on the spec's word; FROZEN lists declared",
+   "chain": "reads: encoding (what a binding declares frozen). ignores: whether the shape is real",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
+   "measures_src": "scope-bound-shapes/README.md:7",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "scope-bound-shapes/README.md:118",
+   "breaks_quote_state": "FOUND",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
    }
   }
  ],

@@ -134,3 +134,15 @@ claim is still not what it looks like.
   themselves.
 
 CC0. Standard library only. Parses under Python 3.9. Phone-buildable.
+
+## Finds-by (ALIAS_PROPOSED, 2026-11-09)
+Note 2026-11-09: added by WORK ORDER TOOL FINDER part 1; aliases derived from this
+tool's stated scope only. Index: Simulators `TOOL_FINDER/TOOL_FINDER.md`.
+
+- same pattern claimed across fields
+- which variables were held fixed
+- scope collision between two bindings
+- domain name hides frozen variables
+- avoided term: AVOIDED_TERM_UNSTATED
+- measures: "A **SCOPE BINDING** is that shape instantiated with a declared list of FROZEN variables."
+- breaks when: "**The shape is taken on the spec's word.**"

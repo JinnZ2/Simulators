@@ -100,3 +100,15 @@ They will follow the same shape (`Claim` dataclass, `CLAIMS` list,
 ## License
 
 CC0 1.0 Universal. Public domain.
+
+## Finds-by (ALIAS_PROPOSED, 2026-11-09)
+Note 2026-11-09: added by WORK ORDER TOOL FINDER part 1; aliases derived from this
+tool's stated scope only. Index: Simulators `TOOL_FINDER/TOOL_FINDER.md`.
+
+- audit claims in an outside document
+- verdict per claim with attribution
+- document claim vs model overlay
+- number with no source in a report
+- avoided term: AVOIDED_TERM_UNSTATED
+- measures: "Standalone single-file audits of external documents. Each audit assigns one of eight verdicts to every claim it addresses, with per-claim attribution so a document's own moves are not conflated with model overlay."
+- breaks when: NO_STATED_LIMITS

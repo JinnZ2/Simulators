@@ -441,3 +441,71 @@ for _e in E:
     _p, _a, _c = A1[_e["name"]]
     _e["precision"], _e["assumes"], _e["chain"] = _p, _a, _c
     _e["a1_status"] = "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)"
+
+# ---- Amendment A3 (2026-11-09): two tools named by the amendment, plus the symptom index
+add("scope", "Simulators", "claim-audits/", "claim-audits",
+    ["audit claims in an outside document", "verdict per claim with attribution", "document claim vs model overlay",
+     "number with no source in a report"],
+    "claim-audits/README.md", "Standalone single-file audits of external documents. Each audit assigns one of eight verdicts to every claim it addresses, with per-claim attribution so a document's own moves are not conflated with model overlay.",
+    None, NB, "python3 claim-audits/claim_audit_visibility.py")
+add("scope", "Simulators", "scope-bound-shapes/", "scope-bound-shapes",
+    ["same pattern claimed across fields", "which variables were held fixed", "scope collision between two bindings",
+     "domain name hides frozen variables"],
+    "scope-bound-shapes/README.md", "A **SCOPE BINDING** is that shape instantiated with a declared list of FROZEN variables.",
+    "scope-bound-shapes/README.md", "**The shape is taken on the spec's word.**",
+    "python3 scope-bound-shapes/scope.py --selftest", also=["frame"])
+for _n, _t in (("claim-audits", ("per claim: one of eight verdicts + who (K = document, M = model overlay)",
+                    "each claim hand-classified by the auditor",
+                    "reads: inference (the document's claims). ignores: how the document was produced")),
+               ("scope-bound-shapes", ("per pair of bindings: SCOPE_COLLISION with the colliding frozen variables",
+                    "the shape is taken on the spec's word; FROZEN lists declared",
+                    "reads: encoding (what a binding declares frozen). ignores: whether the shape is real"))):
+    A1[_n] = _t
+    for _e in E:
+        if _e["name"] == _n:
+            _e["precision"], _e["assumes"], _e["chain"] = _t
+            _e["a1_status"] = "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)"
+
+# SYMPTOM INDEX. "If you're seeing X -> read/run Y". Plain observer language,
+# each written from the named tool's stated scope (its measures / breaks-when
+# text above). ALIAS_PROPOSED, 2026-11-09; not tested against real searches.
+SYMPTOMS = [
+ ("the model blamed me (or my state) for something that was a channel failure", ["telemetry_vocabulary", "cutoff-attribution"]),
+ ("I asked what was failing in the exchange and the model talked about whether it has feelings", ["telemetry_vocabulary"]),
+ ("I can't tell if a claim about the user was said by them or inferred", ["ai_provenance", "tail-check"]),
+ ("the model stated something about me I never said", ["tail-check", "evidence-demotion-detector"]),
+ ("the model treated my first-hand observation as a hypothesis I have to prove again", ["evidence-demotion-detector"]),
+ ("the model assumed I'm typical when what I said puts me at the edge", ["tail-check", "evaluation-frame"]),
+ ("the voice call cut me off mid-sentence and I don't know why", ["cutoff-attribution"]),
+ ("a number came out of a parser and I can't see where in the source it came from", ["sourced"]),
+ ("a study claim seems bigger than its method", ["claim-audits", "scope-bound-shapes", "measurand-partition"]),
+ ("a common phrase in a forecast bundles several things or is used outside where it was tested", ["corpus_prior_audit"]),
+ ("a falsifier never says what range it applies to", ["falsifier-audit"]),
+ ("a claim is a point with no interval and no date to recheck it", ["claim-record"]),
+ ("a metric is standing in for a goal and I can't see the gap", ["fold-matrix"]),
+ ("one word is carrying several quantities that could move separately", ["category-weld"]),
+ ("a text keeps framing time, people or the world in money terms", ["frame-token-audit"]),
+ ("the same phrase means two different things in two places", ["check_term_collision", "valence-divergence"]),
+ ("two results look comparable but their boundaries, horizons or who-counts differ", ["declared-frame", "register_map"]),
+ ("the model just adopted my framing without testing other framings", ["ai_frame_flip", "frame_probe"]),
+ ("the label on an act depends on who did it, not what was done", ["label-position-test", "observer_position_control"]),
+ ("blame landed on a role instead of following the causal chain", ["blame-attribution"]),
+ ("the auditor might not be independent of what it audits", ["assessor-coupling"]),
+ ("one standard was applied to one group and not another", ["criterion-symmetry"]),
+ ("people closest to the system saw it first and were not in the record", ["observer-exclusion", "readout-count"]),
+ ("a report changed as it moved up the chain, or never got filed", ["reporting-chain-loss", "return-path"]),
+ ("a correction channel exists but nothing comes back through it", ["return-path"]),
+ ("knowledge passed down turned into a story and lost its mechanism", ["transmission-decay"]),
+ ("the same content in a table and in prose gave different readings", ["encoding-selection"]),
+ ("an average keeps moving and the norms tied to it move too", ["moving-mean-tracker"]),
+ ("I don't know if this detector can ever fire, or ever stay quiet", ["null-harness", "known_answer"]),
+ ("a new metric has never been run on a case with a known answer", ["known_answer"]),
+ ("a claim from a sim seems finer than the sim can resolve", ["reasoning-gate", "rank_detector"]),
+ ("a reviewer agent is matching an ideal picture instead of checking constraints", ["membership-probe"]),
+ ("several sensors agree but they may share one error source", ["multi_substrate_calibration"]),
+ ("a claim keeps getting retuned so it never fails", ["falsification_ledger"]),
+ ("the system's warning signs went quiet and that looks like recovery", ["cascade_regime_audit"]),
+ ("I want to see what the model almost said instead", ["runner_up_trace"]),
+ ("my answer sounds uniformly confident and I can't see its edges", ["ai_self_scope"]),
+ ("I need to know whether a tool was actually run, and on which version", ["provenance_marker"]),
+]
