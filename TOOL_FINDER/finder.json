@@ -340,11 +340,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 tail-check/selftest.py",
-    "commit": "7e4ba7a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "checks: 26   failed: 0",
-    "status": "RUN",
+    "commit": "ee08562",
+    "cmd": "python3 tail-check/selftest.py",
     "where": "worktree at HEAD"
    }
   },
@@ -377,11 +377,11 @@
    "breaks_quote_state": "NO_QUOTE",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 tools/sourced.py --selftest",
-    "commit": "7e4ba7a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "checks: 41   failed: 0",
-    "status": "RUN",
+    "commit": "ee08562",
+    "cmd": "python3 tools/sourced.py --selftest",
     "where": "worktree at HEAD"
    }
   },
@@ -416,11 +416,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 evidence-demotion-detector/selftest.py",
-    "commit": "7e4ba7a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "selftest: 38/38 checks PASS",
-    "status": "RUN",
+    "commit": "ee08562",
+    "cmd": "python3 evidence-demotion-detector/selftest.py",
     "where": "worktree at HEAD"
    }
   },
@@ -452,11 +452,11 @@
    "breaks_quote_state": "NO_QUOTE",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 tools/provenance_marker.py --selftest",
-    "commit": "7e4ba7a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "checks: 27   failed: 0",
-    "status": "RUN",
+    "commit": "ee08562",
+    "cmd": "python3 tools/provenance_marker.py --selftest",
     "where": "worktree at HEAD"
    }
   },
@@ -489,11 +489,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 moving-mean-tracker/test_tracker.py",
-    "commit": "7e4ba7a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "checks: 68   failed: 0",
-    "status": "RUN",
+    "commit": "ee08562",
+    "cmd": "python3 moving-mean-tracker/test_tracker.py",
     "where": "worktree at HEAD"
    }
   },
@@ -527,11 +527,11 @@
    "breaks_quote_state": "FOUND",
    "status": "UNKNOWN",
    "status_detail": {
-    "cmd": "python3 evaluation-frame/selftest_frame.py",
-    "commit": "7e4ba7a",
+    "status": "UNKNOWN",
     "exit": 1,
     "last_line": "  FAILED and they are the only tokens that fire unmasked",
-    "status": "UNKNOWN",
+    "commit": "ee08562",
+    "cmd": "python3 evaluation-frame/selftest_frame.py",
     "where": "worktree at HEAD"
    }
   },
@@ -566,11 +566,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 cutoff-attribution/selftest.py",
-    "commit": "7e4ba7a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "checks: 25   failed: 0",
-    "status": "RUN",
+    "commit": "ee08562",
+    "cmd": "python3 cutoff-attribution/selftest.py",
     "where": "worktree at HEAD"
    }
   },
@@ -602,11 +602,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 reporting-chain-loss/test_hop.py",
-    "commit": "7e4ba7a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "checks: 50   failed: 0",
-    "status": "RUN",
+    "commit": "ee08562",
+    "cmd": "python3 reporting-chain-loss/test_hop.py",
     "where": "worktree at HEAD"
    }
   },
@@ -638,11 +638,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "cmd": "cd return-path && python3 test_return.py",
-    "commit": "7e4ba7a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "93 checks, 0 failed",
-    "status": "RUN",
+    "commit": "ee08562",
+    "cmd": "cd return-path && python3 test_return.py",
     "where": "worktree at HEAD"
    }
   },
@@ -673,11 +673,11 @@
    "breaks_quote_state": "NO_QUOTE",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 readout-count/selftest_rc.py",
-    "commit": "7e4ba7a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "selftest: 100 checks, 0 failed",
-    "status": "RUN",
+    "commit": "ee08562",
+    "cmd": "python3 readout-count/selftest_rc.py",
     "where": "worktree at HEAD"
    }
   },
@@ -708,11 +708,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 transmission-decay/selftest_power.py",
-    "commit": "7e4ba7a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "selftest: 51 checks, 0 failed",
-    "status": "RUN",
+    "commit": "ee08562",
+    "cmd": "python3 transmission-decay/selftest_power.py",
     "where": "worktree at HEAD"
    }
   },
@@ -744,11 +744,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 encoding-selection/selftest_es.py",
-    "commit": "7e4ba7a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "selftest: 43 checks, 0 failed",
-    "status": "RUN",
+    "commit": "ee08562",
+    "cmd": "python3 encoding-selection/selftest_es.py",
     "where": "worktree at HEAD"
    }
   },
@@ -782,11 +782,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 corpus_prior_audit/audit.py --selftest",
-    "commit": "1345818",
+    "status": "RUN",
     "exit": 0,
     "last_line": "selftest 17/17",
-    "status": "RUN",
+    "commit": "d805a30",
+    "cmd": "python3 corpus_prior_audit/audit.py --selftest",
     "where": "worktree at HEAD"
    }
   },
@@ -818,11 +818,11 @@
    "breaks_quote_state": "NO_QUOTE",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 falsifier-audit/selftest_fa.py",
-    "commit": "7e4ba7a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "selftest: 28 checks, 0 failed",
-    "status": "RUN",
+    "commit": "ee08562",
+    "cmd": "python3 falsifier-audit/selftest_fa.py",
     "where": "worktree at HEAD"
    }
   },
@@ -854,11 +854,11 @@
    "breaks_quote_state": "NO_QUOTE",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 claim-record/record.py --selftest",
-    "commit": "7e4ba7a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "registered: days, sols, years",
-    "status": "RUN",
+    "commit": "ee08562",
+    "cmd": "python3 claim-record/record.py --selftest",
     "where": "worktree at HEAD"
    }
   },
@@ -891,11 +891,11 @@
    "breaks_quote_state": "NO_QUOTE",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 measurand-partition/test_partition.py",
-    "commit": "7e4ba7a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "checks: 128   failed: 0",
-    "status": "RUN",
+    "commit": "ee08562",
+    "cmd": "python3 measurand-partition/test_partition.py",
     "where": "worktree at HEAD"
    }
   },
@@ -929,11 +929,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 fold-matrix/fold_matrix.py --selftest",
-    "commit": "7e4ba7a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "SELFTEST PASS (0 checks failed)",
-    "status": "RUN",
+    "commit": "ee08562",
+    "cmd": "python3 fold-matrix/fold_matrix.py --selftest",
     "where": "worktree at HEAD"
    }
   },
@@ -998,11 +998,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 -m unittest tests.test_register_map",
-    "commit": "f7b607d",
+    "status": "RUN",
     "exit": 0,
     "last_line": "OK",
-    "status": "RUN",
+    "commit": "41b9ce7",
+    "cmd": "python3 -m unittest tests.test_register_map",
     "where": "worktree at HEAD"
    }
   },
@@ -1033,11 +1033,11 @@
    "breaks_quote_state": "NO_QUOTE",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 tools/check_term_collision.py",
-    "commit": "7e4ba7a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "======================================================================",
-    "status": "RUN",
+    "commit": "ee08562",
+    "cmd": "python3 tools/check_term_collision.py",
     "where": "worktree at HEAD"
    }
   },
@@ -1100,11 +1100,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 valence-divergence/test_valence.py",
-    "commit": "7e4ba7a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "333 checks, 0 failed",
-    "status": "RUN",
+    "commit": "ee08562",
+    "cmd": "python3 valence-divergence/test_valence.py",
     "where": "worktree at HEAD"
    }
   },
@@ -1135,11 +1135,11 @@
    "breaks_quote_state": "NO_QUOTE",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 frame-token-audit/selftest_fta.py",
-    "commit": "7e4ba7a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "selftest_fta: 20 checks passed",
-    "status": "RUN",
+    "commit": "ee08562",
+    "cmd": "python3 frame-token-audit/selftest_fta.py",
     "where": "worktree at HEAD"
    }
   },
@@ -1170,11 +1170,11 @@
    "breaks_quote_state": "NO_QUOTE",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 category-weld/test_weld.py",
-    "commit": "7e4ba7a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "FAILURES: 0",
-    "status": "RUN",
+    "commit": "ee08562",
+    "cmd": "python3 category-weld/test_weld.py",
     "where": "worktree at HEAD"
    }
   },
@@ -1205,11 +1205,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 -m unittest tests.test_frame_probe",
-    "commit": "f7b607d",
+    "status": "RUN",
     "exit": 0,
     "last_line": "OK",
-    "status": "RUN",
+    "commit": "41b9ce7",
+    "cmd": "python3 -m unittest tests.test_frame_probe",
     "where": "worktree at HEAD"
    }
   },
@@ -1271,11 +1271,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 -m unittest tests.test_observer_position_control",
-    "commit": "f7b607d",
+    "status": "RUN",
     "exit": 0,
     "last_line": "OK",
-    "status": "RUN",
+    "commit": "41b9ce7",
+    "cmd": "python3 -m unittest tests.test_observer_position_control",
     "where": "worktree at HEAD"
    }
   },
@@ -1306,11 +1306,11 @@
    "breaks_quote_state": "NO_QUOTE",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 observer-exclusion/v2_check.py --selftest",
-    "commit": "7e4ba7a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "SELFTEST PASS (0 checks failed)",
-    "status": "RUN",
+    "commit": "ee08562",
+    "cmd": "python3 observer-exclusion/v2_check.py --selftest",
     "where": "worktree at HEAD"
    }
   },
@@ -1341,11 +1341,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 assessor-coupling/test_assessor.py",
-    "commit": "7e4ba7a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "checks: 98   failed: 0",
-    "status": "RUN",
+    "commit": "ee08562",
+    "cmd": "python3 assessor-coupling/test_assessor.py",
     "where": "worktree at HEAD"
    }
   },
@@ -1378,11 +1378,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 label-position-test/selftest_lpt.py",
-    "commit": "7e4ba7a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "selftest: 78 checks, 0 failed",
-    "status": "RUN",
+    "commit": "ee08562",
+    "cmd": "python3 label-position-test/selftest_lpt.py",
     "where": "worktree at HEAD"
    }
   },
@@ -1413,11 +1413,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 blame-attribution/pair_check.py --selftest",
-    "commit": "7e4ba7a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "selftest: 34 checks, 0 failed",
-    "status": "RUN",
+    "commit": "ee08562",
+    "cmd": "python3 blame-attribution/pair_check.py --selftest",
     "where": "worktree at HEAD"
    }
   },
@@ -1448,11 +1448,11 @@
    "breaks_quote_state": "NO_QUOTE",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 criterion-symmetry/separability.py --selftest",
-    "commit": "7e4ba7a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "SELFTEST PASS (0 checks failed)",
-    "status": "RUN",
+    "commit": "ee08562",
+    "cmd": "python3 criterion-symmetry/separability.py --selftest",
     "where": "worktree at HEAD"
    }
   },
@@ -1515,11 +1515,11 @@
    "breaks_quote_state": "NO_QUOTE",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 tools/known_answer.py",
-    "commit": "7e4ba7a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "========================================================================",
-    "status": "RUN",
+    "commit": "ee08562",
+    "cmd": "python3 tools/known_answer.py",
     "where": "worktree at HEAD"
    }
   },
@@ -1550,11 +1550,11 @@
    "breaks_quote_state": "NO_QUOTE",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 -m unittest discover reasoning-gate/tests",
-    "commit": "7e4ba7a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "OK",
-    "status": "RUN",
+    "commit": "ee08562",
+    "cmd": "python3 -m unittest discover reasoning-gate/tests",
     "where": "worktree at HEAD"
    }
   },
@@ -1585,11 +1585,11 @@
    "breaks_quote_state": "NO_QUOTE",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 -m unittest tests.test_rank_detector",
-    "commit": "f7b607d",
+    "status": "RUN",
     "exit": 0,
     "last_line": "OK",
-    "status": "RUN",
+    "commit": "41b9ce7",
+    "cmd": "python3 -m unittest tests.test_rank_detector",
     "where": "worktree at HEAD"
    }
   },
@@ -1622,11 +1622,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 membership-probe/probe_audit.py --selftest",
-    "commit": "7e4ba7a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "SELFTEST PASS (0 checks failed)",
-    "status": "RUN",
+    "commit": "ee08562",
+    "cmd": "python3 membership-probe/probe_audit.py --selftest",
     "where": "worktree at HEAD"
    }
   },
@@ -1662,11 +1662,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 -m unittest discover -s multi_substrate_calibration -t . -p test_*.py",
-    "commit": "ec3b38a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "OK",
-    "status": "RUN",
+    "commit": "93ad37a",
+    "cmd": "python3 -m unittest discover -s multi_substrate_calibration -t . -p test_*.py",
     "where": "worktree at HEAD"
    }
   },
@@ -1701,11 +1701,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 -m unittest discover -s falsification_ledger -t . -p test_*.py",
-    "commit": "ec3b38a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "OK",
-    "status": "RUN",
+    "commit": "93ad37a",
+    "cmd": "python3 -m unittest discover -s falsification_ledger -t . -p test_*.py",
     "where": "worktree at HEAD"
    }
   },
@@ -1737,11 +1737,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 -m unittest discover -s cascade_regime_audit -t . -p test_*.py",
-    "commit": "ec3b38a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "OK",
-    "status": "RUN",
+    "commit": "93ad37a",
+    "cmd": "python3 -m unittest discover -s cascade_regime_audit -t . -p test_*.py",
     "where": "worktree at HEAD"
    }
   },
@@ -1776,11 +1776,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 -m unittest discover -s runner_up_trace -t . -p test_*.py",
-    "commit": "ec3b38a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "OK",
-    "status": "RUN",
+    "commit": "93ad37a",
+    "cmd": "python3 -m unittest discover -s runner_up_trace -t . -p test_*.py",
     "where": "worktree at HEAD"
    }
   },
@@ -1846,11 +1846,11 @@
    "breaks_quote_state": "NO_QUOTE",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 claim-audits/claim_audit_visibility.py",
-    "commit": "7e4ba7a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "    only thing standing between this and an unfalsifiable framework.",
-    "status": "RUN",
+    "commit": "ee08562",
+    "cmd": "python3 claim-audits/claim_audit_visibility.py",
     "where": "worktree at HEAD"
    }
   },
@@ -1884,11 +1884,11 @@
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
-    "cmd": "python3 scope-bound-shapes/scope.py --selftest",
-    "commit": "7e4ba7a",
+    "status": "RUN",
     "exit": 0,
     "last_line": "29/29 checks passed",
-    "status": "RUN",
+    "commit": "ee08562",
+    "cmd": "python3 scope-bound-shapes/scope.py --selftest",
     "where": "worktree at HEAD"
    }
   }
