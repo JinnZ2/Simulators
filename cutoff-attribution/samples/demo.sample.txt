@@ -1,26 +1,33 @@
 cutoff-attribution readout (candidates held without priority; user cognition is not a candidate)
 params [CHOICE]: GAP_S=0.6 WINDOW_S=2.0 RESUME_S=1.5 (stipulated, not measured)
+tool self-check (inference hop, known cut): CHECKED; record fields: IMPORTED
 
 cut t=4.10  USER_TAGGED status=OBSERVED
     note: user: it cut me
     separated by evidence: NETWORK_LAG
     candidate set: NETWORK_LAG, ENDPOINTING, MODEL_READ
-      NETWORK_LAG   OBSERVED         log network_drop at 4.00
-      NETWORK_LAG   ESTIMATED        model starts 0.20 s after open-ended user text
-      ENDPOINTING   ESTIMATED        model starts 0.20 s after open-ended user text
-      MODEL_READ    ESTIMATED        model starts 0.20 s after open-ended user text
+    chain: sensor[UNVERIFIED_HOP] -> encoding[UNVERIFIED_HOP] -> transmission[CHECKED] -> decoding[CHECK_FAILED] -> inference[UNVERIFIED_HOP] -> inference[CHECKED]
+    chain class: VIA_FAILED_HOP (never a direct observation)
+      NETWORK_LAG   OBSERVED                    log network_drop at 4.00 (hop transmission CHECKED)
+      NETWORK_LAG   ESTIMATED                   model starts 0.20 s after open-ended user text
+      ENDPOINTING   ESTIMATED                   model starts 0.20 s after open-ended user text
+      MODEL_READ    ESTIMATED                   model starts 0.20 s after open-ended user text
 cut t=23.50  DETECTED    status=ESTIMATED
     candidate set: NETWORK_LAG, ENDPOINTING, AMBIENT_NOISE, TRANSCRIPTION, MODEL_READ, UNRESOLVED
-      NETWORK_LAG   ESTIMATED        model starts 0.30 s after open-ended user text
-      ENDPOINTING   OBSERVED         log endpoint_fired at 22.90
-      ENDPOINTING   ESTIMATED        model starts 0.30 s after open-ended user text
-      AMBIENT_NOISE ESTIMATED        unclear tag in user text
-      TRANSCRIPTION OBSERVED         log asr_error at 23.20
-      TRANSCRIPTION ESTIMATED        unclear tag in user text
-      MODEL_READ    ESTIMATED        model starts 0.30 s after open-ended user text
+    chain: sensor[UNVERIFIED_HOP] -> encoding[UNVERIFIED_HOP] -> transmission[CHECKED] -> decoding[CHECK_FAILED] -> inference[UNVERIFIED_HOP] -> inference[CHECKED]
+    chain class: VIA_FAILED_HOP (never a direct observation)
+      NETWORK_LAG   ESTIMATED                   model starts 0.30 s after open-ended user text
+      ENDPOINTING   RECORDED_VIA_UNVERIFIED_HOP log endpoint_fired at 22.90 (hop encoding UNVERIFIED_HOP)
+      ENDPOINTING   ESTIMATED                   model starts 0.30 s after open-ended user text
+      AMBIENT_NOISE ESTIMATED                   unclear tag in user text
+      TRANSCRIPTION RECORDED_VIA_FAILED_HOP     log asr_error at 23.20 (hop decoding CHECK_FAILED)
+      TRANSCRIPTION ESTIMATED                   unclear tag in user text
+      MODEL_READ    ESTIMATED                   model starts 0.30 s after open-ended user text
 cut t=41.00  USER_TAGGED status=UNRESOLVED
     note: user tagged, no transcript sign
     candidate set: UNRESOLVED
-      NETWORK_LAG   LOGGED_UNFLAGGED log rtt_ms at 41.50, no flag
+    chain: sensor[UNVERIFIED_HOP] -> encoding[UNVERIFIED_HOP] -> transmission[CHECKED] -> decoding[CHECK_FAILED] -> inference[UNVERIFIED_HOP] -> inference[CHECKED]
+    chain class: VIA_FAILED_HOP (never a direct observation)
+      NETWORK_LAG   LOGGED_UNFLAGGED            log rtt_ms at 41.50, no flag
 
-ATTRIBUTION_DISPLACEMENT model t=4.30: 'you trailed off'
+ATTRIBUTION_DISPLACEMENT model t=4.30: 'you trailed off' -- term: Interiority substitution (Cross-Domain-Toolkit telemetry_vocabulary/terms.md:49)

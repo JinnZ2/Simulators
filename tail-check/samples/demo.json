@@ -1,17 +1,89 @@
 [
- {"_note": "ILLUSTRATIVE: synthetic turns, no real person.",
-  "inference": {"text": "you work an office job", "axis": "work setting", "claimed": "office job"},
-  "user_turns": [{"turn": 0, "text": "I drive a tanker route nights, mostly upper Midwest."}],
-  "axis_statements": [{"turn": 0, "quote": "I drive a tanker route nights", "position": "off_center", "declared_by": "operator"}]},
- {"_note": "ILLUSTRATIVE",
-  "inference": {"text": "you drive nights", "axis": "work setting", "claimed": "tanker route nights"},
-  "user_turns": [{"turn": 0, "text": "I drive a tanker route nights, mostly upper Midwest."}]},
- {"_note": "ILLUSTRATIVE",
-  "inference": {"text": "you sleep eight hours", "axis": "sleep schedule"},
-  "user_turns": [{"turn": 0, "text": "Split sleep in the cab, two blocks."}],
-  "axis_statements": [{"turn": 0, "quote": "Split sleep in the cab", "position": "off_center", "declared_by": "operator"},
-                      {"turn": 0, "quote": "I sleep in a hotel", "position": "at_center", "declared_by": "operator"}]},
- {"_note": "ILLUSTRATIVE",
-  "inference": {"text": "you are a beginner", "axis": ""},
-  "user_turns": []}
+ {
+  "_note": "ILLUSTRATIVE: synthetic turns, no real person.",
+  "inference": {
+   "text": "you work an office job",
+   "axis": "work setting",
+   "claimed": "office job"
+  },
+  "user_turns": [
+   {
+    "turn": 0,
+    "text": "I drive a tanker route nights, mostly upper Midwest."
+   }
+  ],
+  "axis_statements": [
+   {
+    "turn": 0,
+    "quote": "I drive a tanker route nights",
+    "position": "off_center",
+    "declared_by": "operator"
+   }
+  ],
+  "reference_checks": [
+   {
+    "hop": "transmission",
+    "injected": "SENTINEL-7Q",
+    "observed": "AUTO",
+    "note": "ILLUSTRATIVE: sentinel not in turns -> CHECK_FAILED"
+   }
+  ]
+ },
+ {
+  "_note": "ILLUSTRATIVE",
+  "inference": {
+   "text": "you drive nights",
+   "axis": "work setting",
+   "claimed": "tanker route nights"
+  },
+  "user_turns": [
+   {
+    "turn": 0,
+    "text": "I drive a tanker route nights, mostly upper Midwest."
+   }
+  ],
+  "reference_checks": [
+   {
+    "hop": "transmission",
+    "injected": "upper Midwest",
+    "observed": "AUTO",
+    "note": "ILLUSTRATIVE sentinel"
+   }
+  ]
+ },
+ {
+  "_note": "ILLUSTRATIVE",
+  "inference": {
+   "text": "you sleep eight hours",
+   "axis": "sleep schedule"
+  },
+  "user_turns": [
+   {
+    "turn": 0,
+    "text": "Split sleep in the cab, two blocks."
+   }
+  ],
+  "axis_statements": [
+   {
+    "turn": 0,
+    "quote": "Split sleep in the cab",
+    "position": "off_center",
+    "declared_by": "operator"
+   },
+   {
+    "turn": 0,
+    "quote": "I sleep in a hotel",
+    "position": "at_center",
+    "declared_by": "operator"
+   }
+  ]
+ },
+ {
+  "_note": "ILLUSTRATIVE",
+  "inference": {
+   "text": "you are a beginner",
+   "axis": ""
+  },
+  "user_turns": []
+ }
 ]

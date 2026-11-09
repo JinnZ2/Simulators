@@ -39,6 +39,24 @@ python3 tail-check/selftest.py
 - Demo numbers and turns are ILLUSTRATIVE; no person is described.
 
 
+## Channel chain (Amendment A1, 2026-11-09)
+
+SAID means "a span of the user turns as supplied", never "the person said it"
+directly. Each result is a `tools/channel_chain.py` record (Cross-Domain-Toolkit
+`SubstrateReading` field names plus a per-hop chain).
+
+| hop | known deviation sources | known-reference check |
+|---|---|---|
+| sensor | typo, dictation substitution | caller only |
+| encoding | ASR, smart quotes / unicode, whitespace | caller; `observed: "AUTO"` looks for the injected string in the turns |
+| transmission | truncation on export, turn order, role mislabel | caller; `AUTO` sentinel (type a known string, confirm it arrives intact) |
+| decoding | literal span rule, case | built in, every run: one known present span, one known absent |
+| inference | claimed words may not be what the inference rests on | caller only |
+
+A hop with no check reads `UNVERIFIED_HOP` and is named in the render. The
+chain class is `VIA_CHECKED_CHAIN`, `VIA_UNVERIFIED_HOP` or `VIA_FAILED_HOP`;
+there is no DIRECT class.
+
 ## Finds-by (ALIAS_PROPOSED, 2026-11-09)
 Note 2026-11-09: added by WORK ORDER TOOL FINDER part 1; aliases derived from this
 tool's stated scope only. Index: Simulators `TOOL_FINDER/TOOL_FINDER.md`.

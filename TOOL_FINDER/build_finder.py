@@ -29,7 +29,7 @@ sys.path.insert(0, HERE)
 import entries as EN  # noqa: E402
 
 DIRS = {"Simulators": None, "method-layer": "method-layer", "JinnZ2": "jinnz2",
-        "Shadow-Hunting": "shadow-hunting"}
+        "Shadow-Hunting": "shadow-hunting", "Cross-Domain-Toolkit": "cross-domain-toolkit"}
 STATUS = os.path.join(HERE, "status.json")
 STATES = ("RUN", "NOT_RUN", "UNKNOWN")
 
@@ -159,6 +159,10 @@ def md(rows):
          "  exited non-zero; NOT_RUN = no check stated or repo not checked out. Status is about the check,",
          "  never about whether the tool is right.",
          "- An entry may serve more than one need; it is listed under its first need and named under the others.",
+         "- **precision / assumes / chain** (Amendment A1) are A1_READING: a model reading of each tool's stated",
+         "  scope, not verbatim. chain names which hops of sensor -> encoding -> transmission -> decoding ->",
+         "  inference the tool reads or ignores. A hop a tool ignores is a hop it cannot vouch for: an AI",
+         "  reading its output reads through that hop UNVERIFIED (see Simulators `tools/channel_chain.py`).",
          ""]
     for key, title in EN.NEEDS:
         L.append("## %s" % title)
@@ -174,6 +178,9 @@ def md(rows):
                 L.append("- breaks when: NO_STATED_LIMITS")
             else:
                 L.append("- breaks when (%s): \"%s\"" % (r["breaks_src"], r["breaks_when"]))
+            L.append("- precision: %s" % r["precision"])
+            L.append("- assumes: %s" % r["assumes"])
+            L.append("- chain: %s" % r["chain"])
             sd = r["status_detail"]
             det = sd.get("last_line") or sd.get("why") or ""
             L.append("- status: %s%s" % (r["status"], (" -- `%s` -> %s" % (sd.get("cmd"), det)) if sd.get("cmd") else (" -- " + det if det else "")))
@@ -189,7 +196,8 @@ def md(rows):
     for g in EN.GAPS:
         L.append("| %s |" % " | ".join(g))
     L += ["", "## Scope of this index", "",
-          "Repos read: Simulators, method-layer, JinnZ2/JinnZ2, Shadow-Hunting. Other CC0 JinnZ2 repos were",
+          "Repos read: Simulators, method-layer, JinnZ2/JinnZ2, Shadow-Hunting, Cross-Domain-Toolkit (A2).",
+          "Other CC0 JinnZ2 repos were",
           "not read for this index; a need marked as a GAP may have a tool there. `tools/tool_inventory.json`",
           "(Simulators) lists 3469 modules across 81 repos and is the wider, unverified search surface.", ""]
     return "\n".join(L)
@@ -220,6 +228,8 @@ def selftest():
     j = json.loads(json.dumps({"entries": rows}))
     check(len(j["entries"]) == len(EN.E), "json round trip")
     check(len(set("%s:%s" % (e["repo"], e["path"]) for e in EN.E)) == len(EN.E), "no duplicate entry")
+    check(all(e.get("precision") and e.get("assumes") and e.get("chain") for e in EN.E), "A1 fields on every entry")
+    check(set(EN.A1) == {e["name"] for e in EN.E}, "A1 table matches entries exactly")
     print("checks: %d   failed: %d" % (tot, tot - ok))
     return 0 if ok == tot else 1
 

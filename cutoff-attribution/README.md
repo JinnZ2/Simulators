@@ -45,6 +45,36 @@ python3 cutoff-attribution/selftest.py
 - Demo timestamps and text are ILLUSTRATIVE; no real session.
 
 
+## Channel chain (Amendment A1, 2026-11-09)
+
+No reading here is direct. Each candidate sits at one hop of the voice chain,
+and its evidence is read through that hop.
+
+| hop | candidates | known deviation sources | known-reference check |
+|---|---|---|---|
+| sensor | AMBIENT_NOISE, TASK_PAUSE | room noise, mic placement or clipping, the user's task | caller (`reference_checks`) |
+| encoding | ENDPOINTING | endpointer / VAD timeout, codec concealment | caller |
+| transmission | NETWORK_LAG | latency, drop, relay reconnect | caller (e.g. a known ping sequence echoed) |
+| decoding | TRANSCRIPTION | ASR misrecognition, punctuation, [inaudible] tagging | caller (e.g. a known phrase read through ASR) |
+| inference | MODEL_READ | partial utterance read as complete | caller |
+| inference (this tool) | -- | punctuation rule, word list, [CHOICE] constants | built in, every run: a known cut must be detected |
+
+A log event counts as `OBSERVED` only when its hop passed a reference check.
+Through an unchecked hop it is `RECORDED_VIA_UNVERIFIED_HOP`, through a failed
+one `RECORDED_VIA_FAILED_HOP`; both count as ESTIMATED. "OBSERVED" therefore
+means "recorded at a hop that reproduced a known input", not a direct view.
+Every cut is a `tools/channel_chain.py` record with a chain class that is never
+DIRECT.
+
+## Terms (Amendment A2)
+
+ATTRIBUTION_DISPLACEMENT cites two terms from Cross-Domain-Toolkit
+`telemetry_vocabulary/terms.md`, read from a sibling checkout at run time with
+their line locator, and not re-coined: **Interiority substitution** (a channel
+event attributed to the user's state) and **Care inversion** (the same,
+delivered as care). Which phrase maps to which term is this tool's reading.
+With no checkout the term reads `TERM_NOT_CHECKED`.
+
 ## Finds-by (ALIAS_PROPOSED, 2026-11-09)
 Note 2026-11-09: added by WORK ORDER TOOL FINDER part 1; aliases derived from this
 tool's stated scope only. Index: Simulators `TOOL_FINDER/TOOL_FINDER.md`.

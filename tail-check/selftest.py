@@ -52,5 +52,18 @@ recs = json.load(open(os.path.join(HERE, "samples", "demo.json")))
 vs = [tc.check(x)["verdict"] for x in recs]
 check(vs == ["FILLED", "SAID", "FILLED", "UNRATED"], "demo verdicts %s" % vs)
 check(set(vs) == set(tc.VERDICTS), "all three verdicts reached on demo")
+rs = [tc.check(x) for x in recs]
+check(all(r["record"]["chain_class"] != "DIRECT" for r in rs), "no reading is DIRECT")
+check(rs[1]["record"]["chain"][2]["check"] == "CHECKED", "AUTO sentinel present -> transmission CHECKED")
+check(rs[0]["record"]["chain"][2]["check"] == "CHECK_FAILED", "AUTO sentinel absent -> CHECK_FAILED")
+check(rs[1]["record"]["chain"][3]["check"] == "CHECKED", "decoding hop self-check passes")
+check(rs[1]["verdict"] == "SAID" and "sensor" in rs[1]["record"]["unverified_hops"],
+      "SAID still names its unverified hops")
+check(rs[3]["record"]["chain_class"] == "VIA_UNVERIFIED_HOP", "no reference checks -> VIA_UNVERIFIED_HOP")
+check("value" in rs[0]["record"] and "provenance" in rs[0]["record"], "record has SubstrateReading fields")
+saved = tc.SELF_REF
+tc.SELF_REF = (("abc", "abc", False),)
+check(tc._self_check()["check"] == "CHECK_FAILED", "self-check fails on a wrong expectation")
+tc.SELF_REF = saved
 print("checks: %d   failed: %d" % (total, total - ok))
 sys.exit(0 if ok == total else 1)

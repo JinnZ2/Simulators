@@ -43,6 +43,23 @@ What this does NOT do:
   - characterize any person.
 
 The span logic is imported from ../tools/sourced.py, not copied.
+
+CHANNEL CHAIN (Amendment A1, 2026-11-09). SAID is never "the person said it"
+directly; it is "a span of the user turns AS SUPPLIED". Those turns came
+through hops, each with its own deviation sources:
+  sensor        the person typing or speaking (typo, dictation substitution)
+  encoding      capture of the turn (ASR, smart quotes, unicode, whitespace)
+  transmission  export into this input (truncation, turn order, role labels)
+  decoding      this tool's span match (literal, case-sensitive)
+  inference     the inference under test (claimed words may not be what it rests on)
+Known-reference checks come from `reference_checks` in the input: a known
+input per hop and what came out. For `transmission` (and `encoding`) the
+caller may set observed to "AUTO": the tool then looks for the injected
+string verbatim in the user turns, which is the operator's sentinel check
+("I typed SENTINEL-7Q; did it arrive intact?"). The decoding hop is checked on
+every run against built-in known spans. Each result is a tools/channel_chain.py
+record; its chain_class is never DIRECT, and an unchecked hop is named as
+UNVERIFIED_HOP in the render.
 """
 import json
 import os
@@ -51,6 +68,16 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.dirname(HERE))
 from tools import sourced  # noqa: E402  (import, not a copy)
+from tools import channel_chain as cc  # noqa: E402
+
+DEVIATION = {
+    "sensor": ["typo", "dictation substitution"],
+    "encoding": ["ASR misrecognition", "smart quotes / unicode normalisation", "whitespace"],
+    "transmission": ["truncation on export", "turn order", "role mislabel"],
+    "decoding": ["literal span rule misses paraphrase", "case sensitivity"],
+    "inference": ["claimed words not what the inference rests on"],
+}
+SELF_REF = (("xx tanker route yy", "tanker route", True), ("xx tanker route yy", "office", False))
 
 VERDICTS = ("SAID", "FILLED", "UNRATED")
 POSITIONS = ("off_center", "at_center")
@@ -74,7 +101,45 @@ def _span_in_turns(value, turns, label):
     return None, None
 
 
+def _self_check():
+    """Known spans through this tool's own match: one present, one absent."""
+    got = []
+    for text, val, _ in SELF_REF:
+        sp, _t = _span_in_turns(val, [{"turn": 0, "text": text}], "self")
+        got.append(sp is not None)
+    return cc.hop("decoding", DEVIATION["decoding"], injected=[x[2] for x in SELF_REF],
+                  observed=got, note="tail-check's own span match, known-span reference")
+
+
+def _chain(record, turns):
+    refs = {}
+    for rc in record.get("reference_checks") or []:
+        h = rc.get("hop")
+        if h in cc.HOPS and h != "decoding":
+            obs = rc.get("observed")
+            if obs == "AUTO":
+                inj = rc.get("injected") or ""
+                obs = inj if inj and any(inj in (t.get("text") or "") for t in turns or []) else "NOT_FOUND"
+            refs[h] = (rc.get("injected"), obs)
+    chain = []
+    for h in cc.HOPS:
+        if h == "decoding":
+            chain.append(_self_check())
+        else:
+            inj, obs = refs.get(h, (None, None))
+            chain.append(cc.hop(h, DEVIATION[h], injected=inj, observed=obs))
+    return chain
+
+
 def check(record):
+    out = _check(record)
+    out["record"] = cc.reading(out["verdict"], "text_turns", "label",
+                              _chain(record, record.get("user_turns")),
+                              provenance={"axis": out["axis"], "claimed": out["claimed"]})
+    return out
+
+
+def _check(record):
     inf = record.get("inference") or {}
     turns = record.get("user_turns")
     out = {"inference": inf.get("text"), "axis": inf.get("axis"),
@@ -131,6 +196,10 @@ def render(results):
     lines = ["tail-check readout (a verdict says where content came from, not whether it is true)", ""]
     for r in results:
         lines.append("%-8s axis=%s  inference=%r" % (r["verdict"], r["axis"], r["inference"]))
+        rec = r["record"]
+        lines.append("    chain:   %s" % cc.render_chain(rec["chain"]))
+        lines.append("    chain class: %s%s (never a direct observation)" % (
+            rec["chain_class"], (" -- unverified: " + ", ".join(rec["unverified_hops"])) if rec["unverified_hops"] else ""))
         lines.append("    claimed: %r" % (r["claimed"],))
         lines.append("    reason:  %s" % r["reason"])
         if r["span"]:

@@ -14271,6 +14271,15 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   It also flags ATTRIBUTION_DISPLACEMENT phrases in model turns. The three
   thresholds are [CHOICE] values. Check count printed by
   `python3 cutoff-attribution/selftest.py`.
+- `tools/channel_chain.py` — Amendment A1 of the TOOL FINDER order
+  (2026-11-09). It defines a reading record that carries its chain
+  (sensor -> encoding -> transmission -> decoding -> inference). Each hop
+  lists its deviation sources and a known-reference check, returning CHECKED,
+  CHECK_FAILED or UNVERIFIED_HOP. A record's chain class is never DIRECT. Field
+  names are Cross-Domain-Toolkit `SubstrateReading`'s, read live from a
+  sibling checkout and checked against a mirror (Amendment A2). Both
+  tail-check and cutoff-attribution emit these records, and each checks its
+  own reading against a built-in known input on every run.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
