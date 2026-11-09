@@ -92,3 +92,8 @@ in this step. On this repository at the time of writing, `verify` reads 419 such
 See `CLAIM_TABLE.md` MP_011.
 
 Selftest count is printed by `provenance.py --selftest` (the 29 below is the count at landing). Stdlib only, parses under Python 3.9. CC0.
+
+Note 2026-11-09 (round 7): MP_012 logged. The date windows of the table rows overlap, so the rows
+are not independent. A scratch run that added the 4 missing rows changed the decode of 390 of the
+1030 commits outside the stale set. Option b (add rows) was the owner's pick. It is not written
+here, because of the no-model-identifier rule; see MP_012. `releases.json` is unchanged.

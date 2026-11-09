@@ -47,12 +47,40 @@ check(nc.VALIDITY == "CONDITIONAL(circular_control)" and nc.VALIDITY_LINE in nc.
 check(nc.VALIDITY_OLD == "CONDITIONAL(same_author)" and nc.VALIDITY_OLD not in nc.render(n=10),
       "round 6 rename: old label recorded, not emitted")
 t3 = nc.three_outcome(n=20)
-check(set(nc.DESIGNED_IDENTIFIABLE) == set(t3), "round 6: every control has a designed-identifiability entry")
+check(set(t3) <= set(nc.DESIGNED_IDENTIFIABLE), "round 6: every control has a designed-identifiability entry")
 po = nc.pick_options(t3)
 check(po["current"]["MISSED_IDENTIFIABLE"] == 0 and po["A"]["WRONG"] < po["current"]["WRONG"],
       "round 6: option A moves non-identifiable ESTIMATED out of WRONG")
 check(all(sum(v.values()) == sum(po["current"].values()) for v in po.values()),
       "round 6: every option scores the same number of draws")
+# Note 2026-11-09 (round 7): adopted scoring (pick: both) and noise controls.
+import json
+ad = nc.adopted(n=20)
+check(set(ad) == set(nc.DESIGNED_IDENTIFIABLE), "round 7: adopted score covers every declared control")
+check(all(sum(r["counts"].values()) == 20 for r in ad.values()), "round 7: adopted outcomes partition every draw")
+noise = [lab for lab in ad if "/noise_k" in lab]
+check(len(noise) == len(nc.SOURCES) * len(nc.NOISE_K) and all(nc.DESIGNED_IDENTIFIABLE[l][0] for l in noise),
+      "round 7: one noise control per source per k, all designed identifiable")
+check(all(ad[l]["counts"]["CORRECT_ABSTAIN"] == 20 for l in ad
+          if not nc.DESIGNED_IDENTIFIABLE[l][0]), "round 7: non-identifiable abstentions score CORRECT_ABSTAIN")
+hidden = inwin = outwin = True
+for lab, g, true_set in nc.noise_cases():
+    rng = nc.nh.np.random.default_rng(7)
+    for _ in range(20):
+        d = g(rng)
+        src = next(iter(true_set))
+        hidden &= src not in json.dumps(d)
+        ev = [e for e in d["signal_log"] if e["kind"] == nc.PLANT[src]]
+        inwin &= any(abs(e["t"] - nc.CUT_T) <= nc.ca.WINDOW_S for e in ev)
+        outwin &= any(abs(e["t"] - nc.CUT_T) > nc.ca.WINDOW_S for e in d["signal_log"])
+check(hidden, "round 7: noise data carries no field naming the source (label hidden from the rule set)")
+check(inwin and outwin, "round 7: planted event inside the window, one decoy outside it")
+saved = nc.verdict
+nc.verdict = lambda d: "NONE"
+adn = nc.adopted(n=10)
+nc.verdict = saved
+check(all(adn[l]["counts"]["MISSED_IDENTIFIABLE"] == 10 for l in noise),
+      "round 7: a constant-NONE classifier scores MISSED_IDENTIFIABLE on the noise controls (outcome reachable)")
 r = subprocess.run([sys.executable, os.path.join(HERE, "null_calibration.py"), "--selftest"], capture_output=True, text=True)
 check(r.returncode == 2, "module refuses --selftest")
 print("checks: %d   failed: %d" % (total, total - ok))

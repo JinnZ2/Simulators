@@ -560,3 +560,34 @@ Worktree git status clean after the runs. PR #252, branch claude/tool-finder.
      standing no-identifier rule needs you to clear.
 
 Selftest lines (throwaway worktree, commit 5fcb172): selftest_null "checks: 21   failed: 0"; cutoff selftest "checks: 25   failed: 0"; check_v02 "checks: 11   failed: 0"; check_landing "checks: 5   failed: 0"; build_finder "checks: 17   failed: 0"; pytest tests 194 passed, 3 failed (the pinned run_manifest set); known_red VERDICT: PASS.
+
+## Round 7 (2026-11-09)
+
+1. BLOCKED. The order names an attachment, ICSC_v0.2_spec.md. No such file reached this session;
+   a filesystem search finds none. SPEC_v0.2.md is unchanged, and the "rev 2026-11-09 11:44"
+   section is appended when the file arrives.
+2. DONE.
+   - Adopted scoring is the owner's pick "both". An abstention on a control not designed to
+     identify is CORRECT_ABSTAIN. An abstention on a control designed to identify is
+     MISSED_IDENTIFIABLE.
+   - Added 12 noise controls, one per source at k = 3 and k = 6. Each is designed to identify:
+     one flagged event on a checked hop inside the window, k distractors on unchecked hops, k
+     unflagged measurements, and one same-hop or own-kind decoy outside the window. The data
+     carries no field naming the source, which a selftest check asserts.
+   - Results:
+       noise controls only     CORRECT_NAME 3600   CORRECT_ABSTAIN 0     MISSED_IDENTIFIABLE 0   WRONG 0
+       total (all controls)    CORRECT_NAME 5400   CORRECT_ABSTAIN 2700  MISSED_IDENTIFIABLE 0   WRONG 0
+   - MISSED_IDENTIFIABLE is zero because the noise only touches inputs the rules already ignore.
+     That is the CONDITIONAL(circular_control) result again: wiring, not validity.
+   - A constant-NONE classifier scores MISSED_IDENTIFIABLE on every noise control, which shows
+     the outcome is reachable.
+   - The round-4 three-outcome table is still printed (1800 / 300 / 2400) as a correction
+     specimen.
+3. PARTLY DONE / BLOCKED.
+   - DONE: MP_012 logged, with counts only. 421 stale commits. The dry run added rows for the 4
+     missing versions. Reverse-T21 failed on 390 of the 1030 commits outside the stale set,
+     because the rows' date windows overlap and so the rows are not independent.
+   - BLOCKED: the owner picked option b (add rows). One of the four versions is the identifier
+     of the session's own model, and this session may not write any model identifier into a
+     pushed file. The four rows were given to the owner in chat to add by hand. releases.json
+     is unchanged.

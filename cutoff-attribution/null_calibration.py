@@ -121,6 +121,47 @@ def gen_measurement_only(rng):
             "reference_checks": [{"hop": "transmission", "injected": "ref", "observed": "ref"}]}
 
 
+# Note 2026-11-09 (round 7): controls DESIGNED to identify under noise. Each
+# plants one flagged event of the source's kind on the source's hop, inside the
+# window (jitter up to +/-1.9 s against WINDOW_S 2.0), with that hop
+# reference-checked; around it, k distractor events on other (unchecked) hops,
+# unflagged measurements, and one event of a same-hop kind (or the source's own
+# kind) placed OUTSIDE the window. The data carries no field naming the source:
+# the rule set sees only the log, so the label is hidden from it (asserted in
+# selftest_null.py). Identifiable by design: exactly one checked-hop event
+# inside the window.
+NOISE_K = (3, 6)
+
+
+def gen_noisy(source, k):
+    def g(rng):
+        hop = ca.HOP_OF[source]
+        log = []
+        for _ in range(k):
+            log.append(_distractors(rng, hop)[0])
+        for _ in range(k):
+            log.append({"t": CUT_T + float(rng.uniform(-2, 2)),
+                        "kind": ("rtt_ms", "asr_confidence")[int(rng.integers(2))]})
+        same = [x for x, h in ca.HOP_OF.items() if h == hop and x != source and x in PLANT]
+        oth = same[0] if same else source
+        sign = 1.0 if rng.uniform() < 0.5 else -1.0
+        out = {"t": CUT_T + sign * float(rng.uniform(ca.WINDOW_S + 0.2, ca.WINDOW_S + 1.0)), "kind": PLANT[oth]}
+        ev = {"t": CUT_T + float(rng.uniform(-1.9, 1.9)), "kind": PLANT[source]}
+        for e in (out, ev):
+            if e["kind"] in MEASURED:
+                e["flag"] = True
+        log += [out, ev]
+        order = rng.permutation(len(log))
+        return {"segments": _base(rng), "cut_marks": [{"t": CUT_T}],
+                "signal_log": [log[int(i)] for i in order],
+                "reference_checks": [{"hop": hop, "injected": "ref", "observed": "ref"}]}
+    return g
+
+
+def noise_cases():
+    return [("%s/noise_k%d" % (src, k), gen_noisy(src, k), {src}) for k in NOISE_K for src in SOURCES]
+
+
 def retained(data, source):
     """True if `source` is in the candidate set of the cut (kept, not assigned)."""
     return any(source in c["candidate_set"] for c in ca.attribute(data)["cuts"])
@@ -183,7 +224,9 @@ DESIGNED_IDENTIFIABLE = dict(
     + [("%s/hop_unchecked" % s, (False, "planted event on a hop with no reference check; NONE is gating-correct"))
        for s in SOURCES]
     + [("sensor_collision", (False, "two sources planted on one checked hop; designed not to separate")),
-       ("NETWORK_LAG/measurement_only", (False, "only an unflagged rtt_ms trace; designed as the expected miss"))])
+       ("NETWORK_LAG/measurement_only", (False, "only an unflagged rtt_ms trace; designed as the expected miss"))]
+    + [("%s/noise_k%d" % (src, k), (True, "planted on a checked hop inside the window; %d distractors, "
+        "one same-hop event outside the window; label hidden" % k)) for k in NOISE_K for src in SOURCES])
 
 
 def pick_options(t3=None):
@@ -210,6 +253,46 @@ def pick_options(t3=None):
             tot["WRONG"] += wrong
         out[opt] = tot
     return out
+
+
+# Note 2026-11-09 (round 7): adopted scoring, the owner's pick "both".
+#   CORRECT_NAME          the verdict names a true source.
+#   MISSED_IDENTIFIABLE   NONE on a control designed to identify its source.
+#   CORRECT_ABSTAIN       NONE on a control not designed to identify, true
+#                         source kept in the candidate set (status UNRESOLVED
+#                         or ESTIMATED; the round-4 status condition dropped).
+#   WRONG                 a non-true source named, or NONE with the true
+#                         source dropped from the candidate set.
+# The round-4 three-outcome table is still printed, as a correction specimen.
+ADOPTED = ("CORRECT_NAME", "CORRECT_ABSTAIN", "MISSED_IDENTIFIABLE", "WRONG")
+
+
+def score_adopted(data, true_set, identifiable):
+    cut = ca.attribute(data)["cuts"][0]
+    v = verdict(data)
+    if v != "NONE":
+        return ("CORRECT_NAME", "named") if v in true_set else ("WRONG", "named_non_true")
+    if identifiable:
+        return "MISSED_IDENTIFIABLE", "abstain_status_" + cut["status"]
+    if not any(t in cut["candidate_set"] for t in true_set):
+        return "WRONG", "abstain_true_dropped"
+    return "CORRECT_ABSTAIN", "abstain_status_" + cut["status"]
+
+
+def adopted(n=N_DRAWS, seed=42):
+    """Adopted score over the round-4 controls (same seeds, same draws) and the
+    round-7 noise controls (seeds continue after them)."""
+    rows = {}
+    for k, (label, g, true_set) in enumerate(_cases() + noise_cases()):
+        rng = nh.np.random.default_rng(seed + k)
+        cnt = dict((o, 0) for o in ADOPTED)
+        why = {}
+        for _ in range(n):
+            o, r = score_adopted(g(rng), true_set, DESIGNED_IDENTIFIABLE[label][0])
+            cnt[o] += 1
+            why[o + ":" + r] = why.get(o + ":" + r, 0) + 1
+        rows[label] = {"true": sorted(true_set), "counts": cnt, "reasons": why}
+    return rows
 
 
 def confusion(n=N_DRAWS, seed=42):
@@ -292,11 +375,27 @@ def render(n=N_DRAWS):
         ident, basis = DESIGNED_IDENTIFIABLE[label]
         L.append("  %-28s %-5s ESTIMATED %3d  %s" % (label, "yes" if ident else "no",
                  r["wrong_reasons"].get("abstain_status_ESTIMATED", 0), basis))
-    L += ["", "round 6 pick options (readout only; the score above is unchanged until one is picked)",
+    L += ["", "round 6 pick options (readout; superseded by the round 7 pick: both, below)",
           "  %-8s %13s %15s %7s %20s" % ("option", "CORRECT_NAME", "CORRECT_ABSTAIN", "WRONG", "MISSED_IDENTIFIABLE")]
     for opt, tt in pick_options(t3).items():
         L.append("  %-8s %13d %15d %7d %20d" % (opt, tt["CORRECT_NAME"], tt["CORRECT_ABSTAIN"],
                                                tt["WRONG"], tt["MISSED_IDENTIFIABLE"]))
+    ad = adopted(n)
+    L += ["", "ADOPTED SCORE (Note 2026-11-09, round 7, owner's pick: both)",
+          "%-28s %13s %15s %20s %7s" % ("", "CORRECT_NAME", "CORRECT_ABSTAIN", "MISSED_IDENTIFIABLE", "WRONG")]
+    tot = dict((o, 0) for o in ADOPTED)
+    ntot = dict((o, 0) for o in ADOPTED)
+    for label, r in ad.items():
+        for o in ADOPTED:
+            tot[o] += r["counts"][o]
+            if "/noise_k" in label:
+                ntot[o] += r["counts"][o]
+        L.append("%-28s %13d %15d %20d %7d" % (label, r["counts"]["CORRECT_NAME"], r["counts"]["CORRECT_ABSTAIN"],
+                                                r["counts"]["MISSED_IDENTIFIABLE"], r["counts"]["WRONG"]))
+    L.append("%-28s %13d %15d %20d %7d" % ("total (all controls)", tot["CORRECT_NAME"], tot["CORRECT_ABSTAIN"],
+                                            tot["MISSED_IDENTIFIABLE"], tot["WRONG"]))
+    L.append("%-28s %13d %15d %20d %7d" % ("noise controls only", ntot["CORRECT_NAME"], ntot["CORRECT_ABSTAIN"],
+                                            ntot["MISSED_IDENTIFIABLE"], ntot["WRONG"]))
     L += ["", "Scope: the controls test the evidence-gating rules this file plants against. A real",
           "channel can produce cues the generators never draw (overlapping hops, mislabelled",
           "logs, a reference check that passes while the hop fails on other inputs)."]

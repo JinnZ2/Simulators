@@ -89,6 +89,7 @@ tool's stated scope only. Index: Simulators `TOOL_FINDER/TOOL_FINDER.md`.
 - breaks when: "Detection of unmarked cuts reads punctuation; a transcriber that never punctuates makes every user segment look open-ended."
 - breaks when (Note 2026-11-09, ICSC v0.2 T30): the null calibration's controls were written to the same rule set they test, so its output carries validity = CONDITIONAL(same_author) (renamed, see next line); its FP/TP figures show wiring, not that the rules separate sources on a real channel.
 - Note 2026-11-09 (round 6): the label is now CONDITIONAL(circular_control); CONDITIONAL(same_author) is the old name for the same state, kept as `VALIDITY_OLD` in null_calibration.py.
+- Note 2026-11-09 (round 7): adopted scoring is the owner's pick "both". Two changes: an abstention on a control not designed to identify is CORRECT_ABSTAIN, and an abstention on one that is designed to identify is MISSED_IDENTIFIABLE. Twelve noise controls were added, each designed to identify with its source label hidden. They hold k distractors and one out-of-window decoy, and every draw on them is CORRECT_NAME (3600 / 0 MISSED_IDENTIFIABLE). The noise reaches only things the rules already ignore, so this is the circular-control result again: wiring, not validity. A constant-NONE classifier scores MISSED_IDENTIFIABLE on all of them, so the outcome is reachable. The round-4 table is kept in the output as a correction specimen.
 
 ## Four terms and null calibration (FINDER FOLLOW-UP, 2026-11-09)
 Note 2026-11-09: added by FINDER FOLLOW-UP items A2 and C.

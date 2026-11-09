@@ -303,3 +303,33 @@ a decoded version; the same date without the check still decodes SINGLE, which s
 doing the work. Live reading: 419 commits move out of the agree/disagree rows into stale_table.
 `releases.json` is unchanged (its extension stays BLOCKED, MP_010). Status: SUPPORTED on the selftest.
 
+
+### MP_012 — date windows overlap, so table rows are not independent; reverse-T21 failed
+
+Note 2026-11-09 (round 7). Scratch dry run, never pushed, counts only. The tree had grown, so the
+stale_table count was 421 (MP_011 recorded 419). The snapshot added one observed_bound row per
+version a trailer names without a row (4 versions), built from that version's first/last trailer
+dates. Results:
+
+- stale_table 421 -> 0
+- agree 315 -> 229
+- disagree 94 -> 254
+- ambiguous_contains 17 -> 212
+- ambiguous_excludes 3 -> 155
+- unstated 601 -> 601
+
+Reverse-T21 asks for two things. The 421 return to decoded, which held. Unrelated rows stay
+unchanged, which FAILED: 390 of the 1030 commits outside the stale set changed decode. The new
+rows' date windows overlap the existing ones, so a row's decode depends on every other row it
+overlaps, and the rows are not independent. Adding a row is a change to the whole decode, not a
+local addition.
+
+**Falsifier:** a table extension under which the non-stale decodes are byte-identical before and
+after.
+
+**Status: SUPPORTED on the scratch run.**
+
+Note 2026-11-09 (round 7, item 3): the owner picked option b (add rows). The rows are not written.
+This session operates under a standing rule against writing any model identifier into a pushed
+file, and one of the four versions is the identifier of the session's own model. The four
+rows were given to the owner in chat. `releases.json` is unchanged; MP_010 and MP_011 stand.
