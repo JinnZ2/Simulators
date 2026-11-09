@@ -307,7 +307,7 @@ Also serves this need: multi_substrate_calibration (Cross-Domain-Toolkit), runne
 - precision: per claim: one of eight verdicts + who (K = document, M = model overlay)
 - assumes: each claim hand-classified by the auditor
 - chain: reads: inference (the document's claims). ignores: how the document was produced
-- status: NOT_RUN -- build run without --run
+- status: RUN -- `python3 claim-audits/claim_audit_visibility.py` ->     only thing standing between this and an unfalsifiable framework.
 
 ### scope-bound-shapes  (Simulators / `scope-bound-shapes/`)
 - need: claim vs method / scope overreach
@@ -317,7 +317,7 @@ Also serves this need: multi_substrate_calibration (Cross-Domain-Toolkit), runne
 - precision: per pair of bindings: SCOPE_COLLISION with the colliding frozen variables
 - assumes: the shape is taken on the spec's word; FROZEN lists declared
 - chain: reads: encoding (what a binding declares frozen). ignores: whether the shape is real
-- status: NOT_RUN -- build run without --run
+- status: RUN -- `python3 scope-bound-shapes/scope.py --selftest` -> 29/29 checks passed
 
 Also serves this need: membership-probe (Simulators)
 
