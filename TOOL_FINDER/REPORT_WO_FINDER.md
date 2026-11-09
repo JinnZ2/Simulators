@@ -112,7 +112,7 @@ The Simulators root suite was also run in a worktree at the branch head: `pytest
 
 | repo | branch | head | PR | merge SHA |
 |---|---|---|---|---|
-| JinnZ2/Cross-Domain-Toolkit | claude/tool-finder-aliases | ec3b38a | (see PR list) | PENDING (not merged) |
+| JinnZ2/Cross-Domain-Toolkit | claude/tool-finder-aliases | ec3b38a | #13 | PENDING (not merged) |
 
 Cross-Domain-Toolkit carries a CC0 LICENSE. Its four package test suites pass. telemetry_vocabulary is markdown only and has no check command.
 
