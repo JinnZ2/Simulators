@@ -91,8 +91,9 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "checks: 18   failed: 0",
-    "commit": "a8028b2",
-    "cmd": "python3 tail-check/selftest.py"
+    "commit": "3f7d3f5",
+    "cmd": "python3 tail-check/selftest.py",
+    "where": "worktree at HEAD"
    }
   },
   {
@@ -123,8 +124,9 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "checks: 41   failed: 0",
-    "commit": "a8028b2",
-    "cmd": "python3 tools/sourced.py --selftest"
+    "commit": "3f7d3f5",
+    "cmd": "python3 tools/sourced.py --selftest",
+    "where": "worktree at HEAD"
    }
   },
   {
@@ -157,8 +159,9 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "selftest: 38/38 checks PASS",
-    "commit": "a8028b2",
-    "cmd": "python3 evidence-demotion-detector/selftest.py"
+    "commit": "3f7d3f5",
+    "cmd": "python3 evidence-demotion-detector/selftest.py",
+    "where": "worktree at HEAD"
    }
   },
   {
@@ -188,8 +191,9 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "checks: 27   failed: 0",
-    "commit": "a8028b2",
-    "cmd": "python3 tools/provenance_marker.py --selftest"
+    "commit": "3f7d3f5",
+    "cmd": "python3 tools/provenance_marker.py --selftest",
+    "where": "worktree at HEAD"
    }
   },
   {
@@ -206,22 +210,23 @@
     "representativeness of a sample share"
    ],
    "measures_file": "moving-mean-tracker/README.md",
-   "measures": "The only provider is synthetic (`provider.FixtureProvider`), and nothing in this folder measures any population.",
+   "measures": "A mean anchored to a moving target (GDP, a wealth gap, a skills or literacy score) moves with the target. Any norm, filter or loss tied to that mean inherits the drift.",
    "breaks_file": "moving-mean-tracker/README.md",
-   "breaks_when": "A dropped record with no `drop_rule` is refused.",
+   "breaks_when": "The only provider is synthetic (`provider.FixtureProvider`), and nothing in this folder measures any population.",
    "check": "python3 moving-mean-tracker/test_tracker.py",
    "avoided": "AVOIDED_TERM_UNSTATED",
-   "measures_src": "moving-mean-tracker/README.md:3",
+   "measures_src": "moving-mean-tracker/README.md:16",
    "measures_quote_state": "FOUND",
-   "breaks_src": "moving-mean-tracker/README.md:55",
+   "breaks_src": "moving-mean-tracker/README.md:3",
    "breaks_quote_state": "FOUND",
    "status": "RUN",
    "status_detail": {
     "status": "RUN",
     "exit": 0,
     "last_line": "checks: 68   failed: 0",
-    "commit": "a8028b2",
-    "cmd": "python3 moving-mean-tracker/test_tracker.py"
+    "commit": "3f7d3f5",
+    "cmd": "python3 moving-mean-tracker/test_tracker.py",
+    "where": "worktree at HEAD"
    }
   },
   {
@@ -253,8 +258,9 @@
     "status": "UNKNOWN",
     "exit": 1,
     "last_line": "  FAILED and they are the only tokens that fire unmasked",
-    "commit": "a8028b2",
-    "cmd": "python3 evaluation-frame/selftest_frame.py"
+    "commit": "3f7d3f5",
+    "cmd": "python3 evaluation-frame/selftest_frame.py",
+    "where": "worktree at HEAD"
    }
   },
   {
@@ -287,8 +293,9 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "checks: 15   failed: 0",
-    "commit": "a8028b2",
-    "cmd": "python3 cutoff-attribution/selftest.py"
+    "commit": "3f7d3f5",
+    "cmd": "python3 cutoff-attribution/selftest.py",
+    "where": "worktree at HEAD"
    }
   },
   {
@@ -318,8 +325,9 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "checks: 50   failed: 0",
-    "commit": "a8028b2",
-    "cmd": "python3 reporting-chain-loss/test_hop.py"
+    "commit": "3f7d3f5",
+    "cmd": "python3 reporting-chain-loss/test_hop.py",
+    "where": "worktree at HEAD"
    }
   },
   {
@@ -335,22 +343,23 @@
     "correction channel requirements"
    ],
    "measures_file": "return-path/README.md",
-   "measures": "and returns the **SET** of requirements failed.",
+   "measures": "Scores a proposed or existing correction channel against four requirements and returns the **SET** of requirements failed.",
    "breaks_file": "return-path/README.md",
    "breaks_when": "A channel can be valuable and still not be a return path. Marking a gap is not correcting an error.",
-   "check": "python3 return-path/test_return.py",
+   "check": "cd return-path && python3 test_return.py",
    "avoided": "AVOIDED_TERM_UNSTATED",
-   "measures_src": "return-path/README.md:7",
+   "measures_src": "return-path/README.md:6",
    "measures_quote_state": "FOUND",
    "breaks_src": "return-path/README.md:9",
    "breaks_quote_state": "FOUND",
-   "status": "UNKNOWN",
+   "status": "RUN",
    "status_detail": {
-    "status": "UNKNOWN",
-    "exit": 1,
-    "last_line": "FileNotFoundError: [Errno 2] No such file or directory: 'return_path.py'",
-    "commit": "a8028b2",
-    "cmd": "python3 return-path/test_return.py"
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "93 checks, 0 failed",
+    "commit": "3f7d3f5",
+    "cmd": "cd return-path && python3 test_return.py",
+    "where": "worktree at HEAD"
    }
   },
   {
@@ -379,8 +388,9 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "selftest: 100 checks, 0 failed",
-    "commit": "a8028b2",
-    "cmd": "python3 readout-count/selftest_rc.py"
+    "commit": "3f7d3f5",
+    "cmd": "python3 readout-count/selftest_rc.py",
+    "where": "worktree at HEAD"
    }
   },
   {
@@ -409,8 +419,9 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "selftest: 51 checks, 0 failed",
-    "commit": "a8028b2",
-    "cmd": "python3 transmission-decay/selftest_power.py"
+    "commit": "3f7d3f5",
+    "cmd": "python3 transmission-decay/selftest_power.py",
+    "where": "worktree at HEAD"
    }
   },
   {
@@ -440,8 +451,9 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "selftest: 43 checks, 0 failed",
-    "commit": "a8028b2",
-    "cmd": "python3 encoding-selection/selftest_es.py"
+    "commit": "3f7d3f5",
+    "cmd": "python3 encoding-selection/selftest_es.py",
+    "where": "worktree at HEAD"
    }
   },
   {
@@ -474,7 +486,8 @@
     "exit": 0,
     "last_line": "selftest 17/17",
     "commit": "919f9d3",
-    "cmd": "python3 corpus_prior_audit/audit.py --selftest"
+    "cmd": "python3 corpus_prior_audit/audit.py --selftest",
+    "where": "worktree at HEAD"
    }
   },
   {
@@ -504,8 +517,9 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "selftest: 28 checks, 0 failed",
-    "commit": "a8028b2",
-    "cmd": "python3 falsifier-audit/selftest_fa.py"
+    "commit": "3f7d3f5",
+    "cmd": "python3 falsifier-audit/selftest_fa.py",
+    "where": "worktree at HEAD"
    }
   },
   {
@@ -535,8 +549,9 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "registered: days, sols, years",
-    "commit": "a8028b2",
-    "cmd": "python3 claim-record/record.py --selftest"
+    "commit": "3f7d3f5",
+    "cmd": "python3 claim-record/record.py --selftest",
+    "where": "worktree at HEAD"
    }
   },
   {
@@ -567,8 +582,9 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "checks: 128   failed: 0",
-    "commit": "a8028b2",
-    "cmd": "python3 measurand-partition/test_partition.py"
+    "commit": "3f7d3f5",
+    "cmd": "python3 measurand-partition/test_partition.py",
+    "where": "worktree at HEAD"
    }
   },
   {
@@ -600,8 +616,9 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "SELFTEST PASS (0 checks failed)",
-    "commit": "a8028b2",
-    "cmd": "python3 fold-matrix/fold_matrix.py --selftest"
+    "commit": "3f7d3f5",
+    "cmd": "python3 fold-matrix/fold_matrix.py --selftest",
+    "where": "worktree at HEAD"
    }
   },
   {
@@ -661,7 +678,8 @@
     "exit": 0,
     "last_line": "OK",
     "commit": "47fcab2",
-    "cmd": "python3 -m unittest tests.test_register_map"
+    "cmd": "python3 -m unittest tests.test_register_map",
+    "where": "worktree at HEAD"
    }
   },
   {
@@ -690,8 +708,9 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "======================================================================",
-    "commit": "a8028b2",
-    "cmd": "python3 tools/check_term_collision.py"
+    "commit": "3f7d3f5",
+    "cmd": "python3 tools/check_term_collision.py",
+    "where": "worktree at HEAD"
    }
   },
   {
@@ -748,8 +767,9 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "333 checks, 0 failed",
-    "commit": "a8028b2",
-    "cmd": "python3 valence-divergence/test_valence.py"
+    "commit": "3f7d3f5",
+    "cmd": "python3 valence-divergence/test_valence.py",
+    "where": "worktree at HEAD"
    }
   },
   {
@@ -778,8 +798,9 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "selftest_fta: 20 checks passed",
-    "commit": "a8028b2",
-    "cmd": "python3 frame-token-audit/selftest_fta.py"
+    "commit": "3f7d3f5",
+    "cmd": "python3 frame-token-audit/selftest_fta.py",
+    "where": "worktree at HEAD"
    }
   },
   {
@@ -808,8 +829,9 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "FAILURES: 0",
-    "commit": "a8028b2",
-    "cmd": "python3 category-weld/test_weld.py"
+    "commit": "3f7d3f5",
+    "cmd": "python3 category-weld/test_weld.py",
+    "where": "worktree at HEAD"
    }
   },
   {
@@ -839,7 +861,8 @@
     "exit": 0,
     "last_line": "OK",
     "commit": "47fcab2",
-    "cmd": "python3 -m unittest tests.test_frame_probe"
+    "cmd": "python3 -m unittest tests.test_frame_probe",
+    "where": "worktree at HEAD"
    }
   },
   {
@@ -896,7 +919,8 @@
     "exit": 0,
     "last_line": "OK",
     "commit": "47fcab2",
-    "cmd": "python3 -m unittest tests.test_observer_position_control"
+    "cmd": "python3 -m unittest tests.test_observer_position_control",
+    "where": "worktree at HEAD"
    }
   },
   {
@@ -925,8 +949,9 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "SELFTEST PASS (0 checks failed)",
-    "commit": "a8028b2",
-    "cmd": "python3 observer-exclusion/v2_check.py --selftest"
+    "commit": "3f7d3f5",
+    "cmd": "python3 observer-exclusion/v2_check.py --selftest",
+    "where": "worktree at HEAD"
    }
   },
   {
@@ -955,8 +980,9 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "checks: 98   failed: 0",
-    "commit": "a8028b2",
-    "cmd": "python3 assessor-coupling/test_assessor.py"
+    "commit": "3f7d3f5",
+    "cmd": "python3 assessor-coupling/test_assessor.py",
+    "where": "worktree at HEAD"
    }
   },
   {
@@ -987,8 +1013,9 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "selftest: 78 checks, 0 failed",
-    "commit": "a8028b2",
-    "cmd": "python3 label-position-test/selftest_lpt.py"
+    "commit": "3f7d3f5",
+    "cmd": "python3 label-position-test/selftest_lpt.py",
+    "where": "worktree at HEAD"
    }
   },
   {
@@ -1017,8 +1044,9 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "selftest: 34 checks, 0 failed",
-    "commit": "a8028b2",
-    "cmd": "python3 blame-attribution/pair_check.py --selftest"
+    "commit": "3f7d3f5",
+    "cmd": "python3 blame-attribution/pair_check.py --selftest",
+    "where": "worktree at HEAD"
    }
   },
   {
@@ -1047,8 +1075,9 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "SELFTEST PASS (0 checks failed)",
-    "commit": "a8028b2",
-    "cmd": "python3 criterion-symmetry/separability.py --selftest"
+    "commit": "3f7d3f5",
+    "cmd": "python3 criterion-symmetry/separability.py --selftest",
+    "where": "worktree at HEAD"
    }
   },
   {
@@ -1105,8 +1134,9 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "========================================================================",
-    "commit": "a8028b2",
-    "cmd": "python3 tools/known_answer.py"
+    "commit": "3f7d3f5",
+    "cmd": "python3 tools/known_answer.py",
+    "where": "worktree at HEAD"
    }
   },
   {
@@ -1135,8 +1165,9 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "OK",
-    "commit": "a8028b2",
-    "cmd": "python3 -m unittest discover reasoning-gate/tests"
+    "commit": "3f7d3f5",
+    "cmd": "python3 -m unittest discover reasoning-gate/tests",
+    "where": "worktree at HEAD"
    }
   },
   {
@@ -1166,7 +1197,8 @@
     "exit": 0,
     "last_line": "OK",
     "commit": "47fcab2",
-    "cmd": "python3 -m unittest tests.test_rank_detector"
+    "cmd": "python3 -m unittest tests.test_rank_detector",
+    "where": "worktree at HEAD"
    }
   },
   {
@@ -1197,8 +1229,9 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "SELFTEST PASS (0 checks failed)",
-    "commit": "a8028b2",
-    "cmd": "python3 membership-probe/probe_audit.py --selftest"
+    "commit": "3f7d3f5",
+    "cmd": "python3 membership-probe/probe_audit.py --selftest",
+    "where": "worktree at HEAD"
    }
   }
  ],
