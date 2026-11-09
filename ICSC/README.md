@@ -22,6 +22,14 @@ Cross-references, recorded and not built:
   (the audit's "lock + hash manifest before first run", section G, and T15 epoch lock).
 - TOOL_FINDER NAME_COLLISION: ICSC's `functional_selection` axis vs Simulators `encoding-selection/`.
 
+Note 2026-11-09: v0.2 arrived (pasted text) and is `SPEC_v0.2.md`, verbatim, sha256 5773584923e1...68791e.
+It supersedes nothing; every v0.1 file stays unchanged. STATUS: PROPOSED, nothing built.
+`check_v02.py` checks the landing, re-runs check_landing.py, confirms each section-13 tool path exists
+with one content marker, and confirms the two live specimens still read as cited (MP_010; the
+null_calibration three-outcome total 1800 / 300 / 2400 WRONG, the WRONG rows all
+abstain_status_ESTIMATED). T29/G2 says a required abstention must not be penalized; whether an
+ESTIMATED-status abstention is a required one is still the operator's call, so the scorer is unchanged.
+
 ## Tested (append-only; never overwrite an older line)
 tested: 2026-11-09 | model: WITHHELD (session rule: no model identifier is written into a pushed artifact; the operator holds it) | Claude Code, cloud session (claude.ai/code) | check_landing.py 3/3
 tested: 2026-11-09 | commit 98ecd8f | Claude Code, cloud session (claude.ai/code) | model: see trailer | check_landing.py 3/3
@@ -31,3 +39,4 @@ Note 2026-11-09: round 4 asked for ICSC_v0.1_spec_audit.md beside the PDF. No fi
 attached; the markdown pasted earlier is the same document and is already SPEC_AUDIT_v0.1.md. The
 round-4 name is added as a byte copy (sha256 984c2f94...1e93a75 for both). check_landing.py check 3
 fails if the two diverge. The folder itself first landed in commit a909e9c.
+tested: 2026-11-09 | Claude Code, cloud session (claude.ai/code) | model: see trailer | check_landing.py 4/4 (5 with byte copy) ; check_v02.py 11/11

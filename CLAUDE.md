@@ -14292,6 +14292,8 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   Note 2026-11-09: the markdown source then arrived and is `SPEC_AUDIT_v0.1.md`, verbatim; the
   pdftotext stand-in moved to `SPEC_AUDIT_v0.1.pdftotext.md`, unchanged. A fourth check confirms the
   source and the PDF carry the same 2612-word sequence, and fails on a planted one-word change.
+  Note 2026-11-09: v0.2 then arrived and is `SPEC_v0.2.md`, verbatim, beside v0.1 (superseding
+  nothing); `check_v02.py` (11/11) checks its hash and that its section-13 tools and two live specimens resolve.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
