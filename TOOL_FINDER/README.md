@@ -20,3 +20,5 @@ a reason. Nothing is filled in after the fact from a reading.
 ## Tested (append-only; never overwrite an older line)
 tested: 2026-11-09 | model: WITHHELD (session rule: no model identifier is written into a pushed artifact; the operator holds it) | Claude Code, cloud session (claude.ai/code) | build_finder.py --selftest 17/17, insert_pointer.py --selftest 6/6
 tested: 2026-11-09 | commit 98ecd8f | Claude Code, cloud session (claude.ai/code) | model: see trailer | build_finder.py --selftest 17/17, insert_pointer.py --selftest 6/6
+
+Note 2026-11-09: before reading a tool entry, see `../TRANSLATION_NOTES.md` for how practices named in this corpus (disagreement, competition, frames, credentials) are meant.
