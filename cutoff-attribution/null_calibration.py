@@ -201,6 +201,14 @@ def missed(rows):
     return sum(r["counts"].get("NONE", 0) for r in rows.values() if r["correct"] != "NONE")
 
 
+# Note 2026-11-09 (ICSC v0.2 section 4.1 G1, test T30): the controls below
+# were written to the rule set they test, so the output's validity is
+# CONDITIONAL(same_author). It shows wiring, not validity.
+VALIDITY = "CONDITIONAL(same_author)"
+VALIDITY_LINE = ("validity = %s: controls were authored to the rule set under test "
+                 "(ICSC v0.2 T30); this shows wiring, not validity" % VALIDITY)
+
+
 def gates(n=N_DRAWS, seed=42):
     out = {}
     for s in SOURCES:
@@ -213,7 +221,8 @@ def render(n=N_DRAWS):
     rows, forced, denom = confusion(n)
     cols = SOURCES + ["NONE"]
     L = ["cutoff-attribution null calibration -- ILLUSTRATIVE (synthetic planted sources, %d draws per row)" % n,
-         "verdict = single source separated by evidence, else NONE", "",
+         "verdict = single source separated by evidence, else NONE",
+         VALIDITY_LINE, "",
          "confusion matrix (rows: true source / control; columns: assigned)",
          "%-28s %s" % ("", " ".join("%7s" % c[:7] for c in cols))]
     for label, r in rows.items():

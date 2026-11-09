@@ -20,6 +20,11 @@ provenance selftest
   a human co-author is not a model                           PASS got=None want=None
   an empty trailer is None, not a string                     PASS got=None want=None
   verify separates its five outcomes                         PASS got=(1, 2, 1, 1) want=(1, 2, 1, 1)
+  unknown trailer model decodes CONDITIONAL(stale_table)     PASS got=('CONDITIONAL(stale_table)', []) want=('CONDITIONAL(stale_table)', [])
+  and without the check the same date would print a model    PASS got='SINGLE' want='SINGLE'
+  verify counts it as stale_table, not agree or disagree     PASS got=(1, 0, 0) want=(1, 0, 0)
+  the per-commit row prints no decoded version               PASS got=(True, False) want=(True, False)
+  a trailer model that IS in the table still decodes         PASS got='SINGLE' want='SINGLE'
   a same-day switchover in order is not a counterexample     PASS got=0 want=0
   and reversing the clock within the day is one              PASS got=1 want=1
   the emitted report is clean under the declared exemption   PASS got=True want=True

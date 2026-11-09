@@ -42,6 +42,8 @@ t3b = nc.three_outcome(n=10)
 nc.verdict = saved
 check(t3b["ENDPOINTING"]["wrong_reasons"] == {"named_non_true": 10} and t3b["NETWORK_LAG"]["counts"]["CORRECT_NAME"] == 10,
       "a constant-name classifier: right on its own row, WRONG named_non_true elsewhere")
+check(nc.VALIDITY == "CONDITIONAL(same_author)" and nc.VALIDITY_LINE in nc.render(n=10),
+      "T30: output carries validity = CONDITIONAL(same_author)")
 r = subprocess.run([sys.executable, os.path.join(HERE, "null_calibration.py"), "--selftest"], capture_output=True, text=True)
 check(r.returncode == 2, "module refuses --selftest")
 print("checks: %d   failed: %d" % (total, total - ok))

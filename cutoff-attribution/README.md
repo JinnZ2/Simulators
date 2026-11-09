@@ -87,6 +87,7 @@ tool's stated scope only. Index: Simulators `TOOL_FINDER/TOOL_FINDER.md`.
 - avoided term: AVOIDED_TERM_UNSTATED
 - measures: "Where could a cut in a voice session have come from? Per cut, a candidate set of sources with the evidence present for each, and no single winner unless the evidence separates."
 - breaks when: "Detection of unmarked cuts reads punctuation; a transcriber that never punctuates makes every user segment look open-ended."
+- breaks when (Note 2026-11-09, ICSC v0.2 T30): the null calibration's controls were written to the same rule set they test, so its output carries validity = CONDITIONAL(same_author); its FP/TP figures show wiring, not that the rules separate sources on a real channel.
 
 ## Four terms and null calibration (FINDER FOLLOW-UP, 2026-11-09)
 Note 2026-11-09: added by FINDER FOLLOW-UP items A2 and C.

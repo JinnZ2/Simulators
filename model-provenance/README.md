@@ -84,4 +84,11 @@ through `sheet-structure-scan/no_severity.py` with the two-arm exemption
 arrangement, and unlike scan 4 the exemption list is **empty** — this
 order's verdict names carry no screened word.
 
-29 selftest checks. Stdlib only, parses under Python 3.9. CC0.
+Note 2026-11-09 (ICSC v0.2 section 3, T21 omitted-edge live specimen): `decode_commit()`
+puts a stale-table check in front of `decode()`. A commit whose trailer names a model with
+no row in `releases.json` decodes `CONDITIONAL(stale_table)` with no candidates, so no model
+is printed as decoded; `verify` counts these in their own row. `releases.json` is not edited
+in this step. On this repository at the time of writing, `verify` reads 419 such commits.
+See `CLAIM_TABLE.md` MP_011.
+
+Selftest count is printed by `provenance.py --selftest` (the 29 below is the count at landing). Stdlib only, parses under Python 3.9. CC0.

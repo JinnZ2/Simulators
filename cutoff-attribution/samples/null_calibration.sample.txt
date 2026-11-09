@@ -1,5 +1,6 @@
 cutoff-attribution null calibration -- ILLUSTRATIVE (synthetic planted sources, 300 draws per row)
 verdict = single source separated by evidence, else NONE
+validity = CONDITIONAL(same_author): controls were authored to the rule set under test (ICSC v0.2 T30); this shows wiring, not validity
 
 confusion matrix (rows: true source / control; columns: assigned)
                              NETWORK ENDPOIN TASK_PA AMBIENT TRANSCR MODEL_R    NONE

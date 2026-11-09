@@ -64,6 +64,11 @@ SWITCHOVER_DAYS = 1
 SINGLE = "SINGLE"
 AMBIGUOUS = "AMBIGUOUS"
 NOT_DECODABLE = "NOT_DECODABLE"
+# Note 2026-11-09 (ICSC v0.2 section 3, T21 omitted-edge live specimen):
+# a commit whose trailer names a model the table has no row for has an
+# unchecked upstream assumption (the table is current). That decode is
+# CONDITIONAL, never a model name; the omitted edge must not read VALID.
+STALE_TABLE = "CONDITIONAL(stale_table)"
 
 # ------------------------------------------------------------------ S1 states
 
@@ -189,6 +194,20 @@ def decode(date, rows, window=SWITCHOVER_DAYS):
             "derivation": ASSUMPTION}
 
 
+def decode_commit(date, stated, rows, window=SWITCHOVER_DAYS):
+    """decode() for one commit, with the stale-table check in front.
+
+    If the trailer names a model and no table row carries it, the table
+    is behind the record, so no version is printed as decoded: verdict
+    CONDITIONAL(stale_table), candidates empty. Otherwise decode().
+    """
+    if stated is not None and stated not in {r["version"] for r in rows}:
+        return {"date": date, "verdict": STALE_TABLE, "candidates": [],
+                "why": "trailer names %r; the table has no row for it" % stated,
+                "derivation": ASSUMPTION}
+    return decode(date, rows, window)
+
+
 # ------------------------------------------------------------------ git
 
 def git_log(repo=".", limit=None):
@@ -304,13 +323,16 @@ def verify(commits, rows, window=SWITCHOVER_DAYS):
     makes S2 a measurement rather than a rendering. AGREES / DISAGREES
     are about the DECODE, never about the commit.
     """
-    agree = disagree = ambiguous_hit = ambiguous_miss = unstated = 0
+    agree = disagree = ambiguous_hit = ambiguous_miss = unstated = stale = 0
     misses = []
     for sha, date, _stamp, stated in commits:
         if stated is None:
             unstated += 1
             continue
-        d = decode(date, rows, window)
+        d = decode_commit(date, stated, rows, window)
+        if d["verdict"] == STALE_TABLE:
+            stale += 1
+            continue
         if d["verdict"] == NOT_DECODABLE:
             disagree += 1
             misses.append((sha[:8], date, stated, "NOT_DECODABLE"))
@@ -330,7 +352,7 @@ def verify(commits, rows, window=SWITCHOVER_DAYS):
     return {"agree": agree, "disagree": disagree,
             "ambiguous_contains": ambiguous_hit,
             "ambiguous_excludes": ambiguous_miss,
-            "unstated": unstated, "misses": misses}
+            "unstated": unstated, "stale_table": stale, "misses": misses}
 
 
 # ------------------------------------------------------------------ S4 screen
@@ -392,17 +414,17 @@ def _header(meta, window):
 
 def render_decode(commits, meta, rows, window=SWITCHOVER_DAYS, per_commit=False):
     L = _header(meta, window)
-    counts = {SINGLE: 0, AMBIGUOUS: 0, NOT_DECODABLE: 0}
+    counts = {SINGLE: 0, AMBIGUOUS: 0, NOT_DECODABLE: 0, STALE_TABLE: 0}
     body = []
     for sha, date, _stamp, stated in commits:
-        d = decode(date, rows, window)
+        d = decode_commit(date, stated, rows, window)
         counts[d["verdict"]] += 1
         body.append([sha[:8], date, d["verdict"],
                      "|".join(d["candidates"]) or "-",
                      stated or "-"])
     L.append(table(["verdict", "commits"],
                    [[k, counts[k]] for k in (SINGLE, AMBIGUOUS,
-                                             NOT_DECODABLE)]))
+                                             NOT_DECODABLE, STALE_TABLE)]))
     L.append("")
     if per_commit:
         L.append(table(["commit", "date", "verdict", "candidates",
@@ -431,7 +453,9 @@ def render_verify(commits, meta, rows, window=SWITCHOVER_DAYS):
                      v["ambiguous_contains"]],
                     ["decode AMBIGUOUS, excludes trailer",
                      v["ambiguous_excludes"]],
-                    ["no version stated", v["unstated"]]]))
+                    ["no version stated", v["unstated"]],
+                    ["trailer model has no table row: " + STALE_TABLE,
+                     v["stale_table"]]]))
     L += ["", "S3 -- the assumption scored rather than presumed.",
           ""]
     L.append(table(["quantity", "value"],
@@ -588,6 +612,25 @@ def _selftest():
     ck("verify separates its five outcomes",
        (v["agree"], v["disagree"], v["ambiguous_contains"], v["unstated"]),
        (1, 2, 1, 1))
+
+    # ---- T21 omitted edge (ICSC v0.2 section 3): a planted trailer naming
+    # a model with no table row must not come back as a decoded model.
+    planted = [C("h" * 40, "2026-01-20", "Claude Planted 9")]
+    dc = decode_commit("2026-01-20", "Claude Planted 9", rows)
+    ck("unknown trailer model decodes CONDITIONAL(stale_table)",
+       (dc["verdict"], dc["candidates"]), (STALE_TABLE, []))
+    ck("and without the check the same date would print a model",
+       decode("2026-01-20", rows)["verdict"], SINGLE)
+    ck("verify counts it as stale_table, not agree or disagree",
+       (verify(planted, rows)["stale_table"], verify(planted, rows)["agree"],
+        verify(planted, rows)["disagree"]), (1, 0, 0))
+    _rd = render_decode(planted, {"table_kind": "t", "source": "t"}, rows,
+                        per_commit=True)
+    _row = [l for l in _rd.splitlines() if l.startswith("h" * 8)][0]
+    ck("the per-commit row prints no decoded version",
+       (STALE_TABLE in _row, " A " in _row + " "), (True, False))
+    ck("a trailer model that IS in the table still decodes",
+       decode_commit("2026-01-20", "A", rows)["verdict"], SINGLE)
 
     # ---- the resolution repair, pinned. Two commits on ONE day, in
     # order within it. A day-resolution ordering reports a counterexample

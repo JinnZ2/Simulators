@@ -290,3 +290,16 @@ row.
 
 **Status: OPEN** (the table extension is the operator's call; see the
 round 4 report).
+
+### MP_011 — T21 omitted edge: an unknown trailer model decodes CONDITIONAL(stale_table)
+
+Note 2026-11-09 (ICSC v0.2 section 3 live specimen). Before this change a commit whose trailer
+named a model with no table row still got a decoded model from its date, and `verify` scored the
+mismatch as a disagreement. The upstream assumption (the table is current) was unchecked, so under
+v0.2's propagation rule the decode can be at most CONDITIONAL. `decode_commit()` now returns
+`CONDITIONAL(stale_table)` with an empty candidate list, and `verify` counts those apart from
+agree / disagree. Selftest: a planted trailer naming a model absent from the table must not print
+a decoded version; the same date without the check still decodes SINGLE, which shows the check is
+doing the work. Live reading: 419 commits move out of the agree/disagree rows into stale_table.
+`releases.json` is unchanged (its extension stays BLOCKED, MP_010). Status: SUPPORTED on the selftest.
+
