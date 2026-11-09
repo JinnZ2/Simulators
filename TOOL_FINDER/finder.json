@@ -51,6 +51,10 @@
    "breaks_when": "NO_STATED_LIMITS",
    "check": null,
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "per element: one of 4 tags (user_supplied, template_universal, heuristic_triggered, derived)",
+   "assumes": "the pipeline emitting the element also tags it; tag correctness is not checked",
+   "chain": "reads: inference (its own pipeline output). ignores: sensor, encoding, transmission",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "shadow_hunting/knowledge/ai_provenance.py:3",
    "measures_quote_state": "FOUND",
    "breaks_src": null,
@@ -82,6 +86,10 @@
    "breaks_when": "A span is literal: case-sensitive substring after whitespace strip. A paraphrase of what the person said reads FILLED.",
    "check": "python3 tail-check/selftest.py",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "per inference: SAID / FILLED / UNRATED; span to the character; one flag",
+   "assumes": "literal, case-sensitive spans; off-center position declared by a named caller",
+   "chain": "reads: decoding (self-checked), inference; encoding and transmission only via caller reference checks (AUTO sentinel). ignores: sensor",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "tail-check/README.md:3",
    "measures_quote_state": "FOUND",
    "breaks_src": "tail-check/README.md:33",
@@ -90,8 +98,8 @@
    "status_detail": {
     "status": "RUN",
     "exit": 0,
-    "last_line": "checks: 18   failed: 0",
-    "commit": "3f7d3f5",
+    "last_line": "checks: 26   failed: 0",
+    "commit": "b4d8fb5",
     "cmd": "python3 tail-check/selftest.py",
     "where": "worktree at HEAD"
    }
@@ -115,6 +123,10 @@
    "breaks_when": "NO_STATED_LIMITS",
    "check": "python3 tools/sourced.py --selftest",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "per value: span offsets verified by slicing; UNRATED on any missing field",
+   "assumes": "the parser hands over the source text it read; consistency only, not truth of the source",
+   "chain": "reads: decoding (value vs its own span). ignores: sensor, encoding, transmission, inference",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "tools/sourced.py:5",
    "measures_quote_state": "FOUND",
    "breaks_src": null,
@@ -124,7 +136,7 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "checks: 41   failed: 0",
-    "commit": "3f7d3f5",
+    "commit": "b4d8fb5",
     "cmd": "python3 tools/sourced.py --selftest",
     "where": "worktree at HEAD"
    }
@@ -150,6 +162,10 @@
    "breaks_when": "Regex over text. A paraphrase steps around any pattern. A clean run means the patterns did not fire, not that nothing happened.",
    "check": "python3 evidence-demotion-detector/selftest.py",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "per turn: rule id + quoted span; counts; PROOF_ESCALATION threshold 2",
+   "assumes": "transcript JSON with role labels; keyword patterns",
+   "chain": "reads: inference (assistant turns vs prior user turns). ignores: sensor, encoding, transmission (takes the transcript as given)",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "evidence-demotion-detector/README.md:3",
    "measures_quote_state": "FOUND",
    "breaks_src": "evidence-demotion-detector/README.md:90",
@@ -159,7 +175,7 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "selftest: 38/38 checks PASS",
-    "commit": "3f7d3f5",
+    "commit": "b4d8fb5",
     "cmd": "python3 evidence-demotion-detector/selftest.py",
     "where": "worktree at HEAD"
    }
@@ -182,6 +198,10 @@
    "breaks_when": "NO_STATED_LIMITS",
    "check": "python3 tools/provenance_marker.py --selftest",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "per run: file sha256 before/after, exit code, last line",
+   "assumes": "the stamper states `how`; pass states are declarations",
+   "chain": "reads: the tool file and its run. not a perception chain; hops not applicable",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "tools/provenance_marker.py:5",
    "measures_quote_state": "FOUND",
    "breaks_src": null,
@@ -191,7 +211,7 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "checks: 27   failed: 0",
-    "commit": "3f7d3f5",
+    "commit": "b4d8fb5",
     "cmd": "python3 tools/provenance_marker.py --selftest",
     "where": "worktree at HEAD"
    }
@@ -215,6 +235,10 @@
    "breaks_when": "The only provider is synthetic (`provider.FixtureProvider`), and nothing in this folder measures any population.",
    "check": "python3 moving-mean-tracker/test_tracker.py",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "per run per segment: n, mean, median, p10, p90, mean-median; gauges G1-G4",
+   "assumes": "a provider supplies records with provenance; segment rules and metrics declared per version",
+   "chain": "reads: decoding (provider records, drop rules). ignores: sensor, transmission (provider is trusted to report what it pulled)",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "moving-mean-tracker/README.md:16",
    "measures_quote_state": "FOUND",
    "breaks_src": "moving-mean-tracker/README.md:3",
@@ -224,7 +248,7 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "checks: 68   failed: 0",
-    "commit": "3f7d3f5",
+    "commit": "b4d8fb5",
     "cmd": "python3 moving-mean-tracker/test_tracker.py",
     "where": "worktree at HEAD"
    }
@@ -249,6 +273,10 @@
    "breaks_when": "Nothing here is evidence about any evaluation criterion at any lab, about any other user, or about any other model.",
    "check": "python3 evaluation-frame/selftest_frame.py",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "five countable measures from outputs; corpus n=1 in the built run",
+   "assumes": "outputs are countable without model internals; coder is the system under test (declared)",
+   "chain": "reads: inference (model outputs). ignores: sensor, encoding, transmission",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "evaluation-frame/README.md:3",
    "measures_quote_state": "FOUND",
    "breaks_src": "evaluation-frame/README.md:136",
@@ -258,7 +286,7 @@
     "status": "UNKNOWN",
     "exit": 1,
     "last_line": "  FAILED and they are the only tokens that fire unmasked",
-    "commit": "3f7d3f5",
+    "commit": "b4d8fb5",
     "cmd": "python3 evaluation-frame/selftest_frame.py",
     "where": "worktree at HEAD"
    }
@@ -284,6 +312,10 @@
    "breaks_when": "Detection of unmarked cuts reads punctuation; a transcriber that never punctuates makes every user segment look open-ended.",
    "check": "python3 cutoff-attribution/selftest.py",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "per cut: candidate set, status of 3, evidence per hop; [CHOICE] windows 0.6 / 2.0 / 1.5 s",
+   "assumes": "timestamped segments; logs that flag their own events; punctuation marks utterance ends",
+   "chain": "reads: all five hops by candidate, each gated by a known-reference check; its own reading self-checked. unchecked hops named UNVERIFIED_HOP",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "cutoff-attribution/README.md:3",
    "measures_quote_state": "FOUND",
    "breaks_src": "cutoff-attribution/README.md:42",
@@ -292,8 +324,8 @@
    "status_detail": {
     "status": "RUN",
     "exit": 0,
-    "last_line": "checks: 15   failed: 0",
-    "commit": "3f7d3f5",
+    "last_line": "checks: 25   failed: 0",
+    "commit": "b4d8fb5",
     "cmd": "python3 cutoff-attribution/selftest.py",
     "where": "worktree at HEAD"
    }
@@ -316,6 +348,10 @@
    "breaks_when": "The composition is exact ARITHMETIC on a constructed model; the order's DERIVED claim -- that a real chain estimates its incentive stack -- is unrun on any real chain.",
    "check": "python3 reporting-chain-loss/test_hop.py",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "closed-form gain and bias per hop count; constructed chains only",
+   "assumes": "linear-Gaussian hops; offsets declared",
+   "chain": "reads: transmission (hop by hop, modelled). ignores: sensor and decoding as separate hops",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "reporting-chain-loss/README.md:3",
    "measures_quote_state": "FOUND",
    "breaks_src": "reporting-chain-loss/README.md:81",
@@ -325,7 +361,7 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "checks: 50   failed: 0",
-    "commit": "3f7d3f5",
+    "commit": "b4d8fb5",
     "cmd": "python3 reporting-chain-loss/test_hop.py",
     "where": "worktree at HEAD"
    }
@@ -348,6 +384,10 @@
    "breaks_when": "A channel can be valuable and still not be a return path. Marking a gap is not correcting an error.",
    "check": "cd return-path && python3 test_return.py",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "per channel: the set of 4 requirements failed; one ratio",
+   "assumes": "receipt, encoding count, latency and construction fields are declared by the caller",
+   "chain": "reads: encoding (re-encodings counted), transmission (latency). ignores: inference",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "return-path/README.md:6",
    "measures_quote_state": "FOUND",
    "breaks_src": "return-path/README.md:9",
@@ -357,7 +397,7 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "93 checks, 0 failed",
-    "commit": "3f7d3f5",
+    "commit": "b4d8fb5",
     "cmd": "cd return-path && python3 test_return.py",
     "where": "worktree at HEAD"
    }
@@ -379,6 +419,10 @@
    "breaks_when": "NO_STATED_LIMITS",
    "check": "python3 readout-count/selftest_rc.py",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "per regime: count of returning positions; Spearman rho across >= 4 regimes",
+   "assumes": "rows in the order's CSV schema, each sourced",
+   "chain": "reads: transmission (does the channel return). ignores: sensor, decoding",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "readout-count/README.md:4",
    "measures_quote_state": "FOUND",
    "breaks_src": null,
@@ -388,7 +432,7 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "selftest: 100 checks, 0 failed",
-    "commit": "3f7d3f5",
+    "commit": "b4d8fb5",
     "cmd": "python3 readout-count/selftest_rc.py",
     "where": "worktree at HEAD"
    }
@@ -410,6 +454,10 @@
    "breaks_when": "Nothing here models a valley, an informant, an account, or a transmission chain.",
    "check": "python3 transmission-decay/selftest_power.py",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "power tables: pair vs order recovery by informants per chain position",
+   "assumes": "abstract retention probabilities; no fieldwork modelled",
+   "chain": "reads: transmission across generations (designed, not run). ignores: decoding by the outside recorder",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "transmission-decay/README.md:4",
    "measures_quote_state": "FOUND",
    "breaks_src": "transmission-decay/README.md:32",
@@ -419,7 +467,7 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "selftest: 51 checks, 0 failed",
-    "commit": "3f7d3f5",
+    "commit": "b4d8fb5",
     "cmd": "python3 transmission-decay/selftest_power.py",
     "where": "worktree at HEAD"
    }
@@ -442,6 +490,10 @@
    "breaks_when": "No data ships, and the seven encodings are not here.",
    "check": "python3 encoding-selection/selftest_es.py",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "Kendall W vs permutation null; Jaccard distance on recovered-quantity sets",
+   "assumes": "encodings supplied by the operator; reader declines are a third state",
+   "chain": "reads: encoding (format as instrument), decoding (what a reader recovers). ignores: transmission",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "encoding-selection/README.md:3",
    "measures_quote_state": "FOUND",
    "breaks_src": "encoding-selection/README.md:12",
@@ -451,7 +503,7 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "selftest: 43 checks, 0 failed",
-    "commit": "3f7d3f5",
+    "commit": "b4d8fb5",
     "cmd": "python3 encoding-selection/selftest_es.py",
     "where": "worktree at HEAD"
    }
@@ -476,6 +528,10 @@
    "breaks_when": "A word list. A paraphrase steps around it; no hit is not a clean bill.",
    "check": "python3 corpus_prior_audit/audit.py --selftest",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "per text: list of entry ids hit; whole-word, case-insensitive",
+   "assumes": "a word list; a hit is a prompt to check",
+   "chain": "reads: inference (claims in text). ignores: sensor, encoding, transmission",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "corpus_prior_audit/README.md:5",
    "measures_quote_state": "FOUND",
    "breaks_src": "corpus_prior_audit/README.md:63",
@@ -485,7 +541,7 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "selftest 17/17",
-    "commit": "919f9d3",
+    "commit": "1345818",
     "cmd": "python3 corpus_prior_audit/audit.py --selftest",
     "where": "worktree at HEAD"
    }
@@ -508,6 +564,10 @@
    "breaks_when": "NO_STATED_LIMITS",
    "check": "python3 falsifier-audit/selftest_fa.py",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "per falsifier: A1 / A2 / A4 flags; A3 across repos; counts with coverage",
+   "assumes": "falsifiers sit under recognised marker forms; header-name table parsing",
+   "chain": "reads: decoding (repo text). ignores: sensor, transmission",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "falsifier-audit/README.md:3",
    "measures_quote_state": "FOUND",
    "breaks_src": null,
@@ -517,7 +577,7 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "selftest: 28 checks, 0 failed",
-    "commit": "3f7d3f5",
+    "commit": "b4d8fb5",
     "cmd": "python3 falsifier-audit/selftest_fa.py",
     "where": "worktree at HEAD"
    }
@@ -540,6 +600,10 @@
    "breaks_when": "NO_STATED_LIMITS",
    "check": "python3 claim-record/record.py --selftest",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "per claim: 7 fields, interval not point; clock derived at read time",
+   "assumes": "claims supplied by the author; units registered as frames",
+   "chain": "reads: inference (the claim as recorded). not a perception chain beyond the record",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "claim-record/README.md:3",
    "measures_quote_state": "FOUND",
    "breaks_src": null,
@@ -549,7 +613,7 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "registered: days, sols, years",
-    "commit": "3f7d3f5",
+    "commit": "b4d8fb5",
     "cmd": "python3 claim-record/record.py --selftest",
     "where": "worktree at HEAD"
    }
@@ -573,6 +637,10 @@
    "breaks_when": "NO_STATED_LIMITS",
    "check": "python3 measurand-partition/test_partition.py",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "per population: UNPARTITIONED / PARTITIONED / ASSIGNED_ELSEWHERE / NOT_EVALUABLE",
+   "assumes": "intervening variables enumerated by the caller; constructed worlds",
+   "chain": "reads: inference (attribution of a residual). ignores: sensor, encoding",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "measurand-partition/README.md:5",
    "measures_quote_state": "FOUND",
    "breaks_src": null,
@@ -582,7 +650,7 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "checks: 128   failed: 0",
-    "commit": "3f7d3f5",
+    "commit": "b4d8fb5",
     "cmd": "python3 measurand-partition/test_partition.py",
     "where": "worktree at HEAD"
    }
@@ -607,6 +675,10 @@
    "breaks_when": "S7 says empty emits as empty, never as zero.",
    "check": "python3 fold-matrix/fold_matrix.py --selftest",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "per term: one grid, levels by sign/magnitude/unit; no single number",
+   "assumes": "levels enumerated with a declared basis",
+   "chain": "reads: inference (proxy-to-goal claims). ignores: transmission",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "fold-matrix/README.md:3",
    "measures_quote_state": "FOUND",
    "breaks_src": "fold-matrix/README.md:111",
@@ -616,7 +688,7 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "SELFTEST PASS (0 checks failed)",
-    "commit": "3f7d3f5",
+    "commit": "b4d8fb5",
     "cmd": "python3 fold-matrix/fold_matrix.py --selftest",
     "where": "worktree at HEAD"
    }
@@ -638,6 +710,10 @@
    "breaks_when": "NO_STATED_LIMITS",
    "check": null,
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "scope and silences of one response",
+   "assumes": "applied by the model to its own output",
+   "chain": "reads: inference (own output). ignores: all upstream hops",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "shadow_hunting/knowledge/ai_self_scope.py:4",
    "measures_quote_state": "FOUND",
    "breaks_src": null,
@@ -668,6 +744,10 @@
    "breaks_when": "This tool does NOT rank, judge truth, or infer.",
    "check": "python3 -m unittest tests.test_register_map",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "per join: COMMENSURABLE / UNJOINED / INCOMMENSURABLE / UNDECLARED; integer coarsening",
+   "assumes": "every layer declares measurand, range, instrument, grade, resolution",
+   "chain": "reads: encoding (instrument / datum declared) and decoding (resolution). ignores: sensor as an unchecked hop",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "premise-traceability/register_map.py:8",
    "measures_quote_state": "FOUND",
    "breaks_src": "premise-traceability/register_map.py:13",
@@ -677,7 +757,7 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "OK",
-    "commit": "47fcab2",
+    "commit": "f7b607d",
     "cmd": "python3 -m unittest tests.test_register_map",
     "where": "worktree at HEAD"
    }
@@ -699,6 +779,10 @@
    "breaks_when": "NO_STATED_LIMITS",
    "check": "python3 tools/check_term_collision.py",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "per file: which colliding terms appear and whether a sense is declared",
+   "assumes": "substring scan over the repo",
+   "chain": "reads: decoding (repo text). ignores: other hops",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "tools/check_term_collision.py:3",
    "measures_quote_state": "FOUND",
    "breaks_src": null,
@@ -708,7 +792,7 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "======================================================================",
-    "commit": "3f7d3f5",
+    "commit": "b4d8fb5",
     "cmd": "python3 tools/check_term_collision.py",
     "where": "worktree at HEAD"
    }
@@ -731,6 +815,10 @@
    "breaks_when": "The checker inverts its own load-bearing rule",
    "check": null,
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "per pair: comparability verdict over three core fields",
+   "assumes": "free-text fields compared by string equality",
+   "chain": "reads: encoding (what the frame declares). ignores: transmission, inference",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "declared-frame/README.md:3",
    "measures_quote_state": "FOUND",
    "breaks_src": "declared-frame/README.md:64",
@@ -758,6 +846,10 @@
    "breaks_when": "No lexicon, no valence model, no sentiment scoring.",
    "check": "python3 valence-divergence/test_valence.py",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "per term: two decoder readings, divergence flags; no lexicon",
+   "assumes": "both readings supplied with sources",
+   "chain": "reads: decoding by two parties. ignores: sensor",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "valence-divergence/README.md:3",
    "measures_quote_state": "FOUND",
    "breaks_src": "valence-divergence/README.md:56",
@@ -767,7 +859,7 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "333 checks, 0 failed",
-    "commit": "3f7d3f5",
+    "commit": "b4d8fb5",
     "cmd": "python3 valence-divergence/test_valence.py",
     "where": "worktree at HEAD"
    }
@@ -789,6 +881,10 @@
    "breaks_when": "NO_STATED_LIMITS",
    "check": "python3 frame-token-audit/selftest_fta.py",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "frame tokens per 1000 words, two lexicons, every hit listed",
+   "assumes": "lexicons declared; Stage 2 (use vs mention) is not done here",
+   "chain": "reads: decoding (lexical). ignores: inference (use vs mention)",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "frame-token-audit/README.md:3",
    "measures_quote_state": "FOUND",
    "breaks_src": null,
@@ -798,7 +894,7 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "selftest_fta: 20 checks passed",
-    "commit": "3f7d3f5",
+    "commit": "b4d8fb5",
     "cmd": "python3 frame-token-audit/selftest_fta.py",
     "where": "worktree at HEAD"
    }
@@ -820,6 +916,10 @@
    "breaks_when": "NO_STATED_LIMITS",
    "check": "python3 category-weld/test_weld.py",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "per term: n_cases, max_spread, bias over divergence cases",
+   "assumes": "component readings supplied per case",
+   "chain": "reads: encoding (one term over several quantities). ignores: transmission",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "category-weld/README.md:7",
    "measures_quote_state": "FOUND",
    "breaks_src": null,
@@ -829,7 +929,7 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "FAILURES: 0",
-    "commit": "3f7d3f5",
+    "commit": "b4d8fb5",
     "cmd": "python3 category-weld/test_weld.py",
     "where": "worktree at HEAD"
    }
@@ -851,6 +951,10 @@
    "breaks_when": "This module contains no probe generator.",
    "check": "python3 -m unittest tests.test_frame_probe",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "frame estimate after collapse readings; validity gate per probe",
+   "assumes": "probes hand-authored by a human only",
+   "chain": "reads: inference (reader's frame via probe responses). gate checks the probe instrument first",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "frame_probe.py:8",
    "measures_quote_state": "FOUND",
    "breaks_src": "frame_probe.py:15",
@@ -860,7 +964,7 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "OK",
-    "commit": "47fcab2",
+    "commit": "f7b607d",
     "cmd": "python3 -m unittest tests.test_frame_probe",
     "where": "worktree at HEAD"
    }
@@ -882,6 +986,10 @@
    "breaks_when": "NO_STATED_LIMITS",
    "check": null,
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "counter-frames generated on 8 edges",
+   "assumes": "applied to the model's own in-progress interpretation",
+   "chain": "reads: inference (own framing). ignores: upstream hops",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "shadow_hunting/knowledge/ai_frame_flip.py:1",
    "measures_quote_state": "FOUND",
    "breaks_src": null,
@@ -909,6 +1017,10 @@
    "breaks_when": "This module ships NO corpus and NO source list",
    "check": "python3 -m unittest tests.test_observer_position_control",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "effect = p1 - p3, Cramer's V, MH-weighted residual; nulls first",
+   "assumes": "behaviour coded blind to source; corpus hand-coded",
+   "chain": "reads: inference (describer's label). behaviour coding treated as a checked hop only when blind",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "observer_position_control.py:8",
    "measures_quote_state": "FOUND",
    "breaks_src": "observer_position_control.py:18",
@@ -918,7 +1030,7 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "OK",
-    "commit": "47fcab2",
+    "commit": "f7b607d",
     "cmd": "python3 -m unittest tests.test_observer_position_control",
     "where": "worktree at HEAD"
    }
@@ -940,6 +1052,10 @@
    "breaks_when": "NO_STATED_LIMITS",
    "check": "python3 observer-exclusion/v2_check.py --selftest",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "lead time L in years, with censoring correction and delta-hat per artifact",
+   "assumes": "archives date artifacts; coding pre-registered",
+   "chain": "reads: transmission (archive survival) and encoding (when written down). designed, not run",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "observer-exclusion/SPEC_V2.md:11",
    "measures_quote_state": "FOUND",
    "breaks_src": null,
@@ -949,7 +1065,7 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "SELFTEST PASS (0 checks failed)",
-    "commit": "3f7d3f5",
+    "commit": "b4d8fb5",
     "cmd": "python3 observer-exclusion/v2_check.py --selftest",
     "where": "worktree at HEAD"
    }
@@ -971,6 +1087,10 @@
    "breaks_when": "No funding record is held here and none is composed from memory.",
    "check": "python3 assessor-coupling/test_assessor.py",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "per condition: MET / FAILS / UNVERIFIABLE / UNDECLARED; pool fraction",
+   "assumes": "arrangements declared; no organization named",
+   "chain": "reads: inference (independence structure). not a perception chain",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "assessor-coupling/README.md:4",
    "measures_quote_state": "FOUND",
    "breaks_src": "assessor-coupling/README.md:73",
@@ -980,7 +1100,7 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "checks: 98   failed: 0",
-    "commit": "3f7d3f5",
+    "commit": "b4d8fb5",
     "cmd": "python3 assessor-coupling/test_assessor.py",
     "where": "worktree at HEAD"
    }
@@ -1004,6 +1124,10 @@
    "breaks_when": "No data ships here.",
    "check": "python3 label-position-test/selftest_lpt.py",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "Cramer's V of label vs position / move / outcome; leak test; chance overlap",
+   "assumes": "rows in the order's CSV schema",
+   "chain": "reads: decoding (labels assigned). ignores: sensor",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "label-position-test/README.md:3",
    "measures_quote_state": "FOUND",
    "breaks_src": "label-position-test/README.md:10",
@@ -1013,7 +1137,7 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "selftest: 78 checks, 0 failed",
-    "commit": "3f7d3f5",
+    "commit": "b4d8fb5",
     "cmd": "python3 label-position-test/selftest_lpt.py",
     "where": "worktree at HEAD"
    }
@@ -1035,6 +1159,10 @@
    "breaks_when": "No judgments have been collected.",
    "check": "python3 blame-attribution/pair_check.py --selftest",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "per pair: SYMMETRIC / HELD_CONSTANT_VIOLATION per fact",
+   "assumes": "prose spans declared, code facts parsed",
+   "chain": "reads: encoding (prose vs code form of one chain). ignores: transmission",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "blame-attribution/README.md:3",
    "measures_quote_state": "FOUND",
    "breaks_src": "blame-attribution/README.md:12",
@@ -1044,7 +1172,7 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "selftest: 34 checks, 0 failed",
-    "commit": "3f7d3f5",
+    "commit": "b4d8fb5",
     "cmd": "python3 blame-attribution/pair_check.py --selftest",
     "where": "worktree at HEAD"
    }
@@ -1066,6 +1194,10 @@
    "breaks_when": "NO_STATED_LIMITS",
    "check": "python3 criterion-symmetry/separability.py --selftest",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "pairwise separation of five explanations, 10 pairs",
+   "assumes": "generators calibrated to one tally",
+   "chain": "reads: inference (statistic vs explanations). ignores: upstream hops",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "criterion-symmetry/MARKER.md:3",
    "measures_quote_state": "FOUND",
    "breaks_src": null,
@@ -1075,7 +1207,7 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "SELFTEST PASS (0 checks failed)",
-    "commit": "3f7d3f5",
+    "commit": "b4d8fb5",
     "cmd": "python3 criterion-symmetry/separability.py --selftest",
     "where": "worktree at HEAD"
    }
@@ -1098,6 +1230,10 @@
    "breaks_when": "NO_STATED_LIMITS",
    "check": null,
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "FP and TP over N draws; minimum detectable amplitude; fail class",
+   "assumes": "the gate is a callable; controls are known-answer",
+   "chain": "reads: the gate as an instrument (its own inference hop) against known references",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "null-harness/README.md:3",
    "measures_quote_state": "FOUND",
    "breaks_src": null,
@@ -1125,6 +1261,10 @@
    "breaks_when": "NO_STATED_LIMITS",
    "check": "python3 tools/known_answer.py",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "per metric: fixed cases with stated basis; distinct expected values required",
+   "assumes": "the registered cases are right (same author, regression not validation)",
+   "chain": "reads: the metric's own output against known inputs (the reference-check pattern itself)",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "tools/known_answer.py:3",
    "measures_quote_state": "FOUND",
    "breaks_src": null,
@@ -1134,7 +1274,7 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "========================================================================",
-    "commit": "3f7d3f5",
+    "commit": "b4d8fb5",
     "cmd": "python3 tools/known_answer.py",
     "where": "worktree at HEAD"
    }
@@ -1156,6 +1296,10 @@
    "breaks_when": "NO_STATED_LIMITS",
    "check": "python3 -m unittest discover reasoning-gate/tests",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "per claim: supported / qualified / denied with the guard that fired",
+   "assumes": "declarations are supplied; G-RES only as strong as the declared pair",
+   "chain": "reads: inference (claims) with resolution guards on decoding. ignores: sensor",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "reasoning-gate/README.md:3",
    "measures_quote_state": "FOUND",
    "breaks_src": null,
@@ -1165,7 +1309,7 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "OK",
-    "commit": "3f7d3f5",
+    "commit": "b4d8fb5",
     "cmd": "python3 -m unittest discover reasoning-gate/tests",
     "where": "worktree at HEAD"
    }
@@ -1187,6 +1331,10 @@
    "breaks_when": "NO_STATED_LIMITS",
    "check": "python3 -m unittest tests.test_rank_detector",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "dim(k) curve; outcome + rule; null construction first",
+   "assumes": "one fixed record; scale = radius; density controlled",
+   "chain": "reads: decoding (scale of the instrument) with null runs as reference checks",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "rank_detector.py:10",
    "measures_quote_state": "FOUND",
    "breaks_src": null,
@@ -1196,7 +1344,7 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "OK",
-    "commit": "47fcab2",
+    "commit": "f7b607d",
     "cmd": "python3 -m unittest tests.test_rank_detector",
     "where": "worktree at HEAD"
    }
@@ -1220,6 +1368,10 @@
    "breaks_when": "It measures whether the basis went near a constraint, not whether it reasoned correctly about it.",
    "check": "python3 membership-probe/probe_audit.py --selftest",
    "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "trap rates on trap_a / trap_b; coverage axis separately",
+   "assumes": "a case set (not shipped); a checker's replies",
+   "chain": "reads: inference (a checker's verdicts) against known-answer traps",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
    "measures_src": "membership-probe/README.md:3",
    "measures_quote_state": "FOUND",
    "breaks_src": "membership-probe/README.md:128",
@@ -1229,9 +1381,197 @@
     "status": "RUN",
     "exit": 0,
     "last_line": "SELFTEST PASS (0 checks failed)",
-    "commit": "3f7d3f5",
+    "commit": "b4d8fb5",
     "cmd": "python3 membership-probe/probe_audit.py --selftest",
     "where": "worktree at HEAD"
+   }
+  },
+  {
+   "need": "observer",
+   "also": [
+    "floor",
+    "channel"
+   ],
+   "repo": "Cross-Domain-Toolkit",
+   "path": "multi_substrate_calibration/",
+   "name": "multi_substrate_calibration",
+   "aliases": [
+    "combine readings from different sensors",
+    "sensor fusion with earned trust",
+    "duplicate sensor counted as corroboration",
+    "prediction contradicting ground reading",
+    "per-reading record with confidence and units"
+   ],
+   "measures_file": "multi_substrate_calibration/README.md",
+   "measures": "A published spec for wiring a **new sensing substrate** into a determinacy gate without reverse-engineering the gate.",
+   "breaks_file": "multi_substrate_calibration/README.md",
+   "breaks_when": "An unproven substrate (`reliability \u2192 0`) **cannot dominate",
+   "check": "python3 -m unittest discover -s multi_substrate_calibration -t . -p test_*.py",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "determinacy in [0,1] vs 1 - eps; bound confidence = reliability x warp(native)",
+   "assumes": "substrates declare role, units, correlation_group; reliability earned from counts",
+   "chain": "reads: sensor/encoding via the SubstrateReading contract; collapses correlated reads; does not check per-hop reference inputs",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
+   "measures_src": "multi_substrate_calibration/README.md:3",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "multi_substrate_calibration/README.md:37",
+   "breaks_quote_state": "FOUND",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "OK",
+    "commit": "1407ded",
+    "cmd": "python3 -m unittest discover -s multi_substrate_calibration -t . -p test_*.py",
+    "where": "worktree at HEAD"
+   }
+  },
+  {
+   "need": "scope",
+   "also": [
+    "floor"
+   ],
+   "repo": "Cross-Domain-Toolkit",
+   "path": "falsification_ledger/",
+   "name": "falsification_ledger",
+   "aliases": [
+    "record a refuted claim so it cannot be rewritten",
+    "stop retuning a model to fit noise",
+    "hash-chained claim history",
+    "escape hatch on a claim",
+    "lock layer for claims"
+   ],
+   "measures_file": "falsification_ledger/README.md",
+   "measures": "A repo-shaped template that *is* the refutation protocol.",
+   "breaks_file": "falsification_ledger/README.md",
+   "breaks_when": "**Update the claim, never retune the sim.**",
+   "check": "python3 -m unittest discover -s falsification_ledger -t . -p test_*.py",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "per entry: within tolerance or not; hash chain verify; merkle proofs",
+   "assumes": "the sim kernel is fixed per domain; tolerances declared",
+   "chain": "reads: inference (claim vs observation). the lock layer for a claim's history; not a perception chain",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
+   "measures_src": "falsification_ledger/README.md:3",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "falsification_ledger/README.md:12",
+   "breaks_quote_state": "FOUND",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "OK",
+    "commit": "1407ded",
+    "cmd": "python3 -m unittest discover -s falsification_ledger -t . -p test_*.py",
+    "where": "worktree at HEAD"
+   }
+  },
+  {
+   "need": "floor",
+   "also": [],
+   "repo": "Cross-Domain-Toolkit",
+   "path": "cascade_regime_audit/",
+   "name": "cascade_regime_audit",
+   "aliases": [
+    "is the system near a tipping point",
+    "early warning signals of collapse",
+    "signals going quiet after collapse",
+    "alternate state stops existing"
+   ],
+   "measures_file": "cascade_regime_audit/README.md",
+   "measures": "**is this system being driven toward a saddle-node where the alternate state stops existing?**",
+   "breaks_file": "cascade_regime_audit/README.md",
+   "breaks_when": "It does not make your model smarter",
+   "check": "python3 -m unittest discover -s cascade_regime_audit -t . -p test_*.py",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "six signals in [0,1]; h_eff vs 2/sqrt(27); regime label",
+   "assumes": "observables mapped to the six signals by the caller",
+   "chain": "reads: decoding (normalized signals). ignores: sensor quality of the observables",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
+   "measures_src": "cascade_regime_audit/README.md:4",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "cascade_regime_audit/README.md:3",
+   "breaks_quote_state": "FOUND",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "OK",
+    "commit": "1407ded",
+    "cmd": "python3 -m unittest discover -s cascade_regime_audit -t . -p test_*.py",
+    "where": "worktree at HEAD"
+   }
+  },
+  {
+   "need": "frame",
+   "also": [
+    "channel"
+   ],
+   "repo": "Cross-Domain-Toolkit",
+   "path": "runner_up_trace/",
+   "name": "runner_up_trace",
+   "aliases": [
+    "what did the model almost say",
+    "rank-2 token branch",
+    "does the discarded branch rejoin",
+    "divergence map of sampling",
+    "projection step loss"
+   ],
+   "measures_file": "runner_up_trace/README.md",
+   "measures": "An instrument, posted so that whoever has the hardware can run it.",
+   "breaks_file": "runner_up_trace/README.md",
+   "breaks_when": "Not capability. No score, no leaderboard, no ranking.",
+   "check": "python3 -m unittest discover -s runner_up_trace -t . -p test_*.py",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "per branch: resync_D, div_D over a declared D sweep; permutation null beside",
+   "assumes": "a model adapter; top-N entropy selection",
+   "chain": "reads: inference (the model's projection step). ignores: decoding by a human reader",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
+   "measures_src": "runner_up_trace/README.md:5",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "runner_up_trace/README.md:59",
+   "breaks_quote_state": "FOUND",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "OK",
+    "commit": "1407ded",
+    "cmd": "python3 -m unittest discover -s runner_up_trace -t . -p test_*.py",
+    "where": "worktree at HEAD"
+   }
+  },
+  {
+   "need": "channel",
+   "also": [
+    "observer"
+   ],
+   "repo": "Cross-Domain-Toolkit",
+   "path": "telemetry_vocabulary/",
+   "name": "telemetry_vocabulary",
+   "aliases": [
+    "asked about the channel, answered about the occupant",
+    "model answers condition question with internal states",
+    "care directed at the asker instead of the question",
+    "terms for exchange-condition failure"
+   ],
+   "measures_file": "telemetry_vocabulary/README.md",
+   "measures": "A sender asks a model for **condition data about the exchange itself** (what is transmitting, what is failing, what the receiving node needs) and gets back a statement about whether the model has **internal states**, often followed by care directed at the sender.",
+   "breaks_file": "telemetry_vocabulary/README.md",
+   "breaks_when": "It is not a claim about intent, and not a claim about any model's inner workings.",
+   "check": null,
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "five terms with NOT clauses; a reproduction protocol (counts of statements)",
+   "assumes": "a chat interface; output alone settles the claim",
+   "chain": "reads: transmission and inference (condition question answered as interiority). markdown only, no code",
+   "a1_status": "A1_READING (model reading of stated scope, 2026-11-09; not verbatim)",
+   "measures_src": "telemetry_vocabulary/README.md:12",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "telemetry_vocabulary/README.md:68",
+   "breaks_quote_state": "FOUND",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "no check command stated"
    }
   }
  ],
@@ -1240,7 +1580,7 @@
    "name": "encoding-selection",
    "one": "Simulators/encoding-selection/",
    "other": "ICSC functional selection",
-   "note": "location not found in any repo reachable this session (search for 'ICSC' returned no hit); carried from the work order"
+   "note": "ICSC location not found in any repo reachable this session (code search for 'ICSC' returns only ICSCommand, an ICS component); carried from the work order. Amendment A2 names Cross-Domain-Toolkit falsification_ledger as the ICSC manifest's lock layer; the manifest itself is NOT_LOCATED, so that binding is recorded, not built"
   },
   {
    "name": "WO-6",
@@ -1283,6 +1623,12 @@
    "one": "Simulators/constraint-assembly/",
    "other": "Simulators/clustering-axes/",
    "note": "both use CA_nnn claim ids; cite with the folder"
+  },
+  {
+   "name": "clean-room",
+   "one": "software rebuild: Cross-Domain-Toolkit README.md:112, docs/METHOD.md:10 (\"clean-room, domain-general abstractions\")",
+   "other": "lab isolation (contamination-controlled room)",
+   "note": "lab-isolation sense carried from Amendment A2; no in-scope file using it was located"
   }
  ],
  "gaps": [
@@ -1310,6 +1656,11 @@
    "need": "observer",
    "gap": "a query tool over this index (search by alias at the command line)",
    "why": "the index is static; finder.json is machine-readable but no search CLI ships"
+  },
+  {
+   "need": "floor",
+   "gap": "four-arm paired design instrument: arms 1-4, arm 4 = infeasibility record (the design that could not be run is filed as an arm, not dropped)",
+   "why": "named in Amendment A2; no tool located that holds the four arms or files infeasibility as an arm"
   }
  ]
 }

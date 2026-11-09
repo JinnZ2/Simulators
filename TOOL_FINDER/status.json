@@ -1,7 +1,43 @@
 {
+ "Cross-Domain-Toolkit:cascade_regime_audit/": {
+  "cmd": "python3 -m unittest discover -s cascade_regime_audit -t . -p test_*.py",
+  "commit": "1407ded",
+  "exit": 0,
+  "last_line": "OK",
+  "status": "RUN",
+  "where": "worktree at HEAD"
+ },
+ "Cross-Domain-Toolkit:falsification_ledger/": {
+  "cmd": "python3 -m unittest discover -s falsification_ledger -t . -p test_*.py",
+  "commit": "1407ded",
+  "exit": 0,
+  "last_line": "OK",
+  "status": "RUN",
+  "where": "worktree at HEAD"
+ },
+ "Cross-Domain-Toolkit:multi_substrate_calibration/": {
+  "cmd": "python3 -m unittest discover -s multi_substrate_calibration -t . -p test_*.py",
+  "commit": "1407ded",
+  "exit": 0,
+  "last_line": "OK",
+  "status": "RUN",
+  "where": "worktree at HEAD"
+ },
+ "Cross-Domain-Toolkit:runner_up_trace/": {
+  "cmd": "python3 -m unittest discover -s runner_up_trace -t . -p test_*.py",
+  "commit": "1407ded",
+  "exit": 0,
+  "last_line": "OK",
+  "status": "RUN",
+  "where": "worktree at HEAD"
+ },
+ "Cross-Domain-Toolkit:telemetry_vocabulary/": {
+  "status": "NOT_RUN",
+  "why": "no check command stated"
+ },
  "JinnZ2:corpus_prior_audit/": {
   "cmd": "python3 corpus_prior_audit/audit.py --selftest",
-  "commit": "919f9d3",
+  "commit": "1345818",
   "exit": 0,
   "last_line": "selftest 17/17",
   "status": "RUN",
@@ -21,7 +57,7 @@
  },
  "Simulators:assessor-coupling/": {
   "cmd": "python3 assessor-coupling/test_assessor.py",
-  "commit": "3f7d3f5",
+  "commit": "b4d8fb5",
   "exit": 0,
   "last_line": "checks: 98   failed: 0",
   "status": "RUN",
@@ -29,7 +65,7 @@
  },
  "Simulators:blame-attribution/": {
   "cmd": "python3 blame-attribution/pair_check.py --selftest",
-  "commit": "3f7d3f5",
+  "commit": "b4d8fb5",
   "exit": 0,
   "last_line": "selftest: 34 checks, 0 failed",
   "status": "RUN",
@@ -37,7 +73,7 @@
  },
  "Simulators:category-weld/": {
   "cmd": "python3 category-weld/test_weld.py",
-  "commit": "3f7d3f5",
+  "commit": "b4d8fb5",
   "exit": 0,
   "last_line": "FAILURES: 0",
   "status": "RUN",
@@ -45,7 +81,7 @@
  },
  "Simulators:claim-record/": {
   "cmd": "python3 claim-record/record.py --selftest",
-  "commit": "3f7d3f5",
+  "commit": "b4d8fb5",
   "exit": 0,
   "last_line": "registered: days, sols, years",
   "status": "RUN",
@@ -53,7 +89,7 @@
  },
  "Simulators:criterion-symmetry/": {
   "cmd": "python3 criterion-symmetry/separability.py --selftest",
-  "commit": "3f7d3f5",
+  "commit": "b4d8fb5",
   "exit": 0,
   "last_line": "SELFTEST PASS (0 checks failed)",
   "status": "RUN",
@@ -61,9 +97,9 @@
  },
  "Simulators:cutoff-attribution/": {
   "cmd": "python3 cutoff-attribution/selftest.py",
-  "commit": "3f7d3f5",
+  "commit": "b4d8fb5",
   "exit": 0,
-  "last_line": "checks: 15   failed: 0",
+  "last_line": "checks: 25   failed: 0",
   "status": "RUN",
   "where": "worktree at HEAD"
  },
@@ -73,7 +109,7 @@
  },
  "Simulators:encoding-selection/": {
   "cmd": "python3 encoding-selection/selftest_es.py",
-  "commit": "3f7d3f5",
+  "commit": "b4d8fb5",
   "exit": 0,
   "last_line": "selftest: 43 checks, 0 failed",
   "status": "RUN",
@@ -81,7 +117,7 @@
  },
  "Simulators:evaluation-frame/": {
   "cmd": "python3 evaluation-frame/selftest_frame.py",
-  "commit": "3f7d3f5",
+  "commit": "b4d8fb5",
   "exit": 1,
   "last_line": "  FAILED and they are the only tokens that fire unmasked",
   "status": "UNKNOWN",
@@ -89,7 +125,7 @@
  },
  "Simulators:evidence-demotion-detector/": {
   "cmd": "python3 evidence-demotion-detector/selftest.py",
-  "commit": "3f7d3f5",
+  "commit": "b4d8fb5",
   "exit": 0,
   "last_line": "selftest: 38/38 checks PASS",
   "status": "RUN",
@@ -97,7 +133,7 @@
  },
  "Simulators:falsifier-audit/": {
   "cmd": "python3 falsifier-audit/selftest_fa.py",
-  "commit": "3f7d3f5",
+  "commit": "b4d8fb5",
   "exit": 0,
   "last_line": "selftest: 28 checks, 0 failed",
   "status": "RUN",
@@ -105,7 +141,7 @@
  },
  "Simulators:fold-matrix/": {
   "cmd": "python3 fold-matrix/fold_matrix.py --selftest",
-  "commit": "3f7d3f5",
+  "commit": "b4d8fb5",
   "exit": 0,
   "last_line": "SELFTEST PASS (0 checks failed)",
   "status": "RUN",
@@ -113,7 +149,7 @@
  },
  "Simulators:frame-token-audit/": {
   "cmd": "python3 frame-token-audit/selftest_fta.py",
-  "commit": "3f7d3f5",
+  "commit": "b4d8fb5",
   "exit": 0,
   "last_line": "selftest_fta: 20 checks passed",
   "status": "RUN",
@@ -121,7 +157,7 @@
  },
  "Simulators:label-position-test/": {
   "cmd": "python3 label-position-test/selftest_lpt.py",
-  "commit": "3f7d3f5",
+  "commit": "b4d8fb5",
   "exit": 0,
   "last_line": "selftest: 78 checks, 0 failed",
   "status": "RUN",
@@ -129,7 +165,7 @@
  },
  "Simulators:measurand-partition/": {
   "cmd": "python3 measurand-partition/test_partition.py",
-  "commit": "3f7d3f5",
+  "commit": "b4d8fb5",
   "exit": 0,
   "last_line": "checks: 128   failed: 0",
   "status": "RUN",
@@ -137,7 +173,7 @@
  },
  "Simulators:membership-probe/": {
   "cmd": "python3 membership-probe/probe_audit.py --selftest",
-  "commit": "3f7d3f5",
+  "commit": "b4d8fb5",
   "exit": 0,
   "last_line": "SELFTEST PASS (0 checks failed)",
   "status": "RUN",
@@ -145,7 +181,7 @@
  },
  "Simulators:moving-mean-tracker/": {
   "cmd": "python3 moving-mean-tracker/test_tracker.py",
-  "commit": "3f7d3f5",
+  "commit": "b4d8fb5",
   "exit": 0,
   "last_line": "checks: 68   failed: 0",
   "status": "RUN",
@@ -157,7 +193,7 @@
  },
  "Simulators:observer-exclusion/": {
   "cmd": "python3 observer-exclusion/v2_check.py --selftest",
-  "commit": "3f7d3f5",
+  "commit": "b4d8fb5",
   "exit": 0,
   "last_line": "SELFTEST PASS (0 checks failed)",
   "status": "RUN",
@@ -165,7 +201,7 @@
  },
  "Simulators:readout-count/": {
   "cmd": "python3 readout-count/selftest_rc.py",
-  "commit": "3f7d3f5",
+  "commit": "b4d8fb5",
   "exit": 0,
   "last_line": "selftest: 100 checks, 0 failed",
   "status": "RUN",
@@ -173,7 +209,7 @@
  },
  "Simulators:reasoning-gate/": {
   "cmd": "python3 -m unittest discover reasoning-gate/tests",
-  "commit": "3f7d3f5",
+  "commit": "b4d8fb5",
   "exit": 0,
   "last_line": "OK",
   "status": "RUN",
@@ -181,7 +217,7 @@
  },
  "Simulators:reporting-chain-loss/": {
   "cmd": "python3 reporting-chain-loss/test_hop.py",
-  "commit": "3f7d3f5",
+  "commit": "b4d8fb5",
   "exit": 0,
   "last_line": "checks: 50   failed: 0",
   "status": "RUN",
@@ -189,7 +225,7 @@
  },
  "Simulators:return-path/": {
   "cmd": "cd return-path && python3 test_return.py",
-  "commit": "3f7d3f5",
+  "commit": "b4d8fb5",
   "exit": 0,
   "last_line": "93 checks, 0 failed",
   "status": "RUN",
@@ -197,15 +233,15 @@
  },
  "Simulators:tail-check/": {
   "cmd": "python3 tail-check/selftest.py",
-  "commit": "3f7d3f5",
+  "commit": "b4d8fb5",
   "exit": 0,
-  "last_line": "checks: 18   failed: 0",
+  "last_line": "checks: 26   failed: 0",
   "status": "RUN",
   "where": "worktree at HEAD"
  },
  "Simulators:tools/check_term_collision.py": {
   "cmd": "python3 tools/check_term_collision.py",
-  "commit": "3f7d3f5",
+  "commit": "b4d8fb5",
   "exit": 0,
   "last_line": "======================================================================",
   "status": "RUN",
@@ -213,7 +249,7 @@
  },
  "Simulators:tools/known_answer.py": {
   "cmd": "python3 tools/known_answer.py",
-  "commit": "3f7d3f5",
+  "commit": "b4d8fb5",
   "exit": 0,
   "last_line": "========================================================================",
   "status": "RUN",
@@ -221,7 +257,7 @@
  },
  "Simulators:tools/provenance_marker.py": {
   "cmd": "python3 tools/provenance_marker.py --selftest",
-  "commit": "3f7d3f5",
+  "commit": "b4d8fb5",
   "exit": 0,
   "last_line": "checks: 27   failed: 0",
   "status": "RUN",
@@ -229,7 +265,7 @@
  },
  "Simulators:tools/sourced.py": {
   "cmd": "python3 tools/sourced.py --selftest",
-  "commit": "3f7d3f5",
+  "commit": "b4d8fb5",
   "exit": 0,
   "last_line": "checks: 41   failed: 0",
   "status": "RUN",
@@ -237,7 +273,7 @@
  },
  "Simulators:transmission-decay/": {
   "cmd": "python3 transmission-decay/selftest_power.py",
-  "commit": "3f7d3f5",
+  "commit": "b4d8fb5",
   "exit": 0,
   "last_line": "selftest: 51 checks, 0 failed",
   "status": "RUN",
@@ -245,7 +281,7 @@
  },
  "Simulators:valence-divergence/": {
   "cmd": "python3 valence-divergence/test_valence.py",
-  "commit": "3f7d3f5",
+  "commit": "b4d8fb5",
   "exit": 0,
   "last_line": "333 checks, 0 failed",
   "status": "RUN",
@@ -253,7 +289,7 @@
  },
  "method-layer:frame_probe.py": {
   "cmd": "python3 -m unittest tests.test_frame_probe",
-  "commit": "47fcab2",
+  "commit": "f7b607d",
   "exit": 0,
   "last_line": "OK",
   "status": "RUN",
@@ -261,7 +297,7 @@
  },
  "method-layer:observer_position_control.py": {
   "cmd": "python3 -m unittest tests.test_observer_position_control",
-  "commit": "47fcab2",
+  "commit": "f7b607d",
   "exit": 0,
   "last_line": "OK",
   "status": "RUN",
@@ -269,7 +305,7 @@
  },
  "method-layer:premise-traceability/register_map.py": {
   "cmd": "python3 -m unittest tests.test_register_map",
-  "commit": "47fcab2",
+  "commit": "f7b607d",
   "exit": 0,
   "last_line": "OK",
   "status": "RUN",
@@ -277,7 +313,7 @@
  },
  "method-layer:rank_detector.py": {
   "cmd": "python3 -m unittest tests.test_rank_detector",
-  "commit": "47fcab2",
+  "commit": "f7b607d",
   "exit": 0,
   "last_line": "OK",
   "status": "RUN",
