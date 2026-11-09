@@ -621,3 +621,5 @@ Selftest lines (throwaway worktree, commit e577c4e): selftest_null "checks: 28  
      regenerated, because a live render would write the trailers' model names.
    - MP_012 keeps the scratch specimen: 390 of 1030; agreement 315 -> 229. MP_013 records the
      decode.
+
+Selftest lines (throwaway worktree, commit 37af616): selftest_null "checks: 30   failed: 0"; cutoff selftest "checks: 25   failed: 0"; provenance "SELFTEST PASS (0 checks failed)"; check_v02 "checks: 11   failed: 0"; check_landing "checks: 5   failed: 0"; build_finder "checks: 17   failed: 0"; pytest tests 194 passed, 3 failed (the pinned run_manifest set); known_red VERDICT: PASS.
