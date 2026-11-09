@@ -257,7 +257,10 @@ GAPS = [
  ("channel", "voice/live loss other than cuts: prosody, tone, and affect dropped by transcription",
   "cutoff-attribution reads cuts only"),
  ("floor", "null calibration for the voice-cut detector itself (false positive rate of DETECTED cuts)",
-  "cutoff-attribution has fixtures, no null-harness run"),
+  "cutoff-attribution has fixtures, no null-harness run"
+  " -- PARTIAL 2026-11-09: cutoff-attribution/null_calibration.py runs source attribution through null-harness"
+  " (confusion matrix, forced-attribution 0/2400, one planted miss row; ILLUSTRATIVE). The false positive rate of"
+  " DETECTED cuts themselves is still not calibrated"),
  ("fill-source", "templated-vs-user tagging for model output outside the Shadow-Hunting pipeline",
   "ai_provenance tags elements its own pipeline emits; no tool tags arbitrary model text"),
  ("observer", "a query tool over this index (search by alias at the command line)",

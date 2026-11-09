@@ -50,3 +50,6 @@ tool's stated scope only. Index: Simulators `TOOL_FINDER/TOOL_FINDER.md`.
 - avoided term: AVOIDED_TERM_UNSTATED
 - measures: "No metric ships without a known-answer run."
 - breaks when: NO_STATED_LIMITS
+
+## Tested (append-only; never overwrite an older line): channel_chain
+tested: 2026-11-09 | model: WITHHELD (session rule: no model identifier is written into a pushed artifact; the operator holds it) | Claude Code, cloud session (claude.ai/code) | channel_chain.py --selftest 12/12

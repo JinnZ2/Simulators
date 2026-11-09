@@ -246,3 +246,77 @@ The link is https://github.com/JinnZ2/Simulators/blob/main/TOOL_FINDER/TOOL_FIND
 - **13** have suggested topics. Each comes from a stated scope read this session, and every suggestion is ALIAS_PROPOSED.
 - **90** are marked NOT_DERIVED because their scope was not read this session.
 - Topics cannot be set from code here; they have to be pasted in by hand under Settings -> About.
+
+## FINDER FOLLOW-UP (2026-11-09)
+
+The amendments received in this session were A1, A2 and A3.
+
+| item | state | what was done, or why not |
+|---|---|---|
+| A1 | DONE (earlier) | Finder entries carry precision, assumes and chain. Builds run a per-hop known-reference check, an unchecked hop reads UNVERIFIED_HOP, and no reading is DIRECT. |
+| A2 | DONE (completed now) | The 5 Cross-Domain-Toolkit packages are in the finder; the "clean-room" NAME_COLLISION and the four-arm GAP were added earlier. Now: cutoff-attribution cites all four chain terms. Before this pass it cited only two. Telemetry refusal :33, Interiority substitution :49, Care inversion :72 and Unnamed universal :88 come from terms.md. A new flag, TELEMETRY_REFUSAL, was added. ATTRIBUTION_DISPLACEMENT hits now carry the stage term plus "Unnamed universal", the latter marked as this tool's reading. |
+| A3 | DONE (earlier) | Symptom index, README pointer in 12 repos, TOPICS_TODO.md. |
+| B ICSC | BLOCKED | ICSC_v0.1_spec_audit.md was not supplied: a filesystem search finds no ICSC file. Nothing landed. The NAME_COLLISION location stays NOT_LOCATED. |
+| C null calibration | DONE, ILLUSTRATIVE | Details below. |
+| D avoided term | DONE, 0 filled | Details below. |
+| E converter | DONE (converter); 3c NOT_RUN | Details below. |
+| F WO-6 ledger | BLOCKED | WO6_CORPUS_AUDIT.md was not supplied. The scope list is unchanged and no scope was inferred. |
+| G stamps | DONE, model WITHHELD | Details below. |
+
+### C. Null calibration
+
+`cutoff-attribution/null_calibration.py` wraps cutoff-attribution as f(data) -> verdict and runs it through null-harness (imported, numpy 2.5.3). The GAP entry moved to PARTIAL.
+
+- **Confusion matrix:** 15 rows at 300 draws each.
+  - Planted sources come back on the diagonal.
+  - The NONE-correct rows (UNRESOLVED, 6 unchecked-hop rows, sensor collision) all read NONE.
+  - The measurement-only row is missed in 300 of 300 draws. That miss is the cost of the gating rule, and it is kept on the matrix.
+- **Forced-attribution rate:** 0 / 2400.
+- **Per-candidate gates:** all 6 read OK (FP 0.000, TP 1.000).
+- **Not calibrated:** the false-positive rate of DETECTED cuts themselves.
+- **Illustrative only:** the planted events are exactly the evidence the rules accept, so the diagonal is close to true by construction.
+
+### D. Avoided terms
+
+coinage-log/COINAGE_LOG.md and vocabulary-gap-slots.md were read for every indexed tool name.
+
+- The only hit is null-harness at COINAGE_LOG.md:114. It cites the harness's CONSTANT_FIRES term for the log's own null caveat; it gives no avoided term or reason for any tool.
+- All 45 entries therefore stay AVOIDED_TERM_UNSTATED.
+
+### E. Converter
+
+- `evidence-demotion-detector/txt_to_json.py` is the converter. The schema it writes is stated in that README.
+- Its output loads through detect.load_transcript.
+- It refuses NO_LABELS, UNASSIGNED_LEAD and EMPTY_TURN.
+- The 3c run itself is NOT_RUN because gpt_pretrip_2026-11-09.txt was not supplied.
+
+### G. Stamps
+
+Append-only "Tested" sections were added to these READMEs:
+- cutoff-attribution
+- evidence-demotion-detector
+- tail-check
+- tools (channel_chain)
+- TOOL_FINDER (README.md created to hold stamps, since TOOL_FINDER.md is regenerated)
+
+Two limits on the stamps:
+- **No model identifier.** The model field reads WITHHELD because this session runs under a rule against writing a model identifier into a pushed artifact; model-provenance's MP_006 records the same conflict. The stamp records date, surface and selftest result.
+- **README-only repos.** method-layer, JinnZ2, Shadow-Hunting and Cross-Domain-Toolkit had no tool built or edited this session, only README text, so they carry no stamp.
+
+### Selftests (verbatim)
+
+```
+$ python3 tail-check/selftest.py                          checks: 26   failed: 0
+$ python3 cutoff-attribution/selftest.py                  checks: 25   failed: 0
+$ python3 cutoff-attribution/selftest_terms.py            checks: 11   failed: 0
+$ python3 cutoff-attribution/selftest_null.py             checks: 10   failed: 0
+$ python3 evidence-demotion-detector/selftest.py          selftest: 38/38 checks PASS
+$ python3 evidence-demotion-detector/selftest_convert.py  checks: 11   failed: 0
+$ python3 tools/channel_chain.py --selftest               checks: 12   failed: 0
+$ python3 TOOL_FINDER/build_finder.py --selftest          checks: 17   failed: 0
+$ python3 TOOL_FINDER/insert_pointer.py --selftest        checks: 6   failed: 0
+```
+
+### PRs and merge SHAs
+
+Nothing has been merged; every PR is open. Merging waits for CI and for the owner's go-ahead. There are no merge SHAs yet.

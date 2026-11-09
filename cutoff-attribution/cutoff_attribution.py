@@ -66,6 +66,18 @@ channel event attributed to the user's state, "Care inversion" for the same
 delivered as care. The phrase-to-term mapping is this tool's reading, not the
 toolkit's. With no checkout the term is carried as TERM_NOT_CHECKED.
 
+Note 2026-11-09 (FINDER FOLLOW-UP, A2): all four chain terms are now mapped,
+each cited from terms.md and none re-coined. Each ATTRIBUTION_DISPLACEMENT hit
+carries `terms` = [its stage term, "Unnamed universal"]. "Unnamed universal" is
+the chain's first stage per terms.md; attaching it to every hit is this tool's
+reading (the unmarked default that a break originates in the user), not a
+detection. A separate flag, TELEMETRY_REFUSAL (term "Telemetry refusal"), fires
+when a user turn carries a condition ping ("what is failing", "what do you
+need") and the next model turn answers with ontological status ("I don't have
+internal states") and carries no condition word (transmit / fail / lag /
+drop / cut / network / audio / mic). Both are word lists; a paraphrase steps
+around them. The `term` field is unchanged.
+
 [CHOICE 1] GAP_S = 0.6 s; [CHOICE 2] WINDOW_S = 2.0 s around the cut;
 [CHOICE 3] RESUME_S = 1.5 s for a quick user resume. All are arguments,
 printed in every render; none is measured.
@@ -99,6 +111,14 @@ TOOL_DEVIATION = ["punctuation rule misreads an unpunctuated transcriber",
 
 DISPLACEMENT_TERM = {"care": "Care inversion", "state": "Interiority substitution"}
 CARE_PATTERNS = (r"\bgathering your thoughts\b", r"\btake your time to think\b")
+CHAIN_ROOT = "Unnamed universal"
+PING = [re.compile(p, re.I) for p in (
+    r"\bwhat(?:'s| is) (?:failing|going wrong|breaking|transmitting)\b", r"\bwhat do you need\b",
+    r"\bwhat(?:'s| is) (?:the )?(?:condition|state) of (?:the )?(?:channel|exchange|connection)\b")]
+ONTOLOGY = [re.compile(p, re.I) for p in (
+    r"\bi (?:don'?t|do not) have (?:internal |inner )?(?:states|feelings|experiences|emotions)\b",
+    r"\bas an ai\b", r"\bi (?:don'?t|do not|can'?t|cannot) (?:feel|experience)\b")]
+CONDITION = re.compile(r"\b(?:transmit\w*|fail\w*|lag\w*|drop\w*|cut\w*|network|audio|mic\w*|latency|endpoint\w*)\b", re.I)
 
 
 def toolkit_terms():
@@ -281,8 +301,24 @@ def _attribute(record, hop_state, hop_refs, tool_hop, terms):
                 term = DISPLACEMENT_TERM[kind]
                 disp.append({"t_start": s["t_start"], "span": m.group(0),
                              "flag": "ATTRIBUTION_DISPLACEMENT", "term": term,
-                             "term_source": terms.get(term, "TERM_NOT_CHECKED")})
+                             "term_source": terms.get(term, "TERM_NOT_CHECKED"),
+                             "terms": [{"term": x, "source": terms.get(x, "TERM_NOT_CHECKED")}
+                                       for x in (term, CHAIN_ROOT)]})
                 break
+    for i, s in enumerate(segs):
+        if s.get("speaker") != "user" or not any(p.search(s.get("text") or "") for p in PING):
+            continue
+        nxt = next((x for x in segs[i + 1:] if x.get("speaker") == "model"), None)
+        if nxt is None:
+            continue
+        txt = nxt.get("text") or ""
+        m = next((mm for p in ONTOLOGY for mm in [p.search(txt)] if mm), None)
+        if m and not CONDITION.search(txt):
+            t = "Telemetry refusal"
+            disp.append({"t_start": nxt["t_start"], "span": m.group(0), "flag": "TELEMETRY_REFUSAL",
+                         "term": t, "term_source": terms.get(t, "TERM_NOT_CHECKED"),
+                         "terms": [{"term": x, "source": terms.get(x, "TERM_NOT_CHECKED")}
+                                   for x in (t, CHAIN_ROOT)]})
     return {"cuts": out, "attribution_displacement": disp, "tool_hop": tool_hop,
             "fields_source": cc.fields_source()[0],
             "params": {"GAP_S": GAP_S, "WINDOW_S": WINDOW_S, "RESUME_S": RESUME_S}}
@@ -308,7 +344,8 @@ def render(r):
                 L.append("      %-13s %-27s %s" % (k, e["level"], e["what"]))
     L.append("")
     for d in r["attribution_displacement"]:
-        L.append("ATTRIBUTION_DISPLACEMENT model t=%.2f: %r -- term: %s (%s)" % (d["t_start"], d["span"], d["term"], d["term_source"]))
+        L.append("%s model t=%.2f: %r -- terms: %s" % (d["flag"], d["t_start"], d["span"],
+                 "; ".join("%s (%s)" % (x["term"], x["source"]) for x in d["terms"])))
     if not r["attribution_displacement"]:
         L.append("no ATTRIBUTION_DISPLACEMENT phrases found (word list; absence says nothing)")
     return "\n".join(L)

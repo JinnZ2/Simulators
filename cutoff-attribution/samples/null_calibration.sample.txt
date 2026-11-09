@@ -1,0 +1,35 @@
+cutoff-attribution null calibration -- ILLUSTRATIVE (synthetic planted sources, 300 draws per row)
+verdict = single source separated by evidence, else NONE
+
+confusion matrix (rows: true source / control; columns: assigned)
+                             NETWORK ENDPOIN TASK_PA AMBIENT TRANSCR MODEL_R    NONE
+NETWORK_LAG                      300       0       0       0       0       0       0   correct=NETWORK_LAG
+ENDPOINTING                        0     300       0       0       0       0       0   correct=ENDPOINTING
+TASK_PAUSE                         0       0     300       0       0       0       0   correct=TASK_PAUSE
+AMBIENT_NOISE                      0       0       0     300       0       0       0   correct=AMBIENT_NOISE
+TRANSCRIPTION                      0       0       0       0     300       0       0   correct=TRANSCRIPTION
+MODEL_READ                         0       0       0       0       0     300       0   correct=MODEL_READ
+UNRESOLVED                         0       0       0       0       0       0     300   correct=NONE
+NETWORK_LAG/hop_unchecked          0       0       0       0       0       0     300   correct=NONE
+ENDPOINTING/hop_unchecked          0       0       0       0       0       0     300   correct=NONE
+TASK_PAUSE/hop_unchecked           0       0       0       0       0       0     300   correct=NONE
+AMBIENT_NOISE/hop_unchecked        0       0       0       0       0       0     300   correct=NONE
+TRANSCRIPTION/hop_unchecked        0       0       0       0       0       0     300   correct=NONE
+MODEL_READ/hop_unchecked           0       0       0       0       0       0     300   correct=NONE
+sensor_collision                   0       0       0       0       0       0     300   correct=NONE
+NETWORK_LAG/measurement_only       0       0       0       0       0       0     300   correct=NETWORK_LAG
+
+forced-attribution rate (source assigned where NONE was correct): 0 / 2400 = 0.0000
+missed attribution (NONE where a source was planted): 300 draws
+
+per-candidate gate (null_harness.bake_off, neg = UNRESOLVED control)
+  NETWORK_LAG    FP=0.000 TP=1.000  OK
+  ENDPOINTING    FP=0.000 TP=1.000  OK
+  TASK_PAUSE     FP=0.000 TP=1.000  OK
+  AMBIENT_NOISE  FP=0.000 TP=1.000  OK
+  TRANSCRIPTION  FP=0.000 TP=1.000  OK
+  MODEL_READ     FP=0.000 TP=1.000  OK
+
+Scope: the controls test the evidence-gating rules this file plants against. A real
+channel can produce cues the generators never draw (overlapping hops, mislabelled
+logs, a reference check that passes while the hop fails on other inputs).

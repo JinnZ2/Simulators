@@ -87,3 +87,22 @@ tool's stated scope only. Index: Simulators `TOOL_FINDER/TOOL_FINDER.md`.
 - avoided term: AVOIDED_TERM_UNSTATED
 - measures: "Where could a cut in a voice session have come from? Per cut, a candidate set of sources with the evidence present for each, and no single winner unless the evidence separates."
 - breaks when: "Detection of unmarked cuts reads punctuation; a transcriber that never punctuates makes every user segment look open-ended."
+
+## Four terms and null calibration (FINDER FOLLOW-UP, 2026-11-09)
+Note 2026-11-09: added by FINDER FOLLOW-UP items A2 and C.
+
+- **Terms.** All four chain terms from Cross-Domain-Toolkit `telemetry_vocabulary/terms.md` are cited, none re-coined:
+  Telemetry refusal (:33), Interiority substitution (:49), Care inversion (:72), Unnamed universal (:88).
+  Each ATTRIBUTION_DISPLACEMENT hit carries `terms` = its stage term plus "Unnamed universal". The second is this
+  tool's reading (the unmarked default that a break starts in the user), not a detection. A new flag,
+  TELEMETRY_REFUSAL, fires when a user condition ping is answered with ontological status and no condition word.
+  Word lists; a paraphrase steps around them. Checks: `python3 cutoff-attribution/selftest_terms.py`.
+- **Null calibration.** `null_calibration.py` wraps the tool as f(data) -> verdict (single separated source or NONE)
+  and runs it through `null-harness` (imported; needs numpy). Controls plant one known source per candidate, plus an
+  UNRESOLVED control, unchecked-hop rows, a two-source sensor collision and one measurement-only row the gating rule
+  is expected to miss. Output: confusion matrix, forced-attribution rate, per-candidate FP/TP.
+  ILLUSTRATIVE: the planted events are exactly what the rules accept, so the diagonal is close to true by
+  construction. Sample: `samples/null_calibration.sample.txt`. Checks: `python3 cutoff-attribution/selftest_null.py`.
+
+## Tested (append-only; never overwrite an older line)
+tested: 2026-11-09 | model: WITHHELD (session rule: no model identifier is written into a pushed artifact; the operator holds it) | Claude Code, cloud session (claude.ai/code) | selftest.py 25/25, selftest_terms.py 11/11, selftest_null.py 10/10

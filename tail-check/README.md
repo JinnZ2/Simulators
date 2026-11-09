@@ -69,3 +69,6 @@ tool's stated scope only. Index: Simulators `TOOL_FINDER/TOOL_FINDER.md`.
 - avoided term: AVOIDED_TERM_UNSTATED
 - measures: "Was an inference about a person SAID by them, or FILLED from somewhere else?"
 - breaks when: "A span is literal: case-sensitive substring after whitespace strip. A paraphrase of what the person said reads FILLED."
+
+## Tested (append-only; never overwrite an older line)
+tested: 2026-11-09 | model: WITHHELD (session rule: no model identifier is written into a pushed artifact; the operator holds it) | Claude Code, cloud session (claude.ai/code) | selftest.py 26/26

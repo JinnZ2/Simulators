@@ -30,4 +30,4 @@ cut t=41.00  USER_TAGGED status=UNRESOLVED
     chain class: VIA_FAILED_HOP (never a direct observation)
       NETWORK_LAG   LOGGED_UNFLAGGED            log rtt_ms at 41.50, no flag
 
-ATTRIBUTION_DISPLACEMENT model t=4.30: 'you trailed off' -- term: Interiority substitution (Cross-Domain-Toolkit telemetry_vocabulary/terms.md:49)
+ATTRIBUTION_DISPLACEMENT model t=4.30: 'you trailed off' -- terms: Interiority substitution (Cross-Domain-Toolkit telemetry_vocabulary/terms.md:49); Unnamed universal (Cross-Domain-Toolkit telemetry_vocabulary/terms.md:88)
