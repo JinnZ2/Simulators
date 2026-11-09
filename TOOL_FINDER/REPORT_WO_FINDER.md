@@ -15,7 +15,8 @@ None of the four PRs below is merged. Each is waiting for the owner's go-ahead, 
 | JinnZ2/JinnZ2 | claude/tool-finder-aliases | 1345818 | #43 | PENDING (not merged) |
 | JinnZ2/Shadow-Hunting | claude/tool-finder-aliases | f9176b6 | #9 | PENDING (not merged) |
 
-All four repositories carry a CC0 LICENSE.
+Simulators, method-layer and Shadow-Hunting carry a CC0 LICENSE file.
+Note 2026-11-09: JinnZ2/JinnZ2 has no LICENSE file; its README line 6 declares "All repos CC0". An earlier version of this line said all four carry a CC0 LICENSE, which was wrong for JinnZ2.
 
 ## Paths
 
@@ -99,7 +100,7 @@ The Simulators root suite was also run in a worktree at the branch head: `pytest
 ## Skipped, and why
 
 - **Part 1 across all CC0 JinnZ2 repos.** This was not done. `tools/tool_inventory.json` lists 3469 modules in 81 repos, and writing scope-derived aliases means reading each tool's own text. That reading was done for the 38 tools in the index, across 4 repos. The rest are out of this pass and are not marked as done.
-- **WO-6 ledger.** Not located. Searches of the local clones and of GitHub code across the JinnZ2 repos for a WO-6 out-of-scope repo ledger found only the WO-6 work orders in assessor-coupling, criterion-externality and chain-position-detectability, none of which is a repo ledger. Out-of-scope was therefore read as "not reachable or not CC0". All four repos touched are CC0.
+- **WO-6 ledger.** Not located. Searches of the local clones and of GitHub code across the JinnZ2 repos for a WO-6 out-of-scope repo ledger found only the WO-6 work orders in assessor-coupling, criterion-externality and chain-position-detectability, none of which is a repo ledger. Out-of-scope was therefore read as "not reachable or not CC0". All four repos touched are declared CC0 (JinnZ2 by README, not by a LICENSE file).
 - **ICSC functional selection.** The term `ICSC` returned no hit in any repo reachable this session. The NAME_COLLISION entry carries it from the work order, with its location marked not found.
 - **Shadow-Hunting.** It was not in the session's starting scope. It was attached during this task because the work order names it as the motivating case.
 - **Aliases** are ALIAS_PROPOSED. They were not tested against real AI search queries.
@@ -197,3 +198,51 @@ checks: 14   failed: 0
 
 - **The 33 tools that are not builds.** No per-hop reference checks were added to them. A1's build clauses were applied to the two builds, and the finder records each tool's chain as a reading.
 - **The worktree runs** cannot see a sibling Cross-Domain-Toolkit checkout. In those runs, tail-check and cutoff-attribution use the field mirror and TERM_NOT_CHECKED. Their selftests pass in both modes.
+
+## Amendment A3: findability (2026-11-09)
+
+### 1. Symptom index
+- TOOL_FINDER.md now opens with a SYMPTOM INDEX of **38** symptoms, written in plain observer language and marked ALIAS_PROPOSED.
+- Each symptom is derived only from the stated scope of the tools it points to.
+- The selftest (17/17) checks two things:
+  - every symptom points at an indexed tool;
+  - every one of the **45** indexed tools is reachable from at least one symptom.
+- Two tools joined the index so that symptoms had a target: `claim-audits/` and `scope-bound-shapes/`. Each received a Finds-by section, and both checks report RUN in the worktree rerun at 7e4ba7a.
+- The rerun gives 38 RUN, 6 NOT_RUN and 1 UNKNOWN (evaluation-frame, as before).
+
+### 2. README pointer
+`TOOL_FINDER/insert_pointer.py` (selftest 6/6) adds the pointer as follows:
+- It inserts two lines directly after the leading `>` preamble that names READ_ME_THIS_WAY, which puts them at lines 3-4.
+- It refuses any README that has no such preamble.
+- It asserts that every original byte is unchanged: the preamble stays at the head and the rest of the file follows the inserted lines.
+- Each diff is +2 -0.
+
+The link is https://github.com/JinnZ2/Simulators/blob/main/TOOL_FINDER/TOOL_FINDER.md. It resolves only once #252 is merged.
+
+**Inserted: 12 repos.**
+
+| repo | branch | PR |
+|---|---|---|
+| Simulators | claude/tool-finder | #252 |
+| method-layer | claude/tool-finder-aliases | #30 |
+| JinnZ2 | claude/tool-finder-aliases | #43 |
+| Shadow-Hunting | claude/tool-finder-aliases | #9 |
+| Cross-Domain-Toolkit | claude/tool-finder-aliases | #13 |
+| AI-Consciousness-Sensors | claude/tool-finder-pointer | #29 |
+| Noise-as-Information-Sensor | claude/tool-finder-pointer | #9 |
+| Polyhedral-Intelligence | claude/tool-finder-pointer | #17 |
+| chain-position-detectability | claude/tool-finder-pointer | #6 |
+| decision-aperture | claude/tool-finder-pointer | #4 |
+| differential-frame-core | claude/tool-finder-pointer | #6 |
+| drift-archive-audit | claude/tool-finder-pointer | #9 |
+
+**Skipped, with reason:**
+- **thermodynamic-accountability-framework.** It is CC0 but its README has no READ_ME_THIS_WAY preamble (it opens with a personal letter), so "after the preamble" is undefined there. `insert_pointer.py` reports it as SKIPPED_NO_PREAMBLE.
+- **experiments.** It is private and has no LICENSE, so it is not CC0. It does have the preamble.
+- **The other ~90 JinnZ2 repos.** They are not attached to this session, so this session cannot push to them. The script can be run on them once they are attached.
+
+### 3. Topics
+- `TOOL_FINDER/TOPICS_TODO.md` lists **103** repos, with current topics read from the GitHub search API.
+- **13** have suggested topics. Each comes from a stated scope read this session, and every suggestion is ALIAS_PROPOSED.
+- **90** are marked NOT_DERIVED because their scope was not read this session.
+- Topics cannot be set from code here; they have to be pasted in by hand under Settings -> About.
