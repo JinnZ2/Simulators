@@ -162,3 +162,14 @@ stable-environment argument), `gap-markers/` (`SCR-05`, classification
 splitting on origin rather than behaviour), `observer-exclusion/`
 (survivorship in a transmission record), `investigation-sim/`
 (`IS_001`, an x-axis that must come from outside the sample).
+
+## Finds-by (ALIAS_PROPOSED, 2026-11-09)
+Note 2026-11-09: added by WORK ORDER TOOL FINDER part 1; aliases derived from this
+tool's stated scope only. Index: Simulators `TOOL_FINDER/TOOL_FINDER.md`.
+
+- knowledge lost across generations
+- hazard knowledge becomes a story
+- oral transmission decay rate
+- avoided term: AVOIDED_TERM_UNSTATED
+- measures: "at what generational distance an account shifts from **mechanism** (actionable causal structure) to **story** (narrative retained, causal structure lost)."
+- breaks when: "Nothing here models a valley, an informant, an account, or a transmission chain."

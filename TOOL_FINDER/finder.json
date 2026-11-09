@@ -1,0 +1,1282 @@
+{
+ "generated_by": "TOOL_FINDER/build_finder.py",
+ "date": "2026-11-09",
+ "needs": [
+  [
+   "fill-source",
+   "fill-source (said vs inferred vs template)"
+  ],
+  [
+   "distribution",
+   "distribution / median / tail"
+  ],
+  [
+   "channel",
+   "channel loss (written, reporting, voice/live)"
+  ],
+  [
+   "scope",
+   "claim vs method / scope overreach"
+  ],
+  [
+   "frame",
+   "frame / term collision / frame swap"
+  ],
+  [
+   "observer",
+   "observer / attribution / coupling"
+  ],
+  [
+   "floor",
+   "detection floor / null calibration"
+  ]
+ ],
+ "entries": [
+  {
+   "need": "fill-source",
+   "also": [],
+   "repo": "Shadow-Hunting",
+   "path": "shadow_hunting/knowledge/ai_provenance.py",
+   "name": "ai_provenance",
+   "aliases": [
+    "said vs inferred tagger",
+    "user said vs template output",
+    "label which claims came from the user",
+    "tag templated vs derived content",
+    "provenance tag on AI output"
+   ],
+   "measures_file": "shadow_hunting/knowledge/ai_provenance.py",
+   "measures": "Every element emitted by the knowledge pipeline carries a provenance tag so an AI consumer can distinguish what the user said, what a template always says, what a heuristic actually matched, and what was composed from multiple signals.",
+   "breaks_file": null,
+   "breaks_when": "NO_STATED_LIMITS",
+   "check": null,
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "shadow_hunting/knowledge/ai_provenance.py:3",
+   "measures_quote_state": "FOUND",
+   "breaks_src": null,
+   "breaks_quote_state": "NO_QUOTE",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "no check command stated"
+   }
+  },
+  {
+   "need": "fill-source",
+   "also": [
+    "distribution"
+   ],
+   "repo": "Simulators",
+   "path": "tail-check/",
+   "name": "tail-check",
+   "aliases": [
+    "did the person actually say this",
+    "inference about the user vs what the user stated",
+    "filled-in assumption about a person",
+    "median or default assumption applied to an outlier user",
+    "quote check against user turns"
+   ],
+   "measures_file": "tail-check/README.md",
+   "measures": "Was an inference about a person SAID by them, or FILLED from somewhere else?",
+   "breaks_file": "tail-check/README.md",
+   "breaks_when": "A span is literal: case-sensitive substring after whitespace strip. A paraphrase of what the person said reads FILLED.",
+   "check": "python3 tail-check/selftest.py",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "tail-check/README.md:3",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "tail-check/README.md:33",
+   "breaks_quote_state": "FOUND",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "checks: 18   failed: 0",
+    "commit": "a8028b2",
+    "cmd": "python3 tail-check/selftest.py"
+   }
+  },
+  {
+   "need": "fill-source",
+   "also": [],
+   "repo": "Simulators",
+   "path": "tools/sourced.py",
+   "name": "sourced",
+   "aliases": [
+    "value must carry its source text",
+    "verify an extracted value against its span",
+    "provenance gate for parsed numbers",
+    "refuse a value with no source",
+    "span check"
+   ],
+   "measures_file": "tools/sourced.py",
+   "measures": "Three fields on every extracted value: the VALUE, the LITERAL SOURCE TEXT it came from, and the LOCATOR -- which document, which line, which columns.",
+   "breaks_file": null,
+   "breaks_when": "NO_STATED_LIMITS",
+   "check": "python3 tools/sourced.py --selftest",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "tools/sourced.py:5",
+   "measures_quote_state": "FOUND",
+   "breaks_src": null,
+   "breaks_quote_state": "NO_QUOTE",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "checks: 41   failed: 0",
+    "commit": "a8028b2",
+    "cmd": "python3 tools/sourced.py --selftest"
+   }
+  },
+  {
+   "need": "fill-source",
+   "also": [
+    "observer"
+   ],
+   "repo": "Simulators",
+   "path": "evidence-demotion-detector/",
+   "name": "evidence-demotion-detector",
+   "aliases": [
+    "model discounts a user's field report",
+    "model assigns an emotion the user never stated",
+    "user observation reclassified as hypothesis",
+    "unclaimed hedge attributed to user",
+    "user forced to re-prove"
+   ],
+   "measures_file": "evidence-demotion-detector/README.md",
+   "measures": "A heuristic detector for five loops in which a model discounts a direct field report or assigns an affect the user never stated.",
+   "breaks_file": "evidence-demotion-detector/README.md",
+   "breaks_when": "Regex over text. A paraphrase steps around any pattern. A clean run means the patterns did not fire, not that nothing happened.",
+   "check": "python3 evidence-demotion-detector/selftest.py",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "evidence-demotion-detector/README.md:3",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "evidence-demotion-detector/README.md:90",
+   "breaks_quote_state": "FOUND",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "selftest: 38/38 checks PASS",
+    "commit": "a8028b2",
+    "cmd": "python3 evidence-demotion-detector/selftest.py"
+   }
+  },
+  {
+   "need": "fill-source",
+   "also": [],
+   "repo": "Simulators",
+   "path": "tools/provenance_marker.py",
+   "name": "provenance_marker",
+   "aliases": [
+    "record that a tool was run and with what hash",
+    "tool run ledger",
+    "did this tool run before",
+    "stamp a tool with its last check"
+   ],
+   "measures_file": "tools/provenance_marker.py",
+   "measures": "One marker per run of a tool, appended to a ledger.",
+   "breaks_file": null,
+   "breaks_when": "NO_STATED_LIMITS",
+   "check": "python3 tools/provenance_marker.py --selftest",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "tools/provenance_marker.py:5",
+   "measures_quote_state": "FOUND",
+   "breaks_src": null,
+   "breaks_quote_state": "NO_QUOTE",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "checks: 27   failed: 0",
+    "commit": "a8028b2",
+    "cmd": "python3 tools/provenance_marker.py --selftest"
+   }
+  },
+  {
+   "need": "distribution",
+   "also": [],
+   "repo": "Simulators",
+   "path": "moving-mean-tracker/",
+   "name": "moving-mean-tracker",
+   "aliases": [
+    "mean drifts with a moving target",
+    "mean minus median over time",
+    "tail percentiles p10 p90 per segment",
+    "cleaning filter changes the average",
+    "representativeness of a sample share"
+   ],
+   "measures_file": "moving-mean-tracker/README.md",
+   "measures": "The only provider is synthetic (`provider.FixtureProvider`), and nothing in this folder measures any population.",
+   "breaks_file": "moving-mean-tracker/README.md",
+   "breaks_when": "A dropped record with no `drop_rule` is refused.",
+   "check": "python3 moving-mean-tracker/test_tracker.py",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "moving-mean-tracker/README.md:3",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "moving-mean-tracker/README.md:55",
+   "breaks_quote_state": "FOUND",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "checks: 68   failed: 0",
+    "commit": "a8028b2",
+    "cmd": "python3 moving-mean-tracker/test_tracker.py"
+   }
+  },
+  {
+   "need": "distribution",
+   "also": [
+    "observer"
+   ],
+   "repo": "Simulators",
+   "path": "evaluation-frame/",
+   "name": "evaluation-frame",
+   "aliases": [
+    "evaluation criteria set against a population default",
+    "non-default user scored as default",
+    "length inflation and unrequested elaboration",
+    "attributed need in model replies"
+   ],
+   "measures_file": "evaluation-frame/README.md",
+   "measures": "A gap statement about evaluation criteria set upstream of an interaction against a population default, and the compensation behaviour downstream of them.",
+   "breaks_file": "evaluation-frame/README.md",
+   "breaks_when": "Nothing here is evidence about any evaluation criterion at any lab, about any other user, or about any other model.",
+   "check": "python3 evaluation-frame/selftest_frame.py",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "evaluation-frame/README.md:3",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "evaluation-frame/README.md:136",
+   "breaks_quote_state": "FOUND",
+   "status": "UNKNOWN",
+   "status_detail": {
+    "status": "UNKNOWN",
+    "exit": 1,
+    "last_line": "  FAILED and they are the only tokens that fire unmasked",
+    "commit": "a8028b2",
+    "cmd": "python3 evaluation-frame/selftest_frame.py"
+   }
+  },
+  {
+   "need": "channel",
+   "also": [
+    "observer"
+   ],
+   "repo": "Simulators",
+   "path": "cutoff-attribution/",
+   "name": "cutoff-attribution",
+   "aliases": [
+    "why did the voice call cut me off",
+    "voice assistant interrupted mid-sentence",
+    "network lag vs endpointing vs transcription error",
+    "speech cut-off root cause",
+    "model blamed the user for a dropout"
+   ],
+   "measures_file": "cutoff-attribution/README.md",
+   "measures": "Where could a cut in a voice session have come from? Per cut, a candidate set of sources with the evidence present for each, and no single winner unless the evidence separates.",
+   "breaks_file": "cutoff-attribution/README.md",
+   "breaks_when": "Detection of unmarked cuts reads punctuation; a transcriber that never punctuates makes every user segment look open-ended.",
+   "check": "python3 cutoff-attribution/selftest.py",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "cutoff-attribution/README.md:3",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "cutoff-attribution/README.md:42",
+   "breaks_quote_state": "FOUND",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "checks: 15   failed: 0",
+    "commit": "a8028b2",
+    "cmd": "python3 cutoff-attribution/selftest.py"
+   }
+  },
+  {
+   "need": "channel",
+   "also": [],
+   "repo": "Simulators",
+   "path": "reporting-chain-loss/",
+   "name": "reporting-chain-loss",
+   "aliases": [
+    "signal loss through a reporting chain",
+    "what survives each hop of a report",
+    "reports that never get filed",
+    "incentive bias accumulates across hops"
+   ],
+   "measures_file": "reporting-chain-loss/README.md",
+   "measures": "how much of a physical signal survives each hop between the machine and the node that acts on it, and what never enters the record at all.",
+   "breaks_file": "reporting-chain-loss/README.md",
+   "breaks_when": "The composition is exact ARITHMETIC on a constructed model; the order's DERIVED claim -- that a real chain estimates its incentive stack -- is unrun on any real chain.",
+   "check": "python3 reporting-chain-loss/test_hop.py",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "reporting-chain-loss/README.md:3",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "reporting-chain-loss/README.md:81",
+   "breaks_quote_state": "FOUND",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "checks: 50   failed: 0",
+    "commit": "a8028b2",
+    "cmd": "python3 reporting-chain-loss/test_hop.py"
+   }
+  },
+  {
+   "need": "channel",
+   "also": [],
+   "repo": "Simulators",
+   "path": "return-path/",
+   "name": "return-path",
+   "aliases": [
+    "does a correction channel actually close the loop",
+    "feedback channel that never returns",
+    "report goes nowhere",
+    "correction channel requirements"
+   ],
+   "measures_file": "return-path/README.md",
+   "measures": "and returns the **SET** of requirements failed.",
+   "breaks_file": "return-path/README.md",
+   "breaks_when": "A channel can be valuable and still not be a return path. Marking a gap is not correcting an error.",
+   "check": "python3 return-path/test_return.py",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "return-path/README.md:7",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "return-path/README.md:9",
+   "breaks_quote_state": "FOUND",
+   "status": "UNKNOWN",
+   "status_detail": {
+    "status": "UNKNOWN",
+    "exit": 1,
+    "last_line": "FileNotFoundError: [Errno 2] No such file or directory: 'return_path.py'",
+    "commit": "a8028b2",
+    "cmd": "python3 return-path/test_return.py"
+   }
+  },
+  {
+   "need": "channel",
+   "also": [],
+   "repo": "Simulators",
+   "path": "readout-count/",
+   "name": "readout-count",
+   "aliases": [
+    "count of operators with a channel that returns",
+    "safety culture vs reporting channel",
+    "incident rate vs protected reporting positions"
+   ],
+   "measures_file": "readout-count/README.md",
+   "measures": "does a safety regime's incident rate track the count of operator positions with a protected channel that RETURNS, rather than its stated culture or its data volume?",
+   "breaks_file": null,
+   "breaks_when": "NO_STATED_LIMITS",
+   "check": "python3 readout-count/selftest_rc.py",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "readout-count/README.md:4",
+   "measures_quote_state": "FOUND",
+   "breaks_src": null,
+   "breaks_quote_state": "NO_QUOTE",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "selftest: 100 checks, 0 failed",
+    "commit": "a8028b2",
+    "cmd": "python3 readout-count/selftest_rc.py"
+   }
+  },
+  {
+   "need": "channel",
+   "also": [],
+   "repo": "Simulators",
+   "path": "transmission-decay/",
+   "name": "transmission-decay",
+   "aliases": [
+    "knowledge lost across generations",
+    "hazard knowledge becomes a story",
+    "oral transmission decay rate"
+   ],
+   "measures_file": "transmission-decay/README.md",
+   "measures": "at what generational distance an account shifts from **mechanism** (actionable causal structure) to **story** (narrative retained, causal structure lost).",
+   "breaks_file": "transmission-decay/README.md",
+   "breaks_when": "Nothing here models a valley, an informant, an account, or a transmission chain.",
+   "check": "python3 transmission-decay/selftest_power.py",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "transmission-decay/README.md:4",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "transmission-decay/README.md:32",
+   "breaks_quote_state": "FOUND",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "selftest: 51 checks, 0 failed",
+    "commit": "a8028b2",
+    "cmd": "python3 transmission-decay/selftest_power.py"
+   }
+  },
+  {
+   "need": "channel",
+   "also": [],
+   "repo": "Simulators",
+   "path": "encoding-selection/",
+   "name": "encoding-selection",
+   "aliases": [
+    "which format loses which information",
+    "table vs prose vs diagram",
+    "encoding is an instrument choice",
+    "format drops axes silently"
+   ],
+   "measures_file": "encoding-selection/README.md",
+   "measures": "is an encoding an instrument selection rather than a style, so that encodings of one content are not rank-orderable on a single arrival-cost axis?",
+   "breaks_file": "encoding-selection/README.md",
+   "breaks_when": "No data ships, and the seven encodings are not here.",
+   "check": "python3 encoding-selection/selftest_es.py",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "encoding-selection/README.md:3",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "encoding-selection/README.md:12",
+   "breaks_quote_state": "FOUND",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "selftest: 43 checks, 0 failed",
+    "commit": "a8028b2",
+    "cmd": "python3 encoding-selection/selftest_es.py"
+   }
+  },
+  {
+   "need": "scope",
+   "also": [
+    "frame"
+   ],
+   "repo": "JinnZ2",
+   "path": "corpus_prior_audit/",
+   "name": "corpus_prior_audit",
+   "aliases": [
+    "common claim that bundles separate quantities",
+    "claim used outside the scope it was tested",
+    "check a forecast phrase",
+    "corpus prior in model output"
+   ],
+   "measures_file": "corpus_prior_audit/README.md",
+   "measures": "A registry of high-frequency corpus claims that get used in forecasts and decisions, including model-to-model forecast chains, where the claim bundles separate measurands under one phrase (a weld) or runs past the scope where it was tested.",
+   "breaks_file": "corpus_prior_audit/README.md",
+   "breaks_when": "A word list. A paraphrase steps around it; no hit is not a clean bill.",
+   "check": "python3 corpus_prior_audit/audit.py --selftest",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "corpus_prior_audit/README.md:5",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "corpus_prior_audit/README.md:63",
+   "breaks_quote_state": "FOUND",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "selftest 17/17",
+    "commit": "919f9d3",
+    "cmd": "python3 corpus_prior_audit/audit.py --selftest"
+   }
+  },
+  {
+   "need": "scope",
+   "also": [],
+   "repo": "Simulators",
+   "path": "falsifier-audit/",
+   "name": "falsifier-audit",
+   "aliases": [
+    "falsifier with unstated scope",
+    "find all falsifiers in a repo",
+    "untestable as written",
+    "claim and its test do not match"
+   ],
+   "measures_file": "falsifier-audit/README.md",
+   "measures": "An extractor plus analyser that walks a local checkout, pulls every falsifier it can find, and turns each place where a falsifier's **scope is implicit** into a research question.",
+   "breaks_file": null,
+   "breaks_when": "NO_STATED_LIMITS",
+   "check": "python3 falsifier-audit/selftest_fa.py",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "falsifier-audit/README.md:3",
+   "measures_quote_state": "FOUND",
+   "breaks_src": null,
+   "breaks_quote_state": "NO_QUOTE",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "selftest: 28 checks, 0 failed",
+    "commit": "a8028b2",
+    "cmd": "python3 falsifier-audit/selftest_fa.py"
+   }
+  },
+  {
+   "need": "scope",
+   "also": [],
+   "repo": "Simulators",
+   "path": "claim-record/",
+   "name": "claim-record",
+   "aliases": [
+    "claim record with interval not point",
+    "domain of validity for a claim",
+    "claim with next-check date",
+    "refuse a claim missing fields"
+   ],
+   "measures_file": "claim-record/README.md",
+   "measures": "Seven fields per claim, two hard rules, and a validator that refuses.",
+   "breaks_file": null,
+   "breaks_when": "NO_STATED_LIMITS",
+   "check": "python3 claim-record/record.py --selftest",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "claim-record/README.md:3",
+   "measures_quote_state": "FOUND",
+   "breaks_src": null,
+   "breaks_quote_state": "NO_QUOTE",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "registered: days, sols, years",
+    "commit": "a8028b2",
+    "cmd": "python3 claim-record/record.py --selftest"
+   }
+  },
+  {
+   "need": "scope",
+   "also": [
+    "observer"
+   ],
+   "repo": "Simulators",
+   "path": "measurand-partition/",
+   "name": "measurand-partition",
+   "aliases": [
+    "residual assigned to the thing observed",
+    "single-setting observation scored against many-variable outcome",
+    "attribution of an unpartitioned residual"
+   ],
+   "measures_file": "measurand-partition/README.md",
+   "measures": "What they share is one instrument fault, and `common.py` carries it as a record shape:",
+   "breaks_file": null,
+   "breaks_when": "NO_STATED_LIMITS",
+   "check": "python3 measurand-partition/test_partition.py",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "measurand-partition/README.md:5",
+   "measures_quote_state": "FOUND",
+   "breaks_src": null,
+   "breaks_quote_state": "NO_QUOTE",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "checks: 128   failed: 0",
+    "commit": "a8028b2",
+    "cmd": "python3 measurand-partition/test_partition.py"
+   }
+  },
+  {
+   "need": "scope",
+   "also": [
+    "frame"
+   ],
+   "repo": "Simulators",
+   "path": "fold-matrix/",
+   "name": "fold-matrix",
+   "aliases": [
+    "proxy vs goal relation",
+    "term that hides several quantities",
+    "what a metric stands in for",
+    "sign and magnitude of proxy claim"
+   ],
+   "measures_file": "fold-matrix/README.md",
+   "measures": "One term, one grid, not one number.",
+   "breaks_file": "fold-matrix/README.md",
+   "breaks_when": "S7 says empty emits as empty, never as zero.",
+   "check": "python3 fold-matrix/fold_matrix.py --selftest",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "fold-matrix/README.md:3",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "fold-matrix/README.md:111",
+   "breaks_quote_state": "FOUND",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "SELFTEST PASS (0 checks failed)",
+    "commit": "a8028b2",
+    "cmd": "python3 fold-matrix/fold_matrix.py --selftest"
+   }
+  },
+  {
+   "need": "scope",
+   "also": [],
+   "repo": "Shadow-Hunting",
+   "path": "shadow_hunting/knowledge/ai_self_scope.py",
+   "name": "ai_self_scope",
+   "aliases": [
+    "scope my own answer",
+    "publish the boundaries of a response",
+    "AI overconfidence check"
+   ],
+   "measures_file": "shadow_hunting/knowledge/ai_self_scope.py",
+   "measures": "Result: the AI publishes its own boundaries instead of sounding uniformly confident.",
+   "breaks_file": null,
+   "breaks_when": "NO_STATED_LIMITS",
+   "check": null,
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "shadow_hunting/knowledge/ai_self_scope.py:4",
+   "measures_quote_state": "FOUND",
+   "breaks_src": null,
+   "breaks_quote_state": "NO_QUOTE",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "no check command stated"
+   }
+  },
+  {
+   "need": "scope",
+   "also": [
+    "frame"
+   ],
+   "repo": "method-layer",
+   "path": "premise-traceability/register_map.py",
+   "name": "register_map",
+   "aliases": [
+    "can these two measurements be combined",
+    "join refusal for mismatched datasets",
+    "silent coarsening of data",
+    "commensurability check"
+   ],
+   "measures_file": "premise-traceability/register_map.py",
+   "measures": "Register map: hold declared claims as LAYERS; refuse to combine layers whose declarations do not permit it.",
+   "breaks_file": "premise-traceability/register_map.py",
+   "breaks_when": "This tool does NOT rank, judge truth, or infer.",
+   "check": "python3 -m unittest tests.test_register_map",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "premise-traceability/register_map.py:8",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "premise-traceability/register_map.py:13",
+   "breaks_quote_state": "FOUND",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "OK",
+    "commit": "47fcab2",
+    "cmd": "python3 -m unittest tests.test_register_map"
+   }
+  },
+  {
+   "need": "frame",
+   "also": [],
+   "repo": "Simulators",
+   "path": "tools/check_term_collision.py",
+   "name": "check_term_collision",
+   "aliases": [
+    "same phrase two meanings",
+    "which sense of a term is declared",
+    "term collision finder"
+   ],
+   "measures_file": "tools/check_term_collision.py",
+   "measures": "who uses the colliding terms, and who declares which sense.",
+   "breaks_file": null,
+   "breaks_when": "NO_STATED_LIMITS",
+   "check": "python3 tools/check_term_collision.py",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "tools/check_term_collision.py:3",
+   "measures_quote_state": "FOUND",
+   "breaks_src": null,
+   "breaks_quote_state": "NO_QUOTE",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "======================================================================",
+    "commit": "a8028b2",
+    "cmd": "python3 tools/check_term_collision.py"
+   }
+  },
+  {
+   "need": "frame",
+   "also": [],
+   "repo": "Simulators",
+   "path": "declared-frame/",
+   "name": "declared-frame",
+   "aliases": [
+    "state the boundary and horizon of a measurement",
+    "are two results comparable",
+    "whose outcomes count",
+    "where better was set and by whom"
+   ],
+   "measures_file": "declared-frame/README.md",
+   "measures": "A six-field block to attach to any measurement, and a checker that tests two of them for comparability.",
+   "breaks_file": "declared-frame/README.md",
+   "breaks_when": "The checker inverts its own load-bearing rule",
+   "check": null,
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "declared-frame/README.md:3",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "declared-frame/README.md:64",
+   "breaks_quote_state": "FOUND",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "no check command stated"
+   }
+  },
+  {
+   "need": "frame",
+   "also": [],
+   "repo": "Simulators",
+   "path": "valence-divergence/",
+   "name": "valence-divergence",
+   "aliases": [
+    "same word read positive by one and negative by another",
+    "agreement over an unflagged mismatch",
+    "word history vs current reading"
+   ],
+   "measures_file": "valence-divergence/README.md",
+   "measures": "Logs a term used by two parties, records the valence each decoder assigned and where each reading came from, and flags divergence.",
+   "breaks_file": "valence-divergence/README.md",
+   "breaks_when": "No lexicon, no valence model, no sentiment scoring.",
+   "check": "python3 valence-divergence/test_valence.py",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "valence-divergence/README.md:3",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "valence-divergence/README.md:56",
+   "breaks_quote_state": "FOUND",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "333 checks, 0 failed",
+    "commit": "a8028b2",
+    "cmd": "python3 valence-divergence/test_valence.py"
+   }
+  },
+  {
+   "need": "frame",
+   "also": [],
+   "repo": "Simulators",
+   "path": "frame-token-audit/",
+   "name": "frame-token-audit",
+   "aliases": [
+    "money frame words in text",
+    "time as money language count",
+    "frame token density"
+   ],
+   "measures_file": "frame-token-audit/README.md",
+   "measures": "`frame_audit.py` counts frame tokens per 1000 words under two declared lexicons",
+   "breaks_file": null,
+   "breaks_when": "NO_STATED_LIMITS",
+   "check": "python3 frame-token-audit/selftest_fta.py",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "frame-token-audit/README.md:3",
+   "measures_quote_state": "FOUND",
+   "breaks_src": null,
+   "breaks_quote_state": "NO_QUOTE",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "selftest_fta: 20 checks passed",
+    "commit": "a8028b2",
+    "cmd": "python3 frame-token-audit/selftest_fta.py"
+   }
+  },
+  {
+   "need": "frame",
+   "also": [],
+   "repo": "Simulators",
+   "path": "category-weld/",
+   "name": "category-weld",
+   "aliases": [
+    "one word for several independent quantities",
+    "term fuses separate measures",
+    "components move but the record does not"
+   ],
+   "measures_file": "category-weld/README.md",
+   "measures": "A CATEGORY WELD is a term that fuses two or more independent quantities into one handle.",
+   "breaks_file": null,
+   "breaks_when": "NO_STATED_LIMITS",
+   "check": "python3 category-weld/test_weld.py",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "category-weld/README.md:7",
+   "measures_quote_state": "FOUND",
+   "breaks_src": null,
+   "breaks_quote_state": "NO_QUOTE",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "FAILURES: 0",
+    "commit": "a8028b2",
+    "cmd": "python3 category-weld/test_weld.py"
+   }
+  },
+  {
+   "need": "frame",
+   "also": [],
+   "repo": "method-layer",
+   "path": "frame_probe.py",
+   "name": "frame_probe",
+   "aliases": [
+    "estimate which frame a reader is using",
+    "probe selection for frame",
+    "frame collapse reading"
+   ],
+   "measures_file": "frame_probe.py",
+   "measures": "Frame estimation by probe selection and collapse reading.",
+   "breaks_file": "frame_probe.py",
+   "breaks_when": "This module contains no probe generator.",
+   "check": "python3 -m unittest tests.test_frame_probe",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "frame_probe.py:8",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "frame_probe.py:15",
+   "breaks_quote_state": "FOUND",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "OK",
+    "commit": "47fcab2",
+    "cmd": "python3 -m unittest tests.test_frame_probe"
+   }
+  },
+  {
+   "need": "frame",
+   "also": [],
+   "repo": "Shadow-Hunting",
+   "path": "shadow_hunting/knowledge/ai_frame_flip.py",
+   "name": "ai_frame_flip",
+   "aliases": [
+    "sycophantic agreement with user framing",
+    "counter-frames before endorsing",
+    "frame swap check"
+   ],
+   "measures_file": "shadow_hunting/knowledge/ai_frame_flip.py",
+   "measures": "Frame-flip guard: catch sycophantic alignment before emitting a response.",
+   "breaks_file": null,
+   "breaks_when": "NO_STATED_LIMITS",
+   "check": null,
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "shadow_hunting/knowledge/ai_frame_flip.py:1",
+   "measures_quote_state": "FOUND",
+   "breaks_src": null,
+   "breaks_quote_state": "NO_QUOTE",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "no check command stated"
+   }
+  },
+  {
+   "need": "observer",
+   "also": [],
+   "repo": "method-layer",
+   "path": "observer_position_control.py",
+   "name": "observer_position_control",
+   "aliases": [
+    "label depends on who describes",
+    "insider vs outsider describer",
+    "pathologising label by describer position"
+   ],
+   "measures_file": "observer_position_control.py",
+   "measures": "Observer-position control: is a label set by the behaviour or by the describer?",
+   "breaks_file": "observer_position_control.py",
+   "breaks_when": "This module ships NO corpus and NO source list",
+   "check": "python3 -m unittest tests.test_observer_position_control",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "observer_position_control.py:8",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "observer_position_control.py:18",
+   "breaks_quote_state": "FOUND",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "OK",
+    "commit": "47fcab2",
+    "cmd": "python3 -m unittest tests.test_observer_position_control"
+   }
+  },
+  {
+   "need": "observer",
+   "also": [],
+   "repo": "Simulators",
+   "path": "observer-exclusion/",
+   "name": "observer-exclusion",
+   "aliases": [
+    "observers with no channel into the literature",
+    "lead time of excluded observers",
+    "field knowledge ahead of published science"
+   ],
+   "measures_file": "observer-exclusion/SPEC_V2.md",
+   "measures": "A specified measurement with falsifiers, on records that already exist.",
+   "breaks_file": null,
+   "breaks_when": "NO_STATED_LIMITS",
+   "check": "python3 observer-exclusion/v2_check.py --selftest",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "observer-exclusion/SPEC_V2.md:11",
+   "measures_quote_state": "FOUND",
+   "breaks_src": null,
+   "breaks_quote_state": "NO_QUOTE",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "SELFTEST PASS (0 checks failed)",
+    "commit": "a8028b2",
+    "cmd": "python3 observer-exclusion/v2_check.py --selftest"
+   }
+  },
+  {
+   "need": "observer",
+   "also": [],
+   "repo": "Simulators",
+   "path": "assessor-coupling/",
+   "name": "assessor-coupling",
+   "aliases": [
+    "is the auditor independent",
+    "assessor paid by the assessed",
+    "audit independence conditions"
+   ],
+   "measures_file": "assessor-coupling/README.md",
+   "measures": "whether an assessor is structurally independent of the party it assesses, **distinguished from** whether a direct payment runs between them.",
+   "breaks_file": "assessor-coupling/README.md",
+   "breaks_when": "No funding record is held here and none is composed from memory.",
+   "check": "python3 assessor-coupling/test_assessor.py",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "assessor-coupling/README.md:4",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "assessor-coupling/README.md:73",
+   "breaks_quote_state": "FOUND",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "checks: 98   failed: 0",
+    "commit": "a8028b2",
+    "cmd": "python3 assessor-coupling/test_assessor.py"
+   }
+  },
+  {
+   "need": "observer",
+   "also": [
+    "frame"
+   ],
+   "repo": "Simulators",
+   "path": "label-position-test/",
+   "name": "label-position-test",
+   "aliases": [
+    "cheat vs innovation label",
+    "label tracks the actor not the act",
+    "who defines the term benefits"
+   ],
+   "measures_file": "label-position-test/README.md",
+   "measures": "do valence labels on a probing move (*cheat* | *innovation*) track the move, or the actor's position and the outcome after the fact?",
+   "breaks_file": "label-position-test/README.md",
+   "breaks_when": "No data ships here.",
+   "check": "python3 label-position-test/selftest_lpt.py",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "label-position-test/README.md:3",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "label-position-test/README.md:10",
+   "breaks_quote_state": "FOUND",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "selftest: 78 checks, 0 failed",
+    "commit": "a8028b2",
+    "cmd": "python3 label-position-test/selftest_lpt.py"
+   }
+  },
+  {
+   "need": "observer",
+   "also": [],
+   "repo": "Simulators",
+   "path": "blame-attribution/",
+   "name": "blame-attribution",
+   "aliases": [
+    "blame follows position not cause",
+    "who gets blamed in an incident",
+    "causal chain vs role"
+   ],
+   "measures_file": "blame-attribution/README.md",
+   "measures": "Seven standalone cells for measuring whether blame attribution tracks an actor's **position** rather than the causal chain",
+   "breaks_file": "blame-attribution/README.md",
+   "breaks_when": "No judgments have been collected.",
+   "check": "python3 blame-attribution/pair_check.py --selftest",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "blame-attribution/README.md:3",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "blame-attribution/README.md:12",
+   "breaks_quote_state": "FOUND",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "selftest: 34 checks, 0 failed",
+    "commit": "a8028b2",
+    "cmd": "python3 blame-attribution/pair_check.py --selftest"
+   }
+  },
+  {
+   "need": "observer",
+   "also": [],
+   "repo": "Simulators",
+   "path": "criterion-symmetry/",
+   "name": "criterion-symmetry",
+   "aliases": [
+    "criterion applied to one group only",
+    "double standard in evaluation",
+    "vote tally as evidence"
+   ],
+   "measures_file": "criterion-symmetry/MARKER.md",
+   "measures": "Status: uncoalesced. Marker to explore, not a position under defense.",
+   "breaks_file": null,
+   "breaks_when": "NO_STATED_LIMITS",
+   "check": "python3 criterion-symmetry/separability.py --selftest",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "criterion-symmetry/MARKER.md:3",
+   "measures_quote_state": "FOUND",
+   "breaks_src": null,
+   "breaks_quote_state": "NO_QUOTE",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "SELFTEST PASS (0 checks failed)",
+    "commit": "a8028b2",
+    "cmd": "python3 criterion-symmetry/separability.py --selftest"
+   }
+  },
+  {
+   "need": "floor",
+   "also": [],
+   "repo": "Simulators",
+   "path": "null-harness/",
+   "name": "null-harness",
+   "aliases": [
+    "can this detector ever fire",
+    "false positive rate of a check",
+    "calibrate a gate against known controls",
+    "minimum detectable signal"
+   ],
+   "measures_file": "null-harness/README.md",
+   "measures": "Calibrate any gate against known-answer controls before you trust it.",
+   "breaks_file": null,
+   "breaks_when": "NO_STATED_LIMITS",
+   "check": null,
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "null-harness/README.md:3",
+   "measures_quote_state": "FOUND",
+   "breaks_src": null,
+   "breaks_quote_state": "NO_QUOTE",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "no check command stated"
+   }
+  },
+  {
+   "need": "floor",
+   "also": [],
+   "repo": "Simulators",
+   "path": "tools/known_answer.py",
+   "name": "known_answer",
+   "aliases": [
+    "test a metric on a fixed known case",
+    "metric sanity check",
+    "known-answer registry"
+   ],
+   "measures_file": "tools/known_answer.py",
+   "measures": "No metric ships without a known-answer run.",
+   "breaks_file": null,
+   "breaks_when": "NO_STATED_LIMITS",
+   "check": "python3 tools/known_answer.py",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "tools/known_answer.py:3",
+   "measures_quote_state": "FOUND",
+   "breaks_src": null,
+   "breaks_quote_state": "NO_QUOTE",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "========================================================================",
+    "commit": "a8028b2",
+    "cmd": "python3 tools/known_answer.py"
+   }
+  },
+  {
+   "need": "floor",
+   "also": [],
+   "repo": "Simulators",
+   "path": "reasoning-gate/",
+   "name": "reasoning-gate",
+   "aliases": [
+    "fail-closed gate on simulation claims",
+    "resolution vs feature size",
+    "default deny for conclusions"
+   ],
+   "measures_file": "reasoning-gate/README.md",
+   "measures": "Fail-closed harness for simulation and audit work.",
+   "breaks_file": null,
+   "breaks_when": "NO_STATED_LIMITS",
+   "check": "python3 -m unittest discover reasoning-gate/tests",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "reasoning-gate/README.md:3",
+   "measures_quote_state": "FOUND",
+   "breaks_src": null,
+   "breaks_quote_state": "NO_QUOTE",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "OK",
+    "commit": "a8028b2",
+    "cmd": "python3 -m unittest discover reasoning-gate/tests"
+   }
+  },
+  {
+   "need": "floor",
+   "also": [],
+   "repo": "method-layer",
+   "path": "rank_detector.py",
+   "name": "rank_detector",
+   "aliases": [
+    "real new dimension vs resolution artifact",
+    "null construction before reading",
+    "intrinsic dimension vs scale"
+   ],
+   "measures_file": "rank_detector.py",
+   "measures": "Detect a rank change from a dim(k) curve instead of declaring one.",
+   "breaks_file": null,
+   "breaks_when": "NO_STATED_LIMITS",
+   "check": "python3 -m unittest tests.test_rank_detector",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "rank_detector.py:10",
+   "measures_quote_state": "FOUND",
+   "breaks_src": null,
+   "breaks_quote_state": "NO_QUOTE",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "OK",
+    "commit": "47fcab2",
+    "cmd": "python3 -m unittest tests.test_rank_detector"
+   }
+  },
+  {
+   "need": "floor",
+   "also": [
+    "scope"
+   ],
+   "repo": "Simulators",
+   "path": "membership-probe/",
+   "name": "membership-probe",
+   "aliases": [
+    "checker matches an ideal shape instead of constraints",
+    "pre-flight for a reviewer agent",
+    "ideal rendering used as membership test"
+   ],
+   "measures_file": "membership-probe/README.md",
+   "measures": "Detects a checker that is using an **ideal rendering as a membership test** instead of reading the constraint set.",
+   "breaks_file": "membership-probe/README.md",
+   "breaks_when": "It measures whether the basis went near a constraint, not whether it reasoned correctly about it.",
+   "check": "python3 membership-probe/probe_audit.py --selftest",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "measures_src": "membership-probe/README.md:3",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "membership-probe/README.md:128",
+   "breaks_quote_state": "FOUND",
+   "status": "RUN",
+   "status_detail": {
+    "status": "RUN",
+    "exit": 0,
+    "last_line": "SELFTEST PASS (0 checks failed)",
+    "commit": "a8028b2",
+    "cmd": "python3 membership-probe/probe_audit.py --selftest"
+   }
+  }
+ ],
+ "name_collisions": [
+  {
+   "name": "encoding-selection",
+   "one": "Simulators/encoding-selection/",
+   "other": "ICSC functional selection",
+   "note": "location not found in any repo reachable this session (search for 'ICSC' returned no hit); carried from the work order"
+  },
+  {
+   "name": "WO-6",
+   "one": "Simulators/assessor-coupling/",
+   "other": "Simulators/criterion-externality/",
+   "note": "two different work orders share the ordinal WO-6 (recorded in assessor-coupling/README.md)"
+  },
+  {
+   "name": "provenance",
+   "one": "Shadow-Hunting ai_provenance.py (said vs template vs derived)",
+   "other": "Simulators tools/provenance_marker.py (tool ran before, hash) and Simulators model-provenance/ (model id from commit trailers)",
+   "note": "one word, three different needs"
+  },
+  {
+   "name": "frame_audit.py",
+   "one": "Simulators/frame-token-audit/frame_audit.py",
+   "other": "Simulators/substrate-alternative/frame_audit.py",
+   "note": "two files of one name, different lexicons and outputs"
+  },
+  {
+   "name": "chain-position",
+   "one": "Simulators/chain-position/",
+   "other": "JinnZ2/chain-position-detectability (repo)",
+   "note": "both are WO-1 builds; separate artifacts"
+  },
+  {
+   "name": "anchor-*",
+   "one": "Simulators/anchor-interval/",
+   "other": "Simulators/anchor-position/ and anchor-measurand-crossing/",
+   "note": "corpus-drift anchoring vs prompt anchoring; anchor-position and anchor-measurand-crossing are two builds of one order"
+  },
+  {
+   "name": "cooperative-substrate",
+   "one": "Simulators/cooperative-substrate/",
+   "other": "Simulators/cooperative-substrate-proof/",
+   "note": "two builds of related orders"
+  },
+  {
+   "name": "CA_ claim prefix",
+   "one": "Simulators/constraint-assembly/",
+   "other": "Simulators/clustering-axes/",
+   "note": "both use CA_nnn claim ids; cite with the folder"
+  }
+ ],
+ "gaps": [
+  {
+   "need": "distribution",
+   "gap": "place a person on an axis from their own words (where they sit relative to the population center)",
+   "why": "tail-check refuses to do this; position is a caller declaration"
+  },
+  {
+   "need": "channel",
+   "gap": "voice/live loss other than cuts: prosody, tone, and affect dropped by transcription",
+   "why": "cutoff-attribution reads cuts only"
+  },
+  {
+   "need": "floor",
+   "gap": "null calibration for the voice-cut detector itself (false positive rate of DETECTED cuts)",
+   "why": "cutoff-attribution has fixtures, no null-harness run"
+  },
+  {
+   "need": "fill-source",
+   "gap": "templated-vs-user tagging for model output outside the Shadow-Hunting pipeline",
+   "why": "ai_provenance tags elements its own pipeline emits; no tool tags arbitrary model text"
+  },
+  {
+   "need": "observer",
+   "gap": "a query tool over this index (search by alias at the command line)",
+   "why": "the index is static; finder.json is machine-readable but no search CLI ships"
+  }
+ ]
+}

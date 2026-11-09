@@ -160,3 +160,15 @@ without. (`DF_006`)
 ## License
 
 CC0-1.0, matching the repository default and the delivered files' headers.
+
+## Finds-by (ALIAS_PROPOSED, 2026-11-09)
+Note 2026-11-09: added by WORK ORDER TOOL FINDER part 1; aliases derived from this
+tool's stated scope only. Index: Simulators `TOOL_FINDER/TOOL_FINDER.md`.
+
+- state the boundary and horizon of a measurement
+- are two results comparable
+- whose outcomes count
+- where better was set and by whom
+- avoided term: AVOIDED_TERM_UNSTATED
+- measures: "A six-field block to attach to any measurement, and a checker that tests two of them for comparability."
+- breaks when: "The checker inverts its own load-bearing rule"

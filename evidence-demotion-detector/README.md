@@ -151,3 +151,16 @@ This was written as a standalone repository. The session that built it could
 not create one under the intended owner, so it lands as a self-contained
 folder importing nothing across its own boundary, with its own LICENSE and
 selftest, and can be moved whole.
+
+## Finds-by (ALIAS_PROPOSED, 2026-11-09)
+Note 2026-11-09: added by WORK ORDER TOOL FINDER part 1; aliases derived from this
+tool's stated scope only. Index: Simulators `TOOL_FINDER/TOOL_FINDER.md`.
+
+- model discounts a user's field report
+- model assigns an emotion the user never stated
+- user observation reclassified as hypothesis
+- unclaimed hedge attributed to user
+- user forced to re-prove
+- avoided term: AVOIDED_TERM_UNSTATED
+- measures: "A heuristic detector for five loops in which a model discounts a direct field report or assigns an affect the user never stated."
+- breaks when: "Regex over text. A paraphrase steps around any pattern. A clean run means the patterns did not fire, not that nothing happened."

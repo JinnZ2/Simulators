@@ -1,0 +1,253 @@
+{
+ "JinnZ2:corpus_prior_audit/": {
+  "cmd": "python3 corpus_prior_audit/audit.py --selftest",
+  "commit": "919f9d3",
+  "exit": 0,
+  "last_line": "selftest 17/17",
+  "status": "RUN"
+ },
+ "Shadow-Hunting:shadow_hunting/knowledge/ai_frame_flip.py": {
+  "status": "NOT_RUN",
+  "why": "no check command stated"
+ },
+ "Shadow-Hunting:shadow_hunting/knowledge/ai_provenance.py": {
+  "status": "NOT_RUN",
+  "why": "no check command stated"
+ },
+ "Shadow-Hunting:shadow_hunting/knowledge/ai_self_scope.py": {
+  "status": "NOT_RUN",
+  "why": "no check command stated"
+ },
+ "Simulators:assessor-coupling/": {
+  "cmd": "python3 assessor-coupling/test_assessor.py",
+  "commit": "a8028b2",
+  "exit": 0,
+  "last_line": "checks: 98   failed: 0",
+  "status": "RUN"
+ },
+ "Simulators:blame-attribution/": {
+  "cmd": "python3 blame-attribution/pair_check.py --selftest",
+  "commit": "a8028b2",
+  "exit": 0,
+  "last_line": "selftest: 34 checks, 0 failed",
+  "status": "RUN"
+ },
+ "Simulators:category-weld/": {
+  "cmd": "python3 category-weld/test_weld.py",
+  "commit": "a8028b2",
+  "exit": 0,
+  "last_line": "FAILURES: 0",
+  "status": "RUN"
+ },
+ "Simulators:claim-record/": {
+  "cmd": "python3 claim-record/record.py --selftest",
+  "commit": "a8028b2",
+  "exit": 0,
+  "last_line": "registered: days, sols, years",
+  "status": "RUN"
+ },
+ "Simulators:criterion-symmetry/": {
+  "cmd": "python3 criterion-symmetry/separability.py --selftest",
+  "commit": "a8028b2",
+  "exit": 0,
+  "last_line": "SELFTEST PASS (0 checks failed)",
+  "status": "RUN"
+ },
+ "Simulators:cutoff-attribution/": {
+  "cmd": "python3 cutoff-attribution/selftest.py",
+  "commit": "a8028b2",
+  "exit": 0,
+  "last_line": "checks: 15   failed: 0",
+  "status": "RUN"
+ },
+ "Simulators:declared-frame/": {
+  "status": "NOT_RUN",
+  "why": "no check command stated"
+ },
+ "Simulators:encoding-selection/": {
+  "cmd": "python3 encoding-selection/selftest_es.py",
+  "commit": "a8028b2",
+  "exit": 0,
+  "last_line": "selftest: 43 checks, 0 failed",
+  "status": "RUN"
+ },
+ "Simulators:evaluation-frame/": {
+  "cmd": "python3 evaluation-frame/selftest_frame.py",
+  "commit": "a8028b2",
+  "exit": 1,
+  "last_line": "  FAILED and they are the only tokens that fire unmasked",
+  "status": "UNKNOWN"
+ },
+ "Simulators:evidence-demotion-detector/": {
+  "cmd": "python3 evidence-demotion-detector/selftest.py",
+  "commit": "a8028b2",
+  "exit": 0,
+  "last_line": "selftest: 38/38 checks PASS",
+  "status": "RUN"
+ },
+ "Simulators:falsifier-audit/": {
+  "cmd": "python3 falsifier-audit/selftest_fa.py",
+  "commit": "a8028b2",
+  "exit": 0,
+  "last_line": "selftest: 28 checks, 0 failed",
+  "status": "RUN"
+ },
+ "Simulators:fold-matrix/": {
+  "cmd": "python3 fold-matrix/fold_matrix.py --selftest",
+  "commit": "a8028b2",
+  "exit": 0,
+  "last_line": "SELFTEST PASS (0 checks failed)",
+  "status": "RUN"
+ },
+ "Simulators:frame-token-audit/": {
+  "cmd": "python3 frame-token-audit/selftest_fta.py",
+  "commit": "a8028b2",
+  "exit": 0,
+  "last_line": "selftest_fta: 20 checks passed",
+  "status": "RUN"
+ },
+ "Simulators:label-position-test/": {
+  "cmd": "python3 label-position-test/selftest_lpt.py",
+  "commit": "a8028b2",
+  "exit": 0,
+  "last_line": "selftest: 78 checks, 0 failed",
+  "status": "RUN"
+ },
+ "Simulators:measurand-partition/": {
+  "cmd": "python3 measurand-partition/test_partition.py",
+  "commit": "a8028b2",
+  "exit": 0,
+  "last_line": "checks: 128   failed: 0",
+  "status": "RUN"
+ },
+ "Simulators:membership-probe/": {
+  "cmd": "python3 membership-probe/probe_audit.py --selftest",
+  "commit": "a8028b2",
+  "exit": 0,
+  "last_line": "SELFTEST PASS (0 checks failed)",
+  "status": "RUN"
+ },
+ "Simulators:moving-mean-tracker/": {
+  "cmd": "python3 moving-mean-tracker/test_tracker.py",
+  "commit": "a8028b2",
+  "exit": 0,
+  "last_line": "checks: 68   failed: 0",
+  "status": "RUN"
+ },
+ "Simulators:null-harness/": {
+  "status": "NOT_RUN",
+  "why": "no check command stated"
+ },
+ "Simulators:observer-exclusion/": {
+  "cmd": "python3 observer-exclusion/v2_check.py --selftest",
+  "commit": "a8028b2",
+  "exit": 0,
+  "last_line": "SELFTEST PASS (0 checks failed)",
+  "status": "RUN"
+ },
+ "Simulators:readout-count/": {
+  "cmd": "python3 readout-count/selftest_rc.py",
+  "commit": "a8028b2",
+  "exit": 0,
+  "last_line": "selftest: 100 checks, 0 failed",
+  "status": "RUN"
+ },
+ "Simulators:reasoning-gate/": {
+  "cmd": "python3 -m unittest discover reasoning-gate/tests",
+  "commit": "a8028b2",
+  "exit": 0,
+  "last_line": "OK",
+  "status": "RUN"
+ },
+ "Simulators:reporting-chain-loss/": {
+  "cmd": "python3 reporting-chain-loss/test_hop.py",
+  "commit": "a8028b2",
+  "exit": 0,
+  "last_line": "checks: 50   failed: 0",
+  "status": "RUN"
+ },
+ "Simulators:return-path/": {
+  "cmd": "python3 return-path/test_return.py",
+  "commit": "a8028b2",
+  "exit": 1,
+  "last_line": "FileNotFoundError: [Errno 2] No such file or directory: 'return_path.py'",
+  "status": "UNKNOWN"
+ },
+ "Simulators:tail-check/": {
+  "cmd": "python3 tail-check/selftest.py",
+  "commit": "a8028b2",
+  "exit": 0,
+  "last_line": "checks: 18   failed: 0",
+  "status": "RUN"
+ },
+ "Simulators:tools/check_term_collision.py": {
+  "cmd": "python3 tools/check_term_collision.py",
+  "commit": "a8028b2",
+  "exit": 0,
+  "last_line": "======================================================================",
+  "status": "RUN"
+ },
+ "Simulators:tools/known_answer.py": {
+  "cmd": "python3 tools/known_answer.py",
+  "commit": "a8028b2",
+  "exit": 0,
+  "last_line": "========================================================================",
+  "status": "RUN"
+ },
+ "Simulators:tools/provenance_marker.py": {
+  "cmd": "python3 tools/provenance_marker.py --selftest",
+  "commit": "a8028b2",
+  "exit": 0,
+  "last_line": "checks: 27   failed: 0",
+  "status": "RUN"
+ },
+ "Simulators:tools/sourced.py": {
+  "cmd": "python3 tools/sourced.py --selftest",
+  "commit": "a8028b2",
+  "exit": 0,
+  "last_line": "checks: 41   failed: 0",
+  "status": "RUN"
+ },
+ "Simulators:transmission-decay/": {
+  "cmd": "python3 transmission-decay/selftest_power.py",
+  "commit": "a8028b2",
+  "exit": 0,
+  "last_line": "selftest: 51 checks, 0 failed",
+  "status": "RUN"
+ },
+ "Simulators:valence-divergence/": {
+  "cmd": "python3 valence-divergence/test_valence.py",
+  "commit": "a8028b2",
+  "exit": 0,
+  "last_line": "333 checks, 0 failed",
+  "status": "RUN"
+ },
+ "method-layer:frame_probe.py": {
+  "cmd": "python3 -m unittest tests.test_frame_probe",
+  "commit": "47fcab2",
+  "exit": 0,
+  "last_line": "OK",
+  "status": "RUN"
+ },
+ "method-layer:observer_position_control.py": {
+  "cmd": "python3 -m unittest tests.test_observer_position_control",
+  "commit": "47fcab2",
+  "exit": 0,
+  "last_line": "OK",
+  "status": "RUN"
+ },
+ "method-layer:premise-traceability/register_map.py": {
+  "cmd": "python3 -m unittest tests.test_register_map",
+  "commit": "47fcab2",
+  "exit": 0,
+  "last_line": "OK",
+  "status": "RUN"
+ },
+ "method-layer:rank_detector.py": {
+  "cmd": "python3 -m unittest tests.test_rank_detector",
+  "commit": "47fcab2",
+  "exit": 0,
+  "last_line": "OK",
+  "status": "RUN"
+ }
+}

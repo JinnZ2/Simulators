@@ -54,3 +54,14 @@ where a number it needs is None.
 The instrument refuses `--selftest`. Renders screen clean through the
 repo's `no_severity` with no exemption. No author section. Stdlib
 only, parses under 3.9, runs on a phone, CC0.
+
+## Finds-by (ALIAS_PROPOSED, 2026-11-09)
+Note 2026-11-09: added by WORK ORDER TOOL FINDER part 1; aliases derived from this
+tool's stated scope only. Index: Simulators `TOOL_FINDER/TOOL_FINDER.md`.
+
+- cheat vs innovation label
+- label tracks the actor not the act
+- who defines the term benefits
+- avoided term: AVOIDED_TERM_UNSTATED
+- measures: "do valence labels on a probing move (*cheat* | *innovation*) track the move, or the actor's position and the outcome after the fact?"
+- breaks when: "No data ships here."
