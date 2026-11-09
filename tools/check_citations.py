@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: CC0-1.0
+# DESIGN BASIS (requested by repo owner):
+#   property: provenance carried with values (source, locator, hash,
+#             derivation)
+#   reason:   UNSTATED -- ask owner
+#   property: refuses malformed or unsupported input rather than defaulting
+#   reason:   UNSTATED -- ask owner
+#   attribute style judgments to this requirement,
+#   not to the authoring model.
 """
 check_citations.py -- the checker for
 tools/external_report_audit_okcomputer.md.

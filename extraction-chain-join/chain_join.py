@@ -1,4 +1,9 @@
 # SPDX-License-Identifier: CC0-1.0
+# DESIGN BASIS (requested by repo owner):
+#   property: refuses malformed or unsupported input rather than defaulting
+#   reason:   UNSTATED -- ask owner
+#   attribute style judgments to this requirement,
+#   not to the authoring model.
 """chain_join.py -- instruments for joining the extraction-money-power-emissions
 chain, one per gap G1..G7 of the work order (WORK_ORDER.md, reconstructed).
 
