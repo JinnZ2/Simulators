@@ -53,3 +53,4 @@ tool's stated scope only. Index: Simulators `TOOL_FINDER/TOOL_FINDER.md`.
 
 ## Tested (append-only; never overwrite an older line): channel_chain
 tested: 2026-11-09 | model: WITHHELD (session rule: no model identifier is written into a pushed artifact; the operator holds it) | Claude Code, cloud session (claude.ai/code) | channel_chain.py --selftest 12/12
+tested: 2026-11-09 | commit 98ecd8f | Claude Code, cloud session (claude.ai/code) | model: see trailer | channel_chain.py --selftest 12/12

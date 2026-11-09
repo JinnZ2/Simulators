@@ -18,3 +18,4 @@ Cross-references, recorded and not built:
 
 ## Tested (append-only; never overwrite an older line)
 tested: 2026-11-09 | model: WITHHELD (session rule: no model identifier is written into a pushed artifact; the operator holds it) | Claude Code, cloud session (claude.ai/code) | check_landing.py 3/3
+tested: 2026-11-09 | commit 98ecd8f | Claude Code, cloud session (claude.ai/code) | model: see trailer | check_landing.py 3/3

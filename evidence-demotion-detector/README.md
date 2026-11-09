@@ -178,3 +178,4 @@ NOT_RUN: the file was not supplied.
 
 ## Tested (append-only; never overwrite an older line)
 tested: 2026-11-09 | model: WITHHELD (session rule: no model identifier is written into a pushed artifact; the operator holds it) | Claude Code, cloud session (claude.ai/code) | selftest.py 38/38, selftest_convert.py 11/11
+tested: 2026-11-09 | commit 98ecd8f | Claude Code, cloud session (claude.ai/code) | model: see trailer | selftest.py 38/38, selftest_convert.py 11/11

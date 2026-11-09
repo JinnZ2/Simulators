@@ -72,3 +72,4 @@ tool's stated scope only. Index: Simulators `TOOL_FINDER/TOOL_FINDER.md`.
 
 ## Tested (append-only; never overwrite an older line)
 tested: 2026-11-09 | model: WITHHELD (session rule: no model identifier is written into a pushed artifact; the operator holds it) | Claude Code, cloud session (claude.ai/code) | selftest.py 26/26
+tested: 2026-11-09 | commit 98ecd8f | Claude Code, cloud session (claude.ai/code) | model: see trailer | selftest.py 26/26

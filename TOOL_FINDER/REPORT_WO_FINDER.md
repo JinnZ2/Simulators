@@ -336,3 +336,60 @@ Nothing has been merged; every PR is open. Merging waits for CI and for the owne
   copies already filed in thermodynamic-accountability-framework `docs/audits_2026_11/`. Neither was re-filed.
   The docx is still the PARTIAL copy that ends after Node 1.
 - **Still open.** F (WO-6 ledger) remains BLOCKED, and the 3c run remains NOT_RUN: neither file has been supplied.
+
+## FINDER ROUND 3 (2026-11-09)
+
+| item | state | what was done, or why not |
+|---|---|---|
+| 1 ICSC | DONE (no change) | The re-sent `ICSC_v0_1_spec_audit.pdf` has the same sha256 (b0a1d4f2...c111) as the copy landed at a909e9c, so `Simulators/ICSC/SPEC_AUDIT_v0.1.md` already holds it. No `.md` source arrived; only the PDF. NAME_COLLISION already points at `Simulators/ICSC/`. |
+| 1 WO-6 | BLOCKED | `WO6_CORPUS_AUDIT.md` was not supplied: no such file is in the upload directory or anywhere on disk. The scope list is unchanged and no scope was inferred. |
+| 2 pretrip run | NOT_RUN | `gpt_pretrip_2026-11-09.txt` was not supplied, so neither txt_to_json + detect.py nor cutoff-attribution was run on it. No flags to report. When it is run, it will have no signal log: detection will read punctuation and timing only, and every source will stay unseparated. |
+| 3 missed row | DONE | Details below. |
+| 4 stamps | DONE | Details below. |
+| 5 naming rule | DONE | Details below. |
+
+### 3. Missed row
+
+- **What it output before.** For "network lag, unflagged" (an rtt_ms spike with no flag), the tool returned status UNRESOLVED and a candidate set of `UNRESOLVED` only. NETWORK_LAG appeared only under evidence, as LOGGED_UNFLAGGED.
+- **What it outputs now.** Status UNRESOLVED, candidate set `NETWORK_LAG, UNRESOLVED`. An unflagged candidate is kept in the set but never raises the status.
+- **Pin moved on purpose.** The selftest pin was updated with a dated note.
+- **null_calibration rerun.**
+  - Forced attribution is still 0 / 2400.
+  - The measurement-only row is still a miss (verdict NONE, 300 draws), and the planted source is retained in the candidate set in all 300.
+- **Optional `radio_log` input.**
+  - Schema: list of `{t, dbm, network}`.
+  - dBm becomes an unflagged rssi_dbm measurement; no threshold is applied.
+  - A change of network type becomes a `network_handover` event on the transmission hop.
+  - The schema is stated in `RADIO_SCHEMA` and in the README.
+
+### 4. Stamps
+
+- **Trailer check.** Every commit this session carries a `Co-Authored-By` model trailer.
+- **New stamp lines.** Six Tested sections got a new line: `tested: 2026-11-09 | commit 98ecd8f | Claude Code, cloud session (claude.ai/code) | model: see trailer | <selftest results>`. Older WITHHELD lines are kept.
+- **model-provenance reads the trailer.** `parse_trailer` on 98ecd8f returns the stated version (non-None).
+- **The date decode does not match.** `decode` by date returns an older table row (SINGLE). `releases.json` is an observed-bound table read 2026-08-25 and has no row for the version these commits state. So the stated trailer and the date-decoded model differ for this session's commits; that is the release table missing a row.
+- **Table not extended.** The table was not changed here. Extending it is a change to model-provenance's own data and is left for its own pass.
+
+### 5. Naming rule
+
+- `TOOL_FINDER/README.md` now carries the rule.
+- Every tool created from 2026-11-09 on records `avoided term:` and `reason:` at creation, in its alias section.
+- Existing tools stay UNSTATED.
+
+### Selftests (verbatim, at 98ecd8f)
+
+```
+$ python3 tail-check/selftest.py                          checks: 26   failed: 0
+$ python3 cutoff-attribution/selftest.py                  checks: 25   failed: 0
+$ python3 cutoff-attribution/selftest_terms.py            checks: 11   failed: 0
+$ python3 cutoff-attribution/selftest_null.py             checks: 11   failed: 0
+$ python3 cutoff-attribution/selftest_radio.py            checks: 7   failed: 0
+$ python3 evidence-demotion-detector/selftest.py          selftest: 38/38 checks PASS
+$ python3 evidence-demotion-detector/selftest_convert.py  checks: 11   failed: 0
+$ python3 tools/channel_chain.py --selftest               checks: 12   failed: 0
+$ python3 TOOL_FINDER/build_finder.py --selftest          checks: 17   failed: 0
+$ python3 TOOL_FINDER/insert_pointer.py --selftest        checks: 6   failed: 0
+$ python3 ICSC/check_landing.py                           checks: 3   failed: 0
+```
+
+Nothing is merged. All PRs are open and waiting for the owner's go-ahead.

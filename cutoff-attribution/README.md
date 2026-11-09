@@ -106,6 +106,7 @@ Note 2026-11-09: added by FINDER FOLLOW-UP items A2 and C.
 
 ## Tested (append-only; never overwrite an older line)
 tested: 2026-11-09 | model: WITHHELD (session rule: no model identifier is written into a pushed artifact; the operator holds it) | Claude Code, cloud session (claude.ai/code) | selftest.py 25/25, selftest_terms.py 11/11, selftest_null.py 10/10
+tested: 2026-11-09 | commit 98ecd8f | Claude Code, cloud session (claude.ai/code) | model: see trailer | selftest.py 25/25, selftest_terms.py 11/11, selftest_null.py 11/11, selftest_radio.py 7/7
 
 ## Unflagged measurements and radio_log (FINDER ROUND 3, 2026-11-09)
 Note 2026-11-09: added by FINDER ROUND 3 item 3.
