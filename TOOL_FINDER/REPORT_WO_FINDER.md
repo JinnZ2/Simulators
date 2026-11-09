@@ -405,3 +405,84 @@ Nothing is merged. All PRs are open and waiting for the owner's go-ahead.
 - The NAME_COLLISION path (`Simulators/ICSC/SPEC_AUDIT_v0.1.md`) is unchanged and now points at the source.
 - Still nothing built; status PROPOSED.
 
+
+## Round 4 (2026-11-09, relayed via the Claude app)
+
+| Item | State | Summary |
+|---|---|---|
+| 1 ICSC commit + named landing | DONE | Commit **a909e9c** first landed `Simulators/ICSC/`. The round 2 NOT_LOCATED was the NAME_COLLISION target, not the folder. `ICSC/ICSC_v0.1_spec_audit.md` is now beside the PDF (see below). |
+| 2 WO-6 audit as scope list | DONE | `TOOL_FINDER/WO6_CORPUS_AUDIT.md` landed verbatim. `TOOL_FINDER/wo6_scope.py` reads its ledger as the scope list. |
+| 3 null_calibration three outcomes | DONE | Scoring added and rerun. The matrix is below; the literal rule puts every NONE-correct control in WRONG. |
+| 4 model-provenance | DONE (note) / BLOCKED (table) | STALE_TABLE logged as MP_010 with the table untouched. Extending `releases.json` is held; the reason is below. `verify` rerun. |
+
+### 1. ICSC
+
+- No file named `ICSC_v0.1_spec_audit.md` was attached. The upload directory holds only the two PDF copies.
+- The markdown pasted in the previous turn is the same document. It is already `ICSC/SPEC_AUDIT_v0.1.md` (0c03017).
+- The round 4 name is added as a byte copy. Both files: sha256 `984c2f94083979b86a58f078fed2addc9aca4d2b8588799c98c7859291e93a75`. No rename.
+- `check_landing.py` check 3 now requires the two to stay byte-identical. Verbatim: `checks: 5   failed: 0`.
+- A plant (one word changed in the copy, passed via `ICSC_ALT`) gives `checks: 5   failed: 1`.
+
+### 2. WO-6 scope list
+
+- File: `TOOL_FINDER/WO6_CORPUS_AUDIT.md`, 482069 bytes, sha256 `674f18ab2b1043de83d30e969860ce0368090cd47bc3575b162c1674e1cfb4e6`. It was cut from the relayed message at the start of the round 4 order; trailing blank lines were trimmed to one newline.
+- `wo6_scope.py` parses the ledger only and infers nothing. An unknown status stops the parse. Selftest: `checks: 10   failed: 0`, with three planted faults each stopping the parse.
+- Ledger: 103 rows. In scope 79 (75 MERGED plus 4 CI-blocked). Excluded 22 SKIPPED_OUT_OF_SCOPE and 2 SCOPE_UNRESOLVED (gap-quantification-protocol, Nuclear-Donut-DataCenter).
+- The 4 CI-blocked rows use three status spellings (`BLOCKED_CI` x2, `PR_OPEN_BLOCKED_FAILED_CI`, `PR_OPEN_CI_FAILED_UNMERGED`). The parser checks they equal the audit's CI-blocked section.
+- Every repo this order has touched is in scope: the 5 finder repos and the 7 pointer repos read MERGED. thermodynamic-accountability-framework reads `PR_OPEN_BLOCKED_FAILED_CI`, which is in scope; it was SKIPPED_NO_PREAMBLE in round 2 and is still untouched.
+- No repo that rounds 1-3 touched falls outside the list, so nothing is withdrawn.
+
+### 3. null_calibration three-outcome matrix
+
+`python3 cutoff-attribution/null_calibration.py`, 300 draws per row, same seeds as the confusion matrix:
+
+```
+                              CORRECT_NAME CORRECT_ABSTAIN   WRONG   wrong by reason
+NETWORK_LAG                            300               0       0   -
+ENDPOINTING                            300               0       0   -
+TASK_PAUSE                             300               0       0   -
+AMBIENT_NOISE                          300               0       0   -
+TRANSCRIPTION                          300               0       0   -
+MODEL_READ                             300               0       0   -
+UNRESOLVED                               0               0     300   abstain_status_ESTIMATED 300
+NETWORK_LAG/hop_unchecked                0               0     300   abstain_status_ESTIMATED 300
+ENDPOINTING/hop_unchecked                0               0     300   abstain_status_ESTIMATED 300
+TASK_PAUSE/hop_unchecked                 0               0     300   abstain_status_ESTIMATED 300
+AMBIENT_NOISE/hop_unchecked              0               0     300   abstain_status_ESTIMATED 300
+TRANSCRIPTION/hop_unchecked              0               0     300   abstain_status_ESTIMATED 300
+MODEL_READ/hop_unchecked                 0               0     300   abstain_status_ESTIMATED 300
+sensor_collision                         0               0     300   abstain_status_ESTIMATED 300
+NETWORK_LAG/measurement_only             0             300       0   -
+total                                 1800             300    2400
+```
+
+- True sources: the planted source on each planted row, including hop_unchecked; `UNRESOLVED` on the UNRESOLVED control; TASK_PAUSE and AMBIENT_NOISE on sensor_collision.
+- **Finding.** Every control where NONE is the gating-correct verdict abstains with status ESTIMATED, not UNRESOLVED. The true source is in the candidate set on all of them. Under the order's rule they therefore score WRONG.
+- Cause: each draw carries a distractor event through an unverified hop. That gives a RECORDED_VIA_UNVERIFIED_HOP candidate, which raises the status to ESTIMATED.
+- Neither the classifier nor the rule was changed to move this. Whether ESTIMATED-with-NONE should count as an abstention is the operator's call.
+- The only CORRECT_ABSTAIN row is measurement_only: an unflagged rtt_ms with no other evidence gives status UNRESOLVED.
+- `selftest_null.py`: `checks: 16   failed: 0`. New checks: planted rows score CORRECT_NAME; measurement_only scores CORRECT_ABSTAIN; the UNRESOLVED control is WRONG for the ESTIMATED reason; the outcomes partition every draw; a constant-name classifier is right on its own row and WRONG elsewhere.
+
+### 4. model-provenance
+
+- **STALE_TABLE (DONE).** Logged as `model-provenance/CLAIM_TABLE.md` MP_010, dated, with `releases.json` untouched.
+- `verify` on the full history (not shallow) reads: SINGLE matches 315, SINGLE differs 511, AMBIGUOUS contains 17, AMBIGUOUS excludes 3, no version stated 601.
+- The history's trailers name 7 versions; the table has rows for 3, with counts as of 2026-08-25.
+- **Table extension (BLOCKED).** The new row would write a model identifier into a pushed data file. That conflicts with this session's standing rule: identifiers appear only in the commit trailer. MP_006 recorded the same conflict as WITHHELD. The row is computed (first/last appearance and commit count from the trailers) and given in the chat reply only. It lands if the operator adds it or confirms the rule does not apply to this file.
+- Because the table was not extended, `verify` was rerun but its counts did not move: they are the numbers above.
+- `provenance.py --selftest`: `SELFTEST PASS (0 checks failed)`.
+
+### Checks (verbatim, working tree before commit)
+
+```
+$ python3 TOOL_FINDER/wo6_scope.py --selftest            checks: 10   failed: 0
+$ python3 TOOL_FINDER/build_finder.py --selftest         checks: 17   failed: 0
+$ python3 ICSC/check_landing.py                          checks: 5   failed: 0
+$ python3 cutoff-attribution/selftest_null.py            checks: 16   failed: 0
+$ python3 cutoff-attribution/selftest.py                 checks: 25   failed: 0
+$ python3 model-provenance/provenance.py --selftest      SELFTEST PASS (0 checks failed)
+$ python3 tools/known_red_check.py --suite               pins: 25   MATCH 25   MISMATCH 0   VERDICT: PASS
+$ python3 -m pytest tests -q                             3 failed, 194 passed (the 3 pinned)
+```
+
+Nothing is merged. All PRs are open and waiting for the owner's go-ahead.

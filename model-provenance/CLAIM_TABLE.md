@@ -259,3 +259,34 @@ report it. The pattern is now composed from tokens, the
 **Falsifier:** any emitted row that ranks a commit or a version.
 
 **Status: SUPPORTED.**
+
+### MP_010 — STALE_TABLE: the trailers moved and `releases.json` did not
+
+Note 2026-11-09 (FINDER ROUND 4, item 4). Logged with the table untouched.
+
+`releases.json` is an observed-bound table read on 2026-08-25. Run on
+the full history at commit 0c03017 (not shallow), `verify` reads:
+
+- decode SINGLE, matches trailer: 315
+- decode SINGLE, differs from trailer: 511
+- decode AMBIGUOUS, contains trailer: 17
+- decode AMBIGUOUS, excludes trailer: 3
+- no version stated: 601
+
+The trailers in that history name 7 versions. The table has rows for 3
+of them, and its `first_seen` / `last_seen` / `n_commits` for those 3
+are as of 2026-08-25. The other 4 versions have no row, and every
+commit under one of them decodes to an older row. That is the source of
+the SINGLE-differs count. The state is STALE_TABLE: the decode is
+reading a table older than the record it decodes.
+
+This is not a finding about the derivation. MP_003's counterexamples
+(an earlier version stated after a later one) are a separate count and
+are reported by `verify` beside these.
+
+**Falsifier:** a row added for every version the trailers state, after
+which SINGLE-differs still counts commits under a version that has a
+row.
+
+**Status: OPEN** (the table extension is the operator's call; see the
+round 4 report).

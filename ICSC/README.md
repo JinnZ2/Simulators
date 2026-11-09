@@ -26,3 +26,8 @@ Cross-references, recorded and not built:
 tested: 2026-11-09 | model: WITHHELD (session rule: no model identifier is written into a pushed artifact; the operator holds it) | Claude Code, cloud session (claude.ai/code) | check_landing.py 3/3
 tested: 2026-11-09 | commit 98ecd8f | Claude Code, cloud session (claude.ai/code) | model: see trailer | check_landing.py 3/3
 tested: 2026-11-09 | commit 2982077 | Claude Code, cloud session (claude.ai/code) | model: see trailer | check_landing.py 4/4 (source landed; plant of one changed word fails check 4)
+
+Note 2026-11-09: round 4 asked for ICSC_v0.1_spec_audit.md beside the PDF. No file of that name was
+attached; the markdown pasted earlier is the same document and is already SPEC_AUDIT_v0.1.md. The
+round-4 name is added as a byte copy (sha256 984c2f94...1e93a75 for both). check_landing.py check 3
+fails if the two diverge. The folder itself first landed in commit a909e9c.

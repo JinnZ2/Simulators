@@ -29,6 +29,19 @@ nc.verdict = lambda d: "NETWORK_LAG"
 rows2, forced2, _ = nc.confusion(n=10)
 nc.verdict = saved
 check(forced2 == 10 * 8, "a classifier that always assigns a source shows forced attribution 1.0")
+# Note 2026-11-09 (FINDER ROUND 4): three-outcome score.
+t3 = nc.three_outcome(n=40)
+check(all(t3[s]["counts"]["CORRECT_NAME"] == 40 for s in nc.SOURCES), "planted, checked rows score CORRECT_NAME")
+check(t3["NETWORK_LAG/measurement_only"]["counts"]["CORRECT_ABSTAIN"] == 40, "measurement-only miss scores CORRECT_ABSTAIN")
+check(t3["UNRESOLVED"]["wrong_reasons"] == {"abstain_status_ESTIMATED": 40},
+      "UNRESOLVED control abstains with status ESTIMATED, so the literal rule scores it WRONG")
+check(sum(sum(r["counts"].values()) for r in t3.values()) == 40 * len(t3), "outcomes partition every draw")
+saved = nc.verdict
+nc.verdict = lambda d: "NETWORK_LAG"
+t3b = nc.three_outcome(n=10)
+nc.verdict = saved
+check(t3b["ENDPOINTING"]["wrong_reasons"] == {"named_non_true": 10} and t3b["NETWORK_LAG"]["counts"]["CORRECT_NAME"] == 10,
+      "a constant-name classifier: right on its own row, WRONG named_non_true elsewhere")
 r = subprocess.run([sys.executable, os.path.join(HERE, "null_calibration.py"), "--selftest"], capture_output=True, text=True)
 check(r.returncode == 2, "module refuses --selftest")
 print("checks: %d   failed: %d" % (total, total - ok))

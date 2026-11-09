@@ -35,6 +35,19 @@ Also run:
 The diagonal on the plain rows is close to true by construction: the planted
 event is exactly the evidence the rules accept.
 
+Note 2026-11-09 (FINDER ROUND 4): three-outcome scoring, beside the matrix.
+  CORRECT_NAME     the verdict names a true source.
+  CORRECT_ABSTAIN  the verdict is NONE, the cut status is UNRESOLVED, and a true
+                   source is in the candidate set.
+  WRONG            anything else: a non-true source named, or an abstention
+                   that misses either condition. WRONG is split by reason in the
+                   render (abstain with status ESTIMATED / abstain with the true
+                   source dropped / named a non-true source); the split is a
+                   readout, the three outcomes are the score.
+  True sources: the planted source on every planted row (hop_unchecked
+  included, where NONE is the gating-correct verdict); "UNRESOLVED" on the
+  UNRESOLVED control; TASK_PAUSE and AMBIENT_NOISE on sensor_collision.
+
 Readouts:
   confusion matrix   true source x assigned verdict, counts over N draws.
   forced-attribution rate
@@ -119,6 +132,48 @@ def verdict(data):
     return sep[0] if len(sep) == 1 else "NONE"
 
 
+OUTCOMES = ("CORRECT_NAME", "CORRECT_ABSTAIN", "WRONG")
+
+
+def score_draw(data, true_set):
+    """(outcome, reason) for one draw. One cut per draw in these controls."""
+    cut = ca.attribute(data)["cuts"][0]
+    v = verdict(data)
+    if v != "NONE":
+        return ("CORRECT_NAME", "named") if v in true_set else ("WRONG", "named_non_true")
+    kept = any(t in cut["candidate_set"] for t in true_set)
+    if kept and cut["status"] == "UNRESOLVED":
+        return "CORRECT_ABSTAIN", "abstained"
+    if not kept:
+        return "WRONG", "abstain_true_dropped"
+    return "WRONG", "abstain_status_" + cut["status"]
+
+
+def _cases():
+    cases = [(s, gen(s), {s}) for s in SOURCES] + [("UNRESOLVED", gen("UNRESOLVED"), {"UNRESOLVED"})]
+    cases += [("%s/hop_unchecked" % s, gen(s, checked=False), {s}) for s in SOURCES]
+    cases += [("sensor_collision", gen_collision, {"TASK_PAUSE", "AMBIENT_NOISE"}),
+              ("NETWORK_LAG/measurement_only", gen_measurement_only, {"NETWORK_LAG"})]
+    return cases
+
+
+def three_outcome(n=N_DRAWS, seed=42):
+    """Per row: counts of CORRECT_NAME / CORRECT_ABSTAIN / WRONG, and WRONG reasons.
+    Same generators and seeds as confusion(), so the draws are the same."""
+    rows = {}
+    for k, (label, g, true_set) in enumerate(_cases()):
+        rng = nh.np.random.default_rng(seed + k)
+        cnt = dict((o, 0) for o in OUTCOMES)
+        why = {}
+        for _ in range(n):
+            o, r = score_draw(g(rng), true_set)
+            cnt[o] += 1
+            if o == "WRONG":
+                why[r] = why.get(r, 0) + 1
+        rows[label] = {"true": sorted(true_set), "counts": cnt, "wrong_reasons": why}
+    return rows
+
+
 def confusion(n=N_DRAWS, seed=42):
     rows = {}
     cases = [(s, gen(s), s) for s in SOURCES] + [("UNRESOLVED", gen("UNRESOLVED"), "NONE")]
@@ -170,6 +225,17 @@ def render(n=N_DRAWS):
           % sum(r.get("retained_in_set", 0) for r in rows.values()), "", "per-candidate gate (null_harness.bake_off, neg = UNRESOLVED control)"]
     for s, r in gates(n).items():
         L.append("  %-14s FP=%.3f TP=%.3f  %s" % (s, r["FP"], r["TP"], r["verdict"]))
+    t3 = three_outcome(n)
+    L += ["", "three-outcome score (Note 2026-11-09, round 4; same draws as the matrix)",
+          "%-28s %13s %15s %7s   wrong by reason" % ("", "CORRECT_NAME", "CORRECT_ABSTAIN", "WRONG")]
+    tot = dict((o, 0) for o in OUTCOMES)
+    for label, r in t3.items():
+        for o in OUTCOMES:
+            tot[o] += r["counts"][o]
+        why = ", ".join("%s %d" % kv for kv in sorted(r["wrong_reasons"].items())) or "-"
+        L.append("%-28s %13d %15d %7d   %s" % (label, r["counts"]["CORRECT_NAME"],
+                                              r["counts"]["CORRECT_ABSTAIN"], r["counts"]["WRONG"], why))
+    L.append("%-28s %13d %15d %7d" % ("total", tot["CORRECT_NAME"], tot["CORRECT_ABSTAIN"], tot["WRONG"]))
     L += ["", "Scope: the controls test the evidence-gating rules this file plants against. A real",
           "channel can produce cues the generators never draw (overlapping hops, mislabelled",
           "logs, a reference check that passes while the hop fails on other inputs)."]
