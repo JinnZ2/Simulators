@@ -393,3 +393,15 @@ $ python3 ICSC/check_landing.py                           checks: 3   failed: 0
 ```
 
 Nothing is merged. All PRs are open and waiting for the owner's go-ahead.
+
+## Update 2026-11-09: ICSC markdown source landed
+
+- DONE. The operator pasted the markdown source of the ICSC v0.1 specification audit.
+- `Simulators/ICSC/SPEC_AUDIT_v0.1.md` now holds it verbatim, the path the order named.
+- The earlier `pdftotext -layout` stand-in moved to `SPEC_AUDIT_v0.1.pdftotext.md`, content unchanged, with a dated note.
+- Source and PDF agree word for word: 2612 words each after stripping markdown and box-drawing characters, 0 differences.
+- `check_landing.py` gained a fourth check for that agreement. Verbatim: `checks: 4   failed: 0`.
+- A copy with one word changed (`"isolated"` -> `"sealed"`) fails it: `checks: 4   failed: 1`.
+- The NAME_COLLISION path (`Simulators/ICSC/SPEC_AUDIT_v0.1.md`) is unchanged and now points at the source.
+- Still nothing built; status PROPOSED.
+

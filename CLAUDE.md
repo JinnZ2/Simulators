@@ -14289,6 +14289,9 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   corrected architecture, B acceptance tests T01-T20, C confounders, D assumptions, E indistinguishable
   cases, G the acceptance contract. The Cross-Domain-Toolkit `falsification_ledger` lock-layer binding is
   recorded only, and TOOL_FINDER's NAME_COLLISION entry now points here.
+  Note 2026-11-09: the markdown source then arrived and is `SPEC_AUDIT_v0.1.md`, verbatim; the
+  pdftotext stand-in moved to `SPEC_AUDIT_v0.1.pdftotext.md`, unchanged. A fourth check confirms the
+  source and the PDF carry the same 2612-word sequence, and fails on a planted one-word change.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
