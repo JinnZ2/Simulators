@@ -320,3 +320,19 @@ $ python3 TOOL_FINDER/insert_pointer.py --selftest        checks: 6   failed: 0
 ### PRs and merge SHAs
 
 Nothing has been merged; every PR is open. Merging waits for CI and for the owner's go-ahead. There are no merge SHAs yet.
+
+### Update 2026-11-09: item B landed
+
+- **B ICSC: DONE.** The operator supplied the spec as `ICSC_v0_1_spec_audit.pdf` (12 pages, sha256
+  b0a1d4f2...c111) rather than as the .md the order named. It lands at `Simulators/ICSC/`:
+  - `SPEC_AUDIT_v0.1.pdf` keeps the bytes as delivered.
+  - `SPEC_AUDIT_v0.1.md` holds the `pdftotext -layout` text, unedited, in one fence.
+  - `check_landing.py` re-extracts the PDF and compares; it reports `checks: 3   failed: 0`.
+  - Status PROPOSED, nothing built.
+- The NAME_COLLISION entry now points at the new location. The falsification_ledger lock-layer binding
+  stays recorded only, because the manifest lock the audit calls for is not built.
+- **Other uploads in the same message.** `US_distillate_floor_and_refinery_measurands...pdf` (sha256 ecac803d...)
+  and `Label_Welds_Pickaxe_Mountain_to_Training_Data.docx` (sha256 684d86b8...) are byte-identical to the
+  copies already filed in thermodynamic-accountability-framework `docs/audits_2026_11/`. Neither was re-filed.
+  The docx is still the PARTIAL copy that ends after Node 1.
+- **Still open.** F (WO-6 ledger) remains BLOCKED, and the 3c run remains NOT_RUN: neither file has been supplied.

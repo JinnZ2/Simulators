@@ -14280,6 +14280,15 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   sibling checkout and checked against a mirror (Amendment A2). Both
   tail-check and cutoff-attribution emit these records, and each checks its
   own reading against a built-in known input on every run.
+- `ICSC/` — ICSC v0.1 specification audit (Implicit Communication and Substrate Coupling), landed verbatim
+  2026-11-09 under the TOOL_FINDER follow-up, item B. STATUS: PROPOSED, nothing built. It arrived as a 12-page
+  PDF, not the .md the order named, so `SPEC_AUDIT_v0.1.pdf` keeps the bytes and `SPEC_AUDIT_v0.1.md` holds the
+  `pdftotext -layout` text, unedited, in one fence, with sha256 and provenance in the header.
+  `check_landing.py` re-extracts the PDF and confirms the fenced text is unchanged (`checks: 3   failed: 0`;
+  NOT_RUN without pdftotext). The audit's sections are not restated: F lists nine spec defects, A the
+  corrected architecture, B acceptance tests T01-T20, C confounders, D assumptions, E indistinguishable
+  cases, G the acceptance contract. The Cross-Domain-Toolkit `falsification_ledger` lock-layer binding is
+  recorded only, and TOOL_FINDER's NAME_COLLISION entry now points here.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

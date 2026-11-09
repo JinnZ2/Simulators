@@ -232,8 +232,11 @@ add("floor", "Simulators", "membership-probe/", "membership-probe",
     "python3 membership-probe/probe_audit.py --selftest", also=["scope"])
 
 NAME_COLLISIONS = [
- ("encoding-selection", "Simulators/encoding-selection/", "ICSC functional selection",
-  "ICSC location not found in any repo reachable this session (code search for 'ICSC' returns only ICSCommand, an ICS component); carried from the work order. Amendment A2 names Cross-Domain-Toolkit falsification_ledger as the ICSC manifest's lock layer; the manifest itself is NOT_LOCATED, so that binding is recorded, not built"),
+ ("encoding-selection", "Simulators/encoding-selection/", "ICSC functional selection (Simulators/ICSC/SPEC_AUDIT_v0.1.md)",
+  "ICSC location not found in any repo reachable this session (code search for 'ICSC' returns only ICSCommand, an ICS component); carried from the work order. Amendment A2 names Cross-Domain-Toolkit falsification_ledger as the ICSC manifest's lock layer; the manifest itself is NOT_LOCATED, so that binding is recorded, not built."
+  " Note 2026-11-09 (FINDER FOLLOW-UP B): ICSC is now located at Simulators/ICSC/SPEC_AUDIT_v0.1.md (status PROPOSED,"
+  " nothing built); functional_selection is an analysis axis in its section A, with load-matched dummy receiver T19."
+  " The manifest lock it calls for (section G, T15) is still not built, so the falsification_ledger binding stays recorded only"),
  ("WO-6", "Simulators/assessor-coupling/", "Simulators/criterion-externality/",
   "two different work orders share the ordinal WO-6 (recorded in assessor-coupling/README.md)"),
  ("provenance", "Shadow-Hunting ai_provenance.py (said vs template vs derived)",
