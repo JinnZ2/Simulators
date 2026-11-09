@@ -103,3 +103,97 @@ The Simulators root suite was also run in a worktree at the branch head: `pytest
 - **ICSC functional selection.** The term `ICSC` returned no hit in any repo reachable this session. The NAME_COLLISION entry carries it from the work order, with its location marked not found.
 - **Shadow-Hunting.** It was not in the session's starting scope. It was attached during this task because the work order names it as the motivating case.
 - **Aliases** are ALIAS_PROPOSED. They were not tested against real AI search queries.
+
+---
+
+## Amendments A1 + A2 (2026-11-09)
+
+### Repos touched (added)
+
+| repo | branch | head | PR | merge SHA |
+|---|---|---|---|---|
+| JinnZ2/Cross-Domain-Toolkit | claude/tool-finder-aliases | ec3b38a | (see PR list) | PENDING (not merged) |
+
+Cross-Domain-Toolkit carries a CC0 LICENSE. Its four package test suites pass. telemetry_vocabulary is markdown only and has no check command.
+
+### A1: precision + channel chain
+
+**Finder.** Every one of the now 43 entries carries three new fields: `precision`, `assumes` and `chain`.
+- These fields are **A1_READING**: a model reading of each tool's stated scope, not verbatim text.
+- `chain` names which hops of sensor -> encoding -> transmission -> decoding -> inference the tool reads or ignores.
+
+**New shared record: `tools/channel_chain.py`.**
+- Per hop it holds the known deviation sources and a known-reference check, with state CHECKED, CHECK_FAILED or UNVERIFIED_HOP.
+- The chain class is VIA_CHECKED_CHAIN, VIA_UNVERIFIED_HOP or VIA_FAILED_HOP. No DIRECT class exists, and an empty chain reads UNVERIFIED.
+
+**cutoff-attribution.**
+- Each candidate now sits at one hop.
+- A log event counts as OBSERVED only when its hop passed a reference check supplied by the caller. Otherwise it is RECORDED_VIA_UNVERIFIED_HOP or RECORDED_VIA_FAILED_HOP, and it counts as ESTIMATED.
+- On every run, the tool injects a known cut into its own reading and confirms it is detected; a broken detector reads CHECK_FAILED.
+
+**tail-check.**
+- SAID now means "a span of the user turns as supplied".
+- The decoding hop is self-checked on every run against two known spans, one present and one absent.
+- The transmission and encoding hops accept a caller sentinel with `observed: "AUTO"`: the tool looks for the injected string in the user turns.
+- Unchecked hops are named in every render.
+
+### A2: Cross-Domain-Toolkit
+
+**Finder scan.** Five packages were added: multi_substrate_calibration, falsification_ledger, cascade_regime_audit, runner_up_trace and telemetry_vocabulary. Each got a Finds-by section in its README, five sections in all, adding lines only.
+
+**3a terms.** ATTRIBUTION_DISPLACEMENT cites "Interiority substitution" and "Care inversion".
+- The term names come from `telemetry_vocabulary/terms.md`, read at run time with a line locator (for example `terms.md:49`), and are not re-coined.
+- The mapping from phrase to term is the tool's own reading.
+- With no toolkit checkout present, a hit reads TERM_NOT_CHECKED.
+
+**A1 record fields.** The record uses the field names of `multi_substrate_calibration.substrate.SubstrateReading`.
+- When a toolkit checkout is present they are imported from it (fields source: IMPORTED); otherwise they come from a mirror copy.
+- If the toolkit's fields and the mirror differ, the record build raises an error.
+- The record widens `value` from a float to a label. This is stated in the module, and the toolkit's determinacy gate would rightly refuse such a record.
+
+**ICSC manifest lock layer.**
+- The amendment names falsification_ledger as the lock layer of the ICSC manifest.
+- The ICSC manifest itself is **NOT_LOCATED**: code search across JinnZ2 for "ICSC" returns only ICSCommand (an ICS component) in Nexus-emergency-management.
+- The binding is therefore recorded in the ICSC NAME_COLLISION note and not built. No manifest was invented.
+
+**NAME_COLLISION "clean-room".**
+- The software-rebuild sense is located at Cross-Domain-Toolkit README.md:112 and docs/METHOD.md:10.
+- The lab-isolation sense is carried from the amendment; no file in this session's scope using it was located.
+
+**GAP.** Added: the four-arm paired design instrument (arms 1-4, arm 4 = infeasibility record). No tool was located that holds all four arms or files an infeasibility record as an arm.
+
+### Selftests after the amendments (verbatim)
+
+`python3 tools/channel_chain.py --selftest`
+```
+fields source: IMPORTED
+checks: 12   failed: 0
+```
+
+`python3 tail-check/selftest.py`
+```
+tail_check.py refuses --selftest; run: python3 tail-check/selftest.py
+checks: 26   failed: 0
+```
+
+`python3 cutoff-attribution/selftest.py`
+```
+cutoff_attribution.py refuses --selftest; run: python3 cutoff-attribution/selftest.py
+checks: 25   failed: 0
+```
+
+`python3 TOOL_FINDER/build_finder.py --selftest`
+```
+checks: 14   failed: 0
+```
+
+### Other results
+
+**Finder status** (worktree run): 36 RUN, 6 NOT_RUN, 1 UNKNOWN. The UNKNOWN is evaluation-frame, unchanged.
+
+**Simulators root suite:** 194 passed, 3 failed. All 3 failures are pinned: pins 25, MATCH 25, VERDICT PASS.
+
+### Not done under A1/A2
+
+- **The 33 tools that are not builds.** No per-hop reference checks were added to them. A1's build clauses were applied to the two builds, and the finder records each tool's chain as a reading.
+- **The worktree runs** cannot see a sibling Cross-Domain-Toolkit checkout. In those runs, tail-check and cutoff-attribution use the field mirror and TERM_NOT_CHECKED. Their selftests pass in both modes.
