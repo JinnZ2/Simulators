@@ -23,7 +23,7 @@ Simulators:
 - new: `TOOL_FINDER/` (TOOL_FINDER.md, finder.json, entries.py, build_finder.py, write_finds_by.py, status.json, this report)
 - new: `tail-check/`, `cutoff-attribution/`, `tools/README.md`
 - READMEs created because none existed: `criterion-symmetry/README.md`, `observer-exclusion/README.md`
-- 26 existing READMEs had a Finds-by section appended
+- 22 existing READMEs had a Finds-by section appended; tail-check/ and cutoff-attribution/ carry one in their new READMEs; tools/README.md carries 4 (30 sections in Simulators)
 
 method-layer:
 - `README.md` (+3 sections)
