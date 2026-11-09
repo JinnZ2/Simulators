@@ -1,3 +1,11 @@
+# DESIGN BASIS (requested by repo owner):
+#   property: provenance carried with values (source, locator, hash,
+#             derivation)
+#   reason:   UNSTATED -- ask owner
+#   property: refuses malformed or unsupported input rather than defaulting
+#   reason:   UNSTATED -- ask owner
+#   attribute style judgments to this requirement,
+#   not to the authoring model.
 """Blind calibration of the WO-3 rubric on a post-cutoff anchor (site T),
 and the independent second scorer. Stdlib only, Python >= 3.8, CC0.
 

@@ -68,3 +68,5 @@ is the one request, not an additional license condition.
 ## In this repo
 
 The upstream packages in `fourd-municipal-engine/` and `fourd-municipal-engine-v2/` declare MIT in their `pyproject.toml` files; this reading layer does not alter those terms.
+
+Note 2026-11-09: Style properties marked DESIGN BASIS are requirements, not authoring-model traits.

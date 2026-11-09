@@ -1,4 +1,16 @@
 # SPDX-License-Identifier: CC0-1.0
+# DESIGN BASIS (requested by repo owner):
+#   property: provenance carried with values (source, locator, hash,
+#             derivation)
+#   reason:   UNSTATED -- ask owner
+#   property: explicit status states for absent / unknown / not-run values
+#   reason:   "Keep **found**, **out of scope** and **unresolved** apart.
+#             They are different outcomes." (quoted from
+#             READ_ME_THIS_WAY.md section 4)
+#   property: refuses malformed or unsupported input rather than defaulting
+#   reason:   UNSTATED -- ask owner
+#   attribute style judgments to this requirement,
+#   not to the authoring model.
 """floor_capability.py -- the FLOOR CAPABILITY SITE ASSESSMENT draft v0, read
 and instrumented.
 

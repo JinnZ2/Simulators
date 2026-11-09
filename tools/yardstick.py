@@ -1,3 +1,8 @@
+# DESIGN BASIS (requested by repo owner):
+#   property: refuses malformed or unsupported input rather than defaulting
+#   reason:   UNSTATED -- ask owner
+#   attribute style judgments to this requirement,
+#   not to the authoring model.
 """Coupling vs border-maintenance energy: a yardstick.
 
 CC0. Stdlib only. Parses under Python 3.9. Companion to
