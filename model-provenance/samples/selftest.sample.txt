@@ -25,6 +25,12 @@ provenance selftest
   verify counts it as stale_table, not agree or disagree     PASS got=(1, 0, 0) want=(1, 0, 0)
   the per-commit row prints no decoded version               PASS got=(True, False) want=(True, False)
   a trailer model that IS in the table still decodes         PASS got='SINGLE' want='SINGLE'
+  trailer present -> trailer reading, status OBSERVED        PASS got=('A', 'OBSERVED', 'AGREES') want=('A', 'OBSERVED', 'AGREES')
+  no trailer -> window reading, status ESTIMATED, agreement VOID PASS got=('VOID', 'A', 'ESTIMATED', 'VOID') want=('VOID', 'A', 'ESTIMATED', 'VOID')
+  trailer model with no table row: OBSERVED, agreement stale_table PASS got=('Claude Planted 9', 'OBSERVED', 'CONDITIONAL(stale_table)') want=('Claude Planted 9', 'OBSERVED', 'CONDITIONAL(stale_table)')
+  no trailer and no window: every reading slot VOID, kept    PASS got=(['agreement', 'status', 'trailer_model', 'window_model'], 'VOID', 'VOID') want=(['agreement', 'status', 'trailer_model', 'window_model'], 'VOID', 'VOID')
+  trailer before the table: OBSERVED, window VOID, agreement VOID PASS got=('OBSERVED', 'VOID', 'VOID') want=('OBSERVED', 'VOID', 'VOID')
+  render carries all four per-commit fields                  PASS got=True want=True
   a same-day switchover in order is not a counterexample     PASS got=0 want=0
   and reversing the clock within the day is one              PASS got=1 want=1
   the emitted report is clean under the declared exemption   PASS got=True want=True

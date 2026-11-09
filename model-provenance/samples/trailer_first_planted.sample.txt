@@ -1,0 +1,31 @@
+PLANTED FIXTURE (versions A, B, 'Planted 9' are labels, not model names)
+
+trailer-first decode (Note 2026-11-09, round 7): trailer present -> trailer
+reading, status OBSERVED, no date window; no trailer -> date window, status
+ESTIMATED; VOID where a field is absent (no information, never a zero)
+
+status     commits
+---------  -------
+OBSERVED   5      
+ESTIMATED  1      
+VOID       1      
+
+agreement (trailer vs window)  commits
+-----------------------------  -------
+AGREES                         1      
+DISAGREES                      1      
+WINDOW_CONTAINS                1      
+WINDOW_EXCLUDES                0      
+CONDITIONAL(stale_table)       1      
+VOID                           3      
+
+commit    date        trailer_model  window_model  agreement                 status   
+--------  ----------  -------------  ------------  ------------------------  ---------
+aaaaaaaa  2026-01-15  A              A             AGREES                    OBSERVED 
+bbbbbbbb  2026-01-15  B              A             DISAGREES                 OBSERVED 
+cccccccc  2026-01-31  B              A|B           WINDOW_CONTAINS           OBSERVED 
+dddddddd  2025-06-01  A              VOID          VOID                      OBSERVED 
+eeeeeeee  2026-01-20  VOID           A             VOID                      ESTIMATED
+ffffffff  2025-06-01  VOID           VOID          VOID                      VOID     
+gggggggg  2026-01-20  Planted 9      A             CONDITIONAL(stale_table)  OBSERVED 
+

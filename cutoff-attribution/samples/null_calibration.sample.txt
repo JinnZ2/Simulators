@@ -77,35 +77,36 @@ round 6 pick options (readout; superseded by the round 7 pick: both, below)
 
 ADOPTED SCORE (Note 2026-11-09, round 7, owner's pick: both)
                               CORRECT_NAME CORRECT_ABSTAIN  MISSED_IDENTIFIABLE   WRONG
-NETWORK_LAG                            300               0                    0       0
-ENDPOINTING                            300               0                    0       0
-TASK_PAUSE                             300               0                    0       0
-AMBIENT_NOISE                          300               0                    0       0
-TRANSCRIPTION                          300               0                    0       0
-MODEL_READ                             300               0                    0       0
-UNRESOLVED                               0             300                    0       0
-NETWORK_LAG/hop_unchecked                0             300                    0       0
-ENDPOINTING/hop_unchecked                0             300                    0       0
-TASK_PAUSE/hop_unchecked                 0             300                    0       0
-AMBIENT_NOISE/hop_unchecked              0             300                    0       0
-TRANSCRIPTION/hop_unchecked              0             300                    0       0
-MODEL_READ/hop_unchecked                 0             300                    0       0
-sensor_collision                         0             300                    0       0
-NETWORK_LAG/measurement_only             0             300                    0       0
-NETWORK_LAG/noise_k3                   300               0                    0       0
-ENDPOINTING/noise_k3                   300               0                    0       0
-TASK_PAUSE/noise_k3                    300               0                    0       0
-AMBIENT_NOISE/noise_k3                 300               0                    0       0
-TRANSCRIPTION/noise_k3                 300               0                    0       0
-MODEL_READ/noise_k3                    300               0                    0       0
-NETWORK_LAG/noise_k6                   300               0                    0       0
-ENDPOINTING/noise_k6                   300               0                    0       0
-TASK_PAUSE/noise_k6                    300               0                    0       0
-AMBIENT_NOISE/noise_k6                 300               0                    0       0
-TRANSCRIPTION/noise_k6                 300               0                    0       0
-MODEL_READ/noise_k6                    300               0                    0       0
+NETWORK_LAG                            300            VOID                    0       0
+ENDPOINTING                            300            VOID                    0       0
+TASK_PAUSE                             300            VOID                    0       0
+AMBIENT_NOISE                          300            VOID                    0       0
+TRANSCRIPTION                          300            VOID                    0       0
+MODEL_READ                             300            VOID                    0       0
+UNRESOLVED                               0             300                 VOID       0
+NETWORK_LAG/hop_unchecked                0             300                 VOID       0
+ENDPOINTING/hop_unchecked                0             300                 VOID       0
+TASK_PAUSE/hop_unchecked                 0             300                 VOID       0
+AMBIENT_NOISE/hop_unchecked              0             300                 VOID       0
+TRANSCRIPTION/hop_unchecked              0             300                 VOID       0
+MODEL_READ/hop_unchecked                 0             300                 VOID       0
+sensor_collision                         0             300                 VOID       0
+NETWORK_LAG/measurement_only             0             300                 VOID       0
+NETWORK_LAG/noise_k3                   300            VOID                    0       0
+ENDPOINTING/noise_k3                   300            VOID                    0       0
+TASK_PAUSE/noise_k3                    300            VOID                    0       0
+AMBIENT_NOISE/noise_k3                 300            VOID                    0       0
+TRANSCRIPTION/noise_k3                 300            VOID                    0       0
+MODEL_READ/noise_k3                    300            VOID                    0       0
+NETWORK_LAG/noise_k6                   300            VOID                    0       0
+ENDPOINTING/noise_k6                   300            VOID                    0       0
+TASK_PAUSE/noise_k6                    300            VOID                    0       0
+AMBIENT_NOISE/noise_k6                 300            VOID                    0       0
+TRANSCRIPTION/noise_k6                 300            VOID                    0       0
+MODEL_READ/noise_k6                    300            VOID                    0       0
 total (all controls)                  5400            2700                    0       0
-noise controls only                   3600               0                    0       0
+  MISSED_IDENTIFIABLE is exercised by 18 controls (the designed-identifiable rows); VOID elsewhere
+noise controls only                   3600            VOID                    0       0
 
 Scope: the controls test the evidence-gating rules this file plants against. A real
 channel can produce cues the generators never draw (overlapping hops, mislabelled

@@ -390,11 +390,20 @@ def render(n=N_DRAWS):
             tot[o] += r["counts"][o]
             if "/noise_k" in label:
                 ntot[o] += r["counts"][o]
-        L.append("%-28s %13d %15d %20d %7d" % (label, r["counts"]["CORRECT_NAME"], r["counts"]["CORRECT_ABSTAIN"],
-                                                r["counts"]["MISSED_IDENTIFIABLE"], r["counts"]["WRONG"]))
+        ident = DESIGNED_IDENTIFIABLE[label][0]
+        # Note 2026-11-09 (round 7): a slot a row cannot exercise reads VOID (no
+        # information), never 0: CORRECT_ABSTAIN on rows designed to identify,
+        # MISSED_IDENTIFIABLE on rows not designed to identify.
+        ca_cell = "VOID" if ident else "%d" % r["counts"]["CORRECT_ABSTAIN"]
+        mi_cell = "%d" % r["counts"]["MISSED_IDENTIFIABLE"] if ident else "VOID"
+        L.append("%-28s %13d %15s %20s %7d" % (label, r["counts"]["CORRECT_NAME"], ca_cell, mi_cell,
+                                                r["counts"]["WRONG"]))
     L.append("%-28s %13d %15d %20d %7d" % ("total (all controls)", tot["CORRECT_NAME"], tot["CORRECT_ABSTAIN"],
                                             tot["MISSED_IDENTIFIABLE"], tot["WRONG"]))
-    L.append("%-28s %13d %15d %20d %7d" % ("noise controls only", ntot["CORRECT_NAME"], ntot["CORRECT_ABSTAIN"],
+    n_ex = sum(1 for lab in ad if DESIGNED_IDENTIFIABLE[lab][0])
+    L.append("  MISSED_IDENTIFIABLE is exercised by %d controls (the designed-identifiable rows);"
+             " VOID elsewhere" % n_ex)
+    L.append("%-28s %13d %15s %20d %7d" % ("noise controls only", ntot["CORRECT_NAME"], "VOID",
                                             ntot["MISSED_IDENTIFIABLE"], ntot["WRONG"]))
     L += ["", "Scope: the controls test the evidence-gating rules this file plants against. A real",
           "channel can produce cues the generators never draw (overlapping hops, mislabelled",

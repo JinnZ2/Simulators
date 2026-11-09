@@ -333,3 +333,39 @@ Note 2026-11-09 (round 7, item 3): the owner picked option b (add rows). The row
 This session operates under a standing rule against writing any model identifier into a pushed
 file, and one of the four versions is the identifier of the session's own model. The four
 rows were given to the owner in chat. `releases.json` is unchanged; MP_010 and MP_011 stand.
+
+Note 2026-11-09 (round 7 repeat, item 3d): the MP_012 scratch numbers above are kept as a
+specimen and not re-run. Adding rows dropped trailer agreement from 315 to 229, and reverse-T21
+failed on 390 of 1030. They are the reason table extension was not taken. MP_013 replaces it.
+
+### MP_013 — trailer-first decode: the trailer is the observation, the window an estimate
+
+Note 2026-11-09 (round 7, item 3a-3e). Each commit now carries four fields:
+trailer_model | window_model | agreement | status. Each is filled or VOID. VOID means no
+information, never a zero, and the field is never dropped.
+
+- Trailer present: the reading is the trailer, status OBSERVED, and no date window is used for
+  the reading. window_model is still reported beside it.
+- Agreement compares the trailer with the window: AGREES / DISAGREES under a single
+  candidate, WINDOW_CONTAINS / WINDOW_EXCLUDES under an ambiguous one, CONDITIONAL(stale_table)
+  when the trailer's model has no row, and VOID when the window cannot decode the date.
+- No trailer: the reading is the date window, status ESTIMATED. Status is VOID when the window
+  cannot decode either.
+
+releases.json is untouched and no model name is written. Live reading on this repository:
+
+- status: OBSERVED 855, ESTIMATED 446, VOID 155
+- agreement: AGREES 315, DISAGREES 92, WINDOW_CONTAINS 17, WINDOW_EXCLUDES 3,
+  CONDITIONAL(stale_table) 426, VOID 603
+
+The 92 here against verify's 94: the 2 commits whose trailer date predates the table now read
+agreement VOID. Before this change they were counted as disagreements.
+
+The per-commit sample is `samples/trailer_first_planted.sample.txt`, on a planted fixture.
+`samples/decode_per_commit.sample.txt` is not regenerated, because a live render would write the
+model names the trailers carry. It stays as it was and predates this decode.
+
+**Falsifier:** a commit with a trailer whose status is not OBSERVED, or a commit without one
+whose status is OBSERVED.
+
+**Status: SUPPORTED on the selftest and the live run.**

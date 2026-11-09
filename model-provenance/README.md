@@ -97,3 +97,5 @@ Note 2026-11-09 (round 7): MP_012 logged. The date windows of the table rows ove
 are not independent. A scratch run that added the 4 missing rows changed the decode of 390 of the
 1030 commits outside the stale set. Option b (add rows) was the owner's pick. It is not written
 here, because of the no-model-identifier rule; see MP_012. `releases.json` is unchanged.
+
+Note 2026-11-09 (round 7, MP_013): decode is trailer-first. A commit with a trailer reads its trailer, status OBSERVED. A commit without one reads the date window, status ESTIMATED. Per-commit fields are trailer_model | window_model | agreement | status, with VOID where absent. releases.json is untouched; the planted per-commit sample is samples/trailer_first_planted.sample.txt.

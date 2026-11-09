@@ -81,6 +81,13 @@ adn = nc.adopted(n=10)
 nc.verdict = saved
 check(all(adn[l]["counts"]["MISSED_IDENTIFIABLE"] == 10 for l in noise),
       "round 7: a constant-NONE classifier scores MISSED_IDENTIFIABLE on the noise controls (outcome reachable)")
+out = nc.render(n=10)
+row = [l for l in out.splitlines() if l.startswith("UNRESOLVED ") and "VOID" in l]
+row2 = [l for l in out.splitlines() if l.startswith("NETWORK_LAG/noise_k3") and "VOID" in l]
+check(len(row) == 1 and len(row2) == 1,
+      "round 7: an unexercisable slot prints VOID, not 0, on both kinds of row")
+check(any(l.startswith("  current ") for l in out.splitlines()) and "three-outcome score (Note 2026-11-09, round 4" in out,
+      "round 7: the current scoring row and the round-4 table stay in the output")
 r = subprocess.run([sys.executable, os.path.join(HERE, "null_calibration.py"), "--selftest"], capture_output=True, text=True)
 check(r.returncode == 2, "module refuses --selftest")
 print("checks: %d   failed: %d" % (total, total - ok))

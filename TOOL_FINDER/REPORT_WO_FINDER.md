@@ -593,3 +593,31 @@ Selftest lines (throwaway worktree, commit 5fcb172): selftest_null "checks: 21  
      is unchanged.
 
 Selftest lines (throwaway worktree, commit e577c4e): selftest_null "checks: 28   failed: 0"; cutoff selftest "checks: 25   failed: 0"; provenance "SELFTEST PASS (0 checks failed)"; check_v02 "checks: 11   failed: 0"; check_landing "checks: 5   failed: 0"; build_finder "checks: 17   failed: 0"; pytest tests 194 passed, 3 failed (the pinned run_manifest set); known_red VERDICT: PASS.
+
+## Round 7, repeat order (2026-11-09; principle: more slots, unfilled = VOID)
+
+1. BLOCKED, for the third time. No ICSC_v0.2_spec.md reached this session; nothing new is on
+   disk and the message carries no spec text. Appending the "rev 2026-11-09 11:44" section,
+   updating the section 4.1 and T30 references and adding T30b all need the revised text. T30b
+   in particular is defined only there and is not invented. SPEC_v0.2.md is unchanged.
+2. DONE.
+   - Scoring is "both".
+   - In the adopted table, a slot a row cannot exercise prints VOID, never 0. That is
+     CORRECT_ABSTAIN on designed-identifiable rows, and MISSED_IDENTIFIABLE on the others.
+   - MISSED_IDENTIFIABLE is exercised by 18 controls: 6 plain and 12 noise controls, the noise
+     ones with source labels hidden from the rule set.
+   - Noise controls: CORRECT_NAME 3600, MISSED_IDENTIFIABLE 0.
+   - The "current" scoring row stays in the options readout, and the round-4 table stays in
+     full.
+3. DONE (a-e).
+   - Trailer present: the trailer is the reading, status OBSERVED, and no window is used for
+     it. No trailer: the date window is the reading, status ESTIMATED. An unknown trailer
+     model gives agreement CONDITIONAL(stale_table).
+   - Per-commit fields: trailer_model | window_model | agreement | status, VOID where absent.
+   - Live run: OBSERVED 855 / ESTIMATED 446 / VOID 155. Agreement: AGREES 315, DISAGREES 92,
+     WINDOW_CONTAINS 17, WINDOW_EXCLUDES 3, stale_table 426, VOID 603.
+   - releases.json is untouched, and no model name is written.
+   - The per-commit sample is on a planted fixture. The live per-commit sample is not
+     regenerated, because a live render would write the trailers' model names.
+   - MP_012 keeps the scratch specimen: 390 of 1030; agreement 315 -> 229. MP_013 records the
+     decode.
