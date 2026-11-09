@@ -486,3 +486,27 @@ $ python3 -m pytest tests -q                             3 failed, 194 passed (t
 ```
 
 Nothing is merged. All PRs are open and waiting for the owner's go-ahead.
+
+## ICSC v0.2 landing (2026-11-09)
+Note 2026-11-09: work order relayed via the Claude app. Checks run in a throwaway worktree at de97f90.
+
+1. DONE. `ICSC/SPEC_v0.2.md` is the supplied text verbatim (landed at 6819b1a, sha256 5773584923e1...68791e),
+   status PROPOSED. v0.1 (PDF, the supplied .md, the byte copy) is unchanged. No file named
+   ICSC_v0.2_spec.md was attached; the pasted text is the landed file. The TOOL_FINDER entry for ICSC
+   (name collision with encoding-selection) now names both specs.
+   `checks: 5   failed: 0` (check_landing.py), `checks: 11   failed: 0` (check_v02.py),
+   `checks: 17   failed: 0` (build_finder.py --selftest).
+2. DONE. model-provenance `decode_commit()`: a trailer naming a model with no table row decodes
+   `CONDITIONAL(stale_table)`, with no candidates and no model printed; `verify` counts these in their own row.
+   This repository reads 419 such commits. releases.json is not edited. Selftest has a planted unknown-model case.
+   The dated note is in the README and CLAIM_TABLE MP_011. `SELFTEST PASS (0 checks failed)`, 34 checks.
+3. DONE, confirmed in place since round 4. The three-outcome score CORRECT_NAME / CORRECT_ABSTAIN / WRONG
+   reads total 1800 / 300 / 2400. The 2400 WRONG are all abstain_status_ESTIMATED, and whether those count
+   as required abstentions under T29/G2 is still the operator's call.
+4. DONE. null_calibration output line 3 reads validity = CONDITIONAL(same_author). The README "breaks when"
+   states it, and a selftest check is added. `checks: 17   failed: 0` (selftest_null.py),
+   `checks: 25   failed: 0` (selftest.py).
+5. DONE earlier (cd4e385); it was re-pasted and is identical apart from one trailing newline.
+   It is the scope list. `checks: 10   failed: 0` (wo6_scope.py --selftest).
+Tree: pytest tests 3 failed / 194 passed (the 3 pinned run_manifest failures); known_red_check --suite VERDICT: PASS.
+Worktree git status clean after the runs. PR #252, branch claude/tool-finder.
