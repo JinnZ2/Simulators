@@ -8,5 +8,14 @@ Note 2026-11-09: created by FINDER FOLLOW-UP item G to hold test stamps; `TOOL_F
 - `write_finds_by.py`: appends Finds-by sections. `insert_pointer.py`: README pointer after the preamble.
 - `REPORT_WO_FINDER.md`, `TOPICS_TODO.md`: report and hand-set topics list.
 
+## Naming rule for new tools (FINDER ROUND 3, 2026-11-09)
+
+Every tool created from 2026-11-09 on records, at creation, in its Finds-by (alias) section:
+- `avoided term:` the term it deliberately does not use as its name;
+- `reason:` one line on why, verbatim from the tool's own text where it states one.
+
+Existing tools keep `AVOIDED_TERM_UNSTATED` unless their own text, or the coinage-log files, give a term with
+a reason. Nothing is filled in after the fact from a reading.
+
 ## Tested (append-only; never overwrite an older line)
 tested: 2026-11-09 | model: WITHHELD (session rule: no model identifier is written into a pushed artifact; the operator holds it) | Claude Code, cloud session (claude.ai/code) | build_finder.py --selftest 17/17, insert_pointer.py --selftest 6/6

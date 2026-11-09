@@ -25,7 +25,7 @@ cut t=23.50  DETECTED    status=ESTIMATED
       MODEL_READ    ESTIMATED                   model starts 0.30 s after open-ended user text
 cut t=41.00  USER_TAGGED status=UNRESOLVED
     note: user tagged, no transcript sign
-    candidate set: UNRESOLVED
+    candidate set: NETWORK_LAG, UNRESOLVED
     chain: sensor[UNVERIFIED_HOP] -> encoding[UNVERIFIED_HOP] -> transmission[CHECKED] -> decoding[CHECK_FAILED] -> inference[UNVERIFIED_HOP] -> inference[CHECKED]
     chain class: VIA_FAILED_HOP (never a direct observation)
       NETWORK_LAG   LOGGED_UNFLAGGED            log rtt_ms at 41.50, no flag

@@ -78,6 +78,11 @@ internal states") and carries no condition word (transmit / fail / lag /
 drop / cut / network / audio / mic). Both are word lists; a paraphrase steps
 around them. The `term` field is unchanged.
 
+Note 2026-11-09 (FINDER ROUND 3): an unflagged measurement (e.g. an rtt_ms
+spike with no flag) keeps its candidate in the candidate set of an unseparated
+cut, status still UNRESOLVED or ESTIMATED; before this it was listed under
+evidence only. Optional radio_log input; schema in RADIO_SCHEMA.
+
 [CHOICE 1] GAP_S = 0.6 s; [CHOICE 2] WINDOW_S = 2.0 s around the cut;
 [CHOICE 3] RESUME_S = 1.5 s for a quick user resume. All are arguments,
 printed in every render; none is measured.
@@ -147,7 +152,37 @@ LOG_KINDS = {
     "noise_db": ("AMBIENT_NOISE", False), "noise": ("AMBIENT_NOISE", False),
     "asr_error": ("TRANSCRIPTION", True), "asr_confidence": ("TRANSCRIPTION", False),
     "model_interrupt": ("MODEL_READ", True),
+    "rssi_dbm": ("NETWORK_LAG", False), "network_handover": ("NETWORK_LAG", True),
 }
+
+RADIO_SCHEMA = """radio_log (optional, FINDER ROUND 3): a list of
+  {"t": seconds on the transcript clock, "dbm": received signal in dBm (number),
+   "network": network type string, e.g. "wifi", "lte", "5g"}
+Each entry becomes a signal_log measurement rssi_dbm (NETWORK_LAG, transmission
+hop), unflagged unless the entry carries "flag": true; no dBm threshold is
+applied. A change of "network" between consecutive entries becomes an event
+network_handover at the later entry's t, read through the transmission hop
+like any other event."""
+
+
+def radio_to_log(radio):
+    """radio_log entries -> signal_log entries. Refuses an entry without t."""
+    out, prev = [], None
+    for i, r in enumerate(radio or []):
+        if "t" not in r:
+            raise ValueError("radio_log entry %d has no t" % i)
+    for r in sorted(radio or [], key=lambda x: float(x["t"])):
+        if "dbm" in r:
+            e = {"t": float(r["t"]), "kind": "rssi_dbm", "value": r["dbm"], "network": r.get("network")}
+            if r.get("flag") is True:
+                e["flag"] = True
+            out.append(e)
+        net = r.get("network")
+        if prev is not None and net is not None and prev != net:
+            out.append({"t": float(r["t"]), "kind": "network_handover", "from": prev, "to": net})
+        if net is not None:
+            prev = net
+    return out
 
 NOISE_TAG = re.compile(r"\[(noise|background|static)\]", re.I)
 UNCLEAR_TAG = re.compile(r"\[(inaudible|unclear|crosstalk|garbled)\]", re.I)
@@ -263,7 +298,7 @@ def attribute(record):
 def _attribute(record, hop_state, hop_refs, tool_hop, terms):
     segs = sorted(record.get("segments") or [], key=lambda s: s["t_start"])
     marks = record.get("cut_marks") or []
-    log = record.get("signal_log") or []
+    log = list(record.get("signal_log") or []) + radio_to_log(record.get("radio_log"))
     out = []
     for c in _cuts(segs, marks):
         ev = _evidence(c, segs, log, hop_state)
@@ -277,7 +312,12 @@ def _attribute(record, hop_state, hop_refs, tool_hop, terms):
         else:
             status, sep = "UNRESOLVED", None
         if sep is None:
-            cand_set = cand_set + ["UNRESOLVED"]
+            # Note 2026-11-09 (FINDER ROUND 3): a candidate with only an
+            # unflagged measurement is kept in the set. It is still not
+            # evidence: it cannot raise the status above UNRESOLVED.
+            unflagged = [k for k, v in ev.items() if v and k not in cand_set
+                         and all(e["level"] == "LOGGED_UNFLAGGED" for e in v)]
+            cand_set = sorted(set(cand_set) | set(unflagged), key=CANDIDATES.index) + ["UNRESOLVED"]
         chain = []
         for h in cc.HOPS:
             r = hop_refs.get(h)

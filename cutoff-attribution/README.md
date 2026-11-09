@@ -106,3 +106,20 @@ Note 2026-11-09: added by FINDER FOLLOW-UP items A2 and C.
 
 ## Tested (append-only; never overwrite an older line)
 tested: 2026-11-09 | model: WITHHELD (session rule: no model identifier is written into a pushed artifact; the operator holds it) | Claude Code, cloud session (claude.ai/code) | selftest.py 25/25, selftest_terms.py 11/11, selftest_null.py 10/10
+
+## Unflagged measurements and radio_log (FINDER ROUND 3, 2026-11-09)
+Note 2026-11-09: added by FINDER ROUND 3 item 3.
+
+- **Before:** the "network lag, unflagged" case (an rtt_ms spike with no flag) output status UNRESOLVED,
+  candidate set `UNRESOLVED` only, and listed NETWORK_LAG under evidence as LOGGED_UNFLAGGED.
+- **Now:** status still UNRESOLVED, candidate set `NETWORK_LAG, UNRESOLVED`. An unflagged measurement keeps its
+  candidate in the set of an unseparated cut and never raises the status. The selftest pin moved on purpose.
+  In `null_calibration.py` the measurement-only row is still a miss (verdict NONE), and the planted source is now
+  retained in the candidate set on every one of those draws.
+- **Optional `radio_log` input:** a list of `{"t": seconds, "dbm": number, "network": "wifi" | "lte" | "5g" | ...}`.
+  - Each dBm row becomes an unflagged `rssi_dbm` measurement on the transmission hop (NETWORK_LAG). No dBm
+    threshold is applied; a row may carry `"flag": true`.
+  - A change of `network` between consecutive rows becomes a `network_handover` event, read through the
+    transmission hop like any other event.
+  - An entry with no `t` is refused. Schema text: `RADIO_SCHEMA` in the module.
+  - Checks: `python3 cutoff-attribution/selftest_radio.py`.

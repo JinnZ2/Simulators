@@ -16,6 +16,8 @@ check(forced == 0 and denom == 40 * 8, "no forced attribution on NONE-correct co
 check(rows["sensor_collision"]["counts"].get("NONE", 0) == 40, "two OBSERVED on one hop do not separate")
 check(rows["NETWORK_LAG/measurement_only"]["counts"].get("NONE", 0) == 40, "measurement-only source is missed (cost of gating, kept)")
 check(nc.missed(rows) == 40, "missed count is exactly the measurement_only row")
+# Note 2026-11-09 (FINDER ROUND 3): the miss now keeps NETWORK_LAG in the candidate set.
+check(rows["NETWORK_LAG/measurement_only"]["retained_in_set"] == 40, "missed source retained in candidate set")
 g = nc.gates(n=40)
 check(all(v["verdict"] == "OK" for v in g.values()), "every per-candidate gate reads OK in null_harness terms")
 # the calibration can fail: a constant verdict reads CONSTANT in null_harness terms

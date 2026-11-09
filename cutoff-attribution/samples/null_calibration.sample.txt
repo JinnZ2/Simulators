@@ -21,6 +21,7 @@ NETWORK_LAG/measurement_only       0       0       0       0       0       0    
 
 forced-attribution rate (source assigned where NONE was correct): 0 / 2400 = 0.0000
 missed attribution (NONE where a source was planted): 300 draws
+  of which the planted source is still in the candidate set: 300 draws
 
 per-candidate gate (null_harness.bake_off, neg = UNRESOLVED control)
   NETWORK_LAG    FP=0.000 TP=1.000  OK

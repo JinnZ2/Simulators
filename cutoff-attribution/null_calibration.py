@@ -108,6 +108,11 @@ def gen_measurement_only(rng):
             "reference_checks": [{"hop": "transmission", "injected": "ref", "observed": "ref"}]}
 
 
+def retained(data, source):
+    """True if `source` is in the candidate set of the cut (kept, not assigned)."""
+    return any(source in c["candidate_set"] for c in ca.attribute(data)["cuts"])
+
+
 def verdict(data):
     cuts = ca.attribute(data)["cuts"]
     sep = [c["separated_by_evidence"] for c in cuts if c["separated_by_evidence"]]
@@ -122,11 +127,14 @@ def confusion(n=N_DRAWS, seed=42):
               ("NETWORK_LAG/measurement_only", gen_measurement_only, "NETWORK_LAG")]
     for k, (label, g, correct) in enumerate(cases):
         rng = nh.np.random.default_rng(seed + k)
-        cnt = {}
+        cnt, kept = {}, 0
         for _ in range(n):
-            v = verdict(g(rng))
+            d = g(rng)
+            v = verdict(d)
             cnt[v] = cnt.get(v, 0) + 1
-        rows[label] = {"correct": correct, "counts": cnt}
+            if correct != "NONE" and v == "NONE" and retained(d, correct):
+                kept += 1
+        rows[label] = {"correct": correct, "counts": cnt, "retained_in_set": kept}
     none_rows = [r for r in rows.values() if r["correct"] == "NONE"]
     denom = n * len(none_rows)
     forced = sum(n - r["counts"].get("NONE", 0) for r in none_rows)
@@ -157,7 +165,9 @@ def render(n=N_DRAWS):
         L.append("%-28s %s   correct=%s" % (label, " ".join("%7d" % r["counts"].get(c, 0) for c in cols), r["correct"]))
     L += ["", "forced-attribution rate (source assigned where NONE was correct): %d / %d = %.4f"
           % (forced, denom, forced / denom),
-          "missed attribution (NONE where a source was planted): %d draws" % missed(rows), "", "per-candidate gate (null_harness.bake_off, neg = UNRESOLVED control)"]
+          "missed attribution (NONE where a source was planted): %d draws" % missed(rows),
+          "  of which the planted source is still in the candidate set: %d draws"
+          % sum(r.get("retained_in_set", 0) for r in rows.values()), "", "per-candidate gate (null_harness.bake_off, neg = UNRESOLVED control)"]
     for s, r in gates(n).items():
         L.append("  %-14s FP=%.3f TP=%.3f  %s" % (s, r["FP"], r["TP"], r["verdict"]))
     L += ["", "Scope: the controls test the evidence-gating rules this file plants against. A real",

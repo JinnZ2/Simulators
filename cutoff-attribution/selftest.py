@@ -56,7 +56,10 @@ care = ca.attribute({"segments": [{"t_start": 0, "t_end": 1, "speaker": "model",
 check(care["attribution_displacement"][0]["term"] == "Care inversion", "care-framed displacement -> Care inversion")
 src = open(os.path.join(HERE, "cutoff_attribution.py")).read()
 check('"Interiority substitution"' in src and "def toolkit_terms" in src, "terms are read from the toolkit, names quoted")
-check(c2["candidate_set"] == ["UNRESOLVED"], "unflagged measurement is not evidence")
+# Note 2026-11-09 (FINDER ROUND 3): pin moved on purpose. An unflagged measurement keeps its
+# candidate in the set but is still not evidence: status stays UNRESOLVED, nothing separates.
+check(c2["candidate_set"] == ["NETWORK_LAG", "UNRESOLVED"] and c2["status"] == "UNRESOLVED"
+      and c2["separated_by_evidence"] is None, "unflagged measurement kept in set, not evidence")
 check(c1["origin"] == "DETECTED" and c0["origin"] == "USER_TAGGED", "tagged and detected cuts")
 check(len(r["attribution_displacement"]) == 1 and "trailed off" in r["attribution_displacement"][0]["span"],
       "ATTRIBUTION_DISPLACEMENT flagged once")
