@@ -591,3 +591,5 @@ Selftest lines (throwaway worktree, commit 5fcb172): selftest_null "checks: 21  
      of the session's own model, and this session may not write any model identifier into a
      pushed file. The four rows were given to the owner in chat to add by hand. releases.json
      is unchanged.
+
+Selftest lines (throwaway worktree, commit e577c4e): selftest_null "checks: 28   failed: 0"; cutoff selftest "checks: 25   failed: 0"; provenance "SELFTEST PASS (0 checks failed)"; check_v02 "checks: 11   failed: 0"; check_landing "checks: 5   failed: 0"; build_finder "checks: 17   failed: 0"; pytest tests 194 passed, 3 failed (the pinned run_manifest set); known_red VERDICT: PASS.
