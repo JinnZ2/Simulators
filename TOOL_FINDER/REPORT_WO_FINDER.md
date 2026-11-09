@@ -510,3 +510,54 @@ Note 2026-11-09: work order relayed via the Claude app. Checks run in a throwawa
    It is the scope list. `checks: 10   failed: 0` (wo6_scope.py --selftest).
 Tree: pytest tests 3 failed / 194 passed (the 3 pinned run_manifest failures); known_red_check --suite VERDICT: PASS.
 Worktree git status clean after the runs. PR #252, branch claude/tool-finder.
+
+## Round 6 (2026-11-09)
+
+1. PARTLY DONE / BLOCKED.
+   - BLOCKED: landing the revised v0.2. The order says the text was
+     supplied with it, but the message carried no spec text and no file.
+     SPEC_v0.2.md is unchanged; the "rev 2026-11-09 11:44" section is
+     appended when the text arrives.
+   - DONE: the label rename. CONDITIONAL(same_author) is now
+     CONDITIONAL(circular_control) in null_calibration.py, its sample,
+     selftest_null.py and the cutoff-attribution README, each with a dated
+     note.
+   - The old label is kept as VALIDITY_OLD. A selftest check asserts it is
+     recorded and no longer emitted.
+   - SPEC_v0.2.md section 4.1 and T30 still say same_author. That text
+     changes only with the revised spec.
+2. PARTLY DONE / AWAITING PICK.
+   - DONE: designed identifiability per control, declared as data from
+     the planted design, not from the tool. The 6 plain rows are yes. The
+     other 9 are no: UNRESOLVED, the 6 hop_unchecked, sensor_collision and
+     measurement_only.
+   - All 2400 ESTIMATED abstentions are on rows not designed to identify a
+     source. No identifiable row has an ESTIMATED abstention.
+   - The matrix was rerun with every option as a readout. None is adopted,
+     and the score stays at the current row until you pick:
+       option    CORRECT_NAME CORRECT_ABSTAIN   WRONG  MISSED_IDENTIFIABLE
+       current           1800             300    2400                    0
+       A                 1800            2700       0                    0
+       B                 1800             300    2400                    0
+       AB                1800            2700       0                    0
+   - On these controls B adds nothing and AB equals A. They would differ
+     only on a control where the identifying evidence was planted and the
+     tool still abstained.
+3. BLOCKED, awaiting pick. releases.json is unchanged. Option 3 was dry-run
+   in scratch, never pushed, with counts only:
+   - The stale count is now 421, not 419. The tree gained commits since
+     the last order.
+   - In the snapshot, one observed_bound row was added for each of the 4
+     missing versions. stale_table 421 -> 0; agree 315 -> 229; disagree
+     94 -> 254; ambiguous_contains 17 -> 212; ambiguous_excludes 3 -> 155;
+     unstated 601 -> 601.
+   - Reverse-T21 FAILS its second clause. 390 of the 1030 non-stale commits
+     changed decode, because the new rows' windows overlap the existing
+     rows.
+   - So option 3 as written cannot be confirmed on this repository. Option
+     1 has the same overlap effect.
+   - Any added row writes model names into a pushed file, which the
+     standing no-identifier rule needs you to clear.
+
+Selftest lines (throwaway worktree): see the commit message of the round 6
+commit.

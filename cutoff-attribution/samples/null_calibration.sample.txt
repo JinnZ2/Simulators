@@ -1,6 +1,6 @@
 cutoff-attribution null calibration -- ILLUSTRATIVE (synthetic planted sources, 300 draws per row)
 verdict = single source separated by evidence, else NONE
-validity = CONDITIONAL(same_author): controls were authored to the rule set under test (ICSC v0.2 T30); this shows wiring, not validity
+validity = CONDITIONAL(circular_control): controls were authored to the rule set under test (ICSC v0.2 T30); this shows wiring, not validity
 
 confusion matrix (rows: true source / control; columns: assigned)
                              NETWORK ENDPOIN TASK_PA AMBIENT TRANSCR MODEL_R    NONE
@@ -50,6 +50,30 @@ MODEL_READ/hop_unchecked                 0               0     300   abstain_sta
 sensor_collision                         0               0     300   abstain_status_ESTIMATED 300
 NETWORK_LAG/measurement_only             0             300       0   -
 total                                 1800             300    2400
+
+round 6: designed identifiability per control (set by the planted design, not the tool)
+  NETWORK_LAG                  yes   ESTIMATED   0  flagged event on the source's hop, hop reference-checked
+  ENDPOINTING                  yes   ESTIMATED   0  flagged event on the source's hop, hop reference-checked
+  TASK_PAUSE                   yes   ESTIMATED   0  flagged event on the source's hop, hop reference-checked
+  AMBIENT_NOISE                yes   ESTIMATED   0  flagged event on the source's hop, hop reference-checked
+  TRANSCRIPTION                yes   ESTIMATED   0  flagged event on the source's hop, hop reference-checked
+  MODEL_READ                   yes   ESTIMATED   0  flagged event on the source's hop, hop reference-checked
+  UNRESOLVED                   no    ESTIMATED 300  no source planted; distractors only
+  NETWORK_LAG/hop_unchecked    no    ESTIMATED 300  planted event on a hop with no reference check; NONE is gating-correct
+  ENDPOINTING/hop_unchecked    no    ESTIMATED 300  planted event on a hop with no reference check; NONE is gating-correct
+  TASK_PAUSE/hop_unchecked     no    ESTIMATED 300  planted event on a hop with no reference check; NONE is gating-correct
+  AMBIENT_NOISE/hop_unchecked  no    ESTIMATED 300  planted event on a hop with no reference check; NONE is gating-correct
+  TRANSCRIPTION/hop_unchecked  no    ESTIMATED 300  planted event on a hop with no reference check; NONE is gating-correct
+  MODEL_READ/hop_unchecked     no    ESTIMATED 300  planted event on a hop with no reference check; NONE is gating-correct
+  sensor_collision             no    ESTIMATED 300  two sources planted on one checked hop; designed not to separate
+  NETWORK_LAG/measurement_only no    ESTIMATED   0  only an unflagged rtt_ms trace; designed as the expected miss
+
+round 6 pick options (readout only; the score above is unchanged until one is picked)
+  option    CORRECT_NAME CORRECT_ABSTAIN   WRONG  MISSED_IDENTIFIABLE
+  current           1800             300    2400                    0
+  A                 1800            2700       0                    0
+  B                 1800             300    2400                    0
+  AB                1800            2700       0                    0
 
 Scope: the controls test the evidence-gating rules this file plants against. A real
 channel can produce cues the generators never draw (overlapping hops, mislabelled

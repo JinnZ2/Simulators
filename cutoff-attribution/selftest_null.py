@@ -42,8 +42,17 @@ t3b = nc.three_outcome(n=10)
 nc.verdict = saved
 check(t3b["ENDPOINTING"]["wrong_reasons"] == {"named_non_true": 10} and t3b["NETWORK_LAG"]["counts"]["CORRECT_NAME"] == 10,
       "a constant-name classifier: right on its own row, WRONG named_non_true elsewhere")
-check(nc.VALIDITY == "CONDITIONAL(same_author)" and nc.VALIDITY_LINE in nc.render(n=10),
-      "T30: output carries validity = CONDITIONAL(same_author)")
+check(nc.VALIDITY == "CONDITIONAL(circular_control)" and nc.VALIDITY_LINE in nc.render(n=10),
+      "T30: output carries validity = CONDITIONAL(circular_control)")
+check(nc.VALIDITY_OLD == "CONDITIONAL(same_author)" and nc.VALIDITY_OLD not in nc.render(n=10),
+      "round 6 rename: old label recorded, not emitted")
+t3 = nc.three_outcome(n=20)
+check(set(nc.DESIGNED_IDENTIFIABLE) == set(t3), "round 6: every control has a designed-identifiability entry")
+po = nc.pick_options(t3)
+check(po["current"]["MISSED_IDENTIFIABLE"] == 0 and po["A"]["WRONG"] < po["current"]["WRONG"],
+      "round 6: option A moves non-identifiable ESTIMATED out of WRONG")
+check(all(sum(v.values()) == sum(po["current"].values()) for v in po.values()),
+      "round 6: every option scores the same number of draws")
 r = subprocess.run([sys.executable, os.path.join(HERE, "null_calibration.py"), "--selftest"], capture_output=True, text=True)
 check(r.returncode == 2, "module refuses --selftest")
 print("checks: %d   failed: %d" % (total, total - ok))

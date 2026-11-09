@@ -174,6 +174,44 @@ def three_outcome(n=N_DRAWS, seed=42):
     return rows
 
 
+# Note 2026-11-09 (round 6): whether each control's planted evidence was
+# DESIGNED to identify its source. Set by the planted design (the generator
+# docstrings above), never by the tool's output. Declared data.
+DESIGNED_IDENTIFIABLE = dict(
+    [(s, (True, "flagged event on the source's hop, hop reference-checked")) for s in SOURCES]
+    + [("UNRESOLVED", (False, "no source planted; distractors only"))]
+    + [("%s/hop_unchecked" % s, (False, "planted event on a hop with no reference check; NONE is gating-correct"))
+       for s in SOURCES]
+    + [("sensor_collision", (False, "two sources planted on one checked hop; designed not to separate")),
+       ("NETWORK_LAG/measurement_only", (False, "only an unflagged rtt_ms trace; designed as the expected miss"))])
+
+
+def pick_options(t3=None):
+    """Totals under each round-6 option. A readout: none is adopted here.
+    A = rescore ESTIMATED abstentions on non-identifiable rows -> CORRECT_ABSTAIN.
+    B = ESTIMATED abstentions on identifiable rows -> MISSED_IDENTIFIABLE.
+    AB = both."""
+    t3 = t3 or three_outcome()
+    out = {}
+    for opt in ("current", "A", "B", "AB"):
+        tot = {"CORRECT_NAME": 0, "CORRECT_ABSTAIN": 0, "WRONG": 0, "MISSED_IDENTIFIABLE": 0}
+        for label, r in t3.items():
+            ident = DESIGNED_IDENTIFIABLE[label][0]
+            est = r["wrong_reasons"].get("abstain_status_ESTIMATED", 0)
+            tot["CORRECT_NAME"] += r["counts"]["CORRECT_NAME"]
+            tot["CORRECT_ABSTAIN"] += r["counts"]["CORRECT_ABSTAIN"]
+            wrong = r["counts"]["WRONG"]
+            if opt in ("A", "AB") and not ident:
+                tot["CORRECT_ABSTAIN"] += est
+                wrong -= est
+            elif opt in ("B", "AB") and ident:
+                tot["MISSED_IDENTIFIABLE"] += est
+                wrong -= est
+            tot["WRONG"] += wrong
+        out[opt] = tot
+    return out
+
+
 def confusion(n=N_DRAWS, seed=42):
     rows = {}
     cases = [(s, gen(s), s) for s in SOURCES] + [("UNRESOLVED", gen("UNRESOLVED"), "NONE")]
@@ -204,7 +242,11 @@ def missed(rows):
 # Note 2026-11-09 (ICSC v0.2 section 4.1 G1, test T30): the controls below
 # were written to the rule set they test, so the output's validity is
 # CONDITIONAL(same_author). It shows wiring, not validity.
-VALIDITY = "CONDITIONAL(same_author)"
+# Note 2026-11-09 (round 6): label renamed CONDITIONAL(same_author) ->
+# CONDITIONAL(circular_control) on the operator's order; the old label is kept
+# as VALIDITY_OLD so a reader of earlier output can map it. Meaning unchanged.
+VALIDITY_OLD = "CONDITIONAL(same_author)"
+VALIDITY = "CONDITIONAL(circular_control)"
 VALIDITY_LINE = ("validity = %s: controls were authored to the rule set under test "
                  "(ICSC v0.2 T30); this shows wiring, not validity" % VALIDITY)
 
@@ -245,6 +287,16 @@ def render(n=N_DRAWS):
         L.append("%-28s %13d %15d %7d   %s" % (label, r["counts"]["CORRECT_NAME"],
                                               r["counts"]["CORRECT_ABSTAIN"], r["counts"]["WRONG"], why))
     L.append("%-28s %13d %15d %7d" % ("total", tot["CORRECT_NAME"], tot["CORRECT_ABSTAIN"], tot["WRONG"]))
+    L += ["", "round 6: designed identifiability per control (set by the planted design, not the tool)"]
+    for label, r in t3.items():
+        ident, basis = DESIGNED_IDENTIFIABLE[label]
+        L.append("  %-28s %-5s ESTIMATED %3d  %s" % (label, "yes" if ident else "no",
+                 r["wrong_reasons"].get("abstain_status_ESTIMATED", 0), basis))
+    L += ["", "round 6 pick options (readout only; the score above is unchanged until one is picked)",
+          "  %-8s %13s %15s %7s %20s" % ("option", "CORRECT_NAME", "CORRECT_ABSTAIN", "WRONG", "MISSED_IDENTIFIABLE")]
+    for opt, tt in pick_options(t3).items():
+        L.append("  %-8s %13d %15d %7d %20d" % (opt, tt["CORRECT_NAME"], tt["CORRECT_ABSTAIN"],
+                                               tt["WRONG"], tt["MISSED_IDENTIFIABLE"]))
     L += ["", "Scope: the controls test the evidence-gating rules this file plants against. A real",
           "channel can produce cues the generators never draw (overlapping hops, mislabelled",
           "logs, a reference check that passes while the hop fails on other inputs)."]
