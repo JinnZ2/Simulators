@@ -1,11 +1,12 @@
 # run_11 -- assumption_nudge on the candidate anchor (anchor test 3)
 
 ```text
+status     : INCOMPLETE -- gate rule: tools missing, see ledger/NEEDS_TOOL.md
 code       : runs/run_11.py
 seed       : 0, 1, 2 per nudge ; 0..9 for the noise band
 params     : model/base.py DEFAULTS, unedited ; one override per nudge ; x1.1 and x0.9 per hand-set parameter, x10 for two structural nudges, leak 0.3
 results    : 64 nudges on 13 of 25 assumptions ; budgets closed under 63 ; 33 moved nothing detectable ; no runaway with the ceiling lifted
-flags      : 7 (below)
+flags      : 8 (below)
 provenance : DERIVED -- recomputed in this tree: python3 runs/run_11.py ; pinned in samples/run_11.sample.txt and samples/run_11.json
 feeds      : ANCHOR_run9 (test 3) ; CC_003_nudges_that_move_nothing ; L3_LIGHT_CEILING ; L0_WATER_BUDGET ; L2_GRASS_GROWTH ; assumption_nudge
 l0_closure : N and water CLOSED under 63 of 64 nudges ; N LEAK under the planted off-table path ; C / P / energy VOID
@@ -40,6 +41,8 @@ P0, W_dry x0.9, drought +0.1          water, leaching, fires                   -
 ## Flags
 
 ```text
+- INCOMPLETE under the gate rule (2026-11-10): the trigger below needs ablation,
+  multi_seed_ensemble, equation_family_swap and parameter_recovery; none exists.
 - TRIGGER: 33 of 64 nudges leave every output inside noise. Card CC_003 is OPEN:
   three causes supported and not separated from each other (N throughput fixed by
   the budget; grass-side parameters unreachable after extinction; low power at

@@ -1,0 +1,12 @@
+id: multi_seed_ensemble
+code: void
+diagnoses:
+  - "stochastic effects, early-warning spikes (METHOD BRIEF toolbox line: multi-seed ensembles + variance)"
+inputs: void
+outputs: void
+cannot_see: void
+other_domains_it_could_see_into: void
+used_in: []
+open_issues:
+  - "not built; logged under the gate rule of 2026-11-10, see ledger/NEEDS_TOOL.md"
+status: placeholder

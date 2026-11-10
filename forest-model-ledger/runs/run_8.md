@@ -1,6 +1,7 @@
 # run_8 -- ember spotting
 
 ```text
+status     : REPORTED
 code       : void
 seed       : void
 params     : void

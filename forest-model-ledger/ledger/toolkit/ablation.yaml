@@ -1,0 +1,12 @@
+id: ablation
+code: void
+diagnoses:
+  - "what actually matters (METHOD BRIEF toolbox line: ablation (drop one variable))"
+inputs: void
+outputs: void
+cannot_see: void
+other_domains_it_could_see_into: void
+used_in: []
+open_issues:
+  - "not built; logged under the gate rule of 2026-11-10, see ledger/NEEDS_TOOL.md"
+status: placeholder

@@ -7,5 +7,7 @@ FIRED  card none_of_above against derivation
 FIRED  candidate promoted with tests unpassed
 FIRED  frozen code hash drift
 FIRED  tool with no diagnoses
+FIRED  incomplete run marked complete
+FIRED  needed tool with no toolkit entry
 FIRED  run field dropped
-selftest: 10 planted, 0 silent
+selftest: 12 planted, 0 silent

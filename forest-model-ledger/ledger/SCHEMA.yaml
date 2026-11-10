@@ -56,6 +56,7 @@ anchor:
   code: "list of {path, sha256}; the checker fails when a file no longer matches"
 run:
   files: "runs/run_N.md always; runs/run_N.py when the code is in the tree"
+  status: "REPORTED | COMPLETE | INCOMPLETE; INCOMPLETE when a trigger fired and a needed tool does not exist (gate rule), and then the run is in ledger/NEEDS_TOOL.md"
   fields: "code, seed, params, results, flags, provenance, feeds -- each present, void when unknown"
 provenance_classes:
   OBSERVED: "measured in the world. No entry holds this class yet"

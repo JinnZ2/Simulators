@@ -1,6 +1,7 @@
 # run_9 -- rebuild of the run-6 conserved model as the ledger base
 
 ```text
+status     : COMPLETE
 code       : runs/run_9.py
 seed       : 0 (base cases) ; 0..9 (seed sweep)
 params     : model/base.py DEFAULTS, hand-set, no tuning pass ; 300 yr ; RK4 dt 1/52 (1/104 for the dt check)

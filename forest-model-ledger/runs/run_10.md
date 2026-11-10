@@ -1,11 +1,12 @@
 # run_10 -- toolbox trigger: N misclosure near-identical across seeds
 
 ```text
+status     : INCOMPLETE -- gate rule: tools missing, see ledger/NEEDS_TOOL.md
 code       : runs/run_10.py
 seed       : 0..9
 params     : model/base.py DEFAULTS, unedited ; arms: drought_sd=0, dep=0, fires off, dt 1/52 1/104 1/208 1/64 1/128, years 30..300
 results    : (c) roundoff of the deposition counter. Not (a), not (b).
-flags      : 5 (below)
+flags      : 6 (below)
 provenance : DERIVED -- recomputed in this tree: python3 runs/run_10.py ; pinned in samples/run_10.sample.txt
 feeds      : L0_N_BUDGET ; CC_001_n_misclosure_seed_invariance ; ANCHOR_run9 (test 2) ; budget_closure
 l0_closure : N CLOSED, water CLOSED in every arm ; C / P / energy VOID
@@ -45,6 +46,9 @@ The pools did not lose 5e-11 of N. The boundary counter over-counted it.
 ## Flags
 
 ```text
+- INCOMPLETE under the gate rule (2026-11-10). The reading (c) rests on hand-written
+  checks, not on the toolbox: six of the brief's seven tools do not exist. The
+  evidence stands as logged; the trigger is not counted as resolved.
 - Not converging with dt: the residual GROWS as dt shrinks (more adds). It stays
   10^4 below the CLOSED tolerance at every dt tried.
 - Growth with run length is not smooth: -9.0e-13, +1.3e-12, -1.6e-11, -5.1e-11 at

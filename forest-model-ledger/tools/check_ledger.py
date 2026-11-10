@@ -19,7 +19,7 @@ COMP = ["id", "layer", "equation", "assumes", "if_assumption_fails", "scope", "p
         "test_results", "open_issues", "depends_on", "status"]
 BRANCH = ["id", "family", "status", "components", "links", "convergence_anchors", "runs", "open_issues", "note"]
 BLOCK = ["id", "statement", "if_fails", "used_by", "used_by_runs", "open_issues", "status"]
-RUN_FIELDS = ["code", "seed", "params", "results", "flags", "provenance", "feeds"]
+RUN_FIELDS = ["status", "code", "seed", "params", "results", "flags", "provenance", "feeds"]
 
 
 def load_dir(sub):
@@ -150,13 +150,45 @@ def check(run_tests=False):
               for p in sorted(glob.glob(os.path.join(ROOT, "ledger", "toolkit", "*.yaml")))}
     for n, t in tools_.items():
         fields("tool", n, t, TOOL)
-        if not os.path.exists(os.path.join(HERE, t.get("code", "MISSING"))):
+        if t.get("status") == "placeholder":
+            if t.get("code") != "void":
+                F(f"tool {n}: placeholder with code {t.get('code')}")
+        elif not os.path.exists(os.path.join(HERE, t.get("code", "MISSING"))):
             F(f"tool {n}: code {t.get('code')} not in tree")
         if not t.get("diagnoses"):
             F(f"tool {n}: lists no deviation it diagnoses")
         for r in t.get("used_in", []):
             if r not in runs:
                 F(f"tool {n}: run {r} missing")
+    # ---- gate rule: INCOMPLETE run <-> NEEDS_TOOL.md <-> toolkit entry
+    needs_path = os.path.join(ROOT, "ledger", "NEEDS_TOOL.md")
+    needs = []
+    if os.path.exists(needs_path):
+        for line in open(needs_path):
+            cells = [c.strip() for c in line.strip().strip("|").split("|")]
+            if len(cells) == 5 and re.match(r"run_\d+$", cells[2]):
+                needs.append(cells)
+                if not all(cells):
+                    F(f"NEEDS_TOOL: empty cell in row {cells}")
+    for tool, _, r, _, _ in needs:
+        if tool not in tools_:
+            F(f"NEEDS_TOOL: {tool} has no entry in ledger/toolkit/")
+        elif tools_[tool].get("status") != "placeholder" and r not in tools_[tool].get("used_in", []):
+            F(f"NEEDS_TOOL: {tool} is built but was not run on {r}; row stays until it is")
+        if r not in runs:
+            F(f"NEEDS_TOOL: run {r} missing")
+    run_status = {}
+    for r in sorted(runs):
+        m = re.search(r"^status\s*:\s*(\w+)", open(os.path.join(ROOT, "runs", r + ".md")).read(), re.M)
+        run_status[r] = m.group(1) if m else None
+        if run_status[r] not in ("REPORTED", "COMPLETE", "INCOMPLETE"):
+            F(f"{r}.md: status {run_status[r]} outside REPORTED / COMPLETE / INCOMPLETE")
+    owed = {c[2] for c in needs}
+    for r, st in run_status.items():
+        if st == "INCOMPLETE" and r not in owed:
+            F(f"{r}.md: INCOMPLETE with no row in ledger/NEEDS_TOOL.md")
+        if st == "COMPLETE" and r in owed:
+            F(f"{r}.md: COMPLETE while ledger/NEEDS_TOOL.md still owes it a tool")
     cards = cc.load_all(ROOT)
     readings = {}
     for n, c in cards.items():
@@ -208,7 +240,9 @@ def check(run_tests=False):
             F(f"regime_map: row {fam}")
     count = lambda d: {s: sum(1 for x in d.values() if x.get("status") == s) for s in sorted(STATUS)}
     return fails, notes, dict(components=count(comps), branches=count(branches), blocks=len(blocks), runs=len(runs), tests=len(tests),
-                              tools=len(tools_), cards=readings,
+                              tools=len(tools_), tools_placeholder=sum(1 for t in tools_.values() if t.get("status") == "placeholder"),
+                              run_status={k: sum(1 for v in run_status.values() if v == k) for k in ("REPORTED", "COMPLETE", "INCOMPLETE")},
+                              needs_rows=len(needs), cards=readings,
                               anchors={n: a.get("status") for n, a in anchors_.items()})
 
 
@@ -226,6 +260,8 @@ def selftest():
         ("candidate promoted with tests unpassed", "ledger/anchors/ANCHOR_run9.yaml", "status: candidate", "status: anchor", "status anchor with tests"),
         ("frozen code hash drift", "ledger/anchors/ANCHOR_run9.yaml", "sha256: ebb656bb", "sha256: 0bb656bb", "no longer matches its frozen sha256"),
         ("tool with no diagnoses", "ledger/toolkit/coincidence_card.yaml", "diagnoses:", "diagnoses: []\nwas:", None),
+        ("incomplete run marked complete", "runs/run_11.md", "status     : INCOMPLETE", "status     : COMPLETE", "COMPLETE while ledger/NEEDS_TOOL.md still owes"),
+        ("needed tool with no toolkit entry", "ledger/NEEDS_TOOL.md", "| ablation | 33 of 64", "| ablation_v2 | 33 of 64", "ablation_v2 has no entry"),
         ("run field dropped", "runs/run_3.md", "seed       :", "sead       :", "field seed dropped"),
     ]
     bad = 0
@@ -256,6 +292,7 @@ if __name__ == "__main__":
     print("components", summ["components"])
     print("branches  ", summ["branches"])
     print(f"blocks {summ['blocks']}  runs {summ['runs']}  tests {summ['tests']}")
+    print(f"runs {summ['run_status']}  NEEDS_TOOL rows {summ['needs_rows']}  placeholder tools {summ['tools_placeholder']}")
     print(f"toolkit {summ['tools']} tools  cards {summ['cards']}  anchors {summ['anchors']}")
     for n in notes:
         print("note:", n)

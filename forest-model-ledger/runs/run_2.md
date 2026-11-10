@@ -1,6 +1,7 @@
 # run_2 -- 120 synthetic studies + method artifacts
 
 ```text
+status     : REPORTED
 code       : void
 seed       : void
 params     : void

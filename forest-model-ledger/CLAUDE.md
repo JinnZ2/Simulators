@@ -81,6 +81,22 @@ WHEN UNSURE
 Ask one question rather than filling the gap from typical practice.
 ```
 
+## Additions to the brief (by its authors; verbatim)
+
+```text
+ADD TO METHOD BRIEF — gate rule (Kavik, 2026-11-10)
+If a toolbox trigger fires and the needed tool does not exist:
+- mark the run INCOMPLETE (not resolved)
+- log the missing tool as a placeholder in ledger/toolkit/
+- add it to ledger/NEEDS_TOOL.md (tool, trigger that needed it, run, date)
+- put "TOOL NEEDED: <name>" as the FIRST line of the report to Kavik
+Never explain a trigger away without the tool.
+```
+
+Enforced by `tools/check_ledger.py`: every run carries a status; an INCOMPLETE
+run must appear in `ledger/NEEDS_TOOL.md`; every tool named there must have an
+entry in `ledger/toolkit/`. The first-line rule is for whoever writes the report.
+
 ## Corrections to the brief (by its authors; superseded text kept)
 
 ```text
@@ -101,8 +117,7 @@ brief says                              folder has
 --------------------------------------  ------------------------------------------------
 ledger/toolkit/, 7 tools                budget_closure, coincidence_card, assumption_nudge.
                                         Of the brief's seven, ONE is built (budget closure);
-                                        residual regression, ablation, ensembles, family swap,
-                                        parameter recovery, block trace are ABSENT
+                                        the other six are placeholders in ledger/toolkit/
 anchor = frozen, TAGGED snapshot        ledger/anchors/ANCHOR_run9.yaml, status candidate;
                                         tag forest-model-ledger-anchor-candidate-run9 SET AT MERGE
                                         (every tag route from the session refused); commit
@@ -114,7 +129,9 @@ anchor test: 4 conditions               seeds PASS (wired, run_10); budgets PART
 RETURN closes C, N, P, water, energy    N and water close; C, P, energy print VOID
 RETURN diffs against the anchor         no diff tool
 BRANCH changes ONE component            no branch has been run from run_9 yet
-"run the FULL toolbox" on a trigger     run_10 and run_11 ran what exists; six of seven do not
+"run the FULL toolbox" on a trigger     run_10 and run_11 ran what exists; six of seven do not.
+                                        Both runs are INCOMPLETE under the gate rule;
+                                        see ledger/NEEDS_TOOL.md
 known error, left in place              N residual -5.0e-11 = deposition counter roundoff;
                                         branch BR_RUN_9B_COMPENSATED_COUNTER (placeholder)
 run_9 is a CANDIDATE anchor, not an anchor
@@ -140,6 +157,8 @@ python3 ledger/toolkit/coincidence_card.py  # reads every card
 
 ```text
 void, never dropped     every schema field always present
+gate rule               trigger + missing tool = run INCOMPLETE, tool placeholder, ledger/NEEDS_TOOL.md,
+                        and "TOOL NEEDED: <name>" as the first line of the report
 rejected entries stay   nothing deleted to make the ledger cleaner
 admitted needs a test   named in ledger/tests.yaml, passing when run
 reported != recomputed  runs 1-8 are carried; only runs with code in the tree are DERIVED here

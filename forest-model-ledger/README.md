@@ -6,7 +6,7 @@ admitted it. It does not hold answers.
 
 Read `CLAUDE.md` first: it carries the METHOD BRIEF, which governs before the work order.
 Work order: `WORK_ORDER.md` (verbatim, co-authored, Kavik + Claude, 2026-11-10).
-Claims: `CLAIM_TABLE.md`, `FML_001..023`; constants in `LOG.md`. CC0. *(non-stdlib: numpy)*
+Claims: `CLAIM_TABLE.md`, `FML_001..024`; constants in `LOG.md`. CC0. *(non-stdlib: numpy)*
 
 ```text
 ledger/components/*.yaml        one equation each: layer L0..L5, assumes, if_assumption_fails,
@@ -50,7 +50,8 @@ branches     5 candidate / 10 placeholder
 L0 budgets   N CLOSED, water CLOSED  |  C, P, energy VOID
 boundary     deposition, leaching, fire volatilisation live  |  fixation, dust, groundwater, animal transport void
 OBSERVED     0 entries. Everything is model output or a proposed form.
-toolkit      3 tools; 1 of the brief's 7  |  cards: 1 RESOLVED, 2 OPEN
+toolkit      3 tools built, 6 placeholders (1 of the brief's 7 built)  |  cards: 1 RESOLVED, 2 OPEN
+runs         8 REPORTED, 1 COMPLETE, 2 INCOMPLETE (tools missing: ledger/NEEDS_TOOL.md)
 anchor       run_9 CANDIDATE: seeds PASS; budgets, nudges, independent budgets PARTIAL
 ```
 

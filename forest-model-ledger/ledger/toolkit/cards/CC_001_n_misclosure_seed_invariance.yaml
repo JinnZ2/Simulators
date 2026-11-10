@@ -26,5 +26,6 @@ runs:
   - run_9
   - run_10
 open_issues:
+  - "the card reads RESOLVED on its evidence; run_10 is INCOMPLETE under the gate rule, because the slots were filled from hand-written checks and six toolbox tools do not exist. A resolved card on an incomplete run is not a closed trigger"
   - "the dep=0 arm has 0 fires in all three seeds, so fire and the deposition counter were not removed independently in one run; the fire-off arm at dep=1 covers the other half"
   - "hypothesis (a), seed not wired to the fire draw, is ruled out; anchor test condition 2 is not void on that ground"

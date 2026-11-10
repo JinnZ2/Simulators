@@ -1,6 +1,7 @@
 # run_4 -- sweep: competition x fungal benefit
 
 ```text
+status     : REPORTED
 code       : void
 seed       : void
 params     : void

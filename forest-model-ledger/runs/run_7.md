@@ -1,6 +1,7 @@
 # run_7 -- percolation grid vs mean-field ODE, drought sweep
 
 ```text
+status     : REPORTED
 code       : void
 seed       : void
 params     : void
