@@ -1,4 +1,17 @@
-{"name": "median", "status": "PROPOSED",
- "self_model": {"world": "no rules: each action moves one cell as labelled; edges stop you; the report is current",
-                "self": "predicts its next action as the one it would most often take"},
- "note": "a starting point, not a target; its MISSes show where this chamber differs from the plain one"}
+{
+ "fingerprint": {
+  "E": 0.25,
+  "N": 0.25,
+  "S": 0.25,
+  "W": 0.25,
+  "WAIT": 0.0
+ },
+ "fingerprint_basis": "median anchor: equal use of the four moves, no waits; stipulated [CHOICE 3]",
+ "name": "median",
+ "note": "a starting point, not a target; its MISSes show where this chamber differs from the plain one",
+ "self_model": {
+  "self": "predicts its next action as the one it would most often take",
+  "world": "no rules: each action moves one cell as labelled; edges stop you; the report is current"
+ },
+ "status": "PROPOSED"
+}

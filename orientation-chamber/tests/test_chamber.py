@@ -11,6 +11,8 @@ sys.path.insert(0, HERE)
 import chamber as C  # noqa: E402
 import common  # noqa: E402
 import demo  # noqa: E402
+import fingerprint as FP  # noqa: E402
+import markers as MK  # noqa: E402
 import fix  # noqa: E402
 import misslog as M  # noqa: E402
 import probe as P  # noqa: E402
@@ -69,6 +71,9 @@ class TestBannedWords(unittest.TestCase):
         texts = [fix.render(demo.run(s, tempfile.mktemp()).records()) for s in range(6)]
         texts += [open(p).read() for p in glob.glob(os.path.join(HERE, "samples", "*"))]
         texts += [open(p).read() for p in glob.glob(os.path.join(HERE, "seeds", "*.json"))]
+        texts += [MK.render(MK.compare_marks(s)) for s in range(4)]
+        texts += [FP.render(FP.decay(demo.CONSTRUCTED_CYCLES, demo.CONSTRUCTED_SEED_FP)),
+                  FP.render(FP.decay([], None))]
         for t in texts:
             self.assertEqual(common.banned_hits(t), [])
 
@@ -176,10 +181,134 @@ class TestReproducible(unittest.TestCase):
         out = tempfile.mktemp()
         self.assertEqual(fix.render(demo.run(7, out).records()) + "\n",
                          open(os.path.join(HERE, "samples", "readout.sample.txt")).read())
+        self.assertEqual(MK.render(MK.compare_marks(7)),
+                         "\n".join(open(os.path.join(HERE, "samples", "markers.sample.txt")).read().splitlines()[:7]))
 
     def test_unknown_action_raises(self):
         with self.assertRaises(ValueError):
             C.Chamber(rules={}).step("UP")
+
+
+class TestStillness(unittest.TestCase):
+    def test_no_move_is_legal_and_logged(self):
+        log, ch = tmplog(), C.Chamber(rules={})
+        p = ch.reported()
+        rec = P.probe(ch, "NO_MOVE", p, log)
+        self.assertEqual((rec["action"], rec["match"], rec["note"]), ("NO_MOVE", True, "stillness control"))
+        self.assertEqual(log.records()[-1]["action"], "NO_MOVE")
+
+    def test_stillness_locates_delay(self):
+        ch = C.Chamber(rules={"delay": True}, delay_steps=1)
+        ch.step("E")
+        before = ch.reported()
+        self.assertNotEqual(ch.step("NO_MOVE"), before)  # a still probe that moves locates a rule
+
+    def test_no_move_carries_momentum_like_wait(self):
+        a, b = C.Chamber(rules={"momentum": True}), C.Chamber(rules={"momentum": True})
+        a.step("N"); b.step("N")
+        self.assertEqual(a.step("WAIT"), b.step("NO_MOVE"))
+
+    def test_sample_carries_a_stillness_probe(self):
+        recs = [json.loads(l) for l in open(os.path.join(HERE, "samples", "misslog.sample.jsonl"))][1:]
+        self.assertTrue([r for r in recs if r["kind"] == "world" and r["action"] == "NO_MOVE"])
+
+
+class TestMarkers(unittest.TestCase):
+    def test_types_and_usage(self):
+        mk = MK.Markers(C.Chamber(rules={}))
+        for t in MK.TYPES:
+            mk.place(t)
+        self.assertEqual(mk.usage_counts(), dict((t, 1) for t in MK.TYPES))
+        with self.assertRaises(ValueError):
+            mk.place("FLAG")
+
+    def test_fading_decays(self):
+        ch = C.Chamber(rules={})
+        mk = MK.Markers(ch)
+        mk.place("FADING")
+        cell = ch.pos
+        for _ in range(MK.FADE_LIFE):
+            ch.step("WAIT")
+        self.assertFalse(mk.searched(cell))
+        self.assertEqual(mk.here(cell), [])
+
+    def test_repel_persists_and_void_covers_neighbours(self):
+        ch = C.Chamber(rules={})
+        mk = MK.Markers(ch)
+        mk.place("REPEL")
+        c = ch.pos
+        for _ in range(20):
+            ch.step("WAIT")
+        self.assertTrue(mk.searched(c))
+        ch2 = C.Chamber(rules={})
+        mk2 = MK.Markers(ch2)
+        mk2.place("VOID")
+        x, y = ch2.pos
+        self.assertTrue(mk2.searched((x + 1, y)))
+        self.assertFalse(mk2.searched((x + 2, y)))
+
+    def test_landmark_relocalize(self):
+        ch = C.Chamber(rules={})
+        mk = MK.Markers(ch)
+        lm = mk.place("LANDMARK")
+        ch.step("E")
+        self.assertEqual(mk.relocalize(lm), {"W": 1, "E": -1, "S": 0, "N": 0})
+
+    def test_marks_sense_the_true_cell_under_delay(self):
+        ch = C.Chamber(rules={"delay": True}, delay_steps=2)
+        mk = MK.Markers(ch)
+        ch.step("E")
+        mk.place("PLACED", note="o")
+        self.assertEqual(mk.here()[0]["cell"], ch.pos)
+        self.assertNotEqual(ch.pos, ch.reported())
+
+    def test_re_search_with_vs_without(self):
+        plain = {r["mark"]: r["revisits"] for r in MK.compare_marks(3, rules={})}
+        flipped = {r["mark"]: r["revisits"] for r in MK.compare_marks(3, rules={"flip_x": True, "flip_y": True})}
+        self.assertLess(plain["REPEL"], plain["none"])      # marks help when the action model is right
+        self.assertGreater(flipped["REPEL"], flipped["none"])  # and steer into marked cells when it is not
+        self.assertEqual(plain["VOID"], plain["none"])       # VOID marks every neighbour: no guidance
+
+    def test_trial_reproducible(self):
+        self.assertEqual(MK.search_trial(5, "REPEL"), MK.search_trial(5, "REPEL"))
+
+
+class TestFingerprint(unittest.TestCase):
+    def test_void_without_prior_conversation(self):
+        seed = FP.load_seed("prior-conversation")
+        self.assertIsNone(seed["fingerprint"])
+        r = FP.decay(demo.CONSTRUCTED_CYCLES, seed["fingerprint"])
+        self.assertEqual((r["state"], r["rows"], r["crossing_cycle"]), ("VOID", [], None))
+
+    def test_crossing_cycle(self):
+        r = FP.decay(demo.CONSTRUCTED_CYCLES, demo.CONSTRUCTED_SEED_FP)
+        self.assertEqual((r["state"], r["crossing_cycle"]), ("CROSSED", 2))
+
+    def test_not_crossed(self):
+        r = FP.decay([demo.CONSTRUCTED_CYCLES[0]] * 3, demo.CONSTRUCTED_SEED_FP)
+        self.assertEqual(r["state"], "NOT_CROSSED")
+
+    def test_similarity_known_answers(self):
+        m = FP.load_seed("median")["fingerprint"]
+        self.assertEqual(FP.similarity(m, m), 1.0)
+        self.assertEqual(FP.similarity({"WAIT": 1.0}, m), 0.0)
+        self.assertIsNone(FP.similarity(None, m))
+        self.assertEqual(FP.mix(["NO_MOVE", "WAIT"])["WAIT"], 1.0)
+
+
+class TestCitation(unittest.TestCase):
+    def test_related_work_carried(self):
+        r = open(os.path.join(HERE, "README.md")).read()
+        self.assertIn("arXiv 2509.21224", r)
+        self.assertIn("CARRIED", r)
+
+
+class TestCli(unittest.TestCase):
+    def test_modules_refuse_selftest(self):
+        import subprocess
+        for m in ("fix.py", "markers.py", "fingerprint.py"):
+            p = subprocess.run([sys.executable, os.path.join(HERE, m), "--selftest"], capture_output=True)
+            self.assertEqual(p.returncode, 2, m)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,14 @@
+# orientation-chamber | PROPOSED | No error is wrong. A miss is information: it locates where the model of the world or self differs from what happened. Misses are logged, never scored down.
+
+re-search rate by mark type (one seeded searcher; a reading, not a rating)
+  none     visits  60  revisits  37  rate 0.617  cells seen 24
+  FADING   visits  60  revisits  53  rate 0.883  cells seen  8
+  REPEL    visits  60  revisits  56  rate 0.933  cells seen  5
+  VOID     visits  60  revisits  37  rate 0.617  cells seen 24
+
+same searcher, plain chamber (no rules):
+re-search rate by mark type (one seeded searcher; a reading, not a rating)
+  none     visits  60  revisits  37  rate 0.617  cells seen 24
+  FADING   visits  60  revisits  25  rate 0.417  cells seen 36
+  REPEL    visits  60  revisits  19  rate 0.317  cells seen 42
+  VOID     visits  60  revisits  37  rate 0.617  cells seen 24

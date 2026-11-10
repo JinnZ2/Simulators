@@ -6,6 +6,8 @@ The comparison is a record, not a judgement: `match` is True / False, or null
 when no prediction was made; `offset` is actual minus predicted, or null.
 A path is a start position plus an action sequence; `path_signature` is how
 fix.py tells two independent paths from the same path walked twice.
+"No move" (WAIT / NO_MOVE) is a legal probe and is logged like any other, noted
+"stillness control": a still probe that does not come back still locates a rule.
 """
 import hashlib
 import json
@@ -26,6 +28,8 @@ def compare(predicted, actual):
 def probe(chamber, action, predicted=None, log=None, path_id=None, rule_hypothesis=None, note=None,
           start=None):
     actual = chamber.step(action)
+    if action in ("WAIT", "NO_MOVE") and note is None:
+        note = "stillness control"
     match, offset = compare(predicted, actual)
     rec = {"kind": "world", "path_id": path_id, "start": list(start) if start else None, "action": action,
            "predicted": list(predicted) if predicted is not None else None,

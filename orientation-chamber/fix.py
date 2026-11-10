@@ -109,6 +109,9 @@ def closed_loop(chamber, actions):
     return {"state": "CLOSED" if off == [0, 0] else "OPEN", "OFFSET": off}
 
 
+CODE = {"N": "N", "S": "S", "E": "E", "W": "W", "WAIT": "w", "NO_MOVE": "0"}  # w = WAIT, 0 = NO_MOVE
+
+
 def render(records):
     L = [header(), ""]
     L.append("rules (state per hypothesis; LOCATED needs %d independent matched paths [CHOICE 1])" % MIN_PATHS)
@@ -120,10 +123,10 @@ def render(records):
           "   no prediction %(no_prediction)d" % m]
     for t, a, off, h in m["offsets"]:
         L.append("  MISS t=%s action=%s OFFSET=%s hypothesis=%s" % (t, a, off, h or "UNLOCATED"))
-    L += ["", "loops (nominal action sum zero should return to start)"]
+    L += ["", "loops (nominal action sum zero should return to start; w = WAIT, 0 = NO_MOVE)"]
     for pid, v in loops_readout(records).items():
         states = ", ".join(w["state"] + (" OFFSET=%s" % w["OFFSET"] if "OFFSET" in w else "") for w in v["walks"])
-        L.append("  %s %s start=%s: %s  [%s]" % (pid, "".join(x[0] for x in v["actions"]), v["start"],
+        L.append("  %s %s start=%s: %s  [%s]" % (pid, "".join(CODE.get(x, "?") for x in v["actions"]), v["start"],
                                                  states, v["independence"]))
     return "\n".join(L)
 

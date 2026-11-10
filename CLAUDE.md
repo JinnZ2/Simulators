@@ -14255,8 +14255,16 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   sha256 chain; `fix.py` reads rules LOCATED / FLOATING / UNTESTED (LOCATED
   needs 2 distinct path signatures [CHOICE 1]), misses with OFFSET and
   UNLOCATED, loops CLOSED / OPEN / NOT_A_LOOP, and the same path walked twice
-  as one wall. Self mode logs category and specific predictions. Banned output
-  words scanned with the principle masked, measured both ways. Check count
+  as one wall. Self mode logs category and specific predictions. NO_MOVE is a
+  legal action (the stillness control); on seed 7 a still probe located the
+  delay rule by itself. `markers.py`: FADING / LANDMARK / REPEL / VOID /
+  PLACED at the true cell; in a plain chamber REPEL cuts one searcher's
+  re-visits 37 -> 19, with both axes flipped it raises them to 56, and VOID
+  gives no guidance by construction. `fingerprint.py`: the prior-conversation
+  seed's decay arm (similarity to seed vs median anchor per cycle, crossing
+  cycle), VOID until a real prior log is supplied; arXiv 2509.21224 cited as
+  related work, CARRIED. Banned output words scanned with the principle
+  masked, measured both ways. Check count
   printed by `python3 orientation-chamber/tests/test_chamber.py`. Stdlib only,
   CC0.
 - `legacy/` — Archived source drops. The repo root reserves one

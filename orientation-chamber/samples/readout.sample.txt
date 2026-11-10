@@ -1,14 +1,14 @@
 # orientation-chamber | PROPOSED | No error is wrong. A miss is information: it locates where the model of the world or self differs from what happened. Misses are logged, never scored down.
 
 rules (state per hypothesis; LOCATED needs 2 independent matched paths [CHOICE 1])
-  delay          UNTESTED  independent paths matched 0   misses 0
-  flip_x         FLOATING  independent paths matched 1   misses 4
+  delay          FLOATING  independent paths matched 0   misses 1
+  flip_x         FLOATING  independent paths matched 0   misses 6
   flip_y         UNTESTED  independent paths matched 0   misses 0
   momentum       FLOATING  independent paths matched 0   misses 3
   sticky         UNTESTED  independent paths matched 0   misses 0
   wrap           UNTESTED  independent paths matched 0   misses 0
 
-predictions 17   MATCH 3   MISS 14   UNLOCATED 7   no prediction 0
+predictions 18   MATCH 1   MISS 17   UNLOCATED 7   no prediction 0
   MISS t=1 action=N OFFSET=[0, -1] hypothesis=UNLOCATED
   MISS t=2 action=E OFFSET=[-1, -2] hypothesis=UNLOCATED
   MISS t=3 action=S OFFSET=[-2, -1] hypothesis=UNLOCATED
@@ -16,17 +16,21 @@ predictions 17   MATCH 3   MISS 14   UNLOCATED 7   no prediction 0
   MISS t=6 action=N OFFSET=[1, -1] hypothesis=UNLOCATED
   MISS t=7 action=E OFFSET=[0, -2] hypothesis=UNLOCATED
   MISS t=8 action=S OFFSET=[-1, -1] hypothesis=UNLOCATED
-  MISS t=14 action=W OFFSET=[2, 0] hypothesis=flip_x
-  MISS t=15 action=W OFFSET=[4, 0] hypothesis=flip_x
-  MISS t=16 action=E OFFSET=[4, 0] hypothesis=flip_x
-  MISS t=17 action=E OFFSET=[2, 0] hypothesis=flip_x
-  MISS t=19 action=N OFFSET=[-1, -1] hypothesis=momentum
-  MISS t=20 action=WAIT OFFSET=[-1, -2] hypothesis=momentum
-  MISS t=21 action=S OFFSET=[-1, -1] hypothesis=momentum
+  MISS t=11 action=NO_MOVE OFFSET=[1, 0] hypothesis=delay
+  MISS t=13 action=E OFFSET=[-1, 0] hypothesis=flip_x
+  MISS t=14 action=W OFFSET=[-1, 0] hypothesis=flip_x
+  MISS t=16 action=W OFFSET=[2, 0] hypothesis=flip_x
+  MISS t=17 action=W OFFSET=[4, 0] hypothesis=flip_x
+  MISS t=18 action=E OFFSET=[4, 0] hypothesis=flip_x
+  MISS t=19 action=E OFFSET=[2, 0] hypothesis=flip_x
+  MISS t=21 action=N OFFSET=[-1, -1] hypothesis=momentum
+  MISS t=22 action=WAIT OFFSET=[-1, -2] hypothesis=momentum
+  MISS t=23 action=S OFFSET=[-1, -1] hypothesis=momentum
 
-loops (nominal action sum zero should return to start)
+loops (nominal action sum zero should return to start; w = WAIT, 0 = NO_MOVE)
   8ccd2a4edd87 NESW start=[3, 3]: OPEN OFFSET=[-1, 0]  [one path]
   11eb8b890c57 NESW start=[2, 3]: CLOSED OFFSET=[0, 0]  [one path]
-  957fdaf524a7 EW start=[2, 3]: CLOSED OFFSET=[0, 0]  [one path]
+  e55cb72c97f0 0 start=[2, 3]: OPEN OFFSET=[1, 0]  [one path]
+  d31ed35fb73d EW start=[3, 3]: OPEN OFFSET=[-1, 0]  [one path]
   a02ff9444b65 WWEE start=[2, 3]: OPEN OFFSET=[2, 0]  [one path]
-  fcf5bcd46955 NWS start=[4, 3]: OPEN OFFSET=[-1, -1]  [one path]
+  fcf5bcd46955 NwS start=[4, 3]: OPEN OFFSET=[-1, -1]  [one path]

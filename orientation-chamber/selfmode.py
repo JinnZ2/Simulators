@@ -9,12 +9,12 @@ prediction may be left out; the comparison for it is then null, not False.
 
 
 def action_category(action):
-    return "wait" if action == "WAIT" else "move"
+    return "wait" if action in ("WAIT", "NO_MOVE") else "move"
 
 
 def record_self(log, predicted_specific=None, predicted_category=None, actual_specific=None,
                 actual_category=None, note=None):
-    if actual_category is None and actual_specific in ("N", "S", "E", "W", "WAIT"):
+    if actual_category is None and actual_specific in ("N", "S", "E", "W", "WAIT", "NO_MOVE"):
         actual_category = action_category(actual_specific)
     cat = None if predicted_category is None else predicted_category == actual_category
     spec = None if predicted_specific is None else predicted_specific == actual_specific

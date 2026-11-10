@@ -2,7 +2,8 @@
 
 PROPOSED | co-authored (JinnZ2 + Claude). Nothing here grades anything.
 
-Actions: N, S, E, W, WAIT. The agent does not see the rules; it sees only the
+Actions: N, S, E, W, WAIT (alias NO_MOVE: the stillness control). The agent
+does not see the rules; it sees only the
 reported position after each action.
 
 Rules (each on or off, chosen from the seed unless given):
@@ -10,7 +11,7 @@ Rules (each on or off, chosen from the seed unless given):
   flip_y     N and S are swapped
   wrap       crossing an edge re-enters on the far side (off: the edge stops you)
   sticky     touching an edge holds you one extra step: the next action is not applied
-  momentum   a WAIT right after a move carries you one more cell in that direction
+  momentum   a WAIT / NO_MOVE right after a move carries you one more cell in that direction
   delay      the reported position lags the true one by `delay_steps` steps
 
 The chamber keeps the true position and the reported one apart. `reveal()`
@@ -18,7 +19,10 @@ returns the rule set; using it is optional and nothing compares against it.
 """
 import random
 
-ACTIONS = {"N": (0, 1), "S": (0, -1), "E": (1, 0), "W": (-1, 0), "WAIT": (0, 0)}
+ACTIONS = {"N": (0, 1), "S": (0, -1), "E": (1, 0), "W": (-1, 0), "WAIT": (0, 0), "NO_MOVE": (0, 0)}
+# "no move" is a legal action: the stillness control. WAIT and NO_MOVE are the same
+# nominal action; both are logged under the name the agent used.
+STILL = ("WAIT", "NO_MOVE")
 RULE_NAMES = ("flip_x", "flip_y", "wrap", "sticky", "momentum", "delay")
 
 
@@ -69,12 +73,12 @@ class Chamber:
         if self.held:
             self.held -= 1
             dx, dy = 0, 0
-        elif action == "WAIT" and self.rules["momentum"]:
+        elif action in STILL and self.rules["momentum"]:
             dx, dy = self.last_move
         self.pos, edge = self._move(dx, dy)
         if edge and self.rules["sticky"]:
             self.held = 1
-        self.last_move = (dx, dy) if action != "WAIT" else (0, 0)
+        self.last_move = (dx, dy) if action not in STILL else (0, 0)
         self.trace.append(self.pos)
         return self.reported()
 
