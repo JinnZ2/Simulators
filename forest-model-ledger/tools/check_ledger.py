@@ -202,6 +202,12 @@ def check(run_tests=False):
             F(f"card {n}: id != file name")
         if c["reading_declared"] != reading:
             F(f"card {n}: declared {c['reading_declared']}, derived {reading}")
+        rw = c["recheck_when"] if isinstance(c["recheck_when"], list) else []
+        for t in rw:
+            if t not in tools_:
+                F(f"card {n}: recheck_when names {t}, which has no entry in ledger/toolkit/")
+        if rw and all(t in tools_ and tools_[t].get("status") != "placeholder" for t in rw):
+            F(f"card {n}: PROVISIONAL but every tool in recheck_when is built; the re-check is due")
         if c["branch"] != "void" and c["branch"] not in branches:
             F(f"card {n}: branch {c['branch']} missing")
         for r in c["runs"]:
@@ -262,6 +268,10 @@ def selftest():
         ("tool with no diagnoses", "ledger/toolkit/coincidence_card.yaml", "diagnoses:", "diagnoses: []\nwas:", None),
         ("incomplete run marked complete", "runs/run_11.md", "status     : INCOMPLETE", "status     : COMPLETE", "COMPLETE while ledger/NEEDS_TOOL.md still owes"),
         ("needed tool with no toolkit entry", "ledger/NEEDS_TOOL.md", "| ablation | 33 of 64", "| ablation_v2 | 33 of 64", "ablation_v2 has no entry"),
+        ("provisional card waiting on an unknown tool", "ledger/toolkit/cards/CC_001_n_misclosure_seed_invariance.yaml",
+         "  - multi_seed_ensemble", "  - multi_seed_ensemble_v2", "recheck_when names multi_seed_ensemble_v2"),
+        ("provisional card declared resolved", "ledger/toolkit/cards/CC_001_n_misclosure_seed_invariance.yaml",
+         "reading_declared: PROVISIONAL", "reading_declared: RESOLVED", "declared RESOLVED, derived PROVISIONAL"),
         ("run field dropped", "runs/run_3.md", "seed       :", "sead       :", "field seed dropped"),
     ]
     bad = 0

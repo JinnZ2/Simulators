@@ -20,12 +20,15 @@ slots:
   none_of_above:
     state: ruled_out
     evidence: "two causes supported"
-reading_declared: RESOLVED
+reading_declared: PROVISIONAL
+recheck_when:
+  - multi_seed_ensemble
+  - ablation
 branch: void
 runs:
   - run_9
   - run_10
 open_issues:
-  - "the card reads RESOLVED on its evidence; run_10 is INCOMPLETE under the gate rule, because the slots were filled from hand-written checks and six toolbox tools do not exist. A resolved card on an incomplete run is not a closed trigger"
+  - "PROVISIONAL (Kavik, 2026-11-10): the evidence stands; the producing tools are still in build. The slots were filled from hand-written checks in run_10, which is INCOMPLETE under the gate rule. Re-check when multi_seed_ensemble and ablation exist"
   - "the dep=0 arm has 0 fires in all three seeds, so fire and the deposition counter were not removed independently in one run; the fire-off arm at dep=1 covers the other half"
   - "hypothesis (a), seed not wired to the fire draw, is ruled out; anchor test condition 2 is not void on that ground"

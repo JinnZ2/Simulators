@@ -47,7 +47,8 @@ tool:
 coincidence_card:
   where: "ledger/toolkit/cards/"
   slots: "shared_constraint | local_normal_form | statistical_artifact | numerical_artifact | low_dim_projection | none_of_above; each {state: void | supported | ruled_out, evidence}"
-  reading_declared: "OPEN | RESOLVED | CURIOSITY; must equal what coincidence_card.py derives"
+  reading_declared: "OPEN | RESOLVED | PROVISIONAL | CURIOSITY; must equal what coincidence_card.py derives"
+  recheck_when: "void | list of toolkit ids; a card that would read RESOLVED reads PROVISIONAL while this is set. The checker fails once every listed tool is built: the re-check is then due"
   branch: "void | branch id; required when the reading is CURIOSITY"
 anchor:
   where: "ledger/anchors/"

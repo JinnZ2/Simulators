@@ -50,7 +50,7 @@ branches     5 candidate / 10 placeholder
 L0 budgets   N CLOSED, water CLOSED  |  C, P, energy VOID
 boundary     deposition, leaching, fire volatilisation live  |  fixation, dust, groundwater, animal transport void
 OBSERVED     0 entries. Everything is model output or a proposed form.
-toolkit      3 tools built, 6 placeholders (1 of the brief's 7 built)  |  cards: 1 RESOLVED, 2 OPEN
+toolkit      3 tools built, 6 placeholders (1 of the brief's 7 built)  |  cards: 1 PROVISIONAL, 2 OPEN
 runs         8 REPORTED, 1 COMPLETE, 2 INCOMPLETE (tools missing: ledger/NEEDS_TOOL.md)
 anchor       run_9 CANDIDATE: seeds PASS; budgets, nudges, independent budgets PARTIAL
 ```

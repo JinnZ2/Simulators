@@ -17,6 +17,9 @@ causes and the card then names both.
 Readings (closed set):
   OPEN        at least one of the five is void; the unrun slots are listed
   RESOLVED    all five looked at, at least one supported
+  PROVISIONAL would read RESOLVED, but recheck_when names tools still in
+              build: the evidence stands, the producing tool does not exist
+              yet. Re-check when every named tool is built (Kavik, 2026-11-10)
   CURIOSITY   all five ruled_out; the card must name a branch
 
     python3 ledger/toolkit/coincidence_card.py            # read every card
@@ -30,7 +33,7 @@ from tools import miniyaml
 CAUSES = ["shared_constraint", "local_normal_form", "statistical_artifact", "numerical_artifact", "low_dim_projection"]
 SLOTS = CAUSES + ["none_of_above"]
 STATES = {"void", "supported", "ruled_out"}
-FIELDS = ["id", "observation", "trigger", "slots", "reading_declared", "branch", "runs", "open_issues"]
+FIELDS = ["id", "observation", "trigger", "slots", "reading_declared", "recheck_when", "branch", "runs", "open_issues"]
 
 
 class CardError(ValueError):
@@ -66,6 +69,11 @@ def read(card):
         if card["branch"] == "void":
             raise CardError(f"{card['id']}: CURIOSITY needs its own branch")
         return "CURIOSITY", dict(branch=card["branch"])
+    rw = card["recheck_when"]
+    if rw != "void":
+        if not isinstance(rw, list) or not rw:
+            raise CardError(f"{card['id']}: recheck_when must be void or a list of tool ids")
+        return "PROVISIONAL", dict(supported=supported, awaiting=list(rw))
     return "RESOLVED", dict(supported=supported)
 
 
@@ -79,4 +87,4 @@ if __name__ == "__main__":
         print("refused: the checks live in forest-model-ledger/tests/test_l0.py"); sys.exit(2)
     for cid, card in load_all().items():
         reading, detail = read(card)
-        print(f"{cid:44s} {reading:9s} {detail}")
+        print(f"{cid:44s} {reading:11s} {detail}")

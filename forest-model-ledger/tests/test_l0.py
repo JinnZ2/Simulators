@@ -93,7 +93,7 @@ def T_L0_RESIDUAL_IS_DEPOSITION_COUNTER():
 def _card(states, branch="void"):
     from ledger.toolkit import coincidence_card as cc
     slots = {n: dict(state=s, evidence="void" if s == "void" else "e") for n, s in zip(cc.SLOTS, states)}
-    return dict(id="X", observation="o", trigger="t", slots=slots, reading_declared="void", branch=branch, runs=[], open_issues=[])
+    return dict(id="X", observation="o", trigger="t", slots=slots, reading_declared="void", recheck_when="void", branch=branch, runs=[], open_issues=[])
 
 
 def T_TK_CARD_READINGS():
@@ -103,10 +103,16 @@ def T_TK_CARD_READINGS():
     reading, d = cc.read(_card(["supported", r, r, "supported", r, r]))
     assert reading == "RESOLVED" and d["supported"] == ["shared_constraint", "numerical_artifact"]
     assert cc.read(_card([r, r, r, r, r, "supported"], branch="BR_X"))[0] == "CURIOSITY"
+    pv = _card(["supported", r, r, "supported", r, r]); pv["recheck_when"] = ["ablation"]
+    reading, d = cc.read(pv)
+    assert reading == "PROVISIONAL" and d["awaiting"] == ["ablation"] and d["supported"]
+    op = _card(["supported", "void", r, r, r, "void"]); op["recheck_when"] = ["ablation"]
+    assert cc.read(op)[0] == "OPEN"                              # recheck_when never upgrades an open card
     bad = [_card([r, r, r, r, r, "supported"]),                  # curiosity with no branch
            _card(["supported", r, r, r, r, "supported"]),        # none_of_above declared against the derivation
            _card([r, r, r, r, r, "ruled_out"], branch="BR_X")]   # all five ruled out, none_of_above denied
     c = _card(["supported", r, r, r, r, r]); c["slots"]["shared_constraint"]["evidence"] = "void"; bad.append(c)
+    c = _card(["supported", r, r, r, r, r]); c["recheck_when"] = []; bad.append(c)   # provisional on nothing
     for b in bad:
         try:
             cc.read(b)

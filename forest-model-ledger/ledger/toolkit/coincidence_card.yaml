@@ -7,7 +7,7 @@ inputs:
   - "one card per coincidence in ledger/toolkit/cards/"
   - "evidence per slot, from runs"
 outputs:
-  - "OPEN (unrun slots listed) | RESOLVED (supported slots listed, possibly several) | CURIOSITY (own branch required)"
+  - "OPEN (unrun slots listed) | RESOLVED (supported slots listed, possibly several) | PROVISIONAL (would be RESOLVED; tools named in recheck_when not built yet) | CURIOSITY (own branch required)"
 cannot_see:
   - "a cause outside the five named slots that is mistaken for one of them"
   - "whether the evidence in a slot is sufficient: it checks that evidence is present, not that it is right"

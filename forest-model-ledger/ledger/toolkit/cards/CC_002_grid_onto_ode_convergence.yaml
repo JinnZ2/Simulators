@@ -21,6 +21,7 @@ slots:
     state: void
     evidence: void
 reading_declared: OPEN
+recheck_when: void
 branch: void
 runs:
   - run_8
