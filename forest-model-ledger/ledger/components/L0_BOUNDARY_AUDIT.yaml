@@ -1,0 +1,25 @@
+id: L0_BOUNDARY_AUDIT
+layer: L0
+equation: "audit line printed every run: deposition, fixation, dust, groundwater, animal transport (+ leaching, fire volatilisation)"
+assumes:
+  - id: A1
+    text: "terms printed as void are not modelled, and are never printed as 0"
+    block: AB_VOID_BOUNDARY
+if_assumption_fails:
+  A1: "a void term printed as a number would let an unmodelled flux read as a measured zero"
+scope: "base model"
+provenance:
+  class: PROPOSED
+  source: "work order 2026-11-10; implemented in model/l0_audit.py"
+admitted_by: void
+test_results:
+  - test: T_L0_VOID_TERMS_PRINTED
+    run: run_9
+    result: PASS
+    value: "5 void terms printed as void"
+open_issues:
+  - "3 of 8 N boundary terms are live (deposition, leaching, fire volatilisation); fixation, dust, groundwater, animal in/out are void"
+  - "T_L0_VOID_TERMS_PRINTED checks the printing, not the audit; admitted_by stays void until the void terms carry values"
+depends_on:
+  - L0_N_BUDGET
+status: candidate

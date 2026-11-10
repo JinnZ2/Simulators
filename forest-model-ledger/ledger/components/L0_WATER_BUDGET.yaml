@@ -1,0 +1,27 @@
+id: L0_WATER_BUDGET
+layer: L0
+equation: "dW/dt = precipitation - evapotranspiration - drainage"
+assumes:
+  - id: A1
+    text: "every water transfer is a row in the flux table"
+    block: AB_FLUX_TABLE
+  - id: A2
+    text: "single bucket: no soil layers, snow, interception or groundwater exchange"
+    block: void
+if_assumption_fails:
+  A1: "water misclosure grows with run length"
+  A2: void
+scope: "simulation only; one bucket"
+provenance:
+  class: DERIVED
+  source: "runs/run_9 (recomputed in this tree)"
+admitted_by: T_L0_WATER_CLOSURE
+test_results:
+  - test: T_L0_WATER_CLOSURE
+    run: run_9
+    result: PASS
+    value: "misclosure -3.426e-13 on gross throughput 594.45"
+open_issues:
+  - "groundwater appears in the boundary audit line for N but the water bucket has no groundwater term"
+depends_on: []
+status: admitted

@@ -1,0 +1,42 @@
+# Ledger schema. Enforced by tools/check_ledger.py.
+# Rule 1: every field is always present. Unfilled = the literal `void`. Never dropped.
+# Rule 2: rejected entries stay. Nothing is deleted to make the ledger cleaner.
+# Rule 3: status admitted <=> admitted_by names a test in ledger/tests.yaml that passes when run.
+component:
+  id: "file name without .yaml"
+  layer: "L0 physics | L1 chemistry | L2 organisms | L3 interactions | L4 disturbance | L5 observation"
+  equation: "text | void"
+  assumes: "list of {id: A1.., text, block: assumption-block id | void}"
+  if_assumption_fails: "map A_i -> expected signature | void; one key per assumption"
+  scope: "text | void"
+  provenance: "{class: OBSERVED | DERIVED | PROPOSED, source}"
+  admitted_by: "test id | void"
+  test_results: "list of {test: id | void, run: run_N | void, result, value}"
+  open_issues: "list"
+  depends_on: "list of component ids"
+  status: "candidate | admitted | rejected | placeholder"
+branch:
+  id: "file name without .yaml"
+  family: "equation family"
+  status: "candidate | admitted | rejected | placeholder"
+  components: "list of component ids"
+  links: "list of branch ids"
+  convergence_anchors: "list of {id, between: [branch, branch], condition, evidence, status}; carried by both branches"
+  runs: "list of run_N"
+  open_issues: "list"
+  note: "text | void"
+assumption_block:
+  id: "file name without .yaml"
+  statement: "text"
+  if_fails: "expected signature | void"
+  used_by: "every component whose assumes[] names this block; checked both ways"
+  used_by_runs: "list of run_N"
+  open_issues: "list"
+  status: "candidate | admitted | rejected | placeholder"
+run:
+  files: "runs/run_N.md always; runs/run_N.py when the code is in the tree"
+  fields: "code, seed, params, results, flags, provenance, feeds -- each present, void when unknown"
+provenance_classes:
+  OBSERVED: "measured in the world. No entry holds this class yet"
+  DERIVED: "output of a model run; source names the run and whether it was recomputed here or only reported"
+  PROPOSED: "a form or rule chosen by hand, not yet tested"

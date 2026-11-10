@@ -1,0 +1,7 @@
+FIRED  dropped field
+FIRED  admitted without test
+FIRED  dangling dependency
+FIRED  one-way block link
+FIRED  anchor on one branch only
+FIRED  run field dropped
+selftest: 6 planted, 0 silent

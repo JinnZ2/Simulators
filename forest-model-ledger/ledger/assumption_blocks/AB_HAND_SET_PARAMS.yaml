@@ -1,0 +1,17 @@
+id: AB_HAND_SET_PARAMS
+statement: "parameters were set by hand, not fitted or sourced; one point in parameter space"
+if_fails: "any qualitative result may be a property of the point, not the form"
+used_by:
+  - L1_DECOMP_FIRST_ORDER
+  - L1_LEACHING
+  - L1_UPTAKE_MM
+  - L2_FUNGAL_POOL
+  - L2_GRASS_GROWTH
+  - L2_TREE_GROWTH
+  - L3_LIGHT_CEILING
+  - L3_TREE_FUNGUS_EXCHANGE
+  - L4_FIRE_FUEL_MOISTURE
+used_by_runs:
+  - run_9
+open_issues: []
+status: candidate

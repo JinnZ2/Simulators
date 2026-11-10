@@ -1,0 +1,63 @@
+== base  seed=0 years=300 dt=1/52
+N       CLOSED  misclosure -5.062e-11   d_pools +23.6480  in 300.0000  out 276.3520
+        boundary: deposition=300.0000  fixation=void  dust=void  animal_in=void  leaching=5.6114  fire_volatilisation=270.7406  groundwater_n=void  animal_out=void
+water   CLOSED  misclosure -3.426e-13   d_pools -0.3607  in 297.0436  out 297.4043
+        boundary: precipitation=297.0436  evapotranspiration=143.6682  drainage=153.7361
+C       VOID    not represented; no closure claimed
+P       VOID    not represented; no closure claimed
+energy  VOID    not represented; no closure claimed
+overall PASS  (void budgets: C, P, energy)
+fires 80  interval mean 3.592989289191821  sd 2.091433923842333
+grass < 1e-6 at year 18.961538461538463
+final S=0.3715  T=36.6196  G=0.0000  F=0.9468  Lt=3.6619  Lg=1.0482  W=0.6393
+
+== no_fire  seed=0 years=300 dt=1/52
+N       CLOSED  misclosure -5.075e-11   d_pools +99.1357  in 300.0000  out 200.8643
+        boundary: deposition=300.0000  fixation=void  dust=void  animal_in=void  leaching=200.8643  fire_volatilisation=0.0000  groundwater_n=void  animal_out=void
+water   CLOSED  misclosure -2.209e-13   d_pools -0.4861  in 297.0436  out 297.5297
+        boundary: precipitation=297.0436  evapotranspiration=165.4417  drainage=132.0880
+C       VOID    not represented; no closure claimed
+P       VOID    not represented; no closure claimed
+energy  VOID    not represented; no closure claimed
+overall PASS  (void budgets: C, P, energy)
+fires 0  interval mean None  sd None
+grass < 1e-6 at year 20.5
+final S=39.9417  T=55.0902  G=0.0000  F=1.9299  Lt=18.2655  Lg=2.9084  W=0.5139
+
+== planted_leak_0.3  seed=0 years=300 dt=1/52
+N       LEAK    misclosure -7.264e+01   d_pools +24.4279  in 300.0000  out 202.9291
+        boundary: deposition=300.0000  fixation=void  dust=void  animal_in=void  leaching=5.1115  fire_volatilisation=197.8176  groundwater_n=void  animal_out=void
+water   CLOSED  misclosure -2.645e-13   d_pools -0.3626  in 297.0436  out 297.4062
+        boundary: precipitation=297.0436  evapotranspiration=142.2143  drainage=155.1919
+C       VOID    not represented; no closure claimed
+P       VOID    not represented; no closure claimed
+energy  VOID    not represented; no closure claimed
+overall FAIL  (void budgets: C, P, energy)
+fires 59  interval mean 4.855769230769233  sd 2.0023936464246432
+grass < 1e-6 at year 19.173076923076923
+final S=0.4015  T=36.8278  G=0.0000  F=0.3756  Lt=5.3259  Lg=0.4971  W=0.6374
+
+== base_dt_half  seed=0 years=300 dt=1/104
+N       CLOSED  misclosure +7.124e-11   d_pools +24.2304  in 300.0000  out 275.7696
+        boundary: deposition=300.0000  fixation=void  dust=void  animal_in=void  leaching=5.7399  fire_volatilisation=270.0296  groundwater_n=void  animal_out=void
+water   CLOSED  misclosure -2.790e-12   d_pools -0.3659  in 297.0436  out 297.4095
+        boundary: precipitation=297.0436  evapotranspiration=144.4536  drainage=152.9559
+C       VOID    not represented; no closure claimed
+P       VOID    not represented; no closure claimed
+energy  VOID    not represented; no closure claimed
+overall PASS  (void budgets: C, P, energy)
+fires 79  interval mean 3.650271203155819  sd 2.4084286247905973
+grass < 1e-6 at year 18.961538461538463
+final S=0.3683  T=37.2964  G=0.0000  F=0.9763  Lt=3.5628  Lg=1.0266  W=0.6341
+
+== seeds 0..9, base: fires / grass-gone year / N misclosure
+seed 0: fires  80  grass gone 18.961538461538463  N mis -5.06e-11  PASS
+seed 1: fires  80  grass gone 18.980769230769234  N mis -5.04e-11  PASS
+seed 2: fires  79  grass gone 19.961538461538463  N mis -5.05e-11  PASS
+seed 3: fires  78  grass gone 18.980769230769234  N mis -5.01e-11  PASS
+seed 4: fires  76  grass gone 19.0  N mis -5.01e-11  PASS
+seed 5: fires  81  grass gone 19.0  N mis -5.01e-11  PASS
+seed 6: fires  75  grass gone 20.5  N mis -5.00e-11  PASS
+seed 7: fires  81  grass gone 19.0  N mis -5.00e-11  PASS
+seed 8: fires  78  grass gone 19.961538461538463  N mis -5.00e-11  PASS
+seed 9: fires  77  grass gone 20.51923076923077  N mis -5.02e-11  PASS

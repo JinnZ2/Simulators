@@ -1,0 +1,27 @@
+id: L3_LIGHT_CEILING
+layer: L3
+equation: "growth multiplied by max(0, 1 - (B_self + a * B_other) / K_light)"
+assumes:
+  - id: A1
+    text: "a ceiling exists and is set by light"
+    block: void
+  - id: A2
+    text: "parameters are hand-set"
+    block: AB_HAND_SET_PARAMS
+if_assumption_fails:
+  A1: "without a ceiling mutualism runs away (run 4)"
+  A2: void
+scope: "run 4 sweep; base model"
+provenance:
+  class: DERIVED
+  source: "run_4: work order 2026-11-10 (reported there; code not in this tree; not recomputed)"
+admitted_by: void
+test_results:
+  - test: void
+    run: run_4
+    result: "whole > parts only at low competition + strong fungal benefit; runaway = no ceiling"
+    value: "reported, not recomputed"
+open_issues:
+  - "the ceiling was added to stop a runaway; its form is a patch, not a measurement"
+depends_on: []
+status: candidate

@@ -1,0 +1,24 @@
+id: BR_FIRE_PERCOLATION
+family: "percolation on a grid"
+status: candidate
+components:
+  - L4_FIRE_PERCOLATION_GRID
+  - L4_EMBER_SPOTTING
+links:
+  - BR_FIRE_MEANFIELD
+  - BR_BRANCHING_PROCESS
+  - BR_RENORMALIZATION
+convergence_anchors:
+  - id: CA_1
+    between:
+      - BR_FIRE_PERCOLATION
+      - BR_FIRE_MEANFIELD
+    condition: "spotting 0.2 and drought >= 0.5"
+    evidence: "run_8 (reported, not recomputed)"
+    status: candidate
+runs:
+  - run_7
+  - run_8
+open_issues:
+  - "grid model carries no N budget; L0 closure for this branch is void"
+note: void

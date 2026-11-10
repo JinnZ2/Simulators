@@ -1,0 +1,31 @@
+id: L2_GRASS_GROWTH
+layer: L2
+equation: "dG/dt = uptake_G - mG * G"
+assumes:
+  - id: A1
+    text: "parameters are hand-set"
+    block: AB_HAND_SET_PARAMS
+  - id: A2
+    text: "no seed bank, no immigration"
+    block: void
+if_assumption_fails:
+  A1: void
+  A2: "with a seed bank or immigration the pool cannot reach zero; extinction would become suppression"
+scope: "base model"
+provenance:
+  class: PROPOSED
+  source: "run-9 rebuild"
+admitted_by: void
+test_results:
+  - test: void
+    run: run_9
+    result: "grass < 1e-6 by year 19.0-20.5 in 10 of 10 seeds"
+    value: "also extinct with fire OFF (year 20.5)"
+open_issues:
+  - "OPEN (run 6, reproduced in run 9): grasses go extinct"
+  - "run 9 narrows it: extinction occurs with fire switched off, so in this rebuild it is competitive (soil N drawdown + shading), not fire-driven; whether that holds for the original run 6 is unknown"
+  - "no parameter sweep has been run; one hand-set parameter point"
+depends_on:
+  - L1_UPTAKE_MM
+  - L3_LIGHT_CEILING
+status: candidate

@@ -1,0 +1,10 @@
+id: BR_FAUNA
+family: "animals / insects / birds / earthworms"
+status: placeholder
+components: []
+links:
+  - BR_MASS_BALANCE
+convergence_anchors: []
+runs: []
+open_issues: []
+note: "earthworms are non-native in glaciated North America; the sign of their effect is regional. Animal transport is a void L0 boundary term"

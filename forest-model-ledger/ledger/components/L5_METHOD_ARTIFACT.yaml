@@ -1,0 +1,27 @@
+id: L5_METHOD_ARTIFACT
+layer: L5
+equation: "observed effect = biological effect + method terms (mesh size, ...) + noise"
+assumes:
+  - id: A1
+    text: "method effects are additive on the effect-size scale"
+    block: void
+  - id: A2
+    text: "studies are synthetic"
+    block: AB_SYNTHETIC_ONLY
+if_assumption_fails:
+  A1: void
+  A2: "real method choices correlate with biome and question; the synthetic design made them independent"
+scope: "run 2: 120 synthetic studies"
+provenance:
+  class: DERIVED
+  source: "run_2: work order 2026-11-10 (reported there; code not in this tree; not recomputed)"
+admitted_by: void
+test_results:
+  - test: void
+    run: run_2
+    result: "R2 bio-only 0.15, bio+method 0.66, true bio 0.79; fine mesh inflated ~2x"
+    value: "reported, not recomputed"
+open_issues:
+  - "no field data has been through this component; Jiang et al. and Karst 2023 are listed in ledger/data_sources.yaml, not retrieved"
+depends_on: []
+status: candidate

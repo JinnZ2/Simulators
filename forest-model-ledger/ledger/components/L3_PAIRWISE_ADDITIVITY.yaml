@@ -1,0 +1,23 @@
+id: L3_PAIRWISE_ADDITIVITY
+layer: L3
+equation: "community outcome = sum of pairwise interaction effects"
+assumes:
+  - id: A1
+    text: "interactions compose additively"
+    block: void
+if_assumption_fails:
+  A1: "predicted abundances go negative; no additive combination reproduces the community (run 3)"
+scope: "run 3: trees + grasses + 4 fungi"
+provenance:
+  class: DERIVED
+  source: "run_3: work order 2026-11-10 (reported there; code not in this tree; not recomputed)"
+admitted_by: void
+test_results:
+  - test: void
+    run: run_3
+    result: "pairwise-additive prediction impossible (negative)"
+    value: "reported, not recomputed"
+open_issues:
+  - "rejected on synthetic data from one model family; higher-order effects dominating is a property of that model until a second family or field data shows it"
+depends_on: []
+status: rejected

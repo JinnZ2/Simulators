@@ -1,0 +1,26 @@
+# test registry. admitted_by in a component must name an id here; results come from running the command, not from this file.
+tests:
+  - id: T_L0_N_CLOSURE
+    command: "python3 tests/test_l0.py"
+    checks: "base run, 300 yr: N budget verdict CLOSED"
+  - id: T_L0_WATER_CLOSURE
+    command: "python3 tests/test_l0.py"
+    checks: "base run: water budget verdict CLOSED"
+  - id: T_L0_DT_HALF
+    command: "python3 tests/test_l0.py"
+    checks: "halving dt keeps N CLOSED"
+  - id: T_L0_LEAK_DETECTED
+    command: "python3 tests/test_l0.py"
+    checks: "planted leak 0.3 -> N LEAK and overall FAIL; water still CLOSED"
+  - id: T_L0_NOISE_ARM
+    command: "python3 tests/test_l0.py"
+    checks: "verdict() returns NOISE between numerical tolerance and k_sigma * sigma (synthetic sigma)"
+  - id: T_L0_VOID_NEVER_CLOSED
+    command: "python3 tests/test_l0.py"
+    checks: "C, P, energy report VOID, never CLOSED; listed beside overall"
+  - id: T_L0_VOID_TERMS_PRINTED
+    command: "python3 tests/test_l0.py"
+    checks: "void boundary terms are None in the audit and print as void, never 0"
+  - id: T_L0_FIRE_EVENT_CONSERVES
+    command: "python3 tests/test_l0.py"
+    checks: "a fire event alone leaves the N budget CLOSED"

@@ -1,0 +1,5 @@
+components {'admitted': 3, 'candidate': 15, 'placeholder': 4, 'rejected': 2}
+branches   {'admitted': 0, 'candidate': 5, 'placeholder': 9, 'rejected': 0}
+blocks 6  runs 9  tests 8
+note: PyYAML cross-check: ran
+OK (0 failures)
