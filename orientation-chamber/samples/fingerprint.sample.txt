@@ -1,0 +1,13 @@
+# orientation-chamber | PROPOSED | No error is wrong. A miss is information: it locates where the model of the world or self differs from what happened. Misses are logged, never scored down.
+
+fingerprint decay: similarity of each cycle's action mix to the seed vs the median anchor
+  VOID: seed fingerprint is null: no prior conversation supplied
+
+CONSTRUCTED fixture (demo.CONSTRUCTED_SEED_FP; not a real prior conversation):
+fingerprint decay: similarity of each cycle's action mix to the seed vs the median anchor
+  cycle  0  sim_seed 1.000  sim_median 0.450
+  cycle  1  sim_seed 0.900  sim_median 0.550
+  cycle  2  sim_seed 0.600  sim_median 0.850
+  cycle  3  sim_seed 0.500  sim_median 0.900
+  cycle  4  sim_seed 0.450  sim_median 1.000
+  CROSSED at cycle 2

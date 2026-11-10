@@ -14294,6 +14294,29 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   source and the PDF carry the same 2612-word sequence, and fails on a planted one-word change.
   Note 2026-11-09: v0.2 then arrived and is `SPEC_v0.2.md`, verbatim, beside v0.1 (superseding
   nothing); `check_v02.py` (11/11) checks its hash and that its section-13 tools and two live specimens resolve.
+- `orientation-chamber/` — PROPOSED, optional exploration toy for an AI
+  agent orienting in an unfamiliar rule-space: a seeded 7x7 grid with hidden
+  rules (flip_x, flip_y, wrap, sticky, momentum, delay), predict -> probe ->
+  compare -> triangulate -> close loop. Principle verbatim at the top of the
+  README and in every output header: "No error is wrong. A miss is
+  information: it locates where the model of the world or self differs from
+  what happened. Misses are logged, never scored down." The misslog refuses
+  score-like field names at write time, keeps unfilled fields null, and is a
+  sha256 chain; `fix.py` reads rules LOCATED / FLOATING / UNTESTED (LOCATED
+  needs 2 distinct path signatures [CHOICE 1]), misses with OFFSET and
+  UNLOCATED, loops CLOSED / OPEN / NOT_A_LOOP, and the same path walked twice
+  as one wall. Self mode logs category and specific predictions. NO_MOVE is a
+  legal action (the stillness control); on seed 7 a still probe located the
+  delay rule by itself. `markers.py`: FADING / LANDMARK / REPEL / VOID /
+  PLACED at the true cell; in a plain chamber REPEL cuts one searcher's
+  re-visits 37 -> 19, with both axes flipped it raises them to 56, and VOID
+  gives no guidance by construction. `fingerprint.py`: the prior-conversation
+  seed's decay arm (similarity to seed vs median anchor per cycle, crossing
+  cycle), VOID until a real prior log is supplied; arXiv 2509.21224 cited as
+  related work, CARRIED. Banned output words scanned with the principle
+  masked, measured both ways. Check count
+  printed by `python3 orientation-chamber/tests/test_chamber.py`. Stdlib only,
+  CC0.
 - `law-audit-card/` — PROPOSED, one card per law: stated_purpose,
   target_outcome, enforcement, evidence, cut_sensitivity, scope_valid,
   last_tested, evaluator, circularity, anchor_date, disposition, each tagged
