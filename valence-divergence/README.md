@@ -129,3 +129,14 @@ rather than leaving an absence that looks like an oversight.
 
 The check count is printed by `python3 test_valence.py` and is not stored
 here.
+
+## Finds-by (ALIAS_PROPOSED, 2026-11-09)
+Note 2026-11-09: added by WORK ORDER TOOL FINDER part 1; aliases derived from this
+tool's stated scope only. Index: Simulators `TOOL_FINDER/TOOL_FINDER.md`.
+
+- same word read positive by one and negative by another
+- agreement over an unflagged mismatch
+- word history vs current reading
+- avoided term: AVOIDED_TERM_UNSTATED
+- measures: "Logs a term used by two parties, records the valence each decoder assigned and where each reading came from, and flags divergence."
+- breaks when: "No lexicon, no valence model, no sentiment scoring."

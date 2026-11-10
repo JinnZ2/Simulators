@@ -146,3 +146,15 @@ both delivered text rendered from the parsed document, where rewording
 would misquote the source.
 
 CC0. Stdlib only, parses under 3.9, phone-buildable.
+
+## Finds-by (ALIAS_PROPOSED, 2026-11-09)
+Note 2026-11-09: added by WORK ORDER TOOL FINDER part 1; aliases derived from this
+tool's stated scope only. Index: Simulators `TOOL_FINDER/TOOL_FINDER.md`.
+
+- evaluation criteria set against a population default
+- non-default user scored as default
+- length inflation and unrequested elaboration
+- attributed need in model replies
+- avoided term: AVOIDED_TERM_UNSTATED
+- measures: "A gap statement about evaluation criteria set upstream of an interaction against a population default, and the compensation behaviour downstream of them."
+- breaks when: "Nothing here is evidence about any evaluation criterion at any lab, about any other user, or about any other model."

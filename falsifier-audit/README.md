@@ -132,3 +132,15 @@ that is checked by the record count, not assumed.
   (`checks.py`).
 
 Each is printed or discoverable at the callsite. CC0.
+
+## Finds-by (ALIAS_PROPOSED, 2026-11-09)
+Note 2026-11-09: added by WORK ORDER TOOL FINDER part 1; aliases derived from this
+tool's stated scope only. Index: Simulators `TOOL_FINDER/TOOL_FINDER.md`.
+
+- falsifier with unstated scope
+- find all falsifiers in a repo
+- untestable as written
+- claim and its test do not match
+- avoided term: AVOIDED_TERM_UNSTATED
+- measures: "An extractor plus analyser that walks a local checkout, pulls every falsifier it can find, and turns each place where a falsifier's **scope is implicit** into a research question."
+- breaks when: NO_STATED_LIMITS

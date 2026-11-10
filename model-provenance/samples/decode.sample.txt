@@ -11,11 +11,31 @@ the date: the version existed at least that early, and may
 have existed long before anyone committed under it. Every
 candidate below inherits that.
 
-verdict        commits
--------------  -------
-SINGLE         231    
-AMBIGUOUS      5      
-NOT_DECODABLE  0      
+verdict                   commits
+------------------------  -------
+SINGLE                    852    
+AMBIGUOUS                 21     
+NOT_DECODABLE             157    
+CONDITIONAL(stale_table)  426    
+
+trailer-first decode (Note 2026-11-09, round 7): trailer present -> trailer
+reading, status OBSERVED, no date window; no trailer -> date window, status
+ESTIMATED; VOID where a field is absent (no information, never a zero)
+
+status     commits
+---------  -------
+OBSERVED   855    
+ESTIMATED  446    
+VOID       155    
+
+agreement (trailer vs window)  commits
+-----------------------------  -------
+AGREES                         315    
+DISAGREES                      92     
+WINDOW_CONTAINS                17     
+WINDOW_EXCLUDES                3      
+CONDITIONAL(stale_table)       426    
+VOID                           603    
 
 The decode table is stored alongside and is not written back
 into history (S2). Nothing here ranks a commit, and no version

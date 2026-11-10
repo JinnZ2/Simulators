@@ -84,4 +84,18 @@ through `sheet-structure-scan/no_severity.py` with the two-arm exemption
 arrangement, and unlike scan 4 the exemption list is **empty** — this
 order's verdict names carry no screened word.
 
-29 selftest checks. Stdlib only, parses under Python 3.9. CC0.
+Note 2026-11-09 (ICSC v0.2 section 3, T21 omitted-edge live specimen): `decode_commit()`
+puts a stale-table check in front of `decode()`. A commit whose trailer names a model with
+no row in `releases.json` decodes `CONDITIONAL(stale_table)` with no candidates, so no model
+is printed as decoded; `verify` counts these in their own row. `releases.json` is not edited
+in this step. On this repository at the time of writing, `verify` reads 419 such commits.
+See `CLAIM_TABLE.md` MP_011.
+
+Selftest count is printed by `provenance.py --selftest` (the 29 below is the count at landing). Stdlib only, parses under Python 3.9. CC0.
+
+Note 2026-11-09 (round 7): MP_012 logged. The date windows of the table rows overlap, so the rows
+are not independent. A scratch run that added the 4 missing rows changed the decode of 390 of the
+1030 commits outside the stale set. Option b (add rows) was the owner's pick. It is not written
+here, because of the no-model-identifier rule; see MP_012. `releases.json` is unchanged.
+
+Note 2026-11-09 (round 7, MP_013): decode is trailer-first. A commit with a trailer reads its trailer, status OBSERVED. A commit without one reads the date window, status ESTIMATED. Per-commit fields are trailer_model | window_model | agreement | status, with VOID where absent. releases.json is untouched; the planted per-commit sample is samples/trailer_first_planted.sample.txt.

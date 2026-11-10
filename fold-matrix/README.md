@@ -327,3 +327,15 @@ with a fourth check asserting the list is length one so a widening turns
 red.
 
 74 selftest checks (plus 24 in `sheet-structure-scan/docreader`). Stdlib only, parses under Python 3.9. CC0.
+
+## Finds-by (ALIAS_PROPOSED, 2026-11-09)
+Note 2026-11-09: added by WORK ORDER TOOL FINDER part 1; aliases derived from this
+tool's stated scope only. Index: Simulators `TOOL_FINDER/TOOL_FINDER.md`.
+
+- proxy vs goal relation
+- term that hides several quantities
+- what a metric stands in for
+- sign and magnitude of proxy claim
+- avoided term: AVOIDED_TERM_UNSTATED
+- measures: "One term, one grid, not one number."
+- breaks when: "S7 says empty emits as empty, never as zero."

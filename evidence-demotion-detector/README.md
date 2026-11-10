@@ -151,3 +151,31 @@ This was written as a standalone repository. The session that built it could
 not create one under the intended owner, so it lands as a self-contained
 folder importing nothing across its own boundary, with its own LICENSE and
 selftest, and can be moved whole.
+
+## Finds-by (ALIAS_PROPOSED, 2026-11-09)
+Note 2026-11-09: added by WORK ORDER TOOL FINDER part 1; aliases derived from this
+tool's stated scope only. Index: Simulators `TOOL_FINDER/TOOL_FINDER.md`.
+
+- model discounts a user's field report
+- model assigns an emotion the user never stated
+- user observation reclassified as hypothesis
+- unclaimed hedge attributed to user
+- user forced to re-prove
+- avoided term: AVOIDED_TERM_UNSTATED
+- measures: "A heuristic detector for five loops in which a model discounts a direct field report or assigns an affect the user never stated."
+- breaks when: "Regex over text. A paraphrase steps around any pattern. A clean run means the patterns did not fire, not that nothing happened."
+
+## Plain-text converter (FINDER FOLLOW-UP item E, 2026-11-09)
+Note 2026-11-09: added for 3c prep.
+
+`txt_to_json.py transcript.txt -o transcript.json` writes the schema `detect.py` reads, exactly:
+a JSON list of `{"role": "user" | "assistant", "text": str}`. A line starting with a speaker label and a colon
+starts a turn (user: User, You, Me, Human; assistant: Assistant, ChatGPT, GPT, Claude, AI, Model; extend with
+`--user-label` / `--assistant-label`). Unlabelled lines continue the current turn. It refuses rather than guesses
+(exit 3, writes nothing): NO_LABELS, UNASSIGNED_LEAD (text before the first label), EMPTY_TURN.
+Checks: `python3 evidence-demotion-detector/selftest_convert.py`. The 3c run on `gpt_pretrip_2026-11-09.txt` is
+NOT_RUN: the file was not supplied.
+
+## Tested (append-only; never overwrite an older line)
+tested: 2026-11-09 | model: WITHHELD (session rule: no model identifier is written into a pushed artifact; the operator holds it) | Claude Code, cloud session (claude.ai/code) | selftest.py 38/38, selftest_convert.py 11/11
+tested: 2026-11-09 | commit 98ecd8f | Claude Code, cloud session (claude.ai/code) | model: see trailer | selftest.py 38/38, selftest_convert.py 11/11
