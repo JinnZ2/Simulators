@@ -1,0 +1,9 @@
+id: AB_WATERMASK_IS_CHANNEL
+statement: "a water mask is a channel"
+if_fails: "lakes and reservoirs enter as very wide channels"
+used_by:
+  - L5_WIDTH_WATERMASK
+used_by_runs:
+  - run_3
+open_issues: []
+status: candidate

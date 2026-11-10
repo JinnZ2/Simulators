@@ -1,0 +1,23 @@
+id: L0_BOUNDARY_AUDIT
+layer: L0
+equation: "per-budget list of boundary terms, void terms printed as void"
+assumes:
+  - id: A1
+    text: "the boundary list is complete for the budget"
+    block: AB_VOID_BOUNDARY
+if_assumption_fails:
+  A1: "a term the field record carries that the list does not"
+scope: "toy only"
+provenance:
+  class: DERIVED
+  source: "model/l0_audit.py, runs/run_1"
+admitted_by: T_VOID_PRINTED
+test_results:
+  - test: T_VOID_PRINTED
+    run: run_1
+    result: PASS
+    value: "groundwater, overbank_fines, evaporation, seepage, tributaries, bank_work, transport_work print void"
+open_issues:
+  - "floodplain loss is point bar + oxbow fill only; overbank fine deposition is void"
+depends_on: []
+status: admitted

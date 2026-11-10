@@ -1,0 +1,27 @@
+id: L4_CUTOFF
+layer: L4
+equation: "neck cutoff when two nodes more than cut_gap apart come within neck * W; tightest neck first"
+assumes:
+  - id: A1
+    text: "a cutoff is instantaneous and geometric; no chute cutoffs, no flood trigger"
+    block: void
+  - id: A2
+    text: "the oxbow traps half its channel volume, supply permitting"
+    block: AB_HAND_SET
+if_assumption_fails:
+  A1: "a field cutoff record dominated by chute cutoffs or flood timing"
+  A2: "a measured oxbow fill fraction"
+scope: "toy only"
+provenance:
+  class: PROPOSED
+  source: "form chosen here; DERIVED in runs/run_1, run_2"
+admitted_by: void
+test_results:
+  - test: void
+    run: run_2
+    result: "lam/W 7.34 (neck 2 W), 7.78 (neck 0.5 W), 8.69 (neck 1 W)"
+    value: "weak dependence on neck"
+open_issues:
+  - "first build chose the first-found pair and cut the whole channel; repaired to the tightest neck (recorded in run_1.md)"
+depends_on: []
+status: candidate

@@ -1,0 +1,42 @@
+sources:
+  - id: DS_THAPA_2025
+    what: "SE US meander geometry from remote sensing: water-surface width, wavelength (two columns), sinuosity, slope, NMCI, mapped surface geology; 26512 centerline points, 16951 meanders"
+    locator: "github.com/thapawan/MeanderClassification @ 0b9be85c58a527b113f72c9613cfbc8351a8ab60 : Data/MeanderClass_Final_6_24_2025.csv ; Zenodo 15730646 (not reached)"
+    retrieved: "2026-11-10 via tools/fetch_data.py (git, not checked in; MIT)"
+    used_by:
+      - L5_WAVELENGTH_ESTIMATOR
+      - L5_WIDTH_WATERMASK
+      - L5_SLOPE_DEM_PIXEL
+      - L5_LEOPOLD_WOLMAN_RATIO
+    checksum: "sha256 02aa78259f0844ea703ca904ee7dcf4fe22c2b22aaad1a4b405ee31235c4dd49"
+    method: "width: medial-axis transform on a water mask (README); slope: tan(slope) x 30 on Gaussian-smoothed SRTM 30 m masked to JRC water (script); inflections: sign changes of mean curvature of that DEM, vectorised at scale 200 m (script); 'wavelength' column: (lon[i+1]-lon[i-1])/2 over inflection rows, units not stated (script); 'Wavelength (m)': method not shipped"
+    bank_material: "absent; MAJOR1 is mapped surface geology"
+    discharge: absent
+  - id: DS_GLOFAS_HAMILTON
+    what: "hand-measured meander wavelengths with GloFAS discharge (b-r-hamilton/meander)"
+    locator: "github.com/b-r-hamilton/meander @ 67539a1dcdd0a41c20d8fffe2b7539ee1c19d6c7"
+    retrieved: "code only; data files not in the repository; no licence file"
+    used_by: []
+    checksum: void
+    method: void
+    bank_material: void
+    discharge: "GloFAS (named, not retrieved)"
+  - id: DS_LEOPOLD_WOLMAN
+    what: "the original lambda ~ k W compilation (recalled)"
+    locator: void
+    retrieved: not_retrieved
+    used_by:
+      - L5_LEOPOLD_WOLMAN_RATIO
+    checksum: void
+    method: void
+    bank_material: void
+    discharge: void
+  - id: DS_USGS_MEASUREMENTS
+    what: "USGS field measurements (width, depth, discharge)"
+    locator: "waterdata.usgs.gov (no response from this environment)"
+    retrieved: not_retrieved
+    used_by: []
+    checksum: void
+    method: void
+    bank_material: void
+    discharge: void

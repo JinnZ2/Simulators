@@ -1,0 +1,31 @@
+tests:
+  - id: T_SED_CLOSURE
+    command: "python3 tests/test_meander.py"
+    checks: "base toy run: sediment verdict CLOSED"
+  - id: T_SED_LEAK_DETECTED
+    command: "python3 tests/test_meander.py"
+    checks: "planted leak -> sediment LEAK, overall FAIL"
+  - id: T_VOID_PRINTED
+    command: "python3 tests/test_meander.py"
+    checks: "void boundary terms are None in the audit and print void, never 0; momentum VOID never CLOSED"
+  - id: T_IDENTITY_FLAGGED
+    command: "python3 tests/test_meander.py"
+    checks: "water and energy carry the IDENTITY flag in every report"
+  - id: T_VERDICT_AGREES_FOREST
+    command: "python3 tests/test_meander.py"
+    checks: "verdict() agrees with forest-model-ledger/model/l0_audit.verdict on fixed cases; NOT_TESTABLE without numpy"
+  - id: T_ALPHA_ONLY
+    command: "python3 tests/test_meander.py"
+    checks: "short runs at equal alpha with different H, Cf are identical"
+  - id: T_SUPPLY_NO_PLANFORM
+    command: "python3 tests/test_meander.py"
+    checks: "short runs at supply 0.2 and 2.0 give identical planforms and different bed stores"
+  - id: T_SCATTER_KNOWN
+    command: "python3 tests/test_meander.py"
+    checks: "scatter.py on a constructed CSV: exact ratio, meander grouping, sentinel exclusion, Spearman sign, null R2 small"
+  - id: T_CARDS_READ
+    command: "python3 tests/test_meander.py"
+    checks: "every card reads to its declared reading under forest coincidence_card.read"
+  - id: T_QUESTIONS_SCHEMA
+    command: "python3 tests/test_meander.py"
+    checks: "every question in QUESTIONS.md carries all six fields and status placeholder"

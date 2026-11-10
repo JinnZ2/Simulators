@@ -1,0 +1,9 @@
+id: AB_FIXED_WIDTH
+statement: "channel width is one constant"
+if_fails: "no width-curvature coupling can appear"
+used_by:
+  - L3_BEND_GROWTH_KINEMATIC
+used_by_runs:
+  - run_1
+open_issues: []
+status: candidate

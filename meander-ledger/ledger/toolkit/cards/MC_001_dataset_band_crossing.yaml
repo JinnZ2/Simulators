@@ -1,0 +1,29 @@
+id: MC_001_dataset_band_crossing
+observation: "in DS_THAPA_2025 the per-width-bin median lambda/W passes through the recalled 10..14 band (13.80 at W 100-200 m) while lambda itself is nearly flat: median 1562 m at W 30-60 m, 3186 m at W 1000-3000 m (run_3)"
+trigger: "adds up but does not sit right: the recalled relation appears in one width bin and nowhere else"
+slots:
+  shared_constraint:
+    state: void
+    evidence: void
+  local_normal_form:
+    state: void
+    evidence: void
+  statistical_artifact:
+    state: supported
+    evidence: "widths to 20101 m and 190 meanders with W > 3000 m (lam/W median 0.58): the water mask admits lakes and reservoirs, so the W axis is a mixed population (run_3)"
+  numerical_artifact:
+    state: supported
+    evidence: "lambda 1st percentile 358 m, 5th 620 m; inflections come from a Gaussian-smoothed 30 m DEM vectorised at scale 200 m (Scripts/Slope_Curvature_InflectionPoints); a nearly constant lambda floor divided by W crosses 12 near W = 150 m for any rivers"
+  low_dim_projection:
+    state: ruled_out
+    evidence: "nothing agrees for a projection to hide: sd log10(ratio) 0.484 equals sd log10(W) 0.486, log-log R2 0.116, Spearman(ratio, W) -0.733 (run_3)"
+  none_of_above:
+    state: void
+    evidence: void
+reading_declared: OPEN
+branch: void
+runs:
+  - run_3
+open_issues:
+  - "shared_constraint unrun: the code that produced 'Wavelength (m)' is not the shipped Amplitude_Wavelength script, whose output is the other column ('wavelength'); whether Wavelength (m) depends on W cannot be read"
+  - "local_normal_form unrun"

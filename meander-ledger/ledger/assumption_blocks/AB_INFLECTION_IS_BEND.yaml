@@ -1,0 +1,10 @@
+id: AB_INFLECTION_IS_BEND
+statement: "a curvature sign change marks a bend inflection"
+if_fails: "lambda reads the noise or grid scale"
+used_by:
+  - L5_WAVELENGTH_ESTIMATOR
+used_by_runs:
+  - run_2
+  - run_3
+open_issues: []
+status: candidate

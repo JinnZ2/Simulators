@@ -1,0 +1,22 @@
+id: L5_WIDTH_WATERMASK
+layer: L5
+equation: "W = water-surface width from a medial-axis transform on a water mask (dataset README)"
+assumes:
+  - id: A1
+    text: "the water mask is the channel"
+    block: AB_WATERMASK_IS_CHANNEL
+if_assumption_fails:
+  A1: "reservoirs and lakes read as channel: widths to 20101 m, 190 meanders with W > 3000 m and lam/W median 0.58 (run_3)"
+scope: dataset
+provenance:
+  class: DERIVED
+  source: "runs/run_3; method from the dataset README, not verified"
+admitted_by: void
+test_results:
+  - test: void
+    run: run_3
+    result: "median max/min point width inside one meander 1.20"
+    value: "5732 meanders with > 1 point"
+open_issues: []
+depends_on: []
+status: candidate

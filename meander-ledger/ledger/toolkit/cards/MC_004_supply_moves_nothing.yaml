@@ -1,0 +1,29 @@
+id: MC_004_supply_moves_nothing
+observation: "supply 0.2, supply 2.0 and a planted leak all leave the planform statistics identical to base s0 to every printed digit, while the bed store ends at 0.000, 6085.318 and 0.000 (run_1)"
+trigger: "nudging an assumption moves nothing: something absorbs the change"
+slots:
+  shared_constraint:
+    state: supported
+    evidence: "the migration rule never reads the sediment store (model/meander.py); every run obeys one planform equation that lacks the variable, and the store takes the whole change"
+  local_normal_form:
+    state: ruled_out
+    evidence: "independent of where the planform sits: identical across the whole history"
+  statistical_artifact:
+    state: ruled_out
+    evidence: "same seed, same rng draws: supply does not consume a draw"
+  numerical_artifact:
+    state: ruled_out
+    evidence: "the store change is 4 orders above roundoff"
+  low_dim_projection:
+    state: ruled_out
+    evidence: "the change is visible in another readout (bed store), so the summary is not hiding it"
+  none_of_above:
+    state: ruled_out
+    evidence: "one cause supported"
+reading_declared: RESOLVED
+branch: void
+runs:
+  - run_1
+open_issues:
+  - "the true cause is a MISSING COUPLING (sediment supply -> bank or bar dynamics), which has no slot; it is filed under shared_constraint by reading. This is the card's own cannot_see #1: a cause outside the five named slots taken for one of them"
+  - "rivers are not known to be this way; the toy is"
