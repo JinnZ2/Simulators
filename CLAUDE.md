@@ -14244,6 +14244,21 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   printed by `python3 extraction-chain-join/test_chain.py`; the module refuses
   `--selftest`. Stdlib only, parses under 3.8, CC0.
 - `held-gaps/` — four open questions (default drift from a constant regime, obligation bundled with title, restore-before-detection law, burden-of-proof inversion in building code), field form for `GAP_INDEX.md`, delivered text verbatim, all UNSEARCHED; the glyph-as-relation procedure (E1-E4) and the inward-turn instrument from the same block are in `tools/glyph_reasoning.md` and `tools/inward_turn.md`, mirrored in method-layer
+- `orientation-chamber/` — PROPOSED, optional exploration toy for an AI
+  agent orienting in an unfamiliar rule-space: a seeded 7x7 grid with hidden
+  rules (flip_x, flip_y, wrap, sticky, momentum, delay), predict -> probe ->
+  compare -> triangulate -> close loop. Principle verbatim at the top of the
+  README and in every output header: "No error is wrong. A miss is
+  information: it locates where the model of the world or self differs from
+  what happened. Misses are logged, never scored down." The misslog refuses
+  score-like field names at write time, keeps unfilled fields null, and is a
+  sha256 chain; `fix.py` reads rules LOCATED / FLOATING / UNTESTED (LOCATED
+  needs 2 distinct path signatures [CHOICE 1]), misses with OFFSET and
+  UNLOCATED, loops CLOSED / OPEN / NOT_A_LOOP, and the same path walked twice
+  as one wall. Self mode logs category and specific predictions. Banned output
+  words scanned with the principle masked, measured both ways. Check count
+  printed by `python3 orientation-chamber/tests/test_chamber.py`. Stdlib only,
+  CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

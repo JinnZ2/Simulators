@@ -1,0 +1,4 @@
+{"name": "median", "status": "PROPOSED",
+ "self_model": {"world": "no rules: each action moves one cell as labelled; edges stop you; the report is current",
+                "self": "predicts its next action as the one it would most often take"},
+ "note": "a starting point, not a target; its MISSes show where this chamber differs from the plain one"}
