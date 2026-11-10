@@ -2,10 +2,11 @@
 
 The method is not restated here. Read the METHOD BRIEF in
 `../forest-model-ledger/CLAUDE.md` before `WORK_ORDER.md`, and before touching the
-ledger, the model or a run. At the time this folder was built that file had
-sha256 `aceca6217c4b553fbcee582901ba5078aad59e8a7eb56125459340bd00df0e16`.
-If the hash differs, the brief has moved; re-read it, and check the gap table
-below against it.
+ledger, the model or a run. Pinned at forest commit f633fb9, sha256
+`eb810def881497891cb5cf9627a23f17feba2366c1faff4a3aeeb7aff79433e3`. The folder was built against `aceca621...` (26f79cc); between the two
+only the forest's own gap table and a run_11 line moved, and the verbatim brief
+block is byte-identical. If the hash differs again, re-read the brief and check the
+gap table below against it.
 
 This folder uses the forest ledger's SCHEMA and its checker unchanged:
 
@@ -31,6 +32,8 @@ TOOLBOX                           budget closure and coincidence card used (fore
                                   equation-family swap, parameter recovery on synthetic
                                   data, assumption-block trace: not run. Parameter
                                   recovery is the cheapest next tool (Q-09).
+                                  forest f633fb9 adds ledger/toolkit/assumption_nudge;
+                                  not run here (this folder has no anchor to nudge from).
 7 CONNECT                         no convergence_anchors between any two branches.
 toy convergence                   NOT grid-converged: ds 0.25 gives lam/W 2.62 (run_2).
 ```
