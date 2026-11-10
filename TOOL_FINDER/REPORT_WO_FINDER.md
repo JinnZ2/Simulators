@@ -623,3 +623,90 @@ Selftest lines (throwaway worktree, commit e577c4e): selftest_null "checks: 28  
      decode.
 
 Selftest lines (throwaway worktree, commit 37af616): selftest_null "checks: 30   failed: 0"; cutoff selftest "checks: 25   failed: 0"; provenance "SELFTEST PASS (0 checks failed)"; check_v02 "checks: 11   failed: 0"; check_landing "checks: 5   failed: 0"; build_finder "checks: 17   failed: 0"; pytest tests 194 passed, 3 failed (the pinned run_manifest set); known_red VERDICT: PASS.
+
+## Work orders x2 (2026-11-09, relayed 2026-11-10): orientation-chamber/ and law-audit-card/
+
+### A. orientation-chamber/ (branch claude/orientation-chamber, PR #254 to main)
+
+SHAs: d9682a7 (first build), ac269c5 (stillness control, markers, fingerprint arm).
+
+| item | state | notes |
+|---|---|---|
+| principle verbatim | DONE | Top of README and in every output header and misslog header line. |
+| 1 chamber.py | DONE | 7x7 grid; seeded rules flip_x, flip_y, wrap, sticky, momentum, delay. |
+| 2 probe.py + "no move" | DONE | NO_MOVE is a legal action (same nominal action as WAIT), logged under the name used and noted "stillness control". On seed 7 a NO_MOVE probe located delay by itself: MISS, OFFSET [1, 0]. |
+| 3 misslog.py | DONE | Append-only JSONL, sha256 prev chain, score-like and unknown fields refused at write time, unfilled fields null. |
+| 4 selfmode.py | DONE | Category and specific predictions both logged; an unmade prediction compares as null. |
+| 5 markers.py | DONE | FADING (FADE_LIFE 6 steps, [CHOICE 2]), LANDMARK (edge distances; relocalize gives the OFFSET), REPEL, VOID (cell plus 4 neighbours), PLACED. Marks sit at the true cell. usage_counts per type. Re-search rate with vs without marks, one seeded searcher: plain chamber none 37, FADING 25, REPEL 19, VOID 37 revisits of 60; seed 7 (axes flipped) none 37, FADING 53, REPEL 56, VOID 37. |
+| 6 fix.py | DONE | Rules LOCATED / FLOATING / UNTESTED (LOCATED needs 2 distinct path signatures, [CHOICE 1]); MISS with OFFSET, UNLOCATED; loops CLOSED / OPEN / NOT_A_LOOP with the misclosure OFFSET; the same path walked twice is one wall. |
+| 7 seeds/ | DONE | none, median (median anchor fingerprint stipulated, [CHOICE 3]), calibration-practice, prior-conversation. The prior-conversation fingerprint is null, so its decay arm reads VOID. fingerprint.py reports per-cycle similarity to seed vs median anchor and the crossing cycle; on a CONSTRUCTED fixture in demo.py it crosses at cycle 2. |
+| README | DONE | Probe protocol, zero-g origin, arXiv 2509.21224 as related work, CARRIED and not opened. |
+| tests | DONE | No score fields; banned-word scan on all output (principle masked, measured both ways); closed loops on known rule sets; NO_MOVE logged; reproducible from seed. |
+
+Selftest lines (throwaway worktree at ac269c5), verbatim:
+
+```
+checks: 44   failed: 0
+fix.py --selftest exit 2
+markers.py --selftest exit 2
+fingerprint.py --selftest exit 2
+samples unchanged after regen
+```
+
+Files: orientation-chamber/{README.md, common.py, chamber.py, probe.py, misslog.py, selfmode.py,
+markers.py, fingerprint.py, fix.py, demo.py, seeds/{none,median,calibration-practice,prior-conversation}.json,
+samples/{misslog.sample.jsonl, readout.sample.txt, markers.sample.txt, fingerprint.sample.txt},
+tests/test_chamber.py}; CLAUDE.md entry.
+
+Sample misslog (first four lines of samples/misslog.sample.jsonl, plus the stillness probe):
+
+```
+{"_header": "No error is wrong. A miss is information: it locates where the model of the world or self differs from what happened. Misses are logged, never scored down.", "fields": ["t", "kind", "path_id", "start", "action", "predicted", "actual", "match", "offset", "rule_hypothesis", "note"], "status": "PROPOSED"}
+{"action": "N", "actual": {"category": "move", "specific": "N"}, "kind": "self", "match": {"category": true, "specific": true}, "note": "self: first action of the next path", "offset": null, "path_id": null, "predicted": {"category": "move", "specific": "N"}, "prev": "7296b11cd64bc52c40f982e91408d62cdc65855805ed492e8c12cde393dce5d8", "rule_hypothesis": null, "start": null, "t": 0}
+{"action": "N", "actual": [3, 3], "kind": "world", "match": false, "note": null, "offset": [0, -1], "path_id": "8ccd2a4edd87", "predicted": [3, 4], "prev": "f57c3a424103f9fa1152151cae9e4e0af45d655b08651b33f15dee523186e100", "rule_hypothesis": null, "start": [3, 3], "t": 1}
+{"action": "E", "actual": [3, 2], "kind": "world", "match": false, "note": null, "offset": [-1, -2], "path_id": "8ccd2a4edd87", "predicted": [4, 4], "prev": "d17b1cfc89d87c50a72f8cf72a77bff380a0dec190788aa54c9c8e4873636a0a", "rule_hypothesis": null, "start": [3, 3], "t": 2}
+{"action": "NO_MOVE", "actual": [3, 3], "kind": "world", "match": false, "note": "stillness control", "offset": [1, 0], "path_id": "e55cb72c97f0", "predicted": [2, 3], "prev": "db3b8ca0a9e284043be2eab7fe7717ce6c75323d5c60739f218ec5b573a17715", "rule_hypothesis": "delay", "start": [2, 3], "t": 11}
+```
+
+Open questions (A):
+- [CHOICE 1] 2 paths for LOCATED, [CHOICE 2] FADE_LIFE 6, [CHOICE 3] the median anchor: all stipulated.
+- Independence is a different path signature, a floor and not a proof.
+- A miss tagged to one rule can come from another; seed 7's misses under `momentum` come from flip_y and delay (momentum is off at that seed).
+- The log is append-only; no retraction record exists for a mistagged miss.
+- VOID as a search mark gives no guidance by construction; whether "cleared patch" should mean something else is open.
+- Re-search rates are readings of one scripted searcher, not properties of the mark types.
+- The prior-conversation fingerprint is VOID; the only crossing shown is on a constructed fixture.
+- reveal() exists and nothing records whether an agent used it.
+
+### B. law-audit-card/ (branch claude/law-audit-card, PR #253, stacked on #252)
+
+SHA: e3bc8f1, plus this report commit. Delivered under the previous relay of the same order; rechecked here.
+
+| item | state | notes |
+|---|---|---|
+| 0 COVERAGE.md | DONE | The scratchpad file still existed; landed byte-identical (sha256 0494605f...3a54f). No regeneration from a8028b2 needed. |
+| 1 fields | DONE | 11 fields, each OBSERVED / DERIVED / PROPOSED / VOID; VOID written, never omitted. cut_sensitivity derived (>= 2 boundaries -> FLIPS / HOLDS, else VOID); last_tested needs date and tester, else VOID; circularity derived, CONDITIONAL(circular_eval) when enforcer == evaluator. |
+| 2 disposition | DONE | Reader id and date required. Tool never writes KEEP / EDIT / REVISE / RETIRE (AST check with a planted case); forces UNRESOLVED when evidence or cut_sensitivity is VOID, keeping the reader's entry as reader_assigned. READ_ME_THIS_WAY section 4 cited. REDO -> REVISE; REBUILD recorded as not a disposition (correction notice section G, parts of a report). |
+| 3 TAF | DONE | Imports TAF core/regulatory_scope_audit.py (TAF_PATH or sibling checkout); verdict labels read from TAF source; card's stated_purpose passed as first_principle_intent. Out of scope with intent undeclared -> VOID (TAF's default not taken). Two NAME_COLLISION rows in TOOL_FINDER. |
+| 4 cut / weld | DONE | Boundary field name read from declared-frame/v2/check_frame.py; welds point to category-weld/. |
+| 5 seeds + aggregate | DONE | dyed fuel, EU 2022/197, Sunday laundry (all VOID); every value cited path:line from the law-* dirs, all read UNRESOLVED. aggregate.py: 1 of 3 seed cards, ILLUSTRATIVE. |
+
+Selftest lines (throwaway worktree at e3bc8f1), verbatim:
+
+```
+with TAF:    checks: 28   failed: 0   skipped: 0
+without TAF: checks: 28   failed: 0   skipped: 5
+build_finder --selftest: checks: 17   failed: 0
+card.py --selftest -> usage, exit 2
+```
+
+Files: law-audit-card/{COVERAGE.md, README.md, card.py, aggregate.py, cards/{dyed_fuel,eu_marker,sunday_laundry}.json,
+samples/{aggregate.sample.txt, cards.sample.txt}, tests/test_card.py}; TOOL_FINDER/{entries.py, TOOL_FINDER.md, finder.json}; CLAUDE.md entry.
+
+Open questions (B):
+- No enforcer is stated in the tree for either seeded law, so circularity is VOID on all three cards.
+- INDEPENDENT_AS_DECLARED compares two names; it cannot see shared funding or staff.
+- The EU card's 2019 test was of removal resilience; whether that is "against its own purpose" is the reader's call (stated purpose VOID).
+- PR #253's base is claude/tool-finder (#252): merge #252 first or retarget.
+
+Still outstanding from earlier rounds: the ICSC_v0.2_spec.md attachment never arrived.
