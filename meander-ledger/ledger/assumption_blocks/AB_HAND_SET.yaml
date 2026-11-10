@@ -1,0 +1,10 @@
+id: AB_HAND_SET
+statement: "a coefficient chosen by hand with no source"
+if_fails: "results move with it"
+used_by:
+  - L2_VEGETATION_BANK
+  - L4_CUTOFF
+used_by_runs:
+  - run_1
+open_issues: []
+status: candidate

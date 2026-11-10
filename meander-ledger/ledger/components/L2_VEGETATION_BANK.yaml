@@ -1,0 +1,27 @@
+id: L2_VEGETATION_BANK
+layer: L2
+equation: "E_eff = E (1 - 0.7 veg); point-bar trap = 0.9 + 0.1 veg"
+assumes:
+  - id: A1
+    text: "vegetation acts only by scaling erodibility and point-bar trapping, both hand-set"
+    block: AB_HAND_SET
+  - id: A2
+    text: "vegetation is uniform along the channel and constant in time"
+    block: void
+if_assumption_fails:
+  A1: "a field case where vegetation changes wavelength without changing migration rate (the toy cannot do that)"
+  A2: void
+scope: "toy only"
+provenance:
+  class: PROPOSED
+  source: "form chosen here; run_1 cases veg 0.5, 1.0 (DERIVED)"
+admitted_by: void
+test_results:
+  - test: void
+    run: run_1
+    result: "lam/W 7.69 (veg 0.5), 6.82 (veg 1.0) against 8.69 base; cutoffs/1k 4.75, 1.00 against 7.50"
+    value: "one seed, one point"
+open_issues:
+  - "the 0.7 and 0.1 coefficients have no source"
+depends_on: []
+status: candidate

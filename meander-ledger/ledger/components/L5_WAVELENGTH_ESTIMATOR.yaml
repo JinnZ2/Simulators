@@ -1,0 +1,23 @@
+id: L5_WAVELENGTH_ESTIMATOR
+layer: L5
+equation: "lambda = 2 x mean straight-line distance between successive curvature-sign changes"
+assumes:
+  - id: A1
+    text: "every curvature sign change is a bend inflection, not noise"
+    block: AB_INFLECTION_IS_BEND
+if_assumption_fails:
+  A1: "lambda tracks the noise or grid scale rather than the bends: toy lam/W 2.6 on straight channels and at ds 0.25 W (run_2); dataset lambda nearly flat 1.6-3.2 km over W 30-3000 m (run_3)"
+scope: "toy and dataset"
+provenance:
+  class: DERIVED
+  source: "runs/run_2, run_3"
+admitted_by: void
+test_results:
+  - test: void
+    run: run_3
+    result: "dataset lambda median 1562 m at W 30-60 m, 3186 m at W 1000-3000 m"
+    value: "a factor 2 in lambda over a factor 50 in W"
+open_issues:
+  - "the same estimator failure appears in the dataset and in the toy; neither reading of lam/W is admissible until the estimator is shown to resolve bends at the width studied"
+depends_on: []
+status: candidate

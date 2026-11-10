@@ -1,0 +1,7 @@
+run_2  slot-1 probe on the toy  (DERIVED; recomputed: python3 runs/run_2.py)
+case                     lam/W med  p25..p75     sinuosity med  cutoffs/1k  sed verdict
+base s0 (run_1)            8.69   6.84..10.04    2.39          7.50   CLOSED
+neck 2 W                   7.34   6.74..8.16     2.43          9.50   CLOSED
+neck 0.5 W                 7.78   7.17..8.30     2.39          9.00   CLOSED
+ds 0.25 W                  2.62   2.45..2.88     1.90          2.50   CLOSED
+aspect 10, 15000 steps     2.65   2.50..2.84     1.00          0.00   CLOSED

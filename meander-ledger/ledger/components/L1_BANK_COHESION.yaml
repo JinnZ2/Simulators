@@ -1,0 +1,15 @@
+id: L1_BANK_COHESION
+layer: L1
+equation: void
+assumes: []
+if_assumption_fails: void
+scope: void
+provenance:
+  class: PROPOSED
+  source: "work order: bank material; nothing built"
+admitted_by: void
+test_results: []
+open_issues:
+  - "the dataset carries mapped surface geology (MAJOR1), not bank material; the toy carries one erodibility E"
+depends_on: []
+status: placeholder

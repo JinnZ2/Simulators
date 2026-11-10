@@ -1,0 +1,19 @@
+id: L3_HELICAL_FLOW
+layer: L3
+equation: void
+assumes:
+  - id: A1
+    text: "secondary flow drives outer-bank erosion and inner point-bar deposition (work order, recalled)"
+    block: void
+if_assumption_fails:
+  A1: void
+scope: void
+provenance:
+  class: PROPOSED
+  source: "work order OBSERVED list, recalled not checked"
+admitted_by: void
+test_results: []
+open_issues:
+  - "not resolved in the toy; enters only as the upstream-weighted near-bank velocity"
+depends_on: []
+status: placeholder

@@ -1,0 +1,23 @@
+id: L0_WATER_BUDGET
+layer: L0
+equation: "Q_in - Q_out"
+assumes:
+  - id: A1
+    text: "steady discharge, no storage, no losses"
+    block: AB_STEADY_Q
+if_assumption_fails:
+  A1: "a field record with seepage, evaporation or tributary inflow the toy does not carry"
+scope: "toy only"
+provenance:
+  class: DERIVED
+  source: "runs/run_1 (recomputed)"
+admitted_by: void
+test_results:
+  - test: T_IDENTITY_FLAGGED
+    run: run_1
+    result: IDENTITY
+    value: "misclosure 0 because both sides are the same parameter"
+open_issues:
+  - "closes by identity; carries no information. Kept candidate, never admitted on this test"
+depends_on: []
+status: candidate

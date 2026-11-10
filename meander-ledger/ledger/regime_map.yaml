@@ -1,0 +1,135 @@
+id: REGIME_MAP
+status: placeholder
+regimes:
+  - creek
+  - mid_river
+  - large_river
+  - cohesive_bank
+  - vegetated
+  - supply_limited
+cells:
+  BR_MASS_BALANCE:
+    creek:
+      fit: void
+      l0_closure: void
+      ablation: void
+    mid_river:
+      fit: void
+      l0_closure: void
+      ablation: void
+    large_river:
+      fit: void
+      l0_closure: void
+      ablation: void
+    cohesive_bank:
+      fit: void
+      l0_closure: void
+      ablation: void
+    vegetated:
+      fit: void
+      l0_closure: void
+      ablation: void
+    supply_limited:
+      fit: void
+      l0_closure: void
+      ablation: void
+  BR_KINEMATIC_BEND:
+    creek:
+      fit: void
+      l0_closure: void
+      ablation: void
+    mid_river:
+      fit: void
+      l0_closure: void
+      ablation: void
+    large_river:
+      fit: void
+      l0_closure: void
+      ablation: void
+    cohesive_bank:
+      fit: void
+      l0_closure: void
+      ablation: void
+    vegetated:
+      fit: void
+      l0_closure: void
+      ablation: void
+    supply_limited:
+      fit: void
+      l0_closure: void
+      ablation: void
+  BR_LINEAR_BEND_THEORY:
+    creek:
+      fit: void
+      l0_closure: void
+      ablation: void
+    mid_river:
+      fit: void
+      l0_closure: void
+      ablation: void
+    large_river:
+      fit: void
+      l0_closure: void
+      ablation: void
+    cohesive_bank:
+      fit: void
+      l0_closure: void
+      ablation: void
+    vegetated:
+      fit: void
+      l0_closure: void
+      ablation: void
+    supply_limited:
+      fit: void
+      l0_closure: void
+      ablation: void
+  BR_OBSERVATION_DS_THAPA:
+    creek:
+      fit: void
+      l0_closure: void
+      ablation: void
+    mid_river:
+      fit: void
+      l0_closure: void
+      ablation: void
+    large_river:
+      fit: void
+      l0_closure: void
+      ablation: void
+    cohesive_bank:
+      fit: void
+      l0_closure: void
+      ablation: void
+    vegetated:
+      fit: void
+      l0_closure: void
+      ablation: void
+    supply_limited:
+      fit: void
+      l0_closure: void
+      ablation: void
+  BR_EMPIRICAL_SCALING:
+    creek:
+      fit: void
+      l0_closure: void
+      ablation: void
+    mid_river:
+      fit: void
+      l0_closure: void
+      ablation: void
+    large_river:
+      fit: void
+      l0_closure: void
+      ablation: void
+    cohesive_bank:
+      fit: void
+      l0_closure: void
+      ablation: void
+    vegetated:
+      fit: void
+      l0_closure: void
+      ablation: void
+    supply_limited:
+      fit: void
+      l0_closure: void
+      ablation: void

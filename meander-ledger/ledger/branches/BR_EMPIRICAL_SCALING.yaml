@@ -1,0 +1,12 @@
+id: BR_EMPIRICAL_SCALING
+family: "empirical lambda ~ k W scaling (Leopold & Wolman, recalled)"
+status: placeholder
+components:
+  - L5_LEOPOLD_WOLMAN_RATIO
+links:
+  - BR_OBSERVATION_DS_THAPA
+convergence_anchors: []
+runs: []
+open_issues:
+  - "source not read; the open dataset in hand cannot test it"
+note: void

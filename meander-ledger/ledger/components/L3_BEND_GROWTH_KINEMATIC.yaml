@@ -1,0 +1,41 @@
+id: L3_BEND_GROWTH_KINEMATIC
+layer: L3
+equation: "M_i = Omega R0_i + Gamma sum_k R0_{i-k} G_k / sum G_k ; G_k = exp(-alpha k ds) ; R0 = E W C ; alpha = 2 Cf / H"
+assumes:
+  - id: A1
+    text: "H and Cf act only through alpha"
+    block: AB_ALPHA_ONLY
+  - id: A2
+    text: "width is constant in space and time"
+    block: AB_FIXED_WIDTH
+  - id: A3
+    text: "the form reduces Ikeda, Parker & Sawai 1981 linear bend theory (recalled, not read)"
+    block: void
+  - id: A4
+    text: "results converge as node spacing shrinks"
+    block: void
+if_assumption_fails:
+  A1: "H and Cf varied at fixed alpha give different planforms; in this code they give identical bytes (MC_003)"
+  A2: "width oscillation with curvature, which the toy cannot show"
+  A3: "a read of the paper showing a different weighting kernel or a missing term"
+  A4: "lam/W moves when ds is halved: 8.69 at ds 0.5 W, 2.62 at ds 0.25 W (run_2). A4 FAILS"
+scope: "toy only; one seed per ablation; ds 0.5 W"
+provenance:
+  class: PROPOSED
+  source: "form from recall; behaviour DERIVED in runs/run_1, run_2"
+admitted_by: void
+test_results:
+  - test: void
+    run: run_1
+    result: "lam/W 7.96..8.80 over seeds 0-2"
+    value: "steady state after burn 2000"
+  - test: void
+    run: run_2
+    result: "lam/W 2.62 at ds 0.25 W"
+    value: "not grid-converged"
+open_issues:
+  - "not grid-converged (A4 fails): no wavelength from this toy is admissible"
+  - "Omega -1, Gamma 2.5 are recalled Howard-Knutson weights, not checked"
+depends_on:
+  - L4_CUTOFF
+status: candidate
