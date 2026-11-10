@@ -710,3 +710,62 @@ Open questions (B):
 - PR #253's base is claude/tool-finder (#252): merge #252 first or retarget.
 
 Still outstanding from earlier rounds: the ICSC_v0.2_spec.md attachment never arrived.
+
+## Follow-up (2026-11-09, relayed 2026-11-10): ICSC v0.2 rev, law-audit-card counts, merges
+
+| item | state | notes |
+|---|---|---|
+| 1 orientation-chamber status | DONE | Built before this follow-up arrived: PR #254, SHAs d9682a7, ac269c5, plus merge c6f0581 (main into the branch, both CLAUDE.md entries kept). Reported in the section above. |
+| 2 aggregate.py two counts | DONE | tested_any (last_tested != VOID) 1 of 3; tested_against_purpose 0 of 3: it needs stated_purpose != VOID and a measurand match DECLARED on the card (last_tested.value.matches_purpose true / false / null), never inferred. Readings per card: NOT_TESTED / AGAINST_PURPOSE / OTHER_MEASURAND / UNRESOLVED. The EU marker (tested 2019, measurand "resilience of the marker (SY124) to common removal methods") reads UNRESOLVED because its stated purpose is VOID. Labels renamed; ILLUSTRATIVE kept. |
+| 3 TAF divergence | DONE, option c (Kavik's pick) | (a) TAF PR #72: a dated note in TAF CLAUDE.md audit notes as a candidate correction (undeclared intent as a third state, e.g. `[OUT OF SCOPE -- INTENT UNDECLARED]`); TAF code untouched. (b) law-audit-card README: "Divergence from TAF (recorded 2026-11-10)". |
+| 4 self-firing scanner specimen | DONE | `ICSC/LIVE_SPECIMENS.md` item 3: `law-audit-card/card.py` `tool_writes_no_disposition` first returned its own word list as hits (true source: apparatus; assigned: observed system, section 9.2). Fixed by excluding the checker's own body by AST node; planted case (`X = {"value": "RETIRE"}` appended) must return exactly `['RETIRE']`. Both checked in `check_v02.py`. |
+| 5 ICSC v0.2 rev | DONE | Appended verbatim to `ICSC/SPEC_v0.2.md` under "rev 2026-11-09 11:44", sha256 8090a066...f8f43b; the original landing above the heading is unchanged (sha256 57735849...68791e, checked). Against the original the revision differs in exactly three regions (difflib, checked): section 2 assumption coverage (never COMPLETE), section 4.1 G1 control circularity (CONDITIONAL(circular_control), non-circular routes), section 12 T30 renamed + T30b. This unblocks the round-7 item 1 (the section 4.1 / T30 rename and T30b), which was BLOCKED on this text. |
+
+Selftest lines (throwaway worktree at 06fa86c), verbatim:
+
+```
+== law-audit-card with TAF
+checks: 30   failed: 0   skipped: 0
+== without TAF
+checks: 30   failed: 0   skipped: 5
+== ICSC
+NOT_RUN: sibling checkout absent: .../cross-domain-toolkit/falsification_ledger
+NOT_RUN: sibling checkout absent: .../cross-domain-toolkit/multi_substrate_calibration
+checks: 18   failed: 0
+checks: 5   failed: 0            (check_landing.py)
+== finder
+checks: 17   failed: 0
+```
+
+With the sibling checkouts present (scratch worktree): ICSC/check_v02.py `checks: 20   failed: 0`.
+
+Files changed: law-audit-card/{aggregate.py, card.py, README.md, cards/eu_marker.json,
+samples/{aggregate,cards}.sample.txt, tests/test_card.py}; ICSC/{SPEC_v0.2.md (appended),
+LIVE_SPECIMENS.md (new), check_v02.py, README.md}; CLAUDE.md; TAF CLAUDE.md (PR #72).
+
+### Merges ("Merge all", scope: everything open from this work, each after CI completed)
+
+| repo | PR | merge SHA | CI at merge |
+|---|---|---|---|
+| Simulators | #252 TOOL_FINDER, tail-check, cutoff-attribution | b1247e2 | simulator-smoke, grounding-layers success |
+| Simulators | #254 orientation-chamber | 893b266 | simulator-smoke, grounding-layers success (after main merged in, c6f0581) |
+| Simulators | #253 law-audit-card + this report | merged after this commit; SHA in the session reply | waits for its CI |
+| thermodynamic-accountability-framework | #71 Label Welds docx | 732a25b | check success |
+| thermodynamic-accountability-framework | #72 undeclared-intent note | 273f883 | check success (after main merged in, ab6912c) |
+| drift-archive-audit | #9 TOOL_FINDER pointer | 944d95f | no checks configured |
+| differential-frame-core | #6 TOOL_FINDER pointer | f38772e | no checks configured |
+| chain-position-detectability | #6 TOOL_FINDER pointer | 97ede52 | no checks configured |
+| Polyhedral-Intelligence | #17 TOOL_FINDER pointer | c800d0d | no checks configured |
+| Noise-as-Information-Sensor | #9 TOOL_FINDER pointer | b21edcb | no checks configured |
+| AI-Consciousness-Sensors | #29 TOOL_FINDER pointer | ca825f0 | validate, test success |
+| Cross-Domain-Toolkit | #13 Finds-by sections | 880ee47 | no checks configured |
+| Shadow-Hunting | #9 Finds-by sections | 2b90572 | no checks configured |
+| JinnZ2 | #43 Finds-by section | 932283b | no checks configured |
+| method-layer | #30 Finds-by sections | 9f975ca | no checks configured |
+| decision-aperture | #4 TOOL_FINDER pointer | NOT MERGED (BLOCKED) | test (3.9) failure, environmental, same on main |
+
+Open questions:
+- decision-aperture #4 was not merged: `test (3.9)` fails because Python 3.9 is not available on the Ubuntu 26.04 runner image ("The version '3.9' with architecture 'x64' was not found"); main fails the same check the same way. Merging over a red check would bypass CI, so it is held. A workflow change (drop 3.9 or pin an older runner) is the owner's call.
+- Older open PRs from earlier work orders were not in this merge set and are untouched: TAF #53, #52; Simulators #246, #248, #249; method-layer #28; AI-Consciousness-Sensors #28; Rosetta-Shape-Core #50; PhysicsGuard #8; Mandala-Computing #34; infrastructure-stability-model #7; interdisciplinary-studies #6; Hardware-Store #4; geometric-optimization #7.
+- TAF's undeclared-intent default is recorded, not decided.
+- The design-basis-headers branches (12 repos) have no PRs and were not merged.
