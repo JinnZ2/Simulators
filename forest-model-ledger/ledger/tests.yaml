@@ -36,3 +36,9 @@ tests:
   - id: T_TK_BUDGET_CLOSURE_MOVED
     command: "python3 tests/test_l0.py"
     checks: "model.l0_audit re-exports ledger.toolkit.budget_closure: same function objects"
+  - id: T_LOG_LISTS_EVERY_CONSTANT
+    command: "python3 tests/test_l0.py"
+    checks: "LOG.md carries every DEFAULTS and INIT constant at its value in code"
+  - id: T_TK_NUDGE_COVERAGE_AND_FLAGS
+    command: "python3 tests/test_l0.py"
+    checks: "assumption_nudge refuses four bad nudge maps; flags a no-op nudge EXACT_ZERO and the planted leak as a budget failure; returns to anchor bit-identical"

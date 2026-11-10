@@ -1,0 +1,136 @@
+assumptions in scope: 25   with a nudge: 13   not nudgeable here: 12
+parameters: 32 in DEFAULTS; nudged under an assumption 26; owned by NO listed assumption ['P0', 'drain', 'drought', 'drought_sd', 'et', 'season']; never nudged []
+not nudged at all: INIT (7 values) and dt (dt is run_9 and run_10)
+
+seeds [0, 1, 2]   noise band: 2.0 x sd over anchor seeds [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]   [CHOICE]
+anchor mean (same seeds) and noise sd per output:
+  fires          mean      79.6667   sd     2.0683   smallest detectable change    5.2 %
+  T_mean         mean      38.8729   sd     0.7808   smallest detectable change    4.0 %
+  S_mean         mean       0.6462   sd     0.0255   smallest detectable change    7.9 %
+  F_mean         mean       1.0738   sd     0.0414   smallest detectable change    7.7 %
+  litter_mean    mean       5.5296   sd     0.2374   smallest detectable change    8.6 %
+  W_mean         mean       0.6142   sd     0.0165   smallest detectable change    5.4 %
+  leach_out      mean       5.5144   sd     0.2334   smallest detectable change    8.5 %
+  fire_out       mean     268.5050   sd     1.6737   smallest detectable change    1.2 %
+  grass_gone_yr  mean      19.3013   sd     0.6702   smallest detectable change    6.9 %
+
+component                A   nudge                      ret      N mis      W mis  largest move, then outputs outside noise (diff), then flags
+L0_N_BUDGET              A1  leak 0.3 (off-table path)  ok   -7.26e+01  +1.72e-12  largest  42.3 sd (fire_out)  outside: fires -20.3, S_mean -0.081, F_mean -0.661, fire_out -70.8   BUDGET_LEAK
+L0_N_BUDGET              A2  dep x1.1                   ok   +4.19e-11  +2.36e-12  largest  16.2 sd (fire_out)  outside: fires +8, S_mean +0.0582, fire_out +27.1   -
+L0_N_BUDGET              A2  dep x0.9                   ok   -1.88e-11  -1.93e-12  largest  16.4 sd (fire_out)  outside: fires -7.67, T_mean -1.65, S_mean -0.076, F_mean -0.0882, leach_out -0.492, fire_out -27.5   -
+L0_N_BUDGET              A3  void                        --  not nudgeable here: one currency is the state vector's shape; a second N form needs new pools
+L0_WATER_BUDGET          A1  void                        --  not nudgeable here: no off-table water path exists to switch on; the planted leak is N only
+L0_WATER_BUDGET          A2  void                        --  not nudgeable here: a second soil layer, snow or interception needs new pools
+L1_DECOMP_FIRST_ORDER    A1  void                        --  not nudgeable here: decomposer limitation needs a microbial pool (BR_MICROBE_EXPLICIT)
+L1_DECOMP_FIRST_ORDER    A2  kT x1.1                    ok   -5.01e-11  +2.10e-12  largest   0.8 sd (S_mean)  outside: none   ALL_INSIDE
+L1_DECOMP_FIRST_ORDER    A2  kT x0.9                    ok   -5.03e-11  +1.99e-12  largest   1.2 sd (S_mean)  outside: none   ALL_INSIDE
+L1_DECOMP_FIRST_ORDER    A2  kG x1.1                    ok   -5.04e-11  +1.01e-12  largest   0.7 sd (S_mean)  outside: none   ALL_INSIDE
+L1_DECOMP_FIRST_ORDER    A2  kG x0.9                    ok   -5.04e-11  +2.59e-12  largest   0.7 sd (S_mean)  outside: none   ALL_INSIDE
+L1_DECOMP_FIRST_ORDER    A2  Wh x1.1                    ok   -5.01e-11  +1.54e-12  largest   0.9 sd (leach_out)  outside: none   ALL_INSIDE
+L1_DECOMP_FIRST_ORDER    A2  Wh x0.9                    ok   -5.01e-11  +1.13e-12  largest   0.8 sd (leach_out)  outside: none   ALL_INSIDE
+L1_LEACHING              A1  void                        --  not nudgeable here: the functional form is fixed in the flux table; only its coefficient moves
+L1_LEACHING              A2  leach x1.1                 ok   -5.03e-11  +1.79e-12  largest   2.4 sd (leach_out)  outside: leach_out +0.567   -
+L1_LEACHING              A2  leach x0.9                 ok   -5.03e-11  +1.79e-12  largest   2.4 sd (leach_out)  outside: leach_out -0.553   -
+L1_UPTAKE_MM             A1  void                        --  not nudgeable here: well-mixed is the absence of space; needs a spatial model
+L1_UPTAKE_MM             A2  uT x1.1                    ok   -5.06e-11  +1.59e-12  largest   2.8 sd (S_mean)  outside: S_mean -0.0722, leach_out -0.618   -
+L1_UPTAKE_MM             A2  uT x0.9                    ok   -5.01e-11  +2.19e-12  largest   3.6 sd (S_mean)  outside: S_mean +0.0908, leach_out +0.81   -
+L1_UPTAKE_MM             A2  uG x1.1                    ok   -5.02e-11  +1.87e-12  largest   0.4 sd (grass_gone_yr)  outside: none   ALL_INSIDE
+L1_UPTAKE_MM             A2  uG x0.9                    ok   -5.03e-11  +1.52e-12  largest   0.4 sd (grass_gone_yr)  outside: none   ALL_INSIDE
+L1_UPTAKE_MM             A2  K x1.1                     ok   -5.00e-11  +5.93e-13  largest   2.3 sd (S_mean)  outside: S_mean +0.0594, leach_out +0.529   -
+L1_UPTAKE_MM             A2  K x0.9                     ok   -5.02e-11  +1.99e-12  largest   2.3 sd (S_mean)  outside: S_mean -0.0593, leach_out -0.514   -
+L2_FUNGAL_POOL           A1  void                        --  not nudgeable here: a second guild needs a second pool
+L2_FUNGAL_POOL           A2  mF x1.1                    ok   -5.05e-11  +1.84e-12  largest   4.0 sd (F_mean)  outside: F_mean -0.167   -
+L2_FUNGAL_POOL           A2  mF x0.9                    ok   -4.99e-11  +2.18e-12  largest   4.8 sd (F_mean)  outside: F_mean +0.198   -
+L2_GRASS_GROWTH          A1  mG x1.1                    ok   -5.02e-11  -9.68e-13  largest   2.7 sd (grass_gone_yr)  outside: grass_gone_yr -1.78   -
+L2_GRASS_GROWTH          A1  mG x0.9                    ok   -5.05e-11  +2.69e-12  largest   3.1 sd (grass_gone_yr)  outside: grass_gone_yr +2.1   -
+L2_GRASS_GROWTH          A2  void                        --  not nudgeable here: a seed bank or immigration is a new inflow row; none exists to switch on
+L2_TREE_GROWTH           A1  mT x1.1                    ok   -5.06e-11  +2.33e-12  largest   2.0 sd (F_mean)  outside: T_mean -1.58, F_mean -0.0838   -
+L2_TREE_GROWTH           A1  mT x0.9                    ok   -5.09e-11  +1.41e-12  largest   2.2 sd (F_mean)  outside: T_mean +1.67, F_mean +0.0891   -
+L2_TREE_GROWTH           A2  void                        --  not nudgeable here: age or size structure needs cohorts
+L3_LIGHT_CEILING         A1  KT,KG x10 (ceiling lifted) ok   -5.04e-11  -1.49e-12  largest  16.9 sd (S_mean)  outside: S_mean -0.431, leach_out -3.59   -
+L3_LIGHT_CEILING         A2  KT x1.1                    ok   -5.02e-11  +1.57e-12  largest   4.4 sd (S_mean)  outside: S_mean -0.112, leach_out -0.903   -
+L3_LIGHT_CEILING         A2  KT x0.9                    ok   -5.02e-11  +2.62e-12  largest   8.1 sd (S_mean)  outside: S_mean +0.208, leach_out +1.78   -
+L3_LIGHT_CEILING         A2  KG x1.1                    ok   -5.02e-11  +2.75e-12  largest   0.4 sd (grass_gone_yr)  outside: none   ALL_INSIDE
+L3_LIGHT_CEILING         A2  KG x0.9                    ok   -5.02e-11  +1.92e-12  largest   0.4 sd (grass_gone_yr)  outside: none   ALL_INSIDE
+L3_LIGHT_CEILING         A2  aG x1.1                    ok   -5.01e-11  +2.65e-12  largest   0.0 sd (grass_gone_yr)  outside: none   ALL_INSIDE
+L3_LIGHT_CEILING         A2  aG x0.9                    ok   -5.02e-11  -1.92e-12  largest   0.0 sd (grass_gone_yr)  outside: none   ALL_INSIDE
+L3_LIGHT_CEILING         A2  aT x1.1                    ok   -5.03e-11  -2.15e-12  largest   0.3 sd (grass_gone_yr)  outside: none   ALL_INSIDE
+L3_LIGHT_CEILING         A2  aT x0.9                    ok   -5.02e-11  +1.49e-12  largest   0.4 sd (grass_gone_yr)  outside: none   ALL_INSIDE
+L3_TREE_FUNGUS_EXCHANGE  A1  Kf x10 (near-linear)       ok   -5.03e-11  +1.65e-12  largest  25.9 sd (F_mean)  outside: T_mean +7.52, S_mean +0.556, F_mean -1.07, litter_mean -0.504, W_mean -0.0535, leach_out +3.33, fire_out -9.34   -
+L3_TREE_FUNGUS_EXCHANGE  A2  void                        --  not nudgeable here: a C-denominated payment needs a C budget, which is VOID
+L3_TREE_FUNGUS_EXCHANGE  A3  b x1.1                     ok   -5.05e-11  +1.39e-12  largest   1.4 sd (S_mean)  outside: none   ALL_INSIDE
+L3_TREE_FUNGUS_EXCHANGE  A3  b x0.9                     ok   -5.02e-11  +1.32e-12  largest   1.4 sd (S_mean)  outside: none   ALL_INSIDE
+L3_TREE_FUNGUS_EXCHANGE  A3  c x1.1                     ok   -5.00e-11  -1.95e-12  largest   3.6 sd (F_mean)  outside: F_mean +0.147   -
+L3_TREE_FUNGUS_EXCHANGE  A3  c x0.9                     ok   -5.02e-11  +1.51e-12  largest   3.8 sd (F_mean)  outside: F_mean -0.157   -
+L3_TREE_FUNGUS_EXCHANGE  A3  Kf x1.1                    ok   -4.99e-11  +2.62e-12  largest   1.8 sd (F_mean)  outside: none   ALL_INSIDE
+L3_TREE_FUNGUS_EXCHANGE  A3  Kf x0.9                    ok   -5.01e-11  +2.19e-12  largest   1.8 sd (F_mean)  outside: none   ALL_INSIDE
+L4_FIRE_FUEL_MOISTURE    A1  void                        --  not nudgeable here: threshold sharpness is in the event test, not a parameter
+L4_FIRE_FUEL_MOISTURE    A2  void                        --  not nudgeable here: partial-stand fire needs space (BR_FIRE_PERCOLATION)
+L4_FIRE_FUEL_MOISTURE    A3  fuel_th x1.1               ok   -5.02e-11  +2.74e-12  largest   3.1 sd (fires)  outside: fires -6.33   -
+L4_FIRE_FUEL_MOISTURE    A3  fuel_th x0.9               ok   -5.00e-11  +1.79e-12  largest   3.2 sd (fires)  outside: fires +6.67, S_mean -0.0564, litter_mean -0.492   -
+L4_FIRE_FUEL_MOISTURE    A3  W_dry x1.1                 ok   -5.01e-11  +1.70e-12  largest   1.9 sd (S_mean)  outside: none   ALL_INSIDE
+L4_FIRE_FUEL_MOISTURE    A3  W_dry x0.9                 ok   -5.04e-11  +2.34e-12  largest   3.4 sd (fires)  outside: fires -7, T_mean +1.66, S_mean +0.0857, F_mean +0.0889, litter_mean +0.58, leach_out +0.504   -
+L4_FIRE_FUEL_MOISTURE    A3  p_ign x1.1                 ok   -5.03e-11  +2.77e-12  largest   0.5 sd (fire_out)  outside: none   ALL_INSIDE
+L4_FIRE_FUEL_MOISTURE    A3  p_ign x0.9                 ok   -5.02e-11  -1.21e-12  largest   0.3 sd (fires)  outside: none   ALL_INSIDE
+L4_FIRE_FUEL_MOISTURE    A3  burn x1.1                  ok   -5.02e-11  +1.96e-12  largest   3.2 sd (fires)  outside: fires -6.67   -
+L4_FIRE_FUEL_MOISTURE    A3  burn x0.9                  ok   -5.01e-11  +2.12e-12  largest   4.2 sd (fires)  outside: fires +8.67   -
+L4_FIRE_FUEL_MOISTURE    A3  vol x1.1                   ok   -5.02e-11  +1.58e-12  largest   3.2 sd (fires)  outside: fires -6.67, S_mean -0.08, leach_out -0.471   -
+L4_FIRE_FUEL_MOISTURE    A3  vol x0.9                   ok   -5.01e-11  +2.80e-12  largest   3.9 sd (fires)  outside: fires +8, S_mean +0.0755, leach_out +0.503   -
+L4_FIRE_FUEL_MOISTURE    A3  kill_G x1.1                ok   -4.98e-11  +1.19e-12  largest   0.3 sd (grass_gone_yr)  outside: none   ALL_INSIDE
+L4_FIRE_FUEL_MOISTURE    A3  kill_G x0.9                ok   -5.03e-11  +2.53e-12  largest   0.3 sd (grass_gone_yr)  outside: none   ALL_INSIDE
+L4_FIRE_FUEL_MOISTURE    A3  kill_T x1.1                ok   -5.00e-11  -1.40e-12  largest   0.6 sd (F_mean)  outside: none   ALL_INSIDE
+L4_FIRE_FUEL_MOISTURE    A3  kill_T x0.9                ok   -5.02e-11  +2.79e-12  largest   0.5 sd (fire_out)  outside: none   ALL_INSIDE
+UNOWNED                  water P0 x1.1                    ok   -5.06e-11  -3.40e-12  largest   3.3 sd (leach_out)  outside: fires -5.67, T_mean +1.69, F_mean +0.0903, W_mean +0.0473, leach_out +0.781   -
+UNOWNED                  water P0 x0.9                    ok   -5.03e-11  -7.01e-13  largest   3.1 sd (W_mean)  outside: W_mean -0.0506, leach_out -0.573   -
+UNOWNED                  water season x1.1                ok   -5.02e-11  -2.73e-12  largest   0.3 sd (litter_mean)  outside: none   ALL_INSIDE
+UNOWNED                  water season x0.9                ok   -5.04e-11  +1.71e-12  largest   0.3 sd (fires)  outside: none   ALL_INSIDE
+UNOWNED                  water et x1.1                    ok   -5.00e-11  +2.61e-12  largest   1.3 sd (W_mean)  outside: none   ALL_INSIDE
+UNOWNED                  water et x0.9                    ok   -5.05e-11  +2.64e-12  largest   1.7 sd (leach_out)  outside: none   ALL_INSIDE
+UNOWNED                  water drain x1.1                 ok   -5.01e-11  +2.24e-12  largest   1.4 sd (W_mean)  outside: none   ALL_INSIDE
+UNOWNED                  water drain x0.9                 ok   -5.03e-11  -2.38e-12  largest   1.8 sd (leach_out)  outside: none   ALL_INSIDE
+UNOWNED                  water drought_sd x1.1            ok   -5.01e-11  +9.44e-13  largest   0.3 sd (litter_mean)  outside: none   ALL_INSIDE
+UNOWNED                  water drought_sd x0.9            ok   -5.03e-11  -1.61e-12  largest   0.5 sd (fires)  outside: none   ALL_INSIDE
+UNOWNED                  water drought +0.1               ok   -5.03e-11  -7.01e-13  largest   3.1 sd (W_mean)  outside: W_mean -0.0506, leach_out -0.573   -
+
+nudges run 64   assumptions not nudgeable here 12
+returned to anchor bit-identical: 64 of 64
+budgets closed under the nudge:   63 of 64
+EXACT_ZERO: 0
+ALL_INSIDE: 33
+    L1_DECOMP_FIRST_ORDER.A2 kT x1.1
+    L1_DECOMP_FIRST_ORDER.A2 kT x0.9
+    L1_DECOMP_FIRST_ORDER.A2 kG x1.1
+    L1_DECOMP_FIRST_ORDER.A2 kG x0.9
+    L1_DECOMP_FIRST_ORDER.A2 Wh x1.1
+    L1_DECOMP_FIRST_ORDER.A2 Wh x0.9
+    L1_UPTAKE_MM.A2 uG x1.1
+    L1_UPTAKE_MM.A2 uG x0.9
+    L3_LIGHT_CEILING.A2 KG x1.1
+    L3_LIGHT_CEILING.A2 KG x0.9
+    L3_LIGHT_CEILING.A2 aG x1.1
+    L3_LIGHT_CEILING.A2 aG x0.9
+    L3_LIGHT_CEILING.A2 aT x1.1
+    L3_LIGHT_CEILING.A2 aT x0.9
+    L3_TREE_FUNGUS_EXCHANGE.A3 b x1.1
+    L3_TREE_FUNGUS_EXCHANGE.A3 b x0.9
+    L3_TREE_FUNGUS_EXCHANGE.A3 Kf x1.1
+    L3_TREE_FUNGUS_EXCHANGE.A3 Kf x0.9
+    L4_FIRE_FUEL_MOISTURE.A3 W_dry x1.1
+    L4_FIRE_FUEL_MOISTURE.A3 p_ign x1.1
+    L4_FIRE_FUEL_MOISTURE.A3 p_ign x0.9
+    L4_FIRE_FUEL_MOISTURE.A3 kill_G x1.1
+    L4_FIRE_FUEL_MOISTURE.A3 kill_G x0.9
+    L4_FIRE_FUEL_MOISTURE.A3 kill_T x1.1
+    L4_FIRE_FUEL_MOISTURE.A3 kill_T x0.9
+    UNOWNED.water season x1.1
+    UNOWNED.water season x0.9
+    UNOWNED.water et x1.1
+    UNOWNED.water et x0.9
+    UNOWNED.water drain x1.1
+    UNOWNED.water drain x0.9
+    UNOWNED.water drought_sd x1.1
+    UNOWNED.water drought_sd x0.9
+
+expected failure signatures:
+  L0_N_BUDGET.A1 leak 0.3 (off-table path): expected 'N LEAK; misclosure grows with run length'   got verdicts {'N': ['LEAK'], 'water': ['CLOSED']}  T_mean 37.84  outside ['fires', 'S_mean', 'F_mean', 'fire_out']
+  L3_LIGHT_CEILING.A1 KT,KG x10 (ceiling lifted): expected 'runaway (run 4: no ceiling)'   got verdicts {'N': ['CLOSED'], 'water': ['CLOSED']}  T_mean 38.99  outside ['S_mean', 'leach_out']

@@ -21,7 +21,17 @@ test_results:
     run: run_4
     result: "whole > parts only at low competition + strong fungal benefit; runaway = no ceiling"
     value: "reported, not recomputed"
+  - test: void
+    run: run_11
+    result: "ceiling lifted (KT, KG x10): NO runaway. Tree N 38.99 against 38.87; soil N -0.43 (16.9 sd); leaching -3.59"
+    value: "recomputed"
+  - test: void
+    run: run_11
+    result: "KT x1.1 / x0.9 moves soil N -0.112 / +0.208 and leaching -0.90 / +1.78; KG, aG, aT inside noise"
+    value: "recomputed"
 open_issues:
+  - "the failure signature written for A1 (runaway without a ceiling, run 4) does NOT appear in the conserved base (run_11). There the ceiling modulates uptake and soil N; what bounds tree N is N supply. Run 4's runaway comes from a model with no N audit, so it may be a property of a missing budget rather than of a missing ceiling. The A1 signature is left as written and is contradicted in this scope"
+  - "KG, aG and aT are inert on every output once grasses are gone (run_11)"
   - "the ceiling was added to stop a runaway; its form is a patch, not a measurement"
 depends_on: []
 status: candidate

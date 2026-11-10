@@ -125,7 +125,41 @@ def T_TK_BUDGET_CLOSURE_MOVED():
     assert l0_audit.audit is budget_closure.audit and l0_audit.verdict is budget_closure.verdict
 
 
-TESTS = [T_L0_SEED_WIRED_TO_IGNITION, T_L0_RESIDUAL_IS_DEPOSITION_COUNTER, T_TK_CARD_READINGS, T_TK_BUDGET_CLOSURE_MOVED,
+def T_LOG_LISTS_EVERY_CONSTANT():
+    import re
+    text = open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "LOG.md")).read()
+    for table in (base.DEFAULTS, base.INIT):
+        for k, v in table.items():
+            assert re.search(r"^%s\s+%s(\s|$)" % (re.escape(k), re.escape(repr(v))), text, re.M), f"LOG.md does not carry {k} = {v!r}"
+
+
+def T_TK_NUDGE_COVERAGE_AND_FLAGS():
+    from ledger.toolkit import assumption_nudge as an
+    scope = an.scope_assumptions(["L1_LEACHING"])
+    full = {("L1_LEACHING", "A1"): (an.NOT_NUDGEABLE, "form fixed"), ("L1_LEACHING", "A2"): [dict(label="leach x1.1", params=dict(leach=0.055))]}
+    an.check_coverage(scope, full)
+    for bad in ({("L1_LEACHING", "A2"): full[("L1_LEACHING", "A2")]},                       # an assumption dropped
+                {**full, ("L1_LEACHING", "A1"): (an.NOT_NUDGEABLE, " ")},             # reason blank
+                {**full, ("L1_LEACHING", "A2"): []},                                  # empty nudge list
+                {**full, ("L1_NOPE", "A1"): [dict(label="x", params={})]}):           # not in scope
+        try:
+            an.check_coverage(scope, bad)
+        except an.NudgeError:
+            continue
+        raise AssertionError("bad nudge map accepted")
+    sim = lambda seed=0, params=None: base.simulate(seed=seed, years=20, params=params)
+    outs = lambda r: dict(T=float(r["y"][base.IX["T"]]), fires=float(len(r["events"])))
+    m = {("L1_LEACHING", "A1"): [dict(label="no-op", params={}), dict(label="leak", params=dict(leak=0.3))],
+         ("L1_LEACHING", "A2"): [dict(label="leach x2", params=dict(leach=0.1))]}
+    res = an.run(m, sim, outs, l0_audit.audit, (base.DEFAULTS, base.INIT), seeds=(0, 1), noise_seeds=(0, 1, 2, 3))
+    rows = {r["label"]: r for r in res["rows"]}
+    assert rows["no-op"]["flags"] == ["EXACT_ZERO"], rows["no-op"]["flags"]          # a nudge that reaches nothing is flagged
+    assert any(f.startswith("BUDGET_") for f in rows["leak"]["flags"]) and not rows["leak"]["closed"]
+    assert "EXACT_ZERO" not in rows["leach x2"]["flags"] and rows["leach x2"]["closed"]
+    assert all(r["returned"] for r in res["rows"])
+
+
+TESTS = [T_LOG_LISTS_EVERY_CONSTANT, T_TK_NUDGE_COVERAGE_AND_FLAGS, T_L0_SEED_WIRED_TO_IGNITION, T_L0_RESIDUAL_IS_DEPOSITION_COUNTER, T_TK_CARD_READINGS, T_TK_BUDGET_CLOSURE_MOVED,
          T_L0_N_CLOSURE, T_L0_WATER_CLOSURE, T_L0_DT_HALF, T_L0_LEAK_DETECTED, T_L0_NOISE_ARM,
          T_L0_VOID_NEVER_CLOSED, T_L0_VOID_TERMS_PRINTED, T_L0_FIRE_EVENT_CONSERVES]
 

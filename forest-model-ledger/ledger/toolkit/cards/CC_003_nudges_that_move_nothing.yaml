@@ -1,0 +1,30 @@
+id: CC_003_nudges_that_move_nothing
+observation: "33 of 64 nudges on run_9 leave every output inside noise; lifting the light ceiling tenfold produces no runaway (run_11)"
+trigger: "nudging an assumption moves nothing: something may be absorbing the change"
+slots:
+  shared_constraint:
+    state: supported
+    evidence: "the N budget fixes throughput: exports must equal deposition less pool change. dep x1.1 / x0.9 moves fire export +27.1 / -27.5 (16 sd), about 10 percent of 268.5, and nothing else moves it except the planted leak and Kf x10. With the ceiling lifted (KT, KG x10) tree N stays at 38.99 against 38.87 while soil N falls 0.43 (16.9 sd) and leaching falls 3.59: trees are bounded by N supply, not by the ceiling"
+  local_normal_form:
+    state: void
+    evidence: void
+  statistical_artifact:
+    state: supported
+    evidence: "at 3 seeds the smallest detectable change is 4.0 to 8.6 percent on eight outputs and 1.2 percent on fire export, against a 10 percent nudge. 10 ALL_INSIDE nudges sit at 1.2 to 1.9 sd (kT x0.9, b x1.1, b x0.9, Kf x1.1, Kf x0.9, W_dry x1.1, et x1.1, et x0.9, drain x1.1, drain x0.9): unresolved, not shown inert"
+  numerical_artifact:
+    state: ruled_out
+    evidence: "EXACT_ZERO 0 of 64: every nudge changed the end state, so every parameter is wired; the anchor came back bit-identical 64 of 64"
+  low_dim_projection:
+    state: supported
+    evidence: "grasses are gone by year 19 of 300, and eight of nine outputs are read over years 100-300 or carry no grass term. The ten grass-side nudges (uG, KG, aG, aT, kill_G) can reach only grass_gone_yr and move it 0.0 to 0.4 sd"
+  none_of_above:
+    state: void
+    evidence: void
+reading_declared: OPEN
+branch: void
+runs:
+  - run_11
+open_issues:
+  - "local_normal_form not looked at. First thing to check: the fire cycle as a relaxation oscillator. p_ign x1.1 / x0.9 moves fires 0.5 / 0.3 sd while fuel_th, burn and vol move them 3.1 to 4.2 sd, which is what a threshold reset would give; no run separates it"
+  - "the three supported slots are not separated from each other: no ablation tool exists. A run at larger nudges and 10 seeds would split underpowered from absorbed"
+  - "decomposition (kT, kG, Wh) and water (season, et, drain, drought_sd) nudges are inside noise with no slot assigned to them specifically"

@@ -6,7 +6,7 @@ admitted it. It does not hold answers.
 
 Read `CLAUDE.md` first: it carries the METHOD BRIEF, which governs before the work order.
 Work order: `WORK_ORDER.md` (verbatim, co-authored, Kavik + Claude, 2026-11-10).
-Claims: `CLAIM_TABLE.md`, `FML_001..017`. CC0. *(non-stdlib: numpy)*
+Claims: `CLAIM_TABLE.md`, `FML_001..023`; constants in `LOG.md`. CC0. *(non-stdlib: numpy)*
 
 ```text
 ledger/components/*.yaml        one equation each: layer L0..L5, assumes, if_assumption_fails,
@@ -46,12 +46,12 @@ a void budget is VOID    never CLOSED, never 0; listed beside every overall verd
 
 ```text
 components   3 admitted / 15 candidate / 4 placeholder / 2 rejected
-branches     5 candidate / 9 placeholder
+branches     5 candidate / 10 placeholder
 L0 budgets   N CLOSED, water CLOSED  |  C, P, energy VOID
 boundary     deposition, leaching, fire volatilisation live  |  fixation, dust, groundwater, animal transport void
 OBSERVED     0 entries. Everything is model output or a proposed form.
-toolkit      2 tools of the brief's 7  |  cards: 1 RESOLVED, 1 OPEN
-anchor       run_9 CANDIDATE: seeds PASS, budgets PARTIAL, independent budgets PARTIAL, nudges NOT_RUN
+toolkit      3 tools; 1 of the brief's 7  |  cards: 1 RESOLVED, 2 OPEN
+anchor       run_9 CANDIDATE: seeds PASS; budgets, nudges, independent budgets PARTIAL
 ```
 
 Counts come from `python3 tools/check_ledger.py`; if this block and that
@@ -67,6 +67,7 @@ python3 runs/run_9.py                     # reproduces runs/run_9.md
 python3 runs/run_10.py                    # the too-smooth trigger; reproduces samples/run_10.sample.txt
 ```
 
-Python 3, numpy (`requirements.txt`). Pinned outputs in `samples/`. The work order allows scipy; nothing uses it yet. YAML is read
+Python 3, numpy (`requirements.txt`). scipy installed on a later attempt in the build
+environment; the base stays on its own RK4 because the candidate anchor pins that code. Pinned outputs in `samples/`. The work order allows scipy; nothing uses it yet. YAML is read
 by `tools/miniyaml.py` (a strict subset, stdlib); PyYAML, when present, is used
 only to cross-check that reader.

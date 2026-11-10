@@ -37,6 +37,10 @@ test_results:
     run: run_10
     result: PASS
     value: "bare counter +5.008e-11 against model -5.062e-11 at dt 1/52; same match at 1/104 and 1/208"
+  - test: T_TK_NUDGE_COVERAGE_AND_FLAGS
+    run: run_11
+    result: "N CLOSED under 63 of 64 nudges; the one LEAK is the planted off-table path (-72.6), which is A1's written signature"
+    value: "recomputed"
 open_issues:
   - "the residual the audit reports is roundoff in the deposition COUNTER, not in the pools (run_10, CC_001); the misclosure number therefore measures the bookkeeping at this level, and grows as dt shrinks"
   - "closure holds by construction for anything routed through the flux table; the test shows no path outside the table, and says nothing about whether any flux is right"

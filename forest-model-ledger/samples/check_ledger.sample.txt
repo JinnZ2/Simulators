@@ -1,6 +1,6 @@
 components {'admitted': 3, 'candidate': 15, 'placeholder': 4, 'rejected': 2}
-branches   {'admitted': 0, 'candidate': 5, 'placeholder': 9, 'rejected': 0}
-blocks 6  runs 10  tests 12
-toolkit 2 tools  cards {'RESOLVED': 1, 'OPEN': 1}  anchors {'ANCHOR_run9': 'candidate'}
+branches   {'admitted': 0, 'candidate': 5, 'placeholder': 10, 'rejected': 0}
+blocks 6  runs 11  tests 14
+toolkit 3 tools  cards {'RESOLVED': 1, 'OPEN': 2}  anchors {'ANCHOR_run9': 'candidate'}
 note: PyYAML cross-check: ran
 OK (0 failures)

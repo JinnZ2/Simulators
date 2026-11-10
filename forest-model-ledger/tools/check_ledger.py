@@ -175,7 +175,7 @@ def check(run_tests=False):
         for r in c["runs"]:
             if r not in runs:
                 F(f"card {n}: run {r} missing")
-    ANCHOR = ["id", "status", "git_tag", "git_commit", "tag_state", "run", "seed", "params", "scope", "code", "tests", "open_issues"]
+    ANCHOR = ["id", "status", "git_tag", "git_commit", "tag_state", "run", "seed", "params", "scope", "code", "tests", "known_errors", "open_issues"]
     FOUR = ["budgets_close_within_noise_rule", "holds_across_seeds", "holds_when_each_assumption_nudged",
             "independent_budgets_close_together"]
     anchors_ = {os.path.basename(p)[:-5]: miniyaml.load(p)

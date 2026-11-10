@@ -29,6 +29,10 @@ test_results:
     run: run_9
     result: "80 fires in 300 yr, interval 3.59 +/- 2.09 yr (seed 0); 75-81 over seeds 0-9"
     value: recomputed
+  - test: void
+    run: run_11
+    result: "fuel_th, burn, vol at 10 percent move fire count 3.1-4.2 sd; p_ign and kill_T inside noise"
+    value: "recomputed"
 open_issues:
   - "run 9 does not reproduce the 47: different parameters, and run 6's run length and parameters are not on record here; the two counts are not comparable"
   - "fire removes 270.7 of 300 N deposited in run 9; the stand's N balance is set by vol = 0.6, a hand-set number"

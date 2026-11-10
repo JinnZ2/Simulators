@@ -76,7 +76,7 @@ def load_all(root=HERE):
 
 if __name__ == "__main__":
     if "--selftest" in sys.argv:
-        print("refused: the checks live in tests/test_l0.py"); sys.exit(2)
+        print("refused: the checks live in forest-model-ledger/tests/test_l0.py"); sys.exit(2)
     for cid, card in load_all().items():
         reading, detail = read(card)
         print(f"{cid:44s} {reading:9s} {detail}")

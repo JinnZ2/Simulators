@@ -21,7 +21,12 @@ test_results:
     run: run_9
     result: "grass < 1e-6 by year 19.0-20.5 in 10 of 10 seeds"
     value: "also extinct with fire OFF (year 20.5)"
+  - test: void
+    run: run_11
+    result: "mG x1.1 / x0.9 moves the extinction year -1.78 / +2.10; uG, KG, aT, kill_G move it 0.3-0.4 sd"
+    value: "recomputed"
 open_issues:
+  - "no 10 percent nudge of any parameter keeps grasses: extinction year stays within 17.5-21.4 across all 64 nudges that were run (run_11, samples/run_11.json)"
   - "OPEN (run 6, reproduced in run 9): grasses go extinct"
   - "run 9 narrows it: extinction occurs with fire switched off, so in this rebuild it is competitive (soil N drawdown + shading), not fire-driven; whether that holds for the original run 6 is unknown"
   - "no parameter sweep has been run; one hand-set parameter point"

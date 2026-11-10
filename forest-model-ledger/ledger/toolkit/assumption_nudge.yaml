@@ -1,0 +1,26 @@
+id: assumption_nudge
+code: ledger/toolkit/assumption_nudge.py
+diagnoses:
+  - "an assumption whose nudge breaks a budget (LEAK / FAIL under the nudge)"
+  - "a nudge that moves nothing: EXACT_ZERO (reached nothing) or ALL_INSIDE (nothing detectable; something may be absorbing it)"
+  - "a predicted failure signature that does not appear when the assumption is broken"
+  - "parameters that no listed assumption owns"
+  - "an anchor that does not come back bit-identical after a nudge (state bleeding between runs)"
+inputs:
+  - "component ids in scope; per assumption a list of parameter overrides or the reason it cannot be nudged"
+  - "simulate, outputs and audit callables; seeds; noise seeds"
+outputs:
+  - "per nudge: returned-to-anchor, worst misclosure per live budget, each output's diff against the anchor, outputs outside noise, flags"
+cannot_see:
+  - "an assumption that is structural (space, cohorts, a second currency): 12 of 25 on run_9, listed as void with the reason"
+  - "an effect smaller than the noise band: 4 to 9 percent per output at 3 seeds, 1.2 percent on fire export"
+  - "interactions: one assumption is nudged at a time"
+  - "whether a nudge of 10 percent is the right size for that parameter"
+other_domains_it_could_see_into: void
+used_in:
+  - run_11
+open_issues:
+  - "K_NOISE = 2 and the nudge size are conventions"
+  - "the noise band is taken over 10 seeds and the nudged mean over 3; a nudge at 1.4-1.9 sd is unresolved, not absent"
+  - "INIT and dt are not nudged by run_11"
+status: candidate

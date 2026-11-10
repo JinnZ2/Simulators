@@ -25,6 +25,10 @@ test_results:
     run: run_1
     result: "fertility sweep: 36 positive / 10 neutral / 9 negative"
     value: "reported, not recomputed"
+  - test: void
+    run: run_11
+    result: "Kf x10 (benefit near-linear): tree N +7.52, fungal N -1.07 (25.9 sd), leaching +3.33, fire export -9.34; b and Kf at 10 percent inside noise (1.4-1.8 sd)"
+    value: "recomputed"
 open_issues:
   - "the sign flip along the fertility axis is partly circular: it is written into the equation (run 1)"
   - "sums to 55 sweep points; the sweep grid itself is not on record here"

@@ -13,5 +13,7 @@ used_by:
   - L4_FIRE_FUEL_MOISTURE
 used_by_runs:
   - run_9
-open_issues: []
+  - run_11
+open_issues:
+  - "run_11 nudged all 32 parameters at 10 percent: 31 of 64 nudges moved an output outside noise, 33 did not (card CC_003). The block's if_fails stands untested for the 33"
 status: candidate

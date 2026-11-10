@@ -99,19 +99,24 @@ Ask one question rather than filling the gap from typical practice.
 ```text
 brief says                              folder has
 --------------------------------------  ------------------------------------------------
-ledger/toolkit/, 7 tools                2 of 7: budget_closure, coincidence_card. The other
-                                        five (residual regression, ablation, ensembles,
-                                        family swap, parameter recovery, block trace) ABSENT
+ledger/toolkit/, 7 tools                budget_closure, coincidence_card, assumption_nudge.
+                                        Of the brief's seven, ONE is built (budget closure);
+                                        residual regression, ablation, ensembles, family swap,
+                                        parameter recovery, block trace are ABSENT
 anchor = frozen, TAGGED snapshot        ledger/anchors/ANCHOR_run9.yaml, status candidate;
-                                        tag forest-model-ledger-anchor-candidate-run9 is LOCAL ONLY
-                                        (tag push refused, 403); commit 55c651b is the pin;
+                                        tag forest-model-ledger-anchor-candidate-run9 SET AT MERGE
+                                        (every tag route from the session refused); commit
+                                        55c651b is the pin;
                                         three code files pinned by sha256, checked every run
 anchor test: 4 conditions               seeds PASS (wired, run_10); budgets PARTIAL (sigma void);
-                                        independent budgets PARTIAL (2 of 5); nudges NOT_RUN
+                                        nudges PARTIAL (run_11: 13 of 25 assumptions, 33 of 64
+                                        nudges moved nothing, card OPEN); independent PARTIAL
 RETURN closes C, N, P, water, energy    N and water close; C, P, energy print VOID
 RETURN diffs against the anchor         no diff tool
 BRANCH changes ONE component            no branch has been run from run_9 yet
-"run the FULL toolbox" on a trigger     run_10 ran both tools that exist; five do not
+"run the FULL toolbox" on a trigger     run_10 and run_11 ran what exists; six of seven do not
+known error, left in place              N residual -5.0e-11 = deposition counter roundoff;
+                                        branch BR_RUN_9B_COMPENSATED_COUNTER (placeholder)
 run_9 is a CANDIDATE anchor, not an anchor
 ```
 
@@ -127,6 +132,7 @@ python3 tools/check_ledger.py --tests     # schema + cross-refs + admitting test
 python3 tools/check_ledger.py --selftest  # planted defects; each must fire
 python3 runs/run_9.py                     # reproduces samples/run_9.sample.txt
 python3 runs/run_10.py                    # reproduces samples/run_10.sample.txt (about a minute)
+python3 runs/run_11.py                    # assumption nudges; several minutes; rewrites samples/run_11.json
 python3 ledger/toolkit/coincidence_card.py  # reads every card
 ```
 
