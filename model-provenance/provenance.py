@@ -64,6 +64,11 @@ SWITCHOVER_DAYS = 1
 SINGLE = "SINGLE"
 AMBIGUOUS = "AMBIGUOUS"
 NOT_DECODABLE = "NOT_DECODABLE"
+# Note 2026-11-09 (ICSC v0.2 section 3, T21 omitted-edge live specimen):
+# a commit whose trailer names a model the table has no row for has an
+# unchecked upstream assumption (the table is current). That decode is
+# CONDITIONAL, never a model name; the omitted edge must not read VALID.
+STALE_TABLE = "CONDITIONAL(stale_table)"
 
 # ------------------------------------------------------------------ S1 states
 
@@ -189,6 +194,70 @@ def decode(date, rows, window=SWITCHOVER_DAYS):
             "derivation": ASSUMPTION}
 
 
+def decode_commit(date, stated, rows, window=SWITCHOVER_DAYS):
+    """decode() for one commit, with the stale-table check in front.
+
+    If the trailer names a model and no table row carries it, the table
+    is behind the record, so no version is printed as decoded: verdict
+    CONDITIONAL(stale_table), candidates empty. Otherwise decode().
+    """
+    if stated is not None and stated not in {r["version"] for r in rows}:
+        return {"date": date, "verdict": STALE_TABLE, "candidates": [],
+                "why": "trailer names %r; the table has no row for it" % stated,
+                "derivation": ASSUMPTION}
+    return decode(date, rows, window)
+
+
+# Note 2026-11-09 (round 7, item 3): trailer-first decode. The trailer is
+# the observation; the date window is an estimate used only where there is
+# no trailer. releases.json is untouched. Every per-commit field is filled
+# or VOID; an unfilled slot carries no information and is never dropped.
+OBSERVED = "OBSERVED"
+ESTIMATED = "ESTIMATED"
+VOID = "VOID"
+AGREES, DISAGREES = "AGREES", "DISAGREES"
+CONTAINS, EXCLUDES = "WINDOW_CONTAINS", "WINDOW_EXCLUDES"
+TF_FIELDS = ("trailer_model", "window_model", "agreement", "status")
+
+
+def trailer_first(date, stated, rows, window=SWITCHOVER_DAYS):
+    """Per-commit record: trailer_model | window_model | agreement | status."""
+    w = decode(date, rows, window)
+    window_model = "|".join(w["candidates"]) if w["candidates"] else VOID
+    if stated is None:
+        return {"trailer_model": VOID, "window_model": window_model, "agreement": VOID,
+                "status": ESTIMATED if w["candidates"] else VOID}
+    if stated not in {r["version"] for r in rows}:
+        agreement = STALE_TABLE
+    elif not w["candidates"]:
+        agreement = VOID
+    elif w["verdict"] == SINGLE:
+        agreement = AGREES if w["candidates"][0] == stated else DISAGREES
+    else:
+        agreement = CONTAINS if stated in w["candidates"] else EXCLUDES
+    return {"trailer_model": stated, "window_model": window_model,
+            "agreement": agreement, "status": OBSERVED}
+
+
+def render_trailer_first(commits, rows, window=SWITCHOVER_DAYS, per_commit=False):
+    recs = [(sha, date, trailer_first(date, stated, rows, window)) for sha, date, _s, stated in commits]
+    st, ag = {}, {}
+    for _sha, _d, r in recs:
+        st[r["status"]] = st.get(r["status"], 0) + 1
+        ag[r["agreement"]] = ag.get(r["agreement"], 0) + 1
+    L = ["trailer-first decode (Note 2026-11-09, round 7): trailer present -> trailer",
+         "reading, status OBSERVED, no date window; no trailer -> date window, status",
+         "ESTIMATED; VOID where a field is absent (no information, never a zero)", "",
+         table(["status", "commits"], [[k, st.get(k, 0)] for k in (OBSERVED, ESTIMATED, VOID)]), "",
+         table(["agreement (trailer vs window)", "commits"],
+               [[k, ag.get(k, 0)] for k in (AGREES, DISAGREES, CONTAINS, EXCLUDES, STALE_TABLE, VOID)]), ""]
+    if per_commit:
+        L.append(table(["commit", "date"] + list(TF_FIELDS),
+                       [[sha[:8], d] + [r[f] for f in TF_FIELDS] for sha, d, r in recs]))
+        L.append("")
+    return "\n".join(L)
+
+
 # ------------------------------------------------------------------ git
 
 def git_log(repo=".", limit=None):
@@ -304,13 +373,16 @@ def verify(commits, rows, window=SWITCHOVER_DAYS):
     makes S2 a measurement rather than a rendering. AGREES / DISAGREES
     are about the DECODE, never about the commit.
     """
-    agree = disagree = ambiguous_hit = ambiguous_miss = unstated = 0
+    agree = disagree = ambiguous_hit = ambiguous_miss = unstated = stale = 0
     misses = []
     for sha, date, _stamp, stated in commits:
         if stated is None:
             unstated += 1
             continue
-        d = decode(date, rows, window)
+        d = decode_commit(date, stated, rows, window)
+        if d["verdict"] == STALE_TABLE:
+            stale += 1
+            continue
         if d["verdict"] == NOT_DECODABLE:
             disagree += 1
             misses.append((sha[:8], date, stated, "NOT_DECODABLE"))
@@ -330,7 +402,7 @@ def verify(commits, rows, window=SWITCHOVER_DAYS):
     return {"agree": agree, "disagree": disagree,
             "ambiguous_contains": ambiguous_hit,
             "ambiguous_excludes": ambiguous_miss,
-            "unstated": unstated, "misses": misses}
+            "unstated": unstated, "stale_table": stale, "misses": misses}
 
 
 # ------------------------------------------------------------------ S4 screen
@@ -392,22 +464,23 @@ def _header(meta, window):
 
 def render_decode(commits, meta, rows, window=SWITCHOVER_DAYS, per_commit=False):
     L = _header(meta, window)
-    counts = {SINGLE: 0, AMBIGUOUS: 0, NOT_DECODABLE: 0}
+    counts = {SINGLE: 0, AMBIGUOUS: 0, NOT_DECODABLE: 0, STALE_TABLE: 0}
     body = []
     for sha, date, _stamp, stated in commits:
-        d = decode(date, rows, window)
+        d = decode_commit(date, stated, rows, window)
         counts[d["verdict"]] += 1
         body.append([sha[:8], date, d["verdict"],
                      "|".join(d["candidates"]) or "-",
                      stated or "-"])
     L.append(table(["verdict", "commits"],
                    [[k, counts[k]] for k in (SINGLE, AMBIGUOUS,
-                                             NOT_DECODABLE)]))
+                                             NOT_DECODABLE, STALE_TABLE)]))
     L.append("")
     if per_commit:
         L.append(table(["commit", "date", "verdict", "candidates",
                         "stated in trailer"], body))
         L.append("")
+    L.append(render_trailer_first(commits, rows, window, per_commit))
     L += ["The decode table is stored alongside and is not written back",
           "into history (S2). Nothing here ranks a commit, and no version",
           "is scored against another (S4)."]
@@ -431,7 +504,9 @@ def render_verify(commits, meta, rows, window=SWITCHOVER_DAYS):
                      v["ambiguous_contains"]],
                     ["decode AMBIGUOUS, excludes trailer",
                      v["ambiguous_excludes"]],
-                    ["no version stated", v["unstated"]]]))
+                    ["no version stated", v["unstated"]],
+                    ["trailer model has no table row: " + STALE_TABLE,
+                     v["stale_table"]]]))
     L += ["", "S3 -- the assumption scored rather than presumed.",
           ""]
     L.append(table(["quantity", "value"],
@@ -588,6 +663,47 @@ def _selftest():
     ck("verify separates its five outcomes",
        (v["agree"], v["disagree"], v["ambiguous_contains"], v["unstated"]),
        (1, 2, 1, 1))
+
+    # ---- T21 omitted edge (ICSC v0.2 section 3): a planted trailer naming
+    # a model with no table row must not come back as a decoded model.
+    planted = [C("h" * 40, "2026-01-20", "Claude Planted 9")]
+    dc = decode_commit("2026-01-20", "Claude Planted 9", rows)
+    ck("unknown trailer model decodes CONDITIONAL(stale_table)",
+       (dc["verdict"], dc["candidates"]), (STALE_TABLE, []))
+    ck("and without the check the same date would print a model",
+       decode("2026-01-20", rows)["verdict"], SINGLE)
+    ck("verify counts it as stale_table, not agree or disagree",
+       (verify(planted, rows)["stale_table"], verify(planted, rows)["agree"],
+        verify(planted, rows)["disagree"]), (1, 0, 0))
+    _rd = render_decode(planted, {"table_kind": "t", "source": "t"}, rows,
+                        per_commit=True)
+    _row = [l for l in _rd.splitlines() if l.startswith("h" * 8)][0]
+    ck("the per-commit row prints no decoded version",
+       (STALE_TABLE in _row, " A " in _row + " "), (True, False))
+    ck("a trailer model that IS in the table still decodes",
+       decode_commit("2026-01-20", "A", rows)["verdict"], SINGLE)
+
+    # ---- Note 2026-11-09 (round 7, item 3): trailer-first decode.
+    tf = trailer_first("2026-01-20", "A", rows)
+    ck("trailer present -> trailer reading, status OBSERVED",
+       (tf["trailer_model"], tf["status"], tf["agreement"]), ("A", OBSERVED, AGREES))
+    tf = trailer_first("2026-01-20", None, rows)
+    ck("no trailer -> window reading, status ESTIMATED, agreement VOID",
+       (tf["trailer_model"], tf["window_model"], tf["status"], tf["agreement"]),
+       (VOID, "A", ESTIMATED, VOID))
+    tf = trailer_first("2026-01-20", "Claude Planted 9", rows)
+    ck("trailer model with no table row: OBSERVED, agreement stale_table",
+       (tf["trailer_model"], tf["status"], tf["agreement"]),
+       ("Claude Planted 9", OBSERVED, STALE_TABLE))
+    tf = trailer_first("2025-06-01", None, rows)
+    ck("no trailer and no window: every reading slot VOID, kept",
+       (sorted(tf), tf["window_model"], tf["status"]), (sorted(TF_FIELDS), VOID, VOID))
+    tf = trailer_first("2025-06-01", "A", rows)
+    ck("trailer before the table: OBSERVED, window VOID, agreement VOID",
+       (tf["status"], tf["window_model"], tf["agreement"]), (OBSERVED, VOID, VOID))
+    _rt = render_trailer_first(cs + planted, rows, per_commit=True)
+    ck("render carries all four per-commit fields",
+       all(f in _rt for f in TF_FIELDS), True)
 
     # ---- the resolution repair, pinned. Two commits on ONE day, in
     # order within it. A day-resolution ordering reports a counterexample

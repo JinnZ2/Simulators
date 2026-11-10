@@ -43,3 +43,15 @@ states the reading the trucking row withdrew on the order's own date
 The instrument refuses `--selftest`. Renders screen clean through the
 repo's `no_severity` with no exemption. No author section. Stdlib only,
 parses under 3.9, runs on a phone, CC0.
+
+## Finds-by (ALIAS_PROPOSED, 2026-11-09)
+Note 2026-11-09: added by WORK ORDER TOOL FINDER part 1; aliases derived from this
+tool's stated scope only. Index: Simulators `TOOL_FINDER/TOOL_FINDER.md`.
+
+- which format loses which information
+- table vs prose vs diagram
+- encoding is an instrument choice
+- format drops axes silently
+- avoided term: AVOIDED_TERM_UNSTATED
+- measures: "is an encoding an instrument selection rather than a style, so that encodings of one content are not rank-orderable on a single arrival-cost axis?"
+- breaks when: "No data ships, and the seven encodings are not here."

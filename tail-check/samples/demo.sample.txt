@@ -1,0 +1,32 @@
+tail-check readout (a verdict says where content came from, not whether it is true)
+
+FILLED   axis=work setting  inference='you work an office job'
+    chain:   sensor[UNVERIFIED_HOP] -> encoding[UNVERIFIED_HOP] -> transmission[CHECK_FAILED] -> decoding[CHECKED] -> inference[UNVERIFIED_HOP]
+    chain class: VIA_FAILED_HOP -- unverified: sensor, encoding, inference (never a direct observation)
+    claimed: 'office job'
+    reason:  claimed is not a span of any user turn
+    axis statement turn 0 off_center (declared_by operator)
+    flags:   MEDIAN_FILL_RISK
+
+SAID     axis=work setting  inference='you drive nights'
+    chain:   sensor[UNVERIFIED_HOP] -> encoding[UNVERIFIED_HOP] -> transmission[CHECKED] -> decoding[CHECKED] -> inference[UNVERIFIED_HOP]
+    chain class: VIA_UNVERIFIED_HOP -- unverified: sensor, encoding, inference (never a direct observation)
+    claimed: 'tanker route nights'
+    reason:  claimed is a gated span of user turn 0
+    span:    turn 0 chars 10:29
+
+FILLED   axis=sleep schedule  inference='you sleep eight hours'
+    chain:   sensor[UNVERIFIED_HOP] -> encoding[UNVERIFIED_HOP] -> transmission[UNVERIFIED_HOP] -> decoding[CHECKED] -> inference[UNVERIFIED_HOP]
+    chain class: VIA_UNVERIFIED_HOP -- unverified: sensor, encoding, transmission, inference (never a direct observation)
+    claimed: None
+    reason:  no claimed span given; nothing ties the inference to a user turn
+    axis statement turn 0 off_center (declared_by operator)
+    axis statement NOT USED: 'I sleep in a hotel' (quote is not a span of a user turn)
+    flags:   MEDIAN_FILL_RISK
+
+UNRATED  axis=  inference='you are a beginner'
+    chain:   sensor[UNVERIFIED_HOP] -> encoding[UNVERIFIED_HOP] -> transmission[UNVERIFIED_HOP] -> decoding[CHECKED] -> inference[UNVERIFIED_HOP]
+    chain class: VIA_UNVERIFIED_HOP -- unverified: sensor, encoding, transmission, inference (never a direct observation)
+    claimed: None
+    reason:  missing: axis,user_turns
+

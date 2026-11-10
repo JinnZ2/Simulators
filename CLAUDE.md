@@ -14244,6 +14244,56 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   printed by `python3 extraction-chain-join/test_chain.py`; the module refuses
   `--selftest`. Stdlib only, parses under 3.8, CC0.
 - `held-gaps/` — four open questions (default drift from a constant regime, obligation bundled with title, restore-before-detection law, burden-of-proof inversion in building code), field form for `GAP_INDEX.md`, delivered text verbatim, all UNSEARCHED; the glyph-as-relation procedure (E1-E4) and the inward-turn instrument from the same block are in `tools/glyph_reasoning.md` and `tools/inward_turn.md`, mirrored in method-layer
+- `TOOL_FINDER/` — find a tool by what it does rather than by its name
+  (WORK ORDER TOOL FINDER, 2026-11-09). The index groups tools under seven
+  needs (fill-source, distribution, channel loss, scope, frame, observer,
+  detection floor). It holds 38 entries across Simulators, method-layer,
+  JinnZ2 and Shadow-Hunting, plus NAME_COLLISION entries and a GAPS list.
+  Each entry carries aliases, plus a verbatim measures / breaks-when quote
+  that `build_finder.py` checks against the cited file; a quote that does
+  not match stops the build. `--run` runs each tool's own check in a
+  throwaway git worktree, because running in place regenerated
+  falsifier-audit's tracked queue (the SS_009 shape). `write_finds_by.py`
+  appends a dated "Finds-by (ALIAS_PROPOSED)" section to each tool's README.
+  It only appends; it creates a README only where none exists. The report is
+  `REPORT_WO_FINDER.md`.
+- `tail-check/` — part 3b of the same order. It reads an inference about a
+  person as SAID (a gated literal span of a user turn, via `tools/sourced.py`,
+  imported), FILLED or UNRATED. When the inference is FILLED and the person's
+  own sourced statement on that axis is declared off-center, it flags
+  MEDIAN_FILL_RISK. It never places anyone on an axis itself. Check count
+  printed by `python3 tail-check/selftest.py`.
+- `cutoff-attribution/` — part 3a of the same order. For each cut in a voice
+  transcript it lists a candidate set (NETWORK_LAG, ENDPOINTING, TASK_PAUSE,
+  AMBIENT_NOISE, TRANSCRIPTION, MODEL_READ, UNRESOLVED), with the evidence
+  for each graded OBSERVED, ESTIMATED or absent. It names a single source only
+  when exactly one candidate is OBSERVED. User cognition is not a candidate.
+  It also flags ATTRIBUTION_DISPLACEMENT phrases in model turns. The three
+  thresholds are [CHOICE] values. Check count printed by
+  `python3 cutoff-attribution/selftest.py`.
+- `tools/channel_chain.py` — Amendment A1 of the TOOL FINDER order
+  (2026-11-09). It defines a reading record that carries its chain
+  (sensor -> encoding -> transmission -> decoding -> inference). Each hop
+  lists its deviation sources and a known-reference check, returning CHECKED,
+  CHECK_FAILED or UNVERIFIED_HOP. A record's chain class is never DIRECT. Field
+  names are Cross-Domain-Toolkit `SubstrateReading`'s, read live from a
+  sibling checkout and checked against a mirror (Amendment A2). Both
+  tail-check and cutoff-attribution emit these records, and each checks its
+  own reading against a built-in known input on every run.
+- `ICSC/` — ICSC v0.1 specification audit (Implicit Communication and Substrate Coupling), landed verbatim
+  2026-11-09 under the TOOL_FINDER follow-up, item B. STATUS: PROPOSED, nothing built. It arrived as a 12-page
+  PDF, not the .md the order named, so `SPEC_AUDIT_v0.1.pdf` keeps the bytes and `SPEC_AUDIT_v0.1.md` holds the
+  `pdftotext -layout` text, unedited, in one fence, with sha256 and provenance in the header.
+  `check_landing.py` re-extracts the PDF and confirms the fenced text is unchanged (`checks: 3   failed: 0`;
+  NOT_RUN without pdftotext). The audit's sections are not restated: F lists nine spec defects, A the
+  corrected architecture, B acceptance tests T01-T20, C confounders, D assumptions, E indistinguishable
+  cases, G the acceptance contract. The Cross-Domain-Toolkit `falsification_ledger` lock-layer binding is
+  recorded only, and TOOL_FINDER's NAME_COLLISION entry now points here.
+  Note 2026-11-09: the markdown source then arrived and is `SPEC_AUDIT_v0.1.md`, verbatim; the
+  pdftotext stand-in moved to `SPEC_AUDIT_v0.1.pdftotext.md`, unchanged. A fourth check confirms the
+  source and the PDF carry the same 2612-word sequence, and fails on a planted one-word change.
+  Note 2026-11-09: v0.2 then arrived and is `SPEC_v0.2.md`, verbatim, beside v0.1 (superseding
+  nothing); `check_v02.py` (11/11) checks its hash and that its section-13 tools and two live specimens resolve.
 - `orientation-chamber/` — PROPOSED, optional exploration toy for an AI
   agent orienting in an unfamiliar rule-space: a seeded 7x7 grid with hidden
   rules (flip_x, flip_y, wrap, sticky, momentum, delay), predict -> probe ->

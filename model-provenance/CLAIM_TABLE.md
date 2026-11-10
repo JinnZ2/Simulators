@@ -259,3 +259,113 @@ report it. The pattern is now composed from tokens, the
 **Falsifier:** any emitted row that ranks a commit or a version.
 
 **Status: SUPPORTED.**
+
+### MP_010 — STALE_TABLE: the trailers moved and `releases.json` did not
+
+Note 2026-11-09 (FINDER ROUND 4, item 4). Logged with the table untouched.
+
+`releases.json` is an observed-bound table read on 2026-08-25. Run on
+the full history at commit 0c03017 (not shallow), `verify` reads:
+
+- decode SINGLE, matches trailer: 315
+- decode SINGLE, differs from trailer: 511
+- decode AMBIGUOUS, contains trailer: 17
+- decode AMBIGUOUS, excludes trailer: 3
+- no version stated: 601
+
+The trailers in that history name 7 versions. The table has rows for 3
+of them, and its `first_seen` / `last_seen` / `n_commits` for those 3
+are as of 2026-08-25. The other 4 versions have no row, and every
+commit under one of them decodes to an older row. That is the source of
+the SINGLE-differs count. The state is STALE_TABLE: the decode is
+reading a table older than the record it decodes.
+
+This is not a finding about the derivation. MP_003's counterexamples
+(an earlier version stated after a later one) are a separate count and
+are reported by `verify` beside these.
+
+**Falsifier:** a row added for every version the trailers state, after
+which SINGLE-differs still counts commits under a version that has a
+row.
+
+**Status: OPEN** (the table extension is the operator's call; see the
+round 4 report).
+
+### MP_011 — T21 omitted edge: an unknown trailer model decodes CONDITIONAL(stale_table)
+
+Note 2026-11-09 (ICSC v0.2 section 3 live specimen). Before this change a commit whose trailer
+named a model with no table row still got a decoded model from its date, and `verify` scored the
+mismatch as a disagreement. The upstream assumption (the table is current) was unchecked, so under
+v0.2's propagation rule the decode can be at most CONDITIONAL. `decode_commit()` now returns
+`CONDITIONAL(stale_table)` with an empty candidate list, and `verify` counts those apart from
+agree / disagree. Selftest: a planted trailer naming a model absent from the table must not print
+a decoded version; the same date without the check still decodes SINGLE, which shows the check is
+doing the work. Live reading: 419 commits move out of the agree/disagree rows into stale_table.
+`releases.json` is unchanged (its extension stays BLOCKED, MP_010). Status: SUPPORTED on the selftest.
+
+
+### MP_012 — date windows overlap, so table rows are not independent; reverse-T21 failed
+
+Note 2026-11-09 (round 7). Scratch dry run, never pushed, counts only. The tree had grown, so the
+stale_table count was 421 (MP_011 recorded 419). The snapshot added one observed_bound row per
+version a trailer names without a row (4 versions), built from that version's first/last trailer
+dates. Results:
+
+- stale_table 421 -> 0
+- agree 315 -> 229
+- disagree 94 -> 254
+- ambiguous_contains 17 -> 212
+- ambiguous_excludes 3 -> 155
+- unstated 601 -> 601
+
+Reverse-T21 asks for two things. The 421 return to decoded, which held. Unrelated rows stay
+unchanged, which FAILED: 390 of the 1030 commits outside the stale set changed decode. The new
+rows' date windows overlap the existing ones, so a row's decode depends on every other row it
+overlaps, and the rows are not independent. Adding a row is a change to the whole decode, not a
+local addition.
+
+**Falsifier:** a table extension under which the non-stale decodes are byte-identical before and
+after.
+
+**Status: SUPPORTED on the scratch run.**
+
+Note 2026-11-09 (round 7, item 3): the owner picked option b (add rows). The rows are not written.
+This session operates under a standing rule against writing any model identifier into a pushed
+file, and one of the four versions is the identifier of the session's own model. The four
+rows were given to the owner in chat. `releases.json` is unchanged; MP_010 and MP_011 stand.
+
+Note 2026-11-09 (round 7 repeat, item 3d): the MP_012 scratch numbers above are kept as a
+specimen and not re-run. Adding rows dropped trailer agreement from 315 to 229, and reverse-T21
+failed on 390 of 1030. They are the reason table extension was not taken. MP_013 replaces it.
+
+### MP_013 — trailer-first decode: the trailer is the observation, the window an estimate
+
+Note 2026-11-09 (round 7, item 3a-3e). Each commit now carries four fields:
+trailer_model | window_model | agreement | status. Each is filled or VOID. VOID means no
+information, never a zero, and the field is never dropped.
+
+- Trailer present: the reading is the trailer, status OBSERVED, and no date window is used for
+  the reading. window_model is still reported beside it.
+- Agreement compares the trailer with the window: AGREES / DISAGREES under a single
+  candidate, WINDOW_CONTAINS / WINDOW_EXCLUDES under an ambiguous one, CONDITIONAL(stale_table)
+  when the trailer's model has no row, and VOID when the window cannot decode the date.
+- No trailer: the reading is the date window, status ESTIMATED. Status is VOID when the window
+  cannot decode either.
+
+releases.json is untouched and no model name is written. Live reading on this repository:
+
+- status: OBSERVED 855, ESTIMATED 446, VOID 155
+- agreement: AGREES 315, DISAGREES 92, WINDOW_CONTAINS 17, WINDOW_EXCLUDES 3,
+  CONDITIONAL(stale_table) 426, VOID 603
+
+The 92 here against verify's 94: the 2 commits whose trailer date predates the table now read
+agreement VOID. Before this change they were counted as disagreements.
+
+The per-commit sample is `samples/trailer_first_planted.sample.txt`, on a planted fixture.
+`samples/decode_per_commit.sample.txt` is not regenerated, because a live render would write the
+model names the trailers carry. It stays as it was and predates this decode.
+
+**Falsifier:** a commit with a trailer whose status is not OBSERVED, or a commit without one
+whose status is OBSERVED.
+
+**Status: SUPPORTED on the selftest and the live run.**

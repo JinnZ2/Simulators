@@ -117,3 +117,15 @@ paths from recommendation channels in the field is untouched in both
 directions.
 
 Stdlib only. No network. Parses under Python 3.9. Phone-buildable. CC0.
+
+## Finds-by (ALIAS_PROPOSED, 2026-11-09)
+Note 2026-11-09: added by WORK ORDER TOOL FINDER part 1; aliases derived from this
+tool's stated scope only. Index: Simulators `TOOL_FINDER/TOOL_FINDER.md`.
+
+- does a correction channel actually close the loop
+- feedback channel that never returns
+- report goes nowhere
+- correction channel requirements
+- avoided term: AVOIDED_TERM_UNSTATED
+- measures: "Scores a proposed or existing correction channel against four requirements and returns the **SET** of requirements failed."
+- breaks when: "A channel can be valuable and still not be a return path. Marking a gap is not correcting an error."

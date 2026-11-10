@@ -85,3 +85,15 @@ Test C (a plant willing to change one thing), Test D (app entry records) and
 Test E (published ecology) are NOT_RUN: the first four need access this session
 does not have, the ecology corpus is egress-blocked. Permanent-id findings in
 `CLAIM_TABLE.md` (`RCL_`). Stdlib only, parses under 3.9, phone-buildable, CC0.
+
+## Finds-by (ALIAS_PROPOSED, 2026-11-09)
+Note 2026-11-09: added by WORK ORDER TOOL FINDER part 1; aliases derived from this
+tool's stated scope only. Index: Simulators `TOOL_FINDER/TOOL_FINDER.md`.
+
+- signal loss through a reporting chain
+- what survives each hop of a report
+- reports that never get filed
+- incentive bias accumulates across hops
+- avoided term: AVOIDED_TERM_UNSTATED
+- measures: "how much of a physical signal survives each hop between the machine and the node that acts on it, and what never enters the record at all."
+- breaks when: "The composition is exact ARITHMETIC on a constructed model; the order's DERIVED claim -- that a real chain estimates its incentive stack -- is unrun on any real chain."

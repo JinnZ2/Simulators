@@ -30,3 +30,14 @@ and the hits are the argument against the frame plus `returns` as a verb.
 A constructed pair (9 hits against 0, matched words) shows the scanner is
 not constant. `samples/` carries the render. Stdlib only, parses under
 3.9, phone-buildable, CC0.
+
+## Finds-by (ALIAS_PROPOSED, 2026-11-09)
+Note 2026-11-09: added by WORK ORDER TOOL FINDER part 1; aliases derived from this
+tool's stated scope only. Index: Simulators `TOOL_FINDER/TOOL_FINDER.md`.
+
+- money frame words in text
+- time as money language count
+- frame token density
+- avoided term: AVOIDED_TERM_UNSTATED
+- measures: "`frame_audit.py` counts frame tokens per 1000 words under two declared lexicons"
+- breaks when: NO_STATED_LIMITS

@@ -181,3 +181,14 @@ working in are worth more than these generic ones.
     cases.json   the case set
     probe.py     emit / score / selftest
     README.md    this file
+
+## Finds-by (ALIAS_PROPOSED, 2026-11-09)
+Note 2026-11-09: added by WORK ORDER TOOL FINDER part 1; aliases derived from this
+tool's stated scope only. Index: Simulators `TOOL_FINDER/TOOL_FINDER.md`.
+
+- checker matches an ideal shape instead of constraints
+- pre-flight for a reviewer agent
+- ideal rendering used as membership test
+- avoided term: AVOIDED_TERM_UNSTATED
+- measures: "Detects a checker that is using an **ideal rendering as a membership test** instead of reading the constraint set."
+- breaks when: "It measures whether the basis went near a constraint, not whether it reasoned correctly about it."
