@@ -177,12 +177,45 @@ def check(run_tests=False):
             F(f"NEEDS_TOOL: {tool} is built but was not run on {r}; row stays until it is")
         if r not in runs:
             F(f"NEEDS_TOOL: run {r} missing")
+    # ---- STATUS_MAP: every status on both axes has an entry with every field
+    RUN_AXIS = ("COMPLETE", "INCOMPLETE", "REPORTED")
+    CARD_AXIS = ("OPEN", "PROVISIONAL", "RESOLVED", "CURIOSITY")
+    MAP_FIELDS = ("means", "goal trust it", "goal explore", "goal report now", "forbidden", "exits to")
+    smap, pairs_listed = {}, set()
+    map_path = os.path.join(ROOT, "ledger", "STATUS_MAP.md")
+    if not os.path.exists(map_path):
+        F("ledger/STATUS_MAP.md missing")
+    else:
+        cur = None
+        for line in open(map_path):
+            m = re.match(r"### (RUN|CARD) (\w+)\s*$", line)
+            if m:
+                cur = (m.group(1), m.group(2)); smap[cur] = {}
+                continue
+            m = re.match(r"- ([a-z ]+): (.+)", line)
+            if m and cur:
+                smap[cur][m.group(1)] = m.group(2).strip()
+            m = re.match(r"\| (\w+) \| (\w+) \| .+ \| .+ \|", line)
+            if m and m.group(1) in RUN_AXIS:
+                pairs_listed.add((m.group(1), m.group(2)))
+        for key, entry in smap.items():
+            for f in MAP_FIELDS:
+                if not entry.get(f):
+                    F(f"STATUS_MAP {key[0]} {key[1]}: field '{f}' missing")
+        for r_ in RUN_AXIS:
+            for c_ in CARD_AXIS:
+                if (r_, c_) not in pairs_listed:
+                    F(f"STATUS_MAP pair table: {r_} x {c_} missing")
+        if ("RUN", "PROVISIONAL") in smap:
+            F("STATUS_MAP: PROVISIONAL is a card status, not a run status")
     run_status = {}
     for r in sorted(runs):
         m = re.search(r"^status\s*:\s*(\w+)", open(os.path.join(ROOT, "runs", r + ".md")).read(), re.M)
         run_status[r] = m.group(1) if m else None
-        if run_status[r] not in ("REPORTED", "COMPLETE", "INCOMPLETE"):
+        if run_status[r] not in RUN_AXIS:
             F(f"{r}.md: status {run_status[r]} outside REPORTED / COMPLETE / INCOMPLETE")
+        elif ("RUN", run_status[r]) not in smap:
+            F(f"{r}.md: status {run_status[r]} has no entry in ledger/STATUS_MAP.md")
     owed = {c[2] for c in needs}
     for r, st in run_status.items():
         if st == "INCOMPLETE" and r not in owed:
@@ -198,6 +231,8 @@ def check(run_tests=False):
             F(f"card {e}")
             continue
         readings[reading] = readings.get(reading, 0) + 1
+        if ("CARD", reading) not in smap:
+            F(f"card {n}: status {reading} has no entry in ledger/STATUS_MAP.md")
         if c.get("id") != n:
             F(f"card {n}: id != file name")
         if c["reading_declared"] != reading:
@@ -272,6 +307,10 @@ def selftest():
          "  - multi_seed_ensemble", "  - multi_seed_ensemble_v2", "recheck_when names multi_seed_ensemble_v2"),
         ("provisional card declared resolved", "ledger/toolkit/cards/CC_001_n_misclosure_seed_invariance.yaml",
          "reading_declared: PROVISIONAL", "reading_declared: RESOLVED", "declared RESOLVED, derived PROVISIONAL"),
+        ("card status with no STATUS_MAP entry", "ledger/STATUS_MAP.md", "### CARD PROVISIONAL", "### CARD PROVISIONAL_X", "status PROVISIONAL has no entry"),
+        ("run status with no STATUS_MAP entry", "ledger/STATUS_MAP.md", "### RUN REPORTED", "### RUN REPORTED_X", "status REPORTED has no entry"),
+        ("STATUS_MAP entry missing a field", "ledger/STATUS_MAP.md", "- forbidden: treating PROVISIONAL as RESOLVED", "- forbiden: treating PROVISIONAL as RESOLVED", "CARD PROVISIONAL: field 'forbidden' missing"),
+        ("STATUS_MAP pair row missing", "ledger/STATUS_MAP.md", "| INCOMPLETE | PROVISIONAL |", "| INCOMPLETE | PROVISIONAL_X |", "INCOMPLETE x PROVISIONAL missing"),
         ("run field dropped", "runs/run_3.md", "seed       :", "sead       :", "field seed dropped"),
     ]
     bad = 0

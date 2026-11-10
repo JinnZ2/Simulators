@@ -107,6 +107,19 @@ Not enforced by any checker. It applies to merge conflicts and to any two
 versions of one thing: no side is picked, both stay inspectable, the
 difference is written down per item.
 
+## Status map (read before acting on any run or card)
+
+`ledger/STATUS_MAP.md` says, for every run status and every card status, what
+you may do from there by goal (trust it / explore / report now), what is
+forbidden, and what moves it to another status. Two axes, never merged:
+
+```text
+RUN status   = did the loop finish?        COMPLETE | INCOMPLETE | REPORTED
+CARD status  = how far to trust the read?  OPEN | PROVISIONAL | RESOLVED | CURIOSITY
+```
+
+The checker fails on any run or card whose status has no entry there.
+
 ## Corrections to the brief (by its authors; superseded text kept)
 
 ```text
