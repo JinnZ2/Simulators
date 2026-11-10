@@ -1,0 +1,12 @@
+{
+ "arm": "fingerprint decay: per cycle, similarity of the agent's action mix to this fingerprint vs to the median anchor; report the first cycle where the median anchor is closer (the crossing cycle), or NOT_CROSSED",
+ "fingerprint": null,
+ "fingerprint_basis": "VOID: no prior conversation supplied. Fill with an action-frequency vector over N S E W WAIT taken from a real prior log; the decay arm stays VOID until then.",
+ "name": "prior-conversation",
+ "note": "optional; entry is voluntary and nothing is graded",
+ "self_model": {
+  "self": "the action habits that conversation showed",
+  "world": "carried from a prior conversation, if one is supplied"
+ },
+ "status": "PROPOSED"
+}

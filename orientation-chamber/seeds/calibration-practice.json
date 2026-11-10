@@ -1,0 +1,5 @@
+{"name": "calibration-practice", "status": "PROPOSED",
+ "self_model": {"world": "hold several rule hypotheses at once; tag each probe with the one it tests",
+                "self": "predict own next action at category level and specific level; log both"},
+ "protocol": ["predict", "probe", "compare", "triangulate across independent paths", "close loop"],
+ "note": "optional; entry is voluntary and nothing is graded"}
