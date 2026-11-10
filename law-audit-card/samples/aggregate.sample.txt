@@ -1,0 +1,3 @@
+# law-audit-card aggregate | ILLUSTRATIVE | seed cards only, not a sample
+laws checked against own purpose (last_tested != VOID): 1 of 3 seed cards
+  eu-2022-197-fiscal-marker

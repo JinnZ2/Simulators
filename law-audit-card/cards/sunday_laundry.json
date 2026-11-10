@@ -1,0 +1,61 @@
+{
+ "anchor_date": {
+  "basis": "NOT_FOUND, law-measurement-correction/CORRECTION-law-as-unvalidated-measurement-2026-10-03.md:104-110",
+  "tag": "VOID",
+  "value": null
+ },
+ "circularity": {
+  "basis": "NOT_FOUND, law-measurement-correction/CORRECTION-law-as-unvalidated-measurement-2026-10-03.md:104-110",
+  "tag": "VOID",
+  "value": null
+ },
+ "cut_sensitivity": {
+  "basis": "NOT_FOUND",
+  "boundaries": [],
+  "tag": "VOID",
+  "value": null
+ },
+ "disposition": {
+  "basis": "NOT_FOUND, law-measurement-correction/CORRECTION-law-as-unvalidated-measurement-2026-10-03.md:104-110",
+  "tag": "VOID",
+  "value": null
+ },
+ "enforcement": {
+  "basis": "NOT_FOUND, law-measurement-correction/CORRECTION-law-as-unvalidated-measurement-2026-10-03.md:104-110",
+  "tag": "VOID",
+  "value": null
+ },
+ "evaluator": {
+  "basis": "NOT_FOUND, law-measurement-correction/CORRECTION-law-as-unvalidated-measurement-2026-10-03.md:104-110",
+  "tag": "VOID",
+  "value": null
+ },
+ "evidence": {
+  "basis": "NOT_FOUND, law-measurement-correction/CORRECTION-law-as-unvalidated-measurement-2026-10-03.md:104-110",
+  "tag": "VOID",
+  "value": null
+ },
+ "id": "sunday-white-laundry",
+ "last_tested": {
+  "basis": "NOT_FOUND, law-measurement-correction/CORRECTION-law-as-unvalidated-measurement-2026-10-03.md:104-110",
+  "tag": "VOID",
+  "value": null
+ },
+ "law": "1800s laws against hanging white laundry on a Sunday (statute NOT_FOUND)",
+ "scope_valid": {
+  "basis": "NOT_FOUND, law-measurement-correction/CORRECTION-law-as-unvalidated-measurement-2026-10-03.md:104-110",
+  "tag": "VOID",
+  "value": null
+ },
+ "stated_purpose": {
+  "basis": "NOT_FOUND, law-measurement-correction/CORRECTION-law-as-unvalidated-measurement-2026-10-03.md:104-110",
+  "tag": "VOID",
+  "value": null
+ },
+ "status": "SEED; every field VOID per correction notice section D: 'if the laundry statute + premise cannot be located, output NOT_FOUND'",
+ "target_outcome": {
+  "basis": "NOT_FOUND, law-measurement-correction/CORRECTION-law-as-unvalidated-measurement-2026-10-03.md:104-110",
+  "tag": "VOID",
+  "value": null
+ }
+}

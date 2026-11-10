@@ -1,0 +1,74 @@
+{
+ "anchor_date": {
+  "basis": "law-as-unvalidated-measurement/LEDGER_SETTLE-dyed-fuel-2026-10-03.md (settle date)",
+  "tag": "OBSERVED",
+  "value": "2026-10-03"
+ },
+ "circularity": {
+  "basis": "derived",
+  "tag": "VOID",
+  "value": null
+ },
+ "cut_sensitivity": {
+  "basis": "ledger column B is NOT_EVALUABLE",
+  "boundaries": [
+   {
+    "boundary": "site = bulk plants / wholesale distributors",
+    "evidence_reading": "UNDETERMINED"
+   },
+   {
+    "boundary": "site = farm bulk tanks",
+    "evidence_reading": "UNDETERMINED"
+   }
+  ],
+  "note": "two of five candidate readings, law-as-unvalidated-measurement/LEDGER_SETTLE-dyed-fuel-2026-10-03.md:60-67; no evidence reading under either",
+  "tag": "VOID",
+  "value": null
+ },
+ "disposition": {
+  "basis": "not assigned by any reader",
+  "tag": "VOID",
+  "value": null
+ },
+ "enforcement": {
+  "basis": "law-as-unvalidated-measurement/LEDGER_SETTLE-dyed-fuel-2026-10-03.md:15-20 (search-index text; ecfr.gov refused CONNECT); enforcer not stated",
+  "tag": "OBSERVED",
+  "value": {
+   "enforcer": null,
+   "mechanism": "dye Solvent Red 164 (and no other dye) at a concentration spectrally equivalent to at least 3.9 pounds of the solid dye standard Solvent Red 26 per thousand barrels"
+  }
+ },
+ "evaluator": {
+  "basis": "not stated in either law-* dir",
+  "tag": "VOID",
+  "value": null
+ },
+ "evidence": {
+  "basis": "no outcome-evidence ledger in the tree",
+  "tag": "VOID",
+  "value": null
+ },
+ "id": "us-26cfr48.4082-1-dyed-fuel",
+ "last_tested": {
+  "basis": "no test against own purpose recorded",
+  "tag": "VOID",
+  "value": null
+ },
+ "law": "26 CFR 48.4082-1 (paragraph letter UNCONFIRMED, law-measurement-correction/CC4_MERGED.md:34)",
+ "scope_valid": {
+  "basis": "not stated in either law-* dir",
+  "tag": "VOID",
+  "value": null
+ },
+ "stated_purpose": {
+  "basis": "not stated in either law-* dir",
+  "tag": "VOID",
+  "value": null
+ },
+ "status": "SEED, from tree material only; nothing drafted from memory",
+ "target_outcome": {
+  "basis": "not stated in either law-* dir",
+  "tag": "VOID",
+  "value": null
+ }
+}

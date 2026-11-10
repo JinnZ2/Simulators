@@ -556,6 +556,8 @@ Also serves this need: multi_substrate_calibration (Cross-Domain-Toolkit), falsi
 | cooperative-substrate | Simulators/cooperative-substrate/ | Simulators/cooperative-substrate-proof/ | two builds of related orders |
 | CA_ claim prefix | Simulators/constraint-assembly/ | Simulators/clustering-axes/ | both use CA_nnn claim ids; cite with the folder |
 | clean-room | software rebuild: Cross-Domain-Toolkit README.md:112, docs/METHOD.md:10 ("clean-room, domain-general abstractions") | lab isolation (contamination-controlled room) | lab-isolation sense carried from Amendment A2; no in-scope file using it was located |
+| stated_purpose / scope_valid | Simulators/law-audit-card/ (card fields) | thermodynamic-accountability-framework core/regulatory_scope_audit.py (first_principle_intent; IN SCOPE / OUT OF SCOPE -- INTENT EXPIRED / INTENT PRESERVED) | same concept, two names; law-audit-card imports TAF and passes stated_purpose as first_principle_intent rather than reimplementing (2026-11-10) |
+| KEEP / REVISE vs KEEP / REBUILD | Simulators/law-audit-card/ disposition (reader-assigned, per law) | law-*/CORRECTION-law-as-unvalidated-measurement-2026-10-03.md section G (parts of a report) | REDO renamed REVISE to avoid reading as REBUILD; mapping in law-audit-card/card.py DISPOSITION_MAP |
 
 ## GAPS
 

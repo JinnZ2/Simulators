@@ -1,0 +1,67 @@
+{
+ "anchor_date": {
+  "basis": "law-measurement-correction/CORRECTION-law-as-unvalidated-measurement-2026-10-03.md:90",
+  "tag": "OBSERVED",
+  "value": "2022-01-17"
+ },
+ "circularity": {
+  "basis": "derived",
+  "tag": "VOID",
+  "value": null
+ },
+ "cut_sensitivity": {
+  "basis": "no boundary declared",
+  "boundaries": [],
+  "tag": "VOID",
+  "value": null
+ },
+ "disposition": {
+  "basis": "not assigned by any reader",
+  "tag": "VOID",
+  "value": null
+ },
+ "enforcement": {
+  "basis": "law-measurement-correction/CORRECTION-law-as-unvalidated-measurement-2026-10-03.md:90-91 (EUR-Lex at search depth; law-measurement-correction/CC3b_PRIMARY_RERUN_2026-10-04.md:91 PRIMARY_UNREACHABLE)",
+  "tag": "OBSERVED",
+  "value": {
+   "enforcer": null,
+   "mechanism": "ACCUTRACE PLUS fiscal marker; transition ends 18 Jan 2024"
+  }
+ },
+ "evaluator": {
+  "basis": "not stated in either law-* dir",
+  "tag": "VOID",
+  "value": null
+ },
+ "evidence": {
+  "basis": "no outcome-evidence ledger in the tree",
+  "tag": "VOID",
+  "value": null
+ },
+ "id": "eu-2022-197-fiscal-marker",
+ "last_tested": {
+  "basis": "law-measurement-correction/CORRECTION-law-as-unvalidated-measurement-2026-10-03.md:88-89 'SY124 not resilient to common removal methods -> replace'; next review by 31 Dec 2028, law-measurement-correction/CORRECTION-law-as-unvalidated-measurement-2026-10-03.md:91",
+  "tag": "OBSERVED",
+  "value": {
+   "date": "2019",
+   "tester": "Directive 95/60/EC evaluation (tester body not named in the tree)"
+  }
+ },
+ "law": "Commission Implementing Decision (EU) 2022/197 of 17 January 2022",
+ "scope_valid": {
+  "basis": "not stated in either law-* dir",
+  "tag": "VOID",
+  "value": null
+ },
+ "stated_purpose": {
+  "basis": "review triggers are recorded (tax evasion, health damage, environmental damage), the purpose is not; law-measurement-correction/CORRECTION-law-as-unvalidated-measurement-2026-10-03.md:94-96",
+  "tag": "VOID",
+  "value": null
+ },
+ "status": "SEED, from tree material only; nothing drafted from memory",
+ "target_outcome": {
+  "basis": "not stated in either law-* dir",
+  "tag": "VOID",
+  "value": null
+ }
+}

@@ -14294,6 +14294,23 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   source and the PDF carry the same 2612-word sequence, and fails on a planted one-word change.
   Note 2026-11-09: v0.2 then arrived and is `SPEC_v0.2.md`, verbatim, beside v0.1 (superseding
   nothing); `check_v02.py` (11/11) checks its hash and that its section-13 tools and two live specimens resolve.
+- `law-audit-card/` — PROPOSED, one card per law: stated_purpose,
+  target_outcome, enforcement, evidence, cut_sensitivity, scope_valid,
+  last_tested, evaluator, circularity, anchor_date, disposition, each tagged
+  OBSERVED / DERIVED / PROPOSED / VOID (VOID written, never omitted).
+  `card.py` derives cut_sensitivity (>= 2 declared-frame boundaries -> FLIPS /
+  HOLDS, else VOID) and circularity (enforcer == evaluator ->
+  CONDITIONAL(circular_eval)), and runs scope_valid through TAF
+  core/regulatory_scope_audit.py by import, not reimplementation. The
+  disposition (KEEP / EDIT / REVISE / RETIRE / UNRESOLVED; REVISE replaces
+  REDO so it does not read as section G's REBUILD) is reader-assigned with
+  reader id and date; the tool never writes one, only forces UNRESOLVED when
+  evidence or cut_sensitivity is VOID (READ_ME_THIS_WAY section 4). Seeds:
+  dyed fuel, EU 2022/197 marker, Sunday laundry (all VOID), every value cited
+  `path:line` from the two law-* dirs. `aggregate.py`: laws checked against
+  own purpose = 1 of 3 seed cards, ILLUSTRATIVE. `COVERAGE.md` is the
+  2026-11-10 coverage report, verbatim. Check count printed by
+  `python3 law-audit-card/tests/test_card.py`. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
