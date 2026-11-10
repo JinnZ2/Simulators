@@ -14307,8 +14307,11 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   reader id and date; the tool never writes one, only forces UNRESOLVED when
   evidence or cut_sensitivity is VOID (READ_ME_THIS_WAY section 4). Seeds:
   dyed fuel, EU 2022/197 marker, Sunday laundry (all VOID), every value cited
-  `path:line` from the two law-* dirs. `aggregate.py`: laws checked against
-  own purpose = 1 of 3 seed cards, ILLUSTRATIVE. `COVERAGE.md` is the
+  `path:line` from the two law-* dirs. `aggregate.py`: tested_any 1 of 3,
+  tested_against_purpose 0 of 3 (needs a stated purpose and a declared
+  measurand match, else UNRESOLVED), ILLUSTRATIVE. Divergence from TAF
+  (undeclared intent: TAF assumes it applies, the card reads VOID) recorded
+  in the README and as a dated note in TAF. `COVERAGE.md` is the
   2026-11-10 coverage report, verbatim. Check count printed by
   `python3 law-audit-card/tests/test_card.py`. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one

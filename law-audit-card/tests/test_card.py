@@ -214,8 +214,28 @@ class TestSeeds(unittest.TestCase):
 
     def test_aggregate(self):
         r = aggregate.count()
-        self.assertEqual((r["checked_against_own_purpose"], r["n"]), (1, 3))
+        self.assertEqual((r["tested_any"], r["tested_against_purpose"], r["unresolved"], r["n"]), (1, 0, 1, 3))
         self.assertIn("ILLUSTRATIVE", aggregate.render(r))
+
+    def test_purpose_readings(self):
+        c = card.read(full())
+        self.assertEqual(aggregate.purpose_reading(c)[0], "NOT_TESTED")
+        base = full()
+        for flag, want in ((True, "AGAINST_PURPOSE"), (False, "OTHER_MEASURAND"), (None, "UNRESOLVED")):
+            c = copy.deepcopy(base)
+            c["last_tested"] = {"tag": "OBSERVED", "value": {"date": "2020", "tester": "t", "measurand": "m",
+                                                           "matches_purpose": flag}, "basis": "constructed"}
+            self.assertEqual(aggregate.purpose_reading(card.read(c))[0], want)
+        c["stated_purpose"] = V()
+        c["last_tested"]["value"]["matches_purpose"] = True
+        self.assertEqual(aggregate.purpose_reading(card.read(c)), ("UNRESOLVED", "stated_purpose VOID"))
+
+    def test_matches_purpose_is_three_valued(self):
+        c = full()
+        c["last_tested"] = {"tag": "OBSERVED", "value": {"date": "2020", "tester": "t", "matches_purpose": "yes"},
+                            "basis": "b"}
+        with self.assertRaises(card.CardRefused):
+            card.read(c)
 
     def test_coverage_landed_verbatim(self):
         self.assertTrue(text(os.path.join(HERE, "COVERAGE.md")).startswith(

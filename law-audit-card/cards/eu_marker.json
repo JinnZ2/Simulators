@@ -40,10 +40,12 @@
  },
  "id": "eu-2022-197-fiscal-marker",
  "last_tested": {
-  "basis": "law-measurement-correction/CORRECTION-law-as-unvalidated-measurement-2026-10-03.md:88-89 'SY124 not resilient to common removal methods -> replace'; next review by 31 Dec 2028, law-measurement-correction/CORRECTION-law-as-unvalidated-measurement-2026-10-03.md:91",
+  "basis": "law-measurement-correction/CORRECTION-law-as-unvalidated-measurement-2026-10-03.md:88-89 'SY124 not resilient to common removal methods -> replace'; next review by 31 Dec 2028, law-measurement-correction/CORRECTION-law-as-unvalidated-measurement-2026-10-03.md:91; measurand quoted from the same line; match to purpose not declared (stated_purpose VOID)",
   "tag": "OBSERVED",
   "value": {
    "date": "2019",
+   "matches_purpose": null,
+   "measurand": "resilience of the marker (SY124) to common removal methods",
    "tester": "Directive 95/60/EC evaluation (tester body not named in the tree)"
   }
  },

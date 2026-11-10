@@ -163,6 +163,8 @@ def check_field(name, f):
     if name == "last_tested" and f["value"] is not None:
         if not (f["value"].get("date") and f["value"].get("tester")):
             raise CardRefused("last_tested: needs date and tester, else VOID")
+        if f["value"].get("matches_purpose") not in (True, False, None):
+            raise CardRefused("last_tested: matches_purpose is true, false or null (undeclared)")
     if name == "disposition" and f["value"] is not None:
         if f["value"].get("value") not in DISPOSITIONS:
             raise CardRefused("disposition: %r not in %s" % (f["value"].get("value"), DISPOSITIONS))

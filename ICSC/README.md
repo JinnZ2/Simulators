@@ -40,3 +40,11 @@ attached; the markdown pasted earlier is the same document and is already SPEC_A
 round-4 name is added as a byte copy (sha256 984c2f94...1e93a75 for both). check_landing.py check 3
 fails if the two diverge. The folder itself first landed in commit a909e9c.
 tested: 2026-11-09 | Claude Code, cloud session (claude.ai/code) | model: see trailer | check_landing.py 4/4 (5 with byte copy) ; check_v02.py 11/11
+
+Note 2026-11-10: the revised v0.2 text arrived and is appended verbatim to `SPEC_v0.2.md` under the
+heading "rev 2026-11-09 11:44", sha256 8090a066c5a4...f8f43b. The original landing above that heading
+is unchanged. The revision differs in three places: section 2 (assumption coverage, never COMPLETE),
+section 4.1 (G1 is control circularity, CONDITIONAL(circular_control), with non-circular routes) and
+section 12 (T30 renamed, T30b added). `LIVE_SPECIMENS.md` lists the spec's live specimens and adds a
+third, the self-firing scanner in `law-audit-card/card.py` (fixed, with a planted test).
+`check_v02.py` checks the original prefix, the revision bytes, the three changes and the specimen.

@@ -87,10 +87,22 @@ cards/sunday_laundry.json  every field VOID (correction notice section D:
 Every value is taken from the two `law-*` dirs with a `path:line` basis;
 nothing is drafted from memory. All three read UNRESOLVED.
 
-`aggregate.py` counts cards whose `last_tested` is not VOID as "laws checked
-against own purpose". On the seeds: 1 of 3. **ILLUSTRATIVE**: the seeds were
-picked because the tree already held material on them, so this is a count
-over seeds, not a rate about laws.
+`aggregate.py` reports two counts, both **ILLUSTRATIVE** (the seeds were
+picked because the tree already held material on them, so these are counts
+over seeds, not rates about laws):
+
+```text
+tested_any              last_tested != VOID                          1 of 3
+tested_against_purpose  stated_purpose != VOID AND the test's        0 of 3
+                        measurand declared to match it
+                        (last_tested.value.matches_purpose = true)
+unresolved              tested, but purpose VOID or match undeclared 1
+```
+
+The match is declared on the card (`matches_purpose`: true / false / null),
+never inferred by the tool. The one tested seed, the EU marker, tested
+removal resilience in 2019; its stated purpose is VOID, so it reads
+UNRESOLVED.
 
 ```sh
 python3 card.py cards/*.json
@@ -100,12 +112,22 @@ TAF_PATH=/path/to/thermodynamic-accountability-framework python3 tests/test_card
 
 Neither module accepts `--selftest`.
 
+## Divergence from TAF (recorded 2026-11-10)
+
+TAF `core/regulatory_scope_audit.py` `audit()` treats an absent
+`intent_check` as `intent_applicable = True`. So a regulation out of scope
+with no intent check reads `[OUT OF SCOPE -- INTENT PRESERVED]`: the intent
+is assumed to still apply. This card reads the same case as VOID, since an
+undeclared intent is no information. TAF's code is untouched; a dated note
+there records this as a candidate correction. Until TAF decides, a card's
+`scope_valid` and a direct TAF run can differ on exactly this case, and
+`tests/test_card.py` pins the card's reading.
+
 ## Open
 
 - `INDEPENDENT_AS_DECLARED` compares two names. It cannot see shared funding
   or staff (`assessor-coupling/`).
-- `last_tested` does not say what the test was against. The EU 2019 evaluation
-  tested removal resilience; whether that is "its own purpose" is the reader's
-  call, and the stated purpose is VOID on that card.
+- Whether a test's measurand matches the stated purpose is a reader
+  declaration (`matches_purpose`); nothing checks it against the texts.
 - No enforcer is stated in the tree for either seeded law, so circularity is
   VOID on all three.

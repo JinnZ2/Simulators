@@ -21,7 +21,7 @@
   evidence         VOID      null
   cut_sensitivity  VOID      null
   scope_valid      VOID      null
-  last_tested      OBSERVED  {"date": "2019", "tester": "Directive 95/60/EC evaluation (tester body not named in the tree)"}
+  last_tested      OBSERVED  {"date": "2019", "matches_purpose": null, "measurand": "resilience of the marker (SY124) to common removal methods", "tester": "Directive 95/60/EC evaluation (tester body not named in the tree)"}
   evaluator        VOID      null
   circularity      VOID      null
   anchor_date      OBSERVED  "2022-01-17"
