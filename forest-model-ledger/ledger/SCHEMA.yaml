@@ -33,6 +33,27 @@ assumption_block:
   used_by_runs: "list of run_N"
   open_issues: "list"
   status: "candidate | admitted | rejected | placeholder"
+tool:
+  id: "file name without .yaml, in ledger/toolkit/"
+  code: "path to the tool"
+  diagnoses: "list of deviations it diagnoses; must be non-empty"
+  inputs: "list"
+  outputs: "list"
+  cannot_see: "list"
+  other_domains_it_could_see_into: "void at start"
+  used_in: "list of run_N"
+  open_issues: "list"
+  status: "candidate | admitted | rejected | placeholder"
+coincidence_card:
+  where: "ledger/toolkit/cards/"
+  slots: "shared_constraint | local_normal_form | statistical_artifact | numerical_artifact | low_dim_projection | none_of_above; each {state: void | supported | ruled_out, evidence}"
+  reading_declared: "OPEN | RESOLVED | CURIOSITY; must equal what coincidence_card.py derives"
+  branch: "void | branch id; required when the reading is CURIOSITY"
+anchor:
+  where: "ledger/anchors/"
+  status: "candidate | anchor | failed; anchor only when all four tests read PASS"
+  tests: "budgets_close_within_noise_rule, holds_across_seeds, holds_when_each_assumption_nudged, independent_budgets_close_together; each {state: PASS | PARTIAL | FAIL | NOT_RUN, evidence}"
+  code: "list of {path, sha256}; the checker fails when a file no longer matches"
 run:
   files: "runs/run_N.md always; runs/run_N.py when the code is in the tree"
   fields: "code, seed, params, results, flags, provenance, feeds -- each present, void when unknown"

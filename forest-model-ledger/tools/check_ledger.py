@@ -141,12 +141,75 @@ def check(run_tests=False):
                 F(f"{r}.md: field {f_} dropped")
             elif f_ == "code" and m.group(1).strip() != "void" and not os.path.exists(os.path.join(ROOT, m.group(1).strip())):
                 F(f"{r}.md: code {m.group(1).strip()} not in tree")
+    # ---- toolkit, cards, anchors
+    import hashlib
+    from ledger.toolkit import coincidence_card as cc
+    TOOL = ["id", "code", "diagnoses", "inputs", "outputs", "cannot_see", "other_domains_it_could_see_into",
+            "used_in", "open_issues", "status"]
+    tools_ = {os.path.basename(p)[:-5]: miniyaml.load(p)
+              for p in sorted(glob.glob(os.path.join(ROOT, "ledger", "toolkit", "*.yaml")))}
+    for n, t in tools_.items():
+        fields("tool", n, t, TOOL)
+        if not os.path.exists(os.path.join(HERE, t.get("code", "MISSING"))):
+            F(f"tool {n}: code {t.get('code')} not in tree")
+        if not t.get("diagnoses"):
+            F(f"tool {n}: lists no deviation it diagnoses")
+        for r in t.get("used_in", []):
+            if r not in runs:
+                F(f"tool {n}: run {r} missing")
+    cards = cc.load_all(ROOT)
+    readings = {}
+    for n, c in cards.items():
+        try:
+            reading, _ = cc.read(c)
+        except cc.CardError as e:
+            F(f"card {e}")
+            continue
+        readings[reading] = readings.get(reading, 0) + 1
+        if c.get("id") != n:
+            F(f"card {n}: id != file name")
+        if c["reading_declared"] != reading:
+            F(f"card {n}: declared {c['reading_declared']}, derived {reading}")
+        if c["branch"] != "void" and c["branch"] not in branches:
+            F(f"card {n}: branch {c['branch']} missing")
+        for r in c["runs"]:
+            if r not in runs:
+                F(f"card {n}: run {r} missing")
+    ANCHOR = ["id", "status", "git_tag", "run", "seed", "params", "scope", "code", "tests", "open_issues"]
+    FOUR = ["budgets_close_within_noise_rule", "holds_across_seeds", "holds_when_each_assumption_nudged",
+            "independent_budgets_close_together"]
+    anchors_ = {os.path.basename(p)[:-5]: miniyaml.load(p)
+                for p in sorted(glob.glob(os.path.join(ROOT, "ledger", "anchors", "*.yaml")))}
+    for n, a in anchors_.items():
+        for k in ANCHOR:
+            if k not in a:
+                F(f"anchor {n}: field {k} dropped (write void)")
+        if a.get("status") not in ("candidate", "anchor", "failed"):
+            F(f"anchor {n}: status {a.get('status')}")
+        t4 = a.get("tests", {})
+        if sorted(t4) != sorted(FOUR):
+            F(f"anchor {n}: tests must be exactly the four anchor tests")
+        states = [t4.get(k, {}).get("state") for k in FOUR]
+        if any(s not in ("PASS", "PARTIAL", "FAIL", "NOT_RUN") for s in states):
+            F(f"anchor {n}: test state outside PASS / PARTIAL / FAIL / NOT_RUN")
+        if a.get("status") == "anchor" and states != ["PASS"] * 4:
+            F(f"anchor {n}: status anchor with tests {states}")
+        if a.get("run") not in runs:
+            F(f"anchor {n}: run {a.get('run')} missing")
+        for c in a.get("code", []):
+            path = os.path.join(HERE, c.get("path", "MISSING"))
+            if not os.path.exists(path):
+                F(f"anchor {n}: code {c.get('path')} not in tree")
+            elif hashlib.sha256(open(path, "rb").read()).hexdigest() != c.get("sha256"):
+                F(f"anchor {n}: {c['path']} no longer matches its frozen sha256")
     rm = miniyaml.load(os.path.join(ROOT, "ledger", "regime_map.yaml"))
     for fam, row in rm["cells"].items():
         if fam not in branches or sorted(row) != sorted(rm["regimes"]):
             F(f"regime_map: row {fam}")
     count = lambda d: {s: sum(1 for x in d.values() if x.get("status") == s) for s in sorted(STATUS)}
-    return fails, notes, dict(components=count(comps), branches=count(branches), blocks=len(blocks), runs=len(runs), tests=len(tests))
+    return fails, notes, dict(components=count(comps), branches=count(branches), blocks=len(blocks), runs=len(runs), tests=len(tests),
+                              tools=len(tools_), cards=readings,
+                              anchors={n: a.get("status") for n, a in anchors_.items()})
 
 
 def selftest():
@@ -158,6 +221,11 @@ def selftest():
         ("dangling dependency", "ledger/components/L1_LEACHING.yaml", "  - L0_N_BUDGET", "  - L0_NOPE", "depends_on L0_NOPE"),
         ("one-way block link", "ledger/assumption_blocks/AB_WELL_MIXED.yaml", "  - L1_UPTAKE_MM\n", "", "used_by omits L1_UPTAKE_MM"),
         ("anchor on one branch only", "ledger/branches/BR_FIRE_MEANFIELD.yaml", "drought >= 0.5", "drought >= 0.4", "anchor CA_1: copies differ"),
+        ("card none_of_above against derivation", "ledger/toolkit/cards/CC_001_n_misclosure_seed_invariance.yaml",
+         'none_of_above:\n    state: ruled_out', 'none_of_above:\n    state: supported', "none_of_above declared supported"),
+        ("candidate promoted with tests unpassed", "ledger/anchors/ANCHOR_run9.yaml", "status: candidate", "status: anchor", "status anchor with tests"),
+        ("frozen code hash drift", "ledger/anchors/ANCHOR_run9.yaml", "sha256: ebb656bb", "sha256: 0bb656bb", "no longer matches its frozen sha256"),
+        ("tool with no diagnoses", "ledger/toolkit/coincidence_card.yaml", "diagnoses:", "diagnoses: []\nwas:", None),
         ("run field dropped", "runs/run_3.md", "seed       :", "sead       :", "field seed dropped"),
     ]
     bad = 0
@@ -188,6 +256,7 @@ if __name__ == "__main__":
     print("components", summ["components"])
     print("branches  ", summ["branches"])
     print(f"blocks {summ['blocks']}  runs {summ['runs']}  tests {summ['tests']}")
+    print(f"toolkit {summ['tools']} tools  cards {summ['cards']}  anchors {summ['anchors']}")
     for n in notes:
         print("note:", n)
     for f in fails:

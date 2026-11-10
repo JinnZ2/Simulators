@@ -94,20 +94,29 @@ Ask one question rather than filling the gap from typical practice.
         correction, not delivered text.
 ```
 
-## Where the folder stands against the brief (2026-11-10; revise as it moves)
+## Where the folder stands against the brief (2026-11-10, after run_10; revise as it moves)
 
 ```text
 brief says                              folder has
 --------------------------------------  ------------------------------------------------
-ledger/toolkit/, 7 tools                ABSENT. Only budget closure exists (model/l0_audit.py)
-anchor = frozen, TAGGED snapshot        run_9 is committed, not tagged; no anchor record
-anchor test: 4 conditions               seeds 0..9 done; assumption nudges NOT run;
-                                        independent budgets: 2 live, 3 void
+ledger/toolkit/, 7 tools                2 of 7: budget_closure, coincidence_card. The other
+                                        five (residual regression, ablation, ensembles,
+                                        family swap, parameter recovery, block trace) ABSENT
+anchor = frozen, TAGGED snapshot        ledger/anchors/ANCHOR_run9.yaml, status candidate;
+                                        git tag forest-model-ledger-anchor-candidate-run9;
+                                        three code files pinned by sha256, checked every run
+anchor test: 4 conditions               seeds PASS (wired, run_10); budgets PARTIAL (sigma void);
+                                        independent budgets PARTIAL (2 of 5); nudges NOT_RUN
 RETURN closes C, N, P, water, energy    N and water close; C, P, energy print VOID
 RETURN diffs against the anchor         no diff tool
 BRANCH changes ONE component            no branch has been run from run_9 yet
-run_9 is therefore a CANDIDATE anchor, not an anchor
+"run the FULL toolbox" on a trigger     run_10 ran both tools that exist; five do not
+run_9 is a CANDIDATE anchor, not an anchor
 ```
+
+Do not edit `model/base.py`, `ledger/toolkit/budget_closure.py` or `runs/run_9.py`:
+the candidate anchor pins them by hash and `tools/check_ledger.py` fails on drift.
+A change to any of them is a new anchor candidate, not an edit.
 
 ## Commands
 
@@ -116,6 +125,8 @@ python3 tests/test_l0.py                  # L0 tests; prints its count
 python3 tools/check_ledger.py --tests     # schema + cross-refs + admitting tests
 python3 tools/check_ledger.py --selftest  # planted defects; each must fire
 python3 runs/run_9.py                     # reproduces samples/run_9.sample.txt
+python3 runs/run_10.py                    # reproduces samples/run_10.sample.txt (about a minute)
+python3 ledger/toolkit/coincidence_card.py  # reads every card
 ```
 
 ## Hard constraints

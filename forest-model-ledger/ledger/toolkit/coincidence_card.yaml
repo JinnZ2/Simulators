@@ -1,0 +1,19 @@
+id: coincidence_card
+code: ledger/toolkit/coincidence_card.py
+diagnoses:
+  - "two results agreeing, or one result flatter / smoother / more alike than expected"
+  - "a convergence offered as an anchor before its causes are separated"
+inputs:
+  - "one card per coincidence in ledger/toolkit/cards/"
+  - "evidence per slot, from runs"
+outputs:
+  - "OPEN (unrun slots listed) | RESOLVED (supported slots listed, possibly several) | CURIOSITY (own branch required)"
+cannot_see:
+  - "a cause outside the five named slots that is mistaken for one of them"
+  - "whether the evidence in a slot is sufficient: it checks that evidence is present, not that it is right"
+other_domains_it_could_see_into: void
+used_in:
+  - run_10
+open_issues:
+  - "the five cause slots come from the 2026-11-10 instruction; no card has yet reached CURIOSITY, so that branch of the tool is exercised only by constructed cards in tests"
+status: candidate

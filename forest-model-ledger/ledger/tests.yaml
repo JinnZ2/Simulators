@@ -24,3 +24,15 @@ tests:
   - id: T_L0_FIRE_EVENT_CONSERVES
     command: "python3 tests/test_l0.py"
     checks: "a fire event alone leaves the N budget CLOSED"
+  - id: T_L0_SEED_WIRED_TO_IGNITION
+    command: "python3 tests/test_l0.py"
+    checks: "with drought_sd=0 (identical precipitation) seeds 0-3 give distinct fire-time sequences"
+  - id: T_L0_RESIDUAL_IS_DEPOSITION_COUNTER
+    command: "python3 tests/test_l0.py"
+    checks: "a model-free float64 counter reproduces the N misclosure at dt 1/52 within 5 percent, opposite sign; dep=0 residual below 1e-12"
+  - id: T_TK_CARD_READINGS
+    command: "python3 tests/test_l0.py"
+    checks: "coincidence_card returns OPEN, RESOLVED and CURIOSITY on constructed cards and refuses four malformed ones"
+  - id: T_TK_BUDGET_CLOSURE_MOVED
+    command: "python3 tests/test_l0.py"
+    checks: "model.l0_audit re-exports ledger.toolkit.budget_closure: same function objects"

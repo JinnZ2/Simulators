@@ -1,0 +1,32 @@
+# CANDIDATE anchor. Not an anchor until all four tests read PASS.
+id: ANCHOR_run9
+status: candidate
+git_tag: forest-model-ledger-anchor-candidate-run9
+run: run_9
+seed: "0 (base); 0..9 (seed sweep)"
+params: "model/base.py DEFAULTS and INIT, unedited; 300 yr; RK4 dt 1/52"
+scope: "N and water only; one hand-set parameter point; well-mixed stand; simulation, no field data"
+code:
+  - path: model/base.py
+    sha256: ebb656bbf9554f3a6ed08055a0787f1e3a4ab6c024006a11555aed45eaea4ec8
+  - path: ledger/toolkit/budget_closure.py
+    sha256: 796b76f69e069f082603c3ee4392d56a0261de3ef139fbe942f14a21ba05a456
+  - path: runs/run_9.py
+    sha256: 0bae61f9a04d989a2d58fd90a24290c8285d7f62f0de47b81d760d671765ef22
+tests:
+  budgets_close_within_noise_rule:
+    state: PARTIAL
+    evidence: "N and water CLOSED at numerical tolerance (run_9). sigma_meas is void for every budget, so the measurement-noise rule itself has not been applied"
+  holds_across_seeds:
+    state: PASS
+    evidence: "seeds 0-9 all close (run_9); the seed is wired to the ignition draw: 10 distinct fire sequences with precipitation held identical (run_10)"
+  holds_when_each_assumption_nudged:
+    state: NOT_RUN
+    evidence: void
+  independent_budgets_close_together:
+    state: PARTIAL
+    evidence: "2 of 5 budgets live (N, water); C, P, energy VOID. No compensating-error test exists"
+open_issues:
+  - "the N residual at dt 1/52 is the deposition counter's roundoff (CC_001); left as is, because changing the counter changes the frozen code"
+  - "grasses extinct by year 19-20.5 in every seed; an anchor with one plant guild is a narrower base than the work order describes"
+  - "trajectory not dt-converged: fires 80 at 1/52, 79 at 1/104 and 1/208, 81 at 1/128"

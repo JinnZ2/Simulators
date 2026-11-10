@@ -3,5 +3,9 @@ FIRED  admitted without test
 FIRED  dangling dependency
 FIRED  one-way block link
 FIRED  anchor on one branch only
+FIRED  card none_of_above against derivation
+FIRED  candidate promoted with tests unpassed
+FIRED  frozen code hash drift
+FIRED  tool with no diagnoses
 FIRED  run field dropped
-selftest: 6 planted, 0 silent
+selftest: 10 planted, 0 silent
