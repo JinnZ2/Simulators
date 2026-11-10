@@ -97,6 +97,16 @@ Enforced by `tools/check_ledger.py`: every run carries a status; an INCOMPLETE
 run must appear in `ledger/NEEDS_TOOL.md`; every tool named there must have an
 entry in `ledger/toolkit/`. The first-line rule is for whoever writes the report.
 
+```text
+STANDING RULE (chat side, 2026-11-10 — housekeeping decisions, item 3)
+wherever a conflict arises, branch instead of
+overwrite — keep both versions, document the difference, decision stays with Kavik.
+```
+
+Not enforced by any checker. It applies to merge conflicts and to any two
+versions of one thing: no side is picked, both stay inspectable, the
+difference is written down per item.
+
 ## Corrections to the brief (by its authors; superseded text kept)
 
 ```text
