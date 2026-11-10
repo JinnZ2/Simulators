@@ -2,6 +2,8 @@
 id: ANCHOR_run9
 status: candidate
 git_tag: forest-model-ledger-anchor-candidate-run9
+git_commit: 55c651b8f7228b4d28a21ad442bf817752e80d21
+tag_state: "created locally on the commit above; NOT on the remote: the session's git proxy refused the tag push (HTTP 403). The commit hash and the three sha256 below are the pin until someone with push rights sets the tag"
 run: run_9
 seed: "0 (base); 0..9 (seed sweep)"
 params: "model/base.py DEFAULTS and INIT, unedited; 300 yr; RK4 dt 1/52"

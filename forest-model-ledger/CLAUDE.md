@@ -103,7 +103,8 @@ ledger/toolkit/, 7 tools                2 of 7: budget_closure, coincidence_card
                                         five (residual regression, ablation, ensembles,
                                         family swap, parameter recovery, block trace) ABSENT
 anchor = frozen, TAGGED snapshot        ledger/anchors/ANCHOR_run9.yaml, status candidate;
-                                        git tag forest-model-ledger-anchor-candidate-run9;
+                                        tag forest-model-ledger-anchor-candidate-run9 is LOCAL ONLY
+                                        (tag push refused, 403); commit 55c651b is the pin;
                                         three code files pinned by sha256, checked every run
 anchor test: 4 conditions               seeds PASS (wired, run_10); budgets PARTIAL (sigma void);
                                         independent budgets PARTIAL (2 of 5); nudges NOT_RUN
