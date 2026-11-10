@@ -305,6 +305,12 @@ add("channel", "Cross-Domain-Toolkit", "telemetry_vocabulary/", "telemetry_vocab
 NAME_COLLISIONS.append(("clean-room", "software rebuild: Cross-Domain-Toolkit README.md:112, docs/METHOD.md:10 (\"clean-room, domain-general abstractions\")",
                         "lab isolation (contamination-controlled room)",
                         "lab-isolation sense carried from Amendment A2; no in-scope file using it was located"))
+NAME_COLLISIONS.append(("stated_purpose / scope_valid", "Simulators/law-audit-card/ (card fields)",
+                        "thermodynamic-accountability-framework core/regulatory_scope_audit.py (first_principle_intent; IN SCOPE / OUT OF SCOPE -- INTENT EXPIRED / INTENT PRESERVED)",
+                        "same concept, two names; law-audit-card imports TAF and passes stated_purpose as first_principle_intent rather than reimplementing (2026-11-10)"))
+NAME_COLLISIONS.append(("KEEP / REVISE vs KEEP / REBUILD", "Simulators/law-audit-card/ disposition (reader-assigned, per law)",
+                        "law-*/CORRECTION-law-as-unvalidated-measurement-2026-10-03.md section G (parts of a report)",
+                        "REDO renamed REVISE to avoid reading as REBUILD; mapping in law-audit-card/card.py DISPOSITION_MAP"))
 GAPS.append(("floor", "four-arm paired design instrument: arms 1-4, arm 4 = infeasibility record (the design that could not be run is filed as an arm, not dropped)",
              "named in Amendment A2; no tool located that holds the four arms or files infeasibility as an arm"))
 

@@ -14317,6 +14317,26 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   masked, measured both ways. Check count
   printed by `python3 orientation-chamber/tests/test_chamber.py`. Stdlib only,
   CC0.
+- `law-audit-card/` — PROPOSED, one card per law: stated_purpose,
+  target_outcome, enforcement, evidence, cut_sensitivity, scope_valid,
+  last_tested, evaluator, circularity, anchor_date, disposition, each tagged
+  OBSERVED / DERIVED / PROPOSED / VOID (VOID written, never omitted).
+  `card.py` derives cut_sensitivity (>= 2 declared-frame boundaries -> FLIPS /
+  HOLDS, else VOID) and circularity (enforcer == evaluator ->
+  CONDITIONAL(circular_eval)), and runs scope_valid through TAF
+  core/regulatory_scope_audit.py by import, not reimplementation. The
+  disposition (KEEP / EDIT / REVISE / RETIRE / UNRESOLVED; REVISE replaces
+  REDO so it does not read as section G's REBUILD) is reader-assigned with
+  reader id and date; the tool never writes one, only forces UNRESOLVED when
+  evidence or cut_sensitivity is VOID (READ_ME_THIS_WAY section 4). Seeds:
+  dyed fuel, EU 2022/197 marker, Sunday laundry (all VOID), every value cited
+  `path:line` from the two law-* dirs. `aggregate.py`: tested_any 1 of 3,
+  tested_against_purpose 0 of 3 (needs a stated purpose and a declared
+  measurand match, else UNRESOLVED), ILLUSTRATIVE. Divergence from TAF
+  (undeclared intent: TAF assumes it applies, the card reads VOID) recorded
+  in the README and as a dated note in TAF. `COVERAGE.md` is the
+  2026-11-10 coverage report, verbatim. Check count printed by
+  `python3 law-audit-card/tests/test_card.py`. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

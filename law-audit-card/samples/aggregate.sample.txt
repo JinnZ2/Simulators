@@ -1,0 +1,7 @@
+# law-audit-card aggregate | ILLUSTRATIVE | seed cards only, not a sample
+tested_any (last_tested != VOID): 1 of 3 seed cards
+tested_against_purpose (purpose stated, measurand declared to match): 0 of 3 seed cards
+unresolved (tested, purpose or match not established): 1
+  us-26cfr48.4082-1-dyed-fuel  NOT_TESTED       last_tested VOID
+  eu-2022-197-fiscal-marker    UNRESOLVED       stated_purpose VOID
+  sunday-white-laundry         NOT_TESTED       last_tested VOID

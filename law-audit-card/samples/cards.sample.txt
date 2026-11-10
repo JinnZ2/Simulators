@@ -1,0 +1,45 @@
+# law-audit-card | PROPOSED | us-26cfr48.4082-1-dyed-fuel
+# the tool reads; the disposition is the reader's (READ_ME_THIS_WAY section 4)
+  stated_purpose   VOID      null
+  target_outcome   VOID      null
+  enforcement      OBSERVED  {"enforcer": null, "mechanism": "dye Solvent Red 164 (and no other dye) at a concentration spectrally equivalent to at least 3.9 pounds of the solid dye standard Solvent Red 26 per thousand barrels"}
+  evidence         VOID      null
+  cut_sensitivity  VOID      null
+  scope_valid      VOID      null
+  last_tested      VOID      null
+  evaluator        VOID      null
+  circularity      VOID      null
+  anchor_date      OBSERVED  "2026-10-03"
+  disposition      DERIVED   {"value": "UNRESOLVED", "reader": null, "date": null}
+
+
+# law-audit-card | PROPOSED | eu-2022-197-fiscal-marker
+# the tool reads; the disposition is the reader's (READ_ME_THIS_WAY section 4)
+  stated_purpose   VOID      null
+  target_outcome   VOID      null
+  enforcement      OBSERVED  {"enforcer": null, "mechanism": "ACCUTRACE PLUS fiscal marker; transition ends 18 Jan 2024"}
+  evidence         VOID      null
+  cut_sensitivity  VOID      null
+  scope_valid      VOID      null
+  last_tested      OBSERVED  {"date": "2019", "matches_purpose": null, "measurand": "resilience of the marker (SY124) to common removal methods", "tester": "Directive 95/60/EC evaluation (tester body not named in the tree)"}
+  evaluator        VOID      null
+  circularity      VOID      null
+  anchor_date      OBSERVED  "2022-01-17"
+  disposition      DERIVED   {"value": "UNRESOLVED", "reader": null, "date": null}
+
+
+# law-audit-card | PROPOSED | sunday-white-laundry
+# the tool reads; the disposition is the reader's (READ_ME_THIS_WAY section 4)
+  stated_purpose   VOID      null
+  target_outcome   VOID      null
+  enforcement      VOID      null
+  evidence         VOID      null
+  cut_sensitivity  VOID      null
+  scope_valid      VOID      null
+  last_tested      VOID      null
+  evaluator        VOID      null
+  circularity      VOID      null
+  anchor_date      VOID      null
+  disposition      DERIVED   {"value": "UNRESOLVED", "reader": null, "date": null}
+
+

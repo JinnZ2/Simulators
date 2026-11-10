@@ -1947,6 +1947,18 @@
    "one": "software rebuild: Cross-Domain-Toolkit README.md:112, docs/METHOD.md:10 (\"clean-room, domain-general abstractions\")",
    "other": "lab isolation (contamination-controlled room)",
    "note": "lab-isolation sense carried from Amendment A2; no in-scope file using it was located"
+  },
+  {
+   "name": "stated_purpose / scope_valid",
+   "one": "Simulators/law-audit-card/ (card fields)",
+   "other": "thermodynamic-accountability-framework core/regulatory_scope_audit.py (first_principle_intent; IN SCOPE / OUT OF SCOPE -- INTENT EXPIRED / INTENT PRESERVED)",
+   "note": "same concept, two names; law-audit-card imports TAF and passes stated_purpose as first_principle_intent rather than reimplementing (2026-11-10)"
+  },
+  {
+   "name": "KEEP / REVISE vs KEEP / REBUILD",
+   "one": "Simulators/law-audit-card/ disposition (reader-assigned, per law)",
+   "other": "law-*/CORRECTION-law-as-unvalidated-measurement-2026-10-03.md section G (parts of a report)",
+   "note": "REDO renamed REVISE to avoid reading as REBUILD; mapping in law-audit-card/card.py DISPOSITION_MAP"
   }
  ],
  "gaps": [
