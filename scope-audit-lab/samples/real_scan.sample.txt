@@ -1,0 +1,27 @@
+scope-audit-lab / real_scan / run_scan.py
+================================================================
+series: 158 days, 1424 commits at pin 5e75eb6e74a7, 61 zero days (measured)
+mean 9.01 commits/day, sd 15.14, max 89
+
+1. scan at threshold 10: 42 candidate regions over 157 adjacent pairs
+2. sweep 5/10/20/40: 69, 42, 21, 9
+3. permutation probe: 1316 distinct pairs over 26 scans; 1274 never occur in the given order
+4. coupling (day index vs weekday): coincident 42, A-only 0, B-only 0
+5. null (independent normal days, the series' own mean and sd): expected 100.55  [COMPUTED]
+
+against the pre-registration:
+   P1 coupling A-only = B-only = 0: HELD
+   P2 observed differs from null: observed 42, expected 100.55, difference -58.55. P2 stated no tolerance, so any difference holds it;
+      as written it could only fail on an exact tie, which makes it close to unfalsifiable.
+   P3 permutation flags pairs absent from the given order: HELD (1274)
+
+NOT PRE-REGISTERED (added after the run, labelled as such):
+   shuffled-order null from the probe's 25 permutations (same days, order destroyed):
+   mean 59.2, range 53..65; the real order gives 42,
+   below all 25 shuffles. The normal null's 100.6 mostly measures that
+   generator's misfit to zero-heavy counts (it also admits negative days); the order-only
+   part of the gap is -17.2: active days come in runs.
+
+interpretation: unassigned. A candidate region is a day-to-day change of
+more than 10 commits. Nothing here reads the repository's activity as
+anything beyond that.

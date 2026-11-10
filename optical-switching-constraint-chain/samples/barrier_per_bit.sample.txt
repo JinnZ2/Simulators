@@ -1,0 +1,34 @@
+optical-switching-constraint-chain / barrier_per_bit.py
+==================================================================
+every term declared or the row is refused
+
+STRIPE PERIOD at the report's parameters (Ms 0.9 MA/m, Keff 0.5 MJ/m3, A 15 pJ/m, 0.6 nm/repeat)
+   N= 3     2.465e+05 um
+   N= 5         224.2 um
+   N= 7         12.54 um
+   N= 9         2.695 um
+   N=10         1.601 um
+   N=11         1.055 um
+   N=12        0.7511 um
+   first N below 1.5 um: 11   below 0.76 um: 12
+
+RETENTION LINE (10 years)
+   single_bit, tau0=1e-09 s: Delta = 40.3
+   single_bit, tau0=1e-10 s: Delta = 42.6
+   population 60 with no basis: REFUSED (undeclared: basis)
+   population 60 with a stated basis: 60
+
+COHERENT DELTA AT 30 nm (an upper bracket; nucleation can be lower)
+   Co/Pt 12 nm, 0.5 MJ/m3       Delta    1304   size at Delta=60: 6.4 nm
+   Co/Pt 5.4 nm, 0.3 MJ/m3      Delta     352   size at Delta=60: 12.4 nm
+   FePt grain, 5 MJ/m3, 10 nm   Delta    8533   size at Delta=60: 2.5 nm
+
+ENERGY PER BIT (pJ)
+   row                incident disc  incident sq   absorbed  stated
+   UCSD vector beam            34.5         43.9    REFUSED      12
+      fluence: fluence taken from Vomir 2017, a different experiment; UCSD's own fluence not stated
+   classic AO-HDS            1814.6       2310.4    REFUSED     640
+   plasmonic TbFeCo             8.2         10.4    REFUSED     4.9
+   absorbed: REFUSED because no absorbed fraction is declared in the report.
+
+Nothing above measures a barrier or rates a material.

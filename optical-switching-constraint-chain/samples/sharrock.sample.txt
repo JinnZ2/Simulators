@@ -1,0 +1,12 @@
+optical-switching-constraint-chain / sharrock.py
+================================================================
+CONSTRUCTED data, planted Delta = 50 at f0 = 1e9 Hz (no measurement exists)
+
+fit at the true f0 1e9:   Delta = 50.00
+fit at a wrong f0 1e+08: Delta = 48.04
+fit at a wrong f0 1e+10: Delta = 52.02
+fit at a wrong f0 1e+11: Delta = 54.07
+declared f0 range 1e9..1e10 -> Delta band 50.00..52.02
+decision.py on that band: BETWEEN_LINES
+
+f0 is part of the measurement's uncertainty, not a constant to assume.

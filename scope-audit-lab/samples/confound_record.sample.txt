@@ -1,0 +1,16 @@
+scope-audit-lab / confound_record.py
+============================================================
+thread B seeded (sec. 6.2 of the continuation report):
+   C01  UNTESTED      corpus prior
+   C02  UNTESTED      framing pull
+   C03  UNTESTED      trained reflex
+   C04  UNTESTED      narration-not-causal
+   C05  UNTESTED      context contamination
+   C06  UNTESTED      sampling variance
+   C07  UNTESTED      version drift
+   C08  UNTESTED      evaluator sharing
+   C09  UNTESTED      term freight
+   C10  UNTESTED      observer effect
+
+current status counts: UNTESTED 10, RAN_NO_SIGNAL 0, RAN_SIGNAL 0, NOT_TESTABLE 0
+no combined call is produced; UNTESTED is not 'absent'

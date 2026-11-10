@@ -1,0 +1,17 @@
+optical-switching-constraint-chain / decision.py
+==================================================================
+lines: single bit (10 y, tau0 1 ns) 40.3; population 60 (declared, basis carried)
+
+no measurement:               UNMEASURED
+Co/Pt 12 nm, 0.5 MJ/m3, 30 nm: coherent 1304, no discount declared -> REFUSED (undeclared: discount_range and discount_basis (a coherent estimate is an upper bracket, OSC_011))
+   with an illustrative 30-100x discount: ESTIMATED 13.0..43.5 -> STRADDLES ['BETWEEN_LINES', 'BELOW_SINGLE_BIT_LINE']
+Co/Pt 5.4 nm, 0.3 MJ/m3, 30 nm: coherent 352, no discount declared -> REFUSED (undeclared: discount_range and discount_basis (a coherent estimate is an upper bracket, OSC_011))
+   with an illustrative 30-100x discount: ESTIMATED 3.5..11.7 -> BELOW_SINGLE_BIT_LINE
+
+measured examples (constructed, to show the states):
+   Delta 75 +/- 5: ABOVE_POPULATION_LINE
+   Delta 50 +/- 3: BETWEEN_LINES
+   Delta 30 +/- 4: BELOW_SINGLE_BIT_LINE
+   Delta 58 +/- 5: STRADDLES ['ABOVE_POPULATION_LINE', 'BETWEEN_LINES']
+
+Nothing above is a measurement. The roadmap stays UNMEASURED until one exists.

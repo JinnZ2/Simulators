@@ -1,0 +1,12 @@
+scope-audit-lab / null_expectation.py
+============================================================
+stream: experiments_demo.jsonl
+generator: uniform {'high': 100.0, 'low': 0.0}
+threshold 10 (absolute), 12 cases, 25 replications
+recorded: mean 8.88, range 7..11
+expected: (n-1) * P = 8.9100   [COMPUTED]
+recorded - expected: -0.0300
+reading: the null count is a property of the generator's width against
+the threshold. A real scan's count is read against this expectation,
+not against zero and not against the demo figure.
+spread across replications: not derived (adjacent pairs are dependent)

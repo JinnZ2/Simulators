@@ -1,0 +1,11 @@
+scope-audit-lab / claims / claim_tracker.py
+================================================================
+4 events, 4 claims, as of 2026-10-27
+
+claim                            state                  days (event) days (registry)
+anthropic-attributed-3sat        NOT_LOCATED                      --               0
+openai-eth-disproof              UNDER_OUTSIDE_REVIEW              1               0
+openai-local-smoothing-kakeya    CLAIMED_UNREFEREED                1               0
+openai-qcd-yang-mills-existence  UNDER_OUTSIDE_REVIEW              1               0
+
+no verdict on any claim; depth per event is in claims.jsonl
