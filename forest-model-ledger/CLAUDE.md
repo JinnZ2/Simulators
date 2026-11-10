@@ -1,7 +1,8 @@
 # CLAUDE.md -- forest-model-ledger
 
 Read the METHOD BRIEF below before `WORK_ORDER.md`, and before touching the
-ledger, the model or a run. It is delivered text: verbatim, never edited here.
+ledger, the model or a run. It is delivered text: verbatim, edited only on its
+authors' own correction, with the superseded line kept under the block.
 Where this folder does not yet do what the brief says, the gap is listed
 under it, not smoothed over.
 
@@ -61,8 +62,9 @@ TOOLBOX (ledger/toolkit/, each tool lists the deviations it diagnoses)
 - assumption-block trace → shared assumption failing across many studies
 
 LESSONS ALREADY PAID FOR
-- Runs 1–5 looked plausible and leaked ~24 N units. Flat equilibrium = the leak
-  damping dynamics. Smooth ≠ correct.
+- The litter-guild + fire model (work-order run 5) looked plausible and leaked
+  ~24 N units. Runs 1–4: N audit VOID. Flat equilibrium = the leak damping
+  dynamics. Smooth ≠ correct.   [CORRECTED 2026-11-10, see below the block]
 - Pairwise-additive prediction failed (impossible negative biomass) → system is
   combinatory; never build the whole from pairs alone.
 - Mean-field ODE wrong exactly near thresholds; percolation variance spikes there.
@@ -77,6 +79,19 @@ LABELING RULES
 
 WHEN UNSURE
 Ask one question rather than filling the gap from typical practice.
+```
+
+## Corrections to the brief (by its authors; superseded text kept)
+
+```text
+2026-11-10  LESSONS ALREADY PAID FOR, first line. Corrected by the chat-side author
+            ("my error"): the delivered line overclaimed.
+  was:  - Runs 1–5 looked plausible and leaked ~24 N units. Flat equilibrium = the leak
+          damping dynamics. Smooth ≠ correct.
+  now:  the measured leak is the litter-guild + fire model only (work-order run 5).
+        Runs 1-4: N audit VOID. The ledger already recorded it this way.
+        The corrected wording inside the block is this session's rendering of that
+        correction, not delivered text.
 ```
 
 ## Where the folder stands against the brief (2026-11-10; revise as it moves)
@@ -110,6 +125,6 @@ void, never dropped     every schema field always present
 rejected entries stay   nothing deleted to make the ledger cleaner
 admitted needs a test   named in ledger/tests.yaml, passing when run
 reported != recomputed  runs 1-8 are carried; only runs with code in the tree are DERIVED here
-delivered text          WORK_ORDER.md and the brief above are never edited
+delivered text          WORK_ORDER.md is never edited; the brief only on its authors' correction, logged
 python 3, numpy         scipy allowed by the order, absent in the cloud build environment
 ```
