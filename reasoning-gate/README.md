@@ -16,7 +16,7 @@ retro_sim_stack.py   second replay, declared differently. disagrees
                      with the first about SIM-B, on purpose.
 SIM_STACK_BACKTRACE.md  the audit these guards were back-traced from
 AUDIT_NOTES.md       what broke, what was fixed, what is a limit
-tests/               69 tests. run: python3 -m unittest discover tests
+tests/               70 tests. run: python3 -m unittest discover tests
 ```
 
 ```

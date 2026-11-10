@@ -500,6 +500,25 @@ class DeliveredRegistryAndReplay(unittest.TestCase):
         report = g.close(observed="o", write=False)
         self.assertEqual(report["claims"][0]["status"], "supported")
 
+    def test_claim_text_is_not_read(self):
+        """
+        AUDIT_NOTES section 12, a LIMIT, not a defect. claim() checks that
+        support exists and what layer it sits on; it never compares the
+        claim's text with the recorded values. A claim contradicted by its
+        own support is recorded 'supported' with no finding. If a declared
+        direction field is ever built, rewrite this to assert the finding.
+        """
+        g = opened(strict=True)
+        g.record("success_with_term", 2, "generator", "the solver code")
+        g.record("success_without_term", 4, "generator", "the solver code")
+        g.claim("removing the term has no effect on success",
+                supported_by=["success_with_term", "success_without_term"],
+                scope="generator")
+        g.control_result("c", "ran")
+        report = g.close(observed="o", write=False)
+        self.assertEqual(report["claims"][0]["status"], "supported")
+        self.assertEqual(report["findings"], [])
+
     def test_physical_claim_with_no_physical_support_is_downgraded(self):
         """
         A residual count is a property of the classifier; an artifact floor
