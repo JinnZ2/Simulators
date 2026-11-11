@@ -1,6 +1,6 @@
 # COMBINED_SPEC (STEP 2, DRAFT ONLY)
 
-Status: DRAFT. Nothing is built from it. Neither original is changed. Every choice here is
+Status: DRAFT. Q3, Q7, Q9 and Q15 have proposed answers awaiting Kavik's confirmation (section 9a); nothing is built from it. Neither original is changed. Every choice here is
 proposed for Kavik's review. Section 9 lists the open design choices as numbered questions and
 leaves them unresolved. Citations point at `README.md` findings F1..F15 and O1..O7 and at
 `STEP1_REPORT.md`.
@@ -49,8 +49,8 @@ l0.run_status INCOMPLETE "no LIVE        every budget VOID              -> DETER
   budget"                                                                  (proposed; Q1)
 l0 NOISE                                 misclosure within k sigma      -> no failure; carries sigma (Q2)
 certify / certify_tool UNTRUSTED         harness misses plants          -> INSTRUMENT : FAILED
-certify_tool raise (ZeroDivisionError)   tool gate crashes              -> INSTRUMENT : recorded state,
-                                                                           never silent (F2; status Q3)
+certify_tool raise (ZeroDivisionError)   tool gate crashes              -> INSTRUMENT : CRASHED(exception, path)
+                                                                           never a missing row (F2; Q3 answered)
 trust with no cases written              zero known-answer cases        -> INSTRUMENT : UNTESTED
                                                                            (s-a KA_NO_CASES)
 ```
@@ -168,14 +168,14 @@ misread it.
 | 22 | frozen anchor | both | concept map | -- |
 | 23 | return test with tolerance | s-a, plus #257 deltas | concept map | the verdict and the deltas are both printed |
 | 24 | one-change branch | #257 | F15 | a two-change branch is refused with both changes named |
-| 25 | system vs configuration continuity | both | continuity AGREE, ORIGIN_NOTE | candidate anchor at the split level; criterion choice is Q7 |
+| 25 | system vs configuration continuity | both | continuity AGREE, ORIGIN_NOTE, Q7 | two fields, identity_check and return_to_anchor, no composite (Q7 answered) |
 | 26 | two state tracks, crossing refused | s-a | concept map | -- |
 | 27 | claim tags OBSERVED / DERIVED / PROPOSED | #257 | F15 | a tag on every claim; untagged claims are refused |
 | 28 | claim record / support | s-a | concept map | relation to claim tags is Q8 |
 | 29 | coincidence card | #257 | F5, F15 | opens only after identity passes (section 3) |
 | 30 | measurand identity gates comparison | s-a | F5 | NOT_COMPARABLE(reason) is a distinct token |
-| 31 | observer declared before comparison | #257 (three regimes) | observer card | regime partition is Q9; names are not merged |
-| 32 | observer regime partition | open | ORIGIN_NOTE second note | s-a is a stub (NOT_SCORED_STUB); REACTIVITY and PASSIVE kept apart |
+| 31 | observer declared before comparison | #257 | observer card | UNDECLARED regime refuses the comparison (Q9 answered) |
+| 32 | observer regime partition | new (union) | ORIGIN_NOTE second note, Q9 | PASSIVE (null control) / PERTURBATION / REACTIVITY / STRATEGY; built in the combined build |
 | 33 | no universal ranking | both | concept map | rank() raises |
 | 34 | applicability / domain of validity | s-a | F12 | NOT ASSESSED is a token |
 | 35 | percolation family | both, not merged | F11 | bond vs site with spread are different objects; bounds stated (Q10) |
@@ -192,31 +192,34 @@ misread it.
 
 ---
 
-## 9. Open design choices for Kavik (not resolved)
+## 9a. Answered (proposed by chat-side Claude 2026-11-11; Kavik to confirm)
 
-1. An all-VOID run, where no closure was tested: is that DETERMINATION INDETERMINATE or
-   DETERMINATION UNTESTED?
-2. NOISE: is it OK on PHYSICAL, or a separate within-noise status that carries sigma? And is
-   sigma_meas declared per account (#257) or as an absolute tolerance (s-a)?
-3. A tool-gate crash: INSTRUMENT FAILED, INSTRUMENT INDETERMINATE, or a fifth status, CRASHED?
-4. UNKNOWN expiry: is a typed trigger required, or is free text accepted when it is marked
-   untyped?
-5. A trust verdict that depends on the start state (F1): is it UNTRUSTED until a start state is
-   justified, or trusted per arm?
-6. CIRCULAR_KNOWN_ANSWER: an INSTRUMENT status, or a flag outside the axes?
-7. The continuity system criterion: identity ("still the system", #257) or return to anchor
-   within tolerance (s-a)? In step 1 the adapter supplied it.
-8. Claim tags (#257) and ClaimRecord state (s-a): one object or two?
-9. Observer regimes: #257's perturbation / reactivity / strategy, s-a's passive / perturbative /
-   strategic, or both kept as separate axes? Who builds the regime logic, given that s-a is a
-   stub?
-10. Percolation: keep the bounded exact bond backend and the site-spread simulator as two
-    families, or derive one bound for both?
-11. Size-bound refusals (F13), which currently land on two axes: should they all read
-    DETERMINATION, or all read "outside domain"?
-12. One basis vocabulary or two: is the merge s-a ConditionBasis plus #257 STATUSES, or a mapping
-    table between them?
-13. Is the 1e-9 closure tolerance fixed, per account, or declared per run (O4)?
-14. Should the combined build live in a new folder or in one of the originals? Both originals are
-    untouched under the step-1 rule.
-15. Should the step-1 rows be relabelled under section 2 in step 2, or only in step 3 (R-A4)?
+```text
+Q3   tool-gate crash -> INSTRUMENT : CRASHED(exception, path). Own status: FAILED = ran and failed,
+     INDETERMINATE = not enough to say, CRASHED = did not run. Never a missing row.
+     CARRIED: the answer says it matches TAF GAP_INSTRUMENT_CRASH; that label is not in either
+     playground tree or in Simulators outside WORK_ORDER.md (O6), so the match is unchecked here.
+Q7   continuity: two fields, identity_check (configuration) and return_to_anchor (system),
+     no composite. Branch rule: keep both.
+Q9   observer partition = union of four: PASSIVE (null control: not disturbed, not reacting) |
+     PERTURBATION | REACTIVITY | STRATEGY. Undeclared -> UNDECLARED -> comparison refused.
+     Built in the combined build, by neither original.
+     OPEN SOURCE: the definitions are "Kimi C4"; no Kimi C4 text is in this tree or either
+     playground, so the four definitions are not filed yet. Needed before the build.
+Q15  step-1 rows are kept exactly as recorded. Step 3 adds a second column,
+     "relabeled under COMBINED mapping". Nothing is overwritten.
+```
+
+## 9b. Still open (11)
+
+1. All-VOID run: DETERMINATION INDETERMINATE or UNTESTED?
+2. NOISE: OK on PHYSICAL, or its own within-noise status carrying sigma; sigma per account or absolute?
+3. UNKNOWN expiry: typed trigger required, or untyped free text accepted when marked untyped?
+4. Trust that moves with the start state (F1): UNTRUSTED until justified, or trusted per arm?
+5. CIRCULAR_KNOWN_ANSWER: an INSTRUMENT status, or a flag outside the axes?
+6. Claim tags (#257) and ClaimRecord (s-a): one object or two?
+7. Percolation: two families (bounded bond, site-spread), or one derived bound?
+8. Size-bound refusals (F13): all DETERMINATION, or all "outside domain"?
+9. Basis vocabulary: merge ConditionBasis + STATUSES, or keep both with a mapping table?
+10. Closure tolerance: fixed 1e-9, per account, or declared per run (O4)?
+11. Combined build location: new folder, or inside one original?
