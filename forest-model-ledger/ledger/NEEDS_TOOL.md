@@ -32,7 +32,6 @@ backwards by the session that ran them, not an instruction from the rule's autho
 | parameter_recovery | same shape across three families, first hand (card CC_005) | run_13 | 2026-11-11 | full toolbox |
 | residual_regression | same shape across three families, first hand (card CC_005) | run_13 | 2026-11-11 | full toolbox |
 | assumption_block_trace | same shape across three families, first hand (card CC_005) | run_13 | 2026-11-11 | full toolbox |
-| support_match | detector reads support stated, not support matching; silent on cases a and b first hand (card CC_005) | run_13 | 2026-11-11 | specific: case a states its evidence and the evidence does not support the attribution |
 | residual_regression | run_10 trigger re-run, N misclosure near-identical across seeds (card CC_001) | run_14 | 2026-11-11 | full toolbox |
 | equation_family_swap | run_10 trigger re-run, N misclosure near-identical across seeds (card CC_001) | run_14 | 2026-11-11 | full toolbox |
 | parameter_recovery | run_10 trigger re-run, N misclosure near-identical across seeds (card CC_001) | run_14 | 2026-11-11 | full toolbox |
@@ -54,3 +53,4 @@ used_in lists that run). tools/check_ledger.py enforces all three. Rows are move
 | ablation | N misclosure near-identical across seeds (card CC_001) | run_10 | 2026-11-10 | run_14 | three single drops; dep=0 flagged CO_ABLATED [fire]; counter-only drop carries the residual |
 | ablation | 33 of 64 nudges move nothing detectable (card CC_003) | run_11 | 2026-11-10 | run_15 | grass removed and fire removed against the anchor; grass removal immaterial on late outputs |
 | multi_seed_ensemble | 33 of 64 nudges move nothing detectable (card CC_003) | run_11 | 2026-11-10 | run_15 | 20 paired seeds; the 33 split HIDDEN_IN_NOISE 18 / ABSORBED 9 / SEED_SPECIFIC 2 / INERT 2 / UNRESOLVED 2 |
+| support_match | detector reads support stated, not support matching; silent on cases a and b first hand (card CC_005) | run_13 | 2026-11-11 | run_16 | cases a-d first hand: detector hits 1 before (c1), 3 after (a, b, c1) |

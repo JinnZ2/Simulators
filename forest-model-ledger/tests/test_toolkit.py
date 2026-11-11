@@ -15,7 +15,7 @@ sys.path.insert(0, HERE)
 from ledger.toolkit import gate as G
 
 # tool id -> module in ledger/toolkit/. Order is the build order of the work order.
-GATED = ["multi_seed_ensemble", "ablation"]
+GATED = ["multi_seed_ensemble", "ablation", "support_match"]
 
 
 def run(tool):

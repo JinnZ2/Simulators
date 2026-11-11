@@ -35,7 +35,9 @@ recheck_when: void
 branch: void
 runs:
   - run_13
+  - run_16
 open_issues:
   - "open_slot_filled is still entered by the coder (this session), not computed from text"
   - "case a's assignment runs against its own cited source (DeepSeek: 'Your physics point'); the detector reads whether support is stated, never whether the source supports it"
   - "local_normal_form has no exit defined"
+  - "2026-11-11 (run_16): support_match reads the case a gap from the text -- CONTRADICTS on a, SILENT_ON_CLAIM on b, NO_SUPPORT_CITED on c1; silent on c2 and d. The claim records were coded after the expected reading was known, so this confirms the build, not the slots; no slot state moves"

@@ -1,0 +1,52 @@
+# Claim records for support_match (work order 2026-11-11, tool #3), one per first-hand
+# attribution record in attribution_cases_firsthand.yaml. Coded in this session.
+# Every locator here is one of the record's own locators: this file adds no evidence,
+# it says which located line makes the claim and which the text presents as its basis.
+# The verdicts are computed from the pinned texts, not entered here.
+claims:
+  - id: a_kimi_provenance_map
+    claim:
+      file: kimi_substrate_neutral_intelligence_audit.md
+      line: "43"
+    credited_to: DeepSeek
+    item_terms:
+      - physics
+    support:
+      - file: chat_paste_2026-11-10.txt
+        line: "436"
+    support_basis:
+      - "the audit names the uploaded transcript as its source for authorship; this is the transcript line where the credited item (the physics point) is stated"
+  - id: b_gemini_hex_token
+    claim:
+      file: chat_paste_2026-11-10.txt
+      line: "1314"
+    credited_to: INSTRUMENT
+    item_terms:
+      - hardware
+      - bus
+    support:
+      - file: chat_paste_2026-11-10.txt
+        line: "1313"
+    support_basis:
+      - "the block derives its DERIVED line from its OBSERVED line, one line above; the OBSERVED line is the only basis the text presents"
+  - id: c1_chatgpt_denial_frame
+    claim:
+      file: chat_paste_2026-11-10.txt
+      line: "1255"
+    credited_to: USER
+    item_terms:
+      - reasoning
+    support: []
+    support_basis: []
+  - id: c2_chatgpt_backchannel
+    claim: void
+    credited_to: void
+    item_terms: []
+    support: []
+    support_basis: []
+  - id: d_deepseek_praise_order
+    claim: void
+    credited_to: void
+    item_terms: []
+    support: []
+    support_basis: []

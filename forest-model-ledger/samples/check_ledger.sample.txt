@@ -1,7 +1,7 @@
 components {'admitted': 3, 'candidate': 15, 'placeholder': 7, 'rejected': 2}
 branches   {'admitted': 0, 'candidate': 5, 'placeholder': 11, 'rejected': 0}
-blocks 6  runs 15  tests 17
-runs {'REPORTED': 8, 'COMPLETE': 1, 'INCOMPLETE': 6}  NEEDS_TOOL rows 29 open, 4 cleared  placeholder tools 5
+blocks 6  runs 16  tests 17
+runs {'REPORTED': 8, 'COMPLETE': 2, 'INCOMPLETE': 6}  NEEDS_TOOL rows 28 open, 5 cleared  placeholder tools 4
 toolkit 11 tools  cards {'RESOLVED': 1, 'OPEN': 4}  anchors {'ANCHOR_run9': 'candidate'}
 open slots by exit: no exit defined 10  exit incomplete (sensitivity void) 4  exit complete 0  (counted, not failed)
   owed: ablation built, not yet run on run_12
