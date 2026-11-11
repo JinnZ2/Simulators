@@ -7,4 +7,6 @@ PASS  ablation                 known 8 of 8
 PASS  support_match            known 9 of 9
                                null[contradicts] fp 0.0 tp 1.0 n 200 seed 0-4 PASS
                                null[silent_on_claim] fp 0.0 tp 1.0 n 200 seed 0-4 PASS
-3 tools gated, 0 failed
+PASS  parameter_recovery       known 6 of 6
+                               null[recovered] fp 0.0 tp 1.0 n 200 seed 0-4 PASS
+4 tools gated, 0 failed

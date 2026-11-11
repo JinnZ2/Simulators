@@ -36,9 +36,11 @@ branch: void
 runs:
   - run_11
   - run_15
+  - run_17
 open_issues:
   - "local_normal_form not looked at. First thing to check: the fire cycle as a relaxation oscillator. p_ign x1.1 / x0.9 moves fires 0.5 / 0.3 sd while fuel_th, burn and vol move them 3.1 to 4.2 sd, which is what a threshold reset would give; no run separates it"
   - "the three supported slots are not separated from each other: no ablation tool exists. A run at larger nudges and 10 seeds would split underpowered from absorbed"
   - "2026-11-11 (run_15): split done with multi_seed_ensemble and ablation. HIDDEN_IN_NOISE 18, ABSORBED 9, SEED_SPECIFIC 2, INERT 2 (p_ign x1.1, kill_G x1.1), UNRESOLVED 2. The HIDDEN / ABSORBED line is a 0.5 sd materiality choice; three mirror pairs straddle it"
+  - "run_17 (parameter_recovery): dep, kT, uG RECOVERED; kill_G, p_ign PARTIAL; aG NOT_IDENTIFIABLE (chi2 flat). kill_G is inert at +-10% and visible at x1.4: the +-10% nudge size of run_11 is part of why it moved nothing"
   - "p_ign stays inside noise at 20 paired seeds while W_dry, fuel_th, burn and vol move: what the threshold-reset reading predicts; local_normal_form stays void until equation_family_swap exists"
   - "decomposition (kT, kG, Wh) and water (season, et, drain, drought_sd) nudges are inside noise with no slot assigned to them specifically"

@@ -10,7 +10,6 @@ only because the brief says to run the full toolbox.
 | tool | trigger that needed it | run | date | needed for |
 |---|---|---|---|---|
 | equation_family_swap | 33 of 64 nudges move nothing detectable (card CC_003) | run_11 | 2026-11-10 | specific: the unlooked-at slot, fire cycle as a threshold reset |
-| parameter_recovery | 33 of 64 nudges move nothing detectable (card CC_003) | run_11 | 2026-11-10 | specific: parameters that move no output cannot be recovered from outputs; which ones is this tool's question |
 | residual_regression | 33 of 64 nudges move nothing detectable (card CC_003) | run_11 | 2026-11-10 | full toolbox |
 | assumption_block_trace | 33 of 64 nudges move nothing detectable (card CC_003) | run_11 | 2026-11-10 | full toolbox |
 | ablation | same shape across three families (card CC_004) | run_12 | 2026-11-11 | full toolbox |
@@ -54,3 +53,4 @@ used_in lists that run). tools/check_ledger.py enforces all three. Rows are move
 | ablation | 33 of 64 nudges move nothing detectable (card CC_003) | run_11 | 2026-11-10 | run_15 | grass removed and fire removed against the anchor; grass removal immaterial on late outputs |
 | multi_seed_ensemble | 33 of 64 nudges move nothing detectable (card CC_003) | run_11 | 2026-11-10 | run_15 | 20 paired seeds; the 33 split HIDDEN_IN_NOISE 18 / ABSORBED 9 / SEED_SPECIFIC 2 / INERT 2 / UNRESOLVED 2 |
 | support_match | detector reads support stated, not support matching; silent on cases a and b first hand (card CC_005) | run_13 | 2026-11-11 | run_16 | cases a-d first hand: detector hits 1 before (c1), 3 after (a, b, c1) |
+| parameter_recovery | 33 of 64 nudges move nothing detectable (card CC_003) | run_11 | 2026-11-10 | run_17 | six parameters across run_15 classes: 3 RECOVERED, 2 PARTIAL, aG NOT_IDENTIFIABLE |
