@@ -11,7 +11,7 @@ are read from this working tree. Other repos are read with `git cat-file -e ref:
 from a sibling checkout (../<repo>, ../jinnz2/<repo>, or $CONCEPT_MAP_REPOS/<repo>).
 No checkout: NOT_CHECKED, never OK. A pinned `tip` that no longer matches the ref is STALE.
 Collision evidence is a URL or note (not checked) or {repo, path, ref}, shown as repo:path@ref and
-checked: the ref must resolve, contain `tip_contains` if given, hold the path, and match `sha256` if given.
+checked: the ref must resolve (archive/* branches like any other), sit exactly at `tip` if given, contain `tip_contains` if given, hold the path, and match `sha256` if given.
 No code is moved by this file. Stdlib only.
 """
 import json, os, subprocess, sys
@@ -141,6 +141,10 @@ def check_evidence(e, here=HERE):
     rc, _ = git(d, "rev-parse", "--verify", "--quiet", ref + "^{commit}")
     if rc:
         return "GONE", "ref %s does not resolve (deleted, or not fetched: git fetch origin)" % ref
+    if e.get("tip"):
+        _, now = git(d, "rev-parse", ref + "^{commit}")
+        if not now.startswith(e["tip"]):
+            return "GONE", "%s moved to %s, pinned %s" % (ref, now[:7], e["tip"][:7])
     if e.get("tip_contains"):
         rc, _ = git(d, "merge-base", "--is-ancestor", e["tip_contains"], ref)
         if rc:
@@ -255,6 +259,7 @@ def selftest(data):
     if live:
         for name, mut, word in (("evidence ref deleted", lambda e: e.update(ref="origin/no-such-branch"), "GONE"),
                                 ("evidence path removed", lambda e: e.update(path="no/such/file"), "MISSING"),
+                                ("archive branch moved", lambda e: e.update(tip="0" * 40), "GONE"),
                                 ("branch lost the pinned commit", lambda e: e.update(tip_contains="0" * 40), "GONE")):
             e = dict(live[0]); mut(e)
             hit = check_evidence(e)[0] == word

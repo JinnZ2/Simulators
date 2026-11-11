@@ -126,6 +126,7 @@ home: CANONICAL (decided), CANDIDATE (two or more homes, undecided), SINGLE (one
 | candidate | `Simulators:relational-playground/playground/anchor.py` | Claude Code (commit trailer) |  |
 | candidate | `study-aperture@origin/main:experimental/playground/reference/anchor.py` | Perplexity (commit trailer) |  |
 | copy | `study-aperture@origin/main:experimental/playground/reference/return_test.py` | Perplexity (commit trailer) |  |
+| copy | `Simulators@origin/archive/anchor-run9:forest-model-ledger/ledger/anchors/ANCHOR_run9.yaml` | Claude Code (commit trailer) | archive branch standing in for the anchor tag; pinned |
 
 ## percolation
 

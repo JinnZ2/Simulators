@@ -314,6 +314,15 @@
      "path": "experimental/playground/reference/return_test.py",
      "builder": "Perplexity (commit trailer)",
      "note": ""
+    },
+    {
+     "role": "copy",
+     "repo": "Simulators",
+     "ref": "origin/archive/anchor-run9",
+     "path": "forest-model-ledger/ledger/anchors/ANCHOR_run9.yaml",
+     "builder": "Claude Code (commit trailer)",
+     "note": "archive branch standing in for the anchor tag; pinned",
+     "tip": "55c651b"
     }
    ]
   },
