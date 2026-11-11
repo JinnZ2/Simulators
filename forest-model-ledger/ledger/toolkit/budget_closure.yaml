@@ -23,3 +23,5 @@ open_issues:
   - "sigma_meas void for every budget"
   - "the residual it reports at dt 1/52 is the deposition counter's roundoff, not the model's; a compensated-sum counter would remove it and is NOT applied, since model/base.py is the candidate anchor's code"
 status: candidate
+gate: void
+blocked_on: void

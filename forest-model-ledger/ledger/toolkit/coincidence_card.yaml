@@ -17,3 +17,5 @@ used_in:
 open_issues:
   - "the five cause slots come from the 2026-11-10 instruction; no card has yet reached CURIOSITY, so that branch of the tool is exercised only by constructed cards in tests"
 status: candidate
+gate: void
+blocked_on: void

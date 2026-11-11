@@ -1,12 +1,36 @@
 id: multi_seed_ensemble
-code: void
+code: ledger/toolkit/multi_seed_ensemble.py
 diagnoses:
   - "stochastic effects, early-warning spikes (METHOD BRIEF toolbox line: multi-seed ensembles + variance)"
-inputs: void
-outputs: void
-cannot_see: void
+  - "a quantity near-identical across seeds where a random draw should spread it (seed_invariance INVARIANT / CONSTANT: the too-smooth trigger)"
+  - "an effect hidden in noise at the seed count used: paired comparison on common seeds reads MOVED, EQUIVALENT or UNRESOLVED, never inside-noise-therefore-inert"
+  - "an effect that exists in some realisations and cancels as a mean (seed_specific)"
+  - "variance rising near a threshold along a swept control (variance_spike)"
+inputs:
+  - "fn(seed) -> dict of scalar outputs; a seed list; workers for a process pool"
+  - "for paired: base and arm on the SAME seeds; per output an equivalence margin delta and a per-seed band"
+  - "for variance_spike: the sd at each value of a swept control"
+outputs:
+  - "per output: n, mean, sd, min, max, distinct values"
+  - "seed_invariance per output: CONSTANT | INVARIANT | VARIES"
+  - "paired per output: mean difference, se, z, verdict MOVED | EXACT_ZERO | EQUIVALENT | UNRESOLVED, seed_specific"
+  - "variance_spike: indices of the swept control where sd > K_SPIKE * median sd"
+cannot_see:
+  - "an effect smaller than K_MOVED = 5 standard errors at the seeds given: it reads UNRESOLVED, never inert. K_MOVED = 5 is the price of FP = 0 on the gate"
+  - "a difference between arms that is not on common seeds: paired refuses unequal seed sets"
+  - "anything about mechanism: a MOVED output says the mean moved, not why"
+  - "a spike when the swept grid is too coarse to land near the threshold"
 other_domains_it_could_see_into: void
 used_in: []
 open_issues:
-  - "not built; logged under the gate rule of 2026-11-10, see ledger/NEEDS_TOOL.md"
-status: placeholder
+  - "REL_TOL 0.05, K_MOVED 5.0, K_EQ 2.0, K_SPIKE 3.0 are [CHOICE]; printed by every run that uses them"
+  - "the gate's null draws are Gaussian; a heavy-tailed output distribution (fire counts are integers) is not in the null"
+status: candidate
+gate:
+  verdict: PASS
+  known_answer: "10 of 10"
+  null_legs:
+    moved: "fp 0.0 tp 1.0 n 200 seed 0-4 PASS"
+    invariant: "fp 0.0 tp 1.0 n 200 seed 0-4 PASS"
+  command: "python3 tests/test_toolkit.py"
+blocked_on: void

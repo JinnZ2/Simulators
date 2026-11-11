@@ -44,6 +44,8 @@ tool:
   used_in: "list of run_N"
   open_issues: "list"
   status: "candidate | admitted | rejected | placeholder"
+  gate: "void | {verdict, known_answer, null_legs, command}; for the brief's seven tools a built tool needs verdict PASS (known-answer cases + null harness FP 0 / TP 1, harness seeds 0-4), re-run by check_ledger.py --tests"
+  blocked_on: "void | text; a placeholder may carry code only when this names what it waits on (e.g. real data)"
 coincidence_card:
   where: "ledger/toolkit/cards/"
   slots: "shared_constraint | local_normal_form | statistical_artifact | numerical_artifact | low_dim_projection | none_of_above; each {state: void | supported | ruled_out | ABSENT_AT_SENSITIVITY(<value>), evidence, expiry_condition}"

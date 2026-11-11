@@ -19,6 +19,9 @@ COMP = ["id", "layer", "equation", "assumes", "if_assumption_fails", "scope", "p
         "test_results", "open_issues", "depends_on", "status"]
 BRANCH = ["id", "family", "status", "components", "links", "convergence_anchors", "runs", "open_issues", "note"]
 BLOCK = ["id", "statement", "if_fails", "used_by", "used_by_runs", "open_issues", "status"]
+# the seven tools of the staged build (work order 2026-11-11); each is trusted only after its gate
+STAGED_SEVEN = ("multi_seed_ensemble", "ablation", "support_match", "parameter_recovery", "residual_regression",
+                "equation_family_swap", "assumption_block_trace")
 RUN_FIELDS = ["status", "code", "seed", "params", "results", "flags", "provenance", "feeds"]
 
 
@@ -150,16 +153,39 @@ def check(run_tests=False):
     import hashlib
     from ledger.toolkit import coincidence_card as cc
     TOOL = ["id", "code", "diagnoses", "inputs", "outputs", "cannot_see", "other_domains_it_could_see_into",
-            "used_in", "open_issues", "status"]
+            "used_in", "open_issues", "status", "gate", "blocked_on"]
     tools_ = {os.path.basename(p)[:-5]: miniyaml.load(p)
               for p in sorted(glob.glob(os.path.join(ROOT, "ledger", "toolkit", "*.yaml")))}
+    gate_results = None
+    if run_tests:
+        sys.path.insert(0, HERE)
+        from tests import test_toolkit
+        from ledger.toolkit import gate as G_
+        gate_results = {t: G_.summary(test_toolkit.run(t)) for t in test_toolkit.GATED}
     for n, t in tools_.items():
         fields("tool", n, t, TOOL)
-        if t.get("status") == "placeholder":
-            if t.get("code") != "void":
-                F(f"tool {n}: placeholder with code {t.get('code')}")
-        elif not os.path.exists(os.path.join(HERE, t.get("code", "MISSING"))):
+        built = t.get("code") != "void"
+        if t.get("status") == "placeholder" and built and t.get("blocked_on") == "void":
+            F(f"tool {n}: placeholder with code {t.get('code')} and no blocked_on")
+        if t.get("status") != "placeholder" and not built:
+            F(f"tool {n}: status {t.get('status')} with code void")
+        if built and not os.path.exists(os.path.join(HERE, t.get("code", "MISSING"))):
             F(f"tool {n}: code {t.get('code')} not in tree")
+        # work order 2026-11-11: the brief's seven are trusted only after the gate
+        if n in STAGED_SEVEN and built:
+            g = t.get("gate")
+            if not isinstance(g, dict) or g.get("verdict") != "PASS":
+                F(f"tool {n}: built but its gate is not PASS ({g if not isinstance(g, dict) else g.get('verdict')})")
+            elif gate_results is not None:
+                if n not in gate_results:
+                    F(f"tool {n}: gate recorded but tests/test_toolkit.py does not run it")
+                elif gate_results[n]["verdict"] != "PASS":
+                    F(f"tool {n}: gate re-run reads {gate_results[n]['verdict']}")
+                elif gate_results[n]["known_answer"] != g.get("known_answer") or gate_results[n]["null_legs"] != g.get("null_legs"):
+                    F(f"tool {n}: gate re-run differs from the recorded gate")
+            for f_ in ("inputs", "outputs"):
+                if t.get(f_) in ("void", [], None):
+                    F(f"tool {n}: built with {f_} void")
         if not t.get("diagnoses"):
             F(f"tool {n}: lists no deviation it diagnoses")
         for r in t.get("used_in", []):
@@ -167,19 +193,48 @@ def check(run_tests=False):
                 F(f"tool {n}: run {r} missing")
     # ---- gate rule: INCOMPLETE run <-> NEEDS_TOOL.md <-> toolkit entry
     needs_path = os.path.join(ROOT, "ledger", "NEEDS_TOOL.md")
-    needs = []
+    needs, cleared = [], []
     if os.path.exists(needs_path):
+        section = "open"
         for line in open(needs_path):
+            if line.startswith("## Cleared"):
+                section = "cleared"
             cells = [c.strip() for c in line.strip().strip("|").split("|")]
-            if len(cells) == 5 and re.match(r"run_\d+$", cells[2]):
+            if section == "open" and len(cells) == 5 and re.match(r"run_\d+$", cells[2]):
                 needs.append(cells)
                 if not all(cells):
                     F(f"NEEDS_TOOL: empty cell in row {cells}")
+            elif section == "cleared" and len(cells) == 6 and re.match(r"run_\d+$", cells[2]):
+                cleared.append(cells)
+                if not all(cells):
+                    F(f"NEEDS_TOOL cleared: empty cell in row {cells}")
+    # a row leaves the open table only when the tool passed its gate AND was run on that trigger
+    open_keys = {(c[0], c[1], c[2]) for c in needs}
+    for tool, trig, r, _, by, _ in cleared:
+        t = tools_.get(tool)
+        if t is None:
+            F(f"NEEDS_TOOL cleared: {tool} has no entry in ledger/toolkit/")
+            continue
+        if (tool, trig, r) in open_keys:
+            F(f"NEEDS_TOOL cleared: {tool} / {r} is in both tables")
+        g = t.get("gate")
+        if not isinstance(g, dict) or g.get("verdict") != "PASS":
+            F(f"NEEDS_TOOL cleared: {tool} / {r} removed but the tool's gate is not PASS")
+        if t.get("status") == "placeholder":
+            F(f"NEEDS_TOOL cleared: {tool} / {r} removed but the tool is a placeholder")
+        if by not in runs:
+            F(f"NEEDS_TOOL cleared: {tool} / {r} cleared by {by}, which is not a run")
+        elif by not in t.get("used_in", []):
+            F(f"NEEDS_TOOL cleared: {tool} / {r} cleared by {by}, but the tool's used_in omits {by}")
+    owed_runs = []
     for tool, _, r, _, _ in needs:
         if tool not in tools_:
             F(f"NEEDS_TOOL: {tool} has no entry in ledger/toolkit/")
         elif tools_[tool].get("status") != "placeholder" and r not in tools_[tool].get("used_in", []):
-            F(f"NEEDS_TOOL: {tool} is built but was not run on {r}; row stays until it is")
+            # 2026-11-11: was a FAIL. A built tool not yet run on a trigger is a state the staged build
+            # passes through, not a defect; the invariant (the row cannot leave until the tool ran on it
+            # and passed its gate) is enforced on the cleared table above. Counted and printed instead.
+            owed_runs.append(f"{tool} built, not yet run on {r}")
         if r not in runs:
             F(f"NEEDS_TOOL: run {r} missing")
     # ---- STATUS_MAP: every status on both axes has an entry with every field
@@ -319,7 +374,7 @@ def check(run_tests=False):
     return fails, notes, dict(components=count(comps), branches=count(branches), blocks=len(blocks), runs=len(runs), tests=len(tests),
                               tools=len(tools_), tools_placeholder=sum(1 for t in tools_.values() if t.get("status") == "placeholder"),
                               run_status={k: sum(1 for v in run_status.values() if v == k) for k in ("REPORTED", "COMPLETE", "INCOMPLETE")},
-                              needs_rows=len(needs), cards=readings, exits=exit_counts, no_exit=no_exit,
+                              needs_rows=len(needs), owed_runs=owed_runs, cleared_rows=len(cleared), cards=readings, exits=exit_counts, no_exit=no_exit,
                               anchors={n: a.get("status") for n, a in anchors_.items()})
 
 
@@ -353,6 +408,7 @@ def selftest():
         ("bare absent state", "ledger/toolkit/cards/CC_003_nudges_that_move_nothing.yaml",
          "local_normal_form:\n    state: void", "local_normal_form:\n    state: ABSENT_AT_SENSITIVITY", "not void / supported / ruled_out"),
         ("observer regimes linked", "ledger/components/L5_OBS_STRATEGY.yaml", "depends_on: []", "depends_on:\n  - L5_OBS_REACTIVITY", "observer regimes share no currency"),
+        ("built brief tool with no passing gate", "ledger/toolkit/multi_seed_ensemble.yaml", "  verdict: PASS", "  verdict: FAIL", "multi_seed_ensemble: built but its gate is not PASS"),
         ("expiry target unknown", "ledger/expiry.yaml", "target: L0_P_BUDGET", "target: L0_Q_BUDGET", "L0_Q_BUDGET is neither"),
     ]
     bad = 0
@@ -383,10 +439,12 @@ if __name__ == "__main__":
     print("components", summ["components"])
     print("branches  ", summ["branches"])
     print(f"blocks {summ['blocks']}  runs {summ['runs']}  tests {summ['tests']}")
-    print(f"runs {summ['run_status']}  NEEDS_TOOL rows {summ['needs_rows']}  placeholder tools {summ['tools_placeholder']}")
+    print(f"runs {summ['run_status']}  NEEDS_TOOL rows {summ['needs_rows']} open, {summ['cleared_rows']} cleared  placeholder tools {summ['tools_placeholder']}")
     print(f"toolkit {summ['tools']} tools  cards {summ['cards']}  anchors {summ['anchors']}")
     ex = summ["exits"]
     print(f"open slots by exit: no exit defined {ex['none']}  exit incomplete (sensitivity void) {ex['incomplete']}  exit complete {ex['complete']}  (counted, not failed)")
+    for t in summ["owed_runs"]:
+        print("  owed:", t)
     for t in summ["no_exit"]:
         print("  no exit defined:", t)
     for n in notes:

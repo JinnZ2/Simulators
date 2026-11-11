@@ -25,3 +25,5 @@ open_issues:
   - "seed cases a-d are second hand (chat-side read, 2026-11-10) until the texts are supplied"
   - "2026-11-11: texts supplied and pinned (cases/texts/MANIFEST.yaml); first-hand records in cases/attribution_cases_firsthand.yaml, second-hand file kept; diff in run_13"
 status: candidate
+gate: void
+blocked_on: void
