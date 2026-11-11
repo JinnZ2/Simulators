@@ -144,7 +144,7 @@ ledger/toolkit/, 7 tools                2026-11-11 staged build: all seven built
                                         is absent; assumption_block_trace is a placeholder until real data.
                                         Also: coincidence_card, assumption_nudge, attribution_directionality
 anchor = frozen, TAGGED snapshot        ledger/anchors/ANCHOR_run9.yaml, status candidate;
-                                        tag forest-model-ledger-anchor-candidate-run9 SET AT MERGE
+                                        archive branch archive/anchor-run9 at 55c651b (no tag; 2026-11-11)
                                         (every tag route from the session refused); commit
                                         55c651b is the pin;
                                         three code files pinned by sha256, checked every run
@@ -197,7 +197,7 @@ gate rule               trigger + missing tool = run INCOMPLETE, tool placeholde
                         and "TOOL NEEDED: <name>" as the first line of the report
 rejected entries stay   nothing deleted to make the ledger cleaner
 admitted needs a test   named in ledger/tests.yaml, passing when run
-reported != recomputed  runs 1-8 are carried; only runs with code in the tree are DERIVED here
+reported != recomputed  runs 1-5 are carried; only runs with code in the tree are DERIVED here (6-8 since 2026-11-11)
 delivered text          WORK_ORDER.md is never edited; the brief only on its authors' correction, logged
 python 3, numpy         scipy allowed by the order, absent in the cloud build environment
 ```

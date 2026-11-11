@@ -38,7 +38,7 @@ tools/check_ledger.py           schema, cross-references, admission <=> passing 
 void, never dropped      every field always present; unfilled = void
 rejected entries stay    2 rejected components are in the tree
 admission needs a test   status admitted <=> admitted_by names a test that passes when run
-reported != recomputed   runs 1-8 are logged as reported (code not in this tree); only run_9 runs here
+reported != recomputed   runs 1-5 are logged as reported (code not in this tree); runs 6-8 are the original chat-side code, filed 2026-11-11
 a void budget is VOID    never CLOSED, never 0; listed beside every overall verdict
 ```
 
@@ -49,9 +49,10 @@ components   3 admitted / 15 candidate / 4 placeholder / 2 rejected
 branches     5 candidate / 10 placeholder
 L0 budgets   N CLOSED, water CLOSED  |  C, P, energy VOID
 boundary     deposition, leaching, fire volatilisation live  |  fixation, dust, groundwater, animal transport void
-OBSERVED     0 entries. Everything is model output or a proposed form.
+OBSERVED     0 field observations. Everything is model output or a proposed form.
+             runs 6-8 carry provenance OBSERVED in the sense: original code and log, as executed chat-side.
 toolkit      3 tools built, 6 placeholders (1 of the brief's 7 built)  |  cards: 1 PROVISIONAL, 2 OPEN
-runs         8 REPORTED, 1 COMPLETE, 2 INCOMPLETE (tools missing: ledger/NEEDS_TOOL.md)
+runs         5 REPORTED, 3 COMPLETE, 3 INCOMPLETE (tools missing: ledger/NEEDS_TOOL.md)
 statuses     what each run / card status allows: ledger/STATUS_MAP.md
 anchor       run_9 CANDIDATE: seeds PASS; budgets, nudges, independent budgets PARTIAL
 ```

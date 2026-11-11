@@ -21,6 +21,12 @@ only because the brief says to run the full toolbox.
 | equation_family_swap | N misclosure near-identical across seeds (card CC_001) | run_10 | 2026-11-10 | full toolbox |
 | parameter_recovery | N misclosure near-identical across seeds (card CC_001) | run_10 | 2026-11-10 | full toolbox |
 | assumption_block_trace | N misclosure near-identical across seeds (card CC_001) | run_10 | 2026-11-10 | full toolbox |
+| multi_seed_ensemble | grid converges onto the ODE at spot 0.2, drought >= 0.5, read by eye (card CC_002) | run_8 | 2026-11-11 | specific: 10 reps on one seed; the spread of the grid-minus-ODE gap is not known |
+| equation_family_swap | grid converges onto the ODE at spot 0.2, drought >= 0.5, read by eye (card CC_002) | run_8 | 2026-11-11 | specific: the branching-process family named by the run is a placeholder branch |
+| ablation | grid converges onto the ODE at spot 0.2, drought >= 0.5, read by eye (card CC_002) | run_8 | 2026-11-11 | specific: spotting off / on is the only arm; density and grid size never varied |
+| residual_regression | grid converges onto the ODE at spot 0.2, drought >= 0.5, read by eye (card CC_002) | run_8 | 2026-11-11 | full toolbox |
+| parameter_recovery | grid converges onto the ODE at spot 0.2, drought >= 0.5, read by eye (card CC_002) | run_8 | 2026-11-11 | full toolbox |
+| assumption_block_trace | grid converges onto the ODE at spot 0.2, drought >= 0.5, read by eye (card CC_002) | run_8 | 2026-11-11 | full toolbox |
 
 run_10 and run_11 predate the rule. Marking them INCOMPLETE is the rule applied
 backwards by the session that ran them, not an instruction from the rule's author.
@@ -54,3 +60,5 @@ used_in lists that run). tools/check_ledger.py enforces all three. Rows are move
 | parameter_recovery | 33 of 64 nudges move nothing detectable (card CC_003) | run_11 | 2026-11-10 | run_17 | six parameters across run_15 classes: 3 RECOVERED, 2 PARTIAL, aG NOT_IDENTIFIABLE |
 | residual_regression | N misclosure near-identical across seeds (card CC_001) | run_10 | 2026-11-10 | run_18 | N misclosure on method vs biology over 36 configurations: METHOD_ARTIFACT once the counter error is declared, UNEXPLAINED without |
 | residual_regression | run_10 trigger re-run, N misclosure near-identical across seeds (card CC_001) | run_14 | 2026-11-11 | run_18 | N misclosure on method vs biology over 36 configurations: METHOD_ARTIFACT once the counter error is declared, UNEXPLAINED without |
+
+run_8 was REPORTED until its original code arrived 2026-11-11; INCOMPLETE is PROPOSED by the filing session.

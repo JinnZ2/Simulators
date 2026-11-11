@@ -42,7 +42,7 @@ no entry here, if an entry lacks a field, or if the pair table misses a pair.
 - goal explore: use it as a pointer to what to rebuild; label anything built on it "built on REPORTED ground (<run id>), not recomputed".
 - goal report now: quote it as reported. Label: "REPORTED, not recomputed".
 - forbidden: citing its numbers as DERIVED. Filling its void fields from memory. Using it for an anchor test.
-- exits to: none; it stays REPORTED. A rebuild is a new run with its own status.
+- exits to: COMPLETE or INCOMPLETE (by the gate rule) only when the run's original code arrives from its source, is filed verbatim with its sha256, and reproduces the logged output in this tree; the run file keeps a History line. Otherwise it stays REPORTED, and a rebuild is a new run with its own status. (Exit added 2026-11-11 when runs 6-8 arrived; PROPOSED.)
 
 ---
 
@@ -92,11 +92,11 @@ A card lists the runs it rests on. Read the pair, not either status alone.
 | COMPLETE | PROVISIONAL | the run stands; the reading on it waits for tools | run_9 + CC_001 |
 | COMPLETE | RESOLVED | usable: finished loop, causes named | none |
 | COMPLETE | CURIOSITY | the run stands; the coincidence is unexplained, follow its branch | none |
-| INCOMPLETE | OPEN | nothing to build on without labels; tools and slots both owed | run_11 + CC_003 ; run_12 + CC_004 ; run_13 + CC_005 |
+| INCOMPLETE | OPEN | nothing to build on without labels; tools and slots both owed | run_11 + CC_003 ; run_12 + CC_004 ; run_13 + CC_005 ; run_8 + CC_002 |
 | INCOMPLETE | PROVISIONAL | evidence stands, tools owed on both axes; label twice | run_10 + CC_001 |
 | INCOMPLETE | RESOLVED | not a closed trigger; move the card to PROVISIONAL or build the tools | none |
 | INCOMPLETE | CURIOSITY | unexplained and the tools were missing; build the tools before working the branch | none |
-| REPORTED | OPEN | carried coincidence; no slot can be filled until the run is rebuilt | run_8 + CC_002 |
+| REPORTED | OPEN | carried coincidence; no slot can be filled until the run is rebuilt | none (run_8 + CC_002 until 2026-11-11) |
 | REPORTED | PROVISIONAL | should not arise: a REPORTED run supplies no evidence to hold provisionally | none |
 | REPORTED | RESOLVED | should not arise: evidence must come from a run with code in the tree | none |
 | REPORTED | CURIOSITY | should not arise: rulings-out need recomputed evidence | none |
