@@ -1,6 +1,6 @@
 # COMBINED_SPEC (STEP 2, DRAFT ONLY)
 
-Status: DRAFT. Q3, Q7, Q9 and Q15 have proposed answers awaiting Kavik's confirmation (section 9a); nothing is built from it. Neither original is changed. Every choice here is
+Status: DRAFT. All 15 questions carry PROPOSED answers awaiting Kavik's confirmation (sections 9a, 9b); none is adopted and nothing is built from it. Neither original is changed. Every choice here is
 proposed for Kavik's review. Section 9 lists the open design choices as numbered questions and
 leaves them unresolved. Citations point at `README.md` findings F1..F15 and O1..O7 and at
 `STEP1_REPORT.md`.
@@ -197,29 +197,54 @@ misread it.
 ```text
 Q3   tool-gate crash -> INSTRUMENT : CRASHED(exception, path). Own status: FAILED = ran and failed,
      INDETERMINATE = not enough to say, CRASHED = did not run. Never a missing row.
-     CARRIED: the answer says it matches TAF GAP_INSTRUMENT_CRASH; that label is not in either
-     playground tree or in Simulators outside WORK_ORDER.md (O6), so the match is unchecked here.
+     SOURCE: TAF draft branches #82 / #85 (unmerged). CARRIED, not checked: those are TAF PRs,
+     a repository outside this session's scope. Simulators' own #82 / #85 are unrelated and do not
+     contain the label.
 Q7   continuity: two fields, identity_check (configuration) and return_to_anchor (system),
      no composite. Branch rule: keep both.
 Q9   observer partition = union of four: PASSIVE (null control: not disturbed, not reacting) |
      PERTURBATION | REACTIVITY | STRATEGY. Undeclared -> UNDECLARED -> comparison refused.
      Built in the combined build, by neither original.
-     OPEN SOURCE: the definitions are "Kimi C4"; no Kimi C4 text is in this tree or either
-     playground, so the four definitions are not filed yet. Needed before the build.
+     SOURCE CHECKED: Kimi audit, forest-model-ledger/ledger/toolkit/cases/texts/
+     kimi_substrate_neutral_intelligence_audit.md on #256 (head d402fa8, file sha256 86945968...),
+     section 4.4 "C4 -- Observer regimes": Regime 1 perturbation (instrument disturbs the system),
+     Regime 2 reactivity (behaviour changes under observation without modelling the observer),
+     Regime 3 strategy (system models the evaluation). Three regimes, as stated; PASSIVE is the
+     chat-side addition as the null control and is not in the audit.
 Q15  step-1 rows are kept exactly as recorded. Step 3 adds a second column,
      "relabeled under COMBINED mapping". Nothing is overwritten.
 ```
 
-## 9b. Still open (11)
+## 9b. The other 11 (PROPOSED by chat-side Claude 2026-11-11; Kavik to confirm)
 
-1. All-VOID run: DETERMINATION INDETERMINATE or UNTESTED?
-2. NOISE: OK on PHYSICAL, or its own within-noise status carrying sigma; sigma per account or absolute?
-3. UNKNOWN expiry: typed trigger required, or untyped free text accepted when marked untyped?
-4. Trust that moves with the start state (F1): UNTRUSTED until justified, or trusted per arm?
-5. CIRCULAR_KNOWN_ANSWER: an INSTRUMENT status, or a flag outside the axes?
-6. Claim tags (#257) and ClaimRecord (s-a): one object or two?
-7. Percolation: two families (bounded bond, site-spread), or one derived bound?
-8. Size-bound refusals (F13): all DETERMINATION, or all "outside domain"?
-9. Basis vocabulary: merge ConditionBasis + STATUSES, or keep both with a mapping table?
-10. Closure tolerance: fixed 1e-9, per account, or declared per run (O4)?
-11. Combined build location: new folder, or inside one original?
+Two numberings exist: the original 15 (left column; the full list is section 9 of the first draft, commit 6dfbc4e) and the 11-item
+list sent for answering, which the answers use ("open #n"). Open #3, #7, #9 are NOT the
+original Q3, Q7, Q9 answered in 9a. Nothing in sections 2-8 is rewritten to these answers until
+they are confirmed.
+
+```text
+Q1  / open #1   all-VOID run -> DETERMINATION : UNTESTED, reason NO_LIVE_BUDGET
+       (nothing was posed; s-a's own UNTESTED = no check addressed it)
+Q2  / open #2   NOISE -> own status CLOSED_WITHIN(sigma, basis); sigma per account
+       (N, C, water differ in scale and measurement error; the number is carried)
+Q4  / open #3   UNKNOWN expiry: typed trigger required; free text accepted only as UNTYPED, counted
+       as "no exit defined" (an untyped trigger cannot fire automatically)
+Q5  / open #4   trust recorded per start state, keyed (model, system scope, start state); a verdict
+       that varies -> flag START_STATE_SENSITIVE, not blanket UNTRUSTED
+Q6  / open #5   CIRCULAR_KNOWN_ANSWER -> INSTRUMENT : UNTESTED, reason CIRCULAR_KNOWN_ANSWER
+       (a circular test tested nothing). Revises section 6, which proposed INDETERMINATE.
+Q8  / open #6   claim tags and ClaimRecord: two objects, linked 1:1
+       (tag = status of a statement; record = its provenance chain)
+Q10 / open #7   percolation: two families, separate bounds (site spread on a grid != bond graph)
+Q11 / open #8   size-bound refusals -> APPLICABILITY : OUTSIDE_DOMAIN, on no failure axis
+       (a size limit is a domain edge; s-a already has applicability mapping). Resolves F13.
+Q12 / open #9   basis vocabularies kept separate, with a mapping table (merging loses distinctions)
+Q13 / open #10  closure tolerance per account, DECLARED per run before execution, no global default;
+       the roundoff floor is recorded separately as a known numerical class (forest run 10)
+Q14 / open #11  combined build lives in a new folder: Simulators/combined-playground/
+       (originals untouched)
+```
+
+Action owed when the build starts: file both cited sources into
+`combined-playground/sources/` (the Kimi audit text by path + sha256; the TAF GAP_INSTRUMENT_CRASH
+definition once a copy is reachable). Not done now; nothing is built.
