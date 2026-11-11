@@ -184,7 +184,7 @@ gate rule               trigger + missing tool = run INCOMPLETE, tool placeholde
                         and "TOOL NEEDED: <name>" as the first line of the report
 rejected entries stay   nothing deleted to make the ledger cleaner
 admitted needs a test   named in ledger/tests.yaml, passing when run
-reported != recomputed  runs 1-8 are carried; only runs with code in the tree are DERIVED here
+reported != recomputed  runs 1-5 are carried; only runs with code in the tree are DERIVED here (6-8 since 2026-11-11)
 delivered text          WORK_ORDER.md is never edited; the brief only on its authors' correction, logged
 python 3, numpy         scipy allowed by the order, absent in the cloud build environment
 ```
