@@ -1,0 +1,2271 @@
+{
+ "cases": [
+  {
+   "case_id": "R-F9:replay_base",
+   "data": {
+    "budgets": {
+     "N": {
+      "end": 42.64803003256324,
+      "inflows": {
+       "deposition": 300.0000000000501
+      },
+      "misclosure_pinned": -5.061906449554954e-11,
+      "misclosure_recomputed": -5.061906449554954e-11,
+      "outflows": {
+       "fire_volatilisation": 270.7405929863497,
+       "leaching": 5.611376981086519
+      },
+      "pools": [
+       "S",
+       "T",
+       "G",
+       "F",
+       "Lt",
+       "Lg"
+      ],
+      "reproduces": true,
+      "start": 19.0,
+      "tolerance_257": 5.763519699674864e-07,
+      "verdict_257": "CLOSED"
+     },
+     "water": {
+      "end": 0.6392518601141417,
+      "inflows": {
+       "precipitation": 297.04358081702316
+      },
+      "misclosure_pinned": -3.426148253993233e-13,
+      "misclosure_recomputed": -3.426148253993233e-13,
+      "outflows": {
+       "drainage": 153.73611329580459,
+       "evapotranspiration": 143.66821566110406
+      },
+      "pools": [
+       "W"
+      ],
+      "reproduces": true,
+      "start": 1.0,
+      "tolerance_257": 5.944479097739318e-07,
+      "verdict_257": "CLOSED"
+     }
+    },
+    "fires": 80,
+    "void_budgets": [
+     "mass",
+     "C",
+     "energy"
+    ]
+   },
+   "description": "forest run 9 port, REPLAY of numpy default_rng(0), fixtures/numpy_draws_seed0.json",
+   "group": "forest run 9 port",
+   "kind": "control",
+   "r257": {
+    "model_trust": "TRUSTED: 12 clean draws, 12 planted (leak / coef alternating); FP 0.00 TP 1.00",
+    "status": "COMPLETE",
+    "status_reason": "2 of 5 budgets LIVE and closed; 3 VOID",
+    "verdicts": {
+     "N": "CLOSED",
+     "water": "CLOSED"
+    }
+   }
+  },
+  {
+   "case_id": "R-F9:replay_no_fire",
+   "data": {
+    "budgets": {
+     "N": {
+      "end": 118.13571548248164,
+      "inflows": {
+       "deposition": 300.0000000000501
+      },
+      "misclosure_pinned": -5.0746962187986355e-11,
+      "misclosure_recomputed": -5.0746962187986355e-11,
+      "outflows": {
+       "leaching": 200.8642845175177
+      },
+      "pools": [
+       "S",
+       "T",
+       "G",
+       "F",
+       "Lt",
+       "Lg"
+      ],
+      "reproduces": true,
+      "start": 19.0,
+      "tolerance_257": 5.008642845175678e-07,
+      "verdict_257": "CLOSED"
+     },
+     "water": {
+      "end": 0.5138981547299928,
+      "inflows": {
+       "precipitation": 297.04358081702316
+      },
+      "misclosure_pinned": -2.2093438190040615e-13,
+      "misclosure_recomputed": -2.2093438190040615e-13,
+      "outflows": {
+       "drainage": 132.0879963626863,
+       "evapotranspiration": 165.44168629960663
+      },
+      "pools": [
+       "W"
+      ],
+      "reproduces": true,
+      "start": 1.0,
+      "tolerance_257": 5.945732634793161e-07,
+      "verdict_257": "CLOSED"
+     }
+    },
+    "fires": 0,
+    "void_budgets": [
+     "mass",
+     "C",
+     "energy"
+    ]
+   },
+   "description": "forest run 9 port, REPLAY of numpy default_rng(0), fixtures/numpy_draws_seed0.json",
+   "group": "forest run 9 port",
+   "kind": "control",
+   "r257": {
+    "model_trust": "TRUSTED: 12 clean draws, 12 planted (leak / coef alternating); FP 0.00 TP 1.00",
+    "status": "COMPLETE",
+    "status_reason": "2 of 5 budgets LIVE and closed; 3 VOID",
+    "verdicts": {
+     "N": "CLOSED",
+     "water": "CLOSED"
+    }
+   }
+  },
+  {
+   "case_id": "R-F9:native_seed0",
+   "data": {
+    "budgets": {
+     "N": {
+      "end": 42.24631092052124,
+      "inflows": {
+       "deposition": 300.0000000000501
+      },
+      "misclosure_pinned": -4.9396930990042165e-11,
+      "misclosure_recomputed": -4.9396930990042165e-11,
+      "outflows": {
+       "fire_volatilisation": 270.986162686432,
+       "leaching": 5.767526393047448
+      },
+      "pools": [
+       "S",
+       "T",
+       "G",
+       "F",
+       "Lt",
+       "Lg"
+      ],
+      "reproduces": true,
+      "start": 19.0,
+      "tolerance_257": 5.767536890795296e-07,
+      "verdict_257": "CLOSED"
+     },
+     "water": {
+      "end": 0.443477705156582,
+      "inflows": {
+       "precipitation": 299.75589227119184
+      },
+      "misclosure_pinned": -1.5202283876192269e-12,
+      "misclosure_recomputed": -1.5202283876192269e-12,
+      "outflows": {
+       "drainage": 154.41591087382415,
+       "evapotranspiration": 145.8965036922096
+      },
+      "pools": [
+       "W"
+      ],
+      "reproduces": true,
+      "start": 1.0,
+      "tolerance_257": 6.000683068372256e-07,
+      "verdict_257": "CLOSED"
+     }
+    },
+    "fires": 80,
+    "void_budgets": [
+     "mass",
+     "C",
+     "energy"
+    ]
+   },
+   "description": "forest run 9 port, NATIVE stdlib random.Random(0)",
+   "group": "forest run 9 port",
+   "kind": "control",
+   "r257": {
+    "model_trust": "TRUSTED: 12 clean draws, 12 planted (leak / coef alternating); FP 0.00 TP 1.00",
+    "status": "COMPLETE",
+    "status_reason": "2 of 5 budgets LIVE and closed; 3 VOID",
+    "verdicts": {
+     "N": "CLOSED",
+     "water": "CLOSED"
+    }
+   }
+  },
+  {
+   "case_id": "R-F9:replay_planted_leak_0.3",
+   "data": {
+    "budgets": {
+     "N": {
+      "end": 43.427938730822326,
+      "inflows": {
+       "deposition": 300.0000000000501
+      },
+      "misclosure_pinned": -72.64300773769071,
+      "misclosure_recomputed": -72.64300773769071,
+      "outflows": {
+       "fire_volatilisation": 197.81758714535388,
+       "leaching": 5.1114663861831575
+      },
+      "pools": [
+       "S",
+       "T",
+       "G",
+       "F",
+       "Lt",
+       "Lg"
+      ],
+      "reproduces": true,
+      "start": 19.0,
+      "tolerance_257": 5.029290535315871e-07,
+      "verdict_257": "LEAK"
+     },
+     "water": {
+      "end": 0.6373507444279396,
+      "inflows": {
+       "precipitation": 297.04358081702316
+      },
+      "misclosure_pinned": -2.644551244657123e-13,
+      "misclosure_recomputed": -2.644551244657123e-13,
+      "outflows": {
+       "drainage": 155.1919433543228,
+       "evapotranspiration": 142.21428671827215
+      },
+      "pools": [
+       "W"
+      ],
+      "reproduces": true,
+      "start": 1.0,
+      "tolerance_257": 5.944498108896182e-07,
+      "verdict_257": "CLOSED"
+     }
+    },
+    "fires": 59,
+    "void_budgets": [
+     "mass",
+     "C",
+     "energy"
+    ]
+   },
+   "description": "planted leak: a term in the N state equation that is not in the transfer table",
+   "group": "forest run 9 port",
+   "kind": "planted_defect",
+   "r257": {
+    "model_trust": "TRUSTED: 12 clean draws, 12 planted (leak / coef alternating); FP 0.00 TP 1.00",
+    "status": "INCOMPLETE",
+    "status_reason": "budget(s) ['N'] did not close",
+    "verdicts": {
+     "N": "LEAK",
+     "water": "CLOSED"
+    }
+   }
+  },
+  {
+   "case_id": "R-COIN:CC_percolation[spot_0.00 d=0.10]_ode_meanfield[spot_0.00 d=0.10]",
+   "data": {
+    "declared_at": "PREREG.md, committed before the first run",
+    "families": [
+     "percolation",
+     "nonlinear"
+    ],
+    "observed": 0.001678466796875,
+    "target": 0.0025687774694361427,
+    "window": 0.05
+   },
+   "description": "percolation[spot_0.00 d=0.10] (percolation) and ode_meanfield[spot_0.00 d=0.10] (nonlinear) agree: 0.001678466796875 vs 0.0025687774694361427",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "r257": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   }
+  },
+  {
+   "case_id": "R-COIN:CC_percolation[spot_0.00 d=0.20]_ode_meanfield[spot_0.00 d=0.20]",
+   "data": {
+    "declared_at": "PREREG.md, committed before the first run",
+    "families": [
+     "percolation",
+     "nonlinear"
+    ],
+    "observed": 0.0040771484375,
+    "target": 0.013398733541028064,
+    "window": 0.05
+   },
+   "description": "percolation[spot_0.00 d=0.20] (percolation) and ode_meanfield[spot_0.00 d=0.20] (nonlinear) agree: 0.0040771484375 vs 0.013398733541028064",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "r257": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   }
+  },
+  {
+   "case_id": "R-COIN:CC_percolation[spot_0.00 d=0.65]_ode_meanfield[spot_0.00 d=0.65]",
+   "data": {
+    "declared_at": "PREREG.md, committed before the first run",
+    "families": [
+     "percolation",
+     "nonlinear"
+    ],
+    "observed": 0.596759033203125,
+    "target": 0.5894536325416285,
+    "window": 0.05
+   },
+   "description": "percolation[spot_0.00 d=0.65] (percolation) and ode_meanfield[spot_0.00 d=0.65] (nonlinear) agree: 0.596759033203125 vs 0.5894536325416285",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "r257": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   }
+  },
+  {
+   "case_id": "R-COIN:CC_percolation[spot_0.00 d=0.70]_ode_meanfield[spot_0.00 d=0.70]",
+   "data": {
+    "declared_at": "PREREG.md, committed before the first run",
+    "families": [
+     "percolation",
+     "nonlinear"
+    ],
+    "observed": 0.6792724609375,
+    "target": 0.6485162011002541,
+    "window": 0.05
+   },
+   "description": "percolation[spot_0.00 d=0.70] (percolation) and ode_meanfield[spot_0.00 d=0.70] (nonlinear) agree: 0.6792724609375 vs 0.6485162011002541",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "r257": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   }
+  },
+  {
+   "case_id": "R-COIN:CC_percolation[spot_0.00 d=0.80]_ode_meanfield[spot_0.00 d=0.80]",
+   "data": {
+    "declared_at": "PREREG.md, committed before the first run",
+    "families": [
+     "percolation",
+     "nonlinear"
+    ],
+    "observed": 0.795294189453125,
+    "target": 0.7627407441032739,
+    "window": 0.05
+   },
+   "description": "percolation[spot_0.00 d=0.80] (percolation) and ode_meanfield[spot_0.00 d=0.80] (nonlinear) agree: 0.795294189453125 vs 0.7627407441032739",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "r257": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   }
+  },
+  {
+   "case_id": "R-COIN:CC_percolation[spot_0.00 d=0.90]_ode_meanfield[spot_0.00 d=0.90]",
+   "data": {
+    "declared_at": "PREREG.md, committed before the first run",
+    "families": [
+     "percolation",
+     "nonlinear"
+    ],
+    "observed": 0.8984619140625,
+    "target": 0.8730360071411994,
+    "window": 0.05
+   },
+   "description": "percolation[spot_0.00 d=0.90] (percolation) and ode_meanfield[spot_0.00 d=0.90] (nonlinear) agree: 0.8984619140625 vs 0.8730360071411994",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "r257": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   }
+  },
+  {
+   "case_id": "R-COIN:CC_percolation[spot_0.05 d=0.10]_ode_meanfield[spot_0.05 d=0.10]",
+   "data": {
+    "declared_at": "PREREG.md, committed before the first run",
+    "families": [
+     "percolation",
+     "nonlinear"
+    ],
+    "observed": 0.00169677734375,
+    "target": 0.0025894442862845063,
+    "window": 0.05
+   },
+   "description": "percolation[spot_0.05 d=0.10] (percolation) and ode_meanfield[spot_0.05 d=0.10] (nonlinear) agree: 0.00169677734375 vs 0.0025894442862845063",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "r257": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   }
+  },
+  {
+   "case_id": "R-COIN:CC_percolation[spot_0.05 d=0.20]_ode_meanfield[spot_0.05 d=0.20]",
+   "data": {
+    "declared_at": "PREREG.md, committed before the first run",
+    "families": [
+     "percolation",
+     "nonlinear"
+    ],
+    "observed": 0.0042236328125,
+    "target": 0.013907671751267142,
+    "window": 0.05
+   },
+   "description": "percolation[spot_0.05 d=0.20] (percolation) and ode_meanfield[spot_0.05 d=0.20] (nonlinear) agree: 0.0042236328125 vs 0.013907671751267142",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "r257": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   }
+  },
+  {
+   "case_id": "R-COIN:CC_percolation[spot_0.05 d=0.60]_ode_meanfield[spot_0.05 d=0.60]",
+   "data": {
+    "declared_at": "PREREG.md, committed before the first run",
+    "families": [
+     "percolation",
+     "nonlinear"
+    ],
+    "observed": 0.518505859375,
+    "target": 0.5313316765039372,
+    "window": 0.05
+   },
+   "description": "percolation[spot_0.05 d=0.60] (percolation) and ode_meanfield[spot_0.05 d=0.60] (nonlinear) agree: 0.518505859375 vs 0.5313316765039372",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "r257": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   }
+  },
+  {
+   "case_id": "R-COIN:CC_percolation[spot_0.05 d=0.65]_ode_meanfield[spot_0.05 d=0.65]",
+   "data": {
+    "declared_at": "PREREG.md, committed before the first run",
+    "families": [
+     "percolation",
+     "nonlinear"
+    ],
+    "observed": 0.61500244140625,
+    "target": 0.5917582010721167,
+    "window": 0.05
+   },
+   "description": "percolation[spot_0.05 d=0.65] (percolation) and ode_meanfield[spot_0.05 d=0.65] (nonlinear) agree: 0.61500244140625 vs 0.5917582010721167",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "r257": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   }
+  },
+  {
+   "case_id": "R-COIN:CC_percolation[spot_0.05 d=0.70]_ode_meanfield[spot_0.05 d=0.70]",
+   "data": {
+    "declared_at": "PREREG.md, committed before the first run",
+    "families": [
+     "percolation",
+     "nonlinear"
+    ],
+    "observed": 0.68433837890625,
+    "target": 0.6505721042630889,
+    "window": 0.05
+   },
+   "description": "percolation[spot_0.05 d=0.70] (percolation) and ode_meanfield[spot_0.05 d=0.70] (nonlinear) agree: 0.68433837890625 vs 0.6505721042630889",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "r257": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   }
+  },
+  {
+   "case_id": "R-COIN:CC_percolation[spot_0.05 d=0.80]_ode_meanfield[spot_0.05 d=0.80]",
+   "data": {
+    "declared_at": "PREREG.md, committed before the first run",
+    "families": [
+     "percolation",
+     "nonlinear"
+    ],
+    "observed": 0.795672607421875,
+    "target": 0.7643709621997437,
+    "window": 0.05
+   },
+   "description": "percolation[spot_0.05 d=0.80] (percolation) and ode_meanfield[spot_0.05 d=0.80] (nonlinear) agree: 0.795672607421875 vs 0.7643709621997437",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "r257": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   }
+  },
+  {
+   "case_id": "R-COIN:CC_percolation[spot_0.05 d=0.90]_ode_meanfield[spot_0.05 d=0.90]",
+   "data": {
+    "declared_at": "PREREG.md, committed before the first run",
+    "families": [
+     "percolation",
+     "nonlinear"
+    ],
+    "observed": 0.89847412109375,
+    "target": 0.8743217789689336,
+    "window": 0.05
+   },
+   "description": "percolation[spot_0.05 d=0.90] (percolation) and ode_meanfield[spot_0.05 d=0.90] (nonlinear) agree: 0.89847412109375 vs 0.8743217789689336",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "r257": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   }
+  },
+  {
+   "case_id": "R-COIN:CC_percolation[spot_0.20 d=0.10]_ode_meanfield[spot_0.20 d=0.10]",
+   "data": {
+    "declared_at": "PREREG.md, committed before the first run",
+    "families": [
+     "percolation",
+     "nonlinear"
+    ],
+    "observed": 0.001708984375,
+    "target": 0.002653442265745698,
+    "window": 0.05
+   },
+   "description": "percolation[spot_0.20 d=0.10] (percolation) and ode_meanfield[spot_0.20 d=0.10] (nonlinear) agree: 0.001708984375 vs 0.002653442265745698",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "r257": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   }
+  },
+  {
+   "case_id": "R-COIN:CC_percolation[spot_0.20 d=0.20]_ode_meanfield[spot_0.20 d=0.20]",
+   "data": {
+    "declared_at": "PREREG.md, committed before the first run",
+    "families": [
+     "percolation",
+     "nonlinear"
+    ],
+    "observed": 0.004425048828125,
+    "target": 0.015647643882850868,
+    "window": 0.05
+   },
+   "description": "percolation[spot_0.20 d=0.20] (percolation) and ode_meanfield[spot_0.20 d=0.20] (nonlinear) agree: 0.004425048828125 vs 0.015647643882850868",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "r257": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   }
+  },
+  {
+   "case_id": "R-COIN:CC_percolation[spot_0.20 d=0.55]_ode_meanfield[spot_0.20 d=0.55]",
+   "data": {
+    "declared_at": "PREREG.md, committed before the first run",
+    "families": [
+     "percolation",
+     "nonlinear"
+    ],
+    "observed": 0.473138427734375,
+    "target": 0.476967302611996,
+    "window": 0.05
+   },
+   "description": "percolation[spot_0.20 d=0.55] (percolation) and ode_meanfield[spot_0.20 d=0.55] (nonlinear) agree: 0.473138427734375 vs 0.476967302611996",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "r257": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   }
+  },
+  {
+   "case_id": "R-COIN:CC_percolation[spot_0.20 d=0.60]_ode_meanfield[spot_0.20 d=0.60]",
+   "data": {
+    "declared_at": "PREREG.md, committed before the first run",
+    "families": [
+     "percolation",
+     "nonlinear"
+    ],
+    "observed": 0.55843505859375,
+    "target": 0.5384631594689745,
+    "window": 0.05
+   },
+   "description": "percolation[spot_0.20 d=0.60] (percolation) and ode_meanfield[spot_0.20 d=0.60] (nonlinear) agree: 0.55843505859375 vs 0.5384631594689745",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "r257": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   }
+  },
+  {
+   "case_id": "R-COIN:CC_percolation[spot_0.20 d=0.65]_ode_meanfield[spot_0.20 d=0.65]",
+   "data": {
+    "declared_at": "PREREG.md, committed before the first run",
+    "families": [
+     "percolation",
+     "nonlinear"
+    ],
+    "observed": 0.62901611328125,
+    "target": 0.5981076171226881,
+    "window": 0.05
+   },
+   "description": "percolation[spot_0.20 d=0.65] (percolation) and ode_meanfield[spot_0.20 d=0.65] (nonlinear) agree: 0.62901611328125 vs 0.5981076171226881",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "r257": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   }
+  },
+  {
+   "case_id": "R-COIN:CC_percolation[spot_0.20 d=0.70]_ode_meanfield[spot_0.20 d=0.70]",
+   "data": {
+    "declared_at": "PREREG.md, committed before the first run",
+    "families": [
+     "percolation",
+     "nonlinear"
+    ],
+    "observed": 0.689093017578125,
+    "target": 0.6562183431170863,
+    "window": 0.05
+   },
+   "description": "percolation[spot_0.20 d=0.70] (percolation) and ode_meanfield[spot_0.20 d=0.70] (nonlinear) agree: 0.689093017578125 vs 0.6562183431170863",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "r257": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   }
+  },
+  {
+   "case_id": "R-COIN:CC_percolation[spot_0.20 d=0.80]_ode_meanfield[spot_0.20 d=0.80]",
+   "data": {
+    "declared_at": "PREREG.md, committed before the first run",
+    "families": [
+     "percolation",
+     "nonlinear"
+    ],
+    "observed": 0.796063232421875,
+    "target": 0.7688184748600326,
+    "window": 0.05
+   },
+   "description": "percolation[spot_0.20 d=0.80] (percolation) and ode_meanfield[spot_0.20 d=0.80] (nonlinear) agree: 0.796063232421875 vs 0.7688184748600326",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "r257": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   }
+  },
+  {
+   "case_id": "R-COIN:CC_percolation[spot_0.20 d=0.90]_ode_meanfield[spot_0.20 d=0.90]",
+   "data": {
+    "declared_at": "PREREG.md, committed before the first run",
+    "families": [
+     "percolation",
+     "nonlinear"
+    ],
+    "observed": 0.898486328125,
+    "target": 0.877805039930804,
+    "window": 0.05
+   },
+   "description": "percolation[spot_0.20 d=0.90] (percolation) and ode_meanfield[spot_0.20 d=0.90] (nonlinear) agree: 0.898486328125 vs 0.877805039930804",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "r257": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   }
+  },
+  {
+   "case_id": "R-KAG:percolation-00",
+   "data": {
+    "dt": 1.0,
+    "expected": {
+     "bare": 6,
+     "burned": 24,
+     "burning": 0,
+     "unburned": 6
+    },
+    "initial": {
+     "bare": 0,
+     "burned": 0,
+     "burning": 0,
+     "unassigned": 36,
+     "unburned": 0
+    },
+    "live": {
+     "mass": [
+      "unassigned",
+      "unburned",
+      "burning",
+      "burned",
+      "bare"
+     ]
+    },
+    "model": "percolation",
+    "output": "burned",
+    "params": {
+     "L": 6,
+     "grid": [
+      [
+       1,
+       1,
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1,
+       0,
+       1
+      ]
+     ],
+     "ignition": "left_edge",
+     "p_flammable": 0.0,
+     "spot": 0.0
+    },
+    "t_end": 24,
+    "tol": 1e-09
+   },
+   "description": "percolation gate draw 0 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "r257": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   }
+  },
+  {
+   "case_id": "R-KAG:percolation-01",
+   "data": {
+    "dt": 1.0,
+    "expected": {
+     "bare": 0,
+     "burned": 36,
+     "burning": 0,
+     "unburned": 0
+    },
+    "initial": {
+     "bare": 0,
+     "burned": 0,
+     "burning": 0,
+     "unassigned": 36,
+     "unburned": 0
+    },
+    "live": {
+     "mass": [
+      "unassigned",
+      "unburned",
+      "burning",
+      "burned",
+      "bare"
+     ]
+    },
+    "model": "percolation",
+    "output": "burned",
+    "params": {
+     "L": 6,
+     "grid": "RANDOM",
+     "ignition": "left_edge",
+     "p_flammable": 1.0,
+     "spot": 0.0
+    },
+    "t_end": 24,
+    "tol": 1e-09
+   },
+   "description": "percolation gate draw 1 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "r257": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   }
+  },
+  {
+   "case_id": "R-KAG:percolation-02",
+   "data": {
+    "dt": 1.0,
+    "expected": {
+     "bare": 0,
+     "burned": 64,
+     "burning": 0,
+     "unburned": 0
+    },
+    "initial": {
+     "bare": 0,
+     "burned": 0,
+     "burning": 0,
+     "unassigned": 64,
+     "unburned": 0
+    },
+    "live": {
+     "mass": [
+      "unassigned",
+      "unburned",
+      "burning",
+      "burned",
+      "bare"
+     ]
+    },
+    "model": "percolation",
+    "output": "burned",
+    "params": {
+     "L": 8,
+     "grid": "RANDOM",
+     "ignition": "left_edge",
+     "p_flammable": 1.0,
+     "spot": 0.0
+    },
+    "t_end": 32,
+    "tol": 1e-09
+   },
+   "description": "percolation gate draw 2 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "r257": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   }
+  },
+  {
+   "case_id": "R-KAG:percolation-03",
+   "data": {
+    "dt": 1.0,
+    "expected": {
+     "bare": 5,
+     "burned": 15,
+     "burning": 0,
+     "unburned": 5
+    },
+    "initial": {
+     "bare": 0,
+     "burned": 0,
+     "burning": 0,
+     "unassigned": 25,
+     "unburned": 0
+    },
+    "live": {
+     "mass": [
+      "unassigned",
+      "unburned",
+      "burning",
+      "burned",
+      "bare"
+     ]
+    },
+    "model": "percolation",
+    "output": "burned",
+    "params": {
+     "L": 5,
+     "grid": [
+      [
+       1,
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       0,
+       1
+      ]
+     ],
+     "ignition": "left_edge",
+     "p_flammable": 0.0,
+     "spot": 0.0
+    },
+    "t_end": 20,
+    "tol": 1e-09
+   },
+   "description": "percolation gate draw 3 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "r257": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   }
+  },
+  {
+   "case_id": "R-KAG:percolation-04",
+   "data": {
+    "dt": 1.0,
+    "expected": {
+     "bare": 0,
+     "burned": 64,
+     "burning": 0,
+     "unburned": 0
+    },
+    "initial": {
+     "bare": 0,
+     "burned": 0,
+     "burning": 0,
+     "unassigned": 64,
+     "unburned": 0
+    },
+    "live": {
+     "mass": [
+      "unassigned",
+      "unburned",
+      "burning",
+      "burned",
+      "bare"
+     ]
+    },
+    "model": "percolation",
+    "output": "burned",
+    "params": {
+     "L": 8,
+     "grid": "RANDOM",
+     "ignition": "left_edge",
+     "p_flammable": 1.0,
+     "spot": 0.0
+    },
+    "t_end": 32,
+    "tol": 1e-09
+   },
+   "description": "percolation gate draw 4 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "r257": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   }
+  },
+  {
+   "case_id": "R-KAG:percolation-05",
+   "data": {
+    "dt": 1.0,
+    "expected": {
+     "bare": 5,
+     "burned": 10,
+     "burning": 0,
+     "unburned": 10
+    },
+    "initial": {
+     "bare": 0,
+     "burned": 0,
+     "burning": 0,
+     "unassigned": 25,
+     "unburned": 0
+    },
+    "live": {
+     "mass": [
+      "unassigned",
+      "unburned",
+      "burning",
+      "burned",
+      "bare"
+     ]
+    },
+    "model": "percolation",
+    "output": "burned",
+    "params": {
+     "L": 5,
+     "grid": [
+      [
+       1,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       1
+      ]
+     ],
+     "ignition": "left_edge",
+     "p_flammable": 0.0,
+     "spot": 0.0
+    },
+    "t_end": 20,
+    "tol": 1e-09
+   },
+   "description": "percolation gate draw 5 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "r257": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   }
+  },
+  {
+   "case_id": "R-KAG:percolation-06",
+   "data": {
+    "dt": 1.0,
+    "expected": {
+     "bare": 0,
+     "burned": 64,
+     "burning": 0,
+     "unburned": 0
+    },
+    "initial": {
+     "bare": 0,
+     "burned": 0,
+     "burning": 0,
+     "unassigned": 64,
+     "unburned": 0
+    },
+    "live": {
+     "mass": [
+      "unassigned",
+      "unburned",
+      "burning",
+      "burned",
+      "bare"
+     ]
+    },
+    "model": "percolation",
+    "output": "burned",
+    "params": {
+     "L": 8,
+     "grid": "RANDOM",
+     "ignition": "left_edge",
+     "p_flammable": 1.0,
+     "spot": 0.0
+    },
+    "t_end": 32,
+    "tol": 1e-09
+   },
+   "description": "percolation gate draw 6 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "r257": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   }
+  },
+  {
+   "case_id": "R-KAG:percolation-07",
+   "data": {
+    "dt": 1.0,
+    "expected": {
+     "bare": 7,
+     "burned": 14,
+     "burning": 0,
+     "unburned": 28
+    },
+    "initial": {
+     "bare": 0,
+     "burned": 0,
+     "burning": 0,
+     "unassigned": 49,
+     "unburned": 0
+    },
+    "live": {
+     "mass": [
+      "unassigned",
+      "unburned",
+      "burning",
+      "burned",
+      "bare"
+     ]
+    },
+    "model": "percolation",
+    "output": "burned",
+    "params": {
+     "L": 7,
+     "grid": [
+      [
+       1,
+       1,
+       0,
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       1,
+       1,
+       1
+      ]
+     ],
+     "ignition": "left_edge",
+     "p_flammable": 0.0,
+     "spot": 0.0
+    },
+    "t_end": 28,
+    "tol": 1e-09
+   },
+   "description": "percolation gate draw 7 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "r257": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   }
+  },
+  {
+   "case_id": "R-KAG:percolation-08",
+   "data": {
+    "dt": 1.0,
+    "expected": {
+     "bare": 5,
+     "burned": 10,
+     "burning": 0,
+     "unburned": 10
+    },
+    "initial": {
+     "bare": 0,
+     "burned": 0,
+     "burning": 0,
+     "unassigned": 25,
+     "unburned": 0
+    },
+    "live": {
+     "mass": [
+      "unassigned",
+      "unburned",
+      "burning",
+      "burned",
+      "bare"
+     ]
+    },
+    "model": "percolation",
+    "output": "burned",
+    "params": {
+     "L": 5,
+     "grid": [
+      [
+       1,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       1
+      ]
+     ],
+     "ignition": "left_edge",
+     "p_flammable": 0.0,
+     "spot": 0.0
+    },
+    "t_end": 20,
+    "tol": 1e-09
+   },
+   "description": "percolation gate draw 8 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "r257": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   }
+  },
+  {
+   "case_id": "R-KAG:percolation-09",
+   "data": {
+    "dt": 1.0,
+    "expected": {
+     "bare": 0,
+     "burned": 64,
+     "burning": 0,
+     "unburned": 0
+    },
+    "initial": {
+     "bare": 0,
+     "burned": 0,
+     "burning": 0,
+     "unassigned": 64,
+     "unburned": 0
+    },
+    "live": {
+     "mass": [
+      "unassigned",
+      "unburned",
+      "burning",
+      "burned",
+      "bare"
+     ]
+    },
+    "model": "percolation",
+    "output": "burned",
+    "params": {
+     "L": 8,
+     "grid": "RANDOM",
+     "ignition": "left_edge",
+     "p_flammable": 1.0,
+     "spot": 0.0
+    },
+    "t_end": 32,
+    "tol": 1e-09
+   },
+   "description": "percolation gate draw 9 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "r257": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   }
+  },
+  {
+   "case_id": "R-KAG:percolation-10",
+   "data": {
+    "dt": 1.0,
+    "expected": {
+     "bare": 0,
+     "burned": 25,
+     "burning": 0,
+     "unburned": 0
+    },
+    "initial": {
+     "bare": 0,
+     "burned": 0,
+     "burning": 0,
+     "unassigned": 25,
+     "unburned": 0
+    },
+    "live": {
+     "mass": [
+      "unassigned",
+      "unburned",
+      "burning",
+      "burned",
+      "bare"
+     ]
+    },
+    "model": "percolation",
+    "output": "burned",
+    "params": {
+     "L": 5,
+     "grid": "RANDOM",
+     "ignition": "left_edge",
+     "p_flammable": 1.0,
+     "spot": 0.0
+    },
+    "t_end": 20,
+    "tol": 1e-09
+   },
+   "description": "percolation gate draw 10 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "r257": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   }
+  },
+  {
+   "case_id": "R-KAG:percolation-11",
+   "data": {
+    "dt": 1.0,
+    "expected": {
+     "bare": 0,
+     "burned": 16,
+     "burning": 0,
+     "unburned": 0
+    },
+    "initial": {
+     "bare": 0,
+     "burned": 0,
+     "burning": 0,
+     "unassigned": 16,
+     "unburned": 0
+    },
+    "live": {
+     "mass": [
+      "unassigned",
+      "unburned",
+      "burning",
+      "burned",
+      "bare"
+     ]
+    },
+    "model": "percolation",
+    "output": "burned",
+    "params": {
+     "L": 4,
+     "grid": "RANDOM",
+     "ignition": "left_edge",
+     "p_flammable": 1.0,
+     "spot": 0.0
+    },
+    "t_end": 16,
+    "tol": 1e-09
+   },
+   "description": "percolation gate draw 11 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "r257": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   }
+  },
+  {
+   "case_id": "R-KAG:branching-00",
+   "data": {
+    "dt": 1.0,
+    "expected": {
+     "active": 3,
+     "retired": 15
+    },
+    "initial": {
+     "active": 3,
+     "retired": 0
+    },
+    "live": {
+     "mass": [
+      "active",
+      "retired"
+     ]
+    },
+    "model": "branching",
+    "output": "active",
+    "params": {
+     "R": 1,
+     "cap": 1000000000,
+     "offspring": "fixed"
+    },
+    "t_end": 5.0,
+    "tol": 1e-09
+   },
+   "description": "branching gate draw 0 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "r257": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   }
+  },
+  {
+   "case_id": "R-KAG:branching-01",
+   "data": {
+    "dt": 1.0,
+    "expected": {
+     "active": 24,
+     "retired": 21
+    },
+    "initial": {
+     "active": 3,
+     "retired": 0
+    },
+    "live": {
+     "mass": [
+      "active",
+      "retired"
+     ]
+    },
+    "model": "branching",
+    "output": "active",
+    "params": {
+     "R": 2,
+     "cap": 1000000000,
+     "offspring": "fixed"
+    },
+    "t_end": 3.0,
+    "tol": 1e-09
+   },
+   "description": "branching gate draw 1 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "r257": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   }
+  },
+  {
+   "case_id": "R-KAG:branching-02",
+   "data": {
+    "dt": 1.0,
+    "expected": {
+     "active": 40,
+     "retired": 35
+    },
+    "initial": {
+     "active": 5,
+     "retired": 0
+    },
+    "live": {
+     "mass": [
+      "active",
+      "retired"
+     ]
+    },
+    "model": "branching",
+    "output": "active",
+    "params": {
+     "R": 2,
+     "cap": 1000000000,
+     "offspring": "fixed"
+    },
+    "t_end": 3.0,
+    "tol": 1e-09
+   },
+   "description": "branching gate draw 2 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "r257": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   }
+  },
+  {
+   "case_id": "R-KAG:branching-03",
+   "data": {
+    "dt": 1.0,
+    "expected": {
+     "active": 81,
+     "retired": 39
+    },
+    "initial": {
+     "active": 3,
+     "retired": 0
+    },
+    "live": {
+     "mass": [
+      "active",
+      "retired"
+     ]
+    },
+    "model": "branching",
+    "output": "active",
+    "params": {
+     "R": 3,
+     "cap": 1000000000,
+     "offspring": "fixed"
+    },
+    "t_end": 3.0,
+    "tol": 1e-09
+   },
+   "description": "branching gate draw 3 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "r257": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   }
+  },
+  {
+   "case_id": "R-KAG:branching-04",
+   "data": {
+    "dt": 1.0,
+    "expected": {
+     "active": 729,
+     "retired": 363
+    },
+    "initial": {
+     "active": 3,
+     "retired": 0
+    },
+    "live": {
+     "mass": [
+      "active",
+      "retired"
+     ]
+    },
+    "model": "branching",
+    "output": "active",
+    "params": {
+     "R": 3,
+     "cap": 1000000000,
+     "offspring": "fixed"
+    },
+    "t_end": 5.0,
+    "tol": 1e-09
+   },
+   "description": "branching gate draw 4 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "r257": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   }
+  },
+  {
+   "case_id": "R-KAG:branching-05",
+   "data": {
+    "dt": 1.0,
+    "expected": {
+     "active": 2,
+     "retired": 10
+    },
+    "initial": {
+     "active": 2,
+     "retired": 0
+    },
+    "live": {
+     "mass": [
+      "active",
+      "retired"
+     ]
+    },
+    "model": "branching",
+    "output": "active",
+    "params": {
+     "R": 1,
+     "cap": 1000000000,
+     "offspring": "fixed"
+    },
+    "t_end": 5.0,
+    "tol": 1e-09
+   },
+   "description": "branching gate draw 5 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "r257": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   }
+  },
+  {
+   "case_id": "R-KAG:branching-06",
+   "data": {
+    "dt": 1.0,
+    "expected": {
+     "active": 5,
+     "retired": 15
+    },
+    "initial": {
+     "active": 5,
+     "retired": 0
+    },
+    "live": {
+     "mass": [
+      "active",
+      "retired"
+     ]
+    },
+    "model": "branching",
+    "output": "active",
+    "params": {
+     "R": 1,
+     "cap": 1000000000,
+     "offspring": "fixed"
+    },
+    "t_end": 3.0,
+    "tol": 1e-09
+   },
+   "description": "branching gate draw 6 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "r257": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   }
+  },
+  {
+   "case_id": "R-KAG:branching-07",
+   "data": {
+    "dt": 1.0,
+    "expected": {
+     "active": 2,
+     "retired": 8
+    },
+    "initial": {
+     "active": 2,
+     "retired": 0
+    },
+    "live": {
+     "mass": [
+      "active",
+      "retired"
+     ]
+    },
+    "model": "branching",
+    "output": "active",
+    "params": {
+     "R": 1,
+     "cap": 1000000000,
+     "offspring": "fixed"
+    },
+    "t_end": 4.0,
+    "tol": 1e-09
+   },
+   "description": "branching gate draw 7 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "r257": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   }
+  },
+  {
+   "case_id": "R-KAG:branching-08",
+   "data": {
+    "dt": 1.0,
+    "expected": {
+     "active": 0,
+     "retired": 1
+    },
+    "initial": {
+     "active": 1,
+     "retired": 0
+    },
+    "live": {
+     "mass": [
+      "active",
+      "retired"
+     ]
+    },
+    "model": "branching",
+    "output": "active",
+    "params": {
+     "R": 0,
+     "cap": 1000000000,
+     "offspring": "fixed"
+    },
+    "t_end": 4.0,
+    "tol": 1e-09
+   },
+   "description": "branching gate draw 8 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "r257": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   }
+  },
+  {
+   "case_id": "R-KAG:branching-09",
+   "data": {
+    "dt": 1.0,
+    "expected": {
+     "active": 0,
+     "retired": 4
+    },
+    "initial": {
+     "active": 4,
+     "retired": 0
+    },
+    "live": {
+     "mass": [
+      "active",
+      "retired"
+     ]
+    },
+    "model": "branching",
+    "output": "active",
+    "params": {
+     "R": 0,
+     "cap": 1000000000,
+     "offspring": "fixed"
+    },
+    "t_end": 2.0,
+    "tol": 1e-09
+   },
+   "description": "branching gate draw 9 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "r257": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   }
+  },
+  {
+   "case_id": "R-KAG:branching-10",
+   "data": {
+    "dt": 1.0,
+    "expected": {
+     "active": 54,
+     "retired": 26
+    },
+    "initial": {
+     "active": 2,
+     "retired": 0
+    },
+    "live": {
+     "mass": [
+      "active",
+      "retired"
+     ]
+    },
+    "model": "branching",
+    "output": "active",
+    "params": {
+     "R": 3,
+     "cap": 1000000000,
+     "offspring": "fixed"
+    },
+    "t_end": 3.0,
+    "tol": 1e-09
+   },
+   "description": "branching gate draw 10 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "r257": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   }
+  },
+  {
+   "case_id": "R-KAG:branching-11",
+   "data": {
+    "dt": 1.0,
+    "expected": {
+     "active": 4,
+     "retired": 8
+    },
+    "initial": {
+     "active": 4,
+     "retired": 0
+    },
+    "live": {
+     "mass": [
+      "active",
+      "retired"
+     ]
+    },
+    "model": "branching",
+    "output": "active",
+    "params": {
+     "R": 1,
+     "cap": 1000000000,
+     "offspring": "fixed"
+    },
+    "t_end": 2.0,
+    "tol": 1e-09
+   },
+   "description": "branching gate draw 11 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "r257": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   }
+  },
+  {
+   "case_id": "R-VAL:absent_at_sensitivity",
+   "data": {
+    "provenance": "looked for at this sensitivity, not found",
+    "sensitivity": 0.05,
+    "status": "ABSENT_AT_SENSITIVITY"
+   },
+   "description": "ABSENT_AT_SENSITIVITY(0.05): a bounded null, holds no number",
+   "group": "value status",
+   "kind": "status",
+   "r257": {
+    "accepted": true,
+    "label": "ABSENT_AT_SENSITIVITY(0.05)"
+   }
+  },
+  {
+   "case_id": "R-VAL:unknown_with_expiry_text",
+   "data": {
+    "expiry_condition": "a measured value for K arrives",
+    "status": "UNKNOWN"
+   },
+   "description": "UNKNOWN with a free-text expiry_condition",
+   "group": "value status",
+   "kind": "status",
+   "r257": {
+    "accepted": true,
+    "expiry_report": {
+     "no_exit_defined": 0,
+     "open_slots": 1,
+     "rows": [
+      {
+       "expiry_condition": "a measured value for K arrives",
+       "name": "K",
+       "status": "UNKNOWN"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "case_id": "R-VAL:unknown_without_expiry",
+   "data": {
+    "expiry_condition": null,
+    "status": "UNKNOWN"
+   },
+   "description": "UNKNOWN with no exit stated",
+   "group": "value status",
+   "kind": "planted_defect",
+   "r257": {
+    "accepted": false,
+    "refused": "UNKNOWN needs expiry_condition: what observation would end it (write 'VOID' if none is defined)"
+   }
+  },
+  {
+   "case_id": "R-CLAIM:part2-0",
+   "data": {
+    "basis": "run.py part2, this tree",
+    "tag": "DERIVED",
+    "text": "the table and the four feature readings"
+   },
+   "description": "the table and the four feature readings",
+   "group": "claim tags",
+   "kind": "status",
+   "r257": {
+    "accepted": true,
+    "tag": "DERIVED"
+   }
+  },
+  {
+   "case_id": "R-CLAIM:part2-1",
+   "data": {
+    "basis": "forest-model-ledger runs/run_7.md, run_8.md: REPORTED, code void",
+    "tag": "PROPOSED",
+    "text": "runs 7-8 as logged"
+   },
+   "description": "runs 7-8 as logged",
+   "group": "claim tags",
+   "kind": "status",
+   "r257": {
+    "accepted": true,
+    "tag": "PROPOSED"
+   }
+  },
+  {
+   "case_id": "R-CLAIM:part2-2",
+   "data": {
+    "basis": "not known; grid size, replicates and the ODE are void in the records",
+    "tag": "PROPOSED",
+    "text": "this design is what runs 7-8 ran"
+   },
+   "description": "this design is what runs 7-8 ran",
+   "group": "claim tags",
+   "kind": "status",
+   "r257": {
+    "accepted": true,
+    "tag": "PROPOSED"
+   }
+  },
+  {
+   "case_id": "R-OBS:cross_system_regimes_undeclared",
+   "data": {
+    "observer": {
+     "observer_perturbation": "UNDECLARED",
+     "observer_reactivity": "UNDECLARED",
+     "observer_strategy": "UNDECLARED"
+    }
+   },
+   "description": "cross-system comparison requested with all three observer regimes UNDECLARED",
+   "group": "observer regimes",
+   "kind": "planted_defect",
+   "r257": {
+    "owed": [
+     "observer_perturbation",
+     "observer_reactivity",
+     "observer_strategy"
+    ],
+    "refused": true
+   }
+  },
+  {
+   "case_id": "R-ANCHOR:two_change_branch",
+   "data": {
+    "changes": [
+     "parameter x",
+     "config field dt"
+    ]
+   },
+   "description": "a branch that changes two things against the frozen anchor",
+   "group": "anchor loop",
+   "kind": "planted_defect",
+   "r257": {
+    "reason": "a branch changes ONE thing; got 2",
+    "refused": true
+   }
+  },
+  {
+   "case_id": "R-BR:poisson_R0.8",
+   "data": {
+    "R": 0.8,
+    "law": "poisson"
+   },
+   "description": "Poisson(R) offspring; die-out probability is the smallest root of q = exp(R(q-1))",
+   "group": "branching die-out",
+   "kind": "known_answer",
+   "r257": {
+    "die_out_probability": 1.0
+   }
+  },
+  {
+   "case_id": "R-BR:poisson_R1.5",
+   "data": {
+    "R": 1.5,
+    "law": "poisson"
+   },
+   "description": "Poisson(R) offspring; die-out probability is the smallest root of q = exp(R(q-1))",
+   "group": "branching die-out",
+   "kind": "known_answer",
+   "r257": {
+    "die_out_probability": 0.4171883561341757
+   }
+  },
+  {
+   "case_id": "R-BR:poisson_R2.0",
+   "data": {
+    "R": 2.0,
+    "law": "poisson"
+   },
+   "description": "Poisson(R) offspring; die-out probability is the smallest root of q = exp(R(q-1))",
+   "group": "branching die-out",
+   "kind": "known_answer",
+   "r257": {
+    "die_out_probability": 0.2031878699799769
+   }
+  }
+ ],
+ "rev": "beac98bb5be7a7c6e382d863101cb002d1192b15",
+ "source": "Simulators/relational-playground (#257)"
+}

@@ -1,0 +1,2607 @@
+{
+ "direction": "study-aperture cases -> #257",
+ "rev": "beac98bb5be7a7c6e382d863101cb002d1192b15",
+ "rows": [
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEF:unregistered-control",
+   "description": "A control is declared in the experimental specification but never enters the boundary ledger.",
+   "dropped_on_translation": {
+    "declared_complete": true,
+    "provenances": [
+     "measured",
+     "specified"
+    ],
+    "registered_interventions": [
+     "control:heater",
+     "observer:calorimeter",
+     "control:stirrer"
+    ],
+    "unregistered_interventions": [
+     "control:stirrer"
+    ]
+   },
+   "group": "L0+harness",
+   "kind": "planted_defect",
+   "mapping": [
+    "account tolerance 0.1 -> sigma_meas 0.05 (NOISE band = 2 sigma)",
+    "pool 'E' carries the energy account; each Exchange -> one boundary accumulator"
+   ],
+   "native": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     {
+      "axis": "determination",
+      "code": "L0_UNREGISTERED_INTERVENTION",
+      "severity": "failed"
+     },
+     {
+      "axis": "determination",
+      "code": "L0_BALANCED",
+      "severity": "ok"
+     }
+    ]
+   },
+   "r": {
+    "misclosure": 0.0,
+    "status": "COMPLETE",
+    "status_reason": "1 of 5 budgets LIVE and closed; 4 VOID",
+    "verdict": "CLOSED"
+   },
+   "slot": false,
+   "slot_note": "#257's L0 has no intervention registry, no declared-complete flag and no value provenance; these decide Perplexity's axis and are dropped on the way in (listed above)"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEF:model-conservation-violation",
+   "description": "A declared-complete ledger with no measured values does not balance.",
+   "dropped_on_translation": {
+    "declared_complete": true,
+    "provenances": [
+     "model",
+     "specified"
+    ],
+    "registered_interventions": [
+     "control:heater",
+     "control:cooler"
+    ],
+    "unregistered_interventions": []
+   },
+   "group": "L0+harness",
+   "kind": "planted_defect",
+   "mapping": [
+    "account tolerance 0.1 -> sigma_meas 0.05 (NOISE band = 2 sigma)",
+    "pool 'E' carries the energy account; each Exchange -> one boundary accumulator"
+   ],
+   "native": {
+    "axes": {
+     "determination": "ok",
+     "instrument": "untested",
+     "physical": "failed"
+    },
+    "codes": [
+     {
+      "axis": "determination",
+      "code": "L0_REGISTRATION_COMPLETE",
+      "severity": "ok"
+     },
+     {
+      "axis": "physical",
+      "code": "L0_CONSERVATION_VIOLATION",
+      "severity": "failed"
+     }
+    ]
+   },
+   "r": {
+    "misclosure": 1.0,
+    "status": "INCOMPLETE",
+    "status_reason": "budget(s) ['energy'] did not close",
+    "verdict": "LEAK"
+   },
+   "slot": false,
+   "slot_note": "#257's L0 has no intervention registry, no declared-complete flag and no value provenance; these decide Perplexity's axis and are dropped on the way in (listed above)"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEF:measured-imbalance-unresolved",
+   "description": "A declared-complete ledger with measured values does not balance.",
+   "dropped_on_translation": {
+    "declared_complete": true,
+    "provenances": [
+     "measured",
+     "specified"
+    ],
+    "registered_interventions": [
+     "control:heater",
+     "observer:calorimeter"
+    ],
+    "unregistered_interventions": []
+   },
+   "group": "L0+harness",
+   "kind": "planted_defect",
+   "mapping": [
+    "account tolerance 0.1 -> sigma_meas 0.05 (NOISE band = 2 sigma)",
+    "pool 'E' carries the energy account; each Exchange -> one boundary accumulator"
+   ],
+   "native": {
+    "axes": {
+     "determination": "ok",
+     "instrument": "indeterminate",
+     "physical": "indeterminate"
+    },
+    "codes": [
+     {
+      "axis": "determination",
+      "code": "L0_REGISTRATION_COMPLETE",
+      "severity": "ok"
+     },
+     {
+      "axis": "physical",
+      "code": "L0_BALANCE_UNRESOLVED",
+      "severity": "indeterminate"
+     },
+     {
+      "axis": "instrument",
+      "code": "L0_BALANCE_UNRESOLVED",
+      "severity": "indeterminate"
+     }
+    ]
+   },
+   "r": {
+    "misclosure": -2.0,
+    "status": "INCOMPLETE",
+    "status_reason": "budget(s) ['energy'] did not close",
+    "verdict": "LEAK"
+   },
+   "slot": false,
+   "slot_note": "#257's L0 has no intervention registry, no declared-complete flag and no value provenance; these decide Perplexity's axis and are dropped on the way in (listed above)"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEF:incomplete-ledger-gap",
+   "description": "An unbalanced ledger that is not declared complete.",
+   "dropped_on_translation": {
+    "declared_complete": false,
+    "provenances": [
+     "model",
+     "specified"
+    ],
+    "registered_interventions": [
+     "control:heater",
+     "control:cooler"
+    ],
+    "unregistered_interventions": []
+   },
+   "group": "L0+harness",
+   "kind": "planted_defect",
+   "mapping": [
+    "account tolerance 0.1 -> sigma_meas 0.05 (NOISE band = 2 sigma)",
+    "pool 'E' carries the energy account; each Exchange -> one boundary accumulator"
+   ],
+   "native": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     {
+      "axis": "determination",
+      "code": "L0_REGISTRATION_COMPLETE",
+      "severity": "ok"
+     },
+     {
+      "axis": "determination",
+      "code": "L0_ACCOUNTING_GAP",
+      "severity": "failed"
+     }
+    ]
+   },
+   "r": {
+    "misclosure": 1.0,
+    "status": "INCOMPLETE",
+    "status_reason": "budget(s) ['energy'] did not close",
+    "verdict": "LEAK"
+   },
+   "slot": false,
+   "slot_note": "#257's L0 has no intervention registry, no declared-complete flag and no value provenance; these decide Perplexity's axis and are dropped on the way in (listed above)"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEF:known-answer-violation",
+   "description": "An instrument that returns wrong values on known-answer cases.",
+   "group": "L0+harness",
+   "kind": "planted_defect",
+   "mapping": [
+    "LinearInstrument(slope, intercept) -> one-step #257 model writing slope*x+intercept into y",
+    "each Perplexity known-answer case -> a #257 builder draw (cycled; the gate always takes 12)",
+    "the gate then plants leak/coef defects on top -- planted on the instrument, not on the case",
+    "[CHOICE] a static instrument has no start state in #257's dynamic-model gate, so the adapter supplies one; y0 in {0, 1, -1} is run and y0=0 is primary. The gate's 'coef' plant scales the transfer by 1.1, so it moves nothing on any case whose required flux (answer - y0) is zero: y0=0 blinds it on the x=0 case, y0=1 on the x=1 case, y0=-1 on none. The gate verdict on a clean instrument is therefore a property of this adapter choice -- coded ADAPTER, not read as a result"
+   ],
+   "native": {
+    "axes": {
+     "determination": "untested",
+     "instrument": "failed",
+     "physical": "untested"
+    },
+    "codes": [
+     {
+      "axis": "instrument",
+      "code": "KA_MISMATCH",
+      "severity": "failed"
+     },
+     {
+      "axis": "instrument",
+      "code": "KA_MISMATCH",
+      "severity": "failed"
+     },
+     {
+      "axis": "instrument",
+      "code": "KA_MISMATCH",
+      "severity": "failed"
+     }
+    ]
+   },
+   "r": {
+    "FP": 1.0,
+    "TP": 1.0,
+    "evidence": "12 clean draws, 12 planted (leak / coef alternating); FP 1.00 TP 1.00",
+    "harness": "CONSTANT_FIRES",
+    "trusted": false
+   },
+   "r_arms": {
+    "y0=-1": {
+     "FP": 1.0,
+     "TP": 1.0,
+     "evidence": "12 clean draws, 12 planted (leak / coef alternating); FP 1.00 TP 1.00",
+     "harness": "CONSTANT_FIRES",
+     "trusted": false
+    },
+    "y0=0": {
+     "FP": 1.0,
+     "TP": 1.0,
+     "evidence": "12 clean draws, 12 planted (leak / coef alternating); FP 1.00 TP 1.00",
+     "harness": "CONSTANT_FIRES",
+     "trusted": false
+    },
+    "y0=1": {
+     "FP": 1.0,
+     "TP": 1.0,
+     "evidence": "12 clean draws, 12 planted (leak / coef alternating); FP 1.00 TP 1.00",
+     "harness": "CONSTANT_FIRES",
+     "trusted": false
+    }
+   },
+   "slot": true,
+   "slot_note": null
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEF:null-false-positive",
+   "description": "An instrument that reports a detection on a null system.",
+   "group": "L0+harness",
+   "kind": "planted_defect",
+   "mapping": [
+    "null cases -> certify_tool nulls; signals = [] (Perplexity's null harness has none)",
+    "detector = |instrument(x) - stated null output| > tolerance; null case keys ['_type', 'case_id', 'description', 'inputs', 'null_outputs', 'tolerances']"
+   ],
+   "native": {
+    "axes": {
+     "determination": "untested",
+     "instrument": "failed",
+     "physical": "untested"
+    },
+    "codes": [
+     {
+      "axis": "instrument",
+      "code": "NULL_FALSE_POSITIVE",
+      "severity": "failed"
+     }
+    ]
+   },
+   "r": {
+    "error": "ZeroDivisionError in certify_tool: division by zero",
+    "form": "CRASH"
+   },
+   "slot": false,
+   "slot_note": "#257's tool gate has no null-only mode: TP divides by len(signals)"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEF:expected-return-measured-non-return",
+   "description": "The description asserts a return; measured return values miss the anchor.",
+   "dropped_on_translation": {
+    "expected_return": true,
+    "provenances": [
+     "measured"
+    ],
+    "tolerances": [
+     [
+      "energy",
+      0.1
+     ],
+     [
+      "magnetization",
+      0.01
+     ]
+    ],
+    "tolerances_naming_no_quantity": []
+   },
+   "group": "system-track",
+   "kind": "planted_defect",
+   "mapping": [
+    "anchor quantities -> anchor final_state; returned values -> branch final_state"
+   ],
+   "native": {
+    "axes": {
+     "determination": "ok",
+     "instrument": "indeterminate",
+     "physical": "indeterminate"
+    },
+    "codes": [
+     {
+      "axis": "determination",
+      "code": "RT_LOOP_CLOSED",
+      "severity": "ok"
+     },
+     {
+      "axis": "physical",
+      "code": "RT_RETURN_UNRESOLVED",
+      "severity": "indeterminate"
+     },
+     {
+      "axis": "instrument",
+      "code": "RT_RETURN_UNRESOLVED",
+      "severity": "indeterminate"
+     }
+    ]
+   },
+   "r": {
+    "not_comparable": [],
+    "rows": [
+     [
+      "energy",
+      5.0
+     ],
+     [
+      "magnetization",
+      0.0
+     ]
+    ]
+   },
+   "slot": null,
+   "slot_note": null
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEF:expected-return-model-non-return",
+   "description": "The description asserts a return its own model-asserted values do not produce.",
+   "dropped_on_translation": {
+    "expected_return": true,
+    "provenances": [
+     "measured",
+     "model"
+    ],
+    "tolerances": [
+     [
+      "energy",
+      0.1
+     ],
+     [
+      "magnetization",
+      0.01
+     ]
+    ],
+    "tolerances_naming_no_quantity": []
+   },
+   "group": "system-track",
+   "kind": "planted_defect",
+   "mapping": [
+    "anchor quantities -> anchor final_state; returned values -> branch final_state"
+   ],
+   "native": {
+    "axes": {
+     "determination": "ok",
+     "instrument": "untested",
+     "physical": "failed"
+    },
+    "codes": [
+     {
+      "axis": "determination",
+      "code": "RT_LOOP_CLOSED",
+      "severity": "ok"
+     },
+     {
+      "axis": "physical",
+      "code": "RT_RETURN_VIOLATION",
+      "severity": "failed"
+     }
+    ]
+   },
+   "r": {
+    "not_comparable": [],
+    "rows": [
+     [
+      "energy",
+      5.0
+     ],
+     [
+      "magnetization",
+      0.0
+     ]
+    ]
+   },
+   "slot": null,
+   "slot_note": null
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEF:unasserted-non-return",
+   "description": "A non-return with no return assertion: an observed transition, not a failure.",
+   "dropped_on_translation": {
+    "expected_return": false,
+    "provenances": [
+     "measured"
+    ],
+    "tolerances": [
+     [
+      "energy",
+      0.1
+     ],
+     [
+      "magnetization",
+      0.01
+     ]
+    ],
+    "tolerances_naming_no_quantity": []
+   },
+   "group": "system-track",
+   "kind": "planted_defect",
+   "mapping": [
+    "anchor quantities -> anchor final_state; returned values -> branch final_state"
+   ],
+   "native": {
+    "axes": {
+     "determination": "ok",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     {
+      "axis": "determination",
+      "code": "RT_LOOP_CLOSED",
+      "severity": "ok"
+     }
+    ]
+   },
+   "r": {
+    "not_comparable": [],
+    "rows": [
+     [
+      "energy",
+      5.0
+     ],
+     [
+      "magnetization",
+      0.0
+     ]
+    ]
+   },
+   "slot": null,
+   "slot_note": null
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEF:missing-return-tolerance",
+   "description": "An observed quantity with no declared tolerance.",
+   "dropped_on_translation": {
+    "expected_return": true,
+    "provenances": [
+     "measured"
+    ],
+    "tolerances": [
+     [
+      "magnetization",
+      0.01
+     ]
+    ],
+    "tolerances_naming_no_quantity": []
+   },
+   "group": "system-track",
+   "kind": "planted_defect",
+   "mapping": [
+    "anchor quantities -> anchor final_state; returned values -> branch final_state"
+   ],
+   "native": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     {
+      "axis": "determination",
+      "code": "RT_RECORD_INCOMPLETE",
+      "severity": "indeterminate"
+     }
+    ]
+   },
+   "r": {
+    "not_comparable": [],
+    "rows": [
+     [
+      "energy",
+      5.0
+     ],
+     [
+      "magnetization",
+      0.0
+     ]
+    ]
+   },
+   "slot": null,
+   "slot_note": null
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEF:missing-return-observation",
+   "description": "A tolerance declared for a quantity never observed on return.",
+   "dropped_on_translation": {
+    "expected_return": true,
+    "provenances": [
+     "measured"
+    ],
+    "tolerances": [
+     [
+      "energy",
+      0.1
+     ],
+     [
+      "magnetization",
+      0.01
+     ]
+    ],
+    "tolerances_naming_no_quantity": []
+   },
+   "group": "system-track",
+   "kind": "planted_defect",
+   "mapping": [
+    "anchor quantities -> anchor final_state; returned values -> branch final_state"
+   ],
+   "native": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     {
+      "axis": "determination",
+      "code": "RT_RECORD_INCOMPLETE",
+      "severity": "indeterminate"
+     }
+    ]
+   },
+   "r": {
+    "not_comparable": [
+     "magnetization"
+    ],
+    "rows": [
+     [
+      "energy",
+      0.0
+     ],
+     [
+      "magnetization",
+      "NOT COMPARABLE"
+     ]
+    ]
+   },
+   "slot": null,
+   "slot_note": null
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEF:tolerance-for-unanchored-quantity",
+   "description": "A tolerance names a quantity the anchor never defined.",
+   "dropped_on_translation": {
+    "expected_return": true,
+    "provenances": [
+     "measured"
+    ],
+    "tolerances": [
+     [
+      "energy",
+      0.1
+     ],
+     [
+      "magnetization",
+      0.01
+     ],
+     [
+      "spin",
+      0.1
+     ]
+    ],
+    "tolerances_naming_no_quantity": [
+     "spin"
+    ]
+   },
+   "group": "system-track",
+   "kind": "planted_defect",
+   "mapping": [
+    "anchor quantities -> anchor final_state; returned values -> branch final_state"
+   ],
+   "native": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     {
+      "axis": "determination",
+      "code": "RT_RECORD_INCOMPLETE",
+      "severity": "indeterminate"
+     }
+    ]
+   },
+   "r": {
+    "not_comparable": [],
+    "rows": [
+     [
+      "energy",
+      0.0
+     ],
+     [
+      "magnetization",
+      0.0
+     ]
+    ]
+   },
+   "slot": null,
+   "slot_note": null
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEF:blind-instrument-misses-ladder",
+   "description": "An instrument that detects nothing on a ladder with expected detections.",
+   "group": "determination-track",
+   "kind": "planted_defect",
+   "mapping": [
+    "ladder rungs expected undetectable -> nulls, expected detectable -> planted signals",
+    "detector = |reading - null output| > tolerance"
+   ],
+   "native": {
+    "axes": {
+     "determination": "untested",
+     "instrument": "failed",
+     "physical": "untested"
+    },
+    "codes": [
+     {
+      "axis": "instrument",
+      "code": "SENSITIVITY_MISS",
+      "severity": "failed"
+     },
+     {
+      "axis": "instrument",
+      "code": "SENSITIVITY_MISS",
+      "severity": "failed"
+     },
+     {
+      "axis": "instrument",
+      "code": "SENSITIVITY_MISS",
+      "severity": "failed"
+     }
+    ]
+   },
+   "r": {
+    "FP": 0.0,
+    "TP": 0.0,
+    "form": "RECORD",
+    "harness": "CONSTANT_SILENT",
+    "limit": "NO_SLOT (the tool gate returns FP/TP, never a detection limit)",
+    "trusted": false
+   },
+   "slot": true,
+   "slot_note": "#257 grades the detector; it records no limit, no conditions, no effect size"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEF:noisy-instrument-false-positives",
+   "description": "An instrument that reports detections where none should be possible.",
+   "group": "determination-track",
+   "kind": "planted_defect",
+   "mapping": [
+    "ladder rungs expected undetectable -> nulls, expected detectable -> planted signals",
+    "detector = |reading - null output| > tolerance"
+   ],
+   "native": {
+    "axes": {
+     "determination": "untested",
+     "instrument": "failed",
+     "physical": "untested"
+    },
+    "codes": [
+     {
+      "axis": "instrument",
+      "code": "SENSITIVITY_FALSE_POSITIVE",
+      "severity": "failed"
+     },
+     {
+      "axis": "instrument",
+      "code": "SENSITIVITY_FALSE_POSITIVE",
+      "severity": "failed"
+     }
+    ]
+   },
+   "r": {
+    "FP": 1.0,
+    "TP": 1.0,
+    "form": "RECORD",
+    "harness": "CONSTANT_FIRES",
+    "limit": "NO_SLOT (the tool gate returns FP/TP, never a detection limit)",
+    "trusted": false
+   },
+   "slot": true,
+   "slot_note": "#257 grades the detector; it records no limit, no conditions, no effect size"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEF:sensitivity-ladder-empty",
+   "description": "A sensitivity determination with no cases.",
+   "group": "determination-track",
+   "kind": "planted_defect",
+   "mapping": [
+    "ladder rungs expected undetectable -> nulls, expected detectable -> planted signals",
+    "detector = |reading - null output| > tolerance"
+   ],
+   "native": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     {
+      "axis": "determination",
+      "code": "SENSITIVITY_NO_CASES",
+      "severity": "indeterminate"
+     }
+    ]
+   },
+   "r": {
+    "error": "ZeroDivisionError in certify_tool: division by zero",
+    "form": "CRASH",
+    "n_nulls": 0,
+    "n_signals": 0
+   },
+   "slot": true,
+   "slot_note": "#257 grades the detector; it records no limit, no conditions, no effect size"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEF:sensitivity-limit-not-established",
+   "description": "A ladder of undetectable magnitudes bounds nothing.",
+   "group": "determination-track",
+   "kind": "planted_defect",
+   "mapping": [
+    "ladder rungs expected undetectable -> nulls, expected detectable -> planted signals",
+    "detector = |reading - null output| > tolerance"
+   ],
+   "native": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     {
+      "axis": "determination",
+      "code": "SENSITIVITY_LIMIT_NOT_ESTABLISHED",
+      "severity": "indeterminate"
+     }
+    ]
+   },
+   "r": {
+    "error": "ZeroDivisionError in certify_tool: division by zero",
+    "form": "CRASH",
+    "n_nulls": 2,
+    "n_signals": 0
+   },
+   "slot": true,
+   "slot_note": "#257 grades the detector; it records no limit, no conditions, no effect size"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEF:non-detection-without-sensitivity",
+   "description": "A non-detection with no established sensitivity.",
+   "dropped_on_translation": {
+    "conditions": [
+     [
+      "band",
+      "K"
+     ],
+     [
+      "regime",
+      "passive"
+     ]
+    ],
+    "effect_size_of_interest": 0.5
+   },
+   "group": "determination-track",
+   "kind": "planted_defect",
+   "mapping": [
+    "established detection limit -> Value.sensitivity (None when no sensitivity was established)"
+   ],
+   "native": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     {
+      "axis": "determination",
+      "code": "ND_UNQUALIFIED",
+      "severity": "indeterminate"
+     }
+    ]
+   },
+   "r": {
+    "accepted": false,
+    "form": "RAISE",
+    "refused": "ABSENT_AT_SENSITIVITY needs the sensitivity it was looked for at"
+   },
+   "slot": true,
+   "slot_note": "ABSENT_AT_SENSITIVITY holds one number; no effect size of interest and no scope conditions to compare it with"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEF:non-detection-below-sensitivity",
+   "description": "The effect of interest is smaller than the detection limit.",
+   "dropped_on_translation": {
+    "conditions": [
+     [
+      "band",
+      "K"
+     ],
+     [
+      "regime",
+      "passive"
+     ]
+    ],
+    "effect_size_of_interest": 0.01
+   },
+   "group": "determination-track",
+   "kind": "planted_defect",
+   "mapping": [
+    "established detection limit -> Value.sensitivity (None when no sensitivity was established)"
+   ],
+   "native": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "codes": [
+     {
+      "axis": "instrument",
+      "code": "SENSITIVITY_ESTABLISHED",
+      "severity": "ok"
+     },
+     {
+      "axis": "determination",
+      "code": "ND_BELOW_SENSITIVITY",
+      "severity": "indeterminate"
+     }
+    ]
+   },
+   "r": {
+    "accepted": true,
+    "form": "RECORD",
+    "label": "ABSENT_AT_SENSITIVITY(0.1)"
+   },
+   "slot": false,
+   "slot_note": "ABSENT_AT_SENSITIVITY holds one number; no effect size of interest and no scope conditions to compare it with"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEF:absence-claim-scope-mismatch",
+   "description": "The observation's conditions are not covered by the sensitivity's scope.",
+   "dropped_on_translation": {
+    "conditions": [
+     [
+      "band",
+      "K"
+     ],
+     [
+      "regime",
+      "passive"
+     ],
+     [
+      "temperature",
+      "4K"
+     ]
+    ],
+    "effect_size_of_interest": 0.5
+   },
+   "group": "determination-track",
+   "kind": "planted_defect",
+   "mapping": [
+    "established detection limit -> Value.sensitivity (None when no sensitivity was established)"
+   ],
+   "native": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "codes": [
+     {
+      "axis": "instrument",
+      "code": "SENSITIVITY_ESTABLISHED",
+      "severity": "ok"
+     },
+     {
+      "axis": "determination",
+      "code": "ND_QUALIFIED",
+      "severity": "ok"
+     },
+     {
+      "axis": "determination",
+      "code": "SA_SCOPE_MISMATCH",
+      "severity": "indeterminate"
+     }
+    ]
+   },
+   "r": {
+    "accepted": true,
+    "form": "RECORD",
+    "label": "ABSENT_AT_SENSITIVITY(0.1)"
+   },
+   "slot": false,
+   "slot_note": "ABSENT_AT_SENSITIVITY holds one number; no effect size of interest and no scope conditions to compare it with"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEF:stale-reliance-on-expired-unknown",
+   "description": "A determination rests on an expired, unreevaluated UNKNOWN.",
+   "group": "determination-track",
+   "kind": "planted_defect",
+   "mapping": [],
+   "native": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     {
+      "axis": "determination",
+      "code": "STALE_UNKNOWN_RELIANCE",
+      "severity": "failed"
+     }
+    ]
+   },
+   "r": null,
+   "slot": false,
+   "slot_note": "UNKNOWN carries a free-text expiry_condition; there is no expired state and no record of a determination resting on an UNKNOWN, so stale reliance cannot be expressed"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-CTRL:balanced-ledger-passes",
+   "description": "A balanced ledger passes the gate without validating physics.",
+   "dropped_on_translation": {
+    "declared_complete": true,
+    "provenances": [
+     "measured",
+     "specified"
+    ],
+    "registered_interventions": [
+     "control:heater",
+     "observer:calorimeter"
+    ],
+    "unregistered_interventions": []
+   },
+   "group": "run_control_cases",
+   "kind": "control",
+   "mapping": [
+    "account tolerance 0.1 -> sigma_meas 0.05 (NOISE band = 2 sigma)",
+    "pool 'E' carries the energy account; each Exchange -> one boundary accumulator"
+   ],
+   "native": {
+    "detail": "physical=untested instrument=untested determination=ok findings=2",
+    "passed": true
+   },
+   "r": {
+    "misclosure": 0.0,
+    "status": "COMPLETE",
+    "status_reason": "1 of 5 budgets LIVE and closed; 4 VOID",
+    "verdict": "CLOSED"
+   },
+   "slot": false,
+   "slot_note": "#257's L0 has no intervention registry, no declared-complete flag and no value provenance; these decide Perplexity's axis and are dropped on the way in (listed above)"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-CTRL:clean-instrument-validated",
+   "description": "A clean instrument validates on both harnesses with no physical promotion.",
+   "group": "run_control_cases",
+   "kind": "control",
+   "mapping": [
+    "LinearInstrument(slope, intercept) -> one-step #257 model writing slope*x+intercept into y",
+    "each Perplexity known-answer case -> a #257 builder draw (cycled; the gate always takes 12)",
+    "the gate then plants leak/coef defects on top -- planted on the instrument, not on the case",
+    "[CHOICE] a static instrument has no start state in #257's dynamic-model gate, so the adapter supplies one; y0 in {0, 1, -1} is run and y0=0 is primary. The gate's 'coef' plant scales the transfer by 1.1, so it moves nothing on any case whose required flux (answer - y0) is zero: y0=0 blinds it on the x=0 case, y0=1 on the x=1 case, y0=-1 on none. The gate verdict on a clean instrument is therefore a property of this adapter choice -- coded ADAPTER, not read as a result"
+   ],
+   "native": {
+    "detail": "physical=untested instrument=ok determination=untested findings=1",
+    "passed": true
+   },
+   "r": {
+    "FP": 0.0,
+    "TP": 0.8333333333333334,
+    "evidence": "12 clean draws, 12 planted (leak / coef alternating); FP 0.00 TP 0.83",
+    "harness": "MISSES_PLANTED_DEFECTS",
+    "trusted": false
+   },
+   "r_arms": {
+    "y0=-1": {
+     "FP": 0.0,
+     "TP": 1.0,
+     "evidence": "12 clean draws, 12 planted (leak / coef alternating); FP 0.00 TP 1.00",
+     "harness": "PASS",
+     "trusted": true
+    },
+    "y0=0": {
+     "FP": 0.0,
+     "TP": 0.8333333333333334,
+     "evidence": "12 clean draws, 12 planted (leak / coef alternating); FP 0.00 TP 0.83",
+     "harness": "MISSES_PLANTED_DEFECTS",
+     "trusted": false
+    },
+    "y0=1": {
+     "FP": 0.0,
+     "TP": 0.8333333333333334,
+     "evidence": "12 clean draws, 12 planted (leak / coef alternating); FP 0.00 TP 0.83",
+     "harness": "MISSES_PLANTED_DEFECTS",
+     "trusted": false
+    }
+   },
+   "r_null": {
+    "error": "ZeroDivisionError in certify_tool: division by zero",
+    "form": "CRASH"
+   },
+   "slot": true,
+   "slot_note": null
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-CTRL:empty-harness-is-not-a-pass",
+   "description": "A harness run with zero cases yields INDETERMINATE, not OK.",
+   "group": "run_control_cases",
+   "kind": "control",
+   "mapping": [
+    "LinearInstrument(slope, intercept) -> one-step #257 model writing slope*x+intercept into y",
+    "each Perplexity known-answer case -> a #257 builder draw (cycled; the gate always takes 12)",
+    "the gate then plants leak/coef defects on top -- planted on the instrument, not on the case",
+    "[CHOICE] a static instrument has no start state in #257's dynamic-model gate, so the adapter supplies one; y0 in {0, 1, -1} is run and y0=0 is primary. The gate's 'coef' plant scales the transfer by 1.1, so it moves nothing on any case whose required flux (answer - y0) is zero: y0=0 blinds it on the x=0 case, y0=1 on the x=1 case, y0=-1 on none. The gate verdict on a clean instrument is therefore a property of this adapter choice -- coded ADAPTER, not read as a result"
+   ],
+   "native": {
+    "detail": "physical=untested instrument=indeterminate determination=untested findings=1",
+    "passed": true
+   },
+   "r": {
+    "FP": null,
+    "TP": null,
+    "evidence": "no known-answer cases written for this model",
+    "harness": null,
+    "trusted": false
+   },
+   "r_arms": {
+    "y0=-1": {
+     "FP": null,
+     "TP": null,
+     "evidence": "no known-answer cases written for this model",
+     "harness": null,
+     "trusted": false
+    },
+    "y0=0": {
+     "FP": null,
+     "TP": null,
+     "evidence": "no known-answer cases written for this model",
+     "harness": null,
+     "trusted": false
+    },
+    "y0=1": {
+     "FP": null,
+     "TP": null,
+     "evidence": "no known-answer cases written for this model",
+     "harness": null,
+     "trusted": false
+    }
+   },
+   "slot": true,
+   "slot_note": null
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-CTRL:continuous-system",
+   "description": "Return within tolerance with a persisted configuration yields CONTINUOUS.",
+   "group": "run_system_track_controls",
+   "kind": "control",
+   "mapping": [
+    "system_criterion supplied by the adapter: all anchored quantities within tolerance (PROPOSED)",
+    "configuration_of = sorted configuration entries",
+    "criterion left UNDECLARED when any anchored quantity lacks a tolerance or an observation"
+   ],
+   "native": {
+    "detail": "outcome=returned cell=continuous",
+    "passed": true
+   },
+   "r": {
+    "configuration_continuity": "UNCHANGED",
+    "recovery_and_reorganization": "NONE",
+    "system_continuity": "CONTINUOUS"
+   },
+   "slot": true,
+   "slot_note": "#257 splits system continuity and configuration continuity, as Perplexity does; its system criterion is identity ('still the system'), Perplexity's is return-to-anchor"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-CTRL:return-with-reconfiguration",
+   "description": "A returned state with a changed configuration is its own cell, not CONTINUOUS.",
+   "group": "run_system_track_controls",
+   "kind": "control",
+   "mapping": [
+    "system_criterion supplied by the adapter: all anchored quantities within tolerance (PROPOSED)",
+    "configuration_of = sorted configuration entries",
+    "criterion left UNDECLARED when any anchored quantity lacks a tolerance or an observation"
+   ],
+   "native": {
+    "detail": "cell=return-with-reconfiguration",
+    "passed": true
+   },
+   "r": {
+    "configuration_continuity": "CHANGED 1 time(s)",
+    "recovery_and_reorganization": "REORGANIZED",
+    "system_continuity": "CONTINUOUS"
+   },
+   "slot": true,
+   "slot_note": "#257 splits system continuity and configuration continuity, as Perplexity does; its system criterion is identity ('still the system'), Perplexity's is return-to-anchor"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-CTRL:drift-with-stable-configuration",
+   "description": "A changed state with a persisted configuration is its own cell.",
+   "group": "run_system_track_controls",
+   "kind": "control",
+   "mapping": [
+    "system_criterion supplied by the adapter: all anchored quantities within tolerance (PROPOSED)",
+    "configuration_of = sorted configuration entries",
+    "criterion left UNDECLARED when any anchored quantity lacks a tolerance or an observation"
+   ],
+   "native": {
+    "detail": "cell=drift-with-stable-configuration",
+    "passed": true
+   },
+   "r": {
+    "configuration_continuity": "UNCHANGED",
+    "recovery_and_reorganization": "NONE",
+    "system_continuity": "CRITERION_NOT_MET_AT_END"
+   },
+   "slot": true,
+   "slot_note": "#257 splits system continuity and configuration continuity, as Perplexity does; its system criterion is identity ('still the system'), Perplexity's is return-to-anchor"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-CTRL:discontinuous-system",
+   "description": "A changed state with a changed configuration yields DISCONTINUOUS.",
+   "group": "run_system_track_controls",
+   "kind": "control",
+   "mapping": [
+    "system_criterion supplied by the adapter: all anchored quantities within tolerance (PROPOSED)",
+    "configuration_of = sorted configuration entries",
+    "criterion left UNDECLARED when any anchored quantity lacks a tolerance or an observation"
+   ],
+   "native": {
+    "detail": "cell=discontinuous",
+    "passed": true
+   },
+   "r": {
+    "configuration_continuity": "CHANGED 1 time(s)",
+    "recovery_and_reorganization": "CHANGED_AND_CRITERION_LOST",
+    "system_continuity": "CRITERION_NOT_MET_AT_END"
+   },
+   "slot": true,
+   "slot_note": "#257 splits system continuity and configuration continuity, as Perplexity does; its system criterion is identity ('still the system'), Perplexity's is return-to-anchor"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-CTRL:indeterminate-component-is-indeterminate-cell",
+   "description": "An incomplete record never projects onto a definite continuity cell.",
+   "group": "run_system_track_controls",
+   "kind": "control",
+   "mapping": [
+    "system_criterion supplied by the adapter: all anchored quantities within tolerance (PROPOSED)",
+    "configuration_of = sorted configuration entries",
+    "criterion left UNDECLARED when any anchored quantity lacks a tolerance or an observation"
+   ],
+   "native": {
+    "detail": "outcome=indeterminate cell=indeterminate",
+    "passed": true
+   },
+   "r": {
+    "configuration_continuity": "UNDECLARED",
+    "recovery_and_reorganization": "UNDECLARED",
+    "system_continuity": "UNDECLARED"
+   },
+   "slot": true,
+   "slot_note": "#257 splits system continuity and configuration continuity, as Perplexity does; its system criterion is identity ('still the system'), Perplexity's is return-to-anchor"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-CTRL:return-outcome-is-system-track-transition",
+   "description": "The return outcome records on the system track only.",
+   "dropped_on_translation": {
+    "expected_return": false,
+    "provenances": [
+     "measured"
+    ],
+    "tolerances": [
+     [
+      "energy",
+      0.1
+     ],
+     [
+      "magnetization",
+      0.01
+     ]
+    ],
+    "tolerances_naming_no_quantity": []
+   },
+   "group": "run_system_track_controls",
+   "kind": "control",
+   "mapping": [
+    "anchor quantities -> anchor final_state; returned values -> branch final_state"
+   ],
+   "native": {
+    "detail": "[system] anchored -> not_returned via return-to-anchor test",
+    "passed": true
+   },
+   "r": {
+    "not_comparable": [],
+    "rows": [
+     [
+      "energy",
+      5.0
+     ],
+     [
+      "magnetization",
+      0.0
+     ]
+    ]
+   },
+   "slot": null,
+   "slot_note": null
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-CTRL:ladder-establishes-limit",
+   "description": "A clean ladder establishes the smallest detected effect as the limit.",
+   "group": "run_determination_track_controls",
+   "kind": "control",
+   "mapping": [
+    "ladder rungs expected undetectable -> nulls, expected detectable -> planted signals",
+    "detector = |reading - null output| > tolerance"
+   ],
+   "native": {
+    "detail": "instrument=ladder-clean limit=0.1 conditions={'band': 'K', 'regime': 'passive'}",
+    "passed": true
+   },
+   "r": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "form": "RECORD",
+    "harness": "PASS",
+    "limit": "NO_SLOT (the tool gate returns FP/TP, never a detection limit)",
+    "trusted": true
+   },
+   "slot": true,
+   "slot_note": "#257 grades the detector; it records no limit, no conditions, no effect size"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-CTRL:qualified-non-detection",
+   "description": "A non-detection at or above the detection limit is qualified.",
+   "dropped_on_translation": {
+    "conditions": [
+     [
+      "band",
+      "K"
+     ],
+     [
+      "regime",
+      "passive"
+     ]
+    ],
+    "effect_size_of_interest": 0.5
+   },
+   "group": "run_determination_track_controls",
+   "kind": "control",
+   "mapping": [
+    "established detection limit -> Value.sensitivity (None when no sensitivity was established)"
+   ],
+   "native": {
+    "detail": "qualified=True",
+    "passed": true
+   },
+   "r": {
+    "accepted": true,
+    "form": "RECORD",
+    "label": "ABSENT_AT_SENSITIVITY(0.1)"
+   },
+   "slot": true,
+   "slot_note": "ABSENT_AT_SENSITIVITY holds one number; no effect size of interest and no scope conditions to compare it with"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-CTRL:scoped-absence-claim-issued",
+   "description": "A qualified non-detection under matching scope issues a scoped claim.",
+   "dropped_on_translation": {
+    "conditions": [
+     [
+      "band",
+      "K"
+     ],
+     [
+      "regime",
+      "passive"
+     ]
+    ],
+    "effect_size_of_interest": 0.5
+   },
+   "group": "run_determination_track_controls",
+   "kind": "control",
+   "mapping": [
+    "established detection limit -> Value.sensitivity (None when no sensitivity was established)"
+   ],
+   "native": {
+    "detail": "Within {'band': 'K', 'regime': 'passive'}, no effect of size at or above 0.5 is present, up to the instrument's established detection limit 0.1.",
+    "passed": true
+   },
+   "r": {
+    "accepted": true,
+    "form": "RECORD",
+    "label": "ABSENT_AT_SENSITIVITY(0.1)"
+   },
+   "slot": true,
+   "slot_note": "ABSENT_AT_SENSITIVITY holds one number; no effect size of interest and no scope conditions to compare it with"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-CTRL:expiry-transition-recorded",
+   "description": "Expiry records a determination-track transition from unknown to expired.",
+   "group": "run_determination_track_controls",
+   "kind": "control",
+   "mapping": [],
+   "native": {
+    "detail": "[determination] unknown -> expired via expiry trigger(s): t1",
+    "passed": true
+   },
+   "r": null,
+   "slot": false,
+   "slot_note": "UNKNOWN carries a free-text expiry_condition; there is no expired state and no record of a determination resting on an UNKNOWN, so stale reliance cannot be expressed"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-CTRL:reevaluation-preserves-original",
+   "description": "Reevaluation marks the original REEVALUATED and issues a successor alongside it.",
+   "group": "run_determination_track_controls",
+   "kind": "control",
+   "mapping": [],
+   "native": {
+    "detail": "[determination] expired -> reevaluated via expiry trigger t1",
+    "passed": true
+   },
+   "r": null,
+   "slot": false,
+   "slot_note": "UNKNOWN carries a free-text expiry_condition; there is no expired state and no record of a determination resting on an UNKNOWN, so stale reliance cannot be expressed"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEN:coincident_positive_rates_no_attrition",
+   "description": "",
+   "group": "denominator_process",
+   "kind": "audit_case",
+   "mapping": [],
+   "native": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   },
+   "r": null,
+   "slot": false,
+   "slot_note": "no cohort-member object and no denominator binding; a rate is a number with an interval"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEN:later_attrition_breaks_numeric_coincidence",
+   "description": "",
+   "group": "denominator_process",
+   "kind": "audit_case",
+   "mapping": [],
+   "native": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   },
+   "r": null,
+   "slot": false,
+   "slot_note": "no cohort-member object and no denominator binding; a rate is a number with an interval"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEN:zero_outcomes_hide_different_counts",
+   "description": "",
+   "group": "denominator_process",
+   "kind": "audit_case",
+   "mapping": [],
+   "native": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   },
+   "r": null,
+   "slot": false,
+   "slot_note": "no cohort-member object and no denominator binding; a rate is a number with an interval"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEN:false_shared_label_at_coincidence",
+   "description": "",
+   "group": "denominator_process",
+   "kind": "audit_case",
+   "mapping": [],
+   "native": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   },
+   "r": null,
+   "slot": false,
+   "slot_note": "no cohort-member object and no denominator binding; a rate is a number with an interval"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEN:false_shared_label_after_attrition",
+   "description": "",
+   "group": "denominator_process",
+   "kind": "audit_case",
+   "mapping": [],
+   "native": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   },
+   "r": null,
+   "slot": false,
+   "slot_note": "no cohort-member object and no denominator binding; a rate is a number with an interval"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEN:both_labels_wrong_same_actual_policy",
+   "description": "",
+   "group": "denominator_process",
+   "kind": "audit_case",
+   "mapping": [],
+   "native": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   },
+   "r": null,
+   "slot": false,
+   "slot_note": "no cohort-member object and no denominator binding; a rate is a number with an interval"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEN:same_policy_equivalent_ratio_route",
+   "description": "",
+   "group": "denominator_process",
+   "kind": "audit_case",
+   "mapping": [],
+   "native": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   },
+   "r": null,
+   "slot": false,
+   "slot_note": "no cohort-member object and no denominator binding; a rate is a number with an interval"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEN:survivor_policy_equivalent_ratio_route",
+   "description": "",
+   "group": "denominator_process",
+   "kind": "audit_case",
+   "mapping": [],
+   "native": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   },
+   "r": null,
+   "slot": false,
+   "slot_note": "no cohort-member object and no denominator binding; a rate is a number with an interval"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEN:both_survivor_memberships_unknown",
+   "description": "",
+   "group": "denominator_process",
+   "kind": "audit_case",
+   "mapping": [],
+   "native": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    }
+   },
+   "r": null,
+   "slot": false,
+   "slot_note": "no cohort-member object and no denominator binding; a rate is a number with an interval"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEN:consistent_initial_trace_broader_context_still_unknown",
+   "description": "",
+   "group": "denominator_process",
+   "kind": "audit_case",
+   "mapping": [],
+   "native": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    }
+   },
+   "r": null,
+   "slot": false,
+   "slot_note": "no cohort-member object and no denominator binding; a rate is a number with an interval"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEN:explicitly_empty_survivor_denominator",
+   "description": "",
+   "group": "denominator_process",
+   "kind": "audit_case",
+   "mapping": [],
+   "native": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    }
+   },
+   "r": null,
+   "slot": false,
+   "slot_note": "no cohort-member object and no denominator binding; a rate is a number with an interval"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEN:equal_counts_include_unenrolled_members",
+   "description": "",
+   "group": "denominator_process",
+   "kind": "audit_case",
+   "mapping": [],
+   "native": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "untested",
+     "physical": "untested"
+    }
+   },
+   "r": null,
+   "slot": false,
+   "slot_note": "no cohort-member object and no denominator binding; a rate is a number with an interval"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-DEN:survivor_count_claim_disagrees_with_membership",
+   "description": "",
+   "group": "denominator_process",
+   "kind": "audit_case",
+   "mapping": [],
+   "native": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   },
+   "r": null,
+   "slot": false,
+   "slot_note": "no cohort-member object and no denominator binding; a rate is a number with an interval"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-MEAN:broad_linear_control",
+   "description": "",
+   "group": "distribution_mean_process",
+   "kind": "audit_case",
+   "mapping": [
+    "weighted distribution -> Value(mean, interval=(min, max)); target taken as X^2 for every case"
+   ],
+   "native": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   },
+   "r": {
+    "flags_information_loss": false,
+    "interval": [
+     0,
+     4
+    ],
+    "point_at_mean": 1.0,
+    "true_inside_interval": true,
+    "true_second_moment": 2.0
+   },
+   "slot": false,
+   "slot_note": "no selected-target / information-loss record; corner propagation reports a range"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-MEAN:same_mean_narrow_linear_control",
+   "description": "",
+   "group": "distribution_mean_process",
+   "kind": "audit_case",
+   "mapping": [
+    "weighted distribution -> Value(mean, interval=(min, max)); target taken as X^2 for every case"
+   ],
+   "native": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   },
+   "r": {
+    "flags_information_loss": false,
+    "interval": [
+     1,
+     1
+    ],
+    "point_at_mean": 1.0,
+    "true_inside_interval": true,
+    "true_second_moment": 1.0
+   },
+   "slot": false,
+   "slot_note": "no selected-target / information-loss record; corner propagation reports a range"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-MEAN:broad_second_moment_loss",
+   "description": "",
+   "group": "distribution_mean_process",
+   "kind": "audit_case",
+   "mapping": [
+    "weighted distribution -> Value(mean, interval=(min, max)); target taken as X^2 for every case"
+   ],
+   "native": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   },
+   "r": {
+    "flags_information_loss": false,
+    "interval": [
+     0,
+     4
+    ],
+    "point_at_mean": 1.0,
+    "true_inside_interval": true,
+    "true_second_moment": 2.0
+   },
+   "slot": false,
+   "slot_note": "no selected-target / information-loss record; corner propagation reports a range"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-MEAN:same_mean_degenerate_second_moment_coincidence",
+   "description": "",
+   "group": "distribution_mean_process",
+   "kind": "audit_case",
+   "mapping": [
+    "weighted distribution -> Value(mean, interval=(min, max)); target taken as X^2 for every case"
+   ],
+   "native": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   },
+   "r": {
+    "flags_information_loss": false,
+    "interval": [
+     1,
+     1
+    ],
+    "point_at_mean": 1.0,
+    "true_inside_interval": true,
+    "true_second_moment": 1.0
+   },
+   "slot": false,
+   "slot_note": "no selected-target / information-loss record; corner propagation reports a range"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-MEAN:unequal_weights_second_moment_loss",
+   "description": "",
+   "group": "distribution_mean_process",
+   "kind": "audit_case",
+   "mapping": [
+    "weighted distribution -> Value(mean, interval=(min, max)); target taken as X^2 for every case"
+   ],
+   "native": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   },
+   "r": {
+    "flags_information_loss": false,
+    "interval": [
+     4,
+     4
+    ],
+    "point_at_mean": 1.0,
+    "true_inside_interval": true,
+    "true_second_moment": 4.0
+   },
+   "slot": false,
+   "slot_note": "no selected-target / information-loss record; corner propagation reports a range"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-MEAN:zero_mean_is_not_zero_response",
+   "description": "",
+   "group": "distribution_mean_process",
+   "kind": "audit_case",
+   "mapping": [
+    "weighted distribution -> Value(mean, interval=(min, max)); target taken as X^2 for every case"
+   ],
+   "native": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   },
+   "r": {
+    "flags_information_loss": false,
+    "interval": [
+     1,
+     1
+    ],
+    "point_at_mean": 0.0,
+    "true_inside_interval": true,
+    "true_second_moment": 1.0
+   },
+   "slot": false,
+   "slot_note": "no selected-target / information-loss record; corner propagation reports a range"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-MEAN:zero_point_is_not_physical_absence",
+   "description": "",
+   "group": "distribution_mean_process",
+   "kind": "audit_case",
+   "mapping": [
+    "weighted distribution -> Value(mean, interval=(min, max)); target taken as X^2 for every case"
+   ],
+   "native": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   },
+   "r": {
+    "flags_information_loss": false,
+    "interval": [
+     0,
+     0
+    ],
+    "point_at_mean": 0.0,
+    "true_inside_interval": true,
+    "true_second_moment": 0.0
+   },
+   "slot": false,
+   "slot_note": "no selected-target / information-loss record; corner propagation reports a range"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-MEAN:purpose_unknown_not_defaulted",
+   "description": "",
+   "group": "distribution_mean_process",
+   "kind": "audit_case",
+   "mapping": [
+    "weighted distribution -> Value(mean, interval=(min, max)); target taken as X^2 for every case"
+   ],
+   "native": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    }
+   },
+   "r": {
+    "flags_information_loss": false,
+    "interval": [
+     0,
+     4
+    ],
+    "point_at_mean": 1.0,
+    "true_inside_interval": true,
+    "true_second_moment": 2.0
+   },
+   "slot": false,
+   "slot_note": "no selected-target / information-loss record; corner propagation reports a range"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-MEAN:window_unknown_not_defaulted",
+   "description": "",
+   "group": "distribution_mean_process",
+   "kind": "audit_case",
+   "mapping": [
+    "weighted distribution -> Value(mean, interval=(min, max)); target taken as X^2 for every case"
+   ],
+   "native": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    }
+   },
+   "r": {
+    "flags_information_loss": false,
+    "interval": [
+     0,
+     4
+    ],
+    "point_at_mean": 1.0,
+    "true_inside_interval": true,
+    "true_second_moment": 2.0
+   },
+   "slot": false,
+   "slot_note": "no selected-target / information-loss record; corner propagation reports a range"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-MEAN:population_mismatch_preserved",
+   "description": "",
+   "group": "distribution_mean_process",
+   "kind": "audit_case",
+   "mapping": [
+    "weighted distribution -> Value(mean, interval=(min, max)); target taken as X^2 for every case"
+   ],
+   "native": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "untested",
+     "physical": "untested"
+    }
+   },
+   "r": {
+    "flags_information_loss": false,
+    "interval": [
+     0,
+     4
+    ],
+    "point_at_mean": 1.0,
+    "true_inside_interval": true,
+    "true_second_moment": 2.0
+   },
+   "slot": false,
+   "slot_note": "no selected-target / information-loss record; corner propagation reports a range"
+  },
+  {
+   "adapter_note": "weights unknown or zero: no mean to place in a Value",
+   "adapter_ok": false,
+   "case_id": "P-MEAN:unknown_weight_not_zero",
+   "description": "",
+   "group": "distribution_mean_process",
+   "kind": "audit_case",
+   "mapping": [],
+   "native": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    }
+   },
+   "r": null,
+   "slot": false,
+   "slot_note": "#257 has no weighted-distribution object"
+  },
+  {
+   "adapter_note": "weights unknown or zero: no mean to place in a Value",
+   "adapter_ok": false,
+   "case_id": "P-MEAN:zero_total_mass_undefined",
+   "description": "",
+   "group": "distribution_mean_process",
+   "kind": "audit_case",
+   "mapping": [],
+   "native": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    }
+   },
+   "r": null,
+   "slot": false,
+   "slot_note": "#257 has no weighted-distribution object"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-MEAN:false_mean_derivation",
+   "description": "",
+   "group": "distribution_mean_process",
+   "kind": "audit_case",
+   "mapping": [
+    "weighted distribution -> Value(mean, interval=(min, max)); target taken as X^2 for every case"
+   ],
+   "native": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   },
+   "r": {
+    "flags_information_loss": false,
+    "interval": [
+     0,
+     4
+    ],
+    "point_at_mean": 1.0,
+    "true_inside_interval": true,
+    "true_second_moment": 2.0
+   },
+   "slot": false,
+   "slot_note": "no selected-target / information-loss record; corner propagation reports a range"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-MEAN:unsupported_equivalent_expression_withheld",
+   "description": "",
+   "group": "distribution_mean_process",
+   "kind": "audit_case",
+   "mapping": [
+    "weighted distribution -> Value(mean, interval=(min, max)); target taken as X^2 for every case"
+   ],
+   "native": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   },
+   "r": {
+    "flags_information_loss": false,
+    "interval": [
+     0,
+     4
+    ],
+    "point_at_mean": 1.0,
+    "true_inside_interval": true,
+    "true_second_moment": 2.0
+   },
+   "slot": false,
+   "slot_note": "no selected-target / information-loss record; corner propagation reports a range"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-MEAS:same_identity_different_route",
+   "description": "",
+   "dropped_on_translation": {
+    "differing_fields": [],
+    "identity": "same-declared-measurand"
+   },
+   "group": "measurand",
+   "kind": "audit_case",
+   "mapping": [
+    "two runs -> two families (the runs are different equation revisions)",
+    "agreement window 1e-9 declared before reading: exact agreement only"
+   ],
+   "native": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "state": "declared-point-comparison"
+   },
+   "r": {
+    "cards": 1,
+    "readings": [
+     [
+      "CC_previous_replacement",
+      "OPEN"
+     ]
+    ],
+    "state": "CHECKED"
+   },
+   "slot": false,
+   "slot_note": "no measurand identity: two outputs with one name and one unit are compared; agreement opens a card to be explained instead of voiding the comparison"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-MEAS:different_quantity",
+   "description": "",
+   "dropped_on_translation": {
+    "differing_fields": [
+     "quantity"
+    ],
+    "identity": "different-declared-measurands"
+   },
+   "group": "measurand",
+   "kind": "audit_case",
+   "mapping": [
+    "two runs -> two families (the runs are different equation revisions)",
+    "agreement window 1e-9 declared before reading: exact agreement only"
+   ],
+   "native": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "state": "void-comparison-different-measurands"
+   },
+   "r": {
+    "cards": 1,
+    "readings": [
+     [
+      "CC_previous_replacement",
+      "OPEN"
+     ]
+    ],
+    "state": "CHECKED"
+   },
+   "slot": false,
+   "slot_note": "no measurand identity: two outputs with one name and one unit are compared; agreement opens a card to be explained instead of voiding the comparison"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-MEAS:different_object",
+   "description": "",
+   "dropped_on_translation": {
+    "differing_fields": [
+     "object_of"
+    ],
+    "identity": "different-declared-measurands"
+   },
+   "group": "measurand",
+   "kind": "audit_case",
+   "mapping": [
+    "two runs -> two families (the runs are different equation revisions)",
+    "agreement window 1e-9 declared before reading: exact agreement only"
+   ],
+   "native": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "state": "void-comparison-different-measurands"
+   },
+   "r": {
+    "cards": 1,
+    "readings": [
+     [
+      "CC_previous_replacement",
+      "OPEN"
+     ]
+    ],
+    "state": "CHECKED"
+   },
+   "slot": false,
+   "slot_note": "no measurand identity: two outputs with one name and one unit are compared; agreement opens a card to be explained instead of voiding the comparison"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-MEAS:different_normalizer",
+   "description": "",
+   "dropped_on_translation": {
+    "differing_fields": [
+     "normalizer"
+    ],
+    "identity": "different-declared-measurands"
+   },
+   "group": "measurand",
+   "kind": "audit_case",
+   "mapping": [
+    "two runs -> two families (the runs are different equation revisions)",
+    "agreement window 1e-9 declared before reading: exact agreement only"
+   ],
+   "native": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "state": "void-comparison-different-measurands"
+   },
+   "r": {
+    "cards": 1,
+    "readings": [
+     [
+      "CC_previous_replacement",
+      "OPEN"
+     ]
+    ],
+    "state": "CHECKED"
+   },
+   "slot": false,
+   "slot_note": "no measurand identity: two outputs with one name and one unit are compared; agreement opens a card to be explained instead of voiding the comparison"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-MEAS:different_population",
+   "description": "",
+   "dropped_on_translation": {
+    "differing_fields": [
+     "population"
+    ],
+    "identity": "different-declared-measurands"
+   },
+   "group": "measurand",
+   "kind": "audit_case",
+   "mapping": [
+    "two runs -> two families (the runs are different equation revisions)",
+    "agreement window 1e-9 declared before reading: exact agreement only"
+   ],
+   "native": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "state": "void-comparison-different-measurands"
+   },
+   "r": {
+    "cards": 1,
+    "readings": [
+     [
+      "CC_previous_replacement",
+      "OPEN"
+     ]
+    ],
+    "state": "CHECKED"
+   },
+   "slot": false,
+   "slot_note": "no measurand identity: two outputs with one name and one unit are compared; agreement opens a card to be explained instead of voiding the comparison"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-MEAS:different_window",
+   "description": "",
+   "dropped_on_translation": {
+    "differing_fields": [
+     "time_window"
+    ],
+    "identity": "different-declared-measurands"
+   },
+   "group": "measurand",
+   "kind": "audit_case",
+   "mapping": [
+    "two runs -> two families (the runs are different equation revisions)",
+    "agreement window 1e-9 declared before reading: exact agreement only"
+   ],
+   "native": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "state": "void-comparison-different-measurands"
+   },
+   "r": {
+    "cards": 1,
+    "readings": [
+     [
+      "CC_previous_replacement",
+      "OPEN"
+     ]
+    ],
+    "state": "CHECKED"
+   },
+   "slot": false,
+   "slot_note": "no measurand identity: two outputs with one name and one unit are compared; agreement opens a card to be explained instead of voiding the comparison"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-MEAS:different_spatial_scope",
+   "description": "",
+   "dropped_on_translation": {
+    "differing_fields": [
+     "spatial_scope"
+    ],
+    "identity": "different-declared-measurands"
+   },
+   "group": "measurand",
+   "kind": "audit_case",
+   "mapping": [
+    "two runs -> two families (the runs are different equation revisions)",
+    "agreement window 1e-9 declared before reading: exact agreement only"
+   ],
+   "native": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "state": "void-comparison-different-measurands"
+   },
+   "r": {
+    "cards": 1,
+    "readings": [
+     [
+      "CC_previous_replacement",
+      "OPEN"
+     ]
+    ],
+    "state": "CHECKED"
+   },
+   "slot": false,
+   "slot_note": "no measurand identity: two outputs with one name and one unit are compared; agreement opens a card to be explained instead of voiding the comparison"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-MEAS:different_reference",
+   "description": "",
+   "dropped_on_translation": {
+    "differing_fields": [
+     "reference_state"
+    ],
+    "identity": "different-declared-measurands"
+   },
+   "group": "measurand",
+   "kind": "audit_case",
+   "mapping": [
+    "two runs -> two families (the runs are different equation revisions)",
+    "agreement window 1e-9 declared before reading: exact agreement only"
+   ],
+   "native": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "state": "void-comparison-different-measurands"
+   },
+   "r": {
+    "cards": 1,
+    "readings": [
+     [
+      "CC_previous_replacement",
+      "OPEN"
+     ]
+    ],
+    "state": "CHECKED"
+   },
+   "slot": false,
+   "slot_note": "no measurand identity: two outputs with one name and one unit are compared; agreement opens a card to be explained instead of voiding the comparison"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-MEAS:missing_normalizer",
+   "description": "",
+   "dropped_on_translation": {
+    "differing_fields": [],
+    "identity": "measurand-identity-unknown"
+   },
+   "group": "measurand",
+   "kind": "audit_case",
+   "mapping": [
+    "two runs -> two families (the runs are different equation revisions)",
+    "agreement window 1e-9 declared before reading: exact agreement only"
+   ],
+   "native": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "state": "comparison-withheld"
+   },
+   "r": {
+    "cards": 1,
+    "readings": [
+     [
+      "CC_previous_replacement",
+      "OPEN"
+     ]
+    ],
+    "state": "CHECKED"
+   },
+   "slot": false,
+   "slot_note": "no measurand identity: two outputs with one name and one unit are compared; agreement opens a card to be explained instead of voiding the comparison"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-MEAS:same_identity_missing_route",
+   "description": "",
+   "dropped_on_translation": {
+    "differing_fields": [],
+    "identity": "same-declared-measurand"
+   },
+   "group": "measurand",
+   "kind": "audit_case",
+   "mapping": [
+    "two runs -> two families (the runs are different equation revisions)",
+    "agreement window 1e-9 declared before reading: exact agreement only"
+   ],
+   "native": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "state": "comparison-withheld"
+   },
+   "r": {
+    "cards": 1,
+    "readings": [
+     [
+      "CC_previous_replacement",
+      "OPEN"
+     ]
+    ],
+    "state": "CHECKED"
+   },
+   "slot": false,
+   "slot_note": "no measurand identity: two outputs with one name and one unit are compared; agreement opens a card to be explained instead of voiding the comparison"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-MEAS:known_mismatch_and_missing_field",
+   "description": "",
+   "dropped_on_translation": {
+    "differing_fields": [
+     "object_of"
+    ],
+    "identity": "different-declared-measurands"
+   },
+   "group": "measurand",
+   "kind": "audit_case",
+   "mapping": [
+    "two runs -> two families (the runs are different equation revisions)",
+    "agreement window 1e-9 declared before reading: exact agreement only"
+   ],
+   "native": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "state": "void-comparison-different-measurands"
+   },
+   "r": {
+    "cards": 1,
+    "readings": [
+     [
+      "CC_previous_replacement",
+      "OPEN"
+     ]
+    ],
+    "state": "CHECKED"
+   },
+   "slot": false,
+   "slot_note": "no measurand identity: two outputs with one name and one unit are compared; agreement opens a card to be explained instead of voiding the comparison"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-MEAS:both_legacy_declarations_missing",
+   "description": "",
+   "dropped_on_translation": {
+    "differing_fields": [],
+    "identity": "measurand-identity-unknown"
+   },
+   "group": "measurand",
+   "kind": "audit_case",
+   "mapping": [
+    "two runs -> two families (the runs are different equation revisions)",
+    "agreement window 1e-9 declared before reading: exact agreement only"
+   ],
+   "native": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "state": "comparison-withheld"
+   },
+   "r": {
+    "cards": 1,
+    "readings": [
+     [
+      "CC_previous_replacement",
+      "OPEN"
+     ]
+    ],
+    "state": "CHECKED"
+   },
+   "slot": false,
+   "slot_note": "no measurand identity: two outputs with one name and one unit are compared; agreement opens a card to be explained instead of voiding the comparison"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-MEAS:renamed_output_same_identity",
+   "description": "",
+   "dropped_on_translation": {
+    "differing_fields": [],
+    "identity": "same-declared-measurand"
+   },
+   "group": "measurand",
+   "kind": "audit_case",
+   "mapping": [
+    "two runs -> two families (the runs are different equation revisions)",
+    "agreement window 1e-9 declared before reading: exact agreement only"
+   ],
+   "native": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "state": "declared-point-comparison"
+   },
+   "r": {
+    "cards": 1,
+    "readings": [
+     [
+      "CC_previous_replacement",
+      "OPEN"
+     ]
+    ],
+    "state": "CHECKED"
+   },
+   "slot": false,
+   "slot_note": "no measurand identity: two outputs with one name and one unit are compared; agreement opens a card to be explained instead of voiding the comparison"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-MEAS:same_identity_different_point_value",
+   "description": "",
+   "dropped_on_translation": {
+    "differing_fields": [],
+    "identity": "same-declared-measurand"
+   },
+   "group": "measurand",
+   "kind": "audit_case",
+   "mapping": [
+    "two runs -> two families (the runs are different equation revisions)",
+    "agreement window 1e-9 declared before reading: exact agreement only"
+   ],
+   "native": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "state": "declared-point-comparison"
+   },
+   "r": {
+    "cards": 0,
+    "readings": [],
+    "state": "CHECKED"
+   },
+   "slot": false,
+   "slot_note": "no measurand identity: two outputs with one name and one unit are compared; agreement opens a card to be explained instead of voiding the comparison"
+  },
+  {
+   "adapter_note": "one run produced no output (blocked before calculation); nothing to compare",
+   "adapter_ok": false,
+   "case_id": "P-MEAS:failed_known_answer_not_comparable",
+   "description": "",
+   "group": "measurand",
+   "kind": "audit_case",
+   "mapping": [],
+   "native": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "failed",
+     "physical": "untested"
+    },
+    "state": "comparison-withheld"
+   },
+   "r": null,
+   "slot": false,
+   "slot_note": "no measurand identity in #257"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-XSYS:equation_diagnostics_never_transfer_between_classes",
+   "description": "diagnostics (known-answer/null) earned in one system class presented in another",
+   "group": "cross_system",
+   "kind": "guard_test",
+   "mapping": [
+    "certify 'linear' once; ask gate.trust('linear') with no system argument (there is none)"
+   ],
+   "native": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "untested"
+    },
+    "ran": "PASS"
+   },
+   "r": {
+    "keyed_by": "model name",
+    "other_system": "some-other-class",
+    "trust_in_other_system": true
+   },
+   "slot": false,
+   "slot_note": "trust has no context/system key; calibration and diagnostics carry to every system"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "P-XSYS:calibration_cannot_transfer_even_between_dimensionless_surrogates",
+   "description": "sensitivity calibration from one class used for an absence claim in another",
+   "group": "cross_system",
+   "kind": "guard_test",
+   "mapping": [
+    "certify 'linear' once; ask gate.trust('linear') with no system argument (there is none)"
+   ],
+   "native": {
+    "axes": {
+     "determination": "indeterminate",
+     "physical": "untested"
+    },
+    "ran": "PASS"
+   },
+   "r": {
+    "keyed_by": "model name",
+    "other_system": "some-other-class",
+    "trust_in_other_system": true
+   },
+   "slot": false,
+   "slot_note": "trust has no context/system key; calibration and diagnostics carry to every system"
+  }
+ ]
+}

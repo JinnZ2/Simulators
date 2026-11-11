@@ -1,0 +1,13 @@
+{
+ "sa_rev": "b9dbdeff48c23c44b20dff3c01b4304d3face54a",
+ "sim_rev": "beac98bb5be7a7c6e382d863101cb002d1192b15",
+ "suites": {
+  "#257 relational-playground unittest": "43 tests, OK",
+  "#257 unittest exit": 0,
+  "study-aperture self_check: controls": "14/14",
+  "study-aperture self_check: exit": 0,
+  "study-aperture self_check: guards": "10/10",
+  "study-aperture self_check: planted defects caught / classified": "20/20 caught, 20/20 correctly classified",
+  "study-aperture self_check: unit suites": "12 suites, 503 tests, COMBINED SELF-CHECK PASSED"
+ }
+}

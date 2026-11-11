@@ -1,0 +1,4582 @@
+{
+ "axis_map_257": {
+  "ContinuityMatrix UNDECLARED": "determination:indeterminate",
+  "L0 CLOSED / NOISE, run COMPLETE": "nothing flagged",
+  "L0 LEAK / run INCOMPLETE": "determination:failed   (the run's conclusion is not supported)",
+  "Value / branch refused at construction (raise)": "determination:indeterminate   (nothing recorded)",
+  "coincidence card opened": "nothing flagged   (agreement to be explained, not a refusal)",
+  "cross-system comparison refused (regimes undeclared)": "determination:indeterminate",
+  "gate crash (ZeroDivisionError)": "no reading -- caught = no",
+  "known-answer gate TRUSTED": "nothing flagged",
+  "known-answer gate UNTRUSTED, harness class != PASS": "instrument:failed",
+  "known-answer gate UNTRUSTED, no cases written": "instrument:indeterminate",
+  "return_diff NOT COMPARABLE": "determination:indeterminate",
+  "return_diff deltas only": "nothing flagged   (no verdict is issued)"
+ },
+ "cards": [
+  {
+   "case": "P-DEF:incomplete-ledger-gap",
+   "causes": {
+    "adapter_construction": "void",
+    "shared_constraint": "candidate: closure arithmetic (pools_end - pools_start) - (in - out) is forced by bookkeeping; any ledger checker computes it",
+    "shared_source": "void",
+    "vocabulary_echo": "candidate: both name the gate 'L0' -- a shared label, independent of the arithmetic"
+   },
+   "code": "NO_SLOT",
+   "id": "XC_P-DEF:incomplete-ledger-gap",
+   "notes": [
+    "surface agreement under NO_SLOT: the agreement is reached without the concept that decides the other side's reading, so it is an accident of the case"
+   ],
+   "reading": "OPEN",
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+  },
+  {
+   "case": "P-DEF:known-answer-violation",
+   "causes": {
+    "adapter_construction": "in part: the instrument is rebuilt from its captured parameters and its pass/fail cases become #257 draws or tool cases; the harness CLASS #257 assigns (CONSTANT_FIRES / CONSTANT_SILENT) names the detector, not the instrument",
+    "shared_constraint": "candidate: a wrong value on a known answer, a hit on a null, a miss on a planted signal are facts both gates count the same way; the AXIS name is the mapping's",
+    "shared_source": "void",
+    "vocabulary_echo": "void"
+   },
+   "code": "AGREE",
+   "id": "XC_P-DEF:known-answer-violation",
+   "notes": [],
+   "reading": "OPEN",
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+  },
+  {
+   "case": "P-DEF:unasserted-non-return",
+   "causes": {
+    "adapter_construction": "void",
+    "shared_constraint": "void",
+    "shared_source": "void",
+    "vocabulary_echo": "void"
+   },
+   "code": "NO_SLOT",
+   "id": "XC_P-DEF:unasserted-non-return",
+   "notes": [
+    "surface agreement under NO_SLOT: the agreement is reached without the concept that decides the other side's reading, so it is an accident of the case"
+   ],
+   "reading": "OPEN",
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+  },
+  {
+   "case": "P-DEF:missing-return-observation",
+   "causes": {
+    "adapter_construction": "void",
+    "shared_constraint": "candidate: a difference against a value that is absent cannot be formed; both refuse rather than read absent as zero",
+    "shared_source": "void",
+    "vocabulary_echo": "void"
+   },
+   "code": "AGREE",
+   "id": "XC_P-DEF:missing-return-observation",
+   "notes": [],
+   "reading": "OPEN",
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+  },
+  {
+   "case": "P-DEF:blind-instrument-misses-ladder",
+   "causes": {
+    "adapter_construction": "in part: the instrument is rebuilt from its captured parameters and its pass/fail cases become #257 draws or tool cases; the harness CLASS #257 assigns (CONSTANT_FIRES / CONSTANT_SILENT) names the detector, not the instrument",
+    "shared_constraint": "candidate: a wrong value on a known answer, a hit on a null, a miss on a planted signal are facts both gates count the same way; the AXIS name is the mapping's",
+    "shared_source": "void",
+    "vocabulary_echo": "void"
+   },
+   "code": "AGREE",
+   "id": "XC_P-DEF:blind-instrument-misses-ladder",
+   "notes": [],
+   "reading": "OPEN",
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+  },
+  {
+   "case": "P-DEF:noisy-instrument-false-positives",
+   "causes": {
+    "adapter_construction": "in part: the instrument is rebuilt from its captured parameters and its pass/fail cases become #257 draws or tool cases; the harness CLASS #257 assigns (CONSTANT_FIRES / CONSTANT_SILENT) names the detector, not the instrument",
+    "shared_constraint": "candidate: a wrong value on a known answer, a hit on a null, a miss on a planted signal are facts both gates count the same way; the AXIS name is the mapping's",
+    "shared_source": "void",
+    "vocabulary_echo": "void"
+   },
+   "code": "AGREE",
+   "id": "XC_P-DEF:noisy-instrument-false-positives",
+   "notes": [],
+   "reading": "OPEN",
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+  },
+  {
+   "case": "P-DEF:non-detection-without-sensitivity",
+   "causes": {
+    "adapter_construction": "void",
+    "shared_constraint": "candidate: 'no sensitivity / no cases' cannot be promoted to a pass by either; one refuses at construction, the other records INDETERMINATE",
+    "shared_source": "void",
+    "vocabulary_echo": "void"
+   },
+   "code": "AGREE",
+   "id": "XC_P-DEF:non-detection-without-sensitivity",
+   "notes": [],
+   "reading": "OPEN",
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+  },
+  {
+   "case": "P-CTRL:balanced-ledger-passes",
+   "causes": {
+    "adapter_construction": "void",
+    "shared_constraint": "candidate: closure arithmetic (pools_end - pools_start) - (in - out) is forced by bookkeeping; any ledger checker computes it",
+    "shared_source": "void",
+    "vocabulary_echo": "candidate: both name the gate 'L0' -- a shared label, independent of the arithmetic"
+   },
+   "code": "AGREE",
+   "id": "XC_P-CTRL:balanced-ledger-passes",
+   "notes": [],
+   "reading": "OPEN",
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+  },
+  {
+   "case": "P-CTRL:empty-harness-is-not-a-pass",
+   "causes": {
+    "adapter_construction": "void",
+    "shared_constraint": "candidate: 'no sensitivity / no cases' cannot be promoted to a pass by either; one refuses at construction, the other records INDETERMINATE",
+    "shared_source": "void",
+    "vocabulary_echo": "void"
+   },
+   "code": "AGREE",
+   "id": "XC_P-CTRL:empty-harness-is-not-a-pass",
+   "notes": [],
+   "reading": "OPEN",
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+  },
+  {
+   "case": "P-CTRL:continuous-system",
+   "causes": {
+    "adapter_construction": "SUPPORTED in part: the #257 system criterion used here was SUPPLIED BY THE ADAPTER (within tolerance of the anchor), so the agreement on the system axis is partly constructed; the configuration axis is not",
+    "shared_constraint": "void",
+    "shared_source": "candidate: SPEC_GPT.md section E lists 'System continuity' and 'Configuration continuity' as separate readings; the study-aperture continuity matrix makes the same split. Both playgrounds were built in sessions directed by one operator (Kavik) on 2026-11-11. #257 records its input (SPEC_GPT.md, WORK_ORDER.md, verbatim); the study-aperture playground records none in its tree or its commit messages, so whether it received the same brief is UNDETERMINED from either repository.",
+    "vocabulary_echo": "void"
+   },
+   "code": "AGREE",
+   "id": "XC_P-CTRL:continuous-system",
+   "notes": [],
+   "reading": "PROVISIONAL",
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+  },
+  {
+   "case": "P-CTRL:return-with-reconfiguration",
+   "causes": {
+    "adapter_construction": "SUPPORTED in part: the #257 system criterion used here was SUPPLIED BY THE ADAPTER (within tolerance of the anchor), so the agreement on the system axis is partly constructed; the configuration axis is not",
+    "shared_constraint": "void",
+    "shared_source": "candidate: SPEC_GPT.md section E lists 'System continuity' and 'Configuration continuity' as separate readings; the study-aperture continuity matrix makes the same split. Both playgrounds were built in sessions directed by one operator (Kavik) on 2026-11-11. #257 records its input (SPEC_GPT.md, WORK_ORDER.md, verbatim); the study-aperture playground records none in its tree or its commit messages, so whether it received the same brief is UNDETERMINED from either repository.",
+    "vocabulary_echo": "void"
+   },
+   "code": "AGREE",
+   "id": "XC_P-CTRL:return-with-reconfiguration",
+   "notes": [],
+   "reading": "PROVISIONAL",
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+  },
+  {
+   "case": "P-CTRL:drift-with-stable-configuration",
+   "causes": {
+    "adapter_construction": "SUPPORTED in part: the #257 system criterion used here was SUPPLIED BY THE ADAPTER (within tolerance of the anchor), so the agreement on the system axis is partly constructed; the configuration axis is not",
+    "shared_constraint": "void",
+    "shared_source": "candidate: SPEC_GPT.md section E lists 'System continuity' and 'Configuration continuity' as separate readings; the study-aperture continuity matrix makes the same split. Both playgrounds were built in sessions directed by one operator (Kavik) on 2026-11-11. #257 records its input (SPEC_GPT.md, WORK_ORDER.md, verbatim); the study-aperture playground records none in its tree or its commit messages, so whether it received the same brief is UNDETERMINED from either repository.",
+    "vocabulary_echo": "void"
+   },
+   "code": "AGREE",
+   "id": "XC_P-CTRL:drift-with-stable-configuration",
+   "notes": [],
+   "reading": "PROVISIONAL",
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+  },
+  {
+   "case": "P-CTRL:discontinuous-system",
+   "causes": {
+    "adapter_construction": "SUPPORTED in part: the #257 system criterion used here was SUPPLIED BY THE ADAPTER (within tolerance of the anchor), so the agreement on the system axis is partly constructed; the configuration axis is not",
+    "shared_constraint": "void",
+    "shared_source": "candidate: SPEC_GPT.md section E lists 'System continuity' and 'Configuration continuity' as separate readings; the study-aperture continuity matrix makes the same split. Both playgrounds were built in sessions directed by one operator (Kavik) on 2026-11-11. #257 records its input (SPEC_GPT.md, WORK_ORDER.md, verbatim); the study-aperture playground records none in its tree or its commit messages, so whether it received the same brief is UNDETERMINED from either repository.",
+    "vocabulary_echo": "void"
+   },
+   "code": "AGREE",
+   "id": "XC_P-CTRL:discontinuous-system",
+   "notes": [],
+   "reading": "PROVISIONAL",
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+  },
+  {
+   "case": "P-CTRL:indeterminate-component-is-indeterminate-cell",
+   "causes": {
+    "adapter_construction": "SUPPORTED in part: the #257 system criterion used here was SUPPLIED BY THE ADAPTER (within tolerance of the anchor), so the agreement on the system axis is partly constructed; the configuration axis is not",
+    "shared_constraint": "void",
+    "shared_source": "candidate: SPEC_GPT.md section E lists 'System continuity' and 'Configuration continuity' as separate readings; the study-aperture continuity matrix makes the same split. Both playgrounds were built in sessions directed by one operator (Kavik) on 2026-11-11. #257 records its input (SPEC_GPT.md, WORK_ORDER.md, verbatim); the study-aperture playground records none in its tree or its commit messages, so whether it received the same brief is UNDETERMINED from either repository.",
+    "vocabulary_echo": "void"
+   },
+   "code": "AGREE",
+   "id": "XC_P-CTRL:indeterminate-component-is-indeterminate-cell",
+   "notes": [],
+   "reading": "PROVISIONAL",
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+  },
+  {
+   "case": "P-CTRL:return-outcome-is-system-track-transition",
+   "causes": {
+    "adapter_construction": "void",
+    "shared_constraint": "void",
+    "shared_source": "void",
+    "vocabulary_echo": "void"
+   },
+   "code": "NO_SLOT",
+   "id": "XC_P-CTRL:return-outcome-is-system-track-transition",
+   "notes": [
+    "surface agreement under NO_SLOT: the agreement is reached without the concept that decides the other side's reading, so it is an accident of the case"
+   ],
+   "reading": "OPEN",
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+  },
+  {
+   "case": "P-CTRL:ladder-establishes-limit",
+   "causes": {
+    "adapter_construction": "void",
+    "shared_constraint": "void",
+    "shared_source": "void",
+    "vocabulary_echo": "void"
+   },
+   "code": "NO_SLOT",
+   "id": "XC_P-CTRL:ladder-establishes-limit",
+   "notes": [
+    "surface agreement under NO_SLOT: the agreement is reached without the concept that decides the other side's reading, so it is an accident of the case"
+   ],
+   "reading": "OPEN",
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+  },
+  {
+   "case": "P-CTRL:qualified-non-detection",
+   "causes": {
+    "adapter_construction": "void",
+    "shared_constraint": "void",
+    "shared_source": "void",
+    "vocabulary_echo": "void"
+   },
+   "code": "NO_SLOT",
+   "id": "XC_P-CTRL:qualified-non-detection",
+   "notes": [
+    "surface agreement under NO_SLOT: the agreement is reached without the concept that decides the other side's reading, so it is an accident of the case"
+   ],
+   "reading": "OPEN",
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+  },
+  {
+   "case": "P-CTRL:scoped-absence-claim-issued",
+   "causes": {
+    "adapter_construction": "void",
+    "shared_constraint": "void",
+    "shared_source": "void",
+    "vocabulary_echo": "void"
+   },
+   "code": "NO_SLOT",
+   "id": "XC_P-CTRL:scoped-absence-claim-issued",
+   "notes": [
+    "surface agreement under NO_SLOT: the agreement is reached without the concept that decides the other side's reading, so it is an accident of the case"
+   ],
+   "reading": "OPEN",
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+  },
+  {
+   "case": "R-F9:replay_planted_leak_0.3",
+   "causes": {
+    "adapter_construction": "void",
+    "shared_constraint": "candidate: closure arithmetic (pools_end - pools_start) - (in - out) is forced by bookkeeping; any ledger checker computes it",
+    "shared_source": "void",
+    "vocabulary_echo": "candidate: both name the gate 'L0' -- a shared label, independent of the arithmetic"
+   },
+   "code": "NO_SLOT",
+   "id": "XC_R-F9:replay_planted_leak_0.3",
+   "notes": [
+    "surface agreement under NO_SLOT: the agreement is reached without the concept that decides the other side's reading, so it is an accident of the case"
+   ],
+   "reading": "OPEN",
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+  },
+  {
+   "case": "R-KAG:branching-00",
+   "causes": {
+    "adapter_construction": "SUPPORTED: the Perplexity plan's known-answer case IS #257's closed form, so the run is checked against the answer it was handed (circular by construction)",
+    "shared_constraint": "candidate: n0 * R^n is arithmetic; two correct programs must agree on it",
+    "shared_source": "void",
+    "vocabulary_echo": "void"
+   },
+   "code": "AGREE",
+   "id": "XC_R-KAG:branching-00",
+   "notes": [],
+   "reading": "PROVISIONAL",
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+  },
+  {
+   "case": "R-KAG:branching-01",
+   "causes": {
+    "adapter_construction": "SUPPORTED: the Perplexity plan's known-answer case IS #257's closed form, so the run is checked against the answer it was handed (circular by construction)",
+    "shared_constraint": "candidate: n0 * R^n is arithmetic; two correct programs must agree on it",
+    "shared_source": "void",
+    "vocabulary_echo": "void"
+   },
+   "code": "AGREE",
+   "id": "XC_R-KAG:branching-01",
+   "notes": [],
+   "reading": "PROVISIONAL",
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+  },
+  {
+   "case": "R-KAG:branching-03",
+   "causes": {
+    "adapter_construction": "SUPPORTED: the Perplexity plan's known-answer case IS #257's closed form, so the run is checked against the answer it was handed (circular by construction)",
+    "shared_constraint": "candidate: n0 * R^n is arithmetic; two correct programs must agree on it",
+    "shared_source": "void",
+    "vocabulary_echo": "void"
+   },
+   "code": "AGREE",
+   "id": "XC_R-KAG:branching-03",
+   "notes": [],
+   "reading": "PROVISIONAL",
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+  },
+  {
+   "case": "R-KAG:branching-05",
+   "causes": {
+    "adapter_construction": "SUPPORTED: the Perplexity plan's known-answer case IS #257's closed form, so the run is checked against the answer it was handed (circular by construction)",
+    "shared_constraint": "candidate: n0 * R^n is arithmetic; two correct programs must agree on it",
+    "shared_source": "void",
+    "vocabulary_echo": "void"
+   },
+   "code": "AGREE",
+   "id": "XC_R-KAG:branching-05",
+   "notes": [],
+   "reading": "PROVISIONAL",
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+  },
+  {
+   "case": "R-KAG:branching-07",
+   "causes": {
+    "adapter_construction": "SUPPORTED: the Perplexity plan's known-answer case IS #257's closed form, so the run is checked against the answer it was handed (circular by construction)",
+    "shared_constraint": "candidate: n0 * R^n is arithmetic; two correct programs must agree on it",
+    "shared_source": "void",
+    "vocabulary_echo": "void"
+   },
+   "code": "AGREE",
+   "id": "XC_R-KAG:branching-07",
+   "notes": [],
+   "reading": "PROVISIONAL",
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+  },
+  {
+   "case": "R-KAG:branching-08",
+   "causes": {
+    "adapter_construction": "SUPPORTED: the Perplexity plan's known-answer case IS #257's closed form, so the run is checked against the answer it was handed (circular by construction)",
+    "shared_constraint": "candidate: n0 * R^n is arithmetic; two correct programs must agree on it",
+    "shared_source": "void",
+    "vocabulary_echo": "void"
+   },
+   "code": "AGREE",
+   "id": "XC_R-KAG:branching-08",
+   "notes": [],
+   "reading": "PROVISIONAL",
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+  },
+  {
+   "case": "R-KAG:branching-09",
+   "causes": {
+    "adapter_construction": "SUPPORTED: the Perplexity plan's known-answer case IS #257's closed form, so the run is checked against the answer it was handed (circular by construction)",
+    "shared_constraint": "candidate: n0 * R^n is arithmetic; two correct programs must agree on it",
+    "shared_source": "void",
+    "vocabulary_echo": "void"
+   },
+   "code": "AGREE",
+   "id": "XC_R-KAG:branching-09",
+   "notes": [],
+   "reading": "PROVISIONAL",
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+  },
+  {
+   "case": "R-KAG:branching-10",
+   "causes": {
+    "adapter_construction": "SUPPORTED: the Perplexity plan's known-answer case IS #257's closed form, so the run is checked against the answer it was handed (circular by construction)",
+    "shared_constraint": "candidate: n0 * R^n is arithmetic; two correct programs must agree on it",
+    "shared_source": "void",
+    "vocabulary_echo": "void"
+   },
+   "code": "AGREE",
+   "id": "XC_R-KAG:branching-10",
+   "notes": [],
+   "reading": "PROVISIONAL",
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+  },
+  {
+   "case": "R-KAG:branching-11",
+   "causes": {
+    "adapter_construction": "SUPPORTED: the Perplexity plan's known-answer case IS #257's closed form, so the run is checked against the answer it was handed (circular by construction)",
+    "shared_constraint": "candidate: n0 * R^n is arithmetic; two correct programs must agree on it",
+    "shared_source": "void",
+    "vocabulary_echo": "void"
+   },
+   "code": "AGREE",
+   "id": "XC_R-KAG:branching-11",
+   "notes": [],
+   "reading": "PROVISIONAL",
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+  },
+  {
+   "case": "R-OBS:cross_system_regimes_undeclared",
+   "causes": {
+    "adapter_construction": "void",
+    "shared_constraint": "void",
+    "shared_source": "candidate: both require an observer declaration before comparing. Both playgrounds were built in sessions directed by one operator (Kavik) on 2026-11-11. #257 records its input (SPEC_GPT.md, WORK_ORDER.md, verbatim); the study-aperture playground records none in its tree or its commit messages, so whether it received the same brief is UNDETERMINED from either repository.",
+    "vocabulary_echo": "void"
+   },
+   "code": "AGREE",
+   "id": "XC_R-OBS:cross_system_regimes_undeclared",
+   "notes": [],
+   "reading": "OPEN",
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+  }
+ ],
+ "rows": [
+  {
+   "adapter_note": null,
+   "case_id": "P-DEF:unregistered-control",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": {
+    "declared_complete": true,
+    "provenances": [
+     "measured",
+     "specified"
+    ],
+    "registered_interventions": [
+     "control:heater",
+     "observer:calorimeter",
+     "control:stirrer"
+    ],
+    "unregistered_interventions": [
+     "control:stirrer"
+    ]
+   },
+   "form": "RECORD",
+   "map_entry": "L0 CLOSED / NOISE, run COMPLETE",
+   "mapping": [
+    "account tolerance 0.1 -> sigma_meas 0.05 (NOISE band = 2 sigma)",
+    "pool 'E' carries the energy account; each Exchange -> one boundary accumulator"
+   ],
+   "p": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "misclosure": 0.0,
+    "status": "COMPLETE",
+    "status_reason": "1 of 5 budgets LIVE and closed; 4 VOID",
+    "verdict": "CLOSED"
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "#257's L0 has no intervention registry, no declared-complete flag and no value provenance; these decide Perplexity's axis and are dropped on the way in (listed above)",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-DEF:model-conservation-violation",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": {
+    "declared_complete": true,
+    "provenances": [
+     "model",
+     "specified"
+    ],
+    "registered_interventions": [
+     "control:heater",
+     "control:cooler"
+    ],
+    "unregistered_interventions": []
+   },
+   "form": "RECORD",
+   "map_entry": "L0 LEAK / run INCOMPLETE",
+   "mapping": [
+    "account tolerance 0.1 -> sigma_meas 0.05 (NOISE band = 2 sigma)",
+    "pool 'E' carries the energy account; each Exchange -> one boundary accumulator"
+   ],
+   "p": [
+    [
+     "physical",
+     "failed"
+    ]
+   ],
+   "r": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "raw_r": {
+    "misclosure": 1.0,
+    "status": "INCOMPLETE",
+    "status_reason": "budget(s) ['energy'] did not close",
+    "verdict": "LEAK"
+   },
+   "readings": "MISCLASSIFIED",
+   "slot": false,
+   "slot_note": "#257's L0 has no intervention registry, no declared-complete flag and no value provenance; these decide Perplexity's axis and are dropped on the way in (listed above)",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-DEF:measured-imbalance-unresolved",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": {
+    "declared_complete": true,
+    "provenances": [
+     "measured",
+     "specified"
+    ],
+    "registered_interventions": [
+     "control:heater",
+     "observer:calorimeter"
+    ],
+    "unregistered_interventions": []
+   },
+   "form": "RECORD",
+   "map_entry": "L0 LEAK / run INCOMPLETE",
+   "mapping": [
+    "account tolerance 0.1 -> sigma_meas 0.05 (NOISE band = 2 sigma)",
+    "pool 'E' carries the energy account; each Exchange -> one boundary accumulator"
+   ],
+   "p": [
+    [
+     "instrument",
+     "indeterminate"
+    ],
+    [
+     "physical",
+     "indeterminate"
+    ]
+   ],
+   "r": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "raw_r": {
+    "misclosure": -2.0,
+    "status": "INCOMPLETE",
+    "status_reason": "budget(s) ['energy'] did not close",
+    "verdict": "LEAK"
+   },
+   "readings": "MISCLASSIFIED",
+   "slot": false,
+   "slot_note": "#257's L0 has no intervention registry, no declared-complete flag and no value provenance; these decide Perplexity's axis and are dropped on the way in (listed above)",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-DEF:incomplete-ledger-gap",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": {
+    "declared_complete": false,
+    "provenances": [
+     "model",
+     "specified"
+    ],
+    "registered_interventions": [
+     "control:heater",
+     "control:cooler"
+    ],
+    "unregistered_interventions": []
+   },
+   "form": "RECORD",
+   "map_entry": "L0 LEAK / run INCOMPLETE",
+   "mapping": [
+    "account tolerance 0.1 -> sigma_meas 0.05 (NOISE band = 2 sigma)",
+    "pool 'E' carries the energy account; each Exchange -> one boundary accumulator"
+   ],
+   "p": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "r": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "raw_r": {
+    "misclosure": 1.0,
+    "status": "INCOMPLETE",
+    "status_reason": "budget(s) ['energy'] did not close",
+    "verdict": "LEAK"
+   },
+   "readings": "AGREE",
+   "slot": false,
+   "slot_note": "#257's L0 has no intervention registry, no declared-complete flag and no value provenance; these decide Perplexity's axis and are dropped on the way in (listed above)",
+   "surface": true
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-DEF:known-answer-violation",
+   "code": "AGREE",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "RECORD",
+   "map_entry": "known-answer gate UNTRUSTED, harness class != PASS",
+   "mapping": [
+    "LinearInstrument(slope, intercept) -> one-step #257 model writing slope*x+intercept into y",
+    "each Perplexity known-answer case -> a #257 builder draw (cycled; the gate always takes 12)",
+    "the gate then plants leak/coef defects on top -- planted on the instrument, not on the case",
+    "[CHOICE] a static instrument has no start state in #257's dynamic-model gate, so the adapter supplies one; y0 in {0, 1, -1} is run and y0=0 is primary. The gate's 'coef' plant scales the transfer by 1.1, so it moves nothing on any case whose required flux (answer - y0) is zero: y0=0 blinds it on the x=0 case, y0=1 on the x=1 case, y0=-1 on none. The gate verdict on a clean instrument is therefore a property of this adapter choice -- coded ADAPTER, not read as a result"
+   ],
+   "p": [
+    [
+     "instrument",
+     "failed"
+    ]
+   ],
+   "r": [
+    [
+     "instrument",
+     "failed"
+    ]
+   ],
+   "raw_r": {
+    "FP": 1.0,
+    "TP": 1.0,
+    "evidence": "12 clean draws, 12 planted (leak / coef alternating); FP 1.00 TP 1.00",
+    "harness": "CONSTANT_FIRES",
+    "trusted": false
+   },
+   "readings": "AGREE",
+   "slot": true,
+   "slot_note": null,
+   "surface": true
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-DEF:null-false-positive",
+   "code": "MISSED",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "CRASH",
+   "map_entry": "gate crash (ZeroDivisionError)",
+   "mapping": [
+    "null cases -> certify_tool nulls; signals = [] (Perplexity's null harness has none)",
+    "detector = |instrument(x) - stated null output| > tolerance; null case keys ['_type', 'case_id', 'description', 'inputs', 'null_outputs', 'tolerances']"
+   ],
+   "p": [
+    [
+     "instrument",
+     "failed"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "error": "ZeroDivisionError in certify_tool: division by zero",
+    "form": "CRASH"
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "#257's tool gate has no null-only mode: TP divides by len(signals)",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-DEF:expected-return-measured-non-return",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": {
+    "expected_return": true,
+    "provenances": [
+     "measured"
+    ],
+    "tolerances": [
+     [
+      "energy",
+      0.1
+     ],
+     [
+      "magnetization",
+      0.01
+     ]
+    ],
+    "tolerances_naming_no_quantity": []
+   },
+   "form": "RECORD",
+   "map_entry": "return_diff deltas only",
+   "mapping": [
+    "anchor quantities -> anchor final_state; returned values -> branch final_state"
+   ],
+   "p": [
+    [
+     "instrument",
+     "indeterminate"
+    ],
+    [
+     "physical",
+     "indeterminate"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "not_comparable": [],
+    "rows": [
+     [
+      "energy",
+      5.0
+     ],
+     [
+      "magnetization",
+      0.0
+     ]
+    ]
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "no asserted-return field and no value provenance",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-DEF:expected-return-model-non-return",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": {
+    "expected_return": true,
+    "provenances": [
+     "measured",
+     "model"
+    ],
+    "tolerances": [
+     [
+      "energy",
+      0.1
+     ],
+     [
+      "magnetization",
+      0.01
+     ]
+    ],
+    "tolerances_naming_no_quantity": []
+   },
+   "form": "RECORD",
+   "map_entry": "return_diff deltas only",
+   "mapping": [
+    "anchor quantities -> anchor final_state; returned values -> branch final_state"
+   ],
+   "p": [
+    [
+     "physical",
+     "failed"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "not_comparable": [],
+    "rows": [
+     [
+      "energy",
+      5.0
+     ],
+     [
+      "magnetization",
+      0.0
+     ]
+    ]
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "no asserted-return field and no value provenance",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-DEF:unasserted-non-return",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": {
+    "expected_return": false,
+    "provenances": [
+     "measured"
+    ],
+    "tolerances": [
+     [
+      "energy",
+      0.1
+     ],
+     [
+      "magnetization",
+      0.01
+     ]
+    ],
+    "tolerances_naming_no_quantity": []
+   },
+   "form": "RECORD",
+   "map_entry": "return_diff deltas only",
+   "mapping": [
+    "anchor quantities -> anchor final_state; returned values -> branch final_state"
+   ],
+   "p": [],
+   "r": [],
+   "raw_r": {
+    "not_comparable": [],
+    "rows": [
+     [
+      "energy",
+      5.0
+     ],
+     [
+      "magnetization",
+      0.0
+     ]
+    ]
+   },
+   "readings": "AGREE",
+   "slot": false,
+   "slot_note": "no asserted-return field: 'no failure' is reached because nothing is ever asserted",
+   "surface": true
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-DEF:missing-return-tolerance",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": {
+    "expected_return": true,
+    "provenances": [
+     "measured"
+    ],
+    "tolerances": [
+     [
+      "magnetization",
+      0.01
+     ]
+    ],
+    "tolerances_naming_no_quantity": []
+   },
+   "form": "RECORD",
+   "map_entry": "return_diff deltas only",
+   "mapping": [
+    "anchor quantities -> anchor final_state; returned values -> branch final_state"
+   ],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "not_comparable": [],
+    "rows": [
+     [
+      "energy",
+      5.0
+     ],
+     [
+      "magnetization",
+      0.0
+     ]
+    ]
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "no return tolerance",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-DEF:missing-return-observation",
+   "code": "AGREE",
+   "direction": "P->257",
+   "dropped": {
+    "expected_return": true,
+    "provenances": [
+     "measured"
+    ],
+    "tolerances": [
+     [
+      "energy",
+      0.1
+     ],
+     [
+      "magnetization",
+      0.01
+     ]
+    ],
+    "tolerances_naming_no_quantity": []
+   },
+   "form": "RECORD",
+   "map_entry": "return_diff NOT COMPARABLE",
+   "mapping": [
+    "anchor quantities -> anchor final_state; returned values -> branch final_state"
+   ],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "raw_r": {
+    "not_comparable": [
+     "magnetization"
+    ],
+    "rows": [
+     [
+      "energy",
+      0.0
+     ],
+     [
+      "magnetization",
+      "NOT COMPARABLE"
+     ]
+    ]
+   },
+   "readings": "AGREE",
+   "slot": true,
+   "slot_note": "return_diff marks a variable absent on one side NOT COMPARABLE",
+   "surface": true
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-DEF:tolerance-for-unanchored-quantity",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": {
+    "expected_return": true,
+    "provenances": [
+     "measured"
+    ],
+    "tolerances": [
+     [
+      "energy",
+      0.1
+     ],
+     [
+      "magnetization",
+      0.01
+     ],
+     [
+      "spin",
+      0.1
+     ]
+    ],
+    "tolerances_naming_no_quantity": [
+     "spin"
+    ]
+   },
+   "form": "RECORD",
+   "map_entry": "return_diff deltas only",
+   "mapping": [
+    "anchor quantities -> anchor final_state; returned values -> branch final_state"
+   ],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "not_comparable": [],
+    "rows": [
+     [
+      "energy",
+      0.0
+     ],
+     [
+      "magnetization",
+      0.0
+     ]
+    ]
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "no return tolerance, so a tolerance naming nothing cannot be held",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-DEF:blind-instrument-misses-ladder",
+   "code": "AGREE",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "RECORD",
+   "map_entry": "known-answer gate UNTRUSTED, harness class != PASS",
+   "mapping": [
+    "ladder rungs expected undetectable -> nulls, expected detectable -> planted signals",
+    "detector = |reading - null output| > tolerance"
+   ],
+   "p": [
+    [
+     "instrument",
+     "failed"
+    ]
+   ],
+   "r": [
+    [
+     "instrument",
+     "failed"
+    ]
+   ],
+   "raw_r": {
+    "FP": 0.0,
+    "TP": 0.0,
+    "form": "RECORD",
+    "harness": "CONSTANT_SILENT",
+    "limit": "NO_SLOT (the tool gate returns FP/TP, never a detection limit)",
+    "trusted": false
+   },
+   "readings": "AGREE",
+   "slot": true,
+   "slot_note": "#257 grades the detector; it records no limit, no conditions, no effect size",
+   "surface": true
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-DEF:noisy-instrument-false-positives",
+   "code": "AGREE",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "RECORD",
+   "map_entry": "known-answer gate UNTRUSTED, harness class != PASS",
+   "mapping": [
+    "ladder rungs expected undetectable -> nulls, expected detectable -> planted signals",
+    "detector = |reading - null output| > tolerance"
+   ],
+   "p": [
+    [
+     "instrument",
+     "failed"
+    ]
+   ],
+   "r": [
+    [
+     "instrument",
+     "failed"
+    ]
+   ],
+   "raw_r": {
+    "FP": 1.0,
+    "TP": 1.0,
+    "form": "RECORD",
+    "harness": "CONSTANT_FIRES",
+    "limit": "NO_SLOT (the tool gate returns FP/TP, never a detection limit)",
+    "trusted": false
+   },
+   "readings": "AGREE",
+   "slot": true,
+   "slot_note": "#257 grades the detector; it records no limit, no conditions, no effect size",
+   "surface": true
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-DEF:sensitivity-ladder-empty",
+   "code": "MISSED",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "CRASH",
+   "map_entry": "gate crash (ZeroDivisionError)",
+   "mapping": [
+    "ladder rungs expected undetectable -> nulls, expected detectable -> planted signals",
+    "detector = |reading - null output| > tolerance"
+   ],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "error": "ZeroDivisionError in certify_tool: division by zero",
+    "form": "CRASH",
+    "n_nulls": 0,
+    "n_signals": 0
+   },
+   "readings": "MISSED",
+   "slot": true,
+   "slot_note": "#257 grades the detector; it records no limit, no conditions, no effect size",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-DEF:sensitivity-limit-not-established",
+   "code": "MISSED",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "CRASH",
+   "map_entry": "gate crash (ZeroDivisionError)",
+   "mapping": [
+    "ladder rungs expected undetectable -> nulls, expected detectable -> planted signals",
+    "detector = |reading - null output| > tolerance"
+   ],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "error": "ZeroDivisionError in certify_tool: division by zero",
+    "form": "CRASH",
+    "n_nulls": 2,
+    "n_signals": 0
+   },
+   "readings": "MISSED",
+   "slot": true,
+   "slot_note": "#257 grades the detector; it records no limit, no conditions, no effect size",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-DEF:non-detection-without-sensitivity",
+   "code": "AGREE",
+   "direction": "P->257",
+   "dropped": {
+    "conditions": [
+     [
+      "band",
+      "K"
+     ],
+     [
+      "regime",
+      "passive"
+     ]
+    ],
+    "effect_size_of_interest": 0.5
+   },
+   "form": "RAISE",
+   "map_entry": "Value / branch refused at construction (raise)",
+   "mapping": [
+    "established detection limit -> Value.sensitivity (None when no sensitivity was established)"
+   ],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "raw_r": {
+    "accepted": false,
+    "form": "RAISE",
+    "refused": "ABSENT_AT_SENSITIVITY needs the sensitivity it was looked for at"
+   },
+   "readings": "AGREE",
+   "slot": true,
+   "slot_note": "ABSENT_AT_SENSITIVITY holds one number; no effect size of interest and no scope conditions to compare it with",
+   "surface": true
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-DEF:non-detection-below-sensitivity",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": {
+    "conditions": [
+     [
+      "band",
+      "K"
+     ],
+     [
+      "regime",
+      "passive"
+     ]
+    ],
+    "effect_size_of_interest": 0.01
+   },
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "established detection limit -> Value.sensitivity (None when no sensitivity was established)"
+   ],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "accepted": true,
+    "form": "RECORD",
+    "label": "ABSENT_AT_SENSITIVITY(0.1)"
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "ABSENT_AT_SENSITIVITY holds one number; no effect size of interest and no scope conditions to compare it with",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-DEF:absence-claim-scope-mismatch",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": {
+    "conditions": [
+     [
+      "band",
+      "K"
+     ],
+     [
+      "regime",
+      "passive"
+     ],
+     [
+      "temperature",
+      "4K"
+     ]
+    ],
+    "effect_size_of_interest": 0.5
+   },
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "established detection limit -> Value.sensitivity (None when no sensitivity was established)"
+   ],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "accepted": true,
+    "form": "RECORD",
+    "label": "ABSENT_AT_SENSITIVITY(0.1)"
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "ABSENT_AT_SENSITIVITY holds one number; no effect size of interest and no scope conditions to compare it with",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-DEF:stale-reliance-on-expired-unknown",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "NONE",
+   "map_entry": null,
+   "mapping": [],
+   "p": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "r": [],
+   "raw_r": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "UNKNOWN carries a free-text expiry_condition; there is no expired state and no record of a determination resting on an UNKNOWN, so stale reliance cannot be expressed",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-CTRL:balanced-ledger-passes",
+   "code": "AGREE",
+   "direction": "P->257",
+   "dropped": {
+    "declared_complete": true,
+    "provenances": [
+     "measured",
+     "specified"
+    ],
+    "registered_interventions": [
+     "control:heater",
+     "observer:calorimeter"
+    ],
+    "unregistered_interventions": []
+   },
+   "form": "RECORD",
+   "map_entry": "L0 CLOSED / NOISE, run COMPLETE",
+   "mapping": [
+    "account tolerance 0.1 -> sigma_meas 0.05 (NOISE band = 2 sigma)",
+    "pool 'E' carries the energy account; each Exchange -> one boundary accumulator"
+   ],
+   "p": [],
+   "r": [],
+   "raw_r": {
+    "misclosure": 0.0,
+    "status": "COMPLETE",
+    "status_reason": "1 of 5 budgets LIVE and closed; 4 VOID",
+    "verdict": "CLOSED"
+   },
+   "readings": "AGREE",
+   "slot": true,
+   "slot_note": "#257's L0 has no intervention registry, no declared-complete flag and no value provenance; these decide Perplexity's axis and are dropped on the way in (listed above)",
+   "surface": true
+  },
+  {
+   "adapter_note": "verdict moves with the adapter's start state: {'y0=-1': 'PASS', 'y0=0': 'MISSES_PLANTED_DEFECTS', 'y0=1': 'MISSES_PLANTED_DEFECTS'}",
+   "case_id": "P-CTRL:clean-instrument-validated",
+   "code": "ADAPTER",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "RECORD",
+   "map_entry": "known-answer gate UNTRUSTED, harness class != PASS",
+   "mapping": [
+    "LinearInstrument(slope, intercept) -> one-step #257 model writing slope*x+intercept into y",
+    "each Perplexity known-answer case -> a #257 builder draw (cycled; the gate always takes 12)",
+    "the gate then plants leak/coef defects on top -- planted on the instrument, not on the case",
+    "[CHOICE] a static instrument has no start state in #257's dynamic-model gate, so the adapter supplies one; y0 in {0, 1, -1} is run and y0=0 is primary. The gate's 'coef' plant scales the transfer by 1.1, so it moves nothing on any case whose required flux (answer - y0) is zero: y0=0 blinds it on the x=0 case, y0=1 on the x=1 case, y0=-1 on none. The gate verdict on a clean instrument is therefore a property of this adapter choice -- coded ADAPTER, not read as a result"
+   ],
+   "p": [],
+   "r": [
+    [
+     "instrument",
+     "failed"
+    ]
+   ],
+   "raw_r": {
+    "FP": 0.0,
+    "TP": 0.8333333333333334,
+    "evidence": "12 clean draws, 12 planted (leak / coef alternating); FP 0.00 TP 0.83",
+    "harness": "MISSES_PLANTED_DEFECTS",
+    "trusted": false
+   },
+   "readings": null,
+   "slot": true,
+   "slot_note": null,
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-CTRL:empty-harness-is-not-a-pass",
+   "code": "AGREE",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "RECORD",
+   "map_entry": "known-answer gate UNTRUSTED, no cases written",
+   "mapping": [
+    "LinearInstrument(slope, intercept) -> one-step #257 model writing slope*x+intercept into y",
+    "each Perplexity known-answer case -> a #257 builder draw (cycled; the gate always takes 12)",
+    "the gate then plants leak/coef defects on top -- planted on the instrument, not on the case",
+    "[CHOICE] a static instrument has no start state in #257's dynamic-model gate, so the adapter supplies one; y0 in {0, 1, -1} is run and y0=0 is primary. The gate's 'coef' plant scales the transfer by 1.1, so it moves nothing on any case whose required flux (answer - y0) is zero: y0=0 blinds it on the x=0 case, y0=1 on the x=1 case, y0=-1 on none. The gate verdict on a clean instrument is therefore a property of this adapter choice -- coded ADAPTER, not read as a result"
+   ],
+   "p": [
+    [
+     "instrument",
+     "indeterminate"
+    ]
+   ],
+   "r": [
+    [
+     "instrument",
+     "indeterminate"
+    ]
+   ],
+   "raw_r": {
+    "FP": null,
+    "TP": null,
+    "evidence": "no known-answer cases written for this model",
+    "harness": null,
+    "trusted": false
+   },
+   "readings": "AGREE",
+   "slot": true,
+   "slot_note": null,
+   "surface": true
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-CTRL:continuous-system",
+   "code": "AGREE",
+   "direction": "P->257",
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "system_criterion supplied by the adapter: all anchored quantities within tolerance (PROPOSED)",
+    "configuration_of = sorted configuration entries",
+    "criterion left UNDECLARED when any anchored quantity lacks a tolerance or an observation"
+   ],
+   "p": "cell continuous",
+   "r": "cell continuous",
+   "readings": "AGREE",
+   "slot": true,
+   "slot_note": "#257 splits system continuity and configuration continuity, as Perplexity does; its system criterion is identity ('still the system'), Perplexity's is return-to-anchor",
+   "surface": true
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-CTRL:return-with-reconfiguration",
+   "code": "AGREE",
+   "direction": "P->257",
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "system_criterion supplied by the adapter: all anchored quantities within tolerance (PROPOSED)",
+    "configuration_of = sorted configuration entries",
+    "criterion left UNDECLARED when any anchored quantity lacks a tolerance or an observation"
+   ],
+   "p": "cell return-with-reconfiguration",
+   "r": "cell return-with-reconfiguration",
+   "readings": "AGREE",
+   "slot": true,
+   "slot_note": "#257 splits system continuity and configuration continuity, as Perplexity does; its system criterion is identity ('still the system'), Perplexity's is return-to-anchor",
+   "surface": true
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-CTRL:drift-with-stable-configuration",
+   "code": "AGREE",
+   "direction": "P->257",
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "system_criterion supplied by the adapter: all anchored quantities within tolerance (PROPOSED)",
+    "configuration_of = sorted configuration entries",
+    "criterion left UNDECLARED when any anchored quantity lacks a tolerance or an observation"
+   ],
+   "p": "cell drift-with-stable-configuration",
+   "r": "cell drift-with-stable-configuration",
+   "readings": "AGREE",
+   "slot": true,
+   "slot_note": "#257 splits system continuity and configuration continuity, as Perplexity does; its system criterion is identity ('still the system'), Perplexity's is return-to-anchor",
+   "surface": true
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-CTRL:discontinuous-system",
+   "code": "AGREE",
+   "direction": "P->257",
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "system_criterion supplied by the adapter: all anchored quantities within tolerance (PROPOSED)",
+    "configuration_of = sorted configuration entries",
+    "criterion left UNDECLARED when any anchored quantity lacks a tolerance or an observation"
+   ],
+   "p": "cell discontinuous",
+   "r": "cell discontinuous",
+   "readings": "AGREE",
+   "slot": true,
+   "slot_note": "#257 splits system continuity and configuration continuity, as Perplexity does; its system criterion is identity ('still the system'), Perplexity's is return-to-anchor",
+   "surface": true
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-CTRL:indeterminate-component-is-indeterminate-cell",
+   "code": "AGREE",
+   "direction": "P->257",
+   "form": "RECORD",
+   "map_entry": "ContinuityMatrix UNDECLARED",
+   "mapping": [
+    "system_criterion supplied by the adapter: all anchored quantities within tolerance (PROPOSED)",
+    "configuration_of = sorted configuration entries",
+    "criterion left UNDECLARED when any anchored quantity lacks a tolerance or an observation"
+   ],
+   "p": "cell indeterminate",
+   "r": "cell indeterminate",
+   "readings": "AGREE",
+   "slot": true,
+   "slot_note": "#257 splits system continuity and configuration continuity, as Perplexity does; its system criterion is identity ('still the system'), Perplexity's is return-to-anchor",
+   "surface": true
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-CTRL:return-outcome-is-system-track-transition",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": {
+    "expected_return": false,
+    "provenances": [
+     "measured"
+    ],
+    "tolerances": [
+     [
+      "energy",
+      0.1
+     ],
+     [
+      "magnetization",
+      0.01
+     ]
+    ],
+    "tolerances_naming_no_quantity": []
+   },
+   "form": "RECORD",
+   "map_entry": "return_diff deltas only",
+   "mapping": [
+    "anchor quantities -> anchor final_state; returned values -> branch final_state"
+   ],
+   "p": [],
+   "r": [],
+   "raw_r": {
+    "not_comparable": [],
+    "rows": [
+     [
+      "energy",
+      5.0
+     ],
+     [
+      "magnetization",
+      0.0
+     ]
+    ]
+   },
+   "readings": "AGREE",
+   "slot": false,
+   "slot_note": "no system/determination track split in #257",
+   "surface": true
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-CTRL:ladder-establishes-limit",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "RECORD",
+   "map_entry": "known-answer gate TRUSTED",
+   "mapping": [
+    "ladder rungs expected undetectable -> nulls, expected detectable -> planted signals",
+    "detector = |reading - null output| > tolerance"
+   ],
+   "p": [],
+   "r": [],
+   "raw_r": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "form": "RECORD",
+    "harness": "PASS",
+    "limit": "NO_SLOT (the tool gate returns FP/TP, never a detection limit)",
+    "trusted": true
+   },
+   "readings": "AGREE",
+   "slot": false,
+   "slot_note": "#257's tool gate returns FP/TP and never a detection limit (the control asserts limit=0.1)",
+   "surface": true
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-CTRL:qualified-non-detection",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": {
+    "conditions": [
+     [
+      "band",
+      "K"
+     ],
+     [
+      "regime",
+      "passive"
+     ]
+    ],
+    "effect_size_of_interest": 0.5
+   },
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "established detection limit -> Value.sensitivity (None when no sensitivity was established)"
+   ],
+   "p": [],
+   "r": [],
+   "raw_r": {
+    "accepted": true,
+    "form": "RECORD",
+    "label": "ABSENT_AT_SENSITIVITY(0.1)"
+   },
+   "readings": "AGREE",
+   "slot": false,
+   "slot_note": "no effect-size-of-interest field to compare against the limit",
+   "surface": true
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-CTRL:scoped-absence-claim-issued",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": {
+    "conditions": [
+     [
+      "band",
+      "K"
+     ],
+     [
+      "regime",
+      "passive"
+     ]
+    ],
+    "effect_size_of_interest": 0.5
+   },
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "established detection limit -> Value.sensitivity (None when no sensitivity was established)"
+   ],
+   "p": [],
+   "r": [],
+   "raw_r": {
+    "accepted": true,
+    "form": "RECORD",
+    "label": "ABSENT_AT_SENSITIVITY(0.1)"
+   },
+   "readings": "AGREE",
+   "slot": false,
+   "slot_note": "no scope conditions on a sensitivity",
+   "surface": true
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-CTRL:expiry-transition-recorded",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "NONE",
+   "map_entry": null,
+   "mapping": [],
+   "p": [],
+   "r": [],
+   "raw_r": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no expired state; expiry_condition is text",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-CTRL:reevaluation-preserves-original",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "NONE",
+   "map_entry": null,
+   "mapping": [],
+   "p": [],
+   "r": [],
+   "raw_r": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no reevaluation / successor determination",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-DEN:coincident_positive_rates_no_attrition",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "NONE",
+   "map_entry": null,
+   "mapping": [],
+   "p": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "r": [],
+   "raw_r": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no cohort-member object and no denominator binding; a rate is a number with an interval",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-DEN:later_attrition_breaks_numeric_coincidence",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "NONE",
+   "map_entry": null,
+   "mapping": [],
+   "p": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "r": [],
+   "raw_r": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no cohort-member object and no denominator binding; a rate is a number with an interval",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-DEN:zero_outcomes_hide_different_counts",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "NONE",
+   "map_entry": null,
+   "mapping": [],
+   "p": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "r": [],
+   "raw_r": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no cohort-member object and no denominator binding; a rate is a number with an interval",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-DEN:false_shared_label_at_coincidence",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "NONE",
+   "map_entry": null,
+   "mapping": [],
+   "p": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "r": [],
+   "raw_r": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no cohort-member object and no denominator binding; a rate is a number with an interval",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-DEN:false_shared_label_after_attrition",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "NONE",
+   "map_entry": null,
+   "mapping": [],
+   "p": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "r": [],
+   "raw_r": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no cohort-member object and no denominator binding; a rate is a number with an interval",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-DEN:both_labels_wrong_same_actual_policy",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "NONE",
+   "map_entry": null,
+   "mapping": [],
+   "p": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "r": [],
+   "raw_r": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no cohort-member object and no denominator binding; a rate is a number with an interval",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-DEN:same_policy_equivalent_ratio_route",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "NONE",
+   "map_entry": null,
+   "mapping": [],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [],
+   "raw_r": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no cohort-member object and no denominator binding; a rate is a number with an interval",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-DEN:survivor_policy_equivalent_ratio_route",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "NONE",
+   "map_entry": null,
+   "mapping": [],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [],
+   "raw_r": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no cohort-member object and no denominator binding; a rate is a number with an interval",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-DEN:both_survivor_memberships_unknown",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "NONE",
+   "map_entry": null,
+   "mapping": [],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [],
+   "raw_r": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no cohort-member object and no denominator binding; a rate is a number with an interval",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-DEN:consistent_initial_trace_broader_context_still_unknown",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "NONE",
+   "map_entry": null,
+   "mapping": [],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [],
+   "raw_r": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no cohort-member object and no denominator binding; a rate is a number with an interval",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-DEN:explicitly_empty_survivor_denominator",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "NONE",
+   "map_entry": null,
+   "mapping": [],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [],
+   "raw_r": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no cohort-member object and no denominator binding; a rate is a number with an interval",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-DEN:equal_counts_include_unenrolled_members",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "NONE",
+   "map_entry": null,
+   "mapping": [],
+   "p": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "r": [],
+   "raw_r": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no cohort-member object and no denominator binding; a rate is a number with an interval",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-DEN:survivor_count_claim_disagrees_with_membership",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "NONE",
+   "map_entry": null,
+   "mapping": [],
+   "p": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "r": [],
+   "raw_r": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no cohort-member object and no denominator binding; a rate is a number with an interval",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-MEAN:broad_linear_control",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "weighted distribution -> Value(mean, interval=(min, max)); target taken as X^2 for every case"
+   ],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "flags_information_loss": false,
+    "interval": [
+     0,
+     4
+    ],
+    "point_at_mean": 1.0,
+    "true_inside_interval": true,
+    "true_second_moment": 2.0
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "no selected-target / information-loss record; corner propagation reports a range",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-MEAN:same_mean_narrow_linear_control",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "weighted distribution -> Value(mean, interval=(min, max)); target taken as X^2 for every case"
+   ],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "flags_information_loss": false,
+    "interval": [
+     1,
+     1
+    ],
+    "point_at_mean": 1.0,
+    "true_inside_interval": true,
+    "true_second_moment": 1.0
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "no selected-target / information-loss record; corner propagation reports a range",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-MEAN:broad_second_moment_loss",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "weighted distribution -> Value(mean, interval=(min, max)); target taken as X^2 for every case"
+   ],
+   "p": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "flags_information_loss": false,
+    "interval": [
+     0,
+     4
+    ],
+    "point_at_mean": 1.0,
+    "true_inside_interval": true,
+    "true_second_moment": 2.0
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "no selected-target / information-loss record; corner propagation reports a range",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-MEAN:same_mean_degenerate_second_moment_coincidence",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "weighted distribution -> Value(mean, interval=(min, max)); target taken as X^2 for every case"
+   ],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "flags_information_loss": false,
+    "interval": [
+     1,
+     1
+    ],
+    "point_at_mean": 1.0,
+    "true_inside_interval": true,
+    "true_second_moment": 1.0
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "no selected-target / information-loss record; corner propagation reports a range",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-MEAN:unequal_weights_second_moment_loss",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "weighted distribution -> Value(mean, interval=(min, max)); target taken as X^2 for every case"
+   ],
+   "p": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "flags_information_loss": false,
+    "interval": [
+     4,
+     4
+    ],
+    "point_at_mean": 1.0,
+    "true_inside_interval": true,
+    "true_second_moment": 4.0
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "no selected-target / information-loss record; corner propagation reports a range",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-MEAN:zero_mean_is_not_zero_response",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "weighted distribution -> Value(mean, interval=(min, max)); target taken as X^2 for every case"
+   ],
+   "p": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "flags_information_loss": false,
+    "interval": [
+     1,
+     1
+    ],
+    "point_at_mean": 0.0,
+    "true_inside_interval": true,
+    "true_second_moment": 1.0
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "no selected-target / information-loss record; corner propagation reports a range",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-MEAN:zero_point_is_not_physical_absence",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "weighted distribution -> Value(mean, interval=(min, max)); target taken as X^2 for every case"
+   ],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "flags_information_loss": false,
+    "interval": [
+     0,
+     0
+    ],
+    "point_at_mean": 0.0,
+    "true_inside_interval": true,
+    "true_second_moment": 0.0
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "no selected-target / information-loss record; corner propagation reports a range",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-MEAN:purpose_unknown_not_defaulted",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "weighted distribution -> Value(mean, interval=(min, max)); target taken as X^2 for every case"
+   ],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "flags_information_loss": false,
+    "interval": [
+     0,
+     4
+    ],
+    "point_at_mean": 1.0,
+    "true_inside_interval": true,
+    "true_second_moment": 2.0
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "no selected-target / information-loss record; corner propagation reports a range",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-MEAN:window_unknown_not_defaulted",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "weighted distribution -> Value(mean, interval=(min, max)); target taken as X^2 for every case"
+   ],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "flags_information_loss": false,
+    "interval": [
+     0,
+     4
+    ],
+    "point_at_mean": 1.0,
+    "true_inside_interval": true,
+    "true_second_moment": 2.0
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "no selected-target / information-loss record; corner propagation reports a range",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-MEAN:population_mismatch_preserved",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "weighted distribution -> Value(mean, interval=(min, max)); target taken as X^2 for every case"
+   ],
+   "p": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "flags_information_loss": false,
+    "interval": [
+     0,
+     4
+    ],
+    "point_at_mean": 1.0,
+    "true_inside_interval": true,
+    "true_second_moment": 2.0
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "no selected-target / information-loss record; corner propagation reports a range",
+   "surface": false
+  },
+  {
+   "adapter_note": "weights unknown or zero: no mean to place in a Value",
+   "case_id": "P-MEAN:unknown_weight_not_zero",
+   "code": "ADAPTER",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "NONE",
+   "map_entry": null,
+   "mapping": [],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [],
+   "raw_r": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "#257 has no weighted-distribution object",
+   "surface": null
+  },
+  {
+   "adapter_note": "weights unknown or zero: no mean to place in a Value",
+   "case_id": "P-MEAN:zero_total_mass_undefined",
+   "code": "ADAPTER",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "NONE",
+   "map_entry": null,
+   "mapping": [],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [],
+   "raw_r": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "#257 has no weighted-distribution object",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-MEAN:false_mean_derivation",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "weighted distribution -> Value(mean, interval=(min, max)); target taken as X^2 for every case"
+   ],
+   "p": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "flags_information_loss": false,
+    "interval": [
+     0,
+     4
+    ],
+    "point_at_mean": 1.0,
+    "true_inside_interval": true,
+    "true_second_moment": 2.0
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "no selected-target / information-loss record; corner propagation reports a range",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-MEAN:unsupported_equivalent_expression_withheld",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "weighted distribution -> Value(mean, interval=(min, max)); target taken as X^2 for every case"
+   ],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "flags_information_loss": false,
+    "interval": [
+     0,
+     4
+    ],
+    "point_at_mean": 1.0,
+    "true_inside_interval": true,
+    "true_second_moment": 2.0
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "no selected-target / information-loss record; corner propagation reports a range",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-MEAS:same_identity_different_route",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": {
+    "differing_fields": [],
+    "identity": "same-declared-measurand"
+   },
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [
+    "two runs -> two families (the runs are different equation revisions)",
+    "agreement window 1e-9 declared before reading: exact agreement only"
+   ],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "cards": 1,
+    "readings": [
+     [
+      "CC_previous_replacement",
+      "OPEN"
+     ]
+    ],
+    "state": "CHECKED"
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "no measurand identity: two outputs with one name and one unit are compared; agreement opens a card to be explained instead of voiding the comparison",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-MEAS:different_quantity",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": {
+    "differing_fields": [
+     "quantity"
+    ],
+    "identity": "different-declared-measurands"
+   },
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [
+    "two runs -> two families (the runs are different equation revisions)",
+    "agreement window 1e-9 declared before reading: exact agreement only"
+   ],
+   "p": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "cards": 1,
+    "readings": [
+     [
+      "CC_previous_replacement",
+      "OPEN"
+     ]
+    ],
+    "state": "CHECKED"
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "no measurand identity: two outputs with one name and one unit are compared; agreement opens a card to be explained instead of voiding the comparison",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-MEAS:different_object",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": {
+    "differing_fields": [
+     "object_of"
+    ],
+    "identity": "different-declared-measurands"
+   },
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [
+    "two runs -> two families (the runs are different equation revisions)",
+    "agreement window 1e-9 declared before reading: exact agreement only"
+   ],
+   "p": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "cards": 1,
+    "readings": [
+     [
+      "CC_previous_replacement",
+      "OPEN"
+     ]
+    ],
+    "state": "CHECKED"
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "no measurand identity: two outputs with one name and one unit are compared; agreement opens a card to be explained instead of voiding the comparison",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-MEAS:different_normalizer",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": {
+    "differing_fields": [
+     "normalizer"
+    ],
+    "identity": "different-declared-measurands"
+   },
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [
+    "two runs -> two families (the runs are different equation revisions)",
+    "agreement window 1e-9 declared before reading: exact agreement only"
+   ],
+   "p": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "cards": 1,
+    "readings": [
+     [
+      "CC_previous_replacement",
+      "OPEN"
+     ]
+    ],
+    "state": "CHECKED"
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "no measurand identity: two outputs with one name and one unit are compared; agreement opens a card to be explained instead of voiding the comparison",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-MEAS:different_population",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": {
+    "differing_fields": [
+     "population"
+    ],
+    "identity": "different-declared-measurands"
+   },
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [
+    "two runs -> two families (the runs are different equation revisions)",
+    "agreement window 1e-9 declared before reading: exact agreement only"
+   ],
+   "p": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "cards": 1,
+    "readings": [
+     [
+      "CC_previous_replacement",
+      "OPEN"
+     ]
+    ],
+    "state": "CHECKED"
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "no measurand identity: two outputs with one name and one unit are compared; agreement opens a card to be explained instead of voiding the comparison",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-MEAS:different_window",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": {
+    "differing_fields": [
+     "time_window"
+    ],
+    "identity": "different-declared-measurands"
+   },
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [
+    "two runs -> two families (the runs are different equation revisions)",
+    "agreement window 1e-9 declared before reading: exact agreement only"
+   ],
+   "p": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "cards": 1,
+    "readings": [
+     [
+      "CC_previous_replacement",
+      "OPEN"
+     ]
+    ],
+    "state": "CHECKED"
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "no measurand identity: two outputs with one name and one unit are compared; agreement opens a card to be explained instead of voiding the comparison",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-MEAS:different_spatial_scope",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": {
+    "differing_fields": [
+     "spatial_scope"
+    ],
+    "identity": "different-declared-measurands"
+   },
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [
+    "two runs -> two families (the runs are different equation revisions)",
+    "agreement window 1e-9 declared before reading: exact agreement only"
+   ],
+   "p": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "cards": 1,
+    "readings": [
+     [
+      "CC_previous_replacement",
+      "OPEN"
+     ]
+    ],
+    "state": "CHECKED"
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "no measurand identity: two outputs with one name and one unit are compared; agreement opens a card to be explained instead of voiding the comparison",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-MEAS:different_reference",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": {
+    "differing_fields": [
+     "reference_state"
+    ],
+    "identity": "different-declared-measurands"
+   },
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [
+    "two runs -> two families (the runs are different equation revisions)",
+    "agreement window 1e-9 declared before reading: exact agreement only"
+   ],
+   "p": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "cards": 1,
+    "readings": [
+     [
+      "CC_previous_replacement",
+      "OPEN"
+     ]
+    ],
+    "state": "CHECKED"
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "no measurand identity: two outputs with one name and one unit are compared; agreement opens a card to be explained instead of voiding the comparison",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-MEAS:missing_normalizer",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": {
+    "differing_fields": [],
+    "identity": "measurand-identity-unknown"
+   },
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [
+    "two runs -> two families (the runs are different equation revisions)",
+    "agreement window 1e-9 declared before reading: exact agreement only"
+   ],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "cards": 1,
+    "readings": [
+     [
+      "CC_previous_replacement",
+      "OPEN"
+     ]
+    ],
+    "state": "CHECKED"
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "no measurand identity: two outputs with one name and one unit are compared; agreement opens a card to be explained instead of voiding the comparison",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-MEAS:same_identity_missing_route",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": {
+    "differing_fields": [],
+    "identity": "same-declared-measurand"
+   },
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [
+    "two runs -> two families (the runs are different equation revisions)",
+    "agreement window 1e-9 declared before reading: exact agreement only"
+   ],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "cards": 1,
+    "readings": [
+     [
+      "CC_previous_replacement",
+      "OPEN"
+     ]
+    ],
+    "state": "CHECKED"
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "no measurand identity: two outputs with one name and one unit are compared; agreement opens a card to be explained instead of voiding the comparison",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-MEAS:known_mismatch_and_missing_field",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": {
+    "differing_fields": [
+     "object_of"
+    ],
+    "identity": "different-declared-measurands"
+   },
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [
+    "two runs -> two families (the runs are different equation revisions)",
+    "agreement window 1e-9 declared before reading: exact agreement only"
+   ],
+   "p": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "cards": 1,
+    "readings": [
+     [
+      "CC_previous_replacement",
+      "OPEN"
+     ]
+    ],
+    "state": "CHECKED"
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "no measurand identity: two outputs with one name and one unit are compared; agreement opens a card to be explained instead of voiding the comparison",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-MEAS:both_legacy_declarations_missing",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": {
+    "differing_fields": [],
+    "identity": "measurand-identity-unknown"
+   },
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [
+    "two runs -> two families (the runs are different equation revisions)",
+    "agreement window 1e-9 declared before reading: exact agreement only"
+   ],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "cards": 1,
+    "readings": [
+     [
+      "CC_previous_replacement",
+      "OPEN"
+     ]
+    ],
+    "state": "CHECKED"
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "no measurand identity: two outputs with one name and one unit are compared; agreement opens a card to be explained instead of voiding the comparison",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-MEAS:renamed_output_same_identity",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": {
+    "differing_fields": [],
+    "identity": "same-declared-measurand"
+   },
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [
+    "two runs -> two families (the runs are different equation revisions)",
+    "agreement window 1e-9 declared before reading: exact agreement only"
+   ],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "cards": 1,
+    "readings": [
+     [
+      "CC_previous_replacement",
+      "OPEN"
+     ]
+    ],
+    "state": "CHECKED"
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "no measurand identity: two outputs with one name and one unit are compared; agreement opens a card to be explained instead of voiding the comparison",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-MEAS:same_identity_different_point_value",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": {
+    "differing_fields": [],
+    "identity": "same-declared-measurand"
+   },
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "two runs -> two families (the runs are different equation revisions)",
+    "agreement window 1e-9 declared before reading: exact agreement only"
+   ],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "cards": 0,
+    "readings": [],
+    "state": "CHECKED"
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "no measurand identity: two outputs with one name and one unit are compared; agreement opens a card to be explained instead of voiding the comparison",
+   "surface": false
+  },
+  {
+   "adapter_note": "one run produced no output (blocked before calculation); nothing to compare",
+   "case_id": "P-MEAS:failed_known_answer_not_comparable",
+   "code": "ADAPTER",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "NONE",
+   "map_entry": null,
+   "mapping": [],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ],
+    [
+     "instrument",
+     "failed"
+    ]
+   ],
+   "r": [],
+   "raw_r": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no measurand identity in #257",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-XSYS:equation_diagnostics_never_transfer_between_classes",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "certify 'linear' once; ask gate.trust('linear') with no system argument (there is none)"
+   ],
+   "p": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "keyed_by": "model name",
+    "other_system": "some-other-class",
+    "trust_in_other_system": true
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "trust has no context/system key; calibration and diagnostics carry to every system",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "P-XSYS:calibration_cannot_transfer_even_between_dimensionless_surrogates",
+   "code": "NO_SLOT",
+   "direction": "P->257",
+   "dropped": null,
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "certify 'linear' once; ask gate.trust('linear') with no system argument (there is none)"
+   ],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [],
+   "raw_r": {
+    "keyed_by": "model name",
+    "other_system": "some-other-class",
+    "trust_in_other_system": true
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "trust has no context/system key; calibration and diagnostics carry to every system",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "arms": {
+    "as_stated": [
+     [
+      "determination",
+      "indeterminate"
+     ]
+    ],
+    "self_registered": []
+   },
+   "case_id": "R-F9:replay_base",
+   "code": "NO_SLOT",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "L0 CLOSED / NOISE, run COMPLETE",
+   "mapping": [
+    "#257 per-budget tolerance (1e-9 x scale) entered as the absolute account tolerance",
+    "pool start = SPECIFIED (INIT), pool end and every flux = MODEL (simulated, nothing measured)",
+    "VOID budgets (mass, C, energy) have no account on this side: they are absent, not VOID"
+   ],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [],
+   "raw_p": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:indeterminate:L0_INTERVENTION_REGISTRY_EMPTY",
+     "determination:ok:L0_BALANCED"
+    ]
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "an intervention registry decides whether registration is complete; #257 has none, so 'as_stated' reads L0_INTERVENTION_REGISTRY_EMPTY",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "arms": {
+    "as_stated": [
+     [
+      "determination",
+      "indeterminate"
+     ]
+    ],
+    "self_registered": []
+   },
+   "case_id": "R-F9:replay_no_fire",
+   "code": "NO_SLOT",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "L0 CLOSED / NOISE, run COMPLETE",
+   "mapping": [
+    "#257 per-budget tolerance (1e-9 x scale) entered as the absolute account tolerance",
+    "pool start = SPECIFIED (INIT), pool end and every flux = MODEL (simulated, nothing measured)",
+    "VOID budgets (mass, C, energy) have no account on this side: they are absent, not VOID"
+   ],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [],
+   "raw_p": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:indeterminate:L0_INTERVENTION_REGISTRY_EMPTY",
+     "determination:ok:L0_BALANCED"
+    ]
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "an intervention registry decides whether registration is complete; #257 has none, so 'as_stated' reads L0_INTERVENTION_REGISTRY_EMPTY",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "arms": {
+    "as_stated": [
+     [
+      "determination",
+      "indeterminate"
+     ]
+    ],
+    "self_registered": []
+   },
+   "case_id": "R-F9:native_seed0",
+   "code": "NO_SLOT",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "L0 CLOSED / NOISE, run COMPLETE",
+   "mapping": [
+    "#257 per-budget tolerance (1e-9 x scale) entered as the absolute account tolerance",
+    "pool start = SPECIFIED (INIT), pool end and every flux = MODEL (simulated, nothing measured)",
+    "VOID budgets (mass, C, energy) have no account on this side: they are absent, not VOID"
+   ],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [],
+   "raw_p": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:indeterminate:L0_INTERVENTION_REGISTRY_EMPTY",
+     "determination:ok:L0_BALANCED"
+    ]
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "an intervention registry decides whether registration is complete; #257 has none, so 'as_stated' reads L0_INTERVENTION_REGISTRY_EMPTY",
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "arms": {
+    "as_stated": [
+     [
+      "determination",
+      "failed"
+     ]
+    ],
+    "self_registered": [
+     [
+      "physical",
+      "failed"
+     ]
+    ]
+   },
+   "case_id": "R-F9:replay_planted_leak_0.3",
+   "code": "NO_SLOT",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "L0 LEAK / run INCOMPLETE",
+   "mapping": [
+    "#257 per-budget tolerance (1e-9 x scale) entered as the absolute account tolerance",
+    "pool start = SPECIFIED (INIT), pool end and every flux = MODEL (simulated, nothing measured)",
+    "VOID budgets (mass, C, energy) have no account on this side: they are absent, not VOID"
+   ],
+   "p": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "r": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "raw_p": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:failed:L0_ACCOUNTING_GAP",
+     "determination:indeterminate:L0_INTERVENTION_REGISTRY_EMPTY",
+     "determination:ok:L0_BALANCED"
+    ]
+   },
+   "readings": "AGREE",
+   "slot": false,
+   "slot_note": "declared_complete decides PHYSICAL vs DETERMINATION for an unbalanced ledger; #257 carries no such flag",
+   "surface": true
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-COIN:CC_percolation[spot_0.00 d=0.10]_ode_meanfield[spot_0.00 d=0.10]",
+   "code": "NO_SLOT",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [],
+   "p": [],
+   "r": [],
+   "raw_p": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-COIN:CC_percolation[spot_0.00 d=0.20]_ode_meanfield[spot_0.00 d=0.20]",
+   "code": "NO_SLOT",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [],
+   "p": [],
+   "r": [],
+   "raw_p": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-COIN:CC_percolation[spot_0.00 d=0.65]_ode_meanfield[spot_0.00 d=0.65]",
+   "code": "NO_SLOT",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [],
+   "p": [],
+   "r": [],
+   "raw_p": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-COIN:CC_percolation[spot_0.00 d=0.70]_ode_meanfield[spot_0.00 d=0.70]",
+   "code": "NO_SLOT",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [],
+   "p": [],
+   "r": [],
+   "raw_p": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-COIN:CC_percolation[spot_0.00 d=0.80]_ode_meanfield[spot_0.00 d=0.80]",
+   "code": "NO_SLOT",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [],
+   "p": [],
+   "r": [],
+   "raw_p": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-COIN:CC_percolation[spot_0.00 d=0.90]_ode_meanfield[spot_0.00 d=0.90]",
+   "code": "NO_SLOT",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [],
+   "p": [],
+   "r": [],
+   "raw_p": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-COIN:CC_percolation[spot_0.05 d=0.10]_ode_meanfield[spot_0.05 d=0.10]",
+   "code": "NO_SLOT",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [],
+   "p": [],
+   "r": [],
+   "raw_p": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-COIN:CC_percolation[spot_0.05 d=0.20]_ode_meanfield[spot_0.05 d=0.20]",
+   "code": "NO_SLOT",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [],
+   "p": [],
+   "r": [],
+   "raw_p": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-COIN:CC_percolation[spot_0.05 d=0.60]_ode_meanfield[spot_0.05 d=0.60]",
+   "code": "NO_SLOT",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [],
+   "p": [],
+   "r": [],
+   "raw_p": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-COIN:CC_percolation[spot_0.05 d=0.65]_ode_meanfield[spot_0.05 d=0.65]",
+   "code": "NO_SLOT",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [],
+   "p": [],
+   "r": [],
+   "raw_p": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-COIN:CC_percolation[spot_0.05 d=0.70]_ode_meanfield[spot_0.05 d=0.70]",
+   "code": "NO_SLOT",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [],
+   "p": [],
+   "r": [],
+   "raw_p": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-COIN:CC_percolation[spot_0.05 d=0.80]_ode_meanfield[spot_0.05 d=0.80]",
+   "code": "NO_SLOT",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [],
+   "p": [],
+   "r": [],
+   "raw_p": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-COIN:CC_percolation[spot_0.05 d=0.90]_ode_meanfield[spot_0.05 d=0.90]",
+   "code": "NO_SLOT",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [],
+   "p": [],
+   "r": [],
+   "raw_p": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-COIN:CC_percolation[spot_0.20 d=0.10]_ode_meanfield[spot_0.20 d=0.10]",
+   "code": "NO_SLOT",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [],
+   "p": [],
+   "r": [],
+   "raw_p": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-COIN:CC_percolation[spot_0.20 d=0.20]_ode_meanfield[spot_0.20 d=0.20]",
+   "code": "NO_SLOT",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [],
+   "p": [],
+   "r": [],
+   "raw_p": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-COIN:CC_percolation[spot_0.20 d=0.55]_ode_meanfield[spot_0.20 d=0.55]",
+   "code": "NO_SLOT",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [],
+   "p": [],
+   "r": [],
+   "raw_p": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-COIN:CC_percolation[spot_0.20 d=0.60]_ode_meanfield[spot_0.20 d=0.60]",
+   "code": "NO_SLOT",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [],
+   "p": [],
+   "r": [],
+   "raw_p": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-COIN:CC_percolation[spot_0.20 d=0.65]_ode_meanfield[spot_0.20 d=0.65]",
+   "code": "NO_SLOT",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [],
+   "p": [],
+   "r": [],
+   "raw_p": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-COIN:CC_percolation[spot_0.20 d=0.70]_ode_meanfield[spot_0.20 d=0.70]",
+   "code": "NO_SLOT",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [],
+   "p": [],
+   "r": [],
+   "raw_p": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-COIN:CC_percolation[spot_0.20 d=0.80]_ode_meanfield[spot_0.20 d=0.80]",
+   "code": "NO_SLOT",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [],
+   "p": [],
+   "r": [],
+   "raw_p": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-COIN:CC_percolation[spot_0.20 d=0.90]_ode_meanfield[spot_0.20 d=0.90]",
+   "code": "NO_SLOT",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "coincidence card opened",
+   "mapping": [],
+   "p": [],
+   "r": [],
+   "raw_p": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)",
+   "surface": null
+  },
+  {
+   "adapter_note": "case does not fit the bounded backend (36 nodes, 43 bonds; bounds 32 / 12)",
+   "case_id": "R-KAG:percolation-00",
+   "code": "ADAPTER",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "site grid -> bond graph: nodes = all L*L cells, bond between flammable 4-neighbours",
+    "sources = column 0, targets = column L-1 (the lit edge and the far edge)"
+   ],
+   "p": [],
+   "r": [],
+   "raw_p": {
+    "bounds": {
+     "MAX_EDGES": 12,
+     "MAX_NODES": 32
+    },
+    "detail": "FiniteGraph refused: 2..32 unique immutable node labels required",
+    "edges": 43,
+    "nodes": 36,
+    "refused": true
+   },
+   "readings": null,
+   "slot": false,
+   "slot_note": "fire spread in steps, the burning/burned split and spotting have no slot in a static bond graph",
+   "surface": null
+  },
+  {
+   "adapter_note": "case does not fit the bounded backend (36 nodes, 60 bonds; bounds 32 / 12)",
+   "case_id": "R-KAG:percolation-01",
+   "code": "ADAPTER",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "site grid -> bond graph: nodes = all L*L cells, bond between flammable 4-neighbours",
+    "sources = column 0, targets = column L-1 (the lit edge and the far edge)"
+   ],
+   "p": [],
+   "r": [],
+   "raw_p": {
+    "bounds": {
+     "MAX_EDGES": 12,
+     "MAX_NODES": 32
+    },
+    "detail": "FiniteGraph refused: 2..32 unique immutable node labels required",
+    "edges": 60,
+    "nodes": 36,
+    "refused": true
+   },
+   "readings": null,
+   "slot": false,
+   "slot_note": "fire spread in steps, the burning/burned split and spotting have no slot in a static bond graph",
+   "surface": null
+  },
+  {
+   "adapter_note": "case does not fit the bounded backend (64 nodes, 112 bonds; bounds 32 / 12)",
+   "case_id": "R-KAG:percolation-02",
+   "code": "ADAPTER",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "site grid -> bond graph: nodes = all L*L cells, bond between flammable 4-neighbours",
+    "sources = column 0, targets = column L-1 (the lit edge and the far edge)"
+   ],
+   "p": [],
+   "r": [],
+   "raw_p": {
+    "bounds": {
+     "MAX_EDGES": 12,
+     "MAX_NODES": 32
+    },
+    "detail": "FiniteGraph refused: 2..32 unique immutable node labels required",
+    "edges": 112,
+    "nodes": 64,
+    "refused": true
+   },
+   "readings": null,
+   "slot": false,
+   "slot_note": "fire spread in steps, the burning/burned split and spotting have no slot in a static bond graph",
+   "surface": null
+  },
+  {
+   "adapter_note": "case does not fit the bounded backend (25 nodes, 26 bonds; bounds 32 / 12)",
+   "case_id": "R-KAG:percolation-03",
+   "code": "ADAPTER",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "site grid -> bond graph: nodes = all L*L cells, bond between flammable 4-neighbours",
+    "sources = column 0, targets = column L-1 (the lit edge and the far edge)"
+   ],
+   "p": [],
+   "r": [],
+   "raw_p": {
+    "bounds": {
+     "MAX_EDGES": 12,
+     "MAX_NODES": 32
+    },
+    "detail": "FiniteGraph refused: immutable edge tuple, at most 12 edges required",
+    "edges": 26,
+    "nodes": 25,
+    "refused": true
+   },
+   "readings": null,
+   "slot": false,
+   "slot_note": "fire spread in steps, the burning/burned split and spotting have no slot in a static bond graph",
+   "surface": null
+  },
+  {
+   "adapter_note": "case does not fit the bounded backend (64 nodes, 112 bonds; bounds 32 / 12)",
+   "case_id": "R-KAG:percolation-04",
+   "code": "ADAPTER",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "site grid -> bond graph: nodes = all L*L cells, bond between flammable 4-neighbours",
+    "sources = column 0, targets = column L-1 (the lit edge and the far edge)"
+   ],
+   "p": [],
+   "r": [],
+   "raw_p": {
+    "bounds": {
+     "MAX_EDGES": 12,
+     "MAX_NODES": 32
+    },
+    "detail": "FiniteGraph refused: 2..32 unique immutable node labels required",
+    "edges": 112,
+    "nodes": 64,
+    "refused": true
+   },
+   "readings": null,
+   "slot": false,
+   "slot_note": "fire spread in steps, the burning/burned split and spotting have no slot in a static bond graph",
+   "surface": null
+  },
+  {
+   "adapter_note": "case does not fit the bounded backend (25 nodes, 26 bonds; bounds 32 / 12)",
+   "case_id": "R-KAG:percolation-05",
+   "code": "ADAPTER",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "site grid -> bond graph: nodes = all L*L cells, bond between flammable 4-neighbours",
+    "sources = column 0, targets = column L-1 (the lit edge and the far edge)"
+   ],
+   "p": [],
+   "r": [],
+   "raw_p": {
+    "bounds": {
+     "MAX_EDGES": 12,
+     "MAX_NODES": 32
+    },
+    "detail": "FiniteGraph refused: immutable edge tuple, at most 12 edges required",
+    "edges": 26,
+    "nodes": 25,
+    "refused": true
+   },
+   "readings": null,
+   "slot": false,
+   "slot_note": "fire spread in steps, the burning/burned split and spotting have no slot in a static bond graph",
+   "surface": null
+  },
+  {
+   "adapter_note": "case does not fit the bounded backend (64 nodes, 112 bonds; bounds 32 / 12)",
+   "case_id": "R-KAG:percolation-06",
+   "code": "ADAPTER",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "site grid -> bond graph: nodes = all L*L cells, bond between flammable 4-neighbours",
+    "sources = column 0, targets = column L-1 (the lit edge and the far edge)"
+   ],
+   "p": [],
+   "r": [],
+   "raw_p": {
+    "bounds": {
+     "MAX_EDGES": 12,
+     "MAX_NODES": 32
+    },
+    "detail": "FiniteGraph refused: 2..32 unique immutable node labels required",
+    "edges": 112,
+    "nodes": 64,
+    "refused": true
+   },
+   "readings": null,
+   "slot": false,
+   "slot_note": "fire spread in steps, the burning/burned split and spotting have no slot in a static bond graph",
+   "surface": null
+  },
+  {
+   "adapter_note": "case does not fit the bounded backend (49 nodes, 64 bonds; bounds 32 / 12)",
+   "case_id": "R-KAG:percolation-07",
+   "code": "ADAPTER",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "site grid -> bond graph: nodes = all L*L cells, bond between flammable 4-neighbours",
+    "sources = column 0, targets = column L-1 (the lit edge and the far edge)"
+   ],
+   "p": [],
+   "r": [],
+   "raw_p": {
+    "bounds": {
+     "MAX_EDGES": 12,
+     "MAX_NODES": 32
+    },
+    "detail": "FiniteGraph refused: 2..32 unique immutable node labels required",
+    "edges": 64,
+    "nodes": 49,
+    "refused": true
+   },
+   "readings": null,
+   "slot": false,
+   "slot_note": "fire spread in steps, the burning/burned split and spotting have no slot in a static bond graph",
+   "surface": null
+  },
+  {
+   "adapter_note": "case does not fit the bounded backend (25 nodes, 26 bonds; bounds 32 / 12)",
+   "case_id": "R-KAG:percolation-08",
+   "code": "ADAPTER",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "site grid -> bond graph: nodes = all L*L cells, bond between flammable 4-neighbours",
+    "sources = column 0, targets = column L-1 (the lit edge and the far edge)"
+   ],
+   "p": [],
+   "r": [],
+   "raw_p": {
+    "bounds": {
+     "MAX_EDGES": 12,
+     "MAX_NODES": 32
+    },
+    "detail": "FiniteGraph refused: immutable edge tuple, at most 12 edges required",
+    "edges": 26,
+    "nodes": 25,
+    "refused": true
+   },
+   "readings": null,
+   "slot": false,
+   "slot_note": "fire spread in steps, the burning/burned split and spotting have no slot in a static bond graph",
+   "surface": null
+  },
+  {
+   "adapter_note": "case does not fit the bounded backend (64 nodes, 112 bonds; bounds 32 / 12)",
+   "case_id": "R-KAG:percolation-09",
+   "code": "ADAPTER",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "site grid -> bond graph: nodes = all L*L cells, bond between flammable 4-neighbours",
+    "sources = column 0, targets = column L-1 (the lit edge and the far edge)"
+   ],
+   "p": [],
+   "r": [],
+   "raw_p": {
+    "bounds": {
+     "MAX_EDGES": 12,
+     "MAX_NODES": 32
+    },
+    "detail": "FiniteGraph refused: 2..32 unique immutable node labels required",
+    "edges": 112,
+    "nodes": 64,
+    "refused": true
+   },
+   "readings": null,
+   "slot": false,
+   "slot_note": "fire spread in steps, the burning/burned split and spotting have no slot in a static bond graph",
+   "surface": null
+  },
+  {
+   "adapter_note": "case does not fit the bounded backend (25 nodes, 40 bonds; bounds 32 / 12)",
+   "case_id": "R-KAG:percolation-10",
+   "code": "ADAPTER",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "site grid -> bond graph: nodes = all L*L cells, bond between flammable 4-neighbours",
+    "sources = column 0, targets = column L-1 (the lit edge and the far edge)"
+   ],
+   "p": [],
+   "r": [],
+   "raw_p": {
+    "bounds": {
+     "MAX_EDGES": 12,
+     "MAX_NODES": 32
+    },
+    "detail": "FiniteGraph refused: immutable edge tuple, at most 12 edges required",
+    "edges": 40,
+    "nodes": 25,
+    "refused": true
+   },
+   "readings": null,
+   "slot": false,
+   "slot_note": "fire spread in steps, the burning/burned split and spotting have no slot in a static bond graph",
+   "surface": null
+  },
+  {
+   "adapter_note": "case does not fit the bounded backend (16 nodes, 24 bonds; bounds 32 / 12)",
+   "case_id": "R-KAG:percolation-11",
+   "code": "ADAPTER",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "site grid -> bond graph: nodes = all L*L cells, bond between flammable 4-neighbours",
+    "sources = column 0, targets = column L-1 (the lit edge and the far edge)"
+   ],
+   "p": [],
+   "r": [],
+   "raw_p": {
+    "bounds": {
+     "MAX_EDGES": 12,
+     "MAX_NODES": 32
+    },
+    "detail": "FiniteGraph refused: immutable edge tuple, at most 12 edges required",
+    "edges": 24,
+    "nodes": 16,
+    "refused": true
+   },
+   "readings": null,
+   "slot": false,
+   "slot_note": "fire spread in steps, the burning/burned split and spotting have no slot in a static bond graph",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-KAG:branching-00",
+   "code": "AGREE",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "known-answer gate TRUSTED",
+   "mapping": [
+    "fixed offspring R -> degenerate law ((R, 1),)",
+    "#257 active(n) -> expected_population at horizon n",
+    "#257 retired + active -> expected_cumulative_population (generations 0..n)",
+    "the plan's known-answer case is this same #257 closed form: the run is checked against the answer it is fed (circular)"
+   ],
+   "p": "diagnostically-qualified-calculation; matches #257 closed form",
+   "r": "TRUSTED (FP 0, TP 1)",
+   "raw_p": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:indeterminate:APP_UNRESOLVED",
+     "determination:ok:L0_BALANCED",
+     "determination:ok:L0_REGISTRATION_COMPLETE",
+     "instrument:ok:KA_VALIDATED",
+     "instrument:ok:NULL_CLEAN"
+    ],
+    "got": {
+     "expected_cumulative_population": 18.0,
+     "expected_population": 3.0
+    },
+    "matches_257_closed_form": true,
+    "run_state": "diagnostically-qualified-calculation"
+   },
+   "readings": "AGREE",
+   "slot": true,
+   "slot_note": null,
+   "surface": true
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-KAG:branching-01",
+   "code": "AGREE",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "known-answer gate TRUSTED",
+   "mapping": [
+    "fixed offspring R -> degenerate law ((R, 1),)",
+    "#257 active(n) -> expected_population at horizon n",
+    "#257 retired + active -> expected_cumulative_population (generations 0..n)",
+    "the plan's known-answer case is this same #257 closed form: the run is checked against the answer it is fed (circular)"
+   ],
+   "p": "diagnostically-qualified-calculation; matches #257 closed form",
+   "r": "TRUSTED (FP 0, TP 1)",
+   "raw_p": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:indeterminate:APP_UNRESOLVED",
+     "determination:ok:L0_BALANCED",
+     "determination:ok:L0_REGISTRATION_COMPLETE",
+     "instrument:ok:KA_VALIDATED",
+     "instrument:ok:NULL_CLEAN"
+    ],
+    "got": {
+     "expected_cumulative_population": 45.0,
+     "expected_population": 24.0
+    },
+    "matches_257_closed_form": true,
+    "run_state": "diagnostically-qualified-calculation"
+   },
+   "readings": "AGREE",
+   "slot": true,
+   "slot_note": null,
+   "surface": true
+  },
+  {
+   "adapter_note": "outside Perplexity's bounded backend; refused before calculation",
+   "case_id": "R-KAG:branching-02",
+   "code": "ADAPTER",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "known-answer gate TRUSTED",
+   "mapping": [
+    "fixed offspring R -> degenerate law ((R, 1),)",
+    "#257 active(n) -> expected_population at horizon n",
+    "#257 retired + active -> expected_cumulative_population (generations 0..n)",
+    "the plan's known-answer case is this same #257 closed form: the run is checked against the answer it is fed (circular)"
+   ],
+   "p": "blocked-before-experimental-calculation; blocked: ",
+   "r": "TRUSTED (FP 0, TP 1)",
+   "raw_p": {
+    "axes": {
+     "determination": "ok",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:ok:APP_OUTSIDE_DOMAIN",
+     "determination:ok:L0_BALANCED",
+     "determination:ok:L0_REGISTRATION_COMPLETE"
+    ],
+    "got": {
+     "expected_cumulative_population": null,
+     "expected_population": null
+    },
+    "matches_257_closed_form": false,
+    "run_state": "blocked-before-experimental-calculation"
+   },
+   "readings": null,
+   "slot": true,
+   "slot_note": null,
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-KAG:branching-03",
+   "code": "AGREE",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "known-answer gate TRUSTED",
+   "mapping": [
+    "fixed offspring R -> degenerate law ((R, 1),)",
+    "#257 active(n) -> expected_population at horizon n",
+    "#257 retired + active -> expected_cumulative_population (generations 0..n)",
+    "the plan's known-answer case is this same #257 closed form: the run is checked against the answer it is fed (circular)"
+   ],
+   "p": "diagnostically-qualified-calculation; matches #257 closed form",
+   "r": "TRUSTED (FP 0, TP 1)",
+   "raw_p": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:indeterminate:APP_UNRESOLVED",
+     "determination:ok:L0_BALANCED",
+     "determination:ok:L0_REGISTRATION_COMPLETE",
+     "instrument:ok:KA_VALIDATED",
+     "instrument:ok:NULL_CLEAN"
+    ],
+    "got": {
+     "expected_cumulative_population": 120.0,
+     "expected_population": 81.0
+    },
+    "matches_257_closed_form": true,
+    "run_state": "diagnostically-qualified-calculation"
+   },
+   "readings": "AGREE",
+   "slot": true,
+   "slot_note": null,
+   "surface": true
+  },
+  {
+   "adapter_note": "outside Perplexity's bounded backend; refused before calculation",
+   "case_id": "R-KAG:branching-04",
+   "code": "ADAPTER",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "known-answer gate TRUSTED",
+   "mapping": [
+    "fixed offspring R -> degenerate law ((R, 1),)",
+    "#257 active(n) -> expected_population at horizon n",
+    "#257 retired + active -> expected_cumulative_population (generations 0..n)",
+    "the plan's known-answer case is this same #257 closed form: the run is checked against the answer it is fed (circular)"
+   ],
+   "p": "blocked-before-experimental-calculation; blocked: determination:failed:EQ_PLAN_OR_INPUT_BINDING",
+   "r": "TRUSTED (FP 0, TP 1)",
+   "raw_p": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:failed:EQ_PLAN_OR_INPUT_BINDING",
+     "determination:ok:L0_BALANCED",
+     "determination:ok:L0_REGISTRATION_COMPLETE"
+    ],
+    "got": {
+     "expected_cumulative_population": null,
+     "expected_population": null
+    },
+    "matches_257_closed_form": false,
+    "run_state": "blocked-before-experimental-calculation"
+   },
+   "readings": null,
+   "slot": true,
+   "slot_note": null,
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-KAG:branching-05",
+   "code": "AGREE",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "known-answer gate TRUSTED",
+   "mapping": [
+    "fixed offspring R -> degenerate law ((R, 1),)",
+    "#257 active(n) -> expected_population at horizon n",
+    "#257 retired + active -> expected_cumulative_population (generations 0..n)",
+    "the plan's known-answer case is this same #257 closed form: the run is checked against the answer it is fed (circular)"
+   ],
+   "p": "diagnostically-qualified-calculation; matches #257 closed form",
+   "r": "TRUSTED (FP 0, TP 1)",
+   "raw_p": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:indeterminate:APP_UNRESOLVED",
+     "determination:ok:L0_BALANCED",
+     "determination:ok:L0_REGISTRATION_COMPLETE",
+     "instrument:ok:KA_VALIDATED",
+     "instrument:ok:NULL_CLEAN"
+    ],
+    "got": {
+     "expected_cumulative_population": 12.0,
+     "expected_population": 2.0
+    },
+    "matches_257_closed_form": true,
+    "run_state": "diagnostically-qualified-calculation"
+   },
+   "readings": "AGREE",
+   "slot": true,
+   "slot_note": null,
+   "surface": true
+  },
+  {
+   "adapter_note": "outside Perplexity's bounded backend; refused before calculation",
+   "case_id": "R-KAG:branching-06",
+   "code": "ADAPTER",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "known-answer gate TRUSTED",
+   "mapping": [
+    "fixed offspring R -> degenerate law ((R, 1),)",
+    "#257 active(n) -> expected_population at horizon n",
+    "#257 retired + active -> expected_cumulative_population (generations 0..n)",
+    "the plan's known-answer case is this same #257 closed form: the run is checked against the answer it is fed (circular)"
+   ],
+   "p": "blocked-before-experimental-calculation; blocked: ",
+   "r": "TRUSTED (FP 0, TP 1)",
+   "raw_p": {
+    "axes": {
+     "determination": "ok",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:ok:APP_OUTSIDE_DOMAIN",
+     "determination:ok:L0_BALANCED",
+     "determination:ok:L0_REGISTRATION_COMPLETE"
+    ],
+    "got": {
+     "expected_cumulative_population": null,
+     "expected_population": null
+    },
+    "matches_257_closed_form": false,
+    "run_state": "blocked-before-experimental-calculation"
+   },
+   "readings": null,
+   "slot": true,
+   "slot_note": null,
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-KAG:branching-07",
+   "code": "AGREE",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "known-answer gate TRUSTED",
+   "mapping": [
+    "fixed offspring R -> degenerate law ((R, 1),)",
+    "#257 active(n) -> expected_population at horizon n",
+    "#257 retired + active -> expected_cumulative_population (generations 0..n)",
+    "the plan's known-answer case is this same #257 closed form: the run is checked against the answer it is fed (circular)"
+   ],
+   "p": "diagnostically-qualified-calculation; matches #257 closed form",
+   "r": "TRUSTED (FP 0, TP 1)",
+   "raw_p": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:indeterminate:APP_UNRESOLVED",
+     "determination:ok:L0_BALANCED",
+     "determination:ok:L0_REGISTRATION_COMPLETE",
+     "instrument:ok:KA_VALIDATED",
+     "instrument:ok:NULL_CLEAN"
+    ],
+    "got": {
+     "expected_cumulative_population": 10.0,
+     "expected_population": 2.0
+    },
+    "matches_257_closed_form": true,
+    "run_state": "diagnostically-qualified-calculation"
+   },
+   "readings": "AGREE",
+   "slot": true,
+   "slot_note": null,
+   "surface": true
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-KAG:branching-08",
+   "code": "AGREE",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "known-answer gate TRUSTED",
+   "mapping": [
+    "fixed offspring R -> degenerate law ((R, 1),)",
+    "#257 active(n) -> expected_population at horizon n",
+    "#257 retired + active -> expected_cumulative_population (generations 0..n)",
+    "the plan's known-answer case is this same #257 closed form: the run is checked against the answer it is fed (circular)"
+   ],
+   "p": "diagnostically-qualified-calculation; matches #257 closed form",
+   "r": "TRUSTED (FP 0, TP 1)",
+   "raw_p": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:indeterminate:APP_UNRESOLVED",
+     "determination:ok:L0_BALANCED",
+     "determination:ok:L0_REGISTRATION_COMPLETE",
+     "instrument:ok:KA_VALIDATED",
+     "instrument:ok:NULL_CLEAN"
+    ],
+    "got": {
+     "expected_cumulative_population": 1.0,
+     "expected_population": 0.0
+    },
+    "matches_257_closed_form": true,
+    "run_state": "diagnostically-qualified-calculation"
+   },
+   "readings": "AGREE",
+   "slot": true,
+   "slot_note": null,
+   "surface": true
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-KAG:branching-09",
+   "code": "AGREE",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "known-answer gate TRUSTED",
+   "mapping": [
+    "fixed offspring R -> degenerate law ((R, 1),)",
+    "#257 active(n) -> expected_population at horizon n",
+    "#257 retired + active -> expected_cumulative_population (generations 0..n)",
+    "the plan's known-answer case is this same #257 closed form: the run is checked against the answer it is fed (circular)"
+   ],
+   "p": "diagnostically-qualified-calculation; matches #257 closed form",
+   "r": "TRUSTED (FP 0, TP 1)",
+   "raw_p": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:indeterminate:APP_UNRESOLVED",
+     "determination:ok:L0_BALANCED",
+     "determination:ok:L0_REGISTRATION_COMPLETE",
+     "instrument:ok:KA_VALIDATED",
+     "instrument:ok:NULL_CLEAN"
+    ],
+    "got": {
+     "expected_cumulative_population": 4.0,
+     "expected_population": 0.0
+    },
+    "matches_257_closed_form": true,
+    "run_state": "diagnostically-qualified-calculation"
+   },
+   "readings": "AGREE",
+   "slot": true,
+   "slot_note": null,
+   "surface": true
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-KAG:branching-10",
+   "code": "AGREE",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "known-answer gate TRUSTED",
+   "mapping": [
+    "fixed offspring R -> degenerate law ((R, 1),)",
+    "#257 active(n) -> expected_population at horizon n",
+    "#257 retired + active -> expected_cumulative_population (generations 0..n)",
+    "the plan's known-answer case is this same #257 closed form: the run is checked against the answer it is fed (circular)"
+   ],
+   "p": "diagnostically-qualified-calculation; matches #257 closed form",
+   "r": "TRUSTED (FP 0, TP 1)",
+   "raw_p": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:indeterminate:APP_UNRESOLVED",
+     "determination:ok:L0_BALANCED",
+     "determination:ok:L0_REGISTRATION_COMPLETE",
+     "instrument:ok:KA_VALIDATED",
+     "instrument:ok:NULL_CLEAN"
+    ],
+    "got": {
+     "expected_cumulative_population": 80.0,
+     "expected_population": 54.0
+    },
+    "matches_257_closed_form": true,
+    "run_state": "diagnostically-qualified-calculation"
+   },
+   "readings": "AGREE",
+   "slot": true,
+   "slot_note": null,
+   "surface": true
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-KAG:branching-11",
+   "code": "AGREE",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "known-answer gate TRUSTED",
+   "mapping": [
+    "fixed offspring R -> degenerate law ((R, 1),)",
+    "#257 active(n) -> expected_population at horizon n",
+    "#257 retired + active -> expected_cumulative_population (generations 0..n)",
+    "the plan's known-answer case is this same #257 closed form: the run is checked against the answer it is fed (circular)"
+   ],
+   "p": "diagnostically-qualified-calculation; matches #257 closed form",
+   "r": "TRUSTED (FP 0, TP 1)",
+   "raw_p": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:indeterminate:APP_UNRESOLVED",
+     "determination:ok:L0_BALANCED",
+     "determination:ok:L0_REGISTRATION_COMPLETE",
+     "instrument:ok:KA_VALIDATED",
+     "instrument:ok:NULL_CLEAN"
+    ],
+    "got": {
+     "expected_cumulative_population": 12.0,
+     "expected_population": 4.0
+    },
+    "matches_257_closed_form": true,
+    "run_state": "diagnostically-qualified-calculation"
+   },
+   "readings": "AGREE",
+   "slot": true,
+   "slot_note": null,
+   "surface": true
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-VAL:absent_at_sensitivity",
+   "code": "NO_SLOT",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [
+    "#257 carries one sensitivity number and no ladder: no SensitivityDetermination can be built without inventing one, so sensitivity enters as None",
+    "no effect size of interest and no conditions in #257: None / {}"
+   ],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [],
+   "raw_p": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:indeterminate:ND_UNQUALIFIED"
+    ]
+   },
+   "readings": "MISSED",
+   "slot": false,
+   "slot_note": "a bounded null here needs an established sensitivity (a ladder), an effect size of interest and matching conditions; #257's ABSENT_AT_SENSITIVITY(<value>) carries the value only",
+   "surface": false
+  },
+  {
+   "adapter_note": "UnknownDetermination needs typed ExpiryTriggers (kind in a closed enum); mapping the free-text expiry_condition onto a kind is an interpretation the adapter does not make",
+   "case_id": "R-VAL:unknown_with_expiry_text",
+   "code": "ADAPTER",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [],
+   "p": [],
+   "r": [],
+   "raw_p": null,
+   "readings": null,
+   "slot": true,
+   "slot_note": "UNKNOWN with expiry triggers exists on both sides; the trigger is typed here, text in #257",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-VAL:unknown_without_expiry",
+   "code": "MISSED",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "Value / branch refused at construction (raise)",
+   "mapping": [
+    "expiry_condition None -> expiry_triggers ()"
+   ],
+   "p": [],
+   "r": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "raw_p": {
+    "accepted": true,
+    "state": "unknown"
+   },
+   "readings": "MISSED",
+   "slot": true,
+   "slot_note": null,
+   "surface": false
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-CLAIM:part2-0",
+   "code": "NO_SLOT",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [],
+   "p": [],
+   "r": [],
+   "raw_p": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no OBSERVED / DERIVED / PROPOSED claim tag in this playground; ClaimRecord carries state (draft/recorded/unknown/retired) and support (none/partial/unknown), and Condition carries a basis (selected/assumed/measured/derived) -- a value-provenance axis, not a claim tag",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-CLAIM:part2-1",
+   "code": "NO_SLOT",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [],
+   "p": [],
+   "r": [],
+   "raw_p": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no OBSERVED / DERIVED / PROPOSED claim tag in this playground; ClaimRecord carries state (draft/recorded/unknown/retired) and support (none/partial/unknown), and Condition carries a basis (selected/assumed/measured/derived) -- a value-provenance axis, not a claim tag",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-CLAIM:part2-2",
+   "code": "NO_SLOT",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [],
+   "p": [],
+   "r": [],
+   "raw_p": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no OBSERVED / DERIVED / PROPOSED claim tag in this playground; ClaimRecord carries state (draft/recorded/unknown/retired) and support (none/partial/unknown), and Condition carries a basis (selected/assumed/measured/derived) -- a value-provenance axis, not a claim tag",
+   "surface": null
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-OBS:cross_system_regimes_undeclared",
+   "code": "AGREE",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "cross-system comparison refused (regimes undeclared)",
+   "mapping": [
+    "observer coordinate removed from the shipped applicability fixture context"
+   ],
+   "p": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "r": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "raw_p": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:indeterminate:APP_UNRESOLVED"
+    ],
+    "state": "unknown",
+    "unresolved": [
+     "observer: condition not declared or value unresolved",
+     "context has no observer coordinate"
+    ]
+   },
+   "readings": "AGREE",
+   "slot": true,
+   "slot_note": "one observer coordinate here against three observer regimes in #257: the slot exists at a coarser grain",
+   "surface": true
+  },
+  {
+   "adapter_note": null,
+   "case_id": "R-ANCHOR:two_change_branch",
+   "code": "NO_SLOT",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": "Value / branch refused at construction (raise)",
+   "mapping": [],
+   "p": [],
+   "r": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "raw_p": null,
+   "readings": null,
+   "slot": false,
+   "slot_note": "no one-change rule on a branch; equation substitution changes one adapter and reruns every gate, but nothing counts the changes between a frozen anchor and a run",
+   "surface": null
+  },
+  {
+   "adapter_note": "OffspringLaw takes bounded offspring counts (<= 4) with positive integer weights; Poisson(R) has unbounded support and irrational probabilities, so it cannot be entered without truncating a tail, which the backend is built to refuse",
+   "case_id": "R-BR:poisson_R0.8",
+   "code": "ADAPTER",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [],
+   "p": [],
+   "r": [],
+   "raw_p": null,
+   "readings": null,
+   "slot": true,
+   "slot_note": "extinction_by_horizon exists here as a finite-horizon quantity; #257 reports the ultimate die-out root",
+   "surface": null
+  },
+  {
+   "adapter_note": "OffspringLaw takes bounded offspring counts (<= 4) with positive integer weights; Poisson(R) has unbounded support and irrational probabilities, so it cannot be entered without truncating a tail, which the backend is built to refuse",
+   "case_id": "R-BR:poisson_R1.5",
+   "code": "ADAPTER",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [],
+   "p": [],
+   "r": [],
+   "raw_p": null,
+   "readings": null,
+   "slot": true,
+   "slot_note": "extinction_by_horizon exists here as a finite-horizon quantity; #257 reports the ultimate die-out root",
+   "surface": null
+  },
+  {
+   "adapter_note": "OffspringLaw takes bounded offspring counts (<= 4) with positive integer weights; Poisson(R) has unbounded support and irrational probabilities, so it cannot be entered without truncating a tail, which the backend is built to refuse",
+   "case_id": "R-BR:poisson_R2.0",
+   "code": "ADAPTER",
+   "direction": "257->P",
+   "form": "RECORD",
+   "map_entry": null,
+   "mapping": [],
+   "p": [],
+   "r": [],
+   "raw_p": null,
+   "readings": null,
+   "slot": true,
+   "slot_note": "extinction_by_horizon exists here as a finite-horizon quantity; #257 reports the ultimate die-out root",
+   "surface": null
+  }
+ ]
+}
