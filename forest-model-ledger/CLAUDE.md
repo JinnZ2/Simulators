@@ -199,6 +199,7 @@ python3 tests/test_heldout.py             # held-out gate; refuses if a frozen t
 python3 runs/run_19.py                    # support_match on a blind coder's records and labels
 python3 runs/run_20.py                    # run_15's near-threshold classes over delta 0.40-0.60 sd (about 30 s)
 RELATIONAL_PLAYGROUND_PATH=<checkout>/relational-playground python3 runs/run_21.py   # swap on the engine (about 6 min)
+python3 runs/run_22.py                    # support_match on case e (first-hand, not author-written); reproduces samples/run_22.sample.txt
 python3 tools/check_ledger.py --owed-mode original|owed|proposed   # original is the default; Kavik picks
 ```
 
