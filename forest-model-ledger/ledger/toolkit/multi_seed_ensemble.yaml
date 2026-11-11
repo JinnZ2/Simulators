@@ -26,6 +26,7 @@ other_domains_it_could_see_into: void
 used_in:
   - run_14
   - run_15
+  - run_20
 open_issues:
   - "HELD-OUT FAIL_TP 0.995 (2026-11-11, tests/test_heldout.py, harness seeds 100-104): paired Laplace differences, n = 15 seeds, a 3 sd shift; K_MOVED 5 misses it in 1 of 200 on some seed. A 3 sd effect at 15 seeds is not reliably MOVED with heavy tails. Not retuned; trust PROVISIONAL"
   - "REL_TOL 0.05, K_MOVED 5.0, K_EQ 2.0, K_SPIKE 3.0 are [CHOICE]; printed by every run that uses them"

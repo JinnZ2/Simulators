@@ -37,7 +37,9 @@ runs:
   - run_11
   - run_15
   - run_17
+  - run_20
 open_issues:
+  - "run_20: the HIDDEN / ABSORBED split is a range over the materiality margin. Over delta 0.40-0.60 sd the 33 read HIDDEN 23..15, ABSORBED 4..12 (18 / 9 at run_15's 0.50); uG, KG, kill_T are HIDDEN both ways at <= 0.44 and ABSORBED both ways at 0.60"
   - "local_normal_form not looked at. First thing to check: the fire cycle as a relaxation oscillator. p_ign x1.1 / x0.9 moves fires 0.5 / 0.3 sd while fuel_th, burn and vol move them 3.1 to 4.2 sd, which is what a threshold reset would give; no run separates it"
   - "the three supported slots are not separated from each other: no ablation tool exists. A run at larger nudges and 10 seeds would split underpowered from absorbed"
   - "2026-11-11 (run_15): split done with multi_seed_ensemble and ablation. HIDDEN_IN_NOISE 18, ABSORBED 9, SEED_SPECIFIC 2, INERT 2 (p_ign x1.1, kill_G x1.1), UNRESOLVED 2. The HIDDEN / ABSORBED line is a 0.5 sd materiality choice; three mirror pairs straddle it"
