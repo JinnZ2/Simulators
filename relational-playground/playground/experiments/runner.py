@@ -6,9 +6,10 @@ holding the twelve outputs. Unknown parameters stop the run; nothing is filled.
 import os
 from ..equations import base as eq
 from ..reporting import provenance, results
+from .. import l0
 
 REQUIRED = ("run_id", "system", "boundary", "model", "relationships", "controls", "environment",
-            "parameters", "initial", "t_end", "dt", "observations")
+            "parameters", "initial", "t_end", "dt", "observations", "budgets")
 
 
 class Config(dict):
@@ -39,9 +40,9 @@ def _axpy(state, rates, h):
     return out
 
 
-def _extra_rates(out):
-    """Hook: quantities integrated beside the state. Empty in the base instrument."""
-    return {}
+def _extra_rates(out, cfg):
+    """Quantities integrated beside the state: the boundary accumulators of the L0 gate."""
+    return l0.flux_keys(out, cfg["budgets"])
 
 
 def _eval(model, state, t, dt, cfg, params):
@@ -49,7 +50,7 @@ def _eval(model, state, t, dt, cfg, params):
     envd.update(t=t, dt=dt, rng=cfg["environment"].rng)
     out = model(state, envd, cfg["relationships"], cfg["controls"], params)
     rates = dict(out.state_changes)
-    rates.update(_extra_rates(out))
+    rates.update(_extra_rates(out, cfg))
     return rates, out
 
 
@@ -72,21 +73,30 @@ def integrate(model, cfg, params, state):
             if out.new_config is not None:
                 state["_config"] = out.new_config
         if pert and abs((t + dt) - pert["at"]) < 0.5 * dt:
-            state = _apply_kick(state, pert)
+            state = _apply_kick(state, pert, cfg["budgets"])
         times.append(t + dt)
         states.append(dict(state))
         outs.append(out)
     return times, states, outs
 
 
-def _apply_kick(state, pert):
+def _apply_kick(state, pert, budgets):
+    """A kick moves quantity across the boundary, so it is booked there."""
     state = dict(state)
-    state[pert["target"]] += pert["magnitude"]
+    m = pert["magnitude"]
+    state[pert["target"]] += m
+    for b in budgets.values():
+        if b.live and pert["target"] in b.pools:
+            k = ("_in|%s|perturbation" if m >= 0 else "_out|%s|perturbation") % b.name
+            state[k] = state.get(k, 0.0) + abs(m)
     return state
 
 
 def _finish(record, cfg, model, times, states, outs):
-    """Hook: additions append their sections here. Base: nothing to add."""
+    """Additions append their sections here."""
+    rows, crossings = l0.audit(cfg["budgets"], states[0], states[-1])
+    record["l0_budgets"], record["boundary_audit"] = rows, crossings
+    record["status"], record["status_reason"] = l0.run_status(rows)
     return record
 
 
@@ -98,7 +108,7 @@ def run(cfg, code_paths=()):
     numeric = lambda s: {k: v for k, v in s.items() if not k.startswith("_")}
     obs = cfg["observations"]
     record = dict(
-        run_id=cfg["run_id"], status="COMPLETE",
+        run_id=cfg["run_id"], status="PENDING L0",
         configuration_record=cfg.describe(),
         equation=model.ident(),
         boundary_specification=cfg["boundary"].as_dict() if cfg["boundary"] else "NONE DECLARED",
