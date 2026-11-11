@@ -1,5 +1,5 @@
 id: CC_002_grid_onto_ode_convergence
-observation: "percolation grid with spotting 0.2 converges onto the mean-field ODE at drought >= 0.5 (run_8, reported; anchor CA_1)"
+observation: "percolation grid with spotting 0.2 converges onto the mean-field ODE at drought >= 0.5 (run_8, original code filed 2026-11-11; anchor CA_1, candidate)"
 trigger: "a convergence seen in one toy with chosen coefficients is a candidate anchor, not an anchor"
 slots:
   shared_constraint:
@@ -26,5 +26,6 @@ branch: void
 runs:
   - run_8
 open_issues:
-  - "no slot can be filled from here: run 8's code is not in this tree"
+  - "run 8's code is in the tree since 2026-11-11; no slot is filled yet: the convergence was read by eye, no tolerance declared, 10 reps, one seed"
+  - "a rebuild with a different design (relational-playground forest_fire_regime: L 64, 40 reps, window 0.05 fixed before the run) misses at drought 0.50 by 0.0026 and holds from 0.55; not entered as slot evidence here"
   - "long-range spotting makes every cell see the mean, which would be shared_constraint by construction; stated as the first thing to check, not as a finding"
