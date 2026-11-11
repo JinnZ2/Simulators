@@ -11,4 +11,6 @@ PASS  parameter_recovery       known 6 of 6
                                null[recovered] fp 0.0 tp 1.0 n 200 seed 0-4 PASS
 PASS  residual_regression      known 7 of 7
                                null[method_explains] fp 0.0 tp 1.0 n 60 seed 0-4 PASS
-5 tools gated, 0 failed
+PASS  equation_family_swap     known 8 of 8
+                               null[handoff] fp 0.0 tp 1.0 n 200 seed 0-4 PASS
+6 tools gated, 0 failed

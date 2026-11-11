@@ -1,14 +1,29 @@
 id: equation_family_swap
-code: void
+code: ledger/toolkit/equation_family_swap.py
 diagnoses:
   - "regime handoffs (METHOD BRIEF toolbox line: equation-family swap (ODE | percolation | Ising | spin glass | MaxEnt | branching process | random-matrix stability))"
-inputs: void
-outputs: void
-cannot_see: void
+  - "where two equation families give the same component different answers along a sweep, as sustained regimes, not single points"
+inputs:
+  - "the relational-playground engine (engine.py with run_family(family, component, sweep)), resolved from $RELATIONAL_PLAYGROUND_PATH, a sibling checkout, or the repo root"
+  - "a component id, a list of families from the METHOD BRIEF's own list (parsed from CLAUDE.md), a sweep"
+outputs:
+  - "per family: the engine's [{x, mean, sd}] along the sweep, or ENGINE_ABSENT / ENGINE_MALFORMED with every path looked at"
+  - "handoff(a, b): disagree_at, regime_at (runs of >= MIN_RUN disagreeing points), handoffs (regime starts and ends)"
+cannot_see:
+  - "anything, today: the engine is absent; every swap returns ENGINE_ABSENT and no result"
+  - "a regime shorter than MIN_RUN = 3 sweep points: read as noise"
+  - "families the engine implements differently from their names; the adapter checks the name, not the physics"
 other_domains_it_could_see_into: void
 used_in: []
 open_issues:
-  - "not built; logged under the gate rule of 2026-11-10, see ledger/NEEDS_TOOL.md"
-status: placeholder
-gate: void
-blocked_on: void
+  - "adapter only, per the work order. ENGINE STATE 2026-11-11: no relational-playground in this tree, on any branch of JinnZ2/Simulators, or among the repositories this session can list. No substitute engine is built"
+  - "the gate's known-answer case 'default search finds no engine' will turn red when the engine lands: that is the signal to run the swap on the owed triggers, not a defect"
+  - "first gate failed FP 0.07 (single-point disagreements on 21-point sweeps read as handoffs); repaired by defining a regime as >= 3 consecutive points"
+status: candidate
+gate:
+  verdict: PASS
+  known_answer: "8 of 8"
+  null_legs:
+    handoff: "fp 0.0 tp 1.0 n 200 seed 0-4 PASS"
+  command: "python3 tests/test_toolkit.py"
+blocked_on: "the relational-playground engine: absent from every branch and repo in scope, checked 2026-11-11. Every equation_family_swap row in ledger/NEEDS_TOOL.md stays open until it exists and the swap is run"
