@@ -5,7 +5,7 @@ holding the twelve outputs. Unknown parameters stop the run; nothing is filled.
 """
 import os
 from ..equations import base as eq
-from ..reporting import provenance, results
+from ..reporting import provenance, results, claims as cl
 from .. import l0
 
 REQUIRED = ("run_id", "system", "boundary", "model", "relationships", "controls", "environment",
@@ -97,6 +97,11 @@ def _finish(record, cfg, model, times, states, outs):
     rows, crossings = l0.audit(cfg["budgets"], states[0], states[-1])
     record["l0_budgets"], record["boundary_audit"] = rows, crossings
     record["status"], record["status_reason"] = l0.run_status(rows)
+    record["claims"] = cl.check(list(cfg.get("claims") or []) + [
+        cl.claim("final state %s" % record["observations_and_predictions"]["final_state"], "DERIVED",
+                 "integrated by runner.py from the stated configuration"),
+        cl.claim("budget verdicts %s" % [(r["budget"], r["verdict"]) for r in rows], "DERIVED", "l0.audit on this run"),
+    ] + ([cl.claim("observations supplied with the configuration", "OBSERVED", "config['observations']")] if cfg["observations"] is not None else []))
     record["expiry"] = dict(parameters=cfg["parameters"].expiry_report(), initial=cfg["initial"].expiry_report())
     from .. import known_answer_gate as gate
     t = gate.trust(model.name)

@@ -12,6 +12,10 @@ def check(record):
     missing = [o for o in OUTPUTS if o not in record]
     if missing:
         raise ValueError("record lacks outputs %s (write %r)" % (missing, NOT_RUN))
+    from . import claims
+    if "claims" not in record:
+        raise ValueError("record carries no claims list (ADDITION 5)")
+    claims.check(record["claims"])
     return record
 
 
