@@ -1,14 +1,32 @@
 id: ablation
-code: void
+code: ledger/toolkit/ablation.py
 diagnoses:
   - "what actually matters (METHOD BRIEF toolbox line: ablation (drop one variable))"
-inputs: void
-outputs: void
-cannot_see: void
+  - "a drop that removed more than one thing: an activity the caller did not name goes silent on every seed (CO_ABLATED), so the reading belongs to the set, not to the named component"
+  - "a component that changes outputs only jointly with another (interaction: NON_ADDITIVE)"
+  - "a component shown not to matter at the stated margin (DOES_NOT_MATTER) kept apart from one not shown either way (UNRESOLVED)"
+inputs:
+  - "simulate(seed, overrides) -> dict of scalar outputs"
+  - "ablations: list of {name, overrides, drops}; drops names every component the ablation intends to remove"
+  - "active: {component: fn(outputs) -> bool}, declared by the caller"
+  - "seeds (the base and every arm on the same seeds); per output delta and band for the paired reading"
+outputs:
+  - "per ablation: per-output paired verdicts (imported from multi_seed_ensemble), reading MATTERS | DOES_NOT_MATTER | UNRESOLVED, moved outputs, co_ablated, partial_co"
+  - "interaction: per output NON_ADDITIVE | ADDITIVE | UNRESOLVED from the paired residual (ab - a - b + base)"
+cannot_see:
+  - "an activity nobody declared: co_ablation reads only the `active` map it is given"
+  - "a component whose removal is absorbed by a compensating pathway shows DOES_NOT_MATTER on outputs; the internal flux has to be an output for the absorption to show"
+  - "every multi_seed_ensemble limit: effects under 5 standard errors read UNRESOLVED"
 other_domains_it_could_see_into: void
 used_in: []
 open_issues:
-  - "not built; logged under the gate rule of 2026-11-10, see ledger/NEEDS_TOOL.md"
-status: placeholder
-gate: void
+  - "the co_ablated null leg is close to construction (draws are activity tables, the rule is a set test); its content is that a declared drop never fires it"
+status: candidate
+gate:
+  verdict: PASS
+  known_answer: "7 of 7"
+  null_legs:
+    matters: "fp 0.0 tp 1.0 n 200 seed 0-4 PASS"
+    co_ablated: "fp 0.0 tp 1.0 n 200 seed 0-4 PASS"
+  command: "python3 tests/test_toolkit.py"
 blocked_on: void
