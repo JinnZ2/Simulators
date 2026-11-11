@@ -97,6 +97,7 @@ def _finish(record, cfg, model, times, states, outs):
     rows, crossings = l0.audit(cfg["budgets"], states[0], states[-1])
     record["l0_budgets"], record["boundary_audit"] = rows, crossings
     record["status"], record["status_reason"] = l0.run_status(rows)
+    record["expiry"] = dict(parameters=cfg["parameters"].expiry_report(), initial=cfg["initial"].expiry_report())
     from .. import known_answer_gate as gate
     t = gate.trust(model.name)
     record["model_trust"] = "TRUSTED: " + t["evidence"] if t["trusted"] else "UNTRUSTED: " + t["evidence"]
