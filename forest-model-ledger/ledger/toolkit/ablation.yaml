@@ -11,7 +11,7 @@ inputs:
   - "active: {component: fn(outputs) -> bool}, declared by the caller"
   - "seeds (the base and every arm on the same seeds); per output delta and band for the paired reading"
 outputs:
-  - "per ablation: per-output paired verdicts (imported from multi_seed_ensemble), reading MATTERS | DOES_NOT_MATTER | UNRESOLVED, moved outputs, co_ablated, partial_co"
+  - "per ablation: per-output paired verdicts (imported from multi_seed_ensemble), reading MATTERS (resolved and material) | RESOLVED_IMMATERIAL | DOES_NOT_MATTER | UNRESOLVED, moved outputs, co_ablated, partial_co"
   - "interaction: per output NON_ADDITIVE | ADDITIVE | UNRESOLVED from the paired residual (ab - a - b + base)"
 cannot_see:
   - "an activity nobody declared: co_ablation reads only the `active` map it is given"
@@ -20,12 +20,13 @@ cannot_see:
 other_domains_it_could_see_into: void
 used_in:
   - run_14
+  - run_15
 open_issues:
   - "the co_ablated null leg is close to construction (draws are activity tables, the rule is a set test); its content is that a declared drop never fires it"
 status: candidate
 gate:
   verdict: PASS
-  known_answer: "7 of 7"
+  known_answer: "8 of 8"
   null_legs:
     matters: "fp 0.0 tp 1.0 n 200 seed 0-4 PASS"
     co_ablated: "fp 0.0 tp 1.0 n 200 seed 0-4 PASS"

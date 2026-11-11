@@ -16,7 +16,7 @@ slots:
       provenance: "PROPOSED: this session, from the card's own open issue (2026-11-11); sensitivity not stated anywhere in the tree, left void"
   statistical_artifact:
     state: supported
-    evidence: "at 3 seeds the smallest detectable change is 4.0 to 8.6 percent on eight outputs and 1.2 percent on fire export, against a 10 percent nudge. 10 ALL_INSIDE nudges sit at 1.2 to 1.9 sd (kT x0.9, b x1.1, b x0.9, Kf x1.1, Kf x0.9, W_dry x1.1, et x1.1, et x0.9, drain x1.1, drain x0.9): unresolved, not shown inert"
+    evidence: "at 3 seeds the smallest detectable change is 4.0 to 8.6 percent on eight outputs and 1.2 percent on fire export, against a 10 percent nudge. 10 ALL_INSIDE nudges sit at 1.2 to 1.9 sd (kT x0.9, b x1.1, b x0.9, Kf x1.1, Kf x0.9, W_dry x1.1, et x1.1, et x0.9, drain x1.1, drain x0.9): unresolved, not shown inert. run_15 (multi_seed_ensemble, 20 paired seeds): of the 33, 18 move at least one output by a material amount (> 0.5 sd, resolved), including every decomposition and water nudge (0.6 to 2.1 sd): hidden in noise at three unpaired seeds"
     expiry_condition: void
   numerical_artifact:
     state: ruled_out
@@ -24,7 +24,7 @@ slots:
     expiry_condition: void
   low_dim_projection:
     state: supported
-    evidence: "grasses are gone by year 19 of 300, and eight of nine outputs are read over years 100-300 or carry no grass term. The ten grass-side nudges (uG, KG, aG, aT, kill_G) can reach only grass_gone_yr and move it 0.0 to 0.4 sd"
+    evidence: "grasses are gone by year 19 of 300, and eight of nine outputs are read over years 100-300 or carry no grass term. The ten grass-side nudges (uG, KG, aG, aT, kill_G) can reach only grass_gone_yr and move it 0.0 to 0.4 sd. run_15: resolved on common seeds but immaterial on the late outputs (ABSORBED 7 of the 10 grass-side nudges); ablation with grass removed entirely leaves every late output EQUIVALENT or UNRESOLVED and moves only fire_out and grass_gone_yr"
     expiry_condition: void
   none_of_above:
     state: void
@@ -35,7 +35,10 @@ recheck_when: void
 branch: void
 runs:
   - run_11
+  - run_15
 open_issues:
   - "local_normal_form not looked at. First thing to check: the fire cycle as a relaxation oscillator. p_ign x1.1 / x0.9 moves fires 0.5 / 0.3 sd while fuel_th, burn and vol move them 3.1 to 4.2 sd, which is what a threshold reset would give; no run separates it"
   - "the three supported slots are not separated from each other: no ablation tool exists. A run at larger nudges and 10 seeds would split underpowered from absorbed"
+  - "2026-11-11 (run_15): split done with multi_seed_ensemble and ablation. HIDDEN_IN_NOISE 18, ABSORBED 9, SEED_SPECIFIC 2, INERT 2 (p_ign x1.1, kill_G x1.1), UNRESOLVED 2. The HIDDEN / ABSORBED line is a 0.5 sd materiality choice; three mirror pairs straddle it"
+  - "p_ign stays inside noise at 20 paired seeds while W_dry, fuel_th, burn and vol move: what the threshold-reset reading predicts; local_normal_form stays void until equation_family_swap exists"
   - "decomposition (kT, kG, Wh) and water (season, et, drain, drought_sd) nudges are inside noise with no slot assigned to them specifically"

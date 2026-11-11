@@ -16,6 +16,11 @@ What it reads, per output, over a seed ensemble:
                      UNRESOLVED   none of the above: hidden in noise at this n
                      seed_specific  not MOVED, signs of d_s mixed, and some |d_s| > band
                                     (the effect exists in some realisations and not as a mean)
+                     material     |mean| > delta (None when no delta is given). Separate from
+                                  the verdict: on common seeds a deterministic shift far below
+                                  any noise band resolves at a huge z (run_15: aG x1.1 moves
+                                  fire_out by -0.001, 0.0006 sd, z -55). MOVED says the shift
+                                  is resolved; material says it is large. Never read one as the other.
   variance_spike     along a swept control value, indices where sd > K_SPIKE * median sd
 
 Thresholds, all [CHOICE] and printed by every caller:
@@ -88,7 +93,7 @@ def paired_one(ds, delta=None, band=None):
     n = len(ds)
     m = _mean(ds)
     if all(d == 0 for d in ds):
-        return dict(n=n, mean=0.0, se=0.0, z=None, verdict="EXACT_ZERO", seed_specific=False)
+        return dict(n=n, mean=0.0, se=0.0, z=None, verdict="EXACT_ZERO", material=False, seed_specific=False)
     s = _sd(ds) if n > 1 else None
     se = s / math.sqrt(n) if s else 0.0
     if se == 0.0:
@@ -103,7 +108,9 @@ def paired_one(ds, delta=None, band=None):
             verdict = "UNRESOLVED"
     mixed = any(d > 0 for d in ds) and any(d < 0 for d in ds)
     big = band is not None and any(abs(d) > band for d in ds)
-    return dict(n=n, mean=m, se=se, z=z, verdict=verdict, seed_specific=(verdict != "MOVED" and mixed and big))
+    material = None if delta is None else abs(m) > delta
+    return dict(n=n, mean=m, se=se, z=z, verdict=verdict, material=material,
+                seed_specific=(verdict != "MOVED" and mixed and big))
 
 
 def paired(base, arm, delta=None, band=None):
@@ -145,6 +152,7 @@ def known_cases():
     same = {s: dict(x=base[s]["x"]) for s in range(20)}
     equiv = {s: dict(x=base[s]["x"] + r.gauss(0, 0.01)) for s in range(20)}
     alt = {s: dict(x=base[s]["x"] + (3.0 if s % 2 else -3.0)) for s in range(20)}
+    tiny_shift = {s: dict(x=base[s]["x"] + 0.001) for s in range(20)}
     band = dict(x=2.0)
     return [
         ("constant output reads CONSTANT", "CONSTANT", lambda: seed_invariance(flat)["x"]),
@@ -155,6 +163,9 @@ def known_cases():
         ("tiny paired noise reads EQUIVALENT", "EQUIVALENT", lambda: paired(base, equiv, dict(x=0.5))["x"]["verdict"]),
         ("sign-alternating effect is seed_specific", True, lambda: paired(base, alt, dict(x=0.5), band)["x"]["seed_specific"]),
         ("sign-alternating effect is not MOVED (silent)", False, lambda: paired(base, alt, dict(x=0.5), band)["x"]["verdict"] == "MOVED"),
+        ("deterministic 0.001 shift on common seeds is resolved (MOVED)", "MOVED", lambda: paired(base, tiny_shift, dict(x=0.5))["x"]["verdict"]),
+        ("the same shift is not material at delta 0.5 (silent)", False, lambda: paired(base, tiny_shift, dict(x=0.5))["x"]["material"]),
+        ("planted 5.0 shift is material", True, lambda: paired(base, shift, dict(x=0.5))["x"]["material"]),
         ("planted variance spike found at index 4", [4], lambda: variance_spike([1.0, 1.1, 0.9, 1.0, 6.0, 1.05])),
         ("flat variance has no spike (silent)", [], lambda: variance_spike([1.0, 1.1, 0.9, 1.0, 1.2, 1.05])),
     ]

@@ -12,7 +12,8 @@ Drop one variable, see what actually matters -- and check that one was dropped.
 
   per ablation, against the base on the SAME seeds (multi_seed_ensemble.paired):
     per output   MOVED | EXACT_ZERO | EQUIVALENT | UNRESOLVED   (imported, not copied)
-    reading      MATTERS            some output MOVED
+    reading      MATTERS            some output MOVED by a material amount (|mean| > delta)
+                 RESOLVED_IMMATERIAL  some output resolved on common seeds, none material
                  DOES_NOT_MATTER    every output EXACT_ZERO or EQUIVALENT
                  UNRESOLVED         neither: not shown to matter, not shown not to
     co_ablated   activities active in the base on some seed and inactive on every
@@ -39,9 +40,12 @@ def _runs(simulate, overrides, seeds):
 
 
 def reading(per_output):
+    """MATTERS needs a resolved AND material move (material None = no margin given: resolved counts)."""
     vs = [v["verdict"] for v in per_output.values()]
-    if "MOVED" in vs:
+    if any(v["verdict"] == "MOVED" and v.get("material") is not False for v in per_output.values()):
         return "MATTERS"
+    if "MOVED" in vs:
+        return "RESOLVED_IMMATERIAL"
     if all(v in ("EXACT_ZERO", "EQUIVALENT") for v in vs):
         return "DOES_NOT_MATTER"
     return "UNRESOLVED"
@@ -137,6 +141,8 @@ def known_cases():
         ("the same drop with z declared in drops is not flagged (silent)", [], lambda: row["x1 dropped, z named"]["co_ablated"]),
         ("planted x1*x2 term reads NON_ADDITIVE", "NON_ADDITIVE", lambda: inter["reading"]["y"]),
         ("purely additive toy reads ADDITIVE (silent)", "ADDITIVE", lambda: add["reading"]["y"]),
+        ("a resolved but immaterial shift reads RESOLVED_IMMATERIAL, not MATTERS", "RESOLVED_IMMATERIAL",
+         lambda: reading(mse.paired({s: dict(y=float(s)) for s in range(10)}, {s: dict(y=s + 1e-3) for s in range(10)}, dict(y=0.5)))),
     ]
 
 
