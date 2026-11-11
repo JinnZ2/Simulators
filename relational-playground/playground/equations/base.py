@@ -76,5 +76,5 @@ def get(name):
 
 
 def load_all():
-    from . import linear, nonlinear, network, energy, boundary, stochastic  # noqa: F401
+    from . import linear, nonlinear, network, energy, boundary, stochastic, percolation, branching  # noqa: F401
     return sorted(REGISTRY)

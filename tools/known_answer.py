@@ -786,6 +786,7 @@ EXPECTED_METRICS = (
     "route-independence/lag_count.py::lag_years",
     "relational-playground/playground/l0.py::misclosure",
     "relational-playground/playground/harness.py::harness_class",
+    "relational-playground/playground/equations/branching_math.py::extinction_probability",
     "route-independence/enclosure_caveat_register.py::caveat_rate",
     "route-independence/settlement_split.py::net_positions",
     "revision-survival/revision_survival.py::delta",
@@ -2181,7 +2182,7 @@ def _seed_lag_count():
 def _rp_load(fname):
     import importlib.util
     path = os.path.join(ROOT, "relational-playground", "playground", fname)
-    spec = importlib.util.spec_from_file_location("_rp_" + fname[:-3], path)
+    spec = importlib.util.spec_from_file_location("_rp_" + os.path.basename(fname)[:-3], path)
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     return mod
@@ -2198,7 +2199,28 @@ def _rp_harness_class(fp, tp):
     return _rp_load("harness.py").harness_class(fp, tp)
 
 
+def _rp_extinction(R):
+    """relational-playground/playground/equations/branching_math.py::extinction_probability,
+    imported; rounded to 9 places."""
+    return round(_rp_load(os.path.join("equations", "branching_math.py")).extinction_probability(R), 9)
+
+
 def _seed_relational_playground():
+    register(
+        "relational-playground/playground/equations/branching_math.py::extinction_probability",
+        _rp_extinction,
+        [
+            case("subcritical", (0.5,), 1.0, "R <= 1: every line dies out"),
+            case("critical", (1.0,), 1.0, "R = 1 still dies out with certainty"),
+            case("R = 2 ln 2", (1.3862943611198906,), 0.5,
+                 "q = 1/2 solves q = exp(R(q-1)) exactly when R = 2 ln 2: exp(-ln 2) = 1/2"),
+            case("R = 2", (2.0,), 0.20318787,
+                 "smallest root of q = exp(2(q-1)); 0.2031878699... is the standard value "
+                 "(-W(-2 e^-2)/2). A solver returning the trivial root q = 1 fails here"),
+        ],
+        note=("Relational playground ADDITION 7. q = 1 is always a root, so a solver "
+              "that finds the wrong root passes the first two cases and fails the last two."),
+    )
     register(
         "relational-playground/playground/l0.py::misclosure",
         _rp_misclosure,

@@ -75,6 +75,7 @@ MANIFEST = (
     "route-independence/lag_count.py::lag_years",
     "relational-playground/playground/l0.py::misclosure",
     "relational-playground/playground/harness.py::harness_class",
+    "relational-playground/playground/equations/branching_math.py::extinction_probability",
     "route-independence/enclosure_caveat_register.py::caveat_rate",
     "route-independence/settlement_split.py::net_positions",
     "revision-survival/revision_survival.py::delta",

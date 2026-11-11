@@ -36,12 +36,12 @@ def plant(model, kind):
         if kind == "leak":
             d = dict(out.state_changes)
             d[names[0]] -= 0.02 * abs(state[names[0]]) + 0.01
-            return ModelOutput(d, transfers=out.transfers)
+            return ModelOutput(d, transfers=out.transfers, new_config=out.new_config)
         if kind == "coef":
             tr = list(out.transfers)
             n, s, t, r = tr[0]
             tr[0] = (n, s, t, 1.1 * r)
-            return ModelOutput(from_transfers(tr, names), transfers=tr)
+            return ModelOutput(from_transfers(tr, names), transfers=tr, new_config=out.new_config)
         raise ValueError(kind)
     return eq.Model(model.name + "+" + kind, model.family, model.version, fn, model.kind, model.requires)
 
@@ -62,9 +62,10 @@ def _fires(model, case, make_config):
     from . import l0
     rows, _ = l0.audit(cfg["budgets"], states[0], states[-1])
     leak = any(r["verdict"] == "LEAK" for r in rows)
-    got = states[-1][case["output"]]
-    off = abs(got - case["expected"]) > case["tol"] * max(1.0, abs(case["expected"]))
-    return leak or off, dict(leak=leak, got=got, expected=case["expected"])
+    exp = case["expected"] if isinstance(case["expected"], dict) else {case["output"]: case["expected"]}
+    got = {k: states[-1][k] for k in exp}
+    off = any(abs(got[k] - v) > case["tol"] * max(1.0, abs(v)) for k, v in exp.items())
+    return leak or off, dict(leak=leak, got=got, expected=exp)
 
 
 def certify(model_name, make_config, seed=20261110):
@@ -160,7 +161,29 @@ def _mean_reverting(rng):
                 live=dict(mass=["x"]), output="x", expected=mu + (x0 - mu) * (1 - th * dt) ** n, tol=1e-9)
 
 
-for _n, _b in (("linear", _linear), ("allee", _allee), ("network", _network), ("energy_store", _energy),
+def _percolation(rng):
+    L = rng.randrange(4, 9)
+    init = dict(unassigned=L * L, unburned=0, burning=0, burned=0, bare=0)
+    if rng.random() < 0.5:        # every cell flammable: the whole grid burns from the lit edge
+        return dict(model="percolation", params=dict(L=L, p_flammable=1.0, spot=0.0, ignition="left_edge", grid="RANDOM"),
+                    initial=init, t_end=4 * L, dt=1.0, live=dict(mass=list(init)), output="burned",
+                    expected=dict(burned=L * L, unburned=0, bare=0, burning=0), tol=1e-9)
+    w = rng.randrange(1, L - 1)   # a bare wall in column w: only the columns left of it burn
+    grid = [[0 if j == w else 1 for j in range(L)] for _ in range(L)]
+    return dict(model="percolation", params=dict(L=L, p_flammable=0.0, spot=0.0, ignition="left_edge", grid=grid),
+                initial=init, t_end=4 * L, dt=1.0, live=dict(mass=list(init)), output="burned",
+                expected=dict(burned=L * w, unburned=L * (L - w - 1), bare=L, burning=0), tol=1e-9)
+
+
+def _branching(rng):
+    n0, k, n = rng.randrange(1, 6), rng.randrange(0, 4), rng.randrange(2, 6)
+    retired = n0 * n if k == 1 else n0 * (k ** n - 1) // (k - 1) if k > 1 else n0
+    return dict(model="branching", params=dict(R=k, offspring="fixed", cap=10 ** 9), initial=dict(active=n0, retired=0),
+                t_end=float(n), dt=1.0, live=dict(mass=["active", "retired"]), output="active",
+                expected=dict(active=n0 * k ** n, retired=retired), tol=1e-9)
+
+
+for _n, _b in (("percolation", _percolation), ("branching", _branching), ("linear", _linear), ("allee", _allee), ("network", _network), ("energy_store", _energy),
                ("permeable", _permeable), ("mean_reverting", _mean_reverting)):
     add_builder(_n, _b)
 
