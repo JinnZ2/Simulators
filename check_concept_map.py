@@ -10,6 +10,8 @@ A location is {repo, ref, path, role, builder, note}. Simulators paths with ref 
 are read from this working tree. Other repos are read with `git cat-file -e ref:path`
 from a sibling checkout (../<repo>, ../jinnz2/<repo>, or $CONCEPT_MAP_REPOS/<repo>).
 No checkout: NOT_CHECKED, never OK. A pinned `tip` that no longer matches the ref is STALE.
+Collision evidence is a URL or note (not checked) or {repo, path, ref}, shown as repo:path@ref and
+checked: the ref must resolve, contain `tip_contains` if given, hold the path, and match `sha256` if given.
 No code is moved by this file. Stdlib only.
 """
 import json, os, subprocess, sys
@@ -117,8 +119,61 @@ def render_collisions(data):
               "- resolution: %s" % r["resolution"]]
         if r.get("note"):
             o.append("- note: %s" % r["note"])
-        o += ["- evidence: " + "; ".join(r["evidence"]), ""]
+        o += ["- evidence: " + "; ".join(ev_text(e) for e in r["evidence"]), ""]
     return "\n".join(o)
+
+
+def ev_text(e):
+    if isinstance(e, str):
+        return e
+    return "`%s:%s%s`" % (e["repo"], e["path"], "@" + e["ref"] if e.get("ref") else "")
+
+
+def check_evidence(e, here=HERE):
+    """Evidence written as path@branch-or-commit. -> (state, detail).
+    A ref that no longer resolves in a present checkout is GONE: cleanup cannot orphan evidence silently."""
+    repo, ref, path = e["repo"], e.get("ref"), e["path"]
+    d = here if repo == "Simulators" else checkout(repo)
+    if d is None:
+        return "NOT_CHECKED", "no checkout of %s" % repo
+    if not ref:
+        return ("OK", "") if os.path.exists(os.path.join(d, path)) else ("MISSING", "not in the working tree")
+    rc, _ = git(d, "rev-parse", "--verify", "--quiet", ref + "^{commit}")
+    if rc:
+        return "GONE", "ref %s does not resolve (deleted, or not fetched: git fetch origin)" % ref
+    if e.get("tip_contains"):
+        rc, _ = git(d, "merge-base", "--is-ancestor", e["tip_contains"], ref)
+        if rc:
+            return "GONE", "%s no longer contains %s" % (ref, e["tip_contains"])
+    rc, _ = git(d, "cat-file", "-e", "%s:%s" % (ref, path))
+    if rc:
+        return "MISSING", "not at %s" % ref
+    if e.get("sha256"):
+        import hashlib
+        blob = subprocess.run(["git", "-C", d, "show", "%s:%s" % (ref, path)], capture_output=True).stdout
+        if hashlib.sha256(blob).hexdigest() != e["sha256"]:
+            return "CHANGED", "sha256 differs from the pinned value"
+    return "OK", ""
+
+
+def collision_evidence(data, strict=False, quiet=False):
+    fails, ok, nc = [], 0, 0
+    for r in data["rows"]:
+        for e in r.get("evidence") or []:
+            if isinstance(e, str):
+                continue
+            st, why = check_evidence(e)
+            if st == "OK":
+                ok += 1
+            elif st == "NOT_CHECKED":
+                nc += 1
+                if not quiet:
+                    print("NOT_CHECKED  %s: %s (%s)" % (r["concept"], ev_text(e), why))
+                if strict:
+                    fails.append("NOT_CHECKED under --strict: %s" % ev_text(e))
+            else:
+                fails.append("%s: evidence %s %s (%s)" % (r["concept"], st, ev_text(e), why))
+    return fails, ok, nc
 
 
 def collision_problems(data, md_text):
@@ -195,6 +250,24 @@ def selftest(data):
         hit = bool(collision_problems(d, base_md if "out of date" in name else render_collisions(d)))
         n += 1; bad += 0 if hit else 1
         print("%s  %s" % ("fires " if hit else "SILENT", name))
+    pinned_ev = [e for r in cd["rows"] for e in r["evidence"] if isinstance(e, dict) and e.get("ref")]
+    live = [e for e in pinned_ev if check_evidence(e)[0] == "OK"]
+    if live:
+        for name, mut, word in (("evidence ref deleted", lambda e: e.update(ref="origin/no-such-branch"), "GONE"),
+                                ("evidence path removed", lambda e: e.update(path="no/such/file"), "MISSING"),
+                                ("branch lost the pinned commit", lambda e: e.update(tip_contains="0" * 40), "GONE")):
+            e = dict(live[0]); mut(e)
+            hit = check_evidence(e)[0] == word
+            n += 1; bad += 0 if hit else 1
+            print("%s  %s" % ("fires " if hit else "SILENT", name))
+        sh = [e for e in live if e.get("sha256")]
+        if sh:
+            e = dict(sh[0]); e["sha256"] = "0" * 64
+            hit = check_evidence(e)[0] == "CHANGED"
+            n += 1; bad += 0 if hit else 1
+            print("%s  %s" % ("fires " if hit else "SILENT", "pinned sha256 differs"))
+    else:
+        print("NOT_RUN  evidence plants (no checkout holding an evidence ref)")
     print("planted %d   silent %d" % (n, bad))
     return bad
 
@@ -210,7 +283,9 @@ if __name__ == "__main__":
     md = open(MD, encoding="utf-8").read() if os.path.exists(MD) else ""
     f, _ = run(data, md, strict="--strict" in sys.argv)
     cf = collision_problems(cdata, open(CMD, encoding="utf-8").read() if os.path.exists(CMD) else "")
+    ef, eok, enc = collision_evidence(cdata, strict="--strict" in sys.argv)
+    cf += ef
     for x in cf:
         print("FAIL  " + x)
-    print("collisions %d   failed %d" % (len(cdata["rows"]), len(cf)))
+    print("collisions %d   evidence paths OK %d   NOT_CHECKED %d   failed %d" % (len(cdata["rows"]), eok, enc, len(cf)))
     sys.exit(1 if f or cf else 0)

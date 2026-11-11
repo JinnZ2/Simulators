@@ -11,7 +11,18 @@
    "evidence": [
     "https://github.com/JinnZ2/thermodynamic-accountability-framework/pull/82",
     "https://github.com/JinnZ2/thermodynamic-accountability-framework/pull/85",
-    "TAF branches claude/unknown-axis-followup-2 (b85433c), claude/not-determinable-reason (92cd578)"
+    {
+     "repo": "thermodynamic-accountability-framework",
+     "path": "calibration",
+     "ref": "origin/claude/unknown-axis-followup-2",
+     "tip_contains": "a2c5d99"
+    },
+    {
+     "repo": "thermodynamic-accountability-framework",
+     "path": "calibration",
+     "ref": "origin/claude/not-determinable-reason",
+     "tip_contains": "92cd578"
+    }
    ]
   },
   {
@@ -23,8 +34,16 @@
    "resolution": "OPEN: cross-run pending",
    "evidence": [
     "https://github.com/JinnZ2/Simulators/pull/257",
-    "study-aperture@origin/main:experimental/playground/",
-    "CONCEPT_MAP.md row 'playground'"
+    {
+     "repo": "study-aperture",
+     "path": "experimental/playground",
+     "ref": "origin/main"
+    },
+    {
+     "repo": "Simulators",
+     "path": "CONCEPT_MAP.md",
+     "ref": null
+    }
    ]
   },
   {
@@ -38,7 +57,26 @@
    "evidence": [
     "https://github.com/JinnZ2/thermodynamic-accountability-framework/pull/81",
     "https://github.com/JinnZ2/thermodynamic-accountability-framework/pull/82",
-    "https://github.com/JinnZ2/thermodynamic-accountability-framework/pull/84"
+    "https://github.com/JinnZ2/thermodynamic-accountability-framework/pull/84",
+    {
+     "repo": "thermodynamic-accountability-framework",
+     "path": "calibration/pipeline.py",
+     "ref": "origin/claude/silent-fill-register",
+     "tip_contains": "ed275ef"
+    },
+    {
+     "repo": "thermodynamic-accountability-framework",
+     "path": "calibration/pipeline.py",
+     "ref": "origin/claude/unknown-axis-followup",
+     "tip_contains": "a2c5d99"
+    },
+    {
+     "repo": "thermodynamic-accountability-framework",
+     "path": "calibration/pipeline.py",
+     "ref": "origin/claude/not-determinable-reason",
+     "tip_contains": "92cd578"
+    },
+    "TAF_CLEANUP_PHASE1_INVENTORY.md: NOT COMMITTED as of 2026-11-11 (written to a cleanup-session scratchpad); to be linked at TAF docs/cleanup/ when it lands"
    ]
   },
   {
@@ -61,12 +99,29 @@
    "collided": "Kimi audit section 1.1 'Provenance map of the dialogue' assigns P11 (physics common denominator) to DeepSeek. In the dialogue DeepSeek's reply opens 'You're right, and the correction matters' and says 'Your physics point is the strongest substrate-neutral anchor available', which places the point with the human. The human source has no row in the table; the section's prose names an 'unseen interlocutor'",
    "found": "chat-side read of the pinned texts, then a first-hand check by the forest-ledger session (FML_035); the quoted lines were re-read in this session on 2026-11-11 (audit table line 43; chat paste lines 425 and 436)",
    "resolution": "recorded; uncorrected in source",
-   "note": "The texts are on the PR 256 branch, not in this tree. The delivered commit id 4cf10ec does not resolve in this checkout; the PR tip read here is d402fa8.",
+   "note": "Refs point at claude/forest-toolkit-build, which contains the PR 256 tip d402fa8 (also tagged archive/pr256-tip); both text files are byte-identical there and match their MANIFEST sha256. 4cf10ec is an earlier reported tip, unresolved in this checkout.",
    "evidence": [
     "https://github.com/JinnZ2/Simulators/pull/256",
-    "forest-model-ledger/ledger/toolkit/cases/texts/kimi_substrate_neutral_intelligence_audit.md (section 1.1)",
-    "forest-model-ledger/ledger/toolkit/cases/texts/chat_paste_2026-11-10.txt",
-    "forest-model-ledger/CLAIM_TABLE.md FML_035 (same branch)"
+    {
+     "repo": "Simulators",
+     "path": "forest-model-ledger/ledger/toolkit/cases/texts/kimi_substrate_neutral_intelligence_audit.md",
+     "ref": "origin/claude/forest-toolkit-build",
+     "tip_contains": "d402fa8",
+     "sha256": "86945968c31d3c3bbf289ed78ab918d8d7af6a2d978df22b6f0a6a5b9a60b7c8"
+    },
+    {
+     "repo": "Simulators",
+     "path": "forest-model-ledger/ledger/toolkit/cases/texts/chat_paste_2026-11-10.txt",
+     "ref": "origin/claude/forest-toolkit-build",
+     "tip_contains": "d402fa8",
+     "sha256": "42a206e2603b814f89fd694e31c566c90a07bf606f28d89802149f33fc0444b4"
+    },
+    {
+     "repo": "Simulators",
+     "path": "forest-model-ledger/CLAIM_TABLE.md",
+     "ref": "origin/claude/forest-toolkit-build",
+     "tip_contains": "d402fa8"
+    }
    ]
   }
  ]
