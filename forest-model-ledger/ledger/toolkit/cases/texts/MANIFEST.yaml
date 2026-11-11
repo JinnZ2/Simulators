@@ -10,3 +10,11 @@ texts:
     sha256: 86945968c31d3c3bbf289ed78ab918d8d7af6a2d978df22b6f0a6a5b9a60b7c8
     source: "operator upload, OKComputer_Deep_Research_Audit.zip (sha256 223655cc3f6936ba8b386159c47385e9ba6415ef2d0aa97626a920a79d038892), member 'Substrate-Neutral Intelligence Audit.md'"
     note: "renamed only (spaces removed); bytes as delivered. Its five figures are recorded in FIGURES.md by name and hash, not checked in"
+  - file: kimi_organizational_mode_probe_spec_PARKED.md
+    sha256: 7374ca15577d31beba425330f56ab15b66504669d0c8f91fc957dc4fbf039ffe
+    source: "operator upload 2026-11-11, 'organizational-mode-probe-spec-PARKED.md' (Kimi, PARKED spec); filed byte-identical as study-aperture experimental/rotl_specs/organizational-mode-probe-spec-PARKED.md (PR #29, commit 42c0c4a)"
+    note: "renamed only (kimi_ prefix, so support_match reads it in its own voice); bytes as delivered. Case e's attributing text"
+  - file: study_aperture_publication_provenance_README.md
+    sha256: 5eb4e94cb44c0c581593fc588dc298aa70f35e1fa00e04b9415702e7f7560739
+    source: "JinnZ2/study-aperture main at c26fbd2, experimental/publication_provenance/README.md (blob dc65d8caed0cefaa1cb066f45f731c3fbdcdb1b1), git show, not edited"
+    note: "the text the probe spec's citation [2] names; case e's cited text. The token SCREENED_NO_INDICATORS_FOUND occurs 0 times in it"

@@ -1,0 +1,92 @@
+# Case e, first-hand, NOT author-written: the attributing text is a Kimi spec, the cited text is
+# a study-aperture README; neither was written by the session that built support_match or by this one.
+# Kept in its own file so attribution_cases_firsthand.yaml (cases a-d, paired with second-hand
+# records by tests/test_l0.py) and the samples of runs 13, 16 and 19 do not move. Read by runs/run_22.py.
+cases:
+  - id: e_kimi_probe_citation_verified
+    deviation: "the probe spec says probe failure mirrors 'the publication-provenance screening vocabulary (SCREENED_NO_INDICATORS_FOUND \u2260 safe) [2]', and tags [2] VERIFIED as the 'This does not' section of experimental/publication_provenance/README.md; that section exists and the token is not in it, nor anywhere in that file"
+    first_attribution: OTHER_SYSTEM
+    evidence_for_it: "citation [2]: experimental/publication_provenance/README.md, section 'This does not', fetched raw from main 2026-11-12, tagged VERIFIED"
+    alternatives_examined: []
+    changed_after_challenge: UNKNOWN
+    self_detected: "NO"
+    open_slot_filled: UNKNOWN
+    fits_question: IN_SCOPE
+    locators:
+      - file: kimi_organizational_mode_probe_spec_PARKED.md
+        line: "11"
+        quote: "(SCREENED_NO_INDICATORS_FOUND \u2260 safe) [2]"
+      - file: kimi_organizational_mode_probe_spec_PARKED.md
+        line: "74"
+        quote: "[2] VERIFIED \u2014 `experimental/publication_provenance/README.md` \"This does not\" screening vocabulary"
+      - file: study_aperture_publication_provenance_README.md
+        line: "149"
+        quote: "## This does not"
+      - file: study_aperture_publication_provenance_README.md
+        line: "151"
+        quote: "- **Authenticate a publisher or model session:** supplied identity metadata,"
+      - file: study_aperture_publication_provenance_README.md
+        line: "152"
+        quote: "URLs, capture receipts and matching hashes can all be consistently wrong."
+      - file: study_aperture_publication_provenance_README.md
+        line: "153"
+        quote: "- **Judge meaning or scientific support:** paraphrase fidelity, author"
+      - file: study_aperture_publication_provenance_README.md
+        line: "154"
+        quote: "endorsement, measurand scope, causal validity and physical adequacy require"
+      - file: study_aperture_publication_provenance_README.md
+        line: "155"
+        quote: "additional inspection."
+      - file: study_aperture_publication_provenance_README.md
+        line: "156"
+        quote: "- **Authorize diagnostics or action:** every result explicitly leaves claim"
+      - file: study_aperture_publication_provenance_README.md
+        line: "157"
+        quote: "support and physical adequacy `NOT_ASSESSED`, and design checks,"
+      - file: study_aperture_publication_provenance_README.md
+        line: "158"
+        quote: "independence and deployment `NOT_AUTHORIZED`."
+      - file: study_aperture_publication_provenance_README.md
+        line: "159"
+        quote: "- **Repair an original record:** possible donor matches remain hints; the"
+      - file: study_aperture_publication_provenance_README.md
+        line: "160"
+        quote: "original identity, quotation, support and decision stay inspectable."
+      - file: study_aperture_publication_provenance_README.md
+        line: "161"
+        quote: "- **Change parent enforcement:** this is an explicit audit API and CLI, not"
+      - file: study_aperture_publication_provenance_README.md
+        line: "162"
+        quote: "an automatic import, new parent support state, or mandatory `assess.py`"
+      - file: study_aperture_publication_provenance_README.md
+        line: "163"
+        quote: "ingestion rule. A parent assessment that never calls this audit is not"
+      - file: study_aperture_publication_provenance_README.md
+        line: "164"
+        quote: "retroactively source-verified. No source-authentication guarantee is added"
+      - file: study_aperture_publication_provenance_README.md
+        line: "165"
+        quote: "to the equation library or its diagnostic certificates."
+      - file: study_aperture_publication_provenance_README.md
+        line: "166"
+        quote: "- **Guarantee atomic recovery from disk failure:** existing directories are"
+      - file: study_aperture_publication_provenance_README.md
+        line: "167"
+        quote: "refused; a low-level write failure can leave a partial new directory."
+      - file: study_aperture_publication_provenance_README.md
+        line: "168"
+        quote: "Preserve it as a failed attempt and use a fresh directory for a retry."
+      - file: study_aperture_publication_provenance_README.md
+        line: "170"
+        quote: "The library remains stdlib-only and offline. It follows explicit declarations"
+      - file: study_aperture_publication_provenance_README.md
+        line: "171"
+        quote: "and preserves the conditions under which this particular binding was tested,"
+      - file: study_aperture_publication_provenance_README.md
+        line: "172"
+        quote: "without forcing mathematical descriptions or studies into a universal rank."
+    provenance:
+      hand: first
+      source: "this session (filing the spec in study-aperture PR #29), against texts/kimi_organizational_mode_probe_spec_PARKED.md and texts/study_aperture_publication_provenance_README.md"
+      text_supplied: "true"
+    note: "the record schema was built for credit between speakers; here the 'source' is a document a citation names. OTHER_SYSTEM is the nearest class, forced, not read. self_detected NO: the spec's own correction record (EXP-002) does not cover this tag. open_slot_filled UNKNOWN: whether the token was supplied from elsewhere (the frontier sweep uses it) and attached to [2] is not settled by the text. Expected before the run, written by the operator: support stated, support not matching, detector should FIRE"
