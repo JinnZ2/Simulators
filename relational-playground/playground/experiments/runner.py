@@ -97,6 +97,12 @@ def _finish(record, cfg, model, times, states, outs):
     rows, crossings = l0.audit(cfg["budgets"], states[0], states[-1])
     record["l0_budgets"], record["boundary_audit"] = rows, crossings
     record["status"], record["status_reason"] = l0.run_status(rows)
+    from .. import known_answer_gate as gate
+    t = gate.trust(model.name)
+    record["model_trust"] = "TRUSTED: " + t["evidence"] if t["trusted"] else "UNTRUSTED: " + t["evidence"]
+    if not t["trusted"]:
+        record["status"] = "INCOMPLETE"
+        record["status_reason"] += "; model not through the known-answer gate"
     return record
 
 

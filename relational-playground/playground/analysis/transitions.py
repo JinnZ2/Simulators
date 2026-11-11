@@ -8,8 +8,11 @@ def read(xs, means, variances=None):
     i = max(range(len(slopes)), key=lambda k: abs(slopes[k]))
     out = dict(steepest_between=(xs[i], xs[i + 1]), steepest_slope=slopes[i],
                note="located to the sweep's own spacing, not finer")
+    span = max(abs(v) for v in slopes)
     if max(means) == min(means):
         out["steepest_between"], out["note"] = "NONE", "flat response: no transition in the swept range"
+    elif span - min(abs(v) for v in slopes) <= 1e-9 * span:
+        out["steepest_between"], out["note"] = "NONE", "uniform slope: a ramp has no located transition"
     if variances is not None:
         j = max(range(len(variances)), key=lambda k: variances[k])
         out["variance_peak_at"] = xs[j]
