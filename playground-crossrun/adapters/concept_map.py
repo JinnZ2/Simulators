@@ -39,6 +39,7 @@ ROWS = [
     ("coincidence card on cross-family agreement", "VOID", "analysis/coincidence.py :: def open_card"),
     ("measurand identity gates a comparison", "equations/measurand.py :: def compare_substitution", "VOID"),
     ("observer declared before comparison", "applicability/mapping.py :: OBSERVER (one coordinate)", "controls.py :: OBSERVER_FIELDS (three regimes)"),
+    ("observer regime partition (names differ: PASSIVE vs REACTIVITY; not merged)", "observation/__init__.py :: passive, perturbative, strategic (STUB: all three raise NotImplementedError)", "controls.py :: OBSERVER_FIELDS (perturbation / reactivity / strategy)"),
     ("no universal ranking", "applicability/mapping.py :: no universal ranking", "experiments/comparison.py :: def rank (raises)"),
     ("applicability / domain of validity", "applicability/mapping.py :: def assess", "analysis/applicability.py :: NOT ASSESSED"),
     ("percolation family", "equations/percolation.py :: class BondPercolation (bond, <= 12 edges)", "equations/percolation.py :: spot (site, spread, spotting)"),

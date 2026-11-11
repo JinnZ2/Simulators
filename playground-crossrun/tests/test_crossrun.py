@@ -80,7 +80,7 @@ class PinnedFindings(unittest.TestCase):
         self.assertTrue(all(r[c]["code"] == "AGREE" for c in cells))
 
     def test_continuity_cards_split_shared_source_by_level(self):
-        cards = [c for c in common.load("crossrun.json")["cards"] if c.get("shared_source_by_level")]
+        cards = [c for c in common.load("crossrun.json")["cards"] if c.get("anchor_candidate")]
         self.assertEqual(len(cards), 5)
         for c in cards:
             self.assertEqual(set(c["shared_source_by_level"]), {"concept_level", "split_level"})
@@ -88,6 +88,14 @@ class PinnedFindings(unittest.TestCase):
             self.assertTrue(c["anchor_candidate"].startswith("CANDIDATE"))
             self.assertEqual(c["reading"], "PROVISIONAL")   # adapter-supplied system criterion still stands
         self.assertTrue(os.path.exists(os.path.join(FOLDER, "ORIGIN_NOTE.md")))
+
+    def test_observer_card_names_recorded_not_merged_and_unscored(self):
+        c = [c for c in common.load("crossrun.json")["cards"] if c["case"].startswith("R-OBS")][0]
+        lv = c["shared_source_by_level"]
+        self.assertTrue(lv["concept_level"].startswith("UNDETERMINED"))
+        self.assertIn("not merged", lv["naming_level"])
+        self.assertTrue(lv["regime_level"].startswith("NO AGREEMENT TO SCORE"))
+        self.assertIsNone(c["anchor_candidate"])
 
     def test_forest_runs_indeterminate_without_a_registry(self):
         f = feed("r257_into_p.json")

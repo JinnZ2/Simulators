@@ -497,7 +497,7 @@
    "causes": {
     "adapter_construction": "void",
     "shared_constraint": "void",
-    "shared_source": "candidate: both require an observer declaration before comparing; UNDETERMINED: ORIGIN_NOTE.md does not say whether the work order named an observer layer",
+    "shared_source": "SPLIT BY LEVEL (ORIGIN_NOTE.md): see shared_source_by_level",
     "vocabulary_echo": "void"
    },
    "code": "AGREE",
@@ -505,7 +505,11 @@
    "notes": [],
    "reading": "OPEN",
    "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out",
-   "shared_source_by_level": null
+   "shared_source_by_level": {
+    "concept_level": "UNDETERMINED: the #257 work order (item 6) named PERTURBATION / REACTIVITY / STRATEGY as separate control-matrix fields; possible shared cue only IF that order reached the study-aperture builder, which ORIGIN_NOTE.md does not establish",
+    "naming_level": "2 of 3 names align (perturb-, strateg-); #257 REACTIVITY (reacts to being observed) vs study-aperture PASSIVE (observes without disturbing) partition differently. Both names recorded, not merged",
+    "regime_level": "NO AGREEMENT TO SCORE: study-aperture observation/{passive,perturbative,strategic}.py are stubs (NotImplementedError). This row's AGREE is on a different object, the single applicability/mapping.py OBSERVER coordinate, not on the regime partition"
+   }
   }
  ],
  "rows": [

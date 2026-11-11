@@ -297,7 +297,9 @@ XC_R-KAG:branching-11  PROVISIONAL
     shared_constraint     candidate: n0 * R^n is arithmetic; two correct programs must agree on it
     adapter_construction  SUPPORTED: the Perplexity plan's known-answer case IS #257's closed form, so the run is checked against the answer it was handed (circular by construction)
 XC_R-OBS:cross_system_regimes_undeclared  OPEN
-    shared_source         candidate: both require an observer declaration before comparing; UNDETERMINED: ORIGIN_NOTE.md does not say whether the work order named an observer layer
+    shared_source:concept UNDETERMINED: the #257 work order (item 6) named PERTURBATION / REACTIVITY / STRATEGY as separate control-matrix fields; possible shared cue only IF that order reached the study-aperture builder, which ORIGIN_NOTE.md does not establish
+    shared_source:naming  2 of 3 names align (perturb-, strateg-); #257 REACTIVITY (reacts to being observed) vs study-aperture PASSIVE (observes without disturbing) partition differently. Both names recorded, not merged
+    shared_source:regime  NO AGREEMENT TO SCORE: study-aperture observation/{passive,perturbative,strategic}.py are stubs (NotImplementedError). This row's AGREE is on a different object, the single applicability/mapping.py OBSERVER coordinate, not on the regime partition
 ```
 
 Surface agreements under NO_SLOT also carry cards (in out/crossrun.json); they are not listed here because an agreement reached without the deciding concept is coded NO_SLOT, not AGREE.
@@ -337,6 +339,7 @@ Surface agreements under NO_SLOT also carry cards (in out/crossrun.json); they a
 | coincidence card on cross-family agreement | VOID | analysis/coincidence.py :: def open_card |
 | measurand identity gates a comparison | equations/measurand.py :: def compare_substitution | VOID |
 | observer declared before comparison | applicability/mapping.py :: OBSERVER (one coordinate) | controls.py :: OBSERVER_FIELDS (three regimes) |
+| observer regime partition (names differ: PASSIVE vs REACTIVITY; not merged) | observation/__init__.py :: passive, perturbative, strategic (STUB: all three raise NotImplementedError) | controls.py :: OBSERVER_FIELDS (perturbation / reactivity / strategy) |
 | no universal ranking | applicability/mapping.py :: no universal ranking | experiments/comparison.py :: def rank (raises) |
 | applicability / domain of validity | applicability/mapping.py :: def assess | analysis/applicability.py :: NOT ASSESSED |
 | percolation family | equations/percolation.py :: class BondPercolation (bond, <= 12 edges) | equations/percolation.py :: spot (site, spread, spotting) |

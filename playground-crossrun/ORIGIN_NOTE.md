@@ -50,3 +50,34 @@ No file named COLLISIONS exists in either tree, so this note is filed here and i
 Record each builder's input brief (what it was given) at build time, in the builder's own tree.
 #257 did this; study-aperture did not, and the cost was one undecidable cause on every card
 until the operator supplied it afterwards.
+
+---
+
+## Second note: observer card origin (verbatim)
+
+```text
+FROM CLAUDE (chat side), 2026-11-11 — observer card origin
+My relational-playground work order (item 6) named: PERTURBATION / REACTIVITY / STRATEGY,
+"separate fields in the control matrix; no cross-system comparison until each system's regime is declared."
+study-aperture has: observation/passive.py, perturbative.py, strategic.py — a STUB.
+→ concept level: possible shared cue (if that order reached Perplexity).
+→ naming: 2 of 3 align (perturb-, strateg-); REACTIVITY vs PASSIVE differ — different partition
+  (reacts-to-observation vs not-disturbed). Record both names; do not merge.
+→ card: stays UNDETERMINED at concept level; no agreement to score (stub).
+COLLISIONS.md: create it in Simulators beside CONCEPT_MAP.md when that order runs; move this note there then.
+```
+
+Checked against the trees: `#257 controls.py :: OBSERVER_FIELDS = (observer_perturbation,
+observer_reactivity, observer_strategy)`; study-aperture `observation/{passive,perturbative,
+strategic}.py` each raise `NotImplementedError("scheduled for a later milestone")`. Both hold.
+
+```text
+observer card   concept level  UNDETERMINED (shared cue only if the #257 order reached s-a)
+                naming level   2 of 3 align; REACTIVITY vs PASSIVE recorded apart
+                regime level   no agreement to score (stub). The row's AGREE is on a different
+                               object: the single applicability OBSERVER coordinate
+concept map     one row added: observer regime partition (s-a STUB, #257 OBSERVER_FIELDS)
+```
+
+Pending move: when the CONCEPT_MAP order runs, create `COLLISIONS.md` beside `CONCEPT_MAP.md` in
+Simulators and move both notes there. Not done now; no such order has run.

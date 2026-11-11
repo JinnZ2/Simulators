@@ -241,7 +241,15 @@ SHARED_SOURCE_BY_LEVEL = dict(
                      "no input brief, so this is CARRIED, not verified from the record"),
     ),
     observer=dict(
-        concept_level="UNDETERMINED: ORIGIN_NOTE.md does not say whether the work order named an observer layer",
+        concept_level=("UNDETERMINED: the #257 work order (item 6) named PERTURBATION / REACTIVITY / STRATEGY as "
+                       "separate control-matrix fields; possible shared cue only IF that order reached the "
+                       "study-aperture builder, which ORIGIN_NOTE.md does not establish"),
+        naming_level=("2 of 3 names align (perturb-, strateg-); #257 REACTIVITY (reacts to being observed) vs "
+                      "study-aperture PASSIVE (observes without disturbing) partition differently. Both names "
+                      "recorded, not merged"),
+        regime_level=("NO AGREEMENT TO SCORE: study-aperture observation/{passive,perturbative,strategic}.py are "
+                      "stubs (NotImplementedError). This row's AGREE is on a different object, the single "
+                      "applicability/mapping.py OBSERVER coordinate, not on the regime partition"),
     ),
 )
 
@@ -272,8 +280,7 @@ def card_for(row):
                                           "pass/fail cases become #257 draws or tool cases; the harness CLASS #257 assigns "
                                           "(CONSTANT_FIRES / CONSTANT_SILENT) names the detector, not the instrument")
     if cid.startswith("R-OBS"):
-        causes["shared_source"] = ("candidate: both require an observer declaration before comparing; "
-                                   + SHARED_SOURCE_BY_LEVEL["observer"]["concept_level"])
+        causes["shared_source"] = "SPLIT BY LEVEL (ORIGIN_NOTE.md): see shared_source_by_level"
     if cid.startswith("P-DEF:missing-return-observation"):
         causes["shared_constraint"] = ("candidate: a difference against a value that is absent cannot be formed; both "
                                        "refuse rather than read absent as zero")
@@ -284,9 +291,10 @@ def card_for(row):
         note.append("surface agreement under %s: the agreement is reached without the concept that decides the other "
                     "side's reading, so it is an accident of the case" % row["code"])
     reading = "OPEN" if not any(v.startswith("SUPPORTED") for v in causes.values()) else "PROVISIONAL"
-    by_level = SHARED_SOURCE_BY_LEVEL["continuity"] if "cell" in str(row.get("p")) else None
+    by_level = SHARED_SOURCE_BY_LEVEL["continuity"] if "cell" in str(row.get("p")) else \
+        SHARED_SOURCE_BY_LEVEL["observer"] if cid.startswith("R-OBS") else None
     anchor = None
-    if by_level:
+    if by_level is SHARED_SOURCE_BY_LEVEL["continuity"]:
         anchor = ("CANDIDATE at split level only (system vs configuration continuity). Not promoted: the system axis "
                   "of each cell is also partly adapter-constructed, so the configuration axis is where the "
                   "independent convergence is cleanest")
@@ -377,7 +385,8 @@ def render(rows, cards, baseline, concept_rows):
         if c.get("shared_source_by_level"):
             for lvl, v in c["shared_source_by_level"].items():
                 o.append("    %-21s %s" % ("shared_source:" + lvl.split("_")[0], v))
-            o.append("    %-21s %s" % ("anchor", c["anchor_candidate"]))
+            if c.get("anchor_candidate"):
+                o.append("    %-21s %s" % ("anchor", c["anchor_candidate"]))
     o.append("```")
     o.append("")
     o.append("Surface agreements under NO_SLOT also carry cards (in out/crossrun.json); they are not listed here because "
