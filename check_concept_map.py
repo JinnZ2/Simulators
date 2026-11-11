@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check concept_map.json and render CONCEPT_MAP.md from it.
+"""Check concept_map.json and collisions.json; render CONCEPT_MAP.md and COLLISIONS.md from them.
 
     python3 check_concept_map.py            check: every path exists, MD matches JSON
     python3 check_concept_map.py --write    rewrite CONCEPT_MAP.md from the JSON
@@ -16,6 +16,8 @@ import json, os, subprocess, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 JSON, MD = os.path.join(HERE, "concept_map.json"), os.path.join(HERE, "CONCEPT_MAP.md")
+CJSON, CMD = os.path.join(HERE, "collisions.json"), os.path.join(HERE, "COLLISIONS.md")
+CFIELDS = ("date", "concept", "agents", "collided", "found", "resolution", "evidence")
 ROLES = ("canonical", "candidate", "copy", "nearest")
 PENDING = "pending cross-run"
 
@@ -104,6 +106,32 @@ def render(data):
     return "\n".join(o)
 
 
+def render_collisions(data):
+    o = ["# COLLISIONS", "",
+         "Generated from `collisions.json` by `check_concept_map.py --write`. Edit the JSON, not this file.",
+         "One block per multi-agent collision. Rows are kept, not resolved away; a resolved row stays.",
+         "As of %s." % data["as_of"], ""]
+    for r in data["rows"]:
+        o += ["## %s  %s" % (r["date"], r["concept"]), "", "- agents: %s" % r["agents"],
+              "- what collided: %s" % r["collided"], "- how found: %s" % r["found"],
+              "- resolution: %s" % r["resolution"]]
+        if r.get("note"):
+            o.append("- note: %s" % r["note"])
+        o += ["- evidence: " + "; ".join(r["evidence"]), ""]
+    return "\n".join(o)
+
+
+def collision_problems(data, md_text):
+    out = []
+    for i, r in enumerate(data["rows"]):
+        for k in CFIELDS:
+            if not r.get(k):
+                out.append("collision %d (%s): field %s empty (write OPEN or NOT LOCATED)" % (i + 1, r.get("concept"), k))
+    if md_text != render_collisions(data):
+        out.append("COLLISIONS.md does not match collisions.json (run --write)")
+    return out
+
+
 def run(data, md_text, strict=False, here=HERE, quiet=False):
     fails, notchecked, ok = [], [], 0
     for r in data["rows"]:
@@ -159,16 +187,30 @@ def selftest(data):
         expect("pinned tip moved", d, render(d), "STALE")
     else:
         print("NOT_RUN  pinned tip moved (no checkout holding a pinned ref)")
+    import copy as _c
+    cd = json.load(open(CJSON, encoding="utf-8"))
+    for name, mut in (("collision field empty", lambda d: d["rows"][0].update(resolution="")),
+                      ("COLLISIONS.md out of date", lambda d: d["rows"].pop())):
+        d = _c.deepcopy(cd); base_md = render_collisions(cd); mut(d)
+        hit = bool(collision_problems(d, base_md if "out of date" in name else render_collisions(d)))
+        n += 1; bad += 0 if hit else 1
+        print("%s  %s" % ("fires " if hit else "SILENT", name))
     print("planted %d   silent %d" % (n, bad))
     return bad
 
 
 if __name__ == "__main__":
     data = json.load(open(JSON, encoding="utf-8"))
+    cdata = json.load(open(CJSON, encoding="utf-8"))
     if "--write" in sys.argv:
         open(MD, "w", encoding="utf-8").write(render(data))
+        open(CMD, "w", encoding="utf-8").write(render_collisions(cdata))
     if "--selftest" in sys.argv:
         sys.exit(1 if selftest(data) else 0)
     md = open(MD, encoding="utf-8").read() if os.path.exists(MD) else ""
     f, _ = run(data, md, strict="--strict" in sys.argv)
-    sys.exit(1 if f else 0)
+    cf = collision_problems(cdata, open(CMD, encoding="utf-8").read() if os.path.exists(CMD) else "")
+    for x in cf:
+        print("FAIL  " + x)
+    print("collisions %d   failed %d" % (len(cdata["rows"]), len(cf)))
+    sys.exit(1 if f or cf else 0)

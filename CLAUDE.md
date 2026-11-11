@@ -14263,6 +14263,8 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   (Simulators, study-aperture, TAF): home, other copies, builder, status, who decided.
   Generated from `concept_map.json`; `python3 check_concept_map.py` fails on a path that
   no longer exists or a moved pinned ref. No code is moved by it.
+  `COLLISIONS.md` (from `collisions.json`, same script) keeps one block per multi-agent
+  collision: date, concept, agents, what collided, how found, resolution or OPEN, evidence.
 - `tail-check/` — part 3b of the same order. It reads an inference about a
   person as SAID (a gated literal span of a user turn, via `tools/sourced.py`,
   imported), FILLED or UNRATED. When the inference is FILLED and the person's
