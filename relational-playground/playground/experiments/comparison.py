@@ -2,17 +2,22 @@
 from . import runner
 
 
-def side_by_side(configs, output):
+def side_by_side(configs, output, agreement_window=None, window_declared_at=None):
+    """agreement_window (ADDITION 8): half-width fixed before the outputs are seen.
+    Any cross-family pair inside it opens a coincidence card."""
+    from ..equations import base as eq
+    from ..analysis import coincidence
     rows = []
     for cfg in sorted(configs, key=lambda c: c["model"]):
         try:
             rec = runner.run(cfg)
-            rows.append(dict(model=cfg["model"], run_id=cfg["run_id"], status=rec["status"],
+            rows.append(dict(model=cfg["model"], family=eq.get(cfg["model"]).family, run_id=cfg["run_id"], status=rec["status"],
                              output=rec["observations_and_predictions"]["final_state"].get(output, "MODEL HAS NO SUCH VARIABLE"),
                              limitations=rec["known_limitations"]))
         except Exception as e:
             rows.append(dict(model=cfg["model"], run_id=cfg["run_id"], status="MODEL FAILED", error="%s: %s" % (type(e).__name__, e)))
-    return dict(output=output, rows=rows, note="no ranking; each row is read with its own applicability record")
+    return dict(output=output, rows=rows, note="no ranking; each row is read with its own applicability record",
+                coincidence=coincidence.on_agreement(rows, agreement_window, window_declared_at))
 
 
 def rank(*_a, **_k):
