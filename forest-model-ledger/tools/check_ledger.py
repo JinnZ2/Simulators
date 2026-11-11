@@ -266,6 +266,12 @@ def check(run_tests=False):
             for c_ in CARD_AXIS:
                 if (r_, c_) not in pairs_listed:
                     F(f"STATUS_MAP pair table: {r_} x {c_} missing")
+        # 2026-11-11: every status on both axes needs an entry whether or not a run or card carries
+        # it now. Found by the selftest: once CC_001 left PROVISIONAL, deleting that entry went silent.
+        for ax, names in (("RUN", RUN_AXIS), ("CARD", CARD_AXIS)):
+            for st_ in names:
+                if (ax, st_) not in smap:
+                    F(f"STATUS_MAP: {ax} {st_} has no entry (required for every status on the axis)")
         if ("RUN", "PROVISIONAL") in smap:
             F("STATUS_MAP: PROVISIONAL is a card status, not a run status")
     run_status = {}
@@ -395,10 +401,15 @@ def selftest():
         ("incomplete run marked complete", "runs/run_11.md", "status     : INCOMPLETE", "status     : COMPLETE", "COMPLETE while ledger/NEEDS_TOOL.md still owes"),
         ("needed tool with no toolkit entry", "ledger/NEEDS_TOOL.md", "| ablation | 33 of 64", "| ablation_v2 | 33 of 64", "ablation_v2 has no entry"),
         ("provisional card waiting on an unknown tool", "ledger/toolkit/cards/CC_001_n_misclosure_seed_invariance.yaml",
-         "  - multi_seed_ensemble", "  - multi_seed_ensemble_v2", "recheck_when names multi_seed_ensemble_v2"),
+         "recheck_when: void", "recheck_when:\n  - multi_seed_ensemble_v2", "recheck_when names multi_seed_ensemble_v2"),
+        ("card kept PROVISIONAL after its tools are built", "ledger/toolkit/cards/CC_001_n_misclosure_seed_invariance.yaml",
+         "recheck_when: void", "recheck_when:\n  - multi_seed_ensemble\n  - ablation", "the re-check is due"),
         ("provisional card declared resolved", "ledger/toolkit/cards/CC_001_n_misclosure_seed_invariance.yaml",
-         "reading_declared: PROVISIONAL", "reading_declared: RESOLVED", "declared RESOLVED, derived PROVISIONAL"),
-        ("card status with no STATUS_MAP entry", "ledger/STATUS_MAP.md", "### CARD PROVISIONAL", "### CARD PROVISIONAL_X", "status PROVISIONAL has no entry"),
+         "recheck_when: void", "recheck_when:\n  - support_match", "declared RESOLVED, derived PROVISIONAL"),
+        ("cleared row whose tool's gate is not PASS", "ledger/toolkit/ablation.yaml", "  verdict: PASS", "  verdict: FAIL", "ablation / run_10 removed but the tool's gate is not PASS"),
+        ("cleared row whose clearing run is not in used_in", "ledger/toolkit/ablation.yaml", "used_in:\n  - run_14", "used_in: []", "used_in omits run_14"),
+        ("row in both open and cleared tables", "ledger/NEEDS_TOOL.md", "| ablation | 33 of 64", "| ablation | N misclosure near-identical across seeds (card CC_001) | run_10 | 2026-11-10 | x |\n| ablation | 33 of 64", "is in both tables"),
+        ("card status with no STATUS_MAP entry", "ledger/STATUS_MAP.md", "### CARD PROVISIONAL", "### CARD PROVISIONAL_X", "CARD PROVISIONAL has no entry"),
         ("run status with no STATUS_MAP entry", "ledger/STATUS_MAP.md", "### RUN REPORTED", "### RUN REPORTED_X", "status REPORTED has no entry"),
         ("STATUS_MAP entry missing a field", "ledger/STATUS_MAP.md", "- forbidden: treating PROVISIONAL as RESOLVED", "- forbiden: treating PROVISIONAL as RESOLVED", "CARD PROVISIONAL: field 'forbidden' missing"),
         ("STATUS_MAP pair row missing", "ledger/STATUS_MAP.md", "| INCOMPLETE | PROVISIONAL |", "| INCOMPLETE | PROVISIONAL_X |", "INCOMPLETE x PROVISIONAL missing"),

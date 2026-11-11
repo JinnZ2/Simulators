@@ -1,9 +1,15 @@
 components {'admitted': 3, 'candidate': 15, 'placeholder': 7, 'rejected': 2}
 branches   {'admitted': 0, 'candidate': 5, 'placeholder': 11, 'rejected': 0}
-blocks 6  runs 13  tests 17
-runs {'REPORTED': 8, 'COMPLETE': 1, 'INCOMPLETE': 4}  NEEDS_TOOL rows 24  placeholder tools 6
-toolkit 10 tools  cards {'PROVISIONAL': 1, 'OPEN': 4}  anchors {'ANCHOR_run9': 'candidate'}
+blocks 6  runs 14  tests 17
+runs {'REPORTED': 8, 'COMPLETE': 1, 'INCOMPLETE': 5}  NEEDS_TOOL rows 27 open, 2 cleared  placeholder tools 5
+toolkit 11 tools  cards {'RESOLVED': 1, 'OPEN': 4}  anchors {'ANCHOR_run9': 'candidate'}
 open slots by exit: no exit defined 10  exit incomplete (sensitivity void) 4  exit complete 0  (counted, not failed)
+  owed: ablation built, not yet run on run_11
+  owed: multi_seed_ensemble built, not yet run on run_11
+  owed: ablation built, not yet run on run_12
+  owed: multi_seed_ensemble built, not yet run on run_12
+  owed: ablation built, not yet run on run_13
+  owed: multi_seed_ensemble built, not yet run on run_13
   no exit defined: CC_002_grid_onto_ode_convergence.shared_constraint
   no exit defined: CC_002_grid_onto_ode_convergence.local_normal_form
   no exit defined: CC_002_grid_onto_ode_convergence.statistical_artifact

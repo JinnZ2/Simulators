@@ -18,7 +18,8 @@ cannot_see:
   - "a component whose removal is absorbed by a compensating pathway shows DOES_NOT_MATTER on outputs; the internal flux has to be an output for the absorption to show"
   - "every multi_seed_ensemble limit: effects under 5 standard errors read UNRESOLVED"
 other_domains_it_could_see_into: void
-used_in: []
+used_in:
+  - run_14
 open_issues:
   - "the co_ablated null leg is close to construction (draws are activity tables, the rule is a set test); its content is that a declared drop never fires it"
 status: candidate

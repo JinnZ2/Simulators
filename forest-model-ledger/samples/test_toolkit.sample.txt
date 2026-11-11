@@ -1,0 +1,7 @@
+PASS  multi_seed_ensemble      known 10 of 10
+                               null[moved] fp 0.0 tp 1.0 n 200 seed 0-4 PASS
+                               null[invariant] fp 0.0 tp 1.0 n 200 seed 0-4 PASS
+PASS  ablation                 known 7 of 7
+                               null[matters] fp 0.0 tp 1.0 n 200 seed 0-4 PASS
+                               null[co_ablated] fp 0.0 tp 1.0 n 200 seed 0-4 PASS
+2 tools gated, 0 failed

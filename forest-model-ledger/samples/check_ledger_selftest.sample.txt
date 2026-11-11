@@ -10,7 +10,11 @@ FIRED  tool with no diagnoses
 FIRED  incomplete run marked complete
 FIRED  needed tool with no toolkit entry
 FIRED  provisional card waiting on an unknown tool
+FIRED  card kept PROVISIONAL after its tools are built
 FIRED  provisional card declared resolved
+FIRED  cleared row whose tool's gate is not PASS
+FIRED  cleared row whose clearing run is not in used_in
+FIRED  row in both open and cleared tables
 FIRED  card status with no STATUS_MAP entry
 FIRED  run status with no STATUS_MAP entry
 FIRED  STATUS_MAP entry missing a field
@@ -19,5 +23,6 @@ FIRED  run field dropped
 FIRED  card slot expiry_condition dropped
 FIRED  bare absent state
 FIRED  observer regimes linked
+FIRED  built brief tool with no passing gate
 FIRED  expiry target unknown
-selftest: 22 planted, 0 silent
+selftest: 27 planted, 0 silent
