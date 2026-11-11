@@ -1,0 +1,1672 @@
+{
+ "applicability": [
+  {
+   "applicability": "NOT ASSESSED",
+   "boundary_dependence": "NOT ASSESSED",
+   "computational_cost": "NOT ASSESSED",
+   "context": "fire spread on a 64 x 64 fuel grid, left-edge ignition",
+   "energy_consistency": {
+    "basis": "l0 rows",
+    "finding": "fraction budget CLOSED in every run; energy budget VOID"
+   },
+   "failure_region": {
+    "basis": "out/part2.json; kept, not dropped",
+    "finding": "outside the window at d = [0.3, 0.4, 0.5, 0.55, 0.6] (no spotting)"
+   },
+   "identifiability": "NOT ASSESSED",
+   "model": "ode_meanfield",
+   "not_assessed": [
+    "applicability",
+    "stability",
+    "sensitivity",
+    "boundary_dependence",
+    "observability",
+    "identifiability",
+    "computational_cost"
+   ],
+   "observability": "NOT ASSESSED",
+   "predictive_adequacy": {
+    "basis": "out/part2.json",
+    "finding": "inside the 0.05 window at 6 of 11 levels with no spotting, 8 of 11 at spot 0.2"
+   },
+   "sensitivity": "NOT ASSESSED",
+   "stability": "NOT ASSESSED"
+  },
+  {
+   "applicability": "NOT ASSESSED",
+   "boundary_dependence": "NOT ASSESSED",
+   "computational_cost": "NOT ASSESSED",
+   "context": "fire spread on a 64 x 64 fuel grid, left-edge ignition",
+   "energy_consistency": {
+    "basis": "l0 rows",
+    "finding": "cell budget CLOSED in every run; energy budget VOID"
+   },
+   "failure_region": "NOT ASSESSED",
+   "identifiability": "NOT ASSESSED",
+   "model": "percolation",
+   "not_assessed": [
+    "applicability",
+    "predictive_adequacy",
+    "sensitivity",
+    "boundary_dependence",
+    "observability",
+    "identifiability",
+    "computational_cost",
+    "failure_region"
+   ],
+   "observability": "NOT ASSESSED",
+   "predictive_adequacy": "NOT ASSESSED",
+   "sensitivity": "NOT ASSESSED",
+   "stability": {
+    "basis": "40 seeds per level",
+    "finding": "replicate variance peaks at d = 0.6 (no spotting)"
+   }
+  }
+ ],
+ "claims": [
+  {
+   "basis": "run.py part2, this tree",
+   "tag": "DERIVED",
+   "text": "the table and the four feature readings"
+  },
+  {
+   "basis": "forest-model-ledger runs/run_7.md, run_8.md: REPORTED, code void",
+   "tag": "PROPOSED",
+   "text": "runs 7-8 as logged"
+  },
+  {
+   "basis": "not known; grid size, replicates and the ODE are void in the records",
+   "tag": "PROPOSED",
+   "text": "this design is what runs 7-8 ran"
+  }
+ ],
+ "coincidence": {
+  "cards": [
+   {
+    "branch": "void",
+    "c_tests": {
+     "C1": "NOT RUN",
+     "C2": "NOT RUN",
+     "C3": {
+      "declared_at": "PREREG.md, committed before the first run",
+      "generator": "C3_elastic_target",
+      "hits_pre_window": true,
+      "margin": 0.0008903106725611427,
+      "note": "If pre_window was set after seeing observed, this test is void.  Log the timestamp/context in declared_at and be honest.",
+      "observed": 0.001678466796875,
+      "pre_window": 0.05,
+      "target": 0.0025687774694361427
+     },
+     "C4": "NOT RUN",
+     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
+     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+    },
+    "id": "CC_percolation[spot_0.00 d=0.10]_ode_meanfield[spot_0.00 d=0.10]",
+    "observation": "percolation[spot_0.00 d=0.10] (percolation) and ode_meanfield[spot_0.00 d=0.10] (nonlinear) agree: 0.001678466796875 vs 0.0025687774694361427",
+    "recheck_when": "void",
+    "slots": {
+     "local_normal_form": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "low_dim_projection": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "none_of_above": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "numerical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "shared_constraint": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "statistical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     }
+    },
+    "trigger": "cross-family agreement inside the pre-declared window 0.05 (PREREG.md, committed before the first run)"
+   },
+   {
+    "branch": "void",
+    "c_tests": {
+     "C1": "NOT RUN",
+     "C2": "NOT RUN",
+     "C3": {
+      "declared_at": "PREREG.md, committed before the first run",
+      "generator": "C3_elastic_target",
+      "hits_pre_window": true,
+      "margin": 0.009321585103528065,
+      "note": "If pre_window was set after seeing observed, this test is void.  Log the timestamp/context in declared_at and be honest.",
+      "observed": 0.0040771484375,
+      "pre_window": 0.05,
+      "target": 0.013398733541028064
+     },
+     "C4": "NOT RUN",
+     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
+     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+    },
+    "id": "CC_percolation[spot_0.00 d=0.20]_ode_meanfield[spot_0.00 d=0.20]",
+    "observation": "percolation[spot_0.00 d=0.20] (percolation) and ode_meanfield[spot_0.00 d=0.20] (nonlinear) agree: 0.0040771484375 vs 0.013398733541028064",
+    "recheck_when": "void",
+    "slots": {
+     "local_normal_form": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "low_dim_projection": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "none_of_above": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "numerical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "shared_constraint": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "statistical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     }
+    },
+    "trigger": "cross-family agreement inside the pre-declared window 0.05 (PREREG.md, committed before the first run)"
+   },
+   {
+    "branch": "void",
+    "c_tests": {
+     "C1": "NOT RUN",
+     "C2": "NOT RUN",
+     "C3": {
+      "declared_at": "PREREG.md, committed before the first run",
+      "generator": "C3_elastic_target",
+      "hits_pre_window": true,
+      "margin": 0.007305400661496431,
+      "note": "If pre_window was set after seeing observed, this test is void.  Log the timestamp/context in declared_at and be honest.",
+      "observed": 0.596759033203125,
+      "pre_window": 0.05,
+      "target": 0.5894536325416285
+     },
+     "C4": "NOT RUN",
+     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
+     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+    },
+    "id": "CC_percolation[spot_0.00 d=0.65]_ode_meanfield[spot_0.00 d=0.65]",
+    "observation": "percolation[spot_0.00 d=0.65] (percolation) and ode_meanfield[spot_0.00 d=0.65] (nonlinear) agree: 0.596759033203125 vs 0.5894536325416285",
+    "recheck_when": "void",
+    "slots": {
+     "local_normal_form": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "low_dim_projection": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "none_of_above": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "numerical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "shared_constraint": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "statistical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     }
+    },
+    "trigger": "cross-family agreement inside the pre-declared window 0.05 (PREREG.md, committed before the first run)"
+   },
+   {
+    "branch": "void",
+    "c_tests": {
+     "C1": "NOT RUN",
+     "C2": "NOT RUN",
+     "C3": {
+      "declared_at": "PREREG.md, committed before the first run",
+      "generator": "C3_elastic_target",
+      "hits_pre_window": true,
+      "margin": 0.030756259837245947,
+      "note": "If pre_window was set after seeing observed, this test is void.  Log the timestamp/context in declared_at and be honest.",
+      "observed": 0.6792724609375,
+      "pre_window": 0.05,
+      "target": 0.6485162011002541
+     },
+     "C4": "NOT RUN",
+     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
+     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+    },
+    "id": "CC_percolation[spot_0.00 d=0.70]_ode_meanfield[spot_0.00 d=0.70]",
+    "observation": "percolation[spot_0.00 d=0.70] (percolation) and ode_meanfield[spot_0.00 d=0.70] (nonlinear) agree: 0.6792724609375 vs 0.6485162011002541",
+    "recheck_when": "void",
+    "slots": {
+     "local_normal_form": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "low_dim_projection": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "none_of_above": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "numerical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "shared_constraint": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "statistical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     }
+    },
+    "trigger": "cross-family agreement inside the pre-declared window 0.05 (PREREG.md, committed before the first run)"
+   },
+   {
+    "branch": "void",
+    "c_tests": {
+     "C1": "NOT RUN",
+     "C2": "NOT RUN",
+     "C3": {
+      "declared_at": "PREREG.md, committed before the first run",
+      "generator": "C3_elastic_target",
+      "hits_pre_window": true,
+      "margin": 0.03255344534985116,
+      "note": "If pre_window was set after seeing observed, this test is void.  Log the timestamp/context in declared_at and be honest.",
+      "observed": 0.795294189453125,
+      "pre_window": 0.05,
+      "target": 0.7627407441032739
+     },
+     "C4": "NOT RUN",
+     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
+     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+    },
+    "id": "CC_percolation[spot_0.00 d=0.80]_ode_meanfield[spot_0.00 d=0.80]",
+    "observation": "percolation[spot_0.00 d=0.80] (percolation) and ode_meanfield[spot_0.00 d=0.80] (nonlinear) agree: 0.795294189453125 vs 0.7627407441032739",
+    "recheck_when": "void",
+    "slots": {
+     "local_normal_form": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "low_dim_projection": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "none_of_above": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "numerical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "shared_constraint": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "statistical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     }
+    },
+    "trigger": "cross-family agreement inside the pre-declared window 0.05 (PREREG.md, committed before the first run)"
+   },
+   {
+    "branch": "void",
+    "c_tests": {
+     "C1": "NOT RUN",
+     "C2": "NOT RUN",
+     "C3": {
+      "declared_at": "PREREG.md, committed before the first run",
+      "generator": "C3_elastic_target",
+      "hits_pre_window": true,
+      "margin": 0.025425906921300534,
+      "note": "If pre_window was set after seeing observed, this test is void.  Log the timestamp/context in declared_at and be honest.",
+      "observed": 0.8984619140625,
+      "pre_window": 0.05,
+      "target": 0.8730360071411994
+     },
+     "C4": "NOT RUN",
+     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
+     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+    },
+    "id": "CC_percolation[spot_0.00 d=0.90]_ode_meanfield[spot_0.00 d=0.90]",
+    "observation": "percolation[spot_0.00 d=0.90] (percolation) and ode_meanfield[spot_0.00 d=0.90] (nonlinear) agree: 0.8984619140625 vs 0.8730360071411994",
+    "recheck_when": "void",
+    "slots": {
+     "local_normal_form": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "low_dim_projection": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "none_of_above": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "numerical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "shared_constraint": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "statistical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     }
+    },
+    "trigger": "cross-family agreement inside the pre-declared window 0.05 (PREREG.md, committed before the first run)"
+   },
+   {
+    "branch": "void",
+    "c_tests": {
+     "C1": "NOT RUN",
+     "C2": "NOT RUN",
+     "C3": {
+      "declared_at": "PREREG.md, committed before the first run",
+      "generator": "C3_elastic_target",
+      "hits_pre_window": true,
+      "margin": 0.0008926669425345062,
+      "note": "If pre_window was set after seeing observed, this test is void.  Log the timestamp/context in declared_at and be honest.",
+      "observed": 0.00169677734375,
+      "pre_window": 0.05,
+      "target": 0.0025894442862845063
+     },
+     "C4": "NOT RUN",
+     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
+     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+    },
+    "id": "CC_percolation[spot_0.05 d=0.10]_ode_meanfield[spot_0.05 d=0.10]",
+    "observation": "percolation[spot_0.05 d=0.10] (percolation) and ode_meanfield[spot_0.05 d=0.10] (nonlinear) agree: 0.00169677734375 vs 0.0025894442862845063",
+    "recheck_when": "void",
+    "slots": {
+     "local_normal_form": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "low_dim_projection": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "none_of_above": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "numerical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "shared_constraint": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "statistical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     }
+    },
+    "trigger": "cross-family agreement inside the pre-declared window 0.05 (PREREG.md, committed before the first run)"
+   },
+   {
+    "branch": "void",
+    "c_tests": {
+     "C1": "NOT RUN",
+     "C2": "NOT RUN",
+     "C3": {
+      "declared_at": "PREREG.md, committed before the first run",
+      "generator": "C3_elastic_target",
+      "hits_pre_window": true,
+      "margin": 0.009684038938767143,
+      "note": "If pre_window was set after seeing observed, this test is void.  Log the timestamp/context in declared_at and be honest.",
+      "observed": 0.0042236328125,
+      "pre_window": 0.05,
+      "target": 0.013907671751267142
+     },
+     "C4": "NOT RUN",
+     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
+     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+    },
+    "id": "CC_percolation[spot_0.05 d=0.20]_ode_meanfield[spot_0.05 d=0.20]",
+    "observation": "percolation[spot_0.05 d=0.20] (percolation) and ode_meanfield[spot_0.05 d=0.20] (nonlinear) agree: 0.0042236328125 vs 0.013907671751267142",
+    "recheck_when": "void",
+    "slots": {
+     "local_normal_form": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "low_dim_projection": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "none_of_above": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "numerical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "shared_constraint": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "statistical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     }
+    },
+    "trigger": "cross-family agreement inside the pre-declared window 0.05 (PREREG.md, committed before the first run)"
+   },
+   {
+    "branch": "void",
+    "c_tests": {
+     "C1": "NOT RUN",
+     "C2": "NOT RUN",
+     "C3": {
+      "declared_at": "PREREG.md, committed before the first run",
+      "generator": "C3_elastic_target",
+      "hits_pre_window": true,
+      "margin": 0.012825817128937156,
+      "note": "If pre_window was set after seeing observed, this test is void.  Log the timestamp/context in declared_at and be honest.",
+      "observed": 0.518505859375,
+      "pre_window": 0.05,
+      "target": 0.5313316765039372
+     },
+     "C4": "NOT RUN",
+     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
+     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+    },
+    "id": "CC_percolation[spot_0.05 d=0.60]_ode_meanfield[spot_0.05 d=0.60]",
+    "observation": "percolation[spot_0.05 d=0.60] (percolation) and ode_meanfield[spot_0.05 d=0.60] (nonlinear) agree: 0.518505859375 vs 0.5313316765039372",
+    "recheck_when": "void",
+    "slots": {
+     "local_normal_form": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "low_dim_projection": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "none_of_above": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "numerical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "shared_constraint": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "statistical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     }
+    },
+    "trigger": "cross-family agreement inside the pre-declared window 0.05 (PREREG.md, committed before the first run)"
+   },
+   {
+    "branch": "void",
+    "c_tests": {
+     "C1": "NOT RUN",
+     "C2": "NOT RUN",
+     "C3": {
+      "declared_at": "PREREG.md, committed before the first run",
+      "generator": "C3_elastic_target",
+      "hits_pre_window": true,
+      "margin": 0.023244240334133304,
+      "note": "If pre_window was set after seeing observed, this test is void.  Log the timestamp/context in declared_at and be honest.",
+      "observed": 0.61500244140625,
+      "pre_window": 0.05,
+      "target": 0.5917582010721167
+     },
+     "C4": "NOT RUN",
+     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
+     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+    },
+    "id": "CC_percolation[spot_0.05 d=0.65]_ode_meanfield[spot_0.05 d=0.65]",
+    "observation": "percolation[spot_0.05 d=0.65] (percolation) and ode_meanfield[spot_0.05 d=0.65] (nonlinear) agree: 0.61500244140625 vs 0.5917582010721167",
+    "recheck_when": "void",
+    "slots": {
+     "local_normal_form": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "low_dim_projection": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "none_of_above": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "numerical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "shared_constraint": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "statistical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     }
+    },
+    "trigger": "cross-family agreement inside the pre-declared window 0.05 (PREREG.md, committed before the first run)"
+   },
+   {
+    "branch": "void",
+    "c_tests": {
+     "C1": "NOT RUN",
+     "C2": "NOT RUN",
+     "C3": {
+      "declared_at": "PREREG.md, committed before the first run",
+      "generator": "C3_elastic_target",
+      "hits_pre_window": true,
+      "margin": 0.033766274643161176,
+      "note": "If pre_window was set after seeing observed, this test is void.  Log the timestamp/context in declared_at and be honest.",
+      "observed": 0.68433837890625,
+      "pre_window": 0.05,
+      "target": 0.6505721042630889
+     },
+     "C4": "NOT RUN",
+     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
+     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+    },
+    "id": "CC_percolation[spot_0.05 d=0.70]_ode_meanfield[spot_0.05 d=0.70]",
+    "observation": "percolation[spot_0.05 d=0.70] (percolation) and ode_meanfield[spot_0.05 d=0.70] (nonlinear) agree: 0.68433837890625 vs 0.6505721042630889",
+    "recheck_when": "void",
+    "slots": {
+     "local_normal_form": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "low_dim_projection": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "none_of_above": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "numerical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "shared_constraint": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "statistical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     }
+    },
+    "trigger": "cross-family agreement inside the pre-declared window 0.05 (PREREG.md, committed before the first run)"
+   },
+   {
+    "branch": "void",
+    "c_tests": {
+     "C1": "NOT RUN",
+     "C2": "NOT RUN",
+     "C3": {
+      "declared_at": "PREREG.md, committed before the first run",
+      "generator": "C3_elastic_target",
+      "hits_pre_window": true,
+      "margin": 0.0313016452221313,
+      "note": "If pre_window was set after seeing observed, this test is void.  Log the timestamp/context in declared_at and be honest.",
+      "observed": 0.795672607421875,
+      "pre_window": 0.05,
+      "target": 0.7643709621997437
+     },
+     "C4": "NOT RUN",
+     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
+     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+    },
+    "id": "CC_percolation[spot_0.05 d=0.80]_ode_meanfield[spot_0.05 d=0.80]",
+    "observation": "percolation[spot_0.05 d=0.80] (percolation) and ode_meanfield[spot_0.05 d=0.80] (nonlinear) agree: 0.795672607421875 vs 0.7643709621997437",
+    "recheck_when": "void",
+    "slots": {
+     "local_normal_form": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "low_dim_projection": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "none_of_above": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "numerical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "shared_constraint": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "statistical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     }
+    },
+    "trigger": "cross-family agreement inside the pre-declared window 0.05 (PREREG.md, committed before the first run)"
+   },
+   {
+    "branch": "void",
+    "c_tests": {
+     "C1": "NOT RUN",
+     "C2": "NOT RUN",
+     "C3": {
+      "declared_at": "PREREG.md, committed before the first run",
+      "generator": "C3_elastic_target",
+      "hits_pre_window": true,
+      "margin": 0.02415234212481643,
+      "note": "If pre_window was set after seeing observed, this test is void.  Log the timestamp/context in declared_at and be honest.",
+      "observed": 0.89847412109375,
+      "pre_window": 0.05,
+      "target": 0.8743217789689336
+     },
+     "C4": "NOT RUN",
+     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
+     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+    },
+    "id": "CC_percolation[spot_0.05 d=0.90]_ode_meanfield[spot_0.05 d=0.90]",
+    "observation": "percolation[spot_0.05 d=0.90] (percolation) and ode_meanfield[spot_0.05 d=0.90] (nonlinear) agree: 0.89847412109375 vs 0.8743217789689336",
+    "recheck_when": "void",
+    "slots": {
+     "local_normal_form": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "low_dim_projection": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "none_of_above": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "numerical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "shared_constraint": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "statistical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     }
+    },
+    "trigger": "cross-family agreement inside the pre-declared window 0.05 (PREREG.md, committed before the first run)"
+   },
+   {
+    "branch": "void",
+    "c_tests": {
+     "C1": "NOT RUN",
+     "C2": "NOT RUN",
+     "C3": {
+      "declared_at": "PREREG.md, committed before the first run",
+      "generator": "C3_elastic_target",
+      "hits_pre_window": true,
+      "margin": 0.0009444578907456978,
+      "note": "If pre_window was set after seeing observed, this test is void.  Log the timestamp/context in declared_at and be honest.",
+      "observed": 0.001708984375,
+      "pre_window": 0.05,
+      "target": 0.002653442265745698
+     },
+     "C4": "NOT RUN",
+     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
+     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+    },
+    "id": "CC_percolation[spot_0.20 d=0.10]_ode_meanfield[spot_0.20 d=0.10]",
+    "observation": "percolation[spot_0.20 d=0.10] (percolation) and ode_meanfield[spot_0.20 d=0.10] (nonlinear) agree: 0.001708984375 vs 0.002653442265745698",
+    "recheck_when": "void",
+    "slots": {
+     "local_normal_form": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "low_dim_projection": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "none_of_above": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "numerical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "shared_constraint": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "statistical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     }
+    },
+    "trigger": "cross-family agreement inside the pre-declared window 0.05 (PREREG.md, committed before the first run)"
+   },
+   {
+    "branch": "void",
+    "c_tests": {
+     "C1": "NOT RUN",
+     "C2": "NOT RUN",
+     "C3": {
+      "declared_at": "PREREG.md, committed before the first run",
+      "generator": "C3_elastic_target",
+      "hits_pre_window": true,
+      "margin": 0.011222595054725868,
+      "note": "If pre_window was set after seeing observed, this test is void.  Log the timestamp/context in declared_at and be honest.",
+      "observed": 0.004425048828125,
+      "pre_window": 0.05,
+      "target": 0.015647643882850868
+     },
+     "C4": "NOT RUN",
+     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
+     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+    },
+    "id": "CC_percolation[spot_0.20 d=0.20]_ode_meanfield[spot_0.20 d=0.20]",
+    "observation": "percolation[spot_0.20 d=0.20] (percolation) and ode_meanfield[spot_0.20 d=0.20] (nonlinear) agree: 0.004425048828125 vs 0.015647643882850868",
+    "recheck_when": "void",
+    "slots": {
+     "local_normal_form": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "low_dim_projection": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "none_of_above": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "numerical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "shared_constraint": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "statistical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     }
+    },
+    "trigger": "cross-family agreement inside the pre-declared window 0.05 (PREREG.md, committed before the first run)"
+   },
+   {
+    "branch": "void",
+    "c_tests": {
+     "C1": "NOT RUN",
+     "C2": "NOT RUN",
+     "C3": {
+      "declared_at": "PREREG.md, committed before the first run",
+      "generator": "C3_elastic_target",
+      "hits_pre_window": true,
+      "margin": 0.0038288748776210135,
+      "note": "If pre_window was set after seeing observed, this test is void.  Log the timestamp/context in declared_at and be honest.",
+      "observed": 0.473138427734375,
+      "pre_window": 0.05,
+      "target": 0.476967302611996
+     },
+     "C4": "NOT RUN",
+     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
+     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+    },
+    "id": "CC_percolation[spot_0.20 d=0.55]_ode_meanfield[spot_0.20 d=0.55]",
+    "observation": "percolation[spot_0.20 d=0.55] (percolation) and ode_meanfield[spot_0.20 d=0.55] (nonlinear) agree: 0.473138427734375 vs 0.476967302611996",
+    "recheck_when": "void",
+    "slots": {
+     "local_normal_form": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "low_dim_projection": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "none_of_above": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "numerical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "shared_constraint": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "statistical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     }
+    },
+    "trigger": "cross-family agreement inside the pre-declared window 0.05 (PREREG.md, committed before the first run)"
+   },
+   {
+    "branch": "void",
+    "c_tests": {
+     "C1": "NOT RUN",
+     "C2": "NOT RUN",
+     "C3": {
+      "declared_at": "PREREG.md, committed before the first run",
+      "generator": "C3_elastic_target",
+      "hits_pre_window": true,
+      "margin": 0.019971899124775483,
+      "note": "If pre_window was set after seeing observed, this test is void.  Log the timestamp/context in declared_at and be honest.",
+      "observed": 0.55843505859375,
+      "pre_window": 0.05,
+      "target": 0.5384631594689745
+     },
+     "C4": "NOT RUN",
+     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
+     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+    },
+    "id": "CC_percolation[spot_0.20 d=0.60]_ode_meanfield[spot_0.20 d=0.60]",
+    "observation": "percolation[spot_0.20 d=0.60] (percolation) and ode_meanfield[spot_0.20 d=0.60] (nonlinear) agree: 0.55843505859375 vs 0.5384631594689745",
+    "recheck_when": "void",
+    "slots": {
+     "local_normal_form": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "low_dim_projection": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "none_of_above": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "numerical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "shared_constraint": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "statistical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     }
+    },
+    "trigger": "cross-family agreement inside the pre-declared window 0.05 (PREREG.md, committed before the first run)"
+   },
+   {
+    "branch": "void",
+    "c_tests": {
+     "C1": "NOT RUN",
+     "C2": "NOT RUN",
+     "C3": {
+      "declared_at": "PREREG.md, committed before the first run",
+      "generator": "C3_elastic_target",
+      "hits_pre_window": true,
+      "margin": 0.030908496158561838,
+      "note": "If pre_window was set after seeing observed, this test is void.  Log the timestamp/context in declared_at and be honest.",
+      "observed": 0.62901611328125,
+      "pre_window": 0.05,
+      "target": 0.5981076171226881
+     },
+     "C4": "NOT RUN",
+     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
+     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+    },
+    "id": "CC_percolation[spot_0.20 d=0.65]_ode_meanfield[spot_0.20 d=0.65]",
+    "observation": "percolation[spot_0.20 d=0.65] (percolation) and ode_meanfield[spot_0.20 d=0.65] (nonlinear) agree: 0.62901611328125 vs 0.5981076171226881",
+    "recheck_when": "void",
+    "slots": {
+     "local_normal_form": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "low_dim_projection": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "none_of_above": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "numerical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "shared_constraint": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "statistical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     }
+    },
+    "trigger": "cross-family agreement inside the pre-declared window 0.05 (PREREG.md, committed before the first run)"
+   },
+   {
+    "branch": "void",
+    "c_tests": {
+     "C1": "NOT RUN",
+     "C2": "NOT RUN",
+     "C3": {
+      "declared_at": "PREREG.md, committed before the first run",
+      "generator": "C3_elastic_target",
+      "hits_pre_window": true,
+      "margin": 0.032874674461038755,
+      "note": "If pre_window was set after seeing observed, this test is void.  Log the timestamp/context in declared_at and be honest.",
+      "observed": 0.689093017578125,
+      "pre_window": 0.05,
+      "target": 0.6562183431170863
+     },
+     "C4": "NOT RUN",
+     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
+     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+    },
+    "id": "CC_percolation[spot_0.20 d=0.70]_ode_meanfield[spot_0.20 d=0.70]",
+    "observation": "percolation[spot_0.20 d=0.70] (percolation) and ode_meanfield[spot_0.20 d=0.70] (nonlinear) agree: 0.689093017578125 vs 0.6562183431170863",
+    "recheck_when": "void",
+    "slots": {
+     "local_normal_form": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "low_dim_projection": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "none_of_above": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "numerical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "shared_constraint": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "statistical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     }
+    },
+    "trigger": "cross-family agreement inside the pre-declared window 0.05 (PREREG.md, committed before the first run)"
+   },
+   {
+    "branch": "void",
+    "c_tests": {
+     "C1": "NOT RUN",
+     "C2": "NOT RUN",
+     "C3": {
+      "declared_at": "PREREG.md, committed before the first run",
+      "generator": "C3_elastic_target",
+      "hits_pre_window": true,
+      "margin": 0.027244757561842414,
+      "note": "If pre_window was set after seeing observed, this test is void.  Log the timestamp/context in declared_at and be honest.",
+      "observed": 0.796063232421875,
+      "pre_window": 0.05,
+      "target": 0.7688184748600326
+     },
+     "C4": "NOT RUN",
+     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
+     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+    },
+    "id": "CC_percolation[spot_0.20 d=0.80]_ode_meanfield[spot_0.20 d=0.80]",
+    "observation": "percolation[spot_0.20 d=0.80] (percolation) and ode_meanfield[spot_0.20 d=0.80] (nonlinear) agree: 0.796063232421875 vs 0.7688184748600326",
+    "recheck_when": "void",
+    "slots": {
+     "local_normal_form": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "low_dim_projection": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "none_of_above": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "numerical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "shared_constraint": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "statistical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     }
+    },
+    "trigger": "cross-family agreement inside the pre-declared window 0.05 (PREREG.md, committed before the first run)"
+   },
+   {
+    "branch": "void",
+    "c_tests": {
+     "C1": "NOT RUN",
+     "C2": "NOT RUN",
+     "C3": {
+      "declared_at": "PREREG.md, committed before the first run",
+      "generator": "C3_elastic_target",
+      "hits_pre_window": true,
+      "margin": 0.0206812881941959,
+      "note": "If pre_window was set after seeing observed, this test is void.  Log the timestamp/context in declared_at and be honest.",
+      "observed": 0.898486328125,
+      "pre_window": 0.05,
+      "target": 0.877805039930804
+     },
+     "C4": "NOT RUN",
+     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
+     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+    },
+    "id": "CC_percolation[spot_0.20 d=0.90]_ode_meanfield[spot_0.20 d=0.90]",
+    "observation": "percolation[spot_0.20 d=0.90] (percolation) and ode_meanfield[spot_0.20 d=0.90] (nonlinear) agree: 0.898486328125 vs 0.877805039930804",
+    "recheck_when": "void",
+    "slots": {
+     "local_normal_form": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "low_dim_projection": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "none_of_above": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "numerical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "shared_constraint": {
+      "evidence": "void",
+      "state": "void"
+     },
+     "statistical_artifact": {
+      "evidence": "void",
+      "state": "void"
+     }
+    },
+    "trigger": "cross-family agreement inside the pre-declared window 0.05 (PREREG.md, committed before the first run)"
+   }
+  ],
+  "cards_opened": 21,
+  "readings": [
+   [
+    "CC_percolation[spot_0.00 d=0.10]_ode_meanfield[spot_0.00 d=0.10]",
+    "OPEN"
+   ],
+   [
+    "CC_percolation[spot_0.00 d=0.20]_ode_meanfield[spot_0.00 d=0.20]",
+    "OPEN"
+   ],
+   [
+    "CC_percolation[spot_0.00 d=0.65]_ode_meanfield[spot_0.00 d=0.65]",
+    "OPEN"
+   ],
+   [
+    "CC_percolation[spot_0.00 d=0.70]_ode_meanfield[spot_0.00 d=0.70]",
+    "OPEN"
+   ],
+   [
+    "CC_percolation[spot_0.00 d=0.80]_ode_meanfield[spot_0.00 d=0.80]",
+    "OPEN"
+   ],
+   [
+    "CC_percolation[spot_0.00 d=0.90]_ode_meanfield[spot_0.00 d=0.90]",
+    "OPEN"
+   ],
+   [
+    "CC_percolation[spot_0.05 d=0.10]_ode_meanfield[spot_0.05 d=0.10]",
+    "OPEN"
+   ],
+   [
+    "CC_percolation[spot_0.05 d=0.20]_ode_meanfield[spot_0.05 d=0.20]",
+    "OPEN"
+   ],
+   [
+    "CC_percolation[spot_0.05 d=0.60]_ode_meanfield[spot_0.05 d=0.60]",
+    "OPEN"
+   ],
+   [
+    "CC_percolation[spot_0.05 d=0.65]_ode_meanfield[spot_0.05 d=0.65]",
+    "OPEN"
+   ],
+   [
+    "CC_percolation[spot_0.05 d=0.70]_ode_meanfield[spot_0.05 d=0.70]",
+    "OPEN"
+   ],
+   [
+    "CC_percolation[spot_0.05 d=0.80]_ode_meanfield[spot_0.05 d=0.80]",
+    "OPEN"
+   ],
+   [
+    "CC_percolation[spot_0.05 d=0.90]_ode_meanfield[spot_0.05 d=0.90]",
+    "OPEN"
+   ],
+   [
+    "CC_percolation[spot_0.20 d=0.10]_ode_meanfield[spot_0.20 d=0.10]",
+    "OPEN"
+   ],
+   [
+    "CC_percolation[spot_0.20 d=0.20]_ode_meanfield[spot_0.20 d=0.20]",
+    "OPEN"
+   ],
+   [
+    "CC_percolation[spot_0.20 d=0.55]_ode_meanfield[spot_0.20 d=0.55]",
+    "OPEN"
+   ],
+   [
+    "CC_percolation[spot_0.20 d=0.60]_ode_meanfield[spot_0.20 d=0.60]",
+    "OPEN"
+   ],
+   [
+    "CC_percolation[spot_0.20 d=0.65]_ode_meanfield[spot_0.20 d=0.65]",
+    "OPEN"
+   ],
+   [
+    "CC_percolation[spot_0.20 d=0.70]_ode_meanfield[spot_0.20 d=0.70]",
+    "OPEN"
+   ],
+   [
+    "CC_percolation[spot_0.20 d=0.80]_ode_meanfield[spot_0.20 d=0.80]",
+    "OPEN"
+   ],
+   [
+    "CC_percolation[spot_0.20 d=0.90]_ode_meanfield[spot_0.20 d=0.90]",
+    "OPEN"
+   ]
+  ]
+ },
+ "design": {
+  "L": 64,
+  "declared_at": "PREREG.md, committed before the first run",
+  "levels": [
+   0.1,
+   0.2,
+   0.3,
+   0.4,
+   0.5,
+   0.55,
+   0.6,
+   0.65,
+   0.7,
+   0.8,
+   0.9
+  ],
+  "replicates": 40,
+  "spots": [
+   0.0,
+   0.05,
+   0.2
+  ],
+  "window": 0.05
+ },
+ "features": [
+  {
+   "got": "max ratio 14.9 at d = 0.40",
+   "id": "F1",
+   "logged": "ODE overpredicts mid-drought up to ~60x",
+   "reading": "DOES NOT APPEAR",
+   "rule": "max ODE/grid over d 0.3..0.6 in 30..120"
+  },
+  {
+   "got": "steepest (0.55, 0.6), variance peak at 0.6",
+   "id": "F2",
+   "logged": "grid threshold ~0.6-0.7 with variance spike",
+   "reading": "APPEARS",
+   "rule": "steepest interval inside 0.55..0.7 AND variance peak inside 0.55..0.7"
+  },
+  {
+   "got": "inside at [0.55, 0.6, 0.65, 0.7, 0.8, 0.9] of [0.5, 0.55, 0.6, 0.65, 0.7, 0.8, 0.9]; outside below 0.5 at [0.3, 0.4]",
+   "id": "F3",
+   "logged": "spot 0.2 converges grid onto ODE at drought >= 0.5",
+   "reading": "DOES NOT APPEAR",
+   "rule": "inside window at every d >= 0.5 AND outside at some d < 0.5"
+  },
+  {
+   "got": "steepest (0.5, 0.55)",
+   "id": "F4",
+   "logged": "5% spotting drops threshold to ~0.5",
+   "reading": "APPEARS",
+   "rule": "steepest interval (spot 0.05) has an end at 0.5 or lies inside 0.4..0.55"
+  }
+ ],
+ "runs_not_complete": [],
+ "table": {
+  "spot_0.00": [
+   {
+    "abs_gap": 0.0008903106725611427,
+    "drought": 0.1,
+    "grid_max": 0.00439453125,
+    "grid_mean": 0.001678466796875,
+    "grid_min": 0.00048828125,
+    "grid_variance": 7.426366209983825e-07,
+    "inside_window": true,
+    "ode": 0.0025687774694361427,
+    "ode_over_grid": 1.530430911245155
+   },
+   {
+    "abs_gap": 0.009321585103528065,
+    "drought": 0.2,
+    "grid_max": 0.007080078125,
+    "grid_mean": 0.0040771484375,
+    "grid_min": 0.001708984375,
+    "grid_variance": 1.6486644744873047e-06,
+    "inside_window": true,
+    "ode": 0.013398733541028064,
+    "ode_over_grid": 3.2863001547335897
+   },
+   {
+    "abs_gap": 0.10047134072484379,
+    "drought": 0.3,
+    "grid_max": 0.0166015625,
+    "grid_mean": 0.008721923828125,
+    "grid_min": 0.004638671875,
+    "grid_variance": 7.185302674770355e-06,
+    "inside_window": false,
+    "ode": 0.1091932645529688,
+    "ode_over_grid": 12.519401304659487
+   },
+   {
+    "abs_gap": 0.24426093198196747,
+    "drought": 0.4,
+    "grid_max": 0.031494140625,
+    "grid_mean": 0.017596435546875,
+    "grid_min": 0.0087890625,
+    "grid_variance": 3.251250833272934e-05,
+    "inside_window": false,
+    "ode": 0.2618573675288425,
+    "ode_over_grid": 14.881273359668938
+   },
+   {
+    "abs_gap": 0.35842787242158985,
+    "drought": 0.5,
+    "grid_max": 0.082763671875,
+    "grid_mean": 0.04261474609375,
+    "grid_min": 0.01708984375,
+    "grid_variance": 0.00025362953543663026,
+    "inside_window": false,
+    "ode": 0.40104261851533984,
+    "ode_over_grid": 9.410888372608605
+   },
+   {
+    "abs_gap": 0.36388450830225205,
+    "drought": 0.55,
+    "grid_max": 0.3525390625,
+    "grid_mean": 0.102197265625,
+    "grid_min": 0.029541015625,
+    "grid_variance": 0.003672223687171936,
+    "inside_window": false,
+    "ode": 0.46608177392725203,
+    "ode_over_grid": 4.560609044448219
+   },
+   {
+    "abs_gap": 0.177902958672215,
+    "drought": 0.6,
+    "grid_max": 0.5322265625,
+    "grid_mean": 0.350848388671875,
+    "grid_min": 0.0810546875,
+    "grid_variance": 0.017646453939378262,
+    "inside_window": false,
+    "ode": 0.52875134734409,
+    "ode_over_grid": 1.5070650583451752
+   },
+   {
+    "abs_gap": 0.007305400661496431,
+    "drought": 0.65,
+    "grid_max": 0.6318359375,
+    "grid_mean": 0.596759033203125,
+    "grid_min": 0.55126953125,
+    "grid_variance": 0.0004087400063872337,
+    "inside_window": true,
+    "ode": 0.5894536325416285,
+    "ode_over_grid": 0.9877582068221331
+   },
+   {
+    "abs_gap": 0.030756259837245947,
+    "drought": 0.7,
+    "grid_max": 0.6962890625,
+    "grid_mean": 0.6792724609375,
+    "grid_min": 0.655517578125,
+    "grid_variance": 0.00011890888214111328,
+    "inside_window": true,
+    "ode": 0.6485162011002541,
+    "ode_over_grid": 0.9547217624650974
+   },
+   {
+    "abs_gap": 0.03255344534985116,
+    "drought": 0.8,
+    "grid_max": 0.807861328125,
+    "grid_mean": 0.795294189453125,
+    "grid_min": 0.7841796875,
+    "grid_variance": 3.8024745881557466e-05,
+    "inside_window": true,
+    "ode": 0.7627407441032739,
+    "ode_over_grid": 0.9590674170872088
+   },
+   {
+    "abs_gap": 0.025425906921300534,
+    "drought": 0.9,
+    "grid_max": 0.908203125,
+    "grid_mean": 0.8984619140625,
+    "grid_min": 0.8896484375,
+    "grid_variance": 1.648604869842529e-05,
+    "inside_window": true,
+    "ode": 0.8730360071411994,
+    "ode_over_grid": 0.9717006291270218
+   }
+  ],
+  "spot_0.05": [
+   {
+    "abs_gap": 0.0008926669425345062,
+    "drought": 0.1,
+    "grid_max": 0.00439453125,
+    "grid_mean": 0.00169677734375,
+    "grid_min": 0.00048828125,
+    "grid_variance": 7.866322994232178e-07,
+    "inside_window": true,
+    "ode": 0.0025894442862845063,
+    "ode_over_grid": 1.5260955103052285
+   },
+   {
+    "abs_gap": 0.009684038938767143,
+    "drought": 0.2,
+    "grid_max": 0.008056640625,
+    "grid_mean": 0.0042236328125,
+    "grid_min": 0.001708984375,
+    "grid_variance": 2.1731853485107422e-06,
+    "inside_window": true,
+    "ode": 0.013907671751267142,
+    "ode_over_grid": 3.2928221672364284
+   },
+   {
+    "abs_gap": 0.10422876854135203,
+    "drought": 0.3,
+    "grid_max": 0.017333984375,
+    "grid_mean": 0.009326171875,
+    "grid_min": 0.004638671875,
+    "grid_variance": 8.535981178283692e-06,
+    "inside_window": false,
+    "ode": 0.11355494041635203,
+    "ode_over_grid": 12.175943349355443
+   },
+   {
+    "abs_gap": 0.2440291126666131,
+    "drought": 0.4,
+    "grid_max": 0.052490234375,
+    "grid_mean": 0.0218017578125,
+    "grid_min": 0.0087890625,
+    "grid_variance": 7.889032363891601e-05,
+    "inside_window": false,
+    "ode": 0.2658308704791131,
+    "ode_over_grid": 12.193093454450697
+   },
+   {
+    "abs_gap": 0.27280708430928774,
+    "drought": 0.5,
+    "grid_max": 0.3134765625,
+    "grid_mean": 0.13145751953125,
+    "grid_min": 0.0185546875,
+    "grid_variance": 0.006729891747236252,
+    "inside_window": false,
+    "ode": 0.40426460384053775,
+    "ode_over_grid": 3.0752489875212974
+   },
+   {
+    "abs_gap": 0.12629156948745268,
+    "drought": 0.55,
+    "grid_max": 0.44287109375,
+    "grid_mean": 0.34267578125,
+    "grid_min": 0.03076171875,
+    "grid_variance": 0.00778850257396698,
+    "inside_window": false,
+    "ode": 0.46896735073745266,
+    "ode_over_grid": 1.3685453609437206
+   },
+   {
+    "abs_gap": 0.012825817128937156,
+    "drought": 0.6,
+    "grid_max": 0.566650390625,
+    "grid_mean": 0.518505859375,
+    "grid_min": 0.4619140625,
+    "grid_variance": 0.0006391680240631103,
+    "inside_window": true,
+    "ode": 0.5313316765039372,
+    "ode_over_grid": 1.024736108371846
+   },
+   {
+    "abs_gap": 0.023244240334133304,
+    "drought": 0.65,
+    "grid_max": 0.634765625,
+    "grid_mean": 0.61500244140625,
+    "grid_min": 0.5751953125,
+    "grid_variance": 0.00019702300429344177,
+    "inside_window": true,
+    "ode": 0.5917582010721167,
+    "ode_over_grid": 0.9622046373003275
+   },
+   {
+    "abs_gap": 0.033766274643161176,
+    "drought": 0.7,
+    "grid_max": 0.698974609375,
+    "grid_mean": 0.68433837890625,
+    "grid_min": 0.660400390625,
+    "grid_variance": 7.69852101802826e-05,
+    "inside_window": true,
+    "ode": 0.6505721042630889,
+    "ode_over_grid": 0.9506585109297415
+   },
+   {
+    "abs_gap": 0.0313016452221313,
+    "drought": 0.8,
+    "grid_max": 0.807861328125,
+    "grid_mean": 0.795672607421875,
+    "grid_min": 0.785888671875,
+    "grid_variance": 3.4556947648525236e-05,
+    "inside_window": true,
+    "ode": 0.7643709621997437,
+    "ode_over_grid": 0.9606601447251598
+   },
+   {
+    "abs_gap": 0.02415234212481643,
+    "drought": 0.9,
+    "grid_max": 0.908203125,
+    "grid_mean": 0.89847412109375,
+    "grid_min": 0.8896484375,
+    "grid_variance": 1.6449540853500367e-05,
+    "inside_window": true,
+    "ode": 0.8743217789689336,
+    "ode_over_grid": 0.9731184888270185
+   }
+  ],
+  "spot_0.20": [
+   {
+    "abs_gap": 0.0009444578907456978,
+    "drought": 0.1,
+    "grid_max": 0.00439453125,
+    "grid_mean": 0.001708984375,
+    "grid_min": 0.00048828125,
+    "grid_variance": 7.897615432739258e-07,
+    "inside_window": true,
+    "ode": 0.002653442265745698,
+    "ode_over_grid": 1.552642788642054
+   },
+   {
+    "abs_gap": 0.011222595054725868,
+    "drought": 0.2,
+    "grid_max": 0.009033203125,
+    "grid_mean": 0.004425048828125,
+    "grid_min": 0.001708984375,
+    "grid_variance": 2.5277957320213316e-06,
+    "inside_window": true,
+    "ode": 0.015647643882850868,
+    "ode_over_grid": 3.5361516879534984
+   },
+   {
+    "abs_gap": 0.11419206158197594,
+    "drought": 0.3,
+    "grid_max": 0.02783203125,
+    "grid_mean": 0.01195068359375,
+    "grid_min": 0.006103515625,
+    "grid_variance": 2.3299306631088256e-05,
+    "inside_window": false,
+    "ode": 0.12614274517572593,
+    "ode_over_grid": 10.555274448207832
+   },
+   {
+    "abs_gap": 0.21005970720402817,
+    "drought": 0.4,
+    "grid_max": 0.15625,
+    "grid_mean": 0.06690673828125,
+    "grid_min": 0.010009765625,
+    "grid_variance": 0.0013022391498088836,
+    "inside_window": false,
+    "ode": 0.27696644548527816,
+    "ode_over_grid": 4.139589712489324
+   },
+   {
+    "abs_gap": 0.05262981848139331,
+    "drought": 0.5,
+    "grid_max": 0.403076171875,
+    "grid_mean": 0.360595703125,
+    "grid_min": 0.255126953125,
+    "grid_variance": 0.000879332423210144,
+    "inside_window": false,
+    "ode": 0.4132255216063933,
+    "ode_over_grid": 1.1459524282327602
+   },
+   {
+    "abs_gap": 0.0038288748776210135,
+    "drought": 0.55,
+    "grid_max": 0.50146484375,
+    "grid_mean": 0.473138427734375,
+    "grid_min": 0.43310546875,
+    "grid_variance": 0.00022558715194463729,
+    "inside_window": true,
+    "ode": 0.476967302611996,
+    "ode_over_grid": 1.0080925045466198
+   },
+   {
+    "abs_gap": 0.019971899124775483,
+    "drought": 0.6,
+    "grid_max": 0.58447265625,
+    "grid_mean": 0.55843505859375,
+    "grid_min": 0.53466796875,
+    "grid_variance": 0.00011651679873466492,
+    "inside_window": true,
+    "ode": 0.5384631594689745,
+    "ode_over_grid": 0.9642359504163857
+   },
+   {
+    "abs_gap": 0.030908496158561838,
+    "drought": 0.65,
+    "grid_max": 0.639892578125,
+    "grid_mean": 0.62901611328125,
+    "grid_min": 0.610107421875,
+    "grid_variance": 5.975350737571716e-05,
+    "inside_window": true,
+    "ode": 0.5981076171226881,
+    "ode_over_grid": 0.9508621551881584
+   },
+   {
+    "abs_gap": 0.032874674461038755,
+    "drought": 0.7,
+    "grid_max": 0.701171875,
+    "grid_mean": 0.689093017578125,
+    "grid_min": 0.670654296875,
+    "grid_variance": 4.972811788320542e-05,
+    "inside_window": true,
+    "ode": 0.6562183431170863,
+    "ode_over_grid": 0.9522928347517153
+   },
+   {
+    "abs_gap": 0.027244757561842414,
+    "drought": 0.8,
+    "grid_max": 0.80810546875,
+    "grid_mean": 0.796063232421875,
+    "grid_min": 0.786376953125,
+    "grid_variance": 3.312047570943832e-05,
+    "inside_window": true,
+    "ode": 0.7688184748600326,
+    "ode_over_grid": 0.9657756363411544
+   },
+   {
+    "abs_gap": 0.0206812881941959,
+    "drought": 0.9,
+    "grid_max": 0.908203125,
+    "grid_mean": 0.898486328125,
+    "grid_min": 0.8896484375,
+    "grid_variance": 1.6397833824157716e-05,
+    "inside_window": true,
+    "ode": 0.877805039930804,
+    "ode_over_grid": 0.976982078027437
+   }
+  ]
+ },
+ "transitions": {
+  "spot_0": {
+   "note": "located to the sweep's own spacing, not finer",
+   "steepest_between": [
+    0.55,
+    0.6
+   ],
+   "steepest_slope": 4.973022460937507,
+   "variance_peak": 0.017646453939378262,
+   "variance_peak_at": 0.6
+  },
+  "spot_005": {
+   "note": "located to the sweep's own spacing, not finer",
+   "steepest_between": [
+    0.5,
+    0.55
+   ],
+   "steepest_slope": 4.224365234374996,
+   "variance_peak": 0.00778850257396698,
+   "variance_peak_at": 0.55
+  }
+ }
+}

@@ -45,9 +45,9 @@ def _extra_rates(out, cfg):
     return l0.flux_keys(out, cfg["budgets"])
 
 
-def _eval(model, state, t, dt, cfg, params):
+def _eval(model, state, t, dt, cfg, params, t_step=None):
     envd = dict(cfg["environment"].at(t))
-    envd.update(t=t, dt=dt, rng=cfg["environment"].rng)
+    envd.update(t=t, dt=dt, rng=cfg["environment"].rng, t_step=t if t_step is None else t_step)
     out = model(state, envd, cfg["relationships"], cfg["controls"], params)
     rates = dict(out.state_changes)
     rates.update(_extra_rates(out, cfg))
@@ -56,17 +56,25 @@ def _eval(model, state, t, dt, cfg, params):
 
 def integrate(model, cfg, params, state):
     dt, n = cfg["dt"], int(round(cfg["t_end"] / cfg["dt"]))
-    times, states, outs = [0.0], [dict(state)], []
+    times, states, outs, events = [0.0], [dict(state)], [], []
     pert = (cfg["controls"].get("perturbation") if cfg["controls"] else None) or None
     for i in range(n):
         t = i * dt
         if model.kind == "rate":
             k1, out = _eval(model, state, t, dt, cfg, params)
-            k2, _ = _eval(model, _axpy(state, k1, 0.5 * dt), t + 0.5 * dt, dt, cfg, params)
-            k3, _ = _eval(model, _axpy(state, k2, 0.5 * dt), t + 0.5 * dt, dt, cfg, params)
-            k4, _ = _eval(model, _axpy(state, k3, dt), t + dt, dt, cfg, params)
-            comb = {k: (k1[k] + 2 * k2.get(k, 0.0) + 2 * k3.get(k, 0.0) + k4.get(k, 0.0)) / 6.0 for k in k1}
-            state = _axpy(state, comb, dt)
+            k2, _ = _eval(model, _axpy(state, k1, 0.5 * dt), t + 0.5 * dt, dt, cfg, params, t)
+            k3, _ = _eval(model, _axpy(state, k2, 0.5 * dt), t + 0.5 * dt, dt, cfg, params, t)
+            k4, _ = _eval(model, _axpy(state, k3, dt), t + dt, dt, cfg, params, t)
+            keys = set(k1) | set(k2) | set(k3) | set(k4)
+            comb = {k: k1.get(k, 0.0) + 2 * k2.get(k, 0.0) + 2 * k3.get(k, 0.0) + k4.get(k, 0.0) for k in keys}
+            state = _axpy(state, comb, dt / 6)
+            if model.event is not None:
+                envd = dict(cfg["environment"].at(t + dt))
+                envd.update(t=t + dt, dt=dt, rng=cfg["environment"].rng, t_step=t)
+                moved = model.event(state, envd, params)
+                if moved:
+                    state = _apply_event(state, moved, cfg["budgets"])
+                    events.append(dict(t=t + dt, transfers=moved))
         else:
             delta, out = _eval(model, state, t, dt, cfg, params)
             state = _axpy(state, delta, 1.0)
@@ -77,7 +85,24 @@ def integrate(model, cfg, params, state):
         times.append(t + dt)
         states.append(dict(state))
         outs.append(out)
+    integrate.last_events = events
     return times, states, outs
+
+
+def _apply_event(state, moved, budgets):
+    """A discrete event: amounts (not rates) moved in one instant, booked like any transfer."""
+    state = dict(state)
+    for _name, src, dst, amt in moved:
+        if src is not None:
+            state[src] -= amt
+        if dst is not None:
+            state[dst] += amt
+
+    class _O:
+        transfers = moved
+    for k, v in l0.flux_keys(_O, budgets).items():
+        state[k] = state.get(k, 0.0) + v
+    return state
 
 
 def _apply_kick(state, pert, budgets):
@@ -139,6 +164,7 @@ def run(cfg, code_paths=()):
         energy_changes_last=outs[-1].energy_changes if outs else eq.NOT_APPLICABLE,
         provenance=provenance.stamp(cfg.describe(), list(code_paths) + [os.path.abspath(__file__)]),
     )
+    record["events"] = list(integrate.last_events)
     record = _finish(record, cfg, model, times, states, outs)
     record["_trajectory"] = dict(times=times, states=[numeric(s) for s in states])
     return results.check(record)

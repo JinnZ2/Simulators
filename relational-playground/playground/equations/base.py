@@ -51,6 +51,7 @@ class Model:
             raise ValueError("kind must be rate or step")
         self.name, self.family, self.version, self.fn, self.kind = name, family, version, fn, kind
         self.requires, self.limitations = tuple(requires), tuple(limitations)
+        self.event = None        # optional: event(state, environment, parameters) -> [(name, src, dst, amount)] or None
 
     def __call__(self, state, environment, relationships, controls, parameters):
         missing = [k for k in self.requires if k not in parameters]

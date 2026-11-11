@@ -204,7 +204,7 @@ def default_make_config(case):
     live = case["live"]
     return Config(run_id="gate:" + case["model"], system=SystemDefinition("gate", **{f: UNDECLARED for f in SF}),
                   boundary=None, model=case["model"], relationships=rel, controls=ControlMatrix(**{f: UNDECLARED for f in CF}),
-                  environment=Environment(case.get("seed", 1)),
+                  environment=Environment(case.get("seed", 1), case.get("forcing")),
                   parameters=UncertaintyMatrix({k: K(v) for k, v in case["params"].items()}),
                   initial=UncertaintyMatrix({k: K(v) for k, v in case["initial"].items()}),
                   t_end=case["t_end"], dt=case["dt"], observations=None,

@@ -1,0 +1,224 @@
+{
+ "checks": [
+  {
+   "got": -5.061906449554954e-11,
+   "met": true,
+   "target": "N budget CLOSED, |misclosure| < 1e-9"
+  },
+  {
+   "got": -3.426148253993233e-13,
+   "met": true,
+   "target": "water budget CLOSED"
+  },
+  {
+   "got": 80,
+   "met": true,
+   "target": "fires = 80"
+  },
+  {
+   "got": {
+    "F": 0.9468,
+    "G": 0.0,
+    "Lg": 1.0482,
+    "Lt": 3.6619,
+    "S": 0.3715,
+    "T": 36.6196,
+    "W": 0.6393
+   },
+   "met": true,
+   "target": "final pools match run 9 to 4 decimals"
+  },
+  {
+   "got": -5.061906449554954e-11,
+   "met": true,
+   "target": "N misclosure within a factor 10 of run 9's -5.062e-11 in size"
+  },
+  {
+   "got": -72.64300773769071,
+   "met": true,
+   "target": "planted leak reads LEAK, run INCOMPLETE"
+  },
+  {
+   "got": [
+    59,
+    -72.64300773769071
+   ],
+   "met": true,
+   "target": "planted leak: 59 fires, misclosure -72.64"
+  },
+  {
+   "got": -5.0746962187986355e-11,
+   "met": true,
+   "target": "no fire: 0 fires, N CLOSED"
+  },
+  {
+   "got": [
+    80,
+    -4.9396930990042165e-11
+   ],
+   "met": true,
+   "target": "native stream: both budgets CLOSED"
+  }
+ ],
+ "native_seed0": {
+  "N": {
+   "misclosure": -4.9396930990042165e-11,
+   "verdict": "CLOSED"
+  },
+  "boundary_audit": [
+   "boundary audit [N]: in deposition 300 ; out fire_volatilisation 270.986, leaching 5.76753",
+   "boundary audit [water]: in precipitation 299.756 ; out drainage 154.416, evapotranspiration 145.897"
+  ],
+  "expiry": {
+   "initial": {
+    "no_exit_defined": 0,
+    "open_slots": 0,
+    "rows": []
+   },
+   "parameters": {
+    "no_exit_defined": 0,
+    "open_slots": 0,
+    "rows": []
+   }
+  },
+  "final": {
+   "F": 0.9782533121929847,
+   "G": 1.1431695786980521e-149,
+   "Lg": 0.3358988256803877,
+   "Lt": 2.2829583797974466,
+   "S": 2.319669402947932,
+   "T": 36.32953099990249,
+   "W": 0.443477705156582
+  },
+  "fires": 80,
+  "model_trust": "TRUSTED: 12 clean draws, 12 planted (leak / coef alternating); FP 0.00 TP 1.00",
+  "status": "COMPLETE",
+  "status_reason": "2 of 5 budgets LIVE and closed; 3 VOID",
+  "stream": "NATIVE stdlib random.Random(0)",
+  "water": {
+   "misclosure": -1.5202283876192269e-12,
+   "verdict": "CLOSED"
+  }
+ },
+ "replay_base": {
+  "N": {
+   "misclosure": -5.061906449554954e-11,
+   "verdict": "CLOSED"
+  },
+  "boundary_audit": [
+   "boundary audit [N]: in deposition 300 ; out fire_volatilisation 270.741, leaching 5.61138",
+   "boundary audit [water]: in precipitation 297.044 ; out drainage 153.736, evapotranspiration 143.668"
+  ],
+  "expiry": {
+   "initial": {
+    "no_exit_defined": 0,
+    "open_slots": 0,
+    "rows": []
+   },
+   "parameters": {
+    "no_exit_defined": 0,
+    "open_slots": 0,
+    "rows": []
+   }
+  },
+  "final": {
+   "F": 0.9467817038570815,
+   "G": 2.145426351779628e-149,
+   "Lg": 1.0482246818541145,
+   "Lt": 3.661912568185091,
+   "S": 0.37150838318510354,
+   "T": 36.61960269548185,
+   "W": 0.6392518601141417
+  },
+  "fires": 80,
+  "model_trust": "TRUSTED: 12 clean draws, 12 planted (leak / coef alternating); FP 0.00 TP 1.00",
+  "status": "COMPLETE",
+  "status_reason": "2 of 5 budgets LIVE and closed; 3 VOID",
+  "stream": "REPLAY of numpy default_rng(0), fixtures/numpy_draws_seed0.json",
+  "water": {
+   "misclosure": -3.426148253993233e-13,
+   "verdict": "CLOSED"
+  }
+ },
+ "replay_no_fire": {
+  "N": {
+   "misclosure": -5.0746962187986355e-11,
+   "verdict": "CLOSED"
+  },
+  "boundary_audit": [
+   "boundary audit [N]: in deposition 300 ; out leaching 200.864",
+   "boundary audit [water]: in precipitation 297.044 ; out drainage 132.088, evapotranspiration 165.442"
+  ],
+  "expiry": {
+   "initial": {
+    "no_exit_defined": 0,
+    "open_slots": 0,
+    "rows": []
+   },
+   "parameters": {
+    "no_exit_defined": 0,
+    "open_slots": 0,
+    "rows": []
+   }
+  },
+  "final": {
+   "F": 1.9298524241607589,
+   "G": 3.3111062556923352e-115,
+   "Lg": 2.908429316247037,
+   "Lt": 18.26554711788263,
+   "S": 39.941731514269335,
+   "T": 55.09015510992188,
+   "W": 0.5138981547299928
+  },
+  "fires": 0,
+  "model_trust": "TRUSTED: 12 clean draws, 12 planted (leak / coef alternating); FP 0.00 TP 1.00",
+  "status": "COMPLETE",
+  "status_reason": "2 of 5 budgets LIVE and closed; 3 VOID",
+  "stream": "REPLAY of numpy default_rng(0), fixtures/numpy_draws_seed0.json",
+  "water": {
+   "misclosure": -2.2093438190040615e-13,
+   "verdict": "CLOSED"
+  }
+ },
+ "replay_planted_leak_0.3": {
+  "N": {
+   "misclosure": -72.64300773769071,
+   "verdict": "LEAK"
+  },
+  "boundary_audit": [
+   "boundary audit [N]: in deposition 300 ; out fire_volatilisation 197.818, leaching 5.11147",
+   "boundary audit [water]: in precipitation 297.044 ; out drainage 155.192, evapotranspiration 142.214"
+  ],
+  "expiry": {
+   "initial": {
+    "no_exit_defined": 0,
+    "open_slots": 0,
+    "rows": []
+   },
+   "parameters": {
+    "no_exit_defined": 0,
+    "open_slots": 0,
+    "rows": []
+   }
+  },
+  "final": {
+   "F": 0.37563917617163095,
+   "G": 3.115378866077264e-138,
+   "Lg": 0.49711233025134205,
+   "Lt": 5.3258793730357885,
+   "S": 0.4015103625398319,
+   "T": 36.827797488823734,
+   "W": 0.6373507444279396
+  },
+  "fires": 59,
+  "model_trust": "TRUSTED: 12 clean draws, 12 planted (leak / coef alternating); FP 0.00 TP 1.00",
+  "status": "INCOMPLETE",
+  "status_reason": "budget(s) ['N'] did not close",
+  "stream": "REPLAY of numpy default_rng(0), fixtures/numpy_draws_seed0.json",
+  "water": {
+   "misclosure": -2.644551244657123e-13,
+   "verdict": "CLOSED"
+  }
+ },
+ "run_6_as_logged": "47 fires, misclosure ~1e-9: REPORTED, code void; not reproduced here and not a target (PREREG)"
+}
