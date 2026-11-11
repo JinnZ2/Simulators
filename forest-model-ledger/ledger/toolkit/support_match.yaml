@@ -22,6 +22,7 @@ other_domains_it_could_see_into: void
 used_in:
   - run_16
   - run_19
+  - run_22
 open_issues:
   - "contamination: the expected reading of cases a, b, c1 was known before the claim records were coded; the cases confirm the build, the gate and the paraphrase probe are the tool's evidence"
   - "the gate's draws are templates; the contradicts and silent_on_claim legs are close to construction"
