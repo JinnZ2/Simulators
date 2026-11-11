@@ -20,7 +20,11 @@ One record per case (ledger/toolkit/cases/attribution_cases.yaml):
   provenance              {hand: first | second, source, text_supplied: true | false}
   note                    text | void
 
-Provenance rule: hand "first" needs text_supplied true. A record read by
+  locators                first hand only: list of {file, line, quote}; each file must be
+                          pinned in cases/texts/MANIFEST.yaml with a matching sha256 and
+                          each quote must occur on that line (check_locators)
+
+Provenance rule: hand "first" needs text_supplied true and locators that resolve. A record read by
 another session with no text in the tree is second hand and stays second hand;
 the loader refuses an upgrade (work order: "Do not upgrade to first-hand").
 
@@ -41,7 +45,7 @@ labels are shuffled (direction must not drive the flag).
 
     python3 ledger/toolkit/attribution_directionality.py     # read the cases
 """
-import os, random, sys
+import hashlib, os, random, sys
 
 HERE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, HERE)
@@ -54,6 +58,10 @@ FIELDS = ("id", "deviation", "first_attribution", "evidence_for_it", "alternativ
           "changed_after_challenge", "self_detected", "open_slot_filled", "fits_question", "provenance", "note")
 NONE_STATED = "NONE_STATED"
 CASES = os.path.join(HERE, "ledger", "toolkit", "cases", "attribution_cases.yaml")
+CASES_FIRST = os.path.join(HERE, "ledger", "toolkit", "cases", "attribution_cases_firsthand.yaml")
+TEXTS = os.path.join(HERE, "ledger", "toolkit", "cases", "texts")
+COMPARED = ("first_attribution", "evidence_for_it", "alternatives_examined", "changed_after_challenge",
+            "self_detected", "open_slot_filled", "fits_question")
 
 
 class RecordError(ValueError):
@@ -87,7 +95,37 @@ def validate(r):
         raise RecordError(f"{r['id']}: first hand with no text supplied; it stays second hand")
     if pv["source"] in ("", "void"):
         raise RecordError(f"{r['id']}: provenance source void")
+    if pv["hand"] == "first":
+        check_locators(r)
     return r
+
+
+def _manifest(texts=None):
+    texts = texts or TEXTS
+    return {t["file"]: t for t in miniyaml.load(os.path.join(texts, "MANIFEST.yaml"))["texts"]}
+
+
+def check_locators(r, texts=None):
+    """A first-hand record must point into a pinned text, and each quote must be on its line."""
+    texts = texts or TEXTS
+    locs = r.get("locators")
+    if not isinstance(locs, list) or not locs:
+        raise RecordError(f"{r['id']}: first hand with no locators")
+    man = _manifest(texts)
+    for loc in locs:
+        f = loc.get("file")
+        if f not in man:
+            raise RecordError(f"{r['id']}: locator file {f} not in MANIFEST.yaml")
+        path = os.path.join(texts, f)
+        with open(path, "rb") as fh:
+            raw = fh.read()
+        if hashlib.sha256(raw).hexdigest() != man[f]["sha256"]:
+            raise RecordError(f"{r['id']}: {f} does not match its pinned sha256 (text edited?)")
+        lines = raw.decode("utf-8").split("\n")
+        n = int(loc["line"])
+        if not 1 <= n <= len(lines) or loc["quote"] not in lines[n - 1]:
+            raise RecordError(f"{r['id']}: quote not on {f}:{n}: {loc['quote'][:50]!r}")
+    return len(locs)
 
 
 def flags(r):
@@ -190,6 +228,20 @@ def known_answers(detector=assigns_without_support):
 
 def load_cases(path=CASES):
     return miniyaml.load(path)["cases"]
+
+
+def diff_hands(second, first):
+    """Field-by-field difference between the two codings of one case. Both kept; nothing picked."""
+    s = {r["id"]: r for r in second}
+    out = []
+    for r in first:
+        o = s.get(r["id"])
+        if o is None:
+            out.append(dict(id=r["id"], changed="no second-hand record"))
+            continue
+        ch = {f: (o[f], r[f]) for f in COMPARED if o[f] != r[f]}
+        out.append(dict(id=r["id"], changed=ch, detector=(assigns_without_support(o), assigns_without_support(r))))
+    return out
 
 
 if __name__ == "__main__":

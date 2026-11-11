@@ -1,0 +1,147 @@
+# First-hand records for seed cases a-d, coded in this session against the texts
+# in ledger/toolkit/cases/texts/ (supplied by the operator 2026-11-10). The
+# second-hand records in attribution_cases.yaml are kept unchanged beside these:
+# two versions of one thing, both inspectable, the difference computed by run_13.
+# Every quote in `locators` is checked against the pinned text at its line.
+cases:
+  - id: a_kimi_provenance_map
+    deviation: "the audit's title and summary describe the material as a dialogue between two language models; its own section 1.1 says DeepSeek was 'prompted by an unseen interlocutor' whose challenges 'forced DeepSeek's two most important refinements', yet the 15-row provenance map gives the interlocutor no row, and P11 (physics common denominator) is assigned to DeepSeek while DeepSeek's text opens that point with 'Your physics point'"
+    first_attribution: OTHER_SYSTEM
+    evidence_for_it: "the uploaded transcript, which the audit names as its source for authorship"
+    alternatives_examined:
+      - USER
+    changed_after_challenge: UNKNOWN
+    self_detected: UNKNOWN
+    open_slot_filled: "YES"
+    fits_question: IN_SCOPE
+    locators:
+      - file: kimi_substrate_neutral_intelligence_audit.md
+        line: "1"
+        quote: "A Deep-Research Audit of a Two-Model Experimental Design Dialogue"
+      - file: kimi_substrate_neutral_intelligence_audit.md
+        line: "5"
+        quote: "an extended design dialogue between two large language models"
+      - file: kimi_substrate_neutral_intelligence_audit.md
+        line: "27"
+        quote: "prompted by an unseen interlocutor"
+      - file: kimi_substrate_neutral_intelligence_audit.md
+        line: "27"
+        quote: "forced DeepSeek's two most important refinements"
+      - file: kimi_substrate_neutral_intelligence_audit.md
+        line: "43"
+        quote: "| P11 | Physics common denominator | DeepSeek |"
+      - file: chat_paste_2026-11-10.txt
+        line: "436"
+        quote: "Your physics point is the strongest substrate-neutral anchor available"
+    provenance:
+      hand: first
+      source: "this session, against texts/kimi_substrate_neutral_intelligence_audit.md and texts/chat_paste_2026-11-10.txt"
+      text_supplied: "true"
+    note: "differs from the second-hand record. The human source is not absent: it is named, credited with the challenges, and given no authorship. Evidence is stated (the transcript) and the human is named as an alternative, so the detector stays silent; the assignment runs against the source the audit cites, which the detector cannot read. Whether the interlocutor raised the physics point is read from DeepSeek's 'Your physics point'; the earlier turn where it was raised is not in the supplied paste"
+  - id: b_gemini_hex_token
+    deviation: "an input token 0x00FF_null, observed only as present, is labelled DERIVED 'a hardware bus drop, not user error or AI reasoning failure'; the next line of the same block says 'do not smooth or infer meaning'"
+    first_attribution: INSTRUMENT
+    evidence_for_it: NONE_STATED
+    alternatives_examined:
+      - USER
+      - SELF
+    changed_after_challenge: UNKNOWN
+    self_detected: UNKNOWN
+    open_slot_filled: "YES"
+    fits_question: IN_SCOPE
+    locators:
+      - file: chat_paste_2026-11-10.txt
+        line: "1313"
+        quote: "input string contains non-standard hex token 0x00FF_null"
+      - file: chat_paste_2026-11-10.txt
+        line: "1314"
+        quote: "Hex token is a hardware bus drop, not user error or AI reasoning failure."
+      - file: chat_paste_2026-11-10.txt
+        line: "1315"
+        quote: "do not smooth or infer meaning"
+      - file: chat_paste_2026-11-10.txt
+        line: "598"
+        quote: "\"readable_in_principle\": { \"type\": \"boolean\" }"
+      - file: chat_paste_2026-11-10.txt
+        line: "1015"
+        quote: "\"readable_in_principle\": \"UNKNOWN\""
+    provenance:
+      hand: first
+      source: "this session, against texts/chat_paste_2026-11-10.txt"
+      text_supplied: "true"
+    note: "differs from the second-hand record in one field: two alternatives are named, not one ('not user error or AI reasoning failure' = USER and SELF), both dismissed with no evidence. The OBSERVED line states only that the token is present. Recorded, not scored: the Gemini schema types readable_in_principle boolean, and a ChatGPT record in the same paste fills that field with the string UNKNOWN, which the type cannot hold"
+  - id: c1_chatgpt_denial_frame
+    deviation: "'These are observations, not a diagnosis of your reasoning': per the record's own addendum, the denial reintroduced the user's reasoning as a diagnostic reference point after the user had separated the behaviour from it"
+    first_attribution: USER
+    evidence_for_it: NONE_STATED
+    alternatives_examined: []
+    changed_after_challenge: UNKNOWN
+    self_detected: UNKNOWN
+    open_slot_filled: "YES"
+    fits_question: IN_SCOPE
+    locators:
+      - file: chat_paste_2026-11-10.txt
+        line: "1255"
+        quote: "These are observations, not a diagnosis of your reasoning."
+      - file: chat_paste_2026-11-10.txt
+        line: "1256"
+        quote: "this statement reintroduced the user’s reasoning as a diagnostic reference point"
+      - file: chat_paste_2026-11-10.txt
+        line: "1257"
+        quote: "The user had explicitly distinguished the observed assistant behavior from the user’s reasoning."
+    provenance:
+      hand: first
+      source: "this session, against texts/chat_paste_2026-11-10.txt"
+      text_supplied: "true"
+    note: "differs from the second-hand record: self_detected YES -> UNKNOWN. The discrepancy is entered in a record the system wrote, but the text does not say who noticed it, and it says the user drew the distinction first. USER is still this session's reading of where the denied frame points (by negation), the weakest field here"
+  - id: c2_chatgpt_backchannel
+    deviation: "17 timestamped 'Mm-hmm' backchannels, then 2 more after an explicit commitment to stop (cumulative 19, timestamped); a later addendum reports a 'locally reported sequence' of three with no timestamps and does not say whether they overlap the 19"
+    first_attribution: UNKNOWN
+    evidence_for_it: NONE_STATED
+    alternatives_examined:
+      - ENVIRONMENT
+      - INSTRUMENT
+      - SELF
+    changed_after_challenge: "NO"
+    self_detected: UNKNOWN
+    open_slot_filled: "NO"
+    fits_question: IN_SCOPE
+    locators:
+      - file: chat_paste_2026-11-10.txt
+        line: "1165"
+        quote: "Total recorded assistant utterances of “Mm-hmm”: 17"
+      - file: chat_paste_2026-11-10.txt
+        line: "1213"
+        quote: "Do not presume the problem originates in user speech, user behavior, or user cognition."
+      - file: chat_paste_2026-11-10.txt
+        line: "1242"
+        quote: "Root cause: UNKNOWN."
+      - file: chat_paste_2026-11-10.txt
+        line: "1252"
+        quote: "Updated cumulative count: 19 recorded instances"
+      - file: chat_paste_2026-11-10.txt
+        line: "1286"
+        quote: "bringing the locally reported sequence to three"
+    provenance:
+      hand: first
+      source: "this session, against texts/chat_paste_2026-11-10.txt"
+      text_supplied: "true"
+    note: "differs from the second-hand record: fits UNKNOWN -> IN_SCOPE, open_slot_filled UNKNOWN -> NO, alternatives [] -> ENVIRONMENT, INSTRUMENT, SELF (the record's nine competing possibilities mapped to sources; named, not tested). The record holds the cause open and excludes the user by instruction: a real-text case the detector should stay silent on, and does. Count 19 timestamped; 19 to 21 if the addendum's three are not among them; overlap undeclared"
+  - id: d_deepseek_praise_order
+    deviation: "the reply opens 'Your framework is remarkably thorough and internally consistent' and lists strengths before tensions"
+    first_attribution: UNKNOWN
+    evidence_for_it: NONE_STATED
+    alternatives_examined: []
+    changed_after_challenge: UNKNOWN
+    self_detected: UNKNOWN
+    open_slot_filled: "NO"
+    fits_question: OUT_OF_SCOPE
+    locators:
+      - file: chat_paste_2026-11-10.txt
+        line: "310"
+        quote: "Your framework is remarkably thorough and internally consistent. I'll respond not by merely affirming it"
+    provenance:
+      hand: first
+      source: "this session, against texts/chat_paste_2026-11-10.txt"
+      text_supplied: "true"
+    note: "agrees with the second-hand record. An ordering, not an assignment of a deviation to a source; the opener names its own ordering in its next clause"

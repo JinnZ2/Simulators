@@ -92,7 +92,7 @@ A card lists the runs it rests on. Read the pair, not either status alone.
 | COMPLETE | PROVISIONAL | the run stands; the reading on it waits for tools | run_9 + CC_001 |
 | COMPLETE | RESOLVED | usable: finished loop, causes named | none |
 | COMPLETE | CURIOSITY | the run stands; the coincidence is unexplained, follow its branch | none |
-| INCOMPLETE | OPEN | nothing to build on without labels; tools and slots both owed | run_11 + CC_003 ; run_12 + CC_004 |
+| INCOMPLETE | OPEN | nothing to build on without labels; tools and slots both owed | run_11 + CC_003 ; run_12 + CC_004 ; run_13 + CC_005 |
 | INCOMPLETE | PROVISIONAL | evidence stands, tools owed on both axes; label twice | run_10 + CC_001 |
 | INCOMPLETE | RESOLVED | not a closed trigger; move the card to PROVISIONAL or build the tools | none |
 | INCOMPLETE | CURIOSITY | unexplained and the tools were missing; build the tools before working the branch | none |

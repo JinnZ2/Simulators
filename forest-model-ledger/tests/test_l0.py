@@ -180,6 +180,41 @@ def T_TK_ATTRIBUTION_DIRECTIONALITY():
         pass
 
 
+def T_TK_ATTRIBUTION_FIRST_HAND():
+    import shutil, tempfile
+    from ledger.toolkit import attribution_directionality as ad
+    first = ad.load_cases(ad.CASES_FIRST)
+    second = ad.load_cases()
+    assert [r["id"] for r in first] == [r["id"] for r in second]               # same cases, both hands kept
+    for r in first:
+        assert r["provenance"]["hand"] == "first" and r["provenance"]["text_supplied"] == "true"
+        ad.validate(r)                                                          # every locator resolves
+    r = dict(first[0]); r["locators"] = [dict(first[0]["locators"][0], quote="a sentence the text does not carry")]
+    try:
+        ad.validate(r); raise AssertionError("quote not on its line accepted")
+    except ad.RecordError:
+        pass
+    r = dict(first[0]); r["locators"] = []
+    try:
+        ad.validate(r); raise AssertionError("first hand with no locators accepted")
+    except ad.RecordError:
+        pass
+    tmp = tempfile.mkdtemp()                                                    # an edited text fails its pin
+    for f in os.listdir(ad.TEXTS):
+        shutil.copy(os.path.join(ad.TEXTS, f), tmp)
+    name = first[0]["locators"][0]["file"]
+    with open(os.path.join(tmp, name), "a", encoding="utf-8") as fh:
+        fh.write("edit")
+    try:
+        ad.check_locators(first[0], texts=tmp); raise AssertionError("edited text accepted")
+    except ad.RecordError:
+        pass
+    shutil.rmtree(tmp)
+    d = {x["id"]: x for x in ad.diff_hands(second, first)}
+    assert d["a_kimi_provenance_map"]["detector"] == (True, False)              # run_13 flag 1
+    assert d["d_deepseek_praise_order"]["changed"] == {}
+
+
 def T_TK_BUDGET_CLOSURE_MOVED():
     from ledger.toolkit import budget_closure
     assert l0_audit.audit is budget_closure.audit and l0_audit.verdict is budget_closure.verdict
@@ -219,7 +254,7 @@ def T_TK_NUDGE_COVERAGE_AND_FLAGS():
     assert all(r["returned"] for r in res["rows"])
 
 
-TESTS = [T_LOG_LISTS_EVERY_CONSTANT, T_TK_NUDGE_COVERAGE_AND_FLAGS, T_L0_SEED_WIRED_TO_IGNITION, T_L0_RESIDUAL_IS_DEPOSITION_COUNTER, T_TK_CARD_READINGS, T_TK_EXPIRY_AND_SCOPED_ABSENCE, T_TK_ATTRIBUTION_DIRECTIONALITY, T_TK_BUDGET_CLOSURE_MOVED,
+TESTS = [T_LOG_LISTS_EVERY_CONSTANT, T_TK_NUDGE_COVERAGE_AND_FLAGS, T_L0_SEED_WIRED_TO_IGNITION, T_L0_RESIDUAL_IS_DEPOSITION_COUNTER, T_TK_CARD_READINGS, T_TK_EXPIRY_AND_SCOPED_ABSENCE, T_TK_ATTRIBUTION_DIRECTIONALITY, T_TK_ATTRIBUTION_FIRST_HAND, T_TK_BUDGET_CLOSURE_MOVED,
          T_L0_N_CLOSURE, T_L0_WATER_CLOSURE, T_L0_DT_HALF, T_L0_LEAK_DETECTED, T_L0_NOISE_ARM,
          T_L0_VOID_NEVER_CLOSED, T_L0_VOID_TERMS_PRINTED, T_L0_FIRE_EVENT_CONSERVES]
 

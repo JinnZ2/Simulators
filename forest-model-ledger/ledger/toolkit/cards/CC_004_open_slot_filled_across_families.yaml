@@ -39,3 +39,4 @@ open_issues:
   - "open_slot_filled is entered by the coder, not computed; 3 of 3 in scope carrying it is partly the coder's input"
   - "local_normal_form has no exit defined: this session cannot name an instrument for it on transcript records"
   - "the texts for a-d are not in the tree; nothing here moves until they are supplied"
+  - "2026-11-11: the texts were supplied; the first-hand reading is card CC_005 (run_13). This card is kept unchanged as the second-hand reading"

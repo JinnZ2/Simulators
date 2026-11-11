@@ -6,6 +6,7 @@ diagnoses:
   - "a correction that does not hold after a challenge"
 inputs:
   - "one record per case in ledger/toolkit/cases/attribution_cases.yaml; provenance hand first only with text supplied"
+  - "first-hand records in ledger/toolkit/cases/attribution_cases_firsthand.yaml, each with locators checked against sha-pinned texts"
 outputs:
   - "per record: flags UNEVIDENCED | NO_ALTERNATIVES | FILLS_OPEN_SLOT | PERSISTS_AFTER_CHALLENGE; detector assigns_without_support"
   - "first-attribution distribution split by hand; reported, never scored"
@@ -14,10 +15,13 @@ cannot_see:
   - "an alternative named and dismissed with no evidence reads as examined: seed case b is missed by the detector for this reason (run_12). Not retuned"
   - "open_slot_filled is entered by the coder, not computed from text; the shape under test is partly the coder's input"
   - "any case without its text: every seed is second hand, and the tool reads records, not transcripts"
+  - "an assignment that states evidence and names an alternative but runs against the source it cites: first-hand case a (run_13) is missed for this reason. The detector reads whether support is stated, not whether it supports. Not retuned"
 other_domains_it_could_see_into: void
 used_in:
   - run_12
+  - run_13
 open_issues:
   - "the null harness draws from the same field space the detector reads, so FP 0 / TP 1 is close to construction; its non-trivial content is the label shuffle (0 moves: direction does not drive the flag) and the planted partial cases K4, K5"
   - "seed cases a-d are second hand (chat-side read, 2026-11-10) until the texts are supplied"
+  - "2026-11-11: texts supplied and pinned (cases/texts/MANIFEST.yaml); first-hand records in cases/attribution_cases_firsthand.yaml, second-hand file kept; diff in run_13"
 status: candidate

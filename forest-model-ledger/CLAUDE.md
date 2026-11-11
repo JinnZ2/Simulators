@@ -139,7 +139,7 @@ The checker fails on any run or card whose status has no entry there.
 brief says                              folder has
 --------------------------------------  ------------------------------------------------
 ledger/toolkit/, 7 tools                budget_closure, coincidence_card, assumption_nudge,
-                                        attribution_directionality (run_12, 2026-11-11).
+                                        attribution_directionality (run_12, run_13, 2026-11-11).
                                         Of the brief's seven, ONE is built (budget closure);
                                         the other six are placeholders in ledger/toolkit/
 anchor = frozen, TAGGED snapshot        ledger/anchors/ANCHOR_run9.yaml, status candidate;
@@ -176,6 +176,7 @@ python3 runs/run_10.py                    # reproduces samples/run_10.sample.txt
 python3 runs/run_11.py                    # assumption nudges; several minutes; rewrites samples/run_11.json
 python3 ledger/toolkit/coincidence_card.py  # reads every card
 python3 runs/run_12.py                    # attribution_directionality on second-hand seeds; reproduces samples/run_12.sample.txt
+python3 runs/run_13.py                    # same tool on first-hand records vs sha-pinned texts; diff against run_12
 ```
 
 ## Hard constraints

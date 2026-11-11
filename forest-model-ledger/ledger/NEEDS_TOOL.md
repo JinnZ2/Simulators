@@ -30,3 +30,9 @@ only because the brief says to run the full toolbox.
 
 run_10 and run_11 predate the rule. Marking them INCOMPLETE is the rule applied
 backwards by the session that ran them, not an instruction from the rule's author.
+| ablation | same shape across three families, first hand (card CC_005) | run_13 | 2026-11-11 | full toolbox |
+| multi_seed_ensemble | same shape across three families, first hand (card CC_005) | run_13 | 2026-11-11 | full toolbox |
+| equation_family_swap | same shape across three families, first hand (card CC_005) | run_13 | 2026-11-11 | full toolbox |
+| parameter_recovery | same shape across three families, first hand (card CC_005) | run_13 | 2026-11-11 | full toolbox |
+| residual_regression | same shape across three families, first hand (card CC_005) | run_13 | 2026-11-11 | full toolbox |
+| assumption_block_trace | same shape across three families, first hand (card CC_005) | run_13 | 2026-11-11 | full toolbox |
