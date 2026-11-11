@@ -1,0 +1,21 @@
+id: L0_STOICHIOMETRY
+layer: L0
+equation: "C:N:P per pool constrained to a range, not a ratio"
+assumes:
+  - id: A1
+    text: "ranges per pool are known"
+    block: void
+if_assumption_fails:
+  A1: void
+scope: void
+provenance:
+  class: PROPOSED
+  source: "work order 2026-11-10 (softest L0 part)"
+admitted_by: void
+test_results: []
+open_issues:
+  - "no range has been entered; none will be typed from memory -- each needs a source"
+depends_on:
+  - L0_C_BUDGET
+  - L0_P_BUDGET
+status: placeholder

@@ -1,0 +1,27 @@
+id: BR_FIRE_MEANFIELD
+family: "mean-field fire ODE / event model"
+status: candidate
+components:
+  - L4_FIRE_THRESHOLD_RUN5
+  - L4_FIRE_FUEL_MOISTURE
+  - L4_FIRE_MEANFIELD_ODE
+links:
+  - BR_FIRE_PERCOLATION
+  - BR_MASS_BALANCE
+convergence_anchors:
+  - id: CA_1
+    between:
+      - BR_FIRE_PERCOLATION
+      - BR_FIRE_MEANFIELD
+    condition: "spotting 0.2 and drought >= 0.5"
+    evidence: "run_8 (reported, not recomputed)"
+    status: candidate
+runs:
+  - run_5
+  - run_6
+  - run_7
+  - run_8
+  - run_9
+open_issues:
+  - "the base-model fire (L4_FIRE_FUEL_MOISTURE) and the run-7 ODE are different equations filed in one family; their agreement is untested"
+note: void

@@ -1,0 +1,20 @@
+id: BR_MUTUALISM_ODE
+family: "coupled consumer-resource / mutualism ODE"
+status: candidate
+components:
+  - L3_TREE_FUNGUS_EXCHANGE
+  - L3_LIGHT_CEILING
+  - L3_PAIRWISE_ADDITIVITY
+links:
+  - BR_MASS_BALANCE
+  - BR_SPIN_GLASS
+  - BR_RANDOM_MATRIX
+convergence_anchors: []
+runs:
+  - run_1
+  - run_3
+  - run_4
+open_issues:
+  - "run 1 sign flip partly circular"
+  - "runs 1, 3, 4 predate the conserved rebuild; whether they close an N budget is unknown"
+note: void

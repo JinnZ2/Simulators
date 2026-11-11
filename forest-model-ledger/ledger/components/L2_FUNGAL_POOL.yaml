@@ -1,0 +1,23 @@
+id: L2_FUNGAL_POOL
+layer: L2
+equation: "dF/dt = payment - mF * F"
+assumes:
+  - id: A1
+    text: "one mycorrhizal guild"
+    block: void
+  - id: A2
+    text: "parameters are hand-set"
+    block: AB_HAND_SET_PARAMS
+if_assumption_fails:
+  A1: "run 3 used 4 fungi and found non-additive outcomes; a single guild cannot show them"
+  A2: void
+scope: "base model"
+provenance:
+  class: PROPOSED
+  source: "run-9 rebuild"
+admitted_by: void
+test_results: []
+open_issues: []
+depends_on:
+  - L3_TREE_FUNGUS_EXCHANGE
+status: candidate

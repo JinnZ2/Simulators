@@ -1,0 +1,44 @@
+# forest-model-ledger -- claim table
+
+Claims about this folder's instruments and about the work order's first three
+tasks. Status: SUPPORTED / REFUTED / UNVERIFIED. Ids are permanent. No claim
+here is about a forest: every number is model output at one hand-set
+parameter point, and runs 1-8 are carried as reported.
+
+## REFUTATION_PROTOCOL
+
+A refuted claim keeps its id and its text and gains a status and a dated
+UPDATE line; the correction lands as a new id. Nothing is renumbered or
+removed. When a run contradicts a claim, the CLAIM is updated. The model
+constants are not retuned to rescue it: `model/base.py` is pinned by hash in
+`ledger/anchors/ANCHOR_run9.yaml`, and a changed constant is a new anchor
+candidate. Each row's `falsifier` column states what would refute that row;
+`--` means the row is a count or a record that a rerun either reproduces or
+does not. Ledger entries follow the same rule one level down: a rejected
+component stays in `ledger/components/` with status `rejected`.
+
+| id | claim | status | rests on | falsifier |
+|---|---|---|---|---|
+| FML_001 | The rebuilt base model closes its N and water budgets: N misclosure -5.062e-11 on gross throughput 576.35 over 300 yr (seed 0), water -3.426e-13; 10 of 10 seeds PASS. | SUPPORTED | `runs/run_9.py`, `T_L0_N_CLOSURE`, `T_L0_WATER_CLOSURE` | a seed, dt or parameter point where the audit reads LEAK with `leak=0` |
+| FML_002 | Closure is by construction for transfers routed through the flux table. The audit detects mass moved outside the table; it does not test whether any flux has the right size. | SUPPORTED | `model/base.py` `deriv()`, `model/l0_audit.py` | a wrong-sized flux the audit flags |
+| FML_003 | The audit fires on a leak: a planted loss of 0.3 of the fungal payment reads N LEAK, misclosure -72.64, water still CLOSED. | SUPPORTED | `T_L0_LEAK_DETECTED` | a planted off-table path that reads CLOSED |
+| FML_004 | The work order's "old model leaked ~24 N units" is not verified here. The pre-run-6 code is not in this tree; FML_003 tests the instrument and reconstructs nothing. | UNVERIFIED (carried) | `runs/run_6.md` | the original code, run under `l0_audit` |
+| FML_005 | Three of five L0 budgets (C, P, energy) are VOID and print as VOID, never CLOSED or 0. The multi-budget guard therefore has two live budgets and has not caught anything a single budget missed. | SUPPORTED | `T_L0_VOID_NEVER_CLOSED`, `L0_MULTI_BUDGET_GUARD` | a run report showing a void budget as closed |
+| FML_006 | Five of eight N boundary terms are void (fixation, dust, groundwater, animal in/out) and print as void. | SUPPORTED | `T_L0_VOID_TERMS_PRINTED` | a void term printed as a number |
+| FML_007 | Grass extinction (run 6's open issue) reproduces in the rebuild, 10 of 10 seeds by year 18.96-20.52, and also occurs with fire switched off (year 20.50). In this rebuild it is competitive, not fire-driven. | SUPPORTED (one parameter point) | `runs/run_9.py` case `no_fire` | a sweep showing persistence over most of the plausible range, which would make this a property of the point |
+| FML_008 | Run 9's 80 fires and run 6's reported 47 are not comparable: different parameters, and run 6's length and parameters are not on record. | SUPPORTED | `runs/run_6.md`, `runs/run_9.md` | run 6's parameters, rerun here |
+| FML_009 | Runs 1-8 are logged as reported (the ~24 N unit leak belongs to run 5's model; authors' correction 2026-11-10). No number in `runs/run_1.md`..`run_8.md` was recomputed; `code`, `seed` and `params` are void in all eight. | SUPPORTED | `runs/`, `tools/check_ledger.py` | -- |
+| FML_010 | Every ledger entry carries every schema field (void when unfilled), status `admitted` occurs only with a named test that passes when run, and assumption-block links resolve in both directions. Six planted violations each fire. | SUPPORTED | `tools/check_ledger.py --tests`, `--selftest` | a schema violation the checker passes |
+| FML_011 | The trajectory is not dt-converged: halving dt moves the fire count 80 -> 79 and final tree N by 1.8%. Closure is unaffected. | SUPPORTED | `runs/run_9.py` case `base_dt_half` | -- |
+| FML_012 | No entry has provenance class OBSERVED. Agreement between runs is model-to-model consistency. The two data sources in the order are listed and not retrieved. | SUPPORTED | `ledger/data_sources.yaml`, `AB_SYNTHETIC_ONLY` | -- |
+| FML_013 | The seed reaches the ignition draw. With precipitation identical in every seed (drought_sd = 0, total 300.0000000000), seeds 0-9 give 10 distinct fire-time sequences. The seed test in the anchor record is not hollow on that ground. | SUPPORTED | `runs/run_10.py` sections 1-2, `T_L0_SEED_WIRED_TO_IGNITION` | two seeds giving one fire sequence under identical precipitation |
+| FML_014 | The N misclosure of -5.0e-11 is roundoff in the deposition COUNTER, not loss from the pools. A float64 counter with no model and no random draw gives +5.008e-11, -7.094e-11, -4.447e-10 at dt 1/52, 1/104, 1/208 against model misclosures of -5.062e-11, +7.124e-11, +4.452e-10; at dt 1/64, exact in binary, both are at 1e-13 or below. With dep = 0 the residual is about 1e-14 and its sign varies by seed. | SUPPORTED | `runs/run_10.py` sections 3, 4, 6, `T_L0_RESIDUAL_IS_DEPOSITION_COUNTER`, `CC_001` | a dt where counter and misclosure part by more than their own spread |
+| FML_015 | The residual grows as dt shrinks, so "misclosure at dt and dt/2" is not a convergence check for this model; it stays about 10^4 below the CLOSED tolerance at every dt tried. FML_001's number is a property of the counter at one dt. | SUPPORTED | `runs/run_10.py` section 3 | -- |
+| FML_016 | run_9 is a CANDIDATE anchor: one of the four anchor tests reads PASS (seeds), two PARTIAL (sigma_meas void; 2 of 5 budgets live), one NOT_RUN (assumption nudges; UPDATE 2026-11-10: run, now PARTIAL, see FML_022). The record pins three code files by sha256 and the checker fails on drift or on promotion with a test unpassed. | SUPPORTED | `ledger/anchors/ANCHOR_run9.yaml`, `tools/check_ledger.py --selftest` | -- |
+| FML_017 | The toolkit holds 2 of the brief's 7 tools (UPDATE 2026-11-10: 3 with `assumption_nudge`, which the brief names in its anchor test rather than its toolbox list). "Run the FULL toolbox" was therefore met on run_10 only in the sense that both existing tools ran. The coincidence card's CURIOSITY reading is reached by constructed cards only. | SUPPORTED | `ledger/toolkit/`, `T_TK_CARD_READINGS` | -- |
+| FML_018 | Under 64 nudges of the candidate anchor (13 of 25 assumptions), N and water close in 63. The one LEAK is the planted off-table path, which is the signature written for that assumption. The anchor comes back bit-identical after every nudge, 64 of 64. | SUPPORTED | `runs/run_11.py`, `samples/run_11.sample.txt` | a nudge under which a budget reads LEAK with `leak=0` |
+| FML_019 | Lifting the light ceiling tenfold produces no runaway in the conserved base: tree N 38.99 against 38.87, soil N -0.43 (16.9 sd), leaching -3.59. The failure signature the ledger carries for `L3_LIGHT_CEILING` A1 (from run 4, which has no N audit) is contradicted in this scope. | SUPPORTED (one parameter point) | `runs/run_11.py`, `L3_LIGHT_CEILING` | a parameter point of the conserved model where lifting the ceiling does run away |
+| FML_020 | 33 of 64 nudges move no output outside noise. Three causes are supported and not separated: N throughput fixed by the budget, grass-side parameters unreachable after extinction, and low power (smallest detectable change 4.0-8.6 percent on eight outputs at 3 seeds). The card is OPEN. | SUPPORTED as a count; cause OPEN | `CC_003_nudges_that_move_nothing`, `samples/run_11.json` | -- |
+| FML_021 | 12 of 25 assumptions in scope cannot be nudged by a parameter and are listed with reasons; six parameters (P0, season, et, drain, drought_sd, drought) are owned by no listed assumption; P0 and drought are one parameter under two names. | SUPPORTED | `runs/run_11.py` header lines, `L0_WATER_BUDGET` | -- |
+| FML_022 | Anchor test 3 reads PARTIAL, so run_9 stays a CANDIDATE: seeds PASS; budgets, nudges and independent budgets PARTIAL. | SUPPORTED | `ledger/anchors/ANCHOR_run9.yaml` | -- |
+| FML_023 | The repo suite's three failing tests in `tests/` are the pinned reds of `KNOWN_RED.md` section 19.4 and match their pins. Commit `55c651b` of this branch added a fourth entry to one of them (a refusal message naming a path the redirect contract could not resolve); repaired in the next commit. | SUPPORTED | `tools/known_red_check.py`, `tests/test_run_manifest.py` | -- |

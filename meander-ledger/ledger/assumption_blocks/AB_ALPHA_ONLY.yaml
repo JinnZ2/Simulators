@@ -1,0 +1,10 @@
+id: AB_ALPHA_ONLY
+statement: "depth and friction enter only through alpha = 2 Cf / H"
+if_fails: "planforms differ at fixed alpha"
+used_by:
+  - L3_BEND_GROWTH_KINEMATIC
+used_by_runs:
+  - run_1
+open_issues:
+  - "holds exactly in this code (identical output at aspect 10 vs Cf 0.005, aspect 40 vs Cf 0.02): a property of the code, not of rivers"
+status: candidate

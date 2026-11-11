@@ -1,0 +1,35 @@
+# CANDIDATE anchor. Not an anchor until all four tests read PASS.
+id: ANCHOR_run9
+status: candidate
+git_tag: forest-model-ledger-anchor-candidate-run9
+git_commit: 55c651b8f7228b4d28a21ad442bf817752e80d21
+tag_state: "SET AT MERGE. Not on the remote. Routes tried from the session 2026-11-10, all refused: annotated tag push, lightweight tag push, commit-to-refs/tags refspec (HTTP 403 each); the GitHub tools available carry no tag or release creation. A branch ref was not used as a stand-in: a branch moves. Whoever merges sets this tag on the commit above"
+run: run_9
+seed: "0 (base); 0..9 (seed sweep)"
+params: "model/base.py DEFAULTS and INIT, unedited; 300 yr; RK4 dt 1/52"
+scope: "N and water only; one hand-set parameter point; well-mixed stand; simulation, no field data"
+code:
+  - path: model/base.py
+    sha256: ebb656bbf9554f3a6ed08055a0787f1e3a4ab6c024006a11555aed45eaea4ec8
+  - path: ledger/toolkit/budget_closure.py
+    sha256: 796b76f69e069f082603c3ee4392d56a0261de3ef139fbe942f14a21ba05a456
+  - path: runs/run_9.py
+    sha256: 0bae61f9a04d989a2d58fd90a24290c8285d7f62f0de47b81d760d671765ef22
+tests:
+  budgets_close_within_noise_rule:
+    state: PARTIAL
+    evidence: "N and water CLOSED at numerical tolerance (run_9). sigma_meas is void for every budget, so the measurement-noise rule itself has not been applied"
+  holds_across_seeds:
+    state: PASS
+    evidence: "seeds 0-9 all close (run_9); the seed is wired to the ignition draw: 10 distinct fire sequences with precipitation held identical (run_10)"
+  holds_when_each_assumption_nudged:
+    state: PARTIAL
+    evidence: "run_11: 13 of 25 assumptions nudged (64 nudges), 12 not nudgeable here and listed with reasons. N and water closed under 63 of 64; the one N LEAK is the planted off-table path, which is the signature written for that assumption. Anchor returned bit-identical 64 of 64. Open: 33 nudges moved nothing detectable (CC_003, OPEN), and the light-ceiling signature did not appear"
+  independent_budgets_close_together:
+    state: PARTIAL
+    evidence: "2 of 5 budgets live (N, water); C, P, energy VOID. No compensating-error test exists"
+known_errors:
+  - "N misclosure -5.0e-11 at dt 1/52 is float64 roundoff in the deposition counter (run_10, CC_001); about 10^4 below the CLOSED tolerance; base left unchanged by decision 2026-11-10; branch BR_RUN_9B_COMPENSATED_COUNTER holds the alternative"
+open_issues:
+  - "grasses extinct by year 19-20.5 in every seed; an anchor with one plant guild is a narrower base than the work order describes"
+  - "trajectory not dt-converged: fires 80 at 1/52, 79 at 1/104 and 1/208, 81 at 1/128"

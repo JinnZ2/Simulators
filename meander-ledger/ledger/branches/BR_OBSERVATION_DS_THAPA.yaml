@@ -1,0 +1,18 @@
+id: BR_OBSERVATION_DS_THAPA
+family: "remote-sensing meander geometry, SE United States (DS_THAPA_2025)"
+status: candidate
+components:
+  - L5_WAVELENGTH_ESTIMATOR
+  - L5_WIDTH_WATERMASK
+  - L5_SLOPE_DEM_PIXEL
+  - L5_DISCHARGE
+links:
+  - BR_EMPIRICAL_SCALING
+  - BR_KINEMATIC_BEND
+convergence_anchors: []
+runs:
+  - run_3
+open_issues:
+  - "lambda nearly flat in W; the ratio is set by W"
+  - "Wavelength (m) and wavelength columns disagree: Spearman +0.033"
+note: void

@@ -1,0 +1,49 @@
+id: L0_N_BUDGET
+layer: L0
+equation: "d(sum N pools)/dt = sum(boundary in) - sum(boundary out); misclosure = d_pools - (in - out)"
+assumes:
+  - id: A1
+    text: "every N transfer is a row in the flux table; nothing moves mass outside it"
+    block: AB_FLUX_TABLE
+  - id: A2
+    text: "boundary terms carried as void are zero in the system modelled"
+    block: AB_VOID_BOUNDARY
+  - id: A3
+    text: "one N currency: no distinction between N forms or isotopes"
+    block: AB_N_CURRENCY
+if_assumption_fails:
+  A1: "misclosure grows with run length; its sign and size point at the unlisted path (planted case: -72.6 N units over 300 yr)"
+  A2: "a field budget shows a one-signed residual the model cannot reproduce at any parameter value"
+  A3: void
+scope: "simulation only; base model of model/base.py"
+provenance:
+  class: DERIVED
+  source: "runs/run_9 (recomputed in this tree)"
+admitted_by: T_L0_N_CLOSURE
+test_results:
+  - test: T_L0_N_CLOSURE
+    run: run_9
+    result: PASS
+    value: "misclosure -5.062e-11 on gross throughput 576.35, 300 yr, dt 1/52"
+  - test: T_L0_DT_HALF
+    run: run_9
+    result: PASS
+    value: "misclosure +7.124e-11 at dt 1/104"
+  - test: T_L0_SEED_WIRED_TO_IGNITION
+    run: run_10
+    result: PASS
+    value: "10 distinct fire sequences of 10 with precipitation held identical"
+  - test: T_L0_RESIDUAL_IS_DEPOSITION_COUNTER
+    run: run_10
+    result: PASS
+    value: "bare counter +5.008e-11 against model -5.062e-11 at dt 1/52; same match at 1/104 and 1/208"
+  - test: T_TK_NUDGE_COVERAGE_AND_FLAGS
+    run: run_11
+    result: "N CLOSED under 63 of 64 nudges; the one LEAK is the planted off-table path (-72.6), which is A1's written signature"
+    value: "recomputed"
+open_issues:
+  - "the residual the audit reports is roundoff in the deposition COUNTER, not in the pools (run_10, CC_001); the misclosure number therefore measures the bookkeeping at this level, and grows as dt shrinks"
+  - "closure holds by construction for anything routed through the flux table; the test shows no path outside the table, and says nothing about whether any flux is right"
+  - "the original run-6 leak (~24 N units) cannot be re-measured: the pre-run-6 code is not in this tree"
+depends_on: []
+status: admitted

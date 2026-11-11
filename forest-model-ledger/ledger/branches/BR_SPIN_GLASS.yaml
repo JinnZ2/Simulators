@@ -1,0 +1,11 @@
+id: BR_SPIN_GLASS
+family: "spin glass (fungus-fungus interaction matrix, alternative stable states)"
+status: placeholder
+components: []
+links:
+  - BR_MUTUALISM_ODE
+  - BR_RANDOM_MATRIX
+convergence_anchors: []
+runs: []
+open_issues: []
+note: void

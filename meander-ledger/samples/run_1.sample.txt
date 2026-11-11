@@ -1,0 +1,55 @@
+run_1  meander toy  (DERIVED; recomputed: python3 runs/run_1.py)
+steps 6000  burn 2000 [CHOICE]  record every 100  base params: model/meander.py DEFAULTS + {'E': 0.3, 'steps': 6000}
+
+case                    lam/W med  p25..p75     sinuosity med  p25..p75    cutoffs/1k  sed     sed misclosure  bed store end
+base s0                   8.69   6.84..10.04    2.39  1.93..2.68      7.50   CLOSED +1.464e-12      85.318
+base s1                   8.80   7.49..9.42     2.45  2.05..2.90      8.00   CLOSED +2.430e-12      86.231
+base s2                   7.96   6.41..8.61     2.03  1.79..2.32      7.75   CLOSED +4.405e-13      79.790
+H deeper  aspect 10       2.71   2.63..2.92     1.00  1.00..1.00      0.00   CLOSED +7.603e-13      57.019
+H shallower aspect 40     8.29   8.06..8.86     3.06  2.69..3.23    161.00   CLOSED -9.166e-12      13.686
+Cf 0.005                  2.71   2.63..2.92     1.00  1.00..1.00      0.00   CLOSED -6.750e-13      53.510
+Cf 0.02                   8.29   8.06..8.86     3.06  2.69..3.23    161.00   CLOSED -1.802e-11       0.963
+bank strong E 0.15        8.51   7.31..9.35     2.46  2.11..2.92      2.75   CLOSED -1.663e-12      71.841
+bank weak E 0.6           7.70   6.79..9.00     2.09  1.80..2.57     18.00   CLOSED +3.013e-12     109.751
+veg 0.5                   7.69   6.62..8.46     2.21  1.96..2.39      4.75   CLOSED -2.181e-12      53.123
+veg 1.0                   6.82   5.90..7.43     1.79  1.18..2.23      1.00   CLOSED -2.700e-13      46.326
+supply 0.2                8.69   6.84..10.04    2.39  1.93..2.68      7.50   CLOSED -1.339e-10       0.000
+supply 2.0                8.69   6.84..10.04    2.39  1.93..2.68      7.50   CLOSED +3.001e-11    6085.318
+planted leak 0.05         8.69   6.84..10.04    2.39  1.93..2.68      7.50   LEAK   -1.213e+02       0.000
+
+decay length H/(2 Cf) in widths, per case (the model's built-in length scale):
+  base s0                 H 0.0500  alpha 0.400  1/alpha 2.50 W
+  base s1                 H 0.0500  alpha 0.400  1/alpha 2.50 W
+  base s2                 H 0.0500  alpha 0.400  1/alpha 2.50 W
+  H deeper  aspect 10     H 0.1000  alpha 0.200  1/alpha 5.00 W
+  H shallower aspect 40   H 0.0250  alpha 0.800  1/alpha 1.25 W
+  Cf 0.005                H 0.0500  alpha 0.200  1/alpha 5.00 W
+  Cf 0.02                 H 0.0500  alpha 0.800  1/alpha 1.25 W
+  bank strong E 0.15      H 0.0500  alpha 0.400  1/alpha 2.50 W
+  bank weak E 0.6         H 0.0500  alpha 0.400  1/alpha 2.50 W
+  veg 0.5                 H 0.0500  alpha 0.400  1/alpha 2.50 W
+  veg 1.0                 H 0.0500  alpha 0.400  1/alpha 2.50 W
+  supply 0.2              H 0.0500  alpha 0.400  1/alpha 2.50 W
+  supply 2.0              H 0.0500  alpha 0.400  1/alpha 2.50 W
+  planted leak 0.05       H 0.0500  alpha 0.400  1/alpha 2.50 W
+
+L0 audit, base s0:
+sediment  CLOSED  misclosure +1.464e-12
+          boundary: inflow=6000.0000  bank_input=713.2444  floodplain_loss=677.9262  outflow=6000.0000  groundwater=void  overbank_fines=void
+water     CLOSED  misclosure +0.000e+00  [IDENTITY: both sides are one expression here; carries no information]
+          boundary: Q_in=1.0000  Q_out=1.0000  evaporation=void  seepage=void  tributaries=void
+energy    CLOSED  misclosure +0.000e+00  [IDENTITY: both sides are one expression here; carries no information]
+          boundary: potential_drop=0.1200  friction=0.1200  bank_work=void  transport_work=void
+momentum  VOID    not represented; no closure claimed
+overall   PASS  (void: momentum; identity: water, energy)
+
+L0 audit, planted leak:
+sediment  LEAK    misclosure -1.213e+02
+          boundary: inflow=6000.0000  bank_input=713.2444  floodplain_loss=641.9200  outflow=6000.0000  groundwater=void  overbank_fines=void
+water     CLOSED  misclosure +0.000e+00  [IDENTITY: both sides are one expression here; carries no information]
+          boundary: Q_in=1.0000  Q_out=1.0000  evaporation=void  seepage=void  tributaries=void
+energy    CLOSED  misclosure +0.000e+00  [IDENTITY: both sides are one expression here; carries no information]
+          boundary: potential_drop=0.1200  friction=0.1200  bank_work=void  transport_work=void
+momentum  VOID    not represented; no closure claimed
+overall   FAIL  (void: momentum; identity: water, energy)
+  hidden leak removed: 121.324

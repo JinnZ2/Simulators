@@ -1,0 +1,17 @@
+id: AB_WELL_MIXED
+statement: "no space: every individual experiences the stand mean"
+if_fails: "threshold and variance behaviour near connectivity transitions is lost (run 7)"
+used_by:
+  - L1_UPTAKE_MM
+  - L4_FIRE_FUEL_MOISTURE
+  - L4_FIRE_MEANFIELD_ODE
+used_by_runs:
+  - run_1
+  - run_3
+  - run_4
+  - run_5
+  - run_6
+  - run_7
+  - run_9
+open_issues: []
+status: candidate

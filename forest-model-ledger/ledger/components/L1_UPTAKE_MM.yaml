@@ -1,0 +1,23 @@
+id: L1_UPTAKE_MM
+layer: L1
+equation: "uptake ~ u * B * S / (S + K)"
+assumes:
+  - id: A1
+    text: "soil N is well mixed at the scale of a plant"
+    block: AB_WELL_MIXED
+  - id: A2
+    text: "parameters are hand-set"
+    block: AB_HAND_SET_PARAMS
+if_assumption_fails:
+  A1: "depletion zones: uptake saturates below the Michaelis-Menten curve at high root density"
+  A2: void
+scope: "base model"
+provenance:
+  class: PROPOSED
+  source: "standard form; chosen for the run-9 rebuild"
+admitted_by: void
+test_results: []
+open_issues: []
+depends_on:
+  - L0_N_BUDGET
+status: candidate

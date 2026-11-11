@@ -1,0 +1,19 @@
+id: L5_SLOPE_DEM_PIXEL
+layer: L5
+equation: "Slope (m) = tan(slope_deg) x 30 on a Gaussian-smoothed SRTM DEM masked to water (Scripts/Slope_Curvature_InflectionPoints)"
+assumes:
+  - id: A1
+    text: "a 30 m pixel gradient of a smoothed DEM over water is a channel slope"
+    block: void
+if_assumption_fails:
+  A1: "slope carries no information about the ratio: Spearman +0.003 over 16951 meanders (run_3)"
+scope: dataset
+provenance:
+  class: DERIVED
+  source: "runs/run_3; script read, not run"
+admitted_by: void
+test_results: []
+open_issues:
+  - "water-surface DEM slope is dominated by DEM noise at low gradients; not tested here"
+depends_on: []
+status: candidate

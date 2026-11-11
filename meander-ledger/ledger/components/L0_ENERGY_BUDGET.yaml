@@ -1,0 +1,28 @@
+id: L0_ENERGY_BUDGET
+layer: L0
+equation: "rho g Q dZ_valley = rho g Q S_channel L_channel, S_channel = dZ_valley / L_channel"
+assumes:
+  - id: A1
+    text: "all potential energy is dissipated by friction in the channel; no bank work, no transport work"
+    block: void
+  - id: A2
+    text: "uniform flow at every node"
+    block: void
+if_assumption_fails:
+  A1: "bank erosion and transport take a share the identity cannot show; needs a measured stage-discharge and transport record"
+  A2: void
+scope: "toy only"
+provenance:
+  class: DERIVED
+  source: "runs/run_1 (recomputed)"
+admitted_by: void
+test_results:
+  - test: T_IDENTITY_FLAGGED
+    run: run_1
+    result: IDENTITY
+    value: "0.1200 = 0.1200 by construction"
+open_issues:
+  - "the work order's 'slope x discharge vs friction loss' is an identity in a kinematic model: sinuosity lowers S_channel and lengthens L_channel by the same factor"
+  - "bank work and transport work are void terms; the only non-trivial energy question (how much power goes into moving the bank) is not represented"
+depends_on: []
+status: candidate

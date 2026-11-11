@@ -1,0 +1,26 @@
+id: L4_FIRE_MEANFIELD_ODE
+layer: L4
+equation: "burned fraction as a smooth function of mean fuel and drought"
+assumes:
+  - id: A1
+    text: "well mixed: every cell sees the mean"
+    block: AB_WELL_MIXED
+if_assumption_fails:
+  A1: "overprediction below the connectivity threshold; no variance spike"
+scope: "valid where the grid converges onto it: spotting 0.2, drought >= 0.5 (run 8)"
+provenance:
+  class: DERIVED
+  source: "run_7, run_8: work order 2026-11-10 (reported there; code not in this tree; not recomputed)"
+admitted_by: void
+test_results:
+  - test: void
+    run: run_7
+    result: "ODE overpredicts mid-drought up to ~60x vs grid"
+    value: "reported, not recomputed"
+  - test: void
+    run: run_8
+    result: "grid with spotting 0.2 converges onto ODE at drought >= 0.5"
+    value: "reported, not recomputed"
+open_issues: []
+depends_on: []
+status: candidate

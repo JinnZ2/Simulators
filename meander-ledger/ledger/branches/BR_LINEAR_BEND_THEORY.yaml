@@ -1,0 +1,11 @@
+id: BR_LINEAR_BEND_THEORY
+family: "Ikeda, Parker & Sawai 1981 linear bend theory"
+status: placeholder
+components: []
+links:
+  - BR_KINEMATIC_BEND
+convergence_anchors: []
+runs: []
+open_issues:
+  - "not built; paper not read"
+note: "named by the work order as candidate base model, PROPOSED"

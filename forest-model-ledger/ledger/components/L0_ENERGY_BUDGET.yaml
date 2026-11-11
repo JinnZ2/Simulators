@@ -1,0 +1,16 @@
+id: L0_ENERGY_BUDGET
+layer: L0
+equation: void
+assumes: []
+if_assumption_fails: void
+scope: void
+provenance:
+  class: PROPOSED
+  source: "work order 2026-11-10, L0 audit list"
+admitted_by: void
+test_results: []
+open_issues:
+  - "no radiation, latent or sensible heat term exists"
+  - "until this budget is live the multi-budget guard cannot see an error compensated in it"
+depends_on: []
+status: placeholder

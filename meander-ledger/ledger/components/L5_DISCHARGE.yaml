@@ -1,0 +1,15 @@
+id: L5_DISCHARGE
+layer: L5
+equation: void
+assumes: []
+if_assumption_fails: void
+scope: void
+provenance:
+  class: PROPOSED
+  source: "work order task 1: discharge"
+admitted_by: void
+test_results: []
+open_issues:
+  - "no discharge column in DS_THAPA_2025; DS_GLOFAS named by b-r-hamilton/meander, not retrieved"
+depends_on: []
+status: placeholder

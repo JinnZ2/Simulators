@@ -1,0 +1,99 @@
+TOO-SMOOTH CHECK  wavelength / width   (all numbers DERIVED from the pinned file)
+file sha256 02aa78259f0844ea...  MATCH
+point rows 26512  sentinel lambda<=0 excluded 12  width<=0 0  meanders [CHOICE 1] 16951
+meanders whose points carry > 1 label [CHOICE 3]: geology 691  province 11  class 1738
+
+RATIO lambda/W, per meander (LINEAR summary)
+  median 15.81   IQR 7.23 .. 29.27   p05..p95 1.68 .. 63.02   min 0.032  max 444
+  in recalled band 10..14: 0.116   below 5: 0.175   above 30: 0.241   above 100: 0.009
+  histogram (linear bins of the ratio):
+      0-2       1073 ####################
+      2-4       1327 ########################
+      4-6       1115 ####################
+      6-8       1144 #####################
+      8-10      1085 ####################
+     10-12       991 ##################
+     12-14       980 ##################
+     14-16       852 ################
+     16-20      1563 #############################
+     20-30      2730 ##################################################
+     30-50      2527 ##############################################
+     50-100     1413 ##########################
+    100-200      129 ##
+    200+          22 
+  per POINT row instead (repeats a meander once per point): n 26500 median 17.08  in band 0.111
+
+LINEAR AXES (window = 95th percentile of each axis)
+  lambda (m) 0..7291 linear  ^
+  |  #### #..  ...o####oo.-..  .  o.o.  . .  .o   . .#   ..o . 
+  | ... o .o##....oo.####.## #.   -#.o o  #. .   o    o  .   . 
+  |  .###  ####. ##o#o .- o.  ..--    oo. .. ...  . o ..     . 
+  | #######o###..##.##o-..#####o#oo##o#.## #o...  ..o    ...  .
+  | #########oo#o ####o#o#o##. o   oo...##oo## ... .. ..  .  . 
+  | #############.##o#####oo##o....#o.##..o o oo   ..oo . . ..#
+  |.############# ##########o o.o..#.  .  o . oo... ..   o     
+  | ########################o.# #oo#..o.o#..ooo....#o....  .. .
+  | ############.###o####o##  o.. #  .#.o..oo.##o. o.#o. .  . .
+  | ##############o######### ..o.###o...#### o.. .  o      o  .
+  | ########################o###.##.# o . oo#o#.   .ooo.. .. .o
+  |.##########################.#o#o  #.o###.o. . .# ..#. o .#.#
+  |.###########################o##o###o##ooo# # #####.oo oo#oo.
+  | ###################################o##oo#o##..##...#o  o##o
+  |.############################# ######o##.o#####.###.#.. o#o#
+  | ###############################.####o#######o##.o#.o#o#.ooo
+  |#########################################o..###.##o###.o.  #
+  | ###################################### #o###o#. #o# o#..o o
+  | ###################.# ##.o.o###. ##o##....oo#  o. ..# o    
+  |#########.oo#.  . #    . ..   .    .. o   #o           .    
+  +------------------------------------------------------------> W (m) 0..1281 linear
+  . 1 pt  o 2  # 3+   '-' lambda = 10 W and 14 W   off-window: 1518
+
+FITS
+  linear  lambda = 0.74 W + 2400          R2 0.059
+  log-log log lambda = 0.228 log W + 2.799   R2 0.116
+  sd log10(ratio) 0.484  vs  sd log10(W) 0.486
+    -> one sd of the ratio is a factor 3.05; W spans a factor 3.06 per sd
+  Spearman(ratio, W) -0.733   (a constant ratio would read ~0)
+
+SLOT 5 NULL (pairing shuffled, marginals kept; seed 0, 200 reps)
+  log-log R2 max under null 0.0005   median ratio p05..p95 15.65 .. 15.98
+
+DEPENDENCE (groups with n >= 30 meanders; bank material is NOT in the file: MAJOR1 is mapped surface geology)
+  MAJOR1 geology unit   (meanders in groups < 30: 346)
+    group                     n   median  p25..p75       in band
+    void                      3063     6.55    2.65..14.11    0.103
+    Sand                      2067    15.58    8.34..26.05    0.146
+    Fine-detrital             1811    13.34    7.75..23.74    0.169
+    Limestone                 1229    22.33   12.00..40.06    0.095
+    Clay                      1215    15.44    9.24..24.05    0.166
+    Coarse-detrital           1076    18.10   11.24..29.08    0.162
+    Shale                     1007    25.19   12.68..42.74    0.071
+    Sandstone                  872    31.05   19.37..50.82    0.056
+    Dolostone                  681    25.39   10.35..42.09    0.068
+    Biotite-gneiss             519    17.16    8.64..27.52    0.125
+    Gneiss                     401    16.65    4.78..30.99    0.112
+    Silt                       384    16.79    9.03..27.13    0.117
+  physiographic province   (meanders in groups < 30: 5)
+    group                     n   median  p25..p75       in band
+    COASTAL PLAIN             7655    13.39    7.13..22.65    0.155
+    PIEDMONT                  2822    15.77    5.31..30.63    0.090
+    INTERIOR LOW PLATEAUS     1863    20.56    8.66..41.32    0.075
+    VALLEY AND RIDGE          1501    21.96    8.02..39.02    0.068
+    APPALACHIAN PLATEAUS      1425    23.38   11.40..39.45    0.084
+    BLUE RIDGE                 677    20.17    9.61..32.96    0.105
+    OZARK PLATEAUS             545    15.04    7.11..27.35    0.119
+    OUACHITA                   458    13.24    3.98..26.35    0.085
+  dataset's own meander class   (meanders in groups < 30: 0)
+    group                     n   median  p25..p75       in band
+    Developing                5466    22.87   14.48..36.15    0.129
+    Mature                    4217    13.21    8.11..20.97    0.185
+    Complex                   2862     2.97    1.56..6.24     0.058
+    Incipient                 2619    38.51   24.77..58.84    0.042
+    Dynamic                   1787     7.33    4.16..13.38    0.120
+  slope: Spearman(ratio, Slope degrees) +0.003 over 16951 meanders
+
+SECOND WAVELENGTH COLUMN ('wavelength', from Scripts/Amplitude_Wavelength)
+  meanders with it 16951   Spearman with 'Wavelength (m)' +0.033   median wavelength/W 5.66
+
+WIDTH INSIDE ONE MEANDER
+  meanders with > 1 point 5732   median max/min point width 1.20

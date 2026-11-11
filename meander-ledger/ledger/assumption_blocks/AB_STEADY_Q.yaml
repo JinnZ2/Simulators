@@ -1,0 +1,9 @@
+id: AB_STEADY_Q
+statement: "discharge is steady and conserved"
+if_fails: "variable Q makes the toy's single-Q wavelength meaningless; field rivers are formed by a distribution of flows"
+used_by:
+  - L0_WATER_BUDGET
+used_by_runs:
+  - run_1
+open_issues: []
+status: candidate

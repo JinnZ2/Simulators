@@ -1,0 +1,14 @@
+id: BR_RUN_9B_COMPENSATED_COUNTER
+family: "anchor branch run_9b: compensated-sum (Kahan / Neumaier) boundary counters"
+status: placeholder
+components: []
+links:
+  - BR_MASS_BALANCE
+convergence_anchors: []
+runs:
+  - run_10
+open_issues:
+  - "optional future investigation (authors' decision 2026-11-10); the base stays unchanged"
+  - "ONE component changes: how boundary accumulators are summed. Expected: N misclosure at dt 1/52 falls from -5.0e-11 to the 1e-13 level run_10 saw at dt 1/64, and every pool trajectory is bit-identical to run_9, since counters feed back into nothing"
+  - "if a pool trajectory moves, the counters were not write-only and that is the finding"
+note: "known error it would remove: float64 roundoff in the deposition counter, about 10^4 below the CLOSED tolerance (runs/run_10.md, CC_001, LOG.md)"

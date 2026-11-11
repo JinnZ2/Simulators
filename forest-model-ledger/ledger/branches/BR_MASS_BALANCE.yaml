@@ -1,0 +1,31 @@
+id: BR_MASS_BALANCE
+family: "conserved pool-and-flux accounting"
+status: candidate
+components:
+  - L0_N_BUDGET
+  - L0_WATER_BUDGET
+  - L0_C_BUDGET
+  - L0_P_BUDGET
+  - L0_ENERGY_BUDGET
+  - L0_BOUNDARY_AUDIT
+  - L0_LEAK_VS_NOISE
+  - L0_MULTI_BUDGET_GUARD
+  - L0_STOICHIOMETRY
+  - L1_UPTAKE_MM
+  - L1_DECOMP_FIRST_ORDER
+  - L1_LEACHING
+  - L2_TREE_GROWTH
+  - L2_GRASS_GROWTH
+  - L2_FUNGAL_POOL
+links:
+  - BR_MUTUALISM_ODE
+  - BR_FIRE_MEANFIELD
+  - BR_MICROBE_EXPLICIT
+convergence_anchors: []
+runs:
+  - run_6
+  - run_9
+open_issues:
+  - "grasses extinct (run 6; run 9 with and without fire)"
+  - "3 of 5 budgets void"
+note: "base of the ledger; every other branch is audited against its L0 rows"

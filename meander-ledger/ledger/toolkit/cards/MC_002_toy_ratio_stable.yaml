@@ -1,0 +1,29 @@
+id: MC_002_toy_ratio_stable
+observation: "toy lambda/W stays 7.3..8.8 across seeds 0-2, alpha 0.4 and 0.8, and neck 0.5..2 W (run_1, run_2)"
+trigger: "too smooth: the one number the work order asks about barely moves under four of the knobs"
+slots:
+  shared_constraint:
+    state: supported
+    evidence: "node spacing, neck and initial noise are all in units of W; changing ds alone takes lambda/W from 8.69 to 2.62 (run_2)"
+  local_normal_form:
+    state: void
+    evidence: void
+  statistical_artifact:
+    state: ruled_out
+    evidence: "three seeds 7.96, 8.69, 8.80; the spread is smaller than the ds effect by a factor ~7"
+  numerical_artifact:
+    state: supported
+    evidence: "not grid-converged: ds 0.5 W -> 8.69, ds 0.25 W -> 2.62; straight channels read 2.6 (aspect 10), i.e. the estimator's noise floor (run_1, run_2)"
+  low_dim_projection:
+    state: supported
+    evidence: "lambda comes from counting curvature sign changes, which jitter-scale wiggles also produce; the scalar cannot tell bend inflections from noise (L5_WAVELENGTH_ESTIMATOR)"
+  none_of_above:
+    state: void
+    evidence: void
+reading_declared: OPEN
+branch: void
+runs:
+  - run_1
+  - run_2
+open_issues:
+  - "local_normal_form unrun: whether the ~8 is the fastest-growing linear mode of the kinematic equation was not computed (needs the linear dispersion relation)"

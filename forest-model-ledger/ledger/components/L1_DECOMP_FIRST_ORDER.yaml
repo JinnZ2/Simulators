@@ -1,0 +1,25 @@
+id: L1_DECOMP_FIRST_ORDER
+layer: L1
+equation: "dL/dt = -k * L * W / (W + Wh)"
+assumes:
+  - id: A1
+    text: "decomposer biomass never limits decay"
+    block: void
+  - id: A2
+    text: "parameters are hand-set"
+    block: AB_HAND_SET_PARAMS
+if_assumption_fails:
+  A1: "priming and lagged decay after disturbance; first-order form misses both"
+  A2: void
+scope: "base model; two litter guilds (slow tree, fast grass+fungal)"
+provenance:
+  class: PROPOSED
+  source: "standard form; runs 5-6 (work order 2026-11-10 (reported there; code not in this tree; not recomputed))"
+admitted_by: void
+test_results: []
+open_issues:
+  - "alternative family: microbe-explicit decomposition, see BR_MICROBE_EXPLICIT"
+depends_on:
+  - L0_N_BUDGET
+  - L0_WATER_BUDGET
+status: candidate

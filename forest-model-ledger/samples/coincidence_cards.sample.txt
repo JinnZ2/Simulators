@@ -1,0 +1,3 @@
+CC_001_n_misclosure_seed_invariance          RESOLVED  {'supported': ['shared_constraint', 'numerical_artifact']}
+CC_002_grid_onto_ode_convergence             OPEN      {'unrun': ['shared_constraint', 'local_normal_form', 'statistical_artifact', 'numerical_artifact', 'low_dim_projection'], 'supported': []}
+CC_003_nudges_that_move_nothing              OPEN      {'unrun': ['local_normal_form'], 'supported': ['shared_constraint', 'statistical_artifact', 'low_dim_projection']}

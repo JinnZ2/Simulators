@@ -1,0 +1,43 @@
+id: L4_FIRE_FUEL_MOISTURE
+layer: L4
+equation: "ignition hazard p_ign per yr while fuel > fuel_th AND W < W_dry; event burns a litter fraction, volatilises a share, returns the rest as ash"
+assumes:
+  - id: A1
+    text: "fuel and dryness thresholds are sharp"
+    block: void
+  - id: A2
+    text: "stand is well mixed: a fire burns the whole stand"
+    block: AB_WELL_MIXED
+  - id: A3
+    text: "parameters are hand-set"
+    block: AB_HAND_SET_PARAMS
+if_assumption_fails:
+  A1: void
+  A2: "spatial fuel discontinuity limits spread; mean-field overpredicts mid-drought (run 7: up to ~60x)"
+  A3: void
+scope: "runs 6 and 9"
+provenance:
+  class: DERIVED
+  source: "run_6: work order 2026-11-10 (reported there; code not in this tree; not recomputed); runs/run_9 (recomputed in this tree)"
+admitted_by: void
+test_results:
+  - test: void
+    run: run_6
+    result: "fire cycle emerged, 47 fires"
+    value: "reported, not recomputed"
+  - test: void
+    run: run_9
+    result: "80 fires in 300 yr, interval 3.59 +/- 2.09 yr (seed 0); 75-81 over seeds 0-9"
+    value: recomputed
+  - test: void
+    run: run_11
+    result: "fuel_th, burn, vol at 10 percent move fire count 3.1-4.2 sd; p_ign and kill_T inside noise"
+    value: "recomputed"
+open_issues:
+  - "run 9 does not reproduce the 47: different parameters, and run 6's run length and parameters are not on record here; the two counts are not comparable"
+  - "fire removes 270.7 of 300 N deposited in run 9; the stand's N balance is set by vol = 0.6, a hand-set number"
+depends_on:
+  - L1_DECOMP_FIRST_ORDER
+  - L0_N_BUDGET
+  - L0_WATER_BUDGET
+status: candidate

@@ -1,0 +1,28 @@
+id: MC_003_depth_friction_identical
+observation: "aspect 10 and Cf 0.005 give byte-identical results; aspect 40 and Cf 0.02 give byte-identical results (run_1)"
+trigger: "too smooth: two different physical changes, one outcome"
+slots:
+  shared_constraint:
+    state: supported
+    evidence: "H and Cf enter the code only through alpha = 2 Cf / H (model/meander.py run()); both pairs share alpha 0.2 and 0.8"
+  local_normal_form:
+    state: ruled_out
+    evidence: "holds at both alpha values, one of which grows and one of which stays straight"
+  statistical_artifact:
+    state: ruled_out
+    evidence: "same seed, deterministic; identical, not near-identical"
+  numerical_artifact:
+    state: ruled_out
+    evidence: "no rounding path: alpha is computed to the same float in each pair"
+  low_dim_projection:
+    state: ruled_out
+    evidence: "every printed column matches, including the bed store; the identity follows from the code, not the summary"
+  none_of_above:
+    state: ruled_out
+    evidence: "one cause supported"
+reading_declared: RESOLVED
+branch: void
+runs:
+  - run_1
+open_issues:
+  - "the toy cannot say whether depth and friction are separately identifiable in rivers; it says this model cannot see them apart"

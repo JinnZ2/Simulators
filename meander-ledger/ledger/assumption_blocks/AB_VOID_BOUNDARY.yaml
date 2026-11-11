@@ -1,0 +1,10 @@
+id: AB_VOID_BOUNDARY
+statement: "boundary terms carried as void are zero in the system modelled"
+if_fails: "a one-signed field residual"
+used_by:
+  - L0_SEDIMENT_BUDGET
+  - L0_BOUNDARY_AUDIT
+used_by_runs:
+  - run_1
+open_issues: []
+status: candidate

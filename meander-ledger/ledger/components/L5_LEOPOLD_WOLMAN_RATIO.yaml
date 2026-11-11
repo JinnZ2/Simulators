@@ -1,0 +1,23 @@
+id: L5_LEOPOLD_WOLMAN_RATIO
+layer: L5
+equation: "lambda ~ 10-14 W (work order, recalled)"
+assumes:
+  - id: A1
+    text: "the ratio holds across rivers of all sizes"
+    block: void
+if_assumption_fails:
+  A1: "an open dataset where it does not: run_3 median 15.81, IQR 7.23..29.27, 11.6% of meanders in 10..14, ratio falling as 1/W"
+scope: void
+provenance:
+  class: PROPOSED
+  source: "recalled; Leopold & Wolman ~1960 not read"
+admitted_by: void
+test_results:
+  - test: void
+    run: run_3
+    result: "not reproduced in DS_THAPA_2025"
+    value: "but the instrument there cannot resolve it (L5_WAVELENGTH_ESTIMATOR)"
+open_issues:
+  - "the original data and method are not in this tree; the source has to be read before this can be tested at all"
+depends_on: []
+status: placeholder

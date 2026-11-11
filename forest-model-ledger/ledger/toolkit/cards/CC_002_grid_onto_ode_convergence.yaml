@@ -1,0 +1,29 @@
+id: CC_002_grid_onto_ode_convergence
+observation: "percolation grid with spotting 0.2 converges onto the mean-field ODE at drought >= 0.5 (run_8, reported; anchor CA_1)"
+trigger: "a convergence seen in one toy with chosen coefficients is a candidate anchor, not an anchor"
+slots:
+  shared_constraint:
+    state: void
+    evidence: void
+  local_normal_form:
+    state: void
+    evidence: void
+  statistical_artifact:
+    state: void
+    evidence: void
+  numerical_artifact:
+    state: void
+    evidence: void
+  low_dim_projection:
+    state: void
+    evidence: void
+  none_of_above:
+    state: void
+    evidence: void
+reading_declared: OPEN
+branch: void
+runs:
+  - run_8
+open_issues:
+  - "no slot can be filled from here: run 8's code is not in this tree"
+  - "long-range spotting makes every cell see the mean, which would be shared_constraint by construction; stated as the first thing to check, not as a finding"

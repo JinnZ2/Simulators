@@ -1,0 +1,25 @@
+id: L1_LEACHING
+layer: L1
+equation: "leaching = l * S * W"
+assumes:
+  - id: A1
+    text: "loss proportional to soil N and to water content"
+    block: void
+  - id: A2
+    text: "parameters are hand-set"
+    block: AB_HAND_SET_PARAMS
+if_assumption_fails:
+  A1: void
+  A2: void
+scope: "base model"
+provenance:
+  class: PROPOSED
+  source: "chosen for the run-9 rebuild"
+admitted_by: void
+test_results: []
+open_issues:
+  - "with fire off, leaching carries the whole N export (200.9 of 300 deposited, run 9); the export pathway is set by this untested form"
+depends_on:
+  - L0_N_BUDGET
+  - L0_WATER_BUDGET
+status: candidate

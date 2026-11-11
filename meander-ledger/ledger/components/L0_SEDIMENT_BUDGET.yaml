@@ -1,0 +1,36 @@
+id: L0_SEDIMENT_BUDGET
+layer: L0
+equation: "d(active bed store) = inflow + bank_input - point_bar - oxbow_fill - outflow; misclosure = d_store - (in - out)"
+assumes:
+  - id: A1
+    text: "every sediment transfer is a counter in the ledger; nothing moves sediment outside it"
+    block: AB_LEDGER_COUNTERS
+  - id: A2
+    text: "groundwater and overbank fines carried as void are zero"
+    block: AB_VOID_BOUNDARY
+  - id: A3
+    text: "one sediment currency: no grain-size classes"
+    block: void
+if_assumption_fails:
+  A1: "misclosure grows with run length; planted case: -1.213e+02 over 6000 steps at leak 0.05"
+  A2: "a field sediment budget with a one-signed residual the toy cannot reproduce"
+  A3: void
+scope: "toy only: model/meander.py, fixed width"
+provenance:
+  class: DERIVED
+  source: "runs/run_1 (recomputed in this tree)"
+admitted_by: T_SED_CLOSURE
+test_results:
+  - test: T_SED_CLOSURE
+    run: run_1
+    result: PASS
+    value: "misclosure +1.464e-12 (base s0); all 13 unplanted cases CLOSED"
+  - test: T_SED_LEAK_DETECTED
+    run: run_1
+    result: PASS
+    value: "planted leak 0.05 -> LEAK -1.213e+02"
+open_issues:
+  - "closure is by construction for anything routed through the counters; it says nothing about whether point-bar deposition or oxbow fill has the right size"
+  - "the planform does not read the bed store, so this budget closing cannot constrain the planform (MC_004)"
+depends_on: []
+status: admitted

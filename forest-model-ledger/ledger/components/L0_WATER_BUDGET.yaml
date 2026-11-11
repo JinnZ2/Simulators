@@ -1,0 +1,33 @@
+id: L0_WATER_BUDGET
+layer: L0
+equation: "dW/dt = precipitation - evapotranspiration - drainage"
+assumes:
+  - id: A1
+    text: "every water transfer is a row in the flux table"
+    block: AB_FLUX_TABLE
+  - id: A2
+    text: "single bucket: no soil layers, snow, interception or groundwater exchange"
+    block: void
+if_assumption_fails:
+  A1: "water misclosure grows with run length"
+  A2: void
+scope: "simulation only; one bucket"
+provenance:
+  class: DERIVED
+  source: "runs/run_9 (recomputed in this tree)"
+admitted_by: T_L0_WATER_CLOSURE
+test_results:
+  - test: T_L0_WATER_CLOSURE
+    run: run_9
+    result: PASS
+    value: "misclosure -3.426e-13 on gross throughput 594.45"
+  - test: void
+    run: run_11
+    result: "water CLOSED under all 64 nudges; worst misclosure 3.4e-12"
+    value: "recomputed"
+open_issues:
+  - "six parameters are owned by no listed assumption: P0, season, et, drain, drought_sd, drought (run_11). This component has no hand-set-parameters assumption; adding one is a ledger edit not yet made"
+  - "P0 x0.9 and drought +0.1 give identical outputs to every printed digit: precipitation is P0*(1-drought), so the two are one parameter under two names"
+  - "groundwater appears in the boundary audit line for N but the water bucket has no groundwater term"
+depends_on: []
+status: admitted

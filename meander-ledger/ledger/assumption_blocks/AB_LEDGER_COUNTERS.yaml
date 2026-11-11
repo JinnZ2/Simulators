@@ -1,0 +1,9 @@
+id: AB_LEDGER_COUNTERS
+statement: "every sediment transfer is a named counter; the store moves only through them"
+if_fails: "misclosure in the sediment budget"
+used_by:
+  - L0_SEDIMENT_BUDGET
+used_by_runs:
+  - run_1
+open_issues: []
+status: candidate

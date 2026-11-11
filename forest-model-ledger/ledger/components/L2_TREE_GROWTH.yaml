@@ -1,0 +1,25 @@
+id: L2_TREE_GROWTH
+layer: L2
+equation: "dT/dt = uptake_T - payment - mT * T"
+assumes:
+  - id: A1
+    text: "parameters are hand-set"
+    block: AB_HAND_SET_PARAMS
+  - id: A2
+    text: "no age or size structure"
+    block: void
+if_assumption_fails:
+  A1: void
+  A2: void
+scope: "base model"
+provenance:
+  class: PROPOSED
+  source: "run-9 rebuild"
+admitted_by: void
+test_results: []
+open_issues: []
+depends_on:
+  - L1_UPTAKE_MM
+  - L3_TREE_FUNGUS_EXCHANGE
+  - L3_LIGHT_CEILING
+status: candidate

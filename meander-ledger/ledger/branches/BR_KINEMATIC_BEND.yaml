@@ -1,0 +1,20 @@
+id: BR_KINEMATIC_BEND
+family: "upstream-weighted kinematic migration + neck cutoff (Howard-Knutson form, recalled)"
+status: candidate
+components:
+  - L3_BEND_GROWTH_KINEMATIC
+  - L4_CUTOFF
+  - L2_VEGETATION_BANK
+  - L3_HELICAL_FLOW
+links:
+  - BR_MASS_BALANCE
+  - BR_LINEAR_BEND_THEORY
+  - BR_OBSERVATION_DS_THAPA
+convergence_anchors: []
+runs:
+  - run_1
+  - run_2
+open_issues:
+  - "not grid-converged"
+  - "lam/W 7-9 at ds 0.5 W, 2.6 at ds 0.25 W"
+note: void
