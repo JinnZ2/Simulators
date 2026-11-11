@@ -14259,6 +14259,10 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   appends a dated "Finds-by (ALIAS_PROPOSED)" section to each tool's README.
   It only appends; it creates a README only where none exists. The report is
   `REPORT_WO_FINDER.md`.
+- `CONCEPT_MAP.md` — one block per concept that has more than one home across repos
+  (Simulators, study-aperture, TAF): home, other copies, builder, status, who decided.
+  Generated from `concept_map.json`; `python3 check_concept_map.py` fails on a path that
+  no longer exists or a moved pinned ref. No code is moved by it.
 - `tail-check/` — part 3b of the same order. It reads an inference about a
   person as SAID (a gated literal span of a user turn, via `tools/sourced.py`,
   imported), FILLED or UNRATED. When the inference is FILLED and the person's

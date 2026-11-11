@@ -1,0 +1,409 @@
+{
+ "as_of": "2026-11-11",
+ "rows": [
+  {
+   "concept": "playground (equation-substitution laboratory)",
+   "home": "CANDIDATE",
+   "status": "two independent builds; neither on a main branch in full (Simulators copy is on a draft branch)",
+   "decided_by": "pending cross-run",
+   "locations": [
+    {
+     "role": "candidate",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "relational-playground/",
+     "builder": "Claude Code, to a GPT spec (SPEC_GPT.md)",
+     "note": "draft PR 257"
+    },
+    {
+     "role": "candidate",
+     "repo": "study-aperture",
+     "ref": "origin/main",
+     "path": "experimental/playground/",
+     "builder": "Perplexity (commit trailer)",
+     "note": "18 commits; organised around determinations, equation families deferred"
+    }
+   ]
+  },
+  {
+   "concept": "known-answer / null harness",
+   "home": "CANDIDATE",
+   "status": "three implementations; the relational-playground gate restates the rule in stdlib",
+   "decided_by": "pending cross-run",
+   "locations": [
+    {
+     "role": "candidate",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "tools/known_answer.py",
+     "builder": "Claude Code (commit trailer)",
+     "note": "repo registry; refuses a metric with no cases"
+    },
+    {
+     "role": "candidate",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "null-harness/null_harness.py",
+     "builder": "not recorded",
+     "note": "needs numpy"
+    },
+    {
+     "role": "candidate",
+     "repo": "study-aperture",
+     "ref": "origin/main",
+     "path": "experimental/playground/validation/known_answer.py",
+     "builder": "Perplexity (commit trailer)",
+     "note": ""
+    },
+    {
+     "role": "candidate",
+     "repo": "study-aperture",
+     "ref": "origin/main",
+     "path": "experimental/playground/validation/null_harness.py",
+     "builder": "Perplexity (commit trailer)",
+     "note": ""
+    },
+    {
+     "role": "copy",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "relational-playground/playground/known_answer_gate.py",
+     "builder": "Claude Code (commit trailer)",
+     "note": "FP 0 / TP 1 gate per model"
+    }
+   ]
+  },
+  {
+   "concept": "UNKNOWN expiry",
+   "home": "CANDIDATE",
+   "status": "three builds; TAF register holds real slots, the other two are mechanisms",
+   "decided_by": "pending cross-run",
+   "locations": [
+    {
+     "role": "candidate",
+     "repo": "thermodynamic-accountability-framework",
+     "ref": "origin/main",
+     "path": "calibration/expiry_register.py",
+     "builder": "Claude Code (commit trailer)",
+     "note": "register on main"
+    },
+    {
+     "role": "copy",
+     "repo": "thermodynamic-accountability-framework",
+     "ref": "origin/main",
+     "path": "docs/expiry_register.json",
+     "builder": "Claude Code",
+     "note": "stage-1 register data"
+    },
+    {
+     "role": "candidate",
+     "repo": "study-aperture",
+     "ref": "origin/main",
+     "path": "experimental/playground/lifecycle/unknown_expiry.py",
+     "builder": "Perplexity (commit trailer)",
+     "note": ""
+    },
+    {
+     "role": "candidate",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "relational-playground/playground/uncertainty.py",
+     "builder": "Claude Code (commit trailer)",
+     "note": "expiry on every UNKNOWN / NOT MEASURED"
+    }
+   ]
+  },
+  {
+   "concept": "scoped absence (ABSENT_AT_SENSITIVITY)",
+   "home": "CANDIDATE",
+   "status": "defined in TAF glossary; built in two playgrounds",
+   "decided_by": "pending cross-run",
+   "locations": [
+    {
+     "role": "candidate",
+     "repo": "study-aperture",
+     "ref": "origin/main",
+     "path": "experimental/playground/detection/scoped_absence.py",
+     "builder": "Perplexity (commit trailer)",
+     "note": ""
+    },
+    {
+     "role": "candidate",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "relational-playground/playground/uncertainty.py",
+     "builder": "Claude Code (commit trailer)",
+     "note": "same file as expiry"
+    },
+    {
+     "role": "copy",
+     "repo": "thermodynamic-accountability-framework",
+     "ref": "origin/main",
+     "path": "docs/glossary.md",
+     "builder": "Claude Code",
+     "note": "status definition only"
+    }
+   ]
+  },
+  {
+   "concept": "failure axes (PHYSICAL / INSTRUMENT / DETERMINATION)",
+   "home": "SINGLE",
+   "status": "built; no counterpart in Simulators",
+   "decided_by": "single copy",
+   "locations": [
+    {
+     "role": "candidate",
+     "repo": "study-aperture",
+     "ref": "origin/main",
+     "path": "experimental/playground/failures.py",
+     "builder": "Perplexity (commit trailer)",
+     "note": ""
+    }
+   ]
+  },
+  {
+   "concept": "coincidence card",
+   "home": "CANDIDATE",
+   "status": "C1-C6 tests in one file, the card record in another; a third calls both",
+   "decided_by": "pending cross-run",
+   "note": "divergence-playground/coincidence.py on this branch was taken from claude/healing-folder-additions-u5aojl, which is not on main",
+   "locations": [
+    {
+     "role": "candidate",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "divergence-playground/coincidence.py",
+     "builder": "Claude Code (commit trailer)",
+     "note": "C1-C6 elicitation tests"
+    },
+    {
+     "role": "candidate",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "forest-model-ledger/ledger/toolkit/coincidence_card.py",
+     "builder": "Claude Code (commit trailer)",
+     "note": "card record; draft PR 255"
+    },
+    {
+     "role": "copy",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "relational-playground/playground/analysis/coincidence.py",
+     "builder": "Claude Code (commit trailer)",
+     "note": "wires the two"
+    }
+   ]
+  },
+  {
+   "concept": "assessor reliability",
+   "home": "SINGLE",
+   "status": "built, 114 tests pass, not merged",
+   "decided_by": "single copy",
+   "note": "Simulators assessor-coupling/ is a different concept (independence of assessor from assessed)",
+   "locations": [
+    {
+     "role": "candidate",
+     "repo": "study-aperture",
+     "ref": "origin/experimental/assessor-reliability-pilot",
+     "path": "experimental/assessor_reliability/",
+     "builder": "Manus (commit trailer)",
+     "note": "one commit off main",
+     "tip": "28db96f"
+    }
+   ]
+  },
+  {
+   "concept": "attribution directionality",
+   "home": "NOT_LOCATED",
+   "status": "no file carries the term",
+   "decided_by": "pending: a definition or a path from Kavik",
+   "searched": "2026-11-11: GitHub code search over user:JinnZ2 (default branches only), 0 hits; grep of local checkouts of Simulators (this branch), study-aperture, method-layer, TAF, decision-aperture, 0 hits",
+   "locations": [
+    {
+     "role": "nearest",
+     "repo": "thermodynamic-accountability-framework",
+     "ref": "origin/main",
+     "path": "judgment_registry/experiments.py",
+     "builder": "Claude Code",
+     "note": "ATTRIBUTION_ORDER flag; nearest, not shown to be the same concept"
+    },
+    {
+     "role": "nearest",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "measurand-partition/common.py",
+     "builder": "not recorded",
+     "note": "attribution() UNPARTITIONED; nearest, not shown to be the same concept"
+    }
+   ]
+  },
+  {
+   "concept": "L0 gate (budget closure)",
+   "home": "CANDIDATE",
+   "status": "three builds",
+   "decided_by": "pending cross-run",
+   "locations": [
+    {
+     "role": "candidate",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "forest-model-ledger/ledger/toolkit/budget_closure.py",
+     "builder": "Claude Code (commit trailer)",
+     "note": "needs numpy; sha-pinned"
+    },
+    {
+     "role": "candidate",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "relational-playground/playground/l0.py",
+     "builder": "Claude Code (commit trailer)",
+     "note": "stdlib; LIVE / VOID budgets"
+    },
+    {
+     "role": "candidate",
+     "repo": "study-aperture",
+     "ref": "origin/main",
+     "path": "experimental/playground/gates/l0_closure.py",
+     "builder": "Perplexity (commit trailer)",
+     "note": ""
+    }
+   ]
+  },
+  {
+   "concept": "anchor / return",
+   "home": "CANDIDATE",
+   "status": "rule text in the forest METHOD BRIEF; two code builds",
+   "decided_by": "pending cross-run",
+   "locations": [
+    {
+     "role": "candidate",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "forest-model-ledger/CLAUDE.md",
+     "builder": "Kavik + Claude (METHOD BRIEF)",
+     "note": "the rule as text"
+    },
+    {
+     "role": "copy",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "forest-model-ledger/ledger/anchors/ANCHOR_run9.yaml",
+     "builder": "Claude Code (commit trailer)",
+     "note": "one anchor record"
+    },
+    {
+     "role": "candidate",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "relational-playground/playground/anchor.py",
+     "builder": "Claude Code (commit trailer)",
+     "note": ""
+    },
+    {
+     "role": "candidate",
+     "repo": "study-aperture",
+     "ref": "origin/main",
+     "path": "experimental/playground/reference/anchor.py",
+     "builder": "Perplexity (commit trailer)",
+     "note": ""
+    },
+    {
+     "role": "copy",
+     "repo": "study-aperture",
+     "ref": "origin/main",
+     "path": "experimental/playground/reference/return_test.py",
+     "builder": "Perplexity (commit trailer)",
+     "note": ""
+    }
+   ]
+  },
+  {
+   "concept": "percolation",
+   "home": "CANDIDATE",
+   "status": "two equation-family builds plus the original run code",
+   "decided_by": "pending cross-run",
+   "locations": [
+    {
+     "role": "candidate",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "relational-playground/playground/equations/percolation.py",
+     "builder": "Claude Code (commit trailer)",
+     "note": "with spotting"
+    },
+    {
+     "role": "candidate",
+     "repo": "study-aperture",
+     "ref": "origin/main",
+     "path": "experimental/playground/equations/percolation.py",
+     "builder": "Perplexity (commit trailer)",
+     "note": "finite percolation"
+    },
+    {
+     "role": "copy",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "forest-model-ledger/runs/run_7.py",
+     "builder": "chat-side original, filed verbatim",
+     "note": "ODE vs grid run"
+    },
+    {
+     "role": "nearest",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "energy/exploration_layers/percolation_lens.py",
+     "builder": "not recorded",
+     "note": "graph-threshold lens, a different use"
+    }
+   ]
+  },
+  {
+   "concept": "branching",
+   "home": "CANDIDATE",
+   "status": "two builds",
+   "decided_by": "pending cross-run",
+   "locations": [
+    {
+     "role": "candidate",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "relational-playground/playground/equations/branching.py",
+     "builder": "Claude Code (commit trailer)",
+     "note": "with die-out"
+    },
+    {
+     "role": "copy",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "relational-playground/playground/equations/branching_math.py",
+     "builder": "Claude Code (commit trailer)",
+     "note": "extinction probability"
+    },
+    {
+     "role": "candidate",
+     "repo": "study-aperture",
+     "ref": "origin/main",
+     "path": "experimental/playground/equations/branching.py",
+     "builder": "Perplexity (commit trailer)",
+     "note": "finite branching"
+    }
+   ]
+  },
+  {
+   "concept": "ROTL",
+   "home": "NOT_LOCATED",
+   "status": "term not found; expansion not known to this session",
+   "decided_by": "pending: expansion and a path from Kavik",
+   "searched": "2026-11-11: GitHub code search over user:JinnZ2 (default branches only), 0 hits; grep of local checkouts of Simulators (this branch), study-aperture, method-layer, TAF, decision-aperture, 0 hits",
+   "locations": []
+  },
+  {
+   "concept": "correctness gradients",
+   "home": "NOT_LOCATED",
+   "status": "term not found",
+   "decided_by": "pending: a definition or a path from Kavik",
+   "searched": "2026-11-11: GitHub code search over user:JinnZ2 (default branches only), 0 hits; grep of local checkouts of Simulators (this branch), study-aperture, method-layer, TAF, decision-aperture, 0 hits",
+   "locations": []
+  }
+ ]
+}
