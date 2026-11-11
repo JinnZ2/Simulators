@@ -142,7 +142,7 @@ ledger/toolkit/, 7 tools                budget_closure, coincidence_card, assump
                                         Of the brief's seven, ONE is built (budget closure);
                                         the other six are placeholders in ledger/toolkit/
 anchor = frozen, TAGGED snapshot        ledger/anchors/ANCHOR_run9.yaml, status candidate;
-                                        tag forest-model-ledger-anchor-candidate-run9 SET AT MERGE
+                                        archive branch archive/anchor-run9 at 55c651b (no tag; 2026-11-11)
                                         (every tag route from the session refused); commit
                                         55c651b is the pin;
                                         three code files pinned by sha256, checked every run

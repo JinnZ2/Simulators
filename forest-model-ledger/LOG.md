@@ -96,3 +96,4 @@ corrections recorded as delivered: ODE / grid is a ratio by drought (478 / 321 /
 kept apart  run_6.py header: leaking model = "run-4 equations"; FML_009: run 5's model. Not reconciled.
 STATUS_MAP  REPORTED gained one exit (original code arrives and reproduces). PROPOSED.
 ```
+- 2026-11-11  ANCHOR_run9: the planned tag is replaced by the branch archive/anchor-run9 at 55c651b (Kavik decision; tag pushes are refused from sessions). git_commit stays the pin.
