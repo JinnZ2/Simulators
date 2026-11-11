@@ -17,3 +17,28 @@ def side_by_side(configs, output):
 
 def rank(*_a, **_k):
     raise RuntimeError("no automatic model ranking: read the applicability records")
+
+
+class RegimeUndeclared(RuntimeError):
+    pass
+
+
+def cross_system(systems, output):
+    """ADDITION 6. systems: {system name: [Config, ...]}. Refused until every
+    system's three observer regimes are declared; an UNKNOWN regime is a declaration,
+    UNDECLARED is not. The regimes are printed beside the rows, never folded in."""
+    owed = {}
+    for name, cfgs in systems.items():
+        for c in cfgs:
+            u = c["controls"].observer_undeclared() if c["controls"] else ["no control matrix"]
+            if u:
+                owed.setdefault(name, set()).update(u)
+    if owed:
+        raise RegimeUndeclared("no cross-system comparison: observer regime undeclared for %s"
+                               % {k: sorted(v) for k, v in sorted(owed.items())})
+    out = {}
+    for name in sorted(systems):
+        out[name] = dict(regimes=systems[name][0]["controls"].observer, table=side_by_side(systems[name], output))
+    differ = len({str(sorted(v["regimes"].items())) for v in out.values()}) > 1
+    return dict(systems=out, regimes_differ=differ,
+                note="regimes differ across systems: the rows are not like for like" if differ else "regimes match as declared")
