@@ -230,7 +230,7 @@ def gate(n=200, seeds=(0, 1, 2, 3, 4)):
 
 if __name__ == "__main__":
     if "--selftest" in sys.argv:
-        print("refused: the gate is python3 tests/test_toolkit.py"); sys.exit(2)
+        print("refused: the gate is python3 forest-model-ledger/tests/test_toolkit.py"); sys.exit(2)
     from ledger.toolkit import attribution_directionality as ad
     for row in read_cases(ad.load_cases(ad.CASES_FIRST)):
         print(f"{row['id']:26s} {row['verdict']:18s} fires {row['fires']}")

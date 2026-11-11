@@ -133,15 +133,20 @@ The checker fails on any run or card whose status has no entry there.
         correction, not delivered text.
 ```
 
-## Where the folder stands against the brief (2026-11-11, after run_18; revise as it moves)
+## Where the folder stands against the brief (2026-11-11, after run_21; revise as it moves)
 
 ```text
 brief says                              folder has
 --------------------------------------  ------------------------------------------------
 ledger/toolkit/, 7 tools                2026-11-11 staged build: all seven built and gated (tests/test_toolkit.py:
                                         known answers + null harness FP 0 / TP 1, harness seeds 0-4).
-                                        equation_family_swap is an ADAPTER and its engine (relational-playground)
-                                        is absent; assumption_block_trace is a placeholder until real data.
+                                        Held-out gate (tests/test_heldout.py; thresholds frozen by hash first,
+                                        HELDOUT_FREEZE.md): 4 PASS; multi_seed_ensemble, ablation,
+                                        assumption_block_trace FAIL and are trust PROVISIONAL, not retuned.
+                                        equation_family_swap is an ADAPTER (frozen file) bound to the engine
+                                        (relational-playground, PR #257) by rp_engine.py: run_21 ran it on the
+                                        engine's own fire grid; no ledger component has a second family there.
+                                        assumption_block_trace is a placeholder until real data.
                                         Also: coincidence_card, assumption_nudge, attribution_directionality
 anchor = frozen, TAGGED snapshot        ledger/anchors/ANCHOR_run9.yaml, status candidate;
                                         tag forest-model-ledger-anchor-candidate-run9 SET AT MERGE
@@ -152,14 +157,17 @@ anchor test: 4 conditions               seeds PASS (wired, run_10); budgets PART
                                         nudges PARTIAL (run_11: 13 of 25 assumptions, 33 of 64
                                         nudges moved nothing, card OPEN; run_15 split the 33:
                                         18 hidden in noise, 9 absorbed, 2 seed-specific, 2 inert,
-                                        2 unresolved); independent PARTIAL
+                                        2 unresolved at delta 0.5 sd; run_20: HIDDEN 23..15 and
+                                        ABSORBED 4..12 over 0.40-0.60 sd); independent PARTIAL
 RETURN closes C, N, P, water, energy    N and water close; C, P, energy print VOID
 RETURN diffs against the anchor         no diff tool
 BRANCH changes ONE component            no branch has been run from run_9 yet
 "run the FULL toolbox" on a trigger     run_14..18 re-ran the triggers with the built tools; rows cleared
                                         into NEEDS_TOOL.md's Cleared table. run_10..15 stay INCOMPLETE:
-                                        equation_family_swap (engine absent) and assumption_block_trace
-                                        (no real data) are still owed, and CC_004/CC_005 rows are unrun
+                                        equation_family_swap (engine found, no ledger component under a
+                                        second family) and assumption_block_trace (no real data) are still
+                                        owed, and CC_004/CC_005 rows are unrun. CC_001 back to PROVISIONAL:
+                                        it rests on run_14, where two now-PROVISIONAL tools ran
 known error, left in place              N residual -5.0e-11 = deposition counter roundoff;
                                         branch BR_RUN_9B_COMPENSATED_COUNTER (placeholder)
 run_9 is a CANDIDATE anchor, not an anchor
@@ -187,6 +195,11 @@ python3 runs/run_15.py                    # the 33 non-moving nudges classified 
 python3 runs/run_16.py                    # support_match on first-hand cases a-d, before / after
 python3 runs/run_17.py                    # parameter_recovery, six parameters
 python3 runs/run_18.py                    # residual_regression on N misclosure, 36 configurations
+python3 tests/test_heldout.py             # held-out gate; refuses if a frozen tool file changed
+python3 runs/run_19.py                    # support_match on a blind coder's records and labels
+python3 runs/run_20.py                    # run_15's near-threshold classes over delta 0.40-0.60 sd (about 30 s)
+RELATIONAL_PLAYGROUND_PATH=<checkout>/relational-playground python3 runs/run_21.py   # swap on the engine (about 6 min)
+python3 tools/check_ledger.py --owed-mode original|owed|proposed   # original is the default; Kavik picks
 ```
 
 ## Hard constraints
