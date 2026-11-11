@@ -20,7 +20,7 @@
     {
      "repo": "thermodynamic-accountability-framework",
      "path": "calibration",
-     "ref": "origin/claude/not-determinable-reason",
+     "ref": "origin/archive/not-determinable-reason",
      "tip_contains": "92cd578"
     }
    ]
@@ -52,7 +52,7 @@
    "agents": "three Claude Code sessions (three TAF PR branches)",
    "collided": "calibration/pipeline.py score aggregation changed three ways: PR 81 sets a no-score result to (None, Band.UNKNOWN) inline; PR 82 adds _aggregate returning 2 values, (None, NOT_MEASURED) with no module report; PR 84 adds _aggregate returning 3 values, the third a not_measured_reason",
    "found": "chat-side, TAF cleanup phase 1 inventory, trial merge of stack tips (TAF_CLEANUP_PHASE1_INVENTORY.md, not in the TAF checkout read here); the three diffs of calibration/pipeline.py were then read in this session on 2026-11-11 and match",
-   "resolution": "OPEN: pick pending",
+   "resolution": "picked 2026-11-11 (Kavik): three-value (score, band, reason) from PR 84 plus the no-score -> UNKNOWN rule from PR 81, folded on the PR 85 branch (65bb724); 80/82/84 closed, branches kept under archive/",
    "note": "Diffs read at PR tips ed275ef (81), a2c5d99 (82), 92cd578 (84). PR 81's title does not name the pipeline; the change is in its diff.",
    "evidence": [
     "https://github.com/JinnZ2/thermodynamic-accountability-framework/pull/81",
@@ -61,19 +61,19 @@
     {
      "repo": "thermodynamic-accountability-framework",
      "path": "calibration/pipeline.py",
-     "ref": "origin/claude/silent-fill-register",
+     "ref": "origin/archive/silent-fill-register",
      "tip_contains": "ed275ef"
     },
     {
      "repo": "thermodynamic-accountability-framework",
      "path": "calibration/pipeline.py",
-     "ref": "origin/claude/unknown-axis-followup",
+     "ref": "origin/archive/unknown-axis-followup",
      "tip_contains": "a2c5d99"
     },
     {
      "repo": "thermodynamic-accountability-framework",
      "path": "calibration/pipeline.py",
-     "ref": "origin/claude/not-determinable-reason",
+     "ref": "origin/archive/not-determinable-reason",
      "tip_contains": "92cd578"
     },
     "TAF_CLEANUP_PHASE1_INVENTORY.md: NOT COMMITTED as of 2026-11-11 (written to a cleanup-session scratchpad); to be linked at TAF docs/cleanup/ when it lands"

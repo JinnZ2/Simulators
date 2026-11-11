@@ -10,7 +10,7 @@ As of 2026-11-11.
 - what collided: one status name, two meanings (an instrument crash; a label the instrument does not recognise)
 - how found: chat-side (Kavik + Claude), comparing the report of TAF PR 82 (GAP_INSTRUMENT = a module raised) with the report of PR 84 (= a label outside the severity table). PR tips dated 2026-11-11T14:15:59Z (82, a2c5d99) and 2026-11-11T14:15:24Z (84, 92cd578); the report texts themselves are not in a repo
 - resolution: split into GAP_INSTRUMENT_CRASH / GAP_INSTRUMENT_UNRECOGNIZED_LABEL; both names are on unmerged branches only
-- evidence: https://github.com/JinnZ2/thermodynamic-accountability-framework/pull/82; https://github.com/JinnZ2/thermodynamic-accountability-framework/pull/85; `thermodynamic-accountability-framework:calibration@origin/claude/unknown-axis-followup-2`; `thermodynamic-accountability-framework:calibration@origin/claude/not-determinable-reason`
+- evidence: https://github.com/JinnZ2/thermodynamic-accountability-framework/pull/82; https://github.com/JinnZ2/thermodynamic-accountability-framework/pull/85; `thermodynamic-accountability-framework:calibration@origin/claude/unknown-axis-followup-2`; `thermodynamic-accountability-framework:calibration@origin/archive/not-determinable-reason`
 
 ## 2026-11-10/11  playground
 
@@ -25,9 +25,9 @@ As of 2026-11-11.
 - agents: three Claude Code sessions (three TAF PR branches)
 - what collided: calibration/pipeline.py score aggregation changed three ways: PR 81 sets a no-score result to (None, Band.UNKNOWN) inline; PR 82 adds _aggregate returning 2 values, (None, NOT_MEASURED) with no module report; PR 84 adds _aggregate returning 3 values, the third a not_measured_reason
 - how found: chat-side, TAF cleanup phase 1 inventory, trial merge of stack tips (TAF_CLEANUP_PHASE1_INVENTORY.md, not in the TAF checkout read here); the three diffs of calibration/pipeline.py were then read in this session on 2026-11-11 and match
-- resolution: OPEN: pick pending
+- resolution: picked 2026-11-11 (Kavik): three-value (score, band, reason) from PR 84 plus the no-score -> UNKNOWN rule from PR 81, folded on the PR 85 branch (65bb724); 80/82/84 closed, branches kept under archive/
 - note: Diffs read at PR tips ed275ef (81), a2c5d99 (82), 92cd578 (84). PR 81's title does not name the pipeline; the change is in its diff.
-- evidence: https://github.com/JinnZ2/thermodynamic-accountability-framework/pull/81; https://github.com/JinnZ2/thermodynamic-accountability-framework/pull/82; https://github.com/JinnZ2/thermodynamic-accountability-framework/pull/84; `thermodynamic-accountability-framework:calibration/pipeline.py@origin/claude/silent-fill-register`; `thermodynamic-accountability-framework:calibration/pipeline.py@origin/claude/unknown-axis-followup`; `thermodynamic-accountability-framework:calibration/pipeline.py@origin/claude/not-determinable-reason`; TAF_CLEANUP_PHASE1_INVENTORY.md: NOT COMMITTED as of 2026-11-11 (written to a cleanup-session scratchpad); to be linked at TAF docs/cleanup/ when it lands
+- evidence: https://github.com/JinnZ2/thermodynamic-accountability-framework/pull/81; https://github.com/JinnZ2/thermodynamic-accountability-framework/pull/82; https://github.com/JinnZ2/thermodynamic-accountability-framework/pull/84; `thermodynamic-accountability-framework:calibration/pipeline.py@origin/archive/silent-fill-register`; `thermodynamic-accountability-framework:calibration/pipeline.py@origin/archive/unknown-axis-followup`; `thermodynamic-accountability-framework:calibration/pipeline.py@origin/archive/not-determinable-reason`; TAF_CLEANUP_PHASE1_INVENTORY.md: NOT COMMITTED as of 2026-11-11 (written to a cleanup-session scratchpad); to be linked at TAF docs/cleanup/ when it lands
 
 ## 2026-11-11  expiry register
 
