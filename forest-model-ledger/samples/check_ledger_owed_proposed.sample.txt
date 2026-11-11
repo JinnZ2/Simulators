@@ -1,7 +1,7 @@
 components {'admitted': 3, 'candidate': 15, 'placeholder': 7, 'rejected': 2}
 branches   {'admitted': 0, 'candidate': 5, 'placeholder': 11, 'rejected': 0}
 blocks 6  runs 21  tests 17
-runs {'REPORTED': 8, 'COMPLETE': 7, 'INCOMPLETE': 6}  NEEDS_TOOL rows 25 open, 8 cleared  placeholder tools 1
+runs {'REPORTED': 5, 'COMPLETE': 9, 'INCOMPLETE': 7}  NEEDS_TOOL rows 31 open, 8 cleared  placeholder tools 1
 toolkit 11 tools  cards {'PROVISIONAL': 1, 'OPEN': 4}  anchors {'ANCHOR_run9': 'candidate'}
 open slots by exit: no exit defined 10  exit incomplete (sensitivity void) 4  exit complete 0  (counted, not failed)
 owed-mode proposed
@@ -14,6 +14,11 @@ owed-mode proposed
   owed: residual_regression built, not yet run on run_12   expires VOID   (no exit)
   owed: equation_family_swap built, not yet run on run_10   expires VOID   (no exit)
   owed: parameter_recovery built, not yet run on run_10   expires VOID   (no exit)
+  owed: multi_seed_ensemble built, not yet run on run_8   expires VOID   (no exit)
+  owed: equation_family_swap built, not yet run on run_8   expires VOID   (no exit)
+  owed: ablation built, not yet run on run_8   expires VOID   (no exit)
+  owed: residual_regression built, not yet run on run_8   expires VOID   (no exit)
+  owed: parameter_recovery built, not yet run on run_8   expires VOID   (no exit)
   owed: ablation built, not yet run on run_13   expires VOID   (no exit)
   owed: multi_seed_ensemble built, not yet run on run_13   expires VOID   (no exit)
   owed: equation_family_swap built, not yet run on run_13   expires VOID   (no exit)
@@ -24,7 +29,7 @@ owed-mode proposed
   owed: residual_regression built, not yet run on run_15   expires VOID   (no exit)
   owed: equation_family_swap built, not yet run on run_15   expires VOID   (no exit)
   owed: parameter_recovery built, not yet run on run_15   expires VOID   (no exit)
-  owed rows 19, of which no exit (VOID expiry) 19, expired 0
+  owed rows 24, of which no exit (VOID expiry) 24, expired 0
 held-out PROVISIONAL tools: ablation, assumption_block_trace, multi_seed_ensemble
   cleared by a held-out PROVISIONAL tool (listed, not failed; Kavik's call): ablation / run_10 (cleared by run_14)
   cleared by a held-out PROVISIONAL tool (listed, not failed; Kavik's call): ablation / run_11 (cleared by run_15)
@@ -41,4 +46,4 @@ held-out PROVISIONAL tools: ablation, assumption_block_trace, multi_seed_ensembl
   no exit defined: L0_P_BUDGET
   no exit defined: L0_ENERGY_BUDGET
 note: PyYAML cross-check: ran
-PASS+OWED(19) (0 failures)
+PASS+OWED(24) (0 failures)

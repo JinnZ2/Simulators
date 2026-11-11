@@ -14,14 +14,14 @@ if_assumption_fails:
 scope: "run 7 drought sweep"
 provenance:
   class: DERIVED
-  source: "run_7: work order 2026-11-10 (reported there; code not in this tree; not recomputed)"
+  source: "run_7: original code filed 2026-11-11, rerun in this tree, output matches the log"
 admitted_by: void
 test_results:
   - test: void
     run: run_7
-    result: "threshold at drought ~0.6-0.7 with variance spike"
-    value: "reported, not recomputed"
+    result: "grid fraction 0.164 at drought 0.6, 0.719 at 0.7, 0.954 at 0.8; sd peaks 0.322 at 0.7"
+    value: "rerun of the original code"
 open_issues:
-  - "grid size and replicate count are not on record here; finite-size effects on the threshold are unassessed"
+  - "L 120, 12 reps, one seed; finite-size effects on the threshold are unassessed"
 depends_on: []
 status: candidate

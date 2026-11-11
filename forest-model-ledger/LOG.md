@@ -107,3 +107,17 @@ assumption_block_trace  ALPHA        0.001  was 0.01, failed FP 0.015
 assumption_block_trace  MIN_STUDIES      8
 gate.py                 harness        200 draws (60 for residual_regression) x harness seeds 0-4; PASS = fp 0 and tp 1 on every seed
 ```
+
+## 2026-11-11 -- original code for runs 6, 7, 8 filed
+
+```text
+source      chat side, 2026-11-11: three files, "verbatim as executed 2026-11-10"
+filed       runs/run_6.py  run_7.py  run_8.py, byte-identical to the delivery (sha256 in each run_N.md)
+rerun here  numpy 2.5.3, scipy 1.18.1: each prints its logged output line for line
+statuses    run_6 COMPLETE, run_7 COMPLETE, run_8 INCOMPLETE (card CC_002, 6 rows in NEEDS_TOOL.md) -- PROPOSED
+corrections recorded as delivered: ODE / grid is a ratio by drought (478 / 321 / 62 at 0.3 / 0.4 / 0.5),
+            not "~60x"; the spot-0.2 convergence was read by eye, no tolerance, 10 reps -> CA_1 candidate
+kept apart  run_6.py header: leaking model = "run-4 equations"; FML_009: run 5's model. Not reconciled.
+STATUS_MAP  REPORTED gained one exit (original code arrives and reproduces). PROPOSED.
+```
+- 2026-11-11  ANCHOR_run9: the planned tag is replaced by the branch archive/anchor-run9 at 55c651b (Kavik decision; tag pushes are refused from sessions). git_commit stays the pin.

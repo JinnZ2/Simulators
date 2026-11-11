@@ -1,9 +1,9 @@
 # CANDIDATE anchor. Not an anchor until all four tests read PASS.
 id: ANCHOR_run9
 status: candidate
-git_tag: forest-model-ledger-anchor-candidate-run9
+git_tag: "NOT SET; archive branch archive/anchor-run9 stands in (see tag_state)"
 git_commit: 55c651b8f7228b4d28a21ad442bf817752e80d21
-tag_state: "SET AT MERGE. Not on the remote. Routes tried from the session 2026-11-10, all refused: annotated tag push, lightweight tag push, commit-to-refs/tags refspec (HTTP 403 each); the GitHub tools available carry no tag or release creation. A branch ref was not used as a stand-in: a branch moves. Whoever merges sets this tag on the commit above"
+tag_state: "ARCHIVE BRANCH, 2026-11-11 (Kavik decision: tag pushes are refused from sessions, so a branch under archive/ is used wherever a tag was planned). origin/archive/anchor-run9 was pushed at the git_commit above and read back at that sha. A branch can move; git_commit is the pin, and Simulators check_concept_map.py fails if an archive ref it lists leaves its pinned commit. The planned tag name was forest-model-ledger-anchor-candidate-run9. Earlier state, kept: SET AT MERGE. Not on the remote. Routes tried from the session 2026-11-10, all refused: annotated tag push, lightweight tag push, commit-to-refs/tags refspec (HTTP 403 each); the GitHub tools available carry no tag or release creation. A branch ref was not used as a stand-in: a branch moves. Whoever merges sets this tag on the commit above"
 run: run_9
 seed: "0 (base); 0..9 (seed sweep)"
 params: "model/base.py DEFAULTS and INIT, unedited; 300 yr; RK4 dt 1/52"
