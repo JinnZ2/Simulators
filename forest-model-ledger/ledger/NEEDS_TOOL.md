@@ -54,3 +54,15 @@ used_in lists that run). tools/check_ledger.py enforces all three. Rows are move
 | parameter_recovery | 33 of 64 nudges move nothing detectable (card CC_003) | run_11 | 2026-11-10 | run_17 | six parameters across run_15 classes: 3 RECOVERED, 2 PARTIAL, aG NOT_IDENTIFIABLE |
 | residual_regression | N misclosure near-identical across seeds (card CC_001) | run_10 | 2026-11-10 | run_18 | N misclosure on method vs biology over 36 configurations: METHOD_ARTIFACT once the counter error is declared, UNEXPLAINED without |
 | residual_regression | run_10 trigger re-run, N misclosure near-identical across seeds (card CC_001) | run_14 | 2026-11-11 | run_18 | N misclosure on method vs biology over 36 configurations: METHOD_ARTIFACT once the counter error is declared, UNEXPLAINED without |
+
+## Owed expiry
+
+Read only under `tools/check_ledger.py --owed-mode proposed` (2026-11-11; the mode is a
+proposal awaiting Kavik). One row per owed (tool, run): when the row is no longer
+allowed to stay owed. Declared when the row opens. `date:YYYY-MM-DD`, `run:run_N`
+(expires once run_N exists) or `VOID`. A row with no entry here reads VOID and is
+counted as no exit. Every row open on 2026-11-11 opened before this rule, so none
+carries an expiry; none is back-filled.
+
+| tool | run | expires | declared |
+|---|---|---|---|

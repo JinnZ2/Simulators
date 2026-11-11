@@ -26,14 +26,17 @@ slots:
     state: ruled_out
     evidence: "two causes supported"
     expiry_condition: void
-reading_declared: RESOLVED
-recheck_when: void
+reading_declared: PROVISIONAL
+recheck_when:
+  - multi_seed_ensemble
+  - ablation
 branch: void
 runs:
   - run_9
   - run_10
   - run_14
 open_issues:
+  - "2026-11-11 held-out gate: multi_seed_ensemble (FAIL_TP) and ablation (FAIL_FP) went back to PROVISIONAL; run_14, which this card rests on for RESOLVED, used both. RESOLVED -> PROVISIONAL by the STATUS_MAP exit (evidence from tools not yet trusted). The slots are unchanged. Checker rule: a RESOLVED card may not rest on a run where a held-out PROVISIONAL tool ran"
   - "PROVISIONAL (Kavik, 2026-11-10): the evidence stands; the producing tools are still in build. The slots were filled from hand-written checks in run_10, which is INCOMPLETE under the gate rule. Re-check when multi_seed_ensemble and ablation exist"
   - "the dep=0 arm has 0 fires in all three seeds, so fire and the deposition counter were not removed independently in one run; the fire-off arm at dep=1 covers the other half"
   - "2026-11-11 recheck (run_14): multi_seed_ensemble and ablation built and gated. The dep=0 arm reads CO_ABLATED [fire] mechanically; the counter-only ablation removes the counter with fire kept and carries the whole seed-invariant residual. recheck_when cleared; PROVISIONAL -> RESOLVED. The slots were not changed in state, only in evidence"

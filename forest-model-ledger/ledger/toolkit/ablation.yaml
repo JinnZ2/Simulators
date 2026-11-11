@@ -22,6 +22,7 @@ used_in:
   - run_14
   - run_15
 open_issues:
+  - "HELD-OUT FAIL_FP 0.005 (2026-11-11, tests/test_heldout.py): two outputs, uniform noise, 16 seeds, no effect; MATTERS fired on 1 of 200 null draws on some harness seed. MATTERS inherits MOVED from multi_seed_ensemble with no margin given (material None counts as MOVED), and with two outputs the chance of one false MOVED doubles. Not retuned; trust PROVISIONAL"
   - "the co_ablated null leg is close to construction (draws are activity tables, the rule is a set test); its content is that a declared drop never fires it"
 status: candidate
 gate:
@@ -32,3 +33,12 @@ gate:
     co_ablated: "fp 0.0 tp 1.0 n 200 seed 0-4 PASS"
   command: "python3 tests/test_toolkit.py"
 blocked_on: void
+heldout:
+  verdict: FAIL
+  known_answer: "5 of 5"
+  null_legs:
+    matters_uniform_two_outputs: "fp 0.005 tp 1.0 n 200 seed 100-104 FAIL_FP"
+    co_ablated_vs_flicker: "fp 0.0 tp 1.0 n 200 seed 100-104 PASS"
+  trust: PROVISIONAL
+  frozen_at: "72244bf (ledger/toolkit/HELDOUT_FREEZE.md); sets committed e5e3186 before first run"
+  command: "python3 tests/test_heldout.py"

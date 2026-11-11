@@ -27,3 +27,11 @@ gate:
     handoff: "fp 0.0 tp 1.0 n 200 seed 0-4 PASS"
   command: "python3 tests/test_toolkit.py"
 blocked_on: "the relational-playground engine: absent from every branch and repo in scope, checked 2026-11-11. Every equation_family_swap row in ledger/NEEDS_TOOL.md stays open until it exists and the swap is run"
+heldout:
+  verdict: PASS
+  known_answer: "3 of 3"
+  null_legs:
+    handoff_laplace_31pt: "fp 0.0 tp 1.0 n 200 seed 100-104 PASS"
+  trust: HELD_OUT_PASS
+  frozen_at: "72244bf (ledger/toolkit/HELDOUT_FREEZE.md); sets committed e5e3186 before first run"
+  command: "python3 tests/test_heldout.py"

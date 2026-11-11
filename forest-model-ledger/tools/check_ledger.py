@@ -3,6 +3,14 @@
     python3 tools/check_ledger.py            # schema + cross-references
     python3 tools/check_ledger.py --tests    # also run the tests each admitted entry cites
     python3 tools/check_ledger.py --selftest # plant one defect per rule in a copy; each must fire
+    python3 tools/check_ledger.py --owed-mode original|owed|proposed
+
+--owed-mode (2026-11-11, chat side; Kavik decides, both behaviours kept):
+  original  (default) a NEEDS_TOOL row whose tool is built but not yet run on its run is a FAIL
+  owed      the same rows are listed as owed and do not fail
+  proposed  result reads PASS|FAIL + OWED(n), never bare PASS when n > 0; each owed row carries an
+            expiry declared when the row opens (table "## Owed expiry" in NEEDS_TOOL.md:
+            date:YYYY-MM-DD or run:run_N or VOID). VOID counts as no exit. An expired row is a FAIL.
 
 exit 0 = no FAIL, 1 = FAIL.
 """
@@ -22,6 +30,7 @@ BLOCK = ["id", "statement", "if_fails", "used_by", "used_by_runs", "open_issues"
 # the seven tools of the staged build (work order 2026-11-11); each is trusted only after its gate
 STAGED_SEVEN = ("multi_seed_ensemble", "ablation", "support_match", "parameter_recovery", "residual_regression",
                 "equation_family_swap", "assumption_block_trace")
+OWED_MODES = ("original", "owed", "proposed")
 RUN_FIELDS = ["status", "code", "seed", "params", "results", "flags", "provenance", "feeds"]
 
 
@@ -32,7 +41,9 @@ def load_dir(sub):
     return out
 
 
-def check(run_tests=False):
+def check(run_tests=False, owed_mode="original"):
+    if owed_mode not in OWED_MODES:
+        raise SystemExit(f"--owed-mode {owed_mode}: not one of {OWED_MODES}")
     fails, notes = [], []
     F = fails.append
     comps, branches, blocks = load_dir("components"), load_dir("branches"), load_dir("assumption_blocks")
@@ -153,15 +164,19 @@ def check(run_tests=False):
     import hashlib
     from ledger.toolkit import coincidence_card as cc
     TOOL = ["id", "code", "diagnoses", "inputs", "outputs", "cannot_see", "other_domains_it_could_see_into",
-            "used_in", "open_issues", "status", "gate", "blocked_on"]
+            "used_in", "open_issues", "status", "gate", "blocked_on", "heldout"]
     tools_ = {os.path.basename(p)[:-5]: miniyaml.load(p)
               for p in sorted(glob.glob(os.path.join(ROOT, "ledger", "toolkit", "*.yaml")))}
-    gate_results = None
+    gate_results = heldout_results = None
     if run_tests:
         sys.path.insert(0, HERE)
         from tests import test_toolkit
         from ledger.toolkit import gate as G_
         gate_results = {t: G_.summary(test_toolkit.run(t)) for t in test_toolkit.GATED}
+        from tests import test_heldout
+        test_heldout.check_freeze()
+        heldout_results = {t: G_.summary(f()) for t, f in test_heldout.HELDOUT.items()}
+    provisional_tools = set()
     for n, t in tools_.items():
         fields("tool", n, t, TOOL)
         built = t.get("code") != "void"
@@ -183,6 +198,22 @@ def check(run_tests=False):
                     F(f"tool {n}: gate re-run reads {gate_results[n]['verdict']}")
                 elif gate_results[n]["known_answer"] != g.get("known_answer") or gate_results[n]["null_legs"] != g.get("null_legs"):
                     F(f"tool {n}: gate re-run differs from the recorded gate")
+            # held-out gate (chat side, item 1): thresholds frozen by hash, fresh sets, run once
+            h = t.get("heldout")
+            if not isinstance(h, dict) or h.get("verdict") not in ("PASS", "FAIL"):
+                F(f"tool {n}: built but its held-out gate is not recorded")
+            else:
+                want = "HELD_OUT_PASS" if h["verdict"] == "PASS" else "PROVISIONAL"
+                if h.get("trust") != want:
+                    F(f"tool {n}: held-out {h['verdict']} but trust {h.get('trust')} (must be {want})")
+                if want == "PROVISIONAL":
+                    provisional_tools.add(n)
+                if heldout_results is not None:
+                    hr = heldout_results.get(n)
+                    if hr is None:
+                        F(f"tool {n}: held-out recorded but tests/test_heldout.py does not run it")
+                    elif (hr["verdict"], hr["known_answer"], hr["null_legs"]) != (h["verdict"], h.get("known_answer"), h.get("null_legs")):
+                        F(f"tool {n}: held-out re-run differs from the recorded held-out")
             for f_ in ("inputs", "outputs"):
                 if t.get(f_) in ("void", [], None):
                     F(f"tool {n}: built with {f_} void")
@@ -193,12 +224,14 @@ def check(run_tests=False):
                 F(f"tool {n}: run {r} missing")
     # ---- gate rule: INCOMPLETE run <-> NEEDS_TOOL.md <-> toolkit entry
     needs_path = os.path.join(ROOT, "ledger", "NEEDS_TOOL.md")
-    needs, cleared = [], []
+    needs, cleared, expiry = [], [], {}
     if os.path.exists(needs_path):
         section = "open"
         for line in open(needs_path):
             if line.startswith("## Cleared"):
                 section = "cleared"
+            elif line.startswith("## Owed expiry"):
+                section = "expiry"
             cells = [c.strip() for c in line.strip().strip("|").split("|")]
             if section == "open" and len(cells) == 5 and re.match(r"run_\d+$", cells[2]):
                 needs.append(cells)
@@ -208,6 +241,10 @@ def check(run_tests=False):
                 cleared.append(cells)
                 if not all(cells):
                     F(f"NEEDS_TOOL cleared: empty cell in row {cells}")
+            elif section == "expiry" and len(cells) == 4 and re.match(r"run_\d+$", cells[1]):
+                if not re.match(r"(date:\d{4}-\d{2}-\d{2}|run:run_\d+|VOID)$", cells[2]):
+                    F(f"NEEDS_TOOL expiry: {cells[0]} / {cells[1]}: expires '{cells[2]}' is not date:YYYY-MM-DD, run:run_N or VOID")
+                expiry[(cells[0], cells[1])] = cells[2]
     # a row leaves the open table only when the tool passed its gate AND was run on that trigger
     open_keys = {(c[0], c[1], c[2]) for c in needs}
     for tool, trig, r, _, by, _ in cleared:
@@ -226,7 +263,11 @@ def check(run_tests=False):
             F(f"NEEDS_TOOL cleared: {tool} / {r} cleared by {by}, which is not a run")
         elif by not in t.get("used_in", []):
             F(f"NEEDS_TOOL cleared: {tool} / {r} cleared by {by}, but the tool's used_in omits {by}")
-    owed_runs = []
+    cleared_provisional = sorted({f"{tool} / {r} (cleared by {by})" for tool, _, r, _, by, _ in cleared if tool in provisional_tools})
+    owed_runs, owed_expiry = [], []
+    import datetime
+    today = os.environ.get("LEDGER_TODAY") or datetime.date.today().isoformat()
+    run_no = lambda x: int(x.split("_")[1])
     for tool, _, r, _, _ in needs:
         if tool not in tools_:
             F(f"NEEDS_TOOL: {tool} has no entry in ledger/toolkit/")
@@ -235,6 +276,14 @@ def check(run_tests=False):
             # passes through, not a defect; the invariant (the row cannot leave until the tool ran on it
             # and passed its gate) is enforced on the cleared table above. Counted and printed instead.
             owed_runs.append(f"{tool} built, not yet run on {r}")
+            exp = expiry.get((tool, r), "VOID")
+            expired = (exp.startswith("date:") and exp[5:] < today) or \
+                      (exp.startswith("run:") and any(run_no(x) >= run_no(exp[4:]) for x in runs))
+            owed_expiry.append((tool, r, exp, expired))
+            if owed_mode == "original":
+                F(f"NEEDS_TOOL: {tool} built but not yet run on {r} (owed-mode original)")
+            elif owed_mode == "proposed" and expired:
+                F(f"NEEDS_TOOL: owed row {tool} / {r} expired ({exp})")
         if r not in runs:
             F(f"NEEDS_TOOL: run {r} missing")
     # ---- STATUS_MAP: every status on both axes has an entry with every field
@@ -307,8 +356,13 @@ def check(run_tests=False):
         for t in rw:
             if t not in tools_:
                 F(f"card {n}: recheck_when names {t}, which has no entry in ledger/toolkit/")
-        if rw and all(t in tools_ and tools_[t].get("status") != "placeholder" for t in rw):
+        if rw and all(t in tools_ and tools_[t].get("status") != "placeholder" and t not in provisional_tools for t in rw):
             F(f"card {n}: PROVISIONAL but every tool in recheck_when is built; the re-check is due")
+        if reading == "RESOLVED":
+            for t in sorted(provisional_tools):
+                on = [r for r in c["runs"] if r in tools_[t].get("used_in", [])]
+                if on:
+                    F(f"card {n}: RESOLVED rests on {on[0]}, where held-out PROVISIONAL tool {t} ran; move to PROVISIONAL with {t} in recheck_when")
         if c["branch"] != "void" and c["branch"] not in branches:
             F(f"card {n}: branch {c['branch']} missing")
         for r in c["runs"]:
@@ -380,7 +434,8 @@ def check(run_tests=False):
     return fails, notes, dict(components=count(comps), branches=count(branches), blocks=len(blocks), runs=len(runs), tests=len(tests),
                               tools=len(tools_), tools_placeholder=sum(1 for t in tools_.values() if t.get("status") == "placeholder"),
                               run_status={k: sum(1 for v in run_status.values() if v == k) for k in ("REPORTED", "COMPLETE", "INCOMPLETE")},
-                              needs_rows=len(needs), owed_runs=owed_runs, cleared_rows=len(cleared), cards=readings, exits=exit_counts, no_exit=no_exit,
+                              needs_rows=len(needs), owed_runs=owed_runs, owed_expiry=owed_expiry, owed_mode=owed_mode,
+                              provisional_tools=sorted(provisional_tools), cleared_provisional=cleared_provisional, cleared_rows=len(cleared), cards=readings, exits=exit_counts, no_exit=no_exit,
                               anchors={n: a.get("status") for n, a in anchors_.items()})
 
 
@@ -401,11 +456,11 @@ def selftest():
         ("incomplete run marked complete", "runs/run_11.md", "status     : INCOMPLETE", "status     : COMPLETE", "COMPLETE while ledger/NEEDS_TOOL.md still owes"),
         ("needed tool with no toolkit entry", "ledger/NEEDS_TOOL.md", "| ablation | same shape across three families (card CC_004)", "| ablation_v2 | same shape across three families (card CC_004)", "NEEDS_TOOL: ablation_v2 has no entry"),
         ("provisional card waiting on an unknown tool", "ledger/toolkit/cards/CC_001_n_misclosure_seed_invariance.yaml",
-         "recheck_when: void", "recheck_when:\n  - multi_seed_ensemble_v2", "recheck_when names multi_seed_ensemble_v2"),
+         "recheck_when:\n  - multi_seed_ensemble\n  - ablation", "recheck_when:\n  - multi_seed_ensemble\n  - ablation\n  - multi_seed_ensemble_v2", "recheck_when names multi_seed_ensemble_v2"),
         ("card kept PROVISIONAL after its tools are built", "ledger/toolkit/cards/CC_001_n_misclosure_seed_invariance.yaml",
-         "recheck_when: void", "recheck_when:\n  - multi_seed_ensemble\n  - ablation", "the re-check is due"),
+         "recheck_when:\n  - multi_seed_ensemble\n  - ablation", "recheck_when:\n  - support_match", "the re-check is due"),
         ("provisional card declared resolved", "ledger/toolkit/cards/CC_001_n_misclosure_seed_invariance.yaml",
-         "recheck_when: void", "recheck_when:\n  - support_match", "declared RESOLVED, derived PROVISIONAL"),
+         "reading_declared: PROVISIONAL", "reading_declared: RESOLVED", "declared RESOLVED, derived PROVISIONAL"),
         ("cleared row whose tool's gate is not PASS", "ledger/toolkit/ablation.yaml", "  verdict: PASS", "  verdict: FAIL", "ablation / run_10 removed but the tool's gate is not PASS"),
         ("cleared row whose clearing run is not in used_in", "ledger/toolkit/ablation.yaml", "used_in:\n  - run_14\n  - run_15", "used_in:\n  - run_15", "used_in omits run_14"),
         ("row in both open and cleared tables", "ledger/NEEDS_TOOL.md", "| ablation | same shape across three families (card CC_004)", "| ablation | N misclosure near-identical across seeds (card CC_001) | run_10 | 2026-11-10 | x |\n| ablation | same shape across three families (card CC_004)", "is in both tables"),
@@ -423,18 +478,36 @@ def selftest():
         ("placeholder with code and no blocked_on", "ledger/toolkit/assumption_block_trace.yaml", "blocked_on: \"real data", "blocked_on: void\nwas: \"real data", "placeholder with code"),
         ("expiry target unknown", "ledger/expiry.yaml", "target: L0_P_BUDGET", "target: L0_Q_BUDGET", "L0_Q_BUDGET is neither"),
     ]
+    plants += [
+        ("original owed-mode fails a built tool not yet run on its row", "ledger/NEEDS_TOOL.md", None, None,
+         "built but not yet run on run_12 (owed-mode original)", ["--owed-mode", "original"]),
+        ("proposed owed-mode fails an expired owed row", "ledger/NEEDS_TOOL.md", "| expires | declared |\n|---|---|---|---|\n",
+         "| expires | declared |\n|---|---|---|---|\n| ablation | run_12 | date:2000-01-01 | 2026-11-11 |\n", "owed row ablation / run_12 expired", ["--owed-mode", "proposed"]),
+        ("proposed owed-mode refuses a malformed expiry", "ledger/NEEDS_TOOL.md", "| expires | declared |\n|---|---|---|---|\n",
+         "| expires | declared |\n|---|---|---|---|\n| ablation | run_12 | soon | 2026-11-11 |\n", "expires 'soon' is not", ["--owed-mode", "proposed"]),
+        ("held-out FAIL with trust not PROVISIONAL", "ledger/toolkit/ablation.yaml", "  trust: PROVISIONAL", "  trust: HELD_OUT_PASS",
+         "held-out FAIL but trust HELD_OUT_PASS"),
+        ("staged tool with no held-out record", "ledger/toolkit/parameter_recovery.yaml", "heldout:\n  verdict: PASS", "heldout_x:\n  verdict: PASS",
+         "held-out gate is not recorded"),
+        ("RESOLVED card resting on a held-out PROVISIONAL tool", "ledger/toolkit/cards/CC_001_n_misclosure_seed_invariance.yaml",
+         "reading_declared: PROVISIONAL\nrecheck_when:\n  - multi_seed_ensemble\n  - ablation", "reading_declared: RESOLVED\nrecheck_when: void",
+         "where held-out PROVISIONAL tool"),
+    ]
     bad = 0
-    for name, rel, old, new, expect in plants:
+    for plant in plants:
+        name, rel, old, new, expect = plant[:5]
+        args = plant[5] if len(plant) > 5 else ["--owed-mode", "owed"]   # the plants test their own rule, not the owed rule
         tmp = tempfile.mkdtemp()
         try:
             for d in ("ledger", "runs"):
                 shutil.copytree(os.path.join(HERE, d), os.path.join(tmp, d))
             path = os.path.join(tmp, rel)
-            text = open(path).read()
-            assert old in text, (name, "plant site missing")
-            open(path, "w").write(text.replace(old, new, 1))
+            if old is not None:
+                text = open(path).read()
+                assert old in text, (name, "plant site missing")
+                open(path, "w").write(text.replace(old, new, 1))
             env = dict(os.environ, LEDGER_ROOT=tmp)
-            out = subprocess.run([sys.executable, os.path.abspath(__file__)], env=env, capture_output=True, text=True)
+            out = subprocess.run([sys.executable, os.path.abspath(__file__)] + args, env=env, capture_output=True, text=True)
             fired = out.returncode != 0 and (expect is None or expect in out.stdout + out.stderr)
         finally:
             shutil.rmtree(tmp)
@@ -447,7 +520,8 @@ def selftest():
 if __name__ == "__main__":
     if "--selftest" in sys.argv:
         sys.exit(1 if selftest() else 0)
-    fails, notes, summ = check("--tests" in sys.argv)
+    mode = sys.argv[sys.argv.index("--owed-mode") + 1] if "--owed-mode" in sys.argv else "original"
+    fails, notes, summ = check("--tests" in sys.argv, mode)
     print("components", summ["components"])
     print("branches  ", summ["branches"])
     print(f"blocks {summ['blocks']}  runs {summ['runs']}  tests {summ['tests']}")
@@ -455,13 +529,27 @@ if __name__ == "__main__":
     print(f"toolkit {summ['tools']} tools  cards {summ['cards']}  anchors {summ['anchors']}")
     ex = summ["exits"]
     print(f"open slots by exit: no exit defined {ex['none']}  exit incomplete (sensitivity void) {ex['incomplete']}  exit complete {ex['complete']}  (counted, not failed)")
-    for t in summ["owed_runs"]:
-        print("  owed:", t)
+    print(f"owed-mode {mode}" + ("  (default; the original rule: a built tool not yet run on its row is a FAIL)" if mode == "original" else ""))
+    if mode == "proposed":
+        for tool, r, exp, expired in summ["owed_expiry"]:
+            print(f"  owed: {tool} built, not yet run on {r}   expires {exp}" + ("   EXPIRED" if expired else "   (no exit)" if exp == "VOID" else ""))
+        print(f"  owed rows {len(summ['owed_expiry'])}, of which no exit (VOID expiry) {sum(e == 'VOID' for _, _, e, _ in summ['owed_expiry'])}, expired {sum(x for *_, x in summ['owed_expiry'])}")
+    elif mode == "owed":
+        for t in summ["owed_runs"]:
+            print("  owed:", t)
+    if summ["provisional_tools"]:
+        print("held-out PROVISIONAL tools:", ", ".join(summ["provisional_tools"]))
+        for c in summ["cleared_provisional"]:
+            print("  cleared by a held-out PROVISIONAL tool (listed, not failed; Kavik's call):", c)
     for t in summ["no_exit"]:
         print("  no exit defined:", t)
     for n in notes:
         print("note:", n)
     for f in fails:
         print("FAIL", f)
-    print("FAIL" if fails else "OK", f"({len(fails)} failures)")
+    n_owed = len(summ["owed_runs"])
+    if mode == "proposed":
+        print(("FAIL" if fails else "PASS") + (f"+OWED({n_owed})" if n_owed else ""), f"({len(fails)} failures)")
+    else:
+        print("FAIL" if fails else "OK", f"({len(fails)} failures)")
     sys.exit(1 if fails else 0)

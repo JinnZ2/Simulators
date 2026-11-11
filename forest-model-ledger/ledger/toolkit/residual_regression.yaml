@@ -27,3 +27,11 @@ gate:
     method_explains: "fp 0.0 tp 1.0 n 60 seed 0-4 PASS"
   command: "python3 tests/test_toolkit.py"
 blocked_on: void
+heldout:
+  verdict: PASS
+  known_answer: "3 of 3"
+  null_legs:
+    method_explains_nonlinear: "fp 0.0 tp 1.0 n 40 seed 100-104 PASS"
+  trust: HELD_OUT_PASS
+  frozen_at: "72244bf (ledger/toolkit/HELDOUT_FREEZE.md); sets committed e5e3186 before first run"
+  command: "python3 tests/test_heldout.py"

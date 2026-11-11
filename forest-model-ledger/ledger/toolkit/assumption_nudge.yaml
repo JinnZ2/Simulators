@@ -26,3 +26,4 @@ open_issues:
 status: candidate
 gate: void
 blocked_on: void
+heldout: void

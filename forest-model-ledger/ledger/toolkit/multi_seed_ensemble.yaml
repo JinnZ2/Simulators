@@ -27,6 +27,7 @@ used_in:
   - run_14
   - run_15
 open_issues:
+  - "HELD-OUT FAIL_TP 0.995 (2026-11-11, tests/test_heldout.py, harness seeds 100-104): paired Laplace differences, n = 15 seeds, a 3 sd shift; K_MOVED 5 misses it in 1 of 200 on some seed. A 3 sd effect at 15 seeds is not reliably MOVED with heavy tails. Not retuned; trust PROVISIONAL"
   - "REL_TOL 0.05, K_MOVED 5.0, K_EQ 2.0, K_SPIKE 3.0 are [CHOICE]; printed by every run that uses them"
   - "the gate's null draws are Gaussian; a heavy-tailed output distribution (fire counts are integers) is not in the null"
 status: candidate
@@ -38,3 +39,12 @@ gate:
     invariant: "fp 0.0 tp 1.0 n 200 seed 0-4 PASS"
   command: "python3 tests/test_toolkit.py"
 blocked_on: void
+heldout:
+  verdict: FAIL
+  known_answer: "6 of 6"
+  null_legs:
+    moved_laplace_n15: "fp 0.0 tp 0.995 n 200 seed 100-104 FAIL_TP"
+    invariant_lognormal: "fp 0.0 tp 1.0 n 200 seed 100-104 PASS"
+  trust: PROVISIONAL
+  frozen_at: "72244bf (ledger/toolkit/HELDOUT_FREEZE.md); sets committed e5e3186 before first run"
+  command: "python3 tests/test_heldout.py"

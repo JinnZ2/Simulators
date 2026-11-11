@@ -26,4 +26,10 @@ FIRED  observer regimes linked
 FIRED  built brief tool with no passing gate
 FIRED  placeholder with code and no blocked_on
 FIRED  expiry target unknown
-selftest: 28 planted, 0 silent
+FIRED  original owed-mode fails a built tool not yet run on its row
+FIRED  proposed owed-mode fails an expired owed row
+FIRED  proposed owed-mode refuses a malformed expiry
+FIRED  held-out FAIL with trust not PROVISIONAL
+FIRED  staged tool with no held-out record
+FIRED  RESOLVED card resting on a held-out PROVISIONAL tool
+selftest: 34 planted, 0 silent
