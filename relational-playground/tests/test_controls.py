@@ -18,6 +18,15 @@ class T(unittest.TestCase):
         self.assertEqual(c.observer_undeclared(), ["observer_reactivity", "observer_strategy"])
         self.assertRaises(ValueError, controls, observer_strategy="yes")
 
+    def test_observer_definitions_are_recorded_as_defined(self):
+        from playground import controls as cmod, l0
+        self.assertEqual(set(cmod.OBSERVER_DEFINITIONS), set(cmod.OBSERVER_FIELDS))
+        self.assertTrue(cmod.OBSERVER_DEFINITION_STATUS.startswith("DEFINED"))
+        self.assertTrue(all(d["means"] and d["answered_by"] for d in cmod.OBSERVER_DEFINITIONS.values()))
+        status, reason = l0.run_status([dict(budget="N", verdict="VOID")])
+        self.assertEqual(status, "INCOMPLETE")
+        self.assertTrue(reason.startswith("NO_LIVE_BUDGET"))
+
     def test_cross_system_refused_until_declared(self):
         self.assertRaises(comparison.RegimeUndeclared, comparison.cross_system, dict(a=[C()], b=[C()]), "x")
         full = controls(observer_perturbation=OB("ABSENT"), observer_reactivity=OB("UNKNOWN"), observer_strategy=OB("ABSENT"))

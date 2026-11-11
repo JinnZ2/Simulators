@@ -14,7 +14,7 @@ sd, years, n_uniform = 0.35, 300, 1500
 rng = np.random.default_rng(0)
 pfacs = rng.lognormal(-0.5 * sd ** 2, sd, size=years)
 uni = [rng.random() for _ in range(n_uniform)]
-out = dict(source="numpy.random.default_rng(0); numpy %s" % np.__version__, drought_sd=sd,
+out = dict(source="numpy.random.default_rng(0); numpy %s" % np.__version__, numpy_version=np.__version__, drought_sd=sd,
            pfacs=[float(x).hex() for x in pfacs], uniforms=[float(x).hex() for x in uni])
 with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "fixtures", "numpy_draws_seed0.json"), "w") as f:
     json.dump(out, f, indent=0)

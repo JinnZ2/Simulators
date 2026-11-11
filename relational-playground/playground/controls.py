@@ -6,11 +6,24 @@ FIELDS = ("held_constant", "varied", "coupled", "perturbation_magnitude", "pertu
           "recovery_conditions", "measurement_frequency", "instrument_sensitivity")
 
 # ADDITION 6. Observer regimes: three separate fields, each declared on its own.
-#   observer_perturbation  the act of measuring moves the system physically
-#   observer_reactivity    the system behaves differently because it is being observed
-#   observer_strategy      the system models the observer and acts on that model
+# Definitions: DEFINED 2026-11-11 (chat side; source: Kimi audit, confound C4, 2026-11-10).
+#   observer_perturbation  the instrument physically disturbs the system (crystal, rock)
+#                          -> answered by metrology and a perturbation budget
+#   observer_reactivity    the system changes behaviour because it is observed, without
+#                          modelling the observer (animal, plant)
+#                          -> answered by blinding, habituation, remote sensing
+#   observer_strategy      the system models the evaluation and adjusts to it (AI)
+#                          -> answered by hidden evaluations, mechanistic readouts
 # Each is dict(state=PRESENT | ABSENT | UNKNOWN, basis=...), or the string UNDECLARED.
-# The reading of the three names is the building session's and is PROPOSED.
+OBSERVER_DEFINITIONS = {
+    "observer_perturbation": dict(means="the instrument physically disturbs the system", examples="crystal, rock",
+                                  answered_by="metrology; perturbation budget"),
+    "observer_reactivity": dict(means="the system changes behaviour because it is observed, without modelling the observer",
+                                examples="animal, plant", answered_by="blinding; habituation; remote sensing"),
+    "observer_strategy": dict(means="the system models the evaluation and adjusts to it", examples="AI",
+                              answered_by="hidden evaluations; mechanistic readouts"),
+}
+OBSERVER_DEFINITION_STATUS = "DEFINED 2026-11-11 (chat side; source: Kimi audit confound C4, 2026-11-10)"
 OBSERVER_FIELDS = ("observer_perturbation", "observer_reactivity", "observer_strategy")
 OBSERVER_STATES = ("PRESENT", "ABSENT", "UNKNOWN")
 UNDECLARED = "UNDECLARED"

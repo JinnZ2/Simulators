@@ -43,7 +43,7 @@ parameter missing                 equations/base.Model raises; no default
 automatic boundary choice         boundaries.choose() raises
 model ranking / score             comparison.rank(), applicability.score() raise
 failed sweep point                kept as a MODEL FAILED row
-run with a leak or no LIVE budget INCOMPLETE (l0.run_status)
+run with a leak or no LIVE budget (reason NO_LIVE_BUDGET) INCOMPLETE (l0.run_status)
 untested equation                 INCOMPLETE (known_answer_gate)
 UNKNOWN with no exit stated       refused; VOID is allowed and counted
 value status used as a claim tag  claims.claim() raises
@@ -114,7 +114,7 @@ python3 ../../../../tools/known_answer.py | tail -8                      # repo 
 ```text
 budgets          a run's closure covers LIVE budgets only; C and energy are VOID in every run so far
 gate             closed-form cases cover parts of each model, not all of it (forest_n: 4 of 13 fluxes)
-observer fields  the meaning given to perturbation / reactivity / strategy is this build's reading (PROPOSED)
+observer fields  DEFINED 2026-11-11 by the chat side (controls.OBSERVER_DEFINITIONS)
 C5, C6           wired 2026-11-11 from the coincidence.py on branch claude/healing-folder-additions-u5aojl (7852f0e)
 spec phases      1-2 built; 3 (boundary variation) has the tools and one test, no experiment;
                  4-6 not run. The four other experiments/ folders are empty.

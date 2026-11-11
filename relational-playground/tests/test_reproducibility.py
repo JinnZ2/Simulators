@@ -6,7 +6,7 @@ from playground import known_answer_gate as gate
 gate.certify_all()
 EXP = os.path.join(ROOT, "experiments", "model_comparison", "forest_fire_regime")
 sys.path.insert(0, EXP)
-FIXTURE_SHA = "85fd1f785561d19c5a19eb200e0fc030874462c8d005aa98812492b91a203e28"
+FIXTURE_SHA = "a764976f991706d5299d4cae733ce9a7d269a2996a84a107ccee6bc96e8612a4"
 
 
 class T(unittest.TestCase):
