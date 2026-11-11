@@ -236,7 +236,8 @@ def render(p):
 
 if __name__ == "__main__":
     if "--selftest" in sys.argv:
-        sys.exit("run_originals.py has no selftest; run: python3 tests/test_originals.py (from relational-playground/)")
+        print("run_originals.py has no selftest; run: python3 selftest_originals.py")
+        sys.exit(2)
     p = part3()
     with open(os.path.join(HERE, "out", "part3.json"), "w") as f:
         json.dump(p, f, indent=1, sort_keys=True, default=str)

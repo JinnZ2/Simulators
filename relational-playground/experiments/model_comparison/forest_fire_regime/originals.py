@@ -307,5 +307,6 @@ def run6_stats(B):
 
 if __name__ == "__main__":
     if "--selftest" in sys.argv:
-        sys.exit("originals.py has no selftest; run: python3 tests/test_originals.py (from relational-playground/)")
+        print("originals.py has no selftest; run: python3 selftest_originals.py")
+        sys.exit(2)
     print("ports of forest-model-ledger runs 6, 7, 8; driven by run.py part 3")
