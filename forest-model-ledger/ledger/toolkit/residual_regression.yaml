@@ -1,14 +1,29 @@
 id: residual_regression
-code: void
+code: ledger/toolkit/residual_regression.py
 diagnoses:
   - "measurement artifacts vs biology (METHOD BRIEF toolbox line: residual regression on method fields)"
-inputs: void
-outputs: void
-cannot_see: void
+  - "a residual explained by how it was measured (METHOD_ARTIFACT) kept apart from one explained by the system (BIOLOGY), both (MIXED) or neither (UNEXPLAINED)"
+  - "method and biology fields that move together, so no attribution is possible (NOT_SEPARABLE)"
+inputs:
+  - "rows of dicts; the residual's field name; method field names and biology field names, both declared by the caller"
+outputs:
+  - "R2 of method, biology and both blocks; increments dM, dB with permutation p; collinearity R2; verdict"
+cannot_see:
+  - "a mechanism no declared method field names. run_18: with dt and steps only, the counter roundoff (jagged in dt, stepping at binary exponents) reads UNEXPLAINED, and biology edges toward significance (dB 0.27, p 0.026) because the counter's error scales with dep. With the model-free counter error declared as a method field it reads METHOD_ARTIFACT, R2 1.000"
+  - "non-linear dependence on a field: the fit is linear in each declared column"
+  - "a mis-declared field: calling a bookkeeping quantity 'biology' moves the verdict; the declaration is printed so it can be argued with"
 other_domains_it_could_see_into: void
-used_in: []
+used_in:
+  - run_18
 open_issues:
-  - "not built; logged under the gate rule of 2026-11-10, see ledger/NEEDS_TOOL.md"
-status: placeholder
-gate: void
+  - "the null leg runs 60 draws per harness seed (not 200): each draw is a permutation test. Its null is biology-driven residuals, not pure noise"
+  - "found by running run_18 and repaired before any reading was recorded: unscaled columns let lstsq drop a 1e-11 column beside a 1e4 column; columns are now standardised, with a known-answer case for it"
+  - "N_PERM 500, ALPHA 0.01, MIN_DR2 0.10, COLLINEAR 0.95 [CHOICE]"
+status: candidate
+gate:
+  verdict: PASS
+  known_answer: "7 of 7"
+  null_legs:
+    method_explains: "fp 0.0 tp 1.0 n 60 seed 0-4 PASS"
+  command: "python3 tests/test_toolkit.py"
 blocked_on: void
