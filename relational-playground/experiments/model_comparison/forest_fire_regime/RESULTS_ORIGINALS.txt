@@ -1,0 +1,71 @@
+PART 3  original run 6, 7, 8 code, ported to the standard library
+  reference: delivered files run on numpy 2.5.3, scipy 1.18.1 (fixtures/originals_expected.json)
+  targets (PREREG_ORIGINALS.md): 8 of 8 MET
+    MET    O7 grid mean and sd, 11 droughts, within 1e-12
+           got max difference 0 ; want <= 1e-12
+    MET    O7 ODE fraction within 1e-9
+           got max difference 7.16e-14 ; want <= 1e-9
+    MET    O8 mean and sd, 5 droughts x 4 spot levels, within 1e-12
+           got max difference 0 ; want <= 1e-12
+    MET    O8 ODE fraction within 1e-9
+           got max difference 7.14e-14 ; want <= 1e-9
+    MET    O6 OLD misclosure at the five printed checkpoints, 3 decimals
+           got ['-0.020', '-0.911', '-4.442', '-8.554', '-24.177'] ; want ['-0.020', '-0.911', '-4.442', '-8.554', '-24.177']
+    MET    O6 CONSERVED max |misclosure| below 1e-8
+           got 1.2691900863615047e-09 (numpy run 1.2691900863615047e-09) ; want < 1e-8
+    MET    O6 fires at fire_thr 0.6 / 0.3 / 0.5 / 0.8 / 1.2, exact
+           got [47, 56, 48, 45, 38] ; want [47, 56, 48, 45, 38]
+    MET    O6 late biomass mean, swing, tree share, Ls range, sweep columns at printed precision
+           got largest difference from the numpy run 1.11e-16 ; want equal at printed precision
+  run 6, N budget read by the playground's L0 rule:
+    CONSERVED  CLOSED  max |misclosure| 1.269e-09 (tolerance 1.822e-07)  fires 47
+    OLD        LEAK  misclosure -24.177 at the last checkpoint
+    fires by fire_thr: 0.6: 47  0.3: 56  0.5: 48  0.8: 45  1.2: 38
+  F1  ODE / grid by drought (no spotting) -- two branches, both kept
+    drought   ORIGINAL ode  grid    ratio      REBUILD ode  grid    ratio
+     0.00     0.000        0.000       0.0      --           --      undef
+     0.10     0.000        0.000       0.0    0.003        0.002       1.5
+     0.20     0.206        0.000     517.4    0.013        0.004       3.3
+     0.30     0.478        0.001     647.4    0.109        0.009      12.5
+     0.40     0.642        0.002     373.8    0.262        0.018      14.9
+     0.50     0.747        0.012      62.5    0.401        0.043       9.4
+     0.60     0.817        0.164       5.0    0.529        0.351       1.5
+     0.70     0.866        0.719       1.2    0.649        0.679       1.0
+     0.80     0.900        0.954       0.9    0.763        0.795       1.0
+     0.90     0.925        0.983       0.9    0.873        0.898       1.0
+     1.00     0.943        0.994       0.9      --           --      undef
+    ratios at grid means of a few cells are noise-dominated (original: 12 reps, one seed)
+  F3  |grid - ODE| at spot 0.2, window 0.05 (declared after the original ran; the original declared none)
+    drought   ORIGINAL grid  sd     ode    gap     inside   REBUILD gap  inside
+     0.2      0.002          0.003  0.206  0.2045  no       0.0112      yes
+     0.4      0.330          0.269  0.642  0.3118  no       0.2101      no
+     0.5      0.730          0.012  0.747  0.0169  yes      0.0526      no
+     0.6      0.840          0.007  0.817  0.0228  yes      0.0200      yes
+     0.7      0.903          0.004  0.866  0.0368  yes      0.0329      yes
+    seed spread, original design, seeds 4..23 (grid - ODE, signed):
+      drought 0.5  mean -0.1403  sd over seeds 0.0921  range -0.3779 .. -0.0077  inside 0.05: 3 of 20
+                   replicates that burned under 5%: 34 of 200 (0.170) ; mean of the rest minus ODE -0.0161
+                   branching family, Poisson(R = 4 p d) offspring, die-out from one ignition: 0.253
+      drought 0.6  mean -0.0582  sd over seeds 0.0744  range -0.2296 .. +0.0249  inside 0.05: 7 of 20
+                   replicates that burned under 5%: 19 of 200 (0.095) ; mean of the rest minus ODE +0.0215
+                   branching family, Poisson(R = 4 p d) offspring, die-out from one ignition: 0.183
+      drought 0.7  mean -0.0079  sd over seeds 0.0622  range -0.1439 .. +0.0416  inside 0.05: 12 of 20
+                   replicates that burned under 5%: 10 of 200 (0.050) ; mean of the rest minus ODE +0.0373
+                   branching family, Poisson(R = 4 p d) offspring, die-out from one ignition: 0.134
+      the 5% cut was set after the spread was seen: a description, not a test. In run 8 itself (seed 4)
+      every one of the 30 replicates at these three droughts burned more than 5%: 0 of 30 under 5%
+  coincidence cards (evidence entered, no slot set):
+    CC_F1_ode_grid_ratio  OPEN
+      statistical original: one seed, 10-12 reps. Seed spread of (grid - ODE) at spot 0.2 over 20 seeds: drought 0.5 mean -0.1403 sd 0.0921, 3 of 20 inside 0.05; drought 0.6 mean -0.0582 sd 0.0744, 7 of 20 inside 0.05; drought 0.7 mean -0.0079 sd 0.0622, 12 of 20 inside 0.05
+      numerical   the stdlib port equals the numpy run within 0 on every grid mean and sd, so the original's numbers do not depend on numpy vs plain arithmetic; a grid burn has no step size
+      design      design differences, original vs rebuild: grid L 100 (run 8) / 120 (run 7) vs 64; reps 10 / 12 vs 40; ignition at the centre vs left edge; ODE z = 1 - exp(-4 p d z) vs the rebuild's mean field of its own grid rules; seeds 3 and 4 vs the rebuild's. 'design' is not one of the card's five causes; recorded as evidence text only
+    CC_F3_grid_onto_ode  OPEN
+      statistical original: one seed, 10-12 reps. Seed spread of (grid - ODE) at spot 0.2 over 20 seeds: drought 0.5 mean -0.1403 sd 0.0921, 3 of 20 inside 0.05; drought 0.6 mean -0.0582 sd 0.0744, 7 of 20 inside 0.05; drought 0.7 mean -0.0079 sd 0.0622, 12 of 20 inside 0.05
+      numerical   the stdlib port equals the numpy run within 0 on every grid mean and sd, so the original's numbers do not depend on numpy vs plain arithmetic; a grid burn has no step size
+      design      design differences, original vs rebuild: grid L 100 (run 8) / 120 (run 7) vs 64; reps 10 / 12 vs 40; ignition at the centre vs left edge; ODE z = 1 - exp(-4 p d z) vs the rebuild's mean field of its own grid rules; seeds 3 and 4 vs the rebuild's. 'design' is not one of the card's five causes; recorded as evidence text only
+      C6 by_config  spread 0.0357 against tolerance 0.02 -> numerical_artifact flag True (the two configs also differ in design)
+      family swap run: playground branching_math.extinction_probability (registered). The grid gives a cell at most
+      4 offspring, not Poisson, so that family as built is not the grid's; its die-out is printed beside the count, not fitted to it.
+  F1 note: the delivered correction quotes 478 / 321 / 62 from the 3-decimal columns; unrounded the ratios are the ORIGINAL column above.
+  TRIGGER: the seed spread is an unexpected deviation from run 8's single-seed reading. Full toolbox owed; see NEEDS_TOOL.md.
+  F3 stays CANDIDATE. Nothing here ranks the two branches.

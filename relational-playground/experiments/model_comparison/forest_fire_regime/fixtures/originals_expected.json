@@ -1,0 +1,481 @@
+{
+"numpy_version": "2.5.3",
+"scipy_version": "1.18.1",
+"sources": {
+"run_7.py": "eba95252b17a4653f7741d0837b50e3103ace8b919e32fca54d28e3d221b197f",
+"run_8.py": "bf65e9b7b024b0d93c8b807b0c959756e7a928c48020cae28debe1693caee33e",
+"run_6.py": "b1ccd82ae2eef8cafc66d675be8ad8ca077df8ac22e351b50b0bd6b899488085"
+},
+"printed": {
+"run_7": [
+"drought -> spread prob p ; vegetation density 0.8 (moist forest drying)",
+"drought   p    R0   ODE_frac  GRID_frac  grid_sd",
+"  0.0  0.20  0.64    0.000     0.000    0.000",
+"  0.1  0.28  0.88    0.000     0.000    0.000",
+"  0.2  0.35  1.12    0.206     0.000    0.000",
+"  0.3  0.43  1.36    0.478     0.001    0.001",
+"  0.4  0.50  1.60    0.642     0.002    0.002",
+"  0.5  0.57  1.84    0.747     0.012    0.014",
+"  0.6  0.65  2.08    0.817     0.164    0.123",
+"  0.7  0.73  2.32    0.866     0.719    0.322",
+"  0.8  0.80  2.56    0.900     0.954    0.005",
+"  0.9  0.88  2.80    0.925     0.983    0.003",
+"  1.0  0.95  3.04    0.943     0.994    0.001"
+],
+"run_8": [
+"drought  ODE   | spot=0   0.05   0.2   1.0  (mean / sd)",
+" 0.2   0.21  | 0.00/0.00  0.00/0.00  0.00/0.00  0.05/0.09",
+" 0.4   0.64  | 0.00/0.01  0.02/0.06  0.33/0.27  0.45/0.30",
+" 0.5   0.75  | 0.01/0.01  0.38/0.31  0.73/0.01  0.60/0.30",
+" 0.6   0.82  | 0.20/0.15  0.81/0.01  0.84/0.01  0.74/0.25",
+" 0.7   0.87  | 0.76/0.26  0.82/0.27  0.90/0.00  0.78/0.26"
+],
+"run_6": [
+"OLD misclosure (N units) at checkpoints: [-2.0000e-02 -9.1100e-01 -4.4420e+00 -8.5540e+00 -2.4177e+01] final |mis|/total ~ 24.18",
+"CONSERVED misclosure max: 1.2691900863615047e-09",
+"fires 47 biomass late mean 0.359 swing 0.466 tree share 1.0 Ls range 0.13 2.89",
+"thr 0.3 fires 56 B mean 0.354 swing 0.505 Ls max 2.73",
+"thr 0.5 fires 48 B mean 0.362 swing 0.503 Ls max 2.74",
+"thr 0.8 fires 45 B mean 0.361 swing 0.508 Ls max 2.96",
+"thr 1.2 fires 38 B mean 0.367 swing 0.582 Ls max 3.63"
+]
+},
+"run_7": [
+{
+"drought": "0x0.0p+0",
+"p": "0x1.999999999999ap-3",
+"ode": "0x0.0p+0",
+"grid_mean": "0x1.026d3ebeb7eb4p-13",
+"grid_sd": "0x1.3d9174bb89b48p-14"
+},
+{
+"drought": "0x1.999999999999ap-4",
+"p": "0x1.199999999999ap-2",
+"ode": "0x0.0p+0",
+"grid_mean": "0x1.18d6ad27497b8p-12",
+"grid_sd": "0x1.a8f0c77c67f41p-13"
+},
+{
+"drought": "0x1.999999999999ap-3",
+"p": "0x1.6666666666667p-2",
+"ode": "0x1.a69820f8df204p-3",
+"grid_mean": "0x1.a238b52b41bd9p-12",
+"grid_sd": "0x1.7cb9197ef5507p-12"
+},
+{
+"drought": "0x1.3333333333334p-2",
+"p": "0x1.b333333333334p-2",
+"ode": "0x1.e9753426ed617p-2",
+"grid_mean": "0x1.831814557f049p-11",
+"grid_sd": "0x1.a7b48d4d88e84p-11"
+},
+{
+"drought": "0x1.999999999999ap-2",
+"p": "0x1.0000000000000p-1",
+"ode": "0x1.48b1c675404eep-1",
+"grid_mean": "0x1.c22e00b3a2a13p-10",
+"grid_sd": "0x1.36ac9a65fa8cdp-9"
+},
+{
+"drought": "0x1.0000000000000p-1",
+"p": "0x1.2666666666666p-1",
+"ode": "0x1.7e7dde5c962efp-1",
+"grid_mean": "0x1.87b5c1bd19191p-7",
+"grid_sd": "0x1.c5c875ef662b4p-7"
+},
+{
+"drought": "0x1.3333333333334p-1",
+"p": "0x1.4cccccccccccep-1",
+"ode": "0x1.a27802bcc27d0p-1",
+"grid_mean": "0x1.4f8348326f271p-3",
+"grid_sd": "0x1.f8f5e352a5a24p-4"
+},
+{
+"drought": "0x1.6666666666667p-1",
+"p": "0x1.7333333333334p-1",
+"ode": "0x1.bb500f81e8aedp-1",
+"grid_mean": "0x1.7051af5989070p-1",
+"grid_sd": "0x1.4991c84bd0f0ep-2"
+},
+{
+"drought": "0x1.999999999999ap-1",
+"p": "0x1.999999999999ap-1",
+"ode": "0x1.cce5b1e43d007p-1",
+"grid_mean": "0x1.e877d6d20cd3fp-1",
+"grid_sd": "0x1.41e20a5fbf04dp-8"
+},
+{
+"drought": "0x1.ccccccccccccdp-1",
+"p": "0x1.c000000000000p-1",
+"ode": "0x1.d996465980f8ap-1",
+"grid_mean": "0x1.f73acd752f000p-1",
+"grid_sd": "0x1.9feae483da269p-9"
+},
+{
+"drought": "0x1.0000000000000p+0",
+"p": "0x1.e666666666666p-1",
+"ode": "0x1.e2e316765fd86p-1",
+"grid_mean": "0x1.fd0e226bc5469p-1",
+"grid_sd": "0x1.3013f743e0bcbp-11"
+}
+],
+"run_8": [
+{
+"drought": 0.2,
+"ode": "0x1.a69820f8df204p-3",
+"cells": [
+{
+"spot": 0,
+"mean": "0x1.129d4292e6947p-11",
+"sd": "0x1.702fade35d1c5p-11"
+},
+{
+"spot": 0.05,
+"mean": "0x1.bf25710fc557dp-12",
+"sd": "0x1.6c05eae35e5d1p-12"
+},
+{
+"spot": 0.2,
+"mean": "0x1.dd325d44ef793p-10",
+"sd": "0x1.800d3444c6bfdp-9"
+},
+{
+"spot": 1.0,
+"mean": "0x1.96a04ec757b7ap-5",
+"sd": "0x1.79d7d6eab5a30p-4"
+}
+]
+},
+{
+"drought": 0.4,
+"ode": "0x1.48b1c675404eep-1",
+"cells": [
+{
+"spot": 0,
+"mean": "0x1.12b0fc63aa45bp-8",
+"sd": "0x1.9ef71a97ebb8ep-8"
+},
+{
+"spot": 0.05,
+"mean": "0x1.5ae753c50fb87p-6",
+"sd": "0x1.c2c454c937f23p-5"
+},
+{
+"spot": 0.2,
+"mean": "0x1.521ea91598dc6p-2",
+"sd": "0x1.135b5ca743fcfp-2"
+},
+{
+"spot": 1.0,
+"mean": "0x1.cdec8e65d13d2p-2",
+"sd": "0x1.2e72998f9b568p-2"
+}
+]
+},
+{
+"drought": 0.5,
+"ode": "0x1.7e7dde5c962efp-1",
+"cells": [
+{
+"spot": 0,
+"mean": "0x1.c0c925448ba9dp-7",
+"sd": "0x1.da92ecac8d15ep-7"
+},
+{
+"spot": 0.05,
+"mean": "0x1.86197e7802131p-2",
+"sd": "0x1.3e467be7c107cp-2"
+},
+{
+"spot": 0.2,
+"mean": "0x1.75d2039a2ee04p-1",
+"sd": "0x1.890aadeccadebp-7"
+},
+{
+"spot": 1.0,
+"mean": "0x1.31857bf5d5d43p-1",
+"sd": "0x1.3182577fc1ec3p-2"
+}
+]
+},
+{
+"drought": 0.6,
+"ode": "0x1.a27802bcc27cfp-1",
+"cells": [
+{
+"spot": 0,
+"mean": "0x1.9405d660d3292p-3",
+"sd": "0x1.34434c88d1a13p-3"
+},
+{
+"spot": 0.05,
+"mean": "0x1.a12b675b33d23p-1",
+"sd": "0x1.2943b982dfda1p-7"
+},
+{
+"spot": 0.2,
+"mean": "0x1.ae2388ee442aap-1",
+"sd": "0x1.e25d047ea51afp-8"
+},
+{
+"spot": 1.0,
+"mean": "0x1.78a178667d308p-1",
+"sd": "0x1.f64299aa28b48p-3"
+}
+]
+},
+{
+"drought": 0.7,
+"ode": "0x1.bb500f81e8aedp-1",
+"cells": [
+{
+"spot": 0,
+"mean": "0x1.83c153b416c2cp-1",
+"sd": "0x1.059e96dd820ccp-2"
+},
+{
+"spot": 0.05,
+"mean": "0x1.a3a662de34c03p-1",
+"sd": "0x1.172a4be160974p-2"
+},
+{
+"spot": 0.2,
+"mean": "0x1.ce2c82df888f2p-1",
+"sd": "0x1.dbc429323acc6p-9"
+},
+{
+"spot": 1.0,
+"mean": "0x1.8f9afdbe0453ap-1",
+"sd": "0x1.0a71517417522p-2"
+}
+]
+}
+],
+"run_6": {
+"trait": [
+"0x0.0p+0",
+"0x1.259c9dbb55c6ap-2",
+"0x1.c81afb105948ap-1",
+"0x1.a3e76f69b6252p-3",
+"0x1.47a84fdfdb6d1p-1",
+"0x1.9eecca604ca32p-1",
+"0x1.2787fbe901a7ap-3",
+"0x1.4b5eee3f54e2ep-2",
+"0x1.259c9dbb55c6ap-2",
+"0x0.0p+0",
+"0x1.3ecdfa8a2c70bp-1",
+"0x1.1303f5822ae6ep-1",
+"0x1.482871763f9a4p-1",
+"0x1.48739efc1e7b6p-1",
+"0x1.d8764e71c90d8p-3",
+"0x1.66294d3a5397bp-1",
+"0x1.c81afb105948ap-1",
+"0x1.3ecdfa8a2c70bp-1",
+"0x0.0p+0",
+"0x1.50faab5886f24p-2",
+"0x1.fb154e99da977p-2",
+"0x1.5725e717a800ep-1",
+"0x1.97d942c036f09p-1",
+"0x1.2ec93f7da9a2bp-1",
+"0x1.a3e76f69b6252p-3",
+"0x1.1303f5822ae6ep-1",
+"0x1.50faab5886f24p-2",
+"0x0.0p+0",
+"0x1.070a33944ef36p-2",
+"0x1.3487efbfd7b5cp-2",
+"0x1.5111aff312fc9p-2",
+"0x1.14a37c33cfe08p-1",
+"0x1.47a84fdfdb6d1p-1",
+"0x1.482871763f9a4p-1",
+"0x1.fb154e99da977p-2",
+"0x1.070a33944ef36p-2",
+"0x0.0p+0",
+"0x1.4934c85ce1ae4p-1",
+"0x1.c285ab58bd448p-1",
+"0x1.384d181663597p-2",
+"0x1.9eecca604ca32p-1",
+"0x1.48739efc1e7b6p-1",
+"0x1.5725e717a800ep-1",
+"0x1.3487efbfd7b5cp-2",
+"0x1.4934c85ce1ae4p-1",
+"0x0.0p+0",
+"0x1.5ba6a7c4174b0p-1",
+"0x1.96f7ca2233c42p-3",
+"0x1.2787fbe901a7ap-3",
+"0x1.d8764e71c90d8p-3",
+"0x1.97d942c036f09p-1",
+"0x1.5111aff312fc9p-2",
+"0x1.c285ab58bd448p-1",
+"0x1.5ba6a7c4174b0p-1",
+"0x0.0p+0",
+"0x1.93d6029e7ae05p-1",
+"0x1.4b5eee3f54e2ep-2",
+"0x1.66294d3a5397bp-1",
+"0x1.2ec93f7da9a2bp-1",
+"0x1.14a37c33cfe08p-1",
+"0x1.384d181663597p-2",
+"0x1.96f7ca2233c42p-3",
+"0x1.93d6029e7ae05p-1",
+"0x0.0p+0"
+],
+"aff": [
+"0x1.4637bbc61e3c0p-6",
+"0x1.aa7e93fdb68dap-1",
+"0x1.97301cc612658p-4",
+"0x1.cd6608511cd80p-2",
+"0x1.f438f84e273bep-2",
+"0x1.3d9458593cb37p-1",
+"0x1.020e2fad401d8p-1",
+"0x1.dfeb70c6e438cp-1",
+"0x0.0p+0",
+"0x0.0p+0",
+"0x1.3c0b17efc330fp-1",
+"0x1.035ab794624dap-1",
+"0x1.edf542831951ap-1",
+"0x0.0p+0",
+"0x1.60c82a38381e8p-1",
+"0x1.1c35a1c3f8163p-1",
+"0x1.58291b83162d0p-5",
+"0x1.2f41f20f204cep-2",
+"0x0.0p+0",
+"0x0.0p+0",
+"0x0.0p+0",
+"0x1.2fbed00422d1ep-2",
+"0x0.0p+0",
+"0x1.a7a9bf4539506p-1",
+"0x1.c410cef8174b0p-4",
+"0x1.d6ac3e3a5b9c0p-5",
+"0x1.f6b969df052aep-1",
+"0x1.c8921d1970714p-2",
+"0x1.4608d07903f08p-2",
+"0x0.0p+0",
+"0x0.0p+0",
+"0x1.76d2f14fff8b6p-2"
+],
+"niche": [
+"0x1.95bc26af2f94fp-1",
+"0x1.9fbfc191e0bc2p-2",
+"0x1.f2ef488ba839ap-1",
+"0x1.35d76c10c24afp-1"
+],
+"old_misclosure": [
+"-0x1.405dfceb35e00p-6",
+"-0x1.d258cb6859a10p-1",
+"-0x1.f9b6b4e14f534p+0",
+"-0x1.66250c6219a4ep+1",
+"-0x1.cf63df90229aep+1",
+"-0x1.1c51d5155626bp+2",
+"-0x1.50f1bacfff43fp+2",
+"-0x1.8591a08abaaccp+2",
+"-0x1.ba31864585d79p+2",
+"-0x1.eed16c0052a0bp+2",
+"-0x1.11b8a8dd8fb46p+3",
+"-0x1.2c089bbaf6186p+3",
+"-0x1.46588e985c7c6p+3",
+"-0x1.60a88175c2e06p+3",
+"-0x1.7af8745329448p+3",
+"-0x1.954867308fa88p+3",
+"-0x1.af985a0df60c4p+3",
+"-0x1.c9e84ceb5b764p+3",
+"-0x1.e4383fc8c0e04p+3",
+"-0x1.fe8832a6264a4p+3",
+"-0x1.0c6c12c1c5da2p+4",
+"-0x1.19940c30788f2p+4",
+"-0x1.26bc059f2b442p+4",
+"-0x1.33e3ff0dddf92p+4",
+"-0x1.410bf87c90ae2p+4",
+"-0x1.4e33f1eb43632p+4",
+"-0x1.5b5beb59f6182p+4",
+"-0x1.6883e4c8a8cd2p+4",
+"-0x1.75abde375bf8fp+4",
+"-0x1.82d3d7a60f2afp+4"
+],
+"conserved": {
+"0.6": {
+"B_mean": "0x1.6f267d1e80aa3p-2",
+"swing": "0x1.dcf9a4d75ee35p-2",
+"tree_share": "0x1.0000000000000p+0",
+"Ls_min": "0x1.06126fba1e2ffp-3",
+"Ls_max": "0x1.71b32d05a9fd6p+1",
+"last_row": [
+"0x1.75c0000000000p+11",
+"0x1.4d2b94b145c3ap-2",
+"0x1.4d2b94b145c3ap-2",
+"0x1.cef5ff7dbc556p+0",
+"0x1.3068ee25e3d94p-3"
+],
+"fires": 47,
+"mis_max": "0x1.5cdf500000000p-30",
+"mis_last": "-0x1.43cf6c0000000p-30"
+},
+"0.3": {
+"B_mean": "0x1.6aed9b00106dbp-2",
+"swing": "0x1.02b17bcb12708p-1",
+"tree_share": "0x1.0000000000000p+0",
+"Ls_min": "0x1.7e630e0800396p-4",
+"Ls_max": "0x1.5d697e139018bp+1",
+"last_row": [
+"0x1.75c0000000000p+11",
+"0x1.6c3ad9a7e4b9ep-2",
+"0x1.6c3ad9a7e4b9ep-2",
+"0x1.2183f71efe4c9p-2",
+"0x1.cfa6162885033p-2"
+],
+"fires": 56,
+"mis_max": "0x1.5cd4400000000p-30",
+"mis_last": "-0x1.43f6e00000000p-30"
+},
+"0.5": {
+"B_mean": "0x1.72d3053de2c59p-2",
+"swing": "0x1.01611da0c1bb5p-1",
+"tree_share": "0x1.0000000000000p+0",
+"Ls_min": "0x1.0616392120eacp-3",
+"Ls_max": "0x1.5e76e78f0ccf8p+1",
+"last_row": [
+"0x1.75c0000000000p+11",
+"0x1.4ef7f32ba282ap-2",
+"0x1.4ef7f32ba282bp-2",
+"0x1.8aadef936a606p+0",
+"0x1.2c848fd38ec6ap-3"
+],
+"fires": 48,
+"mis_max": "0x1.5ce5800000000p-30",
+"mis_last": "-0x1.43dc680000000p-30"
+},
+"0.8": {
+"B_mean": "0x1.71e5135ebec0ep-2",
+"swing": "0x1.043a8a4c8c7b0p-1",
+"tree_share": "0x1.0000000000000p+0",
+"Ls_min": "0x1.0f9fa85f412d2p-3",
+"Ls_max": "0x1.7b69aa6c87ab9p+1",
+"last_row": [
+"0x1.75c0000000000p+11",
+"0x1.4d2d5f38f7ad6p-2",
+"0x1.4d2d5f38f7ad6p-2",
+"0x1.cab6bf16797c5p+0",
+"0x1.3071eaa1c6f9cp-3"
+],
+"fires": 45,
+"mis_max": "0x1.5cdd180000000p-30",
+"mis_last": "-0x1.43d7e80000000p-30"
+},
+"1.2": {
+"B_mean": "0x1.7815fbf942215p-2",
+"swing": "0x1.2a0e565c5a200p-1",
+"tree_share": "0x1.0000000000000p+0",
+"Ls_min": "0x1.7376a6f4861d8p-3",
+"Ls_max": "0x1.d12ecfa1951a4p+1",
+"last_row": [
+"0x1.75c0000000000p+11",
+"0x1.4ef58a00940b7p-2",
+"0x1.4ef58a00940b7p-2",
+"0x1.b73c1b89402b5p+0",
+"0x1.2bd893a4d4364p-3"
+],
+"fires": 38,
+"mis_max": "0x1.5ccd100000000p-30",
+"mis_last": "-0x1.43c4200000000p-30"
+}
+}
+}
+}

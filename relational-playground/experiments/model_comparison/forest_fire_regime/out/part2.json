@@ -98,8 +98,9 @@
       "target": 0.0025687774694361427
      },
      "C4": "NOT RUN",
-     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
-     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+     "C5": "NOT RUN",
+     "C6": "NOT RUN",
+     "none_of_above": "NOT RUN"
     },
     "id": "CC_percolation[spot_0.00 d=0.10]_ode_meanfield[spot_0.00 d=0.10]",
     "observation": "percolation[spot_0.00 d=0.10] (percolation) and ode_meanfield[spot_0.00 d=0.10] (nonlinear) agree: 0.001678466796875 vs 0.0025687774694361427",
@@ -148,8 +149,9 @@
       "target": 0.013398733541028064
      },
      "C4": "NOT RUN",
-     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
-     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+     "C5": "NOT RUN",
+     "C6": "NOT RUN",
+     "none_of_above": "NOT RUN"
     },
     "id": "CC_percolation[spot_0.00 d=0.20]_ode_meanfield[spot_0.00 d=0.20]",
     "observation": "percolation[spot_0.00 d=0.20] (percolation) and ode_meanfield[spot_0.00 d=0.20] (nonlinear) agree: 0.0040771484375 vs 0.013398733541028064",
@@ -198,8 +200,9 @@
       "target": 0.5894536325416285
      },
      "C4": "NOT RUN",
-     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
-     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+     "C5": "NOT RUN",
+     "C6": "NOT RUN",
+     "none_of_above": "NOT RUN"
     },
     "id": "CC_percolation[spot_0.00 d=0.65]_ode_meanfield[spot_0.00 d=0.65]",
     "observation": "percolation[spot_0.00 d=0.65] (percolation) and ode_meanfield[spot_0.00 d=0.65] (nonlinear) agree: 0.596759033203125 vs 0.5894536325416285",
@@ -248,8 +251,9 @@
       "target": 0.6485162011002541
      },
      "C4": "NOT RUN",
-     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
-     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+     "C5": "NOT RUN",
+     "C6": "NOT RUN",
+     "none_of_above": "NOT RUN"
     },
     "id": "CC_percolation[spot_0.00 d=0.70]_ode_meanfield[spot_0.00 d=0.70]",
     "observation": "percolation[spot_0.00 d=0.70] (percolation) and ode_meanfield[spot_0.00 d=0.70] (nonlinear) agree: 0.6792724609375 vs 0.6485162011002541",
@@ -298,8 +302,9 @@
       "target": 0.7627407441032739
      },
      "C4": "NOT RUN",
-     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
-     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+     "C5": "NOT RUN",
+     "C6": "NOT RUN",
+     "none_of_above": "NOT RUN"
     },
     "id": "CC_percolation[spot_0.00 d=0.80]_ode_meanfield[spot_0.00 d=0.80]",
     "observation": "percolation[spot_0.00 d=0.80] (percolation) and ode_meanfield[spot_0.00 d=0.80] (nonlinear) agree: 0.795294189453125 vs 0.7627407441032739",
@@ -348,8 +353,9 @@
       "target": 0.8730360071411994
      },
      "C4": "NOT RUN",
-     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
-     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+     "C5": "NOT RUN",
+     "C6": "NOT RUN",
+     "none_of_above": "NOT RUN"
     },
     "id": "CC_percolation[spot_0.00 d=0.90]_ode_meanfield[spot_0.00 d=0.90]",
     "observation": "percolation[spot_0.00 d=0.90] (percolation) and ode_meanfield[spot_0.00 d=0.90] (nonlinear) agree: 0.8984619140625 vs 0.8730360071411994",
@@ -398,8 +404,9 @@
       "target": 0.0025894442862845063
      },
      "C4": "NOT RUN",
-     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
-     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+     "C5": "NOT RUN",
+     "C6": "NOT RUN",
+     "none_of_above": "NOT RUN"
     },
     "id": "CC_percolation[spot_0.05 d=0.10]_ode_meanfield[spot_0.05 d=0.10]",
     "observation": "percolation[spot_0.05 d=0.10] (percolation) and ode_meanfield[spot_0.05 d=0.10] (nonlinear) agree: 0.00169677734375 vs 0.0025894442862845063",
@@ -448,8 +455,9 @@
       "target": 0.013907671751267142
      },
      "C4": "NOT RUN",
-     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
-     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+     "C5": "NOT RUN",
+     "C6": "NOT RUN",
+     "none_of_above": "NOT RUN"
     },
     "id": "CC_percolation[spot_0.05 d=0.20]_ode_meanfield[spot_0.05 d=0.20]",
     "observation": "percolation[spot_0.05 d=0.20] (percolation) and ode_meanfield[spot_0.05 d=0.20] (nonlinear) agree: 0.0042236328125 vs 0.013907671751267142",
@@ -498,8 +506,9 @@
       "target": 0.5313316765039372
      },
      "C4": "NOT RUN",
-     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
-     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+     "C5": "NOT RUN",
+     "C6": "NOT RUN",
+     "none_of_above": "NOT RUN"
     },
     "id": "CC_percolation[spot_0.05 d=0.60]_ode_meanfield[spot_0.05 d=0.60]",
     "observation": "percolation[spot_0.05 d=0.60] (percolation) and ode_meanfield[spot_0.05 d=0.60] (nonlinear) agree: 0.518505859375 vs 0.5313316765039372",
@@ -548,8 +557,9 @@
       "target": 0.5917582010721167
      },
      "C4": "NOT RUN",
-     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
-     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+     "C5": "NOT RUN",
+     "C6": "NOT RUN",
+     "none_of_above": "NOT RUN"
     },
     "id": "CC_percolation[spot_0.05 d=0.65]_ode_meanfield[spot_0.05 d=0.65]",
     "observation": "percolation[spot_0.05 d=0.65] (percolation) and ode_meanfield[spot_0.05 d=0.65] (nonlinear) agree: 0.61500244140625 vs 0.5917582010721167",
@@ -598,8 +608,9 @@
       "target": 0.6505721042630889
      },
      "C4": "NOT RUN",
-     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
-     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+     "C5": "NOT RUN",
+     "C6": "NOT RUN",
+     "none_of_above": "NOT RUN"
     },
     "id": "CC_percolation[spot_0.05 d=0.70]_ode_meanfield[spot_0.05 d=0.70]",
     "observation": "percolation[spot_0.05 d=0.70] (percolation) and ode_meanfield[spot_0.05 d=0.70] (nonlinear) agree: 0.68433837890625 vs 0.6505721042630889",
@@ -648,8 +659,9 @@
       "target": 0.7643709621997437
      },
      "C4": "NOT RUN",
-     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
-     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+     "C5": "NOT RUN",
+     "C6": "NOT RUN",
+     "none_of_above": "NOT RUN"
     },
     "id": "CC_percolation[spot_0.05 d=0.80]_ode_meanfield[spot_0.05 d=0.80]",
     "observation": "percolation[spot_0.05 d=0.80] (percolation) and ode_meanfield[spot_0.05 d=0.80] (nonlinear) agree: 0.795672607421875 vs 0.7643709621997437",
@@ -698,8 +710,9 @@
       "target": 0.8743217789689336
      },
      "C4": "NOT RUN",
-     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
-     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+     "C5": "NOT RUN",
+     "C6": "NOT RUN",
+     "none_of_above": "NOT RUN"
     },
     "id": "CC_percolation[spot_0.05 d=0.90]_ode_meanfield[spot_0.05 d=0.90]",
     "observation": "percolation[spot_0.05 d=0.90] (percolation) and ode_meanfield[spot_0.05 d=0.90] (nonlinear) agree: 0.89847412109375 vs 0.8743217789689336",
@@ -748,8 +761,9 @@
       "target": 0.002653442265745698
      },
      "C4": "NOT RUN",
-     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
-     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+     "C5": "NOT RUN",
+     "C6": "NOT RUN",
+     "none_of_above": "NOT RUN"
     },
     "id": "CC_percolation[spot_0.20 d=0.10]_ode_meanfield[spot_0.20 d=0.10]",
     "observation": "percolation[spot_0.20 d=0.10] (percolation) and ode_meanfield[spot_0.20 d=0.10] (nonlinear) agree: 0.001708984375 vs 0.002653442265745698",
@@ -798,8 +812,9 @@
       "target": 0.015647643882850868
      },
      "C4": "NOT RUN",
-     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
-     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+     "C5": "NOT RUN",
+     "C6": "NOT RUN",
+     "none_of_above": "NOT RUN"
     },
     "id": "CC_percolation[spot_0.20 d=0.20]_ode_meanfield[spot_0.20 d=0.20]",
     "observation": "percolation[spot_0.20 d=0.20] (percolation) and ode_meanfield[spot_0.20 d=0.20] (nonlinear) agree: 0.004425048828125 vs 0.015647643882850868",
@@ -848,8 +863,9 @@
       "target": 0.476967302611996
      },
      "C4": "NOT RUN",
-     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
-     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+     "C5": "NOT RUN",
+     "C6": "NOT RUN",
+     "none_of_above": "NOT RUN"
     },
     "id": "CC_percolation[spot_0.20 d=0.55]_ode_meanfield[spot_0.20 d=0.55]",
     "observation": "percolation[spot_0.20 d=0.55] (percolation) and ode_meanfield[spot_0.20 d=0.55] (nonlinear) agree: 0.473138427734375 vs 0.476967302611996",
@@ -898,8 +914,9 @@
       "target": 0.5384631594689745
      },
      "C4": "NOT RUN",
-     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
-     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+     "C5": "NOT RUN",
+     "C6": "NOT RUN",
+     "none_of_above": "NOT RUN"
     },
     "id": "CC_percolation[spot_0.20 d=0.60]_ode_meanfield[spot_0.20 d=0.60]",
     "observation": "percolation[spot_0.20 d=0.60] (percolation) and ode_meanfield[spot_0.20 d=0.60] (nonlinear) agree: 0.55843505859375 vs 0.5384631594689745",
@@ -948,8 +965,9 @@
       "target": 0.5981076171226881
      },
      "C4": "NOT RUN",
-     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
-     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+     "C5": "NOT RUN",
+     "C6": "NOT RUN",
+     "none_of_above": "NOT RUN"
     },
     "id": "CC_percolation[spot_0.20 d=0.65]_ode_meanfield[spot_0.20 d=0.65]",
     "observation": "percolation[spot_0.20 d=0.65] (percolation) and ode_meanfield[spot_0.20 d=0.65] (nonlinear) agree: 0.62901611328125 vs 0.5981076171226881",
@@ -998,8 +1016,9 @@
       "target": 0.6562183431170863
      },
      "C4": "NOT RUN",
-     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
-     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+     "C5": "NOT RUN",
+     "C6": "NOT RUN",
+     "none_of_above": "NOT RUN"
     },
     "id": "CC_percolation[spot_0.20 d=0.70]_ode_meanfield[spot_0.20 d=0.70]",
     "observation": "percolation[spot_0.20 d=0.70] (percolation) and ode_meanfield[spot_0.20 d=0.70] (nonlinear) agree: 0.689093017578125 vs 0.6562183431170863",
@@ -1048,8 +1067,9 @@
       "target": 0.7688184748600326
      },
      "C4": "NOT RUN",
-     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
-     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+     "C5": "NOT RUN",
+     "C6": "NOT RUN",
+     "none_of_above": "NOT RUN"
     },
     "id": "CC_percolation[spot_0.20 d=0.80]_ode_meanfield[spot_0.20 d=0.80]",
     "observation": "percolation[spot_0.20 d=0.80] (percolation) and ode_meanfield[spot_0.20 d=0.80] (nonlinear) agree: 0.796063232421875 vs 0.7688184748600326",
@@ -1098,8 +1118,9 @@
       "target": 0.877805039930804
      },
      "C4": "NOT RUN",
-     "C5": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)",
-     "C6": "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+     "C5": "NOT RUN",
+     "C6": "NOT RUN",
+     "none_of_above": "NOT RUN"
     },
     "id": "CC_percolation[spot_0.20 d=0.90]_ode_meanfield[spot_0.20 d=0.90]",
     "observation": "percolation[spot_0.20 d=0.90] (percolation) and ode_meanfield[spot_0.20 d=0.90] (nonlinear) agree: 0.898486328125 vs 0.877805039930804",

@@ -95,17 +95,39 @@ PART 2  rebuild of runs 7-8, one design fixed in advance   2 of 4 logged feature
         21 coincidence cards opened by grid/ODE agreement, all OPEN.
 ```
 
-The design of PART 2 is the building session's. A feature that does not appear
-says something about this design; the original design is not on record.
+The design of PART 2 is the building session's. It stays as one branch (REBUILD).
+
+The original run 6, 7, 8 code arrived 2026-11-11 and is the second branch
+(ORIGINAL). `PREREG_ORIGINALS.md` was committed before `originals.py`.
+`RESULTS_ORIGINALS.txt` is the output.
+
+```text
+PART 3  the delivered code, ported draw for draw             8 of 8 targets MET
+        run 7 and run 8: every grid mean and sd equal to the numpy run (difference 0)
+        run 6: fires 47 and 56 / 48 / 45 / 38 over the threshold sweep; max |misclosure|
+               1.269e-09, the same digits as the numpy run; N budget CLOSED by the L0 rule,
+               the old model LEAK (-24.177)
+        random draws: playground/numpy_stream.py replays numpy's generator; checked against
+               numpy 2.5.3 output in fixtures/numpy_stream_check.json
+        F1  stated by drought: ORIGINAL 647 / 374 / 62.5 / 5.0 at 0.3 / 0.4 / 0.5 / 0.6 (unrounded);
+            REBUILD 12.5 / 14.9 / 9.4 / 1.5. Low-drought ratios rest on burns of a few cells.
+        F3  under a 0.05 window the original's three points (drought 0.5 / 0.6 / 0.7) are inside;
+            the original declared no window. On seeds 4..23 of the original design the gap is
+            inside 0.05 on 3 / 7 / 12 of 20 seeds. In 34 / 19 / 10 of 200 replicates the fire burned
+            under 5%; run 8's seed had 0 of 30. F3 stays CANDIDATE.
+        Two coincidence cards OPEN, evidence entered (statistical, numerical, design), no slot set.
+        PART 3 is INCOMPLETE under the gate rule: the seed spread is a deviation and four tools are missing.
+```
 
 ## Commands
 
 ```sh
-cd relational-playground/tests && python3 -m unittest discover -s .      # prints its count; about 25 s
+cd relational-playground/tests && python3 -m unittest discover -s .      # prints its count; about 35 s
 cd relational-playground/experiments/model_comparison/forest_fire_regime
 python3 run.py            # both parts, about 2.5 min; rewrites out/ and RESULTS.txt
 python3 run.py part1
-python3 export_draws.py   # needs numpy; only to re-export the fixture
+python3 run_originals.py  # PART 3, about 30 s; rewrites out/part3.json and RESULTS_ORIGINALS.txt
+python3 export_draws.py   # needs numpy; only to re-export a fixture (also export_stream_check.py, export_originals.py: numpy + scipy)
 python3 ../../../../tools/known_answer.py | tail -8                      # repo registry, three playground metrics
 ```
 
@@ -116,6 +138,9 @@ budgets          a run's closure covers LIVE budgets only; C and energy are VOID
 gate             closed-form cases cover parts of each model, not all of it (forest_n: 4 of 13 fluxes)
 observer fields  DEFINED 2026-11-11 by the chat side (controls.OBSERVER_DEFINITIONS)
 C5, C6           wired 2026-11-11 from the coincidence.py on branch claude/healing-folder-additions-u5aojl (7852f0e)
+run 6 port       checked by the run's own checkpoint audit; the model is not registered through the substitution
+                 interface, so the runner's per-transfer L0 table has not seen it
+numpy stream     random() and integers(n) only; nothing else numpy draws is replayed
 spec phases      1-2 built; 3 (boundary variation) has the tools and one test, no experiment;
                  4-6 not run. The four other experiments/ folders are empty.
 boundary engine  spec section 6 (interior / interface / exterior measurements, hysteresis runs): hysteresis() exists, nothing else
