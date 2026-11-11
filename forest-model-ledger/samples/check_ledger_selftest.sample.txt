@@ -24,5 +24,6 @@ FIRED  card slot expiry_condition dropped
 FIRED  bare absent state
 FIRED  observer regimes linked
 FIRED  built brief tool with no passing gate
+FIRED  placeholder with code and no blocked_on
 FIRED  expiry target unknown
-selftest: 27 planted, 0 silent
+selftest: 28 planted, 0 silent

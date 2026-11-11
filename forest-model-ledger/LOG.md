@@ -83,3 +83,27 @@ nudge size   x1.1 x0.9   assumption_nudge on run_9: per hand-set parameter; stru
             Decision 2026-11-10 (authors): leave the base unchanged. The compensated-sum
             counter is placeholder branch BR_RUN_9B_COMPENSATED_COUNTER.
 ```
+
+## toolkit thresholds -- set 2026-11-11 (work order: toolkit build, staged), all [CHOICE]
+
+Not checked by `T_LOG_LISTS_EVERY_CONSTANT` (that test reads model DEFAULTS and INIT
+only). Each value is the one recorded in the tool's gate; gate history in each docstring.
+
+```text
+tool                    name         value  note
+multi_seed_ensemble     REL_TOL       0.05  INVARIANT = sd <= REL_TOL |mean|; over-reads on outputs with a nonzero mean (run_14 flag 2)
+multi_seed_ensemble     K_MOVED        5.0  paired |z| for MOVED; buys FP 0 on the gate
+multi_seed_ensemble     K_EQ           2.0  EQUIVALENT = |mean| + K_EQ se <= delta
+multi_seed_ensemble     K_SPIKE        3.0  variance spike = sd > K_SPIKE median sd
+runs 14, 15             delta, band   0.5 sd, 2 sd of the base ensemble; material = |mean| > delta
+parameter_recovery      DCHI2          9.0  plausible set
+residual_regression     N_PERM         500  permutations per increment
+residual_regression     ALPHA         0.01
+residual_regression     MIN_DR2       0.10  material R2 increment
+residual_regression     COLLINEAR     0.95  NOT_SEPARABLE
+equation_family_swap    K_HANDOFF      3.0  per-point disagreement
+equation_family_swap    MIN_RUN          3  points in a regime; first gate failed FP 0.07 without it
+assumption_block_trace  ALPHA        0.001  was 0.01, failed FP 0.015
+assumption_block_trace  MIN_STUDIES      8
+gate.py                 harness        200 draws (60 for residual_regression) x harness seeds 0-4; PASS = fp 0 and tp 1 on every seed
+```

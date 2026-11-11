@@ -133,15 +133,16 @@ The checker fails on any run or card whose status has no entry there.
         correction, not delivered text.
 ```
 
-## Where the folder stands against the brief (2026-11-10, after run_10; revise as it moves)
+## Where the folder stands against the brief (2026-11-11, after run_18; revise as it moves)
 
 ```text
 brief says                              folder has
 --------------------------------------  ------------------------------------------------
-ledger/toolkit/, 7 tools                budget_closure, coincidence_card, assumption_nudge,
-                                        attribution_directionality (run_12, run_13, 2026-11-11).
-                                        Of the brief's seven, ONE is built (budget closure);
-                                        the other six are placeholders in ledger/toolkit/
+ledger/toolkit/, 7 tools                2026-11-11 staged build: all seven built and gated (tests/test_toolkit.py:
+                                        known answers + null harness FP 0 / TP 1, harness seeds 0-4).
+                                        equation_family_swap is an ADAPTER and its engine (relational-playground)
+                                        is absent; assumption_block_trace is a placeholder until real data.
+                                        Also: coincidence_card, assumption_nudge, attribution_directionality
 anchor = frozen, TAGGED snapshot        ledger/anchors/ANCHOR_run9.yaml, status candidate;
                                         tag forest-model-ledger-anchor-candidate-run9 SET AT MERGE
                                         (every tag route from the session refused); commit
@@ -149,13 +150,16 @@ anchor = frozen, TAGGED snapshot        ledger/anchors/ANCHOR_run9.yaml, status 
                                         three code files pinned by sha256, checked every run
 anchor test: 4 conditions               seeds PASS (wired, run_10); budgets PARTIAL (sigma void);
                                         nudges PARTIAL (run_11: 13 of 25 assumptions, 33 of 64
-                                        nudges moved nothing, card OPEN); independent PARTIAL
+                                        nudges moved nothing, card OPEN; run_15 split the 33:
+                                        18 hidden in noise, 9 absorbed, 2 seed-specific, 2 inert,
+                                        2 unresolved); independent PARTIAL
 RETURN closes C, N, P, water, energy    N and water close; C, P, energy print VOID
 RETURN diffs against the anchor         no diff tool
 BRANCH changes ONE component            no branch has been run from run_9 yet
-"run the FULL toolbox" on a trigger     run_10 and run_11 ran what exists; six of seven do not.
-                                        Both runs are INCOMPLETE under the gate rule;
-                                        see ledger/NEEDS_TOOL.md
+"run the FULL toolbox" on a trigger     run_14..18 re-ran the triggers with the built tools; rows cleared
+                                        into NEEDS_TOOL.md's Cleared table. run_10..15 stay INCOMPLETE:
+                                        equation_family_swap (engine absent) and assumption_block_trace
+                                        (no real data) are still owed, and CC_004/CC_005 rows are unrun
 known error, left in place              N residual -5.0e-11 = deposition counter roundoff;
                                         branch BR_RUN_9B_COMPENSATED_COUNTER (placeholder)
 run_9 is a CANDIDATE anchor, not an anchor
@@ -177,6 +181,12 @@ python3 runs/run_11.py                    # assumption nudges; several minutes; 
 python3 ledger/toolkit/coincidence_card.py  # reads every card
 python3 runs/run_12.py                    # attribution_directionality on second-hand seeds; reproduces samples/run_12.sample.txt
 python3 runs/run_13.py                    # same tool on first-hand records vs sha-pinned texts; diff against run_12
+python3 tests/test_toolkit.py             # the seven tool gates; one line per tool and per null leg
+python3 runs/run_14.py                    # CC_001 recheck: multi_seed_ensemble + ablation (about a minute)
+python3 runs/run_15.py                    # the 33 non-moving nudges classified (about four minutes, 4 workers)
+python3 runs/run_16.py                    # support_match on first-hand cases a-d, before / after
+python3 runs/run_17.py                    # parameter_recovery, six parameters
+python3 runs/run_18.py                    # residual_regression on N misclosure, 36 configurations
 ```
 
 ## Hard constraints

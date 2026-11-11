@@ -420,6 +420,7 @@ def selftest():
          "local_normal_form:\n    state: void", "local_normal_form:\n    state: ABSENT_AT_SENSITIVITY", "not void / supported / ruled_out"),
         ("observer regimes linked", "ledger/components/L5_OBS_STRATEGY.yaml", "depends_on: []", "depends_on:\n  - L5_OBS_REACTIVITY", "observer regimes share no currency"),
         ("built brief tool with no passing gate", "ledger/toolkit/multi_seed_ensemble.yaml", "  verdict: PASS", "  verdict: FAIL", "multi_seed_ensemble: built but its gate is not PASS"),
+        ("placeholder with code and no blocked_on", "ledger/toolkit/assumption_block_trace.yaml", "blocked_on: \"real data", "blocked_on: void\nwas: \"real data", "placeholder with code"),
         ("expiry target unknown", "ledger/expiry.yaml", "target: L0_P_BUDGET", "target: L0_Q_BUDGET", "L0_Q_BUDGET is neither"),
     ]
     bad = 0
