@@ -215,7 +215,35 @@ def r_into_p_rows():
 SHARED_SOURCE = (
     "Both playgrounds were built in sessions directed by one operator (Kavik) on 2026-11-11. #257 records its "
     "input (SPEC_GPT.md, WORK_ORDER.md, verbatim); the study-aperture playground records none in its tree or "
-    "its commit messages, so whether it received the same brief is UNDETERMINED from either repository.")
+    "its commit messages. ORIGIN_NOTE.md (operator statement relayed 2026-11-11, CARRIED, not found in either "
+    "tree) states the study-aperture builder did NOT receive SPEC_GPT.md and received only chat-side work orders, "
+    "whose playground order named the layers (system, relational, boundary, control, continuity, uncertainty "
+    "matrices) and not the system-vs-configuration continuity split. Shared source is therefore split BY LEVEL "
+    "where a card turns on it, not ruled in wholesale.")
+
+INPUT_BRIEFS = [
+    ("#257 relational-playground", "SPEC_GPT.md (GPT 'Relational Systems Playground' spec) + WORK_ORDER.md; both filed verbatim in its tree"),
+    ("study-aperture playground", "chat-side Claude work orders only (if passed); NOT SPEC_GPT.md, NOT other chat material"),
+    ("  its playground order named", "layers: system, relational, boundary, control, continuity, uncertainty matrices"),
+    ("  its playground order did not", "name the system-vs-configuration continuity split"),
+    ("source of the s-a rows", "operator statement relayed 2026-11-11 (ORIGIN_NOTE.md); CARRIED, not in the s-a tree"),
+]
+
+# Per-level reading of the shared-source cause, from ORIGIN_NOTE.md. Keys are the level a
+# concept agrees at; values carry the reading and what it rests on.
+SHARED_SOURCE_BY_LEVEL = dict(
+    continuity=dict(
+        concept_level=("POSSIBLE shared cue: the chat-side playground work order names a continuity matrix as a "
+                       "layer, so both builders could have taken 'there is a continuity reading' from a brief"),
+        split_level=("INDEPENDENT CONVERGENCE -> candidate anchor: system vs configuration continuity is in "
+                     "SPEC_GPT.md section E (#257's input) and in no brief the study-aperture builder received, "
+                     "per ORIGIN_NOTE.md. Rests on the operator's statement; the study-aperture tree still records "
+                     "no input brief, so this is CARRIED, not verified from the record"),
+    ),
+    observer=dict(
+        concept_level="UNDETERMINED: ORIGIN_NOTE.md does not say whether the work order named an observer layer",
+    ),
+)
 
 
 def card_for(row):
@@ -227,9 +255,9 @@ def card_for(row):
                                        "bookkeeping; any ledger checker computes it")
         causes["vocabulary_echo"] = "candidate: both name the gate 'L0' -- a shared label, independent of the arithmetic"
     if "cell" in str(row.get("p")):
-        causes["shared_source"] = ("candidate: SPEC_GPT.md section E lists 'System continuity' and 'Configuration "
-                                   "continuity' as separate readings; the study-aperture continuity matrix makes the "
-                                   "same split. " + SHARED_SOURCE)
+        lv = SHARED_SOURCE_BY_LEVEL["continuity"]
+        causes["shared_source"] = ("SPLIT BY LEVEL (ORIGIN_NOTE.md): concept level -- %s; split level -- %s"
+                                   % (lv["concept_level"], lv["split_level"]))
         causes["adapter_construction"] = ("SUPPORTED in part: the #257 system criterion used here was SUPPLIED BY THE "
                                           "ADAPTER (within tolerance of the anchor), so the agreement on the system axis "
                                           "is partly constructed; the configuration axis is not")
@@ -244,7 +272,8 @@ def card_for(row):
                                           "pass/fail cases become #257 draws or tool cases; the harness CLASS #257 assigns "
                                           "(CONSTANT_FIRES / CONSTANT_SILENT) names the detector, not the instrument")
     if cid.startswith("R-OBS"):
-        causes["shared_source"] = "candidate: both require an observer declaration before comparing. " + SHARED_SOURCE
+        causes["shared_source"] = ("candidate: both require an observer declaration before comparing; "
+                                   + SHARED_SOURCE_BY_LEVEL["observer"]["concept_level"])
     if cid.startswith("P-DEF:missing-return-observation"):
         causes["shared_constraint"] = ("candidate: a difference against a value that is absent cannot be formed; both "
                                        "refuse rather than read absent as zero")
@@ -254,9 +283,15 @@ def card_for(row):
     if row["code"] != "AGREE":
         note.append("surface agreement under %s: the agreement is reached without the concept that decides the other "
                     "side's reading, so it is an accident of the case" % row["code"])
-    st = [k for k, v in causes.items() if v != "void"]
     reading = "OPEN" if not any(v.startswith("SUPPORTED") for v in causes.values()) else "PROVISIONAL"
+    by_level = SHARED_SOURCE_BY_LEVEL["continuity"] if "cell" in str(row.get("p")) else None
+    anchor = None
+    if by_level:
+        anchor = ("CANDIDATE at split level only (system vs configuration continuity). Not promoted: the system axis "
+                  "of each cell is also partly adapter-constructed, so the configuration axis is where the "
+                  "independent convergence is cleanest")
     return dict(id="XC_" + cid, case=cid, code=row["code"], causes=causes, reading=reading, notes=note,
+                shared_source_by_level=by_level, anchor_candidate=anchor,
                 rule="a cause is a candidate until something rules the others out; nothing here is ruled out")
 
 
@@ -269,6 +304,13 @@ def render(rows, cards, baseline, concept_rows):
     o.append("Inputs: study-aperture rev %s, Simulators rev %s. Every case below was run through the other playground's "
              "public objects by a thin adapter; neither playground's code is edited." % (baseline.get("sa_rev", "?")[:10],
                                                                                           baseline.get("sim_rev", "?")[:10]))
+    o.append("")
+    o.append("## 0. Builder input briefs (what each builder was given; ORIGIN_NOTE.md)")
+    o.append("")
+    o.append("```text")
+    for k, v in INPUT_BRIEFS:
+        o.append("%-34s %s" % (k, v))
+    o.append("```")
     o.append("")
     o.append("## 1. Baseline (each playground's own checks, as-is)")
     o.append("")
@@ -330,8 +372,12 @@ def render(rows, cards, baseline, concept_rows):
             continue
         o.append("%s  %s" % (c["id"], c["reading"]))
         for k, v in c["causes"].items():
-            if v != "void":
+            if v != "void" and not (k == "shared_source" and c.get("shared_source_by_level")):
                 o.append("    %-21s %s" % (k, v[:200]))
+        if c.get("shared_source_by_level"):
+            for lvl, v in c["shared_source_by_level"].items():
+                o.append("    %-21s %s" % ("shared_source:" + lvl.split("_")[0], v))
+            o.append("    %-21s %s" % ("anchor", c["anchor_candidate"]))
     o.append("```")
     o.append("")
     o.append("Surface agreements under NO_SLOT also carry cards (in out/crossrun.json); they are not listed here because "

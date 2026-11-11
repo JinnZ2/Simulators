@@ -2,6 +2,16 @@
 
 Inputs: study-aperture rev b9dbdeff48, Simulators rev beac98bb5b. Every case below was run through the other playground's public objects by a thin adapter; neither playground's code is edited.
 
+## 0. Builder input briefs (what each builder was given; ORIGIN_NOTE.md)
+
+```text
+#257 relational-playground         SPEC_GPT.md (GPT 'Relational Systems Playground' spec) + WORK_ORDER.md; both filed verbatim in its tree
+study-aperture playground          chat-side Claude work orders only (if passed); NOT SPEC_GPT.md, NOT other chat material
+  its playground order named       layers: system, relational, boundary, control, continuity, uncertainty matrices
+  its playground order did not     name the system-vs-configuration continuity split
+source of the s-a rows             operator statement relayed 2026-11-11 (ORIGIN_NOTE.md); CARRIED, not in the s-a tree
+```
+
 ## 1. Baseline (each playground's own checks, as-is)
 
 ```text
@@ -213,7 +223,7 @@ NO_SLOT rows by what the readings do anyway: AGREE 7, MISCLASSIFIED 2, MISSED 39
 
 ## 3. Coincidence cards (one per agreement, step 1D)
 
-Both playgrounds were built in sessions directed by one operator (Kavik) on 2026-11-11. #257 records its input (SPEC_GPT.md, WORK_ORDER.md, verbatim); the study-aperture playground records none in its tree or its commit messages, so whether it received the same brief is UNDETERMINED from either repository.
+Both playgrounds were built in sessions directed by one operator (Kavik) on 2026-11-11. #257 records its input (SPEC_GPT.md, WORK_ORDER.md, verbatim); the study-aperture playground records none in its tree or its commit messages. ORIGIN_NOTE.md (operator statement relayed 2026-11-11, CARRIED, not found in either tree) states the study-aperture builder did NOT receive SPEC_GPT.md and received only chat-side work orders, whose playground order named the layers (system, relational, boundary, control, continuity, uncertainty matrices) and not the system-vs-configuration continuity split. Shared source is therefore split BY LEVEL where a card turns on it, not ruled in wholesale.
 
 ```text
 XC_P-DEF:known-answer-violation  OPEN
@@ -235,20 +245,30 @@ XC_P-CTRL:balanced-ledger-passes  OPEN
 XC_P-CTRL:empty-harness-is-not-a-pass  OPEN
     shared_constraint     candidate: 'no sensitivity / no cases' cannot be promoted to a pass by either; one refuses at construction, the other records INDETERMINATE
 XC_P-CTRL:continuous-system  PROVISIONAL
-    shared_source         candidate: SPEC_GPT.md section E lists 'System continuity' and 'Configuration continuity' as separate readings; the study-aperture continuity matrix makes the same split. Both playgrounds were built i
     adapter_construction  SUPPORTED in part: the #257 system criterion used here was SUPPLIED BY THE ADAPTER (within tolerance of the anchor), so the agreement on the system axis is partly constructed; the configuration axis i
+    shared_source:concept POSSIBLE shared cue: the chat-side playground work order names a continuity matrix as a layer, so both builders could have taken 'there is a continuity reading' from a brief
+    shared_source:split   INDEPENDENT CONVERGENCE -> candidate anchor: system vs configuration continuity is in SPEC_GPT.md section E (#257's input) and in no brief the study-aperture builder received, per ORIGIN_NOTE.md. Rests on the operator's statement; the study-aperture tree still records no input brief, so this is CARRIED, not verified from the record
+    anchor                CANDIDATE at split level only (system vs configuration continuity). Not promoted: the system axis of each cell is also partly adapter-constructed, so the configuration axis is where the independent convergence is cleanest
 XC_P-CTRL:return-with-reconfiguration  PROVISIONAL
-    shared_source         candidate: SPEC_GPT.md section E lists 'System continuity' and 'Configuration continuity' as separate readings; the study-aperture continuity matrix makes the same split. Both playgrounds were built i
     adapter_construction  SUPPORTED in part: the #257 system criterion used here was SUPPLIED BY THE ADAPTER (within tolerance of the anchor), so the agreement on the system axis is partly constructed; the configuration axis i
+    shared_source:concept POSSIBLE shared cue: the chat-side playground work order names a continuity matrix as a layer, so both builders could have taken 'there is a continuity reading' from a brief
+    shared_source:split   INDEPENDENT CONVERGENCE -> candidate anchor: system vs configuration continuity is in SPEC_GPT.md section E (#257's input) and in no brief the study-aperture builder received, per ORIGIN_NOTE.md. Rests on the operator's statement; the study-aperture tree still records no input brief, so this is CARRIED, not verified from the record
+    anchor                CANDIDATE at split level only (system vs configuration continuity). Not promoted: the system axis of each cell is also partly adapter-constructed, so the configuration axis is where the independent convergence is cleanest
 XC_P-CTRL:drift-with-stable-configuration  PROVISIONAL
-    shared_source         candidate: SPEC_GPT.md section E lists 'System continuity' and 'Configuration continuity' as separate readings; the study-aperture continuity matrix makes the same split. Both playgrounds were built i
     adapter_construction  SUPPORTED in part: the #257 system criterion used here was SUPPLIED BY THE ADAPTER (within tolerance of the anchor), so the agreement on the system axis is partly constructed; the configuration axis i
+    shared_source:concept POSSIBLE shared cue: the chat-side playground work order names a continuity matrix as a layer, so both builders could have taken 'there is a continuity reading' from a brief
+    shared_source:split   INDEPENDENT CONVERGENCE -> candidate anchor: system vs configuration continuity is in SPEC_GPT.md section E (#257's input) and in no brief the study-aperture builder received, per ORIGIN_NOTE.md. Rests on the operator's statement; the study-aperture tree still records no input brief, so this is CARRIED, not verified from the record
+    anchor                CANDIDATE at split level only (system vs configuration continuity). Not promoted: the system axis of each cell is also partly adapter-constructed, so the configuration axis is where the independent convergence is cleanest
 XC_P-CTRL:discontinuous-system  PROVISIONAL
-    shared_source         candidate: SPEC_GPT.md section E lists 'System continuity' and 'Configuration continuity' as separate readings; the study-aperture continuity matrix makes the same split. Both playgrounds were built i
     adapter_construction  SUPPORTED in part: the #257 system criterion used here was SUPPLIED BY THE ADAPTER (within tolerance of the anchor), so the agreement on the system axis is partly constructed; the configuration axis i
+    shared_source:concept POSSIBLE shared cue: the chat-side playground work order names a continuity matrix as a layer, so both builders could have taken 'there is a continuity reading' from a brief
+    shared_source:split   INDEPENDENT CONVERGENCE -> candidate anchor: system vs configuration continuity is in SPEC_GPT.md section E (#257's input) and in no brief the study-aperture builder received, per ORIGIN_NOTE.md. Rests on the operator's statement; the study-aperture tree still records no input brief, so this is CARRIED, not verified from the record
+    anchor                CANDIDATE at split level only (system vs configuration continuity). Not promoted: the system axis of each cell is also partly adapter-constructed, so the configuration axis is where the independent convergence is cleanest
 XC_P-CTRL:indeterminate-component-is-indeterminate-cell  PROVISIONAL
-    shared_source         candidate: SPEC_GPT.md section E lists 'System continuity' and 'Configuration continuity' as separate readings; the study-aperture continuity matrix makes the same split. Both playgrounds were built i
     adapter_construction  SUPPORTED in part: the #257 system criterion used here was SUPPLIED BY THE ADAPTER (within tolerance of the anchor), so the agreement on the system axis is partly constructed; the configuration axis i
+    shared_source:concept POSSIBLE shared cue: the chat-side playground work order names a continuity matrix as a layer, so both builders could have taken 'there is a continuity reading' from a brief
+    shared_source:split   INDEPENDENT CONVERGENCE -> candidate anchor: system vs configuration continuity is in SPEC_GPT.md section E (#257's input) and in no brief the study-aperture builder received, per ORIGIN_NOTE.md. Rests on the operator's statement; the study-aperture tree still records no input brief, so this is CARRIED, not verified from the record
+    anchor                CANDIDATE at split level only (system vs configuration continuity). Not promoted: the system axis of each cell is also partly adapter-constructed, so the configuration axis is where the independent convergence is cleanest
 XC_R-KAG:branching-00  PROVISIONAL
     shared_constraint     candidate: n0 * R^n is arithmetic; two correct programs must agree on it
     adapter_construction  SUPPORTED: the Perplexity plan's known-answer case IS #257's closed form, so the run is checked against the answer it was handed (circular by construction)
@@ -277,7 +297,7 @@ XC_R-KAG:branching-11  PROVISIONAL
     shared_constraint     candidate: n0 * R^n is arithmetic; two correct programs must agree on it
     adapter_construction  SUPPORTED: the Perplexity plan's known-answer case IS #257's closed form, so the run is checked against the answer it was handed (circular by construction)
 XC_R-OBS:cross_system_regimes_undeclared  OPEN
-    shared_source         candidate: both require an observer declaration before comparing. Both playgrounds were built in sessions directed by one operator (Kavik) on 2026-11-11. #257 records its input (SPEC_GPT.md, WORK_ORDE
+    shared_source         candidate: both require an observer declaration before comparing; UNDETERMINED: ORIGIN_NOTE.md does not say whether the work order named an observer layer
 ```
 
 Surface agreements under NO_SLOT also carry cards (in out/crossrun.json); they are not listed here because an agreement reached without the deciding concept is coded NO_SLOT, not AGREE.

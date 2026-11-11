@@ -79,6 +79,16 @@ class PinnedFindings(unittest.TestCase):
         self.assertEqual(len(cells), 5)
         self.assertTrue(all(r[c]["code"] == "AGREE" for c in cells))
 
+    def test_continuity_cards_split_shared_source_by_level(self):
+        cards = [c for c in common.load("crossrun.json")["cards"] if c.get("shared_source_by_level")]
+        self.assertEqual(len(cards), 5)
+        for c in cards:
+            self.assertEqual(set(c["shared_source_by_level"]), {"concept_level", "split_level"})
+            self.assertTrue(c["shared_source_by_level"]["split_level"].startswith("INDEPENDENT CONVERGENCE"))
+            self.assertTrue(c["anchor_candidate"].startswith("CANDIDATE"))
+            self.assertEqual(c["reading"], "PROVISIONAL")   # adapter-supplied system criterion still stands
+        self.assertTrue(os.path.exists(os.path.join(FOLDER, "ORIGIN_NOTE.md")))
+
     def test_forest_runs_indeterminate_without_a_registry(self):
         f = feed("r257_into_p.json")
         for cid in ("R-F9:replay_base", "R-F9:replay_no_fire", "R-F9:native_seed0"):

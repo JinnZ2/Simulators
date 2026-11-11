@@ -15,6 +15,7 @@
  },
  "cards": [
   {
+   "anchor_candidate": null,
    "case": "P-DEF:incomplete-ledger-gap",
    "causes": {
     "adapter_construction": "void",
@@ -28,9 +29,11 @@
     "surface agreement under NO_SLOT: the agreement is reached without the concept that decides the other side's reading, so it is an accident of the case"
    ],
    "reading": "OPEN",
-   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out",
+   "shared_source_by_level": null
   },
   {
+   "anchor_candidate": null,
    "case": "P-DEF:known-answer-violation",
    "causes": {
     "adapter_construction": "in part: the instrument is rebuilt from its captured parameters and its pass/fail cases become #257 draws or tool cases; the harness CLASS #257 assigns (CONSTANT_FIRES / CONSTANT_SILENT) names the detector, not the instrument",
@@ -42,9 +45,11 @@
    "id": "XC_P-DEF:known-answer-violation",
    "notes": [],
    "reading": "OPEN",
-   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out",
+   "shared_source_by_level": null
   },
   {
+   "anchor_candidate": null,
    "case": "P-DEF:unasserted-non-return",
    "causes": {
     "adapter_construction": "void",
@@ -58,9 +63,11 @@
     "surface agreement under NO_SLOT: the agreement is reached without the concept that decides the other side's reading, so it is an accident of the case"
    ],
    "reading": "OPEN",
-   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out",
+   "shared_source_by_level": null
   },
   {
+   "anchor_candidate": null,
    "case": "P-DEF:missing-return-observation",
    "causes": {
     "adapter_construction": "void",
@@ -72,9 +79,11 @@
    "id": "XC_P-DEF:missing-return-observation",
    "notes": [],
    "reading": "OPEN",
-   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out",
+   "shared_source_by_level": null
   },
   {
+   "anchor_candidate": null,
    "case": "P-DEF:blind-instrument-misses-ladder",
    "causes": {
     "adapter_construction": "in part: the instrument is rebuilt from its captured parameters and its pass/fail cases become #257 draws or tool cases; the harness CLASS #257 assigns (CONSTANT_FIRES / CONSTANT_SILENT) names the detector, not the instrument",
@@ -86,9 +95,11 @@
    "id": "XC_P-DEF:blind-instrument-misses-ladder",
    "notes": [],
    "reading": "OPEN",
-   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out",
+   "shared_source_by_level": null
   },
   {
+   "anchor_candidate": null,
    "case": "P-DEF:noisy-instrument-false-positives",
    "causes": {
     "adapter_construction": "in part: the instrument is rebuilt from its captured parameters and its pass/fail cases become #257 draws or tool cases; the harness CLASS #257 assigns (CONSTANT_FIRES / CONSTANT_SILENT) names the detector, not the instrument",
@@ -100,9 +111,11 @@
    "id": "XC_P-DEF:noisy-instrument-false-positives",
    "notes": [],
    "reading": "OPEN",
-   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out",
+   "shared_source_by_level": null
   },
   {
+   "anchor_candidate": null,
    "case": "P-DEF:non-detection-without-sensitivity",
    "causes": {
     "adapter_construction": "void",
@@ -114,9 +127,11 @@
    "id": "XC_P-DEF:non-detection-without-sensitivity",
    "notes": [],
    "reading": "OPEN",
-   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out",
+   "shared_source_by_level": null
   },
   {
+   "anchor_candidate": null,
    "case": "P-CTRL:balanced-ledger-passes",
    "causes": {
     "adapter_construction": "void",
@@ -128,9 +143,11 @@
    "id": "XC_P-CTRL:balanced-ledger-passes",
    "notes": [],
    "reading": "OPEN",
-   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out",
+   "shared_source_by_level": null
   },
   {
+   "anchor_candidate": null,
    "case": "P-CTRL:empty-harness-is-not-a-pass",
    "causes": {
     "adapter_construction": "void",
@@ -142,79 +159,106 @@
    "id": "XC_P-CTRL:empty-harness-is-not-a-pass",
    "notes": [],
    "reading": "OPEN",
-   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out",
+   "shared_source_by_level": null
   },
   {
+   "anchor_candidate": "CANDIDATE at split level only (system vs configuration continuity). Not promoted: the system axis of each cell is also partly adapter-constructed, so the configuration axis is where the independent convergence is cleanest",
    "case": "P-CTRL:continuous-system",
    "causes": {
     "adapter_construction": "SUPPORTED in part: the #257 system criterion used here was SUPPLIED BY THE ADAPTER (within tolerance of the anchor), so the agreement on the system axis is partly constructed; the configuration axis is not",
     "shared_constraint": "void",
-    "shared_source": "candidate: SPEC_GPT.md section E lists 'System continuity' and 'Configuration continuity' as separate readings; the study-aperture continuity matrix makes the same split. Both playgrounds were built in sessions directed by one operator (Kavik) on 2026-11-11. #257 records its input (SPEC_GPT.md, WORK_ORDER.md, verbatim); the study-aperture playground records none in its tree or its commit messages, so whether it received the same brief is UNDETERMINED from either repository.",
+    "shared_source": "SPLIT BY LEVEL (ORIGIN_NOTE.md): concept level -- POSSIBLE shared cue: the chat-side playground work order names a continuity matrix as a layer, so both builders could have taken 'there is a continuity reading' from a brief; split level -- INDEPENDENT CONVERGENCE -> candidate anchor: system vs configuration continuity is in SPEC_GPT.md section E (#257's input) and in no brief the study-aperture builder received, per ORIGIN_NOTE.md. Rests on the operator's statement; the study-aperture tree still records no input brief, so this is CARRIED, not verified from the record",
     "vocabulary_echo": "void"
    },
    "code": "AGREE",
    "id": "XC_P-CTRL:continuous-system",
    "notes": [],
    "reading": "PROVISIONAL",
-   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out",
+   "shared_source_by_level": {
+    "concept_level": "POSSIBLE shared cue: the chat-side playground work order names a continuity matrix as a layer, so both builders could have taken 'there is a continuity reading' from a brief",
+    "split_level": "INDEPENDENT CONVERGENCE -> candidate anchor: system vs configuration continuity is in SPEC_GPT.md section E (#257's input) and in no brief the study-aperture builder received, per ORIGIN_NOTE.md. Rests on the operator's statement; the study-aperture tree still records no input brief, so this is CARRIED, not verified from the record"
+   }
   },
   {
+   "anchor_candidate": "CANDIDATE at split level only (system vs configuration continuity). Not promoted: the system axis of each cell is also partly adapter-constructed, so the configuration axis is where the independent convergence is cleanest",
    "case": "P-CTRL:return-with-reconfiguration",
    "causes": {
     "adapter_construction": "SUPPORTED in part: the #257 system criterion used here was SUPPLIED BY THE ADAPTER (within tolerance of the anchor), so the agreement on the system axis is partly constructed; the configuration axis is not",
     "shared_constraint": "void",
-    "shared_source": "candidate: SPEC_GPT.md section E lists 'System continuity' and 'Configuration continuity' as separate readings; the study-aperture continuity matrix makes the same split. Both playgrounds were built in sessions directed by one operator (Kavik) on 2026-11-11. #257 records its input (SPEC_GPT.md, WORK_ORDER.md, verbatim); the study-aperture playground records none in its tree or its commit messages, so whether it received the same brief is UNDETERMINED from either repository.",
+    "shared_source": "SPLIT BY LEVEL (ORIGIN_NOTE.md): concept level -- POSSIBLE shared cue: the chat-side playground work order names a continuity matrix as a layer, so both builders could have taken 'there is a continuity reading' from a brief; split level -- INDEPENDENT CONVERGENCE -> candidate anchor: system vs configuration continuity is in SPEC_GPT.md section E (#257's input) and in no brief the study-aperture builder received, per ORIGIN_NOTE.md. Rests on the operator's statement; the study-aperture tree still records no input brief, so this is CARRIED, not verified from the record",
     "vocabulary_echo": "void"
    },
    "code": "AGREE",
    "id": "XC_P-CTRL:return-with-reconfiguration",
    "notes": [],
    "reading": "PROVISIONAL",
-   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out",
+   "shared_source_by_level": {
+    "concept_level": "POSSIBLE shared cue: the chat-side playground work order names a continuity matrix as a layer, so both builders could have taken 'there is a continuity reading' from a brief",
+    "split_level": "INDEPENDENT CONVERGENCE -> candidate anchor: system vs configuration continuity is in SPEC_GPT.md section E (#257's input) and in no brief the study-aperture builder received, per ORIGIN_NOTE.md. Rests on the operator's statement; the study-aperture tree still records no input brief, so this is CARRIED, not verified from the record"
+   }
   },
   {
+   "anchor_candidate": "CANDIDATE at split level only (system vs configuration continuity). Not promoted: the system axis of each cell is also partly adapter-constructed, so the configuration axis is where the independent convergence is cleanest",
    "case": "P-CTRL:drift-with-stable-configuration",
    "causes": {
     "adapter_construction": "SUPPORTED in part: the #257 system criterion used here was SUPPLIED BY THE ADAPTER (within tolerance of the anchor), so the agreement on the system axis is partly constructed; the configuration axis is not",
     "shared_constraint": "void",
-    "shared_source": "candidate: SPEC_GPT.md section E lists 'System continuity' and 'Configuration continuity' as separate readings; the study-aperture continuity matrix makes the same split. Both playgrounds were built in sessions directed by one operator (Kavik) on 2026-11-11. #257 records its input (SPEC_GPT.md, WORK_ORDER.md, verbatim); the study-aperture playground records none in its tree or its commit messages, so whether it received the same brief is UNDETERMINED from either repository.",
+    "shared_source": "SPLIT BY LEVEL (ORIGIN_NOTE.md): concept level -- POSSIBLE shared cue: the chat-side playground work order names a continuity matrix as a layer, so both builders could have taken 'there is a continuity reading' from a brief; split level -- INDEPENDENT CONVERGENCE -> candidate anchor: system vs configuration continuity is in SPEC_GPT.md section E (#257's input) and in no brief the study-aperture builder received, per ORIGIN_NOTE.md. Rests on the operator's statement; the study-aperture tree still records no input brief, so this is CARRIED, not verified from the record",
     "vocabulary_echo": "void"
    },
    "code": "AGREE",
    "id": "XC_P-CTRL:drift-with-stable-configuration",
    "notes": [],
    "reading": "PROVISIONAL",
-   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out",
+   "shared_source_by_level": {
+    "concept_level": "POSSIBLE shared cue: the chat-side playground work order names a continuity matrix as a layer, so both builders could have taken 'there is a continuity reading' from a brief",
+    "split_level": "INDEPENDENT CONVERGENCE -> candidate anchor: system vs configuration continuity is in SPEC_GPT.md section E (#257's input) and in no brief the study-aperture builder received, per ORIGIN_NOTE.md. Rests on the operator's statement; the study-aperture tree still records no input brief, so this is CARRIED, not verified from the record"
+   }
   },
   {
+   "anchor_candidate": "CANDIDATE at split level only (system vs configuration continuity). Not promoted: the system axis of each cell is also partly adapter-constructed, so the configuration axis is where the independent convergence is cleanest",
    "case": "P-CTRL:discontinuous-system",
    "causes": {
     "adapter_construction": "SUPPORTED in part: the #257 system criterion used here was SUPPLIED BY THE ADAPTER (within tolerance of the anchor), so the agreement on the system axis is partly constructed; the configuration axis is not",
     "shared_constraint": "void",
-    "shared_source": "candidate: SPEC_GPT.md section E lists 'System continuity' and 'Configuration continuity' as separate readings; the study-aperture continuity matrix makes the same split. Both playgrounds were built in sessions directed by one operator (Kavik) on 2026-11-11. #257 records its input (SPEC_GPT.md, WORK_ORDER.md, verbatim); the study-aperture playground records none in its tree or its commit messages, so whether it received the same brief is UNDETERMINED from either repository.",
+    "shared_source": "SPLIT BY LEVEL (ORIGIN_NOTE.md): concept level -- POSSIBLE shared cue: the chat-side playground work order names a continuity matrix as a layer, so both builders could have taken 'there is a continuity reading' from a brief; split level -- INDEPENDENT CONVERGENCE -> candidate anchor: system vs configuration continuity is in SPEC_GPT.md section E (#257's input) and in no brief the study-aperture builder received, per ORIGIN_NOTE.md. Rests on the operator's statement; the study-aperture tree still records no input brief, so this is CARRIED, not verified from the record",
     "vocabulary_echo": "void"
    },
    "code": "AGREE",
    "id": "XC_P-CTRL:discontinuous-system",
    "notes": [],
    "reading": "PROVISIONAL",
-   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out",
+   "shared_source_by_level": {
+    "concept_level": "POSSIBLE shared cue: the chat-side playground work order names a continuity matrix as a layer, so both builders could have taken 'there is a continuity reading' from a brief",
+    "split_level": "INDEPENDENT CONVERGENCE -> candidate anchor: system vs configuration continuity is in SPEC_GPT.md section E (#257's input) and in no brief the study-aperture builder received, per ORIGIN_NOTE.md. Rests on the operator's statement; the study-aperture tree still records no input brief, so this is CARRIED, not verified from the record"
+   }
   },
   {
+   "anchor_candidate": "CANDIDATE at split level only (system vs configuration continuity). Not promoted: the system axis of each cell is also partly adapter-constructed, so the configuration axis is where the independent convergence is cleanest",
    "case": "P-CTRL:indeterminate-component-is-indeterminate-cell",
    "causes": {
     "adapter_construction": "SUPPORTED in part: the #257 system criterion used here was SUPPLIED BY THE ADAPTER (within tolerance of the anchor), so the agreement on the system axis is partly constructed; the configuration axis is not",
     "shared_constraint": "void",
-    "shared_source": "candidate: SPEC_GPT.md section E lists 'System continuity' and 'Configuration continuity' as separate readings; the study-aperture continuity matrix makes the same split. Both playgrounds were built in sessions directed by one operator (Kavik) on 2026-11-11. #257 records its input (SPEC_GPT.md, WORK_ORDER.md, verbatim); the study-aperture playground records none in its tree or its commit messages, so whether it received the same brief is UNDETERMINED from either repository.",
+    "shared_source": "SPLIT BY LEVEL (ORIGIN_NOTE.md): concept level -- POSSIBLE shared cue: the chat-side playground work order names a continuity matrix as a layer, so both builders could have taken 'there is a continuity reading' from a brief; split level -- INDEPENDENT CONVERGENCE -> candidate anchor: system vs configuration continuity is in SPEC_GPT.md section E (#257's input) and in no brief the study-aperture builder received, per ORIGIN_NOTE.md. Rests on the operator's statement; the study-aperture tree still records no input brief, so this is CARRIED, not verified from the record",
     "vocabulary_echo": "void"
    },
    "code": "AGREE",
    "id": "XC_P-CTRL:indeterminate-component-is-indeterminate-cell",
    "notes": [],
    "reading": "PROVISIONAL",
-   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out",
+   "shared_source_by_level": {
+    "concept_level": "POSSIBLE shared cue: the chat-side playground work order names a continuity matrix as a layer, so both builders could have taken 'there is a continuity reading' from a brief",
+    "split_level": "INDEPENDENT CONVERGENCE -> candidate anchor: system vs configuration continuity is in SPEC_GPT.md section E (#257's input) and in no brief the study-aperture builder received, per ORIGIN_NOTE.md. Rests on the operator's statement; the study-aperture tree still records no input brief, so this is CARRIED, not verified from the record"
+   }
   },
   {
+   "anchor_candidate": null,
    "case": "P-CTRL:return-outcome-is-system-track-transition",
    "causes": {
     "adapter_construction": "void",
@@ -228,9 +272,11 @@
     "surface agreement under NO_SLOT: the agreement is reached without the concept that decides the other side's reading, so it is an accident of the case"
    ],
    "reading": "OPEN",
-   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out",
+   "shared_source_by_level": null
   },
   {
+   "anchor_candidate": null,
    "case": "P-CTRL:ladder-establishes-limit",
    "causes": {
     "adapter_construction": "void",
@@ -244,9 +290,11 @@
     "surface agreement under NO_SLOT: the agreement is reached without the concept that decides the other side's reading, so it is an accident of the case"
    ],
    "reading": "OPEN",
-   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out",
+   "shared_source_by_level": null
   },
   {
+   "anchor_candidate": null,
    "case": "P-CTRL:qualified-non-detection",
    "causes": {
     "adapter_construction": "void",
@@ -260,9 +308,11 @@
     "surface agreement under NO_SLOT: the agreement is reached without the concept that decides the other side's reading, so it is an accident of the case"
    ],
    "reading": "OPEN",
-   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out",
+   "shared_source_by_level": null
   },
   {
+   "anchor_candidate": null,
    "case": "P-CTRL:scoped-absence-claim-issued",
    "causes": {
     "adapter_construction": "void",
@@ -276,9 +326,11 @@
     "surface agreement under NO_SLOT: the agreement is reached without the concept that decides the other side's reading, so it is an accident of the case"
    ],
    "reading": "OPEN",
-   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out",
+   "shared_source_by_level": null
   },
   {
+   "anchor_candidate": null,
    "case": "R-F9:replay_planted_leak_0.3",
    "causes": {
     "adapter_construction": "void",
@@ -292,9 +344,11 @@
     "surface agreement under NO_SLOT: the agreement is reached without the concept that decides the other side's reading, so it is an accident of the case"
    ],
    "reading": "OPEN",
-   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out",
+   "shared_source_by_level": null
   },
   {
+   "anchor_candidate": null,
    "case": "R-KAG:branching-00",
    "causes": {
     "adapter_construction": "SUPPORTED: the Perplexity plan's known-answer case IS #257's closed form, so the run is checked against the answer it was handed (circular by construction)",
@@ -306,9 +360,11 @@
    "id": "XC_R-KAG:branching-00",
    "notes": [],
    "reading": "PROVISIONAL",
-   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out",
+   "shared_source_by_level": null
   },
   {
+   "anchor_candidate": null,
    "case": "R-KAG:branching-01",
    "causes": {
     "adapter_construction": "SUPPORTED: the Perplexity plan's known-answer case IS #257's closed form, so the run is checked against the answer it was handed (circular by construction)",
@@ -320,9 +376,11 @@
    "id": "XC_R-KAG:branching-01",
    "notes": [],
    "reading": "PROVISIONAL",
-   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out",
+   "shared_source_by_level": null
   },
   {
+   "anchor_candidate": null,
    "case": "R-KAG:branching-03",
    "causes": {
     "adapter_construction": "SUPPORTED: the Perplexity plan's known-answer case IS #257's closed form, so the run is checked against the answer it was handed (circular by construction)",
@@ -334,9 +392,11 @@
    "id": "XC_R-KAG:branching-03",
    "notes": [],
    "reading": "PROVISIONAL",
-   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out",
+   "shared_source_by_level": null
   },
   {
+   "anchor_candidate": null,
    "case": "R-KAG:branching-05",
    "causes": {
     "adapter_construction": "SUPPORTED: the Perplexity plan's known-answer case IS #257's closed form, so the run is checked against the answer it was handed (circular by construction)",
@@ -348,9 +408,11 @@
    "id": "XC_R-KAG:branching-05",
    "notes": [],
    "reading": "PROVISIONAL",
-   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out",
+   "shared_source_by_level": null
   },
   {
+   "anchor_candidate": null,
    "case": "R-KAG:branching-07",
    "causes": {
     "adapter_construction": "SUPPORTED: the Perplexity plan's known-answer case IS #257's closed form, so the run is checked against the answer it was handed (circular by construction)",
@@ -362,9 +424,11 @@
    "id": "XC_R-KAG:branching-07",
    "notes": [],
    "reading": "PROVISIONAL",
-   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out",
+   "shared_source_by_level": null
   },
   {
+   "anchor_candidate": null,
    "case": "R-KAG:branching-08",
    "causes": {
     "adapter_construction": "SUPPORTED: the Perplexity plan's known-answer case IS #257's closed form, so the run is checked against the answer it was handed (circular by construction)",
@@ -376,9 +440,11 @@
    "id": "XC_R-KAG:branching-08",
    "notes": [],
    "reading": "PROVISIONAL",
-   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out",
+   "shared_source_by_level": null
   },
   {
+   "anchor_candidate": null,
    "case": "R-KAG:branching-09",
    "causes": {
     "adapter_construction": "SUPPORTED: the Perplexity plan's known-answer case IS #257's closed form, so the run is checked against the answer it was handed (circular by construction)",
@@ -390,9 +456,11 @@
    "id": "XC_R-KAG:branching-09",
    "notes": [],
    "reading": "PROVISIONAL",
-   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out",
+   "shared_source_by_level": null
   },
   {
+   "anchor_candidate": null,
    "case": "R-KAG:branching-10",
    "causes": {
     "adapter_construction": "SUPPORTED: the Perplexity plan's known-answer case IS #257's closed form, so the run is checked against the answer it was handed (circular by construction)",
@@ -404,9 +472,11 @@
    "id": "XC_R-KAG:branching-10",
    "notes": [],
    "reading": "PROVISIONAL",
-   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out",
+   "shared_source_by_level": null
   },
   {
+   "anchor_candidate": null,
    "case": "R-KAG:branching-11",
    "causes": {
     "adapter_construction": "SUPPORTED: the Perplexity plan's known-answer case IS #257's closed form, so the run is checked against the answer it was handed (circular by construction)",
@@ -418,21 +488,24 @@
    "id": "XC_R-KAG:branching-11",
    "notes": [],
    "reading": "PROVISIONAL",
-   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out",
+   "shared_source_by_level": null
   },
   {
+   "anchor_candidate": null,
    "case": "R-OBS:cross_system_regimes_undeclared",
    "causes": {
     "adapter_construction": "void",
     "shared_constraint": "void",
-    "shared_source": "candidate: both require an observer declaration before comparing. Both playgrounds were built in sessions directed by one operator (Kavik) on 2026-11-11. #257 records its input (SPEC_GPT.md, WORK_ORDER.md, verbatim); the study-aperture playground records none in its tree or its commit messages, so whether it received the same brief is UNDETERMINED from either repository.",
+    "shared_source": "candidate: both require an observer declaration before comparing; UNDETERMINED: ORIGIN_NOTE.md does not say whether the work order named an observer layer",
     "vocabulary_echo": "void"
    },
    "code": "AGREE",
    "id": "XC_R-OBS:cross_system_regimes_undeclared",
    "notes": [],
    "reading": "OPEN",
-   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out"
+   "rule": "a cause is a candidate until something rules the others out; nothing here is ruled out",
+   "shared_source_by_level": null
   }
  ],
  "rows": [
