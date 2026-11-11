@@ -15,6 +15,12 @@ only because the brief says to run the full toolbox.
 | parameter_recovery | 33 of 64 nudges move nothing detectable (card CC_003) | run_11 | 2026-11-10 | specific: parameters that move no output cannot be recovered from outputs; which ones is this tool's question |
 | residual_regression | 33 of 64 nudges move nothing detectable (card CC_003) | run_11 | 2026-11-10 | full toolbox |
 | assumption_block_trace | 33 of 64 nudges move nothing detectable (card CC_003) | run_11 | 2026-11-10 | full toolbox |
+| ablation | same shape across three families (card CC_004) | run_12 | 2026-11-11 | full toolbox |
+| multi_seed_ensemble | same shape across three families (card CC_004) | run_12 | 2026-11-11 | full toolbox |
+| equation_family_swap | same shape across three families (card CC_004) | run_12 | 2026-11-11 | full toolbox |
+| parameter_recovery | same shape across three families (card CC_004) | run_12 | 2026-11-11 | full toolbox |
+| residual_regression | same shape across three families (card CC_004) | run_12 | 2026-11-11 | full toolbox |
+| assumption_block_trace | same shape across three families (card CC_004) | run_12 | 2026-11-11 | full toolbox |
 | multi_seed_ensemble | N misclosure near-identical across seeds (card CC_001) | run_10 | 2026-11-10 | specific: run_10 used hand-written seed loops in place of the tool |
 | ablation | N misclosure near-identical across seeds (card CC_001) | run_10 | 2026-11-10 | specific: run_10 dropped deposition and fire by hand; the dep=0 arm removed both at once |
 | residual_regression | N misclosure near-identical across seeds (card CC_001) | run_10 | 2026-11-10 | full toolbox |

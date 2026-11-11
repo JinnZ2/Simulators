@@ -46,10 +46,15 @@ tool:
   status: "candidate | admitted | rejected | placeholder"
 coincidence_card:
   where: "ledger/toolkit/cards/"
-  slots: "shared_constraint | local_normal_form | statistical_artifact | numerical_artifact | low_dim_projection | none_of_above; each {state: void | supported | ruled_out, evidence}"
+  slots: "shared_constraint | local_normal_form | statistical_artifact | numerical_artifact | low_dim_projection | none_of_above; each {state: void | supported | ruled_out | ABSENT_AT_SENSITIVITY(<value>), evidence, expiry_condition}"
+  slot_state_ABSENT_AT_SENSITIVITY: "a scoped absence: a null result at the stated sensitivity, never a bare absent; counts as ruled out within that sensitivity and the reading carries the scope (work order 2026-11-10 item 1)"
+  expiry_condition: "void | {instrument_class, sensitivity, protocol, provenance}; the instrument whose null result would move a void slot to ABSENT_AT_SENSITIVITY(<sensitivity>). void on a void slot = no exit defined; the checker counts these and does not fail on them yet"
   reading_declared: "OPEN | RESOLVED | PROVISIONAL | CURIOSITY; must equal what coincidence_card.py derives"
   recheck_when: "void | list of toolkit ids; a card that would read RESOLVED reads PROVISIONAL while this is set. The checker fails once every listed tool is built: the re-check is then due"
   branch: "void | branch id; required when the reading is CURIOSITY"
+expiry_registry:
+  where: "ledger/expiry.yaml"
+  entries: "list of {target: component or card id, state: VOID | UNKNOWN | PROVISIONAL, expiry_condition, note}; for entries that are not card slots"
 anchor:
   where: "ledger/anchors/"
   status: "candidate | anchor | failed; anchor only when all four tests read PASS"

@@ -130,6 +130,11 @@ def check(run_tests=False):
             F(f"anchor {aid}: carried by {[h[0] for h in holders]}, between {between}")
         if any(h[1] != holders[0][1] for h in holders):
             F(f"anchor {aid}: copies differ")
+    regimes = [c for c in comps if c.startswith("L5_OBS_")]   # item 3: separate rows, no shared currency
+    for c in regimes:
+        for d in comps[c].get("depends_on", []):
+            if d in regimes:
+                F(f"component {c}: depends_on {d}; observer regimes share no currency")
     homeless = [c for c in comps if not any(c in b.get("components", []) for b in branches.values())]
     for c in homeless:
         F(f"component {c}: in no branch")
@@ -248,6 +253,37 @@ def check(run_tests=False):
         for r in c["runs"]:
             if r not in runs:
                 F(f"card {n}: run {r} missing")
+    # ---- expiry_condition (work order 2026-11-10 item 1): count open slots with no exit; never fail on the count
+    exit_counts = {"none": 0, "incomplete": 0, "complete": 0}
+    no_exit = []
+    for n, c in cards.items():
+        try:
+            for slot, st in cc.exits(c).items():
+                exit_counts[st] += 1
+                if st == "none":
+                    no_exit.append(f"{n}.{slot}")
+        except cc.CardError as e:
+            F(f"card {n}: {e}")
+    ex_path = os.path.join(ROOT, "ledger", "expiry.yaml")
+    if not os.path.exists(ex_path):
+        F("ledger/expiry.yaml missing")
+    else:
+        for e in miniyaml.load(ex_path)["entries"]:
+            for k in ("target", "state", "expiry_condition", "note"):
+                if k not in e:
+                    F(f"expiry.yaml {e.get('target')}: field {k} dropped (write void)")
+            if e.get("target") not in comps and e.get("target") not in cards:
+                F(f"expiry.yaml: target {e.get('target')} is neither a component nor a card")
+            if e.get("state") not in ("VOID", "UNKNOWN", "PROVISIONAL"):
+                F(f"expiry.yaml {e.get('target')}: state {e.get('state')} outside VOID / UNKNOWN / PROVISIONAL")
+            try:
+                st = cc.expiry(e)
+            except cc.CardError as err:
+                F(f"expiry.yaml {e.get('target')}: {err}")
+                continue
+            exit_counts[st] += 1
+            if st == "none":
+                no_exit.append(e["target"])
     ANCHOR = ["id", "status", "git_tag", "git_commit", "tag_state", "run", "seed", "params", "scope", "code", "tests", "known_errors", "open_issues"]
     FOUR = ["budgets_close_within_noise_rule", "holds_across_seeds", "holds_when_each_assumption_nudged",
             "independent_budgets_close_together"]
@@ -283,7 +319,7 @@ def check(run_tests=False):
     return fails, notes, dict(components=count(comps), branches=count(branches), blocks=len(blocks), runs=len(runs), tests=len(tests),
                               tools=len(tools_), tools_placeholder=sum(1 for t in tools_.values() if t.get("status") == "placeholder"),
                               run_status={k: sum(1 for v in run_status.values() if v == k) for k in ("REPORTED", "COMPLETE", "INCOMPLETE")},
-                              needs_rows=len(needs), cards=readings,
+                              needs_rows=len(needs), cards=readings, exits=exit_counts, no_exit=no_exit,
                               anchors={n: a.get("status") for n, a in anchors_.items()})
 
 
@@ -312,6 +348,12 @@ def selftest():
         ("STATUS_MAP entry missing a field", "ledger/STATUS_MAP.md", "- forbidden: treating PROVISIONAL as RESOLVED", "- forbiden: treating PROVISIONAL as RESOLVED", "CARD PROVISIONAL: field 'forbidden' missing"),
         ("STATUS_MAP pair row missing", "ledger/STATUS_MAP.md", "| INCOMPLETE | PROVISIONAL |", "| INCOMPLETE | PROVISIONAL_X |", "INCOMPLETE x PROVISIONAL missing"),
         ("run field dropped", "runs/run_3.md", "seed       :", "sead       :", "field seed dropped"),
+        ("card slot expiry_condition dropped", "ledger/toolkit/cards/CC_002_grid_onto_ode_convergence.yaml",
+         "    expiry_condition: void\n", "", "expiry_condition dropped"),
+        ("bare absent state", "ledger/toolkit/cards/CC_003_nudges_that_move_nothing.yaml",
+         "local_normal_form:\n    state: void", "local_normal_form:\n    state: ABSENT_AT_SENSITIVITY", "not void / supported / ruled_out"),
+        ("observer regimes linked", "ledger/components/L5_OBS_STRATEGY.yaml", "depends_on: []", "depends_on:\n  - L5_OBS_REACTIVITY", "observer regimes share no currency"),
+        ("expiry target unknown", "ledger/expiry.yaml", "target: L0_P_BUDGET", "target: L0_Q_BUDGET", "L0_Q_BUDGET is neither"),
     ]
     bad = 0
     for name, rel, old, new, expect in plants:
@@ -343,6 +385,10 @@ if __name__ == "__main__":
     print(f"blocks {summ['blocks']}  runs {summ['runs']}  tests {summ['tests']}")
     print(f"runs {summ['run_status']}  NEEDS_TOOL rows {summ['needs_rows']}  placeholder tools {summ['tools_placeholder']}")
     print(f"toolkit {summ['tools']} tools  cards {summ['cards']}  anchors {summ['anchors']}")
+    ex = summ["exits"]
+    print(f"open slots by exit: no exit defined {ex['none']}  exit incomplete (sensitivity void) {ex['incomplete']}  exit complete {ex['complete']}  (counted, not failed)")
+    for t in summ["no_exit"]:
+        print("  no exit defined:", t)
     for n in notes:
         print("note:", n)
     for f in fails:

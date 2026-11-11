@@ -1,0 +1,26 @@
+# Exit conditions for VOID / UNKNOWN / PROVISIONAL entries that are not card slots.
+# Work order 2026-11-10 (cross-model audit follow-up, item 1; Kimi confound C7,
+# unfalsifiability drift). Card slots carry expiry_condition on the slot itself.
+# expiry_condition: void | {instrument_class, sensitivity, protocol, provenance}
+# void = "no exit defined". Counted by tools/check_ledger.py, not failed on.
+entries:
+  - target: L0_C_BUDGET
+    state: VOID
+    expiry_condition: void
+    note: "a VOID budget is not represented in the model: no photosynthesis or respiration rows. It is unbuilt, not unmeasured, so no instrument's null result can move it to ABSENT_AT_SENSITIVITY; its exit is construction. Recorded as a type mismatch with the item-1 field, not filled"
+  - target: L0_P_BUDGET
+    state: VOID
+    expiry_condition: void
+    note: "same as L0_C_BUDGET: no P pools or fluxes exist; exit is construction, not measurement"
+  - target: L0_ENERGY_BUDGET
+    state: VOID
+    expiry_condition: void
+    note: "same as L0_C_BUDGET: no energy rows exist; exit is construction, not measurement"
+  - target: CC_001_n_misclosure_seed_invariance
+    state: PROVISIONAL
+    expiry_condition:
+      instrument_class: "multi_seed_ensemble ; ablation (both placeholders, named in the card's recheck_when)"
+      sensitivity: void
+      protocol: "re-run the card's slots with the tools in recheck_when on run_10's seeds and dep=0 arm"
+      provenance: "DERIVED from the card's recheck_when field; recheck_when IS this card's exit. Same shape as expiry_condition (convergent branch, candidate anchor: work order note). Sensitivity not stated anywhere, left void"
+    note: "PROVISIONAL + recheck_when and expiry_condition were written separately and have one shape: a named instrument whose run changes the status. Logged as a candidate anchor, not an anchor"

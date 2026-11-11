@@ -1,7 +1,17 @@
-components {'admitted': 3, 'candidate': 15, 'placeholder': 4, 'rejected': 2}
-branches   {'admitted': 0, 'candidate': 5, 'placeholder': 10, 'rejected': 0}
-blocks 6  runs 11  tests 14
-runs {'REPORTED': 8, 'COMPLETE': 1, 'INCOMPLETE': 2}  NEEDS_TOOL rows 12  placeholder tools 6
-toolkit 9 tools  cards {'PROVISIONAL': 1, 'OPEN': 2}  anchors {'ANCHOR_run9': 'candidate'}
+components {'admitted': 3, 'candidate': 15, 'placeholder': 7, 'rejected': 2}
+branches   {'admitted': 0, 'candidate': 5, 'placeholder': 11, 'rejected': 0}
+blocks 6  runs 12  tests 16
+runs {'REPORTED': 8, 'COMPLETE': 1, 'INCOMPLETE': 3}  NEEDS_TOOL rows 18  placeholder tools 6
+toolkit 10 tools  cards {'PROVISIONAL': 1, 'OPEN': 3}  anchors {'ANCHOR_run9': 'candidate'}
+open slots by exit: no exit defined 9  exit incomplete (sensitivity void) 3  exit complete 0  (counted, not failed)
+  no exit defined: CC_002_grid_onto_ode_convergence.shared_constraint
+  no exit defined: CC_002_grid_onto_ode_convergence.local_normal_form
+  no exit defined: CC_002_grid_onto_ode_convergence.statistical_artifact
+  no exit defined: CC_002_grid_onto_ode_convergence.numerical_artifact
+  no exit defined: CC_002_grid_onto_ode_convergence.low_dim_projection
+  no exit defined: CC_004_open_slot_filled_across_families.local_normal_form
+  no exit defined: L0_C_BUDGET
+  no exit defined: L0_P_BUDGET
+  no exit defined: L0_ENERGY_BUDGET
 note: PyYAML cross-check: ran
 OK (0 failures)

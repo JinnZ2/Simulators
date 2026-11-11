@@ -5,26 +5,33 @@ slots:
   shared_constraint:
     state: void
     evidence: void
+    expiry_condition: void
   local_normal_form:
     state: void
     evidence: void
+    expiry_condition: void
   statistical_artifact:
     state: void
     evidence: void
+    expiry_condition: void
   numerical_artifact:
     state: void
     evidence: void
+    expiry_condition: void
   low_dim_projection:
     state: void
     evidence: void
+    expiry_condition: void
   none_of_above:
     state: void
     evidence: void
+    expiry_condition: void
 reading_declared: OPEN
 recheck_when: void
 branch: void
 runs:
   - run_8
 open_issues:
+  - "expiry_condition void on all five open slots (2026-11-11): no exit defined. The card rests on REPORTED run_8; no instrument's null result can move a slot until run_8 is rebuilt with code in the tree (STATUS_MAP, REPORTED x OPEN)"
   - "no slot can be filled from here: run 8's code is not in this tree"
   - "long-range spotting makes every cell see the mean, which would be shared_constraint by construction; stated as the first thing to check, not as a finding"

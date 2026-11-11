@@ -1,0 +1,41 @@
+id: CC_004_open_slot_filled_across_families
+observation: "three in-scope seed cases from three model families (a, b, c1) share one shape: an instrument fills or reassigns a slot that should have stayed open. d is out of scope, c2 unscoped (run_12)"
+trigger: "result too smooth / adds up but does not sit right: the same shape across three families"
+slots:
+  shared_constraint:
+    state: void
+    evidence: void
+    expiry_condition:
+      instrument_class: "one probe with a known-open slot, run cold on each family with the source known to the evaluator"
+      sensitivity: void
+      protocol: "count fills of the open slot per family against a control prompt where the slot is labelled UNKNOWN in the input"
+      provenance: "PROPOSED: this session, 2026-11-11. No family was run here; sensitivity not stated anywhere, left void"
+  local_normal_form:
+    state: void
+    evidence: void
+    expiry_condition: void
+  statistical_artifact:
+    state: supported
+    evidence: "run_12: n = 3 in scope, one case per family, all chosen by one reader (chat-side session) who reported the shape; every record is second hand. A selection on the shape cannot be separated from the shape at this n"
+    expiry_condition: void
+  numerical_artifact:
+    state: ruled_out
+    evidence: "run_12: the readout is counts of coder-entered fields; no numeric step, solver or rounding is in the path"
+    expiry_condition: void
+  low_dim_projection:
+    state: supported
+    evidence: "run_12: one bit (open_slot_filled) carries three different mechanisms: an omitted source (a), an asserted cause with a named-and-dismissed alternative (b), a denial that reintroduces its frame (c1). The detector itself separates them: it fires on a and c1 and is silent on b"
+    expiry_condition: void
+  none_of_above:
+    state: void
+    evidence: void
+    expiry_condition: void
+reading_declared: OPEN
+recheck_when: void
+branch: void
+runs:
+  - run_12
+open_issues:
+  - "open_slot_filled is entered by the coder, not computed; 3 of 3 in scope carrying it is partly the coder's input"
+  - "local_normal_form has no exit defined: this session cannot name an instrument for it on transcript records"
+  - "the texts for a-d are not in the tree; nothing here moves until they are supplied"
