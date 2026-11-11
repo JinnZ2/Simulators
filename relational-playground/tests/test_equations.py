@@ -128,7 +128,14 @@ class Tools(unittest.TestCase):
         self.assertEqual(len(r["cards"]), 2)                       # a-b and a-c; b-c is one family
         self.assertTrue(all(x == "OPEN" for _, x in r["readings"]))
         card = r["cards"][0]
-        self.assertIn("NOT IN THE SOURCE FILE", card["c_tests"]["C5"])
+        self.assertEqual(card["c_tests"]["C5"], "NOT RUN")
+        self.assertRaises(ValueError, coincidence.run_c5, card, "a", "b", 0.9, 0.2, 0.1, "")
+        self.assertTrue(coincidence.run_c5(card, "a", "b", 0.9, 0.2, 0.1, "fixture")["explained_by_normal_form"])
+        self.assertFalse(coincidence.run_c5(card, "a", "b", 0.9, 0.85, 0.1, "fixture")["explained_by_normal_form"])
+        self.assertTrue(coincidence.run_c6(card, "m", 0.05, "fixture", by_config={"rk4": 1.0, "euler": 1.5})["numerical_artifact"])
+        self.assertIsNone(coincidence.run_c6(card, "m", 0.05, "fixture")["numerical_artifact"])   # no variation supplied: undecidable, not False
+        self.assertRaises(ValueError, coincidence.run_none_of_above, card, dict(c1=True))         # a missing verdict is never inferred
+        self.assertEqual(coincidence.run_none_of_above(card, {k: True for k in ("c1", "c2", "c3", "c4", "c5", "c6")})["status"], "SUPPORTED_OPENS_BRANCH")
         self.assertRaises(ValueError, coincidence.set_slot, card, "none_of_above", "supported", "x")
         self.assertRaises(ValueError, coincidence.set_slot, card, "shared_constraint", "supported", "void")
         for s in coincidence.CAUSES:

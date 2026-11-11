@@ -115,7 +115,7 @@ python3 ../../../../tools/known_answer.py | tail -8                      # repo 
 budgets          a run's closure covers LIVE budgets only; C and energy are VOID in every run so far
 gate             closed-form cases cover parts of each model, not all of it (forest_n: 4 of 13 fluxes)
 observer fields  the meaning given to perturbation / reactivity / strategy is this build's reading (PROPOSED)
-C5, C6           named in the work order; the source file holds C1-C4; not invented
+C5, C6           wired 2026-11-11 from the coincidence.py on branch claude/healing-folder-additions-u5aojl (7852f0e)
 spec phases      1-2 built; 3 (boundary variation) has the tools and one test, no experiment;
                  4-6 not run. The four other experiments/ folders are empty.
 boundary engine  spec section 6 (interior / interface / exterior measurements, hysteresis runs): hysteresis() exists, nothing else
