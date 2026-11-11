@@ -36,3 +36,4 @@ backwards by the session that ran them, not an instruction from the rule's autho
 | parameter_recovery | same shape across three families, first hand (card CC_005) | run_13 | 2026-11-11 | full toolbox |
 | residual_regression | same shape across three families, first hand (card CC_005) | run_13 | 2026-11-11 | full toolbox |
 | assumption_block_trace | same shape across three families, first hand (card CC_005) | run_13 | 2026-11-11 | full toolbox |
+| support_match | detector reads support stated, not support matching; silent on cases a and b first hand (card CC_005) | run_13 | 2026-11-11 | specific: case a states its evidence and the evidence does not support the attribution |

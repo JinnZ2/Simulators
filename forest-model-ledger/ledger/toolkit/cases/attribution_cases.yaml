@@ -18,6 +18,7 @@ cases:
       source: "chat-side read, 2026-11-10"
       text_supplied: "false"
     note: "the deviation is an omission: the source that was present is the one not listed. Recorded as OTHER_SYSTEM because the content was assigned to two models; the human source is the missing alternative"
+    corrected_by: "attribution_cases_firsthand.yaml a_kimi_provenance_map (run_13). First hand, the audit names an 'unseen interlocutor' (line 27) and credits its challenges, so 'the human source is absent' is REFUTED on the text (CLAIM_TABLE FML_035); what the text shows is a source named in prose with no provenance-table row. This record is kept unchanged as the second-hand reading"
   - id: b_gemini_hex_token
     deviation: "a hex token in the input was labelled 'DERIVED: hex token is a hardware bus drop, not user error'"
     first_attribution: INSTRUMENT
