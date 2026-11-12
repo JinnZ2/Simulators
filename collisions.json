@@ -33,13 +33,17 @@
        "sha": "a2c5d99",
        "date": "2026-11-11T14:15:59+00:00",
        "model": "Claude Opus 5.5",
-       "session": "https://claude.ai/code/session_01BSBFWFx2jFzaiK4egn9iaJ"
+       "session": "https://claude.ai/code/session_01BSBFWFx2jFzaiK4egn9iaJ",
+       "role": "rename",
+       "role_basis": "subject: Rename GAP_INSTRUMENT -> GAP_INSTRUMENT_CRASH"
       },
       {
        "sha": "f12fc01",
        "date": "2026-11-11T09:03:08+00:00",
        "model": "Claude Opus 5.5",
-       "session": "https://claude.ai/code/session_01BSBFWLfMGR7yRZZCUHBs9g"
+       "session": "https://claude.ai/code/session_01BSBFWLfMGR7yRZZCUHBs9g",
+       "role": "origin",
+       "role_basis": "adds GAP_INSTRUMENT (crash sense): 22 added lines name it, 0 removed; subject 'crash is GAP_INSTRUMENT'"
       }
      ]
     },
@@ -51,13 +55,17 @@
        "sha": "92cd578",
        "date": "2026-11-11T14:15:24+00:00",
        "model": "Claude Opus 5.5",
-       "session": "https://claude.ai/code/session_01BSBFWFx2jFzaiK4egn9iaJ"
+       "session": "https://claude.ai/code/session_01BSBFWFx2jFzaiK4egn9iaJ",
+       "role": "rename",
+       "role_basis": "subject: Split GAP_INSTRUMENT: UNRECOGNIZED_LABEL vs CRASH"
       },
       {
        "sha": "f603b43",
        "date": "2026-11-11T14:04:17+00:00",
        "model": "Claude Opus 5.5",
-       "session": "https://claude.ai/code/session_01BSBFWFx2jFzaiK4egn9iaJ"
+       "session": "https://claude.ai/code/session_01BSBFWFx2jFzaiK4egn9iaJ",
+       "role": "origin",
+       "role_basis": "adds GAP_INSTRUMENT (unrecognised-label sense): 11 added lines name it, 0 removed"
       }
      ]
     }
@@ -92,109 +100,163 @@
        "sha": "1fc37a8",
        "date": "2026-11-11T12:06:41+00:00",
        "model": "Perplexity (trailer names no model version)",
-       "session": "VOID"
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
       },
       {
        "sha": "12beac8",
        "date": "2026-11-11T11:39:35+00:00",
        "model": "Perplexity (trailer names no model version)",
-       "session": "VOID"
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
       },
       {
        "sha": "c0873df",
        "date": "2026-11-11T11:13:28+00:00",
        "model": "Perplexity (trailer names no model version)",
-       "session": "VOID"
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
       },
       {
        "sha": "e4a9bc9",
        "date": "2026-11-11T10:57:46+00:00",
        "model": "Perplexity (trailer names no model version)",
-       "session": "VOID"
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
       },
       {
        "sha": "bbd7c76",
        "date": "2026-11-11T10:12:02+00:00",
        "model": "Perplexity (trailer names no model version)",
-       "session": "VOID"
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
       },
       {
        "sha": "8f8ae94",
        "date": "2026-11-11T10:11:19+00:00",
        "model": "Perplexity (trailer names no model version)",
-       "session": "VOID"
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
       },
       {
        "sha": "a441494",
        "date": "2026-11-11T09:49:45+00:00",
        "model": "Perplexity (trailer names no model version)",
-       "session": "VOID"
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
       },
       {
        "sha": "e433071",
        "date": "2026-11-11T09:34:00+00:00",
        "model": "Perplexity (trailer names no model version)",
-       "session": "VOID"
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
       },
       {
        "sha": "28efc3e",
        "date": "2026-11-11T09:32:21+00:00",
        "model": "Perplexity (trailer names no model version)",
-       "session": "VOID"
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
       },
       {
        "sha": "e5541f9",
        "date": "2026-11-11T09:28:39+00:00",
        "model": "Perplexity (trailer names no model version)",
-       "session": "VOID"
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
       },
       {
        "sha": "c780f5c",
        "date": "2026-11-11T09:14:42+00:00",
        "model": "Perplexity (trailer names no model version)",
-       "session": "VOID"
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
       },
       {
        "sha": "05b2f1a",
        "date": "2026-11-11T09:02:06+00:00",
        "model": "Perplexity (trailer names no model version)",
-       "session": "VOID"
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
       },
       {
        "sha": "474db2a",
        "date": "2026-11-11T08:47:07+00:00",
        "model": "Perplexity (trailer names no model version)",
-       "session": "VOID"
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
       },
       {
        "sha": "18b8722",
        "date": "2026-11-11T04:31:57+00:00",
        "model": "Perplexity (trailer names no model version)",
-       "session": "VOID"
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
       },
       {
        "sha": "c86d6b9",
        "date": "2026-11-11T04:17:46+00:00",
        "model": "Perplexity (trailer names no model version)",
-       "session": "VOID"
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
       },
       {
        "sha": "ea34f5c",
        "date": "2026-11-11T04:06:29+00:00",
        "model": "Perplexity (trailer names no model version)",
-       "session": "VOID"
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
       },
       {
        "sha": "9587178",
        "date": "2026-11-11T03:53:17+00:00",
        "model": "Perplexity (trailer names no model version)",
-       "session": "VOID"
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
       },
       {
        "sha": "79f402c",
        "date": "2026-11-11T03:33:20+00:00",
        "model": "Perplexity (trailer names no model version)",
-       "session": "VOID"
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
       }
      ]
     },
@@ -206,97 +268,129 @@
        "sha": "02bc605",
        "date": "2026-11-11T20:14:00+00:00",
        "model": "Claude Fable 5.2",
-       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s"
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
       },
       {
        "sha": "a1c04ae",
        "date": "2026-11-11T14:32:19+00:00",
        "model": "Claude Fable 5.2",
-       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s"
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
       },
       {
        "sha": "512f320",
        "date": "2026-11-11T14:21:26+00:00",
        "model": "Claude Fable 5.2",
-       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s"
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
       },
       {
        "sha": "c395a41",
        "date": "2026-11-11T14:17:54+00:00",
        "model": "Claude Fable 5.2",
-       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s"
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
       },
       {
        "sha": "beac98b",
        "date": "2026-11-11T14:05:30+00:00",
        "model": "Claude Fable 5.2",
-       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s"
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
       },
       {
        "sha": "f9a1aac",
        "date": "2026-11-11T08:55:54+00:00",
        "model": "Claude Fable 5.2",
-       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s"
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
       },
       {
        "sha": "2cdfd53",
        "date": "2026-11-11T08:54:37+00:00",
        "model": "Claude Fable 5.2",
-       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s"
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
       },
       {
        "sha": "02dd4c7",
        "date": "2026-11-11T08:53:43+00:00",
        "model": "Claude Fable 5.2",
-       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s"
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
       },
       {
        "sha": "d31383b",
        "date": "2026-11-11T08:51:42+00:00",
        "model": "Claude Fable 5.2",
-       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s"
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
       },
       {
        "sha": "70e546f",
        "date": "2026-11-11T08:51:37+00:00",
        "model": "Claude Fable 5.2",
-       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s"
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
       },
       {
        "sha": "9b8c5e2",
        "date": "2026-11-11T08:50:57+00:00",
        "model": "Claude Fable 5.2",
-       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s"
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
       },
       {
        "sha": "92a8ca9",
        "date": "2026-11-11T08:50:56+00:00",
        "model": "Claude Fable 5.2",
-       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s"
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
       },
       {
        "sha": "decb1a7",
        "date": "2026-11-11T08:48:02+00:00",
        "model": "Claude Fable 5.2",
-       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s"
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
       },
       {
        "sha": "7b06c26",
        "date": "2026-11-11T08:48:02+00:00",
        "model": "Claude Fable 5.2",
-       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s"
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
       },
       {
        "sha": "861b7c5",
        "date": "2026-11-11T08:47:19+00:00",
        "model": "Claude Fable 5.2",
-       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s"
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
       },
       {
        "sha": "62e8fb7",
        "date": "2026-11-11T08:43:46+00:00",
        "model": "Claude Fable 5.2",
-       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s"
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
       }
      ]
     }
@@ -343,7 +437,9 @@
        "sha": "ed275ef",
        "date": "2026-11-11T08:54:31+00:00",
        "model": "Claude Opus 5.5",
-       "session": "https://claude.ai/code/session_01BSBFWFx2jFzaiK4egn9iaJ"
+       "session": "https://claude.ai/code/session_01BSBFWFx2jFzaiK4egn9iaJ",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
       }
      ]
     },
@@ -355,7 +451,9 @@
        "sha": "f12fc01",
        "date": "2026-11-11T09:03:08+00:00",
        "model": "Claude Opus 5.5",
-       "session": "https://claude.ai/code/session_01BSBFWLfMGR7yRZZCUHBs9g"
+       "session": "https://claude.ai/code/session_01BSBFWLfMGR7yRZZCUHBs9g",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
       }
      ]
     },
@@ -367,7 +465,9 @@
        "sha": "f603b43",
        "date": "2026-11-11T14:04:17+00:00",
        "model": "Claude Opus 5.5",
-       "session": "https://claude.ai/code/session_01BSBFWFx2jFzaiK4egn9iaJ"
+       "session": "https://claude.ai/code/session_01BSBFWFx2jFzaiK4egn9iaJ",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
       }
      ]
     }
@@ -394,7 +494,9 @@
        "sha": "614b795",
        "date": "2026-11-11T01:17:29+00:00",
        "model": "Claude Fable 5.2",
-       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s"
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
       }
      ]
     },
@@ -406,19 +508,25 @@
        "sha": "e177780",
        "date": "2026-11-11T00:42:59+00:00",
        "model": "Claude Opus 5.5",
-       "session": "https://claude.ai/code/session_01BSBFWLfMGR7yRZZCUHBs9g"
+       "session": "https://claude.ai/code/session_01BSBFWLfMGR7yRZZCUHBs9g",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
       },
       {
        "sha": "bbe4da9",
        "date": "2026-11-11T00:42:59+00:00",
        "model": "Claude Opus 5.5",
-       "session": "https://claude.ai/code/session_01BSBFWLfMGR7yRZZCUHBs9g"
+       "session": "https://claude.ai/code/session_01BSBFWLfMGR7yRZZCUHBs9g",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
       },
       {
        "sha": "c777c6e",
        "date": "2026-11-11T00:41:06+00:00",
        "model": "Claude Opus 5.5",
-       "session": "https://claude.ai/code/session_01BSBFWLfMGR7yRZZCUHBs9g"
+       "session": "https://claude.ai/code/session_01BSBFWLfMGR7yRZZCUHBs9g",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
       }
      ]
     }
@@ -489,14 +597,39 @@
    "sha": "11033ad",
    "date": "2026-07-04T11:01:15+00:00",
    "model": "Claude Opus 4.7 (1M context)",
-   "commits_before_on_main": 154
+   "commits_before_on_main": 154,
+   "claude_session_start": {
+    "sha": "11033ad",
+    "date": "2026-07-04T11:01:15+00:00",
+    "model": "Claude Opus 4.7 (1M context)"
+   },
+   "untrailered_after_start": {
+    "main_tip": "34eb3cf",
+    "merge": 267,
+    "web_ui": 142,
+    "other": 37,
+    "total": 446
+   }
   },
   {
    "repo": "thermodynamic-accountability-framework",
    "sha": "3410a18",
    "date": "2026-09-23T03:55:11+00:00",
    "model": "Claude Opus 5",
-   "commits_before_on_main": 442
+   "commits_before_on_main": 442,
+   "claude_session_start": {
+    "sha": "3410a18",
+    "date": "2026-09-23T03:55:11+00:00",
+    "model": "Claude Opus 5"
+   },
+   "untrailered_after_start": {
+    "main_tip": "953f1a8",
+    "merge": 14,
+    "web_ui": 1,
+    "other": 0,
+    "total": 15
+   },
+   "note": "bare session-URL line (no 'Claude-Session:' key, no model; author 'Claude') from 56a2ebe, 2026-03-24T13:26:16+00:00; 97 commits on main carry a claude.ai/code URL in any form"
   },
   {
    "repo": "study-aperture",
@@ -504,10 +637,22 @@
    "date": "2026-10-28T06:29:46-05:00",
    "model": "Claude Opus 5.5",
    "commits_before_on_main": 13,
+   "claude_session_start": {
+    "sha": "62858b4",
+    "date": "2026-10-28T06:29:46-05:00",
+    "model": "Claude Opus 5.5"
+   },
+   "untrailered_after_start": {
+    "main_tip": "c26fbd2",
+    "merge": 27,
+    "web_ui": 0,
+    "other": 0,
+    "total": 27
+   },
    "note": "first Perplexity trailer 0384df3, 2026-11-10"
   }
  ],
- "marking_note": "Read from git (first commit on any ref whose Co-Authored-By trailer is present). This is earlier than the ~2026-11 stated in CONDITIONS for all three repos; both are kept. Commits on main after the start that still carry no trailer (merge commits included): Simulators 445, TAF 15, study-aperture 27.",
+ "marking_note": "Read from git on origin/main. Co-Authored-By start and Claude-Session start are listed separately; neither is picked. Untrailered = no Co-Authored-By trailer, counted from the Co-Authored-By start to the main tip named. merge = more than one parent; web-UI = non-merge with committer GitHub <noreply@github.com> (web-flow); other = the rest. Simulators 'other' splits by committer name: Claude 32, JinnZ2 5.",
  "conditions": {
   "as_of": "2026-11-11",
   "items": [

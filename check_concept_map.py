@@ -19,6 +19,7 @@ import json, os, subprocess, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 JSON, MD = os.path.join(HERE, "concept_map.json"), os.path.join(HERE, "CONCEPT_MAP.md")
 CJSON, CMD = os.path.join(HERE, "collisions.json"), os.path.join(HERE, "COLLISIONS.md")
+COMMIT_ROLES = ("origin", "rename", "other", "VOID")
 CFIELDS = ("date", "concept", "agents", "collided", "found", "resolution", "evidence")
 ROLES = ("canonical", "candidate", "copy", "nearest")
 PENDING = "pending cross-run"
@@ -129,15 +130,29 @@ def render_collisions(data):
             o.append("- side %s (%s, %d commit%s, %s .. %s): model %s; session %s" % (
                 sd["label"], sd["repo"], len(cs), "" if len(cs) == 1 else "s", ds[0], ds[-1],
                 " | ".join(sorted({c["model"] for c in cs})), " | ".join(sorted({c["session"] for c in cs}))))
-            o.append("  - commits: " + ", ".join(c["sha"] for c in cs))
+            o.append("  - commits: " + ", ".join("%s %s" % (c["sha"], c["role"]) for c in cs))
+            for c in cs:
+                if c["role"] != "VOID":
+                    o.append("  - %s role %s: %s" % (c["sha"], c["role"], c["role_basis"]))
+            vr = sorted({(k, c[k + "_void_reason"]) for c in cs for k in ("model", "session", "role") if c.get(k + "_void_reason")})
+            for k, why in vr:
+                o.append("  - %s VOID: %s" % (k, why))
         o.append("")
     if "marking_start" in data:
         o += ["## MARKING START", "", "First commit carrying a Co-Authored-By trailer, per repo. Before it: model VOID (not inferred from date or style).", ""]
         for m in data["marking_start"]:
-            o.append("- %s: `%s` %s, %s; %d commits on main before it%s" % (
-                m["repo"], m["sha"], m["date"], m["model"], m["commits_before_on_main"],
-                ("; " + m["note"]) if m.get("note") else ""))
-        o += ["- note: %s" % data["marking_note"], ""]
+            cs = m["claude_session_start"]
+            o.append("- %s, Co-Authored-By start: `%s` %s, %s; %d commits on main before it" % (
+                m["repo"], m["sha"], m["date"], m["model"], m["commits_before_on_main"]))
+            o.append("- %s, Claude-Session start: `%s` %s, %s" % (m["repo"], cs["sha"], cs["date"], cs["model"]))
+            if m.get("note"):
+                o.append("  - note: %s" % m["note"])
+        o += ["", "Untrailered commits after the Co-Authored-By start:", "",
+              "| repo | main tip | merge | non-merge web-UI | non-merge other | total |", "|---|---|---|---|---|---|"]
+        for m in data["marking_start"]:
+            u = m["untrailered_after_start"]
+            o.append("| %s | `%s` | %d | %d | %d | %d |" % (m["repo"], u["main_tip"], u["merge"], u["web_ui"], u["other"], u["total"]))
+        o += ["", "- note: %s" % data["marking_note"], ""]
     if "conditions" in data:
         o += ["## CONDITIONS (as of %s)" % data["conditions"]["as_of"], "", "These affect how to read the record.", ""]
         o += ["- %s" % c for c in data["conditions"]["items"]] + [""]
@@ -250,9 +265,16 @@ def collision_problems(data, md_text):
             if not sd.get("commits"):
                 out.append("collision %d side %d: no commits (write VOID with a void_reason)" % (i + 1, j + 1))
             for c in sd.get("commits") or []:
-                for k in ("sha", "date", "model", "session"):
+                for k in ("sha", "date", "model", "session", "role"):
                     if not c.get(k):
                         out.append("collision %d side %d %s: field %s empty (write VOID)" % (i + 1, j + 1, c.get("sha"), k))
+                if c.get("role") and c["role"] not in COMMIT_ROLES:
+                    out.append("collision %d side %d %s: role %r not in %s" % (i + 1, j + 1, c.get("sha"), c["role"], COMMIT_ROLES))
+                if c.get("role") not in (None, "", "VOID") and not c.get("role_basis"):
+                    out.append("collision %d side %d %s: role with no role_basis" % (i + 1, j + 1, c.get("sha")))
+                for k in ("model", "session", "role"):
+                    if c.get(k) == "VOID" and not c.get(k + "_void_reason"):
+                        out.append("collision %d side %d %s: %s VOID with no %s_void_reason" % (i + 1, j + 1, c.get("sha"), k, k))
     if md_text != render_collisions(data):
         out.append("COLLISIONS.md does not match collisions.json (run --write)")
     return out
@@ -318,7 +340,11 @@ def selftest(data):
     for name, mut in (("collision field empty", lambda d: d["rows"][0].update(resolution="")),
                       ("COLLISIONS.md out of date", lambda d: d["rows"].pop()),
                       ("side model empty", lambda d: d["rows"][0]["sides"][0]["commits"][0].update(model="")),
-                      ("VOID side with no reason", lambda d: d["rows"][-1]["sides"][0].update(void_reason=""))):
+                      ("VOID side with no reason", lambda d: d["rows"][-1]["sides"][0].update(void_reason="")),
+                      ("role blank", lambda d: d["rows"][0]["sides"][0]["commits"][0].update(role="")),
+                      ("role outside vocabulary", lambda d: d["rows"][0]["sides"][0]["commits"][0].update(role="author")),
+                      ("role VOID with no reason", lambda d: d["rows"][1]["sides"][0]["commits"][0].pop("role_void_reason")),
+                      ("session VOID with no reason", lambda d: d["rows"][1]["sides"][0]["commits"][0].pop("session_void_reason"))):
         d = _c.deepcopy(cd); base_md = render_collisions(cd); mut(d)
         hit = bool(collision_problems(d, base_md if "out of date" in name else render_collisions(d)))
         n += 1; bad += 0 if hit else 1
