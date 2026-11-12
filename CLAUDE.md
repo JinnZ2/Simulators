@@ -378,6 +378,7 @@ last three; read in order:
 - `gap-instruments/` — evidence notation for coordination systems, physical limits, discrepancies and abstentions; MEASURED/ESTIMATED/UNKNOWN/GAP per field, no verdict; two supplied files verbatim in `source/`, eight marked fixes in the working copy, mirrored byte-identical in `tools/` here and in method-layer
 - `extraction-chain-join/` — the extraction-money-power-emissions chain, G1..G7 as instruments not verdicts; order RECONSTRUCTED from the session summary; coverage on every reading, NO_PATTERN added to the four branches, end-to-end effect refused; all CONSTRUCTED
 - `forest-model-ledger/` — provenance-tracked ledger of forest model components *(non-stdlib: numpy)*; 24 components (3 admitted / 15 candidate / 4 placeholder / 2 rejected), N and water budgets CLOSED on a rebuilt run-6 base, C / P / energy VOID never closed; runs 1-5 logged as reported; runs 6-8 are the original chat-side code filed 2026-11-11 (each reproduces its log; the ODE/grid ratio is stated by drought, the spotting convergence stays a candidate); admission needs a passing test; run 10 traced the too-smooth N misclosure to the deposition counter's roundoff, run 9 is a CANDIDATE anchor (1 of 4 anchor tests PASS, 3 PARTIAL), run 11 nudged 13 of 25 assumptions (no runaway with the light ceiling lifted; 33 of 64 nudges moved nothing detectable, card OPEN), all 7 of the brief's tools built and gated, 4 pass a held-out gate and 3 are back to PROVISIONAL (not retuned); equation_family_swap runs on the relational-playground engine (run 21), which has no ledger component under a second family; the checker's owed rule is behind a switch awaiting Kavik. **Read `forest-model-ledger/CLAUDE.md` first: it carries the METHOD BRIEF (anchor / branch / return loop, full-toolbox triggers), which governs before the work order**
+- `relational-playground/` — equation-substitution laboratory to a GPT spec (verbatim in `SPEC_GPT.md`) plus eight method additions, one commit each: L0 budget gate, anchor loop, known-answer gate (FP 0 / TP 1), expiry on unknowns, claim tags, observer regimes, percolation and branching families, coincidence card. No ranking, no boundary auto-selection, unknowns raise. First experiment `forest_fire_regime`: the port of forest run 9 meets 9 of 9 pre-registered targets (fires 80, N misclosure -5.062e-11); a rebuild of runs 7-8 shows 2 of 4 logged features; the original run 6-8 code (arrived 2026-11-11) is ported draw for draw through a stdlib replay of numpy's generator and meets 8 of 8 targets, and over 20 seeds the spot-0.2 convergence holds on 3 / 7 / 12 of 20 at drought 0.5 / 0.6 / 0.7, so it stays a candidate; parts 2 and 3 INCOMPLETE under the gate rule (`NEEDS_TOOL.md`). Read its README first
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks; `narrative_check.py` (12 structural markers, structure never a verdict; moved 2026-11-02 from AI-Consciousness-Sensors, mirrored in method-layer)
 
@@ -14258,6 +14259,12 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   appends a dated "Finds-by (ALIAS_PROPOSED)" section to each tool's README.
   It only appends; it creates a README only where none exists. The report is
   `REPORT_WO_FINDER.md`.
+- `CONCEPT_MAP.md` — one block per concept that has more than one home across repos
+  (Simulators, study-aperture, TAF): home, other copies, builder, status, who decided.
+  Generated from `concept_map.json`; `python3 check_concept_map.py` fails on a path that
+  no longer exists or a moved pinned ref. No code is moved by it.
+  `COLLISIONS.md` (from `collisions.json`, same script) keeps one block per multi-agent
+  collision: date, concept, agents, what collided, how found, resolution or OPEN, evidence.
 - `tail-check/` — part 3b of the same order. It reads an inference about a
   person as SAID (a gated literal span of a user turn, via `tools/sourced.py`,
   imported), FILLED or UNRATED. When the inference is FILLED and the person's

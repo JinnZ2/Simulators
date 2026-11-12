@@ -1,0 +1,77 @@
+PART 1  port of run 9 (the in-tree rebuild of run 6)
+  replay_base              COMPLETE   fires  80   N CLOSED -5.062e-11   water CLOSED -3.426e-13
+  replay_no_fire           COMPLETE   fires   0   N CLOSED -5.075e-11   water CLOSED -2.209e-13
+  replay_planted_leak_0.3  INCOMPLETE fires  59   N LEAK   -7.264e+01   water CLOSED -2.645e-13
+  native_seed0             COMPLETE   fires  80   N CLOSED -4.940e-11   water CLOSED -1.520e-12
+  final pools (replay_base): S 0.3715  T 36.6196  G 0.0000  F 0.9468  Lt 3.6619  Lg 1.0482  W 0.6393
+  boundary audit [N]: in deposition 300 ; out fire_volatilisation 270.741, leaching 5.61138
+  boundary audit [water]: in precipitation 297.044 ; out drainage 153.736, evapotranspiration 143.668
+  targets (PREREG):
+    MET     N budget CLOSED, |misclosure| < 1e-9   got -5.061906449554954e-11
+    MET     water budget CLOSED   got -3.426148253993233e-13
+    MET     fires = 80   got 80
+    MET     final pools match run 9 to 4 decimals   got {'S': 0.3715, 'T': 36.6196, 'G': 0.0, 'F': 0.9468, 'Lt': 3.6619, 'Lg': 1.0482, 'W': 0.6393}
+    MET     N misclosure within a factor 10 of run 9's -5.062e-11 in size   got -5.061906449554954e-11
+    MET     planted leak reads LEAK, run INCOMPLETE   got -72.64300773769071
+    MET     planted leak: 59 fires, misclosure -72.64   got (59, -72.64300773769071)
+    MET     no fire: 0 fires, N CLOSED   got -5.0746962187986355e-11
+    MET     native stream: both budgets CLOSED   got (80, -4.9396930990042165e-11)
+  run 6 as logged: 47 fires, misclosure ~1e-9: REPORTED, code void; not reproduced here and not a target (PREREG)
+  model trust: TRUSTED: 12 clean draws, 12 planted (leak / coef alternating); FP 0.00 TP 1.00
+
+PART 2  rebuild of runs 7-8 (one design, fixed in PREREG.md; L 64, 40 replicates, window 0.05)
+  spot_0.00
+    drought  grid_mean  grid_var   ode      ode/grid   gap     in_window
+     0.10    0.0017     0.00000   0.0026       1.5   0.0009  yes
+     0.20    0.0041     0.00000   0.0134       3.3   0.0093  yes
+     0.30    0.0087     0.00001   0.1092      12.5   0.1005  no
+     0.40    0.0176     0.00003   0.2619      14.9   0.2443  no
+     0.50    0.0426     0.00025   0.4010       9.4   0.3584  no
+     0.55    0.1022     0.00367   0.4661       4.6   0.3639  no
+     0.60    0.3508     0.01765   0.5288       1.5   0.1779  no
+     0.65    0.5968     0.00041   0.5895       1.0   0.0073  yes
+     0.70    0.6793     0.00012   0.6485       1.0   0.0308  yes
+     0.80    0.7953     0.00004   0.7627       1.0   0.0326  yes
+     0.90    0.8985     0.00002   0.8730       1.0   0.0254  yes
+  spot_0.05
+    drought  grid_mean  grid_var   ode      ode/grid   gap     in_window
+     0.10    0.0017     0.00000   0.0026       1.5   0.0009  yes
+     0.20    0.0042     0.00000   0.0139       3.3   0.0097  yes
+     0.30    0.0093     0.00001   0.1136      12.2   0.1042  no
+     0.40    0.0218     0.00008   0.2658      12.2   0.2440  no
+     0.50    0.1315     0.00673   0.4043       3.1   0.2728  no
+     0.55    0.3427     0.00779   0.4690       1.4   0.1263  no
+     0.60    0.5185     0.00064   0.5313       1.0   0.0128  yes
+     0.65    0.6150     0.00020   0.5918       1.0   0.0232  yes
+     0.70    0.6843     0.00008   0.6506       1.0   0.0338  yes
+     0.80    0.7957     0.00003   0.7644       1.0   0.0313  yes
+     0.90    0.8985     0.00002   0.8743       1.0   0.0242  yes
+  spot_0.20
+    drought  grid_mean  grid_var   ode      ode/grid   gap     in_window
+     0.10    0.0017     0.00000   0.0027       1.6   0.0009  yes
+     0.20    0.0044     0.00000   0.0156       3.5   0.0112  yes
+     0.30    0.0120     0.00002   0.1261      10.6   0.1142  no
+     0.40    0.0669     0.00130   0.2770       4.1   0.2101  no
+     0.50    0.3606     0.00088   0.4132       1.1   0.0526  no
+     0.55    0.4731     0.00023   0.4770       1.0   0.0038  yes
+     0.60    0.5584     0.00012   0.5385       1.0   0.0200  yes
+     0.65    0.6290     0.00006   0.5981       1.0   0.0309  yes
+     0.70    0.6891     0.00005   0.6562       1.0   0.0329  yes
+     0.80    0.7961     0.00003   0.7688       1.0   0.0272  yes
+     0.90    0.8985     0.00002   0.8778       1.0   0.0207  yes
+  logged features, read by the rules fixed in PREREG.md:
+    F1 DOES NOT APPEAR  ODE overpredicts mid-drought up to ~60x
+       rule: max ODE/grid over d 0.3..0.6 in 30..120
+       got:  max ratio 14.9 at d = 0.40
+    F2 APPEARS          grid threshold ~0.6-0.7 with variance spike
+       rule: steepest interval inside 0.55..0.7 AND variance peak inside 0.55..0.7
+       got:  steepest (0.55, 0.6), variance peak at 0.6
+    F3 DOES NOT APPEAR  spot 0.2 converges grid onto ODE at drought >= 0.5
+       rule: inside window at every d >= 0.5 AND outside at some d < 0.5
+       got:  inside at [0.55, 0.6, 0.65, 0.7, 0.8, 0.9] of [0.5, 0.55, 0.6, 0.65, 0.7, 0.8, 0.9]; outside below 0.5 at [0.3, 0.4]
+    F4 APPEARS          5% spotting drops threshold to ~0.5
+       rule: steepest interval (spot 0.05) has an end at 0.5 or lies inside 0.4..0.55
+       got:  steepest (0.5, 0.55)
+  runs not COMPLETE or still burning at the last step: 0
+  coincidence cards opened by cross-family agreement: 21, all ['OPEN']
+  no model is ranked; applicability records are in out/part2.json

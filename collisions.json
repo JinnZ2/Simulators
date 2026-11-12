@@ -1,0 +1,705 @@
+{
+ "as_of": "2026-11-11",
+ "rows": [
+  {
+   "date": "2026-11-11",
+   "concept": "GAP_INSTRUMENT",
+   "agents": "two Claude Code sessions",
+   "collided": "one status name, two meanings (an instrument crash; a label the instrument does not recognise)",
+   "found": "chat-side (Kavik + Claude), comparing the report of TAF PR 82 (GAP_INSTRUMENT = a module raised) with the report of PR 84 (= a label outside the severity table). PR tips dated 2026-11-11T14:15:59Z (82, a2c5d99) and 2026-11-11T14:15:24Z (84, 92cd578); the report texts themselves are not in a repo",
+   "resolution": "split into GAP_INSTRUMENT_CRASH / GAP_INSTRUMENT_UNRECOGNIZED_LABEL; both names are on unmerged branches only",
+   "evidence": [
+    "https://github.com/JinnZ2/thermodynamic-accountability-framework/pull/82",
+    "https://github.com/JinnZ2/thermodynamic-accountability-framework/pull/85",
+    {
+     "repo": "thermodynamic-accountability-framework",
+     "path": "calibration",
+     "ref": "origin/claude/unknown-axis-followup-2",
+     "tip_contains": "a2c5d99"
+    },
+    {
+     "repo": "thermodynamic-accountability-framework",
+     "path": "calibration",
+     "ref": "origin/archive/not-determinable-reason",
+     "tip_contains": "92cd578"
+    }
+   ],
+   "sides": [
+    {
+     "label": "TAF PR 82",
+     "repo": "thermodynamic-accountability-framework",
+     "commits": [
+      {
+       "sha": "a2c5d99",
+       "date": "2026-11-11T14:15:59+00:00",
+       "model": "Claude Opus 5.5",
+       "session": "https://claude.ai/code/session_01BSBFWFx2jFzaiK4egn9iaJ",
+       "role": "rename",
+       "role_basis": "subject: Rename GAP_INSTRUMENT -> GAP_INSTRUMENT_CRASH"
+      },
+      {
+       "sha": "f12fc01",
+       "date": "2026-11-11T09:03:08+00:00",
+       "model": "Claude Opus 5.5",
+       "session": "https://claude.ai/code/session_01BSBFWLfMGR7yRZZCUHBs9g",
+       "role": "origin",
+       "role_basis": "adds GAP_INSTRUMENT (crash sense): 22 added lines name it, 0 removed; subject 'crash is GAP_INSTRUMENT'"
+      }
+     ]
+    },
+    {
+     "label": "TAF PR 84",
+     "repo": "thermodynamic-accountability-framework",
+     "commits": [
+      {
+       "sha": "92cd578",
+       "date": "2026-11-11T14:15:24+00:00",
+       "model": "Claude Opus 5.5",
+       "session": "https://claude.ai/code/session_01BSBFWFx2jFzaiK4egn9iaJ",
+       "role": "rename",
+       "role_basis": "subject: Split GAP_INSTRUMENT: UNRECOGNIZED_LABEL vs CRASH"
+      },
+      {
+       "sha": "f603b43",
+       "date": "2026-11-11T14:04:17+00:00",
+       "model": "Claude Opus 5.5",
+       "session": "https://claude.ai/code/session_01BSBFWFx2jFzaiK4egn9iaJ",
+       "role": "origin",
+       "role_basis": "adds GAP_INSTRUMENT (unrecognised-label sense): 11 added lines name it, 0 removed"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "date": "2026-11-10/11",
+   "concept": "playground",
+   "agents": "Perplexity (study-aperture) / Claude Code (Simulators)",
+   "collided": "two builds of one equation-substitution laboratory from related specs, different organisation",
+   "found": "concept map survey, 2026-11-11",
+   "resolution": "OPEN: cross-run pending",
+   "evidence": [
+    "https://github.com/JinnZ2/Simulators/pull/257",
+    {
+     "repo": "study-aperture",
+     "path": "experimental/playground",
+     "ref": "origin/main"
+    },
+    {
+     "repo": "Simulators",
+     "path": "CONCEPT_MAP.md",
+     "ref": null
+    }
+   ],
+   "sides": [
+    {
+     "label": "study-aperture experimental/playground",
+     "repo": "study-aperture",
+     "commits": [
+      {
+       "sha": "1fc37a8",
+       "date": "2026-11-11T12:06:41+00:00",
+       "model": "Perplexity (trailer names no model version)",
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
+      },
+      {
+       "sha": "12beac8",
+       "date": "2026-11-11T11:39:35+00:00",
+       "model": "Perplexity (trailer names no model version)",
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
+      },
+      {
+       "sha": "c0873df",
+       "date": "2026-11-11T11:13:28+00:00",
+       "model": "Perplexity (trailer names no model version)",
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
+      },
+      {
+       "sha": "e4a9bc9",
+       "date": "2026-11-11T10:57:46+00:00",
+       "model": "Perplexity (trailer names no model version)",
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
+      },
+      {
+       "sha": "bbd7c76",
+       "date": "2026-11-11T10:12:02+00:00",
+       "model": "Perplexity (trailer names no model version)",
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
+      },
+      {
+       "sha": "8f8ae94",
+       "date": "2026-11-11T10:11:19+00:00",
+       "model": "Perplexity (trailer names no model version)",
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
+      },
+      {
+       "sha": "a441494",
+       "date": "2026-11-11T09:49:45+00:00",
+       "model": "Perplexity (trailer names no model version)",
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
+      },
+      {
+       "sha": "e433071",
+       "date": "2026-11-11T09:34:00+00:00",
+       "model": "Perplexity (trailer names no model version)",
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
+      },
+      {
+       "sha": "28efc3e",
+       "date": "2026-11-11T09:32:21+00:00",
+       "model": "Perplexity (trailer names no model version)",
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
+      },
+      {
+       "sha": "e5541f9",
+       "date": "2026-11-11T09:28:39+00:00",
+       "model": "Perplexity (trailer names no model version)",
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
+      },
+      {
+       "sha": "c780f5c",
+       "date": "2026-11-11T09:14:42+00:00",
+       "model": "Perplexity (trailer names no model version)",
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
+      },
+      {
+       "sha": "05b2f1a",
+       "date": "2026-11-11T09:02:06+00:00",
+       "model": "Perplexity (trailer names no model version)",
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
+      },
+      {
+       "sha": "474db2a",
+       "date": "2026-11-11T08:47:07+00:00",
+       "model": "Perplexity (trailer names no model version)",
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
+      },
+      {
+       "sha": "18b8722",
+       "date": "2026-11-11T04:31:57+00:00",
+       "model": "Perplexity (trailer names no model version)",
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
+      },
+      {
+       "sha": "c86d6b9",
+       "date": "2026-11-11T04:17:46+00:00",
+       "model": "Perplexity (trailer names no model version)",
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
+      },
+      {
+       "sha": "ea34f5c",
+       "date": "2026-11-11T04:06:29+00:00",
+       "model": "Perplexity (trailer names no model version)",
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
+      },
+      {
+       "sha": "9587178",
+       "date": "2026-11-11T03:53:17+00:00",
+       "model": "Perplexity (trailer names no model version)",
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
+      },
+      {
+       "sha": "79f402c",
+       "date": "2026-11-11T03:33:20+00:00",
+       "model": "Perplexity (trailer names no model version)",
+       "session": "VOID",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)",
+       "session_void_reason": "no Claude-Session line; channel: non-merge commit, committer is the owner's GitHub account (users.noreply), not web-flow; trailer names Perplexity only"
+      }
+     ]
+    },
+    {
+     "label": "Simulators PR 257 relational-playground/",
+     "repo": "Simulators",
+     "commits": [
+      {
+       "sha": "02bc605",
+       "date": "2026-11-11T20:14:00+00:00",
+       "model": "Claude Fable 5.2",
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
+      },
+      {
+       "sha": "a1c04ae",
+       "date": "2026-11-11T14:32:19+00:00",
+       "model": "Claude Fable 5.2",
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
+      },
+      {
+       "sha": "512f320",
+       "date": "2026-11-11T14:21:26+00:00",
+       "model": "Claude Fable 5.2",
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
+      },
+      {
+       "sha": "c395a41",
+       "date": "2026-11-11T14:17:54+00:00",
+       "model": "Claude Fable 5.2",
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
+      },
+      {
+       "sha": "beac98b",
+       "date": "2026-11-11T14:05:30+00:00",
+       "model": "Claude Fable 5.2",
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
+      },
+      {
+       "sha": "f9a1aac",
+       "date": "2026-11-11T08:55:54+00:00",
+       "model": "Claude Fable 5.2",
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
+      },
+      {
+       "sha": "2cdfd53",
+       "date": "2026-11-11T08:54:37+00:00",
+       "model": "Claude Fable 5.2",
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
+      },
+      {
+       "sha": "02dd4c7",
+       "date": "2026-11-11T08:53:43+00:00",
+       "model": "Claude Fable 5.2",
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
+      },
+      {
+       "sha": "d31383b",
+       "date": "2026-11-11T08:51:42+00:00",
+       "model": "Claude Fable 5.2",
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
+      },
+      {
+       "sha": "70e546f",
+       "date": "2026-11-11T08:51:37+00:00",
+       "model": "Claude Fable 5.2",
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
+      },
+      {
+       "sha": "9b8c5e2",
+       "date": "2026-11-11T08:50:57+00:00",
+       "model": "Claude Fable 5.2",
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
+      },
+      {
+       "sha": "92a8ca9",
+       "date": "2026-11-11T08:50:56+00:00",
+       "model": "Claude Fable 5.2",
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
+      },
+      {
+       "sha": "decb1a7",
+       "date": "2026-11-11T08:48:02+00:00",
+       "model": "Claude Fable 5.2",
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
+      },
+      {
+       "sha": "7b06c26",
+       "date": "2026-11-11T08:48:02+00:00",
+       "model": "Claude Fable 5.2",
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
+      },
+      {
+       "sha": "861b7c5",
+       "date": "2026-11-11T08:47:19+00:00",
+       "model": "Claude Fable 5.2",
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
+      },
+      {
+       "sha": "62e8fb7",
+       "date": "2026-11-11T08:43:46+00:00",
+       "model": "Claude Fable 5.2",
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "date": "2026-11-11",
+   "concept": "pipeline aggregation",
+   "agents": "three Claude Code sessions (three TAF PR branches)",
+   "collided": "calibration/pipeline.py score aggregation changed three ways: PR 81 sets a no-score result to (None, Band.UNKNOWN) inline; PR 82 adds _aggregate returning 2 values, (None, NOT_MEASURED) with no module report; PR 84 adds _aggregate returning 3 values, the third a not_measured_reason",
+   "found": "chat-side, TAF cleanup phase 1 inventory, trial merge of stack tips (TAF_CLEANUP_PHASE1_INVENTORY.md, not in the TAF checkout read here); the three diffs of calibration/pipeline.py were then read in this session on 2026-11-11 and match",
+   "resolution": "picked 2026-11-11 (Kavik): three-value (score, band, reason) from PR 84 plus the no-score -> UNKNOWN rule from PR 81, folded on the PR 85 branch (65bb724); 80/82/84 closed, branches kept under archive/",
+   "note": "Diffs read at PR tips ed275ef (81), a2c5d99 (82), 92cd578 (84). PR 81's title does not name the pipeline; the change is in its diff.",
+   "evidence": [
+    "https://github.com/JinnZ2/thermodynamic-accountability-framework/pull/81",
+    "https://github.com/JinnZ2/thermodynamic-accountability-framework/pull/82",
+    "https://github.com/JinnZ2/thermodynamic-accountability-framework/pull/84",
+    {
+     "repo": "thermodynamic-accountability-framework",
+     "path": "calibration/pipeline.py",
+     "ref": "origin/archive/silent-fill-register",
+     "tip_contains": "ed275ef"
+    },
+    {
+     "repo": "thermodynamic-accountability-framework",
+     "path": "calibration/pipeline.py",
+     "ref": "origin/archive/unknown-axis-followup",
+     "tip_contains": "a2c5d99"
+    },
+    {
+     "repo": "thermodynamic-accountability-framework",
+     "path": "calibration/pipeline.py",
+     "ref": "origin/archive/not-determinable-reason",
+     "tip_contains": "92cd578"
+    },
+    "TAF_CLEANUP_PHASE1_INVENTORY.md: NOT COMMITTED as of 2026-11-11 (written to a cleanup-session scratchpad); to be linked at TAF docs/cleanup/ when it lands"
+   ],
+   "sides": [
+    {
+     "label": "TAF PR 81",
+     "repo": "thermodynamic-accountability-framework",
+     "commits": [
+      {
+       "sha": "ed275ef",
+       "date": "2026-11-11T08:54:31+00:00",
+       "model": "Claude Opus 5.5",
+       "session": "https://claude.ai/code/session_01BSBFWFx2jFzaiK4egn9iaJ",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
+      }
+     ]
+    },
+    {
+     "label": "TAF PR 82",
+     "repo": "thermodynamic-accountability-framework",
+     "commits": [
+      {
+       "sha": "f12fc01",
+       "date": "2026-11-11T09:03:08+00:00",
+       "model": "Claude Opus 5.5",
+       "session": "https://claude.ai/code/session_01BSBFWLfMGR7yRZZCUHBs9g",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
+      }
+     ]
+    },
+    {
+     "label": "TAF PR 84",
+     "repo": "thermodynamic-accountability-framework",
+     "commits": [
+      {
+       "sha": "f603b43",
+       "date": "2026-11-11T14:04:17+00:00",
+       "model": "Claude Opus 5.5",
+       "session": "https://claude.ai/code/session_01BSBFWFx2jFzaiK4egn9iaJ",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "date": "2026-11-11",
+   "concept": "expiry register",
+   "agents": "two sessions, as stated",
+   "collided": "two registers of the same slots under different counting rules: PR 77 value rule, PR 78 token rule",
+   "found": "PR 79 reconciles them",
+   "resolution": "both kept, split coded (PR 79 merged; 78 merged; 77 closed unmerged)",
+   "evidence": [
+    "https://github.com/JinnZ2/thermodynamic-accountability-framework/pull/77",
+    "https://github.com/JinnZ2/thermodynamic-accountability-framework/pull/78",
+    "https://github.com/JinnZ2/thermodynamic-accountability-framework/pull/79"
+   ],
+   "sides": [
+    {
+     "label": "TAF PR 77",
+     "repo": "thermodynamic-accountability-framework",
+     "commits": [
+      {
+       "sha": "614b795",
+       "date": "2026-11-11T01:17:29+00:00",
+       "model": "Claude Fable 5.2",
+       "session": "https://claude.ai/code/session_01BSBFWG4whgMfkPUeexTM9s",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
+      }
+     ]
+    },
+    {
+     "label": "TAF PR 78",
+     "repo": "thermodynamic-accountability-framework",
+     "commits": [
+      {
+       "sha": "e177780",
+       "date": "2026-11-11T00:42:59+00:00",
+       "model": "Claude Opus 5.5",
+       "session": "https://claude.ai/code/session_01BSBFWLfMGR7yRZZCUHBs9g",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
+      },
+      {
+       "sha": "bbe4da9",
+       "date": "2026-11-11T00:42:59+00:00",
+       "model": "Claude Opus 5.5",
+       "session": "https://claude.ai/code/session_01BSBFWLfMGR7yRZZCUHBs9g",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
+      },
+      {
+       "sha": "c777c6e",
+       "date": "2026-11-11T00:41:06+00:00",
+       "model": "Claude Opus 5.5",
+       "session": "https://claude.ai/code/session_01BSBFWLfMGR7yRZZCUHBs9g",
+       "role": "VOID",
+       "role_void_reason": "not coded: only GAP_INSTRUMENT was filled from git (2026-11-12 instruction)"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "date": "2026-11-10/11",
+   "concept": "provenance credit",
+   "agents": "Kimi / Kavik / DeepSeek",
+   "collided": "Kimi audit section 1.1 'Provenance map of the dialogue' assigns P11 (physics common denominator) to DeepSeek. In the dialogue DeepSeek's reply opens 'You're right, and the correction matters' and says 'Your physics point is the strongest substrate-neutral anchor available', which places the point with the human. The human source has no row in the table; the section's prose names an 'unseen interlocutor'",
+   "found": "chat-side read of the pinned texts, then a first-hand check by the forest-ledger session (FML_035); the quoted lines were re-read in this session on 2026-11-11 (audit table line 43; chat paste lines 425 and 436)",
+   "resolution": "recorded; uncorrected in source",
+   "note": "Refs point at claude/forest-toolkit-build, which contains the PR 256 tip d402fa8; both text files are byte-identical there and match their MANIFEST sha256. 4cf10ec is an earlier reported tip, unresolved in this checkout. No tag: tag pushes are refused from sessions, so by Kavik's decision (2026-11-11) the branch archive/pr256-tip holds the old PR 256 tip d402fa8; pushed and read back at that sha.",
+   "evidence": [
+    "https://github.com/JinnZ2/Simulators/pull/256",
+    {
+     "repo": "Simulators",
+     "path": "forest-model-ledger/ledger/toolkit/cases/texts/kimi_substrate_neutral_intelligence_audit.md",
+     "ref": "origin/claude/forest-toolkit-build",
+     "tip_contains": "d402fa8",
+     "sha256": "86945968c31d3c3bbf289ed78ab918d8d7af6a2d978df22b6f0a6a5b9a60b7c8"
+    },
+    {
+     "repo": "Simulators",
+     "path": "forest-model-ledger/ledger/toolkit/cases/texts/chat_paste_2026-11-10.txt",
+     "ref": "origin/claude/forest-toolkit-build",
+     "tip_contains": "d402fa8",
+     "sha256": "42a206e2603b814f89fd694e31c566c90a07bf606f28d89802149f33fc0444b4"
+    },
+    {
+     "repo": "Simulators",
+     "path": "forest-model-ledger/CLAIM_TABLE.md",
+     "ref": "origin/claude/forest-toolkit-build",
+     "tip_contains": "d402fa8"
+    },
+    {
+     "repo": "Simulators",
+     "path": "forest-model-ledger/ledger/toolkit/cases/texts/MANIFEST.yaml",
+     "ref": "origin/archive/pr256-tip",
+     "tip": "d402fa8eb084eae6b2226e1e5193d1a648c6757f"
+    }
+   ],
+   "sides": [
+    {
+     "label": "Kimi",
+     "repo": "VOID",
+     "commits": "VOID",
+     "void_reason": "VOID: this side is a document author, not a commit; there is no trailer to read"
+    },
+    {
+     "label": "Kavik",
+     "repo": "VOID",
+     "commits": "VOID",
+     "void_reason": "VOID: this side is a document author, not a commit; there is no trailer to read"
+    },
+    {
+     "label": "DeepSeek",
+     "repo": "VOID",
+     "commits": "VOID",
+     "void_reason": "VOID: this side is a document author, not a commit; there is no trailer to read"
+    }
+   ]
+  }
+ ],
+ "marking_start": [
+  {
+   "repo": "Simulators",
+   "commits_before_on_main": 154,
+   "untrailered_after_start": {
+    "main_tip": "34eb3cf",
+    "merge": 267,
+    "web_ui": 142,
+    "other": 37,
+    "total": 446
+   },
+   "forms": {
+    "a": {
+     "sha": "11033ad",
+     "date": "2026-07-04T11:01:15+00:00",
+     "agent": "Claude",
+     "model": "Opus 4.7 (1M context)"
+    },
+    "b": {
+     "sha": "11033ad",
+     "date": "2026-07-04T11:01:15+00:00"
+    },
+    "c": {
+     "sha": "VOID",
+     "void_reason": "no commit on main carries a claude.ai/code/session URL outside a 'Claude-Session:' key (main tip 34eb3cf)"
+    },
+    "d": {
+     "sha": "VOID",
+     "void_reason": "no Co-Authored-By trailer on main names a non-Claude model agent (main tip 34eb3cf); the only non-Claude Co-Authored-By value is JinnZ2 (4 commits, users.noreply address), a person, not a model"
+    }
+   }
+  },
+  {
+   "repo": "thermodynamic-accountability-framework",
+   "commits_before_on_main": 442,
+   "untrailered_after_start": {
+    "main_tip": "953f1a8",
+    "merge": 14,
+    "web_ui": 1,
+    "other": 0,
+    "total": 15
+   },
+   "forms": {
+    "a": {
+     "sha": "3410a18",
+     "date": "2026-09-23T03:55:11+00:00",
+     "agent": "Claude",
+     "model": "Opus 5"
+    },
+    "b": {
+     "sha": "3410a18",
+     "date": "2026-09-23T03:55:11+00:00"
+    },
+    "c": {
+     "sha": "56a2ebe",
+     "date": "2026-03-24T13:26:16+00:00",
+     "author": "Claude"
+    },
+    "d": {
+     "sha": "VOID",
+     "void_reason": "no Co-Authored-By trailer on main names a non-Claude model agent (main tip 953f1a8)"
+    }
+   },
+   "note": "97 commits on main carry a claude.ai/code URL in any form; 44 in the bare form; 11 carry 'Co-Authored-By: Claude' with no model"
+  },
+  {
+   "repo": "study-aperture",
+   "commits_before_on_main": 13,
+   "untrailered_after_start": {
+    "main_tip": "c26fbd2",
+    "merge": 27,
+    "web_ui": 0,
+    "other": 0,
+    "total": 27
+   },
+   "forms": {
+    "a": {
+     "sha": "62858b4",
+     "date": "2026-10-28T06:29:46-05:00",
+     "agent": "Claude",
+     "model": "Opus 5.5"
+    },
+    "b": {
+     "sha": "62858b4",
+     "date": "2026-10-28T06:29:46-05:00"
+    },
+    "c": {
+     "sha": "VOID",
+     "void_reason": "no commit on main carries a claude.ai/code/session URL outside a 'Claude-Session:' key (main tip c26fbd2)"
+    },
+    "d": {
+     "sha": "79f402c",
+     "date": "2026-11-11T03:33:20+00:00",
+     "agent": "Perplexity",
+     "email": "noreply@perplexity.ai"
+    }
+   },
+   "note": "0384df3 (Perplexity) is dated 2026-11-10T22:10:30-06:00 = 2026-11-11T04:10:30Z, after 79f402c; first Manus trailer dd220df 2026-11-11T19:30:23Z"
+  }
+ ],
+ "marking_note": "Read from git on origin/main; 'first' = earliest committer date (UTC), not topological order. a = first Co-Authored-By naming a Claude model; b = first 'Claude-Session:' keyed trailer; c = first bare claude.ai/code/session URL line; d = first Co-Authored-By naming a non-Claude model agent. None is picked. Untrailered = no Co-Authored-By trailer, counted from line a to the main tip named. merge = more than one parent; web-UI = non-merge with committer GitHub <noreply@github.com> (web-flow); other = the rest. Simulators 'other' splits by committer name: Claude 32, JinnZ2 5.",
+ "conditions": {
+  "as_of": "2026-11-11",
+  "items": [
+   "Model marking began PLACEHOLDER (chat-side estimate from 'recently'; unsourced) (per-repo first-form commits listed under MARKING START); earlier collisions can't be split by model.",
+   "GitHub mobile UI change (PLACEHOLDER (owner report, date not established)): owner can no longer delete branches from phone; branch clutter accumulated partly from this; deletions now routed via Manus + auto-delete on.",
+   "Owner works phone-only (no keyboard, no local compute).",
+   "Sessions vary in model (Opus/Sonnet/Haiku/Fable) and model updates.",
+   "Committer/author field = the pusher, not the model (basis: the 18 Perplexity commits in the playground row are committed under the user's GitHub noreply account)."
+  ]
+ }
+}

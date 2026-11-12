@@ -784,6 +784,9 @@ EXPECTED_METRICS = (
     "measurand-partition/wo4_lumber.py::stiffness_ratio",
     "route-independence/route_independence.py::independence_ratio",
     "route-independence/lag_count.py::lag_years",
+    "relational-playground/playground/l0.py::misclosure",
+    "relational-playground/playground/harness.py::harness_class",
+    "relational-playground/playground/equations/branching_math.py::extinction_probability",
     "route-independence/enclosure_caveat_register.py::caveat_rate",
     "route-independence/settlement_split.py::net_positions",
     "revision-survival/revision_survival.py::delta",
@@ -1777,6 +1780,7 @@ def seed():
     _seed_potential()
     _seed_route_independence()
     _seed_lag_count()
+    _seed_relational_playground()
     _seed_enclosure_caveat()
     _seed_settlement_split()
     _seed_work_order_metrics()
@@ -2172,6 +2176,85 @@ def _seed_lag_count():
                  "the class carries no lag whatever dates are passed; None, never 1506"),
         ],
         note="FWO-11; the None cases pin absence against a zero lag.",
+    )
+
+
+def _rp_load(fname):
+    import importlib.util
+    path = os.path.join(ROOT, "relational-playground", "playground", fname)
+    spec = importlib.util.spec_from_file_location("_rp_" + os.path.basename(fname)[:-3], path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def _rp_misclosure(start, end, b_in, b_out):
+    """relational-playground/playground/l0.py::misclosure, imported. Rounded to
+    12 places so a float tail does not decide a case."""
+    return round(_rp_load("l0.py").misclosure(start, end, b_in, b_out), 12)
+
+
+def _rp_harness_class(fp, tp):
+    """relational-playground/playground/harness.py::harness_class, imported."""
+    return _rp_load("harness.py").harness_class(fp, tp)
+
+
+def _rp_extinction(R):
+    """relational-playground/playground/equations/branching_math.py::extinction_probability,
+    imported; rounded to 9 places."""
+    return round(_rp_load(os.path.join("equations", "branching_math.py")).extinction_probability(R), 9)
+
+
+def _seed_relational_playground():
+    register(
+        "relational-playground/playground/equations/branching_math.py::extinction_probability",
+        _rp_extinction,
+        [
+            case("subcritical", (0.5,), 1.0, "R <= 1: every line dies out"),
+            case("critical", (1.0,), 1.0, "R = 1 still dies out with certainty"),
+            case("R = 2 ln 2", (1.3862943611198906,), 0.5,
+                 "q = 1/2 solves q = exp(R(q-1)) exactly when R = 2 ln 2: exp(-ln 2) = 1/2"),
+            case("R = 2", (2.0,), 0.20318787,
+                 "smallest root of q = exp(2(q-1)); 0.2031878699... is the standard value "
+                 "(-W(-2 e^-2)/2). A solver returning the trivial root q = 1 fails here"),
+        ],
+        note=("Relational playground ADDITION 7. q = 1 is always a root, so a solver "
+              "that finds the wrong root passes the first two cases and fails the last two."),
+    )
+    register(
+        "relational-playground/playground/l0.py::misclosure",
+        _rp_misclosure,
+        [
+            case("balanced", (10.0, 12.0, 5.0, 3.0), 0.0,
+                 "pools rose by 2 and 5 - 3 = 2 crossed inward; by hand"),
+            case("mass left with no ledger row", (10.0, 11.7, 5.0, 3.0), -0.3,
+                 "pools rose by 1.7 against a booked net inflow of 2: 0.3 is "
+                 "missing, and missing mass reads negative"),
+            case("mass appeared with no ledger row", (10.0, 12.5, 5.0, 3.0), 0.5,
+                 "pools rose by 2.5 against a booked 2: 0.5 unaccounted, positive"),
+            case("in and out swapped would flip this", (0.0, -4.0, 1.0, 5.0), 0.0,
+                 "pools fell by 4 and 1 - 5 = -4; a function that added "
+                 "outflow instead of subtracting it returns -10 here"),
+        ],
+        note="Relational playground ADDITION 1. The sign cases keep a leak apart from a source.",
+    )
+    register(
+        "relational-playground/playground/harness.py::harness_class",
+        _rp_harness_class,
+        [
+            case("silent on nulls, fires on every planted defect", (0.0, 1.0), "PASS",
+                 "the pass rule as written: FP = 0 and TP = 1"),
+            case("recovers half the planted defects", (0.0, 0.5), "MISSES_PLANTED_DEFECTS",
+                 "null-harness's _verdict reads this as OK (pinned above); "
+                 "this class must not"),
+            case("always fires", (1.0, 1.0), "CONSTANT_FIRES", "a constant detector, firing"),
+            case("never fires", (0.0, 0.0), "CONSTANT_SILENT", "a constant detector, silent"),
+            case("fires on nulls as often as on signal", (0.4, 0.4), "NO_DISCRIMINATION",
+                 "TP <= FP: the detector carries no information"),
+            case("some false alarms, all signals found", (0.1, 1.0), "FALSE_ALARMS",
+                 "FP > 0 fails the gate even with TP = 1"),
+        ],
+        note="Relational playground ADDITION 3.",
     )
 
 
