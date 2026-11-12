@@ -609,6 +609,10 @@
     "web_ui": 142,
     "other": 37,
     "total": 446
+   },
+   "bare_url_start": {
+    "sha": "VOID",
+    "void_reason": "no commit on main carries a claude.ai/code/session URL outside a 'Claude-Session:' key (main tip 34eb3cf)"
    }
   },
   {
@@ -629,7 +633,14 @@
     "other": 0,
     "total": 15
    },
-   "note": "bare session-URL line (no 'Claude-Session:' key, no model; author 'Claude') from 56a2ebe, 2026-03-24T13:26:16+00:00; 97 commits on main carry a claude.ai/code URL in any form"
+   "note": "97 commits on main carry a claude.ai/code URL in any form",
+   "bare_url_start": {
+    "sha": "56a2ebe",
+    "date": "2026-03-24T13:26:16+00:00",
+    "author": "Claude",
+    "form": "bare URL line, no 'Claude-Session:' key, no Co-Authored-By trailer",
+    "commits_in_form_on_main": 44
+   }
   },
   {
    "repo": "study-aperture",
@@ -649,7 +660,11 @@
     "other": 0,
     "total": 27
    },
-   "note": "first Perplexity trailer 0384df3, 2026-11-10"
+   "note": "first Perplexity trailer 0384df3, 2026-11-10",
+   "bare_url_start": {
+    "sha": "VOID",
+    "void_reason": "no commit on main carries a claude.ai/code/session URL outside a 'Claude-Session:' key (main tip c26fbd2)"
+   }
   }
  ],
  "marking_note": "Read from git on origin/main. Co-Authored-By start and Claude-Session start are listed separately; neither is picked. Untrailered = no Co-Authored-By trailer, counted from the Co-Authored-By start to the main tip named. merge = more than one parent; web-UI = non-merge with committer GitHub <noreply@github.com> (web-flow); other = the rest. Simulators 'other' splits by committer name: Claude 32, JinnZ2 5.",
@@ -659,7 +674,8 @@
    "Model marking began ~2026-11 (per-repo start commit listed under MARKING START); earlier collisions can't be split by model.",
    "GitHub mobile UI change (recent, ~2026-11): owner can no longer delete branches from phone; branch clutter accumulated partly from this; deletions now routed via Manus + auto-delete on.",
    "Owner works phone-only (no keyboard, no local compute).",
-   "Sessions vary in model (Opus/Sonnet/Haiku/Fable) and model updates."
+   "Sessions vary in model (Opus/Sonnet/Haiku/Fable) and model updates.",
+   "Committer/author field = the pusher, not the model (basis: the 18 Perplexity commits in the playground row are committed under the user's GitHub noreply account)."
   ]
  }
 }

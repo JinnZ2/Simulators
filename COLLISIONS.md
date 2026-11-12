@@ -85,11 +85,14 @@ First commit carrying a Co-Authored-By trailer, per repo. Before it: model VOID 
 
 - Simulators, Co-Authored-By start: `11033ad` 2026-07-04T11:01:15+00:00, Claude Opus 4.7 (1M context); 154 commits on main before it
 - Simulators, Claude-Session start: `11033ad` 2026-07-04T11:01:15+00:00, Claude Opus 4.7 (1M context)
+- Simulators, bare-URL form: VOID (no commit on main carries a claude.ai/code/session URL outside a 'Claude-Session:' key (main tip 34eb3cf))
 - thermodynamic-accountability-framework, Co-Authored-By start: `3410a18` 2026-09-23T03:55:11+00:00, Claude Opus 5; 442 commits on main before it
 - thermodynamic-accountability-framework, Claude-Session start: `3410a18` 2026-09-23T03:55:11+00:00, Claude Opus 5
-  - note: bare session-URL line (no 'Claude-Session:' key, no model; author 'Claude') from 56a2ebe, 2026-03-24T13:26:16+00:00; 97 commits on main carry a claude.ai/code URL in any form
+- thermodynamic-accountability-framework, bare-URL form: `56a2ebe` 2026-03-24T13:26:16+00:00, author Claude; bare URL line, no 'Claude-Session:' key, no Co-Authored-By trailer; 44 commits on main in this form
+  - note: 97 commits on main carry a claude.ai/code URL in any form
 - study-aperture, Co-Authored-By start: `62858b4` 2026-10-28T06:29:46-05:00, Claude Opus 5.5; 13 commits on main before it
 - study-aperture, Claude-Session start: `62858b4` 2026-10-28T06:29:46-05:00, Claude Opus 5.5
+- study-aperture, bare-URL form: VOID (no commit on main carries a claude.ai/code/session URL outside a 'Claude-Session:' key (main tip c26fbd2))
   - note: first Perplexity trailer 0384df3, 2026-11-10
 
 Untrailered commits after the Co-Authored-By start:
@@ -110,6 +113,7 @@ These affect how to read the record.
 - GitHub mobile UI change (recent, ~2026-11): owner can no longer delete branches from phone; branch clutter accumulated partly from this; deletions now routed via Manus + auto-delete on.
 - Owner works phone-only (no keyboard, no local compute).
 - Sessions vary in model (Opus/Sonnet/Haiku/Fable) and model updates.
+- Committer/author field = the pusher, not the model (basis: the 18 Perplexity commits in the playground row are committed under the user's GitHub noreply account).
 
 ## SUMMARY
 

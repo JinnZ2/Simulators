@@ -145,6 +145,12 @@ def render_collisions(data):
             o.append("- %s, Co-Authored-By start: `%s` %s, %s; %d commits on main before it" % (
                 m["repo"], m["sha"], m["date"], m["model"], m["commits_before_on_main"]))
             o.append("- %s, Claude-Session start: `%s` %s, %s" % (m["repo"], cs["sha"], cs["date"], cs["model"]))
+            bu = m.get("bare_url_start") or {}
+            if bu.get("sha") in (None, "", "VOID"):
+                o.append("- %s, bare-URL form: VOID (%s)" % (m["repo"], bu.get("void_reason") or "MISSING"))
+            else:
+                o.append("- %s, bare-URL form: `%s` %s, author %s; %s; %d commits on main in this form" % (
+                    m["repo"], bu["sha"], bu["date"], bu["author"], bu["form"], bu["commits_in_form_on_main"]))
             if m.get("note"):
                 o.append("  - note: %s" % m["note"])
         o += ["", "Untrailered commits after the Co-Authored-By start:", "",
@@ -275,6 +281,12 @@ def collision_problems(data, md_text):
                 for k in ("model", "session", "role"):
                     if c.get(k) == "VOID" and not c.get(k + "_void_reason"):
                         out.append("collision %d side %d %s: %s VOID with no %s_void_reason" % (i + 1, j + 1, c.get("sha"), k, k))
+    for m in data.get("marking_start", []):
+        bu = m.get("bare_url_start")
+        if not bu or not bu.get("sha"):
+            out.append("marking_start %s: bare_url_start missing (write VOID with a void_reason)" % m["repo"])
+        elif bu["sha"] == "VOID" and not bu.get("void_reason"):
+            out.append("marking_start %s: bare_url_start VOID with no void_reason" % m["repo"])
     if md_text != render_collisions(data):
         out.append("COLLISIONS.md does not match collisions.json (run --write)")
     return out
@@ -344,6 +356,8 @@ def selftest(data):
                       ("role blank", lambda d: d["rows"][0]["sides"][0]["commits"][0].update(role="")),
                       ("role outside vocabulary", lambda d: d["rows"][0]["sides"][0]["commits"][0].update(role="author")),
                       ("role VOID with no reason", lambda d: d["rows"][1]["sides"][0]["commits"][0].pop("role_void_reason")),
+                      ("bare-URL start missing", lambda d: d["marking_start"][0].pop("bare_url_start")),
+                      ("bare-URL VOID with no reason", lambda d: d["marking_start"][0]["bare_url_start"].pop("void_reason")),
                       ("session VOID with no reason", lambda d: d["rows"][1]["sides"][0]["commits"][0].pop("session_void_reason"))):
         d = _c.deepcopy(cd); base_md = render_collisions(cd); mut(d)
         hit = bool(collision_problems(d, base_md if "out of date" in name else render_collisions(d)))
