@@ -119,8 +119,64 @@ def render_collisions(data):
               "- resolution: %s" % r["resolution"]]
         if r.get("note"):
             o.append("- note: %s" % r["note"])
-        o += ["- evidence: " + "; ".join(ev_text(e) for e in r["evidence"]), ""]
+        o += ["- evidence: " + "; ".join(ev_text(e) for e in r["evidence"])]
+        for sd in r.get("sides", []):
+            if sd["commits"] == "VOID":
+                o.append("- side %s: model VOID; session VOID; date VOID (%s)" % (sd["label"], sd["void_reason"]))
+                continue
+            cs = sd["commits"]
+            ds = sorted(c["date"] for c in cs)
+            o.append("- side %s (%s, %d commit%s, %s .. %s): model %s; session %s" % (
+                sd["label"], sd["repo"], len(cs), "" if len(cs) == 1 else "s", ds[0], ds[-1],
+                " | ".join(sorted({c["model"] for c in cs})), " | ".join(sorted({c["session"] for c in cs}))))
+            o.append("  - commits: " + ", ".join(c["sha"] for c in cs))
+        o.append("")
+    if "marking_start" in data:
+        o += ["## MARKING START", "", "First commit carrying a Co-Authored-By trailer, per repo. Before it: model VOID (not inferred from date or style).", ""]
+        for m in data["marking_start"]:
+            o.append("- %s: `%s` %s, %s; %d commits on main before it%s" % (
+                m["repo"], m["sha"], m["date"], m["model"], m["commits_before_on_main"],
+                ("; " + m["note"]) if m.get("note") else ""))
+        o += ["- note: %s" % data["marking_note"], ""]
+    if "conditions" in data:
+        o += ["## CONDITIONS (as of %s)" % data["conditions"]["as_of"], "", "These affect how to read the record.", ""]
+        o += ["- %s" % c for c in data["conditions"]["items"]] + [""]
+    if "marking_start" in data:
+        o += ["## SUMMARY", ""] + summary_lines(data) + [""]
     return "\n".join(o)
+
+
+def side_marked(sd):
+    return sd["commits"] != "VOID" and bool(sd["commits"]) and all(
+        c["model"] != "VOID" for c in sd["commits"])
+
+
+def summary_lines(data):
+    """Counts only rows where EVERY side carries a trailer. No interpretation."""
+    both = [r for r in data["rows"] if r.get("sides") and all(side_marked(s) for s in r["sides"])]
+    out_rows = [r["concept"] for r in data["rows"] if r not in both]
+    differ, same = [], []
+    for r in both:
+        ms = [frozenset(c["model"] for c in s["commits"]) for s in r["sides"]]
+        (same if len(set(ms)) == 1 else differ).append(r)
+    same_diff_session = [r for r in same if len({frozenset(c["session"] for c in s["commits"]) for s in r["sides"]}) > 1]
+    same_same_session = [r for r in same if r not in same_diff_session]
+    pairs = dict(differ=0, same_diff=0, same_same=0)
+    for r in both:
+        ss = r["sides"]
+        for i in range(len(ss)):
+            for j in range(i + 1, len(ss)):
+                mi = {c["model"] for c in ss[i]["commits"]}; mj = {c["model"] for c in ss[j]["commits"]}
+                si = {c["session"] for c in ss[i]["commits"]}; sj = {c["session"] for c in ss[j]["commits"]}
+                pairs["differ" if mi != mj else ("same_diff" if si != sj else "same_same")] += 1
+    names = lambda rs: ", ".join(r["concept"] for r in rs) or "none"
+    return ["- rows counted (every side carries a trailer): %d of %d; not counted: %s" % (len(both), len(data["rows"]), ", ".join(out_rows) or "none"),
+            "- models differ: %d (%s)" % (len(differ), names(differ)),
+            "- same model, different session: %d (%s)" % (len(same_diff_session), names(same_diff_session)),
+            "- same model, same session: %d (%s)" % (len(same_same_session), names(same_same_session)),
+            "- by side pair over counted rows: models differ %d, same model different session %d, same model same session %d" % (
+                pairs["differ"], pairs["same_diff"], pairs["same_same"]),
+            "- no interpretation until n is larger."]
 
 
 def ev_text(e):
@@ -186,6 +242,17 @@ def collision_problems(data, md_text):
         for k in CFIELDS:
             if not r.get(k):
                 out.append("collision %d (%s): field %s empty (write OPEN or NOT LOCATED)" % (i + 1, r.get("concept"), k))
+        for j, sd in enumerate(r.get("sides", [])):
+            if sd.get("commits") == "VOID":
+                if not sd.get("void_reason"):
+                    out.append("collision %d side %d: commits VOID with no void_reason" % (i + 1, j + 1))
+                continue
+            if not sd.get("commits"):
+                out.append("collision %d side %d: no commits (write VOID with a void_reason)" % (i + 1, j + 1))
+            for c in sd.get("commits") or []:
+                for k in ("sha", "date", "model", "session"):
+                    if not c.get(k):
+                        out.append("collision %d side %d %s: field %s empty (write VOID)" % (i + 1, j + 1, c.get("sha"), k))
     if md_text != render_collisions(data):
         out.append("COLLISIONS.md does not match collisions.json (run --write)")
     return out
@@ -249,7 +316,9 @@ def selftest(data):
     import copy as _c
     cd = json.load(open(CJSON, encoding="utf-8"))
     for name, mut in (("collision field empty", lambda d: d["rows"][0].update(resolution="")),
-                      ("COLLISIONS.md out of date", lambda d: d["rows"].pop())):
+                      ("COLLISIONS.md out of date", lambda d: d["rows"].pop()),
+                      ("side model empty", lambda d: d["rows"][0]["sides"][0]["commits"][0].update(model="")),
+                      ("VOID side with no reason", lambda d: d["rows"][-1]["sides"][0].update(void_reason=""))):
         d = _c.deepcopy(cd); base_md = render_collisions(cd); mut(d)
         hit = bool(collision_problems(d, base_md if "out of date" in name else render_collisions(d)))
         n += 1; bad += 0 if hit else 1
