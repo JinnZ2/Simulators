@@ -260,3 +260,14 @@ claim is made about any contemporary assessor; the only scoring is the
 order's own, marked carried and re-verified against nothing. Whether the
 pool metric is measurable in practice is untested here — it runs on
 constructed graphs and the public records it wants are egress-refused.
+
+## Finds-by (ALIAS_PROPOSED, 2026-11-09)
+Note 2026-11-09: added by WORK ORDER TOOL FINDER part 1; aliases derived from this
+tool's stated scope only. Index: Simulators `TOOL_FINDER/TOOL_FINDER.md`.
+
+- is the auditor independent
+- assessor paid by the assessed
+- audit independence conditions
+- avoided term: AVOIDED_TERM_UNSTATED
+- measures: "whether an assessor is structurally independent of the party it assesses, **distinguished from** whether a direct payment runs between them."
+- breaks when: "No funding record is held here and none is composed from memory."

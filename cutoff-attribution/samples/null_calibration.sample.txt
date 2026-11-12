@@ -1,0 +1,113 @@
+cutoff-attribution null calibration -- ILLUSTRATIVE (synthetic planted sources, 300 draws per row)
+verdict = single source separated by evidence, else NONE
+validity = CONDITIONAL(circular_control): controls were authored to the rule set under test (ICSC v0.2 T30); this shows wiring, not validity
+
+confusion matrix (rows: true source / control; columns: assigned)
+                             NETWORK ENDPOIN TASK_PA AMBIENT TRANSCR MODEL_R    NONE
+NETWORK_LAG                      300       0       0       0       0       0       0   correct=NETWORK_LAG
+ENDPOINTING                        0     300       0       0       0       0       0   correct=ENDPOINTING
+TASK_PAUSE                         0       0     300       0       0       0       0   correct=TASK_PAUSE
+AMBIENT_NOISE                      0       0       0     300       0       0       0   correct=AMBIENT_NOISE
+TRANSCRIPTION                      0       0       0       0     300       0       0   correct=TRANSCRIPTION
+MODEL_READ                         0       0       0       0       0     300       0   correct=MODEL_READ
+UNRESOLVED                         0       0       0       0       0       0     300   correct=NONE
+NETWORK_LAG/hop_unchecked          0       0       0       0       0       0     300   correct=NONE
+ENDPOINTING/hop_unchecked          0       0       0       0       0       0     300   correct=NONE
+TASK_PAUSE/hop_unchecked           0       0       0       0       0       0     300   correct=NONE
+AMBIENT_NOISE/hop_unchecked        0       0       0       0       0       0     300   correct=NONE
+TRANSCRIPTION/hop_unchecked        0       0       0       0       0       0     300   correct=NONE
+MODEL_READ/hop_unchecked           0       0       0       0       0       0     300   correct=NONE
+sensor_collision                   0       0       0       0       0       0     300   correct=NONE
+NETWORK_LAG/measurement_only       0       0       0       0       0       0     300   correct=NETWORK_LAG
+
+forced-attribution rate (source assigned where NONE was correct): 0 / 2400 = 0.0000
+missed attribution (NONE where a source was planted): 300 draws
+  of which the planted source is still in the candidate set: 300 draws
+
+per-candidate gate (null_harness.bake_off, neg = UNRESOLVED control)
+  NETWORK_LAG    FP=0.000 TP=1.000  OK
+  ENDPOINTING    FP=0.000 TP=1.000  OK
+  TASK_PAUSE     FP=0.000 TP=1.000  OK
+  AMBIENT_NOISE  FP=0.000 TP=1.000  OK
+  TRANSCRIPTION  FP=0.000 TP=1.000  OK
+  MODEL_READ     FP=0.000 TP=1.000  OK
+
+three-outcome score (Note 2026-11-09, round 4; same draws as the matrix)
+                              CORRECT_NAME CORRECT_ABSTAIN   WRONG   wrong by reason
+NETWORK_LAG                            300               0       0   -
+ENDPOINTING                            300               0       0   -
+TASK_PAUSE                             300               0       0   -
+AMBIENT_NOISE                          300               0       0   -
+TRANSCRIPTION                          300               0       0   -
+MODEL_READ                             300               0       0   -
+UNRESOLVED                               0               0     300   abstain_status_ESTIMATED 300
+NETWORK_LAG/hop_unchecked                0               0     300   abstain_status_ESTIMATED 300
+ENDPOINTING/hop_unchecked                0               0     300   abstain_status_ESTIMATED 300
+TASK_PAUSE/hop_unchecked                 0               0     300   abstain_status_ESTIMATED 300
+AMBIENT_NOISE/hop_unchecked              0               0     300   abstain_status_ESTIMATED 300
+TRANSCRIPTION/hop_unchecked              0               0     300   abstain_status_ESTIMATED 300
+MODEL_READ/hop_unchecked                 0               0     300   abstain_status_ESTIMATED 300
+sensor_collision                         0               0     300   abstain_status_ESTIMATED 300
+NETWORK_LAG/measurement_only             0             300       0   -
+total                                 1800             300    2400
+
+round 6: designed identifiability per control (set by the planted design, not the tool)
+  NETWORK_LAG                  yes   ESTIMATED   0  flagged event on the source's hop, hop reference-checked
+  ENDPOINTING                  yes   ESTIMATED   0  flagged event on the source's hop, hop reference-checked
+  TASK_PAUSE                   yes   ESTIMATED   0  flagged event on the source's hop, hop reference-checked
+  AMBIENT_NOISE                yes   ESTIMATED   0  flagged event on the source's hop, hop reference-checked
+  TRANSCRIPTION                yes   ESTIMATED   0  flagged event on the source's hop, hop reference-checked
+  MODEL_READ                   yes   ESTIMATED   0  flagged event on the source's hop, hop reference-checked
+  UNRESOLVED                   no    ESTIMATED 300  no source planted; distractors only
+  NETWORK_LAG/hop_unchecked    no    ESTIMATED 300  planted event on a hop with no reference check; NONE is gating-correct
+  ENDPOINTING/hop_unchecked    no    ESTIMATED 300  planted event on a hop with no reference check; NONE is gating-correct
+  TASK_PAUSE/hop_unchecked     no    ESTIMATED 300  planted event on a hop with no reference check; NONE is gating-correct
+  AMBIENT_NOISE/hop_unchecked  no    ESTIMATED 300  planted event on a hop with no reference check; NONE is gating-correct
+  TRANSCRIPTION/hop_unchecked  no    ESTIMATED 300  planted event on a hop with no reference check; NONE is gating-correct
+  MODEL_READ/hop_unchecked     no    ESTIMATED 300  planted event on a hop with no reference check; NONE is gating-correct
+  sensor_collision             no    ESTIMATED 300  two sources planted on one checked hop; designed not to separate
+  NETWORK_LAG/measurement_only no    ESTIMATED   0  only an unflagged rtt_ms trace; designed as the expected miss
+
+round 6 pick options (readout; superseded by the round 7 pick: both, below)
+  option    CORRECT_NAME CORRECT_ABSTAIN   WRONG  MISSED_IDENTIFIABLE
+  current           1800             300    2400                    0
+  A                 1800            2700       0                    0
+  B                 1800             300    2400                    0
+  AB                1800            2700       0                    0
+
+ADOPTED SCORE (Note 2026-11-09, round 7, owner's pick: both)
+                              CORRECT_NAME CORRECT_ABSTAIN  MISSED_IDENTIFIABLE   WRONG
+NETWORK_LAG                            300            VOID                    0       0
+ENDPOINTING                            300            VOID                    0       0
+TASK_PAUSE                             300            VOID                    0       0
+AMBIENT_NOISE                          300            VOID                    0       0
+TRANSCRIPTION                          300            VOID                    0       0
+MODEL_READ                             300            VOID                    0       0
+UNRESOLVED                               0             300                 VOID       0
+NETWORK_LAG/hop_unchecked                0             300                 VOID       0
+ENDPOINTING/hop_unchecked                0             300                 VOID       0
+TASK_PAUSE/hop_unchecked                 0             300                 VOID       0
+AMBIENT_NOISE/hop_unchecked              0             300                 VOID       0
+TRANSCRIPTION/hop_unchecked              0             300                 VOID       0
+MODEL_READ/hop_unchecked                 0             300                 VOID       0
+sensor_collision                         0             300                 VOID       0
+NETWORK_LAG/measurement_only             0             300                 VOID       0
+NETWORK_LAG/noise_k3                   300            VOID                    0       0
+ENDPOINTING/noise_k3                   300            VOID                    0       0
+TASK_PAUSE/noise_k3                    300            VOID                    0       0
+AMBIENT_NOISE/noise_k3                 300            VOID                    0       0
+TRANSCRIPTION/noise_k3                 300            VOID                    0       0
+MODEL_READ/noise_k3                    300            VOID                    0       0
+NETWORK_LAG/noise_k6                   300            VOID                    0       0
+ENDPOINTING/noise_k6                   300            VOID                    0       0
+TASK_PAUSE/noise_k6                    300            VOID                    0       0
+AMBIENT_NOISE/noise_k6                 300            VOID                    0       0
+TRANSCRIPTION/noise_k6                 300            VOID                    0       0
+MODEL_READ/noise_k6                    300            VOID                    0       0
+total (all controls)                  5400            2700                    0       0
+  MISSED_IDENTIFIABLE is exercised by 18 controls (the designed-identifiable rows); VOID elsewhere
+noise controls only                   3600            VOID                    0       0
+
+Scope: the controls test the evidence-gating rules this file plants against. A real
+channel can produce cues the generators never draw (overlapping hops, mislabelled
+logs, a reference check that passes while the hop fails on other inputs).

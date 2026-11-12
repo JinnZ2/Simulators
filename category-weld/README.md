@@ -68,3 +68,14 @@ self-supporting capacity.
 revenue claim, input supply.
 
 Both currently sit at four named cases, zero quantified.
+
+## Finds-by (ALIAS_PROPOSED, 2026-11-09)
+Note 2026-11-09: added by WORK ORDER TOOL FINDER part 1; aliases derived from this
+tool's stated scope only. Index: Simulators `TOOL_FINDER/TOOL_FINDER.md`.
+
+- one word for several independent quantities
+- term fuses separate measures
+- components move but the record does not
+- avoided term: AVOIDED_TERM_UNSTATED
+- measures: "A CATEGORY WELD is a term that fuses two or more independent quantities into one handle."
+- breaks when: NO_STATED_LIMITS

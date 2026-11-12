@@ -118,3 +118,14 @@ samples/                 the renders and the test transcript
 ```
 
 `wo4_lumber.py::stiffness_ratio` is registered in `tools/known_answer.py`.
+
+## Finds-by (ALIAS_PROPOSED, 2026-11-09)
+Note 2026-11-09: added by WORK ORDER TOOL FINDER part 1; aliases derived from this
+tool's stated scope only. Index: Simulators `TOOL_FINDER/TOOL_FINDER.md`.
+
+- residual assigned to the thing observed
+- single-setting observation scored against many-variable outcome
+- attribution of an unpartitioned residual
+- avoided term: AVOIDED_TERM_UNSTATED
+- measures: "What they share is one instrument fault, and `common.py` carries it as a record shape:"
+- breaks when: NO_STATED_LIMITS

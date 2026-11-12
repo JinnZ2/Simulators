@@ -111,3 +111,16 @@ unfiltered). None is wired. The spec says to confirm each source before
 use.
 
 Stdlib only, parses under Python 3.9, CC0.
+
+## Finds-by (ALIAS_PROPOSED, 2026-11-09)
+Note 2026-11-09: added by WORK ORDER TOOL FINDER part 1; aliases derived from this
+tool's stated scope only. Index: Simulators `TOOL_FINDER/TOOL_FINDER.md`.
+
+- mean drifts with a moving target
+- mean minus median over time
+- tail percentiles p10 p90 per segment
+- cleaning filter changes the average
+- representativeness of a sample share
+- avoided term: AVOIDED_TERM_UNSTATED
+- measures: "A mean anchored to a moving target (GDP, a wealth gap, a skills or literacy score) moves with the target. Any norm, filter or loss tied to that mean inherits the drift."
+- breaks when: "The only provider is synthetic (`provider.FixtureProvider`), and nothing in this folder measures any population."

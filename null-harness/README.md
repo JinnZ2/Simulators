@@ -159,3 +159,15 @@ numpy (archetype_library adds `scipy.optimize.curve_fit`).
 ## License
 
 CC0 1.0 Universal. Public domain.
+
+## Finds-by (ALIAS_PROPOSED, 2026-11-09)
+Note 2026-11-09: added by WORK ORDER TOOL FINDER part 1; aliases derived from this
+tool's stated scope only. Index: Simulators `TOOL_FINDER/TOOL_FINDER.md`.
+
+- can this detector ever fire
+- false positive rate of a check
+- calibrate a gate against known controls
+- minimum detectable signal
+- avoided term: AVOIDED_TERM_UNSTATED
+- measures: "Calibrate any gate against known-answer controls before you trust it."
+- breaks when: NO_STATED_LIMITS

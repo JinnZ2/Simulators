@@ -14244,6 +14244,99 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   printed by `python3 extraction-chain-join/test_chain.py`; the module refuses
   `--selftest`. Stdlib only, parses under 3.8, CC0.
 - `held-gaps/` — four open questions (default drift from a constant regime, obligation bundled with title, restore-before-detection law, burden-of-proof inversion in building code), field form for `GAP_INDEX.md`, delivered text verbatim, all UNSEARCHED; the glyph-as-relation procedure (E1-E4) and the inward-turn instrument from the same block are in `tools/glyph_reasoning.md` and `tools/inward_turn.md`, mirrored in method-layer
+- `TOOL_FINDER/` — find a tool by what it does rather than by its name
+  (WORK ORDER TOOL FINDER, 2026-11-09). The index groups tools under seven
+  needs (fill-source, distribution, channel loss, scope, frame, observer,
+  detection floor). It holds 38 entries across Simulators, method-layer,
+  JinnZ2 and Shadow-Hunting, plus NAME_COLLISION entries and a GAPS list.
+  Each entry carries aliases, plus a verbatim measures / breaks-when quote
+  that `build_finder.py` checks against the cited file; a quote that does
+  not match stops the build. `--run` runs each tool's own check in a
+  throwaway git worktree, because running in place regenerated
+  falsifier-audit's tracked queue (the SS_009 shape). `write_finds_by.py`
+  appends a dated "Finds-by (ALIAS_PROPOSED)" section to each tool's README.
+  It only appends; it creates a README only where none exists. The report is
+  `REPORT_WO_FINDER.md`.
+- `tail-check/` — part 3b of the same order. It reads an inference about a
+  person as SAID (a gated literal span of a user turn, via `tools/sourced.py`,
+  imported), FILLED or UNRATED. When the inference is FILLED and the person's
+  own sourced statement on that axis is declared off-center, it flags
+  MEDIAN_FILL_RISK. It never places anyone on an axis itself. Check count
+  printed by `python3 tail-check/selftest.py`.
+- `cutoff-attribution/` — part 3a of the same order. For each cut in a voice
+  transcript it lists a candidate set (NETWORK_LAG, ENDPOINTING, TASK_PAUSE,
+  AMBIENT_NOISE, TRANSCRIPTION, MODEL_READ, UNRESOLVED), with the evidence
+  for each graded OBSERVED, ESTIMATED or absent. It names a single source only
+  when exactly one candidate is OBSERVED. User cognition is not a candidate.
+  It also flags ATTRIBUTION_DISPLACEMENT phrases in model turns. The three
+  thresholds are [CHOICE] values. Check count printed by
+  `python3 cutoff-attribution/selftest.py`.
+- `tools/channel_chain.py` — Amendment A1 of the TOOL FINDER order
+  (2026-11-09). It defines a reading record that carries its chain
+  (sensor -> encoding -> transmission -> decoding -> inference). Each hop
+  lists its deviation sources and a known-reference check, returning CHECKED,
+  CHECK_FAILED or UNVERIFIED_HOP. A record's chain class is never DIRECT. Field
+  names are Cross-Domain-Toolkit `SubstrateReading`'s, read live from a
+  sibling checkout and checked against a mirror (Amendment A2). Both
+  tail-check and cutoff-attribution emit these records, and each checks its
+  own reading against a built-in known input on every run.
+- `ICSC/` — ICSC v0.1 specification audit (Implicit Communication and Substrate Coupling), landed verbatim
+  2026-11-09 under the TOOL_FINDER follow-up, item B. STATUS: PROPOSED, nothing built. It arrived as a 12-page
+  PDF, not the .md the order named, so `SPEC_AUDIT_v0.1.pdf` keeps the bytes and `SPEC_AUDIT_v0.1.md` holds the
+  `pdftotext -layout` text, unedited, in one fence, with sha256 and provenance in the header.
+  `check_landing.py` re-extracts the PDF and confirms the fenced text is unchanged (`checks: 3   failed: 0`;
+  NOT_RUN without pdftotext). The audit's sections are not restated: F lists nine spec defects, A the
+  corrected architecture, B acceptance tests T01-T20, C confounders, D assumptions, E indistinguishable
+  cases, G the acceptance contract. The Cross-Domain-Toolkit `falsification_ledger` lock-layer binding is
+  recorded only, and TOOL_FINDER's NAME_COLLISION entry now points here.
+  Note 2026-11-09: the markdown source then arrived and is `SPEC_AUDIT_v0.1.md`, verbatim; the
+  pdftotext stand-in moved to `SPEC_AUDIT_v0.1.pdftotext.md`, unchanged. A fourth check confirms the
+  source and the PDF carry the same 2612-word sequence, and fails on a planted one-word change.
+  Note 2026-11-09: v0.2 then arrived and is `SPEC_v0.2.md`, verbatim, beside v0.1 (superseding
+  nothing); `check_v02.py` (11/11) checks its hash and that its section-13 tools and two live specimens resolve.
+- `orientation-chamber/` — PROPOSED, optional exploration toy for an AI
+  agent orienting in an unfamiliar rule-space: a seeded 7x7 grid with hidden
+  rules (flip_x, flip_y, wrap, sticky, momentum, delay), predict -> probe ->
+  compare -> triangulate -> close loop. Principle verbatim at the top of the
+  README and in every output header: "No error is wrong. A miss is
+  information: it locates where the model of the world or self differs from
+  what happened. Misses are logged, never scored down." The misslog refuses
+  score-like field names at write time, keeps unfilled fields null, and is a
+  sha256 chain; `fix.py` reads rules LOCATED / FLOATING / UNTESTED (LOCATED
+  needs 2 distinct path signatures [CHOICE 1]), misses with OFFSET and
+  UNLOCATED, loops CLOSED / OPEN / NOT_A_LOOP, and the same path walked twice
+  as one wall. Self mode logs category and specific predictions. NO_MOVE is a
+  legal action (the stillness control); on seed 7 a still probe located the
+  delay rule by itself. `markers.py`: FADING / LANDMARK / REPEL / VOID /
+  PLACED at the true cell; in a plain chamber REPEL cuts one searcher's
+  re-visits 37 -> 19, with both axes flipped it raises them to 56, and VOID
+  gives no guidance by construction. `fingerprint.py`: the prior-conversation
+  seed's decay arm (similarity to seed vs median anchor per cycle, crossing
+  cycle), VOID until a real prior log is supplied; arXiv 2509.21224 cited as
+  related work, CARRIED. Banned output words scanned with the principle
+  masked, measured both ways. Check count
+  printed by `python3 orientation-chamber/tests/test_chamber.py`. Stdlib only,
+  CC0.
+- `law-audit-card/` — PROPOSED, one card per law: stated_purpose,
+  target_outcome, enforcement, evidence, cut_sensitivity, scope_valid,
+  last_tested, evaluator, circularity, anchor_date, disposition, each tagged
+  OBSERVED / DERIVED / PROPOSED / VOID (VOID written, never omitted).
+  `card.py` derives cut_sensitivity (>= 2 declared-frame boundaries -> FLIPS /
+  HOLDS, else VOID) and circularity (enforcer == evaluator ->
+  CONDITIONAL(circular_eval)), and runs scope_valid through TAF
+  core/regulatory_scope_audit.py by import, not reimplementation. The
+  disposition (KEEP / EDIT / REVISE / RETIRE / UNRESOLVED; REVISE replaces
+  REDO so it does not read as section G's REBUILD) is reader-assigned with
+  reader id and date; the tool never writes one, only forces UNRESOLVED when
+  evidence or cut_sensitivity is VOID (READ_ME_THIS_WAY section 4). Seeds:
+  dyed fuel, EU 2022/197 marker, Sunday laundry (all VOID), every value cited
+  `path:line` from the two law-* dirs. `aggregate.py`: tested_any 1 of 3,
+  tested_against_purpose 0 of 3 (needs a stated purpose and a declared
+  measurand match, else UNRESOLVED), ILLUSTRATIVE. Divergence from TAF
+  (undeclared intent: TAF assumes it applies, the card reads VOID) recorded
+  in the README and as a dated note in TAF. `COVERAGE.md` is the
+  2026-11-10 coverage report, verbatim. Check count printed by
+  `python3 law-audit-card/tests/test_card.py`. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

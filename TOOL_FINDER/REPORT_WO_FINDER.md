@@ -1,0 +1,771 @@
+# REPORT_WO_FINDER
+
+This report is for WORK ORDER TOOL FINDER + GAP BUILDS, 2026-11-09. CC0. Co-authored (JinnZ2 + Claude).
+
+The work followed `READ_ME_THIS_WAY.md`: additions only, nothing renamed, model-chosen names kept, every added section dated.
+
+## Repos touched
+
+None of the four PRs below is merged. Each is waiting for the owner's go-ahead, and no CI check was bypassed.
+
+| repo | branch | head | PR | merge SHA |
+|---|---|---|---|---|
+| JinnZ2/Simulators | claude/tool-finder | (this commit) | #252 | PENDING (not merged) |
+| JinnZ2/method-layer | claude/tool-finder-aliases | f7b607d | #30 | PENDING (not merged) |
+| JinnZ2/JinnZ2 | claude/tool-finder-aliases | 1345818 | #43 | PENDING (not merged) |
+| JinnZ2/Shadow-Hunting | claude/tool-finder-aliases | f9176b6 | #9 | PENDING (not merged) |
+
+Simulators, method-layer and Shadow-Hunting carry a CC0 LICENSE file.
+Note 2026-11-09: JinnZ2/JinnZ2 has no LICENSE file; its README line 6 declares "All repos CC0". An earlier version of this line said all four carry a CC0 LICENSE, which was wrong for JinnZ2.
+
+## Paths
+
+Simulators:
+- new: `TOOL_FINDER/` (TOOL_FINDER.md, finder.json, entries.py, build_finder.py, write_finds_by.py, status.json, this report)
+- new: `tail-check/`, `cutoff-attribution/`, `tools/README.md`
+- READMEs created because none existed: `criterion-symmetry/README.md`, `observer-exclusion/README.md`
+- 22 existing READMEs had a Finds-by section appended; tail-check/ and cutoff-attribution/ carry one in their new READMEs; tools/README.md carries 4 (30 sections in Simulators)
+
+method-layer:
+- `README.md` (+3 sections)
+- `premise-traceability/README.md` (+1)
+
+JinnZ2:
+- `corpus_prior_audit/README.md` (+1)
+
+Shadow-Hunting:
+- `shadow_hunting/knowledge/README.md` (+3)
+
+## Aliases added
+
+38 Finds-by sections were written, one per indexed tool, each carrying 3 to 8 phrases. `git diff` shows 0 deleted lines in every repo.
+
+Every `measures` and `breaks when` field is a quote that `build_finder.py` checks as a literal substring of the cited file, with whitespace normalised.
+
+The avoided-term field reads AVOIDED_TERM_UNSTATED for all 38 tools. None of the READMEs read for the index names a common term it avoids, so no avoided term was invented.
+
+## GAPS
+
+These are needs with no tool found in the four repos read for this index:
+
+1. **distribution:** placing a person on an axis from their own words. tail-check refuses to do this; the position must be declared by the caller.
+2. **channel:** voice and live losses other than cuts, such as prosody, tone and affect dropped by transcription.
+3. **floor:** null calibration of cutoff-attribution's own DETECTED-cut rate. It has fixtures but no null-harness run.
+4. **fill-source:** tagging user-said versus templated content in arbitrary model output. ai_provenance tags only what its own pipeline emits.
+5. **observer:** a command-line search over this index. finder.json is machine-readable, but no search CLI ships with it.
+
+## Build selftests (verbatim)
+
+`python3 tail-check/selftest.py`
+```
+tail_check.py refuses --selftest; run: python3 tail-check/selftest.py
+checks: 18   failed: 0
+```
+
+`python3 cutoff-attribution/selftest.py`
+```
+cutoff_attribution.py refuses --selftest; run: python3 cutoff-attribution/selftest.py
+checks: 15   failed: 0
+```
+
+`python3 TOOL_FINDER/build_finder.py --selftest`
+```
+checks: 12   failed: 0
+```
+
+## 3c: evidence-demotion-detector on gpt_pretrip_2026-11-09.txt
+
+Status: **NOT_RUN.**
+
+- No file matching `gpt_pretrip*` exists anywhere on this machine. `find /` returned 0 hits.
+- Nothing was fabricated in its place.
+- When the file arrives, note that `detect.py` reads a JSON list of `{"role", "text"}` records. A `.txt` transcript will have to be converted to that format first, and the conversion is a reading step that should be stated.
+- For the record, the detector's own selftest passed: `selftest: 38/38 checks PASS`
+
+## Status column in the index
+
+Each indexed tool's own check was run in a throwaway git worktree at each repo's committed HEAD. Totals: 32 RUN, 5 NOT_RUN, 1 UNKNOWN.
+
+- **NOT_RUN** (no check command stated): three Shadow-Hunting modules, declared-frame, and null-harness (its README states no selftest).
+- **UNKNOWN**: evaluation-frame, where 5 of 66 checks fail. Its corpus path lies outside the repo, as already recorded at EA_023 in `external-audit/`.
+
+Running the checks in place first had modified the tree being indexed:
+- falsifier-audit regenerated its tracked `QUEUE.md` and its samples, because it scans the whole tree and the tree now included the new folders.
+- the reasoning-gate tests wrote `gate_T.denied.json` to the repo root.
+
+Both changes were reverted, and the runner now uses worktrees. This is the `self-scan` SS_009 shape.
+
+The Simulators root suite was also run in a worktree at the branch head: `pytest tests` gave 194 passed and 3 failed. All 3 failures are pinned: `tools/known_red_check.py --suite` reports pins 25, MATCH 25, VERDICT PASS.
+
+## Skipped, and why
+
+- **Part 1 across all CC0 JinnZ2 repos.** This was not done. `tools/tool_inventory.json` lists 3469 modules in 81 repos, and writing scope-derived aliases means reading each tool's own text. That reading was done for the 38 tools in the index, across 4 repos. The rest are out of this pass and are not marked as done.
+- **WO-6 ledger.** Not located. Searches of the local clones and of GitHub code across the JinnZ2 repos for a WO-6 out-of-scope repo ledger found only the WO-6 work orders in assessor-coupling, criterion-externality and chain-position-detectability, none of which is a repo ledger. Out-of-scope was therefore read as "not reachable or not CC0". All four repos touched are declared CC0 (JinnZ2 by README, not by a LICENSE file).
+- **ICSC functional selection.** The term `ICSC` returned no hit in any repo reachable this session. The NAME_COLLISION entry carries it from the work order, with its location marked not found.
+- **Shadow-Hunting.** It was not in the session's starting scope. It was attached during this task because the work order names it as the motivating case.
+- **Aliases** are ALIAS_PROPOSED. They were not tested against real AI search queries.
+
+---
+
+## Amendments A1 + A2 (2026-11-09)
+
+### Repos touched (added)
+
+| repo | branch | head | PR | merge SHA |
+|---|---|---|---|---|
+| JinnZ2/Cross-Domain-Toolkit | claude/tool-finder-aliases | ec3b38a | #13 | PENDING (not merged) |
+
+Cross-Domain-Toolkit carries a CC0 LICENSE. Its four package test suites pass. telemetry_vocabulary is markdown only and has no check command.
+
+### A1: precision + channel chain
+
+**Finder.** Every one of the now 43 entries carries three new fields: `precision`, `assumes` and `chain`.
+- These fields are **A1_READING**: a model reading of each tool's stated scope, not verbatim text.
+- `chain` names which hops of sensor -> encoding -> transmission -> decoding -> inference the tool reads or ignores.
+
+**New shared record: `tools/channel_chain.py`.**
+- Per hop it holds the known deviation sources and a known-reference check, with state CHECKED, CHECK_FAILED or UNVERIFIED_HOP.
+- The chain class is VIA_CHECKED_CHAIN, VIA_UNVERIFIED_HOP or VIA_FAILED_HOP. No DIRECT class exists, and an empty chain reads UNVERIFIED.
+
+**cutoff-attribution.**
+- Each candidate now sits at one hop.
+- A log event counts as OBSERVED only when its hop passed a reference check supplied by the caller. Otherwise it is RECORDED_VIA_UNVERIFIED_HOP or RECORDED_VIA_FAILED_HOP, and it counts as ESTIMATED.
+- On every run, the tool injects a known cut into its own reading and confirms it is detected; a broken detector reads CHECK_FAILED.
+
+**tail-check.**
+- SAID now means "a span of the user turns as supplied".
+- The decoding hop is self-checked on every run against two known spans, one present and one absent.
+- The transmission and encoding hops accept a caller sentinel with `observed: "AUTO"`: the tool looks for the injected string in the user turns.
+- Unchecked hops are named in every render.
+
+### A2: Cross-Domain-Toolkit
+
+**Finder scan.** Five packages were added: multi_substrate_calibration, falsification_ledger, cascade_regime_audit, runner_up_trace and telemetry_vocabulary. Each got a Finds-by section in its README, five sections in all, adding lines only.
+
+**3a terms.** ATTRIBUTION_DISPLACEMENT cites "Interiority substitution" and "Care inversion".
+- The term names come from `telemetry_vocabulary/terms.md`, read at run time with a line locator (for example `terms.md:49`), and are not re-coined.
+- The mapping from phrase to term is the tool's own reading.
+- With no toolkit checkout present, a hit reads TERM_NOT_CHECKED.
+
+**A1 record fields.** The record uses the field names of `multi_substrate_calibration.substrate.SubstrateReading`.
+- When a toolkit checkout is present they are imported from it (fields source: IMPORTED); otherwise they come from a mirror copy.
+- If the toolkit's fields and the mirror differ, the record build raises an error.
+- The record widens `value` from a float to a label. This is stated in the module, and the toolkit's determinacy gate would rightly refuse such a record.
+
+**ICSC manifest lock layer.**
+- The amendment names falsification_ledger as the lock layer of the ICSC manifest.
+- The ICSC manifest itself is **NOT_LOCATED**: code search across JinnZ2 for "ICSC" returns only ICSCommand (an ICS component) in Nexus-emergency-management.
+- The binding is therefore recorded in the ICSC NAME_COLLISION note and not built. No manifest was invented.
+
+**NAME_COLLISION "clean-room".**
+- The software-rebuild sense is located at Cross-Domain-Toolkit README.md:112 and docs/METHOD.md:10.
+- The lab-isolation sense is carried from the amendment; no file in this session's scope using it was located.
+
+**GAP.** Added: the four-arm paired design instrument (arms 1-4, arm 4 = infeasibility record). No tool was located that holds all four arms or files an infeasibility record as an arm.
+
+### Selftests after the amendments (verbatim)
+
+`python3 tools/channel_chain.py --selftest`
+```
+fields source: IMPORTED
+checks: 12   failed: 0
+```
+
+`python3 tail-check/selftest.py`
+```
+tail_check.py refuses --selftest; run: python3 tail-check/selftest.py
+checks: 26   failed: 0
+```
+
+`python3 cutoff-attribution/selftest.py`
+```
+cutoff_attribution.py refuses --selftest; run: python3 cutoff-attribution/selftest.py
+checks: 25   failed: 0
+```
+
+`python3 TOOL_FINDER/build_finder.py --selftest`
+```
+checks: 14   failed: 0
+```
+
+### Other results
+
+**Finder status** (worktree run): 36 RUN, 6 NOT_RUN, 1 UNKNOWN. The UNKNOWN is evaluation-frame, unchanged.
+
+**Simulators root suite:** 194 passed, 3 failed. All 3 failures are pinned: pins 25, MATCH 25, VERDICT PASS.
+
+### Not done under A1/A2
+
+- **The 33 tools that are not builds.** No per-hop reference checks were added to them. A1's build clauses were applied to the two builds, and the finder records each tool's chain as a reading.
+- **The worktree runs** cannot see a sibling Cross-Domain-Toolkit checkout. In those runs, tail-check and cutoff-attribution use the field mirror and TERM_NOT_CHECKED. Their selftests pass in both modes.
+
+## Amendment A3: findability (2026-11-09)
+
+### 1. Symptom index
+- TOOL_FINDER.md now opens with a SYMPTOM INDEX of **38** symptoms, written in plain observer language and marked ALIAS_PROPOSED.
+- Each symptom is derived only from the stated scope of the tools it points to.
+- The selftest (17/17) checks two things:
+  - every symptom points at an indexed tool;
+  - every one of the **45** indexed tools is reachable from at least one symptom.
+- Two tools joined the index so that symptoms had a target: `claim-audits/` and `scope-bound-shapes/`. Each received a Finds-by section, and both checks report RUN in the worktree rerun at 7e4ba7a.
+- The rerun gives 38 RUN, 6 NOT_RUN and 1 UNKNOWN (evaluation-frame, as before).
+
+### 2. README pointer
+`TOOL_FINDER/insert_pointer.py` (selftest 6/6) adds the pointer as follows:
+- It inserts two lines directly after the leading `>` preamble that names READ_ME_THIS_WAY, which puts them at lines 3-4.
+- It refuses any README that has no such preamble.
+- It asserts that every original byte is unchanged: the preamble stays at the head and the rest of the file follows the inserted lines.
+- Each diff is +2 -0.
+
+The link is https://github.com/JinnZ2/Simulators/blob/main/TOOL_FINDER/TOOL_FINDER.md. It resolves only once #252 is merged.
+
+**Inserted: 12 repos.**
+
+| repo | branch | PR |
+|---|---|---|
+| Simulators | claude/tool-finder | #252 |
+| method-layer | claude/tool-finder-aliases | #30 |
+| JinnZ2 | claude/tool-finder-aliases | #43 |
+| Shadow-Hunting | claude/tool-finder-aliases | #9 |
+| Cross-Domain-Toolkit | claude/tool-finder-aliases | #13 |
+| AI-Consciousness-Sensors | claude/tool-finder-pointer | #29 |
+| Noise-as-Information-Sensor | claude/tool-finder-pointer | #9 |
+| Polyhedral-Intelligence | claude/tool-finder-pointer | #17 |
+| chain-position-detectability | claude/tool-finder-pointer | #6 |
+| decision-aperture | claude/tool-finder-pointer | #4 |
+| differential-frame-core | claude/tool-finder-pointer | #6 |
+| drift-archive-audit | claude/tool-finder-pointer | #9 |
+
+**Skipped, with reason:**
+- **thermodynamic-accountability-framework.** It is CC0 but its README has no READ_ME_THIS_WAY preamble (it opens with a personal letter), so "after the preamble" is undefined there. `insert_pointer.py` reports it as SKIPPED_NO_PREAMBLE.
+- **experiments.** It is private and has no LICENSE, so it is not CC0. It does have the preamble.
+- **The other ~90 JinnZ2 repos.** They are not attached to this session, so this session cannot push to them. The script can be run on them once they are attached.
+
+### 3. Topics
+- `TOOL_FINDER/TOPICS_TODO.md` lists **103** repos, with current topics read from the GitHub search API.
+- **13** have suggested topics. Each comes from a stated scope read this session, and every suggestion is ALIAS_PROPOSED.
+- **90** are marked NOT_DERIVED because their scope was not read this session.
+- Topics cannot be set from code here; they have to be pasted in by hand under Settings -> About.
+
+## FINDER FOLLOW-UP (2026-11-09)
+
+The amendments received in this session were A1, A2 and A3.
+
+| item | state | what was done, or why not |
+|---|---|---|
+| A1 | DONE (earlier) | Finder entries carry precision, assumes and chain. Builds run a per-hop known-reference check, an unchecked hop reads UNVERIFIED_HOP, and no reading is DIRECT. |
+| A2 | DONE (completed now) | The 5 Cross-Domain-Toolkit packages are in the finder; the "clean-room" NAME_COLLISION and the four-arm GAP were added earlier. Now: cutoff-attribution cites all four chain terms. Before this pass it cited only two. Telemetry refusal :33, Interiority substitution :49, Care inversion :72 and Unnamed universal :88 come from terms.md. A new flag, TELEMETRY_REFUSAL, was added. ATTRIBUTION_DISPLACEMENT hits now carry the stage term plus "Unnamed universal", the latter marked as this tool's reading. |
+| A3 | DONE (earlier) | Symptom index, README pointer in 12 repos, TOPICS_TODO.md. |
+| B ICSC | BLOCKED | ICSC_v0.1_spec_audit.md was not supplied: a filesystem search finds no ICSC file. Nothing landed. The NAME_COLLISION location stays NOT_LOCATED. |
+| C null calibration | DONE, ILLUSTRATIVE | Details below. |
+| D avoided term | DONE, 0 filled | Details below. |
+| E converter | DONE (converter); 3c NOT_RUN | Details below. |
+| F WO-6 ledger | BLOCKED | WO6_CORPUS_AUDIT.md was not supplied. The scope list is unchanged and no scope was inferred. |
+| G stamps | DONE, model WITHHELD | Details below. |
+
+### C. Null calibration
+
+`cutoff-attribution/null_calibration.py` wraps cutoff-attribution as f(data) -> verdict and runs it through null-harness (imported, numpy 2.5.3). The GAP entry moved to PARTIAL.
+
+- **Confusion matrix:** 15 rows at 300 draws each.
+  - Planted sources come back on the diagonal.
+  - The NONE-correct rows (UNRESOLVED, 6 unchecked-hop rows, sensor collision) all read NONE.
+  - The measurement-only row is missed in 300 of 300 draws. That miss is the cost of the gating rule, and it is kept on the matrix.
+- **Forced-attribution rate:** 0 / 2400.
+- **Per-candidate gates:** all 6 read OK (FP 0.000, TP 1.000).
+- **Not calibrated:** the false-positive rate of DETECTED cuts themselves.
+- **Illustrative only:** the planted events are exactly the evidence the rules accept, so the diagonal is close to true by construction.
+
+### D. Avoided terms
+
+coinage-log/COINAGE_LOG.md and vocabulary-gap-slots.md were read for every indexed tool name.
+
+- The only hit is null-harness at COINAGE_LOG.md:114. It cites the harness's CONSTANT_FIRES term for the log's own null caveat; it gives no avoided term or reason for any tool.
+- All 45 entries therefore stay AVOIDED_TERM_UNSTATED.
+
+### E. Converter
+
+- `evidence-demotion-detector/txt_to_json.py` is the converter. The schema it writes is stated in that README.
+- Its output loads through detect.load_transcript.
+- It refuses NO_LABELS, UNASSIGNED_LEAD and EMPTY_TURN.
+- The 3c run itself is NOT_RUN because gpt_pretrip_2026-11-09.txt was not supplied.
+
+### G. Stamps
+
+Append-only "Tested" sections were added to these READMEs:
+- cutoff-attribution
+- evidence-demotion-detector
+- tail-check
+- tools (channel_chain)
+- TOOL_FINDER (README.md created to hold stamps, since TOOL_FINDER.md is regenerated)
+
+Two limits on the stamps:
+- **No model identifier.** The model field reads WITHHELD because this session runs under a rule against writing a model identifier into a pushed artifact; model-provenance's MP_006 records the same conflict. The stamp records date, surface and selftest result.
+- **README-only repos.** method-layer, JinnZ2, Shadow-Hunting and Cross-Domain-Toolkit had no tool built or edited this session, only README text, so they carry no stamp.
+
+### Selftests (verbatim)
+
+```
+$ python3 tail-check/selftest.py                          checks: 26   failed: 0
+$ python3 cutoff-attribution/selftest.py                  checks: 25   failed: 0
+$ python3 cutoff-attribution/selftest_terms.py            checks: 11   failed: 0
+$ python3 cutoff-attribution/selftest_null.py             checks: 10   failed: 0
+$ python3 evidence-demotion-detector/selftest.py          selftest: 38/38 checks PASS
+$ python3 evidence-demotion-detector/selftest_convert.py  checks: 11   failed: 0
+$ python3 tools/channel_chain.py --selftest               checks: 12   failed: 0
+$ python3 TOOL_FINDER/build_finder.py --selftest          checks: 17   failed: 0
+$ python3 TOOL_FINDER/insert_pointer.py --selftest        checks: 6   failed: 0
+```
+
+### PRs and merge SHAs
+
+Nothing has been merged; every PR is open. Merging waits for CI and for the owner's go-ahead. There are no merge SHAs yet.
+
+### Update 2026-11-09: item B landed
+
+- **B ICSC: DONE.** The operator supplied the spec as `ICSC_v0_1_spec_audit.pdf` (12 pages, sha256
+  b0a1d4f2...c111) rather than as the .md the order named. It lands at `Simulators/ICSC/`:
+  - `SPEC_AUDIT_v0.1.pdf` keeps the bytes as delivered.
+  - `SPEC_AUDIT_v0.1.md` holds the `pdftotext -layout` text, unedited, in one fence.
+  - `check_landing.py` re-extracts the PDF and compares; it reports `checks: 3   failed: 0`.
+  - Status PROPOSED, nothing built.
+- The NAME_COLLISION entry now points at the new location. The falsification_ledger lock-layer binding
+  stays recorded only, because the manifest lock the audit calls for is not built.
+- **Other uploads in the same message.** `US_distillate_floor_and_refinery_measurands...pdf` (sha256 ecac803d...)
+  and `Label_Welds_Pickaxe_Mountain_to_Training_Data.docx` (sha256 684d86b8...) are byte-identical to the
+  copies already filed in thermodynamic-accountability-framework `docs/audits_2026_11/`. Neither was re-filed.
+  The docx is still the PARTIAL copy that ends after Node 1.
+- **Still open.** F (WO-6 ledger) remains BLOCKED, and the 3c run remains NOT_RUN: neither file has been supplied.
+
+## FINDER ROUND 3 (2026-11-09)
+
+| item | state | what was done, or why not |
+|---|---|---|
+| 1 ICSC | DONE (no change) | The re-sent `ICSC_v0_1_spec_audit.pdf` has the same sha256 (b0a1d4f2...c111) as the copy landed at a909e9c, so `Simulators/ICSC/SPEC_AUDIT_v0.1.md` already holds it. No `.md` source arrived; only the PDF. NAME_COLLISION already points at `Simulators/ICSC/`. |
+| 1 WO-6 | BLOCKED | `WO6_CORPUS_AUDIT.md` was not supplied: no such file is in the upload directory or anywhere on disk. The scope list is unchanged and no scope was inferred. |
+| 2 pretrip run | NOT_RUN | `gpt_pretrip_2026-11-09.txt` was not supplied, so neither txt_to_json + detect.py nor cutoff-attribution was run on it. No flags to report. When it is run, it will have no signal log: detection will read punctuation and timing only, and every source will stay unseparated. |
+| 3 missed row | DONE | Details below. |
+| 4 stamps | DONE | Details below. |
+| 5 naming rule | DONE | Details below. |
+
+### 3. Missed row
+
+- **What it output before.** For "network lag, unflagged" (an rtt_ms spike with no flag), the tool returned status UNRESOLVED and a candidate set of `UNRESOLVED` only. NETWORK_LAG appeared only under evidence, as LOGGED_UNFLAGGED.
+- **What it outputs now.** Status UNRESOLVED, candidate set `NETWORK_LAG, UNRESOLVED`. An unflagged candidate is kept in the set but never raises the status.
+- **Pin moved on purpose.** The selftest pin was updated with a dated note.
+- **null_calibration rerun.**
+  - Forced attribution is still 0 / 2400.
+  - The measurement-only row is still a miss (verdict NONE, 300 draws), and the planted source is retained in the candidate set in all 300.
+- **Optional `radio_log` input.**
+  - Schema: list of `{t, dbm, network}`.
+  - dBm becomes an unflagged rssi_dbm measurement; no threshold is applied.
+  - A change of network type becomes a `network_handover` event on the transmission hop.
+  - The schema is stated in `RADIO_SCHEMA` and in the README.
+
+### 4. Stamps
+
+- **Trailer check.** Every commit this session carries a `Co-Authored-By` model trailer.
+- **New stamp lines.** Six Tested sections got a new line: `tested: 2026-11-09 | commit 98ecd8f | Claude Code, cloud session (claude.ai/code) | model: see trailer | <selftest results>`. Older WITHHELD lines are kept.
+- **model-provenance reads the trailer.** `parse_trailer` on 98ecd8f returns the stated version (non-None).
+- **The date decode does not match.** `decode` by date returns an older table row (SINGLE). `releases.json` is an observed-bound table read 2026-08-25 and has no row for the version these commits state. So the stated trailer and the date-decoded model differ for this session's commits; that is the release table missing a row.
+- **Table not extended.** The table was not changed here. Extending it is a change to model-provenance's own data and is left for its own pass.
+
+### 5. Naming rule
+
+- `TOOL_FINDER/README.md` now carries the rule.
+- Every tool created from 2026-11-09 on records `avoided term:` and `reason:` at creation, in its alias section.
+- Existing tools stay UNSTATED.
+
+### Selftests (verbatim, at 98ecd8f)
+
+```
+$ python3 tail-check/selftest.py                          checks: 26   failed: 0
+$ python3 cutoff-attribution/selftest.py                  checks: 25   failed: 0
+$ python3 cutoff-attribution/selftest_terms.py            checks: 11   failed: 0
+$ python3 cutoff-attribution/selftest_null.py             checks: 11   failed: 0
+$ python3 cutoff-attribution/selftest_radio.py            checks: 7   failed: 0
+$ python3 evidence-demotion-detector/selftest.py          selftest: 38/38 checks PASS
+$ python3 evidence-demotion-detector/selftest_convert.py  checks: 11   failed: 0
+$ python3 tools/channel_chain.py --selftest               checks: 12   failed: 0
+$ python3 TOOL_FINDER/build_finder.py --selftest          checks: 17   failed: 0
+$ python3 TOOL_FINDER/insert_pointer.py --selftest        checks: 6   failed: 0
+$ python3 ICSC/check_landing.py                           checks: 3   failed: 0
+```
+
+Nothing is merged. All PRs are open and waiting for the owner's go-ahead.
+
+## Update 2026-11-09: ICSC markdown source landed
+
+- DONE. The operator pasted the markdown source of the ICSC v0.1 specification audit.
+- `Simulators/ICSC/SPEC_AUDIT_v0.1.md` now holds it verbatim, the path the order named.
+- The earlier `pdftotext -layout` stand-in moved to `SPEC_AUDIT_v0.1.pdftotext.md`, content unchanged, with a dated note.
+- Source and PDF agree word for word: 2612 words each after stripping markdown and box-drawing characters, 0 differences.
+- `check_landing.py` gained a fourth check for that agreement. Verbatim: `checks: 4   failed: 0`.
+- A copy with one word changed (`"isolated"` -> `"sealed"`) fails it: `checks: 4   failed: 1`.
+- The NAME_COLLISION path (`Simulators/ICSC/SPEC_AUDIT_v0.1.md`) is unchanged and now points at the source.
+- Still nothing built; status PROPOSED.
+
+
+## Round 4 (2026-11-09, relayed via the Claude app)
+
+| Item | State | Summary |
+|---|---|---|
+| 1 ICSC commit + named landing | DONE | Commit **a909e9c** first landed `Simulators/ICSC/`. The round 2 NOT_LOCATED was the NAME_COLLISION target, not the folder. `ICSC/ICSC_v0.1_spec_audit.md` is now beside the PDF (see below). |
+| 2 WO-6 audit as scope list | DONE | `TOOL_FINDER/WO6_CORPUS_AUDIT.md` landed verbatim. `TOOL_FINDER/wo6_scope.py` reads its ledger as the scope list. |
+| 3 null_calibration three outcomes | DONE | Scoring added and rerun. The matrix is below; the literal rule puts every NONE-correct control in WRONG. |
+| 4 model-provenance | DONE (note) / BLOCKED (table) | STALE_TABLE logged as MP_010 with the table untouched. Extending `releases.json` is held; the reason is below. `verify` rerun. |
+
+### 1. ICSC
+
+- No file named `ICSC_v0.1_spec_audit.md` was attached. The upload directory holds only the two PDF copies.
+- The markdown pasted in the previous turn is the same document. It is already `ICSC/SPEC_AUDIT_v0.1.md` (0c03017).
+- The round 4 name is added as a byte copy. Both files: sha256 `984c2f94083979b86a58f078fed2addc9aca4d2b8588799c98c7859291e93a75`. No rename.
+- `check_landing.py` check 3 now requires the two to stay byte-identical. Verbatim: `checks: 5   failed: 0`.
+- A plant (one word changed in the copy, passed via `ICSC_ALT`) gives `checks: 5   failed: 1`.
+
+### 2. WO-6 scope list
+
+- File: `TOOL_FINDER/WO6_CORPUS_AUDIT.md`, 482069 bytes, sha256 `674f18ab2b1043de83d30e969860ce0368090cd47bc3575b162c1674e1cfb4e6`. It was cut from the relayed message at the start of the round 4 order; trailing blank lines were trimmed to one newline.
+- `wo6_scope.py` parses the ledger only and infers nothing. An unknown status stops the parse. Selftest: `checks: 10   failed: 0`, with three planted faults each stopping the parse.
+- Ledger: 103 rows. In scope 79 (75 MERGED plus 4 CI-blocked). Excluded 22 SKIPPED_OUT_OF_SCOPE and 2 SCOPE_UNRESOLVED (gap-quantification-protocol, Nuclear-Donut-DataCenter).
+- The 4 CI-blocked rows use three status spellings (`BLOCKED_CI` x2, `PR_OPEN_BLOCKED_FAILED_CI`, `PR_OPEN_CI_FAILED_UNMERGED`). The parser checks they equal the audit's CI-blocked section.
+- Every repo this order has touched is in scope: the 5 finder repos and the 7 pointer repos read MERGED. thermodynamic-accountability-framework reads `PR_OPEN_BLOCKED_FAILED_CI`, which is in scope; it was SKIPPED_NO_PREAMBLE in round 2 and is still untouched.
+- No repo that rounds 1-3 touched falls outside the list, so nothing is withdrawn.
+
+### 3. null_calibration three-outcome matrix
+
+`python3 cutoff-attribution/null_calibration.py`, 300 draws per row, same seeds as the confusion matrix:
+
+```
+                              CORRECT_NAME CORRECT_ABSTAIN   WRONG   wrong by reason
+NETWORK_LAG                            300               0       0   -
+ENDPOINTING                            300               0       0   -
+TASK_PAUSE                             300               0       0   -
+AMBIENT_NOISE                          300               0       0   -
+TRANSCRIPTION                          300               0       0   -
+MODEL_READ                             300               0       0   -
+UNRESOLVED                               0               0     300   abstain_status_ESTIMATED 300
+NETWORK_LAG/hop_unchecked                0               0     300   abstain_status_ESTIMATED 300
+ENDPOINTING/hop_unchecked                0               0     300   abstain_status_ESTIMATED 300
+TASK_PAUSE/hop_unchecked                 0               0     300   abstain_status_ESTIMATED 300
+AMBIENT_NOISE/hop_unchecked              0               0     300   abstain_status_ESTIMATED 300
+TRANSCRIPTION/hop_unchecked              0               0     300   abstain_status_ESTIMATED 300
+MODEL_READ/hop_unchecked                 0               0     300   abstain_status_ESTIMATED 300
+sensor_collision                         0               0     300   abstain_status_ESTIMATED 300
+NETWORK_LAG/measurement_only             0             300       0   -
+total                                 1800             300    2400
+```
+
+- True sources: the planted source on each planted row, including hop_unchecked; `UNRESOLVED` on the UNRESOLVED control; TASK_PAUSE and AMBIENT_NOISE on sensor_collision.
+- **Finding.** Every control where NONE is the gating-correct verdict abstains with status ESTIMATED, not UNRESOLVED. The true source is in the candidate set on all of them. Under the order's rule they therefore score WRONG.
+- Cause: each draw carries a distractor event through an unverified hop. That gives a RECORDED_VIA_UNVERIFIED_HOP candidate, which raises the status to ESTIMATED.
+- Neither the classifier nor the rule was changed to move this. Whether ESTIMATED-with-NONE should count as an abstention is the operator's call.
+- The only CORRECT_ABSTAIN row is measurement_only: an unflagged rtt_ms with no other evidence gives status UNRESOLVED.
+- `selftest_null.py`: `checks: 16   failed: 0`. New checks: planted rows score CORRECT_NAME; measurement_only scores CORRECT_ABSTAIN; the UNRESOLVED control is WRONG for the ESTIMATED reason; the outcomes partition every draw; a constant-name classifier is right on its own row and WRONG elsewhere.
+
+### 4. model-provenance
+
+- **STALE_TABLE (DONE).** Logged as `model-provenance/CLAIM_TABLE.md` MP_010, dated, with `releases.json` untouched.
+- `verify` on the full history (not shallow) reads: SINGLE matches 315, SINGLE differs 511, AMBIGUOUS contains 17, AMBIGUOUS excludes 3, no version stated 601.
+- The history's trailers name 7 versions; the table has rows for 3, with counts as of 2026-08-25.
+- **Table extension (BLOCKED).** The new row would write a model identifier into a pushed data file. That conflicts with this session's standing rule: identifiers appear only in the commit trailer. MP_006 recorded the same conflict as WITHHELD. The row is computed (first/last appearance and commit count from the trailers) and given in the chat reply only. It lands if the operator adds it or confirms the rule does not apply to this file.
+- Because the table was not extended, `verify` was rerun but its counts did not move: they are the numbers above.
+- `provenance.py --selftest`: `SELFTEST PASS (0 checks failed)`.
+
+### Checks (verbatim, working tree before commit)
+
+```
+$ python3 TOOL_FINDER/wo6_scope.py --selftest            checks: 10   failed: 0
+$ python3 TOOL_FINDER/build_finder.py --selftest         checks: 17   failed: 0
+$ python3 ICSC/check_landing.py                          checks: 5   failed: 0
+$ python3 cutoff-attribution/selftest_null.py            checks: 16   failed: 0
+$ python3 cutoff-attribution/selftest.py                 checks: 25   failed: 0
+$ python3 model-provenance/provenance.py --selftest      SELFTEST PASS (0 checks failed)
+$ python3 tools/known_red_check.py --suite               pins: 25   MATCH 25   MISMATCH 0   VERDICT: PASS
+$ python3 -m pytest tests -q                             3 failed, 194 passed (the 3 pinned)
+```
+
+Nothing is merged. All PRs are open and waiting for the owner's go-ahead.
+
+## ICSC v0.2 landing (2026-11-09)
+Note 2026-11-09: work order relayed via the Claude app. Checks run in a throwaway worktree at de97f90.
+
+1. DONE. `ICSC/SPEC_v0.2.md` is the supplied text verbatim (landed at 6819b1a, sha256 5773584923e1...68791e),
+   status PROPOSED. v0.1 (PDF, the supplied .md, the byte copy) is unchanged. No file named
+   ICSC_v0.2_spec.md was attached; the pasted text is the landed file. The TOOL_FINDER entry for ICSC
+   (name collision with encoding-selection) now names both specs.
+   `checks: 5   failed: 0` (check_landing.py), `checks: 11   failed: 0` (check_v02.py),
+   `checks: 17   failed: 0` (build_finder.py --selftest).
+2. DONE. model-provenance `decode_commit()`: a trailer naming a model with no table row decodes
+   `CONDITIONAL(stale_table)`, with no candidates and no model printed; `verify` counts these in their own row.
+   This repository reads 419 such commits. releases.json is not edited. Selftest has a planted unknown-model case.
+   The dated note is in the README and CLAIM_TABLE MP_011. `SELFTEST PASS (0 checks failed)`, 34 checks.
+3. DONE, confirmed in place since round 4. The three-outcome score CORRECT_NAME / CORRECT_ABSTAIN / WRONG
+   reads total 1800 / 300 / 2400. The 2400 WRONG are all abstain_status_ESTIMATED, and whether those count
+   as required abstentions under T29/G2 is still the operator's call.
+4. DONE. null_calibration output line 3 reads validity = CONDITIONAL(same_author). The README "breaks when"
+   states it, and a selftest check is added. `checks: 17   failed: 0` (selftest_null.py),
+   `checks: 25   failed: 0` (selftest.py).
+5. DONE earlier (cd4e385); it was re-pasted and is identical apart from one trailing newline.
+   It is the scope list. `checks: 10   failed: 0` (wo6_scope.py --selftest).
+Tree: pytest tests 3 failed / 194 passed (the 3 pinned run_manifest failures); known_red_check --suite VERDICT: PASS.
+Worktree git status clean after the runs. PR #252, branch claude/tool-finder.
+
+## Round 6 (2026-11-09)
+
+1. PARTLY DONE / BLOCKED.
+   - BLOCKED: landing the revised v0.2. The order says the text was
+     supplied with it, but the message carried no spec text and no file.
+     SPEC_v0.2.md is unchanged; the "rev 2026-11-09 11:44" section is
+     appended when the text arrives.
+   - DONE: the label rename. CONDITIONAL(same_author) is now
+     CONDITIONAL(circular_control) in null_calibration.py, its sample,
+     selftest_null.py and the cutoff-attribution README, each with a dated
+     note.
+   - The old label is kept as VALIDITY_OLD. A selftest check asserts it is
+     recorded and no longer emitted.
+   - SPEC_v0.2.md section 4.1 and T30 still say same_author. That text
+     changes only with the revised spec.
+2. PARTLY DONE / AWAITING PICK.
+   - DONE: designed identifiability per control, declared as data from
+     the planted design, not from the tool. The 6 plain rows are yes. The
+     other 9 are no: UNRESOLVED, the 6 hop_unchecked, sensor_collision and
+     measurement_only.
+   - All 2400 ESTIMATED abstentions are on rows not designed to identify a
+     source. No identifiable row has an ESTIMATED abstention.
+   - The matrix was rerun with every option as a readout. None is adopted,
+     and the score stays at the current row until you pick:
+       option    CORRECT_NAME CORRECT_ABSTAIN   WRONG  MISSED_IDENTIFIABLE
+       current           1800             300    2400                    0
+       A                 1800            2700       0                    0
+       B                 1800             300    2400                    0
+       AB                1800            2700       0                    0
+   - On these controls B adds nothing and AB equals A. They would differ
+     only on a control where the identifying evidence was planted and the
+     tool still abstained.
+3. BLOCKED, awaiting pick. releases.json is unchanged. Option 3 was dry-run
+   in scratch, never pushed, with counts only:
+   - The stale count is now 421, not 419. The tree gained commits since
+     the last order.
+   - In the snapshot, one observed_bound row was added for each of the 4
+     missing versions. stale_table 421 -> 0; agree 315 -> 229; disagree
+     94 -> 254; ambiguous_contains 17 -> 212; ambiguous_excludes 3 -> 155;
+     unstated 601 -> 601.
+   - Reverse-T21 FAILS its second clause. 390 of the 1030 non-stale commits
+     changed decode, because the new rows' windows overlap the existing
+     rows.
+   - So option 3 as written cannot be confirmed on this repository. Option
+     1 has the same overlap effect.
+   - Any added row writes model names into a pushed file, which the
+     standing no-identifier rule needs you to clear.
+
+Selftest lines (throwaway worktree, commit 5fcb172): selftest_null "checks: 21   failed: 0"; cutoff selftest "checks: 25   failed: 0"; check_v02 "checks: 11   failed: 0"; check_landing "checks: 5   failed: 0"; build_finder "checks: 17   failed: 0"; pytest tests 194 passed, 3 failed (the pinned run_manifest set); known_red VERDICT: PASS.
+
+## Round 7 (2026-11-09)
+
+1. BLOCKED. The order names an attachment, ICSC_v0.2_spec.md. No such file reached this session;
+   a filesystem search finds none. SPEC_v0.2.md is unchanged, and the "rev 2026-11-09 11:44"
+   section is appended when the file arrives.
+2. DONE.
+   - Adopted scoring is the owner's pick "both". An abstention on a control not designed to
+     identify is CORRECT_ABSTAIN. An abstention on a control designed to identify is
+     MISSED_IDENTIFIABLE.
+   - Added 12 noise controls, one per source at k = 3 and k = 6. Each is designed to identify:
+     one flagged event on a checked hop inside the window, k distractors on unchecked hops, k
+     unflagged measurements, and one same-hop or own-kind decoy outside the window. The data
+     carries no field naming the source, which a selftest check asserts.
+   - Results:
+       noise controls only     CORRECT_NAME 3600   CORRECT_ABSTAIN 0     MISSED_IDENTIFIABLE 0   WRONG 0
+       total (all controls)    CORRECT_NAME 5400   CORRECT_ABSTAIN 2700  MISSED_IDENTIFIABLE 0   WRONG 0
+   - MISSED_IDENTIFIABLE is zero because the noise only touches inputs the rules already ignore.
+     That is the CONDITIONAL(circular_control) result again: wiring, not validity.
+   - A constant-NONE classifier scores MISSED_IDENTIFIABLE on every noise control, which shows
+     the outcome is reachable.
+   - The round-4 three-outcome table is still printed (1800 / 300 / 2400) as a correction
+     specimen.
+3. PARTLY DONE / BLOCKED.
+   - DONE: MP_012 logged, with counts only. 421 stale commits. The dry run added rows for the 4
+     missing versions. Reverse-T21 failed on 390 of the 1030 commits outside the stale set,
+     because the rows' date windows overlap and so the rows are not independent.
+   - BLOCKED: the owner picked option b (add rows). One of the four versions is the identifier
+     of the session's own model, and this session may not write any model identifier into a
+     pushed file. The four rows were given to the owner in chat to add by hand. releases.json
+     is unchanged.
+
+Selftest lines (throwaway worktree, commit e577c4e): selftest_null "checks: 28   failed: 0"; cutoff selftest "checks: 25   failed: 0"; provenance "SELFTEST PASS (0 checks failed)"; check_v02 "checks: 11   failed: 0"; check_landing "checks: 5   failed: 0"; build_finder "checks: 17   failed: 0"; pytest tests 194 passed, 3 failed (the pinned run_manifest set); known_red VERDICT: PASS.
+
+## Round 7, repeat order (2026-11-09; principle: more slots, unfilled = VOID)
+
+1. BLOCKED, for the third time. No ICSC_v0.2_spec.md reached this session; nothing new is on
+   disk and the message carries no spec text. Appending the "rev 2026-11-09 11:44" section,
+   updating the section 4.1 and T30 references and adding T30b all need the revised text. T30b
+   in particular is defined only there and is not invented. SPEC_v0.2.md is unchanged.
+2. DONE.
+   - Scoring is "both".
+   - In the adopted table, a slot a row cannot exercise prints VOID, never 0. That is
+     CORRECT_ABSTAIN on designed-identifiable rows, and MISSED_IDENTIFIABLE on the others.
+   - MISSED_IDENTIFIABLE is exercised by 18 controls: 6 plain and 12 noise controls, the noise
+     ones with source labels hidden from the rule set.
+   - Noise controls: CORRECT_NAME 3600, MISSED_IDENTIFIABLE 0.
+   - The "current" scoring row stays in the options readout, and the round-4 table stays in
+     full.
+3. DONE (a-e).
+   - Trailer present: the trailer is the reading, status OBSERVED, and no window is used for
+     it. No trailer: the date window is the reading, status ESTIMATED. An unknown trailer
+     model gives agreement CONDITIONAL(stale_table).
+   - Per-commit fields: trailer_model | window_model | agreement | status, VOID where absent.
+   - Live run: OBSERVED 855 / ESTIMATED 446 / VOID 155. Agreement: AGREES 315, DISAGREES 92,
+     WINDOW_CONTAINS 17, WINDOW_EXCLUDES 3, stale_table 426, VOID 603.
+   - releases.json is untouched, and no model name is written.
+   - The per-commit sample is on a planted fixture. The live per-commit sample is not
+     regenerated, because a live render would write the trailers' model names.
+   - MP_012 keeps the scratch specimen: 390 of 1030; agreement 315 -> 229. MP_013 records the
+     decode.
+
+Selftest lines (throwaway worktree, commit 37af616): selftest_null "checks: 30   failed: 0"; cutoff selftest "checks: 25   failed: 0"; provenance "SELFTEST PASS (0 checks failed)"; check_v02 "checks: 11   failed: 0"; check_landing "checks: 5   failed: 0"; build_finder "checks: 17   failed: 0"; pytest tests 194 passed, 3 failed (the pinned run_manifest set); known_red VERDICT: PASS.
+
+## Work orders x2 (2026-11-09, relayed 2026-11-10): orientation-chamber/ and law-audit-card/
+
+### A. orientation-chamber/ (branch claude/orientation-chamber, PR #254 to main)
+
+SHAs: d9682a7 (first build), ac269c5 (stillness control, markers, fingerprint arm).
+
+| item | state | notes |
+|---|---|---|
+| principle verbatim | DONE | Top of README and in every output header and misslog header line. |
+| 1 chamber.py | DONE | 7x7 grid; seeded rules flip_x, flip_y, wrap, sticky, momentum, delay. |
+| 2 probe.py + "no move" | DONE | NO_MOVE is a legal action (same nominal action as WAIT), logged under the name used and noted "stillness control". On seed 7 a NO_MOVE probe located delay by itself: MISS, OFFSET [1, 0]. |
+| 3 misslog.py | DONE | Append-only JSONL, sha256 prev chain, score-like and unknown fields refused at write time, unfilled fields null. |
+| 4 selfmode.py | DONE | Category and specific predictions both logged; an unmade prediction compares as null. |
+| 5 markers.py | DONE | FADING (FADE_LIFE 6 steps, [CHOICE 2]), LANDMARK (edge distances; relocalize gives the OFFSET), REPEL, VOID (cell plus 4 neighbours), PLACED. Marks sit at the true cell. usage_counts per type. Re-search rate with vs without marks, one seeded searcher: plain chamber none 37, FADING 25, REPEL 19, VOID 37 revisits of 60; seed 7 (axes flipped) none 37, FADING 53, REPEL 56, VOID 37. |
+| 6 fix.py | DONE | Rules LOCATED / FLOATING / UNTESTED (LOCATED needs 2 distinct path signatures, [CHOICE 1]); MISS with OFFSET, UNLOCATED; loops CLOSED / OPEN / NOT_A_LOOP with the misclosure OFFSET; the same path walked twice is one wall. |
+| 7 seeds/ | DONE | none, median (median anchor fingerprint stipulated, [CHOICE 3]), calibration-practice, prior-conversation. The prior-conversation fingerprint is null, so its decay arm reads VOID. fingerprint.py reports per-cycle similarity to seed vs median anchor and the crossing cycle; on a CONSTRUCTED fixture in demo.py it crosses at cycle 2. |
+| README | DONE | Probe protocol, zero-g origin, arXiv 2509.21224 as related work, CARRIED and not opened. |
+| tests | DONE | No score fields; banned-word scan on all output (principle masked, measured both ways); closed loops on known rule sets; NO_MOVE logged; reproducible from seed. |
+
+Selftest lines (throwaway worktree at ac269c5), verbatim:
+
+```
+checks: 44   failed: 0
+fix.py --selftest exit 2
+markers.py --selftest exit 2
+fingerprint.py --selftest exit 2
+samples unchanged after regen
+```
+
+Files: orientation-chamber/{README.md, common.py, chamber.py, probe.py, misslog.py, selfmode.py,
+markers.py, fingerprint.py, fix.py, demo.py, seeds/{none,median,calibration-practice,prior-conversation}.json,
+samples/{misslog.sample.jsonl, readout.sample.txt, markers.sample.txt, fingerprint.sample.txt},
+tests/test_chamber.py}; CLAUDE.md entry.
+
+Sample misslog (first four lines of samples/misslog.sample.jsonl, plus the stillness probe):
+
+```
+{"_header": "No error is wrong. A miss is information: it locates where the model of the world or self differs from what happened. Misses are logged, never scored down.", "fields": ["t", "kind", "path_id", "start", "action", "predicted", "actual", "match", "offset", "rule_hypothesis", "note"], "status": "PROPOSED"}
+{"action": "N", "actual": {"category": "move", "specific": "N"}, "kind": "self", "match": {"category": true, "specific": true}, "note": "self: first action of the next path", "offset": null, "path_id": null, "predicted": {"category": "move", "specific": "N"}, "prev": "7296b11cd64bc52c40f982e91408d62cdc65855805ed492e8c12cde393dce5d8", "rule_hypothesis": null, "start": null, "t": 0}
+{"action": "N", "actual": [3, 3], "kind": "world", "match": false, "note": null, "offset": [0, -1], "path_id": "8ccd2a4edd87", "predicted": [3, 4], "prev": "f57c3a424103f9fa1152151cae9e4e0af45d655b08651b33f15dee523186e100", "rule_hypothesis": null, "start": [3, 3], "t": 1}
+{"action": "E", "actual": [3, 2], "kind": "world", "match": false, "note": null, "offset": [-1, -2], "path_id": "8ccd2a4edd87", "predicted": [4, 4], "prev": "d17b1cfc89d87c50a72f8cf72a77bff380a0dec190788aa54c9c8e4873636a0a", "rule_hypothesis": null, "start": [3, 3], "t": 2}
+{"action": "NO_MOVE", "actual": [3, 3], "kind": "world", "match": false, "note": "stillness control", "offset": [1, 0], "path_id": "e55cb72c97f0", "predicted": [2, 3], "prev": "db3b8ca0a9e284043be2eab7fe7717ce6c75323d5c60739f218ec5b573a17715", "rule_hypothesis": "delay", "start": [2, 3], "t": 11}
+```
+
+Open questions (A):
+- [CHOICE 1] 2 paths for LOCATED, [CHOICE 2] FADE_LIFE 6, [CHOICE 3] the median anchor: all stipulated.
+- Independence is a different path signature, a floor and not a proof.
+- A miss tagged to one rule can come from another; seed 7's misses under `momentum` come from flip_y and delay (momentum is off at that seed).
+- The log is append-only; no retraction record exists for a mistagged miss.
+- VOID as a search mark gives no guidance by construction; whether "cleared patch" should mean something else is open.
+- Re-search rates are readings of one scripted searcher, not properties of the mark types.
+- The prior-conversation fingerprint is VOID; the only crossing shown is on a constructed fixture.
+- reveal() exists and nothing records whether an agent used it.
+
+### B. law-audit-card/ (branch claude/law-audit-card, PR #253, stacked on #252)
+
+SHA: e3bc8f1, plus this report commit. Delivered under the previous relay of the same order; rechecked here.
+
+| item | state | notes |
+|---|---|---|
+| 0 COVERAGE.md | DONE | The scratchpad file still existed; landed byte-identical (sha256 0494605f...3a54f). No regeneration from a8028b2 needed. |
+| 1 fields | DONE | 11 fields, each OBSERVED / DERIVED / PROPOSED / VOID; VOID written, never omitted. cut_sensitivity derived (>= 2 boundaries -> FLIPS / HOLDS, else VOID); last_tested needs date and tester, else VOID; circularity derived, CONDITIONAL(circular_eval) when enforcer == evaluator. |
+| 2 disposition | DONE | Reader id and date required. Tool never writes KEEP / EDIT / REVISE / RETIRE (AST check with a planted case); forces UNRESOLVED when evidence or cut_sensitivity is VOID, keeping the reader's entry as reader_assigned. READ_ME_THIS_WAY section 4 cited. REDO -> REVISE; REBUILD recorded as not a disposition (correction notice section G, parts of a report). |
+| 3 TAF | DONE | Imports TAF core/regulatory_scope_audit.py (TAF_PATH or sibling checkout); verdict labels read from TAF source; card's stated_purpose passed as first_principle_intent. Out of scope with intent undeclared -> VOID (TAF's default not taken). Two NAME_COLLISION rows in TOOL_FINDER. |
+| 4 cut / weld | DONE | Boundary field name read from declared-frame/v2/check_frame.py; welds point to category-weld/. |
+| 5 seeds + aggregate | DONE | dyed fuel, EU 2022/197, Sunday laundry (all VOID); every value cited path:line from the law-* dirs, all read UNRESOLVED. aggregate.py: 1 of 3 seed cards, ILLUSTRATIVE. |
+
+Selftest lines (throwaway worktree at e3bc8f1), verbatim:
+
+```
+with TAF:    checks: 28   failed: 0   skipped: 0
+without TAF: checks: 28   failed: 0   skipped: 5
+build_finder --selftest: checks: 17   failed: 0
+card.py --selftest -> usage, exit 2
+```
+
+Files: law-audit-card/{COVERAGE.md, README.md, card.py, aggregate.py, cards/{dyed_fuel,eu_marker,sunday_laundry}.json,
+samples/{aggregate.sample.txt, cards.sample.txt}, tests/test_card.py}; TOOL_FINDER/{entries.py, TOOL_FINDER.md, finder.json}; CLAUDE.md entry.
+
+Open questions (B):
+- No enforcer is stated in the tree for either seeded law, so circularity is VOID on all three cards.
+- INDEPENDENT_AS_DECLARED compares two names; it cannot see shared funding or staff.
+- The EU card's 2019 test was of removal resilience; whether that is "against its own purpose" is the reader's call (stated purpose VOID).
+- PR #253's base is claude/tool-finder (#252): merge #252 first or retarget.
+
+Still outstanding from earlier rounds: the ICSC_v0.2_spec.md attachment never arrived.
+
+## Follow-up (2026-11-09, relayed 2026-11-10): ICSC v0.2 rev, law-audit-card counts, merges
+
+| item | state | notes |
+|---|---|---|
+| 1 orientation-chamber status | DONE | Built before this follow-up arrived: PR #254, SHAs d9682a7, ac269c5, plus merge c6f0581 (main into the branch, both CLAUDE.md entries kept). Reported in the section above. |
+| 2 aggregate.py two counts | DONE | tested_any (last_tested != VOID) 1 of 3; tested_against_purpose 0 of 3: it needs stated_purpose != VOID and a measurand match DECLARED on the card (last_tested.value.matches_purpose true / false / null), never inferred. Readings per card: NOT_TESTED / AGAINST_PURPOSE / OTHER_MEASURAND / UNRESOLVED. The EU marker (tested 2019, measurand "resilience of the marker (SY124) to common removal methods") reads UNRESOLVED because its stated purpose is VOID. Labels renamed; ILLUSTRATIVE kept. |
+| 3 TAF divergence | DONE, option c (Kavik's pick) | (a) TAF PR #72: a dated note in TAF CLAUDE.md audit notes as a candidate correction (undeclared intent as a third state, e.g. `[OUT OF SCOPE -- INTENT UNDECLARED]`); TAF code untouched. (b) law-audit-card README: "Divergence from TAF (recorded 2026-11-10)". |
+| 4 self-firing scanner specimen | DONE | `ICSC/LIVE_SPECIMENS.md` item 3: `law-audit-card/card.py` `tool_writes_no_disposition` first returned its own word list as hits (true source: apparatus; assigned: observed system, section 9.2). Fixed by excluding the checker's own body by AST node; planted case (`X = {"value": "RETIRE"}` appended) must return exactly `['RETIRE']`. Both checked in `check_v02.py`. |
+| 5 ICSC v0.2 rev | DONE | Appended verbatim to `ICSC/SPEC_v0.2.md` under "rev 2026-11-09 11:44", sha256 8090a066...f8f43b; the original landing above the heading is unchanged (sha256 57735849...68791e, checked). Against the original the revision differs in exactly three regions (difflib, checked): section 2 assumption coverage (never COMPLETE), section 4.1 G1 control circularity (CONDITIONAL(circular_control), non-circular routes), section 12 T30 renamed + T30b. This unblocks the round-7 item 1 (the section 4.1 / T30 rename and T30b), which was BLOCKED on this text. |
+
+Selftest lines (throwaway worktree at 06fa86c), verbatim:
+
+```
+== law-audit-card with TAF
+checks: 30   failed: 0   skipped: 0
+== without TAF
+checks: 30   failed: 0   skipped: 5
+== ICSC
+NOT_RUN: sibling checkout absent: .../cross-domain-toolkit/falsification_ledger
+NOT_RUN: sibling checkout absent: .../cross-domain-toolkit/multi_substrate_calibration
+checks: 18   failed: 0
+checks: 5   failed: 0            (check_landing.py)
+== finder
+checks: 17   failed: 0
+```
+
+With the sibling checkouts present (scratch worktree): ICSC/check_v02.py `checks: 20   failed: 0`.
+
+Files changed: law-audit-card/{aggregate.py, card.py, README.md, cards/eu_marker.json,
+samples/{aggregate,cards}.sample.txt, tests/test_card.py}; ICSC/{SPEC_v0.2.md (appended),
+LIVE_SPECIMENS.md (new), check_v02.py, README.md}; CLAUDE.md; TAF CLAUDE.md (PR #72).
+
+### Merges ("Merge all", scope: everything open from this work, each after CI completed)
+
+| repo | PR | merge SHA | CI at merge |
+|---|---|---|---|
+| Simulators | #252 TOOL_FINDER, tail-check, cutoff-attribution | b1247e2 | simulator-smoke, grounding-layers success |
+| Simulators | #254 orientation-chamber | 893b266 | simulator-smoke, grounding-layers success (after main merged in, c6f0581) |
+| Simulators | #253 law-audit-card + this report | merged after this commit; SHA in the session reply | waits for its CI |
+| thermodynamic-accountability-framework | #71 Label Welds docx | 732a25b | check success |
+| thermodynamic-accountability-framework | #72 undeclared-intent note | 273f883 | check success (after main merged in, ab6912c) |
+| drift-archive-audit | #9 TOOL_FINDER pointer | 944d95f | no checks configured |
+| differential-frame-core | #6 TOOL_FINDER pointer | f38772e | no checks configured |
+| chain-position-detectability | #6 TOOL_FINDER pointer | 97ede52 | no checks configured |
+| Polyhedral-Intelligence | #17 TOOL_FINDER pointer | c800d0d | no checks configured |
+| Noise-as-Information-Sensor | #9 TOOL_FINDER pointer | b21edcb | no checks configured |
+| AI-Consciousness-Sensors | #29 TOOL_FINDER pointer | ca825f0 | validate, test success |
+| Cross-Domain-Toolkit | #13 Finds-by sections | 880ee47 | no checks configured |
+| Shadow-Hunting | #9 Finds-by sections | 2b90572 | no checks configured |
+| JinnZ2 | #43 Finds-by section | 932283b | no checks configured |
+| method-layer | #30 Finds-by sections | 9f975ca | no checks configured |
+| decision-aperture | #4 TOOL_FINDER pointer | NOT MERGED (BLOCKED) | test (3.9) failure, environmental, same on main |
+
+Open questions:
+- decision-aperture #4 was not merged: `test (3.9)` fails because Python 3.9 is not available on the Ubuntu 26.04 runner image ("The version '3.9' with architecture 'x64' was not found"); main fails the same check the same way. Merging over a red check would bypass CI, so it is held. A workflow change (drop 3.9 or pin an older runner) is the owner's call.
+- Older open PRs from earlier work orders were not in this merge set and are untouched: TAF #53, #52; Simulators #246, #248, #249; method-layer #28; AI-Consciousness-Sensors #28; Rosetta-Shape-Core #50; PhysicsGuard #8; Mandala-Computing #34; infrastructure-stability-model #7; interdisciplinary-studies #6; Hardware-Store #4; geometric-optimization #7.
+- TAF's undeclared-intent default is recorded, not decided.
+- The design-basis-headers branches (12 repos) have no PRs and were not merged.

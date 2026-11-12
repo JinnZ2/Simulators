@@ -1,0 +1,96 @@
+{
+ "_note": "ILLUSTRATIVE: synthetic timestamps and text; no real session, no real person.",
+ "segments": [
+  {
+   "t_start": 0.0,
+   "t_end": 4.1,
+   "speaker": "user",
+   "text": "The pressure on the left drive axle reads"
+  },
+  {
+   "t_start": 4.3,
+   "t_end": 7.0,
+   "speaker": "model",
+   "text": "It sounds like you trailed off there. What were you going to say?"
+  },
+  {
+   "t_start": 7.4,
+   "t_end": 10.0,
+   "speaker": "user",
+   "text": "Ninety five. I didn't stop, it cut me."
+  },
+  {
+   "t_start": 10.2,
+   "t_end": 12.0,
+   "speaker": "model",
+   "text": "Got it, ninety five."
+  },
+  {
+   "t_start": 20.0,
+   "t_end": 23.5,
+   "speaker": "user",
+   "text": "And the trailer [inaudible] side is"
+  },
+  {
+   "t_start": 23.8,
+   "t_end": 25.0,
+   "speaker": "model",
+   "text": "Which side?"
+  },
+  {
+   "t_start": 40.0,
+   "t_end": 42.0,
+   "speaker": "user",
+   "text": "Checking the glad hands now."
+  },
+  {
+   "t_start": 50.0,
+   "t_end": 51.0,
+   "speaker": "model",
+   "text": "Okay."
+  }
+ ],
+ "cut_marks": [
+  {
+   "t": 4.1,
+   "note": "user: it cut me"
+  },
+  {
+   "t": 41.0,
+   "note": "user tagged, no transcript sign"
+  }
+ ],
+ "signal_log": [
+  {
+   "t": 4.0,
+   "kind": "network_drop"
+  },
+  {
+   "t": 22.9,
+   "kind": "endpoint_fired"
+  },
+  {
+   "t": 23.2,
+   "kind": "asr_error"
+  },
+  {
+   "t": 41.5,
+   "kind": "rtt_ms",
+   "flag": false
+  }
+ ],
+ "reference_checks": [
+  {
+   "hop": "transmission",
+   "injected": "ping seq 1-20",
+   "observed": "ping seq 1-20",
+   "note": "ILLUSTRATIVE: known ping sequence echoed back"
+  },
+  {
+   "hop": "decoding",
+   "injected": "one two three four",
+   "observed": "one to three four",
+   "note": "ILLUSTRATIVE: known phrase read through ASR"
+  }
+ ]
+}
