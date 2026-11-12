@@ -1,0 +1,23 @@
+id: L4_FIRE_THRESHOLD_RUN5
+layer: L4
+equation: "fire when fuel exceeds a fixed threshold"
+assumes:
+  - id: A1
+    text: "threshold lies inside the range the fuel pool reaches"
+    block: void
+if_assumption_fails:
+  A1: "no fires at all"
+scope: "run 5: litter guilds + fire"
+provenance:
+  class: DERIVED
+  source: "run_5: work order 2026-11-10 (reported there; code not in this tree; not recomputed)"
+admitted_by: void
+test_results:
+  - test: void
+    run: run_5
+    result: "no fires (threshold miscalibrated)"
+    value: "reported, not recomputed"
+open_issues:
+  - "what was rejected is the parameterisation; the functional form continues in L4_FIRE_FUEL_MOISTURE"
+depends_on: []
+status: rejected

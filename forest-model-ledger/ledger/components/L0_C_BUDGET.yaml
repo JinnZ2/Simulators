@@ -1,0 +1,16 @@
+id: L0_C_BUDGET
+layer: L0
+equation: void
+assumes: []
+if_assumption_fails: void
+scope: void
+provenance:
+  class: PROPOSED
+  source: "work order 2026-11-10, L0 audit list"
+admitted_by: void
+test_results: []
+open_issues:
+  - "payment tree->fungus is biologically a C flux but is carried in N units; no photosynthesis or respiration rows exist"
+  - "until this budget is live the multi-budget guard cannot see an error compensated in it"
+depends_on: []
+status: placeholder

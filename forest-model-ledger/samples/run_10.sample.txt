@@ -1,0 +1,50 @@
+== 1. per-seed fire count and fire times (base, 300 yr, dt 1/52)
+seed 0: fires  80  first 5 [14.75, 26.865, 30.712, 37.077, 40.731]  N mis -5.061906e-11
+seed 1: fires  80  first 5 [14.981, 24.635, 27.885, 31.981, 36.846]  N mis -5.036327e-11
+seed 2: fires  79  first 5 [19.962, 25.058, 29.442, 36.885, 40.077]  N mis -5.050182e-11
+seed 3: fires  78  first 5 [14.808, 24.019, 29.019, 36.365, 39.173]  N mis -5.007550e-11
+seed 4: fires  76  first 5 [14.885, 20.808, 26.135, 30.731, 37.827]  N mis -5.010747e-11
+seed 5: fires  81  first 5 [15.731, 20.808, 26.654, 30.231, 34.577]  N mis -5.009326e-11
+seed 6: fires  75  first 5 [21.692, 25.712, 35.865, 39.923, 43.0]  N mis -5.003642e-11
+seed 7: fires  81  first 5 [16.827, 21.904, 26.25, 30.577, 34.019]  N mis -5.002221e-11
+seed 8: fires  78  first 5 [19.962, 26.019, 31.25, 37.923, 40.096]  N mis -4.996892e-11
+seed 9: fires  77  first 5 [22.558, 29.75, 32.615, 35.154, 40.096]  N mis -5.022827e-11
+distinct fire-time sequences across 10 seeds: 10
+
+== 2. seed -> ignition draw alone (drought_sd=0: precipitation identical in every seed)
+seed 0: fires  76  first 3 [36.0, 37.942, 39.923]  precip total 300.0000000000  N mis -5.013234e-11
+seed 1: fires  76  first 3 [33.0, 35.019, 37.885]  precip total 300.0000000000  N mis -4.972023e-11
+seed 2: fires  75  first 3 [35.0, 37.923, 42.846]  precip total 300.0000000000  N mis -4.992273e-11
+seed 3: fires  76  first 3 [33.942, 35.904, 38.885]  precip total 300.0000000000  N mis -4.986234e-11
+seed 4: fires  76  first 3 [32.942, 34.962, 39.942]  precip total 300.0000000000  N mis -4.997247e-11
+seed 5: fires  76  first 3 [32.962, 34.865, 37.019]  precip total 300.0000000000  N mis -5.028511e-11
+seed 6: fires  75  first 3 [34.962, 39.019, 40.885]  precip total 300.0000000000  N mis -5.034906e-11
+seed 7: fires  76  first 3 [33.0, 36.981, 38.885]  precip total 300.0000000000  N mis -5.070078e-11
+seed 8: fires  76  first 3 [33.904, 36.038, 40.865]  precip total 300.0000000000  N mis -4.989076e-11
+seed 9: fires  76  first 3 [32.981, 36.904, 40.038]  precip total 300.0000000000  N mis -4.962430e-11
+distinct fire-time sequences with precipitation held identical: 10
+distinct precipitation totals: 1
+
+== 3. misclosure at dt, dt/2, dt/4 and at a power-of-two dt (seed 0)
+dt 1/52   steps  15600  N mis -5.061906e-11  water mis -3.426148e-13  fires 80
+dt 1/104  steps  31200  N mis +7.124257e-11  water mis -2.789546e-12  fires 79
+dt 1/208  steps  62400  N mis +4.451621e-10  water mis +4.596323e-13  fires 79
+dt 1/64   steps  19200  N mis +1.421085e-13  water mis -9.791057e-13  fires 79
+dt 1/128  steps  38400  N mis -8.171241e-14  water mis -2.477574e-12  fires 81
+
+== 4. misclosure with fire disabled, and with the constant deposition term removed (seed 0..2)
+seed 0: no fire -5.074696e-11   dep=0 -2.220446e-14 (fires 0)   no fire and dep=0 -2.220446e-14
+seed 1: no fire -5.042011e-11   dep=0 -6.128431e-14 (fires 0)   no fire and dep=0 -6.128431e-14
+seed 2: no fire -4.982326e-11   dep=0 +1.643130e-14 (fires 0)   no fire and dep=0 +1.643130e-14
+
+== 5. growth with run length (seed 0, dt 1/52): roundoff bias accumulates per step
+years   30  steps   1560  N mis -8.988366e-13  per step -5.762e-16
+years   75  steps   3900  N mis +1.250555e-12  per step +3.207e-16
+years  150  steps   7800  N mis -1.611511e-11  per step -2.066e-15
+years  300  steps  15600  N mis -5.061906e-11  per step -3.245e-15
+
+== 6. the deposition accumulator alone, no model: add dt*dep N times in float64
+dt 1/52 : accumulated 300.0000000000501   minus exact 300 = +5.007905e-11   (model N misclosure has the opposite sign: it subtracts this counter)
+dt 1/104: accumulated 299.99999999992906   minus exact 300 = -7.094059e-11   (model N misclosure has the opposite sign: it subtracts this counter)
+dt 1/208: accumulated 299.99999999955526   minus exact 300 = -4.447429e-10   (model N misclosure has the opposite sign: it subtracts this counter)
+dt 1/64 : accumulated 300.0   minus exact 300 = +0.000000e+00   (model N misclosure has the opposite sign: it subtracts this counter)

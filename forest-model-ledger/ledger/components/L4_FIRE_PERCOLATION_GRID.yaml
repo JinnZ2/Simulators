@@ -1,0 +1,27 @@
+id: L4_FIRE_PERCOLATION_GRID
+layer: L4
+equation: "site percolation of fire on a grid; spread to neighbours with drought-dependent probability"
+assumes:
+  - id: A1
+    text: "nearest-neighbour spread only"
+    block: void
+  - id: A2
+    text: "fuel is spatially uncorrelated"
+    block: void
+if_assumption_fails:
+  A1: "long-range spread (embers) lowers the threshold: 5% spotting moves it to ~0.5 (run 8)"
+  A2: void
+scope: "run 7 drought sweep"
+provenance:
+  class: DERIVED
+  source: "run_7: original code filed 2026-11-11, rerun in this tree, output matches the log"
+admitted_by: void
+test_results:
+  - test: void
+    run: run_7
+    result: "grid fraction 0.164 at drought 0.6, 0.719 at 0.7, 0.954 at 0.8; sd peaks 0.322 at 0.7"
+    value: "rerun of the original code"
+open_issues:
+  - "L 120, 12 reps, one seed; finite-size effects on the threshold are unassessed"
+depends_on: []
+status: candidate

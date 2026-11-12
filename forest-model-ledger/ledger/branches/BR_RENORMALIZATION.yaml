@@ -1,0 +1,11 @@
+id: BR_RENORMALIZATION
+family: "renormalization (scale)"
+status: placeholder
+components: []
+links:
+  - BR_FIRE_PERCOLATION
+  - BR_ISING_MASTING
+convergence_anchors: []
+runs: []
+open_issues: []
+note: void

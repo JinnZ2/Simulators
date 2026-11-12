@@ -1,0 +1,9 @@
+id: BR_REGIME_MAP
+family: "regime map: families x regimes"
+status: placeholder
+components: []
+links: []
+convergence_anchors: []
+runs: []
+open_issues: []
+note: "cells live in ledger/regime_map.yaml; all void"

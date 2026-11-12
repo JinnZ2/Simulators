@@ -1,0 +1,26 @@
+seeds 0..19 paired ; band 2.0 sd ; thresholds {'REL_TOL': 0.05, 'K_MOVED': 5.0, 'K_EQ': 2.0, 'K_SPIKE': 3.0} ; simulations 220
+class by materiality margin delta (sd of the anchor's own seeds); run_15 used 0.50
+  nudge        eff sd  0.40 0.42 0.44 0.46 0.48 0.50 0.52 0.54 0.56 0.58 0.60   class over the range
+  uG x1.1       0.523     H    H    H    H    H    H    H    A    A    A    A   HIDDEN_IN_NOISE -> ABSORBED (changes at [0.54])
+  uG x0.9       0.500     H    H    H    H    H    A    A    A    A    A    A   HIDDEN_IN_NOISE -> ABSORBED (changes at [0.5])
+  KG x1.1       0.458     H    H    H    A    A    A    A    A    A    A    A   HIDDEN_IN_NOISE -> ABSORBED (changes at [0.46])
+  KG x0.9       0.516     H    H    H    H    H    H    A    A    A    A    A   HIDDEN_IN_NOISE -> ABSORBED (changes at [0.52])
+  kill_T x1.1   0.585     H    H    H    H    H    H    H    H    H    H    A   HIDDEN_IN_NOISE -> ABSORBED (changes at [0.6])
+  kill_T x0.9   0.478     H    H    H    H    A    A    A    A    A    A    A   HIDDEN_IN_NOISE -> ABSORBED (changes at [0.48])
+  season x1.1   0.407     A    A    A    A    A    A    A    A    A    A    A   ABSORBED
+  season x0.9   0.484     S    S    S    S    S    S    S    S    S    S    S   SEED_SPECIFIC
+  aT x1.1       0.432     H    H    A    A    A    A    A    A    A    A    A   HIDDEN_IN_NOISE -> ABSORBED (changes at [0.44])
+  aT x0.9       0.459     H    H    H    A    A    A    A    A    A    A    A   HIDDEN_IN_NOISE -> ABSORBED (changes at [0.46])
+run_15 counts over the 33 at 0.50: HIDDEN 18, ABSORBED 9, SEED_SPECIFIC 2, INERT 2, UNRESOLVED 2
+  delta 0.40: HIDDEN_IN_NOISE 23  ABSORBED 4  SEED_SPECIFIC 2  INERT 2  UNRESOLVED 2
+  delta 0.42: HIDDEN_IN_NOISE 23  ABSORBED 4  SEED_SPECIFIC 2  INERT 2  UNRESOLVED 2
+  delta 0.44: HIDDEN_IN_NOISE 22  ABSORBED 5  SEED_SPECIFIC 2  INERT 2  UNRESOLVED 2
+  delta 0.46: HIDDEN_IN_NOISE 20  ABSORBED 7  SEED_SPECIFIC 2  INERT 2  UNRESOLVED 2
+  delta 0.48: HIDDEN_IN_NOISE 19  ABSORBED 8  SEED_SPECIFIC 2  INERT 2  UNRESOLVED 2
+  delta 0.50: HIDDEN_IN_NOISE 18  ABSORBED 9  SEED_SPECIFIC 2  INERT 2  UNRESOLVED 2
+  delta 0.52: HIDDEN_IN_NOISE 17  ABSORBED 10  SEED_SPECIFIC 2  INERT 2  UNRESOLVED 2
+  delta 0.54: HIDDEN_IN_NOISE 16  ABSORBED 11  SEED_SPECIFIC 2  INERT 2  UNRESOLVED 2
+  delta 0.56: HIDDEN_IN_NOISE 16  ABSORBED 11  SEED_SPECIFIC 2  INERT 2  UNRESOLVED 2
+  delta 0.58: HIDDEN_IN_NOISE 16  ABSORBED 11  SEED_SPECIFIC 2  INERT 2  UNRESOLVED 2
+  delta 0.60: HIDDEN_IN_NOISE 15  ABSORBED 12  SEED_SPECIFIC 2  INERT 2  UNRESOLVED 2
+  H HIDDEN_IN_NOISE  A ABSORBED  S SEED_SPECIFIC  I INERT  U UNRESOLVED

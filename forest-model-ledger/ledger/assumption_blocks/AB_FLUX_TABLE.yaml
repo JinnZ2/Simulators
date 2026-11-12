@@ -1,0 +1,10 @@
+id: AB_FLUX_TABLE
+statement: "every continuous transfer is a (name, source, sink, rate) row; the derivative is assembled only from rows"
+if_fails: "misclosure in the budget whose row is missing"
+used_by:
+  - L0_N_BUDGET
+  - L0_WATER_BUDGET
+used_by_runs:
+  - run_9
+open_issues: []
+status: candidate

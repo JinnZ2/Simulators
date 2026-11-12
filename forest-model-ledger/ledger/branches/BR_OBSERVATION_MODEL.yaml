@@ -1,0 +1,13 @@
+id: BR_OBSERVATION_MODEL
+family: "meta-analytic observation model (study-level method terms)"
+status: candidate
+components:
+  - L5_METHOD_ARTIFACT
+links:
+  - BR_MUTUALISM_ODE
+convergence_anchors: []
+runs:
+  - run_2
+open_issues:
+  - "synthetic studies only"
+note: void

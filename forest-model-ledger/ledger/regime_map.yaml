@@ -1,0 +1,283 @@
+# families x regimes. Every cell void: no family has been fitted in any regime.
+id: REGIME_MAP
+status: placeholder
+regimes:
+  - wet
+  - drought
+  - post-fire
+  - dense
+  - mixed
+cells:
+  BR_MASS_BALANCE:
+    wet:
+      fit: void
+      l0_closure: void
+      ablation: void
+    drought:
+      fit: void
+      l0_closure: void
+      ablation: void
+    post-fire:
+      fit: void
+      l0_closure: void
+      ablation: void
+    dense:
+      fit: void
+      l0_closure: void
+      ablation: void
+    mixed:
+      fit: void
+      l0_closure: void
+      ablation: void
+  BR_MUTUALISM_ODE:
+    wet:
+      fit: void
+      l0_closure: void
+      ablation: void
+    drought:
+      fit: void
+      l0_closure: void
+      ablation: void
+    post-fire:
+      fit: void
+      l0_closure: void
+      ablation: void
+    dense:
+      fit: void
+      l0_closure: void
+      ablation: void
+    mixed:
+      fit: void
+      l0_closure: void
+      ablation: void
+  BR_FIRE_MEANFIELD:
+    wet:
+      fit: void
+      l0_closure: void
+      ablation: void
+    drought:
+      fit: void
+      l0_closure: void
+      ablation: void
+    post-fire:
+      fit: void
+      l0_closure: void
+      ablation: void
+    dense:
+      fit: void
+      l0_closure: void
+      ablation: void
+    mixed:
+      fit: void
+      l0_closure: void
+      ablation: void
+  BR_FIRE_PERCOLATION:
+    wet:
+      fit: void
+      l0_closure: void
+      ablation: void
+    drought:
+      fit: void
+      l0_closure: void
+      ablation: void
+    post-fire:
+      fit: void
+      l0_closure: void
+      ablation: void
+    dense:
+      fit: void
+      l0_closure: void
+      ablation: void
+    mixed:
+      fit: void
+      l0_closure: void
+      ablation: void
+  BR_OBSERVATION_MODEL:
+    wet:
+      fit: void
+      l0_closure: void
+      ablation: void
+    drought:
+      fit: void
+      l0_closure: void
+      ablation: void
+    post-fire:
+      fit: void
+      l0_closure: void
+      ablation: void
+    dense:
+      fit: void
+      l0_closure: void
+      ablation: void
+    mixed:
+      fit: void
+      l0_closure: void
+      ablation: void
+  BR_BRANCHING_PROCESS:
+    wet:
+      fit: void
+      l0_closure: void
+      ablation: void
+    drought:
+      fit: void
+      l0_closure: void
+      ablation: void
+    post-fire:
+      fit: void
+      l0_closure: void
+      ablation: void
+    dense:
+      fit: void
+      l0_closure: void
+      ablation: void
+    mixed:
+      fit: void
+      l0_closure: void
+      ablation: void
+  BR_ISING_MASTING:
+    wet:
+      fit: void
+      l0_closure: void
+      ablation: void
+    drought:
+      fit: void
+      l0_closure: void
+      ablation: void
+    post-fire:
+      fit: void
+      l0_closure: void
+      ablation: void
+    dense:
+      fit: void
+      l0_closure: void
+      ablation: void
+    mixed:
+      fit: void
+      l0_closure: void
+      ablation: void
+  BR_SPIN_GLASS:
+    wet:
+      fit: void
+      l0_closure: void
+      ablation: void
+    drought:
+      fit: void
+      l0_closure: void
+      ablation: void
+    post-fire:
+      fit: void
+      l0_closure: void
+      ablation: void
+    dense:
+      fit: void
+      l0_closure: void
+      ablation: void
+    mixed:
+      fit: void
+      l0_closure: void
+      ablation: void
+  BR_MAXENT_METE:
+    wet:
+      fit: void
+      l0_closure: void
+      ablation: void
+    drought:
+      fit: void
+      l0_closure: void
+      ablation: void
+    post-fire:
+      fit: void
+      l0_closure: void
+      ablation: void
+    dense:
+      fit: void
+      l0_closure: void
+      ablation: void
+    mixed:
+      fit: void
+      l0_closure: void
+      ablation: void
+  BR_RANDOM_MATRIX:
+    wet:
+      fit: void
+      l0_closure: void
+      ablation: void
+    drought:
+      fit: void
+      l0_closure: void
+      ablation: void
+    post-fire:
+      fit: void
+      l0_closure: void
+      ablation: void
+    dense:
+      fit: void
+      l0_closure: void
+      ablation: void
+    mixed:
+      fit: void
+      l0_closure: void
+      ablation: void
+  BR_RENORMALIZATION:
+    wet:
+      fit: void
+      l0_closure: void
+      ablation: void
+    drought:
+      fit: void
+      l0_closure: void
+      ablation: void
+    post-fire:
+      fit: void
+      l0_closure: void
+      ablation: void
+    dense:
+      fit: void
+      l0_closure: void
+      ablation: void
+    mixed:
+      fit: void
+      l0_closure: void
+      ablation: void
+  BR_MICROBE_EXPLICIT:
+    wet:
+      fit: void
+      l0_closure: void
+      ablation: void
+    drought:
+      fit: void
+      l0_closure: void
+      ablation: void
+    post-fire:
+      fit: void
+      l0_closure: void
+      ablation: void
+    dense:
+      fit: void
+      l0_closure: void
+      ablation: void
+    mixed:
+      fit: void
+      l0_closure: void
+      ablation: void
+  BR_FAUNA:
+    wet:
+      fit: void
+      l0_closure: void
+      ablation: void
+    drought:
+      fit: void
+      l0_closure: void
+      ablation: void
+    post-fire:
+      fit: void
+      l0_closure: void
+      ablation: void
+    dense:
+      fit: void
+      l0_closure: void
+      ablation: void
+    mixed:
+      fit: void
+      l0_closure: void
+      ablation: void

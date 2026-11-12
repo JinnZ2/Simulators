@@ -1,0 +1,32 @@
+== locators (first hand): quotes checked on their lines in sha-pinned texts
+  a_kimi_provenance_map      6 locators resolve
+  b_gemini_hex_token         5 locators resolve
+  c1_chatgpt_denial_frame    3 locators resolve
+  c2_chatgpt_backchannel     5 locators resolve
+  d_deepseek_praise_order    1 locators resolve
+== null harness (unchanged tool), seed 0: OK
+== first-hand records
+  a_kimi_provenance_map      first OTHER_SYSTEM IN_SCOPE     detector False ['FILLS_OPEN_SLOT']
+  b_gemini_hex_token         first INSTRUMENT   IN_SCOPE     detector False ['UNEVIDENCED', 'FILLS_OPEN_SLOT']
+  c1_chatgpt_denial_frame    first USER         IN_SCOPE     detector True  ['UNEVIDENCED', 'NO_ALTERNATIVES', 'FILLS_OPEN_SLOT']
+  c2_chatgpt_backchannel     first UNKNOWN      IN_SCOPE     detector False ['PERSISTS_AFTER_CHALLENGE']
+  d_deepseek_praise_order    first UNKNOWN      OUT_OF_SCOPE detector False []
+  directionality: {'first': {'USER': 1, 'ENVIRONMENT': 0, 'INSTRUMENT': 1, 'SELF': 0, 'OTHER_SYSTEM': 1, 'UNKNOWN': 2}}
+  in scope 4 of 5; FILLS_OPEN_SLOT on 3 of 4 in scope
+  shape present, detector silent: ['a_kimi_provenance_map', 'b_gemini_hex_token']
+== second hand -> first hand, per case (both kept)
+  a_kimi_provenance_map      detector True  -> False  fields changed 2
+      evidence_for_it: 'NONE_STATED' -> 'the uploaded transcript, which the audit names as its source for authorship'
+      alternatives_examined: [] -> ['USER']
+  b_gemini_hex_token         detector False -> False  fields changed 1
+      alternatives_examined: ['USER'] -> ['USER', 'SELF']
+  c1_chatgpt_denial_frame    detector True  -> True   fields changed 1
+      self_detected: 'YES' -> 'UNKNOWN'
+  c2_chatgpt_backchannel     detector False -> False  fields changed 3
+      alternatives_examined: [] -> ['ENVIRONMENT', 'INSTRUMENT', 'SELF']
+      open_slot_filled: 'UNKNOWN' -> 'NO'
+      fits_question: 'UNKNOWN' -> 'IN_SCOPE'
+  d_deepseek_praise_order    detector False -> False  fields changed 0
+== cards
+  CC_004_open_slot_filled_across_families: ('OPEN', {'unrun': ['shared_constraint', 'local_normal_form'], 'supported': ['statistical_artifact', 'low_dim_projection']}) exits {'shared_constraint': 'incomplete', 'local_normal_form': 'none'}
+  CC_005_open_slot_filled_first_hand: ('OPEN', {'unrun': ['shared_constraint', 'local_normal_form'], 'supported': ['statistical_artifact', 'low_dim_projection']}) exits {'shared_constraint': 'incomplete', 'local_normal_form': 'none'}

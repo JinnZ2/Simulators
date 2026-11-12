@@ -1,0 +1,14 @@
+# listed in the work order for later. Nothing retrieved; nothing here has been read.
+sources:
+  - id: DS_JIANG_PSF
+    what: "Jiang et al. global plant-soil feedback dataset"
+    locator: "zenodo.org/records/10403125 ; Dryad doi:10.5061/dryad.n2z34tn35"
+    retrieved: not_retrieved
+    used_by: []
+    checksum: void
+  - id: DS_KARST_2023
+    what: "Karst 2023 CMN review (26 field studies)"
+    locator: "doi:10.1038/s41559-023-01986-1"
+    retrieved: not_retrieved
+    used_by: []
+    checksum: void

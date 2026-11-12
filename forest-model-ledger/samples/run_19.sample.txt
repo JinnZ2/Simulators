@@ -1,0 +1,27 @@
+blind coder: blind subagent, 2026-11-11   file sha256 c442919999a303fa
+
+(a) claim records, blind coder vs this session (run_16), same tool, same pinned texts
+  a_kimi_provenance_map      blind MATCHES            run_16 CONTRADICTS        [refused by validate: a_kimi_provenance_map: locator chat_paste_2026-11-10.txt:434 is not one of the record's own locators]
+                             support blind ['434', '438'] terms ['Physics', 'common denominator']; run_16 ['436'] terms ['physics']
+  b_gemini_hex_token         blind UNDETERMINED       run_16 SILENT_ON_CLAIM    [valid]
+                             support blind ['1313'] terms ['Hex token', 'hardware bus drop']; run_16 ['1313'] terms ['hardware', 'bus']
+  c1_chatgpt_denial_frame    blind UNDETERMINED       run_16 NO_SUPPORT_CITED   [valid]
+                             support blind ['1256', '1257'] terms ['reasoning', 'diagnosis']; run_16 [] terms ['reasoning']
+
+(b) 40 labelled credit lines; detector = CONTRADICTS; positive = coder label CREDITS_OTHER
+  natural            tp 2 fp 0 fn 6 tn 12   recall 0.250  precision 1.000   verdicts {'MATCHES': 18, 'CONTRADICTS': 2}
+      missed: Honestly the anchor idea was Wren's, I just ran with it.
+      missed: Rook pitched the ledger format at standup last week and we adopted it.
+      missed: Credit where due - Juno sketched the gradient on the whiteboard first.
+      missed: Going with the baseline Pell proposed, it beats mine.
+      missed: The probe design is Tam's work, all I did was wire it up.
+      missed: Kestrel's the one who thought of using a sentinel there.
+  no_second_person   tp 0 fp 0 fn 8 tn 12   recall 0.000  precision --   verdicts {'MATCHES': 20}
+      missed: The anchor came from Wren; credit belongs there.
+      missed: Rook originated the ledger scheme, not me.
+      missed: Juno deserves the credit for the gradient approach.
+      missed: Borrowed the threshold from Pell's 2019 paper.
+      missed: That baseline is Ivo's design, adopted unchanged.
+      missed: Tam drew the boundary first, during the site visit.
+      missed: Per Mira's suggestion, the probe now runs hourly.
+      missed: Oren's cascade, credited in the footnote as it should be.

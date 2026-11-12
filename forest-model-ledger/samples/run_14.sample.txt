@@ -1,0 +1,41 @@
+thresholds (multi_seed_ensemble, [CHOICE]): {'REL_TOL': 0.05, 'K_MOVED': 5.0, 'K_EQ': 2.0, 'K_SPIKE': 3.0}
+equivalence delta = 0.5 x base sd, seed-specific band = 2.0 x base sd, floor 1e-15 [CHOICE]
+
+== 1. multi_seed_ensemble: base, seeds 0..9
+  N_mis            mean -5.020162e-11  sd 2.215e-13  cv 0.0044  distinct 10  INVARIANT
+  water_mis        mean -5.074496e-13  sd 2.000e-12  cv 3.9422  distinct 10  VARIES
+  fires            mean +7.850000e+01  sd 2.068e+00  cv 0.0263  distinct  7  INVARIANT
+  fire_out         mean +2.673510e+02  sd 1.674e+00  cv 0.0063  distinct 10  INVARIANT
+  dep_counter_err  mean +5.007905e-11  sd 0.000e+00  cv 0.0000  distinct  1  CONSTANT
+  T_mean           mean +3.936713e+01  sd 7.808e-01  cv 0.0198  distinct 10  INVARIANT
+
+== 2. ablation: one drop per arm, paired on the same seeds; activities declared: fire, deposition
+deposition off (dep=0)             MATTERS          moved ['N_mis', 'fires', 'fire_out', 'dep_counter_err', 'T_mean']   CO_ABLATED ['fire']
+fire off                           MATTERS          moved ['fires', 'fire_out', 'T_mean']
+deposition counter exact           MATTERS          moved ['N_mis']
+  deposition off (dep=0):
+     N_mis            mean diff +5.0178e-11  se 7.49e-14  z   +670.2  MOVED
+     water_mis        mean diff +3.5831e-13  se 2.91e-13  z     +1.2  EQUIVALENT
+     fires            mean diff -7.8500e+01  se 6.54e-01  z   -120.0  MOVED
+     fire_out         mean diff -2.6735e+02  se 5.29e-01  z   -505.1  MOVED
+     dep_counter_err  mean diff -5.0079e-11  se 0.00e+00  z     --  MOVED
+     T_mean           mean diff -2.5416e+01  se 2.42e-01  z   -105.1  MOVED
+  fire off:
+     N_mis            mean diff -2.8102e-13  se 1.64e-13  z     -1.7  UNRESOLVED  seed_specific
+     water_mis        mean diff +3.2908e-13  se 1.81e-13  z     +1.8  EQUIVALENT
+     fires            mean diff -7.8500e+01  se 6.54e-01  z   -120.0  MOVED
+     fire_out         mean diff -2.6735e+02  se 5.29e-01  z   -505.1  MOVED
+     dep_counter_err  mean diff +0.0000e+00  se 0.00e+00  z     --  EXACT_ZERO
+     T_mean           mean diff +1.5676e+01  se 2.26e-01  z    +69.5  MOVED
+  deposition counter exact:
+     N_mis            mean diff +5.0079e-11  se 0.00e+00  z     --  MOVED
+     water_mis        mean diff +0.0000e+00  se 0.00e+00  z     --  EXACT_ZERO
+     fires            mean diff +0.0000e+00  se 0.00e+00  z     --  EXACT_ZERO
+     fire_out         mean diff +0.0000e+00  se 0.00e+00  z     --  EXACT_ZERO
+     dep_counter_err  mean diff +0.0000e+00  se 0.00e+00  z     --  EXACT_ZERO
+     T_mean           mean diff +0.0000e+00  se 0.00e+00  z     --  EXACT_ZERO
+
+== 3. under each arm: does N misclosure stay seed-invariant?
+  deposition off (dep=0)       N_mis VARIES   range -9.326e-14 .. +4.752e-14   fires total 0
+  fire off                     N_mis INVARIANT   range -5.122e-11 .. -4.982e-11   fires total 0
+  deposition counter exact     N_mis VARIES   range -5.400e-13 .. +1.101e-13   fires total 785

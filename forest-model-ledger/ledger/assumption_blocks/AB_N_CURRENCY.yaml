@@ -1,0 +1,11 @@
+id: AB_N_CURRENCY
+statement: "N is the only conserved currency; C-shaped fluxes are expressed in N units"
+if_fails: "responses that depend on C or P limitation are absent, not small"
+used_by:
+  - L0_N_BUDGET
+  - L3_TREE_FUNGUS_EXCHANGE
+used_by_runs:
+  - run_6
+  - run_9
+open_issues: []
+status: candidate

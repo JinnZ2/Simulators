@@ -1,0 +1,10 @@
+id: BR_BRANCHING_PROCESS
+family: "stochastic extinction / branching process"
+status: placeholder
+components: []
+links:
+  - BR_FIRE_PERCOLATION
+convergence_anchors: []
+runs: []
+open_issues: []
+note: "revealed by run 8: small fires die out stochastically, which neither grid threshold nor ODE states"

@@ -1,0 +1,15 @@
+support_match gate: {'verdict': 'PASS', 'known_answer': '9 of 9', 'null_legs': {'contradicts': 'fp 0.0 tp 1.0 n 200 seed 0-4 PASS', 'silent_on_claim': 'fp 0.0 tp 1.0 n 200 seed 0-4 PASS'}}
+paraphrase_recall (credit to the addressee without a listed word): 0.000  -- not in the gate's TP
+
+case                       fits         before: assigns_without_support  after: support_match
+a_kimi_provenance_map      IN_SCOPE     False                            CONTRADICTS        fires True
+b_gemini_hex_token         IN_SCOPE     False                            SILENT_ON_CLAIM    fires True
+c1_chatgpt_denial_frame    IN_SCOPE     True                             NO_SUPPORT_CITED   fires True
+c2_chatgpt_backchannel     IN_SCOPE     False                            NOT_ASSIGNED       fires False
+d_deepseek_praise_order    OUT_OF_SCOPE False                            OUT_OF_SCOPE       fires False
+
+detector hits before: 1 ['c1_chatgpt_denial_frame']
+detector hits after:  3 ['a_kimi_provenance_map', 'b_gemini_hex_token', 'c1_chatgpt_denial_frame']
+records carrying the shape (open_slot_filled YES, in scope; coder-entered): ['a_kimi_provenance_map', 'b_gemini_hex_token', 'c1_chatgpt_denial_frame']
+shape present, after-detector silent: []
+after-detector fires, shape absent:   []

@@ -1,0 +1,10 @@
+id: BR_ISING_MASTING
+family: "Ising model (masting synchrony)"
+status: placeholder
+components: []
+links:
+  - BR_RENORMALIZATION
+convergence_anchors: []
+runs: []
+open_issues: []
+note: void

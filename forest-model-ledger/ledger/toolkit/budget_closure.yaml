@@ -1,0 +1,28 @@
+id: budget_closure
+code: ledger/toolkit/budget_closure.py
+diagnoses:
+  - "leak: mass moved by a code path outside the flux table (misclosure grows with run length)"
+  - "missing flux: a field budget with a one-signed residual no parameter value reproduces"
+  - "boundary gap: a boundary term carried as void while the residual has its sign"
+  - "bookkeeping artifact: a boundary COUNTER that is itself inexact (run_10: the deposition counter)"
+inputs:
+  - "a run result: start state, end state, boundary accumulators"
+  - "rel_tol; sigma_meas per budget (void today)"
+outputs:
+  - "per budget: CLOSED | NOISE | LEAK | VOID, misclosure, boundary audit line"
+  - "overall PASS only when every non-void budget is CLOSED; void budgets listed"
+cannot_see:
+  - "a flux of the wrong size that is routed through the table"
+  - "an error compensated inside a budget that is void (C, P, energy)"
+  - "whether a residual sits in the pools or in the counters: run_10 needed a model-free counter to tell"
+other_domains_it_could_see_into: void
+used_in:
+  - run_9
+  - run_10
+open_issues:
+  - "sigma_meas void for every budget"
+  - "the residual it reports at dt 1/52 is the deposition counter's roundoff, not the model's; a compensated-sum counter would remove it and is NOT applied, since model/base.py is the candidate anchor's code"
+status: candidate
+gate: void
+blocked_on: void
+heldout: void

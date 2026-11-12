@@ -1,0 +1,34 @@
+id: L0_LEAK_VS_NOISE
+layer: L0
+equation: "CLOSED if |m| <= rel_tol * throughput; NOISE if |m| <= k_sigma * sigma_meas; else LEAK; VOID if budget not represented"
+assumes:
+  - id: A1
+    text: "sigma_meas is known per budget"
+    block: void
+  - id: A2
+    text: "numerical tolerance rel_tol = 1e-9 separates roundoff from a coding leak"
+    block: void
+if_assumption_fails:
+  A1: "without sigma_meas the NOISE arm is unreachable and every real residual reads LEAK"
+  A2: "a leak smaller than rel_tol * throughput reads CLOSED"
+scope: "simulation: CLOSED / LEAK arms. NOISE arm exercised with a synthetic sigma only"
+provenance:
+  class: PROPOSED
+  source: "work order 2026-11-10; implemented in model/l0_audit.py"
+admitted_by: T_L0_LEAK_DETECTED
+test_results:
+  - test: T_L0_LEAK_DETECTED
+    run: run_9
+    result: PASS
+    value: "planted leak 0.3 -> N LEAK, misclosure -72.64; clean run CLOSED"
+  - test: T_L0_NOISE_ARM
+    run: void
+    result: PASS
+    value: "synthetic sigma only"
+open_issues:
+  - "sigma_meas is void for every budget: no instrument error has been entered"
+  - "k_sigma = 2 is a convention, not a derived value"
+depends_on:
+  - L0_N_BUDGET
+  - L0_WATER_BUDGET
+status: admitted

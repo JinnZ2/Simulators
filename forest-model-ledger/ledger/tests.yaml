@@ -1,0 +1,53 @@
+# test registry. admitted_by in a component must name an id here; results come from running the command, not from this file.
+tests:
+  - id: T_L0_N_CLOSURE
+    command: "python3 tests/test_l0.py"
+    checks: "base run, 300 yr: N budget verdict CLOSED"
+  - id: T_L0_WATER_CLOSURE
+    command: "python3 tests/test_l0.py"
+    checks: "base run: water budget verdict CLOSED"
+  - id: T_L0_DT_HALF
+    command: "python3 tests/test_l0.py"
+    checks: "halving dt keeps N CLOSED"
+  - id: T_L0_LEAK_DETECTED
+    command: "python3 tests/test_l0.py"
+    checks: "planted leak 0.3 -> N LEAK and overall FAIL; water still CLOSED"
+  - id: T_L0_NOISE_ARM
+    command: "python3 tests/test_l0.py"
+    checks: "verdict() returns NOISE between numerical tolerance and k_sigma * sigma (synthetic sigma)"
+  - id: T_L0_VOID_NEVER_CLOSED
+    command: "python3 tests/test_l0.py"
+    checks: "C, P, energy report VOID, never CLOSED; listed beside overall"
+  - id: T_L0_VOID_TERMS_PRINTED
+    command: "python3 tests/test_l0.py"
+    checks: "void boundary terms are None in the audit and print as void, never 0"
+  - id: T_L0_FIRE_EVENT_CONSERVES
+    command: "python3 tests/test_l0.py"
+    checks: "a fire event alone leaves the N budget CLOSED"
+  - id: T_L0_SEED_WIRED_TO_IGNITION
+    command: "python3 tests/test_l0.py"
+    checks: "with drought_sd=0 (identical precipitation) seeds 0-3 give distinct fire-time sequences"
+  - id: T_L0_RESIDUAL_IS_DEPOSITION_COUNTER
+    command: "python3 tests/test_l0.py"
+    checks: "a model-free float64 counter reproduces the N misclosure at dt 1/52 within 5 percent, opposite sign; dep=0 residual below 1e-12"
+  - id: T_TK_CARD_READINGS
+    command: "python3 tests/test_l0.py"
+    checks: "coincidence_card returns OPEN, RESOLVED, PROVISIONAL and CURIOSITY on constructed cards and refuses five malformed ones"
+  - id: T_TK_EXPIRY_AND_SCOPED_ABSENCE
+    command: "python3 tests/test_l0.py"
+    checks: "ABSENT_AT_SENSITIVITY(<value>) reads as ruled out within scope and the scope travels in the reading; four bare or empty absence states refused; expiry_condition void / incomplete / complete counted; partial or dropped expiry refused"
+  - id: T_TK_ATTRIBUTION_DIRECTIONALITY
+    command: "python3 tests/test_l0.py"
+    checks: "six planted known-answer records read as expected; null harness OK with 0 label-shuffle moves; constant-fire, constant-silent and label-driven detectors caught; seed cases stay second hand; first-hand upgrade without text refused"
+  - id: T_TK_ATTRIBUTION_FIRST_HAND
+    command: "python3 tests/test_l0.py"
+    checks: "first-hand records cover the same cases as the second-hand ones, both files kept; every locator quote is on its line in a sha-pinned text; a moved quote, an empty locator list and an edited text are each refused; case a's detector flip True -> False is pinned"
+  - id: T_TK_BUDGET_CLOSURE_MOVED
+    command: "python3 tests/test_l0.py"
+    checks: "model.l0_audit re-exports ledger.toolkit.budget_closure: same function objects"
+  - id: T_LOG_LISTS_EVERY_CONSTANT
+    command: "python3 tests/test_l0.py"
+    checks: "LOG.md carries every DEFAULTS and INIT constant at its value in code"
+  - id: T_TK_NUDGE_COVERAGE_AND_FLAGS
+    command: "python3 tests/test_l0.py"
+    checks: "assumption_nudge refuses four bad nudge maps; flags a no-op nudge EXACT_ZERO and the planted leak as a budget failure; returns to anchor bit-identical"

@@ -1,0 +1,10 @@
+id: AB_VOID_BOUNDARY
+statement: "boundary terms not modelled are carried as void and contribute zero flux: fixation, dust, groundwater N, animal transport in/out"
+if_fails: "a real one-signed residual with no model counterpart"
+used_by:
+  - L0_BOUNDARY_AUDIT
+  - L0_N_BUDGET
+used_by_runs:
+  - run_9
+open_issues: []
+status: candidate

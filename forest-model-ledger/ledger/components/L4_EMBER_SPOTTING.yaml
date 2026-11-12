@@ -1,0 +1,24 @@
+id: L4_EMBER_SPOTTING
+layer: L4
+equation: "with probability spot, a burning cell ignites a random non-neighbour cell"
+assumes:
+  - id: A1
+    text: "spotting distance is unbounded on the grid"
+    block: void
+if_assumption_fails:
+  A1: "bounded spotting would give an intermediate threshold between ~0.5 and ~0.6-0.7"
+scope: "run 8"
+provenance:
+  class: DERIVED
+  source: "run_8: original code filed 2026-11-11, rerun in this tree, output matches the log"
+admitted_by: void
+test_results:
+  - test: void
+    run: run_8
+    result: "spot 0.2 vs ODE at drought 0.5 / 0.6 / 0.7: 0.73 / 0.84 / 0.90 vs 0.75 / 0.82 / 0.87 (read by eye, candidate); spot 0.05 at drought 0.5: 0.38, sd 0.31"
+    value: "rerun of the original code"
+open_issues:
+  - "revealed a missing family: stochastic extinction of small fires, see BR_BRANCHING_PROCESS"
+depends_on:
+  - L4_FIRE_PERCOLATION_GRID
+status: candidate

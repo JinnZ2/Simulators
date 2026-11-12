@@ -1,0 +1,37 @@
+id: assumption_block_trace
+code: ledger/toolkit/assumption_block_trace.py
+diagnoses:
+  - "shared assumption failing across many studies (METHOD BRIEF toolbox line: assumption-block trace)"
+  - "failures concentrated on the studies that rest on one assumption block (SHARED_FAILURE), kept apart from a block every study shares, which cannot be tested (NOT_EVALUABLE)"
+inputs:
+  - "studies: list of {id, blocks it rests on, outcome FAILED | HELD | UNKNOWN}; UNKNOWN is excluded and counted, never read as HELD"
+  - "today, only the ledger's own runs (ledger_studies): blocks from used_by_runs, every outcome UNKNOWN"
+outputs:
+  - "per block: the 2x2 table (uses / not x failed / held), unknowns, one-sided Fisher p, verdict SHARED_FAILURE | NOT_ENRICHED | INSUFFICIENT | NOT_EVALUABLE"
+  - "ledger_structure: per block, the components and runs that rest on it"
+cannot_see:
+  - "anything about real studies until they are coded: the ledger's runs are one synthetic model, and a run is not a study that held or failed against data"
+  - "a block that every coded study shares: NOT_EVALUABLE by construction (AB_SYNTHETIC_ONLY is under every run here)"
+  - "two blocks always used together: each reads the same table; the tool does not separate them"
+other_domains_it_could_see_into: void
+used_in: []
+open_issues:
+  - "HELD-OUT FAIL_TP 0.9 (2026-11-11, tests/test_heldout.py): three blocks, a third of 80 studies on each, failure 0.6 on AB_Q users vs 0.1 otherwise; at ALPHA 0.001 one draw in ten is missed. Power at about 27 users is too low for that alpha. Not retuned; trust PROVISIONAL"
+  - "ALPHA 0.001, MIN_STUDIES 8 [CHOICE]; ALPHA was 0.01 in the first gate and failed FP 0.015; then TP 0.995 at 40-study draws, raised once to 60"
+  - "on the ledger's runs every block reads NOT_EVALUABLE: all outcomes are UNKNOWN"
+status: placeholder
+gate:
+  verdict: PASS
+  known_answer: "7 of 7"
+  null_legs:
+    shared_failure: "fp 0.0 tp 1.0 n 200 seed 0-4 PASS"
+  command: "python3 tests/test_toolkit.py"
+blocked_on: "real data (work order 2026-11-11: placeholder until real data): independent studies coded for the assumption blocks they rest on and whether they failed. Every assumption_block_trace row in ledger/NEEDS_TOOL.md stays open"
+heldout:
+  verdict: FAIL
+  known_answer: "4 of 4"
+  null_legs:
+    shared_failure_three_blocks_n80: "fp 0.0 tp 0.9 n 200 seed 100-104 FAIL_TP"
+  trust: PROVISIONAL
+  frozen_at: "72244bf (ledger/toolkit/HELDOUT_FREEZE.md); sets committed e5e3186 before first run"
+  command: "python3 tests/test_heldout.py"
