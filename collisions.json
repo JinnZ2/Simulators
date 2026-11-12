@@ -594,15 +594,7 @@
  "marking_start": [
   {
    "repo": "Simulators",
-   "sha": "11033ad",
-   "date": "2026-07-04T11:01:15+00:00",
-   "model": "Claude Opus 4.7 (1M context)",
    "commits_before_on_main": 154,
-   "claude_session_start": {
-    "sha": "11033ad",
-    "date": "2026-07-04T11:01:15+00:00",
-    "model": "Claude Opus 4.7 (1M context)"
-   },
    "untrailered_after_start": {
     "main_tip": "34eb3cf",
     "merge": 267,
@@ -610,22 +602,30 @@
     "other": 37,
     "total": 446
    },
-   "bare_url_start": {
-    "sha": "VOID",
-    "void_reason": "no commit on main carries a claude.ai/code/session URL outside a 'Claude-Session:' key (main tip 34eb3cf)"
+   "forms": {
+    "a": {
+     "sha": "11033ad",
+     "date": "2026-07-04T11:01:15+00:00",
+     "agent": "Claude",
+     "model": "Opus 4.7 (1M context)"
+    },
+    "b": {
+     "sha": "11033ad",
+     "date": "2026-07-04T11:01:15+00:00"
+    },
+    "c": {
+     "sha": "VOID",
+     "void_reason": "no commit on main carries a claude.ai/code/session URL outside a 'Claude-Session:' key (main tip 34eb3cf)"
+    },
+    "d": {
+     "sha": "VOID",
+     "void_reason": "no Co-Authored-By trailer on main names a non-Claude model agent (main tip 34eb3cf); the only non-Claude Co-Authored-By value is JinnZ2 (4 commits, users.noreply address), a person, not a model"
+    }
    }
   },
   {
    "repo": "thermodynamic-accountability-framework",
-   "sha": "3410a18",
-   "date": "2026-09-23T03:55:11+00:00",
-   "model": "Claude Opus 5",
    "commits_before_on_main": 442,
-   "claude_session_start": {
-    "sha": "3410a18",
-    "date": "2026-09-23T03:55:11+00:00",
-    "model": "Claude Opus 5"
-   },
    "untrailered_after_start": {
     "main_tip": "953f1a8",
     "merge": 14,
@@ -633,26 +633,32 @@
     "other": 0,
     "total": 15
    },
-   "note": "97 commits on main carry a claude.ai/code URL in any form",
-   "bare_url_start": {
-    "sha": "56a2ebe",
-    "date": "2026-03-24T13:26:16+00:00",
-    "author": "Claude",
-    "form": "bare URL line, no 'Claude-Session:' key, no Co-Authored-By trailer",
-    "commits_in_form_on_main": 44
-   }
+   "forms": {
+    "a": {
+     "sha": "3410a18",
+     "date": "2026-09-23T03:55:11+00:00",
+     "agent": "Claude",
+     "model": "Opus 5"
+    },
+    "b": {
+     "sha": "3410a18",
+     "date": "2026-09-23T03:55:11+00:00"
+    },
+    "c": {
+     "sha": "56a2ebe",
+     "date": "2026-03-24T13:26:16+00:00",
+     "author": "Claude"
+    },
+    "d": {
+     "sha": "VOID",
+     "void_reason": "no Co-Authored-By trailer on main names a non-Claude model agent (main tip 953f1a8)"
+    }
+   },
+   "note": "97 commits on main carry a claude.ai/code URL in any form; 44 in the bare form; 11 carry 'Co-Authored-By: Claude' with no model"
   },
   {
    "repo": "study-aperture",
-   "sha": "62858b4",
-   "date": "2026-10-28T06:29:46-05:00",
-   "model": "Claude Opus 5.5",
    "commits_before_on_main": 13,
-   "claude_session_start": {
-    "sha": "62858b4",
-    "date": "2026-10-28T06:29:46-05:00",
-    "model": "Claude Opus 5.5"
-   },
    "untrailered_after_start": {
     "main_tip": "c26fbd2",
     "merge": 27,
@@ -660,19 +666,37 @@
     "other": 0,
     "total": 27
    },
-   "note": "first Perplexity trailer 0384df3, 2026-11-10",
-   "bare_url_start": {
-    "sha": "VOID",
-    "void_reason": "no commit on main carries a claude.ai/code/session URL outside a 'Claude-Session:' key (main tip c26fbd2)"
-   }
+   "forms": {
+    "a": {
+     "sha": "62858b4",
+     "date": "2026-10-28T06:29:46-05:00",
+     "agent": "Claude",
+     "model": "Opus 5.5"
+    },
+    "b": {
+     "sha": "62858b4",
+     "date": "2026-10-28T06:29:46-05:00"
+    },
+    "c": {
+     "sha": "VOID",
+     "void_reason": "no commit on main carries a claude.ai/code/session URL outside a 'Claude-Session:' key (main tip c26fbd2)"
+    },
+    "d": {
+     "sha": "79f402c",
+     "date": "2026-11-11T03:33:20+00:00",
+     "agent": "Perplexity",
+     "email": "noreply@perplexity.ai"
+    }
+   },
+   "note": "0384df3 (Perplexity) is dated 2026-11-10T22:10:30-06:00 = 2026-11-11T04:10:30Z, after 79f402c; first Manus trailer dd220df 2026-11-11T19:30:23Z"
   }
  ],
- "marking_note": "Read from git on origin/main. Co-Authored-By start and Claude-Session start are listed separately; neither is picked. Untrailered = no Co-Authored-By trailer, counted from the Co-Authored-By start to the main tip named. merge = more than one parent; web-UI = non-merge with committer GitHub <noreply@github.com> (web-flow); other = the rest. Simulators 'other' splits by committer name: Claude 32, JinnZ2 5.",
+ "marking_note": "Read from git on origin/main; 'first' = earliest committer date (UTC), not topological order. a = first Co-Authored-By naming a Claude model; b = first 'Claude-Session:' keyed trailer; c = first bare claude.ai/code/session URL line; d = first Co-Authored-By naming a non-Claude model agent. None is picked. Untrailered = no Co-Authored-By trailer, counted from line a to the main tip named. merge = more than one parent; web-UI = non-merge with committer GitHub <noreply@github.com> (web-flow); other = the rest. Simulators 'other' splits by committer name: Claude 32, JinnZ2 5.",
  "conditions": {
   "as_of": "2026-11-11",
   "items": [
-   "Model marking began ~2026-11 (per-repo start commit listed under MARKING START); earlier collisions can't be split by model.",
-   "GitHub mobile UI change (recent, ~2026-11): owner can no longer delete branches from phone; branch clutter accumulated partly from this; deletions now routed via Manus + auto-delete on.",
+   "Model marking began PLACEHOLDER (chat-side estimate from 'recently'; unsourced) (per-repo first-form commits listed under MARKING START); earlier collisions can't be split by model.",
+   "GitHub mobile UI change (PLACEHOLDER (owner report, date not established)): owner can no longer delete branches from phone; branch clutter accumulated partly from this; deletions now routed via Manus + auto-delete on.",
    "Owner works phone-only (no keyboard, no local compute).",
    "Sessions vary in model (Opus/Sonnet/Haiku/Fable) and model updates.",
    "Committer/author field = the pusher, not the model (basis: the 18 Perplexity commits in the playground row are committed under the user's GitHub noreply account)."

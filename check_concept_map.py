@@ -20,6 +20,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 JSON, MD = os.path.join(HERE, "concept_map.json"), os.path.join(HERE, "CONCEPT_MAP.md")
 CJSON, CMD = os.path.join(HERE, "collisions.json"), os.path.join(HERE, "COLLISIONS.md")
 COMMIT_ROLES = ("origin", "rename", "other", "VOID")
+FORM_LABELS = (("a", "a. first model trailer"), ("b", "b. first Claude-Session keyed trailer"),
+               ("c", "c. first bare session URL"), ("d", "d. first non-Claude model trailer"))
 CFIELDS = ("date", "concept", "agents", "collided", "found", "resolution", "evidence")
 ROLES = ("canonical", "candidate", "copy", "nearest")
 PENDING = "pending cross-run"
@@ -139,21 +141,20 @@ def render_collisions(data):
                 o.append("  - %s VOID: %s" % (k, why))
         o.append("")
     if "marking_start" in data:
-        o += ["## MARKING START", "", "First commit carrying a Co-Authored-By trailer, per repo. Before it: model VOID (not inferred from date or style).", ""]
+        o += ["## MARKING START", "", "Per repo, four forms, none picked. Before a form's first commit: that field VOID (not inferred from date or style).", ""]
         for m in data["marking_start"]:
-            cs = m["claude_session_start"]
-            o.append("- %s, Co-Authored-By start: `%s` %s, %s; %d commits on main before it" % (
-                m["repo"], m["sha"], m["date"], m["model"], m["commits_before_on_main"]))
-            o.append("- %s, Claude-Session start: `%s` %s, %s" % (m["repo"], cs["sha"], cs["date"], cs["model"]))
-            bu = m.get("bare_url_start") or {}
-            if bu.get("sha") in (None, "", "VOID"):
-                o.append("- %s, bare-URL form: VOID (%s)" % (m["repo"], bu.get("void_reason") or "MISSING"))
-            else:
-                o.append("- %s, bare-URL form: `%s` %s, author %s; %s; %d commits on main in this form" % (
-                    m["repo"], bu["sha"], bu["date"], bu["author"], bu["form"], bu["commits_in_form_on_main"]))
+            fm = m.get("forms") or {}
+            for k, label in FORM_LABELS:
+                v = fm.get(k) or {}
+                if v.get("sha") in (None, "", "VOID"):
+                    o.append("- %s, %s: VOID (%s)" % (m["repo"], label, v.get("void_reason") or "MISSING"))
+                else:
+                    extra = "; ".join("%s %s" % (x, v[x]) for x in ("agent", "model", "author") if v.get(x))
+                    o.append("- %s, %s: `%s` %s%s" % (m["repo"], label, v["sha"], v.get("date") or "DATE MISSING", ("; " + extra) if extra else ""))
+            o.append("  - %d commits on main before line a" % m["commits_before_on_main"])
             if m.get("note"):
                 o.append("  - note: %s" % m["note"])
-        o += ["", "Untrailered commits after the Co-Authored-By start:", "",
+        o += ["", "Untrailered commits (no Co-Authored-By trailer) after line a:", "",
               "| repo | main tip | merge | non-merge web-UI | non-merge other | total |", "|---|---|---|---|---|---|"]
         for m in data["marking_start"]:
             u = m["untrailered_after_start"]
@@ -282,11 +283,14 @@ def collision_problems(data, md_text):
                     if c.get(k) == "VOID" and not c.get(k + "_void_reason"):
                         out.append("collision %d side %d %s: %s VOID with no %s_void_reason" % (i + 1, j + 1, c.get("sha"), k, k))
     for m in data.get("marking_start", []):
-        bu = m.get("bare_url_start")
-        if not bu or not bu.get("sha"):
-            out.append("marking_start %s: bare_url_start missing (write VOID with a void_reason)" % m["repo"])
-        elif bu["sha"] == "VOID" and not bu.get("void_reason"):
-            out.append("marking_start %s: bare_url_start VOID with no void_reason" % m["repo"])
+        for k, label in FORM_LABELS:
+            v = (m.get("forms") or {}).get(k)
+            if not v or not v.get("sha"):
+                out.append("marking_start %s: form %s missing (write VOID with a void_reason)" % (m["repo"], k))
+            elif v["sha"] == "VOID" and not v.get("void_reason"):
+                out.append("marking_start %s: form %s VOID with no void_reason" % (m["repo"], k))
+            elif v["sha"] != "VOID" and not v.get("date"):
+                out.append("marking_start %s: form %s has no date" % (m["repo"], k))
     if md_text != render_collisions(data):
         out.append("COLLISIONS.md does not match collisions.json (run --write)")
     return out
@@ -356,8 +360,9 @@ def selftest(data):
                       ("role blank", lambda d: d["rows"][0]["sides"][0]["commits"][0].update(role="")),
                       ("role outside vocabulary", lambda d: d["rows"][0]["sides"][0]["commits"][0].update(role="author")),
                       ("role VOID with no reason", lambda d: d["rows"][1]["sides"][0]["commits"][0].pop("role_void_reason")),
-                      ("bare-URL start missing", lambda d: d["marking_start"][0].pop("bare_url_start")),
-                      ("bare-URL VOID with no reason", lambda d: d["marking_start"][0]["bare_url_start"].pop("void_reason")),
+                      ("marking form missing", lambda d: d["marking_start"][0]["forms"].pop("c")),
+                      ("marking form VOID with no reason", lambda d: d["marking_start"][0]["forms"]["c"].pop("void_reason")),
+                      ("marking form with no date", lambda d: d["marking_start"][0]["forms"]["a"].pop("date")),
                       ("session VOID with no reason", lambda d: d["rows"][1]["sides"][0]["commits"][0].pop("session_void_reason"))):
         d = _c.deepcopy(cd); base_md = render_collisions(cd); mut(d)
         hit = bool(collision_problems(d, base_md if "out of date" in name else render_collisions(d)))

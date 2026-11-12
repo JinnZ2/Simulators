@@ -81,21 +81,27 @@ As of 2026-11-11.
 
 ## MARKING START
 
-First commit carrying a Co-Authored-By trailer, per repo. Before it: model VOID (not inferred from date or style).
+Per repo, four forms, none picked. Before a form's first commit: that field VOID (not inferred from date or style).
 
-- Simulators, Co-Authored-By start: `11033ad` 2026-07-04T11:01:15+00:00, Claude Opus 4.7 (1M context); 154 commits on main before it
-- Simulators, Claude-Session start: `11033ad` 2026-07-04T11:01:15+00:00, Claude Opus 4.7 (1M context)
-- Simulators, bare-URL form: VOID (no commit on main carries a claude.ai/code/session URL outside a 'Claude-Session:' key (main tip 34eb3cf))
-- thermodynamic-accountability-framework, Co-Authored-By start: `3410a18` 2026-09-23T03:55:11+00:00, Claude Opus 5; 442 commits on main before it
-- thermodynamic-accountability-framework, Claude-Session start: `3410a18` 2026-09-23T03:55:11+00:00, Claude Opus 5
-- thermodynamic-accountability-framework, bare-URL form: `56a2ebe` 2026-03-24T13:26:16+00:00, author Claude; bare URL line, no 'Claude-Session:' key, no Co-Authored-By trailer; 44 commits on main in this form
-  - note: 97 commits on main carry a claude.ai/code URL in any form
-- study-aperture, Co-Authored-By start: `62858b4` 2026-10-28T06:29:46-05:00, Claude Opus 5.5; 13 commits on main before it
-- study-aperture, Claude-Session start: `62858b4` 2026-10-28T06:29:46-05:00, Claude Opus 5.5
-- study-aperture, bare-URL form: VOID (no commit on main carries a claude.ai/code/session URL outside a 'Claude-Session:' key (main tip c26fbd2))
-  - note: first Perplexity trailer 0384df3, 2026-11-10
+- Simulators, a. first model trailer: `11033ad` 2026-07-04T11:01:15+00:00; agent Claude; model Opus 4.7 (1M context)
+- Simulators, b. first Claude-Session keyed trailer: `11033ad` 2026-07-04T11:01:15+00:00
+- Simulators, c. first bare session URL: VOID (no commit on main carries a claude.ai/code/session URL outside a 'Claude-Session:' key (main tip 34eb3cf))
+- Simulators, d. first non-Claude model trailer: VOID (no Co-Authored-By trailer on main names a non-Claude model agent (main tip 34eb3cf); the only non-Claude Co-Authored-By value is JinnZ2 (4 commits, users.noreply address), a person, not a model)
+  - 154 commits on main before line a
+- thermodynamic-accountability-framework, a. first model trailer: `3410a18` 2026-09-23T03:55:11+00:00; agent Claude; model Opus 5
+- thermodynamic-accountability-framework, b. first Claude-Session keyed trailer: `3410a18` 2026-09-23T03:55:11+00:00
+- thermodynamic-accountability-framework, c. first bare session URL: `56a2ebe` 2026-03-24T13:26:16+00:00; author Claude
+- thermodynamic-accountability-framework, d. first non-Claude model trailer: VOID (no Co-Authored-By trailer on main names a non-Claude model agent (main tip 953f1a8))
+  - 442 commits on main before line a
+  - note: 97 commits on main carry a claude.ai/code URL in any form; 44 in the bare form; 11 carry 'Co-Authored-By: Claude' with no model
+- study-aperture, a. first model trailer: `62858b4` 2026-10-28T06:29:46-05:00; agent Claude; model Opus 5.5
+- study-aperture, b. first Claude-Session keyed trailer: `62858b4` 2026-10-28T06:29:46-05:00
+- study-aperture, c. first bare session URL: VOID (no commit on main carries a claude.ai/code/session URL outside a 'Claude-Session:' key (main tip c26fbd2))
+- study-aperture, d. first non-Claude model trailer: `79f402c` 2026-11-11T03:33:20+00:00; agent Perplexity
+  - 13 commits on main before line a
+  - note: 0384df3 (Perplexity) is dated 2026-11-10T22:10:30-06:00 = 2026-11-11T04:10:30Z, after 79f402c; first Manus trailer dd220df 2026-11-11T19:30:23Z
 
-Untrailered commits after the Co-Authored-By start:
+Untrailered commits (no Co-Authored-By trailer) after line a:
 
 | repo | main tip | merge | non-merge web-UI | non-merge other | total |
 |---|---|---|---|---|---|
@@ -103,14 +109,14 @@ Untrailered commits after the Co-Authored-By start:
 | thermodynamic-accountability-framework | `953f1a8` | 14 | 1 | 0 | 15 |
 | study-aperture | `c26fbd2` | 27 | 0 | 0 | 27 |
 
-- note: Read from git on origin/main. Co-Authored-By start and Claude-Session start are listed separately; neither is picked. Untrailered = no Co-Authored-By trailer, counted from the Co-Authored-By start to the main tip named. merge = more than one parent; web-UI = non-merge with committer GitHub <noreply@github.com> (web-flow); other = the rest. Simulators 'other' splits by committer name: Claude 32, JinnZ2 5.
+- note: Read from git on origin/main; 'first' = earliest committer date (UTC), not topological order. a = first Co-Authored-By naming a Claude model; b = first 'Claude-Session:' keyed trailer; c = first bare claude.ai/code/session URL line; d = first Co-Authored-By naming a non-Claude model agent. None is picked. Untrailered = no Co-Authored-By trailer, counted from line a to the main tip named. merge = more than one parent; web-UI = non-merge with committer GitHub <noreply@github.com> (web-flow); other = the rest. Simulators 'other' splits by committer name: Claude 32, JinnZ2 5.
 
 ## CONDITIONS (as of 2026-11-11)
 
 These affect how to read the record.
 
-- Model marking began ~2026-11 (per-repo start commit listed under MARKING START); earlier collisions can't be split by model.
-- GitHub mobile UI change (recent, ~2026-11): owner can no longer delete branches from phone; branch clutter accumulated partly from this; deletions now routed via Manus + auto-delete on.
+- Model marking began PLACEHOLDER (chat-side estimate from 'recently'; unsourced) (per-repo first-form commits listed under MARKING START); earlier collisions can't be split by model.
+- GitHub mobile UI change (PLACEHOLDER (owner report, date not established)): owner can no longer delete branches from phone; branch clutter accumulated partly from this; deletions now routed via Manus + auto-delete on.
 - Owner works phone-only (no keyboard, no local compute).
 - Sessions vary in model (Opus/Sonnet/Haiku/Fable) and model updates.
 - Committer/author field = the pusher, not the model (basis: the 18 Perplexity commits in the playground row are committed under the user's GitHub noreply account).
