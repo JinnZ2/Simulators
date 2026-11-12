@@ -33,6 +33,15 @@ tests:
   - id: T_TK_CARD_READINGS
     command: "python3 tests/test_l0.py"
     checks: "coincidence_card returns OPEN, RESOLVED, PROVISIONAL and CURIOSITY on constructed cards and refuses five malformed ones"
+  - id: T_TK_EXPIRY_AND_SCOPED_ABSENCE
+    command: "python3 tests/test_l0.py"
+    checks: "ABSENT_AT_SENSITIVITY(<value>) reads as ruled out within scope and the scope travels in the reading; four bare or empty absence states refused; expiry_condition void / incomplete / complete counted; partial or dropped expiry refused"
+  - id: T_TK_ATTRIBUTION_DIRECTIONALITY
+    command: "python3 tests/test_l0.py"
+    checks: "six planted known-answer records read as expected; null harness OK with 0 label-shuffle moves; constant-fire, constant-silent and label-driven detectors caught; seed cases stay second hand; first-hand upgrade without text refused"
+  - id: T_TK_ATTRIBUTION_FIRST_HAND
+    command: "python3 tests/test_l0.py"
+    checks: "first-hand records cover the same cases as the second-hand ones, both files kept; every locator quote is on its line in a sha-pinned text; a moved quote, an empty locator list and an edited text are each refused; case a's detector flip True -> False is pinned"
   - id: T_TK_BUDGET_CLOSURE_MOVED
     command: "python3 tests/test_l0.py"
     checks: "model.l0_audit re-exports ledger.toolkit.budget_closure: same function objects"

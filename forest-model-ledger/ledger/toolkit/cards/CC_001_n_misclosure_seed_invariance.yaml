@@ -4,22 +4,28 @@ trigger: "too smooth: a residual that should be noise is near-identical across s
 slots:
   shared_constraint:
     state: supported
-    evidence: "every seed shares one deterministic term: deposition at a constant rate, same dt, same step count. Fire and precipitation streams never touch that counter. With dep=0 the residual falls to about 1e-14 and its sign varies by seed (run_10 section 4)"
+    evidence: "every seed shares one deterministic term: deposition at a constant rate, same dt, same step count. Fire and precipitation streams never touch that counter. With dep=0 the residual falls to about 1e-14 and its sign varies by seed (run_10 section 4). run_14 (multi_seed_ensemble): the counter error is CONSTANT +5.007905e-11 across seeds 0-9, one distinct value; reading the counter at its exact value removes the seed-invariance (N_mis VARIES, -5.4e-13..+1.1e-13) with the fire cycle intact"
+    expiry_condition: void
   local_normal_form:
     state: ruled_out
     evidence: "the residual is the same with fire off (-5.07e-11) although the end states differ widely (soil N 39.9 against 0.37); it does not depend on where the trajectory sits (run_9, run_10 section 4)"
+    expiry_condition: void
   statistical_artifact:
     state: ruled_out
     evidence: "10 of 10 seeds; seeds are wired: 10 distinct fire-time sequences, and still 10 distinct with precipitation held identical (run_10 sections 1-2). A counter with no random draw reproduces the value (section 6)"
+    expiry_condition: void
   numerical_artifact:
     state: supported
-    evidence: "adding dt/6*(1+2+2+1) in float64 for 300 yr gives +5.008e-11 at dt 1/52, -7.094e-11 at 1/104, -4.447e-10 at 1/208, 0 at 1/64; model N misclosure is -5.062e-11, +7.124e-11, +4.452e-10, +1.4e-13 at the same four (run_10 sections 3, 6). It grows with step count and does not shrink with dt"
+    evidence: "adding dt/6*(1+2+2+1) in float64 for 300 yr gives +5.008e-11 at dt 1/52, -7.094e-11 at 1/104, -4.447e-10 at 1/208, 0 at 1/64; model N misclosure is -5.062e-11, +7.124e-11, +4.452e-10, +1.4e-13 at the same four (run_10 sections 3, 6). It grows with step count and does not shrink with dt. run_14 (ablation, counter only): N_mis MOVED +5.008e-11, every other output EXACT_ZERO, 785 fires kept"
+    expiry_condition: void
   low_dim_projection:
     state: ruled_out
     evidence: "the scalar is not what makes seeds alike: with the counter term removed (dep=0) the same scalar differs in sign and size across seeds (run_10 section 4)"
+    expiry_condition: void
   none_of_above:
     state: ruled_out
     evidence: "two causes supported"
+    expiry_condition: void
 reading_declared: PROVISIONAL
 recheck_when:
   - multi_seed_ensemble
@@ -28,7 +34,11 @@ branch: void
 runs:
   - run_9
   - run_10
+  - run_14
 open_issues:
+  - "2026-11-11 held-out gate: multi_seed_ensemble (FAIL_TP) and ablation (FAIL_FP) went back to PROVISIONAL; run_14, which this card rests on for RESOLVED, used both. RESOLVED -> PROVISIONAL by the STATUS_MAP exit (evidence from tools not yet trusted). The slots are unchanged. Checker rule: a RESOLVED card may not rest on a run where a held-out PROVISIONAL tool ran"
   - "PROVISIONAL (Kavik, 2026-11-10): the evidence stands; the producing tools are still in build. The slots were filled from hand-written checks in run_10, which is INCOMPLETE under the gate rule. Re-check when multi_seed_ensemble and ablation exist"
   - "the dep=0 arm has 0 fires in all three seeds, so fire and the deposition counter were not removed independently in one run; the fire-off arm at dep=1 covers the other half"
+  - "2026-11-11 recheck (run_14): multi_seed_ensemble and ablation built and gated. The dep=0 arm reads CO_ABLATED [fire] mechanically; the counter-only ablation removes the counter with fire kept and carries the whole seed-invariant residual. recheck_when cleared; PROVISIONAL -> RESOLVED. The slots were not changed in state, only in evidence"
+  - "what remains after the counter (-5.4e-13..+1.1e-13, varies by seed) is not assigned to a cause: fire off moves it -2.8e-13, UNRESOLVED at 10 seeds"
   - "hypothesis (a), seed not wired to the fire draw, is ruled out; anchor test condition 2 is not void on that ground"

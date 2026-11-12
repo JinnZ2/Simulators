@@ -92,7 +92,7 @@ A card lists the runs it rests on. Read the pair, not either status alone.
 | COMPLETE | PROVISIONAL | the run stands; the reading on it waits for tools | run_9 + CC_001 |
 | COMPLETE | RESOLVED | usable: finished loop, causes named | none |
 | COMPLETE | CURIOSITY | the run stands; the coincidence is unexplained, follow its branch | none |
-| INCOMPLETE | OPEN | nothing to build on without labels; tools and slots both owed | run_11 + CC_003 ; run_8 + CC_002 |
+| INCOMPLETE | OPEN | nothing to build on without labels; tools and slots both owed | run_11 + CC_003 ; run_12 + CC_004 ; run_13 + CC_005 ; run_8 + CC_002 |
 | INCOMPLETE | PROVISIONAL | evidence stands, tools owed on both axes; label twice | run_10 + CC_001 |
 | INCOMPLETE | RESOLVED | not a closed trigger; move the card to PROVISIONAL or build the tools | none |
 | INCOMPLETE | CURIOSITY | unexplained and the tools were missing; build the tools before working the branch | none |
@@ -100,3 +100,19 @@ A card lists the runs it rests on. Read the pair, not either status alone.
 | REPORTED | PROVISIONAL | should not arise: a REPORTED run supplies no evidence to hold provisionally | none |
 | REPORTED | RESOLVED | should not arise: evidence must come from a run with code in the tree | none |
 | REPORTED | CURIOSITY | should not arise: rulings-out need recomputed evidence | none |
+
+---
+
+## Slot states and exits (added 2026-11-11, work order item 1)
+
+A slot state is not a card status and is not a run status; it is a third
+thing, one level below the card. `ABSENT_AT_SENSITIVITY(<value>)` is a
+scoped absence: the cause was looked for at that sensitivity and not found.
+It counts as ruled out for the card's reading, and the reading carries the
+scope, so quoting a card that rests on one without its sensitivity is the
+same violation as dropping the PROVISIONAL label. A bare "absent" is refused.
+
+Every void slot, and every VOID / UNKNOWN / PROVISIONAL entry in
+`ledger/expiry.yaml`, carries `expiry_condition`. Void there means no exit
+defined: nothing named would move it. The checker prints the count and the
+list and does not fail on it.

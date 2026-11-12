@@ -1,0 +1,24 @@
+id: L5_OBS_REACTIVITY
+layer: L5
+equation: "observed behaviour = behaviour unobserved + response to the observer; separated by blinding and habituation"
+assumes:
+  - id: A1
+    text: "the response to the observer does not model the evaluation; it decays with habituation or vanishes under blinding"
+    block: void
+  - id: A2
+    text: "the substrate's regime is declared before any comparison with another substrate; no shared currency with the other two regimes"
+    block: void
+if_assumption_fails:
+  A1: "a response that persists under blinding or anticipates the test: the row is STRATEGY, not REACTIVITY"
+  A2: "a number from this regime read beside a number from another regime as one scale: refused by the rule, no conversion exists"
+scope: "observer regime REACTIVITY only (the system responds to being observed (animal, plant)); method: blinding, habituation"
+provenance:
+  class: PROPOSED
+  source: "work order 2026-11-10 (cross-model audit follow-up, item 3), regimes after Kimi confound C4; design as given, not tested"
+admitted_by: void
+test_results: []
+open_issues:
+  - "no substrate in this ledger is assigned a regime yet; the forest model's own observations (L5_METHOD_ARTIFACT) would be PERTURBATION or REACTIVITY by substrate, undeclared"
+  - "rule: no cross-substrate comparison until each substrate's regime is declared. tools/check_ledger.py enforces only that the three regime rows share no depends_on link (no shared currency); no comparison object exists yet to refuse"
+depends_on: []
+status: placeholder

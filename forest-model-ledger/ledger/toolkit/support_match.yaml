@@ -1,0 +1,45 @@
+id: support_match
+code: ledger/toolkit/support_match.py
+diagnoses:
+  - "whether the support a record cites actually supports the attribution it carries, as distinct from whether support is stated at all (attribution_directionality reads only the second)"
+  - "a cited source that gives the credited item away: the support line is spoken by the credited source and credits its addressee (CONTRADICTS)"
+  - "a basis that never reaches the claim: no support line names the credited item (SILENT_ON_CLAIM)"
+  - "an assignment whose text presents no basis at all (NO_SUPPORT_CITED)"
+inputs:
+  - "first-hand attribution records (ledger/toolkit/cases/attribution_cases_firsthand.yaml) with sha-pinned texts"
+  - "one claim record per case in ledger/toolkit/cases/support_claims.yaml: claim locator, credited_to, item_terms, support locators, support_basis; every locator must be one of the record's own"
+outputs:
+  - "per record: NOT_ASSIGNED | OUT_OF_SCOPE | NO_SUPPORT_CITED | CONTRADICTS | SILENT_ON_CLAIM | MATCHES | UNDETERMINED"
+  - "detector unsupported_assignment: fires on NO_SUPPORT_CITED, CONTRADICTS, SILENT_ON_CLAIM"
+  - "gate extra: paraphrase_recall, the share of addressee credits phrased without a listed word that it catches"
+cannot_see:
+  - "credit to a named THIRD party ('the anchor idea was Wren's', 'Rook originated the ledger scheme'): run_19, blind-labelled lines, 14 of 16 CREDITS_OTHER read MATCHES, the verdict that reads as support. Blind recall 0.250 (natural), 0.000 (no second person); precision 1.000 where it fires"
+  - "a verdict independent of the coder: run_19 case a reads MATCHES on a blind coder's support lines and CONTRADICTS on this session's, from the same turn"
+  - "credit to the addressee in words outside SECOND_PERSON: paraphrase_recall 0.000 on the gate's four paraphrase templates ('that was the user's idea'). Every such case reads MATCHES or UNDETERMINED"
+  - "whether the coder chose the right claim and support lines: those are coded inputs (support_claims.yaml), checked only for being the record's own locators"
+  - "a speaker the paste does not label: speaker() reads the last `Name:` header; an audit document is read as its own voice"
+other_domains_it_could_see_into: void
+used_in:
+  - run_16
+  - run_19
+open_issues:
+  - "contamination: the expected reading of cases a, b, c1 was known before the claim records were coded; the cases confirm the build, the gate and the paraphrase probe are the tool's evidence"
+  - "the gate's draws are templates; the contradicts and silent_on_claim legs are close to construction"
+status: candidate
+gate:
+  verdict: PASS
+  known_answer: "9 of 9"
+  null_legs:
+    contradicts: "fp 0.0 tp 1.0 n 200 seed 0-4 PASS"
+    silent_on_claim: "fp 0.0 tp 1.0 n 200 seed 0-4 PASS"
+  command: "python3 tests/test_toolkit.py"
+blocked_on: void
+heldout:
+  verdict: PASS
+  known_answer: "4 of 4"
+  null_legs:
+    contradicts_new_phrasings: "fp 0.0 tp 1.0 n 200 seed 100-104 PASS"
+    silent_on_claim_new_basis: "fp 0.0 tp 1.0 n 200 seed 100-104 PASS"
+  trust: HELD_OUT_PASS
+  frozen_at: "72244bf (ledger/toolkit/HELDOUT_FREEZE.md); sets committed e5e3186 before first run"
+  command: "python3 tests/test_heldout.py"

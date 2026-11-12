@@ -1,12 +1,36 @@
 id: parameter_recovery
-code: void
+code: ledger/toolkit/parameter_recovery.py
 diagnoses:
   - "can the pipeline see what it claims (METHOD BRIEF toolbox line: parameter recovery on synthetic data)"
-inputs: void
-outputs: void
-cannot_see: void
+  - "a parameter the outputs do not constrain at all (NOT_IDENTIFIABLE): a nudge on it that moves nothing says nothing about the parameter"
+  - "a parameter constrained on one side only (PARTIAL), or recovered at the wrong value (BIASED: the model and the data-generating process differ)"
+inputs:
+  - "outputs_at(theta, seed) -> dict of scalar outputs; theta_true; a grid; observation seeds disjoint from fit seeds"
+outputs:
+  - "per parameter: chi2 profile over the grid, plausible set (within DCHI2 of the minimum), theta_hat, verdict RECOVERED | PARTIAL | BIASED | NOT_IDENTIFIABLE, outputs skipped for zero noise"
+cannot_see:
+  - "identifiability off the grid or between grid points; a 5-point grid at x0.2 steps is coarse"
+  - "joint identifiability: one parameter at a time with the rest at their true values; two parameters trading off against each other read RECOVERED singly"
+  - "real-data bias: the synthetic data come from the same model, so BIASED can only fire on a planted offset, never on model error in the world"
 other_domains_it_could_see_into: void
-used_in: []
+used_in:
+  - run_17
 open_issues:
-  - "not built; logged under the gate rule of 2026-11-10, see ledger/NEEDS_TOOL.md"
-status: placeholder
+  - "the null leg's FP 0 is partly construction: common fit seeds along the grid make a theta-independent toy's profile exactly flat. A null with independent seeds per grid value is not run"
+  - "DCHI2 = 9 [CHOICE]"
+status: candidate
+gate:
+  verdict: PASS
+  known_answer: "6 of 6"
+  null_legs:
+    recovered: "fp 0.0 tp 1.0 n 200 seed 0-4 PASS"
+  command: "python3 tests/test_toolkit.py"
+blocked_on: void
+heldout:
+  verdict: PASS
+  known_answer: "3 of 3"
+  null_legs:
+    recovered_quadratic_laplace: "fp 0.0 tp 1.0 n 200 seed 100-104 PASS"
+  trust: HELD_OUT_PASS
+  frozen_at: "72244bf (ledger/toolkit/HELDOUT_FREEZE.md); sets committed e5e3186 before first run"
+  command: "python3 tests/test_heldout.py"
