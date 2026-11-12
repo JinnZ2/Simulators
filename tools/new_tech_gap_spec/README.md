@@ -9,7 +9,7 @@ and not a position on any product.
 
 | File | What it is |
 |---|---|
-| `spec.md` | the spec: disciplines, 14 standard interfaces, 10-section checklist, forward trajectories, cross-cutting gaps, clock-rate mismatch |
+| `spec.md` | the spec: disciplines, 14 standard interfaces, 11-section checklist, forward trajectories, cross-cutting gaps, clock-rate mismatch |
 | `case_thruster_roadster.md` | worked case 1: a road car with cold-gas thrusters |
 | `case_ai_wearables.md` | worked case 2: always-on AI wearables at work |
 
