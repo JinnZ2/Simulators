@@ -1,3 +1,5 @@
 ingested 210 records, 1 VOID, 0 unknown prompt ids
 ingested 210 records, 1 VOID, 0 unknown prompt ids
+ingested 238 records, 1 VOID, 0 unknown prompt ids
+PILOT: ingested 48 records, 0 VOID, 0 unknown prompt ids
 selftest: PASS
