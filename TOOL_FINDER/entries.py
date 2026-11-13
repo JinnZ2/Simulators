@@ -521,3 +521,86 @@ SYMPTOMS = [
  ("my answer sounds uniformly confident and I can't see its edges", ["ai_self_scope"]),
  ("I need to know whether a tool was actually run, and on which version", ["provenance_marker"]),
 ]
+
+# ---- reasoning-toolkit cards (2026-11-13). Cards are markdown, not programs:
+# no check command (status NOT_RUN). measures / breaks quotes are checked against
+# reasoning-toolkit/CARDS.md like any other entry. Aliases ALIAS_PROPOSED.
+_CARD = "reasoning-toolkit/CARDS.md"
+_CARDS = [
+ ("distribution", [], "card-distribution-check", "#1-distribution-check",
+  ["when to distrust the median", "average does not describe me", "shape before center",
+   "modes tails spread", "advice for the middle given to a tail case"],
+  "whether a central value represents the population at all",
+  "n too small to show shape → mark the shape VOID, not \"normal\"",
+  "advice fitted to the middle was handed to me and I sit in a tail or another mode"),
+ ("fill-source", [], "card-fill-source-tag", "#2-fill-source-tag",
+  ["said vs filled", "SAID DERIVED FILLED VOID tags", "laundered default", "silent fill",
+   "confident specific with no source line"],
+  "which parts of an output came from the input vs from defaults",
+  "the source is itself an earlier fill (laundered default)",
+  "a summary or record states something specific about me and I can't see where it came from"),
+ ("scope", [], "card-claim-vs-method", "#3-claim-vs-method",
+  ["claim bigger than the study", "n vs claim width", "measured vs modeled",
+   "sufficiency read as necessity", "research shows overreach"],
+  "the gap between what a study says and what its design could have shown",
+  "the method section is not available -> mark the gap VOID, not \"fine\"",
+  "a claim about everyone rests on one sample, one site or one simulation"),
+ ("channel", [], "card-channel-loss-map", "#4-channel-loss-map",
+  ["what each channel drops", "transcription drops environment", "summary drops branches",
+   "voice drops layout", "per-hop loss"],
+  "which parts of a signal do not survive each hop between source and reader",
+  "a hop is invisible (nobody recorded that a summary was made)",
+  "something I said is missing from the summary and is being treated as never said"),
+ ("frame", [], "card-frame-check", "#5-frame-check",
+  ["term changes sense mid-argument", "sense substitution", "which frame is this word in",
+   "technical vs everyday sense"],
+  "whether a key term keeps one sense through an argument",
+  "the term is never pinned at any use -> mark VOID",
+  "an argument starts with one meaning of a word and ends with another"),
+ ("observer", ["frame"], "card-label-tracks-valve", "#6-label-tracks-valve",
+  ["label follows payment", "same act, different word once paid", "vice word vs virtue word",
+   "renamed once money attaches"],
+  "whether the label on a fixed act moves when only payment moves",
+  "payment is part of the act itself (see entangled variable)",
+  "the same act gets a kinder name when it pays"),
+ ("channel", ["observer"], "card-symptom-vs-cause-feeds", "#7-symptom-vs-cause-feeds",
+  ["outage tracker vs status page", "crowd reports vs official incident", "two feeds two layers",
+   "status page says no incident"],
+  "whether a crowd symptom feed and an operator status feed show the same event at the same time",
+  "the crowd feed counts reports, not users, and rises with attention",
+  "the status page says no incident while user reports of the problem keep rising"),
+ ("observer", [], "card-parallax-by-rotation", "#8-parallax-by-rotation",
+  ["rotate news sources", "what each vantage omits", "single-source picture",
+   "omission across outlets"],
+  "which items appear from one vantage and not from another",
+  "the vantages share one upstream source (one wire, one release)",
+  "I only see an event from one outlet or one role and can't tell what it leaves out"),
+ ("scope", [], "card-entangled-variable", "#9-entangled-variable",
+  ["factor cannot vary on its own", "impossible design cell", "variable inside the act",
+   "holding everything else fixed fails"],
+  "whether a factor can be varied without changing the act it modifies",
+  "the entanglement is partial (only some instances carry it)",
+  "a design asks about a case that cannot exist, like the act without the thing that defines it"),
+ ("observer", ["fill-source"], "card-author-familiarity", "#10-author-familiarity",
+  ["who wrote the prompt", "paraphrase author effect", "prompt written by the model's own family",
+   "results per item author"],
+  "whether results move with who wrote the prompt text",
+  "one author for every item -> the split is empty",
+  "a prompt set was written by one source and results may depend on whose wording it is"),
+ ("channel", [], "card-carrier-spread", "#11-carrier-spread",
+  ["warning held by many carriers", "one row per carrier", "canonical entry collapses variants",
+   "withheld content kept as a slot"],
+  "how many carriers hold a piece of knowledge, and what each kept",
+  "the carriers copy one source -> the spread is nominal",
+  "a tradition's warning is summarised as one entry and the variants are gone"),
+]
+for _need, _also, _name, _anchor, _aliases, _m, _b, _sym in _CARDS:
+    add(_need, "Simulators", _CARD + _anchor, _name, _aliases, _CARD, _m, _CARD, _b, None, also=_also)
+    A1[_name] = ("a question set; no numeric readout",
+                 "the reader applies the method by hand; status line in CARDS.md",
+                 "reads: inference (the reader's step). ignores: whether the card was applied correctly")
+    for _e in E:
+        if _e["name"] == _name:
+            _e["precision"], _e["assumes"], _e["chain"] = A1[_name]
+            _e["a1_status"] = "A1_READING (model reading of the card, 2026-11-13; not verbatim)"
+    SYMPTOMS.append((_sym, [_name]))
