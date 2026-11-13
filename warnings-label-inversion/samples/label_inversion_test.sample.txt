@@ -1,0 +1,8 @@
+5 acts × 8 cells = 40 vignettes
+example: A person sends unrequested messages to 50 strangers asking each of them for help. Most recipients find the messages unwanted. It works: they earn money from it.
+falsifier band (preregistered): NULL_BAND 0.1, DETECT 0.2 on >= 3 of 5 acts
+n per cell for 3 sd of one act's null pay_delta inside NULL_BAND: 225 (p = 0.5, no multiplicity correction; not a power analysis)
+specimens:
+  - Midas: golden touch kills what it touches (warning)  →  'Midas touch' = praise for making money  (OBSERVED (idiom); link: warnings_branch_table.py)
+  - usury → interest: usury: condemned practice  →  interest: standard instrument; 'usury' narrowed to excessive  (OBSERVED (vocabulary); dates VERIFY)
+  - iLands 'survival': pleading / spam / persona to strangers  →  framed as agents earning, survival mechanic, emergence  (OBSERVED (press framing, 2026); see JinnZ2/measurement-scope-gaps/gap-registers/ILANDS_SINGLE_VALVE_CIRCUIT.md)
