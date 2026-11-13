@@ -159,6 +159,15 @@ def render_collisions(data):
         for m in data["marking_start"]:
             u = m["untrailered_after_start"]
             o.append("| %s | `%s` | %d | %d | %d | %d |" % (m["repo"], u["main_tip"], u["merge"], u["web_ui"], u["other"], u["total"]))
+        uc = data.get("untrailered_claude_simulators")
+        if uc:
+            o += ["", "Untrailered, non-merge, Claude-committed commits, %s, after %s (main tip %s):" % (uc["repo"], uc["after"], uc["main_tip"]), "",
+                  "| hash | date | subject | bare claude.ai/code URL |", "|---|---|---|---|"]
+            for c in uc["commits"]:
+                o.append("| `%s` | %s | %s | %s |" % (c["sha"], c["date"], c["subject"].replace("|", "\\|"), c["bare_url"]))
+            o += ["", "- rule: %s" % uc["rule"], "- bare URL: %s" % uc["bare_url_rule"],
+                  "- count %d; date range %s .. %s" % (uc["count"], uc["first"], uc["last"]),
+                  "- per month (UTC): " + ", ".join("%s %d" % (k, v) for k, v in uc["per_month_utc"].items())]
         o += ["", "- note: %s" % data["marking_note"], ""]
     if "conditions" in data:
         o += ["## CONDITIONS (as of %s)" % data["conditions"]["as_of"], "", "These affect how to read the record.", ""]
@@ -291,6 +300,32 @@ def collision_problems(data, md_text):
                 out.append("marking_start %s: form %s VOID with no void_reason" % (m["repo"], k))
             elif v["sha"] != "VOID" and not v.get("date"):
                 out.append("marking_start %s: form %s has no date" % (m["repo"], k))
+    uc = data.get("untrailered_claude_simulators")
+    if not uc:
+        out.append("untrailered_claude_simulators: block missing")
+    else:
+        cs = uc.get("commits") or []
+        if not cs:
+            out.append("untrailered_claude_simulators: no commits")
+        for c in cs:
+            for k in ("sha", "date", "subject", "bare_url"):
+                if not c.get(k):
+                    out.append("untrailered_claude_simulators %s: field %s empty" % (c.get("sha"), k))
+            if c.get("bare_url") not in ("yes", "no"):
+                out.append("untrailered_claude_simulators %s: bare_url %r is not yes/no" % (c.get("sha"), c.get("bare_url")))
+        if uc.get("count") != len(cs):
+            out.append("untrailered_claude_simulators: count %s != %d commits listed" % (uc.get("count"), len(cs)))
+        ds = sorted(c["date"] for c in cs if c.get("date"))
+        if ds and (uc.get("first"), uc.get("last")) != (ds[0], ds[-1]):
+            out.append("untrailered_claude_simulators: date range does not match the commits")
+        from datetime import datetime, timezone
+        pm = {}
+        for c in cs:
+            if c.get("date"):
+                m = datetime.fromisoformat(c["date"]).astimezone(timezone.utc).strftime("%Y-%m")
+                pm[m] = pm.get(m, 0) + 1
+        if pm != dict(uc.get("per_month_utc") or {}):
+            out.append("untrailered_claude_simulators: per-month counts do not match the commits")
     if md_text != render_collisions(data):
         out.append("COLLISIONS.md does not match collisions.json (run --write)")
     return out
@@ -363,6 +398,11 @@ def selftest(data):
                       ("marking form missing", lambda d: d["marking_start"][0]["forms"].pop("c")),
                       ("marking form VOID with no reason", lambda d: d["marking_start"][0]["forms"]["c"].pop("void_reason")),
                       ("marking form with no date", lambda d: d["marking_start"][0]["forms"]["a"].pop("date")),
+                      ("untrailered table missing", lambda d: d.pop("untrailered_claude_simulators")),
+                      ("untrailered bare_url not yes/no", lambda d: d["untrailered_claude_simulators"]["commits"][0].update(bare_url="")),
+                      ("untrailered count differs", lambda d: d["untrailered_claude_simulators"].update(count=31)),
+                      ("untrailered month counts differ", lambda d: d["untrailered_claude_simulators"]["per_month_utc"].update({"2026-08": 30})),
+                      ("untrailered date range differs", lambda d: d["untrailered_claude_simulators"].update(last="2026-08-24T00:00:00+00:00")),
                       ("session VOID with no reason", lambda d: d["rows"][1]["sides"][0]["commits"][0].pop("session_void_reason"))):
         d = _c.deepcopy(cd); base_md = render_collisions(cd); mut(d)
         hit = bool(collision_problems(d, base_md if "out of date" in name else render_collisions(d)))

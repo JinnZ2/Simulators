@@ -691,6 +691,214 @@
    "note": "0384df3 (Perplexity) is dated 2026-11-10T22:10:30-06:00 = 2026-11-11T04:10:30Z, after 79f402c; first Manus trailer dd220df 2026-11-11T19:30:23Z"
   }
  ],
+ "untrailered_claude_simulators": {
+  "repo": "Simulators",
+  "main_tip": "34eb3cf",
+  "after": "11033ad",
+  "rule": "non-merge; committer name Claude; no Co-Authored-By trailer; committer date on or after 11033ad; reachable from the main tip named",
+  "bare_url_rule": "yes = a line containing claude.ai/code/session that does not begin with 'Claude-Session:'",
+  "count": 32,
+  "first": "2026-07-28T22:08:46+00:00",
+  "last": "2026-08-25T01:16:34+00:00",
+  "per_month_utc": {
+   "2026-07": 1,
+   "2026-08": 31
+  },
+  "commits": [
+   {
+    "sha": "cb35ea2",
+    "date": "2026-07-28T22:08:46+00:00",
+    "subject": "claim-audits/: new folder -- K/M attribution + 8-verdict convention",
+    "bare_url": "no"
+   },
+   {
+    "sha": "1468a79",
+    "date": "2026-08-01T13:11:21+00:00",
+    "subject": "inverseminar/: new folder -- micro-inverseminar as a single stdlib script",
+    "bare_url": "no"
+   },
+   {
+    "sha": "1979359",
+    "date": "2026-08-04T18:12:39+00:00",
+    "subject": "energy/: new folder -- coupled-quintessence drop + metrology stack",
+    "bare_url": "no"
+   },
+   {
+    "sha": "82d8dea",
+    "date": "2026-08-04T18:27:57+00:00",
+    "subject": "energy/: ship the flagship report as markdown too",
+    "bare_url": "no"
+   },
+   {
+    "sha": "cde6789",
+    "date": "2026-08-04T18:32:55+00:00",
+    "subject": "energy/: land author audit (F1-F6), F2 confirmed as an echo",
+    "bare_url": "no"
+   },
+   {
+    "sha": "fd4aa79",
+    "date": "2026-08-04T23:11:46+00:00",
+    "subject": "energy/exploration_layers/: land three lenses -- R-D, percolation, RG flow",
+    "bare_url": "no"
+   },
+   {
+    "sha": "cfac176",
+    "date": "2026-08-04T23:17:56+00:00",
+    "subject": "energy/ v2 update: unified engine + Needle Lab + PROVENANCE ledger",
+    "bare_url": "no"
+   },
+   {
+    "sha": "be6d350",
+    "date": "2026-08-04T23:36:09+00:00",
+    "subject": "energy/: G1-G5 audit response + CC0 license switch + DP-13/14/15/16 + OB-8",
+    "bare_url": "no"
+   },
+   {
+    "sha": "8870d81",
+    "date": "2026-08-04T23:45:57+00:00",
+    "subject": "energy/: DP-17 -- certificate validity radius r̂ = 1.00, wall property",
+    "bare_url": "no"
+   },
+   {
+    "sha": "5edf2d0",
+    "date": "2026-08-04T23:56:45+00:00",
+    "subject": "divergence-playground/: new folder + energy/FORKS.jsonl (PROVENANCE DP-18)",
+    "bare_url": "no"
+   },
+   {
+    "sha": "10416e4",
+    "date": "2026-08-05T07:43:23+00:00",
+    "subject": "null-harness/: new folder -- trust-calibration for any gate; F-9 lands",
+    "bare_url": "no"
+   },
+   {
+    "sha": "9ccb626",
+    "date": "2026-08-05T08:07:56+00:00",
+    "subject": "claim-audits + null-harness: audit 5-piece paste from other models; F-10",
+    "bare_url": "no"
+   },
+   {
+    "sha": "0e1aea4",
+    "date": "2026-08-05T12:47:08+00:00",
+    "subject": "energy/: F-10 D corrected -- local scalar drift lens with lab falsifier",
+    "bare_url": "no"
+   },
+   {
+    "sha": "ff26aa1",
+    "date": "2026-08-05T12:52:48+00:00",
+    "subject": "relational/: new folder, different genre, landed in its own frame",
+    "bare_url": "no"
+   },
+   {
+    "sha": "4f267f8",
+    "date": "2026-08-05T12:59:01+00:00",
+    "subject": "relational/: second drop -- 3 more code files + INTEGRATION_SUMMARY.md",
+    "bare_url": "no"
+   },
+   {
+    "sha": "c4cd79d",
+    "date": "2026-08-05T13:06:45+00:00",
+    "subject": "relational/: third drop -- correlated_birth_mode.py + pain_as_sensor.py",
+    "bare_url": "no"
+   },
+   {
+    "sha": "75f952b",
+    "date": "2026-08-05T13:12:12+00:00",
+    "subject": "relational/: fourth drop -- FILES DELIVERED closes + bonus demo",
+    "bare_url": "no"
+   },
+   {
+    "sha": "7edaf16",
+    "date": "2026-08-05T13:27:11+00:00",
+    "subject": "relational/proposal.md: ten avenues for taking the framework real",
+    "bare_url": "no"
+   },
+   {
+    "sha": "ffc488a",
+    "date": "2026-08-05T13:40:11+00:00",
+    "subject": "cleanup of the three merged-in files: fold, delete, rename",
+    "bare_url": "no"
+   },
+   {
+    "sha": "7cbaccf",
+    "date": "2026-08-05T18:15:18+00:00",
+    "subject": "relational/arch_garden/: split workToDo.md into a real subfolder + flesh out stubs",
+    "bare_url": "no"
+   },
+   {
+    "sha": "8d8d9e7",
+    "date": "2026-08-05T18:23:14+00:00",
+    "subject": "relational/figures/: land the FILES DELIVERED visualizations (fifth drop)",
+    "bare_url": "no"
+   },
+   {
+    "sha": "2499238",
+    "date": "2026-08-21T22:48:50+00:00",
+    "subject": "Add search-substitution/: three organisms that do not search",
+    "bare_url": "no"
+   },
+   {
+    "sha": "e2018fb",
+    "date": "2026-08-21T23:48:44+00:00",
+    "subject": "Add qrng-pair-search/: bath sets, not names, with three corrections",
+    "bare_url": "no"
+   },
+   {
+    "sha": "6365d18",
+    "date": "2026-08-22T00:20:46+00:00",
+    "subject": "Strip authorship attribution from qrng-pair-search prose",
+    "bare_url": "no"
+   },
+   {
+    "sha": "99885ea",
+    "date": "2026-08-22T01:49:35+00:00",
+    "subject": "Install AUDIT_CONTRACT; withdraw two overreaches it catches",
+    "bare_url": "no"
+   },
+   {
+    "sha": "7a876bf",
+    "date": "2026-08-22T01:53:12+00:00",
+    "subject": "Readout sharing is a deployment property; third reading of the same field",
+    "bare_url": "no"
+   },
+   {
+    "sha": "511103f",
+    "date": "2026-08-24T13:37:23+00:00",
+    "subject": "Add custody-verification-band/: criterion reads two of five cuts",
+    "bare_url": "no"
+   },
+   {
+    "sha": "6349b6a",
+    "date": "2026-08-24T13:46:05+00:00",
+    "subject": "Install the delivered corpus; B4 withdrawn, three reader defects fixed",
+    "bare_url": "no"
+   },
+   {
+    "sha": "f9822f9",
+    "date": "2026-08-24T13:49:33+00:00",
+    "subject": "Add LIVE_CULTURES corpus; gap coverage is 4 of 9",
+    "bare_url": "no"
+   },
+   {
+    "sha": "db23b12",
+    "date": "2026-08-24T14:47:12+00:00",
+    "subject": "Install SHAPE_SPEC; section 2 describes B7 verbatim",
+    "bare_url": "no"
+   },
+   {
+    "sha": "ac9a1dd",
+    "date": "2026-08-24T14:58:13+00:00",
+    "subject": "Install METHOD_SPEC; section 3 names the next move on the conversion cases",
+    "bare_url": "no"
+   },
+   {
+    "sha": "e9594f8",
+    "date": "2026-08-25T01:16:34+00:00",
+    "subject": "Install READING_PROTOCOL",
+    "bare_url": "no"
+   }
+  ]
+ },
  "marking_note": "Read from git on origin/main; 'first' = earliest committer date (UTC), not topological order. a = first Co-Authored-By naming a Claude model; b = first 'Claude-Session:' keyed trailer; c = first bare claude.ai/code/session URL line; d = first Co-Authored-By naming a non-Claude model agent. None is picked. Untrailered = no Co-Authored-By trailer, counted from line a to the main tip named. merge = more than one parent; web-UI = non-merge with committer GitHub <noreply@github.com> (web-flow); other = the rest. Simulators 'other' splits by committer name: Claude 32, JinnZ2 5.",
  "conditions": {
   "as_of": "2026-11-11",
