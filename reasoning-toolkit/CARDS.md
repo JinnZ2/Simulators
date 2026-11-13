@@ -45,6 +45,7 @@ Provenance is per card:
 13. gate regeneration
 14. ontology before pathology
 15. echo check
+16. critical-facility cloud dependency audit
 
 Tests (PROPOSED): T-source, T-band
 
@@ -418,6 +419,39 @@ CARD: echo check -- is this input new evidence or a copy coming back
 
 link notes:
 - bestiary copyists (chat-side, not in repo)
+
+---
+
+## 16. critical-facility cloud dependency audit
+
+provenance: drafted chat-side, landed verbatim
+status: PROPOSED
+
+```
+CARD: critical-facility cloud dependency audit (PROPOSED)
+  measures   which critical functions fail when a remote service fails
+  fits       hospitals, utilities, dispatch, water, food cold chain, any
+             facility calling itself infrastructure
+  method     per function: list every remote dependency, down to the physical
+               layer (data center, power, cooling, fiber, region)
+             per dependency: load margin | redundancy (independent, or shared
+               upstream?) | failure mode | local fallback | time-to-manual
+             test: run the function with the dependency cut (a drill, not a claim)
+  rule       if the cloud is infrastructure, it gets infrastructure engineering:
+             rated load, safety factor, design to the worst-case tail, not average uptime
+  breaks     "redundant" services that share one upstream (same provider, region,
+             or auth system) → count them as one
+  warning    "it's in the cloud" given as the answer to "where does it run?"
+  specimen   Microsoft 365, 2026-11-12: elevated load across regions; hospitals hit
+  link       configuration-record physical layer + frame-exit; distribution check
+```
+
+link notes:
+- The card carries two fields beyond the six-field format, `rule` and `specimen`. Both are kept as delivered.
+- specimen: Microsoft 365, 2026-11-12 (chat-side, not in repo)
+- configuration-record physical layer + frame-exit: `configuration-record/` (`config_schema.json`, layer `physical`, `frame_exit`, flag CLOSED-FRAME)
+- distribution check: card 1
+- Related: `effective-redundancy-audit/` (shared upstream nodes counted once)
 
 ---
 

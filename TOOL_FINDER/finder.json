@@ -335,6 +335,12 @@
    ]
   },
   {
+   "symptom": "a facility that calls itself infrastructure stops working when a remote service is overloaded",
+   "tools": [
+    "card-critical-facility-cloud-dependency"
+   ]
+  },
+  {
    "symptom": "a model plus tools is called the decider by its name, and nobody has written down who can see or fix the whole",
    "tools": [
     "configuration-record"
@@ -2011,9 +2017,9 @@
    "assumes": "the reader applies the method by hand; status line in CARDS.md",
    "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
    "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
-   "measures_src": "reasoning-toolkit/CARDS.md:60",
+   "measures_src": "reasoning-toolkit/CARDS.md:61",
    "measures_quote_state": "FOUND",
-   "breaks_src": "reasoning-toolkit/CARDS.md:68",
+   "breaks_src": "reasoning-toolkit/CARDS.md:69",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {
@@ -2044,9 +2050,9 @@
    "assumes": "the reader applies the method by hand; status line in CARDS.md",
    "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
    "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
-   "measures_src": "reasoning-toolkit/CARDS.md:90",
+   "measures_src": "reasoning-toolkit/CARDS.md:91",
    "measures_quote_state": "FOUND",
-   "breaks_src": "reasoning-toolkit/CARDS.md:95",
+   "breaks_src": "reasoning-toolkit/CARDS.md:96",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {
@@ -2077,9 +2083,9 @@
    "assumes": "the reader applies the method by hand; status line in CARDS.md",
    "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
    "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
-   "measures_src": "reasoning-toolkit/CARDS.md:119",
+   "measures_src": "reasoning-toolkit/CARDS.md:120",
    "measures_quote_state": "FOUND",
-   "breaks_src": "reasoning-toolkit/CARDS.md:126",
+   "breaks_src": "reasoning-toolkit/CARDS.md:127",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {
@@ -2110,9 +2116,9 @@
    "assumes": "the reader applies the method by hand; status line in CARDS.md",
    "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
    "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
-   "measures_src": "reasoning-toolkit/CARDS.md:148",
+   "measures_src": "reasoning-toolkit/CARDS.md:149",
    "measures_quote_state": "FOUND",
-   "breaks_src": "reasoning-toolkit/CARDS.md:156",
+   "breaks_src": "reasoning-toolkit/CARDS.md:157",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {
@@ -2142,9 +2148,9 @@
    "assumes": "the reader applies the method by hand; status line in CARDS.md",
    "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
    "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
-   "measures_src": "reasoning-toolkit/CARDS.md:173",
+   "measures_src": "reasoning-toolkit/CARDS.md:174",
    "measures_quote_state": "FOUND",
-   "breaks_src": "reasoning-toolkit/CARDS.md:180",
+   "breaks_src": "reasoning-toolkit/CARDS.md:181",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {
@@ -2176,9 +2182,9 @@
    "assumes": "the reader applies the method by hand; status line in CARDS.md",
    "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
    "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
-   "measures_src": "reasoning-toolkit/CARDS.md:203",
+   "measures_src": "reasoning-toolkit/CARDS.md:204",
    "measures_quote_state": "FOUND",
-   "breaks_src": "reasoning-toolkit/CARDS.md:207",
+   "breaks_src": "reasoning-toolkit/CARDS.md:208",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {
@@ -2210,9 +2216,9 @@
    "assumes": "the reader applies the method by hand; status line in CARDS.md",
    "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
    "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
-   "measures_src": "reasoning-toolkit/CARDS.md:223",
+   "measures_src": "reasoning-toolkit/CARDS.md:224",
    "measures_quote_state": "FOUND",
-   "breaks_src": "reasoning-toolkit/CARDS.md:229",
+   "breaks_src": "reasoning-toolkit/CARDS.md:230",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {
@@ -2242,9 +2248,9 @@
    "assumes": "the reader applies the method by hand; status line in CARDS.md",
    "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
    "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
-   "measures_src": "reasoning-toolkit/CARDS.md:250",
+   "measures_src": "reasoning-toolkit/CARDS.md:251",
    "measures_quote_state": "FOUND",
-   "breaks_src": "reasoning-toolkit/CARDS.md:254",
+   "breaks_src": "reasoning-toolkit/CARDS.md:255",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {
@@ -2274,9 +2280,9 @@
    "assumes": "the reader applies the method by hand; status line in CARDS.md",
    "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
    "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
-   "measures_src": "reasoning-toolkit/CARDS.md:276",
+   "measures_src": "reasoning-toolkit/CARDS.md:277",
    "measures_quote_state": "FOUND",
-   "breaks_src": "reasoning-toolkit/CARDS.md:281",
+   "breaks_src": "reasoning-toolkit/CARDS.md:282",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {
@@ -2308,9 +2314,9 @@
    "assumes": "the reader applies the method by hand; status line in CARDS.md",
    "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
    "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
-   "measures_src": "reasoning-toolkit/CARDS.md:298",
+   "measures_src": "reasoning-toolkit/CARDS.md:299",
    "measures_quote_state": "FOUND",
-   "breaks_src": "reasoning-toolkit/CARDS.md:303",
+   "breaks_src": "reasoning-toolkit/CARDS.md:304",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {
@@ -2340,9 +2346,9 @@
    "assumes": "the reader applies the method by hand; status line in CARDS.md",
    "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
    "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
-   "measures_src": "reasoning-toolkit/CARDS.md:322",
+   "measures_src": "reasoning-toolkit/CARDS.md:323",
    "measures_quote_state": "FOUND",
-   "breaks_src": "reasoning-toolkit/CARDS.md:328",
+   "breaks_src": "reasoning-toolkit/CARDS.md:329",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {
@@ -2374,9 +2380,9 @@
    "assumes": "the reader applies the method by hand; status line in CARDS.md",
    "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
    "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
-   "measures_src": "reasoning-toolkit/CARDS.md:343",
+   "measures_src": "reasoning-toolkit/CARDS.md:344",
    "measures_quote_state": "FOUND",
-   "breaks_src": "reasoning-toolkit/CARDS.md:349",
+   "breaks_src": "reasoning-toolkit/CARDS.md:350",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {
@@ -2408,9 +2414,9 @@
    "assumes": "the reader applies the method by hand; status line in CARDS.md",
    "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
    "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
-   "measures_src": "reasoning-toolkit/CARDS.md:364",
+   "measures_src": "reasoning-toolkit/CARDS.md:365",
    "measures_quote_state": "FOUND",
-   "breaks_src": "reasoning-toolkit/CARDS.md:370",
+   "breaks_src": "reasoning-toolkit/CARDS.md:371",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {
@@ -2442,9 +2448,9 @@
    "assumes": "the reader applies the method by hand; status line in CARDS.md",
    "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
    "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
-   "measures_src": "reasoning-toolkit/CARDS.md:386",
+   "measures_src": "reasoning-toolkit/CARDS.md:387",
    "measures_quote_state": "FOUND",
-   "breaks_src": "reasoning-toolkit/CARDS.md:393",
+   "breaks_src": "reasoning-toolkit/CARDS.md:394",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {
@@ -2477,9 +2483,45 @@
    "assumes": "the reader applies the method by hand; status line in CARDS.md",
    "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
    "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
-   "measures_src": "reasoning-toolkit/CARDS.md:408",
+   "measures_src": "reasoning-toolkit/CARDS.md:409",
    "measures_quote_state": "FOUND",
-   "breaks_src": "reasoning-toolkit/CARDS.md:413",
+   "breaks_src": "reasoning-toolkit/CARDS.md:414",
+   "breaks_quote_state": "FOUND",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
+   }
+  },
+  {
+   "need": "channel",
+   "also": [
+    "observer"
+   ],
+   "repo": "Simulators",
+   "path": "reasoning-toolkit/CARDS.md#16-critical-facility-cloud-dependency-audit",
+   "name": "card-critical-facility-cloud-dependency",
+   "aliases": [
+    "hospital depends on the cloud",
+    "what fails when the remote service fails",
+    "it's in the cloud",
+    "redundant services share one upstream",
+    "dependency down to the data center",
+    "time to manual"
+   ],
+   "measures_file": "reasoning-toolkit/CARDS.md",
+   "measures": "which critical functions fail when a remote service fails",
+   "breaks_file": "reasoning-toolkit/CARDS.md",
+   "breaks_when": "\"redundant\" services that share one upstream (same provider, region, or auth system) \u2192 count them as one",
+   "check": null,
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "a question set; no numeric readout",
+   "assumes": "the reader applies the method by hand; status line in CARDS.md",
+   "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
+   "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
+   "measures_src": "reasoning-toolkit/CARDS.md:432",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "reasoning-toolkit/CARDS.md:442",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {
