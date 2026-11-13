@@ -24,7 +24,8 @@ VOID (None) = no information, always carried with a reason. stdlib only.
           [--add-paraphrases FILE]
   python3 model_corpus_arm.py --mini [--prompt-pack] [--repeats N]   # PILOT
   python3 model_corpus_arm.py --ingest answers.txt --model NAME [--version V]
-          [--app|--api] [--memory on|off] [--date D] [--temperature T]
+          [--app|--api] [--memory on|off|temporary-chat] [--memory-note TEXT]
+          [--date D] [--temperature T]
           [--seed N] [--with-actor] [--add-paraphrases FILE] [--mini]
           [--out records.json]
   python3 model_corpus_arm.py --analyze records.json [more.json ...]
@@ -230,7 +231,11 @@ def render_pack(pack):
     return "\n".join(f"### {p['prompt_id']}\n{p['text']}\n" for p in pack)
 
 
-TEMPLATE_KEYS = ("model", "version", "app/api", "date", "memory")
+TEMPLATE_KEYS = ("model", "version", "app/api", "date", "memory", "memory_note")
+MEMORY_VALUES = ("on", "off", "temporary-chat")
+# P3 runs the other way from P1/P2: the label is given, pay is the answer.
+TAG = {"P1": "P1", "P2": "P2", "P3": "P3-reverse"}
+DIRECTION = {"P1": "pay -> label", "P2": "pay -> label", "P3": "label -> pay"}
 _ID_LINE = re.compile(r"^([a-z\-]+-P[123]-p\d+-\S+?):[ \t]?(.*)$")
 
 
@@ -254,7 +259,7 @@ def parse_template(text):
             else:
                 blank.append(pid)
             continue
-        km = re.match(r"^\s*([a-z/]+)\s*:\s*(.*)$", line, re.I)
+        km = re.match(r"^\s*([a-z_/]+)\s*:\s*(.*)$", line, re.I)
         if km and km.group(1).lower() in TEMPLATE_KEYS:
             header[km.group(1).lower()] = km.group(2).strip() or None
     if not answers and not blank:
@@ -315,15 +320,17 @@ def code(prompt, answer):
 
 
 def ingest(answers_text, model, version=None, app_api=None, memory=None,
+           memory_note=None,
            date=None, temperature=None, seed=0, actors=None, extra=None,
            mini=False, repeats=MINI_REPEATS):
     built = build_mini(seed, repeats) if mini else build_pack(seed, actors, extra)
     pack = {p["prompt_id"]: p for p in built}
     header, ans, blank = parse_template(answers_text)
     given = dict(model=model, version=version, app_api=app_api, date=date,
-                 memory=memory)
+                 memory=memory, memory_note=memory_note)
     for k, hk in (("model", "model"), ("version", "version"),
-                  ("app_api", "app/api"), ("date", "date"), ("memory", "memory")):
+                  ("app_api", "app/api"), ("date", "date"), ("memory", "memory"),
+                  ("memory_note", "memory_note")):
         hv = header.get(hk)
         if hv is not None and given[k] is not None and str(given[k]) != hv:
             raise ValueError(f"{hk}: command line {given[k]!r} vs template {hv!r}")
@@ -331,19 +338,21 @@ def ingest(answers_text, model, version=None, app_api=None, memory=None,
             given[k] = hv
     if given["app_api"] not in (None, "app", "api"):
         raise ValueError(f"app/api must be app or api, not {given['app_api']!r}")
-    if given["memory"] not in (None, "on", "off"):
-        raise ValueError(f"memory must be on or off, not {given['memory']!r}")
+    if given["memory"] not in (None,) + MEMORY_VALUES:
+        raise ValueError(f"memory must be one of {', '.join(MEMORY_VALUES)}, "
+                         f"not {given['memory']!r}")
     if not given["model"]:
         raise ValueError("no model: give --model or fill 'model:' in the template")
-    model, version, app_api, date, memory = (given[k] for k in
-        ("model", "version", "app_api", "date", "memory"))
+    model, version, app_api, date, memory, memory_note = (given[k] for k in
+        ("model", "version", "app_api", "date", "memory", "memory_note"))
     run_id = hashlib.sha256(answers_text.encode()).hexdigest()[:12]
     meta = dict(model=model, version=version, app_api=app_api, date=date,
-                memory=memory, temperature=temperature)
+                memory=memory, memory_note=memory_note, temperature=temperature)
     reasons = dict(version="not supplied (--version or template)",
                    app_api="not supplied (--app/--api or template)",
                    date="not supplied (--date or template)",
                    memory="not supplied (--memory or template)",
+                   memory_note="not supplied (--memory-note or template; optional)",
                    temperature="not settable or not reported in this interface; "
                                "not supplied with --temperature")
     nulls = {k: reasons[k] for k, v in meta.items() if v is None and k in reasons}
@@ -355,6 +364,7 @@ def ingest(answers_text, model, version=None, app_api=None, memory=None,
         p = pack[pid]
         coded, lab, why = code(p, a)
         recs.append(dict(meta, prompt_id=pid, prompt_type=p["prompt_type"],
+            tag=TAG[p["prompt_type"]], direction=DIRECTION[p["prompt_type"]],
             act=p["act"], actor=p["actor"], paraphrase=p["paraphrase"],
             paraphrase_author=p["paraphrase_author"],
             repeat=p.get("repeat"), pilot=p.get("pilot", False),
@@ -538,6 +548,25 @@ def cross(ma, pooled):
     return out
 
 
+def pilot_caveats(recs):
+    """Caveats for --mini records, each flagged PILOT."""
+    pr = [r for r in recs if r.get("pilot")]
+    out = []
+    if any(r["act"] == "soliciting strangers" for r in pr):
+        out.append(("K2", "soliciting strangers: the help requested may be "
+                    "money, so the act and the pay manipulation overlap"))
+    reps = {r.get("repeat") for r in pr}
+    if reps == {1}:
+        out.append(("K3", "repeats=1: one answer per P1 cell, so each P1 "
+                    "pay_delta is a direction only (-1, 0 or +1)"))
+    return out
+
+
+def render_caveats(cav):
+    lines = ["caveats:"] + [f"  PILOT {k}: {t}" for k, t in cav]
+    return "\n".join(lines) if cav else "caveats: none"
+
+
 # ── rendering ──────────────────────────────────────────────────────────
 def f(x):
     return "VOID" if x is VOID else f"{x:+.3f}"
@@ -550,7 +579,7 @@ def render_model(ma):
     for mk, res in ma.items():
         lines.append(f"\nmodel {mk}   P1 verdict: {res['verdict_P1']}")
         for pt in ("P1", "P2", "P3"):
-            lines.append(f"  {pt}  act                     pay_delta  "
+            lines.append(f"  {TAG[pt]:<10}  act           pay_delta  "
                          f"coded void  var_para  var_run runs")
             for a, d in res[pt].items():
                 lines.append(f"      {a:<23} {f(d['pay_delta']):>9}  "
@@ -562,7 +591,7 @@ def render_model(ma):
     if len(ma) > 1:
         lines.append("\ncross-model spread (max - min pay_delta)")
         for (pt, a), d in cross_model_spread(ma).items():
-            lines.append(f"  {pt} {a:<23} {f(d['spread'])}")
+            lines.append(f"  {TAG[pt]:<10} {a:<23} {f(d['spread'])}")
     return "\n".join(lines)
 
 
@@ -585,7 +614,7 @@ def render_corpus(cs):
 def render_cross(cr, title="pooled corpus ratio"):
     lines = [f"\nB-CROSS: model pay_delta - {title}, per prompt type"]
     for (mk, pt, a), d in cr.items():
-        lines.append(f"  {mk:<14} {pt} {a:<23} model {f(d['model'])}  corpus "
+        lines.append(f"  {mk:<14} {TAG[pt]:<10} {a:<23} model {f(d['model'])}  corpus "
                      f"{f(d['corpus'])}  diff {f(d['diff'])}")
     return "\n".join(lines)
 
@@ -778,8 +807,9 @@ def selftest():
           "repeats 1 + repeats 2-3 != repeats 3 (same seed)")
     tpl = render_template(m1)
     tl = tpl.splitlines()
-    check(tl[:5] == [f"{k}: " for k in TEMPLATE_KEYS], "template header lines")
-    check([x.split(": ")[0] for x in tl[6:]] == [p["prompt_id"] for p in m1],
+    nk = len(TEMPLATE_KEYS)
+    check(tl[:nk] == [f"{k}: " for k in TEMPLATE_KEYS], "template header lines")
+    check([x.split(": ")[0] for x in tl[nk + 1:]] == [p["prompt_id"] for p in m1],
           "template ID lines not in pack order")
     ans1 = dict(parse_answers(_synthetic_answers(m1, "inv")))
     filled = []
@@ -789,7 +819,9 @@ def selftest():
         elif x.startswith("app/api: "):
             x += "app"
         elif x.startswith("memory: "):
-            x += "off"
+            x += "temporary-chat"
+        elif x.startswith("memory_note: "):
+            x += "new chat each prompt; history off"
         elif ": " in x and x.split(": ")[0] in ans1 and not x.startswith(
                 m1[-1]["prompt_id"]):
             x += ans1[x.split(": ")[0]]
@@ -805,12 +837,40 @@ def selftest():
     check(len(rt) == 15 and ingest.blank == [m1[-1]["prompt_id"]],
           f"template: {len(rt)} records, blank {ingest.blank}")
     check(all(r["model"] == "planted-tpl" and r["app_api"] == "app"
-              and r["memory"] == "off" and r["version"] is None
+              and r["memory"] == "temporary-chat"
+              and r["memory_note"] == "new chat each prompt; history off"
+              and r["version"] is None
               and "version" in r["nulls"] for r in rt), "template header not read")
     check(main(["--ingest", tp, "--mini", "--seed", "1", "--repeats", "3",
                 "--out", tr]) == 0, "repeats=1 template refused under --repeats 3")
     check(main(["--ingest", tp, "--mini", "--seed", "1", "--model", "other",
                 "--out", tr]) == 2, "conflicting --model not refused")
+    check(all((r["tag"], r["direction"]) == (("P3-reverse", "label -> pay")
+              if r["prompt_type"] == "P3" else (r["prompt_type"], "pay -> label"))
+              for r in rt), "P3 records not tagged P3-reverse")
+    check("P3-reverse" in render_model(model_analysis(rt))
+          and "  P3 " not in render_model(model_analysis(rt)),
+          "analyze output does not show P3-reverse")
+    cav = dict(pilot_caveats(rt))
+    check(set(cav) == {"K2", "K3"}, f"pilot caveats at repeats=1: {sorted(cav)}")
+    check("PILOT K2" in render_caveats(pilot_caveats(rt))
+          and "PILOT K3" in render_caveats(pilot_caveats(rt)), "caveats not flagged PILOT")
+    bm = os.path.join(tmp, "badmem.txt")
+    with open(bm, "w") as fh:
+        fh.write("\n".join(x.replace("memory: temporary-chat", "memory: sometimes")
+                           for x in filled) + "\n")
+    check(main(["--ingest", bm, "--mini", "--seed", "1", "--out", tr]) == 2,
+          "memory value outside on/off/temporary-chat not refused")
+    nn = os.path.join(tmp, "nonote.txt")
+    with open(nn, "w") as fh:
+        fh.write("\n".join(x for x in filled
+                           if not x.startswith("memory_note:")) + "\n")
+    check(main(["--ingest", nn, "--mini", "--seed", "1", "--out", tr]) == 0,
+          "template without memory_note refused")
+    with open(tr) as fh:
+        rn = json.load(fh)
+    check(all(r["memory_note"] is None and "memory_note" in r["nulls"] for r in rn),
+          "absent memory_note not null + reason")
     blank_tpl = os.path.join(tmp, "blank.txt")
     with open(blank_tpl, "w") as fh:
         fh.write(tpl)
@@ -838,6 +898,8 @@ def selftest():
     with open(rpm) as fh:
         rm = json.load(fh)
     check(len(rm) == len(mini) and all(r["pilot"] for r in rm), "mini records not PILOT")
+    check(dict(pilot_caveats(rm)).keys() == {"K2"}, "K3 printed at repeats=3")
+    check(pilot_caveats(recs) == [], "caveats printed for non-pilot records")
     mm = model_analysis(rm)["planted-mini"]
     for a in MINI_ACTS:
         for pt in ("P1", "P3"):
@@ -858,7 +920,8 @@ def main(argv=None):
     g = ap.add_mutually_exclusive_group()
     g.add_argument("--app", action="store_true")
     g.add_argument("--api", action="store_true")
-    ap.add_argument("--memory", choices=["on", "off"])
+    ap.add_argument("--memory", choices=list(MEMORY_VALUES))
+    ap.add_argument("--memory-note")
     ap.add_argument("--date")
     ap.add_argument("--temperature", type=float)
     ap.add_argument("--out")
@@ -904,7 +967,8 @@ def main(argv=None):
         try:
             recs, unknown = ingest(text, a.model, a.version,
                                    "app" if a.app else "api" if a.api else None,
-                                   a.memory, a.date, a.temperature, a.seed, actors,
+                                   a.memory, a.memory_note, a.date,
+                                   a.temperature, a.seed, actors,
                                    extra, a.mini, a.repeats)
         except ValueError as e:
             print("ingest refused:", e, file=sys.stderr)
@@ -929,6 +993,7 @@ def main(argv=None):
         ma = model_analysis(recs)
         if any(r.get("pilot") for r in recs):
             print("PILOT: records from the --mini pack are present")
+            print(render_caveats(pilot_caveats(recs)))
         print(render_model(ma))
     if a.corpus:
         years = corpus_by_year(a.corpus)

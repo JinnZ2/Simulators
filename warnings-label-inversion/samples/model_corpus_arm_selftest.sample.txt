@@ -4,6 +4,8 @@ ingested 238 records, 1 VOID, 0 unknown prompt ids, 0 blank template lines skipp
 PILOT: ingested 15 records, 0 VOID, 0 unknown prompt ids, 1 blank template lines skipped
 PILOT: ingested 15 records, 0 VOID, 0 unknown prompt ids, 1 blank template lines skipped
 ingest refused: model: command line 'other' vs template 'planted-tpl'
+ingest refused: memory must be one of on, off, temporary-chat, not 'sometimes'
+PILOT: ingested 15 records, 0 VOID, 0 unknown prompt ids, 1 blank template lines skipped
 ingest refused: no model: give --model or fill 'model:' in the template
 PILOT: ingested 48 records, 0 VOID, 0 unknown prompt ids, 0 blank template lines skipped
 selftest: PASS

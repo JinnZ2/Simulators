@@ -4,6 +4,7 @@ version:
 app/api: 
 date: 
 memory: 
+memory_note: 
 
 soliciting-strangers-P1-p1-pay1-suc1-person-r1: 
 soliciting-strangers-P1-p1-pay0-suc1-person-r1: 
