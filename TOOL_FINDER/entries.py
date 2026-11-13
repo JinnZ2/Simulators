@@ -617,6 +617,12 @@ _CARDS = [
   "whether an input is independent of the reader's own outputs or of a median copy",
   "the copy carries an independent check the original did not",
   "many sources agree and none of them observed the thing"),
+ ("channel", ["observer"], "card-critical-facility-cloud-dependency", "#16-critical-facility-cloud-dependency-audit",
+  ["hospital depends on the cloud", "what fails when the remote service fails", "it's in the cloud",
+   "redundant services share one upstream", "dependency down to the data center", "time to manual"],
+  "which critical functions fail when a remote service fails",
+  "\"redundant\" services that share one upstream (same provider, region, or auth system) → count them as one",
+  "a facility that calls itself infrastructure stops working when a remote service is overloaded"),
 ]
 for _need, _also, _name, _anchor, _aliases, _m, _b, _sym in _CARDS:
     add(_need, "Simulators", _CARD + _anchor, _name, _aliases, _CARD, _m, _CARD, _b, None, also=_also)

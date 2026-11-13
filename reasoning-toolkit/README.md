@@ -33,6 +33,7 @@ provenance line and a status line.
 | 13 | gate regeneration | PROPOSED | chat-side voice session, fields Claude Code, 2026-11-13 |
 | 14 | ontology before pathology | PROPOSED | chat-side voice session, fields Claude Code, 2026-11-13 |
 | 15 | echo check | PROPOSED | chat-side voice session, fields Claude Code, 2026-11-13 |
+| 16 | critical-facility cloud dependency audit | PROPOSED | chat-side, verbatim |
 
 Tests: T-source and T-band, both PROPOSED and not run, under `## Tests` in `CARDS.md`.
 
