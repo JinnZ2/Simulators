@@ -1,0 +1,79 @@
+{
+  "schema_meta": {
+    "version": "1.0",
+    "written": "2026-11-13",
+    "valid_for": "present configurations",
+    "expiry_rule": "when a component no longer fits any one layer, or an axis stops separating configurations",
+    "on_expiry": "fork to a new version; keep the old records readable",
+    "license": "CC0",
+    "authors": "co-authored"
+  },
+  "value_rules": {
+    "axis": "an object {\"value\": number in [0.0, 1.0], \"basis\": non-blank text} or {\"value\": \"VOID\", \"reason\": non-blank text}",
+    "text_or_void": "a non-blank string, or {\"value\": \"VOID\", \"reason\": non-blank text}",
+    "blank": "an empty string, an empty list where a list of named items is required, or a missing field is refused"
+  },
+  "record": {
+    "required": ["schema_version", "config_id", "observed_at", "observed_by", "source",
+                 "components", "positions", "channels", "authority_chain", "maintenance",
+                 "frame_exit", "bounds", "design_source"],
+    "optional": ["example", "roles_at_t", "links"],
+    "source_values": ["observed", "claimed", "VOID"]
+  },
+  "components": {
+    "required": ["id", "layer", "name", "version"],
+    "layers": ["substrate", "algorithm", "model", "system", "channel", "tool", "physical"],
+    "physical_kinds": ["actuator", "sensor", "mechanical", "power", "environment"],
+    "note": "a component with layer 'physical' also carries 'kind' from physical_kinds; version is text_or_void"
+  },
+  "positions": {
+    "required": ["component_id", "t", "chooses_vs_executes", "adapts_in_run",
+                 "persists_between_runs", "reach_on_world", "override"],
+    "axes": ["chooses_vs_executes", "adapts_in_run", "persists_between_runs", "reach_on_world"],
+    "override_required": ["who", "latency"],
+    "note": "who is text_or_void; latency is an axis. every axis carries its own basis"
+  },
+  "channels": {
+    "required": ["id", "from", "to", "t", "bandwidth", "fidelity", "filtering", "filter_holder",
+                 "latency", "adapts_in_run", "persists", "visibility", "drops"],
+    "axes": ["bandwidth", "fidelity", "filtering", "latency", "adapts_in_run", "persists", "visibility"],
+    "note": "filter_holder is text_or_void; drops is a non-empty list of {name, basis}; to state that nothing was seen dropped, use {\"name\": \"NONE_OBSERVED\", \"basis\": ...}"
+  },
+  "roles_at_t": {
+    "rule": "derived from positions only, never hand-set; a role is read from positions at a given t, not from the component's name or layer",
+    "derivation": "decider if chooses_vs_executes >= DECIDE; else executor if reach_on_world >= REACH; else carrier. any needed axis VOID -> the role is VOID with a reason",
+    "DECIDE": 0.5,
+    "REACH": 0.1,
+    "choice": "[CHOICE] thresholds set 2026-11-13, printed with every derivation, overridable on the command line",
+    "input_rule": "a record may omit roles_at_t; if present it must carry derived_by and equal the derivation, else it is refused as hand-set"
+  },
+  "authority_chain": {
+    "required": ["t", "bounds_set_by", "when", "basis", "checked_by", "checked_against",
+                 "verification_method", "operated_within_bounds", "tools_touched"],
+    "within_bounds_values": ["yes", "no", "VOID"],
+    "note": "checked_by, checked_against, verification_method are text_or_void; operated_within_bounds is {value, basis} or VOID with reason; tools_touched lists component ids (empty list allowed only with tools_touched_basis)"
+  },
+  "maintenance": {
+    "required": ["per_component", "whole_holders"],
+    "per_component_required": ["component_id", "repairable_by", "sees_of_rest"],
+    "note": "repairable_by is text_or_void; sees_of_rest is an axis; whole_holders is a list of {role, holder_kind, basis} (holder_kind person|system) or VOID with reason",
+    "flags": {"FRAGMENTED": "whole_holders is an empty list (count 0)",
+              "WHOLE_HOLDERS_UNKNOWN": "whole_holders is VOID; not read as 0"}
+  },
+  "frame_exit": {
+    "note": "a list of {sees_failure, can_act, path_kind, basis} (path_kind person|check|physical_override) or VOID with reason",
+    "flags": {"CLOSED-FRAME": "an empty list: nothing outside the system's own frame can see a failure or act on it",
+              "FRAME_EXIT_UNKNOWN": "VOID; not read as closed"}
+  },
+  "bounds": {
+    "rule": "one entry per component and one with scope 'whole'; no layer is exempt",
+    "required": ["scope", "energy", "physical_limits"],
+    "note": "energy is {value: number >= 0, unit, basis} or VOID with reason; physical_limits is a non-empty list of {name, value, unit, basis} or VOID with reason"
+  },
+  "design_source": {
+    "status": "PROPOSED, untested",
+    "required": ["segmentation_origin"],
+    "segmentation_values": ["chosen_for_task", "inherited_from_corpus", "VOID"],
+    "note": "was the segmentation of the system chosen for the task, or inherited from segmented domain structure in the training corpus; {value, basis} or VOID with reason"
+  }
+}

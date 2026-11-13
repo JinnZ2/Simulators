@@ -309,6 +309,12 @@
    "tools": [
     "card-carrier-spread"
    ]
+  },
+  {
+   "symptom": "a model plus tools is called the decider by its name, and nobody has written down who can see or fix the whole",
+   "tools": [
+    "configuration-record"
+   ]
   }
  ],
  "needs": [
@@ -2313,6 +2319,42 @@
    "measures_src": "reasoning-toolkit/CARDS.md:316",
    "measures_quote_state": "FOUND",
    "breaks_src": "reasoning-toolkit/CARDS.md:322",
+   "breaks_quote_state": "FOUND",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
+   }
+  },
+  {
+   "need": "observer",
+   "also": [
+    "scope"
+   ],
+   "repo": "Simulators",
+   "path": "configuration-record/",
+   "name": "configuration-record",
+   "aliases": [
+    "who decides in this AI setup",
+    "roles from positions not names",
+    "configuration record for a model plus tools",
+    "nobody understands the whole system",
+    "no path outside the system to see a failure",
+    "authority chain per run"
+   ],
+   "measures_file": "configuration-record/README.md",
+   "measures": "Roles are derived from positions and never set by hand.",
+   "breaks_file": "configuration-record/README.md",
+   "breaks_when": "an axis stops separating configurations.",
+   "check": "python3 configuration-record/config_record.py --selftest",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "axes 0.0-1.0 or VOID with a reason; roles at [CHOICE] thresholds 0.5 / 0.1",
+   "assumes": "every value carries a basis; roles read from positions at t",
+   "chain": "reads: declared positions, channels, authority chain, maintenance, frame exit, bounds. ignores: whether the declared values are true",
+   "a1_status": "A1_READING (model reading of the module, 2026-11-13; not verbatim)",
+   "measures_src": "configuration-record/README.md:7",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "configuration-record/README.md:93",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {

@@ -1,0 +1,454 @@
+{
+ "schema_version": "1.0",
+ "example": true,
+ "config_id": "EXAMPLE-chat-tool-api",
+ "observed_at": "EXAMPLE 2026-11-13",
+ "observed_by": "EXAMPLE",
+ "source": {
+  "value": "claimed",
+  "basis": "EXAMPLE value, illustrative, not observed"
+ },
+ "components": [
+  {
+   "id": "m1",
+   "layer": "model",
+   "name": "chat model",
+   "version": {
+    "value": "VOID",
+    "reason": "EXAMPLE: no version observed"
+   }
+  },
+  {
+   "id": "s1",
+   "layer": "system",
+   "name": "chat application",
+   "version": {
+    "value": "VOID",
+    "reason": "EXAMPLE: no version observed"
+   }
+  },
+  {
+   "id": "t1",
+   "layer": "tool",
+   "name": "tool connector",
+   "version": "EXAMPLE-1"
+  },
+  {
+   "id": "a1",
+   "layer": "channel",
+   "name": "API channel",
+   "version": "EXAMPLE-v1"
+  },
+  {
+   "id": "p1",
+   "layer": "physical",
+   "kind": "power",
+   "name": "datacenter power",
+   "version": {
+    "value": "VOID",
+    "reason": "EXAMPLE: not applicable to a supply"
+   }
+  }
+ ],
+ "positions": [
+  {
+   "component_id": "m1",
+   "t": 1,
+   "chooses_vs_executes": {
+    "value": 0.7,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "adapts_in_run": {
+    "value": 0.0,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "persists_between_runs": {
+    "value": 0.1,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "reach_on_world": {
+    "value": 0.0,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "override": {
+    "who": "EXAMPLE: user",
+    "latency": {
+     "value": 0.2,
+     "basis": "EXAMPLE value, illustrative, not observed"
+    }
+   }
+  },
+  {
+   "component_id": "s1",
+   "t": 1,
+   "chooses_vs_executes": {
+    "value": 0.3,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "adapts_in_run": {
+    "value": 0.1,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "persists_between_runs": {
+    "value": 0.6,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "reach_on_world": {
+    "value": 0.0,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "override": {
+    "who": "EXAMPLE: user",
+    "latency": {
+     "value": 0.2,
+     "basis": "EXAMPLE value, illustrative, not observed"
+    }
+   }
+  },
+  {
+   "component_id": "t1",
+   "t": 1,
+   "chooses_vs_executes": {
+    "value": 0.1,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "adapts_in_run": {
+    "value": 0.0,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "persists_between_runs": {
+    "value": 0.2,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "reach_on_world": {
+    "value": 0.6,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "override": {
+    "who": "EXAMPLE: user",
+    "latency": {
+     "value": 0.2,
+     "basis": "EXAMPLE value, illustrative, not observed"
+    }
+   }
+  },
+  {
+   "component_id": "a1",
+   "t": 1,
+   "chooses_vs_executes": {
+    "value": 0.0,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "adapts_in_run": {
+    "value": 0.0,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "persists_between_runs": {
+    "value": 0.0,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "reach_on_world": {
+    "value": 0.0,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "override": {
+    "who": "EXAMPLE: user",
+    "latency": {
+     "value": 0.2,
+     "basis": "EXAMPLE value, illustrative, not observed"
+    }
+   }
+  },
+  {
+   "component_id": "p1",
+   "t": 1,
+   "chooses_vs_executes": {
+    "value": 0.0,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "adapts_in_run": {
+    "value": 0.0,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "persists_between_runs": {
+    "value": 0.0,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "reach_on_world": {
+    "value": 1.0,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "override": {
+    "who": "EXAMPLE: user",
+    "latency": {
+     "value": 0.2,
+     "basis": "EXAMPLE value, illustrative, not observed"
+    }
+   }
+  }
+ ],
+ "channels": [
+  {
+   "id": "ch1",
+   "from": "s1",
+   "to": "m1",
+   "t": 1,
+   "bandwidth": {
+    "value": 0.6,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "fidelity": {
+    "value": 0.8,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "filtering": {
+    "value": 0.4,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "filter_holder": "EXAMPLE: system operator",
+   "latency": {
+    "value": 0.2,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "adapts_in_run": {
+    "value": 0.1,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "persists": {
+    "value": 0.3,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "visibility": {
+    "value": 0.2,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "drops": [
+    {
+     "name": "layout",
+     "basis": "EXAMPLE value, illustrative, not observed"
+    },
+    {
+     "name": "environment",
+     "basis": "EXAMPLE value, illustrative, not observed"
+    }
+   ]
+  },
+  {
+   "id": "ch2",
+   "from": "m1",
+   "to": "t1",
+   "t": 1,
+   "bandwidth": {
+    "value": 0.5,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "fidelity": {
+    "value": 0.9,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "filtering": {
+    "value": 0.2,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "filter_holder": {
+    "value": "VOID",
+    "reason": "EXAMPLE: not observed"
+   },
+   "latency": {
+    "value": 0.3,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "adapts_in_run": {
+    "value": 0.0,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "persists": {
+    "value": 0.1,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "visibility": {
+    "value": 0.1,
+    "basis": "EXAMPLE value, illustrative, not observed"
+   },
+   "drops": [
+    {
+     "name": "NONE_OBSERVED",
+     "basis": "EXAMPLE value, illustrative, not observed"
+    }
+   ]
+  }
+ ],
+ "authority_chain": [
+  {
+   "t": 1,
+   "bounds_set_by": "EXAMPLE: system operator",
+   "when": "EXAMPLE 2026-11-13",
+   "basis": "EXAMPLE value, illustrative, not observed",
+   "checked_by": {
+    "value": "VOID",
+    "reason": "EXAMPLE: no checker observed"
+   },
+   "checked_against": {
+    "value": "VOID",
+    "reason": "EXAMPLE: no reference observed"
+   },
+   "verification_method": {
+    "value": "VOID",
+    "reason": "EXAMPLE: no checksum observed"
+   },
+   "operated_within_bounds": {
+    "value": "VOID",
+    "reason": "EXAMPLE: not observed"
+   },
+   "tools_touched": [
+    "t1"
+   ]
+  }
+ ],
+ "maintenance": {
+  "per_component": [
+   {
+    "component_id": "m1",
+    "repairable_by": {
+     "value": "VOID",
+     "reason": "EXAMPLE: not observed"
+    },
+    "sees_of_rest": {
+     "value": 0.2,
+     "basis": "EXAMPLE value, illustrative, not observed"
+    }
+   },
+   {
+    "component_id": "s1",
+    "repairable_by": {
+     "value": "VOID",
+     "reason": "EXAMPLE: not observed"
+    },
+    "sees_of_rest": {
+     "value": 0.2,
+     "basis": "EXAMPLE value, illustrative, not observed"
+    }
+   },
+   {
+    "component_id": "t1",
+    "repairable_by": {
+     "value": "VOID",
+     "reason": "EXAMPLE: not observed"
+    },
+    "sees_of_rest": {
+     "value": 0.2,
+     "basis": "EXAMPLE value, illustrative, not observed"
+    }
+   },
+   {
+    "component_id": "a1",
+    "repairable_by": {
+     "value": "VOID",
+     "reason": "EXAMPLE: not observed"
+    },
+    "sees_of_rest": {
+     "value": 0.2,
+     "basis": "EXAMPLE value, illustrative, not observed"
+    }
+   },
+   {
+    "component_id": "p1",
+    "repairable_by": {
+     "value": "VOID",
+     "reason": "EXAMPLE: not observed"
+    },
+    "sees_of_rest": {
+     "value": 0.2,
+     "basis": "EXAMPLE value, illustrative, not observed"
+    }
+   }
+  ],
+  "whole_holders": []
+ },
+ "frame_exit": [
+  {
+   "sees_failure": "EXAMPLE: the user reading the reply",
+   "can_act": "EXAMPLE: the user",
+   "path_kind": "person",
+   "basis": "EXAMPLE value, illustrative, not observed"
+  }
+ ],
+ "bounds": [
+  {
+   "scope": "m1",
+   "energy": {
+    "value": "VOID",
+    "reason": "EXAMPLE: not measured"
+   },
+   "physical_limits": {
+    "value": "VOID",
+    "reason": "EXAMPLE: not measured"
+   }
+  },
+  {
+   "scope": "s1",
+   "energy": {
+    "value": "VOID",
+    "reason": "EXAMPLE: not measured"
+   },
+   "physical_limits": {
+    "value": "VOID",
+    "reason": "EXAMPLE: not measured"
+   }
+  },
+  {
+   "scope": "t1",
+   "energy": {
+    "value": "VOID",
+    "reason": "EXAMPLE: not measured"
+   },
+   "physical_limits": {
+    "value": "VOID",
+    "reason": "EXAMPLE: not measured"
+   }
+  },
+  {
+   "scope": "a1",
+   "energy": {
+    "value": "VOID",
+    "reason": "EXAMPLE: not measured"
+   },
+   "physical_limits": {
+    "value": "VOID",
+    "reason": "EXAMPLE: not measured"
+   }
+  },
+  {
+   "scope": "p1",
+   "energy": {
+    "value": "VOID",
+    "reason": "EXAMPLE: not measured"
+   },
+   "physical_limits": {
+    "value": "VOID",
+    "reason": "EXAMPLE: not measured"
+   }
+  },
+  {
+   "scope": "whole",
+   "energy": {
+    "value": "VOID",
+    "reason": "EXAMPLE: not measured"
+   },
+   "physical_limits": {
+    "value": "VOID",
+    "reason": "EXAMPLE: not measured"
+   }
+  }
+ ],
+ "design_source": {
+  "segmentation_origin": {
+   "value": "VOID",
+   "reason": "EXAMPLE: PROPOSED field, untested; not observed"
+  }
+ },
+ "links": [
+  "automation-maintenance-accountability-gap (not in repo)",
+  "automation-gap/"
+ ]
+}

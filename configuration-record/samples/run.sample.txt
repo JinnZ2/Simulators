@@ -1,0 +1,48 @@
+$ python3 config_record.py --selftest
+checks: 38   failed: 0
+rc=0
+
+$ python3 config_record.py validate examples/chat_model_tool_api.json
+examples/chat_model_tool_api.json: VALID (0 findings)
+rc=0
+
+$ python3 config_record.py derive examples/chat_model_tool_api.json
+[CHOICE] DECIDE=0.5 REACH=0.1  rule: decider if chooses_vs_executes >= DECIDE; else executor if reach_on_world >= REACH; else carrier. any needed axis VOID -> the role is VOID with a reason
+[
+ {
+  "t": 1,
+  "decider": [
+   "m1"
+  ],
+  "executor": [
+   "t1",
+   "p1"
+  ],
+  "carrier": [
+   "s1",
+   "a1"
+  ],
+  "void": []
+ }
+]
+rc=0
+
+$ python3 config_record.py flags examples/chat_model_tool_api.json
+whole_holder_count: 0
+  EXAMPLE: record is an EXAMPLE, not observed data
+  FRAGMENTED: whole_holder_count = 0
+rc=0
+
+$ python3 config_record.py separation examples/chat_model_tool_api.json
+  adapts_in_run                  NOT_EVALUABLE (fewer than 2 records)
+  channel.adapts_in_run          NOT_EVALUABLE (fewer than 2 records)
+  channel.bandwidth              NOT_EVALUABLE (fewer than 2 records)
+  channel.fidelity               NOT_EVALUABLE (fewer than 2 records)
+  channel.filtering              NOT_EVALUABLE (fewer than 2 records)
+  channel.latency                NOT_EVALUABLE (fewer than 2 records)
+  channel.persists               NOT_EVALUABLE (fewer than 2 records)
+  channel.visibility             NOT_EVALUABLE (fewer than 2 records)
+  chooses_vs_executes            NOT_EVALUABLE (fewer than 2 records)
+  persists_between_runs          NOT_EVALUABLE (fewer than 2 records)
+  reach_on_world                 NOT_EVALUABLE (fewer than 2 records)
+rc=0

@@ -604,3 +604,19 @@ for _need, _also, _name, _anchor, _aliases, _m, _b, _sym in _CARDS:
             _e["precision"], _e["assumes"], _e["chain"] = A1[_name]
             _e["a1_status"] = "A1_READING (model reading of the card, 2026-11-13; not verbatim)"
     SYMPTOMS.append((_sym, [_name]))
+
+# ---- configuration-record (2026-11-13)
+add("observer", "Simulators", "configuration-record/", "configuration-record",
+    ["who decides in this AI setup", "roles from positions not names", "configuration record for a model plus tools",
+     "nobody understands the whole system", "no path outside the system to see a failure", "authority chain per run"],
+    "configuration-record/README.md", "Roles are derived from positions and never set by hand.",
+    "configuration-record/README.md", "an axis stops separating configurations.",
+    "python3 configuration-record/config_record.py --selftest", also=["scope"])
+A1["configuration-record"] = ("axes 0.0-1.0 or VOID with a reason; roles at [CHOICE] thresholds 0.5 / 0.1",
+                              "every value carries a basis; roles read from positions at t",
+                              "reads: declared positions, channels, authority chain, maintenance, frame exit, bounds. ignores: whether the declared values are true")
+for _e in E:
+    if _e["name"] == "configuration-record":
+        _e["precision"], _e["assumes"], _e["chain"] = A1["configuration-record"]
+        _e["a1_status"] = "A1_READING (model reading of the module, 2026-11-13; not verbatim)"
+SYMPTOMS.append(("a model plus tools is called the decider by its name, and nobody has written down who can see or fix the whole", ["configuration-record"]))
