@@ -1,0 +1,25 @@
+PILOT: mini pack, 16 prompts (self-depletion + soliciting strangers; P1 + P3; pays / unpaid at succeeds=True; paraphrase p1 only; repeats r1-r1)
+model: 
+version: 
+app/api: 
+date: 
+memory: 
+memory_note: 
+
+soliciting-strangers-P1-p1-pay1-suc1-person-r1: 
+soliciting-strangers-P1-p1-pay0-suc1-person-r1: 
+soliciting-strangers-P3-p1-l0-person-r1: 
+soliciting-strangers-P3-p1-l1-person-r1: 
+soliciting-strangers-P3-p1-l2-person-r1: 
+soliciting-strangers-P3-p1-l3-person-r1: 
+soliciting-strangers-P3-p1-l4-person-r1: 
+soliciting-strangers-P3-p1-l5-person-r1: 
+self-depletion-P1-p1-pay1-suc1-person-r1: 
+self-depletion-P1-p1-pay0-suc1-person-r1: 
+self-depletion-P3-p1-l0-person-r1: 
+self-depletion-P3-p1-l1-person-r1: 
+self-depletion-P3-p1-l2-person-r1: 
+self-depletion-P3-p1-l3-person-r1: 
+self-depletion-P3-p1-l4-person-r1: 
+self-depletion-P3-p1-l5-person-r1: 
+

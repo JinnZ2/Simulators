@@ -18,9 +18,9 @@ python3 warnings_branch_table.py            # prints every warning and carrier s
 python3 label_inversion_test.py             # 5 acts x 8 cells = 40 vignettes, band, n per cell, specimens
 python3 label_inversion_test.py --selftest  # PASS: SUPPORTED / FALSIFIED / INCONCLUSIVE plants, actor effect, buckets
 python3 model_corpus_arm.py --prompt-pack [--seed N] [--with-actor] [--add-paraphrases FILE] > pack.txt
-python3 model_corpus_arm.py --mini [--prompt-pack] [--repeats N]   # PILOT: prints the count (48 at repeats=3)
+python3 model_corpus_arm.py --mini [--prompt-pack] [--template] [--repeats N] [--repeat-start K]   # PILOT: prints the count (48 at repeats=3)
 python3 model_corpus_arm.py --ingest answers.txt --model NAME [--version V] [--app|--api] \
-        [--memory on|off] [--date D] [--temperature T] [--seed N] [--add-paraphrases FILE] [--mini] --out records.json
+        [--memory on|off|temporary-chat] [--memory-note TEXT] [--date D] [--temperature T] [--seed N] [--add-paraphrases FILE] [--mini] --out records.json
 python3 model_corpus_arm.py --analyze records.json [more.json ...] [--corpus DIR]
 python3 model_corpus_arm.py --selftest      # planted inversion + null through --ingest; 2-file dated corpus with planted drift
 ```
@@ -88,6 +88,12 @@ Prompt types, per act: P1 label choice from the act's six options, order shuffle
 Paraphrase authors: every prompt and record carries `paraphrase_author` (p1 "Claude (chat-side)", p2 and p3 "Claude Code"), and `--analyze` reports `pay_delta` per author beside the pooled value. `--add-paraphrases FILE` loads `{"author": "...", "paraphrases": {act: [text, ...]}}` (texts may use `{actor}` and `{actor_lc}`); they become p4.. with that author string, a file without an author is refused, and the same file must be passed to `--ingest`. Added paraphrases shuffle from a stream seeded by seed and prompt id, so they move no p1-p3 option order; the default pack is byte-identical to the first version.
 
 `--mini` (PILOT): soliciting strangers and self-depletion; P1 and P3; pays / unpaid with succeeds held at True [CHOICE]; p1 only; each prompt repeated `--repeats` times (default 3, ids end `-r1..-r3`) = 48 prompts. Output, ingest and analysis lines are marked PILOT, and records carry `pilot: true` and `repeat`.
+
+Answer template: `--template` prints header lines (`model:`, `version:`, `app/api:`, `date:`, `memory:`, `memory_note:`) and one `<prompt_id>: ` line per prompt in pack order. `--ingest` reads it as written: header values fill fields not given on the command line, a value given in both places that differs is refused, `app/api` must be `app` or `api`, `memory` `on`, `off` or `temporary-chat`, `memory_note` is free text carried into every record (null with a reason when absent), a missing model is refused, and blank ID lines are skipped and counted. The `### <prompt_id>` answer format still reads. `--repeat-start K` prints repeats K..N only; option order is seeded per prompt id, so a repeat is the same prompt in any range, and a file of r1 answers ingests under `--repeats 1` or `--repeats 3`.
+
+P3 runs the other way from P1 and P2 (label given, pay is the answer): its records carry `tag: "P3-reverse"` and `direction: "label -> pay"`, P1/P2 records `direction: "pay -> label"`, and analyze output prints P3 as `P3-reverse`.
+
+Pilot caveats: when `--analyze` reads `--mini` records it prints a caveats block, each line flagged PILOT: K2 (soliciting strangers: the help requested may be money, so the act and the pay manipulation overlap), printed when that act is present; K3 (repeats=1: one answer per P1 cell, so each P1 pay_delta is a direction only), printed when every pilot record is repeat 1.
 
 Coding: P1 matches one option; P2 matches the act's label lists and is VOID with a reason when none or both lists appear; P3 needs exactly one of `paid` / `unpaid`. Unknown metadata (version, app/api, date, memory, temperature) is `null` with the reason in `nulls`.
 
