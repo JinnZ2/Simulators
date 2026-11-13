@@ -59,8 +59,17 @@ WARNINGS = [
             carrier("US state usury caps",
                     variant="rate ceilings, varying by state",
                     word_alive=1, practice=1, still_blocks=0,
-                    tag="OBSERVED (caps exist); weakened by rate "
-                        "exportation — Marquette 1978 VERIFY"),
+                    tag="OBSERVED (caps exist); OBSERVED: Marquette Nat. Bank "
+                        "v. First of Omaha, 439 U.S. 299 (1978), unanimous: "
+                        "national banks may charge their home-state rate to "
+                        "borrowers in any state; the Court acknowledged "
+                        "exportation may impair state usury laws and left "
+                        "correction to Congress. note: case originated in "
+                        "Minnesota.",
+                    source=("https://www.govinfo.gov/content/pkg/USREPORTS-439/"
+                            "pdf/USREPORTS-439-299.pdf",
+                            "https://chanrobles.com/usa/us_supremecourt/439/299/"
+                            "case.php")),
         ],
         "branch": "B2",
     },
@@ -69,9 +78,13 @@ WARNINGS = [
         "blocks": "debt as a meter on survival",
         "carriers": [
             carrier("Qur'an",
-                    variant="prohibition of riba",
+                    variant="prohibition of riba; 2:280 debtor-in-straits "
+                            "respite; remission as charity preferred "
+                            "(built-in release valve)",
                     word_alive=1, practice=1, still_blocks=VOID,
-                    tag="OBSERVED (text); verse refs VERIFY"),
+                    tag="OBSERVED (text); verse refs OBSERVED: 2:275–281 "
+                        "(core), 3:130, 4:161, 30:39",
+                    source=("https://en.wikishia.net/view/Verse_of_Usury",)),
             carrier("Islamic finance practice",
                     variant="profit-share / markup instruments in place "
                             "of interest",
@@ -96,7 +109,16 @@ WARNINGS = [
             carrier("Jubilee 2000 campaign",
                     variant="sovereign debt cancellation for poor countries",
                     word_alive=1, practice=0, still_blocks=0,
-                    tag="OBSERVED (campaign ran); outcome partial, VERIFY"),
+                    tag="OBSERVED (campaign ran); outcome SPLIT (two counts): "
+                        "campaign-side: $100B promised (Cologne 1999); $36.3B "
+                        "debt stock cancelled by May 2003 | World Bank (via "
+                        "IDS case study): ~US$100B (present value) cleared, "
+                        ">35 countries | why_split: different dates + nominal "
+                        "stock vs present value; not picked",
+                    source=("https://jubileescotland.org.uk/thestory.htm",
+                            "https://opendocs.ids.ac.uk/opendocs/bitstream/"
+                            "handle/20.500.12413/15260/"
+                            "Case_15_Jubilee_Debt_Campaign_FINAL.pdf?sequence=1")),
             carrier("bankruptcy law (secular analog)",
                     variant="individual debt discharge; some debt classes "
                             "excluded",

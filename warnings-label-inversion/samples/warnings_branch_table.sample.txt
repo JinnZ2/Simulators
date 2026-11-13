@@ -4,18 +4,18 @@ usury  [B2]
   - Torah (Deut. 23:19-20): score 1/3, void 0  (OBSERVED (text); practice status DERIVED*)
   - Aristotle, Politics I: score 1/3, void 0  (OBSERVED (text))
   - Medieval Church canon law: score 1/3, void 0  (DERIVED; dates VERIFY)
-  - US state usury caps: score 2/3, void 0  (OBSERVED (caps exist); weakened by rate exportation — Marquette 1978 VERIFY)
+  - US state usury caps: score 2/3, void 0  (OBSERVED (caps exist); OBSERVED: Marquette Nat. Bank v. First of Omaha, 439 U.S. 299 (1978), unanimous: national banks may charge their home-state rate to borrowers in any state; the Court acknowledged exportation may impair state usury laws and left correction to Congress. note: case originated in Minnesota.)
 
 riba  [B2/B3 (contested)]
   blocks: debt as a meter on survival
-  - Qur'an: score 2/2, void 1  (OBSERVED (text); verse refs VERIFY)
+  - Qur'an: score 2/2, void 1  (OBSERVED (text); verse refs OBSERVED: 2:275–281 (core), 3:130, 4:161, 30:39)
   - Islamic finance practice: score 2/2, void 1  (OBSERVED (practice runs); critics say some instruments reproduce interest — contested*, VERIFY)
 
 Jubilee  [B3]
   blocks: permanent capture; the valve reopened on a cycle
   - Leviticus 25: score 1/3, void 0  (OBSERVED (text))
   - Catholic Jubilee years: score 2/3, void 0  (OBSERVED; B3 — ritual kept, mechanism dropped)
-  - Jubilee 2000 campaign: score 1/3, void 0  (OBSERVED (campaign ran); outcome partial, VERIFY)
+  - Jubilee 2000 campaign: score 1/3, void 0  (OBSERVED (campaign ran); outcome SPLIT (two counts): campaign-side: $100B promised (Cologne 1999); $36.3B debt stock cancelled by May 2003 | World Bank (via IDS case study): ~US$100B (present value) cleared, >35 countries | why_split: different dates + nominal stock vs present value; not picked)
   - bankruptcy law (secular analog): score 1/2, void 1  (DERIVED (analog, not descendant)*)
 
 Sabbath  [B2 (most carriers)]

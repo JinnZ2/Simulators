@@ -1,7 +1,8 @@
 # warnings-label-inversion
 
 Two co-authored CC0 files, landed verbatim on 2026-11-13. `warnings_branch_table.py`
-is unedited. `label_inversion_test.py` was then edited on the operator's FIX SPEC
+was later edited on the operator's VERIFY resolution (below); the delivered version
+is at `f158b8f`. `label_inversion_test.py` was then edited on the operator's FIX SPEC
 (L1-L7 below); the delivered version is at `f158b8f`. This README holds the audit.
 
 | file | what it is |
@@ -51,8 +52,25 @@ Sourcing flags (from memory; no source host was opened):
 |---|---|---|
 | Ovid, Metamorphoses XI | "turns what he loves to metal" | In Ovid his food and wine turn to gold. The daughter turned to gold is Hawthorne, *A Wonder-Book* (1852). |
 | Leviticus 25 | "debt release, land return" | Lev 25 has land return, release of bondservants and an interest ban (25:35-37). Debt release is Deut 15:1-2, on a 7-year cycle. |
-| US usury caps | "Marquette 1978 VERIFY" | Consistent with *Marquette Nat'l Bank v. First of Omaha Service Corp.*, 439 U.S. 299 (1978). |
-| Qur'an, riba | "verse refs VERIFY" | Commonly cited: 2:275-280, 3:130, 4:161, 30:39. |
+| US usury caps | "Marquette 1978 VERIFY" | Resolved by the operator (below). |
+| Qur'an, riba | "verse refs VERIFY" | Resolved by the operator (below): 2:275-281 (core), 3:130, 4:161, 30:39. |
+
+### VERIFY resolution (operator, 2026-11-13)
+
+Sources were fetched chat-side on 2026-11-13 via search excerpts and given to this
+session as text; no source host was opened from this session. The URLs are in each
+carrier's `source` field, which `report()` does not print (W5).
+
+| carrier | was | now |
+|---|---|---|
+| US state usury caps | `weakened by rate exportation — Marquette 1978 VERIFY` | OBSERVED: *Marquette Nat. Bank v. First of Omaha*, 439 U.S. 299 (1978), unanimous: national banks may charge their home-state rate to borrowers in any state; the Court acknowledged exportation may impair state usury laws and left correction to Congress. Case originated in Minnesota. Sources: govinfo USREPORTS-439-299, chanrobles. |
+| Qur'an (riba) | `verse refs VERIFY` | Verse refs OBSERVED: 2:275–281 (core), 3:130, 4:161, 30:39. Variant adds 2:280: respite for a debtor in straits; remission as charity preferred (built-in release valve). Source: wikishia "Verse of Usury". |
+| Jubilee 2000 campaign | `outcome partial, VERIFY` | SPLIT (two counts). Campaign-side: $100B promised (Cologne 1999); $36.3B debt stock cancelled by May 2003 (Jubilee Scotland). World Bank, via an IDS case study: ~US$100B (present value) cleared, >35 countries. Why split: different dates, and nominal stock vs present value. Neither count is picked. |
+
+No score changed; only `variant`, `tag` and `source` moved.
+
+Still open (VERIFY kept): Medieval canon-law dates; blue-law remnants by state;
+Islamic finance critique (contested*).
 
 The grandmother row and the Wendigo carriers are left as delivered. Their
 status fields say they are hers, or the carriers', to fill or withhold.
@@ -117,7 +135,8 @@ README, the samples, and the findings are model-written in that session. The
 delivered files are co-authored; whose lines are whose inside them is not
 marked and is not inferred here.
 
-sha256 (first 16 hex): `warnings_branch_table.py` e835a3a987129b0f;
+sha256 (first 16 hex): `warnings_branch_table.py` as delivered e835a3a987129b0f,
+after the VERIFY resolution 2241436e455ecdb7;
 `label_inversion_test.py` as delivered 27aeafc65b33d193, after the fix spec
 78f94d67d792cbbd; `model_corpus_arm.py` first version 05f6e3a32212bfda, with authors / window / mini 741489ea3e2dbdfd.
 
