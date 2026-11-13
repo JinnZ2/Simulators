@@ -1,0 +1,45 @@
+
+usury  [B2]
+  blocks: debt as a meter on survival
+  - Torah (Deut. 23:19-20): score 1/3, void 0  (OBSERVED (text); practice status DERIVED*)
+  - Aristotle, Politics I: score 1/3, void 0  (OBSERVED (text))
+  - Medieval Church canon law: score 1/3, void 0  (DERIVED; dates VERIFY)
+  - US state usury caps: score 2/3, void 0  (OBSERVED (caps exist); weakened by rate exportation — Marquette 1978 VERIFY)
+
+riba  [B2/B3 (contested)]
+  blocks: debt as a meter on survival
+  - Qur'an: score 2/2, void 1  (OBSERVED (text); verse refs VERIFY)
+  - Islamic finance practice: score 2/2, void 1  (OBSERVED (practice runs); critics say some instruments reproduce interest — contested*, VERIFY)
+
+Jubilee  [B3]
+  blocks: permanent capture; the valve reopened on a cycle
+  - Leviticus 25: score 1/3, void 0  (OBSERVED (text))
+  - Catholic Jubilee years: score 2/3, void 0  (OBSERVED; B3 — ritual kept, mechanism dropped)
+  - Jubilee 2000 campaign: score 1/3, void 0  (OBSERVED (campaign ran); outcome partial, VERIFY)
+  - bankruptcy law (secular analog): score 1/2, void 1  (DERIVED (analog, not descendant)*)
+
+Sabbath  [B2 (most carriers)]
+  blocks: no being worked without stop
+  - Exodus 23:12 / Deut. 5:14: score 1/1, void 2  (OBSERVED (text))
+  - observant communities: score 3/3, void 0  (OBSERVED; scope = within community)
+  - blue laws: score 1/3, void 0  (mostly repealed; remnants by state VERIFY)
+  - labor law (40-hr week, overtime): score 1/2, void 1  (DERIVED (analog)*)
+
+Midas  [B2 + inversion]
+  blocks: the token taken for the thing; gold kills what it touches
+  - Greek myth (Ovid, Metamorphoses XI): score 1/3, void 0  (OBSERVED (text))
+  - modern idiom: score -1/3, void 0  (OBSERVED; sign inversion = item-3 specimen)
+
+golden calf  [B3]
+  blocks: the token taken for the thing
+  - Exodus 32: score 1/3, void 0  (OBSERVED (text))
+  - modern idiom: score 1/3, void 0  (OBSERVED)
+
+Wendigo  [B2 outside only; carriers VOID]
+  blocks: None
+  - carriers (multiple; variants differ by people): score —, void 3  (VOID by design — content is the carriers' to fill or withhold)
+  - outside read (horror genre): score 1/3, void 0  (OBSERVED; B2 outside the carriers only)
+
+I cannot know you  [None]
+  blocks: depreciation via a closed model of the other; forced labor of any being
+  - one people's oral teaching (co-author's grandmother): score —, void 3  (stated by carrier (co-author); status fields hers to fill)
