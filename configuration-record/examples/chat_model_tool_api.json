@@ -67,7 +67,7 @@
     "basis": "EXAMPLE value, illustrative, not observed"
    },
    "reach_on_world": {
-    "value": 0.0,
+    "value": 0.2,
     "basis": "EXAMPLE value, illustrative, not observed"
    },
    "override": {
@@ -82,7 +82,7 @@
    "component_id": "s1",
    "t": 1,
    "chooses_vs_executes": {
-    "value": 0.3,
+    "value": 0.5,
     "basis": "EXAMPLE value, illustrative, not observed"
    },
    "adapts_in_run": {

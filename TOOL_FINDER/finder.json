@@ -2354,7 +2354,7 @@
    "a1_status": "A1_READING (model reading of the module, 2026-11-13; not verbatim)",
    "measures_src": "configuration-record/README.md:7",
    "measures_quote_state": "FOUND",
-   "breaks_src": "configuration-record/README.md:93",
+   "breaks_src": "configuration-record/README.md:115",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {

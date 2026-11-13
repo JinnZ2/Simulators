@@ -39,7 +39,8 @@ The validator refuses:
 - a value out of range;
 - an unknown component reference;
 - a component with no maintenance entry or no bounds entry;
-- `roles_at_t` given by hand.
+- `roles_at_t` given by hand;
+- a missing authority-chain slot.
 
 ## Layers
 
@@ -52,15 +53,36 @@ A `physical` component also carries `kind`, which is one of `actuator`,
 
 A role is read from positions at a given t, never from a component's name or layer.
 
-The rule is a [CHOICE] set on 2026-11-13. It is printed with every derivation, and the thresholds can be overridden:
+The roles are a set per component per t, not one label. The rule is a
+[CHOICE] set on 2026-11-13. The band and the threshold are printed with
+every derivation and can be overridden with `--band LO HI` and `--reach Y`.
 
-- decider if `chooses_vs_executes >= 0.5`;
-- else executor if `reach_on_world >= 0.1`;
-- else carrier.
+| role | condition |
+|---|---|
+| decider | `chooses_vs_executes` > 0.6 |
+| mixed | `chooses_vs_executes` in [0.4, 0.6]; both readings are listed (`as_decider`, `as_not_decider`) |
+| executor | `reach_on_world` >= 0.1 |
+| passive | neither decider nor executor |
+| carrier | the `channels[]` entries at t; never a component |
 
-If an axis the rule needs is VOID, the role is VOID and carries the reason.
+A component can be decider and executor at the same t.
 
-A record may carry `roles_at_t` only if it equals the derivation and carries `derived_by`. Otherwise the record is refused as hand-set.
+If an axis is VOID, the role it decides is VOID and carries the reason. Passive is not inferred through a VOID axis.
+
+The raw positions are emitted beside the derived roles.
+
+A record may carry `roles_at_t` only if it carries `derived_by` and equals the derivation at its stated band and reach. Otherwise the record is refused as hand-set.
+
+## Authority chain
+
+Each authority-chain entry has these slots:
+
+- `bounds_set_by`, `when`, `basis`
+- `checked_by`, `checked_against`, `verification_method`
+- `operated_within_bounds`
+- `tools_touched`
+
+A slot that cannot be filled is kept and written as VOID with a reason. A missing or blank slot is refused.
 
 ## Flags
 

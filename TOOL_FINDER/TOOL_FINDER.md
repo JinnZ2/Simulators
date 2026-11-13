@@ -605,7 +605,7 @@ Also serves this need: corpus_prior_audit (JinnZ2), fold-matrix (Simulators), re
 - need: observer / attribution / coupling
 - aliases: who decides in this AI setup; roles from positions not names; configuration record for a model plus tools; nobody understands the whole system; no path outside the system to see a failure; authority chain per run
 - measures (configuration-record/README.md:7): "Roles are derived from positions and never set by hand."
-- breaks when (configuration-record/README.md:93): "an axis stops separating configurations."
+- breaks when (configuration-record/README.md:115): "an axis stops separating configurations."
 - precision: axes 0.0-1.0 or VOID with a reason; roles at [CHOICE] thresholds 0.5 / 0.1
 - assumes: every value carries a basis; roles read from positions at t
 - chain: reads: declared positions, channels, authority chain, maintenance, frame exit, bounds. ignores: whether the declared values are true

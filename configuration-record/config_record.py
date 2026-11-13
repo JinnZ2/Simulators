@@ -11,15 +11,17 @@ Flags (recorded, not refusals): FRAGMENTED, WHOLE_HOLDERS_UNKNOWN, CLOSED-FRAME,
 FRAME_EXIT_UNKNOWN, BOUNDS_EXCEEDED, EXAMPLE.
 
   python3 config_record.py validate FILE [FILE ...]
-  python3 config_record.py derive FILE [--decide X] [--reach Y]
+  python3 config_record.py derive FILE [--band LO HI] [--reach Y]
   python3 config_record.py flags FILE
   python3 config_record.py separation FILE [FILE ...]
   python3 config_record.py --selftest
 
-Role rule [CHOICE, 2026-11-13]: decider if chooses_vs_executes >= DECIDE;
-else executor if reach_on_world >= REACH; else carrier. A needed axis VOID
-makes the role VOID with the reason. Read from positions at t, never from
-the component's name or layer.
+Role rule [CHOICE, 2026-11-13], roles are a SET per component per t:
+decider if chooses_vs_executes > BAND_HI; mixed (both readings listed) if it
+lies in [BAND_LO, BAND_HI]; executor if reach_on_world >= REACH; passive if
+neither. Carriers are the channels[] entries, never components. A VOID axis
+makes the role it decides VOID with the reason. Raw positions are emitted
+beside the roles. Read from positions at t, never from name or layer.
 """
 import copy
 import json
@@ -37,7 +39,7 @@ def load_schema(path=SCHEMA_PATH):
 
 
 SCHEMA = load_schema()
-DECIDE = SCHEMA["roles_at_t"]["DECIDE"]
+BAND_LO, BAND_HI = SCHEMA["roles_at_t"]["BAND"]
 REACH = SCHEMA["roles_at_t"]["REACH"]
 LIST_MAY_BE_EMPTY = {("frame_exit",), ("maintenance", "whole_holders")}
 
@@ -148,31 +150,67 @@ def _walk_blank(obj, path, out):
             _walk_blank(v, f"{path}[{i}]", out)
 
 
-def derive_roles(rec, decide=DECIDE, reach=REACH):
-    """roles_at_t from positions only. Returns a list sorted by t."""
+def _role_reading(roles):
+    return sorted(roles) if roles else ["passive"]
+
+
+def derive_roles(rec, lo=None, hi=None, reach=None):
+    """roles_at_t from positions only. Roles are a SET per component per t.
+    decider: chooses_vs_executes > hi; mixed: lo <= chooses <= hi (both readings
+    listed); executor: reach_on_world >= reach; passive: neither. Carriers are the
+    channels[] entries at t, never components. A VOID axis makes the role(s) it
+    decides VOID with the reason. Raw positions are emitted beside the roles."""
+    lo = BAND_LO if lo is None else lo
+    hi = BAND_HI if hi is None else hi
+    reach = REACH if reach is None else reach
     by_t = {}
     for p in rec.get("positions", []):
-        t = p.get("t")
-        slot = by_t.setdefault(str(t), dict(t=t, decider=[], executor=[],
-                                             carrier=[], void=[]))
+        by_t.setdefault(str(p.get("t")), {"t": p.get("t"), "components": [], "carriers": []})
+    for ch in rec.get("channels", []):
+        by_t.setdefault(str(ch.get("t")), {"t": ch.get("t"), "components": [], "carriers": []})
+    for p in rec.get("positions", []):
         cid = p.get("component_id")
-        c = p.get("chooses_vs_executes")
+        c, r = p.get("chooses_vs_executes"), p.get("reach_on_world")
+        roles, void, readings = set(), [], None
+        dstate = estate = None
         if c is None or is_void(c):
-            slot["void"].append(dict(component_id=cid,
-                reason="chooses_vs_executes VOID: " + str((c or {}).get("reason"))))
-            continue
-        if c["value"] >= decide:
-            slot["decider"].append(cid)
-            continue
-        r = p.get("reach_on_world")
+            void.append({"role": "decider", "reason": "chooses_vs_executes VOID: " + str((c or {}).get("reason"))})
+        elif c["value"] > hi:
+            dstate = "decider"
+        elif c["value"] >= lo:
+            dstate = "mixed"
+        else:
+            dstate = "none"
         if r is None or is_void(r):
-            slot["void"].append(dict(component_id=cid,
-                reason="reach_on_world VOID: " + str((r or {}).get("reason"))))
-            continue
-        (slot["executor"] if r["value"] >= reach else slot["carrier"]).append(cid)
+            void.append({"role": "executor", "reason": "reach_on_world VOID: " + str((r or {}).get("reason"))})
+        elif r["value"] >= reach:
+            estate = "executor"
+        else:
+            estate = "none"
+        if dstate in ("decider", "mixed"):
+            roles.add(dstate)
+        if estate == "executor":
+            roles.add("executor")
+        if dstate == "none" and estate == "none":
+            roles.add("passive")
+        elif dstate is None or estate is None:
+            if not roles:
+                void.append({"role": "passive", "reason": "passive needs both axes; one is VOID"})
+        if dstate == "mixed" and estate is not None:
+            base = roles - {"mixed"}
+            readings = {"as_decider": sorted(base | {"decider"}),
+                        "as_not_decider": _role_reading(base)}
+        raw = {a: copy.deepcopy(p.get(a)) for a in SCHEMA["positions"]["axes"]}
+        raw["override"] = copy.deepcopy(p.get("override"))
+        by_t[str(p.get("t"))]["components"].append(dict(
+            component_id=cid, roles=sorted(roles), readings=readings, void=void, raw=raw))
+    for ch in rec.get("channels", []):
+        by_t[str(ch.get("t"))]["carriers"].append(
+            {"channel_id": ch.get("id"), "from": ch.get("from"), "to": ch.get("to")})
     out = [by_t[k] for k in sorted(by_t)]
     return dict(derived_by=DERIVED_BY, rule=SCHEMA["roles_at_t"]["derivation"],
-                DECIDE=decide, REACH=reach, roles=out)
+                choice=SCHEMA["roles_at_t"]["choice"],
+                BAND=[lo, hi], REACH=reach, roles=out)
 
 
 def validate(rec, schema=SCHEMA):
@@ -245,7 +283,10 @@ def validate(rec, schema=SCHEMA):
         ck.add("BLANK", "authority_chain", "empty list")
     for i, a in enumerate(ac):
         p = f"authority_chain[{i}]"
-        if not ck.required(a, S["authority_chain"]["required"], p):
+        miss = [k for k in S["authority_chain"]["required"] if k not in a]
+        for k in miss:
+            ck.add("BLANK", f"{p}.{k}", "missing authority-chain slot: keep it, write VOID with a reason")
+        if miss:
             continue
         for k in ("bounds_set_by", "when", "basis"):
             ck.text_or_void(a[k], f"{p}.{k}")
@@ -310,7 +351,8 @@ def validate(rec, schema=SCHEMA):
     # roles: never hand-set
     if "roles_at_t" in rec:
         r = rec["roles_at_t"]
-        derived = derive_roles(rec)
+        band = r.get("BAND", [None, None]) if isinstance(r, dict) else [None, None]
+        derived = derive_roles(rec, band[0], band[1], r.get("REACH") if isinstance(r, dict) else None)
         if not isinstance(r, dict) or r.get("derived_by") != DERIVED_BY:
             ck.add("HAND_SET_ROLES", "roles_at_t", "no derived_by; roles are derived, never set")
         elif r.get("roles") != derived["roles"]:
@@ -393,7 +435,7 @@ def example_record():
         dict(id="p1", layer="physical", kind="power", name="datacenter power", version=V("EXAMPLE: not applicable to a supply")),
     ]
     pos = []
-    for cid, c, ad, pe, re_ in (("m1", 0.7, 0.0, 0.1, 0.0), ("s1", 0.3, 0.1, 0.6, 0.0),
+    for cid, c, ad, pe, re_ in (("m1", 0.7, 0.0, 0.1, 0.2), ("s1", 0.5, 0.1, 0.6, 0.0),
                                 ("t1", 0.1, 0.0, 0.2, 0.6), ("a1", 0.0, 0.0, 0.0, 0.0),
                                 ("p1", 0.0, 0.0, 0.0, 1.0)):
         pos.append(dict(component_id=cid, t=1, chooses_vs_executes=ax(c), adapts_in_run=ax(ad),
@@ -434,6 +476,12 @@ def example_record():
 
 
 # ---------------------------------------------------------------- selftest
+def _mut(rec, fn):
+    r = copy.deepcopy(rec)
+    fn(r)
+    return r
+
+
 def selftest():
     ok = tot = 0
 
@@ -468,11 +516,6 @@ def selftest():
           "axis out of range")
     check("HAND_SET_ROLES" in plant(lambda r: r.update(roles_at_t={"roles": [{"t": 1, "decider": ["a1"]}]})),
           "hand-set roles without derived_by")
-    def forged(r):
-        d = derive_roles(r)
-        d["roles"][0]["decider"] = ["a1"]
-        r["roles_at_t"] = d
-    check("HAND_SET_ROLES" in plant(forged), "roles marked derived but differing from positions")
     def honest(r):
         r["roles_at_t"] = derive_roles(r)
     check("HAND_SET_ROLES" not in plant(honest), "roles equal to the derivation accepted")
@@ -489,10 +532,18 @@ def selftest():
         segmentation_origin={"value": "obvious", "basis": "x"})), "segmentation outside the set")
     check("MISSING_MAINTENANCE" in plant(lambda r: r["maintenance"]["per_component"].pop()),
           "component without a maintenance entry")
-    # roles derived from positions, not names
-    d = derive_roles(ex)["roles"][0]
-    check(d["decider"] == ["m1"] and d["executor"] == ["t1", "p1"] and set(d["carrier"]) == {"s1", "a1"},
-          f"derived roles: {d}")
+    # roles: a set per component, band, passive, carriers = channels, raw beside
+    D = derive_roles(ex)["roles"][0]
+    R = {c["component_id"]: c for c in D["components"]}
+    check(R["m1"]["roles"] == ["decider", "executor"], f"non-exclusive roles: {R['m1']['roles']}")
+    check(R["s1"]["roles"] == ["mixed"] and R["s1"]["readings"] ==
+          {"as_decider": ["decider"], "as_not_decider": ["passive"]}, f"band -> mixed: {R['s1']}")
+    check(R["t1"]["roles"] == ["executor"] and R["p1"]["roles"] == ["executor"], "executors")
+    check(R["a1"]["roles"] == ["passive"], "low-choose low-reach component -> passive")
+    check([c["channel_id"] for c in D["carriers"]] == ["ch1", "ch2"], "carriers are the channels[] entries")
+    check(all("carrier" not in c["roles"] for c in D["components"]), "no component labelled carrier")
+    check(all(R[q["component_id"]]["raw"][ax] == q[ax] for q in ex["positions"]
+              for ax in SCHEMA["positions"]["axes"]), "raw positions emitted beside roles")
     r2 = copy.deepcopy(ex)
     for c in r2["components"]:
         c["name"] = "renamed " + c["id"]
@@ -500,10 +551,40 @@ def selftest():
     check(derive_roles(r2)["roles"] == derive_roles(ex)["roles"], "roles invariant to name and layer")
     r3 = copy.deepcopy(ex)
     r3["positions"][0]["chooses_vs_executes"] = {"value": "VOID", "reason": "not observed"}
-    d3 = derive_roles(r3)["roles"][0]
-    check("m1" not in d3["decider"] and any(v["component_id"] == "m1" for v in d3["void"]),
-          "VOID axis -> VOID role, not a guess")
-    check(derive_roles(ex, decide=0.8)["roles"][0]["decider"] == [], "DECIDE threshold overridable")
+    c3 = {c["component_id"]: c for c in derive_roles(r3)["roles"][0]["components"]}["m1"]
+    check(c3["roles"] == ["executor"] and c3["void"][0]["role"] == "decider"
+          and "not observed" in c3["void"][0]["reason"], f"VOID axis -> that role VOID: {c3}")
+    r3b = copy.deepcopy(ex)
+    r3b["positions"][4]["reach_on_world"] = {"value": "VOID", "reason": "no meter"}
+    r3b["positions"][4]["chooses_vs_executes"] = {"value": 0.0, "basis": "x"}
+    c3b = {c["component_id"]: c for c in derive_roles(r3b)["roles"][0]["components"]}["p1"]
+    check(c3b["roles"] == [] and {v["role"] for v in c3b["void"]} == {"executor", "passive"},
+          "passive not inferred through a VOID axis")
+    Dn = {c["component_id"]: c for c in derive_roles(ex, 0.45, 0.45)["roles"][0]["components"]}
+    check(Dn["s1"]["roles"] == ["decider"], "band overridable")
+    # planted: exclusive-role assumption, band ignored, carrier mislabelled
+    def forge(fn):
+        def f(r):
+            d = derive_roles(r)
+            fn({c["component_id"]: c for c in d["roles"][0]["components"]}, d["roles"][0])
+            r["roles_at_t"] = d
+        return plant(f)
+    check("HAND_SET_ROLES" in forge(lambda C, s: C["m1"].update(roles=["decider"])),
+          "planted exclusive-role assumption refused")
+    check("HAND_SET_ROLES" in forge(lambda C, s: C["s1"].update(roles=["decider"], readings=None)),
+          "planted band-ignored roles refused")
+    check("HAND_SET_ROLES" in forge(lambda C, s: C["a1"].update(roles=["carrier"])),
+          "planted component-as-carrier refused")
+    check("HAND_SET_ROLES" in forge(lambda C, s: s["carriers"].append(
+        {"channel_id": "a1", "from": "s1", "to": "m1"})), "planted carrier not in channels[] refused")
+    check("HAND_SET_ROLES" in forge(lambda C, s: C["m1"]["raw"]["chooses_vs_executes"].update(value=0.9)),
+          "planted raw position altered refused")
+    # authority-chain slots: missing refused, VOID with reason accepted, blank refused
+    f_ac = validate(_mut(ex, lambda r: r["authority_chain"][0].pop("checked_by")))
+    check(any("missing authority-chain slot" in f[2] for f in f_ac), "missing authority slot refused")
+    check("BLANK" in plant(lambda r: r["authority_chain"][0].update(checked_by="")), "blank authority slot refused")
+    check("VOID_NO_REASON" in plant(lambda r: r["authority_chain"][0].update(checked_by={"value": "VOID"})),
+          "authority slot VOID without reason refused")
     # flags
     fl = dict(flags(ex))
     check("FRAGMENTED" in fl and "EXAMPLE" in fl, f"flags: {sorted(fl)}")
@@ -572,14 +653,27 @@ def main(argv):
             rc = rc or (1 if fs else 0)
         return rc
     if cmd == "derive":
-        d, r = DECIDE, REACH
-        if "--decide" in args:
-            d = float(args[args.index("--decide") + 1])
+        lo = hi = r = None
+        if "--band" in args:
+            i = args.index("--band")
+            lo, hi = float(args[i + 1]), float(args[i + 2])
         if "--reach" in args:
             r = float(args[args.index("--reach") + 1])
-        out = derive_roles(_load(args[0]), d, r)
-        print(f"[CHOICE] DECIDE={out['DECIDE']} REACH={out['REACH']}  rule: {out['rule']}")
-        print(json.dumps(out["roles"], indent=1))
+        out = derive_roles(_load(args[0]), lo, hi, r)
+        print(f"[CHOICE] BAND={out['BAND']} REACH={out['REACH']}  {out['choice']}")
+        print(f"rule: {out['rule']}")
+        for slot in out["roles"]:
+            print(f"t={slot['t']}")
+            for c in slot["components"]:
+                raw = {k: (v.get("value") if isinstance(v, dict) else v)
+                       for k, v in c["raw"].items() if k != "override"}
+                print(f"  {c['component_id']:<6} roles={c['roles']} raw={raw}")
+                if c["readings"]:
+                    print(f"         readings: {c['readings']}")
+                for v in c["void"]:
+                    print(f"         VOID {v['role']}: {v['reason']}")
+            for ch in slot["carriers"]:
+                print(f"  carrier {ch['channel_id']}: {ch['from']} -> {ch['to']}")
         return 0
     if cmd == "flags":
         rec = _load(args[0])
