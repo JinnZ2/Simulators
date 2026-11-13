@@ -109,6 +109,48 @@ Untrailered commits (no Co-Authored-By trailer) after line a:
 | thermodynamic-accountability-framework | `953f1a8` | 14 | 1 | 0 | 15 |
 | study-aperture | `c26fbd2` | 27 | 0 | 0 | 27 |
 
+Untrailered, non-merge, Claude-committed commits, Simulators, after 11033ad (main tip 34eb3cf):
+
+| hash | date | subject | bare claude.ai/code URL |
+|---|---|---|---|
+| `cb35ea2` | 2026-07-28T22:08:46+00:00 | claim-audits/: new folder -- K/M attribution + 8-verdict convention | no |
+| `1468a79` | 2026-08-01T13:11:21+00:00 | inverseminar/: new folder -- micro-inverseminar as a single stdlib script | no |
+| `1979359` | 2026-08-04T18:12:39+00:00 | energy/: new folder -- coupled-quintessence drop + metrology stack | no |
+| `82d8dea` | 2026-08-04T18:27:57+00:00 | energy/: ship the flagship report as markdown too | no |
+| `cde6789` | 2026-08-04T18:32:55+00:00 | energy/: land author audit (F1-F6), F2 confirmed as an echo | no |
+| `fd4aa79` | 2026-08-04T23:11:46+00:00 | energy/exploration_layers/: land three lenses -- R-D, percolation, RG flow | no |
+| `cfac176` | 2026-08-04T23:17:56+00:00 | energy/ v2 update: unified engine + Needle Lab + PROVENANCE ledger | no |
+| `be6d350` | 2026-08-04T23:36:09+00:00 | energy/: G1-G5 audit response + CC0 license switch + DP-13/14/15/16 + OB-8 | no |
+| `8870d81` | 2026-08-04T23:45:57+00:00 | energy/: DP-17 -- certificate validity radius r̂ = 1.00, wall property | no |
+| `5edf2d0` | 2026-08-04T23:56:45+00:00 | divergence-playground/: new folder + energy/FORKS.jsonl (PROVENANCE DP-18) | no |
+| `10416e4` | 2026-08-05T07:43:23+00:00 | null-harness/: new folder -- trust-calibration for any gate; F-9 lands | no |
+| `9ccb626` | 2026-08-05T08:07:56+00:00 | claim-audits + null-harness: audit 5-piece paste from other models; F-10 | no |
+| `0e1aea4` | 2026-08-05T12:47:08+00:00 | energy/: F-10 D corrected -- local scalar drift lens with lab falsifier | no |
+| `ff26aa1` | 2026-08-05T12:52:48+00:00 | relational/: new folder, different genre, landed in its own frame | no |
+| `4f267f8` | 2026-08-05T12:59:01+00:00 | relational/: second drop -- 3 more code files + INTEGRATION_SUMMARY.md | no |
+| `c4cd79d` | 2026-08-05T13:06:45+00:00 | relational/: third drop -- correlated_birth_mode.py + pain_as_sensor.py | no |
+| `75f952b` | 2026-08-05T13:12:12+00:00 | relational/: fourth drop -- FILES DELIVERED closes + bonus demo | no |
+| `7edaf16` | 2026-08-05T13:27:11+00:00 | relational/proposal.md: ten avenues for taking the framework real | no |
+| `ffc488a` | 2026-08-05T13:40:11+00:00 | cleanup of the three merged-in files: fold, delete, rename | no |
+| `7cbaccf` | 2026-08-05T18:15:18+00:00 | relational/arch_garden/: split workToDo.md into a real subfolder + flesh out stubs | no |
+| `8d8d9e7` | 2026-08-05T18:23:14+00:00 | relational/figures/: land the FILES DELIVERED visualizations (fifth drop) | no |
+| `2499238` | 2026-08-21T22:48:50+00:00 | Add search-substitution/: three organisms that do not search | no |
+| `e2018fb` | 2026-08-21T23:48:44+00:00 | Add qrng-pair-search/: bath sets, not names, with three corrections | no |
+| `6365d18` | 2026-08-22T00:20:46+00:00 | Strip authorship attribution from qrng-pair-search prose | no |
+| `99885ea` | 2026-08-22T01:49:35+00:00 | Install AUDIT_CONTRACT; withdraw two overreaches it catches | no |
+| `7a876bf` | 2026-08-22T01:53:12+00:00 | Readout sharing is a deployment property; third reading of the same field | no |
+| `511103f` | 2026-08-24T13:37:23+00:00 | Add custody-verification-band/: criterion reads two of five cuts | no |
+| `6349b6a` | 2026-08-24T13:46:05+00:00 | Install the delivered corpus; B4 withdrawn, three reader defects fixed | no |
+| `f9822f9` | 2026-08-24T13:49:33+00:00 | Add LIVE_CULTURES corpus; gap coverage is 4 of 9 | no |
+| `db23b12` | 2026-08-24T14:47:12+00:00 | Install SHAPE_SPEC; section 2 describes B7 verbatim | no |
+| `ac9a1dd` | 2026-08-24T14:58:13+00:00 | Install METHOD_SPEC; section 3 names the next move on the conversion cases | no |
+| `e9594f8` | 2026-08-25T01:16:34+00:00 | Install READING_PROTOCOL | no |
+
+- rule: non-merge; committer name Claude; no Co-Authored-By trailer; committer date on or after 11033ad; reachable from the main tip named
+- bare URL: yes = a line containing claude.ai/code/session that does not begin with 'Claude-Session:'
+- count 32; date range 2026-07-28T22:08:46+00:00 .. 2026-08-25T01:16:34+00:00
+- per month (UTC): 2026-07 1, 2026-08 31
+
 - note: Read from git on origin/main; 'first' = earliest committer date (UTC), not topological order. a = first Co-Authored-By naming a Claude model; b = first 'Claude-Session:' keyed trailer; c = first bare claude.ai/code/session URL line; d = first Co-Authored-By naming a non-Claude model agent. None is picked. Untrailered = no Co-Authored-By trailer, counted from line a to the main tip named. merge = more than one parent; web-UI = non-merge with committer GitHub <noreply@github.com> (web-flow); other = the rest. Simulators 'other' splits by committer name: Claude 32, JinnZ2 5.
 
 ## CONDITIONS (as of 2026-11-11)
