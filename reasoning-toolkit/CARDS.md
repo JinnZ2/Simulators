@@ -21,7 +21,7 @@ Each card carries a status line:
 - PROPOSED means no worked instance is in this repository.
 - OBSERVED means this repository holds a worked case the card was applied to. An `instance` line names that case.
 
-A reference with no file in this repository is written as plain text and marked "(chat-side, not in repo)" or "not located in this repository". It is not linked.
+A reference with no file in any repository is written as plain text and marked "(chat-side, not in repo)". It is not linked. A reference to another repository is a cross-repo link.
 
 Provenance is per card:
 
@@ -69,7 +69,7 @@ CARD: distribution check — when to distrust the median
 
 link notes:
 - reasoning-root (chat-side, not in repo)
-- "BLS basket vs truck-stop prices" was not located as a pair in this repository.
+- BLS basket vs truck-stop prices: cross-repo link [JinnZ2/measurement-scope-gaps/gap-registers/WORKER_SIDE_LEDGER.md](https://github.com/JinnZ2/measurement-scope-gaps/blob/main/gap-registers/WORKER_SIDE_LEDGER.md) (captive-market price line).
 - Related folders: `tail-check/`, `moving-mean-tracker/`, `evaluation-frame/`.
 
 ---
