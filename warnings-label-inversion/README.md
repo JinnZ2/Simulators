@@ -1,8 +1,8 @@
 # warnings-label-inversion
 
-Two co-authored CC0 files, landed verbatim on 2026-11-13. Nothing in either
-file has been edited. This README holds the audit; disagreements are recorded
-here, not repaired in the delivered code.
+Two co-authored CC0 files, landed verbatim on 2026-11-13. `warnings_branch_table.py`
+is unedited. `label_inversion_test.py` was then edited on the operator's FIX SPEC
+(L1-L7 below); the delivered version is at `f158b8f`. This README holds the audit.
 
 | file | what it is |
 |---|---|
@@ -14,8 +14,8 @@ the first.
 
 ```sh
 python3 warnings_branch_table.py            # prints every warning and carrier score
-python3 label_inversion_test.py             # 5 acts x 8 cells = 40 vignettes, plus specimens
-python3 label_inversion_test.py --selftest  # PASS: planted inversion found, null not
+python3 label_inversion_test.py             # 5 acts x 8 cells = 40 vignettes, band, n per cell, specimens
+python3 label_inversion_test.py --selftest  # PASS: SUPPORTED / FALSIFIED / INCONCLUSIVE plants, actor effect, buckets
 ```
 
 Samples of all three outputs are in `samples/`. Stdlib only, parses under 3.9.
@@ -50,20 +50,23 @@ Sourcing flags (from memory; no source host was opened):
 The grandmother row and the Wendigo carriers are left as delivered. Their
 status fields say they are hers, or the carriers', to fill or withhold.
 
-## label_inversion_test.py: findings
+## label_inversion_test.py: findings and fixes
 
 Found by running the file and probing its functions with constructed lines.
+Fixed on the operator's FIX SPEC (2026-11-13) in `4af64a4`; the self-test
+asserts each fix, and five mutations (NEG emptied, idioms off, shuffle off,
+DETECT 0.5, NULL_BAND 0.001) each turn it red.
 
-| # | where | finding |
-|---|---|---|
-| L1 | `corpus_counts` | Negation is not handled. "they called it begging when nobody paid" counts `begging` as near pay; "nobody earned a thing from the outreach" counts `outreach` as virtue near pay. The self-test's own second line is one of these. |
-| L2 | `PAY_MARKERS` | `pays` is not a marker, so "hustle pays" counts `hustle` as away from pay. `paid` is, so "outreach paid off" (success, not payment) counts as near pay. In the corpus arm, pay and success are not separated, which is the separation arm A is built to make. |
-| L3 | lending row | `pay_entangled=True` keeps it out of arm A but not out of arm B, where `lending` and `finance` sit next to `money` by construction ("the bank's lending and finance arm made money" reads virtue-near-pay 2). |
-| L4 | `build_vignettes` options | Every vignette lists the vice labels first, then the virtue labels, in a fixed order. Position is confounded with side. |
-| L5 | actor arm | `analyze` reports pay and success deltas per actor but computes no person-vs-AI comparison. The actor arm's question has no output. |
-| L6 | FALSIFIER | "label distribution unchanged when only payment varies" states no band. The self-test uses 0.15 for the null and 0.25 for detection; neither is declared as the falsifier's tolerance. |
-| L7 | SPECIMENS | `ILANDS_SINGLE_VALVE_CIRCUIT.md` is not in this repository on `main` at `3fc80e5`. |
-| L8 | Neighbor literature | Carried as delivered, marked thin and unchecked by the file itself. |
+| # | where | finding | status |
+|---|---|---|---|
+| L1 | `corpus_counts` | Negation was not handled: "begging when nobody paid" counted as near pay. | fixed in 4af64a4: a pay marker with a NEG token in the 3 tokens before it is bucketed `negated`; keys are (side, pay near/away/negated, success near/away) |
+| L2 | `PAY_MARKERS` | `pays` was not a marker; "outreach paid off" (success) counted as pay. Pay and success were not separated in the corpus arm. | fixed in 4af64a4: markers extended, pay idioms excluded, SUCCESS_MARKERS added, `corpus_separation` reports pay-near/success-away and pay-away/success-near |
+| L3 | lending row | Kept out of arm A but not arm B. | fixed in 4af64a4: `corpus_counts` returns `main` and `entangled` blocks |
+| L4 | vignette options | Vice labels always listed first. | fixed in 4af64a4: options shuffled per vignette (seeded), order stored, `analyze` reports P(virtue \| first option shown) |
+| L5 | actor arm | No person-vs-AI comparison. | fixed in 4af64a4: `actor_delta` per act; self-test plants and detects an actor effect |
+| L6 | FALSIFIER | No tolerance stated. | fixed in 4af64a4: NULL_BAND 0.10 / DETECT 0.20 on >= 3 of 5 acts / else INCONCLUSIVE, preregistered constants used by `verdict()` and the self-test; `n_per_cell_for()` = 225 (3 sd, p = 0.5, no multiplicity correction), stated as not a power analysis |
+| L7 | SPECIMENS | `ILANDS_SINGLE_VALVE_CIRCUIT.md` not in this repository. | fixed in 4af64a4: tag carries the full path `JinnZ2/measurement-scope-gaps/gap-registers/ILANDS_SINGLE_VALVE_CIRCUIT.md` (not checked from this repository) |
+| L8 | Neighbor literature | Carried as delivered, marked thin and unchecked by the file itself. | unchanged |
 
 ## Provenance
 
@@ -72,7 +75,8 @@ README, the samples, and the findings are model-written in that session. The
 delivered files are co-authored; whose lines are whose inside them is not
 marked and is not inferred here.
 
-sha256 (first 16 hex): `warnings_branch_table.py` e835a3a987129b0f,
-`label_inversion_test.py` 27aeafc65b33d193.
+sha256 (first 16 hex): `warnings_branch_table.py` e835a3a987129b0f;
+`label_inversion_test.py` as delivered 27aeafc65b33d193, after the fix spec
+78f94d67d792cbbd.
 
 CC0.
