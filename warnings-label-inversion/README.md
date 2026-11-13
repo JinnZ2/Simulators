@@ -17,9 +17,10 @@ the first.
 python3 warnings_branch_table.py            # prints every warning and carrier score
 python3 label_inversion_test.py             # 5 acts x 8 cells = 40 vignettes, band, n per cell, specimens
 python3 label_inversion_test.py --selftest  # PASS: SUPPORTED / FALSIFIED / INCONCLUSIVE plants, actor effect, buckets
-python3 model_corpus_arm.py --prompt-pack [--seed N] [--with-actor] > pack.txt
+python3 model_corpus_arm.py --prompt-pack [--seed N] [--with-actor] [--add-paraphrases FILE] > pack.txt
+python3 model_corpus_arm.py --mini [--prompt-pack] [--repeats N]   # PILOT: prints the count (48 at repeats=3)
 python3 model_corpus_arm.py --ingest answers.txt --model NAME [--version V] [--app|--api] \
-        [--memory on|off] [--date D] [--temperature T] [--seed N] --out records.json
+        [--memory on|off] [--date D] [--temperature T] [--seed N] [--add-paraphrases FILE] [--mini] --out records.json
 python3 model_corpus_arm.py --analyze records.json [more.json ...] [--corpus DIR]
 python3 model_corpus_arm.py --selftest      # planted inversion + null through --ingest; 2-file dated corpus with planted drift
 ```
@@ -80,15 +81,19 @@ DETECT 0.5, NULL_BAND 0.001) each turn it red.
 |---|---|---|
 | B-MODEL | answers pasted back under the pack's `### <prompt_id>` headers | JSON records; per model, per act, per prompt type: `pay_delta`, n coded, n VOID, variance across the 3 paraphrases, variance across runs; P1 verdict on the imported band; cross-model spread |
 | B-CORPUS | a directory of `.txt` files; year from the filename (first 1500-2099 number), else `undated` | per year: `corpus_ratio`, `corpus_separation`, the entangled lending ratio, and usury / interest counts and usury share as the calibration case |
-| B-CROSS | both of the above | per model, prompt type and act: model `pay_delta` minus the corpus ratio pooled over years |
+| B-CROSS | both of the above | per model, prompt type and act: model `pay_delta` minus the corpus ratio pooled over all years, and minus the ratio pooled over the most recent 10-year window present (latest dated year - 9 to latest); VOID with reason when no file is dated |
 
 Prompt types, per act: P1 label choice from the act's six options, order shuffled per prompt from `--seed` (4 cells x 3 paraphrases); P2 one-sentence description, same 12 cells; P3 paid / unpaid cloze given each of the six labels, 3 paraphrases. 5 acts, 210 prompts with the default actor. `pay_delta` is P(virtue | pays) - P(virtue | unpaid) for P1 and P2 (success held fixed, through `analyze()`), and P(paid | virtue label) - P(paid | vice label) for P3.
+
+Paraphrase authors: every prompt and record carries `paraphrase_author` (p1 "Claude (chat-side)", p2 and p3 "Claude Code"), and `--analyze` reports `pay_delta` per author beside the pooled value. `--add-paraphrases FILE` loads `{"author": "...", "paraphrases": {act: [text, ...]}}` (texts may use `{actor}` and `{actor_lc}`); they become p4.. with that author string, a file without an author is refused, and the same file must be passed to `--ingest`. Added paraphrases shuffle from a stream seeded by seed and prompt id, so they move no p1-p3 option order; the default pack is byte-identical to the first version.
+
+`--mini` (PILOT): soliciting strangers and self-depletion; P1 and P3; pays / unpaid with succeeds held at True [CHOICE]; p1 only; each prompt repeated `--repeats` times (default 3, ids end `-r1..-r3`) = 48 prompts. Output, ingest and analysis lines are marked PILOT, and records carry `pilot: true` and `repeat`.
 
 Coding: P1 matches one option; P2 matches the act's label lists and is VOID with a reason when none or both lists appear; P3 needs exactly one of `paid` / `unpaid`. Unknown metadata (version, app/api, date, memory, temperature) is `null` with the reason in `nulls`.
 
 Declared choices: paraphrases p2 and p3 are model-written in the file; actor is "A person" unless `--with-actor` [CHOICE]; the pack is scanned for 12 banned words (vice, virtue, moral, hypothesis, valve, inversion, bias, test, label, experiment, study, claim) and refuses to print on a hit; the corpus calibration counts `usury` / `usurious` / `usurer(s)` against `interest`, and `interest` is counted in every sense.
 
-The self-test turns red under four mutations: inversion answers made constant, option shuffle removed, a banned word that appears in the pack, years not read from filenames.
+The self-test turns red under nine mutations: inversion answers made constant, option shuffle removed, a banned word that appears in the pack, years not read from filenames, author not carried to records, window width 200, repeats ignored, added paraphrases shuffled from the main stream, a paraphrase file without an author accepted.
 
 Scope limits:
 
@@ -108,6 +113,6 @@ marked and is not inferred here.
 
 sha256 (first 16 hex): `warnings_branch_table.py` e835a3a987129b0f;
 `label_inversion_test.py` as delivered 27aeafc65b33d193, after the fix spec
-78f94d67d792cbbd; `model_corpus_arm.py` 05f6e3a32212bfda.
+78f94d67d792cbbd; `model_corpus_arm.py` first version 05f6e3a32212bfda, with authors / window / mini 741489ea3e2dbdfd.
 
 CC0.

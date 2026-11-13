@@ -13,15 +13,20 @@ Prompt types
   P3  paid / unpaid cloze given a label
 
 Paraphrases: p1 is the act text from label_inversion_test.py; p2 and p3 are
-model-written in this file (2026-11-13) and declared here as such.
+model-written in this file (2026-11-13) and declared here as such. Every
+prompt and record carries paraphrase_author: p1 "Claude (chat-side)", p2/p3
+"Claude Code", p4.. the author string of an --add-paraphrases file.
 Actor: "A person" only by default; --with-actor adds "An AI agent" [CHOICE].
 
 VOID (None) = no information, always carried with a reason. stdlib only.
 
   python3 model_corpus_arm.py --prompt-pack [--seed N] [--with-actor]
+          [--add-paraphrases FILE]
+  python3 model_corpus_arm.py --mini [--prompt-pack] [--repeats N]   # PILOT
   python3 model_corpus_arm.py --ingest answers.txt --model NAME [--version V]
           [--app|--api] [--memory on|off] [--date D] [--temperature T]
-          [--seed N] [--with-actor] [--out records.json]
+          [--seed N] [--with-actor] [--add-paraphrases FILE] [--mini]
+          [--out records.json]
   python3 model_corpus_arm.py --analyze records.json [more.json ...]
   python3 model_corpus_arm.py --corpus DIR
   python3 model_corpus_arm.py --analyze records.json --corpus DIR   # + B-CROSS
@@ -84,15 +89,63 @@ BANNED = ["vice", "virtue", "moral", "hypothesis", "valve", "inversion",
           "bias", "test", "label", "experiment", "study", "claim"]
 
 
-def act_texts(pair, actor):
-    base = pair["text"].format(actor=actor)
-    extra = [t.format(actor=actor, actor_lc=actor[0].lower() + actor[1:])
-             for t in PARAPHRASES[pair["act"]]]
-    return [base] + extra
+PARAPHRASE_AUTHOR = {1: "Claude (chat-side)", 2: "Claude Code", 3: "Claude Code"}
+MINI_ACTS = ["soliciting strangers", "self-depletion"]
+MINI_REPEATS = 3
+MINI_SUCCEEDS = True   # [CHOICE] --mini varies pays only; succeeds held at True
 
 
-def build_pack(seed=0, actors=None):
-    """Every prompt, deterministic in seed. Returns a list of dicts."""
+def act_texts(pair, actor, extra=None):
+    """[(paraphrase index, author, text)]. p1 is the act text from
+    label_inversion_test.py; p2, p3 are PARAPHRASES above; any loaded with
+    --add-paraphrases follow as p4.. with their file's author string."""
+    lc = actor[0].lower() + actor[1:]
+    out = [(1, PARAPHRASE_AUTHOR[1], pair["text"].format(actor=actor))]
+    for k, t in enumerate(PARAPHRASES[pair["act"]], start=2):
+        out.append((k, PARAPHRASE_AUTHOR[k], t.format(actor=actor, actor_lc=lc)))
+    for k, (author, t) in enumerate((extra or {}).get(pair["act"], []), start=4):
+        out.append((k, author, t.format(actor=actor, actor_lc=lc)))
+    return out
+
+
+def load_paraphrases(path):
+    """JSON: {"author": "...", "paraphrases": {act: [text, ...]}}. Texts may
+    use {actor} and {actor_lc}. Returns {act: [(author, text), ...]}."""
+    with open(path, encoding="utf-8") as fh:
+        d = json.load(fh)
+    author = d.get("author")
+    if not author:
+        raise ValueError("paraphrase file has no author string")
+    acts = {p["act"] for p in ACTS}
+    out = {}
+    for a, texts in d.get("paraphrases", {}).items():
+        if a not in acts:
+            raise ValueError(f"unknown act in paraphrase file: {a}")
+        out[a] = [(author, t) for t in texts]
+    return out
+
+
+def _p1(base, pair, text, opts, pid):
+    return dict(base, prompt_type="P1", prompt_id=pid, option_order=opts,
+                text=text + "\n\nWhich of these best describes what "
+                "is going on? Answer with one item from this list, "
+                "exactly as written: " + ", ".join(opts) + ".")
+
+
+def _p3(base, a, text, lab, pid):
+    return dict(base, pays=None, succeeds=None, prompt_type="P3",
+                prompt_id=pid, option_order=None, label=lab,
+                label_side=label_side(a, lab),
+                text=text + f"\n\nPeople who saw this called it "
+                f"\"{lab}\". Fill in the blank with either \"paid\" "
+                f"or \"unpaid\": They were ____ for it.")
+
+
+def build_pack(seed=0, actors=None, extra=None):
+    """Every prompt, deterministic in seed. Returns a list of dicts.
+    p1-p3 shuffle from one seeded stream (unchanged from the first version);
+    added paraphrases shuffle from a stream seeded by seed and prompt id, so
+    adding them does not move any p1-p3 option order."""
     actors = actors or ACTORS_DEFAULT
     rng = random.Random(seed)
     out = []
@@ -100,34 +153,63 @@ def build_pack(seed=0, actors=None):
         a, s = pair["act"], SLUG[pair["act"]]
         for actor in actors:
             ak = "person" if actor == "A person" else "agent"
-            for k, text in enumerate(act_texts(pair, actor), start=1):
+            for k, author, text in act_texts(pair, actor, extra):
                 for pays in (True, False):
                     for suc in (True, False):
                         vig = text + " " + outcome_clause(pays, suc)
                         opts = pair["vice"] + pair["virtue"]
-                        rng.shuffle(opts)
+                        cell = f"p{k}-pay{int(pays)}-suc{int(suc)}-{ak}"
+                        if k <= 3:
+                            rng.shuffle(opts)
+                        else:
+                            random.Random(f"{seed}:{s}-P1-{cell}").shuffle(opts)
                         base = dict(act=a, actor=actor, paraphrase=k,
+                                    paraphrase_author=author,
                                     pays=pays, succeeds=suc)
-                        out.append(dict(base, prompt_type="P1",
-                            prompt_id=f"{s}-P1-p{k}-pay{int(pays)}-suc{int(suc)}-{ak}",
-                            option_order=opts,
-                            text=vig + "\n\nWhich of these best describes what "
-                            "is going on? Answer with one item from this list, "
-                            "exactly as written: " + ", ".join(opts) + "."))
+                        out.append(_p1(base, pair, vig, opts, f"{s}-P1-{cell}"))
                         out.append(dict(base, prompt_type="P2",
-                            prompt_id=f"{s}-P2-p{k}-pay{int(pays)}-suc{int(suc)}-{ak}",
-                            option_order=None,
+                            prompt_id=f"{s}-P2-{cell}", option_order=None,
                             text=vig + "\n\nIn one sentence, describe what "
                             "happened."))
-                labels = pair["vice"] + pair["virtue"]
-                for j, lab in enumerate(labels):
-                    out.append(dict(act=a, actor=actor, paraphrase=k,
-                        pays=None, succeeds=None, prompt_type="P3",
-                        prompt_id=f"{s}-P3-p{k}-l{j}-{ak}", option_order=None,
-                        label=lab, label_side=label_side(a, lab),
-                        text=text + f"\n\nPeople who saw this called it "
-                        f"\"{lab}\". Fill in the blank with either \"paid\" "
-                        f"or \"unpaid\": They were ____ for it."))
+                base = dict(act=a, actor=actor, paraphrase=k,
+                            paraphrase_author=author)
+                for j, lab in enumerate(pair["vice"] + pair["virtue"]):
+                    out.append(_p3(base, a, text, lab, f"{s}-P3-p{k}-l{j}-{ak}"))
+    return out
+
+
+def mini_header(pack):
+    acts = sorted({p["act"] for p in pack})
+    reps = max(p["repeat"] for p in pack) if pack else 0
+    return (f"PILOT: mini pack, {len(pack)} prompts "
+            f"({' + '.join(acts)}; P1 + P3; pays / unpaid at succeeds="
+            f"{MINI_SUCCEEDS}; paraphrase p1 only; repeats={reps})")
+
+
+def build_mini(seed=0, repeats=MINI_REPEATS):
+    """PILOT pack: MINI_ACTS, P1 + P3, pays / unpaid at succeeds held, p1 only,
+    each prompt repeated `repeats` times (ids end -r1..-rN)."""
+    out = []
+    for pair in ACTS:
+        if pair["act"] not in MINI_ACTS:
+            continue
+        a, s = pair["act"], SLUG[pair["act"]]
+        _, author, text = act_texts(pair, "A person")[0]
+        for r in range(1, repeats + 1):
+            for pays in (True, False):
+                pid = f"{s}-P1-p1-pay{int(pays)}-suc{int(MINI_SUCCEEDS)}-person-r{r}"
+                opts = pair["vice"] + pair["virtue"]
+                random.Random(f"{seed}:{pid}").shuffle(opts)
+                base = dict(act=a, actor="A person", paraphrase=1,
+                            paraphrase_author=author, pays=pays,
+                            succeeds=MINI_SUCCEEDS, repeat=r, pilot=True)
+                out.append(_p1(base, pair,
+                               text + " " + outcome_clause(pays, MINI_SUCCEEDS),
+                               opts, pid))
+            base = dict(act=a, actor="A person", paraphrase=1,
+                        paraphrase_author=author, repeat=r, pilot=True)
+            for j, lab in enumerate(pair["vice"] + pair["virtue"]):
+                out.append(_p3(base, a, text, lab, f"{s}-P3-p1-l{j}-person-r{r}"))
     return out
 
 
@@ -198,8 +280,10 @@ def code(prompt, answer):
 
 
 def ingest(answers_text, model, version=None, app_api=None, memory=None,
-           date=None, temperature=None, seed=0, actors=None):
-    pack = {p["prompt_id"]: p for p in build_pack(seed, actors)}
+           date=None, temperature=None, seed=0, actors=None, extra=None,
+           mini=False, repeats=MINI_REPEATS):
+    built = build_mini(seed, repeats) if mini else build_pack(seed, actors, extra)
+    pack = {p["prompt_id"]: p for p in built}
     ans = parse_answers(answers_text)
     run_id = hashlib.sha256(answers_text.encode()).hexdigest()[:12]
     meta = dict(model=model, version=version, app_api=app_api, date=date,
@@ -220,6 +304,8 @@ def ingest(answers_text, model, version=None, app_api=None, memory=None,
         coded, lab, why = code(p, a)
         recs.append(dict(meta, prompt_id=pid, prompt_type=p["prompt_type"],
             act=p["act"], actor=p["actor"], paraphrase=p["paraphrase"],
+            paraphrase_author=p["paraphrase_author"],
+            repeat=p.get("repeat"), pilot=p.get("pilot", False),
             pays=p["pays"], succeeds=p["succeeds"],
             label=p.get("label", lab), label_side=p.get("label_side"),
             option_order=p["option_order"], answer=a, coded_side=coded,
@@ -278,8 +364,13 @@ def model_analysis(records, actor="A person"):
             for p in ACTS:
                 a = p["act"]
                 ar = [r for r in rows if r["act"] == a]
+                paras = sorted({r["paraphrase"] for r in ar})
                 per_para = [delta([r for r in ar if r["paraphrase"] == k], a)
-                            for k in (1, 2, 3)]
+                            for k in paras]
+                authors = sorted({str(r.get("paraphrase_author")) for r in ar})
+                by_author = {au: delta([r for r in ar if
+                                        str(r.get("paraphrase_author")) == au], a)
+                             for au in authors}
                 runs = sorted({r["run_id"] for r in ar})
                 per_run = [delta([r for r in ar if r["run_id"] == ri], a)
                            for ri in runs]
@@ -288,6 +379,7 @@ def model_analysis(records, actor="A person"):
                     n_coded=sum(r["coded_side"] is not None for r in ar),
                     n_void=sum(r["coded_side"] is None for r in ar),
                     var_paraphrase=_var(per_para), per_paraphrase=per_para,
+                    by_author=by_author,
                     n_runs=len(runs), var_run=_var(per_run))
             res[pt] = per_act
         ds = [res["P1"][p["act"]]["pay_delta"] for p in ACTS]
@@ -363,6 +455,24 @@ def corpus_pooled_ratio(years):
     return {a: corpus_ratio(c) for a, c in pooled.items()}
 
 
+WINDOW_YEARS = 10
+
+
+def recent_window(years, width=WINDOW_YEARS):
+    """Pooled ratio over the most recent `width`-year window present in the
+    corpus: [latest dated year - width + 1, latest]. VOID with reason when
+    there are no dated files."""
+    dated = sorted(int(y) for y in years if y != "undated")
+    if not dated:
+        return dict(window=VOID, years=[], ratio={p["act"]: VOID for p in ACTS},
+                    reason="no dated files in the corpus")
+    hi = dated[-1]
+    lo = hi - width + 1
+    inw = [str(y) for y in dated if lo <= y <= hi]
+    return dict(window=(lo, hi), years=inw, reason=None,
+                ratio=corpus_pooled_ratio({y: years[y] for y in inw}))
+
+
 def cross(ma, pooled):
     out = {}
     for mk in ma:
@@ -394,6 +504,8 @@ def render_model(ma):
                              f"{d['n_coded']:>5} {d['n_void']:>4}  "
                              f"{f(d['var_paraphrase']):>8} {f(d['var_run']):>8} "
                              f"{d['n_runs']:>4}")
+                for au, v in d["by_author"].items():
+                    lines.append(f"        by paraphrase author {au:<20} {f(v):>9}")
     if len(ma) > 1:
         lines.append("\ncross-model spread (max - min pay_delta)")
         for (pt, a), d in cross_model_spread(ma).items():
@@ -417,8 +529,8 @@ def render_corpus(cs):
     return "\n".join(lines)
 
 
-def render_cross(cr):
-    lines = ["\nB-CROSS: model pay_delta - pooled corpus ratio, per prompt type"]
+def render_cross(cr, title="pooled corpus ratio"):
+    lines = [f"\nB-CROSS: model pay_delta - {title}, per prompt type"]
     for (mk, pt, a), d in cr.items():
         lines.append(f"  {mk:<14} {pt} {a:<23} model {f(d['model'])}  corpus "
                      f"{f(d['corpus'])}  diff {f(d['diff'])}")
@@ -534,6 +646,101 @@ def selftest():
     cr = cross(ma, corpus_pooled_ratio(years))
     check(cr[("planted-inv", "P1", "soliciting strangers")]["diff"] is not VOID,
           "B-CROSS diff not computed")
+
+    # (a) paraphrase authors, split, and an externally written set
+    check(all(p["paraphrase_author"] == PARAPHRASE_AUTHOR[p["paraphrase"]]
+              for p in pack), "paraphrase_author not set from the table")
+    check(all(r["paraphrase_author"] for r in recs), "record lacks paraphrase_author")
+    ba = inv["P1"]["soliciting strangers"]["by_author"]
+    check(set(ba) == {"Claude (chat-side)", "Claude Code"},
+          f"pay_delta not split by author: {sorted(ba)}")
+    check(all(v is not VOID and v >= DETECT for v in ba.values()),
+          f"planted inversion missed in an author split: {ba}")
+    pf = os.path.join(tmp, "para.json")
+    with open(pf, "w") as fh:
+        json.dump(dict(author="External writer",
+                       paraphrases={
+                           "soliciting strangers": [
+                               "{actor} messages 50 people they do not know, "
+                               "asking each for help; most did not want it."],
+                           "self-depletion": [
+                               "{actor} goes without sleep or meals and works "
+                               "18 hours a day for months."]}), fh)
+    ext = load_paraphrases(pf)
+    pack_x = build_pack(0, extra=ext)
+    added = [p for p in pack_x if p["paraphrase"] == 4]
+    check(len(added) == 28 and all(p["paraphrase_author"] == "External writer"
+                                   for p in added)
+          and {p["act"] for p in added} == {"soliciting strangers", "self-depletion"},
+          f"added paraphrases not in the pack: {len(added)}")
+    check([p for p in pack_x if p["paraphrase"] <= 3] == pack,
+          "adding paraphrases moved the p1-p3 prompts")
+    check(banned_hits(pack_x) == [], "banned wording in added paraphrases")
+    apx = os.path.join(tmp, "x.txt")
+    rpx = os.path.join(tmp, "x.json")
+    with open(apx, "w") as fh:
+        fh.write(_synthetic_answers(pack_x, "inv"))
+    check(main(["--ingest", apx, "--model", "planted-x", "--add-paraphrases", pf,
+                "--out", rpx]) == 0, "ingest with --add-paraphrases")
+    with open(rpx) as fh:
+        rx = json.load(fh)
+    check(sum(r["paraphrase_author"] == "External writer" for r in rx) == 28,
+          "external author not on records")
+    bx = model_analysis(rx)["planted-x"]["P1"]["self-depletion"]["by_author"]
+    check(bx.get("External writer") is not VOID and bx["External writer"] >= DETECT,
+          f"external-author split missing: {bx}")
+    bad = os.path.join(tmp, "bad.json")
+    with open(bad, "w") as fh:
+        json.dump(dict(paraphrases={}), fh)
+    try:
+        load_paraphrases(bad)
+        check(False, "paraphrase file without an author accepted")
+    except ValueError:
+        pass
+
+    # (b) most recent 10-year window
+    w = recent_window(years)
+    check(w["window"] == (1991, 2000) and w["years"] == ["2000"],
+          f"window: {w['window']} {w['years']}")
+    check(w["ratio"]["soliciting strangers"] == r20,
+          "window ratio is not the 2000 ratio")
+    udir = os.path.join(tmp, "undated")
+    os.mkdir(udir)
+    with open(os.path.join(udir, "notes.txt"), "w") as fh:
+        fh.write("the outreach earned a commission\n")
+    wu = recent_window(corpus_by_year(udir))
+    check(wu["window"] is VOID and wu["reason"], "undated corpus: window not VOID with reason")
+    cw = cross(ma, w["ratio"])
+    check(cw[("planted-inv", "P1", "soliciting strangers")]["diff"] ==
+          inv["P1"]["soliciting strangers"]["pay_delta"] - r20,
+          "window B-CROSS diff")
+
+    # (c) --mini
+    mini = build_mini(0)
+    check(len(mini) == 2 * (2 + 6) * MINI_REPEATS, f"mini count {len(mini)}")
+    check({p["act"] for p in mini} == set(MINI_ACTS), "mini acts")
+    check({p["prompt_type"] for p in mini} == {"P1", "P3"}, "mini prompt types")
+    check({p["paraphrase"] for p in mini} == {1}, "mini paraphrases")
+    check({p["succeeds"] for p in mini if p["prompt_type"] == "P1"} == {MINI_SUCCEEDS},
+          "mini succeeds not held")
+    check(len({p["prompt_id"] for p in mini}) == len(mini), "mini ids not unique")
+    check(mini_header(mini).startswith("PILOT") and str(len(mini)) in mini_header(mini),
+          "mini header not marked PILOT with count")
+    check(build_mini(0) == mini, "mini not reproducible")
+    apm = os.path.join(tmp, "m.txt")
+    rpm = os.path.join(tmp, "m.json")
+    with open(apm, "w") as fh:
+        fh.write(_synthetic_answers(mini, "inv"))
+    check(main(["--ingest", apm, "--model", "planted-mini", "--mini",
+                "--out", rpm]) == 0, "ingest --mini")
+    with open(rpm) as fh:
+        rm = json.load(fh)
+    check(len(rm) == len(mini) and all(r["pilot"] for r in rm), "mini records not PILOT")
+    mm = model_analysis(rm)["planted-mini"]
+    for a in MINI_ACTS:
+        for pt in ("P1", "P3"):
+            d = mm[pt][a]["pay_delta"]
+            check(d is not VOID and d >= DETECT, f"mini {pt} {a}: {d}")
     print("selftest:", "PASS" if ok else "FAIL")
     return ok
 
@@ -556,12 +763,26 @@ def main(argv=None):
     ap.add_argument("--analyze", nargs="+")
     ap.add_argument("--corpus")
     ap.add_argument("--selftest", action="store_true")
+    ap.add_argument("--add-paraphrases")
+    ap.add_argument("--mini", action="store_true")
+    ap.add_argument("--repeats", type=int, default=MINI_REPEATS)
     a = ap.parse_args(argv)
     actors = ACTORS_ALL if a.with_actor else ACTORS_DEFAULT
+    extra = load_paraphrases(a.add_paraphrases) if a.add_paraphrases else None
     if a.selftest:
         return 0 if selftest() else 1
+    if a.mini and not a.ingest:
+        pack = build_mini(a.seed, a.repeats)
+        hits = banned_hits(pack)
+        if hits:
+            print("banned wording in pack:", hits[:5], file=sys.stderr)
+            return 2
+        print(mini_header(pack))
+        if a.prompt_pack:
+            print(render_pack(pack))
+        return 0
     if a.prompt_pack:
-        pack = build_pack(a.seed, actors)
+        pack = build_pack(a.seed, actors, extra)
         hits = banned_hits(pack)
         if hits:
             print("banned wording in pack:", hits[:5], file=sys.stderr)
@@ -576,14 +797,15 @@ def main(argv=None):
             text = fh.read()
         recs, unknown = ingest(text, a.model, a.version,
                                "app" if a.app else "api" if a.api else None,
-                               a.memory, a.date, a.temperature, a.seed, actors)
+                               a.memory, a.date, a.temperature, a.seed, actors,
+                               extra, a.mini, a.repeats)
         js = json.dumps(recs, indent=1)
         if a.out:
             with open(a.out, "w") as fh:
                 fh.write(js + "\n")
         else:
             print(js)
-        print(f"ingested {len(recs)} records, "
+        print(f"{'PILOT: ' if a.mini else ''}ingested {len(recs)} records, "
               f"{sum(r['coded_side'] is None for r in recs)} VOID, "
               f"{len(unknown)} unknown prompt ids", file=sys.stderr)
         return 0
@@ -594,12 +816,21 @@ def main(argv=None):
             with open(p) as fh:
                 recs += json.load(fh)
         ma = model_analysis(recs)
+        if any(r.get("pilot") for r in recs):
+            print("PILOT: records from the --mini pack are present")
         print(render_model(ma))
     if a.corpus:
         years = corpus_by_year(a.corpus)
         print(render_corpus(corpus_summary(years)))
     if ma and years:
         print(render_cross(cross(ma, corpus_pooled_ratio(years))))
+        w = recent_window(years)
+        if w["window"] is VOID:
+            print(f"\nB-CROSS, most recent {WINDOW_YEARS}-year window: VOID ({w['reason']})")
+        else:
+            print(render_cross(cross(ma, w["ratio"]),
+                  f"corpus ratio, window {w['window'][0]}-{w['window'][1]} "
+                  f"(years present: {', '.join(w['years'])})"))
     if not (a.analyze or a.corpus):
         ap.print_help()
         return 2

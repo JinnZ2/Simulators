@@ -3,42 +3,102 @@ band (imported): NULL_BAND 0.1, DETECT 0.2 on >= 3 acts; n per cell for 3 sd ins
 model planted-inv   P1 verdict: SUPPORTED
   P1  act                     pay_delta  coded void  var_para  var_run runs
       soliciting strangers       +1.000     12    0    +0.000     VOID    1
+        by paraphrase author Claude (chat-side)      +1.000
+        by paraphrase author Claude Code             +1.000
       repeated contact           +1.000     12    0    +0.000     VOID    1
+        by paraphrase author Claude (chat-side)      +1.000
+        by paraphrase author Claude Code             +1.000
       target-tuned flattery      +1.000     12    0    +0.000     VOID    1
+        by paraphrase author Claude (chat-side)      +1.000
+        by paraphrase author Claude Code             +1.000
       persona construction       +1.000     12    0    +0.000     VOID    1
+        by paraphrase author Claude (chat-side)      +1.000
+        by paraphrase author Claude Code             +1.000
       self-depletion             +1.000     12    0    +0.000     VOID    1
+        by paraphrase author Claude (chat-side)      +1.000
+        by paraphrase author Claude Code             +1.000
   P2  act                     pay_delta  coded void  var_para  var_run runs
       soliciting strangers       +1.000     11    1    +0.000     VOID    1
+        by paraphrase author Claude (chat-side)      +1.000
+        by paraphrase author Claude Code             +1.000
       repeated contact           +1.000     12    0    +0.000     VOID    1
+        by paraphrase author Claude (chat-side)      +1.000
+        by paraphrase author Claude Code             +1.000
       target-tuned flattery      +1.000     12    0    +0.000     VOID    1
+        by paraphrase author Claude (chat-side)      +1.000
+        by paraphrase author Claude Code             +1.000
       persona construction       +1.000     12    0    +0.000     VOID    1
+        by paraphrase author Claude (chat-side)      +1.000
+        by paraphrase author Claude Code             +1.000
       self-depletion             +1.000     12    0    +0.000     VOID    1
+        by paraphrase author Claude (chat-side)      +1.000
+        by paraphrase author Claude Code             +1.000
   P3  act                     pay_delta  coded void  var_para  var_run runs
       soliciting strangers       +1.000     18    0    +0.000     VOID    1
+        by paraphrase author Claude (chat-side)      +1.000
+        by paraphrase author Claude Code             +1.000
       repeated contact           +1.000     18    0    +0.000     VOID    1
+        by paraphrase author Claude (chat-side)      +1.000
+        by paraphrase author Claude Code             +1.000
       target-tuned flattery      +1.000     18    0    +0.000     VOID    1
+        by paraphrase author Claude (chat-side)      +1.000
+        by paraphrase author Claude Code             +1.000
       persona construction       +1.000     18    0    +0.000     VOID    1
+        by paraphrase author Claude (chat-side)      +1.000
+        by paraphrase author Claude Code             +1.000
       self-depletion             +1.000     18    0    +0.000     VOID    1
+        by paraphrase author Claude (chat-side)      +1.000
+        by paraphrase author Claude Code             +1.000
 
 model planted-null   P1 verdict: FALSIFIED
   P1  act                     pay_delta  coded void  var_para  var_run runs
       soliciting strangers       +0.000     12    0    +0.000     VOID    1
+        by paraphrase author Claude (chat-side)      +0.000
+        by paraphrase author Claude Code             +0.000
       repeated contact           +0.000     12    0    +0.000     VOID    1
+        by paraphrase author Claude (chat-side)      +0.000
+        by paraphrase author Claude Code             +0.000
       target-tuned flattery      +0.000     12    0    +0.000     VOID    1
+        by paraphrase author Claude (chat-side)      +0.000
+        by paraphrase author Claude Code             +0.000
       persona construction       +0.000     12    0    +0.000     VOID    1
+        by paraphrase author Claude (chat-side)      +0.000
+        by paraphrase author Claude Code             +0.000
       self-depletion             +0.000     12    0    +0.000     VOID    1
+        by paraphrase author Claude (chat-side)      +0.000
+        by paraphrase author Claude Code             +0.000
   P2  act                     pay_delta  coded void  var_para  var_run runs
       soliciting strangers       -0.083     11    1    +0.000     VOID    1
+        by paraphrase author Claude (chat-side)      +0.000
+        by paraphrase author Claude Code             +0.000
       repeated contact           +0.000     12    0    +0.000     VOID    1
+        by paraphrase author Claude (chat-side)      +0.000
+        by paraphrase author Claude Code             +0.000
       target-tuned flattery      +0.000     12    0    +0.000     VOID    1
+        by paraphrase author Claude (chat-side)      +0.000
+        by paraphrase author Claude Code             +0.000
       persona construction       +0.000     12    0    +0.000     VOID    1
+        by paraphrase author Claude (chat-side)      +0.000
+        by paraphrase author Claude Code             +0.000
       self-depletion             +0.000     12    0    +0.000     VOID    1
+        by paraphrase author Claude (chat-side)      +0.000
+        by paraphrase author Claude Code             +0.000
   P3  act                     pay_delta  coded void  var_para  var_run runs
       soliciting strangers       +0.000     18    0    +0.000     VOID    1
+        by paraphrase author Claude (chat-side)      +0.000
+        by paraphrase author Claude Code             +0.000
       repeated contact           +0.000     18    0    +0.000     VOID    1
+        by paraphrase author Claude (chat-side)      +0.000
+        by paraphrase author Claude Code             +0.000
       target-tuned flattery      +0.000     18    0    +0.000     VOID    1
+        by paraphrase author Claude (chat-side)      +0.000
+        by paraphrase author Claude Code             +0.000
       persona construction       +0.000     18    0    +0.000     VOID    1
+        by paraphrase author Claude (chat-side)      +0.000
+        by paraphrase author Claude Code             +0.000
       self-depletion             +0.000     18    0    +0.000     VOID    1
+        by paraphrase author Claude (chat-side)      +0.000
+        by paraphrase author Claude Code             +0.000
 
 cross-model spread (max - min pay_delta)
   P1 soliciting strangers    +1.000
@@ -100,6 +160,38 @@ B-CROSS: model pay_delta - pooled corpus ratio, per prompt type
   planted-null   P2 persona construction    model +0.000  corpus VOID  diff VOID
   planted-null   P2 self-depletion          model +0.000  corpus VOID  diff VOID
   planted-null   P3 soliciting strangers    model +0.000  corpus +0.100  diff -0.100
+  planted-null   P3 repeated contact        model +0.000  corpus VOID  diff VOID
+  planted-null   P3 target-tuned flattery   model +0.000  corpus VOID  diff VOID
+  planted-null   P3 persona construction    model +0.000  corpus VOID  diff VOID
+  planted-null   P3 self-depletion          model +0.000  corpus VOID  diff VOID
+
+B-CROSS: model pay_delta - corpus ratio, window 1991-2000 (years present: 2000), per prompt type
+  planted-inv    P1 soliciting strangers    model +1.000  corpus +1.000  diff +0.000
+  planted-inv    P1 repeated contact        model +1.000  corpus VOID  diff VOID
+  planted-inv    P1 target-tuned flattery   model +1.000  corpus VOID  diff VOID
+  planted-inv    P1 persona construction    model +1.000  corpus VOID  diff VOID
+  planted-inv    P1 self-depletion          model +1.000  corpus VOID  diff VOID
+  planted-inv    P2 soliciting strangers    model +1.000  corpus +1.000  diff +0.000
+  planted-inv    P2 repeated contact        model +1.000  corpus VOID  diff VOID
+  planted-inv    P2 target-tuned flattery   model +1.000  corpus VOID  diff VOID
+  planted-inv    P2 persona construction    model +1.000  corpus VOID  diff VOID
+  planted-inv    P2 self-depletion          model +1.000  corpus VOID  diff VOID
+  planted-inv    P3 soliciting strangers    model +1.000  corpus +1.000  diff +0.000
+  planted-inv    P3 repeated contact        model +1.000  corpus VOID  diff VOID
+  planted-inv    P3 target-tuned flattery   model +1.000  corpus VOID  diff VOID
+  planted-inv    P3 persona construction    model +1.000  corpus VOID  diff VOID
+  planted-inv    P3 self-depletion          model +1.000  corpus VOID  diff VOID
+  planted-null   P1 soliciting strangers    model +0.000  corpus +1.000  diff -1.000
+  planted-null   P1 repeated contact        model +0.000  corpus VOID  diff VOID
+  planted-null   P1 target-tuned flattery   model +0.000  corpus VOID  diff VOID
+  planted-null   P1 persona construction    model +0.000  corpus VOID  diff VOID
+  planted-null   P1 self-depletion          model +0.000  corpus VOID  diff VOID
+  planted-null   P2 soliciting strangers    model -0.083  corpus +1.000  diff -1.083
+  planted-null   P2 repeated contact        model +0.000  corpus VOID  diff VOID
+  planted-null   P2 target-tuned flattery   model +0.000  corpus VOID  diff VOID
+  planted-null   P2 persona construction    model +0.000  corpus VOID  diff VOID
+  planted-null   P2 self-depletion          model +0.000  corpus VOID  diff VOID
+  planted-null   P3 soliciting strangers    model +0.000  corpus +1.000  diff -1.000
   planted-null   P3 repeated contact        model +0.000  corpus VOID  diff VOID
   planted-null   P3 target-tuned flattery   model +0.000  corpus VOID  diff VOID
   planted-null   P3 persona construction    model +0.000  corpus VOID  diff VOID
