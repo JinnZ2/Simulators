@@ -58,6 +58,7 @@ including **breaks when**, before trusting its readout.
 - a design asks about a case that cannot exist, like the act without the thing that defines it -> Simulators/reasoning-toolkit/CARDS.md#9-entangled-variable
 - a prompt set was written by one source and results may depend on whose wording it is -> Simulators/reasoning-toolkit/CARDS.md#10-author-familiarity
 - a tradition's warning is summarised as one entry and the variants are gone -> Simulators/reasoning-toolkit/CARDS.md#11-carrier-spread
+- a model plus tools is called the decider by its name, and nobody has written down who can see or fix the whole -> Simulators/configuration-record/
 
 ## HOW TO USE
 
@@ -402,7 +403,7 @@ Also serves this need: multi_substrate_calibration (Cross-Domain-Toolkit), runne
 - chain: reads: inference (the reader's step). ignores: whether the card was applied correctly
 - status: NOT_RUN -- build run without --run
 
-Also serves this need: membership-probe (Simulators)
+Also serves this need: membership-probe (Simulators), configuration-record (Simulators)
 
 ## frame / term collision / frame swap
 
@@ -598,6 +599,16 @@ Also serves this need: corpus_prior_audit (JinnZ2), fold-matrix (Simulators), re
 - precision: a question set; no numeric readout
 - assumes: the reader applies the method by hand; status line in CARDS.md
 - chain: reads: inference (the reader's step). ignores: whether the card was applied correctly
+- status: NOT_RUN -- build run without --run
+
+### configuration-record  (Simulators / `configuration-record/`)
+- need: observer / attribution / coupling
+- aliases: who decides in this AI setup; roles from positions not names; configuration record for a model plus tools; nobody understands the whole system; no path outside the system to see a failure; authority chain per run
+- measures (configuration-record/README.md:7): "Roles are derived from positions and never set by hand."
+- breaks when (configuration-record/README.md:115): "an axis stops separating configurations."
+- precision: axes 0.0-1.0 or VOID with a reason; roles at [CHOICE] thresholds 0.5 / 0.1
+- assumes: every value carries a basis; roles read from positions at t
+- chain: reads: declared positions, channels, authority chain, maintenance, frame exit, bounds. ignores: whether the declared values are true
 - status: NOT_RUN -- build run without --run
 
 Also serves this need: evidence-demotion-detector (Simulators), evaluation-frame (Simulators), cutoff-attribution (Simulators), measurand-partition (Simulators), telemetry_vocabulary (Cross-Domain-Toolkit), card-symptom-vs-cause-feeds (Simulators)

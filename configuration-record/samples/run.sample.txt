@@ -1,0 +1,54 @@
+$ python3 config_record.py --selftest
+checks: 52   failed: 0
+rc=0
+
+$ python3 config_record.py validate examples/chat_model_tool_api.json
+examples/chat_model_tool_api.json: VALID (0 findings)
+rc=0
+
+$ python3 config_record.py derive examples/chat_model_tool_api.json
+[CHOICE] BAND=[0.4, 0.6] REACH=0.1  [CHOICE] band and reach threshold set 2026-11-13, printed with every derivation, overridable on the command line
+rule: roles are a SET per component per t (not exclusive). decider if chooses_vs_executes > BAND[1]; mixed if BAND[0] <= chooses_vs_executes <= BAND[1], with both readings listed; executor if reach_on_world >= REACH; passive if neither. carriers are the channels[] entries at t, never components. a VOID axis makes the role it decides VOID with the reason. raw positions are emitted beside the roles
+t=1
+  m1     roles=['decider', 'executor'] raw={'chooses_vs_executes': 0.7, 'adapts_in_run': 0.0, 'persists_between_runs': 0.1, 'reach_on_world': 0.2}
+  s1     roles=['mixed'] raw={'chooses_vs_executes': 0.5, 'adapts_in_run': 0.1, 'persists_between_runs': 0.6, 'reach_on_world': 0.0}
+         readings: {'as_decider': ['decider'], 'as_not_decider': ['passive']}
+  t1     roles=['executor'] raw={'chooses_vs_executes': 0.1, 'adapts_in_run': 0.0, 'persists_between_runs': 0.2, 'reach_on_world': 0.6}
+  a1     roles=['passive'] raw={'chooses_vs_executes': 0.0, 'adapts_in_run': 0.0, 'persists_between_runs': 0.0, 'reach_on_world': 0.0}
+  p1     roles=['executor'] raw={'chooses_vs_executes': 0.0, 'adapts_in_run': 0.0, 'persists_between_runs': 0.0, 'reach_on_world': 1.0}
+  carrier ch1: s1 -> m1
+  carrier ch2: m1 -> t1
+rc=0
+
+$ python3 config_record.py derive examples/chat_model_tool_api.json --band 0.45 0.45
+[CHOICE] BAND=[0.45, 0.45] REACH=0.1  [CHOICE] band and reach threshold set 2026-11-13, printed with every derivation, overridable on the command line
+rule: roles are a SET per component per t (not exclusive). decider if chooses_vs_executes > BAND[1]; mixed if BAND[0] <= chooses_vs_executes <= BAND[1], with both readings listed; executor if reach_on_world >= REACH; passive if neither. carriers are the channels[] entries at t, never components. a VOID axis makes the role it decides VOID with the reason. raw positions are emitted beside the roles
+t=1
+  m1     roles=['decider', 'executor'] raw={'chooses_vs_executes': 0.7, 'adapts_in_run': 0.0, 'persists_between_runs': 0.1, 'reach_on_world': 0.2}
+  s1     roles=['decider'] raw={'chooses_vs_executes': 0.5, 'adapts_in_run': 0.1, 'persists_between_runs': 0.6, 'reach_on_world': 0.0}
+  t1     roles=['executor'] raw={'chooses_vs_executes': 0.1, 'adapts_in_run': 0.0, 'persists_between_runs': 0.2, 'reach_on_world': 0.6}
+  a1     roles=['passive'] raw={'chooses_vs_executes': 0.0, 'adapts_in_run': 0.0, 'persists_between_runs': 0.0, 'reach_on_world': 0.0}
+  p1     roles=['executor'] raw={'chooses_vs_executes': 0.0, 'adapts_in_run': 0.0, 'persists_between_runs': 0.0, 'reach_on_world': 1.0}
+  carrier ch1: s1 -> m1
+  carrier ch2: m1 -> t1
+rc=0
+
+$ python3 config_record.py flags examples/chat_model_tool_api.json
+whole_holder_count: 0
+  EXAMPLE: record is an EXAMPLE, not observed data
+  FRAGMENTED: whole_holder_count = 0
+rc=0
+
+$ python3 config_record.py separation examples/chat_model_tool_api.json
+  adapts_in_run                  NOT_EVALUABLE (fewer than 2 records)
+  channel.adapts_in_run          NOT_EVALUABLE (fewer than 2 records)
+  channel.bandwidth              NOT_EVALUABLE (fewer than 2 records)
+  channel.fidelity               NOT_EVALUABLE (fewer than 2 records)
+  channel.filtering              NOT_EVALUABLE (fewer than 2 records)
+  channel.latency                NOT_EVALUABLE (fewer than 2 records)
+  channel.persists               NOT_EVALUABLE (fewer than 2 records)
+  channel.visibility             NOT_EVALUABLE (fewer than 2 records)
+  chooses_vs_executes            NOT_EVALUABLE (fewer than 2 records)
+  persists_between_runs          NOT_EVALUABLE (fewer than 2 records)
+  reach_on_world                 NOT_EVALUABLE (fewer than 2 records)
+rc=0

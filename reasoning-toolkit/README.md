@@ -42,3 +42,7 @@ Each card has a row in `TOOL_FINDER/entries.py`, with aliases and a symptom. Reb
 index with `python3 TOOL_FINDER/build_finder.py`. The measures and breaks quotes in those
 rows are checked as literal substrings of `CARDS.md`. Cards carry no check command, so
 their status in the index is NOT_RUN.
+
+## Related
+
+- `configuration-record/`: a schema and validator for one AI configuration record, with roles derived from positions at t.
