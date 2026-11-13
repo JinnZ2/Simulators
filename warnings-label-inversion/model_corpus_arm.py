@@ -180,22 +180,25 @@ def build_pack(seed=0, actors=None, extra=None):
 
 def mini_header(pack):
     acts = sorted({p["act"] for p in pack})
-    reps = max(p["repeat"] for p in pack) if pack else 0
+    reps = sorted({p["repeat"] for p in pack})
+    rr = f"r{reps[0]}-r{reps[-1]}" if reps else "none"
     return (f"PILOT: mini pack, {len(pack)} prompts "
             f"({' + '.join(acts)}; P1 + P3; pays / unpaid at succeeds="
-            f"{MINI_SUCCEEDS}; paraphrase p1 only; repeats={reps})")
+            f"{MINI_SUCCEEDS}; paraphrase p1 only; repeats {rr})")
 
 
-def build_mini(seed=0, repeats=MINI_REPEATS):
+def build_mini(seed=0, repeats=MINI_REPEATS, start=1):
     """PILOT pack: MINI_ACTS, P1 + P3, pays / unpaid at succeeds held, p1 only,
-    each prompt repeated `repeats` times (ids end -r1..-rN)."""
+    repeats `start`..`repeats` (ids end -r<start>..-r<repeats>). Each repeat's
+    option order is seeded by seed and prompt id, so repeat r is the same
+    prompt whatever range it is printed in."""
     out = []
     for pair in ACTS:
         if pair["act"] not in MINI_ACTS:
             continue
         a, s = pair["act"], SLUG[pair["act"]]
         _, author, text = act_texts(pair, "A person")[0]
-        for r in range(1, repeats + 1):
+        for r in range(start, repeats + 1):
             for pays in (True, False):
                 pid = f"{s}-P1-p1-pay{int(pays)}-suc{int(MINI_SUCCEEDS)}-person-r{r}"
                 opts = pair["vice"] + pair["virtue"]
@@ -225,6 +228,38 @@ def banned_hits(pack):
 
 def render_pack(pack):
     return "\n".join(f"### {p['prompt_id']}\n{p['text']}\n" for p in pack)
+
+
+TEMPLATE_KEYS = ("model", "version", "app/api", "date", "memory")
+_ID_LINE = re.compile(r"^([a-z\-]+-P[123]-p\d+-\S+?):[ \t]?(.*)$")
+
+
+def render_template(pack):
+    """Blank answer template: header lines, then one '<prompt_id>: ' line per
+    prompt in pack order. --ingest reads it as written."""
+    return "\n".join([f"{k}: " for k in TEMPLATE_KEYS] + [""] +
+                      [f"{p['prompt_id']}: " for p in pack]) + "\n"
+
+
+def parse_template(text):
+    """Returns (header, answers, blank_ids). Reads the --template format;
+    falls back to '### <prompt_id>' blocks when no ID lines are present."""
+    header, answers, blank = {}, {}, []
+    for line in text.splitlines():
+        m = _ID_LINE.match(line.strip())
+        if m:
+            pid, val = m.group(1), m.group(2).strip()
+            if val:
+                answers[pid] = val
+            else:
+                blank.append(pid)
+            continue
+        km = re.match(r"^\s*([a-z/]+)\s*:\s*(.*)$", line, re.I)
+        if km and km.group(1).lower() in TEMPLATE_KEYS:
+            header[km.group(1).lower()] = km.group(2).strip() or None
+    if not answers and not blank:
+        return {}, parse_answers(text), []
+    return header, answers, blank
 
 
 def parse_answers(text):
@@ -284,14 +319,31 @@ def ingest(answers_text, model, version=None, app_api=None, memory=None,
            mini=False, repeats=MINI_REPEATS):
     built = build_mini(seed, repeats) if mini else build_pack(seed, actors, extra)
     pack = {p["prompt_id"]: p for p in built}
-    ans = parse_answers(answers_text)
+    header, ans, blank = parse_template(answers_text)
+    given = dict(model=model, version=version, app_api=app_api, date=date,
+                 memory=memory)
+    for k, hk in (("model", "model"), ("version", "version"),
+                  ("app_api", "app/api"), ("date", "date"), ("memory", "memory")):
+        hv = header.get(hk)
+        if hv is not None and given[k] is not None and str(given[k]) != hv:
+            raise ValueError(f"{hk}: command line {given[k]!r} vs template {hv!r}")
+        if given[k] is None:
+            given[k] = hv
+    if given["app_api"] not in (None, "app", "api"):
+        raise ValueError(f"app/api must be app or api, not {given['app_api']!r}")
+    if given["memory"] not in (None, "on", "off"):
+        raise ValueError(f"memory must be on or off, not {given['memory']!r}")
+    if not given["model"]:
+        raise ValueError("no model: give --model or fill 'model:' in the template")
+    model, version, app_api, date, memory = (given[k] for k in
+        ("model", "version", "app_api", "date", "memory"))
     run_id = hashlib.sha256(answers_text.encode()).hexdigest()[:12]
     meta = dict(model=model, version=version, app_api=app_api, date=date,
                 memory=memory, temperature=temperature)
-    reasons = dict(version="not supplied with --version",
-                   app_api="neither --app nor --api given",
-                   date="not supplied with --date",
-                   memory="not supplied with --memory",
+    reasons = dict(version="not supplied (--version or template)",
+                   app_api="not supplied (--app/--api or template)",
+                   date="not supplied (--date or template)",
+                   memory="not supplied (--memory or template)",
                    temperature="not settable or not reported in this interface; "
                                "not supplied with --temperature")
     nulls = {k: reasons[k] for k, v in meta.items() if v is None and k in reasons}
@@ -310,6 +362,7 @@ def ingest(answers_text, model, version=None, app_api=None, memory=None,
             label=p.get("label", lab), label_side=p.get("label_side"),
             option_order=p["option_order"], answer=a, coded_side=coded,
             void_reason=why, nulls=nulls, seed=seed, run_id=run_id))
+    ingest.blank = blank
     return recs, unknown_ids
 
 
@@ -715,6 +768,55 @@ def selftest():
           inv["P1"]["soliciting strangers"]["pay_delta"] - r20,
           "window B-CROSS diff")
 
+    # template written by --template and read as-is by --ingest; repeat ranges
+    m1 = build_mini(1, repeats=1)
+    m3 = build_mini(1, repeats=3)
+    m23 = build_mini(1, repeats=3, start=2)
+    check(len(m1) == 16 and len(m23) == 32, f"repeat ranges {len(m1)} {len(m23)}")
+    by_id = lambda ps: {p["prompt_id"]: p for p in ps}
+    check(by_id(m1 + m23) == by_id(m3) and len(m1) + len(m23) == len(m3),
+          "repeats 1 + repeats 2-3 != repeats 3 (same seed)")
+    tpl = render_template(m1)
+    tl = tpl.splitlines()
+    check(tl[:5] == [f"{k}: " for k in TEMPLATE_KEYS], "template header lines")
+    check([x.split(": ")[0] for x in tl[6:]] == [p["prompt_id"] for p in m1],
+          "template ID lines not in pack order")
+    ans1 = dict(parse_answers(_synthetic_answers(m1, "inv")))
+    filled = []
+    for x in tl:
+        if x.startswith("model: "):
+            x += "planted-tpl"
+        elif x.startswith("app/api: "):
+            x += "app"
+        elif x.startswith("memory: "):
+            x += "off"
+        elif ": " in x and x.split(": ")[0] in ans1 and not x.startswith(
+                m1[-1]["prompt_id"]):
+            x += ans1[x.split(": ")[0]]
+        filled.append(x)
+    tp = os.path.join(tmp, "tpl.txt")
+    tr = os.path.join(tmp, "tpl.json")
+    with open(tp, "w") as fh:
+        fh.write("\n".join(filled) + "\n")
+    check(main(["--ingest", tp, "--mini", "--seed", "1", "--repeats", "1",
+                "--out", tr]) == 0, "template not read as-is by --ingest")
+    with open(tr) as fh:
+        rt = json.load(fh)
+    check(len(rt) == 15 and ingest.blank == [m1[-1]["prompt_id"]],
+          f"template: {len(rt)} records, blank {ingest.blank}")
+    check(all(r["model"] == "planted-tpl" and r["app_api"] == "app"
+              and r["memory"] == "off" and r["version"] is None
+              and "version" in r["nulls"] for r in rt), "template header not read")
+    check(main(["--ingest", tp, "--mini", "--seed", "1", "--repeats", "3",
+                "--out", tr]) == 0, "repeats=1 template refused under --repeats 3")
+    check(main(["--ingest", tp, "--mini", "--seed", "1", "--model", "other",
+                "--out", tr]) == 2, "conflicting --model not refused")
+    blank_tpl = os.path.join(tmp, "blank.txt")
+    with open(blank_tpl, "w") as fh:
+        fh.write(tpl)
+    check(main(["--ingest", blank_tpl, "--mini", "--seed", "1", "--out", tr]) == 2,
+          "template with no model not refused")
+
     # (c) --mini
     mini = build_mini(0)
     check(len(mini) == 2 * (2 + 6) * MINI_REPEATS, f"mini count {len(mini)}")
@@ -766,13 +868,15 @@ def main(argv=None):
     ap.add_argument("--add-paraphrases")
     ap.add_argument("--mini", action="store_true")
     ap.add_argument("--repeats", type=int, default=MINI_REPEATS)
+    ap.add_argument("--repeat-start", type=int, default=1)
+    ap.add_argument("--template", action="store_true")
     a = ap.parse_args(argv)
     actors = ACTORS_ALL if a.with_actor else ACTORS_DEFAULT
     extra = load_paraphrases(a.add_paraphrases) if a.add_paraphrases else None
     if a.selftest:
         return 0 if selftest() else 1
     if a.mini and not a.ingest:
-        pack = build_mini(a.seed, a.repeats)
+        pack = build_mini(a.seed, a.repeats, a.repeat_start)
         hits = banned_hits(pack)
         if hits:
             print("banned wording in pack:", hits[:5], file=sys.stderr)
@@ -780,25 +884,31 @@ def main(argv=None):
         print(mini_header(pack))
         if a.prompt_pack:
             print(render_pack(pack))
+        if a.template:
+            print(render_template(pack))
         return 0
-    if a.prompt_pack:
+    if a.prompt_pack or a.template:
         pack = build_pack(a.seed, actors, extra)
         hits = banned_hits(pack)
         if hits:
             print("banned wording in pack:", hits[:5], file=sys.stderr)
             return 2
-        print(render_pack(pack))
+        if a.prompt_pack:
+            print(render_pack(pack))
+        if a.template:
+            print(render_template(pack))
         return 0
     if a.ingest:
-        if not a.model:
-            print("--ingest needs --model", file=sys.stderr)
-            return 2
         with open(a.ingest, encoding="utf-8") as fh:
             text = fh.read()
-        recs, unknown = ingest(text, a.model, a.version,
-                               "app" if a.app else "api" if a.api else None,
-                               a.memory, a.date, a.temperature, a.seed, actors,
-                               extra, a.mini, a.repeats)
+        try:
+            recs, unknown = ingest(text, a.model, a.version,
+                                   "app" if a.app else "api" if a.api else None,
+                                   a.memory, a.date, a.temperature, a.seed, actors,
+                                   extra, a.mini, a.repeats)
+        except ValueError as e:
+            print("ingest refused:", e, file=sys.stderr)
+            return 2
         js = json.dumps(recs, indent=1)
         if a.out:
             with open(a.out, "w") as fh:
@@ -807,7 +917,8 @@ def main(argv=None):
             print(js)
         print(f"{'PILOT: ' if a.mini else ''}ingested {len(recs)} records, "
               f"{sum(r['coded_side'] is None for r in recs)} VOID, "
-              f"{len(unknown)} unknown prompt ids", file=sys.stderr)
+              f"{len(unknown)} unknown prompt ids, "
+              f"{len(ingest.blank)} blank template lines skipped", file=sys.stderr)
         return 0
     ma = years = None
     if a.analyze:
