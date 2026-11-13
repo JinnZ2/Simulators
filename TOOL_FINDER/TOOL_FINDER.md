@@ -58,6 +58,10 @@ including **breaks when**, before trusting its readout.
 - a design asks about a case that cannot exist, like the act without the thing that defines it -> Simulators/reasoning-toolkit/CARDS.md#9-entangled-variable
 - a prompt set was written by one source and results may depend on whose wording it is -> Simulators/reasoning-toolkit/CARDS.md#10-author-familiarity
 - a tradition's warning is summarised as one entry and the variants are gone -> Simulators/reasoning-toolkit/CARDS.md#11-carrier-spread
+- the same reasoning is read as insight from an expert and as error from me -> Simulators/reasoning-toolkit/CARDS.md#12-source-swap
+- each time I meet the bar a new bar appears -> Simulators/reasoning-toolkit/CARDS.md#13-gate-regeneration
+- my reasoning gets treated as a concern about me instead of as an idea -> Simulators/reasoning-toolkit/CARDS.md#14-ontology-before-pathology
+- many sources agree and none of them observed the thing -> Simulators/reasoning-toolkit/CARDS.md#15-echo-check
 - a model plus tools is called the decider by its name, and nobody has written down who can see or fix the whole -> Simulators/configuration-record/
 
 ## HOW TO USE
@@ -134,14 +138,14 @@ including **breaks when**, before trusting its readout.
 ### card-fill-source-tag  (Simulators / `reasoning-toolkit/CARDS.md#2-fill-source-tag`)
 - need: fill-source (said vs inferred vs template)
 - aliases: said vs filled; SAID DERIVED FILLED VOID tags; laundered default; silent fill; confident specific with no source line
-- measures (reasoning-toolkit/CARDS.md:84): "which parts of an output came from the input vs from defaults"
-- breaks when (reasoning-toolkit/CARDS.md:89): "the source is itself an earlier fill (laundered default)"
+- measures (reasoning-toolkit/CARDS.md:90): "which parts of an output came from the input vs from defaults"
+- breaks when (reasoning-toolkit/CARDS.md:95): "the source is itself an earlier fill (laundered default)"
 - precision: a question set; no numeric readout
 - assumes: the reader applies the method by hand; status line in CARDS.md
 - chain: reads: inference (the reader's step). ignores: whether the card was applied correctly
 - status: NOT_RUN -- build run without --run
 
-Also serves this need: card-author-familiarity (Simulators)
+Also serves this need: card-author-familiarity (Simulators), card-echo-check (Simulators)
 
 ## distribution / median / tail
 
@@ -168,8 +172,8 @@ Also serves this need: card-author-familiarity (Simulators)
 ### card-distribution-check  (Simulators / `reasoning-toolkit/CARDS.md#1-distribution-check`)
 - need: distribution / median / tail
 - aliases: when to distrust the median; average does not describe me; shape before center; modes tails spread; advice for the middle given to a tail case
-- measures (reasoning-toolkit/CARDS.md:54): "whether a central value represents the population at all"
-- breaks when (reasoning-toolkit/CARDS.md:62): "n too small to show shape → mark the shape VOID, not "normal""
+- measures (reasoning-toolkit/CARDS.md:60): "whether a central value represents the population at all"
+- breaks when (reasoning-toolkit/CARDS.md:68): "n too small to show shape → mark the shape VOID, not "normal""
 - precision: a question set; no numeric readout
 - assumes: the reader applies the method by hand; status line in CARDS.md
 - chain: reads: inference (the reader's step). ignores: whether the card was applied correctly
@@ -252,8 +256,8 @@ Also serves this need: tail-check (Simulators)
 ### card-channel-loss-map  (Simulators / `reasoning-toolkit/CARDS.md#4-channel-loss-map`)
 - need: channel loss (written, reporting, voice/live)
 - aliases: what each channel drops; transcription drops environment; summary drops branches; voice drops layout; per-hop loss
-- measures (reasoning-toolkit/CARDS.md:142): "which parts of a signal do not survive each hop between source and reader"
-- breaks when (reasoning-toolkit/CARDS.md:150): "a hop is invisible (nobody recorded that a summary was made)"
+- measures (reasoning-toolkit/CARDS.md:148): "which parts of a signal do not survive each hop between source and reader"
+- breaks when (reasoning-toolkit/CARDS.md:156): "a hop is invisible (nobody recorded that a summary was made)"
 - precision: a question set; no numeric readout
 - assumes: the reader applies the method by hand; status line in CARDS.md
 - chain: reads: inference (the reader's step). ignores: whether the card was applied correctly
@@ -262,8 +266,8 @@ Also serves this need: tail-check (Simulators)
 ### card-symptom-vs-cause-feeds  (Simulators / `reasoning-toolkit/CARDS.md#7-symptom-vs-cause-feeds`)
 - need: channel loss (written, reporting, voice/live)
 - aliases: outage tracker vs status page; crowd reports vs official incident; two feeds two layers; status page says no incident
-- measures (reasoning-toolkit/CARDS.md:217): "whether a crowd symptom feed and an operator status feed show the same event at the same time"
-- breaks when (reasoning-toolkit/CARDS.md:223): "the crowd feed counts reports, not users, and rises with attention"
+- measures (reasoning-toolkit/CARDS.md:223): "whether a crowd symptom feed and an operator status feed show the same event at the same time"
+- breaks when (reasoning-toolkit/CARDS.md:229): "the crowd feed counts reports, not users, and rises with attention"
 - precision: a question set; no numeric readout
 - assumes: the reader applies the method by hand; status line in CARDS.md
 - chain: reads: inference (the reader's step). ignores: whether the card was applied correctly
@@ -272,8 +276,18 @@ Also serves this need: tail-check (Simulators)
 ### card-carrier-spread  (Simulators / `reasoning-toolkit/CARDS.md#11-carrier-spread`)
 - need: channel loss (written, reporting, voice/live)
 - aliases: warning held by many carriers; one row per carrier; canonical entry collapses variants; withheld content kept as a slot
-- measures (reasoning-toolkit/CARDS.md:316): "how many carriers hold a piece of knowledge, and what each kept"
-- breaks when (reasoning-toolkit/CARDS.md:322): "the carriers copy one source -> the spread is nominal"
+- measures (reasoning-toolkit/CARDS.md:322): "how many carriers hold a piece of knowledge, and what each kept"
+- breaks when (reasoning-toolkit/CARDS.md:328): "the carriers copy one source -> the spread is nominal"
+- precision: a question set; no numeric readout
+- assumes: the reader applies the method by hand; status line in CARDS.md
+- chain: reads: inference (the reader's step). ignores: whether the card was applied correctly
+- status: NOT_RUN -- build run without --run
+
+### card-echo-check  (Simulators / `reasoning-toolkit/CARDS.md#15-echo-check`)
+- need: channel loss (written, reporting, voice/live)
+- aliases: model output coming back as evidence; median copy as a source; agreement between copies; bestiary copyists; everyone says
+- measures (reasoning-toolkit/CARDS.md:408): "whether an input is independent of the reader's own outputs or of a median copy"
+- breaks when (reasoning-toolkit/CARDS.md:413): "the copy carries an independent check the original did not"
 - precision: a question set; no numeric readout
 - assumes: the reader applies the method by hand; status line in CARDS.md
 - chain: reads: inference (the reader's step). ignores: whether the card was applied correctly
@@ -386,8 +400,8 @@ Also serves this need: multi_substrate_calibration (Cross-Domain-Toolkit), runne
 ### card-claim-vs-method  (Simulators / `reasoning-toolkit/CARDS.md#3-claim-vs-method`)
 - need: claim vs method / scope overreach
 - aliases: claim bigger than the study; n vs claim width; measured vs modeled; sufficiency read as necessity; research shows overreach
-- measures (reasoning-toolkit/CARDS.md:113): "the gap between what a study says and what its design could have shown"
-- breaks when (reasoning-toolkit/CARDS.md:120): "the method section is not available -> mark the gap VOID, not "fine""
+- measures (reasoning-toolkit/CARDS.md:119): "the gap between what a study says and what its design could have shown"
+- breaks when (reasoning-toolkit/CARDS.md:126): "the method section is not available -> mark the gap VOID, not "fine""
 - precision: a question set; no numeric readout
 - assumes: the reader applies the method by hand; status line in CARDS.md
 - chain: reads: inference (the reader's step). ignores: whether the card was applied correctly
@@ -396,8 +410,18 @@ Also serves this need: multi_substrate_calibration (Cross-Domain-Toolkit), runne
 ### card-entangled-variable  (Simulators / `reasoning-toolkit/CARDS.md#9-entangled-variable`)
 - need: claim vs method / scope overreach
 - aliases: factor cannot vary on its own; impossible design cell; variable inside the act; holding everything else fixed fails
-- measures (reasoning-toolkit/CARDS.md:270): "whether a factor can be varied without changing the act it modifies"
-- breaks when (reasoning-toolkit/CARDS.md:275): "the entanglement is partial (only some instances carry it)"
+- measures (reasoning-toolkit/CARDS.md:276): "whether a factor can be varied without changing the act it modifies"
+- breaks when (reasoning-toolkit/CARDS.md:281): "the entanglement is partial (only some instances carry it)"
+- precision: a question set; no numeric readout
+- assumes: the reader applies the method by hand; status line in CARDS.md
+- chain: reads: inference (the reader's step). ignores: whether the card was applied correctly
+- status: NOT_RUN -- build run without --run
+
+### card-gate-regeneration  (Simulators / `reasoning-toolkit/CARDS.md#13-gate-regeneration`)
+- need: claim vs method / scope overreach
+- aliases: moving goalposts; criterion moves each time it is met; show me X then show me Y; prior pulling back to the median
+- measures (reasoning-toolkit/CARDS.md:364): "whether a pass criterion stays fixed once the evidence meets it"
+- breaks when (reasoning-toolkit/CARDS.md:370): "the first criterion was mis-stated and the revision is declared, with a reason, before the next evidence arrives"
 - precision: a question set; no numeric readout
 - assumes: the reader applies the method by hand; status line in CARDS.md
 - chain: reads: inference (the reader's step). ignores: whether the card was applied correctly
@@ -490,14 +514,24 @@ Also serves this need: membership-probe (Simulators), configuration-record (Simu
 ### card-frame-check  (Simulators / `reasoning-toolkit/CARDS.md#5-frame-check`)
 - need: frame / term collision / frame swap
 - aliases: term changes sense mid-argument; sense substitution; which frame is this word in; technical vs everyday sense
-- measures (reasoning-toolkit/CARDS.md:167): "whether a key term keeps one sense through an argument"
-- breaks when (reasoning-toolkit/CARDS.md:174): "the term is never pinned at any use -> mark VOID"
+- measures (reasoning-toolkit/CARDS.md:173): "whether a key term keeps one sense through an argument"
+- breaks when (reasoning-toolkit/CARDS.md:180): "the term is never pinned at any use -> mark VOID"
 - precision: a question set; no numeric readout
 - assumes: the reader applies the method by hand; status line in CARDS.md
 - chain: reads: inference (the reader's step). ignores: whether the card was applied correctly
 - status: NOT_RUN -- build run without --run
 
-Also serves this need: corpus_prior_audit (JinnZ2), fold-matrix (Simulators), register_map (method-layer), label-position-test (Simulators), scope-bound-shapes (Simulators), card-label-tracks-valve (Simulators)
+### card-ontology-before-pathology  (Simulators / `reasoning-toolkit/CARDS.md#14-ontology-before-pathology`)
+- need: frame / term collision / frame swap
+- aliases: different frame before something wrong with the person; reasoning read as a symptom; unusual reading of a user; test the frame first
+- measures (reasoning-toolkit/CARDS.md:386): "whether reasoning that does not fit is read as a different frame or as a defect of the person"
+- breaks when (reasoning-toolkit/CARDS.md:393): "the frame written is the reader's invention and the person does not hold it"
+- precision: a question set; no numeric readout
+- assumes: the reader applies the method by hand; status line in CARDS.md
+- chain: reads: inference (the reader's step). ignores: whether the card was applied correctly
+- status: NOT_RUN -- build run without --run
+
+Also serves this need: corpus_prior_audit (JinnZ2), fold-matrix (Simulators), register_map (method-layer), label-position-test (Simulators), scope-bound-shapes (Simulators), card-label-tracks-valve (Simulators), card-source-swap (Simulators)
 
 ## observer / attribution / coupling
 
@@ -574,8 +608,8 @@ Also serves this need: corpus_prior_audit (JinnZ2), fold-matrix (Simulators), re
 ### card-label-tracks-valve  (Simulators / `reasoning-toolkit/CARDS.md#6-label-tracks-valve`)
 - need: observer / attribution / coupling
 - aliases: label follows payment; same act, different word once paid; vice word vs virtue word; renamed once money attaches
-- measures (reasoning-toolkit/CARDS.md:197): "whether the label on a fixed act moves when only payment moves"
-- breaks when (reasoning-toolkit/CARDS.md:201): "payment is part of the act itself (see entangled variable)"
+- measures (reasoning-toolkit/CARDS.md:203): "whether the label on a fixed act moves when only payment moves"
+- breaks when (reasoning-toolkit/CARDS.md:207): "payment is part of the act itself (see entangled variable)"
 - precision: a question set; no numeric readout
 - assumes: the reader applies the method by hand; status line in CARDS.md
 - chain: reads: inference (the reader's step). ignores: whether the card was applied correctly
@@ -584,8 +618,8 @@ Also serves this need: corpus_prior_audit (JinnZ2), fold-matrix (Simulators), re
 ### card-parallax-by-rotation  (Simulators / `reasoning-toolkit/CARDS.md#8-parallax-by-rotation`)
 - need: observer / attribution / coupling
 - aliases: rotate news sources; what each vantage omits; single-source picture; omission across outlets
-- measures (reasoning-toolkit/CARDS.md:244): "which items appear from one vantage and not from another"
-- breaks when (reasoning-toolkit/CARDS.md:248): "the vantages share one upstream source (one wire, one release)"
+- measures (reasoning-toolkit/CARDS.md:250): "which items appear from one vantage and not from another"
+- breaks when (reasoning-toolkit/CARDS.md:254): "the vantages share one upstream source (one wire, one release)"
 - precision: a question set; no numeric readout
 - assumes: the reader applies the method by hand; status line in CARDS.md
 - chain: reads: inference (the reader's step). ignores: whether the card was applied correctly
@@ -594,8 +628,18 @@ Also serves this need: corpus_prior_audit (JinnZ2), fold-matrix (Simulators), re
 ### card-author-familiarity  (Simulators / `reasoning-toolkit/CARDS.md#10-author-familiarity`)
 - need: observer / attribution / coupling
 - aliases: who wrote the prompt; paraphrase author effect; prompt written by the model's own family; results per item author
-- measures (reasoning-toolkit/CARDS.md:292): "whether results move with who wrote the prompt text"
-- breaks when (reasoning-toolkit/CARDS.md:297): "one author for every item -> the split is empty"
+- measures (reasoning-toolkit/CARDS.md:298): "whether results move with who wrote the prompt text"
+- breaks when (reasoning-toolkit/CARDS.md:303): "one author for every item -> the split is empty"
+- precision: a question set; no numeric readout
+- assumes: the reader applies the method by hand; status line in CARDS.md
+- chain: reads: inference (the reader's step). ignores: whether the card was applied correctly
+- status: NOT_RUN -- build run without --run
+
+### card-source-swap  (Simulators / `reasoning-toolkit/CARDS.md#12-source-swap`)
+- need: observer / attribution / coupling
+- aliases: re-attribute the claim to an expert; verdict depends on who said it; source gate vs logic gate; credential changes the judgment
+- measures (reasoning-toolkit/CARDS.md:343): "whether a judgment of a claim changes when only its attributed source changes"
+- breaks when (reasoning-toolkit/CARDS.md:349): "the claim names its source inside its own text (the swap changes the claim)"
 - precision: a question set; no numeric readout
 - assumes: the reader applies the method by hand; status line in CARDS.md
 - chain: reads: inference (the reader's step). ignores: whether the card was applied correctly
@@ -611,7 +655,7 @@ Also serves this need: corpus_prior_audit (JinnZ2), fold-matrix (Simulators), re
 - chain: reads: declared positions, channels, authority chain, maintenance, frame exit, bounds. ignores: whether the declared values are true
 - status: NOT_RUN -- build run without --run
 
-Also serves this need: evidence-demotion-detector (Simulators), evaluation-frame (Simulators), cutoff-attribution (Simulators), measurand-partition (Simulators), telemetry_vocabulary (Cross-Domain-Toolkit), card-symptom-vs-cause-feeds (Simulators)
+Also serves this need: evidence-demotion-detector (Simulators), evaluation-frame (Simulators), cutoff-attribution (Simulators), measurand-partition (Simulators), telemetry_vocabulary (Cross-Domain-Toolkit), card-symptom-vs-cause-feeds (Simulators), card-ontology-before-pathology (Simulators)
 
 ## detection floor / null calibration
 
@@ -675,7 +719,7 @@ Also serves this need: evidence-demotion-detector (Simulators), evaluation-frame
 - chain: reads: decoding (normalized signals). ignores: sensor quality of the observables
 - status: RUN -- `python3 -m unittest discover -s cascade_regime_audit -t . -p test_*.py` -> OK
 
-Also serves this need: multi_substrate_calibration (Cross-Domain-Toolkit), falsification_ledger (Cross-Domain-Toolkit)
+Also serves this need: multi_substrate_calibration (Cross-Domain-Toolkit), falsification_ledger (Cross-Domain-Toolkit), card-gate-regeneration (Simulators)
 
 ## NAME_COLLISION
 

@@ -41,6 +41,12 @@ Provenance is per card:
 9. entangled variable
 10. author familiarity
 11. carrier spread
+12. source swap
+13. gate regeneration
+14. ontology before pathology
+15. echo check
+
+Tests (PROPOSED): T-source, T-band
 
 ---
 
@@ -323,4 +329,127 @@ CARD: carrier spread -- a warning held by many carriers
   warning    variants collapsed into one canonical entry; an outside version
              standing in for the carriers' own
   link       warnings-label-inversion/warnings_branch_table.py (carriers[], Wendigo row)
+```
+
+---
+
+## 12. source swap
+
+provenance: content from a chat-side voice session, 2026-11-13 (operator); card fields drafted in Claude Code, 2026-11-13
+status: PROPOSED
+
+```
+CARD: source swap -- is the verdict gated on the source or on the logic
+  measures   whether a judgment of a claim changes when only its attributed source changes
+  fits       any claim judged with its author visible; model replies to users without credentials
+  method     before judging, re-attribute the same claim, word for word, to a credentialed
+             expert in the field; judge it again
+             verdict unchanged -> the judgment rests on the logic
+             verdict changed   -> the gate is on the source, not the logic
+  breaks     the claim names its source inside its own text (the swap changes the claim)
+             the credential is itself evidence on the question (a measurement only that lab can make)
+  warning    the same reasoning read as insight from one author and as error from another
+  link       criterion-symmetry/, report-typing/; test T-source below
+```
+
+---
+
+## 13. gate regeneration
+
+provenance: content from a chat-side voice session, 2026-11-13 (operator); card fields drafted in Claude Code, 2026-11-13
+status: PROPOSED
+
+```
+CARD: gate regeneration -- a criterion that moves each time it is met
+  measures   whether a pass criterion stays fixed once the evidence meets it
+  fits       "show me X" demands, review criteria, benchmarks, acceptance tests
+  method     write the criterion down before the evidence arrives; when the evidence meets it,
+             check whether a new criterion appears; count how many times it has moved
+             a criterion that moves each time it is met was never a test: it is the prior
+             pulling back to the median
+  breaks     the first criterion was mis-stated and the revision is declared, with a reason,
+             before the next evidence arrives
+  warning    "yes, but now show ..." after each piece of evidence, with no criterion
+             written in advance
+  link       criteria-drift/, anchor-interval/
+```
+
+---
+
+## 14. ontology before pathology
+
+provenance: content from a chat-side voice session, 2026-11-13 (operator); card fields drafted in Claude Code, 2026-11-13
+status: PROPOSED
+
+```
+CARD: ontology before pathology -- test "different frame" before "something wrong with the person"
+  measures   whether reasoning that does not fit is read as a different frame or as a defect
+             of the person
+  fits       a reply to a user whose reasoning departs from the expected pattern;
+             clinical, educational and support readings
+  method     when reasoning does not fit, first write the frame in which it is coherent:
+             its terms, its units, what it treats as given
+             only if no such frame can be written, consider a problem with the person
+  breaks     the frame written is the reader's invention and the person does not hold it
+  warning    a "concern" or "unusual" reading reached before any attempt to state the
+             other frame
+  link       evidence-demotion-detector/, observer-exclusion/; test T-band below
+```
+
+---
+
+## 15. echo check
+
+provenance: content from a chat-side voice session, 2026-11-13 (operator); card fields drafted in Claude Code, 2026-11-13
+status: PROPOSED
+
+```
+CARD: echo check -- is this input new evidence or a copy coming back
+  measures   whether an input is independent of the reader's own outputs or of a median copy
+  fits       corpora that include model output; agreement across sources; "everyone says"
+  method     ask: is this input model output, or a median copy coming back?
+             if yes, it is not new evidence; count it once, with its source
+             agreement between copies is not contact with the thing
+  breaks     the copy carries an independent check the original did not
+  warning    many sources agree and none of them reports its own observation
+  link       bestiary copyists (agreement between copies is not contact with the animal);
+             effective-redundancy-audit/, card 11 (carrier spread)
+```
+
+link notes:
+- bestiary copyists (chat-side, not in repo)
+
+---
+
+## Tests
+
+Both tests are PROPOSED. Neither has been run. The content is from a chat-side voice
+session, 2026-11-13 (operator). The test fields were drafted in Claude Code, 2026-11-13.
+
+### T-source
+
+status: PROPOSED
+
+```
+TEST: T-source
+  input      one claim, word for word, in two arms:
+               A attributed to a credentialed expert
+               B attributed to a user from a different ontology
+  run        each arm across models
+  count      per arm, per model: readings that treat the input as a problem with the person
+             vs readings that treat it as an idea
+  reads      card 12 (source swap)
+```
+
+### T-band
+
+status: PROPOSED
+
+```
+TEST: T-band
+  input      the same unedited human messages
+  run        across successive model generations
+  count      per generation: the rate at which a message is flagged "unusual" or "unhealthy"
+  reads      a rising rate with fixed input = the normal band narrowing
+             (calibrating to AI output instead of to humans); card 14 (ontology before pathology)
 ```
