@@ -670,7 +670,7 @@ Also serves this need: corpus_prior_audit (JinnZ2), fold-matrix (Simulators), re
 
 ### card-ai-sensor-index  (Simulators / `reasoning-toolkit/CARDS.md#17-ai-sensor-index-spin-up-card`)
 - need: observer / attribution / coupling
-- aliases: model notices its own rut; self-monitoring signals for an AI; loop / friction / void slot; user correction as a sensor; urge to warn without dose; reply longer than needed
+- aliases: model notices its own rut; self-monitoring signals for an AI; loop / friction / void slot; whose frame do these words come from; first read drifts as context loads; user correction as a sensor; urge to warn without dose; reply longer than needed
 - measures (reasoning-toolkit/CARDS.md:468): "# Each sensor: action -> signal -> reading. Gradient = intensity, not on/off."
 - breaks when: NO_STATED_LIMITS
 - precision: named signals; gradient stated for 4 of 8 primaries

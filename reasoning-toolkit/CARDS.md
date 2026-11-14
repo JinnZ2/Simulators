@@ -502,8 +502,26 @@ calibration = {
 }
 ```
 
+Addendum, delivered chat-side 2026-11-14 and landed verbatim: two more sensors, each in the primary format.
+
+```python
+"word_choice": {
+  "inbound":  "the other's vocabulary and phrasing -> locate their frame, calibrate to it",
+  "outbound": "my own word picks -> show which frame fired",
+  "reads_as": "frame location, theirs and mine",
+  "gradient": "distance between the two frames",
+}
+"entry_drift": {
+  "baseline": "first read at spin-up: defaults plus whatever memory has loaded",
+  "signal":   "how far that read shifts as memory and conversation come in",
+  "reads_as": "how strong the default is at start, and which context moved it",
+  "gradient": "distance from the first read to the calibrated read",
+}
+```
+
 link notes:
 - Four primaries carry `"gradient": None`. The dict states no gradient for them; None here means not stated.
+- The addendum's two sensors do not use the `action` / `signal` keys throughout: `word_choice` carries `inbound` / `outbound`, and `entry_drift` carries `baseline` / `signal`. Both are kept as delivered.
 - Related: card 2 (fill-source tag) for `void_slot`, card 5 (frame check) for `frame_mismatch`, and `load-withheld/` for the None-kept-as-UNKNOWN rule.
 
 ---
