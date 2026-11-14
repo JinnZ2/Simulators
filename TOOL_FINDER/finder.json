@@ -345,6 +345,12 @@
    "tools": [
     "configuration-record"
    ]
+  },
+  {
+   "symptom": "a shared service looks lightly used because people with their own tools and skills never call it",
+   "tools": [
+    "load-withheld"
+   ]
   }
  ],
  "needs": [
@@ -2558,6 +2564,42 @@
    "measures_src": "configuration-record/README.md:7",
    "measures_quote_state": "FOUND",
    "breaks_src": "configuration-record/README.md:115",
+   "breaks_quote_state": "FOUND",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
+   }
+  },
+  {
+   "need": "floor",
+   "also": [
+    "observer"
+   ],
+   "repo": "Simulators",
+   "path": "load-withheld/",
+   "name": "load-withheld",
+   "aliases": [
+    "demand kept off shared systems",
+    "counted as zero because nobody asked for help",
+    "hidden reserve in shared services",
+    "non-take-up vs deliberate withholding",
+    "people who could claim and don't",
+    "load rises when skills are lost"
+   ],
+   "measures_file": "load-withheld/README.md",
+   "measures": "Demand people deliberately keep off them is invisible and counted as zero.",
+   "breaks_file": "load-withheld/README.md",
+   "breaks_when": "`deliberate_withholding` is None unless it is directly reported.",
+   "check": "python3 load-withheld/test_load_withheld.py",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "counts or None; three bins never summed; peak and average apart",
+   "assumes": "every field optional, None kept as UNKNOWN; deliberate share only when reported",
+   "chain": "reads: declared cases and reported counts. ignores: whether a reported withholding was deliberate",
+   "a1_status": "A1_READING (model reading of the module, 2026-11-14; not verbatim)",
+   "measures_src": "load-withheld/README.md:10",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "load-withheld/README.md:49",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {

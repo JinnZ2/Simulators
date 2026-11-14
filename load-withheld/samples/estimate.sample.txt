@@ -1,0 +1,21 @@
+CONSTRUCTED numbers, not data.
+withheld estimate
+  eligible_population      1000
+  claimants                700
+  non_claimants            300
+  bin barrier_non_take_up  120
+  bin unaware              90
+  bin deliberate_withholding UNKNOWN
+  unattributed             UNKNOWN
+  flag UNATTRIBUTED_UNKNOWN: one or more bins not reported
+  flag DELIBERATE_SHARE_UNKNOWN: not directly reported
+
+peak vs average (constructed):
+  average        6.4
+  peak           10.0
+  off_peak       3.5
+  n              5
+  n_peak         2
+  n_off_peak     2
+  unknown_peak   1
+  unknown_load   1
