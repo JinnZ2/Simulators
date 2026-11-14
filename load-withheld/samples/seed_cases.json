@@ -1,0 +1,89 @@
+[
+ {
+  "case_id": "seed-1",
+  "date": null,
+  "region": null,
+  "shared_system": "truck yard tools",
+  "service_avoided": "shared yard torch for frozen trailer landing gear",
+  "skill_or_tool_used": "own mallet and torch",
+  "peak_condition": "-40 morning; shared yard torches saturated",
+  "withheld_by_choice": true,
+  "eligible": null,
+  "reason_stated": null,
+  "scope_limit": "gear still frozen after own tools; damage to the gear",
+  "fallback_if_fails": "queue for a yard torch or call yard maintenance",
+  "est_load_units": null,
+  "est_method": null,
+  "status_tag": "PROPOSED",
+  "coupled_systems": [
+   "yard maintenance",
+   "dispatch schedule"
+  ],
+  "notes": null
+ },
+ {
+  "case_id": "seed-2",
+  "date": null,
+  "region": null,
+  "shared_system": "EMS",
+  "service_avoided": "ambulance call for a minor hand injury",
+  "skill_or_tool_used": "first aid treatment in place",
+  "peak_condition": null,
+  "withheld_by_choice": true,
+  "eligible": null,
+  "reason_stated": null,
+  "scope_limit": "injury beyond first-aid scope (bleeding not controlled, function lost)",
+  "fallback_if_fails": "self-transport to care",
+  "est_load_units": null,
+  "est_method": null,
+  "status_tag": "PROPOSED",
+  "coupled_systems": [
+   "911 dispatch",
+   "emergency department"
+  ],
+  "notes": null
+ },
+ {
+  "case_id": "seed-3",
+  "date": null,
+  "region": null,
+  "shared_system": "public benefits",
+  "service_avoided": "benefit claim",
+  "skill_or_tool_used": "adapted household practice",
+  "peak_condition": null,
+  "withheld_by_choice": true,
+  "eligible": true,
+  "reason_stated": null,
+  "scope_limit": null,
+  "fallback_if_fails": null,
+  "est_load_units": null,
+  "est_method": null,
+  "status_tag": "PROPOSED",
+  "coupled_systems": [
+   "take-up statistics"
+  ],
+  "notes": null
+ },
+ {
+  "case_id": "seed-4",
+  "date": null,
+  "region": null,
+  "shared_system": "GPS / ELD vendor support line",
+  "service_avoided": "support call during a GPS or ELD outage",
+  "skill_or_tool_used": "paper map and paper logs carried",
+  "peak_condition": "vendor outage",
+  "withheld_by_choice": true,
+  "eligible": null,
+  "reason_stated": null,
+  "scope_limit": null,
+  "fallback_if_fails": "call the support line",
+  "est_load_units": null,
+  "est_method": null,
+  "status_tag": "PROPOSED",
+  "coupled_systems": [
+   "ELD vendor",
+   "carrier compliance"
+  ],
+  "notes": null
+ }
+]

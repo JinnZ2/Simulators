@@ -650,3 +650,20 @@ for _e in E:
         _e["precision"], _e["assumes"], _e["chain"] = A1["configuration-record"]
         _e["a1_status"] = "A1_READING (model reading of the module, 2026-11-13; not verbatim)"
 SYMPTOMS.append(("a model plus tools is called the decider by its name, and nobody has written down who can see or fix the whole", ["configuration-record"]))
+
+# ---- load-withheld (2026-11-14)
+add("floor", "Simulators", "load-withheld/", "load-withheld",
+    ["demand kept off shared systems", "counted as zero because nobody asked for help",
+     "hidden reserve in shared services", "non-take-up vs deliberate withholding",
+     "people who could claim and don't", "load rises when skills are lost"],
+    "load-withheld/README.md", "Demand people deliberately keep off them is invisible and counted as zero.",
+    "load-withheld/README.md", "`deliberate_withholding` is None unless it is directly reported.",
+    "python3 load-withheld/test_load_withheld.py", also=["observer"])
+A1["load-withheld"] = ("counts or None; three bins never summed; peak and average apart",
+                       "every field optional, None kept as UNKNOWN; deliberate share only when reported",
+                       "reads: declared cases and reported counts. ignores: whether a reported withholding was deliberate")
+for _e in E:
+    if _e["name"] == "load-withheld":
+        _e["precision"], _e["assumes"], _e["chain"] = A1["load-withheld"]
+        _e["a1_status"] = "A1_READING (model reading of the module, 2026-11-14; not verbatim)"
+SYMPTOMS.append(("a shared service looks lightly used because people with their own tools and skills never call it", ["load-withheld"]))

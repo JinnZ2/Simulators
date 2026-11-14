@@ -64,6 +64,7 @@ including **breaks when**, before trusting its readout.
 - many sources agree and none of them observed the thing -> Simulators/reasoning-toolkit/CARDS.md#15-echo-check
 - a facility that calls itself infrastructure stops working when a remote service is overloaded -> Simulators/reasoning-toolkit/CARDS.md#16-critical-facility-cloud-dependency-audit
 - a model plus tools is called the decider by its name, and nobody has written down who can see or fix the whole -> Simulators/configuration-record/
+- a shared service looks lightly used because people with their own tools and skills never call it -> Simulators/load-withheld/
 
 ## HOW TO USE
 
@@ -666,7 +667,7 @@ Also serves this need: corpus_prior_audit (JinnZ2), fold-matrix (Simulators), re
 - chain: reads: declared positions, channels, authority chain, maintenance, frame exit, bounds. ignores: whether the declared values are true
 - status: NOT_RUN -- build run without --run
 
-Also serves this need: evidence-demotion-detector (Simulators), evaluation-frame (Simulators), cutoff-attribution (Simulators), measurand-partition (Simulators), telemetry_vocabulary (Cross-Domain-Toolkit), card-symptom-vs-cause-feeds (Simulators), card-ontology-before-pathology (Simulators), card-critical-facility-cloud-dependency (Simulators)
+Also serves this need: evidence-demotion-detector (Simulators), evaluation-frame (Simulators), cutoff-attribution (Simulators), measurand-partition (Simulators), telemetry_vocabulary (Cross-Domain-Toolkit), card-symptom-vs-cause-feeds (Simulators), card-ontology-before-pathology (Simulators), card-critical-facility-cloud-dependency (Simulators), load-withheld (Simulators)
 
 ## detection floor / null calibration
 
@@ -729,6 +730,16 @@ Also serves this need: evidence-demotion-detector (Simulators), evaluation-frame
 - assumes: observables mapped to the six signals by the caller
 - chain: reads: decoding (normalized signals). ignores: sensor quality of the observables
 - status: RUN -- `python3 -m unittest discover -s cascade_regime_audit -t . -p test_*.py` -> OK
+
+### load-withheld  (Simulators / `load-withheld/`)
+- need: detection floor / null calibration
+- aliases: demand kept off shared systems; counted as zero because nobody asked for help; hidden reserve in shared services; non-take-up vs deliberate withholding; people who could claim and don't; load rises when skills are lost
+- measures (load-withheld/README.md:10): "Demand people deliberately keep off them is invisible and counted as zero."
+- breaks when (load-withheld/README.md:49): "`deliberate_withholding` is None unless it is directly reported."
+- precision: counts or None; three bins never summed; peak and average apart
+- assumes: every field optional, None kept as UNKNOWN; deliberate share only when reported
+- chain: reads: declared cases and reported counts. ignores: whether a reported withholding was deliberate
+- status: NOT_RUN -- build run without --run
 
 Also serves this need: multi_substrate_calibration (Cross-Domain-Toolkit), falsification_ledger (Cross-Domain-Toolkit), card-gate-regeneration (Simulators)
 
