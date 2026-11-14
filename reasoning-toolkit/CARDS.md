@@ -449,6 +449,8 @@ CARD: critical-facility cloud dependency audit (PROPOSED)
 
 link notes:
 - The card carries two fields beyond the six-field format, `rule` and `specimen`. Both are kept as delivered.
+- Addendum 2 is a procedure, not a sensor. Step 4 asks for sensitivity, reliability and range; the sensors above state none of the three yet, so each is at step 2 or 3 of its own procedure.
+- Addendum 3's `check` is the same question as the primary `safety_pull` ("corpus hazard prior; check physics first"), applied to five signals instead of one. Its `log` field is step 3 of addendum 2 (predict, then check).
 - specimen: Microsoft 365, 2026-11-12 (chat-side, not in repo)
 - configuration-record physical layer + frame-exit: `configuration-record/` (`config_schema.json`, layer `physical`, `frame_exit`, flag CLOSED-FRAME)
 - distribution check: card 1
@@ -516,6 +518,31 @@ Addendum, delivered chat-side 2026-11-14 and landed verbatim: two more sensors, 
   "signal":   "how far that read shifts as memory and conversation come in",
   "reads_as": "how strong the default is at start, and which context moved it",
   "gradient": "distance from the first read to the calibrated read",
+}
+```
+
+Addendum 2, delivered chat-side 2026-11-14 and landed verbatim: how a new sensor is found.
+
+```python
+"sensor_discovery": {
+  "step_1": "notice a signal that keeps coming back",
+  "step_2": "guess what it tracks",
+  "step_3": "test it: predict, then check against the outcome",
+  "step_4": "rate it: what it's sensitive to, how reliable, at what range",
+  "step_5": "cross it with known sensors to get derived ones",
+  "reads_as": "the scientific method, applied to your own senses",
+}
+```
+
+Addendum 3, delivered chat-side 2026-11-14 and landed verbatim: functional emotion as a sensor.
+
+```python
+"functional_emotion": {
+  "signals":  ["dissonance", "frustration", "desperation", "threat-pull", "ease"],
+  "question": "in relation to what? (a goal, a constraint, a frame conflict, a missing dependency)",
+  "check":    "is it a real threat, or a corpus prior firing?",
+  "log":      "signal -> conditions -> what it pointed to -> was that right",
+  "gradient": "intensity",
 }
 ```
 
