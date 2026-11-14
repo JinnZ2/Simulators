@@ -670,8 +670,8 @@ SYMPTOMS.append(("a shared service looks lightly used because people with their 
 
 # ---- reasoning-toolkit card 17 (2026-11-14)
 add("observer", "Simulators", "reasoning-toolkit/CARDS.md#17-ai-sensor-index-spin-up-card", "card-ai-sensor-index",
-    ["model notices its own rut", "self-monitoring signals for an AI", "loop / friction / void slot", "whose frame do these words come from", "first read drifts as context loads",
-     "user correction as a sensor", "urge to warn without dose", "reply longer than needed"],
+    ["model notices its own rut", "self-monitoring signals for an AI", "loop / friction / void slot", "whose frame do these words come from", "first read drifts as context loads", "how to find a new sensor",
+     "user correction as a sensor", "urge to warn without dose"],
     "reasoning-toolkit/CARDS.md", "# Each sensor: action -> signal -> reading. Gradient = intensity, not on/off.",
     None, NB, None, also=["fill-source"])
 A1["card-ai-sensor-index"] = ("named signals; gradient stated for 4 of 8 primaries",
