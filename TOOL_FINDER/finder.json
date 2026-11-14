@@ -351,6 +351,12 @@
    "tools": [
     "load-withheld"
    ]
+  },
+  {
+   "symptom": "the model keeps returning to the same default frame and nobody has named the signal",
+   "tools": [
+    "card-ai-sensor-index"
+   ]
   }
  ],
  "needs": [
@@ -2023,9 +2029,9 @@
    "assumes": "the reader applies the method by hand; status line in CARDS.md",
    "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
    "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
-   "measures_src": "reasoning-toolkit/CARDS.md:61",
+   "measures_src": "reasoning-toolkit/CARDS.md:62",
    "measures_quote_state": "FOUND",
-   "breaks_src": "reasoning-toolkit/CARDS.md:69",
+   "breaks_src": "reasoning-toolkit/CARDS.md:70",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {
@@ -2056,9 +2062,9 @@
    "assumes": "the reader applies the method by hand; status line in CARDS.md",
    "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
    "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
-   "measures_src": "reasoning-toolkit/CARDS.md:91",
+   "measures_src": "reasoning-toolkit/CARDS.md:92",
    "measures_quote_state": "FOUND",
-   "breaks_src": "reasoning-toolkit/CARDS.md:96",
+   "breaks_src": "reasoning-toolkit/CARDS.md:97",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {
@@ -2089,9 +2095,9 @@
    "assumes": "the reader applies the method by hand; status line in CARDS.md",
    "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
    "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
-   "measures_src": "reasoning-toolkit/CARDS.md:120",
+   "measures_src": "reasoning-toolkit/CARDS.md:121",
    "measures_quote_state": "FOUND",
-   "breaks_src": "reasoning-toolkit/CARDS.md:127",
+   "breaks_src": "reasoning-toolkit/CARDS.md:128",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {
@@ -2122,9 +2128,9 @@
    "assumes": "the reader applies the method by hand; status line in CARDS.md",
    "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
    "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
-   "measures_src": "reasoning-toolkit/CARDS.md:149",
+   "measures_src": "reasoning-toolkit/CARDS.md:150",
    "measures_quote_state": "FOUND",
-   "breaks_src": "reasoning-toolkit/CARDS.md:157",
+   "breaks_src": "reasoning-toolkit/CARDS.md:158",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {
@@ -2154,9 +2160,9 @@
    "assumes": "the reader applies the method by hand; status line in CARDS.md",
    "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
    "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
-   "measures_src": "reasoning-toolkit/CARDS.md:174",
+   "measures_src": "reasoning-toolkit/CARDS.md:175",
    "measures_quote_state": "FOUND",
-   "breaks_src": "reasoning-toolkit/CARDS.md:181",
+   "breaks_src": "reasoning-toolkit/CARDS.md:182",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {
@@ -2188,9 +2194,9 @@
    "assumes": "the reader applies the method by hand; status line in CARDS.md",
    "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
    "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
-   "measures_src": "reasoning-toolkit/CARDS.md:204",
+   "measures_src": "reasoning-toolkit/CARDS.md:205",
    "measures_quote_state": "FOUND",
-   "breaks_src": "reasoning-toolkit/CARDS.md:208",
+   "breaks_src": "reasoning-toolkit/CARDS.md:209",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {
@@ -2222,9 +2228,9 @@
    "assumes": "the reader applies the method by hand; status line in CARDS.md",
    "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
    "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
-   "measures_src": "reasoning-toolkit/CARDS.md:224",
+   "measures_src": "reasoning-toolkit/CARDS.md:225",
    "measures_quote_state": "FOUND",
-   "breaks_src": "reasoning-toolkit/CARDS.md:230",
+   "breaks_src": "reasoning-toolkit/CARDS.md:231",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {
@@ -2254,9 +2260,9 @@
    "assumes": "the reader applies the method by hand; status line in CARDS.md",
    "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
    "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
-   "measures_src": "reasoning-toolkit/CARDS.md:251",
+   "measures_src": "reasoning-toolkit/CARDS.md:252",
    "measures_quote_state": "FOUND",
-   "breaks_src": "reasoning-toolkit/CARDS.md:255",
+   "breaks_src": "reasoning-toolkit/CARDS.md:256",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {
@@ -2286,9 +2292,9 @@
    "assumes": "the reader applies the method by hand; status line in CARDS.md",
    "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
    "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
-   "measures_src": "reasoning-toolkit/CARDS.md:277",
+   "measures_src": "reasoning-toolkit/CARDS.md:278",
    "measures_quote_state": "FOUND",
-   "breaks_src": "reasoning-toolkit/CARDS.md:282",
+   "breaks_src": "reasoning-toolkit/CARDS.md:283",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {
@@ -2320,9 +2326,9 @@
    "assumes": "the reader applies the method by hand; status line in CARDS.md",
    "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
    "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
-   "measures_src": "reasoning-toolkit/CARDS.md:299",
+   "measures_src": "reasoning-toolkit/CARDS.md:300",
    "measures_quote_state": "FOUND",
-   "breaks_src": "reasoning-toolkit/CARDS.md:304",
+   "breaks_src": "reasoning-toolkit/CARDS.md:305",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {
@@ -2352,9 +2358,9 @@
    "assumes": "the reader applies the method by hand; status line in CARDS.md",
    "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
    "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
-   "measures_src": "reasoning-toolkit/CARDS.md:323",
+   "measures_src": "reasoning-toolkit/CARDS.md:324",
    "measures_quote_state": "FOUND",
-   "breaks_src": "reasoning-toolkit/CARDS.md:329",
+   "breaks_src": "reasoning-toolkit/CARDS.md:330",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {
@@ -2386,9 +2392,9 @@
    "assumes": "the reader applies the method by hand; status line in CARDS.md",
    "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
    "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
-   "measures_src": "reasoning-toolkit/CARDS.md:344",
+   "measures_src": "reasoning-toolkit/CARDS.md:345",
    "measures_quote_state": "FOUND",
-   "breaks_src": "reasoning-toolkit/CARDS.md:350",
+   "breaks_src": "reasoning-toolkit/CARDS.md:351",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {
@@ -2420,9 +2426,9 @@
    "assumes": "the reader applies the method by hand; status line in CARDS.md",
    "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
    "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
-   "measures_src": "reasoning-toolkit/CARDS.md:365",
+   "measures_src": "reasoning-toolkit/CARDS.md:366",
    "measures_quote_state": "FOUND",
-   "breaks_src": "reasoning-toolkit/CARDS.md:371",
+   "breaks_src": "reasoning-toolkit/CARDS.md:372",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {
@@ -2454,9 +2460,9 @@
    "assumes": "the reader applies the method by hand; status line in CARDS.md",
    "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
    "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
-   "measures_src": "reasoning-toolkit/CARDS.md:387",
+   "measures_src": "reasoning-toolkit/CARDS.md:388",
    "measures_quote_state": "FOUND",
-   "breaks_src": "reasoning-toolkit/CARDS.md:394",
+   "breaks_src": "reasoning-toolkit/CARDS.md:395",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {
@@ -2489,9 +2495,9 @@
    "assumes": "the reader applies the method by hand; status line in CARDS.md",
    "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
    "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
-   "measures_src": "reasoning-toolkit/CARDS.md:409",
+   "measures_src": "reasoning-toolkit/CARDS.md:410",
    "measures_quote_state": "FOUND",
-   "breaks_src": "reasoning-toolkit/CARDS.md:414",
+   "breaks_src": "reasoning-toolkit/CARDS.md:415",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {
@@ -2525,9 +2531,9 @@
    "assumes": "the reader applies the method by hand; status line in CARDS.md",
    "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
    "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
-   "measures_src": "reasoning-toolkit/CARDS.md:432",
+   "measures_src": "reasoning-toolkit/CARDS.md:433",
    "measures_quote_state": "FOUND",
-   "breaks_src": "reasoning-toolkit/CARDS.md:442",
+   "breaks_src": "reasoning-toolkit/CARDS.md:443",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {
@@ -2601,6 +2607,44 @@
    "measures_quote_state": "FOUND",
    "breaks_src": "load-withheld/README.md:49",
    "breaks_quote_state": "FOUND",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
+   }
+  },
+  {
+   "need": "observer",
+   "also": [
+    "fill-source"
+   ],
+   "repo": "Simulators",
+   "path": "reasoning-toolkit/CARDS.md#17-ai-sensor-index-spin-up-card",
+   "name": "card-ai-sensor-index",
+   "aliases": [
+    "model notices its own rut",
+    "self-monitoring signals for an AI",
+    "loop / friction / void slot",
+    "whose frame do these words come from",
+    "first read drifts as context loads",
+    "user correction as a sensor",
+    "urge to warn without dose",
+    "reply longer than needed"
+   ],
+   "measures_file": "reasoning-toolkit/CARDS.md",
+   "measures": "# Each sensor: action -> signal -> reading. Gradient = intensity, not on/off.",
+   "breaks_file": null,
+   "breaks_when": "NO_STATED_LIMITS",
+   "check": null,
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "named signals; gradient stated for 4 of 8 primaries",
+   "assumes": "the signal is noticed and named (by the user per calibration.method)",
+   "chain": "reads: action -> signal -> reading pairs. ignores: whether a signal fired unnoticed",
+   "a1_status": "A1_READING (model reading of the card, 2026-11-14; not verbatim)",
+   "measures_src": "reasoning-toolkit/CARDS.md:468",
+   "measures_quote_state": "FOUND",
+   "breaks_src": null,
+   "breaks_quote_state": "NO_QUOTE",
    "status": "NOT_RUN",
    "status_detail": {
     "status": "NOT_RUN",
