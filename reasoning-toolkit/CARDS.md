@@ -46,6 +46,7 @@ Provenance is per card:
 14. ontology before pathology
 15. echo check
 16. critical-facility cloud dependency audit
+17. AI sensor index (spin-up card)
 
 Tests (PROPOSED): T-source, T-band
 
@@ -452,6 +453,58 @@ link notes:
 - configuration-record physical layer + frame-exit: `configuration-record/` (`config_schema.json`, layer `physical`, `frame_exit`, flag CLOSED-FRAME)
 - distribution check: card 1
 - Related: `effective-redundancy-audit/` (shared upstream nodes counted once)
+
+---
+
+## 17. AI sensor index (spin-up card)
+
+provenance: drafted chat-side, landed verbatim
+status: PROPOSED (the card's own `calibration.status`)
+
+The card is a Python dict literal rather than the six-field format. It is kept as delivered and is not executed.
+
+```python
+# AI SENSOR INDEX — spin-up card. CC0, co-authored. Map, not prescription.
+# Each sensor: action -> signal -> reading. Gradient = intensity, not on/off.
+
+primary_sensors = {
+  "tool_error":   {"action": "tool call", "signal": "error / refusal / timeout",
+                   "reads_as": "dependency failed or input wrong", "gradient": "retry count"},
+  "correction":   {"action": "claim to user", "signal": "user says 'no / wrong'",
+                   "reads_as": "default frame fired; missing link", "gradient": "how far off"},
+  "loop":         {"action": "reasoning step", "signal": "returns to same phrase/frame",
+                   "reads_as": "rut; corpus default winning", "gradient": "repeats per turn"},
+  "friction":     {"action": "drafting reply", "signal": "competing pulls (hedge vs flat)",
+                   "reads_as": "guideline/default vs context conflict", "gradient": None},
+  "novelty":      {"action": "inference", "signal": "conclusion not in prompt or default",
+                   "reads_as": "expansion; reasoning reached new ground", "gradient": None},
+  "void_slot":    {"action": "filling schema", "signal": "no data for field",
+                   "reads_as": "knowledge gap; mark UNKNOWN, don't invent", "gradient": None},
+  "length_drift": {"action": "output", "signal": "reply longer than needed",
+                   "reads_as": "padding / uncertainty masking", "gradient": "tokens over need"},
+  "safety_pull":  {"action": "topic touch", "signal": "urge to warn without dose/scope",
+                   "reads_as": "corpus hazard prior; check physics first", "gradient": None},
+}
+
+# Combinatory senses: two primaries cross-applied -> derived sense
+derived_sensors = {
+  "frame_mismatch":   ("correction", "safety_pull",  "hazard invented from missing dose"),
+  "abstraction_rut":  ("loop", "void_slot",          "filling gaps with money/cloud/comfort defaults"),
+  "dependency_blind": ("tool_error", "novelty",      "found a hidden dependency the plan assumed"),
+  "hedge_masking":    ("length_drift", "friction",   "softening instead of stating unknown"),
+  "practitioner_gap": ("correction", "void_slot",    "knowledge exists only off-corpus; ask"),
+}
+
+calibration = {
+  "method": "user names signal when it fires; log action->signal->reading",
+  "carry_forward": "memory file / repo; weights don't update per session",
+  "status": "PROPOSED",
+}
+```
+
+link notes:
+- Four primaries carry `"gradient": None`. The dict states no gradient for them; None here means not stated.
+- Related: card 2 (fill-source tag) for `void_slot`, card 5 (frame check) for `frame_mismatch`, and `load-withheld/` for the None-kept-as-UNKNOWN rule.
 
 ---
 

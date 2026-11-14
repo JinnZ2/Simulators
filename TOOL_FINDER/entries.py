@@ -667,3 +667,18 @@ for _e in E:
         _e["precision"], _e["assumes"], _e["chain"] = A1["load-withheld"]
         _e["a1_status"] = "A1_READING (model reading of the module, 2026-11-14; not verbatim)"
 SYMPTOMS.append(("a shared service looks lightly used because people with their own tools and skills never call it", ["load-withheld"]))
+
+# ---- reasoning-toolkit card 17 (2026-11-14)
+add("observer", "Simulators", "reasoning-toolkit/CARDS.md#17-ai-sensor-index-spin-up-card", "card-ai-sensor-index",
+    ["model notices its own rut", "self-monitoring signals for an AI", "loop / friction / void slot",
+     "user correction as a sensor", "urge to warn without dose", "reply longer than needed"],
+    "reasoning-toolkit/CARDS.md", "# Each sensor: action -> signal -> reading. Gradient = intensity, not on/off.",
+    None, NB, None, also=["fill-source"])
+A1["card-ai-sensor-index"] = ("named signals; gradient stated for 4 of 8 primaries",
+                              "the signal is noticed and named (by the user per calibration.method)",
+                              "reads: action -> signal -> reading pairs. ignores: whether a signal fired unnoticed")
+for _e in E:
+    if _e["name"] == "card-ai-sensor-index":
+        _e["precision"], _e["assumes"], _e["chain"] = A1["card-ai-sensor-index"]
+        _e["a1_status"] = "A1_READING (model reading of the card, 2026-11-14; not verbatim)"
+SYMPTOMS.append(("the model keeps returning to the same default frame and nobody has named the signal", ["card-ai-sensor-index"]))
