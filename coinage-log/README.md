@@ -42,6 +42,18 @@ naming gap as the unasked question.
     extractor matched File B's prose *mention* of the heading before
     the heading itself. It is now anchored at line start and pinned.
 
+- **`NO_ENGLISH_WORD_INDEX.md`**: one table of every term and slot in the
+  log, 51 rows. Columns: status, one-line meaning, nearest English
+  neighbors, why the neighbor misleads, and an NSM paraphrase (PROPOSED,
+  new rows only). Neighbors and misleads come only from the entries
+  themselves. Rows whose entry states no status read
+  `unnamed_here (log premise)`.
+- **2026-11-14:** seven slots were appended to
+  `source/coinage-log.full.md` under `## NEW ENTRIES 2026-11-14`, as
+  chunk 8 in `MISSING_SOURCE.md`. `check_coinage.py` pins the new size
+  and hash. It also checks that the first 47474 bytes still hash to the
+  2026-10-11 delivery.
+
 ## Why it is a register and not a finding
 
 The entry does not claim the word is missing; it claims the referent
