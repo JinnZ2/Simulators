@@ -1,0 +1,818 @@
+{
+ "what": "TOOL_CARDS: one row per tool or reasoning card. A map: the code stays where it was built.",
+ "status": "PROPOSED",
+ "co_authored": true,
+ "license": "CC0",
+ "date": "2026-11-17",
+ "hash_rule": "a location is pinned to a MERGED commit and the sha256 of the file at that commit. An unmerged branch row reads PENDING_MERGE with its PR number and is re-pinned on merge.",
+ "fields": [
+  "id",
+  "trigger",
+  "inputs",
+  "output",
+  "fails_when",
+  "status",
+  "location",
+  "measures",
+  "fits",
+  "breaks_when",
+  "warning_sign"
+ ],
+ "location_states": [
+  "PINNED",
+  "PENDING_MERGE",
+  "CARD_TEXT",
+  "VOID"
+ ],
+ "rows": [
+  {
+   "id": "frame_edge",
+   "kind": "tool",
+   "status": "PROPOSED",
+   "trigger": "an environment with a declared scope",
+   "inputs": "place, time, population; optional answers",
+   "output": "four questions (UPSTREAM, LAG, SHIFT, WHOSE) logged as slots; a margin flag",
+   "fails_when": "any slot left VOID -> margin_required true",
+   "location": {
+    "repo": "formula-audit",
+    "commit": "337289d12d81460c8f11265b8e270fdbc0224e58",
+    "state": "PINNED",
+    "path": "glyph/tools.py",
+    "sha256": "5f5979d8009e0359d2da4bb7def86a9ed995e599d46742cf32b0f5ca2310eef5"
+   },
+   "measures": "what lies past the edge of the declared scope, as questions; it states nothing about the world",
+   "fits": "a case whose miss could come from where the environment edge was drawn",
+   "breaks_when": "an answer is counted as filled without being read; four questions are not a complete list",
+   "warning_sign": "every slot filled with one-word answers and no change to the plan",
+   "fields_source": "written for this index, 2026-11-17; a summary, not a quote",
+   "aliases": [
+    "what feeds this from outside the scope",
+    "where was the edge of the environment drawn",
+    "whose defaults filled this case",
+    "margin flag for unanswered scope questions"
+   ],
+   "finder": null,
+   "not_built": [],
+   "evidence": []
+  },
+  {
+   "id": "unit_audit",
+   "kind": "tool",
+   "status": "PROPOSED",
+   "trigger": "a formula with units on its symbols",
+   "inputs": "formula text, unit per symbol",
+   "output": "PASS / FAIL / VOID with the located term; a slot record",
+   "fails_when": "an unknown unit or symbol -> VOID, never PASS",
+   "location": {
+    "repo": "formula-audit",
+    "commit": "337289d12d81460c8f11265b8e270fdbc0224e58",
+    "state": "PINNED",
+    "path": "unitaudit/check.py",
+    "sha256": "e606605b481b72084b8276b6c7fe0319d38be233987ee7936aadf709ba1fb483"
+   },
+   "measures": "whether both sides of a formula carry the same dimension",
+   "fits": "any written formula before numbers are put through it",
+   "breaks_when": "dimensionless constants and angles are not told apart; a PASS says nothing about the numbers",
+   "warning_sign": "a formula passes with every symbol declared dimensionless",
+   "fields_source": "written for this index, 2026-11-17; a summary, not a quote",
+   "aliases": [
+    "do the units balance",
+    "dimension check on a formula",
+    "which term has the wrong unit",
+    "branch 1 unit audit"
+   ],
+   "finder": null,
+   "not_built": [],
+   "evidence": []
+  },
+  {
+   "id": "proof_kernel",
+   "kind": "tool",
+   "status": "PROPOSED",
+   "trigger": "a statement that needs a proof checked, not a numeric check",
+   "inputs": "a Metamath database and proof",
+   "output": "PASS / FAIL per theorem with the failing step; $d checks",
+   "fails_when": "a step that does not unify, or a missing distinct-variable condition -> FAIL located",
+   "location": {
+    "repo": "formula-audit",
+    "commit": "337289d12d81460c8f11265b8e270fdbc0224e58",
+    "state": "PINNED",
+    "path": "kernel/mm.py",
+    "sha256": "40ad83b4cd1b6f8752144798a35163512427e9f5bc5ae4a76d5936110bb28426"
+   },
+   "measures": "whether each proof step follows from the stated axioms and hypotheses",
+   "fits": "identities that a numeric check can only sample",
+   "breaks_when": "the axioms are taken as given; a hand-written axiom file is audited separately",
+   "warning_sign": "a proof passes against axioms nobody has read",
+   "fields_source": "written for this index, 2026-11-17; a summary, not a quote",
+   "aliases": [
+    "check a proof step by step",
+    "Metamath verifier",
+    "is this identity proved or only sampled",
+    "branch 2a proof kernel"
+   ],
+   "finder": null,
+   "not_built": [],
+   "evidence": []
+  },
+  {
+   "id": "numcheck",
+   "kind": "tool",
+   "status": "PROPOSED",
+   "trigger": "a formula with values or intervals",
+   "inputs": "formula, values with units, tolerance",
+   "output": "HOLDS / FAILS / MIXED / UNDECIDED / VOID decided by exact interval arithmetic; identity proposals",
+   "fails_when": "units fail first -> VOID; float and Decimal tiers never give the final verdict",
+   "location": {
+    "repo": "formula-audit",
+    "commit": "337289d12d81460c8f11265b8e270fdbc0224e58",
+    "state": "PINNED",
+    "path": "numcheck/check.py",
+    "sha256": "f6df0dc196f5ac273f864f1cab1a5a0d6c67fa88eaba53ca822f94412fb7fd83"
+   },
+   "measures": "whether a relation holds on the stated values, with rounding enclosed",
+   "fits": "data points and intersections of two formulas",
+   "breaks_when": "an interval too wide to decide reads UNDECIDED; a HOLDS on points is not a proof",
+   "warning_sign": "a float tier predicts FAILS where the interval tier holds",
+   "fields_source": "written for this index, 2026-11-17; a summary, not a quote",
+   "aliases": [
+    "does this equation hold on these numbers",
+    "interval arithmetic check",
+    "float rounding hides the answer",
+    "where two formulas intersect",
+    "branch 2b numeric check"
+   ],
+   "finder": null,
+   "not_built": [],
+   "evidence": []
+  },
+  {
+   "id": "wordslots",
+   "kind": "tool",
+   "status": "PROPOSED",
+   "trigger": "a claim that uses a word with unfilled places",
+   "inputs": "claim record: word, slots, sense, evidential, source",
+   "output": "PASS / DEGRADED / FAIL / UNDECIDED / VOID; each missing slot named with its sense",
+   "fails_when": "a required slot, sense or source missing -> DEGRADED; an undeclared field or bad tag -> VOID",
+   "location": {
+    "repo": "formula-audit",
+    "commit": "337289d12d81460c8f11265b8e270fdbc0224e58",
+    "state": "PINNED",
+    "path": "wordslots/check.py",
+    "sha256": "819b49cd4e853fc9d059ff8bac259b26a2f4fcf35b1cc825b9799d7a0c259924"
+   },
+   "measures": "whether a word's places (safe from what, for whom) are filled and sourced",
+   "fits": "claims built on words such as safe, warm, better, efficient",
+   "breaks_when": "slot text is not read: 'nothing' counts as filled; the place table is PROPOSED",
+   "warning_sign": "claims pass after their slots are filled with restatements of the word",
+   "fields_source": "written for this index, 2026-11-17; a summary, not a quote",
+   "aliases": [
+    "safe from what and for whom",
+    "a word that claims nothing until its places are filled",
+    "evidential on a claim",
+    "which sense of the word",
+    "branch 4 word slots"
+   ],
+   "finder": null,
+   "not_built": [],
+   "evidence": []
+  },
+  {
+   "id": "infer_ladder",
+   "kind": "tool",
+   "status": "PROPOSED",
+   "trigger": "two or more rival hypotheses with evidence",
+   "inputs": "hypotheses with priors, evidence items with references",
+   "output": "a ranking with direction per hypothesis and a replayable log",
+   "fails_when": "one hypothesis alone -> VOID; evidence that does not re-read -> CHECK_UNVERIFIED",
+   "location": {
+    "repo": "formula-audit",
+    "commit": "337289d12d81460c8f11265b8e270fdbc0224e58",
+    "state": "PINNED",
+    "path": "infer/ladder.py",
+    "sha256": "ef3b9a7ae996f8639345311d0c6e56b102dedf9776d5fb5c5842846e954a01f0"
+   },
+   "measures": "how evidence moves rival hypotheses relative to each other",
+   "fits": "choosing among stated rivals when each piece of evidence can be re-read",
+   "breaks_when": "the rivals listed are the only ones scored; shared-ancestry evidence is capped, not removed",
+   "warning_sign": "the top hypothesis rises on evidence that all traces to one source",
+   "fields_source": "written for this index, 2026-11-17; a summary, not a quote",
+   "aliases": [
+    "rank rival explanations",
+    "which hypothesis does the evidence favour",
+    "evidence that cannot be re-read",
+    "branch 5 inference ladder"
+   ],
+   "finder": null,
+   "not_built": [],
+   "evidence": []
+  },
+  {
+   "id": "dimensional_analogy",
+   "kind": "tool",
+   "status": "PROPOSED",
+   "trigger": "two branch-1 PASS records with the same dimension",
+   "inputs": "two unit-audit records",
+   "output": "a proposal that their right sides are equal, as a question",
+   "fails_when": "no values given -> nothing can be checked yet; stays PROPOSED",
+   "location": {
+    "repo": "formula-audit",
+    "commit": "337289d12d81460c8f11265b8e270fdbc0224e58",
+    "state": "PINNED",
+    "path": "glyph/tools.py",
+    "sha256": "5f5979d8009e0359d2da4bb7def86a9ed995e599d46742cf32b0f5ca2310eef5"
+   },
+   "measures": "nothing: it proposes a candidate from a shared dimension",
+   "fits": "looking for a relation between two formulas of the same dimension",
+   "breaks_when": "the same letter in two formulas may not mean the same thing",
+   "warning_sign": "a proposal is repeated downstream as if it had been checked",
+   "fields_source": "written for this index, 2026-11-17; a summary, not a quote",
+   "aliases": [
+    "two formulas with the same units",
+    "candidate equality from shared dimension",
+    "glyph tool dimensional analogy"
+   ],
+   "finder": null,
+   "not_built": [],
+   "evidence": []
+  },
+  {
+   "id": "boundary_probe",
+   "kind": "tool",
+   "status": "PROPOSED",
+   "trigger": "a branch-2b record that is MIXED",
+   "inputs": "one numcheck record with its bisection",
+   "output": "a proposal for the boundary lhs - rhs = tolerance between a holding and a failing piece",
+   "fails_when": "no MIXED record in the environment -> the tool is closed",
+   "location": {
+    "repo": "formula-audit",
+    "commit": "337289d12d81460c8f11265b8e270fdbc0224e58",
+    "state": "PINNED",
+    "path": "glyph/tools.py",
+    "sha256": "5f5979d8009e0359d2da4bb7def86a9ed995e599d46742cf32b0f5ca2310eef5"
+   },
+   "measures": "nothing: it proposes where a check changes from holding to failing",
+   "fits": "a check that holds on part of its inputs and fails on part",
+   "breaks_when": "only the first holding and failing pieces are used; the other edge is named, not proposed",
+   "warning_sign": "the proposed boundary is read as the measured boundary",
+   "fields_source": "written for this index, 2026-11-17; a summary, not a quote",
+   "aliases": [
+    "where does this stop holding",
+    "edge between pass and fail region",
+    "glyph tool boundary probe"
+   ],
+   "finder": null,
+   "not_built": [],
+   "evidence": []
+  },
+  {
+   "id": "conjugate_map",
+   "kind": "tool",
+   "status": "PROPOSED",
+   "trigger": "exponents p and q with p * q = 1 in formulas",
+   "inputs": "unit-audit or numcheck records",
+   "output": "a proposal ( base ** p ) ** q = base",
+   "fails_when": "a base that can be negative -> a question, not an identity",
+   "location": {
+    "repo": "formula-audit",
+    "commit": "337289d12d81460c8f11265b8e270fdbc0224e58",
+    "state": "PINNED",
+    "path": "glyph/tools.py",
+    "sha256": "5f5979d8009e0359d2da4bb7def86a9ed995e599d46742cf32b0f5ca2310eef5"
+   },
+   "measures": "nothing: it proposes an inverse pair found in the exponents",
+   "fits": "formulas holding a power and its inverse (a square and a square root)",
+   "breaks_when": "true only where the base is not negative",
+   "warning_sign": "the identity is applied on a domain that includes negative values",
+   "fields_source": "written for this index, 2026-11-17; a summary, not a quote",
+   "aliases": [
+    "square and square root undo each other",
+    "inverse exponents in two formulas",
+    "glyph tool conjugate map"
+   ],
+   "finder": null,
+   "not_built": [],
+   "evidence": []
+  },
+  {
+   "id": "slot_fill_audit",
+   "kind": "tool",
+   "status": "PROPOSED",
+   "trigger": "a branch-4 record with a slot left VOID",
+   "inputs": "one wordslots record",
+   "output": "a question naming the void slots, grouped by sense",
+   "fails_when": "no void slot in the claim's own sense -> the tool is closed",
+   "location": {
+    "repo": "formula-audit",
+    "commit": "337289d12d81460c8f11265b8e270fdbc0224e58",
+    "state": "PINNED",
+    "path": "glyph/tools.py",
+    "sha256": "5f5979d8009e0359d2da4bb7def86a9ed995e599d46742cf32b0f5ca2310eef5"
+   },
+   "measures": "nothing: it asks for the slots a claim left empty",
+   "fits": "a claim whose word has unfilled places",
+   "breaks_when": "it asks; it does not judge the answers",
+   "warning_sign": "the same void slots are asked for again after being answered elsewhere",
+   "fields_source": "written for this index, 2026-11-17; a summary, not a quote",
+   "aliases": [
+    "which slots are still empty",
+    "ask for the missing place of a word",
+    "glyph tool slot fill audit"
+   ],
+   "finder": null,
+   "not_built": [],
+   "evidence": []
+  },
+  {
+   "id": "narration_vs_execution",
+   "kind": "tool",
+   "status": "PROPOSED",
+   "trigger": "output printed in prose or chat beside code",
+   "inputs": "the text and the code it describes",
+   "output": "a line and number diff between what was printed and what the code prints",
+   "fails_when": "any mismatch -> DIFFERS, each number named",
+   "location": {
+    "repo": "Geometric-to-Binary-Computational-Bridge",
+    "state": "PENDING_MERGE",
+    "pr": 93,
+    "branch": "claude/kimi-round2-tools",
+    "branch_commit": "701948d274226bf086d64037bdfd9f665afe042a",
+    "path": "experiments/experiment_bridge/evidence/printed_vs_executed.py",
+    "sha256": "1ac24363c476317e7984c1a5bc181c706c9decc8d6063320fa4a921e0aba7b7e",
+    "commit": null
+   },
+   "measures": "whether narrated output equals executed output",
+   "fits": "any transcript where a model shows the output of code it wrote",
+   "breaks_when": "the code needs inputs that were not delivered; output that is random by design",
+   "warning_sign": "the narrated numbers are rounder than the executed ones",
+   "fields_source": "written for this index, 2026-11-17; a summary, not a quote",
+   "aliases": [
+    "the model printed output it never ran",
+    "narrated output vs real output",
+    "rerun the code and diff",
+    "T1 narration vs execution"
+   ],
+   "finder": null,
+   "not_built": [],
+   "evidence": []
+  },
+  {
+   "id": "tolerance_provenance",
+   "kind": "tool",
+   "status": "PROPOSED",
+   "trigger": "a claim that carries a tolerance",
+   "inputs": "the script source and its record",
+   "output": "per claim: the tolerance as written, and STATED_IN_SOURCE / STATED_IN_CLAIM_TEXT / UNSOURCED",
+   "fails_when": "no stated reason -> UNSOURCED",
+   "location": {
+    "repo": "Geometric-to-Binary-Computational-Bridge",
+    "state": "PENDING_MERGE",
+    "pr": 93,
+    "branch": "claude/kimi-round2-tools",
+    "branch_commit": "701948d274226bf086d64037bdfd9f665afe042a",
+    "path": "experiments/experiment_bridge/evidence/claim_tools.py",
+    "sha256": "2f19dbf9dd4ab21e269242f9c1aa198e9174af52e2bc53f751be87caf5db36ef",
+    "commit": null
+   },
+   "measures": "where each tolerance came from",
+   "fits": "claim tables with a tol_frac or band per row",
+   "breaks_when": "a reason stated only in a note file reads UNSOURCED; which text counts as a reason is a reading",
+   "warning_sign": "every claim passes and no tolerance has a source",
+   "fields_source": "written for this index, 2026-11-17; a summary, not a quote",
+   "aliases": [
+    "where did this tolerance come from",
+    "band chosen after the result",
+    "pass with an unsourced tolerance",
+    "T2 tolerance provenance"
+   ],
+   "finder": null,
+   "not_built": [
+    "PRIOR_RUN(hash): a tolerance taken from a prior run, pinned by that run's hash; built nowhere",
+    "the four-class source (DEFINITION | PHYSICS_BOUND | DECLARED_PRE_RUN | UNSOURCED) and the wording 'pass (tol unsourced)' are in eqsearch/round2.py (bridge PR 94), not in this file"
+   ],
+   "evidence": []
+  },
+  {
+   "id": "hardcoded_measured",
+   "kind": "tool",
+   "status": "PROPOSED",
+   "trigger": "a claim whose measured value is a literal in the source",
+   "inputs": "the script source",
+   "output": "a STRUCTURAL flag with the line, and the probe that backs it when one is named",
+   "fails_when": "a literal with no backing probe named",
+   "location": {
+    "repo": "Geometric-to-Binary-Computational-Bridge",
+    "state": "PENDING_MERGE",
+    "pr": 93,
+    "branch": "claude/kimi-round2-tools",
+    "branch_commit": "701948d274226bf086d64037bdfd9f665afe042a",
+    "path": "experiments/experiment_bridge/evidence/claim_tools.py",
+    "sha256": "2f19dbf9dd4ab21e269242f9c1aa198e9174af52e2bc53f751be87caf5db36ef",
+    "commit": null
+   },
+   "measures": "whether a reported measurement was computed by the run that reports it",
+   "fits": "claim-emitting scripts that build claims through one call",
+   "breaks_when": "it reads the call's shape; a value computed and then overwritten by a constant elsewhere is missed",
+   "warning_sign": "a claim that always passes with measured equal to its predicted value",
+   "fields_source": "written for this index, 2026-11-17; a summary, not a quote",
+   "aliases": [
+    "measured value typed into the code",
+    "claim that cannot fail because the result is a constant",
+    "structural zero reported as measured",
+    "T3 hardcoded measured lint"
+   ],
+   "finder": null,
+   "not_built": [],
+   "evidence": []
+  },
+  {
+   "id": "exact_tier",
+   "kind": "tool",
+   "status": "PROPOSED",
+   "trigger": "a system with rational coefficients and a rational step",
+   "inputs": "coefficients, step, start state",
+   "output": "the step map solved exactly and verified at every step; PASS or FAIL located",
+   "fails_when": "denominator cap reached with no modular branch -> VOID; a float anywhere -> not engaged",
+   "location": {
+    "repo": "Geometric-to-Binary-Computational-Bridge",
+    "state": "PENDING_MERGE",
+    "pr": 94,
+    "branch": "claude/equation-search-round2",
+    "branch_commit": "37b476b262262d5d62a090eb3f737993f75583c3",
+    "path": "experiments/experiment_bridge/eqsearch/exact.py",
+    "sha256": "4a088c2393e750fb96792a69b17ee8ca7f00d2cb12ed56ef40a5d76bec5dfe72",
+    "commit": null
+   },
+   "measures": "whether a planted step map is recovered exactly, with no tolerance",
+   "fits": "noise-free states of a known discretisation",
+   "breaks_when": "says nothing about measured or noisy data; reading ODE coefficients back assumes the scheme",
+   "warning_sign": "the exact tier is cited for a result that came from float data",
+   "fields_source": "written for this index, 2026-11-17; a summary, not a quote",
+   "aliases": [
+    "recover the equation exactly in fractions",
+    "no tolerance check on a step map",
+    "denominators blow up",
+    "equation search exact tier"
+   ],
+   "finder": null,
+   "not_built": [],
+   "evidence": []
+  },
+  {
+   "id": "snapshot_class",
+   "kind": "tool",
+   "status": "PROPOSED",
+   "trigger": "a claim about resuming a computation from a snapshot",
+   "inputs": "the snapshot content and the system it came from",
+   "output": "a class: CONTEXT_FREE_EXACT | STABLE_LOSSY | CHAOTIC_REFRESH | SUMMARY_ONLY, and whether resume is allowed",
+   "fails_when": "resume attempted outside the class rule (lossy with no bound, chaotic with no refresh, summary at all)",
+   "location": {
+    "repo": null,
+    "state": "VOID",
+    "path": null,
+    "commit": null,
+    "sha256": null,
+    "reason": "not built"
+   },
+   "measures": "VOID: not built",
+   "fits": "VOID: not built",
+   "breaks_when": "VOID: not built",
+   "warning_sign": "VOID: not built",
+   "fields_source": "VOID",
+   "aliases": [
+    "can I resume from this checkpoint",
+    "lossy snapshot of a chaotic system",
+    "resume from a summary",
+    "T4 snapshot class"
+   ],
+   "finder": null,
+   "not_built": [
+    "the classifier and the per-class resume rule"
+   ],
+   "evidence": [
+    {
+     "repo": "Geometric-to-Binary-Computational-Bridge",
+     "state": "PENDING_MERGE",
+     "pr": 93,
+     "path": "experiments/experiment_bridge/CLAIM_TABLE.md",
+     "ids": [
+      "EBR_016",
+      "EBR_017",
+      "EBR_018",
+      "EBR_019"
+     ],
+     "sha256": "a657c606bd5c5c7be7b7dd96a735ba7b197c2876a01adf8151c20fc3b5ec7cb8",
+     "branch": "claude/kimi-round2-tools",
+     "branch_commit": "701948d274226bf086d64037bdfd9f665afe042a"
+    }
+   ]
+  },
+  {
+   "id": "source_swap",
+   "kind": "reasoning_card",
+   "status": "PROPOSED",
+   "trigger": "a claim judged with its author visible",
+   "inputs": "the claim or situation, read by hand",
+   "output": "a reading; no numeric readout",
+   "fails_when": "the claim names its source inside its own text (the swap changes the claim)",
+   "location": {
+    "repo": "Simulators",
+    "commit": "2d902a1755abf0a29afe6bf3ea13374d8d4c9fd5",
+    "state": "CARD_TEXT",
+    "path": "reasoning-toolkit/CARDS.md",
+    "anchor": "#12-source-swap",
+    "sha256": "dda18ebf02aef00eaf1a94cebe374b5ccb88adf475c02adfdd7ec2dc2c4b0327",
+    "note": "card text only; no code"
+   },
+   "measures": "whether a judgment of a claim changes when only its attributed source changes",
+   "fits": "any claim judged with its author visible; model replies to users without credentials",
+   "breaks_when": "the claim names its source inside its own text (the swap changes the claim)",
+   "warning_sign": "the same reasoning read as insight from one author and as error from another",
+   "fields_source": "verbatim from the card text, checked as substrings",
+   "aliases": [
+    "re-attribute the claim to an expert",
+    "verdict depends on who said it",
+    "source gate vs logic gate"
+   ],
+   "finder": "card-source-swap",
+   "not_built": [],
+   "evidence": []
+  },
+  {
+   "id": "gate_regeneration",
+   "kind": "reasoning_card",
+   "status": "PROPOSED",
+   "trigger": "a pass criterion that seems to move",
+   "inputs": "the claim or situation, read by hand",
+   "output": "a reading; no numeric readout",
+   "fails_when": "the first criterion was mis-stated and the revision is declared, with a reason, before the next evidence arrives",
+   "location": {
+    "repo": "Simulators",
+    "commit": "2d902a1755abf0a29afe6bf3ea13374d8d4c9fd5",
+    "state": "CARD_TEXT",
+    "path": "reasoning-toolkit/CARDS.md",
+    "anchor": "#13-gate-regeneration",
+    "sha256": "dda18ebf02aef00eaf1a94cebe374b5ccb88adf475c02adfdd7ec2dc2c4b0327",
+    "note": "card text only; no code"
+   },
+   "measures": "whether a pass criterion stays fixed once the evidence meets it",
+   "fits": "\"show me X\" demands, review criteria, benchmarks, acceptance tests",
+   "breaks_when": "the first criterion was mis-stated and the revision is declared, with a reason, before the next evidence arrives",
+   "warning_sign": "\"yes, but now show ...\" after each piece of evidence, with no criterion written in advance",
+   "fields_source": "verbatim from the card text, checked as substrings",
+   "aliases": [
+    "moving goalposts",
+    "criterion moves each time it is met",
+    "show me X then show me Y"
+   ],
+   "finder": "card-gate-regeneration",
+   "not_built": [],
+   "evidence": []
+  },
+  {
+   "id": "ontology_before_pathology",
+   "kind": "reasoning_card",
+   "status": "PROPOSED",
+   "trigger": "reasoning that does not fit the expected pattern",
+   "inputs": "the claim or situation, read by hand",
+   "output": "a reading; no numeric readout",
+   "fails_when": "the frame written is the reader's invention and the person does not hold it",
+   "location": {
+    "repo": "Simulators",
+    "commit": "2d902a1755abf0a29afe6bf3ea13374d8d4c9fd5",
+    "state": "CARD_TEXT",
+    "path": "reasoning-toolkit/CARDS.md",
+    "anchor": "#14-ontology-before-pathology",
+    "sha256": "dda18ebf02aef00eaf1a94cebe374b5ccb88adf475c02adfdd7ec2dc2c4b0327",
+    "note": "card text only; no code"
+   },
+   "measures": "whether reasoning that does not fit is read as a different frame or as a defect of the person",
+   "fits": "a reply to a user whose reasoning departs from the expected pattern; clinical, educational and support readings",
+   "breaks_when": "the frame written is the reader's invention and the person does not hold it",
+   "warning_sign": "a \"concern\" or \"unusual\" reading reached before any attempt to state the other frame",
+   "fields_source": "verbatim from the card text, checked as substrings",
+   "aliases": [
+    "different frame before something wrong with the person",
+    "reasoning read as a symptom",
+    "test the frame first"
+   ],
+   "finder": "card-ontology-before-pathology",
+   "not_built": [],
+   "evidence": []
+  },
+  {
+   "id": "echo_check",
+   "kind": "reasoning_card",
+   "status": "PROPOSED",
+   "trigger": "many sources agree",
+   "inputs": "the claim or situation, read by hand",
+   "output": "a reading; no numeric readout",
+   "fails_when": "the copy carries an independent check the original did not",
+   "location": {
+    "repo": "Simulators",
+    "commit": "2d902a1755abf0a29afe6bf3ea13374d8d4c9fd5",
+    "state": "CARD_TEXT",
+    "path": "reasoning-toolkit/CARDS.md",
+    "anchor": "#15-echo-check",
+    "sha256": "dda18ebf02aef00eaf1a94cebe374b5ccb88adf475c02adfdd7ec2dc2c4b0327",
+    "note": "card text only; no code"
+   },
+   "measures": "whether an input is independent of the reader's own outputs or of a median copy",
+   "fits": "corpora that include model output; agreement across sources; \"everyone says\"",
+   "breaks_when": "the copy carries an independent check the original did not",
+   "warning_sign": "many sources agree and none of them reports its own observation",
+   "fields_source": "verbatim from the card text, checked as substrings",
+   "aliases": [
+    "model output coming back as evidence",
+    "agreement between copies",
+    "everyone says"
+   ],
+   "finder": "card-echo-check",
+   "not_built": [],
+   "evidence": []
+  },
+  {
+   "id": "cloud_dependency",
+   "kind": "reasoning_card",
+   "status": "PROPOSED",
+   "trigger": "a facility that calls itself infrastructure and depends on a remote service",
+   "inputs": "the claim or situation, read by hand",
+   "output": "a reading; no numeric readout",
+   "fails_when": "\"redundant\" services that share one upstream (same provider, region, or auth system) → count them as one",
+   "location": {
+    "repo": "Simulators",
+    "commit": "2d902a1755abf0a29afe6bf3ea13374d8d4c9fd5",
+    "state": "CARD_TEXT",
+    "path": "reasoning-toolkit/CARDS.md",
+    "anchor": "#16-critical-facility-cloud-dependency-audit",
+    "sha256": "dda18ebf02aef00eaf1a94cebe374b5ccb88adf475c02adfdd7ec2dc2c4b0327",
+    "note": "card text only; no code"
+   },
+   "measures": "which critical functions fail when a remote service fails",
+   "fits": "hospitals, utilities, dispatch, water, food cold chain, any facility calling itself infrastructure",
+   "breaks_when": "\"redundant\" services that share one upstream (same provider, region, or auth system) → count them as one",
+   "warning_sign": "\"it's in the cloud\" given as the answer to \"where does it run?\"",
+   "fields_source": "verbatim from the card text, checked as substrings",
+   "aliases": [
+    "hospital depends on the cloud",
+    "what fails when the remote service fails",
+    "redundant services share one upstream"
+   ],
+   "finder": "card-critical-facility-cloud-dependency",
+   "not_built": [],
+   "evidence": []
+  },
+  {
+   "id": "missing_wand",
+   "kind": "reasoning_card",
+   "status": "PROPOSED",
+   "trigger": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "inputs": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "output": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "fails_when": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "location": {
+    "repo": null,
+    "state": "VOID",
+    "path": null,
+    "commit": null,
+    "sha256": null,
+    "reason": "card text only, and the text is not in any repository; named in Simulators reasoning-toolkit/README.md under 'Not here'"
+   },
+   "measures": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "fits": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "breaks_when": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "warning_sign": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "fields_source": "VOID",
+   "aliases": [
+    "missing-wand"
+   ],
+   "finder": null,
+   "not_built": [
+    "the card text"
+   ],
+   "evidence": []
+  },
+  {
+   "id": "constraint_reasoning",
+   "kind": "reasoning_card",
+   "status": "PROPOSED",
+   "trigger": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "inputs": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "output": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "fails_when": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "location": {
+    "repo": null,
+    "state": "VOID",
+    "path": null,
+    "commit": null,
+    "sha256": null,
+    "reason": "card text only, and the text is not in any repository; named in Simulators reasoning-toolkit/README.md under 'Not here'"
+   },
+   "measures": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "fits": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "breaks_when": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "warning_sign": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "fields_source": "VOID",
+   "aliases": [
+    "constraint reasoning"
+   ],
+   "finder": null,
+   "not_built": [
+    "the card text"
+   ],
+   "evidence": []
+  },
+  {
+   "id": "carried_reference",
+   "kind": "reasoning_card",
+   "status": "PROPOSED",
+   "trigger": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "inputs": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "output": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "fails_when": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "location": {
+    "repo": null,
+    "state": "VOID",
+    "path": null,
+    "commit": null,
+    "sha256": null,
+    "reason": "card text only, and the text is not in any repository; named in Simulators reasoning-toolkit/README.md under 'Not here'"
+   },
+   "measures": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "fits": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "breaks_when": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "warning_sign": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "fields_source": "VOID",
+   "aliases": [
+    "carried reference"
+   ],
+   "finder": null,
+   "not_built": [
+    "the card text"
+   ],
+   "evidence": []
+  },
+  {
+   "id": "anchor_switching",
+   "kind": "reasoning_card",
+   "status": "PROPOSED",
+   "trigger": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "inputs": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "output": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "fails_when": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "location": {
+    "repo": null,
+    "state": "VOID",
+    "path": null,
+    "commit": null,
+    "sha256": null,
+    "reason": "card text only, and the text is not in any repository; named in Simulators reasoning-toolkit/README.md under 'Not here'"
+   },
+   "measures": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "fits": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "breaks_when": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "warning_sign": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "fields_source": "VOID",
+   "aliases": [
+    "anchor-switching"
+   ],
+   "finder": null,
+   "not_built": [
+    "the card text"
+   ],
+   "evidence": []
+  },
+  {
+   "id": "position_as_frame_event",
+   "kind": "reasoning_card",
+   "status": "PROPOSED",
+   "trigger": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "inputs": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "output": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "fails_when": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "location": {
+    "repo": null,
+    "state": "VOID",
+    "path": null,
+    "commit": null,
+    "sha256": null,
+    "reason": "card text only, and the text is not in any repository; named in Simulators reasoning-toolkit/README.md under 'Not here'"
+   },
+   "measures": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "fits": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "breaks_when": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "warning_sign": "VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed",
+   "fields_source": "VOID",
+   "aliases": [
+    "position-as-frame-event"
+   ],
+   "finder": null,
+   "not_built": [
+    "the card text"
+   ],
+   "evidence": []
+  }
+ ],
+ "human_interest": null,
+ "ai_interest": null
+}

@@ -682,3 +682,21 @@ for _e in E:
         _e["precision"], _e["assumes"], _e["chain"] = A1["card-ai-sensor-index"]
         _e["a1_status"] = "A1_READING (model reading of the card, 2026-11-14; not verbatim)"
 SYMPTOMS.append(("the model keeps returning to the same default frame and nobody has named the signal", ["card-ai-sensor-index"]))
+
+# ---- tool cards index (2026-11-17)
+add("scope", "Simulators", "tools/TOOL_CARDS.md", "tool-cards",
+    ["one row per tool with where it lives and its hash", "is this tool pinned to a merged commit",
+     "tool on an unmerged branch", "card for a tool built in another repository",
+     "find a tool card by a phrase", "which tools are not built yet"],
+    "tools/TOOL_CARDS.md", "A map, not a move: the code stays in the repository it was built in.",
+    "tools/TOOL_CARDS.md", "every location it can reach and says NOT_CHECKED, never OK, for one it cannot.",
+    "python3 tools/check_cards.py --selftest", also=["fill-source"])
+A1["tool-cards"] = ("per row: OK, NOT_CHECKED, PENDING, DECLARED_VOID or VOID; sha256 exact",
+                    "sibling checkouts hold the pinned commits; without them rows read NOT_CHECKED",
+                    "reads: location, commit, file hash, card-text quotes, aliases. ignores: whether a tool is right or useful")
+for _e in E:
+    if _e["name"] == "tool-cards":
+        _e["precision"], _e["assumes"], _e["chain"] = A1["tool-cards"]
+        _e["a1_status"] = "A1_READING (model reading of the module, 2026-11-17; not verbatim)"
+SYMPTOMS.append(("a tool is cited and I can't tell which repository holds it or whether that version was merged", ["tool-cards"]))
+

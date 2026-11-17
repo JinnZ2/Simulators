@@ -357,6 +357,12 @@
    "tools": [
     "card-ai-sensor-index"
    ]
+  },
+  {
+   "symptom": "a tool is cited and I can't tell which repository holds it or whether that version was merged",
+   "tools": [
+    "tool-cards"
+   ]
   }
  ],
  "needs": [
@@ -2645,6 +2651,42 @@
    "measures_quote_state": "FOUND",
    "breaks_src": null,
    "breaks_quote_state": "NO_QUOTE",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
+   }
+  },
+  {
+   "need": "scope",
+   "also": [
+    "fill-source"
+   ],
+   "repo": "Simulators",
+   "path": "tools/TOOL_CARDS.md",
+   "name": "tool-cards",
+   "aliases": [
+    "one row per tool with where it lives and its hash",
+    "is this tool pinned to a merged commit",
+    "tool on an unmerged branch",
+    "card for a tool built in another repository",
+    "find a tool card by a phrase",
+    "which tools are not built yet"
+   ],
+   "measures_file": "tools/TOOL_CARDS.md",
+   "measures": "A map, not a move: the code stays in the repository it was built in.",
+   "breaks_file": "tools/TOOL_CARDS.md",
+   "breaks_when": "every location it can reach and says NOT_CHECKED, never OK, for one it cannot.",
+   "check": "python3 tools/check_cards.py --selftest",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "per row: OK, NOT_CHECKED, PENDING, DECLARED_VOID or VOID; sha256 exact",
+   "assumes": "sibling checkouts hold the pinned commits; without them rows read NOT_CHECKED",
+   "chain": "reads: location, commit, file hash, card-text quotes, aliases. ignores: whether a tool is right or useful",
+   "a1_status": "A1_READING (model reading of the module, 2026-11-17; not verbatim)",
+   "measures_src": "tools/TOOL_CARDS.md:6",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "tools/TOOL_CARDS.md:9",
+   "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {
     "status": "NOT_RUN",

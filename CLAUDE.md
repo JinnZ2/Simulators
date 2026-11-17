@@ -384,7 +384,7 @@ last three; read in order:
 - `load-withheld/` — demand deliberately kept off shared systems (yard tools, clouds, 911, EMS, hospitals, benefits), counted as zero by use-only measurement; schema with every field optional and None kept, three take-up bins never merged, peak and average apart; four PROPOSED seed cases, C1-C4 PROPOSED; co-authored
 - `reasoning-toolkit/` — reasoning cards, markdown only (measures / fits / method / breaks / warning / link, provenance and status per card); two drafted chat-side landed verbatim, nine drafted 2026-11-13; 3 OBSERVED with a worked instance in this repo, 8 PROPOSED; indexed in TOOL_FINDER
 - `legacy/` — archived drops; `Organize.md` is the
-- `tools/` — gate-drift and term-collision checks; `narrative_check.py` (12 structural markers, structure never a verdict; moved 2026-11-02 from AI-Consciousness-Sensors, mirrored in method-layer)
+- `tools/` — gate-drift and term-collision checks; `narrative_check.py` (12 structural markers, structure never a verdict; moved 2026-11-02 from AI-Consciousness-Sensors, mirrored in method-layer); `TOOL_CARDS.json` / `TOOL_CARDS.md` + `check_cards.py` (one row per tool or reasoning card, a map: code stays where it was built, each row pinned to a merged commit + sha256 or PENDING_MERGE with a PR number; a mismatch voids the card, an unreachable commit reads NOT_CHECKED)
 
 ## Reconciliation and conventions
 

@@ -66,6 +66,7 @@ including **breaks when**, before trusting its readout.
 - a model plus tools is called the decider by its name, and nobody has written down who can see or fix the whole -> Simulators/configuration-record/
 - a shared service looks lightly used because people with their own tools and skills never call it -> Simulators/load-withheld/
 - the model keeps returning to the same default frame and nobody has named the signal -> Simulators/reasoning-toolkit/CARDS.md#17-ai-sensor-index-spin-up-card
+- a tool is cited and I can't tell which repository holds it or whether that version was merged -> Simulators/tools/TOOL_CARDS.md
 
 ## HOW TO USE
 
@@ -148,7 +149,7 @@ including **breaks when**, before trusting its readout.
 - chain: reads: inference (the reader's step). ignores: whether the card was applied correctly
 - status: NOT_RUN -- build run without --run
 
-Also serves this need: card-author-familiarity (Simulators), card-echo-check (Simulators), card-ai-sensor-index (Simulators)
+Also serves this need: card-author-familiarity (Simulators), card-echo-check (Simulators), card-ai-sensor-index (Simulators), tool-cards (Simulators)
 
 ## distribution / median / tail
 
@@ -438,6 +439,16 @@ Also serves this need: multi_substrate_calibration (Cross-Domain-Toolkit), runne
 - precision: a question set; no numeric readout
 - assumes: the reader applies the method by hand; status line in CARDS.md
 - chain: reads: inference (the reader's step). ignores: whether the card was applied correctly
+- status: NOT_RUN -- build run without --run
+
+### tool-cards  (Simulators / `tools/TOOL_CARDS.md`)
+- need: claim vs method / scope overreach
+- aliases: one row per tool with where it lives and its hash; is this tool pinned to a merged commit; tool on an unmerged branch; card for a tool built in another repository; find a tool card by a phrase; which tools are not built yet
+- measures (tools/TOOL_CARDS.md:6): "A map, not a move: the code stays in the repository it was built in."
+- breaks when (tools/TOOL_CARDS.md:9): "every location it can reach and says NOT_CHECKED, never OK, for one it cannot."
+- precision: per row: OK, NOT_CHECKED, PENDING, DECLARED_VOID or VOID; sha256 exact
+- assumes: sibling checkouts hold the pinned commits; without them rows read NOT_CHECKED
+- chain: reads: location, commit, file hash, card-text quotes, aliases. ignores: whether a tool is right or useful
 - status: NOT_RUN -- build run without --run
 
 Also serves this need: membership-probe (Simulators), configuration-record (Simulators)
