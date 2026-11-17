@@ -300,7 +300,14 @@ def selftest():
            verdict(bent(pinned, lambda r: r["location"].update(commit="f" * 40))), "NOT_CHECKED")
     expect("a short commit id is refused",
            verdict(bent(pinned, lambda r: r["location"].update(commit="2d902a1"))), "VOID")
-    pend = "exact_tier"
+    # a constructed PENDING_MERGE row: the live index may hold none once its PRs merge
+    pend = "_selftest_pending"
+    by[pend] = copy.deepcopy(by["exact_tier"])
+    by[pend]["id"] = pend
+    by[pend]["location"] = {"repo": by["exact_tier"]["location"]["repo"],
+                            "state": "PENDING_MERGE", "pr": 1, "branch": "a-branch",
+                            "branch_commit": None, "commit": None,
+                            "path": by["exact_tier"]["location"]["path"], "sha256": "0" * 64}
     expect("a PENDING_MERGE row with its PR number is PENDING", verdict(by[pend]), "PENDING")
     expect("PENDING_MERGE without a PR number voids the card",
            verdict(bent(pend, lambda r: r["location"].pop("pr"))), "VOID")

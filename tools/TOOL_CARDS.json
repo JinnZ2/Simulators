@@ -333,13 +333,13 @@
    "fails_when": "any mismatch -> DIFFERS, each number named",
    "location": {
     "repo": "Geometric-to-Binary-Computational-Bridge",
-    "state": "PENDING_MERGE",
-    "pr": 93,
-    "branch": "claude/kimi-round2-tools",
-    "branch_commit": "701948d274226bf086d64037bdfd9f665afe042a",
+    "commit": "a934bc24e576d49ca45eb93407856f3bd20e8e8f",
+    "state": "PINNED",
     "path": "experiments/experiment_bridge/evidence/printed_vs_executed.py",
     "sha256": "1ac24363c476317e7984c1a5bc181c706c9decc8d6063320fa4a921e0aba7b7e",
-    "commit": null
+    "merged_from": {
+     "pr": 93
+    }
    },
    "measures": "whether narrated output equals executed output",
    "fits": "any transcript where a model shows the output of code it wrote",
@@ -366,13 +366,13 @@
    "fails_when": "no stated reason -> UNSOURCED",
    "location": {
     "repo": "Geometric-to-Binary-Computational-Bridge",
-    "state": "PENDING_MERGE",
-    "pr": 93,
-    "branch": "claude/kimi-round2-tools",
-    "branch_commit": "701948d274226bf086d64037bdfd9f665afe042a",
+    "commit": "a934bc24e576d49ca45eb93407856f3bd20e8e8f",
+    "state": "PINNED",
     "path": "experiments/experiment_bridge/evidence/claim_tools.py",
     "sha256": "2f19dbf9dd4ab21e269242f9c1aa198e9174af52e2bc53f751be87caf5db36ef",
-    "commit": null
+    "merged_from": {
+     "pr": 93
+    }
    },
    "measures": "where each tolerance came from",
    "fits": "claim tables with a tol_frac or band per row",
@@ -402,13 +402,13 @@
    "fails_when": "a literal with no backing probe named",
    "location": {
     "repo": "Geometric-to-Binary-Computational-Bridge",
-    "state": "PENDING_MERGE",
-    "pr": 93,
-    "branch": "claude/kimi-round2-tools",
-    "branch_commit": "701948d274226bf086d64037bdfd9f665afe042a",
+    "commit": "a934bc24e576d49ca45eb93407856f3bd20e8e8f",
+    "state": "PINNED",
     "path": "experiments/experiment_bridge/evidence/claim_tools.py",
     "sha256": "2f19dbf9dd4ab21e269242f9c1aa198e9174af52e2bc53f751be87caf5db36ef",
-    "commit": null
+    "merged_from": {
+     "pr": 93
+    }
    },
    "measures": "whether a reported measurement was computed by the run that reports it",
    "fits": "claim-emitting scripts that build claims through one call",
@@ -435,13 +435,13 @@
    "fails_when": "denominator cap reached with no modular branch -> VOID; a float anywhere -> not engaged",
    "location": {
     "repo": "Geometric-to-Binary-Computational-Bridge",
-    "state": "PENDING_MERGE",
-    "pr": 94,
-    "branch": "claude/equation-search-round2",
-    "branch_commit": "37b476b262262d5d62a090eb3f737993f75583c3",
+    "commit": "a934bc24e576d49ca45eb93407856f3bd20e8e8f",
+    "state": "PINNED",
     "path": "experiments/experiment_bridge/eqsearch/exact.py",
     "sha256": "4a088c2393e750fb96792a69b17ee8ca7f00d2cb12ed56ef40a5d76bec5dfe72",
-    "commit": null
+    "merged_from": {
+     "pr": 94
+    }
    },
    "measures": "whether a planted step map is recovered exactly, with no tolerance",
    "fits": "noise-free states of a known discretisation",
@@ -492,7 +492,7 @@
    "evidence": [
     {
      "repo": "Geometric-to-Binary-Computational-Bridge",
-     "state": "PENDING_MERGE",
+     "state": "PINNED",
      "pr": 93,
      "path": "experiments/experiment_bridge/CLAIM_TABLE.md",
      "ids": [
@@ -502,8 +502,7 @@
       "EBR_019"
      ],
      "sha256": "a657c606bd5c5c7be7b7dd96a735ba7b197c2876a01adf8151c20fc3b5ec7cb8",
-     "branch": "claude/kimi-round2-tools",
-     "branch_commit": "701948d274226bf086d64037bdfd9f665afe042a"
+     "commit": "a934bc24e576d49ca45eb93407856f3bd20e8e8f"
     }
    ]
   },
