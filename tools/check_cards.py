@@ -20,7 +20,9 @@ Per row, by location state:
                  commit -> the card is VOID.
   CARD_TEXT      as PINNED, and the four card fields (measures, fits, breaks
                  when, warning sign) are literal substrings of the card text
-                 (whitespace-normalised). A field that is not -> VOID.
+                 (whitespace-normalised). A field that is not -> VOID. A field
+                 the card does not carry is written "VOID: ..." and is kept
+                 as a gap, never filled in.
   PENDING_MERGE  allowed only with a PR number; without one -> VOID. Its
                  sha256 is the file on the unmerged branch: compared when the
                  branch commit is in a checkout, never counted as pinned.
@@ -154,7 +156,9 @@ def check_row(row, finder_names):
         return out
     if state == "CARD_TEXT":
         text = norm(data.decode("utf-8", "replace"))
-        bad = [f for f in CARD_FIELDS if norm(row[f]) not in text]
+        # a field the card does not carry is declared "VOID: ..." and is not looked for
+        bad = [f for f in CARD_FIELDS
+               if not row[f].startswith("VOID:") and norm(row[f]) not in text]
         if bad:
             out["why"] = "not a literal substring of the card text: " + ", ".join(bad)
             return out
@@ -296,6 +300,13 @@ def selftest():
         expect("a card field that is not in the card text voids the card",
                verdict(bent(pinned, lambda r: r.update(measures="something the card does not say"))),
                "VOID")
+    if base == "OK":
+        expect("a field declared VOID is kept as a gap, not looked for",
+               verdict(bent(pinned, lambda r: r.update(fits="VOID: the card carries no such field"))),
+               "OK")
+        expect("a paraphrase of a card field voids the card",
+               verdict(bent(pinned, lambda r: r.update(
+                   warning_sign="the same reasoning seen as insight from one author"))), "VOID")
     expect("an unavailable commit is NOT_CHECKED, never OK",
            verdict(bent(pinned, lambda r: r["location"].update(commit="f" * 40))), "NOT_CHECKED")
     expect("a short commit id is refused",
