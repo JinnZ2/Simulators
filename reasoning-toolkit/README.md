@@ -35,14 +35,21 @@ provenance line and a status line.
 | 15 | echo check | PROPOSED | chat-side voice session, fields Claude Code, 2026-11-13 |
 | 16 | critical-facility cloud dependency audit | PROPOSED | chat-side, verbatim |
 | 17 | AI sensor index (spin-up card) | PROPOSED | chat-side, verbatim |
+| 18 | missing-wand protocol | PROPOSED | chat-side, verbatim (landed 2026-11-17) |
+| 19 | constraint reasoning | PROPOSED | chat-side, verbatim (landed 2026-11-17) |
+| 20 | carried reference / cross-site alignment | PROPOSED | chat-side, verbatim (landed 2026-11-17) |
+| 21 | anchor-switching | PROPOSED | chat-side, verbatim (landed 2026-11-17) |
+| 22 | position as frame event | PROPOSED | chat-side, verbatim (landed 2026-11-17) |
 
 Tests: T-source and T-band, both PROPOSED and not run, under `## Tests` in `CARDS.md`.
 
-## Not here
+## Landed later
 
-Five earlier cards are not in this repository: missing-wand, constraint reasoning,
-carried reference, anchor-switching and position-as-frame-event. Their text is not in
-the repository anywhere, so they were not added and not reconstructed.
+Five earlier cards were named here as absent on 2026-11-13 because their text was in no
+repository: missing-wand, constraint reasoning, carried reference, anchor-switching and
+position-as-frame-event. The operator delivered their text on 2026-11-17 and they are now
+cards 18 to 22, verbatim. Three of them do not carry all six fields of the card format; a
+field a card does not carry is left absent, not filled in.
 
 ## Index
 
