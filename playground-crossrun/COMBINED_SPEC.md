@@ -453,6 +453,14 @@ VOID or not built in combined-playground M1-M9 and needs a decision before it is
                      spiral_lossy (ratio 0.0498, as EBR_017), lorenz_lossy, counts_word. Match with
                      the measured resume outcome: C-A 3/4 (fails spiral), C-B 2/4, C-C 2/4 (both
                      fail lorenz and counts). SPLIT: spiral, lorenz, counts. Held-VOID stays
+2026-11-18  BRANCHED VOID-12 vocabulary mapping rows; decide on evidence from SPLIT rows. V-A same
+                     label, V-B definitions match under the TOOL_CARDS VERBATIM / WRAP_COLLAPSED rule,
+                     V-C same predicate + same slots; cplay/vocab_branches.py,
+                     samples/vocab_branches.txt; 8 pairs across TAF @16285cc, COMBINED_SPEC / cplay
+                     @9658b3e, formula-audit numcheck @4345de6, every definition pinned. SPLIT:
+                     GAP_INSTRUMENT_CRASH | CRASHED (V-C only), UNKNOWN | UNKNOWN and
+                     ABSENT_AT_SENSITIVITY pair (V-A only, slots differ), VOID | VOID (V-A only,
+                     predicates differ: homonym). V-B maps no pair. Held-VOID stays
 2026-11-18  GAP      rows 35-36 percolation (two families) and branching (bounded pmf + closed form):
                      families and bounds named, no algorithm stated; not built (closed by G3 below)
 2026-11-18  CHOICE   M4 closure verdict rule: verdict() raises SpecGap; six candidates built beside it,

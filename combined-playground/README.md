@@ -23,6 +23,7 @@ G1       §9c    cplay/pins.py       REUSE items 1 5 6 10 11 pinned (repo, commi
 G2       §9c    gates.py, known_answer.py  identity (VIM), En comparison, regime refusal, KA pass rule; sources NOT_CHECKED
 G5-7     §9c    cplay/harness_branches.py  VOID-7 BRANCHED: H-A source vs H-B measured power; SPLIT en_strong en_weak poisson
 G5-9     §9c    cplay/continuity_branches.py  VOID-9 BRANCHED: exact / tolerance / lineage vs measured resume; C-A 3/4
+G5-12    §9c    cplay/vocab_branches.py  VOID-12 BRANCHED: label / definition / structure on 8 pinned pairs
 ```
 
 Run: `python3 -m unittest discover -s combined-playground/tests`

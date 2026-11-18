@@ -1,0 +1,12 @@
+pair                                           V-A label  V-B defn  V-C struct  same pred  SPLIT
+GAP_INSTRUMENT_CRASH | CRASHED                 --         --        maps        yes        SPLIT
+UNKNOWN | UNKNOWN                              maps       --        --          yes        SPLIT
+ABSENT_AT_SENSITIVITY | ABSENT_AT_SENSITIVITY  maps       --        --          yes        SPLIT
+expiry_condition | ExpiryTrigger               --         --        --          yes        
+VOID | VOID                                    maps       --        --          no         SPLIT
+UNDECIDED | UNRESOLVED                         --         --        --          yes        
+HOLDS | OK                                     --         --        --          no         
+HOLDS | CLOSED_WITHIN                          --         --        --          yes        
+SPLIT (branches disagree): GAP_INSTRUMENT_CRASH | CRASHED, UNKNOWN | UNKNOWN, ABSENT_AT_SENSITIVITY | ABSENT_AT_SENSITIVITY, VOID | VOID
+predicates are declared readings; slots marked code are read from the source
+no branch picked
