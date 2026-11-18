@@ -445,6 +445,10 @@ VOID or not built in combined-playground M1-M9 and needs a decision before it is
                      samples/harness_branches.txt. SPLIT: en_strong (misses uc_linear_sum), en_weak
                      (0/5), poisson (misses critical_strict at lam = 1); g_table CIRCULAR yet 2/3.
                      Held-VOID stays until a branch survives the cases
+2026-11-18  DECIDED  VOID-7 on evidence: power = H-B (measured catch rate, the rating); H-A kept as
+                     the provenance field. Evidence round added an RSS vs linear-sum case (|d| 0.6,
+                     U 0.3 / 0.4: RSS En 1.2 FAILED, linear 0.857) and Poisson lam = 1: en_strong
+                     4/5 -> 5/5, poisson 3/4 -> 4/4, no false alarms; en_weak stays 0/5 (SPLIT)
 2026-11-18  BRANCHED VOID-9 continuity identity; decide on evidence from SPLIT rows. C-A exact state
                      hash, C-B every declared variable within tolerance (M8), C-C unbroken chain of
                      replay-verified transitions; cplay/continuity_branches.py,

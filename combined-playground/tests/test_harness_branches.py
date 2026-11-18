@@ -30,9 +30,11 @@ class HB(unittest.TestCase):
     def test_measured_weaknesses_kept_not_tuned_away(self):
         s = H.measure_power(H.get("en_strong"))
         w = H.measure_power(H.get("en_weak"))
-        self.assertEqual((s["bin_catch"], s["missed"]), ("PARTIAL", ("uc_linear_sum",)))
+        self.assertEqual((s["bin_catch"], s["missed"]), ("CATCHES_ALL", ()))        # after added cases
         self.assertEqual((w["bin_catch"], w["caught"]), ("CATCHES_NONE", 0))
-        self.assertEqual(H.measure_power(H.get("poisson"))["missed"], ("critical_strict",))
+        self.assertEqual(H.measure_power(H.get("poisson"))["missed"], ())
+        self.assertEqual(H.measure_power(H.get("poisson"), base_only=True)["missed"], ("critical_strict",))
+        self.assertEqual(H.measure_power(H.get("en_strong"), base_only=True)["missed"], ("uc_linear_sum",))
         self.assertEqual(H.measure_power(H.get("g_table"))["missed"], ("floor_out_of_u",))
 
     def test_equivalent_nulls_raise_no_false_alarm_on_good_harness(self):
@@ -54,7 +56,7 @@ class Split(unittest.TestCase):
     def test_split_rows(self):
         rows = H.table()
         split = [r["harness"] for r in rows if r["split"]]
-        self.assertEqual(split, ["en_strong", "en_weak", "poisson"])   # every KNOWN_ANSWER harness
+        self.assertEqual(split, ["en_weak"])            # after the evidence round
         circ = next(r for r in rows if r["harness"] == "g_table")
         self.assertEqual(circ["H-A"], "CIRCULAR")    # reported beside its measured power
 
@@ -65,3 +67,25 @@ class Split(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class EvidenceRound(unittest.TestCase):
+    """Added cases: RSS vs linear-sum separation, Poisson lam = 1. Before/after kept."""
+    def test_added_cases_are_hand_known(self):
+        self.assertEqual(H.ADDED["en_strong"][0].expected, "FAILED")     # RSS En 1.2, linear 0.857
+        self.assertEqual(H.ADDED["poisson"][0].inputs, (1.0,))
+
+    def test_before_after_catch_counts(self):
+        rows = {r["harness"]: r for r in H.table()}
+        self.assertEqual((rows["en_strong"]["catch_before"], rows["en_strong"]["catch"]), ((4, 5), (5, 5)))
+        self.assertEqual((rows["poisson"]["catch_before"], rows["poisson"]["catch"]), ((3, 4), (4, 4)))
+        self.assertEqual(rows["en_strong"]["power"], "CATCHES_ALL")
+        self.assertEqual(rows["poisson"]["power"], "CATCHES_ALL")
+
+    def test_provenance_field_and_power_rating(self):
+        r = next(r for r in H.table() if r["harness"] == "en_weak")
+        self.assertEqual((r["provenance"], r["power"]), ("KNOWN_ANSWER", "CATCHES_NONE"))
+
+    def test_added_cases_raise_no_false_alarm(self):
+        for name in ("en_strong", "poisson"):
+            self.assertEqual(H.measure_power(H.get(name))["false_alarms"], 0)
