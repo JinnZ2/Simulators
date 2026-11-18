@@ -1,5 +1,5 @@
 P = PHYSICAL, D = DETERMINATION, I = INSTRUMENT, CW = CLOSED_WITHIN; n_legs = 4 for F
-G source: ISO 14253-1 / JCGM 106 decision rule, recalled, not re-read (VERIFY) [NOT_CHECKED]
+G source: JCGM 106:2012 sections 3.3.9-3.3.12, 8.3.2.1, 8.3.2.3 (w = rU, r = 1), 8.3.3.1; read by Manus (browser) 2026-11-18, relayed; ISO 14253-1 via JCGM's description only [CHECKED_BY_RELAY]
 case  |m|           tol    k*sigma  floor   complete  A       B       C       D       E       F       G        G-pre        sys-check  split  G-differs
 c1    1e-07         1e-06  3e-06    1e-12   True      P:OK    P:OK    P:CW    P:CW    P:CW    P:CW    I:UNRES  I:TOL_UNRES  --         SPLIT  G
 c2    2e-06         1e-06  3e-06    1e-12   True      P:CW    P:CW    P:CW    P:FAIL  P:CW    P:FAIL  I:UNRES  I:TOL_UNRES  --         SPLIT  G

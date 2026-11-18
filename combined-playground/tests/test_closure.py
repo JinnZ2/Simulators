@@ -20,6 +20,17 @@ def _prereg(accounts=None, **kw):
     return C.Prereg(**base)
 
 
+def _same(a, b):
+    """Token defines no equality; compare the carried content."""
+    def key(x):
+        if isinstance(x, C.FieldToken):
+            return ("FT", x.field, x.token.state, x.token.reason)
+        if isinstance(x, T.Token):
+            return ("T", x.state, x.reason)
+        return ("R",) + tuple(x)
+    return key(a) == key(b)
+
+
 class Declarations(unittest.TestCase):
     def test_tolerance_required_per_account_no_default(self):
         with self.assertRaises(TypeError):
@@ -104,10 +115,19 @@ class Run(unittest.TestCase):
         self.assertEqual(res.roundoff_floor, 1e-12)
         self.assertEqual(res.state, "ACCEPTED")
 
-    def test_verdict_is_a_spec_gap(self):
+    def test_verdict_is_branch_G(self):
         p = _prereg(accounts=[_decl(sigma=1e-6, k=3)])
         res = C.run(p, p.sha256, [self._obs()])
-        with self.assertRaises(C.SpecGap):
+        self.assertTrue(_same(C.verdict(res, "N"), C.verdict_branch_G(res, res.observations[0])))
+        self.assertFalse(hasattr(C, "SpecGap"))
+
+    def test_verdict_needs_one_declared_misclosure(self):
+        p = _prereg()
+        res = C.run(p, p.sha256, [self._obs(), self._obs(m=4e-7)])
+        with self.assertRaises(C.ClosureError):
+            C.verdict(res, "N")
+        res = C.run(p, p.sha256, [])
+        with self.assertRaises(C.ClosureError):
             C.verdict(res, "N")
 
 
@@ -123,10 +143,20 @@ class Branches(unittest.TestCase):
         obs = C.Misclosure(account="N", value=m, provenance="declared ledger sum")
         return C.run(p, p.sha256, [obs]), obs
 
-    def test_verdict_still_raises(self):
-        res, obs = self._res(1e-7)
-        with self.assertRaises(C.SpecGap):
-            C.verdict(res, "N")
+    def test_verdict_equals_G_on_all_11_cases(self):
+        rows = C.branch_table()
+        self.assertEqual(len(rows), 11)
+        for cid, m, tol, sigma, k, floor, complete in C.CASES:
+            fl = T.Token("UNTESTED", "floor not measured") if floor == "TOKEN" else floor
+            dc = C.ABSENT if complete == "ABSENT" else complete
+            p = C.Prereg(accounts=[C.AccountDecl(account="N", tolerance=tol, sigma=sigma, k=k,
+                                                 basis="declared")],
+                         declared_complete=dc, registry=("constructed case",), roundoff_floor=fl)
+            obs = C.Misclosure(account="N", value=m, provenance="declared case %s" % cid)
+            res = C.run(p, p.sha256, [obs])
+            self.assertTrue(_same(C.verdict(res, "N"), C.verdict_branch_G(res, obs)), cid)
+            self.assertEqual(C._label(C.verdict(res, "N")),
+                             next(r for r in rows if r["case"] == cid)["branches"]["G"], cid)
 
     def test_misclosure_must_be_declared_input(self):
         res, _ = self._res(1e-7)
@@ -244,7 +274,7 @@ class BranchG(unittest.TestCase):
         g = C.verdict_branch_G(r, o)
         self.assertIsInstance(g, C.FieldToken)
         self.assertEqual((g.field, g.token.state), ("INSTRUMENT", "UNRESOLVED"))
-        self.assertIn("NOT_CHECKED", g.token.reason)
+        self.assertIn("CHECKED_BY_RELAY", g.token.reason)
         r, o = self._res(1.1e-5)
         self.assertEqual(C.verdict_branch_G(r, o).status, "FAILED")
         r, o = self._res(1.1e-5, complete=C.ABSENT)
@@ -291,8 +321,10 @@ class BranchG(unittest.TestCase):
             C.FieldToken("PHYSICAL", T.Token("TOLERANCE_UNRESOLVABLE", "x"))
 
     def test_source_status(self):
-        self.assertEqual(C.G_SOURCE_STATUS, "NOT_CHECKED")
-        self.assertIn("VERIFY", C.G_SOURCE)
+        self.assertEqual(C.G_SOURCE_STATUS, "CHECKED_BY_RELAY")
+        self.assertIn("JCGM 106:2012", C.G_SOURCE)
+        self.assertIn("ISO 14253-1 via JCGM's description only", C.G_SOURCE)
+        self.assertTrue(C.G_SOURCE_URL.endswith("JCGM_106_2012_E.pdf"))
 
 
 class SystematicCheck(unittest.TestCase):
