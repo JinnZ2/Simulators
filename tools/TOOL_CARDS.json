@@ -1090,6 +1090,47 @@
    "finder": "card-position-as-frame-event",
    "not_built": [],
    "evidence": []
+  },
+  {
+   "id": "rejoin_protocol",
+   "kind": "reasoning_card",
+   "status": "PROPOSED",
+   "trigger": "an old order, a repository or a channel picked up again after time apart",
+   "inputs": "VOID: no card field",
+   "output": "VOID: no card field",
+   "fails_when": "both sides changed their reference while apart (no fixed point to align against)",
+   "location": {
+    "repo": "Simulators",
+    "commit": "d1eafe8ceb6b367a6d9de0569863b68561f83194",
+    "state": "CARD_TEXT",
+    "path": "reasoning-toolkit/CARDS.md",
+    "anchor": "#23-rejoin-protocol-explorer-re-entry",
+    "sha256": "9d9b0cc970b4517498a6a5233c0db7a568a87208fc7fdfe10bd7baf6db8d197f",
+    "note": "card text only; no code"
+   },
+   "measures": "drift in protocol between members after separation",
+   "fits": "agents / sessions resuming old orders, repos after parallel work, any channel unused for a while",
+   "breaks_when": "both sides changed their reference while apart (no fixed point to align against)",
+   "warning_sign": "acting on an old order or record without checking what changed in between",
+   "cell_source": {
+    "trigger": "INDEX_WRITTEN",
+    "inputs": "VOID",
+    "output": "VOID",
+    "fails_when": "WRAP_COLLAPSED",
+    "measures": "VERBATIM",
+    "fits": "WRAP_COLLAPSED",
+    "breaks_when": "WRAP_COLLAPSED",
+    "warning_sign": "WRAP_COLLAPSED"
+   },
+   "aliases": [
+    "rejoin protocol",
+    "explorer re-entry",
+    "handshake before transfer",
+    "resuming an old order after time apart"
+   ],
+   "finder": null,
+   "not_built": [],
+   "evidence": []
   }
  ],
  "human_interest": null,
