@@ -1,9 +1,10 @@
-harness         H-A (source)   H-B (measured)  caught/faults  false alarms  missed               SPLIT
-en_strong       KNOWN_ANSWER   PARTIAL         4/5            QUIET         uc_linear_sum        SPLIT
-en_weak         KNOWN_ANSWER   CATCHES_NONE    0/5            QUIET         always_ok,strict_less,threshold_two,uc_first_only,uc_linear_sum SPLIT
-poisson         KNOWN_ANSWER   PARTIAL         3/4            QUIET         critical_strict      SPLIT
-g_table         CIRCULAR       PARTIAL         2/3            QUIET         floor_out_of_u       
-en_null_only    NULL_ONLY      NOT_MEASURABLE  --             NOT_MEASURABLE --                   
-en_plants_only  PLANTED_FAULT  NOT_MEASURABLE  --             NOT_MEASURABLE --                   
-SPLIT (H-A KNOWN_ANSWER, H-B not CATCHES_ALL): en_strong, en_weak, poisson
-no branch picked; bins are measured counts, no threshold
+DECIDED on evidence: provenance = H-A (a field), power = H-B (the rating)
+harness         provenance     power before    caught before  added  power after     caught after  false alarms  missed  SPLIT
+en_strong       KNOWN_ANSWER   PARTIAL         4/5            1      CATCHES_ALL     5/5           QUIET         --      
+en_weak         KNOWN_ANSWER   CATCHES_NONE    0/5            0      CATCHES_NONE    0/5           QUIET         always_ok,strict_less,threshold_two,uc_first_only,uc_linear_sum SPLIT
+poisson         KNOWN_ANSWER   PARTIAL         3/4            1      CATCHES_ALL     4/4           QUIET         --      
+g_table         CIRCULAR       PARTIAL         2/3            0      PARTIAL         2/3           QUIET         floor_out_of_u 
+en_null_only    NULL_ONLY      NOT_MEASURABLE  --             0      NOT_MEASURABLE  --            NOT_MEASURABLE --      
+en_plants_only  PLANTED_FAULT  NOT_MEASURABLE  --             0      NOT_MEASURABLE  --            NOT_MEASURABLE --      
+SPLIT (provenance KNOWN_ANSWER, power not CATCHES_ALL): en_weak
+bins are measured counts, no threshold

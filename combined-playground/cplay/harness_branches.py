@@ -10,6 +10,10 @@ H-B  by MEASURED POWER: plant N faults into the harness's own domain (mutants of
      There is no pre-set threshold.
 SPLIT  H-A says KNOWN_ANSWER and H-B does not measure CATCHES_ALL.
 
+DECIDED on evidence (2026-11-18): H-A is kept as the provenance field, H-B is the power rating.
+Evidence round: ADDED cases (RSS vs linear-sum separation; Poisson lam = 1) re-measured; the
+before / after counts are both reported.
+
 Scope (reading taken here): "every harness in the repo" is read as every known-answer harness the
 combined playground can run as code: en_compare, extinction_poisson and the M4 verdict (G), plus
 two constructed harnesses showing NULL_ONLY and PLANTED_FAULT. Mutants and nulls are written here
@@ -162,18 +166,31 @@ def classify_source(h):
     raise ValueError("harness %s carries no information source" % h.name)
 
 
-def failures(h, fn):
-    return [c for c in h.cases if fn(*c.inputs) != c.expected]
+# Evidence round (2026-11-18): cases added to close the gaps H-B measured. Base cases stay as they
+# were so the before / after counts are both reported.
+ADDED = {
+    "en_strong": (Case((10.0, 0.3, 10.6, 0.4), "FAILED",
+                       "hand calc: |d| 0.6; RSS U_c 0.5 -> En 1.2 FAILED; linear sum 0.7 -> 0.857 would pass"),),
+    "poisson": (Case((1.0,), 1.0, "critical: q = 1 at lam = 1 (Galton-Watson, recalled, VERIFY)"),),
+}
 
 
-def measure_power(h):
+def _cases(h, base_only=False):
+    return tuple(h.cases) + (() if base_only else ADDED.get(h.name, ()))
+
+
+def failures(h, fn, base_only=False):
+    return [c for c in _cases(h, base_only) if fn(*c.inputs) != c.expected]
+
+
+def measure_power(h, base_only=False):
     n, nn = len(h.mutants), len(h.nulls)
-    if not h.cases:
+    if not _cases(h, base_only):
         return {"n_faults": n, "caught": None, "catch": None, "catch_rate": None,
                 "bin_catch": "NOT_MEASURABLE", "n_nulls": nn, "false_alarms": None,
                 "bin_false_alarm": "NOT_MEASURABLE", "missed": ()}
-    caught = [m for m, fn in h.mutants.items() if failures(h, fn)]
-    fa = [m for m, fn in h.nulls.items() if failures(h, fn)]
+    caught = [m for m, fn in h.mutants.items() if failures(h, fn, base_only)]
+    fa = [m for m, fn in h.nulls.items() if failures(h, fn, base_only)]
     k = len(caught)
     return {"n_faults": n, "caught": k, "catch": (k, n), "catch_rate": k / n if n else None,
             "bin_catch": "CATCHES_ALL" if k == n else ("CATCHES_NONE" if k == 0 else "PARTIAL"),
@@ -184,22 +201,26 @@ def measure_power(h):
 def table():
     rows = []
     for h in HARNESSES:
-        a, b = classify_source(h), measure_power(h)
-        rows.append({"harness": h.name, "H-A": a, "H-B": b["bin_catch"], "catch": b["catch"],
+        a, b, b0 = classify_source(h), measure_power(h), measure_power(h, base_only=True)
+        rows.append({"harness": h.name, "provenance": a, "power": b["bin_catch"], "H-A": a,
+                     "H-B": b["bin_catch"], "catch": b["catch"], "catch_before": b0["catch"],
+                     "power_before": b0["bin_catch"], "added": len(ADDED.get(h.name, ())),
                      "false_alarm": b["bin_false_alarm"], "missed": b["missed"],
                      "split": a == "KNOWN_ANSWER" and b["bin_catch"] != "CATCHES_ALL"})
     return rows
 
 
 def render():
-    out = ["harness         H-A (source)   H-B (measured)  caught/faults  false alarms  missed               SPLIT"]
+    f = lambda c: "--" if c is None else "%d/%d" % c
+    out = ["DECIDED on evidence: provenance = H-A (a field), power = H-B (the rating)",
+           "harness         provenance     power before    caught before  added  power after     caught after  false alarms  missed  SPLIT"]
     for r in table():
-        out.append("%-15s %-14s %-15s %-14s %-13s %-20s %s" % (
-            r["harness"], r["H-A"], r["H-B"], "--" if r["catch"] is None else "%d/%d" % r["catch"],
-            r["false_alarm"], ",".join(r["missed"]) or "--", "SPLIT" if r["split"] else ""))
-    out.append("SPLIT (H-A KNOWN_ANSWER, H-B not CATCHES_ALL): "
+        out.append("%-15s %-14s %-15s %-14s %-6s %-15s %-13s %-13s %-7s %s" % (
+            r["harness"], r["provenance"], r["power_before"], f(r["catch_before"]), r["added"], r["power"],
+            f(r["catch"]), r["false_alarm"], ",".join(r["missed"]) or "--", "SPLIT" if r["split"] else ""))
+    out.append("SPLIT (provenance KNOWN_ANSWER, power not CATCHES_ALL): "
                + (", ".join(r["harness"] for r in table() if r["split"]) or "none"))
-    out.append("no branch picked; bins are measured counts, no threshold")
+    out.append("bins are measured counts, no threshold")
     return "\n".join(out)
 
 
