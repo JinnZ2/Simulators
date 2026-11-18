@@ -1,16 +1,20 @@
-case          C-A exact  C-B tol    C-C lineage  measured resume  SPLIT  detail
-fib_exact     SAME       SAME       SAME         SAME                    level-15 resume equals uninterrupted: True
-spiral_lossy  NOT_SAME*  SAME       SAME         SAME             SPLIT  error ratio 0.04979 vs band 3
-lorenz_lossy  NOT_SAME   SAME*      SAME*        NOT_SAME         SPLIT  error ratio 5.571e+04 vs band 100
-counts_word   NOT_SAME   SAME*      SAME*        NOT_SAME         SPLIT  counts (34, 21) fit C(55,21) = 841728816603675 words; no decoder
-* = branch disagrees with the measured resume outcome
-C-A matches the measured outcome on 3 of 4
-C-B matches the measured outcome on 2 of 4
-C-C matches the measured outcome on 2 of 4
-SPLIT (branches disagree): spiral_lossy, lorenz_lossy, counts_word
-reference: Geometric-to-Binary-Computational-Bridge@85f3302 CLAIM_TABLE.md EBR_016-019
-  fib_exact     EBR_016: 0 mismatched levels of 26; RK4 exact resume bitwise
-  spiral_lossy  EBR_017: ratio 0.0498 inside band [0, 3] (band UNSOURCED)
-  lorenz_lossy  EBR_018: ratio 16980 vs band 100, needs refresh (band UNSOURCED)
-  counts_word   EBR_019: counts (34, 21) fit 841,728,816,603,675 words; verdict void
+case            T4 class (growth, where measured)              C-A        C-B        C-C0       C-C        D          measured  SPLIT
+fib_exact       CONTEXT_FREE_EXACT                             SAME       SAME       SAME       SAME       SAME       SAME      
+spiral_lossy    STABLE_LOSSY 0.0498 at the case's own snapshot NOT_SAME*  SAME       SAME       NOT_SAME*  SAME       SAME      SPLIT
+lorenz_lossy    CHAOTIC_REFRESH 5.57e+04 at the case's own snapshot NOT_SAME   SAME*      SAME*      NOT_SAME   NOT_SAME   NOT_SAME  SPLIT
+counts_word     SUMMARY_ONLY                                   NOT_SAME   SAME*      SAME*      NOT_SAME   NOT_SAME   NOT_SAME  SPLIT
+bistable_loose  STABLE_LOSSY 0.000439 at declared reference snapshot NOT_SAME   SAME*      SAME*      NOT_SAME   SAME*      NOT_SAME  SPLIT
+* = branch disagrees with the measured resume outcome; C-C0 is the first build, kept as history
+C-A  matches on 4 of 5  (first four cases: 3 of 4)
+C-B  matches on 2 of 5  (first four cases: 2 of 4)
+C-C0 matches on 2 of 5  (first four cases: 2 of 4)
+C-C  matches on 4 of 5  (first four cases: 3 of 4)
+D    matches on 4 of 5  (first four cases: 4 of 4)
+SPLIT (branches disagree): spiral_lossy, lorenz_lossy, counts_word, bistable_loose
+D with growth measured at each case's own snapshot instead: fib_exact SAME, spiral_lossy SAME, lorenz_lossy NOT_SAME, counts_word NOT_SAME, bistable_loose NOT_SAME
+  fib_exact       level-15 resume equals uninterrupted: True; EBR_016: 0 mismatched levels of 26; RK4 exact resume bitwise
+  spiral_lossy    error ratio 0.04979 vs band 3; EBR_017: ratio 0.0498 inside band [0, 3] (band UNSOURCED)
+  lorenz_lossy    error ratio 5.571e+04 vs band 100; EBR_018: ratio 16980 vs band 100, needs refresh (band UNSOURCED)
+  counts_word     counts (34, 21) fit C(55,21) = 841728816603675 words; no decoder; EBR_019: counts (34, 21) fit 841,728,816,603,675 words; verdict void
+  bistable_loose  error ratio 32.17 vs band 3; constructed here, no EBR claim; band [0, 3] as EBR_017
 no branch picked

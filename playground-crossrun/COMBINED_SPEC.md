@@ -457,6 +457,16 @@ VOID or not built in combined-playground M1-M9 and needs a decision before it is
                      spiral_lossy (ratio 0.0498, as EBR_017), lorenz_lossy, counts_word. Match with
                      the measured resume outcome: C-A 3/4 (fails spiral), C-B 2/4, C-C 2/4 (both
                      fail lorenz and counts). SPLIT: spiral, lorenz, counts. Held-VOID stays
+2026-11-18  EVIDENCE VOID-9 round: C-C fixed to replay against the exact trajectory (first build kept
+                     as C-C0); branch D added, class-conditioned on the T4 snapshot class
+                     (CONTEXT_FREE_EXACT -> C-A, STABLE_LOSSY -> C-B, CHAOTIC_REFRESH -> exact-only,
+                     SUMMARY_ONLY -> NOT_SAME). D holds 4/4 on the original cases -> PROPOSED as the
+                     criterion. Fifth case bistable_loose (damped double well, class measured at a
+                     reference snapshot deep in one basin -> STABLE_LOSSY; snapshot near the
+                     separatrix, 1-dp rounding within tol 0.1 lands in the other basin): D FAILS it
+                     (SAME vs measured NOT_SAME). D holds 5/5 only if growth is measured at each
+                     case's own snapshot, which is the resume measurement itself. Matches: C-A 4/5,
+                     C-C 4/5, D 4/5, C-B 2/5, C-C0 2/5. VOID-9 stays; D PROPOSED, broken by case 5
 2026-11-18  BRANCHED VOID-12 vocabulary mapping rows; decide on evidence from SPLIT rows. V-A same
                      label, V-B definitions match under the TOOL_CARDS VERBATIM / WRAP_COLLAPSED rule,
                      V-C same predicate + same slots; cplay/vocab_branches.py,

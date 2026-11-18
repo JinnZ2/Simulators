@@ -22,7 +22,7 @@ G3       §8     cplay/families.py   rows 35-36: site + bond percolation (union-
 G1       §9c    cplay/pins.py       REUSE items 1 5 6 10 11 pinned (repo, commit, path, sha256, anchor); resolve() checks
 G2       §9c    gates.py, known_answer.py  identity (VIM), En comparison, regime refusal, KA pass rule; sources NOT_CHECKED
 G5-7     §9c    cplay/harness_branches.py  VOID-7 DECIDED: provenance = H-A field, power = H-B rating
-G5-9     §9c    cplay/continuity_branches.py  VOID-9 BRANCHED: exact / tolerance / lineage vs measured resume; C-A 3/4
+G5-9     §9c    cplay/continuity_branches.py  VOID-9: 5 branches x 5 cases; D (T4 class) 4/4, broken by case 5
 G5-12    §9c    cplay/vocab_branches.py  VOID-12 BRANCHED: label / definition / structure on 8 pinned pairs
 ```
 
