@@ -18,16 +18,25 @@ Per row, by location state:
   PINNED         the commit and path resolve in a checkout and the sha256
                  matches -> OK. A mismatch, or a path that is not in that
                  commit -> the card is VOID.
-  CARD_TEXT      as PINNED, and the four card fields (measures, fits, breaks
-                 when, warning sign) are literal substrings of the card text
-                 (whitespace-normalised). A field that is not -> VOID. A field
-                 the card does not carry is written "VOID: ..." and is kept
-                 as a gap, never filled in.
+  CARD_TEXT      as PINNED; the pinned file is card text, not code.
   PENDING_MERGE  allowed only with a PR number; without one -> VOID. Its
                  sha256 is the file on the unmerged branch: compared when the
                  branch commit is in a checkout, never counted as pinned.
   VOID           a declared gap (not built, or text in no repository): kept,
                  reported, and not a failure of the index. It must say why.
+
+Per cell: every text cell of a row (trigger, inputs, output, fails_when,
+measures, fits, breaks_when, warning_sign) names its source in `cell_source`:
+  VERBATIM        a literal substring of the pinned text, byte for byte.
+  WRAP_COLLAPSED  a substring once runs of whitespace (the card's line wraps)
+                  are collapsed to one space on both sides.
+  INDEX_WRITTEN   written for this index; matched against nothing, and flagged
+                  in the rendered .md.
+  VOID            the source carries no such field; the cell reads "VOID: ..."
+                  and is kept as a gap, never filled in.
+A VERBATIM or WRAP_COLLAPSED claim that does not hold against the pinned text
+voids the row. A cell with no source, an unknown source, or a "VOID: ..." text
+whose source is not VOID (or the reverse) voids the row.
 
 NOT_CHECKED is not OK. When the repository or the commit is not available
 here, the row reads NOT_CHECKED and is counted apart; nothing is assumed to
@@ -55,10 +64,13 @@ DIRS = {"Simulators": None, "formula-audit": "formula-audit",
         "Geometric-to-Binary-Computational-Bridge": "geometric-to-binary-computational-bridge"}
 FIELDS = ("id", "trigger", "inputs", "output", "fails_when", "status", "location",
           "measures", "fits", "breaks_when", "warning_sign")
-EXTRA = ("kind", "fields_source", "aliases", "finder", "not_built", "evidence")
+EXTRA = ("kind", "cell_source", "aliases", "finder", "not_built", "evidence")
 STATES = ("PINNED", "PENDING_MERGE", "CARD_TEXT", "VOID")
 STATUS = ("PROPOSED", "OBSERVED")
-CARD_FIELDS = ("measures", "fits", "breaks_when", "warning_sign")
+CELLS = ("trigger", "inputs", "output", "fails_when", "measures", "fits", "breaks_when",
+         "warning_sign")
+SOURCES = ("VERBATIM", "WRAP_COLLAPSED", "INDEX_WRITTEN", "VOID")
+QUOTED = ("VERBATIM", "WRAP_COLLAPSED")
 
 
 def repo_dir(repo):
@@ -110,6 +122,18 @@ def check_row(row, finder_names):
     if row["finder"] is not None and finder_names is not None and row["finder"] not in finder_names:
         out["why"] = "finder entry %r is not in TOOL_FINDER/finder.json" % row["finder"]
         return out
+    src = row["cell_source"]
+    if not isinstance(src, dict) or sorted(src) != sorted(CELLS):
+        out["why"] = "cell_source must name exactly: " + ", ".join(CELLS)
+        return out
+    bad = [f for f in CELLS if src[f] not in SOURCES]
+    if bad:
+        out["why"] = "cell source is not one of %s: %s" % (", ".join(SOURCES), ", ".join(bad))
+        return out
+    bad = [f for f in CELLS if (src[f] == "VOID") != row[f].startswith("VOID:")]
+    if bad:
+        out["why"] = "a VOID cell reads \"VOID: ...\" and nothing else does: " + ", ".join(bad)
+        return out
     loc = row["location"]
     state = loc.get("state") if isinstance(loc, dict) else None
     out["state"] = state
@@ -120,6 +144,10 @@ def check_row(row, finder_names):
         if not loc.get("reason"):
             out["why"] = "a VOID location must say why"
             return out
+        quoted = [f for f in CELLS if src[f] in QUOTED]
+        if quoted:
+            out["why"] = "a quoted cell with no pinned text to quote: " + ", ".join(quoted)
+            return out
         out.update(verdict="DECLARED_VOID", why=loc["reason"])
         return out
     if not (isinstance(loc.get("sha256"), str) and re.fullmatch(r"[0-9a-f]{64}", loc["sha256"])
@@ -127,6 +155,10 @@ def check_row(row, finder_names):
         out["why"] = "location needs repo, path and a full sha256"
         return out
     if state == "PENDING_MERGE":
+        quoted = [f for f in CELLS if src[f] in QUOTED]
+        if quoted:
+            out["why"] = "a quoted cell on an unmerged branch (no pinned text): " + ", ".join(quoted)
+            return out
         if not (isinstance(loc.get("pr"), int) and not isinstance(loc["pr"], bool) and loc["pr"] > 0):
             out["why"] = "PENDING_MERGE without a PR number"
             return out
@@ -154,14 +186,15 @@ def check_row(row, finder_names):
     if hashlib.sha256(data).hexdigest() != loc["sha256"]:
         out["why"] = "sha256 mismatch for %s at %s" % (loc["path"], loc["commit"][:12])
         return out
-    if state == "CARD_TEXT":
-        text = norm(data.decode("utf-8", "replace"))
-        # a field the card does not carry is declared "VOID: ..." and is not looked for
-        bad = [f for f in CARD_FIELDS
-               if not row[f].startswith("VOID:") and norm(row[f]) not in text]
-        if bad:
-            out["why"] = "not a literal substring of the card text: " + ", ".join(bad)
-            return out
+    raw = data.decode("utf-8", "replace")
+    text = norm(raw)
+    # INDEX_WRITTEN and VOID cells are not looked for; a quoted cell must be there
+    bad = ["%s (%s)" % (f, src[f]) for f in CELLS
+           if (src[f] == "VERBATIM" and row[f] not in raw)
+           or (src[f] == "WRAP_COLLAPSED" and norm(row[f]) not in text)]
+    if bad:
+        out["why"] = "claimed as quoted, not in the pinned text: " + ", ".join(bad)
+        return out
     out.update(verdict="OK", why="%s at %s" % (loc["path"], loc["commit"][:12]))
     return out
 
@@ -241,20 +274,30 @@ def render(doc):
          "Find a card by a phrase: `python3 tools/check_cards.py --find \"moving goalposts\"`.",
          "For tools by need and symptom see `TOOL_FINDER/TOOL_FINDER.md`; a card with a `finder` name",
          "points at its entry there.", "",
+         "Every text cell names its source. A cell marked `[iw]` in the index (INDEX_WRITTEN below) was",
+         "written for this index: a summary, not a quote, matched against nothing. VERBATIM and",
+         "WRAP_COLLAPSED cells are checked against the pinned text (WRAP_COLLAPSED after the card's line",
+         "wraps are collapsed to one space). A VOID cell is a field the source does not carry.", "",
          "## Index", "",
          "| id | trigger | inputs | output | fails when | status | location + sha |",
          "|---|---|---|---|---|---|---|"]
     for r in doc["rows"]:
+        src = r["cell_source"]
+
+        def marked(f):
+            return r[f] + (" [iw]" if src[f] == "INDEX_WRITTEN" else "")
         L.append("| %s |" % " | ".join(cell(x) for x in (
-            r["id"], r["trigger"], r["inputs"], r["output"], r["fails_when"], r["status"],
-            where(r["location"]))))
+            r["id"], marked("trigger"), marked("inputs"), marked("output"), marked("fails_when"),
+            r["status"], where(r["location"]))))
     L += ["", "## Cards", ""]
     for r in doc["rows"]:
         L += ["### %s" % r["id"], "",
               "- kind: %s" % r["kind"],
-              "- measures: %s" % r["measures"], "- fits: %s" % r["fits"],
-              "- breaks when: %s" % r["breaks_when"], "- warning sign: %s" % r["warning_sign"],
-              "- fields: %s" % r["fields_source"],
+              "- measures [%s]: %s" % (r["cell_source"]["measures"], r["measures"]),
+              "- fits [%s]: %s" % (r["cell_source"]["fits"], r["fits"]),
+              "- breaks when [%s]: %s" % (r["cell_source"]["breaks_when"], r["breaks_when"]),
+              "- warning sign [%s]: %s" % (r["cell_source"]["warning_sign"], r["warning_sign"]),
+              "- index cells: %s" % "; ".join("%s %s" % (f, r["cell_source"][f]) for f in CELLS[:4]),
               "- aliases: %s" % "; ".join(r["aliases"]),
               "- finder: %s" % (r["finder"] or "none")]
         for n in r["not_built"]:
@@ -297,16 +340,55 @@ def selftest():
         expect("a path that is not in the commit voids the card",
                verdict(bent(pinned, lambda r: r["location"].update(path="reasoning-toolkit/NOPE.md"))),
                "VOID")
-        expect("a card field that is not in the card text voids the card",
+        expect("a VERBATIM cell that is not in the card text voids the row",
                verdict(bent(pinned, lambda r: r.update(measures="something the card does not say"))),
                "VOID")
-    if base == "OK":
-        expect("a field declared VOID is kept as a gap, not looked for",
-               verdict(bent(pinned, lambda r: r.update(fits="VOID: the card carries no such field"))),
-               "OK")
-        expect("a paraphrase of a card field voids the card",
+        expect("a paraphrase claimed VERBATIM voids the row",
                verdict(bent(pinned, lambda r: r.update(
                    warning_sign="the same reasoning seen as insight from one author"))), "VOID")
+
+        def set_cell(f, text, source):
+            def change(r):
+                r[f] = text
+                r["cell_source"][f] = source
+            return change
+        expect("a field declared VOID is kept as a gap, not looked for",
+               verdict(bent(pinned, set_cell("fits", "VOID: the card carries no such field", "VOID"))),
+               "OK")
+        expect("an INDEX_WRITTEN cell is exempt from matching",
+               verdict(bent(pinned, set_cell("measures", "a summary the card does not say",
+                                             "INDEX_WRITTEN"))), "OK")
+        wrapped = "gate_regeneration"            # carries WRAP_COLLAPSED cells
+        f = [c for c in CELLS if by[wrapped]["cell_source"][c] == "WRAP_COLLAPSED"][0]
+        expect("a WRAP_COLLAPSED cell matches once the wraps are collapsed", verdict(by[wrapped]), "OK")
+        expect("the same cell claimed VERBATIM voids the row",
+               verdict(bent(wrapped, lambda r: r["cell_source"].update({f: "VERBATIM"}))), "VOID")
+        expect("a WRAP_COLLAPSED cell that is not in the card text voids the row",
+               verdict(bent(wrapped, lambda r: r.update({f: "something the card does not say"}))),
+               "VOID")
+    expect("VOID text under a source that is not VOID voids the row",
+           verdict(bent(pinned, lambda r: r.update(fits="VOID: the card carries no such field"))),
+           "VOID")
+    expect("a VOID source on a cell that has text voids the row",
+           verdict(bent(pinned, lambda r: r["cell_source"].update(fits="VOID"))), "VOID")
+    expect("an unknown cell source voids the row",
+           verdict(bent(pinned, lambda r: r["cell_source"].update(fits="QUOTED"))), "VOID")
+    expect("a cell with no source voids the row",
+           verdict(bent(pinned, lambda r: r["cell_source"].pop("trigger"))), "VOID")
+    expect("a row with no cell_source voids", verdict(bent(pinned, lambda r: r.pop("cell_source"))),
+           "VOID")
+    expect("row-level fields_source is gone from every row",
+           [r["id"] for r in doc["rows"] if "fields_source" in r], [])
+    expect("every reasoning card: inputs and output VOID, trigger INDEX_WRITTEN",
+           [r["id"] for r in doc["rows"] if r["kind"] == "reasoning_card" and
+            (r["cell_source"]["inputs"], r["cell_source"]["output"], r["cell_source"]["trigger"])
+            != ("VOID", "VOID", "INDEX_WRITTEN")], [])
+    expect("every code-tool row: all cells INDEX_WRITTEN",
+           [r["id"] for r in doc["rows"] if r["kind"] == "tool" and
+            set(r["cell_source"].values()) != {"INDEX_WRITTEN"}], [])
+    expect("the rendered .md flags an INDEX_WRITTEN cell and no other",
+           (by["frame_edge"]["trigger"] + " [iw] |" in render(doc),
+            by[pinned]["fails_when"] + " [iw]" in render(doc)), (True, False))
     expect("an unavailable commit is NOT_CHECKED, never OK",
            verdict(bent(pinned, lambda r: r["location"].update(commit="f" * 40))), "NOT_CHECKED")
     expect("a short commit id is refused",
@@ -331,6 +413,8 @@ def selftest():
     by[gap]["location"] = {"repo": None, "state": "VOID", "path": None, "commit": None,
                            "sha256": None, "reason": "not built"}
     expect("a declared gap is DECLARED_VOID, not a failure", verdict(by[gap]), "DECLARED_VOID")
+    expect("a quoted cell on a row with no pinned text voids the row",
+           verdict(bent(gap, lambda r: r["cell_source"].update(measures="VERBATIM"))), "VOID")
     expect("a VOID location must say why",
            verdict(bent(gap, lambda r: r["location"].pop("reason"))), "VOID")
     expect("a missing field voids the card",
