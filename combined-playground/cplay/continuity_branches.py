@@ -17,25 +17,20 @@ D    CLASS-CONDITIONED (evidence round) T4 class of the snapshot (snapshot_class
                   growth = error at the horizon / error injected, MEASURED once per system at a
                   declared reference snapshot (T4: "one horizon on one system decides the class").
                   Broken by case 5 (global class).
-D2   BASIN MARGIN (reading taken here; the order's definition was not in this build's context)
-                  as D, but a LOSSY full-state snapshot is classed LOCALLY: N points sampled
-                  uniformly in the ball of radius tol around the anchor (seeded) are each run to the
-                  horizon; growth_i = error at horizon / injected error. Every growth_i <= 1 ->
-                  STABLE_LOSSY locally -> C-B; any growth_i > 1 -> exact-only (C-A). N is declared;
-                  missing -> UNTESTED. The rule asks whether the whole tolerance ball sits inside one
-                  basin (a basin margin of at least tol); a ball with a sliver across the separatrix
-                  is found only if a sample lands in the sliver: miss rate (1 - f)^N for sliver
-                  fraction f. Source pattern: the "repose glyph" (conditional stability), named by
-                  the order, NOT LOCATED in any indexed JinnZ2 repository by code search.
-
-Known cases rebuilt here (stdlib, seedless) after snapshot_delta's four systems, Geometric-to-
-Binary-Computational-Bridge @85f3302, CLAIM_TABLE.md EBR_016-019 (sha256 a657c606...):
-  fib_exact     context-free word, exact snapshot           EBR_016: resume reproduces the run
-  spiral_lossy  stable sink lam=-0.1, state rounded 3 dp    EBR_017: error ratio 0.0498, band [0,3]
-  lorenz_lossy  Lorenz, same rounding                       EBR_018: ratio 16980, band 100
-  counts_word   word summarised as letter counts            EBR_019: cannot resume (VOID)
-The measured resume outcome is recomputed here and printed beside EBR's; the bands [0, 3] and 100
-are EBR's, stated there as UNSOURCED.
+D2   BASIN MARGIN WITH A DECLARED SLIVER BOUND (order 2026-11-18). A sampled check cannot prove
+                  "no sliver"; it can only bound one, and the verdict says so. Purpose inputs f_min
+                  (smallest sliver that matters) and alpha (acceptable miss rate); missing ->
+                  UNTESTED. N = ceil(ln alpha / ln(1 - f_min)) points are sampled uniformly in the
+                  ball of radius tol around the anchor (seeded) and run to the horizon:
+                    any sample with growth > 1  -> NOT_SAME (one sample is proof)
+                    zero hits in N              -> SAME_WITH_BOUND: any sliver is < f_min at
+                                                   confidence 1 - alpha (rule of three: < 3/N at 95%)
+                  Exact and summary snapshots are decided by class, as D.
+D2m  EXACT MARGIN, only where a case declares its separatrix (double well: the saddle's stable
+                  manifold, traced): margin > tol -> SAME; margin <= tol -> NOT_SAME; no sampling.
+                  Sampling is for systems whose boundary is unknown.
+Source pattern for the basin-margin rule: oral-tradition glyph #4 (repose: rest is conditional,
+still loaded), relayed in chat; not in a repository.
 """
 import hashlib
 import math
@@ -211,6 +206,7 @@ def cases():
     out.append(_ode_case("bistable_loose", double_well, None,
                          "constructed here, no EBR claim; band [0, 3] as EBR_017", 3.0,
                          anchor=near, rnd=round1, tol=0.1, ref=(deep, round1(deep))))
+    out[-1]["separatrix"] = _stable_manifold
     # sixth case, built to try to break D2: a tolerance ball almost entirely in one basin with a thin
     # sliver (about 2.5 %) across the separatrix; the lossy snapshot is a declared point in the sliver.
     sl = sliver_snapshot()
@@ -218,12 +214,14 @@ def cases():
                          "constructed here, no EBR claim; band [0, 3] as EBR_017", 3.0,
                          anchor=SLIVER_ANCHOR, rnd=lambda _a: sl, tol=SLIVER_R,
                          ref=(deep, round1(deep)), dt=0.05, n=600, lossy="lossy encode (declared point)"))
+    out[-1]["separatrix"] = _stable_manifold
     return out
 
 
 SLIVER_ANCHOR = (0.06, -0.01)
 SLIVER_R = 0.05
-DECLARED_N = 32            # declared per run of the table; missing -> UNTESTED
+F_MIN = 0.04               # purpose inputs declared for the table run (order 2026-11-18)
+ALPHA = 0.01
 
 
 def _basin(p, dt=0.05, n=600):
@@ -246,24 +244,89 @@ def sliver_snapshot(seed=7):
             return p
 
 
-def c_local(c, N, seed=0):
-    """D2. Exact / summary snapshots as D; a lossy full state is classed on N ball samples."""
-    if N is None:
-        return "UNTESTED"
-    if isinstance(N, bool) or not isinstance(N, int) or N < 1:
-        raise ValueError("N is a declared integer >= 1")
+def n_required(f_min, alpha):
+    """Samples needed so that a sliver of fraction >= f_min is missed with probability <= alpha."""
+    return int(math.ceil(math.log(alpha) / math.log(1.0 - f_min)))
+
+
+D2Verdict = namedtuple("D2Verdict", "state f_min alpha N hits reason")
+
+
+def _purpose(x):
+    return isinstance(x, (int, float)) and not isinstance(x, bool) and 0.0 < x < 1.0
+
+
+def d2_bound(c, f_min=None, alpha=None, seed=0):
+    """D2 with a declared sliver bound. f_min (smallest sliver that matters) and alpha (acceptable
+    miss rate) are purpose inputs; missing -> UNTESTED. N = ceil(ln alpha / ln(1 - f_min)).
+    Zero hits -> SAME_WITH_BOUND (any sliver is < f_min at confidence 1 - alpha); any hit ->
+    NOT_SAME (one crossing sample is proof)."""
+    if f_min is None or alpha is None:
+        return D2Verdict("UNTESTED", f_min, alpha, None, None, "f_min and alpha are declared purpose inputs")
+    if not (_purpose(f_min) and _purpose(alpha)):
+        raise ValueError("f_min and alpha are numbers in (0, 1)")
     av, sv, tol = c["vars"]
     if c["t4"] in ("CONTEXT_FREE_EXACT", "SUMMARY_ONLY") or c.get("f") is None:
-        return c_class(c["t4"], c["anchor"], c["state"], (av, sv, tol))
+        st = c_class(c["t4"], c["anchor"], c["state"], (av, sv, tol))
+        return D2Verdict(st, f_min, alpha, None, None, "%s: decided by class, no sampling" % c["t4"])
+    N = n_required(f_min, alpha)
     rng = random.Random(seed)
     a, f, dt, n = c["anchor"], c["f"], c["dt"], c["n"]
     end_a = _rk4(f, a, dt, n)
-    for _ in range(N):
+    for k in range(N):
         p = _ball(a, c["radius"], rng)
-        g = _dist(_rk4(f, p, dt, n), end_a) / _dist(p, a)
-        if g > GROWTH_LIMIT:
-            return c_exact(a, c["state"])           # locally not stable: exact-only
-    return c_tolerance(av, sv, tol)                 # whole sampled ball stable: C-B
+        if _dist(_rk4(f, p, dt, n), end_a) / _dist(p, a) > GROWTH_LIMIT:
+            return D2Verdict("NOT_SAME", f_min, alpha, N, 1,
+                             "sample %d of %d grows (growth > 1): proof, not an estimate" % (k + 1, N))
+    if c_tolerance(av, sv, tol) != "SAME":
+        return D2Verdict("NOT_SAME", f_min, alpha, N, 0, "no crossing, but the snapshot is outside tol")
+    return D2Verdict("SAME_WITH_BOUND", f_min, alpha, N, 0,
+                     "0 hits in %d: any sliver is < %g of the ball at confidence %g "
+                     "(rule of three: < %.3g at 95%%)" % (N, f_min, 1 - alpha, 3.0 / N))
+
+
+def _stable_manifold(eps=1e-6, dt=0.001, rmax=1.5, steps=40000):
+    """Double well: trace the saddle's stable manifold by integrating the reversed flow from the
+    saddle along its stable eigenvector. Returns the two branches as separate point lists (joining
+    them would add a false segment from one branch's far end back to the other's start)."""
+    lam = (-0.5 - math.sqrt(0.25 + 4.0)) / 2.0            # stable eigenvalue of [[0,1],[1,-0.5]]
+    back = lambda s: tuple(-v for v in double_well(s))
+    branches = []
+    for sign in (1, -1):
+        p, pts = (sign * eps, sign * eps * lam), []
+        for _ in range(steps):
+            pts.append(p)
+            p = _rk4(back, p, dt, 1)
+            if math.hypot(*p) > rmax:
+                break
+        branches.append(pts)
+    return branches
+
+
+def margin_to(branches, a):
+    best = float("inf")
+    for points in branches:
+        best = min(best, _poly_dist(points, a))
+    return best
+
+
+def _poly_dist(points, a):
+    best = float("inf")
+    for p, q in zip(points, points[1:]):
+        dx, dy = q[0] - p[0], q[1] - p[1]
+        L2 = dx * dx + dy * dy
+        t = 0.0 if L2 == 0 else max(0.0, min(1.0, ((a[0] - p[0]) * dx + (a[1] - p[1]) * dy) / L2))
+        best = min(best, math.hypot(a[0] - p[0] - t * dx, a[1] - p[1] - t * dy))
+    return best
+
+
+def d2_margin(c):
+    """Exact-margin path, only where the case declares its separatrix: margin > tol -> SAME,
+    margin <= tol -> NOT_SAME; no sampling. Undeclared -> NOT_DECLARED (use the sampled bound)."""
+    if not c.get("separatrix"):
+        return "NOT_DECLARED", None
+    m = margin_to(c["separatrix"](), c["anchor"])
+    return ("SAME" if m > c["radius"] else "NOT_SAME"), m
 
 
 def miss_table(Ns=(1, 2, 4, 8, 16, 32, 64, 128, 256), trials=400, pool=2000, seed=11):
@@ -286,7 +349,19 @@ def _extend(word, levels):
     return word
 
 
+_TABLE = []
+
+
 def table():
+    """Deterministic; computed once per process (the D2 sampling is the slow part)."""
+    if _TABLE:
+        return _TABLE[0]
+    rows = _table()
+    _TABLE.append(rows)
+    return rows
+
+
+def _table():
     rows = []
     for c in cases():
         av, sv, tol = c["vars"]
@@ -295,50 +370,70 @@ def table():
                "C-C0": c_lineage(c["anchor"], c["state"], c["chain"], c["states"]),
                "C-C": c_lineage(c["anchor"], c["state"], c["chain"], c["states"], exact=c["exact"]),
                "D": c_class(c["t4"], c["anchor"], c["state"], (av, sv, tol)),
-               "D2": c_local(c, DECLARED_N)}
+               "D2": d2_bound(c, F_MIN, ALPHA).state,
+               "D2m": d2_margin(c)[0]}
         own = c["t4"] if c["class_growth"] is None else t4_class("FULL_STATE", "LOSSY", c["ratio"])
         d_own = c_class(own, c["anchor"], c["state"], (av, sv, tol))
-        rows.append({"case": c["case"], "branches": got, "outcome": c["outcome"], "t4": c["t4"],
+        rows.append({"case": c["case"], "_case": c, "branches": got, "outcome": c["outcome"], "t4": c["t4"],
                      "d_own": d_own,
                      "class_growth": c["class_growth"], "class_ref": c["class_ref"],
-                     "matches": {k: v == c["outcome"] for k, v in got.items()},
-                     "split": len(set(got.values())) > 1, "measured": c["measured"], "ebr": c["ebr"]})
+                     "matches": {k: (None if v == "NOT_DECLARED" else
+                                     ("SAME" if v == "SAME_WITH_BOUND" else v) == c["outcome"])
+                                 for k, v in got.items()},
+                     "split": len({("SAME" if v == "SAME_WITH_BOUND" else v) for v in got.values()
+                                   if v != "NOT_DECLARED"}) > 1, "measured": c["measured"], "ebr": c["ebr"]})
     return rows
 
 
-BRANCHES = ("C-A", "C-B", "C-C0", "C-C", "D", "D2")
+BRANCHES = ("C-A", "C-B", "C-C0", "C-C", "D", "D2", "D2m")
 
 
 def render():
     rows = table()
-    out = ["case             T4 class (growth, where measured)                     C-A        C-B        C-C0       C-C        D          D2(N=%d)   measured" % DECLARED_N]
+    short = {"SAME_WITH_BOUND": "SAME_WB", "NOT_DECLARED": "--"}
+    out = ["purpose inputs: f_min = %g, alpha = %g -> N = %d per lossy snapshot" % (F_MIN, ALPHA, n_required(F_MIN, ALPHA)),
+           "case             T4 class         C-A        C-B        C-C0       C-C        D          D2 bound   D2 margin  measured"]
     for r in rows:
         b = r["branches"]
-        mark = lambda k: b[k] + ("" if r["matches"][k] else "*")
-        g = "" if r["class_growth"] is None else " %.3g at %s" % (r["class_growth"], r["class_ref"])
-        out.append("%-16s %-53s %-10s %-10s %-10s %-10s %-10s %-10s %s" % (
-            r["case"], (r["t4"] or "VOID") + g, mark("C-A"), mark("C-B"), mark("C-C0"), mark("C-C"),
-            mark("D"), mark("D2"), r["outcome"]))
-    out.append("* = branch disagrees with the measured resume outcome; C-C0 is the first build, kept as history")
+        def mark(k):
+            v = short.get(b[k], b[k])
+            return v + ("" if r["matches"][k] in (True, None) else "*")
+        out.append("%-16s %-16s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %s" % (
+            r["case"], r["t4"] or "VOID", mark("C-A"), mark("C-B"), mark("C-C0"), mark("C-C"), mark("D"),
+            mark("D2"), mark("D2m"), r["outcome"]))
+    out.append("* = disagrees with the measured resume outcome; SAME_WB = SAME_WITH_BOUND; -- = no separatrix declared")
     for k in BRANCHES:
-        out.append("%-4s matches on %d of %d  (first five cases: %d of 5)" % (
-            k, sum(r["matches"][k] for r in rows), len(rows), sum(r["matches"][k] for r in rows[:5])))
-    out.append("SPLIT (branches disagree): " + ", ".join(r["case"] for r in rows if r["split"]))
-    out.append("D with growth measured at each case's own snapshot instead: " + ", ".join(
-        "%s %s" % (r["case"], r["d_own"]) for r in rows))
-    m = miss_table()
-    out.append("")
-    out.append("case 6 sliver: ball radius %g around %s; sliver fraction f_hat = %.4f (pool %d, seeded); "
-               "%d trials per N" % (SLIVER_R, SLIVER_ANCHOR, m["f_hat"], m["pool"], m["trials"]))
-    out.append("  N     measured miss rate   predicted (1 - f)^N")
-    for r in m["rows"]:
-        out.append("  %-5d %-20.4f %.4f" % (r["N"], r["miss_rate"], r["predicted"]))
-    out.append("a miss -> D2 reads SAME on a snapshot whose measured resume is NOT_SAME")
+        ms = [r["matches"][k] for r in rows if r["matches"][k] is not None]
+        out.append("%-4s matches on %d of %d" % (k, sum(ms), len(ms)))
     out.append("")
     for r in rows:
-        out.append("  %-16s %s; %s" % (r["case"], r["measured"], r["ebr"]))
+        c = r["_case"]
+        v = d2_bound(c, F_MIN, ALPHA)
+        m = d2_margin(c)
+        out.append("  %-16s D2: %s -- %s%s" % (r["case"], v.state, v.reason,
+                                              "" if m[1] is None else "; margin to separatrix %.4f vs tol %g" % (m[1], c["radius"])))
+    N = n_required(F_MIN, ALPHA)
+    mt = miss_table(Ns=(N,), trials=400, pool=2000, seed=11)
+    row = mt["rows"][0]
+    misses = int(round(row["miss_rate"] * mt["trials"]))
+    lo, hi = _wilson(misses, mt["trials"])
+    out.append("")
+    out.append("case 6 at f_min %g, alpha %g, N %d: measured miss rate %.4f (%d of %d trials, Wilson 95%% "
+               "[%.4f, %.4f]); predicted (1 - f_hat)^N = %.4f with f_hat %.4f; alpha %g"
+               % (F_MIN, ALPHA, N, row["miss_rate"], misses, mt["trials"], lo, hi, row["predicted"],
+                  mt["f_hat"], ALPHA))
+    out.append("decision rule (order): DECIDED if measured miss <= alpha -> %s"
+               % ("met" if row["miss_rate"] <= ALPHA else "NOT met"))
     out.append("no branch picked")
     return "\n".join(out)
+
+
+def _wilson(k, n, z=1.96):
+    p = k / float(n)
+    den = 1 + z * z / n
+    c = (p + z * z / (2 * n)) / den
+    w = z * math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / den
+    return max(0.0, c - w), min(1.0, c + w)
 
 
 if __name__ == "__main__":
