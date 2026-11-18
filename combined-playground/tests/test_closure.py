@@ -164,7 +164,54 @@ class Branches(unittest.TestCase):
     def test_table_and_split_rows(self):
         rows = C.branch_table()
         self.assertEqual(len(rows), 8)
-        split = [r["case"] for r in rows if r["split"]]
-        self.assertEqual(split, ["c1", "c4", "c6"])
+        self.assertEqual([r["case"] for r in rows if r["split"]], ["c1", "c2", "c4", "c5", "c6", "c7"])
+        self.assertEqual([r["case"] for r in rows if r["split_live"]], ["c1", "c2", "c4"])
+        self.assertEqual([r["case"] for r in rows if r["split_abc"]], ["c1", "c4", "c6"])
         for r in rows:
-            self.assertEqual(sorted(r["branches"]), ["A", "B", "C"])
+            self.assertEqual(sorted(r["branches"]), list("ABCDEF"))
+
+    def test_branch_D_floor_first(self):
+        res, obs = self._res(1e-13)
+        self.assertEqual(C.verdict_branch_D(res, obs).status, "OK")
+        res, obs = self._res(5e-7)
+        self.assertEqual(C.verdict_branch_D(res, obs).status, "CLOSED_WITHIN")
+        res, obs = self._res(2e-6)
+        self.assertEqual(C.verdict_branch_D(res, obs).status, "FAILED")
+        res, obs = self._res(5e-7, sigma=None, k=None)
+        self.assertEqual(C.verdict_branch_D(res, obs).state, "VOID")      # CLOSED_WITHIN needs sigma
+        res, obs = self._res(5e-7, floor=T.Token("UNTESTED", "x"))
+        self.assertEqual(C.verdict_branch_D(res, obs).state, "VOID")
+
+    def test_branch_E_band_is_max_of_tol_and_k_sigma(self):
+        res, obs = self._res(2e-6)                        # tol 1e-6 < 2e-6 <= k*sigma 3e-6
+        self.assertEqual(C.verdict_branch_E(res, obs).status, "CLOSED_WITHIN")
+        res, obs = self._res(2e-6, sigma=1e-7, k=3)       # band = tol = 1e-6
+        self.assertEqual(C.verdict_branch_E(res, obs).status, "FAILED")
+        res, obs = self._res(1e-13)
+        self.assertEqual(C.verdict_branch_E(res, obs).status, "OK")
+
+    def test_branch_F_legs_and_cap(self):
+        res, obs = self._res(5e-7)
+        self.assertEqual(C.verdict_branch_F(res, obs).state, "VOID")        # n_legs missing
+        for bad in (0, 2.0, True, "4"):
+            self.assertEqual(C.verdict_branch_F(res, obs, n_legs=bad).state, "VOID")
+        r = C.verdict_branch_F(res, obs, n_legs=4)
+        self.assertEqual(r.status, "CLOSED_WITHIN")
+        self.assertAlmostEqual(r.sigma, 2e-6)                               # sigma * sqrt(4)
+        res, obs = self._res(2e-6, tol=1e-6)                                # above the hard cap
+        self.assertEqual(C.verdict_branch_F(res, obs, n_legs=100).status, "FAILED")
+        res, obs = self._res(9e-7, tol=1e-5, sigma=1e-7, k=3)               # allowable 3e-7*sqrt(1)
+        self.assertEqual(C.verdict_branch_F(res, obs, n_legs=1).status, "FAILED")
+        res, obs = self._res(5e-7, sigma=None, k=None)
+        self.assertEqual(C.verdict_branch_F(res, obs, n_legs=4).state, "VOID")
+
+    def test_failed_routing_cites_section_2(self):
+        doc = C.__doc__
+        self.assertIn("lines 62-65", doc)
+        self.assertIn("R-A1, lines 82-84", doc)
+        spec = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+                            "playground-crossrun", "COMBINED_SPEC.md")
+        lines = open(spec).read().splitlines()
+        self.assertIn("ledger declared -> PHYSICAL : FAILED", lines[61])
+        self.assertIn("ledger NOT      -> DETERMINATION : FAILED", lines[63])
+        self.assertIn("R-A1", lines[81])
