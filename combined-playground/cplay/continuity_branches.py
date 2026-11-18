@@ -215,6 +215,14 @@ def cases():
                          anchor=SLIVER_ANCHOR, rnd=lambda _a: sl, tol=SLIVER_R,
                          ref=(deep, round1(deep)), dt=0.05, n=600, lossy="lossy encode (declared point)"))
     out[-1]["separatrix"] = _stable_manifold
+    # seventh case (order 2026-11-18): a sliver SMALLER than f_min. Same anchor, ball radius 0.046,
+    # sliver f = 0.0203 by chord integration (below f_min 0.04); the snapshot is a point in the sliver.
+    s7 = sliver_snapshot(radius=SMALL_R)
+    out.append(_ode_case("bistable_small", double_well, None,
+                         "constructed here, no EBR claim; band [0, 3] as EBR_017", 3.0,
+                         anchor=SLIVER_ANCHOR, rnd=lambda _a: s7, tol=SMALL_R,
+                         ref=(deep, round1(deep)), dt=0.05, n=600, lossy="lossy encode (declared point)"))
+    out[-1]["separatrix"] = _stable_manifold
     return out
 
 
@@ -222,8 +230,13 @@ SLIVER_ANCHOR = (0.06, -0.01)
 SLIVER_R = 0.05
 SLIVER_F_EXACT = 0.04362    # sliver_fraction_exact(M=200); recorded, recomputed in the tests at M 40
 DIRECT_RUN = {"trials": 10000, "miss": 62, "seed": 2026, "N": 113}   # direct_miss(10000, 113): 386 s
+SMALL_R = 0.046            # case 7 ball radius
+SMALL_F_EXACT = 0.02032     # sliver_fraction_exact(radius=SMALL_R): 0.020320 / 0.020314 (two orientations)
+CASE7_RUN = {"trials": 1000, "same_with_bound": 98, "not_same": 902, "seeds": "0..999"}   # d2_bound per seed, 82 s
 F_MIN = 0.04               # purpose inputs declared for the table run (order 2026-11-18)
 ALPHA = 0.01
+F_MIN_PROVENANCE = ("f_min 0.04 chosen after the pool estimate 0.0405 was seen; declared pre-run, "
+                    "informed by the answer. True f 0.0436 clears the threshold 0.03993 by a thin margin")
 
 
 def _basin(p, dt=0.05, n=600):
@@ -237,11 +250,11 @@ def _ball(c, r, rng):
             return tuple(a + b for a, b in zip(c, d))
 
 
-def sliver_snapshot(seed=7):
-    """First seeded ball point (radius SLIVER_R) whose basin differs from the anchor's."""
+def sliver_snapshot(seed=7, radius=None):
+    """First seeded ball point (radius SLIVER_R unless given) whose basin differs from the anchor's."""
     rng, home = random.Random(seed), _basin(SLIVER_ANCHOR)
     while True:
-        p = _ball(SLIVER_ANCHOR, SLIVER_R, rng)
+        p = _ball(SLIVER_ANCHOR, SLIVER_R if radius is None else radius, rng)
         if _basin(p) != home:
             return p
 
@@ -350,18 +363,19 @@ def f_threshold(N, alpha):
     return 1.0 - alpha ** (1.0 / N)
 
 
-def sliver_fraction_exact(M=200, bisect=40, dt=0.05, axis=0):
+def sliver_fraction_exact(M=200, bisect=40, dt=0.05, axis=0, anchor=None, radius=None):
     """Case 6: the sliver's share of the ball, by chord integration (no sampling). M chords across
     the ball; on each, the basin boundary is located by bisection on the classifier. axis 0 = vertical
     chords, 1 = horizontal; the two orientations are an internal check. Raises on a chord crossing the
     boundary more than once (the single-crossing assumption is checked, not taken)."""
-    ax, ay = SLIVER_ANCHOR
-    r = SLIVER_R
+    anchor = SLIVER_ANCHOR if anchor is None else anchor
+    ax, ay = anchor
+    r = SLIVER_R if radius is None else radius
     e1, e2 = ((1, 0), (0, 1)) if axis == 0 else ((0, 1), (-1, 0))
 
     def basin(q):
         return 1 if _rk4(double_well, q, dt, int(round(30 / dt)))[0] > 0 else -1
-    home, tot = basin(SLIVER_ANCHOR), 0.0
+    home, tot = basin(anchor), 0.0
     for i in range(M):
         u = -r + (i + 0.5) * 2 * r / M
         half = math.sqrt(r * r - u * u)
@@ -485,6 +499,21 @@ def render():
                "resolved run %s (upper bound %.4f vs alpha %g)" % ("met" if hi <= ALPHA else "NOT met", hi, ALPHA))
     out.append("VOID-9 -> DECIDED: identity across lossy snapshot = D2 with a declared sliver bound; "
                "verdict carries the bound")
+    out.append("  scope: SAME_WITH_BOUND certifies the bound, not identity below f_min")
+    out.append("  provenance: " + F_MIN_PROVENANCE)
+    r = CASE7_RUN
+    lo, hi = _wilson(r["same_with_bound"], r["trials"])
+    out.append("")
+    out.append("case 7 (sliver below f_min): ball r %g, exact sliver f %.4f < f_min %g; resume outcome NOT_SAME"
+               % (SMALL_R, SMALL_F_EXACT, F_MIN))
+    out.append("  D2 over %d fresh-draw trials (seeds %s): SAME_WITH_BOUND %d, NOT_SAME %d; SWB rate %.3f, "
+               "Wilson 95%% [%.3f, %.3f]; exact (1 - f)^N = %.4f"
+               % (r["trials"], r["seeds"], r["same_with_bound"], r["not_same"], r["same_with_bound"] / float(r["trials"]),
+                  lo, hi, (1 - SMALL_F_EXACT) ** n_required(F_MIN, ALPHA)))
+    out.append("  each SAME_WITH_BOUND is true as stated (%.4f < %g) while identity is NOT_SAME: passes by design"
+               % (SMALL_F_EXACT, F_MIN))
+    out.append("  SWB is the minority here; it is the majority only for f < 1 - 0.5^(1/N) = %.5f"
+               % (1 - 0.5 ** (1.0 / n_required(F_MIN, ALPHA))))
     return "\n".join(out)
 
 

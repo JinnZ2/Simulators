@@ -515,6 +515,19 @@ VOID or not built in combined-playground M1-M9 and needs a decision before it is
                      across lossy snapshot = D2 with a declared sliver bound; verdict carries the bound
                      (f_min, alpha, N, hits). D2m (exact margin) where a separatrix is declared. The
                      400-trial NOT MET line above is kept
+2026-11-18  NOTE     f_min 0.04 chosen after the pool estimate 0.0405 was seen; declared pre-run,
+                     informed by the answer (same pattern as a threshold set by a party holding the
+                     truth). True f 0.0436 clears the threshold 0.03993 by a thin margin
+2026-11-18  CASE 7   sliver smaller than f_min: same anchor, ball r 0.046, exact sliver f 0.0203
+                     (chord integration, two orientations agree to 6e-6); f_min 0.04, alpha 0.01,
+                     N 113; snapshot a point in the sliver; resume outcome NOT_SAME. D2 over 1000
+                     fresh-draw trials (seeds 0..999): SAME_WITH_BOUND 98, NOT_SAME 902 (SWB rate
+                     0.098, Wilson 95 % [0.081, 0.118]; exact (1 - f)^113 = 0.0983). Expectation
+                     "SAME_WITH_BOUND usually" NOT MET at N 113: SWB is the majority only for
+                     f < 1 - 0.5^(1/113) = 0.00612. Where it occurs, each SWB is true as stated
+                     (0.0203 < 0.04) while identity is NOT_SAME: passes by design, not by error
+2026-11-18  SCOPE    SAME_WITH_BOUND certifies the bound, not identity below f_min. VOID-9 stays
+                     DECIDED with that scope line
 2026-11-18  BRANCHED VOID-12 vocabulary mapping rows; decide on evidence from SPLIT rows. V-A same
                      label, V-B definitions match under the TOOL_CARDS VERBATIM / WRAP_COLLAPSED rule,
                      V-C same predicate + same slots; cplay/vocab_branches.py,
