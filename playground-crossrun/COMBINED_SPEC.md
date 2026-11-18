@@ -492,6 +492,18 @@ VOID or not built in combined-playground M1-M9 and needs a decision before it is
                      shown. VOID-9 stays until D2 survives case 6
 2026-11-18  XREF     basin-margin rule: source pattern named as the "repose glyph" (conditional
                      stability); NOT LOCATED in any indexed JinnZ2 repository by code search
+2026-11-18  XREF     corrected: oral-tradition glyph #4 (repose: rest is conditional, still loaded),
+                     relayed in chat; not in a repository
+2026-11-18  BRANCH   D2 bound rule: purpose inputs f_min, alpha (missing -> UNTESTED);
+                     N = ceil(ln alpha / ln(1 - f_min)); zero hits -> SAME_WITH_BOUND recording
+                     (f_min, alpha, N, hits 0); any hit -> NOT_SAME; exact-margin path D2m where a
+                     case declares its separatrix (margin > tol -> SAME, else NOT_SAME).
+                     6 cases at f_min 0.04, alpha 0.01, N 113: D2 6/6; D2m 2/2 (sliver margin 0.0411
+                     vs tol 0.05; flat-cap estimate 4.4 % vs sampled sliver 4.05 %)
+2026-11-18  NOT MET  VOID-9 decision test: case 6 at N 113 over 400 trials (pool seed 11, as before)
+                     -> measured miss 0.0125 (5 of 400; Wilson 95 % [0.0054, 0.0289]) > alpha 0.01;
+                     predicted (1 - 0.0405)^113 = 0.0094. 400 trials cannot separate 0.0094 from
+                     0.01. Per the rule, VOID-9 stays VOID
 2026-11-18  BRANCHED VOID-12 vocabulary mapping rows; decide on evidence from SPLIT rows. V-A same
                      label, V-B definitions match under the TOOL_CARDS VERBATIM / WRAP_COLLAPSED rule,
                      V-C same predicate + same slots; cplay/vocab_branches.py,

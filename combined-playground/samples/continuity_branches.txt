@@ -1,37 +1,27 @@
-case             T4 class (growth, where measured)                     C-A        C-B        C-C0       C-C        D          D2(N=32)   measured
-fib_exact        CONTEXT_FREE_EXACT                                    SAME       SAME       SAME       SAME       SAME       SAME       SAME
-spiral_lossy     STABLE_LOSSY 0.0498 at the case's own snapshot        NOT_SAME*  SAME       SAME       NOT_SAME*  SAME       SAME       SAME
-lorenz_lossy     CHAOTIC_REFRESH 5.57e+04 at the case's own snapshot   NOT_SAME   SAME*      SAME*      NOT_SAME   NOT_SAME   NOT_SAME   NOT_SAME
-counts_word      SUMMARY_ONLY                                          NOT_SAME   SAME*      SAME*      NOT_SAME   NOT_SAME   NOT_SAME   NOT_SAME
-bistable_loose   STABLE_LOSSY 0.000439 at declared reference snapshot  NOT_SAME   SAME*      SAME*      NOT_SAME   SAME*      NOT_SAME   NOT_SAME
-bistable_sliver  STABLE_LOSSY 0.000439 at declared reference snapshot  NOT_SAME   SAME*      SAME*      NOT_SAME   SAME*      NOT_SAME   NOT_SAME
-* = branch disagrees with the measured resume outcome; C-C0 is the first build, kept as history
-C-A  matches on 5 of 6  (first five cases: 4 of 5)
-C-B  matches on 2 of 6  (first five cases: 2 of 5)
-C-C0 matches on 2 of 6  (first five cases: 2 of 5)
-C-C  matches on 5 of 6  (first five cases: 4 of 5)
-D    matches on 4 of 6  (first five cases: 4 of 5)
-D2   matches on 6 of 6  (first five cases: 5 of 5)
-SPLIT (branches disagree): spiral_lossy, lorenz_lossy, counts_word, bistable_loose, bistable_sliver
-D with growth measured at each case's own snapshot instead: fib_exact SAME, spiral_lossy SAME, lorenz_lossy NOT_SAME, counts_word NOT_SAME, bistable_loose NOT_SAME, bistable_sliver NOT_SAME
+purpose inputs: f_min = 0.04, alpha = 0.01 -> N = 113 per lossy snapshot
+case             T4 class         C-A        C-B        C-C0       C-C        D          D2 bound   D2 margin  measured
+fib_exact        CONTEXT_FREE_EXACT SAME       SAME       SAME       SAME       SAME       SAME       --         SAME
+spiral_lossy     STABLE_LOSSY     NOT_SAME*  SAME       SAME       NOT_SAME*  SAME       SAME_WB    --         SAME
+lorenz_lossy     CHAOTIC_REFRESH  NOT_SAME   SAME*      SAME*      NOT_SAME   NOT_SAME   NOT_SAME   --         NOT_SAME
+counts_word      SUMMARY_ONLY     NOT_SAME   SAME*      SAME*      NOT_SAME   NOT_SAME   NOT_SAME   --         NOT_SAME
+bistable_loose   STABLE_LOSSY     NOT_SAME   SAME*      SAME*      NOT_SAME   SAME*      NOT_SAME   NOT_SAME   NOT_SAME
+bistable_sliver  STABLE_LOSSY     NOT_SAME   SAME*      SAME*      NOT_SAME   SAME*      NOT_SAME   NOT_SAME   NOT_SAME
+* = disagrees with the measured resume outcome; SAME_WB = SAME_WITH_BOUND; -- = no separatrix declared
+C-A  matches on 5 of 6
+C-B  matches on 2 of 6
+C-C0 matches on 2 of 6
+C-C  matches on 5 of 6
+D    matches on 4 of 6
+D2   matches on 6 of 6
+D2m  matches on 2 of 2
 
-case 6 sliver: ball radius 0.05 around (0.06, -0.01); sliver fraction f_hat = 0.0405 (pool 2000, seeded); 400 trials per N
-  N     measured miss rate   predicted (1 - f)^N
-  1     0.9600               0.9595
-  2     0.9475               0.9206
-  4     0.8075               0.8476
-  8     0.7275               0.7184
-  16    0.5200               0.5161
-  32    0.2800               0.2663
-  64    0.0500               0.0709
-  128   0.0025               0.0050
-  256   0.0000               0.0000
-a miss -> D2 reads SAME on a snapshot whose measured resume is NOT_SAME
+  fib_exact        D2: SAME -- CONTEXT_FREE_EXACT: decided by class, no sampling
+  spiral_lossy     D2: SAME_WITH_BOUND -- 0 hits in 113: any sliver is < 0.04 of the ball at confidence 0.99 (rule of three: < 0.0265 at 95%)
+  lorenz_lossy     D2: NOT_SAME -- sample 1 of 113 grows (growth > 1): proof, not an estimate
+  counts_word      D2: NOT_SAME -- SUMMARY_ONLY: decided by class, no sampling
+  bistable_loose   D2: NOT_SAME -- sample 2 of 113 grows (growth > 1): proof, not an estimate; margin to separatrix 0.0002 vs tol 0.1
+  bistable_sliver  D2: NOT_SAME -- sample 23 of 113 grows (growth > 1): proof, not an estimate; margin to separatrix 0.0411 vs tol 0.05
 
-  fib_exact        level-15 resume equals uninterrupted: True; EBR_016: 0 mismatched levels of 26; RK4 exact resume bitwise
-  spiral_lossy     error ratio 0.04979 vs band 3; EBR_017: ratio 0.0498 inside band [0, 3] (band UNSOURCED)
-  lorenz_lossy     error ratio 5.571e+04 vs band 100; EBR_018: ratio 16980 vs band 100, needs refresh (band UNSOURCED)
-  counts_word      counts (34, 21) fit C(55,21) = 841728816603675 words; no decoder; EBR_019: counts (34, 21) fit 841,728,816,603,675 words; verdict void
-  bistable_loose   error ratio 32.17 vs band 3; constructed here, no EBR claim; band [0, 3] as EBR_017
-  bistable_sliver  error ratio 42.82 vs band 3; constructed here, no EBR claim; band [0, 3] as EBR_017
+case 6 at f_min 0.04, alpha 0.01, N 113: measured miss rate 0.0125 (5 of 400 trials, Wilson 95% [0.0054, 0.0289]); predicted (1 - f_hat)^N = 0.0094 with f_hat 0.0405; alpha 0.01
+decision rule (order): DECIDED if measured miss <= alpha -> NOT met
 no branch picked
