@@ -1,0 +1,269 @@
+{
+ "meta": {
+  "first_reader_module": "combined-playground/cplay/vocab_branches.py",
+  "first_reader_module_sha256": "30fe580e4e8b6b54ded496be420fe36b0260ce9f0707dae1f71c9f00d9a94f3f",
+  "simulators_head": "b5e8614bef123a445f247f69803e1fa4361eeed6",
+  "shuffle_seed": 20261118,
+  "n_terms": 15,
+  "n_pairs": 8,
+  "n_predicate_clusters": 9
+ },
+ "terms": {
+  "T10": {
+   "term_id": "taf:GAP_INSTRUMENT_CRASH",
+   "label": "GAP_INSTRUMENT_CRASH",
+   "predicate": "a check raised; recorded on coverage, never severity",
+   "slots": [
+    "kind",
+    "module",
+    "input",
+    "reason",
+    "missing_path",
+    "expiry_condition"
+   ],
+   "slots_from": "code: unified_audit.py lines 337-342",
+   "cluster": 1
+  },
+  "T08": {
+   "term_id": "cplay:CRASHED",
+   "label": "CRASHED",
+   "predicate": "a check raised; recorded on coverage, never severity",
+   "slots": [
+    "kind",
+    "module",
+    "input",
+    "reason",
+    "missing_path",
+    "expiry_condition"
+   ],
+   "slots_from": "code: cplay axes.CoverageEntry (crash() fills it)",
+   "cluster": 1
+  },
+  "T09": {
+   "term_id": "taf:UNKNOWN",
+   "label": "UNKNOWN",
+   "predicate": "value not yet known, held open with an exit",
+   "slots": [
+    "expiry_condition",
+    "instrument_class",
+    "sensitivity",
+    "protocol",
+    "provenance"
+   ],
+   "slots_from": "code: expiry_register.py EXPIRY_KEYS",
+   "cluster": 2
+  },
+  "T12": {
+   "term_id": "cplay:UNKNOWN",
+   "label": "UNKNOWN",
+   "predicate": "value not yet known, held open with an exit",
+   "slots": [
+    "reason",
+    "triggers",
+    "kind",
+    "target",
+    "condition"
+   ],
+   "slots_from": "declared: cplay tokens.unknown + ExpiryTrigger",
+   "cluster": 2
+  },
+  "T02": {
+   "term_id": "taf:ABSENT_AT_SENSITIVITY",
+   "label": "ABSENT_AT_SENSITIVITY",
+   "predicate": "scoped absence: not found at a stated sensitivity",
+   "slots": [
+    "instrument_class",
+    "sensitivity",
+    "protocol"
+   ],
+   "slots_from": "declared from the definition's three named slots",
+   "cluster": 3
+  },
+  "T05": {
+   "term_id": "cplay:ABSENT_AT_SENSITIVITY",
+   "label": "ABSENT_AT_SENSITIVITY",
+   "predicate": "scoped absence: not found at a stated sensitivity",
+   "slots": [
+    "limit",
+    "basis",
+    "effect_size",
+    "conditions",
+    "ladder"
+   ],
+   "slots_from": "code: cplay tokens.absent_at_sensitivity signature",
+   "cluster": 3
+  },
+  "T15": {
+   "term_id": "taf:expiry_condition",
+   "label": "expiry_condition",
+   "predicate": "the exit of an open slot",
+   "slots": [
+    "instrument_class",
+    "sensitivity",
+    "protocol",
+    "provenance"
+   ],
+   "slots_from": "code: expiry_register.py EXPIRY_KEYS",
+   "cluster": 4
+  },
+  "T04": {
+   "term_id": "cplay:ExpiryTrigger",
+   "label": "ExpiryTrigger",
+   "predicate": "the exit of an open slot",
+   "slots": [
+    "kind",
+    "target",
+    "condition"
+   ],
+   "slots_from": "code: cplay tokens.ExpiryTrigger",
+   "cluster": 4
+  },
+  "T07": {
+   "term_id": "fa:VOID",
+   "label": "VOID",
+   "predicate": "the check could not be evaluated on these inputs",
+   "slots": [
+    "reason"
+   ],
+   "slots_from": "declared",
+   "cluster": 5
+  },
+  "T03": {
+   "term_id": "cplay:VOID",
+   "label": "VOID",
+   "predicate": "a value the spec leaves open, held with a reason",
+   "slots": [
+    "reason"
+   ],
+   "slots_from": "code: cplay tokens.Token",
+   "cluster": 6
+  },
+  "T01": {
+   "term_id": "fa:UNDECIDED",
+   "label": "UNDECIDED",
+   "predicate": "an uncertain difference straddles a tolerance edge",
+   "slots": [
+    "D",
+    "t"
+   ],
+   "slots_from": "declared",
+   "cluster": 7
+  },
+  "T06": {
+   "term_id": "cplay:UNRESOLVED",
+   "label": "UNRESOLVED",
+   "predicate": "an uncertain difference straddles a tolerance edge",
+   "slots": [
+    "m",
+    "tol",
+    "U"
+   ],
+   "slots_from": "declared: verdict_branch_G inputs",
+   "cluster": 7
+  },
+  "T11": {
+   "term_id": "fa:HOLDS",
+   "label": "HOLDS",
+   "predicate": "a difference lies inside its tolerance",
+   "slots": [
+    "D",
+    "t"
+   ],
+   "slots_from": "declared",
+   "cluster": 8
+  },
+  "T13": {
+   "term_id": "cplay:OK",
+   "label": "OK",
+   "predicate": "a check ran and passed",
+   "slots": [],
+   "slots_from": "declared: axes.reading OK carries no slot",
+   "cluster": 9
+  },
+  "T14": {
+   "term_id": "cplay:CLOSED_WITHIN",
+   "label": "CLOSED_WITHIN",
+   "predicate": "a difference lies inside its tolerance",
+   "slots": [
+    "sigma",
+    "basis"
+   ],
+   "slots_from": "code: axes.reading CLOSED_WITHIN",
+   "cluster": 8
+  }
+ },
+ "pairs": [
+  {
+   "left": "T10",
+   "right": "T08",
+   "pair_label": "GAP_INSTRUMENT_CRASH | CRASHED",
+   "key_tier": "MAPS",
+   "same_predicate": true,
+   "slots_equal": true,
+   "same_label": false
+  },
+  {
+   "left": "T09",
+   "right": "T12",
+   "pair_label": "UNKNOWN | UNKNOWN",
+   "key_tier": "PARTIAL",
+   "same_predicate": true,
+   "slots_equal": false,
+   "same_label": true
+  },
+  {
+   "left": "T02",
+   "right": "T05",
+   "pair_label": "ABSENT_AT_SENSITIVITY | ABSENT_AT_SENSITIVITY",
+   "key_tier": "PARTIAL",
+   "same_predicate": true,
+   "slots_equal": false,
+   "same_label": true
+  },
+  {
+   "left": "T15",
+   "right": "T04",
+   "pair_label": "expiry_condition | ExpiryTrigger",
+   "key_tier": "PARTIAL",
+   "same_predicate": true,
+   "slots_equal": false,
+   "same_label": false
+  },
+  {
+   "left": "T07",
+   "right": "T03",
+   "pair_label": "VOID | VOID",
+   "key_tier": "HOMONYM",
+   "same_predicate": false,
+   "slots_equal": true,
+   "same_label": true
+  },
+  {
+   "left": "T01",
+   "right": "T06",
+   "pair_label": "UNDECIDED | UNRESOLVED",
+   "key_tier": "PARTIAL",
+   "same_predicate": true,
+   "slots_equal": false,
+   "same_label": false
+  },
+  {
+   "left": "T11",
+   "right": "T13",
+   "pair_label": "HOLDS | OK",
+   "key_tier": "NONE",
+   "same_predicate": false,
+   "slots_equal": false,
+   "same_label": false
+  },
+  {
+   "left": "T11",
+   "right": "T14",
+   "pair_label": "HOLDS | CLOSED_WITHIN",
+   "key_tier": "PARTIAL",
+   "same_predicate": true,
+   "slots_equal": false,
+   "same_label": false
+  }
+ ]
+}

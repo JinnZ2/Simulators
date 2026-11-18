@@ -1,0 +1,34 @@
+reader pilot-A | unknown AI model | 2026-11-18 | blindness: UNCERTAIN (also declared: q5_used_anything_outside_packet)
+
+declared pairs: reader tier vs key tier   (7 of 8 agree; Clopper-Pearson 95%: 0.473 to 0.997)
+pair                                           reader   key      
+GAP_INSTRUMENT_CRASH | CRASHED                 PARTIAL  MAPS     DIFFER
+UNKNOWN | UNKNOWN                              PARTIAL  PARTIAL  agree
+ABSENT_AT_SENSITIVITY | ABSENT_AT_SENSITIVITY  PARTIAL  PARTIAL  agree
+expiry_condition | ExpiryTrigger               PARTIAL  PARTIAL  agree
+VOID | VOID                                    HOMONYM  HOMONYM  agree
+UNDECIDED | UNRESOLVED                         PARTIAL  PARTIAL  agree
+HOLDS | OK                                     NONE     NONE     agree
+HOLDS | CLOSED_WITHIN                          PARTIAL  PARTIAL  agree
+
+all 105 term pairs (same predicate?): both join 6, reader only 0, key only 0, neither 99; adjusted Rand index 1.000; clusters reader 9, key 9
+
+slots (Jaccard of reader's set and key's set):
+   T01 UNDECIDED                0.00         | reader basis READ_FROM_SOURCE | key: declared
+   T02 ABSENT_AT_SENSITIVITY    0.00         | reader basis READ_FROM_SOURCE | key: declared from the definition's three nam
+   T03 VOID                     0.50         | reader basis READ_FROM_SOURCE | key: code: cplay tokens.Token
+   T04 ExpiryTrigger            1.00  equal  | reader basis READ_FROM_SOURCE | key: code: cplay tokens.ExpiryTrigger
+   T05 ABSENT_AT_SENSITIVITY    0.62         | reader basis READ_FROM_SOURCE | key: code: cplay tokens.absent_at_sensitivity
+   T06 UNRESOLVED               0.00         | reader basis READ_FROM_SOURCE | key: declared: verdict_branch_G inputs
+   T07 VOID                     0.00         | reader basis READ_FROM_SOURCE | key: declared
+   T08 CRASHED                  0.46         | reader basis READ_FROM_SOURCE | key: code: cplay axes.CoverageEntry (crash() 
+   T09 UNKNOWN                  0.00         | reader basis NONE_STATED | key: code: expiry_register.py EXPIRY_KEYS
+   T10 GAP_INSTRUMENT_CRASH     1.00  equal  | reader basis READ_FROM_SOURCE | key: code: unified_audit.py lines 337-342
+   T11 HOLDS                    0.00         | reader basis READ_FROM_SOURCE | key: declared
+   T12 UNKNOWN                  0.12         | reader basis READ_FROM_SOURCE | key: declared: cplay tokens.unknown + ExpiryT
+   T13 OK                       0.00         | reader basis READ_FROM_SOURCE | key: declared: axes.reading OK carries no slo
+   T14 CLOSED_WITHIN            0.25         | reader basis READ_FROM_SOURCE | key: code: axes.reading CLOSED_WITHIN
+   T15 expiry_condition         1.00  equal  | reader basis READ_FROM_SOURCE | key: code: expiry_register.py EXPIRY_KEYS
+
+references: singletons 2 of 8 (ARI 0.000); label-only 3 of 8 (ARI 0.422)
+random regroupings with the key's cluster sizes (20000 draws): mean tier agreement 2.22, P(>= observed) 0.00010; mean ARI -0.001, 95th percentile 0.116, P(>= observed) 0.00005
