@@ -1,0 +1,9 @@
+harness         H-A (source)   H-B (measured)  caught/faults  false alarms  missed               SPLIT
+en_strong       KNOWN_ANSWER   PARTIAL         4/5            QUIET         uc_linear_sum        SPLIT
+en_weak         KNOWN_ANSWER   CATCHES_NONE    0/5            QUIET         always_ok,strict_less,threshold_two,uc_first_only,uc_linear_sum SPLIT
+poisson         KNOWN_ANSWER   PARTIAL         3/4            QUIET         critical_strict      SPLIT
+g_table         CIRCULAR       PARTIAL         2/3            QUIET         floor_out_of_u       
+en_null_only    NULL_ONLY      NOT_MEASURABLE  --             NOT_MEASURABLE --                   
+en_plants_only  PLANTED_FAULT  NOT_MEASURABLE  --             NOT_MEASURABLE --                   
+SPLIT (H-A KNOWN_ANSWER, H-B not CATCHES_ALL): en_strong, en_weak, poisson
+no branch picked; bins are measured counts, no threshold

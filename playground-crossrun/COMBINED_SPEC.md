@@ -439,6 +439,12 @@ VOID or not built in combined-playground M1-M9 and needs a decision before it is
                      known answers NOT_CHECKED (VERIFY): site ~0.5927, bond 0.5, Poisson
                      q = e^{lam(q-1)} -- recalled, no source read
 2026-11-18  OPEN     VOID-7, VOID-9, VOID-12: author's call, open
+2026-11-18  BRANCHED VOID-7 harness classes; decide on evidence from SPLIT rows. H-A by information
+                     source (M7 labels), H-B by measured power (planted mutants caught / equivalent
+                     nulls flagged, bins from counts, no threshold); cplay/harness_branches.py,
+                     samples/harness_branches.txt. SPLIT: en_strong (misses uc_linear_sum), en_weak
+                     (0/5), poisson (misses critical_strict at lam = 1); g_table CIRCULAR yet 2/3.
+                     Held-VOID stays until a branch survives the cases
 2026-11-18  GAP      rows 35-36 percolation (two families) and branching (bounded pmf + closed form):
                      families and bounds named, no algorithm stated; not built (closed by G3 below)
 2026-11-18  CHOICE   M4 closure verdict rule: verdict() raises SpecGap; six candidates built beside it,

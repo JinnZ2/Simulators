@@ -21,6 +21,7 @@ M9       §8     cplay/uncertainty.py  row 39 mean^2 / E[X^2] flag; propagation 
 G3       §8     cplay/families.py   rows 35-36: site + bond percolation (union-find), Galton-Watson extinction; known answers VERIFY
 G1       §9c    cplay/pins.py       REUSE items 1 5 6 10 11 pinned (repo, commit, path, sha256, anchor); resolve() checks
 G2       §9c    gates.py, known_answer.py  identity (VIM), En comparison, regime refusal, KA pass rule; sources NOT_CHECKED
+G5-7     §9c    cplay/harness_branches.py  VOID-7 BRANCHED: H-A source vs H-B measured power; SPLIT en_strong en_weak poisson
 ```
 
 Run: `python3 -m unittest discover -s combined-playground/tests`
