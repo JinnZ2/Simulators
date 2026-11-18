@@ -1,0 +1,1762 @@
+{
+ "direction": "#257 cases -> study-aperture playground",
+ "rev": "b9dbdeff48c23c44b20dff3c01b4304d3face54a",
+ "rows": [
+  {
+   "adapter_ok": true,
+   "case_id": "R-F9:replay_base",
+   "description": "forest run 9 port, REPLAY of numpy default_rng(0), fixtures/numpy_draws_seed0.json",
+   "group": "forest run 9 port",
+   "kind": "control",
+   "mapping": [
+    "#257 per-budget tolerance (1e-9 x scale) entered as the absolute account tolerance",
+    "pool start = SPECIFIED (INIT), pool end and every flux = MODEL (simulated, nothing measured)",
+    "VOID budgets (mass, C, energy) have no account on this side: they are absent, not VOID"
+   ],
+   "native": {
+    "model_trust": "TRUSTED: 12 clean draws, 12 planted (leak / coef alternating); FP 0.00 TP 1.00",
+    "status": "COMPLETE",
+    "status_reason": "2 of 5 budgets LIVE and closed; 3 VOID",
+    "verdicts": {
+     "N": "CLOSED",
+     "water": "CLOSED"
+    }
+   },
+   "p": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:indeterminate:L0_INTERVENTION_REGISTRY_EMPTY",
+     "determination:ok:L0_BALANCED"
+    ]
+   },
+   "p_arms": {
+    "as_stated": {
+     "axes": {
+      "determination": "indeterminate",
+      "instrument": "untested",
+      "physical": "untested"
+     },
+     "codes": [
+      "determination:indeterminate:L0_INTERVENTION_REGISTRY_EMPTY",
+      "determination:ok:L0_BALANCED"
+     ]
+    },
+    "self_registered": {
+     "axes": {
+      "determination": "ok",
+      "instrument": "untested",
+      "physical": "untested"
+     },
+     "codes": [
+      "determination:ok:L0_BALANCED",
+      "determination:ok:L0_REGISTRATION_COMPLETE"
+     ]
+    }
+   },
+   "slot": false,
+   "slot_note": "an intervention registry decides whether registration is complete; #257 has none, so 'as_stated' reads L0_INTERVENTION_REGISTRY_EMPTY"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-F9:replay_no_fire",
+   "description": "forest run 9 port, REPLAY of numpy default_rng(0), fixtures/numpy_draws_seed0.json",
+   "group": "forest run 9 port",
+   "kind": "control",
+   "mapping": [
+    "#257 per-budget tolerance (1e-9 x scale) entered as the absolute account tolerance",
+    "pool start = SPECIFIED (INIT), pool end and every flux = MODEL (simulated, nothing measured)",
+    "VOID budgets (mass, C, energy) have no account on this side: they are absent, not VOID"
+   ],
+   "native": {
+    "model_trust": "TRUSTED: 12 clean draws, 12 planted (leak / coef alternating); FP 0.00 TP 1.00",
+    "status": "COMPLETE",
+    "status_reason": "2 of 5 budgets LIVE and closed; 3 VOID",
+    "verdicts": {
+     "N": "CLOSED",
+     "water": "CLOSED"
+    }
+   },
+   "p": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:indeterminate:L0_INTERVENTION_REGISTRY_EMPTY",
+     "determination:ok:L0_BALANCED"
+    ]
+   },
+   "p_arms": {
+    "as_stated": {
+     "axes": {
+      "determination": "indeterminate",
+      "instrument": "untested",
+      "physical": "untested"
+     },
+     "codes": [
+      "determination:indeterminate:L0_INTERVENTION_REGISTRY_EMPTY",
+      "determination:ok:L0_BALANCED"
+     ]
+    },
+    "self_registered": {
+     "axes": {
+      "determination": "ok",
+      "instrument": "untested",
+      "physical": "untested"
+     },
+     "codes": [
+      "determination:ok:L0_BALANCED",
+      "determination:ok:L0_REGISTRATION_COMPLETE"
+     ]
+    }
+   },
+   "slot": false,
+   "slot_note": "an intervention registry decides whether registration is complete; #257 has none, so 'as_stated' reads L0_INTERVENTION_REGISTRY_EMPTY"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-F9:native_seed0",
+   "description": "forest run 9 port, NATIVE stdlib random.Random(0)",
+   "group": "forest run 9 port",
+   "kind": "control",
+   "mapping": [
+    "#257 per-budget tolerance (1e-9 x scale) entered as the absolute account tolerance",
+    "pool start = SPECIFIED (INIT), pool end and every flux = MODEL (simulated, nothing measured)",
+    "VOID budgets (mass, C, energy) have no account on this side: they are absent, not VOID"
+   ],
+   "native": {
+    "model_trust": "TRUSTED: 12 clean draws, 12 planted (leak / coef alternating); FP 0.00 TP 1.00",
+    "status": "COMPLETE",
+    "status_reason": "2 of 5 budgets LIVE and closed; 3 VOID",
+    "verdicts": {
+     "N": "CLOSED",
+     "water": "CLOSED"
+    }
+   },
+   "p": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:indeterminate:L0_INTERVENTION_REGISTRY_EMPTY",
+     "determination:ok:L0_BALANCED"
+    ]
+   },
+   "p_arms": {
+    "as_stated": {
+     "axes": {
+      "determination": "indeterminate",
+      "instrument": "untested",
+      "physical": "untested"
+     },
+     "codes": [
+      "determination:indeterminate:L0_INTERVENTION_REGISTRY_EMPTY",
+      "determination:ok:L0_BALANCED"
+     ]
+    },
+    "self_registered": {
+     "axes": {
+      "determination": "ok",
+      "instrument": "untested",
+      "physical": "untested"
+     },
+     "codes": [
+      "determination:ok:L0_BALANCED",
+      "determination:ok:L0_REGISTRATION_COMPLETE"
+     ]
+    }
+   },
+   "slot": false,
+   "slot_note": "an intervention registry decides whether registration is complete; #257 has none, so 'as_stated' reads L0_INTERVENTION_REGISTRY_EMPTY"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-F9:replay_planted_leak_0.3",
+   "description": "planted leak: a term in the N state equation that is not in the transfer table",
+   "group": "forest run 9 port",
+   "kind": "planted_defect",
+   "mapping": [
+    "#257 per-budget tolerance (1e-9 x scale) entered as the absolute account tolerance",
+    "pool start = SPECIFIED (INIT), pool end and every flux = MODEL (simulated, nothing measured)",
+    "VOID budgets (mass, C, energy) have no account on this side: they are absent, not VOID"
+   ],
+   "native": {
+    "model_trust": "TRUSTED: 12 clean draws, 12 planted (leak / coef alternating); FP 0.00 TP 1.00",
+    "status": "INCOMPLETE",
+    "status_reason": "budget(s) ['N'] did not close",
+    "verdicts": {
+     "N": "LEAK",
+     "water": "CLOSED"
+    }
+   },
+   "p": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:failed:L0_ACCOUNTING_GAP",
+     "determination:indeterminate:L0_INTERVENTION_REGISTRY_EMPTY",
+     "determination:ok:L0_BALANCED"
+    ]
+   },
+   "p_arms": {
+    "as_stated": {
+     "axes": {
+      "determination": "failed",
+      "instrument": "untested",
+      "physical": "untested"
+     },
+     "codes": [
+      "determination:failed:L0_ACCOUNTING_GAP",
+      "determination:indeterminate:L0_INTERVENTION_REGISTRY_EMPTY",
+      "determination:ok:L0_BALANCED"
+     ]
+    },
+    "self_registered": {
+     "axes": {
+      "determination": "ok",
+      "instrument": "untested",
+      "physical": "failed"
+     },
+     "codes": [
+      "determination:ok:L0_BALANCED",
+      "determination:ok:L0_REGISTRATION_COMPLETE",
+      "physical:failed:L0_CONSERVATION_VIOLATION"
+     ]
+    }
+   },
+   "slot": false,
+   "slot_note": "declared_complete decides PHYSICAL vs DETERMINATION for an unbalanced ledger; #257 carries no such flag"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-COIN:CC_percolation[spot_0.00 d=0.10]_ode_meanfield[spot_0.00 d=0.10]",
+   "description": "percolation[spot_0.00 d=0.10] (percolation) and ode_meanfield[spot_0.00 d=0.10] (nonlinear) agree: 0.001678466796875 vs 0.0025687774694361427",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "mapping": [],
+   "native": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   },
+   "p": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-COIN:CC_percolation[spot_0.00 d=0.20]_ode_meanfield[spot_0.00 d=0.20]",
+   "description": "percolation[spot_0.00 d=0.20] (percolation) and ode_meanfield[spot_0.00 d=0.20] (nonlinear) agree: 0.0040771484375 vs 0.013398733541028064",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "mapping": [],
+   "native": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   },
+   "p": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-COIN:CC_percolation[spot_0.00 d=0.65]_ode_meanfield[spot_0.00 d=0.65]",
+   "description": "percolation[spot_0.00 d=0.65] (percolation) and ode_meanfield[spot_0.00 d=0.65] (nonlinear) agree: 0.596759033203125 vs 0.5894536325416285",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "mapping": [],
+   "native": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   },
+   "p": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-COIN:CC_percolation[spot_0.00 d=0.70]_ode_meanfield[spot_0.00 d=0.70]",
+   "description": "percolation[spot_0.00 d=0.70] (percolation) and ode_meanfield[spot_0.00 d=0.70] (nonlinear) agree: 0.6792724609375 vs 0.6485162011002541",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "mapping": [],
+   "native": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   },
+   "p": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-COIN:CC_percolation[spot_0.00 d=0.80]_ode_meanfield[spot_0.00 d=0.80]",
+   "description": "percolation[spot_0.00 d=0.80] (percolation) and ode_meanfield[spot_0.00 d=0.80] (nonlinear) agree: 0.795294189453125 vs 0.7627407441032739",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "mapping": [],
+   "native": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   },
+   "p": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-COIN:CC_percolation[spot_0.00 d=0.90]_ode_meanfield[spot_0.00 d=0.90]",
+   "description": "percolation[spot_0.00 d=0.90] (percolation) and ode_meanfield[spot_0.00 d=0.90] (nonlinear) agree: 0.8984619140625 vs 0.8730360071411994",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "mapping": [],
+   "native": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   },
+   "p": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-COIN:CC_percolation[spot_0.05 d=0.10]_ode_meanfield[spot_0.05 d=0.10]",
+   "description": "percolation[spot_0.05 d=0.10] (percolation) and ode_meanfield[spot_0.05 d=0.10] (nonlinear) agree: 0.00169677734375 vs 0.0025894442862845063",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "mapping": [],
+   "native": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   },
+   "p": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-COIN:CC_percolation[spot_0.05 d=0.20]_ode_meanfield[spot_0.05 d=0.20]",
+   "description": "percolation[spot_0.05 d=0.20] (percolation) and ode_meanfield[spot_0.05 d=0.20] (nonlinear) agree: 0.0042236328125 vs 0.013907671751267142",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "mapping": [],
+   "native": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   },
+   "p": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-COIN:CC_percolation[spot_0.05 d=0.60]_ode_meanfield[spot_0.05 d=0.60]",
+   "description": "percolation[spot_0.05 d=0.60] (percolation) and ode_meanfield[spot_0.05 d=0.60] (nonlinear) agree: 0.518505859375 vs 0.5313316765039372",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "mapping": [],
+   "native": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   },
+   "p": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-COIN:CC_percolation[spot_0.05 d=0.65]_ode_meanfield[spot_0.05 d=0.65]",
+   "description": "percolation[spot_0.05 d=0.65] (percolation) and ode_meanfield[spot_0.05 d=0.65] (nonlinear) agree: 0.61500244140625 vs 0.5917582010721167",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "mapping": [],
+   "native": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   },
+   "p": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-COIN:CC_percolation[spot_0.05 d=0.70]_ode_meanfield[spot_0.05 d=0.70]",
+   "description": "percolation[spot_0.05 d=0.70] (percolation) and ode_meanfield[spot_0.05 d=0.70] (nonlinear) agree: 0.68433837890625 vs 0.6505721042630889",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "mapping": [],
+   "native": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   },
+   "p": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-COIN:CC_percolation[spot_0.05 d=0.80]_ode_meanfield[spot_0.05 d=0.80]",
+   "description": "percolation[spot_0.05 d=0.80] (percolation) and ode_meanfield[spot_0.05 d=0.80] (nonlinear) agree: 0.795672607421875 vs 0.7643709621997437",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "mapping": [],
+   "native": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   },
+   "p": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-COIN:CC_percolation[spot_0.05 d=0.90]_ode_meanfield[spot_0.05 d=0.90]",
+   "description": "percolation[spot_0.05 d=0.90] (percolation) and ode_meanfield[spot_0.05 d=0.90] (nonlinear) agree: 0.89847412109375 vs 0.8743217789689336",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "mapping": [],
+   "native": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   },
+   "p": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-COIN:CC_percolation[spot_0.20 d=0.10]_ode_meanfield[spot_0.20 d=0.10]",
+   "description": "percolation[spot_0.20 d=0.10] (percolation) and ode_meanfield[spot_0.20 d=0.10] (nonlinear) agree: 0.001708984375 vs 0.002653442265745698",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "mapping": [],
+   "native": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   },
+   "p": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-COIN:CC_percolation[spot_0.20 d=0.20]_ode_meanfield[spot_0.20 d=0.20]",
+   "description": "percolation[spot_0.20 d=0.20] (percolation) and ode_meanfield[spot_0.20 d=0.20] (nonlinear) agree: 0.004425048828125 vs 0.015647643882850868",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "mapping": [],
+   "native": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   },
+   "p": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-COIN:CC_percolation[spot_0.20 d=0.55]_ode_meanfield[spot_0.20 d=0.55]",
+   "description": "percolation[spot_0.20 d=0.55] (percolation) and ode_meanfield[spot_0.20 d=0.55] (nonlinear) agree: 0.473138427734375 vs 0.476967302611996",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "mapping": [],
+   "native": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   },
+   "p": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-COIN:CC_percolation[spot_0.20 d=0.60]_ode_meanfield[spot_0.20 d=0.60]",
+   "description": "percolation[spot_0.20 d=0.60] (percolation) and ode_meanfield[spot_0.20 d=0.60] (nonlinear) agree: 0.55843505859375 vs 0.5384631594689745",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "mapping": [],
+   "native": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   },
+   "p": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-COIN:CC_percolation[spot_0.20 d=0.65]_ode_meanfield[spot_0.20 d=0.65]",
+   "description": "percolation[spot_0.20 d=0.65] (percolation) and ode_meanfield[spot_0.20 d=0.65] (nonlinear) agree: 0.62901611328125 vs 0.5981076171226881",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "mapping": [],
+   "native": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   },
+   "p": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-COIN:CC_percolation[spot_0.20 d=0.70]_ode_meanfield[spot_0.20 d=0.70]",
+   "description": "percolation[spot_0.20 d=0.70] (percolation) and ode_meanfield[spot_0.20 d=0.70] (nonlinear) agree: 0.689093017578125 vs 0.6562183431170863",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "mapping": [],
+   "native": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   },
+   "p": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-COIN:CC_percolation[spot_0.20 d=0.80]_ode_meanfield[spot_0.20 d=0.80]",
+   "description": "percolation[spot_0.20 d=0.80] (percolation) and ode_meanfield[spot_0.20 d=0.80] (nonlinear) agree: 0.796063232421875 vs 0.7688184748600326",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "mapping": [],
+   "native": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   },
+   "p": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-COIN:CC_percolation[spot_0.20 d=0.90]_ode_meanfield[spot_0.20 d=0.90]",
+   "description": "percolation[spot_0.20 d=0.90] (percolation) and ode_meanfield[spot_0.20 d=0.90] (nonlinear) agree: 0.898486328125 vs 0.877805039930804",
+   "group": "forest part 2 coincidence",
+   "kind": "coincidence",
+   "mapping": [],
+   "native": {
+    "card": "OPEN",
+    "slots": {
+     "local_normal_form": "void",
+     "low_dim_projection": "void",
+     "none_of_above": "void",
+     "numerical_artifact": "void",
+     "shared_constraint": "void",
+     "statistical_artifact": "void"
+    }
+   },
+   "p": null,
+   "slot": false,
+   "slot_note": "no coincidence card or cross-family agreement object; the nearest object, measurand comparison, needs two EquationRuns with declared identity coordinates (#257 declares none: see P-MEAS:both_legacy_declarations_missing, comparison-withheld)"
+  },
+  {
+   "adapter_note": "case does not fit the bounded backend (36 nodes, 43 bonds; bounds 32 / 12)",
+   "adapter_ok": false,
+   "case_id": "R-KAG:percolation-00",
+   "description": "percolation gate draw 0 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "mapping": [
+    "site grid -> bond graph: nodes = all L*L cells, bond between flammable 4-neighbours",
+    "sources = column 0, targets = column L-1 (the lit edge and the far edge)"
+   ],
+   "native": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   },
+   "p": {
+    "bounds": {
+     "MAX_EDGES": 12,
+     "MAX_NODES": 32
+    },
+    "detail": "FiniteGraph refused: 2..32 unique immutable node labels required",
+    "edges": 43,
+    "nodes": 36,
+    "refused": true
+   },
+   "slot": false,
+   "slot_note": "fire spread in steps, the burning/burned split and spotting have no slot in a static bond graph"
+  },
+  {
+   "adapter_note": "case does not fit the bounded backend (36 nodes, 60 bonds; bounds 32 / 12)",
+   "adapter_ok": false,
+   "case_id": "R-KAG:percolation-01",
+   "description": "percolation gate draw 1 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "mapping": [
+    "site grid -> bond graph: nodes = all L*L cells, bond between flammable 4-neighbours",
+    "sources = column 0, targets = column L-1 (the lit edge and the far edge)"
+   ],
+   "native": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   },
+   "p": {
+    "bounds": {
+     "MAX_EDGES": 12,
+     "MAX_NODES": 32
+    },
+    "detail": "FiniteGraph refused: 2..32 unique immutable node labels required",
+    "edges": 60,
+    "nodes": 36,
+    "refused": true
+   },
+   "slot": false,
+   "slot_note": "fire spread in steps, the burning/burned split and spotting have no slot in a static bond graph"
+  },
+  {
+   "adapter_note": "case does not fit the bounded backend (64 nodes, 112 bonds; bounds 32 / 12)",
+   "adapter_ok": false,
+   "case_id": "R-KAG:percolation-02",
+   "description": "percolation gate draw 2 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "mapping": [
+    "site grid -> bond graph: nodes = all L*L cells, bond between flammable 4-neighbours",
+    "sources = column 0, targets = column L-1 (the lit edge and the far edge)"
+   ],
+   "native": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   },
+   "p": {
+    "bounds": {
+     "MAX_EDGES": 12,
+     "MAX_NODES": 32
+    },
+    "detail": "FiniteGraph refused: 2..32 unique immutable node labels required",
+    "edges": 112,
+    "nodes": 64,
+    "refused": true
+   },
+   "slot": false,
+   "slot_note": "fire spread in steps, the burning/burned split and spotting have no slot in a static bond graph"
+  },
+  {
+   "adapter_note": "case does not fit the bounded backend (25 nodes, 26 bonds; bounds 32 / 12)",
+   "adapter_ok": false,
+   "case_id": "R-KAG:percolation-03",
+   "description": "percolation gate draw 3 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "mapping": [
+    "site grid -> bond graph: nodes = all L*L cells, bond between flammable 4-neighbours",
+    "sources = column 0, targets = column L-1 (the lit edge and the far edge)"
+   ],
+   "native": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   },
+   "p": {
+    "bounds": {
+     "MAX_EDGES": 12,
+     "MAX_NODES": 32
+    },
+    "detail": "FiniteGraph refused: immutable edge tuple, at most 12 edges required",
+    "edges": 26,
+    "nodes": 25,
+    "refused": true
+   },
+   "slot": false,
+   "slot_note": "fire spread in steps, the burning/burned split and spotting have no slot in a static bond graph"
+  },
+  {
+   "adapter_note": "case does not fit the bounded backend (64 nodes, 112 bonds; bounds 32 / 12)",
+   "adapter_ok": false,
+   "case_id": "R-KAG:percolation-04",
+   "description": "percolation gate draw 4 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "mapping": [
+    "site grid -> bond graph: nodes = all L*L cells, bond between flammable 4-neighbours",
+    "sources = column 0, targets = column L-1 (the lit edge and the far edge)"
+   ],
+   "native": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   },
+   "p": {
+    "bounds": {
+     "MAX_EDGES": 12,
+     "MAX_NODES": 32
+    },
+    "detail": "FiniteGraph refused: 2..32 unique immutable node labels required",
+    "edges": 112,
+    "nodes": 64,
+    "refused": true
+   },
+   "slot": false,
+   "slot_note": "fire spread in steps, the burning/burned split and spotting have no slot in a static bond graph"
+  },
+  {
+   "adapter_note": "case does not fit the bounded backend (25 nodes, 26 bonds; bounds 32 / 12)",
+   "adapter_ok": false,
+   "case_id": "R-KAG:percolation-05",
+   "description": "percolation gate draw 5 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "mapping": [
+    "site grid -> bond graph: nodes = all L*L cells, bond between flammable 4-neighbours",
+    "sources = column 0, targets = column L-1 (the lit edge and the far edge)"
+   ],
+   "native": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   },
+   "p": {
+    "bounds": {
+     "MAX_EDGES": 12,
+     "MAX_NODES": 32
+    },
+    "detail": "FiniteGraph refused: immutable edge tuple, at most 12 edges required",
+    "edges": 26,
+    "nodes": 25,
+    "refused": true
+   },
+   "slot": false,
+   "slot_note": "fire spread in steps, the burning/burned split and spotting have no slot in a static bond graph"
+  },
+  {
+   "adapter_note": "case does not fit the bounded backend (64 nodes, 112 bonds; bounds 32 / 12)",
+   "adapter_ok": false,
+   "case_id": "R-KAG:percolation-06",
+   "description": "percolation gate draw 6 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "mapping": [
+    "site grid -> bond graph: nodes = all L*L cells, bond between flammable 4-neighbours",
+    "sources = column 0, targets = column L-1 (the lit edge and the far edge)"
+   ],
+   "native": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   },
+   "p": {
+    "bounds": {
+     "MAX_EDGES": 12,
+     "MAX_NODES": 32
+    },
+    "detail": "FiniteGraph refused: 2..32 unique immutable node labels required",
+    "edges": 112,
+    "nodes": 64,
+    "refused": true
+   },
+   "slot": false,
+   "slot_note": "fire spread in steps, the burning/burned split and spotting have no slot in a static bond graph"
+  },
+  {
+   "adapter_note": "case does not fit the bounded backend (49 nodes, 64 bonds; bounds 32 / 12)",
+   "adapter_ok": false,
+   "case_id": "R-KAG:percolation-07",
+   "description": "percolation gate draw 7 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "mapping": [
+    "site grid -> bond graph: nodes = all L*L cells, bond between flammable 4-neighbours",
+    "sources = column 0, targets = column L-1 (the lit edge and the far edge)"
+   ],
+   "native": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   },
+   "p": {
+    "bounds": {
+     "MAX_EDGES": 12,
+     "MAX_NODES": 32
+    },
+    "detail": "FiniteGraph refused: 2..32 unique immutable node labels required",
+    "edges": 64,
+    "nodes": 49,
+    "refused": true
+   },
+   "slot": false,
+   "slot_note": "fire spread in steps, the burning/burned split and spotting have no slot in a static bond graph"
+  },
+  {
+   "adapter_note": "case does not fit the bounded backend (25 nodes, 26 bonds; bounds 32 / 12)",
+   "adapter_ok": false,
+   "case_id": "R-KAG:percolation-08",
+   "description": "percolation gate draw 8 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "mapping": [
+    "site grid -> bond graph: nodes = all L*L cells, bond between flammable 4-neighbours",
+    "sources = column 0, targets = column L-1 (the lit edge and the far edge)"
+   ],
+   "native": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   },
+   "p": {
+    "bounds": {
+     "MAX_EDGES": 12,
+     "MAX_NODES": 32
+    },
+    "detail": "FiniteGraph refused: immutable edge tuple, at most 12 edges required",
+    "edges": 26,
+    "nodes": 25,
+    "refused": true
+   },
+   "slot": false,
+   "slot_note": "fire spread in steps, the burning/burned split and spotting have no slot in a static bond graph"
+  },
+  {
+   "adapter_note": "case does not fit the bounded backend (64 nodes, 112 bonds; bounds 32 / 12)",
+   "adapter_ok": false,
+   "case_id": "R-KAG:percolation-09",
+   "description": "percolation gate draw 9 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "mapping": [
+    "site grid -> bond graph: nodes = all L*L cells, bond between flammable 4-neighbours",
+    "sources = column 0, targets = column L-1 (the lit edge and the far edge)"
+   ],
+   "native": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   },
+   "p": {
+    "bounds": {
+     "MAX_EDGES": 12,
+     "MAX_NODES": 32
+    },
+    "detail": "FiniteGraph refused: 2..32 unique immutable node labels required",
+    "edges": 112,
+    "nodes": 64,
+    "refused": true
+   },
+   "slot": false,
+   "slot_note": "fire spread in steps, the burning/burned split and spotting have no slot in a static bond graph"
+  },
+  {
+   "adapter_note": "case does not fit the bounded backend (25 nodes, 40 bonds; bounds 32 / 12)",
+   "adapter_ok": false,
+   "case_id": "R-KAG:percolation-10",
+   "description": "percolation gate draw 10 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "mapping": [
+    "site grid -> bond graph: nodes = all L*L cells, bond between flammable 4-neighbours",
+    "sources = column 0, targets = column L-1 (the lit edge and the far edge)"
+   ],
+   "native": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   },
+   "p": {
+    "bounds": {
+     "MAX_EDGES": 12,
+     "MAX_NODES": 32
+    },
+    "detail": "FiniteGraph refused: immutable edge tuple, at most 12 edges required",
+    "edges": 40,
+    "nodes": 25,
+    "refused": true
+   },
+   "slot": false,
+   "slot_note": "fire spread in steps, the burning/burned split and spotting have no slot in a static bond graph"
+  },
+  {
+   "adapter_note": "case does not fit the bounded backend (16 nodes, 24 bonds; bounds 32 / 12)",
+   "adapter_ok": false,
+   "case_id": "R-KAG:percolation-11",
+   "description": "percolation gate draw 11 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "mapping": [
+    "site grid -> bond graph: nodes = all L*L cells, bond between flammable 4-neighbours",
+    "sources = column 0, targets = column L-1 (the lit edge and the far edge)"
+   ],
+   "native": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   },
+   "p": {
+    "bounds": {
+     "MAX_EDGES": 12,
+     "MAX_NODES": 32
+    },
+    "detail": "FiniteGraph refused: immutable edge tuple, at most 12 edges required",
+    "edges": 24,
+    "nodes": 16,
+    "refused": true
+   },
+   "slot": false,
+   "slot_note": "fire spread in steps, the burning/burned split and spotting have no slot in a static bond graph"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-KAG:branching-00",
+   "description": "branching gate draw 0 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "mapping": [
+    "fixed offspring R -> degenerate law ((R, 1),)",
+    "#257 active(n) -> expected_population at horizon n",
+    "#257 retired + active -> expected_cumulative_population (generations 0..n)",
+    "the plan's known-answer case is this same #257 closed form: the run is checked against the answer it is fed (circular)"
+   ],
+   "native": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   },
+   "p": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:indeterminate:APP_UNRESOLVED",
+     "determination:ok:L0_BALANCED",
+     "determination:ok:L0_REGISTRATION_COMPLETE",
+     "instrument:ok:KA_VALIDATED",
+     "instrument:ok:NULL_CLEAN"
+    ],
+    "got": {
+     "expected_cumulative_population": 18.0,
+     "expected_population": 3.0
+    },
+    "matches_257_closed_form": true,
+    "run_state": "diagnostically-qualified-calculation"
+   },
+   "slot": true,
+   "slot_note": null
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-KAG:branching-01",
+   "description": "branching gate draw 1 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "mapping": [
+    "fixed offspring R -> degenerate law ((R, 1),)",
+    "#257 active(n) -> expected_population at horizon n",
+    "#257 retired + active -> expected_cumulative_population (generations 0..n)",
+    "the plan's known-answer case is this same #257 closed form: the run is checked against the answer it is fed (circular)"
+   ],
+   "native": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   },
+   "p": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:indeterminate:APP_UNRESOLVED",
+     "determination:ok:L0_BALANCED",
+     "determination:ok:L0_REGISTRATION_COMPLETE",
+     "instrument:ok:KA_VALIDATED",
+     "instrument:ok:NULL_CLEAN"
+    ],
+    "got": {
+     "expected_cumulative_population": 45.0,
+     "expected_population": 24.0
+    },
+    "matches_257_closed_form": true,
+    "run_state": "diagnostically-qualified-calculation"
+   },
+   "slot": true,
+   "slot_note": null
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-KAG:branching-02",
+   "description": "branching gate draw 2 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "mapping": [
+    "fixed offspring R -> degenerate law ((R, 1),)",
+    "#257 active(n) -> expected_population at horizon n",
+    "#257 retired + active -> expected_cumulative_population (generations 0..n)",
+    "the plan's known-answer case is this same #257 closed form: the run is checked against the answer it is fed (circular)"
+   ],
+   "native": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   },
+   "p": {
+    "axes": {
+     "determination": "ok",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:ok:APP_OUTSIDE_DOMAIN",
+     "determination:ok:L0_BALANCED",
+     "determination:ok:L0_REGISTRATION_COMPLETE"
+    ],
+    "got": {
+     "expected_cumulative_population": null,
+     "expected_population": null
+    },
+    "matches_257_closed_form": false,
+    "run_state": "blocked-before-experimental-calculation"
+   },
+   "slot": true,
+   "slot_note": null
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-KAG:branching-03",
+   "description": "branching gate draw 3 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "mapping": [
+    "fixed offspring R -> degenerate law ((R, 1),)",
+    "#257 active(n) -> expected_population at horizon n",
+    "#257 retired + active -> expected_cumulative_population (generations 0..n)",
+    "the plan's known-answer case is this same #257 closed form: the run is checked against the answer it is fed (circular)"
+   ],
+   "native": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   },
+   "p": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:indeterminate:APP_UNRESOLVED",
+     "determination:ok:L0_BALANCED",
+     "determination:ok:L0_REGISTRATION_COMPLETE",
+     "instrument:ok:KA_VALIDATED",
+     "instrument:ok:NULL_CLEAN"
+    ],
+    "got": {
+     "expected_cumulative_population": 120.0,
+     "expected_population": 81.0
+    },
+    "matches_257_closed_form": true,
+    "run_state": "diagnostically-qualified-calculation"
+   },
+   "slot": true,
+   "slot_note": null
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-KAG:branching-04",
+   "description": "branching gate draw 4 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "mapping": [
+    "fixed offspring R -> degenerate law ((R, 1),)",
+    "#257 active(n) -> expected_population at horizon n",
+    "#257 retired + active -> expected_cumulative_population (generations 0..n)",
+    "the plan's known-answer case is this same #257 closed form: the run is checked against the answer it is fed (circular)"
+   ],
+   "native": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   },
+   "p": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:failed:EQ_PLAN_OR_INPUT_BINDING",
+     "determination:ok:L0_BALANCED",
+     "determination:ok:L0_REGISTRATION_COMPLETE"
+    ],
+    "got": {
+     "expected_cumulative_population": null,
+     "expected_population": null
+    },
+    "matches_257_closed_form": false,
+    "run_state": "blocked-before-experimental-calculation"
+   },
+   "slot": true,
+   "slot_note": null
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-KAG:branching-05",
+   "description": "branching gate draw 5 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "mapping": [
+    "fixed offspring R -> degenerate law ((R, 1),)",
+    "#257 active(n) -> expected_population at horizon n",
+    "#257 retired + active -> expected_cumulative_population (generations 0..n)",
+    "the plan's known-answer case is this same #257 closed form: the run is checked against the answer it is fed (circular)"
+   ],
+   "native": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   },
+   "p": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:indeterminate:APP_UNRESOLVED",
+     "determination:ok:L0_BALANCED",
+     "determination:ok:L0_REGISTRATION_COMPLETE",
+     "instrument:ok:KA_VALIDATED",
+     "instrument:ok:NULL_CLEAN"
+    ],
+    "got": {
+     "expected_cumulative_population": 12.0,
+     "expected_population": 2.0
+    },
+    "matches_257_closed_form": true,
+    "run_state": "diagnostically-qualified-calculation"
+   },
+   "slot": true,
+   "slot_note": null
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-KAG:branching-06",
+   "description": "branching gate draw 6 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "mapping": [
+    "fixed offspring R -> degenerate law ((R, 1),)",
+    "#257 active(n) -> expected_population at horizon n",
+    "#257 retired + active -> expected_cumulative_population (generations 0..n)",
+    "the plan's known-answer case is this same #257 closed form: the run is checked against the answer it is fed (circular)"
+   ],
+   "native": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   },
+   "p": {
+    "axes": {
+     "determination": "ok",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:ok:APP_OUTSIDE_DOMAIN",
+     "determination:ok:L0_BALANCED",
+     "determination:ok:L0_REGISTRATION_COMPLETE"
+    ],
+    "got": {
+     "expected_cumulative_population": null,
+     "expected_population": null
+    },
+    "matches_257_closed_form": false,
+    "run_state": "blocked-before-experimental-calculation"
+   },
+   "slot": true,
+   "slot_note": null
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-KAG:branching-07",
+   "description": "branching gate draw 7 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "mapping": [
+    "fixed offspring R -> degenerate law ((R, 1),)",
+    "#257 active(n) -> expected_population at horizon n",
+    "#257 retired + active -> expected_cumulative_population (generations 0..n)",
+    "the plan's known-answer case is this same #257 closed form: the run is checked against the answer it is fed (circular)"
+   ],
+   "native": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   },
+   "p": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:indeterminate:APP_UNRESOLVED",
+     "determination:ok:L0_BALANCED",
+     "determination:ok:L0_REGISTRATION_COMPLETE",
+     "instrument:ok:KA_VALIDATED",
+     "instrument:ok:NULL_CLEAN"
+    ],
+    "got": {
+     "expected_cumulative_population": 10.0,
+     "expected_population": 2.0
+    },
+    "matches_257_closed_form": true,
+    "run_state": "diagnostically-qualified-calculation"
+   },
+   "slot": true,
+   "slot_note": null
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-KAG:branching-08",
+   "description": "branching gate draw 8 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "mapping": [
+    "fixed offspring R -> degenerate law ((R, 1),)",
+    "#257 active(n) -> expected_population at horizon n",
+    "#257 retired + active -> expected_cumulative_population (generations 0..n)",
+    "the plan's known-answer case is this same #257 closed form: the run is checked against the answer it is fed (circular)"
+   ],
+   "native": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   },
+   "p": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:indeterminate:APP_UNRESOLVED",
+     "determination:ok:L0_BALANCED",
+     "determination:ok:L0_REGISTRATION_COMPLETE",
+     "instrument:ok:KA_VALIDATED",
+     "instrument:ok:NULL_CLEAN"
+    ],
+    "got": {
+     "expected_cumulative_population": 1.0,
+     "expected_population": 0.0
+    },
+    "matches_257_closed_form": true,
+    "run_state": "diagnostically-qualified-calculation"
+   },
+   "slot": true,
+   "slot_note": null
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-KAG:branching-09",
+   "description": "branching gate draw 9 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "mapping": [
+    "fixed offspring R -> degenerate law ((R, 1),)",
+    "#257 active(n) -> expected_population at horizon n",
+    "#257 retired + active -> expected_cumulative_population (generations 0..n)",
+    "the plan's known-answer case is this same #257 closed form: the run is checked against the answer it is fed (circular)"
+   ],
+   "native": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   },
+   "p": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:indeterminate:APP_UNRESOLVED",
+     "determination:ok:L0_BALANCED",
+     "determination:ok:L0_REGISTRATION_COMPLETE",
+     "instrument:ok:KA_VALIDATED",
+     "instrument:ok:NULL_CLEAN"
+    ],
+    "got": {
+     "expected_cumulative_population": 4.0,
+     "expected_population": 0.0
+    },
+    "matches_257_closed_form": true,
+    "run_state": "diagnostically-qualified-calculation"
+   },
+   "slot": true,
+   "slot_note": null
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-KAG:branching-10",
+   "description": "branching gate draw 10 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "mapping": [
+    "fixed offspring R -> degenerate law ((R, 1),)",
+    "#257 active(n) -> expected_population at horizon n",
+    "#257 retired + active -> expected_cumulative_population (generations 0..n)",
+    "the plan's known-answer case is this same #257 closed form: the run is checked against the answer it is fed (circular)"
+   ],
+   "native": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   },
+   "p": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:indeterminate:APP_UNRESOLVED",
+     "determination:ok:L0_BALANCED",
+     "determination:ok:L0_REGISTRATION_COMPLETE",
+     "instrument:ok:KA_VALIDATED",
+     "instrument:ok:NULL_CLEAN"
+    ],
+    "got": {
+     "expected_cumulative_population": 80.0,
+     "expected_population": 54.0
+    },
+    "matches_257_closed_form": true,
+    "run_state": "diagnostically-qualified-calculation"
+   },
+   "slot": true,
+   "slot_note": null
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-KAG:branching-11",
+   "description": "branching gate draw 11 (clean)",
+   "group": "known-answer gate fixture",
+   "kind": "known_answer",
+   "mapping": [
+    "fixed offspring R -> degenerate law ((R, 1),)",
+    "#257 active(n) -> expected_population at horizon n",
+    "#257 retired + active -> expected_cumulative_population (generations 0..n)",
+    "the plan's known-answer case is this same #257 closed form: the run is checked against the answer it is fed (circular)"
+   ],
+   "native": {
+    "FP": 0.0,
+    "TP": 1.0,
+    "harness": "PASS",
+    "trusted": true
+   },
+   "p": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:indeterminate:APP_UNRESOLVED",
+     "determination:ok:L0_BALANCED",
+     "determination:ok:L0_REGISTRATION_COMPLETE",
+     "instrument:ok:KA_VALIDATED",
+     "instrument:ok:NULL_CLEAN"
+    ],
+    "got": {
+     "expected_cumulative_population": 12.0,
+     "expected_population": 4.0
+    },
+    "matches_257_closed_form": true,
+    "run_state": "diagnostically-qualified-calculation"
+   },
+   "slot": true,
+   "slot_note": null
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-VAL:absent_at_sensitivity",
+   "description": "ABSENT_AT_SENSITIVITY(0.05): a bounded null, holds no number",
+   "group": "value status",
+   "kind": "status",
+   "mapping": [
+    "#257 carries one sensitivity number and no ladder: no SensitivityDetermination can be built without inventing one, so sensitivity enters as None",
+    "no effect size of interest and no conditions in #257: None / {}"
+   ],
+   "native": {
+    "accepted": true,
+    "label": "ABSENT_AT_SENSITIVITY(0.05)"
+   },
+   "p": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:indeterminate:ND_UNQUALIFIED"
+    ]
+   },
+   "slot": false,
+   "slot_note": "a bounded null here needs an established sensitivity (a ladder), an effect size of interest and matching conditions; #257's ABSENT_AT_SENSITIVITY(<value>) carries the value only"
+  },
+  {
+   "adapter_note": "UnknownDetermination needs typed ExpiryTriggers (kind in a closed enum); mapping the free-text expiry_condition onto a kind is an interpretation the adapter does not make",
+   "adapter_ok": false,
+   "case_id": "R-VAL:unknown_with_expiry_text",
+   "description": "UNKNOWN with a free-text expiry_condition",
+   "group": "value status",
+   "kind": "status",
+   "mapping": [],
+   "native": {
+    "accepted": true,
+    "expiry_report": {
+     "no_exit_defined": 0,
+     "open_slots": 1,
+     "rows": [
+      {
+       "expiry_condition": "a measured value for K arrives",
+       "name": "K",
+       "status": "UNKNOWN"
+      }
+     ]
+    }
+   },
+   "p": null,
+   "slot": true,
+   "slot_note": "UNKNOWN with expiry triggers exists on both sides; the trigger is typed here, text in #257"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-VAL:unknown_without_expiry",
+   "description": "UNKNOWN with no exit stated",
+   "group": "value status",
+   "kind": "planted_defect",
+   "mapping": [
+    "expiry_condition None -> expiry_triggers ()"
+   ],
+   "native": {
+    "accepted": false,
+    "refused": "UNKNOWN needs expiry_condition: what observation would end it (write 'VOID' if none is defined)"
+   },
+   "p": {
+    "accepted": true,
+    "state": "unknown"
+   },
+   "slot": true,
+   "slot_note": null
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-CLAIM:part2-0",
+   "description": "the table and the four feature readings",
+   "group": "claim tags",
+   "kind": "status",
+   "mapping": [],
+   "native": {
+    "accepted": true,
+    "tag": "DERIVED"
+   },
+   "p": null,
+   "slot": false,
+   "slot_note": "no OBSERVED / DERIVED / PROPOSED claim tag in this playground; ClaimRecord carries state (draft/recorded/unknown/retired) and support (none/partial/unknown), and Condition carries a basis (selected/assumed/measured/derived) -- a value-provenance axis, not a claim tag"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-CLAIM:part2-1",
+   "description": "runs 7-8 as logged",
+   "group": "claim tags",
+   "kind": "status",
+   "mapping": [],
+   "native": {
+    "accepted": true,
+    "tag": "PROPOSED"
+   },
+   "p": null,
+   "slot": false,
+   "slot_note": "no OBSERVED / DERIVED / PROPOSED claim tag in this playground; ClaimRecord carries state (draft/recorded/unknown/retired) and support (none/partial/unknown), and Condition carries a basis (selected/assumed/measured/derived) -- a value-provenance axis, not a claim tag"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-CLAIM:part2-2",
+   "description": "this design is what runs 7-8 ran",
+   "group": "claim tags",
+   "kind": "status",
+   "mapping": [],
+   "native": {
+    "accepted": true,
+    "tag": "PROPOSED"
+   },
+   "p": null,
+   "slot": false,
+   "slot_note": "no OBSERVED / DERIVED / PROPOSED claim tag in this playground; ClaimRecord carries state (draft/recorded/unknown/retired) and support (none/partial/unknown), and Condition carries a basis (selected/assumed/measured/derived) -- a value-provenance axis, not a claim tag"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-OBS:cross_system_regimes_undeclared",
+   "description": "cross-system comparison requested with all three observer regimes UNDECLARED",
+   "group": "observer regimes",
+   "kind": "planted_defect",
+   "mapping": [
+    "observer coordinate removed from the shipped applicability fixture context"
+   ],
+   "native": {
+    "owed": [
+     "observer_perturbation",
+     "observer_reactivity",
+     "observer_strategy"
+    ],
+    "refused": true
+   },
+   "p": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     "determination:indeterminate:APP_UNRESOLVED"
+    ],
+    "state": "unknown",
+    "unresolved": [
+     "observer: condition not declared or value unresolved",
+     "context has no observer coordinate"
+    ]
+   },
+   "slot": true,
+   "slot_note": "one observer coordinate here against three observer regimes in #257: the slot exists at a coarser grain"
+  },
+  {
+   "adapter_ok": true,
+   "case_id": "R-ANCHOR:two_change_branch",
+   "description": "a branch that changes two things against the frozen anchor",
+   "group": "anchor loop",
+   "kind": "planted_defect",
+   "mapping": [],
+   "native": {
+    "reason": "a branch changes ONE thing; got 2",
+    "refused": true
+   },
+   "p": null,
+   "slot": false,
+   "slot_note": "no one-change rule on a branch; equation substitution changes one adapter and reruns every gate, but nothing counts the changes between a frozen anchor and a run"
+  },
+  {
+   "adapter_note": "OffspringLaw takes bounded offspring counts (<= 4) with positive integer weights; Poisson(R) has unbounded support and irrational probabilities, so it cannot be entered without truncating a tail, which the backend is built to refuse",
+   "adapter_ok": false,
+   "case_id": "R-BR:poisson_R0.8",
+   "description": "Poisson(R) offspring; die-out probability is the smallest root of q = exp(R(q-1))",
+   "group": "branching die-out",
+   "kind": "known_answer",
+   "mapping": [],
+   "native": {
+    "die_out_probability": 1.0
+   },
+   "p": null,
+   "slot": true,
+   "slot_note": "extinction_by_horizon exists here as a finite-horizon quantity; #257 reports the ultimate die-out root"
+  },
+  {
+   "adapter_note": "OffspringLaw takes bounded offspring counts (<= 4) with positive integer weights; Poisson(R) has unbounded support and irrational probabilities, so it cannot be entered without truncating a tail, which the backend is built to refuse",
+   "adapter_ok": false,
+   "case_id": "R-BR:poisson_R1.5",
+   "description": "Poisson(R) offspring; die-out probability is the smallest root of q = exp(R(q-1))",
+   "group": "branching die-out",
+   "kind": "known_answer",
+   "mapping": [],
+   "native": {
+    "die_out_probability": 0.4171883561341757
+   },
+   "p": null,
+   "slot": true,
+   "slot_note": "extinction_by_horizon exists here as a finite-horizon quantity; #257 reports the ultimate die-out root"
+  },
+  {
+   "adapter_note": "OffspringLaw takes bounded offspring counts (<= 4) with positive integer weights; Poisson(R) has unbounded support and irrational probabilities, so it cannot be entered without truncating a tail, which the backend is built to refuse",
+   "adapter_ok": false,
+   "case_id": "R-BR:poisson_R2.0",
+   "description": "Poisson(R) offspring; die-out probability is the smallest root of q = exp(R(q-1))",
+   "group": "branching die-out",
+   "kind": "known_answer",
+   "mapping": [],
+   "native": {
+    "die_out_probability": 0.2031878699799769
+   },
+   "p": null,
+   "slot": true,
+   "slot_note": "extinction_by_horizon exists here as a finite-horizon quantity; #257 reports the ultimate die-out root"
+  }
+ ]
+}
