@@ -6,6 +6,7 @@ import os, sys, unittest
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from cplay import closure as C  # noqa: E402
 from cplay import tokens as T  # noqa: E402
+from cplay import axes as A  # noqa: E402
 
 
 def _decl(acct="N", tol=1e-6, sigma=None, k=None, basis="declared"):
@@ -167,8 +168,10 @@ class Branches(unittest.TestCase):
         self.assertEqual([r["case"] for r in rows if r["split"]], ["c1", "c2", "c4", "c5", "c6", "c7"])
         self.assertEqual([r["case"] for r in rows if r["split_live"]], ["c1", "c2", "c4"])
         self.assertEqual([r["case"] for r in rows if r["split_abc"]], ["c1", "c4", "c6"])
+        self.assertEqual([r["case"] for r in rows if r["split_af"]], ["c1", "c2", "c4", "c5", "c6", "c7"])
+        self.assertEqual([r["case"] for r in rows if r["g_differs"]], ["c1", "c2"])
         for r in rows:
-            self.assertEqual(sorted(r["branches"]), list("ABCDEF"))
+            self.assertEqual(sorted(r["branches"]), list("ABCDEFG"))
 
     def test_branch_D_floor_first(self):
         res, obs = self._res(1e-13)
@@ -215,3 +218,55 @@ class Branches(unittest.TestCase):
         self.assertIn("ledger declared -> PHYSICAL : FAILED", lines[61])
         self.assertIn("ledger NOT      -> DETERMINATION : FAILED", lines[63])
         self.assertIn("R-A1", lines[81])
+
+
+class BranchG(unittest.TestCase):
+    """Guard-band rule: U = k*sigma + floor; UNRESOLVED on INSTRUMENT, never PHYSICAL."""
+    def _res(self, m, tol=1e-5, sigma=1e-7, k=2, floor=1e-12, complete=True):
+        p = _prereg(accounts=[_decl(tol=tol, sigma=sigma, k=k)], roundoff_floor=floor,
+                    declared_complete=complete)
+        obs = C.Misclosure(account="N", value=m, provenance="declared")
+        return C.run(p, p.sha256, [obs]), obs
+
+    def test_three_zones(self):                       # U = 2e-7 + 1e-12, tol 1e-5
+        r, o = self._res(9e-6)
+        self.assertEqual(C.verdict_branch_G(r, o).status, "OK")
+        r, o = self._res(1.0e-5)
+        g = C.verdict_branch_G(r, o)
+        self.assertIsInstance(g, C.FieldToken)
+        self.assertEqual((g.field, g.token.state), ("INSTRUMENT", "UNRESOLVED"))
+        self.assertIn("NOT_CHECKED", g.token.reason)
+        r, o = self._res(1.1e-5)
+        self.assertEqual(C.verdict_branch_G(r, o).status, "FAILED")
+        r, o = self._res(1.1e-5, complete=C.ABSENT)
+        self.assertEqual(C.verdict_branch_G(r, o).field, "DETERMINATION")
+
+    def test_unresolved_never_physical(self):
+        with self.assertRaises(C.ClosureError):
+            C.FieldToken("PHYSICAL", T.Token("UNRESOLVED", "x"))
+        with self.assertRaises(C.ClosureError):
+            C.FieldToken("INSTRUMENT", T.Token("FAILED", "x"))
+        with self.assertRaises(A.AxisError):
+            A.reading("PHYSICAL", "UNRESOLVED", reason="x")     # not an axis status
+
+    def test_sigma_or_k_missing_void(self):
+        for kw in ({"sigma": None}, {"k": None}):
+            r, o = self._res(5e-6, **kw)
+            self.assertEqual(C.verdict_branch_G(r, o).state, "VOID")
+
+    def test_token_floor_void_and_floor_added_to_u(self):
+        r, o = self._res(5e-6, floor=T.Token("UNTESTED", "x"))
+        self.assertEqual(C.verdict_branch_G(r, o).state, "VOID")
+        # floor widens U: 9.8e-6 is OK with floor 0 (U = 2e-7) but not with floor 1e-7 (U = 3e-7)
+        r, o = self._res(9.75e-6, floor=0)
+        self.assertEqual(C.verdict_branch_G(r, o).status, "OK")
+        r, o = self._res(9.75e-6, floor=1e-7)
+        self.assertEqual(C.verdict_branch_G(r, o).token.state, "UNRESOLVED")
+
+    def test_empty_acceptance_zone_no_ok(self):
+        r, o = self._res(0.0, tol=1e-7, sigma=1e-7, k=2)        # U > tol
+        self.assertEqual(C.verdict_branch_G(r, o).token.state, "UNRESOLVED")
+
+    def test_source_status(self):
+        self.assertEqual(C.G_SOURCE_STATUS, "NOT_CHECKED")
+        self.assertIn("VERIFY", C.G_SOURCE)

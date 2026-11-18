@@ -12,7 +12,7 @@ module   spec   file                PR
 M1       §7     cplay/brief.py      input-brief record; shared source read per level
 M2       §4     cplay/tokens.py     distinct tokens, reason rule, typed expiry, scoped absence, claims 1:1
 M3       §2     cplay/axes.py       3 axes + APPLICABILITY; COVERAGE apart, never severity; crash = record; #257 map; CLOSED_WITHIN off PHYSICAL VOID
-M4       §2     cplay/closure.py    verdict() STOPPED (spec gap); branches A-F beside it, SPLIT c1 c2 c4 c5 c6 c7 (samples/)
+M4       §2     cplay/closure.py    verdict() STOPPED (spec gap); branches A-G beside it (G guard band, source NOT_CHECKED); G differs on c1 c2
 M5       §3     cplay/gates.py      identity -> regime -> compare -> card enforced; UNDECLARED regime refuses
 M6       §5     cplay/trust.py      key (model, scope, start state); no transfer without cert; START_STATE_SENSITIVE
 M7       §6     cplay/known_answer.py  provenance per case; circular counts nothing; crash = record; null-only harness

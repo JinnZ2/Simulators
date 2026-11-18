@@ -28,6 +28,12 @@ Added (branch completion), none adopted:
                        |m| > allowable; else CLOSED_WITHIN with sigma*sqrt(n_legs). n_legs is a
                        declared call input; missing -> VOID. F as given states no OK condition, so
                        F returns no OK (reading taken here).
+  G  guard band        U = k*sigma + roundoff floor. OK if |m| <= tol - U; FAILED if |m| > tol + U;
+                       otherwise UNRESOLVED (inside the guard band), carried on INSTRUMENT, never
+                       PHYSICAL. sigma or k missing -> VOID; a token floor -> VOID. When U >= tol
+                       the acceptance zone is empty and OK is unreachable (reading taken here).
+                       Source: "ISO 14253-1 / JCGM 106 decision rule, recalled, not re-read
+                       (VERIFY)"; COMBINED_SPEC section 7 status NOT_CHECKED.
 D and E need a numeric floor (a token floor -> VOID); a CLOSED_WITHIN with no declared sigma is
 VOID, since Q2 makes sigma part of CLOSED_WITHIN. F needs sigma and k (missing -> VOID).
 
@@ -259,8 +265,42 @@ def verdict_branch_F(result, misclosure=None, n_legs=None):
     return _closed(decl, m, allowable, sigma=s_legs, what="k*sigma*sqrt(%d)" % n_legs)
 
 
+G_SOURCE = "ISO 14253-1 / JCGM 106 decision rule, recalled, not re-read (VERIFY)"
+G_SOURCE_STATUS = "NOT_CHECKED"
+
+
+class FieldToken(namedtuple("FieldToken", "field token")):
+    """A non-axis state carried on a named failure axis (branch G's UNRESOLVED)."""
+    __slots__ = ()
+
+    def __new__(cls, field, token):
+        if field != "INSTRUMENT":
+            raise ClosureError("UNRESOLVED is carried on INSTRUMENT, never %s" % field)
+        if not isinstance(token, T.Token) or token.state != "UNRESOLVED":
+            raise ClosureError("FieldToken carries an UNRESOLVED token")
+        return super().__new__(cls, field, token)
+
+
+def verdict_branch_G(result, misclosure=None):
+    decl, m, band = _accepted(result, misclosure)
+    if band is None:
+        return T.Token("VOID", "branch G needs sigma and k declared for account %s" % decl.account)
+    floor, void = _floor(result, "G")
+    if void is not None:
+        return void
+    u = band + floor
+    if m <= decl.tolerance - u:
+        return A.reading("PHYSICAL", "OK")
+    if m > decl.tolerance + u:
+        return _failed(result, decl, m)
+    return FieldToken("INSTRUMENT", T.Token(
+        "UNRESOLVED", "|m| = %g within guard band tol +/- U = %g +/- %g (source %s: %s)"
+        % (m, decl.tolerance, u, G_SOURCE_STATUS, G_SOURCE)))
+
+
 BRANCHES = {"A": verdict_branch_A, "B": verdict_branch_B, "C": verdict_branch_C,
-            "D": verdict_branch_D, "E": verdict_branch_E, "F": verdict_branch_F}
+            "D": verdict_branch_D, "E": verdict_branch_E, "F": verdict_branch_F,
+            "G": verdict_branch_G}
 N_LEGS = 4    # declared for every constructed case, so F's VOIDs come from sigma / k, not legs
 
 # case: (misclosure, tolerance, sigma, k, roundoff floor, declared_complete) -- constructed
@@ -277,6 +317,8 @@ CASES = (
 
 
 def _label(r):
+    if isinstance(r, FieldToken):
+        return "%s:%s" % (r.field, r.token.state)
     if isinstance(r, T.Token):
         return r.state
     return "%s:%s" % (r.field, r.status)
@@ -295,26 +337,31 @@ def branch_table():
                for b, fn in BRANCHES.items()}
         abc = {got[b] for b in "ABC"}
         live = {v for v in got.values() if v != "VOID"}
+        a_f = {got[b] for b in "ABCDEF"}
         rows.append({"case": cid, "m": m, "tol": tol, "sigma": sigma, "k": k, "floor": floor,
                      "complete": complete, "branches": got, "split": len(set(got.values())) > 1,
-                     "split_abc": len(abc) > 1, "split_live": len(live) > 1})
+                     "split_abc": len(abc) > 1, "split_live": len(live) > 1,
+                     "split_af": len(a_f) > 1, "g_differs": got["G"] not in a_f})
     return rows
 
 
 def render_table(rows=None):
     rows = rows or branch_table()
     short = {"PHYSICAL:OK": "P:OK", "PHYSICAL:CLOSED_WITHIN": "P:CW", "PHYSICAL:FAILED": "P:FAIL",
-             "DETERMINATION:FAILED": "D:FAIL", "VOID": "VOID"}
-    out = ["P = PHYSICAL, D = DETERMINATION, CW = CLOSED_WITHIN; n_legs = %d for branch F" % N_LEGS,
-           "case  |m|           tol    k*sigma  floor   complete  A       B       C       D       E       F       split"]
+             "DETERMINATION:FAILED": "D:FAIL", "VOID": "VOID", "INSTRUMENT:UNRESOLVED": "I:UNRES"}
+    out = ["P = PHYSICAL, D = DETERMINATION, I = INSTRUMENT, CW = CLOSED_WITHIN; n_legs = %d for F" % N_LEGS,
+           "G source: %s [%s]" % (G_SOURCE, G_SOURCE_STATUS),
+           "case  |m|           tol    k*sigma  floor   complete  A       B       C       D       E       F       G        split  G-differs"]
     for r in rows:
         band = "--" if r["sigma"] is None else "%g" % (r["k"] * r["sigma"])
-        cells = " ".join("%-7s" % short.get(r["branches"][b], r["branches"][b]) for b in "ABCDEF")
-        out.append("%-5s %-13.8g %-6g %-8s %-7s %-9s %s %s" % (
+        cells = " ".join("%-7s" % short.get(r["branches"][b], r["branches"][b]) for b in "ABCDEFG")
+        out.append("%-5s %-13.8g %-6g %-8s %-7s %-9s %s  %-6s %s" % (
             r["case"], r["m"], r["tol"], band, r["floor"], r["complete"], cells,
-            "SPLIT" if r["split"] else ""))
-    out.append("SPLIT (A-F): " + ", ".join(r["case"] for r in rows if r["split"]))
-    out.append("SPLIT on non-VOID cells only: " + ", ".join(r["case"] for r in rows if r["split_live"]))
+            "SPLIT" if r["split"] else "", "G" if r["g_differs"] else ""))
+    out.append("SPLIT (A-G): " + ", ".join(r["case"] for r in rows if r["split"]))
+    out.append("G differs from every A-F cell: " + ", ".join(r["case"] for r in rows if r["g_differs"]))
+    out.append("SPLIT (A-F, as before): " + ", ".join(r["case"] for r in rows if r["split_af"]))
+    out.append("SPLIT (A-G) on non-VOID cells only: " + ", ".join(r["case"] for r in rows if r["split_live"]))
     out.append("SPLIT (A-C only, as before): " + ", ".join(r["case"] for r in rows if r["split_abc"]))
     return "\n".join(out)
 

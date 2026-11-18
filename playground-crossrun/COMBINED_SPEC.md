@@ -193,6 +193,9 @@ TAF GAP_INSTRUMENT_CRASH       TAF main                                    CHECK
                                definition: calibration/unified_audit.py:92-101
                                merged to main 2026-11-18 via #85 (16285cc); definition line 96,
                                COVERAGE_KINDS line 101
+Decision rule, M4 branch G     ISO 14253-1 / JCGM 106 decision rule,       NOT_CHECKED
+                               recalled, not re-read (VERIFY); stays NOT_CHECKED until someone
+                               reads the standard's text
 ```
 
 Definition as quoted (identical text on #82, #85 and main 16285cc):
@@ -357,6 +360,11 @@ VOID or not built in combined-playground M1-M9 and needs a decision before it is
                      E floor then max(tol, k*sigma) / F k*sigma*sqrt(n_legs), tol hard cap); table below
 2026-11-18  CITED    FAILED routing in every branch: PHYSICAL iff ledger DECLARED complete, else
                      DETERMINATION -- section 2 mapping lines 62-65 and R-A1 lines 82-84 (not VOID)
+2026-11-18  BRANCH   G guard band: U = k*sigma + roundoff floor; OK if |m| <= tol - U; FAILED if
+                     |m| > tol + U; between -> UNRESOLVED token on INSTRUMENT, never PHYSICAL;
+                     sigma or k missing -> VOID; token floor -> VOID; U >= tol -> no OK reachable
+2026-11-18  PROPOSAL verdict() = branch G once its source (section 7, decision rule) is CHECKED;
+                     until then verdict() keeps raising SpecGap
 2026-11-18  READING  branch F gives no OK (the item states none); D / E CLOSED_WITHIN with no declared
                      sigma -> VOID (Q2 makes sigma part of CLOSED_WITHIN)
 ```
@@ -373,22 +381,26 @@ Merge log:
 M4 branch table (combined-playground/samples/closure_branch_table.txt, constructed cases):
 
 ```text
-P = PHYSICAL, D = DETERMINATION, CW = CLOSED_WITHIN; n_legs = 4 for branch F
-case  |m|           tol    k*sigma  floor   complete  A       B       C       D       E       F       split
-c1    1e-07         1e-06  3e-06    1e-12   True      P:OK    P:OK    P:CW    P:CW    P:CW    P:CW    SPLIT
-c2    2e-06         1e-06  3e-06    1e-12   True      P:CW    P:CW    P:CW    P:FAIL  P:CW    P:FAIL  SPLIT
-c3    5e-06         1e-06  3e-06    1e-12   True      P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL  
-c4    1.0000005e-06 1e-06  --       1e-09   True      P:FAIL  P:OK    P:FAIL  P:FAIL  P:FAIL  VOID    SPLIT
-c5    5e-07         1e-06  --       1e-12   True      P:OK    P:OK    P:OK    VOID    VOID    VOID    SPLIT
-c6    5e-07         1e-06  --       TOKEN   True      P:OK    VOID    P:OK    VOID    VOID    VOID    SPLIT
-c7    2e-06         1e-06  --       1e-12   True      P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL  VOID    SPLIT
-c8    5e-06         1e-06  3e-06    1e-12   ABSENT    D:FAIL  D:FAIL  D:FAIL  D:FAIL  D:FAIL  D:FAIL  
-SPLIT (A-F): c1, c2, c4, c5, c6, c7
-SPLIT on non-VOID cells only: c1, c2, c4
+P = PHYSICAL, D = DETERMINATION, I = INSTRUMENT, CW = CLOSED_WITHIN; n_legs = 4 for F
+G source: ISO 14253-1 / JCGM 106 decision rule, recalled, not re-read (VERIFY) [NOT_CHECKED]
+case  |m|           tol    k*sigma  floor   complete  A       B       C       D       E       F       G        split  G-differs
+c1    1e-07         1e-06  3e-06    1e-12   True      P:OK    P:OK    P:CW    P:CW    P:CW    P:CW    I:UNRES  SPLIT  G
+c2    2e-06         1e-06  3e-06    1e-12   True      P:CW    P:CW    P:CW    P:FAIL  P:CW    P:FAIL  I:UNRES  SPLIT  G
+c3    5e-06         1e-06  3e-06    1e-12   True      P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL          
+c4    1.0000005e-06 1e-06  --       1e-09   True      P:FAIL  P:OK    P:FAIL  P:FAIL  P:FAIL  VOID    VOID     SPLIT  
+c5    5e-07         1e-06  --       1e-12   True      P:OK    P:OK    P:OK    VOID    VOID    VOID    VOID     SPLIT  
+c6    5e-07         1e-06  --       TOKEN   True      P:OK    VOID    P:OK    VOID    VOID    VOID    VOID     SPLIT  
+c7    2e-06         1e-06  --       1e-12   True      P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL  VOID    VOID     SPLIT  
+c8    5e-06         1e-06  3e-06    1e-12   ABSENT    D:FAIL  D:FAIL  D:FAIL  D:FAIL  D:FAIL  D:FAIL  D:FAIL          
+SPLIT (A-G): c1, c2, c4, c5, c6, c7
+G differs from every A-F cell: c1, c2
+SPLIT (A-F, as before): c1, c2, c4, c5, c6, c7
+SPLIT (A-G) on non-VOID cells only: c1, c2, c4
 SPLIT (A-C only, as before): c1, c4, c6
 ```
 
-SPLIT rows (A-F): c1, c2, c4, c5, c6, c7. Splits between non-VOID verdicts: c1 (OK vs CLOSED_WITHIN:
-is a misclosure inside both tol and k*sigma OK?), c2 (CLOSED_WITHIN vs FAILED: is tol a cap or is
-k*sigma a wider band?), c4 (OK vs FAILED: is the roundoff floor added to tol?). c5, c6, c7 split only
-on VOID cells (no sigma, a token floor, or no sigma for F). A-C alone split on c1, c4, c6 as before.
+SPLIT rows (A-G): c1, c2, c4, c5, c6, c7. Splits between non-VOID verdicts: c1 (OK vs CLOSED_WITHIN
+vs UNRESOLVED), c2 (CLOSED_WITHIN vs FAILED vs UNRESOLVED), c4 (OK vs FAILED). G differs from every
+A-F cell on c1 and c2: with k*sigma = 3e-6 > tol = 1e-6 the guard band swallows the acceptance zone,
+so G returns UNRESOLVED where A-F return OK, CLOSED_WITHIN or FAILED. G agrees on c3 and c8, and is
+VOID on c4-c7 (no sigma declared). A-C alone split on c1, c4, c6 as before.
