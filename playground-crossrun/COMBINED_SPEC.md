@@ -76,7 +76,10 @@ Rules:
   If it is absent, the ledger counts as NOT declared, and the failure lands on DETERMINATION,
   never on PHYSICAL (F9).
 - R-A2: a crash is a record carrying the exception type, the call path that raised, and the
-  inputs. A crash never produces "no row" (F2).
+  inputs. A crash never produces "no row" (F2). CRASHED stays an INSTRUMENT status, and it is
+  reported on the coverage axis (kinds UNKNOWN / INFO / GAP_INSTRUMENT_CRASH), never in severity.
+  The coverage entry carries TAF's fields: kind, module, input, reason, missing_path,
+  expiry_condition (source: section 7).
 - R-A3: a field no gate read is UNTESTED, never OK by default.
 - R-A4: closure tolerance is declared PER ACCOUNT, BEFORE the run. There is no global default; a
   missing tolerance refuses the run rather than filling 1e-9 silently (O4, Q13). The numerical
@@ -177,9 +180,26 @@ Sources owed to `combined-playground/sources/` when the build starts:
 Kimi audit, observer regimes   #256 forest-model-ledger/ledger/toolkit/cases/texts/
                                kimi_substrate_neutral_intelligence_audit.md, section 4.4
                                (head d402fa8, sha256 86945968...)          CHECKED
-TAF GAP_INSTRUMENT_CRASH       TAF draft branches #82 / #85 (unmerged)     NOT CHECKED HERE:
-                               to be verified from the TAF cleanup session, where they are readable
+TAF GAP_INSTRUMENT_CRASH       TAF draft branches #82 / #85 (unmerged)     CHECKED 2026-11-18, read-only
+                               heads #82 a2c5d99d8b41 / #85 65bb724f0484
+                               definition: calibration/unified_audit.py:92-101
+                               main 25551f8: 0 occurrences (label unmerged)
 ```
+
+Definition as quoted (identical text on both heads):
+
+```text
+# A module that raised is not a reading of the system. Its status is
+# GAP_INSTRUMENT_CRASH and it goes to coverage with the exception and the
+# missing path, never to severity (2026-11-11 follow-up to #80).
+GAP_INSTRUMENT_CRASH = "GAP_INSTRUMENT_CRASH"
+COVERAGE_KINDS = ("UNKNOWN", "INFO", "GAP_INSTRUMENT_CRASH")
+coverage entry fields: kind, module, input, reason, missing_path, expiry_condition
+```
+
+Pin note: `calibration/unified_audit.py` differs between the two heads (sha256 #82 a0864e725159...,
+#85 fcccb9af8d8e...). This spec cites #85 as the later head. Re-pin to the merge commit when the
+label merges to TAF main.
 
 ---
 
@@ -252,6 +272,8 @@ Q3   tool-gate crash -> INSTRUMENT : CRASHED(exception, path). Own status: FAILE
      session, where they are readable. Not checked here: those are TAF PRs,
      a repository outside this session's scope. Simulators' own #82 / #85 are unrelated and do not
      contain the label.
+     2026-11-18: source CHECKED (read-only; section 7). Answer kept: CRASHED is an instrument
+     status, reported on the coverage axis and never in severity.
 Q7   continuity: two fields, identity_check (configuration) and return_to_anchor (system),
      no composite. Branch rule: keep both.
 Q9   observer partition = union of four: PASSIVE (null control: not disturbed, not reacting) |
