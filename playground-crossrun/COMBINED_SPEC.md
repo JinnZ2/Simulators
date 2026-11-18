@@ -352,24 +352,43 @@ VOID or not built in combined-playground M1-M9 and needs a decision before it is
 2026-11-18  also     CLOSED_WITHIN on INSTRUMENT / DETERMINATION -> VOID (M3; mapped to PHYSICAL only)
 2026-11-18  GAP      rows 35-36 percolation (two families) and branching (bounded pmf + closed form):
                      families and bounds named, no algorithm stated; not built
-2026-11-18  CHOICE   M4 closure verdict rule: verdict() raises SpecGap; three candidates built beside it,
-                     none adopted (A tolerance first / B floor added / C band first); table below
+2026-11-18  CHOICE   M4 closure verdict rule: verdict() raises SpecGap; six candidates built beside it,
+                     none adopted (A tolerance first / B floor added / C band first / D floor first /
+                     E floor then max(tol, k*sigma) / F k*sigma*sqrt(n_legs), tol hard cap); table below
+2026-11-18  CITED    FAILED routing in every branch: PHYSICAL iff ledger DECLARED complete, else
+                     DETERMINATION -- section 2 mapping lines 62-65 and R-A1 lines 82-84 (not VOID)
+2026-11-18  READING  branch F gives no OK (the item states none); D / E CLOSED_WITHIN with no declared
+                     sigma -> VOID (Q2 makes sigma part of CLOSED_WITHIN)
+```
+
+Merge log:
+
+```text
+2026-11-18  M1 #280 ba4c9fc  M2 #281 8bb5eee  M4 #283 02c98b9  M5 #284 f5cb3a6  M6 #285 2e900c1
+            M7 #286 6d790c1  M8 #287 ab4b007  M9 #288 a827228
+2026-11-18  M3 #282 landed via M4 merge 02c98b9 (no merge commit of its own: base auto-retargeted on
+            branch delete, the PR was still draft, M4 carried its commits; GitHub marked #282 merged)
 ```
 
 M4 branch table (combined-playground/samples/closure_branch_table.txt, constructed cases):
 
 ```text
-case  |m|           tol    k*sigma  floor   complete  A                     B                     C
-c1    1e-07         1e-06  3e-06    1e-12   True      PHYSICAL:OK           PHYSICAL:OK           PHYSICAL:CLOSED_WITHIN  SPLIT
-c2    2e-06         1e-06  3e-06    1e-12   True      PHYSICAL:CLOSED_WITHIN (all three)
-c3    5e-06         1e-06  3e-06    1e-12   True      PHYSICAL:FAILED (all three)
-c4    1.0000005e-06 1e-06  --       1e-09   True      PHYSICAL:FAILED       PHYSICAL:OK           PHYSICAL:FAILED         SPLIT
-c5    5e-07         1e-06  --       1e-12   True      PHYSICAL:OK (all three)
-c6    5e-07         1e-06  --       TOKEN   True      PHYSICAL:OK           VOID                  PHYSICAL:OK             SPLIT
-c7    2e-06         1e-06  --       1e-12   True      PHYSICAL:FAILED (all three)
-c8    5e-06         1e-06  3e-06    1e-12   ABSENT    DETERMINATION:FAILED (all three)
+P = PHYSICAL, D = DETERMINATION, CW = CLOSED_WITHIN; n_legs = 4 for branch F
+case  |m|           tol    k*sigma  floor   complete  A       B       C       D       E       F       split
+c1    1e-07         1e-06  3e-06    1e-12   True      P:OK    P:OK    P:CW    P:CW    P:CW    P:CW    SPLIT
+c2    2e-06         1e-06  3e-06    1e-12   True      P:CW    P:CW    P:CW    P:FAIL  P:CW    P:FAIL  SPLIT
+c3    5e-06         1e-06  3e-06    1e-12   True      P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL  
+c4    1.0000005e-06 1e-06  --       1e-09   True      P:FAIL  P:OK    P:FAIL  P:FAIL  P:FAIL  VOID    SPLIT
+c5    5e-07         1e-06  --       1e-12   True      P:OK    P:OK    P:OK    VOID    VOID    VOID    SPLIT
+c6    5e-07         1e-06  --       TOKEN   True      P:OK    VOID    P:OK    VOID    VOID    VOID    SPLIT
+c7    2e-06         1e-06  --       1e-12   True      P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL  VOID    SPLIT
+c8    5e-06         1e-06  3e-06    1e-12   ABSENT    D:FAIL  D:FAIL  D:FAIL  D:FAIL  D:FAIL  D:FAIL  
+SPLIT (A-F): c1, c2, c4, c5, c6, c7
+SPLIT on non-VOID cells only: c1, c2, c4
+SPLIT (A-C only, as before): c1, c4, c6
 ```
 
-SPLIT rows: c1 (A/B vs C: does a misclosure inside both tolerance and k*sigma read OK or
-CLOSED_WITHIN?), c4 (B vs A/C: is the roundoff floor added to the tolerance?), c6 (B vs A/C:
-what does B do with an unmeasured floor?).
+SPLIT rows (A-F): c1, c2, c4, c5, c6, c7. Splits between non-VOID verdicts: c1 (OK vs CLOSED_WITHIN:
+is a misclosure inside both tol and k*sigma OK?), c2 (CLOSED_WITHIN vs FAILED: is tol a cap or is
+k*sigma a wider band?), c4 (OK vs FAILED: is the roundoff floor added to tol?). c5, c6, c7 split only
+on VOID cells (no sigma, a token floor, or no sigma for F). A-C alone split on c1, c4, c6 as before.

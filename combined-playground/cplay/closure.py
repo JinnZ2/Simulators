@@ -18,8 +18,24 @@ DECLARED complete (R-A1), else on DETERMINATION:
   B  floor added       OK if |m| <= tol + roundoff floor; CLOSED_WITHIN if |m| <= k*sigma;
                        else FAILED. A token floor (not a number) makes B VOID.
   C  band first        CLOSED_WITHIN if |m| <= k*sigma; OK if |m| <= tol; else FAILED
-A missing sigma or k removes the band step. branch_table() runs eight declared cases through
-all three and marks SPLIT where they disagree.
+A missing sigma or k removes the band step.
+
+Added (branch completion), none adopted:
+  D  floor first       OK if |m| <= roundoff floor; CLOSED_WITHIN if |m| <= tol; else FAILED
+  E  floor, then band  band = max(tol, k*sigma); OK if |m| <= floor; CLOSED_WITHIN if |m| <= band;
+                       else FAILED
+  F  legs              allowable = k*sigma*sqrt(n_legs), tol a hard cap: FAILED if |m| > tol or
+                       |m| > allowable; else CLOSED_WITHIN with sigma*sqrt(n_legs). n_legs is a
+                       declared call input; missing -> VOID. F as given states no OK condition, so
+                       F returns no OK (reading taken here).
+D and E need a numeric floor (a token floor -> VOID); a CLOSED_WITHIN with no declared sigma is
+VOID, since Q2 makes sigma part of CLOSED_WITHIN. F needs sigma and k (missing -> VOID).
+
+FAILED routing (all branches): PHYSICAL when the ledger is DECLARED complete, else DETERMINATION.
+Source: COMBINED_SPEC section 2 mapping table, lines 62-65 ("closure fail, ledger declared
+complete -> PHYSICAL : FAILED" / "ledger NOT declared complete -> DETERMINATION : FAILED"), and
+R-A1, lines 82-84. branch_table() runs eight declared cases through all six and marks SPLIT where
+they disagree.
 """
 import hashlib
 import json
@@ -158,9 +174,21 @@ def _failed(result, decl, m):
                      % (m, decl.tolerance, decl.account))
 
 
-def _closed(decl, m, band):
-    return A.reading("PHYSICAL", "CLOSED_WITHIN", reason="|m| = %g <= k*sigma = %g" % (m, band),
-                     sigma=decl.sigma, basis=decl.basis)
+def _closed(decl, m, band, sigma=None, what="k*sigma"):
+    sigma = decl.sigma if sigma is None else sigma
+    if sigma is None:
+        return T.Token("VOID", "CLOSED_WITHIN needs a declared sigma (Q2); account %s has none"
+                       % decl.account)
+    return A.reading("PHYSICAL", "CLOSED_WITHIN", reason="|m| = %g <= %s = %g" % (m, what, band),
+                     sigma=sigma, basis=decl.basis)
+
+
+def _floor(result, branch):
+    floor = result.prereg.roundoff_floor
+    if isinstance(floor, T.Token):
+        return None, T.Token("VOID", "branch %s reads the roundoff floor; the floor is a token, "
+                                     "not a number" % branch)
+    return floor, None
 
 
 def verdict_branch_A(result, misclosure=None):
@@ -193,7 +221,47 @@ def verdict_branch_C(result, misclosure=None):
     return _failed(result, decl, m)
 
 
-BRANCHES = {"A": verdict_branch_A, "B": verdict_branch_B, "C": verdict_branch_C}
+def verdict_branch_D(result, misclosure=None):
+    decl, m, _ = _accepted(result, misclosure)
+    floor, void = _floor(result, "D")
+    if void is not None:
+        return void
+    if m <= floor:
+        return A.reading("PHYSICAL", "OK")
+    if m <= decl.tolerance:
+        return _closed(decl, m, decl.tolerance, what="tol")
+    return _failed(result, decl, m)
+
+
+def verdict_branch_E(result, misclosure=None):
+    decl, m, band = _accepted(result, misclosure)
+    floor, void = _floor(result, "E")
+    if void is not None:
+        return void
+    wide = decl.tolerance if band is None else max(decl.tolerance, band)
+    if m <= floor:
+        return A.reading("PHYSICAL", "OK")
+    if m <= wide:
+        return _closed(decl, m, wide, what="max(tol, k*sigma)")
+    return _failed(result, decl, m)
+
+
+def verdict_branch_F(result, misclosure=None, n_legs=None):
+    decl, m, _ = _accepted(result, misclosure)
+    if isinstance(n_legs, bool) or not isinstance(n_legs, int) or n_legs < 1:
+        return T.Token("VOID", "branch F needs n_legs as a declared integer >= 1; got %r" % (n_legs,))
+    if decl.sigma is None or decl.k is None:
+        return T.Token("VOID", "branch F needs sigma and k declared for account %s" % decl.account)
+    s_legs = decl.sigma * n_legs ** 0.5
+    allowable = decl.k * s_legs
+    if m > decl.tolerance or m > allowable:
+        return _failed(result, decl, m)
+    return _closed(decl, m, allowable, sigma=s_legs, what="k*sigma*sqrt(%d)" % n_legs)
+
+
+BRANCHES = {"A": verdict_branch_A, "B": verdict_branch_B, "C": verdict_branch_C,
+            "D": verdict_branch_D, "E": verdict_branch_E, "F": verdict_branch_F}
+N_LEGS = 4    # declared for every constructed case, so F's VOIDs come from sigma / k, not legs
 
 # case: (misclosure, tolerance, sigma, k, roundoff floor, declared_complete) -- constructed
 CASES = (
@@ -223,23 +291,32 @@ def branch_table():
                    declared_complete=dc, registry=("constructed case",), roundoff_floor=fl)
         obs = Misclosure(account="N", value=m, provenance="declared case %s" % cid)
         res = run(p, p.sha256, [obs])
-        got = {b: _label(fn(res, obs)) for b, fn in BRANCHES.items()}
+        got = {b: _label(fn(res, obs, n_legs=N_LEGS) if b == "F" else fn(res, obs))
+               for b, fn in BRANCHES.items()}
+        abc = {got[b] for b in "ABC"}
+        live = {v for v in got.values() if v != "VOID"}
         rows.append({"case": cid, "m": m, "tol": tol, "sigma": sigma, "k": k, "floor": floor,
-                     "complete": complete, "branches": got, "split": len(set(got.values())) > 1})
+                     "complete": complete, "branches": got, "split": len(set(got.values())) > 1,
+                     "split_abc": len(abc) > 1, "split_live": len(live) > 1})
     return rows
 
 
 def render_table(rows=None):
     rows = rows or branch_table()
-    out = ["case  |m|          tol    k*sigma  floor   complete  A                       B                       C                       split"]
+    short = {"PHYSICAL:OK": "P:OK", "PHYSICAL:CLOSED_WITHIN": "P:CW", "PHYSICAL:FAILED": "P:FAIL",
+             "DETERMINATION:FAILED": "D:FAIL", "VOID": "VOID"}
+    out = ["P = PHYSICAL, D = DETERMINATION, CW = CLOSED_WITHIN; n_legs = %d for branch F" % N_LEGS,
+           "case  |m|           tol    k*sigma  floor   complete  A       B       C       D       E       F       split"]
     for r in rows:
         band = "--" if r["sigma"] is None else "%g" % (r["k"] * r["sigma"])
-        b = r["branches"]
-        out.append("%-5s %-12.8g %-6g %-8s %-7s %-9s %-23s %-23s %-23s %s" % (
-            r["case"], r["m"], r["tol"], band, r["floor"], r["complete"], b["A"], b["B"], b["C"],
+        cells = " ".join("%-7s" % short.get(r["branches"][b], r["branches"][b]) for b in "ABCDEF")
+        out.append("%-5s %-13.8g %-6g %-8s %-7s %-9s %s %s" % (
+            r["case"], r["m"], r["tol"], band, r["floor"], r["complete"], cells,
             "SPLIT" if r["split"] else ""))
+    out.append("SPLIT (A-F): " + ", ".join(r["case"] for r in rows if r["split"]))
+    out.append("SPLIT on non-VOID cells only: " + ", ".join(r["case"] for r in rows if r["split_live"]))
+    out.append("SPLIT (A-C only, as before): " + ", ".join(r["case"] for r in rows if r["split_abc"]))
     return "\n".join(out)
-
 
 if __name__ == "__main__":
     print(render_table())

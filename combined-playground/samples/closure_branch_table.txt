@@ -1,9 +1,13 @@
-case  |m|          tol    k*sigma  floor   complete  A                       B                       C                       split
-c1    1e-07        1e-06  3e-06    1e-12   True      PHYSICAL:OK             PHYSICAL:OK             PHYSICAL:CLOSED_WITHIN  SPLIT
-c2    2e-06        1e-06  3e-06    1e-12   True      PHYSICAL:CLOSED_WITHIN  PHYSICAL:CLOSED_WITHIN  PHYSICAL:CLOSED_WITHIN  
-c3    5e-06        1e-06  3e-06    1e-12   True      PHYSICAL:FAILED         PHYSICAL:FAILED         PHYSICAL:FAILED         
-c4    1.0000005e-06 1e-06  --       1e-09   True      PHYSICAL:FAILED         PHYSICAL:OK             PHYSICAL:FAILED         SPLIT
-c5    5e-07        1e-06  --       1e-12   True      PHYSICAL:OK             PHYSICAL:OK             PHYSICAL:OK             
-c6    5e-07        1e-06  --       TOKEN   True      PHYSICAL:OK             VOID                    PHYSICAL:OK             SPLIT
-c7    2e-06        1e-06  --       1e-12   True      PHYSICAL:FAILED         PHYSICAL:FAILED         PHYSICAL:FAILED         
-c8    5e-06        1e-06  3e-06    1e-12   ABSENT    DETERMINATION:FAILED    DETERMINATION:FAILED    DETERMINATION:FAILED    
+P = PHYSICAL, D = DETERMINATION, CW = CLOSED_WITHIN; n_legs = 4 for branch F
+case  |m|           tol    k*sigma  floor   complete  A       B       C       D       E       F       split
+c1    1e-07         1e-06  3e-06    1e-12   True      P:OK    P:OK    P:CW    P:CW    P:CW    P:CW    SPLIT
+c2    2e-06         1e-06  3e-06    1e-12   True      P:CW    P:CW    P:CW    P:FAIL  P:CW    P:FAIL  SPLIT
+c3    5e-06         1e-06  3e-06    1e-12   True      P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL  
+c4    1.0000005e-06 1e-06  --       1e-09   True      P:FAIL  P:OK    P:FAIL  P:FAIL  P:FAIL  VOID    SPLIT
+c5    5e-07         1e-06  --       1e-12   True      P:OK    P:OK    P:OK    VOID    VOID    VOID    SPLIT
+c6    5e-07         1e-06  --       TOKEN   True      P:OK    VOID    P:OK    VOID    VOID    VOID    SPLIT
+c7    2e-06         1e-06  --       1e-12   True      P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL  VOID    SPLIT
+c8    5e-06         1e-06  3e-06    1e-12   ABSENT    D:FAIL  D:FAIL  D:FAIL  D:FAIL  D:FAIL  D:FAIL  
+SPLIT (A-F): c1, c2, c4, c5, c6, c7
+SPLIT on non-VOID cells only: c1, c2, c4
+SPLIT (A-C only, as before): c1, c4, c6
