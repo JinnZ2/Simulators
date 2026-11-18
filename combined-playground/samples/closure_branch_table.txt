@@ -1,13 +1,16 @@
-P = PHYSICAL, D = DETERMINATION, CW = CLOSED_WITHIN; n_legs = 4 for branch F
-case  |m|           tol    k*sigma  floor   complete  A       B       C       D       E       F       split
-c1    1e-07         1e-06  3e-06    1e-12   True      P:OK    P:OK    P:CW    P:CW    P:CW    P:CW    SPLIT
-c2    2e-06         1e-06  3e-06    1e-12   True      P:CW    P:CW    P:CW    P:FAIL  P:CW    P:FAIL  SPLIT
-c3    5e-06         1e-06  3e-06    1e-12   True      P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL  
-c4    1.0000005e-06 1e-06  --       1e-09   True      P:FAIL  P:OK    P:FAIL  P:FAIL  P:FAIL  VOID    SPLIT
-c5    5e-07         1e-06  --       1e-12   True      P:OK    P:OK    P:OK    VOID    VOID    VOID    SPLIT
-c6    5e-07         1e-06  --       TOKEN   True      P:OK    VOID    P:OK    VOID    VOID    VOID    SPLIT
-c7    2e-06         1e-06  --       1e-12   True      P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL  VOID    SPLIT
-c8    5e-06         1e-06  3e-06    1e-12   ABSENT    D:FAIL  D:FAIL  D:FAIL  D:FAIL  D:FAIL  D:FAIL  
-SPLIT (A-F): c1, c2, c4, c5, c6, c7
-SPLIT on non-VOID cells only: c1, c2, c4
+P = PHYSICAL, D = DETERMINATION, I = INSTRUMENT, CW = CLOSED_WITHIN; n_legs = 4 for F
+G source: ISO 14253-1 / JCGM 106 decision rule, recalled, not re-read (VERIFY) [NOT_CHECKED]
+case  |m|           tol    k*sigma  floor   complete  A       B       C       D       E       F       G        split  G-differs
+c1    1e-07         1e-06  3e-06    1e-12   True      P:OK    P:OK    P:CW    P:CW    P:CW    P:CW    I:UNRES  SPLIT  G
+c2    2e-06         1e-06  3e-06    1e-12   True      P:CW    P:CW    P:CW    P:FAIL  P:CW    P:FAIL  I:UNRES  SPLIT  G
+c3    5e-06         1e-06  3e-06    1e-12   True      P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL          
+c4    1.0000005e-06 1e-06  --       1e-09   True      P:FAIL  P:OK    P:FAIL  P:FAIL  P:FAIL  VOID    VOID     SPLIT  
+c5    5e-07         1e-06  --       1e-12   True      P:OK    P:OK    P:OK    VOID    VOID    VOID    VOID     SPLIT  
+c6    5e-07         1e-06  --       TOKEN   True      P:OK    VOID    P:OK    VOID    VOID    VOID    VOID     SPLIT  
+c7    2e-06         1e-06  --       1e-12   True      P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL  VOID    VOID     SPLIT  
+c8    5e-06         1e-06  3e-06    1e-12   ABSENT    D:FAIL  D:FAIL  D:FAIL  D:FAIL  D:FAIL  D:FAIL  D:FAIL          
+SPLIT (A-G): c1, c2, c4, c5, c6, c7
+G differs from every A-F cell: c1, c2
+SPLIT (A-F, as before): c1, c2, c4, c5, c6, c7
+SPLIT (A-G) on non-VOID cells only: c1, c2, c4
 SPLIT (A-C only, as before): c1, c4, c6
