@@ -394,6 +394,20 @@ VOID or not built in combined-playground M1-M9 and needs a decision before it is
 2026-11-18  VOID-11  expiry-trigger kind vocabulary (M2)
 2026-11-18  VOID-12  vocabulary mapping rows (M2, Q12)
 2026-11-18  also     CLOSED_WITHIN on INSTRUMENT / DETERMINATION -> VOID (M3; mapped to PHYSICAL only)
+2026-11-18  TRIAGE   G1 REUSE (pins in combined-playground/cplay/pins.py; sample samples/pins_resolve.txt):
+                     VOID-1  no composite; severity() is the per-axis vector (P1 TAF 16285cc
+                             unified_audit.py "UNKNOWN is deliberately absent"; R-A2). The cited
+                             "ai-metrology weights not bins" was NOT FOUND (no such repo or file)
+                     VOID-5  card causes = shared source, method, model, training data, code, axioms;
+                             undeclared -> UNDECLARED token (P5 formula-audit 4345de6 infer/ladder.py)
+                     VOID-6  transfer argument passes iff every declared constraint matched and
+                             independence checked, else REFUSED (P6 ladder cross_domain; P6 card)
+                     VOID-10 interval propagation delegated to formula-audit numcheck, not copied
+                             (P10 337289d numcheck/check.py, identical bytes on main 4345de6)
+                     VOID-11 expiry vocabulary = TAF EXPIRY_KEYS instrument_class / sensitivity /
+                             protocol / provenance (P11 16285cc); not mapped onto cplay ExpiryTrigger
+                             kind / target / condition -- that mapping is VOID-12
+2026-11-18  OPEN     VOID-7, VOID-9, VOID-12: author's call, open
 2026-11-18  GAP      rows 35-36 percolation (two families) and branching (bounded pmf + closed form):
                      families and bounds named, no algorithm stated; not built
 2026-11-18  CHOICE   M4 closure verdict rule: verdict() raises SpecGap; six candidates built beside it,

@@ -68,7 +68,7 @@ class Order(unittest.TestCase):
         self.assertEqual(card["shared_source_by_level"]["concept_level"].state, B.CUE_IN_ONE)
         self.assertEqual(card["regimes"], ("PASSIVE", "REACTIVITY"))
         self.assertEqual(card["regime_mismatch_effect"].state, "VOID")
-        self.assertEqual(card["other_causes"].state, "VOID")
+        self.assertEqual(card["other_causes"]["model"].state, "UNDECLARED")   # 9c item 5
 
     def test_steps_run_once(self):
         self.ch.identity(True, "same")

@@ -62,7 +62,8 @@ class Token(object):
 
 
 class ExpiryTrigger(object):
-    """Typed: kind, target, condition all required. The kind vocabulary is VOID in the spec."""
+    """Typed: kind, target, condition all required. The vocabulary is the TAF expiry_condition register
+    (EXPIRY_VOCABULARY, pinned); its keys are not mapped onto kind/target/condition (9c item 12, open)."""
     is_exit = True
 
     def __init__(self, kind, target, condition):
@@ -130,3 +131,10 @@ class Claim(object):
 
 VOCABULARY_MAPPING = Token("VOID", "Q12: the spec keeps s-a ConditionBasis and #257 STATUSES apart and calls for "
                                    "a mapping table, but gives no rows; rows are not invented here")
+
+
+# 9c item 11: the expiry vocabulary is the TAF expiry_condition register, pinned, not copied.
+TAF_EXPIRY_KEYS = ("instrument_class", "sensitivity", "protocol", "provenance")
+EXPIRY_VOCABULARY = Token("REFUSED", "not redefined here: TAF calibration/expiry_register.py EXPIRY_KEYS, "
+                          "pin P11-taf-expiry-register (main 16285cc); mapping onto ExpiryTrigger's "
+                          "kind/target/condition is 9c item 12, author's call")

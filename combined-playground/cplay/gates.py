@@ -10,12 +10,16 @@ Held VOID (the spec does not define them):
   - the measurand identity criterion: the caller supplies the verdict and its reason
   - what a comparison computes: the caller supplies its result as a token
   - the effect of two systems declaring different regimes
-  - every card cause other than shared source
+  (decided, 9c item 5: card causes are the independence list INDEPENDENCE_CAUSES)
 """
 from collections import namedtuple
 
 from . import brief as B
 from . import tokens as T
+
+# 9c item 5: the independence list (formula-audit branch 5 shared_ancestry, pin P5-ladder-shared-ancestry).
+# shared_source is read from the M1 briefs; the other five are declared per card or read UNDECLARED.
+INDEPENDENCE_CAUSES = ("shared_source", "method", "model", "training_data", "code", "axioms")
 
 REGIMES = ("PASSIVE", "PERTURBATION", "REACTIVITY", "STRATEGY")
 REGIME_SOURCE = {
@@ -96,7 +100,14 @@ class Chain(object):
         self.comparison = result
         return result
 
-    def open_card(self, brief_a, brief_b, cues):
+    def open_card(self, brief_a, brief_b, cues, causes=None):
+        causes = dict(causes or {})
+        bad = sorted(set(causes) - set(INDEPENDENCE_CAUSES[1:]))
+        if bad:
+            raise GateError("unknown card cause(s) %s; the list is %r" % (", ".join(bad), INDEPENDENCE_CAUSES))
+        for c, v in causes.items():
+            if not isinstance(v, T.Token):
+                raise GateError("card cause %r is a token, not %r" % (c, v))
         self._step("card")
         return {
             "systems": self.systems,
@@ -104,7 +115,8 @@ class Chain(object):
             "comparison": self.comparison,
             "shared_source_by_level": B.shared_source(cues, brief_a, brief_b),
             "regime_mismatch_effect": T.Token("VOID", "section 3 does not say what differing regimes do"),
-            "other_causes": T.Token("VOID", "section 3 / row 29 name no card cause besides shared source"),
+            "other_causes": {c: causes[c] if c in causes else T.Token("UNDECLARED", "cause %r not declared for this card" % c)
+                             for c in INDEPENDENCE_CAUSES[1:]},
         }
 
 

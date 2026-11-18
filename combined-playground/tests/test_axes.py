@@ -85,7 +85,7 @@ class Coverage(unittest.TestCase):
     def test_severity_has_no_composite(self):
         sev = A.Record({}, coverage=[]).severity()
         self.assertEqual(tuple(sev), A.AXES)
-        self.assertEqual(A.COMPOSITE_SEVERITY.state, "VOID")
+        self.assertEqual(A.COMPOSITE_SEVERITY.state, "REFUSED")   # 9c item 1: no composite
 
 
 class Crash(unittest.TestCase):

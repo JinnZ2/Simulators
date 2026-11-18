@@ -1,0 +1,9 @@
+pin                           item  repo@commit                                 state
+P1-taf-unknown-axis           1     thermodynamic-accountability-framework@16285cc RESOLVED
+P5-ladder-shared-ancestry     5     formula-audit@4345de6                       RESOLVED
+P6-ladder-cross-domain        6     formula-audit@4345de6                       RESOLVED
+P6-card-constraint-reasoning  6     Simulators@b128fd0                          RESOLVED
+P10-numcheck                  10    formula-audit@337289d                       RESOLVED
+P11-taf-expiry-register       11    thermodynamic-accountability-framework@16285cc RESOLVED
+P11-taf-expiry-field          11    thermodynamic-accountability-framework@16285cc RESOLVED
+NOT_FOUND  item 1  ai-metrology 'weights not bins': no repo JinnZ2/ai-metrology reachable; code search for the phrase found no such file; item 1 rests on P1 and R-A2
