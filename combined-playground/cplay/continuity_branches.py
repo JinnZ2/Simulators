@@ -1,5 +1,5 @@
 """G5 item 9: continuity identity ("the same thing" across time), three branches, no winner
-(9c VOID-9, BRANCHED).
+(9c VOID-9, BRANCHED; DECIDED on evidence 2026-11-18: D2 with a declared sliver bound).
 
 C-A  EXACT STATE  sha256 of the declared state matches the anchor's.
 C-B  TOLERANCE    every declared variable within its declared tolerance of the anchor
@@ -220,6 +220,8 @@ def cases():
 
 SLIVER_ANCHOR = (0.06, -0.01)
 SLIVER_R = 0.05
+SLIVER_F_EXACT = 0.04362    # sliver_fraction_exact(M=200); recorded, recomputed in the tests at M 40
+DIRECT_RUN = {"trials": 10000, "miss": 62, "seed": 2026, "N": 113}   # direct_miss(10000, 113): 386 s
 F_MIN = 0.04               # purpose inputs declared for the table run (order 2026-11-18)
 ALPHA = 0.01
 
@@ -343,6 +345,54 @@ def miss_table(Ns=(1, 2, 4, 8, 16, 32, 64, 128, 256), trials=400, pool=2000, see
     return {"f_hat": f_hat, "pool": pool, "trials": trials, "rows": rows}
 
 
+def f_threshold(N, alpha):
+    """Smallest sliver fraction a run of N independent samples misses with probability <= alpha."""
+    return 1.0 - alpha ** (1.0 / N)
+
+
+def sliver_fraction_exact(M=200, bisect=40, dt=0.05, axis=0):
+    """Case 6: the sliver's share of the ball, by chord integration (no sampling). M chords across
+    the ball; on each, the basin boundary is located by bisection on the classifier. axis 0 = vertical
+    chords, 1 = horizontal; the two orientations are an internal check. Raises on a chord crossing the
+    boundary more than once (the single-crossing assumption is checked, not taken)."""
+    ax, ay = SLIVER_ANCHOR
+    r = SLIVER_R
+    e1, e2 = ((1, 0), (0, 1)) if axis == 0 else ((0, 1), (-1, 0))
+
+    def basin(q):
+        return 1 if _rk4(double_well, q, dt, int(round(30 / dt)))[0] > 0 else -1
+    home, tot = basin(SLIVER_ANCHOR), 0.0
+    for i in range(M):
+        u = -r + (i + 0.5) * 2 * r / M
+        half = math.sqrt(r * r - u * u)
+        at = lambda t: (ax + u * e1[0] + t * e2[0], ay + u * e1[1] + t * e2[1])
+        ts = [-half + 2 * half * k / 8.0 for k in range(9)]
+        bs = [basin(at(t)) for t in ts]
+        cross = [k for k in range(8) if bs[k] != bs[k + 1]]
+        if len(cross) > 1:
+            raise ValueError("chord u=%g crosses the boundary %d times" % (u, len(cross)))
+        if not cross:
+            tot += 2 * half if bs[0] != home else 0.0
+            continue
+        lo, hi, blo = ts[cross[0]], ts[cross[0] + 1], bs[cross[0]]
+        for _ in range(bisect):
+            m = (lo + hi) / 2
+            lo, hi = (m, hi) if basin(at(m)) == blo else (lo, m)
+        c = (lo + hi) / 2
+        tot += (c + half) if blo != home else (half - c)
+    return tot * (2 * r / M) / (math.pi * r * r)
+
+
+def direct_miss(trials, N, seed=2026):
+    """Case 6: trials each draw N FRESH ball points (no pool) and stop at the first hit. A miss is a
+    trial with no hit. Unlike miss_table, this samples the ball, not a fixed labelled pool."""
+    rng, home, miss = random.Random(seed), _basin(SLIVER_ANCHOR), 0
+    for _ in range(trials):
+        if not any(_basin(_ball(SLIVER_ANCHOR, SLIVER_R, rng)) != home for _ in range(N)):
+            miss += 1
+    return miss
+
+
 def _extend(word, levels):
     for _ in range(levels):
         word = "".join("ab" if c == "a" else "a" for c in word)
@@ -422,9 +472,19 @@ def render():
                "[%.4f, %.4f]); predicted (1 - f_hat)^N = %.4f with f_hat %.4f; alpha %g"
                % (F_MIN, ALPHA, N, row["miss_rate"], misses, mt["trials"], lo, hi, row["predicted"],
                   mt["f_hat"], ALPHA))
-    out.append("decision rule (order): DECIDED if measured miss <= alpha -> %s"
-               % ("met" if row["miss_rate"] <= ALPHA else "NOT met"))
-    out.append("no branch picked")
+    out.append("  (that run draws from a fixed labelled pool of 2000, so it measures the pool's f_hat, not the ball)")
+    f = SLIVER_F_EXACT
+    out.append("resolution run (2026-11-18):")
+    out.append("  exact sliver fraction, chord integration (M 200, both orientations, dt 0.05/0.02/0.01): %.5f" % f)
+    out.append("  threshold f* = 1 - alpha^(1/N) = %.5f; exact miss (1 - f)^N = %.4f" % (f_threshold(N, ALPHA), (1 - f) ** N))
+    k, n = DIRECT_RUN["miss"], DIRECT_RUN["trials"]
+    lo, hi = _wilson(k, n)
+    out.append("  direct fresh-sample trials (seed %d): %d of %d missed = %.4f, Wilson 95%% [%.4f, %.4f]"
+               % (DIRECT_RUN["seed"], k, n, k / float(n), lo, hi))
+    out.append("decision rule (order): DECIDED if measured miss <= alpha -> 400-trial pooled run NOT met; "
+               "resolved run %s (upper bound %.4f vs alpha %g)" % ("met" if hi <= ALPHA else "NOT met", hi, ALPHA))
+    out.append("VOID-9 -> DECIDED: identity across lossy snapshot = D2 with a declared sliver bound; "
+               "verdict carries the bound")
     return "\n".join(out)
 
 

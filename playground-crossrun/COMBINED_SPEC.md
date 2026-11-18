@@ -504,6 +504,17 @@ VOID or not built in combined-playground M1-M9 and needs a decision before it is
                      -> measured miss 0.0125 (5 of 400; Wilson 95 % [0.0054, 0.0289]) > alpha 0.01;
                      predicted (1 - 0.0405)^113 = 0.0094. 400 trials cannot separate 0.0094 from
                      0.01. Per the rule, VOID-9 stays VOID
+2026-11-18  RESOLVE  case 6 resolution run. The 400-trial run drew from a fixed labelled pool of 2000
+                     (f_hat 0.0405), so it measured the pool, not the ball. Exact sliver fraction by
+                     chord integration (200 chords, two orientations, dt 0.05 / 0.02 / 0.01, single
+                     crossing checked per chord): f = 0.04362 > f* = 1 - alpha^(1/113) = 0.03993;
+                     exact miss (1 - f)^113 = 0.0065. Direct fresh-sample trials (seed 2026): 62 of
+                     10000 missed = 0.0062, Wilson 95 % [0.0048, 0.0079], whole interval below alpha,
+                     agrees with the exact value. Pool f_hat was 0.68 se low: chance, not bias
+2026-11-18  DECIDED  VOID-9 on evidence (rule: measured miss <= alpha, met on the resolved run): identity
+                     across lossy snapshot = D2 with a declared sliver bound; verdict carries the bound
+                     (f_min, alpha, N, hits). D2m (exact margin) where a separatrix is declared. The
+                     400-trial NOT MET line above is kept
 2026-11-18  BRANCHED VOID-12 vocabulary mapping rows; decide on evidence from SPLIT rows. V-A same
                      label, V-B definitions match under the TOOL_CARDS VERBATIM / WRAP_COLLAPSED rule,
                      V-C same predicate + same slots; cplay/vocab_branches.py,
