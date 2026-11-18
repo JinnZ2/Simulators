@@ -1,0 +1,24 @@
+# amendment_options
+
+Evidence for the choice of key v2 amendment 1. Nothing in this folder changes a key, the brief, a scorer, `PREREG.md` or any reading. Nothing here is adopted.
+
+| path | what it is |
+|---|---|
+| `OPTIONS.md` | the three open choices, the evidence for each labelled SOURCE / RULE / COMPUTED, how much each moves the one filed v2 reading, and a view (labelled as a view) |
+| `as_received/KEY_V2_AMENDMENT_1.patch` | the patch exactly as received, sha256 `8ea98d4cd6cc4702b239a626b4f45c54ad1174f209d8a03ce70fe65fa75452bb` |
+| `as_received/KEY_V2_AMENDMENT_1_DRAFT.md` | the earlier draft exactly as received, sha256 `b2805ea9e976d15a60bac23f0fd70e634f471d006bbe31ed20cf1d3208762598` |
+| `evidence/check_rules.py`, `check_rules_output.txt`, `.json` | applies the amendment's rule tests mechanically to the packet's own sources (numcheck records, cplay constructors, TAF coverage dictionaries) |
+| `evidence/build_candidates.py`, `build_candidates_stdout.txt`, `candidate_scores.txt`, `.json` | builds candidate keys on the patched key, scores the filed Claude-v2-A reading under each; the candidate key files are not kept |
+
+Re-running:
+
+```text
+# 1. the rule checks (formula-audit checkout whose numcheck/check.py has the same sha256 as the packet's; the script checks and stops if not)
+FORMULA_AUDIT_DIR=<checkout> python3 evidence/check_rules.py > evidence/check_rules_output.txt
+
+# 2. apply the patch to a scratch copy of main (not to this branch), then
+SCORER_DIR=<scratch>/blind-reader-void12/scoring PATCHED_KEY=<scratch>/blind-reader-void12/scoring/key_v2_a1.json \
+  python3 evidence/build_candidates.py
+```
+
+Limits: one v2 reading exists (Claude-v2-A, the model the amendment was drafted by). Scores under a candidate key show how much a choice matters, not which choice is right.

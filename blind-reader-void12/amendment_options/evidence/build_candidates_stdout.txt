@@ -1,0 +1,35 @@
+builder self-check, key_v2            : reproduces stored pair tiers
+builder self-check, patched key_v2_a1 : reproduces stored pair tiers
+candidate P reproduces the patched key's terms and pair tiers exactly
+Claude-v2-A (status UNCERTAIN, same family as the first reader) scored under each candidate key. Specific meaning only: the candidates differ only there.
+grouping and slots_carried are identical under every key and are not repeated: ARI 0.823; carried 5 of 7 determined pairs agree; 2 of 14 carried slot sets equal.
+
+key        pairs agree       sets equal        nothing-grp  label-only    slot set vs key, the four terms the options move (T01 T05 T12 T14)
+--------------------------------------------------------------------------------------------------------------------------------------------
+v2         4 of 7            7 of 14           2 of 7       3 of 7        T01:differ  T05:differ  T12:differ  T14:equal
+P          3 of 6            9 of 13           2 of 6       2 of 6        T01:differ(superset)  T05:differ(superset)  T12:differ(superset)  T14:equal
+P_T14lit   3 of 6            8 of 13           2 of 6       2 of 6        T01:differ(superset)  T05:differ(superset)  T12:differ(superset)  T14:differ(superset)
+P_open     4 of 6            9 of 13           2 of 6       2 of 6        T01:differ(disjoint)  T05:differ(superset)  T12:differ(superset)  T14:equal
+P_literal  4 of 6            8 of 13           2 of 6       2 of 6        T01:differ(disjoint)  T05:differ(superset)  T12:differ(superset)  T14:differ(superset)
+P_S3in     3 of 6            11 of 13          2 of 6       2 of 6        T01:differ(superset)  T05:equal  T12:equal  T14:equal
+
+what each candidate is:
+  v2         key v2 as filed (no N1, no C1)
+  P          the patch as received: S3-out, T14 keeps [sigma, basis], nested records not opened
+  P_T14lit   P, but T14 = [] (S2 read literally: sigma and basis are present on every Reading)
+  P_open     P, but T01 = the 14 fields of the proposal record (S1b applied to a nested record built only on UNDECIDED)
+  P_literal  P with both of the above
+  P_S3in     P, but S3-in: covers_effect added to T05, typed and untyped added to T12
+
+per-pair tiers, specific meaning (reader / key):
+  pair                                             v2            P             P_T14lit      P_open        P_literal     P_S3in       
+  GAP_INSTRUMENT_CRASH | CRASHED                   PARTIAL/None  PARTIAL/None  PARTIAL/None  PARTIAL/None  PARTIAL/None  PARTIAL/None 
+  UNKNOWN | UNKNOWN                                PARTIAL/PARTIAL PARTIAL/None  PARTIAL/None  PARTIAL/None  PARTIAL/None  PARTIAL/None 
+  ABSENT_AT_SENSITIVITY | ABSENT_AT_SENSITIVITY    PARTIAL/PARTIAL PARTIAL/PARTIAL PARTIAL/PARTIAL PARTIAL/PARTIAL PARTIAL/PARTIAL PARTIAL/PARTIAL
+  expiry_condition | ExpiryTrigger                 PARTIAL/PARTIAL PARTIAL/PARTIAL PARTIAL/PARTIAL PARTIAL/PARTIAL PARTIAL/PARTIAL PARTIAL/PARTIAL
+  VOID | VOID                                      HOMONYM/HOMONYM HOMONYM/HOMONYM HOMONYM/HOMONYM HOMONYM/HOMONYM HOMONYM/HOMONYM HOMONYM/HOMONYM
+  UNDECIDED | UNRESOLVED                           PARTIAL/MAPS  PARTIAL/MAPS  PARTIAL/MAPS  PARTIAL/PARTIAL PARTIAL/PARTIAL PARTIAL/MAPS 
+  HOLDS | OK                                       MAPS/NONE     MAPS/NONE     MAPS/NONE     MAPS/NONE     MAPS/NONE     MAPS/NONE    
+  HOLDS | CLOSED_WITHIN                            NONE/PARTIAL  NONE/PARTIAL  NONE/MAPS     NONE/PARTIAL  NONE/MAPS     NONE/PARTIAL 
+
+scorer sha256 22055614cac916e0 ; patched key sha256 175b720f7bb7c07d ; reading sha256 c86f2211d110ec9b

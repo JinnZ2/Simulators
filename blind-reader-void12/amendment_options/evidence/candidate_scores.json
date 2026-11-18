@@ -1,0 +1,3893 @@
+{
+ "P": {
+  "ari": 0.823,
+  "attestation_flags": [
+   "q5_used_anything_outside_packet",
+   "q6_prior_sessions_about_this_project"
+  ],
+  "blind_status": "UNCERTAIN",
+  "clusters_key": 9,
+  "clusters_reader": 9,
+  "date_utc": "2026-11-18",
+  "flags": [],
+  "key_version": "2-a1-candidate-P",
+  "meanings": {
+   "carried": {
+    "baselines": {
+     "label_only": 2,
+     "singletons": 2
+    },
+    "cp95": [
+     0.29,
+     0.963
+    ],
+    "n_determined": 7,
+    "n_pairs": 8,
+    "pairs": [
+     {
+      "agree": true,
+      "first_reading_declared": "MAPS",
+      "key": "PARTIAL",
+      "pair": "GAP_INSTRUMENT_CRASH | CRASHED",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": null,
+      "first_reading_declared": "PARTIAL",
+      "key": null,
+      "pair": "UNKNOWN | UNKNOWN",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "ABSENT_AT_SENSITIVITY | ABSENT_AT_SENSITIVITY",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "expiry_condition | ExpiryTrigger",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "HOMONYM",
+      "key": "HOMONYM",
+      "pair": "VOID | VOID",
+      "reader": "HOMONYM"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "UNDECIDED | UNRESOLVED",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": false,
+      "first_reading_declared": "NONE",
+      "key": "NONE",
+      "pair": "HOLDS | OK",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": false,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "HOLDS | CLOSED_WITHIN",
+      "reader": "NONE"
+     }
+    ],
+    "relations": {
+     "disjoint": 0,
+     "equal": 2,
+     "overlap": 0,
+     "reader-subset": 1,
+     "reader-superset": 11
+    },
+    "slots": [
+     {
+      "extra": [
+       "counts",
+       "input",
+       "proposals",
+       "records",
+       "tool"
+      ],
+      "id": "T01",
+      "label": "UNDECIDED",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T02",
+      "label": "ABSENT_AT_SENSITIVITY",
+      "missing": [
+       "value"
+      ],
+      "reader_basis": "NONE_STATED",
+      "relation": "reader-subset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "branches",
+       "case",
+       "complete",
+       "floor",
+       "g_differs",
+       "g_pre",
+       "k",
+       "m",
+       "sigma",
+       "split",
+       "split_abc",
+       "split_af",
+       "split_live",
+       "sys",
+       "tol"
+      ],
+      "id": "T03",
+      "label": "VOID",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "is_exit"
+      ],
+      "id": "T04",
+      "label": "ExpiryTrigger",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T05",
+      "label": "ABSENT_AT_SENSITIVITY",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [
+       "branches",
+       "case",
+       "complete",
+       "floor",
+       "g_differs",
+       "g_pre",
+       "k",
+       "m",
+       "sigma",
+       "split",
+       "split_abc",
+       "split_af",
+       "split_live",
+       "sys",
+       "tol"
+      ],
+      "id": "T06",
+      "label": "UNRESOLVED",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "counts",
+       "input",
+       "proposals",
+       "records",
+       "tool"
+      ],
+      "id": "T07",
+      "label": "VOID",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T08",
+      "label": "CRASHED",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [
+       "class",
+       "cls",
+       "coverage",
+       "coverage_by_kind",
+       "coverage_count",
+       "exit",
+       "expiry",
+       "expiry_condition",
+       "input",
+       "kind",
+       "line",
+       "module",
+       "modules_run",
+       "modules_skipped",
+       "not_determinable_reason",
+       "note",
+       "overall_status",
+       "path",
+       "quote",
+       "reason",
+       "red_flags",
+       "sections",
+       "severity",
+       "sid",
+       "slot id",
+       "summary",
+       "system_id"
+      ],
+      "id": "T09",
+      "label": "UNKNOWN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "n/d",
+      "status": "n/d"
+     },
+     {
+      "extra": [
+       "coverage",
+       "coverage_by_kind",
+       "coverage_count",
+       "error",
+       "exception_type",
+       "modules_run",
+       "modules_skipped",
+       "not_determinable_reason",
+       "overall_status",
+       "red_flags",
+       "sections",
+       "severity",
+       "summary",
+       "system_id"
+      ],
+      "id": "T10",
+      "label": "GAP_INSTRUMENT_CRASH",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "counts",
+       "input",
+       "proposals",
+       "records",
+       "tool"
+      ],
+      "id": "T11",
+      "label": "HOLDS",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "expiry_condition",
+       "input",
+       "kind",
+       "missing_path",
+       "module"
+      ],
+      "id": "T12",
+      "label": "UNKNOWN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "branches",
+       "case",
+       "complete",
+       "floor",
+       "g_differs",
+       "g_pre",
+       "k",
+       "m",
+       "split",
+       "split_abc",
+       "split_af",
+       "split_live",
+       "state",
+       "sys",
+       "tol"
+      ],
+      "id": "T13",
+      "label": "OK",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "branches",
+       "case",
+       "complete",
+       "floor",
+       "g_differs",
+       "g_pre",
+       "k",
+       "m",
+       "split",
+       "split_abc",
+       "split_af",
+       "split_live",
+       "sys",
+       "tol"
+      ],
+      "id": "T14",
+      "label": "CLOSED_WITHIN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "class",
+       "cls",
+       "exit",
+       "expiry",
+       "expiry_condition",
+       "input",
+       "kind",
+       "line",
+       "missing_path",
+       "module",
+       "note",
+       "path",
+       "pr77",
+       "pr78",
+       "quote",
+       "reason",
+       "sid",
+       "slot id"
+      ],
+      "id": "T15",
+      "label": "expiry_condition",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     }
+    ],
+    "slots_determined": 14,
+    "slots_equal": 2,
+    "tier_agree": 5
+   },
+   "specific": {
+    "baselines": {
+     "label_only": 2,
+     "singletons": 2
+    },
+    "cp95": [
+     0.118,
+     0.882
+    ],
+    "n_determined": 6,
+    "n_pairs": 8,
+    "pairs": [
+     {
+      "agree": null,
+      "first_reading_declared": "MAPS",
+      "key": null,
+      "pair": "GAP_INSTRUMENT_CRASH | CRASHED",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": null,
+      "first_reading_declared": "PARTIAL",
+      "key": null,
+      "pair": "UNKNOWN | UNKNOWN",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "ABSENT_AT_SENSITIVITY | ABSENT_AT_SENSITIVITY",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "expiry_condition | ExpiryTrigger",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "HOMONYM",
+      "key": "HOMONYM",
+      "pair": "VOID | VOID",
+      "reader": "HOMONYM"
+     },
+     {
+      "agree": false,
+      "first_reading_declared": "PARTIAL",
+      "key": "MAPS",
+      "pair": "UNDECIDED | UNRESOLVED",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": false,
+      "first_reading_declared": "NONE",
+      "key": "NONE",
+      "pair": "HOLDS | OK",
+      "reader": "MAPS"
+     },
+     {
+      "agree": false,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "HOLDS | CLOSED_WITHIN",
+      "reader": "NONE"
+     }
+    ],
+    "relations": {
+     "disjoint": 0,
+     "equal": 9,
+     "overlap": 0,
+     "reader-subset": 0,
+     "reader-superset": 4
+    },
+    "slots": [
+     {
+      "extra": [
+       "first_straddling_piece",
+       "first_undecided_subbox",
+       "proposal",
+       "straddle_at_depth_limit",
+       "undecided_at_depth_limit"
+      ],
+      "id": "T01",
+      "label": "UNDECIDED",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T02",
+      "label": "ABSENT_AT_SENSITIVITY",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [],
+      "id": "T03",
+      "label": "VOID",
+      "missing": [],
+      "reader_basis": "NONE_STATED",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [],
+      "id": "T04",
+      "label": "ExpiryTrigger",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [
+       "covers_effect"
+      ],
+      "id": "T05",
+      "label": "ABSENT_AT_SENSITIVITY",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T06",
+      "label": "UNRESOLVED",
+      "missing": [],
+      "reader_basis": "NONE_STATED",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [
+       "first_subbox_with_no_value",
+       "void_reason"
+      ],
+      "id": "T07",
+      "label": "VOID",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "call",
+       "exception",
+       "inputs",
+       "path"
+      ],
+      "id": "T08",
+      "label": "CRASHED",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "n/d",
+      "status": "n/d"
+     },
+     {
+      "extra": [
+       "expiry_condition",
+       "expiry_source"
+      ],
+      "id": "T09",
+      "label": "UNKNOWN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "n/d",
+      "status": "n/d"
+     },
+     {
+      "extra": [],
+      "id": "T10",
+      "label": "GAP_INSTRUMENT_CRASH",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [],
+      "id": "T11",
+      "label": "HOLDS",
+      "missing": [],
+      "reader_basis": "NONE_STATED",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [
+       "typed",
+       "untyped"
+      ],
+      "id": "T12",
+      "label": "UNKNOWN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T13",
+      "label": "OK",
+      "missing": [],
+      "reader_basis": "NONE_STATED",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [],
+      "id": "T14",
+      "label": "CLOSED_WITHIN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [],
+      "id": "T15",
+      "label": "expiry_condition",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     }
+    ],
+    "slots_determined": 13,
+    "slots_equal": 9,
+    "tier_agree": 3
+   }
+  },
+  "model_family": "claude-opus-5-5 (the identifier this session is configured with; the model serving this turn was not separately verified)",
+  "reader_label": "Claude-v2-A",
+  "scoring_rules": [
+   "N1",
+   "C1"
+  ],
+  "term_pair_differences": [
+   [
+    "reader joins, key does not",
+    "T11",
+    "T13"
+   ],
+   [
+    "key joins, reader does not",
+    "T11",
+    "T14"
+   ]
+  ],
+  "term_pairs": {
+   "both_join": 5,
+   "key_only": 1,
+   "neither": 98,
+   "reader_only": 1,
+   "total": 105
+  }
+ },
+ "P_S3in": {
+  "ari": 0.823,
+  "attestation_flags": [
+   "q5_used_anything_outside_packet",
+   "q6_prior_sessions_about_this_project"
+  ],
+  "blind_status": "UNCERTAIN",
+  "clusters_key": 9,
+  "clusters_reader": 9,
+  "date_utc": "2026-11-18",
+  "flags": [],
+  "key_version": "2-a1-candidate-P_S3in",
+  "meanings": {
+   "carried": {
+    "baselines": {
+     "label_only": 2,
+     "singletons": 2
+    },
+    "cp95": [
+     0.29,
+     0.963
+    ],
+    "n_determined": 7,
+    "n_pairs": 8,
+    "pairs": [
+     {
+      "agree": true,
+      "first_reading_declared": "MAPS",
+      "key": "PARTIAL",
+      "pair": "GAP_INSTRUMENT_CRASH | CRASHED",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": null,
+      "first_reading_declared": "PARTIAL",
+      "key": null,
+      "pair": "UNKNOWN | UNKNOWN",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "ABSENT_AT_SENSITIVITY | ABSENT_AT_SENSITIVITY",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "expiry_condition | ExpiryTrigger",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "HOMONYM",
+      "key": "HOMONYM",
+      "pair": "VOID | VOID",
+      "reader": "HOMONYM"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "UNDECIDED | UNRESOLVED",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": false,
+      "first_reading_declared": "NONE",
+      "key": "NONE",
+      "pair": "HOLDS | OK",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": false,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "HOLDS | CLOSED_WITHIN",
+      "reader": "NONE"
+     }
+    ],
+    "relations": {
+     "disjoint": 0,
+     "equal": 2,
+     "overlap": 0,
+     "reader-subset": 1,
+     "reader-superset": 11
+    },
+    "slots": [
+     {
+      "extra": [
+       "counts",
+       "input",
+       "proposals",
+       "records",
+       "tool"
+      ],
+      "id": "T01",
+      "label": "UNDECIDED",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T02",
+      "label": "ABSENT_AT_SENSITIVITY",
+      "missing": [
+       "value"
+      ],
+      "reader_basis": "NONE_STATED",
+      "relation": "reader-subset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "branches",
+       "case",
+       "complete",
+       "floor",
+       "g_differs",
+       "g_pre",
+       "k",
+       "m",
+       "sigma",
+       "split",
+       "split_abc",
+       "split_af",
+       "split_live",
+       "sys",
+       "tol"
+      ],
+      "id": "T03",
+      "label": "VOID",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "is_exit"
+      ],
+      "id": "T04",
+      "label": "ExpiryTrigger",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T05",
+      "label": "ABSENT_AT_SENSITIVITY",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [
+       "branches",
+       "case",
+       "complete",
+       "floor",
+       "g_differs",
+       "g_pre",
+       "k",
+       "m",
+       "sigma",
+       "split",
+       "split_abc",
+       "split_af",
+       "split_live",
+       "sys",
+       "tol"
+      ],
+      "id": "T06",
+      "label": "UNRESOLVED",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "counts",
+       "input",
+       "proposals",
+       "records",
+       "tool"
+      ],
+      "id": "T07",
+      "label": "VOID",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T08",
+      "label": "CRASHED",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [
+       "class",
+       "cls",
+       "coverage",
+       "coverage_by_kind",
+       "coverage_count",
+       "exit",
+       "expiry",
+       "expiry_condition",
+       "input",
+       "kind",
+       "line",
+       "module",
+       "modules_run",
+       "modules_skipped",
+       "not_determinable_reason",
+       "note",
+       "overall_status",
+       "path",
+       "quote",
+       "reason",
+       "red_flags",
+       "sections",
+       "severity",
+       "sid",
+       "slot id",
+       "summary",
+       "system_id"
+      ],
+      "id": "T09",
+      "label": "UNKNOWN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "n/d",
+      "status": "n/d"
+     },
+     {
+      "extra": [
+       "coverage",
+       "coverage_by_kind",
+       "coverage_count",
+       "error",
+       "exception_type",
+       "modules_run",
+       "modules_skipped",
+       "not_determinable_reason",
+       "overall_status",
+       "red_flags",
+       "sections",
+       "severity",
+       "summary",
+       "system_id"
+      ],
+      "id": "T10",
+      "label": "GAP_INSTRUMENT_CRASH",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "counts",
+       "input",
+       "proposals",
+       "records",
+       "tool"
+      ],
+      "id": "T11",
+      "label": "HOLDS",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "expiry_condition",
+       "input",
+       "kind",
+       "missing_path",
+       "module"
+      ],
+      "id": "T12",
+      "label": "UNKNOWN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "branches",
+       "case",
+       "complete",
+       "floor",
+       "g_differs",
+       "g_pre",
+       "k",
+       "m",
+       "split",
+       "split_abc",
+       "split_af",
+       "split_live",
+       "state",
+       "sys",
+       "tol"
+      ],
+      "id": "T13",
+      "label": "OK",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "branches",
+       "case",
+       "complete",
+       "floor",
+       "g_differs",
+       "g_pre",
+       "k",
+       "m",
+       "split",
+       "split_abc",
+       "split_af",
+       "split_live",
+       "sys",
+       "tol"
+      ],
+      "id": "T14",
+      "label": "CLOSED_WITHIN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "class",
+       "cls",
+       "exit",
+       "expiry",
+       "expiry_condition",
+       "input",
+       "kind",
+       "line",
+       "missing_path",
+       "module",
+       "note",
+       "path",
+       "pr77",
+       "pr78",
+       "quote",
+       "reason",
+       "sid",
+       "slot id"
+      ],
+      "id": "T15",
+      "label": "expiry_condition",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     }
+    ],
+    "slots_determined": 14,
+    "slots_equal": 2,
+    "tier_agree": 5
+   },
+   "specific": {
+    "baselines": {
+     "label_only": 2,
+     "singletons": 2
+    },
+    "cp95": [
+     0.118,
+     0.882
+    ],
+    "n_determined": 6,
+    "n_pairs": 8,
+    "pairs": [
+     {
+      "agree": null,
+      "first_reading_declared": "MAPS",
+      "key": null,
+      "pair": "GAP_INSTRUMENT_CRASH | CRASHED",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": null,
+      "first_reading_declared": "PARTIAL",
+      "key": null,
+      "pair": "UNKNOWN | UNKNOWN",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "ABSENT_AT_SENSITIVITY | ABSENT_AT_SENSITIVITY",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "expiry_condition | ExpiryTrigger",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "HOMONYM",
+      "key": "HOMONYM",
+      "pair": "VOID | VOID",
+      "reader": "HOMONYM"
+     },
+     {
+      "agree": false,
+      "first_reading_declared": "PARTIAL",
+      "key": "MAPS",
+      "pair": "UNDECIDED | UNRESOLVED",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": false,
+      "first_reading_declared": "NONE",
+      "key": "NONE",
+      "pair": "HOLDS | OK",
+      "reader": "MAPS"
+     },
+     {
+      "agree": false,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "HOLDS | CLOSED_WITHIN",
+      "reader": "NONE"
+     }
+    ],
+    "relations": {
+     "disjoint": 0,
+     "equal": 11,
+     "overlap": 0,
+     "reader-subset": 0,
+     "reader-superset": 2
+    },
+    "slots": [
+     {
+      "extra": [
+       "first_straddling_piece",
+       "first_undecided_subbox",
+       "proposal",
+       "straddle_at_depth_limit",
+       "undecided_at_depth_limit"
+      ],
+      "id": "T01",
+      "label": "UNDECIDED",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T02",
+      "label": "ABSENT_AT_SENSITIVITY",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [],
+      "id": "T03",
+      "label": "VOID",
+      "missing": [],
+      "reader_basis": "NONE_STATED",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [],
+      "id": "T04",
+      "label": "ExpiryTrigger",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [],
+      "id": "T05",
+      "label": "ABSENT_AT_SENSITIVITY",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [],
+      "id": "T06",
+      "label": "UNRESOLVED",
+      "missing": [],
+      "reader_basis": "NONE_STATED",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [
+       "first_subbox_with_no_value",
+       "void_reason"
+      ],
+      "id": "T07",
+      "label": "VOID",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "call",
+       "exception",
+       "inputs",
+       "path"
+      ],
+      "id": "T08",
+      "label": "CRASHED",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "n/d",
+      "status": "n/d"
+     },
+     {
+      "extra": [
+       "expiry_condition",
+       "expiry_source"
+      ],
+      "id": "T09",
+      "label": "UNKNOWN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "n/d",
+      "status": "n/d"
+     },
+     {
+      "extra": [],
+      "id": "T10",
+      "label": "GAP_INSTRUMENT_CRASH",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [],
+      "id": "T11",
+      "label": "HOLDS",
+      "missing": [],
+      "reader_basis": "NONE_STATED",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [],
+      "id": "T12",
+      "label": "UNKNOWN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [],
+      "id": "T13",
+      "label": "OK",
+      "missing": [],
+      "reader_basis": "NONE_STATED",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [],
+      "id": "T14",
+      "label": "CLOSED_WITHIN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [],
+      "id": "T15",
+      "label": "expiry_condition",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     }
+    ],
+    "slots_determined": 13,
+    "slots_equal": 11,
+    "tier_agree": 3
+   }
+  },
+  "model_family": "claude-opus-5-5 (the identifier this session is configured with; the model serving this turn was not separately verified)",
+  "reader_label": "Claude-v2-A",
+  "scoring_rules": [
+   "N1",
+   "C1"
+  ],
+  "term_pair_differences": [
+   [
+    "reader joins, key does not",
+    "T11",
+    "T13"
+   ],
+   [
+    "key joins, reader does not",
+    "T11",
+    "T14"
+   ]
+  ],
+  "term_pairs": {
+   "both_join": 5,
+   "key_only": 1,
+   "neither": 98,
+   "reader_only": 1,
+   "total": 105
+  }
+ },
+ "P_T14lit": {
+  "ari": 0.823,
+  "attestation_flags": [
+   "q5_used_anything_outside_packet",
+   "q6_prior_sessions_about_this_project"
+  ],
+  "blind_status": "UNCERTAIN",
+  "clusters_key": 9,
+  "clusters_reader": 9,
+  "date_utc": "2026-11-18",
+  "flags": [],
+  "key_version": "2-a1-candidate-P_T14lit",
+  "meanings": {
+   "carried": {
+    "baselines": {
+     "label_only": 2,
+     "singletons": 2
+    },
+    "cp95": [
+     0.29,
+     0.963
+    ],
+    "n_determined": 7,
+    "n_pairs": 8,
+    "pairs": [
+     {
+      "agree": true,
+      "first_reading_declared": "MAPS",
+      "key": "PARTIAL",
+      "pair": "GAP_INSTRUMENT_CRASH | CRASHED",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": null,
+      "first_reading_declared": "PARTIAL",
+      "key": null,
+      "pair": "UNKNOWN | UNKNOWN",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "ABSENT_AT_SENSITIVITY | ABSENT_AT_SENSITIVITY",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "expiry_condition | ExpiryTrigger",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "HOMONYM",
+      "key": "HOMONYM",
+      "pair": "VOID | VOID",
+      "reader": "HOMONYM"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "UNDECIDED | UNRESOLVED",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": false,
+      "first_reading_declared": "NONE",
+      "key": "NONE",
+      "pair": "HOLDS | OK",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": false,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "HOLDS | CLOSED_WITHIN",
+      "reader": "NONE"
+     }
+    ],
+    "relations": {
+     "disjoint": 0,
+     "equal": 2,
+     "overlap": 0,
+     "reader-subset": 1,
+     "reader-superset": 11
+    },
+    "slots": [
+     {
+      "extra": [
+       "counts",
+       "input",
+       "proposals",
+       "records",
+       "tool"
+      ],
+      "id": "T01",
+      "label": "UNDECIDED",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T02",
+      "label": "ABSENT_AT_SENSITIVITY",
+      "missing": [
+       "value"
+      ],
+      "reader_basis": "NONE_STATED",
+      "relation": "reader-subset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "branches",
+       "case",
+       "complete",
+       "floor",
+       "g_differs",
+       "g_pre",
+       "k",
+       "m",
+       "sigma",
+       "split",
+       "split_abc",
+       "split_af",
+       "split_live",
+       "sys",
+       "tol"
+      ],
+      "id": "T03",
+      "label": "VOID",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "is_exit"
+      ],
+      "id": "T04",
+      "label": "ExpiryTrigger",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T05",
+      "label": "ABSENT_AT_SENSITIVITY",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [
+       "branches",
+       "case",
+       "complete",
+       "floor",
+       "g_differs",
+       "g_pre",
+       "k",
+       "m",
+       "sigma",
+       "split",
+       "split_abc",
+       "split_af",
+       "split_live",
+       "sys",
+       "tol"
+      ],
+      "id": "T06",
+      "label": "UNRESOLVED",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "counts",
+       "input",
+       "proposals",
+       "records",
+       "tool"
+      ],
+      "id": "T07",
+      "label": "VOID",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T08",
+      "label": "CRASHED",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [
+       "class",
+       "cls",
+       "coverage",
+       "coverage_by_kind",
+       "coverage_count",
+       "exit",
+       "expiry",
+       "expiry_condition",
+       "input",
+       "kind",
+       "line",
+       "module",
+       "modules_run",
+       "modules_skipped",
+       "not_determinable_reason",
+       "note",
+       "overall_status",
+       "path",
+       "quote",
+       "reason",
+       "red_flags",
+       "sections",
+       "severity",
+       "sid",
+       "slot id",
+       "summary",
+       "system_id"
+      ],
+      "id": "T09",
+      "label": "UNKNOWN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "n/d",
+      "status": "n/d"
+     },
+     {
+      "extra": [
+       "coverage",
+       "coverage_by_kind",
+       "coverage_count",
+       "error",
+       "exception_type",
+       "modules_run",
+       "modules_skipped",
+       "not_determinable_reason",
+       "overall_status",
+       "red_flags",
+       "sections",
+       "severity",
+       "summary",
+       "system_id"
+      ],
+      "id": "T10",
+      "label": "GAP_INSTRUMENT_CRASH",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "counts",
+       "input",
+       "proposals",
+       "records",
+       "tool"
+      ],
+      "id": "T11",
+      "label": "HOLDS",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "expiry_condition",
+       "input",
+       "kind",
+       "missing_path",
+       "module"
+      ],
+      "id": "T12",
+      "label": "UNKNOWN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "branches",
+       "case",
+       "complete",
+       "floor",
+       "g_differs",
+       "g_pre",
+       "k",
+       "m",
+       "split",
+       "split_abc",
+       "split_af",
+       "split_live",
+       "state",
+       "sys",
+       "tol"
+      ],
+      "id": "T13",
+      "label": "OK",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "branches",
+       "case",
+       "complete",
+       "floor",
+       "g_differs",
+       "g_pre",
+       "k",
+       "m",
+       "split",
+       "split_abc",
+       "split_af",
+       "split_live",
+       "sys",
+       "tol"
+      ],
+      "id": "T14",
+      "label": "CLOSED_WITHIN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "class",
+       "cls",
+       "exit",
+       "expiry",
+       "expiry_condition",
+       "input",
+       "kind",
+       "line",
+       "missing_path",
+       "module",
+       "note",
+       "path",
+       "pr77",
+       "pr78",
+       "quote",
+       "reason",
+       "sid",
+       "slot id"
+      ],
+      "id": "T15",
+      "label": "expiry_condition",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     }
+    ],
+    "slots_determined": 14,
+    "slots_equal": 2,
+    "tier_agree": 5
+   },
+   "specific": {
+    "baselines": {
+     "label_only": 2,
+     "singletons": 2
+    },
+    "cp95": [
+     0.118,
+     0.882
+    ],
+    "n_determined": 6,
+    "n_pairs": 8,
+    "pairs": [
+     {
+      "agree": null,
+      "first_reading_declared": "MAPS",
+      "key": null,
+      "pair": "GAP_INSTRUMENT_CRASH | CRASHED",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": null,
+      "first_reading_declared": "PARTIAL",
+      "key": null,
+      "pair": "UNKNOWN | UNKNOWN",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "ABSENT_AT_SENSITIVITY | ABSENT_AT_SENSITIVITY",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "expiry_condition | ExpiryTrigger",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "HOMONYM",
+      "key": "HOMONYM",
+      "pair": "VOID | VOID",
+      "reader": "HOMONYM"
+     },
+     {
+      "agree": false,
+      "first_reading_declared": "PARTIAL",
+      "key": "MAPS",
+      "pair": "UNDECIDED | UNRESOLVED",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": false,
+      "first_reading_declared": "NONE",
+      "key": "NONE",
+      "pair": "HOLDS | OK",
+      "reader": "MAPS"
+     },
+     {
+      "agree": false,
+      "first_reading_declared": "PARTIAL",
+      "key": "MAPS",
+      "pair": "HOLDS | CLOSED_WITHIN",
+      "reader": "NONE"
+     }
+    ],
+    "relations": {
+     "disjoint": 0,
+     "equal": 8,
+     "overlap": 0,
+     "reader-subset": 0,
+     "reader-superset": 5
+    },
+    "slots": [
+     {
+      "extra": [
+       "first_straddling_piece",
+       "first_undecided_subbox",
+       "proposal",
+       "straddle_at_depth_limit",
+       "undecided_at_depth_limit"
+      ],
+      "id": "T01",
+      "label": "UNDECIDED",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T02",
+      "label": "ABSENT_AT_SENSITIVITY",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [],
+      "id": "T03",
+      "label": "VOID",
+      "missing": [],
+      "reader_basis": "NONE_STATED",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [],
+      "id": "T04",
+      "label": "ExpiryTrigger",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [
+       "covers_effect"
+      ],
+      "id": "T05",
+      "label": "ABSENT_AT_SENSITIVITY",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T06",
+      "label": "UNRESOLVED",
+      "missing": [],
+      "reader_basis": "NONE_STATED",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [
+       "first_subbox_with_no_value",
+       "void_reason"
+      ],
+      "id": "T07",
+      "label": "VOID",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "call",
+       "exception",
+       "inputs",
+       "path"
+      ],
+      "id": "T08",
+      "label": "CRASHED",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "n/d",
+      "status": "n/d"
+     },
+     {
+      "extra": [
+       "expiry_condition",
+       "expiry_source"
+      ],
+      "id": "T09",
+      "label": "UNKNOWN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "n/d",
+      "status": "n/d"
+     },
+     {
+      "extra": [],
+      "id": "T10",
+      "label": "GAP_INSTRUMENT_CRASH",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [],
+      "id": "T11",
+      "label": "HOLDS",
+      "missing": [],
+      "reader_basis": "NONE_STATED",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [
+       "typed",
+       "untyped"
+      ],
+      "id": "T12",
+      "label": "UNKNOWN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T13",
+      "label": "OK",
+      "missing": [],
+      "reader_basis": "NONE_STATED",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [
+       "basis",
+       "sigma"
+      ],
+      "id": "T14",
+      "label": "CLOSED_WITHIN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T15",
+      "label": "expiry_condition",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     }
+    ],
+    "slots_determined": 13,
+    "slots_equal": 8,
+    "tier_agree": 3
+   }
+  },
+  "model_family": "claude-opus-5-5 (the identifier this session is configured with; the model serving this turn was not separately verified)",
+  "reader_label": "Claude-v2-A",
+  "scoring_rules": [
+   "N1",
+   "C1"
+  ],
+  "term_pair_differences": [
+   [
+    "reader joins, key does not",
+    "T11",
+    "T13"
+   ],
+   [
+    "key joins, reader does not",
+    "T11",
+    "T14"
+   ]
+  ],
+  "term_pairs": {
+   "both_join": 5,
+   "key_only": 1,
+   "neither": 98,
+   "reader_only": 1,
+   "total": 105
+  }
+ },
+ "P_literal": {
+  "ari": 0.823,
+  "attestation_flags": [
+   "q5_used_anything_outside_packet",
+   "q6_prior_sessions_about_this_project"
+  ],
+  "blind_status": "UNCERTAIN",
+  "clusters_key": 9,
+  "clusters_reader": 9,
+  "date_utc": "2026-11-18",
+  "flags": [],
+  "key_version": "2-a1-candidate-P_literal",
+  "meanings": {
+   "carried": {
+    "baselines": {
+     "label_only": 2,
+     "singletons": 2
+    },
+    "cp95": [
+     0.29,
+     0.963
+    ],
+    "n_determined": 7,
+    "n_pairs": 8,
+    "pairs": [
+     {
+      "agree": true,
+      "first_reading_declared": "MAPS",
+      "key": "PARTIAL",
+      "pair": "GAP_INSTRUMENT_CRASH | CRASHED",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": null,
+      "first_reading_declared": "PARTIAL",
+      "key": null,
+      "pair": "UNKNOWN | UNKNOWN",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "ABSENT_AT_SENSITIVITY | ABSENT_AT_SENSITIVITY",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "expiry_condition | ExpiryTrigger",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "HOMONYM",
+      "key": "HOMONYM",
+      "pair": "VOID | VOID",
+      "reader": "HOMONYM"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "UNDECIDED | UNRESOLVED",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": false,
+      "first_reading_declared": "NONE",
+      "key": "NONE",
+      "pair": "HOLDS | OK",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": false,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "HOLDS | CLOSED_WITHIN",
+      "reader": "NONE"
+     }
+    ],
+    "relations": {
+     "disjoint": 0,
+     "equal": 2,
+     "overlap": 0,
+     "reader-subset": 1,
+     "reader-superset": 11
+    },
+    "slots": [
+     {
+      "extra": [
+       "counts",
+       "input",
+       "proposals",
+       "records",
+       "tool"
+      ],
+      "id": "T01",
+      "label": "UNDECIDED",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T02",
+      "label": "ABSENT_AT_SENSITIVITY",
+      "missing": [
+       "value"
+      ],
+      "reader_basis": "NONE_STATED",
+      "relation": "reader-subset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "branches",
+       "case",
+       "complete",
+       "floor",
+       "g_differs",
+       "g_pre",
+       "k",
+       "m",
+       "sigma",
+       "split",
+       "split_abc",
+       "split_af",
+       "split_live",
+       "sys",
+       "tol"
+      ],
+      "id": "T03",
+      "label": "VOID",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "is_exit"
+      ],
+      "id": "T04",
+      "label": "ExpiryTrigger",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T05",
+      "label": "ABSENT_AT_SENSITIVITY",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [
+       "branches",
+       "case",
+       "complete",
+       "floor",
+       "g_differs",
+       "g_pre",
+       "k",
+       "m",
+       "sigma",
+       "split",
+       "split_abc",
+       "split_af",
+       "split_live",
+       "sys",
+       "tol"
+      ],
+      "id": "T06",
+      "label": "UNRESOLVED",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "counts",
+       "input",
+       "proposals",
+       "records",
+       "tool"
+      ],
+      "id": "T07",
+      "label": "VOID",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T08",
+      "label": "CRASHED",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [
+       "class",
+       "cls",
+       "coverage",
+       "coverage_by_kind",
+       "coverage_count",
+       "exit",
+       "expiry",
+       "expiry_condition",
+       "input",
+       "kind",
+       "line",
+       "module",
+       "modules_run",
+       "modules_skipped",
+       "not_determinable_reason",
+       "note",
+       "overall_status",
+       "path",
+       "quote",
+       "reason",
+       "red_flags",
+       "sections",
+       "severity",
+       "sid",
+       "slot id",
+       "summary",
+       "system_id"
+      ],
+      "id": "T09",
+      "label": "UNKNOWN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "n/d",
+      "status": "n/d"
+     },
+     {
+      "extra": [
+       "coverage",
+       "coverage_by_kind",
+       "coverage_count",
+       "error",
+       "exception_type",
+       "modules_run",
+       "modules_skipped",
+       "not_determinable_reason",
+       "overall_status",
+       "red_flags",
+       "sections",
+       "severity",
+       "summary",
+       "system_id"
+      ],
+      "id": "T10",
+      "label": "GAP_INSTRUMENT_CRASH",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "counts",
+       "input",
+       "proposals",
+       "records",
+       "tool"
+      ],
+      "id": "T11",
+      "label": "HOLDS",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "expiry_condition",
+       "input",
+       "kind",
+       "missing_path",
+       "module"
+      ],
+      "id": "T12",
+      "label": "UNKNOWN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "branches",
+       "case",
+       "complete",
+       "floor",
+       "g_differs",
+       "g_pre",
+       "k",
+       "m",
+       "split",
+       "split_abc",
+       "split_af",
+       "split_live",
+       "state",
+       "sys",
+       "tol"
+      ],
+      "id": "T13",
+      "label": "OK",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "branches",
+       "case",
+       "complete",
+       "floor",
+       "g_differs",
+       "g_pre",
+       "k",
+       "m",
+       "split",
+       "split_abc",
+       "split_af",
+       "split_live",
+       "sys",
+       "tol"
+      ],
+      "id": "T14",
+      "label": "CLOSED_WITHIN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "class",
+       "cls",
+       "exit",
+       "expiry",
+       "expiry_condition",
+       "input",
+       "kind",
+       "line",
+       "missing_path",
+       "module",
+       "note",
+       "path",
+       "pr77",
+       "pr78",
+       "quote",
+       "reason",
+       "sid",
+       "slot id"
+      ],
+      "id": "T15",
+      "label": "expiry_condition",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     }
+    ],
+    "slots_determined": 14,
+    "slots_equal": 2,
+    "tier_agree": 5
+   },
+   "specific": {
+    "baselines": {
+     "label_only": 2,
+     "singletons": 2
+    },
+    "cp95": [
+     0.223,
+     0.957
+    ],
+    "n_determined": 6,
+    "n_pairs": 8,
+    "pairs": [
+     {
+      "agree": null,
+      "first_reading_declared": "MAPS",
+      "key": null,
+      "pair": "GAP_INSTRUMENT_CRASH | CRASHED",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": null,
+      "first_reading_declared": "PARTIAL",
+      "key": null,
+      "pair": "UNKNOWN | UNKNOWN",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "ABSENT_AT_SENSITIVITY | ABSENT_AT_SENSITIVITY",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "expiry_condition | ExpiryTrigger",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "HOMONYM",
+      "key": "HOMONYM",
+      "pair": "VOID | VOID",
+      "reader": "HOMONYM"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "UNDECIDED | UNRESOLVED",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": false,
+      "first_reading_declared": "NONE",
+      "key": "NONE",
+      "pair": "HOLDS | OK",
+      "reader": "MAPS"
+     },
+     {
+      "agree": false,
+      "first_reading_declared": "PARTIAL",
+      "key": "MAPS",
+      "pair": "HOLDS | CLOSED_WITHIN",
+      "reader": "NONE"
+     }
+    ],
+    "relations": {
+     "disjoint": 1,
+     "equal": 8,
+     "overlap": 0,
+     "reader-subset": 0,
+     "reader-superset": 4
+    },
+    "slots": [
+     {
+      "extra": [
+       "first_straddling_piece",
+       "first_undecided_subbox",
+       "proposal",
+       "straddle_at_depth_limit",
+       "undecided_at_depth_limit"
+      ],
+      "id": "T01",
+      "label": "UNDECIDED",
+      "missing": [
+       "ai_interest",
+       "domain",
+       "evidence",
+       "fixed",
+       "human_interest",
+       "lhs",
+       "polynomial",
+       "proof",
+       "proof_attempted",
+       "rhs",
+       "source_check",
+       "status",
+       "units",
+       "why_not_proved"
+      ],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "disjoint",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T02",
+      "label": "ABSENT_AT_SENSITIVITY",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [],
+      "id": "T03",
+      "label": "VOID",
+      "missing": [],
+      "reader_basis": "NONE_STATED",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [],
+      "id": "T04",
+      "label": "ExpiryTrigger",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [
+       "covers_effect"
+      ],
+      "id": "T05",
+      "label": "ABSENT_AT_SENSITIVITY",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T06",
+      "label": "UNRESOLVED",
+      "missing": [],
+      "reader_basis": "NONE_STATED",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [
+       "first_subbox_with_no_value",
+       "void_reason"
+      ],
+      "id": "T07",
+      "label": "VOID",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "call",
+       "exception",
+       "inputs",
+       "path"
+      ],
+      "id": "T08",
+      "label": "CRASHED",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "n/d",
+      "status": "n/d"
+     },
+     {
+      "extra": [
+       "expiry_condition",
+       "expiry_source"
+      ],
+      "id": "T09",
+      "label": "UNKNOWN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "n/d",
+      "status": "n/d"
+     },
+     {
+      "extra": [],
+      "id": "T10",
+      "label": "GAP_INSTRUMENT_CRASH",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [],
+      "id": "T11",
+      "label": "HOLDS",
+      "missing": [],
+      "reader_basis": "NONE_STATED",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [
+       "typed",
+       "untyped"
+      ],
+      "id": "T12",
+      "label": "UNKNOWN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T13",
+      "label": "OK",
+      "missing": [],
+      "reader_basis": "NONE_STATED",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [
+       "basis",
+       "sigma"
+      ],
+      "id": "T14",
+      "label": "CLOSED_WITHIN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T15",
+      "label": "expiry_condition",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     }
+    ],
+    "slots_determined": 13,
+    "slots_equal": 8,
+    "tier_agree": 4
+   }
+  },
+  "model_family": "claude-opus-5-5 (the identifier this session is configured with; the model serving this turn was not separately verified)",
+  "reader_label": "Claude-v2-A",
+  "scoring_rules": [
+   "N1",
+   "C1"
+  ],
+  "term_pair_differences": [
+   [
+    "reader joins, key does not",
+    "T11",
+    "T13"
+   ],
+   [
+    "key joins, reader does not",
+    "T11",
+    "T14"
+   ]
+  ],
+  "term_pairs": {
+   "both_join": 5,
+   "key_only": 1,
+   "neither": 98,
+   "reader_only": 1,
+   "total": 105
+  }
+ },
+ "P_open": {
+  "ari": 0.823,
+  "attestation_flags": [
+   "q5_used_anything_outside_packet",
+   "q6_prior_sessions_about_this_project"
+  ],
+  "blind_status": "UNCERTAIN",
+  "clusters_key": 9,
+  "clusters_reader": 9,
+  "date_utc": "2026-11-18",
+  "flags": [],
+  "key_version": "2-a1-candidate-P_open",
+  "meanings": {
+   "carried": {
+    "baselines": {
+     "label_only": 2,
+     "singletons": 2
+    },
+    "cp95": [
+     0.29,
+     0.963
+    ],
+    "n_determined": 7,
+    "n_pairs": 8,
+    "pairs": [
+     {
+      "agree": true,
+      "first_reading_declared": "MAPS",
+      "key": "PARTIAL",
+      "pair": "GAP_INSTRUMENT_CRASH | CRASHED",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": null,
+      "first_reading_declared": "PARTIAL",
+      "key": null,
+      "pair": "UNKNOWN | UNKNOWN",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "ABSENT_AT_SENSITIVITY | ABSENT_AT_SENSITIVITY",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "expiry_condition | ExpiryTrigger",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "HOMONYM",
+      "key": "HOMONYM",
+      "pair": "VOID | VOID",
+      "reader": "HOMONYM"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "UNDECIDED | UNRESOLVED",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": false,
+      "first_reading_declared": "NONE",
+      "key": "NONE",
+      "pair": "HOLDS | OK",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": false,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "HOLDS | CLOSED_WITHIN",
+      "reader": "NONE"
+     }
+    ],
+    "relations": {
+     "disjoint": 0,
+     "equal": 2,
+     "overlap": 0,
+     "reader-subset": 1,
+     "reader-superset": 11
+    },
+    "slots": [
+     {
+      "extra": [
+       "counts",
+       "input",
+       "proposals",
+       "records",
+       "tool"
+      ],
+      "id": "T01",
+      "label": "UNDECIDED",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T02",
+      "label": "ABSENT_AT_SENSITIVITY",
+      "missing": [
+       "value"
+      ],
+      "reader_basis": "NONE_STATED",
+      "relation": "reader-subset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "branches",
+       "case",
+       "complete",
+       "floor",
+       "g_differs",
+       "g_pre",
+       "k",
+       "m",
+       "sigma",
+       "split",
+       "split_abc",
+       "split_af",
+       "split_live",
+       "sys",
+       "tol"
+      ],
+      "id": "T03",
+      "label": "VOID",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "is_exit"
+      ],
+      "id": "T04",
+      "label": "ExpiryTrigger",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T05",
+      "label": "ABSENT_AT_SENSITIVITY",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [
+       "branches",
+       "case",
+       "complete",
+       "floor",
+       "g_differs",
+       "g_pre",
+       "k",
+       "m",
+       "sigma",
+       "split",
+       "split_abc",
+       "split_af",
+       "split_live",
+       "sys",
+       "tol"
+      ],
+      "id": "T06",
+      "label": "UNRESOLVED",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "counts",
+       "input",
+       "proposals",
+       "records",
+       "tool"
+      ],
+      "id": "T07",
+      "label": "VOID",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T08",
+      "label": "CRASHED",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [
+       "class",
+       "cls",
+       "coverage",
+       "coverage_by_kind",
+       "coverage_count",
+       "exit",
+       "expiry",
+       "expiry_condition",
+       "input",
+       "kind",
+       "line",
+       "module",
+       "modules_run",
+       "modules_skipped",
+       "not_determinable_reason",
+       "note",
+       "overall_status",
+       "path",
+       "quote",
+       "reason",
+       "red_flags",
+       "sections",
+       "severity",
+       "sid",
+       "slot id",
+       "summary",
+       "system_id"
+      ],
+      "id": "T09",
+      "label": "UNKNOWN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "n/d",
+      "status": "n/d"
+     },
+     {
+      "extra": [
+       "coverage",
+       "coverage_by_kind",
+       "coverage_count",
+       "error",
+       "exception_type",
+       "modules_run",
+       "modules_skipped",
+       "not_determinable_reason",
+       "overall_status",
+       "red_flags",
+       "sections",
+       "severity",
+       "summary",
+       "system_id"
+      ],
+      "id": "T10",
+      "label": "GAP_INSTRUMENT_CRASH",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "counts",
+       "input",
+       "proposals",
+       "records",
+       "tool"
+      ],
+      "id": "T11",
+      "label": "HOLDS",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "expiry_condition",
+       "input",
+       "kind",
+       "missing_path",
+       "module"
+      ],
+      "id": "T12",
+      "label": "UNKNOWN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "branches",
+       "case",
+       "complete",
+       "floor",
+       "g_differs",
+       "g_pre",
+       "k",
+       "m",
+       "split",
+       "split_abc",
+       "split_af",
+       "split_live",
+       "state",
+       "sys",
+       "tol"
+      ],
+      "id": "T13",
+      "label": "OK",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "branches",
+       "case",
+       "complete",
+       "floor",
+       "g_differs",
+       "g_pre",
+       "k",
+       "m",
+       "split",
+       "split_abc",
+       "split_af",
+       "split_live",
+       "sys",
+       "tol"
+      ],
+      "id": "T14",
+      "label": "CLOSED_WITHIN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "class",
+       "cls",
+       "exit",
+       "expiry",
+       "expiry_condition",
+       "input",
+       "kind",
+       "line",
+       "missing_path",
+       "module",
+       "note",
+       "path",
+       "pr77",
+       "pr78",
+       "quote",
+       "reason",
+       "sid",
+       "slot id"
+      ],
+      "id": "T15",
+      "label": "expiry_condition",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     }
+    ],
+    "slots_determined": 14,
+    "slots_equal": 2,
+    "tier_agree": 5
+   },
+   "specific": {
+    "baselines": {
+     "label_only": 2,
+     "singletons": 2
+    },
+    "cp95": [
+     0.223,
+     0.957
+    ],
+    "n_determined": 6,
+    "n_pairs": 8,
+    "pairs": [
+     {
+      "agree": null,
+      "first_reading_declared": "MAPS",
+      "key": null,
+      "pair": "GAP_INSTRUMENT_CRASH | CRASHED",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": null,
+      "first_reading_declared": "PARTIAL",
+      "key": null,
+      "pair": "UNKNOWN | UNKNOWN",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "ABSENT_AT_SENSITIVITY | ABSENT_AT_SENSITIVITY",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "expiry_condition | ExpiryTrigger",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "HOMONYM",
+      "key": "HOMONYM",
+      "pair": "VOID | VOID",
+      "reader": "HOMONYM"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "UNDECIDED | UNRESOLVED",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": false,
+      "first_reading_declared": "NONE",
+      "key": "NONE",
+      "pair": "HOLDS | OK",
+      "reader": "MAPS"
+     },
+     {
+      "agree": false,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "HOLDS | CLOSED_WITHIN",
+      "reader": "NONE"
+     }
+    ],
+    "relations": {
+     "disjoint": 1,
+     "equal": 9,
+     "overlap": 0,
+     "reader-subset": 0,
+     "reader-superset": 3
+    },
+    "slots": [
+     {
+      "extra": [
+       "first_straddling_piece",
+       "first_undecided_subbox",
+       "proposal",
+       "straddle_at_depth_limit",
+       "undecided_at_depth_limit"
+      ],
+      "id": "T01",
+      "label": "UNDECIDED",
+      "missing": [
+       "ai_interest",
+       "domain",
+       "evidence",
+       "fixed",
+       "human_interest",
+       "lhs",
+       "polynomial",
+       "proof",
+       "proof_attempted",
+       "rhs",
+       "source_check",
+       "status",
+       "units",
+       "why_not_proved"
+      ],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "disjoint",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T02",
+      "label": "ABSENT_AT_SENSITIVITY",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [],
+      "id": "T03",
+      "label": "VOID",
+      "missing": [],
+      "reader_basis": "NONE_STATED",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [],
+      "id": "T04",
+      "label": "ExpiryTrigger",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [
+       "covers_effect"
+      ],
+      "id": "T05",
+      "label": "ABSENT_AT_SENSITIVITY",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T06",
+      "label": "UNRESOLVED",
+      "missing": [],
+      "reader_basis": "NONE_STATED",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [
+       "first_subbox_with_no_value",
+       "void_reason"
+      ],
+      "id": "T07",
+      "label": "VOID",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "call",
+       "exception",
+       "inputs",
+       "path"
+      ],
+      "id": "T08",
+      "label": "CRASHED",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "n/d",
+      "status": "n/d"
+     },
+     {
+      "extra": [
+       "expiry_condition",
+       "expiry_source"
+      ],
+      "id": "T09",
+      "label": "UNKNOWN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "n/d",
+      "status": "n/d"
+     },
+     {
+      "extra": [],
+      "id": "T10",
+      "label": "GAP_INSTRUMENT_CRASH",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [],
+      "id": "T11",
+      "label": "HOLDS",
+      "missing": [],
+      "reader_basis": "NONE_STATED",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [
+       "typed",
+       "untyped"
+      ],
+      "id": "T12",
+      "label": "UNKNOWN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "reader-superset",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T13",
+      "label": "OK",
+      "missing": [],
+      "reader_basis": "NONE_STATED",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [],
+      "id": "T14",
+      "label": "CLOSED_WITHIN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     },
+     {
+      "extra": [],
+      "id": "T15",
+      "label": "expiry_condition",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "relation": "equal",
+      "status": "equal"
+     }
+    ],
+    "slots_determined": 13,
+    "slots_equal": 9,
+    "tier_agree": 4
+   }
+  },
+  "model_family": "claude-opus-5-5 (the identifier this session is configured with; the model serving this turn was not separately verified)",
+  "reader_label": "Claude-v2-A",
+  "scoring_rules": [
+   "N1",
+   "C1"
+  ],
+  "term_pair_differences": [
+   [
+    "reader joins, key does not",
+    "T11",
+    "T13"
+   ],
+   [
+    "key joins, reader does not",
+    "T11",
+    "T14"
+   ]
+  ],
+  "term_pairs": {
+   "both_join": 5,
+   "key_only": 1,
+   "neither": 98,
+   "reader_only": 1,
+   "total": 105
+  }
+ },
+ "v2": {
+  "ari": 0.823,
+  "attestation_flags": [
+   "q5_used_anything_outside_packet",
+   "q6_prior_sessions_about_this_project"
+  ],
+  "blind_status": "UNCERTAIN",
+  "clusters_key": 9,
+  "clusters_reader": 9,
+  "date_utc": "2026-11-18",
+  "flags": [],
+  "meanings": {
+   "carried": {
+    "baselines": {
+     "label_only": 2,
+     "singletons": 2
+    },
+    "cp95": [
+     0.29,
+     0.963
+    ],
+    "n_determined": 7,
+    "n_pairs": 8,
+    "pairs": [
+     {
+      "agree": true,
+      "first_reading_declared": "MAPS",
+      "key": "PARTIAL",
+      "pair": "GAP_INSTRUMENT_CRASH | CRASHED",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": null,
+      "first_reading_declared": "PARTIAL",
+      "key": null,
+      "pair": "UNKNOWN | UNKNOWN",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "ABSENT_AT_SENSITIVITY | ABSENT_AT_SENSITIVITY",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "expiry_condition | ExpiryTrigger",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "HOMONYM",
+      "key": "HOMONYM",
+      "pair": "VOID | VOID",
+      "reader": "HOMONYM"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "UNDECIDED | UNRESOLVED",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": false,
+      "first_reading_declared": "NONE",
+      "key": "NONE",
+      "pair": "HOLDS | OK",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": false,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "HOLDS | CLOSED_WITHIN",
+      "reader": "NONE"
+     }
+    ],
+    "slots": [
+     {
+      "extra": [
+       "counts",
+       "input",
+       "proposals",
+       "records",
+       "tool"
+      ],
+      "id": "T01",
+      "label": "UNDECIDED",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T02",
+      "label": "ABSENT_AT_SENSITIVITY",
+      "missing": [
+       "value"
+      ],
+      "reader_basis": "NONE_STATED",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "branches",
+       "case",
+       "complete",
+       "floor",
+       "g_differs",
+       "g_pre",
+       "k",
+       "m",
+       "sigma",
+       "split",
+       "split_abc",
+       "split_af",
+       "split_live",
+       "sys",
+       "tol"
+      ],
+      "id": "T03",
+      "label": "VOID",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "is_exit"
+      ],
+      "id": "T04",
+      "label": "ExpiryTrigger",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T05",
+      "label": "ABSENT_AT_SENSITIVITY",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "status": "equal"
+     },
+     {
+      "extra": [
+       "branches",
+       "case",
+       "complete",
+       "floor",
+       "g_differs",
+       "g_pre",
+       "k",
+       "m",
+       "sigma",
+       "split",
+       "split_abc",
+       "split_af",
+       "split_live",
+       "sys",
+       "tol"
+      ],
+      "id": "T06",
+      "label": "UNRESOLVED",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "counts",
+       "input",
+       "proposals",
+       "records",
+       "tool"
+      ],
+      "id": "T07",
+      "label": "VOID",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T08",
+      "label": "CRASHED",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "status": "equal"
+     },
+     {
+      "extra": [
+       "class",
+       "cls",
+       "coverage",
+       "coverage_by_kind",
+       "coverage_count",
+       "exit",
+       "expiry",
+       "expiry_condition",
+       "input",
+       "kind",
+       "line",
+       "module",
+       "modules_run",
+       "modules_skipped",
+       "not_determinable_reason",
+       "note",
+       "overall_status",
+       "path",
+       "quote",
+       "reason",
+       "red_flags",
+       "sections",
+       "severity",
+       "sid",
+       "slot id",
+       "summary",
+       "system_id"
+      ],
+      "id": "T09",
+      "label": "UNKNOWN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "status": "n/d"
+     },
+     {
+      "extra": [
+       "coverage",
+       "coverage_by_kind",
+       "coverage_count",
+       "error",
+       "exception_type",
+       "modules_run",
+       "modules_skipped",
+       "not_determinable_reason",
+       "overall_status",
+       "red_flags",
+       "sections",
+       "severity",
+       "summary",
+       "system_id"
+      ],
+      "id": "T10",
+      "label": "GAP_INSTRUMENT_CRASH",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "counts",
+       "input",
+       "proposals",
+       "records",
+       "tool"
+      ],
+      "id": "T11",
+      "label": "HOLDS",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "expiry_condition",
+       "input",
+       "kind",
+       "missing_path",
+       "module"
+      ],
+      "id": "T12",
+      "label": "UNKNOWN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "branches",
+       "case",
+       "complete",
+       "floor",
+       "g_differs",
+       "g_pre",
+       "k",
+       "m",
+       "split",
+       "split_abc",
+       "split_af",
+       "split_live",
+       "state",
+       "sys",
+       "tol"
+      ],
+      "id": "T13",
+      "label": "OK",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "branches",
+       "case",
+       "complete",
+       "floor",
+       "g_differs",
+       "g_pre",
+       "k",
+       "m",
+       "split",
+       "split_abc",
+       "split_af",
+       "split_live",
+       "sys",
+       "tol"
+      ],
+      "id": "T14",
+      "label": "CLOSED_WITHIN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "class",
+       "cls",
+       "exit",
+       "expiry",
+       "expiry_condition",
+       "input",
+       "kind",
+       "line",
+       "missing_path",
+       "module",
+       "note",
+       "path",
+       "pr77",
+       "pr78",
+       "quote",
+       "reason",
+       "sid",
+       "slot id"
+      ],
+      "id": "T15",
+      "label": "expiry_condition",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "status": "differ"
+     }
+    ],
+    "slots_determined": 14,
+    "slots_equal": 2,
+    "tier_agree": 5
+   },
+   "specific": {
+    "baselines": {
+     "label_only": 3,
+     "singletons": 2
+    },
+    "cp95": [
+     0.184,
+     0.901
+    ],
+    "n_determined": 7,
+    "n_pairs": 8,
+    "pairs": [
+     {
+      "agree": null,
+      "first_reading_declared": "MAPS",
+      "key": null,
+      "pair": "GAP_INSTRUMENT_CRASH | CRASHED",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "UNKNOWN | UNKNOWN",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "ABSENT_AT_SENSITIVITY | ABSENT_AT_SENSITIVITY",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "expiry_condition | ExpiryTrigger",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": true,
+      "first_reading_declared": "HOMONYM",
+      "key": "HOMONYM",
+      "pair": "VOID | VOID",
+      "reader": "HOMONYM"
+     },
+     {
+      "agree": false,
+      "first_reading_declared": "PARTIAL",
+      "key": "MAPS",
+      "pair": "UNDECIDED | UNRESOLVED",
+      "reader": "PARTIAL"
+     },
+     {
+      "agree": false,
+      "first_reading_declared": "NONE",
+      "key": "NONE",
+      "pair": "HOLDS | OK",
+      "reader": "MAPS"
+     },
+     {
+      "agree": false,
+      "first_reading_declared": "PARTIAL",
+      "key": "PARTIAL",
+      "pair": "HOLDS | CLOSED_WITHIN",
+      "reader": "NONE"
+     }
+    ],
+    "slots": [
+     {
+      "extra": [
+       "first_straddling_piece",
+       "first_undecided_subbox",
+       "proposal",
+       "straddle_at_depth_limit",
+       "undecided_at_depth_limit"
+      ],
+      "id": "T01",
+      "label": "UNDECIDED",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "<value>"
+      ],
+      "id": "T02",
+      "label": "ABSENT_AT_SENSITIVITY",
+      "missing": [
+       "value"
+      ],
+      "reader_basis": "READ_FROM_SOURCE",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T03",
+      "label": "VOID",
+      "missing": [],
+      "reader_basis": "NONE_STATED",
+      "status": "equal"
+     },
+     {
+      "extra": [],
+      "id": "T04",
+      "label": "ExpiryTrigger",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "status": "equal"
+     },
+     {
+      "extra": [
+       "covers_effect"
+      ],
+      "id": "T05",
+      "label": "ABSENT_AT_SENSITIVITY",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T06",
+      "label": "UNRESOLVED",
+      "missing": [],
+      "reader_basis": "NONE_STATED",
+      "status": "equal"
+     },
+     {
+      "extra": [
+       "first_subbox_with_no_value",
+       "void_reason"
+      ],
+      "id": "T07",
+      "label": "VOID",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "call",
+       "exception",
+       "inputs",
+       "path"
+      ],
+      "id": "T08",
+      "label": "CRASHED",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "status": "n/d"
+     },
+     {
+      "extra": [
+       "expiry_condition",
+       "expiry_source"
+      ],
+      "id": "T09",
+      "label": "UNKNOWN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "status": "differ"
+     },
+     {
+      "extra": [
+       "error",
+       "exception_type"
+      ],
+      "id": "T10",
+      "label": "GAP_INSTRUMENT_CRASH",
+      "missing": [
+       "expiry_condition",
+       "input",
+       "kind",
+       "module",
+       "reason"
+      ],
+      "reader_basis": "READ_FROM_SOURCE",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T11",
+      "label": "HOLDS",
+      "missing": [],
+      "reader_basis": "NONE_STATED",
+      "status": "equal"
+     },
+     {
+      "extra": [
+       "typed",
+       "untyped"
+      ],
+      "id": "T12",
+      "label": "UNKNOWN",
+      "missing": [
+       "reason"
+      ],
+      "reader_basis": "READ_FROM_SOURCE",
+      "status": "differ"
+     },
+     {
+      "extra": [],
+      "id": "T13",
+      "label": "OK",
+      "missing": [],
+      "reader_basis": "NONE_STATED",
+      "status": "equal"
+     },
+     {
+      "extra": [],
+      "id": "T14",
+      "label": "CLOSED_WITHIN",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "status": "equal"
+     },
+     {
+      "extra": [],
+      "id": "T15",
+      "label": "expiry_condition",
+      "missing": [],
+      "reader_basis": "READ_FROM_SOURCE",
+      "status": "equal"
+     }
+    ],
+    "slots_determined": 14,
+    "slots_equal": 7,
+    "tier_agree": 4
+   }
+  },
+  "model_family": "claude-opus-5-5 (the identifier this session is configured with; the model serving this turn was not separately verified)",
+  "reader_label": "Claude-v2-A",
+  "term_pair_differences": [
+   [
+    "reader joins, key does not",
+    "T11",
+    "T13"
+   ],
+   [
+    "key joins, reader does not",
+    "T11",
+    "T14"
+   ]
+  ],
+  "term_pairs": {
+   "both_join": 5,
+   "key_only": 1,
+   "neither": 98,
+   "reader_only": 1,
+   "total": 105
+  }
+ }
+}
