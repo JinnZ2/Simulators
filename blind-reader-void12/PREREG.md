@@ -79,3 +79,13 @@ Base commit of Simulators main when the packet was built: `b5e8614bef123a445f247
 
 This file's own hash is not listed; the commit that adds it identifies it.
 
+
+## 2026-11-18, later: owner's reply and pilot plan (added before any reading exists)
+
+The owner replied "Yes please, and I agree" to the three open decisions. Read as follows; the owner can correct any of it.
+
+1. **Reading rules 1 to 5 above are accepted as proposed.** They are now fixed.
+2. **Brief variants.** Two briefs exist. **Variant A** is `reader_packet/READER_BRIEF.md` as written (sha256 `6f33a9528e477efc03363136d7037319687037a417811a5ea0ee7d4a8469f86f`). **Variant B** is `variants/READER_BRIEF.variant_B.md` (sha256 `cdaca465b8b1636990d49c653f4ded55965ec18e097d347bdcb578c42772158b`): identical except that the words ", even if the second system attaches different extra fields or detail" are removed from the definition of predicate. Both are filed whatever they show. A difference between A and B readings is a difference between two readings, not evidence about the brief: one reading each cannot separate the brief from the reader.
+3. **Pilot.** One reader per variant, each a fresh isolated session of an AI model of the same family as this build, given only the packet zip and told only to read the brief and follow it. Filed as `pilot`, status as the reader attests, and by rule 5 not counted toward confirming any pair. What a pilot can show is whether the brief, template and scorer work end to end and where a reader gets stuck. It cannot show that the first reading is right or wrong.
+
+The packet zip for variant B differs from variant A's in the brief and in that file's line of `PACKET_MANIFEST.json`; nothing else.

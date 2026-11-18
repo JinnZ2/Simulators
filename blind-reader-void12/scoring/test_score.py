@@ -71,6 +71,18 @@ class KeyAndPacket(unittest.TestCase):
                 for w in preds | {"vocab_branches", "second reader", "second-reader", "void-12", "blind"}:
                     self.assertNotIn(w.lower(), low, "%s contains %r" % (rel, w))
 
+    def test_variant_brief_has_no_key_vocabulary_and_differs_only_by_the_clause(self):
+        with open(os.path.join(ROOT, "variants", "READER_BRIEF.variant_B.md"), encoding="utf-8") as fh:
+            b = fh.read()
+        with open(os.path.join(ROOT, "reader_packet", "READER_BRIEF.md"), encoding="utf-8") as fh:
+            a = fh.read()
+        self.assertEqual(a.replace(", even if the second system attaches different extra fields or detail", ""), b)
+        for w in ("MAPS", "PARTIAL", "HOMONYM", "SPLIT"):
+            self.assertIsNone(re.search(r"\b%s\b" % w, b))
+        low = b.lower()
+        for w in {t["predicate"] for t in KEY["terms"].values()} | {"vocab_branches", "void-12", "second reader"}:
+            self.assertNotIn(w.lower(), low)
+
     def test_terms_json_has_only_neutral_fields(self):
         t = S.load(os.path.join(ROOT, "reader_packet", "terms.json"))["terms"]
         self.assertEqual(len(t), 15)
