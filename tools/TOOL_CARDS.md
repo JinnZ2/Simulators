@@ -36,11 +36,11 @@ points at its entry there.
 | ontology_before_pathology | reasoning that does not fit the expected pattern | the claim or situation, read by hand | a reading; no numeric readout | the frame written is the reader's invention and the person does not hold it | PROPOSED | `Simulators:reasoning-toolkit/CARDS.md`#14-ontology-before-pathology @ `2d902a1` sha256 `dda18ebf02ae` (card text only; no code) |
 | echo_check | many sources agree | the claim or situation, read by hand | a reading; no numeric readout | the copy carries an independent check the original did not | PROPOSED | `Simulators:reasoning-toolkit/CARDS.md`#15-echo-check @ `2d902a1` sha256 `dda18ebf02ae` (card text only; no code) |
 | cloud_dependency | a facility that calls itself infrastructure and depends on a remote service | the claim or situation, read by hand | a reading; no numeric readout | "redundant" services that share one upstream (same provider, region, or auth system) → count them as one | PROPOSED | `Simulators:reasoning-toolkit/CARDS.md`#16-critical-facility-cloud-dependency-audit @ `2d902a1` sha256 `dda18ebf02ae` (card text only; no code) |
-| missing_wand | VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed | VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed | VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed | VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed | PROPOSED | VOID: card text only, and the text is not in any repository; named in Simulators reasoning-toolkit/README.md under 'Not here' |
-| constraint_reasoning | VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed | VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed | VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed | VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed | PROPOSED | VOID: card text only, and the text is not in any repository; named in Simulators reasoning-toolkit/README.md under 'Not here' |
-| carried_reference | VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed | VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed | VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed | VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed | PROPOSED | VOID: card text only, and the text is not in any repository; named in Simulators reasoning-toolkit/README.md under 'Not here' |
-| anchor_switching | VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed | VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed | VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed | VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed | PROPOSED | VOID: card text only, and the text is not in any repository; named in Simulators reasoning-toolkit/README.md under 'Not here' |
-| position_as_frame_event | VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed | VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed | VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed | VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed | PROPOSED | VOID: card text only, and the text is not in any repository; named in Simulators reasoning-toolkit/README.md under 'Not here' |
+| missing_wand | a chain with a gap: a citation, a commit history, a claim lineage, a route | the claim or situation, read by hand | a reading; no numeric readout | no verified point exists behind you (no anchor): status UNRESOLVED, don't extend | PROPOSED | `Simulators:reasoning-toolkit/CARDS.md`#18-missing-wand-protocol @ `b128fd0` sha256 `19535eab9b73` (card text only; no code) |
+| constraint_reasoning | independent systems that arrived at similar solutions | the claim or situation, read by hand | a reading; no numeric readout | the similarity came from borrowing or shared history, not shared constraints | PROPOSED | `Simulators:reasoning-toolkit/CARDS.md`#19-constraint-reasoning @ `b128fd0` sha256 `19535eab9b73` (card text only; no code) |
+| carried_reference | independent records that disagree on sequence or timing | the claim or situation, read by hand | a reading; no numeric readout | the reference itself changed in transit, or sites share an upstream source (not independent) | PROPOSED | `Simulators:reasoning-toolkit/CARDS.md`#20-carried-reference--cross-site-alignment @ `b128fd0` sha256 `19535eab9b73` (card text only; no code) |
+| anchor_switching | an interruption or a switch to another branch of work | the claim or situation, read by hand | a reading; no numeric readout | no anchor was placed: full rebuild of position | PROPOSED | `Simulators:reasoning-toolkit/CARDS.md`#21-anchor-switching @ `b128fd0` sha256 `19535eab9b73` (card text only; no code) |
+| position_as_frame_event | a stated position, framework or purpose to be read without taking a side | the claim or situation, read by hand | a reading; no numeric readout | the reader treats the readout as a verdict on the position (re-enters the contest) | PROPOSED | `Simulators:reasoning-toolkit/CARDS.md`#22-position-as-frame-event @ `b128fd0` sha256 `19535eab9b73` (card text only; no code) |
 
 ## Cards
 
@@ -271,60 +271,55 @@ points at its entry there.
 ### missing_wand
 
 - kind: reasoning_card
-- measures: VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed
-- fits: VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed
-- breaks when: VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed
-- warning sign: VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed
-- fields: VOID
-- aliases: missing-wand
-- finder: none
-- not built: the card text
+- measures: a break in a provenance / reasoning / route chain
+- fits: missing link in a citation chain, commit history, claim lineage, handoff record, any trajectory with a gap
+- breaks when: no verified point exists behind you (no anchor): status UNRESOLVED, don't extend
+- warning sign: reasoning continues past a gap without a tether back to the last verified point
+- fields: verbatim from the card text, checked as substrings; a field the card does not carry is VOID
+- aliases: missing-wand; gap in a citation chain; stay tied to the last verified point; do not jump the gap blind
+- finder: card-missing-wand
 
 ### constraint_reasoning
 
 - kind: reasoning_card
-- measures: VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed
-- fits: VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed
-- breaks when: VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed
-- warning sign: VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed
-- fields: VOID
-- aliases: constraint reasoning
-- finder: none
-- not built: the card text
+- measures: whether two solutions share their constraint pattern
+- fits: VOID: the card carries no such field
+- breaks when: the similarity came from borrowing or shared history, not shared constraints
+- warning sign: a solution transferred on surface similarity without mapping the underlying constraints
+- fields: verbatim from the card text, checked as substrings; a field the card does not carry is VOID
+- aliases: constraint reasoning; two systems arrived at the same solution; transfer a solution by matching constraints
+- finder: card-constraint-reasoning
 
 ### carried_reference
 
 - kind: reasoning_card
-- measures: VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed
-- fits: VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed
-- breaks when: VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed
-- warning sign: VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed
-- fields: VOID
-- aliases: carried reference
-- finder: none
-- not built: the card text
+- measures: sequence and timing agreement across independent records
+- fits: conflicting sources, version histories, timelines across documents, sessions or models
+- breaks when: the reference itself changed in transit, or sites share an upstream source (not independent)
+- warning sign: a dispute settled by which account sounds better rather than by alignment against the reference
+- fields: verbatim from the card text, checked as substrings; a field the card does not carry is VOID
+- aliases: carried reference; cross-site alignment; conflicting timelines across documents; align accounts against one reference
+- finder: card-carried-reference
 
 ### anchor_switching
 
 - kind: reasoning_card
-- measures: VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed
-- fits: VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed
-- breaks when: VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed
-- warning sign: VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed
-- fields: VOID
-- aliases: anchor-switching
-- finder: none
-- not built: the card text
+- measures: resumption cost after interruption / branch switch
+- fits: VOID: the card carries no such field
+- breaks when: no anchor was placed: full rebuild of position
+- warning sign: restarting a branch from the beginning after an interruption
+- fields: verbatim from the card text, checked as substrings; a field the card does not carry is VOID
+- aliases: anchor-switching; lost my place after an interruption; return to the anchor not the start
+- finder: card-anchor-switching
 
 ### position_as_frame_event
 
 - kind: reasoning_card
-- measures: VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed
-- fits: VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed
-- breaks when: VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed
-- warning sign: VOID: the card text is in no repository (reasoning-toolkit/README.md, 'Not here'); not reconstructed
-- fields: VOID
-- aliases: position-as-frame-event
-- finder: none
-- not built: the card text
+- measures: the vantage a position was taken from
+- fits: ethics/policy frameworks, study framings, stated purposes of laws, model outputs
+- breaks when: the reader treats the readout as a verdict on the position (re-enters the contest)
+- warning sign: "supports / undermines your view" phrasing
+- fields: verbatim from the card text, checked as substrings; a field the card does not carry is VOID
+- aliases: position-as-frame-event; read a position without taking a side; never assign a position to the asker
+- finder: card-position-as-frame-event
 

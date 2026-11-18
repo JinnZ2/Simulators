@@ -47,6 +47,11 @@ Provenance is per card:
 15. echo check
 16. critical-facility cloud dependency audit
 17. AI sensor index (spin-up card)
+18. missing-wand protocol
+19. constraint reasoning
+20. carried reference / cross-site alignment
+21. anchor-switching
+22. position as frame event
 
 Tests (PROPOSED): T-source, T-band
 
@@ -550,6 +555,132 @@ link notes:
 - Four primaries carry `"gradient": None`. The dict states no gradient for them; None here means not stated.
 - The addendum's two sensors do not use the `action` / `signal` keys throughout: `word_choice` carries `inbound` / `outbound`, and `entry_drift` carries `baseline` / `signal`. Both are kept as delivered.
 - Related: card 2 (fill-source tag) for `void_slot`, card 5 (frame check) for `frame_mismatch`, and `load-withheld/` for the None-kept-as-UNKNOWN rule.
+
+---
+
+## 18. missing-wand protocol
+
+provenance: drafted chat-side, landed verbatim
+status: PROPOSED
+
+```
+## missing-wand protocol
+source practice: glacier traverse in whiteout; a route wand is missing
+measures: a break in a provenance / reasoning / route chain
+fits: missing link in a citation chain, commit history, claim lineage,
+  handoff record, any trajectory with a gap
+method: stay tied to the last VERIFIED point; search outward bounded
+  by the tether (scope limit); find the next verified point; only
+  then rebuild the segment between; never jump the gap blind
+breaks when: no verified point exists behind you (no anchor): status
+  UNRESOLVED, don't extend; switch to PATHFINDER: probe ahead and set
+  the first new anchors; two candidate routes: rig the rope in a
+  TRIANGLE back to the anchor so both branches stay explorable;
+  generalizes to any polygon; closing the loop works like a survey
+  closed traverse, where misclosure measures accumulated error
+warning sign: reasoning continues past a gap without a tether back to
+  the last verified point
+```
+
+link notes:
+- The card carries one field beyond the six-field format, `source practice`. It is kept as delivered. It has no `link` field.
+
+---
+
+## 19. constraint reasoning
+
+provenance: drafted chat-side, landed verbatim
+status: PROPOSED
+
+```
+## constraint reasoning
+measures: whether two solutions share their constraint pattern
+principle: when independent systems arrive at similar solutions, the
+  constraints they were under matched; map the constraints that made
+  the solution possible; where those constraints appear elsewhere,
+  the solution is already known
+breaks when: the similarity came from borrowing or shared history, not
+  shared constraints; check independence before inferring a match
+warning sign: a solution transferred on surface similarity without
+  mapping the underlying constraints
+prediction (PROPOSED): the harsher the constraints, the smaller the
+  space of workable solutions, the tighter independent solvers converge
+nearby work: convergent evolution logic; TRIZ (Altshuller)
+```
+
+link notes:
+- The card carries `principle`, `prediction` and `nearby work` and has no `fits`, `method` or `link` field. Kept as delivered; a field the card does not carry is not filled in.
+- convergent evolution logic; TRIZ (Altshuller) (chat-side, not in repo)
+
+---
+
+## 20. carried reference / cross-site alignment
+
+provenance: drafted chat-side, landed verbatim
+status: PROPOSED
+
+```
+## carried reference / cross-site alignment
+measures: sequence and timing agreement across independent records
+fits: conflicting sources, version histories, timelines across
+  documents, sessions or models
+method: fix a reference that's already in the world; carry it; align
+  each site against it; disputes go to checking at more than one
+  site, not to argument
+breaks when: the reference itself changed in transit, or sites share
+  an upstream source (not independent); check independence first
+warning sign: a dispute settled by which account sounds better rather
+  than by alignment against the reference
+```
+
+link notes:
+- The card has no `link` field. Kept as delivered.
+
+---
+
+## 21. anchor-switching
+
+provenance: drafted chat-side, landed verbatim
+status: PROPOSED
+
+```
+## anchor-switching
+measures: resumption cost after interruption / branch switch
+method: before switching, set an anchor at the current position on the
+  trajectory; switch; return to the anchor, not the start
+breaks when: no anchor was placed: full rebuild of position
+warning sign: restarting a branch from the beginning after an
+  interruption
+nearby work: Altmann & Trafton memory-for-goals; climbers' "beta"
+```
+
+link notes:
+- The card has no `fits` or `link` field. Kept as delivered.
+- Altmann & Trafton memory-for-goals; climbers' "beta" (chat-side, not in repo)
+
+---
+
+## 22. position as frame event
+
+provenance: drafted chat-side, landed verbatim
+status: PROPOSED
+
+```
+## position as frame event
+measures: the vantage a position was taken from
+method: read each position for five fields: where assumptions are |
+  what's publicly fashionable at the time (date-stamp it) | most
+  likely past references used | which terms are welded | where they
+  chose to measure; never assign a position to the asker
+fits: ethics/policy frameworks, study framings, stated purposes of
+  laws, model outputs
+breaks when: the reader treats the readout as a verdict on the
+  position (re-enters the contest)
+warning sign: "supports / undermines your view" phrasing
+```
+
+link notes:
+- The card has no `link` field. Kept as delivered.
 
 ---
 
