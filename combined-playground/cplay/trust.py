@@ -6,8 +6,9 @@ own is UNTESTED; per-start-state records, with START_STATE_SENSITIVE and every a
 the verdict varies (never a blanket UNTRUSTED); the harness class carried beside the INSTRUMENT
 reading, never replacing it; one certification per key (a revision is not an overwrite).
 
-Held VOID: how the gate tests a declared transfer argument (section 5 says it does, not how);
-the harness-class vocabulary and its thresholds (#257 names them; the spec does not list them).
+Decided (9c item 6): a transfer argument passes only when every declared constraint is matched
+and independence is checked (pins P6-ladder-cross-domain, P6-card-constraint-reasoning).
+Held VOID: the harness-class vocabulary and its thresholds (#257 names them; the spec does not list them).
 """
 from collections import namedtuple
 
@@ -35,6 +36,24 @@ class TrustKey(namedtuple("TrustKey", "model scope start_state")):
 TrustRecord = namedtuple("TrustRecord", "key reading harness_class")
 
 
+class TransferArgument(namedtuple("TransferArgument", "from_scope constraints independence_checked")):
+    """9c item 6 (pins P6-ladder-cross-domain, P6-card-constraint-reasoning): every declared constraint
+    matched and independence checked, else the transfer is refused."""
+    __slots__ = ()
+
+    def __new__(cls, *, from_scope, constraints, independence_checked):
+        cons = tuple(constraints)
+        if not _filled(from_scope) or not cons or not all(
+                len(c) == 2 and _filled(c[0]) and isinstance(c[1], bool) for c in cons):
+            raise TrustError("transfer argument: a source scope and >= 1 (name, matched bool) constraint")
+        if not isinstance(independence_checked, bool):
+            raise TrustError("independence_checked is an explicit bool")
+        return super().__new__(cls, from_scope, cons, independence_checked)
+
+
+TransferredTrust = namedtuple("TransferredTrust", "source key argument")
+
+
 class Registry(object):
     def __init__(self):
         self._recs = {}
@@ -55,9 +74,24 @@ class Registry(object):
         key = TrustKey(model, scope, start_state)
         if key in self._recs:
             return self._recs[key]
-        if _filled(transfer_argument):
-            return T.Token("VOID", "transfer argument declared (%s); section 5 does not say how the "
-                                   "gate tests it" % transfer_argument)
+        if transfer_argument is not None:
+            if not isinstance(transfer_argument, TransferArgument):
+                raise TrustError("a transfer argument is a TransferArgument: declared constraints, each "
+                                 "matched or not, plus an independence check (9c item 6)")
+            src = TrustKey(model, transfer_argument.from_scope, start_state)
+            if src not in self._recs:
+                return T.Token("UNTESTED", "transfer source %r has no certification at start state %r"
+                               % (transfer_argument.from_scope, start_state))
+            unmatched = [n for n, ok in transfer_argument.constraints if not ok]
+            if unmatched or not transfer_argument.independence_checked:
+                why = []
+                if unmatched:
+                    why.append("constraint not matched: " + "; ".join(unmatched))
+                if not transfer_argument.independence_checked:
+                    why.append("independence not checked")
+                return T.Token("REFUSED", "transfer %r -> %r refused: %s (pin P6-ladder-cross-domain)"
+                               % (transfer_argument.from_scope, scope, ", ".join(why)))
+            return TransferredTrust(self._recs[src], key, transfer_argument)
         return T.Token("UNTESTED", "no certification in scope %r at start state %r" % (scope, start_state))
 
     def scope_summary(self, model, scope):

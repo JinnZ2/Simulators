@@ -11,8 +11,8 @@ Field restrictions taken from the spec text:
                   Reading: the spec maps CLOSED_WITHIN to PHYSICAL only and says nothing of the
                   other two, so it is neither allowed nor refused (follow-up item 1).
 
-Not defined by the spec, and held VOID: a composite severity across axes; CLOSED_WITHIN on
-INSTRUMENT or DETERMINATION.
+Decided (9c item 1): no composite severity across axes; severity() is the per-axis vector.
+Held VOID: CLOSED_WITHIN on INSTRUMENT or DETERMINATION.
 """
 from collections import namedtuple
 
@@ -26,7 +26,8 @@ COVERAGE_KINDS = ("UNKNOWN", "INFO", "GAP_INSTRUMENT_CRASH")   # TAF unified_aud
 CLOSED_WITHIN_OFF_PHYSICAL = ("section 2 maps CLOSED_WITHIN to PHYSICAL only; its meaning on "
                               "INSTRUMENT / DETERMINATION is not defined")
 
-COMPOSITE_SEVERITY = T.Token("VOID", "section 2 defines per-axis status only; no rule combines axes")
+COMPOSITE_SEVERITY = T.Token("REFUSED", "decided: no composite; severity() reports the per-axis vector "
+                             "(9c item 1; pin P1-taf-unknown-axis, TAF 16285cc unified_audit.py: UNKNOWN on its own axis; R-A2)")
 
 
 class AxisError(ValueError):

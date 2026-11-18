@@ -37,9 +37,9 @@ class Scope(unittest.TestCase):
         self.assertEqual(got.state, "UNTESTED")
         self.assertIn("relational", got.reason)
 
-    def test_declared_transfer_argument_rule_is_void(self):
-        got = self.reg.lookup("m", "relational", "steady", transfer_argument="same ODE family")
-        self.assertEqual(got.state, "VOID")
+    def test_untyped_transfer_argument_refused(self):           # 9c item 6 (test_reuse covers the rule)
+        with self.assertRaises(R.TrustError):
+            self.reg.lookup("m", "relational", "steady", transfer_argument="same ODE family")
 
     def test_same_key_returns_the_record(self):
         rec = self.reg.lookup("m", "forest", "steady")

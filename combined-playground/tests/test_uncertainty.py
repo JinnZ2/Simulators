@@ -31,7 +31,7 @@ class Flag(unittest.TestCase):
             U.mean_loss_flag(lo=0.0, hi=1.0, samples=[])
 
     def test_interval_propagation_rule_void(self):
-        self.assertEqual(U.PROPAGATION.state, "VOID")
+        self.assertEqual(U.PROPAGATION.state, "REFUSED")          # 9c item 10: delegated, pinned
 
 
 if __name__ == "__main__":

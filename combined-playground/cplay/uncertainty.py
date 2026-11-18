@@ -4,14 +4,14 @@ Built: row 39's flag, raised when a reported interval contains both mean^2 and E
 underlying distribution, so the interval cannot say which was propagated. When the two coincide
 (no spread) the flag is raised and `coincide` is set, so the case is reported rather than hidden.
 
-Held VOID: the interval propagation rule itself (row 37 names #257's propagation, the spec does
-not state its arithmetic).
+Interval propagation (row 37) is delegated, not copied: formula-audit numcheck, pin P10-numcheck.
 """
 from collections import namedtuple
 
 from . import tokens as T
 
-PROPAGATION = T.Token("VOID", "row 37: interval propagation arithmetic not stated in the spec")
+PROPAGATION = T.Token("REFUSED", "not reimplemented here: interval propagation is delegated to formula-audit "
+                      "numcheck (outward-rounded Fraction intervals), pin P10-numcheck (9c item 10)")
 
 
 class UncertaintyError(ValueError):
