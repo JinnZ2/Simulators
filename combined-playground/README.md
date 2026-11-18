@@ -17,6 +17,8 @@ M5       §3     cplay/gates.py      identity -> regime -> compare -> card enfor
 M6       §5     cplay/trust.py      key (model, scope, start state); no transfer without cert; START_STATE_SENSITIVE
 M7       §6     cplay/known_answer.py  provenance per case; circular counts nothing; crash = record; null-only harness
 M8       §8,Q7  cplay/continuity.py identity_check + return_to_anchor, no composite; one-change branch; tracks
+M9       §8     cplay/uncertainty.py  row 39 mean^2 / E[X^2] flag; propagation rule VOID
+--       §8     (not built)         rows 35-36 percolation / branching: GAP, spec gives no algorithm
 ```
 
 Run: `python3 -m unittest discover -s combined-playground/tests`
