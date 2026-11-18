@@ -28,10 +28,12 @@ Added (branch completion), none adopted:
                        |m| > allowable; else CLOSED_WITHIN with sigma*sqrt(n_legs). n_legs is a
                        declared call input; missing -> VOID. F as given states no OK condition, so
                        F returns no OK (reading taken here).
-  G  guard band        U = k*sigma + roundoff floor. OK if |m| <= tol - U; FAILED if |m| > tol + U;
-                       otherwise UNRESOLVED (inside the guard band), carried on INSTRUMENT, never
-                       PHYSICAL. sigma or k missing -> VOID; a token floor -> VOID. When U >= tol
-                       the acceptance zone is empty and OK is unreachable (reading taken here).
+  G  guard band        U = k*sigma + roundoff floor. OK if |m| <= roundoff floor; CLOSED_WITHIN if
+                       |m| <= tol - U; FAILED if |m| > tol + U; otherwise UNRESOLVED (inside the
+                       guard band), carried on INSTRUMENT, never PHYSICAL. sigma or k missing ->
+                       VOID; a token floor -> VOID. Precondition, independent of m:
+                       U >= tol -> INSTRUMENT flag TOLERANCE_UNRESOLVABLE on the case (the
+                       instrument cannot prove conformance at this tolerance); see g_precondition().
                        Source: "ISO 14253-1 / JCGM 106 decision rule, recalled, not re-read
                        (VERIFY)"; COMBINED_SPEC section 7 status NOT_CHECKED.
 D and E need a numeric floor (a token floor -> VOID); a CLOSED_WITHIN with no declared sigma is
@@ -270,14 +272,17 @@ G_SOURCE_STATUS = "NOT_CHECKED"
 
 
 class FieldToken(namedtuple("FieldToken", "field token")):
-    """A non-axis state carried on a named failure axis (branch G's UNRESOLVED)."""
+    """A non-axis state carried on INSTRUMENT: branch G's UNRESOLVED, and its precondition flag
+    TOLERANCE_UNRESOLVABLE."""
     __slots__ = ()
+    STATES = ("UNRESOLVED", "TOLERANCE_UNRESOLVABLE")
 
     def __new__(cls, field, token):
         if field != "INSTRUMENT":
-            raise ClosureError("UNRESOLVED is carried on INSTRUMENT, never %s" % field)
-        if not isinstance(token, T.Token) or token.state != "UNRESOLVED":
-            raise ClosureError("FieldToken carries an UNRESOLVED token")
+            raise ClosureError("UNRESOLVED / TOLERANCE_UNRESOLVABLE are carried on INSTRUMENT, never %s"
+                               % field)
+        if not isinstance(token, T.Token) or token.state not in cls.STATES:
+            raise ClosureError("FieldToken carries one of %r" % (cls.STATES,))
         return super().__new__(cls, field, token)
 
 
@@ -289,13 +294,35 @@ def verdict_branch_G(result, misclosure=None):
     if void is not None:
         return void
     u = band + floor
-    if m <= decl.tolerance - u:
+    if m <= floor:
         return A.reading("PHYSICAL", "OK")
+    if m <= decl.tolerance - u:
+        return _closed(decl, m, decl.tolerance - u, what="tol - U")
     if m > decl.tolerance + u:
         return _failed(result, decl, m)
     return FieldToken("INSTRUMENT", T.Token(
         "UNRESOLVED", "|m| = %g within guard band tol +/- U = %g +/- %g (source %s: %s)"
         % (m, decl.tolerance, u, G_SOURCE_STATUS, G_SOURCE)))
+
+
+def g_precondition(result, account):
+    """Decided from the declarations alone, before any misclosure is read. Returns the flag
+    FieldToken("INSTRUMENT", TOLERANCE_UNRESOLVABLE) when U >= tol, None when U < tol, and a VOID
+    token when U cannot be formed (no sigma / k, or a token floor)."""
+    if result.state != "ACCEPTED":
+        raise ClosureError("no precondition on a %s run" % result.state)
+    decl = result.prereg.accounts[account]
+    if decl.sigma is None or decl.k is None:
+        return T.Token("VOID", "U needs sigma and k declared for account %s" % account)
+    floor, void = _floor(result, "G")
+    if void is not None:
+        return void
+    u = decl.k * decl.sigma + floor
+    if u >= decl.tolerance:
+        return FieldToken("INSTRUMENT", T.Token(
+            "TOLERANCE_UNRESOLVABLE", "U = %g >= tol = %g: no misclosure can prove conformance "
+            "(account %s)" % (u, decl.tolerance, account)))
+    return None
 
 
 BRANCHES = {"A": verdict_branch_A, "B": verdict_branch_B, "C": verdict_branch_C,
@@ -313,6 +340,10 @@ CASES = (
     ("c6", 5e-7, 1e-6, None, None, "TOKEN", True),
     ("c7", 2e-6, 1e-6, None, None, 1e-12, True),
     ("c8", 5e-6, 1e-6, 1e-6, 3, 1e-12, "ABSENT"),
+    # U = 2*1e-7 + 1e-12 < tol = 1e-5 for c9-c11
+    ("c9", 5e-6, 1e-5, 1e-7, 2, 1e-12, True),      # inside tol - U -> G CW
+    ("c10", 0.0, 1e-5, 1e-7, 2, 1e-12, True),      # exactly zero -> G OK
+    ("c11", 1.1e-5, 1e-5, 1e-7, 2, 1e-12, True),   # beyond tol + U -> G FAILED
 )
 
 
@@ -338,10 +369,13 @@ def branch_table():
         abc = {got[b] for b in "ABC"}
         live = {v for v in got.values() if v != "VOID"}
         a_f = {got[b] for b in "ABCDEF"}
+        pre = g_precondition(res, "N")
+        pre = "--" if pre is None else ("I:TOL_UNRES" if isinstance(pre, FieldToken) else pre.state)
         rows.append({"case": cid, "m": m, "tol": tol, "sigma": sigma, "k": k, "floor": floor,
                      "complete": complete, "branches": got, "split": len(set(got.values())) > 1,
                      "split_abc": len(abc) > 1, "split_live": len(live) > 1,
-                     "split_af": len(a_f) > 1, "g_differs": got["G"] not in a_f})
+                     "split_af": len(a_f) > 1, "g_differs": got["G"] not in a_f,
+                     "g_pre": pre})
     return rows
 
 
@@ -351,13 +385,15 @@ def render_table(rows=None):
              "DETERMINATION:FAILED": "D:FAIL", "VOID": "VOID", "INSTRUMENT:UNRESOLVED": "I:UNRES"}
     out = ["P = PHYSICAL, D = DETERMINATION, I = INSTRUMENT, CW = CLOSED_WITHIN; n_legs = %d for F" % N_LEGS,
            "G source: %s [%s]" % (G_SOURCE, G_SOURCE_STATUS),
-           "case  |m|           tol    k*sigma  floor   complete  A       B       C       D       E       F       G        split  G-differs"]
+           "case  |m|           tol    k*sigma  floor   complete  A       B       C       D       E       F       G        G-pre        split  G-differs"]
     for r in rows:
         band = "--" if r["sigma"] is None else "%g" % (r["k"] * r["sigma"])
         cells = " ".join("%-7s" % short.get(r["branches"][b], r["branches"][b]) for b in "ABCDEFG")
-        out.append("%-5s %-13.8g %-6g %-8s %-7s %-9s %s  %-6s %s" % (
-            r["case"], r["m"], r["tol"], band, r["floor"], r["complete"], cells,
+        out.append("%-5s %-13.8g %-6g %-8s %-7s %-9s %s  %-12s %-6s %s" % (
+            r["case"], r["m"], r["tol"], band, r["floor"], r["complete"], cells, r["g_pre"],
             "SPLIT" if r["split"] else "", "G" if r["g_differs"] else ""))
+    out.append("G-pre TOLERANCE_UNRESOLVABLE (U >= tol, independent of m): "
+               + ", ".join(r["case"] for r in rows if r["g_pre"] == "I:TOL_UNRES"))
     out.append("SPLIT (A-G): " + ", ".join(r["case"] for r in rows if r["split"]))
     out.append("G differs from every A-F cell: " + ", ".join(r["case"] for r in rows if r["g_differs"]))
     out.append("SPLIT (A-F, as before): " + ", ".join(r["case"] for r in rows if r["split_af"]))

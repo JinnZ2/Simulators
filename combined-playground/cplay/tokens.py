@@ -24,6 +24,7 @@ STATES = (
     "NOT_COMPARABLE", "NOT_SCORED_STUB", "UNTYPED", "UNDECLARED", "REFUSED", "BRIEF_UNRECORDED",
     "UNKNOWN", "ABSENT_AT_SENSITIVITY", "VOID",
     "UNRESOLVED",   # M4 branch G: inside the guard band; carried on INSTRUMENT, never PHYSICAL
+    "TOLERANCE_UNRESOLVABLE",   # M4 branch G precondition: U >= tol, decided before m is read
 )
 TAGS = ("OBSERVED", "DERIVED", "PROPOSED")
 ABSENCE_BASES = ("LADDER", "DECLARED")
