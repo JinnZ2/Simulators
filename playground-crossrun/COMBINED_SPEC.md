@@ -211,12 +211,23 @@ Quotes as relayed (JCGM 106:2012):
 3.3.12  decision rule: "documented rule that describes how measurement uncertainty will be
         accounted for with regard to accepting or rejecting an item, given a specified
         requirement and the result of a measurement"
-8.3.2.1 guarded acceptance: acceptance limit set inside the tolerance interval to reduce the
-        risk of accepting a non-conforming item (relayed as summary, not a quote)
+8.3.1.1 "Accepting or rejecting an item when the measured value of its property of interest
+        is close to a tolerance limit may result in an incorrect decision and lead to
+        undesirable consequences."
+8.3.1.2 incorrect-decision probability "can be as large as 50 %" near the limit (simple
+        acceptance)
+8.3.1.3 "choosing acceptance limits offset from the tolerance limits, a conformity decision
+        strategy called guardbanding"
+8.3.2.1 guarded acceptance: "The risk of accepting a non-conforming item can be reduced by
+        setting an acceptance limit AU inside the tolerance interval"
 8.3.2.3 guard band width w = rU; "A common choice is r = 1, in which case w = U."
-8.3.3.1 guarded rejection: acceptance limit outside the tolerance interval, raising the
-        probability that a rejected item is truly non-conforming (relayed as summary)
+8.3.3.1 guarded rejection (partial quote, as relayed): an acceptance limit outside the
+        tolerance interval "can be chosen so as to increase the probability that a rejected
+        item is truly non-conforming"
 ```
+
+Note 2026-11-18: 8.3.2.1/8.3.3.1 first entered as summaries because the relay to the build
+paraphrased them; restored from the original Manus read. 8.3.1.1-8.3.1.3 added as relayed.
 
 DERIVED (combined build, not stated by JCGM 106):
 
