@@ -33,15 +33,15 @@ class Table(unittest.TestCase):
     def setUp(self):
         self.rows = {r["case"]: r for r in K.table()}
 
-    def test_six_cases(self):
-        self.assertEqual(sorted(self.rows), ["bistable_loose", "bistable_sliver", "counts_word", "fib_exact",
-                                             "lorenz_lossy", "spiral_lossy"])
+    def test_seven_cases(self):
+        self.assertEqual(sorted(self.rows), ["bistable_loose", "bistable_sliver", "bistable_small", "counts_word",
+                                             "fib_exact", "lorenz_lossy", "spiral_lossy"])
 
     def test_measured_outcomes_match_ebr_direction(self):
         o = {k: r["outcome"] for k, r in self.rows.items()}
         self.assertEqual(o, {"fib_exact": "SAME", "spiral_lossy": "SAME", "lorenz_lossy": "NOT_SAME",
                              "counts_word": "NOT_SAME", "bistable_loose": "NOT_SAME",
-                             "bistable_sliver": "NOT_SAME"})
+                             "bistable_sliver": "NOT_SAME", "bistable_small": "NOT_SAME"})
 
     def test_spiral_ratio_reproduces_ebr017(self):
         c = next(c for c in K.cases() if c["case"] == "spiral_lossy")
@@ -169,6 +169,23 @@ class Table(unittest.TestCase):
         self.assertGreater(hi, (1 - K.SLIVER_F_EXACT) ** 113)                   # agrees with the exact miss
         self.assertEqual(K.direct_miss(5, 0), 5)                                # N 0 samples: every trial misses
         self.assertIn("VOID-9 -> DECIDED", K.render())
+
+    def test_case7_small_sliver_passes_by_design(self):
+        c = next(c for c in K.cases() if c["case"] == "bistable_small")
+        self.assertEqual(c["outcome"], "NOT_SAME")                              # identity: resume lands elsewhere
+        self.assertLess(K.SMALL_F_EXACT, K.F_MIN)                               # sliver below the declared bound
+        f = K.sliver_fraction_exact(M=40, bisect=20, radius=K.SMALL_R)
+        self.assertLess(abs(f - K.SMALL_F_EXACT), 5e-4)
+        v = K.d2_bound(c, K.F_MIN, K.ALPHA, seed=27)                            # first SAME_WITH_BOUND seed
+        self.assertEqual((v.state, v.hits, v.N), ("SAME_WITH_BOUND", 0, 113))   # bound true, identity not
+        self.assertEqual(K.d2_bound(c, K.F_MIN, K.ALPHA, seed=0).state, "NOT_SAME")
+        r = K.CASE7_RUN
+        self.assertEqual(r["same_with_bound"] + r["not_same"], r["trials"])
+        lo, hi = K._wilson(r["same_with_bound"], r["trials"])
+        self.assertLess(lo, (1 - K.SMALL_F_EXACT) ** 113)
+        self.assertGreater(hi, (1 - K.SMALL_F_EXACT) ** 113)                    # agrees with exact 0.0983
+        self.assertLess(r["same_with_bound"], r["trials"] / 2)                 # "usually SWB" does not hold at N 113
+        self.assertIn("certifies the bound, not identity below f_min", K.render())
 
     def test_no_branch_picked(self):
         self.assertNotIn("winner", next(iter(self.rows.values())))

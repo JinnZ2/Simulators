@@ -6,14 +6,15 @@ lorenz_lossy     CHAOTIC_REFRESH  NOT_SAME   SAME*      SAME*      NOT_SAME   NO
 counts_word      SUMMARY_ONLY     NOT_SAME   SAME*      SAME*      NOT_SAME   NOT_SAME   NOT_SAME   --         NOT_SAME
 bistable_loose   STABLE_LOSSY     NOT_SAME   SAME*      SAME*      NOT_SAME   SAME*      NOT_SAME   NOT_SAME   NOT_SAME
 bistable_sliver  STABLE_LOSSY     NOT_SAME   SAME*      SAME*      NOT_SAME   SAME*      NOT_SAME   NOT_SAME   NOT_SAME
+bistable_small   STABLE_LOSSY     NOT_SAME   SAME*      SAME*      NOT_SAME   SAME*      NOT_SAME   NOT_SAME   NOT_SAME
 * = disagrees with the measured resume outcome; SAME_WB = SAME_WITH_BOUND; -- = no separatrix declared
-C-A  matches on 5 of 6
-C-B  matches on 2 of 6
-C-C0 matches on 2 of 6
-C-C  matches on 5 of 6
-D    matches on 4 of 6
-D2   matches on 6 of 6
-D2m  matches on 2 of 2
+C-A  matches on 6 of 7
+C-B  matches on 2 of 7
+C-C0 matches on 2 of 7
+C-C  matches on 6 of 7
+D    matches on 4 of 7
+D2   matches on 7 of 7
+D2m  matches on 3 of 3
 
   fib_exact        D2: SAME -- CONTEXT_FREE_EXACT: decided by class, no sampling
   spiral_lossy     D2: SAME_WITH_BOUND -- 0 hits in 113: any sliver is < 0.04 of the ball at confidence 0.99 (rule of three: < 0.0265 at 95%)
@@ -21,6 +22,7 @@ D2m  matches on 2 of 2
   counts_word      D2: NOT_SAME -- SUMMARY_ONLY: decided by class, no sampling
   bistable_loose   D2: NOT_SAME -- sample 2 of 113 grows (growth > 1): proof, not an estimate; margin to separatrix 0.0002 vs tol 0.1
   bistable_sliver  D2: NOT_SAME -- sample 23 of 113 grows (growth > 1): proof, not an estimate; margin to separatrix 0.0411 vs tol 0.05
+  bistable_small   D2: NOT_SAME -- sample 45 of 113 grows (growth > 1): proof, not an estimate; margin to separatrix 0.0411 vs tol 0.046
 
 case 6 at f_min 0.04, alpha 0.01, N 113: measured miss rate 0.0125 (5 of 400 trials, Wilson 95% [0.0054, 0.0289]); predicted (1 - f_hat)^N = 0.0094 with f_hat 0.0405; alpha 0.01
   (that run draws from a fixed labelled pool of 2000, so it measures the pool's f_hat, not the ball)
@@ -30,3 +32,10 @@ resolution run (2026-11-18):
   direct fresh-sample trials (seed 2026): 62 of 10000 missed = 0.0062, Wilson 95% [0.0048, 0.0079]
 decision rule (order): DECIDED if measured miss <= alpha -> 400-trial pooled run NOT met; resolved run met (upper bound 0.0079 vs alpha 0.01)
 VOID-9 -> DECIDED: identity across lossy snapshot = D2 with a declared sliver bound; verdict carries the bound
+  scope: SAME_WITH_BOUND certifies the bound, not identity below f_min
+  provenance: f_min 0.04 chosen after the pool estimate 0.0405 was seen; declared pre-run, informed by the answer. True f 0.0436 clears the threshold 0.03993 by a thin margin
+
+case 7 (sliver below f_min): ball r 0.046, exact sliver f 0.0203 < f_min 0.04; resume outcome NOT_SAME
+  D2 over 1000 fresh-draw trials (seeds 0..999): SAME_WITH_BOUND 98, NOT_SAME 902; SWB rate 0.098, Wilson 95% [0.081, 0.118]; exact (1 - f)^N = 0.0983
+  each SAME_WITH_BOUND is true as stated (0.0203 < 0.04) while identity is NOT_SAME: passes by design
+  SWB is the minority here; it is the majority only for f < 1 - 0.5^(1/N) = 0.00612
