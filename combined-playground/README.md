@@ -12,6 +12,7 @@ module   spec   file                PR
 M1       §7     cplay/brief.py      input-brief record; shared source read per level
 M2       §4     cplay/tokens.py     distinct tokens, reason rule, typed expiry, scoped absence, claims 1:1
 M3       §2     cplay/axes.py       3 axes + APPLICABILITY; COVERAGE apart, never severity; crash = record; #257 map
+M4       §2     cplay/closure.py    STOPPED at verdict (spec gap); declarations, prereg hash, R-A4 refusal built
 ```
 
 Run: `python3 -m unittest discover -s combined-playground/tests`
