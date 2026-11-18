@@ -14,6 +14,7 @@ M2       §4     cplay/tokens.py     distinct tokens, reason rule, typed expiry,
 M3       §2     cplay/axes.py       3 axes + APPLICABILITY; COVERAGE apart, never severity; crash = record; #257 map
 M4       §2     cplay/closure.py    STOPPED at verdict (spec gap); declarations, prereg hash, R-A4 refusal built
 M5       §3     cplay/gates.py      identity -> regime -> compare -> card enforced; UNDECLARED regime refuses
+M6       §5     cplay/trust.py      key (model, scope, start state); no transfer without cert; START_STATE_SENSITIVE
 ```
 
 Run: `python3 -m unittest discover -s combined-playground/tests`
