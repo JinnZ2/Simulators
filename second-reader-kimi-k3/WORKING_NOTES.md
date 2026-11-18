@@ -128,7 +128,7 @@ item  what stood there                                   status
 10    sources and commits                                recovered from the chat paste
 11    Part A: copied or paraphrased, per pair            STILL LOST
 ```
-Item 5 and the prose of the others came through. The author names two note files, `precursor-window-calibration-note.md` and `precursor-fix-sweep-note.md`, in an output folder of its own environment; pastes 77 and 78 appear to be those two, which is not checked. Those two files, `precursor_calibration.png`, and a plain-text file holding the lost tables would close every item above (`OWED`, from the author, via the owner).
+Item 5 and the prose of the others came through. The author names two note files, `precursor-window-calibration-note.md` and `precursor-fix-sweep-note.md`, in an output folder of its own environment; pastes 77 and 78 are those two (byte-identical, confirmed in 9.1). Those two files, `precursor_calibration.png`, and a plain-text file holding the lost tables would close every item above (`OWED`, from the author, via the owner).
 
 ### 8.3 What the reply says (author's statements, labels as the author gave them)
 
@@ -177,7 +177,7 @@ Python used here: 3.12.3, the same minor version as the author's; the reference 
 
 ### 8.6 Owed from the author, via the owner
 
-Items by the numbers of the ask: 1 the Part B seven-row table; 2 the n = 200 grid; 3 the citation table; 4 the two code blocks (generators, surrogate signatures), and the JavaScript file if it can be found; 6 the surrogate raw counts; 7 the six JavaScript cells; 8 the second half of the figure map and `precursor_calibration.png`; 11 the Part A table. Plus the two note files named in 8.2 (to compare with pastes 77 and 78). Everything above in one plain-text file would be the easiest form to receive.
+Items by the numbers of the ask: 1 the Part B seven-row table; 2 the n = 200 grid; 3 the citation table; 4 the two code blocks (generators, surrogate signatures), and the JavaScript file if it can be found; 6 the surrogate raw counts; 7 the six JavaScript cells; 8 the second half of the figure map and `precursor_calibration.png`; 11 the Part A table. Plus the two note files named in 8.2 (to compare with pastes 77 and 78). Everything above in one plain-text file would be the easiest form to receive. **Status: delivered in round 3; see section 9.**
 
 ### 8.7 TAF, found by name (added 2026-11-18, after the owner supplied the address)
 
@@ -195,3 +195,81 @@ CHECKED  calibration/expiry_register.py docstring, lines 3 to 6: "Work order 202
 NOT      the definitions and slot lists Kimi quotes for the TAF side of Part A (the six-field coverage entry, the slot lists) are not compared here.
 ```
 Because `main` has not moved since 2026-11-18T00:36Z, Kimi's statement that its downloads were at that commit is consistent with what is observable, as with `formula-audit` (8.4). It is still an inference about a download no one recorded.
+
+## 9. Round 3: Kimi's answers to the short list (received 2026-11-18, about 21:25 UTC)
+
+`ASK_TO_KIMI_ROUND3.md` is the list as Manus wrote it. The answers follow its numbering, so it was presumably sent as written; that is not confirmed.
+
+### 9.1 Received
+
+- A first download attempt arrived as a 117-byte file named like the zip, holding only `{"code":"unauthenticated","message":"invalid user token: token has invalid claims: token is expired"}` (sha256 `47f12294331cf22e48d9c11bf65a7f0cba39589cc8f899597247cd7934ed2185`). A failed transfer, not Kimi's content; **not filed**.
+- The second download is a real zip of 732868 bytes, sha256 `a4b1035066ccb7976038701b90c5f8544d4a78c8b78019baefed54dcf76311f9`. Its nine members are filed unchanged in `as_received/round3/`:
+
+```text
+bytes   sha256 (first 12)  file                                   relation to earlier material
+98827   0abfd92ab34a       ipython_5e4a8aeb6f900c07.png            lower-resolution render of precursor_fix_sweep.png (by eye; hash differs)
+114141  9d5ef10bd187       ipython_632f71c4a62c4dcb.png            same bytes as the round-1 file of the same name
+84704   6377aa68445e       ipython_ec009e04363687eb.png            lower-resolution render of precursor_calibration.png (by eye; hash differs)
+4638    e5ebde5a77bf       precursor-fix-sweep-note.md             byte-identical to Pasted_content_78 (cmp)
+4856    cbec70e623dc       precursor-window-calibration-note.md    byte-identical to Pasted_content_77 (cmp)
+132192  5d2f01e1987a       precursor_calibration.png               new; the file owed since round 2
+153753  61b8c7c3ecf8       precursor_fix_sweep.png                 new
+180393  78ff3b608ea4       precursor_fraction_sweep.png            same bytes as the round-1 file of the same name
+14595   049ebdd57adf       round-3-provenance-answers.txt          the answers
+```
+The two note files are therefore the pastes 77 and 78, as suspected in 8.2. The answers file has no U+FFFC placeholder characters: every table and code block arrived as text.
+
+### 9.2 What the answers say, and what Manus checked
+
+```text
+item  claim                                                            status here
+1     Part B, seven rows, set.mm and algebra.mm guards                 CHECKED (below). Verdicts are Kimi's; not re-assessed.
+2     n = 200 grid, 4 windows x 2 limits                               REPLICATED 16 of 16 cells (8 planted counts, 8 white counts), equal.
+3     five citations plus the Oikos/Ecology Letters correction         CHECKED against Crossref records (below).
+4a    series generators                                                counts reproduce; construction equal to my replication; selftest lines
+                                                                       199-211 exist (200 is the declaration with "streak_limit": 3).
+4b    surrogate function bodies                                        Kimi labels them a reconstruction; semantics only. Not source.
+4c    JavaScript port source                                           "cannot recover" (Kimi). Stays lost.
+5     surrogate-calibrated counts, n = 400                             STATISTICALLY CONSISTENT (below). Not cell for cell: different draws.
+6     six JS/Python cells                                              Python side REPLICATED 12 of 12 numbers. JS side NOT replicated (no code).
+7     Part A, copied or paraphrased                                    21 of 22 quoted strings found verbatim in the files named (below).
+8     flag rule: both taus >= limit; "streak" was a mis-description    CHECKED: precursor.py lines 126-130 hold exactly the quoted rule; lines
+                                                                       122-124 the taus. Retraction of the earlier phrase accepted as stated.
+9     three files                                                      DELIVERED (9.1)
+```
+
+**Part B (item 1).** The `set.mm` blob `e483895ed36dc7846cfa30d8c643e18ff587815c` (51954169 bytes; `git hash-object` of the downloaded content returns that id) holds all seven `set.mm` labels. Line numbers match Kimi's: oveq1 72786, oveq2 72792, fveq2 66092, resqrtth 173606, sqrtge0 173619, sqrtsq 173744, sqrtth 174919, sqsqrti 175028; `divcan1` is at line 135038 (Kimi wrote "~135035", marked approximate). The antecedents are as quoted: oveq1/oveq2/fveq2 `A = B`; divcan1 `( A e. CC /\ B e. CC /\ B =/= 0 )`; resqrtth and sqrtge0 `( A e. RR /\ 0 <_ A )`; sqsqrti `0 <_ A`. `set.mm`'s own `sqrtsq` is `( ( A e. RR /\ 0 <_ A ) -> ( sqrt ` ( A ^ 2 ) ) = A )`, a different statement from `algebra.mm`'s, as Kimi says. In `algebra.mm` (formula-audit main, lines 87-90, 105, 140, 141) the guards are `t = r` (four rows), `-. r = 0`, `0 <_ t`, `0 <_ t`, as quoted.
+Two readings kept in view, both mine: (a) every verdict is GUARD_OK **modulo typing**: `set.mm` carries `A e. CC` or `A e. RR` conditions that `algebra.mm` has no way to state, which Kimi says for rows 1 to 4 and which holds for rows 5 to 7 too; (b) in row 6 the guards compare, but the conclusions do not have the same form: `algebra.mm`'s `sqrtsq` concludes `( ( sqrt t ) * ( sqrt t ) ) = t`, `resqrtth` concludes `( ( sqrt ` A ) ^ 2 ) = A`. Related, not the same statement.
+
+**Citations (item 3).** Crossref returns, for each DOI Kimi gives: Dakos et al., PLoS ONE 7, e41010; Boettiger and Hastings, J. R. Soc. Interface 9, 2527-2539; O'Brien et al., Nature Communications 14, 7942; Clements and Ozgul, Ecology Letters 21, 905-919, "Indicators of transitions in biological systems"; Dutta, Sharma and Abbott, Oikos 127, 1251-1263; Scheffer et al., Nature 461, 53-59. Kimi's correction (Clements and Ozgul is Ecology Letters, not Oikos; the Oikos paper is Dutta et al.) is confirmed. Issue numbers (7(7), 21(6)) were not checked. Kimi labelled Scheffer "RECALLED only"; the record is correct. This checks the records, not what the papers say; no paper was opened here for this round.
+
+**Surrogate-calibrated counts (item 5).** Own run, same seeds for the series, my own surrogate draws, S = 100, alpha 0.05, my numpy rolling statistics first compared with the module's functions (0 mismatches in 40 comparisons):
+
+```text
+            w=20   w=50   w=100  w=200          Kimi: w=20 / 50 / 100 / 200
+memory      66     81     68     77             65 / 79 / 63 / 71
+white       2      2      2      1              3 / 2 / 3 / 1
+drift       0      0      0      1              1 / 0 / 0 / 0
+step        0      0      2      0              0 / 0 / 0 / 0
+```
+Differences in the memory row are 1, 2, 5, 6; the standard deviation of a difference of two independent counts near 70 of 100 is about 6.5. The shape, including the dip at w = 100, appears in both runs. White false alarms stay at or below alpha in both. This shows the described procedure gives these rates; it is not a cell-for-cell match and is not meant to be.
+
+**JS and Python cells (item 6).** My Python counts equal Kimi's Python column in all 12 numbers (46/3, 14/0, 110/7, 109/1, 156/11, 87/12). The JS column differs from the Python column by at most 1.40 standard errors (two independent binomials, pooled rate) across the 12 numbers, as Kimi says ("within binomial noise", Kimi's own inference; no test there). The JS code is lost, so that column is Kimi's report only.
+
+**Part A quotations (item 7).** Each quoted string, whitespace and comment markers normalised, searched in the file Kimi names: 21 of 22 found. The one not found is `must carry limit+basis` (pair 3, right side), which Kimi had marked "paraphrased; quoted fragment". It is not a verbatim string in `COMBINED_SPEC.md` or in `combined-playground`; section 4 of the spec says an absence "must carry three things". Treat it as a paraphrase that was put in quotation marks. Kimi's per-pair statements about which side was copied and which paraphrased are consistent with the files for the other 21.
+Which pairs have "MAPS", "PARTIAL", "HOMONYM", "NONE" verdicts remains Kimi's inference (it says so), checked earlier against the first reader's table (see the log entry in `COMBINED_SPEC.md`).
+
+### 9.3 Not replicated, and not recoverable
+
+```text
+NOT REPLICATED  cusum, rvh (raw); vote-cal and rvh-cal (calibrated variants, 60 seeds x 50 surrogates); the JavaScript port.
+CANNOT RECOVER  (Kimi) commit hashes of its original downloads; its fast-path source lines; the JavaScript file; the time zone behind "2026-11-19".
+RECONSTRUCTED   (Kimi) the surrogate function bodies, from its design notes: semantics, not source.
+```
+Everything else Kimi owed in 8.6 has been delivered. The scripts are `replication/round2/replicate_round3_cells.py`, `replicate_surrogate.py` and `check_round3_claims.py`, each with its saved output beside it. Python 3.12.3, numpy for the surrogate run only.
+
+### 9.4 Readings that remain open
+
+- **Agreement does not make the readers independent.** The counts reproduce because the construction is deterministic and fully stated; the one run on different random numbers (surrogates) agrees within noise. That supports "the numbers are what the procedure gives", not "the procedure is right".
+- **The fix-sweep ranking** (vote, weighted Kendall, recent-versus-history) is replicated for the raw rule at the cells I ran; the calibrated variants and the recent-versus-history rule are not.
+- **The figure titles** carry "Kimi K3 replay 2026-11-19" and the answers file "2026-11-19 (harness-provided, timezone unknown)"; unchanged from 8.3.

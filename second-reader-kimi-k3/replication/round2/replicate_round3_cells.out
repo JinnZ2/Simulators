@@ -1,0 +1,16 @@
+n=200 w=20 limit 0.3: planted 93/200  white 1/200
+n=200 w=20 limit 0.5: planted 14/200  white 0/200
+n=200 w=40 limit 0.3: planted 149/200  white 8/200
+n=200 w=40 limit 0.5: planted 89/200  white 0/200
+n=200 w=60 limit 0.3: planted 165/200  white 21/200
+n=200 w=60 limit 0.5: planted 120/200  white 6/200
+n=200 w=100 limit 0.3: planted 186/200  white 35/200
+n=200 w=100 limit 0.5: planted 158/200  white 14/200
+n=60 w=20 limit 0.3: planted 87/200  white 12/200
+n=60 w=20 limit 0.5: planted 46/200  white 3/200
+n=70 w=50 limit 0.3: planted 140/200  white 22/200
+n=70 w=50 limit 0.5: planted 110/200  white 7/200
+n=150 w=100 limit 0.3: planted 180/200  white 25/200
+n=150 w=100 limit 0.5: planted 156/200  white 11/200
+n=400 w=50 limit 0.3: planted 179/200  white 5/200
+n=400 w=50 limit 0.5: planted 109/200  white 1/200

@@ -1,0 +1,60 @@
+== 1. JS vs Python cells: z of the difference (two independent binomials, n=200, pooled p)
+  n60 w20 .5 planted     JS  55  Py  46  z=1.04
+  n60 w20 .5 white       JS   5  Py   3  z=0.71
+  n200 w20 .5 planted    JS  12  Py  14  z=-0.41
+  n200 w20 .5 white      JS   0  Py   0  z=n/a
+  n70 w50 .5 planted     JS  98  Py 110  z=-1.20
+  n70 w50 .5 white       JS  11  Py   7  z=0.96
+  n400 w50 .5 planted    JS 109  Py 109  z=0.00
+  n400 w50 .5 white      JS   0  Py   1  z=-1.00
+  n150 w100 .5 planted   JS 161  Py 156  z=0.62
+  n150 w100 .5 white     JS   9  Py  11  z=-0.46
+  n60 w20 .3 planted     JS 101  Py  87  z=1.40
+  n60 w20 .3 white       JS  11  Py  12  z=-0.21
+== 2. DOIs via Crossref (title, container, volume, pages)
+  10.1371/journal.pone.0041010   Methods for Detecting Early Warnings of Critical Transitions in Time S | PLoS ONE | vol 7 pp e41010 | Dakos, Carpenter, Brock
+  10.1098/rsif.2012.0125         Quantifying limits to detection of early warning for critical transiti | Journal of The Royal Society | vol 9 pp 2527-2539 | Boettiger, Hastings
+  10.1038/s41467-023-43744-8     Early warning signals have limited applicability to empirical lake dat | Nature Communications | vol 14 pp 7942 | O’Brien, Deb, Gal
+  10.1111/ele.12948              Indicators of transitions in biological systems | Ecology Letters | vol 21 pp 905-919 | Clements, Ozgul
+  10.1111/oik.05172              Robustness of early warning signals for catastrophic and non‐catastrop | Oikos | vol 127 pp 1251-1263 | Dutta, Sharma, Abbott
+  10.1038/nature08227            Early-warning signals for critical transitions | Nature | vol 461 pp 53-59 | Scheffer, Bascompte, Brock
+== 3. precursor.py line citations (item 8 and 4a)
+  122:         rv = rolling(sig, w, variance)
+  123:         ra = rolling(sig, w, lag1_autocorr)
+  124:         tv, ta = kendall_tau(rv), kendall_tau(ra)
+  125:         p = {"signal": src, "trend_variance": tv, "trend_autocorr": ta}
+  126:         lim = d.get("trend_limit")
+  127:         if isinstance(lim, (int, float)) and 0 < lim <= 1:
+  128:             rising = [n for n, t in (("variance", tv), ("autocorr", ta)) if t is not None and t >= lim]
+  129:             p["rising"] = rising
+  130:             p["flag"] = "PRECURSOR" if len(rising) == 2 else ("WATCH" if rising else "NONE")
+  199:     import random
+  200:     dp = {"tau": 3.0, "window": 30, "streak_limit": 3, "trend_limit": 0.5}
+  201:     hit = fa = 0
+  210:         fa += check({"events": [{"t": t, "outcome": "PASS", "state": rng.gauss(0, 1)}
+  211:                                 for t in range(60)], "declare": dp})["precursor"]["flag"] == "PRECURSOR"
+== 4. Part A quoted strings: present in the cited file? (normalised)
+  sizes: {'unified_audit': 27122, 'expiry_register': 23069, 'numcheck': 30102, 'spec': 41721, 'combined-playground+spec': 256689, 'unknown_expiry': 4083}
+  p1 L   FOUND     in unified_audit              A module that raised is not a reading of the system
+  p1 L   FOUND     in unified_audit              never to severity
+  p1 R   FOUND     in spec                       did not run: the check raised
+  p2 L   FOUND     in unified_audit              UNKNOWN is deliberately absent
+  p2 L   FOUND     in unified_audit              separate coverage axis
+  p2 R   FOUND     in spec                       UNTYPED
+  p3 L   FOUND     in expiry_register            state a slot moves to when its exit instrument runs at a stated sensit
+  p3 L   FOUND     in expiry_register            never a bare
+  p3 R   NOT-FOUND in combined-playground+spec   must carry limit+basis
+  p4 L   FOUND     in numcheck                   units not PASS
+  p4 L   FOUND     in numcheck                   internal error
+  p5 L   FOUND     in expiry_register            instrument class, sensitivity, and protocol whose null result would do
+  p5 R   FOUND     in unknown_expiry             NEW_EVIDENCE
+  p5 R   FOUND     in unknown_expiry             CONDITION_CHANGE
+  p5 R   FOUND     in unknown_expiry             INSTRUMENT_CHANGE
+  p5 R   FOUND     in unknown_expiry             REVISION_DEPENDENCY
+  p6 L   FOUND     in numcheck                   D straddles the edge at the last tier
+  p6 R   FOUND     in combined-playground+spec   inside the guard band; carried on INSTRUMENT, never PHYSICAL
+  p7 L   FOUND     in numcheck                   D lies inside [-t, t]
+  p7 R   FOUND     in spec                       ran and passed
+  p7 R   FOUND     in spec                       OK is reserved for the exact tier
+  p8 R   FOUND     in spec                       closure holds within sigma, not exactly
+  21 of 22 found verbatim
