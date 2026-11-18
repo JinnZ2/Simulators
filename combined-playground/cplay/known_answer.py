@@ -7,7 +7,8 @@ UNTESTED (KA_NO_CASES); all-circular -> UNTESTED (CIRCULAR_KNOWN_ANSWER, sources
 check -> CRASHED plus a GAP_INSTRUMENT_CRASH coverage entry (R-A2); each plant names the axis it
 should hit; a null-only harness gives a record, with the TP rate None and a reason, not a crash.
 
-Held VOID: the pass rule over counted cases (how many must pass); the harness-class labels and
+Decided (9c item 8): ka_verdict() passes iff every counted case passes and every planted fault is
+caught; counts reported, no threshold. Held VOID: the harness-class labels and
 their FP / TP thresholds; the ladder method for a detection limit (row 15; see tokens).
 Circularity is detected by the declared tested ids appearing in the provenance string; a
 provenance that names its source some other way is not caught.
@@ -73,7 +74,7 @@ def run_cases(cases, *, tested, check, module):
         return Result(A.reading("INSTRUMENT", "UNTESTED", reason=why), T.Token("UNTESTED", why),
                       (), tuple(circular), 0, 0, ())
     passed = sum(1 for _, ok in counted if ok)
-    return Result(None, T.Token("VOID", "section 6 gives no pass rule over counted cases"),
+    return Result(None, T.Token("UNTESTED", "pass rule (9c item 8) needs the plant harness: call ka_verdict()"),
                   tuple(counted), tuple(circular), passed, len(counted) - passed, ())
 
 
@@ -103,3 +104,19 @@ def harness(plants, fired):
         "fp_rate_reason": None if nul else "NO_NULL_PLANTS",
         "harness_class": T.Token("VOID", "harness-class labels and thresholds not in the spec (row 12)"),
     }
+
+
+def ka_verdict(result, harness_result):
+    """9c item 8: pass iff every counted known-answer case passes AND every planted fault is caught.
+    Counts are reported; there is no threshold. Zero cases, all-circular and crash readings pass
+    through unchanged; no signal plants -> UNTESTED (nothing planted to catch)."""
+    if result.reading is not None:
+        return result.reading
+    n_cases, n_sig, tp = len(result.counted), harness_result["n_signal"], harness_result["tp"]
+    counts = "cases %d/%d, plants caught %d/%d, FP %d" % (result.passed, n_cases, tp, n_sig,
+                                                         harness_result["fp"])
+    if n_sig == 0:
+        return A.reading("INSTRUMENT", "UNTESTED", reason="no planted faults to catch; " + counts)
+    if result.passed == n_cases and tp == n_sig:
+        return A.reading("INSTRUMENT", "OK", reason=counts)
+    return A.reading("INSTRUMENT", "FAILED", reason=counts)

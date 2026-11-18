@@ -49,10 +49,10 @@ class Run(unittest.TestCase):
         self.assertEqual([x.case_id for x, _ in r.counted], ["a"])
         self.assertEqual([x.case_id for x, _ in r.circular], ["b"])
 
-    def test_verdict_rule_void(self):
+    def test_verdict_needs_plant_harness(self):
         r = K.run_cases([_case()], tested=TESTED, check=lambda c: True, module="m")
         self.assertIsNone(r.reading)                  # no axis status without a verdict rule
-        self.assertEqual(r.verdict.state, "VOID")
+        self.assertEqual(r.verdict.state, "UNTESTED")          # 9c item 8: ka_verdict needs plants
         self.assertEqual(r.passed, 1)
         self.assertEqual(r.failed, 0)
 

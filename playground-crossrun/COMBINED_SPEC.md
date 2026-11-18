@@ -201,6 +201,19 @@ Decision rule, M4 branch G     JCGM 106:2012                               CHECK
                                earlier status: NOT_CHECKED ("recalled, not re-read (VERIFY)")
 ```
 
+G2 theory sources (not read by this session):
+
+```text
+Measurand identity (9c item 2)  JCGM 200:2012 (VIM), section 2.3 measurand:     NOT_CHECKED
+                               "quantity intended to be measured"; identity read as same kind of
+                               quantity + same specification of conditions. Recalled, not read
+                               (VERIFY): www.bipm.org egress refused to this session's fetches
+Comparison (9c item 3)         EA-4/02: En = |x1 - x2| / sqrt(U1^2 + U2^2), En <= 1 agree,  NOT_CHECKED
+                               U expanded. Recalled, not read (VERIFY): european-accreditation.org
+                               unreachable; ISO 13528 paywalled. Which EA document carries En is
+                               itself unverified.
+```
+
 Quotes as relayed (JCGM 106:2012):
 
 ```text
@@ -407,6 +420,15 @@ VOID or not built in combined-playground M1-M9 and needs a decision before it is
                      VOID-11 expiry vocabulary = TAF EXPIRY_KEYS instrument_class / sensitivity /
                              protocol / provenance (P11 16285cc); not mapped onto cplay ExpiryTrigger
                              kind / target / condition -- that mapping is VOID-12
+2026-11-18  TRIAGE   G2 THEORY (sources NOT_CHECKED, VERIFY; section 7):
+                     VOID-2  identity = same kind of quantity + same specification of conditions
+                             (Measurand / measurand_identity; a missing condition key differs)
+                     VOID-3  comparison = difference with combined uncertainty; En = |x1-x2| /
+                             sqrt(U1^2+U2^2), En <= 1 -> OK; combined U = 0 -> VOID
+                     VOID-4  differing regimes -> REFUSED naming both, unless a TransferArgument
+                             passes (all constraints matched, independence checked)
+                     VOID-8  ka_verdict: OK iff every counted case passes AND every planted fault
+                             is caught; counts reported, no threshold; no plants -> UNTESTED
 2026-11-18  OPEN     VOID-7, VOID-9, VOID-12: author's call, open
 2026-11-18  GAP      rows 35-36 percolation (two families) and branching (bounded pmf + closed form):
                      families and bounds named, no algorithm stated; not built
