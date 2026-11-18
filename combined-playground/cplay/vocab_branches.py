@@ -6,6 +6,14 @@ V-B  DEFINITION   the two definitions match under the TOOL_CARDS rule (tools/che
                   runs of whitespace are collapsed). norm() is imported from that checker.
 V-C  STRUCTURE    same predicate and same slots (wordslots place-table style).
 
+DECIDED on evidence (2026-11-18): the mapping relation is V-C, tiered --
+  MAPS     same predicate, same slots
+  PARTIAL  same predicate, slots differ (the mapping row must name the slot correspondence)
+  HOMONYM  same label (V-A) with no shared predicate: the label match is not a mapping
+  NONE     different label, different predicate
+V-A and V-B stay as columns. Open: predicates are assigned by a single reader (this build); a
+blind second-reader predicate assignment has not been run.
+
 Every definition is quoted from its source and pinned (repo, commit, path, sha256, one-line
 anchor), checked with pins.resolve. Predicates are declared readings, written here; slots are
 read from code where the code names them (marked slots_from), else declared.
@@ -146,27 +154,39 @@ def vc(a, b):
     return a.predicate == b.predicate and tuple(a.slots) == tuple(b.slots)
 
 
+TIERS = ("MAPS", "PARTIAL", "HOMONYM", "NONE")
+PREDICATE_STATUS = ("single reader: predicates declared by the building session; a blind second-reader "
+                    "assignment is open")
+
+
+def relation(a, b):
+    if a.predicate == b.predicate:
+        return "MAPS" if tuple(a.slots) == tuple(b.slots) else "PARTIAL"
+    return "HOMONYM" if va(a, b) else "NONE"
+
+
 def table():
     rows = []
     for x, y in PAIRS:
         a, b = term(x), term(y)
         got = {"V-A": va(a, b), "V-B": vb(a, b), "V-C": vc(a, b)}
         rows.append(dict(pair="%s | %s" % (a.label, b.label), left=x, right=y,
-                         same_predicate=a.predicate == b.predicate,
+                         same_predicate=a.predicate == b.predicate, relation=relation(a, b),
                          split=len(set(got.values())) > 1, **got))
     return rows
 
 
 def render():
     yn = lambda v: "maps" if v else "--"
-    out = ["pair                                           V-A label  V-B defn  V-C struct  same pred  SPLIT"]
+    out = ["DECIDED on evidence: relation = V-C tiered (MAPS / PARTIAL / HOMONYM / NONE)",
+           "pair                                           V-A label  V-B defn  V-C exact  same pred  relation  SPLIT"]
     for r in table():
-        out.append("%-46s %-10s %-9s %-11s %-10s %s" % (r["pair"], yn(r["V-A"]), yn(r["V-B"]), yn(r["V-C"]),
-                                                    "yes" if r["same_predicate"] else "no",
-                                                    "SPLIT" if r["split"] else ""))
+        out.append("%-46s %-10s %-9s %-10s %-10s %-9s %s" % (r["pair"], yn(r["V-A"]), yn(r["V-B"]), yn(r["V-C"]),
+                                                         "yes" if r["same_predicate"] else "no", r["relation"],
+                                                         "SPLIT" if r["split"] else ""))
     out.append("SPLIT (branches disagree): " + ", ".join(r["pair"] for r in table() if r["split"]))
     out.append("predicates are declared readings; slots marked code are read from the source")
-    out.append("no branch picked")
+    out.append("open: %s" % PREDICATE_STATUS)
     return "\n".join(out)
 
 

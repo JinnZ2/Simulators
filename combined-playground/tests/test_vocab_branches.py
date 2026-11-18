@@ -55,5 +55,31 @@ class Table(unittest.TestCase):
         self.assertEqual(srcs, {"taf", "cplay", "fa"})
 
 
+class Tiers(unittest.TestCase):
+    """Evidence round: V-C tiered; a label match with no shared predicate is a HOMONYM."""
+    def test_tier_values(self):
+        self.assertEqual(V.TIERS, ("MAPS", "PARTIAL", "HOMONYM", "NONE"))
+
+    def test_tiers_per_pair(self):
+        rel = {r["pair"]: r["relation"] for r in V.table()}
+        self.assertEqual(rel["GAP_INSTRUMENT_CRASH | CRASHED"], "MAPS")
+        self.assertEqual(rel["UNKNOWN | UNKNOWN"], "PARTIAL")
+        self.assertEqual(rel["ABSENT_AT_SENSITIVITY | ABSENT_AT_SENSITIVITY"], "PARTIAL")
+        self.assertEqual(rel["VOID | VOID"], "HOMONYM")
+        self.assertEqual(rel["expiry_condition | ExpiryTrigger"], "PARTIAL")
+        self.assertEqual(rel["UNDECIDED | UNRESOLVED"], "PARTIAL")
+        self.assertEqual(rel["HOLDS | CLOSED_WITHIN"], "PARTIAL")
+        self.assertEqual(rel["HOLDS | OK"], "NONE")
+
+    def test_homonym_needs_label_match(self):
+        a, b = V.term("fa:HOLDS"), V.term("cplay:OK")       # different labels, different predicates
+        self.assertEqual(V.relation(a, b), "NONE")
+        a, b = V.term("fa:VOID"), V.term("cplay:VOID")       # same label, different predicates
+        self.assertEqual(V.relation(a, b), "HOMONYM")
+
+    def test_predicates_flagged_single_reader(self):
+        self.assertIn("single reader", V.PREDICATE_STATUS)
+
+
 if __name__ == "__main__":
     unittest.main()

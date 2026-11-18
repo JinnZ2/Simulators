@@ -475,6 +475,13 @@ VOID or not built in combined-playground M1-M9 and needs a decision before it is
                      GAP_INSTRUMENT_CRASH | CRASHED (V-C only), UNKNOWN | UNKNOWN and
                      ABSENT_AT_SENSITIVITY pair (V-A only, slots differ), VOID | VOID (V-A only,
                      predicates differ: homonym). V-B maps no pair. Held-VOID stays
+2026-11-18  DECIDED  VOID-12 on evidence: the mapping relation is V-C tiered -- MAPS (same predicate,
+                     same slots), PARTIAL (same predicate, slots differ; the row names the slot
+                     correspondence), HOMONYM (same label, no shared predicate), NONE. On the 8
+                     pairs: MAPS 1 (GAP_INSTRUMENT_CRASH | CRASHED), PARTIAL 5, HOMONYM 1
+                     (VOID | VOID), NONE 1 (HOLDS | OK). V-A and V-B kept as columns.
+2026-11-18  OPEN     VOID-12 predicates were assigned by one reader (this build); a blind
+                     second-reader predicate assignment is open
 2026-11-18  GAP      rows 35-36 percolation (two families) and branching (bounded pmf + closed form):
                      families and bounds named, no algorithm stated; not built (closed by G3 below)
 2026-11-18  CHOICE   M4 closure verdict rule: verdict() raises SpecGap; six candidates built beside it,
