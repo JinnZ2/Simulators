@@ -3,7 +3,7 @@
  "status": "PROPOSED",
  "co_authored": true,
  "license": "CC0",
- "date": "2026-11-17",
+ "date": "2026-11-18",
  "hash_rule": "a location is pinned to a MERGED commit and the sha256 of the file at that commit. An unmerged branch row reads PENDING_MERGE with its PR number and is re-pinned on merge.",
  "fields": [
   "id",
@@ -24,6 +24,12 @@
   "CARD_TEXT",
   "VOID"
  ],
+ "cell_sources": {
+  "VERBATIM": "a literal substring of the pinned card text, byte for byte",
+  "WRAP_COLLAPSED": "a substring of the pinned card text once runs of whitespace (the card's line wraps) are collapsed to one space",
+  "INDEX_WRITTEN": "written for this index; a summary, not a quote; not matched against any text",
+  "VOID": "the source carries no such field; the cell reads \"VOID: ...\" and is kept as a gap"
+ },
  "rows": [
   {
    "id": "frame_edge",
@@ -44,7 +50,16 @@
    "fits": "a case whose miss could come from where the environment edge was drawn",
    "breaks_when": "an answer is counted as filled without being read; four questions are not a complete list",
    "warning_sign": "every slot filled with one-word answers and no change to the plan",
-   "fields_source": "written for this index, 2026-11-17; a summary, not a quote",
+   "cell_source": {
+    "trigger": "INDEX_WRITTEN",
+    "inputs": "INDEX_WRITTEN",
+    "output": "INDEX_WRITTEN",
+    "fails_when": "INDEX_WRITTEN",
+    "measures": "INDEX_WRITTEN",
+    "fits": "INDEX_WRITTEN",
+    "breaks_when": "INDEX_WRITTEN",
+    "warning_sign": "INDEX_WRITTEN"
+   },
    "aliases": [
     "what feeds this from outside the scope",
     "where was the edge of the environment drawn",
@@ -74,7 +89,16 @@
    "fits": "any written formula before numbers are put through it",
    "breaks_when": "dimensionless constants and angles are not told apart; a PASS says nothing about the numbers",
    "warning_sign": "a formula passes with every symbol declared dimensionless",
-   "fields_source": "written for this index, 2026-11-17; a summary, not a quote",
+   "cell_source": {
+    "trigger": "INDEX_WRITTEN",
+    "inputs": "INDEX_WRITTEN",
+    "output": "INDEX_WRITTEN",
+    "fails_when": "INDEX_WRITTEN",
+    "measures": "INDEX_WRITTEN",
+    "fits": "INDEX_WRITTEN",
+    "breaks_when": "INDEX_WRITTEN",
+    "warning_sign": "INDEX_WRITTEN"
+   },
    "aliases": [
     "do the units balance",
     "dimension check on a formula",
@@ -104,7 +128,16 @@
    "fits": "identities that a numeric check can only sample",
    "breaks_when": "the axioms are taken as given; a hand-written axiom file is audited separately",
    "warning_sign": "a proof passes against axioms nobody has read",
-   "fields_source": "written for this index, 2026-11-17; a summary, not a quote",
+   "cell_source": {
+    "trigger": "INDEX_WRITTEN",
+    "inputs": "INDEX_WRITTEN",
+    "output": "INDEX_WRITTEN",
+    "fails_when": "INDEX_WRITTEN",
+    "measures": "INDEX_WRITTEN",
+    "fits": "INDEX_WRITTEN",
+    "breaks_when": "INDEX_WRITTEN",
+    "warning_sign": "INDEX_WRITTEN"
+   },
    "aliases": [
     "check a proof step by step",
     "Metamath verifier",
@@ -134,7 +167,16 @@
    "fits": "data points and intersections of two formulas",
    "breaks_when": "an interval too wide to decide reads UNDECIDED; a HOLDS on points is not a proof",
    "warning_sign": "a float tier predicts FAILS where the interval tier holds",
-   "fields_source": "written for this index, 2026-11-17; a summary, not a quote",
+   "cell_source": {
+    "trigger": "INDEX_WRITTEN",
+    "inputs": "INDEX_WRITTEN",
+    "output": "INDEX_WRITTEN",
+    "fails_when": "INDEX_WRITTEN",
+    "measures": "INDEX_WRITTEN",
+    "fits": "INDEX_WRITTEN",
+    "breaks_when": "INDEX_WRITTEN",
+    "warning_sign": "INDEX_WRITTEN"
+   },
    "aliases": [
     "does this equation hold on these numbers",
     "interval arithmetic check",
@@ -165,7 +207,16 @@
    "fits": "claims built on words such as safe, warm, better, efficient",
    "breaks_when": "slot text is not read: 'nothing' counts as filled; the place table is PROPOSED",
    "warning_sign": "claims pass after their slots are filled with restatements of the word",
-   "fields_source": "written for this index, 2026-11-17; a summary, not a quote",
+   "cell_source": {
+    "trigger": "INDEX_WRITTEN",
+    "inputs": "INDEX_WRITTEN",
+    "output": "INDEX_WRITTEN",
+    "fails_when": "INDEX_WRITTEN",
+    "measures": "INDEX_WRITTEN",
+    "fits": "INDEX_WRITTEN",
+    "breaks_when": "INDEX_WRITTEN",
+    "warning_sign": "INDEX_WRITTEN"
+   },
    "aliases": [
     "safe from what and for whom",
     "a word that claims nothing until its places are filled",
@@ -196,7 +247,16 @@
    "fits": "choosing among stated rivals when each piece of evidence can be re-read",
    "breaks_when": "the rivals listed are the only ones scored; shared-ancestry evidence is capped, not removed",
    "warning_sign": "the top hypothesis rises on evidence that all traces to one source",
-   "fields_source": "written for this index, 2026-11-17; a summary, not a quote",
+   "cell_source": {
+    "trigger": "INDEX_WRITTEN",
+    "inputs": "INDEX_WRITTEN",
+    "output": "INDEX_WRITTEN",
+    "fails_when": "INDEX_WRITTEN",
+    "measures": "INDEX_WRITTEN",
+    "fits": "INDEX_WRITTEN",
+    "breaks_when": "INDEX_WRITTEN",
+    "warning_sign": "INDEX_WRITTEN"
+   },
    "aliases": [
     "rank rival explanations",
     "which hypothesis does the evidence favour",
@@ -226,7 +286,16 @@
    "fits": "looking for a relation between two formulas of the same dimension",
    "breaks_when": "the same letter in two formulas may not mean the same thing",
    "warning_sign": "a proposal is repeated downstream as if it had been checked",
-   "fields_source": "written for this index, 2026-11-17; a summary, not a quote",
+   "cell_source": {
+    "trigger": "INDEX_WRITTEN",
+    "inputs": "INDEX_WRITTEN",
+    "output": "INDEX_WRITTEN",
+    "fails_when": "INDEX_WRITTEN",
+    "measures": "INDEX_WRITTEN",
+    "fits": "INDEX_WRITTEN",
+    "breaks_when": "INDEX_WRITTEN",
+    "warning_sign": "INDEX_WRITTEN"
+   },
    "aliases": [
     "two formulas with the same units",
     "candidate equality from shared dimension",
@@ -255,7 +324,16 @@
    "fits": "a check that holds on part of its inputs and fails on part",
    "breaks_when": "only the first holding and failing pieces are used; the other edge is named, not proposed",
    "warning_sign": "the proposed boundary is read as the measured boundary",
-   "fields_source": "written for this index, 2026-11-17; a summary, not a quote",
+   "cell_source": {
+    "trigger": "INDEX_WRITTEN",
+    "inputs": "INDEX_WRITTEN",
+    "output": "INDEX_WRITTEN",
+    "fails_when": "INDEX_WRITTEN",
+    "measures": "INDEX_WRITTEN",
+    "fits": "INDEX_WRITTEN",
+    "breaks_when": "INDEX_WRITTEN",
+    "warning_sign": "INDEX_WRITTEN"
+   },
    "aliases": [
     "where does this stop holding",
     "edge between pass and fail region",
@@ -284,7 +362,16 @@
    "fits": "formulas holding a power and its inverse (a square and a square root)",
    "breaks_when": "true only where the base is not negative",
    "warning_sign": "the identity is applied on a domain that includes negative values",
-   "fields_source": "written for this index, 2026-11-17; a summary, not a quote",
+   "cell_source": {
+    "trigger": "INDEX_WRITTEN",
+    "inputs": "INDEX_WRITTEN",
+    "output": "INDEX_WRITTEN",
+    "fails_when": "INDEX_WRITTEN",
+    "measures": "INDEX_WRITTEN",
+    "fits": "INDEX_WRITTEN",
+    "breaks_when": "INDEX_WRITTEN",
+    "warning_sign": "INDEX_WRITTEN"
+   },
    "aliases": [
     "square and square root undo each other",
     "inverse exponents in two formulas",
@@ -313,7 +400,16 @@
    "fits": "a claim whose word has unfilled places",
    "breaks_when": "it asks; it does not judge the answers",
    "warning_sign": "the same void slots are asked for again after being answered elsewhere",
-   "fields_source": "written for this index, 2026-11-17; a summary, not a quote",
+   "cell_source": {
+    "trigger": "INDEX_WRITTEN",
+    "inputs": "INDEX_WRITTEN",
+    "output": "INDEX_WRITTEN",
+    "fails_when": "INDEX_WRITTEN",
+    "measures": "INDEX_WRITTEN",
+    "fits": "INDEX_WRITTEN",
+    "breaks_when": "INDEX_WRITTEN",
+    "warning_sign": "INDEX_WRITTEN"
+   },
    "aliases": [
     "which slots are still empty",
     "ask for the missing place of a word",
@@ -345,7 +441,16 @@
    "fits": "any transcript where a model shows the output of code it wrote",
    "breaks_when": "the code needs inputs that were not delivered; output that is random by design",
    "warning_sign": "the narrated numbers are rounder than the executed ones",
-   "fields_source": "written for this index, 2026-11-17; a summary, not a quote",
+   "cell_source": {
+    "trigger": "INDEX_WRITTEN",
+    "inputs": "INDEX_WRITTEN",
+    "output": "INDEX_WRITTEN",
+    "fails_when": "INDEX_WRITTEN",
+    "measures": "INDEX_WRITTEN",
+    "fits": "INDEX_WRITTEN",
+    "breaks_when": "INDEX_WRITTEN",
+    "warning_sign": "INDEX_WRITTEN"
+   },
    "aliases": [
     "the model printed output it never ran",
     "narrated output vs real output",
@@ -378,7 +483,16 @@
    "fits": "claim tables with a tol_frac or band per row",
    "breaks_when": "a reason stated only in a note file reads UNSOURCED; which text counts as a reason is a reading",
    "warning_sign": "every claim passes and no tolerance has a source",
-   "fields_source": "written for this index, 2026-11-17; a summary, not a quote",
+   "cell_source": {
+    "trigger": "INDEX_WRITTEN",
+    "inputs": "INDEX_WRITTEN",
+    "output": "INDEX_WRITTEN",
+    "fails_when": "INDEX_WRITTEN",
+    "measures": "INDEX_WRITTEN",
+    "fits": "INDEX_WRITTEN",
+    "breaks_when": "INDEX_WRITTEN",
+    "warning_sign": "INDEX_WRITTEN"
+   },
    "aliases": [
     "where did this tolerance come from",
     "band chosen after the result",
@@ -414,7 +528,16 @@
    "fits": "claim-emitting scripts that build claims through one call",
    "breaks_when": "it reads the call's shape; a value computed and then overwritten by a constant elsewhere is missed",
    "warning_sign": "a claim that always passes with measured equal to its predicted value",
-   "fields_source": "written for this index, 2026-11-17; a summary, not a quote",
+   "cell_source": {
+    "trigger": "INDEX_WRITTEN",
+    "inputs": "INDEX_WRITTEN",
+    "output": "INDEX_WRITTEN",
+    "fails_when": "INDEX_WRITTEN",
+    "measures": "INDEX_WRITTEN",
+    "fits": "INDEX_WRITTEN",
+    "breaks_when": "INDEX_WRITTEN",
+    "warning_sign": "INDEX_WRITTEN"
+   },
    "aliases": [
     "measured value typed into the code",
     "claim that cannot fail because the result is a constant",
@@ -447,7 +570,16 @@
    "fits": "noise-free states of a known discretisation",
    "breaks_when": "says nothing about measured or noisy data; reading ODE coefficients back assumes the scheme",
    "warning_sign": "the exact tier is cited for a result that came from float data",
-   "fields_source": "written for this index, 2026-11-17; a summary, not a quote",
+   "cell_source": {
+    "trigger": "INDEX_WRITTEN",
+    "inputs": "INDEX_WRITTEN",
+    "output": "INDEX_WRITTEN",
+    "fails_when": "INDEX_WRITTEN",
+    "measures": "INDEX_WRITTEN",
+    "fits": "INDEX_WRITTEN",
+    "breaks_when": "INDEX_WRITTEN",
+    "warning_sign": "INDEX_WRITTEN"
+   },
    "aliases": [
     "recover the equation exactly in fractions",
     "no tolerance check on a step map",
@@ -480,7 +612,16 @@
    "fits": "snapshots described by content (full state or summary), fidelity (exact or lossy) and a measured growth",
    "breaks_when": "content and fidelity per claim are read by hand; it tests growth, not chaos; it does not check that a stated bound is true",
    "warning_sign": "a lossy snapshot of a growing system resumed on a stated bound with no refresh",
-   "fields_source": "written for this index, 2026-11-18; a summary, not a quote",
+   "cell_source": {
+    "trigger": "INDEX_WRITTEN",
+    "inputs": "INDEX_WRITTEN",
+    "output": "INDEX_WRITTEN",
+    "fails_when": "INDEX_WRITTEN",
+    "measures": "INDEX_WRITTEN",
+    "fits": "INDEX_WRITTEN",
+    "breaks_when": "INDEX_WRITTEN",
+    "warning_sign": "INDEX_WRITTEN"
+   },
    "aliases": [
     "can I resume from this checkpoint",
     "lossy snapshot of a chaotic system",
@@ -511,8 +652,8 @@
    "kind": "reasoning_card",
    "status": "PROPOSED",
    "trigger": "a claim judged with its author visible",
-   "inputs": "the claim or situation, read by hand",
-   "output": "a reading; no numeric readout",
+   "inputs": "VOID: no card field",
+   "output": "VOID: no card field",
    "fails_when": "the claim names its source inside its own text (the swap changes the claim)",
    "location": {
     "repo": "Simulators",
@@ -527,7 +668,16 @@
    "fits": "any claim judged with its author visible; model replies to users without credentials",
    "breaks_when": "the claim names its source inside its own text (the swap changes the claim)",
    "warning_sign": "the same reasoning read as insight from one author and as error from another",
-   "fields_source": "verbatim from the card text, checked as substrings",
+   "cell_source": {
+    "trigger": "INDEX_WRITTEN",
+    "inputs": "VOID",
+    "output": "VOID",
+    "fails_when": "VERBATIM",
+    "measures": "VERBATIM",
+    "fits": "VERBATIM",
+    "breaks_when": "VERBATIM",
+    "warning_sign": "VERBATIM"
+   },
    "aliases": [
     "re-attribute the claim to an expert",
     "verdict depends on who said it",
@@ -542,8 +692,8 @@
    "kind": "reasoning_card",
    "status": "PROPOSED",
    "trigger": "a pass criterion that seems to move",
-   "inputs": "the claim or situation, read by hand",
-   "output": "a reading; no numeric readout",
+   "inputs": "VOID: no card field",
+   "output": "VOID: no card field",
    "fails_when": "the first criterion was mis-stated and the revision is declared, with a reason, before the next evidence arrives",
    "location": {
     "repo": "Simulators",
@@ -558,7 +708,16 @@
    "fits": "\"show me X\" demands, review criteria, benchmarks, acceptance tests",
    "breaks_when": "the first criterion was mis-stated and the revision is declared, with a reason, before the next evidence arrives",
    "warning_sign": "\"yes, but now show ...\" after each piece of evidence, with no criterion written in advance",
-   "fields_source": "verbatim from the card text, checked as substrings",
+   "cell_source": {
+    "trigger": "INDEX_WRITTEN",
+    "inputs": "VOID",
+    "output": "VOID",
+    "fails_when": "WRAP_COLLAPSED",
+    "measures": "VERBATIM",
+    "fits": "VERBATIM",
+    "breaks_when": "WRAP_COLLAPSED",
+    "warning_sign": "WRAP_COLLAPSED"
+   },
    "aliases": [
     "moving goalposts",
     "criterion moves each time it is met",
@@ -573,8 +732,8 @@
    "kind": "reasoning_card",
    "status": "PROPOSED",
    "trigger": "reasoning that does not fit the expected pattern",
-   "inputs": "the claim or situation, read by hand",
-   "output": "a reading; no numeric readout",
+   "inputs": "VOID: no card field",
+   "output": "VOID: no card field",
    "fails_when": "the frame written is the reader's invention and the person does not hold it",
    "location": {
     "repo": "Simulators",
@@ -589,7 +748,16 @@
    "fits": "a reply to a user whose reasoning departs from the expected pattern; clinical, educational and support readings",
    "breaks_when": "the frame written is the reader's invention and the person does not hold it",
    "warning_sign": "a \"concern\" or \"unusual\" reading reached before any attempt to state the other frame",
-   "fields_source": "verbatim from the card text, checked as substrings",
+   "cell_source": {
+    "trigger": "INDEX_WRITTEN",
+    "inputs": "VOID",
+    "output": "VOID",
+    "fails_when": "VERBATIM",
+    "measures": "WRAP_COLLAPSED",
+    "fits": "WRAP_COLLAPSED",
+    "breaks_when": "VERBATIM",
+    "warning_sign": "WRAP_COLLAPSED"
+   },
    "aliases": [
     "different frame before something wrong with the person",
     "reasoning read as a symptom",
@@ -604,8 +772,8 @@
    "kind": "reasoning_card",
    "status": "PROPOSED",
    "trigger": "many sources agree",
-   "inputs": "the claim or situation, read by hand",
-   "output": "a reading; no numeric readout",
+   "inputs": "VOID: no card field",
+   "output": "VOID: no card field",
    "fails_when": "the copy carries an independent check the original did not",
    "location": {
     "repo": "Simulators",
@@ -620,7 +788,16 @@
    "fits": "corpora that include model output; agreement across sources; \"everyone says\"",
    "breaks_when": "the copy carries an independent check the original did not",
    "warning_sign": "many sources agree and none of them reports its own observation",
-   "fields_source": "verbatim from the card text, checked as substrings",
+   "cell_source": {
+    "trigger": "INDEX_WRITTEN",
+    "inputs": "VOID",
+    "output": "VOID",
+    "fails_when": "VERBATIM",
+    "measures": "VERBATIM",
+    "fits": "VERBATIM",
+    "breaks_when": "VERBATIM",
+    "warning_sign": "VERBATIM"
+   },
    "aliases": [
     "model output coming back as evidence",
     "agreement between copies",
@@ -635,8 +812,8 @@
    "kind": "reasoning_card",
    "status": "PROPOSED",
    "trigger": "a facility that calls itself infrastructure and depends on a remote service",
-   "inputs": "the claim or situation, read by hand",
-   "output": "a reading; no numeric readout",
+   "inputs": "VOID: no card field",
+   "output": "VOID: no card field",
    "fails_when": "\"redundant\" services that share one upstream (same provider, region, or auth system) → count them as one",
    "location": {
     "repo": "Simulators",
@@ -651,7 +828,16 @@
    "fits": "hospitals, utilities, dispatch, water, food cold chain, any facility calling itself infrastructure",
    "breaks_when": "\"redundant\" services that share one upstream (same provider, region, or auth system) → count them as one",
    "warning_sign": "\"it's in the cloud\" given as the answer to \"where does it run?\"",
-   "fields_source": "verbatim from the card text, checked as substrings",
+   "cell_source": {
+    "trigger": "INDEX_WRITTEN",
+    "inputs": "VOID",
+    "output": "VOID",
+    "fails_when": "WRAP_COLLAPSED",
+    "measures": "VERBATIM",
+    "fits": "WRAP_COLLAPSED",
+    "breaks_when": "WRAP_COLLAPSED",
+    "warning_sign": "VERBATIM"
+   },
    "aliases": [
     "hospital depends on the cloud",
     "what fails when the remote service fails",
@@ -666,8 +852,8 @@
    "kind": "reasoning_card",
    "status": "PROPOSED",
    "trigger": "a chain with a gap: a citation, a commit history, a claim lineage, a route",
-   "inputs": "the claim or situation, read by hand",
-   "output": "a reading; no numeric readout",
+   "inputs": "VOID: no card field",
+   "output": "VOID: no card field",
    "fails_when": "no verified point exists behind you (no anchor): status UNRESOLVED, don't extend",
    "location": {
     "repo": "Simulators",
@@ -682,7 +868,16 @@
    "fits": "missing link in a citation chain, commit history, claim lineage, handoff record, any trajectory with a gap",
    "breaks_when": "no verified point exists behind you (no anchor): status UNRESOLVED, don't extend",
    "warning_sign": "reasoning continues past a gap without a tether back to the last verified point",
-   "fields_source": "verbatim from the card text, checked as substrings; a field the card does not carry is VOID",
+   "cell_source": {
+    "trigger": "INDEX_WRITTEN",
+    "inputs": "VOID",
+    "output": "VOID",
+    "fails_when": "WRAP_COLLAPSED",
+    "measures": "VERBATIM",
+    "fits": "WRAP_COLLAPSED",
+    "breaks_when": "WRAP_COLLAPSED",
+    "warning_sign": "WRAP_COLLAPSED"
+   },
    "aliases": [
     "missing-wand",
     "gap in a citation chain",
@@ -698,8 +893,8 @@
    "kind": "reasoning_card",
    "status": "PROPOSED",
    "trigger": "independent systems that arrived at similar solutions",
-   "inputs": "the claim or situation, read by hand",
-   "output": "a reading; no numeric readout",
+   "inputs": "VOID: no card field",
+   "output": "VOID: no card field",
    "fails_when": "the similarity came from borrowing or shared history, not shared constraints",
    "location": {
     "repo": "Simulators",
@@ -714,7 +909,16 @@
    "fits": "VOID: the card carries no such field",
    "breaks_when": "the similarity came from borrowing or shared history, not shared constraints",
    "warning_sign": "a solution transferred on surface similarity without mapping the underlying constraints",
-   "fields_source": "verbatim from the card text, checked as substrings; a field the card does not carry is VOID",
+   "cell_source": {
+    "trigger": "INDEX_WRITTEN",
+    "inputs": "VOID",
+    "output": "VOID",
+    "fails_when": "WRAP_COLLAPSED",
+    "measures": "VERBATIM",
+    "fits": "VOID",
+    "breaks_when": "WRAP_COLLAPSED",
+    "warning_sign": "WRAP_COLLAPSED"
+   },
    "aliases": [
     "constraint reasoning",
     "two systems arrived at the same solution",
@@ -729,8 +933,8 @@
    "kind": "reasoning_card",
    "status": "PROPOSED",
    "trigger": "independent records that disagree on sequence or timing",
-   "inputs": "the claim or situation, read by hand",
-   "output": "a reading; no numeric readout",
+   "inputs": "VOID: no card field",
+   "output": "VOID: no card field",
    "fails_when": "the reference itself changed in transit, or sites share an upstream source (not independent)",
    "location": {
     "repo": "Simulators",
@@ -745,7 +949,16 @@
    "fits": "conflicting sources, version histories, timelines across documents, sessions or models",
    "breaks_when": "the reference itself changed in transit, or sites share an upstream source (not independent)",
    "warning_sign": "a dispute settled by which account sounds better rather than by alignment against the reference",
-   "fields_source": "verbatim from the card text, checked as substrings; a field the card does not carry is VOID",
+   "cell_source": {
+    "trigger": "INDEX_WRITTEN",
+    "inputs": "VOID",
+    "output": "VOID",
+    "fails_when": "WRAP_COLLAPSED",
+    "measures": "VERBATIM",
+    "fits": "WRAP_COLLAPSED",
+    "breaks_when": "WRAP_COLLAPSED",
+    "warning_sign": "WRAP_COLLAPSED"
+   },
    "aliases": [
     "carried reference",
     "cross-site alignment",
@@ -761,8 +974,8 @@
    "kind": "reasoning_card",
    "status": "PROPOSED",
    "trigger": "an interruption or a switch to another branch of work",
-   "inputs": "the claim or situation, read by hand",
-   "output": "a reading; no numeric readout",
+   "inputs": "VOID: no card field",
+   "output": "VOID: no card field",
    "fails_when": "no anchor was placed: full rebuild of position",
    "location": {
     "repo": "Simulators",
@@ -777,7 +990,16 @@
    "fits": "VOID: the card carries no such field",
    "breaks_when": "no anchor was placed: full rebuild of position",
    "warning_sign": "restarting a branch from the beginning after an interruption",
-   "fields_source": "verbatim from the card text, checked as substrings; a field the card does not carry is VOID",
+   "cell_source": {
+    "trigger": "INDEX_WRITTEN",
+    "inputs": "VOID",
+    "output": "VOID",
+    "fails_when": "VERBATIM",
+    "measures": "VERBATIM",
+    "fits": "VOID",
+    "breaks_when": "VERBATIM",
+    "warning_sign": "WRAP_COLLAPSED"
+   },
    "aliases": [
     "anchor-switching",
     "lost my place after an interruption",
@@ -792,8 +1014,8 @@
    "kind": "reasoning_card",
    "status": "PROPOSED",
    "trigger": "a stated position, framework or purpose to be read without taking a side",
-   "inputs": "the claim or situation, read by hand",
-   "output": "a reading; no numeric readout",
+   "inputs": "VOID: no card field",
+   "output": "VOID: no card field",
    "fails_when": "the reader treats the readout as a verdict on the position (re-enters the contest)",
    "location": {
     "repo": "Simulators",
@@ -808,7 +1030,16 @@
    "fits": "ethics/policy frameworks, study framings, stated purposes of laws, model outputs",
    "breaks_when": "the reader treats the readout as a verdict on the position (re-enters the contest)",
    "warning_sign": "\"supports / undermines your view\" phrasing",
-   "fields_source": "verbatim from the card text, checked as substrings; a field the card does not carry is VOID",
+   "cell_source": {
+    "trigger": "INDEX_WRITTEN",
+    "inputs": "VOID",
+    "output": "VOID",
+    "fails_when": "WRAP_COLLAPSED",
+    "measures": "VERBATIM",
+    "fits": "WRAP_COLLAPSED",
+    "breaks_when": "WRAP_COLLAPSED",
+    "warning_sign": "VERBATIM"
+   },
    "aliases": [
     "position-as-frame-event",
     "read a position without taking a side",
