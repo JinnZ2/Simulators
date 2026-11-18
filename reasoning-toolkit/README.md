@@ -40,6 +40,7 @@ provenance line and a status line.
 | 20 | carried reference / cross-site alignment | PROPOSED | chat-side, verbatim (landed 2026-11-17) |
 | 21 | anchor-switching | PROPOSED | chat-side, verbatim (landed 2026-11-17) |
 | 22 | position as frame event | PROPOSED | chat-side, verbatim (landed 2026-11-17) |
+| 23 | rejoin protocol (explorer re-entry) | PROPOSED | chat-side, verbatim (landed 2026-11-18) |
 
 Tests: T-source and T-band, both PROPOSED and not run, under `## Tests` in `CARDS.md`.
 

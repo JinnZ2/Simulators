@@ -52,6 +52,7 @@ Provenance is per card:
 20. carried reference / cross-site alignment
 21. anchor-switching
 22. position as frame event
+23. rejoin protocol (explorer re-entry)
 
 Tests (PROPOSED): T-source, T-band
 
@@ -681,6 +682,48 @@ warning sign: "supports / undermines your view" phrasing
 
 link notes:
 - The card has no `link` field. Kept as delivered.
+
+---
+
+## 23. rejoin protocol (explorer re-entry)
+
+provenance: drafted chat-side, landed verbatim (2026-11-18)
+status: PROPOSED
+
+```
+CARD: rejoin protocol (explorer re-entry)   PROPOSED
+source practice: tribes work as a group; each member is taught to live
+  alone; the meet-up is where information passes; re-socialization after
+  long solo exploration is the COST of bringing back what the group
+  couldn't know, not a deficit
+measures: drift in protocol between members after separation
+fits: agents / sessions resuming old orders, repos after parallel
+  work, any channel unused for a while
+method:
+  1 HANDSHAKE FIRST: each side states its protocol version (schema, field
+    names, status vocabulary, base commit)
+  2 DIFF: what changed while apart, on BOTH sides
+  3 TRANSLATE: old → new with a declared mapping; unmappable → VOID,
+    never guessed (source → source_id is mappable; a dead status word
+    isn't, without a rule)
+  4 THEN TRANSFER: information passes only over a verified handshake
+  5 TAG THE NEWS: what the explorer brings is marked "from outside the
+    group's frame": high value, checked like any source, not
+    discounted for being unfamiliar
+  6 BUDGET RE-ENTRY: time for re-learning is planned into the
+    expedition, not counted as a delay
+breaks when: both sides changed their reference while apart (no fixed
+  point to align against) → fall back to the carried-reference card:
+  find a reference outside both
+warning sign: acting on an old order or record without checking what
+  changed in between; or the group treating the explorer's news as error
+  because it doesn't match the group's current frame
+```
+
+link notes:
+- The card opens with `CARD: ... PROPOSED` where cards 18 to 22 open with `## name`, and carries
+  `source practice` beyond the six-field format. Kept as delivered. It has no `link` field.
+- `breaks when` points at card 20 (carried reference / cross-site alignment).
 
 ---
 
