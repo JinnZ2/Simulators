@@ -47,6 +47,7 @@ wraps are collapsed to one space). A VOID cell is a field the source does not ca
 | carried_reference | independent records that disagree on sequence or timing [iw] | VOID: no card field | VOID: no card field | the reference itself changed in transit, or sites share an upstream source (not independent) | PROPOSED | `Simulators:reasoning-toolkit/CARDS.md`#20-carried-reference--cross-site-alignment @ `b128fd0` sha256 `19535eab9b73` (card text only; no code) |
 | anchor_switching | an interruption or a switch to another branch of work [iw] | VOID: no card field | VOID: no card field | no anchor was placed: full rebuild of position | PROPOSED | `Simulators:reasoning-toolkit/CARDS.md`#21-anchor-switching @ `b128fd0` sha256 `19535eab9b73` (card text only; no code) |
 | position_as_frame_event | a stated position, framework or purpose to be read without taking a side [iw] | VOID: no card field | VOID: no card field | the reader treats the readout as a verdict on the position (re-enters the contest) | PROPOSED | `Simulators:reasoning-toolkit/CARDS.md`#22-position-as-frame-event @ `b128fd0` sha256 `19535eab9b73` (card text only; no code) |
+| rejoin_protocol | an old order, a repository or a channel picked up again after time apart [iw] | VOID: no card field | VOID: no card field | both sides changed their reference while apart (no fixed point to align against) | PROPOSED | `Simulators:reasoning-toolkit/CARDS.md`#23-rejoin-protocol-explorer-re-entry @ `d1eafe8` sha256 `9d9b0cc970b4` (card text only; no code) |
 
 ## Cards
 
@@ -338,4 +339,15 @@ wraps are collapsed to one space). A VOID cell is a field the source does not ca
 - index cells: trigger INDEX_WRITTEN; inputs VOID; output VOID; fails_when WRAP_COLLAPSED
 - aliases: position-as-frame-event; read a position without taking a side; never assign a position to the asker
 - finder: card-position-as-frame-event
+
+### rejoin_protocol
+
+- kind: reasoning_card
+- measures [VERBATIM]: drift in protocol between members after separation
+- fits [WRAP_COLLAPSED]: agents / sessions resuming old orders, repos after parallel work, any channel unused for a while
+- breaks when [WRAP_COLLAPSED]: both sides changed their reference while apart (no fixed point to align against)
+- warning sign [WRAP_COLLAPSED]: acting on an old order or record without checking what changed in between
+- index cells: trigger INDEX_WRITTEN; inputs VOID; output VOID; fails_when WRAP_COLLAPSED
+- aliases: rejoin protocol; explorer re-entry; handshake before transfer; resuming an old order after time apart
+- finder: none
 
