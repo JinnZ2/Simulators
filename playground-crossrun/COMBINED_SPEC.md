@@ -21,7 +21,7 @@ relational-playground package from PR #257 (abbreviated **#257**). The concept r
                          |
      closure gate (tolerance declared per account, pre-run) --> AXIS reading (section 2)
                          |                                    PHYSICAL | INSTRUMENT | DETERMINATION
-          known-answer / null / ladder gate ------>           + APPLICABILITY (not an axis)
+          known-answer / null / ladder gate ------>           + APPLICABILITY, COVERAGE (not axes)
                          |
    measurand identity -> observer regime -> comparison -> coincidence card     (section 3)
                          |
@@ -35,7 +35,14 @@ relational-playground package from PR #257 (abbreviated **#257**). The concept r
 ## 2. Axes, statuses and the #257 mapping
 
 Three failure axes, canonical from s-a: **PHYSICAL**, **INSTRUMENT**, **DETERMINATION**.
-APPLICABILITY is a separate field and is not a failure axis (Q11).
+APPLICABILITY is a separate field and is not a failure axis (Q11). **COVERAGE** is a separate
+field too, and never feeds severity (R-A2):
+
+```text
+COVERAGE entry   kind ∈ {UNKNOWN, INFO, GAP_INSTRUMENT_CRASH}, module, input, reason,
+                 missing_path, expiry_condition
+source           TAF calibration/unified_audit.py @ 16285cc, lines 96-101, CHECKED (section 7)
+```
 
 ```text
 status          meaning                                        reason field
@@ -276,6 +283,7 @@ Q3   tool-gate crash -> INSTRUMENT : CRASHED(exception, path). Own status: FAILE
      contain the label.
      2026-11-18: source CHECKED (read-only; section 7). Answer kept: CRASHED is an instrument
      status, reported on the coverage axis and never in severity.
+     2026-11-18 coverage field declared (G1, found at gate)
 Q7   continuity: two fields, identity_check (configuration) and return_to_anchor (system),
      no composite. Branch rule: keep both.
 Q9   observer partition = union of four: PASSIVE (null control: not disturbed, not reacting) |
