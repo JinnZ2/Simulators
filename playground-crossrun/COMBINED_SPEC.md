@@ -330,3 +330,46 @@ Q14 / open #11  combined build lives in a new folder: Simulators/combined-playgr
 
 Build: NOT STARTED. It waits for the TAF cleanup approval round; the sources it owes are listed
 in section 7.
+
+### 9c. Open for next pass (2026-11-18)
+
+Requested as "9b"; 9b already holds the second-round answers, so this is 9c. Each item is held
+VOID or not built in combined-playground M1-M9 and needs a decision before it is built.
+
+```text
+2026-11-18  VOID-1   composite severity across axes (M3; section 2 defines per-axis status only)
+2026-11-18  VOID-2   measurand identity criterion (M5; caller supplies verdict + reason)
+2026-11-18  VOID-3   what a comparison computes (M5; caller supplies a token)
+2026-11-18  VOID-4   effect of two systems declaring different observer regimes (M5)
+2026-11-18  VOID-5   coincidence-card causes other than shared source (M5)
+2026-11-18  VOID-6   how the gate tests a declared trust-transfer argument (M6)
+2026-11-18  VOID-7   harness-class labels and their FP / TP thresholds (M6, M7)
+2026-11-18  VOID-8   pass rule over counted known-answer cases (M7)
+2026-11-18  VOID-9   continuity identity criterion (M8; identity_check is a caller token)
+2026-11-18  VOID-10  interval propagation arithmetic (M9, row 37)
+2026-11-18  VOID-11  expiry-trigger kind vocabulary (M2)
+2026-11-18  VOID-12  vocabulary mapping rows (M2, Q12)
+2026-11-18  also     CLOSED_WITHIN on INSTRUMENT / DETERMINATION -> VOID (M3; mapped to PHYSICAL only)
+2026-11-18  GAP      rows 35-36 percolation (two families) and branching (bounded pmf + closed form):
+                     families and bounds named, no algorithm stated; not built
+2026-11-18  CHOICE   M4 closure verdict rule: verdict() raises SpecGap; three candidates built beside it,
+                     none adopted (A tolerance first / B floor added / C band first); table below
+```
+
+M4 branch table (combined-playground/samples/closure_branch_table.txt, constructed cases):
+
+```text
+case  |m|           tol    k*sigma  floor   complete  A                     B                     C
+c1    1e-07         1e-06  3e-06    1e-12   True      PHYSICAL:OK           PHYSICAL:OK           PHYSICAL:CLOSED_WITHIN  SPLIT
+c2    2e-06         1e-06  3e-06    1e-12   True      PHYSICAL:CLOSED_WITHIN (all three)
+c3    5e-06         1e-06  3e-06    1e-12   True      PHYSICAL:FAILED (all three)
+c4    1.0000005e-06 1e-06  --       1e-09   True      PHYSICAL:FAILED       PHYSICAL:OK           PHYSICAL:FAILED         SPLIT
+c5    5e-07         1e-06  --       1e-12   True      PHYSICAL:OK (all three)
+c6    5e-07         1e-06  --       TOKEN   True      PHYSICAL:OK           VOID                  PHYSICAL:OK             SPLIT
+c7    2e-06         1e-06  --       1e-12   True      PHYSICAL:FAILED (all three)
+c8    5e-06         1e-06  3e-06    1e-12   ABSENT    DETERMINATION:FAILED (all three)
+```
+
+SPLIT rows: c1 (A/B vs C: does a misclosure inside both tolerance and k*sigma read OK or
+CLOSED_WITHIN?), c4 (B vs A/C: is the roundoff floor added to the tolerance?), c6 (B vs A/C:
+what does B do with an unmeasured floor?).
