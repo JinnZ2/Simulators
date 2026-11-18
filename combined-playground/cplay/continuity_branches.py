@@ -16,6 +16,17 @@ D    CLASS-CONDITIONED (evidence round) T4 class of the snapshot (snapshot_class
                     CHAOTIC_REFRESH    -> exact-only (C-A)   SUMMARY_ONLY -> NOT_SAME
                   growth = error at the horizon / error injected, MEASURED once per system at a
                   declared reference snapshot (T4: "one horizon on one system decides the class").
+                  Broken by case 5 (global class).
+D2   BASIN MARGIN (reading taken here; the order's definition was not in this build's context)
+                  as D, but a LOSSY full-state snapshot is classed LOCALLY: N points sampled
+                  uniformly in the ball of radius tol around the anchor (seeded) are each run to the
+                  horizon; growth_i = error at horizon / injected error. Every growth_i <= 1 ->
+                  STABLE_LOSSY locally -> C-B; any growth_i > 1 -> exact-only (C-A). N is declared;
+                  missing -> UNTESTED. The rule asks whether the whole tolerance ball sits inside one
+                  basin (a basin margin of at least tol); a ball with a sliver across the separatrix
+                  is found only if a sample lands in the sliver: miss rate (1 - f)^N for sliver
+                  fraction f. Source pattern: the "repose glyph" (conditional stability), named by
+                  the order, NOT LOCATED in any indexed JinnZ2 repository by code search.
 
 Known cases rebuilt here (stdlib, seedless) after snapshot_delta's four systems, Geometric-to-
 Binary-Computational-Bridge @85f3302, CLAIM_TABLE.md EBR_016-019 (sha256 a657c606...):
@@ -28,6 +39,7 @@ are EBR's, stated there as UNSOURCED.
 """
 import hashlib
 import math
+import random
 from collections import namedtuple
 
 from . import continuity as M8
@@ -143,26 +155,26 @@ def _growth(f, anchor, snap, dt=0.01, n=3000):
     return _dist(_rk4(f, anchor, dt, n), _rk4(f, snap, dt, n)) / _dist(anchor, snap)
 
 
-def _ode_case(name, f, s0, ebr, band, *, anchor=None, rnd=round3, tol=1e-3, ref=None):
-    dt = 0.01
+def _ode_case(name, f, s0, ebr, band, *, anchor=None, rnd=round3, tol=1e-3, ref=None,
+              dt=0.01, n=3000, lossy="round"):
     anchor = _rk4(f, s0, dt, 1500) if anchor is None else anchor   # t = 15 s by default
     snap = rnd(anchor)
-    true_end = _rk4(f, anchor, dt, 3000)         # 30 s horizon
-    res_end = _rk4(f, snap, dt, 3000)
+    true_end = _rk4(f, anchor, dt, n)            # 30 s horizon
+    res_end = _rk4(f, snap, dt, n)
     e0 = _dist(anchor, snap)
     ratio = _dist(true_end, res_end) / e0
     outcome = "SAME" if ratio <= band else "NOT_SAME"
     names = "xyz"[:len(anchor)]
-    chain = [Transition("round", h(anchor), h(snap), rnd)]
+    chain = [Transition(lossy, h(anchor), h(snap), rnd)]
     ra, rs = ref if ref is not None else (anchor, snap)
-    growth = _growth(f, ra, rs)
+    growth = _growth(f, ra, rs, dt, n)
     return {"case": name, "anchor": anchor, "state": snap,
             "vars": (dict(zip(names, anchor)), dict(zip(names, snap)), {n: tol for n in names}),
             "chain": chain, "states": {h(anchor): anchor}, "exact": {h(anchor): anchor},
             "t4": t4_class("FULL_STATE", "LOSSY", growth), "class_growth": growth,
             "class_ref": "the case's own snapshot" if ref is None else "declared reference snapshot",
             "measured": "error ratio %.4g vs band %g" % (ratio, band), "outcome": outcome,
-            "ratio": ratio, "ebr": ebr}
+            "ratio": ratio, "ebr": ebr, "f": f, "dt": dt, "n": n, "radius": tol}
 
 
 def cases():
@@ -199,7 +211,73 @@ def cases():
     out.append(_ode_case("bistable_loose", double_well, None,
                          "constructed here, no EBR claim; band [0, 3] as EBR_017", 3.0,
                          anchor=near, rnd=round1, tol=0.1, ref=(deep, round1(deep))))
+    # sixth case, built to try to break D2: a tolerance ball almost entirely in one basin with a thin
+    # sliver (about 2.5 %) across the separatrix; the lossy snapshot is a declared point in the sliver.
+    sl = sliver_snapshot()
+    out.append(_ode_case("bistable_sliver", double_well, None,
+                         "constructed here, no EBR claim; band [0, 3] as EBR_017", 3.0,
+                         anchor=SLIVER_ANCHOR, rnd=lambda _a: sl, tol=SLIVER_R,
+                         ref=(deep, round1(deep)), dt=0.05, n=600, lossy="lossy encode (declared point)"))
     return out
+
+
+SLIVER_ANCHOR = (0.06, -0.01)
+SLIVER_R = 0.05
+DECLARED_N = 32            # declared per run of the table; missing -> UNTESTED
+
+
+def _basin(p, dt=0.05, n=600):
+    return 1 if _rk4(double_well, p, dt, n)[0] > 0 else -1
+
+
+def _ball(c, r, rng):
+    while True:
+        d = [rng.uniform(-r, r) for _ in c]
+        if sum(x * x for x in d) <= r * r:
+            return tuple(a + b for a, b in zip(c, d))
+
+
+def sliver_snapshot(seed=7):
+    """First seeded ball point (radius SLIVER_R) whose basin differs from the anchor's."""
+    rng, home = random.Random(seed), _basin(SLIVER_ANCHOR)
+    while True:
+        p = _ball(SLIVER_ANCHOR, SLIVER_R, rng)
+        if _basin(p) != home:
+            return p
+
+
+def c_local(c, N, seed=0):
+    """D2. Exact / summary snapshots as D; a lossy full state is classed on N ball samples."""
+    if N is None:
+        return "UNTESTED"
+    if isinstance(N, bool) or not isinstance(N, int) or N < 1:
+        raise ValueError("N is a declared integer >= 1")
+    av, sv, tol = c["vars"]
+    if c["t4"] in ("CONTEXT_FREE_EXACT", "SUMMARY_ONLY") or c.get("f") is None:
+        return c_class(c["t4"], c["anchor"], c["state"], (av, sv, tol))
+    rng = random.Random(seed)
+    a, f, dt, n = c["anchor"], c["f"], c["dt"], c["n"]
+    end_a = _rk4(f, a, dt, n)
+    for _ in range(N):
+        p = _ball(a, c["radius"], rng)
+        g = _dist(_rk4(f, p, dt, n), end_a) / _dist(p, a)
+        if g > GROWTH_LIMIT:
+            return c_exact(a, c["state"])           # locally not stable: exact-only
+    return c_tolerance(av, sv, tol)                 # whole sampled ball stable: C-B
+
+
+def miss_table(Ns=(1, 2, 4, 8, 16, 32, 64, 128, 256), trials=400, pool=2000, seed=11):
+    """Case 6: how often N ball samples miss the sliver. A pool of labelled ball points is drawn once
+    (seeded); each trial draws N points from it. Measured miss rate beside (1 - f_hat)^N."""
+    rng = random.Random(seed)
+    home = _basin(SLIVER_ANCHOR)
+    labels = [_basin(_ball(SLIVER_ANCHOR, SLIVER_R, rng)) != home for _ in range(pool)]
+    f_hat = sum(labels) / float(pool)
+    rows = []
+    for N in Ns:
+        miss = sum(not any(labels[rng.randrange(pool)] for _ in range(N)) for _ in range(trials))
+        rows.append({"N": N, "miss_rate": miss / float(trials), "predicted": (1 - f_hat) ** N})
+    return {"f_hat": f_hat, "pool": pool, "trials": trials, "rows": rows}
 
 
 def _extend(word, levels):
@@ -216,7 +294,8 @@ def table():
                "C-B": c_tolerance(av, sv, tol),
                "C-C0": c_lineage(c["anchor"], c["state"], c["chain"], c["states"]),
                "C-C": c_lineage(c["anchor"], c["state"], c["chain"], c["states"], exact=c["exact"]),
-               "D": c_class(c["t4"], c["anchor"], c["state"], (av, sv, tol))}
+               "D": c_class(c["t4"], c["anchor"], c["state"], (av, sv, tol)),
+               "D2": c_local(c, DECLARED_N)}
         own = c["t4"] if c["class_growth"] is None else t4_class("FULL_STATE", "LOSSY", c["ratio"])
         d_own = c_class(own, c["anchor"], c["state"], (av, sv, tol))
         rows.append({"case": c["case"], "branches": got, "outcome": c["outcome"], "t4": c["t4"],
@@ -227,30 +306,40 @@ def table():
     return rows
 
 
-BRANCHES = ("C-A", "C-B", "C-C0", "C-C", "D")
+BRANCHES = ("C-A", "C-B", "C-C0", "C-C", "D", "D2")
 
 
 def render():
     rows = table()
-    out = ["case            T4 class (growth, where measured)              C-A        C-B        C-C0       C-C        D          measured  SPLIT"]
+    out = ["case             T4 class (growth, where measured)                     C-A        C-B        C-C0       C-C        D          D2(N=%d)   measured" % DECLARED_N]
     for r in rows:
         b = r["branches"]
         mark = lambda k: b[k] + ("" if r["matches"][k] else "*")
         g = "" if r["class_growth"] is None else " %.3g at %s" % (r["class_growth"], r["class_ref"])
-        out.append("%-15s %-46s %-10s %-10s %-10s %-10s %-10s %-9s %s" % (
+        out.append("%-16s %-53s %-10s %-10s %-10s %-10s %-10s %-10s %s" % (
             r["case"], (r["t4"] or "VOID") + g, mark("C-A"), mark("C-B"), mark("C-C0"), mark("C-C"),
-            mark("D"), r["outcome"], "SPLIT" if r["split"] else ""))
+            mark("D"), mark("D2"), r["outcome"]))
     out.append("* = branch disagrees with the measured resume outcome; C-C0 is the first build, kept as history")
     for k in BRANCHES:
-        out.append("%-4s matches on %d of %d  (first four cases: %d of 4)" % (
-            k, sum(r["matches"][k] for r in rows), len(rows), sum(r["matches"][k] for r in rows[:4])))
+        out.append("%-4s matches on %d of %d  (first five cases: %d of 5)" % (
+            k, sum(r["matches"][k] for r in rows), len(rows), sum(r["matches"][k] for r in rows[:5])))
     out.append("SPLIT (branches disagree): " + ", ".join(r["case"] for r in rows if r["split"]))
     out.append("D with growth measured at each case's own snapshot instead: " + ", ".join(
         "%s %s" % (r["case"], r["d_own"]) for r in rows))
+    m = miss_table()
+    out.append("")
+    out.append("case 6 sliver: ball radius %g around %s; sliver fraction f_hat = %.4f (pool %d, seeded); "
+               "%d trials per N" % (SLIVER_R, SLIVER_ANCHOR, m["f_hat"], m["pool"], m["trials"]))
+    out.append("  N     measured miss rate   predicted (1 - f)^N")
+    for r in m["rows"]:
+        out.append("  %-5d %-20.4f %.4f" % (r["N"], r["miss_rate"], r["predicted"]))
+    out.append("a miss -> D2 reads SAME on a snapshot whose measured resume is NOT_SAME")
+    out.append("")
     for r in rows:
-        out.append("  %-15s %s; %s" % (r["case"], r["measured"], r["ebr"]))
+        out.append("  %-16s %s; %s" % (r["case"], r["measured"], r["ebr"]))
     out.append("no branch picked")
     return "\n".join(out)
+
 
 if __name__ == "__main__":
     print(render())
