@@ -154,6 +154,22 @@ class Table(unittest.TestCase):
         for r in m["rows"]:
             self.assertLess(abs(r["miss_rate"] - r["predicted"]), 0.12)
 
+    def test_resolution_exact_sliver_above_threshold(self):
+        self.assertAlmostEqual(K.f_threshold(113, 0.01), 0.039934, places=6)
+        f = K.sliver_fraction_exact(M=40, bisect=20)                            # coarse recompute
+        self.assertLess(abs(f - K.SLIVER_F_EXACT), 5e-4)
+        self.assertGreater(K.SLIVER_F_EXACT, K.f_threshold(113, K.ALPHA))
+        self.assertLess((1 - K.SLIVER_F_EXACT) ** 113, K.ALPHA)                  # exact miss 0.0065
+
+    def test_resolution_direct_run_resolves_alpha(self):
+        k, n = K.DIRECT_RUN["miss"], K.DIRECT_RUN["trials"]
+        lo, hi = K._wilson(k, n)
+        self.assertLess(hi, K.ALPHA)                                            # resolved: whole interval below alpha
+        self.assertLess(lo, (1 - K.SLIVER_F_EXACT) ** 113)
+        self.assertGreater(hi, (1 - K.SLIVER_F_EXACT) ** 113)                   # agrees with the exact miss
+        self.assertEqual(K.direct_miss(5, 0), 5)                                # N 0 samples: every trial misses
+        self.assertIn("VOID-9 -> DECIDED", K.render())
+
     def test_no_branch_picked(self):
         self.assertNotIn("winner", next(iter(self.rows.values())))
 
