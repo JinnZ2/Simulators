@@ -1,0 +1,129 @@
+{
+ "reviewed_leak_check_exceptions": [
+  {
+   "file": "sources/Simulators/combined-playground/cplay/closure.py",
+   "word": "SPLIT",
+   "reason": "closure.py's own branch table (verdict branches A-G)"
+  }
+ ],
+ "files": {
+  "READER_BRIEF.md": {
+   "bytes": 6040,
+   "sha256": "a9881ee5cdd49544513e704d664b5f99b754c13cb7cdaae6b99aa20c183effa3"
+  },
+  "response_template.json": {
+   "bytes": 3968,
+   "sha256": "d3dc896800357f666c0fd9fedd1cee6b54fa2ec20db71cce9115416288210060"
+  },
+  "terms.json": {
+   "bytes": 6514,
+   "sha256": "467f4fe6769e2ee2e0fed26e91dca25e3c4c04b8f61f339adc2b01d4ab19e0ce"
+  },
+  "sources/Simulators/combined-playground/cplay/axes.py": {
+   "bytes": 7786,
+   "sha256": "0e40b7e5ce87de2226103593782e78015534e196005f6c06ed2f460d700453a7"
+  },
+  "sources/Simulators/combined-playground/cplay/closure.py": {
+   "bytes": 22158,
+   "sha256": "827d681c8b08003519a60967d3b61ef891254a38bb8c02e29cacba51633c3188"
+  },
+  "sources/Simulators/combined-playground/cplay/tokens.py": {
+   "bytes": 5832,
+   "sha256": "8c43890bf90ab49931a3947ff420b00368e5ce23ed82f8e57bd7aec3be6337e6"
+  },
+  "sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md": {
+   "bytes": 24327,
+   "sha256": "72bbd97749918468a862ab72ec2af5211eb1c1c99e3f1b3e512a65b9f30160a8"
+  },
+  "sources/formula-audit/numcheck/check.py": {
+   "bytes": 30102,
+   "sha256": "f6df0dc196f5ac273f864f1cab1a5a0d6c67fa88eaba53ca822f94412fb7fd83"
+  },
+  "sources/thermodynamic-accountability-framework/calibration/expiry_register.py": {
+   "bytes": 23071,
+   "sha256": "ddaf2cc5b6539df340ceb84dab98e249d00a5def9f5d9f374a8ff875a04db0ae"
+  },
+  "sources/thermodynamic-accountability-framework/calibration/unified_audit.py": {
+   "bytes": 27122,
+   "sha256": "fcccb9af8d8edb01940a09a639be2ff376c53781097b5562f8745a084c368a49"
+  },
+  "sources/thermodynamic-accountability-framework/docs/glossary.md": {
+   "bytes": 9629,
+   "sha256": "412ed3abf4c2a546fe16def60fcb223bd496e4f297db995fcfb7232ad56c712b"
+  }
+ },
+ "sources": [
+  {
+   "served_as": "sources/Simulators/combined-playground/cplay/axes.py",
+   "repo": "Simulators",
+   "commit": "9658b3ee64892ab375b201a9dcd376180a503417",
+   "path": "combined-playground/cplay/axes.py",
+   "sha256_of_full_file_at_commit": "0e40b7e5ce87de2226103593782e78015534e196005f6c06ed2f460d700453a7",
+   "bytes_served": 7786,
+   "note": "complete file"
+  },
+  {
+   "served_as": "sources/Simulators/combined-playground/cplay/closure.py",
+   "repo": "Simulators",
+   "commit": "9658b3ee64892ab375b201a9dcd376180a503417",
+   "path": "combined-playground/cplay/closure.py",
+   "sha256_of_full_file_at_commit": "827d681c8b08003519a60967d3b61ef891254a38bb8c02e29cacba51633c3188",
+   "bytes_served": 22158,
+   "note": "complete file"
+  },
+  {
+   "served_as": "sources/Simulators/combined-playground/cplay/tokens.py",
+   "repo": "Simulators",
+   "commit": "9658b3ee64892ab375b201a9dcd376180a503417",
+   "path": "combined-playground/cplay/tokens.py",
+   "sha256_of_full_file_at_commit": "8c43890bf90ab49931a3947ff420b00368e5ce23ed82f8e57bd7aec3be6337e6",
+   "bytes_served": 5832,
+   "note": "complete file"
+  },
+  {
+   "served_as": "sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md",
+   "repo": "Simulators",
+   "commit": "9658b3ee64892ab375b201a9dcd376180a503417",
+   "path": "playground-crossrun/COMBINED_SPEC.md",
+   "sha256_of_full_file_at_commit": "b42e23b4c9327aef6ac056561a50753f4928b4b836c74f89bf801264ff35b357",
+   "bytes_served": 24327,
+   "note": "cut before the heading '### 9c.': lines 1-390 of 517; line numbers are those of the full file"
+  },
+  {
+   "served_as": "sources/formula-audit/numcheck/check.py",
+   "repo": "formula-audit",
+   "commit": "4345de69c19429a876f5b16aaf32666a1b00db59",
+   "path": "numcheck/check.py",
+   "sha256_of_full_file_at_commit": "f6df0dc196f5ac273f864f1cab1a5a0d6c67fa88eaba53ca822f94412fb7fd83",
+   "bytes_served": 30102,
+   "note": "complete file"
+  },
+  {
+   "served_as": "sources/thermodynamic-accountability-framework/calibration/expiry_register.py",
+   "repo": "thermodynamic-accountability-framework",
+   "commit": "16285cccdd48d608067b9bca50bd6ac683fe860a",
+   "path": "calibration/expiry_register.py",
+   "sha256_of_full_file_at_commit": "ddaf2cc5b6539df340ceb84dab98e249d00a5def9f5d9f374a8ff875a04db0ae",
+   "bytes_served": 23071,
+   "note": "complete file"
+  },
+  {
+   "served_as": "sources/thermodynamic-accountability-framework/calibration/unified_audit.py",
+   "repo": "thermodynamic-accountability-framework",
+   "commit": "16285cccdd48d608067b9bca50bd6ac683fe860a",
+   "path": "calibration/unified_audit.py",
+   "sha256_of_full_file_at_commit": "fcccb9af8d8edb01940a09a639be2ff376c53781097b5562f8745a084c368a49",
+   "bytes_served": 27122,
+   "note": "complete file"
+  },
+  {
+   "served_as": "sources/thermodynamic-accountability-framework/docs/glossary.md",
+   "repo": "thermodynamic-accountability-framework",
+   "commit": "16285cccdd48d608067b9bca50bd6ac683fe860a",
+   "path": "docs/glossary.md",
+   "sha256_of_full_file_at_commit": "412ed3abf4c2a546fe16def60fcb223bd496e4f297db995fcfb7232ad56c712b",
+   "bytes_served": 9629,
+   "note": "complete file"
+  }
+ ]
+}
