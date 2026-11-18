@@ -467,6 +467,31 @@ VOID or not built in combined-playground M1-M9 and needs a decision before it is
                      (SAME vs measured NOT_SAME). D holds 5/5 only if growth is measured at each
                      case's own snapshot, which is the resume measurement itself. Matches: C-A 4/5,
                      C-C 4/5, D 4/5, C-B 2/5, C-C0 2/5. VOID-9 stays; D PROPOSED, broken by case 5
+2026-11-18  STATUS   D -> broken by case 5 (global class): the class is measured once per system at
+                     a reference snapshot, so a snapshot near a separatrix inherits the wrong class
+2026-11-18  BRANCH   D2 basin margin (reading taken by the build; the order's definition was not in
+                     its context): a lossy full-state snapshot is classed locally from N declared
+                     ball samples (radius = tol) around the anchor; any sample growth > 1 ->
+                     exact-only, all <= 1 -> C-B; N missing -> UNTESTED. 6 cases x 6 branches
+                     (D and D2 kept): D2 6/6 at N = 32, seed 0; D 4/6; C-A 5/6; C-C 5/6; C-B 2/6
+2026-11-18  PROPOSED D2, with the case 6 miss-rate table (bistable_sliver: ball almost entirely in one
+                     basin, a thin sliver across the separatrix, the lossy snapshot in the sliver):
+                     case 6 sliver: ball radius 0.05 around (0.06, -0.01); sliver fraction f_hat = 0.0405 (pool 2000, seeded); 400 trials per N
+                     N     measured miss rate   predicted (1 - f)^N
+                     1     0.9600               0.9595
+                     2     0.9475               0.9206
+                     4     0.8075               0.8476
+                     8     0.7275               0.7184
+                     16    0.5200               0.5161
+                     32    0.2800               0.2663
+                     64    0.0500               0.0709
+                     128   0.0025               0.0050
+                     256   0.0000               0.0000
+                     a miss reads SAME on a NOT_SAME snapshot. D2 survives case 6 at N = 32, seed 0,
+                     with a 0.28 measured miss rate at that N: survival is probabilistic, not
+                     shown. VOID-9 stays until D2 survives case 6
+2026-11-18  XREF     basin-margin rule: source pattern named as the "repose glyph" (conditional
+                     stability); NOT LOCATED in any indexed JinnZ2 repository by code search
 2026-11-18  BRANCHED VOID-12 vocabulary mapping rows; decide on evidence from SPLIT rows. V-A same
                      label, V-B definitions match under the TOOL_CARDS VERBATIM / WRAP_COLLAPSED rule,
                      V-C same predicate + same slots; cplay/vocab_branches.py,

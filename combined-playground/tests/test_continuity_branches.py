@@ -33,14 +33,15 @@ class Table(unittest.TestCase):
     def setUp(self):
         self.rows = {r["case"]: r for r in K.table()}
 
-    def test_five_cases(self):
-        self.assertEqual(sorted(self.rows), ["bistable_loose", "counts_word", "fib_exact", "lorenz_lossy",
-                                             "spiral_lossy"])
+    def test_six_cases(self):
+        self.assertEqual(sorted(self.rows), ["bistable_loose", "bistable_sliver", "counts_word", "fib_exact",
+                                             "lorenz_lossy", "spiral_lossy"])
 
     def test_measured_outcomes_match_ebr_direction(self):
         o = {k: r["outcome"] for k, r in self.rows.items()}
         self.assertEqual(o, {"fib_exact": "SAME", "spiral_lossy": "SAME", "lorenz_lossy": "NOT_SAME",
-                             "counts_word": "NOT_SAME", "bistable_loose": "NOT_SAME"})
+                             "counts_word": "NOT_SAME", "bistable_loose": "NOT_SAME",
+                             "bistable_sliver": "NOT_SAME"})
 
     def test_spiral_ratio_reproduces_ebr017(self):
         c = next(c for c in K.cases() if c["case"] == "spiral_lossy")
@@ -49,15 +50,15 @@ class Table(unittest.TestCase):
     def test_branch_cells_five_branches(self):
         b = {k: r["branches"] for k, r in self.rows.items()}
         S, N = "SAME", "NOT_SAME"
-        self.assertEqual(b["spiral_lossy"], {"C-A": N, "C-B": S, "C-C0": S, "C-C": N, "D": S})
-        self.assertEqual(b["lorenz_lossy"], {"C-A": N, "C-B": S, "C-C0": S, "C-C": N, "D": N})
-        self.assertEqual(b["counts_word"], {"C-A": N, "C-B": S, "C-C0": S, "C-C": N, "D": N})
-        self.assertEqual(b["bistable_loose"], {"C-A": N, "C-B": S, "C-C0": S, "C-C": N, "D": S})
+        self.assertEqual(b["spiral_lossy"], {"C-A": N, "C-B": S, "C-C0": S, "C-C": N, "D": S, "D2": S})
+        self.assertEqual(b["lorenz_lossy"], {"C-A": N, "C-B": S, "C-C0": S, "C-C": N, "D": N, "D2": N})
+        self.assertEqual(b["counts_word"], {"C-A": N, "C-B": S, "C-C0": S, "C-C": N, "D": N, "D2": N})
+        self.assertEqual(b["bistable_loose"], {"C-A": N, "C-B": S, "C-C0": S, "C-C": N, "D": S, "D2": N})
         self.assertEqual(set(b["fib_exact"].values()), {S})
 
     def test_d_holds_four_of_four_and_breaks_on_case_five(self):
         rows = list(self.rows.values())
-        first4 = [r for r in rows if r["case"] != "bistable_loose"]
+        first4 = [r for r in rows if not r["case"].startswith("bistable")]
         self.assertTrue(all(r["matches"]["D"] for r in first4))
         self.assertFalse(self.rows["bistable_loose"]["matches"]["D"])
         self.assertEqual(self.rows["bistable_loose"]["t4"], "STABLE_LOSSY")   # class from the reference
@@ -79,6 +80,37 @@ class Table(unittest.TestCase):
         self.assertEqual(K.t4_class("FULL_STATE", "LOSSY", 1.01), "CHAOTIC_REFRESH")
         self.assertIsNone(K.t4_class("FULL_STATE", "LOSSY", None))
         self.assertEqual(K.c_class(None, 1, 1, ({}, {}, {})), "VOID")
+
+    def test_d2_needs_declared_n(self):
+        c = next(c for c in K.cases() if c["case"] == "spiral_lossy")
+        self.assertEqual(K.c_local(c, None), "UNTESTED")
+        for bad in (0, 2.5, True):
+            with self.assertRaises(ValueError):
+                K.c_local(c, bad)
+
+    def test_d2_holds_on_first_five_and_finds_the_loose_basin(self):
+        first5 = [r for r in self.rows.values() if r["case"] != "bistable_sliver"]
+        self.assertTrue(all(r["matches"]["D2"] for r in first5))
+
+    def test_sliver_snapshot_is_across_the_separatrix_and_inside_the_ball(self):
+        c = next(c for c in K.cases() if c["case"] == "bistable_sliver")
+        self.assertLessEqual(K._dist(c["state"], c["anchor"]), K.SLIVER_R)
+        self.assertNotEqual(K._basin(c["state"]), K._basin(c["anchor"]))
+        self.assertEqual(c["t4"], "STABLE_LOSSY")                     # global class misses it
+
+    def test_d2_on_sliver_depends_on_whether_a_sample_lands_in_it(self):
+        c = next(c for c in K.cases() if c["case"] == "bistable_sliver")
+        self.assertEqual(K.c_local(c, 1, seed=0), "SAME")             # one sample: misses -> wrong
+        self.assertEqual(K.c_local(c, 256, seed=0), "NOT_SAME")       # many: finds it
+
+    def test_miss_rate_falls_with_n_and_tracks_prediction(self):
+        m = K.miss_table(Ns=(1, 16, 64, 256), trials=200, pool=600)
+        rates = [r["miss_rate"] for r in m["rows"]]
+        self.assertEqual(rates, sorted(rates, reverse=True))
+        self.assertGreater(m["f_hat"], 0.0)
+        self.assertLess(m["f_hat"], 0.1)                              # a thin sliver
+        for r in m["rows"]:
+            self.assertLess(abs(r["miss_rate"] - r["predicted"]), 0.12)
 
     def test_no_branch_picked(self):
         self.assertNotIn("winner", next(iter(self.rows.values())))
