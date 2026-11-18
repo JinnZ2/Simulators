@@ -15,6 +15,7 @@ M3       §2     cplay/axes.py       3 axes + APPLICABILITY; COVERAGE apart, nev
 M4       §2     cplay/closure.py    verdict() STOPPED (spec gap); branches A/B/C beside it, SPLIT c1 c4 c6 (samples/)
 M5       §3     cplay/gates.py      identity -> regime -> compare -> card enforced; UNDECLARED regime refuses
 M6       §5     cplay/trust.py      key (model, scope, start state); no transfer without cert; START_STATE_SENSITIVE
+M7       §6     cplay/known_answer.py  provenance per case; circular counts nothing; crash = record; null-only harness
 ```
 
 Run: `python3 -m unittest discover -s combined-playground/tests`
