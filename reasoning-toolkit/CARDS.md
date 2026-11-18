@@ -690,6 +690,8 @@ link notes:
 provenance: drafted chat-side, landed verbatim (2026-11-18)
 status: PROPOSED
 
+## rejoin protocol (explorer re-entry)
+
 ```
 CARD: rejoin protocol (explorer re-entry)   PROPOSED
 source practice: tribes work as a group; each member is taught to live
@@ -721,8 +723,10 @@ warning sign: acting on an old order or record without checking what
 ```
 
 link notes:
-- The card opens with `CARD: ... PROPOSED` where cards 18 to 22 open with `## name`, and carries
-  `source practice` beyond the six-field format. Kept as delivered. It has no `link` field.
+- The heading line above the block was added on 2026-11-18 so the card opens like cards 18
+  to 22. It is index structure, not card text; the block below it is byte for byte as delivered.
+- The block opens with `CARD: ... PROPOSED` and carries `source practice` and `method` beyond
+  the six-field format. Kept as delivered. It has no `link` field.
 - `breaks when` points at card 20 (carried reference / cross-site alignment).
 
 ---
