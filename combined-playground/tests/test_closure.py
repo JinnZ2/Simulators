@@ -112,3 +112,59 @@ class Run(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class Branches(unittest.TestCase):
+    """Follow-up item 2: three candidate verdict rules beside verdict(), which keeps raising."""
+    def _res(self, m, tol=1e-6, sigma=1e-6, k=3, floor=1e-12, complete=True):
+        p = _prereg(accounts=[_decl(tol=tol, sigma=sigma, k=k)], roundoff_floor=floor,
+                    declared_complete=complete)
+        obs = C.Misclosure(account="N", value=m, provenance="declared ledger sum")
+        return C.run(p, p.sha256, [obs]), obs
+
+    def test_verdict_still_raises(self):
+        res, obs = self._res(1e-7)
+        with self.assertRaises(C.SpecGap):
+            C.verdict(res, "N")
+
+    def test_misclosure_must_be_declared_input(self):
+        res, _ = self._res(1e-7)
+        other = C.Misclosure(account="N", value=1e-7, provenance="not in the run")
+        for fn in C.BRANCHES.values():
+            with self.assertRaises(C.ClosureError):
+                fn(res)                                    # misclosure argument required
+            with self.assertRaises(C.ClosureError):
+                fn(res, other)                             # must be one the run accepted
+
+    def test_refused_run_has_no_branch_verdict(self):
+        p = _prereg()
+        obs = C.Misclosure(account="P", value=1e-7, provenance="x")
+        res = C.run(p, p.sha256, [obs])
+        with self.assertRaises(C.ClosureError):
+            C.verdict_branch_A(res, obs)
+
+    def test_branches_differ_where_designed(self):
+        res, obs = self._res(1e-7)                         # inside tol and inside k*sigma
+        self.assertEqual(C.verdict_branch_A(res, obs).status, "OK")
+        self.assertEqual(C.verdict_branch_C(res, obs).status, "CLOSED_WITHIN")
+        res, obs = self._res(1.0000005e-6, sigma=None, k=None, floor=1e-9)
+        self.assertEqual(C.verdict_branch_A(res, obs).status, "FAILED")
+        self.assertEqual(C.verdict_branch_B(res, obs).status, "OK")
+
+    def test_failed_routes_by_declared_complete(self):
+        res, obs = self._res(5e-6)
+        self.assertEqual(C.verdict_branch_A(res, obs).field, "PHYSICAL")
+        res, obs = self._res(5e-6, complete=C.ABSENT)
+        self.assertEqual(C.verdict_branch_A(res, obs).field, "DETERMINATION")
+
+    def test_branch_B_token_floor_is_void(self):
+        res, obs = self._res(5e-7, floor=T.Token("UNTESTED", "floor not measured"))
+        self.assertEqual(C.verdict_branch_B(res, obs).state, "VOID")
+
+    def test_table_and_split_rows(self):
+        rows = C.branch_table()
+        self.assertEqual(len(rows), 8)
+        split = [r["case"] for r in rows if r["split"]]
+        self.assertEqual(split, ["c1", "c4", "c6"])
+        for r in rows:
+            self.assertEqual(sorted(r["branches"]), ["A", "B", "C"])
