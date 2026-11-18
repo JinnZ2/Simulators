@@ -1,0 +1,151 @@
+{
+"reader_label": "claude-fresh-1",
+"model_family": "claude-opus-5-5 (configured model id for this session; the serving model was not separately verified)",
+"date_utc": "2026-11-18",
+"terms": {
+"T01": {
+"cluster": "A",
+"predicate": "The measured discrepancy, taken with its uncertainty, sits across the tolerance limit, so the instrument can prove neither acceptance nor rejection.",
+"slots": ["kind", "verdict", "void_reason", "status", "deciding_tier", "precision", "rigorous", "fast", "tiers", "triage", "located", "proposal", "intervals", "inputs", "units", "provenance", "slots"],
+"slots_basis": "READ_FROM_SOURCE",
+"source_lines_read": "formula-audit/numcheck/check.py 6-14 (verdict definitions), 27-38 (bisection; UNDECIDED at tol 0 may carry a proposal), 110-119 (_blank: the record keys listed as slots; UNDECIDED itself has no dedicated slot, it is a value of 'verdict'), 188-195, 353-440 (check_point; UNDECIDED set at ~420-424 after the interval tier straddles 'the tolerance edge'). Matched to T06 on the mechanism (enclosure/guard band straddling tol), not the label.",
+"confidence": "MEDIUM",
+"could_also_join": []
+},
+"T02": {
+"cluster": "B",
+"predicate": "A thing was searched for with a stated instrument/sensitivity/protocol and not found at that sensitivity; a scoped null, never a bare absence.",
+"slots": ["<value>"],
+"slots_basis": "READ_FROM_SOURCE",
+"source_lines_read": "thermodynamic-accountability-framework/docs/glossary.md 129 (term written ABSENT_AT_SENSITIVITY(<value>)); calibration/expiry_register.py 34-38 (state a slot moves to when its exit instrument runs at a stated sensitivity and returns null; no slot holds it), 54 (SCOPED regex: one captured parameter). Note: the definition names instrument / sensitivity / protocol, but the token form carries only one parameter; the source does not say which of those <value> holds. Label matched T05, but I clustered on the definitions.",
+"confidence": "HIGH",
+"could_also_join": []
+},
+"T03": {
+"cluster": "C",
+"predicate": "An item the governing specification leaves without content is kept explicitly empty, with its reason, instead of being filled with a default or an invented value.",
+"slots": ["state", "reason"],
+"slots_basis": "READ_FROM_SOURCE",
+"source_lines_read": "Simulators/combined-playground/cplay/tokens.py 13-16 (VOID in the spec, so VOID here: ExpiryTrigger kind vocabulary; ConditionBasis<->#257 mapping table), 44-50 (Token(state, reason); reason required on non-verdict), 132-133 (VOCABULARY_MAPPING = Token('VOID', ...)). Elsewhere in the same build VOID is also returned for a missing declared input (closure.py 196, 300-303; axes.py 54), which is closer to T07; the anchor definition is the spec-gap sense, so I kept it apart from T07. The labels match; I did not cluster on that.",
+"confidence": "LOW",
+"could_also_join": ["T07"]
+},
+"T04": {
+"cluster": "D",
+"predicate": "The stated exit for an open (UNKNOWN) value: the condition whose occurrence would end or downgrade that unknown.",
+"slots": ["kind", "target", "condition"],
+"slots_basis": "READ_FROM_SOURCE",
+"source_lines_read": "Simulators/combined-playground/cplay/tokens.py 64-72 (class ExpiryTrigger, init(kind, target, condition), all required), 81-89 (unknown() needs at least one typed trigger), 136-140 (vocabulary is the TAF expiry_condition register; its keys are NOT mapped onto kind/target/condition, open item). COMBINED_SPEC 126-128, 296. The source itself states the slot sets of T04 and T15 are not mapped; same predicate, different slots.",
+"confidence": "MEDIUM",
+"could_also_join": []
+},
+"T05": {
+"cluster": "B",
+"predicate": "A non-detection recorded as a bounded null: not found at a stated detection limit, for a stated effect size, under stated conditions.",
+"slots": ["limit", "basis", "effect_size", "conditions", "ladder"],
+"slots_basis": "READ_FROM_SOURCE",
+"source_lines_read": "Simulators/playground-crossrun/COMBINED_SPEC.md 129-133 ('three things': limit and how established, effect size of interest, conditions); combined-playground/cplay/tokens.py 9-10, 92-104 (absent_at_sensitivity(limit, basis, effect_size, conditions, ladder=None); basis in LADDER/DECLARED; ladder required when basis is LADDER; covers_effect is a derived reading, not an input). Disagreement in count: the spec says three things, the code requires four (limit, basis, effect_size, conditions) plus a conditional ladder, because the spec's first item bundles limit and its basis.",
+"confidence": "HIGH",
+"could_also_join": []
+},
+"T06": {
+"cluster": "A",
+"predicate": "The measured misclosure lies inside the guard band around the tolerance limit (tol - U < |m| <= tol + U), so neither conformance nor non-conformance is proven.",
+"slots": ["field", "token"],
+"slots_basis": "READ_FROM_SOURCE",
+"source_lines_read": "Simulators/combined-playground/cplay/closure.py 33-40 (branch G definition), 284-296 (FieldToken(field, token), field must be INSTRUMENT), 299-315 (verdict_branch_G returns FieldToken('INSTRUMENT', Token('UNRESOLVED', reason))); tokens.py 26 and 44-50 (Token(state, reason)); COMBINED_SPEC 248-250 (DERIVED: middle zone between guarded acceptance and guarded rejection). Same situation as T01: uncertainty interval straddling the tolerance limit.",
+"confidence": "MEDIUM",
+"could_also_join": []
+},
+"T07": {
+"cluster": "E",
+"predicate": "A check produced no verdict because a precondition or input was unusable (units gate not passed, value missing or unreadable, undefined on these inputs, unsupported syntax, or an internal error), with the reason recorded.",
+"slots": ["kind", "verdict", "void_reason", "status", "deciding_tier", "precision", "rigorous", "fast", "tiers", "triage", "located", "proposal", "intervals", "inputs", "units", "provenance", "slots"],
+"slots_basis": "READ_FROM_SOURCE",
+"source_lines_read": "formula-audit/numcheck/check.py 3-4 (units not PASS -> VOID with branch 1's reason), 12-14, 51-52 (intersection VOID), 110-119 (_blank: default verdict 'VOID', void_reason is the dedicated slot), 136-137, 436-439 (Bad/NumVoid -> VOID; any other Exception -> VOID 'internal: ...' fail closed), 546-548. Note: this one term covers what the Simulators build splits into several tokens (missing input -> VOID; a raised check -> CRASHED; units FAIL is itself a located failure). So it partly overlaps T03 (VOID on missing content) and T08/T10 (internal error = raised), and equals neither. Label matched T03; I did not cluster on that.",
+"confidence": "LOW",
+"could_also_join": ["T03", "T08", "T10"]
+},
+"T08": {
+"cluster": "F",
+"predicate": "The check or module raised an exception and did not run, so no reading of the system was made; this is a gap in instrument coverage, not a failure of the system.",
+"slots": ["exception", "path", "reason"],
+"slots_basis": "READ_FROM_SOURCE",
+"source_lines_read": "Simulators/playground-crossrun/COMBINED_SPEC.md 53 (reason field 'exception + path'), 71-72, 85-89 (R-A2: exception type, call path, inputs; reported on coverage as GAP_INSTRUMENT_CRASH, never in severity); combined-playground/cplay/axes.py 44-66 (reading(..., exception, path); CRASHED only on INSTRUMENT; needs exception and path), 81-88 (crash(): an INSTRUMENT CRASHED reading plus a CoverageEntry of kind GAP_INSTRUMENT_CRASH). Disagreement: R-A2 lists 'inputs' on the crash record; reading() carries no inputs; inputs go on the paired CoverageEntry (input=inputs).",
+"confidence": "HIGH",
+"could_also_join": []
+},
+"T09": {
+"cluster": "G",
+"predicate": "A slot whose value is not yet known and is held open, never read as zero or as absent.",
+"slots": ["expiry_condition", "expiry_source"],
+"slots_basis": "READ_FROM_SOURCE",
+"source_lines_read": "thermodynamic-accountability-framework/docs/glossary.md 126 (PENDING / UNKNOWN; the row itself names no fields), 127-128 (expiry_condition and expiry_source attach to 'a PENDING / UNKNOWN slot'); calibration/expiry_register.py 28-31 (only SLOT/EMITTER/DEFAULT carry expiry_condition: 'void' or a dict). The glossary row groups PENDING and UNKNOWN as one term; the label given here is UNKNOWN only. In unified_audit.py 98-101, 345-354 UNKNOWN is also a coverage kind with entry fields kind, module, input, reason, expiry_condition. Unlike T12, a missing exit is reported, not refused (expiry_register.py 30-32).",
+"confidence": "HIGH",
+"could_also_join": []
+},
+"T10": {
+"cluster": "F",
+"predicate": "An audit module raised an exception, so nothing was measured; recorded as a coverage gap, never as a severity.",
+"slots": ["kind", "module", "input", "reason", "missing_path", "expiry_condition"],
+"slots_basis": "READ_FROM_SOURCE",
+"source_lines_read": "thermodynamic-accountability-framework/docs/glossary.md 133-138; calibration/unified_audit.py 92-101 (definition, COVERAGE_KINDS), 331-343 (coverage entry for a crash; expiry_condition is VOID), 479-492 (_dispatch: section fields error, exception_type, missing_path). The glossary names no slots; the code does. Simulators COMBINED_SPEC 42-44, 255-263 and axes.py 69-88 quote the same six fields and pair this with CRASHED.",
+"confidence": "HIGH",
+"could_also_join": []
+},
+"T11": {
+"cluster": "H",
+"predicate": "The check ran and the tested relation is accepted: the result lies within the stated tolerance.",
+"slots": ["kind", "verdict", "void_reason", "status", "deciding_tier", "precision", "rigorous", "fast", "tiers", "triage", "located", "proposal", "intervals", "inputs", "units", "provenance", "slots"],
+"slots_basis": "READ_FROM_SOURCE",
+"source_lines_read": "formula-audit/numcheck/check.py 6-9 (HOLDS: enclosure D inside [-t, t]), 15-25 (confirmed at the interval tier unless fast; rigorous flag), 110-119 (record keys), 353-440. Because D is an enclosure, HOLDS means the whole uncertainty interval is inside tolerance, which is structurally like CLOSED_WITHIN under branch G (|m| <= tol - U); but HOLDS has no sigma/noise-band notion and also covers exact agreement, so I put it with the generic pass (T13). Uncertain between T13 and T14.",
+"confidence": "LOW",
+"could_also_join": ["T14"]
+},
+"T12": {
+"cluster": "G",
+"predicate": "A value not yet known, which may be recorded only together with at least one typed condition that would end it.",
+"slots": ["reason", "triggers"],
+"slots_basis": "READ_FROM_SOURCE",
+"source_lines_read": "Simulators/playground-crossrun/COMBINED_SPEC.md 126-128, 296-297; combined-playground/cplay/tokens.py 7-8, 81-89 (unknown(reason, triggers); stored as .typed and .untyped; refused with no typed trigger). Same open-value situation as T09; differs in that a missing exit is refused here and only reported in TAF.",
+"confidence": "HIGH",
+"could_also_join": []
+},
+"T13": {
+"cluster": "H",
+"predicate": "The check ran and passed.",
+"slots": ["field", "status"],
+"slots_basis": "READ_FROM_SOURCE",
+"source_lines_read": "Simulators/playground-crossrun/COMBINED_SPEC.md 49 (reason field '--'); combined-playground/cplay/tokens.py 4-6, 21 (OK is the only verdict; reason not required); axes.py 44 (reading(field, status, ...)); closure.py 33-34, 307-308 (in branch G, OK = |m| <= roundoff floor, i.e. agreement to roundoff, tighter than CLOSED_WITHIN). The spec's generic sense was used for the cluster.",
+"confidence": "MEDIUM",
+"could_also_join": ["T14"]
+},
+"T14": {
+"cluster": "I",
+"predicate": "The balance closes only within the declared noise band (sigma), not exactly; accepted with its sigma and basis recorded, as a state distinct from a plain pass.",
+"slots": ["sigma", "basis"],
+"slots_basis": "READ_FROM_SOURCE",
+"source_lines_read": "Simulators/playground-crossrun/COMBINED_SPEC.md 54 ('sigma + basis, required'), 68-69, 286; combined-playground/cplay/axes.py 44, 54-55, 62-64 (CLOSED_WITHIN needs numeric sigma >= 0 and basis; VOID off PHYSICAL); closure.py 33-34, 193-198, 309-310. Spec 134-136 insists it is a distinct token from OK. Considered T11 (HOLDS) since both mean within-tolerance acceptance, but HOLDS has no sigma and no 'not exactly' qualifier.",
+"confidence": "MEDIUM",
+"could_also_join": ["T11", "T13"]
+},
+"T15": {
+"cluster": "D",
+"predicate": "The stated exit for an open (PENDING/UNKNOWN) slot: the instrument, sensitivity and protocol whose null result would downgrade the slot to a scoped absence.",
+"slots": ["instrument_class", "sensitivity", "protocol", "provenance"],
+"slots_basis": "READ_FROM_SOURCE",
+"source_lines_read": "thermodynamic-accountability-framework/docs/glossary.md 127 (filled only from the slot's own text, otherwise 'VOID -- no exit defined'); calibration/expiry_register.py 5-8, 28-31, 53 (EXPIRY_KEYS), 58-59 (E(...)). Disagreement: the glossary names three things (instrument class, sensitivity or protocol); the code adds a fourth key, provenance, and allows sensitivity='void'. Same predicate as T04 with a different, explicitly unmapped slot set (tokens.py 65-66, 136-140).",
+"confidence": "MEDIUM",
+"could_also_join": []
+}
+},
+"attestation": {
+"q1_seen_pair_table_with_verdicts": "no",
+"q2_seen_predicate_sentence_by_someone_else": "no",
+"q3_seen_vocabulary_mapping_or_second_reader_report": "unsure",
+"q4_told_how_many_clusters_or_pairs": "no",
+"q5_used_anything_outside_packet": "unsure",
+"q6_prior_sessions_about_this_project": "yes",
+"notes": "This was NOT a fresh session, though reader_label is set to 'claude-fresh-1' as instructed. The reading ran in a Claude Code cloud session. Tools on: shell (used only to unzip the packet and read/grep its files with line numbers), file tools, and connected GitHub access to eight repositories by the same owner (chain-position-detectability, decision-aperture, differential-frame-core, drift-archive-audit, Noise-as-Information-Sensor, study-aperture, assumption_validator, explorative-math). Those repos are already cloned in the session, and they do not include Simulators, formula-audit or thermodynamic-accountability-framework. I did not open them, but the session could probably attach more repositories. Web search was available as a deferred tool and was not used. No cross-session memory feature was on. But project knowledge was effectively on: the CLAUDE.md files of those eight repos were injected into my context before the task. They mention the sibling Simulators repo, READING_PROTOCOL / AUDIT_CONTRACT, status vocabularies across layers (one notes 'no file maps them'), and a blind held-out set for a G2 frame-glyph pilot. I did not use them for any cluster or slot, but I read them, so q3 and q5 are 'unsure' rather than 'no'. q6 'yes' because those reachable repos hold notes about Simulators. The work order that came with the packet mentions an owner's note ('Before you send it') that was not shown to me. On cluster count: nothing told me a number. PACKET_MANIFEST.json's leak-check exception refers to 'the vocabulary mapping', and COMBINED_SPEC / tokens.py say a mapping table between vocabularies is owed but has no rows. That suggests the packet is testing a cross-project mapping, but it implies no number. I also noticed that labels repeat in pairs (ABSENT_AT_SENSITIVITY, VOID, UNKNOWN). I tried not to lean on that, and I split the two VOIDs apart."
+}
+}

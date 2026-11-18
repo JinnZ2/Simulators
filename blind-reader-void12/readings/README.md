@@ -1,6 +1,8 @@
 # Readings filed so far
 
-Two pilots, both 2026-11-18, both filed whatever they showed. Neither counts toward confirming a pair (`PREREG.md`, rule 5: same family as the first reading, as far as we know).
+Three readings, all 2026-11-18, all filed whatever they showed: two pilots (below) and `2026-11-18_claude-fresh-1` (summary at the end of this file).
+
+The two pilots: Neither counts toward confirming a pair (`PREREG.md`, rule 5: same family as the first reading, as far as we know).
 
 | | pilot-A (brief as written) | pilot-B (brief without the "even if..." clause) |
 |---|---|---|
@@ -26,3 +28,7 @@ These are about the other projects' files, not about this folder. Nothing was ed
 - `thermodynamic-accountability-framework/calibration/unified_audit.py`, lines 113 to 117, still say the all-crash case is "not reachable on this branch (a raise is RED here); reachable once the crash-as-coverage change (#82) lands". The same file's code and the glossary route a raise to coverage. The pinned commit is also the current head of that repository's default branch as of this run.
 - `.../calibration/expiry_register.py`, lines 146 to 148, record a rank map entry `"UNKNOWN": 1` at `unified_audit.py` line 80. That text is no longer in the file at the pinned commit (`UNKNOWN` is excluded from the rank table, lines 86 to 89). The register marks the row "Recorded, not changed", so it may be an intended historical record; it now describes a state the file no longer has.
 - `COMBINED_SPEC.md` line 321 names the crash record `CRASHED(exception, call, inputs)` and line 335 `CRASHED(exception, path)`; the code uses `path` and, in the coverage entry, `input`.
+
+## claude-fresh-1 (added later; against packet v1)
+
+A Claude reading taken by the owner in a session that was not fresh (see its `RUN_NOTES.md`). Status `UNCERTAIN`; not counted. 5 of 8 declared tiers, ARI 0.823, 9 groups against the key's 9, 7 of the key's 9 groups reproduced exactly (both pilots: 9 of 9), and **one grouping disagreement**: it puts `HOLDS` with `OK` where the key and both pilots put it with `CLOSED_WITHIN` (its own confidence: LOW). It is the first reading to differ from the first reading's grouping. One reading of an uncertain status is a pointer to where a further reader's attention is worth spending, not evidence that the first reading is wrong.

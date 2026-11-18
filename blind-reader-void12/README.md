@@ -20,3 +20,7 @@ Run the tests from `scoring/`: `python3 -m unittest test_score`. Python 3 standa
 What the packet leaves out: every predicate sentence, tier name and branch name from the first reading; the section of the spec from 9c onward (where VOID-12 is discussed); any count of groups or pairs. What it keeps: each definition as quoted, the file it comes from at its pinned commit, byte for byte.
 
 Blindness here is declared by the reader, not enforced, because the first reading is public. See `PREREG.md`.
+
+## Packet v2 (2026-11-18)
+
+`reader_packet_v2/` and `scoring/key_v2.json` split "slots" into two questions (fields tied to this term alone; every field of every record built when it is reported). Same 15 terms and sources as v1. Use v2 for new readers; the v1 files and readings stay as filed. Build: `python3 build/make_packet_v2.py`. Score: `python3 scoring/score_v2.py response.json`. Tests: `python3 -m unittest test_score_v2` in `scoring/`. Why and what is undetermined: last section of `PREREG.md`. A third reading (`claude-fresh-1`, status UNCERTAIN) is filed under `readings/`.

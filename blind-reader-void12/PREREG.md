@@ -89,3 +89,24 @@ The owner replied "Yes please, and I agree" to the three open decisions. Read as
 3. **Pilot.** One reader per variant, each a fresh isolated session of an AI model of the same family as this build, given only the packet zip and told only to read the brief and follow it. Filed as `pilot`, status as the reader attests, and by rule 5 not counted toward confirming any pair. What a pilot can show is whether the brief, template and scorer work end to end and where a reader gets stuck. It cannot show that the first reading is right or wrong.
 
 The packet zip for variant B differs from variant A's in the brief and in that file's line of `PACKET_MANIFEST.json`; nothing else.
+
+
+---
+
+## Packet v2: the two meanings of "slots" (added 2026-11-18, before any v2 reading exists)
+
+**Why.** In v1 the word "slots" covered three things: the fields tied to one term, the fields of the shared record that carries it, and the input names of a calculation. Three readings used it three ways, and the key used a fourth. Of the 15 key lists, 7 were written by the first reading from prose ("declared"), not read from code. The v1 slot scores therefore measure which reading of the word each reader chose more than they measure the sources. v1 results stand as filed; nothing in `readings/` is changed.
+
+**What changes in v2 (nothing else does).** `READER_BRIEF.md` asks for two lists per term: `slots_specific` (fields the source ties to this term alone) and `slots_carried` (every named field of every record built or documented when the term is reported), each with its own basis. The calculation-input meaning is dropped; it was a third question and the first reading's `declared` lists for T01, T06 and T11 used it. The 15 terms, their order, the sources, and the grouping question are byte-identical to v1 (test `test_sources_and_terms_identical_to_v1`). The leak-check note in the manifest loses the phrase "unrelated to the vocabulary mapping" (a Claude reader named it as a hint).
+
+**Key v2** is `scoring/key_v2.json`. Each list has its derivation written beside it and is checked by `test_score_v2.py` against the packet's own files: the cplay lists by running the pinned code, the TAF and numcheck lists by matching names in the pinned text. Two lists are **undetermined** because the sources support more than one reading: `slots_specific` for `cplay:CRASHED` (call parameters or `CoverageEntry` fields) and `slots_carried` for `taf:UNKNOWN` (no record is named). A pair that needs an undetermined list is reported `n/d`, and counts as neither a match nor a miss, so each meaning is scored out of 7 declared pairs, not 8. Key v2 was written by the same party that wrote the v1 key and this packet; it is not independent of them.
+
+**Scoring v2** (`scoring/score_v2.py`) reports grouping once (it does not depend on slots) and the two slot meanings separately. It does not add them into one number and does not say which meaning is right. Under `specific`, two terms with no tied fields have equal empty sets and so count as `MAPS` if grouped together; that is the first reading's tier rule applied as written, and it makes `UNDECIDED | UNRESOLVED` come out `MAPS` under `specific` where the first reading declared `PARTIAL`. That difference is a result of the split, and is shown beside the first reading's declared tier in every report.
+
+**Hand-worked references, before running the scorer.** Nothing grouped: 2 of 7 under both meanings. Label-only: 3 of 7 under `specific`, 2 of 7 under `carried`. The tests assert these.
+
+**What would count as informative.** (a) Readers agree with each other on a meaning but not with the key: the key's derivation for that list needs a second look, and the pair is not evidence about the first reading. (b) Readers split on a meaning while agreeing with each other across the other: that meaning is still underdetermined by the sources. (c) A reader agrees with the key on `carried` and not `specific`, or the reverse: the split mattered. Anything else is reported as it comes. No threshold is set; the unit here is 7 pairs and 15 terms, and a count alone cannot carry a claim.
+
+**Variants.** Variant A is the brief as written. Variant B (`variants/READER_BRIEF.v2.variant_B.md`) removes the clause "even if the second system attaches different extra fields or detail", as in v1. Both stay in the design. Readers of v1 cannot be reused for v2 and should not be given v2.
+
+**Hashes.** `key_v2.json` sha256 `c88a910a03a6456900efabd130c57a19f1a0133c9566ebce34ae0b6e813b18d1`; `make_packet_v2.py` sha256 `37e0dd55c76231359c4060ef8f3a703cf5865eefa63bd1ca9fe18f04c4923e48`; v1 key sha256 `5c1a6caba4e3b0f1bc7d1a93b8e2503158e343a67d58fae5c77fe91a710a500b` (unchanged).

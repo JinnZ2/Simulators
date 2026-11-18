@@ -39,3 +39,7 @@ Reader labels may be a code. The response asks for `model_family`, which for a p
 ## If the key is ever rebuilt
 
 `scoring/test_score.py` fails if `vocab_branches.py` changes after the key was built. Rebuild with `build/make_packet_and_key.py` (usage in its header), say in a dated section of `PREREG.md` what changed in the first reading and why, and treat any reading taken against the old packet as filed against the old key.
+
+## For packet v2
+
+Give the reader `reader_packet_v2/` (zip below) and the brief in it; nothing else. Use `scoring/score_v2.py`, not `score.py`. Everything else in this protocol is unchanged. A response in the v1 shape (`slots`, `slots_basis`) is refused by `score_v2.py` and is not silently scored.
