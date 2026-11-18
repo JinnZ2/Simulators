@@ -7,10 +7,12 @@ Field restrictions taken from the spec text:
   CRASHED         INSTRUMENT only        ("CRASHED stays an INSTRUMENT status", R-A2)
   OUTSIDE_DOMAIN  APPLICABILITY only     (status table, Q11)
   FAILED          failure axes only      (APPLICABILITY "is not a failure axis", Q11)
-  CLOSED_WITHIN   failure axes; the spec maps it to PHYSICAL and does not forbid the other
-                  two, so they are left open rather than refused.
+  CLOSED_WITHIN   PHYSICAL. On INSTRUMENT / DETERMINATION reading() returns a VOID token, not a
+                  Reading: the spec maps CLOSED_WITHIN to PHYSICAL only and says nothing of the
+                  other two, so it is neither allowed nor refused (follow-up item 1).
 
-Not defined by the spec, and held VOID: a composite severity across axes.
+Not defined by the spec, and held VOID: a composite severity across axes; CLOSED_WITHIN on
+INSTRUMENT or DETERMINATION.
 """
 from collections import namedtuple
 
@@ -20,6 +22,9 @@ AXES = ("PHYSICAL", "INSTRUMENT", "DETERMINATION")
 FIELDS = AXES + ("APPLICABILITY",)
 STATUSES = ("OK", "FAILED", "INDETERMINATE", "UNTESTED", "CRASHED", "CLOSED_WITHIN", "OUTSIDE_DOMAIN")
 COVERAGE_KINDS = ("UNKNOWN", "INFO", "GAP_INSTRUMENT_CRASH")   # TAF unified_audit.py @16285cc l.101
+
+CLOSED_WITHIN_OFF_PHYSICAL = ("section 2 maps CLOSED_WITHIN to PHYSICAL only; its meaning on "
+                              "INSTRUMENT / DETERMINATION is not defined")
 
 COMPOSITE_SEVERITY = T.Token("VOID", "section 2 defines per-axis status only; no rule combines axes")
 
@@ -44,6 +49,8 @@ def reading(field, status, reason=None, sigma=None, basis=None, exception=None, 
         raise AxisError("CRASHED is an INSTRUMENT status (R-A2)")
     if status == "OUTSIDE_DOMAIN" and field != "APPLICABILITY":
         raise AxisError("OUTSIDE_DOMAIN is APPLICABILITY only (Q11)")
+    if status == "CLOSED_WITHIN" and field in ("INSTRUMENT", "DETERMINATION"):
+        return T.Token("VOID", CLOSED_WITHIN_OFF_PHYSICAL)
     if field == "APPLICABILITY" and status in ("FAILED", "CRASHED", "CLOSED_WITHIN"):
         raise AxisError("APPLICABILITY is not a failure axis (Q11)")
     if status in ("FAILED", "INDETERMINATE", "UNTESTED") and not _filled(reason):
