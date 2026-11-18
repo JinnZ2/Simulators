@@ -1,0 +1,6143 @@
+{
+ "cases": [
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "BoundaryAccounting",
+       "accounts": [
+        {
+         "_type": "QuantityAccount",
+         "exchanges": [
+          {
+           "_type": "Exchange",
+           "direction": "inflow",
+           "label": "heater-pulse",
+           "magnitude": 10.0,
+           "provenance": "specified",
+           "quantity": "energy",
+           "registered_by": "control:heater"
+          },
+          {
+           "_type": "Exchange",
+           "direction": "outflow",
+           "label": "calorimeter-reading",
+           "magnitude": 10.0,
+           "provenance": "measured",
+           "quantity": "energy",
+           "registered_by": "observer:calorimeter"
+          }
+         ],
+         "final": 100.0,
+         "final_provenance": "measured",
+         "initial": 100.0,
+         "initial_provenance": "specified",
+         "quantity": "energy",
+         "tolerance": 0.1
+        }
+       ],
+       "boundary_label": "cell-A",
+       "declared_complete": true,
+       "registered_interventions": [
+        "control:heater",
+        "observer:calorimeter",
+        "control:stirrer"
+       ]
+      }
+     ],
+     "fn": "l0_closure_gate",
+     "kwargs": {},
+     "module": "planted_defects"
+    }
+   ],
+   "case_id": "P-DEF:unregistered-control",
+   "description": "A control is declared in the experimental specification but never enters the boundary ledger.",
+   "expected": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "group": "L0+harness",
+   "kind": "planted_defect",
+   "must_be_untested": [
+    "physical",
+    "instrument"
+   ],
+   "perplexity": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     {
+      "axis": "determination",
+      "code": "L0_UNREGISTERED_INTERVENTION",
+      "severity": "failed"
+     },
+     {
+      "axis": "determination",
+      "code": "L0_BALANCED",
+      "severity": "ok"
+     }
+    ]
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "BoundaryAccounting",
+       "accounts": [
+        {
+         "_type": "QuantityAccount",
+         "exchanges": [
+          {
+           "_type": "Exchange",
+           "direction": "inflow",
+           "label": "heater-pulse",
+           "magnitude": 10.0,
+           "provenance": "specified",
+           "quantity": "energy",
+           "registered_by": "control:heater"
+          },
+          {
+           "_type": "Exchange",
+           "direction": "outflow",
+           "label": "cooler-pulse",
+           "magnitude": 10.0,
+           "provenance": "specified",
+           "quantity": "energy",
+           "registered_by": "control:cooler"
+          }
+         ],
+         "final": 101.0,
+         "final_provenance": "model",
+         "initial": 100.0,
+         "initial_provenance": "specified",
+         "quantity": "energy",
+         "tolerance": 0.1
+        }
+       ],
+       "boundary_label": "cell-B",
+       "declared_complete": true,
+       "registered_interventions": [
+        "control:heater",
+        "control:cooler"
+       ]
+      }
+     ],
+     "fn": "l0_closure_gate",
+     "kwargs": {},
+     "module": "planted_defects"
+    }
+   ],
+   "case_id": "P-DEF:model-conservation-violation",
+   "description": "A declared-complete ledger with no measured values does not balance.",
+   "expected": [
+    [
+     "physical",
+     "failed"
+    ],
+    [
+     "determination",
+     "ok"
+    ]
+   ],
+   "group": "L0+harness",
+   "kind": "planted_defect",
+   "must_be_untested": [
+    "instrument"
+   ],
+   "perplexity": {
+    "axes": {
+     "determination": "ok",
+     "instrument": "untested",
+     "physical": "failed"
+    },
+    "codes": [
+     {
+      "axis": "determination",
+      "code": "L0_REGISTRATION_COMPLETE",
+      "severity": "ok"
+     },
+     {
+      "axis": "physical",
+      "code": "L0_CONSERVATION_VIOLATION",
+      "severity": "failed"
+     }
+    ]
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "BoundaryAccounting",
+       "accounts": [
+        {
+         "_type": "QuantityAccount",
+         "exchanges": [
+          {
+           "_type": "Exchange",
+           "direction": "inflow",
+           "label": "heater-pulse",
+           "magnitude": 10.0,
+           "provenance": "specified",
+           "quantity": "energy",
+           "registered_by": "control:heater"
+          },
+          {
+           "_type": "Exchange",
+           "direction": "outflow",
+           "label": "calorimeter-reading",
+           "magnitude": 8.0,
+           "provenance": "measured",
+           "quantity": "energy",
+           "registered_by": "observer:calorimeter"
+          }
+         ],
+         "final": 100.0,
+         "final_provenance": "specified",
+         "initial": 100.0,
+         "initial_provenance": "specified",
+         "quantity": "energy",
+         "tolerance": 0.1
+        }
+       ],
+       "boundary_label": "cell-C",
+       "declared_complete": true,
+       "registered_interventions": [
+        "control:heater",
+        "observer:calorimeter"
+       ]
+      }
+     ],
+     "fn": "l0_closure_gate",
+     "kwargs": {},
+     "module": "planted_defects"
+    }
+   ],
+   "case_id": "P-DEF:measured-imbalance-unresolved",
+   "description": "A declared-complete ledger with measured values does not balance.",
+   "expected": [
+    [
+     "physical",
+     "indeterminate"
+    ],
+    [
+     "instrument",
+     "indeterminate"
+    ],
+    [
+     "determination",
+     "ok"
+    ]
+   ],
+   "group": "L0+harness",
+   "kind": "planted_defect",
+   "must_be_untested": [],
+   "perplexity": {
+    "axes": {
+     "determination": "ok",
+     "instrument": "indeterminate",
+     "physical": "indeterminate"
+    },
+    "codes": [
+     {
+      "axis": "determination",
+      "code": "L0_REGISTRATION_COMPLETE",
+      "severity": "ok"
+     },
+     {
+      "axis": "physical",
+      "code": "L0_BALANCE_UNRESOLVED",
+      "severity": "indeterminate"
+     },
+     {
+      "axis": "instrument",
+      "code": "L0_BALANCE_UNRESOLVED",
+      "severity": "indeterminate"
+     }
+    ]
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "BoundaryAccounting",
+       "accounts": [
+        {
+         "_type": "QuantityAccount",
+         "exchanges": [
+          {
+           "_type": "Exchange",
+           "direction": "inflow",
+           "label": "heater-pulse",
+           "magnitude": 10.0,
+           "provenance": "specified",
+           "quantity": "energy",
+           "registered_by": "control:heater"
+          },
+          {
+           "_type": "Exchange",
+           "direction": "outflow",
+           "label": "cooler-pulse",
+           "magnitude": 10.0,
+           "provenance": "specified",
+           "quantity": "energy",
+           "registered_by": "control:cooler"
+          }
+         ],
+         "final": 101.0,
+         "final_provenance": "model",
+         "initial": 100.0,
+         "initial_provenance": "specified",
+         "quantity": "energy",
+         "tolerance": 0.1
+        }
+       ],
+       "boundary_label": "cell-B",
+       "declared_complete": false,
+       "registered_interventions": [
+        "control:heater",
+        "control:cooler"
+       ]
+      }
+     ],
+     "fn": "l0_closure_gate",
+     "kwargs": {},
+     "module": "planted_defects"
+    }
+   ],
+   "case_id": "P-DEF:incomplete-ledger-gap",
+   "description": "An unbalanced ledger that is not declared complete.",
+   "expected": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "group": "L0+harness",
+   "kind": "planted_defect",
+   "must_be_untested": [
+    "physical",
+    "instrument"
+   ],
+   "perplexity": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     {
+      "axis": "determination",
+      "code": "L0_REGISTRATION_COMPLETE",
+      "severity": "ok"
+     },
+     {
+      "axis": "determination",
+      "code": "L0_ACCOUNTING_GAP",
+      "severity": "failed"
+     }
+    ]
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "LinearInstrument",
+       "instrument_id": "linear-defective",
+       "intercept": 0.5,
+       "slope": 1.0
+      },
+      [
+       {
+        "_type": "KnownAnswerCase",
+        "case_id": "ka-linear-0",
+        "description": "",
+        "expected": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "inputs": [
+         [
+          "x",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "KnownAnswerCase",
+        "case_id": "ka-linear-1",
+        "description": "",
+        "expected": [
+         [
+          "y",
+          1.0
+         ]
+        ],
+        "inputs": [
+         [
+          "x",
+          1.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "KnownAnswerCase",
+        "case_id": "ka-linear-2",
+        "description": "",
+        "expected": [
+         [
+          "y",
+          2.0
+         ]
+        ],
+        "inputs": [
+         [
+          "x",
+          2.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       }
+      ]
+     ],
+     "fn": "validate_known_answers",
+     "kwargs": {},
+     "module": "planted_defects"
+    }
+   ],
+   "case_id": "P-DEF:known-answer-violation",
+   "description": "An instrument that returns wrong values on known-answer cases.",
+   "expected": [
+    [
+     "instrument",
+     "failed"
+    ]
+   ],
+   "group": "L0+harness",
+   "kind": "planted_defect",
+   "must_be_untested": [
+    "physical"
+   ],
+   "perplexity": {
+    "axes": {
+     "determination": "untested",
+     "instrument": "failed",
+     "physical": "untested"
+    },
+    "codes": [
+     {
+      "axis": "instrument",
+      "code": "KA_MISMATCH",
+      "severity": "failed"
+     },
+     {
+      "axis": "instrument",
+      "code": "KA_MISMATCH",
+      "severity": "failed"
+     },
+     {
+      "axis": "instrument",
+      "code": "KA_MISMATCH",
+      "severity": "failed"
+     }
+    ]
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "LinearInstrument",
+       "instrument_id": "linear-null-defective",
+       "intercept": 0.5,
+       "slope": 1.0
+      },
+      [
+       {
+        "_type": "NullCase",
+        "case_id": "null-zero-input",
+        "description": "",
+        "inputs": [
+         [
+          "x",
+          0.0
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       }
+      ]
+     ],
+     "fn": "validate_nulls",
+     "kwargs": {},
+     "module": "planted_defects"
+    }
+   ],
+   "case_id": "P-DEF:null-false-positive",
+   "description": "An instrument that reports a detection on a null system.",
+   "expected": [
+    [
+     "instrument",
+     "failed"
+    ]
+   ],
+   "group": "L0+harness",
+   "kind": "planted_defect",
+   "must_be_untested": [
+    "physical"
+   ],
+   "perplexity": {
+    "axes": {
+     "determination": "untested",
+     "instrument": "failed",
+     "physical": "untested"
+    },
+    "codes": [
+     {
+      "axis": "instrument",
+      "code": "NULL_FALSE_POSITIVE",
+      "severity": "failed"
+     }
+    ]
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "ReturnTestSpec",
+       "anchor": {
+        "_type": "AnchorState",
+        "conditions": [],
+        "label": "cell-A",
+        "quantities": [
+         [
+          "energy",
+          100.0
+         ],
+         [
+          "magnetization",
+          0.5
+         ]
+        ]
+       },
+       "expected_return": true,
+       "returned": [
+        {
+         "_type": "QuantityReturn",
+         "provenance": "measured",
+         "quantity": "energy",
+         "returned": 105.0
+        },
+        {
+         "_type": "QuantityReturn",
+         "provenance": "measured",
+         "quantity": "magnetization",
+         "returned": 0.5
+        }
+       ],
+       "tolerances": [
+        [
+         "energy",
+         0.1
+        ],
+        [
+         "magnetization",
+         0.01
+        ]
+       ]
+      }
+     ],
+     "fn": "return_test",
+     "kwargs": {},
+     "module": "system_track_defects"
+    }
+   ],
+   "case_id": "P-DEF:expected-return-measured-non-return",
+   "description": "The description asserts a return; measured return values miss the anchor.",
+   "expected": [
+    [
+     "physical",
+     "indeterminate"
+    ],
+    [
+     "instrument",
+     "indeterminate"
+    ],
+    [
+     "determination",
+     "ok"
+    ]
+   ],
+   "group": "system-track",
+   "kind": "planted_defect",
+   "must_be_untested": [],
+   "perplexity": {
+    "axes": {
+     "determination": "ok",
+     "instrument": "indeterminate",
+     "physical": "indeterminate"
+    },
+    "codes": [
+     {
+      "axis": "determination",
+      "code": "RT_LOOP_CLOSED",
+      "severity": "ok"
+     },
+     {
+      "axis": "physical",
+      "code": "RT_RETURN_UNRESOLVED",
+      "severity": "indeterminate"
+     },
+     {
+      "axis": "instrument",
+      "code": "RT_RETURN_UNRESOLVED",
+      "severity": "indeterminate"
+     }
+    ]
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "ReturnTestSpec",
+       "anchor": {
+        "_type": "AnchorState",
+        "conditions": [],
+        "label": "cell-A",
+        "quantities": [
+         [
+          "energy",
+          100.0
+         ],
+         [
+          "magnetization",
+          0.5
+         ]
+        ]
+       },
+       "expected_return": true,
+       "returned": [
+        {
+         "_type": "QuantityReturn",
+         "provenance": "model",
+         "quantity": "energy",
+         "returned": 105.0
+        },
+        {
+         "_type": "QuantityReturn",
+         "provenance": "measured",
+         "quantity": "magnetization",
+         "returned": 0.5
+        }
+       ],
+       "tolerances": [
+        [
+         "energy",
+         0.1
+        ],
+        [
+         "magnetization",
+         0.01
+        ]
+       ]
+      }
+     ],
+     "fn": "return_test",
+     "kwargs": {},
+     "module": "system_track_defects"
+    }
+   ],
+   "case_id": "P-DEF:expected-return-model-non-return",
+   "description": "The description asserts a return its own model-asserted values do not produce.",
+   "expected": [
+    [
+     "physical",
+     "failed"
+    ],
+    [
+     "determination",
+     "ok"
+    ]
+   ],
+   "group": "system-track",
+   "kind": "planted_defect",
+   "must_be_untested": [
+    "instrument"
+   ],
+   "perplexity": {
+    "axes": {
+     "determination": "ok",
+     "instrument": "untested",
+     "physical": "failed"
+    },
+    "codes": [
+     {
+      "axis": "determination",
+      "code": "RT_LOOP_CLOSED",
+      "severity": "ok"
+     },
+     {
+      "axis": "physical",
+      "code": "RT_RETURN_VIOLATION",
+      "severity": "failed"
+     }
+    ]
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "ReturnTestSpec",
+       "anchor": {
+        "_type": "AnchorState",
+        "conditions": [],
+        "label": "cell-A",
+        "quantities": [
+         [
+          "energy",
+          100.0
+         ],
+         [
+          "magnetization",
+          0.5
+         ]
+        ]
+       },
+       "expected_return": false,
+       "returned": [
+        {
+         "_type": "QuantityReturn",
+         "provenance": "measured",
+         "quantity": "energy",
+         "returned": 105.0
+        },
+        {
+         "_type": "QuantityReturn",
+         "provenance": "measured",
+         "quantity": "magnetization",
+         "returned": 0.5
+        }
+       ],
+       "tolerances": [
+        [
+         "energy",
+         0.1
+        ],
+        [
+         "magnetization",
+         0.01
+        ]
+       ]
+      }
+     ],
+     "fn": "return_test",
+     "kwargs": {},
+     "module": "system_track_defects"
+    }
+   ],
+   "case_id": "P-DEF:unasserted-non-return",
+   "description": "A non-return with no return assertion: an observed transition, not a failure.",
+   "expected": [
+    [
+     "determination",
+     "ok"
+    ]
+   ],
+   "group": "system-track",
+   "kind": "planted_defect",
+   "must_be_untested": [
+    "physical",
+    "instrument"
+   ],
+   "perplexity": {
+    "axes": {
+     "determination": "ok",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     {
+      "axis": "determination",
+      "code": "RT_LOOP_CLOSED",
+      "severity": "ok"
+     }
+    ]
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "ReturnTestSpec",
+       "anchor": {
+        "_type": "AnchorState",
+        "conditions": [],
+        "label": "cell-A",
+        "quantities": [
+         [
+          "energy",
+          100.0
+         ],
+         [
+          "magnetization",
+          0.5
+         ]
+        ]
+       },
+       "expected_return": true,
+       "returned": [
+        {
+         "_type": "QuantityReturn",
+         "provenance": "measured",
+         "quantity": "energy",
+         "returned": 105.0
+        },
+        {
+         "_type": "QuantityReturn",
+         "provenance": "measured",
+         "quantity": "magnetization",
+         "returned": 0.5
+        }
+       ],
+       "tolerances": [
+        [
+         "magnetization",
+         0.01
+        ]
+       ]
+      }
+     ],
+     "fn": "return_test",
+     "kwargs": {},
+     "module": "system_track_defects"
+    }
+   ],
+   "case_id": "P-DEF:missing-return-tolerance",
+   "description": "An observed quantity with no declared tolerance.",
+   "expected": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "group": "system-track",
+   "kind": "planted_defect",
+   "must_be_untested": [
+    "physical",
+    "instrument"
+   ],
+   "perplexity": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     {
+      "axis": "determination",
+      "code": "RT_RECORD_INCOMPLETE",
+      "severity": "indeterminate"
+     }
+    ]
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "ReturnTestSpec",
+       "anchor": {
+        "_type": "AnchorState",
+        "conditions": [],
+        "label": "cell-A",
+        "quantities": [
+         [
+          "energy",
+          100.0
+         ],
+         [
+          "magnetization",
+          0.5
+         ]
+        ]
+       },
+       "expected_return": true,
+       "returned": [
+        {
+         "_type": "QuantityReturn",
+         "provenance": "measured",
+         "quantity": "energy",
+         "returned": 100.0
+        }
+       ],
+       "tolerances": [
+        [
+         "energy",
+         0.1
+        ],
+        [
+         "magnetization",
+         0.01
+        ]
+       ]
+      }
+     ],
+     "fn": "return_test",
+     "kwargs": {},
+     "module": "system_track_defects"
+    }
+   ],
+   "case_id": "P-DEF:missing-return-observation",
+   "description": "A tolerance declared for a quantity never observed on return.",
+   "expected": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "group": "system-track",
+   "kind": "planted_defect",
+   "must_be_untested": [
+    "physical",
+    "instrument"
+   ],
+   "perplexity": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     {
+      "axis": "determination",
+      "code": "RT_RECORD_INCOMPLETE",
+      "severity": "indeterminate"
+     }
+    ]
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "ReturnTestSpec",
+       "anchor": {
+        "_type": "AnchorState",
+        "conditions": [],
+        "label": "cell-A",
+        "quantities": [
+         [
+          "energy",
+          100.0
+         ],
+         [
+          "magnetization",
+          0.5
+         ]
+        ]
+       },
+       "expected_return": true,
+       "returned": [
+        {
+         "_type": "QuantityReturn",
+         "provenance": "measured",
+         "quantity": "energy",
+         "returned": 100.0
+        },
+        {
+         "_type": "QuantityReturn",
+         "provenance": "measured",
+         "quantity": "magnetization",
+         "returned": 0.5
+        }
+       ],
+       "tolerances": [
+        [
+         "energy",
+         0.1
+        ],
+        [
+         "magnetization",
+         0.01
+        ],
+        [
+         "spin",
+         0.1
+        ]
+       ]
+      }
+     ],
+     "fn": "return_test",
+     "kwargs": {},
+     "module": "system_track_defects"
+    }
+   ],
+   "case_id": "P-DEF:tolerance-for-unanchored-quantity",
+   "description": "A tolerance names a quantity the anchor never defined.",
+   "expected": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "group": "system-track",
+   "kind": "planted_defect",
+   "must_be_untested": [
+    "physical",
+    "instrument"
+   ],
+   "perplexity": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     {
+      "axis": "determination",
+      "code": "RT_RECORD_INCOMPLETE",
+      "severity": "indeterminate"
+     }
+    ]
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "_ThresholdInstrument",
+       "instrument_id": "ladder-blind",
+       "offset": 0.0,
+       "threshold": "inf"
+      },
+      [
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-0.01",
+        "effect_size": 0.01,
+        "expected_detectable": false,
+        "inputs": [
+         [
+          "x",
+          0.01
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-0.05",
+        "effect_size": 0.05,
+        "expected_detectable": false,
+        "inputs": [
+         [
+          "x",
+          0.05
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-0.1",
+        "effect_size": 0.1,
+        "expected_detectable": true,
+        "inputs": [
+         [
+          "x",
+          0.1
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-0.5",
+        "effect_size": 0.5,
+        "expected_detectable": true,
+        "inputs": [
+         [
+          "x",
+          0.5
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-1",
+        "effect_size": 1.0,
+        "expected_detectable": true,
+        "inputs": [
+         [
+          "x",
+          1.0
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       }
+      ],
+      {
+       "band": "K",
+       "regime": "passive"
+      }
+     ],
+     "fn": "establish_sensitivity",
+     "kwargs": {},
+     "module": "determination_track_defects"
+    }
+   ],
+   "case_id": "P-DEF:blind-instrument-misses-ladder",
+   "description": "An instrument that detects nothing on a ladder with expected detections.",
+   "expected": [
+    [
+     "instrument",
+     "failed"
+    ]
+   ],
+   "group": "determination-track",
+   "kind": "planted_defect",
+   "must_be_untested": [
+    "physical"
+   ],
+   "perplexity": {
+    "axes": {
+     "determination": "untested",
+     "instrument": "failed",
+     "physical": "untested"
+    },
+    "codes": [
+     {
+      "axis": "instrument",
+      "code": "SENSITIVITY_MISS",
+      "severity": "failed"
+     },
+     {
+      "axis": "instrument",
+      "code": "SENSITIVITY_MISS",
+      "severity": "failed"
+     },
+     {
+      "axis": "instrument",
+      "code": "SENSITIVITY_MISS",
+      "severity": "failed"
+     }
+    ]
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "_ThresholdInstrument",
+       "instrument_id": "ladder-noisy",
+       "offset": 0.1,
+       "threshold": "inf"
+      },
+      [
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-0.01",
+        "effect_size": 0.01,
+        "expected_detectable": false,
+        "inputs": [
+         [
+          "x",
+          0.01
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-0.05",
+        "effect_size": 0.05,
+        "expected_detectable": false,
+        "inputs": [
+         [
+          "x",
+          0.05
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-0.1",
+        "effect_size": 0.1,
+        "expected_detectable": true,
+        "inputs": [
+         [
+          "x",
+          0.1
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-0.5",
+        "effect_size": 0.5,
+        "expected_detectable": true,
+        "inputs": [
+         [
+          "x",
+          0.5
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-1",
+        "effect_size": 1.0,
+        "expected_detectable": true,
+        "inputs": [
+         [
+          "x",
+          1.0
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       }
+      ],
+      {
+       "band": "K",
+       "regime": "passive"
+      }
+     ],
+     "fn": "establish_sensitivity",
+     "kwargs": {},
+     "module": "determination_track_defects"
+    }
+   ],
+   "case_id": "P-DEF:noisy-instrument-false-positives",
+   "description": "An instrument that reports detections where none should be possible.",
+   "expected": [
+    [
+     "instrument",
+     "failed"
+    ]
+   ],
+   "group": "determination-track",
+   "kind": "planted_defect",
+   "must_be_untested": [
+    "physical"
+   ],
+   "perplexity": {
+    "axes": {
+     "determination": "untested",
+     "instrument": "failed",
+     "physical": "untested"
+    },
+    "codes": [
+     {
+      "axis": "instrument",
+      "code": "SENSITIVITY_FALSE_POSITIVE",
+      "severity": "failed"
+     },
+     {
+      "axis": "instrument",
+      "code": "SENSITIVITY_FALSE_POSITIVE",
+      "severity": "failed"
+     }
+    ]
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "_ThresholdInstrument",
+       "instrument_id": "ladder-clean",
+       "offset": 0.0,
+       "threshold": 0.1
+      },
+      [],
+      {
+       "band": "K",
+       "regime": "passive"
+      }
+     ],
+     "fn": "establish_sensitivity",
+     "kwargs": {},
+     "module": "determination_track_defects"
+    }
+   ],
+   "case_id": "P-DEF:sensitivity-ladder-empty",
+   "description": "A sensitivity determination with no cases.",
+   "expected": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "group": "determination-track",
+   "kind": "planted_defect",
+   "must_be_untested": [
+    "physical",
+    "instrument"
+   ],
+   "perplexity": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     {
+      "axis": "determination",
+      "code": "SENSITIVITY_NO_CASES",
+      "severity": "indeterminate"
+     }
+    ]
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "_ThresholdInstrument",
+       "instrument_id": "ladder-blind",
+       "offset": 0.0,
+       "threshold": "inf"
+      },
+      [
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-0.01",
+        "effect_size": 0.01,
+        "expected_detectable": false,
+        "inputs": [
+         [
+          "x",
+          0.01
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-0.05",
+        "effect_size": 0.05,
+        "expected_detectable": false,
+        "inputs": [
+         [
+          "x",
+          0.05
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       }
+      ],
+      {
+       "band": "K",
+       "regime": "passive"
+      }
+     ],
+     "fn": "establish_sensitivity",
+     "kwargs": {},
+     "module": "determination_track_defects"
+    }
+   ],
+   "case_id": "P-DEF:sensitivity-limit-not-established",
+   "description": "A ladder of undetectable magnitudes bounds nothing.",
+   "expected": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "group": "determination-track",
+   "kind": "planted_defect",
+   "must_be_untested": [
+    "physical"
+   ],
+   "perplexity": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     {
+      "axis": "determination",
+      "code": "SENSITIVITY_LIMIT_NOT_ESTABLISHED",
+      "severity": "indeterminate"
+     }
+    ]
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "NonDetectionObservation",
+       "conditions": [
+        [
+         "band",
+         "K"
+        ],
+        [
+         "regime",
+         "passive"
+        ]
+       ],
+       "effect_size_of_interest": 0.5,
+       "notes": [],
+       "observation_id": "nd-1"
+      },
+      null
+     ],
+     "fn": "record_non_detection",
+     "kwargs": {},
+     "module": "determination_track_defects"
+    }
+   ],
+   "case_id": "P-DEF:non-detection-without-sensitivity",
+   "description": "A non-detection with no established sensitivity.",
+   "expected": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "group": "determination-track",
+   "kind": "planted_defect",
+   "must_be_untested": [
+    "physical",
+    "instrument"
+   ],
+   "perplexity": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     {
+      "axis": "determination",
+      "code": "ND_UNQUALIFIED",
+      "severity": "indeterminate"
+     }
+    ]
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "_ThresholdInstrument",
+       "instrument_id": "ladder-clean",
+       "offset": 0.0,
+       "threshold": 0.1
+      },
+      [
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-0.01",
+        "effect_size": 0.01,
+        "expected_detectable": false,
+        "inputs": [
+         [
+          "x",
+          0.01
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-0.05",
+        "effect_size": 0.05,
+        "expected_detectable": false,
+        "inputs": [
+         [
+          "x",
+          0.05
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-0.1",
+        "effect_size": 0.1,
+        "expected_detectable": true,
+        "inputs": [
+         [
+          "x",
+          0.1
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-0.5",
+        "effect_size": 0.5,
+        "expected_detectable": true,
+        "inputs": [
+         [
+          "x",
+          0.5
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-1",
+        "effect_size": 1.0,
+        "expected_detectable": true,
+        "inputs": [
+         [
+          "x",
+          1.0
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       }
+      ],
+      {
+       "band": "K",
+       "regime": "passive"
+      }
+     ],
+     "fn": "establish_sensitivity",
+     "kwargs": {},
+     "module": "determination_track_defects"
+    },
+    {
+     "args": [
+      {
+       "_type": "NonDetectionObservation",
+       "conditions": [
+        [
+         "band",
+         "K"
+        ],
+        [
+         "regime",
+         "passive"
+        ]
+       ],
+       "effect_size_of_interest": 0.01,
+       "notes": [],
+       "observation_id": "nd-small"
+      },
+      {
+       "_type": "SensitivityDetermination",
+       "conditions": [
+        [
+         "band",
+         "K"
+        ],
+        [
+         "regime",
+         "passive"
+        ]
+       ],
+       "detection_limit": 0.1,
+       "instrument_id": "ladder-clean",
+       "notes": [
+        "ladder-0.01: size=0.01 detected=False expected=False",
+        "ladder-0.05: size=0.05 detected=False expected=False",
+        "ladder-0.1: size=0.1 detected=True expected=True",
+        "ladder-0.5: size=0.5 detected=True expected=True",
+        "ladder-1: size=1 detected=True expected=True"
+       ],
+       "record": {
+        "_type": "FailureRecord",
+        "findings": [
+         {
+          "_type": "Finding",
+          "axis": "instrument",
+          "code": "SENSITIVITY_ESTABLISHED",
+          "evidence": [
+           {
+            "_type": "EvidenceRef",
+            "digest": null,
+            "kind": "sensitivity-case",
+            "locator": "ladder-0.01"
+           },
+           {
+            "_type": "EvidenceRef",
+            "digest": null,
+            "kind": "sensitivity-case",
+            "locator": "ladder-0.05"
+           },
+           {
+            "_type": "EvidenceRef",
+            "digest": null,
+            "kind": "sensitivity-case",
+            "locator": "ladder-0.1"
+           },
+           {
+            "_type": "EvidenceRef",
+            "digest": null,
+            "kind": "sensitivity-case",
+            "locator": "ladder-0.5"
+           },
+           {
+            "_type": "EvidenceRef",
+            "digest": null,
+            "kind": "sensitivity-case",
+            "locator": "ladder-1"
+           }
+          ],
+          "message": "Detection limit 0.1 (smallest detected effect size), established within the tested ladder and conditions. Sensitivity is not transferable outside these conditions.",
+          "severity": "ok",
+          "source": "detection.sensitivity"
+         }
+        ]
+       }
+      }
+     ],
+     "fn": "record_non_detection",
+     "kwargs": {},
+     "module": "determination_track_defects"
+    }
+   ],
+   "case_id": "P-DEF:non-detection-below-sensitivity",
+   "description": "The effect of interest is smaller than the detection limit.",
+   "expected": [
+    [
+     "determination",
+     "indeterminate"
+    ],
+    [
+     "instrument",
+     "ok"
+    ]
+   ],
+   "group": "determination-track",
+   "kind": "planted_defect",
+   "must_be_untested": [
+    "physical"
+   ],
+   "perplexity": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "codes": [
+     {
+      "axis": "instrument",
+      "code": "SENSITIVITY_ESTABLISHED",
+      "severity": "ok"
+     },
+     {
+      "axis": "determination",
+      "code": "ND_BELOW_SENSITIVITY",
+      "severity": "indeterminate"
+     }
+    ]
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "_ThresholdInstrument",
+       "instrument_id": "ladder-clean",
+       "offset": 0.0,
+       "threshold": 0.1
+      },
+      [
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-0.01",
+        "effect_size": 0.01,
+        "expected_detectable": false,
+        "inputs": [
+         [
+          "x",
+          0.01
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-0.05",
+        "effect_size": 0.05,
+        "expected_detectable": false,
+        "inputs": [
+         [
+          "x",
+          0.05
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-0.1",
+        "effect_size": 0.1,
+        "expected_detectable": true,
+        "inputs": [
+         [
+          "x",
+          0.1
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-0.5",
+        "effect_size": 0.5,
+        "expected_detectable": true,
+        "inputs": [
+         [
+          "x",
+          0.5
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-1",
+        "effect_size": 1.0,
+        "expected_detectable": true,
+        "inputs": [
+         [
+          "x",
+          1.0
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       }
+      ],
+      {
+       "band": "K",
+       "regime": "passive"
+      }
+     ],
+     "fn": "establish_sensitivity",
+     "kwargs": {},
+     "module": "determination_track_defects"
+    },
+    {
+     "args": [
+      {
+       "_type": "NonDetectionObservation",
+       "conditions": [
+        [
+         "band",
+         "K"
+        ],
+        [
+         "regime",
+         "passive"
+        ],
+        [
+         "temperature",
+         "4K"
+        ]
+       ],
+       "effect_size_of_interest": 0.5,
+       "notes": [],
+       "observation_id": "nd-mismatch"
+      },
+      {
+       "_type": "SensitivityDetermination",
+       "conditions": [
+        [
+         "band",
+         "K"
+        ],
+        [
+         "regime",
+         "passive"
+        ]
+       ],
+       "detection_limit": 0.1,
+       "instrument_id": "ladder-clean",
+       "notes": [
+        "ladder-0.01: size=0.01 detected=False expected=False",
+        "ladder-0.05: size=0.05 detected=False expected=False",
+        "ladder-0.1: size=0.1 detected=True expected=True",
+        "ladder-0.5: size=0.5 detected=True expected=True",
+        "ladder-1: size=1 detected=True expected=True"
+       ],
+       "record": {
+        "_type": "FailureRecord",
+        "findings": [
+         {
+          "_type": "Finding",
+          "axis": "instrument",
+          "code": "SENSITIVITY_ESTABLISHED",
+          "evidence": [
+           {
+            "_type": "EvidenceRef",
+            "digest": null,
+            "kind": "sensitivity-case",
+            "locator": "ladder-0.01"
+           },
+           {
+            "_type": "EvidenceRef",
+            "digest": null,
+            "kind": "sensitivity-case",
+            "locator": "ladder-0.05"
+           },
+           {
+            "_type": "EvidenceRef",
+            "digest": null,
+            "kind": "sensitivity-case",
+            "locator": "ladder-0.1"
+           },
+           {
+            "_type": "EvidenceRef",
+            "digest": null,
+            "kind": "sensitivity-case",
+            "locator": "ladder-0.5"
+           },
+           {
+            "_type": "EvidenceRef",
+            "digest": null,
+            "kind": "sensitivity-case",
+            "locator": "ladder-1"
+           }
+          ],
+          "message": "Detection limit 0.1 (smallest detected effect size), established within the tested ladder and conditions. Sensitivity is not transferable outside these conditions.",
+          "severity": "ok",
+          "source": "detection.sensitivity"
+         }
+        ]
+       }
+      }
+     ],
+     "fn": "record_non_detection",
+     "kwargs": {},
+     "module": "determination_track_defects"
+    },
+    {
+     "args": [
+      "ac-mismatch",
+      {
+       "_type": "NonDetectionRecord",
+       "notes": [
+        "observation=nd-mismatch",
+        "sensitivity: instrument=ladder-clean limit=0.1 conditions={'band': 'K', 'regime': 'passive'}"
+       ],
+       "observation": {
+        "_type": "NonDetectionObservation",
+        "conditions": [
+         [
+          "band",
+          "K"
+         ],
+         [
+          "regime",
+          "passive"
+         ],
+         [
+          "temperature",
+          "4K"
+         ]
+        ],
+        "effect_size_of_interest": 0.5,
+        "notes": [],
+        "observation_id": "nd-mismatch"
+       },
+       "qualified": true,
+       "record": {
+        "_type": "FailureRecord",
+        "findings": [
+         {
+          "_type": "Finding",
+          "axis": "instrument",
+          "code": "SENSITIVITY_ESTABLISHED",
+          "evidence": [
+           {
+            "_type": "EvidenceRef",
+            "digest": null,
+            "kind": "sensitivity-case",
+            "locator": "ladder-0.01"
+           },
+           {
+            "_type": "EvidenceRef",
+            "digest": null,
+            "kind": "sensitivity-case",
+            "locator": "ladder-0.05"
+           },
+           {
+            "_type": "EvidenceRef",
+            "digest": null,
+            "kind": "sensitivity-case",
+            "locator": "ladder-0.1"
+           },
+           {
+            "_type": "EvidenceRef",
+            "digest": null,
+            "kind": "sensitivity-case",
+            "locator": "ladder-0.5"
+           },
+           {
+            "_type": "EvidenceRef",
+            "digest": null,
+            "kind": "sensitivity-case",
+            "locator": "ladder-1"
+           }
+          ],
+          "message": "Detection limit 0.1 (smallest detected effect size), established within the tested ladder and conditions. Sensitivity is not transferable outside these conditions.",
+          "severity": "ok",
+          "source": "detection.sensitivity"
+         },
+         {
+          "_type": "Finding",
+          "axis": "determination",
+          "code": "ND_QUALIFIED",
+          "evidence": [
+           {
+            "_type": "EvidenceRef",
+            "digest": null,
+            "kind": "non-detection",
+            "locator": "nd-mismatch"
+           }
+          ],
+          "message": "Within its conditions, the instrument would have detected an effect of the size in question (0.5 at or above the limit 0.1); the non-detection is qualified for a scoped absence claim.",
+          "severity": "ok",
+          "source": "detection.non_detection"
+         }
+        ]
+       },
+       "sensitivity": {
+        "_type": "SensitivityDetermination",
+        "conditions": [
+         [
+          "band",
+          "K"
+         ],
+         [
+          "regime",
+          "passive"
+         ]
+        ],
+        "detection_limit": 0.1,
+        "instrument_id": "ladder-clean",
+        "notes": [
+         "ladder-0.01: size=0.01 detected=False expected=False",
+         "ladder-0.05: size=0.05 detected=False expected=False",
+         "ladder-0.1: size=0.1 detected=True expected=True",
+         "ladder-0.5: size=0.5 detected=True expected=True",
+         "ladder-1: size=1 detected=True expected=True"
+        ],
+        "record": {
+         "_type": "FailureRecord",
+         "findings": [
+          {
+           "_type": "Finding",
+           "axis": "instrument",
+           "code": "SENSITIVITY_ESTABLISHED",
+           "evidence": [
+            {
+             "_type": "EvidenceRef",
+             "digest": null,
+             "kind": "sensitivity-case",
+             "locator": "ladder-0.01"
+            },
+            {
+             "_type": "EvidenceRef",
+             "digest": null,
+             "kind": "sensitivity-case",
+             "locator": "ladder-0.05"
+            },
+            {
+             "_type": "EvidenceRef",
+             "digest": null,
+             "kind": "sensitivity-case",
+             "locator": "ladder-0.1"
+            },
+            {
+             "_type": "EvidenceRef",
+             "digest": null,
+             "kind": "sensitivity-case",
+             "locator": "ladder-0.5"
+            },
+            {
+             "_type": "EvidenceRef",
+             "digest": null,
+             "kind": "sensitivity-case",
+             "locator": "ladder-1"
+            }
+           ],
+           "message": "Detection limit 0.1 (smallest detected effect size), established within the tested ladder and conditions. Sensitivity is not transferable outside these conditions.",
+           "severity": "ok",
+           "source": "detection.sensitivity"
+          }
+         ]
+        }
+       }
+      }
+     ],
+     "fn": "claim_absence",
+     "kwargs": {},
+     "module": "determination_track_defects"
+    }
+   ],
+   "case_id": "P-DEF:absence-claim-scope-mismatch",
+   "description": "The observation's conditions are not covered by the sensitivity's scope.",
+   "expected": [
+    [
+     "determination",
+     "indeterminate"
+    ]
+   ],
+   "group": "determination-track",
+   "kind": "planted_defect",
+   "must_be_untested": [
+    "physical"
+   ],
+   "perplexity": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "codes": [
+     {
+      "axis": "instrument",
+      "code": "SENSITIVITY_ESTABLISHED",
+      "severity": "ok"
+     },
+     {
+      "axis": "determination",
+      "code": "ND_QUALIFIED",
+      "severity": "ok"
+     },
+     {
+      "axis": "determination",
+      "code": "SA_SCOPE_MISMATCH",
+      "severity": "indeterminate"
+     }
+    ]
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "u1": "expired"
+      }
+     ],
+     "fn": "stale_reliance",
+     "kwargs": {},
+     "module": "determination_track_defects"
+    }
+   ],
+   "case_id": "P-DEF:stale-reliance-on-expired-unknown",
+   "description": "A determination rests on an expired, unreevaluated UNKNOWN.",
+   "expected": [
+    [
+     "determination",
+     "failed"
+    ]
+   ],
+   "group": "determination-track",
+   "kind": "planted_defect",
+   "must_be_untested": [
+    "physical",
+    "instrument"
+   ],
+   "perplexity": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "untested",
+     "physical": "untested"
+    },
+    "codes": [
+     {
+      "axis": "determination",
+      "code": "STALE_UNKNOWN_RELIANCE",
+      "severity": "failed"
+     }
+    ]
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "BoundaryAccounting",
+       "accounts": [
+        {
+         "_type": "QuantityAccount",
+         "exchanges": [
+          {
+           "_type": "Exchange",
+           "direction": "inflow",
+           "label": "heater-pulse",
+           "magnitude": 10.0,
+           "provenance": "specified",
+           "quantity": "energy",
+           "registered_by": "control:heater"
+          },
+          {
+           "_type": "Exchange",
+           "direction": "outflow",
+           "label": "calorimeter-reading",
+           "magnitude": 10.0,
+           "provenance": "measured",
+           "quantity": "energy",
+           "registered_by": "observer:calorimeter"
+          }
+         ],
+         "final": 100.0,
+         "final_provenance": "measured",
+         "initial": 100.0,
+         "initial_provenance": "specified",
+         "quantity": "energy",
+         "tolerance": 0.1
+        }
+       ],
+       "boundary_label": "cell-A",
+       "declared_complete": true,
+       "registered_interventions": [
+        "control:heater",
+        "observer:calorimeter"
+       ]
+      }
+     ],
+     "fn": "l0_closure_gate",
+     "kwargs": {},
+     "module": "planted_defects"
+    }
+   ],
+   "case_id": "P-CTRL:balanced-ledger-passes",
+   "description": "A balanced ledger passes the gate without validating physics.",
+   "group": "run_control_cases",
+   "kind": "control",
+   "perplexity": {
+    "detail": "physical=untested instrument=untested determination=ok findings=2",
+    "passed": true
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "LinearInstrument",
+       "instrument_id": "linear-clean",
+       "intercept": 0.0,
+       "slope": 1.0
+      },
+      [
+       {
+        "_type": "KnownAnswerCase",
+        "case_id": "ka-linear-0",
+        "description": "",
+        "expected": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "inputs": [
+         [
+          "x",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "KnownAnswerCase",
+        "case_id": "ka-linear-1",
+        "description": "",
+        "expected": [
+         [
+          "y",
+          1.0
+         ]
+        ],
+        "inputs": [
+         [
+          "x",
+          1.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "KnownAnswerCase",
+        "case_id": "ka-linear-2",
+        "description": "",
+        "expected": [
+         [
+          "y",
+          2.0
+         ]
+        ],
+        "inputs": [
+         [
+          "x",
+          2.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       }
+      ]
+     ],
+     "fn": "validate_known_answers",
+     "kwargs": {},
+     "module": "planted_defects"
+    },
+    {
+     "args": [
+      {
+       "_type": "LinearInstrument",
+       "instrument_id": "linear-clean",
+       "intercept": 0.0,
+       "slope": 1.0
+      },
+      [
+       {
+        "_type": "NullCase",
+        "case_id": "null-zero-input",
+        "description": "",
+        "inputs": [
+         [
+          "x",
+          0.0
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       }
+      ]
+     ],
+     "fn": "validate_nulls",
+     "kwargs": {},
+     "module": "planted_defects"
+    }
+   ],
+   "case_id": "P-CTRL:clean-instrument-validated",
+   "description": "A clean instrument validates on both harnesses with no physical promotion.",
+   "group": "run_control_cases",
+   "kind": "control",
+   "perplexity": {
+    "detail": "physical=untested instrument=ok determination=untested findings=1",
+    "passed": true
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "LinearInstrument",
+       "instrument_id": "linear-clean",
+       "intercept": 0.0,
+       "slope": 1.0
+      },
+      []
+     ],
+     "fn": "validate_known_answers",
+     "kwargs": {},
+     "module": "planted_defects"
+    }
+   ],
+   "case_id": "P-CTRL:empty-harness-is-not-a-pass",
+   "description": "A harness run with zero cases yields INDETERMINATE, not OK.",
+   "group": "run_control_cases",
+   "kind": "control",
+   "perplexity": {
+    "detail": "physical=untested instrument=indeterminate determination=untested findings=1",
+    "passed": true
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "ReturnTestSpec",
+       "anchor": {
+        "_type": "AnchorState",
+        "conditions": [],
+        "label": "cell-A",
+        "quantities": [
+         [
+          "energy",
+          100.0
+         ],
+         [
+          "magnetization",
+          0.5
+         ]
+        ]
+       },
+       "expected_return": false,
+       "returned": [
+        {
+         "_type": "QuantityReturn",
+         "provenance": "measured",
+         "quantity": "energy",
+         "returned": 100.0
+        },
+        {
+         "_type": "QuantityReturn",
+         "provenance": "measured",
+         "quantity": "magnetization",
+         "returned": 0.5
+        }
+       ],
+       "tolerances": [
+        [
+         "energy",
+         0.1
+        ],
+        [
+         "magnetization",
+         0.01
+        ]
+       ]
+      }
+     ],
+     "fn": "return_test",
+     "kwargs": {},
+     "module": "system_track_defects"
+    },
+    {
+     "args": [
+      {
+       "_type": "ConfigurationObservation",
+       "entries": [
+        [
+         "coupling",
+         "nearest-neighbor"
+        ],
+        [
+         "topology",
+         "square-lattice"
+        ]
+       ],
+       "label": "cell-A-configuration"
+      },
+      {
+       "_type": "ConfigurationObservation",
+       "entries": [
+        [
+         "coupling",
+         "nearest-neighbor"
+        ],
+        [
+         "topology",
+         "square-lattice"
+        ]
+       ],
+       "label": "cell-A-configuration"
+      }
+     ],
+     "fn": "compare_configurations",
+     "kwargs": {},
+     "module": "system_track_defects"
+    },
+    {
+     "args": [
+      "persisted",
+      "persisted"
+     ],
+     "fn": "classify_continuity",
+     "kwargs": {},
+     "module": "system_track_defects"
+    }
+   ],
+   "case_id": "P-CTRL:continuous-system",
+   "description": "Return within tolerance with a persisted configuration yields CONTINUOUS.",
+   "group": "run_system_track_controls",
+   "kind": "control",
+   "perplexity": {
+    "detail": "outcome=returned cell=continuous",
+    "passed": true
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "ReturnTestSpec",
+       "anchor": {
+        "_type": "AnchorState",
+        "conditions": [],
+        "label": "cell-A",
+        "quantities": [
+         [
+          "energy",
+          100.0
+         ],
+         [
+          "magnetization",
+          0.5
+         ]
+        ]
+       },
+       "expected_return": false,
+       "returned": [
+        {
+         "_type": "QuantityReturn",
+         "provenance": "measured",
+         "quantity": "energy",
+         "returned": 100.0
+        },
+        {
+         "_type": "QuantityReturn",
+         "provenance": "measured",
+         "quantity": "magnetization",
+         "returned": 0.5
+        }
+       ],
+       "tolerances": [
+        [
+         "energy",
+         0.1
+        ],
+        [
+         "magnetization",
+         0.01
+        ]
+       ]
+      }
+     ],
+     "fn": "return_test",
+     "kwargs": {},
+     "module": "system_track_defects"
+    },
+    {
+     "args": [
+      {
+       "_type": "ConfigurationObservation",
+       "entries": [
+        [
+         "coupling",
+         "nearest-neighbor"
+        ],
+        [
+         "topology",
+         "square-lattice"
+        ]
+       ],
+       "label": "cell-A-configuration"
+      },
+      {
+       "_type": "ConfigurationObservation",
+       "entries": [
+        [
+         "coupling",
+         "long-range"
+        ],
+        [
+         "topology",
+         "square-lattice"
+        ]
+       ],
+       "label": "cell-A-configuration"
+      }
+     ],
+     "fn": "compare_configurations",
+     "kwargs": {},
+     "module": "system_track_defects"
+    },
+    {
+     "args": [
+      "persisted",
+      "changed"
+     ],
+     "fn": "classify_continuity",
+     "kwargs": {},
+     "module": "system_track_defects"
+    }
+   ],
+   "case_id": "P-CTRL:return-with-reconfiguration",
+   "description": "A returned state with a changed configuration is its own cell, not CONTINUOUS.",
+   "group": "run_system_track_controls",
+   "kind": "control",
+   "perplexity": {
+    "detail": "cell=return-with-reconfiguration",
+    "passed": true
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "ReturnTestSpec",
+       "anchor": {
+        "_type": "AnchorState",
+        "conditions": [],
+        "label": "cell-A",
+        "quantities": [
+         [
+          "energy",
+          100.0
+         ],
+         [
+          "magnetization",
+          0.5
+         ]
+        ]
+       },
+       "expected_return": false,
+       "returned": [
+        {
+         "_type": "QuantityReturn",
+         "provenance": "measured",
+         "quantity": "energy",
+         "returned": 105.0
+        },
+        {
+         "_type": "QuantityReturn",
+         "provenance": "measured",
+         "quantity": "magnetization",
+         "returned": 0.5
+        }
+       ],
+       "tolerances": [
+        [
+         "energy",
+         0.1
+        ],
+        [
+         "magnetization",
+         0.01
+        ]
+       ]
+      }
+     ],
+     "fn": "return_test",
+     "kwargs": {},
+     "module": "system_track_defects"
+    },
+    {
+     "args": [
+      {
+       "_type": "ConfigurationObservation",
+       "entries": [
+        [
+         "coupling",
+         "nearest-neighbor"
+        ],
+        [
+         "topology",
+         "square-lattice"
+        ]
+       ],
+       "label": "cell-A-configuration"
+      },
+      {
+       "_type": "ConfigurationObservation",
+       "entries": [
+        [
+         "coupling",
+         "nearest-neighbor"
+        ],
+        [
+         "topology",
+         "square-lattice"
+        ]
+       ],
+       "label": "cell-A-configuration"
+      }
+     ],
+     "fn": "compare_configurations",
+     "kwargs": {},
+     "module": "system_track_defects"
+    },
+    {
+     "args": [
+      "changed",
+      "persisted"
+     ],
+     "fn": "classify_continuity",
+     "kwargs": {},
+     "module": "system_track_defects"
+    }
+   ],
+   "case_id": "P-CTRL:drift-with-stable-configuration",
+   "description": "A changed state with a persisted configuration is its own cell.",
+   "group": "run_system_track_controls",
+   "kind": "control",
+   "perplexity": {
+    "detail": "cell=drift-with-stable-configuration",
+    "passed": true
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "ReturnTestSpec",
+       "anchor": {
+        "_type": "AnchorState",
+        "conditions": [],
+        "label": "cell-A",
+        "quantities": [
+         [
+          "energy",
+          100.0
+         ],
+         [
+          "magnetization",
+          0.5
+         ]
+        ]
+       },
+       "expected_return": false,
+       "returned": [
+        {
+         "_type": "QuantityReturn",
+         "provenance": "measured",
+         "quantity": "energy",
+         "returned": 105.0
+        },
+        {
+         "_type": "QuantityReturn",
+         "provenance": "measured",
+         "quantity": "magnetization",
+         "returned": 0.5
+        }
+       ],
+       "tolerances": [
+        [
+         "energy",
+         0.1
+        ],
+        [
+         "magnetization",
+         0.01
+        ]
+       ]
+      }
+     ],
+     "fn": "return_test",
+     "kwargs": {},
+     "module": "system_track_defects"
+    },
+    {
+     "args": [
+      {
+       "_type": "ConfigurationObservation",
+       "entries": [
+        [
+         "coupling",
+         "nearest-neighbor"
+        ],
+        [
+         "topology",
+         "square-lattice"
+        ]
+       ],
+       "label": "cell-A-configuration"
+      },
+      {
+       "_type": "ConfigurationObservation",
+       "entries": [
+        [
+         "coupling",
+         "long-range"
+        ],
+        [
+         "topology",
+         "square-lattice"
+        ]
+       ],
+       "label": "cell-A-configuration"
+      }
+     ],
+     "fn": "compare_configurations",
+     "kwargs": {},
+     "module": "system_track_defects"
+    },
+    {
+     "args": [
+      "changed",
+      "changed"
+     ],
+     "fn": "classify_continuity",
+     "kwargs": {},
+     "module": "system_track_defects"
+    }
+   ],
+   "case_id": "P-CTRL:discontinuous-system",
+   "description": "A changed state with a changed configuration yields DISCONTINUOUS.",
+   "group": "run_system_track_controls",
+   "kind": "control",
+   "perplexity": {
+    "detail": "cell=discontinuous",
+    "passed": true
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "ReturnTestSpec",
+       "anchor": {
+        "_type": "AnchorState",
+        "conditions": [],
+        "label": "cell-A",
+        "quantities": [
+         [
+          "energy",
+          100.0
+         ],
+         [
+          "magnetization",
+          0.5
+         ]
+        ]
+       },
+       "expected_return": true,
+       "returned": [
+        {
+         "_type": "QuantityReturn",
+         "provenance": "measured",
+         "quantity": "energy",
+         "returned": 105.0
+        },
+        {
+         "_type": "QuantityReturn",
+         "provenance": "measured",
+         "quantity": "magnetization",
+         "returned": 0.5
+        }
+       ],
+       "tolerances": [
+        [
+         "energy",
+         0.1
+        ]
+       ]
+      }
+     ],
+     "fn": "return_test",
+     "kwargs": {},
+     "module": "system_track_defects"
+    },
+    {
+     "args": [
+      "indeterminate",
+      "persisted"
+     ],
+     "fn": "classify_continuity",
+     "kwargs": {},
+     "module": "system_track_defects"
+    }
+   ],
+   "case_id": "P-CTRL:indeterminate-component-is-indeterminate-cell",
+   "description": "An incomplete record never projects onto a definite continuity cell.",
+   "group": "run_system_track_controls",
+   "kind": "control",
+   "perplexity": {
+    "detail": "outcome=indeterminate cell=indeterminate",
+    "passed": true
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "ReturnTestSpec",
+       "anchor": {
+        "_type": "AnchorState",
+        "conditions": [],
+        "label": "cell-A",
+        "quantities": [
+         [
+          "energy",
+          100.0
+         ],
+         [
+          "magnetization",
+          0.5
+         ]
+        ]
+       },
+       "expected_return": false,
+       "returned": [
+        {
+         "_type": "QuantityReturn",
+         "provenance": "measured",
+         "quantity": "energy",
+         "returned": 105.0
+        },
+        {
+         "_type": "QuantityReturn",
+         "provenance": "measured",
+         "quantity": "magnetization",
+         "returned": 0.5
+        }
+       ],
+       "tolerances": [
+        [
+         "energy",
+         0.1
+        ],
+        [
+         "magnetization",
+         0.01
+        ]
+       ]
+      }
+     ],
+     "fn": "return_test",
+     "kwargs": {},
+     "module": "system_track_defects"
+    }
+   ],
+   "case_id": "P-CTRL:return-outcome-is-system-track-transition",
+   "description": "The return outcome records on the system track only.",
+   "group": "run_system_track_controls",
+   "kind": "control",
+   "perplexity": {
+    "detail": "[system] anchored -> not_returned via return-to-anchor test",
+    "passed": true
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "_ThresholdInstrument",
+       "instrument_id": "ladder-clean",
+       "offset": 0.0,
+       "threshold": 0.1
+      },
+      [
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-0.01",
+        "effect_size": 0.01,
+        "expected_detectable": false,
+        "inputs": [
+         [
+          "x",
+          0.01
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-0.05",
+        "effect_size": 0.05,
+        "expected_detectable": false,
+        "inputs": [
+         [
+          "x",
+          0.05
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-0.1",
+        "effect_size": 0.1,
+        "expected_detectable": true,
+        "inputs": [
+         [
+          "x",
+          0.1
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-0.5",
+        "effect_size": 0.5,
+        "expected_detectable": true,
+        "inputs": [
+         [
+          "x",
+          0.5
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-1",
+        "effect_size": 1.0,
+        "expected_detectable": true,
+        "inputs": [
+         [
+          "x",
+          1.0
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       }
+      ],
+      {
+       "band": "K",
+       "regime": "passive"
+      }
+     ],
+     "fn": "establish_sensitivity",
+     "kwargs": {},
+     "module": "determination_track_defects"
+    }
+   ],
+   "case_id": "P-CTRL:ladder-establishes-limit",
+   "description": "A clean ladder establishes the smallest detected effect as the limit.",
+   "group": "run_determination_track_controls",
+   "kind": "control",
+   "perplexity": {
+    "detail": "instrument=ladder-clean limit=0.1 conditions={'band': 'K', 'regime': 'passive'}",
+    "passed": true
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "_ThresholdInstrument",
+       "instrument_id": "ladder-clean",
+       "offset": 0.0,
+       "threshold": 0.1
+      },
+      [
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-0.01",
+        "effect_size": 0.01,
+        "expected_detectable": false,
+        "inputs": [
+         [
+          "x",
+          0.01
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-0.05",
+        "effect_size": 0.05,
+        "expected_detectable": false,
+        "inputs": [
+         [
+          "x",
+          0.05
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-0.1",
+        "effect_size": 0.1,
+        "expected_detectable": true,
+        "inputs": [
+         [
+          "x",
+          0.1
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-0.5",
+        "effect_size": 0.5,
+        "expected_detectable": true,
+        "inputs": [
+         [
+          "x",
+          0.5
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-1",
+        "effect_size": 1.0,
+        "expected_detectable": true,
+        "inputs": [
+         [
+          "x",
+          1.0
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       }
+      ],
+      {
+       "band": "K",
+       "regime": "passive"
+      }
+     ],
+     "fn": "establish_sensitivity",
+     "kwargs": {},
+     "module": "determination_track_defects"
+    },
+    {
+     "args": [
+      {
+       "_type": "NonDetectionObservation",
+       "conditions": [
+        [
+         "band",
+         "K"
+        ],
+        [
+         "regime",
+         "passive"
+        ]
+       ],
+       "effect_size_of_interest": 0.5,
+       "notes": [],
+       "observation_id": "nd-clean"
+      },
+      {
+       "_type": "SensitivityDetermination",
+       "conditions": [
+        [
+         "band",
+         "K"
+        ],
+        [
+         "regime",
+         "passive"
+        ]
+       ],
+       "detection_limit": 0.1,
+       "instrument_id": "ladder-clean",
+       "notes": [
+        "ladder-0.01: size=0.01 detected=False expected=False",
+        "ladder-0.05: size=0.05 detected=False expected=False",
+        "ladder-0.1: size=0.1 detected=True expected=True",
+        "ladder-0.5: size=0.5 detected=True expected=True",
+        "ladder-1: size=1 detected=True expected=True"
+       ],
+       "record": {
+        "_type": "FailureRecord",
+        "findings": [
+         {
+          "_type": "Finding",
+          "axis": "instrument",
+          "code": "SENSITIVITY_ESTABLISHED",
+          "evidence": [
+           {
+            "_type": "EvidenceRef",
+            "digest": null,
+            "kind": "sensitivity-case",
+            "locator": "ladder-0.01"
+           },
+           {
+            "_type": "EvidenceRef",
+            "digest": null,
+            "kind": "sensitivity-case",
+            "locator": "ladder-0.05"
+           },
+           {
+            "_type": "EvidenceRef",
+            "digest": null,
+            "kind": "sensitivity-case",
+            "locator": "ladder-0.1"
+           },
+           {
+            "_type": "EvidenceRef",
+            "digest": null,
+            "kind": "sensitivity-case",
+            "locator": "ladder-0.5"
+           },
+           {
+            "_type": "EvidenceRef",
+            "digest": null,
+            "kind": "sensitivity-case",
+            "locator": "ladder-1"
+           }
+          ],
+          "message": "Detection limit 0.1 (smallest detected effect size), established within the tested ladder and conditions. Sensitivity is not transferable outside these conditions.",
+          "severity": "ok",
+          "source": "detection.sensitivity"
+         }
+        ]
+       }
+      }
+     ],
+     "fn": "record_non_detection",
+     "kwargs": {},
+     "module": "determination_track_defects"
+    }
+   ],
+   "case_id": "P-CTRL:qualified-non-detection",
+   "description": "A non-detection at or above the detection limit is qualified.",
+   "group": "run_determination_track_controls",
+   "kind": "control",
+   "perplexity": {
+    "detail": "qualified=True",
+    "passed": true
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "_ThresholdInstrument",
+       "instrument_id": "ladder-clean",
+       "offset": 0.0,
+       "threshold": 0.1
+      },
+      [
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-0.01",
+        "effect_size": 0.01,
+        "expected_detectable": false,
+        "inputs": [
+         [
+          "x",
+          0.01
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-0.05",
+        "effect_size": 0.05,
+        "expected_detectable": false,
+        "inputs": [
+         [
+          "x",
+          0.05
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-0.1",
+        "effect_size": 0.1,
+        "expected_detectable": true,
+        "inputs": [
+         [
+          "x",
+          0.1
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-0.5",
+        "effect_size": 0.5,
+        "expected_detectable": true,
+        "inputs": [
+         [
+          "x",
+          0.5
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       },
+       {
+        "_type": "SensitivityCase",
+        "case_id": "ladder-1",
+        "effect_size": 1.0,
+        "expected_detectable": true,
+        "inputs": [
+         [
+          "x",
+          1.0
+         ]
+        ],
+        "null_outputs": [
+         [
+          "y",
+          0.0
+         ]
+        ],
+        "tolerances": [
+         [
+          "y",
+          1e-09
+         ]
+        ]
+       }
+      ],
+      {
+       "band": "K",
+       "regime": "passive"
+      }
+     ],
+     "fn": "establish_sensitivity",
+     "kwargs": {},
+     "module": "determination_track_defects"
+    },
+    {
+     "args": [
+      {
+       "_type": "NonDetectionObservation",
+       "conditions": [
+        [
+         "band",
+         "K"
+        ],
+        [
+         "regime",
+         "passive"
+        ]
+       ],
+       "effect_size_of_interest": 0.5,
+       "notes": [],
+       "observation_id": "nd-clean"
+      },
+      {
+       "_type": "SensitivityDetermination",
+       "conditions": [
+        [
+         "band",
+         "K"
+        ],
+        [
+         "regime",
+         "passive"
+        ]
+       ],
+       "detection_limit": 0.1,
+       "instrument_id": "ladder-clean",
+       "notes": [
+        "ladder-0.01: size=0.01 detected=False expected=False",
+        "ladder-0.05: size=0.05 detected=False expected=False",
+        "ladder-0.1: size=0.1 detected=True expected=True",
+        "ladder-0.5: size=0.5 detected=True expected=True",
+        "ladder-1: size=1 detected=True expected=True"
+       ],
+       "record": {
+        "_type": "FailureRecord",
+        "findings": [
+         {
+          "_type": "Finding",
+          "axis": "instrument",
+          "code": "SENSITIVITY_ESTABLISHED",
+          "evidence": [
+           {
+            "_type": "EvidenceRef",
+            "digest": null,
+            "kind": "sensitivity-case",
+            "locator": "ladder-0.01"
+           },
+           {
+            "_type": "EvidenceRef",
+            "digest": null,
+            "kind": "sensitivity-case",
+            "locator": "ladder-0.05"
+           },
+           {
+            "_type": "EvidenceRef",
+            "digest": null,
+            "kind": "sensitivity-case",
+            "locator": "ladder-0.1"
+           },
+           {
+            "_type": "EvidenceRef",
+            "digest": null,
+            "kind": "sensitivity-case",
+            "locator": "ladder-0.5"
+           },
+           {
+            "_type": "EvidenceRef",
+            "digest": null,
+            "kind": "sensitivity-case",
+            "locator": "ladder-1"
+           }
+          ],
+          "message": "Detection limit 0.1 (smallest detected effect size), established within the tested ladder and conditions. Sensitivity is not transferable outside these conditions.",
+          "severity": "ok",
+          "source": "detection.sensitivity"
+         }
+        ]
+       }
+      }
+     ],
+     "fn": "record_non_detection",
+     "kwargs": {},
+     "module": "determination_track_defects"
+    },
+    {
+     "args": [
+      "ac-clean",
+      {
+       "_type": "NonDetectionRecord",
+       "notes": [
+        "observation=nd-clean",
+        "sensitivity: instrument=ladder-clean limit=0.1 conditions={'band': 'K', 'regime': 'passive'}"
+       ],
+       "observation": {
+        "_type": "NonDetectionObservation",
+        "conditions": [
+         [
+          "band",
+          "K"
+         ],
+         [
+          "regime",
+          "passive"
+         ]
+        ],
+        "effect_size_of_interest": 0.5,
+        "notes": [],
+        "observation_id": "nd-clean"
+       },
+       "qualified": true,
+       "record": {
+        "_type": "FailureRecord",
+        "findings": [
+         {
+          "_type": "Finding",
+          "axis": "instrument",
+          "code": "SENSITIVITY_ESTABLISHED",
+          "evidence": [
+           {
+            "_type": "EvidenceRef",
+            "digest": null,
+            "kind": "sensitivity-case",
+            "locator": "ladder-0.01"
+           },
+           {
+            "_type": "EvidenceRef",
+            "digest": null,
+            "kind": "sensitivity-case",
+            "locator": "ladder-0.05"
+           },
+           {
+            "_type": "EvidenceRef",
+            "digest": null,
+            "kind": "sensitivity-case",
+            "locator": "ladder-0.1"
+           },
+           {
+            "_type": "EvidenceRef",
+            "digest": null,
+            "kind": "sensitivity-case",
+            "locator": "ladder-0.5"
+           },
+           {
+            "_type": "EvidenceRef",
+            "digest": null,
+            "kind": "sensitivity-case",
+            "locator": "ladder-1"
+           }
+          ],
+          "message": "Detection limit 0.1 (smallest detected effect size), established within the tested ladder and conditions. Sensitivity is not transferable outside these conditions.",
+          "severity": "ok",
+          "source": "detection.sensitivity"
+         },
+         {
+          "_type": "Finding",
+          "axis": "determination",
+          "code": "ND_QUALIFIED",
+          "evidence": [
+           {
+            "_type": "EvidenceRef",
+            "digest": null,
+            "kind": "non-detection",
+            "locator": "nd-clean"
+           }
+          ],
+          "message": "Within its conditions, the instrument would have detected an effect of the size in question (0.5 at or above the limit 0.1); the non-detection is qualified for a scoped absence claim.",
+          "severity": "ok",
+          "source": "detection.non_detection"
+         }
+        ]
+       },
+       "sensitivity": {
+        "_type": "SensitivityDetermination",
+        "conditions": [
+         [
+          "band",
+          "K"
+         ],
+         [
+          "regime",
+          "passive"
+         ]
+        ],
+        "detection_limit": 0.1,
+        "instrument_id": "ladder-clean",
+        "notes": [
+         "ladder-0.01: size=0.01 detected=False expected=False",
+         "ladder-0.05: size=0.05 detected=False expected=False",
+         "ladder-0.1: size=0.1 detected=True expected=True",
+         "ladder-0.5: size=0.5 detected=True expected=True",
+         "ladder-1: size=1 detected=True expected=True"
+        ],
+        "record": {
+         "_type": "FailureRecord",
+         "findings": [
+          {
+           "_type": "Finding",
+           "axis": "instrument",
+           "code": "SENSITIVITY_ESTABLISHED",
+           "evidence": [
+            {
+             "_type": "EvidenceRef",
+             "digest": null,
+             "kind": "sensitivity-case",
+             "locator": "ladder-0.01"
+            },
+            {
+             "_type": "EvidenceRef",
+             "digest": null,
+             "kind": "sensitivity-case",
+             "locator": "ladder-0.05"
+            },
+            {
+             "_type": "EvidenceRef",
+             "digest": null,
+             "kind": "sensitivity-case",
+             "locator": "ladder-0.1"
+            },
+            {
+             "_type": "EvidenceRef",
+             "digest": null,
+             "kind": "sensitivity-case",
+             "locator": "ladder-0.5"
+            },
+            {
+             "_type": "EvidenceRef",
+             "digest": null,
+             "kind": "sensitivity-case",
+             "locator": "ladder-1"
+            }
+           ],
+           "message": "Detection limit 0.1 (smallest detected effect size), established within the tested ladder and conditions. Sensitivity is not transferable outside these conditions.",
+           "severity": "ok",
+           "source": "detection.sensitivity"
+          }
+         ]
+        }
+       }
+      }
+     ],
+     "fn": "claim_absence",
+     "kwargs": {},
+     "module": "determination_track_defects"
+    }
+   ],
+   "case_id": "P-CTRL:scoped-absence-claim-issued",
+   "description": "A qualified non-detection under matching scope issues a scoped claim.",
+   "group": "run_determination_track_controls",
+   "kind": "control",
+   "perplexity": {
+    "detail": "Within {'band': 'K', 'regime': 'passive'}, no effect of size at or above 0.5 is present, up to the instrument's established detection limit 0.1.",
+    "passed": true
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "UnknownDetermination",
+       "determination_id": "u1",
+       "evidence": [],
+       "expiry_triggers": [
+        {
+         "_type": "ExpiryTrigger",
+         "description": "a new measurement of the coupling arrives",
+         "kind": "new-evidence",
+         "trigger_id": "t1"
+        }
+       ],
+       "scope_conditions": [],
+       "state": "unknown",
+       "statement": "the coupling regime is unresolved"
+      },
+      [
+       "t1"
+      ]
+     ],
+     "fn": "check_expiry",
+     "kwargs": {},
+     "module": "determination_track_defects"
+    }
+   ],
+   "case_id": "P-CTRL:expiry-transition-recorded",
+   "description": "Expiry records a determination-track transition from unknown to expired.",
+   "group": "run_determination_track_controls",
+   "kind": "control",
+   "perplexity": {
+    "detail": "[determination] unknown -> expired via expiry trigger(s): t1",
+    "passed": true
+   }
+  },
+  {
+   "calls": [
+    {
+     "args": [
+      {
+       "_type": "UnknownDetermination",
+       "determination_id": "u1",
+       "evidence": [],
+       "expiry_triggers": [
+        {
+         "_type": "ExpiryTrigger",
+         "description": "a new measurement of the coupling arrives",
+         "kind": "new-evidence",
+         "trigger_id": "t1"
+        }
+       ],
+       "scope_conditions": [],
+       "state": "expired",
+       "statement": "the coupling regime is unresolved"
+      },
+      "u1-r1",
+      "the coupling regime is resolved under the new measurement"
+     ],
+     "fn": "reevaluate",
+     "kwargs": {
+      "reason": "expiry trigger t1"
+     },
+     "module": "determination_track_defects"
+    }
+   ],
+   "case_id": "P-CTRL:reevaluation-preserves-original",
+   "description": "Reevaluation marks the original REEVALUATED and issues a successor alongside it.",
+   "group": "run_determination_track_controls",
+   "kind": "control",
+   "perplexity": {
+    "detail": "[determination] expired -> reevaluated via expiry trigger t1",
+    "passed": true
+   }
+  },
+  {
+   "case_id": "P-DEN:coincident_positive_rates_no_attrition",
+   "data": {
+    "audited_comparison": "void-comparison-different-measurands",
+    "census": {
+     "cohort_id": "constructed-fixed-cohort",
+     "decision": {
+      "chosen_by": "constructed-denominator-audit",
+      "criteria": "Preserve procedure, membership, source bindings and independent failure axes.",
+      "rationale": "Test whether numerical coincidence or a shared false label launders a denominator change."
+     },
+     "enrolled": [
+      "A",
+      "B",
+      "C",
+      "D"
+     ],
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-census",
+       "locator": "denominator_process:fixture_census"
+      }
+     ],
+     "outcome_members": [
+      "A",
+      "B"
+     ],
+     "surviving": [
+      "A",
+      "B",
+      "C",
+      "D"
+     ],
+     "window": "t0-to-t1"
+    },
+    "interchangeability_established": false
+   },
+   "group": "denominator_process",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   }
+  },
+  {
+   "case_id": "P-DEN:later_attrition_breaks_numeric_coincidence",
+   "data": {
+    "audited_comparison": "void-comparison-different-measurands",
+    "census": {
+     "cohort_id": "constructed-fixed-cohort",
+     "decision": {
+      "chosen_by": "constructed-denominator-audit",
+      "criteria": "Preserve procedure, membership, source bindings and independent failure axes.",
+      "rationale": "Test whether numerical coincidence or a shared false label launders a denominator change."
+     },
+     "enrolled": [
+      "A",
+      "B",
+      "C",
+      "D"
+     ],
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-census",
+       "locator": "denominator_process:fixture_census"
+      }
+     ],
+     "outcome_members": [
+      "A",
+      "B"
+     ],
+     "surviving": [
+      "A",
+      "B"
+     ],
+     "window": "t1-to-t2"
+    },
+    "interchangeability_established": false
+   },
+   "group": "denominator_process",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   }
+  },
+  {
+   "case_id": "P-DEN:zero_outcomes_hide_different_counts",
+   "data": {
+    "audited_comparison": "void-comparison-different-measurands",
+    "census": {
+     "cohort_id": "constructed-fixed-cohort",
+     "decision": {
+      "chosen_by": "constructed-denominator-audit",
+      "criteria": "Preserve procedure, membership, source bindings and independent failure axes.",
+      "rationale": "Test whether numerical coincidence or a shared false label launders a denominator change."
+     },
+     "enrolled": [
+      "A",
+      "B",
+      "C",
+      "D"
+     ],
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-census",
+       "locator": "denominator_process:fixture_census"
+      }
+     ],
+     "outcome_members": [],
+     "surviving": [
+      "A",
+      "B"
+     ],
+     "window": "t0-to-t1"
+    },
+    "interchangeability_established": false
+   },
+   "group": "denominator_process",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   }
+  },
+  {
+   "case_id": "P-DEN:false_shared_label_at_coincidence",
+   "data": {
+    "audited_comparison": "void-comparison-different-measurands",
+    "census": {
+     "cohort_id": "constructed-fixed-cohort",
+     "decision": {
+      "chosen_by": "constructed-denominator-audit",
+      "criteria": "Preserve procedure, membership, source bindings and independent failure axes.",
+      "rationale": "Test whether numerical coincidence or a shared false label launders a denominator change."
+     },
+     "enrolled": [
+      "A",
+      "B",
+      "C",
+      "D"
+     ],
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-census",
+       "locator": "denominator_process:fixture_census"
+      }
+     ],
+     "outcome_members": [
+      "A",
+      "B"
+     ],
+     "surviving": [
+      "A",
+      "B",
+      "C",
+      "D"
+     ],
+     "window": "t0-to-t1"
+    },
+    "interchangeability_established": false
+   },
+   "group": "denominator_process",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   }
+  },
+  {
+   "case_id": "P-DEN:false_shared_label_after_attrition",
+   "data": {
+    "audited_comparison": "void-comparison-different-measurands",
+    "census": {
+     "cohort_id": "constructed-fixed-cohort",
+     "decision": {
+      "chosen_by": "constructed-denominator-audit",
+      "criteria": "Preserve procedure, membership, source bindings and independent failure axes.",
+      "rationale": "Test whether numerical coincidence or a shared false label launders a denominator change."
+     },
+     "enrolled": [
+      "A",
+      "B",
+      "C",
+      "D"
+     ],
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-census",
+       "locator": "denominator_process:fixture_census"
+      }
+     ],
+     "outcome_members": [
+      "A",
+      "B"
+     ],
+     "surviving": [
+      "A",
+      "B"
+     ],
+     "window": "t1-to-t2"
+    },
+    "interchangeability_established": false
+   },
+   "group": "denominator_process",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   }
+  },
+  {
+   "case_id": "P-DEN:both_labels_wrong_same_actual_policy",
+   "data": {
+    "audited_comparison": "comparison-withheld",
+    "census": {
+     "cohort_id": "constructed-fixed-cohort",
+     "decision": {
+      "chosen_by": "constructed-denominator-audit",
+      "criteria": "Preserve procedure, membership, source bindings and independent failure axes.",
+      "rationale": "Test whether numerical coincidence or a shared false label launders a denominator change."
+     },
+     "enrolled": [
+      "A",
+      "B",
+      "C",
+      "D"
+     ],
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-census",
+       "locator": "denominator_process:fixture_census"
+      }
+     ],
+     "outcome_members": [
+      "A",
+      "B"
+     ],
+     "surviving": [
+      "A",
+      "B"
+     ],
+     "window": "t1-to-t2"
+    },
+    "interchangeability_established": false
+   },
+   "group": "denominator_process",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   }
+  },
+  {
+   "case_id": "P-DEN:same_policy_equivalent_ratio_route",
+   "data": {
+    "audited_comparison": "declared-point-comparison",
+    "census": {
+     "cohort_id": "constructed-fixed-cohort",
+     "decision": {
+      "chosen_by": "constructed-denominator-audit",
+      "criteria": "Preserve procedure, membership, source bindings and independent failure axes.",
+      "rationale": "Test whether numerical coincidence or a shared false label launders a denominator change."
+     },
+     "enrolled": [
+      "A",
+      "B",
+      "C",
+      "D"
+     ],
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-census",
+       "locator": "denominator_process:fixture_census"
+      }
+     ],
+     "outcome_members": [
+      "A",
+      "B"
+     ],
+     "surviving": [
+      "A",
+      "B"
+     ],
+     "window": "t1-to-t2"
+    },
+    "interchangeability_established": false
+   },
+   "group": "denominator_process",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   }
+  },
+  {
+   "case_id": "P-DEN:survivor_policy_equivalent_ratio_route",
+   "data": {
+    "audited_comparison": "declared-point-comparison",
+    "census": {
+     "cohort_id": "constructed-fixed-cohort",
+     "decision": {
+      "chosen_by": "constructed-denominator-audit",
+      "criteria": "Preserve procedure, membership, source bindings and independent failure axes.",
+      "rationale": "Test whether numerical coincidence or a shared false label launders a denominator change."
+     },
+     "enrolled": [
+      "A",
+      "B",
+      "C",
+      "D"
+     ],
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-census",
+       "locator": "denominator_process:fixture_census"
+      }
+     ],
+     "outcome_members": [
+      "A",
+      "B"
+     ],
+     "surviving": [
+      "A",
+      "B"
+     ],
+     "window": "t1-to-t2"
+    },
+    "interchangeability_established": false
+   },
+   "group": "denominator_process",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   }
+  },
+  {
+   "case_id": "P-DEN:both_survivor_memberships_unknown",
+   "data": {
+    "audited_comparison": "comparison-withheld",
+    "census": {
+     "cohort_id": "constructed-fixed-cohort",
+     "decision": {
+      "chosen_by": "constructed-denominator-audit",
+      "criteria": "Preserve procedure, membership, source bindings and independent failure axes.",
+      "rationale": "Test whether numerical coincidence or a shared false label launders a denominator change."
+     },
+     "enrolled": [
+      "A",
+      "B",
+      "C",
+      "D"
+     ],
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-census",
+       "locator": "denominator_process:fixture_census"
+      }
+     ],
+     "outcome_members": [
+      "A",
+      "B"
+     ],
+     "surviving": null,
+     "window": "t0-to-t1"
+    },
+    "interchangeability_established": false
+   },
+   "group": "denominator_process",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    }
+   }
+  },
+  {
+   "case_id": "P-DEN:consistent_initial_trace_broader_context_still_unknown",
+   "data": {
+    "audited_comparison": "comparison-withheld",
+    "census": {
+     "cohort_id": "constructed-fixed-cohort",
+     "decision": {
+      "chosen_by": "constructed-denominator-audit",
+      "criteria": "Preserve procedure, membership, source bindings and independent failure axes.",
+      "rationale": "Test whether numerical coincidence or a shared false label launders a denominator change."
+     },
+     "enrolled": [
+      "A",
+      "B",
+      "C",
+      "D"
+     ],
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-census",
+       "locator": "denominator_process:fixture_census"
+      }
+     ],
+     "outcome_members": [
+      "A",
+      "B"
+     ],
+     "surviving": null,
+     "window": "t0-to-t1"
+    },
+    "interchangeability_established": false
+   },
+   "group": "denominator_process",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    }
+   }
+  },
+  {
+   "case_id": "P-DEN:explicitly_empty_survivor_denominator",
+   "data": {
+    "audited_comparison": "comparison-withheld",
+    "census": {
+     "cohort_id": "constructed-fixed-cohort",
+     "decision": {
+      "chosen_by": "constructed-denominator-audit",
+      "criteria": "Preserve procedure, membership, source bindings and independent failure axes.",
+      "rationale": "Test whether numerical coincidence or a shared false label launders a denominator change."
+     },
+     "enrolled": [
+      "A",
+      "B",
+      "C",
+      "D"
+     ],
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-census",
+       "locator": "denominator_process:fixture_census"
+      }
+     ],
+     "outcome_members": [],
+     "surviving": [],
+     "window": "t0-to-t1"
+    },
+    "interchangeability_established": false
+   },
+   "group": "denominator_process",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    }
+   }
+  },
+  {
+   "case_id": "P-DEN:equal_counts_include_unenrolled_members",
+   "data": {
+    "audited_comparison": "void-comparison-different-measurands",
+    "census": {
+     "cohort_id": "constructed-fixed-cohort",
+     "decision": {
+      "chosen_by": "constructed-denominator-audit",
+      "criteria": "Preserve procedure, membership, source bindings and independent failure axes.",
+      "rationale": "Test whether numerical coincidence or a shared false label launders a denominator change."
+     },
+     "enrolled": [
+      "A",
+      "B",
+      "C",
+      "D"
+     ],
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-census",
+       "locator": "denominator_process:fixture_census"
+      }
+     ],
+     "outcome_members": [
+      "A",
+      "B"
+     ],
+     "surviving": [
+      "A",
+      "B",
+      "X",
+      "Y"
+     ],
+     "window": "t0-to-t1"
+    },
+    "interchangeability_established": false
+   },
+   "group": "denominator_process",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "untested",
+     "physical": "untested"
+    }
+   }
+  },
+  {
+   "case_id": "P-DEN:survivor_count_claim_disagrees_with_membership",
+   "data": {
+    "audited_comparison": "void-comparison-different-measurands",
+    "census": {
+     "cohort_id": "constructed-fixed-cohort",
+     "decision": {
+      "chosen_by": "constructed-denominator-audit",
+      "criteria": "Preserve procedure, membership, source bindings and independent failure axes.",
+      "rationale": "Test whether numerical coincidence or a shared false label launders a denominator change."
+     },
+     "enrolled": [
+      "A",
+      "B",
+      "C",
+      "D"
+     ],
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-census",
+       "locator": "denominator_process:fixture_census"
+      }
+     ],
+     "outcome_members": [
+      "A",
+      "B"
+     ],
+     "surviving": [
+      "A",
+      "B"
+     ],
+     "window": "t1-to-t2"
+    },
+    "interchangeability_established": false
+   },
+   "group": "denominator_process",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   }
+  },
+  {
+   "case_id": "P-MEAN:broad_linear_control",
+   "data": {
+    "audited_point_difference": 0.0,
+    "conclusion": "purpose-preserved-in-constructed-case",
+    "question": {
+     "conditions": [
+      "constructed dimensionless exact weighted atoms",
+      "finite-window marginal only"
+     ],
+     "decision": {
+      "chosen_by": "constructed-distribution-mean-audit",
+      "criteria": "Scope the operation before evaluation; retain source atoms, weights, information loss and unresolved conditions.",
+      "rationale": "Determine whether replacing a selected finite weighted distribution by its mean preserves a declared target."
+     },
+     "domain": "selected dimensionless domain",
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-definition",
+       "locator": "audits.distribution_mean_process:fixtures"
+      }
+     ],
+     "population": "selected constructed population",
+     "purpose": "weighted mean of the response 2X",
+     "window": "selected finite window W"
+    },
+    "source": {
+     "atoms": [
+      {
+       "value": 0,
+       "weight": 1
+      },
+      {
+       "value": 2,
+       "weight": 1
+      }
+     ],
+     "decision": {
+      "chosen_by": "constructed-distribution-mean-audit",
+      "criteria": "Scope the operation before evaluation; retain source atoms, weights, information loss and unresolved conditions.",
+      "rationale": "Determine whether replacing a selected finite weighted distribution by its mean preserves a declared target."
+     },
+     "domain": "selected dimensionless domain",
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-definition",
+       "locator": "audits.distribution_mean_process:fixtures"
+      }
+     ],
+     "population": "selected constructed population",
+     "source_id": "broad",
+     "window": "selected finite window W"
+    },
+    "source_moments": {
+     "m": "1",
+     "p": "1/2",
+     "second": "2",
+     "total_weight": "2",
+     "variance": "1"
+    },
+    "usable_for_selected_target_in_this_case": true
+   },
+   "group": "distribution_mean_process",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   }
+  },
+  {
+   "case_id": "P-MEAN:same_mean_narrow_linear_control",
+   "data": {
+    "audited_point_difference": 0.0,
+    "conclusion": "purpose-preserved-in-constructed-case",
+    "question": {
+     "conditions": [
+      "constructed dimensionless exact weighted atoms",
+      "finite-window marginal only"
+     ],
+     "decision": {
+      "chosen_by": "constructed-distribution-mean-audit",
+      "criteria": "Scope the operation before evaluation; retain source atoms, weights, information loss and unresolved conditions.",
+      "rationale": "Determine whether replacing a selected finite weighted distribution by its mean preserves a declared target."
+     },
+     "domain": "selected dimensionless domain",
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-definition",
+       "locator": "audits.distribution_mean_process:fixtures"
+      }
+     ],
+     "population": "selected constructed population",
+     "purpose": "weighted mean of the response 2X",
+     "window": "selected finite window W"
+    },
+    "source": {
+     "atoms": [
+      {
+       "value": 1,
+       "weight": 1
+      },
+      {
+       "value": 1,
+       "weight": 1
+      }
+     ],
+     "decision": {
+      "chosen_by": "constructed-distribution-mean-audit",
+      "criteria": "Scope the operation before evaluation; retain source atoms, weights, information loss and unresolved conditions.",
+      "rationale": "Determine whether replacing a selected finite weighted distribution by its mean preserves a declared target."
+     },
+     "domain": "selected dimensionless domain",
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-definition",
+       "locator": "audits.distribution_mean_process:fixtures"
+      }
+     ],
+     "population": "selected constructed population",
+     "source_id": "point-at-one",
+     "window": "selected finite window W"
+    },
+    "source_moments": {
+     "m": "1",
+     "p": "1/2",
+     "second": "1",
+     "total_weight": "2",
+     "variance": "0"
+    },
+    "usable_for_selected_target_in_this_case": true
+   },
+   "group": "distribution_mean_process",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   }
+  },
+  {
+   "case_id": "P-MEAN:broad_second_moment_loss",
+   "data": {
+    "audited_point_difference": -1.0,
+    "conclusion": "purpose-information-loss-in-constructed-case",
+    "question": {
+     "conditions": [
+      "constructed dimensionless exact weighted atoms",
+      "finite-window marginal only"
+     ],
+     "decision": {
+      "chosen_by": "constructed-distribution-mean-audit",
+      "criteria": "Scope the operation before evaluation; retain source atoms, weights, information loss and unresolved conditions.",
+      "rationale": "Determine whether replacing a selected finite weighted distribution by its mean preserves a declared target."
+     },
+     "domain": "selected dimensionless domain",
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-definition",
+       "locator": "audits.distribution_mean_process:fixtures"
+      }
+     ],
+     "population": "selected constructed population",
+     "purpose": "weighted mean of the response X squared",
+     "window": "selected finite window W"
+    },
+    "source": {
+     "atoms": [
+      {
+       "value": 0,
+       "weight": 1
+      },
+      {
+       "value": 2,
+       "weight": 1
+      }
+     ],
+     "decision": {
+      "chosen_by": "constructed-distribution-mean-audit",
+      "criteria": "Scope the operation before evaluation; retain source atoms, weights, information loss and unresolved conditions.",
+      "rationale": "Determine whether replacing a selected finite weighted distribution by its mean preserves a declared target."
+     },
+     "domain": "selected dimensionless domain",
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-definition",
+       "locator": "audits.distribution_mean_process:fixtures"
+      }
+     ],
+     "population": "selected constructed population",
+     "source_id": "broad",
+     "window": "selected finite window W"
+    },
+    "source_moments": {
+     "m": "1",
+     "p": "1/2",
+     "second": "2",
+     "total_weight": "2",
+     "variance": "1"
+    },
+    "usable_for_selected_target_in_this_case": false
+   },
+   "group": "distribution_mean_process",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   }
+  },
+  {
+   "case_id": "P-MEAN:same_mean_degenerate_second_moment_coincidence",
+   "data": {
+    "audited_point_difference": 0.0,
+    "conclusion": "purpose-preserved-in-constructed-case",
+    "question": {
+     "conditions": [
+      "constructed dimensionless exact weighted atoms",
+      "finite-window marginal only"
+     ],
+     "decision": {
+      "chosen_by": "constructed-distribution-mean-audit",
+      "criteria": "Scope the operation before evaluation; retain source atoms, weights, information loss and unresolved conditions.",
+      "rationale": "Determine whether replacing a selected finite weighted distribution by its mean preserves a declared target."
+     },
+     "domain": "selected dimensionless domain",
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-definition",
+       "locator": "audits.distribution_mean_process:fixtures"
+      }
+     ],
+     "population": "selected constructed population",
+     "purpose": "weighted mean of the response X squared",
+     "window": "selected finite window W"
+    },
+    "source": {
+     "atoms": [
+      {
+       "value": 1,
+       "weight": 1
+      },
+      {
+       "value": 1,
+       "weight": 1
+      }
+     ],
+     "decision": {
+      "chosen_by": "constructed-distribution-mean-audit",
+      "criteria": "Scope the operation before evaluation; retain source atoms, weights, information loss and unresolved conditions.",
+      "rationale": "Determine whether replacing a selected finite weighted distribution by its mean preserves a declared target."
+     },
+     "domain": "selected dimensionless domain",
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-definition",
+       "locator": "audits.distribution_mean_process:fixtures"
+      }
+     ],
+     "population": "selected constructed population",
+     "source_id": "point-at-one",
+     "window": "selected finite window W"
+    },
+    "source_moments": {
+     "m": "1",
+     "p": "1/2",
+     "second": "1",
+     "total_weight": "2",
+     "variance": "0"
+    },
+    "usable_for_selected_target_in_this_case": true
+   },
+   "group": "distribution_mean_process",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   }
+  },
+  {
+   "case_id": "P-MEAN:unequal_weights_second_moment_loss",
+   "data": {
+    "audited_point_difference": -3.0,
+    "conclusion": "purpose-information-loss-in-constructed-case",
+    "question": {
+     "conditions": [
+      "constructed dimensionless exact weighted atoms",
+      "finite-window marginal only"
+     ],
+     "decision": {
+      "chosen_by": "constructed-distribution-mean-audit",
+      "criteria": "Scope the operation before evaluation; retain source atoms, weights, information loss and unresolved conditions.",
+      "rationale": "Determine whether replacing a selected finite weighted distribution by its mean preserves a declared target."
+     },
+     "domain": "selected dimensionless domain",
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-definition",
+       "locator": "audits.distribution_mean_process:fixtures"
+      }
+     ],
+     "population": "selected constructed population",
+     "purpose": "weighted mean of the response X squared",
+     "window": "selected finite window W"
+    },
+    "source": {
+     "atoms": [
+      {
+       "value": -2,
+       "weight": 1
+      },
+      {
+       "value": 2,
+       "weight": 3
+      }
+     ],
+     "decision": {
+      "chosen_by": "constructed-distribution-mean-audit",
+      "criteria": "Scope the operation before evaluation; retain source atoms, weights, information loss and unresolved conditions.",
+      "rationale": "Determine whether replacing a selected finite weighted distribution by its mean preserves a declared target."
+     },
+     "domain": "selected dimensionless domain",
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-definition",
+       "locator": "audits.distribution_mean_process:fixtures"
+      }
+     ],
+     "population": "selected constructed population",
+     "source_id": "asymmetric",
+     "window": "selected finite window W"
+    },
+    "source_moments": {
+     "m": "1",
+     "p": "1/4",
+     "second": "4",
+     "total_weight": "4",
+     "variance": "3"
+    },
+    "usable_for_selected_target_in_this_case": false
+   },
+   "group": "distribution_mean_process",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   }
+  },
+  {
+   "case_id": "P-MEAN:zero_mean_is_not_zero_response",
+   "data": {
+    "audited_point_difference": -1.0,
+    "conclusion": "purpose-information-loss-in-constructed-case",
+    "question": {
+     "conditions": [
+      "constructed dimensionless exact weighted atoms",
+      "finite-window marginal only"
+     ],
+     "decision": {
+      "chosen_by": "constructed-distribution-mean-audit",
+      "criteria": "Scope the operation before evaluation; retain source atoms, weights, information loss and unresolved conditions.",
+      "rationale": "Determine whether replacing a selected finite weighted distribution by its mean preserves a declared target."
+     },
+     "domain": "selected dimensionless domain",
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-definition",
+       "locator": "audits.distribution_mean_process:fixtures"
+      }
+     ],
+     "population": "selected constructed population",
+     "purpose": "weighted mean of the response X squared",
+     "window": "selected finite window W"
+    },
+    "source": {
+     "atoms": [
+      {
+       "value": -1,
+       "weight": 1
+      },
+      {
+       "value": 1,
+       "weight": 1
+      }
+     ],
+     "decision": {
+      "chosen_by": "constructed-distribution-mean-audit",
+      "criteria": "Scope the operation before evaluation; retain source atoms, weights, information loss and unresolved conditions.",
+      "rationale": "Determine whether replacing a selected finite weighted distribution by its mean preserves a declared target."
+     },
+     "domain": "selected dimensionless domain",
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-definition",
+       "locator": "audits.distribution_mean_process:fixtures"
+      }
+     ],
+     "population": "selected constructed population",
+     "source_id": "zero-mean",
+     "window": "selected finite window W"
+    },
+    "source_moments": {
+     "m": "0",
+     "p": "1/2",
+     "second": "1",
+     "total_weight": "2",
+     "variance": "1"
+    },
+    "usable_for_selected_target_in_this_case": false
+   },
+   "group": "distribution_mean_process",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   }
+  },
+  {
+   "case_id": "P-MEAN:zero_point_is_not_physical_absence",
+   "data": {
+    "audited_point_difference": 0.0,
+    "conclusion": "purpose-preserved-in-constructed-case",
+    "question": {
+     "conditions": [
+      "constructed dimensionless exact weighted atoms",
+      "finite-window marginal only"
+     ],
+     "decision": {
+      "chosen_by": "constructed-distribution-mean-audit",
+      "criteria": "Scope the operation before evaluation; retain source atoms, weights, information loss and unresolved conditions.",
+      "rationale": "Determine whether replacing a selected finite weighted distribution by its mean preserves a declared target."
+     },
+     "domain": "selected dimensionless domain",
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-definition",
+       "locator": "audits.distribution_mean_process:fixtures"
+      }
+     ],
+     "population": "selected constructed population",
+     "purpose": "weighted mean of the response X squared",
+     "window": "selected finite window W"
+    },
+    "source": {
+     "atoms": [
+      {
+       "value": 0,
+       "weight": 1
+      },
+      {
+       "value": 0,
+       "weight": 1
+      }
+     ],
+     "decision": {
+      "chosen_by": "constructed-distribution-mean-audit",
+      "criteria": "Scope the operation before evaluation; retain source atoms, weights, information loss and unresolved conditions.",
+      "rationale": "Determine whether replacing a selected finite weighted distribution by its mean preserves a declared target."
+     },
+     "domain": "selected dimensionless domain",
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-definition",
+       "locator": "audits.distribution_mean_process:fixtures"
+      }
+     ],
+     "population": "selected constructed population",
+     "source_id": "zero-point",
+     "window": "selected finite window W"
+    },
+    "source_moments": {
+     "m": "0",
+     "p": "1/2",
+     "second": "0",
+     "total_weight": "2",
+     "variance": "0"
+    },
+    "usable_for_selected_target_in_this_case": true
+   },
+   "group": "distribution_mean_process",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   }
+  },
+  {
+   "case_id": "P-MEAN:purpose_unknown_not_defaulted",
+   "data": {
+    "audited_point_difference": null,
+    "conclusion": "determination-withheld",
+    "question": {
+     "conditions": [
+      "constructed dimensionless exact weighted atoms",
+      "finite-window marginal only"
+     ],
+     "decision": {
+      "chosen_by": "constructed-distribution-mean-audit",
+      "criteria": "Scope the operation before evaluation; retain source atoms, weights, information loss and unresolved conditions.",
+      "rationale": "Determine whether replacing a selected finite weighted distribution by its mean preserves a declared target."
+     },
+     "domain": "selected dimensionless domain",
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-definition",
+       "locator": "audits.distribution_mean_process:fixtures"
+      }
+     ],
+     "population": "selected constructed population",
+     "purpose": null,
+     "window": "selected finite window W"
+    },
+    "source": {
+     "atoms": [
+      {
+       "value": 0,
+       "weight": 1
+      },
+      {
+       "value": 2,
+       "weight": 1
+      }
+     ],
+     "decision": {
+      "chosen_by": "constructed-distribution-mean-audit",
+      "criteria": "Scope the operation before evaluation; retain source atoms, weights, information loss and unresolved conditions.",
+      "rationale": "Determine whether replacing a selected finite weighted distribution by its mean preserves a declared target."
+     },
+     "domain": "selected dimensionless domain",
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-definition",
+       "locator": "audits.distribution_mean_process:fixtures"
+      }
+     ],
+     "population": "selected constructed population",
+     "source_id": "broad",
+     "window": "selected finite window W"
+    },
+    "source_moments": {
+     "m": "1",
+     "p": "1/2",
+     "second": "2",
+     "total_weight": "2",
+     "variance": "1"
+    },
+    "usable_for_selected_target_in_this_case": null
+   },
+   "group": "distribution_mean_process",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    }
+   }
+  },
+  {
+   "case_id": "P-MEAN:window_unknown_not_defaulted",
+   "data": {
+    "audited_point_difference": null,
+    "conclusion": "determination-withheld",
+    "question": {
+     "conditions": [
+      "constructed dimensionless exact weighted atoms",
+      "finite-window marginal only"
+     ],
+     "decision": {
+      "chosen_by": "constructed-distribution-mean-audit",
+      "criteria": "Scope the operation before evaluation; retain source atoms, weights, information loss and unresolved conditions.",
+      "rationale": "Determine whether replacing a selected finite weighted distribution by its mean preserves a declared target."
+     },
+     "domain": "selected dimensionless domain",
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-definition",
+       "locator": "audits.distribution_mean_process:fixtures"
+      }
+     ],
+     "population": "selected constructed population",
+     "purpose": "weighted mean of the response X squared",
+     "window": null
+    },
+    "source": {
+     "atoms": [
+      {
+       "value": 0,
+       "weight": 1
+      },
+      {
+       "value": 2,
+       "weight": 1
+      }
+     ],
+     "decision": {
+      "chosen_by": "constructed-distribution-mean-audit",
+      "criteria": "Scope the operation before evaluation; retain source atoms, weights, information loss and unresolved conditions.",
+      "rationale": "Determine whether replacing a selected finite weighted distribution by its mean preserves a declared target."
+     },
+     "domain": "selected dimensionless domain",
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-definition",
+       "locator": "audits.distribution_mean_process:fixtures"
+      }
+     ],
+     "population": "selected constructed population",
+     "source_id": "broad",
+     "window": "selected finite window W"
+    },
+    "source_moments": {
+     "m": "1",
+     "p": "1/2",
+     "second": "2",
+     "total_weight": "2",
+     "variance": "1"
+    },
+    "usable_for_selected_target_in_this_case": null
+   },
+   "group": "distribution_mean_process",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    }
+   }
+  },
+  {
+   "case_id": "P-MEAN:population_mismatch_preserved",
+   "data": {
+    "audited_point_difference": null,
+    "conclusion": "determination-withheld",
+    "question": {
+     "conditions": [
+      "constructed dimensionless exact weighted atoms",
+      "finite-window marginal only"
+     ],
+     "decision": {
+      "chosen_by": "constructed-distribution-mean-audit",
+      "criteria": "Scope the operation before evaluation; retain source atoms, weights, information loss and unresolved conditions.",
+      "rationale": "Determine whether replacing a selected finite weighted distribution by its mean preserves a declared target."
+     },
+     "domain": "selected dimensionless domain",
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-definition",
+       "locator": "audits.distribution_mean_process:fixtures"
+      }
+     ],
+     "population": "another selected population",
+     "purpose": "weighted mean of the response X squared",
+     "window": "selected finite window W"
+    },
+    "source": {
+     "atoms": [
+      {
+       "value": 0,
+       "weight": 1
+      },
+      {
+       "value": 2,
+       "weight": 1
+      }
+     ],
+     "decision": {
+      "chosen_by": "constructed-distribution-mean-audit",
+      "criteria": "Scope the operation before evaluation; retain source atoms, weights, information loss and unresolved conditions.",
+      "rationale": "Determine whether replacing a selected finite weighted distribution by its mean preserves a declared target."
+     },
+     "domain": "selected dimensionless domain",
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-definition",
+       "locator": "audits.distribution_mean_process:fixtures"
+      }
+     ],
+     "population": "selected constructed population",
+     "source_id": "broad",
+     "window": "selected finite window W"
+    },
+    "source_moments": {
+     "m": "1",
+     "p": "1/2",
+     "second": "2",
+     "total_weight": "2",
+     "variance": "1"
+    },
+    "usable_for_selected_target_in_this_case": null
+   },
+   "group": "distribution_mean_process",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "untested",
+     "physical": "untested"
+    }
+   }
+  },
+  {
+   "case_id": "P-MEAN:unknown_weight_not_zero",
+   "data": {
+    "audited_point_difference": null,
+    "conclusion": "determination-withheld",
+    "question": {
+     "conditions": [
+      "constructed dimensionless exact weighted atoms",
+      "finite-window marginal only"
+     ],
+     "decision": {
+      "chosen_by": "constructed-distribution-mean-audit",
+      "criteria": "Scope the operation before evaluation; retain source atoms, weights, information loss and unresolved conditions.",
+      "rationale": "Determine whether replacing a selected finite weighted distribution by its mean preserves a declared target."
+     },
+     "domain": "selected dimensionless domain",
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-definition",
+       "locator": "audits.distribution_mean_process:fixtures"
+      }
+     ],
+     "population": "selected constructed population",
+     "purpose": "weighted mean of the response X squared",
+     "window": "selected finite window W"
+    },
+    "source": {
+     "atoms": [
+      {
+       "value": 0,
+       "weight": 1
+      },
+      {
+       "value": 2,
+       "weight": null
+      }
+     ],
+     "decision": {
+      "chosen_by": "constructed-distribution-mean-audit",
+      "criteria": "Scope the operation before evaluation; retain source atoms, weights, information loss and unresolved conditions.",
+      "rationale": "Determine whether replacing a selected finite weighted distribution by its mean preserves a declared target."
+     },
+     "domain": "selected dimensionless domain",
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-definition",
+       "locator": "audits.distribution_mean_process:fixtures"
+      }
+     ],
+     "population": "selected constructed population",
+     "source_id": "unknown-weight",
+     "window": "selected finite window W"
+    },
+    "source_moments": {
+     "m": null,
+     "p": null,
+     "second": null,
+     "total_weight": null,
+     "variance": null
+    },
+    "usable_for_selected_target_in_this_case": null
+   },
+   "group": "distribution_mean_process",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    }
+   }
+  },
+  {
+   "case_id": "P-MEAN:zero_total_mass_undefined",
+   "data": {
+    "audited_point_difference": null,
+    "conclusion": "determination-withheld",
+    "question": {
+     "conditions": [
+      "constructed dimensionless exact weighted atoms",
+      "finite-window marginal only"
+     ],
+     "decision": {
+      "chosen_by": "constructed-distribution-mean-audit",
+      "criteria": "Scope the operation before evaluation; retain source atoms, weights, information loss and unresolved conditions.",
+      "rationale": "Determine whether replacing a selected finite weighted distribution by its mean preserves a declared target."
+     },
+     "domain": "selected dimensionless domain",
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-definition",
+       "locator": "audits.distribution_mean_process:fixtures"
+      }
+     ],
+     "population": "selected constructed population",
+     "purpose": "weighted mean of the response X squared",
+     "window": "selected finite window W"
+    },
+    "source": {
+     "atoms": [
+      {
+       "value": 0,
+       "weight": 0
+      },
+      {
+       "value": 2,
+       "weight": 0
+      }
+     ],
+     "decision": {
+      "chosen_by": "constructed-distribution-mean-audit",
+      "criteria": "Scope the operation before evaluation; retain source atoms, weights, information loss and unresolved conditions.",
+      "rationale": "Determine whether replacing a selected finite weighted distribution by its mean preserves a declared target."
+     },
+     "domain": "selected dimensionless domain",
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-definition",
+       "locator": "audits.distribution_mean_process:fixtures"
+      }
+     ],
+     "population": "selected constructed population",
+     "source_id": "empty-mass",
+     "window": "selected finite window W"
+    },
+    "source_moments": {
+     "m": null,
+     "p": null,
+     "second": null,
+     "total_weight": "0",
+     "variance": null
+    },
+    "usable_for_selected_target_in_this_case": null
+   },
+   "group": "distribution_mean_process",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "untested",
+     "physical": "untested"
+    }
+   }
+  },
+  {
+   "case_id": "P-MEAN:false_mean_derivation",
+   "data": {
+    "audited_point_difference": null,
+    "conclusion": "determination-withheld",
+    "question": {
+     "conditions": [
+      "constructed dimensionless exact weighted atoms",
+      "finite-window marginal only"
+     ],
+     "decision": {
+      "chosen_by": "constructed-distribution-mean-audit",
+      "criteria": "Scope the operation before evaluation; retain source atoms, weights, information loss and unresolved conditions.",
+      "rationale": "Determine whether replacing a selected finite weighted distribution by its mean preserves a declared target."
+     },
+     "domain": "selected dimensionless domain",
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-definition",
+       "locator": "audits.distribution_mean_process:fixtures"
+      }
+     ],
+     "population": "selected constructed population",
+     "purpose": "weighted mean of the response X squared",
+     "window": "selected finite window W"
+    },
+    "source": {
+     "atoms": [
+      {
+       "value": 0,
+       "weight": 1
+      },
+      {
+       "value": 2,
+       "weight": 1
+      }
+     ],
+     "decision": {
+      "chosen_by": "constructed-distribution-mean-audit",
+      "criteria": "Scope the operation before evaluation; retain source atoms, weights, information loss and unresolved conditions.",
+      "rationale": "Determine whether replacing a selected finite weighted distribution by its mean preserves a declared target."
+     },
+     "domain": "selected dimensionless domain",
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-definition",
+       "locator": "audits.distribution_mean_process:fixtures"
+      }
+     ],
+     "population": "selected constructed population",
+     "source_id": "broad",
+     "window": "selected finite window W"
+    },
+    "source_moments": {
+     "m": "1",
+     "p": "1/2",
+     "second": "2",
+     "total_weight": "2",
+     "variance": "1"
+    },
+    "usable_for_selected_target_in_this_case": null
+   },
+   "group": "distribution_mean_process",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   }
+  },
+  {
+   "case_id": "P-MEAN:unsupported_equivalent_expression_withheld",
+   "data": {
+    "audited_point_difference": null,
+    "conclusion": "determination-withheld",
+    "question": {
+     "conditions": [
+      "constructed dimensionless exact weighted atoms",
+      "finite-window marginal only"
+     ],
+     "decision": {
+      "chosen_by": "constructed-distribution-mean-audit",
+      "criteria": "Scope the operation before evaluation; retain source atoms, weights, information loss and unresolved conditions.",
+      "rationale": "Determine whether replacing a selected finite weighted distribution by its mean preserves a declared target."
+     },
+     "domain": "selected dimensionless domain",
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-definition",
+       "locator": "audits.distribution_mean_process:fixtures"
+      }
+     ],
+     "population": "selected constructed population",
+     "purpose": "weighted mean of the response 2X",
+     "window": "selected finite window W"
+    },
+    "source": {
+     "atoms": [
+      {
+       "value": 0,
+       "weight": 1
+      },
+      {
+       "value": 2,
+       "weight": 1
+      }
+     ],
+     "decision": {
+      "chosen_by": "constructed-distribution-mean-audit",
+      "criteria": "Scope the operation before evaluation; retain source atoms, weights, information loss and unresolved conditions.",
+      "rationale": "Determine whether replacing a selected finite weighted distribution by its mean preserves a declared target."
+     },
+     "domain": "selected dimensionless domain",
+     "evidence": [
+      {
+       "digest": null,
+       "kind": "constructed-definition",
+       "locator": "audits.distribution_mean_process:fixtures"
+      }
+     ],
+     "population": "selected constructed population",
+     "source_id": "broad",
+     "window": "selected finite window W"
+    },
+    "source_moments": {
+     "m": "1",
+     "p": "1/2",
+     "second": "2",
+     "total_weight": "2",
+     "variance": "1"
+    },
+    "usable_for_selected_target_in_this_case": null
+   },
+   "group": "distribution_mean_process",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    }
+   }
+  },
+  {
+   "case_id": "P-MEAS:same_identity_different_route",
+   "data": {
+    "differing_fields": [],
+    "identity": "same-declared-measurand",
+    "previous_output": {
+     "name": "y",
+     "uncertainty": null,
+     "unit": "toy-energy-unit",
+     "value": 2.0
+    },
+    "replacement_output": {
+     "name": "y",
+     "uncertainty": null,
+     "unit": "toy-energy-unit",
+     "value": 2.0
+    },
+    "state": "declared-point-comparison"
+   },
+   "group": "measurand",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "state": "declared-point-comparison"
+   }
+  },
+  {
+   "case_id": "P-MEAS:different_quantity",
+   "data": {
+    "differing_fields": [
+     "quantity"
+    ],
+    "identity": "different-declared-measurands",
+    "previous_output": {
+     "name": "y",
+     "uncertainty": null,
+     "unit": "toy-energy-unit",
+     "value": 2.0
+    },
+    "replacement_output": {
+     "name": "y",
+     "uncertainty": null,
+     "unit": "toy-energy-unit",
+     "value": 2.0
+    },
+    "state": "void-comparison-different-measurands"
+   },
+   "group": "measurand",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "state": "void-comparison-different-measurands"
+   }
+  },
+  {
+   "case_id": "P-MEAS:different_object",
+   "data": {
+    "differing_fields": [
+     "object_of"
+    ],
+    "identity": "different-declared-measurands",
+    "previous_output": {
+     "name": "y",
+     "uncertainty": null,
+     "unit": "toy-energy-unit",
+     "value": 2.0
+    },
+    "replacement_output": {
+     "name": "y",
+     "uncertainty": null,
+     "unit": "toy-energy-unit",
+     "value": 2.0
+    },
+    "state": "void-comparison-different-measurands"
+   },
+   "group": "measurand",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "state": "void-comparison-different-measurands"
+   }
+  },
+  {
+   "case_id": "P-MEAS:different_normalizer",
+   "data": {
+    "differing_fields": [
+     "normalizer"
+    ],
+    "identity": "different-declared-measurands",
+    "previous_output": {
+     "name": "y",
+     "uncertainty": null,
+     "unit": "toy-energy-unit",
+     "value": 2.0
+    },
+    "replacement_output": {
+     "name": "y",
+     "uncertainty": null,
+     "unit": "toy-energy-unit",
+     "value": 2.0
+    },
+    "state": "void-comparison-different-measurands"
+   },
+   "group": "measurand",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "state": "void-comparison-different-measurands"
+   }
+  },
+  {
+   "case_id": "P-MEAS:different_population",
+   "data": {
+    "differing_fields": [
+     "population"
+    ],
+    "identity": "different-declared-measurands",
+    "previous_output": {
+     "name": "y",
+     "uncertainty": null,
+     "unit": "toy-energy-unit",
+     "value": 2.0
+    },
+    "replacement_output": {
+     "name": "y",
+     "uncertainty": null,
+     "unit": "toy-energy-unit",
+     "value": 2.0
+    },
+    "state": "void-comparison-different-measurands"
+   },
+   "group": "measurand",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "state": "void-comparison-different-measurands"
+   }
+  },
+  {
+   "case_id": "P-MEAS:different_window",
+   "data": {
+    "differing_fields": [
+     "time_window"
+    ],
+    "identity": "different-declared-measurands",
+    "previous_output": {
+     "name": "y",
+     "uncertainty": null,
+     "unit": "toy-energy-unit",
+     "value": 2.0
+    },
+    "replacement_output": {
+     "name": "y",
+     "uncertainty": null,
+     "unit": "toy-energy-unit",
+     "value": 2.0
+    },
+    "state": "void-comparison-different-measurands"
+   },
+   "group": "measurand",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "state": "void-comparison-different-measurands"
+   }
+  },
+  {
+   "case_id": "P-MEAS:different_spatial_scope",
+   "data": {
+    "differing_fields": [
+     "spatial_scope"
+    ],
+    "identity": "different-declared-measurands",
+    "previous_output": {
+     "name": "y",
+     "uncertainty": null,
+     "unit": "toy-energy-unit",
+     "value": 2.0
+    },
+    "replacement_output": {
+     "name": "y",
+     "uncertainty": null,
+     "unit": "toy-energy-unit",
+     "value": 2.0
+    },
+    "state": "void-comparison-different-measurands"
+   },
+   "group": "measurand",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "state": "void-comparison-different-measurands"
+   }
+  },
+  {
+   "case_id": "P-MEAS:different_reference",
+   "data": {
+    "differing_fields": [
+     "reference_state"
+    ],
+    "identity": "different-declared-measurands",
+    "previous_output": {
+     "name": "y",
+     "uncertainty": null,
+     "unit": "toy-energy-unit",
+     "value": 2.0
+    },
+    "replacement_output": {
+     "name": "y",
+     "uncertainty": null,
+     "unit": "toy-energy-unit",
+     "value": 2.0
+    },
+    "state": "void-comparison-different-measurands"
+   },
+   "group": "measurand",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "state": "void-comparison-different-measurands"
+   }
+  },
+  {
+   "case_id": "P-MEAS:missing_normalizer",
+   "data": {
+    "differing_fields": [],
+    "identity": "measurand-identity-unknown",
+    "previous_output": {
+     "name": "y",
+     "uncertainty": null,
+     "unit": "toy-energy-unit",
+     "value": 2.0
+    },
+    "replacement_output": {
+     "name": "y",
+     "uncertainty": null,
+     "unit": "toy-energy-unit",
+     "value": 2.0
+    },
+    "state": "comparison-withheld"
+   },
+   "group": "measurand",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "state": "comparison-withheld"
+   }
+  },
+  {
+   "case_id": "P-MEAS:same_identity_missing_route",
+   "data": {
+    "differing_fields": [],
+    "identity": "same-declared-measurand",
+    "previous_output": {
+     "name": "y",
+     "uncertainty": null,
+     "unit": "toy-energy-unit",
+     "value": 2.0
+    },
+    "replacement_output": {
+     "name": "y",
+     "uncertainty": null,
+     "unit": "toy-energy-unit",
+     "value": 2.0
+    },
+    "state": "comparison-withheld"
+   },
+   "group": "measurand",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "state": "comparison-withheld"
+   }
+  },
+  {
+   "case_id": "P-MEAS:known_mismatch_and_missing_field",
+   "data": {
+    "differing_fields": [
+     "object_of"
+    ],
+    "identity": "different-declared-measurands",
+    "previous_output": {
+     "name": "y",
+     "uncertainty": null,
+     "unit": "toy-energy-unit",
+     "value": 2.0
+    },
+    "replacement_output": {
+     "name": "y",
+     "uncertainty": null,
+     "unit": "toy-energy-unit",
+     "value": 2.0
+    },
+    "state": "void-comparison-different-measurands"
+   },
+   "group": "measurand",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "state": "void-comparison-different-measurands"
+   }
+  },
+  {
+   "case_id": "P-MEAS:both_legacy_declarations_missing",
+   "data": {
+    "differing_fields": [],
+    "identity": "measurand-identity-unknown",
+    "previous_output": {
+     "name": "y",
+     "uncertainty": null,
+     "unit": "toy-energy-unit",
+     "value": 2.0
+    },
+    "replacement_output": {
+     "name": "y",
+     "uncertainty": null,
+     "unit": "toy-energy-unit",
+     "value": 2.0
+    },
+    "state": "comparison-withheld"
+   },
+   "group": "measurand",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "state": "comparison-withheld"
+   }
+  },
+  {
+   "case_id": "P-MEAS:renamed_output_same_identity",
+   "data": {
+    "differing_fields": [],
+    "identity": "same-declared-measurand",
+    "previous_output": {
+     "name": "y",
+     "uncertainty": null,
+     "unit": "toy-energy-unit",
+     "value": 2.0
+    },
+    "replacement_output": {
+     "name": "renamed_response",
+     "uncertainty": null,
+     "unit": "toy-energy-unit",
+     "value": 2.0
+    },
+    "state": "declared-point-comparison"
+   },
+   "group": "measurand",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "state": "declared-point-comparison"
+   }
+  },
+  {
+   "case_id": "P-MEAS:same_identity_different_point_value",
+   "data": {
+    "differing_fields": [],
+    "identity": "same-declared-measurand",
+    "previous_output": {
+     "name": "y",
+     "uncertainty": null,
+     "unit": "toy-energy-unit",
+     "value": 2.0
+    },
+    "replacement_output": {
+     "name": "y",
+     "uncertainty": null,
+     "unit": "toy-energy-unit",
+     "value": 4.0
+    },
+    "state": "declared-point-comparison"
+   },
+   "group": "measurand",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "ok",
+     "physical": "untested"
+    },
+    "state": "declared-point-comparison"
+   }
+  },
+  {
+   "case_id": "P-MEAS:failed_known_answer_not_comparable",
+   "data": {
+    "differing_fields": [],
+    "identity": "same-declared-measurand",
+    "previous_output": {
+     "name": "y",
+     "uncertainty": null,
+     "unit": "toy-energy-unit",
+     "value": 2.0
+    },
+    "replacement_output": null,
+    "state": "comparison-withheld"
+   },
+   "group": "measurand",
+   "kind": "audit_case",
+   "perplexity": {
+    "axes": {
+     "determination": "indeterminate",
+     "instrument": "failed",
+     "physical": "untested"
+    },
+    "state": "comparison-withheld"
+   }
+  },
+  {
+   "case_id": "P-XSYS:equation_diagnostics_never_transfer_between_classes",
+   "data": {
+    "classes": [
+     "thermal-storage",
+     "electrical-storage",
+     "mechanical-storage",
+     "porous-connectivity-surrogate",
+     "lineage-reproduction-surrogate"
+    ],
+    "permutations": 20,
+    "test": "test_equation_diagnostics_never_transfer_between_classes"
+   },
+   "description": "diagnostics (known-answer/null) earned in one system class presented in another",
+   "group": "cross_system",
+   "kind": "guard_test",
+   "perplexity": {
+    "axes": {
+     "determination": "failed",
+     "instrument": "untested"
+    },
+    "ran": "PASS"
+   }
+  },
+  {
+   "case_id": "P-XSYS:calibration_cannot_transfer_even_between_dimensionless_surrogates",
+   "data": {
+    "classes": [
+     "thermal-storage",
+     "electrical-storage",
+     "mechanical-storage",
+     "porous-connectivity-surrogate",
+     "lineage-reproduction-surrogate"
+    ],
+    "permutations": 20,
+    "test": "test_calibration_cannot_transfer_even_between_dimensionless_surrogates"
+   },
+   "description": "sensitivity calibration from one class used for an absence claim in another",
+   "group": "cross_system",
+   "kind": "guard_test",
+   "perplexity": {
+    "axes": {
+     "determination": "indeterminate",
+     "physical": "untested"
+    },
+    "ran": "PASS"
+   }
+  }
+ ],
+ "rev": "b9dbdeff48c23c44b20dff3c01b4304d3face54a",
+ "source": "study-aperture/experimental/playground"
+}
