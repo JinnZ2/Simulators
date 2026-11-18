@@ -1,0 +1,68 @@
+{
+ "date": "2026-11-18",
+ "status": "RAW_PRESERVED_WITH_SEPARATE_NOTES",
+ "provenance_note": "Texts and images attached to a Manus session by the repository owner. Hashes identify received bytes; they do not authenticate the source, the model named in the texts, or the dates inside them (both texts are dated 2026-11-19).",
+ "as_received_originals": {
+  "report_parts_A_B_C.txt": "Pasted_content_76.txt",
+  "one_page_precursor_note.md": "Pasted_content_77.txt",
+  "ipython_632f71c4a62c4dcb.png": "member of OKComputer_谓词分配与守卫分析.zip",
+  "precursor_fraction_sweep.png": "member of OKComputer_谓词分配与守卫分析.zip"
+ },
+ "archive_not_kept": {
+  "name": "OKComputer_谓词分配与守卫分析.zip",
+  "bytes": 282175,
+  "sha256": "8c8cde137bb00b3b4c04b9251286f9724e0633afe38a2e9b7100967a0cbe047f"
+ },
+ "files": [
+  {
+   "path": "WORKING_NOTES.md",
+   "bytes": 12794,
+   "sha256": "ec26b55c5f56ddf7b24b0251b6b05c83ff8205792fd0b033ceee91f3172f654a"
+  },
+  {
+   "path": "as_received/ipython_632f71c4a62c4dcb.png",
+   "bytes": 114141,
+   "sha256": "9d5ef10bd187fbd89032655b20898e677fe4b59d390c1746c11a4f061d7ccf50"
+  },
+  {
+   "path": "as_received/one_page_precursor_note.md",
+   "bytes": 4856,
+   "sha256": "cbec70e623dca38073fd9eb92be6ade3772ab3065fba067eb34d449e93280c80"
+  },
+  {
+   "path": "as_received/precursor_fraction_sweep.png",
+   "bytes": 180393,
+   "sha256": "78ff3b608ea44773feb6910b926da09fe3f39fcab5a93f637c5a5165c1c27b28"
+  },
+  {
+   "path": "as_received/report_parts_A_B_C.txt",
+   "bytes": 12609,
+   "sha256": "a72a527a3cf042427f719f67e525895454f54cff66ba5a99ebd3f19722f4a81a"
+  },
+  {
+   "path": "replication/replicate_lengths.out",
+   "bytes": 462,
+   "sha256": "947bdfaa6618f4855059b031574a94bbb8a71928ad751598aa8e9e8a8a00adb3"
+  },
+  {
+   "path": "replication/replicate_lengths.py",
+   "bytes": 2039,
+   "sha256": "2bbecf848377a1cd9daee6611422ed7fc6d171121c9f0e9221334ce9af909bf5"
+  },
+  {
+   "path": "replication/replicate_raw_table.json",
+   "bytes": 900,
+   "sha256": "fd180dcea0d3a755e9e69fd140278dfc8826f91c91e15088e10c11ae48c5011b"
+  },
+  {
+   "path": "replication/replicate_raw_table.out",
+   "bytes": 376,
+   "sha256": "fcb9799ff473c60036d1aec0a1f4a4dab5f178a77bda7dd6b17ebc21b1317a06"
+  },
+  {
+   "path": "replication/replicate_raw_table.py",
+   "bytes": 2711,
+   "sha256": "1d8ef0c382d9d2ed8b773dc7cf7718bc041ab227b706950b66edaee667dd193d"
+  }
+ ]
+}

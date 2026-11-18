@@ -1,0 +1,7 @@
+limit 0.5, out of 200 (own series via random.Random)
+w=20  memory by n: {60: 44, 100: 20, 200: 16, 400: 6}  white FA: {60: 3, 100: 0, 200: 0, 400: 0}
+w=50  memory by n: {60: 95, 100: 112, 200: 108, 400: 109}  white FA: {60: 10, 100: 9, 200: 3, 400: 1}
+n=60 w=30 limit=0.5 -> {'memory': 77, 'white': 8}
+n=60 w=30 limit=0.3 -> {'memory': 118, 'white': 20}
+n=200 w=100 limit=0.5 -> {'memory': 157, 'white': 14}
+n=200 w=100 limit=0.3 -> {'memory': 185, 'white': 35}
