@@ -333,7 +333,7 @@
    "fails_when": "any mismatch -> DIFFERS, each number named",
    "location": {
     "repo": "Geometric-to-Binary-Computational-Bridge",
-    "commit": "a934bc24e576d49ca45eb93407856f3bd20e8e8f",
+    "commit": "85f3302317dd5a1689912682e0400df17634d5be",
     "state": "PINNED",
     "path": "experiments/experiment_bridge/evidence/printed_vs_executed.py",
     "sha256": "1ac24363c476317e7984c1a5bc181c706c9decc8d6063320fa4a921e0aba7b7e",
@@ -366,7 +366,7 @@
    "fails_when": "no stated reason -> UNSOURCED",
    "location": {
     "repo": "Geometric-to-Binary-Computational-Bridge",
-    "commit": "a934bc24e576d49ca45eb93407856f3bd20e8e8f",
+    "commit": "85f3302317dd5a1689912682e0400df17634d5be",
     "state": "PINNED",
     "path": "experiments/experiment_bridge/evidence/claim_tools.py",
     "sha256": "2f19dbf9dd4ab21e269242f9c1aa198e9174af52e2bc53f751be87caf5db36ef",
@@ -402,7 +402,7 @@
    "fails_when": "a literal with no backing probe named",
    "location": {
     "repo": "Geometric-to-Binary-Computational-Bridge",
-    "commit": "a934bc24e576d49ca45eb93407856f3bd20e8e8f",
+    "commit": "85f3302317dd5a1689912682e0400df17634d5be",
     "state": "PINNED",
     "path": "experiments/experiment_bridge/evidence/claim_tools.py",
     "sha256": "2f19dbf9dd4ab21e269242f9c1aa198e9174af52e2bc53f751be87caf5db36ef",
@@ -435,7 +435,7 @@
    "fails_when": "denominator cap reached with no modular branch -> VOID; a float anywhere -> not engaged",
    "location": {
     "repo": "Geometric-to-Binary-Computational-Bridge",
-    "commit": "a934bc24e576d49ca45eb93407856f3bd20e8e8f",
+    "commit": "85f3302317dd5a1689912682e0400df17634d5be",
     "state": "PINNED",
     "path": "experiments/experiment_bridge/eqsearch/exact.py",
     "sha256": "4a088c2393e750fb96792a69b17ee8ca7f00d2cb12ed56ef40a5d76bec5dfe72",
@@ -467,18 +467,20 @@
    "output": "a class: CONTEXT_FREE_EXACT | STABLE_LOSSY | CHAOTIC_REFRESH | SUMMARY_ONLY, and whether resume is allowed",
    "fails_when": "resume attempted outside the class rule (lossy with no bound, chaotic with no refresh, summary at all)",
    "location": {
-    "repo": null,
-    "state": "VOID",
-    "path": null,
-    "commit": null,
-    "sha256": null,
-    "reason": "not built"
+    "repo": "Geometric-to-Binary-Computational-Bridge",
+    "commit": "85f3302317dd5a1689912682e0400df17634d5be",
+    "state": "PINNED",
+    "path": "experiments/experiment_bridge/snapshot/snapshot_class.py",
+    "sha256": "b10af1ae91e177a0460690ea511693027827d2a56afeb6a8f760fea70644701e",
+    "merged_from": {
+     "pr": 95
+    }
    },
-   "measures": "VOID: not built",
-   "fits": "VOID: not built",
-   "breaks_when": "VOID: not built",
-   "warning_sign": "VOID: not built",
-   "fields_source": "VOID",
+   "measures": "which of four classes a snapshot is in, and whether resuming from it is ALLOWED, REFUSED or VOID",
+   "fits": "snapshots described by content (full state or summary), fidelity (exact or lossy) and a measured growth",
+   "breaks_when": "content and fidelity per claim are read by hand; it tests growth, not chaos; it does not check that a stated bound is true",
+   "warning_sign": "a lossy snapshot of a growing system resumed on a stated bound with no refresh",
+   "fields_source": "written for this index, 2026-11-18; a summary, not a quote",
    "aliases": [
     "can I resume from this checkpoint",
     "lossy snapshot of a chaotic system",
@@ -486,9 +488,7 @@
     "T4 snapshot class"
    ],
    "finder": null,
-   "not_built": [
-    "the classifier and the per-class resume rule"
-   ],
+   "not_built": [],
    "evidence": [
     {
      "repo": "Geometric-to-Binary-Computational-Bridge",
@@ -502,7 +502,7 @@
       "EBR_019"
      ],
      "sha256": "a657c606bd5c5c7be7b7dd96a735ba7b197c2876a01adf8151c20fc3b5ec7cb8",
-     "commit": "a934bc24e576d49ca45eb93407856f3bd20e8e8f"
+     "commit": "85f3302317dd5a1689912682e0400df17634d5be"
     }
    ]
   },

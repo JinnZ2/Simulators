@@ -324,10 +324,15 @@ def selftest():
            verdict(bent(pend, lambda r: r["location"].pop("pr"))), "VOID")
     expect("PENDING_MERGE cannot also claim a pinned commit",
            verdict(bent(pend, lambda r: r["location"].update(commit="a" * 40))), "VOID")
-    expect("a declared gap is DECLARED_VOID, not a failure", verdict(by["snapshot_class"]),
-           "DECLARED_VOID")
+    # a constructed declared gap: the live index may hold none once every tool is built
+    gap = "_selftest_gap"
+    by[gap] = copy.deepcopy(by["exact_tier"])
+    by[gap]["id"] = gap
+    by[gap]["location"] = {"repo": None, "state": "VOID", "path": None, "commit": None,
+                           "sha256": None, "reason": "not built"}
+    expect("a declared gap is DECLARED_VOID, not a failure", verdict(by[gap]), "DECLARED_VOID")
     expect("a VOID location must say why",
-           verdict(bent("snapshot_class", lambda r: r["location"].pop("reason"))), "VOID")
+           verdict(bent(gap, lambda r: r["location"].pop("reason"))), "VOID")
     expect("a missing field voids the card",
            verdict(bent(pend, lambda r: r.pop("warning_sign"))), "VOID")
     expect("an empty field voids the card", verdict(bent(pend, lambda r: r.update(fits=" "))), "VOID")

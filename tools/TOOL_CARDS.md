@@ -26,11 +26,11 @@ points at its entry there.
 | boundary_probe | a branch-2b record that is MIXED | one numcheck record with its bisection | a proposal for the boundary lhs - rhs = tolerance between a holding and a failing piece | no MIXED record in the environment -> the tool is closed | PROPOSED | `formula-audit:glyph/tools.py` @ `337289d` sha256 `5f5979d8009e` |
 | conjugate_map | exponents p and q with p * q = 1 in formulas | unit-audit or numcheck records | a proposal ( base ** p ) ** q = base | a base that can be negative -> a question, not an identity | PROPOSED | `formula-audit:glyph/tools.py` @ `337289d` sha256 `5f5979d8009e` |
 | slot_fill_audit | a branch-4 record with a slot left VOID | one wordslots record | a question naming the void slots, grouped by sense | no void slot in the claim's own sense -> the tool is closed | PROPOSED | `formula-audit:glyph/tools.py` @ `337289d` sha256 `5f5979d8009e` |
-| narration_vs_execution | output printed in prose or chat beside code | the text and the code it describes | a line and number diff between what was printed and what the code prints | any mismatch -> DIFFERS, each number named | PROPOSED | `Geometric-to-Binary-Computational-Bridge:experiments/experiment_bridge/evidence/printed_vs_executed.py` @ `a934bc2` sha256 `1ac24363c476` |
-| tolerance_provenance | a claim that carries a tolerance | the script source and its record | per claim: the tolerance as written, and STATED_IN_SOURCE / STATED_IN_CLAIM_TEXT / UNSOURCED | no stated reason -> UNSOURCED | PROPOSED | `Geometric-to-Binary-Computational-Bridge:experiments/experiment_bridge/evidence/claim_tools.py` @ `a934bc2` sha256 `2f19dbf9dd4a` |
-| hardcoded_measured | a claim whose measured value is a literal in the source | the script source | a STRUCTURAL flag with the line, and the probe that backs it when one is named | a literal with no backing probe named | PROPOSED | `Geometric-to-Binary-Computational-Bridge:experiments/experiment_bridge/evidence/claim_tools.py` @ `a934bc2` sha256 `2f19dbf9dd4a` |
-| exact_tier | a system with rational coefficients and a rational step | coefficients, step, start state | the step map solved exactly and verified at every step; PASS or FAIL located | denominator cap reached with no modular branch -> VOID; a float anywhere -> not engaged | PROPOSED | `Geometric-to-Binary-Computational-Bridge:experiments/experiment_bridge/eqsearch/exact.py` @ `a934bc2` sha256 `4a088c2393e7` |
-| snapshot_class | a claim about resuming a computation from a snapshot | the snapshot content and the system it came from | a class: CONTEXT_FREE_EXACT \| STABLE_LOSSY \| CHAOTIC_REFRESH \| SUMMARY_ONLY, and whether resume is allowed | resume attempted outside the class rule (lossy with no bound, chaotic with no refresh, summary at all) | PROPOSED | VOID: not built |
+| narration_vs_execution | output printed in prose or chat beside code | the text and the code it describes | a line and number diff between what was printed and what the code prints | any mismatch -> DIFFERS, each number named | PROPOSED | `Geometric-to-Binary-Computational-Bridge:experiments/experiment_bridge/evidence/printed_vs_executed.py` @ `85f3302` sha256 `1ac24363c476` |
+| tolerance_provenance | a claim that carries a tolerance | the script source and its record | per claim: the tolerance as written, and STATED_IN_SOURCE / STATED_IN_CLAIM_TEXT / UNSOURCED | no stated reason -> UNSOURCED | PROPOSED | `Geometric-to-Binary-Computational-Bridge:experiments/experiment_bridge/evidence/claim_tools.py` @ `85f3302` sha256 `2f19dbf9dd4a` |
+| hardcoded_measured | a claim whose measured value is a literal in the source | the script source | a STRUCTURAL flag with the line, and the probe that backs it when one is named | a literal with no backing probe named | PROPOSED | `Geometric-to-Binary-Computational-Bridge:experiments/experiment_bridge/evidence/claim_tools.py` @ `85f3302` sha256 `2f19dbf9dd4a` |
+| exact_tier | a system with rational coefficients and a rational step | coefficients, step, start state | the step map solved exactly and verified at every step; PASS or FAIL located | denominator cap reached with no modular branch -> VOID; a float anywhere -> not engaged | PROPOSED | `Geometric-to-Binary-Computational-Bridge:experiments/experiment_bridge/eqsearch/exact.py` @ `85f3302` sha256 `4a088c2393e7` |
+| snapshot_class | a claim about resuming a computation from a snapshot | the snapshot content and the system it came from | a class: CONTEXT_FREE_EXACT \| STABLE_LOSSY \| CHAOTIC_REFRESH \| SUMMARY_ONLY, and whether resume is allowed | resume attempted outside the class rule (lossy with no bound, chaotic with no refresh, summary at all) | PROPOSED | `Geometric-to-Binary-Computational-Bridge:experiments/experiment_bridge/snapshot/snapshot_class.py` @ `85f3302` sha256 `b10af1ae91e1` |
 | source_swap | a claim judged with its author visible | the claim or situation, read by hand | a reading; no numeric readout | the claim names its source inside its own text (the swap changes the claim) | PROPOSED | `Simulators:reasoning-toolkit/CARDS.md`#12-source-swap @ `2d902a1` sha256 `dda18ebf02ae` (card text only; no code) |
 | gate_regeneration | a pass criterion that seems to move | the claim or situation, read by hand | a reading; no numeric readout | the first criterion was mis-stated and the revision is declared, with a reason, before the next evidence arrives | PROPOSED | `Simulators:reasoning-toolkit/CARDS.md`#13-gate-regeneration @ `2d902a1` sha256 `dda18ebf02ae` (card text only; no code) |
 | ontology_before_pathology | reasoning that does not fit the expected pattern | the claim or situation, read by hand | a reading; no numeric readout | the frame written is the reader's invention and the person does not hold it | PROPOSED | `Simulators:reasoning-toolkit/CARDS.md`#14-ontology-before-pathology @ `2d902a1` sha256 `dda18ebf02ae` (card text only; no code) |
@@ -203,14 +203,13 @@ points at its entry there.
 ### snapshot_class
 
 - kind: tool
-- measures: VOID: not built
-- fits: VOID: not built
-- breaks when: VOID: not built
-- warning sign: VOID: not built
-- fields: VOID
+- measures: which of four classes a snapshot is in, and whether resuming from it is ALLOWED, REFUSED or VOID
+- fits: snapshots described by content (full state or summary), fidelity (exact or lossy) and a measured growth
+- breaks when: content and fidelity per claim are read by hand; it tests growth, not chaos; it does not check that a stated bound is true
+- warning sign: a lossy snapshot of a growing system resumed on a stated bound with no refresh
+- fields: written for this index, 2026-11-18; a summary, not a quote
 - aliases: can I resume from this checkpoint; lossy snapshot of a chaotic system; resume from a summary; T4 snapshot class
 - finder: none
-- not built: the classifier and the per-class resume rule
 - evidence: PINNED `Geometric-to-Binary-Computational-Bridge:experiments/experiment_bridge/CLAIM_TABLE.md` EBR_016, EBR_017, EBR_018, EBR_019 (PR 93)
 
 ### source_swap
