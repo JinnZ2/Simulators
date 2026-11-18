@@ -18,7 +18,7 @@ M6       §5     cplay/trust.py      key (model, scope, start state); no transfe
 M7       §6     cplay/known_answer.py  provenance per case; circular counts nothing; crash = record; null-only harness
 M8       §8,Q7  cplay/continuity.py identity_check + return_to_anchor, no composite; one-change branch; tracks
 M9       §8     cplay/uncertainty.py  row 39 mean^2 / E[X^2] flag; propagation rule VOID
---       §8     (not built)         rows 35-36 percolation / branching: GAP, spec gives no algorithm
+G3       §8     cplay/families.py   rows 35-36: site + bond percolation (union-find), Galton-Watson extinction; known answers VERIFY
 G1       §9c    cplay/pins.py       REUSE items 1 5 6 10 11 pinned (repo, commit, path, sha256, anchor); resolve() checks
 G2       §9c    gates.py, known_answer.py  identity (VIM), En comparison, regime refusal, KA pass rule; sources NOT_CHECKED
 ```

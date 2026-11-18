@@ -1,0 +1,12 @@
+known answers: NOT_CHECKED (VERIFY): recalled, no source read by this session
+site L=32 runs=60 seed=11  mean first-span fraction 0.5923  se 0.0039  known 0.5927
+bond L=32 runs=60 seed=11  mean first-span fraction 0.5022  se 0.0044  known 0.5
+Poisson lam=0.5  extinction q = 1.0000000000
+Poisson lam=1.0  extinction q = 1.0000000000
+Poisson lam=1.5  extinction q = 0.4171883561
+Poisson lam=2.0  extinction q = 0.2031878700
+Poisson lam=3.0  extinction q = 0.0595202093
+pmf [0.5, 0.5]           extinction q = 1.0000000000
+pmf [0.25, 0.5, 0.25]    extinction q = 1.0000000000
+pmf [0.25, 0.25, 0.5]    extinction q = 0.5000000000
+pmf [0.0, 1.0]           extinction q = 0.0000000000

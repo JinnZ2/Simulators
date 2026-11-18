@@ -429,9 +429,18 @@ VOID or not built in combined-playground M1-M9 and needs a decision before it is
                              passes (all constraints matched, independence checked)
                      VOID-8  ka_verdict: OK iff every counted case passes AND every planted fault
                              is caught; counts reported, no threshold; no plants -> UNTESTED
+2026-11-18  TRIAGE   G3 rows 35-36 BUILT (cplay/families.py; samples/families.txt):
+                     percolation, two families kept apart (Q10): site and bond on the square
+                     lattice, union-find cluster growth (Newman-Ziff), mean first-span fraction;
+                     L=32, 60 runs: site 0.5923 (se 0.0039), bond 0.5022 (se 0.0044)
+                     branching (Q11): Galton-Watson extinction = smallest fixed point of the
+                     offspring pgf in [0,1]; bounded pmf and Poisson closed form; m <= 1 -> q = 1
+                     size bounds (L, pmf support) -> APPLICABILITY OUTSIDE_DOMAIN
+                     known answers NOT_CHECKED (VERIFY): site ~0.5927, bond 0.5, Poisson
+                     q = e^{lam(q-1)} -- recalled, no source read
 2026-11-18  OPEN     VOID-7, VOID-9, VOID-12: author's call, open
 2026-11-18  GAP      rows 35-36 percolation (two families) and branching (bounded pmf + closed form):
-                     families and bounds named, no algorithm stated; not built
+                     families and bounds named, no algorithm stated; not built (closed by G3 below)
 2026-11-18  CHOICE   M4 closure verdict rule: verdict() raises SpecGap; six candidates built beside it,
                      none adopted (A tolerance first / B floor added / C band first / D floor first /
                      E floor then max(tol, k*sigma) / F k*sigma*sqrt(n_legs), tol hard cap); table below
