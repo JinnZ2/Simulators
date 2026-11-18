@@ -68,6 +68,7 @@ including **breaks when**, before trusting its readout.
 - two records disagree on order or timing and the argument is about which one sounds right -> Simulators/reasoning-toolkit/CARDS.md#20-carried-reference--cross-site-alignment
 - after an interruption the work restarts from the beginning -> Simulators/reasoning-toolkit/CARDS.md#21-anchor-switching
 - a question about a position gets answered as support for or against my view -> Simulators/reasoning-toolkit/CARDS.md#22-position-as-frame-event
+- an old order or an unused channel is picked up again and nobody checks what changed in between -> Simulators/reasoning-toolkit/CARDS.md#23-rejoin-protocol-explorer-re-entry
 - a model plus tools is called the decider by its name, and nobody has written down who can see or fix the whole -> Simulators/configuration-record/
 - a shared service looks lightly used because people with their own tools and skills never call it -> Simulators/load-withheld/
 - the model keeps returning to the same default frame and nobody has named the signal -> Simulators/reasoning-toolkit/CARDS.md#17-ai-sensor-index-spin-up-card
@@ -342,6 +343,16 @@ Also serves this need: tail-check (Simulators)
 - chain: reads: inference (the reader's step). ignores: whether the card was applied correctly
 - status: NOT_RUN -- build run without --run
 
+### card-rejoin-protocol  (Simulators / `reasoning-toolkit/CARDS.md#23-rejoin-protocol-explorer-re-entry`)
+- need: channel loss (written, reporting, voice/live)
+- aliases: rejoin; re-entry; handshake decay; explorer return; meet-up
+- measures (reasoning-toolkit/CARDS.md:701): "drift in protocol between members after separation"
+- breaks when (reasoning-toolkit/CARDS.md:717): "both sides changed their reference while apart (no fixed point to align against)"
+- precision: a question set; no numeric readout
+- assumes: the reader applies the method by hand; status line in CARDS.md
+- chain: reads: inference (the reader's step). ignores: whether the card was applied correctly
+- status: NOT_RUN -- build run without --run
+
 Also serves this need: multi_substrate_calibration (Cross-Domain-Toolkit), runner_up_trace (Cross-Domain-Toolkit)
 
 ## claim vs method / scope overreach
@@ -610,7 +621,7 @@ Also serves this need: membership-probe (Simulators), card-missing-wand (Simulat
 - chain: reads: inference (the reader's step). ignores: whether the card was applied correctly
 - status: NOT_RUN -- build run without --run
 
-Also serves this need: corpus_prior_audit (JinnZ2), fold-matrix (Simulators), register_map (method-layer), label-position-test (Simulators), scope-bound-shapes (Simulators), card-label-tracks-valve (Simulators), card-source-swap (Simulators), card-constraint-reasoning (Simulators)
+Also serves this need: corpus_prior_audit (JinnZ2), fold-matrix (Simulators), register_map (method-layer), label-position-test (Simulators), scope-bound-shapes (Simulators), card-label-tracks-valve (Simulators), card-source-swap (Simulators), card-constraint-reasoning (Simulators), card-rejoin-protocol (Simulators)
 
 ## observer / attribution / coupling
 

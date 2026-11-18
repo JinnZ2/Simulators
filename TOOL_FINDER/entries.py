@@ -654,6 +654,11 @@ _CARDS = [
   "the vantage a position was taken from",
   "the reader treats the readout as a verdict on the position (re-enters the contest)",
   "a question about a position gets answered as support for or against my view"),
+ ("channel", ["frame"], "card-rejoin-protocol", "#23-rejoin-protocol-explorer-re-entry",
+  ["rejoin", "re-entry", "handshake decay", "explorer return", "meet-up"],
+  "drift in protocol between members after separation",
+  "both sides changed their reference while apart (no fixed point to align against)",
+  "an old order or an unused channel is picked up again and nobody checks what changed in between"),
 ]
 for _need, _also, _name, _anchor, _aliases, _m, _b, _sym in _CARDS:
     add(_need, "Simulators", _CARD + _anchor, _name, _aliases, _CARD, _m, _CARD, _b, None, also=_also)

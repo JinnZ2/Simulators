@@ -429,10 +429,13 @@
    "fails_when": "missing declaration → VOID part",
    "location": {
     "repo": "formula-audit",
-    "commit": "c077494c30b2f7846a9c25a0ed17ca9af091456a",
+    "commit": "c644b3cca5cae2ab9c143d968c6a27c08856e333",
     "state": "PINNED",
     "path": "glyph/precursor.py",
-    "sha256": "d2cdb8d71df9b9737b5a080a24e714f2c1f363a81f7140d6ce22e00654be7856"
+    "sha256": "d1eab08effbc5b4b40b24969797763abf99f31b54e630da3dd6117e8f9f5e537",
+    "merged_from": {
+     "pr": 10
+    }
    },
    "measures": "trend of rolling variance and lag-1 autocorrelation of the state signal",
    "fits": "any run with an event log",
@@ -1085,6 +1088,48 @@
     "never assign a position to the asker"
    ],
    "finder": "card-position-as-frame-event",
+   "not_built": [],
+   "evidence": []
+  },
+  {
+   "id": "rejoin_protocol",
+   "kind": "reasoning_card",
+   "status": "PROPOSED",
+   "trigger": "an old order, a repository or a channel picked up again after time apart",
+   "inputs": "VOID: no card field",
+   "output": "VOID: no card field",
+   "fails_when": "both sides changed their reference while apart (no fixed point to align against)",
+   "location": {
+    "repo": "Simulators",
+    "commit": "0957631d03799df81e00be480039c815ca79d99f",
+    "state": "CARD_TEXT",
+    "path": "reasoning-toolkit/CARDS.md",
+    "anchor": "#23-rejoin-protocol-explorer-re-entry",
+    "sha256": "fa7e4a41a369fe120d30f1919ff92c1e6b8b2316a1776f0275cb18212cc6d017",
+    "note": "card text only; no code"
+   },
+   "measures": "drift in protocol between members after separation",
+   "fits": "agents / sessions resuming old orders, repos after parallel work, any channel unused for a while",
+   "breaks_when": "both sides changed their reference while apart (no fixed point to align against)",
+   "warning_sign": "acting on an old order or record without checking what changed in between",
+   "cell_source": {
+    "trigger": "INDEX_WRITTEN",
+    "inputs": "VOID",
+    "output": "VOID",
+    "fails_when": "WRAP_COLLAPSED",
+    "measures": "VERBATIM",
+    "fits": "WRAP_COLLAPSED",
+    "breaks_when": "WRAP_COLLAPSED",
+    "warning_sign": "WRAP_COLLAPSED"
+   },
+   "aliases": [
+    "rejoin",
+    "re-entry",
+    "handshake decay",
+    "explorer return",
+    "meet-up"
+   ],
+   "finder": "card-rejoin-protocol",
    "not_built": [],
    "evidence": []
   }

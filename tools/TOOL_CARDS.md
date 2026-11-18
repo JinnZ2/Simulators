@@ -31,7 +31,7 @@ wraps are collapsed to one space). A VOID cell is a field the source does not ca
 | boundary_probe | a branch-2b record that is MIXED [iw] | one numcheck record with its bisection [iw] | a proposal for the boundary lhs - rhs = tolerance between a holding and a failing piece [iw] | no MIXED record in the environment -> the tool is closed [iw] | PROPOSED | `formula-audit:glyph/tools.py` @ `337289d` sha256 `5f5979d8009e` |
 | conjugate_map | exponents p and q with p * q = 1 in formulas [iw] | unit-audit or numcheck records [iw] | a proposal ( base ** p ) ** q = base [iw] | a base that can be negative -> a question, not an identity [iw] | PROPOSED | `formula-audit:glyph/tools.py` @ `337289d` sha256 `5f5979d8009e` |
 | slot_fill_audit | a branch-4 record with a slot left VOID [iw] | one wordslots record [iw] | a question naming the void slots, grouped by sense [iw] | no void slot in the claim's own sense -> the tool is closed [iw] | PROPOSED | `formula-audit:glyph/tools.py` @ `337289d` sha256 `5f5979d8009e` |
-| precursor | event log with outcomes [iw] | events + declared tau/window/limits [iw] | carried state, precursor flag, mode shift, relief flags [iw] | missing declaration → VOID part [iw] | PROPOSED | `formula-audit:glyph/precursor.py` @ `c077494` sha256 `d2cdb8d71df9` |
+| precursor | event log with outcomes [iw] | events + declared tau/window/limits [iw] | carried state, precursor flag, mode shift, relief flags [iw] | missing declaration → VOID part [iw] | PROPOSED | `formula-audit:glyph/precursor.py` @ `c644b3c` sha256 `d1eab08effbc` |
 | narration_vs_execution | output printed in prose or chat beside code [iw] | the text and the code it describes [iw] | a line and number diff between what was printed and what the code prints [iw] | any mismatch -> DIFFERS, each number named [iw] | PROPOSED | `Geometric-to-Binary-Computational-Bridge:experiments/experiment_bridge/evidence/printed_vs_executed.py` @ `85f3302` sha256 `1ac24363c476` |
 | tolerance_provenance | a claim that carries a tolerance [iw] | the script source and its record [iw] | per claim: the tolerance as written, and STATED_IN_SOURCE / STATED_IN_CLAIM_TEXT / UNSOURCED [iw] | no stated reason -> UNSOURCED [iw] | PROPOSED | `Geometric-to-Binary-Computational-Bridge:experiments/experiment_bridge/evidence/claim_tools.py` @ `85f3302` sha256 `2f19dbf9dd4a` |
 | hardcoded_measured | a claim whose measured value is a literal in the source [iw] | the script source [iw] | a STRUCTURAL flag with the line, and the probe that backs it when one is named [iw] | a literal with no backing probe named [iw] | PROPOSED | `Geometric-to-Binary-Computational-Bridge:experiments/experiment_bridge/evidence/claim_tools.py` @ `85f3302` sha256 `2f19dbf9dd4a` |
@@ -47,6 +47,7 @@ wraps are collapsed to one space). A VOID cell is a field the source does not ca
 | carried_reference | independent records that disagree on sequence or timing [iw] | VOID: no card field | VOID: no card field | the reference itself changed in transit, or sites share an upstream source (not independent) | PROPOSED | `Simulators:reasoning-toolkit/CARDS.md`#20-carried-reference--cross-site-alignment @ `b128fd0` sha256 `19535eab9b73` (card text only; no code) |
 | anchor_switching | an interruption or a switch to another branch of work [iw] | VOID: no card field | VOID: no card field | no anchor was placed: full rebuild of position | PROPOSED | `Simulators:reasoning-toolkit/CARDS.md`#21-anchor-switching @ `b128fd0` sha256 `19535eab9b73` (card text only; no code) |
 | position_as_frame_event | a stated position, framework or purpose to be read without taking a side [iw] | VOID: no card field | VOID: no card field | the reader treats the readout as a verdict on the position (re-enters the contest) | PROPOSED | `Simulators:reasoning-toolkit/CARDS.md`#22-position-as-frame-event @ `b128fd0` sha256 `19535eab9b73` (card text only; no code) |
+| rejoin_protocol | an old order, a repository or a channel picked up again after time apart [iw] | VOID: no card field | VOID: no card field | both sides changed their reference while apart (no fixed point to align against) | PROPOSED | `Simulators:reasoning-toolkit/CARDS.md`#23-rejoin-protocol-explorer-re-entry @ `0957631` sha256 `fa7e4a41a369` (card text only; no code) |
 
 ## Cards
 
@@ -338,4 +339,15 @@ wraps are collapsed to one space). A VOID cell is a field the source does not ca
 - index cells: trigger INDEX_WRITTEN; inputs VOID; output VOID; fails_when WRAP_COLLAPSED
 - aliases: position-as-frame-event; read a position without taking a side; never assign a position to the asker
 - finder: card-position-as-frame-event
+
+### rejoin_protocol
+
+- kind: reasoning_card
+- measures [VERBATIM]: drift in protocol between members after separation
+- fits [WRAP_COLLAPSED]: agents / sessions resuming old orders, repos after parallel work, any channel unused for a while
+- breaks when [WRAP_COLLAPSED]: both sides changed their reference while apart (no fixed point to align against)
+- warning sign [WRAP_COLLAPSED]: acting on an old order or record without checking what changed in between
+- index cells: trigger INDEX_WRITTEN; inputs VOID; output VOID; fails_when WRAP_COLLAPSED
+- aliases: rejoin; re-entry; handshake decay; explorer return; meet-up
+- finder: card-rejoin-protocol
 
