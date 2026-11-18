@@ -445,6 +445,14 @@ VOID or not built in combined-playground M1-M9 and needs a decision before it is
                      samples/harness_branches.txt. SPLIT: en_strong (misses uc_linear_sum), en_weak
                      (0/5), poisson (misses critical_strict at lam = 1); g_table CIRCULAR yet 2/3.
                      Held-VOID stays until a branch survives the cases
+2026-11-18  BRANCHED VOID-9 continuity identity; decide on evidence from SPLIT rows. C-A exact state
+                     hash, C-B every declared variable within tolerance (M8), C-C unbroken chain of
+                     replay-verified transitions; cplay/continuity_branches.py,
+                     samples/continuity_branches.txt. Known cases rebuilt after snapshot_delta
+                     (Geometric-to-Binary-Computational-Bridge @85f3302, EBR_016-019): fib_exact,
+                     spiral_lossy (ratio 0.0498, as EBR_017), lorenz_lossy, counts_word. Match with
+                     the measured resume outcome: C-A 3/4 (fails spiral), C-B 2/4, C-C 2/4 (both
+                     fail lorenz and counts). SPLIT: spiral, lorenz, counts. Held-VOID stays
 2026-11-18  GAP      rows 35-36 percolation (two families) and branching (bounded pmf + closed form):
                      families and bounds named, no algorithm stated; not built (closed by G3 below)
 2026-11-18  CHOICE   M4 closure verdict rule: verdict() raises SpecGap; six candidates built beside it,

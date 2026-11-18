@@ -1,0 +1,16 @@
+case          C-A exact  C-B tol    C-C lineage  measured resume  SPLIT  detail
+fib_exact     SAME       SAME       SAME         SAME                    level-15 resume equals uninterrupted: True
+spiral_lossy  NOT_SAME*  SAME       SAME         SAME             SPLIT  error ratio 0.04979 vs band 3
+lorenz_lossy  NOT_SAME   SAME*      SAME*        NOT_SAME         SPLIT  error ratio 5.571e+04 vs band 100
+counts_word   NOT_SAME   SAME*      SAME*        NOT_SAME         SPLIT  counts (34, 21) fit C(55,21) = 841728816603675 words; no decoder
+* = branch disagrees with the measured resume outcome
+C-A matches the measured outcome on 3 of 4
+C-B matches the measured outcome on 2 of 4
+C-C matches the measured outcome on 2 of 4
+SPLIT (branches disagree): spiral_lossy, lorenz_lossy, counts_word
+reference: Geometric-to-Binary-Computational-Bridge@85f3302 CLAIM_TABLE.md EBR_016-019
+  fib_exact     EBR_016: 0 mismatched levels of 26; RK4 exact resume bitwise
+  spiral_lossy  EBR_017: ratio 0.0498 inside band [0, 3] (band UNSOURCED)
+  lorenz_lossy  EBR_018: ratio 16980 vs band 100, needs refresh (band UNSOURCED)
+  counts_word   EBR_019: counts (34, 21) fit 841,728,816,603,675 words; verdict void
+no branch picked
