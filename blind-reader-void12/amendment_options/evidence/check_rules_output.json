@@ -1,0 +1,183 @@
+{
+ "A": {
+  "HOLDS": [],
+  "UNDECIDED": [
+   "proposal.ai_interest",
+   "proposal.domain",
+   "proposal.evidence",
+   "proposal.fixed",
+   "proposal.human_interest",
+   "proposal.lhs",
+   "proposal.polynomial",
+   "proposal.proof",
+   "proposal.proof_attempted",
+   "proposal.rhs",
+   "proposal.source_check",
+   "proposal.status",
+   "proposal.units",
+   "proposal.why_not_proved"
+  ],
+  "VOID": [],
+  "proposal_keys": [
+   "ai_interest",
+   "domain",
+   "evidence",
+   "fixed",
+   "human_interest",
+   "lhs",
+   "polynomial",
+   "proof",
+   "proof_attempted",
+   "rhs",
+   "source_check",
+   "status",
+   "units",
+   "why_not_proved"
+  ]
+ },
+ "B": {
+  "T08_requires_only_S1c": [
+   "exception",
+   "path"
+  ],
+  "T14_literal": [],
+  "T14_requires_only": [
+   "basis",
+   "sigma"
+  ],
+  "required": {
+   "CLOSED_WITHIN": [
+    "basis",
+    "sigma"
+   ],
+   "CRASHED": [
+    "exception",
+    "path"
+   ],
+   "FAILED": [
+    "reason"
+   ],
+   "INDETERMINATE": [
+    "reason"
+   ],
+   "OK": [],
+   "OUTSIDE_DOMAIN": [
+    "bound"
+   ],
+   "UNTESTED": [
+    "reason"
+   ]
+  },
+  "tokens": {
+   "cplay:ABSENT_AT_SENSITIVITY (T05)": {
+    "parameters": [
+     "limit",
+     "basis",
+     "effect_size",
+     "conditions",
+     "ladder"
+    ],
+    "vars": [
+     "basis",
+     "conditions",
+     "covers_effect",
+     "effect_size",
+     "ladder",
+     "limit",
+     "reason",
+     "state"
+    ]
+   },
+   "cplay:ExpiryTrigger (T04)": {
+    "parameters": [
+     "kind",
+     "target",
+     "condition"
+    ],
+    "vars": [
+     "condition",
+     "kind",
+     "target"
+    ]
+   },
+   "cplay:UNKNOWN via unknown() (T12)": {
+    "parameters": [
+     "reason",
+     "triggers"
+    ],
+    "vars": [
+     "reason",
+     "state",
+     "typed",
+     "untyped"
+    ]
+   },
+   "cplay:VOID, plain Token (T03)": {
+    "parameters": [
+     "state",
+     "reason"
+    ],
+    "vars": [
+     "reason",
+     "state"
+    ]
+   }
+  }
+ },
+ "C": [
+  {
+   "keys": [
+    "kind",
+    "module",
+    "input",
+    "reason",
+    "missing_path",
+    "expiry_condition"
+   ],
+   "kind": "GAP_INSTRUMENT_CRASH",
+   "line": 336
+  },
+  {
+   "keys": [
+    "kind",
+    "module",
+    "input",
+    "reason",
+    "expiry_condition"
+   ],
+   "kind": "'UNKNOWN'",
+   "line": 365
+  },
+  {
+   "keys": [
+    "error",
+    "exception_type",
+    "missing_path"
+   ],
+   "kind": "",
+   "line": 485
+  },
+  {
+   "keys": [
+    "kind",
+    "module",
+    "input",
+    "reason",
+    "expiry_condition"
+   ],
+   "kind": "'UNKNOWN'",
+   "line": 348
+  },
+  {
+   "keys": [
+    "kind",
+    "module",
+    "input",
+    "reason",
+    "expiry_condition"
+   ],
+   "kind": "'INFO'",
+   "line": 356
+  }
+ ]
+}

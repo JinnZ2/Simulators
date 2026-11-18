@@ -1,0 +1,99 @@
+
+====================================================================================================
+A. numcheck: keys that appear on records of one verdict only (S2: 'present on every record of a kind')
+====================================================================================================
+packet check.py sha256 f6df0dc196f5ac27 ; checkout check.py sha256 f6df0dc196f5ac27 ; identical: True
+  point_HOLDS_exact              point        HOLDS      21 top-level keys; proposal None; bisection None
+  point_FAILS_exact              point        FAILS      21 top-level keys; proposal None; bisection None
+  point_UNDECIDED_tol0_proposal  point        UNDECIDED  21 top-level keys; proposal set ; bisection set
+  point_MIXED_bisected           point        MIXED      21 top-level keys; proposal None; bisection set
+  point_FAILS_bisected           point        FAILS      21 top-level keys; proposal None; bisection set
+  point_HOLDS_bisected           point        HOLDS      21 top-level keys; proposal None; bisection set
+  point_VOID_units               point        VOID       20 top-level keys; proposal None; bisection absent
+  point_VOID_noformula           point        VOID       19 top-level keys; proposal None; bisection absent
+  inter_BOTH_HOLD                intersection BOTH_HOLD  25 top-level keys; proposal None; bisection absent
+  inter_UNDECIDED                intersection UNDECIDED  25 top-level keys; proposal None; bisection absent
+  inter_ONE_FAILS                intersection ONE_FAILS  25 top-level keys; proposal None; bisection absent
+  inter_VOID_one_formula         intersection VOID       19 top-level keys; proposal None; bisection absent
+
+  keys present on a UNDECIDED record and on no record of another verdict (from point_UNDECIDED_tol0_proposal, inter_UNDECIDED):
+    proposal.ai_interest, proposal.domain, proposal.evidence, proposal.fixed, proposal.human_interest, proposal.lhs, proposal.polynomial, proposal.proof, proposal.proof_attempted, proposal.rhs, proposal.source_check, proposal.status, proposal.units, proposal.why_not_proved
+
+  keys present on a VOID record and on no record of another verdict (from point_VOID_units, point_VOID_noformula, inter_VOID_one_formula):
+    (none)
+
+  keys present on a HOLDS record and on no record of another verdict (from point_HOLDS_exact, point_HOLDS_bisected):
+    (none)
+
+  the `proposal` record on that UNDECIDED, its own keys (14):
+    lhs, rhs, domain, fixed, units, source_check, status, polynomial, proof, proof_attempted, why_not_proved, evidence, human_interest, ai_interest
+  proposal is None on every record whose verdict is not UNDECIDED here: True
+  `proposal` itself is a top-level key on every record (from _blank): True
+  every non-None `bisection` record has the same key set whatever the verdict (point_FAILS_bisected, point_HOLDS_bisected, point_MIXED_bisected, point_UNDECIDED_tol0_proposal): True
+
+====================================================================================================
+B. cplay: what each status requires, what is a parameter, what is set after construction
+====================================================================================================
+  Reading fields (a namedtuple, so every status has all of them): ['field', 'status', 'reason', 'sigma', 'basis', 'exception', 'path', 'bound']
+  fields whose removal makes axes.reading raise, per status (S1c 'a source rule REQUIRES'):
+    OK             -
+    FAILED         ['reason']
+    INDETERMINATE  ['reason']
+    UNTESTED       ['reason']
+    CRASHED        ['exception', 'path']
+    CLOSED_WITHIN  ['basis', 'sigma']
+    OUTSIDE_DOMAIN ['bound']
+
+  S2 applied to each status's S1(c) names, two ways:
+    literal S2, 'presence counts': a name is shared if every other status's Reading also HAS the field -> every Reading has every field
+    S2 on 'also requires' only:    a name is shared if every other status also REQUIRES it
+    CLOSED_WITHIN  S1c names ['basis', 'sigma']     literal S2 leaves []       requires-only S2 leaves ['basis', 'sigma']
+    CRASHED        S1c names ['exception', 'path']  literal S2 leaves []       requires-only S2 leaves ['exception', 'path']
+    OK             S1c names []                     literal S2 leaves []       requires-only S2 leaves []
+
+  tokens.py constructors, parameters versus instance attributes:
+    cplay:ExpiryTrigger (T04)            parameters ['kind', 'target', 'condition']                  vars(instance) ['condition', 'kind', 'target']
+                                         attributes beyond the parameters: -
+    cplay:UNKNOWN via unknown() (T12)    parameters ['reason', 'triggers']                           vars(instance) ['reason', 'state', 'typed', 'untyped']
+                                         attributes beyond the parameters: ['state', 'typed', 'untyped']
+    cplay:ABSENT_AT_SENSITIVITY (T05)    parameters ['limit', 'basis', 'effect_size', 'conditions', 'ladder'] vars(instance) ['basis', 'conditions', 'covers_effect', 'effect_size', 'ladder', 'limit', 'reason', 'state']
+                                         attributes beyond the parameters: ['covers_effect', 'reason', 'state']
+    cplay:VOID, plain Token (T03)        parameters ['state', 'reason']                              vars(instance) ['reason', 'state']
+                                         attributes beyond the parameters: -
+
+  class attribute `is_exit` on ExpiryTrigger (T04):  in vars(class): True ; in vars(instance): False ; set on the UNTYPED token by untyped(): True
+
+  closure.FieldToken (T06): fields ['field', 'token'] ; STATES ('UNRESOLVED', 'TOLERANCE_UNRESOLVABLE')
+  axes.CoverageEntry (cplay's form of the coverage entry): fields ['kind', 'module', 'input', 'reason', 'missing_path', 'expiry_condition'] ; the same six on kind UNKNOWN, INFO and GAP_INSTRUMENT_CRASH: True
+  axes.crash() parameters (T08): ['exc', 'path', 'module', 'inputs', 'expiry_condition']
+
+====================================================================================================
+C. TAF unified_audit.py: dict literals that carry a coverage or crash key (T09, T10)
+====================================================================================================
+  line  336  kind=GAP_INSTRUMENT_CRASH     keys=['kind', 'module', 'input', 'reason', 'missing_path', 'expiry_condition']
+  line  348  kind='UNKNOWN'                keys=['kind', 'module', 'input', 'reason', 'expiry_condition']
+  line  356  kind='INFO'                   keys=['kind', 'module', 'input', 'reason', 'expiry_condition']
+  line  365  kind='UNKNOWN'                keys=['kind', 'module', 'input', 'reason', 'expiry_condition']
+  line  485  kind=-                        keys=['error', 'exception_type', 'missing_path']
+
+  coverage-entry literals found: 4 ; kinds: ["'INFO'", "'UNKNOWN'", 'GAP_INSTRUMENT_CRASH']
+  `missing_path` appears in coverage literals of kind(s): ['GAP_INSTRUMENT_CRASH']
+  `expiry_condition` appears in coverage literals of kind(s): ["'INFO'", "'UNKNOWN'", 'GAP_INSTRUMENT_CRASH']
+  `error` / `exception_type` appear in literal(s) at line(s): [485]
+
+====================================================================================================
+D. Sentences the rules lean on (verbatim, with file and line)
+====================================================================================================
+  thermodynamic-accountability-framework/docs/glossary.md:124  | Term | Role | Defined in |
+  thermodynamic-accountability-framework/docs/glossary.md:125  |---|---|---|
+  thermodynamic-accountability-framework/docs/glossary.md:126  | `PENDING` / `UNKNOWN` | A slot whose value is not yet known. Never read as zero or as absent. | per module; listed in `docs/expiry_register.json` |
+  thermodynamic-accountability-framework/docs/glossary.md:127  | `expiry_condition` | Instrument class, sensitivity or protocol whose null result would downgrade a PENDING / UNKNOWN slot. Filled only from the slot's own text; otherwise `VOID -- no exit defined`. | `docs/expiry_register.json` |
+  thermodynamic-accountability-framework/docs/glossary.md:128  | `expiry_source` | `file:line` or citation where that exit is already stated; `VOID` when none is. | `docs/expiry_register.json` |
+  thermodynamic-accountability-framework/docs/glossary.md:129  | `ABSENT_AT_SENSITIVITY(<value>)` | Scoped absence: looked for with a stated instrument / sensitivity / protocol and not found at that sensitivity. Never written as bare "absent". No slot holds it yet. | `docs/expiry_register.json` |
+  thermodynamic-accountability-framework/calibration/expiry_register.py:34  ABSENT_AT_SENSITIVITY(<value>) is the state a slot moves to when its exit
+  thermodynamic-accountability-framework/calibration/expiry_register.py:35  instrument runs at a stated sensitivity and returns null. It is a scoped
+  thermodynamic-accountability-framework/calibration/expiry_register.py:36  absence, never a bare "absent". No slot in this repo is in that state today;
+  thermodynamic-accountability-framework/calibration/expiry_register.py:37  the count is printed as a visible zero.
+  ../READER_BRIEF.md:22  - `slots_specific`: the named fields or parameters the source ties to this term and to no other term. Examples: a class written for the term, the parameters of a function or notation written for it, a documented key list for it, or a rule that says this status
+
+(done)
