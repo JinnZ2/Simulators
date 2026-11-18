@@ -102,3 +102,12 @@ Not evidence. The choices are about what the rule text means, so they can be set
 - Only the readings filed in this folder were available to score; I scored one under candidate keys (Claude-v2-A). The other Claude reading was made on the v1 packet and is not a v2 reading.
 - The `slots_carried` lists, the grouping key and the brief are not examined here beyond the places that touch the three choices.
 - I did not run the patch's N1 and C1 on any reading except the one above.
+
+## 6. Update (2026-11-18, after PR #315 merged): who proposed S3
+
+The owner stated, in the same session as the options merge, that S3 was Claude's proposal. It was not an owner decision. So:
+
+- The statements in the received patch that "the owner fixed S3 as S3-out" (the amendment's status line, its section 4 step 1, and the dated `PREREG.md` section in the patch) are not supported by the record available here. S3 is open, with both readings in section 2 (Choice 3).
+- The same holds for the patch's claim that the owner "accepted the other rules (S1, S2, ND, N1, C1, K1) as drafted": nothing in this folder shows that either. Those rules are drafts until the owner says otherwise.
+- Consequence for procedure: the patch must not be applied as received, because applying it would write an adoption record into `PREREG.md` that the owner did not make. Apply it only after the owner has settled the three choices and the text has been edited to match.
+- This note records a statement by the owner; it does not change any key, scorer, brief, reading or `PREREG.md`.
