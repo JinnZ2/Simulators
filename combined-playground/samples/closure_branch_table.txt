@@ -1,0 +1,9 @@
+case  |m|          tol    k*sigma  floor   complete  A                       B                       C                       split
+c1    1e-07        1e-06  3e-06    1e-12   True      PHYSICAL:OK             PHYSICAL:OK             PHYSICAL:CLOSED_WITHIN  SPLIT
+c2    2e-06        1e-06  3e-06    1e-12   True      PHYSICAL:CLOSED_WITHIN  PHYSICAL:CLOSED_WITHIN  PHYSICAL:CLOSED_WITHIN  
+c3    5e-06        1e-06  3e-06    1e-12   True      PHYSICAL:FAILED         PHYSICAL:FAILED         PHYSICAL:FAILED         
+c4    1.0000005e-06 1e-06  --       1e-09   True      PHYSICAL:FAILED         PHYSICAL:OK             PHYSICAL:FAILED         SPLIT
+c5    5e-07        1e-06  --       1e-12   True      PHYSICAL:OK             PHYSICAL:OK             PHYSICAL:OK             
+c6    5e-07        1e-06  --       TOKEN   True      PHYSICAL:OK             VOID                    PHYSICAL:OK             SPLIT
+c7    2e-06        1e-06  --       1e-12   True      PHYSICAL:FAILED         PHYSICAL:FAILED         PHYSICAL:FAILED         
+c8    5e-06        1e-06  3e-06    1e-12   ABSENT    DETERMINATION:FAILED    DETERMINATION:FAILED    DETERMINATION:FAILED    
