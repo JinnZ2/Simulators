@@ -1,0 +1,25 @@
+source                                                        how obtained this session            commit / hash
+github.com/JinnZ2/TAF  calibration/unified_audit.py           READ (tarball of main)               main = 16285cccdd48d608067b9bca50bd6ac683fe860a
+github.com/JinnZ2/TAF  calibration/expiry_register.py         READ (same tarball)                  (READ today via ls-remote; COMBINED_SPEC section 7
+github.com/JinnZ2/Simulators  playground-crossrun/            READ (tarball of main)               pins "main merge commit 16285cc (PR #85)" — READ;
+  COMBINED_SPEC.md; combined-playground/cplay/tokens.py,                                          my fetch commit not recorded -> cannot recover
+  axes.py, closure.py                                                                             per-file, INFERRED same)
+github.com/JinnZ2/formula-audit  numcheck/check.py,           READ (tarball of main, twice:        main = 74ceae9b4df2ccbe55b16755d9d871aec88ba446
+  glyph/precursor.py, tests/data/algebra.mm,                  pre- and post-wipe)                  (READ today; committer date 2026-11-18T17:05:19Z,
+  REFERENCES/precursor_operating_curve.md                                                        merge of PR #11 — READ; INFERRED both fetches
+                                                                                                   were this commit since main is unchanged)
+github.com/JinnZ2/study-aperture  experimental/playground/    READ (tarball of main)               commit not recorded -> cannot recover
+  lifecycle/unknown_expiry.py
+github.com/metamath/set.mm  set.mm @ develop                  READ (GitHub blob API)               blob sha1 e483895ed36dc7846cfa30d8c643e18ff587815c,
+                                                                                                   51,954,169 bytes
+
+
+file                            answers table                panels (READ today)
+precursor_fraction_sweep.png    fraction sweep               left: catch rate vs fraction f=w/n, limit 0.3, lines n=60/100/200/400
+                                                             middle: same, limit 0.5
+                                                             right: decomposition at limit 0.5 — blue "fixed k=51, vary w" (bottom
+                                                             axis = absolute window w), red dashed "fixed w=50, vary n" (top axis
+                                                             = fraction). Title: "precursor operating curve: what the detector
+                                                             actually reads · 200 seeds/cell · Kimi K3 replay 2026-11-19"
+precursor_calibration.png       w-sweep at n=400 +           left: raw rule limit 0.3 — rates for memory/drift/step/white vs w
+                                surrogate calibration         middle: raw rule limit 0.5, same curves (annotated

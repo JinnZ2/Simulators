@@ -1,0 +1,126 @@
+{
+ "date": "2026-11-18",
+ "status": "RAW_PRESERVED_WITH_SEPARATE_NOTES",
+ "provenance_note": "Texts and images attached to a Manus session by the repository owner. Hashes identify received bytes; they do not authenticate the source, the model named in the texts, or the dates inside them (both texts are dated 2026-11-19). Round 2 files were received 2026-11-18, about 20:00 UTC; ASK_TO_KIMI.md is Manus's own text.",
+ "as_received_originals": {
+  "report_parts_A_B_C.txt": "Pasted_content_76.txt",
+  "one_page_precursor_note.md": "Pasted_content_77.txt",
+  "ipython_632f71c4a62c4dcb.png": "member of OKComputer_谓词分配与守卫分析.zip",
+  "precursor_fraction_sweep.png": "member of OKComputer_谓词分配与守卫分析.zip",
+  "round2/reply_to_ask.txt": "Pasted_content_79.txt",
+  "round2/one_page_precursor_fixes_note.md": "Pasted_content_78.txt",
+  "round2/tables_pasted_in_chat.txt": "text of the owner's chat message, reproduced; not byte-verified"
+ },
+ "archive_not_kept": {
+  "name": "OKComputer_谓词分配与守卫分析.zip",
+  "bytes": 282175,
+  "sha256": "8c8cde137bb00b3b4c04b9251286f9724e0633afe38a2e9b7100967a0cbe047f"
+ },
+ "files": [
+  {
+   "path": "ASK_TO_KIMI.md",
+   "bytes": 4176,
+   "sha256": "52998c97363ccf683e62e9b3b6938cd640c62d6059e7226568d4632c8fa60070"
+  },
+  {
+   "path": "WORKING_NOTES.md",
+   "bytes": 25005,
+   "sha256": "2a9304a8016bccf04ba2deb486defd5d2d6269adc8a8f4fac6cc655c1e59cb78"
+  },
+  {
+   "path": "as_received/ipython_632f71c4a62c4dcb.png",
+   "bytes": 114141,
+   "sha256": "9d5ef10bd187fbd89032655b20898e677fe4b59d390c1746c11a4f061d7ccf50"
+  },
+  {
+   "path": "as_received/one_page_precursor_note.md",
+   "bytes": 4856,
+   "sha256": "cbec70e623dca38073fd9eb92be6ade3772ab3065fba067eb34d449e93280c80"
+  },
+  {
+   "path": "as_received/precursor_fraction_sweep.png",
+   "bytes": 180393,
+   "sha256": "78ff3b608ea44773feb6910b926da09fe3f39fcab5a93f637c5a5165c1c27b28"
+  },
+  {
+   "path": "as_received/report_parts_A_B_C.txt",
+   "bytes": 12609,
+   "sha256": "a72a527a3cf042427f719f67e525895454f54cff66ba5a99ebd3f19722f4a81a"
+  },
+  {
+   "path": "as_received/round2/one_page_precursor_fixes_note.md",
+   "bytes": 4638,
+   "sha256": "e5ebde5a77bf340c84423aa9215f8a9ff0772cd6bcc6ccd0036b88f7938d61ca"
+  },
+  {
+   "path": "as_received/round2/reply_to_ask.txt",
+   "bytes": 10753,
+   "sha256": "54f5bed93d40d0ce3539470b1acb43f1da0de9dc1b4c8e78c06445da982e77d8"
+  },
+  {
+   "path": "as_received/round2/tables_pasted_in_chat.txt",
+   "bytes": 2900,
+   "sha256": "46ce0cb93ee194717034fa2c26c18e15e9b15716bd70c335006a3350a0b4ab98"
+  },
+  {
+   "path": "replication/replicate_lengths.out",
+   "bytes": 462,
+   "sha256": "947bdfaa6618f4855059b031574a94bbb8a71928ad751598aa8e9e8a8a00adb3"
+  },
+  {
+   "path": "replication/replicate_lengths.py",
+   "bytes": 2039,
+   "sha256": "2bbecf848377a1cd9daee6611422ed7fc6d171121c9f0e9221334ce9af909bf5"
+  },
+  {
+   "path": "replication/replicate_raw_table.json",
+   "bytes": 900,
+   "sha256": "fd180dcea0d3a755e9e69fd140278dfc8826f91c91e15088e10c11ae48c5011b"
+  },
+  {
+   "path": "replication/replicate_raw_table.out",
+   "bytes": 376,
+   "sha256": "fcb9799ff473c60036d1aec0a1f4a4dab5f178a77bda7dd6b17ebc21b1317a06"
+  },
+  {
+   "path": "replication/replicate_raw_table.py",
+   "bytes": 2711,
+   "sha256": "1d8ef0c382d9d2ed8b773dc7cf7718bc041ab227b706950b66edaee667dd193d"
+  },
+  {
+   "path": "replication/round2/replicate_lengths_x0zero.out",
+   "bytes": 463,
+   "sha256": "a24ab731383b34e2b8d88befe55b3306a2d9fcb8a6377f56f154c5f33329277f"
+  },
+  {
+   "path": "replication/round2/replicate_lengths_x0zero.py",
+   "bytes": 2036,
+   "sha256": "35e81072ab05f094c2141456e0af6bc91dc6f95e5940f7c5f11360c5df1df8f8"
+  },
+  {
+   "path": "replication/round2/replicate_raw_table_x0zero.json",
+   "bytes": 900,
+   "sha256": "32d6752f0fac275c94827ee03036a3e84ac192d0d1117e8d14b212ea04e8500c"
+  },
+  {
+   "path": "replication/round2/replicate_variants.out",
+   "bytes": 614,
+   "sha256": "c2af9485994ae07d83ad9fad0af0de045ced38d21266c4b2e286cb77ad9a54d0"
+  },
+  {
+   "path": "replication/round2/replicate_variants.py",
+   "bytes": 2953,
+   "sha256": "da268b9fabb3c856279a8f8434785ac7dda084944b66cfcadb47478062bb4519"
+  },
+  {
+   "path": "replication/round2/replicate_x0zero.out",
+   "bytes": 376,
+   "sha256": "b3d265dae21bdc19d70ba0cc16493f06b3aae7da7f7206ed3ccac3aa54495d9d"
+  },
+  {
+   "path": "replication/round2/replicate_x0zero.py",
+   "bytes": 2795,
+   "sha256": "a94877d4d51f187d9bd7bf3ae8206ea755816ad401e8fcd949ede7deddc4c7cd"
+  }
+ ]
+}

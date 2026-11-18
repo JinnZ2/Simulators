@@ -1,0 +1,53 @@
+Item 1 — Part B table and provenance
+algebra.mm: repo https://github.com/JinnZ2/formula-audit, path tests/data/algebra.mm, branch main (READ, fetched this session as a tarball of main). The commit hash of my original download was not recorded at fetch time and /tmp was later wiped: cannot recover it directly. Current main is 74ceae9b4df2ccbe55b16755d9d871aec88ba446 (READ today via git ls-remote), committer date 2026-11-18T17:05:19Z, "Merge pull request #11" (READ today via GitHub API). Since that commit predates my fetch and main has not moved, my download was also 74ceae9 (INFERRED from the two READ facts).
+set.mm: repo https://github.com/metamath/set.mm, branch develop, blob sha1 e483895ed36dc7846cfa30d8c643e18ff587815c, 51,954,169 bytes (READ — fetched live this session via the GitHub blob API after raw/codeload TLS failures). Full hash as requested: e483895ed36dc7846cfa30d8c643e18ff587815c. FETCHED, not recalled.
+Seven-row table. algebra.mm guards copied verbatim (READ); set.mm antecedents copied verbatim from the downloaded blob (READ); line numbers approximate where marked ~; verdicts INFERRED (my assignment):
+￼
+Per-statement labels you asked about: sqrtsq — READ; note set.mm's own sqrtsq (173744) is ( ( sqrt ( A ^ 2 ) ) = A ), a different statement, so the name-matching is a trap; the statement matching algebra.mm's sqrtsq is resqrtth/sqsqrti (INFERRED mapping, both READ). sqrtth — READ (line ~174919, |- ( A e. CC -> ( ( sqrt A ) ^ 2 ) = A ), complex-domain variant, not the match). df-div — READ (line ~134955, iota-based total operator; division defined on CC x (CC \ {0})). resqrtth / sqsqrti — READ (quoted above). Observation row: rows 1–4 carry no domain guard in either file, which sits oddly with algebra.mm's own header ("division only for non-zero divisor") but is equal to set.mm — INFERRED.
+Item 2 — full n=200 grid
+Verbatim from the run output (RAN this session; 200 seeds per cell; catches = planted flagged, FA = white flagged):
+￼
+Does a longer series move the curve? Yes (INFERRED from RAN data): at n=60 the reference file (READ) recorded w=30/0.5 = 79 catches; at n=200 (RAN) w=40/0.5 = 89 and w=100/0.5 = 158. Holding the fraction fixed and lengthening n raises the catch rate; the fraction sweep (RAN) showed the absolute window w is the operative parameter, not w/n.
+Item 3 — citations
+Status today: bibliographic records verified via web search (READ — search-result metadata and abstract snippets only; no full text opened at any point). The phrases I used in the layer-localization answer were RECALLED at the time I wrote them, not read from full text.
+￼
+Correction (honest): in-session I attributed Clements & Ozgul 2018 to Oikos. That journal was wrong (RECALLED error). Verified today: Ecology Letters 21: 905-919 (READ). The Oikos paper I conflated it with is Dutta, Sharma & Abbott 2018, "Robustness of early warning signals for catastrophic and non-catastrophic transitions", Oikos 127: 1251-1263, doi 10.1111/oik.05172 (READ in today's search results). For every quoted phrase: full text was never opened; classification is RECALLED phrase + READ-today bibliographic metadata.
+Item 4 — code as text
+Series generators, verbatim as recorded (RAN). RNG: Python 3.12 random module (Mersenne Twister); gauss via Random.gauss, which in CPython is Box-Muller with a per-instance cached second deviate (RECALLED CPython detail). Planted: seed s, start x = 0.0, coefficient schedule a_t = 0.05 + 0.9*t/(n-1), i.e. 0.05 → 0.95 linear. White: seed 10000+s, iid gauss(0,1). Drift and step each use Random(s):
+￼
+Declaration passed to check() and mirrored in the fast path (RAN): {"tau": 3.0, "window": w, "streak_limit": 3, "trend_limit": lim}. The fast path (rolling_stats_np cumsum-vectorized variance + lag-1 autocorrelation; trends_np via scipy.stats.kendalltau; flag = window-streak of tau >= limit reaching streak 3) is not preserved line-for-line in what remains of this session: cannot recover the exact source lines. Its semantics are pinned by the equivalence checks (item 7). I can re-write and re-verify it against the module if you want the text; that would be labeled RE-RUN.
+Surrogate calibration: signature lines verbatim as recorded; bodies reconstructed from my recorded design notes (RECALLED reconstruction, semantics exact):
+￼
+JS port: exact file text cannot recover. RNG core was the standard mulberry32 plus Box-Muller gauss (RECALLED, standard implementations); seeds mulberry32(s) for planted, mulberry32(10000+s) for white, 200 seeds per cell. JS draws are not the same numbers as Python draws — the check is distributional, not bitwise. On your 30-of-32 replication: a port must replicate CPython's gauss deviate-caching to be bit-exact; otherwise borderline windows flip (INFERRED).
+Item 5 — n=60 figures provenance
+The n=60 numbers were not run by me in the original pass; they were READ this session from the file REFERENCES/precursor_operating_curve.md in JinnZ2/formula-audit (READ). Separately, I ran my replay at n=60 for the overlapping cells (RAN) and reproduced the file exactly: w=30/0.5 → 79 catches / 8 FA; w=30/0.3 → 120/20; w=20/0.5 → 46/3; w=20/0.3 → 87/12. So: file record READ, four overlapping cells independently reproduced RAN, zero discrepancies.
+Item 6 — surrogate calibration details
+All RAN. Mean handling: none removed; DC bin phase forced to 0 (amplitude kept). Nyquist bin (n even): phase forced to 0. All other phases uniform[0, 2π), amplitudes untouched, irfft back. Percentile: per tau separately (variance-tau and autocorr-tau each get their own null), one-sided upper tail, add-one smoothing p = (1 + #{s: tau_s >= tau_obs}) / (S+1) with S=100. Flag iff both p <= 0.05. Series length: n=400 (READ today from the figure title; this detail was not in my remaining text record — recovered from the PNG, not regenerated). Raw counts (RAN):
+￼
+Item 7 — the 36-case fidelity check and the six JS cells
+36-case check (RAN): seeds 0–5 × (n, w) in {(60,30), (200,40), (200,100)} × kind in {planted, white} = 36 cases; compared my fast-path boolean flag against the module's check()["precursor"]["flag"]; 0 mismatches. A separate earlier check compared the rolling variance/autocorrelation vectors against the module in 30 cases (seeds 0–4, same grids, both kinds): 0/30 mismatches. All RAN. One honest bug from that turn: a Kendall-tau sanity test of mine first reported 24/25 mismatches because I compared two different random series; the test was wrong, not the code; fixed test gave 0/25 (RAN).
+Six JS cells (RAN; planted catches & white FA, each of 200 seeds):
+￼
+All JS/Python pairs within binomial noise (INFERRED; no formal test computed).
+Item 8 — which PNG shows which table
+All three re-opened today (READ). Mapping:
+￼
+The two one-page notes (precursor-window-calibration-note.md, precursor-fix-sweep-note.md) sit beside the PNGs in /mnt/agents/output and carry the matching tables as text (READ — I created them this session; files confirmed present today).
+Item 9 — the date 2026-11-19
+The stamp comes from a line injected into my runtime context by the harness: "Current date: 2026-11-19" (READ — it is in my context at session start). I copied it onto Pass A and the figure titles per the work order's "mark model name + date" (model: Kimi K3, Moonshot AI). No timezone is provided to me — cannot recover one from my side. You received the texts ~19:00 UTC 2026-11-18 while my context read the 19th, so the harness clock is ahead of UTC; your UTC+8 hypothesis (≈03:00 on the 19th) is consistent with that, but it is INFERRED — I cannot verify the timezone.
+Item 10 — files opened live vs recalled; hashes
+￼
+sha256 of glyph/precursor.py: d1eab08effbc5b4b40b24969797763abf99f31b54e630da3dd6117e8f9f5e537. This was computed today on a fresh download pinned at 74ceae9 (RAN — label RE-RUN, because the original /tmp copy was wiped and cannot be hashed retroactively). It matches the value recorded in REFERENCES/precursor_operating_curve.md with the note "since: docstring run line only" (READ). The earlier filed hash d2cdb8d71df9b9737b5a080a24e714f2c1f363a81f7140d6ce22e00654be7856 in the same file corresponds to an older revision (READ). TAF URL and the full hash behind "16285cc": https://github.com/JinnZ2/TAF, 16285cccdd48d608067b9bca50bd6ac683fe860a (READ today).
+Recalled, never opened this session: full texts of the five papers in item 3; JCGM 106:2012 itself (the spec's quotation of it was READ); CPython gauss internals; the mulberry32 reference implementation.
+Item 11 — Part A: copied vs paraphrased, per pair
+The text of my original message is not re-openable (compacted), so the form of each quotation is RECALLED from my session record; every underlying source string was READ at its file. My best per-pair account:
+￼
+The verdicts (MAPS, five PARTIAL, HOMONYM, NONE) and the one-line reasons were my derivations: INFERRED.
+Item 12 — first-reader material seen besides §9c
+ • COMBINED_SPEC §9c itself: the VOID-12 verdict table plus the V-A / V-B / V-C SPLIT notes (READ; disclosed in my Pass A answer at the time).
+ • REFERENCES/precursor_operating_curve.md in formula-audit: the first reader's n=60 operating-curve record, including both sha256 lines and the "since: docstring run line only" note (READ; used as the n=60 reference, then reproduced independently, RAN — item 5).
+ • The quotation "Kimi audit C7" embedded in the expiry_register.py docstring — prior audit provenance text, READ as part of that file.
+ • The REFERENCES/ directory listing, i.e., the existence of algebra_axiom_audit.md (READ as a filename). Its contents were NOT opened, per your instruction — that constraint held for the whole session.
+ • cplay/vocab_branches.py and samples/vocab_branches.txt: known to exist; deliberately NOT opened (first reader's work product).
+ • Nothing else that I can identify. Classifying the §9c block and the REFERENCES files as the first reader's work is INFERRED from your work order's framing.
+What I could not do, collected in one place: the exact commit of my original algebra.mm / formula-audit / Simulators / study-aperture downloads (not recorded at fetch; /tmp wiped) — cannot recover, only bounded by ls-remote today; the exact source lines of the fast-path statistics and the JS port file — cannot recover verbatim (semantics and outputs preserved); the hash of the wiped /tmp precursor.py copy — cannot recover (replaced by a RE-RUN hash at the pinned commit, which matches the repo record); the harness timezone — cannot verify. And one correction volunteered: the Clements & Ozgul journal attribution in my earlier note was wrong (Ecology Letters, not Oikos) — fixed in item 3.

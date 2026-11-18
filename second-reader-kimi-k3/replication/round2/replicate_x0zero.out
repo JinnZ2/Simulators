@@ -1,0 +1,13 @@
+rates out of 200 (n=400, own RNG)
+limit 0.3
+  w   memory  drift  step  white
+  20      87      0     0     0
+  50     179      1     0     5
+  100    191      2     0     8
+  200    196     29     0    20
+limit 0.5
+  w   memory  drift  step  white
+  20       6      0     0     0
+  50     109      0     0     1
+  100    169      0     0     4
+  200    186     10     0     8
