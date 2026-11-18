@@ -32,3 +32,8 @@ These are about the other projects' files, not about this folder. Nothing was ed
 ## claude-fresh-1 (added later; against packet v1)
 
 A Claude reading taken by the owner in a session that was not fresh (see its `RUN_NOTES.md`). Status `UNCERTAIN`; not counted. 5 of 8 declared tiers, ARI 0.823, 9 groups against the key's 9, 7 of the key's 9 groups reproduced exactly (both pilots: 9 of 9), and **one grouping disagreement**: it puts `HOLDS` with `OK` where the key and both pilots put it with `CLOSED_WITHIN` (its own confidence: LOW). It is the first reading to differ from the first reading's grouping. One reading of an uncertain status is a pointer to where a further reader's attention is worth spending, not evidence that the first reading is wrong.
+
+## Claude-v2-A (added later; against packet v2)
+
+Second Claude reading from a Claude Code session with another repository attached; status `UNCERTAIN`; not counted; same family as the first reader. The same grouping disagreement as `claude-fresh-1` (`HOLDS` with `OK`). `slots_specific`: 4 of 7 determined pairs agree; `slots_carried`: 5 of 7. Its carried lists reach one level of wrapper higher than the key's, which exposes that the brief does not say how many levels count; it also exposes four places where the key itself may be wrong or contestable. See its `RUN_NOTES.md`. Nothing in the key was changed.
+

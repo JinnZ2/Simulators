@@ -1,0 +1,181 @@
+{
+ "reader_label": "Claude-v2-A",
+ "model_family": "claude-opus-5-5 (the identifier this session is configured with; the model serving this turn was not separately verified)",
+ "date_utc": "2026-11-18",
+ "terms": {
+  "T01": {
+   "cluster": "A",
+   "predicate": "The measured value, with its uncertainty, lies across the acceptance limit, so the check cannot prove the value is inside the limit or outside it.",
+   "slots_specific": ["straddle_at_depth_limit", "first_straddling_piece", "undecided_at_depth_limit", "first_undecided_subbox", "proposal"],
+   "slots_specific_basis": "READ_FROM_SOURCE",
+   "slots_carried": ["kind", "verdict", "void_reason", "status", "deciding_tier", "precision", "rigorous", "fast", "tiers", "triage", "located", "proposal", "intervals", "inputs", "units", "provenance", "slots", "human_interest", "ai_interest", "formula", "bisection", "formulas", "subboxes", "subboxes_where_both_hold", "subboxes_where_one_fails", "first_undecided_subbox", "first_subbox_with_no_value", "tool", "input", "counts", "proposals", "records"],
+   "slots_carried_basis": "READ_FROM_SOURCE",
+   "source_lines_read": "numcheck/check.py 8-11, 27-38, 45-50 (definitions); 110-119 (_blank record keys); 188-240 (_bisect_point: straddle_at_depth_limit count 200/219, first_straddling_piece 240, returns None meaning UNDECIDED); 296-350 (_identity_candidate: proposal exists only for UNDECIDED at tolerance 0, so I put 'proposal' in specific); 353-440 (check_point adds formula 359, bisection 415-422, verdict UNDECIDED 420/423); 443-557 (check_intersection: undecided_at_depth_limit 479/519, first_undecided_subbox 520/538, UNDECIDED 549-550); 560-592 (check_all wrapper: tool, input, fast, counts, triage, proposals, records). The source uses UNDECIDED in two senses: for a point, D straddles the tolerance edge at the last tier; for an intersection, the subboxes are still undecided at the depth limit. I used the point sense for the cluster. straddle_at_depth_limit and undecided_at_depth_limit are keys inside nested records (bisection, subboxes). I put them in specific because they are tied to this verdict, and I am unsure that is right. The carried list covers point records, intersection records and the check_all wrapper. 'fast' and 'triage' appear in both the record and the wrapper; each is listed once.",
+   "confidence": "MEDIUM",
+   "could_also_join": []
+  },
+  "T02": {
+   "cluster": "B",
+   "predicate": "A thing was searched for with a stated instrument, sensitivity or protocol and was not found at that sensitivity; this is a scoped null, not a claim that the thing is absent.",
+   "slots_specific": ["<value>"],
+   "slots_specific_basis": "READ_FROM_SOURCE",
+   "slots_carried": [],
+   "slots_carried_basis": "NONE_STATED",
+   "source_lines_read": "docs/glossary.md 129; calibration/expiry_register.py 34-37 (docstring), 54 (SCOPED regex captures the parenthesised value), 228-235 (slot_state: refuses a bare absence or a missing sensitivity and returns the string 'scoped_absence'; no record is built), 294 (render prints a count line: 'ABSENT_AT_SENSITIVITY slots: 0'). The notation parameter is spelled '<value>' in the glossary. The code calls it the sensitivity ('an absence needs its sensitivity'). The glossary says 'No slot holds it yet', and the code agrees: nothing builds a record carrying this state, so slots_carried is [].",
+   "confidence": "HIGH",
+   "could_also_join": []
+  },
+  "T03": {
+   "cluster": "C",
+   "predicate": "The governing source leaves this item undefined or unformable, so it is recorded as explicitly empty, with a reason, rather than filled in or defaulted.",
+   "slots_specific": [],
+   "slots_specific_basis": "NONE_STATED",
+   "slots_carried": ["state", "reason", "case", "m", "tol", "sigma", "k", "floor", "complete", "branches", "split", "split_abc", "split_live", "split_af", "g_differs", "g_pre", "sys"],
+   "slots_carried_basis": "READ_FROM_SOURCE",
+   "source_lines_read": "cplay/tokens.py 13-18 (definition anchor: the ExpiryTrigger kind vocabulary and the mapping table are VOID because the spec gives none), 22-25 (VOID in STATES), 44-50 (Token: state and reason; reason required on every non-verdict), 132-133 (VOCABULARY_MAPPING = Token('VOID', ...)); cplay/closure.py 196, 205, 223, 268, 302, 326 (VOID tokens when sigma, k, n_legs or a numeric floor is missing: 'cannot be formed'); 397-420 (branch_table rows carry 'VOID' as a value in branches). reason is shared by all non-verdict tokens, so specific is []. The term's own anchor is the 'spec is silent' sense. closure.py also uses VOID for 'a required declared input is missing', which is close to T07. I included the branch_table row fields as a wrapper that carries VOID as a value; the row fields are those of the demonstration table.",
+   "confidence": "LOW",
+   "could_also_join": ["T07"]
+  },
+  "T04": {
+   "cluster": "D",
+   "predicate": "A stated condition (what to check, on what, and with what result) whose occurrence would end an open, not-yet-known state.",
+   "slots_specific": ["kind", "target", "condition"],
+   "slots_specific_basis": "READ_FROM_SOURCE",
+   "slots_carried": ["kind", "target", "condition", "is_exit"],
+   "slots_carried_basis": "READ_FROM_SOURCE",
+   "source_lines_read": "cplay/tokens.py 64-72 (class ExpiryTrigger: is_exit = True class attribute; kind, target and condition all required), 81-89 (unknown() keeps typed triggers in t.typed), 136-140 (EXPIRY_VOCABULARY: the vocabulary is the TAF expiry_condition register, and its keys are explicitly NOT mapped onto kind/target/condition); COMBINED_SPEC 126-128 and 296 ('UNKNOWN carries what would end it'). I clustered this with T15 because both are the exit condition of an UNKNOWN. The source itself says the two field sets are unmapped (open item 12), so the predicates match but the fields differ. is_exit is a class attribute, not a constructor field; I put it in carried and am unsure whether it counts.",
+   "confidence": "MEDIUM",
+   "could_also_join": []
+  },
+  "T05": {
+   "cluster": "B",
+   "predicate": "A thing was searched for and not found at a stated detection limit, recorded together with how the limit was established, the effect size of interest and the conditions the null holds under.",
+   "slots_specific": ["limit", "basis", "effect_size", "conditions", "ladder", "covers_effect"],
+   "slots_specific_basis": "READ_FROM_SOURCE",
+   "slots_carried": ["state", "reason", "limit", "basis", "effect_size", "conditions", "ladder", "covers_effect"],
+   "slots_carried_basis": "READ_FROM_SOURCE",
+   "source_lines_read": "COMBINED_SPEC 129-133 (must carry the limit and its basis, the effect size, and the conditions), 293-295 (rows 15-17: 'fields: limit, effect size, scope'); cplay/tokens.py 9-10, 17-18 (covers_effect is a reading added here that refuses nothing), 31 (ABSENCE_BASES), 92-104 (absent_at_sensitivity(limit, basis, effect_size, conditions, ladder=None) sets those attributes plus covers_effect on a Token). The spec prose says 'three things', but the code has five parameters plus covers_effect, and spec row 16 uses the word 'scope' where the code uses 'conditions'. I recorded the code's spellings.",
+   "confidence": "HIGH",
+   "could_also_join": []
+  },
+  "T06": {
+   "cluster": "A",
+   "predicate": "The measured misclosure lies within the uncertainty band around the tolerance limit, so neither conformance nor nonconformance is proven.",
+   "slots_specific": [],
+   "slots_specific_basis": "NONE_STATED",
+   "slots_carried": ["field", "token", "case", "m", "tol", "sigma", "k", "floor", "complete", "branches", "split", "split_abc", "split_live", "split_af", "g_differs", "g_pre", "sys"],
+   "slots_carried_basis": "READ_FROM_SOURCE",
+   "source_lines_read": "cplay/closure.py 33-38 (branch G definition), 284-296 (FieldToken(field, token), written for UNRESOLVED AND TOLERANCE_UNRESOLVABLE, so it is not specific to this term alone), 299-315 (verdict_branch_G returns FieldToken('INSTRUMENT', Token('UNRESOLVED', reason))), 389-394 and 397-420 (branch_table rows carry 'INSTRUMENT:UNRESOLVED' in branches); cplay/tokens.py 26, 44-50 (the nested Token has state and reason; per the brief I named 'token' and did not open it); COMBINED_SPEC 248-253 (DERIVED: guarded acceptance and guarded rejection together leave UNRESOLVED on INSTRUMENT). tolerance, sigma, k and the roundoff floor are calculation inputs, so they are excluded from specific. The branch_table row fields are a wrapper carrying the term as a value.",
+   "confidence": "MEDIUM",
+   "could_also_join": []
+  },
+  "T07": {
+   "cluster": "E",
+   "predicate": "No verdict could be computed for this check because a prerequisite failed (units not passing, a missing or unreadable value, an input with no defined value, unsupported syntax or an internal error); the result is explicitly empty, with a reason.",
+   "slots_specific": ["void_reason", "first_subbox_with_no_value"],
+   "slots_specific_basis": "READ_FROM_SOURCE",
+   "slots_carried": ["kind", "verdict", "void_reason", "status", "deciding_tier", "precision", "rigorous", "fast", "tiers", "triage", "located", "proposal", "intervals", "inputs", "units", "provenance", "slots", "human_interest", "ai_interest", "formula", "bisection", "formulas", "subboxes", "subboxes_where_both_hold", "subboxes_where_one_fails", "first_undecided_subbox", "first_subbox_with_no_value", "tool", "input", "counts", "proposals", "records"],
+   "slots_carried_basis": "READ_FROM_SOURCE",
+   "source_lines_read": "numcheck/check.py 3-4, 12-14, 51-52 (definitions); 110-119 (_blank starts every record as verdict VOID with void_reason None); 436-439 and 553-556 (void_reason set on the VOID paths; status set to None); 545-548 (intersection VOID with first_subbox_with_no_value); 571-574 (unknown-kind record, VOID with void_reason); 560-592 (wrapper). This term bundles input-level failures with 'internal error' (the fail-closed catch at 438-439), and that part overlaps T08 and T10 (the check raised). I kept it separate because the dominant sense is 'no value on these inputs', not 'the instrument crashed'. Which of formula, bisection and the intersection fields are present depends on where the check stopped; I listed every name the source can put in.",
+   "confidence": "LOW",
+   "could_also_join": ["T03", "T08", "T10"]
+  },
+  "T08": {
+   "cluster": "F",
+   "predicate": "The check did not run to a result because the checking code itself raised an exception, so this is a gap in measurement, not a reading of the system.",
+   "slots_specific": ["exception", "path", "inputs", "call"],
+   "slots_specific_basis": "READ_FROM_SOURCE",
+   "slots_carried": ["field", "status", "reason", "sigma", "basis", "exception", "path", "bound", "kind", "module", "input", "missing_path", "expiry_condition"],
+   "slots_carried_basis": "READ_FROM_SOURCE",
+   "source_lines_read": "COMBINED_SPEC 53 ('exception + path, required'), 71-72, 85-89 (R-A2: exception type, call path, inputs; CRASHED goes on the coverage axis with TAF's fields), 321 ('CRASHED(exception, call, inputs)'), 335-343 (Q3); cplay/axes.py 41 (Reading fields), 49-50 and 59-60 (CRASHED must be on INSTRUMENT and needs exception and path), 69-78 (CoverageEntry fields), 81-88 (crash(exc, *, path, module, inputs, expiry_condition) returns a Reading AND a CoverageEntry), 99-102 (Record refuses a CRASHED reading that has no coverage entry). 'call' and 'inputs' are names in the spec prose only; the code's Reading has exception and path, and inputs goes to CoverageEntry.input. crash() builds both the CRASHED reading and the GAP_INSTRUMENT_CRASH entry, so its parameters module and expiry_condition are not specific to this term; I left them out of specific.",
+   "confidence": "HIGH",
+   "could_also_join": []
+  },
+  "T09": {
+   "cluster": "G",
+   "predicate": "A value is held open as not yet known, and must not be read as zero or as absent.",
+   "slots_specific": ["expiry_condition", "expiry_source"],
+   "slots_specific_basis": "READ_FROM_SOURCE",
+   "slots_carried": ["kind", "module", "input", "reason", "expiry_condition", "system_id", "modules_run", "modules_skipped", "overall_status", "severity", "not_determinable_reason", "coverage_count", "coverage_by_kind", "coverage", "red_flags", "summary", "sections", "path", "line", "quote", "class", "slot id", "expiry", "note", "cls", "sid", "exit"],
+   "slots_carried_basis": "READ_FROM_SOURCE",
+   "source_lines_read": "docs/glossary.md 124-129 (the PENDING / UNKNOWN row; expiry_condition and expiry_source are the exits documented for it). Those two fields are shared with PENDING, which is in the same glossary row but not among the 15 terms. calibration/unified_audit.py 45-46, 86-89 (UNKNOWN is on the coverage axis, not a severity), 98-101, 331-372 (UNKNOWN coverage entries: kind, module, input, reason, expiry_condition; no missing_path), 209-236 (UnifiedAuditReport.to_dict wrapper); calibration/expiry_register.py 19-31, 65 (register tuple documented in a comment as path, line, quote, class, slot id, expiry, note; 'slot id' is spelled there with a space), 262 (check() rows: cls, sid, exit). I did not open the nested expiry_condition dict or the sections entries.",
+   "confidence": "HIGH",
+   "could_also_join": []
+  },
+  "T10": {
+   "cluster": "F",
+   "predicate": "A module raised an exception, so nothing was measured; this is recorded as a coverage gap in the instrument, never as a severity reading.",
+   "slots_specific": ["error", "exception_type", "missing_path"],
+   "slots_specific_basis": "READ_FROM_SOURCE",
+   "slots_carried": ["kind", "module", "input", "reason", "missing_path", "expiry_condition", "error", "exception_type", "system_id", "modules_run", "modules_skipped", "overall_status", "severity", "not_determinable_reason", "coverage_count", "coverage_by_kind", "coverage", "red_flags", "summary", "sections"],
+   "slots_carried_basis": "READ_FROM_SOURCE",
+   "source_lines_read": "docs/glossary.md 131-142; calibration/unified_audit.py 93-101 (definition and COVERAGE_KINDS), 113-117 (ALL_MODULES_GAP_INSTRUMENT_CRASH reason), 334-344 (the crash coverage entry; it is the only kind that carries missing_path, and its expiry_condition is VOID), 479-492 (_dispatch writes the section record {error, exception_type, missing_path} only on a raise), 209-236 (report wrapper). COMBINED_SPEC 42-45 and 257-264 quote the same six coverage fields. One disagreement: the comment at unified_audit.py 113-117 says ALL_MODULES_GAP_INSTRUMENT_CRASH is 'not reachable on this branch (a raise is RED here)', but the _dispatch code at 479-492 already routes a raise to GAP_INSTRUMENT_CRASH. The comment looks stale relative to the code. missing_path is spelled the same in the section record and the coverage entry; it is listed once.",
+   "confidence": "HIGH",
+   "could_also_join": ["T07"]
+  },
+  "T11": {
+   "cluster": "H",
+   "predicate": "The check passed: the result was proven to conform to its stated criterion (here, the enclosure of lhs - rhs lies within the tolerance).",
+   "slots_specific": [],
+   "slots_specific_basis": "NONE_STATED",
+   "slots_carried": ["kind", "verdict", "void_reason", "status", "deciding_tier", "precision", "rigorous", "fast", "tiers", "triage", "located", "proposal", "intervals", "inputs", "units", "provenance", "slots", "human_interest", "ai_interest", "formula", "bisection", "tool", "input", "counts", "proposals", "records"],
+   "slots_carried_basis": "READ_FROM_SOURCE",
+   "source_lines_read": "numcheck/check.py 9 (definition), 15-25 (confirmed at the interval tier; predicted beside confirmed), 29 (every piece HOLDS -> HOLDS), 110-119, 353-440 (point record), 560-592 (wrapper). The bisection record has pieces_that_hold and pieces_that_hold_listed (237-238), but those describe pieces, not this verdict alone, so specific is []. Only point records carry HOLDS; intersections use BOTH_HOLD. This cluster choice is uncertain. HOLDS with t > 0 means 'inside a tolerance, not necessarily exact', which is close to T14 CLOSED_WITHIN, and closure.py branches D, E and G give CLOSED_WITHIN for a within-tolerance closure. Branches A to C give OK, which supports T13. I chose T13 because HOLDS is this system's plain pass verdict and carries no sigma or basis.",
+   "confidence": "LOW",
+   "could_also_join": ["T14"]
+  },
+  "T12": {
+   "cluster": "G",
+   "predicate": "A value is held open as not yet known, and the record must name at least one typed condition that would end it.",
+   "slots_specific": ["triggers", "typed", "untyped"],
+   "slots_specific_basis": "READ_FROM_SOURCE",
+   "slots_carried": ["state", "reason", "typed", "untyped", "kind", "module", "input", "missing_path", "expiry_condition"],
+   "slots_carried_basis": "READ_FROM_SOURCE",
+   "source_lines_read": "COMBINED_SPEC 126-128, 296-298 (rows 18-20), 370-371 (Q4); cplay/tokens.py 7-8, 81-89 (unknown(reason, triggers) refuses without a typed trigger; the Token gains typed and untyped); cplay/axes.py 24, 69-78 (CoverageEntry accepts kind 'UNKNOWN' with the six TAF fields). I am unsure whether the CoverageEntry of kind UNKNOWN counts as a record built when this term is reported; I included it with that caveat. The UNKNOWN token itself carries state, reason, typed and untyped. Spec row 20 says expiry is checked at read time, and I found no code for that in the packet; the source is silent there.",
+   "confidence": "HIGH",
+   "could_also_join": []
+  },
+  "T13": {
+   "cluster": "H",
+   "predicate": "The check ran and passed.",
+   "slots_specific": [],
+   "slots_specific_basis": "NONE_STATED",
+   "slots_carried": ["field", "status", "reason", "sigma", "basis", "exception", "path", "bound", "state", "case", "m", "tol", "k", "floor", "complete", "branches", "split", "split_abc", "split_live", "split_af", "g_differs", "g_pre", "sys"],
+   "slots_carried_basis": "READ_FROM_SOURCE",
+   "source_lines_read": "COMBINED_SPEC 49 (OK: 'ran and passed', reason field '--'), 252 (OK at roundoff in branch G); cplay/axes.py 23, 41-66 (a Reading with status OK; no extra field required); cplay/tokens.py 21 (VERDICTS = ('OK',); an OK Token needs no reason), 44-50 (Token state, reason); cplay/closure.py 213, 225, 236, 246, 259, 308 (A.reading('PHYSICAL','OK')), 397-420 (branch_table rows). OK is the only verdict that needs no reason, so nothing is tied to it alone. The carried list unions the Reading fields, the Token fields and the branch_table row fields.",
+   "confidence": "MEDIUM",
+   "could_also_join": ["T11"]
+  },
+  "T14": {
+   "cluster": "I",
+   "predicate": "The closure balances only to within a declared noise or uncertainty band (sigma), not exactly; this is a qualified pass that carries its band and the basis for it.",
+   "slots_specific": ["sigma", "basis"],
+   "slots_specific_basis": "READ_FROM_SOURCE",
+   "slots_carried": ["field", "status", "reason", "sigma", "basis", "exception", "path", "bound", "case", "m", "tol", "k", "floor", "complete", "branches", "split", "split_abc", "split_live", "split_af", "g_differs", "g_pre", "sys"],
+   "slots_carried_basis": "READ_FROM_SOURCE",
+   "source_lines_read": "COMBINED_SPEC 54 ('sigma + basis, required (Q2)'), 68-69, 286, 368-369 (Q2); cplay/axes.py 10-15, 53-54 (off PHYSICAL it returns a VOID token, not a Reading), 61-63 (CLOSED_WITHIN needs a numeric sigma and a basis); cplay/closure.py 193-199 (_closed builds the Reading with sigma and basis; VOID if no sigma), 397-420. The definition says 'within sigma', but in branch G CLOSED_WITHIN means |m| <= tol - U (310) and in branch D it means |m| <= tol (247-248). So within this source the term covers both 'within the noise band' and 'within tolerance minus U'. That spread is why I list T11 in its could_also_join. sigma is also a branch_table row field and is listed once.",
+   "confidence": "MEDIUM",
+   "could_also_join": ["T11"]
+  },
+  "T15": {
+   "cluster": "D",
+   "predicate": "The stated instrument, sensitivity or protocol whose null result would end, by downgrading, an open not-yet-known slot; it is recorded as VOID when no exit is defined.",
+   "slots_specific": ["instrument_class", "sensitivity", "protocol", "provenance"],
+   "slots_specific_basis": "READ_FROM_SOURCE",
+   "slots_carried": ["instrument_class", "sensitivity", "protocol", "provenance", "pr77", "pr78", "kind", "module", "input", "reason", "missing_path", "expiry_condition", "path", "line", "quote", "class", "slot id", "expiry", "note", "cls", "sid", "exit"],
+   "slots_carried_basis": "READ_FROM_SOURCE",
+   "source_lines_read": "docs/glossary.md 127-128; calibration/expiry_register.py 4-8 (Kimi audit wording), 28-32 (expiry_condition is the string 'void' or a dict with instrument_class, sensitivity, protocol, provenance), 53 (EXPIRY_KEYS), 58-59 (E() builds the dict), 65 (register tuple names), 216-225 (exit_state: none / incomplete / complete), 262 (rows cls, sid, exit); calibration/unified_audit.py 136-146 (_AV_UNKNOWN_EXPIRY: two disagreeing registers carried side by side under keys pr77 and pr78), 331-372 (every coverage entry carries expiry_condition); cplay/tokens.py 136-137 (the same four keys pinned as TAF_EXPIRY_KEYS). Spelling disagreement: the glossary says 'VOID -- no exit defined', the register code uses lowercase 'void', and unified_audit uses 'VOID'. I clustered this with T04; the field sets differ and the source says they are unmapped.",
+   "confidence": "MEDIUM",
+   "could_also_join": []
+  }
+ },
+ "attestation": {
+  "q1_seen_pair_table_with_verdicts": "no",
+  "q2_seen_predicate_sentence_by_someone_else": "no",
+  "q3_seen_vocabulary_mapping_or_second_reader_report": "unsure",
+  "q4_told_how_many_clusters_or_pairs": "no",
+  "q5_used_anything_outside_packet": "unsure",
+  "q6_prior_sessions_about_this_project": "yes",
+  "notes": "SETUP DID NOT MATCH THE REQUEST. I could not start a fresh, memory-free conversation. This reading was done inside an existing Claude Code cloud session. (1) Instruction files: a project instruction file (CLAUDE.md of the repository jinnz2/decision-aperture) was loaded into my context automatically. It names 'Simulators' as a sibling project and describes its own state vocabulary (UNMAPPED, UNMEASURED, RESOLVED, DEFERRED and others). It contains no pair table, no cluster count and no predicates for these 15 terms. I did not consult it for this reading, but it was present, so q5 is 'unsure' rather than 'no'. (2) Attached repositories: jinnz2/decision-aperture was attached and checked out. I did not read it for this task. (3) Tools on: shell (bash), file read/write/search, subagent spawning, web search (available, not used), GitHub tools (available, not used), and session tools that could attach other repositories. I used only bash and file read, to unzip the packet into an empty scratch folder and read its files. (4) Memory and project knowledge: no persistent memory or project-knowledge store was loaded that I am aware of. q6 is 'yes' because tools in this session could probably reach the user's other repositories, and possibly earlier notes in them; I did not use them. q3 is 'unsure' because the instruction file belongs to a sibling tool in what looks like the same family of projects; it is not a mapping report, but I cannot fully rule out the category. On the questions with no answer above: the tokens.py and COMBINED_SPEC texts in the packet themselves discuss mapping vocabularies (Q12, 9c items 11-12), and I read them only as packet content. (5) Cluster count: nothing told me a number. The packet's structure hints at pairs, since three labels appear twice (ABSENT_AT_SENSITIVITY, UNKNOWN, VOID) across projects, and PACKET_MANIFEST lists a leak-check exception for the word SPLIT. I did not aim for a number. My result is 9 clusters, and the same-label VOID pair (T03, T07) is deliberately split. (6) Exact app model name not visible to me; I gave the configured model identifier."
+ }
+}
