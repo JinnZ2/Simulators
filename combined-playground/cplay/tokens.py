@@ -25,6 +25,7 @@ STATES = (
     "UNKNOWN", "ABSENT_AT_SENSITIVITY", "VOID",
     "UNRESOLVED",   # M4 branch G: inside the guard band; carried on INSTRUMENT, never PHYSICAL
     "TOLERANCE_UNRESOLVABLE",   # M4 branch G precondition: U >= tol, decided before m is read
+    "SYSTEMATIC_ERROR_INDICATED",   # M4 diagnostic: |m| > k*sigma*sqrt(n_legs), on DETERMINATION
 )
 TAGS = ("OBSERVED", "DERIVED", "PROPOSED")
 ABSENCE_BASES = ("LADDER", "DECLARED")

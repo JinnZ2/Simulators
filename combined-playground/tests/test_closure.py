@@ -293,3 +293,42 @@ class BranchG(unittest.TestCase):
     def test_source_status(self):
         self.assertEqual(C.G_SOURCE_STATUS, "NOT_CHECKED")
         self.assertIn("VERIFY", C.G_SOURCE)
+
+
+class SystematicCheck(unittest.TestCase):
+    """F reinterpreted as a random-error consistency check: a diagnostic, never a verdict."""
+    def _row(self, cid):
+        return next(r for r in C.branch_table() if r["case"] == cid)
+
+    def test_c9_cw_plus_systematic_flag(self):
+        r = self._row("c9")
+        self.assertEqual(r["branches"]["G"], "PHYSICAL:CLOSED_WITHIN")
+        self.assertEqual(r["sys"], "D:SYS_ERR")
+        self.assertEqual(r["branches"]["F"], "PHYSICAL:FAILED")       # F kept as history
+
+    def test_flag_fields_and_reason(self):
+        p = _prereg(accounts=[_decl(tol=1e-5, sigma=1e-7, k=2)])
+        o = C.Misclosure(account="N", value=5e-6, provenance="x")
+        res = C.run(p, p.sha256, [o])
+        f = C.systematic_check(res, o, n_legs=4)
+        self.assertEqual((f.field, f.token.state), ("DETERMINATION", "SYSTEMATIC_ERROR_INDICATED"))
+        self.assertIn("exceeds random-error expectation for n legs", f.token.reason)
+        g_before = C.verdict_branch_G(res, o)
+        C.systematic_check(res, o, n_legs=4)
+        self.assertEqual(C.verdict_branch_G(res, o), g_before)        # never changes G
+
+    def test_within_random_error_no_flag_and_void_cases(self):
+        p = _prereg(accounts=[_decl(tol=1e-5, sigma=1e-7, k=2)])
+        o = C.Misclosure(account="N", value=3e-7, provenance="x")
+        res = C.run(p, p.sha256, [o])
+        self.assertIsNone(C.systematic_check(res, o, n_legs=4))       # 3e-7 <= 4e-7
+        self.assertEqual(C.systematic_check(res, o).state, "VOID")    # n_legs missing
+        p = _prereg(accounts=[_decl(sigma=None, k=None)])
+        o = C.Misclosure(account="N", value=3e-7, provenance="x")
+        res = C.run(p, p.sha256, [o])
+        self.assertEqual(C.systematic_check(res, o, n_legs=4).state, "VOID")
+        with self.assertRaises(C.ClosureError):
+            C.DiagnosticFlag("PHYSICAL", T.Token("SYSTEMATIC_ERROR_INDICATED", "x"))
+
+    def test_table_flags(self):
+        self.assertEqual([r["case"] for r in C.branch_table() if r["sys"] == "D:SYS_ERR"], ["c9", "c11"])

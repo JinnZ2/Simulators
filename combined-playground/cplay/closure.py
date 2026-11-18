@@ -36,6 +36,10 @@ Added (branch completion), none adopted:
                        instrument cannot prove conformance at this tolerance); see g_precondition().
                        Source: "ISO 14253-1 / JCGM 106 decision rule, recalled, not re-read
                        (VERIFY)"; COMBINED_SPEC section 7 status NOT_CHECKED.
+Diagnostic (not a verdict): systematic_check() -- F's rule reinterpreted as a random-error
+consistency check from closed-traverse practice: |m| > k*sigma*sqrt(n_legs) -> DETERMINATION
+flag SYSTEMATIC_ERROR_INDICATED (misclosure exceeds random-error expectation for n legs). n_legs
+missing -> VOID. It never changes G's verdict; verdict_branch_F stays in the SPLIT table as history.
 D and E need a numeric floor (a token floor -> VOID); a CLOSED_WITHIN with no declared sigma is
 VOID, since Q2 makes sigma part of CLOSED_WITHIN. F needs sigma and k (missing -> VOID).
 
@@ -325,6 +329,35 @@ def g_precondition(result, account):
     return None
 
 
+class DiagnosticFlag(namedtuple("DiagnosticFlag", "field token")):
+    """A diagnostic carried beside a verdict, never replacing it."""
+    __slots__ = ()
+
+    def __new__(cls, field, token):
+        if field != "DETERMINATION" or not isinstance(token, T.Token) \
+                or token.state != "SYSTEMATIC_ERROR_INDICATED":
+            raise ClosureError("DiagnosticFlag is DETERMINATION : SYSTEMATIC_ERROR_INDICATED")
+        return super().__new__(cls, field, token)
+
+
+def systematic_check(result, misclosure=None, n_legs=None):
+    """Random-error consistency check. Returns DiagnosticFlag when |m| > k*sigma*sqrt(n_legs),
+    None when the misclosure is within random-error expectation, VOID when it cannot be formed."""
+    decl, m, _ = _accepted(result, misclosure)
+    if isinstance(n_legs, bool) or not isinstance(n_legs, int) or n_legs < 1:
+        return T.Token("VOID", "systematic_check needs n_legs as a declared integer >= 1; got %r"
+                       % (n_legs,))
+    if decl.sigma is None or decl.k is None:
+        return T.Token("VOID", "systematic_check needs sigma and k declared for account %s"
+                       % decl.account)
+    expect = decl.k * decl.sigma * n_legs ** 0.5
+    if m > expect:
+        return DiagnosticFlag("DETERMINATION", T.Token(
+            "SYSTEMATIC_ERROR_INDICATED", "misclosure exceeds random-error expectation for n legs: "
+            "|m| = %g > k*sigma*sqrt(%d) = %g (account %s)" % (m, n_legs, expect, decl.account)))
+    return None
+
+
 BRANCHES = {"A": verdict_branch_A, "B": verdict_branch_B, "C": verdict_branch_C,
             "D": verdict_branch_D, "E": verdict_branch_E, "F": verdict_branch_F,
             "G": verdict_branch_G}
@@ -369,13 +402,15 @@ def branch_table():
         abc = {got[b] for b in "ABC"}
         live = {v for v in got.values() if v != "VOID"}
         a_f = {got[b] for b in "ABCDEF"}
+        sysf = systematic_check(res, obs, n_legs=N_LEGS)
+        sysf = "--" if sysf is None else ("D:SYS_ERR" if isinstance(sysf, DiagnosticFlag) else sysf.state)
         pre = g_precondition(res, "N")
         pre = "--" if pre is None else ("I:TOL_UNRES" if isinstance(pre, FieldToken) else pre.state)
         rows.append({"case": cid, "m": m, "tol": tol, "sigma": sigma, "k": k, "floor": floor,
                      "complete": complete, "branches": got, "split": len(set(got.values())) > 1,
                      "split_abc": len(abc) > 1, "split_live": len(live) > 1,
                      "split_af": len(a_f) > 1, "g_differs": got["G"] not in a_f,
-                     "g_pre": pre})
+                     "g_pre": pre, "sys": sysf})
     return rows
 
 
@@ -385,15 +420,17 @@ def render_table(rows=None):
              "DETERMINATION:FAILED": "D:FAIL", "VOID": "VOID", "INSTRUMENT:UNRESOLVED": "I:UNRES"}
     out = ["P = PHYSICAL, D = DETERMINATION, I = INSTRUMENT, CW = CLOSED_WITHIN; n_legs = %d for F" % N_LEGS,
            "G source: %s [%s]" % (G_SOURCE, G_SOURCE_STATUS),
-           "case  |m|           tol    k*sigma  floor   complete  A       B       C       D       E       F       G        G-pre        split  G-differs"]
+           "case  |m|           tol    k*sigma  floor   complete  A       B       C       D       E       F       G        G-pre        sys-check  split  G-differs"]
     for r in rows:
         band = "--" if r["sigma"] is None else "%g" % (r["k"] * r["sigma"])
         cells = " ".join("%-7s" % short.get(r["branches"][b], r["branches"][b]) for b in "ABCDEFG")
-        out.append("%-5s %-13.8g %-6g %-8s %-7s %-9s %s  %-12s %-6s %s" % (
-            r["case"], r["m"], r["tol"], band, r["floor"], r["complete"], cells, r["g_pre"],
+        out.append("%-5s %-13.8g %-6g %-8s %-7s %-9s %s  %-12s %-10s %-6s %s" % (
+            r["case"], r["m"], r["tol"], band, r["floor"], r["complete"], cells, r["g_pre"], r["sys"],
             "SPLIT" if r["split"] else "", "G" if r["g_differs"] else ""))
     out.append("G-pre TOLERANCE_UNRESOLVABLE (U >= tol, independent of m): "
                + ", ".join(r["case"] for r in rows if r["g_pre"] == "I:TOL_UNRES"))
+    out.append("sys-check SYSTEMATIC_ERROR_INDICATED (diagnostic, n_legs = %d; changes no verdict): "
+               % N_LEGS + ", ".join(r["case"] for r in rows if r["sys"] == "D:SYS_ERR"))
     out.append("SPLIT (A-G): " + ", ".join(r["case"] for r in rows if r["split"]))
     out.append("G differs from every A-F cell: " + ", ".join(r["case"] for r in rows if r["g_differs"]))
     out.append("SPLIT (A-F, as before): " + ", ".join(r["case"] for r in rows if r["split_af"]))

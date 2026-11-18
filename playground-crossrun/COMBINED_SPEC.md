@@ -370,6 +370,11 @@ VOID or not built in combined-playground M1-M9 and needs a decision before it is
                      (the instrument cannot prove conformance at the tolerance it is judged against)
 2026-11-18  PROPOSAL verdict() = branch G once its source (section 7, decision rule) is CHECKED;
                      until then verdict() keeps raising SpecGap
+2026-11-18  DERIVED  F reinterpreted as random-error consistency check (closed-traverse practice),
+                     separate from conformance: systematic_check() flags DETERMINATION
+                     SYSTEMATIC_ERROR_INDICATED when |m| > k*sigma*sqrt(n_legs); n_legs missing -> VOID;
+                     never changes G's verdict. c9: G P:CW + SYSTEMATIC_ERROR_INDICATED.
+                     verdict_branch_F stays in the SPLIT table as history
 2026-11-18  READING  branch F gives no OK (the item states none); D / E CLOSED_WITHIN with no declared
                      sigma -> VOID (Q2 makes sigma part of CLOSED_WITHIN)
 ```
@@ -388,19 +393,20 @@ M4 branch table (combined-playground/samples/closure_branch_table.txt, construct
 ```text
 P = PHYSICAL, D = DETERMINATION, I = INSTRUMENT, CW = CLOSED_WITHIN; n_legs = 4 for F
 G source: ISO 14253-1 / JCGM 106 decision rule, recalled, not re-read (VERIFY) [NOT_CHECKED]
-case  |m|           tol    k*sigma  floor   complete  A       B       C       D       E       F       G        G-pre        split  G-differs
-c1    1e-07         1e-06  3e-06    1e-12   True      P:OK    P:OK    P:CW    P:CW    P:CW    P:CW    I:UNRES  I:TOL_UNRES  SPLIT  G
-c2    2e-06         1e-06  3e-06    1e-12   True      P:CW    P:CW    P:CW    P:FAIL  P:CW    P:FAIL  I:UNRES  I:TOL_UNRES  SPLIT  G
-c3    5e-06         1e-06  3e-06    1e-12   True      P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL   I:TOL_UNRES         
-c4    1.0000005e-06 1e-06  --       1e-09   True      P:FAIL  P:OK    P:FAIL  P:FAIL  P:FAIL  VOID    VOID     VOID         SPLIT  
-c5    5e-07         1e-06  --       1e-12   True      P:OK    P:OK    P:OK    VOID    VOID    VOID    VOID     VOID         SPLIT  
-c6    5e-07         1e-06  --       TOKEN   True      P:OK    VOID    P:OK    VOID    VOID    VOID    VOID     VOID         SPLIT  
-c7    2e-06         1e-06  --       1e-12   True      P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL  VOID    VOID     VOID         SPLIT  
-c8    5e-06         1e-06  3e-06    1e-12   ABSENT    D:FAIL  D:FAIL  D:FAIL  D:FAIL  D:FAIL  D:FAIL  D:FAIL   I:TOL_UNRES         
-c9    5e-06         1e-05  2e-07    1e-12   True      P:OK    P:OK    P:OK    P:CW    P:CW    P:FAIL  P:CW     --           SPLIT  
-c10   0             1e-05  2e-07    1e-12   True      P:OK    P:OK    P:CW    P:OK    P:OK    P:CW    P:OK     --           SPLIT  
-c11   1.1e-05       1e-05  2e-07    1e-12   True      P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL   --                  
+case  |m|           tol    k*sigma  floor   complete  A       B       C       D       E       F       G        G-pre        sys-check  split  G-differs
+c1    1e-07         1e-06  3e-06    1e-12   True      P:OK    P:OK    P:CW    P:CW    P:CW    P:CW    I:UNRES  I:TOL_UNRES  --         SPLIT  G
+c2    2e-06         1e-06  3e-06    1e-12   True      P:CW    P:CW    P:CW    P:FAIL  P:CW    P:FAIL  I:UNRES  I:TOL_UNRES  --         SPLIT  G
+c3    5e-06         1e-06  3e-06    1e-12   True      P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL   I:TOL_UNRES  --                
+c4    1.0000005e-06 1e-06  --       1e-09   True      P:FAIL  P:OK    P:FAIL  P:FAIL  P:FAIL  VOID    VOID     VOID         VOID       SPLIT  
+c5    5e-07         1e-06  --       1e-12   True      P:OK    P:OK    P:OK    VOID    VOID    VOID    VOID     VOID         VOID       SPLIT  
+c6    5e-07         1e-06  --       TOKEN   True      P:OK    VOID    P:OK    VOID    VOID    VOID    VOID     VOID         VOID       SPLIT  
+c7    2e-06         1e-06  --       1e-12   True      P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL  VOID    VOID     VOID         VOID       SPLIT  
+c8    5e-06         1e-06  3e-06    1e-12   ABSENT    D:FAIL  D:FAIL  D:FAIL  D:FAIL  D:FAIL  D:FAIL  D:FAIL   I:TOL_UNRES  --                
+c9    5e-06         1e-05  2e-07    1e-12   True      P:OK    P:OK    P:OK    P:CW    P:CW    P:FAIL  P:CW     --           D:SYS_ERR  SPLIT  
+c10   0             1e-05  2e-07    1e-12   True      P:OK    P:OK    P:CW    P:OK    P:OK    P:CW    P:OK     --           --         SPLIT  
+c11   1.1e-05       1e-05  2e-07    1e-12   True      P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL  P:FAIL   --           D:SYS_ERR         
 G-pre TOLERANCE_UNRESOLVABLE (U >= tol, independent of m): c1, c2, c3, c8
+sys-check SYSTEMATIC_ERROR_INDICATED (diagnostic, n_legs = 4; changes no verdict): c9, c11
 SPLIT (A-G): c1, c2, c4, c5, c6, c7, c9, c10
 G differs from every A-F cell: c1, c2
 SPLIT (A-F, as before): c1, c2, c4, c5, c6, c7, c9, c10
@@ -411,4 +417,6 @@ SPLIT (A-C only, as before): c1, c4, c6, c10
 SPLIT rows (A-G): c1, c2, c4, c5, c6, c7, c9, c10; non-VOID splits: c1, c2, c4, c9, c10. G differs
 from every A-F cell on c1 and c2 (I:UNRES). TOLERANCE_UNRESOLVABLE flags c1, c2, c3, c8, where
 U = 3e-6 >= tol = 1e-6: G cannot prove conformance there whatever m is. c9-c11 (U = 2e-7 < tol =
-1e-5) reach G's other three outcomes: CLOSED_WITHIN, OK at exactly zero, FAILED.
+1e-5) reach G's other three outcomes: CLOSED_WITHIN, OK at exactly zero, FAILED. The systematic
+check flags c9 and c11 (|m| > k*sigma*sqrt(4) = 4e-7); on c9 tolerance is met and the flag says
+the loop's error is not random.
