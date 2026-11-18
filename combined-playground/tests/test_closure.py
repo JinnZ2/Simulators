@@ -164,11 +164,16 @@ class Branches(unittest.TestCase):
 
     def test_table_and_split_rows(self):
         rows = C.branch_table()
-        self.assertEqual(len(rows), 8)
-        self.assertEqual([r["case"] for r in rows if r["split"]], ["c1", "c2", "c4", "c5", "c6", "c7"])
-        self.assertEqual([r["case"] for r in rows if r["split_live"]], ["c1", "c2", "c4"])
-        self.assertEqual([r["case"] for r in rows if r["split_abc"]], ["c1", "c4", "c6"])
-        self.assertEqual([r["case"] for r in rows if r["split_af"]], ["c1", "c2", "c4", "c5", "c6", "c7"])
+        self.assertEqual(len(rows), 11)
+        cases = lambda key: [r["case"] for r in rows if r[key]]
+        self.assertEqual(cases("split"), ["c1", "c2", "c4", "c5", "c6", "c7", "c9", "c10"])
+        self.assertEqual(cases("split_live"), ["c1", "c2", "c4", "c9", "c10"])
+        self.assertEqual(cases("split_abc"), ["c1", "c4", "c6", "c10"])
+        self.assertEqual(cases("split_af"), ["c1", "c2", "c4", "c5", "c6", "c7", "c9", "c10"])
+        self.assertEqual([r["case"] for r in rows if r["g_pre"] == "I:TOL_UNRES"], ["c1", "c2", "c3", "c8"])
+        g = {r["case"]: r["branches"]["G"] for r in rows}
+        self.assertEqual((g["c9"], g["c10"], g["c11"]),
+                         ("PHYSICAL:CLOSED_WITHIN", "PHYSICAL:OK", "PHYSICAL:FAILED"))
         self.assertEqual([r["case"] for r in rows if r["g_differs"]], ["c1", "c2"])
         for r in rows:
             self.assertEqual(sorted(r["branches"]), list("ABCDEFG"))
@@ -228,9 +233,13 @@ class BranchG(unittest.TestCase):
         obs = C.Misclosure(account="N", value=m, provenance="declared")
         return C.run(p, p.sha256, [obs]), obs
 
-    def test_three_zones(self):                       # U = 2e-7 + 1e-12, tol 1e-5
-        r, o = self._res(9e-6)
+    def test_four_zones(self):                        # U = 2e-7 + 1e-12, tol 1e-5
+        r, o = self._res(0.0)
+        self.assertEqual(C.verdict_branch_G(r, o).status, "OK")        # exact tier: |m| <= floor
+        r, o = self._res(5e-13)
         self.assertEqual(C.verdict_branch_G(r, o).status, "OK")
+        r, o = self._res(9e-6)
+        self.assertEqual(C.verdict_branch_G(r, o).status, "CLOSED_WITHIN")   # was OK before relabel
         r, o = self._res(1.0e-5)
         g = C.verdict_branch_G(r, o)
         self.assertIsInstance(g, C.FieldToken)
@@ -257,15 +266,29 @@ class BranchG(unittest.TestCase):
     def test_token_floor_void_and_floor_added_to_u(self):
         r, o = self._res(5e-6, floor=T.Token("UNTESTED", "x"))
         self.assertEqual(C.verdict_branch_G(r, o).state, "VOID")
-        # floor widens U: 9.8e-6 is OK with floor 0 (U = 2e-7) but not with floor 1e-7 (U = 3e-7)
+        # floor widens U: 9.75e-6 is CW with floor 0 (U = 2e-7) but not with floor 1e-7 (U = 3e-7)
         r, o = self._res(9.75e-6, floor=0)
-        self.assertEqual(C.verdict_branch_G(r, o).status, "OK")
+        self.assertEqual(C.verdict_branch_G(r, o).status, "CLOSED_WITHIN")
         r, o = self._res(9.75e-6, floor=1e-7)
         self.assertEqual(C.verdict_branch_G(r, o).token.state, "UNRESOLVED")
 
-    def test_empty_acceptance_zone_no_ok(self):
-        r, o = self._res(0.0, tol=1e-7, sigma=1e-7, k=2)        # U > tol
+    def test_empty_acceptance_zone_no_cw(self):
+        r, o = self._res(1e-9, tol=1e-7, sigma=1e-7, k=2)       # U > tol
         self.assertEqual(C.verdict_branch_G(r, o).token.state, "UNRESOLVED")
+
+    def test_precondition_tolerance_unresolvable_independent_of_m(self):
+        for m in (0.0, 1e-9, 5e-8, 1.0):
+            r, o = self._res(m, tol=1e-7, sigma=1e-7, k=2)      # U = 2e-7 >= tol
+            pre = C.g_precondition(r, "N")
+            self.assertEqual((pre.field, pre.token.state), ("INSTRUMENT", "TOLERANCE_UNRESOLVABLE"))
+        r, o = self._res(0.0, tol=2e-7 + 1e-12, sigma=1e-7, k=2)   # U == tol -> flagged (>=)
+        self.assertEqual(C.g_precondition(r, "N").token.state, "TOLERANCE_UNRESOLVABLE")
+        r, o = self._res(0.0)                                   # U < tol
+        self.assertIsNone(C.g_precondition(r, "N"))
+        r, o = self._res(0.0, sigma=None)
+        self.assertEqual(C.g_precondition(r, "N").state, "VOID")
+        with self.assertRaises(C.ClosureError):
+            C.FieldToken("PHYSICAL", T.Token("TOLERANCE_UNRESOLVABLE", "x"))
 
     def test_source_status(self):
         self.assertEqual(C.G_SOURCE_STATUS, "NOT_CHECKED")
