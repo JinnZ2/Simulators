@@ -54,3 +54,25 @@ tool's stated scope only. Index: Simulators `TOOL_FINDER/TOOL_FINDER.md`.
 ## Tested (append-only; never overwrite an older line): channel_chain
 tested: 2026-11-09 | model: WITHHELD (session rule: no model identifier is written into a pushed artifact; the operator holds it) | Claude Code, cloud session (claude.ai/code) | channel_chain.py --selftest 12/12
 tested: 2026-11-09 | commit 98ecd8f | Claude Code, cloud session (claude.ai/code) | model: see trailer | channel_chain.py --selftest 12/12
+
+## Finds-by (ALIAS_PROPOSED, 2026-11-17): check_cards / TOOL_CARDS
+Note 2026-11-17: added with the TOOL_CARDS index; aliases derived from this tool's
+stated scope only. Index: Simulators `TOOL_FINDER/TOOL_FINDER.md` (entry `tool-cards`).
+
+- one row per tool with where it lives and its hash
+- is this tool pinned to a merged commit
+- tool on an unmerged branch
+- card for a tool built in another repository
+- find a tool card by a phrase
+- which tools are not built yet
+- avoided term: registry
+- reason: a registry reads as the place the tools live; "A map, not a move: the code stays in the repository it was built in."
+- measures: "A map, not a move: the code stays in the repository it was built in."
+- breaks when: "every location it can reach and says NOT_CHECKED, never OK, for one it cannot."
+
+`TOOL_CARDS.json` is the source; `TOOL_CARDS.md` is rendered by `python3 tools/check_cards.py --write`.
+A row is pinned to a merged commit and the sha256 of the file there; a row on an unmerged branch
+reads PENDING_MERGE with its PR number and is re-pinned on merge. Sibling checkouts are looked for
+at `../formula-audit` and `../geometric-to-binary-computational-bridge` (override with
+`CARDS_<REPO>_PATH`); without them those rows read NOT_CHECKED.
+

@@ -1,0 +1,828 @@
+{
+ "F1": {
+  "note": "ratios at grid means of a few cells are noise-dominated (original: 12 reps, one seed)",
+  "rows": [
+   {
+    "drought": 0.0,
+    "original_grid": 0.0001232274716675884,
+    "original_ode": 0.0,
+    "original_ratio": 0.0,
+    "rebuild_grid": null,
+    "rebuild_ode": null,
+    "rebuild_ratio": null
+   },
+   {
+    "drought": 0.1,
+    "original_grid": 0.00026782854043216507,
+    "original_ode": 0.0,
+    "original_ratio": 0.0,
+    "rebuild_grid": 0.001678466796875,
+    "rebuild_ode": 0.0025687774694361427,
+    "rebuild_ratio": 1.530430911245155
+   },
+   {
+    "drought": 0.2,
+    "original_grid": 0.00039884711687004703,
+    "original_ode": 0.20634485015392867,
+    "original_ratio": 517.3532449556612,
+    "rebuild_grid": 0.0040771484375,
+    "rebuild_ode": 0.013398733541028064,
+    "rebuild_ratio": 3.2863001547335897
+   },
+   {
+    "drought": 0.3,
+    "original_grid": 0.0007383233266291613,
+    "original_ode": 0.47798615920632725,
+    "original_ratio": 647.3940914051684,
+    "rebuild_grid": 0.008721923828125,
+    "rebuild_ode": 0.1091932645529688,
+    "rebuild_ratio": 12.519401304659487
+   },
+   {
+    "drought": 0.4,
+    "original_grid": 0.001717299263790499,
+    "original_ode": 0.6419813173416999,
+    "original_ratio": 373.83194116364456,
+    "rebuild_grid": 0.017596435546875,
+    "rebuild_ode": 0.2618573675288425,
+    "rebuild_ratio": 14.881273359668938
+   },
+   {
+    "drought": 0.5,
+    "original_grid": 0.01195404014487947,
+    "original_ode": 0.7470540512104815,
+    "original_ratio": 62.49385497759794,
+    "rebuild_grid": 0.04261474609375,
+    "rebuild_ode": 0.40104261851533984,
+    "rebuild_ratio": 9.410888372608605
+   },
+   {
+    "drought": 0.6,
+    "original_grid": 0.16382461933052953,
+    "original_ode": 0.8173218589229185,
+    "original_ratio": 4.989005085211918,
+    "rebuild_grid": 0.350848388671875,
+    "rebuild_ode": 0.52875134734409,
+    "rebuild_ratio": 1.5070650583451752
+   },
+   {
+    "drought": 0.7,
+    "original_grid": 0.7193732067867256,
+    "original_ode": 0.8658451887207959,
+    "original_ratio": 1.2036105606272534,
+    "rebuild_grid": 0.6792724609375,
+    "rebuild_ode": 0.6485162011002541,
+    "rebuild_ratio": 0.9547217624650974
+   },
+   {
+    "drought": 0.8,
+    "original_grid": 0.9540393000992607,
+    "original_ode": 0.9001899329291538,
+    "original_ratio": 0.9435564476594368,
+    "rebuild_grid": 0.795294189453125,
+    "rebuild_ode": 0.7627407441032739,
+    "rebuild_ratio": 0.9590674170872088
+   },
+   {
+    "drought": 0.9,
+    "original_grid": 0.9828705030008678,
+    "original_ode": 0.9249746307618676,
+    "original_ratio": 0.9410951167399628,
+    "rebuild_grid": 0.8984619140625,
+    "rebuild_ode": 0.8730360071411994,
+    "rebuild_ratio": 0.9717006291270218
+   },
+   {
+    "drought": 1.0,
+    "original_grid": 0.9942484623485487,
+    "original_ode": 0.9431387919902796,
+    "original_ratio": 0.9485946699504657,
+    "rebuild_grid": null,
+    "rebuild_ode": null,
+    "rebuild_ratio": null
+   }
+  ],
+  "rule": "ODE / grid by drought for both branches; no single number"
+ },
+ "F3": {
+  "rows": [
+   {
+    "drought": 0.2,
+    "original_gap": 0.2045244890711793,
+    "original_grid": 0.0018203610827493874,
+    "original_inside": false,
+    "original_ode": 0.20634485015392867,
+    "original_sd": 0.0029300810150636445,
+    "rebuild_gap": 0.011222595054725868,
+    "rebuild_inside": true
+   },
+   {
+    "drought": 0.4,
+    "original_gap": 0.311786231870372,
+    "original_grid": 0.3301950854713279,
+    "original_inside": false,
+    "original_ode": 0.6419813173416999,
+    "original_sd": 0.26890320559413977,
+    "rebuild_gap": 0.21005970720402817,
+    "rebuild_inside": false
+   },
+   {
+    "drought": 0.5,
+    "original_gap": 0.016936146002675567,
+    "original_grid": 0.730117905207806,
+    "original_inside": true,
+    "original_ode": 0.7470540512104815,
+    "original_sd": 0.011994681286146188,
+    "rebuild_gap": 0.05262981848139331,
+    "rebuild_inside": false
+   },
+   {
+    "drought": 0.6,
+    "original_gap": 0.0227930007393653,
+    "original_grid": 0.8401148596622836,
+    "original_inside": true,
+    "original_ode": 0.8173218589229183,
+    "original_sd": 0.00736028060659459,
+    "rebuild_gap": 0.019971899124775483,
+    "rebuild_inside": true
+   },
+   {
+    "drought": 0.7,
+    "original_gap": 0.036838154963206415,
+    "original_grid": 0.902683343684002,
+    "original_inside": true,
+    "original_ode": 0.8658451887207956,
+    "original_sd": 0.0036298084534017476,
+    "rebuild_gap": 0.032874674461038755,
+    "rebuild_inside": true
+   }
+  ],
+  "seed4_small": "0 of 30 under 5%",
+  "seed_spread": [
+   {
+    "branching_dieout": 0.25294594878951443,
+    "drought": 0.5,
+    "inside_window": 3,
+    "max": -0.007724819540239403,
+    "mean_of_the_rest": 0.7309929107031529,
+    "mean_signed_gap": -0.14028492699502712,
+    "min": -0.37794084796426025,
+    "replicates": 200,
+    "replicates_below_small": 34,
+    "rest_minus_ode": -0.016061140507328653,
+    "sd_over_seeds": 0.09208912642411717,
+    "seeds": 20
+   },
+   {
+    "branching_dieout": 0.18267814107707683,
+    "drought": 0.6,
+    "inside_window": 7,
+    "max": 0.0249314215059524,
+    "mean_of_the_rest": 0.8387994319197171,
+    "mean_signed_gap": -0.058186513137631325,
+    "min": -0.2296158348689994,
+    "replicates": 200,
+    "replicates_below_small": 19,
+    "rest_minus_ode": 0.021477572996798755,
+    "sd_over_seeds": 0.07439120579882272,
+    "seeds": 20
+   },
+   {
+    "branching_dieout": 0.13415481127920212,
+    "drought": 0.7,
+    "inside_window": 12,
+    "max": 0.041637590147800774,
+    "mean_of_the_rest": 0.903138815467615,
+    "mean_signed_gap": -0.00785267918728258,
+    "min": -0.14385767636024027,
+    "replicates": 200,
+    "replicates_below_small": 10,
+    "rest_minus_ode": 0.03729362674681935,
+    "sd_over_seeds": 0.06224302794125922,
+    "seeds": 20
+   }
+  ],
+  "seed_spread_note": "original design (L 100, 10 reps, spot 0.2) on seeds 4..23, three droughts only, so the draw sequence for seed 4 is not the one the full run 8 used; a hand-written seed loop, not a multi-seed tool",
+  "window": 0.05,
+  "window_declared": "PREREG_ORIGINALS.md, committed before originals.py; the original run declared none"
+ },
+ "cards": [
+  {
+   "branch": "void",
+   "c_tests": {
+    "C1": "NOT RUN",
+    "C2": "NOT RUN",
+    "C3": "NOT RUN",
+    "C4": "NOT RUN",
+    "C5": "NOT RUN",
+    "C6": "NOT RUN",
+    "none_of_above": "NOT RUN"
+   },
+   "evidence_entered": {
+    "design": "design differences, original vs rebuild: grid L 100 (run 8) / 120 (run 7) vs 64; reps 10 / 12 vs 40; ignition at the centre vs left edge; ODE z = 1 - exp(-4 p d z) vs the rebuild's mean field of its own grid rules; seeds 3 and 4 vs the rebuild's. 'design' is not one of the card's five causes; recorded as evidence text only",
+    "numerical": "the stdlib port equals the numpy run within 0 on every grid mean and sd, so the original's numbers do not depend on numpy vs plain arithmetic; a grid burn has no step size",
+    "statistical": "original: one seed, 10-12 reps. Seed spread of (grid - ODE) at spot 0.2 over 20 seeds: drought 0.5 mean -0.1403 sd 0.0921, 3 of 20 inside 0.05; drought 0.6 mean -0.0582 sd 0.0744, 7 of 20 inside 0.05; drought 0.7 mean -0.0079 sd 0.0622, 12 of 20 inside 0.05"
+   },
+   "id": "CC_F1_ode_grid_ratio",
+   "observation": "ODE / grid ratio differs between branches (original 62 at drought 0.5; rebuild max 14.9)",
+   "reading": "OPEN",
+   "recheck_when": "void",
+   "slots": {
+    "local_normal_form": {
+     "evidence": "void",
+     "state": "void"
+    },
+    "low_dim_projection": {
+     "evidence": "void",
+     "state": "void"
+    },
+    "none_of_above": {
+     "evidence": "void",
+     "state": "void"
+    },
+    "numerical_artifact": {
+     "evidence": "void",
+     "state": "void"
+    },
+    "shared_constraint": {
+     "evidence": "void",
+     "state": "void"
+    },
+    "statistical_artifact": {
+     "evidence": "void",
+     "state": "void"
+    }
+   },
+   "trigger": "rebuild does not show the logged feature; the divergence between two builds of one comparison is data"
+  },
+  {
+   "branch": "void",
+   "c_tests": {
+    "C1": "NOT RUN",
+    "C2": "NOT RUN: the chance of one (spot, drought) cell landing inside the window is not known; 20 cells were looked at",
+    "C3": "VOID for the original: no window was declared before the numbers were seen (read by eye). The 0.05 window is applied afterwards.",
+    "C4": "NOT RUN",
+    "C5": "NOT RUN: no persistence tolerance was declared in PREREG_ORIGINALS.md",
+    "C6": {
+     "config_spread": 0.03569367247871774,
+     "declared_at": "PREREG_ORIGINALS.md, committed before originals.py",
+     "flags": [
+      "unstable_across_configs"
+     ],
+     "generator": "C6_numerical_artifact",
+     "metric_name": "abs(grid - ODE) at spot 0.2, drought 0.5",
+     "numerical_artifact": true,
+     "stability_tol": 0.02,
+     "unstable_across_configs": true
+    },
+    "none_of_above": "NOT RUN"
+   },
+   "evidence_entered": {
+    "design": "design differences, original vs rebuild: grid L 100 (run 8) / 120 (run 7) vs 64; reps 10 / 12 vs 40; ignition at the centre vs left edge; ODE z = 1 - exp(-4 p d z) vs the rebuild's mean field of its own grid rules; seeds 3 and 4 vs the rebuild's. 'design' is not one of the card's five causes; recorded as evidence text only",
+    "numerical": "the stdlib port equals the numpy run within 0 on every grid mean and sd, so the original's numbers do not depend on numpy vs plain arithmetic; a grid burn has no step size",
+    "statistical": "original: one seed, 10-12 reps. Seed spread of (grid - ODE) at spot 0.2 over 20 seeds: drought 0.5 mean -0.1403 sd 0.0921, 3 of 20 inside 0.05; drought 0.6 mean -0.0582 sd 0.0744, 7 of 20 inside 0.05; drought 0.7 mean -0.0079 sd 0.0622, 12 of 20 inside 0.05"
+   },
+   "id": "CC_F3_grid_onto_ode",
+   "observation": "grid at spot 0.2 near the ODE at drought >= 0.5: original inside 0.05 at 3 of 3 points; rebuild outside at 0.50 (gap 0.0526), inside from 0.55",
+   "reading": "OPEN",
+   "recheck_when": "void",
+   "slots": {
+    "local_normal_form": {
+     "evidence": "void",
+     "state": "void"
+    },
+    "low_dim_projection": {
+     "evidence": "void",
+     "state": "void"
+    },
+    "none_of_above": {
+     "evidence": "void",
+     "state": "void"
+    },
+    "numerical_artifact": {
+     "evidence": "void",
+     "state": "void"
+    },
+    "shared_constraint": {
+     "evidence": "void",
+     "state": "void"
+    },
+    "statistical_artifact": {
+     "evidence": "void",
+     "state": "void"
+    }
+   },
+   "trigger": "a convergence seen in one toy, read by eye, is a candidate; two builds disagree at one point"
+  }
+ ],
+ "claims": [
+  {
+   "basis": "run_originals.py against fixtures/originals_expected.json",
+   "tag": "DERIVED",
+   "text": "the port reproduces the delivered code's results (targets table)"
+  },
+  {
+   "basis": "source: chat side, 2026-11-11; filed verbatim, sha256 in the fixture",
+   "tag": "OBSERVED",
+   "text": "the delivered code is what ran chat-side on 2026-11-10"
+  },
+  {
+   "basis": "evidence entered on two OPEN cards; no slot set",
+   "tag": "PROPOSED",
+   "text": "which of statistical / numerical / design explains the rebuild-original difference"
+  }
+ ],
+ "reference": {
+  "numpy": "2.5.3",
+  "scipy": "1.18.1",
+  "sources": {
+   "run_6.py": "b1ccd82ae2eef8cafc66d675be8ad8ca077df8ac22e351b50b0bd6b899488085",
+   "run_7.py": "eba95252b17a4653f7741d0837b50e3103ace8b919e32fca54d28e3d221b197f",
+   "run_8.py": "bf65e9b7b024b0d93c8b807b0c959756e7a928c48020cae28debe1693caee33e"
+  }
+ },
+ "run_6": {
+  "conserved": {
+   "0.3": {
+    "boundary": {
+     "dep": 59.999999999950866,
+     "fix": 29.999999999975433,
+     "leach": 44.07340597426794,
+     "volat": 49.376763934943796
+    },
+    "fires": 56,
+    "l0": {
+     "budget": "N",
+     "how": "playground l0.verdict on the run's own checkpoint audit (31 checkpoints); not the runner's per-transfer table: this model is not registered through the substitution interface",
+     "misclosure_max": 1.2690328787812177e-09,
+     "tolerance": 1.8345016990913806e-07,
+     "verdict": "CLOSED"
+    },
+    "mis_max": 1.2690328787812177e-09,
+    "mis_max_numpy": 1.2690328787812177e-09,
+    "stats": {
+     "B_mean": 0.3544220179356736,
+     "Ls_max": 2.7297818751832827,
+     "Ls_min": 0.09335618477781646,
+     "last_row": [
+      2990.0,
+      0.355693245766071,
+      0.355693245766071,
+      0.2827299702326625,
+      0.45278200743019
+     ],
+     "swing": 0.5052603421583807,
+     "tree_share": 1.0
+    }
+   },
+   "0.5": {
+    "boundary": {
+     "dep": 59.999999999950866,
+     "fix": 29.999999999975433,
+     "leach": 43.56630491860416,
+     "volat": 48.89333776665242
+    },
+    "fires": 48,
+    "l0": {
+     "budget": "N",
+     "how": "playground l0.verdict on the run's own checkpoint audit (31 checkpoints); not the runner's per-transfer table: this model is not registered through the substitution interface",
+     "misclosure_max": 1.269278016025055e-09,
+     "tolerance": 1.824596426851829e-07,
+     "verdict": "CLOSED"
+    },
+    "mis_max": 1.269278016025055e-09,
+    "mis_max_numpy": 1.269278016025055e-09,
+    "stats": {
+     "B_mean": 0.3621331042310821,
+     "Ls_max": 2.7380036781775026,
+     "Ls_min": 0.12797207481718453,
+     "last_row": [
+      2990.0,
+      0.32711772874665945,
+      0.3271177287466595,
+      1.5417165503407673,
+      0.14673721660969657
+     ],
+     "swing": 0.502694059251431,
+     "tree_share": 1.0
+    }
+   },
+   "0.6": {
+    "boundary": {
+     "dep": 59.999999999950866,
+     "fix": 29.999999999975433,
+     "leach": 43.44232012053277,
+     "volat": 48.751017875651286
+    },
+    "fires": 47,
+    "l0": {
+     "budget": "N",
+     "how": "playground l0.verdict on the run's own checkpoint audit (31 checkpoints); not the runner's per-transfer table: this model is not registered through the substitution interface",
+     "misclosure_max": 1.2691900863615047e-09,
+     "tolerance": 1.8219333799611038e-07,
+     "verdict": "CLOSED"
+    },
+    "mis_max": 1.2691900863615047e-09,
+    "mis_max_numpy": 1.2691900863615047e-09,
+    "stats": {
+     "B_mean": 0.3585452604167278,
+     "Ls_max": 2.8882805135399208,
+     "Ls_min": 0.12796485220658124,
+     "last_row": [
+      2990.0,
+      0.3253615601728971,
+      0.3253615601728971,
+      1.808441131779849,
+      0.14863763859873969
+     ],
+     "swing": 0.46579606594579853,
+     "tree_share": 1.0
+    }
+   },
+   "0.8": {
+    "boundary": {
+     "dep": 59.999999999950866,
+     "fix": 29.999999999975433,
+     "leach": 43.40775946696993,
+     "volat": 48.80214783691019
+    },
+    "fires": 45,
+    "l0": {
+     "budget": "N",
+     "how": "playground l0.verdict on the run's own checkpoint audit (31 checkpoints); not the runner's per-transfer table: this model is not registered through the substitution interface",
+     "misclosure_max": 1.2691585560276053e-09,
+     "tolerance": 1.8220990730380644e-07,
+     "verdict": "CLOSED"
+    },
+    "mis_max": 1.2691585560276053e-09,
+    "mis_max_numpy": 1.2691585560276053e-09,
+    "stats": {
+     "B_mean": 0.36122541681078324,
+     "Ls_max": 2.9641621618205503,
+     "Ls_min": 0.13262874165243105,
+     "last_row": [
+      2990.0,
+      0.32536839280321084,
+      0.32536839280321084,
+      1.7918509893292918,
+      0.1486547785397051
+     ],
+     "swing": 0.5082591265147496,
+     "tree_share": 1.0
+    }
+   },
+   "1.2": {
+    "boundary": {
+     "dep": 59.999999999950866,
+     "fix": 29.999999999975433,
+     "leach": 43.35360732905507,
+     "volat": 48.932257874501005
+    },
+    "fires": 38,
+    "l0": {
+     "budget": "N",
+     "how": "playground l0.verdict on the run's own checkpoint audit (31 checkpoints); not the runner's per-transfer table: this model is not registered through the substitution interface",
+     "misclosure_max": 1.2689307382629522e-09,
+     "tolerance": 1.822858652034824e-07,
+     "verdict": "CLOSED"
+    },
+    "mis_max": 1.2689307382629522e-09,
+    "mis_max_numpy": 1.2689307382629522e-09,
+    "stats": {
+     "B_mean": 0.3672713633427816,
+     "Ls_max": 3.63424106015937,
+     "Ls_min": 0.18137865480163273,
+     "last_row": [
+      2990.0,
+      0.32710853222398434,
+      0.32710853222398434,
+      1.7157609186253184,
+      0.14640918108718914
+     ],
+     "swing": 0.5821406352743566,
+     "tree_share": 1.0
+    }
+   }
+  },
+  "old_checkpoints": [
+   -0.019553658476835878,
+   -0.9108336987381467,
+   -4.44249465068479,
+   -8.553791458832748,
+   -24.176719330471943
+  ],
+  "old_l0": {
+   "budget": "N",
+   "how": "playground l0.verdict on the run's own audit; scale 1.0 N unit",
+   "misclosure_last_checkpoint": -24.176719330471943,
+   "verdict": "LEAK"
+  }
+ },
+ "run_7": [
+  {
+   "R0": 0.6400000000000001,
+   "drought": 0.0,
+   "grid_mean": 0.0001232274716675884,
+   "grid_sd": 7.571415601913018e-05,
+   "ode": 0.0,
+   "ode_over_grid": 0.0,
+   "p": 0.2
+  },
+  {
+   "R0": 0.8800000000000001,
+   "drought": 0.1,
+   "grid_mean": 0.00026782854043216507,
+   "grid_sd": 0.00020262744136533876,
+   "ode": 0.0,
+   "ode_over_grid": 0.0,
+   "p": 0.275
+  },
+  {
+   "R0": 1.12,
+   "drought": 0.2,
+   "grid_mean": 0.00039884711687004703,
+   "grid_sd": 0.00036308578995421264,
+   "ode": 0.20634485015392867,
+   "ode_over_grid": 517.3532449556612,
+   "p": 0.35000000000000003
+  },
+  {
+   "R0": 1.3600000000000003,
+   "drought": 0.30000000000000004,
+   "grid_mean": 0.0007383233266291613,
+   "grid_sd": 0.0008081536886419137,
+   "ode": 0.47798615920632725,
+   "ode_over_grid": 647.3940914051684,
+   "p": 0.42500000000000004
+  },
+  {
+   "R0": 1.6,
+   "drought": 0.4,
+   "grid_mean": 0.001717299263790499,
+   "grid_sd": 0.0023702562784722937,
+   "ode": 0.6419813173416999,
+   "ode_over_grid": 373.83194116364456,
+   "p": 0.5
+  },
+  {
+   "R0": 1.8399999999999999,
+   "drought": 0.5,
+   "grid_mean": 0.01195404014487947,
+   "grid_sd": 0.013848359666370193,
+   "ode": 0.7470540512104815,
+   "ode_over_grid": 62.49385497759794,
+   "p": 0.575
+  },
+  {
+   "R0": 2.0800000000000005,
+   "drought": 0.6000000000000001,
+   "grid_mean": 0.16382461933052953,
+   "grid_sd": 0.12328137205108952,
+   "ode": 0.8173218589229185,
+   "ode_over_grid": 4.989005085211918,
+   "p": 0.6500000000000001
+  },
+  {
+   "R0": 2.3200000000000003,
+   "drought": 0.7000000000000001,
+   "grid_mean": 0.7193732067867256,
+   "grid_sd": 0.3218451782488366,
+   "ode": 0.8658451887207959,
+   "ode_over_grid": 1.2036105606272534,
+   "p": 0.7250000000000001
+  },
+  {
+   "R0": 2.5600000000000005,
+   "drought": 0.8,
+   "grid_mean": 0.9540393000992607,
+   "grid_sd": 0.004911544354168807,
+   "ode": 0.9001899329291538,
+   "ode_over_grid": 0.9435564476594368,
+   "p": 0.8
+  },
+  {
+   "R0": 2.8000000000000003,
+   "drought": 0.9,
+   "grid_mean": 0.9828705030008678,
+   "grid_sd": 0.0031731990765602636,
+   "ode": 0.9249746307618676,
+   "ode_over_grid": 0.9410951167399628,
+   "p": 0.875
+  },
+  {
+   "R0": 3.04,
+   "drought": 1.0,
+   "grid_mean": 0.9942484623485487,
+   "grid_sd": 0.0005799827417692858,
+   "ode": 0.9431387919902796,
+   "ode_over_grid": 0.9485946699504657,
+   "p": 0.95
+  }
+ ],
+ "run_8": [
+  {
+   "cells": [
+    {
+     "mean": 0.0005237852040978285,
+     "sd": 0.000702259534973986,
+     "spot": 0
+    },
+    {
+     "mean": 0.0004264319004375279,
+     "sd": 0.00034715949569593974,
+     "spot": 0.05
+    },
+    {
+     "mean": 0.0018203610827493874,
+     "sd": 0.0029300810150636445,
+     "spot": 0.2
+    },
+    {
+     "mean": 0.04963698755704278,
+     "sd": 0.09224685623062423,
+     "spot": 1.0
+    }
+   ],
+   "drought": 0.2,
+   "ode": 0.20634485015392867
+  },
+  {
+   "cells": [
+    {
+     "mean": 0.0041914573845725734,
+     "sd": 0.00633186721090241,
+     "spot": 0
+    },
+    {
+     "mean": 0.02117331677095138,
+     "sd": 0.05502525863425791,
+     "spot": 0.05
+    },
+    {
+     "mean": 0.3301950854713279,
+     "sd": 0.26890320559413977,
+     "spot": 0.2
+    },
+    {
+     "mean": 0.45109770294612617,
+     "sd": 0.29535903872495917,
+     "spot": 1.0
+    }
+   ],
+   "drought": 0.4,
+   "ode": 0.6419813173416999
+  },
+  {
+   "cells": [
+    {
+     "mean": 0.013695853421350985,
+     "sd": 0.014482846797456869,
+     "spot": 0
+    },
+    {
+     "mean": 0.38095662696334204,
+     "sd": 0.31081575014128027,
+     "spot": 0.05
+    },
+    {
+     "mean": 0.730117905207806,
+     "sd": 0.011994681286146188,
+     "spot": 0.2
+    },
+    {
+     "mean": 0.5967215287773019,
+     "sd": 0.29834877698202095,
+     "spot": 1.0
+    }
+   ],
+   "drought": 0.5,
+   "ode": 0.7470540512104815
+  },
+  {
+   "cells": [
+    {
+     "mean": 0.19727675898538571,
+     "sd": 0.15051898758447688,
+     "spot": 0
+    },
+    {
+     "mean": 0.8147842692214095,
+     "sd": 0.00907179411092224,
+     "spot": 0.05
+    },
+    {
+     "mean": 0.8401148596622836,
+     "sd": 0.00736028060659459,
+     "spot": 0.2
+    },
+    {
+     "mean": 0.7356069207295102,
+     "sd": 0.24524421740087576,
+     "spot": 1.0
+    }
+   ],
+   "drought": 0.6,
+   "ode": 0.8173218589229183
+  },
+  {
+   "cells": [
+    {
+     "mean": 0.7573343427023977,
+     "sd": 0.2554877827356108,
+     "spot": 0
+    },
+    {
+     "mean": 0.8196288009879712,
+     "sd": 0.2726222854909317,
+     "spot": 0.05
+    },
+    {
+     "mean": 0.902683343684002,
+     "sd": 0.0036298084534017476,
+     "spot": 0.2
+    },
+    {
+     "mean": 0.7804793638662553,
+     "sd": 0.26019789954246353,
+     "spot": 1.0
+    }
+   ],
+   "drought": 0.7,
+   "ode": 0.8658451887207956
+  }
+ ],
+ "targets": [
+  {
+   "got": "max difference 0",
+   "reading": "MET",
+   "target": "O7 grid mean and sd, 11 droughts, within 1e-12",
+   "want": "<= 1e-12"
+  },
+  {
+   "got": "max difference 7.16e-14",
+   "reading": "MET",
+   "target": "O7 ODE fraction within 1e-9",
+   "want": "<= 1e-9"
+  },
+  {
+   "got": "max difference 0",
+   "reading": "MET",
+   "target": "O8 mean and sd, 5 droughts x 4 spot levels, within 1e-12",
+   "want": "<= 1e-12"
+  },
+  {
+   "got": "max difference 7.14e-14",
+   "reading": "MET",
+   "target": "O8 ODE fraction within 1e-9",
+   "want": "<= 1e-9"
+  },
+  {
+   "got": [
+    "-0.020",
+    "-0.911",
+    "-4.442",
+    "-8.554",
+    "-24.177"
+   ],
+   "reading": "MET",
+   "target": "O6 OLD misclosure at the five printed checkpoints, 3 decimals",
+   "want": [
+    "-0.020",
+    "-0.911",
+    "-4.442",
+    "-8.554",
+    "-24.177"
+   ]
+  },
+  {
+   "got": "1.2691900863615047e-09 (numpy run 1.2691900863615047e-09)",
+   "reading": "MET",
+   "target": "O6 CONSERVED max |misclosure| below 1e-8",
+   "want": "< 1e-8"
+  },
+  {
+   "got": [
+    47,
+    56,
+    48,
+    45,
+    38
+   ],
+   "reading": "MET",
+   "target": "O6 fires at fire_thr 0.6 / 0.3 / 0.5 / 0.8 / 1.2, exact",
+   "want": [
+    47,
+    56,
+    48,
+    45,
+    38
+   ]
+  },
+  {
+   "got": "largest difference from the numpy run 1.11e-16",
+   "reading": "MET",
+   "target": "O6 late biomass mean, swing, tree share, Ls range, sweep columns at printed precision",
+   "want": "equal at printed precision"
+  }
+ ]
+}

@@ -7,20 +7,20 @@ assumes:
     block: AB_WELL_MIXED
 if_assumption_fails:
   A1: "overprediction below the connectivity threshold; no variance spike"
-scope: "valid where the grid converges onto it: spotting 0.2, drought >= 0.5 (run 8)"
+scope: "candidate only: grid near it at spotting 0.2, drought >= 0.5 (run 8, read by eye, no declared tolerance)"
 provenance:
   class: DERIVED
-  source: "run_7, run_8: work order 2026-11-10 (reported there; code not in this tree; not recomputed)"
+  source: "run_7, run_8: original code filed 2026-11-11, rerun in this tree, output matches the log"
 admitted_by: void
 test_results:
   - test: void
     run: run_7
-    result: "ODE overpredicts mid-drought up to ~60x vs grid"
-    value: "reported, not recomputed"
+    result: "ODE / grid by drought: 478 at 0.3, 321 at 0.4, 62 at 0.5, 5.0 at 0.6, 1.2 at 0.7; small-grid-mean ratios are noise-dominated"
+    value: "rerun of the original code"
   - test: void
     run: run_8
-    result: "grid with spotting 0.2 converges onto ODE at drought >= 0.5"
-    value: "reported, not recomputed"
+    result: "grid at spotting 0.2 vs ODE at drought 0.5 / 0.6 / 0.7: 0.73 / 0.84 / 0.90 vs 0.75 / 0.82 / 0.87; read by eye, candidate"
+    value: "rerun of the original code"
 open_issues: []
 depends_on: []
 status: candidate

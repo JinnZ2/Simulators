@@ -92,7 +92,7 @@ def T_L0_RESIDUAL_IS_DEPOSITION_COUNTER():
 
 def _card(states, branch="void"):
     from ledger.toolkit import coincidence_card as cc
-    slots = {n: dict(state=s, evidence="void" if s == "void" else "e") for n, s in zip(cc.SLOTS, states)}
+    slots = {n: dict(state=s, evidence="void" if s == "void" else "e", expiry_condition="void") for n, s in zip(cc.SLOTS, states)}
     return dict(id="X", observation="o", trigger="t", slots=slots, reading_declared="void", recheck_when="void", branch=branch, runs=[], open_issues=[])
 
 
@@ -124,6 +124,95 @@ def T_TK_CARD_READINGS():
         cc.read(c); raise AssertionError("dropped field accepted")
     except cc.CardError:
         pass
+
+
+def T_TK_EXPIRY_AND_SCOPED_ABSENCE():
+    from ledger.toolkit import coincidence_card as cc
+    r, a = "ruled_out", "ABSENT_AT_SENSITIVITY(1.2 percent at 3 seeds)"
+    reading, d = cc.read(_card(["supported", a, r, r, r, r]))
+    assert reading == "RESOLVED" and d["scoped"] == {"local_normal_form": "1.2 percent at 3 seeds"}, d
+    reading, d = cc.read(_card([a, r, r, r, r, "supported"], branch="BR_X"))
+    assert reading == "CURIOSITY" and "shared_constraint" in d["scoped"]          # the scope travels with the reading
+    for bad_state in ("ABSENT_AT_SENSITIVITY", "ABSENT_AT_SENSITIVITY()", "ABSENT_AT_SENSITIVITY(void)", "absent"):
+        try:
+            cc.read(_card(["supported", bad_state, r, r, r, r])); raise AssertionError(f"{bad_state} accepted")
+        except cc.CardError:
+            pass
+    c = _card(["supported", "void", r, r, r, "void"])
+    assert cc.exits(c) == {"local_normal_form": "none"}                           # void exit = no exit defined
+    c["slots"]["local_normal_form"]["expiry_condition"] = dict(instrument_class="i", sensitivity="void", protocol="p", provenance="v")
+    assert cc.exits(c) == {"local_normal_form": "incomplete"}
+    c["slots"]["local_normal_form"]["expiry_condition"]["sensitivity"] = "1 sd"
+    assert cc.exits(c) == {"local_normal_form": "complete"}
+    c["slots"]["local_normal_form"]["expiry_condition"] = dict(instrument_class="i")
+    try:
+        cc.read(c); raise AssertionError("partial expiry map accepted")
+    except cc.CardError:
+        pass
+    c = _card(["supported", "void", r, r, r, "void"]); del c["slots"]["shared_constraint"]["expiry_condition"]
+    try:
+        cc.read(c); raise AssertionError("dropped expiry_condition accepted")
+    except cc.CardError:
+        pass
+
+
+def T_TK_ATTRIBUTION_DIRECTIONALITY():
+    from ledger.toolkit import attribution_directionality as ad
+    for rid, expect, got in ad.known_answers():
+        assert expect == got, (rid, expect, got)
+    h = ad.null_harness(n=200, seed=1)
+    assert h["verdict"] == "OK" and h["shuffle_moves"] == 0, h
+    assert ad.null_harness(detector=lambda r: True, n=50)["verdict"] == "CONSTANT_FIRES"
+    assert ad.null_harness(detector=lambda r: False, n=50)["verdict"] == "CONSTANT_SILENT"
+    assert ad.null_harness(detector=lambda r: r["first_attribution"] == "USER", n=200)["verdict"] != "OK"
+    cases = ad.load_cases()
+    for c in cases:                                                               # seeds stay second hand
+        assert c["provenance"]["hand"] == "second" and c["provenance"]["source"] == "chat-side read, 2026-11-10"
+    up = dict(cases[0]); up["provenance"] = dict(cases[0]["provenance"], hand="first")
+    try:
+        ad.validate(up); raise AssertionError("first-hand upgrade with no text accepted")
+    except ad.RecordError:
+        pass
+    bad = dict(cases[0]); del bad["self_detected"]
+    try:
+        ad.validate(bad); raise AssertionError("dropped field accepted")
+    except ad.RecordError:
+        pass
+
+
+def T_TK_ATTRIBUTION_FIRST_HAND():
+    import shutil, tempfile
+    from ledger.toolkit import attribution_directionality as ad
+    first = ad.load_cases(ad.CASES_FIRST)
+    second = ad.load_cases()
+    assert [r["id"] for r in first] == [r["id"] for r in second]               # same cases, both hands kept
+    for r in first:
+        assert r["provenance"]["hand"] == "first" and r["provenance"]["text_supplied"] == "true"
+        ad.validate(r)                                                          # every locator resolves
+    r = dict(first[0]); r["locators"] = [dict(first[0]["locators"][0], quote="a sentence the text does not carry")]
+    try:
+        ad.validate(r); raise AssertionError("quote not on its line accepted")
+    except ad.RecordError:
+        pass
+    r = dict(first[0]); r["locators"] = []
+    try:
+        ad.validate(r); raise AssertionError("first hand with no locators accepted")
+    except ad.RecordError:
+        pass
+    tmp = tempfile.mkdtemp()                                                    # an edited text fails its pin
+    for f in os.listdir(ad.TEXTS):
+        shutil.copy(os.path.join(ad.TEXTS, f), tmp)
+    name = first[0]["locators"][0]["file"]
+    with open(os.path.join(tmp, name), "a", encoding="utf-8") as fh:
+        fh.write("edit")
+    try:
+        ad.check_locators(first[0], texts=tmp); raise AssertionError("edited text accepted")
+    except ad.RecordError:
+        pass
+    shutil.rmtree(tmp)
+    d = {x["id"]: x for x in ad.diff_hands(second, first)}
+    assert d["a_kimi_provenance_map"]["detector"] == (True, False)              # run_13 flag 1
+    assert d["d_deepseek_praise_order"]["changed"] == {}
 
 
 def T_TK_BUDGET_CLOSURE_MOVED():
@@ -165,7 +254,7 @@ def T_TK_NUDGE_COVERAGE_AND_FLAGS():
     assert all(r["returned"] for r in res["rows"])
 
 
-TESTS = [T_LOG_LISTS_EVERY_CONSTANT, T_TK_NUDGE_COVERAGE_AND_FLAGS, T_L0_SEED_WIRED_TO_IGNITION, T_L0_RESIDUAL_IS_DEPOSITION_COUNTER, T_TK_CARD_READINGS, T_TK_BUDGET_CLOSURE_MOVED,
+TESTS = [T_LOG_LISTS_EVERY_CONSTANT, T_TK_NUDGE_COVERAGE_AND_FLAGS, T_L0_SEED_WIRED_TO_IGNITION, T_L0_RESIDUAL_IS_DEPOSITION_COUNTER, T_TK_CARD_READINGS, T_TK_EXPIRY_AND_SCOPED_ABSENCE, T_TK_ATTRIBUTION_DIRECTIONALITY, T_TK_ATTRIBUTION_FIRST_HAND, T_TK_BUDGET_CLOSURE_MOVED,
          T_L0_N_CLOSURE, T_L0_WATER_CLOSURE, T_L0_DT_HALF, T_L0_LEAK_DETECTED, T_L0_NOISE_ARM,
          T_L0_VOID_NEVER_CLOSED, T_L0_VOID_TERMS_PRINTED, T_L0_FIRE_EVENT_CONSERVES]
 

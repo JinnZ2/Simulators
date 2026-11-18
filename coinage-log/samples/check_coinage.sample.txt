@@ -42,8 +42,11 @@ COINAGE LOG -- STRUCTURAL CHECK
    File B vocabulary-gap-slots: frontmatter True, entries 1 (seeded)
    pointers A->B True, B->A True; seed identical to render True;
    seed provenance says NOT chunk 1: True
-   chunks: 6 rows (expected 6), all MISSING_SOURCE True,
-   received 0 chars; no reconstruction declared True
+   chunks: 8 rows (7 delivered + 1 appended; 6 was the superseded estimate), all RECEIVED True,
+   received 49428 of 49428 bytes (table); landed file 49428 bytes;
+   file sha256 == stated True; manifest states it True;
+   per-chunk sha256[:16] recompute from file True;
+   no reconstruction declared True; File A/B not yet split (separate order)
 
 This module computes; it does not conclude, and it adjudicates
 no coinage. Whether the word is missing or merely unsearched is

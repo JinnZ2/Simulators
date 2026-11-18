@@ -45,3 +45,7 @@ jobs:
         run: |
           python tools/narrative_check.py --selftest
           python -m unittest tests.test_narrative_check -v
+      - name: tools/check_cards (TOOL_CARDS index; a row whose pinned commit is not in this checkout reads NOT_CHECKED)
+        run: |
+          python tools/check_cards.py --selftest
+          python tools/check_cards.py

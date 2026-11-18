@@ -1,0 +1,14 @@
+id: BR_L5_OBSERVER_REGIMES
+family: "L5 observation: three observer regimes, separate rows, no shared currency"
+status: placeholder
+components:
+  - L5_OBS_PERTURBATION
+  - L5_OBS_REACTIVITY
+  - L5_OBS_STRATEGY
+links: []
+convergence_anchors: []
+runs: []
+open_issues:
+  - "design as given (work order 2026-11-10 item 3); no run, no substrate assigned"
+  - "a fourth regime, or a system sitting in two at once, has no row; not added"
+note: "PERTURBATION -> metrology, perturbation budget. REACTIVITY -> blinding, habituation. STRATEGY -> hidden evals, mechanistic readouts. No cross-substrate comparison until each substrate's regime is declared"

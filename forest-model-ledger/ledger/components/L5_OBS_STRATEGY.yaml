@@ -1,0 +1,24 @@
+id: L5_OBS_STRATEGY
+layer: L5
+equation: "observed output = output under no evaluation + output conditioned on a model of the evaluation; separated by hidden evals and mechanistic readouts"
+assumes:
+  - id: A1
+    text: "the system's model of the evaluation is not itself perfectly hidden from a hidden eval; mechanistic readouts are not themselves modelled"
+    block: void
+  - id: A2
+    text: "the substrate's regime is declared before any comparison with another substrate; no shared currency with the other two regimes"
+    block: void
+if_assumption_fails:
+  A1: "behaviour that changes when the eval is hidden in a way the system can detect: the hidden eval is visible and the row's method fails"
+  A2: "a number from this regime read beside a number from another regime as one scale: refused by the rule, no conversion exists"
+scope: "observer regime STRATEGY only (the system models the evaluation (AI)); method: hidden evals, mechanistic readouts"
+provenance:
+  class: PROPOSED
+  source: "work order 2026-11-10 (cross-model audit follow-up, item 3), regimes after Kimi confound C4; design as given, not tested"
+admitted_by: void
+test_results: []
+open_issues:
+  - "no substrate in this ledger is assigned a regime yet; the forest model's own observations (L5_METHOD_ARTIFACT) would be PERTURBATION or REACTIVITY by substrate, undeclared"
+  - "rule: no cross-substrate comparison until each substrate's regime is declared. tools/check_ledger.py enforces only that the three regime rows share no depends_on link (no shared currency); no comparison object exists yet to refuse"
+depends_on: []
+status: placeholder

@@ -1,12 +1,51 @@
 id: multi_seed_ensemble
-code: void
+code: ledger/toolkit/multi_seed_ensemble.py
 diagnoses:
   - "stochastic effects, early-warning spikes (METHOD BRIEF toolbox line: multi-seed ensembles + variance)"
-inputs: void
-outputs: void
-cannot_see: void
+  - "a quantity near-identical across seeds where a random draw should spread it (seed_invariance INVARIANT / CONSTANT: the too-smooth trigger)"
+  - "an effect hidden in noise at the seed count used: paired comparison on common seeds reads MOVED, EQUIVALENT or UNRESOLVED, never inside-noise-therefore-inert"
+  - "an effect that exists in some realisations and cancels as a mean (seed_specific)"
+  - "variance rising near a threshold along a swept control (variance_spike)"
+inputs:
+  - "fn(seed) -> dict of scalar outputs; a seed list; workers for a process pool"
+  - "for paired: base and arm on the SAME seeds; per output an equivalence margin delta and a per-seed band"
+  - "for variance_spike: the sd at each value of a swept control"
+outputs:
+  - "per output: n, mean, sd, min, max, distinct values"
+  - "seed_invariance per output: CONSTANT | INVARIANT | VARIES"
+  - "paired per output: mean difference, se, z, verdict MOVED | EXACT_ZERO | EQUIVALENT | UNRESOLVED, material (|mean| > delta), seed_specific"
+  - "variance_spike: indices of the swept control where sd > K_SPIKE * median sd"
+cannot_see:
+  - "an effect smaller than K_MOVED = 5 standard errors at the seeds given: it reads UNRESOLVED, never inert. K_MOVED = 5 is the price of FP = 0 on the gate"
+  - "a difference between arms that is not on common seeds: paired refuses unequal seed sets"
+  - "anything about mechanism: a MOVED output says the mean moved, not why"
+  - "size from MOVED: on common seeds a deterministic shift far below any noise band resolves (run_15: aG x1.1, 0.0006 sd, z -55). MOVED = resolved; read `material` for size"
+  - "a spike when the swept grid is too coarse to land near the threshold"
+  - "too-smooth on an output with a nonzero mean: INVARIANT is relative spread (sd <= 0.05 |mean|), so a mean plus ordinary noise reads INVARIANT too. run_14: fires (cv 0.026), fire_out (0.006), T_mean (0.020) read INVARIANT and vary by seed. The label means too-smooth only where the mean is itself the residual (N misclosure, the counter). Not retuned to run_14"
 other_domains_it_could_see_into: void
-used_in: []
+used_in:
+  - run_14
+  - run_15
+  - run_20
 open_issues:
-  - "not built; logged under the gate rule of 2026-11-10, see ledger/NEEDS_TOOL.md"
-status: placeholder
+  - "HELD-OUT FAIL_TP 0.995 (2026-11-11, tests/test_heldout.py, harness seeds 100-104): paired Laplace differences, n = 15 seeds, a 3 sd shift; K_MOVED 5 misses it in 1 of 200 on some seed. A 3 sd effect at 15 seeds is not reliably MOVED with heavy tails. Not retuned; trust PROVISIONAL"
+  - "REL_TOL 0.05, K_MOVED 5.0, K_EQ 2.0, K_SPIKE 3.0 are [CHOICE]; printed by every run that uses them"
+  - "the gate's null draws are Gaussian; a heavy-tailed output distribution (fire counts are integers) is not in the null"
+status: candidate
+gate:
+  verdict: PASS
+  known_answer: "13 of 13"
+  null_legs:
+    moved: "fp 0.0 tp 1.0 n 200 seed 0-4 PASS"
+    invariant: "fp 0.0 tp 1.0 n 200 seed 0-4 PASS"
+  command: "python3 tests/test_toolkit.py"
+blocked_on: void
+heldout:
+  verdict: FAIL
+  known_answer: "6 of 6"
+  null_legs:
+    moved_laplace_n15: "fp 0.0 tp 0.995 n 200 seed 100-104 FAIL_TP"
+    invariant_lognormal: "fp 0.0 tp 1.0 n 200 seed 100-104 PASS"
+  trust: PROVISIONAL
+  frozen_at: "72244bf (ledger/toolkit/HELDOUT_FREEZE.md); sets committed e5e3186 before first run"
+  command: "python3 tests/test_heldout.py"

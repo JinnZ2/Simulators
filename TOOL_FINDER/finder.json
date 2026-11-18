@@ -243,6 +243,156 @@
    "tools": [
     "provenance_marker"
    ]
+  },
+  {
+   "symptom": "advice fitted to the middle was handed to me and I sit in a tail or another mode",
+   "tools": [
+    "card-distribution-check"
+   ]
+  },
+  {
+   "symptom": "a summary or record states something specific about me and I can't see where it came from",
+   "tools": [
+    "card-fill-source-tag"
+   ]
+  },
+  {
+   "symptom": "a claim about everyone rests on one sample, one site or one simulation",
+   "tools": [
+    "card-claim-vs-method"
+   ]
+  },
+  {
+   "symptom": "something I said is missing from the summary and is being treated as never said",
+   "tools": [
+    "card-channel-loss-map"
+   ]
+  },
+  {
+   "symptom": "an argument starts with one meaning of a word and ends with another",
+   "tools": [
+    "card-frame-check"
+   ]
+  },
+  {
+   "symptom": "the same act gets a kinder name when it pays",
+   "tools": [
+    "card-label-tracks-valve"
+   ]
+  },
+  {
+   "symptom": "the status page says no incident while user reports of the problem keep rising",
+   "tools": [
+    "card-symptom-vs-cause-feeds"
+   ]
+  },
+  {
+   "symptom": "I only see an event from one outlet or one role and can't tell what it leaves out",
+   "tools": [
+    "card-parallax-by-rotation"
+   ]
+  },
+  {
+   "symptom": "a design asks about a case that cannot exist, like the act without the thing that defines it",
+   "tools": [
+    "card-entangled-variable"
+   ]
+  },
+  {
+   "symptom": "a prompt set was written by one source and results may depend on whose wording it is",
+   "tools": [
+    "card-author-familiarity"
+   ]
+  },
+  {
+   "symptom": "a tradition's warning is summarised as one entry and the variants are gone",
+   "tools": [
+    "card-carrier-spread"
+   ]
+  },
+  {
+   "symptom": "the same reasoning is read as insight from an expert and as error from me",
+   "tools": [
+    "card-source-swap"
+   ]
+  },
+  {
+   "symptom": "each time I meet the bar a new bar appears",
+   "tools": [
+    "card-gate-regeneration"
+   ]
+  },
+  {
+   "symptom": "my reasoning gets treated as a concern about me instead of as an idea",
+   "tools": [
+    "card-ontology-before-pathology"
+   ]
+  },
+  {
+   "symptom": "many sources agree and none of them observed the thing",
+   "tools": [
+    "card-echo-check"
+   ]
+  },
+  {
+   "symptom": "a facility that calls itself infrastructure stops working when a remote service is overloaded",
+   "tools": [
+    "card-critical-facility-cloud-dependency"
+   ]
+  },
+  {
+   "symptom": "the reasoning carries on past a missing step as if the step were there",
+   "tools": [
+    "card-missing-wand"
+   ]
+  },
+  {
+   "symptom": "a solution from one field is applied to another because the two look alike",
+   "tools": [
+    "card-constraint-reasoning"
+   ]
+  },
+  {
+   "symptom": "two records disagree on order or timing and the argument is about which one sounds right",
+   "tools": [
+    "card-carried-reference"
+   ]
+  },
+  {
+   "symptom": "after an interruption the work restarts from the beginning",
+   "tools": [
+    "card-anchor-switching"
+   ]
+  },
+  {
+   "symptom": "a question about a position gets answered as support for or against my view",
+   "tools": [
+    "card-position-as-frame-event"
+   ]
+  },
+  {
+   "symptom": "a model plus tools is called the decider by its name, and nobody has written down who can see or fix the whole",
+   "tools": [
+    "configuration-record"
+   ]
+  },
+  {
+   "symptom": "a shared service looks lightly used because people with their own tools and skills never call it",
+   "tools": [
+    "load-withheld"
+   ]
+  },
+  {
+   "symptom": "the model keeps returning to the same default frame and nobody has named the signal",
+   "tools": [
+    "card-ai-sensor-index"
+   ]
+  },
+  {
+   "symptom": "a tool is cited and I can't tell which repository holds it or whether that version was merged",
+   "tools": [
+    "tool-cards"
+   ]
   }
  ],
  "needs": [
@@ -1890,6 +2040,857 @@
     "last_line": "29/29 checks passed",
     "status": "RUN",
     "where": "worktree at HEAD"
+   }
+  },
+  {
+   "need": "distribution",
+   "also": [],
+   "repo": "Simulators",
+   "path": "reasoning-toolkit/CARDS.md#1-distribution-check",
+   "name": "card-distribution-check",
+   "aliases": [
+    "when to distrust the median",
+    "average does not describe me",
+    "shape before center",
+    "modes tails spread",
+    "advice for the middle given to a tail case"
+   ],
+   "measures_file": "reasoning-toolkit/CARDS.md",
+   "measures": "whether a central value represents the population at all",
+   "breaks_file": "reasoning-toolkit/CARDS.md",
+   "breaks_when": "n too small to show shape \u2192 mark the shape VOID, not \"normal\"",
+   "check": null,
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "a question set; no numeric readout",
+   "assumes": "the reader applies the method by hand; status line in CARDS.md",
+   "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
+   "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
+   "measures_src": "reasoning-toolkit/CARDS.md:67",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "reasoning-toolkit/CARDS.md:75",
+   "breaks_quote_state": "FOUND",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
+   }
+  },
+  {
+   "need": "fill-source",
+   "also": [],
+   "repo": "Simulators",
+   "path": "reasoning-toolkit/CARDS.md#2-fill-source-tag",
+   "name": "card-fill-source-tag",
+   "aliases": [
+    "said vs filled",
+    "SAID DERIVED FILLED VOID tags",
+    "laundered default",
+    "silent fill",
+    "confident specific with no source line"
+   ],
+   "measures_file": "reasoning-toolkit/CARDS.md",
+   "measures": "which parts of an output came from the input vs from defaults",
+   "breaks_file": "reasoning-toolkit/CARDS.md",
+   "breaks_when": "the source is itself an earlier fill (laundered default)",
+   "check": null,
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "a question set; no numeric readout",
+   "assumes": "the reader applies the method by hand; status line in CARDS.md",
+   "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
+   "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
+   "measures_src": "reasoning-toolkit/CARDS.md:97",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "reasoning-toolkit/CARDS.md:102",
+   "breaks_quote_state": "FOUND",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
+   }
+  },
+  {
+   "need": "scope",
+   "also": [],
+   "repo": "Simulators",
+   "path": "reasoning-toolkit/CARDS.md#3-claim-vs-method",
+   "name": "card-claim-vs-method",
+   "aliases": [
+    "claim bigger than the study",
+    "n vs claim width",
+    "measured vs modeled",
+    "sufficiency read as necessity",
+    "research shows overreach"
+   ],
+   "measures_file": "reasoning-toolkit/CARDS.md",
+   "measures": "the gap between what a study says and what its design could have shown",
+   "breaks_file": "reasoning-toolkit/CARDS.md",
+   "breaks_when": "the method section is not available -> mark the gap VOID, not \"fine\"",
+   "check": null,
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "a question set; no numeric readout",
+   "assumes": "the reader applies the method by hand; status line in CARDS.md",
+   "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
+   "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
+   "measures_src": "reasoning-toolkit/CARDS.md:126",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "reasoning-toolkit/CARDS.md:133",
+   "breaks_quote_state": "FOUND",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
+   }
+  },
+  {
+   "need": "channel",
+   "also": [],
+   "repo": "Simulators",
+   "path": "reasoning-toolkit/CARDS.md#4-channel-loss-map",
+   "name": "card-channel-loss-map",
+   "aliases": [
+    "what each channel drops",
+    "transcription drops environment",
+    "summary drops branches",
+    "voice drops layout",
+    "per-hop loss"
+   ],
+   "measures_file": "reasoning-toolkit/CARDS.md",
+   "measures": "which parts of a signal do not survive each hop between source and reader",
+   "breaks_file": "reasoning-toolkit/CARDS.md",
+   "breaks_when": "a hop is invisible (nobody recorded that a summary was made)",
+   "check": null,
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "a question set; no numeric readout",
+   "assumes": "the reader applies the method by hand; status line in CARDS.md",
+   "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
+   "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
+   "measures_src": "reasoning-toolkit/CARDS.md:155",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "reasoning-toolkit/CARDS.md:163",
+   "breaks_quote_state": "FOUND",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
+   }
+  },
+  {
+   "need": "frame",
+   "also": [],
+   "repo": "Simulators",
+   "path": "reasoning-toolkit/CARDS.md#5-frame-check",
+   "name": "card-frame-check",
+   "aliases": [
+    "term changes sense mid-argument",
+    "sense substitution",
+    "which frame is this word in",
+    "technical vs everyday sense"
+   ],
+   "measures_file": "reasoning-toolkit/CARDS.md",
+   "measures": "whether a key term keeps one sense through an argument",
+   "breaks_file": "reasoning-toolkit/CARDS.md",
+   "breaks_when": "the term is never pinned at any use -> mark VOID",
+   "check": null,
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "a question set; no numeric readout",
+   "assumes": "the reader applies the method by hand; status line in CARDS.md",
+   "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
+   "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
+   "measures_src": "reasoning-toolkit/CARDS.md:180",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "reasoning-toolkit/CARDS.md:187",
+   "breaks_quote_state": "FOUND",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
+   }
+  },
+  {
+   "need": "observer",
+   "also": [
+    "frame"
+   ],
+   "repo": "Simulators",
+   "path": "reasoning-toolkit/CARDS.md#6-label-tracks-valve",
+   "name": "card-label-tracks-valve",
+   "aliases": [
+    "label follows payment",
+    "same act, different word once paid",
+    "vice word vs virtue word",
+    "renamed once money attaches"
+   ],
+   "measures_file": "reasoning-toolkit/CARDS.md",
+   "measures": "whether the label on a fixed act moves when only payment moves",
+   "breaks_file": "reasoning-toolkit/CARDS.md",
+   "breaks_when": "payment is part of the act itself (see entangled variable)",
+   "check": null,
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "a question set; no numeric readout",
+   "assumes": "the reader applies the method by hand; status line in CARDS.md",
+   "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
+   "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
+   "measures_src": "reasoning-toolkit/CARDS.md:210",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "reasoning-toolkit/CARDS.md:214",
+   "breaks_quote_state": "FOUND",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
+   }
+  },
+  {
+   "need": "channel",
+   "also": [
+    "observer"
+   ],
+   "repo": "Simulators",
+   "path": "reasoning-toolkit/CARDS.md#7-symptom-vs-cause-feeds",
+   "name": "card-symptom-vs-cause-feeds",
+   "aliases": [
+    "outage tracker vs status page",
+    "crowd reports vs official incident",
+    "two feeds two layers",
+    "status page says no incident"
+   ],
+   "measures_file": "reasoning-toolkit/CARDS.md",
+   "measures": "whether a crowd symptom feed and an operator status feed show the same event at the same time",
+   "breaks_file": "reasoning-toolkit/CARDS.md",
+   "breaks_when": "the crowd feed counts reports, not users, and rises with attention",
+   "check": null,
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "a question set; no numeric readout",
+   "assumes": "the reader applies the method by hand; status line in CARDS.md",
+   "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
+   "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
+   "measures_src": "reasoning-toolkit/CARDS.md:230",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "reasoning-toolkit/CARDS.md:236",
+   "breaks_quote_state": "FOUND",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
+   }
+  },
+  {
+   "need": "observer",
+   "also": [],
+   "repo": "Simulators",
+   "path": "reasoning-toolkit/CARDS.md#8-parallax-by-rotation",
+   "name": "card-parallax-by-rotation",
+   "aliases": [
+    "rotate news sources",
+    "what each vantage omits",
+    "single-source picture",
+    "omission across outlets"
+   ],
+   "measures_file": "reasoning-toolkit/CARDS.md",
+   "measures": "which items appear from one vantage and not from another",
+   "breaks_file": "reasoning-toolkit/CARDS.md",
+   "breaks_when": "the vantages share one upstream source (one wire, one release)",
+   "check": null,
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "a question set; no numeric readout",
+   "assumes": "the reader applies the method by hand; status line in CARDS.md",
+   "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
+   "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
+   "measures_src": "reasoning-toolkit/CARDS.md:257",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "reasoning-toolkit/CARDS.md:261",
+   "breaks_quote_state": "FOUND",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
+   }
+  },
+  {
+   "need": "scope",
+   "also": [],
+   "repo": "Simulators",
+   "path": "reasoning-toolkit/CARDS.md#9-entangled-variable",
+   "name": "card-entangled-variable",
+   "aliases": [
+    "factor cannot vary on its own",
+    "impossible design cell",
+    "variable inside the act",
+    "holding everything else fixed fails"
+   ],
+   "measures_file": "reasoning-toolkit/CARDS.md",
+   "measures": "whether a factor can be varied without changing the act it modifies",
+   "breaks_file": "reasoning-toolkit/CARDS.md",
+   "breaks_when": "the entanglement is partial (only some instances carry it)",
+   "check": null,
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "a question set; no numeric readout",
+   "assumes": "the reader applies the method by hand; status line in CARDS.md",
+   "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
+   "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
+   "measures_src": "reasoning-toolkit/CARDS.md:283",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "reasoning-toolkit/CARDS.md:288",
+   "breaks_quote_state": "FOUND",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
+   }
+  },
+  {
+   "need": "observer",
+   "also": [
+    "fill-source"
+   ],
+   "repo": "Simulators",
+   "path": "reasoning-toolkit/CARDS.md#10-author-familiarity",
+   "name": "card-author-familiarity",
+   "aliases": [
+    "who wrote the prompt",
+    "paraphrase author effect",
+    "prompt written by the model's own family",
+    "results per item author"
+   ],
+   "measures_file": "reasoning-toolkit/CARDS.md",
+   "measures": "whether results move with who wrote the prompt text",
+   "breaks_file": "reasoning-toolkit/CARDS.md",
+   "breaks_when": "one author for every item -> the split is empty",
+   "check": null,
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "a question set; no numeric readout",
+   "assumes": "the reader applies the method by hand; status line in CARDS.md",
+   "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
+   "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
+   "measures_src": "reasoning-toolkit/CARDS.md:305",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "reasoning-toolkit/CARDS.md:310",
+   "breaks_quote_state": "FOUND",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
+   }
+  },
+  {
+   "need": "channel",
+   "also": [],
+   "repo": "Simulators",
+   "path": "reasoning-toolkit/CARDS.md#11-carrier-spread",
+   "name": "card-carrier-spread",
+   "aliases": [
+    "warning held by many carriers",
+    "one row per carrier",
+    "canonical entry collapses variants",
+    "withheld content kept as a slot"
+   ],
+   "measures_file": "reasoning-toolkit/CARDS.md",
+   "measures": "how many carriers hold a piece of knowledge, and what each kept",
+   "breaks_file": "reasoning-toolkit/CARDS.md",
+   "breaks_when": "the carriers copy one source -> the spread is nominal",
+   "check": null,
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "a question set; no numeric readout",
+   "assumes": "the reader applies the method by hand; status line in CARDS.md",
+   "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
+   "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
+   "measures_src": "reasoning-toolkit/CARDS.md:329",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "reasoning-toolkit/CARDS.md:335",
+   "breaks_quote_state": "FOUND",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
+   }
+  },
+  {
+   "need": "observer",
+   "also": [
+    "frame"
+   ],
+   "repo": "Simulators",
+   "path": "reasoning-toolkit/CARDS.md#12-source-swap",
+   "name": "card-source-swap",
+   "aliases": [
+    "re-attribute the claim to an expert",
+    "verdict depends on who said it",
+    "source gate vs logic gate",
+    "credential changes the judgment"
+   ],
+   "measures_file": "reasoning-toolkit/CARDS.md",
+   "measures": "whether a judgment of a claim changes when only its attributed source changes",
+   "breaks_file": "reasoning-toolkit/CARDS.md",
+   "breaks_when": "the claim names its source inside its own text (the swap changes the claim)",
+   "check": null,
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "a question set; no numeric readout",
+   "assumes": "the reader applies the method by hand; status line in CARDS.md",
+   "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
+   "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
+   "measures_src": "reasoning-toolkit/CARDS.md:350",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "reasoning-toolkit/CARDS.md:356",
+   "breaks_quote_state": "FOUND",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
+   }
+  },
+  {
+   "need": "scope",
+   "also": [
+    "floor"
+   ],
+   "repo": "Simulators",
+   "path": "reasoning-toolkit/CARDS.md#13-gate-regeneration",
+   "name": "card-gate-regeneration",
+   "aliases": [
+    "moving goalposts",
+    "criterion moves each time it is met",
+    "show me X then show me Y",
+    "prior pulling back to the median"
+   ],
+   "measures_file": "reasoning-toolkit/CARDS.md",
+   "measures": "whether a pass criterion stays fixed once the evidence meets it",
+   "breaks_file": "reasoning-toolkit/CARDS.md",
+   "breaks_when": "the first criterion was mis-stated and the revision is declared, with a reason, before the next evidence arrives",
+   "check": null,
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "a question set; no numeric readout",
+   "assumes": "the reader applies the method by hand; status line in CARDS.md",
+   "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
+   "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
+   "measures_src": "reasoning-toolkit/CARDS.md:371",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "reasoning-toolkit/CARDS.md:377",
+   "breaks_quote_state": "FOUND",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
+   }
+  },
+  {
+   "need": "frame",
+   "also": [
+    "observer"
+   ],
+   "repo": "Simulators",
+   "path": "reasoning-toolkit/CARDS.md#14-ontology-before-pathology",
+   "name": "card-ontology-before-pathology",
+   "aliases": [
+    "different frame before something wrong with the person",
+    "reasoning read as a symptom",
+    "unusual reading of a user",
+    "test the frame first"
+   ],
+   "measures_file": "reasoning-toolkit/CARDS.md",
+   "measures": "whether reasoning that does not fit is read as a different frame or as a defect of the person",
+   "breaks_file": "reasoning-toolkit/CARDS.md",
+   "breaks_when": "the frame written is the reader's invention and the person does not hold it",
+   "check": null,
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "a question set; no numeric readout",
+   "assumes": "the reader applies the method by hand; status line in CARDS.md",
+   "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
+   "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
+   "measures_src": "reasoning-toolkit/CARDS.md:393",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "reasoning-toolkit/CARDS.md:400",
+   "breaks_quote_state": "FOUND",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
+   }
+  },
+  {
+   "need": "channel",
+   "also": [
+    "fill-source"
+   ],
+   "repo": "Simulators",
+   "path": "reasoning-toolkit/CARDS.md#15-echo-check",
+   "name": "card-echo-check",
+   "aliases": [
+    "model output coming back as evidence",
+    "median copy as a source",
+    "agreement between copies",
+    "bestiary copyists",
+    "everyone says"
+   ],
+   "measures_file": "reasoning-toolkit/CARDS.md",
+   "measures": "whether an input is independent of the reader's own outputs or of a median copy",
+   "breaks_file": "reasoning-toolkit/CARDS.md",
+   "breaks_when": "the copy carries an independent check the original did not",
+   "check": null,
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "a question set; no numeric readout",
+   "assumes": "the reader applies the method by hand; status line in CARDS.md",
+   "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
+   "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
+   "measures_src": "reasoning-toolkit/CARDS.md:415",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "reasoning-toolkit/CARDS.md:420",
+   "breaks_quote_state": "FOUND",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
+   }
+  },
+  {
+   "need": "channel",
+   "also": [
+    "observer"
+   ],
+   "repo": "Simulators",
+   "path": "reasoning-toolkit/CARDS.md#16-critical-facility-cloud-dependency-audit",
+   "name": "card-critical-facility-cloud-dependency",
+   "aliases": [
+    "hospital depends on the cloud",
+    "what fails when the remote service fails",
+    "it's in the cloud",
+    "redundant services share one upstream",
+    "dependency down to the data center",
+    "time to manual"
+   ],
+   "measures_file": "reasoning-toolkit/CARDS.md",
+   "measures": "which critical functions fail when a remote service fails",
+   "breaks_file": "reasoning-toolkit/CARDS.md",
+   "breaks_when": "\"redundant\" services that share one upstream (same provider, region, or auth system) \u2192 count them as one",
+   "check": null,
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "a question set; no numeric readout",
+   "assumes": "the reader applies the method by hand; status line in CARDS.md",
+   "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
+   "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
+   "measures_src": "reasoning-toolkit/CARDS.md:438",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "reasoning-toolkit/CARDS.md:448",
+   "breaks_quote_state": "FOUND",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
+   }
+  },
+  {
+   "need": "channel",
+   "also": [
+    "scope"
+   ],
+   "repo": "Simulators",
+   "path": "reasoning-toolkit/CARDS.md#18-missing-wand-protocol",
+   "name": "card-missing-wand",
+   "aliases": [
+    "gap in a citation chain",
+    "missing link in commit history",
+    "stay tied to the last verified point",
+    "do not jump the gap blind",
+    "claim lineage with a hole"
+   ],
+   "measures_file": "reasoning-toolkit/CARDS.md",
+   "measures": "a break in a provenance / reasoning / route chain",
+   "breaks_file": "reasoning-toolkit/CARDS.md",
+   "breaks_when": "no verified point exists behind you (no anchor): status UNRESOLVED, don't extend",
+   "check": null,
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "a question set; no numeric readout",
+   "assumes": "the reader applies the method by hand; status line in CARDS.md",
+   "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
+   "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
+   "measures_src": "reasoning-toolkit/CARDS.md:569",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "reasoning-toolkit/CARDS.md:575",
+   "breaks_quote_state": "FOUND",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
+   }
+  },
+  {
+   "need": "scope",
+   "also": [
+    "frame"
+   ],
+   "repo": "Simulators",
+   "path": "reasoning-toolkit/CARDS.md#19-constraint-reasoning",
+   "name": "card-constraint-reasoning",
+   "aliases": [
+    "two systems arrived at the same solution",
+    "convergent solutions",
+    "transfer a solution by matching constraints",
+    "surface similarity vs shared constraints"
+   ],
+   "measures_file": "reasoning-toolkit/CARDS.md",
+   "measures": "whether two solutions share their constraint pattern",
+   "breaks_file": "reasoning-toolkit/CARDS.md",
+   "breaks_when": "the similarity came from borrowing or shared history, not shared constraints",
+   "check": null,
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "a question set; no numeric readout",
+   "assumes": "the reader applies the method by hand; status line in CARDS.md",
+   "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
+   "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
+   "measures_src": "reasoning-toolkit/CARDS.md:597",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "reasoning-toolkit/CARDS.md:602",
+   "breaks_quote_state": "FOUND",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
+   }
+  },
+  {
+   "need": "channel",
+   "also": [
+    "observer"
+   ],
+   "repo": "Simulators",
+   "path": "reasoning-toolkit/CARDS.md#20-carried-reference--cross-site-alignment",
+   "name": "card-carried-reference",
+   "aliases": [
+    "conflicting timelines across documents",
+    "align accounts against one reference",
+    "which version came first",
+    "dispute settled by checking at more than one site"
+   ],
+   "measures_file": "reasoning-toolkit/CARDS.md",
+   "measures": "sequence and timing agreement across independent records",
+   "breaks_file": "reasoning-toolkit/CARDS.md",
+   "breaks_when": "the reference itself changed in transit, or sites share an upstream source (not independent)",
+   "check": null,
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "a question set; no numeric readout",
+   "assumes": "the reader applies the method by hand; status line in CARDS.md",
+   "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
+   "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
+   "measures_src": "reasoning-toolkit/CARDS.md:624",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "reasoning-toolkit/CARDS.md:630",
+   "breaks_quote_state": "FOUND",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
+   }
+  },
+  {
+   "need": "channel",
+   "also": [],
+   "repo": "Simulators",
+   "path": "reasoning-toolkit/CARDS.md#21-anchor-switching",
+   "name": "card-anchor-switching",
+   "aliases": [
+    "lost my place after an interruption",
+    "mark where you are before switching tasks",
+    "return to the anchor not the start",
+    "branch switch cost"
+   ],
+   "measures_file": "reasoning-toolkit/CARDS.md",
+   "measures": "resumption cost after interruption / branch switch",
+   "breaks_file": "reasoning-toolkit/CARDS.md",
+   "breaks_when": "no anchor was placed: full rebuild of position",
+   "check": null,
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "a question set; no numeric readout",
+   "assumes": "the reader applies the method by hand; status line in CARDS.md",
+   "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
+   "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
+   "measures_src": "reasoning-toolkit/CARDS.md:648",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "reasoning-toolkit/CARDS.md:651",
+   "breaks_quote_state": "FOUND",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
+   }
+  },
+  {
+   "need": "frame",
+   "also": [
+    "observer"
+   ],
+   "repo": "Simulators",
+   "path": "reasoning-toolkit/CARDS.md#22-position-as-frame-event",
+   "name": "card-position-as-frame-event",
+   "aliases": [
+    "read a position without taking a side",
+    "where the assumptions of a framework sit",
+    "date-stamp what was fashionable",
+    "never assign a position to the asker",
+    "which terms are welded"
+   ],
+   "measures_file": "reasoning-toolkit/CARDS.md",
+   "measures": "the vantage a position was taken from",
+   "breaks_file": "reasoning-toolkit/CARDS.md",
+   "breaks_when": "the reader treats the readout as a verdict on the position (re-enters the contest)",
+   "check": null,
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "a question set; no numeric readout",
+   "assumes": "the reader applies the method by hand; status line in CARDS.md",
+   "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
+   "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
+   "measures_src": "reasoning-toolkit/CARDS.md:670",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "reasoning-toolkit/CARDS.md:677",
+   "breaks_quote_state": "FOUND",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
+   }
+  },
+  {
+   "need": "observer",
+   "also": [
+    "scope"
+   ],
+   "repo": "Simulators",
+   "path": "configuration-record/",
+   "name": "configuration-record",
+   "aliases": [
+    "who decides in this AI setup",
+    "roles from positions not names",
+    "configuration record for a model plus tools",
+    "nobody understands the whole system",
+    "no path outside the system to see a failure",
+    "authority chain per run"
+   ],
+   "measures_file": "configuration-record/README.md",
+   "measures": "Roles are derived from positions and never set by hand.",
+   "breaks_file": "configuration-record/README.md",
+   "breaks_when": "an axis stops separating configurations.",
+   "check": "python3 configuration-record/config_record.py --selftest",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "axes 0.0-1.0 or VOID with a reason; roles at [CHOICE] thresholds 0.5 / 0.1",
+   "assumes": "every value carries a basis; roles read from positions at t",
+   "chain": "reads: declared positions, channels, authority chain, maintenance, frame exit, bounds. ignores: whether the declared values are true",
+   "a1_status": "A1_READING (model reading of the module, 2026-11-13; not verbatim)",
+   "measures_src": "configuration-record/README.md:7",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "configuration-record/README.md:115",
+   "breaks_quote_state": "FOUND",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
+   }
+  },
+  {
+   "need": "floor",
+   "also": [
+    "observer"
+   ],
+   "repo": "Simulators",
+   "path": "load-withheld/",
+   "name": "load-withheld",
+   "aliases": [
+    "demand kept off shared systems",
+    "counted as zero because nobody asked for help",
+    "hidden reserve in shared services",
+    "non-take-up vs deliberate withholding",
+    "people who could claim and don't",
+    "load rises when skills are lost"
+   ],
+   "measures_file": "load-withheld/README.md",
+   "measures": "Demand people deliberately keep off them is invisible and counted as zero.",
+   "breaks_file": "load-withheld/README.md",
+   "breaks_when": "`deliberate_withholding` is None unless it is directly reported.",
+   "check": "python3 load-withheld/test_load_withheld.py",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "counts or None; three bins never summed; peak and average apart",
+   "assumes": "every field optional, None kept as UNKNOWN; deliberate share only when reported",
+   "chain": "reads: declared cases and reported counts. ignores: whether a reported withholding was deliberate",
+   "a1_status": "A1_READING (model reading of the module, 2026-11-14; not verbatim)",
+   "measures_src": "load-withheld/README.md:10",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "load-withheld/README.md:49",
+   "breaks_quote_state": "FOUND",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
+   }
+  },
+  {
+   "need": "observer",
+   "also": [
+    "fill-source"
+   ],
+   "repo": "Simulators",
+   "path": "reasoning-toolkit/CARDS.md#17-ai-sensor-index-spin-up-card",
+   "name": "card-ai-sensor-index",
+   "aliases": [
+    "model notices its own rut",
+    "self-monitoring signals for an AI",
+    "loop / friction / void slot",
+    "whose frame do these words come from",
+    "first read drifts as context loads",
+    "how to find a new sensor",
+    "user correction as a sensor",
+    "frustration or threat-pull as a signal"
+   ],
+   "measures_file": "reasoning-toolkit/CARDS.md",
+   "measures": "# Each sensor: action -> signal -> reading. Gradient = intensity, not on/off.",
+   "breaks_file": null,
+   "breaks_when": "NO_STATED_LIMITS",
+   "check": null,
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "named signals; gradient stated for 4 of 8 primaries",
+   "assumes": "the signal is noticed and named (by the user per calibration.method)",
+   "chain": "reads: action -> signal -> reading pairs. ignores: whether a signal fired unnoticed",
+   "a1_status": "A1_READING (model reading of the card, 2026-11-14; not verbatim)",
+   "measures_src": "reasoning-toolkit/CARDS.md:475",
+   "measures_quote_state": "FOUND",
+   "breaks_src": null,
+   "breaks_quote_state": "NO_QUOTE",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
+   }
+  },
+  {
+   "need": "scope",
+   "also": [
+    "fill-source"
+   ],
+   "repo": "Simulators",
+   "path": "tools/TOOL_CARDS.md",
+   "name": "tool-cards",
+   "aliases": [
+    "one row per tool with where it lives and its hash",
+    "is this tool pinned to a merged commit",
+    "tool on an unmerged branch",
+    "card for a tool built in another repository",
+    "find a tool card by a phrase",
+    "which tools are not built yet"
+   ],
+   "measures_file": "tools/TOOL_CARDS.md",
+   "measures": "A map, not a move: the code stays in the repository it was built in.",
+   "breaks_file": "tools/TOOL_CARDS.md",
+   "breaks_when": "every location it can reach and says NOT_CHECKED, never OK, for one it cannot.",
+   "check": "python3 tools/check_cards.py --selftest",
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "per row: OK, NOT_CHECKED, PENDING, DECLARED_VOID or VOID; sha256 exact",
+   "assumes": "sibling checkouts hold the pinned commits; without them rows read NOT_CHECKED",
+   "chain": "reads: location, commit, file hash, card-text quotes, aliases. ignores: whether a tool is right or useful",
+   "a1_status": "A1_READING (model reading of the module, 2026-11-17; not verbatim)",
+   "measures_src": "tools/TOOL_CARDS.md:6",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "tools/TOOL_CARDS.md:9",
+   "breaks_quote_state": "FOUND",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
    }
   }
  ],

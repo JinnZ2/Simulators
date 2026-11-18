@@ -1,0 +1,4 @@
+engine: ENGINE_ABSENT; looked at:
+   /home/user/relational-playground
+   /home/user/sim-forest/relational-playground
+families (from the METHOD BRIEF): ('ODE', 'percolation', 'Ising', 'spin glass', 'MaxEnt', 'branching process', 'random-matrix stability')

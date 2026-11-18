@@ -1,0 +1,63 @@
+ALL_INSIDE nudges read from samples/run_11.json: 33
+own path per parameter (flux rows whose rate the parameter changes):
+  KG         ['uptake_G']   [mechanical]
+  Kf         ['payment', 'uptake_T']   [mechanical]
+  W_dry      none: acts in the fire event test, own path = event channel (in the outputs)
+  Wh         ['decomp_Lg', 'decomp_Lt', 'uptake_G', 'uptake_T']   [mechanical]
+  aG         ['uptake_T']   [mechanical]
+  aT         ['uptake_G']   [mechanical]
+  b          ['uptake_T']   [mechanical]
+  drain      ['drainage']   [mechanical]
+  drought_sd ['precipitation']   [declared: acts through the precipitation factor]
+  et         ['evapotranspiration']   [mechanical]
+  kG         ['decomp_Lg']   [mechanical]
+  kT         ['decomp_Lt']   [mechanical]
+  kill_G     none: acts in the fire event test, own path = event channel (in the outputs)
+  kill_T     none: acts in the fire event test, own path = event channel (in the outputs)
+  p_ign      none: acts in the fire event test, own path = event channel (in the outputs)
+  season     ['precipitation']   [mechanical]
+  uG         ['uptake_G']   [mechanical]
+seeds 0..19 paired; thresholds {'REL_TOL': 0.05, 'K_MOVED': 5.0, 'K_EQ': 2.0, 'K_SPIKE': 3.0}; delta 0.5 sd, band 2.0 sd [CHOICE]
+simulations: 680
+
+== 1. the 33, classified
+  L1_DECOMP_FIRST_ORDER.A2     kT x1.1              HIDDEN_IN_NOISE  largest effect 0.88 sd (S_mean); top |z|  +10.2 (leach_out)  moved ['T_mean', 'S_mean', 'F_mean', 'leach_out']  resolved-immaterial ['fires', 'W_mean']  seed_specific ['grass_gone_yr']  own path {'decomp_Lt': 'MOVED'}
+  L1_DECOMP_FIRST_ORDER.A2     kT x0.9              HIDDEN_IN_NOISE  largest effect 0.92 sd (S_mean); top |z|   -8.3 (leach_out)  moved ['T_mean', 'S_mean', 'F_mean', 'leach_out']  resolved-immaterial ['W_mean']  seed_specific ['litter_mean', 'fire_out', 'grass_gone_yr']  own path {'decomp_Lt': 'MOVED'}
+  L1_DECOMP_FIRST_ORDER.A2     kG x1.1              HIDDEN_IN_NOISE  largest effect 0.61 sd (S_mean); top |z|   +8.7 (leach_out)  moved ['T_mean', 'S_mean', 'F_mean']  resolved-immaterial ['W_mean', 'leach_out']  own path {'decomp_Lg': 'MOVED'}
+  L1_DECOMP_FIRST_ORDER.A2     kG x0.9              HIDDEN_IN_NOISE  largest effect 0.77 sd (S_mean); top |z|  -15.1 (leach_out)  moved ['T_mean', 'S_mean', 'F_mean', 'leach_out']  resolved-immaterial ['W_mean', 'fire_out']  own path {'decomp_Lg': 'MOVED'}
+  L1_DECOMP_FIRST_ORDER.A2     Wh x1.1              HIDDEN_IN_NOISE  largest effect 0.96 sd (leach_out); top |z|  +13.6 (leach_out)  moved ['T_mean', 'S_mean', 'F_mean', 'leach_out']  resolved-immaterial ['W_mean']  seed_specific ['fire_out']  own path {'decomp_Lg': 'MOVED', 'decomp_Lt': 'MOVED', 'uptake_G': 'EQUIVALENT', 'uptake_T': 'UNRESOLVED'}
+  L1_DECOMP_FIRST_ORDER.A2     Wh x0.9              HIDDEN_IN_NOISE  largest effect 0.91 sd (leach_out); top |z|  -16.8 (leach_out)  moved ['T_mean', 'S_mean', 'F_mean', 'leach_out']  resolved-immaterial ['W_mean']  own path {'decomp_Lg': 'MOVED', 'decomp_Lt': 'MOVED', 'uptake_G': 'EQUIVALENT', 'uptake_T': 'UNRESOLVED'}
+  L1_UPTAKE_MM.A2              uG x1.1              HIDDEN_IN_NOISE  largest effect 0.52 sd (grass_gone_yr); top |z|  +11.2 (grass_gone_yr)  moved ['grass_gone_yr']  resolved-immaterial ['T_mean', 'S_mean', 'F_mean', 'litter_mean', 'W_mean', 'leach_out', 'fire_out']  own path {'uptake_G': 'MOVED'}
+  L1_UPTAKE_MM.A2              uG x0.9              ABSORBED         largest effect 0.50 sd (grass_gone_yr); top |z|  -10.5 (grass_gone_yr)  resolved-immaterial ['T_mean', 'S_mean', 'F_mean', 'litter_mean', 'W_mean', 'leach_out', 'fire_out', 'grass_gone_yr']  own path {'uptake_G': 'MOVED'}
+  L3_LIGHT_CEILING.A2          KG x1.1              ABSORBED         largest effect 0.46 sd (grass_gone_yr); top |z|  +11.3 (grass_gone_yr)  resolved-immaterial ['T_mean', 'S_mean', 'F_mean', 'litter_mean', 'W_mean', 'leach_out', 'fire_out', 'grass_gone_yr']  own path {'uptake_G': 'EQUIVALENT'}
+  L3_LIGHT_CEILING.A2          KG x0.9              HIDDEN_IN_NOISE  largest effect 0.52 sd (grass_gone_yr); top |z|  -10.4 (grass_gone_yr)  moved ['grass_gone_yr']  resolved-immaterial ['T_mean', 'S_mean', 'F_mean', 'litter_mean', 'W_mean', 'leach_out', 'fire_out']  own path {'uptake_G': 'MOVED'}
+  L3_LIGHT_CEILING.A2          aG x1.1              ABSORBED         largest effect 0.00 sd (grass_gone_yr); top |z|  -55.5 (fire_out)  resolved-immaterial ['T_mean', 'S_mean', 'F_mean', 'litter_mean', 'W_mean', 'leach_out', 'fire_out']  own path {'uptake_T': 'MOVED'}
+  L3_LIGHT_CEILING.A2          aG x0.9              ABSORBED         largest effect 0.00 sd (grass_gone_yr); top |z|  +54.4 (fire_out)  resolved-immaterial ['leach_out', 'fire_out']  own path {'uptake_T': 'EQUIVALENT'}
+  L3_LIGHT_CEILING.A2          aT x1.1              ABSORBED         largest effect 0.43 sd (grass_gone_yr); top |z|  -10.5 (grass_gone_yr)  resolved-immaterial ['T_mean', 'S_mean', 'F_mean', 'litter_mean', 'W_mean', 'leach_out', 'fire_out', 'grass_gone_yr']  own path {'uptake_G': 'MOVED'}
+  L3_LIGHT_CEILING.A2          aT x0.9              ABSORBED         largest effect 0.46 sd (grass_gone_yr); top |z|  +11.3 (grass_gone_yr)  resolved-immaterial ['T_mean', 'S_mean', 'F_mean', 'litter_mean', 'W_mean', 'leach_out', 'fire_out', 'grass_gone_yr']  own path {'uptake_G': 'EQUIVALENT'}
+  L3_TREE_FUNGUS_EXCHANGE.A3   b x1.1               HIDDEN_IN_NOISE  largest effect 1.53 sd (S_mean); top |z|  -33.6 (leach_out)  moved ['S_mean', 'leach_out']  resolved-immaterial ['grass_gone_yr']  own path {'uptake_T': 'EQUIVALENT'}
+  L3_TREE_FUNGUS_EXCHANGE.A3   b x0.9               HIDDEN_IN_NOISE  largest effect 1.63 sd (S_mean); top |z|  +38.6 (leach_out)  moved ['S_mean', 'leach_out']  resolved-immaterial ['grass_gone_yr']  own path {'uptake_T': 'EQUIVALENT'}
+  L3_TREE_FUNGUS_EXCHANGE.A3   Kf x1.1              HIDDEN_IN_NOISE  largest effect 2.17 sd (F_mean); top |z|  -29.5 (F_mean)  moved ['T_mean', 'S_mean', 'F_mean', 'leach_out']  resolved-immaterial ['W_mean']  own path {'payment': 'MOVED', 'uptake_T': 'MOVED'}
+  L3_TREE_FUNGUS_EXCHANGE.A3   Kf x0.9              HIDDEN_IN_NOISE  largest effect 1.98 sd (F_mean); top |z|  +40.2 (F_mean)  moved ['T_mean', 'S_mean', 'F_mean', 'leach_out']  resolved-immaterial ['W_mean', 'grass_gone_yr']  own path {'payment': 'MOVED', 'uptake_T': 'MOVED'}
+  L4_FIRE_FUEL_MOISTURE.A3     W_dry x1.1           HIDDEN_IN_NOISE  largest effect 2.26 sd (S_mean); top |z|  -15.5 (T_mean)  moved ['fires', 'T_mean', 'S_mean', 'F_mean', 'litter_mean', 'W_mean', 'leach_out']  seed_specific ['grass_gone_yr']  own path: event channel
+  L4_FIRE_FUEL_MOISTURE.A3     p_ign x1.1           INERT            largest effect 0.17 sd (fires); top |z|   +1.7 (fires)  own path: event channel
+  L4_FIRE_FUEL_MOISTURE.A3     p_ign x0.9           UNRESOLVED       largest effect 0.37 sd (fires); top |z|   -2.8 (fires)  own path: event channel
+  L4_FIRE_FUEL_MOISTURE.A3     kill_G x1.1          INERT            largest effect 0.26 sd (grass_gone_yr); top |z|   -4.9 (grass_gone_yr)  own path: event channel
+  L4_FIRE_FUEL_MOISTURE.A3     kill_G x0.9          ABSORBED         largest effect 0.23 sd (grass_gone_yr); top |z|   +5.3 (grass_gone_yr)  resolved-immaterial ['grass_gone_yr']  own path: event channel
+  L4_FIRE_FUEL_MOISTURE.A3     kill_T x1.1          HIDDEN_IN_NOISE  largest effect 0.58 sd (F_mean); top |z|   +9.3 (W_mean)  moved ['T_mean', 'F_mean']  resolved-immaterial ['W_mean']  own path: event channel
+  L4_FIRE_FUEL_MOISTURE.A3     kill_T x0.9          ABSORBED         largest effect 0.48 sd (F_mean); top |z|   +7.2 (F_mean)  resolved-immaterial ['T_mean', 'F_mean', 'W_mean']  own path: event channel
+  UNOWNED.water                season x1.1          ABSORBED         largest effect 0.41 sd (S_mean); top |z|   -5.5 (T_mean)  resolved-immaterial ['T_mean', 'F_mean', 'W_mean']  own path {'precipitation': 'MOVED'}
+  UNOWNED.water                season x0.9          SEED_SPECIFIC    largest effect 0.48 sd (S_mean); top |z|   -3.7 (W_mean)  seed_specific ['S_mean', 'fire_out']  own path {'precipitation': 'MOVED'}
+  UNOWNED.water                et x1.1              HIDDEN_IN_NOISE  largest effect 1.55 sd (leach_out); top |z|  -38.7 (W_mean)  moved ['fires', 'T_mean', 'S_mean', 'F_mean', 'litter_mean', 'W_mean', 'leach_out']  seed_specific ['grass_gone_yr']  own path {'evapotranspiration': 'MOVED'}
+  UNOWNED.water                et x0.9              HIDDEN_IN_NOISE  largest effect 2.08 sd (leach_out); top |z|  +38.8 (W_mean)  moved ['fires', 'T_mean', 'S_mean', 'F_mean', 'litter_mean', 'W_mean', 'leach_out', 'fire_out']  own path {'evapotranspiration': 'MOVED'}
+  UNOWNED.water                drain x1.1           HIDDEN_IN_NOISE  largest effect 1.65 sd (leach_out); top |z|  -45.9 (W_mean)  moved ['fires', 'T_mean', 'S_mean', 'F_mean', 'litter_mean', 'W_mean', 'leach_out']  seed_specific ['grass_gone_yr']  own path {'drainage': 'MOVED'}
+  UNOWNED.water                drain x0.9           HIDDEN_IN_NOISE  largest effect 2.01 sd (leach_out); top |z|  +36.0 (W_mean)  moved ['fires', 'T_mean', 'S_mean', 'F_mean', 'litter_mean', 'W_mean', 'leach_out']  seed_specific ['fire_out']  own path {'drainage': 'MOVED'}
+  UNOWNED.water                drought_sd x1.1      SEED_SPECIFIC    largest effect 0.35 sd (fires); top |z|   -4.8 (F_mean)  seed_specific ['grass_gone_yr']  own path {'precipitation': 'EQUIVALENT'}
+  UNOWNED.water                drought_sd x0.9      UNRESOLVED       largest effect 0.37 sd (fires); top |z|   +4.8 (leach_out)  own path {'precipitation': 'EQUIVALENT'}
+  counts: {'ABSORBED': 9, 'HIDDEN_IN_NOISE': 18, 'INERT': 2, 'SEED_SPECIFIC': 2, 'UNRESOLVED': 2}
+
+== 2. ablation on the anchor: the two mechanisms CC_003 names
+grass removed (G0=0, uG=0)         MATTERS          moved ['fire_out', 'grass_gone_yr']
+fire removed                       MATTERS          moved ['fires', 'T_mean', 'S_mean', 'F_mean', 'litter_mean', 'W_mean', 'leach_out', 'fire_out']
+  grass removed (G0=0, uG=0): fires UNRESOLVED  T_mean EQUIVALENT  S_mean UNRESOLVED  F_mean EQUIVALENT  litter_mean EQUIVALENT  W_mean EQUIVALENT  leach_out EQUIVALENT  fire_out MOVED  grass_gone_yr MOVED
+  fire removed: fires MOVED  T_mean MOVED  S_mean MOVED  F_mean MOVED  litter_mean MOVED  W_mean MOVED  leach_out MOVED  fire_out MOVED  grass_gone_yr UNRESOLVED

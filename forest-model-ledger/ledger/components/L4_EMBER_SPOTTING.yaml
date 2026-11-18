@@ -10,13 +10,13 @@ if_assumption_fails:
 scope: "run 8"
 provenance:
   class: DERIVED
-  source: "run_8: work order 2026-11-10 (reported there; code not in this tree; not recomputed)"
+  source: "run_8: original code filed 2026-11-11, rerun in this tree, output matches the log"
 admitted_by: void
 test_results:
   - test: void
     run: run_8
-    result: "spot 0.2 converges grid onto ODE at drought >= 0.5; 5% spotting drops threshold to ~0.5"
-    value: "reported, not recomputed"
+    result: "spot 0.2 vs ODE at drought 0.5 / 0.6 / 0.7: 0.73 / 0.84 / 0.90 vs 0.75 / 0.82 / 0.87 (read by eye, candidate); spot 0.05 at drought 0.5: 0.38, sd 0.31"
+    value: "rerun of the original code"
 open_issues:
   - "revealed a missing family: stochastic extinction of small fires, see BR_BRANCHING_PROCESS"
 depends_on:

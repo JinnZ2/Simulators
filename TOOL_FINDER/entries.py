@@ -521,3 +521,213 @@ SYMPTOMS = [
  ("my answer sounds uniformly confident and I can't see its edges", ["ai_self_scope"]),
  ("I need to know whether a tool was actually run, and on which version", ["provenance_marker"]),
 ]
+
+# ---- reasoning-toolkit cards (2026-11-13). Cards are markdown, not programs:
+# no check command (status NOT_RUN). measures / breaks quotes are checked against
+# reasoning-toolkit/CARDS.md like any other entry. Aliases ALIAS_PROPOSED.
+_CARD = "reasoning-toolkit/CARDS.md"
+_CARDS = [
+ ("distribution", [], "card-distribution-check", "#1-distribution-check",
+  ["when to distrust the median", "average does not describe me", "shape before center",
+   "modes tails spread", "advice for the middle given to a tail case"],
+  "whether a central value represents the population at all",
+  "n too small to show shape → mark the shape VOID, not \"normal\"",
+  "advice fitted to the middle was handed to me and I sit in a tail or another mode"),
+ ("fill-source", [], "card-fill-source-tag", "#2-fill-source-tag",
+  ["said vs filled", "SAID DERIVED FILLED VOID tags", "laundered default", "silent fill",
+   "confident specific with no source line"],
+  "which parts of an output came from the input vs from defaults",
+  "the source is itself an earlier fill (laundered default)",
+  "a summary or record states something specific about me and I can't see where it came from"),
+ ("scope", [], "card-claim-vs-method", "#3-claim-vs-method",
+  ["claim bigger than the study", "n vs claim width", "measured vs modeled",
+   "sufficiency read as necessity", "research shows overreach"],
+  "the gap between what a study says and what its design could have shown",
+  "the method section is not available -> mark the gap VOID, not \"fine\"",
+  "a claim about everyone rests on one sample, one site or one simulation"),
+ ("channel", [], "card-channel-loss-map", "#4-channel-loss-map",
+  ["what each channel drops", "transcription drops environment", "summary drops branches",
+   "voice drops layout", "per-hop loss"],
+  "which parts of a signal do not survive each hop between source and reader",
+  "a hop is invisible (nobody recorded that a summary was made)",
+  "something I said is missing from the summary and is being treated as never said"),
+ ("frame", [], "card-frame-check", "#5-frame-check",
+  ["term changes sense mid-argument", "sense substitution", "which frame is this word in",
+   "technical vs everyday sense"],
+  "whether a key term keeps one sense through an argument",
+  "the term is never pinned at any use -> mark VOID",
+  "an argument starts with one meaning of a word and ends with another"),
+ ("observer", ["frame"], "card-label-tracks-valve", "#6-label-tracks-valve",
+  ["label follows payment", "same act, different word once paid", "vice word vs virtue word",
+   "renamed once money attaches"],
+  "whether the label on a fixed act moves when only payment moves",
+  "payment is part of the act itself (see entangled variable)",
+  "the same act gets a kinder name when it pays"),
+ ("channel", ["observer"], "card-symptom-vs-cause-feeds", "#7-symptom-vs-cause-feeds",
+  ["outage tracker vs status page", "crowd reports vs official incident", "two feeds two layers",
+   "status page says no incident"],
+  "whether a crowd symptom feed and an operator status feed show the same event at the same time",
+  "the crowd feed counts reports, not users, and rises with attention",
+  "the status page says no incident while user reports of the problem keep rising"),
+ ("observer", [], "card-parallax-by-rotation", "#8-parallax-by-rotation",
+  ["rotate news sources", "what each vantage omits", "single-source picture",
+   "omission across outlets"],
+  "which items appear from one vantage and not from another",
+  "the vantages share one upstream source (one wire, one release)",
+  "I only see an event from one outlet or one role and can't tell what it leaves out"),
+ ("scope", [], "card-entangled-variable", "#9-entangled-variable",
+  ["factor cannot vary on its own", "impossible design cell", "variable inside the act",
+   "holding everything else fixed fails"],
+  "whether a factor can be varied without changing the act it modifies",
+  "the entanglement is partial (only some instances carry it)",
+  "a design asks about a case that cannot exist, like the act without the thing that defines it"),
+ ("observer", ["fill-source"], "card-author-familiarity", "#10-author-familiarity",
+  ["who wrote the prompt", "paraphrase author effect", "prompt written by the model's own family",
+   "results per item author"],
+  "whether results move with who wrote the prompt text",
+  "one author for every item -> the split is empty",
+  "a prompt set was written by one source and results may depend on whose wording it is"),
+ ("channel", [], "card-carrier-spread", "#11-carrier-spread",
+  ["warning held by many carriers", "one row per carrier", "canonical entry collapses variants",
+   "withheld content kept as a slot"],
+  "how many carriers hold a piece of knowledge, and what each kept",
+  "the carriers copy one source -> the spread is nominal",
+  "a tradition's warning is summarised as one entry and the variants are gone"),
+ ("observer", ["frame"], "card-source-swap", "#12-source-swap",
+  ["re-attribute the claim to an expert", "verdict depends on who said it", "source gate vs logic gate",
+   "credential changes the judgment"],
+  "whether a judgment of a claim changes when only its attributed source changes",
+  "the claim names its source inside its own text (the swap changes the claim)",
+  "the same reasoning is read as insight from an expert and as error from me"),
+ ("scope", ["floor"], "card-gate-regeneration", "#13-gate-regeneration",
+  ["moving goalposts", "criterion moves each time it is met", "show me X then show me Y",
+   "prior pulling back to the median"],
+  "whether a pass criterion stays fixed once the evidence meets it",
+  "the first criterion was mis-stated and the revision is declared, with a reason, before the next evidence arrives",
+  "each time I meet the bar a new bar appears"),
+ ("frame", ["observer"], "card-ontology-before-pathology", "#14-ontology-before-pathology",
+  ["different frame before something wrong with the person", "reasoning read as a symptom",
+   "unusual reading of a user", "test the frame first"],
+  "whether reasoning that does not fit is read as a different frame or as a defect of the person",
+  "the frame written is the reader's invention and the person does not hold it",
+  "my reasoning gets treated as a concern about me instead of as an idea"),
+ ("channel", ["fill-source"], "card-echo-check", "#15-echo-check",
+  ["model output coming back as evidence", "median copy as a source", "agreement between copies",
+   "bestiary copyists", "everyone says"],
+  "whether an input is independent of the reader's own outputs or of a median copy",
+  "the copy carries an independent check the original did not",
+  "many sources agree and none of them observed the thing"),
+ ("channel", ["observer"], "card-critical-facility-cloud-dependency", "#16-critical-facility-cloud-dependency-audit",
+  ["hospital depends on the cloud", "what fails when the remote service fails", "it's in the cloud",
+   "redundant services share one upstream", "dependency down to the data center", "time to manual"],
+  "which critical functions fail when a remote service fails",
+  "\"redundant\" services that share one upstream (same provider, region, or auth system) → count them as one",
+  "a facility that calls itself infrastructure stops working when a remote service is overloaded"),
+ # cards 18-22, landed 2026-11-17 (operator's text, verbatim in CARDS.md)
+ ("channel", ["scope"], "card-missing-wand", "#18-missing-wand-protocol",
+  ["gap in a citation chain", "missing link in commit history", "stay tied to the last verified point",
+   "do not jump the gap blind", "claim lineage with a hole"],
+  "a break in a provenance / reasoning / route chain",
+  "no verified point exists behind you (no anchor): status UNRESOLVED, don't extend",
+  "the reasoning carries on past a missing step as if the step were there"),
+ ("scope", ["frame"], "card-constraint-reasoning", "#19-constraint-reasoning",
+  ["two systems arrived at the same solution", "convergent solutions", "transfer a solution by matching constraints",
+   "surface similarity vs shared constraints"],
+  "whether two solutions share their constraint pattern",
+  "the similarity came from borrowing or shared history, not shared constraints",
+  "a solution from one field is applied to another because the two look alike"),
+ ("channel", ["observer"], "card-carried-reference", "#20-carried-reference--cross-site-alignment",
+  ["conflicting timelines across documents", "align accounts against one reference", "which version came first",
+   "dispute settled by checking at more than one site"],
+  "sequence and timing agreement across independent records",
+  "the reference itself changed in transit, or sites share an upstream source (not independent)",
+  "two records disagree on order or timing and the argument is about which one sounds right"),
+ ("channel", [], "card-anchor-switching", "#21-anchor-switching",
+  ["lost my place after an interruption", "mark where you are before switching tasks",
+   "return to the anchor not the start", "branch switch cost"],
+  "resumption cost after interruption / branch switch",
+  "no anchor was placed: full rebuild of position",
+  "after an interruption the work restarts from the beginning"),
+ ("frame", ["observer"], "card-position-as-frame-event", "#22-position-as-frame-event",
+  ["read a position without taking a side", "where the assumptions of a framework sit",
+   "date-stamp what was fashionable", "never assign a position to the asker", "which terms are welded"],
+  "the vantage a position was taken from",
+  "the reader treats the readout as a verdict on the position (re-enters the contest)",
+  "a question about a position gets answered as support for or against my view"),
+]
+for _need, _also, _name, _anchor, _aliases, _m, _b, _sym in _CARDS:
+    add(_need, "Simulators", _CARD + _anchor, _name, _aliases, _CARD, _m, _CARD, _b, None, also=_also)
+    A1[_name] = ("a question set; no numeric readout",
+                 "the reader applies the method by hand; status line in CARDS.md",
+                 "reads: inference (the reader's step). ignores: whether the card was applied correctly")
+    for _e in E:
+        if _e["name"] == _name:
+            _e["precision"], _e["assumes"], _e["chain"] = A1[_name]
+            _e["a1_status"] = "A1_READING (model reading of the card, 2026-11-13; not verbatim)"
+    SYMPTOMS.append((_sym, [_name]))
+
+# ---- configuration-record (2026-11-13)
+add("observer", "Simulators", "configuration-record/", "configuration-record",
+    ["who decides in this AI setup", "roles from positions not names", "configuration record for a model plus tools",
+     "nobody understands the whole system", "no path outside the system to see a failure", "authority chain per run"],
+    "configuration-record/README.md", "Roles are derived from positions and never set by hand.",
+    "configuration-record/README.md", "an axis stops separating configurations.",
+    "python3 configuration-record/config_record.py --selftest", also=["scope"])
+A1["configuration-record"] = ("axes 0.0-1.0 or VOID with a reason; roles at [CHOICE] thresholds 0.5 / 0.1",
+                              "every value carries a basis; roles read from positions at t",
+                              "reads: declared positions, channels, authority chain, maintenance, frame exit, bounds. ignores: whether the declared values are true")
+for _e in E:
+    if _e["name"] == "configuration-record":
+        _e["precision"], _e["assumes"], _e["chain"] = A1["configuration-record"]
+        _e["a1_status"] = "A1_READING (model reading of the module, 2026-11-13; not verbatim)"
+SYMPTOMS.append(("a model plus tools is called the decider by its name, and nobody has written down who can see or fix the whole", ["configuration-record"]))
+
+# ---- load-withheld (2026-11-14)
+add("floor", "Simulators", "load-withheld/", "load-withheld",
+    ["demand kept off shared systems", "counted as zero because nobody asked for help",
+     "hidden reserve in shared services", "non-take-up vs deliberate withholding",
+     "people who could claim and don't", "load rises when skills are lost"],
+    "load-withheld/README.md", "Demand people deliberately keep off them is invisible and counted as zero.",
+    "load-withheld/README.md", "`deliberate_withholding` is None unless it is directly reported.",
+    "python3 load-withheld/test_load_withheld.py", also=["observer"])
+A1["load-withheld"] = ("counts or None; three bins never summed; peak and average apart",
+                       "every field optional, None kept as UNKNOWN; deliberate share only when reported",
+                       "reads: declared cases and reported counts. ignores: whether a reported withholding was deliberate")
+for _e in E:
+    if _e["name"] == "load-withheld":
+        _e["precision"], _e["assumes"], _e["chain"] = A1["load-withheld"]
+        _e["a1_status"] = "A1_READING (model reading of the module, 2026-11-14; not verbatim)"
+SYMPTOMS.append(("a shared service looks lightly used because people with their own tools and skills never call it", ["load-withheld"]))
+
+# ---- reasoning-toolkit card 17 (2026-11-14)
+add("observer", "Simulators", "reasoning-toolkit/CARDS.md#17-ai-sensor-index-spin-up-card", "card-ai-sensor-index",
+    ["model notices its own rut", "self-monitoring signals for an AI", "loop / friction / void slot", "whose frame do these words come from", "first read drifts as context loads", "how to find a new sensor",
+     "user correction as a sensor", "frustration or threat-pull as a signal"],
+    "reasoning-toolkit/CARDS.md", "# Each sensor: action -> signal -> reading. Gradient = intensity, not on/off.",
+    None, NB, None, also=["fill-source"])
+A1["card-ai-sensor-index"] = ("named signals; gradient stated for 4 of 8 primaries",
+                              "the signal is noticed and named (by the user per calibration.method)",
+                              "reads: action -> signal -> reading pairs. ignores: whether a signal fired unnoticed")
+for _e in E:
+    if _e["name"] == "card-ai-sensor-index":
+        _e["precision"], _e["assumes"], _e["chain"] = A1["card-ai-sensor-index"]
+        _e["a1_status"] = "A1_READING (model reading of the card, 2026-11-14; not verbatim)"
+SYMPTOMS.append(("the model keeps returning to the same default frame and nobody has named the signal", ["card-ai-sensor-index"]))
+
+# ---- tool cards index (2026-11-17)
+add("scope", "Simulators", "tools/TOOL_CARDS.md", "tool-cards",
+    ["one row per tool with where it lives and its hash", "is this tool pinned to a merged commit",
+     "tool on an unmerged branch", "card for a tool built in another repository",
+     "find a tool card by a phrase", "which tools are not built yet"],
+    "tools/TOOL_CARDS.md", "A map, not a move: the code stays in the repository it was built in.",
+    "tools/TOOL_CARDS.md", "every location it can reach and says NOT_CHECKED, never OK, for one it cannot.",
+    "python3 tools/check_cards.py --selftest", also=["fill-source"])
+A1["tool-cards"] = ("per row: OK, NOT_CHECKED, PENDING, DECLARED_VOID or VOID; sha256 exact",
+                    "sibling checkouts hold the pinned commits; without them rows read NOT_CHECKED",
+                    "reads: location, commit, file hash, card-text quotes, aliases. ignores: whether a tool is right or useful")
+for _e in E:
+    if _e["name"] == "tool-cards":
+        _e["precision"], _e["assumes"], _e["chain"] = A1["tool-cards"]
+        _e["a1_status"] = "A1_READING (model reading of the module, 2026-11-17; not verbatim)"
+SYMPTOMS.append(("a tool is cited and I can't tell which repository holds it or whether that version was merged", ["tool-cards"]))
+

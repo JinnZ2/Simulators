@@ -3,10 +3,14 @@
 Agreement between families is an observation to be explained, not support for
 either. Two existing instruments are wired in, neither copied:
 
-  divergence-playground/coincidence.py   loaded by path. It holds four generators,
-      C1 same object two shadows, C2 trials factor, C3 elastic target, C4 real
-      common cause. The work order names C1-C6; that file has C1-C4, so C5 and
-      C6 are recorded here as NOT IN THE SOURCE FILE and are not invented.
+  divergence-playground/coincidence.py   loaded by path. Six generators plus a
+      derived none_of_above: C1 same object two shadows, C2 trials factor,
+      C3 elastic target, C4 real common cause, C5 local normal form,
+      C6 numerical artifact. C5, C6 and none_of_above come from the version on
+      branch claude/healing-folder-additions-u5aojl (commit 7852f0e), brought
+      into this branch 2026-11-11 on the chat side's instruction. Against an
+      older copy of the file (C1-C4 only) the three report NOT IN THE SOURCE
+      FILE; nothing is invented here.
   forest-model-ledger coincidence_card   its six slots and its reading rule
       (OPEN / RESOLVED / PROVISIONAL / CURIOSITY, none_of_above derived, never
       declared). That module reads YAML through the ledger's own loader, so the
@@ -21,7 +25,7 @@ CAUSES = ("shared_constraint", "local_normal_form", "statistical_artifact", "num
 SLOTS = CAUSES + ("none_of_above",)
 STATES = ("void", "supported", "ruled_out")
 C_TESTS = ("C1", "C2", "C3", "C4", "C5", "C6")
-NOT_IN_SOURCE = "NOT IN THE SOURCE FILE (divergence-playground/coincidence.py holds C1-C4)"
+NOT_IN_SOURCE = "NOT IN THE SOURCE FILE (this copy of divergence-playground/coincidence.py holds C1-C4 only)"
 _SRC = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "divergence-playground", "coincidence.py")
 
 
@@ -41,7 +45,7 @@ def source():
 def open_card(card_id, observation, trigger):
     return dict(id=card_id, observation=observation, trigger=trigger,
                 slots={s: dict(state="void", evidence="void") for s in SLOTS},
-                c_tests={c: (NOT_IN_SOURCE if c in ("C5", "C6") else "NOT RUN") for c in C_TESTS},
+                c_tests=dict({c: "NOT RUN" for c in C_TESTS}, none_of_above="NOT RUN"),
                 recheck_when="void", branch="void")
 
 
@@ -99,6 +103,51 @@ def run_c4(card, cause, prediction, predicted_value, predicted_uncertainty, pre_
     card["c_tests"]["C4"] = (src.C4Test(cause, prediction, predicted_value, predicted_uncertainty, pre_registered_at).run(observed_value)
                              if src else "SOURCE FILE NOT FOUND")
     return card["c_tests"]["C4"]
+
+
+def run_c5(card, system_a, system_b, match_near, match_far, persistence_tol, declared_at, transition=""):
+    """Local normal form: does the match hold only near the transition? The
+    tolerance is fixed before the two match scores are seen."""
+    if not declared_at:
+        raise ValueError("C5 needs declared_at: when persistence_tol was fixed, before the match scores were seen")
+    src = source()
+    if not src:
+        out = "SOURCE FILE NOT FOUND"
+    elif not hasattr(src, "C5Test"):
+        out = NOT_IN_SOURCE
+    else:
+        out = dict(src.C5Test(system_a, system_b, match_near, match_far, persistence_tol, transition).run(), declared_at=declared_at)
+    card["c_tests"]["C5"] = out
+    return out
+
+
+def run_c6(card, metric_name, stability_tol, declared_at, refinement=(), by_config=None, exact_binary=None):
+    """Numerical artifact: does the number move when solver, step or precision move?"""
+    if not declared_at:
+        raise ValueError("C6 needs declared_at: when stability_tol was fixed, before the variants were run")
+    src = source()
+    if not src:
+        out = "SOURCE FILE NOT FOUND"
+    elif not hasattr(src, "C6Test"):
+        out = NOT_IN_SOURCE
+    else:
+        out = dict(src.C6Test(metric_name, stability_tol, list(refinement), dict(by_config or {}), exact_binary).run(), declared_at=declared_at)
+    card["c_tests"]["C6"] = out
+    return out
+
+
+def run_none_of_above(card, ruled_out, branch_id="", note=""):
+    """The source file's derived verdict over c1..c6. Each must be an explicit
+    bool supplied by a person; a missing one raises there, and is not inferred here."""
+    src = source()
+    if not src:
+        out = "SOURCE FILE NOT FOUND"
+    elif not hasattr(src, "none_of_above"):
+        out = NOT_IN_SOURCE
+    else:
+        out = src.none_of_above(ruled_out, branch_id, note)
+    card["c_tests"]["none_of_above"] = out
+    return out
 
 
 def on_agreement(rows, window, declared_at):

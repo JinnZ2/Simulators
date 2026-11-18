@@ -14,7 +14,7 @@ convergence_anchors:
       - BR_FIRE_PERCOLATION
       - BR_FIRE_MEANFIELD
     condition: "spotting 0.2 and drought >= 0.5"
-    evidence: "run_8 (reported, not recomputed)"
+    evidence: "run_8 (original code in tree, rerun 2026-11-11; read by eye, no declared tolerance, 10 reps)"
     status: candidate
 runs:
   - run_5

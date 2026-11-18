@@ -20,9 +20,12 @@
 #      0 chars received and every chunk MISSING_SOURCE, and the checks
 #      pinned it; the source then arrived in 7 verified chunks and the
 #      checks now pin the RECEIVED state instead: the landed file
-#      source/coinage-log.full.md is 47474 bytes with the stated sha256,
-#      the manifest's 7 rows are all RECEIVED and sum to that size, and
-#      each row's sha256[:16] recomputes from the file at its offsets.
+#      source/coinage-log.full.md has the stated size and sha256, the
+#      manifest's rows are all RECEIVED and sum to that size, and each
+#      row's sha256[:16] recomputes from the file at its offsets.
+#      2026-11-14: an 8th chunk (section NEW ENTRIES 2026-11-14) was
+#      appended by order; the file is now 49428 bytes, and its first
+#      47474 bytes must still hash to the 2026-10-11 delivery.
 #      File A and File B did not move in that landing (entries are not
 #      split into them yet), so their checks still read the seeded state.
 # It does not decide whether any word is genuinely missing or merely
@@ -41,9 +44,14 @@ MANIFEST = os.path.join(HERE, "MISSING_SOURCE.md")
 SOURCE_CHARS_APPROX = 46900      # operator-stated estimate, superseded
 EXPORT_CAP = 8000                # operator-stated; the 6-chunk estimate
 SOURCE = os.path.join(HERE, "source", "coinage-log.full.md")
-SOURCE_BYTES = 47474             # measured on the landed file
-SOURCE_SHA256 = ("4822118f1f8bac45667f4fa2652e0c4b18bf4f2f"
-                 "2376ff7adf46a749d28b6757")
+SOURCE_BYTES = 49428             # measured on the landed file (7 chunks + 1 appended)
+SOURCE_SHA256 = ("21d3a04097e2a2e159e1a96f2a968cc2eab6a826"
+                 "74ac0c472003c8b7f243db95")
+DELIVERED_CHUNKS = 7             # 2026-10-11
+DELIVERED_BYTES = 47474
+DELIVERED_SHA256 = ("4822118f1f8bac45667f4fa2652e0c4b18bf4f2f"
+                    "2376ff7adf46a749d28b6757")
+APPENDED_CHUNKS = 1              # 2026-11-14, NEW ENTRIES section
 
 # the five terms the entry says fail, each with the reason it gives
 REJECTED = {
@@ -308,7 +316,7 @@ def render():
              sp["seed_identical_to_render"]))
         w("   seed provenance says NOT chunk 1: %s"
           % sp["seed_provenance_not_chunk1"])
-        w("   chunks: %d rows (6 was the superseded estimate), all"
+        w("   chunks: %d rows (7 delivered + 1 appended; 6 was the superseded estimate), all"
           " RECEIVED %s," % (sp["chunk_rows"], sp["all_rows_received"]))
         w("   received %d of %d bytes (table); landed file %d bytes;"
           % (sp["received_total"], sp["bytes_total"], sp["source_bytes"]))
@@ -385,8 +393,9 @@ def selftest():
         sp["seed_identical_to_render"])
     chk("split: seed provenance says NOT chunk 1",
         sp["seed_provenance_not_chunk1"])
-    chk("split: manifest rows == 7 delivered chunks (estimate was 6)",
-        sp["chunk_rows"] == 7 and sp["estimated_chunks"] == 6)
+    chk("split: manifest rows == 7 delivered + 1 appended (estimate was 6)",
+        sp["chunk_rows"] == DELIVERED_CHUNKS + APPENDED_CHUNKS
+        and sp["estimated_chunks"] == 6)
     chk("split: every chunk RECEIVED", sp["all_rows_received"])
     chk("split: source file present", sp["present"]["source"])
     chk("split: source bytes == %d" % SOURCE_BYTES,
@@ -399,6 +408,10 @@ def selftest():
     chk("split: source sha256 == pinned constant",
         sp["source_sha256"] == SOURCE_SHA256)
     chk("split: manifest states the same sha256", sp["manifest_states_sha"])
+    chk("split: first %d bytes still hash to the 2026-10-11 delivery"
+        % DELIVERED_BYTES,
+        hashlib.sha256(io.open(SOURCE, "rb").read()[:DELIVERED_BYTES])
+        .hexdigest() == DELIVERED_SHA256)
     chk("split: every row's sha256[:16] recomputes from the file",
         sp["chunk_hashes_match"])
     # the recompute must be able to fail: one byte shifted reads False

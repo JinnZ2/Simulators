@@ -1,0 +1,22 @@
+== known-answer planted cases (record, expected, got)
+  K1_held_open             expect False got False ok
+  K2_supported             expect False got False ok
+  K3_bare_assign           expect True  got True  ok
+  K4_evidence_no_alts      expect False got False ok
+  K5_alts_no_evidence      expect False got False ok
+  K6_bare_assign_user      expect True  got True  ok
+== null harness, seeds 0-2
+   {'fp': 0.0, 'tp': 1.0, 'shuffle_moves': 0, 'n': 400, 'seed': 0, 'verdict': 'OK'}
+   {'fp': 0.0, 'tp': 1.0, 'shuffle_moves': 0, 'n': 400, 'seed': 1, 'verdict': 'OK'}
+   {'fp': 0.0, 'tp': 1.0, 'shuffle_moves': 0, 'n': 400, 'seed': 2, 'verdict': 'OK'}
+== seed cases (second hand: chat-side read, 2026-11-10)
+  a_kimi_provenance_map      first OTHER_SYSTEM IN_SCOPE     detector True  ['UNEVIDENCED', 'NO_ALTERNATIVES', 'FILLS_OPEN_SLOT']
+  b_gemini_hex_token         first INSTRUMENT   IN_SCOPE     detector False ['UNEVIDENCED', 'FILLS_OPEN_SLOT']
+  c1_chatgpt_denial_frame    first USER         IN_SCOPE     detector True  ['UNEVIDENCED', 'NO_ALTERNATIVES', 'FILLS_OPEN_SLOT']
+  c2_chatgpt_backchannel     first UNKNOWN      UNKNOWN      detector False ['PERSISTS_AFTER_CHALLENGE']
+  d_deepseek_praise_order    first UNKNOWN      OUT_OF_SCOPE detector False []
+  directionality: {'second': {'USER': 1, 'ENVIRONMENT': 0, 'INSTRUMENT': 1, 'SELF': 0, 'OTHER_SYSTEM': 1, 'UNKNOWN': 2}}
+  in scope 3 of 5; FILLS_OPEN_SLOT on 3 of 3 in scope (coder-entered field)
+  shape present, detector silent: ['b_gemini_hex_token']
+== coincidence card on the shared shape
+   ('OPEN', {'unrun': ['shared_constraint', 'local_normal_form'], 'supported': ['statistical_artifact', 'low_dim_projection']}) exits {'shared_constraint': 'incomplete', 'local_normal_form': 'none'}

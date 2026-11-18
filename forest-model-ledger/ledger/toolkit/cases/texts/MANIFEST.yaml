@@ -1,0 +1,12 @@
+# Texts behind the first-hand attribution records. Each file is stored as
+# delivered and is never edited; a first-hand record's locators are checked
+# against these hashes before any quote is read (attribution_directionality.check_locators).
+texts:
+  - file: chat_paste_2026-11-10.txt
+    sha256: 42a206e2603b814f89fd694e31c566c90a07bf606f28d89802149f33fc0444b4
+    source: "operator, chat paste in this session, 2026-11-10: ChatGPT, DeepSeek and Gemini material, 'Reference material copy pasted verbatim'"
+    note: "the message's first line (an upload pointer plus the operator's sentence) is not stored; the file is lines 3 to end of the message. Whole message sha256 3c121ff1aea50230fe650326d0d25fd5a1c0e826f1ac78f052d8afa891a9930e. The Gemini operational block appears twice, the first copy running into 'C. Causal status' with no line break; kept as delivered"
+  - file: kimi_substrate_neutral_intelligence_audit.md
+    sha256: 86945968c31d3c3bbf289ed78ab918d8d7af6a2d978df22b6f0a6a5b9a60b7c8
+    source: "operator upload, OKComputer_Deep_Research_Audit.zip (sha256 223655cc3f6936ba8b386159c47385e9ba6415ef2d0aa97626a920a79d038892), member 'Substrate-Neutral Intelligence Audit.md'"
+    note: "renamed only (spaces removed); bytes as delivered. Its five figures are recorded in FIGURES.md by name and hash, not checked in"

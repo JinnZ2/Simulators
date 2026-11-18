@@ -94,7 +94,7 @@ def run_status(rows):
     """INCOMPLETE unless at least one budget is LIVE and every LIVE budget is CLOSED or NOISE."""
     live = [r for r in rows if r["verdict"] != "VOID"]
     if not live:
-        return "INCOMPLETE", "no LIVE budget: closure was not tested"
+        return "INCOMPLETE", "NO_LIVE_BUDGET: closure was not tested"
     bad = [r["budget"] for r in live if r["verdict"] == "LEAK"]
     if bad:
         return "INCOMPLETE", "budget(s) %s did not close" % bad

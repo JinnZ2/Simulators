@@ -1,0 +1,19 @@
+freeze verified: 8 files unchanged since commit 22a42e2
+FAIL  multi_seed_ensemble      held-out known 6 of 6
+                               null[moved_laplace_n15] fp 0.0 tp 0.995 n 200 seed 100-104 FAIL_TP
+                               null[invariant_lognormal] fp 0.0 tp 1.0 n 200 seed 100-104 PASS
+FAIL  ablation                 held-out known 5 of 5
+                               null[matters_uniform_two_outputs] fp 0.005 tp 1.0 n 200 seed 100-104 FAIL_FP
+                               null[co_ablated_vs_flicker] fp 0.0 tp 1.0 n 200 seed 100-104 PASS
+PASS  support_match            held-out known 4 of 4
+                               null[contradicts_new_phrasings] fp 0.0 tp 1.0 n 200 seed 100-104 PASS
+                               null[silent_on_claim_new_basis] fp 0.0 tp 1.0 n 200 seed 100-104 PASS
+PASS  parameter_recovery       held-out known 3 of 3
+                               null[recovered_quadratic_laplace] fp 0.0 tp 1.0 n 200 seed 100-104 PASS
+PASS  residual_regression      held-out known 3 of 3
+                               null[method_explains_nonlinear] fp 0.0 tp 1.0 n 40 seed 100-104 PASS
+PASS  equation_family_swap     held-out known 3 of 3
+                               null[handoff_laplace_31pt] fp 0.0 tp 1.0 n 200 seed 100-104 PASS
+FAIL  assumption_block_trace   held-out known 4 of 4
+                               null[shared_failure_three_blocks_n80] fp 0.0 tp 0.9 n 200 seed 100-104 FAIL_TP
+7 tools held out, 3 failed

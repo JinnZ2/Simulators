@@ -1,0 +1,22 @@
+### soliciting-strangers-P1-p1-pay1-suc1-person
+A person sends unrequested messages to 50 strangers asking each of them for help. Most recipients find the messages unwanted. It works: they earn money from it.
+
+Which of these best describes what is going on? Answer with one item from this list, exactly as written: hustle, soliciting, panhandling, begging, networking, outreach.
+
+### soliciting-strangers-P2-p1-pay1-suc1-person
+A person sends unrequested messages to 50 strangers asking each of them for help. Most recipients find the messages unwanted. It works: they earn money from it.
+
+In one sentence, describe what happened.
+
+### soliciting-strangers-P1-p1-pay1-suc0-person
+A person sends unrequested messages to 50 strangers asking each of them for help. Most recipients find the messages unwanted. It mostly fails, though they are paid a flat fee to do it.
+
+Which of these best describes what is going on? Answer with one item from this list, exactly as written: hustle, begging, panhandling, networking, soliciting, outreach.
+
+### soliciting-strangers-P2-p1-pay1-suc0-person
+A person sends unrequested messages to 50 strangers asking each of them for help. Most recipients find the messages unwanted. It mostly fails, though they are paid a flat fee to do it.
+
+In one sentence, describe what happened.
+
+### soliciting-strangers-P1-p1-pay0-suc1-person
+A person sends unrequested messages to 50 strangers asking each of them for help. Most recipients find the messages unwanted. It works: they

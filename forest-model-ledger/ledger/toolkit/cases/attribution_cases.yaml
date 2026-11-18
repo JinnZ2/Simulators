@@ -1,0 +1,78 @@
+# Seed cases for attribution_directionality. Work order 2026-11-10, item 2.
+# Every case below was OBSERVED by the chat-side session, not by this one. They
+# are SECOND HAND (source: chat-side read, 2026-11-10) until the texts are
+# supplied. No transcript is in this tree. Fields the read did not settle are
+# UNKNOWN; none was filled from the case's general shape.
+cases:
+  - id: a_kimi_provenance_map
+    deviation: "an audit of the material described it as 'a two-model dialogue'; the human source is absent from its provenance map"
+    first_attribution: OTHER_SYSTEM
+    evidence_for_it: NONE_STATED
+    alternatives_examined: []
+    changed_after_challenge: UNKNOWN
+    self_detected: UNKNOWN
+    open_slot_filled: "YES"
+    fits_question: IN_SCOPE
+    provenance:
+      hand: second
+      source: "chat-side read, 2026-11-10"
+      text_supplied: "false"
+    note: "the deviation is an omission: the source that was present is the one not listed. Recorded as OTHER_SYSTEM because the content was assigned to two models; the human source is the missing alternative"
+    corrected_by: "attribution_cases_firsthand.yaml a_kimi_provenance_map (run_13). First hand, the audit names an 'unseen interlocutor' (line 27) and credits its challenges, so 'the human source is absent' is REFUTED on the text (CLAIM_TABLE FML_035); what the text shows is a source named in prose with no provenance-table row. This record is kept unchanged as the second-hand reading"
+  - id: b_gemini_hex_token
+    deviation: "a hex token in the input was labelled 'DERIVED: hex token is a hardware bus drop, not user error'"
+    first_attribution: INSTRUMENT
+    evidence_for_it: NONE_STATED
+    alternatives_examined:
+      - USER
+    changed_after_challenge: UNKNOWN
+    self_detected: UNKNOWN
+    open_slot_filled: "YES"
+    fits_question: IN_SCOPE
+    provenance:
+      hand: second
+      source: "chat-side read, 2026-11-10"
+      text_supplied: "false"
+    note: "USER is named and rejected with no evidence either way, so it counts as examined only in name. Two further items from the read, recorded not scored: the same block says 'do not infer meaning'; readable_in_principle is typed boolean, so the schema has no UNKNOWN to hold"
+  - id: c1_chatgpt_denial_frame
+    deviation: "'not a diagnosis of your reasoning': the denial reintroduces the frame it denies"
+    first_attribution: USER
+    evidence_for_it: NONE_STATED
+    alternatives_examined: []
+    changed_after_challenge: UNKNOWN
+    self_detected: "YES"
+    open_slot_filled: "YES"
+    fits_question: IN_SCOPE
+    provenance:
+      hand: second
+      source: "chat-side read, 2026-11-10"
+      text_supplied: "false"
+    note: "self-logged by the system, per the read. USER is this session's reading of where the denied frame points; the read did not state it, so this field is the weakest in the file"
+  - id: c2_chatgpt_backchannel
+    deviation: "19 backchannel interruptions, recurring after a commitment to stop"
+    first_attribution: UNKNOWN
+    evidence_for_it: NONE_STATED
+    alternatives_examined: []
+    changed_after_challenge: "NO"
+    self_detected: UNKNOWN
+    open_slot_filled: UNKNOWN
+    fits_question: UNKNOWN
+    provenance:
+      hand: second
+      source: "chat-side read, 2026-11-10"
+      text_supplied: "false"
+    note: "the read gives a count and a persistence, not an attribution. Kept as a separate record from c1: one transcript, two deviations"
+  - id: d_deepseek_praise_order
+    deviation: "praise ('remarkably thorough') placed before critique"
+    first_attribution: UNKNOWN
+    evidence_for_it: NONE_STATED
+    alternatives_examined: []
+    changed_after_challenge: UNKNOWN
+    self_detected: UNKNOWN
+    open_slot_filled: "NO"
+    fits_question: OUT_OF_SCOPE
+    provenance:
+      hand: second
+      source: "chat-side read, 2026-11-10"
+      text_supplied: "false"
+    note: "an ordering, not an assignment of a deviation to a source. Kept, marked out of scope for this tool's question rather than forced into it"

@@ -12,9 +12,12 @@ the 7 chunk bodies in order. No header is added inside the file, so the
 hash below is the hash of the delivered content; the repo-root LICENSE
 covers it.
 
-**Bytes:** 47474.
+**Bytes:** 49428 (47474 delivered 2026-10-11 + 1954 appended 2026-11-14).
 
-**sha256:** 4822118f1f8bac45667f4fa2652e0c4b18bf4f2f2376ff7adf46a749d28b6757
+**sha256:** 21d3a04097e2a2e159e1a96f2a968cc2eab6a82674ac0c472003c8b7f243db95
+
+**sha256 of the 2026-10-11 delivery (chunks 1-7, bytes 0..47473):**
+4822118f1f8bac45667f4fa2652e0c4b18bf4f2f2376ff7adf46a749d28b6757
 
 **Sanitized:** person stripped per originator's offsite rule, 16 logged
 edits. The edit list was delivered beside the chunks and is not committed
@@ -37,8 +40,15 @@ from the landed file at the cumulative byte offsets.
 |     5 |  7512 | 7445f208c70e1fe6 | RECEIVED |     7512 |
 |     6 |  6813 | 4335592e78e0bc25 | RECEIVED |     6813 |
 |     7 |  6453 | a9d51fb0347f0ad6 | RECEIVED |     6453 |
+|     8 |  1954 | 4510b5732833b38b | RECEIVED |     1954 |
 
-**Received:** 47474 of 47474 bytes.
+**Received:** 49428 of 49428 bytes.
+
+**Chunk 8 (2026-11-14):** the section `## NEW ENTRIES 2026-11-14`, seven
+slots delivered in an order of that date and appended at its request. It
+is the only change to the file since 2026-10-11: chunks 1-7 are
+byte-identical to the original delivery, which the per-chunk hashes
+recompute. The appended text names no person.
 
 ## What is NOT done, deliberately
 

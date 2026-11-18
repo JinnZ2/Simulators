@@ -97,7 +97,7 @@ evidence against the actor under another layer.
 
 ---
 
-## 2. CHECKLIST (10 SECTIONS)
+## 2. CHECKLIST (11 SECTIONS)
 
 ### S1. Contact surfaces
 [PROPOSED] List every physical, informational and financial surface the
@@ -153,6 +153,13 @@ specific points where the analogy fails. The break points are the gaps.
 
 ### S10. Forward trajectories
 See section 3.
+
+### S11. Single-valve continuation
+[PROPOSED] Does the design gate a being's continued existence behind a single valve (one
+currency or channel), with the exit being the penalty and no opt-out? If yes, name: who holds
+the meter, who sets the price, where the exhaust lands, which other channels (care, relationship,
+refusal, rest) are uncoupled from continuation. Specimen: measurement-scope-gaps
+ILANDS_SINGLE_VALVE_CIRCUIT.md.
 
 ---
 

@@ -1,0 +1,13 @@
+grid (x DEFAULTS) [0.6, 0.8, 1.0, 1.2, 1.4]; obs seeds 100-104; fit seeds 0-4; {'DCHI2': 9.0} [CHOICE]
+dep     RECOVERED        theta_hat x1.0  plausible [1.0]   run_15: (not in the 33: moved in run_11)
+        chi2 0.6:  7912.9  0.8:  1971.3  1.0:     7.4  1.2:  1798.6  1.4:  7860.8   outputs skipped (se 0): -
+kT      RECOVERED        theta_hat x1.0  plausible [1.0]   run_15: HIDDEN_IN_NOISE
+        chi2 0.6:   105.2  0.8:    22.8  1.0:     7.4  1.2:    41.2  1.4:   125.7   outputs skipped (se 0): -
+uG      RECOVERED        theta_hat x1.0  plausible [0.8, 1.0, 1.2]   run_15: HIDDEN x1.1 / ABSORBED x0.9
+        chi2 0.6:    41.3  0.8:    16.3  1.0:     7.4  1.2:    11.3  1.4:    34.9   outputs skipped (se 0): -
+aG      NOT_IDENTIFIABLE theta_hat x1.2  plausible [0.6, 0.8, 1.0, 1.2, 1.4]   run_15: ABSORBED
+        chi2 0.6:     7.4  0.8:     7.4  1.0:     7.4  1.2:     7.4  1.4:     7.4   outputs skipped (se 0): -
+kill_G  PARTIAL          theta_hat x1.0  plausible [0.6, 0.8, 1.0, 1.2]   run_15: INERT x1.1 / ABSORBED x0.9
+        chi2 0.6:    11.1  0.8:     8.1  1.0:     7.4  1.2:    14.5  1.4:   110.4   outputs skipped (se 0): -
+p_ign   PARTIAL          theta_hat x1.2  plausible [1.0, 1.2, 1.4]   run_15: INERT x1.1 / UNRESOLVED x0.9
+        chi2 0.6:    48.6  0.8:    16.5  1.0:     7.4  1.2:     2.5  1.4:     4.1   outputs skipped (se 0): -

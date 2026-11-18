@@ -1,5 +1,6 @@
 {
 "source": "numpy.random.default_rng(0); numpy 2.5.3",
+"numpy_version": "2.5.3",
 "drought_sd": 0.35,
 "pfacs": [
 "0x1.f73f1dae96b2fp-1",
