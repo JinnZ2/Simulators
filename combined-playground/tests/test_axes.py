@@ -38,6 +38,15 @@ class Shape(unittest.TestCase):
         with self.assertRaises(A.AxisError):
             A.reading("PHYSICAL", "CLOSED_WITHIN", sigma=0.1)       # needs basis
         A.reading("PHYSICAL", "CLOSED_WITHIN", sigma=0.1, basis="declared per account")
+
+    def test_closed_within_off_physical_is_void_not_a_reading(self):
+        for f in ("INSTRUMENT", "DETERMINATION"):
+            got = A.reading(f, "CLOSED_WITHIN", sigma=0.1, basis="b")
+            self.assertIsInstance(got, T.Token)
+            self.assertEqual(got.state, "VOID")
+            self.assertIn("PHYSICAL only", got.reason)
+            with self.assertRaises(A.AxisError):
+                A.Record({f: got}, coverage=[])          # a VOID token cannot sit on an axis
         with self.assertRaises(A.AxisError):
             A.reading("APPLICABILITY", "OUTSIDE_DOMAIN")            # needs the bound
         A.reading("APPLICABILITY", "OUTSIDE_DOMAIN", bound="n <= 200")

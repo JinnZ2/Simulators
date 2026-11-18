@@ -10,11 +10,22 @@ SPEC GAP (stops this module at the verdict): section 2 names a tolerance, a sigm
 roundoff floor per account, and says NOISE is "misclosure within k sigma", but gives no rule
 combining them into OK / CLOSED_WITHIN / FAILED, and does not state how a misclosure is
 computed. verdict() raises SpecGap rather than choosing one.
+
+Beside it (follow-up item 2), three candidate rules, none adopted. Each takes the misclosure as a
+declared input that the run accepted; a FAILED reading lands on PHYSICAL only when the ledger is
+DECLARED complete (R-A1), else on DETERMINATION:
+  A  tolerance first   OK if |m| <= tol; CLOSED_WITHIN if |m| <= k*sigma; else FAILED
+  B  floor added       OK if |m| <= tol + roundoff floor; CLOSED_WITHIN if |m| <= k*sigma;
+                       else FAILED. A token floor (not a number) makes B VOID.
+  C  band first        CLOSED_WITHIN if |m| <= k*sigma; OK if |m| <= tol; else FAILED
+A missing sigma or k removes the band step. branch_table() runs eight declared cases through
+all three and marks SPLIT where they disagree.
 """
 import hashlib
 import json
 from collections import namedtuple
 
+from . import axes as A
 from . import tokens as T
 
 
@@ -129,3 +140,106 @@ def run(prereg, prereg_sha256, observations):
 def verdict(result, account):
     raise SpecGap("section 2: no rule combines tolerance, k*sigma and the roundoff floor into "
                   "OK / CLOSED_WITHIN / FAILED, and the misclosure formula is not stated")
+
+
+def _accepted(result, misclosure):
+    if result.state != "ACCEPTED":
+        raise ClosureError("no branch verdict on a %s run" % result.state)
+    if not isinstance(misclosure, Misclosure) or misclosure not in result.observations:
+        raise ClosureError("misclosure must be declared input, one the run accepted")
+    decl = result.prereg.accounts[misclosure.account]
+    band = decl.k * decl.sigma if decl.sigma is not None and decl.k is not None else None
+    return decl, abs(misclosure.value), band
+
+
+def _failed(result, decl, m):
+    field = "PHYSICAL" if result.prereg.counts_as_declared else "DETERMINATION"
+    return A.reading(field, "FAILED", reason="|m| = %g beyond tolerance %g (account %s)"
+                     % (m, decl.tolerance, decl.account))
+
+
+def _closed(decl, m, band):
+    return A.reading("PHYSICAL", "CLOSED_WITHIN", reason="|m| = %g <= k*sigma = %g" % (m, band),
+                     sigma=decl.sigma, basis=decl.basis)
+
+
+def verdict_branch_A(result, misclosure=None):
+    decl, m, band = _accepted(result, misclosure)
+    if m <= decl.tolerance:
+        return A.reading("PHYSICAL", "OK")
+    if band is not None and m <= band:
+        return _closed(decl, m, band)
+    return _failed(result, decl, m)
+
+
+def verdict_branch_B(result, misclosure=None):
+    decl, m, band = _accepted(result, misclosure)
+    floor = result.prereg.roundoff_floor
+    if isinstance(floor, T.Token):
+        return T.Token("VOID", "branch B adds the roundoff floor; the floor is a token, not a number")
+    if m <= decl.tolerance + floor:
+        return A.reading("PHYSICAL", "OK")
+    if band is not None and m <= band:
+        return _closed(decl, m, band)
+    return _failed(result, decl, m)
+
+
+def verdict_branch_C(result, misclosure=None):
+    decl, m, band = _accepted(result, misclosure)
+    if band is not None and m <= band:
+        return _closed(decl, m, band)
+    if m <= decl.tolerance:
+        return A.reading("PHYSICAL", "OK")
+    return _failed(result, decl, m)
+
+
+BRANCHES = {"A": verdict_branch_A, "B": verdict_branch_B, "C": verdict_branch_C}
+
+# case: (misclosure, tolerance, sigma, k, roundoff floor, declared_complete) -- constructed
+CASES = (
+    ("c1", 1e-7, 1e-6, 1e-6, 3, 1e-12, True),
+    ("c2", 2e-6, 1e-6, 1e-6, 3, 1e-12, True),
+    ("c3", 5e-6, 1e-6, 1e-6, 3, 1e-12, True),
+    ("c4", 1.0000005e-6, 1e-6, None, None, 1e-9, True),
+    ("c5", 5e-7, 1e-6, None, None, 1e-12, True),
+    ("c6", 5e-7, 1e-6, None, None, "TOKEN", True),
+    ("c7", 2e-6, 1e-6, None, None, 1e-12, True),
+    ("c8", 5e-6, 1e-6, 1e-6, 3, 1e-12, "ABSENT"),
+)
+
+
+def _label(r):
+    if isinstance(r, T.Token):
+        return r.state
+    return "%s:%s" % (r.field, r.status)
+
+
+def branch_table():
+    rows = []
+    for cid, m, tol, sigma, k, floor, complete in CASES:
+        fl = T.Token("UNTESTED", "floor not measured") if floor == "TOKEN" else floor
+        dc = ABSENT if complete == "ABSENT" else complete
+        p = Prereg(accounts=[AccountDecl(account="N", tolerance=tol, sigma=sigma, k=k, basis="declared")],
+                   declared_complete=dc, registry=("constructed case",), roundoff_floor=fl)
+        obs = Misclosure(account="N", value=m, provenance="declared case %s" % cid)
+        res = run(p, p.sha256, [obs])
+        got = {b: _label(fn(res, obs)) for b, fn in BRANCHES.items()}
+        rows.append({"case": cid, "m": m, "tol": tol, "sigma": sigma, "k": k, "floor": floor,
+                     "complete": complete, "branches": got, "split": len(set(got.values())) > 1})
+    return rows
+
+
+def render_table(rows=None):
+    rows = rows or branch_table()
+    out = ["case  |m|          tol    k*sigma  floor   complete  A                       B                       C                       split"]
+    for r in rows:
+        band = "--" if r["sigma"] is None else "%g" % (r["k"] * r["sigma"])
+        b = r["branches"]
+        out.append("%-5s %-12.8g %-6g %-8s %-7s %-9s %-23s %-23s %-23s %s" % (
+            r["case"], r["m"], r["tol"], band, r["floor"], r["complete"], b["A"], b["B"], b["C"],
+            "SPLIT" if r["split"] else ""))
+    return "\n".join(out)
+
+
+if __name__ == "__main__":
+    print(render_table())

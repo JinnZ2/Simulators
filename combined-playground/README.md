@@ -11,8 +11,8 @@ The package is `cplay`, not `playground`: both source playgrounds ship a `playgr
 module   spec   file                PR
 M1       §7     cplay/brief.py      input-brief record; shared source read per level
 M2       §4     cplay/tokens.py     distinct tokens, reason rule, typed expiry, scoped absence, claims 1:1
-M3       §2     cplay/axes.py       3 axes + APPLICABILITY; COVERAGE apart, never severity; crash = record; #257 map
-M4       §2     cplay/closure.py    STOPPED at verdict (spec gap); declarations, prereg hash, R-A4 refusal built
+M3       §2     cplay/axes.py       3 axes + APPLICABILITY; COVERAGE apart, never severity; crash = record; #257 map; CLOSED_WITHIN off PHYSICAL VOID
+M4       §2     cplay/closure.py    verdict() STOPPED (spec gap); branches A/B/C beside it, SPLIT c1 c4 c6 (samples/)
 M5       §3     cplay/gates.py      identity -> regime -> compare -> card enforced; UNDECLARED regime refuses
 ```
 
