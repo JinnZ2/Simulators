@@ -371,6 +371,12 @@
    ]
   },
   {
+   "symptom": "an old order or an unused channel is picked up again and nobody checks what changed in between",
+   "tools": [
+    "card-rejoin-protocol"
+   ]
+  },
+  {
    "symptom": "a model plus tools is called the decider by its name, and nobody has written down who can see or fix the whole",
    "tools": [
     "configuration-record"
@@ -2740,6 +2746,41 @@
    "measures_src": "reasoning-toolkit/CARDS.md:671",
    "measures_quote_state": "FOUND",
    "breaks_src": "reasoning-toolkit/CARDS.md:678",
+   "breaks_quote_state": "FOUND",
+   "status": "NOT_RUN",
+   "status_detail": {
+    "status": "NOT_RUN",
+    "why": "build run without --run"
+   }
+  },
+  {
+   "need": "channel",
+   "also": [
+    "frame"
+   ],
+   "repo": "Simulators",
+   "path": "reasoning-toolkit/CARDS.md#23-rejoin-protocol-explorer-re-entry",
+   "name": "card-rejoin-protocol",
+   "aliases": [
+    "rejoin",
+    "re-entry",
+    "handshake decay",
+    "explorer return",
+    "meet-up"
+   ],
+   "measures_file": "reasoning-toolkit/CARDS.md",
+   "measures": "drift in protocol between members after separation",
+   "breaks_file": "reasoning-toolkit/CARDS.md",
+   "breaks_when": "both sides changed their reference while apart (no fixed point to align against)",
+   "check": null,
+   "avoided": "AVOIDED_TERM_UNSTATED",
+   "precision": "a question set; no numeric readout",
+   "assumes": "the reader applies the method by hand; status line in CARDS.md",
+   "chain": "reads: inference (the reader's step). ignores: whether the card was applied correctly",
+   "a1_status": "A1_READING (model reading of the card, 2026-11-13; not verbatim)",
+   "measures_src": "reasoning-toolkit/CARDS.md:701",
+   "measures_quote_state": "FOUND",
+   "breaks_src": "reasoning-toolkit/CARDS.md:717",
    "breaks_quote_state": "FOUND",
    "status": "NOT_RUN",
    "status_detail": {

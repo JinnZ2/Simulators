@@ -1101,11 +1101,11 @@
    "fails_when": "both sides changed their reference while apart (no fixed point to align against)",
    "location": {
     "repo": "Simulators",
-    "commit": "d1eafe8ceb6b367a6d9de0569863b68561f83194",
+    "commit": "0957631d03799df81e00be480039c815ca79d99f",
     "state": "CARD_TEXT",
     "path": "reasoning-toolkit/CARDS.md",
     "anchor": "#23-rejoin-protocol-explorer-re-entry",
-    "sha256": "9d9b0cc970b4517498a6a5233c0db7a568a87208fc7fdfe10bd7baf6db8d197f",
+    "sha256": "fa7e4a41a369fe120d30f1919ff92c1e6b8b2316a1776f0275cb18212cc6d017",
     "note": "card text only; no code"
    },
    "measures": "drift in protocol between members after separation",
@@ -1123,12 +1123,13 @@
     "warning_sign": "WRAP_COLLAPSED"
    },
    "aliases": [
-    "rejoin protocol",
-    "explorer re-entry",
-    "handshake before transfer",
-    "resuming an old order after time apart"
+    "rejoin",
+    "re-entry",
+    "handshake decay",
+    "explorer return",
+    "meet-up"
    ],
-   "finder": null,
+   "finder": "card-rejoin-protocol",
    "not_built": [],
    "evidence": []
   }
