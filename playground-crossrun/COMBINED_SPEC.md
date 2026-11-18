@@ -180,13 +180,15 @@ Sources owed to `combined-playground/sources/` when the build starts:
 Kimi audit, observer regimes   #256 forest-model-ledger/ledger/toolkit/cases/texts/
                                kimi_substrate_neutral_intelligence_audit.md, section 4.4
                                (head d402fa8, sha256 86945968...)          CHECKED
-TAF GAP_INSTRUMENT_CRASH       TAF draft branches #82 / #85 (unmerged)     CHECKED 2026-11-18, read-only
-                               heads #82 a2c5d99d8b41 / #85 65bb724f0484
+TAF GAP_INSTRUMENT_CRASH       TAF main                                    CHECKED 2026-11-18, read-only
+                               #85 pin: main merge commit 16285cc (PR #85; branch head 51083ca)
+                               #82 pin: archive/unknown-axis-followup a2c5d99d8b41
                                definition: calibration/unified_audit.py:92-101
-                               main 25551f8: 0 occurrences (label unmerged)
+                               merged to main 2026-11-18 via #85 (16285cc); definition line 96,
+                               COVERAGE_KINDS line 101
 ```
 
-Definition as quoted (identical text on both heads):
+Definition as quoted (identical text on #82, #85 and main 16285cc):
 
 ```text
 # A module that raised is not a reading of the system. Its status is
@@ -197,9 +199,9 @@ COVERAGE_KINDS = ("UNKNOWN", "INFO", "GAP_INSTRUMENT_CRASH")
 coverage entry fields: kind, module, input, reason, missing_path, expiry_condition
 ```
 
-Pin note: `calibration/unified_audit.py` differs between the two heads (sha256 #82 a0864e725159...,
-#85 fcccb9af8d8e...). This spec cites #85 as the later head. Re-pin to the merge commit when the
-label merges to TAF main.
+Pin note: `calibration/unified_audit.py` on main 16285cc has sha256 fcccb9af8d8e..., unchanged from
+the #85 branch head the spec first cited (65bb724f0484, since rebased to 51083ca). Only the commit
+pin moved. The #82 version differs (a0864e725159...) and is kept at the archive ref above.
 
 ---
 
