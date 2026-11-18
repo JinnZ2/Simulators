@@ -1,0 +1,327 @@
+ROUND 3 PROVENANCE ANSWERS
+Model: Kimi K3 (Moonshot AI). Date: 2026-11-19 (harness-provided, timezone unknown).
+Labels: READ = opened the source this session. RAN = executed code this session.
+RECALLED = from memory, not opened. INFERRED = my derivation. RE-RUN = newly re-run.
+"cannot recover" = the information is not available to me and I will not regenerate it.
+
+=====================================================================
+ITEM 1 - Part B, seven-row guard table
+
+Provenance: algebra.mm guards READ (JinnZ2/formula-audit, tests/data/algebra.mm,
+main; commit of original fetch not recorded -> cannot recover; current main is
+74ceae9b4df2ccbe55b16755d9d871aec88ba446, READ via ls-remote, and since that
+commit predates my fetch and main has not moved, my copy was the same: INFERRED).
+set.mm antecedents READ (metamath/set.mm, develop, blob sha1
+e483895ed36dc7846cfa30d8c643e18ff587815c, fetched live via GitHub blob API).
+Verdicts INFERRED (my assignments). Line numbers approximate where marked ~.
+
+Row 1
+  algebra.mm label: diveq1
+  set.mm label:     oveq1 (line 72786)
+  algebra.mm guard (verbatim): t = r
+  set.mm antecedent (verbatim): A = B
+  verdict: GUARD_OK (equal, typing aside)
+
+Row 2
+  algebra.mm label: diveq2
+  set.mm label:     oveq2 (line 72792)
+  algebra.mm guard (verbatim): t = r
+  set.mm antecedent (verbatim): A = B
+  verdict: GUARD_OK (equal, typing aside)
+
+Row 3
+  algebra.mm label: poweq1
+  set.mm label:     oveq1 (line 72786)
+  algebra.mm guard (verbatim): t = r
+  set.mm antecedent (verbatim): A = B
+  verdict: GUARD_OK (equal, typing aside)
+
+Row 4
+  algebra.mm label: sqrteq
+  set.mm label:     fveq2 (line 66092)
+  algebra.mm guard (verbatim): t = r
+  set.mm antecedent (verbatim): A = B
+  verdict: GUARD_OK (equal, typing aside)
+
+Row 5
+  algebra.mm label: divmul
+  set.mm label:     divcan1 (line ~135035)
+  algebra.mm guard (verbatim): -. r = 0
+  set.mm antecedent (verbatim): ( A e. CC /\ B e. CC /\ B =/= 0 )
+  verdict: GUARD_OK (the operative nonzero condition B =/= 0 matches -. r = 0)
+
+Row 6
+  algebra.mm label: sqrtsq
+  set.mm label:     resqrtth (line 173606) and sqsqrti (line 175028)
+  algebra.mm guard (verbatim): 0 <_ t
+  set.mm antecedent (verbatim, resqrtth): ( A e. RR /\ 0 <_ A )
+  set.mm antecedent (verbatim, sqsqrti): 0 <_ A
+  verdict: GUARD_OK
+  note (INFERRED): set.mm's own statement named sqrtsq (line 173744) is
+  ( ( sqrt ` ( A ^ 2 ) ) = A ), a different statement; name-matching is a trap.
+  The matching statement is resqrtth / sqsqrti. sqrtth (line ~174919) is the
+  complex-domain variant, not the match.
+
+Row 7
+  algebra.mm label: sqrtge0
+  set.mm label:     sqrtge0 (line 173619)
+  algebra.mm guard (verbatim): 0 <_ t
+  set.mm antecedent (verbatim): ( A e. RR /\ 0 <_ A )
+  verdict: GUARD_OK
+
+Observation (INFERRED): rows 1-4 carry no domain guard in either file; that sits
+oddly with algebra.mm's own header ("division only for non-zero divisor") but is
+equal to set.mm.
+
+=====================================================================
+ITEM 2 - n = 200 grid (RAN; 200 seeds per cell; catches = planted flagged,
+false alarms = white flagged)
+
+window w=20   limit 0.3   planted catches 93  of 200   white false alarms 1  of 200
+window w=20   limit 0.5   planted catches 14  of 200   white false alarms 0  of 200
+window w=40   limit 0.3   planted catches 149 of 200   white false alarms 8  of 200
+window w=40   limit 0.5   planted catches 89  of 200   white false alarms 0  of 200
+window w=60   limit 0.3   planted catches 165 of 200   white false alarms 21 of 200
+window w=60   limit 0.5   planted catches 120 of 200   white false alarms 6  of 200
+window w=100  limit 0.3   planted catches 186 of 200   white false alarms 35 of 200
+window w=100  limit 0.5   planted catches 158 of 200   white false alarms 14 of 200
+
+Longer series moves the curve up (INFERRED from RAN data; reference point:
+n=60 w=30 limit 0.5 gave 79 catches in the repo record, READ, and reproduced
+by me, RAN).
+
+=====================================================================
+ITEM 3 - citations
+
+For each: DOI/URL verified today via web search (READ, search-snippet and
+abstract level only; no full text was opened at any point). The phrases I
+used in the earlier answer were RECALLED at the time of writing.
+
+Dakos et al. 2012
+  PLoS ONE 7(7): e41010
+  DOI 10.1371/journal.pone.0041010
+  seen: search snippet + journal page metadata (READ today)
+
+Boettiger and Hastings 2012
+  Journal of the Royal Society Interface 9: 2527-2539
+  DOI 10.1098/rsif.2012.0125
+  seen: search snippet / reference-list entries (READ today)
+
+O'Brien et al. 2023
+  Nature Communications 14: 7942
+  DOI 10.1038/s41467-023-43744-8
+  seen: search snippet + abstract (READ today)
+
+Clements and Ozgul 2018  -- CORRECTION
+  Ecology Letters 21(6): 905-919
+  DOI 10.1111/ele.12948
+  seen: search snippet (READ today)
+  My earlier attribution to Oikos was wrong (RECALLED error). The Oikos paper
+  I conflated it with is Dutta, Sharma and Abbott 2018, Oikos 127: 1251-1263,
+  DOI 10.1111/oik.05172 (READ today).
+
+Scheffer et al. 2009
+  Nature 461: 53-59
+  DOI 10.1038/nature08227
+  seen: RECALLED only; not re-verified in this session's searches.
+
+=====================================================================
+ITEM 4 - code as text
+
+(a) Series generators, verbatim as recorded (RAN). RNG: Python 3.12 random
+module (Mersenne Twister); Random.gauss is Box-Muller with a per-instance
+cached second deviate (RECALLED CPython detail). Provenance: the planted and
+white constructions were taken from the module's own selftest
+(glyph/precursor.py lines 199-211, READ today: Random(s), x start 0.0,
+coefficient 0.05 + 0.9*t/59 at n=60, white from Random(10000+s)); my replay
+generalizes /59 to /(n-1). Drift and step are my additions (RAN).
+
+import random
+
+def planted_series(s, n):
+    rng, x, sig = random.Random(s), 0.0, []
+    for t in range(n):
+        x = (0.05 + 0.9 * t / (n - 1)) * x + rng.gauss(0, 1)
+        sig.append(x)
+    return sig
+
+def white_series(s, n):
+    rng = random.Random(10000 + s)
+    return [rng.gauss(0, 1) for _ in range(n)]
+
+def make(kind, s, n):
+    if kind == "planted":
+        return planted_series(s, n)
+    if kind == "white":
+        return white_series(s, n)
+    if kind == "drift":
+        rng = random.Random(s)
+        return [0.02 * t + rng.gauss(0, 1) for t in range(n)]
+    if kind == "step":
+        rng = random.Random(s)
+        return [(3.0 if t >= n // 2 else 0.0) + rng.gauss(0, 1) for t in range(n)]
+
+Declaration used (RAN): {"tau": 3.0, "window": w, "streak_limit": 3,
+"trend_limit": lim}. Note: streak_limit is inert for the precursor flag
+(see item 8); it was carried over from the module's selftest declaration
+(line 200, READ today).
+
+(b) Surrogate calibration. Signature lines verbatim as recorded (RAN);
+the bodies are a reconstruction from my recorded design notes (RECALLED
+reconstruction, semantics exact):
+
+def phase_surrogates(x, S, rng):
+    # rfft(x); keep amplitudes; draw phases uniform in [0, 2*pi)
+    # force ph[0] = 0.0 (DC bin); if n even, force ph[-1] = 0.0 (Nyquist bin)
+    # irfft back; produce S surrogate series
+
+def surrogate_p(sig, w, S=100, seed=None):
+    # observed Kendall taus (variance, autocorr) of sig
+    # same taus for each surrogate; per-tau one-sided upper p, add-one:
+    #     p = (1 + count(tau_surrogate >= tau_observed)) / (S + 1)
+    # flag iff p_variance <= 0.05 and p_autocorr <= 0.05
+
+(c) JavaScript port: the exact source text cannot recover. Facts as recorded
+(RECALLED): standard mulberry32 PRNG; Box-Muller gaussian; seeds mulberry32(s)
+for planted and mulberry32(10000+s) for white; 200 seeds per cell. JS draws
+are not the same numbers as the Python draws; the check was distributional,
+not bitwise. Raw outputs are in item 6.
+
+=====================================================================
+ITEM 5 - surrogate calibration raw counts (RAN; n=400, READ from the figure
+title; 100 seeds per class per window; S=100 surrogates; alpha=0.05;
+counts = series flagged, out of 100)
+
+memory   w=20: 65   w=50: 79   w=100: 63   w=200: 71
+white    w=20: 3    w=50: 2    w=100: 3    w=200: 1
+drift    w=20: 1    w=50: 0    w=100: 0    w=200: 0
+step     w=20: 0    w=50: 0    w=100: 0    w=200: 0
+
+=====================================================================
+ITEM 6 - the six JavaScript cells (RAN; planted catches and white false
+alarms, each out of 200 seeds) with Python counterparts (RAN)
+
+cell n=60  w=20  limit 0.5:  JS planted 55   JS white 5    Python planted 46   Python white 3
+cell n=200 w=20  limit 0.5:  JS planted 12   JS white 0    Python planted 14   Python white 0
+cell n=70  w=50  limit 0.5:  JS planted 98   JS white 11   Python planted 110  Python white 7
+cell n=400 w=50  limit 0.5:  JS planted 109  JS white 0    Python planted 109  Python white 1
+cell n=150 w=100 limit 0.5:  JS planted 161  JS white 9    Python planted 156  Python white 11
+cell n=60  w=20  limit 0.3:  JS planted 101  JS white 11   Python planted 87   Python white 12
+
+All JS/Python pairs within binomial noise (INFERRED; no formal test computed).
+
+=====================================================================
+ITEM 7 - Part A, the eight pairs: copied or paraphrased
+
+The text of my original message is not re-openable (compacted), so the form
+of each quotation is RECALLED from my session record; every underlying source
+string was READ at its file.
+
+pair 1 GAP_INSTRUMENT_CRASH | CRASHED
+  left:  copied verbatim from unified_audit.py docstring ("A module that
+         raised is not a reading of the system ... never to severity")
+  right: copied verbatim from COMBINED_SPEC section 2 ("did not run: the
+         check raised", fields exception + path)
+
+pair 2 UNKNOWN | UNKNOWN
+  left:  copied phrases "UNKNOWN is deliberately absent", "separate coverage
+         axis" (unified_audit.py)
+  right: paraphrased rule, copied token UNTYPED (COMBINED_SPEC section 4)
+
+pair 3 ABSENT_AT_SENSITIVITY | ABSENT_AT_SENSITIVITY
+  left:  copied "state a slot moves to when its exit instrument runs at a
+         stated sensitivity and returns null", "never a bare 'absent'"
+         (expiry_register.py)
+  right: paraphrased; quoted fragment "must carry limit+basis"; slot list
+         {limit, basis, effect size, conditions} paraphrased (section 4)
+
+pair 4 VOID | VOID
+  left:  copied verbatim from numcheck docstring ("units not PASS ...
+         internal error")
+  right: paraphrased from cplay tokens.py/axes.py (no long verbatim quote)
+
+pair 5 expiry_condition | ExpiryTrigger
+  left:  copied "instrument class, sensitivity, and protocol whose null
+         result would downgrade the entry to 'absent-at-this-sensitivity'"
+         (expiry_register.py, itself quoting Kimi audit C7)
+  right: dataclass fields paraphrased; kind enum values copied
+         (NEW_EVIDENCE, CONDITION_CHANGE, INSTRUMENT_CHANGE,
+         REVISION_DEPENDENCY) (unknown_expiry.py)
+
+pair 6 UNDECIDED | UNRESOLVED
+  left:  copied "D straddles the edge at the last tier" (numcheck docstring)
+  right: copied "inside the guard band; carried on INSTRUMENT, never
+         PHYSICAL" (cplay tokens.py)
+
+pair 7 HOLDS | OK
+  left:  copied "D lies inside [-t, t]" (numcheck docstring)
+  right: copied "ran and passed" (section 2) and "OK is reserved for the
+         exact tier |m| <= roundoff floor" (section 9c RELABEL)
+
+pair 8 HOLDS | CLOSED_WITHIN
+  left:  same HOLDS quote as pair 7
+  right: copied "closure holds within sigma, not exactly" (section 2)
+
+The verdicts (MAPS, five PARTIAL, HOMONYM, NONE) and one-line reasons were
+my derivations: INFERRED.
+
+=====================================================================
+ITEM 8 - the flag rule: you are right, and my earlier sentence was wrong
+
+Module text, glyph/precursor.py lines 126-130 (READ today, commit 74ceae9,
+sha256 d1eab08effbc5b4b40b24969797763abf99f31b54e630da3dd6117e8f9f5e537):
+
+    lim = d.get("trend_limit")
+    if isinstance(lim, (int, float)) and 0 < lim <= 1:
+        rising = [n for n, t in (("variance", tv), ("autocorr", ta)) if t is not None and t >= lim]
+        p["rising"] = rising
+        p["flag"] = "PRECURSOR" if len(rising) == 2 else ("WATCH" if rising else "NONE")
+
+And lines 122-124 (READ today):
+
+    rv = rolling(sig, w, variance)
+    ra = rolling(sig, w, lag1_autocorr)
+    tv, ta = kendall_tau(rv), kendall_tau(ra)
+
+So the module's rule is: one Kendall tau for the whole rolling-variance
+series (tv), one for the whole rolling-autocorr series (ta); flag PRECURSOR
+iff tv >= lim AND ta >= lim; WATCH if exactly one; NONE otherwise. No streak
+is involved anywhere in the precursor part. streak_limit is used only by the
+mode_shift part (consecutive FAIL outcomes on the same target, lines
+135-153, READ today).
+
+Which my fast path implemented: the module's rule, "both >= limit" (READ
+module; INFERRED for my fast path, whose exact source lines cannot recover).
+Evidence: my fast-path flag matched check()["precursor"]["flag"] in 36 of 36
+fidelity cases (RAN); and your independent "both >= limit" implementation
+reproduces all my counts, which pins it from your side. My earlier phrase
+"window-streak of tau >= limit reaching streak 3" was a prose
+mis-description (RECALLED error): I conflated the inert streak_limit key in
+my declare dict (copied from the module's selftest declaration, line 200)
+with the actual flag rule. The counts themselves stand, since both your
+implementation and the module produce them.
+
+=====================================================================
+ITEM 9 - files
+
+Sent alongside this file (READ today, still present; all created this
+session, RAN where they contain run results):
+
+precursor_calibration.png          figure: raw w-sweep at n=400 (limits 0.3
+                                   and 0.5) plus surrogate-calibrated bars
+precursor-window-calibration-note.md   one-page note: window calibration
+precursor-fix-sweep-note.md            one-page note: variant benchmark sweep
+
+=====================================================================
+CANNOT RECOVER, collected
+
+- Exact commit hashes of my original Simulators and study-aperture tarball
+  downloads, and of the first formula-audit download (not recorded at fetch;
+  /tmp wiped). Bounded only by ls-remote today.
+- Exact source lines of my fast-path statistics (rolling_stats_np,
+  trends_np) and of the JavaScript port file. Semantics and outputs
+  preserved; sources not.
+- The sha256 of the wiped /tmp copy of precursor.py. Replaced by a RE-RUN
+  hash on a fresh download pinned at 74ceae9, which matches the repo's
+  REFERENCES record.
+- The harness timezone behind the date 2026-11-19.

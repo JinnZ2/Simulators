@@ -1,7 +1,7 @@
 {
  "date": "2026-11-18",
  "status": "RAW_PRESERVED_WITH_SEPARATE_NOTES",
- "provenance_note": "Texts and images attached to a Manus session by the repository owner. Hashes identify received bytes; they do not authenticate the source, the model named in the texts, or the dates inside them (both texts are dated 2026-11-19). Round 2 files were received 2026-11-18, about 20:00 UTC; ASK_TO_KIMI.md is Manus's own text.",
+ "provenance_note": "Texts and images attached to a Manus session by the repository owner. Hashes identify received bytes; they do not authenticate the source, the model named in the texts, or the dates inside them (both texts are dated 2026-11-19). Round 2 files were received 2026-11-18, about 20:00 UTC; ASK_TO_KIMI.md is Manus's own text. Round 3 files were received 2026-11-18, about 21:25 UTC; ASK_TO_KIMI_ROUND3.md is Manus's own text. A 117-byte token-expired error file received before the real zip is not filed.",
  "as_received_originals": {
   "report_parts_A_B_C.txt": "Pasted_content_76.txt",
   "one_page_precursor_note.md": "Pasted_content_77.txt",
@@ -9,7 +9,16 @@
   "precursor_fraction_sweep.png": "member of OKComputer_谓词分配与守卫分析.zip",
   "round2/reply_to_ask.txt": "Pasted_content_79.txt",
   "round2/one_page_precursor_fixes_note.md": "Pasted_content_78.txt",
-  "round2/tables_pasted_in_chat.txt": "text of the owner's chat message, reproduced; not byte-verified"
+  "round2/tables_pasted_in_chat.txt": "text of the owner's chat message, reproduced; not byte-verified",
+  "round3/ipython_5e4a8aeb6f900c07.png": "OKComputer zip (2), sha256 a4b1035066ccb7976038701b90c5f8544d4a78c8b78019baefed54dcf76311f9, member of",
+  "round3/ipython_632f71c4a62c4dcb.png": "OKComputer zip (2), sha256 a4b1035066ccb7976038701b90c5f8544d4a78c8b78019baefed54dcf76311f9, member of",
+  "round3/ipython_ec009e04363687eb.png": "OKComputer zip (2), sha256 a4b1035066ccb7976038701b90c5f8544d4a78c8b78019baefed54dcf76311f9, member of",
+  "round3/precursor-fix-sweep-note.md": "OKComputer zip (2), sha256 a4b1035066ccb7976038701b90c5f8544d4a78c8b78019baefed54dcf76311f9, member of",
+  "round3/precursor-window-calibration-note.md": "OKComputer zip (2), sha256 a4b1035066ccb7976038701b90c5f8544d4a78c8b78019baefed54dcf76311f9, member of",
+  "round3/precursor_calibration.png": "OKComputer zip (2), sha256 a4b1035066ccb7976038701b90c5f8544d4a78c8b78019baefed54dcf76311f9, member of",
+  "round3/precursor_fix_sweep.png": "OKComputer zip (2), sha256 a4b1035066ccb7976038701b90c5f8544d4a78c8b78019baefed54dcf76311f9, member of",
+  "round3/precursor_fraction_sweep.png": "OKComputer zip (2), sha256 a4b1035066ccb7976038701b90c5f8544d4a78c8b78019baefed54dcf76311f9, member of",
+  "round3/round-3-provenance-answers.txt": "OKComputer zip (2), sha256 a4b1035066ccb7976038701b90c5f8544d4a78c8b78019baefed54dcf76311f9, member of"
  },
  "archive_not_kept": {
   "name": "OKComputer_谓词分配与守卫分析.zip",
@@ -23,9 +32,14 @@
    "sha256": "52998c97363ccf683e62e9b3b6938cd640c62d6059e7226568d4632c8fa60070"
   },
   {
+   "path": "ASK_TO_KIMI_ROUND3.md",
+   "bytes": 2242,
+   "sha256": "7e25444ccfdf57ecd5053c3c74edeacd5015e485343e82235be1c08849c047c0"
+  },
+  {
    "path": "WORKING_NOTES.md",
-   "bytes": 25005,
-   "sha256": "2a9304a8016bccf04ba2deb486defd5d2d6269adc8a8f4fac6cc655c1e59cb78"
+   "bytes": 34495,
+   "sha256": "e8c61df92d3d62c3bf0a9410df776e338524d7e73fe1008f92cd039f213b9ab1"
   },
   {
    "path": "as_received/ipython_632f71c4a62c4dcb.png",
@@ -63,6 +77,51 @@
    "sha256": "46ce0cb93ee194717034fa2c26c18e15e9b15716bd70c335006a3350a0b4ab98"
   },
   {
+   "path": "as_received/round3/ipython_5e4a8aeb6f900c07.png",
+   "bytes": 98827,
+   "sha256": "0abfd92ab34ae6a6c8a9a29e04bdad6e28df507985116b18218f6ecf39ad600a"
+  },
+  {
+   "path": "as_received/round3/ipython_632f71c4a62c4dcb.png",
+   "bytes": 114141,
+   "sha256": "9d5ef10bd187fbd89032655b20898e677fe4b59d390c1746c11a4f061d7ccf50"
+  },
+  {
+   "path": "as_received/round3/ipython_ec009e04363687eb.png",
+   "bytes": 84704,
+   "sha256": "6377aa68445ef25a8a44f25249b5739caeb0c007bf479b633ecf132db873d15e"
+  },
+  {
+   "path": "as_received/round3/precursor-fix-sweep-note.md",
+   "bytes": 4638,
+   "sha256": "e5ebde5a77bf340c84423aa9215f8a9ff0772cd6bcc6ccd0036b88f7938d61ca"
+  },
+  {
+   "path": "as_received/round3/precursor-window-calibration-note.md",
+   "bytes": 4856,
+   "sha256": "cbec70e623dca38073fd9eb92be6ade3772ab3065fba067eb34d449e93280c80"
+  },
+  {
+   "path": "as_received/round3/precursor_calibration.png",
+   "bytes": 132192,
+   "sha256": "5d2f01e1987a315b27646d3390ad2455c10225cb494fce8f977df3132aef5a82"
+  },
+  {
+   "path": "as_received/round3/precursor_fix_sweep.png",
+   "bytes": 153753,
+   "sha256": "61b8c7c3ecf86a75e7b7dcc640013b30b3dca2bb695c0fee29f6a62b7c64a70e"
+  },
+  {
+   "path": "as_received/round3/precursor_fraction_sweep.png",
+   "bytes": 180393,
+   "sha256": "78ff3b608ea44773feb6910b926da09fe3f39fcab5a93f637c5a5165c1c27b28"
+  },
+  {
+   "path": "as_received/round3/round-3-provenance-answers.txt",
+   "bytes": 14595,
+   "sha256": "049ebdd57adf1e8d5ed439b1e6133316e5da26d702281c4d8158b7f07a18c13d"
+  },
+  {
    "path": "replication/replicate_lengths.out",
    "bytes": 462,
    "sha256": "947bdfaa6618f4855059b031574a94bbb8a71928ad751598aa8e9e8a8a00adb3"
@@ -88,6 +147,16 @@
    "sha256": "1d8ef0c382d9d2ed8b773dc7cf7718bc041ab227b706950b66edaee667dd193d"
   },
   {
+   "path": "replication/round2/check_round3_claims.out",
+   "bytes": 4621,
+   "sha256": "5e188acf5f85d1d557fb8669474200f42d127da16934d1eacd781aa3510d0b17"
+  },
+  {
+   "path": "replication/round2/check_round3_claims.py",
+   "bytes": 4983,
+   "sha256": "53a9cfc27580c4faf07ee61839dd040deef37f776978b09bc3188e6d6fb9629d"
+  },
+  {
    "path": "replication/round2/replicate_lengths_x0zero.out",
    "bytes": 463,
    "sha256": "a24ab731383b34e2b8d88befe55b3306a2d9fcb8a6377f56f154c5f33329277f"
@@ -101,6 +170,26 @@
    "path": "replication/round2/replicate_raw_table_x0zero.json",
    "bytes": 900,
    "sha256": "32d6752f0fac275c94827ee03036a3e84ac192d0d1117e8d14b212ea04e8500c"
+  },
+  {
+   "path": "replication/round2/replicate_round3_cells.out",
+   "bytes": 818,
+   "sha256": "2c3b744b1d43a2bd5d48bbd5b256228f71e37ade90d3f551f60cd32b120dca63"
+  },
+  {
+   "path": "replication/round2/replicate_round3_cells.py",
+   "bytes": 1618,
+   "sha256": "a53585eaa3d3029821aeed0e0e800b37cb401504ccfcf37d500979aa7ec7d208"
+  },
+  {
+   "path": "replication/round2/replicate_surrogate.out",
+   "bytes": 297,
+   "sha256": "a28904ebe0bd00ea9df3708edf46946cb40012edcf3e993c9d828ba85b5be5a9"
+  },
+  {
+   "path": "replication/round2/replicate_surrogate.py",
+   "bytes": 4283,
+   "sha256": "3f4a490f3b5e05c5a852513de3b92d99873f532c884f9f6c40e8d62f49871b52"
   },
   {
    "path": "replication/round2/replicate_variants.out",

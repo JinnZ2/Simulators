@@ -1,0 +1,7 @@
+fast path vs module: 0 mismatches in 40 comparisons
+surrogate-calibrated flags out of 100 (n=400, S=100, alpha=0.05)
+        w=20   w=50   w=100  w=200 
+memory  66     81     68     77    
+white   2      2      2      1     
+drift   0      0      0      1     
+step    0      0      2      0     
