@@ -546,6 +546,12 @@ VOID or not built in combined-playground M1-M9 and needs a decision before it is
                      verdict_branch_F stays in the SPLIT table as history
 2026-11-18  READING  branch F gives no OK (the item states none); D / E CLOSED_WITHIN with no declared
                      sigma -> VOID (Q2 makes sigma part of CLOSED_WITHIN)
+2026-11-18  FILED    VOID-12 second-reader report, NOT blind: second-reader-kimi-k3/ (PR #306, merge
+                     1268c12). Its eight pair relations equal the first reader's, 8 of 8 (checked
+                     against samples/vocab_branches.txt); the author states it saw the first reader's
+                     verdicts, so this is agreement, not an independent assignment. Its per-pair table
+                     on how each quotation was taken was lost in transit and is owed. The OPEN line
+                     for VOID-12 above stays open
 ```
 
 Merge log:
