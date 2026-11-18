@@ -38,7 +38,7 @@ Method for everything marked CHECKED: the file or page was opened and read in th
 | The eight pair labels and their order | CHECKED against `combined-playground/samples/vocab_branches.txt`: same eight pairs, same order. |
 | Per-pair relations | CHECKED: MAPS, PARTIAL, PARTIAL, PARTIAL, HOMONYM, PARTIAL, NONE, PARTIAL for pairs 1 to 8 in the report; the relation column in `vocab_branches.txt` reads the same, 8 of 8. The tally in the report (MAPS 1, PARTIAL 5, HOMONYM 1, NONE 1) is the tally logged in `COMBINED_SPEC.md` under "DECIDED VOID-12". |
 | Whether that agreement means anything | Not by itself. The author saw the first reader's verdicts (section 2). It shows the second reader did not contradict them. |
-| The quoted definitions and slot lists, the pins (TAF `16285cc`, numcheck, cplay), and the line numbers "GAP_INSTRUMENT_CRASH at line 96, COVERAGE_KINDS line 101" | NOT CHECKED. A TAF repository was not found under the owner's account in this session. `OWED`. |
+| The quoted definitions and slot lists, the pins (TAF `16285cc`, numcheck, cplay), and the line numbers "GAP_INSTRUMENT_CRASH at line 96, COVERAGE_KINDS line 101" | NOT CHECKED. A TAF repository was not found under the owner's account in this session. `OWED`. | **Partly closed in 8.7: the TAF pin and the two line numbers are CHECKED; the quoted definitions and slot lists are not.**
 | The open item in `COMBINED_SPEC.md`: "VOID-12 predicates were assigned by one reader (this build); a blind second-reader predicate assignment is open" | Left as it is. This report is a second reader's assignment that is not blind. Whether it closes the item, or is logged beside it, is the owner's call. |
 
 ### Part B (guards in `algebra.mm` against `set.mm`)
@@ -155,8 +155,8 @@ CHECKED  tests/data/algebra.mm exists in formula-audit (4509 bytes). Its header 
          This confirms the author's statement about those statements in algebra.mm. The set.mm side and the seven-row table are NOT checked.
 CHECKED  set.mm blob e483895ed36dc7846cfa30d8c643e18ff587815c exists and is 51954169 bytes. Its content was not read, and whether it was the
          tip of develop at the time is not checked.
-NOT      JinnZ2/TAF is not reachable from this session, with the owner's credentials or without: the API and git both answer "not found".
-         Every claim that rests on TAF (commit 16285cc, line numbers 96 and 101, the pin, "Kimi audit C7") is therefore unchecked here.
+SUPERSEDED  (see 8.7) "JinnZ2/TAF" was the wrong repository name; the repository is public under another name.
+         The first sentence of this line, as written when Manus did not have the name, said the repository was unreachable; that was a failed lookup by name, not a finding.
 REPLICATED  raw table of the one-page note, with x_0 = 0.0: 32 of 32 cells equal (round 1 had 30 of 32 with x_0 drawn from N(0,1); that assumption,
          not the note, caused the two off-by-one cells). Length cells also equal: w 20, limit 0.5, memory by n = 60/100/200/400 gives 46/20/14/6;
          n 60, w 30 gives 79/8 and 120/20; n 200, w 100 gives 158/14 and 186/35.
@@ -173,8 +173,25 @@ Python used here: 3.12.3, the same minor version as the author's; the reference 
 - **The n = 60 numbers are not independent of the first reader.** They are the first reader's record, reproduced. The author says so.
 - **An unexplained phrase.** The reply describes the fast-path flag as "window-streak of tau >= limit reaching streak 3". The module's flag is PRECURSOR iff both trend values are >= the limit; `streak_limit` is used only by the module's mode-shift part. My implementation of the module's rule reproduces every count, so the phrase is either a loose description or refers to something I have not seen. Not resolved.
 - **Part B and Part A tables** are still unseen. Part B's verdicts cannot be assessed from prose.
-- **Whether the "second reader" starts from a clean slate.** The reply reports having read a prior "Kimi audit" mention in a repository docstring. What that earlier audit was, and whether it came from the same model, is not known here.
+- **Whether the "second reader" starts from a clean slate.** The reply reports having read a prior "Kimi audit" mention in a repository docstring. What that earlier audit was, and whether it came from the same model, is not known here. Context (8.7): the docstring names "Kimi audit C7" as the source of a requirement, in a work order dated 2026-11-10; it is a quotation from an earlier audit, not a statement about the present reader.
 
 ### 8.6 Owed from the author, via the owner
 
 Items by the numbers of the ask: 1 the Part B seven-row table; 2 the n = 200 grid; 3 the citation table; 4 the two code blocks (generators, surrogate signatures), and the JavaScript file if it can be found; 6 the surrogate raw counts; 7 the six JavaScript cells; 8 the second half of the figure map and `precursor_calibration.png`; 11 the Part A table. Plus the two note files named in 8.2 (to compare with pastes 77 and 78). Everything above in one plain-text file would be the easiest form to receive.
+
+### 8.7 TAF, found by name (added 2026-11-18, after the owner supplied the address)
+
+The repository is `JinnZ2/thermodynamic-accountability-framework` (public, default branch `main`). Checked:
+
+```text
+CHECKED  main tip = 16285cccdd48d608067b9bca50bd6ac683fe860a, committer date 2026-11-18T00:36:25Z, "Merge pull request #85 from
+         JinnZ2/claude/unknown-axis-followup-2". This is the commit Kimi (item 10) and COMBINED_SPEC section 7 call "16285cc".
+CHECKED  calibration/unified_audit.py at that commit, line 96: GAP_INSTRUMENT_CRASH = "GAP_INSTRUMENT_CRASH"; line 101:
+         COVERAGE_KINDS = ("UNKNOWN", "INFO", "GAP_INSTRUMENT_CRASH"). Kimi's "line 96" and "line 101" are right.
+CHECKED  sha256 of calibration/unified_audit.py at that commit starts fcccb9af8d8e, the prefix COMBINED_SPEC records in its pin note.
+CHECKED  calibration/expiry_register.py docstring, lines 3 to 6: "Work order 2026-11-10 (cross-model audit follow-up), item 1(b), confirmed by
+         the operator 2026-11-11. Source of the confound: Kimi audit C7 (unfalsifiability drift): "every UNKNOWN must carry an expiry condition ..."".
+         The phrase Kimi says it saw is there, and it is a quotation of an earlier audit item inside a work order.
+NOT      the definitions and slot lists Kimi quotes for the TAF side of Part A (the six-field coverage entry, the slot lists) are not compared here.
+```
+Because `main` has not moved since 2026-11-18T00:36Z, Kimi's statement that its downloads were at that commit is consistent with what is observable, as with `formula-audit` (8.4). It is still an inference about a download no one recorded.
