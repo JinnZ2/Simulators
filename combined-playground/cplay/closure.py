@@ -6,10 +6,12 @@ the ledger's declared-complete flag in three states; the intervention registry a
 list or a token; misclosure value provenance as a field; the pre-registration hashed before the
 run; an undeclared account refusing the run.
 
-SPEC GAP (stops this module at the verdict): section 2 names a tolerance, a sigma, a k and a
-roundoff floor per account, and says NOISE is "misclosure within k sigma", but gives no rule
-combining them into OK / CLOSED_WITHIN / FAILED, and does not state how a misclosure is
-computed. verdict() raises SpecGap rather than choosing one.
+VERDICT: verdict() = verdict_branch_G (guard-band decision rule, JCGM 106:2012 sections 3.3.9-3.3.12,
+8.3.2.1, 8.3.2.3, 8.3.3.1; COMBINED_SPEC section 7 status CHECKED_BY_RELAY). It formerly raised
+SpecGap: section 2 names tolerance, sigma, k and roundoff floor but no rule combining them. The
+misclosure is the declared input of the run (one observation per account); its formula stays the
+caller's. Branches A-F remain as named alternatives with the SPLIT table; systematic_check is a
+diagnostic beside the verdict.
 
 Beside it (follow-up item 2), three candidate rules, none adopted. Each takes the misclosure as a
 declared input that the run accepted; a FAILED reading lands on PHYSICAL only when the ledger is
@@ -34,8 +36,8 @@ Added (branch completion), none adopted:
                        VOID; a token floor -> VOID. Precondition, independent of m:
                        U >= tol -> INSTRUMENT flag TOLERANCE_UNRESOLVABLE on the case (the
                        instrument cannot prove conformance at this tolerance); see g_precondition().
-                       Source: "ISO 14253-1 / JCGM 106 decision rule, recalled, not re-read
-                       (VERIFY)"; COMBINED_SPEC section 7 status NOT_CHECKED.
+                       Source: JCGM 106:2012 (read by relay, 2026-11-18); ISO 14253-1 via JCGM's
+                       description only; COMBINED_SPEC section 7 status CHECKED_BY_RELAY.
 Diagnostic (not a verdict): systematic_check() -- F's rule reinterpreted as a random-error
 consistency check from closed-traverse practice: |m| > k*sigma*sqrt(n_legs) -> DETERMINATION
 flag SYSTEMATIC_ERROR_INDICATED (misclosure exceeds random-error expectation for n legs). n_legs
@@ -58,10 +60,6 @@ from . import tokens as T
 
 
 class ClosureError(ValueError):
-    pass
-
-
-class SpecGap(NotImplementedError):
     pass
 
 
@@ -166,8 +164,14 @@ def run(prereg, prereg_sha256, observations):
 
 
 def verdict(result, account):
-    raise SpecGap("section 2: no rule combines tolerance, k*sigma and the roundoff floor into "
-                  "OK / CLOSED_WITHIN / FAILED, and the misclosure formula is not stated")
+    """The closure verdict: branch G applied to the run's one declared misclosure for `account`."""
+    if result.state != "ACCEPTED":
+        raise ClosureError("no verdict on a %s run" % result.state)
+    obs = [o for o in result.observations if o.account == account]
+    if len(obs) != 1:
+        raise ClosureError("verdict needs exactly one declared misclosure for %r; got %d"
+                           % (account, len(obs)))
+    return verdict_branch_G(result, obs[0])
 
 
 def _accepted(result, misclosure):
@@ -271,8 +275,10 @@ def verdict_branch_F(result, misclosure=None, n_legs=None):
     return _closed(decl, m, allowable, sigma=s_legs, what="k*sigma*sqrt(%d)" % n_legs)
 
 
-G_SOURCE = "ISO 14253-1 / JCGM 106 decision rule, recalled, not re-read (VERIFY)"
-G_SOURCE_STATUS = "NOT_CHECKED"
+G_SOURCE = ("JCGM 106:2012 sections 3.3.9-3.3.12, 8.3.2.1, 8.3.2.3 (w = rU, r = 1), 8.3.3.1; "
+            "read by Manus (browser) 2026-11-18, relayed; ISO 14253-1 via JCGM's description only")
+G_SOURCE_URL = "https://www.bipm.org/documents/20126/2071204/JCGM_106_2012_E.pdf"
+G_SOURCE_STATUS = "CHECKED_BY_RELAY"
 
 
 class FieldToken(namedtuple("FieldToken", "field token")):

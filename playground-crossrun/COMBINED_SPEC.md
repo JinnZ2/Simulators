@@ -193,9 +193,39 @@ TAF GAP_INSTRUMENT_CRASH       TAF main                                    CHECK
                                definition: calibration/unified_audit.py:92-101
                                merged to main 2026-11-18 via #85 (16285cc); definition line 96,
                                COVERAGE_KINDS line 101
-Decision rule, M4 branch G     ISO 14253-1 / JCGM 106 decision rule,       NOT_CHECKED
-                               recalled, not re-read (VERIFY); stays NOT_CHECKED until someone
-                               reads the standard's text
+Decision rule, M4 branch G     JCGM 106:2012                               CHECKED_BY_RELAY
+                               https://www.bipm.org/documents/20126/2071204/JCGM_106_2012_E.pdf
+                               reader: Manus (browser), read 2026-11-18, relayed via chat;
+                               not read by the building session (www.bipm.org egress refused)
+                               ISO 14253-1: via JCGM's description only (paywalled; not read)
+                               earlier status: NOT_CHECKED ("recalled, not re-read (VERIFY)")
+```
+
+Quotes as relayed (JCGM 106:2012):
+
+```text
+3.3.9   acceptance interval: "interval of permissible measured quantity values"
+3.3.10  rejection interval: "interval of non-permissible measured quantity values"
+3.3.11  guard band: "interval between a tolerance limit and a corresponding acceptance limit"
+        (note: includes the limits)
+3.3.12  decision rule: "documented rule that describes how measurement uncertainty will be
+        accounted for with regard to accepting or rejecting an item, given a specified
+        requirement and the result of a measurement"
+8.3.2.1 guarded acceptance: acceptance limit set inside the tolerance interval to reduce the
+        risk of accepting a non-conforming item (relayed as summary, not a quote)
+8.3.2.3 guard band width w = rU; "A common choice is r = 1, in which case w = U."
+8.3.3.1 guarded rejection: acceptance limit outside the tolerance interval, raising the
+        probability that a rejected item is truly non-conforming (relayed as summary)
+```
+
+DERIVED (combined build, not stated by JCGM 106):
+
+```text
+UNRESOLVED middle zone  guarded acceptance (8.3.2.1) and guarded rejection (8.3.3.1) applied
+                        together: accept below tol - U, reject above tol + U; between the two
+                        limits neither is proven -> UNRESOLVED on INSTRUMENT
+floor folded into U     U = k*sigma + roundoff floor (w = rU with r = 1, 8.3.2.3)
+OK tier at roundoff     |m| <= roundoff floor -> OK; |m| <= tol - U -> CLOSED_WITHIN
 ```
 
 Definition as quoted (identical text on #82, #85 and main 16285cc):
@@ -370,6 +400,9 @@ VOID or not built in combined-playground M1-M9 and needs a decision before it is
                      (the instrument cannot prove conformance at the tolerance it is judged against)
 2026-11-18  PROPOSAL verdict() = branch G once its source (section 7, decision rule) is CHECKED;
                      until then verdict() keeps raising SpecGap
+2026-11-18  DECIDED  verdict() = verdict_branch_G (go-live); SpecGap removed. Source CHECKED_BY_RELAY
+                     (section 7). Branches A-F stay as named alternatives with the SPLIT table;
+                     systematic_check unchanged. Supersedes the CHOICE and PROPOSAL lines above.
 2026-11-18  DERIVED  F reinterpreted as random-error consistency check (closed-traverse practice),
                      separate from conformance: systematic_check() flags DETERMINATION
                      SYSTEMATIC_ERROR_INDICATED when |m| > k*sigma*sqrt(n_legs); n_legs missing -> VOID;
@@ -388,11 +421,11 @@ Merge log:
             branch delete, the PR was still draft, M4 carried its commits; GitHub marked #282 merged)
 ```
 
-M4 branch table (combined-playground/samples/closure_branch_table.txt, constructed cases):
+M4 branch table (combined-playground/samples/closure_branch_table.txt, constructed cases; verdict() = column G):
 
 ```text
 P = PHYSICAL, D = DETERMINATION, I = INSTRUMENT, CW = CLOSED_WITHIN; n_legs = 4 for F
-G source: ISO 14253-1 / JCGM 106 decision rule, recalled, not re-read (VERIFY) [NOT_CHECKED]
+G source: JCGM 106:2012 sections 3.3.9-3.3.12, 8.3.2.1, 8.3.2.3 (w = rU, r = 1), 8.3.3.1; read by Manus (browser) 2026-11-18, relayed; ISO 14253-1 via JCGM's description only [CHECKED_BY_RELAY]
 case  |m|           tol    k*sigma  floor   complete  A       B       C       D       E       F       G        G-pre        sys-check  split  G-differs
 c1    1e-07         1e-06  3e-06    1e-12   True      P:OK    P:OK    P:CW    P:CW    P:CW    P:CW    I:UNRES  I:TOL_UNRES  --         SPLIT  G
 c2    2e-06         1e-06  3e-06    1e-12   True      P:CW    P:CW    P:CW    P:FAIL  P:CW    P:FAIL  I:UNRES  I:TOL_UNRES  --         SPLIT  G
