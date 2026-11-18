@@ -17,6 +17,8 @@
 
 It could not start a fresh conversation. It worked inside an existing Claude Code cloud session with another repository of the owner's attached and checked out, and that repository's project instruction file loaded into its context automatically. The file names the Simulators project as a sibling and describes its own state vocabulary, and contains no pair table, cluster count or predicates for these terms. It says it did not consult it. Tools on: shell, file tools, sub-agents, web search and GitHub tools (the last two unused). It answered q3 `unsure`, q5 `unsure`, q6 `yes`. These are its claims; we have not checked them.
 
+**Owner's account (2026-11-18, relayed).** The session required a repository to be attached, and the one attached was a different project, not one of those in this work. The reader's description of that repository's instruction file (that it names Simulators as a sibling) is the reader's reading of it; we have not seen the file. The owner's account does not change the attestation answers, and the status stays `UNCERTAIN`: the rule works from what the reader could truthfully say, and the reader said `unsure`. It does explain why the attachment happened. Advice for the next run (an empty throwaway repository with no instruction file) is in the v2 work order.
+
 ## Reading the result
 
 **Grouping is identical to the other Claude reading, in the same place.** `HOLDS` goes with `OK` instead of with `CLOSED_WITHIN` (LOW confidence, `CLOSED_WITHIN` named as the alternative). Both readings are the same model family, taken in the same kind of session, so this is one family's reading twice, not two independent readings. It does not confirm the disagreement and it does not retire it.
