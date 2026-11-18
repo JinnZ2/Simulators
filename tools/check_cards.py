@@ -37,6 +37,9 @@ measures, fits, breaks_when, warning_sign) names its source in `cell_source`:
 A VERBATIM or WRAP_COLLAPSED claim that does not hold against the pinned text
 voids the row. A cell with no source, an unknown source, or a "VOID: ..." text
 whose source is not VOID (or the reverse) voids the row.
+A WRAP_COLLAPSED cell that is in fact a literal match is reported as
+UPGRADE_AVAILABLE: a warning, the row stays OK and the exit code does not
+change. The cell is relabelled VERBATIM by hand.
 
 NOT_CHECKED is not OK. When the repository or the commit is not available
 here, the row reads NOT_CHECKED and is counted apart; nothing is assumed to
@@ -104,7 +107,7 @@ def norm(s):
 
 def check_row(row, finder_names):
     """One row -> {id, state, verdict, why}. verdict: OK | NOT_CHECKED | PENDING | DECLARED_VOID | VOID."""
-    out = {"id": row.get("id"), "state": None, "verdict": "VOID", "why": None}
+    out = {"id": row.get("id"), "state": None, "verdict": "VOID", "why": None, "warn": []}
     missing = [f for f in FIELDS + EXTRA if f not in row]
     if missing:
         out["why"] = "missing field: " + ", ".join(missing)
@@ -195,6 +198,8 @@ def check_row(row, finder_names):
     if bad:
         out["why"] = "claimed as quoted, not in the pinned text: " + ", ".join(bad)
         return out
+    out["warn"] = ["UPGRADE_AVAILABLE: %s is a literal match, labelled WRAP_COLLAPSED" % f
+                   for f in CELLS if src[f] == "WRAP_COLLAPSED" and row[f] in raw]
     out.update(verdict="OK", why="%s at %s" % (loc["path"], loc["commit"][:12]))
     return out
 
@@ -245,6 +250,7 @@ def check(doc):
         counts[res["verdict"]] = counts.get(res["verdict"], 0) + 1
     return {"rows": len(rows), "counts": counts, "results": results,
             "finder_read": names is not None,
+            "warnings": [(r["id"], w) for r in results for w in r["warn"]],
             "void": [r["id"] for r in results if r["verdict"] == "VOID"]}
 
 
@@ -361,6 +367,12 @@ def selftest():
         wrapped = "gate_regeneration"            # carries WRAP_COLLAPSED cells
         f = [c for c in CELLS if by[wrapped]["cell_source"][c] == "WRAP_COLLAPSED"][0]
         expect("a WRAP_COLLAPSED cell matches once the wraps are collapsed", verdict(by[wrapped]), "OK")
+        up = check_row(bent(pinned, lambda r: r["cell_source"].update(measures="WRAP_COLLAPSED")),
+                       names)
+        expect("a literal match labelled WRAP_COLLAPSED is a warning, the row stays OK",
+               (up["verdict"], up["warn"]),
+               ("OK", ["UPGRADE_AVAILABLE: measures is a literal match, labelled WRAP_COLLAPSED"]))
+        expect("the shipped index has no UPGRADE_AVAILABLE warning", check(doc)["warnings"], [])
         expect("the same cell claimed VERBATIM voids the row",
                verdict(bent(wrapped, lambda r: r["cell_source"].update({f: "VERBATIM"}))), "VOID")
         expect("a WRAP_COLLAPSED cell that is not in the card text voids the row",
@@ -383,9 +395,9 @@ def selftest():
            [r["id"] for r in doc["rows"] if r["kind"] == "reasoning_card" and
             (r["cell_source"]["inputs"], r["cell_source"]["output"], r["cell_source"]["trigger"])
             != ("VOID", "VOID", "INDEX_WRITTEN")], [])
-    expect("every code-tool row: all cells INDEX_WRITTEN",
+    expect("every code-tool row: no cell is VOID, and a quoted cell is checked like any other",
            [r["id"] for r in doc["rows"] if r["kind"] == "tool" and
-            set(r["cell_source"].values()) != {"INDEX_WRITTEN"}], [])
+            "VOID" in r["cell_source"].values()], [])
     expect("the rendered .md flags an INDEX_WRITTEN cell and no other",
            (by["frame_edge"]["trigger"] + " [iw] |" in render(doc),
             by[pinned]["fails_when"] + " [iw]" in render(doc)), (True, False))
@@ -464,7 +476,10 @@ def main(argv):
     else:
         for r in res["results"]:
             print("%-13s %-26s %s" % (r["verdict"], r["id"], r["why"]))
+        for rid, w in res["warnings"]:
+            print("WARNING       %-26s %s" % (rid, w))
         print("rows %d: %s" % (res["rows"], ", ".join("%s %d" % kv for kv in sorted(res["counts"].items()))))
+        print("warnings: %d" % len(res["warnings"]))
         if not res["finder_read"]:
             print("NOTE: TOOL_FINDER/finder.json was not read; finder names NOT_CHECKED")
     return 1 if res["void"] else 0

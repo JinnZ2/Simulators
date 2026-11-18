@@ -420,6 +420,45 @@
    "evidence": []
   },
   {
+   "id": "precursor",
+   "kind": "tool",
+   "status": "PROPOSED",
+   "trigger": "event log with outcomes",
+   "inputs": "events + declared tau/window/limits",
+   "output": "carried state, precursor flag, mode shift, relief flags",
+   "fails_when": "missing declaration → VOID part",
+   "location": {
+    "repo": "formula-audit",
+    "commit": "c077494c30b2f7846a9c25a0ed17ca9af091456a",
+    "state": "PINNED",
+    "path": "glyph/precursor.py",
+    "sha256": "d2cdb8d71df9b9737b5a080a24e714f2c1f363a81f7140d6ce22e00654be7856"
+   },
+   "measures": "trend of rolling variance and lag-1 autocorrelation of the state signal",
+   "fits": "any run with an event log",
+   "breaks_when": "short windows are blind: detection needs about half the series as the window",
+   "warning_sign": "a PASS that ends two or more failures, taken as proof without being run",
+   "cell_source": {
+    "trigger": "INDEX_WRITTEN",
+    "inputs": "INDEX_WRITTEN",
+    "output": "INDEX_WRITTEN",
+    "fails_when": "INDEX_WRITTEN",
+    "measures": "WRAP_COLLAPSED",
+    "fits": "INDEX_WRITTEN",
+    "breaks_when": "INDEX_WRITTEN",
+    "warning_sign": "INDEX_WRITTEN"
+   },
+   "aliases": [
+    "read the slope before the peak",
+    "failures piling up in one session",
+    "early warning before a cascade",
+    "a pass right after a run of failures"
+   ],
+   "finder": null,
+   "not_built": [],
+   "evidence": []
+  },
+  {
    "id": "narration_vs_execution",
    "kind": "tool",
    "status": "PROPOSED",
