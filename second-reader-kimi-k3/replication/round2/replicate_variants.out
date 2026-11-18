@@ -1,0 +1,12 @@
+limit 0.3  catches n=60/200/400 | white FA n=60/200/400 | drift, step leaks n=400
+  baseline   87  93  87 | 12  1  0 |   0   0
+  tail50     87  36  38 | 12  9 14 |   9   9
+  weighted   94 102 103 | 12  2  0 |   1   0
+  logvar     87  93  87 | 12  1  0 |   0   0
+  vote      104 116 125 | 13  2  2 |   0   0
+limit 0.5  catches n=60/200/400 | white FA n=60/200/400 | drift, step leaks n=400
+  baseline   46  14   6 |  3  0  0 |   0   0
+  tail50     46  12   9 |  3  1  1 |   0   0
+  weighted   56  32  11 |  3  0  0 |   0   0
+  logvar     46  14   6 |  3  0  0 |   0   0
+  vote       54  32  19 |  2  0  0 |   0   0
