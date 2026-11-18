@@ -10,6 +10,7 @@ The package is `cplay`, not `playground`: both source playgrounds ship a `playgr
 ```text
 module   spec   file                PR
 M1       §7     cplay/brief.py      input-brief record; shared source read per level
+M2       §4     cplay/tokens.py     distinct tokens, reason rule, typed expiry, scoped absence, claims 1:1
 ```
 
 Run: `python3 -m unittest discover -s combined-playground/tests`
