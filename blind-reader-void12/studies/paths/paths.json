@@ -1,0 +1,19 @@
+{
+ "source": "the branches left in ../MEASURANDS.md ('Branches that remain') and ../BOUNDARY_CASES.md cases 5 and 6; each candidate rule is one path",
+ "paths": [
+  {"path_id": "P-TAG-pres", "gap_id": "G1", "rule": "slots_specific TAG at the reader layer reads presence (or requirement): the key is defined for the term and for no other term"},
+  {"path_id": "P-TAG-appl", "gap_id": "G1", "rule": "slots_specific TAG at the reader layer reads applicability: the field is populated for the term and for no other term"},
+  {"path_id": "P-IND-out-no", "gap_id": "G1", "rule": "a value computed from other candidate fields is not a slot"},
+  {"path_id": "P-IND-out-yes", "gap_id": "G1", "rule": "a computed value is a slot if it is tied to this term alone"},
+  {"path_id": "P-CTOR-no", "gap_id": "CF09/CF10", "rule": "a constructor or function parameter stored under no field is not a slot"},
+  {"path_id": "P-CTOR-yes", "gap_id": "CF09/CF10", "rule": "a parameter of a function written for the term is a slot, stored or not"},
+  {"path_id": "P-POP-empty-unfilled", "gap_id": "KC03/CF19", "rule": "an empty collection is unfilled (like None and \"void\")"},
+  {"path_id": "P-POP-empty-filled", "gap_id": "KC03/CF19", "rule": "an empty collection is a value, so filled (like 0 and False)"},
+  {"path_id": "P-OWN-first", "gap_id": "G2", "rule": "when two records both carry the term, the own record is the first one built"},
+  {"path_id": "P-OWN-every", "gap_id": "G2", "rule": "every record whose status, kind, verdict or state value is the term is an own record"},
+  {"path_id": "P-OWN-returned", "gap_id": "G2", "rule": "the own record is the one the reporting function returns"},
+  {"path_id": "P-AGG-out", "gap_id": "G3", "rule": "an outer aggregate report is not on the term's reporting path"},
+  {"path_id": "P-AGG-in", "gap_id": "G3", "rule": "an outer aggregate report counts, as a record that carries the term as a value"},
+  {"path_id": "P-AGG-call", "gap_id": "G3", "rule": "an outer aggregate report counts only if it is built on the term's own reporting call"}
+ ]
+}

@@ -55,6 +55,7 @@ For a reader who has only the reports. Paths are relative to `blind-reader-void1
 | KA-07 | the fixture case for presence vs applicability; "the term" there is the fixture's own synthetic target, not a T-numbered term | `studies/instrument/fixtures/m01_known_answer.json` |
 | mode / stage | BLIND, REVIEW, AUDIT, SUGGEST, IMPLEMENT, REVIEW-2, AUDIT-2; one per request, named in its header; authority sits in the mode, not in a person or a model | `MODE_SEQUENCE.md`; headers in `studies/REQUEST_HEADERS.md` |
 | L0-L4 | independence level: same session / fresh session, same family / different family / plus no exposure to the implementation or other readers / plus a non-model instrument; an unknown field caps the level | `MODE_SEQUENCE.md` dated section; `studies/INDEPENDENCE_LEDGER.md` |
+| path / walk | a candidate rule for an OPEN definition / one recorded run of it on a case, with provenance; a walk is independent only at L2+ with no exposure to prior walks, otherwise traffic, unknown or dependent | `studies/paths/README.md` |
 | evidence status | what kind of evidence can close a confusion row (SOURCE_RUN_REQUIRED, SECOND_CODER_REQUIRED, DEFINITION_REQUIRED, ...); another reader's agreement is not one | `studies/OPEN_ROWS.md` |
 | confusion record | one row per point a reader was unsure, guessed or stopped | `studies/CONFUSION_TEMPLATE.md`; records in `studies/confusion/` |
 
