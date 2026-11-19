@@ -116,11 +116,10 @@
   "taf:GAP_INSTRUMENT_CRASH": {
    "derived": [
     "missing_path",
-    "error",
-    "exception_type"
+    "error"
    ],
    "vs": {
-    "p1": "same",
+    "p1": "DIFFERS",
     "r1": "DIFFERS",
     "v2": "DIFFERS"
    }
@@ -237,8 +236,7 @@
   "taf:GAP_INSTRUMENT_CRASH": {
    "slots": [
     "missing_path",
-    "error",
-    "exception_type"
+    "error"
    ]
   },
   "taf:UNKNOWN": {

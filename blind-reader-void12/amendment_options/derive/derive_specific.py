@@ -5,8 +5,20 @@ RULE.  A field f is a slot of term t when
   INDEPENDENCE  f is an independent input of t's record, not a function of the other slots.
 "Defined" means: a declared parameter of the constructor written for t; a key present on the record (a key set to None
 counts as present); or a field a source rule requires (removing it makes the constructor raise).
-INDEPENDENCE: an attribute a constructor sets from its own parameters is a function of them (checked: building twice
-from the same parameters gives equal attributes), so it is not a slot.
+INDEPENDENCE: a field is dropped when it is COMPUTED FROM other candidate fields, not passed in or recorded raw.
+Tested per route:
+  cplay constructors   an attribute the constructor sets that is not one of its parameters is computed from them (so
+                       covers_effect, typed, untyped, reason are dropped); the parameters themselves are tested for free
+                       variation (every combination of two values per parameter is accepted) and any rejected combination
+                       is reported, not silently ignored.
+  TAF section record   each field's expression is evaluated on a corpus of exceptions; field Y is computed from field X
+                       when Y is a function of X on the corpus (equal X always gives equal Y) and X is not a function of Y.
+                       The corpus contains pairs that break each dependence that is not real (e.g. same message, different
+                       filename), so a dependence that survives is one the corpus could not break.
+  numcheck records     a candidate list is empty for every term here, so there is nothing to test; if a non-empty list
+                       appears, this route has no independence test and the script says so.
+(An earlier version of this file built each cplay object twice and compared; that passes for any deterministic constructor
+and proves nothing about independence. It was replaced.)
 
 Nothing here reads a key.  The derived lists are compared with the keys afterwards, in a separate step.
 Where two derivation routes in the sources give different lists, the term is reported as undetermined (None) with both
@@ -100,13 +112,31 @@ def token_slots(T):
     }
     res = {}
     for tid, (mk, params, state) in built.items():
-        a, b = mk(), mk()
-        assert vars(a) == vars(b) or tid == "cplay:UNKNOWN", "constructor not deterministic: " + tid   # UNKNOWN holds ExpiryTrigger objects (new identities)
+        a = mk()
         assert state is None or a.state == state, (tid, a.state)
         derived = sorted(set(vars(a)) - set(params) - {"state"})
         res[tid] = {"slots": [p for p in params if p not in shared], "parameters": params,
-                    "set_by_the_constructor_from_its_parameters_so_not_slots": derived}
+                    "computed_by_the_constructor_so_not_slots": derived, "free_variation": free_variation(tid, T)}
     return res, sorted(shared)
+
+def free_variation(tid, T):
+    import itertools
+    pools = {"limit": (1, 2), "effect_size": (1, 2), "basis": ("LADDER", "DECLARED"), "ladder": ("L", "M"), "conditions": ("c", "d"),
+             "kind": ("a", "b"), "target": ("a", "b"), "condition": ("a", "b"), "reason": ("a", "b"), "state": ("VOID", "UNKNOWN")}
+    mk = {"cplay:ABSENT_AT_SENSITIVITY": lambda **k: T.absent_at_sensitivity(**k),
+          "cplay:ExpiryTrigger": lambda **k: T.ExpiryTrigger(**k),
+          "cplay:UNKNOWN": lambda reason, triggers: T.unknown(reason, [T.ExpiryTrigger("k", "t", "c")] if triggers else []),
+          "cplay:VOID": lambda reason, state: T.Token("VOID", reason)}.get(tid)
+    if mk is None: return "n/a"
+    names = {"cplay:ABSENT_AT_SENSITIVITY": ["limit", "basis", "effect_size", "conditions", "ladder"], "cplay:ExpiryTrigger": ["kind", "target", "condition"],
+             "cplay:UNKNOWN": ["reason", "triggers"], "cplay:VOID": ["reason", "state"]}[tid]
+    pool = {n: pools.get(n, (True, False)) if n != "triggers" else (True, False) for n in names}
+    bad = 0; tot = 0
+    for combo in itertools.product(*[pool[n] for n in names]):
+        tot += 1
+        try: mk(**dict(zip(names, combo)))
+        except T.TokenError: bad += 1
+    return "%d of %d combinations accepted" % (tot - bad, tot)
 
 def reading_required(AX, reading=None):
     reading = reading or AX.reading
@@ -137,6 +167,33 @@ def fieldtoken_slots(T, CL):
 # ------------------------------------------------------------------------------------------------ C: TAF
 GAP = "GAP_INSTRUMENT_CRASH"
 
+def exception_corpus():
+    class E(Exception): pass
+    def withfn(fn, msg):
+        e = E(msg); e.filename = fn; return e
+    return [ValueError("a"), ValueError("b"), KeyError("a"), ValueError(), ValueError(""), FileNotFoundError(2, "No such", "p1"),
+            FileNotFoundError(2, "No such", "p2"), FileNotFoundError(2, "Other", "p1"), FileNotFoundError(2, "No such"), OSError(),
+            withfn("p1", "x"), withfn("p2", "x"), withfn(None, "x")]
+
+def dependence(secexpr, cand, corpus=None):
+    corpus = corpus or exception_corpus()
+    vals = {k: [] for k in cand}
+    for e in corpus:
+        for k in cand:
+            vals[k].append(repr(eval(secexpr[k], {"e": e, "type": type, "getattr": getattr, "str": str, "len": len})))
+    def determines(x, y):
+        m = {}
+        for a, b in zip(vals[x], vals[y]):
+            if m.setdefault(a, b) != b: return False
+        return True
+    computed = {}
+    for y in cand:
+        for x in cand:
+            if x != y and determines(x, y) and not determines(y, x): computed.setdefault(y, []).append(x)
+    mutual = [(x, y) for i, x in enumerate(cand) for y in cand[i + 1:] if determines(x, y) and determines(y, x)]
+    return {"computed_from": computed, "mutually_determining_pairs_kept": mutual, "corpus_size": len(corpus),
+            "determines": {x + "->" + y: determines(x, y) for x in cand for y in cand if x != y}}
+
 def taf_gap(src):
     tree = ast.parse(src)
     lits = []
@@ -153,17 +210,22 @@ def taf_gap(src):
     handlers = [h for h in ast.walk(tree) if isinstance(h, ast.ExceptHandler) and any(isinstance(n, ast.Assign) and is_gap(n.value) for n in ast.walk(h))]
     inside = set(id(n) for h in handlers for n in ast.walk(h))
     outside = [n.lineno for n in ast.walk(tree) if ((isinstance(n, ast.Assign) or isinstance(n, ast.Return)) and is_gap(n.value)) and id(n) not in inside]
-    sec = None
+    sec = None; secexpr = {}
     if len(handlers) == 1:
         for n in ast.walk(handlers[0]):
             if isinstance(n, ast.Assign) and isinstance(n.value, ast.Dict) and isinstance(n.targets[0], ast.Subscript):
                 sec = [k.value for k in n.value.keys if isinstance(k, ast.Constant)]
+                secexpr = {k.value: ast.unparse(v) for k, v in zip(n.value.keys, n.value.values) if isinstance(k, ast.Constant)}
     info = {"coverage_literals": [(l, k, ks) for l, k, ks in sorted(lits)], "exclusive_to_GAP_coverage_entries": cov_excl,
             "handlers_that_assign_the_GAP_status": len(handlers), "GAP_assigned_or_returned_outside_the_handler_at_lines": outside,
             "section_record_keys_built_in_that_handler": sec}
     if len(handlers) == 1 and not outside and sec:
-        info["slots"] = cov_excl + [k for k in sec if k not in cov_excl]
-        info["why"] = "the section record exists exactly when the GAP status is assigned (one assignment, in the handler that builds it); missing_path is also the one coverage key no other kind carries"
+        cand = cov_excl + [k for k in sec if k not in cov_excl]
+        dep = dependence(secexpr, cand)
+        info["candidates"] = cand; info["section_expressions"] = secexpr; info["dependence"] = dep
+        info["slots"] = [k for k in cand if k not in dep["computed_from"]]
+        info["why"] = ("the section record exists exactly when the GAP status is assigned (one assignment, in the handler that builds it); "
+                       "missing_path is also the one coverage key no other kind carries; fields computed from another candidate field are dropped: " + (json.dumps(dep["computed_from"]) if dep["computed_from"] else "none"))
     else:
         info["slots"] = cov_excl
         info["why"] = "FLAG: the GAP status is also set or returned elsewhere, so the section record is not tied to it; only the coverage-entry key counts"
@@ -262,12 +324,14 @@ def main():
             P("  %s %s: routes %s" % (byid[tid], tid, json.dumps(v["routes"])))
         if tid in ("fa:UNDECIDED", "fa:VOID", "fa:HOLDS"):
             P("  %s %s: from %d records; exclusive to the term but not on every instance of it: %s" % (byid[tid], tid, len(v["records"]), v["exclusive_to_term_but_not_on_every_instance"] or "-"))
-        if tid.startswith("cplay:") and "set_by_the_constructor_from_its_parameters_so_not_slots" in v:
-            P("  %s %s: parameters %s ; set by the constructor from them (not slots): %s" % (byid[tid], tid, v["parameters"], v["set_by_the_constructor_from_its_parameters_so_not_slots"] or "-"))
+        if tid.startswith("cplay:") and "computed_by_the_constructor_so_not_slots" in v:
+            P("  %s %s: parameters %s ; computed by the constructor (not slots): %s ; free variation: %s" % (byid[tid], tid, v["parameters"], v["computed_by_the_constructor_so_not_slots"] or "-", v["free_variation"]))
         if tid == "cplay:CLOSED_WITHIN":
             P("  %s %s: fields whose removal makes reading() raise, per status: %s" % (byid[tid], tid, json.dumps(v["required_per_status"])))
         if tid == "taf:GAP_INSTRUMENT_CRASH":
             P("  %s %s: %s" % (byid[tid], tid, v["why"]))
+            if "dependence" in v:
+                P("      independence on %d exceptions: computed from another candidate field: %s ; determines: %s" % (v["dependence"]["corpus_size"], json.dumps(v["dependence"]["computed_from"]), json.dumps({k: x for k, x in v["dependence"]["determines"].items() if x})))
             P("      coverage literals (line, kind): %s ; GAP assigned or returned outside the handler at lines: %s ; section keys: %s" % (
                 [(l, k) for l, k, _ in v["coverage_literals"]], v["GAP_assigned_or_returned_outside_the_handler_at_lines"] or "none", v["section_record_keys_built_in_that_handler"]))
     # ---- mutation checks: the rule must change its answer when the evidence changes
@@ -289,6 +353,10 @@ def main():
         return AX.reading(field, status, **kw)
     m3, _ = reading_slots(AX, stub)
     chk("M3 a second status also requires sigma: T14 drops sigma", m3["CLOSED_WITHIN"], ["basis"])
+    m4 = taf_gap(src.replace('"exception_type": type(e).__name__,', '"exception_type": len(e.args),'))
+    chk("M4 exception_type made an independent input (len(e.args)): T10 gets it back", m4["slots"], ["missing_path", "error", "exception_type"])
+    m5 = taf_gap(src.replace('"exception_type": type(e).__name__,', '"exception_type": e.__class__.__name__ + "!",'))
+    chk("M5 exception_type still computed from error by another route: dropped", m5["slots"], ["missing_path", "error"])
     P(); P("all mutation checks pass" if ok else "A MUTATION CHECK FAILED")
     txt = "\n".join(lines)
     print(txt)
