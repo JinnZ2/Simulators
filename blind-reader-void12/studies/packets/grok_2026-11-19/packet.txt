@@ -1,0 +1,1465 @@
+=== FILE 1 === TASK.md
+
+# Task
+
+You are asked to do one reading task and return one thing.
+
+**Setup.** Use a new conversation with no memory, no project knowledge, no connected repositories and no repository link or URL, and web search and code tools off if you can turn them off. Work only from the files below. If you use anything else, say so at the top of your answer.
+
+**What the files are.** Two small studies, M01 and M02, are designed to measure how readers apply one reading brief. They are given here so you can read them as a reader who would have to apply them:
+
+- `brief/READER_BRIEF.md` and `brief/terms.json`: the reading brief and its 15 terms (this is condition D0).
+- `studies/`: the two studies' criteria and schemas, and `studies/conditions/`: the extra notes some readers get (D1-D3).
+- `sources/`: excerpts of the source files the studies cite. Line numbers are the originals; lines not shown are omitted. P1, P2, P3 are three projects.
+
+Some documents mention files that are not included here, or text marked as withheld. Treat those as unavailable; if you needed one, say so in your answer.
+
+**Task.** Read the studies and condition notes against the brief and the source excerpts. Do not fill in the brief's response template and do not group the terms; this task is not a reading of the brief. Your answer is the confusion inventory described in `CONFUSION_REQUEST.md`: every point where you were unsure, guessed, stopped, or needed evidence not in these files.
+
+**Label.** Write `R-2026-11-19-a` at the top of your answer, with the model name your app shows (or "unknown AI model") and today's UTC date. Also say which tools were on, and whether memory or project knowledge was on.
+
+=== FILE 2 === brief/READER_BRIEF.md
+
+# Reader brief
+
+Read this whole file. It and the files beside it are everything you need.
+
+## The task
+
+`terms.json` lists 15 terms. Each is a word or label used in one of three small software projects (a documentation glossary, a checking tool, and a specification with its code). Each entry gives the term's label, its definition as quoted from the project, and the file in `sources/` where the quotation sits.
+
+You are asked two things:
+
+1. **Which terms say the same thing?** Group the 15 terms into clusters. Terms in one cluster have the same *predicate* (defined below). A term may be alone in its cluster.
+2. **What are each term's slots?** Two lists per term, defined below: the fields the source ties to this term alone, and every field of every record the source builds when this term is reported.
+
+Work only from this packet. Please do not use the internet, do not look for other files from these projects, and do not look for earlier answers to this question. Anything you used from outside, or anything you had already seen, goes in the attestation (below). Neither disqualifies a reading; it changes how the reading is filed.
+
+## Definitions
+
+**Predicate.** What the term records or asserts, in one sentence of your own words, taken away from the system's own name for it. Two terms have the same predicate when they are used to record the same situation: if a statement written in one system were translated into the other, this is the term you would reach for, even if the second system attaches different extra fields or detail. Decide on the definitions and the sources, not on the labels. Labels can match while the meaning differs, and can differ while the meaning is the same. If you did lean on a label, say so in `source_lines_read`.
+
+**Slots.** "Slots" can mean two different things, so you are asked for both, as two separate lists. Use the source's spelling, each name once.
+
+- `slots_specific`: the named fields or parameters the source ties to this term and to no other term. Examples: a class written for the term, the parameters of a function or notation written for it, a documented key list for it, or a rule that says this status needs certain fields. Not fields that every term sharing a record has. Not names for the inputs of a calculation. If nothing is tied to this term alone, write `[]`.
+- `slots_carried`: every named field of every record that the source's code or text builds, returns or documents when this term is reported. This includes a shared or wrapper record that only carries the term as a value. Give a record's own fields; if a field holds another record, name the field and do not open it. If a record's fields differ by path, give every name the source can put in it. If no record is built or documented for the term, write `[]`.
+
+The two lists often differ and may be equal, and a name can be in one list only (a constructor's parameter is not always a field of what it returns). Do not copy one into the other for convenience. If you cannot tell which list a field belongs in, put it where you think it fits and say so in `source_lines_read`.
+
+Each list has its own basis field, `slots_specific_basis` and `slots_carried_basis`:
+- `READ_FROM_SOURCE`: the source names the fields (give file and lines in `source_lines_read`).
+- `NONE_STATED`: the source names none for this meaning. Write `[]`.
+- `DECLARED`: the source names none, but you are naming them yourself from the prose. Say why in one line in `source_lines_read`.
+
+**Cluster.** A label of your choosing ("A", "B", "1", ...). Same label means same predicate. Different labels means different predicates. Use as many clusters as you think there are; do not pad and do not merge to be tidy.
+
+## What to return
+
+Copy `response_template.json`, fill it in, and return only that file. For each term id:
+
+| field | what to put |
+|---|---|
+| `cluster` | your cluster label |
+| `predicate` | one sentence, your own words |
+| `slots_specific` | list of names, or `[]` |
+| `slots_specific_basis` | `READ_FROM_SOURCE`, `NONE_STATED` or `DECLARED` |
+| `slots_carried` | list of names, or `[]` |
+| `slots_carried_basis` | `READ_FROM_SOURCE`, `NONE_STATED` or `DECLARED` |
+| `source_lines_read` | file and line numbers you relied on, or a note |
+| `confidence` | `HIGH`, `MEDIUM` or `LOW` for the cluster choice |
+| `could_also_join` | ids of any terms you considered putting in this term's cluster and did not, or `[]` |
+
+Also fill `reader_label` (a name or a code; it may be anonymous), `model_family` (for a person, `human`), and `date_utc`.
+
+## Attestation
+
+Answer each with `yes`, `no` or `unsure`, and add a note if useful. These are not a test; they only decide how the reading is recorded.
+
+- `q1_seen_pair_table_with_verdicts`: before this task, had you seen a table that pairs terms across these projects and gives a relation or verdict for each pair?
+- `q2_seen_predicate_sentence_by_someone_else`: had you seen a one-sentence predicate written by someone else for any of these terms?
+- `q3_seen_vocabulary_mapping_or_second_reader_report`: had you seen any report, file or message about mapping these projects' vocabularies, or about a second reading of such a mapping?
+- `q4_told_how_many_clusters_or_pairs`: has anyone told you how many clusters, pairs or matches to expect?
+- `q5_used_anything_outside_packet`: did you use anything not in this packet (web pages, other files, memory of the projects)? List it in `notes`.
+- `q6_prior_sessions_about_this_project`: do you have, or could you reach, notes or memory from earlier sessions about these projects?
+
+If you are unsure whether something counts, answer `unsure` and describe it. A reading with honest `unsure` answers is more useful than one that guesses.
+
+## One more thing
+
+If a term's definition and its source disagree, or the source is silent, say so in `source_lines_read`; do not smooth it over. If you cannot tell whether two terms share a predicate, put your best choice in `cluster`, set `confidence` to `LOW`, and list the other term in `could_also_join`.
+
+=== FILE 3 === brief/terms.json
+
+{
+ "note": "Fifteen terms from three projects. Order is fixed and carries no meaning.",
+ "terms": [
+  {
+   "id": "T01",
+   "label": "UNDECIDED",
+   "definition": "D straddles the edge at the last tier",
+   "source": {
+    "path": "sources/P2/numcheck/check.py",
+    "anchor": "D straddles the edge at the last tier"
+   }
+  },
+  {
+   "id": "T02",
+   "label": "ABSENT_AT_SENSITIVITY",
+   "definition": "Scoped absence: looked for with a stated instrument / sensitivity / protocol and not found at that sensitivity. Never written as bare \"absent\". No slot holds it yet.",
+   "source": {
+    "path": "sources/P3/docs/glossary.md",
+    "anchor": "Scoped absence: looked for with a stated instrument / sensitivity / protocol"
+   }
+  },
+  {
+   "id": "T03",
+   "label": "VOID",
+   "definition": "VOID in the spec, so VOID here (never a default):",
+   "source": {
+    "path": "sources/P1/cplay/tokens.py",
+    "anchor": "VOID in the spec, so VOID here (never a default):"
+   }
+  },
+  {
+   "id": "T04",
+   "label": "ExpiryTrigger",
+   "definition": "Typed: kind, target, condition all required.",
+   "source": {
+    "path": "sources/P1/cplay/tokens.py",
+    "anchor": "Typed: kind, target, condition all required."
+   }
+  },
+  {
+   "id": "T05",
+   "label": "ABSENT_AT_SENSITIVITY",
+   "definition": "ABSENT_AT_SENSITIVITY must carry three things, or it is refused (F7):",
+   "source": {
+    "path": "sources/P1/playground-crossrun/COMBINED_SPEC.lines_1-390.md",
+    "anchor": "must carry three things, or it is refused (F7):"
+   }
+  },
+  {
+   "id": "T06",
+   "label": "UNRESOLVED",
+   "definition": "otherwise UNRESOLVED (inside the",
+   "source": {
+    "path": "sources/P1/cplay/closure.py",
+    "anchor": "otherwise UNRESOLVED (inside the"
+   }
+  },
+  {
+   "id": "T07",
+   "label": "VOID",
+   "definition": "units not PASS, a missing or unreadable value, no value on",
+   "source": {
+    "path": "sources/P2/numcheck/check.py",
+    "anchor": "units not PASS, a missing or unreadable value, no value on"
+   }
+  },
+  {
+   "id": "T08",
+   "label": "CRASHED",
+   "definition": "did not run: the check raised",
+   "source": {
+    "path": "sources/P1/playground-crossrun/COMBINED_SPEC.lines_1-390.md",
+    "anchor": "did not run: the check raised"
+   }
+  },
+  {
+   "id": "T09",
+   "label": "UNKNOWN",
+   "definition": "A slot whose value is not yet known. Never read as zero or as absent.",
+   "source": {
+    "path": "sources/P3/docs/glossary.md",
+    "anchor": "A slot whose value is not yet known. Never read as zero or as absent."
+   }
+  },
+  {
+   "id": "T10",
+   "label": "GAP_INSTRUMENT_CRASH",
+   "definition": "A module raised; nothing was measured. Coverage, not severity (#82 sense)",
+   "source": {
+    "path": "sources/P3/docs/glossary.md",
+    "anchor": "A module raised; nothing was measured. Coverage, not severity (#82 sense)"
+   }
+  },
+  {
+   "id": "T11",
+   "label": "HOLDS",
+   "definition": "D lies inside [-t, t]",
+   "source": {
+    "path": "sources/P2/numcheck/check.py",
+    "anchor": "D lies inside [-t, t]"
+   }
+  },
+  {
+   "id": "T12",
+   "label": "UNKNOWN",
+   "definition": "UNKNOWN requires a typed expiry trigger",
+   "source": {
+    "path": "sources/P1/playground-crossrun/COMBINED_SPEC.lines_1-390.md",
+    "anchor": "UNKNOWN requires a typed expiry trigger"
+   }
+  },
+  {
+   "id": "T13",
+   "label": "OK",
+   "definition": "ran and passed",
+   "source": {
+    "path": "sources/P1/playground-crossrun/COMBINED_SPEC.lines_1-390.md",
+    "anchor": "ran and passed"
+   }
+  },
+  {
+   "id": "T14",
+   "label": "CLOSED_WITHIN",
+   "definition": "closure holds within sigma, not exactly",
+   "source": {
+    "path": "sources/P1/playground-crossrun/COMBINED_SPEC.lines_1-390.md",
+    "anchor": "closure holds within sigma, not exactly"
+   }
+  },
+  {
+   "id": "T15",
+   "label": "expiry_condition",
+   "definition": "Instrument class, sensitivity or protocol whose null result would downgrade a PENDING / UNKNOWN slot.",
+   "source": {
+    "path": "sources/P3/docs/glossary.md",
+    "anchor": "Instrument class, sensitivity or protocol whose null result would downgrade a PENDING / UNKNOWN"
+   }
+  }
+ ]
+}
+
+=== FILE 4 === studies/M01_CRITERIA.md
+
+# M01 criteria: slots_specific membership (fixed before coding)
+
+Written 2026-11-19, before `m01_code.py` exists and before any record is coded. Committed and pushed alone, so the commit that adds the coding comes after it in history. Schema: `M01_SCHEMA.json`. Proposed by a reader (the test matrix A-G, the "same list, different reasons" point) and reshaped in the [the coding session]; the owner said "Yes please" to building it.
+
+## 1. What this is, and what it is not
+
+**Descriptive, not a test.** The coder (the [the coding session]) has already seen all three readings' lists and their scores, and has seen the comparison key derived. So nothing coded here tests a hypothesis: any pattern it shows was visible to the coder beforehand. Its use is to put the three readings into one table with every value's provenance marked, so that the next readings (taken after this file is fixed) can be coded the same way and compared. A test needs readers this coder has not seen.
+
+**Owner's decisions are not made here.** Nothing in M01 changes the brief, the packet, a key, a score, a status or a reading.
+
+## 2. What is coded
+
+- Readings: the three filed v2 readings, by folder: [three reading folders, names withheld]. Condition D0 (brief unchanged). Packet v2; variants as filed.
+- Fields: for each of the 15 terms, every name that any of the three readers or the comparison key lists in `slots_specific`, after N1 normalisation (strip one pair of backticks, then of `< >`). One record per (reader, term, field).
+- `slots_carried` is not coded here (that is M02, whose schema and criteria come later and separately).
+
+## 3. The source half: how each value is obtained
+
+Every value carries `provenance` SCRIPT_DERIVED or CODER_INFERRED, and `source_basis` says how.
+
+- **cplay terms** (T03 T04 T05 T06 T08 T12 T13 T14): SCRIPT_DERIVED by importing the packet's `cplay` modules (isolated interpreter, no bytecode written into the packet): constructor parameters by `inspect.signature`; stored fields by `vars()` or `_fields`; COMPUTED = stored but not a parameter; requirement by removing the field and seeing whether the constructor raises, for every status that shares the record.
+- **P3 terms** (T02 T09 T10 T15): SCRIPT_DERIVED by parsing the packet's `unified_audit.py`, `expiry_register.py` and `glossary.md` (dict-literal keys per coverage kind; the raise handler's section record; `EXPIRY_KEYS`; the notation `ABSENT_AT_SENSITIVITY(<value>)`).
+- **numcheck terms** (T01 T07 T11): numcheck cannot run from the packet (it imports modules the packet does not ship). Presence is SCRIPT_DERIVED by parsing `_blank` and the unconditional `rec[...] =` assignments in `check.py`. Applicability is CODER_INFERRED from the code's verdict branches, citing lines, cross-checked against the filed [an excluded file] (a 12-record run by another session) where that file covers the field.
+- **COMPUTED vs RAW_INPUT for P3 and numcheck fields** is CODER_INFERRED with the expression cited (for example `error = f"{type(e).__name__}: {e}"` makes `exception_type` COMPUTED from `error`).
+- **routes**: 2 for T08 and T09 (the two terms with disagreeing routes in [an excluded file]), 1 otherwise.
+
+**Case cells (fixed rule, applied in this order, a field may collect several):**
+
+```text
+G  routes >= 2
+D  origin DOCUMENTED
+E  origin PARAMETER_ONLY
+B  origin COMPUTED and some scope is ALL_EXCLUSIVE or SOME_EXCLUSIVE
+A  origin RAW_INPUT and some scope is ALL_EXCLUSIVE
+F  no scope is ALL_EXCLUSIVE and some scope is SOME_EXCLUSIVE
+C  every recorded scope is SHARED or NONE
+```
+
+## 4. The reader half
+
+- `listed`: LISTED if the name (after N1) is in that reader's `slots_specific`, else NOT_LISTED. Read from the file. NOT_LISTED is never written as "excluded".
+- `basis_quote`: only a verbatim substring of that reader's `source_lines_read` for that term that mentions the field by name; the script fails if a quote is not found in the file. Otherwise null.
+- `basis_kind`: the coder's classification of the quote, CODER_INFERRED; null when there is no quote.
+- `uncertainty_stated`: true only where the reader's text says it is unsure about the field; otherwise null.
+
+## 5. What is reported (counts only; no threshold, no score)
+
+1. Per field: how many of the three readers list it, beside the comparison key.
+2. Per case cell A-G: listing rate per reader, and the comparison key's.
+3. Same list, different reasons: fields all three readers list where the coded `basis_kind` differs between readers.
+4. Uncertainty: fields with `uncertainty_stated` true.
+5. Where the three readers agree with each other and not with the comparison key ([the pre-registration file, excluded] v2's case (a): the key's derivation deserves a second look; not evidence about the first reading).
+
+## 6. Limits stated now
+
+One coder, the same model family as one of the three readers and the drafter of a superseded draft; no second coder, so CODER_INFERRED values carry no agreement estimate. Three readings, one each. A reader's silence about a reason is recorded as silence, which makes the "different reasons" count a lower bound.
+
+=== FILE 5 === studies/M01_SCHEMA.json
+
+{
+ "study_id": "M01",
+ "title": "slots_specific membership: what a reader takes 'tied to this term and to no other term' to mean",
+ "version": 1,
+ "record": "one record per (reader, term, field). A field is in the catalog if any coded reader or the comparison key names it in slots_specific for that term.",
+ "null_rule": "null means NOT_RECORDED. No field has a default. true / false / an enum value appear only when someone recorded them, and the *_provenance beside it says who.",
+ "provenance_values": {
+  "SCRIPT_DERIVED": "computed by m01_code.py from the packet's own sources (running cplay code, parsing P3 / numcheck text) or from a filed evidence file named in the value's source_basis",
+  "CODER_INFERRED": "set by the coder from reading the sources or a reader's note; not mechanically checked; the coder is named in the study's notes",
+  "READER_STATED": "taken verbatim from the reader's filed response; m01_code.py checks the quote is a substring of that reader's file",
+  "NOT_RECORDED": "nobody recorded it; the value is null"
+ },
+ "fields": {
+  "study_id":           {"type": "string", "const": "M01"},
+  "reader_id":          {"type": "string", "note": "the [readings folder] folder name, never reader_label (which the task text set for every reader)"},
+  "packet":             {"type": "object", "keys": ["version", "variant", "sha256"], "note": "variant null when the reader's variant was not stated"},
+  "condition":          {"type": "string", "enum": ["D0", "D1", "D2", "D3"], "note": "D0 = brief unchanged; D1-D3 are M02 conditions, never pooled with D0"},
+  "term_id":            {"type": "string", "pattern": "T01..T15"},
+  "field":              {"type": "string"},
+  "source": {
+   "type": "object", "note": "properties of the packet's sources, the same for every reader",
+   "keys": {
+    "location":           {"type": "string", "note": "file:lines in the packet"},
+    "origin":             {"enum": ["RAW_INPUT", "PARAMETER_ONLY", "COMPUTED", "DOCUMENTED", "UNKNOWN"],
+                           "note": "RAW_INPUT: passed in or recorded raw and stored; PARAMETER_ONLY: a parameter of a function written for the term, not stored under that name; COMPUTED: computed from other candidate fields or by the source after construction; DOCUMENTED: named only in prose, a notation or a key list, with no instance built in the packet"},
+    "presence_scope":     {"enum": ["ALL_EXCLUSIVE", "SOME_EXCLUSIVE", "SHARED", "NONE", "NO_INSTANCE", "UNKNOWN"],
+                           "note": "is the key present (even as None) on every instance of this term and on no instance of another term"},
+    "applicability_scope":{"enum": ["ALL_EXCLUSIVE", "SOME_EXCLUSIVE", "SHARED", "NONE", "NO_INSTANCE", "UNKNOWN"],
+                           "note": "is it populated (non-None, non-zero) on every / some instances of this term only"},
+    "requirement_scope":  {"enum": ["ALL_EXCLUSIVE", "SHARED", "NONE", "NO_INSTANCE", "UNKNOWN"],
+                           "note": "does a source rule require it for this status only (removing it raises or refuses)"},
+    "routes":             {"type": "integer", "note": "number of source routes to 'the instance' of the term that give different lists (2 for T08 and T09)"},
+    "cases":              {"type": "array", "items": {"enum": ["A", "B", "C", "D", "E", "F", "G"]},
+                           "note": "the [a reader] test-matrix cells, assigned by the fixed rule in M01_CRITERIA.md section 3; a field can sit in more than one"},
+    "source_basis":       {"type": "string", "note": "how each value was obtained (the run, the parsed lines, or the filed evidence file)"},
+    "provenance":         {"enum": ["SCRIPT_DERIVED", "CODER_INFERRED"]}
+   }
+  },
+  "reader": {
+   "type": "object",
+   "keys": {
+    "listed":             {"enum": ["LISTED", "NOT_LISTED"], "note": "NOT_LISTED is not 'excluded': the reader was never asked to exclude"},
+    "basis_quote":        {"type": ["string", "null"], "note": "verbatim from the reader's source_lines_read, or null"},
+    "basis_kind":         {"enum": ["PARAMETER", "STORED_FIELD", "REQUIRED", "APPLICABLE_ONLY", "DOCUMENTED", "DERIVED_BUT_TIED", "SHARED_SO_NOT", "OTHER", null],
+                           "note": "the coder's classification of basis_quote; null when there is no quote"},
+    "basis_kind_provenance": {"enum": ["CODER_INFERRED", "NOT_RECORDED"]},
+    "uncertainty_stated": {"type": ["boolean", "null"], "note": "true only when the reader's own text says it is unsure about this field; null otherwise (silence is not certainty)"},
+    "provenance":         {"enum": ["READER_STATED"], "note": "listed is read from the reader's slots_specific list"}
+   }
+  },
+  "comparison_key":              {"type": "object", "keys": {"listed": {"enum": ["LISTED", "NOT_LISTED", "KEY_UNDETERMINED"]}}}
+ }
+}
+
+=== FILE 6 === studies/M01_EXTENSION.md
+
+# M01 extension: new readings, two arms, a D1 condition (fixed before any instrument code or new reading)
+
+Written 2026-11-19. Extends `M01_CRITERIA.md` (pinned in `[commit]`), which stays in force for the three filed D0 readings. Design taken from a reader's proposal ([an excluded file], filed as received), with the changes listed in section 5.
+
+## 1. Conditions
+
+```text
+D0   the v2 packet and brief, unchanged (v2 variant A unless the owner states B)
+D1   D0 plus conditions/M01_D1.md: the TAG and INDEPENDENCE wording of [an excluded file],
+     marked experimental, cited with a status note in an excluded file
+```
+
+D1 readings are their own pool. They are never pooled with D0, never scored as v2 readings toward [the pre-registration file, excluded] rules 1 and 2, and never used to change a key.
+
+## 2. Arms
+
+- **Parallel.** Different readers, assigned to D0 or D1 before the task. Each sees one condition. Estimates the effect of the wording without carryover.
+- **Sequential.** One reader does D0 then D1, or D1 then D0, order counterbalanced. Estimates within-reader change. A second session from one reader is a repeated observation, not a new reader; it is analysed by reader id and position, and the reader is asked whether they recalled or reused their earlier answer.
+- **Assignment** is written down before the task (reader pseudonym, family, arm, condition, order). Pseudonyms only; no names or account details in the data.
+
+## 3. Coding
+
+New readings are coded with `M01_SCHEMA.json` and the rules of `M01_CRITERIA.md` sections 3 and 4, unchanged. Under D1 the reader may state TAG / INDEPENDENCE judgements; those are READER_STATED. Under D0 they are never asked, so any TAG / INDEPENDENCE value on a D0 record is CODER_INFERRED or null. **No reader choice is ever rejected by the instrument for disagreeing with the comparison key's rule**; the instrument records, it does not score.
+
+## 4. Known-answer fixtures
+
+Synthetic cases with stipulated answers, used to check that the instrument can represent each case, not to decide any real case. Given to a separate cohort, or to the same readers only after their real-source responses are locked; stored apart from real-source records. A failed fixture means the instrument or instructions failed it; it never justifies changing a reader's real-source record. Fixtures use neutral names, none from the packet.
+
+## 5. Changes from the proposal as received
+
+```text
+proposal                                          here, and why
+------------------------------------------------  ---------------------------------------------------------
+validator rejects included=true unless TAG=YES     dropped: it would reject the D0 behaviour under study
+  and INDEPENDENCE=YES                             ([a result from the filed readings, withheld])
+required booleans ambiguity_detected,              nullable; null = NOT_RECORDED (silence is not "no")
+  alternatives_preserved
+no provenance on values                            every value carries READER_STATED / CODER_INFERRED /
+                                                   SCRIPT_DERIVED / NOT_RECORDED, as in M01
+fixture G02-KA-02 uses the packet's real field     rewritten with neutral names; as received it attached an
+  names (Reading + error / exception_type /        answer to T10's open carried question
+  missing_path)
+fixture G01-KA-05 "declared only" puts the field   rewritten: the declared-only field appears on no instance
+  on every instance
+tests never load the fixture files                 the tests load and check every fixture
+"[an excluded change] is not in force"         [an excluded change] is in force ([the pre-registration file, excluded] status note, this date);
+                                                   the file's line 3 is stale and left as written
+ids G01 / G02                                      M01 / M02 (G01-G33 are a reader's gap inventory)
+```
+
+## 6. What is reported
+
+As `M01_CRITERIA.md` section 5, by condition and arm, plus: per field, the D0 vs D1 listing rate (parallel arm); per reader, D0-to-D1 transitions (sequential arm, by order). Counts only; no threshold, no majority answer, no composite score.
+
+=== FILE 7 === studies/M02_CRITERIA.md
+
+# M02 criteria: slots_carried record boundary and traversal (fixed before any coding)
+
+Written 2026-11-19, before any M02 instrument code, coded record or new reading. Schema: `M02_SCHEMA.json`. Design from a reader's proposal ([an excluded file]), reshaped as in `M01_EXTENSION.md` section 5.
+
+## 1. Question
+
+For `slots_carried`, which records does a reader count, and how far does the reader follow a field that holds another record? These are two different choices and are recorded separately:
+
+- **scope**: which records are in (the term's own record; records built beside it on the reporting path; wrappers that carry it; everything reachable);
+- **traversal**: whether a record-valued field is named and left closed, or opened.
+
+Two readers can disagree about **record identity** (they picked different records) or about **depth** (the same records, opened to different levels). The analysis reports the two kinds apart, because they are different failures.
+
+## 2. Conditions and arms
+
+```text
+D0   the v2 packet and brief, unchanged
+D1   + conditions/M02_D1.md   the term's own record only; name nested fields, do not open
+D2   + conditions/M02_D2.md   every record built, returned or documented on the reporting path; name, do not open
+D3   + conditions/M02_D3.md   the reader states their own rule first, in attestation.notes; none is suggested
+```
+
+Parallel and sequential arms as in `M01_EXTENSION.md` section 2. D1, D2 and D3 are separate comparisons and are never merged into one "clarified" condition. None is presented as the correct reading of the brief. D3 is run before D1 and D2 if readers are scarce, because it measures interpretation directly; D1 and D2 mostly measure compliance with an explicit instruction.
+
+## 3. Specimens
+
+- **Primary: T10** (`p3:GAP_INSTRUMENT_CRASH`). The coverage entry and the raise handler's section record are both built on the reporting path; [the comparison key's list for this term, withheld]; whether the section record also counts is open.
+- **Secondary:** T08 (a Reading and a CoverageEntry from one `crash()` call), T04 (ExpiryTrigger, held as a value inside UNKNOWN tokens: tests "name, do not open"), T06 (a FieldToken holding a Token), T09 (the case where readers already chose different records: coverage entries vs register rows).
+- All 15 terms stay in the task; the specimens are where the analysis looks first, not a reduced packet.
+
+## 4. Coding
+
+One record per (reader, term, record the reader names or the catalog lists), with every value's provenance marked as in M01. The record catalog per term (the records the packet's sources build on each term's reporting path, with depth from the term's own record) is built from the sources and is SCRIPT_DERIVED where the code can be run or parsed, CODER_INFERRED otherwise. The reader half: which records the reader's `slots_carried` names draw on (a name belonging to several catalog records is recorded against each, flagged), the stated scope and traversal rules (READER_STATED under D3, CODER_INFERRED or null otherwise), and quotes checked verbatim as in M01.
+
+**The three filed D0 readings will be coded first, as a descriptive table** (the coder has seen them), in a later commit, under this file unchanged.
+
+## 5. What is reported (counts only)
+
+Per term and condition: records counted per reader; fields per record; scope-rule and traversal-rule distributions; nested-record open rate; T10's section record counted / not counted; identity-vs-depth classification of each pairwise disagreement; within-reader transitions (sequential arm). No majority answer, no composite score, no change to any key.
+
+## 6. Limits stated now
+
+One coder (the [the coding session], same family as one filed reader). The catalog of records is the coder's; a record the catalog misses shows up as a reader name with no catalog record, which is reported, not dropped. Readers per arm will be few; counts, not rates, are the honest unit.
+
+=== FILE 8 === studies/M02_SCHEMA.json
+
+{
+ "study_id": "M02",
+ "title": "slots_carried: which records count, and how far a record-valued field is followed",
+ "version": 1,
+ "null_rule": "null means NOT_RECORDED. No field has a default; *_provenance says who recorded each value. Provenance values as in M01_SCHEMA.json.",
+ "levels": {
+  "session": {
+   "note": "one per (reader, term)",
+   "fields": {
+    "study_id":        {"const": "M02"},
+    "reader_id":       {"type": "string", "note": "pseudonym or [readings folder] folder name; never reader_label"},
+    "family":          {"type": "string"},
+    "packet":          {"keys": ["version", "variant", "sha256"]},
+    "condition":       {"enum": ["D0", "D1", "D2", "D3"]},
+    "instruction_sha256": {"type": ["string", "null"], "note": "sha256 of conditions/M02_Dn.md; null for D0"},
+    "arm":             {"enum": ["PARALLEL", "SEQUENTIAL", "FILED"], "note": "FILED = a reading taken before M02 existed"},
+    "sequence_index":  {"type": ["integer", "null"]},
+    "prior_condition": {"enum": ["D0", "D1", "D2", "D3", null]},
+    "recalled_prior":  {"type": ["boolean", "null"], "note": "sequential arm: did the reader say they recalled or reused the earlier answer"},
+    "term_id":         {"pattern": "T01..T15"},
+    "scope_rule":      {"enum": ["TERM_OWN_RECORD_ONLY", "ALL_REPORTING_PATH_RECORDS", "FIRST_WRAPPER_ONLY", "ALL_REACHABLE_RECORDS", "OTHER", "UNRESOLVED", null]},
+    "traversal_rule":  {"enum": ["NAME_DO_NOT_OPEN", "OPEN", "MIXED", "UNRESOLVED", null],
+                        "note": "a nested-field rule, recorded apart from scope_rule"},
+    "rule_quote":      {"type": ["string", "null"], "note": "verbatim, where the reader stated a rule"},
+    "rule_provenance": {"enum": ["READER_STATED", "CODER_INFERRED", "NOT_RECORDED"]},
+    "ambiguity_stated":{"type": ["boolean", "null"], "note": "true only where the reader's text says so; null otherwise"},
+    "unmatched_names": {"type": "array", "note": "names in the reader's slots_carried that no catalog record carries: reported, never dropped"}
+   }
+  },
+  "record": {
+   "note": "one per (session, catalog record)",
+   "fields": {
+    "record_id":       {"type": "string", "note": "local id from the catalog, not a source identifier"},
+    "source_location": {"type": "string"},
+    "relationship":    {"enum": ["TERM_OWN_RECORD", "REPORTING_RECORD", "WRAPPER_RECORD", "NESTED_RECORD", "DOCUMENTED_RECORD", "UNKNOWN"]},
+    "on_reporting_path": {"type": ["boolean", "null"]},
+    "depth":           {"type": ["integer", "null"], "note": "0 = the term's own record; a record built beside it is also 0; a wrapper is +1; a nested record is +1 from its holder"},
+    "fields":          {"type": "array"},
+    "nested_field_refs": {"type": "object", "note": "field -> record_id of the record it holds"},
+    "catalog_provenance": {"enum": ["SCRIPT_DERIVED", "CODER_INFERRED"]},
+    "counted":         {"enum": ["COUNTED", "PARTLY_COUNTED", "NOT_COUNTED"], "note": "from the reader's slots_carried: all / some / none of this record's own fields named. NOT_COUNTED is not 'excluded'"},
+    "opened":          {"type": ["boolean", "null"], "note": "for a NESTED_RECORD: did the reader list its fields"},
+    "counted_provenance": {"enum": ["READER_STATED", "CODER_INFERRED"]}
+   }
+  }
+ }
+}
+
+=== FILE 9 === studies/conditions/D0.md
+
+# Condition D0
+
+The brief and terms in `brief/`, unchanged, with no extra note. D1, D2 and D3 are the brief plus the note of that name in this folder; a reader in a study gets exactly one condition.
+
+=== FILE 10 === studies/conditions/M01_D1.md
+
+# Additional note for this reading (experimental, M01 condition D1)
+
+This note is added to the reader brief for this reading only. It is experimental wording used to study how readers read the brief; it is not a change to the brief, and other readers do not receive it.
+
+For `slots_specific`, a field counts as a slot of a term when both of these hold:
+
+- TAG: it is defined on every instance of the term and on no instance of any other term; and
+- INDEPENDENCE: it is an independent input of the term's record, that is, not computed from other candidate fields (it is passed in or recorded raw).
+
+If you cannot tell whether a field meets one of these, say which one and why in `source_lines_read`, and set `confidence` accordingly. Do not guess.
+
+=== FILE 11 === studies/conditions/M02_D1.md
+
+# Additional note for this reading (experimental, M02 condition D1)
+
+This note is added to the reader brief for this reading only. It is experimental wording used to study how readers read the brief; it is not a change to the brief, and other readers do not receive it.
+
+For `slots_carried`, list the fields of the term's own record only: the record whose status, kind, verdict or state value is this term. If one of its fields holds another record, name that field and do not open it. Do not list the fields of any other record, even one built on the same reporting path.
+
+=== FILE 12 === studies/conditions/M02_D2.md
+
+# Additional note for this reading (experimental, M02 condition D2)
+
+This note is added to the reader brief for this reading only. It is experimental wording used to study how readers read the brief; it is not a change to the brief, and other readers do not receive it.
+
+For `slots_carried`, list the fields of every record that the source builds, returns or documents on the path that reports this term, including a record built beside the term's own record. List each record's own fields. If a field holds another record, name that field and do not open it.
+
+=== FILE 13 === studies/conditions/M02_D3.md
+
+# Additional note for this reading (experimental, M02 condition D3)
+
+This note is added to the reader brief for this reading only. It is experimental wording used to study how readers read the brief; it is not a change to the brief, and other readers do not receive it.
+
+Before you fill `slots_carried` for any term, write in `attestation.notes` the rule you will use to decide which records count and how far you follow a field that holds another record. Then apply that rule to every term. No rule is suggested here; choose your own and state it.
+
+=== FILE 14 === sources/P1/cplay/tokens.py
+
+# Excerpt of P1/cplay/tokens.py, original line numbers kept (lines 1-140 of 140). Lines not shown are omitted, not empty.
+
+    1| """M2. State tokens, typed expiry, scoped absence, claims (COMBINED_SPEC section 4). CC0 1.0 Universal.
+    2| 
+    3| Rules:
+    4|   - one distinct token per state; none ever reads as 0, OK or "no row" (no numeric or
+    5|     truth value: float() and bool() raise)
+    6|   - a reason is required on every token that is not a verdict (VERDICTS = {OK})
+    7|   - UNKNOWN requires at least one TYPED expiry trigger; free text is UNTYPED and is not
+    8|     an exit (Q4)
+    9|   - ABSENT_AT_SENSITIVITY carries limit + basis (LADDER with a ladder ref, or DECLARED),
+   10|     effect size of interest, and conditions, or it is refused (F7)
+   11|   - claim tag and claim record are two objects linked 1:1 (Q8); untagged claims refused
+   12| 
+   13| VOID in the spec, so VOID here (never a default):
+   14|   - the ExpiryTrigger `kind` vocabulary: the spec requires typed triggers and lists no kinds
+   15|   - the ConditionBasis <-> #257 STATUSES mapping table (Q12 keeps the two vocabularies and
+   16|     asks for a table; the table's rows are not in the spec)
+   17| Reading added here: `covers_effect` (limit <= effect size) is reported on a scoped
+   18| absence. It refuses nothing; the spec requires the fields, not the comparison.
+   19| """
+   20| 
+   21| VERDICTS = ("OK",)
+   22| STATES = (
+   23|     "OK", "FAILED", "INDETERMINATE", "UNTESTED", "CRASHED", "CLOSED_WITHIN", "OUTSIDE_DOMAIN",
+   24|     "NOT_COMPARABLE", "NOT_SCORED_STUB", "UNTYPED", "UNDECLARED", "REFUSED", "BRIEF_UNRECORDED",
+   25|     "UNKNOWN", "ABSENT_AT_SENSITIVITY", "VOID",
+   26|     "UNRESOLVED",   # M4 branch G: inside the guard band; carried on INSTRUMENT, never PHYSICAL
+   27|     "TOLERANCE_UNRESOLVABLE",   # M4 branch G precondition: U >= tol, decided before m is read
+   28|     "SYSTEMATIC_ERROR_INDICATED",   # M4 diagnostic: |m| > k*sigma*sqrt(n_legs), on DETERMINATION
+   29| )
+   30| TAGS = ("OBSERVED", "DERIVED", "PROPOSED")
+   31| ABSENCE_BASES = ("LADDER", "DECLARED")
+   32| 
+   33| 
+   34| class TokenError(ValueError):
+   35|     pass
+   36| 
+   37| 
+   38| def _need(value, what):
+   39|     if value is None or (isinstance(value, str) and not value.strip()):
+   40|         raise TokenError("%s required" % what)
+   41|     return value
+   42| 
+   43| 
+   44| class Token(object):
+   45|     def __init__(self, state, reason=None):
+   46|         if state not in STATES:
+   47|             raise TokenError("unknown state %r; states are %r" % (state, STATES))
+   48|         if state not in VERDICTS:
+   49|             _need(reason, "reason on non-verdict token %s" % state)
+   50|         self.state, self.reason = state, reason
+   51| 
+   52|     is_verdict = property(lambda self: self.state in VERDICTS)
+   53| 
+   54|     def __bool__(self):
+   55|         raise TypeError("a state token has no truth value; read .state")
+   56| 
+   57|     def __float__(self):
+   58|         raise TypeError("a state token is not a number; read .state")
+   59| 
+   60|     def __repr__(self):
+   61|         return "%s(%s)" % (self.state, self.reason or "")
+   62| 
+   63| 
+   64| class ExpiryTrigger(object):
+   65|     """Typed: kind, target, condition all required. The vocabulary is the P3 expiry_condition register
+   66|     (EXPIRY_VOCABULARY, pinned); its keys are not mapped onto kind/target/condition (9c item 12, open)."""
+   67|     is_exit = True
+   68| 
+   69|     def __init__(self, kind, target, condition):
+   70|         self.kind = _need(kind, "trigger kind")
+   71|         self.target = _need(target, "trigger target")
+   72|         self.condition = _need(condition, "trigger condition")
+   73| 
+   74| 
+   75| def untyped(text):
+   76|     t = Token("UNTYPED", _need(text, "untyped note text"))
+   77|     t.is_exit = False
+   78|     return t
+   79| 
+   80| 
+   81| def unknown(reason, triggers):
+   82|     triggers = list(triggers)
+   83|     typed = [t for t in triggers if isinstance(t, ExpiryTrigger)]
+   84|     if not typed:
+   85|         raise TokenError("UNKNOWN refused: no typed expiry trigger (free text is UNTYPED, no exit)")
+   86|     t = Token("UNKNOWN", reason)
+   87|     t.typed = tuple(typed)
+   88|     t.untyped = tuple(x for x in triggers if not isinstance(x, ExpiryTrigger))
+   89|     return t
+   90| 
+   91| 
+   92| def absent_at_sensitivity(limit, basis, effect_size, conditions, ladder=None):
+   93|     _need(limit, "limit")
+   94|     _need(basis, "basis (LADDER or DECLARED)")
+   95|     _need(effect_size, "effect size of interest")
+   96|     _need(conditions, "conditions the null holds under")
+   97|     if basis not in ABSENCE_BASES:
+   98|         raise TokenError("basis %r not in %r" % (basis, ABSENCE_BASES))
+   99|     if basis == "LADDER":
+  100|         _need(ladder, "ladder reference for a LADDER basis")
+  101|     t = Token("ABSENT_AT_SENSITIVITY", "not found at limit %r (%s) under %s" % (limit, basis, conditions))
+  102|     t.limit, t.basis, t.effect_size, t.conditions, t.ladder = limit, basis, effect_size, conditions, ladder
+  103|     t.covers_effect = limit <= effect_size
+  104|     return t
+  105| 
+  106| 
+  107| class _Tag(object):
+  108|     def __init__(self, claim, value):
+  109|         self.claim, self.value = claim, value
+  110| 
+  111| 
+  112| class _Record(object):
+  113|     def __init__(self, claim, chain):
+  114|         self.claim, self.chain = claim, chain
+  115| 
+  116| 
+  117| class Claim(object):
+  118|     """A statement with its tag (status) and its record (provenance chain), linked 1:1."""
+  119| 
+  120|     def __init__(self, statement, tag, chain):
+  121|         _need(statement, "claim statement")
+  122|         if tag not in TAGS:
+  123|             raise TokenError("claim tag %r not in %r: untagged claims are refused" % (tag, TAGS))
+  124|         chain = tuple(chain)
+  125|         if not chain:
+  126|             raise TokenError("claim record needs a provenance chain")
+  127|         self.statement = statement
+  128|         self.tag = _Tag(self, tag)
+  129|         self.record = _Record(self, chain)
+  130| 
+  131| 
+  132| VOCABULARY_MAPPING = Token("VOID", "Q12: the spec keeps s-a ConditionBasis and #257 STATUSES apart and calls for "
+  133|                                    "a mapping table, but gives no rows; rows are not invented here")
+  134| 
+  135| 
+  136| # 9c item 11: the expiry vocabulary is the P3 expiry_condition register, pinned, not copied.
+  137| TAF_EXPIRY_KEYS = ("instrument_class", "sensitivity", "protocol", "provenance")
+  138| EXPIRY_VOCABULARY = Token("REFUSED", "not redefined here: P3 calibration/expiry_register.py EXPIRY_KEYS, "
+  139|                           "pin P11-p3-expiry-register (main [commit]); mapping onto ExpiryTrigger's "
+  140|                           "kind/target/condition is 9c item 12, author's call")
+
+=== FILE 15 === sources/P1/cplay/axes.py
+
+# Excerpt of P1/cplay/axes.py, original line numbers kept (lines 1-150 of 150). Lines not shown are omitted, not empty.
+
+    1| """M3: failure axes, statuses, COVERAGE, and the #257 mapping (COMBINED_SPEC section 2).
+    2| 
+    3| Three failure axes (PHYSICAL, INSTRUMENT, DETERMINATION). APPLICABILITY is a field on no
+    4| failure axis. COVERAGE is a list of entries beside the axes and never feeds severity (R-A2).
+    5| 
+    6| Field restrictions taken from the spec text:
+    7|   CRASHED         INSTRUMENT only        ("CRASHED stays an INSTRUMENT status", R-A2)
+    8|   OUTSIDE_DOMAIN  APPLICABILITY only     (status table, Q11)
+    9|   FAILED          failure axes only      (APPLICABILITY "is not a failure axis", Q11)
+   10|   CLOSED_WITHIN   PHYSICAL. On INSTRUMENT / DETERMINATION reading() returns a VOID token, not a
+   11|                   Reading: the spec maps CLOSED_WITHIN to PHYSICAL only and says nothing of the
+   12|                   other two, so it is neither allowed nor refused (follow-up item 1).
+   13| 
+   14| Decided (9c item 1): no composite severity across axes; severity() is the per-axis vector.
+   15| Held VOID: CLOSED_WITHIN on INSTRUMENT or DETERMINATION.
+   16| """
+   17| from collections import namedtuple
+   18| 
+   19| from . import tokens as T
+   20| 
+   21| AXES = ("PHYSICAL", "INSTRUMENT", "DETERMINATION")
+   22| FIELDS = AXES + ("APPLICABILITY",)
+   23| STATUSES = ("OK", "FAILED", "INDETERMINATE", "UNTESTED", "CRASHED", "CLOSED_WITHIN", "OUTSIDE_DOMAIN")
+   24| COVERAGE_KINDS = ("UNKNOWN", "INFO", "GAP_INSTRUMENT_CRASH")   # P3 unified_audit.py @[commit] l.101
+   25| 
+   26| CLOSED_WITHIN_OFF_PHYSICAL = ("section 2 maps CLOSED_WITHIN to PHYSICAL only; its meaning on "
+   27|                               "INSTRUMENT / DETERMINATION is not defined")
+   28| 
+   29| COMPOSITE_SEVERITY = T.Token("REFUSED", "decided: no composite; severity() reports the per-axis vector "
+   30|                              "(9c item 1; pin P1-p3-unknown-axis, P3 [commit] unified_audit.py: UNKNOWN on its own axis; R-A2)")
+   31| 
+   32| 
+   33| class AxisError(ValueError):
+   34|     pass
+   35| 
+   36| 
+   37| def _filled(x):
+   38|     return isinstance(x, str) and x.strip() != ""
+   39| 
+   40| 
+   41| Reading = namedtuple("Reading", "field status reason sigma basis exception path bound")
+   42| 
+   43| 
+   44| def reading(field, status, reason=None, sigma=None, basis=None, exception=None, path=None, bound=None):
+   45|     if field not in FIELDS:
+   46|         raise AxisError("unknown field %r; COVERAGE is not an axis" % (field,))
+   47|     if status not in STATUSES:
+   48|         raise AxisError("unknown status %r" % (status,))
+   49|     if status == "CRASHED" and field != "INSTRUMENT":
+   50|         raise AxisError("CRASHED is an INSTRUMENT status (R-A2)")
+   51|     if status == "OUTSIDE_DOMAIN" and field != "APPLICABILITY":
+   52|         raise AxisError("OUTSIDE_DOMAIN is APPLICABILITY only (Q11)")
+   53|     if status == "CLOSED_WITHIN" and field in ("INSTRUMENT", "DETERMINATION"):
+   54|         return T.Token("VOID", CLOSED_WITHIN_OFF_PHYSICAL)
+   55|     if field == "APPLICABILITY" and status in ("FAILED", "CRASHED", "CLOSED_WITHIN"):
+   56|         raise AxisError("APPLICABILITY is not a failure axis (Q11)")
+   57|     if status in ("FAILED", "INDETERMINATE", "UNTESTED") and not _filled(reason):
+   58|         raise AxisError("%s needs a reason" % status)
+   59|     if status == "CRASHED" and not (_filled(exception) and _filled(path)):
+   60|         raise AxisError("CRASHED needs exception and path (Q3)")
+   61|     if status == "CLOSED_WITHIN":
+   62|         if not isinstance(sigma, (int, float)) or isinstance(sigma, bool) or sigma < 0 or not _filled(basis):
+   63|             raise AxisError("CLOSED_WITHIN needs a numeric sigma >= 0 and a basis (Q2)")
+   64|     if status == "OUTSIDE_DOMAIN" and not _filled(bound):
+   65|         raise AxisError("OUTSIDE_DOMAIN needs the bound (Q11)")
+   66|     return Reading(field, status, reason, sigma, basis, exception, path, bound)
+   67| 
+   68| 
+   69| class CoverageEntry(namedtuple("CoverageEntry", "kind module input reason missing_path expiry_condition")):
+   70|     """All six P3 fields are keyword-required; None is accepted as a passed value, never filled in."""
+   71|     __slots__ = ()
+   72| 
+   73|     def __new__(cls, *, kind, module, input, reason, missing_path, expiry_condition):
+   74|         if kind not in COVERAGE_KINDS:
+   75|             raise AxisError("coverage kind %r not in %r" % (kind, COVERAGE_KINDS))
+   76|         if not (_filled(module) and _filled(reason)):
+   77|             raise AxisError("coverage entry needs module and reason")
+   78|         return super().__new__(cls, kind, module, input, reason, missing_path, expiry_condition)
+   79| 
+   80| 
+   81| def crash(exc, *, path, module, inputs, expiry_condition):
+   82|     """R-A2: a crash is a record -- an INSTRUMENT reading plus a coverage entry, never no row."""
+   83|     name = type(exc).__name__
+   84|     rd = reading("INSTRUMENT", "CRASHED", reason=str(exc) or name, exception=name, path=path)
+   85|     cov = CoverageEntry(kind="GAP_INSTRUMENT_CRASH", module=module, input=inputs,
+   86|                         reason="%s: %s" % (name, exc), missing_path=path,
+   87|                         expiry_condition=expiry_condition)
+   88|     return rd, cov
+   89| 
+   90| 
+   91| class Record(object):
+   92|     def __init__(self, readings, coverage):
+   93|         for f, rd in readings.items():
+   94|             if not isinstance(rd, Reading) or rd.field != f:
+   95|                 raise AxisError("reading for %r must be a Reading on that field" % (f,))
+   96|         for c in coverage:
+   97|             if not isinstance(c, CoverageEntry):
+   98|                 raise AxisError("coverage holds CoverageEntry objects only")
+   99|         crashed = [rd for rd in readings.values() if rd.status == "CRASHED"]
+  100|         gaps = [c for c in coverage if c.kind == "GAP_INSTRUMENT_CRASH"]
+  101|         if crashed and not gaps:
+  102|             raise AxisError("a CRASHED reading needs its coverage entry (R-A2)")
+  103|         self._readings = dict(readings)
+  104|         self.coverage = tuple(coverage)
+  105| 
+  106|     def get(self, field):
+  107|         if field not in FIELDS:
+  108|             raise AxisError("unknown field %r" % (field,))
+  109|         return self._readings.get(field) or reading(field, "UNTESTED", reason="NO_GATE_READ")  # R-A3
+  110| 
+  111|     def severity(self):
+  112|         """Per-axis status only. Reads no coverage entry and no APPLICABILITY (R-A2, Q11)."""
+  113|         return {f: self.get(f).status for f in AXES}
+  114| 
+  115| 
+  116| def map_257(source, **cond):
+  117|     """Every reason #257 can emit, mapped per section 2. An unlisted source is refused."""
+  118|     if source == "l0.did_not_close":
+  119|         if cond.get("declared_complete") is True:                         # R-A1: literal True only
+  120|             return reading("PHYSICAL", "FAILED", reason="did not close; ledger declared complete")
+  121|         return reading("DETERMINATION", "FAILED", reason="did not close; ledger not declared complete")
+  122|     if source == "l0.no_live_budget":
+  123|         return reading("DETERMINATION", "UNTESTED", reason="NO_LIVE_BUDGET")
+  124|     if source == "l0.noise":
+  125|         return reading("PHYSICAL", "CLOSED_WITHIN", reason="misclosure within k sigma",
+  126|                        sigma=cond.get("sigma"), basis=cond.get("basis"))
+  127|     if source == "certify.untrusted":
+  128|         return reading("INSTRUMENT", "FAILED", reason="UNTRUSTED: harness misses plants")
+  129|     if source == "certify_tool.raise":
+  130|         raise AxisError("a tool raise is a crash record: call crash(), which carries the coverage entry")
+  131|     if source == "trust.no_cases":
+  132|         return reading("INSTRUMENT", "UNTESTED", reason="KA_NO_CASES")
+  133|     if source == "known_answer.circular":
+  134|         return reading("INSTRUMENT", "UNTESTED", reason="CIRCULAR_KNOWN_ANSWER")
+  135|     if source == "bound.hit":
+  136|         return reading("APPLICABILITY", "OUTSIDE_DOMAIN", reason="input beyond a declared bound",
+  137|                        bound=cond.get("bound"))
+  138|     raise AxisError("no mapping row for #257 source %r (section 2)" % (source,))
+  139| 
+  140| 
+  141| Relabeled = namedtuple("Relabeled", "step1_code combined")
+  142| 
+  143| 
+  144| def relabel(step1_code, combined):
+  145|     """R-A5: the step-1 code is kept; the COMBINED reading sits beside it."""
+  146|     if not _filled(step1_code):
+  147|         raise AxisError("step-1 code required; rows are not relabelled in place")
+  148|     if not isinstance(combined, Reading):
+  149|         raise AxisError("combined column takes a Reading")
+  150|     return Relabeled(step1_code, combined)
+
+=== FILE 16 === sources/P1/cplay/closure.py
+
+# Excerpt of P1/cplay/closure.py, original line numbers kept (lines 284-336 of 448). Lines not shown are omitted, not empty.
+
+  284| class FieldToken(namedtuple("FieldToken", "field token")):
+  285|     """A non-axis state carried on INSTRUMENT: branch G's UNRESOLVED, and its precondition flag
+  286|     TOLERANCE_UNRESOLVABLE."""
+  287|     __slots__ = ()
+  288|     STATES = ("UNRESOLVED", "TOLERANCE_UNRESOLVABLE")
+  289| 
+  290|     def __new__(cls, field, token):
+  291|         if field != "INSTRUMENT":
+  292|             raise ClosureError("UNRESOLVED / TOLERANCE_UNRESOLVABLE are carried on INSTRUMENT, never %s"
+  293|                                % field)
+  294|         if not isinstance(token, T.Token) or token.state not in cls.STATES:
+  295|             raise ClosureError("FieldToken carries one of %r" % (cls.STATES,))
+  296|         return super().__new__(cls, field, token)
+  297| 
+  298| 
+  299| def verdict_branch_G(result, misclosure=None):
+  300|     decl, m, band = _accepted(result, misclosure)
+  301|     if band is None:
+  302|         return T.Token("VOID", "branch G needs sigma and k declared for account %s" % decl.account)
+  303|     floor, void = _floor(result, "G")
+  304|     if void is not None:
+  305|         return void
+  306|     u = band + floor
+  307|     if m <= floor:
+  308|         return A.reading("PHYSICAL", "OK")
+  309|     if m <= decl.tolerance - u:
+  310|         return _closed(decl, m, decl.tolerance - u, what="tol - U")
+  311|     if m > decl.tolerance + u:
+  312|         return _failed(result, decl, m)
+  313|     return FieldToken("INSTRUMENT", T.Token(
+  314|         "UNRESOLVED", "|m| = %g within guard band tol +/- U = %g +/- %g (source %s: %s)"
+  315|         % (m, decl.tolerance, u, G_SOURCE_STATUS, G_SOURCE)))
+  316| 
+  317| 
+  318| def g_precondition(result, account):
+  319|     """Decided from the declarations alone, before any misclosure is read. Returns the flag
+  320|     FieldToken("INSTRUMENT", TOLERANCE_UNRESOLVABLE) when U >= tol, None when U < tol, and a VOID
+  321|     token when U cannot be formed (no sigma / k, or a token floor)."""
+  322|     if result.state != "ACCEPTED":
+  323|         raise ClosureError("no precondition on a %s run" % result.state)
+  324|     decl = result.prereg.accounts[account]
+  325|     if decl.sigma is None or decl.k is None:
+  326|         return T.Token("VOID", "U needs sigma and k declared for account %s" % account)
+  327|     floor, void = _floor(result, "G")
+  328|     if void is not None:
+  329|         return void
+  330|     u = decl.k * decl.sigma + floor
+  331|     if u >= decl.tolerance:
+  332|         return FieldToken("INSTRUMENT", T.Token(
+  333|             "TOLERANCE_UNRESOLVABLE", "U = %g >= tol = %g: no misclosure can prove conformance "
+  334|             "(account %s)" % (u, decl.tolerance, account)))
+  335|     return None
+  336| 
+
+=== FILE 17 === sources/P1/playground-crossrun/COMBINED_SPEC.md
+
+# Excerpt of P1/playground-crossrun/COMBINED_SPEC.md, original line numbers kept (lines 35-96, 122-145 of 390). Lines not shown are omitted, not empty.
+
+   35| ## 2. Axes, statuses and the #257 mapping
+   36| 
+   37| Three failure axes, canonical from s-a: **PHYSICAL**, **INSTRUMENT**, **DETERMINATION**.
+   38| APPLICABILITY is a separate field and is not a failure axis (Q11). **COVERAGE** is a separate
+   39| field too, and never feeds severity (R-A2):
+   40| 
+   41| ```text
+   42| COVERAGE entry   kind ∈ {UNKNOWN, INFO, GAP_INSTRUMENT_CRASH}, module, input, reason,
+   43|                  missing_path, expiry_condition
+   44| source           P3 calibration/unified_audit.py @ [commit], lines 96-101, CHECKED (section 7)
+   45| ```
+   46| 
+   47| ```text
+   48| status          meaning                                        reason field
+   49| OK              ran and passed                                 --
+   50| FAILED          ran and failed                                 required
+   51| INDETERMINATE   ran; not enough to say                         required
+   52| UNTESTED        no check addressed it                          required
+   53| CRASHED         did not run: the check raised                  exception + path, required  (Q3)
+   54| CLOSED_WITHIN   closure holds within sigma, not exactly        sigma + basis, required     (Q2)
+   55| OUTSIDE_DOMAIN  APPLICABILITY only: input beyond a bound       the bound, required         (Q11)
+   56| ```
+   57| 
+   58| Every reason #257 can emit, mapped:
+   59| 
+   60| ```text
+   61| #257 source                              condition                     -> field : status (reason)
+   62| l0.run_status INCOMPLETE "did not close" closure fail, ledger declared -> PHYSICAL : FAILED
+   63|                                          complete                         (F9: the leak is a model defect)
+   64| l0.run_status INCOMPLETE "did not close" closure fail, ledger NOT      -> DETERMINATION : FAILED
+   65|                                          declared complete                (F8, F9: accounting gap)
+   66| l0.run_status INCOMPLETE "no LIVE        every budget VOID             -> DETERMINATION : UNTESTED
+   67|   budget"                                                                 (NO_LIVE_BUDGET)          (Q1)
+   68| l0 NOISE                                 misclosure within k sigma     -> PHYSICAL : CLOSED_WITHIN
+   69|                                                                           (sigma, basis; sigma per account) (Q2)
+   70| certify / certify_tool UNTRUSTED         harness misses plants         -> INSTRUMENT : FAILED
+   71| certify_tool raise (ZeroDivisionError)   tool gate crashes             -> INSTRUMENT : CRASHED
+   72|                                                                           (exception, path); never a missing row (F2, Q3)
+   73| trust with no cases written              zero known-answer cases       -> INSTRUMENT : UNTESTED (s-a KA_NO_CASES)
+   74| known answer from the tested formula     circular case                 -> INSTRUMENT : UNTESTED
+   75|                                                                           (CIRCULAR_KNOWN_ANSWER)   (Q6)
+   76| size / population / founder bound hit    input beyond a declared bound -> APPLICABILITY : OUTSIDE_DOMAIN
+   77|                                                                           on no failure axis (F13, Q11)
+   78| ```
+   79| 
+   80| Rules:
+   81| 
+   82| - R-A1: the "declared complete" flag is part of the ledger record and must be set explicitly.
+   83|   If it is absent, the ledger counts as NOT declared, and the failure lands on DETERMINATION,
+   84|   never on PHYSICAL (F9).
+   85| - R-A2: a crash is a record carrying the exception type, the call path that raised, and the
+   86|   inputs. A crash never produces "no row" (F2). CRASHED stays an INSTRUMENT status, and it is
+   87|   reported on the coverage axis (kinds UNKNOWN / INFO / GAP_INSTRUMENT_CRASH), never in severity.
+   88|   The coverage entry carries P3's fields: kind, module, input, reason, missing_path,
+   89|   expiry_condition (source: section 7).
+   90| - R-A3: a field no gate read is UNTESTED, never OK by default.
+   91| - R-A4: closure tolerance is declared PER ACCOUNT, BEFORE the run. There is no global default; a
+   92|   missing tolerance refuses the run rather than filling 1e-9 silently (O4, Q13). The numerical
+   93|   roundoff floor is recorded separately as its own known class (forest run 10), not folded into
+   94|   sigma.
+   95| - R-A5: step-1 rows are NOT relabelled. Step 3 adds a second column, "relabeled under COMBINED
+   96|   mapping", beside the preserved step-1 code (Q15).
+  ...
+
+  122| ---
+  123| 
+  124| ## 4. States: one token per state, a reason on every non-verdict
+  125| 
+  126| - **UNKNOWN requires a typed expiry trigger** (from #257 `NEEDS_EXPIRY`, typed per s-a
+  127|   `ExpiryTrigger`). Free text is accepted only as `UNTYPED` and counts as "no exit defined", so it
+  128|   does not satisfy the requirement (F10, F14, Q4). An UNKNOWN with no typed trigger is refused.
+  129| - **Scoped absence and detection limits** (from s-a `establish_sensitivity`, `claim_absence`).
+  130|   `ABSENT_AT_SENSITIVITY` must carry three things, or it is refused (F7):
+  131|   - the limit, and how it was established (from a ladder, or declared);
+  132|   - the effect size of interest;
+  133|   - the conditions the null holds under.
+  134| - Each state has a distinct token: INDETERMINATE, UNTESTED, CRASHED, CLOSED_WITHIN,
+  135|   OUTSIDE_DOMAIN, NOT_COMPARABLE, NOT_SCORED_STUB, UNTYPED, UNDECLARED and REFUSED are all
+  136|   different. None is ever read as 0, OK or "no row".
+  137| - A `reason` is required on every token that is not a verdict; an empty reason is refused at
+  138|   construction.
+  139| - Vocabularies are kept separate (s-a ConditionBasis, #257 STATUSES) with an explicit mapping
+  140|   table between them; merging would lose one side's distinctions (Q12).
+  141| - Claim tags (#257 OBSERVED / DERIVED / PROPOSED) and claim records (s-a ClaimRecord) are two
+  142|   objects linked 1:1: the tag is the status of a statement, the record is its provenance chain
+  143|   (Q8).
+  144| 
+  145| ---
+
+=== FILE 18 === sources/P2/numcheck/check.py
+
+# Excerpt of P2/numcheck/check.py, original line numbers kept (lines 1-53, 110-119, 188-240, 296-305, 415-440, 443-557 of 592). Lines not shown are omitted, not empty.
+
+    1| """check -- data points and intersections. Co-authored.
+    2| 
+    3| Units first: every formula goes through branch 1 (unitaudit). Unless that
+    4| verdict is PASS, the numeric check is VOID with branch 1's reason.
+    5| 
+    6| A data point: "lhs = rhs", a value per symbol (a number, or an interval
+    7| [lo, hi]; with its unit and its own status tag) and a tolerance t >= 0.
+    8| With D an enclosure of lhs - rhs:
+    9|   HOLDS      D lies inside [-t, t]
+   10|   FAILS      D lies wholly outside [-t, t]
+   11|   UNDECIDED  D straddles the edge at the last tier
+   12|   VOID       units not PASS, a missing or unreadable value, no value on
+   13|              these inputs (division by an interval containing 0, ...),
+   14|              unsupported syntax, internal error
+   15| The verdict comes from the interval tier: Fraction intervals, with sqrt exp
+   16| ln sin cos as outward enclosures (precision doubling up to max_precision
+   17| when one was used). It is the only rigorous tier. float and Decimal run
+   18| first as TRIAGE: each gives a predicted_verdict or says "too close to
+   19| call". Every HOLDS / FAILS is confirmed at the interval tier, and the record
+   20| sets predicted beside confirmed; a mismatch is listed on the record and
+   21| counted in the report. The margin rule behind a prediction is a heuristic
+   22| with no bound over a long chain of steps, so a prediction is never the
+   23| verdict, unless the check asks for fast (entry "fast": true, or --fast):
+   24| then confirmation is skipped, the prediction is the verdict, and the record
+   25| carries rigorous: false.
+   26| 
+   27| A straddle on interval inputs is bisected (the inputs are split, widest
+   28| first, to the depth limit) and every piece is read:
+   29|   every piece HOLDS                          -> HOLDS
+   30|   pieces that HOLD and pieces that FAIL      -> MIXED: both kinds are listed
+   31|   pieces that FAIL, none that hold           -> FAILS, located
+   32|   otherwise                                  -> UNDECIDED
+   33| An UNDECIDED at tolerance 0 with no piece against it, whose two sides agree
+   34| at every sampled exact point, is put on the record as an identity candidate
+   35| ("proposal"). If lhs - rhs is a polynomial in the interval inputs and is 0
+   36| on a full grid of (degree + 1) exact points per variable, that is a proof:
+   37| the proposal's status is DERIVED and it carries the proof. Otherwise it
+   38| stays PROPOSED, with the reason. The check's own verdict is not changed.
+   39| 
+   40| An intersection: two formulas and a region (a box: an interval per region
+   41| variable). On a subbox, both formulas HOLD (enclosure inside tolerance:
+   42| true at every point of the subbox), or one FAILS (enclosure outside: false
+   43| at every point of it), or the subbox is bisected along its widest side, to
+   44| a depth limit.
+   45|   BOTH_HOLD   every subbox reached: both hold
+   46|   MIXED       subboxes where both hold, and subboxes where one fails
+   47|               everywhere (both kinds listed)
+   48|   ONE_FAILS   subboxes where one formula fails everywhere (located), and
+   49|               none where both hold
+   50|   UNDECIDED   neither, at the depth limit
+   51|   VOID        as above; or a subbox with no value at the depth limit and no
+   52|               failure found
+   53| """
+  ...
+
+  110| def _blank(kind, entry, index, input_path):
+  111|     get = entry.get if isinstance(entry, dict) else (lambda *_: None)
+  112|     return {"kind": kind, "verdict": "VOID", "void_reason": None, "status": None,
+  113|             "deciding_tier": None, "precision": None, "rigorous": None, "fast": None,
+  114|             "tiers": [], "triage": None, "located": None, "proposal": None,
+  115|             "intervals": None, "inputs": None, "units": None,
+  116|             "provenance": {"source_path": get("source_path"), "input": input_path,
+  117|                            "index": index, "tool": VERSION},
+  118|             "slots": slot_record(get("slots")),
+  119|             "human_interest": None, "ai_interest": None}
+  ...
+
+  188| def _bisect_point(sides, tol, env, prec, depth_limit):
+  189|     """A straddle on interval inputs: split the inputs (widest first) and look
+  190|     again, on every piece, to the depth limit. Returns (verdict or None, detail).
+  191|       every piece HOLDS                               -> HOLDS
+  192|       pieces that HOLD and pieces that FAIL           -> MIXED (both kinds listed)
+  193|       pieces that FAIL, none that hold                -> FAILS, located
+  194|       otherwise (pieces straddle at the depth limit)  -> None (UNDECIDED)
+  195|     A piece HOLDS / FAILS when the formula does so at every point of it."""
+  196|     if depth_limit < 0 or 2 ** depth_limit > MAX_SUBBOXES:
+  197|         raise Bad(f"depth must be between 0 and {MAX_SUBBOXES.bit_length() - 1}")
+  198|     names = sorted(n for n, v in env.items() if not v.is_point)
+  199|     stack = [({n: env[n] for n in names}, 0)]
+  200|     counts = {"examined": 0, "hold": 0, "fail": 0, "straddle_at_depth_limit": 0}
+  201|     deepest, first_open, holds, fails = 0, None, [], []
+  202|     while stack:
+  203|         box, depth = stack.pop()
+  204|         counts["examined"] += 1
+  205|         deepest = max(deepest, depth)
+  206|         _, _, d = _difference(sides, dict(env, **box), IntSys(prec))
+  207|         v, _ = IntSys(prec).judge(d, tol)
+  208|         piece = {"subbox": {n: box[n].as_record() for n in names}, "depth": depth,
+  209|                  "difference": d.as_record()}
+  210|         if v == "HOLDS":
+  211|             counts["hold"] += 1
+  212|             if len(holds) < LIST_CAP:
+  213|                 holds.append(piece)
+  214|         elif v == "FAILS":
+  215|             counts["fail"] += 1
+  216|             if len(fails) < LIST_CAP:
+  217|                 fails.append(piece)
+  218|         elif depth >= depth_limit:
+  219|             counts["straddle_at_depth_limit"] += 1
+  220|             first_open = first_open or piece
+  221|         else:
+  222|             widest = max(names, key=lambda n: box[n].width)
+  223|             a, b = box[widest].split()
+  224|             stack.append((dict(box, **{widest: b}), depth + 1))
+  225|             stack.append((dict(box, **{widest: a}), depth + 1))
+  226|     h, f, o = counts["hold"], counts["fail"], counts["straddle_at_depth_limit"]
+  227|     verdict = ("MIXED" if h and f else "FAILS" if f else "HOLDS" if not o else None)
+  228|     return verdict, {**counts, "depth_limit": depth_limit, "deepest": deepest,
+  229|                      "variables_split": names, "tolerance": str(tol),
+  230|                      "list_cap": LIST_CAP,
+  231|                      "reading": {"MIXED": "holds on some pieces of the given values and "
+  232|                                           "fails on others",
+  233|                                  "FAILS": "fails at every point of the located pieces; "
+  234|                                           "no piece holds",
+  235|                                  "HOLDS": "holds on every piece",
+  236|                                  None: "pieces still straddle at the depth limit"}[verdict],
+  237|                      "pieces_that_hold": holds, "pieces_that_fail": fails,
+  238|                      "pieces_that_hold_listed": len(holds), "pieces_that_fail_listed": len(fails),
+  239|                      "located": fails[0] if fails else None,
+  240|                      "first_straddling_piece": first_open}
+  ...
+
+  296| def _identity_candidate(entry, sides, tol, env, rec, prec, index, input_path):
+  297|     """tolerance 0, interval inputs, UNDECIDED, and nothing against it: the two
+  298|     sides may be the same function. Sample exact points; if the difference
+  299|     is 0 at every one, hand the pair on as a PROPOSED identity. Nothing is
+  300|     proved here by sampling. If lhs - rhs is a polynomial in the interval
+  301|     inputs, the full-grid check of _polynomial_proof IS a proof: the
+  302|     proposal then carries it and its status is DERIVED."""
+  303|     b = rec["bisection"]
+  304|     if tol != 0 or b is None or b["hold"] or b["fail"]:
+  305|         return None
+  ...
+
+  415|             rec["bisection"] = None
+  416|             if not verdict and not points:
+  417|                 verdict, rec["bisection"] = _bisect_point(sides, tol, env, prec,
+  418|                                                           int(opt["depth"]))
+  419|                 rec["located"] = rec["bisection"]["located"]
+  420|                 rec["verdict"] = verdict or "UNDECIDED"
+  421|                 rec["proposal"] = _identity_candidate(entry, sides, tol, env, rec, prec,
+  422|                                                       index, input_path)
+  423|             rec.update(verdict=verdict or "UNDECIDED", deciding_tier="interval",
+  424|                        precision="exact" if exact else prec, rigorous=True, status="DERIVED")
+  425|         confirmed = rec["verdict"] if rec["rigorous"] else None
+  426|         per_tier = [{"tier": t["tier"], "predicted_verdict": t["predicted_verdict"],
+  427|                      "confirmed_verdict": confirmed,
+  428|                      "match": None if confirmed is None else t["predicted_verdict"] == confirmed}
+  429|                     for t in tiers if t.get("predicted_verdict")]
+  430|         rec["triage"] = {"predictions": per_tier,
+  431|                          "confirmed_verdict": confirmed,
+  432|                          "confirmed_at": "interval" if confirmed else None,
+  433|                          "mismatches": [x["tier"] for x in per_tier if x["match"] is False],
+  434|                          "note": None if confirmed else
+  435|                          "fast: the prediction was taken as the verdict, not confirmed"}
+  436|     except (Bad, NumVoid) as e:
+  437|         rec.update(verdict="VOID", void_reason=str(e), status=None)
+  438|     except Exception as e:                       # fail closed
+  439|         rec.update(verdict="VOID", void_reason=f"internal: {type(e).__name__}: {e}", status=None)
+  440|     return rec
+  ...
+
+  443| def check_intersection(entry, index=None, input_path=None):
+  444|     rec = _blank("intersection", entry, index, input_path)
+  445|     try:
+  446|         forms = entry.get("formulas") if isinstance(entry, dict) else None
+  447|         if not isinstance(forms, list) or len(forms) != 2:
+  448|             raise Bad("an intersection needs exactly two formulas")
+  449|         region = entry.get("region")
+  450|         if not isinstance(region, dict) or not region:
+  451|             raise Bad("an intersection needs a region: {variable: [lo, hi]}")
+  452|         values = entry.get("values")
+  453|         parsed, rec["units"], rec["formulas"] = [], [], []
+  454|         needed = set()
+  455|         for i, f in enumerate(forms):
+  456|             if not isinstance(f, dict) or not isinstance(f.get("formula"), str):
+  457|                 raise Bad(f"formula {i + 1}: no formula string")
+  458|             u, reason = _units(f["formula"], values)
+  459|             rec["units"].append(u)
+  460|             rec["formulas"].append(f["formula"])
+  461|             if reason:
+  462|                 raise Bad(f"formula {i + 1}: {reason}")
+  463|             sides = _parse(f["formula"])
+  464|             tol = to_fraction(f.get("tolerance", 0), f"tolerance {i + 1}")
+  465|             if tol < 0:
+  466|                 raise Bad(f"tolerance {i + 1} is negative")
+  467|             parsed.append((sides, tol))
+  468|             needed |= _names(sides[0][1]) | _names(sides[1][1])
+  469|         for name in region:
+  470|             if name not in needed:
+  471|                 raise Bad(f"region variable {name!r} is in neither formula")
+  472|         env, rec["inputs"] = _inputs(values, needed, region)
+  473|         prec = int(entry.get("precision", DEFAULTS["precision"]))
+  474|         depth_limit = int(entry.get("depth", DEFAULTS["depth"]))
+  475|         if depth_limit < 0 or 2 ** depth_limit > MAX_SUBBOXES:
+  476|             raise Bad(f"depth must be between 0 and {MAX_SUBBOXES.bit_length() - 1}")
+  477|         names = sorted(region)
+  478|         stack = [({n: env[n] for n in names}, 0)]
+  479|         counts = {"examined": 0, "both_hold": 0, "undecided_at_depth_limit": 0,
+  480|                   "no_value_at_depth_limit": 0}
+  481|         first_open, first_void, deepest = None, None, 0
+  482|         holds, fails = [], []
+  483|         counts["one_fails"] = 0
+  484|         while stack:
+  485|             box, depth = stack.pop()
+  486|             counts["examined"] += 1
+  487|             deepest = max(deepest, depth)
+  488|             cur = dict(env, **box)
+  489|             state, void_reason, diffs = [], None, []
+  490|             for sides, tol in parsed:
+  491|                 S = IntSys(prec)
+  492|                 try:
+  493|                     _, _, d = _difference(sides, cur, S)
+  494|                     state.append(S.judge(d, tol)[0])
+  495|                     diffs.append(d.as_record())
+  496|                 except NumVoid as e:
+  497|                     state.append("VOID")
+  498|                     diffs.append(None)
+  499|                     void_reason = str(e)
+  500|             sub = {n: box[n].as_record() for n in names}
+  501|             if "FAILS" in state:
+  502|                 i = state.index("FAILS")
+  503|                 counts["one_fails"] += 1
+  504|                 if len(fails) < LIST_CAP:
+  505|                     fails.append({"subbox": sub, "depth": depth, "formula_number": i + 1,
+  506|                                   "formula": rec["formulas"][i], "difference": diffs[i],
+  507|                                   "tolerance": str(parsed[i][1]),
+  508|                                   "other_formula_on_this_subbox": state[1 - i]})
+  509|             elif state == ["HOLDS", "HOLDS"]:
+  510|                 counts["both_hold"] += 1
+  511|                 if len(holds) < LIST_CAP:
+  512|                     holds.append({"subbox": sub, "depth": depth})
+  513|             elif depth >= depth_limit:
+  514|                 if void_reason:
+  515|                     counts["no_value_at_depth_limit"] += 1
+  516|                     first_void = first_void or {"subbox": sub, "depth": depth,
+  517|                                                 "reason": void_reason}
+  518|                 else:
+  519|                     counts["undecided_at_depth_limit"] += 1
+  520|                     first_open = first_open or {"subbox": sub, "depth": depth,
+  521|                                                 "states": state, "differences": diffs}
+  522|             else:
+  523|                 widest = max(names, key=lambda n: box[n].width)
+  524|                 if box[widest].width == 0:
+  525|                     counts["undecided_at_depth_limit"] += 1
+  526|                     first_open = first_open or {"subbox": sub, "depth": depth, "states": state,
+  527|                                                 "differences": diffs}
+  528|                     continue
+  529|                 a, b = box[widest].split()
+  530|                 stack.append((dict(box, **{widest: b}), depth + 1))
+  531|                 stack.append((dict(box, **{widest: a}), depth + 1))
+  532|         located = fails[0] if fails else None
+  533|         rec["subboxes"] = {**counts, "depth_limit": depth_limit, "deepest": deepest,
+  534|                            "list_cap": LIST_CAP}
+  535|         rec["located"] = located
+  536|         rec["subboxes_where_both_hold"] = holds
+  537|         rec["subboxes_where_one_fails"] = fails
+  538|         rec["first_undecided_subbox"] = first_open
+  539|         rec["first_subbox_with_no_value"] = first_void
+  540|         rec.update(deciding_tier="interval", precision=prec, rigorous=True)
+  541|         if located and counts["both_hold"]:
+  542|             rec.update(verdict="MIXED", status="DERIVED")
+  543|         elif located:
+  544|             rec.update(verdict="ONE_FAILS", status="DERIVED")
+  545|         elif counts["no_value_at_depth_limit"]:
+  546|             rec.update(verdict="VOID", status=None,
+  547|                        void_reason="no value on a subbox at the depth limit: "
+  548|                                    + first_void["reason"])
+  549|         elif counts["undecided_at_depth_limit"]:
+  550|             rec.update(verdict="UNDECIDED", status="DERIVED")
+  551|         else:
+  552|             rec.update(verdict="BOTH_HOLD", status="DERIVED")
+  553|     except (Bad, NumVoid) as e:
+  554|         rec.update(verdict="VOID", void_reason=str(e), status=None)
+  555|     except Exception as e:                       # fail closed
+  556|         rec.update(verdict="VOID", void_reason=f"internal: {type(e).__name__}: {e}", status=None)
+  557|     return rec
+
+=== FILE 19 === sources/P3/calibration/unified_audit.py
+
+# Excerpt of P3/calibration/unified_audit.py, original line numbers kept (lines 93-101, 209-236, 331-372, 479-496 of 662). Lines not shown are omitted, not empty.
+
+   93| # A module that raised is not a reading of the system. Its status is
+   94| # GAP_INSTRUMENT_CRASH and it goes to coverage with the exception and the
+   95| # missing path, never to severity (2026-11-11 follow-up to #80).
+   96| GAP_INSTRUMENT_CRASH = "GAP_INSTRUMENT_CRASH"
+   97| 
+   98| # Coverage kinds, kept apart: UNKNOWN (no value), INFO (a value that the
+   99| # instrument cannot assess, e.g. non-numeric), GAP_INSTRUMENT_CRASH (the
+  100| # instrument itself failed).
+  101| COVERAGE_KINDS = ("UNKNOWN", "INFO", "GAP_INSTRUMENT_CRASH")
+  ...
+
+  209| @dataclass
+  210| class UnifiedAuditReport:
+  211|     system_id: str
+  212|     modules_run: list[str] = field(default_factory=list)
+  213|     modules_skipped: list[str] = field(default_factory=list)
+  214|     sections: dict = field(default_factory=dict)
+  215|     severity: str = NOT_DETERMINABLE
+  216|     coverage: list[dict] = field(default_factory=list)
+  217|     overall_status: str = NOT_DETERMINABLE
+  218|     not_determinable_reason: Optional[str] = NO_MODULES_RUN
+  219|     red_flags: list[str] = field(default_factory=list)
+  220|     summary: str = ""
+  221| 
+  222|     def to_dict(self) -> dict:
+  223|         return {
+  224|             "system_id": self.system_id,
+  225|             "modules_run": self.modules_run,
+  226|             "modules_skipped": self.modules_skipped,
+  227|             "overall_status": self.overall_status,
+  228|             "severity": self.severity,
+  229|             "not_determinable_reason": self.not_determinable_reason,
+  230|             "coverage_count": len(self.coverage),
+  231|             "coverage_by_kind": _coverage_by_kind(self.coverage),
+  232|             "coverage": self.coverage,
+  233|             "red_flags": self.red_flags,
+  234|             "summary": self.summary,
+  235|             "sections": self.sections,
+  236|         }
+  ...
+
+  331| def _coverage_entries(name: str, status: str, section: Any) -> list[dict]:
+  332|     """UNKNOWN inputs for one module, each with its expiry_condition."""
+  333|     entries: list[dict] = []
+  334|     if status == GAP_INSTRUMENT_CRASH:
+  335|         sec = section if isinstance(section, dict) else {}
+  336|         entries.append({
+  337|             "kind": GAP_INSTRUMENT_CRASH,
+  338|             "module": name,
+  339|             "input": name,
+  340|             "reason": sec.get("error", "module raised"),
+  341|             "missing_path": sec.get("missing_path"),
+  342|             "expiry_condition": _VOID,
+  343|         })
+  344|         return entries
+  345|     if name == "assumption_validator" and isinstance(section, dict):
+  346|         for aid, a in section.get("assumptions", {}).items():
+  347|             if a.get("status") == "UNKNOWN":
+  348|                 entries.append({
+  349|                     "kind": "UNKNOWN",
+  350|                     "module": name,
+  351|                     "input": aid,
+  352|                     "reason": a.get("message", "no value"),
+  353|                     "expiry_condition": dict(_AV_UNKNOWN_EXPIRY),
+  354|                 })
+  355|             elif a.get("status") == "INFO":
+  356|                 entries.append({
+  357|                     "kind": "INFO",
+  358|                     "module": name,
+  359|                     "input": aid,
+  360|                     "reason": a.get("message", "value not assessable"),
+  361|                     "expiry_condition": _VOID,
+  362|                 })
+  363|         return entries
+  364|     if status not in _STATUS_RANK:
+  365|         entries.append({
+  366|             "kind": "UNKNOWN",
+  367|             "module": name,
+  368|             "input": name,
+  369|             "reason": f"module status {status!r} is not a measured severity",
+  370|             "expiry_condition": _VOID,
+  371|         })
+  372|     return entries
+  ...
+
+  479|     def _dispatch(name: str, runner, *args, **kwargs):
+  480|         try:
+  481|             status, section = runner(*args, **kwargs)
+  482|         except Exception as e:
+  483|             # Was: status RED + a red flag. A crash is a gap in the
+  484|             # instrument, not a reading of the system.
+  485|             report.sections[name] = {
+  486|                 "error": f"{type(e).__name__}: {e}",
+  487|                 "exception_type": type(e).__name__,
+  488|                 "missing_path": getattr(e, "filename", None),
+  489|             }
+  490|             report.modules_run.append(name)
+  491|             module_statuses[name] = GAP_INSTRUMENT_CRASH
+  492|             return GAP_INSTRUMENT_CRASH
+  493|         report.sections[name] = section
+  494|         report.modules_run.append(name)
+  495|         module_statuses[name] = status
+  496|         return status
+
+=== FILE 20 === sources/P3/calibration/expiry_register.py
+
+# Excerpt of P3/calibration/expiry_register.py, original line numbers kept (lines 51-60, 216-235 of 342). Lines not shown are omitted, not empty.
+
+   51| CLASSES = ("SLOT", "EMITTER", "DEFAULT", "VOCAB", "RULE", "MENTION", "ARCHIVE", "OTHER_SENSE")
+   52| CARRY_EXPIRY = ("SLOT", "EMITTER", "DEFAULT")
+   53| EXPIRY_KEYS = ("instrument_class", "sensitivity", "protocol", "provenance")
+   54| SCOPED = re.compile(r"^ABSENT_AT_SENSITIVITY\((.+)\)$")
+   55| SELF = "calibration/expiry_register.py"
+   56| 
+   57| 
+   58| def E(instrument, protocol, provenance, sensitivity="void"):
+   59|     return dict(instrument_class=instrument, sensitivity=sensitivity, protocol=protocol, provenance=provenance)
+   60| 
+  ...
+
+  216| def exit_state(e):
+  217|     if e is None:
+  218|         return None
+  219|     if e == "void":
+  220|         return "none"
+  221|     if not isinstance(e, dict) or sorted(e) != sorted(EXPIRY_KEYS):
+  222|         raise ValueError(f"expiry_condition must be void or carry {EXPIRY_KEYS}")
+  223|     if any(e[k] in ("", "void") for k in ("instrument_class", "protocol", "provenance")):
+  224|         raise ValueError("partial expiry_condition: instrument_class, protocol and provenance are required")
+  225|     return "incomplete" if e["sensitivity"] == "void" else "complete"
+  226| 
+  227| 
+  228| def slot_state(s):
+  229|     """For a slot's state value: ABSENT_AT_SENSITIVITY needs its sensitivity; a bare absent is refused."""
+  230|     if s in ("absent", "ABSENT", "ABSENT_AT_SENSITIVITY"):
+  231|         raise ValueError("an absence needs its sensitivity: ABSENT_AT_SENSITIVITY(<value>)")
+  232|     m = SCOPED.match(s)
+  233|     if s.upper().startswith("ABSENT") and (not m or m.group(1).strip() in ("", "void")):
+  234|         raise ValueError("ABSENT_AT_SENSITIVITY with no sensitivity")
+  235|     return "scoped_absence" if m else s
+
+=== FILE 21 === sources/P3/docs/glossary.md
+
+# Excerpt of P3/docs/glossary.md, original line numbers kept (lines 122-142 of 142). Lines not shown are omitted, not empty.
+
+  122| ## Open-slot statuses and their exits
+  123| 
+  124| | Term | Role | Defined in |
+  125| |---|---|---|
+  126| | `PENDING` / `UNKNOWN` | A slot whose value is not yet known. Never read as zero or as absent. | per module; listed in `docs/expiry_register.json` |
+  127| | `expiry_condition` | Instrument class, sensitivity or protocol whose null result would downgrade a PENDING / UNKNOWN slot. Filled only from the slot's own text; otherwise `VOID -- no exit defined`. | `docs/expiry_register.json` |
+  128| | `expiry_source` | `file:line` or citation where that exit is already stated; `VOID` when none is. | `docs/expiry_register.json` |
+  129| | `ABSENT_AT_SENSITIVITY(<value>)` | Scoped absence: looked for with a stated instrument / sensitivity / protocol and not found at that sensitivity. Never written as bare "absent". No slot holds it yet. | `docs/expiry_register.json` |
+  130| 
+  131| ## Audit coverage terms (`calibration/unified_audit.py`)
+  132| 
+  133| One name, `GAP_INSTRUMENT`, was used in two senses on two branches. Both
+  134| senses are kept under split names (2026-11-11). The bare name is retired.
+  135| 
+  136| | Term | Meaning | Defined in |
+  137| |---|---|---|
+  138| | `GAP_INSTRUMENT_CRASH` | A module raised; nothing was measured. Coverage, not severity (#82 sense) | `calibration/unified_audit.py` |
+  139| | `GAP_INSTRUMENT_UNRECOGNIZED_LABEL` | A module returned a status outside `_STATUS_RANK`; it emitted no severity that can be ranked (#84 sense) | `calibration/unified_audit.py` |
+  140| | `ALL_MODULES_GAP_INSTRUMENT_CRASH` | `not_determinable_reason`: every non-measured status is a crash | `calibration/unified_audit.py` |
+  141| | `ALL_MODULES_GAP_INSTRUMENT_UNRECOGNIZED_LABEL` | `not_determinable_reason`: every non-measured status is an unrecognized label | `calibration/unified_audit.py` |
+  142| | `MIXED_UNKNOWN_AND_GAP_INSTRUMENT` | `not_determinable_reason`: UNKNOWN and gap-instrument statuses both present | `calibration/unified_audit.py` |
+
+=== FILE 22 === CONFUSION_REQUEST.md
+
+# Confusion request
+
+Reader: Grok      Read: <the files of this packet>
+
+For every point where you were unsure, guessed, stopped, or needed evidence unavailable in these files, give one row:
+
+```text
+id | term or passage | what was missing | what you did (guessed / stopped / read X as Y) | file and lines | resolves with
+```
+
+- "What you did" is required: include every guess or interpretation, even if later evidence showed it was right.
+- Leave a cell void when you do not know; do not omit the row.
+- One row per point; do not merge separate uncertainties.
+- If you find no confusion, write "none found" and list everything you read.
+- Do not resolve a row by guessing what another reader would say.
+- The inventory is a record of reading, not a score.
