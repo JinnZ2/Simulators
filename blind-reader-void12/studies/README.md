@@ -20,6 +20,7 @@ Instrumentation studies on the readings. Each study's criteria and schema are pi
 | independence | `INDEPENDENCE_LEDGER.md` | every reading, review and check with its independence fields and level (L0-L4, owner's rules in `../MODE_SEQUENCE.md`); unknown fields void, levels capped |
 | open items outside | `OPEN_ITEMS_OUTSIDE.md` | grounding-layers psutil, COLLISIONS evidence pins, TOOL_FINDER quotes: listed only; each waits on an AUDIT of its fix choice |
 | residue register | `RESIDUE_REGISTER.md` | DRAFT sidecar: records kept on purpose, path / kind / reason / source; no marker in any specimen or hashed file |
+| firing log | `confusion/FIRING_LOG.md` | codebook firings (F01-F12) seen outside a test run, one row each; two F01 rows from the 2026-11-19 subliminal-learning filing; not a score, no test arm |
 | failure-point index | `AI_FAILURE_MODES_INDEX.md` | DRAFT, links only: the confusion records and the root `COLLISIONS.md` entries |
 | drafts | `drafts/CONCEPT_MAP_SCHEMA_DRAFT.md`, `drafts/folder_fields_draft.py`, `drafts/folder_fields.draft.json` | proposed per-folder fields for `concept_map.json`; not merged |
 | as received | `as_received/gpt6_g01_g02_instrumentation.patch` | the GPT-6 reader's proposal these designs come from, unedited |
