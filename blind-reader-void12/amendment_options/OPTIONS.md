@@ -158,3 +158,7 @@ A second Claude session, reading PR #317, pointed out that the first version of 
 
 The same message said the owner had written "S3: DECIDED BY THE MEANING OF 'SLOT' -> S3-out" and "THE OTHER RULES: accept as drafted" in an earlier conversation. That message is not in this session's record. It is recorded here as a relayed claim, not as a decision: section 6.1 stands until the owner confirms the other rules in this thread.
 
+Update, 2026-11-18 18:14 Central: the owner wrote in this thread, about those lines, "Yes those were from Claude." So S1, S2, ND, N1, C1 and K1 are recorded as not decided by the owner (drafted by Claude), and section 6.1 stands as written. Each still needs the owner's own yes or no before the amendment text is hashed.
+
+A suggested precedence rule ("only lines marked OWNER are my decisions") was also relayed from Claude, and the owner said so ("So is this"). It is not an owner decision and is not added to `PREREG.md` or `PROTOCOL.md`. If the owner wants it, it takes effect when the owner sends it in a message of their own.
+
