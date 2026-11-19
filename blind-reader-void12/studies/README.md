@@ -9,6 +9,7 @@ Instrumentation studies on the readings. Each study's criteria and schema are pi
 | M02, `slots_carried` scope and traversal | `M02_CRITERIA.md`, `M02_SCHEMA.json`, `instructions/M02_D1.md`..`M02_D3.md` (pinned `66d4f28`) | designed; the three filed readings not yet coded |
 | instrument | `instrument/validate.py`, `instrument/fixtures/`, `instrument/test_instrument.py` | structural validator for M01 and M02; never rejects a reader's choice for disagreeing with key a1; fixtures use neutral names and are checked by rule |
 | arms | `instrument/arms.py`, `instrument/arms_report.txt` | the GPT-6 proposal's validator rule kept as an analysis arm (`validate.py --arm=rule_on`; default `rule_off`), and TAG computed under presence and applicability on every record with the divergence list; nothing chosen. Lives here because `scoring/score_v2.py` is hash-pinned |
+| glossary | `GLOSSARY.md` | one line per term with the path that defines it; **open** marks the owner's undecided questions |
 | confusion records | `CONFUSION_TEMPLATE.md`, `confusion/` | where a reader of the packet or the studies was unsure, guessed or stopped, one row per point; the Claude Code session's own record of its M01 / M02 work (17 rows), and the chat session's record of the same work from its reports (12 rows, filed as received) |
 | as received | `as_received/gpt6_g01_g02_instrumentation.patch` | the GPT-6 reader's proposal these designs come from, unedited |
 
