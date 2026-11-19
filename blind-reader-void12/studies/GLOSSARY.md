@@ -64,4 +64,5 @@ For a reader who has only the reports. Paths are relative to `blind-reader-void1
 | C01-C15 | the Kimi reader's branch inventory | `readings/2026-11-19_kimi-v2-A/followup_as_received.md` |
 | CF01-CF17 | the Claude Code session's confusion record | `studies/confusion/2026-11-19_claude-code_m01-m02.md` |
 | CH01-CH12 | the chat session's confusion record | `studies/confusion/2026-11-19_claude-chat_m01-m02.md` |
+| KC01-KC13 | the Kimi reader's confusion record on the study material (its own ids C01-C12, which also name its earlier, different branch inventory) | `studies/confusion/2026-11-19_kimi_m01-m02.md` |
 | M01, M02 | the studies (the GPT-6 proposal called them G01 / G02, which clashed with its own inventory) | `studies/` |
