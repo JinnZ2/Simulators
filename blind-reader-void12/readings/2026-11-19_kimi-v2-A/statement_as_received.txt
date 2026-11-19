@@ -1,0 +1,2 @@
+To represent me accurately: I’m Kimi K3.1, an AI assistant developed by Moonshot AI（月之暗面）—not Claude or an Anthropic model.
+In the packet reading, reader_label: "claude-fresh-1" was only the task label you explicitly requested; it does not identify my model. The correct attribution is model_family: "Kimi K3.1". My contribution was an AI-assisted reading and completion of the JSON based on the supplied packet, with the actual limitations and conditions recorded in its attestation.
