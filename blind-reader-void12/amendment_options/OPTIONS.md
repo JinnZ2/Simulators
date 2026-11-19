@@ -102,3 +102,63 @@ Not evidence. The choices are about what the rule text means, so they can be set
 - Only the readings filed in this folder were available to score; I scored one under candidate keys (Claude-v2-A). The other Claude reading was made on the v1 packet and is not a v2 reading.
 - The `slots_carried` lists, the grouping key and the brief are not examined here beyond the places that touch the three choices.
 - I did not run the patch's N1 and C1 on any reading except the one above.
+
+## 6. Decision record, the rule, and the derivation (2026-11-18, after PR #315 merged)
+
+### 6.1 Who decided what
+
+Quoted from the owner, in order, 2026-11-18 (Central time 17:37, 17:53, 17:56):
+
+- "s3 was Claude's proposal"
+- "I will Chose on évidence, the closest base to physics, proven mathmatics or has the most proven science behind it…"
+- "Yes please, both" (to an offer that read: "If you choose it on that basis, record it as a decision made today. The patch's claim that you fixed it earlier is still unsupported", together with a derivation script)
+
+Recorded on the strength of those replies; the owner can correct this record.
+
+- **S3: out.** Decided by the owner on 2026-11-18 (about 23:57 UTC), on the criterion above, after seeing the evidence in section 6.2. It was not decided earlier: the received patch's statement that the owner had already fixed S3 is not supported, and a PR that only recorded that (#316) is closed in favour of this section.
+- **Not decided here:** S1, S2, ND, N1, C1, K1 (the received patch says the owner accepted them as drafted; nothing in this folder shows that), R-a, R-b, and the T10 list of revision 1. No key, scorer, brief, reading or `PREREG.md` is changed by this section.
+
+### 6.2 The rule, as one statement
+
+A field is a slot of a term when (TAG) it is defined on every instance of the term and on no instance of any other term, and (INDEPENDENCE) it is an independent input of the term's record: it is not computed from other candidate fields (it is passed in or recorded raw). This replaces R-a and R-b with one test: R-a's two tests are the same test on two kinds of definedness (a record has the field; a rule requires it), and R-b's question of whose record it is becomes a property of the data (is the field on every instance).
+
+Why this rule, in the owner's terms: INDEPENDENCE is the distinction a measurement model draws between input quantities and the output quantity (a function of the inputs adds no degree of freedom); TAG is the condition that a field's definedness is equivalent to the term (a biconditional). Both are about what the sources contain, not about what any reader wrote.
+
+### 6.3 What the rule gives (`derive/derive_specific.py`, output in `derive/`)
+
+The script reads only the packet's sources (numcheck run on 13 records, the cplay constructors run, the TAF code parsed). It reads no key. Compared afterwards with three keys:
+
+| key | same | differs | undetermined on one side only |
+|---|---|---|---|
+| key v2 | 12 | 2 (T10, T12) | 1 (T09) |
+| the patch as received (first patch's key) | 14 | 1 (T10) | 0 |
+| revision 1 | 14 | 1 (T10) | 0 |
+
+- T01 `[]`: the `proposal` record is on one of three UNDECIDED records (exclusive to UNDECIDED, not on every instance).
+- T10 `[missing_path, error]`: one assignment of the GAP status, in the handler that builds the section record; nothing returns or assigns it elsewhere (TAG). `exception_type` is dropped by INDEPENDENCE: it is `type(e).__name__` and `error` is `f"{type(e).__name__}: {e}"`, so on a corpus of 13 exceptions `error` determines `exception_type` and not the reverse. `missing_path` is not determined by `error` (the corpus has two exceptions with the same message and different `filename`). No key lists exactly this: key v2 lists six coverage fields, the first patch's key has one name more (`exception_type`) and revision 1 one name fewer (`error`).
+- T14 `[sigma, basis]` (required only for CLOSED_WITHIN), T12 `[triggers]`, T05 unchanged (`covers_effect`, `reason` are set by the constructor and are not parameters, so they are computed from them and are not slots; T12's `typed`, `untyped` likewise). The parameters of T03, T04, T05 vary freely (4 of 4, 8 of 8, 32 of 32 combinations of two values accepted); T12 accepts 2 of 4 because an empty `triggers` list is refused (a constraint on a value, not a dependence between fields), T08 and T09 undetermined because their routes disagree.
+- Five mutation checks pass: with a corpus where every UNDECIDED record carries a proposal, T01 gets the proposal fields; with the GAP status also returned elsewhere, T10 falls back to `[missing_path]`; with a second status requiring `sigma`, T14 drops it; with `exception_type` made an independent input (`len(e.args)`), T10 gets it back; with `exception_type` computed from `error` by another route, it is dropped. The rule changes its answer when the evidence changes.
+
+### 6.4 Limits
+
+- I wrote the rule after seeing the first patch's key and the candidate scores (`evidence/`). Agreement with the first patch's key on 14 of 15 shows the rule is mechanical and applied the same way to all terms, including T01, where the patch's own text was inconsistent. It does not show the key is right.
+- The numcheck lists depend on the 13-record corpus. Adding records can only shrink the "every instance" set and grow the "other terms" set, so the three empty lists are robust; a non-empty list would be an upper bound.
+- The independence test on the TAF section record is empirical: a dependence it finds holds on the 13-exception corpus, and an exception class that breaks it would be a counter-example. The corpus was built to break each dependence that is not real (same message, different filename; same message text, different `args`); it cannot prove a dependence in general. For numcheck records there is no independence test, because every numcheck list is empty.
+- The T10 result relies on one file. A runner outside `unified_audit.py` that returns the GAP string would break the biconditional; none is in the packet.
+- T09's text route is noisy: it picks up `MIXED_UNKNOWN_AND_GAP_INSTRUMENT` (a status label, not a field) beside `expiry_condition`. It differs from the code route (`[]`) either way, so T09 stays undetermined; the script reports the route as found and does not tidy it.
+- Whether the brief's word "slot" means an independent coordinate is a definition, not a physical fact. The mathematics says which definitions are coherent; whether readers follow it is a question for readers.
+
+### 6.5 Open
+
+The owner has not yet decided whether to adopt the rule above. Its T10 list (`[missing_path, error]`) is neither the first patch's (`[missing_path, error, exception_type]`) nor revision 1's (`[missing_path]`); the other 14 terms agree with revision 1, and 14 with the first patch's key. If the rule is adopted, the amendment text needs its own edit to say it, drop the sentence that cites the reading's agreement as a reason, and correct the T01 explanation ("every key on it is on every record" is not true of `bisection` and `formula`; `[]` follows from the tag test).
+
+### 6.6 Review finding on the first version of this section (2026-11-18, later the same hour)
+
+A second Claude session, reading PR #317, pointed out that the first version of the script applied INDEPENDENCE only to the cplay constructors (and by a weak test: building each object twice passes for any deterministic constructor). Checked against `unified_audit.py` lines 486-488: correct. `exception_type` is a function of `error`. The script now tests independence on every route (see its docstring), the first version's T10 list `[missing_path, error, exception_type]` was wrong under the rule's own text, and the table and bullets above are corrected. The same session expected `[missing_path, error]` before the script was run; the script gives that result from the sources.
+
+The same message said the owner had written "S3: DECIDED BY THE MEANING OF 'SLOT' -> S3-out" and "THE OTHER RULES: accept as drafted" in an earlier conversation. That message is not in this session's record. It is recorded here as a relayed claim, not as a decision: section 6.1 stands until the owner confirms the other rules in this thread.
+
+Update, 2026-11-18 18:14 Central: the owner wrote in this thread, about those lines, "Yes those were from Claude." So S1, S2, ND, N1, C1 and K1 are recorded as not decided by the owner (drafted by Claude), and section 6.1 stands as written. Each still needs the owner's own yes or no before the amendment text is hashed.
+
+A suggested precedence rule ("only lines marked OWNER are my decisions") was also relayed from Claude, and the owner said so ("So is this"). It is not an owner decision and is not added to `PREREG.md` or `PROTOCOL.md`. If the owner wants it, it takes effect when the owner sends it in a message of their own.
+

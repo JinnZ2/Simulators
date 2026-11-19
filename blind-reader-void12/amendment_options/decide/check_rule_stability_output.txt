@@ -1,0 +1,25 @@
+A1 determinism: two fresh runs byte-identical: True ; mutation checks pass: True
+A2 numcheck corpus: 600 records accepted (0 inputs rejected by the checker), verdict counts {"BOTH_HOLD": 3, "FAILS": 86, "HOLDS": 64, "MIXED": 15, "ONE_FAILS": 50, "UNDECIDED": 52, "VOID": 330}
+   derived lists: T01 []  T07 []  T11 [] ; UNDECIDED records carrying a proposal: 21 of 52 ; exclusive-to-UNDECIDED-but-not-universal paths: 14
+   -> A2 holds
+A3 exception corpus (13 exceptions): base T10 ['missing_path', 'error']
+   single removals that change T10: none (of 13)
+   pair removals that change T10: 3 of 78: [("E('x')", "E('x')"), ("E('x')", "E('x')"), ("E('x')", "E('x')")]
+   -> A3 holds
+A4 constructor stability under a second filler and a second, disjoint pool:
+   token-constructor lists unchanged: {'cplay:UNKNOWN': True, 'cplay:ABSENT_AT_SENSITIVITY': True, 'cplay:ExpiryTrigger': True, 'cplay:VOID': True, 'shared': True} ; Reading-requirement lists unchanged: True ; free-variation counts unchanged: True
+   -> A4 holds
+A5 reader independence: the derivation functions mention none of scoring / readings / key_v2 / response.json / COMPARE: True 
+   (keys are opened only in main(), after derive_all has returned.)
+   -> A5 holds
+A6 routes that yield a non-empty list and the independence test applied:
+   cplay constructors (T04, T05, T12)               computed attributes dropped; parameters probed for free variation [yes]
+   cplay Reading requirement table (T14)            required fields probed for free variation: {"CLOSED_WITHIN": "4 of 4 combinations accepted", "CRASHED": "4 of 4 combinations accepted"} [yes]
+   TAF section record (T10)                         functional dependence on 13 exceptions [yes]
+   TAF coverage entries (T10 missing_path, T09)     the one exclusive key; module and input are both `name` in the GAP entry but are not exclusive, so are dropped by TAG [n/a (one candidate)]
+   numcheck records (T01, T07, T11)                 every list is empty on 600 records, nothing to test [n/a (empty)]
+   TAF notation (T02, T15)                          one parameter / a fixed key tuple from the source; no dependence test [NO TEST]
+   Noted gap: T02 (`value`) and T15 (the four EXPIRY_KEYS) are read from a notation / a constant and have no dependence test; they are single named parameters or a fixed tuple in the source.
+   -> A6 holds (for the three routes that derive a list from instances)
+
+summary: A1 holds, A2 holds, A3 holds, A4 holds, A5 holds, A6 holds

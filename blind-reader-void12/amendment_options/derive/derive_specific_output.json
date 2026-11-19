@@ -1,0 +1,261 @@
+{
+ "comparison": {
+  "cplay:ABSENT_AT_SENSITIVITY": {
+   "derived": [
+    "limit",
+    "basis",
+    "effect_size",
+    "conditions",
+    "ladder"
+   ],
+   "vs": {
+    "p1": "same",
+    "r1": "same",
+    "v2": "same"
+   }
+  },
+  "cplay:CLOSED_WITHIN": {
+   "derived": [
+    "basis",
+    "sigma"
+   ],
+   "vs": {
+    "p1": "same",
+    "r1": "same",
+    "v2": "same"
+   }
+  },
+  "cplay:CRASHED": {
+   "derived": null,
+   "vs": {
+    "p1": "n/d = n/d",
+    "r1": "n/d = n/d",
+    "v2": "n/d = n/d"
+   }
+  },
+  "cplay:ExpiryTrigger": {
+   "derived": [
+    "kind",
+    "target",
+    "condition"
+   ],
+   "vs": {
+    "p1": "same",
+    "r1": "same",
+    "v2": "same"
+   }
+  },
+  "cplay:OK": {
+   "derived": [],
+   "vs": {
+    "p1": "same",
+    "r1": "same",
+    "v2": "same"
+   }
+  },
+  "cplay:UNKNOWN": {
+   "derived": [
+    "triggers"
+   ],
+   "vs": {
+    "p1": "same",
+    "r1": "same",
+    "v2": "DIFFERS"
+   }
+  },
+  "cplay:UNRESOLVED": {
+   "derived": [],
+   "vs": {
+    "p1": "same",
+    "r1": "same",
+    "v2": "same"
+   }
+  },
+  "cplay:VOID": {
+   "derived": [],
+   "vs": {
+    "p1": "same",
+    "r1": "same",
+    "v2": "same"
+   }
+  },
+  "fa:HOLDS": {
+   "derived": [],
+   "vs": {
+    "p1": "same",
+    "r1": "same",
+    "v2": "same"
+   }
+  },
+  "fa:UNDECIDED": {
+   "derived": [],
+   "vs": {
+    "p1": "same",
+    "r1": "same",
+    "v2": "same"
+   }
+  },
+  "fa:VOID": {
+   "derived": [],
+   "vs": {
+    "p1": "same",
+    "r1": "same",
+    "v2": "same"
+   }
+  },
+  "taf:ABSENT_AT_SENSITIVITY": {
+   "derived": [
+    "value"
+   ],
+   "vs": {
+    "p1": "same",
+    "r1": "same",
+    "v2": "same"
+   }
+  },
+  "taf:GAP_INSTRUMENT_CRASH": {
+   "derived": [
+    "missing_path",
+    "error"
+   ],
+   "vs": {
+    "p1": "DIFFERS",
+    "r1": "DIFFERS",
+    "v2": "DIFFERS"
+   }
+  },
+  "taf:UNKNOWN": {
+   "derived": null,
+   "vs": {
+    "p1": "n/d = n/d",
+    "r1": "n/d = n/d",
+    "v2": "n/d vs list"
+   }
+  },
+  "taf:expiry_condition": {
+   "derived": [
+    "instrument_class",
+    "sensitivity",
+    "protocol",
+    "provenance"
+   ],
+   "vs": {
+    "p1": "same",
+    "r1": "same",
+    "v2": "same"
+   }
+  }
+ },
+ "derived": {
+  "cplay:ABSENT_AT_SENSITIVITY": {
+   "parameters": [
+    "limit",
+    "basis",
+    "effect_size",
+    "conditions",
+    "ladder"
+   ],
+   "slots": [
+    "limit",
+    "basis",
+    "effect_size",
+    "conditions",
+    "ladder"
+   ]
+  },
+  "cplay:CLOSED_WITHIN": {
+   "slots": [
+    "basis",
+    "sigma"
+   ]
+  },
+  "cplay:CRASHED": {
+   "routes": {
+    "Reading fields a rule requires for CRASHED": [
+     "exception",
+     "path"
+    ],
+    "parameters of crash()": [
+     "exc",
+     "path",
+     "module",
+     "inputs",
+     "expiry_condition"
+    ]
+   },
+   "slots": null
+  },
+  "cplay:ExpiryTrigger": {
+   "parameters": [
+    "kind",
+    "target",
+    "condition"
+   ],
+   "slots": [
+    "kind",
+    "target",
+    "condition"
+   ]
+  },
+  "cplay:OK": {
+   "slots": []
+  },
+  "cplay:UNKNOWN": {
+   "parameters": [
+    "reason",
+    "triggers"
+   ],
+   "slots": [
+    "triggers"
+   ]
+  },
+  "cplay:UNRESOLVED": {
+   "slots": []
+  },
+  "cplay:VOID": {
+   "parameters": [
+    "state",
+    "reason"
+   ],
+   "slots": []
+  },
+  "fa:HOLDS": {
+   "slots": []
+  },
+  "fa:UNDECIDED": {
+   "slots": []
+  },
+  "fa:VOID": {
+   "slots": []
+  },
+  "taf:ABSENT_AT_SENSITIVITY": {
+   "slots": [
+    "value"
+   ]
+  },
+  "taf:GAP_INSTRUMENT_CRASH": {
+   "slots": [
+    "missing_path",
+    "error"
+   ]
+  },
+  "taf:UNKNOWN": {
+   "routes": {
+    "code: coverage entries of kind UNKNOWN, keys no other kind carries": [],
+    "glossary: terms whose row text names an UNKNOWN slot": [
+     "MIXED_UNKNOWN_AND_GAP_INSTRUMENT",
+     "expiry_condition"
+    ]
+   },
+   "slots": null
+  },
+  "taf:expiry_condition": {
+   "slots": [
+    "instrument_class",
+    "sensitivity",
+    "protocol",
+    "provenance"
+   ]
+  }
+ }
+}
