@@ -1,0 +1,94 @@
+M01 coding of the filed v2 readings (descriptive; the coder had seen all three readings; see M01_CRITERIA.md section 1)
+readers: claude=2026-11-18_claude-v2-A, kimi=2026-11-19_kimi-v2-A, gpt6=2026-11-19_gpt6-v2 ; condition D0 ; one coder (Claude Code session)
+
+1. per field: L = listed, . = not listed ; key a1: L / . / n/d
+
+term field                       origin  cases  claude kimi  gpt6    key a1 | presence / applicability / requirement
+T01  first_straddling_piece      COMPUTE C      L     .     .       .   | SHARED / SHARED / NONE  [coder]
+T01  first_undecided_subbox      COMPUTE C      L     L     .       .   | SHARED / SHARED / NONE  [coder]
+T01  proposal                    COMPUTE BF     L     L     .       .   | SHARED / SOME_EXCLUSIVE / NONE  [coder]
+T01  straddle_at_depth_limit     COMPUTE C      L     .     .       .   | SHARED / SHARED / NONE  [coder]
+T01  undecided_at_depth_limit    COMPUTE C      L     .     .       .   | SHARED / SHARED / NONE  [coder]
+T02  value                       DOCUMEN D      L     L     .       L   | NO_INSTANCE / NO_INSTANCE / NO_INSTANCE
+T04  condition                   RAW_INP A      L     L     L       L   | ALL_EXCLUSIVE / ALL_EXCLUSIVE / ALL_EXCLUSIVE
+T04  kind                        RAW_INP A      L     L     L       L   | ALL_EXCLUSIVE / ALL_EXCLUSIVE / ALL_EXCLUSIVE
+T04  target                      RAW_INP A      L     L     L       L   | ALL_EXCLUSIVE / ALL_EXCLUSIVE / ALL_EXCLUSIVE
+T05  basis                       RAW_INP A      L     L     L       L   | ALL_EXCLUSIVE / ALL_EXCLUSIVE / ALL_EXCLUSIVE
+T05  conditions                  RAW_INP A      L     L     L       L   | ALL_EXCLUSIVE / ALL_EXCLUSIVE / ALL_EXCLUSIVE
+T05  covers_effect               COMPUTE B      L     L     L       .   | ALL_EXCLUSIVE / ALL_EXCLUSIVE / NONE
+T05  effect_size                 RAW_INP A      L     L     L       L   | ALL_EXCLUSIVE / ALL_EXCLUSIVE / ALL_EXCLUSIVE
+T05  ladder                      RAW_INP A      L     L     L       L   | ALL_EXCLUSIVE / SOME_EXCLUSIVE / NONE
+T05  limit                       RAW_INP A      L     L     L       L   | ALL_EXCLUSIVE / ALL_EXCLUSIVE / ALL_EXCLUSIVE
+T07  first_subbox_with_no_value  COMPUTE C      L     L     .       .   | SHARED / SHARED / NONE  [coder]
+T07  void_reason                 RAW_INP A      L     L     L       .   | SHARED / ALL_EXCLUSIVE / NONE  [coder]
+T08  call                        DOCUMEN GD     L     .     .       .   | NO_INSTANCE / NO_INSTANCE / NO_INSTANCE
+T08  exc                         PARAMET GEC    .     L     .       .   | NONE / NONE / SHARED
+T08  exception                   RAW_INP GA     L     L     L       L   | SHARED / SHARED / ALL_EXCLUSIVE
+T08  inputs                      PARAMET GEC    L     L     L       .   | NONE / NONE / SHARED
+T08  path                        RAW_INP GA     L     L     L       L   | SHARED / SHARED / ALL_EXCLUSIVE
+T09  expiry_condition            RAW_INP GC     L     .     .       n/d | SHARED / SHARED / NONE
+T09  expiry_source               DOCUMEN GD     L     .     .       n/d | NO_INSTANCE / NO_INSTANCE / NO_INSTANCE
+T10  error                       RAW_INP A      L     L     .       L   | ALL_EXCLUSIVE / ALL_EXCLUSIVE / NONE
+T10  exception_type              COMPUTE B      L     L     .       .   | ALL_EXCLUSIVE / ALL_EXCLUSIVE / NONE
+T10  missing_path                RAW_INP A      L     L     .       L   | ALL_EXCLUSIVE / SOME_EXCLUSIVE / NONE
+T12  triggers                    PARAMET E      L     L     .       L   | NONE / NONE / ALL_EXCLUSIVE
+T12  typed                       COMPUTE B      L     L     L       .   | ALL_EXCLUSIVE / ALL_EXCLUSIVE / NONE
+T12  untyped                     COMPUTE B      L     L     L       .   | ALL_EXCLUSIVE / SOME_EXCLUSIVE / NONE
+T14  basis                       RAW_INP A      L     L     L       L   | SHARED / SHARED / ALL_EXCLUSIVE
+T14  sigma                       RAW_INP A      L     L     L       L   | SHARED / SHARED / ALL_EXCLUSIVE
+T15  instrument                  PARAMET EC     .     L     .       .   | NONE / NONE / NONE
+T15  instrument_class            RAW_INP A      L     L     L       L   | ALL_EXCLUSIVE / ALL_EXCLUSIVE / ALL_EXCLUSIVE
+T15  protocol                    RAW_INP A      L     L     L       L   | ALL_EXCLUSIVE / ALL_EXCLUSIVE / ALL_EXCLUSIVE
+T15  provenance                  RAW_INP A      L     L     L       L   | ALL_EXCLUSIVE / ALL_EXCLUSIVE / ALL_EXCLUSIVE
+T15  sensitivity                 RAW_INP A      L     L     L       L   | ALL_EXCLUSIVE / SOME_EXCLUSIVE / ALL_EXCLUSIVE
+
+2. per case cell: fields in the cell, and how many each reader / key a1 lists (a field can sit in several cells)
+
+A exclusive raw field             n=19  claude 19  kimi 19  gpt6 17  key a1 18
+B exclusive computed field        n=5   claude 5  kimi 5  gpt6 3  key a1 0
+C shared field                    n=9   claude 7  kimi 5  gpt6 1  key a1 0 (+1 n/d)
+D documented only                 n=3   claude 3  kimi 1  gpt6 0  key a1 1 (+1 n/d)
+E parameter, not a stored field   n=4   claude 2  kimi 4  gpt6 1  key a1 1
+F on some instances only          n=1   claude 1  kimi 1  gpt6 0  key a1 0
+G two routes to the instance      n=7   claude 6  kimi 4  gpt6 3  key a1 2 (+2 n/d)
+
+3. same list, different stated reasons: fields all three readers list, with each reader's coded basis_kind
+
+   T04  condition          REQUIRED         REQUIRED         -                partly stated
+   T04  kind               REQUIRED         REQUIRED         -                partly stated
+   T04  target             REQUIRED         REQUIRED         -                partly stated
+   T05  basis              PARAMETER        -                STORED_FIELD     DIFFER
+   T05  conditions         PARAMETER        -                STORED_FIELD     DIFFER
+   T05  covers_effect      DERIVED_BUT_TIED DERIVED_BUT_TIED DERIVED_BUT_TIED same
+   T05  effect_size        PARAMETER        -                STORED_FIELD     DIFFER
+   T05  ladder             PARAMETER        -                STORED_FIELD     DIFFER
+   T05  limit              PARAMETER        -                STORED_FIELD     DIFFER
+   T07  void_reason        APPLICABLE_ONLY  APPLICABLE_ONLY  APPLICABLE_ONLY  same
+   T08  exception          REQUIRED         REQUIRED         REQUIRED         same
+   T08  inputs             DOCUMENTED       PARAMETER        DOCUMENTED       DIFFER
+   T08  path               REQUIRED         REQUIRED         REQUIRED         same
+   T12  typed              STORED_FIELD     STORED_FIELD     STORED_FIELD     same
+   T12  untyped            STORED_FIELD     STORED_FIELD     STORED_FIELD     same
+   T14  basis              REQUIRED         REQUIRED         REQUIRED         same
+   T14  sigma              REQUIRED         REQUIRED         REQUIRED         same
+   T15  instrument_class   STORED_FIELD     STORED_FIELD     -                partly stated
+   T15  protocol           STORED_FIELD     STORED_FIELD     -                partly stated
+   T15  provenance         STORED_FIELD     STORED_FIELD     -                partly stated
+   T15  sensitivity        STORED_FIELD     STORED_FIELD     -                partly stated
+   fields listed by all three with stated reasons of different kinds: 6 (a lower bound: silence is not coded as a reason)
+
+4. uncertainty the reader stated about a field
+
+   claude T01 straddle_at_depth_limit: 'straddle_at_depth_limit and undecided_at_depth_limit are keys inside nested records (bisection, subboxes). I put them in specific because they are tied to this verdict, and I am unsure that is right'
+   claude T01 undecided_at_depth_limit: 'straddle_at_depth_limit and undecided_at_depth_limit are keys inside nested records (bisection, subboxes). I put them in specific because they are tied to this verdict, and I am unsure that is right'
+
+5. readers agree with each other and not with key a1 (PREREG v2 case (a): a reason to re-read the key's derivation)
+
+   T05  covers_effect      readers all LISTED, key a1 NOT_LISTED ; origin COMPUTED ; cases B
+   T07  void_reason        readers all LISTED, key a1 NOT_LISTED ; origin RAW_INPUT ; cases A
+   T08  inputs             readers all LISTED, key a1 NOT_LISTED ; origin PARAMETER_ONLY ; cases GEC
+   T12  typed              readers all LISTED, key a1 NOT_LISTED ; origin COMPUTED ; cases B
+   T12  untyped            readers all LISTED, key a1 NOT_LISTED ; origin COMPUTED ; cases B
+
+inputs: key_v2_a1.json a7309046319e6221 ; check_rules_output.txt 5693702100d1c5cc ; numcheck check.py f6df0dc196f5ac27
+records: 111 (3 readers x 37 catalog fields)

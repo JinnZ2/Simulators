@@ -1,0 +1,4142 @@
+[
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T01",
+  "term": "fa:UNDECIDED",
+  "field": "first_straddling_piece",
+  "source": {
+   "location": "check.py 201, 220, 240",
+   "origin": "COMPUTED",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SHARED",
+   "requirement_scope": "NONE",
+   "source_basis": "inside the bisection record (same key set whatever the verdict); set whenever a piece straddles at the limit, MIXED included",
+   "provenance": "CODER_INFERRED",
+   "routes": 1,
+   "cases": [
+    "C"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "first_straddling_piece 240, returns None meaning UNDECIDED",
+   "basis_kind": "OTHER",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T01",
+  "term": "fa:UNDECIDED",
+  "field": "first_undecided_subbox",
+  "source": {
+   "location": "check.py 513-528, 538, 541-552",
+   "origin": "COMPUTED",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SHARED",
+   "requirement_scope": "NONE",
+   "source_basis": "presence parsed (assigned on every intersection record); populated when a subbox is undecided at the depth limit, which can also happen on a MIXED or ONE_FAILS record (verdict precedence 541-552); the 13-record derive corpus did not show that",
+   "provenance": "CODER_INFERRED",
+   "routes": 1,
+   "cases": [
+    "C"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "first_undecided_subbox 520/538, UNDECIDED 549-550",
+   "basis_kind": "OTHER",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T01",
+  "term": "fa:UNDECIDED",
+  "field": "proposal",
+  "source": {
+   "location": "check.py 112-119, 296-350, 421",
+   "origin": "COMPUTED",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SOME_EXCLUSIVE",
+   "requirement_scope": "NONE",
+   "source_basis": "presence parsed from _blank (every record); populated only on an UNDECIDED point record at tolerance 0 with nothing against it (lines 304-305, 421); check_rules_output.txt agrees on 12 records",
+   "provenance": "CODER_INFERRED",
+   "routes": 1,
+   "cases": [
+    "B",
+    "F"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "proposal exists only for UNDECIDED at tolerance 0, so I put 'proposal' in specific",
+   "basis_kind": "APPLICABLE_ONLY",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T01",
+  "term": "fa:UNDECIDED",
+  "field": "straddle_at_depth_limit",
+  "source": {
+   "location": "check.py 200, 219, 226-227",
+   "origin": "COMPUTED",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SHARED",
+   "requirement_scope": "NONE",
+   "source_basis": "a count inside the bisection record, whose key set is the same whatever the verdict (check_rules_output.txt); non-zero on a MIXED record too (227: MIXED wins when pieces hold and fail)",
+   "provenance": "CODER_INFERRED",
+   "routes": 1,
+   "cases": [
+    "C"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "straddle_at_depth_limit and undecided_at_depth_limit are keys inside nested records (bisection, subboxes). I put them in specific because they are tied to this verdict, and I am unsure that is right",
+   "basis_kind": "APPLICABLE_ONLY",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": true,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T01",
+  "term": "fa:UNDECIDED",
+  "field": "undecided_at_depth_limit",
+  "source": {
+   "location": "check.py 479-480, 519, 533",
+   "origin": "COMPUTED",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SHARED",
+   "requirement_scope": "NONE",
+   "source_basis": "a count inside rec['subboxes'] on every intersection record; non-zero on MIXED / ONE_FAILS too",
+   "provenance": "CODER_INFERRED",
+   "routes": 1,
+   "cases": [
+    "C"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "straddle_at_depth_limit and undecided_at_depth_limit are keys inside nested records (bisection, subboxes). I put them in specific because they are tied to this verdict, and I am unsure that is right",
+   "basis_kind": "APPLICABLE_ONLY",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": true,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T02",
+  "term": "taf:ABSENT_AT_SENSITIVITY",
+  "field": "value",
+  "source": {
+   "location": "glossary.md 129; expiry_register.py 228-235",
+   "origin": "DOCUMENTED",
+   "presence_scope": "NO_INSTANCE",
+   "applicability_scope": "NO_INSTANCE",
+   "requirement_scope": "NO_INSTANCE",
+   "source_basis": "parsed: the notation's parameter; the glossary says no slot holds the state",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "D"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "The notation parameter is spelled '<value>' in the glossary",
+   "basis_kind": "DOCUMENTED",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T04",
+  "term": "cplay:ExpiryTrigger",
+  "field": "condition",
+  "source": {
+   "location": "tokens.py 64-72",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran ExpiryTrigger: parameter and stored field; empty value raises TokenError: True; absent from a plain Token",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "kind, target and condition all required",
+   "basis_kind": "REQUIRED",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T04",
+  "term": "cplay:ExpiryTrigger",
+  "field": "kind",
+  "source": {
+   "location": "tokens.py 64-72",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran ExpiryTrigger: parameter and stored field; empty value raises TokenError: True; absent from a plain Token",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "kind, target and condition all required",
+   "basis_kind": "REQUIRED",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T04",
+  "term": "cplay:ExpiryTrigger",
+  "field": "target",
+  "source": {
+   "location": "tokens.py 64-72",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran ExpiryTrigger: parameter and stored field; empty value raises TokenError: True; absent from a plain Token",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "kind, target and condition all required",
+   "basis_kind": "REQUIRED",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T05",
+  "term": "cplay:ABSENT_AT_SENSITIVITY",
+  "field": "basis",
+  "source": {
+   "location": "tokens.py 92-104",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran absent_at_sensitivity: parameter, stored; None raises: True",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "absent_at_sensitivity(limit, basis, effect_size, conditions, ladder=None) sets those attributes plus covers_effect on a Token",
+   "basis_kind": "PARAMETER",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T05",
+  "term": "cplay:ABSENT_AT_SENSITIVITY",
+  "field": "conditions",
+  "source": {
+   "location": "tokens.py 92-104",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran absent_at_sensitivity: parameter, stored; None raises: True",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "absent_at_sensitivity(limit, basis, effect_size, conditions, ladder=None) sets those attributes plus covers_effect on a Token",
+   "basis_kind": "PARAMETER",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T05",
+  "term": "cplay:ABSENT_AT_SENSITIVITY",
+  "field": "covers_effect",
+  "source": {
+   "location": "tokens.py 103",
+   "origin": "COMPUTED",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "NONE",
+   "source_basis": "ran absent_at_sensitivity: stored but not a parameter (limit <= effect_size)",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "B"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "covers_effect is a reading added here that refuses nothing",
+   "basis_kind": "DERIVED_BUT_TIED",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T05",
+  "term": "cplay:ABSENT_AT_SENSITIVITY",
+  "field": "effect_size",
+  "source": {
+   "location": "tokens.py 92-104",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran absent_at_sensitivity: parameter, stored; None raises: True",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "absent_at_sensitivity(limit, basis, effect_size, conditions, ladder=None) sets those attributes plus covers_effect on a Token",
+   "basis_kind": "PARAMETER",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T05",
+  "term": "cplay:ABSENT_AT_SENSITIVITY",
+  "field": "ladder",
+  "source": {
+   "location": "tokens.py 92-104",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "SOME_EXCLUSIVE",
+   "requirement_scope": "NONE",
+   "source_basis": "ran absent_at_sensitivity: parameter, stored; None raises: True; required only when basis == LADDER (DECLARED with ladder=None accepted)",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "absent_at_sensitivity(limit, basis, effect_size, conditions, ladder=None) sets those attributes plus covers_effect on a Token",
+   "basis_kind": "PARAMETER",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T05",
+  "term": "cplay:ABSENT_AT_SENSITIVITY",
+  "field": "limit",
+  "source": {
+   "location": "tokens.py 92-104",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran absent_at_sensitivity: parameter, stored; None raises: True",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "absent_at_sensitivity(limit, basis, effect_size, conditions, ladder=None) sets those attributes plus covers_effect on a Token",
+   "basis_kind": "PARAMETER",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T07",
+  "term": "fa:VOID",
+  "field": "first_subbox_with_no_value",
+  "source": {
+   "location": "check.py 516-517, 539, 541-548",
+   "origin": "COMPUTED",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SHARED",
+   "requirement_scope": "NONE",
+   "source_basis": "presence parsed (every intersection record); set when a subbox has no value at the limit, which a ONE_FAILS / MIXED record can also carry; absent from point VOID records",
+   "provenance": "CODER_INFERRED",
+   "routes": 1,
+   "cases": [
+    "C"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "intersection VOID with first_subbox_with_no_value",
+   "basis_kind": "APPLICABLE_ONLY",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T07",
+  "term": "fa:VOID",
+  "field": "void_reason",
+  "source": {
+   "location": "check.py 112, 436-439, 545-548, 553-556, 571-574",
+   "origin": "RAW_INPUT",
+   "presence_scope": "SHARED",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "NONE",
+   "source_basis": "presence parsed from _blank (every record, None); set on every VOID path and on no other (the reason string is recorded raw)",
+   "provenance": "CODER_INFERRED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "void_reason set on the VOID paths",
+   "basis_kind": "APPLICABLE_ONLY",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T08",
+  "term": "cplay:CRASHED",
+  "field": "call",
+  "source": {
+   "location": "COMBINED_SPEC line 321",
+   "origin": "DOCUMENTED",
+   "presence_scope": "NO_INSTANCE",
+   "applicability_scope": "NO_INSTANCE",
+   "requirement_scope": "NO_INSTANCE",
+   "source_basis": "named in the spec's crash-record notation; no record built by the packet's code has it",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 2,
+   "cases": [
+    "G",
+    "D"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "'call' and 'inputs' are names in the spec prose only",
+   "basis_kind": "DOCUMENTED",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T08",
+  "term": "cplay:CRASHED",
+  "field": "exc",
+  "source": {
+   "location": "axes.py 81-88",
+   "origin": "PARAMETER_ONLY",
+   "presence_scope": "NONE",
+   "applicability_scope": "NONE",
+   "requirement_scope": "SHARED",
+   "source_basis": "ran crash(): a parameter stored under no field of that name; crash() builds a CRASHED Reading AND a GAP_INSTRUMENT_CRASH CoverageEntry, so the call is shared by two terms",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 2,
+   "cases": [
+    "G",
+    "E",
+    "C"
+   ]
+  },
+  "reader": {
+   "listed": "NOT_LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T08",
+  "term": "cplay:CRASHED",
+  "field": "exception",
+  "source": {
+   "location": "axes.py 41-66",
+   "origin": "RAW_INPUT",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SHARED",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran reading(): a field of every Reading; OK accepts it too; required only for CRASHED: True",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 2,
+   "cases": [
+    "G",
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "CRASHED must be on INSTRUMENT and needs exception and path",
+   "basis_kind": "REQUIRED",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T08",
+  "term": "cplay:CRASHED",
+  "field": "inputs",
+  "source": {
+   "location": "axes.py 81-88",
+   "origin": "PARAMETER_ONLY",
+   "presence_scope": "NONE",
+   "applicability_scope": "NONE",
+   "requirement_scope": "SHARED",
+   "source_basis": "ran crash(): a parameter stored under no field of that name; crash() builds a CRASHED Reading AND a GAP_INSTRUMENT_CRASH CoverageEntry, so the call is shared by two terms",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 2,
+   "cases": [
+    "G",
+    "E",
+    "C"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "'call' and 'inputs' are names in the spec prose only",
+   "basis_kind": "DOCUMENTED",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T08",
+  "term": "cplay:CRASHED",
+  "field": "path",
+  "source": {
+   "location": "axes.py 41-66",
+   "origin": "RAW_INPUT",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SHARED",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran reading(): a field of every Reading; OK accepts it too; required only for CRASHED: True",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 2,
+   "cases": [
+    "G",
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "CRASHED must be on INSTRUMENT and needs exception and path",
+   "basis_kind": "REQUIRED",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T09",
+  "term": "taf:UNKNOWN",
+  "field": "expiry_condition",
+  "source": {
+   "location": "glossary.md 127; unified_audit.py 336-371",
+   "origin": "RAW_INPUT",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SHARED",
+   "requirement_scope": "NONE",
+   "source_basis": "parsed: on every coverage literal (UNKNOWN, INFO, GAP); glossary documents it for PENDING / UNKNOWN slots; value set from module constants",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 2,
+   "cases": [
+    "G",
+    "C"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "expiry_condition and expiry_source are the exits documented for it",
+   "basis_kind": "DOCUMENTED",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "KEY_UNDETERMINED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T09",
+  "term": "taf:UNKNOWN",
+  "field": "expiry_source",
+  "source": {
+   "location": "glossary.md 128",
+   "origin": "DOCUMENTED",
+   "presence_scope": "NO_INSTANCE",
+   "applicability_scope": "NO_INSTANCE",
+   "requirement_scope": "NO_INSTANCE",
+   "source_basis": "parsed: in the glossary only; no code in the packet builds it",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 2,
+   "cases": [
+    "G",
+    "D"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "expiry_condition and expiry_source are the exits documented for it",
+   "basis_kind": "DOCUMENTED",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "KEY_UNDETERMINED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T10",
+  "term": "taf:GAP_INSTRUMENT_CRASH",
+  "field": "error",
+  "source": {
+   "location": "unified_audit.py 485-489",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "NONE",
+   "source_basis": "parsed: section record built only in the raise handler; recorded from the exception",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "_dispatch writes the section record {error, exception_type, missing_path} only on a raise",
+   "basis_kind": "STORED_FIELD",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T10",
+  "term": "taf:GAP_INSTRUMENT_CRASH",
+  "field": "exception_type",
+  "source": {
+   "location": "unified_audit.py 485-489",
+   "origin": "COMPUTED",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "NONE",
+   "source_basis": "parsed: built in the raise handler; type(e).__name__ is the prefix of error (f\"{type(e).__name__}: {e}\"), so a function of error",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "B"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "_dispatch writes the section record {error, exception_type, missing_path} only on a raise",
+   "basis_kind": "STORED_FIELD",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T10",
+  "term": "taf:GAP_INSTRUMENT_CRASH",
+  "field": "missing_path",
+  "source": {
+   "location": "unified_audit.py 336-343, 485-489",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "SOME_EXCLUSIVE",
+   "requirement_scope": "NONE",
+   "source_basis": "parsed: on the GAP coverage literal only (not UNKNOWN / INFO); value is getattr(e, 'filename', None), so None on some instances",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "it is the only kind that carries missing_path",
+   "basis_kind": "STORED_FIELD",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T12",
+  "term": "cplay:UNKNOWN",
+  "field": "triggers",
+  "source": {
+   "location": "tokens.py 81-89",
+   "origin": "PARAMETER_ONLY",
+   "presence_scope": "NONE",
+   "applicability_scope": "NONE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran unknown(): parameter, not stored under that name; no typed trigger raises: True",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "E"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "unknown(reason, triggers) refuses without a typed trigger",
+   "basis_kind": "PARAMETER",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T12",
+  "term": "cplay:UNKNOWN",
+  "field": "typed",
+  "source": {
+   "location": "tokens.py 87-88",
+   "origin": "COMPUTED",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "NONE",
+   "source_basis": "ran unknown(): stored, split out of triggers; empty on some instances: False",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "B"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "the Token gains typed and untyped",
+   "basis_kind": "STORED_FIELD",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T12",
+  "term": "cplay:UNKNOWN",
+  "field": "untyped",
+  "source": {
+   "location": "tokens.py 87-88",
+   "origin": "COMPUTED",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "SOME_EXCLUSIVE",
+   "requirement_scope": "NONE",
+   "source_basis": "ran unknown(): stored, split out of triggers; empty on some instances: True",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "B"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "the Token gains typed and untyped",
+   "basis_kind": "STORED_FIELD",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T14",
+  "term": "cplay:CLOSED_WITHIN",
+  "field": "basis",
+  "source": {
+   "location": "axes.py 41-66",
+   "origin": "RAW_INPUT",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SHARED",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran reading(): a field of every Reading; OK accepts it too; required only for CLOSED_WITHIN: True",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "CLOSED_WITHIN needs a numeric sigma and a basis",
+   "basis_kind": "REQUIRED",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T14",
+  "term": "cplay:CLOSED_WITHIN",
+  "field": "sigma",
+  "source": {
+   "location": "axes.py 41-66",
+   "origin": "RAW_INPUT",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SHARED",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran reading(): a field of every Reading; OK accepts it too; required only for CLOSED_WITHIN: True",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "CLOSED_WITHIN needs a numeric sigma and a basis",
+   "basis_kind": "REQUIRED",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T15",
+  "term": "taf:expiry_condition",
+  "field": "instrument",
+  "source": {
+   "location": "expiry_register.py 58-59",
+   "origin": "PARAMETER_ONLY",
+   "presence_scope": "NONE",
+   "applicability_scope": "NONE",
+   "requirement_scope": "NONE",
+   "source_basis": "parsed: a parameter of E(), stored as instrument_class",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "E",
+    "C"
+   ]
+  },
+  "reader": {
+   "listed": "NOT_LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T15",
+  "term": "taf:expiry_condition",
+  "field": "instrument_class",
+  "source": {
+   "location": "expiry_register.py 53, 58-59, 216-225",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "parsed: EXPIRY_KEYS; exit_state() refuses any other key set; refused if '' or 'void'",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "a dict with instrument_class, sensitivity, protocol, provenance",
+   "basis_kind": "STORED_FIELD",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T15",
+  "term": "taf:expiry_condition",
+  "field": "protocol",
+  "source": {
+   "location": "expiry_register.py 53, 58-59, 216-225",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "parsed: EXPIRY_KEYS; exit_state() refuses any other key set; refused if '' or 'void'",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "a dict with instrument_class, sensitivity, protocol, provenance",
+   "basis_kind": "STORED_FIELD",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T15",
+  "term": "taf:expiry_condition",
+  "field": "provenance",
+  "source": {
+   "location": "expiry_register.py 53, 58-59, 216-225",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "parsed: EXPIRY_KEYS; exit_state() refuses any other key set; refused if '' or 'void'",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "a dict with instrument_class, sensitivity, protocol, provenance",
+   "basis_kind": "STORED_FIELD",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-18_claude-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T15",
+  "term": "taf:expiry_condition",
+  "field": "sensitivity",
+  "source": {
+   "location": "expiry_register.py 53, 58-59, 216-225",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "SOME_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "parsed: EXPIRY_KEYS; exit_state() refuses any other key set; sensitivity may be 'void'",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "a dict with instrument_class, sensitivity, protocol, provenance",
+   "basis_kind": "STORED_FIELD",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T01",
+  "term": "fa:UNDECIDED",
+  "field": "first_straddling_piece",
+  "source": {
+   "location": "check.py 201, 220, 240",
+   "origin": "COMPUTED",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SHARED",
+   "requirement_scope": "NONE",
+   "source_basis": "inside the bisection record (same key set whatever the verdict); set whenever a piece straddles at the limit, MIXED included",
+   "provenance": "CODER_INFERRED",
+   "routes": 1,
+   "cases": [
+    "C"
+   ]
+  },
+  "reader": {
+   "listed": "NOT_LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T01",
+  "term": "fa:UNDECIDED",
+  "field": "first_undecided_subbox",
+  "source": {
+   "location": "check.py 513-528, 538, 541-552",
+   "origin": "COMPUTED",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SHARED",
+   "requirement_scope": "NONE",
+   "source_basis": "presence parsed (assigned on every intersection record); populated when a subbox is undecided at the depth limit, which can also happen on a MIXED or ONE_FAILS record (verdict precedence 541-552); the 13-record derive corpus did not show that",
+   "provenance": "CODER_INFERRED",
+   "routes": 1,
+   "cases": [
+    "C"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "first_undecided_subbox is specific to the intersection UNDECIDED path",
+   "basis_kind": "APPLICABLE_ONLY",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T01",
+  "term": "fa:UNDECIDED",
+  "field": "proposal",
+  "source": {
+   "location": "check.py 112-119, 296-350, 421",
+   "origin": "COMPUTED",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SOME_EXCLUSIVE",
+   "requirement_scope": "NONE",
+   "source_basis": "presence parsed from _blank (every record); populated only on an UNDECIDED point record at tolerance 0 with nothing against it (lines 304-305, 421); check_rules_output.txt agrees on 12 records",
+   "provenance": "CODER_INFERRED",
+   "routes": 1,
+   "cases": [
+    "B",
+    "F"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "proposal is generated only for qualifying UNDECIDED point checks",
+   "basis_kind": "APPLICABLE_ONLY",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T01",
+  "term": "fa:UNDECIDED",
+  "field": "straddle_at_depth_limit",
+  "source": {
+   "location": "check.py 200, 219, 226-227",
+   "origin": "COMPUTED",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SHARED",
+   "requirement_scope": "NONE",
+   "source_basis": "a count inside the bisection record, whose key set is the same whatever the verdict (check_rules_output.txt); non-zero on a MIXED record too (227: MIXED wins when pieces hold and fail)",
+   "provenance": "CODER_INFERRED",
+   "routes": 1,
+   "cases": [
+    "C"
+   ]
+  },
+  "reader": {
+   "listed": "NOT_LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T01",
+  "term": "fa:UNDECIDED",
+  "field": "undecided_at_depth_limit",
+  "source": {
+   "location": "check.py 479-480, 519, 533",
+   "origin": "COMPUTED",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SHARED",
+   "requirement_scope": "NONE",
+   "source_basis": "a count inside rec['subboxes'] on every intersection record; non-zero on MIXED / ONE_FAILS too",
+   "provenance": "CODER_INFERRED",
+   "routes": 1,
+   "cases": [
+    "C"
+   ]
+  },
+  "reader": {
+   "listed": "NOT_LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T02",
+  "term": "taf:ABSENT_AT_SENSITIVITY",
+  "field": "value",
+  "source": {
+   "location": "glossary.md 129; expiry_register.py 228-235",
+   "origin": "DOCUMENTED",
+   "presence_scope": "NO_INSTANCE",
+   "applicability_scope": "NO_INSTANCE",
+   "requirement_scope": "NO_INSTANCE",
+   "source_basis": "parsed: the notation's parameter; the glossary says no slot holds the state",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "D"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "value is the parameter in the notation",
+   "basis_kind": "DOCUMENTED",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T04",
+  "term": "cplay:ExpiryTrigger",
+  "field": "condition",
+  "source": {
+   "location": "tokens.py 64-72",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran ExpiryTrigger: parameter and stored field; empty value raises TokenError: True; absent from a plain Token",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "ExpiryTrigger requires and stores kind, target, and condition",
+   "basis_kind": "REQUIRED",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T04",
+  "term": "cplay:ExpiryTrigger",
+  "field": "kind",
+  "source": {
+   "location": "tokens.py 64-72",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran ExpiryTrigger: parameter and stored field; empty value raises TokenError: True; absent from a plain Token",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "ExpiryTrigger requires and stores kind, target, and condition",
+   "basis_kind": "REQUIRED",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T04",
+  "term": "cplay:ExpiryTrigger",
+  "field": "target",
+  "source": {
+   "location": "tokens.py 64-72",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran ExpiryTrigger: parameter and stored field; empty value raises TokenError: True; absent from a plain Token",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "ExpiryTrigger requires and stores kind, target, and condition",
+   "basis_kind": "REQUIRED",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T05",
+  "term": "cplay:ABSENT_AT_SENSITIVITY",
+  "field": "basis",
+  "source": {
+   "location": "tokens.py 92-104",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran absent_at_sensitivity: parameter, stored; None raises: True",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T05",
+  "term": "cplay:ABSENT_AT_SENSITIVITY",
+  "field": "conditions",
+  "source": {
+   "location": "tokens.py 92-104",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran absent_at_sensitivity: parameter, stored; None raises: True",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T05",
+  "term": "cplay:ABSENT_AT_SENSITIVITY",
+  "field": "covers_effect",
+  "source": {
+   "location": "tokens.py 103",
+   "origin": "COMPUTED",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "NONE",
+   "source_basis": "ran absent_at_sensitivity: stored but not a parameter (limit <= effect_size)",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "B"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "covers_effect is an additional absence-only derived attribute",
+   "basis_kind": "DERIVED_BUT_TIED",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T05",
+  "term": "cplay:ABSENT_AT_SENSITIVITY",
+  "field": "effect_size",
+  "source": {
+   "location": "tokens.py 92-104",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran absent_at_sensitivity: parameter, stored; None raises: True",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T05",
+  "term": "cplay:ABSENT_AT_SENSITIVITY",
+  "field": "ladder",
+  "source": {
+   "location": "tokens.py 92-104",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "SOME_EXCLUSIVE",
+   "requirement_scope": "NONE",
+   "source_basis": "ran absent_at_sensitivity: parameter, stored; None raises: True; required only when basis == LADDER (DECLARED with ladder=None accepted)",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T05",
+  "term": "cplay:ABSENT_AT_SENSITIVITY",
+  "field": "limit",
+  "source": {
+   "location": "tokens.py 92-104",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran absent_at_sensitivity: parameter, stored; None raises: True",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T07",
+  "term": "fa:VOID",
+  "field": "first_subbox_with_no_value",
+  "source": {
+   "location": "check.py 516-517, 539, 541-548",
+   "origin": "COMPUTED",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SHARED",
+   "requirement_scope": "NONE",
+   "source_basis": "presence parsed (every intersection record); set when a subbox has no value at the limit, which a ONE_FAILS / MIXED record can also carry; absent from point VOID records",
+   "provenance": "CODER_INFERRED",
+   "routes": 1,
+   "cases": [
+    "C"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "first_subbox_with_no_value is specific to the intersection VOID path",
+   "basis_kind": "APPLICABLE_ONLY",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T07",
+  "term": "fa:VOID",
+  "field": "void_reason",
+  "source": {
+   "location": "check.py 112, 436-439, 545-548, 553-556, 571-574",
+   "origin": "RAW_INPUT",
+   "presence_scope": "SHARED",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "NONE",
+   "source_basis": "presence parsed from _blank (every record, None); set on every VOID path and on no other (the reason string is recorded raw)",
+   "provenance": "CODER_INFERRED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "void_reason records the VOID cause",
+   "basis_kind": "APPLICABLE_ONLY",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T08",
+  "term": "cplay:CRASHED",
+  "field": "call",
+  "source": {
+   "location": "COMBINED_SPEC line 321",
+   "origin": "DOCUMENTED",
+   "presence_scope": "NO_INSTANCE",
+   "applicability_scope": "NO_INSTANCE",
+   "requirement_scope": "NO_INSTANCE",
+   "source_basis": "named in the spec's crash-record notation; no record built by the packet's code has it",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 2,
+   "cases": [
+    "G",
+    "D"
+   ]
+  },
+  "reader": {
+   "listed": "NOT_LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T08",
+  "term": "cplay:CRASHED",
+  "field": "exc",
+  "source": {
+   "location": "axes.py 81-88",
+   "origin": "PARAMETER_ONLY",
+   "presence_scope": "NONE",
+   "applicability_scope": "NONE",
+   "requirement_scope": "SHARED",
+   "source_basis": "ran crash(): a parameter stored under no field of that name; crash() builds a CRASHED Reading AND a GAP_INSTRUMENT_CRASH CoverageEntry, so the call is shared by two terms",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 2,
+   "cases": [
+    "G",
+    "E",
+    "C"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "the dedicated crash() constructor also has the crash-specific parameters exc and inputs",
+   "basis_kind": "PARAMETER",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T08",
+  "term": "cplay:CRASHED",
+  "field": "exception",
+  "source": {
+   "location": "axes.py 41-66",
+   "origin": "RAW_INPUT",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SHARED",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran reading(): a field of every Reading; OK accepts it too; required only for CRASHED: True",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 2,
+   "cases": [
+    "G",
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "CRASHED requires exception and path",
+   "basis_kind": "REQUIRED",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T08",
+  "term": "cplay:CRASHED",
+  "field": "inputs",
+  "source": {
+   "location": "axes.py 81-88",
+   "origin": "PARAMETER_ONLY",
+   "presence_scope": "NONE",
+   "applicability_scope": "NONE",
+   "requirement_scope": "SHARED",
+   "source_basis": "ran crash(): a parameter stored under no field of that name; crash() builds a CRASHED Reading AND a GAP_INSTRUMENT_CRASH CoverageEntry, so the call is shared by two terms",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 2,
+   "cases": [
+    "G",
+    "E",
+    "C"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "the dedicated crash() constructor also has the crash-specific parameters exc and inputs",
+   "basis_kind": "PARAMETER",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T08",
+  "term": "cplay:CRASHED",
+  "field": "path",
+  "source": {
+   "location": "axes.py 41-66",
+   "origin": "RAW_INPUT",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SHARED",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran reading(): a field of every Reading; OK accepts it too; required only for CRASHED: True",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 2,
+   "cases": [
+    "G",
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "CRASHED requires exception and path",
+   "basis_kind": "REQUIRED",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T09",
+  "term": "taf:UNKNOWN",
+  "field": "expiry_condition",
+  "source": {
+   "location": "glossary.md 127; unified_audit.py 336-371",
+   "origin": "RAW_INPUT",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SHARED",
+   "requirement_scope": "NONE",
+   "source_basis": "parsed: on every coverage literal (UNKNOWN, INFO, GAP); glossary documents it for PENDING / UNKNOWN slots; value set from module constants",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 2,
+   "cases": [
+    "G",
+    "C"
+   ]
+  },
+  "reader": {
+   "listed": "NOT_LISTED",
+   "basis_quote": "No field is exclusive to UNKNOWN: expiry_condition also serves PENDING and other coverage kinds",
+   "basis_kind": "SHARED_SO_NOT",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "KEY_UNDETERMINED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T09",
+  "term": "taf:UNKNOWN",
+  "field": "expiry_source",
+  "source": {
+   "location": "glossary.md 128",
+   "origin": "DOCUMENTED",
+   "presence_scope": "NO_INSTANCE",
+   "applicability_scope": "NO_INSTANCE",
+   "requirement_scope": "NO_INSTANCE",
+   "source_basis": "parsed: in the glossary only; no code in the packet builds it",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 2,
+   "cases": [
+    "G",
+    "D"
+   ]
+  },
+  "reader": {
+   "listed": "NOT_LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "KEY_UNDETERMINED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T10",
+  "term": "taf:GAP_INSTRUMENT_CRASH",
+  "field": "error",
+  "source": {
+   "location": "unified_audit.py 485-489",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "NONE",
+   "source_basis": "parsed: section record built only in the raise handler; recorded from the exception",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "A crash produces a section record with error, exception_type, and missing_path",
+   "basis_kind": "STORED_FIELD",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T10",
+  "term": "taf:GAP_INSTRUMENT_CRASH",
+  "field": "exception_type",
+  "source": {
+   "location": "unified_audit.py 485-489",
+   "origin": "COMPUTED",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "NONE",
+   "source_basis": "parsed: built in the raise handler; type(e).__name__ is the prefix of error (f\"{type(e).__name__}: {e}\"), so a function of error",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "B"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "A crash produces a section record with error, exception_type, and missing_path",
+   "basis_kind": "STORED_FIELD",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T10",
+  "term": "taf:GAP_INSTRUMENT_CRASH",
+  "field": "missing_path",
+  "source": {
+   "location": "unified_audit.py 336-343, 485-489",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "SOME_EXCLUSIVE",
+   "requirement_scope": "NONE",
+   "source_basis": "parsed: on the GAP coverage literal only (not UNKNOWN / INFO); value is getattr(e, 'filename', None), so None on some instances",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "Those crash-section fields and missing_path distinguish this path from UNKNOWN and INFO coverage entries",
+   "basis_kind": "STORED_FIELD",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T12",
+  "term": "cplay:UNKNOWN",
+  "field": "triggers",
+  "source": {
+   "location": "tokens.py 81-89",
+   "origin": "PARAMETER_ONLY",
+   "presence_scope": "NONE",
+   "applicability_scope": "NONE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran unknown(): parameter, not stored under that name; no typed trigger raises: True",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "E"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "triggers is the UNKNOWN constructor's parameter",
+   "basis_kind": "PARAMETER",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T12",
+  "term": "cplay:UNKNOWN",
+  "field": "typed",
+  "source": {
+   "location": "tokens.py 87-88",
+   "origin": "COMPUTED",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "NONE",
+   "source_basis": "ran unknown(): stored, split out of triggers; empty on some instances: False",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "B"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "the returned Token stores typed and untyped",
+   "basis_kind": "STORED_FIELD",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T12",
+  "term": "cplay:UNKNOWN",
+  "field": "untyped",
+  "source": {
+   "location": "tokens.py 87-88",
+   "origin": "COMPUTED",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "SOME_EXCLUSIVE",
+   "requirement_scope": "NONE",
+   "source_basis": "ran unknown(): stored, split out of triggers; empty on some instances: True",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "B"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "the returned Token stores typed and untyped",
+   "basis_kind": "STORED_FIELD",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T14",
+  "term": "cplay:CLOSED_WITHIN",
+  "field": "basis",
+  "source": {
+   "location": "axes.py 41-66",
+   "origin": "RAW_INPUT",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SHARED",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran reading(): a field of every Reading; OK accepts it too; required only for CLOSED_WITHIN: True",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "CLOSED_WITHIN specifically requires numeric sigma and basis",
+   "basis_kind": "REQUIRED",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T14",
+  "term": "cplay:CLOSED_WITHIN",
+  "field": "sigma",
+  "source": {
+   "location": "axes.py 41-66",
+   "origin": "RAW_INPUT",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SHARED",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran reading(): a field of every Reading; OK accepts it too; required only for CLOSED_WITHIN: True",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "CLOSED_WITHIN specifically requires numeric sigma and basis",
+   "basis_kind": "REQUIRED",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T15",
+  "term": "taf:expiry_condition",
+  "field": "instrument",
+  "source": {
+   "location": "expiry_register.py 58-59",
+   "origin": "PARAMETER_ONLY",
+   "presence_scope": "NONE",
+   "applicability_scope": "NONE",
+   "requirement_scope": "NONE",
+   "source_basis": "parsed: a parameter of E(), stored as instrument_class",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "E",
+    "C"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "E() has the constructor parameter instrument",
+   "basis_kind": "PARAMETER",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T15",
+  "term": "taf:expiry_condition",
+  "field": "instrument_class",
+  "source": {
+   "location": "expiry_register.py 53, 58-59, 216-225",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "parsed: EXPIRY_KEYS; exit_state() refuses any other key set; refused if '' or 'void'",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "its returned expiry dictionary spells the corresponding key instrument_class",
+   "basis_kind": "STORED_FIELD",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T15",
+  "term": "taf:expiry_condition",
+  "field": "protocol",
+  "source": {
+   "location": "expiry_register.py 53, 58-59, 216-225",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "parsed: EXPIRY_KEYS; exit_state() refuses any other key set; refused if '' or 'void'",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "the other three keys are sensitivity, protocol, and provenance",
+   "basis_kind": "STORED_FIELD",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T15",
+  "term": "taf:expiry_condition",
+  "field": "provenance",
+  "source": {
+   "location": "expiry_register.py 53, 58-59, 216-225",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "parsed: EXPIRY_KEYS; exit_state() refuses any other key set; refused if '' or 'void'",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "the other three keys are sensitivity, protocol, and provenance",
+   "basis_kind": "STORED_FIELD",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_kimi-v2-A",
+  "packet": {
+   "version": "v2",
+   "variant": "A",
+   "sha256": "94836e79b966a89fe9a14464e0930462d039aba052cc44377b9b092d7ca24a63"
+  },
+  "condition": "D0",
+  "term_id": "T15",
+  "term": "taf:expiry_condition",
+  "field": "sensitivity",
+  "source": {
+   "location": "expiry_register.py 53, 58-59, 216-225",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "SOME_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "parsed: EXPIRY_KEYS; exit_state() refuses any other key set; sensitivity may be 'void'",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "the other three keys are sensitivity, protocol, and provenance",
+   "basis_kind": "STORED_FIELD",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T01",
+  "term": "fa:UNDECIDED",
+  "field": "first_straddling_piece",
+  "source": {
+   "location": "check.py 201, 220, 240",
+   "origin": "COMPUTED",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SHARED",
+   "requirement_scope": "NONE",
+   "source_basis": "inside the bisection record (same key set whatever the verdict); set whenever a piece straddles at the limit, MIXED included",
+   "provenance": "CODER_INFERRED",
+   "routes": 1,
+   "cases": [
+    "C"
+   ]
+  },
+  "reader": {
+   "listed": "NOT_LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T01",
+  "term": "fa:UNDECIDED",
+  "field": "first_undecided_subbox",
+  "source": {
+   "location": "check.py 513-528, 538, 541-552",
+   "origin": "COMPUTED",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SHARED",
+   "requirement_scope": "NONE",
+   "source_basis": "presence parsed (assigned on every intersection record); populated when a subbox is undecided at the depth limit, which can also happen on a MIXED or ONE_FAILS record (verdict precedence 541-552); the 13-record derive corpus did not show that",
+   "provenance": "CODER_INFERRED",
+   "routes": 1,
+   "cases": [
+    "C"
+   ]
+  },
+  "reader": {
+   "listed": "NOT_LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T01",
+  "term": "fa:UNDECIDED",
+  "field": "proposal",
+  "source": {
+   "location": "check.py 112-119, 296-350, 421",
+   "origin": "COMPUTED",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SOME_EXCLUSIVE",
+   "requirement_scope": "NONE",
+   "source_basis": "presence parsed from _blank (every record); populated only on an UNDECIDED point record at tolerance 0 with nothing against it (lines 304-305, 421); check_rules_output.txt agrees on 12 records",
+   "provenance": "CODER_INFERRED",
+   "routes": 1,
+   "cases": [
+    "B",
+    "F"
+   ]
+  },
+  "reader": {
+   "listed": "NOT_LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T01",
+  "term": "fa:UNDECIDED",
+  "field": "straddle_at_depth_limit",
+  "source": {
+   "location": "check.py 200, 219, 226-227",
+   "origin": "COMPUTED",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SHARED",
+   "requirement_scope": "NONE",
+   "source_basis": "a count inside the bisection record, whose key set is the same whatever the verdict (check_rules_output.txt); non-zero on a MIXED record too (227: MIXED wins when pieces hold and fail)",
+   "provenance": "CODER_INFERRED",
+   "routes": 1,
+   "cases": [
+    "C"
+   ]
+  },
+  "reader": {
+   "listed": "NOT_LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T01",
+  "term": "fa:UNDECIDED",
+  "field": "undecided_at_depth_limit",
+  "source": {
+   "location": "check.py 479-480, 519, 533",
+   "origin": "COMPUTED",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SHARED",
+   "requirement_scope": "NONE",
+   "source_basis": "a count inside rec['subboxes'] on every intersection record; non-zero on MIXED / ONE_FAILS too",
+   "provenance": "CODER_INFERRED",
+   "routes": 1,
+   "cases": [
+    "C"
+   ]
+  },
+  "reader": {
+   "listed": "NOT_LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T02",
+  "term": "taf:ABSENT_AT_SENSITIVITY",
+  "field": "value",
+  "source": {
+   "location": "glossary.md 129; expiry_register.py 228-235",
+   "origin": "DOCUMENTED",
+   "presence_scope": "NO_INSTANCE",
+   "applicability_scope": "NO_INSTANCE",
+   "requirement_scope": "NO_INSTANCE",
+   "source_basis": "parsed: the notation's parameter; the glossary says no slot holds the state",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "D"
+   ]
+  },
+  "reader": {
+   "listed": "NOT_LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T04",
+  "term": "cplay:ExpiryTrigger",
+  "field": "condition",
+  "source": {
+   "location": "tokens.py 64-72",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran ExpiryTrigger: parameter and stored field; empty value raises TokenError: True; absent from a plain Token",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T04",
+  "term": "cplay:ExpiryTrigger",
+  "field": "kind",
+  "source": {
+   "location": "tokens.py 64-72",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran ExpiryTrigger: parameter and stored field; empty value raises TokenError: True; absent from a plain Token",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T04",
+  "term": "cplay:ExpiryTrigger",
+  "field": "target",
+  "source": {
+   "location": "tokens.py 64-72",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran ExpiryTrigger: parameter and stored field; empty value raises TokenError: True; absent from a plain Token",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T05",
+  "term": "cplay:ABSENT_AT_SENSITIVITY",
+  "field": "basis",
+  "source": {
+   "location": "tokens.py 92-104",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran absent_at_sensitivity: parameter, stored; None raises: True",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "implementation stores limit, basis, effect_size, conditions, ladder",
+   "basis_kind": "STORED_FIELD",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T05",
+  "term": "cplay:ABSENT_AT_SENSITIVITY",
+  "field": "conditions",
+  "source": {
+   "location": "tokens.py 92-104",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran absent_at_sensitivity: parameter, stored; None raises: True",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "implementation stores limit, basis, effect_size, conditions, ladder",
+   "basis_kind": "STORED_FIELD",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T05",
+  "term": "cplay:ABSENT_AT_SENSITIVITY",
+  "field": "covers_effect",
+  "source": {
+   "location": "tokens.py 103",
+   "origin": "COMPUTED",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "NONE",
+   "source_basis": "ran absent_at_sensitivity: stored but not a parameter (limit <= effect_size)",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "B"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "derived covers_effect on a Token",
+   "basis_kind": "DERIVED_BUT_TIED",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T05",
+  "term": "cplay:ABSENT_AT_SENSITIVITY",
+  "field": "effect_size",
+  "source": {
+   "location": "tokens.py 92-104",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran absent_at_sensitivity: parameter, stored; None raises: True",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "implementation stores limit, basis, effect_size, conditions, ladder",
+   "basis_kind": "STORED_FIELD",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T05",
+  "term": "cplay:ABSENT_AT_SENSITIVITY",
+  "field": "ladder",
+  "source": {
+   "location": "tokens.py 92-104",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "SOME_EXCLUSIVE",
+   "requirement_scope": "NONE",
+   "source_basis": "ran absent_at_sensitivity: parameter, stored; None raises: True; required only when basis == LADDER (DECLARED with ladder=None accepted)",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "implementation stores limit, basis, effect_size, conditions, ladder",
+   "basis_kind": "STORED_FIELD",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T05",
+  "term": "cplay:ABSENT_AT_SENSITIVITY",
+  "field": "limit",
+  "source": {
+   "location": "tokens.py 92-104",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran absent_at_sensitivity: parameter, stored; None raises: True",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "implementation stores limit, basis, effect_size, conditions, ladder",
+   "basis_kind": "STORED_FIELD",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T07",
+  "term": "fa:VOID",
+  "field": "first_subbox_with_no_value",
+  "source": {
+   "location": "check.py 516-517, 539, 541-548",
+   "origin": "COMPUTED",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SHARED",
+   "requirement_scope": "NONE",
+   "source_basis": "presence parsed (every intersection record); set when a subbox has no value at the limit, which a ONE_FAILS / MIXED record can also carry; absent from point VOID records",
+   "provenance": "CODER_INFERRED",
+   "routes": 1,
+   "cases": [
+    "C"
+   ]
+  },
+  "reader": {
+   "listed": "NOT_LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T07",
+  "term": "fa:VOID",
+  "field": "void_reason",
+  "source": {
+   "location": "check.py 112, 436-439, 545-548, 553-556, 571-574",
+   "origin": "RAW_INPUT",
+   "presence_scope": "SHARED",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "NONE",
+   "source_basis": "presence parsed from _blank (every record, None); set on every VOID path and on no other (the reason string is recorded raw)",
+   "provenance": "CODER_INFERRED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "Point VOID writes void_reason",
+   "basis_kind": "APPLICABLE_ONLY",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T08",
+  "term": "cplay:CRASHED",
+  "field": "call",
+  "source": {
+   "location": "COMBINED_SPEC line 321",
+   "origin": "DOCUMENTED",
+   "presence_scope": "NO_INSTANCE",
+   "applicability_scope": "NO_INSTANCE",
+   "requirement_scope": "NO_INSTANCE",
+   "source_basis": "named in the spec's crash-record notation; no record built by the packet's code has it",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 2,
+   "cases": [
+    "G",
+    "D"
+   ]
+  },
+  "reader": {
+   "listed": "NOT_LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T08",
+  "term": "cplay:CRASHED",
+  "field": "exc",
+  "source": {
+   "location": "axes.py 81-88",
+   "origin": "PARAMETER_ONLY",
+   "presence_scope": "NONE",
+   "applicability_scope": "NONE",
+   "requirement_scope": "SHARED",
+   "source_basis": "ran crash(): a parameter stored under no field of that name; crash() builds a CRASHED Reading AND a GAP_INSTRUMENT_CRASH CoverageEntry, so the call is shared by two terms",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 2,
+   "cases": [
+    "G",
+    "E",
+    "C"
+   ]
+  },
+  "reader": {
+   "listed": "NOT_LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T08",
+  "term": "cplay:CRASHED",
+  "field": "exception",
+  "source": {
+   "location": "axes.py 41-66",
+   "origin": "RAW_INPUT",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SHARED",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran reading(): a field of every Reading; OK accepts it too; required only for CRASHED: True",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 2,
+   "cases": [
+    "G",
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "CRASHED requires exception/path on a Reading",
+   "basis_kind": "REQUIRED",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T08",
+  "term": "cplay:CRASHED",
+  "field": "inputs",
+  "source": {
+   "location": "axes.py 81-88",
+   "origin": "PARAMETER_ONLY",
+   "presence_scope": "NONE",
+   "applicability_scope": "NONE",
+   "requirement_scope": "SHARED",
+   "source_basis": "ran crash(): a parameter stored under no field of that name; crash() builds a CRASHED Reading AND a GAP_INSTRUMENT_CRASH CoverageEntry, so the call is shared by two terms",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 2,
+   "cases": [
+    "G",
+    "E",
+    "C"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "The spec's crash record additionally names inputs",
+   "basis_kind": "DOCUMENTED",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T08",
+  "term": "cplay:CRASHED",
+  "field": "path",
+  "source": {
+   "location": "axes.py 41-66",
+   "origin": "RAW_INPUT",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SHARED",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran reading(): a field of every Reading; OK accepts it too; required only for CRASHED: True",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 2,
+   "cases": [
+    "G",
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "CRASHED requires exception/path on a Reading",
+   "basis_kind": "REQUIRED",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T09",
+  "term": "taf:UNKNOWN",
+  "field": "expiry_condition",
+  "source": {
+   "location": "glossary.md 127; unified_audit.py 336-371",
+   "origin": "RAW_INPUT",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SHARED",
+   "requirement_scope": "NONE",
+   "source_basis": "parsed: on every coverage literal (UNKNOWN, INFO, GAP); glossary documents it for PENDING / UNKNOWN slots; value set from module constants",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 2,
+   "cases": [
+    "G",
+    "C"
+   ]
+  },
+  "reader": {
+   "listed": "NOT_LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "KEY_UNDETERMINED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T09",
+  "term": "taf:UNKNOWN",
+  "field": "expiry_source",
+  "source": {
+   "location": "glossary.md 128",
+   "origin": "DOCUMENTED",
+   "presence_scope": "NO_INSTANCE",
+   "applicability_scope": "NO_INSTANCE",
+   "requirement_scope": "NO_INSTANCE",
+   "source_basis": "parsed: in the glossary only; no code in the packet builds it",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 2,
+   "cases": [
+    "G",
+    "D"
+   ]
+  },
+  "reader": {
+   "listed": "NOT_LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "KEY_UNDETERMINED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T10",
+  "term": "taf:GAP_INSTRUMENT_CRASH",
+  "field": "error",
+  "source": {
+   "location": "unified_audit.py 485-489",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "NONE",
+   "source_basis": "parsed: section record built only in the raise handler; recorded from the exception",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "NOT_LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T10",
+  "term": "taf:GAP_INSTRUMENT_CRASH",
+  "field": "exception_type",
+  "source": {
+   "location": "unified_audit.py 485-489",
+   "origin": "COMPUTED",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "NONE",
+   "source_basis": "parsed: built in the raise handler; type(e).__name__ is the prefix of error (f\"{type(e).__name__}: {e}\"), so a function of error",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "B"
+   ]
+  },
+  "reader": {
+   "listed": "NOT_LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T10",
+  "term": "taf:GAP_INSTRUMENT_CRASH",
+  "field": "missing_path",
+  "source": {
+   "location": "unified_audit.py 336-343, 485-489",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "SOME_EXCLUSIVE",
+   "requirement_scope": "NONE",
+   "source_basis": "parsed: on the GAP coverage literal only (not UNKNOWN / INFO); value is getattr(e, 'filename', None), so None on some instances",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "NOT_LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T12",
+  "term": "cplay:UNKNOWN",
+  "field": "triggers",
+  "source": {
+   "location": "tokens.py 81-89",
+   "origin": "PARAMETER_ONLY",
+   "presence_scope": "NONE",
+   "applicability_scope": "NONE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran unknown(): parameter, not stored under that name; no typed trigger raises: True",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "E"
+   ]
+  },
+  "reader": {
+   "listed": "NOT_LISTED",
+   "basis_quote": "The constructor parameter `triggers` is not a returned field",
+   "basis_kind": "OTHER",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T12",
+  "term": "cplay:UNKNOWN",
+  "field": "typed",
+  "source": {
+   "location": "tokens.py 87-88",
+   "origin": "COMPUTED",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "NONE",
+   "source_basis": "ran unknown(): stored, split out of triggers; empty on some instances: False",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "B"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "implementation stores typed and untyped trigger tuples on the Token",
+   "basis_kind": "STORED_FIELD",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T12",
+  "term": "cplay:UNKNOWN",
+  "field": "untyped",
+  "source": {
+   "location": "tokens.py 87-88",
+   "origin": "COMPUTED",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "SOME_EXCLUSIVE",
+   "requirement_scope": "NONE",
+   "source_basis": "ran unknown(): stored, split out of triggers; empty on some instances: True",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "B"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "implementation stores typed and untyped trigger tuples on the Token",
+   "basis_kind": "STORED_FIELD",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T14",
+  "term": "cplay:CLOSED_WITHIN",
+  "field": "basis",
+  "source": {
+   "location": "axes.py 41-66",
+   "origin": "RAW_INPUT",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SHARED",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran reading(): a field of every Reading; OK accepts it too; required only for CLOSED_WITHIN: True",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "Spec requires sigma and basis",
+   "basis_kind": "REQUIRED",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T14",
+  "term": "cplay:CLOSED_WITHIN",
+  "field": "sigma",
+  "source": {
+   "location": "axes.py 41-66",
+   "origin": "RAW_INPUT",
+   "presence_scope": "SHARED",
+   "applicability_scope": "SHARED",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "ran reading(): a field of every Reading; OK accepts it too; required only for CLOSED_WITHIN: True",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": "Spec requires sigma and basis",
+   "basis_kind": "REQUIRED",
+   "basis_kind_provenance": "CODER_INFERRED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T15",
+  "term": "taf:expiry_condition",
+  "field": "instrument",
+  "source": {
+   "location": "expiry_register.py 58-59",
+   "origin": "PARAMETER_ONLY",
+   "presence_scope": "NONE",
+   "applicability_scope": "NONE",
+   "requirement_scope": "NONE",
+   "source_basis": "parsed: a parameter of E(), stored as instrument_class",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "E",
+    "C"
+   ]
+  },
+  "reader": {
+   "listed": "NOT_LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "NOT_LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T15",
+  "term": "taf:expiry_condition",
+  "field": "instrument_class",
+  "source": {
+   "location": "expiry_register.py 53, 58-59, 216-225",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "parsed: EXPIRY_KEYS; exit_state() refuses any other key set; refused if '' or 'void'",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T15",
+  "term": "taf:expiry_condition",
+  "field": "protocol",
+  "source": {
+   "location": "expiry_register.py 53, 58-59, 216-225",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "parsed: EXPIRY_KEYS; exit_state() refuses any other key set; refused if '' or 'void'",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T15",
+  "term": "taf:expiry_condition",
+  "field": "provenance",
+  "source": {
+   "location": "expiry_register.py 53, 58-59, 216-225",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "ALL_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "parsed: EXPIRY_KEYS; exit_state() refuses any other key set; refused if '' or 'void'",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ },
+ {
+  "study_id": "M01",
+  "reader_id": "2026-11-19_gpt6-v2",
+  "packet": {
+   "version": "v2",
+   "variant": null,
+   "sha256": null
+  },
+  "condition": "D0",
+  "term_id": "T15",
+  "term": "taf:expiry_condition",
+  "field": "sensitivity",
+  "source": {
+   "location": "expiry_register.py 53, 58-59, 216-225",
+   "origin": "RAW_INPUT",
+   "presence_scope": "ALL_EXCLUSIVE",
+   "applicability_scope": "SOME_EXCLUSIVE",
+   "requirement_scope": "ALL_EXCLUSIVE",
+   "source_basis": "parsed: EXPIRY_KEYS; exit_state() refuses any other key set; sensitivity may be 'void'",
+   "provenance": "SCRIPT_DERIVED",
+   "routes": 1,
+   "cases": [
+    "A"
+   ]
+  },
+  "reader": {
+   "listed": "LISTED",
+   "basis_quote": null,
+   "basis_kind": null,
+   "basis_kind_provenance": "NOT_RECORDED",
+   "uncertainty_stated": null,
+   "provenance": "READER_STATED"
+  },
+  "key_a1": {
+   "listed": "LISTED"
+  }
+ }
+]
