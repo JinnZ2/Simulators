@@ -1,0 +1,1896 @@
+From cff83e5544b3ab6a83021542dcf225759b97ea99 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Wed, 18 Nov 2026 23:23:32 +0000
+Subject: [PATCH] blind-reader-void12: key v2 amendment 1 revision 1 (S3-out,
+ R-a, R-b), N1 and C1
+
+Supersedes the patch filed in amendment_options/as_received/ (sha256
+8ea98d4c...), which amendment_options/OPTIONS.md showed did not follow its
+own text at T14 (literal S2) and T01 (literal S1(b)). key_v2.json is
+unchanged; the amended key is scoring/key_v2_a1.json.
+
+- KEY_V2_AMENDMENT_1.md (at the owner's stated location): S3-out as decided
+  (S3-in kept struck, tokens.py 17-18 recorded as counter-evidence);
+  R-a: exclusivity tested by the tie a name was collected under (presence
+  for a field a record has, requirement for a field a rule requires);
+  R-b: S1(b) collects the term's own record only and opens no record built
+  beside it or held in its fields
+- scoring/key_v2_a1.json: T09 specific -> undetermined; T10 ->
+  [missing_path]; T12 -> [triggers]; T14 and T01 unchanged by rule;
+  UNKNOWN | UNKNOWN key_tier_specific -> n/d
+- scoring/score_v2.py: N1 and C1 apply only when the key names them;
+  scoring against key_v2.json is unchanged byte for byte
+- scoring/test_score_v2.py: every a1 specific list derived from the packet
+  sources by the rules, T14 (requirement table over all statuses) and T01
+  (proposal record carries its own status, held in a field) included
+- readings/2026-11-18_claude-v2-A/score_a1.txt, score_a1.json: step 5,
+  filed beside the v2 score, which is unchanged
+- PREREG.md: dated section with the revision-1 hashes
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01BSBFWHuGrN5AdHuCDNkS29
+---
+ blind-reader-void12/KEY_V2_AMENDMENT_1.md     | 217 ++++++
+ blind-reader-void12/PREREG.md                 |  18 +
+ .../2026-11-18_claude-v2-A/score_a1.json      | 652 ++++++++++++++++++
+ .../2026-11-18_claude-v2-A/score_a1.txt       |  56 ++
+ blind-reader-void12/scoring/key_v2_a1.json    | 518 ++++++++++++++
+ blind-reader-void12/scoring/score_v2.py       |  68 +-
+ blind-reader-void12/scoring/test_score_v2.py  | 185 ++++-
+ 7 files changed, 1705 insertions(+), 9 deletions(-)
+ create mode 100644 blind-reader-void12/KEY_V2_AMENDMENT_1.md
+ create mode 100644 blind-reader-void12/readings/2026-11-18_claude-v2-A/score_a1.json
+ create mode 100644 blind-reader-void12/readings/2026-11-18_claude-v2-A/score_a1.txt
+ create mode 100644 blind-reader-void12/scoring/key_v2_a1.json
+
+diff --git a/blind-reader-void12/KEY_V2_AMENDMENT_1.md b/blind-reader-void12/KEY_V2_AMENDMENT_1.md
+new file mode 100644
+index 0000000..8a92e56
+--- /dev/null
++++ b/blind-reader-void12/KEY_V2_AMENDMENT_1.md
+@@ -0,0 +1,217 @@
++# Key v2, amendment 1 (a1), revision 1
++
++Status: S3 fixed by the owner 2026-11-18 as S3-out; S1, S2, ND, N1, C1, K1
++accepted as drafted. Revision 1 (same day, before any further reading) closes
++two gaps that `amendment_options/OPTIONS.md` found in the patch as received
++(choice 1: S2 read literally removes T14's `sigma, basis`; choice 2: S1(b) read
++literally collects the 14 fields of the `proposal` record for T01). Revision 1
++is in force when the owner applies it; its sha256 is then recorded in
++`PREREG.md` (dated section "Key v2, amendment 1").
++`key_v2.json` is unchanged; the amended key is `scoring/key_v2_a1.json`.
++
++Drafted by: the Claude-v2-A model, AFTER it had seen key v2 and its own score,
++and (for revision 1) after it had seen `amendment_options/`, which scores that
++reading under candidate keys. The drafter is not independent of the key or of a
++reader. The safeguard is procedural: each change below follows from a rule
++stated in section 1, each rule is applied to all 15 terms in section 2
++(including the terms where it moves the key AWAY from both Claude readings),
++and the text is fixed and hashed before a reader of another family reads.
++
++Scope: `slots_specific` rules, one scorer normalization, one scorer report
++addition. The brief, the packet, the grouping key and the `slots_carried` key
++lists are NOT changed. v2 readers stay poolable.
++
++---
++
++## 1. Rules
++
++```text
++S1  COLLECT  A name enters slots_specific if the source gives it by one of:
++             (a) a parameter of a constructor / function written for this term only
++             (b) a field of THIS TERM'S OWN RECORD -- the record whose status / kind /
++                 verdict / state value is this term -- where that record's shape is
++                 built only on this term's path                          [revised R-b]
++             (c) a field a source rule REQUIRES for this status
++                 (raises / refuses without it, or a spec table marks it "required")
++             (d) a documented key list or notation parameter for this term
++             Not opened under (b): another record built alongside the term's own
++             record, or held in one of its fields. Such a record is collected, if
++             at all, for the term whose own record it is.               [revised R-b]
++
++S2  EXCLUDE  Remove a collected name when it is not this term's alone, tested the
++             same way it was collected:                                 [revised R-a]
++             - a name collected by (a), (b) or (d) (because a record or signature
++               HAS it) is removed if every other status sharing that record or
++               constructor also has it. Presence counts, not value: a key present on
++               every record of a kind is shared even when it is None on the other
++               paths.
++             - a name collected by (c) (because a rule REQUIRES it) is removed if
++               every other status sharing that record also requires it. A field
++               every record has, but only this status requires, stays.
++             (e.g. `reason` where the rule is "every non-verdict token needs one":
++             removed under both tests)
++
++S3  ATTRS    S3-out (decided: a slot is an input degree of freedom; derived
++             attributes carry no new information)
++             Only S1(a), (c), (d) names and declared class / record fields count.
++             An attribute computed after construction from the parameters
++             (covers_effect; typed / untyped split out of triggers) is filled by
++             nothing: it is a function of slots already counted, and counting it
++             would count the same information twice.
++  [STRUCK]   S3-in   an attribute set by the source on this term's record only
++  [STRUCK]           (not a parameter) is collected under S1(b)
++             Counter-evidence considered (revision 1): tokens.py 17-18, "Reading
++             added here: `covers_effect` (limit <= effect size) is reported on a
++             scoped absence. It refuses nothing; the spec requires the fields, not
++             the comparison." The source reports covers_effect on this term. S3-out
++             keeps it out because the same sentence says it is a comparison of two
++             slots already counted, which nothing fills.
++
++ND  TEST     After S1-S3, if the sources still support two different lists,
++             the list is undetermined (null), as PREREG v2 already defines n/d.
++
++N1  SCORER   Before comparing names, strip one pair of surrounding `<` `>` and
++             surrounding backticks. Nothing else changes (the scorer's existing
++             strip + lowercase is kept; underscores and spaces are kept).
++
++C1  SCORER   For each determined list, beside equal / differ, report the set
++             relation: equal | reader-superset | reader-subset | overlap | disjoint.
++             For a superset, list the extras. Reported beside the existing
++             numbers; it replaces none of them and adds no combined score.
++
++K1  CLARIFY  `slots_carried` "instance fields, checked by running it" means
++             vars(instance): class attributes (e.g. ExpiryTrigger.is_exit) are
++             not instance fields. No list changes under K1.
++```
++
++Why R-a and R-b, from the brief (READER_BRIEF.md line 22): `slots_specific` is
++"the named fields or parameters the source ties to this term and to no other
++term. Examples: a class written for the term, the parameters of a function or
++notation written for it, a documented key list for it, or a rule that says this
++status needs certain fields. Not fields that every term sharing a record has."
++
++- R-a. The brief collects by two different kinds of tie: a record that HAS a
++  field, and a rule that REQUIRES one. A single presence test applied to a
++  requirement-collected name always removes it (every namedtuple status has
++  every field), which would make the brief's own fourth example empty by
++  construction. So each name is tested for exclusivity by the tie it was
++  collected under.
++- R-b. The brief's examples are things written FOR the term. The `proposal`
++  record (numcheck `_identity_candidate`) is written for an identity candidate:
++  it carries its own `status` (PROPOSED / DERIVED), and the check's header says
++  "The check's own verdict is not changed". The TAF section record
++  `{error, exception_type, missing_path}` is the module's report section, built
++  beside the coverage entry, not the entry itself. Neither is the term's own
++  record. Applying one rule to both keeps T01 and T10 consistent with each
++  other; the patch as received opened one (T10) and not the other (T01).
++
++---
++
++## 2. Applied to all 15 slots_specific lists (S3-out, revision 1)
++
++```text
++id   term                     key v2                     a1 r1 (rule result)                 change   who it moves toward
++---  -----------------------  -------------------------  ----------------------------------  -------  -------------------
++T01  fa:UNDECIDED             []                         []  own record = the point /          none     AWAY from Claude-v2-A
++                                                             intersection record: every key           (it listed 5 names)
++                                                             on it is on every record (S2).
++                                                             `proposal` record not opened (R-b)
++T02  taf:ABSENT_AT_SENS.      [value]                    [value]  via N1 (`<value>` == value)  scorer   toward both Claude
++T03  cplay:VOID               []                         []                                  none     --
++T04  cplay:ExpiryTrigger      [kind,target,condition]    same (S1a / S1b)                    none     --
++T05  cplay:ABSENT_AT_SENS.    [limit,basis,effect_size,  same; covers_effect is derived      none     AWAY from Claude-v2-A
++                               conditions,ladder]        (S3-out)                                     (it listed covers_effect)
++T06  cplay:UNRESOLVED         []                         []  (FieldToken shared with          none     --
++                                                             TOLERANCE_UNRESOLVABLE; S2)
++T07  fa:VOID                  []                         []  (void_reason present on every    none     AWAY from Claude-v2-A
++                                                             record; no rule requires it)             (it listed 2 names)
++T08  cplay:CRASHED            null (n/d)                 null  (crash() builds CRASHED AND    none     --
++                                                             GAP_INSTRUMENT_CRASH; params
++                                                             `exc` vs field `exception`;
++                                                             two readings remain -> ND)
++T09  taf:UNKNOWN              []                         null: glossary row ties              ND       neutral (n/d is
++                                                             expiry_condition / expiry_source         neither match nor
++                                                             to "PENDING / UNKNOWN" (S1d), but         miss)
++                                                             unified_audit puts expiry_condition
++                                                             on INFO and crash entries too (S2),
++                                                             and expiry_source may belong to the
++                                                             exit, not the slot. Two readings.
++T10  taf:GAP_INSTR._CRASH     [kind,module,input,reason, [missing_path]                      S2       toward Claude-v2-A
++                               missing_path,              own record = the coverage entry       (r1)     on missing_path;
++                               expiry_condition]          of kind GAP_INSTRUMENT_CRASH             AWAY on error,
++                                                          (unified_audit 336-343). S2: UNKNOWN /   exception_type
++                                                          INFO entries carry the other 5
++                                                          (345-371). The section record
++                                                          {error, exception_type, missing_path}
++                                                          (485-489) is not opened (R-b).
++T11  fa:HOLDS                 []                         []                                  none     --
++T12  cplay:UNKNOWN            [reason,triggers]          [triggers]                          S2       toward Claude-v2-A
++                                                         S2: `reason` required on every       (S3-out: (typed, untyped
++                                                             non-verdict token (tokens.py      not added) AWAY from it
++                                                             48-49); typed / untyped derived
++                                                             from triggers (S3-out)
++T13  cplay:OK                 []                         []                                  none     --
++T14  cplay:CLOSED_WITHIN      [sigma,basis]              same: S1(c), axes.py 61-63; under    none     --
++                                                         R-a only CLOSED_WITHIN requires them
++                                                         (OK none; FAILED / INDETERMINATE /
++                                                         UNTESTED reason; CRASHED exception,
++                                                         path; OUTSIDE_DOMAIN bound)
++T15  taf:expiry_condition     [instrument_class,         same (S1d, EXPIRY_KEYS)             none     --
++                               sensitivity,protocol,
++                               provenance]
++```
++
++Net change, specific: T10 and T12 (S2); T09 -> n/d (ND); T02 by scorer (N1).
++Pair tier, specific: `UNKNOWN | UNKNOWN` becomes n/d with T09, so under a1
++`slots_specific` is scored out of 6 determined pairs (v2: 7).
++`GAP_INSTRUMENT_CRASH | CRASHED` stays n/d under `specific` (T08).
++
++Direction check, stated plainly. Of the changes, T12's `reason`, N1 and the
++`missing_path` part of T10 move toward the Claude readings; T09 moves to
++neutral. The rules hold the key against Claude-v2-A at T01, T05, T07, T10 and
++T12 (12 names it gave: 5 + 1 + 2 + 2 + 2). R-b was chosen over the alternative
++that opens the `proposal` record, which `amendment_options/` shows would raise
++Claude-v2-A's specific pair agreement from 3 of 6 to 4 of 6; R-a keeps T14 as
++key v2 had it. That is weak evidence that the rules were not fitted to the
++reader: one drafter, one family. A reader from another family is the real test.
++
++Owner's note (2026-11-18), as given for the patch as received: T10's change
++reaches the same conclusion as the erratum on the pair tier
++(`GAP_INSTRUMENT_CRASH | CRASHED` is not MAPS), from the code by a different
++route. Revision 1 narrows T10 to `[missing_path]`. The pair's tiers do not
++move (specific stays n/d through T08; carried stays PARTIAL), but the list the
++owner saw was `[missing_path, error, exception_type]`, and this revision
++changes it; the owner confirms by applying revision 1.
++
++---
++
++## 3. What stays open (not amended)
++
++```text
++slots_carried depth     not stated in the brief. Handled by C1 (report relation),
++                        not by changing the brief. A v2.1 brief remains possible later
++                        as its own pool.
++T09 slots_carried       already null in key v2; unchanged.
++grouping key            unchanged. HOLDS | CLOSED_WITHIN vs HOLDS | OK stays the
++                        key's call; two Claude readings are one family (rule 5).
++is_exit                 a class attribute of ExpiryTrigger (K1 for carried; for
++                        specific it is no parameter and no instance field): T04
++                        unchanged either way.
++```
++
++---
++
++## 4. Procedure
++
++```text
++1  owner fixed S3 = S3-out; other rules accepted as drafted          done 2026-11-18
++1r amendment_options/ (Manus) found two gaps; revision 1 (R-a, R-b)  this text
++2  sha256 of this file -> PREREG.md dated section                    with this change
++3  scoring/key_v2_a1.json from section 2; key_v2.json byte-identical with this change
++4  test_score_v2.py: every a1 specific list, T14 and T01 included,   with this change
++   derived from the packet's sources by the rules; N1 and C1 tested;
++   v2 scoring of the filed reading reproduces its filed score.txt
++5  score the filed v2 reading (Claude-v2-A) under both keys;         with this change
++   file both, change neither
++6  only then request the next reading (v2 packet, unchanged)
++```
+diff --git a/blind-reader-void12/PREREG.md b/blind-reader-void12/PREREG.md
+index 1c73b39..0c4f42e 100644
+--- a/blind-reader-void12/PREREG.md
++++ b/blind-reader-void12/PREREG.md
+@@ -110,3 +110,21 @@ The packet zip for variant B differs from variant A's in the brief and in that f
+ **Variants.** Variant A is the brief as written. Variant B (`variants/READER_BRIEF.v2.variant_B.md`) removes the clause "even if the second system attaches different extra fields or detail", as in v1. Both stay in the design. Readers of v1 cannot be reused for v2 and should not be given v2.
+ 
+ **Hashes.** `key_v2.json` sha256 `c88a910a03a6456900efabd130c57a19f1a0133c9566ebce34ae0b6e813b18d1`; `make_packet_v2.py` sha256 `37e0dd55c76231359c4060ef8f3a703cf5865eefa63bd1ca9fe18f04c4923e48`; v1 key sha256 `5c1a6caba4e3b0f1bc7d1a93b8e2503158e343a67d58fae5c77fe91a710a500b` (unchanged).
++
++---
++
++## Key v2, amendment 1 (added 2026-11-18, after the Claude-v2-A reading, before any further reading is requested)
++
++**Why.** The Claude-v2-A reading exposed places where key v2 applied its own `slots_specific` rule unevenly (`GAP_INSTRUMENT_CRASH`, `cplay:UNKNOWN`), one judgement call (`taf:UNKNOWN`), one spelling (`<value>`), and an open question about derived attributes (`covers_effect`). Changing the key to match that reader would fit the key to a reader. So rules were written first and applied to all 15 terms, and the owner decided them before the next reading.
++
++**Text.** `KEY_V2_AMENDMENT_1.md` (revision 1), sha256 `09dcec7ce977078dfd8bee70afb5d4b999e8903da7b5f8ed4eea07e6c2947184`. Drafted by the Claude-v2-A model after it had seen key v2 and its own score; not independent. The owner fixed S3 as **S3-out** (a slot is an input degree of freedom; an attribute computed after construction from the parameters carries no new information) and accepted S1, S2, ND, N1, C1, K1 as drafted. `amendment_options/OPTIONS.md` then found two places where the patch as received did not follow its own text (T14 under a literal S2; T01 under a literal S1(b)). Revision 1 closes both by rule: **R-a**, each collected name is tested for exclusivity by the tie it was collected under (presence for a field a record has, requirement for a field a rule requires); **R-b**, S1(b) collects the fields of the term's own record only, and does not open a record built beside it or held in one of its fields. The patch as received (`amendment_options/as_received/`, sha256 `8ea98d4cd6cc4702b239a626b4f45c54ad1174f209d8a03ce70fe65fa75452bb`) is superseded, not adopted.
++
++**Amended key.** `scoring/key_v2_a1.json`, sha256 `b0a19e82ea57f9ee4e5ff406ad84cbb6ee7c85684f46ddb59f1df5773edf0928`. `key_v2.json` is unchanged (sha256 `c88a910a03a6456900efabd130c57a19f1a0133c9566ebce34ae0b6e813b18d1`). Changes, `slots_specific` only: T09 `taf:UNKNOWN` `[]` -> undetermined; T10 `taf:GAP_INSTRUMENT_CRASH` six coverage fields -> `[missing_path]`; T12 `cplay:UNKNOWN` `[reason, triggers]` -> `[triggers]`. T14 keeps `[sigma, basis]` (R-a) and T01 keeps `[]` (R-b). Pair `UNKNOWN | UNKNOWN` becomes n/d under `specific`, so a1 `specific` is scored out of 6 determined pairs (v2: 7). `slots_carried`, grouping and the brief are unchanged; v2 readers stay poolable. Every a1 `specific` list is derived from the packet's sources by the rules in `test_score_v2.py`, T14 and T01 included.
++
++**Scoring.** `score_v2.py` applies N1 (strip one pair of `<>` and backticks before comparing names) and C1 (set relation of reader to key: equal / reader-superset / reader-subset / overlap / disjoint, reported beside the existing counts) only when the key names them in `meta.scoring_rules`, as `key_v2_a1.json` does. Scoring against `key_v2.json` is unchanged byte for byte; a test re-renders the filed Claude-v2-A `score.txt` and `score.json` and compares.
++
++**Hand-worked references under a1, before running the scorer.** `specific`: nothing grouped 2 of 6, label-only 2 of 6. `carried`: unchanged, 2 of 7 and 2 of 7. The tests assert these.
++
++**Reporting.** Every v2 reading is scored under both `key_v2.json` and `key_v2_a1.json`, and both are filed. Neither replaces the other; a reading is not re-filed or changed. The Claude-v2-A a1 score is filed beside its v2 score as `score_a1.txt` / `score_a1.json`.
++
++**Direction, stated.** The changes move toward the Claude readings or to n/d. The same rules hold the key against Claude-v2-A at T01, T05, T07, T10 and T12 (twelve names it gave), and R-b was chosen over the alternative that would raise that reading's `specific` pair agreement from 3 of 6 to 4 of 6. That is weak evidence that the rules were not fitted to it: one drafter, one family. A reader from another family is the test.
+diff --git a/blind-reader-void12/readings/2026-11-18_claude-v2-A/score_a1.json b/blind-reader-void12/readings/2026-11-18_claude-v2-A/score_a1.json
+new file mode 100644
+index 0000000..b57f9b8
+--- /dev/null
++++ b/blind-reader-void12/readings/2026-11-18_claude-v2-A/score_a1.json
+@@ -0,0 +1,652 @@
++{
++ "reader_label": "Claude-v2-A",
++ "model_family": "claude-opus-5-5 (the identifier this session is configured with; the model serving this turn was not separately verified)",
++ "date_utc": "2026-11-18",
++ "blind_status": "UNCERTAIN",
++ "attestation_flags": [
++  "q5_used_anything_outside_packet",
++  "q6_prior_sessions_about_this_project"
++ ],
++ "term_pairs": {
++  "both_join": 5,
++  "reader_only": 1,
++  "key_only": 1,
++  "neither": 98,
++  "total": 105
++ },
++ "ari": 0.823,
++ "term_pair_differences": [
++  [
++   "reader joins, key does not",
++   "T11",
++   "T13"
++  ],
++  [
++   "key joins, reader does not",
++   "T11",
++   "T14"
++  ]
++ ],
++ "clusters_reader": 9,
++ "clusters_key": 9,
++ "meanings": {
++  "specific": {
++   "pairs": [
++    {
++     "pair": "GAP_INSTRUMENT_CRASH | CRASHED",
++     "reader": "PARTIAL",
++     "key": null,
++     "first_reading_declared": "MAPS",
++     "agree": null
++    },
++    {
++     "pair": "UNKNOWN | UNKNOWN",
++     "reader": "PARTIAL",
++     "key": null,
++     "first_reading_declared": "PARTIAL",
++     "agree": null
++    },
++    {
++     "pair": "ABSENT_AT_SENSITIVITY | ABSENT_AT_SENSITIVITY",
++     "reader": "PARTIAL",
++     "key": "PARTIAL",
++     "first_reading_declared": "PARTIAL",
++     "agree": true
++    },
++    {
++     "pair": "expiry_condition | ExpiryTrigger",
++     "reader": "PARTIAL",
++     "key": "PARTIAL",
++     "first_reading_declared": "PARTIAL",
++     "agree": true
++    },
++    {
++     "pair": "VOID | VOID",
++     "reader": "HOMONYM",
++     "key": "HOMONYM",
++     "first_reading_declared": "HOMONYM",
++     "agree": true
++    },
++    {
++     "pair": "UNDECIDED | UNRESOLVED",
++     "reader": "PARTIAL",
++     "key": "MAPS",
++     "first_reading_declared": "PARTIAL",
++     "agree": false
++    },
++    {
++     "pair": "HOLDS | OK",
++     "reader": "MAPS",
++     "key": "NONE",
++     "first_reading_declared": "NONE",
++     "agree": false
++    },
++    {
++     "pair": "HOLDS | CLOSED_WITHIN",
++     "reader": "NONE",
++     "key": "PARTIAL",
++     "first_reading_declared": "PARTIAL",
++     "agree": false
++    }
++   ],
++   "tier_agree": 3,
++   "n_determined": 6,
++   "n_pairs": 8,
++   "cp95": [
++    0.118,
++    0.882
++   ],
++   "baselines": {
++    "singletons": 2,
++    "label_only": 2
++   },
++   "slots": [
++    {
++     "id": "T01",
++     "label": "UNDECIDED",
++     "status": "differ",
++     "missing": [],
++     "extra": [
++      "first_straddling_piece",
++      "first_undecided_subbox",
++      "proposal",
++      "straddle_at_depth_limit",
++      "undecided_at_depth_limit"
++     ],
++     "reader_basis": "READ_FROM_SOURCE",
++     "relation": "reader-superset"
++    },
++    {
++     "id": "T02",
++     "label": "ABSENT_AT_SENSITIVITY",
++     "status": "equal",
++     "missing": [],
++     "extra": [],
++     "reader_basis": "READ_FROM_SOURCE",
++     "relation": "equal"
++    },
++    {
++     "id": "T03",
++     "label": "VOID",
++     "status": "equal",
++     "missing": [],
++     "extra": [],
++     "reader_basis": "NONE_STATED",
++     "relation": "equal"
++    },
++    {
++     "id": "T04",
++     "label": "ExpiryTrigger",
++     "status": "equal",
++     "missing": [],
++     "extra": [],
++     "reader_basis": "READ_FROM_SOURCE",
++     "relation": "equal"
++    },
++    {
++     "id": "T05",
++     "label": "ABSENT_AT_SENSITIVITY",
++     "status": "differ",
++     "missing": [],
++     "extra": [
++      "covers_effect"
++     ],
++     "reader_basis": "READ_FROM_SOURCE",
++     "relation": "reader-superset"
++    },
++    {
++     "id": "T06",
++     "label": "UNRESOLVED",
++     "status": "equal",
++     "missing": [],
++     "extra": [],
++     "reader_basis": "NONE_STATED",
++     "relation": "equal"
++    },
++    {
++     "id": "T07",
++     "label": "VOID",
++     "status": "differ",
++     "missing": [],
++     "extra": [
++      "first_subbox_with_no_value",
++      "void_reason"
++     ],
++     "reader_basis": "READ_FROM_SOURCE",
++     "relation": "reader-superset"
++    },
++    {
++     "id": "T08",
++     "label": "CRASHED",
++     "status": "n/d",
++     "missing": [],
++     "extra": [
++      "call",
++      "exception",
++      "inputs",
++      "path"
++     ],
++     "reader_basis": "READ_FROM_SOURCE",
++     "relation": "n/d"
++    },
++    {
++     "id": "T09",
++     "label": "UNKNOWN",
++     "status": "n/d",
++     "missing": [],
++     "extra": [
++      "expiry_condition",
++      "expiry_source"
++     ],
++     "reader_basis": "READ_FROM_SOURCE",
++     "relation": "n/d"
++    },
++    {
++     "id": "T10",
++     "label": "GAP_INSTRUMENT_CRASH",
++     "status": "differ",
++     "missing": [],
++     "extra": [
++      "error",
++      "exception_type"
++     ],
++     "reader_basis": "READ_FROM_SOURCE",
++     "relation": "reader-superset"
++    },
++    {
++     "id": "T11",
++     "label": "HOLDS",
++     "status": "equal",
++     "missing": [],
++     "extra": [],
++     "reader_basis": "NONE_STATED",
++     "relation": "equal"
++    },
++    {
++     "id": "T12",
++     "label": "UNKNOWN",
++     "status": "differ",
++     "missing": [],
++     "extra": [
++      "typed",
++      "untyped"
++     ],
++     "reader_basis": "READ_FROM_SOURCE",
++     "relation": "reader-superset"
++    },
++    {
++     "id": "T13",
++     "label": "OK",
++     "status": "equal",
++     "missing": [],
++     "extra": [],
++     "reader_basis": "NONE_STATED",
++     "relation": "equal"
++    },
++    {
++     "id": "T14",
++     "label": "CLOSED_WITHIN",
++     "status": "equal",
++     "missing": [],
++     "extra": [],
++     "reader_basis": "READ_FROM_SOURCE",
++     "relation": "equal"
++    },
++    {
++     "id": "T15",
++     "label": "expiry_condition",
++     "status": "equal",
++     "missing": [],
++     "extra": [],
++     "reader_basis": "READ_FROM_SOURCE",
++     "relation": "equal"
++    }
++   ],
++   "slots_equal": 8,
++   "slots_determined": 13,
++   "relations": {
++    "equal": 8,
++    "reader-superset": 5,
++    "reader-subset": 0,
++    "overlap": 0,
++    "disjoint": 0
++   }
++  },
++  "carried": {
++   "pairs": [
++    {
++     "pair": "GAP_INSTRUMENT_CRASH | CRASHED",
++     "reader": "PARTIAL",
++     "key": "PARTIAL",
++     "first_reading_declared": "MAPS",
++     "agree": true
++    },
++    {
++     "pair": "UNKNOWN | UNKNOWN",
++     "reader": "PARTIAL",
++     "key": null,
++     "first_reading_declared": "PARTIAL",
++     "agree": null
++    },
++    {
++     "pair": "ABSENT_AT_SENSITIVITY | ABSENT_AT_SENSITIVITY",
++     "reader": "PARTIAL",
++     "key": "PARTIAL",
++     "first_reading_declared": "PARTIAL",
++     "agree": true
++    },
++    {
++     "pair": "expiry_condition | ExpiryTrigger",
++     "reader": "PARTIAL",
++     "key": "PARTIAL",
++     "first_reading_declared": "PARTIAL",
++     "agree": true
++    },
++    {
++     "pair": "VOID | VOID",
++     "reader": "HOMONYM",
++     "key": "HOMONYM",
++     "first_reading_declared": "HOMONYM",
++     "agree": true
++    },
++    {
++     "pair": "UNDECIDED | UNRESOLVED",
++     "reader": "PARTIAL",
++     "key": "PARTIAL",
++     "first_reading_declared": "PARTIAL",
++     "agree": true
++    },
++    {
++     "pair": "HOLDS | OK",
++     "reader": "PARTIAL",
++     "key": "NONE",
++     "first_reading_declared": "NONE",
++     "agree": false
++    },
++    {
++     "pair": "HOLDS | CLOSED_WITHIN",
++     "reader": "NONE",
++     "key": "PARTIAL",
++     "first_reading_declared": "PARTIAL",
++     "agree": false
++    }
++   ],
++   "tier_agree": 5,
++   "n_determined": 7,
++   "n_pairs": 8,
++   "cp95": [
++    0.29,
++    0.963
++   ],
++   "baselines": {
++    "singletons": 2,
++    "label_only": 2
++   },
++   "slots": [
++    {
++     "id": "T01",
++     "label": "UNDECIDED",
++     "status": "differ",
++     "missing": [],
++     "extra": [
++      "counts",
++      "input",
++      "proposals",
++      "records",
++      "tool"
++     ],
++     "reader_basis": "READ_FROM_SOURCE",
++     "relation": "reader-superset"
++    },
++    {
++     "id": "T02",
++     "label": "ABSENT_AT_SENSITIVITY",
++     "status": "differ",
++     "missing": [
++      "value"
++     ],
++     "extra": [],
++     "reader_basis": "NONE_STATED",
++     "relation": "reader-subset"
++    },
++    {
++     "id": "T03",
++     "label": "VOID",
++     "status": "differ",
++     "missing": [],
++     "extra": [
++      "branches",
++      "case",
++      "complete",
++      "floor",
++      "g_differs",
++      "g_pre",
++      "k",
++      "m",
++      "sigma",
++      "split",
++      "split_abc",
++      "split_af",
++      "split_live",
++      "sys",
++      "tol"
++     ],
++     "reader_basis": "READ_FROM_SOURCE",
++     "relation": "reader-superset"
++    },
++    {
++     "id": "T04",
++     "label": "ExpiryTrigger",
++     "status": "differ",
++     "missing": [],
++     "extra": [
++      "is_exit"
++     ],
++     "reader_basis": "READ_FROM_SOURCE",
++     "relation": "reader-superset"
++    },
++    {
++     "id": "T05",
++     "label": "ABSENT_AT_SENSITIVITY",
++     "status": "equal",
++     "missing": [],
++     "extra": [],
++     "reader_basis": "READ_FROM_SOURCE",
++     "relation": "equal"
++    },
++    {
++     "id": "T06",
++     "label": "UNRESOLVED",
++     "status": "differ",
++     "missing": [],
++     "extra": [
++      "branches",
++      "case",
++      "complete",
++      "floor",
++      "g_differs",
++      "g_pre",
++      "k",
++      "m",
++      "sigma",
++      "split",
++      "split_abc",
++      "split_af",
++      "split_live",
++      "sys",
++      "tol"
++     ],
++     "reader_basis": "READ_FROM_SOURCE",
++     "relation": "reader-superset"
++    },
++    {
++     "id": "T07",
++     "label": "VOID",
++     "status": "differ",
++     "missing": [],
++     "extra": [
++      "counts",
++      "input",
++      "proposals",
++      "records",
++      "tool"
++     ],
++     "reader_basis": "READ_FROM_SOURCE",
++     "relation": "reader-superset"
++    },
++    {
++     "id": "T08",
++     "label": "CRASHED",
++     "status": "equal",
++     "missing": [],
++     "extra": [],
++     "reader_basis": "READ_FROM_SOURCE",
++     "relation": "equal"
++    },
++    {
++     "id": "T09",
++     "label": "UNKNOWN",
++     "status": "n/d",
++     "missing": [],
++     "extra": [
++      "class",
++      "cls",
++      "coverage",
++      "coverage_by_kind",
++      "coverage_count",
++      "exit",
++      "expiry",
++      "expiry_condition",
++      "input",
++      "kind",
++      "line",
++      "module",
++      "modules_run",
++      "modules_skipped",
++      "not_determinable_reason",
++      "note",
++      "overall_status",
++      "path",
++      "quote",
++      "reason",
++      "red_flags",
++      "sections",
++      "severity",
++      "sid",
++      "slot id",
++      "summary",
++      "system_id"
++     ],
++     "reader_basis": "READ_FROM_SOURCE",
++     "relation": "n/d"
++    },
++    {
++     "id": "T10",
++     "label": "GAP_INSTRUMENT_CRASH",
++     "status": "differ",
++     "missing": [],
++     "extra": [
++      "coverage",
++      "coverage_by_kind",
++      "coverage_count",
++      "error",
++      "exception_type",
++      "modules_run",
++      "modules_skipped",
++      "not_determinable_reason",
++      "overall_status",
++      "red_flags",
++      "sections",
++      "severity",
++      "summary",
++      "system_id"
++     ],
++     "reader_basis": "READ_FROM_SOURCE",
++     "relation": "reader-superset"
++    },
++    {
++     "id": "T11",
++     "label": "HOLDS",
++     "status": "differ",
++     "missing": [],
++     "extra": [
++      "counts",
++      "input",
++      "proposals",
++      "records",
++      "tool"
++     ],
++     "reader_basis": "READ_FROM_SOURCE",
++     "relation": "reader-superset"
++    },
++    {
++     "id": "T12",
++     "label": "UNKNOWN",
++     "status": "differ",
++     "missing": [],
++     "extra": [
++      "expiry_condition",
++      "input",
++      "kind",
++      "missing_path",
++      "module"
++     ],
++     "reader_basis": "READ_FROM_SOURCE",
++     "relation": "reader-superset"
++    },
++    {
++     "id": "T13",
++     "label": "OK",
++     "status": "differ",
++     "missing": [],
++     "extra": [
++      "branches",
++      "case",
++      "complete",
++      "floor",
++      "g_differs",
++      "g_pre",
++      "k",
++      "m",
++      "split",
++      "split_abc",
++      "split_af",
++      "split_live",
++      "state",
++      "sys",
++      "tol"
++     ],
++     "reader_basis": "READ_FROM_SOURCE",
++     "relation": "reader-superset"
++    },
++    {
++     "id": "T14",
++     "label": "CLOSED_WITHIN",
++     "status": "differ",
++     "missing": [],
++     "extra": [
++      "branches",
++      "case",
++      "complete",
++      "floor",
++      "g_differs",
++      "g_pre",
++      "k",
++      "m",
++      "split",
++      "split_abc",
++      "split_af",
++      "split_live",
++      "sys",
++      "tol"
++     ],
++     "reader_basis": "READ_FROM_SOURCE",
++     "relation": "reader-superset"
++    },
++    {
++     "id": "T15",
++     "label": "expiry_condition",
++     "status": "differ",
++     "missing": [],
++     "extra": [
++      "class",
++      "cls",
++      "exit",
++      "expiry",
++      "expiry_condition",
++      "input",
++      "kind",
++      "line",
++      "missing_path",
++      "module",
++      "note",
++      "path",
++      "pr77",
++      "pr78",
++      "quote",
++      "reason",
++      "sid",
++      "slot id"
++     ],
++     "reader_basis": "READ_FROM_SOURCE",
++     "relation": "reader-superset"
++    }
++   ],
++   "slots_equal": 2,
++   "slots_determined": 14,
++   "relations": {
++    "equal": 2,
++    "reader-superset": 11,
++    "reader-subset": 1,
++    "overlap": 0,
++    "disjoint": 0
++   }
++  }
++ },
++ "flags": [],
++ "key_version": "2-a1",
++ "scoring_rules": [
++  "N1",
++  "C1"
++ ]
++}
+\ No newline at end of file
+diff --git a/blind-reader-void12/readings/2026-11-18_claude-v2-A/score_a1.txt b/blind-reader-void12/readings/2026-11-18_claude-v2-A/score_a1.txt
+new file mode 100644
+index 0000000..86f0a38
+--- /dev/null
++++ b/blind-reader-void12/readings/2026-11-18_claude-v2-A/score_a1.txt
+@@ -0,0 +1,56 @@
++reader Claude-v2-A | claude-opus-5-5 (the identifier this session is configured with; the model serving this turn was not separately verified) | 2026-11-18 | blindness: UNCERTAIN (also declared: q5_used_anything_outside_packet, q6_prior_sessions_about_this_project)
++key 2-a1 | scoring rules N1, C1 (KEY_V2_AMENDMENT_1.md)
++
++grouping (independent of slots): all 105 term pairs: both join 5, reader only 1, key only 1, neither 98; adjusted Rand index 0.823; clusters reader 9, key 9
++   reader joins, key does not: T11 T13
++   key joins, reader does not: T11 T14
++
++=== slots_specific ===
++declared pairs: 3 of 6 determined agree with the key (Clopper-Pearson 95%: 0.118 to 0.882); 2 pair(s) n/d
++pair                                           reader   key      first reading's declared tier
++GAP_INSTRUMENT_CRASH | CRASHED                 PARTIAL  n/d      MAPS     
++UNKNOWN | UNKNOWN                              PARTIAL  n/d      PARTIAL  
++ABSENT_AT_SENSITIVITY | ABSENT_AT_SENSITIVITY  PARTIAL  PARTIAL  PARTIAL  agree
++expiry_condition | ExpiryTrigger               PARTIAL  PARTIAL  PARTIAL  agree
++VOID | VOID                                    HOMONYM  HOMONYM  HOMONYM  agree
++UNDECIDED | UNRESOLVED                         PARTIAL  MAPS     PARTIAL  DIFFER
++HOLDS | OK                                     MAPS     NONE     NONE     DIFFER
++HOLDS | CLOSED_WITHIN                          NONE     PARTIAL  PARTIAL  DIFFER
++references under this key: nothing grouped 2, label-only 2 (of 6 determined)
++slot sets equal to the key's: 8 of 13 determined
++set relation, reader to key (C1, beside the count above): equal 8, reader-superset 5, reader-subset 0, overlap 0, disjoint 0
++   T01 UNDECIDED                differ missing - extra ['first_straddling_piece', 'first_undecided_subbox', 'proposal', 'straddle_at_depth_limit', 'undecided_at_depth_limit'] [reader-superset]
++   T05 ABSENT_AT_SENSITIVITY    differ missing - extra ['covers_effect'] [reader-superset]
++   T07 VOID                     differ missing - extra ['first_subbox_with_no_value', 'void_reason'] [reader-superset]
++   T08 CRASHED                  n/d (key undetermined); reader gave ['call', 'exception', 'inputs', 'path']
++   T09 UNKNOWN                  n/d (key undetermined); reader gave ['expiry_condition', 'expiry_source']
++   T10 GAP_INSTRUMENT_CRASH     differ missing - extra ['error', 'exception_type'] [reader-superset]
++   T12 UNKNOWN                  differ missing - extra ['typed', 'untyped'] [reader-superset]
++
++=== slots_carried ===
++declared pairs: 5 of 7 determined agree with the key (Clopper-Pearson 95%: 0.290 to 0.963); 1 pair(s) n/d
++pair                                           reader   key      first reading's declared tier
++GAP_INSTRUMENT_CRASH | CRASHED                 PARTIAL  PARTIAL  MAPS     agree
++UNKNOWN | UNKNOWN                              PARTIAL  n/d      PARTIAL  
++ABSENT_AT_SENSITIVITY | ABSENT_AT_SENSITIVITY  PARTIAL  PARTIAL  PARTIAL  agree
++expiry_condition | ExpiryTrigger               PARTIAL  PARTIAL  PARTIAL  agree
++VOID | VOID                                    HOMONYM  HOMONYM  HOMONYM  agree
++UNDECIDED | UNRESOLVED                         PARTIAL  PARTIAL  PARTIAL  agree
++HOLDS | OK                                     PARTIAL  NONE     NONE     DIFFER
++HOLDS | CLOSED_WITHIN                          NONE     PARTIAL  PARTIAL  DIFFER
++references under this key: nothing grouped 2, label-only 2 (of 7 determined)
++slot sets equal to the key's: 2 of 14 determined
++set relation, reader to key (C1, beside the count above): equal 2, reader-superset 11, reader-subset 1, overlap 0, disjoint 0
++   T01 UNDECIDED                differ missing - extra ['counts', 'input', 'proposals', 'records', 'tool'] [reader-superset]
++   T02 ABSENT_AT_SENSITIVITY    differ missing ['value'] extra - [reader-subset]
++   T03 VOID                     differ missing - extra ['branches', 'case', 'complete', 'floor', 'g_differs', 'g_pre', 'k', 'm', 'sigma', 'split', 'split_abc', 'split_af', 'split_live', 'sys', 'tol'] [reader-superset]
++   T04 ExpiryTrigger            differ missing - extra ['is_exit'] [reader-superset]
++   T06 UNRESOLVED               differ missing - extra ['branches', 'case', 'complete', 'floor', 'g_differs', 'g_pre', 'k', 'm', 'sigma', 'split', 'split_abc', 'split_af', 'split_live', 'sys', 'tol'] [reader-superset]
++   T07 VOID                     differ missing - extra ['counts', 'input', 'proposals', 'records', 'tool'] [reader-superset]
++   T09 UNKNOWN                  n/d (key undetermined); reader gave ['class', 'cls', 'coverage', 'coverage_by_kind', 'coverage_count', 'exit', 'expiry', 'expiry_condition', 'input', 'kind', 'line', 'module', 'modules_run', 'modules_skipped', 'not_determinable_reason', 'note', 'overall_status', 'path', 'quote', 'reason', 'red_flags', 'sections', 'severity', 'sid', 'slot id', 'summary', 'system_id']
++   T10 GAP_INSTRUMENT_CRASH     differ missing - extra ['coverage', 'coverage_by_kind', 'coverage_count', 'error', 'exception_type', 'modules_run', 'modules_skipped', 'not_determinable_reason', 'overall_status', 'red_flags', 'sections', 'severity', 'summary', 'system_id'] [reader-superset]
++   T11 HOLDS                    differ missing - extra ['counts', 'input', 'proposals', 'records', 'tool'] [reader-superset]
++   T12 UNKNOWN                  differ missing - extra ['expiry_condition', 'input', 'kind', 'missing_path', 'module'] [reader-superset]
++   T13 OK                       differ missing - extra ['branches', 'case', 'complete', 'floor', 'g_differs', 'g_pre', 'k', 'm', 'split', 'split_abc', 'split_af', 'split_live', 'state', 'sys', 'tol'] [reader-superset]
++   T14 CLOSED_WITHIN            differ missing - extra ['branches', 'case', 'complete', 'floor', 'g_differs', 'g_pre', 'k', 'm', 'split', 'split_abc', 'split_af', 'split_live', 'sys', 'tol'] [reader-superset]
++   T15 expiry_condition         differ missing - extra ['class', 'cls', 'exit', 'expiry', 'expiry_condition', 'input', 'kind', 'line', 'missing_path', 'module', 'note', 'path', 'pr77', 'pr78', 'quote', 'reason', 'sid', 'slot id'] [reader-superset]
+diff --git a/blind-reader-void12/scoring/key_v2_a1.json b/blind-reader-void12/scoring/key_v2_a1.json
+new file mode 100644
+index 0000000..8d2a801
+--- /dev/null
++++ b/blind-reader-void12/scoring/key_v2_a1.json
+@@ -0,0 +1,518 @@
++{
++ "meta": {
++  "first_reader_module": "combined-playground/cplay/vocab_branches.py",
++  "first_reader_module_sha256": "30fe580e4e8b6b54ded496be420fe36b0260ce9f0707dae1f71c9f00d9a94f3f",
++  "simulators_head": "b5e8614bef123a445f247f69803e1fa4361eeed6",
++  "shuffle_seed": 20261118,
++  "n_terms": 15,
++  "n_pairs": 8,
++  "n_predicate_clusters": 9,
++  "v": "2-a1",
++  "key_v1_sha256": "5c1a6caba4e3b0f1bc7d1a93b8e2503158e343a67d58fae5c77fe91a710a500b",
++  "note": "slots_* = None means undetermined: scored as 'not determined', never as a match or a miss",
++  "key_v2_sha256": "c88a910a03a6456900efabd130c57a19f1a0133c9566ebce34ae0b6e813b18d1",
++  "amendment": "blind-reader-void12/KEY_V2_AMENDMENT_1.md (revision 1)",
++  "amendment_sha256": "09dcec7ce977078dfd8bee70afb5d4b999e8903da7b5f8ed4eea07e6c2947184",
++  "scoring_rules": [
++   "N1",
++   "C1"
++  ],
++  "a1_changes": [
++   "T09.slots_specific",
++   "T10.slots_specific",
++   "T12.slots_specific",
++   "pair UNKNOWN | UNKNOWN key_tier_specific"
++  ]
++ },
++ "terms": {
++  "T10": {
++   "term_id": "taf:GAP_INSTRUMENT_CRASH",
++   "label": "GAP_INSTRUMENT_CRASH",
++   "cluster": 1,
++   "predicate": "a check raised; recorded on coverage, never severity",
++   "slots_specific": [
++    "missing_path"
++   ],
++   "slots_carried": [
++    "kind",
++    "module",
++    "input",
++    "reason",
++    "missing_path",
++    "expiry_condition"
++   ],
++   "derivation": "unified_audit.py builds one dictionary in the branch written for this term; its six keys. Same list for both meanings. | a1 r1 (S1b own record, S2, R-b): specific = missing_path, the one key of the GAP_INSTRUMENT_CRASH coverage entry (unified_audit.py 336-343) that the UNKNOWN / INFO entries (345-371) do not carry. The section record {error, exception_type, missing_path} built in _dispatch's raise branch (485-489) is not this term's own record and is not opened (R-b). carried unchanged.",
++   "v1_slots_welded": [
++    "kind",
++    "module",
++    "input",
++    "reason",
++    "missing_path",
++    "expiry_condition"
++   ],
++   "v1_slots_from": "code: unified_audit.py lines 337-342"
++  },
++  "T08": {
++   "term_id": "cplay:CRASHED",
++   "label": "CRASHED",
++   "cluster": 1,
++   "predicate": "a check raised; recorded on coverage, never severity",
++   "slots_specific": null,
++   "slots_carried": [
++    "field",
++    "status",
++    "reason",
++    "sigma",
++    "basis",
++    "exception",
++    "path",
++    "bound",
++    "kind",
++    "module",
++    "input",
++    "missing_path",
++    "expiry_condition"
++   ],
++   "derivation": "specific: undetermined. axes.crash(exc, *, path, module, inputs, expiry_condition) is written for CRASHED, but what it builds is the shared Reading plus a CoverageEntry, and the sources support reading 'specific' as the call's parameters or as CoverageEntry's fields. carried: fields of Reading and of CoverageEntry (reason once), checked by running crash().",
++   "v1_slots_welded": [
++    "kind",
++    "module",
++    "input",
++    "reason",
++    "missing_path",
++    "expiry_condition"
++   ],
++   "v1_slots_from": "code: cplay axes.CoverageEntry (crash() fills it)"
++  },
++  "T09": {
++   "term_id": "taf:UNKNOWN",
++   "label": "UNKNOWN",
++   "cluster": 2,
++   "predicate": "value not yet known, held open with an exit",
++   "slots_specific": null,
++   "slots_carried": null,
++   "derivation": "specific: the glossary defines UNKNOWN as a status of a slot and names no fields for it. carried: undetermined; the register describes the expiry_condition and expiry_source that go beside an UNKNOWN slot but names no record that is built for UNKNOWN. | a1 (ND): specific undetermined. The glossary row ties expiry_condition and expiry_source to 'PENDING / UNKNOWN' (S1d), but unified_audit.py puts expiry_condition on INFO and crash coverage entries too (S2), and expiry_source may belong to the exit rather than the slot; two readings remain.",
++   "v1_slots_welded": [
++    "expiry_condition",
++    "instrument_class",
++    "sensitivity",
++    "protocol",
++    "provenance"
++   ],
++   "v1_slots_from": "code: expiry_register.py EXPIRY_KEYS"
++  },
++  "T12": {
++   "term_id": "cplay:UNKNOWN",
++   "label": "UNKNOWN",
++   "cluster": 2,
++   "predicate": "value not yet known, held open with an exit",
++   "slots_specific": [
++    "triggers"
++   ],
++   "slots_carried": [
++    "state",
++    "reason",
++    "typed",
++    "untyped"
++   ],
++   "derivation": "specific: parameters of tokens.unknown(reason, triggers). carried: instance fields of the Token it returns, checked by running it. The nested ExpiryTrigger objects held in 'typed' are not opened. | a1 (S2, S3-out): 'reason' removed, since every non-verdict Token requires one (tokens.py 48-49); typed / untyped are derived from triggers and not added. carried unchanged.",
++   "v1_slots_welded": [
++    "reason",
++    "triggers",
++    "kind",
++    "target",
++    "condition"
++   ],
++   "v1_slots_from": "declared: cplay tokens.unknown + ExpiryTrigger"
++  },
++  "T02": {
++   "term_id": "taf:ABSENT_AT_SENSITIVITY",
++   "label": "ABSENT_AT_SENSITIVITY",
++   "cluster": 3,
++   "predicate": "scoped absence: not found at a stated sensitivity",
++   "slots_specific": [
++    "value"
++   ],
++   "slots_carried": [
++    "value"
++   ],
++   "derivation": "the glossary and expiry_register.py write the notation ABSENT_AT_SENSITIVITY(<value>); the prose names instrument, sensitivity and protocol as what the value must state but writes no field list; no record holds the state today ('No slot holds it yet').",
++   "v1_slots_welded": [
++    "instrument_class",
++    "sensitivity",
++    "protocol"
++   ],
++   "v1_slots_from": "declared from the definition's three named slots"
++  },
++  "T05": {
++   "term_id": "cplay:ABSENT_AT_SENSITIVITY",
++   "label": "ABSENT_AT_SENSITIVITY",
++   "cluster": 3,
++   "predicate": "scoped absence: not found at a stated sensitivity",
++   "slots_specific": [
++    "limit",
++    "basis",
++    "effect_size",
++    "conditions",
++    "ladder"
++   ],
++   "slots_carried": [
++    "state",
++    "reason",
++    "limit",
++    "basis",
++    "effect_size",
++    "conditions",
++    "ladder",
++    "covers_effect"
++   ],
++   "derivation": "specific: parameters of tokens.absent_at_sensitivity. carried: instance fields of the Token it returns, checked by running it.",
++   "v1_slots_welded": [
++    "limit",
++    "basis",
++    "effect_size",
++    "conditions",
++    "ladder"
++   ],
++   "v1_slots_from": "code: cplay tokens.absent_at_sensitivity signature"
++  },
++  "T15": {
++   "term_id": "taf:expiry_condition",
++   "label": "expiry_condition",
++   "cluster": 4,
++   "predicate": "the exit of an open slot",
++   "slots_specific": [
++    "instrument_class",
++    "sensitivity",
++    "protocol",
++    "provenance"
++   ],
++   "slots_carried": [
++    "instrument_class",
++    "sensitivity",
++    "protocol",
++    "provenance"
++   ],
++   "derivation": "expiry_register.EXPIRY_KEYS; the register rejects any other key set.",
++   "v1_slots_welded": [
++    "instrument_class",
++    "sensitivity",
++    "protocol",
++    "provenance"
++   ],
++   "v1_slots_from": "code: expiry_register.py EXPIRY_KEYS"
++  },
++  "T04": {
++   "term_id": "cplay:ExpiryTrigger",
++   "label": "ExpiryTrigger",
++   "cluster": 4,
++   "predicate": "the exit of an open slot",
++   "slots_specific": [
++    "kind",
++    "target",
++    "condition"
++   ],
++   "slots_carried": [
++    "kind",
++    "target",
++    "condition"
++   ],
++   "derivation": "class ExpiryTrigger(kind, target, condition); instance fields the same.",
++   "v1_slots_welded": [
++    "kind",
++    "target",
++    "condition"
++   ],
++   "v1_slots_from": "code: cplay tokens.ExpiryTrigger"
++  },
++  "T07": {
++   "term_id": "fa:VOID",
++   "label": "VOID",
++   "cluster": 5,
++   "predicate": "the check could not be evaluated on these inputs",
++   "slots_specific": [],
++   "slots_carried": [
++    "kind",
++    "verdict",
++    "void_reason",
++    "status",
++    "deciding_tier",
++    "precision",
++    "rigorous",
++    "fast",
++    "tiers",
++    "triage",
++    "located",
++    "proposal",
++    "intervals",
++    "inputs",
++    "units",
++    "provenance",
++    "slots",
++    "human_interest",
++    "ai_interest",
++    "formula",
++    "bisection",
++    "formulas",
++    "subboxes",
++    "subboxes_where_both_hold",
++    "subboxes_where_one_fails",
++    "first_undecided_subbox",
++    "first_subbox_with_no_value"
++   ],
++   "derivation": "as fa:UNDECIDED: VOID is the verdict of _blank, which both check_point and check_intersection start from.",
++   "v1_slots_welded": [
++    "reason"
++   ],
++   "v1_slots_from": "declared"
++  },
++  "T03": {
++   "term_id": "cplay:VOID",
++   "label": "VOID",
++   "cluster": 6,
++   "predicate": "a value the spec leaves open, held with a reason",
++   "slots_specific": [],
++   "slots_carried": [
++    "state",
++    "reason"
++   ],
++   "derivation": "specific: no constructor or key list is written for VOID; tokens.py requires a reason on every non-verdict token, a rule shared by all of them. carried: Token(state, reason), which every VOID in the sources constructs.",
++   "v1_slots_welded": [
++    "reason"
++   ],
++   "v1_slots_from": "code: cplay tokens.Token"
++  },
++  "T01": {
++   "term_id": "fa:UNDECIDED",
++   "label": "UNDECIDED",
++   "cluster": 7,
++   "predicate": "an uncertain difference straddles a tolerance edge",
++   "slots_specific": [],
++   "slots_carried": [
++    "kind",
++    "verdict",
++    "void_reason",
++    "status",
++    "deciding_tier",
++    "precision",
++    "rigorous",
++    "fast",
++    "tiers",
++    "triage",
++    "located",
++    "proposal",
++    "intervals",
++    "inputs",
++    "units",
++    "provenance",
++    "slots",
++    "human_interest",
++    "ai_interest",
++    "formula",
++    "bisection",
++    "formulas",
++    "subboxes",
++    "subboxes_where_both_hold",
++    "subboxes_where_one_fails",
++    "first_undecided_subbox",
++    "first_subbox_with_no_value"
++   ],
++   "derivation": "specific: UNDECIDED is a verdict value of numcheck's result record; no class, function or key list is written for it (the symbols D and t in the docstring are inputs to the decision, not slots). carried: keys of the record built by check_point (_blank + formula + bisection) and by check_intersection (_blank + formulas + the five subbox keys); the docstring says UNDECIDED can end either check. Checked by running check_point on the pinned file.",
++   "v1_slots_welded": [
++    "D",
++    "t"
++   ],
++   "v1_slots_from": "declared"
++  },
++  "T06": {
++   "term_id": "cplay:UNRESOLVED",
++   "label": "UNRESOLVED",
++   "cluster": 7,
++   "predicate": "an uncertain difference straddles a tolerance edge",
++   "slots_specific": [],
++   "slots_carried": [
++    "field",
++    "token"
++   ],
++   "derivation": "specific: nothing is tied to UNRESOLVED alone (the guard-band inputs m, tol, U are inputs to the decision, not slots). carried: closure.FieldToken(field, token); the Token inside is a field's value and is not opened.",
++   "v1_slots_welded": [
++    "m",
++    "tol",
++    "U"
++   ],
++   "v1_slots_from": "declared: verdict_branch_G inputs"
++  },
++  "T11": {
++   "term_id": "fa:HOLDS",
++   "label": "HOLDS",
++   "cluster": 8,
++   "predicate": "a difference lies inside its tolerance",
++   "slots_specific": [],
++   "slots_carried": [
++    "kind",
++    "verdict",
++    "void_reason",
++    "status",
++    "deciding_tier",
++    "precision",
++    "rigorous",
++    "fast",
++    "tiers",
++    "triage",
++    "located",
++    "proposal",
++    "intervals",
++    "inputs",
++    "units",
++    "provenance",
++    "slots",
++    "human_interest",
++    "ai_interest",
++    "formula",
++    "bisection"
++   ],
++   "derivation": "as fa:UNDECIDED, point check only: check_intersection's own verdicts are not HOLDS (HOLDS appears there only for subboxes).",
++   "v1_slots_welded": [
++    "D",
++    "t"
++   ],
++   "v1_slots_from": "declared"
++  },
++  "T13": {
++   "term_id": "cplay:OK",
++   "label": "OK",
++   "cluster": 9,
++   "predicate": "a check ran and passed",
++   "slots_specific": [],
++   "slots_carried": [
++    "field",
++    "status",
++    "reason",
++    "sigma",
++    "basis",
++    "exception",
++    "path",
++    "bound"
++   ],
++   "derivation": "specific: OK needs no field beyond the shared record (axes.reading). carried: Reading(field, status, reason, sigma, basis, exception, path, bound), what axes.reading returns for OK.",
++   "v1_slots_welded": [],
++   "v1_slots_from": "declared: axes.reading OK carries no slot"
++  },
++  "T14": {
++   "term_id": "cplay:CLOSED_WITHIN",
++   "label": "CLOSED_WITHIN",
++   "cluster": 8,
++   "predicate": "a difference lies inside its tolerance",
++   "slots_specific": [
++    "sigma",
++    "basis"
++   ],
++   "slots_carried": [
++    "field",
++    "status",
++    "reason",
++    "sigma",
++    "basis",
++    "exception",
++    "path",
++    "bound"
++   ],
++   "derivation": "specific: axes.reading raises unless CLOSED_WITHIN has a numeric sigma >= 0 and a basis. carried: the shared Reading fields.",
++   "v1_slots_welded": [
++    "sigma",
++    "basis"
++   ],
++   "v1_slots_from": "code: axes.reading CLOSED_WITHIN"
++  }
++ },
++ "pairs": [
++  {
++   "left": "T10",
++   "right": "T08",
++   "pair_label": "GAP_INSTRUMENT_CRASH | CRASHED",
++   "key_tier": "MAPS",
++   "same_predicate": true,
++   "slots_equal": true,
++   "same_label": false,
++   "key_tier_specific": null,
++   "key_tier_carried": "PARTIAL"
++  },
++  {
++   "left": "T09",
++   "right": "T12",
++   "pair_label": "UNKNOWN | UNKNOWN",
++   "key_tier": "PARTIAL",
++   "same_predicate": true,
++   "slots_equal": false,
++   "same_label": true,
++   "key_tier_specific": null,
++   "key_tier_carried": null
++  },
++  {
++   "left": "T02",
++   "right": "T05",
++   "pair_label": "ABSENT_AT_SENSITIVITY | ABSENT_AT_SENSITIVITY",
++   "key_tier": "PARTIAL",
++   "same_predicate": true,
++   "slots_equal": false,
++   "same_label": true,
++   "key_tier_specific": "PARTIAL",
++   "key_tier_carried": "PARTIAL"
++  },
++  {
++   "left": "T15",
++   "right": "T04",
++   "pair_label": "expiry_condition | ExpiryTrigger",
++   "key_tier": "PARTIAL",
++   "same_predicate": true,
++   "slots_equal": false,
++   "same_label": false,
++   "key_tier_specific": "PARTIAL",
++   "key_tier_carried": "PARTIAL"
++  },
++  {
++   "left": "T07",
++   "right": "T03",
++   "pair_label": "VOID | VOID",
++   "key_tier": "HOMONYM",
++   "same_predicate": false,
++   "slots_equal": true,
++   "same_label": true,
++   "key_tier_specific": "HOMONYM",
++   "key_tier_carried": "HOMONYM"
++  },
++  {
++   "left": "T01",
++   "right": "T06",
++   "pair_label": "UNDECIDED | UNRESOLVED",
++   "key_tier": "PARTIAL",
++   "same_predicate": true,
++   "slots_equal": false,
++   "same_label": false,
++   "key_tier_specific": "MAPS",
++   "key_tier_carried": "PARTIAL"
++  },
++  {
++   "left": "T11",
++   "right": "T13",
++   "pair_label": "HOLDS | OK",
++   "key_tier": "NONE",
++   "same_predicate": false,
++   "slots_equal": false,
++   "same_label": false,
++   "key_tier_specific": "NONE",
++   "key_tier_carried": "NONE"
++  },
++  {
++   "left": "T11",
++   "right": "T14",
++   "pair_label": "HOLDS | CLOSED_WITHIN",
++   "key_tier": "PARTIAL",
++   "same_predicate": true,
++   "slots_equal": false,
++   "same_label": false,
++   "key_tier_specific": "PARTIAL",
++   "key_tier_carried": "PARTIAL"
++  }
++ ]
++}
+diff --git a/blind-reader-void12/scoring/score_v2.py b/blind-reader-void12/scoring/score_v2.py
+index 448833f..cae3d5d 100644
+--- a/blind-reader-void12/scoring/score_v2.py
++++ b/blind-reader-void12/scoring/score_v2.py
+@@ -15,12 +15,50 @@ Reports, in this order:
+ It does not combine the two meanings into one number, and it does not say which meaning is right. The tier rule is the first
+ reader's (same cluster: MAPS if the two slot sets are equal, else PARTIAL; different clusters: HOMONYM if the labels are
+ equal, else NONE); under 'specific' two terms that each have no tied fields have equal (empty) sets and so MAPS.
++
++Scoring rules a key may name in meta.scoring_rules (key_v2_a1.json names both; key_v2.json names none, so v2 output is
++unchanged byte for byte). Source: KEY_V2_AMENDMENT_1.md.
++  N1  before comparing slot names, strip one pair of surrounding < > and surrounding backticks (after strip + lowercase)
++  C1  per term, beside equal / differ, the set relation of reader to key: equal | reader-superset | reader-subset |
++      overlap | disjoint; a superset lists its extras. Reported beside the existing numbers; nothing is combined.
+ """
+ import argparse, itertools, json, os, sys
+ HERE = os.path.dirname(os.path.abspath(__file__))
+ sys.path.insert(0, HERE)
+ import score as S  # noqa: E402
+ MEANINGS = ("specific", "carried")
++RULES = ("N1", "C1")
++RELATIONS = ("equal", "reader-superset", "reader-subset", "overlap", "disjoint")
++
++def rules_of(key):
++    r = tuple(key.get("meta", {}).get("scoring_rules", ()))
++    bad = [x for x in r if x not in RULES]
++    if bad:
++        raise ValueError("unknown scoring rule(s) in key: %s" % ", ".join(bad))
++    return r
++
++def norm_name(x, n1):
++    """The scorer's name comparison: strip + lowercase (as score.slotset); under N1 also one pair of <> and backticks."""
++    x = x.strip().lower()
++    if n1:
++        if len(x) >= 2 and x[0] == "`" and x[-1] == "`": x = x[1:-1].strip()
++        if len(x) >= 2 and x[0] == "<" and x[-1] == ">": x = x[1:-1].strip()
++    return x
++
++def nset(xs, n1):
++    return frozenset(norm_name(x, n1) for x in xs)
++
++def relation(r, q):
++    """C1: reader set r against key set q."""
++    if r == q: return "equal"
++    if r > q: return "reader-superset"
++    if r < q: return "reader-subset"
++    return "overlap" if r & q else "disjoint"
++
++def ntier(same, sa, sb, la, lb, n1):
++    if same:
++        return "MAPS" if nset(sa, n1) == nset(sb, n1) else "PARTIAL"
++    return "HOMONYM" if la == lb else "NONE"
+ 
+ def validate(resp, key):
+     errs = []
+@@ -60,6 +98,7 @@ def validate(resp, key):
+ 
+ def tiers_under(key, clusters, slots_of, m):
+     """Tier of each declared pair given clusters and a {id: list or None} map; None if a needed list is undetermined."""
++    n1 = "N1" in rules_of(key)
+     out = []
+     for p in key["pairs"]:
+         a, b = p["left"], p["right"]
+@@ -68,10 +107,12 @@ def tiers_under(key, clusters, slots_of, m):
+         if same and (sa is None or sb is None):
+             out.append(None)
+         else:
+-            out.append(S.tier(same, sa or [], sb or [], key["terms"][a]["label"], key["terms"][b]["label"]))
++            out.append(ntier(same, sa or [], sb or [], key["terms"][a]["label"], key["terms"][b]["label"], n1))
+     return out
+ 
+ def score(resp, key):
++    rules = rules_of(key)
++    n1, c1 = "N1" in rules, "C1" in rules
+     ids = sorted(key["terms"])
+     cl = {i: str(resp["terms"][i]["cluster"]).strip() for i in ids}
+     kc = {i: key["terms"][i]["cluster"] for i in ids}
+@@ -88,6 +129,8 @@ def score(resp, key):
+            "term_pairs": {"both_join": tp, "reader_only": fp, "key_only": fn, "neither": tn, "total": tp + fp + fn + tn},
+            "ari": round(S.ari([cl[i] for i in ids], [kc[i] for i in ids]), 3), "term_pair_differences": diff,
+            "clusters_reader": len(set(cl.values())), "clusters_key": len(set(kc.values())), "meanings": {}, "flags": []}   # flags: reserved, empty
++    if rules:
++        out["key_version"] = key["meta"].get("v"); out["scoring_rules"] = list(rules)
+     single = {i: "s" + i for i in ids}
+     label = {i: key["terms"][i]["label"] for i in ids}
+     for m in MEANINGS:
+@@ -108,22 +151,30 @@ def score(resp, key):
+             base[name] = sum(1 for a, b in zip(t, ktier) if b is not None and a == b)
+         srows = []
+         for i in ids:
+-            r = S.slotset(rslots[i])
++            r = nset(rslots[i], n1)
+             if kslots[i] is None:
+-                srows.append({"id": i, "label": key["terms"][i]["label"], "status": "n/d", "missing": [], "extra": sorted(r), "reader_basis": resp["terms"][i]["slots_%s_basis" % m]})
++                row = {"id": i, "label": key["terms"][i]["label"], "status": "n/d", "missing": [], "extra": sorted(r), "reader_basis": resp["terms"][i]["slots_%s_basis" % m]}
++                if c1: row["relation"] = "n/d"
++                srows.append(row)
+                 continue
+-            q = S.slotset(kslots[i])
+-            srows.append({"id": i, "label": key["terms"][i]["label"], "status": "equal" if r == q else "differ",
+-                          "missing": sorted(q - r), "extra": sorted(r - q), "reader_basis": resp["terms"][i]["slots_%s_basis" % m]})
++            q = nset(kslots[i], n1)
++            row = {"id": i, "label": key["terms"][i]["label"], "status": "equal" if r == q else "differ",
++                   "missing": sorted(q - r), "extra": sorted(r - q), "reader_basis": resp["terms"][i]["slots_%s_basis" % m]}
++            if c1: row["relation"] = relation(r, q)
++            srows.append(row)
+         sdet = [s for s in srows if s["status"] != "n/d"]
+         out["meanings"][m] = {"pairs": rows, "tier_agree": k, "n_determined": n, "n_pairs": len(rows),
+                               "cp95": [round(lo, 3), round(hi, 3)], "baselines": base, "slots": srows,
+                               "slots_equal": sum(s["status"] == "equal" for s in sdet), "slots_determined": len(sdet)}
++        if c1:
++            out["meanings"][m]["relations"] = {k2: sum(s["relation"] == k2 for s in sdet) for k2 in RELATIONS}
+     return out
+ 
+ def render(o):
+     L = ["reader %s | %s | %s | blindness: %s %s" % (o["reader_label"], o["model_family"], o["date_utc"], o["blind_status"],
+                                                       ("(also declared: %s)" % ", ".join(o["attestation_flags"])) if o["attestation_flags"] else "")]
++    if o.get("scoring_rules"):
++        L.append("key %s | scoring rules %s (KEY_V2_AMENDMENT_1.md)" % (o["key_version"], ", ".join(o["scoring_rules"])))
+     t = o["term_pairs"]
+     L += ["", "grouping (independent of slots): all %d term pairs: both join %d, reader only %d, key only %d, neither %d; adjusted Rand index %.3f; clusters reader %d, key %d"
+           % (t["total"], t["both_join"], t["reader_only"], t["key_only"], t["neither"], o["ari"], o["clusters_reader"], o["clusters_key"])]
+@@ -138,9 +189,12 @@ def render(o):
+                                                   "" if r["agree"] is None else ("agree" if r["agree"] else "DIFFER")))
+         L.append("references under this key: nothing grouped %d, label-only %d (of %d determined)" % (x["baselines"]["singletons"], x["baselines"]["label_only"], x["n_determined"]))
+         L.append("slot sets equal to the key's: %d of %d determined" % (x["slots_equal"], x["slots_determined"]))
++        if "relations" in x:
++            L.append("set relation, reader to key (C1, beside the count above): " + ", ".join("%s %d" % (k2, x["relations"][k2]) for k2 in RELATIONS))
+         for s in x["slots"]:
+             if s["status"] == "equal": continue
+-            L.append("   %s %-24s %-6s missing %s extra %s" % (s["id"], s["label"], s["status"], s["missing"] or "-", s["extra"] or "-") if s["status"] == "differ"
++            rel = (" [%s]" % s["relation"]) if "relation" in s and s["status"] == "differ" else ""
++            L.append("   %s %-24s %-6s missing %s extra %s%s" % (s["id"], s["label"], s["status"], s["missing"] or "-", s["extra"] or "-", rel) if s["status"] == "differ"
+                      else "   %s %-24s n/d (key undetermined); reader gave %s" % (s["id"], s["label"], s["extra"] or "[]"))
+     if o["flags"]:
+         L += ["", "flags:"] + ["   " + f for f in o["flags"]]
+diff --git a/blind-reader-void12/scoring/test_score_v2.py b/blind-reader-void12/scoring/test_score_v2.py
+index a44078e..80ee406 100644
+--- a/blind-reader-void12/scoring/test_score_v2.py
++++ b/blind-reader-void12/scoring/test_score_v2.py
+@@ -2,6 +2,10 @@
+ Baselines worked out by hand before the scorer was run (pairs with an undetermined list are left out of the count):
+   slots_specific, 7 of 8 pairs determined:  nothing grouped 2 of 7 (VOID|VOID, HOLDS|OK); label-only 3 of 7 (UNKNOWN, ABSENT, HOLDS|OK).
+   slots_carried,  7 of 8 pairs determined:  nothing grouped 2 of 7; label-only 2 of 7 (ABSENT, HOLDS|OK).
++Key v2 amendment 1 revision 1 (../KEY_V2_AMENDMENT_1.md, S3-out, R-a, R-b), worked by hand before the scorer was run against key_v2_a1.json:
++  slots_specific, 6 of 8 pairs determined (UNKNOWN|UNKNOWN joins GAP|CRASHED as n/d):
++     nothing grouped 2 of 6 (VOID|VOID, HOLDS|OK); label-only 2 of 6 (ABSENT, HOLDS|OK; VOID|VOID grouped gives MAPS, not HOMONYM).
++  slots_carried unchanged: 2 of 7 and 2 of 7.
+ """
+ import copy, hashlib, importlib.util, inspect, json, os, re, sys, types, unittest
+ HERE = os.path.dirname(os.path.abspath(__file__))
+@@ -11,6 +15,8 @@ sys.dont_write_bytecode = True
+ import score as S  # noqa: E402
+ import score_v2 as S2  # noqa: E402
+ KEY = S.load(os.path.join(HERE, "key_v2.json"))
++KEY_A1 = S.load(os.path.join(HERE, "key_v2_a1.json"))
++KEY_V2_SHA256 = "c88a910a03a6456900efabd130c57a19f1a0133c9566ebce34ae0b6e813b18d1"   # PREREG.md, packet v2 section
+ PK = os.path.join(ROOT, "reader_packet_v2")
+ SRC = os.path.join(PK, "sources")
+ TEMPLATE = S.load(os.path.join(PK, "response_template.json"))
+@@ -27,10 +33,10 @@ def load_cplay():
+         mod = importlib.util.module_from_spec(spec); sys.modules["cplay_v2test." + m] = mod; spec.loader.exec_module(mod); setattr(pkg, m, mod)
+     return pkg.tokens, pkg.axes, pkg.closure
+ 
+-def make_response(clusters=None, specific=None, carried=None):
++def make_response(clusters=None, specific=None, carried=None, key=None):
+     r = copy.deepcopy(TEMPLATE)
+     r.update(reader_label="test", model_family="test", date_utc="2026-01-01")
+-    for i, t in KEY["terms"].items():
++    for i, t in (key or KEY)["terms"].items():
+         sp = (specific or {}).get(i, t["slots_specific"] or [])
+         ca = (carried or {}).get(i, t["slots_carried"] or [])
+         r["terms"][i] = {"cluster": (clusters or {}).get(i, str(t["cluster"])), "predicate": "p",
+@@ -215,5 +221,180 @@ class ScoringV2(unittest.TestCase):
+         b = S2.score(make_response(specific={"T05": []}, carried={"T05": []}), KEY)
+         self.assertEqual((a["ari"], a["term_pairs"]), (b["ari"], b["term_pairs"]))
+ 
++def sha(*p):
++    with open(os.path.join(*p), "rb") as fh:
++        return hashlib.sha256(fh.read()).hexdigest()
++
++class KeyV2Amendment1(unittest.TestCase):
++    """key_v2_a1.json: each changed list follows from the amendment's rules, checked against the packet's sources."""
++    @classmethod
++    def setUpClass(cls):
++        cls.T, cls.A, cls.C = load_cplay()
++        cls.by = {t["term_id"]: t for t in KEY_A1["terms"].values()}
++    def test_key_v2_untouched_and_hashes_pinned(self):
++        self.assertEqual(sha(HERE, "key_v2.json"), KEY_V2_SHA256)
++        self.assertEqual(KEY_A1["meta"]["key_v2_sha256"], KEY_V2_SHA256)
++        self.assertEqual(KEY_A1["meta"]["amendment_sha256"], sha(ROOT, "KEY_V2_AMENDMENT_1.md"))
++        prereg = read(ROOT, "PREREG.md")
++        self.assertIn(KEY_A1["meta"]["amendment_sha256"], prereg)
++        self.assertIn(sha(HERE, "key_v2_a1.json"), prereg)
++        self.assertEqual(KEY_A1["meta"]["scoring_rules"], ["N1", "C1"])
++        self.assertNotIn("scoring_rules", KEY["meta"])
++    def test_amendment_records_s3_out_and_keeps_s3_in_struck(self):
++        txt = read(ROOT, "KEY_V2_AMENDMENT_1.md")
++        self.assertIn("S3-out (decided: a slot is an input degree of freedom; derived\n             attributes carry no new information)", txt)
++        self.assertIn("[STRUCK]   S3-in", txt)
++        self.assertIn("[revised R-a]", txt); self.assertIn("[revised R-b]", txt)
++        self.assertIn("Counter-evidence considered (revision 1): tokens.py 17-18", txt)
++    def test_only_the_listed_changes(self):
++        changed = []
++        for i in KEY["terms"]:
++            for f in ("cluster", "label", "term_id", "predicate", "slots_specific", "slots_carried"):
++                if KEY["terms"][i][f] != KEY_A1["terms"][i][f]:
++                    changed.append("%s.%s" % (i, f))
++        self.assertEqual(sorted(changed), ["T09.slots_specific", "T10.slots_specific", "T12.slots_specific"])
++        for p, q in zip(KEY["pairs"], KEY_A1["pairs"]):
++            diff = {k for k in p if p[k] != q[k]}
++            self.assertEqual(diff, {"key_tier_specific"} if p["pair_label"] == "UNKNOWN | UNKNOWN" else set(), p["pair_label"])
++        self.assertIsNone([q for q in KEY_A1["pairs"] if q["pair_label"] == "UNKNOWN | UNKNOWN"][0]["key_tier_specific"])
++    def test_t12_s2_reason_shared_by_every_non_verdict_and_s3_out(self):
++        T = self.T
++        for st in T.STATES:
++            if st in T.VERDICTS: continue
++            with self.assertRaises(T.TokenError):
++                T.Token(st)                      # S2: reason is required on every non-verdict, so it is not UNKNOWN's alone
++        params = list(inspect.signature(T.unknown).parameters)
++        self.assertEqual(params, ["reason", "triggers"])
++        self.assertEqual(self.by["cplay:UNKNOWN"]["slots_specific"], [x for x in params if x != "reason"])
++        tok = T.unknown("r", [T.ExpiryTrigger("k", "t", "c"), "note"])
++        self.assertEqual((len(tok.typed), len(tok.untyped)), (1, 1))   # derived from triggers: S3-out does not add them
++        self.assertNotIn("typed", self.by["cplay:UNKNOWN"]["slots_specific"])
++    def test_t05_s3_out_excludes_derived_covers_effect(self):
++        T = self.T
++        params = list(inspect.signature(T.absent_at_sensitivity).parameters)
++        tok = T.absent_at_sensitivity(limit=1, basis="LADDER", effect_size=2, conditions="c", ladder="L")
++        self.assertEqual(sorted(set(vars(tok)) - set(params) - {"state", "reason"}), ["covers_effect"])
++        self.assertIs(tok.covers_effect, True)                           # computed: limit <= effect_size
++        self.assertEqual(self.by["cplay:ABSENT_AT_SENSITIVITY"]["slots_specific"], params)
++    def test_t10_s2_and_s1b_from_unified_audit(self):
++        ua = read(SRC, "thermodynamic-accountability-framework", "calibration", "unified_audit.py")
++        a, b = ua.index("def _coverage_entries"), ua.index("# CODE-AUDIT DISPATCHER")
++        blocks = [set(re.findall(r'"(\w+)":', x.split("})")[0])) for x in ua[a:b].split("entries.append({")[1:]]
++        self.assertEqual(len(blocks), 4)                                 # crash, UNKNOWN, INFO, unranked label
++        crash, others = blocks[0], blocks[1:]
++        self.assertIn("missing_path", crash)
++        only_crash = sorted(crash - set.intersection(*others))
++        self.assertEqual(only_crash, ["missing_path"])                   # S2: the other five are on every kind
++        self.assertIn("kind", crash)                                     # the coverage entry is the term's own record
++        d = ua.index("def _dispatch"); e = ua.index("report.sections[name] = section", d)
++        raise_branch = ua[ua.index("except Exception as e:", d):e]
++        section = re.findall(r'"(\w+)":', raise_branch)
++        self.assertEqual(section, ["error", "exception_type", "missing_path"])   # built beside the entry, in report.sections
++        self.assertNotIn("kind", section)                                # carries no term value: not the term's own record (R-b)
++        self.assertEqual(self.by["taf:GAP_INSTRUMENT_CRASH"]["slots_specific"], only_crash)
++    def test_t09_nd_both_readings_present_in_the_sources(self):
++        gl = read(SRC, "thermodynamic-accountability-framework", "docs", "glossary.md")
++        row = [l for l in gl.splitlines() if l.startswith("| `PENDING` / `UNKNOWN`")]
++        self.assertEqual(len(row), 1)
++        self.assertIn("`expiry_condition`", gl); self.assertIn("`expiry_source`", gl)
++        ua = read(SRC, "thermodynamic-accountability-framework", "calibration", "unified_audit.py")
++        self.assertGreaterEqual(ua.count('"expiry_condition":'), 3)      # also on INFO and crash entries
++        self.assertIsNone(self.by["taf:UNKNOWN"]["slots_specific"])
++    def test_s2_presence_keeps_numcheck_specific_empty(self):
++        src = read(SRC, "formula-audit", "numcheck", "check.py")
++        blank = src[src.index("def _blank"):src.index("def _units")]
++        for k in ("void_reason", "proposal", "located"):
++            self.assertIn('"%s"' % k, blank, k)                          # on every record, None on other paths
++        inter = src[src.index("def check_intersection"):src.index("def check_all")]
++        for k in ("first_undecided_subbox", "first_subbox_with_no_value"):
++            self.assertRegex(inter, r'\n        rec\["%s"\] = ' % k)   # set on every intersection record
++        for tid in ("fa:UNDECIDED", "fa:VOID", "fa:HOLDS"):
++            self.assertEqual(self.by[tid]["slots_specific"], [], tid)
++    def test_t14_r_a_required_only_by_closed_within(self):
++        A = self.A
++        full = dict(reason="r", sigma=1.0, basis="b", exception="E", path="p", bound="x")
++        where = {"CRASHED": "INSTRUMENT", "OUTSIDE_DOMAIN": "APPLICABILITY"}
++        req = {}
++        for st in A.STATUSES:
++            req[st] = []
++            for k in full:
++                kw = dict(full); del kw[k]
++                try:
++                    A.reading(where.get(st, "PHYSICAL"), st, **kw)
++                except A.AxisError:
++                    req[st].append(k)
++        self.assertEqual(req["CLOSED_WITHIN"], ["sigma", "basis"])       # S1(c)
++        for k in ("sigma", "basis"):                                     # R-a: no other status requires them
++            self.assertEqual([st for st in A.STATUSES if k in req[st]], ["CLOSED_WITHIN"])
++        self.assertTrue(set(A.Reading._fields) >= {"sigma", "basis"})    # every Reading HAS them: a presence test alone would empty T14
++        self.assertEqual(self.by["cplay:CLOSED_WITHIN"]["slots_specific"], req["CLOSED_WITHIN"])
++        self.assertEqual(req["OK"], []); self.assertEqual(self.by["cplay:OK"]["slots_specific"], [])
++    def test_t01_r_b_proposal_is_not_the_terms_own_record(self):
++        src = read(SRC, "formula-audit", "numcheck", "check.py")
++        cand = src[src.index("def _identity_candidate"):src.index("def check_point")]
++        self.assertIn('"status": "DERIVED" if proof else "PROPOSED"', cand)   # it carries its own status value
++        self.assertNotIn('"verdict"', cand.split("return {", 1)[1].split('"evidence"')[0])
++        self.assertIn("The check's own verdict is not changed.", src)
++        point = src[src.index("def check_point"):src.index("def check_intersection")]
++        self.assertIn('rec["proposal"] = _identity_candidate(', point)  # held in a field of the point record (R-b: not opened)
++        blank = src[src.index("def _blank"):src.index("def _units")]
++        self.assertIn('"proposal": None', blank)                        # the field itself is on every record (S2 presence)
++        self.assertEqual(self.by["fa:UNDECIDED"]["slots_specific"], [])
++    def test_exactly_three_undetermined_lists(self):
++        nulls = sorted((t["term_id"], m) for t in KEY_A1["terms"].values() for m in ("slots_specific", "slots_carried") if t[m] is None)
++        self.assertEqual(nulls, [("cplay:CRASHED", "slots_specific"), ("taf:UNKNOWN", "slots_carried"), ("taf:UNKNOWN", "slots_specific")])
++
++class ScoringA1(unittest.TestCase):
++    def test_perfect_reader_under_a1(self):
++        o = S2.score(make_response(key=KEY_A1), KEY_A1)
++        self.assertEqual(o["meanings"]["specific"]["n_determined"], 6)
++        self.assertEqual(o["meanings"]["carried"]["n_determined"], 7)
++        self.assertEqual(o["meanings"]["specific"]["slots_determined"], 13)
++        for m in S2.MEANINGS:
++            x = o["meanings"][m]
++            self.assertEqual(x["tier_agree"], x["n_determined"])
++            self.assertEqual(x["relations"]["equal"], x["slots_determined"])
++    def test_hand_worked_baselines_a1(self):
++        o = S2.score(make_response(key=KEY_A1), KEY_A1)["meanings"]
++        self.assertEqual((o["specific"]["baselines"]["singletons"], o["specific"]["baselines"]["label_only"]), (2, 2))
++        self.assertEqual((o["carried"]["baselines"]["singletons"], o["carried"]["baselines"]["label_only"]), (2, 2))
++    def test_n1_only_under_a1(self):
++        r = make_response(specific={"T02": ["<value>"]}, carried={"T02": ["`value`"]})
++        a1 = {s["id"]: s for s in S2.score(r, KEY_A1)["meanings"]["specific"]["slots"]}
++        v2 = {s["id"]: s for s in S2.score(r, KEY)["meanings"]["specific"]["slots"]}
++        self.assertEqual(a1["T02"]["status"], "equal"); self.assertEqual(v2["T02"]["status"], "differ")
++        self.assertEqual({s["id"]: s for s in S2.score(r, KEY_A1)["meanings"]["carried"]["slots"]}["T02"]["status"], "equal")
++        self.assertEqual(S2.norm_name(" <Value> ", True), "value")
++        self.assertEqual(S2.norm_name("<value>", False), "<value>")
++        self.assertEqual(S2.norm_name("slot id", True), "slot id")       # spaces and underscores kept
++    def test_c1_relations(self):
++        f = frozenset
++        self.assertEqual(S2.relation(f("ab"), f("ab")), "equal")
++        self.assertEqual(S2.relation(f("abc"), f("ab")), "reader-superset")
++        self.assertEqual(S2.relation(f(), f("ab")), "reader-subset")
++        self.assertEqual(S2.relation(f("ac"), f("ab")), "overlap")
++        self.assertEqual(S2.relation(f("c"), f("ab")), "disjoint")
++        self.assertEqual(S2.relation(f("c"), f()), "reader-superset")
++        r = make_response(key=KEY_A1, carried={"T04": ["kind", "target", "condition", "is_exit"], "T03": ["state"], "T13": ["x"]})
++        rows = {s["id"]: s for s in S2.score(r, KEY_A1)["meanings"]["carried"]["slots"]}
++        self.assertEqual((rows["T04"]["relation"], rows["T03"]["relation"], rows["T13"]["relation"]),
++                         ("reader-superset", "reader-subset", "disjoint"))
++        self.assertEqual(rows["T09"]["relation"], "n/d")
++    def test_v2_output_unchanged_by_the_rules(self):
++        o = S2.score(make_response(), KEY)
++        self.assertNotIn("scoring_rules", o)
++        for m in S2.MEANINGS:
++            self.assertNotIn("relations", o["meanings"][m])
++            self.assertTrue(all("relation" not in s for s in o["meanings"][m]["slots"]))
++    def test_filed_v2_score_reproduces(self):
++        d = os.path.join(ROOT, "readings", "2026-11-18_claude-v2-A")
++        o = S2.score(S.load(os.path.join(d, "response.json")), KEY)
++        self.assertEqual(S2.render(o), read(d, "score.txt").rstrip("\n"))
++        self.assertEqual(json.loads(json.dumps(o)), S.load(os.path.join(d, "score.json")))
++    def test_unknown_rule_refused(self):
++        k = copy.deepcopy(KEY_A1); k["meta"]["scoring_rules"] = ["N1", "Z9"]
++        with self.assertRaises(ValueError):
++            S2.score(make_response(key=KEY_A1), k)
++
+ if __name__ == "__main__":
+     unittest.main()
+-- 
+2.43.0
+
