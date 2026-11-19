@@ -5,9 +5,12 @@ Instrumentation studies on the readings. Each study's criteria and schema are pi
 | study | files | status |
 |---|---|---|
 | M01, `slots_specific` membership | `M01_CRITERIA.md`, `M01_SCHEMA.json` (pinned 2026-11-19, commit `67b8e9d`), `m01_code.py`, `m01_records.json`, `m01_report.txt` | three filed v2 readings coded; descriptive only |
-| M02, `slots_carried` traversal depth | not started | schema and criteria to be pinned before coding |
+| M01 extension (D1 condition, parallel / sequential arms, fixtures) | `M01_EXTENSION.md`, `instructions/M01_D1.md` (pinned `66d4f28`) | designed; no new reading yet |
+| M02, `slots_carried` scope and traversal | `M02_CRITERIA.md`, `M02_SCHEMA.json`, `instructions/M02_D1.md`..`M02_D3.md` (pinned `66d4f28`) | designed; the three filed readings not yet coded |
+| instrument | `instrument/validate.py`, `instrument/fixtures/`, `instrument/test_instrument.py` | structural validator for M01 and M02; never rejects a reader's choice for disagreeing with key a1; fixtures use neutral names and are checked by rule |
+| as received | `as_received/gpt6_g01_g02_instrumentation.patch` | the GPT-6 reader's proposal these designs come from, unedited |
 
-Re-run: `python3 m01_code.py` (writes both outputs); `python3 m01_code.py --check` (fails if they would change). Stdlib only; imports the packet's cplay code without writing bytecode; parses numcheck and TAF text.
+Re-run: `python3 -m unittest test_instrument` (in `instrument/`); `python3 m01_code.py` (writes both outputs); `python3 m01_code.py --check` (fails if they would change). Stdlib only; imports the packet's cplay code without writing bytecode; parses numcheck and TAF text.
 
 ## M01: what the coding shows (descriptive; the coder had seen all three readings)
 

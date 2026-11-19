@@ -1,0 +1,37 @@
+{
+ "fixture_set": "M02_KNOWN_ANSWER",
+ "version": 1,
+ "purpose": "Synthetic record layouts with stipulated answers under a stated scope rule and traversal rule. They check that the instrument can represent and compute each layout; they decide no real case. Neutral names only; nothing here is from the packet.",
+ "cases": [
+  {"case_id": "M02-KA-01", "description": "own record holds a record-valued field: name it, do not open",
+   "scope_rule": "TERM_OWN_RECORD_ONLY", "traversal_rule": "NAME_DO_NOT_OPEN",
+   "records": [
+    {"record_id": "R0", "relationship": "TERM_OWN_RECORD", "on_reporting_path": true, "depth": 0, "fields": ["phase", "note", "detail"], "nested_field_refs": {"detail": "R1"}},
+    {"record_id": "R1", "relationship": "NESTED_RECORD", "on_reporting_path": false, "depth": 1, "fields": ["inner_a", "inner_b"], "nested_field_refs": {}}],
+   "expected": {"counted": ["R0"], "opened": [], "fields": ["phase", "note", "detail"]}},
+  {"case_id": "M02-KA-02", "description": "two records built on one reporting path; both count under the all-reporting-path rule",
+   "scope_rule": "ALL_REPORTING_PATH_RECORDS", "traversal_rule": "NAME_DO_NOT_OPEN",
+   "records": [
+    {"record_id": "LOG", "relationship": "TERM_OWN_RECORD", "on_reporting_path": true, "depth": 0, "fields": ["phase", "mark"], "nested_field_refs": {}},
+    {"record_id": "SLIP", "relationship": "REPORTING_RECORD", "on_reporting_path": true, "depth": 0, "fields": ["tally", "stamp"], "nested_field_refs": {}}],
+   "expected": {"counted": ["LOG", "SLIP"], "opened": [], "fields": ["phase", "mark", "tally", "stamp"]}},
+  {"case_id": "M02-KA-03", "description": "the same layout under the own-record rule: only the term's own record counts",
+   "scope_rule": "TERM_OWN_RECORD_ONLY", "traversal_rule": "NAME_DO_NOT_OPEN",
+   "records": [
+    {"record_id": "LOG", "relationship": "TERM_OWN_RECORD", "on_reporting_path": true, "depth": 0, "fields": ["phase", "mark"], "nested_field_refs": {}},
+    {"record_id": "SLIP", "relationship": "REPORTING_RECORD", "on_reporting_path": true, "depth": 0, "fields": ["tally", "stamp"], "nested_field_refs": {}}],
+   "expected": {"counted": ["LOG"], "opened": [], "fields": ["phase", "mark"]}},
+  {"case_id": "M02-KA-04", "description": "a wrapper carries the term's record; it counts only under a rule that takes wrappers",
+   "scope_rule": "FIRST_WRAPPER_ONLY", "traversal_rule": "NAME_DO_NOT_OPEN",
+   "records": [
+    {"record_id": "CORE", "relationship": "TERM_OWN_RECORD", "on_reporting_path": true, "depth": 0, "fields": ["phase", "mark"], "nested_field_refs": {}},
+    {"record_id": "BOX", "relationship": "WRAPPER_RECORD", "on_reporting_path": true, "depth": 1, "fields": ["items", "count"], "nested_field_refs": {"items": "CORE"}}],
+   "expected": {"counted": ["CORE", "BOX"], "opened": [], "fields": ["phase", "mark", "items", "count"]}},
+  {"case_id": "M02-KA-05", "description": "a reachable nested record, opened under the OPEN traversal rule",
+   "scope_rule": "TERM_OWN_RECORD_ONLY", "traversal_rule": "OPEN",
+   "records": [
+    {"record_id": "E0", "relationship": "TERM_OWN_RECORD", "on_reporting_path": true, "depth": 0, "fields": ["sort", "detail"], "nested_field_refs": {"detail": "E1"}},
+    {"record_id": "E1", "relationship": "NESTED_RECORD", "on_reporting_path": false, "depth": 1, "fields": ["line", "trace"], "nested_field_refs": {}}],
+   "expected": {"counted": ["E0", "E1"], "opened": ["E1"], "fields": ["sort", "detail", "line", "trace"]}}
+ ]
+}

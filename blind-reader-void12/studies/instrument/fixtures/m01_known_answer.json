@@ -1,0 +1,34 @@
+{
+ "fixture_set": "M01_KNOWN_ANSWER",
+ "version": 1,
+ "purpose": "Synthetic cases with stipulated answers. They check that the instrument can represent and compute each case; they decide no real case. Neutral names only; nothing here is from the packet. Given to readers only apart from, or after locking, their real-source responses (M01_EXTENSION.md section 4).",
+ "rule_under_test": {
+  "TAG": "the field is present on every instance of the target and on no instance of any other term",
+  "INDEPENDENCE": "the field is not listed in the case's computed_from map (it is passed in or recorded raw)",
+  "slot_under_this_rule": "TAG and INDEPENDENCE; this is the stipulated rule of the fixture, not a rule readers must follow"
+ },
+ "cases": [
+  {"case_id": "M01-KA-01", "cell": "A", "description": "raw field, exclusive, on every target instance",
+   "target": [{"tide": 1, "keel": "a"}, {"tide": 2, "keel": "b"}], "others": [{"tide": 1}, {"tide": 2}],
+   "computed_from": {}, "field": "keel", "expected": {"TAG": "YES", "INDEPENDENCE": "YES", "slot": true}},
+  {"case_id": "M01-KA-02", "cell": "B", "description": "computed field, exclusive",
+   "target": [{"tide": 1, "keel": 2, "wake": true}, {"tide": 3, "keel": 1, "wake": false}], "others": [{"tide": 1}],
+   "computed_from": {"wake": ["tide", "keel"]}, "field": "wake", "expected": {"TAG": "YES", "INDEPENDENCE": "NO", "slot": false}},
+  {"case_id": "M01-KA-03", "cell": "C", "description": "raw field shared with another term",
+   "target": [{"hull": "a"}, {"hull": "b"}], "others": [{"hull": "c"}],
+   "computed_from": {}, "field": "hull", "expected": {"TAG": "NO", "INDEPENDENCE": "YES", "slot": false}},
+  {"case_id": "M01-KA-04", "cell": "F", "description": "raw field missing from one target instance",
+   "target": [{"mast": "a"}, {}], "others": [{}],
+   "computed_from": {}, "field": "mast", "expected": {"TAG": "NO", "INDEPENDENCE": "YES", "slot": false}},
+  {"case_id": "M01-KA-05", "cell": "D", "description": "named in prose only; on no instance",
+   "target": [{"tide": 1}, {"tide": 2}], "others": [{}], "documented_only": ["sounding"],
+   "computed_from": {}, "field": "sounding", "expected": {"TAG": "NO", "INDEPENDENCE": "UNRESOLVED", "slot": false}},
+  {"case_id": "M01-KA-06", "cell": "C", "description": "on every target instance and on one other-term instance",
+   "target": [{"tide": "a", "spar": "v"}, {"tide": "b", "spar": "w"}], "others": [{"spar": "z"}, {}],
+   "computed_from": {}, "field": "spar", "expected": {"TAG": "NO", "INDEPENDENCE": "YES", "slot": false}},
+  {"case_id": "M01-KA-07", "cell": "C (presence) / A (applicability)", "description": "a key present on every record of every term (None off the target), populated on the target only: TAG reads presence here, so NO; a reader reading applicability would say YES. The fixture fixes TAG to presence and records the other reading as an alternative.",
+   "target": [{"note": "x"}, {"note": "y"}], "others": [{"note": null}, {"note": null}],
+   "computed_from": {}, "field": "note", "expected": {"TAG": "NO", "INDEPENDENCE": "YES", "slot": false,
+   "alternative_reading": {"TAG_by_applicability": "YES", "slot": true}}}
+ ]
+}
