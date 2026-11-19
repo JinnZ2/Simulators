@@ -4,6 +4,8 @@ Filed as pasted by the owner, unedited. Authorship of the parts is not stated. T
 
 Note 2026-11-19 (later the same day): the owner sent this text again, without its opening paragraph and under the one-word heading `Kimi`. Recorded as: author of the numbered points 1-7 and their six blocks = Kimi (owner-stated 2026-11-19). The heading sits above the whole paste, which also holds the `MODE_SEQUENCE.md` block and the layer and K3 blocks; the owner did not say whether the heading covers those, so their author stays not stated. The line above ("Authorship of the parts is not stated") is kept as written. The text below is unchanged.
 
+Note 2026-11-19 (segment sources, owner-stated; this replaces "their author stays not stated" in the note above, which is kept as written): lines 10-87 of this file = Kimi, 2026-11-19 11:46 (the suggestions). Lines 89-165 = Claude chat, 2026-11-19 11:48-11:52 (the `MODE_SEQUENCE.md` block, the K3 block, the layer blocks). Lines 8-9 are the owner's opening. The owner gave these as lines 1-78 and 80-156 of the bundle as sent, which starts at this file's line 10. Line 104 ("Open: in REVIEW-2 and AUDIT-2 ...") is answered since by `../../MODE_SEQUENCE.md`, "Later (2026-11-19)". A version for sending, with segment headers, a request header and that line marked, is `../requests/REVIEW_MODE_AND_AUTHORITY_BUNDLE_2026-11-19_DRAFT.md`.
+
 ```text
 Ok.... I just realized something.  I am so sorry for not understanding this before now.  🤦‍♀️.  My cultures default has been creating confusion.
 

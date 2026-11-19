@@ -66,6 +66,8 @@ RETURN: commits; for every changed definition the three claims kept apart: the s
 
 REVIEW-2 and AUDIT-2 use the REVIEW and AUDIT headers with the implementing commit named in READ. Whether their reader must differ from the implementer is open in `../MODE_SEQUENCE.md` (`[void]`).
 
+Note 2026-11-19: answered since in `../MODE_SEQUENCE.md`, "Later (2026-11-19)": REVIEW-2 requires a reader different from the implementer; AUDIT-2 is split by deterministic and judgment checks. The sentence above is kept as written.
+
 ## The baseline is not touched by any mode
 
 D0 is the brief unchanged. Each clarification is its own condition (`instructions/`). Past responses, scores and keys stay as filed. A new version gets a new hash and a changelog. Nothing in this file is sent to a blind reader except the BLIND header.
