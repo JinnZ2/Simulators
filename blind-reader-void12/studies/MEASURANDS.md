@@ -103,3 +103,37 @@ The DERIVED key-layer lines rest on the wordslots card, which marks its place ta
 ## Later (2026-11-19): correction
 
 Item 1 says repairing the fixture "is the next IMPLEMENT step and is not done here". It was drafted earlier in this session: `7bc51bb`, PR #320 (draft). See the dated section of `confusion/2026-11-19_claude-code_m01-m02.md`.
+
+## Later (2026-11-19): SUGGEST records on this file as read at `a3e204f`
+
+Request header: `MODE: SUGGEST (records only)  READ: studies/MEASURANDS.md@a3e204f` (the owner, 2026-11-19). The section above this one, added at `671a226`, comes after that read set. These records do not depend on it.
+
+**1. The key TAG chain, link by link.** The status of each link is the owner's marking. The "source here" column is what this tree holds for it.
+
+```text
+link                                                       status     source here
+vocab_branches.py line 7: "same predicate and same slots   OBSERVED   combined-playground/cplay/vocab_branches.py:7
+  (wordslots place-table style)"
+Lojban zo'e: an unfilled place is still a place (the       OBSERVED   the owner's marking; no file in this tree states
+  elided argument is filled by zo'e, "unspecified")                   it. Nearest: tools/provenance_marker.py:30
+                                                                      ("(Ithkuil/Lojban) every predicate place filled")
+wordslots card: places vs "filled and sourced"             PROPOSED   tools/TOOL_CARDS.md, wordslots card ("the place
+                                                                      table is PROPOSED")
+wordslots code                                             UNREAD     formula-audit:wordslots/check.py, another
+                                                                      repository, not read in this session
+overall: TAG = presence for the key                        DERIVED on PROPOSED
+```
+
+The TAG and Populated lines in the table above inherit this status. If the wordslots code, once read, defines a place differently, both move.
+
+**2. GR08 and outer aggregate reports.** The reading of `READER_BRIEF.md` line 23 that includes wrappers ("a shared or wrapper record that only carries the term as a value") also includes outer aggregate reports, since an aggregate report carries the term's record as a value. The same reading answers both. Linked rows: KC10 (outer aggregates such as `check_all()` and `UnifiedAuditReport`), GR08 and GR18 (Grok rows 8 and 18). Where the path **stops** stays OPEN: line 23 says what a carrying record is, not how far out the carrying goes (G3).
+
+**3. Independence of the findings above.** Under the owner's rules (`../MODE_SEQUENCE.md`, dated section), each of these is the Claude Code session reading text it is itself working on. They are **INDEPENDENCE L0**, self-review:
+
+```text
+ANSWERED_IN_FILES on GR08 (OPEN_ROWS.md)                 L0
+ANSWERED_IN_FILES on KC11 (OPEN_ROWS.md)                 L0
+CF20 "the brief's text decides it against the fixture"   L0
+```
+
+None closes or decides anything alone. The fixture repair (`7bc51bb`, PR #320, draft) is **held** until a REVIEW-2 at L2 or above. The request is drafted in `requests/REVIEW2_LINE23_2026-11-19_DRAFT.md`.

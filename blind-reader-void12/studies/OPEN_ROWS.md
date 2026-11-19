@@ -133,3 +133,14 @@ Rows now 63: CF20 is added after the counts above were taken. The counts are not
 ## Later (2026-11-19): CF20 status
 
 CF20's repair already exists at `7bc51bb` (PR #320, draft). Status: EDIT_REQUIRED, drafted, waiting on REVIEW-2 by a reader other than the implementer (`INDEPENDENCE_LEDGER.md`).
+
+## Later (2026-11-19): independence of the second statuses; GR08 widened
+
+From the owner's SUGGEST request (read set `MEASURANDS.md@a3e204f`). Recorded in that file's dated section:
+
+```text
+GR08  ANSWERED_IN_FILES (L0): the line-23 reading that takes in wrappers also takes in outer aggregate
+      reports; linked KC10, GR18; where the path stops: OPEN (G3)
+KC11  ANSWERED_IN_FILES (L0)
+CF20  "the brief decides against the fixture" (L0); repair 7bc51bb HELD until REVIEW-2 at L2+
+```
