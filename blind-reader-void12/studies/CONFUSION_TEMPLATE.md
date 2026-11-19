@@ -35,3 +35,21 @@ Proposal filed as received: `as_received/kimi_confusion_inventory_proposal.md`. 
 Kimi also proposes that the inventory be filed with **every** reading. That is a change to the task text readers receive, so it is the owner's to adopt; a draft is in `readings/WORK_ORDER_NEXT_DRAFT.md`.
 
 Evidence-specific closures named by Kimi, recorded against the rows: **CF02** closes only by a numcheck run with a formula-audit checkout; **CF08** and **CF17** only by a second coder reading the same quotes.
+
+## Later (2026-11-19): reader attestation block
+
+Added at the owner's request (message of 2026-11-19, item 5), after the Grok reader's repository read proposed a prior-exposure declaration (`as_received/grok_repo_read_2026-11-19.md`, E6). The same reader then read the repository in the conversation that had produced its confusion record (`packets/grok_2026-11-19/SENT_RECORD.json`, `later_2026-11-19`). A record is filed with this block at its head. "unknown" is an answer; a blank is not recorded and stays blank, never defaulted to "no".
+
+```text
+Reader attestation
+prior exposure, before this task:
+  the packet (these files, or an earlier version of them)          yes / no / unknown
+  the key (comparison key, its amendment, or any score)            yes / no / unknown
+  the repository (any part, any branch)                            yes / no / unknown
+  other readers' records (readings, confusion records)             yes / no / unknown
+memory from other conversations                                   on / off / unknown
+tools used in this task                                            <list, or "none">
+filled by                                                          reader / owner's record
+```
+
+Records filed before this section have no block. Where the owner's record supplies a value for one of them, it goes in that record's dated section with its source. It is not written into the header above.

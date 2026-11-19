@@ -13,6 +13,10 @@ Instrumentation studies on the readings. Each study's criteria and schema are pi
 | confusion records | `CONFUSION_TEMPLATE.md`, `confusion/` | where a reader of the packet or the studies was unsure, guessed or stopped, one row per point; the Claude Code session's own record of its M01 / M02 work (17 rows), the chat session's record of the same work from its reports (12 rows), the Kimi reader's record of the study material at 158aa12 (KC01-KC13; its own ids C01-C12 kept beside them), and the Grok reader's record of study-review packet v1 (GR01-GR18; 9 PACKET, 9 TEXT), all filed as received |
 | packets | `packets/build_packet.py`, `packets/grok_2026-11-19/` (v1, sent; `SENT_RECORD.json`), `packets/grok_2026-11-19_v2/` (DRAFT, not sent; `v1_to_v2.diff`) | blind study-review packets for a new reader: the files, the paste form, the zip and a private manifest mapping each file to path@commit; v2 fixes the v1 defects P1-P6 |
 | gaps | `GAPS.md` | the definition gaps G1-G5, each with its confusion rows; none decided |
+| repository read | `as_received/grok_repo_read_2026-11-19.md`, `GROK_REPO_READ_CHECK.md` | the Grok reader's answer about the repository in general (F1-F7, E1-E7), as received; its claims checked against main, with the concept map, tool finder and freeze state |
+| residue register | `RESIDUE_REGISTER.md` | DRAFT sidecar: records kept on purpose, path / kind / reason / source; no marker in any specimen or hashed file |
+| failure-point index | `AI_FAILURE_MODES_INDEX.md` | DRAFT, links only: the confusion records and the root `COLLISIONS.md` entries |
+| drafts | `drafts/CONCEPT_MAP_SCHEMA_DRAFT.md`, `drafts/folder_fields_draft.py`, `drafts/folder_fields.draft.json` | proposed per-folder fields for `concept_map.json`; not merged |
 | as received | `as_received/gpt6_g01_g02_instrumentation.patch` | the GPT-6 reader's proposal these designs come from, unedited |
 
 Re-run: `python3 -m unittest test_instrument` (in `instrument/`); `python3 m01_code.py` (writes both outputs); `python3 m01_code.py --check` (fails if they would change). Stdlib only; imports the packet's cplay code without writing bytecode; parses numcheck and TAF text.

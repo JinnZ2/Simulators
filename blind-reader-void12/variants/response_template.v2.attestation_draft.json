@@ -1,0 +1,191 @@
+{
+ "reader_label": "",
+ "model_family": "",
+ "date_utc": "",
+ "terms": {
+  "T01": {
+   "cluster": "",
+   "predicate": "",
+   "slots_specific": [],
+   "slots_specific_basis": "",
+   "slots_carried": [],
+   "slots_carried_basis": "",
+   "source_lines_read": "",
+   "confidence": "",
+   "could_also_join": []
+  },
+  "T02": {
+   "cluster": "",
+   "predicate": "",
+   "slots_specific": [],
+   "slots_specific_basis": "",
+   "slots_carried": [],
+   "slots_carried_basis": "",
+   "source_lines_read": "",
+   "confidence": "",
+   "could_also_join": []
+  },
+  "T03": {
+   "cluster": "",
+   "predicate": "",
+   "slots_specific": [],
+   "slots_specific_basis": "",
+   "slots_carried": [],
+   "slots_carried_basis": "",
+   "source_lines_read": "",
+   "confidence": "",
+   "could_also_join": []
+  },
+  "T04": {
+   "cluster": "",
+   "predicate": "",
+   "slots_specific": [],
+   "slots_specific_basis": "",
+   "slots_carried": [],
+   "slots_carried_basis": "",
+   "source_lines_read": "",
+   "confidence": "",
+   "could_also_join": []
+  },
+  "T05": {
+   "cluster": "",
+   "predicate": "",
+   "slots_specific": [],
+   "slots_specific_basis": "",
+   "slots_carried": [],
+   "slots_carried_basis": "",
+   "source_lines_read": "",
+   "confidence": "",
+   "could_also_join": []
+  },
+  "T06": {
+   "cluster": "",
+   "predicate": "",
+   "slots_specific": [],
+   "slots_specific_basis": "",
+   "slots_carried": [],
+   "slots_carried_basis": "",
+   "source_lines_read": "",
+   "confidence": "",
+   "could_also_join": []
+  },
+  "T07": {
+   "cluster": "",
+   "predicate": "",
+   "slots_specific": [],
+   "slots_specific_basis": "",
+   "slots_carried": [],
+   "slots_carried_basis": "",
+   "source_lines_read": "",
+   "confidence": "",
+   "could_also_join": []
+  },
+  "T08": {
+   "cluster": "",
+   "predicate": "",
+   "slots_specific": [],
+   "slots_specific_basis": "",
+   "slots_carried": [],
+   "slots_carried_basis": "",
+   "source_lines_read": "",
+   "confidence": "",
+   "could_also_join": []
+  },
+  "T09": {
+   "cluster": "",
+   "predicate": "",
+   "slots_specific": [],
+   "slots_specific_basis": "",
+   "slots_carried": [],
+   "slots_carried_basis": "",
+   "source_lines_read": "",
+   "confidence": "",
+   "could_also_join": []
+  },
+  "T10": {
+   "cluster": "",
+   "predicate": "",
+   "slots_specific": [],
+   "slots_specific_basis": "",
+   "slots_carried": [],
+   "slots_carried_basis": "",
+   "source_lines_read": "",
+   "confidence": "",
+   "could_also_join": []
+  },
+  "T11": {
+   "cluster": "",
+   "predicate": "",
+   "slots_specific": [],
+   "slots_specific_basis": "",
+   "slots_carried": [],
+   "slots_carried_basis": "",
+   "source_lines_read": "",
+   "confidence": "",
+   "could_also_join": []
+  },
+  "T12": {
+   "cluster": "",
+   "predicate": "",
+   "slots_specific": [],
+   "slots_specific_basis": "",
+   "slots_carried": [],
+   "slots_carried_basis": "",
+   "source_lines_read": "",
+   "confidence": "",
+   "could_also_join": []
+  },
+  "T13": {
+   "cluster": "",
+   "predicate": "",
+   "slots_specific": [],
+   "slots_specific_basis": "",
+   "slots_carried": [],
+   "slots_carried_basis": "",
+   "source_lines_read": "",
+   "confidence": "",
+   "could_also_join": []
+  },
+  "T14": {
+   "cluster": "",
+   "predicate": "",
+   "slots_specific": [],
+   "slots_specific_basis": "",
+   "slots_carried": [],
+   "slots_carried_basis": "",
+   "source_lines_read": "",
+   "confidence": "",
+   "could_also_join": []
+  },
+  "T15": {
+   "cluster": "",
+   "predicate": "",
+   "slots_specific": [],
+   "slots_specific_basis": "",
+   "slots_carried": [],
+   "slots_carried_basis": "",
+   "source_lines_read": "",
+   "confidence": "",
+   "could_also_join": []
+  }
+ },
+ "attestation": {
+  "q1_seen_pair_table_with_verdicts": "",
+  "q2_seen_predicate_sentence_by_someone_else": "",
+  "q3_seen_vocabulary_mapping_or_second_reader_report": "",
+  "q4_told_how_many_clusters_or_pairs": "",
+  "q5_used_anything_outside_packet": "",
+  "q6_prior_sessions_about_this_project": "",
+  "notes": ""
+ },
+ "attestation_exposure": {
+  "_draft": "DRAFT 2026-11-19, not in any packet; reader_packet_v2/response_template.json is hash-pinned and unchanged. Answer each with yes / no / unknown; a blank is not recorded.",
+  "prior_exposure_packet": "",
+  "prior_exposure_key": "",
+  "prior_exposure_repository": "",
+  "prior_exposure_other_readers_records": "",
+  "memory_from_other_conversations": "",
+  "tools_used": [],
+  "filled_by": ""
+ }
+}

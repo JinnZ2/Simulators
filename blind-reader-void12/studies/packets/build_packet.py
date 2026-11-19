@@ -173,7 +173,7 @@ def d0():
     return ("# Condition D0\n\nThe brief and terms in `brief/`, unchanged, with no extra note. D1, D2 and D3 are the brief plus the note "
             "of that name in this folder; a reader in a study gets exactly one condition.\n")
 
-def confusion(reader):
+def confusion(reader, version=1):
     return f"""# Confusion request
 
 Reader: {reader}      Read: <the files of this packet>
@@ -190,6 +190,22 @@ id | term or passage | what was missing | what you did (guessed / stopped / read
 - If you find no confusion, write "none found" and list everything you read.
 - Do not resolve a row by guessing what another reader would say.
 - The inventory is a record of reading, not a score.
+""" + (ATTEST if version == 2 else "")
+
+# packet v2 (added 2026-11-19, owner's item 5): the reader attestation block of CONFUSION_TEMPLATE.md
+ATTEST = """
+Put this block at the head of your inventory. "unknown" is an answer; leave nothing blank.
+
+```text
+Reader attestation
+prior exposure, before this task:
+  the packet (these files, or an earlier version of them)          yes / no / unknown
+  the key (any comparison key, or any score)                       yes / no / unknown
+  the repository these files come from (any part)                  yes / no / unknown
+  other readers' records (readings, confusion records)             yes / no / unknown
+memory from other conversations                                   on / off / unknown
+tools used in this task                                            <list, or "none">
+```
 """
 
 def build(reader, date, version=1):
@@ -200,7 +216,7 @@ def build(reader, date, version=1):
         counts = {}
         if kind == "task": text = task(label, version)
         elif kind == "d0": text = d0()
-        elif kind == "confusion": text = confusion(reader)
+        elif kind == "confusion": text = confusion(reader, version)
         elif kind == "terms": text = terms()
         elif kind == "excerpt": text = excerpt(rel, ranges, name)
         else: text = read(rel)
@@ -266,7 +282,9 @@ def main():
         manifest["diff_from_v1"] = {"files": rows, "diff_file": "v1_to_v2.diff",
                                     "fixes": {"P1": "response template added", "P2": "condition stated in TASK.md (none: a review task)",
                                               "P3": "spec excerpt named as terms.json points to it", "P4": "excerpt rule stated in TASK.md",
-                                              "P5": "pointers to files not included neutralized", "P6": "six answer-bearing sentences neutralized"}}
+                                              "P5": "pointers to files not included neutralized", "P6": "six answer-bearing sentences neutralized"},
+                                    "added": {"2026-11-19": "reader attestation block in CONFUSION_REQUEST.md (owner's item 5; not a v1 defect)"},
+                                    "send_constraint": "not to be sent into the conversation that produced R-2026-11-19-a: that reader has since read the repository (grok_2026-11-19/SENT_RECORD.json, later_2026-11-19)"}
         os.makedirs(out, exist_ok=True)
         open(os.path.join(out, "v1_to_v2.diff"), "w", encoding="utf-8").writelines(diff)
     if leaks:

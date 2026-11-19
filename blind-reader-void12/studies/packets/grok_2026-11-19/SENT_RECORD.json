@@ -9,5 +9,15 @@
  "channel": null,
  "observer": null,
  "packet_defects_known_after_sending": "P1-P6, checked in confusion/2026-11-19_grok_m01-m02.md once filed; summary in packets/grok_2026-11-19_v2/MANIFEST_PRIVATE.json diff_from_v1.fixes",
- "comparability": "the reader's answers are to packet v1 with defects P1-P6; rows caused by a defect are to be tagged PACKET when the record is filed"
+ "comparability": "the reader's answers are to packet v1 with defects P1-P6; rows caused by a defect are to be tagged PACKET when the record is filed",
+ "later_2026-11-19": [
+  {
+   "event": "After returning R-2026-11-19-a, the reader was asked about the repository in general and answered from a general read of it (its answer: seven confusions about the repository and seven proposals, filed in studies/as_received/grok_repo_read_2026-11-19.md).",
+   "consequence": "In that conversation the reader is NOT usable as a blind reader of any VOID-12 packet: it has read the repository, which holds the key, the scores and the other readers' records. A later packet to Grok needs a fresh conversation with memory off, and its attestation must still be asked, not assumed.",
+   "source": "owner's record (message of 2026-11-19); the answer as pasted by the owner",
+   "applies_to": [
+    "packets/grok_2026-11-19_v2 (DRAFT, not sent)"
+   ]
+  }
+ ]
 }

@@ -1,0 +1,4773 @@
+{
+ "status": "DRAFT, not merged into concept_map.json",
+ "rules": {
+  "deps": "top-level imports (ast, absolute only) in the folder's .py files, minus stdlib and minus any module name defined as a .py file or package anywhere in the repo, so the list mixes third-party packages with modules imported but not present in this tree (e.g. a cross-repo source file); 'stdlib' when none; an import inside try/except is still counted",
+  "claim_table": "'yes' if a file whose name starts with CLAIM (CLAIM_TABLE, CLAIMS) is anywhere in the folder, else 'no'; 'void' is not assigned by the script (its meaning is the owner's)",
+  "refutation_protocol": "'yes' if the token REFUTATION_PROTOCOL occurs in a .md/.py/.json file of the folder, else 'no' (a mention, not a check that the protocol is followed)",
+  "self_exclusion": "the folder holding this draft (blind-reader-void12/studies/drafts/) is not scanned: it names the tokens it counts, so scanning it would count itself",
+  "selftest": "'yes' if the string --selftest occurs in a .py file of the folder, else 'no' (a mention; refusals of --selftest also count; nothing is run)"
+ },
+ "null_means": "not recorded; no default",
+ "folders": {
+  "AMOC": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "yes",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "ICSC": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "TOOL_FINDER": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "adaptive-claim-loop": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": [
+    "numpy"
+   ],
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "additivity-inheritance": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "agent-lifecycle-energy": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "alignment-under-coupling": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "anchor-interval": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "anchor-measurand-crossing": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "anchor-position": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "animacy-pass": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "antifungal-mechanism-sim": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "yes",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "aperiodic-order-sim-stack": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "archive": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": [
+    "preference_free_rank"
+   ],
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "assessor-coupling": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "automation-gap": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "battery-offgas-prearm": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "blame-attribution": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "blind-reader-void12": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": [
+    "anti_metaphor_locker",
+    "assumption_validator",
+    "cascade_length_eval",
+    "first_principles_audit",
+    "fork_width_scorer",
+    "monoculture_detector",
+    "negative_space_index",
+    "numcheck",
+    "substrate_refusal_eval",
+    "trapdoor_eval",
+    "unitaudit"
+   ],
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": "blind-reader-void12/studies/RESIDUE_REGISTER.md",
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": "CODER_INFERRED",
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   },
+   "parse_failures": [
+    "blind-reader-void12/studies/packets/grok_2026-11-19_v2/packet/sources/P1/cplay/tokens.py",
+    "blind-reader-void12/studies/packets/grok_2026-11-19_v2/packet/sources/P1/cplay/closure.py",
+    "blind-reader-void12/studies/packets/grok_2026-11-19_v2/packet/sources/P1/cplay/axes.py",
+    "blind-reader-void12/studies/packets/grok_2026-11-19_v2/packet/sources/P2/numcheck/check.py",
+    "blind-reader-void12/studies/packets/grok_2026-11-19_v2/packet/sources/P3/calibration/unified_audit.py",
+    "blind-reader-void12/studies/packets/grok_2026-11-19_v2/packet/sources/P3/calibration/expiry_register.py",
+    "blind-reader-void12/studies/packets/grok_2026-11-19/packet/sources/P1/cplay/tokens.py",
+    "blind-reader-void12/studies/packets/grok_2026-11-19/packet/sources/P1/cplay/closure.py",
+    "blind-reader-void12/studies/packets/grok_2026-11-19/packet/sources/P1/cplay/axes.py",
+    "blind-reader-void12/studies/packets/grok_2026-11-19/packet/sources/P2/numcheck/check.py",
+    "blind-reader-void12/studies/packets/grok_2026-11-19/packet/sources/P3/calibration/unified_audit.py",
+    "blind-reader-void12/studies/packets/grok_2026-11-19/packet/sources/P3/calibration/expiry_register.py"
+   ]
+  },
+  "branch-set": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "bridge-impoundment": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "category-weld": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "ch4-four-box": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "chain-position": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "claim-audits": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "claim-record": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "claim-refusal-gap": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "climate-modeling": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": [
+    "numpy",
+    "openai",
+    "scipy"
+   ],
+   "claim_table": "no",
+   "refutation_protocol": "yes",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "closure-cost": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "clustering-axes": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "coinage-log": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "cold-weather-battery-guide": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "columbia-chain-cascade": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "combined-playground": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "condition-scoped-authority": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "configuration-record": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "consensus-anchor": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "constraint-assembly": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "continuity-audit": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "conversation-type": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "cooperative-substrate": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "cooperative-substrate-proof": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "corn-stunt-forensics": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "corpus-input-gaps": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "credential-channel": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "crediting-rate": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": [
+    "preference_free_rank"
+   ],
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "criteria-drift": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "criterion-externality": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "criterion-symmetry": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "crossdomain-eval": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": [
+    "matplotlib",
+    "numpy",
+    "pytest",
+    "scipy",
+    "sympy"
+   ],
+   "claim_table": "no",
+   "refutation_protocol": "yes",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "custody-verification-band": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "cutoff-attribution": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "cycle-ledger": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "declared-frame": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "deep-research-correction": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "dependency-ledger": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "dependency-survey": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "derivation-discarded": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "design-basis-ai": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "divergence-playground": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "yes",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "docs": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "yes",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "domain-ledger": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "earth_economics": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": [
+    "inquiry_engine",
+    "matplotlib",
+    "numpy"
+   ],
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "effective-redundancy-audit": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "emergence-stability-simulator": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "enclosure-first-residual": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": [
+    "preference_free_rank"
+   ],
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "encoding-selection": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "energy": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": [
+    "matplotlib",
+    "numpy",
+    "pysr",
+    "scipy"
+   ],
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "engine-boiler-guide": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "envelope-asymmetry": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "equivalence-field": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "evaluation-frame": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "evidence-demotion-detector": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "experience-ledger": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "exploration-engine": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "exploration-playground": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "external-audit": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "extraction-blindness-sim": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "extraction-chain-join": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "failure-mode-register": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "false-tradeoff": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "falsifier-audit": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "falsifier-survey": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "yes",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "field-fabrication-guide": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "field-mode-eval": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "floor-capability": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "floor-resilience": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": [
+    "matplotlib",
+    "numpy",
+    "pydantic",
+    "pytest",
+    "yaml"
+   ],
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "fold-matrix": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "forest-model-ledger": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": [
+    "numpy",
+    "runs",
+    "scipy",
+    "yaml"
+   ],
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "fourd-municipal-engine": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "yes",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "fourd-municipal-engine-v2": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": [
+    "fastapi",
+    "geoalchemy2",
+    "geopandas",
+    "openai",
+    "psycopg2",
+    "pydantic",
+    "pypdf",
+    "pytest",
+    "rapidfuzz",
+    "sqlalchemy"
+   ],
+   "claim_table": "no",
+   "refutation_protocol": "yes",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "fragility-cascade": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": [
+    "matplotlib",
+    "numpy",
+    "scipy"
+   ],
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "frame-instruments": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "frame-location-benchmark": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "frame-token-audit": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "fuel-independence-guide": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "gap-existence-cases": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "gap-instruments": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "gap-markers": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "gap-register": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "gate-check": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "gdprf-framework": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": [
+    "jsonschema"
+   ],
+   "claim_table": "no",
+   "refutation_protocol": "yes",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "generation-capacity": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "grounded-work-stack": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "grounding-layers": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": [
+    "matplotlib",
+    "numpy",
+    "psutil",
+    "pynvml",
+    "scipy"
+   ],
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "habitat-lag-dependency": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "handoff-provenance": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "held-gaps": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "held-open-uncertainty": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "hf-incident-extract": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "household-scope-audit": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "human-sensing-prior": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "incentive-blindspot-sim": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "instrument-bias-sims": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "instrument-epistemology": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": [
+    "jsonschema",
+    "numpy"
+   ],
+   "claim_table": "no",
+   "refutation_protocol": "yes",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "instrument-index": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "internal-reference-boundary": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "inverseminar": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "investigation-sim": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "kernel_stake": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "label-position-test": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "labor-instrument": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "law-as-unvalidated-measurement": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "law-audit-card": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "law-measurement-correction": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "ledger": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": [
+    "cobol_ledger",
+    "py_ledger"
+   ],
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "legacy": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "load-withheld": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "loop-weight": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "machine-record-format": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "measurand-partition": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "measurement-fork": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "membership-probe": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "memory-archive": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "merge-path": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "mining-increment": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "model-deprecation-backcast": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "model-ecology": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "model-provenance": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "moral-decomposer": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "move-set": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "move-set-derivation": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "moving-mean-tracker": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "msiaf-framework": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "yes",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "msiaf-gdprf-bridge": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "neural-augmentation-audit": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "nonidentity-census": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "notes": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "null-harness": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": [
+    "numpy",
+    "scipy"
+   ],
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "observable-indicator-rules": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "observer-exclusion": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "observer-position-control": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "ontology-probe": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "open-instrumentation-project": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "operator-machine-coupling": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "operator-structure-echo": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "orientation-chamber": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "photoperiod-claim-harness": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "play-sims": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": [
+    "IPython",
+    "astropy",
+    "ipywidgets",
+    "matplotlib",
+    "numpy",
+    "scipy",
+    "sklearn"
+   ],
+   "claim_table": "no",
+   "refutation_protocol": "yes",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "playground-crossrun": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "potential": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "predicate-difference": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "presented-binary": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "proxy-investigation-lab": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": [
+    "jsonschema",
+    "numpy"
+   ],
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "publication-loop-work-orders": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "qrng-pair-search": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "question-availability": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "quiet-aggregation": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "quiet-failure": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "railcar-containment": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "readout-count": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "reasoning-dial": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "reasoning-gate": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "reasoning-toolkit": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "recommender-confound": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "reg-uncertainty-registry": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "relational": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": [
+    "numpy",
+    "psutil",
+    "requests"
+   ],
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "relational-playground": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": [
+    "numpy",
+    "scipy"
+   ],
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "removal-closure": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "report-typing": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "reporting-chain-loss": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "research-stability-audit": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "reservoir-chain-coupling": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "residual-direction": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "return-path": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "revision-mechanism": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "revision-survival": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "rigidification-sensor": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "route-independence": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "routing-data-layer": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "rule-coherence-counterfactual": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "scope-bound-shapes": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "seam-gaps": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "search-substitution": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "second-reader-kimi-k3": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": [
+    "glyph",
+    "numpy"
+   ],
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "self-scan": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "sense-as-match": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "shape-spec-audit": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "sheet-structure-scan": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "sim-span": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "simulation-hypothesis-budget": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "skill-drain-simulator": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "stability-trigger-envelope": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "stop-authority": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "substrate-alternative": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "substrate-emergence": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "supplement-placement": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "sustained-activation-gate": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "tail-check": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "term-drift-citation": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "terminal-crossing": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "terrain-prior": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "tests": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "thermal-coupling": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "thermal-sensor-degradation-audit": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "threshold-states": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "thwaites-risk-audit": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "token-minimizer": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "tools": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": [
+    "multi_substrate_calibration",
+    "py_ledger"
+   ],
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "transmission-cascade": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "transmission-decay": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "triad-playground": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "trigger-geometry": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "undeclared-cuts": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "uninstrumented": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "unowned-join": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "upgrade-queue": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "valence-divergence": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "vector-field-explorer": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "voice-attractor-probe": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "no",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "warnings-label-inversion": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "no",
+   "refutation_protocol": "no",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  },
+  "zero-sum-curriculum-null": {
+   "purpose": null,
+   "read_first": null,
+   "first_file": null,
+   "deps": "stdlib",
+   "claim_table": "yes",
+   "refutation_protocol": "yes",
+   "selftest": "yes",
+   "residue_register_ref": null,
+   "provenance": {
+    "deps": "SCRIPT_DERIVED",
+    "claim_table": "SCRIPT_DERIVED",
+    "refutation_protocol": "SCRIPT_DERIVED",
+    "selftest": "SCRIPT_DERIVED",
+    "residue_register_ref": null,
+    "purpose": null,
+    "read_first": null,
+    "first_file": null
+   }
+  }
+ }
+}

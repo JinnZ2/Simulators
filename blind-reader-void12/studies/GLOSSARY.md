@@ -68,4 +68,6 @@ For a reader who has only the reports. Paths are relative to `blind-reader-void1
 | GR01-GR18 | the Grok reader's confusion record on study-review packet v1 (its own numbers 1-18) | `studies/confusion/2026-11-19_grok_m01-m02.md` |
 | P1-P6 | defects of the Grok study-review packet v1, fixed in the v2 draft | `studies/packets/grok_2026-11-19_v2/MANIFEST_PRIVATE.json` (`diff_from_v1`) |
 | G1-G5 | definition gaps, each with its rows | `studies/GAPS.md` |
+| F1-F7, E1-E7 | the Grok reader's repository read: seven claims, seven proposals | `studies/as_received/grok_repo_read_2026-11-19.md`; checked in `studies/GROK_REPO_READ_CHECK.md` |
+| RR01-RR10 | residue register rows | `studies/RESIDUE_REGISTER.md` |
 | M01, M02 | the studies (the GPT-6 proposal called them G01 / G02, which clashed with its own inventory) | `studies/` |
