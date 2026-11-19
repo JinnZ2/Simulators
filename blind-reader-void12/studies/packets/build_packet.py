@@ -44,6 +44,11 @@ FILES = [
     ("sources/P3/docs/glossary.md", P3 + "/docs/glossary.md", "excerpt", [(122, 142)]),
     ("CONFUSION_REQUEST.md", None, "confusion", None),
 ]
+# packet v2 (P1, P3): the response template is added; the spec excerpt keeps the file name terms.json points to
+FILES_V2 = [f for f in FILES if f[0] != "CONFUSION_REQUEST.md"]
+FILES_V2 = [(("sources/P1/playground-crossrun/COMBINED_SPEC.lines_1-390.md",) + f[1:]) if f[0].endswith("COMBINED_SPEC.md") else f for f in FILES_V2]
+FILES_V2.insert(3, ("brief/response_template.json", "reader_packet_v2/response_template.json", "text", None))
+FILES_V2.append(("CONFUSION_REQUEST.md", None, "confusion", None))
 
 # Applied in order to every file. Each entry: (pattern, replacement, why).
 REDACT = [
@@ -91,6 +96,18 @@ REDACT = [
     (r"\btaf\b", "p3", "project name"),
     (r"`?readings/[^\s`]*`?", "[readings folder]", "readings path"),
 ]
+REDACT_V2 = [
+    (r"- \*\*routes\*\*: 2 for T08 and T09 \(the two terms with disagreeing routes in \[an excluded file\]\), 1 otherwise\.",
+     "- **routes**: the number of source routes to the term's instance that give different lists, set by the coder from a derivation not included here.", "P6: a value from an excluded file"),
+    (r" \(2 for T08 and T09\)", "", "P6: a value from an excluded file"),
+    (r"\[the comparison key's list for this term, withheld\]; whether the section record also counts is open\.", "which of the two a reader counts is what the study records.", "P6: a decision state from an excluded file"),
+    (r"answer to T10's open carried question", "answer to a real term", "P6: a decision state from an excluded file"),
+    (r"T09 \(the case where readers already chose different records: coverage entries vs register rows\)", "T09", "P6: a result of filed readings"),
+    (r"\"\[an excluded change\] is not in force\"\s+\[an excluded change\] is in force \(\[the pre-registration file, excluded\] status note, this date\);\n\s+the file's line 3 is stale and left as written",
+     "[row withheld: it concerns the status of a file not included]", "P6: a decision from an excluded file"),
+    (r"\[an excluded file\]|\[a proposal file, excluded\]|\[an excluded change\]|\[the pre-registration file, excluded\]", "(not included)", "P5: pointer to a file not included"),
+    (r"\[readings folder\]", "the readings folder (not included)", "P5: pointer to a folder not included"),
+]
 LATE = [(r"(the )?\[the pre-registration file, excluded\] status note on \[an excluded change\]", "a status note in an excluded file", "excluded file")]
 BANNED = [r"\bamendment\b", r"claude", r"kimi", r"\bgpt", r"manus", r"kavik", r"simulators", r"jinnz2", r"thermodynamic", r"formula-audit",
           r"\btaf\b", r"key_v2", r"key a1", r"key_a1", r"amendment_options", r"\b[0-9a-f]{7,64}\b",
@@ -104,8 +121,8 @@ def git(*a):
 def read(rel):
     return open(os.path.join(BASE, rel), encoding="utf-8").read()
 
-def redact(text, counts):
-    for pat, rep, why in REDACT + LATE:
+def redact(text, counts, version=1):
+    for pat, rep, why in REDACT + LATE + (REDACT_V2 if version == 2 else []):
         text, n = re.subn(pat, rep, text)
         if n: counts[pat] = counts.get(pat, 0) + n
     return text
@@ -126,7 +143,7 @@ def terms():
         x["source"] = {"path": s["served_as"], "anchor": s["anchor"]}
     return json.dumps(t, indent=1, ensure_ascii=False) + "\n"
 
-def task(label):
+def task(label, version=1):
     return f"""# Task
 
 You are asked to do one reading task and return one thing.
@@ -140,10 +157,16 @@ You are asked to do one reading task and return one thing.
 - `sources/`: excerpts of the source files the studies cite. Line numbers are the originals; lines not shown are omitted. P1, P2, P3 are three projects.
 
 Some documents mention files that are not included here, or text marked as withheld. Treat those as unavailable; if you needed one, say so in your answer.
-
+{V2_RULES if version == 2 else ""}
 **Task.** Read the studies and condition notes against the brief and the source excerpts. Do not fill in the brief's response template and do not group the terms; this task is not a reading of the brief. Your answer is the confusion inventory described in `CONFUSION_REQUEST.md`: every point where you were unsure, guessed, stopped, or needed evidence not in these files.
 
 **Label.** Write `{label}` at the top of your answer, with the model name your app shows (or "unknown AI model") and today's UTC date. Also say which tools were on, and whether memory or project knowledge was on.
+"""
+
+V2_RULES = """
+**Your condition.** This task places you under no condition. You are not doing a reading of the brief; read D0, D1, D2 and D3 as material, the way a study designer would. Where a study says what a reader under a condition would do, judge whether its text lets you tell.
+
+**Excerpt rule.** The source files are excerpts. Each starts with a header naming its line ranges; lines outside them are omitted, not empty. An answer that would need an omitted line is bounded by the excerpt, not by you: record it as a row ("needed evidence not in these files"), say which lines you would need, and do not guess their content. The response template (`brief/response_template.json`) is included so the brief's output format can be read; do not fill it in.
 """
 
 def d0():
@@ -169,19 +192,19 @@ id | term or passage | what was missing | what you did (guessed / stopped / read
 - The inventory is a record of reading, not a score.
 """
 
-def build(reader, date):
+def build(reader, date, version=1):
     label = "R-%s-a" % date      # hyphens kept, so the label cannot read as a commit id
     commit = git("rev-parse", "HEAD")
     files, manifest_files, counts_all = [], [], {}
-    for name, rel, kind, ranges in FILES:
+    for name, rel, kind, ranges in (FILES_V2 if version == 2 else FILES):
         counts = {}
-        if kind == "task": text = task(label)
+        if kind == "task": text = task(label, version)
         elif kind == "d0": text = d0()
         elif kind == "confusion": text = confusion(reader)
         elif kind == "terms": text = terms()
         elif kind == "excerpt": text = excerpt(rel, ranges, name)
         else: text = read(rel)
-        text = text if kind in ("task", "confusion", "d0") else redact(text, counts)
+        text = text if kind in ("task", "confusion", "d0") else redact(text, counts, version)
         files.append((name, text))
         manifest_files.append({"packet_file": name, "source": (rel and "blind-reader-void12/%s@%s" % (rel, commit)),
                                "source_sha256": rel and hashlib.sha256(open(os.path.join(BASE, rel), "rb").read()).hexdigest(),
@@ -205,7 +228,8 @@ def build(reader, date):
             z.writestr(zi, t.encode("utf-8"))
     manifest = {
         "private": "NOT given to the reader. Maps each packet file to its source path@commit.",
-        "reader": reader, "reader_label_in_packet": label, "built_at_commit": commit, "date_utc": date,
+        "reader": reader, "packet_version": version, "status": "SENT" if version == 1 else "DRAFT (not sent)",
+        "reader_label_in_packet": label, "built_at_commit": commit, "date_utc": date,
         "condition": {
             "blind_to": ["the comparison key's lists and derivation (keys and amendment excluded)", "the M01 coding and reports",
                          "the arms report", "every confusion record", "the pre-registration file", "every reader response",
@@ -216,7 +240,7 @@ def build(reader, date):
             "prior_exposure": None, "channel": None, "observer": None,
             "note": "prior_exposure, channel (paste or zip) and observer are null until filled from the reader's answer and the owner's record"},
         "files": manifest_files, "redaction_counts_total": counts_all,
-        "redaction_rules": [{"pattern": p, "replacement": r, "why": w} for p, r, w in REDACT + LATE],
+        "redaction_rules": [{"pattern": p, "replacement": r, "why": w} for p, r, w in REDACT + LATE + (REDACT_V2 if version == 2 else [])],
         "leak_scan": {"banned_patterns_case_insensitive": BANNED, "banned_case_sensitive": BANNED_CASE, "allowed": ALLOW, "hits": leaks},
         "sizes": {"packet_txt_chars": len(paste), "packet_txt_bytes": len(paste.encode("utf-8")), "zip_bytes": len(zbuf.getvalue())},
     }
@@ -224,8 +248,27 @@ def build(reader, date):
 
 def main():
     reader, date = sys.argv[1], sys.argv[2]
-    files, paste, zbytes, manifest, leaks = build(reader.capitalize(), date)
-    out = os.path.join(HERE, "%s_%s" % (reader.lower(), date))
+    version = 2 if "--v2" in sys.argv else 1
+    files, paste, zbytes, manifest, leaks = build(reader.capitalize(), date, version)
+    out = os.path.join(HERE, "%s_%s%s" % (reader.lower(), date, "_v2" if version == 2 else ""))
+    if version == 2:
+        import difflib
+        v1dir = os.path.join(HERE, "%s_%s" % (reader.lower(), date), "packet")
+        v1 = {os.path.relpath(os.path.join(d, f), v1dir): open(os.path.join(d, f), encoding="utf-8").read()
+              for d, _, fs in os.walk(v1dir) for f in fs}
+        v2 = dict(files); diff, rows = [], []
+        for n in sorted(set(v1) | set(v2)):
+            a, b = v1.get(n), v2.get(n)
+            rows.append({"file": n, "v1": a and hashlib.sha256(a.encode()).hexdigest(), "v2": b and hashlib.sha256(b.encode()).hexdigest(),
+                         "change": "added" if a is None else "removed" if b is None else "same" if a == b else "changed"})
+            if a != b:
+                diff += difflib.unified_diff((a or "").splitlines(True), (b or "").splitlines(True), "v1/" + n, "v2/" + n)
+        manifest["diff_from_v1"] = {"files": rows, "diff_file": "v1_to_v2.diff",
+                                    "fixes": {"P1": "response template added", "P2": "condition stated in TASK.md (none: a review task)",
+                                              "P3": "spec excerpt named as terms.json points to it", "P4": "excerpt rule stated in TASK.md",
+                                              "P5": "pointers to files not included neutralized", "P6": "six answer-bearing sentences neutralized"}}
+        os.makedirs(out, exist_ok=True)
+        open(os.path.join(out, "v1_to_v2.diff"), "w", encoding="utf-8").writelines(diff)
     if leaks:
         print("LEAK SCAN FAILED:"); print("\n".join("  " + l for l in leaks)); sys.exit(1)
     if "--check" in sys.argv:

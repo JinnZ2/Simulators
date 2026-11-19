@@ -1,0 +1,140 @@
+{
+ "note": "Fifteen terms from three projects. Order is fixed and carries no meaning.",
+ "terms": [
+  {
+   "id": "T01",
+   "label": "UNDECIDED",
+   "definition": "D straddles the edge at the last tier",
+   "source": {
+    "path": "sources/P2/numcheck/check.py",
+    "anchor": "D straddles the edge at the last tier"
+   }
+  },
+  {
+   "id": "T02",
+   "label": "ABSENT_AT_SENSITIVITY",
+   "definition": "Scoped absence: looked for with a stated instrument / sensitivity / protocol and not found at that sensitivity. Never written as bare \"absent\". No slot holds it yet.",
+   "source": {
+    "path": "sources/P3/docs/glossary.md",
+    "anchor": "Scoped absence: looked for with a stated instrument / sensitivity / protocol"
+   }
+  },
+  {
+   "id": "T03",
+   "label": "VOID",
+   "definition": "VOID in the spec, so VOID here (never a default):",
+   "source": {
+    "path": "sources/P1/cplay/tokens.py",
+    "anchor": "VOID in the spec, so VOID here (never a default):"
+   }
+  },
+  {
+   "id": "T04",
+   "label": "ExpiryTrigger",
+   "definition": "Typed: kind, target, condition all required.",
+   "source": {
+    "path": "sources/P1/cplay/tokens.py",
+    "anchor": "Typed: kind, target, condition all required."
+   }
+  },
+  {
+   "id": "T05",
+   "label": "ABSENT_AT_SENSITIVITY",
+   "definition": "ABSENT_AT_SENSITIVITY must carry three things, or it is refused (F7):",
+   "source": {
+    "path": "sources/P1/playground-crossrun/COMBINED_SPEC.lines_1-390.md",
+    "anchor": "must carry three things, or it is refused (F7):"
+   }
+  },
+  {
+   "id": "T06",
+   "label": "UNRESOLVED",
+   "definition": "otherwise UNRESOLVED (inside the",
+   "source": {
+    "path": "sources/P1/cplay/closure.py",
+    "anchor": "otherwise UNRESOLVED (inside the"
+   }
+  },
+  {
+   "id": "T07",
+   "label": "VOID",
+   "definition": "units not PASS, a missing or unreadable value, no value on",
+   "source": {
+    "path": "sources/P2/numcheck/check.py",
+    "anchor": "units not PASS, a missing or unreadable value, no value on"
+   }
+  },
+  {
+   "id": "T08",
+   "label": "CRASHED",
+   "definition": "did not run: the check raised",
+   "source": {
+    "path": "sources/P1/playground-crossrun/COMBINED_SPEC.lines_1-390.md",
+    "anchor": "did not run: the check raised"
+   }
+  },
+  {
+   "id": "T09",
+   "label": "UNKNOWN",
+   "definition": "A slot whose value is not yet known. Never read as zero or as absent.",
+   "source": {
+    "path": "sources/P3/docs/glossary.md",
+    "anchor": "A slot whose value is not yet known. Never read as zero or as absent."
+   }
+  },
+  {
+   "id": "T10",
+   "label": "GAP_INSTRUMENT_CRASH",
+   "definition": "A module raised; nothing was measured. Coverage, not severity (#82 sense)",
+   "source": {
+    "path": "sources/P3/docs/glossary.md",
+    "anchor": "A module raised; nothing was measured. Coverage, not severity (#82 sense)"
+   }
+  },
+  {
+   "id": "T11",
+   "label": "HOLDS",
+   "definition": "D lies inside [-t, t]",
+   "source": {
+    "path": "sources/P2/numcheck/check.py",
+    "anchor": "D lies inside [-t, t]"
+   }
+  },
+  {
+   "id": "T12",
+   "label": "UNKNOWN",
+   "definition": "UNKNOWN requires a typed expiry trigger",
+   "source": {
+    "path": "sources/P1/playground-crossrun/COMBINED_SPEC.lines_1-390.md",
+    "anchor": "UNKNOWN requires a typed expiry trigger"
+   }
+  },
+  {
+   "id": "T13",
+   "label": "OK",
+   "definition": "ran and passed",
+   "source": {
+    "path": "sources/P1/playground-crossrun/COMBINED_SPEC.lines_1-390.md",
+    "anchor": "ran and passed"
+   }
+  },
+  {
+   "id": "T14",
+   "label": "CLOSED_WITHIN",
+   "definition": "closure holds within sigma, not exactly",
+   "source": {
+    "path": "sources/P1/playground-crossrun/COMBINED_SPEC.lines_1-390.md",
+    "anchor": "closure holds within sigma, not exactly"
+   }
+  },
+  {
+   "id": "T15",
+   "label": "expiry_condition",
+   "definition": "Instrument class, sensitivity or protocol whose null result would downgrade a PENDING / UNKNOWN slot.",
+   "source": {
+    "path": "sources/P3/docs/glossary.md",
+    "anchor": "Instrument class, sensitivity or protocol whose null result would downgrade a PENDING / UNKNOWN"
+   }
+  }
+ ]
+}

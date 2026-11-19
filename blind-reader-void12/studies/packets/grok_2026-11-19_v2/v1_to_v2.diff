@@ -1,0 +1,496 @@
+--- v1/TASK.md
++++ v2/TASK.md
+@@ -12,6 +12,10 @@
+ 
+ Some documents mention files that are not included here, or text marked as withheld. Treat those as unavailable; if you needed one, say so in your answer.
+ 
++**Your condition.** This task places you under no condition. You are not doing a reading of the brief; read D0, D1, D2 and D3 as material, the way a study designer would. Where a study says what a reader under a condition would do, judge whether its text lets you tell.
++
++**Excerpt rule.** The source files are excerpts. Each starts with a header naming its line ranges; lines outside them are omitted, not empty. An answer that would need an omitted line is bounded by the excerpt, not by you: record it as a row ("needed evidence not in these files"), say which lines you would need, and do not guess their content. The response template (`brief/response_template.json`) is included so the brief's output format can be read; do not fill it in.
++
+ **Task.** Read the studies and condition notes against the brief and the source excerpts. Do not fill in the brief's response template and do not group the terms; this task is not a reading of the brief. Your answer is the confusion inventory described in `CONFUSION_REQUEST.md`: every point where you were unsure, guessed, stopped, or needed evidence not in these files.
+ 
+ **Label.** Write `R-2026-11-19-a` at the top of your answer, with the model name your app shows (or "unknown AI model") and today's UTC date. Also say which tools were on, and whether memory or project knowledge was on.
+--- v1/brief/response_template.json
++++ v2/brief/response_template.json
+@@ -0,0 +1,181 @@
++{
++ "reader_label": "",
++ "model_family": "",
++ "date_utc": "",
++ "terms": {
++  "T01": {
++   "cluster": "",
++   "predicate": "",
++   "slots_specific": [],
++   "slots_specific_basis": "",
++   "slots_carried": [],
++   "slots_carried_basis": "",
++   "source_lines_read": "",
++   "confidence": "",
++   "could_also_join": []
++  },
++  "T02": {
++   "cluster": "",
++   "predicate": "",
++   "slots_specific": [],
++   "slots_specific_basis": "",
++   "slots_carried": [],
++   "slots_carried_basis": "",
++   "source_lines_read": "",
++   "confidence": "",
++   "could_also_join": []
++  },
++  "T03": {
++   "cluster": "",
++   "predicate": "",
++   "slots_specific": [],
++   "slots_specific_basis": "",
++   "slots_carried": [],
++   "slots_carried_basis": "",
++   "source_lines_read": "",
++   "confidence": "",
++   "could_also_join": []
++  },
++  "T04": {
++   "cluster": "",
++   "predicate": "",
++   "slots_specific": [],
++   "slots_specific_basis": "",
++   "slots_carried": [],
++   "slots_carried_basis": "",
++   "source_lines_read": "",
++   "confidence": "",
++   "could_also_join": []
++  },
++  "T05": {
++   "cluster": "",
++   "predicate": "",
++   "slots_specific": [],
++   "slots_specific_basis": "",
++   "slots_carried": [],
++   "slots_carried_basis": "",
++   "source_lines_read": "",
++   "confidence": "",
++   "could_also_join": []
++  },
++  "T06": {
++   "cluster": "",
++   "predicate": "",
++   "slots_specific": [],
++   "slots_specific_basis": "",
++   "slots_carried": [],
++   "slots_carried_basis": "",
++   "source_lines_read": "",
++   "confidence": "",
++   "could_also_join": []
++  },
++  "T07": {
++   "cluster": "",
++   "predicate": "",
++   "slots_specific": [],
++   "slots_specific_basis": "",
++   "slots_carried": [],
++   "slots_carried_basis": "",
++   "source_lines_read": "",
++   "confidence": "",
++   "could_also_join": []
++  },
++  "T08": {
++   "cluster": "",
++   "predicate": "",
++   "slots_specific": [],
++   "slots_specific_basis": "",
++   "slots_carried": [],
++   "slots_carried_basis": "",
++   "source_lines_read": "",
++   "confidence": "",
++   "could_also_join": []
++  },
++  "T09": {
++   "cluster": "",
++   "predicate": "",
++   "slots_specific": [],
++   "slots_specific_basis": "",
++   "slots_carried": [],
++   "slots_carried_basis": "",
++   "source_lines_read": "",
++   "confidence": "",
++   "could_also_join": []
++  },
++  "T10": {
++   "cluster": "",
++   "predicate": "",
++   "slots_specific": [],
++   "slots_specific_basis": "",
++   "slots_carried": [],
++   "slots_carried_basis": "",
++   "source_lines_read": "",
++   "confidence": "",
++   "could_also_join": []
++  },
++  "T11": {
++   "cluster": "",
++   "predicate": "",
++   "slots_specific": [],
++   "slots_specific_basis": "",
++   "slots_carried": [],
++   "slots_carried_basis": "",
++   "source_lines_read": "",
++   "confidence": "",
++   "could_also_join": []
++  },
++  "T12": {
++   "cluster": "",
++   "predicate": "",
++   "slots_specific": [],
++   "slots_specific_basis": "",
++   "slots_carried": [],
++   "slots_carried_basis": "",
++   "source_lines_read": "",
++   "confidence": "",
++   "could_also_join": []
++  },
++  "T13": {
++   "cluster": "",
++   "predicate": "",
++   "slots_specific": [],
++   "slots_specific_basis": "",
++   "slots_carried": [],
++   "slots_carried_basis": "",
++   "source_lines_read": "",
++   "confidence": "",
++   "could_also_join": []
++  },
++  "T14": {
++   "cluster": "",
++   "predicate": "",
++   "slots_specific": [],
++   "slots_specific_basis": "",
++   "slots_carried": [],
++   "slots_carried_basis": "",
++   "source_lines_read": "",
++   "confidence": "",
++   "could_also_join": []
++  },
++  "T15": {
++   "cluster": "",
++   "predicate": "",
++   "slots_specific": [],
++   "slots_specific_basis": "",
++   "slots_carried": [],
++   "slots_carried_basis": "",
++   "source_lines_read": "",
++   "confidence": "",
++   "could_also_join": []
++  }
++ },
++ "attestation": {
++  "q1_seen_pair_table_with_verdicts": "",
++  "q2_seen_predicate_sentence_by_someone_else": "",
++  "q3_seen_vocabulary_mapping_or_second_reader_report": "",
++  "q4_told_how_many_clusters_or_pairs": "",
++  "q5_used_anything_outside_packet": "",
++  "q6_prior_sessions_about_this_project": "",
++  "notes": ""
++ }
++}
+--- v1/sources/P1/playground-crossrun/COMBINED_SPEC.lines_1-390.md
++++ v2/sources/P1/playground-crossrun/COMBINED_SPEC.lines_1-390.md
+@@ -0,0 +1,90 @@
++# Excerpt of P1/playground-crossrun/COMBINED_SPEC.lines_1-390.md, original line numbers kept (lines 35-96, 122-145 of 390). Lines not shown are omitted, not empty.
++
++   35| ## 2. Axes, statuses and the #257 mapping
++   36| 
++   37| Three failure axes, canonical from s-a: **PHYSICAL**, **INSTRUMENT**, **DETERMINATION**.
++   38| APPLICABILITY is a separate field and is not a failure axis (Q11). **COVERAGE** is a separate
++   39| field too, and never feeds severity (R-A2):
++   40| 
++   41| ```text
++   42| COVERAGE entry   kind ∈ {UNKNOWN, INFO, GAP_INSTRUMENT_CRASH}, module, input, reason,
++   43|                  missing_path, expiry_condition
++   44| source           P3 calibration/unified_audit.py @ [commit], lines 96-101, CHECKED (section 7)
++   45| ```
++   46| 
++   47| ```text
++   48| status          meaning                                        reason field
++   49| OK              ran and passed                                 --
++   50| FAILED          ran and failed                                 required
++   51| INDETERMINATE   ran; not enough to say                         required
++   52| UNTESTED        no check addressed it                          required
++   53| CRASHED         did not run: the check raised                  exception + path, required  (Q3)
++   54| CLOSED_WITHIN   closure holds within sigma, not exactly        sigma + basis, required     (Q2)
++   55| OUTSIDE_DOMAIN  APPLICABILITY only: input beyond a bound       the bound, required         (Q11)
++   56| ```
++   57| 
++   58| Every reason #257 can emit, mapped:
++   59| 
++   60| ```text
++   61| #257 source                              condition                     -> field : status (reason)
++   62| l0.run_status INCOMPLETE "did not close" closure fail, ledger declared -> PHYSICAL : FAILED
++   63|                                          complete                         (F9: the leak is a model defect)
++   64| l0.run_status INCOMPLETE "did not close" closure fail, ledger NOT      -> DETERMINATION : FAILED
++   65|                                          declared complete                (F8, F9: accounting gap)
++   66| l0.run_status INCOMPLETE "no LIVE        every budget VOID             -> DETERMINATION : UNTESTED
++   67|   budget"                                                                 (NO_LIVE_BUDGET)          (Q1)
++   68| l0 NOISE                                 misclosure within k sigma     -> PHYSICAL : CLOSED_WITHIN
++   69|                                                                           (sigma, basis; sigma per account) (Q2)
++   70| certify / certify_tool UNTRUSTED         harness misses plants         -> INSTRUMENT : FAILED
++   71| certify_tool raise (ZeroDivisionError)   tool gate crashes             -> INSTRUMENT : CRASHED
++   72|                                                                           (exception, path); never a missing row (F2, Q3)
++   73| trust with no cases written              zero known-answer cases       -> INSTRUMENT : UNTESTED (s-a KA_NO_CASES)
++   74| known answer from the tested formula     circular case                 -> INSTRUMENT : UNTESTED
++   75|                                                                           (CIRCULAR_KNOWN_ANSWER)   (Q6)
++   76| size / population / founder bound hit    input beyond a declared bound -> APPLICABILITY : OUTSIDE_DOMAIN
++   77|                                                                           on no failure axis (F13, Q11)
++   78| ```
++   79| 
++   80| Rules:
++   81| 
++   82| - R-A1: the "declared complete" flag is part of the ledger record and must be set explicitly.
++   83|   If it is absent, the ledger counts as NOT declared, and the failure lands on DETERMINATION,
++   84|   never on PHYSICAL (F9).
++   85| - R-A2: a crash is a record carrying the exception type, the call path that raised, and the
++   86|   inputs. A crash never produces "no row" (F2). CRASHED stays an INSTRUMENT status, and it is
++   87|   reported on the coverage axis (kinds UNKNOWN / INFO / GAP_INSTRUMENT_CRASH), never in severity.
++   88|   The coverage entry carries P3's fields: kind, module, input, reason, missing_path,
++   89|   expiry_condition (source: section 7).
++   90| - R-A3: a field no gate read is UNTESTED, never OK by default.
++   91| - R-A4: closure tolerance is declared PER ACCOUNT, BEFORE the run. There is no global default; a
++   92|   missing tolerance refuses the run rather than filling 1e-9 silently (O4, Q13). The numerical
++   93|   roundoff floor is recorded separately as its own known class (forest run 10), not folded into
++   94|   sigma.
++   95| - R-A5: step-1 rows are NOT relabelled. Step 3 adds a second column, "relabeled under COMBINED
++   96|   mapping", beside the preserved step-1 code (Q15).
++  ...
++
++  122| ---
++  123| 
++  124| ## 4. States: one token per state, a reason on every non-verdict
++  125| 
++  126| - **UNKNOWN requires a typed expiry trigger** (from #257 `NEEDS_EXPIRY`, typed per s-a
++  127|   `ExpiryTrigger`). Free text is accepted only as `UNTYPED` and counts as "no exit defined", so it
++  128|   does not satisfy the requirement (F10, F14, Q4). An UNKNOWN with no typed trigger is refused.
++  129| - **Scoped absence and detection limits** (from s-a `establish_sensitivity`, `claim_absence`).
++  130|   `ABSENT_AT_SENSITIVITY` must carry three things, or it is refused (F7):
++  131|   - the limit, and how it was established (from a ladder, or declared);
++  132|   - the effect size of interest;
++  133|   - the conditions the null holds under.
++  134| - Each state has a distinct token: INDETERMINATE, UNTESTED, CRASHED, CLOSED_WITHIN,
++  135|   OUTSIDE_DOMAIN, NOT_COMPARABLE, NOT_SCORED_STUB, UNTYPED, UNDECLARED and REFUSED are all
++  136|   different. None is ever read as 0, OK or "no row".
++  137| - A `reason` is required on every token that is not a verdict; an empty reason is refused at
++  138|   construction.
++  139| - Vocabularies are kept separate (s-a ConditionBasis, #257 STATUSES) with an explicit mapping
++  140|   table between them; merging would lose one side's distinctions (Q12).
++  141| - Claim tags (#257 OBSERVED / DERIVED / PROPOSED) and claim records (s-a ClaimRecord) are two
++  142|   objects linked 1:1: the tag is the status of a statement, the record is its provenance chain
++  143|   (Q8).
++  144| 
++  145| ---
+--- v1/sources/P1/playground-crossrun/COMBINED_SPEC.md
++++ v2/sources/P1/playground-crossrun/COMBINED_SPEC.md
+@@ -1,90 +0,0 @@
+-# Excerpt of P1/playground-crossrun/COMBINED_SPEC.md, original line numbers kept (lines 35-96, 122-145 of 390). Lines not shown are omitted, not empty.
+-
+-   35| ## 2. Axes, statuses and the #257 mapping
+-   36| 
+-   37| Three failure axes, canonical from s-a: **PHYSICAL**, **INSTRUMENT**, **DETERMINATION**.
+-   38| APPLICABILITY is a separate field and is not a failure axis (Q11). **COVERAGE** is a separate
+-   39| field too, and never feeds severity (R-A2):
+-   40| 
+-   41| ```text
+-   42| COVERAGE entry   kind ∈ {UNKNOWN, INFO, GAP_INSTRUMENT_CRASH}, module, input, reason,
+-   43|                  missing_path, expiry_condition
+-   44| source           P3 calibration/unified_audit.py @ [commit], lines 96-101, CHECKED (section 7)
+-   45| ```
+-   46| 
+-   47| ```text
+-   48| status          meaning                                        reason field
+-   49| OK              ran and passed                                 --
+-   50| FAILED          ran and failed                                 required
+-   51| INDETERMINATE   ran; not enough to say                         required
+-   52| UNTESTED        no check addressed it                          required
+-   53| CRASHED         did not run: the check raised                  exception + path, required  (Q3)
+-   54| CLOSED_WITHIN   closure holds within sigma, not exactly        sigma + basis, required     (Q2)
+-   55| OUTSIDE_DOMAIN  APPLICABILITY only: input beyond a bound       the bound, required         (Q11)
+-   56| ```
+-   57| 
+-   58| Every reason #257 can emit, mapped:
+-   59| 
+-   60| ```text
+-   61| #257 source                              condition                     -> field : status (reason)
+-   62| l0.run_status INCOMPLETE "did not close" closure fail, ledger declared -> PHYSICAL : FAILED
+-   63|                                          complete                         (F9: the leak is a model defect)
+-   64| l0.run_status INCOMPLETE "did not close" closure fail, ledger NOT      -> DETERMINATION : FAILED
+-   65|                                          declared complete                (F8, F9: accounting gap)
+-   66| l0.run_status INCOMPLETE "no LIVE        every budget VOID             -> DETERMINATION : UNTESTED
+-   67|   budget"                                                                 (NO_LIVE_BUDGET)          (Q1)
+-   68| l0 NOISE                                 misclosure within k sigma     -> PHYSICAL : CLOSED_WITHIN
+-   69|                                                                           (sigma, basis; sigma per account) (Q2)
+-   70| certify / certify_tool UNTRUSTED         harness misses plants         -> INSTRUMENT : FAILED
+-   71| certify_tool raise (ZeroDivisionError)   tool gate crashes             -> INSTRUMENT : CRASHED
+-   72|                                                                           (exception, path); never a missing row (F2, Q3)
+-   73| trust with no cases written              zero known-answer cases       -> INSTRUMENT : UNTESTED (s-a KA_NO_CASES)
+-   74| known answer from the tested formula     circular case                 -> INSTRUMENT : UNTESTED
+-   75|                                                                           (CIRCULAR_KNOWN_ANSWER)   (Q6)
+-   76| size / population / founder bound hit    input beyond a declared bound -> APPLICABILITY : OUTSIDE_DOMAIN
+-   77|                                                                           on no failure axis (F13, Q11)
+-   78| ```
+-   79| 
+-   80| Rules:
+-   81| 
+-   82| - R-A1: the "declared complete" flag is part of the ledger record and must be set explicitly.
+-   83|   If it is absent, the ledger counts as NOT declared, and the failure lands on DETERMINATION,
+-   84|   never on PHYSICAL (F9).
+-   85| - R-A2: a crash is a record carrying the exception type, the call path that raised, and the
+-   86|   inputs. A crash never produces "no row" (F2). CRASHED stays an INSTRUMENT status, and it is
+-   87|   reported on the coverage axis (kinds UNKNOWN / INFO / GAP_INSTRUMENT_CRASH), never in severity.
+-   88|   The coverage entry carries P3's fields: kind, module, input, reason, missing_path,
+-   89|   expiry_condition (source: section 7).
+-   90| - R-A3: a field no gate read is UNTESTED, never OK by default.
+-   91| - R-A4: closure tolerance is declared PER ACCOUNT, BEFORE the run. There is no global default; a
+-   92|   missing tolerance refuses the run rather than filling 1e-9 silently (O4, Q13). The numerical
+-   93|   roundoff floor is recorded separately as its own known class (forest run 10), not folded into
+-   94|   sigma.
+-   95| - R-A5: step-1 rows are NOT relabelled. Step 3 adds a second column, "relabeled under COMBINED
+-   96|   mapping", beside the preserved step-1 code (Q15).
+-  ...
+-
+-  122| ---
+-  123| 
+-  124| ## 4. States: one token per state, a reason on every non-verdict
+-  125| 
+-  126| - **UNKNOWN requires a typed expiry trigger** (from #257 `NEEDS_EXPIRY`, typed per s-a
+-  127|   `ExpiryTrigger`). Free text is accepted only as `UNTYPED` and counts as "no exit defined", so it
+-  128|   does not satisfy the requirement (F10, F14, Q4). An UNKNOWN with no typed trigger is refused.
+-  129| - **Scoped absence and detection limits** (from s-a `establish_sensitivity`, `claim_absence`).
+-  130|   `ABSENT_AT_SENSITIVITY` must carry three things, or it is refused (F7):
+-  131|   - the limit, and how it was established (from a ladder, or declared);
+-  132|   - the effect size of interest;
+-  133|   - the conditions the null holds under.
+-  134| - Each state has a distinct token: INDETERMINATE, UNTESTED, CRASHED, CLOSED_WITHIN,
+-  135|   OUTSIDE_DOMAIN, NOT_COMPARABLE, NOT_SCORED_STUB, UNTYPED, UNDECLARED and REFUSED are all
+-  136|   different. None is ever read as 0, OK or "no row".
+-  137| - A `reason` is required on every token that is not a verdict; an empty reason is refused at
+-  138|   construction.
+-  139| - Vocabularies are kept separate (s-a ConditionBasis, #257 STATUSES) with an explicit mapping
+-  140|   table between them; merging would lose one side's distinctions (Q12).
+-  141| - Claim tags (#257 OBSERVED / DERIVED / PROPOSED) and claim records (s-a ClaimRecord) are two
+-  142|   objects linked 1:1: the tag is the status of a statement, the record is its provenance chain
+-  143|   (Q8).
+-  144| 
+-  145| ---
+--- v1/studies/M01_CRITERIA.md
++++ v2/studies/M01_CRITERIA.md
+@@ -20,9 +20,9 @@
+ 
+ - **cplay terms** (T03 T04 T05 T06 T08 T12 T13 T14): SCRIPT_DERIVED by importing the packet's `cplay` modules (isolated interpreter, no bytecode written into the packet): constructor parameters by `inspect.signature`; stored fields by `vars()` or `_fields`; COMPUTED = stored but not a parameter; requirement by removing the field and seeing whether the constructor raises, for every status that shares the record.
+ - **P3 terms** (T02 T09 T10 T15): SCRIPT_DERIVED by parsing the packet's `unified_audit.py`, `expiry_register.py` and `glossary.md` (dict-literal keys per coverage kind; the raise handler's section record; `EXPIRY_KEYS`; the notation `ABSENT_AT_SENSITIVITY(<value>)`).
+-- **numcheck terms** (T01 T07 T11): numcheck cannot run from the packet (it imports modules the packet does not ship). Presence is SCRIPT_DERIVED by parsing `_blank` and the unconditional `rec[...] =` assignments in `check.py`. Applicability is CODER_INFERRED from the code's verdict branches, citing lines, cross-checked against the filed [an excluded file] (a 12-record run by another session) where that file covers the field.
++- **numcheck terms** (T01 T07 T11): numcheck cannot run from the packet (it imports modules the packet does not ship). Presence is SCRIPT_DERIVED by parsing `_blank` and the unconditional `rec[...] =` assignments in `check.py`. Applicability is CODER_INFERRED from the code's verdict branches, citing lines, cross-checked against the filed (not included) (a 12-record run by another session) where that file covers the field.
+ - **COMPUTED vs RAW_INPUT for P3 and numcheck fields** is CODER_INFERRED with the expression cited (for example `error = f"{type(e).__name__}: {e}"` makes `exception_type` COMPUTED from `error`).
+-- **routes**: 2 for T08 and T09 (the two terms with disagreeing routes in [an excluded file]), 1 otherwise.
++- **routes**: the number of source routes to the term's instance that give different lists, set by the coder from a derivation not included here.
+ 
+ **Case cells (fixed rule, applied in this order, a field may collect several):**
+ 
+@@ -49,7 +49,7 @@
+ 2. Per case cell A-G: listing rate per reader, and the comparison key's.
+ 3. Same list, different reasons: fields all three readers list where the coded `basis_kind` differs between readers.
+ 4. Uncertainty: fields with `uncertainty_stated` true.
+-5. Where the three readers agree with each other and not with the comparison key ([the pre-registration file, excluded] v2's case (a): the key's derivation deserves a second look; not evidence about the first reading).
++5. Where the three readers agree with each other and not with the comparison key ((not included) v2's case (a): the key's derivation deserves a second look; not evidence about the first reading).
+ 
+ ## 6. Limits stated now
+ 
+--- v1/studies/M01_EXTENSION.md
++++ v2/studies/M01_EXTENSION.md
+@@ -1,16 +1,16 @@
+ # M01 extension: new readings, two arms, a D1 condition (fixed before any instrument code or new reading)
+ 
+-Written 2026-11-19. Extends `M01_CRITERIA.md` (pinned in `[commit]`), which stays in force for the three filed D0 readings. Design taken from a reader's proposal ([an excluded file], filed as received), with the changes listed in section 5.
++Written 2026-11-19. Extends `M01_CRITERIA.md` (pinned in `[commit]`), which stays in force for the three filed D0 readings. Design taken from a reader's proposal ((not included), filed as received), with the changes listed in section 5.
+ 
+ ## 1. Conditions
+ 
+ ```text
+ D0   the v2 packet and brief, unchanged (v2 variant A unless the owner states B)
+-D1   D0 plus conditions/M01_D1.md: the TAG and INDEPENDENCE wording of [an excluded file],
++D1   D0 plus conditions/M01_D1.md: the TAG and INDEPENDENCE wording of (not included),
+      marked experimental, cited with a status note in an excluded file
+ ```
+ 
+-D1 readings are their own pool. They are never pooled with D0, never scored as v2 readings toward [the pre-registration file, excluded] rules 1 and 2, and never used to change a key.
++D1 readings are their own pool. They are never pooled with D0, never scored as v2 readings toward (not included) rules 1 and 2, and never used to change a key.
+ 
+ ## 2. Arms
+ 
+@@ -38,13 +38,12 @@
+ no provenance on values                            every value carries READER_STATED / CODER_INFERRED /
+                                                    SCRIPT_DERIVED / NOT_RECORDED, as in M01
+ fixture G02-KA-02 uses the packet's real field     rewritten with neutral names; as received it attached an
+-  names (Reading + error / exception_type /        answer to T10's open carried question
++  names (Reading + error / exception_type /        answer to a real term
+   missing_path)
+ fixture G01-KA-05 "declared only" puts the field   rewritten: the declared-only field appears on no instance
+   on every instance
+ tests never load the fixture files                 the tests load and check every fixture
+-"[an excluded change] is not in force"         [an excluded change] is in force ([the pre-registration file, excluded] status note, this date);
+-                                                   the file's line 3 is stale and left as written
++[row withheld: it concerns the status of a file not included]
+ ids G01 / G02                                      M01 / M02 (G01-G33 are a reader's gap inventory)
+ ```
+ 
+--- v1/studies/M01_SCHEMA.json
++++ v2/studies/M01_SCHEMA.json
+@@ -12,7 +12,7 @@
+  },
+  "fields": {
+   "study_id":           {"type": "string", "const": "M01"},
+-  "reader_id":          {"type": "string", "note": "the [readings folder] folder name, never reader_label (which the task text set for every reader)"},
++  "reader_id":          {"type": "string", "note": "the the readings folder (not included) folder name, never reader_label (which the task text set for every reader)"},
+   "packet":             {"type": "object", "keys": ["version", "variant", "sha256"], "note": "variant null when the reader's variant was not stated"},
+   "condition":          {"type": "string", "enum": ["D0", "D1", "D2", "D3"], "note": "D0 = brief unchanged; D1-D3 are M02 conditions, never pooled with D0"},
+   "term_id":            {"type": "string", "pattern": "T01..T15"},
+@@ -29,7 +29,7 @@
+                            "note": "is it populated (non-None, non-zero) on every / some instances of this term only"},
+     "requirement_scope":  {"enum": ["ALL_EXCLUSIVE", "SHARED", "NONE", "NO_INSTANCE", "UNKNOWN"],
+                            "note": "does a source rule require it for this status only (removing it raises or refuses)"},
+-    "routes":             {"type": "integer", "note": "number of source routes to 'the instance' of the term that give different lists (2 for T08 and T09)"},
++    "routes":             {"type": "integer", "note": "number of source routes to 'the instance' of the term that give different lists"},
+     "cases":              {"type": "array", "items": {"enum": ["A", "B", "C", "D", "E", "F", "G"]},
+                            "note": "the [a reader] test-matrix cells, assigned by the fixed rule in M01_CRITERIA.md section 3; a field can sit in more than one"},
+     "source_basis":       {"type": "string", "note": "how each value was obtained (the run, the parsed lines, or the filed evidence file)"},
+--- v1/studies/M02_CRITERIA.md
++++ v2/studies/M02_CRITERIA.md
+@@ -1,6 +1,6 @@
+ # M02 criteria: slots_carried record boundary and traversal (fixed before any coding)
+ 
+-Written 2026-11-19, before any M02 instrument code, coded record or new reading. Schema: `M02_SCHEMA.json`. Design from a reader's proposal ([an excluded file]), reshaped as in `M01_EXTENSION.md` section 5.
++Written 2026-11-19, before any M02 instrument code, coded record or new reading. Schema: `M02_SCHEMA.json`. Design from a reader's proposal ((not included)), reshaped as in `M01_EXTENSION.md` section 5.
+ 
+ ## 1. Question
+ 
+@@ -24,8 +24,8 @@
+ 
+ ## 3. Specimens
+ 
+-- **Primary: T10** (`p3:GAP_INSTRUMENT_CRASH`). The coverage entry and the raise handler's section record are both built on the reporting path; [the comparison key's list for this term, withheld]; whether the section record also counts is open.
+-- **Secondary:** T08 (a Reading and a CoverageEntry from one `crash()` call), T04 (ExpiryTrigger, held as a value inside UNKNOWN tokens: tests "name, do not open"), T06 (a FieldToken holding a Token), T09 (the case where readers already chose different records: coverage entries vs register rows).
++- **Primary: T10** (`p3:GAP_INSTRUMENT_CRASH`). The coverage entry and the raise handler's section record are both built on the reporting path; which of the two a reader counts is what the study records.
++- **Secondary:** T08 (a Reading and a CoverageEntry from one `crash()` call), T04 (ExpiryTrigger, held as a value inside UNKNOWN tokens: tests "name, do not open"), T06 (a FieldToken holding a Token), T09.
+ - All 15 terms stay in the task; the specimens are where the analysis looks first, not a reduced packet.
+ 
+ ## 4. Coding
+--- v1/studies/M02_SCHEMA.json
++++ v2/studies/M02_SCHEMA.json
+@@ -8,7 +8,7 @@
+    "note": "one per (reader, term)",
+    "fields": {
+     "study_id":        {"const": "M02"},
+-    "reader_id":       {"type": "string", "note": "pseudonym or [readings folder] folder name; never reader_label"},
++    "reader_id":       {"type": "string", "note": "pseudonym or the readings folder (not included) folder name; never reader_label"},
+     "family":          {"type": "string"},
+     "packet":          {"keys": ["version", "variant", "sha256"]},
+     "condition":       {"enum": ["D0", "D1", "D2", "D3"]},

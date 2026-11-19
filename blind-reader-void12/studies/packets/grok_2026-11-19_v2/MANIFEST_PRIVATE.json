@@ -1,0 +1,866 @@
+{
+ "private": "NOT given to the reader. Maps each packet file to its source path@commit.",
+ "reader": "Grok",
+ "packet_version": 2,
+ "status": "DRAFT (not sent)",
+ "reader_label_in_packet": "R-2026-11-19-a",
+ "built_at_commit": "32343795d9188b065b821566b23c7763b5026b62",
+ "date_utc": "2026-11-19",
+ "condition": {
+  "blind_to": [
+   "the comparison key's lists and derivation (keys and amendment excluded)",
+   "the M01 coding and reports",
+   "the arms report",
+   "every confusion record",
+   "the pre-registration file",
+   "every reader response",
+   "reader names, repository and project names, commit ids"
+  ],
+  "not_blind_to": [
+   "the study designs (M01 / M02 criteria, schemas, extension)",
+   "the condition notes D1-D3, including M01_D1, which states the comparison key's own slot rule (TAG and INDEPENDENCE): after this packet the reader is not a fresh D0 reader of the v2 brief"
+  ],
+  "prior_exposure": null,
+  "channel": null,
+  "observer": null,
+  "note": "prior_exposure, channel (paste or zip) and observer are null until filled from the reader's answer and the owner's record"
+ },
+ "files": [
+  {
+   "packet_file": "TASK.md",
+   "source": null,
+   "source_sha256": null,
+   "lines": null,
+   "kind": "task",
+   "redactions": {},
+   "packet_sha256": "88ea185c6ef1d1b88cc95878c25526e48f5f990117069891e72d2cf0775b09bd"
+  },
+  {
+   "packet_file": "brief/READER_BRIEF.md",
+   "source": "blind-reader-void12/reader_packet_v2/READER_BRIEF.md@32343795d9188b065b821566b23c7763b5026b62",
+   "source_sha256": "a9881ee5cdd49544513e704d664b5f99b754c13cb7cdaae6b99aa20c183effa3",
+   "lines": null,
+   "kind": "text",
+   "redactions": {},
+   "packet_sha256": "a9881ee5cdd49544513e704d664b5f99b754c13cb7cdaae6b99aa20c183effa3"
+  },
+  {
+   "packet_file": "brief/terms.json",
+   "source": "blind-reader-void12/reader_packet_v2/terms.json@32343795d9188b065b821566b23c7763b5026b62",
+   "source_sha256": "467f4fe6769e2ee2e0fed26e91dca25e3c4c04b8f61f339adc2b01d4ab19e0ce",
+   "lines": null,
+   "kind": "terms",
+   "redactions": {
+    "Simulators/combined-playground": 3,
+    "\\bthermodynamic-accountability-framework\\b": 4,
+    "\\bformula-audit\\b": 3,
+    "\\bSimulators\\b": 5
+   },
+   "packet_sha256": "f6ac900026227ea2b57dc737d795820f8dec4043a6d110ae36a19d55a4afc82c"
+  },
+  {
+   "packet_file": "brief/response_template.json",
+   "source": "blind-reader-void12/reader_packet_v2/response_template.json@32343795d9188b065b821566b23c7763b5026b62",
+   "source_sha256": "d3dc896800357f666c0fd9fedd1cee6b54fa2ec20db71cce9115416288210060",
+   "lines": null,
+   "kind": "text",
+   "redactions": {},
+   "packet_sha256": "d3dc896800357f666c0fd9fedd1cee6b54fa2ec20db71cce9115416288210060"
+  },
+  {
+   "packet_file": "studies/M01_CRITERIA.md",
+   "source": "blind-reader-void12/studies/M01_CRITERIA.md@32343795d9188b065b821566b23c7763b5026b62",
+   "source_sha256": "f194ecbcd991720b0ee1279531f5422035b6035505198aab63df0d58b2a5c467",
+   "lines": null,
+   "kind": "text",
+   "redactions": {
+    "`2026-11-18_claude-v2-A`, `2026-11-19_kimi-v2-A`, `2026-11-19_gpt6-v2`": 1,
+    "variant A for the first two, null for GPT-6 \\(not stated\\)": 1,
+    "`?amendment_options/[^\\s`)]*`?": 1,
+    "`?derive_specific_output\\.txt`?": 1,
+    "\\(Manus's 12-record run\\)": 1,
+    "Claude Code session": 2,
+    "the GPT-6 reader\\b": 1,
+    "the drafter of a superseded amendment": 1,
+    "\\bkey a1('s)?\\b": 5,
+    "`?\\bPREREG(\\.md)?\\b`?": 1,
+    "\\bTAF\\b": 2,
+    "- \\*\\*routes\\*\\*: 2 for T08 and T09 \\(the two terms with disagreeing routes in \\[an excluded file\\]\\), 1 otherwise\\.": 1,
+    "\\[an excluded file\\]|\\[a proposal file, excluded\\]|\\[an excluded change\\]|\\[the pre-registration file, excluded\\]": 2
+   },
+   "packet_sha256": "ad56b5429999d120c5945da3f2ed44dc98880808c9a6d65563d4254ca9623283"
+  },
+  {
+   "packet_file": "studies/M01_SCHEMA.json",
+   "source": "blind-reader-void12/studies/M01_SCHEMA.json@32343795d9188b065b821566b23c7763b5026b62",
+   "source_sha256": "2e63b53a5085bed70b940a3232a10d144a93601f2e1ef8dcfb4612e9435a0f40",
+   "lines": null,
+   "kind": "text",
+   "redactions": {
+    "\\bGPT-6\\b|\\bgpt6\\b|\\bGPT\\b": 1,
+    "\\bkey a1('s)?\\b": 1,
+    "\\\"key_a1\\\"": 1,
+    "\\bTAF\\b": 1,
+    "`?readings/[^\\s`]*`?": 1,
+    " \\(2 for T08 and T09\\)": 1,
+    "\\[readings folder\\]": 1
+   },
+   "packet_sha256": "ee12c7ef1257a2742d318f10274b67c6178f9c686e2098b9379090305e02df83"
+  },
+  {
+   "packet_file": "studies/M01_EXTENSION.md",
+   "source": "blind-reader-void12/studies/M01_EXTENSION.md@32343795d9188b065b821566b23c7763b5026b62",
+   "source_sha256": "9710be2a9a77b094a3e8c70e014bf6095b9943ced2186f351df6b84d19f56b5e",
+   "lines": null,
+   "kind": "text",
+   "redactions": {
+    "\\(all three filed readers list covers_effect\\)": 1,
+    "`?KEY_V2_AMENDMENT_1\\.md`?(,? sections? \\d+(\\.\\d+)?(-\\d+)?)?": 1,
+    "`?as_received/[^\\s`)]*`?": 1,
+    "the GPT-6 reader's": 2,
+    "\\\"the amendment is proposed and not merged\\\"": 1,
+    "\\bamendment 1\\b": 2,
+    "\\binstructions/": 1,
+    "\\bkey a1('s)?\\b": 1,
+    "`?\\bPREREG(\\.md)?\\b`?": 3,
+    "\\b[0-9a-f]{7,64}\\b": 1,
+    "(the )?\\[the pre-registration file, excluded\\] status note on \\[an excluded change\\]": 1,
+    "answer to T10's open carried question": 1,
+    "\\\"\\[an excluded change\\] is not in force\\\"\\s+\\[an excluded change\\] is in force \\(\\[the pre-registration file, excluded\\] status note, this date\\);\\n\\s+the file's line 3 is stale and left as written": 1,
+    "\\[an excluded file\\]|\\[a proposal file, excluded\\]|\\[an excluded change\\]|\\[the pre-registration file, excluded\\]": 3
+   },
+   "packet_sha256": "473ef8ad10a188e79c02cfde42877959f8fcc5d2dc4dd9da4420e766ce2cc4a3"
+  },
+  {
+   "packet_file": "studies/M02_CRITERIA.md",
+   "source": "blind-reader-void12/studies/M02_CRITERIA.md@32343795d9188b065b821566b23c7763b5026b62",
+   "source_sha256": "bddfc32b0731d1db14e3f3a446f4bec6d67d31e43cc1e6c89f936ed2b915f2c5",
+   "lines": null,
+   "kind": "text",
+   "redactions": {
+    "key v2's carried list is the coverage entry's six fields, and whether the section record also counts is open \\(`KEY_V2_AMENDMENT_1\\.md` section 6\\.1\\)": 1,
+    "`?as_received/[^\\s`)]*`?": 1,
+    "Claude Code session": 1,
+    "the GPT-6 reader's": 1,
+    "\\binstructions/": 3,
+    "\\btaf:": 1,
+    "\\[the comparison key's list for this term, withheld\\]; whether the section record also counts is open\\.": 1,
+    "T09 \\(the case where readers already chose different records: coverage entries vs register rows\\)": 1,
+    "\\[an excluded file\\]|\\[a proposal file, excluded\\]|\\[an excluded change\\]|\\[the pre-registration file, excluded\\]": 1
+   },
+   "packet_sha256": "db7e6079479ec83fbe676a4fa54054c47e1a9dfe345c81ba16d5396ee2108a31"
+  },
+  {
+   "packet_file": "studies/M02_SCHEMA.json",
+   "source": "blind-reader-void12/studies/M02_SCHEMA.json@32343795d9188b065b821566b23c7763b5026b62",
+   "source_sha256": "e2e80ba2e7d6f00c84ee17ccadd2d1a03096c7d276c08d6f239a0e1f910eefcb",
+   "lines": null,
+   "kind": "text",
+   "redactions": {
+    "\\binstructions/": 1,
+    "`?readings/[^\\s`]*`?": 1,
+    "\\[readings folder\\]": 1
+   },
+   "packet_sha256": "3da07c38e6ae4cf6316fd2f2d6e5605b6c015fcac2354c9f201a56cf0a5d5815"
+  },
+  {
+   "packet_file": "studies/conditions/D0.md",
+   "source": null,
+   "source_sha256": null,
+   "lines": null,
+   "kind": "d0",
+   "redactions": {},
+   "packet_sha256": "e7b3d748370092b0ffaebef0fc3f11af302ce9f5c44e5986b3448af6102dd731"
+  },
+  {
+   "packet_file": "studies/conditions/M01_D1.md",
+   "source": "blind-reader-void12/studies/instructions/M01_D1.md@32343795d9188b065b821566b23c7763b5026b62",
+   "source_sha256": "055b0a30028a785e8819cc4ca8ca16bbd6c94c25b75484cab53a4677e2171090",
+   "lines": null,
+   "kind": "text",
+   "redactions": {},
+   "packet_sha256": "055b0a30028a785e8819cc4ca8ca16bbd6c94c25b75484cab53a4677e2171090"
+  },
+  {
+   "packet_file": "studies/conditions/M02_D1.md",
+   "source": "blind-reader-void12/studies/instructions/M02_D1.md@32343795d9188b065b821566b23c7763b5026b62",
+   "source_sha256": "4769714245b626dcfcf96ea8369b81e64a913b0c484cf9bd54ed10894192e006",
+   "lines": null,
+   "kind": "text",
+   "redactions": {},
+   "packet_sha256": "4769714245b626dcfcf96ea8369b81e64a913b0c484cf9bd54ed10894192e006"
+  },
+  {
+   "packet_file": "studies/conditions/M02_D2.md",
+   "source": "blind-reader-void12/studies/instructions/M02_D2.md@32343795d9188b065b821566b23c7763b5026b62",
+   "source_sha256": "6787145f8bbf3af6b85e4ca8d15b4a978a0b04319a09175f102115b20cbac2eb",
+   "lines": null,
+   "kind": "text",
+   "redactions": {},
+   "packet_sha256": "6787145f8bbf3af6b85e4ca8d15b4a978a0b04319a09175f102115b20cbac2eb"
+  },
+  {
+   "packet_file": "studies/conditions/M02_D3.md",
+   "source": "blind-reader-void12/studies/instructions/M02_D3.md@32343795d9188b065b821566b23c7763b5026b62",
+   "source_sha256": "cce4d69c553e4eec50393b8c02eb68191d26af992807ab282a47b3a0a0d420aa",
+   "lines": null,
+   "kind": "text",
+   "redactions": {},
+   "packet_sha256": "cce4d69c553e4eec50393b8c02eb68191d26af992807ab282a47b3a0a0d420aa"
+  },
+  {
+   "packet_file": "sources/P1/cplay/tokens.py",
+   "source": "blind-reader-void12/reader_packet_v2/sources/Simulators/combined-playground/cplay/tokens.py@32343795d9188b065b821566b23c7763b5026b62",
+   "source_sha256": "8c43890bf90ab49931a3947ff420b00368e5ce23ed82f8e57bd7aec3be6337e6",
+   "lines": null,
+   "kind": "excerpt",
+   "redactions": {
+    "\\b[0-9a-f]{7,64}\\b": 1,
+    "\\bTAF\\b": 3,
+    "\\btaf\\b": 1
+   },
+   "packet_sha256": "ec046baec9157e8179ef98125302c719fa5195cebe1639b6c97dab3b4db04d81"
+  },
+  {
+   "packet_file": "sources/P1/cplay/axes.py",
+   "source": "blind-reader-void12/reader_packet_v2/sources/Simulators/combined-playground/cplay/axes.py@32343795d9188b065b821566b23c7763b5026b62",
+   "source_sha256": "0e40b7e5ce87de2226103593782e78015534e196005f6c06ed2f460d700453a7",
+   "lines": null,
+   "kind": "excerpt",
+   "redactions": {
+    "\\b[0-9a-f]{7,64}\\b": 2,
+    "\\bTAF\\b": 3,
+    "\\btaf\\b": 1
+   },
+   "packet_sha256": "e773cb3c03485a1586139a11b43e38d97835b1a7951f649b38386a972a5536bf"
+  },
+  {
+   "packet_file": "sources/P1/cplay/closure.py",
+   "source": "blind-reader-void12/reader_packet_v2/sources/Simulators/combined-playground/cplay/closure.py@32343795d9188b065b821566b23c7763b5026b62",
+   "source_sha256": "827d681c8b08003519a60967d3b61ef891254a38bb8c02e29cacba51633c3188",
+   "lines": [
+    [
+     284,
+     336
+    ]
+   ],
+   "kind": "excerpt",
+   "redactions": {},
+   "packet_sha256": "e0f8d8d27e9bc0f9c04a9d995fc4b962cf47ceaf47ecb0619e25d73b344bcdec"
+  },
+  {
+   "packet_file": "sources/P1/playground-crossrun/COMBINED_SPEC.lines_1-390.md",
+   "source": "blind-reader-void12/reader_packet_v2/sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md@32343795d9188b065b821566b23c7763b5026b62",
+   "source_sha256": "72bbd97749918468a862ab72ec2af5211eb1c1c99e3f1b3e512a65b9f30160a8",
+   "lines": [
+    [
+     35,
+     96
+    ],
+    [
+     122,
+     145
+    ]
+   ],
+   "kind": "excerpt",
+   "redactions": {
+    "\\b[0-9a-f]{7,64}\\b": 1,
+    "\\bTAF\\b": 2
+   },
+   "packet_sha256": "b405d6f602ff1964e5ec32ebedfa458f5646f795c245af3e563dc734c326a304"
+  },
+  {
+   "packet_file": "sources/P2/numcheck/check.py",
+   "source": "blind-reader-void12/reader_packet_v2/sources/formula-audit/numcheck/check.py@32343795d9188b065b821566b23c7763b5026b62",
+   "source_sha256": "f6df0dc196f5ac273f864f1cab1a5a0d6c67fa88eaba53ca822f94412fb7fd83",
+   "lines": [
+    [
+     1,
+     53
+    ],
+    [
+     110,
+     119
+    ],
+    [
+     188,
+     240
+    ],
+    [
+     296,
+     305
+    ],
+    [
+     415,
+     440
+    ],
+    [
+     443,
+     557
+    ]
+   ],
+   "kind": "excerpt",
+   "redactions": {},
+   "packet_sha256": "6ec4314b8f39b2af8db8f93b935b31690acac8d579e71459ee13efb5a24b9b35"
+  },
+  {
+   "packet_file": "sources/P3/calibration/unified_audit.py",
+   "source": "blind-reader-void12/reader_packet_v2/sources/thermodynamic-accountability-framework/calibration/unified_audit.py@32343795d9188b065b821566b23c7763b5026b62",
+   "source_sha256": "fcccb9af8d8edb01940a09a639be2ff376c53781097b5562f8745a084c368a49",
+   "lines": [
+    [
+     93,
+     101
+    ],
+    [
+     209,
+     236
+    ],
+    [
+     331,
+     372
+    ],
+    [
+     479,
+     496
+    ]
+   ],
+   "kind": "excerpt",
+   "redactions": {},
+   "packet_sha256": "a9f5cc64ca1068436ebe5a7539f5c8c1e71cb5b0d2b12589bec830738b27f452"
+  },
+  {
+   "packet_file": "sources/P3/calibration/expiry_register.py",
+   "source": "blind-reader-void12/reader_packet_v2/sources/thermodynamic-accountability-framework/calibration/expiry_register.py@32343795d9188b065b821566b23c7763b5026b62",
+   "source_sha256": "ddaf2cc5b6539df340ceb84dab98e249d00a5def9f5d9f374a8ff875a04db0ae",
+   "lines": [
+    [
+     51,
+     60
+    ],
+    [
+     216,
+     235
+    ]
+   ],
+   "kind": "excerpt",
+   "redactions": {},
+   "packet_sha256": "458ca5f704bec45797bc675f714c0e440e80a0abc5c744b1332526eb63d54f96"
+  },
+  {
+   "packet_file": "sources/P3/docs/glossary.md",
+   "source": "blind-reader-void12/reader_packet_v2/sources/thermodynamic-accountability-framework/docs/glossary.md@32343795d9188b065b821566b23c7763b5026b62",
+   "source_sha256": "412ed3abf4c2a546fe16def60fcb223bd496e4f297db995fcfb7232ad56c712b",
+   "lines": [
+    [
+     122,
+     142
+    ]
+   ],
+   "kind": "excerpt",
+   "redactions": {},
+   "packet_sha256": "92c6caf80d443781b7852d326797d59326aac4cd93d69dd9b591fb7bc10b9265"
+  },
+  {
+   "packet_file": "CONFUSION_REQUEST.md",
+   "source": null,
+   "source_sha256": null,
+   "lines": null,
+   "kind": "confusion",
+   "redactions": {},
+   "packet_sha256": "d652598c9838b11b5804c2103671e85c67cff455416f4249e10954deb47d6cb1"
+  }
+ ],
+ "redaction_counts_total": {
+  "Simulators/combined-playground": 3,
+  "\\bthermodynamic-accountability-framework\\b": 4,
+  "\\bformula-audit\\b": 3,
+  "\\bSimulators\\b": 5,
+  "`2026-11-18_claude-v2-A`, `2026-11-19_kimi-v2-A`, `2026-11-19_gpt6-v2`": 1,
+  "variant A for the first two, null for GPT-6 \\(not stated\\)": 1,
+  "`?amendment_options/[^\\s`)]*`?": 1,
+  "`?derive_specific_output\\.txt`?": 1,
+  "\\(Manus's 12-record run\\)": 1,
+  "Claude Code session": 3,
+  "the GPT-6 reader\\b": 1,
+  "the drafter of a superseded amendment": 1,
+  "\\bkey a1('s)?\\b": 7,
+  "`?\\bPREREG(\\.md)?\\b`?": 4,
+  "\\bTAF\\b": 11,
+  "- \\*\\*routes\\*\\*: 2 for T08 and T09 \\(the two terms with disagreeing routes in \\[an excluded file\\]\\), 1 otherwise\\.": 1,
+  "\\[an excluded file\\]|\\[a proposal file, excluded\\]|\\[an excluded change\\]|\\[the pre-registration file, excluded\\]": 6,
+  "\\bGPT-6\\b|\\bgpt6\\b|\\bGPT\\b": 1,
+  "\\\"key_a1\\\"": 1,
+  "`?readings/[^\\s`]*`?": 2,
+  " \\(2 for T08 and T09\\)": 1,
+  "\\[readings folder\\]": 2,
+  "\\(all three filed readers list covers_effect\\)": 1,
+  "`?KEY_V2_AMENDMENT_1\\.md`?(,? sections? \\d+(\\.\\d+)?(-\\d+)?)?": 1,
+  "`?as_received/[^\\s`)]*`?": 2,
+  "the GPT-6 reader's": 3,
+  "\\\"the amendment is proposed and not merged\\\"": 1,
+  "\\bamendment 1\\b": 2,
+  "\\binstructions/": 5,
+  "\\b[0-9a-f]{7,64}\\b": 5,
+  "(the )?\\[the pre-registration file, excluded\\] status note on \\[an excluded change\\]": 1,
+  "answer to T10's open carried question": 1,
+  "\\\"\\[an excluded change\\] is not in force\\\"\\s+\\[an excluded change\\] is in force \\(\\[the pre-registration file, excluded\\] status note, this date\\);\\n\\s+the file's line 3 is stale and left as written": 1,
+  "key v2's carried list is the coverage entry's six fields, and whether the section record also counts is open \\(`KEY_V2_AMENDMENT_1\\.md` section 6\\.1\\)": 1,
+  "\\btaf:": 1,
+  "\\[the comparison key's list for this term, withheld\\]; whether the section record also counts is open\\.": 1,
+  "T09 \\(the case where readers already chose different records: coverage entries vs register rows\\)": 1,
+  "\\btaf\\b": 2
+ },
+ "redaction_rules": [
+  {
+   "pattern": "`2026-11-18_claude-v2-A`, `2026-11-19_kimi-v2-A`, `2026-11-19_gpt6-v2`",
+   "replacement": "[three reading folders, names withheld]",
+   "why": "reader names"
+  },
+  {
+   "pattern": "\\(all three filed readers list covers_effect\\)",
+   "replacement": "([a result from the filed readings, withheld])",
+   "why": "a reading result"
+  },
+  {
+   "pattern": "key v2's carried list is the coverage entry's six fields, and whether the section record also counts is open \\(`KEY_V2_AMENDMENT_1\\.md` section 6\\.1\\)",
+   "replacement": "[the comparison key's list for this term, withheld]; whether the section record also counts is open",
+   "why": "key content"
+  },
+  {
+   "pattern": "variant A for the first two, null for GPT-6 \\(not stated\\)",
+   "replacement": "variants as filed",
+   "why": "reader names"
+  },
+  {
+   "pattern": "`?KEY_V2_AMENDMENT_1\\.md`?(,? sections? \\d+(\\.\\d+)?(-\\d+)?)?",
+   "replacement": "[an excluded file]",
+   "why": "excluded file"
+  },
+  {
+   "pattern": "`?amendment_options/[^\\s`)]*`?",
+   "replacement": "[an excluded file]",
+   "why": "excluded file"
+  },
+  {
+   "pattern": "`?derive_specific_output\\.txt`?",
+   "replacement": "[an excluded file]",
+   "why": "excluded file"
+  },
+  {
+   "pattern": "`?key_v2(_a1)?\\.json`?",
+   "replacement": "[an excluded file]",
+   "why": "excluded file"
+  },
+  {
+   "pattern": "`?as_received/[^\\s`)]*`?",
+   "replacement": "[an excluded file]",
+   "why": "excluded file"
+  },
+  {
+   "pattern": "\\(Manus's 12-record run\\)",
+   "replacement": "(a 12-record run by another session)",
+   "why": "a session name"
+  },
+  {
+   "pattern": "\\bManus\\b",
+   "replacement": "[another session]",
+   "why": "a session name"
+  },
+  {
+   "pattern": "\\bKavik\\b",
+   "replacement": "[a person]",
+   "why": "a person's name"
+  },
+  {
+   "pattern": "chat-side Claude",
+   "replacement": "[another session]",
+   "why": "a session name"
+  },
+  {
+   "pattern": "Claude Code session",
+   "replacement": "[the coding session]",
+   "why": "a session name"
+  },
+  {
+   "pattern": "the GPT-6 reader's",
+   "replacement": "a reader's",
+   "why": "reader names"
+  },
+  {
+   "pattern": "the GPT-6 reader\\b",
+   "replacement": "a reader",
+   "why": "reader names"
+  },
+  {
+   "pattern": "(the )?\\[the pre-registration file, excluded\\] status note on amendment 1",
+   "replacement": "a status note in an excluded file",
+   "why": "excluded file"
+  },
+  {
+   "pattern": "the drafter of a superseded amendment",
+   "replacement": "the drafter of a superseded draft",
+   "why": "excluded change"
+  },
+  {
+   "pattern": "\\\"the amendment is proposed and not merged\\\"",
+   "replacement": "\"[an excluded change] is not in force\"",
+   "why": "excluded change"
+  },
+  {
+   "pattern": "\\bamendment 1\\b",
+   "replacement": "[an excluded change]",
+   "why": "excluded change"
+  },
+  {
+   "pattern": "\\binstructions/",
+   "replacement": "conditions/",
+   "why": "packet folder name"
+  },
+  {
+   "pattern": "\\bGPT-6\\b|\\bgpt6\\b|\\bGPT\\b",
+   "replacement": "[a reader]",
+   "why": "reader names"
+  },
+  {
+   "pattern": "\\b[Cc]laude\\b",
+   "replacement": "[a reader]",
+   "why": "reader names"
+  },
+  {
+   "pattern": "\\b[Kk]imi audit\\b",
+   "replacement": "[an external] audit",
+   "why": "a reader / author name"
+  },
+  {
+   "pattern": "\\b[Kk]imi\\b",
+   "replacement": "[a reader]",
+   "why": "reader names"
+  },
+  {
+   "pattern": "\\bkey a1('s)?\\b",
+   "replacement": "the comparison key\\1",
+   "why": "key name"
+  },
+  {
+   "pattern": "\\bkey v2('s)?\\b",
+   "replacement": "the comparison key\\1",
+   "why": "key name"
+  },
+  {
+   "pattern": "\\\"key_a1\\\"",
+   "replacement": "\"comparison_key\"",
+   "why": "key name"
+  },
+  {
+   "pattern": "`?\\bPREREG(\\.md)?\\b`?",
+   "replacement": "[the pre-registration file, excluded]",
+   "why": "excluded file"
+  },
+  {
+   "pattern": "\\b[0-9a-f]{7,64}\\b",
+   "replacement": "[commit]",
+   "why": "commit id"
+  },
+  {
+   "pattern": "reader_packet_v2/sources/Simulators/combined-playground",
+   "replacement": "sources/P1",
+   "why": "repo path"
+  },
+  {
+   "pattern": "reader_packet_v2/sources/formula-audit",
+   "replacement": "sources/P2",
+   "why": "repo path"
+  },
+  {
+   "pattern": "reader_packet_v2/sources/thermodynamic-accountability-framework",
+   "replacement": "sources/P3",
+   "why": "repo path"
+  },
+  {
+   "pattern": "Simulators/combined-playground",
+   "replacement": "P1",
+   "why": "repo name"
+  },
+  {
+   "pattern": "\\bthermodynamic-accountability-framework\\b",
+   "replacement": "P3",
+   "why": "repo name"
+  },
+  {
+   "pattern": "\\bformula-audit\\b",
+   "replacement": "P2",
+   "why": "repo name"
+  },
+  {
+   "pattern": "\\bSimulators\\b",
+   "replacement": "P1",
+   "why": "repo name"
+  },
+  {
+   "pattern": "\\bJinnZ2\\b",
+   "replacement": "[owner]",
+   "why": "owner account"
+  },
+  {
+   "pattern": "\\bTAF\\b",
+   "replacement": "P3",
+   "why": "project name"
+  },
+  {
+   "pattern": "\\btaf:",
+   "replacement": "p3:",
+   "why": "project name"
+  },
+  {
+   "pattern": "\\btaf\\b",
+   "replacement": "p3",
+   "why": "project name"
+  },
+  {
+   "pattern": "`?readings/[^\\s`]*`?",
+   "replacement": "[readings folder]",
+   "why": "readings path"
+  },
+  {
+   "pattern": "(the )?\\[the pre-registration file, excluded\\] status note on \\[an excluded change\\]",
+   "replacement": "a status note in an excluded file",
+   "why": "excluded file"
+  },
+  {
+   "pattern": "- \\*\\*routes\\*\\*: 2 for T08 and T09 \\(the two terms with disagreeing routes in \\[an excluded file\\]\\), 1 otherwise\\.",
+   "replacement": "- **routes**: the number of source routes to the term's instance that give different lists, set by the coder from a derivation not included here.",
+   "why": "P6: a value from an excluded file"
+  },
+  {
+   "pattern": " \\(2 for T08 and T09\\)",
+   "replacement": "",
+   "why": "P6: a value from an excluded file"
+  },
+  {
+   "pattern": "\\[the comparison key's list for this term, withheld\\]; whether the section record also counts is open\\.",
+   "replacement": "which of the two a reader counts is what the study records.",
+   "why": "P6: a decision state from an excluded file"
+  },
+  {
+   "pattern": "answer to T10's open carried question",
+   "replacement": "answer to a real term",
+   "why": "P6: a decision state from an excluded file"
+  },
+  {
+   "pattern": "T09 \\(the case where readers already chose different records: coverage entries vs register rows\\)",
+   "replacement": "T09",
+   "why": "P6: a result of filed readings"
+  },
+  {
+   "pattern": "\\\"\\[an excluded change\\] is not in force\\\"\\s+\\[an excluded change\\] is in force \\(\\[the pre-registration file, excluded\\] status note, this date\\);\\n\\s+the file's line 3 is stale and left as written",
+   "replacement": "[row withheld: it concerns the status of a file not included]",
+   "why": "P6: a decision from an excluded file"
+  },
+  {
+   "pattern": "\\[an excluded file\\]|\\[a proposal file, excluded\\]|\\[an excluded change\\]|\\[the pre-registration file, excluded\\]",
+   "replacement": "(not included)",
+   "why": "P5: pointer to a file not included"
+  },
+  {
+   "pattern": "\\[readings folder\\]",
+   "replacement": "the readings folder (not included)",
+   "why": "P5: pointer to a folder not included"
+  }
+ ],
+ "leak_scan": {
+  "banned_patterns_case_insensitive": [
+   "\\bamendment\\b",
+   "claude",
+   "kimi",
+   "\\bgpt",
+   "manus",
+   "kavik",
+   "simulators",
+   "jinnz2",
+   "thermodynamic",
+   "formula-audit",
+   "\\btaf\\b",
+   "key_v2",
+   "key a1",
+   "key_a1",
+   "amendment_options",
+   "\\b[0-9a-f]{7,64}\\b",
+   "readings/",
+   "github",
+   "\\bgrok\\b"
+  ],
+  "banned_case_sensitive": [
+   "PREREG"
+  ],
+  "allowed": {
+   "CONFUSION_REQUEST.md": [
+    "\\bgrok\\b"
+   ]
+  },
+  "hits": []
+ },
+ "sizes": {
+  "packet_txt_chars": 93074,
+  "packet_txt_bytes": 93076,
+  "zip_bytes": 38082,
+  "fits_100k_chars": true
+ },
+ "diff_from_v1": {
+  "files": [
+   {
+    "file": "CONFUSION_REQUEST.md",
+    "v1": "d652598c9838b11b5804c2103671e85c67cff455416f4249e10954deb47d6cb1",
+    "v2": "d652598c9838b11b5804c2103671e85c67cff455416f4249e10954deb47d6cb1",
+    "change": "same"
+   },
+   {
+    "file": "TASK.md",
+    "v1": "1479f2a32b2b5dea2987a006a9cb519f5b519685deca41295b9b3b3c1633fb9e",
+    "v2": "88ea185c6ef1d1b88cc95878c25526e48f5f990117069891e72d2cf0775b09bd",
+    "change": "changed"
+   },
+   {
+    "file": "brief/READER_BRIEF.md",
+    "v1": "a9881ee5cdd49544513e704d664b5f99b754c13cb7cdaae6b99aa20c183effa3",
+    "v2": "a9881ee5cdd49544513e704d664b5f99b754c13cb7cdaae6b99aa20c183effa3",
+    "change": "same"
+   },
+   {
+    "file": "brief/response_template.json",
+    "v1": null,
+    "v2": "d3dc896800357f666c0fd9fedd1cee6b54fa2ec20db71cce9115416288210060",
+    "change": "added"
+   },
+   {
+    "file": "brief/terms.json",
+    "v1": "f6ac900026227ea2b57dc737d795820f8dec4043a6d110ae36a19d55a4afc82c",
+    "v2": "f6ac900026227ea2b57dc737d795820f8dec4043a6d110ae36a19d55a4afc82c",
+    "change": "same"
+   },
+   {
+    "file": "sources/P1/cplay/axes.py",
+    "v1": "e773cb3c03485a1586139a11b43e38d97835b1a7951f649b38386a972a5536bf",
+    "v2": "e773cb3c03485a1586139a11b43e38d97835b1a7951f649b38386a972a5536bf",
+    "change": "same"
+   },
+   {
+    "file": "sources/P1/cplay/closure.py",
+    "v1": "e0f8d8d27e9bc0f9c04a9d995fc4b962cf47ceaf47ecb0619e25d73b344bcdec",
+    "v2": "e0f8d8d27e9bc0f9c04a9d995fc4b962cf47ceaf47ecb0619e25d73b344bcdec",
+    "change": "same"
+   },
+   {
+    "file": "sources/P1/cplay/tokens.py",
+    "v1": "ec046baec9157e8179ef98125302c719fa5195cebe1639b6c97dab3b4db04d81",
+    "v2": "ec046baec9157e8179ef98125302c719fa5195cebe1639b6c97dab3b4db04d81",
+    "change": "same"
+   },
+   {
+    "file": "sources/P1/playground-crossrun/COMBINED_SPEC.lines_1-390.md",
+    "v1": null,
+    "v2": "b405d6f602ff1964e5ec32ebedfa458f5646f795c245af3e563dc734c326a304",
+    "change": "added"
+   },
+   {
+    "file": "sources/P1/playground-crossrun/COMBINED_SPEC.md",
+    "v1": "1292e5e86ca4b3caf8e5b56d1f7accd4d7c04be11f07aeddd803e03c8fe8197e",
+    "v2": null,
+    "change": "removed"
+   },
+   {
+    "file": "sources/P2/numcheck/check.py",
+    "v1": "6ec4314b8f39b2af8db8f93b935b31690acac8d579e71459ee13efb5a24b9b35",
+    "v2": "6ec4314b8f39b2af8db8f93b935b31690acac8d579e71459ee13efb5a24b9b35",
+    "change": "same"
+   },
+   {
+    "file": "sources/P3/calibration/expiry_register.py",
+    "v1": "458ca5f704bec45797bc675f714c0e440e80a0abc5c744b1332526eb63d54f96",
+    "v2": "458ca5f704bec45797bc675f714c0e440e80a0abc5c744b1332526eb63d54f96",
+    "change": "same"
+   },
+   {
+    "file": "sources/P3/calibration/unified_audit.py",
+    "v1": "a9f5cc64ca1068436ebe5a7539f5c8c1e71cb5b0d2b12589bec830738b27f452",
+    "v2": "a9f5cc64ca1068436ebe5a7539f5c8c1e71cb5b0d2b12589bec830738b27f452",
+    "change": "same"
+   },
+   {
+    "file": "sources/P3/docs/glossary.md",
+    "v1": "92c6caf80d443781b7852d326797d59326aac4cd93d69dd9b591fb7bc10b9265",
+    "v2": "92c6caf80d443781b7852d326797d59326aac4cd93d69dd9b591fb7bc10b9265",
+    "change": "same"
+   },
+   {
+    "file": "studies/M01_CRITERIA.md",
+    "v1": "bddda33c0d57a9a0ed733bb96c3e6204d3233d11946606ef061544d120bd8dc6",
+    "v2": "ad56b5429999d120c5945da3f2ed44dc98880808c9a6d65563d4254ca9623283",
+    "change": "changed"
+   },
+   {
+    "file": "studies/M01_EXTENSION.md",
+    "v1": "ef5e052410116c6c089d90fa1e6e18c1884cb353d1c9f9d2702ab9947c4e15e4",
+    "v2": "473ef8ad10a188e79c02cfde42877959f8fcc5d2dc4dd9da4420e766ce2cc4a3",
+    "change": "changed"
+   },
+   {
+    "file": "studies/M01_SCHEMA.json",
+    "v1": "6a9e8686d591436ef59c6ad66716e7121a1ceb134f64917b4f85a7eeec219254",
+    "v2": "ee12c7ef1257a2742d318f10274b67c6178f9c686e2098b9379090305e02df83",
+    "change": "changed"
+   },
+   {
+    "file": "studies/M02_CRITERIA.md",
+    "v1": "0e2b5507c13e4c9e011f9d4b6e300455f18f05c89414cfc4f87833a7926066e6",
+    "v2": "db7e6079479ec83fbe676a4fa54054c47e1a9dfe345c81ba16d5396ee2108a31",
+    "change": "changed"
+   },
+   {
+    "file": "studies/M02_SCHEMA.json",
+    "v1": "e7aa55ff44b42a4f2dc21ab230dffd5fe450b25e974deca6ae3550cedeaac5dd",
+    "v2": "3da07c38e6ae4cf6316fd2f2d6e5605b6c015fcac2354c9f201a56cf0a5d5815",
+    "change": "changed"
+   },
+   {
+    "file": "studies/conditions/D0.md",
+    "v1": "e7b3d748370092b0ffaebef0fc3f11af302ce9f5c44e5986b3448af6102dd731",
+    "v2": "e7b3d748370092b0ffaebef0fc3f11af302ce9f5c44e5986b3448af6102dd731",
+    "change": "same"
+   },
+   {
+    "file": "studies/conditions/M01_D1.md",
+    "v1": "055b0a30028a785e8819cc4ca8ca16bbd6c94c25b75484cab53a4677e2171090",
+    "v2": "055b0a30028a785e8819cc4ca8ca16bbd6c94c25b75484cab53a4677e2171090",
+    "change": "same"
+   },
+   {
+    "file": "studies/conditions/M02_D1.md",
+    "v1": "4769714245b626dcfcf96ea8369b81e64a913b0c484cf9bd54ed10894192e006",
+    "v2": "4769714245b626dcfcf96ea8369b81e64a913b0c484cf9bd54ed10894192e006",
+    "change": "same"
+   },
+   {
+    "file": "studies/conditions/M02_D2.md",
+    "v1": "6787145f8bbf3af6b85e4ca8d15b4a978a0b04319a09175f102115b20cbac2eb",
+    "v2": "6787145f8bbf3af6b85e4ca8d15b4a978a0b04319a09175f102115b20cbac2eb",
+    "change": "same"
+   },
+   {
+    "file": "studies/conditions/M02_D3.md",
+    "v1": "cce4d69c553e4eec50393b8c02eb68191d26af992807ab282a47b3a0a0d420aa",
+    "v2": "cce4d69c553e4eec50393b8c02eb68191d26af992807ab282a47b3a0a0d420aa",
+    "change": "same"
+   }
+  ],
+  "diff_file": "v1_to_v2.diff",
+  "fixes": {
+   "P1": "response template added",
+   "P2": "condition stated in TASK.md (none: a review task)",
+   "P3": "spec excerpt named as terms.json points to it",
+   "P4": "excerpt rule stated in TASK.md",
+   "P5": "pointers to files not included neutralized",
+   "P6": "six answer-bearing sentences neutralized"
+  }
+ }
+}

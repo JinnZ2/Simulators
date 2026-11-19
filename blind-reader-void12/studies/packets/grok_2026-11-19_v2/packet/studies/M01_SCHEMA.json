@@ -1,0 +1,53 @@
+{
+ "study_id": "M01",
+ "title": "slots_specific membership: what a reader takes 'tied to this term and to no other term' to mean",
+ "version": 1,
+ "record": "one record per (reader, term, field). A field is in the catalog if any coded reader or the comparison key names it in slots_specific for that term.",
+ "null_rule": "null means NOT_RECORDED. No field has a default. true / false / an enum value appear only when someone recorded them, and the *_provenance beside it says who.",
+ "provenance_values": {
+  "SCRIPT_DERIVED": "computed by m01_code.py from the packet's own sources (running cplay code, parsing P3 / numcheck text) or from a filed evidence file named in the value's source_basis",
+  "CODER_INFERRED": "set by the coder from reading the sources or a reader's note; not mechanically checked; the coder is named in the study's notes",
+  "READER_STATED": "taken verbatim from the reader's filed response; m01_code.py checks the quote is a substring of that reader's file",
+  "NOT_RECORDED": "nobody recorded it; the value is null"
+ },
+ "fields": {
+  "study_id":           {"type": "string", "const": "M01"},
+  "reader_id":          {"type": "string", "note": "the the readings folder (not included) folder name, never reader_label (which the task text set for every reader)"},
+  "packet":             {"type": "object", "keys": ["version", "variant", "sha256"], "note": "variant null when the reader's variant was not stated"},
+  "condition":          {"type": "string", "enum": ["D0", "D1", "D2", "D3"], "note": "D0 = brief unchanged; D1-D3 are M02 conditions, never pooled with D0"},
+  "term_id":            {"type": "string", "pattern": "T01..T15"},
+  "field":              {"type": "string"},
+  "source": {
+   "type": "object", "note": "properties of the packet's sources, the same for every reader",
+   "keys": {
+    "location":           {"type": "string", "note": "file:lines in the packet"},
+    "origin":             {"enum": ["RAW_INPUT", "PARAMETER_ONLY", "COMPUTED", "DOCUMENTED", "UNKNOWN"],
+                           "note": "RAW_INPUT: passed in or recorded raw and stored; PARAMETER_ONLY: a parameter of a function written for the term, not stored under that name; COMPUTED: computed from other candidate fields or by the source after construction; DOCUMENTED: named only in prose, a notation or a key list, with no instance built in the packet"},
+    "presence_scope":     {"enum": ["ALL_EXCLUSIVE", "SOME_EXCLUSIVE", "SHARED", "NONE", "NO_INSTANCE", "UNKNOWN"],
+                           "note": "is the key present (even as None) on every instance of this term and on no instance of another term"},
+    "applicability_scope":{"enum": ["ALL_EXCLUSIVE", "SOME_EXCLUSIVE", "SHARED", "NONE", "NO_INSTANCE", "UNKNOWN"],
+                           "note": "is it populated (non-None, non-zero) on every / some instances of this term only"},
+    "requirement_scope":  {"enum": ["ALL_EXCLUSIVE", "SHARED", "NONE", "NO_INSTANCE", "UNKNOWN"],
+                           "note": "does a source rule require it for this status only (removing it raises or refuses)"},
+    "routes":             {"type": "integer", "note": "number of source routes to 'the instance' of the term that give different lists"},
+    "cases":              {"type": "array", "items": {"enum": ["A", "B", "C", "D", "E", "F", "G"]},
+                           "note": "the [a reader] test-matrix cells, assigned by the fixed rule in M01_CRITERIA.md section 3; a field can sit in more than one"},
+    "source_basis":       {"type": "string", "note": "how each value was obtained (the run, the parsed lines, or the filed evidence file)"},
+    "provenance":         {"enum": ["SCRIPT_DERIVED", "CODER_INFERRED"]}
+   }
+  },
+  "reader": {
+   "type": "object",
+   "keys": {
+    "listed":             {"enum": ["LISTED", "NOT_LISTED"], "note": "NOT_LISTED is not 'excluded': the reader was never asked to exclude"},
+    "basis_quote":        {"type": ["string", "null"], "note": "verbatim from the reader's source_lines_read, or null"},
+    "basis_kind":         {"enum": ["PARAMETER", "STORED_FIELD", "REQUIRED", "APPLICABLE_ONLY", "DOCUMENTED", "DERIVED_BUT_TIED", "SHARED_SO_NOT", "OTHER", null],
+                           "note": "the coder's classification of basis_quote; null when there is no quote"},
+    "basis_kind_provenance": {"enum": ["CODER_INFERRED", "NOT_RECORDED"]},
+    "uncertainty_stated": {"type": ["boolean", "null"], "note": "true only when the reader's own text says it is unsure about this field; null otherwise (silence is not certainty)"},
+    "provenance":         {"enum": ["READER_STATED"], "note": "listed is read from the reader's slots_specific list"}
+   }
+  },
+  "comparison_key":              {"type": "object", "keys": {"listed": {"enum": ["LISTED", "NOT_LISTED", "KEY_UNDETERMINED"]}}}
+ }
+}

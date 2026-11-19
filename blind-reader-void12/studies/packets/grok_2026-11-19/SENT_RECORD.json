@@ -1,0 +1,13 @@
+{
+ "packet": "grok_2026-11-19 (v1)",
+ "note": "Filled after sending, from the owner's record (2026-11-19). Kept beside MANIFEST_PRIVATE.json so the build still reproduces v1 byte for byte.",
+ "reader": "Grok",
+ "reader_label": "R-2026-11-19-a",
+ "status": "SENT",
+ "tools": "bash and file read; no web (owner's record)",
+ "prior_exposure": "memory ON: user memory from prior chats was present, so the reader is not blind on that dimension (owner's record)",
+ "channel": null,
+ "observer": null,
+ "packet_defects_known_after_sending": "P1-P6, checked in confusion/2026-11-19_grok_m01-m02.md once filed; summary in packets/grok_2026-11-19_v2/MANIFEST_PRIVATE.json diff_from_v1.fixes",
+ "comparability": "the reader's answers are to packet v1 with defects P1-P6; rows caused by a defect are to be tagged PACKET when the record is filed"
+}
