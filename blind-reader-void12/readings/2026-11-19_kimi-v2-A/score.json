@@ -1,0 +1,460 @@
+{
+ "reader_label": "claude-fresh-1",
+ "model_family": "Kimi K3.1",
+ "date_utc": "2026-11-19",
+ "blind_status": "BLIND",
+ "attestation_flags": [],
+ "term_pairs": {
+  "both_join": 6,
+  "reader_only": 0,
+  "key_only": 0,
+  "neither": 99,
+  "total": 105
+ },
+ "ari": 1.0,
+ "term_pair_differences": [],
+ "clusters_reader": 9,
+ "clusters_key": 9,
+ "meanings": {
+  "specific": {
+   "pairs": [
+    {
+     "pair": "GAP_INSTRUMENT_CRASH | CRASHED",
+     "reader": "PARTIAL",
+     "key": null,
+     "first_reading_declared": "MAPS",
+     "agree": null
+    },
+    {
+     "pair": "UNKNOWN | UNKNOWN",
+     "reader": "PARTIAL",
+     "key": "PARTIAL",
+     "first_reading_declared": "PARTIAL",
+     "agree": true
+    },
+    {
+     "pair": "ABSENT_AT_SENSITIVITY | ABSENT_AT_SENSITIVITY",
+     "reader": "PARTIAL",
+     "key": "PARTIAL",
+     "first_reading_declared": "PARTIAL",
+     "agree": true
+    },
+    {
+     "pair": "expiry_condition | ExpiryTrigger",
+     "reader": "PARTIAL",
+     "key": "PARTIAL",
+     "first_reading_declared": "PARTIAL",
+     "agree": true
+    },
+    {
+     "pair": "VOID | VOID",
+     "reader": "HOMONYM",
+     "key": "HOMONYM",
+     "first_reading_declared": "HOMONYM",
+     "agree": true
+    },
+    {
+     "pair": "UNDECIDED | UNRESOLVED",
+     "reader": "PARTIAL",
+     "key": "MAPS",
+     "first_reading_declared": "PARTIAL",
+     "agree": false
+    },
+    {
+     "pair": "HOLDS | OK",
+     "reader": "NONE",
+     "key": "NONE",
+     "first_reading_declared": "NONE",
+     "agree": true
+    },
+    {
+     "pair": "HOLDS | CLOSED_WITHIN",
+     "reader": "PARTIAL",
+     "key": "PARTIAL",
+     "first_reading_declared": "PARTIAL",
+     "agree": true
+    }
+   ],
+   "tier_agree": 6,
+   "n_determined": 7,
+   "n_pairs": 8,
+   "cp95": [
+    0.421,
+    0.996
+   ],
+   "baselines": {
+    "singletons": 2,
+    "label_only": 3
+   },
+   "slots": [
+    {
+     "id": "T01",
+     "label": "UNDECIDED",
+     "status": "differ",
+     "missing": [],
+     "extra": [
+      "first_undecided_subbox",
+      "proposal"
+     ],
+     "reader_basis": "READ_FROM_SOURCE"
+    },
+    {
+     "id": "T02",
+     "label": "ABSENT_AT_SENSITIVITY",
+     "status": "equal",
+     "missing": [],
+     "extra": [],
+     "reader_basis": "READ_FROM_SOURCE"
+    },
+    {
+     "id": "T03",
+     "label": "VOID",
+     "status": "equal",
+     "missing": [],
+     "extra": [],
+     "reader_basis": "NONE_STATED"
+    },
+    {
+     "id": "T04",
+     "label": "ExpiryTrigger",
+     "status": "equal",
+     "missing": [],
+     "extra": [],
+     "reader_basis": "READ_FROM_SOURCE"
+    },
+    {
+     "id": "T05",
+     "label": "ABSENT_AT_SENSITIVITY",
+     "status": "differ",
+     "missing": [],
+     "extra": [
+      "covers_effect"
+     ],
+     "reader_basis": "READ_FROM_SOURCE"
+    },
+    {
+     "id": "T06",
+     "label": "UNRESOLVED",
+     "status": "equal",
+     "missing": [],
+     "extra": [],
+     "reader_basis": "NONE_STATED"
+    },
+    {
+     "id": "T07",
+     "label": "VOID",
+     "status": "differ",
+     "missing": [],
+     "extra": [
+      "first_subbox_with_no_value",
+      "void_reason"
+     ],
+     "reader_basis": "READ_FROM_SOURCE"
+    },
+    {
+     "id": "T08",
+     "label": "CRASHED",
+     "status": "n/d",
+     "missing": [],
+     "extra": [
+      "exc",
+      "exception",
+      "inputs",
+      "path"
+     ],
+     "reader_basis": "READ_FROM_SOURCE"
+    },
+    {
+     "id": "T09",
+     "label": "UNKNOWN",
+     "status": "equal",
+     "missing": [],
+     "extra": [],
+     "reader_basis": "NONE_STATED"
+    },
+    {
+     "id": "T10",
+     "label": "GAP_INSTRUMENT_CRASH",
+     "status": "differ",
+     "missing": [
+      "expiry_condition",
+      "input",
+      "kind",
+      "module",
+      "reason"
+     ],
+     "extra": [
+      "error",
+      "exception_type"
+     ],
+     "reader_basis": "READ_FROM_SOURCE"
+    },
+    {
+     "id": "T11",
+     "label": "HOLDS",
+     "status": "equal",
+     "missing": [],
+     "extra": [],
+     "reader_basis": "NONE_STATED"
+    },
+    {
+     "id": "T12",
+     "label": "UNKNOWN",
+     "status": "differ",
+     "missing": [
+      "reason"
+     ],
+     "extra": [
+      "typed",
+      "untyped"
+     ],
+     "reader_basis": "READ_FROM_SOURCE"
+    },
+    {
+     "id": "T13",
+     "label": "OK",
+     "status": "equal",
+     "missing": [],
+     "extra": [],
+     "reader_basis": "NONE_STATED"
+    },
+    {
+     "id": "T14",
+     "label": "CLOSED_WITHIN",
+     "status": "equal",
+     "missing": [],
+     "extra": [],
+     "reader_basis": "READ_FROM_SOURCE"
+    },
+    {
+     "id": "T15",
+     "label": "expiry_condition",
+     "status": "differ",
+     "missing": [],
+     "extra": [
+      "instrument"
+     ],
+     "reader_basis": "READ_FROM_SOURCE"
+    }
+   ],
+   "slots_equal": 8,
+   "slots_determined": 14
+  },
+  "carried": {
+   "pairs": [
+    {
+     "pair": "GAP_INSTRUMENT_CRASH | CRASHED",
+     "reader": "PARTIAL",
+     "key": "PARTIAL",
+     "first_reading_declared": "MAPS",
+     "agree": true
+    },
+    {
+     "pair": "UNKNOWN | UNKNOWN",
+     "reader": "PARTIAL",
+     "key": null,
+     "first_reading_declared": "PARTIAL",
+     "agree": null
+    },
+    {
+     "pair": "ABSENT_AT_SENSITIVITY | ABSENT_AT_SENSITIVITY",
+     "reader": "PARTIAL",
+     "key": "PARTIAL",
+     "first_reading_declared": "PARTIAL",
+     "agree": true
+    },
+    {
+     "pair": "expiry_condition | ExpiryTrigger",
+     "reader": "PARTIAL",
+     "key": "PARTIAL",
+     "first_reading_declared": "PARTIAL",
+     "agree": true
+    },
+    {
+     "pair": "VOID | VOID",
+     "reader": "HOMONYM",
+     "key": "HOMONYM",
+     "first_reading_declared": "HOMONYM",
+     "agree": true
+    },
+    {
+     "pair": "UNDECIDED | UNRESOLVED",
+     "reader": "PARTIAL",
+     "key": "PARTIAL",
+     "first_reading_declared": "PARTIAL",
+     "agree": true
+    },
+    {
+     "pair": "HOLDS | OK",
+     "reader": "NONE",
+     "key": "NONE",
+     "first_reading_declared": "NONE",
+     "agree": true
+    },
+    {
+     "pair": "HOLDS | CLOSED_WITHIN",
+     "reader": "PARTIAL",
+     "key": "PARTIAL",
+     "first_reading_declared": "PARTIAL",
+     "agree": true
+    }
+   ],
+   "tier_agree": 7,
+   "n_determined": 7,
+   "n_pairs": 8,
+   "cp95": [
+    0.59,
+    1.0
+   ],
+   "baselines": {
+    "singletons": 2,
+    "label_only": 2
+   },
+   "slots": [
+    {
+     "id": "T01",
+     "label": "UNDECIDED",
+     "status": "equal",
+     "missing": [],
+     "extra": [],
+     "reader_basis": "READ_FROM_SOURCE"
+    },
+    {
+     "id": "T02",
+     "label": "ABSENT_AT_SENSITIVITY",
+     "status": "differ",
+     "missing": [
+      "value"
+     ],
+     "extra": [],
+     "reader_basis": "NONE_STATED"
+    },
+    {
+     "id": "T03",
+     "label": "VOID",
+     "status": "equal",
+     "missing": [],
+     "extra": [],
+     "reader_basis": "READ_FROM_SOURCE"
+    },
+    {
+     "id": "T04",
+     "label": "ExpiryTrigger",
+     "status": "equal",
+     "missing": [],
+     "extra": [],
+     "reader_basis": "READ_FROM_SOURCE"
+    },
+    {
+     "id": "T05",
+     "label": "ABSENT_AT_SENSITIVITY",
+     "status": "equal",
+     "missing": [],
+     "extra": [],
+     "reader_basis": "READ_FROM_SOURCE"
+    },
+    {
+     "id": "T06",
+     "label": "UNRESOLVED",
+     "status": "equal",
+     "missing": [],
+     "extra": [],
+     "reader_basis": "READ_FROM_SOURCE"
+    },
+    {
+     "id": "T07",
+     "label": "VOID",
+     "status": "equal",
+     "missing": [],
+     "extra": [],
+     "reader_basis": "READ_FROM_SOURCE"
+    },
+    {
+     "id": "T08",
+     "label": "CRASHED",
+     "status": "equal",
+     "missing": [],
+     "extra": [],
+     "reader_basis": "READ_FROM_SOURCE"
+    },
+    {
+     "id": "T09",
+     "label": "UNKNOWN",
+     "status": "n/d",
+     "missing": [],
+     "extra": [
+      "cls",
+      "exit",
+      "expiry_condition",
+      "input",
+      "kind",
+      "module",
+      "reason",
+      "sid"
+     ],
+     "reader_basis": "READ_FROM_SOURCE"
+    },
+    {
+     "id": "T10",
+     "label": "GAP_INSTRUMENT_CRASH",
+     "status": "differ",
+     "missing": [],
+     "extra": [
+      "error",
+      "exception_type"
+     ],
+     "reader_basis": "READ_FROM_SOURCE"
+    },
+    {
+     "id": "T11",
+     "label": "HOLDS",
+     "status": "equal",
+     "missing": [],
+     "extra": [],
+     "reader_basis": "READ_FROM_SOURCE"
+    },
+    {
+     "id": "T12",
+     "label": "UNKNOWN",
+     "status": "differ",
+     "missing": [],
+     "extra": [
+      "expiry_condition",
+      "input",
+      "kind",
+      "missing_path",
+      "module"
+     ],
+     "reader_basis": "READ_FROM_SOURCE"
+    },
+    {
+     "id": "T13",
+     "label": "OK",
+     "status": "equal",
+     "missing": [],
+     "extra": [],
+     "reader_basis": "READ_FROM_SOURCE"
+    },
+    {
+     "id": "T14",
+     "label": "CLOSED_WITHIN",
+     "status": "equal",
+     "missing": [],
+     "extra": [],
+     "reader_basis": "READ_FROM_SOURCE"
+    },
+    {
+     "id": "T15",
+     "label": "expiry_condition",
+     "status": "equal",
+     "missing": [],
+     "extra": [],
+     "reader_basis": "READ_FROM_SOURCE"
+    }
+   ],
+   "slots_equal": 11,
+   "slots_determined": 14
+  }
+ },
+ "flags": []
+}

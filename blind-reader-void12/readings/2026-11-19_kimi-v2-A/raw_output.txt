@@ -1,0 +1,395 @@
+{
+"reader_label": "claude-fresh-1",
+"model_family": "Kimi K3.1",
+"date_utc": "2026-11-19",
+"terms": {
+"T01": {
+"cluster": "A",
+"predicate": "The result lies too close to a tolerance boundary for the applicable decision procedure to establish either acceptance or rejection.",
+"slots_specific": [
+"proposal",
+"first_undecided_subbox"
+],
+"slots_specific_basis": "READ_FROM_SOURCE",
+"slots_carried": [
+"kind",
+"verdict",
+"void_reason",
+"status",
+"deciding_tier",
+"precision",
+"rigorous",
+"fast",
+"tiers",
+"triage",
+"located",
+"proposal",
+"intervals",
+"inputs",
+"units",
+"provenance",
+"slots",
+"human_interest",
+"ai_interest",
+"formula",
+"bisection",
+"formulas",
+"subboxes",
+"subboxes_where_both_hold",
+"subboxes_where_one_fails",
+"first_undecided_subbox",
+"first_subbox_with_no_value"
+],
+"slots_carried_basis": "READ_FROM_SOURCE",
+"source_lines_read": "sources/formula-audit/numcheck/check.py:6-38,110-119,188-240,296-350,353-440,443-557. The carried list unions the point and intersection top-level records; nested records are not opened. proposal is generated only for qualifying UNDECIDED point checks, and first_undecided_subbox is specific to the intersection UNDECIDED path. Clustering with T06 is a meaning-based comparison, not a label match.",
+"confidence": "MEDIUM",
+"could_also_join": []
+},
+"T02": {
+"cluster": "B",
+"predicate": "A null result under a stated instrument, sensitivity or protocol establishes absence only within that stated scope.",
+"slots_specific": [
+"value"
+],
+"slots_specific_basis": "READ_FROM_SOURCE",
+"slots_carried": [],
+"slots_carried_basis": "NONE_STATED",
+"source_lines_read": "sources/thermodynamic-accountability-framework/docs/glossary.md:122-129; sources/thermodynamic-accountability-framework/calibration/expiry_register.py:28-37,53-59,228-235,283-298. value is the parameter in the notation ABSENT_AT_SENSITIVITY(). The glossary expressly says no slot holds this state yet; the code validates its string form and prints a zero count but builds no absence record.",
+"confidence": "HIGH",
+"could_also_join": []
+},
+"T03": {
+"cluster": "C",
+"predicate": "A required specification vocabulary or mapping is not defined, and that absence is reported explicitly instead of being filled with a default.",
+"slots_specific": [],
+"slots_specific_basis": "NONE_STATED",
+"slots_carried": [
+"state",
+"reason"
+],
+"slots_carried_basis": "READ_FROM_SOURCE",
+"source_lines_read": "sources/Simulators/combined-playground/cplay/tokens.py:13-18,21-29,44-61,132-140. VOID marks missing specification content, including the trigger-kind vocabulary and vocabulary-mapping rows. It is represented by the generic Token fields state and reason, with no VOID-exclusive fields. I considered T07 because of the shared label but did not join it: T07 concerns failure to obtain a numerical verdict, not unspecified specification content.",
+"confidence": "HIGH",
+"could_also_join": [
+"T07"
+]
+},
+"T04": {
+"cluster": "D",
+"predicate": "An exit condition names the instrument, sensitivity, protocol, or typed condition whose result would close or downgrade an open UNKNOWN value.",
+"slots_specific": [
+"kind",
+"target",
+"condition"
+],
+"slots_specific_basis": "READ_FROM_SOURCE",
+"slots_carried": [
+"kind",
+"target",
+"condition"
+],
+"slots_carried_basis": "READ_FROM_SOURCE",
+"source_lines_read": "sources/Simulators/combined-playground/cplay/tokens.py:7-10,64-72,81-89,136-140; sources/thermodynamic-accountability-framework/calibration/expiry_register.py:53-59. ExpiryTrigger requires and stores kind, target, and condition. Its role matches T15, but tokens.py expressly leaves the mapping between these three fields and TAF's expiry-register keys open, so confidence in the cross-project cluster is MEDIUM.",
+"confidence": "MEDIUM",
+"could_also_join": []
+},
+"T05": {
+"cluster": "B",
+"predicate": "A null result under a stated instrument, sensitivity or protocol establishes absence only within that stated scope.",
+"slots_specific": [
+"limit",
+"basis",
+"effect_size",
+"conditions",
+"ladder",
+"covers_effect"
+],
+"slots_specific_basis": "READ_FROM_SOURCE",
+"slots_carried": [
+"state",
+"reason",
+"limit",
+"basis",
+"effect_size",
+"conditions",
+"ladder",
+"covers_effect"
+],
+"slots_carried_basis": "READ_FROM_SOURCE",
+"source_lines_read": "sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md:124-140,293-297; sources/Simulators/combined-playground/cplay/tokens.py:9-18,92-104. The first five specific names are absence-constructor parameters and stored attributes; covers_effect is an additional absence-only derived attribute. The carried Token also has the shared state and reason fields.",
+"confidence": "HIGH",
+"could_also_join": []
+},
+"T06": {
+"cluster": "A",
+"predicate": "The result lies too close to a tolerance boundary for the applicable decision procedure to establish either acceptance or rejection.",
+"slots_specific": [],
+"slots_specific_basis": "NONE_STATED",
+"slots_carried": [
+"field",
+"token"
+],
+"slots_carried_basis": "READ_FROM_SOURCE",
+"source_lines_read": "sources/Simulators/combined-playground/cplay/closure.py:33-40,284-315; sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md:245-253. Branch G returns UNRESOLVED in a FieldToken whose own fields are field and token; the nested Token is not opened. FieldToken also carries TOLERANCE_UNRESOLVABLE, so its fields are not UNRESOLVED-exclusive. The match with T01 is MEDIUM confidence because T01 reflects exhausted numerical refinement whereas T06 is a deliberate guard-band decision outcome.",
+"confidence": "MEDIUM",
+"could_also_join": []
+},
+"T07": {
+"cluster": "E",
+"predicate": "No numerical verdict can be produced because units do not pass, inputs are missing or unreadable, evaluation is unsupported or has no value, or an internal error occurs.",
+"slots_specific": [
+"void_reason",
+"first_subbox_with_no_value"
+],
+"slots_specific_basis": "READ_FROM_SOURCE",
+"slots_carried": [
+"kind",
+"verdict",
+"void_reason",
+"status",
+"deciding_tier",
+"precision",
+"rigorous",
+"fast",
+"tiers",
+"triage",
+"located",
+"proposal",
+"intervals",
+"inputs",
+"units",
+"provenance",
+"slots",
+"human_interest",
+"ai_interest",
+"formula",
+"bisection",
+"formulas",
+"subboxes",
+"subboxes_where_both_hold",
+"subboxes_where_one_fails",
+"first_undecided_subbox",
+"first_subbox_with_no_value"
+],
+"slots_carried_basis": "READ_FROM_SOURCE",
+"source_lines_read": "sources/formula-audit/numcheck/check.py:3-14,40-52,110-137,353-440,443-557. The carried list unions all top-level point and intersection record paths that can end in VOID. void_reason records the VOID cause, and first_subbox_with_no_value is specific to the intersection VOID path. I considered T03 because both are labelled VOID but kept them separate because their predicates differ.",
+"confidence": "HIGH",
+"could_also_join": [
+"T03"
+]
+},
+"T08": {
+"cluster": "F",
+"predicate": "The check or module raised before producing a measurement, so the event is an instrument-coverage gap rather than a measured failure.",
+"slots_specific": [
+"exc",
+"path",
+"inputs",
+"exception"
+],
+"slots_specific_basis": "READ_FROM_SOURCE",
+"slots_carried": [
+"field",
+"status",
+"reason",
+"sigma",
+"basis",
+"exception",
+"path",
+"bound",
+"kind",
+"module",
+"input",
+"missing_path",
+"expiry_condition"
+],
+"slots_carried_basis": "READ_FROM_SOURCE",
+"source_lines_read": "sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md:47-56,80-89,334-342; sources/Simulators/combined-playground/cplay/axes.py:41-88. CRASHED requires exception and path; the dedicated crash() constructor also has the crash-specific parameters exc and inputs. It returns both a Reading and a CoverageEntry, whose own fields are unioned in slots_carried. The constructor's inputs becomes the coverage field input, while path also supplies missing_path.",
+"confidence": "HIGH",
+"could_also_join": []
+},
+"T09": {
+"cluster": "G",
+"predicate": "A value is not yet known and remains open rather than being treated as zero or absence, with any expiry or exit condition recorded.",
+"slots_specific": [],
+"slots_specific_basis": "NONE_STATED",
+"slots_carried": [
+"kind",
+"module",
+"input",
+"reason",
+"expiry_condition",
+"cls",
+"sid",
+"exit"
+],
+"slots_carried_basis": "READ_FROM_SOURCE",
+"source_lines_read": "sources/thermodynamic-accountability-framework/docs/glossary.md:122-129; sources/thermodynamic-accountability-framework/calibration/unified_audit.py:41-49,86-101,331-372; sources/thermodynamic-accountability-framework/calibration/expiry_register.py:17-37,238-267. UNKNOWN coverage entries carry kind, module, input, reason, and expiry_condition; individual expiry-register occurrence rows carry cls, sid, and exit. No field is exclusive to UNKNOWN: expiry_condition also serves PENDING and other coverage kinds, while the occurrence-row fields are shared across classes.",
+"confidence": "HIGH",
+"could_also_join": []
+},
+"T10": {
+"cluster": "F",
+"predicate": "The check or module raised before producing a measurement, so the event is an instrument-coverage gap rather than a measured failure.",
+"slots_specific": [
+"error",
+"exception_type",
+"missing_path"
+],
+"slots_specific_basis": "READ_FROM_SOURCE",
+"slots_carried": [
+"kind",
+"module",
+"input",
+"reason",
+"missing_path",
+"expiry_condition",
+"error",
+"exception_type"
+],
+"slots_carried_basis": "READ_FROM_SOURCE",
+"source_lines_read": "sources/thermodynamic-accountability-framework/docs/glossary.md:131-142; sources/thermodynamic-accountability-framework/calibration/unified_audit.py:91-101,331-344,479-496,558-565. A crash produces a section record with error, exception_type, and missing_path, plus a six-field coverage entry. Those crash-section fields and missing_path distinguish this path from UNKNOWN and INFO coverage entries. The outer unified report is not recursively opened.",
+"confidence": "HIGH",
+"could_also_join": []
+},
+"T11": {
+"cluster": "H",
+"predicate": "A closure or equality discrepancy is accepted because it lies within a declared tolerance or uncertainty band.",
+"slots_specific": [],
+"slots_specific_basis": "NONE_STATED",
+"slots_carried": [
+"kind",
+"verdict",
+"void_reason",
+"status",
+"deciding_tier",
+"precision",
+"rigorous",
+"fast",
+"tiers",
+"triage",
+"located",
+"proposal",
+"intervals",
+"inputs",
+"units",
+"provenance",
+"slots",
+"human_interest",
+"ai_interest",
+"formula",
+"bisection"
+],
+"slots_carried_basis": "READ_FROM_SOURCE",
+"source_lines_read": "sources/formula-audit/numcheck/check.py:6-25,110-119,188-240,353-440. HOLDS is a point-check verdict and uses the shared point record, with formula and the possible bisection detail added; no top-level field is exclusive to HOLDS. I matched it with T14 by the within-tolerance predicate. I considered T13 but did not join it because OK is the generic ran-and-passed status rather than specifically a tolerance-based closure result.",
+"confidence": "MEDIUM",
+"could_also_join": [
+"T13"
+]
+},
+"T12": {
+"cluster": "G",
+"predicate": "A value is not yet known and remains open rather than being treated as zero or absence, with any expiry or exit condition recorded.",
+"slots_specific": [
+"triggers",
+"typed",
+"untyped"
+],
+"slots_specific_basis": "READ_FROM_SOURCE",
+"slots_carried": [
+"state",
+"reason",
+"typed",
+"untyped",
+"kind",
+"module",
+"input",
+"missing_path",
+"expiry_condition"
+],
+"slots_carried_basis": "READ_FROM_SOURCE",
+"source_lines_read": "sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md:41-45,124-140,296-299; sources/Simulators/combined-playground/cplay/tokens.py:44-50,75-89; sources/Simulators/combined-playground/cplay/axes.py:69-78. triggers is the UNKNOWN constructor's parameter; the returned Token stores typed and untyped alongside shared state and reason. UNKNOWN can also be carried as a coverage kind, so the six CoverageEntry fields are included. reason is not specific because every non-verdict Token requires it.",
+"confidence": "HIGH",
+"could_also_join": []
+},
+"T13": {
+"cluster": "I",
+"predicate": "The addressed check executed and passed.",
+"slots_specific": [],
+"slots_specific_basis": "NONE_STATED",
+"slots_carried": [
+"field",
+"status",
+"reason",
+"sigma",
+"basis",
+"exception",
+"path",
+"bound"
+],
+"slots_carried_basis": "READ_FROM_SOURCE",
+"source_lines_read": "sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md:47-56; sources/Simulators/combined-playground/cplay/axes.py:41-66; sources/Simulators/combined-playground/cplay/closure.py:299-315. OK is reported in the shared Reading record and requires no status-exclusive field. I considered joining T11 and T14 because they can also describe successful numerical checks, but retained a separate cluster because OK asserts only generic execution and passage, not specifically closure within a tolerance band.",
+"confidence": "MEDIUM",
+"could_also_join": [
+"T11",
+"T14"
+]
+},
+"T14": {
+"cluster": "H",
+"predicate": "A closure or equality discrepancy is accepted because it lies within a declared tolerance or uncertainty band.",
+"slots_specific": [
+"sigma",
+"basis"
+],
+"slots_specific_basis": "READ_FROM_SOURCE",
+"slots_carried": [
+"field",
+"status",
+"reason",
+"sigma",
+"basis",
+"exception",
+"path",
+"bound"
+],
+"slots_carried_basis": "READ_FROM_SOURCE",
+"source_lines_read": "sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md:47-55,68-69,245-253,286; sources/Simulators/combined-playground/cplay/axes.py:41-66; sources/Simulators/combined-playground/cplay/closure.py:193-199,299-315. CLOSED_WITHIN specifically requires numeric sigma and basis, and is returned in the shared Reading record. The cross-project match with T11 is MEDIUM confidence because the source emphasizes non-exact closure while HOLDS can also include exact equality. T13 was considered but is broader.",
+"confidence": "MEDIUM",
+"could_also_join": [
+"T13"
+]
+},
+"T15": {
+"cluster": "D",
+"predicate": "An exit condition names the instrument, sensitivity, protocol, or typed condition whose result would close or downgrade an open UNKNOWN value.",
+"slots_specific": [
+"instrument",
+"protocol",
+"provenance",
+"sensitivity",
+"instrument_class"
+],
+"slots_specific_basis": "READ_FROM_SOURCE",
+"slots_carried": [
+"instrument_class",
+"sensitivity",
+"protocol",
+"provenance"
+],
+"slots_carried_basis": "READ_FROM_SOURCE",
+"source_lines_read": "sources/thermodynamic-accountability-framework/docs/glossary.md:122-129; sources/thermodynamic-accountability-framework/calibration/expiry_register.py:28-32,51-60,216-225; sources/Simulators/combined-playground/cplay/tokens.py:64-66,136-140. E() has the constructor parameter instrument, while its returned expiry dictionary spells the corresponding key instrument_class; the other three keys are sensitivity, protocol, and provenance. The cluster with T04 is MEDIUM confidence because the packet expressly leaves mapping TAF's keys onto ExpiryTrigger's kind, target, and condition unresolved.",
+"confidence": "MEDIUM",
+"could_also_join": []
+}
+},
+"attestation": {
+"q1_seen_pair_table_with_verdicts": "no",
+"q2_seen_predicate_sentence_by_someone_else": "no",
+"q3_seen_vocabulary_mapping_or_second_reader_report": "no",
+"q4_told_how_many_clusters_or_pairs": "no",
+"q5_used_anything_outside_packet": "no",
+"q6_prior_sessions_about_this_project": "no",
+"notes": "All eight packet source files were read. No outside project material, web pages, earlier answers, or remembered project facts were used; only the runtime-supplied model name and current date were used for required metadata. Web-search and code-execution tools were available and could not be disabled here; web search was not used, and no packet code was executed. Shell and file tools were used only to extract, list, and read the supplied archive. An unrelated session memory profile was present but was not used; its supplied index contained no notes about these projects, and no project knowledge or connected repositories were used. The packet neither stated nor implied a target cluster count, and I did not aim for one."
+}
+}
