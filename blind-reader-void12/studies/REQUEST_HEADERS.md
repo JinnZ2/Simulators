@@ -115,3 +115,7 @@ OPERATIONAL_DEFINITIONS.md OPEN    rules no file states                      to 
 ```
 
 So an OPEN row is closed by an arm that runs each candidate rule and shows where they diverge, and by physics or evidence where they can decide. Writing the rule into a validator is not what closes it. The leak scan is the one gate that enforces, and the reason is physical, not a preference: exposure only adds.
+
+## Later (2026-11-19): REVIEW-2 and AUDIT-2
+
+The open line in `../MODE_SEQUENCE.md` is answered by the owner's independence rules in that file's dated section. A REVIEW-2 reader differs from the implementer. In AUDIT-2, the implementer may rerun a deterministic check only if its design was reviewed by a different reader; a judgment check, including test and fixture design, needs a different auditor. Every REVIEW and AUDIT return adds the independence fields and level, as defined in `INDEPENDENCE_LEDGER.md`.

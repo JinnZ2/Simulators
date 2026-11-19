@@ -129,3 +129,7 @@ CF20  EDIT_REQUIRED (decided by the brief's text)  fixture rule ALL_REPORTING_PA
 ```
 
 Rows now 63: CF20 is added after the counts above were taken. The counts are not redone.
+
+## Later (2026-11-19): CF20 status
+
+CF20's repair already exists at `7bc51bb` (PR #320, draft). Status: EDIT_REQUIRED, drafted, waiting on REVIEW-2 by a reader other than the implementer (`INDEPENDENCE_LEDGER.md`).

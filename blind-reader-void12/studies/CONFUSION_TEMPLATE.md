@@ -53,3 +53,24 @@ filled by                                                          reader / owne
 ```
 
 Records filed before this section have no block. Where the owner's record supplies a value for one of them, it goes in that record's dated section with its source. It is not written into the header above.
+
+## Later (2026-11-19): attestation fields extended for independence
+
+The owner's independence rules (`../MODE_SEQUENCE.md`, A3) count context as memory plus project features, not only the session. They also need exposure to the implementation. The block above is kept as written; a record filed from now on uses this one:
+
+```text
+Reader attestation
+prior exposure, before this task:
+  the packet (these files, or an earlier version of them)          yes / no / unknown
+  the key (comparison key, its amendment, or any score)            yes / no / unknown
+  the repository (any part, any branch)                            yes / no / unknown
+  the implementation (the code or instruments under review)        yes / no / unknown
+  other readers' records (readings, confusion records)             yes / no / unknown
+memory from other conversations                                   on / off / unknown
+project or context features (project knowledge, connected
+  repositories, custom instructions, attached files)              <list, or "none", or "unknown">
+tools used in this task                                            <list, or "none">
+filled by                                                          reader / owner's record
+```
+
+The recorder adds the fields a reader cannot know: the implementer of what was read, the session, and the model family. With those, the level is computed by `INDEPENDENCE_LEDGER.md`'s rule.

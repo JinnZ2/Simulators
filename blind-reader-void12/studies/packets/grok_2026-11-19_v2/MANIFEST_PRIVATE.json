@@ -4,7 +4,7 @@
  "packet_version": 2,
  "status": "DRAFT (not sent)",
  "reader_label_in_packet": "R-2026-11-19-a",
- "built_at_commit": "1c89ab9fba1a09883d574f2ac230251713e650eb",
+ "built_at_commit": "a3e204f768d04faa9ad7e7bf84cef12b8835ae4f",
  "date_utc": "2026-11-19",
  "condition": {
   "blind_to": [
@@ -37,7 +37,7 @@
   },
   {
    "packet_file": "brief/READER_BRIEF.md",
-   "source": "blind-reader-void12/reader_packet_v2/READER_BRIEF.md@1c89ab9fba1a09883d574f2ac230251713e650eb",
+   "source": "blind-reader-void12/reader_packet_v2/READER_BRIEF.md@a3e204f768d04faa9ad7e7bf84cef12b8835ae4f",
    "source_sha256": "a9881ee5cdd49544513e704d664b5f99b754c13cb7cdaae6b99aa20c183effa3",
    "lines": null,
    "kind": "text",
@@ -46,7 +46,7 @@
   },
   {
    "packet_file": "brief/terms.json",
-   "source": "blind-reader-void12/reader_packet_v2/terms.json@1c89ab9fba1a09883d574f2ac230251713e650eb",
+   "source": "blind-reader-void12/reader_packet_v2/terms.json@a3e204f768d04faa9ad7e7bf84cef12b8835ae4f",
    "source_sha256": "467f4fe6769e2ee2e0fed26e91dca25e3c4c04b8f61f339adc2b01d4ab19e0ce",
    "lines": null,
    "kind": "terms",
@@ -60,7 +60,7 @@
   },
   {
    "packet_file": "brief/response_template.json",
-   "source": "blind-reader-void12/reader_packet_v2/response_template.json@1c89ab9fba1a09883d574f2ac230251713e650eb",
+   "source": "blind-reader-void12/reader_packet_v2/response_template.json@a3e204f768d04faa9ad7e7bf84cef12b8835ae4f",
    "source_sha256": "d3dc896800357f666c0fd9fedd1cee6b54fa2ec20db71cce9115416288210060",
    "lines": null,
    "kind": "text",
@@ -69,7 +69,7 @@
   },
   {
    "packet_file": "studies/M01_CRITERIA.md",
-   "source": "blind-reader-void12/studies/M01_CRITERIA.md@1c89ab9fba1a09883d574f2ac230251713e650eb",
+   "source": "blind-reader-void12/studies/M01_CRITERIA.md@a3e204f768d04faa9ad7e7bf84cef12b8835ae4f",
    "source_sha256": "f194ecbcd991720b0ee1279531f5422035b6035505198aab63df0d58b2a5c467",
    "lines": null,
    "kind": "text",
@@ -92,7 +92,7 @@
   },
   {
    "packet_file": "studies/M01_SCHEMA.json",
-   "source": "blind-reader-void12/studies/M01_SCHEMA.json@1c89ab9fba1a09883d574f2ac230251713e650eb",
+   "source": "blind-reader-void12/studies/M01_SCHEMA.json@a3e204f768d04faa9ad7e7bf84cef12b8835ae4f",
    "source_sha256": "2e63b53a5085bed70b940a3232a10d144a93601f2e1ef8dcfb4612e9435a0f40",
    "lines": null,
    "kind": "text",
@@ -109,7 +109,7 @@
   },
   {
    "packet_file": "studies/M01_EXTENSION.md",
-   "source": "blind-reader-void12/studies/M01_EXTENSION.md@1c89ab9fba1a09883d574f2ac230251713e650eb",
+   "source": "blind-reader-void12/studies/M01_EXTENSION.md@a3e204f768d04faa9ad7e7bf84cef12b8835ae4f",
    "source_sha256": "9710be2a9a77b094a3e8c70e014bf6095b9943ced2186f351df6b84d19f56b5e",
    "lines": null,
    "kind": "text",
@@ -133,7 +133,7 @@
   },
   {
    "packet_file": "studies/M02_CRITERIA.md",
-   "source": "blind-reader-void12/studies/M02_CRITERIA.md@1c89ab9fba1a09883d574f2ac230251713e650eb",
+   "source": "blind-reader-void12/studies/M02_CRITERIA.md@a3e204f768d04faa9ad7e7bf84cef12b8835ae4f",
    "source_sha256": "bddfc32b0731d1db14e3f3a446f4bec6d67d31e43cc1e6c89f936ed2b915f2c5",
    "lines": null,
    "kind": "text",
@@ -152,7 +152,7 @@
   },
   {
    "packet_file": "studies/M02_SCHEMA.json",
-   "source": "blind-reader-void12/studies/M02_SCHEMA.json@1c89ab9fba1a09883d574f2ac230251713e650eb",
+   "source": "blind-reader-void12/studies/M02_SCHEMA.json@a3e204f768d04faa9ad7e7bf84cef12b8835ae4f",
    "source_sha256": "e2e80ba2e7d6f00c84ee17ccadd2d1a03096c7d276c08d6f239a0e1f910eefcb",
    "lines": null,
    "kind": "text",
@@ -174,7 +174,7 @@
   },
   {
    "packet_file": "studies/conditions/M01_D1.md",
-   "source": "blind-reader-void12/studies/instructions/M01_D1.md@1c89ab9fba1a09883d574f2ac230251713e650eb",
+   "source": "blind-reader-void12/studies/instructions/M01_D1.md@a3e204f768d04faa9ad7e7bf84cef12b8835ae4f",
    "source_sha256": "055b0a30028a785e8819cc4ca8ca16bbd6c94c25b75484cab53a4677e2171090",
    "lines": null,
    "kind": "text",
@@ -183,7 +183,7 @@
   },
   {
    "packet_file": "studies/conditions/M02_D1.md",
-   "source": "blind-reader-void12/studies/instructions/M02_D1.md@1c89ab9fba1a09883d574f2ac230251713e650eb",
+   "source": "blind-reader-void12/studies/instructions/M02_D1.md@a3e204f768d04faa9ad7e7bf84cef12b8835ae4f",
    "source_sha256": "4769714245b626dcfcf96ea8369b81e64a913b0c484cf9bd54ed10894192e006",
    "lines": null,
    "kind": "text",
@@ -192,7 +192,7 @@
   },
   {
    "packet_file": "studies/conditions/M02_D2.md",
-   "source": "blind-reader-void12/studies/instructions/M02_D2.md@1c89ab9fba1a09883d574f2ac230251713e650eb",
+   "source": "blind-reader-void12/studies/instructions/M02_D2.md@a3e204f768d04faa9ad7e7bf84cef12b8835ae4f",
    "source_sha256": "6787145f8bbf3af6b85e4ca8d15b4a978a0b04319a09175f102115b20cbac2eb",
    "lines": null,
    "kind": "text",
@@ -201,7 +201,7 @@
   },
   {
    "packet_file": "studies/conditions/M02_D3.md",
-   "source": "blind-reader-void12/studies/instructions/M02_D3.md@1c89ab9fba1a09883d574f2ac230251713e650eb",
+   "source": "blind-reader-void12/studies/instructions/M02_D3.md@a3e204f768d04faa9ad7e7bf84cef12b8835ae4f",
    "source_sha256": "cce4d69c553e4eec50393b8c02eb68191d26af992807ab282a47b3a0a0d420aa",
    "lines": null,
    "kind": "text",
@@ -210,7 +210,7 @@
   },
   {
    "packet_file": "sources/P1/cplay/tokens.py",
-   "source": "blind-reader-void12/reader_packet_v2/sources/Simulators/combined-playground/cplay/tokens.py@1c89ab9fba1a09883d574f2ac230251713e650eb",
+   "source": "blind-reader-void12/reader_packet_v2/sources/Simulators/combined-playground/cplay/tokens.py@a3e204f768d04faa9ad7e7bf84cef12b8835ae4f",
    "source_sha256": "8c43890bf90ab49931a3947ff420b00368e5ce23ed82f8e57bd7aec3be6337e6",
    "lines": null,
    "kind": "excerpt",
@@ -223,7 +223,7 @@
   },
   {
    "packet_file": "sources/P1/cplay/axes.py",
-   "source": "blind-reader-void12/reader_packet_v2/sources/Simulators/combined-playground/cplay/axes.py@1c89ab9fba1a09883d574f2ac230251713e650eb",
+   "source": "blind-reader-void12/reader_packet_v2/sources/Simulators/combined-playground/cplay/axes.py@a3e204f768d04faa9ad7e7bf84cef12b8835ae4f",
    "source_sha256": "0e40b7e5ce87de2226103593782e78015534e196005f6c06ed2f460d700453a7",
    "lines": null,
    "kind": "excerpt",
@@ -236,7 +236,7 @@
   },
   {
    "packet_file": "sources/P1/cplay/closure.py",
-   "source": "blind-reader-void12/reader_packet_v2/sources/Simulators/combined-playground/cplay/closure.py@1c89ab9fba1a09883d574f2ac230251713e650eb",
+   "source": "blind-reader-void12/reader_packet_v2/sources/Simulators/combined-playground/cplay/closure.py@a3e204f768d04faa9ad7e7bf84cef12b8835ae4f",
    "source_sha256": "827d681c8b08003519a60967d3b61ef891254a38bb8c02e29cacba51633c3188",
    "lines": [
     [
@@ -250,7 +250,7 @@
   },
   {
    "packet_file": "sources/P1/playground-crossrun/COMBINED_SPEC.lines_1-390.md",
-   "source": "blind-reader-void12/reader_packet_v2/sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md@1c89ab9fba1a09883d574f2ac230251713e650eb",
+   "source": "blind-reader-void12/reader_packet_v2/sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md@a3e204f768d04faa9ad7e7bf84cef12b8835ae4f",
    "source_sha256": "72bbd97749918468a862ab72ec2af5211eb1c1c99e3f1b3e512a65b9f30160a8",
    "lines": [
     [
@@ -271,7 +271,7 @@
   },
   {
    "packet_file": "sources/P2/numcheck/check.py",
-   "source": "blind-reader-void12/reader_packet_v2/sources/formula-audit/numcheck/check.py@1c89ab9fba1a09883d574f2ac230251713e650eb",
+   "source": "blind-reader-void12/reader_packet_v2/sources/formula-audit/numcheck/check.py@a3e204f768d04faa9ad7e7bf84cef12b8835ae4f",
    "source_sha256": "f6df0dc196f5ac273f864f1cab1a5a0d6c67fa88eaba53ca822f94412fb7fd83",
    "lines": [
     [
@@ -305,7 +305,7 @@
   },
   {
    "packet_file": "sources/P3/calibration/unified_audit.py",
-   "source": "blind-reader-void12/reader_packet_v2/sources/thermodynamic-accountability-framework/calibration/unified_audit.py@1c89ab9fba1a09883d574f2ac230251713e650eb",
+   "source": "blind-reader-void12/reader_packet_v2/sources/thermodynamic-accountability-framework/calibration/unified_audit.py@a3e204f768d04faa9ad7e7bf84cef12b8835ae4f",
    "source_sha256": "fcccb9af8d8edb01940a09a639be2ff376c53781097b5562f8745a084c368a49",
    "lines": [
     [
@@ -331,7 +331,7 @@
   },
   {
    "packet_file": "sources/P3/calibration/expiry_register.py",
-   "source": "blind-reader-void12/reader_packet_v2/sources/thermodynamic-accountability-framework/calibration/expiry_register.py@1c89ab9fba1a09883d574f2ac230251713e650eb",
+   "source": "blind-reader-void12/reader_packet_v2/sources/thermodynamic-accountability-framework/calibration/expiry_register.py@a3e204f768d04faa9ad7e7bf84cef12b8835ae4f",
    "source_sha256": "ddaf2cc5b6539df340ceb84dab98e249d00a5def9f5d9f374a8ff875a04db0ae",
    "lines": [
     [
@@ -349,7 +349,7 @@
   },
   {
    "packet_file": "sources/P3/docs/glossary.md",
-   "source": "blind-reader-void12/reader_packet_v2/sources/thermodynamic-accountability-framework/docs/glossary.md@1c89ab9fba1a09883d574f2ac230251713e650eb",
+   "source": "blind-reader-void12/reader_packet_v2/sources/thermodynamic-accountability-framework/docs/glossary.md@a3e204f768d04faa9ad7e7bf84cef12b8835ae4f",
    "source_sha256": "412ed3abf4c2a546fe16def60fcb223bd496e4f297db995fcfb7232ad56c712b",
    "lines": [
     [
@@ -368,7 +368,7 @@
    "lines": null,
    "kind": "confusion",
    "redactions": {},
-   "packet_sha256": "64feafabd055d111cc4a90ed8088b7b4f9c54227766669e8708a746a7341171a"
+   "packet_sha256": "412c54766ec2fe30d81eb815cf0067e79d64daa8bd507dc5ac415b2de465bbee"
   }
  ],
  "redaction_counts_total": {
@@ -701,9 +701,9 @@
   "hits": []
  },
  "sizes": {
-  "packet_txt_chars": 93746,
-  "packet_txt_bytes": 93748,
-  "zip_bytes": 38319,
+  "packet_txt_chars": 93988,
+  "packet_txt_bytes": 93990,
+  "zip_bytes": 38410,
   "fits_100k_chars": true
  },
  "diff_from_v1": {
@@ -711,7 +711,7 @@
    {
     "file": "CONFUSION_REQUEST.md",
     "v1": "d652598c9838b11b5804c2103671e85c67cff455416f4249e10954deb47d6cb1",
-    "v2": "64feafabd055d111cc4a90ed8088b7b4f9c54227766669e8708a746a7341171a",
+    "v2": "412c54766ec2fe30d81eb815cf0067e79d64daa8bd507dc5ac415b2de465bbee",
     "change": "changed"
    },
    {

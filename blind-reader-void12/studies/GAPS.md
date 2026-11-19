@@ -15,3 +15,7 @@ What "confirmed by two readers" means here: two readers stopped or guessed at th
 ## Later (2026-11-19): after filing the Grok record
 
 The Grok rows were first cited from the owner's summary. Read against the filed rows: GR09 (are the four keys tied to this term only) and GR10 belong to G1, not G2; GR07 (same label, different rules) belongs to G5 with GR12, not with KC08; GR05 bears on G3 as well as G2. The table above now cites the filed rows.
+
+## Later (2026-11-19): independence levels
+
+Under the owner's independence rules (`../MODE_SEQUENCE.md`, dated section), the Kimi (KC) and Grok (GR) reviewers are both L2: different families, both exposed to the implementation (`INDEPENDENCE_LEDGER.md`). Where they converge (G2, G3), the agreement counts once, at L2, not as two independent confirmations. The sentence above ("two readers stopped or guessed at the same point independently") is kept as written; "independently" there means two different sessions, not L3.

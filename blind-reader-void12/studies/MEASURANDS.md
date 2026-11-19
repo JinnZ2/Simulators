@@ -99,3 +99,7 @@ outer aggregate reports                                   G3
 2. **The key and the reader answer different questions on TAG.** The key's place-table construct derives presence; the reader's brief leaves both readings open. A reader listing `void_reason` (applicability) is therefore not wrong against the brief. It differs from the key on a point the brief does not fix. VOID-12's own measurand is agreement, not correctness (PREREG), so this is recorded as a source of disagreement, not of reader error.
 
 The DERIVED key-layer lines rest on the wordslots card, which marks its place table PROPOSED, and on the wordslots code, which lives in another repository and was not read here. If that code defines a place differently, the TAG and Populated lines move.
+
+## Later (2026-11-19): correction
+
+Item 1 says repairing the fixture "is the next IMPLEMENT step and is not done here". It was drafted earlier in this session: `7bc51bb`, PR #320 (draft). See the dated section of `confusion/2026-11-19_claude-code_m01-m02.md`.

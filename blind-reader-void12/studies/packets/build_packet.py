@@ -202,8 +202,11 @@ prior exposure, before this task:
   the packet (these files, or an earlier version of them)          yes / no / unknown
   the key (any comparison key, or any score)                       yes / no / unknown
   the repository these files come from (any part)                  yes / no / unknown
+  the code or instruments these files describe, run or read        yes / no / unknown
   other readers' records (readings, confusion records)             yes / no / unknown
 memory from other conversations                                   on / off / unknown
+project or context features (project knowledge, connected
+  repositories, custom instructions, attached files)              <list, or "none", or "unknown">
 tools used in this task                                            <list, or "none">
 ```
 """
