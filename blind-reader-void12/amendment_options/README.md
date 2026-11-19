@@ -10,6 +10,7 @@ Evidence for the choice of key v2 amendment 1. Nothing in this folder changes a 
 | `evidence/check_rules.py`, `check_rules_output.txt`, `.json` | applies the amendment's rule tests mechanically to the packet's own sources (numcheck records, cplay constructors, TAF coverage dictionaries) |
 | `evidence/build_candidates.py`, `build_candidates_stdout.txt`, `candidate_scores.txt`, `.json` | builds candidate keys on the patched key, scores the filed Claude-v2-A reading under each; the candidate key files are not kept |
 | `derive/derive_specific.py`, `derive_specific_output.txt`, `.json` | derives each term's `slots_specific` from the packet's sources by one stated rule (OPTIONS.md section 6), reads no key, compares with three keys afterwards, and runs five mutation checks |
+| `decide/CRITERIA.md`, `check_rule_stability.py`, `check_nck.py`, `check_nd.py`, `DECISION_EVIDENCE.md` | criteria committed before the checks (`d7b7687`); the checks and their outputs; the per-item result and recommendation for the rule, N1, C1, ND, K1. Re-run: `SCORER_TREE=<tree with the received r1 patch applied> FORMULA_AUDIT_DIR=<formula-audit checkout> python3 check_nck.py` (the other two need only `FORMULA_AUDIT_DIR`). |
 
 Re-running the derivation (needs a formula-audit checkout whose `numcheck/check.py` matches the packet's; the script checks and stops if not; `COMPARE` is optional and names extra key files to compare with):
 

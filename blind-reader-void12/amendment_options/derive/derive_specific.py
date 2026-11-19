@@ -31,7 +31,7 @@ and a non-empty one is an upper bound.
 Run:
   FORMULA_AUDIT_DIR=<checkout whose numcheck/check.py has the packet's sha256> \
   COMPARE="p1=/path/key_p1.json,r1=/path/key_r1.json" python3 derive_specific.py
-Writes derive_specific_output.txt and .json beside this file.
+Writes derive_specific_output.txt and .json beside this file (or into $DERIVE_OUT_DIR if that is set).
 """
 import ast, hashlib, inspect, json, os, re, sys
 sys.dont_write_bytecode = True
@@ -90,14 +90,14 @@ def load_cplay():
     from cplay import tokens, axes, closure
     return tokens, axes, closure
 
-def token_slots(T):
+def token_slots(T, fill="x"):
     nonverdict = [s for s in T.STATES if s not in T.VERDICTS]
     gen = [p for p in inspect.signature(T.Token.__init__).parameters if p != "self"]
     def required(s):
         r = set()
         for p in gen:
             if p == "state": continue
-            kw = {q: "x" for q in gen}; kw["state"] = s; kw[p] = None
+            kw = {q: fill for q in gen}; kw["state"] = s; kw[p] = None
             try: T.Token(**kw)
             except T.TokenError: r.add(p)
         return r
@@ -119,7 +119,7 @@ def token_slots(T):
                     "computed_by_the_constructor_so_not_slots": derived, "free_variation": free_variation(tid, T)}
     return res, sorted(shared)
 
-def free_variation(tid, T):
+def free_variation(tid, T, alt=False):
     import itertools
     pools = {"limit": (1, 2), "effect_size": (1, 2), "basis": ("LADDER", "DECLARED"), "ladder": ("L", "M"), "conditions": ("c", "d"),
              "kind": ("a", "b"), "target": ("a", "b"), "condition": ("a", "b"), "reason": ("a", "b"), "state": ("VOID", "UNKNOWN")}
@@ -130,6 +130,9 @@ def free_variation(tid, T):
     if mk is None: return "n/a"
     names = {"cplay:ABSENT_AT_SENSITIVITY": ["limit", "basis", "effect_size", "conditions", "ladder"], "cplay:ExpiryTrigger": ["kind", "target", "condition"],
              "cplay:UNKNOWN": ["reason", "triggers"], "cplay:VOID": ["reason", "state"]}[tid]
+    if alt:   # a second pool, disjoint from the first
+        pools = {"limit": (5, 9), "effect_size": (7, 11), "basis": ("DECLARED", "LADDER"), "ladder": ("Q", "R"), "conditions": ("e", "f"),
+                 "kind": ("p", "q"), "target": ("p", "q"), "condition": ("p", "q"), "reason": ("p", "q"), "state": ("VOID", "UNKNOWN")}
     pool = {n: pools.get(n, (True, False)) if n != "triggers" else (True, False) for n in names}
     bad = 0; tot = 0
     for combo in itertools.product(*[pool[n] for n in names]):
@@ -138,10 +141,10 @@ def free_variation(tid, T):
         except T.TokenError: bad += 1
     return "%d of %d combinations accepted" % (tot - bad, tot)
 
-def reading_required(AX, reading=None):
+def reading_required(AX, reading=None, base=None):
     reading = reading or AX.reading
     fieldof = lambda s: "INSTRUMENT" if s == "CRASHED" else ("APPLICABILITY" if s == "OUTSIDE_DOMAIN" else "PHYSICAL")
-    base = dict(reason="r", sigma=0.1, basis="b", exception="E", path="p", bound="bd")
+    base = base or dict(reason="r", sigma=0.1, basis="b", exception="E", path="p", bound="bd")
     req = {}
     for s in AX.STATUSES:
         r = set()
@@ -152,8 +155,8 @@ def reading_required(AX, reading=None):
         req[s] = r
     return req
 
-def reading_slots(AX, reading=None):
-    req = reading_required(AX, reading)
+def reading_slots(AX, reading=None, base=None):
+    req = reading_required(AX, reading, base)
     out = {}
     for s in AX.STATUSES:
         out[s] = sorted(f for f in req[s] if not any(f in req[o] for o in AX.STATUSES if o != s))
@@ -360,9 +363,9 @@ def main():
     P(); P("all mutation checks pass" if ok else "A MUTATION CHECK FAILED")
     txt = "\n".join(lines)
     print(txt)
-    open(os.path.join(HERE, "derive_specific_output.txt"), "w").write(txt + "\n")
+    open(os.path.join(os.environ.get("DERIVE_OUT_DIR", HERE), "derive_specific_output.txt"), "w").write(txt + "\n")
     json.dump({"derived": {t: {k: v for k, v in d.items() if k in ("slots", "routes", "parameters")} for t, d in D.items()}, "comparison": rows},
-              open(os.path.join(HERE, "derive_specific_output.json"), "w"), indent=1, sort_keys=True)
+              open(os.path.join(os.environ.get("DERIVE_OUT_DIR", HERE), "derive_specific_output.json"), "w"), indent=1, sort_keys=True)
     sys.exit(0 if ok else 1)
 
 if __name__ == "__main__":

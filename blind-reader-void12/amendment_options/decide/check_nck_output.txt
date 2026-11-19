@@ -1,0 +1,41 @@
+scorer under test: blind-reader-void12/scoring (functions norm_name, nset, relation, rules_of imported from the received patch)
+key_v2 names scoring rules: () ; key_v2_a1 names: ('N1', 'C1')
+
+N-a lists examined: 130 (keys v2 and v2-a1, and 4 filed readings). Lists where N1 makes two distinct names equal: none
+N-b names N1 changes: 2 occurrences, distinct ['<value>']
+      2026-11-18_claude-fresh-1 T02 slots: '<value>' -> 'value'
+      2026-11-18_claude-v2-A T02 slots_specific: '<value>' -> 'value'
+   each change removes only the wrapper: True ; each wrapped form appears verbatim in a packet source: {'<value>': True}
+N-c patched scorer on Claude-v2-A under key_v2 (no rules named): text identical to filed score.txt: True ; json byte-identical to filed score.json: True
+N-d effect of N1 on each filed v2 reading (key v2 lists, N1 switched on):
+   2026-11-18_claude-fresh-1    v1 packet reading (one 'slots' list); not scored by score_v2
+   2026-11-18_claude-v2-A       slot sets equal to key, without N1 {'specific': 7, 'carried': 2} -> with N1 {'specific': 8, 'carried': 2} ; tier agreement {'specific': 4, 'carried': 5} -> {'specific': 4, 'carried': 5} [CHANGES]
+   2026-11-18_pilot-A           v1 packet reading (one 'slots' list); not scored by score_v2
+   2026-11-18_pilot-B           v1 packet reading (one 'slots' list); not scored by score_v2
+   -> N1: N-a holds, N-b holds, N-c holds, N-d reported
+
+C-a all 1024 ordered pairs of subsets of a 5-name universe: relation returned is the one true predicate in 1024 cases, in 0 it is not (exhaustive and exclusive: True). counts {'equal': 32, 'reader-superset': 211, 'reader-subset': 211, 'overlap': 390, 'disjoint': 180}
+   edge cases: relation(empty, empty) = equal ; relation(empty, {a}) = reader-subset ; relation({a}, empty) = reader-superset
+C-b Claude-v2-A under key_v2 with C1 switched on: every existing number unchanged once the C1 fields are removed: True ; relation == 'equal' iff status == 'equal' on every determined row: True
+      specific: relations {'equal': 7, 'reader-superset': 4, 'reader-subset': 0, 'overlap': 2, 'disjoint': 1}
+      carried: relations {'equal': 2, 'reader-superset': 11, 'reader-subset': 1, 'overlap': 0, 'disjoint': 0}
+C-c output keys removed by C1: none ; added: ['key_version', 'meanings.carried.relations', 'meanings.carried.relations.disjoint', 'meanings.carried.relations.equal', 'meanings.carried.relations.overlap', 'meanings.carried.relations.reader-subset', 'meanings.carried.relations.reader-superset', 'meanings.carried.slots.[].relation', 'meanings.specific.relations', 'meanings.specific.relations.disjoint', 'meanings.specific.relations.equal', 'meanings.specific.relations.overlap', 'meanings.specific.relations.reader-subset', 'meanings.specific.relations.reader-superset', 'meanings.specific.slots.[].relation', 'scoring_rules']
+   -> C1: C-a holds, C-b holds, C-c holds
+
+K-0 does vars(instance) work on the record each term's carried list comes from?  {"Reading (T13, T14, T08)": false, "closure.FieldToken (T06)": false, "CoverageEntry (T08)": false, "Token (T03, T05, T12)": true, "ExpiryTrigger (T04)": true}
+K-a T03 cplay:VOID                 key carried True == fields by running 
+K-a T04 cplay:ExpiryTrigger        key carried True == fields by running 
+K-a T05 cplay:ABSENT_AT_SENSITIVITY key carried True == fields by running 
+K-a T06 cplay:UNRESOLVED           key carried True == fields by running 
+K-a T08 cplay:CRASHED              key carried True == fields by running 
+K-a T12 cplay:UNKNOWN              key carried True == fields by running 
+K-a T13 cplay:OK                   key carried True == fields by running 
+K-a T14 cplay:CLOSED_WITHIN        key carried True == fields by running 
+K-b ExpiryTrigger.is_exit is a class attribute (in vars of the class, not of an instance): True ; not in T04 carried: True
+   note: tokens.untyped() DOES set is_exit on the instance: 'is_exit' in vars(untyped('note')) = True (an UNTYPED Token; no term in the packet is UNTYPED, and T12's `untyped` holds such tokens, unopened)
+K-c the phrase 'instance fields' occurs in: {"reader_packet_v2/READER_BRIEF.md": false, "reader_packet/READER_BRIEF.md": false, "PREREG.md": false, "PROTOCOL.md": false, "scoring/key_v2.json (derivation notes)": true}
+   brief wording for slots_carried (what the readers were given): 'every named field of every record that the source's code or text builds, returns or documents ...'
+   -> K-c FAILS: the criterion assumed the phrase is the brief's own; it is in the key's derivation notes only
+   -> K1: K-a holds, K-b holds, K-c FAILS ; K-0 (not a pre-registered criterion; found while running K-a) FAILS: vars() raises on namedtuple records
+
+summary: C-a holds, C-b holds, C-c holds, K-0 FAILS, K-a holds, K-b holds, K-c FAILS, N-a holds, N-b holds, N-c holds, N-d holds
