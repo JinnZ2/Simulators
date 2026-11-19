@@ -48,3 +48,9 @@ Reconciling with numpy/psutil: Grok's "require numpy" holds. The missing piece i
 | path-check script | yes, `check_concept_map.py` | the counts above, from its own output |
 
 **The 2026-11-11 feature freeze is not recorded in this repository**, as in force or otherwise. Searched: every `.md` and `.json` for "freeze", "frozen", "feature freeze" and "no new tools", and every commit message on every fetched branch for "freeze". The only freeze dated 2026-11-11 is `forest-model-ledger/ledger/toolkit/HELDOUT_FREEZE.md`, a freeze of one toolkit's thresholds before a held-out run, not a feature freeze. If the freeze is recorded, it is in a repository or a conversation not reachable here.
+
+## Later (2026-11-19): F6 re-marked
+
+The owner's marking, in an IMPLEMENT request of 2026-11-19: **F6 NOT CONFIRMED**. The table above says PARTIAL, and it is kept as written.
+
+The difference in the reading: F6's load-bearing claim is that the missing dependency is numpy ("a few (grounding-layers, some others) require numpy"). The dependency that actually makes `AIObserverState` unimportable is **psutil**, imported unguarded at `grounding-layers/ai_observer_state.py` line 11 (`import psutil`). numpy is listed in `requirements.txt` and is installed here. On the point that produces the failure, the claim names the wrong module.

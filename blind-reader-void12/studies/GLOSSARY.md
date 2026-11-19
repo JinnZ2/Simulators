@@ -18,7 +18,7 @@ For a reader who has only the reports. Paths are relative to `blind-reader-void1
 | BLIND / UNCERTAIN / NOT_BLIND | status from attestation q1-q4: all no / any unsure, none yes / any yes | `PREREG.md` "Blindness is declared, not enforced" |
 | family | the reader's model family; all Claude readers count as one family with the first reader | `PREREG.md` rules, rule 5 |
 | rules 1-5 | how a pair is reader-confirmed, contested, confirmed | `PREREG.md` "Rules proposed for reading the results" |
-| confirmation tier | which tier a confirmation counts on now that v2 has two slot meanings | **open** (owner) |
+| confirmation tier | which tier a confirmation counts on now that v2 has two slot meanings | **open**: DEFINITION_REQUIRED, stage SUGGEST (`../MODE_SEQUENCE.md`); no measurand line yet |
 
 ## Keys and scoring
 
@@ -36,8 +36,8 @@ For a reader who has only the reports. Paths are relative to `blind-reader-void1
 | MAPS / PARTIAL / HOMONYM / NONE | pair tiers: same cluster and equal slots / same cluster / different clusters, same label / neither | `scoring/score.py` lines 15-25, `tier()` |
 | ARI | adjusted Rand index of the reader's grouping against the key's | `scoring/score.py` |
 | `covers_effect` | an attribute computed on a scoped-absence token (limit <= effect size); excluded by S3-out | `reader_packet_v2/sources/Simulators/combined-playground/cplay/tokens.py` lines 17-18, 103 |
-| HOLDS question | whether `HOLDS` (T11) groups with `CLOSED_WITHIN` (T14), with `OK` (T13), or alone; three readings, three answers | **open** (owner); readings in `readings/README.md` |
-| `void_reason` question | whether TAG reads presence (key on every record) or applicability (populated on the term only) | **open** (owner); both computed in `studies/instrument/arms_report.txt` |
+| HOLDS question | whether `HOLDS` (T11) groups with `CLOSED_WITHIN` (T14), with `OK` (T13), or alone; three readings, three answers | **open**: DEFINITION_REQUIRED, stage SUGGEST; readings in `readings/README.md`; no measurand line yet |
+| `void_reason` question | whether TAG reads presence (key on every record) or applicability (populated on the term only) | **open** at the reader layer: two paths, `P-TAG-pres` and `P-TAG-appl` (`studies/paths/paths.json`), to be walked; the key layer's measurand line reads presence, DERIVED on PROPOSED (`studies/MEASURANDS.md`); both readings computed in `studies/instrument/arms_report.txt` |
 
 ## Studies
 
@@ -75,3 +75,7 @@ For a reader who has only the reports. Paths are relative to `blind-reader-void1
 | F1-F7, E1-E7 | the Grok reader's repository read: seven claims, seven proposals | `studies/as_received/grok_repo_read_2026-11-19.md`; checked in `studies/GROK_REPO_READ_CHECK.md` |
 | RR01-RR10 | residue register rows | `studies/RESIDUE_REGISTER.md` |
 | M01, M02 | the studies (the GPT-6 proposal called them G01 / G02, which clashed with its own inventory) | `studies/` |
+
+## Later (2026-11-19): routing
+
+The header says a term marked **open** "is a decision the owner has not made". Under `MODE_SEQUENCE.md` an open definition goes to the stage that can decide it, not to a person. The three rows above that said "open (owner)" now name their stage. The header sentence is kept as written; read "the owner" there as "no stage".

@@ -162,6 +162,7 @@ These affect how to read the record.
 - Owner works phone-only (no keyboard, no local compute).
 - Sessions vary in model (Opus/Sonnet/Haiku/Fable) and model updates.
 - Committer/author field = the pusher, not the model (basis: the 18 Perplexity commits in the playground row are committed under the user's GitHub noreply account).
+- Feature freeze (dated record, filed 2026-11-19): source = the owner's chat statement of 2026-11-11 in chat Claude, "Freeze new features until map + cleanup done"; status IN FORCE as of 2026-11-19 (the owner's record); lifts when the concept map and the cleanup are done. Records-only work is allowed under it (the owner, 2026-11-19). The statement itself is in chat, not in this repository.
 
 ## SUMMARY
 

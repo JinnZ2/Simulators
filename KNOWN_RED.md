@@ -1589,3 +1589,19 @@ cooperative-substrate-proof/selftest.py:40
 §14 records this selftest at 82/0. `cooperative-substrate-proof/scope.py` defines `code`, not
 `code_case`. By the table at the top of this file (a listed result that moved) this is NEW. Not repaired here; whether the
 test or the module carries the intended name is the folder's call.
+
+## 21. 2026-11-19: a test red on Python 3.11 only (blind-reader-void12 session, records only)
+
+Added at the owner's request (IMPLEMENT, records only, under the feature freeze). Run at Simulators main `91014e6`; not repaired.
+
+```
+python3.11 -m unittest tests.test_fitness_bin_self_test      Ran 19 tests   FAILED (failures=1)
+FAIL: test_sample_is_complete_default_output (tests.test_fitness_bin_self_test.FitnessBinSelfTest.test_sample_is_complete_default_output)
+  File "tests/test_fitness_bin_self_test.py", line 33, in test_sample_is_complete_default_output
+    self.assertEqual(p.stdout, sample)
+AssertionError: 'WO-7[5141 chars]554299, "H_next_bits": 39.942139856234974, "H_[317575 chars]=0\n' != 'WO-7[5141 chars]5542986, "H_next_bits": 39.94213985623495, "H_[317575 chars]=0\n'
+
+python3 (3.13) -m unittest tests.test_fitness_bin_self_test  Ran 19 tests   OK
+```
+
+The output differs from the pinned sample in the last digits of floating-point values: `39.942139856234974` on 3.11 against `39.94213985623495` in the sample, which matches 3.13. So the pin depends on the interpreter version. Whether the sample or the comparison should change is the folder's call, after an AUDIT. pytest is not installed for 3.11 here; the run used unittest.

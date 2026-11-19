@@ -144,3 +144,17 @@ GR08  ANSWERED_IN_FILES (L0): the line-23 reading that takes in wrappers also ta
 KC11  ANSWERED_IN_FILES (L0)
 CF20  "the brief decides against the fixture" (L0); repair 7bc51bb HELD until REVIEW-2 at L2+
 ```
+
+## Later (2026-11-19): fresh count
+
+63 rows: CF 20, CH 12, KC 13, GR 18. Each row is counted once, under its primary status. Changes since the counts above:
+- CF20 added (EDIT_REQUIRED: drafted at `7bc51bb`, held for REVIEW-2).
+- CF15 and CH03 closed on the owner's record (GPT-6 packet: variant A).
+
+The second statuses on GR08 and KC11 (ANSWERED_IN_FILES, L0) are listed, not counted as primaries.
+
+```text
+DEFINITION_REQUIRED 33   PACKET_FIX_DRAFTED 9   ANSWERED_IN_FILES 6   CLOSED 4 (CH11, CH12, CF15, CH03)
+AUTHOR_RECORD 3 (CF12, CF13, CF14)   EDIT_REQUIRED 3 (KC04, KC05, CF20)   SECOND_CODER_REQUIRED 2
+SOURCE_RUN_REQUIRED 1   READING_REQUIRED 1   void 1 (KC13)                                total 63
+```
