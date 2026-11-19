@@ -115,3 +115,17 @@ The routing of this session's own rows and reports, re-read against `../MODE_SEQ
   4. Where the 2026-11-11 freeze is recorded: AUTHOR_RECORD.
 
   Questions 1-3 were Layer 2 (a decision handed back to the user); question 4 was not.
+
+## Later (2026-11-19): second status from MEASURANDS.md
+
+`MEASURANDS.md` finds that the brief, read at D0, answers part of two rows. `READER_BRIEF.md` line 23 counts every record built when the term is reported, wrappers included, and every M02 condition keeps that line. No row is closed: under the no-silent-closure rule, the reader who wrote the row closes it by reading the line. The rows gain a second status:
+
+```text
+GR08  DEFINITION_REQUIRED (outer reports, G3) + ANSWERED_IN_FILES (T10's section record is built when the
+      term is reported, so it counts at D0: READER_BRIEF line 23; unified_audit.py 479-491 per the row)
+KC11  ANSWERED_IN_FILES (wrappers are in under every condition: READER_BRIEF line 23) against the fixture rule;
+      the fixture's contradiction is CF20
+CF20  EDIT_REQUIRED (decided by the brief's text)  fixture rule ALL_REPORTING_PATH_RECORDS excludes wrappers  open
+```
+
+Rows now 63: CF20 is added after the counts above were taken. The counts are not redone.
