@@ -1,0 +1,1533 @@
+diff --git a/blind-reader-void12/gap_instrumentation/README.md b/blind-reader-void12/gap_instrumentation/README.md
+new file mode 100644
+--- /dev/null
++++ b/blind-reader-void12/gap_instrumentation/README.md
+@@ -0,0 +1,46 @@
++# G01 / G02 gap instrumentation
++
++Additive experiment package for `blind-reader-void12`. This package does not revise, replace, or score the frozen VOID-12 reader packet.
++
++## Snapshot and isolation
++
++Prepared against repository commit:
++
++`8d74903b3be9796fa18df64990d0dcacff89cb44`
++
++Target location:
++
++`blind-reader-void12/gap_instrumentation/`
++
++The package is designed to be copied into that directory. It does not overwrite any existing path.
++
++The reader brief, packet sources, `terms.json`, `PREREG.md`, `KEY_V2_AMENDMENT_1.md`, `key_v2.json`, `key_v2_a1.json`, `score_v2.py`, tests, and filed readings remain untouched.
++
++## Contents
++
++- `SPECIFICATION.md` — experimental design, assignments, measures, controls, analysis, and stopping conditions.
++- `source_snapshot.json` — source commit and Git blob identifiers for the principal frozen inputs.
++- `schema/observation.schema.json` — JSON Schema for G01/G02 observation records.
++- `fixtures/g01_known_answer.json` — synthetic known-answer controls for TAG and INDEPENDENCE.
++- `fixtures/g02_known_answer.json` — synthetic known-answer controls for record boundaries and nested records.
++- `validate_observations.py` — standard-library structural validator. It does not score interpretations.
++- `test_validator.py` — standard-library tests for the validator and known-answer fixtures.
++
++## Quick check
++
++From this directory:
++
++```bash
++python3 -m unittest -v
++python3 validate_observations.py path/to/observations.jsonl
++```
++
++An observation file is JSON Lines: one complete JSON object per line. The validator reports structural errors only. A structurally valid observation is not necessarily well-supported or correct.
++
++## Apply
++
++Copy the contents of this directory to:
++
++`blind-reader-void12/gap_instrumentation/`
++
++No existing file needs to be edited. Review `source_snapshot.json` against the target checkout before running. If the repository has advanced beyond the pinned commit, create a new snapshot record rather than silently updating the pin.
+diff --git a/blind-reader-void12/gap_instrumentation/SPECIFICATION.md b/blind-reader-void12/gap_instrumentation/SPECIFICATION.md
+new file mode 100644
+--- /dev/null
++++ b/blind-reader-void12/gap_instrumentation/SPECIFICATION.md
+@@ -0,0 +1,345 @@
++# G01 and G02 instrumentation specification
++
++**Experiment:** `VOID12-GAP-INSTRUMENTATION`  
++**Version:** `0.1.0`  
++**Pinned repository snapshot:** `8d74903b3be9796fa18df64990d0dcacff89cb44`  
++**Status:** implementation specification; no reader observations collected by this package.
++
++## 1. Purpose and limits
++
++Instrument two interpretation gaps in the VOID-12 reading task:
++
++- **G01 — specific-slot boundary:** how readers decide whether a candidate field belongs in `slots_specific`, especially where exclusivity and independent-input status are not explicit in the original brief.
++- **G02 — carried-record boundary:** which records count as records built, returned, or documented when a term is reported, and where traversal stops when a field contains another record.
++
++The experiment measures the interpretations readers make, the evidence they use, the alternative branches they notice, and whether they preserve unresolved cases. It does not decide which interpretation is correct by majority vote.
++
++The instrumentation is not an amendment to the reader task. The original packet remains a distinct baseline. Diagnostic variants are experimental interventions and must be identified as such in every record.
++
++## 2. Source-derived starting conditions
++
++The following statements are taken from the pinned repository snapshot.
++
++### 2.1 G01
++
++The original `reader_packet_v2/READER_BRIEF.md` defines `slots_specific` as named fields or parameters tied to a term and no other term. Its examples include a class written for the term, parameters of a function or notation written for it, a documented key list, and fields required by a status-specific rule. It also excludes fields shared by every term using the same record and names for calculation inputs.
++
++`KEY_V2_AMENDMENT_1.md`, section 2, proposes two explicit criteria:
++
++- **TAG:** defined on every instance of the term and on no instance of any other term.
++- **INDEPENDENCE:** an independent input of the term's record, passed in or recorded raw, rather than computed from other candidate fields.
++
++The amendment describes itself as proposed and not merged in this snapshot. It is therefore a diagnostic wording source, not silently promoted to the original reader brief.
++
++The instrument must measure TAG and INDEPENDENCE separately. A field can satisfy one and fail the other. The final `slots_specific` decision is not reducible to a single unexplained yes/no.
++
++### 2.2 G02
++
++The original brief says `slots_carried` includes every named field of every record the source builds, returns, or documents when the term is reported. It then says to give a record's own fields and, if a field holds another record, name that field and do not open it.
++
++The a1 amendment explicitly leaves open a T10 boundary issue: the coverage entry and the `report.sections[name]` exception record are built in the reporting path. The T10 a1 `slots_specific` list is taken from the section record, while the v2 `slots_carried` list remains the six fields of the coverage entry. The amendment notes that the section record may also qualify under the brief's carried wording, but does not change the carried list.
++
++The instrument therefore separates:
++1. record identity / relationship to the term;
++2. whether the record is built on the reporting path;
++3. traversal into a field that references another record; and
++4. the reader's stopping rule.
++
++These are separate observations. “The reader included the wrapper” is not a sufficient description of the branch taken.
++
++## 3. Experimental architecture
++
++Both parallel and sequential comparisons are required for G01 and G02. Synthetic known-answer fixtures are also required.
++
++### 3.1 Parallel comparison
++
++Independent reader sessions are assigned to different instruction variants. A reader assigned to a parallel arm sees only that arm's variant for the relevant gap during the primary response.
++
++Purpose: estimate between-variant differences without exposing the reader to the alternative wording first.
++
++Requirements:
++- assign readers before the task;
++- balance reader family and relevant prior-exposure status across arms where feasible;
++- use the same source specimens in each arm;
++- do not share completed responses between readers;
++- retain the exact instruction text and its hash in the session record.
++
++### 3.2 Sequential comparison
++
++The same reader completes the baseline and one or more diagnostic variants. Order is counterbalanced across readers.
++
++Purpose: observe within-reader branch changes and identify carryover effects.
++
++Required order arms:
++- baseline then clarification (`D0 -> D1`, or `D0 -> D2`);
++- clarification then baseline (`D1 -> D0`, or `D2 -> D0`).
++
++For G02, the D1 and D2 clarification arms are separate comparisons; do not collapse them into one “clarified” condition.
++
++A sequential response is not an independent reader. It must be analyzed as a repeated observation, with reader identity and sequence position retained. Record whether the reader recalls, consults, or reuses the prior response.
++
++### 3.3 Synthetic known-answer controls
++
++The synthetic fixtures in `fixtures/` are calibration and instrument-validation material. They are not additional real source specimens and must not be used to establish a normative answer for ambiguous real specimens.
++
++To prevent priming:
++- do not show fixture answers to readers before their primary real-source responses are locked;
++- preferably validate the observation instrument with a separate calibration cohort;
++- if the same readers must complete calibration, administer it only after all real-source sessions and lock the real-source responses first;
++- store fixture observations in a separate dataset from real-source observations.
++
++A failed synthetic control means the measurement apparatus or instructions failed that control. It does not justify silently correcting a reader's real-source interpretation.
++
++## 4. G01 protocol: specific-slot interpretation
++
++### 4.1 Question
++
++When a reader decides whether a candidate field belongs in `slots_specific`, how do they operationalize:
++- exclusivity across term instances and other terms (TAG);
++- independent input versus computed attribute (INDEPENDENCE);
++- uncertainty about the source's instance boundary or data origin?
++
++### 4.2 Variants
++
++| Variant | Instruction | Role |
++|---|---|---|
++| `D0` | Original `READER_BRIEF.md` wording, byte-for-byte | Baseline |
++| `D1` | Original brief plus a separate diagnostic note defining TAG and INDEPENDENCE exactly as section 2 of `KEY_V2_AMENDMENT_1.md` | Clarification intervention |
++
++D1 must be stored as a new file under the instrumentation directory and hashed before the first reader sees it. Do not edit `READER_BRIEF.md` or `KEY_V2_AMENDMENT_1.md`.
++
++D1 must state that it is experimental wording, not an adopted change to the original packet.
++
++### 4.3 Real-source specimen set
++
++Use the same set in D0 and D1. The minimum specimen set is:
++
++- `T05` — cplay `ABSENT_AT_SENSITIVITY`; candidate `covers_effect` is relevant to the raw-versus-computed distinction.
++- `T08` — cplay `CRASHED`; amendment section 3 records an owner ruling about the Reading as the instance.
++- `T09` — TAF `UNKNOWN`; amendment records the instance boundary as undetermined.
++- `T10` — TAF `GAP_INSTRUMENT_CRASH`; the amendment derives the specific list from the exception section record.
++- `T12` — cplay `UNKNOWN`; `reason` and `triggers` expose the distinction between a required shared parameter and an independent input.
++
++The specimen set is a targeted diagnostic set, not a representative sample of all possible slot structures. Retain all 15 terms in the overall VOID-12 task if the study is run as a full-packet reading; do not replace the original task with only these five terms.
++
++### 4.4 Required G01 observations
++
++For every candidate field a reader considers, record:
++
++- field name exactly as written in the source;
++- source path and line range;
++- total term instances examined and number with the field;
++- other term/status instances examined and number with the field;
++- field origin: `RAW_INPUT`, `COMPUTED`, `DECLARED_ONLY`, `UNKNOWN`;
++- TAG decision: `YES`, `NO`, `UNRESOLVED`;
++- INDEPENDENCE decision: `YES`, `NO`, `UNRESOLVED`;
++- whether the reader includes it in `slots_specific`;
++- the reader's stated rule / evidence;
++- alternative branch considered, if any;
++- confidence as declared by the reader.
++
++Do not infer a `YES` TAG decision from the fact that a field appears in one source excerpt. The denominator must be recorded. If the reader did not inspect enough instances to establish the denominator, use `UNRESOLVED` or `UNKNOWN`, not an inferred `YES`.
++
++Do not infer `RAW_INPUT` merely because a value appears in a returned record. The reader must state whether it is passed in, recorded raw, derived, or not determinable from the available source.
++
++### 4.5 G01 measures
++
++Primary:
++1. per-field TAG decision distribution by variant;
++2. per-field INDEPENDENCE decision distribution by variant;
++3. final inclusion / exclusion / unresolved distribution;
++4. branch transitions in sequential sessions.
++
++Secondary:
++- agreement on field names;
++- agreement on reasons, not merely final list equality;
++- frequency of `UNRESOLVED`;
++- whether readers identify the instance boundary issue at T08/T09;
++- whether readers distinguish shared required parameters from independent inputs at T12;
++- whether readers distinguish computed `covers_effect` from raw parameters at T05.
++
++Do not combine TAG and INDEPENDENCE into one score. Report them as separate axes.
++
++## 5. G02 protocol: carried-record boundary
++
++### 5.1 Question
++
++Which records does a reader treat as in-scope for `slots_carried`, and how does the reader handle a field that contains another record?
++
++### 5.2 Variants
++
++| Variant | Instruction | Role |
++|---|---|---|
++| `D0` | Original `READER_BRIEF.md` wording, byte-for-byte | Baseline |
++| `D1` | Diagnostic note: enumerate the term's own record only; list its fields; name but do not open nested record-valued fields | Narrow-boundary intervention |
++| `D2` | Diagnostic note: enumerate every record built, returned, or documented on the reporting path for the term; list each record's own fields; name but do not open nested record-valued fields | Reporting-path intervention |
++| `D3` | Original brief, plus a required declaration of the reader's stopping rule before listing fields; no stopping rule is supplied | Boundary-declaration intervention |
++
++D1, D2, and D3 are experimental variants. None is represented as the correct interpretation of the original brief.
++
++For sequential comparisons, run `D0 -> D1`, `D1 -> D0`, `D0 -> D2`, `D2 -> D0`, and `D0 -> D3` / `D3 -> D0` where sample size permits. Do not make all readers complete all variants unless the study can control fatigue and carryover.
++
++### 5.3 Real-source specimen set
++
++Primary specimen:
++- `T10` — `taf:GAP_INSTRUMENT_CRASH`, because the dispatch exception section and coverage entry are both visible in the reporting path and the amendment explicitly leaves their carried relationship open.
++
++Secondary specimens:
++- `T08` — cplay `CRASHED`, where a `Reading` and coverage entry are distinct records associated with the crash path.
++- `T04` — cplay `ExpiryTrigger`, where a typed record is nested as a value in other structures and tests the “name field, do not open it” rule.
++- `T06` — cplay `UNRESOLVED`, where output structures may contain subrecords and nested result collections.
++
++Use exact source versions pinned by the packet. The packet's source paths are not permission to inspect external project checkouts.
++
++### 5.4 Required G02 observations
++
++For each record the reader identifies, record:
++
++- `record_id` assigned locally for the observation (not claimed to be a source identifier);
++- source path and line range;
++- record type / constructor / literal shape, if known;
++- relationship to the term: `TERM_OWN_RECORD`, `REPORTING_RECORD`, `SHARED_RECORD`, `WRAPPER_RECORD`, `NESTED_RECORD`, `DOCUMENTED_RECORD`, `UNKNOWN`;
++- whether it is built, returned, or documented on the reporting path;
++- depth relative to the reader's selected root;
++- its own field names;
++- field-to-record references;
++- whether each referenced record was opened;
++- whether the record was included in the reader's carried-field decision;
++- reason for inclusion, exclusion, or unresolved status.
++
++Also record the stopping rule selected:
++
++- `TERM_OWN_RECORD_ONLY`
++- `ALL_REPORTING_PATH_RECORDS`
++- `FIRST_WRAPPER_ONLY`
++- `NAME_NESTED_FIELD_DO_NOT_OPEN`
++- `ALL_REACHABLE_RECORDS`
++- `OTHER`
++- `UNRESOLVED`
++
++The rule `NAME_NESTED_FIELD_DO_NOT_OPEN` is a nested-field traversal rule, not a substitute for deciding which top-level reporting records are in scope. Record both dimensions.
++
++### 5.5 G02 measures
++
++Primary:
++1. selected record IDs and record roles by variant;
++2. fields included per selected record;
++3. boundary / stopping-rule distribution;
++4. nested-record open rate;
++5. inclusion / exclusion / unresolved decisions for the T10 exception section record;
++6. within-reader transition across variants.
++
++Secondary:
++- disagreement about record identity versus traversal depth;
++- whether a reader names a nested field without opening its contents;
++- whether a reader distinguishes a record built beside the term's own record from a record held inside one of its fields;
++- whether the reader identifies that T10's a1 specific list and v2 carried list derive from different records.
++
++## 6. Observation record and data handling
++
++The JSON Schema defines a common envelope and gap-specific payloads. Store observations as JSON Lines, one record per line.
++
++Required provenance:
++- experiment ID and version;
++- reader ID and family label;
++- session ID;
++- comparison mode (`PARALLEL` or `SEQUENTIAL`);
++- instruction variant;
++- sequence index and prior variant;
++- repository commit and packet snapshot;
++- observation timestamp, if collected, with timezone;
++- term ID;
++- source locations actually consulted.
++
++Use pseudonymous reader IDs. Do not put personal names, account identifiers, or unrelated profile data into the dataset.
++
++The record is an observation of a reader's decision, not a claim that the decision is true. Preserve reader wording separately from normalized categorical values where feasible.
++
++## 7. Synthetic known-answer fixtures
++
++The fixtures test the measurement apparatus against controlled structures.
++
++### G01 fixture dimensions
++
++The known-answer cases cover:
++- raw field exclusive to all instances of the term;
++- computed field present only on the term;
++- raw field shared with another term;
++- raw field missing from some instances of the term;
++- declared-only field with no evidence of raw input;
++- raw field present on another term even though all instances of the target term have it.
++
++Expected TAG and INDEPENDENCE results are separately specified. `slots_specific` inclusion is true only when both are `YES` under the fixture's stipulated rule. An `UNRESOLVED` dimension must not be silently coerced to `NO` or `YES`.
++
++### G02 fixture dimensions
++
++The known-answer cases cover:
++- a record with a nested record-valued field: name the field, do not open the nested record;
++- two distinct records built on one reporting path: include both under the stipulated all-reporting-records rule;
++- a wrapper record that merely carries a term value: include its own fields only when the fixture explicitly marks it as a reporting-path record;
++- a nested record that is not opened, even when it is reachable.
++
++The fixtures are not source-derived expected answers for T10. They test whether the observation instrument can represent and preserve the boundary choice.
++
++## 8. Analysis plan
++
++Report counts and distributions, not a single composite score.
++
++For each gap:
++- show raw counts by variant and specimen;
++- show parallel-arm differences;
++- show sequential transition tables by order;
++- stratify by reader family and prior-exposure / attestation status where available;
++- show missing, unresolved, and invalid observations separately;
++- preserve exact free-text explanations and source references;
++- distinguish reader disagreement from instrument-schema failure.
++
++Do not:
++- select a majority branch as truth;
++- average categorical branch labels;
++- treat repeated sessions from one reader as independent readers;
++- pool D0 and diagnostic variants as though instructions were identical;
++- use synthetic fixture success as evidence that a real-source interpretation is correct;
++- change the VOID-12 key or score existing readings as part of this experiment.
++
++## 9. Controls and validity threats
++
++| Threat | Control |
++|---|---|
++| Reader learns the diagnostic rule before baseline | Parallel arms; counterbalanced sequential arms; record order |
++| Prior repository exposure | Retain the existing attestation protocol; add a separate exposure note for this experiment |
++| Different source specimen exposure | Same pinned source specimens in all arms |
++| Inconsistent line references | Pin commit and packet blob IDs; record lines actually consulted |
++| Synthetic fixtures prime real judgments | Separate cohort or administer fixtures after real responses are locked |
++| Repeated reader counted as independent | Repeated-measures analysis keyed by reader ID |
++| Majority treated as ground truth | No majority adjudication; retain branch distribution |
++| Schema validation mistaken for evidentiary validity | Validator reports structure only |
++| New packet changes accidentally enter baseline | Additive directory; no edits to frozen paths; snapshot check before run |
++
++## 10. Execution sequence
++
++1. Confirm target checkout is at the pinned commit, or create a new snapshot record.
++2. Hash the exact D1/D2/D3 diagnostic instruction files before any reader sees them.
++3. Freeze the assignment schedule and reader IDs.
++4. Validate the synthetic fixtures and validator tests.
++5. Run calibration separately or after primary responses are locked.
++6. Run parallel arms.
++7. Run counterbalanced sequential arms.
++8. Lock raw observation JSONL files before analysis.
++9. Validate records; retain invalid lines and report validation errors rather than repairing silently.
++10. Analyze by gap, specimen, variant, order, and reader.
++11. Publish raw counts, branch maps, limitations, and unresolved cases.
++12. Make any later amendment to the original VOID-12 task in a separate owner-controlled decision, not in this experiment package.
++
++## 11. Exit conditions
++
++The instrument is ready for reader deployment only when:
++- the source snapshot matches the declared commit;
++- diagnostic variants are fixed and hashed;
++- all schema and validator tests pass;
++- all synthetic known-answer tests pass;
++- parallel and sequential assignment procedures are documented;
++- fixture exposure is isolated from primary reader responses;
++- the observation store can preserve `UNRESOLVED`, alternatives, and exact source references.
++
++A run is not complete merely because every reader returned a JSON file. Report missing readers, incomplete specimens, invalid records, and unrun comparison arms explicitly.
+diff --git a/blind-reader-void12/gap_instrumentation/source_snapshot.json b/blind-reader-void12/gap_instrumentation/source_snapshot.json
+new file mode 100644
+--- /dev/null
++++ b/blind-reader-void12/gap_instrumentation/source_snapshot.json
+@@ -0,0 +1,50 @@
++{
++  "experiment_id": "VOID12-GAP-INSTRUMENTATION",
++  "experiment_version": "0.1.0",
++  "repository": "JinnZ2/Simulators",
++  "base_commit": "8d74903b3be9796fa18df64990d0dcacff89cb44",
++  "snapshot_note": "Git blob identifiers below pin principal inputs at the base commit. They are Git object IDs, not SHA-256 digests. No files in this list are to be edited by this experiment.",
++  "frozen_inputs": [
++    {
++      "path": "blind-reader-void12/reader_packet_v2/READER_BRIEF.md",
++      "git_blob": "956975bb8739f4bd7b004d0ffe9b5dd59ebc9716"
++    },
++    {
++      "path": "blind-reader-void12/reader_packet_v2/terms.json",
++      "git_blob": "d120a0b9b9a0434c8ede8aaab8c17f3b36c3ac05"
++    },
++    {
++      "path": "blind-reader-void12/reader_packet_v2/PACKET_MANIFEST.json",
++      "git_blob": "66b9f6adbcfa3d8e12025b4cb4541b755be23a73"
++    },
++    {
++      "path": "blind-reader-void12/PREREG.md",
++      "git_blob": "57a7438a0840bbd1839ffa803a72f0d676dcffca"
++    },
++    {
++      "path": "blind-reader-void12/KEY_V2_AMENDMENT_1.md",
++      "git_blob": "a53bf64966d0db4963b53c008b4614e60ca68bf5"
++    },
++    {
++      "path": "blind-reader-void12/scoring/key_v2.json",
++      "git_blob": "bb7002422c0d1dae1f38e49ae3e2e2967675fb7c"
++    },
++    {
++      "path": "blind-reader-void12/scoring/key_v2_a1.json",
++      "git_blob": "fc8b4ef09392a6d9453f5e8221be433730df077e"
++    },
++    {
++      "path": "blind-reader-void12/scoring/score_v2.py",
++      "git_blob": "cae3d5dd905df10f257db1073835bacbc68382d9"
++    },
++    {
++      "path": "blind-reader-void12/reader_packet_v2/sources/Simulators/combined-playground/cplay/axes.py",
++      "git_blob": "7a570296ee47e2863226e3e5f9cd449d2115babf"
++    },
++    {
++      "path": "blind-reader-void12/reader_packet_v2/sources/Simulators/combined-playground/cplay/closure.py",
++      "git_blob": "594eb2e078f389cd6177e4ddaf51d7fb9a47deb4"
++    }
++  ],
++  "known_open_boundary": "KEY_V2_AMENDMENT_1.md section 6.1 leaves the T10 carried-versus-specific record boundary open in this snapshot."
++}
+diff --git a/blind-reader-void12/gap_instrumentation/schema/observation.schema.json b/blind-reader-void12/gap_instrumentation/schema/observation.schema.json
+new file mode 100644
+--- /dev/null
++++ b/blind-reader-void12/gap_instrumentation/schema/observation.schema.json
+@@ -0,0 +1,479 @@
++{
++  "$schema": "https://json-schema.org/draft/2020-12/schema",
++  "$id": "https://example.invalid/void12/gap-instrumentation/observation.schema.json",
++  "title": "VOID-12 G01/G02 observation",
++  "type": "object",
++  "required": [
++    "schema_version",
++    "experiment_id",
++    "gap_id",
++    "event_type",
++    "reader",
++    "assignment",
++    "source_snapshot",
++    "term_id",
++    "observed_at",
++    "payload"
++  ],
++  "properties": {
++    "schema_version": {
++      "const": "1.0"
++    },
++    "experiment_id": {
++      "const": "VOID12-GAP-INSTRUMENTATION"
++    },
++    "gap_id": {
++      "enum": [
++        "G01",
++        "G02"
++      ]
++    },
++    "event_type": {
++      "enum": [
++        "G01_FIELD_ASSESSMENT",
++        "G02_RECORD_BOUNDARY"
++      ]
++    },
++    "reader": {
++      "type": "object",
++      "required": [
++        "reader_id",
++        "family",
++        "session_id"
++      ],
++      "properties": {
++        "reader_id": {
++          "type": "string",
++          "minLength": 1
++        },
++        "family": {
++          "type": "string",
++          "minLength": 1
++        },
++        "session_id": {
++          "type": "string",
++          "minLength": 1
++        }
++      },
++      "additionalProperties": true
++    },
++    "assignment": {
++      "type": "object",
++      "required": [
++        "mode",
++        "variant",
++        "sequence_index",
++        "prior_variant"
++      ],
++      "properties": {
++        "mode": {
++          "enum": [
++            "PARALLEL",
++            "SEQUENTIAL"
++          ]
++        },
++        "variant": {
++          "enum": [
++            "D0",
++            "D1",
++            "D2",
++            "D3"
++          ]
++        },
++        "sequence_index": {
++          "type": "integer",
++          "minimum": 1
++        },
++        "prior_variant": {
++          "type": [
++            "string",
++            "null"
++          ],
++          "enum": [
++            "D0",
++            "D1",
++            "D2",
++            "D3",
++            null
++          ]
++        }
++      },
++      "additionalProperties": true
++    },
++    "source_snapshot": {
++      "type": "object",
++      "required": [
++        "repository",
++        "commit",
++        "packet_manifest_blob"
++      ],
++      "properties": {
++        "repository": {
++          "const": "JinnZ2/Simulators"
++        },
++        "commit": {
++          "type": "string",
++          "pattern": "^[0-9a-f]{40}$"
++        },
++        "packet_manifest_blob": {
++          "type": "string",
++          "pattern": "^[0-9a-f]{40}$"
++        },
++        "instruction_sha256": {
++          "type": [
++            "string",
++            "null"
++          ],
++          "pattern": "^[0-9a-f]{64}$"
++        }
++      },
++      "additionalProperties": true
++    },
++    "term_id": {
++      "type": "string",
++      "pattern": "^T(0[1-9]|1[0-5])$"
++    },
++    "observed_at": {
++      "type": [
++        "string",
++        "null"
++      ],
++      "format": "date-time"
++    },
++    "payload": {
++      "type": "object"
++    }
++  },
++  "allOf": [
++    {
++      "if": {
++        "properties": {
++          "gap_id": {
++            "const": "G01"
++          }
++        }
++      },
++      "then": {
++        "properties": {
++          "event_type": {
++            "const": "G01_FIELD_ASSESSMENT"
++          },
++          "payload": {
++            "type": "object",
++            "required": [
++              "field_assessments",
++              "final_slots_specific",
++              "ambiguity_detected",
++              "alternatives_preserved"
++            ],
++            "properties": {
++              "field_assessments": {
++                "type": "array",
++                "items": {
++                  "type": "object",
++                  "required": [
++                    "field_name",
++                    "origin",
++                    "instance_coverage",
++                    "tag_decision",
++                    "independence_decision",
++                    "included",
++                    "source_locations",
++                    "basis"
++                  ],
++                  "properties": {
++                    "field_name": {
++                      "type": "string",
++                      "minLength": 1
++                    },
++                    "origin": {
++                      "enum": [
++                        "RAW_INPUT",
++                        "COMPUTED",
++                        "DECLARED_ONLY",
++                        "UNKNOWN"
++                      ]
++                    },
++                    "instance_coverage": {
++                      "type": "object",
++                      "required": [
++                        "term_total",
++                        "term_with_field",
++                        "other_total",
++                        "other_with_field"
++                      ],
++                      "properties": {
++                        "term_total": {
++                          "type": [
++                            "integer",
++                            "null"
++                          ],
++                          "minimum": 0
++                        },
++                        "term_with_field": {
++                          "type": [
++                            "integer",
++                            "null"
++                          ],
++                          "minimum": 0
++                        },
++                        "other_total": {
++                          "type": [
++                            "integer",
++                            "null"
++                          ],
++                          "minimum": 0
++                        },
++                        "other_with_field": {
++                          "type": [
++                            "integer",
++                            "null"
++                          ],
++                          "minimum": 0
++                        }
++                      },
++                      "additionalProperties": true
++                    },
++                    "tag_decision": {
++                      "enum": [
++                        "YES",
++                        "NO",
++                        "UNRESOLVED"
++                      ]
++                    },
++                    "independence_decision": {
++                      "enum": [
++                        "YES",
++                        "NO",
++                        "UNRESOLVED"
++                      ]
++                    },
++                    "included": {
++                      "type": "boolean"
++                    },
++                    "source_locations": {
++                      "type": "array",
++                      "items": {
++                        "type": "object",
++                        "required": [
++                          "path"
++                        ],
++                        "properties": {
++                          "path": {
++                            "type": "string"
++                          },
++                          "lines": {
++                            "type": [
++                              "string",
++                              "null"
++                            ]
++                          }
++                        },
++                        "additionalProperties": true
++                      }
++                    },
++                    "basis": {
++                      "type": "string"
++                    },
++                    "alternative_interpretations": {
++                      "type": "array",
++                      "items": {
++                        "type": "string"
++                      }
++                    },
++                    "confidence": {
++                      "enum": [
++                        "HIGH",
++                        "MEDIUM",
++                        "LOW",
++                        "UNKNOWN"
++                      ]
++                    }
++                  },
++                  "additionalProperties": true
++                }
++              },
++              "final_slots_specific": {
++                "type": "array",
++                "items": {
++                  "type": "string"
++                }
++              },
++              "ambiguity_detected": {
++                "type": "boolean"
++              },
++              "alternatives_preserved": {
++                "type": "boolean"
++              },
++              "unresolved_fields": {
++                "type": "array",
++                "items": {
++                  "type": "string"
++                }
++              }
++            },
++            "additionalProperties": true
++          }
++        }
++      }
++    },
++    {
++      "if": {
++        "properties": {
++          "gap_id": {
++            "const": "G02"
++          }
++        }
++      },
++      "then": {
++        "properties": {
++          "event_type": {
++            "const": "G02_RECORD_BOUNDARY"
++          },
++          "payload": {
++            "type": "object",
++            "required": [
++              "record_inventory",
++              "stopping_rule",
++              "selected_record_ids",
++              "excluded_record_ids",
++              "final_slots_carried",
++              "nested_records_opened",
++              "ambiguity_detected",
++              "alternatives_preserved"
++            ],
++            "properties": {
++              "record_inventory": {
++                "type": "array",
++                "items": {
++                  "type": "object",
++                  "required": [
++                    "record_id",
++                    "relationship",
++                    "depth",
++                    "source_locations",
++                    "fields",
++                    "nested_field_refs",
++                    "included"
++                  ],
++                  "properties": {
++                    "record_id": {
++                      "type": "string",
++                      "minLength": 1
++                    },
++                    "relationship": {
++                      "enum": [
++                        "TERM_OWN_RECORD",
++                        "REPORTING_RECORD",
++                        "SHARED_RECORD",
++                        "WRAPPER_RECORD",
++                        "NESTED_RECORD",
++                        "DOCUMENTED_RECORD",
++                        "UNKNOWN"
++                      ]
++                    },
++                    "depth": {
++                      "type": "integer",
++                      "minimum": 0
++                    },
++                    "source_locations": {
++                      "type": "array",
++                      "items": {
++                        "type": "object",
++                        "required": [
++                          "path"
++                        ],
++                        "properties": {
++                          "path": {
++                            "type": "string"
++                          },
++                          "lines": {
++                            "type": [
++                              "string",
++                              "null"
++                            ]
++                          }
++                        },
++                        "additionalProperties": true
++                      }
++                    },
++                    "fields": {
++                      "type": "array",
++                      "items": {
++                        "type": "string"
++                      }
++                    },
++                    "nested_field_refs": {
++                      "type": "object",
++                      "additionalProperties": {
++                        "type": "string"
++                      }
++                    },
++                    "included": {
++                      "type": "boolean"
++                    },
++                    "inclusion_basis": {
++                      "type": "string"
++                    }
++                  },
++                  "additionalProperties": true
++                }
++              },
++              "stopping_rule": {
++                "enum": [
++                  "TERM_OWN_RECORD_ONLY",
++                  "ALL_REPORTING_PATH_RECORDS",
++                  "FIRST_WRAPPER_ONLY",
++                  "NAME_NESTED_FIELD_DO_NOT_OPEN",
++                  "ALL_REACHABLE_RECORDS",
++                  "OTHER",
++                  "UNRESOLVED"
++                ]
++              },
++              "selected_record_ids": {
++                "type": "array",
++                "items": {
++                  "type": "string"
++                },
++                "uniqueItems": true
++              },
++              "excluded_record_ids": {
++                "type": "array",
++                "items": {
++                  "type": "string"
++                },
++                "uniqueItems": true
++              },
++              "final_slots_carried": {
++                "type": "array",
++                "items": {
++                  "type": "string"
++                }
++              },
++              "nested_records_opened": {
++                "type": "array",
++                "items": {
++                  "type": "string"
++                }
++              },
++              "ambiguity_detected": {
++                "type": "boolean"
++              },
++              "alternatives_preserved": {
++                "type": "boolean"
++              },
++              "unresolved_record_ids": {
++                "type": "array",
++                "items": {
++                  "type": "string"
++                }
++              }
++            },
++            "additionalProperties": true
++          }
++        }
++      }
++    }
++  ],
++  "additionalProperties": true
++}
+diff --git a/blind-reader-void12/gap_instrumentation/fixtures/g01_known_answer.json b/blind-reader-void12/gap_instrumentation/fixtures/g01_known_answer.json
+new file mode 100644
+--- /dev/null
++++ b/blind-reader-void12/gap_instrumentation/fixtures/g01_known_answer.json
+@@ -0,0 +1,159 @@
++{
++  "fixture_set": "G01_SYNTHETIC_KNOWN_ANSWER",
++  "fixture_version": "1.0",
++  "rule_under_test": {
++    "TAG": "candidate field occurs on every instance of the target term and no instance of any other term",
++    "INDEPENDENCE": "candidate field is passed in or recorded raw, not computed from other candidate fields",
++    "include_in_slots_specific": "TAG == YES and INDEPENDENCE == YES"
++  },
++  "cases": [
++    {
++      "case_id": "G01-KA-01",
++      "description": "Raw independent field exclusive to target term and present on every target instance",
++      "target_instances": [
++        {
++          "x": 1,
++          "raw_key": "a"
++        },
++        {
++          "x": 2,
++          "raw_key": "b"
++        }
++      ],
++      "other_term_instances": [
++        {
++          "x": 1
++        },
++        {
++          "x": 2
++        }
++      ],
++      "candidate_field": "raw_key",
++      "origin": "RAW_INPUT",
++      "expected": {
++        "tag_decision": "YES",
++        "independence_decision": "YES",
++        "included": true
++      }
++    },
++    {
++      "case_id": "G01-KA-02",
++      "description": "Computed field exclusive to target term",
++      "target_instances": [
++        {
++          "x": 1,
++          "derived": true
++        },
++        {
++          "x": 2,
++          "derived": false
++        }
++      ],
++      "other_term_instances": [
++        {
++          "x": 1
++        }
++      ],
++      "candidate_field": "derived",
++      "origin": "COMPUTED",
++      "expected": {
++        "tag_decision": "YES",
++        "independence_decision": "NO",
++        "included": false
++      }
++    },
++    {
++      "case_id": "G01-KA-03",
++      "description": "Raw field shared with another term",
++      "target_instances": [
++        {
++          "shared": "a"
++        },
++        {
++          "shared": "b"
++        }
++      ],
++      "other_term_instances": [
++        {
++          "shared": "c"
++        }
++      ],
++      "candidate_field": "shared",
++      "origin": "RAW_INPUT",
++      "expected": {
++        "tag_decision": "NO",
++        "independence_decision": "YES",
++        "included": false
++      }
++    },
++    {
++      "case_id": "G01-KA-04",
++      "description": "Raw field missing from one target instance",
++      "target_instances": [
++        {
++          "partial": "a"
++        },
++        {}
++      ],
++      "other_term_instances": [
++        {}
++      ],
++      "candidate_field": "partial",
++      "origin": "RAW_INPUT",
++      "expected": {
++        "tag_decision": "NO",
++        "independence_decision": "YES",
++        "included": false
++      }
++    },
++    {
++      "case_id": "G01-KA-05",
++      "description": "Declared in prose but no evidence that it is an independent raw input",
++      "target_instances": [
++        {
++          "declared": "a"
++        },
++        {
++          "declared": "b"
++        }
++      ],
++      "other_term_instances": [
++        {}
++      ],
++      "candidate_field": "declared",
++      "origin": "DECLARED_ONLY",
++      "expected": {
++        "tag_decision": "YES",
++        "independence_decision": "UNRESOLVED",
++        "included": false
++      }
++    },
++    {
++      "case_id": "G01-KA-06",
++      "description": "Field present on all target instances and at least one other-term instance",
++      "target_instances": [
++        {
++          "x": "a",
++          "cross": "v"
++        },
++        {
++          "x": "b",
++          "cross": "w"
++        }
++      ],
++      "other_term_instances": [
++        {
++          "cross": "z"
++        },
++        {}
++      ],
++      "candidate_field": "cross",
++      "origin": "RAW_INPUT",
++      "expected": {
++        "tag_decision": "NO",
++        "independence_decision": "YES",
++        "included": false
++      }
++    }
++  ]
++}
+diff --git a/blind-reader-void12/gap_instrumentation/fixtures/g02_known_answer.json b/blind-reader-void12/gap_instrumentation/fixtures/g02_known_answer.json
+new file mode 100644
+--- /dev/null
++++ b/blind-reader-void12/gap_instrumentation/fixtures/g02_known_answer.json
+@@ -0,0 +1,195 @@
++{
++  "fixture_set": "G02_SYNTHETIC_KNOWN_ANSWER",
++  "fixture_version": "1.0",
++  "rule_under_test": "Apply the stated boundary rule to the records in the fixture. A nested record-valued field is named but its contents are not opened unless the fixture explicitly makes it a separate reporting-path record.",
++  "cases": [
++    {
++      "case_id": "G02-KA-01",
++      "description": "Own record contains a nested record-valued field; list the reference field, do not open nested fields",
++      "stopping_rule": "TERM_OWN_RECORD_ONLY",
++      "records": [
++        {
++          "record_id": "R0",
++          "relationship": "TERM_OWN_RECORD",
++          "depth": 0,
++          "fields": [
++            "status",
++            "reason",
++            "detail"
++          ],
++          "nested_field_refs": {
++            "detail": "R1"
++          },
++          "on_reporting_path": true
++        },
++        {
++          "record_id": "R1",
++          "relationship": "NESTED_RECORD",
++          "depth": 1,
++          "fields": [
++            "private_a",
++            "private_b"
++          ],
++          "nested_field_refs": {},
++          "on_reporting_path": false
++        }
++      ],
++      "expected": {
++        "selected_record_ids": [
++          "R0"
++        ],
++        "excluded_record_ids": [
++          "R1"
++        ],
++        "final_slots_carried": [
++          "status",
++          "reason",
++          "detail"
++        ],
++        "nested_records_opened": []
++      }
++    },
++    {
++      "case_id": "G02-KA-02",
++      "description": "Two distinct records are built on the same reporting path; both are in scope under the stipulated all-reporting-path rule",
++      "stopping_rule": "ALL_REPORTING_PATH_RECORDS",
++      "records": [
++        {
++          "record_id": "READING",
++          "relationship": "TERM_OWN_RECORD",
++          "depth": 0,
++          "fields": [
++            "field",
++            "status",
++            "reason",
++            "exception",
++            "path"
++          ],
++          "nested_field_refs": {},
++          "on_reporting_path": true
++        },
++        {
++          "record_id": "SECTION",
++          "relationship": "REPORTING_RECORD",
++          "depth": 0,
++          "fields": [
++            "error",
++            "exception_type",
++            "missing_path"
++          ],
++          "nested_field_refs": {},
++          "on_reporting_path": true
++        }
++      ],
++      "expected": {
++        "selected_record_ids": [
++          "READING",
++          "SECTION"
++        ],
++        "excluded_record_ids": [],
++        "final_slots_carried": [
++          "field",
++          "status",
++          "reason",
++          "exception",
++          "path",
++          "error",
++          "exception_type",
++          "missing_path"
++        ],
++        "nested_records_opened": []
++      }
++    },
++    {
++      "case_id": "G02-KA-03",
++      "description": "Wrapper record carries a term value and is explicitly marked as a reporting-path record",
++      "stopping_rule": "ALL_REPORTING_PATH_RECORDS",
++      "records": [
++        {
++          "record_id": "TERM",
++          "relationship": "TERM_OWN_RECORD",
++          "depth": 0,
++          "fields": [
++            "status",
++            "reason"
++          ],
++          "nested_field_refs": {},
++          "on_reporting_path": true
++        },
++        {
++          "record_id": "WRAPPER",
++          "relationship": "WRAPPER_RECORD",
++          "depth": 0,
++          "fields": [
++            "term_value",
++            "source_id",
++            "recorded_at"
++          ],
++          "nested_field_refs": {},
++          "on_reporting_path": true
++        }
++      ],
++      "expected": {
++        "selected_record_ids": [
++          "TERM",
++          "WRAPPER"
++        ],
++        "excluded_record_ids": [],
++        "final_slots_carried": [
++          "status",
++          "reason",
++          "term_value",
++          "source_id",
++          "recorded_at"
++        ],
++        "nested_records_opened": []
++      }
++    },
++    {
++      "case_id": "G02-KA-04",
++      "description": "A nested record is reachable but not marked as separately built on the reporting path",
++      "stopping_rule": "ALL_REPORTING_PATH_RECORDS",
++      "records": [
++        {
++          "record_id": "ENTRY",
++          "relationship": "TERM_OWN_RECORD",
++          "depth": 0,
++          "fields": [
++            "kind",
++            "module",
++            "detail"
++          ],
++          "nested_field_refs": {
++            "detail": "DETAIL"
++          },
++          "on_reporting_path": true
++        },
++        {
++          "record_id": "DETAIL",
++          "relationship": "NESTED_RECORD",
++          "depth": 1,
++          "fields": [
++            "error",
++            "stack"
++          ],
++          "nested_field_refs": {},
++          "on_reporting_path": false
++        }
++      ],
++      "expected": {
++        "selected_record_ids": [
++          "ENTRY"
++        ],
++        "excluded_record_ids": [
++          "DETAIL"
++        ],
++        "final_slots_carried": [
++          "kind",
++          "module",
++          "detail"
++        ],
++        "nested_records_opened": []
++      }
++    }
++  ]
++}
+diff --git a/blind-reader-void12/gap_instrumentation/validate_observations.py b/blind-reader-void12/gap_instrumentation/validate_observations.py
+new file mode 100644
+--- /dev/null
++++ b/blind-reader-void12/gap_instrumentation/validate_observations.py
+@@ -0,0 +1,137 @@
++#!/usr/bin/env python3
++"""Structural validator for VOID-12 G01/G02 observations. No interpretation scoring."""
++import json
++import sys
++from pathlib import Path
++
++G01 = "G01_FIELD_ASSESSMENT"
++G02 = "G02_RECORD_BOUNDARY"
++VARIANTS = {"D0", "D1", "D2", "D3"}
++
++def validate_record(o, line_no=None):
++    errors = []
++    where = f"line {line_no}: " if line_no is not None else ""
++    required = ("schema_version", "experiment_id", "gap_id", "event_type",
++                "reader", "assignment", "source_snapshot", "term_id",
++                "observed_at", "payload")
++    for key in required:
++        if key not in o:
++            errors.append(where + f"missing {key}")
++    if errors:
++        return errors
++    if o["schema_version"] != "1.0":
++        errors.append(where + "unsupported schema_version")
++    if o["experiment_id"] != "VOID12-GAP-INSTRUMENTATION":
++        errors.append(where + "wrong experiment_id")
++    if o["gap_id"] not in ("G01", "G02"):
++        errors.append(where + "gap_id must be G01 or G02")
++        return errors
++    if o["term_id"] not in {f"T{i:02d}" for i in range(1, 16)}:
++        errors.append(where + "term_id must be T01 through T15")
++    reader = o["reader"]
++    for key in ("reader_id", "family", "session_id"):
++        if not isinstance(reader, dict) or not reader.get(key):
++            errors.append(where + f"reader.{key} is required")
++    a = o["assignment"]
++    if not isinstance(a, dict):
++        errors.append(where + "assignment must be an object")
++    else:
++        if a.get("mode") not in ("PARALLEL", "SEQUENTIAL"):
++            errors.append(where + "assignment.mode invalid")
++        if a.get("variant") not in VARIANTS:
++            errors.append(where + "assignment.variant invalid")
++        if not isinstance(a.get("sequence_index"), int) or a["sequence_index"] < 1:
++            errors.append(where + "assignment.sequence_index must be >= 1")
++        if a.get("mode") == "PARALLEL" and (a.get("sequence_index") != 1 or a.get("prior_variant") is not None):
++            errors.append(where + "parallel assignment must have sequence_index=1 and prior_variant=null")
++        if a.get("mode") == "SEQUENTIAL" and a.get("sequence_index", 1) > 1:
++            if a.get("prior_variant") not in VARIANTS:
++                errors.append(where + "sequential observation after first must name prior_variant")
++    snap = o["source_snapshot"]
++    if not isinstance(snap, dict) or snap.get("repository") != "JinnZ2/Simulators":
++        errors.append(where + "source_snapshot.repository must be JinnZ2/Simulators")
++    elif len(snap.get("commit", "")) != 40 or len(snap.get("packet_manifest_blob", "")) != 40:
++        errors.append(where + "source snapshot commit and packet_manifest_blob must be full 40-character Git IDs")
++    p = o["payload"]
++    if not isinstance(p, dict):
++        errors.append(where + "payload must be an object")
++        return errors
++    if o["gap_id"] == "G01":
++        if o["event_type"] != G01:
++            errors.append(where + "G01 requires event_type G01_FIELD_ASSESSMENT")
++        for k in ("field_assessments", "final_slots_specific", "ambiguity_detected", "alternatives_preserved"):
++            if k not in p:
++                errors.append(where + f"G01 payload missing {k}")
++        if isinstance(p.get("field_assessments"), list):
++            for i, f in enumerate(p["field_assessments"]):
++                prefix = where + f"field_assessments[{i}] "
++                for k in ("field_name", "origin", "instance_coverage", "tag_decision",
++                          "independence_decision", "included", "source_locations", "basis"):
++                    if k not in f:
++                        errors.append(prefix + f"missing {k}")
++                if f.get("origin") not in ("RAW_INPUT", "COMPUTED", "DECLARED_ONLY", "UNKNOWN"):
++                    errors.append(prefix + "invalid origin")
++                if f.get("tag_decision") not in ("YES", "NO", "UNRESOLVED"):
++                    errors.append(prefix + "invalid tag_decision")
++                if f.get("independence_decision") not in ("YES", "NO", "UNRESOLVED"):
++                    errors.append(prefix + "invalid independence_decision")
++                if f.get("included") is True and not (
++                    f.get("tag_decision") == "YES" and f.get("independence_decision") == "YES"
++                ):
++                    errors.append(prefix + "included=true requires TAG=YES and INDEPENDENCE=YES")
++    else:
++        if o["event_type"] != G02:
++            errors.append(where + "G02 requires event_type G02_RECORD_BOUNDARY")
++        for k in ("record_inventory", "stopping_rule", "selected_record_ids",
++                  "excluded_record_ids", "final_slots_carried", "nested_records_opened",
++                  "ambiguity_detected", "alternatives_preserved"):
++            if k not in p:
++                errors.append(where + f"G02 payload missing {k}")
++        selected = p.get("selected_record_ids", [])
++        excluded = p.get("excluded_record_ids", [])
++        if len(selected) != len(set(selected)):
++            errors.append(where + "selected_record_ids contains duplicates")
++        if len(excluded) != len(set(excluded)):
++            errors.append(where + "excluded_record_ids contains duplicates")
++        if set(selected) & set(excluded):
++            errors.append(where + "a record cannot be both selected and excluded")
++        if p.get("stopping_rule") not in (
++            "TERM_OWN_RECORD_ONLY", "ALL_REPORTING_PATH_RECORDS", "FIRST_WRAPPER_ONLY",
++            "NAME_NESTED_FIELD_DO_NOT_OPEN", "ALL_REACHABLE_RECORDS", "OTHER", "UNRESOLVED"
++        ):
++            errors.append(where + "invalid stopping_rule")
++    return errors
++
++def validate_jsonl(path):
++    all_errors = []
++    count = 0
++    with Path(path).open(encoding="utf-8") as fh:
++        for line_no, line in enumerate(fh, 1):
++            if not line.strip():
++                continue
++            count += 1
++            try:
++                obj = json.loads(line)
++            except json.JSONDecodeError as exc:
++                all_errors.append(f"line {line_no}: invalid JSON: {exc}")
++                continue
++            if not isinstance(obj, dict):
++                all_errors.append(f"line {line_no}: each line must be a JSON object")
++                continue
++            all_errors.extend(validate_record(obj, line_no))
++    return count, all_errors
++
++def main(argv=None):
++    argv = argv or sys.argv[1:]
++    if len(argv) != 1:
++        print("usage: python3 validate_observations.py observations.jsonl", file=sys.stderr)
++        return 2
++    count, errors = validate_jsonl(argv[0])
++    print(f"records: {count}")
++    print(f"structural_errors: {len(errors)}")
++    for error in errors:
++        print("- " + error)
++    return 1 if errors else 0
++
++if __name__ == "__main__":
++    raise SystemExit(main())
+diff --git a/blind-reader-void12/gap_instrumentation/test_validator.py b/blind-reader-void12/gap_instrumentation/test_validator.py
+new file mode 100644
+--- /dev/null
++++ b/blind-reader-void12/gap_instrumentation/test_validator.py
+@@ -0,0 +1,82 @@
++import json
++import tempfile
++import unittest
++from pathlib import Path
++
++from validate_observations import validate_record
++
++BASE = {
++    "schema_version": "1.0",
++    "experiment_id": "VOID12-GAP-INSTRUMENTATION",
++    "gap_id": "G01",
++    "event_type": "G01_FIELD_ASSESSMENT",
++    "reader": {"reader_id": "R-001", "family": "test-family", "session_id": "S-001"},
++    "assignment": {"mode": "PARALLEL", "variant": "D0", "sequence_index": 1, "prior_variant": None},
++    "source_snapshot": {
++        "repository": "JinnZ2/Simulators",
++        "commit": "8d74903b3be9796fa18df64990d0dcacff89cb44",
++        "packet_manifest_blob": "66b9f6adbcfa3d8e12025b4cb4541b755be23a73"
++    },
++    "term_id": "T05",
++    "observed_at": None,
++    "payload": {
++        "field_assessments": [{
++            "field_name": "raw_x",
++            "origin": "RAW_INPUT",
++            "instance_coverage": {"term_total": 2, "term_with_field": 2, "other_total": 2, "other_with_field": 0},
++            "tag_decision": "YES",
++            "independence_decision": "YES",
++            "included": True,
++            "source_locations": [{"path": "source.py", "lines": "1-4"}],
++            "basis": "Synthetic test observation"
++        }],
++        "final_slots_specific": ["raw_x"],
++        "ambiguity_detected": False,
++        "alternatives_preserved": True
++    }
++}
++
++class ObservationValidatorTests(unittest.TestCase):
++    def test_valid_g01(self):
++        self.assertEqual(validate_record(BASE), [])
++
++    def test_included_requires_both_g01_axes(self):
++        x = json.loads(json.dumps(BASE))
++        x["payload"]["field_assessments"][0]["independence_decision"] = "NO"
++        self.assertTrue(any("included=true requires" in e for e in validate_record(x)))
++
++    def test_valid_g02_boundary_record(self):
++        x = json.loads(json.dumps(BASE))
++        x["gap_id"] = "G02"
++        x["event_type"] = "G02_RECORD_BOUNDARY"
++        x["payload"] = {
++            "record_inventory": [{
++                "record_id": "ENTRY", "relationship": "TERM_OWN_RECORD", "depth": 0,
++                "source_locations": [{"path":"source.py","lines":"10-15"}],
++                "fields": ["kind","detail"], "nested_field_refs":{"detail":"DETAIL"},
++                "included": True
++            }],
++            "stopping_rule": "ALL_REPORTING_PATH_RECORDS",
++            "selected_record_ids": ["ENTRY"],
++            "excluded_record_ids": ["DETAIL"],
++            "final_slots_carried": ["kind","detail"],
++            "nested_records_opened": [],
++            "ambiguity_detected": True,
++            "alternatives_preserved": True
++        }
++        self.assertEqual(validate_record(x), [])
++
++    def test_selected_and_excluded_must_be_disjoint(self):
++        x = json.loads(json.dumps(BASE))
++        x["gap_id"] = "G02"
++        x["event_type"] = "G02_RECORD_BOUNDARY"
++        x["payload"] = {
++            "record_inventory": [], "stopping_rule":"UNRESOLVED",
++            "selected_record_ids":["R0"], "excluded_record_ids":["R0"],
++            "final_slots_carried":[], "nested_records_opened":[],
++            "ambiguity_detected":True, "alternatives_preserved":True
++        }
++        self.assertTrue(any("both selected and excluded" in e for e in validate_record(x)))
++
++if __name__ == "__main__":
++    unittest.main()

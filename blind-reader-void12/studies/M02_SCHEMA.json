@@ -1,0 +1,47 @@
+{
+ "study_id": "M02",
+ "title": "slots_carried: which records count, and how far a record-valued field is followed",
+ "version": 1,
+ "null_rule": "null means NOT_RECORDED. No field has a default; *_provenance says who recorded each value. Provenance values as in M01_SCHEMA.json.",
+ "levels": {
+  "session": {
+   "note": "one per (reader, term)",
+   "fields": {
+    "study_id":        {"const": "M02"},
+    "reader_id":       {"type": "string", "note": "pseudonym or readings/ folder name; never reader_label"},
+    "family":          {"type": "string"},
+    "packet":          {"keys": ["version", "variant", "sha256"]},
+    "condition":       {"enum": ["D0", "D1", "D2", "D3"]},
+    "instruction_sha256": {"type": ["string", "null"], "note": "sha256 of instructions/M02_Dn.md; null for D0"},
+    "arm":             {"enum": ["PARALLEL", "SEQUENTIAL", "FILED"], "note": "FILED = a reading taken before M02 existed"},
+    "sequence_index":  {"type": ["integer", "null"]},
+    "prior_condition": {"enum": ["D0", "D1", "D2", "D3", null]},
+    "recalled_prior":  {"type": ["boolean", "null"], "note": "sequential arm: did the reader say they recalled or reused the earlier answer"},
+    "term_id":         {"pattern": "T01..T15"},
+    "scope_rule":      {"enum": ["TERM_OWN_RECORD_ONLY", "ALL_REPORTING_PATH_RECORDS", "FIRST_WRAPPER_ONLY", "ALL_REACHABLE_RECORDS", "OTHER", "UNRESOLVED", null]},
+    "traversal_rule":  {"enum": ["NAME_DO_NOT_OPEN", "OPEN", "MIXED", "UNRESOLVED", null],
+                        "note": "a nested-field rule, recorded apart from scope_rule"},
+    "rule_quote":      {"type": ["string", "null"], "note": "verbatim, where the reader stated a rule"},
+    "rule_provenance": {"enum": ["READER_STATED", "CODER_INFERRED", "NOT_RECORDED"]},
+    "ambiguity_stated":{"type": ["boolean", "null"], "note": "true only where the reader's text says so; null otherwise"},
+    "unmatched_names": {"type": "array", "note": "names in the reader's slots_carried that no catalog record carries: reported, never dropped"}
+   }
+  },
+  "record": {
+   "note": "one per (session, catalog record)",
+   "fields": {
+    "record_id":       {"type": "string", "note": "local id from the catalog, not a source identifier"},
+    "source_location": {"type": "string"},
+    "relationship":    {"enum": ["TERM_OWN_RECORD", "REPORTING_RECORD", "WRAPPER_RECORD", "NESTED_RECORD", "DOCUMENTED_RECORD", "UNKNOWN"]},
+    "on_reporting_path": {"type": ["boolean", "null"]},
+    "depth":           {"type": ["integer", "null"], "note": "0 = the term's own record; a record built beside it is also 0; a wrapper is +1; a nested record is +1 from its holder"},
+    "fields":          {"type": "array"},
+    "nested_field_refs": {"type": "object", "note": "field -> record_id of the record it holds"},
+    "catalog_provenance": {"enum": ["SCRIPT_DERIVED", "CODER_INFERRED"]},
+    "counted":         {"enum": ["COUNTED", "PARTLY_COUNTED", "NOT_COUNTED"], "note": "from the reader's slots_carried: all / some / none of this record's own fields named. NOT_COUNTED is not 'excluded'"},
+    "opened":          {"type": ["boolean", "null"], "note": "for a NESTED_RECORD: did the reader list its fields"},
+    "counted_provenance": {"enum": ["READER_STATED", "CODER_INFERRED"]}
+   }
+  }
+ }
+}

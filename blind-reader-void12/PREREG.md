@@ -144,3 +144,22 @@ Owner: "Yes please" (2026-11-19) to building the M01 instrumentation: a schema, 
 ## Status note on amendment 1 (added 2026-11-19)
 
 `KEY_V2_AMENDMENT_1.md` (sha256 `2f881227942f06322b122a1890b4c5d814ab635e9eaf93adf36832dcd29baf74`, unchanged) still says in its line 3: "Status: proposed, on a branch, not merged. It takes effect when the owner has read it, it is merged, and its sha256 is recorded in `PREREG.md` before any further reading." All three conditions were met before the Kimi and GPT-6 readings: the owner decided its content (section "Key v2, amendment 1" above), it was merged in PR #318, and its sha256 is recorded above. **Amendment 1 is in force.** The line is left as written because the file is hashed; this note is the record of its status. A reader of the file alone can mistake it for a draft (the GPT-6 reader's instrumentation proposal did, reading the line correctly), so any packet or brief that cites the amendment should cite this note beside it.
+
+---
+
+## Study M01 extension and study M02 (added 2026-11-19, before any M02 coding, any instrument code for either, or any new reading)
+
+Owner: "Yes please" (2026-11-19) to folding the GPT-6 reader's G01 / G02 instrumentation proposal into M01 and M02, with its validator, fixture and status problems fixed. The proposal is filed as received. These files are fixed now; the instrument (validator, fixtures, tests) and any coding come in later commits.
+
+| file | sha256 |
+|---|---|
+| `studies/M01_EXTENSION.md` | `9710be2a9a77b094a3e8c70e014bf6095b9943ced2186f351df6b84d19f56b5e` |
+| `studies/M02_CRITERIA.md` | `bddfc32b0731d1db14e3f3a446f4bec6d67d31e43cc1e6c89f936ed2b915f2c5` |
+| `studies/M02_SCHEMA.json` | `e2e80ba2e7d6f00c84ee17ccadd2d1a03096c7d276c08d6f239a0e1f910eefcb` |
+| `studies/instructions/M01_D1.md` | `055b0a30028a785e8819cc4ca8ca16bbd6c94c25b75484cab53a4677e2171090` |
+| `studies/instructions/M02_D1.md` | `4769714245b626dcfcf96ea8369b81e64a913b0c484cf9bd54ed10894192e006` |
+| `studies/instructions/M02_D2.md` | `6787145f8bbf3af6b85e4ca8d15b4a978a0b04319a09175f102115b20cbac2eb` |
+| `studies/instructions/M02_D3.md` | `cce4d69c553e4eec50393b8c02eb68191d26af992807ab282a47b3a0a0d420aa` |
+| `studies/as_received/gpt6_g01_g02_instrumentation.patch` | `ad346f60225e099367ebc3b57bb17e92275d7ed4b4674232b6679c896db0f488` |
+
+**What is fixed.** M01 gains a D1 condition (the amendment's TAG and INDEPENDENCE wording as an experimental note), parallel and counterbalanced sequential arms, and known-answer fixtures given apart from real-source readings. M02 records which records a reader counts for `slots_carried` (scope) separately from how far it opens record-valued fields (traversal), across D0 and three experimental notes D1 to D3, with T10 as the primary specimen. Every condition other than D0 is its own pool: never pooled with D0, never counted under rules 1 and 2, never used to change a key. The instrument records readers' choices and never rejects one for disagreeing with key a1.
