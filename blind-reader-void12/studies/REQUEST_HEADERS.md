@@ -69,3 +69,49 @@ REVIEW-2 and AUDIT-2 use the REVIEW and AUDIT headers with the implementing comm
 ## The baseline is not touched by any mode
 
 D0 is the brief unchanged. Each clarification is its own condition (`instructions/`). Past responses, scores and keys stay as filed. A new version gets a new hash and a changelog. Nothing in this file is sent to a blind reader except the BLIND header.
+
+## Later (2026-11-19): what the Claude Code session must do, and what was only a default
+
+Added at the owner's request ("Yes please", 2026-11-19). The owner had read the session's deference as one of its requirements; it was a default. This list is the session's own account of its operating instructions. It is an author record, not something a reader can check.
+
+```text
+required (the session's instructions; not set by mode or header)
+  safety floor                       some requests are refused whatever the mode
+  confirm before outward or          pushing to another place, deleting, posting, opening a PR:
+    hard-to-reverse actions            asked first unless already authorized
+  no pull request unless asked       PR #320 exists because it was asked for
+  no model identifier in commits     why a Reader slot holds a family name or a pseudonym
+    or repository artifacts
+  the owner's personal details       kept out of requests to outside services
+    stay private
+
+defaults (filled a missing decision rule; not required)
+  ending a report with "questions for you", "your call", options instead of a decision
+  routing a definition "to the owner"
+  closing a row on another reader's agreement
+```
+
+Where a default used to fill the gap, the mode sequence now routes: a decision goes to the stage that can decide it (`../MODE_SEQUENCE.md`), and an open row carries its evidence status (`OPEN_ROWS.md`).
+
+## Later (2026-11-19): the owner's frame for unknowns and code
+
+[stated] "My culture is comfortable with unknowns, retests, re audits, Open things to examine to let mathmatics, physics, and science fill. That is definitely not the default for many. This makes identifying the confusion, understanding the parts that provide more clarity as something to explore by coding; not rules to be enforced by code. We use code for the scientific method discovery of best engineering..."
+
+How the folder's instruments read against it. This is the session's reading, and no instrument is changed:
+
+```text
+instrument                         what it does                              against the frame
+instrument/arms.py                 computes TAG under presence AND           explores: both readings run,
+                                   applicability on every record              divergence listed, none chosen
+studies/m01_code.py                codes fields by declared rules            explores; values carry provenance
+instrument/validate.py             structural checks only; never rejects a   enforces form, not readings
+                                   reader's choice for disagreeing with a key
+instrument/fixtures + tests        known answers under a STATED rule          tests the instrument, decides no case
+packets/build_packet.py leak scan  refuses a packet naming what it hides     enforces: it protects the one thing
+                                                                               spent at first exposure (BLIND)
+OPERATIONAL_DEFINITIONS.md OPEN    rules no file states                      to explore by coding: run each
+                                                                               candidate rule as an arm, as
+                                                                               arms.py does for TAG
+```
+
+So an OPEN row is closed by an arm that runs each candidate rule and shows where they diverge, and by physics or evidence where they can decide. Writing the rule into a validator is not what closes it. The leak scan is the one gate that enforces, and the reason is physical, not a preference: exposure only adds.
