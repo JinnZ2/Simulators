@@ -7,7 +7,7 @@ Drafted 2026-11-19 after the owner's three notes on the bundle as first sent to 
 - **Sending:** the text below the line is sent unchanged.
 - **Filing:** the answer is filed as received in `../confusion/`, with the attestation block and the sent text beside it.
 
-Sources as built, Simulators main `e5dae63`: segment A = `../as_received/mode_and_authority_2026-11-19.md` lines 10-87; segment B = the same file, lines 89-165, with one marked line added under the open line; segment C = `../../MODE_SEQUENCE.md`, the "Later (2026-11-19)" block. Segment authors and times are owner-stated 2026-11-19.
+Sources as built, Simulators main `e5dae63`: segment A = `../as_received/mode_and_authority_2026-11-19.md` lines 12-89; segment B = the same file, lines 91-167, with one marked line added under the open line; segment C = `../../MODE_SEQUENCE.md`, the "Later (2026-11-19)" block. Segment authors and times are owner-stated 2026-11-19.
 
 ---
 

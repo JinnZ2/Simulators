@@ -1,5 +1,7 @@
 # MODE_SEQUENCE.md
 
+Note 2026-11-19: the repository-level file is now `../MODE_SEQUENCE.md` (the same sequence text, the open line struck, the independence block with its sources). This file is kept as first filed.
+
 Delivered by the owner on 2026-11-19 and filed verbatim below. The full message it came in is `studies/as_received/mode_and_authority_2026-11-19.md`. Applies to `blind-reader-void12/`; no other folder has adopted it. Request headers per mode: `studies/REQUEST_HEADERS.md`.
 
 ```text

@@ -41,3 +41,10 @@ Collected from the two bullets above; no fix (AUDIT of the fix choice first).
    the JinnZ2 checkout and reported two quotes MISSING_FILE. The `sibling_state` line shows the
    case as `JinnZ2@UNREADABLE`. With the JinnZ2 repository at FINDER_JINNZ2_PATH all quotes are
    FOUND. build_finder's own selftest fails 1 of 17 in this layout for the same cause.
+
+## Later (2026-11-19): study-aperture, author note for the 2026-11-17 outside audit
+
+- Open: study-aperture's notes name the 2026-11-17 outside audit, and its author is not recorded there. The record to add: author Kimi-or-GPT, UNRESOLVED (owner-stated, neither confirmed); the audit's text is not filed.
+- Reason it is open: the filing session has no push access to study-aperture, and the GitHub API is denied for that repository there.
+- Where the same note is filed: formula-audit `READING_NOTES.md`, "Note 2026-11-19: the outside audit's author" (merged by formula-audit PR #13, `a1513b9`).
+- Next stage: IMPLEMENT (records) by a session with study-aperture push access.
