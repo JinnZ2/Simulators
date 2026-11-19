@@ -58,3 +58,57 @@ written, three rows NOT_CHECKABLE_HERE).
 
 Checked with full clones of TAF (origin/main 16285cccdd48) and study-aperture (origin/main
 03bd2014cd20) on 2026-11-19. Observer slots: null.
+
+## 3. Items 24-30 located (dated 2026-11-19, second pass)
+
+This section supersedes the NOT LOCATED reading for items 24-30 above; the earlier text stays as
+written. Source: the owner's chat of 2026-11-11 (chat Claude), work order "Branch deletions
+(Kavik -> Manus)", as relayed in the owner's IMPLEMENT request of 2026-11-19. The work order text
+itself is not in this repository. The Manus report docs are pending re-attachment.
+
+As relayed:
+- 24: TAF, 5 branches. 25: TAF, 13 branches. 26: Simulators, 9. 27: method-layer, 8.
+- 28: `manus/wo11-current-main` in 8 repos, plus 2.
+- 29: `tool-finder-pointer` in 6 repos.
+- 30: `healing-folder-additions-u5aojl` in 3 repos, `clone-refspec-note` in 2, plus 4 named.
+- the stray TAF `archive/expiry-condition-stage1-test`.
+- safety rules a, b, c, and round 2's a2 (PR merged AND refs/pull/N/head == tip).
+- reported outcome, round 1: 41 deleted, 20 skipped, auto-delete on in 15 repos (Manus report,
+  not read here).
+
+Reading of 24 + 25: 5 + 13 = 18, the count of TAF names in
+`docs/cleanup/TAF_CLEANUP_PHASE1_INVENTORY.md` "Branches still to delete". The split between
+24 and 25 is not in that file. Taking those 18 as items 24 + 25 is a reading, not a statement in
+either source.
+
+### done-test run: does each named branch still exist?
+
+Method: `git ls-remote --heads https://github.com/JinnZ2/<repo>.git` over 82 repos (the 78
+reachable repos named in `tools/tool_inventory.json` meta.repo_heads plus Simulators, method-layer,
+study-aperture, TAF), run 2026-11-19T22:57:21Z. Every call exited 0. A branch is matched by exact name,
+with or without a `claude/` prefix.
+
+| item | branch | target repos named? | reading |
+|---|---|---|---|
+| 24 + 25 | the 18 TAF names | yes (TAF) | GONE, 18 of 18 (TAF has 25 heads; none matches) |
+| stray | `archive/expiry-condition-stage1-test` | yes (TAF) | GONE (absent in all 82) |
+| 26 | 9 Simulators branches | names not relayed | not run (no names); Simulators has 30 heads now |
+| 27 | 8 method-layer branches | names not relayed | not run (no names); method-layer has 3 heads now (`main`, `claude/design-basis-headers`, `claude/reversible-loop-triage-rubric-2vu4tt`) |
+| 28 | `manus/wo11-current-main` | repo list not relayed (8 + 2) | EXISTS in 22 repos: AI-Human-Audit-Protocol AI-arena Academic-Translator Adaptive-Intelligence-Framework- Antarctic-basin-dynamics BE2-communication Bio-Grid-American-Manufacturing- BioGrid2.0 Combine-Cognitive-Architecture- Coop-framework Cyclic-programming DIY-CNC Fractal_Compass_Core Fulgerite-Antenna-Prototype- GlyphAI HAAS Hardware-Store Inversion assumption_validator biomachine_ecology fairmont-ecological-recovery infrastructure-stability-model |
+| 29 | `tool-finder-pointer` | repo list not relayed (6) | GONE in all 82 (nearest name: `claude/tool-finder-aliases` in JinnZ2 and Shadow-Hunting, a different branch) |
+| 30 | `claude/healing-folder-additions-u5aojl` | repo list not relayed (3) | EXISTS in 4 repos: AI-Consciousness-Sensors, Rosetta-Shape-Core, Simulators, thermodynamic-accountability-framework |
+| 30 | `claude/clone-refspec-note` | repo list not relayed (2) | EXISTS in 67 repos: AI-Consciousness-Sensors AI-Human-Audit-Protocol AI-arena Academic-Translator Adaptive-Intelligence-Framework- Antarctic-basin-dynamics BE2-communication BioGrid2.0 Combine-Cognitive-Architecture- Component-failure-repurposing-database Coop-framework Cyclic-programming DIY-CNC Fractal-Compass-Atlas Fractal_Compass_Core Fulgerite-Antenna-Prototype- Geometric-to-Binary-Computational-Bridge GlyphAI HAAS Hardware-Store Inversion JinnZ2 Keystone-Codex Living-Intelligence-Database Logic-Ferret Logistics-Disparity-Sensor Mandala-Computing Mathematic-economics Municipal-Code-Translator Nexus-emergency-management Non-equilibrium-atmospheric-forcing Nuclear-Donut-DataCenter PatternBridge Permeable-intelligence-commons PhysicsGuard Plain-English-Translator Prosthetic-arm-CNC Regenerative-intelligence-core Resilience-hydrology-core Resilience Resilient-AI-Human-Collaboration- Rosetta-Shape-Core Seed-physics Study-on-Nazca-Lines Symbolic-Defense-Protocol Symbolic-sensor-suite SymbolicSentinel The-Curriculum-of-Everything-Earth- Universal-Redesign-Algorithm- Voice-Integrity-Module assumption_validator biomachine_ecology chain-position-detectability differential-frame-core electromagnetic-ocean-restoration fairmont-ecological-recovery hgai-geometric-systems infrastructure-assistance infrastructure-stability-model metabolic-accounting open-source-plastic-lab orbital-phycom planetary-conservation-framework resilience-indigenous-worldwide temporal-consciousness-playground thermodynamic-accountability-framework urban-resilience-sim |
+| 30 | 4 named branches | names not relayed | not run (no names) |
+
+Reading. For 28 and 30, the count of repos now carrying the branch (22, 4, 67) is larger than
+the count named for deletion (10, 3, 2). So either the deletions were not done in some repos,
+or the branch was pushed again afterward, or the named set is a different set from the one
+found here. The relayed text does not say which repos were named, so no branch in 28 or 30 can
+be read GONE or EXISTS per target repo. The per-repo done-test needs the work order's repo
+lists or the Manus report docs.
+
+done-test for "cleanup" (section 2): still not met. Items 24 + 25 and the stray now hold under
+the 18-name reading. 26, 27 and the 4 named in 30 are not run. 28 and 30 are not decidable per
+target repo.
+
+Observer slots: null.
