@@ -138,3 +138,9 @@ Owner: "Yes please" (2026-11-19) to building the M01 instrumentation: a schema, 
 **Criteria.** `studies/M01_CRITERIA.md`, sha256 `f194ecbcd991720b0ee1279531f5422035b6035505198aab63df0d58b2a5c467`. **Schema.** `studies/M01_SCHEMA.json`, sha256 `2e63b53a5085bed70b940a3232a10d144a93601f2e1ef8dcfb4612e9435a0f40`.
 
 **What M01 is.** A descriptive table of the three filed v2 readings' `slots_specific` choices, one record per reader, term and field, with every value's provenance marked (SCRIPT_DERIVED / CODER_INFERRED / READER_STATED / NOT_RECORDED) and no default anywhere. It is not a test of any hypothesis: the coder has seen all three readings. It changes no brief, packet, key, score, status or reading. Readings taken after this section can be coded the same way.
+
+---
+
+## Status note on amendment 1 (added 2026-11-19)
+
+`KEY_V2_AMENDMENT_1.md` (sha256 `2f881227942f06322b122a1890b4c5d814ab635e9eaf93adf36832dcd29baf74`, unchanged) still says in its line 3: "Status: proposed, on a branch, not merged. It takes effect when the owner has read it, it is merged, and its sha256 is recorded in `PREREG.md` before any further reading." All three conditions were met before the Kimi and GPT-6 readings: the owner decided its content (section "Key v2, amendment 1" above), it was merged in PR #318, and its sha256 is recorded above. **Amendment 1 is in force.** The line is left as written because the file is hashed; this note is the record of its status. A reader of the file alone can mistake it for a draft (the GPT-6 reader's instrumentation proposal did, reading the line correctly), so any packet or brief that cites the amendment should cite this note beside it.
