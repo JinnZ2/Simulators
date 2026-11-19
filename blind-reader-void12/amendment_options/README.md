@@ -9,8 +9,15 @@ Evidence for the choice of key v2 amendment 1. Nothing in this folder changes a 
 | `as_received/KEY_V2_AMENDMENT_1_DRAFT.md` | the earlier draft exactly as received, sha256 `b2805ea9e976d15a60bac23f0fd70e634f471d006bbe31ed20cf1d3208762598` |
 | `evidence/check_rules.py`, `check_rules_output.txt`, `.json` | applies the amendment's rule tests mechanically to the packet's own sources (numcheck records, cplay constructors, TAF coverage dictionaries) |
 | `evidence/build_candidates.py`, `build_candidates_stdout.txt`, `candidate_scores.txt`, `.json` | builds candidate keys on the patched key, scores the filed Claude-v2-A reading under each; the candidate key files are not kept |
+| `derive/derive_specific.py`, `derive_specific_output.txt`, `.json` | derives each term's `slots_specific` from the packet's sources by one stated rule (OPTIONS.md section 6), reads no key, compares with three keys afterwards, and runs three mutation checks |
 
-Re-running:
+Re-running the derivation (needs a formula-audit checkout whose `numcheck/check.py` matches the packet's; the script checks and stops if not; `COMPARE` is optional and names extra key files to compare with):
+
+```text
+FORMULA_AUDIT_DIR=<checkout> COMPARE="name=<path to a key json>" python3 derive/derive_specific.py
+```
+
+Re-running the rest:
 
 ```text
 # 1. the rule checks (formula-audit checkout whose numcheck/check.py has the same sha256 as the packet's; the script checks and stops if not)

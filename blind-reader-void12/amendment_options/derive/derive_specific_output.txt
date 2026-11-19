@@ -1,0 +1,46 @@
+derive_specific: slots_specific derived from the packet's sources; the rule is in the docstring of derive_specific.py
+sources: numcheck/check.py sha256 f6df0dc196f5ac27 ; unified_audit.py fcccb9af8d8edb01 ; expiry_register.py ddaf2cc5b6539df3 ; glossary.md 412ed3abf4c2a546
+keys compared: v2 (sha256 02500b81eea4), p1 (sha256 094ed953a75d), r1 (sha256 3e0266957b69)
+
+id   term                         derived                                          v2           p1           r1          
+-------------------------------------------------------------------------------------------------------------------------
+T01  fa:UNDECIDED                 []                                               same         same         same        
+T02  taf:ABSENT_AT_SENSITIVITY    ['value']                                        same         same         same        
+T03  cplay:VOID                   []                                               same         same         same        
+T04  cplay:ExpiryTrigger          ['kind', 'target', 'condition']                  same         same         same        
+T05  cplay:ABSENT_AT_SENSITIVITY  ['limit', 'basis', 'effect_size', 'conditions',  same         same         same        
+T06  cplay:UNRESOLVED             []                                               same         same         same        
+T07  fa:VOID                      []                                               same         same         same        
+T08  cplay:CRASHED                n/d (routes disagree)                            n/d = n/d    n/d = n/d    n/d = n/d   
+T09  taf:UNKNOWN                  n/d (routes disagree)                            n/d vs list  n/d = n/d    n/d = n/d   
+T10  taf:GAP_INSTRUMENT_CRASH     ['missing_path', 'error', 'exception_type']      DIFFERS      same         DIFFERS     
+T11  fa:HOLDS                     []                                               same         same         same        
+T12  cplay:UNKNOWN                ['triggers']                                     DIFFERS      same         same        
+T13  cplay:OK                     []                                               same         same         same        
+T14  cplay:CLOSED_WITHIN          ['basis', 'sigma']                               same         same         same        
+T15  taf:expiry_condition         ['instrument_class', 'sensitivity', 'protocol',  same         same         same        
+
+against key v2 : same 12, differs 2, undetermined on one side only 1 (of 15)
+against key p1 : same 15, differs 0, undetermined on one side only 0 (of 15)
+against key r1 : same 14, differs 1, undetermined on one side only 0 (of 15)
+
+detail where a term was not read off a single source
+  T01 fa:UNDECIDED: from 3 records; exclusive to the term but not on every instance of it: ['first_undecided_subbox.depth', 'first_undecided_subbox.differences', 'first_undecided_subbox.states', 'first_undecided_subbox.subbox', 'proposal.ai_interest', 'proposal.domain', 'proposal.evidence', 'proposal.fixed', 'proposal.human_interest', 'proposal.lhs', 'proposal.polynomial', 'proposal.proof', 'proposal.proof_attempted', 'proposal.rhs', 'proposal.source_check', 'proposal.status', 'proposal.units', 'proposal.why_not_proved']
+  T03 cplay:VOID: parameters ['state', 'reason'] ; set by the constructor from them (not slots): -
+  T04 cplay:ExpiryTrigger: parameters ['kind', 'target', 'condition'] ; set by the constructor from them (not slots): -
+  T05 cplay:ABSENT_AT_SENSITIVITY: parameters ['limit', 'basis', 'effect_size', 'conditions', 'ladder'] ; set by the constructor from them (not slots): ['covers_effect', 'reason']
+  T07 fa:VOID: from 3 records; exclusive to the term but not on every instance of it: -
+  T08 cplay:CRASHED: routes {"Reading fields a rule requires for CRASHED": ["exception", "path"], "parameters of crash()": ["exc", "path", "module", "inputs", "expiry_condition"]}
+  T09 taf:UNKNOWN: routes {"code: coverage entries of kind UNKNOWN, keys no other kind carries": [], "glossary: terms whose row text names an UNKNOWN slot": ["MIXED_UNKNOWN_AND_GAP_INSTRUMENT", "expiry_condition"]}
+  T10 taf:GAP_INSTRUMENT_CRASH: the section record exists exactly when the GAP status is assigned (one assignment, in the handler that builds it); missing_path is also the one coverage key no other kind carries
+      coverage literals (line, kind): [(336, 'GAP_INSTRUMENT_CRASH'), (348, "'UNKNOWN'"), (356, "'INFO'"), (365, "'UNKNOWN'")] ; GAP assigned or returned outside the handler at lines: none ; section keys: ['error', 'exception_type', 'missing_path']
+  T11 fa:HOLDS: from 2 records; exclusive to the term but not on every instance of it: -
+  T12 cplay:UNKNOWN: parameters ['reason', 'triggers'] ; set by the constructor from them (not slots): ['typed', 'untyped']
+  T14 cplay:CLOSED_WITHIN: fields whose removal makes reading() raise, per status: {"OK": [], "FAILED": ["reason"], "INDETERMINATE": ["reason"], "UNTESTED": ["reason"], "CRASHED": ["exception", "path"], "CLOSED_WITHIN": ["basis", "sigma"], "OUTSIDE_DOMAIN": ["bound"]}
+
+mutation checks (the rule must move when the evidence moves)
+  PASS M1 corpus whose only UNDECIDED record carries a proposal: T01 has the proposal fields: got (True, True) ; expected (True, True)
+  PASS M2 GAP status also returned outside the handler: T10 falls back to the coverage-entry key: got (['missing_path'], True) ; expected (['missing_path'], True)
+  PASS M3 a second status also requires sigma: T14 drops sigma: got ['basis'] ; expected ['basis']
+
+all mutation checks pass
