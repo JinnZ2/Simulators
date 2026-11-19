@@ -112,3 +112,35 @@ the 18-name reading. 26, 27 and the 4 named in 30 are not run. 28 and 30 are not
 target repo.
 
 Observer slots: null.
+
+## 4. Recheck (dated 2026-11-19, third pass)
+
+Items 24, 25 and the stray `archive/expiry-condition-stage1-test`: GONE per Manus (ls-remote,
+2026-11-19, relayed by the owner; Manus's five tables were not received in this session and are
+not filed). This repo's own run (section 3, rerun 2026-11-19T23:00:20Z, 82 repos, every call
+exit 0) agrees: the 18 TAF names and the stray are absent.
+
+Items 26-30, rerun 23:00:20Z, exact name with or without a `claude/` prefix:
+
+| item | branch | reading |
+|---|---|---|
+| 26 (Simulators x9), 27 (method-layer x8), 30 (+4 named) | names not received | not run |
+| 28 | `manus/wo11-current-main` | EXISTS in 22 repos (unchanged from 22:57Z) |
+| 29 | `tool-finder-pointer` | GONE in all 82 |
+| 30 | `claude/healing-folder-additions-u5aojl` | EXISTS in 4 repos |
+| 30 | `claude/clone-refspec-note` | EXISTS in 67 repos |
+
+Per-target-repo readings for 28 and 30 still need the repo lists (Manus's tables).
+
+Item 16, rechecked against TAF origin/main 16285cccdd48 (fetched --prune 2026-11-19):
+- #85 merged: yes. 16285cc is "Merge pull request #85 from JinnZ2/claude/unknown-axis-followup-2",
+  parents 3887eb4 and 51083ca.
+- 65bb724: not a valid object in the full TAF clone. The fold commit on #85's branch is 51083ca
+  ("Fold #84 into #85: ..."). 65bb724 may be an earlier SHA of that commit that was rewritten;
+  that is a reading, not observed.
+- `claude/unknown-axis-followup-2`: EXISTS, tip 51083ca (the merged head).
+- Also present: `claude/unknown-axis-followup` and `archive/unknown-axis-followup`, both a2c5d99.
+- Reading: the merge part of item 16 holds; "folded at 65bb724" does not resolve; the #85 head
+  branch was not deleted.
+
+Observer slots: null.
