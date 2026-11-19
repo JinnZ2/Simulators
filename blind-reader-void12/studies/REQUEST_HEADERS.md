@@ -66,6 +66,8 @@ RETURN: commits; for every changed definition the three claims kept apart: the s
 
 REVIEW-2 and AUDIT-2 use the REVIEW and AUDIT headers with the implementing commit named in READ. Whether their reader must differ from the implementer is open in `../MODE_SEQUENCE.md` (`[void]`).
 
+Note 2026-11-19: answered since in `../MODE_SEQUENCE.md`, "Later (2026-11-19)": REVIEW-2 requires a reader different from the implementer; AUDIT-2 is split by deterministic and judgment checks. The sentence above is kept as written.
+
 ## The baseline is not touched by any mode
 
 D0 is the brief unchanged. Each clarification is its own condition (`instructions/`). Past responses, scores and keys stay as filed. A new version gets a new hash and a changelog. Nothing in this file is sent to a blind reader except the BLIND header.
@@ -123,3 +125,87 @@ The open line in `../MODE_SEQUENCE.md` is answered by the owner's independence r
 ## Later (2026-11-19): standing rule for merge reports
 
 The owner's rule, 2026-11-19: every report of a merge carries the suite's counts line and the post-merge CI result, or marks each one NOT READ with the reason. The counts line is the line the suite prints for itself (for example `counts: ran N | passed N | skipped N | NOT_RUN N | failed N`). A local rerun can stand beside the CI result but does not replace it, and it is labelled local, with its interpreter and sibling commits. A run of `check_concept_map.py` or `build_finder.py` also carries its `sibling_state` line, since the NOT_CHECKED and QUOTE_NOT_CHECKED counts depend on which siblings were present.
+
+## Later (2026-11-19): the source text of the headers, by segment
+
+SOURCE: Kimi, 2026-11-19 11:46 (owner-stated). Items 1-7, with the header template, the definitions table, the open-row lines and the blind-reading request. The text blocks came as images in the reader's message and as text at its end; they follow the items here, in the order received. Filed verbatim from `as_received/mode_and_authority_2026-11-19.md`, lines 12-89 (line numbers as of the commit that added this section). The headers above were built from this text. If the reader is Kimi, its agreement with this text is recorded L0 (same actor).
+
+```text
+The biggest remaining gains are not more explanatory prose. They are fewer implicit choices about my role, the authoritative sources, and the decision rules.
+1. Tell me which mode I am in
+These are different tasks and should not share a reading context:
+ • Blind reader: produce a response from the packet alone.
+ • Confusion reviewer: report uncertainties without rewriting anything.
+ • Editor: improve wording.
+ • Coder/auditor: inspect or run instruments and tests.
+For a blind reading, use a fresh session with only the packet. My previous readings, confusion inventories, keys, scores, and repository discussions should not be visible.
+For an editorial review like my current session, say so explicitly and provide the commit.
+2. Identify the authoritative read set
+At the top of each request, state:
+￼
+This is especially useful where a hashed file intentionally contains stale status wording and PREREG.md supplies the current status.
+3. Put the operational definitions in one place
+A compact table would be more useful to me than additional surrounding narrative:
+￼
+The current M01/M02 work already moves strongly in this direction.
+4. Give examples only for boundary cases
+One neutral worked example for each difficult case is enough:
+ • A field present everywhere but populated only for the target.
+ • A documented-only field with no instances.
+ • Two records built beside one another.
+ • A wrapper around the term-bearing record.
+ • Two different records that both satisfy “own record.”
+ • An outer aggregate report.
+Ordinary cases need less explanation once the boundaries are pinned.
+5. Preserve the experimental baseline
+Do not clarify D0 retroactively if D0 is meant to measure interpretation of the original brief.
+Keep:
+ • D0 unchanged.
+ • Each experimental clarification in its own condition.
+ • Past responses, scores, and keys filed as received.
+ • New versions identified by new hashes and changelogs.
+For repository editing generally, separate “the source was ambiguous”, “the documentation is now revised”, and “the revised interpretation is correct.” Those are three different claims.
+6. Keep evidence status beside each open row
+For example:
+￼
+That prevents another reader’s agreement from being mistaken for independent evidence.
+7. For the next blind Kimi or GPT reading
+The cleanest request would be:
+￼
+For me specifically, “mode + exact read set + authority order + output contract” is the single most useful addition. It prevents me from silently switching between blind reading, interpretation, and editorial advice.
+
+MODE: editorial review
+READ: <exact paths>@<commit>
+AUTHORITATIVE WHEN FILES DISAGREE: <ordered list>
+DO NOT USE: <keys, prior readings, later commits, web, etc.>
+RETURN: <exact artifact or row format>
+CODE EXECUTION: <allowed / not allowed>
+
+
+| Concept | Exact decision rule | Boundary cases |
+|---|---|---|
+| TAG | Presence, applicability, requirement, or a stated combination | No instances; documented-only fields |
+| INDEPENDENCE | Raw input versus computed; treatment of constructor-only parameters | Renamed parameters; derived fields |
+| Populated | Explicit missing-value rule | `0`, `False`, empty collections, `"void"` |
+| Own record | How to identify it | T04, T06, T12, T15 |
+| Reporting path | Where traversal starts and stops | Outer reports; adjacent records; wrappers |
+| Nested record | Name only or open | Multiple nesting levels |
+
+CF02 | SOURCE_RUN_REQUIRED | numcheck + formula-audit checkout | OPEN
+CF08 | SECOND_CODER_REQUIRED | same quotes | OPEN
+CF17 | SECOND_CODER_REQUIRED | same quotes | OPEN
+
+
+MODE: blind reading
+READ: only the attached packet
+DO NOT USE: the repository, web, prior readings, keys, scores, or earlier sessions
+
+RETURN:
+1. The completed response template.
+2. A separate confusion inventory using the prescribed row format.
+
+Record guesses even if you later believe they were correct.
+Do not merge rows.
+Use void for unknown cells.
+If no confusion is found, say “none found” and list what you read.
+```
