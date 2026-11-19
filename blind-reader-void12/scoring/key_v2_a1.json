@@ -1,0 +1,526 @@
+{
+ "meta": {
+  "first_reader_module": "combined-playground/cplay/vocab_branches.py",
+  "first_reader_module_sha256": "30fe580e4e8b6b54ded496be420fe36b0260ce9f0707dae1f71c9f00d9a94f3f",
+  "simulators_head": "b5e8614bef123a445f247f69803e1fa4361eeed6",
+  "shuffle_seed": 20261118,
+  "n_terms": 15,
+  "n_pairs": 8,
+  "n_predicate_clusters": 9,
+  "v": "2-a1",
+  "key_v1_sha256": "5c1a6caba4e3b0f1bc7d1a93b8e2503158e343a67d58fae5c77fe91a710a500b",
+  "note": "slots_* = None means undetermined: scored as 'not determined', never as a match or a miss",
+  "key_v2_sha256": "c88a910a03a6456900efabd130c57a19f1a0133c9566ebce34ae0b6e813b18d1",
+  "scoring_rules": [
+   "N1",
+   "C1"
+  ],
+  "a1_changes": [
+   "T08.slots_specific",
+   "T09.slots_specific",
+   "T10.slots_specific",
+   "T12.slots_specific",
+   "pair key_tier_specific recomputed from the lists"
+  ],
+  "a1_rulings": {
+   "cplay:CRASHED": "instance = the Reading with status CRASHED",
+   "taf:UNKNOWN": "undetermined; packet unchanged"
+  },
+  "a1_carried_statement": "The key's slots_carried lists were derived from the record each term's source builds: for cplay terms by running the constructors and taking the record's fields (vars for plain objects, _fields for namedtuples); for numcheck and TAF terms by reading the record's keys in the source. Class attributes are not included. A reader who names a class attribute is scored as having an extra name."
+ },
+ "terms": {
+  "T10": {
+   "term_id": "taf:GAP_INSTRUMENT_CRASH",
+   "label": "GAP_INSTRUMENT_CRASH",
+   "cluster": 1,
+   "predicate": "a check raised; recorded on coverage, never severity",
+   "slots_specific": [
+    "missing_path",
+    "error"
+   ],
+   "slots_carried": [
+    "kind",
+    "module",
+    "input",
+    "reason",
+    "missing_path",
+    "expiry_condition"
+   ],
+   "derivation": "unified_audit.py builds one dictionary in the branch written for this term; its six keys. Same list for both meanings. | a1: the rule (TAG + INDEPENDENCE) on the section record built in the one handler that assigns the GAP status: missing_path, error. exception_type is a function of error (unified_audit.py 486-488) and is dropped. slots_carried is not changed by a1.",
+   "v1_slots_welded": [
+    "kind",
+    "module",
+    "input",
+    "reason",
+    "missing_path",
+    "expiry_condition"
+   ],
+   "v1_slots_from": "code: unified_audit.py lines 337-342"
+  },
+  "T08": {
+   "term_id": "cplay:CRASHED",
+   "label": "CRASHED",
+   "cluster": 1,
+   "predicate": "a check raised; recorded on coverage, never severity",
+   "slots_specific": [
+    "exception",
+    "path"
+   ],
+   "slots_carried": [
+    "field",
+    "status",
+    "reason",
+    "sigma",
+    "basis",
+    "exception",
+    "path",
+    "bound",
+    "kind",
+    "module",
+    "input",
+    "missing_path",
+    "expiry_condition"
+   ],
+   "derivation": "specific: undetermined. axes.crash(exc, *, path, module, inputs, expiry_condition) is written for CRASHED, but what it builds is the shared Reading plus a CoverageEntry, and the sources support reading 'specific' as the call's parameters or as CoverageEntry's fields. carried: fields of Reading and of CoverageEntry (reason once), checked by running crash(). | a1: instance of CRASHED = the Reading with status CRASHED (owner ruling 2026-11-19); the fields a rule requires for CRASHED and for no other status (axes.py 59-60): exception, path.",
+   "v1_slots_welded": [
+    "kind",
+    "module",
+    "input",
+    "reason",
+    "missing_path",
+    "expiry_condition"
+   ],
+   "v1_slots_from": "code: cplay axes.CoverageEntry (crash() fills it)"
+  },
+  "T09": {
+   "term_id": "taf:UNKNOWN",
+   "label": "UNKNOWN",
+   "cluster": 2,
+   "predicate": "value not yet known, held open with an exit",
+   "slots_specific": null,
+   "slots_carried": null,
+   "derivation": "specific: the glossary defines UNKNOWN as a status of a slot and names no fields for it. carried: undetermined; the register describes the expiry_condition and expiry_source that go beside an UNKNOWN slot but names no record that is built for UNKNOWN. | a1: undetermined (owner ruling 2026-11-19): the glossary defines UNKNOWN as a slot, the code builds a coverage entry, and the sources do not fix which is the instance; the packet is unchanged.",
+   "v1_slots_welded": [
+    "expiry_condition",
+    "instrument_class",
+    "sensitivity",
+    "protocol",
+    "provenance"
+   ],
+   "v1_slots_from": "code: expiry_register.py EXPIRY_KEYS"
+  },
+  "T12": {
+   "term_id": "cplay:UNKNOWN",
+   "label": "UNKNOWN",
+   "cluster": 2,
+   "predicate": "value not yet known, held open with an exit",
+   "slots_specific": [
+    "triggers"
+   ],
+   "slots_carried": [
+    "state",
+    "reason",
+    "typed",
+    "untyped"
+   ],
+   "derivation": "specific: parameters of tokens.unknown(reason, triggers). carried: instance fields of the Token it returns, checked by running it. The nested ExpiryTrigger objects held in 'typed' are not opened. | a1: the rule: reason is required by every non-verdict token (tokens.py), so it is not this term's alone; triggers is the parameter that is.",
+   "v1_slots_welded": [
+    "reason",
+    "triggers",
+    "kind",
+    "target",
+    "condition"
+   ],
+   "v1_slots_from": "declared: cplay tokens.unknown + ExpiryTrigger"
+  },
+  "T02": {
+   "term_id": "taf:ABSENT_AT_SENSITIVITY",
+   "label": "ABSENT_AT_SENSITIVITY",
+   "cluster": 3,
+   "predicate": "scoped absence: not found at a stated sensitivity",
+   "slots_specific": [
+    "value"
+   ],
+   "slots_carried": [
+    "value"
+   ],
+   "derivation": "the glossary and expiry_register.py write the notation ABSENT_AT_SENSITIVITY(<value>); the prose names instrument, sensitivity and protocol as what the value must state but writes no field list; no record holds the state today ('No slot holds it yet').",
+   "v1_slots_welded": [
+    "instrument_class",
+    "sensitivity",
+    "protocol"
+   ],
+   "v1_slots_from": "declared from the definition's three named slots"
+  },
+  "T05": {
+   "term_id": "cplay:ABSENT_AT_SENSITIVITY",
+   "label": "ABSENT_AT_SENSITIVITY",
+   "cluster": 3,
+   "predicate": "scoped absence: not found at a stated sensitivity",
+   "slots_specific": [
+    "limit",
+    "basis",
+    "effect_size",
+    "conditions",
+    "ladder"
+   ],
+   "slots_carried": [
+    "state",
+    "reason",
+    "limit",
+    "basis",
+    "effect_size",
+    "conditions",
+    "ladder",
+    "covers_effect"
+   ],
+   "derivation": "specific: parameters of tokens.absent_at_sensitivity. carried: instance fields of the Token it returns, checked by running it.",
+   "v1_slots_welded": [
+    "limit",
+    "basis",
+    "effect_size",
+    "conditions",
+    "ladder"
+   ],
+   "v1_slots_from": "code: cplay tokens.absent_at_sensitivity signature"
+  },
+  "T15": {
+   "term_id": "taf:expiry_condition",
+   "label": "expiry_condition",
+   "cluster": 4,
+   "predicate": "the exit of an open slot",
+   "slots_specific": [
+    "instrument_class",
+    "sensitivity",
+    "protocol",
+    "provenance"
+   ],
+   "slots_carried": [
+    "instrument_class",
+    "sensitivity",
+    "protocol",
+    "provenance"
+   ],
+   "derivation": "expiry_register.EXPIRY_KEYS; the register rejects any other key set.",
+   "v1_slots_welded": [
+    "instrument_class",
+    "sensitivity",
+    "protocol",
+    "provenance"
+   ],
+   "v1_slots_from": "code: expiry_register.py EXPIRY_KEYS"
+  },
+  "T04": {
+   "term_id": "cplay:ExpiryTrigger",
+   "label": "ExpiryTrigger",
+   "cluster": 4,
+   "predicate": "the exit of an open slot",
+   "slots_specific": [
+    "kind",
+    "target",
+    "condition"
+   ],
+   "slots_carried": [
+    "kind",
+    "target",
+    "condition"
+   ],
+   "derivation": "class ExpiryTrigger(kind, target, condition); instance fields the same.",
+   "v1_slots_welded": [
+    "kind",
+    "target",
+    "condition"
+   ],
+   "v1_slots_from": "code: cplay tokens.ExpiryTrigger"
+  },
+  "T07": {
+   "term_id": "fa:VOID",
+   "label": "VOID",
+   "cluster": 5,
+   "predicate": "the check could not be evaluated on these inputs",
+   "slots_specific": [],
+   "slots_carried": [
+    "kind",
+    "verdict",
+    "void_reason",
+    "status",
+    "deciding_tier",
+    "precision",
+    "rigorous",
+    "fast",
+    "tiers",
+    "triage",
+    "located",
+    "proposal",
+    "intervals",
+    "inputs",
+    "units",
+    "provenance",
+    "slots",
+    "human_interest",
+    "ai_interest",
+    "formula",
+    "bisection",
+    "formulas",
+    "subboxes",
+    "subboxes_where_both_hold",
+    "subboxes_where_one_fails",
+    "first_undecided_subbox",
+    "first_subbox_with_no_value"
+   ],
+   "derivation": "as fa:UNDECIDED: VOID is the verdict of _blank, which both check_point and check_intersection start from.",
+   "v1_slots_welded": [
+    "reason"
+   ],
+   "v1_slots_from": "declared"
+  },
+  "T03": {
+   "term_id": "cplay:VOID",
+   "label": "VOID",
+   "cluster": 6,
+   "predicate": "a value the spec leaves open, held with a reason",
+   "slots_specific": [],
+   "slots_carried": [
+    "state",
+    "reason"
+   ],
+   "derivation": "specific: no constructor or key list is written for VOID; tokens.py requires a reason on every non-verdict token, a rule shared by all of them. carried: Token(state, reason), which every VOID in the sources constructs.",
+   "v1_slots_welded": [
+    "reason"
+   ],
+   "v1_slots_from": "code: cplay tokens.Token"
+  },
+  "T01": {
+   "term_id": "fa:UNDECIDED",
+   "label": "UNDECIDED",
+   "cluster": 7,
+   "predicate": "an uncertain difference straddles a tolerance edge",
+   "slots_specific": [],
+   "slots_carried": [
+    "kind",
+    "verdict",
+    "void_reason",
+    "status",
+    "deciding_tier",
+    "precision",
+    "rigorous",
+    "fast",
+    "tiers",
+    "triage",
+    "located",
+    "proposal",
+    "intervals",
+    "inputs",
+    "units",
+    "provenance",
+    "slots",
+    "human_interest",
+    "ai_interest",
+    "formula",
+    "bisection",
+    "formulas",
+    "subboxes",
+    "subboxes_where_both_hold",
+    "subboxes_where_one_fails",
+    "first_undecided_subbox",
+    "first_subbox_with_no_value"
+   ],
+   "derivation": "specific: UNDECIDED is a verdict value of numcheck's result record; no class, function or key list is written for it (the symbols D and t in the docstring are inputs to the decision, not slots). carried: keys of the record built by check_point (_blank + formula + bisection) and by check_intersection (_blank + formulas + the five subbox keys); the docstring says UNDECIDED can end either check. Checked by running check_point on the pinned file.",
+   "v1_slots_welded": [
+    "D",
+    "t"
+   ],
+   "v1_slots_from": "declared"
+  },
+  "T06": {
+   "term_id": "cplay:UNRESOLVED",
+   "label": "UNRESOLVED",
+   "cluster": 7,
+   "predicate": "an uncertain difference straddles a tolerance edge",
+   "slots_specific": [],
+   "slots_carried": [
+    "field",
+    "token"
+   ],
+   "derivation": "specific: nothing is tied to UNRESOLVED alone (the guard-band inputs m, tol, U are inputs to the decision, not slots). carried: closure.FieldToken(field, token); the Token inside is a field's value and is not opened.",
+   "v1_slots_welded": [
+    "m",
+    "tol",
+    "U"
+   ],
+   "v1_slots_from": "declared: verdict_branch_G inputs"
+  },
+  "T11": {
+   "term_id": "fa:HOLDS",
+   "label": "HOLDS",
+   "cluster": 8,
+   "predicate": "a difference lies inside its tolerance",
+   "slots_specific": [],
+   "slots_carried": [
+    "kind",
+    "verdict",
+    "void_reason",
+    "status",
+    "deciding_tier",
+    "precision",
+    "rigorous",
+    "fast",
+    "tiers",
+    "triage",
+    "located",
+    "proposal",
+    "intervals",
+    "inputs",
+    "units",
+    "provenance",
+    "slots",
+    "human_interest",
+    "ai_interest",
+    "formula",
+    "bisection"
+   ],
+   "derivation": "as fa:UNDECIDED, point check only: check_intersection's own verdicts are not HOLDS (HOLDS appears there only for subboxes).",
+   "v1_slots_welded": [
+    "D",
+    "t"
+   ],
+   "v1_slots_from": "declared"
+  },
+  "T13": {
+   "term_id": "cplay:OK",
+   "label": "OK",
+   "cluster": 9,
+   "predicate": "a check ran and passed",
+   "slots_specific": [],
+   "slots_carried": [
+    "field",
+    "status",
+    "reason",
+    "sigma",
+    "basis",
+    "exception",
+    "path",
+    "bound"
+   ],
+   "derivation": "specific: OK needs no field beyond the shared record (axes.reading). carried: Reading(field, status, reason, sigma, basis, exception, path, bound), what axes.reading returns for OK.",
+   "v1_slots_welded": [],
+   "v1_slots_from": "declared: axes.reading OK carries no slot"
+  },
+  "T14": {
+   "term_id": "cplay:CLOSED_WITHIN",
+   "label": "CLOSED_WITHIN",
+   "cluster": 8,
+   "predicate": "a difference lies inside its tolerance",
+   "slots_specific": [
+    "sigma",
+    "basis"
+   ],
+   "slots_carried": [
+    "field",
+    "status",
+    "reason",
+    "sigma",
+    "basis",
+    "exception",
+    "path",
+    "bound"
+   ],
+   "derivation": "specific: axes.reading raises unless CLOSED_WITHIN has a numeric sigma >= 0 and a basis. carried: the shared Reading fields.",
+   "v1_slots_welded": [
+    "sigma",
+    "basis"
+   ],
+   "v1_slots_from": "code: axes.reading CLOSED_WITHIN"
+  }
+ },
+ "pairs": [
+  {
+   "left": "T10",
+   "right": "T08",
+   "pair_label": "GAP_INSTRUMENT_CRASH | CRASHED",
+   "key_tier": "MAPS",
+   "same_predicate": true,
+   "slots_equal": true,
+   "same_label": false,
+   "key_tier_specific": "PARTIAL",
+   "key_tier_carried": "PARTIAL"
+  },
+  {
+   "left": "T09",
+   "right": "T12",
+   "pair_label": "UNKNOWN | UNKNOWN",
+   "key_tier": "PARTIAL",
+   "same_predicate": true,
+   "slots_equal": false,
+   "same_label": true,
+   "key_tier_specific": null,
+   "key_tier_carried": null
+  },
+  {
+   "left": "T02",
+   "right": "T05",
+   "pair_label": "ABSENT_AT_SENSITIVITY | ABSENT_AT_SENSITIVITY",
+   "key_tier": "PARTIAL",
+   "same_predicate": true,
+   "slots_equal": false,
+   "same_label": true,
+   "key_tier_specific": "PARTIAL",
+   "key_tier_carried": "PARTIAL"
+  },
+  {
+   "left": "T15",
+   "right": "T04",
+   "pair_label": "expiry_condition | ExpiryTrigger",
+   "key_tier": "PARTIAL",
+   "same_predicate": true,
+   "slots_equal": false,
+   "same_label": false,
+   "key_tier_specific": "PARTIAL",
+   "key_tier_carried": "PARTIAL"
+  },
+  {
+   "left": "T07",
+   "right": "T03",
+   "pair_label": "VOID | VOID",
+   "key_tier": "HOMONYM",
+   "same_predicate": false,
+   "slots_equal": true,
+   "same_label": true,
+   "key_tier_specific": "HOMONYM",
+   "key_tier_carried": "HOMONYM"
+  },
+  {
+   "left": "T01",
+   "right": "T06",
+   "pair_label": "UNDECIDED | UNRESOLVED",
+   "key_tier": "PARTIAL",
+   "same_predicate": true,
+   "slots_equal": false,
+   "same_label": false,
+   "key_tier_specific": "MAPS",
+   "key_tier_carried": "PARTIAL"
+  },
+  {
+   "left": "T11",
+   "right": "T13",
+   "pair_label": "HOLDS | OK",
+   "key_tier": "NONE",
+   "same_predicate": false,
+   "slots_equal": false,
+   "same_label": false,
+   "key_tier_specific": "NONE",
+   "key_tier_carried": "NONE"
+  },
+  {
+   "left": "T11",
+   "right": "T14",
+   "pair_label": "HOLDS | CLOSED_WITHIN",
+   "key_tier": "PARTIAL",
+   "same_predicate": true,
+   "slots_equal": false,
+   "same_label": false,
+   "key_tier_specific": "PARTIAL",
+   "key_tier_carried": "PARTIAL"
+  }
+ ]
+}

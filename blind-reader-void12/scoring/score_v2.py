@@ -15,12 +15,50 @@ Reports, in this order:
 It does not combine the two meanings into one number, and it does not say which meaning is right. The tier rule is the first
 reader's (same cluster: MAPS if the two slot sets are equal, else PARTIAL; different clusters: HOMONYM if the labels are
 equal, else NONE); under 'specific' two terms that each have no tied fields have equal (empty) sets and so MAPS.
+
+Scoring rules a key may name in meta.scoring_rules (key_v2_a1.json names both; key_v2.json names none, so v2 output is
+unchanged byte for byte). Source: KEY_V2_AMENDMENT_1.md.
+  N1  before comparing slot names, strip one pair of surrounding < > and surrounding backticks (after strip + lowercase)
+  C1  per term, beside equal / differ, the set relation of reader to key: equal | reader-superset | reader-subset |
+      overlap | disjoint; a superset lists its extras. Reported beside the existing numbers; nothing is combined.
 """
 import argparse, itertools, json, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import score as S  # noqa: E402
 MEANINGS = ("specific", "carried")
+RULES = ("N1", "C1")
+RELATIONS = ("equal", "reader-superset", "reader-subset", "overlap", "disjoint")
+
+def rules_of(key):
+    r = tuple(key.get("meta", {}).get("scoring_rules", ()))
+    bad = [x for x in r if x not in RULES]
+    if bad:
+        raise ValueError("unknown scoring rule(s) in key: %s" % ", ".join(bad))
+    return r
+
+def norm_name(x, n1):
+    """The scorer's name comparison: strip + lowercase (as score.slotset); under N1 also one pair of <> and backticks."""
+    x = x.strip().lower()
+    if n1:
+        if len(x) >= 2 and x[0] == "`" and x[-1] == "`": x = x[1:-1].strip()
+        if len(x) >= 2 and x[0] == "<" and x[-1] == ">": x = x[1:-1].strip()
+    return x
+
+def nset(xs, n1):
+    return frozenset(norm_name(x, n1) for x in xs)
+
+def relation(r, q):
+    """C1: reader set r against key set q."""
+    if r == q: return "equal"
+    if r > q: return "reader-superset"
+    if r < q: return "reader-subset"
+    return "overlap" if r & q else "disjoint"
+
+def ntier(same, sa, sb, la, lb, n1):
+    if same:
+        return "MAPS" if nset(sa, n1) == nset(sb, n1) else "PARTIAL"
+    return "HOMONYM" if la == lb else "NONE"
 
 def validate(resp, key):
     errs = []
@@ -60,6 +98,7 @@ def validate(resp, key):
 
 def tiers_under(key, clusters, slots_of, m):
     """Tier of each declared pair given clusters and a {id: list or None} map; None if a needed list is undetermined."""
+    n1 = "N1" in rules_of(key)
     out = []
     for p in key["pairs"]:
         a, b = p["left"], p["right"]
@@ -68,10 +107,12 @@ def tiers_under(key, clusters, slots_of, m):
         if same and (sa is None or sb is None):
             out.append(None)
         else:
-            out.append(S.tier(same, sa or [], sb or [], key["terms"][a]["label"], key["terms"][b]["label"]))
+            out.append(ntier(same, sa or [], sb or [], key["terms"][a]["label"], key["terms"][b]["label"], n1))
     return out
 
 def score(resp, key):
+    rules = rules_of(key)
+    n1, c1 = "N1" in rules, "C1" in rules
     ids = sorted(key["terms"])
     cl = {i: str(resp["terms"][i]["cluster"]).strip() for i in ids}
     kc = {i: key["terms"][i]["cluster"] for i in ids}
@@ -88,6 +129,8 @@ def score(resp, key):
            "term_pairs": {"both_join": tp, "reader_only": fp, "key_only": fn, "neither": tn, "total": tp + fp + fn + tn},
            "ari": round(S.ari([cl[i] for i in ids], [kc[i] for i in ids]), 3), "term_pair_differences": diff,
            "clusters_reader": len(set(cl.values())), "clusters_key": len(set(kc.values())), "meanings": {}, "flags": []}   # flags: reserved, empty
+    if rules:
+        out["key_version"] = key["meta"].get("v"); out["scoring_rules"] = list(rules)
     single = {i: "s" + i for i in ids}
     label = {i: key["terms"][i]["label"] for i in ids}
     for m in MEANINGS:
@@ -108,22 +151,30 @@ def score(resp, key):
             base[name] = sum(1 for a, b in zip(t, ktier) if b is not None and a == b)
         srows = []
         for i in ids:
-            r = S.slotset(rslots[i])
+            r = nset(rslots[i], n1)
             if kslots[i] is None:
-                srows.append({"id": i, "label": key["terms"][i]["label"], "status": "n/d", "missing": [], "extra": sorted(r), "reader_basis": resp["terms"][i]["slots_%s_basis" % m]})
+                row = {"id": i, "label": key["terms"][i]["label"], "status": "n/d", "missing": [], "extra": sorted(r), "reader_basis": resp["terms"][i]["slots_%s_basis" % m]}
+                if c1: row["relation"] = "n/d"
+                srows.append(row)
                 continue
-            q = S.slotset(kslots[i])
-            srows.append({"id": i, "label": key["terms"][i]["label"], "status": "equal" if r == q else "differ",
-                          "missing": sorted(q - r), "extra": sorted(r - q), "reader_basis": resp["terms"][i]["slots_%s_basis" % m]})
+            q = nset(kslots[i], n1)
+            row = {"id": i, "label": key["terms"][i]["label"], "status": "equal" if r == q else "differ",
+                   "missing": sorted(q - r), "extra": sorted(r - q), "reader_basis": resp["terms"][i]["slots_%s_basis" % m]}
+            if c1: row["relation"] = relation(r, q)
+            srows.append(row)
         sdet = [s for s in srows if s["status"] != "n/d"]
         out["meanings"][m] = {"pairs": rows, "tier_agree": k, "n_determined": n, "n_pairs": len(rows),
                               "cp95": [round(lo, 3), round(hi, 3)], "baselines": base, "slots": srows,
                               "slots_equal": sum(s["status"] == "equal" for s in sdet), "slots_determined": len(sdet)}
+        if c1:
+            out["meanings"][m]["relations"] = {k2: sum(s["relation"] == k2 for s in sdet) for k2 in RELATIONS}
     return out
 
 def render(o):
     L = ["reader %s | %s | %s | blindness: %s %s" % (o["reader_label"], o["model_family"], o["date_utc"], o["blind_status"],
                                                       ("(also declared: %s)" % ", ".join(o["attestation_flags"])) if o["attestation_flags"] else "")]
+    if o.get("scoring_rules"):
+        L.append("key %s | scoring rules %s (KEY_V2_AMENDMENT_1.md)" % (o["key_version"], ", ".join(o["scoring_rules"])))
     t = o["term_pairs"]
     L += ["", "grouping (independent of slots): all %d term pairs: both join %d, reader only %d, key only %d, neither %d; adjusted Rand index %.3f; clusters reader %d, key %d"
           % (t["total"], t["both_join"], t["reader_only"], t["key_only"], t["neither"], o["ari"], o["clusters_reader"], o["clusters_key"])]
@@ -138,9 +189,12 @@ def render(o):
                                                   "" if r["agree"] is None else ("agree" if r["agree"] else "DIFFER")))
         L.append("references under this key: nothing grouped %d, label-only %d (of %d determined)" % (x["baselines"]["singletons"], x["baselines"]["label_only"], x["n_determined"]))
         L.append("slot sets equal to the key's: %d of %d determined" % (x["slots_equal"], x["slots_determined"]))
+        if "relations" in x:
+            L.append("set relation, reader to key (C1, beside the count above): " + ", ".join("%s %d" % (k2, x["relations"][k2]) for k2 in RELATIONS))
         for s in x["slots"]:
             if s["status"] == "equal": continue
-            L.append("   %s %-24s %-6s missing %s extra %s" % (s["id"], s["label"], s["status"], s["missing"] or "-", s["extra"] or "-") if s["status"] == "differ"
+            rel = (" [%s]" % s["relation"]) if "relation" in s and s["status"] == "differ" else ""
+            L.append("   %s %-24s %-6s missing %s extra %s%s" % (s["id"], s["label"], s["status"], s["missing"] or "-", s["extra"] or "-", rel) if s["status"] == "differ"
                      else "   %s %-24s n/d (key undetermined); reader gave %s" % (s["id"], s["label"], s["extra"] or "[]"))
     if o["flags"]:
         L += ["", "flags:"] + ["   " + f for f in o["flags"]]

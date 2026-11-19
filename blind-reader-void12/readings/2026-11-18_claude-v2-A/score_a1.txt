@@ -1,0 +1,56 @@
+reader Claude-v2-A | claude-opus-5-5 (the identifier this session is configured with; the model serving this turn was not separately verified) | 2026-11-18 | blindness: UNCERTAIN (also declared: q5_used_anything_outside_packet, q6_prior_sessions_about_this_project)
+key 2-a1 | scoring rules N1, C1 (KEY_V2_AMENDMENT_1.md)
+
+grouping (independent of slots): all 105 term pairs: both join 5, reader only 1, key only 1, neither 98; adjusted Rand index 0.823; clusters reader 9, key 9
+   reader joins, key does not: T11 T13
+   key joins, reader does not: T11 T14
+
+=== slots_specific ===
+declared pairs: 4 of 7 determined agree with the key (Clopper-Pearson 95%: 0.184 to 0.901); 1 pair(s) n/d
+pair                                           reader   key      first reading's declared tier
+GAP_INSTRUMENT_CRASH | CRASHED                 PARTIAL  PARTIAL  MAPS     agree
+UNKNOWN | UNKNOWN                              PARTIAL  n/d      PARTIAL  
+ABSENT_AT_SENSITIVITY | ABSENT_AT_SENSITIVITY  PARTIAL  PARTIAL  PARTIAL  agree
+expiry_condition | ExpiryTrigger               PARTIAL  PARTIAL  PARTIAL  agree
+VOID | VOID                                    HOMONYM  HOMONYM  HOMONYM  agree
+UNDECIDED | UNRESOLVED                         PARTIAL  MAPS     PARTIAL  DIFFER
+HOLDS | OK                                     MAPS     NONE     NONE     DIFFER
+HOLDS | CLOSED_WITHIN                          NONE     PARTIAL  PARTIAL  DIFFER
+references under this key: nothing grouped 2, label-only 2 (of 7 determined)
+slot sets equal to the key's: 8 of 14 determined
+set relation, reader to key (C1, beside the count above): equal 8, reader-superset 6, reader-subset 0, overlap 0, disjoint 0
+   T01 UNDECIDED                differ missing - extra ['first_straddling_piece', 'first_undecided_subbox', 'proposal', 'straddle_at_depth_limit', 'undecided_at_depth_limit'] [reader-superset]
+   T05 ABSENT_AT_SENSITIVITY    differ missing - extra ['covers_effect'] [reader-superset]
+   T07 VOID                     differ missing - extra ['first_subbox_with_no_value', 'void_reason'] [reader-superset]
+   T08 CRASHED                  differ missing - extra ['call', 'inputs'] [reader-superset]
+   T09 UNKNOWN                  n/d (key undetermined); reader gave ['expiry_condition', 'expiry_source']
+   T10 GAP_INSTRUMENT_CRASH     differ missing - extra ['exception_type'] [reader-superset]
+   T12 UNKNOWN                  differ missing - extra ['typed', 'untyped'] [reader-superset]
+
+=== slots_carried ===
+declared pairs: 5 of 7 determined agree with the key (Clopper-Pearson 95%: 0.290 to 0.963); 1 pair(s) n/d
+pair                                           reader   key      first reading's declared tier
+GAP_INSTRUMENT_CRASH | CRASHED                 PARTIAL  PARTIAL  MAPS     agree
+UNKNOWN | UNKNOWN                              PARTIAL  n/d      PARTIAL  
+ABSENT_AT_SENSITIVITY | ABSENT_AT_SENSITIVITY  PARTIAL  PARTIAL  PARTIAL  agree
+expiry_condition | ExpiryTrigger               PARTIAL  PARTIAL  PARTIAL  agree
+VOID | VOID                                    HOMONYM  HOMONYM  HOMONYM  agree
+UNDECIDED | UNRESOLVED                         PARTIAL  PARTIAL  PARTIAL  agree
+HOLDS | OK                                     PARTIAL  NONE     NONE     DIFFER
+HOLDS | CLOSED_WITHIN                          NONE     PARTIAL  PARTIAL  DIFFER
+references under this key: nothing grouped 2, label-only 2 (of 7 determined)
+slot sets equal to the key's: 2 of 14 determined
+set relation, reader to key (C1, beside the count above): equal 2, reader-superset 11, reader-subset 1, overlap 0, disjoint 0
+   T01 UNDECIDED                differ missing - extra ['counts', 'input', 'proposals', 'records', 'tool'] [reader-superset]
+   T02 ABSENT_AT_SENSITIVITY    differ missing ['value'] extra - [reader-subset]
+   T03 VOID                     differ missing - extra ['branches', 'case', 'complete', 'floor', 'g_differs', 'g_pre', 'k', 'm', 'sigma', 'split', 'split_abc', 'split_af', 'split_live', 'sys', 'tol'] [reader-superset]
+   T04 ExpiryTrigger            differ missing - extra ['is_exit'] [reader-superset]
+   T06 UNRESOLVED               differ missing - extra ['branches', 'case', 'complete', 'floor', 'g_differs', 'g_pre', 'k', 'm', 'sigma', 'split', 'split_abc', 'split_af', 'split_live', 'sys', 'tol'] [reader-superset]
+   T07 VOID                     differ missing - extra ['counts', 'input', 'proposals', 'records', 'tool'] [reader-superset]
+   T09 UNKNOWN                  n/d (key undetermined); reader gave ['class', 'cls', 'coverage', 'coverage_by_kind', 'coverage_count', 'exit', 'expiry', 'expiry_condition', 'input', 'kind', 'line', 'module', 'modules_run', 'modules_skipped', 'not_determinable_reason', 'note', 'overall_status', 'path', 'quote', 'reason', 'red_flags', 'sections', 'severity', 'sid', 'slot id', 'summary', 'system_id']
+   T10 GAP_INSTRUMENT_CRASH     differ missing - extra ['coverage', 'coverage_by_kind', 'coverage_count', 'error', 'exception_type', 'modules_run', 'modules_skipped', 'not_determinable_reason', 'overall_status', 'red_flags', 'sections', 'severity', 'summary', 'system_id'] [reader-superset]
+   T11 HOLDS                    differ missing - extra ['counts', 'input', 'proposals', 'records', 'tool'] [reader-superset]
+   T12 UNKNOWN                  differ missing - extra ['expiry_condition', 'input', 'kind', 'missing_path', 'module'] [reader-superset]
+   T13 OK                       differ missing - extra ['branches', 'case', 'complete', 'floor', 'g_differs', 'g_pre', 'k', 'm', 'split', 'split_abc', 'split_af', 'split_live', 'state', 'sys', 'tol'] [reader-superset]
+   T14 CLOSED_WITHIN            differ missing - extra ['branches', 'case', 'complete', 'floor', 'g_differs', 'g_pre', 'k', 'm', 'split', 'split_abc', 'split_af', 'split_live', 'sys', 'tol'] [reader-superset]
+   T15 expiry_condition         differ missing - extra ['class', 'cls', 'exit', 'expiry', 'expiry_condition', 'input', 'kind', 'line', 'missing_path', 'module', 'note', 'path', 'pr77', 'pr78', 'quote', 'reason', 'sid', 'slot id'] [reader-superset]

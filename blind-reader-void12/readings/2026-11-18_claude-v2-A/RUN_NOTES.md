@@ -39,3 +39,17 @@ It could not start a fresh conversation. It worked inside an existing Claude Cod
 ## Key issues raised by this reading (open; no change made)
 
 `key_v2.json` is as pre-registered. Any change is a dated amendment with its own hash, made so as not to depend on any one reader's answer. Candidate amendments, for the owner to decide: (a) state the depth for `slots_carried` in the brief, in a v2.1, and say which wrappers count; (b) re-derive `slots_specific` for `GAP_INSTRUMENT_CRASH` by the brief's own rule; (c) accept `<value>` and `value` as the same name for T02; (d) decide whether derived attributes count as fields. (a) changes what readers are asked, so a v2.1 reader cannot be pooled with v2 readers; (b) to (d) change only the key.
+
+## Scored again under key v2 amendment 1 (added 2026-11-19; `score_a1.txt` and `score_a1.json` beside `score.txt` and `score.json`)
+Key v2 and the scorer's v2 output are unchanged and byte-identical to the filed score. Under key a1 (`KEY_V2_AMENDMENT_1.md`, hashes in `PREREG.md`):
+
+| | key v2 | key a1 |
+|---|---|---|
+| `slots_specific` declared pairs agreeing with the key | 4 of 7 determined | 4 of 7 determined (GAP_INSTRUMENT_CRASH | CRASHED is now determined and agrees; UNKNOWN | UNKNOWN is now n/d) |
+| `slots_specific` slot sets equal to the key's | 7 of 14 | 8 of 14 |
+| set relation of the six unequal `specific` lists (C1) | not reported | all six reader-superset (extras only, nothing missing): T01, T05, T07, T08 (`call`, `inputs`), T10 (`exception_type`), T12 (`typed`, `untyped`) |
+| `slots_carried` | 5 of 7 pairs; 2 of 14 sets equal | unchanged (carried lists are not amended); relations: equal 2, reader-superset 11, reader-subset 1 |
+| grouping (adjusted Rand index) | 0.823 | 0.823 (grouping key is not amended) |
+| label-only baseline, `specific` | 3 of 7 | 2 of 7 (the UNKNOWN pair left the determined set) |
+
+How to read this. The only gain in equal sets is T02, from N1 (`<value>` against `value`); T10 and T12 moved toward this reader without becoming equal, T08 went from n/d to a list the reader's list contains, and T09 went from a miss to n/d. Three of the changes answer points this reader raised above (items 1, 2 and 3 of "Key issues raised by this reading": T10, T09, and `<value>` through N1); item 4 (`covers_effect`) is not changed by a1, and the T08 and T12 changes were not raised by this reader. The rule was written after this reading had been scored. So the second score is not evidence that a1 is right. It shows what moved. A reading from another family, made after the amendment is merged, is the first that is independent of it.
