@@ -2,6 +2,7 @@
 
   python3 validate.py m01 path/to/records.json     (a JSON list, as m01_code.py writes)
   python3 validate.py m02 path/to/sessions.json    (a JSON list of M02 sessions, each with a "records" list)
+  python3 validate.py --arm=rule_on m01 ...        the GPT-6 proposal's rule as an analysis arm (default --arm=rule_off)
 
 Rules (M01_EXTENSION.md section 3; M02_CRITERIA.md section 4):
   - every enum value is checked against the schema files, so the schema and the validator cannot drift apart;
@@ -19,7 +20,45 @@ load = lambda name: json.load(open(os.path.join(STUDIES, name), encoding="utf-8"
 def _enum(spec):
     return spec.get("enum", spec.get("items", {}).get("enum"))
 
-def m01_errors(recs):
+ARMS = ("rule_off", "rule_on")
+
+def tag_by(x, reading):
+    """TAG as a reading of the source half: 'presence' (the key is on every instance of the term and on no other),
+    'applicability' (populated on every instance of the term and on no other), or 'a1_defined' (key a1's own TAG: present OR
+    required on every instance and on no other). None is chosen here."""
+    src = x["source"]
+    if reading == "a1_defined":
+        # KEY_V2_AMENDMENT_1.md / derive_specific.py: "defined" = a declared parameter, a key present, or a field a rule
+        # requires; TAG = defined on every instance of the term and on no other. Coder's mapping onto the three scopes.
+        if src["origin"] == "DOCUMENTED": return "UNRESOLVED"
+        return "YES" if "ALL_EXCLUSIVE" in (src["presence_scope"], src["requirement_scope"]) else "NO"
+    scope = src["presence_scope" if reading == "presence" else "applicability_scope"]
+    if scope in ("UNKNOWN", "NO_INSTANCE"): return "UNRESOLVED"
+    return "YES" if scope == "ALL_EXCLUSIVE" else "NO"
+
+def independence_of(x):
+    o = x["source"]["origin"]
+    return {"RAW_INPUT": "YES", "PARAMETER_ONLY": "YES", "COMPUTED": "NO"}.get(o, "UNRESOLVED")
+
+def gpt_rule_errors(recs, reading="a1_defined"):
+    """The GPT-6 proposal's validator rule, kept as an arm (rule_on) instead of deleted: a LISTED field must have TAG = YES and
+    INDEPENDENCE = YES. TAG and INDEPENDENCE are read off the source half (the proposal asked readers for them; D0 readers
+    were never asked), so under rule_on a reader is 'invalid' whenever its listing disagrees with that reading of the rule."""
+    err = []
+    for x in recs:
+        if x["reader"]["listed"] == "LISTED":
+            t, i = tag_by(x, reading), independence_of(x)
+            if not (t == "YES" and i == "YES"):
+                err.append("rule_on: %s %s %s listed with TAG=%s INDEPENDENCE=%s" % (x["reader_id"], x["term_id"], x["field"], t, i))
+    return err
+
+def m01_errors(recs, arm="rule_off"):
+    if arm not in ARMS:
+        raise ValueError("arm must be one of %r" % (ARMS,))
+    base = m01_structural_errors(recs)
+    return base + (gpt_rule_errors(recs) if arm == "rule_on" and not base else [])
+
+def m01_structural_errors(recs):
     s = load("M01_SCHEMA.json")["fields"]
     sk, rk = s["source"]["keys"], s["reader"]["keys"]
     err = []
@@ -83,11 +122,16 @@ def m02_errors(sessions):
     return err
 
 def main(argv):
-    if len(argv) != 2 or argv[0] not in ("m01", "m02"):
+    arm = "rule_off"
+    if argv and argv[0].startswith("--arm="):
+        arm = argv[0].split("=", 1)[1]; argv = argv[1:]
+    if len(argv) != 2 or argv[0] not in ("m01", "m02") or arm not in ARMS:
         print(__doc__); return 2
     data = json.load(open(argv[1], encoding="utf-8"))
-    errs = (m01_errors if argv[0] == "m01" else m02_errors)(data)
-    print("%s: %d item(s), %d structural error(s)" % (argv[0], len(data) if isinstance(data, list) else 0, len(errs)))
+    errs = m01_errors(data, arm) if argv[0] == "m01" else m02_errors(data)
+    n_rule = sum(1 for e in errs if e.startswith("rule_on:"))
+    print("%s: %d item(s), %d structural error(s)%s" % (argv[0], len(data) if isinstance(data, list) else 0, len(errs) - n_rule,
+          (", %d rule_on rejection(s) (analysis arm, TAG read as key a1 defines it)" % n_rule) if arm == "rule_on" else ""))
     for e in errs: print("  " + e)
     return 1 if errs else 0
 

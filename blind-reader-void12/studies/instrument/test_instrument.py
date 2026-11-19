@@ -115,5 +115,25 @@ class M02Validator(unittest.TestCase):
         s = session(); s["records"][0]["nested_field_refs"] = {"a": "NOWHERE"}
         self.assertTrue(V.m02_errors([s]))
 
+class Arms(unittest.TestCase):
+    def test_rule_off_is_the_default_and_finds_no_error(self):
+        self.assertEqual(V.m01_errors(M01_RECORDS), [])
+        self.assertEqual(V.m01_errors(M01_RECORDS, "rule_off"), [])
+    def test_rule_on_rejects_the_filed_covers_effect_listings(self):
+        errs = V.m01_errors(M01_RECORDS, "rule_on")
+        self.assertEqual(len([e for e in errs if "covers_effect" in e]), 3)
+    def test_unknown_arm_refused(self):
+        with self.assertRaises(ValueError):
+            V.m01_errors(M01_RECORDS, "rule_maybe")
+    def test_both_tag_readings_on_every_record(self):
+        for x in M01_RECORDS:
+            self.assertIn(V.tag_by(x, "presence"), ("YES", "NO", "UNRESOLVED"))
+            self.assertIn(V.tag_by(x, "applicability"), ("YES", "NO", "UNRESOLVED"))
+        vr = [x for x in M01_RECORDS if x["field"] == "void_reason"]
+        self.assertTrue(all(V.tag_by(x, "presence") == "NO" and V.tag_by(x, "applicability") == "YES" for x in vr))
+    def test_arms_report_reproduces(self):
+        import arms
+        self.assertEqual(arms.report(), open(os.path.join(HERE, "arms_report.txt"), encoding="utf-8").read())
+
 if __name__ == "__main__":
     unittest.main()

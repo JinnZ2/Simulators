@@ -1,0 +1,66 @@
+arms.py on studies/m01_records.json (111 records, 3 readers, condition D0)
+
+1. validator arms
+
+   rule_off (as adopted)                  structural errors: 0
+   rule_on, TAG read by a1_defined          records rejected: 33   (claude 16 of 35 listed, kimi 12 of 31 listed, gpt6 5 of 21 listed)
+   rule_on, TAG read by presence            records rejected: 47   (claude 21 of 35 listed, kimi 17 of 31 listed, gpt6 9 of 21 listed)
+   rule_on, TAG read by applicability       records rejected: 52   (claude 23 of 35 listed, kimi 19 of 31 listed, gpt6 10 of 21 listed)
+
+   self-check: TAG = a1_defined and INDEPENDENCE reproduce key a1 on the catalog fields: NO, 1 field(s) differ: T02 value
+
+   rule_on rejections by field (TAG by a1_defined / presence / applicability):
+
+   T01  first_straddling_piece      by claude            TAG d=NO  p=NO  a=NO  IND=NO  rejected under: all three
+   T01  first_undecided_subbox      by claude,kimi       TAG d=NO  p=NO  a=NO  IND=NO  rejected under: all three
+   T01  proposal                    by claude,kimi       TAG d=NO  p=NO  a=NO  IND=NO  rejected under: all three
+   T01  straddle_at_depth_limit     by claude            TAG d=NO  p=NO  a=NO  IND=NO  rejected under: all three
+   T01  undecided_at_depth_limit    by claude            TAG d=NO  p=NO  a=NO  IND=NO  rejected under: all three
+   T02  value                       by claude,kimi       TAG d=UNR p=UNR a=UNR IND=UNR rejected under: all three
+   T05  covers_effect               by claude,kimi,gpt6  TAG d=YES p=YES a=YES IND=NO  rejected under: all three
+   T05  ladder                      by claude,kimi,gpt6  TAG d=YES p=YES a=NO  IND=YES rejected under: applicability
+   T07  first_subbox_with_no_value  by claude,kimi       TAG d=NO  p=NO  a=NO  IND=NO  rejected under: all three
+   T07  void_reason                 by claude,kimi,gpt6  TAG d=NO  p=NO  a=YES IND=YES rejected under: a1_defined, presence
+   T08  call                        by claude            TAG d=UNR p=UNR a=UNR IND=UNR rejected under: all three
+   T08  exc                         by kimi              TAG d=NO  p=NO  a=NO  IND=YES rejected under: all three
+   T08  exception                   by claude,kimi,gpt6  TAG d=YES p=NO  a=NO  IND=YES rejected under: presence, applicability
+   T08  inputs                      by claude,kimi,gpt6  TAG d=NO  p=NO  a=NO  IND=YES rejected under: all three
+   T08  path                        by claude,kimi,gpt6  TAG d=YES p=NO  a=NO  IND=YES rejected under: presence, applicability
+   T09  expiry_condition            by claude            TAG d=NO  p=NO  a=NO  IND=YES rejected under: all three
+   T09  expiry_source               by claude            TAG d=UNR p=UNR a=UNR IND=UNR rejected under: all three
+   T10  exception_type              by claude,kimi       TAG d=YES p=YES a=YES IND=NO  rejected under: all three
+   T10  missing_path                by claude,kimi       TAG d=YES p=YES a=NO  IND=YES rejected under: applicability
+   T12  triggers                    by claude,kimi       TAG d=YES p=NO  a=NO  IND=YES rejected under: presence, applicability
+   T12  typed                       by claude,kimi,gpt6  TAG d=YES p=YES a=YES IND=NO  rejected under: all three
+   T12  untyped                     by claude,kimi,gpt6  TAG d=YES p=YES a=NO  IND=NO  rejected under: all three
+   T14  basis                       by claude,kimi,gpt6  TAG d=YES p=NO  a=NO  IND=YES rejected under: presence, applicability
+   T14  sigma                       by claude,kimi,gpt6  TAG d=YES p=NO  a=NO  IND=YES rejected under: presence, applicability
+   T15  instrument                  by kimi              TAG d=NO  p=NO  a=NO  IND=YES rejected under: all three
+   T15  sensitivity                 by claude,kimi,gpt6  TAG d=YES p=YES a=NO  IND=YES rejected under: applicability
+
+2. TAG under two readings, every record
+
+   records: 111 ; divergent: 15 ; agree: 96
+
+   divergent records (reader, term, field: presence -> applicability ; a1_defined ; reader listed ; key a1):
+
+   claude T05  ladder                      YES        -> NO          a1 YES  LISTED     key a1 LISTED
+   claude T07  void_reason                 NO         -> YES         a1 NO   LISTED     key a1 NOT_LISTED  [coder]
+   claude T10  missing_path                YES        -> NO          a1 YES  LISTED     key a1 LISTED
+   claude T12  untyped                     YES        -> NO          a1 YES  LISTED     key a1 NOT_LISTED
+   claude T15  sensitivity                 YES        -> NO          a1 YES  LISTED     key a1 LISTED
+   kimi   T05  ladder                      YES        -> NO          a1 YES  LISTED     key a1 LISTED
+   kimi   T07  void_reason                 NO         -> YES         a1 NO   LISTED     key a1 NOT_LISTED  [coder]
+   kimi   T10  missing_path                YES        -> NO          a1 YES  LISTED     key a1 LISTED
+   kimi   T12  untyped                     YES        -> NO          a1 YES  LISTED     key a1 NOT_LISTED
+   kimi   T15  sensitivity                 YES        -> NO          a1 YES  LISTED     key a1 LISTED
+   gpt6   T05  ladder                      YES        -> NO          a1 YES  LISTED     key a1 LISTED
+   gpt6   T07  void_reason                 NO         -> YES         a1 NO   LISTED     key a1 NOT_LISTED  [coder]
+   gpt6   T10  missing_path                YES        -> NO          a1 YES  NOT_LISTED key a1 LISTED
+   gpt6   T12  untyped                     YES        -> NO          a1 YES  LISTED     key a1 NOT_LISTED
+   gpt6   T15  sensitivity                 YES        -> NO          a1 YES  LISTED     key a1 LISTED
+
+   distinct fields divergent: 5 (T05 ladder, T07 void_reason, T10 missing_path, T12 untyped, T15 sensitivity)
+   (the readings are properties of the source, so each divergent field appears once per reader)
+
+Neither reading is chosen; which reading TAG uses is the owner's definition.
