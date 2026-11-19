@@ -53,6 +53,8 @@ For a reader who has only the reports. Paths are relative to `blind-reader-void1
 | rule_on / rule_off | the GPT-6 proposal's validator rule applied as an analysis arm / the instrument as adopted | `studies/instrument/validate.py`, `arms.py` |
 | known-answer fixtures (KA) | synthetic cases with stipulated answers, testing the instrument, deciding no real case; neutral names | `studies/instrument/fixtures/` |
 | KA-07 | the fixture case for presence vs applicability; "the term" there is the fixture's own synthetic target, not a T-numbered term | `studies/instrument/fixtures/m01_known_answer.json` |
+| mode / stage | BLIND, REVIEW, AUDIT, SUGGEST, IMPLEMENT, REVIEW-2, AUDIT-2; one per request, named in its header; authority sits in the mode, not in a person or a model | `MODE_SEQUENCE.md`; headers in `studies/REQUEST_HEADERS.md` |
+| evidence status | what kind of evidence can close a confusion row (SOURCE_RUN_REQUIRED, SECOND_CODER_REQUIRED, DEFINITION_REQUIRED, ...); another reader's agreement is not one | `studies/OPEN_ROWS.md` |
 | confusion record | one row per point a reader was unsure, guessed or stopped | `studies/CONFUSION_TEMPLATE.md`; records in `studies/confusion/` |
 
 ## Id families (so ids from different sources are not mixed up)

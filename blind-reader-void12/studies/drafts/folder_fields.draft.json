@@ -391,7 +391,7 @@
     "unitaudit"
    ],
    "claim_table": "no",
-   "refutation_protocol": "no",
+   "refutation_protocol": "yes",
    "selftest": "yes",
    "residue_register_ref": "blind-reader-void12/studies/RESIDUE_REGISTER.md",
    "provenance": {

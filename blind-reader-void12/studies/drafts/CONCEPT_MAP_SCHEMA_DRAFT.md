@@ -46,6 +46,8 @@ Counts on 2026-11-19 (script output):
 folders 232 | non-stdlib 24 | claim_table yes 139 | refutation_protocol yes 95 | selftest yes 152
 ```
 
+**Later (2026-11-19).** The file committed at `3b963e7` was stale: `GROK_REPO_READ_CHECK.md` was written after the last run, and it quotes the token REFUTATION_PROTOCOL as evidence for F7, so `--check` would have failed on that commit. Re-run, the count is **96**: `blind-reader-void12` now reads `refutation_protocol: yes` because a check file names the token. The folder has no refutation protocol. This is the mention-only limit above, set off by this session's own audit text. The value is kept as the rule gives it, not overridden.
+
 `purpose`, `read_first` and `first_file` are null for all 232. `residue_register_ref` is set for one folder (`blind-reader-void12`, CODER_INFERRED).
 
 ## Open for the owner

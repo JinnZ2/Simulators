@@ -39,3 +39,22 @@ id | term or passage | what was missing | what you did | source path | resolves 
 - The inventory accompanies the response; it does not change the response or how it is scored.
 
 In attestation.notes also say which tools were on, and whether memory or project knowledge was on.
+
+## Later (2026-11-19): header form
+
+The owner's message of 2026-11-19 (`studies/as_received/mode_and_authority_2026-11-19.md`, item 7) puts the mode, read set, exclusions and output contract at the top. The draft above is kept as written. Sent in header form, the next blind reading opens with the BLIND header in `studies/REQUEST_HEADERS.md`, filled for packet v2:
+
+```text
+MODE: BLIND (blind reading)
+READ: only the attached packet: reader_packet_v2/ (variant A or B, as sent)
+DO NOT USE: the repository, web, prior readings, keys, scores, or earlier sessions
+SESSION: new conversation; memory off; no project knowledge; no connected repositories; no repository URL
+CODE EXECUTION: not allowed (turn code tools off if the app allows)
+RETURN:
+1. The completed response_template.json, reader_label "<NEW-NEUTRAL-LABEL>".
+2. A separate confusion inventory using the row format in Return item 2 above, with the reader attestation block at its head.
+Record guesses even if you later believe they were correct. Do not merge rows. Use void for unknown cells.
+If no confusion is found, say "none found" and list what you read.
+```
+
+The attestation block's wording for a packet is in `studies/packets/build_packet.py` (`ATTEST`), where the packet leak scan checks it. The pinned `reader_packet_v2/response_template.json` is not changed. The block goes in the confusion inventory, which the reader writes outside the template.

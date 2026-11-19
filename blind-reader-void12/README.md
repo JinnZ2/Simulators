@@ -2,6 +2,8 @@
 
 A packet and a scorer for a blind second reading of the vocabulary mapping that section 9c of `playground-crossrun/COMBINED_SPEC.md` calls VOID-12. CC0 1.0 Universal, like the rest of the repository.
 
+Every request in this folder names its mode in a header: `MODE_SEQUENCE.md` (added 2026-11-19), with the headers and the authority order in `studies/REQUEST_HEADERS.md`.
+
 The first reading (`combined-playground/cplay/vocab_branches.py`) gives 15 terms from three projects a one-sentence predicate each, and sorts eight pairs into MAPS, PARTIAL, HOMONYM or NONE from those sentences. One reader wrote all the predicates. This folder lets a second reader do the grouping without seeing them, and counts where the two agree. It decides nothing.
 
 | Path | What it is |
