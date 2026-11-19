@@ -2,6 +2,8 @@
 
 Filed as pasted by the owner, unedited. Authorship of the parts is not stated. The "For me specifically" passages read as a reader's voice, and the owner opens and delivers the whole; it is filed as the owner's delivery. The six `￼` marks are images that did not survive the paste. The message ends with six text blocks, which read as the content of those images, in order. That is this filing's reading, not a fact stated in the message. Derived files: `../../MODE_SEQUENCE.md` (verbatim block), `../OPERATIONAL_DEFINITIONS.md`, `../BOUNDARY_CASES.md`, `../OPEN_ROWS.md`, `../REQUEST_HEADERS.md`.
 
+Note 2026-11-19 (later the same day): the owner sent this text again, without its opening paragraph and under the one-word heading `Kimi`. Recorded as: author of the numbered points 1-7 and their six blocks = Kimi (owner-stated 2026-11-19). The heading sits above the whole paste, which also holds the `MODE_SEQUENCE.md` block and the layer and K3 blocks; the owner did not say whether the heading covers those, so their author stays not stated. The line above ("Authorship of the parts is not stated") is kept as written. The text below is unchanged.
+
 ```text
 Ok.... I just realized something.  I am so sorry for not understanding this before now.  🤦‍♀️.  My cultures default has been creating confusion.
 
