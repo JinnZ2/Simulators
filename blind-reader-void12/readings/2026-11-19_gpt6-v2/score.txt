@@ -1,0 +1,41 @@
+reader claude-fresh-1 | GPT-6 | 2026-11-19 | blindness: UNCERTAIN (also declared: q6_prior_sessions_about_this_project)
+
+grouping (independent of slots): all 105 term pairs: both join 4, reader only 0, key only 2, neither 99; adjusted Rand index 0.790; clusters reader 11, key 9
+   key joins, reader does not: T01 T06
+   key joins, reader does not: T11 T14
+
+=== slots_specific ===
+declared pairs: 5 of 7 determined agree with the key (Clopper-Pearson 95%: 0.290 to 0.963); 1 pair(s) n/d
+pair                                           reader   key      first reading's declared tier
+GAP_INSTRUMENT_CRASH | CRASHED                 PARTIAL  n/d      MAPS     
+UNKNOWN | UNKNOWN                              PARTIAL  PARTIAL  PARTIAL  agree
+ABSENT_AT_SENSITIVITY | ABSENT_AT_SENSITIVITY  PARTIAL  PARTIAL  PARTIAL  agree
+expiry_condition | ExpiryTrigger               PARTIAL  PARTIAL  PARTIAL  agree
+VOID | VOID                                    HOMONYM  HOMONYM  HOMONYM  agree
+UNDECIDED | UNRESOLVED                         NONE     MAPS     PARTIAL  DIFFER
+HOLDS | OK                                     NONE     NONE     NONE     agree
+HOLDS | CLOSED_WITHIN                          NONE     PARTIAL  PARTIAL  DIFFER
+references under this key: nothing grouped 2, label-only 3 (of 7 determined)
+slot sets equal to the key's: 9 of 14 determined
+   T02 ABSENT_AT_SENSITIVITY    differ missing ['value'] extra -
+   T05 ABSENT_AT_SENSITIVITY    differ missing - extra ['covers_effect']
+   T07 VOID                     differ missing - extra ['void_reason']
+   T08 CRASHED                  n/d (key undetermined); reader gave ['exception', 'inputs', 'path']
+   T10 GAP_INSTRUMENT_CRASH     differ missing ['expiry_condition', 'input', 'kind', 'missing_path', 'module', 'reason'] extra -
+   T12 UNKNOWN                  differ missing ['reason', 'triggers'] extra ['typed', 'untyped']
+
+=== slots_carried ===
+declared pairs: 5 of 7 determined agree with the key (Clopper-Pearson 95%: 0.290 to 0.963); 1 pair(s) n/d
+pair                                           reader   key      first reading's declared tier
+GAP_INSTRUMENT_CRASH | CRASHED                 PARTIAL  PARTIAL  MAPS     agree
+UNKNOWN | UNKNOWN                              PARTIAL  n/d      PARTIAL  
+ABSENT_AT_SENSITIVITY | ABSENT_AT_SENSITIVITY  PARTIAL  PARTIAL  PARTIAL  agree
+expiry_condition | ExpiryTrigger               PARTIAL  PARTIAL  PARTIAL  agree
+VOID | VOID                                    HOMONYM  HOMONYM  HOMONYM  agree
+UNDECIDED | UNRESOLVED                         NONE     PARTIAL  PARTIAL  DIFFER
+HOLDS | OK                                     NONE     NONE     NONE     agree
+HOLDS | CLOSED_WITHIN                          NONE     PARTIAL  PARTIAL  DIFFER
+references under this key: nothing grouped 2, label-only 2 (of 7 determined)
+slot sets equal to the key's: 13 of 14 determined
+   T02 ABSENT_AT_SENSITIVITY    differ missing ['value'] extra -
+   T09 UNKNOWN                  n/d (key undetermined); reader gave ['expiry_condition', 'input', 'kind', 'module', 'reason']

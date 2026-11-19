@@ -1,0 +1,117 @@
+Gap Inventory: Interpretation, Assumptions, and Communication Interfaces
+
+1. Context-boundary gaps
+
+ID	Potential gap	Competing interpretations
+G01	Project context vs. task context	The assistant is helping with Simulators generally, or performing an isolated reading task within that project.
+G02	Repository link purpose	The link supplies background context, or it identifies the project whose vocabulary is being evaluated.
+G03	Isolation boundary	Isolation means no external information, or it also requires no prior memory and no project familiarity.
+G04	Conversation continuity	A new task inherits conversational context, or it must independently establish its operating conditions.
+G05	Context contamination	Knowing the project name is harmless, or even knowing its purpose can influence interpretation.
+
+2. Instruction interpretation gaps
+
+ID	Potential gap	Competing interpretations
+G06	Follow instructions exactly	Literal compliance with available instructions, or compliance with the intended experimental conditions as well.
+G07	Work only from packet	No web research, or no use of any information outside the packet, including memory.
+G08	Unknown information	Leave unavailable information unreported, or explicitly record it as unknown.
+G09	Honest attestation	Report only deliberate information use, or also disclose automatically available memory and context.
+G10	Model identity	Use the model’s underlying family, or the exact product-visible model designation.
+G11	Tool availability	Report tools actually used, or report tools enabled and available even if unused.
+
+3. Classification gaps
+
+These come directly from the reader brief’s distinction between predicate, cluster, and slots.
+
+ID	Potential gap	Competing interpretations
+G12	Same predicate	Same general subject, or same specific recorded situation.
+G13	Different terminology	Different labels indicate different meanings, or different labels can describe identical predicates.
+G14	Shared fields	Shared fields imply equivalent terms, or fields are independent of predicate equivalence.
+G15	Specific slots	Constructor parameters, class attributes, or only fields explicitly tied to one term.
+G16	Carried slots	Only the term’s own fields, or every field of the enclosing record.
+G17	Nested records	Include nested fields recursively, or record only the field holding the nested object.
+G18	Conditional records	Record only the common fields, or every field available across all execution paths.
+G19	Undocumented behavior	Infer fields from implementation, or report only explicitly documented fields.
+G20	Source disagreement	Prefer the definition, prefer the implementation, or preserve the disagreement.
+G21	Cluster uncertainty	Force a decision, or preserve alternative possible groupings and low confidence.
+
+4. Communication-interface gaps
+
+ID	Potential gap	Competing interpretations
+G22	Clarification	A correction of the assistant, or additional information about the intended task.
+G23	Successful response	The user approves the output, or the user approves the process and its boundaries.
+G24	Confusion attribution	The user misunderstood, the assistant misunderstood, or the interface permitted multiple interpretations.
+G25	Missing information	The user omitted something, or the assistant failed to recognize information already provided.
+G26	Assumed agreement	Silence means agreement, or silence means no additional information was supplied.
+G27	Context transfer	A project link transfers all project context, or only the specific information explicitly associated with the link.
+
+5. Measurement and audit gaps
+
+ID	Potential gap	Competing interpretations
+G28	Observed vs. inferred	An observed event and an explanation of that event are interchangeable, or they require separate records.
+G29	Tool state	Tool enabled, tool invoked, and tool output used are equivalent, or three distinct conditions.
+G30	Memory state	Memory available means memory used, or availability and actual use must be distinguished.
+G31	Knowledge provenance	Information supplied by the user and information retrieved independently are equivalent, or provenance must be preserved.
+G32	Experimental validity	A correct answer demonstrates a valid process, or answer correctness and process validity are separate measurements.
+G33	Reproducibility	Repeating the same prompt is sufficient, or the environment, memory state, tools, and available context must also be controlled.
+
+6. Important distinctions to preserve
+
+These are not interchangeable:
+
+* Unknown ≠ absent.
+* Available ≠ accessed.
+* Accessed ≠ used.
+* Used ≠ materially influential.
+* Similar terminology ≠ identical predicate.
+* Identical fields ≠ identical function.
+* Same function ≠ same implementation.
+* Clarification ≠ correction.
+* Correct output ≠ verified process.
+* Missing declaration ≠ declared negative.
+* Multiple interpretations ≠ multiple errors.
+* A successful interaction ≠ an unambiguous interface.
+
+7. Proposed investigation method
+
+For every identified gap:
+
+1. Record the original observation.
+2. Identify each plausible interpretation.
+3. Identify the assumption required by each interpretation.
+4. Identify the information that would distinguish them.
+5. Record whether that information is present, absent, or unavailable.
+6. Preserve unresolved branches.
+7. Determine whether the gap belongs to the source, instructions, interface, environment, or evaluator.
+8. Only then consider a correction.
+
+Do not automatically eliminate ambiguity. Some ambiguities are legitimate properties of the source material and should remain visible.
+
+8. Experimental record of this interaction
+
+Observed:
+
+* An isolated reading task was presented.
+* The repository context was subsequently supplied.
+* The assistant initially returned a file link without establishing that the packet had been read.
+* The assistant subsequently acknowledged that limitation.
+* The user clarified the relationship between the reading task and the broader project.
+
+Additional provenance:
+
+* Memory was available in this conversation.
+* Project-related prior context was available.
+* The user supplied the repository URL.
+* No web search was performed in this interaction.
+* A container tool was used to inspect the uploaded ZIP and read READER_BRIEF.md.
+* Code/tool isolation was not established.
+
+Therefore, this interaction cannot be classified as a fresh, memory-free reading experiment.
+
+9. Central engineering question
+
+Can we design an interface in which multiple interpretations are detected and recorded before an evaluator silently selects one?
+
+That is the larger opportunity.
+
+The objective is not to eliminate all confusion. It is to eliminate unrecorded assumptions introduced during the transition from observation to interpretation.

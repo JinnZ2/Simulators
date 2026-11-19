@@ -1,0 +1,375 @@
+{
+  "reader_label": "claude-fresh-1",
+  "model_family": "GPT-6",
+  "date_utc": "2026-11-19",
+  "terms": {
+    "T01": {
+      "cluster": "A",
+      "predicate": "The numerical relation cannot be decided because the computed difference still straddles the tolerance boundary at the final evaluation tier.",
+      "slots_specific": [],
+      "slots_specific_basis": "NONE_STATED",
+      "slots_carried": [
+        "kind",
+        "verdict",
+        "void_reason",
+        "status",
+        "deciding_tier",
+        "precision",
+        "rigorous",
+        "fast",
+        "tiers",
+        "triage",
+        "located",
+        "proposal",
+        "intervals",
+        "inputs",
+        "units",
+        "provenance",
+        "slots",
+        "human_interest",
+        "ai_interest",
+        "formula",
+        "bisection",
+        "formulas",
+        "subboxes",
+        "subboxes_where_both_hold",
+        "subboxes_where_one_fails",
+        "first_undecided_subbox",
+        "first_subbox_with_no_value"
+      ],
+      "slots_carried_basis": "READ_FROM_SOURCE",
+      "source_lines_read": "sources/formula-audit/numcheck/check.py: 9-14, 27-38, 110-120, 353-440. Point-check record starts in _blank and gains formula/bisection plus the verdict and evaluation fields; UNDECIDED is emitted at lines 420-424. No term-exclusive input field is named.",
+      "confidence": "HIGH",
+      "could_also_join": [
+        "T06"
+      ]
+    },
+    "T02": {
+      "cluster": "B",
+      "predicate": "A scoped search did not find the target at the stated instrument, sensitivity, or protocol.",
+      "slots_specific": [],
+      "slots_specific_basis": "NONE_STATED",
+      "slots_carried": [],
+      "slots_carried_basis": "NONE_STATED",
+      "source_lines_read": "sources/thermodynamic-accountability-framework/docs/glossary.md: 122-130; sources/thermodynamic-accountability-framework/calibration/expiry_register.py: 34-37, 228-235, 294. The glossary explicitly says no slot holds this state yet; slot_state validates a string and builds no record.",
+      "confidence": "HIGH",
+      "could_also_join": []
+    },
+    "T03": {
+      "cluster": "C",
+      "predicate": "A deliberately undefined or unavailable vocabulary item is represented by a non-default VOID token with an explanatory reason.",
+      "slots_specific": [],
+      "slots_specific_basis": "NONE_STATED",
+      "slots_carried": [
+        "state",
+        "reason"
+      ],
+      "slots_carried_basis": "READ_FROM_SOURCE",
+      "source_lines_read": "sources/Simulators/combined-playground/cplay/tokens.py: 13-18, 44-50, 132-140. VOID is used for the unspecified ExpiryTrigger kind vocabulary and absent mapping-table rows; Token stores state and reason.",
+      "confidence": "MEDIUM",
+      "could_also_join": [
+        "T07"
+      ]
+    },
+    "T04": {
+      "cluster": "D",
+      "predicate": "A typed trigger specifies what target and condition cause an open state to expire.",
+      "slots_specific": [
+        "kind",
+        "target",
+        "condition"
+      ],
+      "slots_specific_basis": "READ_FROM_SOURCE",
+      "slots_carried": [
+        "kind",
+        "target",
+        "condition"
+      ],
+      "slots_carried_basis": "READ_FROM_SOURCE",
+      "source_lines_read": "sources/Simulators/combined-playground/cplay/tokens.py: 64-73. ExpiryTrigger's constructor requires all three values and stores them as its fields. The class docstring says the mapping to the TAF expiry vocabulary is not defined.",
+      "confidence": "MEDIUM",
+      "could_also_join": []
+    },
+    "T05": {
+      "cluster": "B",
+      "predicate": "A scoped search did not find the target at the stated instrument, sensitivity, or protocol.",
+      "slots_specific": [
+        "limit",
+        "basis",
+        "effect_size",
+        "conditions",
+        "ladder",
+        "covers_effect"
+      ],
+      "slots_specific_basis": "READ_FROM_SOURCE",
+      "slots_carried": [
+        "state",
+        "reason",
+        "limit",
+        "basis",
+        "effect_size",
+        "conditions",
+        "ladder",
+        "covers_effect"
+      ],
+      "slots_carried_basis": "READ_FROM_SOURCE",
+      "source_lines_read": "sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md: 129-133; sources/Simulators/combined-playground/cplay/tokens.py: 9-10, 17-18, 92-104. Spec names limit/how established, effect size and conditions; implementation stores limit, basis, effect_size, conditions, ladder and derived covers_effect on a Token with state/reason. `ladder` is present as an attribute even when None.",
+      "confidence": "HIGH",
+      "could_also_join": [
+        "T15"
+      ]
+    },
+    "T06": {
+      "cluster": "E",
+      "predicate": "The measured result falls inside the uncertainty guard band, so neither conformity nor nonconformity is established.",
+      "slots_specific": [],
+      "slots_specific_basis": "NONE_STATED",
+      "slots_carried": [
+        "field",
+        "token"
+      ],
+      "slots_carried_basis": "READ_FROM_SOURCE",
+      "source_lines_read": "sources/Simulators/combined-playground/cplay/tokens.py: 26; sources/Simulators/combined-playground/cplay/closure.py: 284-296, 299-315; sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md: 245-253. FieldToken carries the state on INSTRUMENT and has fields field/token; the nested token is not opened. The predicate is derived from the guard-band explanation.",
+      "confidence": "HIGH",
+      "could_also_join": [
+        "T01"
+      ]
+    },
+    "T07": {
+      "cluster": "F",
+      "predicate": "The numerical check cannot produce a valid verdict because required units or values are unusable, the calculation has no value, or the check encounters an unsupported or internal failure.",
+      "slots_specific": [
+        "void_reason"
+      ],
+      "slots_specific_basis": "READ_FROM_SOURCE",
+      "slots_carried": [
+        "kind",
+        "verdict",
+        "void_reason",
+        "status",
+        "deciding_tier",
+        "precision",
+        "rigorous",
+        "fast",
+        "tiers",
+        "triage",
+        "located",
+        "proposal",
+        "intervals",
+        "inputs",
+        "units",
+        "provenance",
+        "slots",
+        "human_interest",
+        "ai_interest",
+        "formula",
+        "bisection",
+        "formulas",
+        "subboxes",
+        "subboxes_where_both_hold",
+        "subboxes_where_one_fails",
+        "first_undecided_subbox",
+        "first_subbox_with_no_value"
+      ],
+      "slots_carried_basis": "READ_FROM_SOURCE",
+      "source_lines_read": "sources/formula-audit/numcheck/check.py: 12-14, 110-120, 353-440, 436-440, 443-557. Point VOID writes void_reason and status=None; intersection VOID also writes void_reason. The listed fields are the union of the returned point/intersection record fields on VOID paths; fields nested inside records are not expanded.",
+      "confidence": "HIGH",
+      "could_also_join": [
+        "T03"
+      ]
+    },
+    "T08": {
+      "cluster": "G",
+      "predicate": "A check or instrument did not run because its execution raised an exception.",
+      "slots_specific": [
+        "exception",
+        "path",
+        "inputs"
+      ],
+      "slots_specific_basis": "READ_FROM_SOURCE",
+      "slots_carried": [
+        "field",
+        "status",
+        "reason",
+        "sigma",
+        "basis",
+        "exception",
+        "path",
+        "bound",
+        "kind",
+        "module",
+        "input",
+        "missing_path",
+        "expiry_condition"
+      ],
+      "slots_carried_basis": "READ_FROM_SOURCE",
+      "source_lines_read": "sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md: 53, 70-72, 85-89; sources/Simulators/combined-playground/cplay/axes.py: 41-66, 69-88. CRASHED requires exception/path on a Reading; crash() also returns a CoverageEntry carrying kind,module,input,reason,missing_path,expiry_condition. The spec's crash record additionally names inputs, carried as CoverageEntry.input.",
+      "confidence": "HIGH",
+      "could_also_join": []
+    },
+    "T09": {
+      "cluster": "H",
+      "predicate": "A slot's value has not yet been established and must not be treated as zero or as absent.",
+      "slots_specific": [],
+      "slots_specific_basis": "NONE_STATED",
+      "slots_carried": [
+        "kind",
+        "module",
+        "input",
+        "reason",
+        "expiry_condition"
+      ],
+      "slots_carried_basis": "READ_FROM_SOURCE",
+      "source_lines_read": "sources/thermodynamic-accountability-framework/docs/glossary.md: 122-129; sources/thermodynamic-accountability-framework/calibration/unified_audit.py: 331-372. The glossary defines the open slot and its exit metadata; when UNKNOWN is reported in the unified audit coverage path, the built entry has kind,module,input,reason,expiry_condition. `expiry_condition` is not expanded.",
+      "confidence": "HIGH",
+      "could_also_join": []
+    },
+    "T10": {
+      "cluster": "G",
+      "predicate": "A module did not measure anything because the instrument itself raised during execution.",
+      "slots_specific": [],
+      "slots_specific_basis": "NONE_STATED",
+      "slots_carried": [
+        "kind",
+        "module",
+        "input",
+        "reason",
+        "missing_path",
+        "expiry_condition"
+      ],
+      "slots_carried_basis": "READ_FROM_SOURCE",
+      "source_lines_read": "sources/thermodynamic-accountability-framework/docs/glossary.md: 131-140; sources/thermodynamic-accountability-framework/calibration/unified_audit.py: 93-101, 331-344, 479-492. The glossary names the coverage-not-severity meaning; _coverage_entries builds the six-field coverage dictionary for a crash.",
+      "confidence": "HIGH",
+      "could_also_join": []
+    },
+    "T11": {
+      "cluster": "I",
+      "predicate": "The computed difference is contained within the permitted interval from negative tolerance to positive tolerance.",
+      "slots_specific": [],
+      "slots_specific_basis": "NONE_STATED",
+      "slots_carried": [
+        "kind",
+        "verdict",
+        "void_reason",
+        "status",
+        "deciding_tier",
+        "precision",
+        "rigorous",
+        "fast",
+        "tiers",
+        "triage",
+        "located",
+        "proposal",
+        "intervals",
+        "inputs",
+        "units",
+        "provenance",
+        "slots",
+        "human_interest",
+        "ai_interest",
+        "formula",
+        "bisection"
+      ],
+      "slots_carried_basis": "READ_FROM_SOURCE",
+      "source_lines_read": "sources/formula-audit/numcheck/check.py: 6-20, 110-120, 353-440. HOLDS is the point-check verdict and uses the same returned point record shape; no HOLDS-exclusive field is named.",
+      "confidence": "HIGH",
+      "could_also_join": [
+        "T13"
+      ]
+    },
+    "T12": {
+      "cluster": "H",
+      "predicate": "A slot's value has not yet been established and must not be treated as zero or as absent.",
+      "slots_specific": [
+        "typed",
+        "untyped"
+      ],
+      "slots_specific_basis": "READ_FROM_SOURCE",
+      "slots_carried": [
+        "state",
+        "reason",
+        "typed",
+        "untyped"
+      ],
+      "slots_carried_basis": "READ_FROM_SOURCE",
+      "source_lines_read": "sources/Simulators/combined-playground/cplay/tokens.py: 7-8, 81-89; sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md: 126-128, 370-371. The UNKNOWN token is refused without at least one typed ExpiryTrigger; implementation stores typed and untyped trigger tuples on the Token. The constructor parameter `triggers` is not a returned field.",
+      "confidence": "HIGH",
+      "could_also_join": []
+    },
+    "T13": {
+      "cluster": "J",
+      "predicate": "The check ran and passed.",
+      "slots_specific": [],
+      "slots_specific_basis": "NONE_STATED",
+      "slots_carried": [
+        "field",
+        "status",
+        "reason",
+        "sigma",
+        "basis",
+        "exception",
+        "path",
+        "bound"
+      ],
+      "slots_carried_basis": "READ_FROM_SOURCE",
+      "source_lines_read": "sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md: 48-55; sources/Simulators/combined-playground/cplay/axes.py: 41-66, 116-126, 141-150. OK has no additional required fields; when built as a Reading it carries the full Reading field set.",
+      "confidence": "HIGH",
+      "could_also_join": [
+        "T11"
+      ]
+    },
+    "T14": {
+      "cluster": "K",
+      "predicate": "A measured closure or misclosure is accepted within the stated uncertainty band, rather than asserted to be exact.",
+      "slots_specific": [
+        "sigma",
+        "basis"
+      ],
+      "slots_specific_basis": "READ_FROM_SOURCE",
+      "slots_carried": [
+        "field",
+        "status",
+        "reason",
+        "sigma",
+        "basis",
+        "exception",
+        "path",
+        "bound"
+      ],
+      "slots_carried_basis": "READ_FROM_SOURCE",
+      "source_lines_read": "sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md: 53-55, 68-69; sources/Simulators/combined-playground/cplay/axes.py: 41-66; sources/Simulators/combined-playground/cplay/closure.py: 193-199, 210-216, 299-315. Spec requires sigma and basis; Reading also carries all other declared fields.",
+      "confidence": "HIGH",
+      "could_also_join": []
+    },
+    "T15": {
+      "cluster": "D",
+      "predicate": "A typed trigger specifies what target and condition cause an open state to expire.",
+      "slots_specific": [
+        "instrument_class",
+        "sensitivity",
+        "protocol",
+        "provenance"
+      ],
+      "slots_specific_basis": "READ_FROM_SOURCE",
+      "slots_carried": [
+        "instrument_class",
+        "sensitivity",
+        "protocol",
+        "provenance"
+      ],
+      "slots_carried_basis": "READ_FROM_SOURCE",
+      "source_lines_read": "sources/thermodynamic-accountability-framework/docs/glossary.md: 126-128; sources/thermodynamic-accountability-framework/calibration/expiry_register.py: 28-30, 53, 58-63. The glossary defines the exit criterion; expiry_register.py names the exact four-key dictionary. The relationship to Simulators ExpiryTrigger.kind/target/condition is not mapped in tokens.py: 64-73, 136-140.",
+      "confidence": "MEDIUM",
+      "could_also_join": []
+    }
+  },
+  "attestation": {
+    "q1_seen_pair_table_with_verdicts": "unsure",
+    "q2_seen_predicate_sentence_by_someone_else": "unsure",
+    "q3_seen_vocabulary_mapping_or_second_reader_report": "unsure",
+    "q4_told_how_many_clusters_or_pairs": "no",
+    "q5_used_anything_outside_packet": "no",
+    "q6_prior_sessions_about_this_project": "yes",
+    "notes": "Task analysis and field extraction used only the attached packet; no web pages, other files, repository connections, or remembered project details were used to form the clusters or slot lists. This was not a fresh no-memory conversation: prior-session context/memory was available in the chat environment, so q6 is yes. Whether that context included any of the exact pair tables, third-party predicate sentences, or vocabulary-mapping/second-reader reports asked about in q1-q3 cannot be established from the material consulted, hence unsure. Tools: Python code execution was on and used only to inspect the uploaded ZIP and write this response file; web search was available but not used; connected repositories were not connected or used. I could not turn off memory or create a separate fresh conversation from this task context."
+  }
+}
