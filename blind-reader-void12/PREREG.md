@@ -128,3 +128,13 @@ Pinned (sha256 of the files at commit `1c45e1e`):
 | `build/make_key_a1.py` | `5c01a8fa50e34f0848ff895bae581e9834c9c5955c28577c56938ba36adaffad` |
 
 Every v2 reading read before this section is scored under key v2 and under key a1, and both scores are filed. A reader of another family reads only after this section is merged, and reads the v2 packet unchanged. Readings from before packet v2 (one slot list) are not scored by `score_v2.py`.
+
+---
+
+## Study M01, slots_specific membership (added 2026-11-19, before any M01 coding exists)
+
+Owner: "Yes please" (2026-11-19) to building the M01 instrumentation: a schema, criteria, a script that fills the source half, then coding of the filed readings. This section records the first two before the third and fourth exist.
+
+**Criteria.** `studies/M01_CRITERIA.md`, sha256 `f194ecbcd991720b0ee1279531f5422035b6035505198aab63df0d58b2a5c467`. **Schema.** `studies/M01_SCHEMA.json`, sha256 `2e63b53a5085bed70b940a3232a10d144a93601f2e1ef8dcfb4612e9435a0f40`.
+
+**What M01 is.** A descriptive table of the three filed v2 readings' `slots_specific` choices, one record per reader, term and field, with every value's provenance marked (SCRIPT_DERIVED / CODER_INFERRED / READER_STATED / NOT_RECORDED) and no default anywhere. It is not a test of any hypothesis: the coder has seen all three readings. It changes no brief, packet, key, score, status or reading. Readings taken after this section can be coded the same way.
