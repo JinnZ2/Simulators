@@ -14271,6 +14271,10 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   no longer exists or a moved pinned ref. No code is moved by it.
   `COLLISIONS.md` (from `collisions.json`, same script) keeps one block per multi-agent
   collision: date, concept, agents, what collided, how found, resolution or OPEN, evidence.
+  `MULTI_HOME_REGISTER.json` (DRAFT, from `build_multi_home_register.py`) is the map's denominator:
+  every concept with more than one home across the three repos that four named sources reach,
+  homes as repo:path@commit, in_map per row as an L0 reading. `FREEZE_CLEANUP_MEASURAND.md`
+  (PROPOSED) holds the measurand lines and done-tests for the freeze's "map" and "cleanup".
 - `tail-check/` — part 3b of the same order. It reads an inference about a
   person as SAID (a gated literal span of a user turn, via `tools/sourced.py`,
   imported), FILLED or UNRATED. When the inference is FILLED and the person's

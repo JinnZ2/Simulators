@@ -119,3 +119,7 @@ So an OPEN row is closed by an arm that runs each candidate rule and shows where
 ## Later (2026-11-19): REVIEW-2 and AUDIT-2
 
 The open line in `../MODE_SEQUENCE.md` is answered by the owner's independence rules in that file's dated section. A REVIEW-2 reader differs from the implementer. In AUDIT-2, the implementer may rerun a deterministic check only if its design was reviewed by a different reader; a judgment check, including test and fixture design, needs a different auditor. Every REVIEW and AUDIT return adds the independence fields and level, as defined in `INDEPENDENCE_LEDGER.md`.
+
+## Later (2026-11-19): standing rule for merge reports
+
+The owner's rule, 2026-11-19: every report of a merge carries the suite's counts line and the post-merge CI result, or marks each one NOT READ with the reason. The counts line is the line the suite prints for itself (for example `counts: ran N | passed N | skipped N | NOT_RUN N | failed N`). A local rerun can stand beside the CI result but does not replace it, and it is labelled local, with its interpreter and sibling commits. A run of `check_concept_map.py` or `build_finder.py` also carries its `sibling_state` line, since the NOT_CHECKED and QUOTE_NOT_CHECKED counts depend on which siblings were present.

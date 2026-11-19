@@ -18,3 +18,13 @@ TOOL_FINDER quotes                TOOL_FINDER/finder.json, entry              bu
                                   JinnZ2:corpus_prior_audit/                  corpus_prior_audit/README.md, twice (the JinnZ2       JinnZ2 repository
                                                                               repository, not checked out here)                     checked out
 ```
+
+## Later (2026-11-19): state of the three items after the AUDIT round
+
+Records only. Each line says what was measured and where; no fix is chosen here.
+
+- COLLISIONS evidence pins: repinned (owner's IMPLEMENT of 2026-11-19). The three `origin/claude/forest-toolkit-build` pins now point at `origin/archive/pr256-tip` @ d402fa8 (exact tip; the two sha256 values still match), and the `unknown-axis-followup-2` pin at TAF `origin/archive/unknown-axis-followup` @ a2c5d99. The old pins are kept inside each entry as `repinned_2026-11-19.old_pin`. `check_concept_map.py --strict` with all siblings present: collisions OK 11, NOT_CHECKED 0, failed 0, exit 0.
+- TOOL_FINDER quotes: the two MISSING_FILE quotes are not about the JinnZ2 repository. In this container `../jinnz2` is a plain directory holding a Simulators copy (no `.git`), and `build_finder.py` takes any existing directory as the checkout. With the JinnZ2 repository at FINDER_JINNZ2_PATH all quotes are FOUND. The new `sibling_state` line shows the case as `JinnZ2@UNREADABLE`. Open item: `repo_dir` checks that a directory exists, not that it holds the named repository (AUDIT of the fix choice first).
+- build_finder.py fails open: without siblings it exits 0 with QUOTE_NOT_CHECKED rows and "?" line numbers, and rewrites the tracked TOOL_FINDER.md and finder.json with that output. Open item; no fix (AUDIT first).
+- grounding-layers psutil: unchanged.
+- ai-arena (outside this repository): at 732458a its suite passes with formula-audit at `main` (c1acb59, which is also the CI pin) and fails 1 test with formula-audit at its default branch HEAD (7df0d81, default branch `claude/quasicrystal-projection-properties-448bx7`, which does not contain main). Failing test: `tests.test_word_slots.TestPins.test_hash_mismatch_is_not_run`. At 7df0d81 `wordslots/places.json` is absent, so `report()` returns NOT_RUN with the reason "not found", which matches neither string the test accepts ("sha256", "no checkout"). The 18 pinned tests read NOT_RUN there. Local runs, Python 3.13 only; ai-arena CI logs NOT READ (api.github.com returns 403 here).

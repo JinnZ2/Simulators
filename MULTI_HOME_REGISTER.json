@@ -1,0 +1,1078 @@
+{
+ "status": "DRAFT",
+ "as_of": "2026-11-19",
+ "built_by": "build_multi_home_register.py",
+ "scope": "concepts with more than one home across Simulators / study-aperture / thermodynamic-accountability-framework",
+ "read_at": {
+  "Simulators": "HEAD",
+  "study-aperture": "origin/main@03bd2014cd20",
+  "thermodynamic-accountability-framework": "origin/main@16285cccdd48"
+ },
+ "denominator_note": "rows is a lower bound from four named sources, not an enumeration; grep covered top-level names and .py basenames only",
+ "counts": {
+  "rows": 28,
+  "in_map YES": 11,
+  "in_map PARTIAL": 3,
+  "in_map NO": 14,
+  "in_map_by_path YES": 15,
+  "tokens not found": 0
+ },
+ "rows": [
+  {
+   "concept": "stated_purpose / scope_valid (law purpose and scope against first principle intent)",
+   "homes": [
+    {
+     "repo": "Simulators",
+     "path": "law-audit-card/card.py",
+     "commit": "06fa86c56e73",
+     "kind": "blob",
+     "blob": "982f64c0f771",
+     "ref": "Simulators:law-audit-card/card.py@06fa86c56e73"
+    },
+    {
+     "repo": "thermodynamic-accountability-framework",
+     "path": "core/regulatory_scope_audit.py",
+     "commit": "f3728dfcdf80",
+     "kind": "blob",
+     "blob": "824720e4af18",
+     "ref": "thermodynamic-accountability-framework:core/regulatory_scope_audit.py@f3728dfcdf80"
+    }
+   ],
+   "source": "S1 TOOL_FINDER/entries.py NAME_COLLISIONS (\"same concept, two names\")",
+   "grain_note": "one concept, two names; law-audit-card imports the TAF module rather than reimplementing (entries.py note, 2026-11-10)",
+   "in_map_by_path": "NO",
+   "map_rows_by_path": [],
+   "in_map": "NO",
+   "in_map_basis": "by path; no other map row read as covering it",
+   "grain_judgment": {
+    "who": "Claude Code session (same session that built the register)",
+    "level": "L0",
+    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+   }
+  },
+  {
+   "concept": "boundary closure gate before any physics",
+   "homes": [
+    {
+     "repo": "study-aperture",
+     "path": "experimental/playground/gates/l0_closure.py",
+     "commit": "79f402c7153c",
+     "kind": "blob",
+     "blob": "cf25bdef4974",
+     "token": "def l0_closure_gate",
+     "token_found": true,
+     "ref": "study-aperture:experimental/playground/gates/l0_closure.py@79f402c7153c"
+    },
+    {
+     "repo": "Simulators",
+     "path": "relational-playground/playground/l0.py",
+     "commit": "512f320aba19",
+     "kind": "blob",
+     "blob": "35be27ded953",
+     "token": "def audit",
+     "token_found": true,
+     "ref": "Simulators:relational-playground/playground/l0.py@512f320aba19"
+    }
+   ],
+   "source": "S2 playground-crossrun/adapters/concept_map.py ROWS (location on both sides)",
+   "grain_note": "crossrun grain is finer than map rows: one map row can cover several of these; combined-playground/cplay/ may carry a third Simulators copy, not checked per row",
+   "in_map_by_path": "YES",
+   "map_rows_by_path": [
+    "L0 gate (budget closure)"
+   ],
+   "in_map": "YES",
+   "in_map_basis": "L0 gate (budget closure)",
+   "grain_judgment": {
+    "who": "Claude Code session (same session that built the register)",
+    "level": "L0",
+    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+   }
+  },
+  {
+   "concept": "noise band on a misclosure",
+   "homes": [
+    {
+     "repo": "study-aperture",
+     "path": "experimental/playground/gates/l0_closure.py",
+     "commit": "79f402c7153c",
+     "kind": "blob",
+     "blob": "cf25bdef4974",
+     "token": "tolerance",
+     "token_found": true,
+     "ref": "study-aperture:experimental/playground/gates/l0_closure.py@79f402c7153c"
+    },
+    {
+     "repo": "Simulators",
+     "path": "relational-playground/playground/l0.py",
+     "commit": "512f320aba19",
+     "kind": "blob",
+     "blob": "35be27ded953",
+     "token": "sigma_meas",
+     "token_found": true,
+     "ref": "Simulators:relational-playground/playground/l0.py@512f320aba19"
+    }
+   ],
+   "source": "S2 playground-crossrun/adapters/concept_map.py ROWS (location on both sides)",
+   "grain_note": "crossrun grain is finer than map rows: one map row can cover several of these; combined-playground/cplay/ may carry a third Simulators copy, not checked per row",
+   "in_map_by_path": "YES",
+   "map_rows_by_path": [
+    "L0 gate (budget closure)"
+   ],
+   "in_map": "PARTIAL",
+   "in_map_basis": "same files as the L0 gate row; the tolerance itself is not named in the map",
+   "grain_judgment": {
+    "who": "Claude Code session (same session that built the register)",
+    "level": "L0",
+    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+   }
+  },
+  {
+   "concept": "known-answer validation",
+   "homes": [
+    {
+     "repo": "study-aperture",
+     "path": "experimental/playground/validation/known_answer.py",
+     "commit": "18b8722964ef",
+     "kind": "blob",
+     "blob": "679bd96fbfc9",
+     "token": "def validate_known_answers",
+     "token_found": true,
+     "ref": "study-aperture:experimental/playground/validation/known_answer.py@18b8722964ef"
+    },
+    {
+     "repo": "Simulators",
+     "path": "relational-playground/playground/known_answer_gate.py",
+     "commit": "beac98bb5be7",
+     "kind": "blob",
+     "blob": "315536cafe84",
+     "token": "def certify",
+     "token_found": true,
+     "ref": "Simulators:relational-playground/playground/known_answer_gate.py@beac98bb5be7"
+    }
+   ],
+   "source": "S2 playground-crossrun/adapters/concept_map.py ROWS (location on both sides)",
+   "grain_note": "crossrun grain is finer than map rows: one map row can cover several of these; combined-playground/cplay/ may carry a third Simulators copy, not checked per row",
+   "in_map_by_path": "YES",
+   "map_rows_by_path": [
+    "known-answer / null harness"
+   ],
+   "in_map": "YES",
+   "in_map_basis": "known-answer / null harness",
+   "grain_judgment": {
+    "who": "Claude Code session (same session that built the register)",
+    "level": "L0",
+    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+   }
+  },
+  {
+   "concept": "planted defects on the lab itself",
+   "homes": [
+    {
+     "repo": "study-aperture",
+     "path": "experimental/playground/validation/planted_defects.py",
+     "commit": "9587178428d9",
+     "kind": "blob",
+     "blob": "b2de4eb943c9",
+     "token": "DEFECTS",
+     "token_found": true,
+     "ref": "study-aperture:experimental/playground/validation/planted_defects.py@9587178428d9"
+    },
+    {
+     "repo": "Simulators",
+     "path": "relational-playground/playground/known_answer_gate.py",
+     "commit": "beac98bb5be7",
+     "kind": "blob",
+     "blob": "315536cafe84",
+     "token": "def plant",
+     "token_found": true,
+     "ref": "Simulators:relational-playground/playground/known_answer_gate.py@beac98bb5be7"
+    }
+   ],
+   "source": "S2 playground-crossrun/adapters/concept_map.py ROWS (location on both sides)",
+   "grain_note": "crossrun grain is finer than map rows: one map row can cover several of these; combined-playground/cplay/ may carry a third Simulators copy, not checked per row",
+   "in_map_by_path": "YES",
+   "map_rows_by_path": [
+    "known-answer / null harness"
+   ],
+   "in_map": "PARTIAL",
+   "in_map_basis": "the map row names the harness, not the planted-defect set",
+   "grain_judgment": {
+    "who": "Claude Code session (same session that built the register)",
+    "level": "L0",
+    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+   }
+  },
+  {
+   "concept": "null harness",
+   "homes": [
+    {
+     "repo": "study-aperture",
+     "path": "experimental/playground/validation/null_harness.py",
+     "commit": "18b8722964ef",
+     "kind": "blob",
+     "blob": "d529da7ff0b2",
+     "token": "def validate_nulls",
+     "token_found": true,
+     "ref": "study-aperture:experimental/playground/validation/null_harness.py@18b8722964ef"
+    },
+    {
+     "repo": "Simulators",
+     "path": "relational-playground/playground/known_answer_gate.py",
+     "commit": "beac98bb5be7",
+     "kind": "blob",
+     "blob": "315536cafe84",
+     "token": "def certify_tool",
+     "token_found": true,
+     "ref": "Simulators:relational-playground/playground/known_answer_gate.py@beac98bb5be7"
+    }
+   ],
+   "source": "S2 playground-crossrun/adapters/concept_map.py ROWS (location on both sides)",
+   "grain_note": "crossrun grain is finer than map rows: one map row can cover several of these; combined-playground/cplay/ may carry a third Simulators copy, not checked per row",
+   "in_map_by_path": "YES",
+   "map_rows_by_path": [
+    "known-answer / null harness"
+   ],
+   "in_map": "YES",
+   "in_map_basis": "known-answer / null harness",
+   "grain_judgment": {
+    "who": "Claude Code session (same session that built the register)",
+    "level": "L0",
+    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+   }
+  },
+  {
+   "concept": "zero cases is not a pass",
+   "homes": [
+    {
+     "repo": "study-aperture",
+     "path": "experimental/playground/validation/known_answer.py",
+     "commit": "18b8722964ef",
+     "kind": "blob",
+     "blob": "679bd96fbfc9",
+     "token": "KA_NO_CASES",
+     "token_found": true,
+     "ref": "study-aperture:experimental/playground/validation/known_answer.py@18b8722964ef"
+    },
+    {
+     "repo": "Simulators",
+     "path": "relational-playground/playground/known_answer_gate.py",
+     "commit": "beac98bb5be7",
+     "kind": "blob",
+     "blob": "315536cafe84",
+     "token": "no known-answer cases written",
+     "token_found": true,
+     "ref": "Simulators:relational-playground/playground/known_answer_gate.py@beac98bb5be7"
+    }
+   ],
+   "source": "S2 playground-crossrun/adapters/concept_map.py ROWS (location on both sides)",
+   "grain_note": "crossrun grain is finer than map rows: one map row can cover several of these; combined-playground/cplay/ may carry a third Simulators copy, not checked per row",
+   "in_map_by_path": "YES",
+   "map_rows_by_path": [
+    "known-answer / null harness"
+   ],
+   "in_map": "PARTIAL",
+   "in_map_basis": "a rule inside the known-answer files; not a map row",
+   "grain_judgment": {
+    "who": "Claude Code session (same session that built the register)",
+    "level": "L0",
+    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+   }
+  },
+  {
+   "concept": "non-detection as bounded null",
+   "homes": [
+    {
+     "repo": "study-aperture",
+     "path": "experimental/playground/detection/non_detection.py",
+     "commit": "c780f5c388c2",
+     "kind": "blob",
+     "blob": "9a6093017d01",
+     "token": "def record_non_detection",
+     "token_found": true,
+     "ref": "study-aperture:experimental/playground/detection/non_detection.py@c780f5c388c2"
+    },
+    {
+     "repo": "Simulators",
+     "path": "relational-playground/playground/uncertainty.py",
+     "commit": "9b8c5e281fd7",
+     "kind": "blob",
+     "blob": "e598a973e548",
+     "token": "ABSENT_AT_SENSITIVITY",
+     "token_found": true,
+     "ref": "Simulators:relational-playground/playground/uncertainty.py@9b8c5e281fd7"
+    }
+   ],
+   "source": "S2 playground-crossrun/adapters/concept_map.py ROWS (location on both sides)",
+   "grain_note": "crossrun grain is finer than map rows: one map row can cover several of these; combined-playground/cplay/ may carry a third Simulators copy, not checked per row",
+   "in_map_by_path": "YES",
+   "map_rows_by_path": [
+    "UNKNOWN expiry",
+    "scoped absence (ABSENT_AT_SENSITIVITY)"
+   ],
+   "in_map": "YES",
+   "in_map_basis": "scoped absence (ABSENT_AT_SENSITIVITY)",
+   "grain_judgment": {
+    "who": "Claude Code session (same session that built the register)",
+    "level": "L0",
+    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+   }
+  },
+  {
+   "concept": "UNKNOWN carries what would end it",
+   "homes": [
+    {
+     "repo": "study-aperture",
+     "path": "experimental/playground/lifecycle/unknown_expiry.py",
+     "commit": "ea34f5c71fc2",
+     "kind": "blob",
+     "blob": "8de0ce046d53",
+     "token": "class ExpiryTrigger",
+     "token_found": true,
+     "ref": "study-aperture:experimental/playground/lifecycle/unknown_expiry.py@ea34f5c71fc2"
+    },
+    {
+     "repo": "Simulators",
+     "path": "relational-playground/playground/uncertainty.py",
+     "commit": "9b8c5e281fd7",
+     "kind": "blob",
+     "blob": "e598a973e548",
+     "token": "expiry_condition",
+     "token_found": true,
+     "ref": "Simulators:relational-playground/playground/uncertainty.py@9b8c5e281fd7"
+    }
+   ],
+   "source": "S2 playground-crossrun/adapters/concept_map.py ROWS (location on both sides)",
+   "grain_note": "crossrun grain is finer than map rows: one map row can cover several of these; combined-playground/cplay/ may carry a third Simulators copy, not checked per row",
+   "in_map_by_path": "YES",
+   "map_rows_by_path": [
+    "UNKNOWN expiry",
+    "scoped absence (ABSENT_AT_SENSITIVITY)"
+   ],
+   "in_map": "YES",
+   "in_map_basis": "UNKNOWN expiry",
+   "grain_judgment": {
+    "who": "Claude Code session (same session that built the register)",
+    "level": "L0",
+    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+   }
+  },
+  {
+   "concept": "frozen anchor",
+   "homes": [
+    {
+     "repo": "study-aperture",
+     "path": "experimental/playground/reference/anchor.py",
+     "commit": "79f402c7153c",
+     "kind": "blob",
+     "blob": "221e2b6ee399",
+     "token": "class AnchorState",
+     "token_found": true,
+     "ref": "study-aperture:experimental/playground/reference/anchor.py@79f402c7153c"
+    },
+    {
+     "repo": "Simulators",
+     "path": "relational-playground/playground/anchor.py",
+     "commit": "decb1a778d4a",
+     "kind": "blob",
+     "blob": "890192905c7b",
+     "token": "def freeze",
+     "token_found": true,
+     "ref": "Simulators:relational-playground/playground/anchor.py@decb1a778d4a"
+    }
+   ],
+   "source": "S2 playground-crossrun/adapters/concept_map.py ROWS (location on both sides)",
+   "grain_note": "crossrun grain is finer than map rows: one map row can cover several of these; combined-playground/cplay/ may carry a third Simulators copy, not checked per row",
+   "in_map_by_path": "YES",
+   "map_rows_by_path": [
+    "anchor / return"
+   ],
+   "in_map": "YES",
+   "in_map_basis": "anchor / return",
+   "grain_judgment": {
+    "who": "Claude Code session (same session that built the register)",
+    "level": "L0",
+    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+   }
+  },
+  {
+   "concept": "return test (asserted return + tolerance)",
+   "homes": [
+    {
+     "repo": "study-aperture",
+     "path": "experimental/playground/reference/return_test.py",
+     "commit": "c780f5c388c2",
+     "kind": "blob",
+     "blob": "a202e97bd0ba",
+     "token": "def return_test",
+     "token_found": true,
+     "ref": "study-aperture:experimental/playground/reference/return_test.py@c780f5c388c2"
+    },
+    {
+     "repo": "Simulators",
+     "path": "relational-playground/playground/anchor.py",
+     "commit": "decb1a778d4a",
+     "kind": "blob",
+     "blob": "890192905c7b",
+     "token": "def return_diff",
+     "token_found": true,
+     "ref": "Simulators:relational-playground/playground/anchor.py@decb1a778d4a"
+    }
+   ],
+   "source": "S2 playground-crossrun/adapters/concept_map.py ROWS (location on both sides)",
+   "grain_note": "crossrun grain is finer than map rows: one map row can cover several of these; combined-playground/cplay/ may carry a third Simulators copy, not checked per row",
+   "in_map_by_path": "YES",
+   "map_rows_by_path": [
+    "anchor / return"
+   ],
+   "in_map": "YES",
+   "in_map_basis": "anchor / return",
+   "grain_judgment": {
+    "who": "Claude Code session (same session that built the register)",
+    "level": "L0",
+    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+   }
+  },
+  {
+   "concept": "system continuity vs configuration continuity",
+   "homes": [
+    {
+     "repo": "study-aperture",
+     "path": "experimental/playground/reference/continuity.py",
+     "commit": "9587178428d9",
+     "kind": "blob",
+     "blob": "67180b64ba45",
+     "token": "def classify_continuity",
+     "token_found": true,
+     "ref": "study-aperture:experimental/playground/reference/continuity.py@9587178428d9"
+    },
+    {
+     "repo": "Simulators",
+     "path": "relational-playground/playground/continuity.py",
+     "commit": "861b7c5568fe",
+     "kind": "blob",
+     "blob": "e4a7095fa67c",
+     "token": "class ContinuityMatrix",
+     "token_found": true,
+     "ref": "Simulators:relational-playground/playground/continuity.py@861b7c5568fe"
+    }
+   ],
+   "source": "S2 playground-crossrun/adapters/concept_map.py ROWS (location on both sides)",
+   "grain_note": "crossrun grain is finer than map rows: one map row can cover several of these; combined-playground/cplay/ may carry a third Simulators copy, not checked per row",
+   "in_map_by_path": "NO",
+   "map_rows_by_path": [],
+   "in_map": "NO",
+   "in_map_basis": "",
+   "grain_judgment": {
+    "who": "Claude Code session (same session that built the register)",
+    "level": "L0",
+    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+   }
+  },
+  {
+   "concept": "observer declared before comparison",
+   "homes": [
+    {
+     "repo": "study-aperture",
+     "path": "experimental/playground/applicability/mapping.py",
+     "commit": "c86d6b9cb150",
+     "kind": "blob",
+     "blob": "e25f61875e32",
+     "token": "OBSERVER",
+     "token_found": true,
+     "ref": "study-aperture:experimental/playground/applicability/mapping.py@c86d6b9cb150"
+    },
+    {
+     "repo": "Simulators",
+     "path": "relational-playground/playground/controls.py",
+     "commit": "512f320aba19",
+     "kind": "blob",
+     "blob": "e6f55a2d8503",
+     "token": "OBSERVER_FIELDS",
+     "token_found": true,
+     "ref": "Simulators:relational-playground/playground/controls.py@512f320aba19"
+    }
+   ],
+   "source": "S2 playground-crossrun/adapters/concept_map.py ROWS (location on both sides)",
+   "grain_note": "crossrun grain is finer than map rows: one map row can cover several of these; combined-playground/cplay/ may carry a third Simulators copy, not checked per row",
+   "in_map_by_path": "NO",
+   "map_rows_by_path": [],
+   "in_map": "NO",
+   "in_map_basis": "",
+   "grain_judgment": {
+    "who": "Claude Code session (same session that built the register)",
+    "level": "L0",
+    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+   }
+  },
+  {
+   "concept": "observer regime partition (names differ: PASSIVE vs REACTIVITY; not merged)",
+   "homes": [
+    {
+     "repo": "study-aperture",
+     "path": "experimental/playground/observation/__init__.py",
+     "commit": "79f402c7153c",
+     "kind": "blob",
+     "blob": "d926c344c961",
+     "token": "passive, perturbative, strategic",
+     "token_found": true,
+     "ref": "study-aperture:experimental/playground/observation/__init__.py@79f402c7153c"
+    },
+    {
+     "repo": "Simulators",
+     "path": "relational-playground/playground/controls.py",
+     "commit": "512f320aba19",
+     "kind": "blob",
+     "blob": "e6f55a2d8503",
+     "token": "OBSERVER_FIELDS",
+     "token_found": true,
+     "ref": "Simulators:relational-playground/playground/controls.py@512f320aba19"
+    }
+   ],
+   "source": "S2 playground-crossrun/adapters/concept_map.py ROWS (location on both sides)",
+   "grain_note": "crossrun grain is finer than map rows: one map row can cover several of these; combined-playground/cplay/ may carry a third Simulators copy, not checked per row",
+   "in_map_by_path": "NO",
+   "map_rows_by_path": [],
+   "in_map": "NO",
+   "in_map_basis": "",
+   "grain_judgment": {
+    "who": "Claude Code session (same session that built the register)",
+    "level": "L0",
+    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+   }
+  },
+  {
+   "concept": "no universal ranking",
+   "homes": [
+    {
+     "repo": "study-aperture",
+     "path": "experimental/playground/applicability/mapping.py",
+     "commit": "c86d6b9cb150",
+     "kind": "blob",
+     "blob": "e25f61875e32",
+     "token": "no universal ranking",
+     "token_found": true,
+     "ref": "study-aperture:experimental/playground/applicability/mapping.py@c86d6b9cb150"
+    },
+    {
+     "repo": "Simulators",
+     "path": "relational-playground/playground/experiments/comparison.py",
+     "commit": "2cdfd53f64c6",
+     "kind": "blob",
+     "blob": "4a966c1b248c",
+     "token": "def rank",
+     "token_found": true,
+     "ref": "Simulators:relational-playground/playground/experiments/comparison.py@2cdfd53f64c6"
+    }
+   ],
+   "source": "S2 playground-crossrun/adapters/concept_map.py ROWS (location on both sides)",
+   "grain_note": "crossrun grain is finer than map rows: one map row can cover several of these; combined-playground/cplay/ may carry a third Simulators copy, not checked per row",
+   "in_map_by_path": "NO",
+   "map_rows_by_path": [],
+   "in_map": "NO",
+   "in_map_basis": "",
+   "grain_judgment": {
+    "who": "Claude Code session (same session that built the register)",
+    "level": "L0",
+    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+   }
+  },
+  {
+   "concept": "applicability / domain of validity",
+   "homes": [
+    {
+     "repo": "study-aperture",
+     "path": "experimental/playground/applicability/mapping.py",
+     "commit": "c86d6b9cb150",
+     "kind": "blob",
+     "blob": "e25f61875e32",
+     "token": "def assess",
+     "token_found": true,
+     "ref": "study-aperture:experimental/playground/applicability/mapping.py@c86d6b9cb150"
+    },
+    {
+     "repo": "Simulators",
+     "path": "relational-playground/playground/analysis/applicability.py",
+     "commit": "861b7c5568fe",
+     "kind": "blob",
+     "blob": "1a1ac7e95ab7",
+     "token": "NOT ASSESSED",
+     "token_found": true,
+     "ref": "Simulators:relational-playground/playground/analysis/applicability.py@861b7c5568fe"
+    }
+   ],
+   "source": "S2 playground-crossrun/adapters/concept_map.py ROWS (location on both sides)",
+   "grain_note": "crossrun grain is finer than map rows: one map row can cover several of these; combined-playground/cplay/ may carry a third Simulators copy, not checked per row",
+   "in_map_by_path": "NO",
+   "map_rows_by_path": [],
+   "in_map": "NO",
+   "in_map_basis": "",
+   "grain_judgment": {
+    "who": "Claude Code session (same session that built the register)",
+    "level": "L0",
+    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+   }
+  },
+  {
+   "concept": "percolation family",
+   "homes": [
+    {
+     "repo": "study-aperture",
+     "path": "experimental/playground/equations/percolation.py",
+     "commit": "474db2ab0944",
+     "kind": "blob",
+     "blob": "3c057004e788",
+     "token": "class BondPercolation",
+     "token_found": true,
+     "ref": "study-aperture:experimental/playground/equations/percolation.py@474db2ab0944"
+    },
+    {
+     "repo": "Simulators",
+     "path": "relational-playground/playground/equations/percolation.py",
+     "commit": "02dd4c7dcb07",
+     "kind": "blob",
+     "blob": "9977c15b17d8",
+     "token": "spot",
+     "token_found": true,
+     "ref": "Simulators:relational-playground/playground/equations/percolation.py@02dd4c7dcb07"
+    }
+   ],
+   "source": "S2 playground-crossrun/adapters/concept_map.py ROWS (location on both sides)",
+   "grain_note": "crossrun grain is finer than map rows: one map row can cover several of these; combined-playground/cplay/ may carry a third Simulators copy, not checked per row",
+   "in_map_by_path": "YES",
+   "map_rows_by_path": [
+    "percolation"
+   ],
+   "in_map": "YES",
+   "in_map_basis": "percolation",
+   "grain_judgment": {
+    "who": "Claude Code session (same session that built the register)",
+    "level": "L0",
+    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+   }
+  },
+  {
+   "concept": "branching family",
+   "homes": [
+    {
+     "repo": "study-aperture",
+     "path": "experimental/playground/equations/branching.py",
+     "commit": "05b2f1a8da5b",
+     "kind": "blob",
+     "blob": "6d26b28105dc",
+     "token": "class FiniteBranching",
+     "token_found": true,
+     "ref": "study-aperture:experimental/playground/equations/branching.py@05b2f1a8da5b"
+    },
+    {
+     "repo": "Simulators",
+     "path": "relational-playground/playground/equations/branching.py",
+     "commit": "02dd4c7dcb07",
+     "kind": "blob",
+     "blob": "0046e51921ba",
+     "token": "def branching",
+     "token_found": true,
+     "ref": "Simulators:relational-playground/playground/equations/branching.py@02dd4c7dcb07"
+    }
+   ],
+   "source": "S2 playground-crossrun/adapters/concept_map.py ROWS (location on both sides)",
+   "grain_note": "crossrun grain is finer than map rows: one map row can cover several of these; combined-playground/cplay/ may carry a third Simulators copy, not checked per row",
+   "in_map_by_path": "YES",
+   "map_rows_by_path": [
+    "branching"
+   ],
+   "in_map": "YES",
+   "in_map_basis": "branching",
+   "grain_judgment": {
+    "who": "Claude Code session (same session that built the register)",
+    "level": "L0",
+    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+   }
+  },
+  {
+   "concept": "value / condition basis vocabulary",
+   "homes": [
+    {
+     "repo": "study-aperture",
+     "path": "experimental/playground/applicability/mapping.py",
+     "commit": "c86d6b9cb150",
+     "kind": "blob",
+     "blob": "e25f61875e32",
+     "token": "class ConditionBasis",
+     "token_found": true,
+     "ref": "study-aperture:experimental/playground/applicability/mapping.py@c86d6b9cb150"
+    },
+    {
+     "repo": "Simulators",
+     "path": "relational-playground/playground/uncertainty.py",
+     "commit": "9b8c5e281fd7",
+     "kind": "blob",
+     "blob": "e598a973e548",
+     "token": "STATUSES",
+     "token_found": true,
+     "ref": "Simulators:relational-playground/playground/uncertainty.py@9b8c5e281fd7"
+    }
+   ],
+   "source": "S2 playground-crossrun/adapters/concept_map.py ROWS (location on both sides)",
+   "grain_note": "crossrun grain is finer than map rows: one map row can cover several of these; combined-playground/cplay/ may carry a third Simulators copy, not checked per row",
+   "in_map_by_path": "YES",
+   "map_rows_by_path": [
+    "UNKNOWN expiry",
+    "scoped absence (ABSENT_AT_SENSITIVITY)"
+   ],
+   "in_map": "NO",
+   "in_map_basis": "",
+   "grain_judgment": {
+    "who": "Claude Code session (same session that built the register)",
+    "level": "L0",
+    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+   }
+  },
+  {
+   "concept": "READING_PROTOCOL (how a folder is to be read)",
+   "homes": [
+    {
+     "repo": "Simulators",
+     "path": "READING_PROTOCOL.md",
+     "commit": "751490c471fb",
+     "kind": "blob",
+     "blob": "ae6dd1146a38",
+     "ref": "Simulators:READING_PROTOCOL.md@751490c471fb"
+    },
+    {
+     "repo": "study-aperture",
+     "path": "READING_PROTOCOL.md",
+     "commit": "1bd269730fbc",
+     "kind": "blob",
+     "blob": "601fdd196ceb",
+     "ref": "study-aperture:READING_PROTOCOL.md@1bd269730fbc"
+    },
+    {
+     "repo": "thermodynamic-accountability-framework",
+     "path": "READING_PROTOCOL.md",
+     "commit": "9f3766b68c19",
+     "kind": "blob",
+     "blob": "601fdd196ceb",
+     "ref": "thermodynamic-accountability-framework:READING_PROTOCOL.md@9f3766b68c19"
+    }
+   ],
+   "source": "S3 grep: top-level name shared by all three repos",
+   "grain_note": "study-aperture and TAF copies have the same blob; the Simulators copy differs",
+   "in_map_by_path": "NO",
+   "map_rows_by_path": [],
+   "in_map": "NO",
+   "in_map_basis": "by path; no other map row read as covering it",
+   "grain_judgment": {
+    "who": "Claude Code session (same session that built the register)",
+    "level": "L0",
+    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+   }
+  },
+  {
+   "concept": "driver-hours evidence register",
+   "homes": [
+    {
+     "repo": "Simulators",
+     "path": "automation-gap/driver_hours_evidence_register.py",
+     "commit": "445f829ffc11",
+     "kind": "blob",
+     "blob": "32e35ef6e2f1",
+     "ref": "Simulators:automation-gap/driver_hours_evidence_register.py@445f829ffc11"
+    },
+    {
+     "repo": "thermodynamic-accountability-framework",
+     "path": "labor_thermodynamics/driver_hours_evidence_register.py",
+     "commit": "eaed14d2a289",
+     "kind": "blob",
+     "blob": "556e741bdf30",
+     "ref": "thermodynamic-accountability-framework:labor_thermodynamics/driver_hours_evidence_register.py@eaed14d2a289"
+    }
+   ],
+   "source": "S3 grep: .py basename shared Simulators/TAF; same header, different blobs",
+   "grain_note": "one file in two places, drifted (diff 88 lines at these commits)",
+   "in_map_by_path": "NO",
+   "map_rows_by_path": [],
+   "in_map": "NO",
+   "in_map_basis": "by path; no other map row read as covering it",
+   "grain_judgment": {
+    "who": "Claude Code session (same session that built the register)",
+    "level": "L0",
+    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+   }
+  },
+  {
+   "concept": "conditional_claims (vendored tool)",
+   "homes": [
+    {
+     "repo": "Simulators",
+     "path": "tools/conditional_claims.py",
+     "commit": "5f7c7db1b4f7",
+     "kind": "blob",
+     "blob": "454501cf457d",
+     "ref": "Simulators:tools/conditional_claims.py@5f7c7db1b4f7"
+    },
+    {
+     "repo": "study-aperture",
+     "path": "vendored/conditional_claims.py",
+     "commit": "5b2f2c540703",
+     "kind": "blob",
+     "blob": "454501cf457d",
+     "ref": "study-aperture:vendored/conditional_claims.py@5b2f2c540703"
+    }
+   ],
+   "source": "S3 grep: .py basename shared Simulators/study-aperture; same blob",
+   "grain_note": "a vendored copy: same bytes today, can drift; whether a vendored copy is a home is a reading",
+   "in_map_by_path": "NO",
+   "map_rows_by_path": [],
+   "in_map": "NO",
+   "in_map_basis": "by path; no other map row read as covering it",
+   "grain_judgment": {
+    "who": "Claude Code session (same session that built the register)",
+    "level": "L0",
+    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+   }
+  },
+  {
+   "concept": "false_agree (vendored tool)",
+   "homes": [
+    {
+     "repo": "Simulators",
+     "path": "tools/false_agree.py",
+     "commit": "fd6d3bcd428e",
+     "kind": "blob",
+     "blob": "2ea1cc3a7197",
+     "ref": "Simulators:tools/false_agree.py@fd6d3bcd428e"
+    },
+    {
+     "repo": "study-aperture",
+     "path": "vendored/false_agree.py",
+     "commit": "5b2f2c540703",
+     "kind": "blob",
+     "blob": "2ea1cc3a7197",
+     "ref": "study-aperture:vendored/false_agree.py@5b2f2c540703"
+    }
+   ],
+   "source": "S3 grep: .py basename shared Simulators/study-aperture; same blob",
+   "grain_note": "a vendored copy: same bytes today, can drift; whether a vendored copy is a home is a reading",
+   "in_map_by_path": "NO",
+   "map_rows_by_path": [],
+   "in_map": "NO",
+   "in_map_basis": "by path; no other map row read as covering it",
+   "grain_judgment": {
+    "who": "Claude Code session (same session that built the register)",
+    "level": "L0",
+    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+   }
+  },
+  {
+   "concept": "provenance_graph (vendored tool)",
+   "homes": [
+    {
+     "repo": "Simulators",
+     "path": "tools/provenance_graph.py",
+     "commit": "cc9114186c51",
+     "kind": "blob",
+     "blob": "49680b7456df",
+     "ref": "Simulators:tools/provenance_graph.py@cc9114186c51"
+    },
+    {
+     "repo": "study-aperture",
+     "path": "vendored/provenance_graph.py",
+     "commit": "5b2f2c540703",
+     "kind": "blob",
+     "blob": "49680b7456df",
+     "ref": "study-aperture:vendored/provenance_graph.py@5b2f2c540703"
+    }
+   ],
+   "source": "S3 grep: .py basename shared Simulators/study-aperture; same blob",
+   "grain_note": "a vendored copy: same bytes today, can drift; whether a vendored copy is a home is a reading",
+   "in_map_by_path": "NO",
+   "map_rows_by_path": [],
+   "in_map": "NO",
+   "in_map_basis": "by path; no other map row read as covering it",
+   "grain_judgment": {
+    "who": "Claude Code session (same session that built the register)",
+    "level": "L0",
+    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+   }
+  },
+  {
+   "concept": "measurand declaration (measurand vs indication / declared identity)",
+   "homes": [
+    {
+     "repo": "Simulators",
+     "path": "instrument-epistemology/src/instrum/measurand.py",
+     "commit": "b31ab273b674",
+     "kind": "blob",
+     "blob": "b2de42add64a",
+     "ref": "Simulators:instrument-epistemology/src/instrum/measurand.py@b31ab273b674"
+    },
+    {
+     "repo": "study-aperture",
+     "path": "experimental/playground/equations/measurand.py",
+     "commit": "e4a9bc9f9609",
+     "kind": "blob",
+     "blob": "7bc3079c9394",
+     "ref": "study-aperture:experimental/playground/equations/measurand.py@e4a9bc9f9609"
+    }
+   ],
+   "source": "S3 grep: .py basename shared Simulators/study-aperture; headers read",
+   "grain_note": "CANDIDATE match only: decomposition (instrument-epistemology) vs declared identity on linked runs (playground); same word, possibly two concepts",
+   "in_map_by_path": "NO",
+   "map_rows_by_path": [],
+   "in_map": "NO",
+   "in_map_basis": "by path; no other map row read as covering it",
+   "grain_judgment": {
+    "who": "Claude Code session (same session that built the register)",
+    "level": "L0",
+    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+   }
+  },
+  {
+   "concept": "thermodynamic audit inside an economic sim",
+   "homes": [
+    {
+     "repo": "Simulators",
+     "path": "earth_economics/earth_economic_sim.py",
+     "commit": "1eade85651a3",
+     "kind": "blob",
+     "blob": "23bb3f99a822",
+     "ref": "Simulators:earth_economics/earth_economic_sim.py@1eade85651a3"
+    },
+    {
+     "repo": "thermodynamic-accountability-framework",
+     "path": "calibration/unified_audit.py",
+     "commit": "51083ca4e447",
+     "kind": "blob",
+     "blob": "6f5e23146b0c",
+     "ref": "thermodynamic-accountability-framework:calibration/unified_audit.py@51083ca4e447"
+    }
+   ],
+   "source": "S3 grep: earth_economic_sim.py names TAF ('In reality, this would import modules from TAF')",
+   "grain_note": "CANDIDATE: a stand-in in Simulators for TAF's auditor; the TAF path is the nearest auditor module read, not a declared counterpart",
+   "in_map_by_path": "NO",
+   "map_rows_by_path": [],
+   "in_map": "NO",
+   "in_map_basis": "by path; no other map row read as covering it",
+   "grain_judgment": {
+    "who": "Claude Code session (same session that built the register)",
+    "level": "L0",
+    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+   }
+  },
+  {
+   "concept": "playground (equation-substitution laboratory)",
+   "homes": [
+    {
+     "repo": "Simulators",
+     "path": "relational-playground/",
+     "commit": "02bc60548b5d",
+     "kind": "tree",
+     "ref": "Simulators:relational-playground/@02bc60548b5d"
+    },
+    {
+     "repo": "study-aperture",
+     "path": "experimental/playground/",
+     "commit": "1fc37a8894c5",
+     "kind": "tree",
+     "ref": "study-aperture:experimental/playground/@1fc37a8894c5"
+    }
+   ],
+   "source": "S4 concept_map.json row spanning 2 repos",
+   "grain_note": "taken from the map itself",
+   "in_map_by_path": "YES",
+   "map_rows_by_path": [
+    "playground (equation-substitution laboratory)"
+   ],
+   "in_map": "YES",
+   "in_map_basis": "playground (equation-substitution laboratory)",
+   "grain_judgment": {
+    "who": "Claude Code session (same session that built the register)",
+    "level": "L0",
+    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+   }
+  },
+  {
+   "concept": "attribution directionality",
+   "homes": [
+    {
+     "repo": "thermodynamic-accountability-framework",
+     "path": "judgment_registry/experiments.py",
+     "commit": "c42676233d5b",
+     "kind": "blob",
+     "blob": "bc89558ce2d8",
+     "ref": "thermodynamic-accountability-framework:judgment_registry/experiments.py@c42676233d5b"
+    },
+    {
+     "repo": "Simulators",
+     "path": "measurand-partition/common.py",
+     "commit": "8595066ecd82",
+     "kind": "blob",
+     "blob": "154f76844ab0",
+     "ref": "Simulators:measurand-partition/common.py@8595066ecd82"
+    }
+   ],
+   "source": "S4 concept_map.json row spanning 2 repos",
+   "grain_note": "taken from the map itself",
+   "in_map_by_path": "YES",
+   "map_rows_by_path": [
+    "attribution directionality"
+   ],
+   "in_map": "YES",
+   "in_map_basis": "attribution directionality",
+   "grain_judgment": {
+    "who": "Claude Code session (same session that built the register)",
+    "level": "L0",
+    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+   }
+  }
+ ],
+ "considered_not_included": [
+  {
+   "name": "institutional_audit.py",
+   "homes": [
+    "Simulators:fragility-cascade/",
+    "TAF:metrology/"
+   ],
+   "why_not": "same name, different concepts (refutation verdicts vs premise-set audit), headers read"
+  },
+  {
+   "name": "ablation.py",
+   "homes": [
+    "Simulators:forest-model-ledger/ledger/toolkit/",
+    "Simulators:relational-playground/playground/analysis/",
+    "TAF:judgment_registry/"
+   ],
+   "why_not": "TAF copy is label ablation, a different concept; the two Simulators copies are one repo"
+  },
+  {
+   "name": "sensitivity.py",
+   "homes": [
+    "Simulators:relational-playground/playground/experiments/",
+    "study-aperture:experimental/playground/detection/"
+   ],
+   "why_not": "parameter sensitivity vs instrument detection limit; different concepts"
+  },
+  {
+   "name": "expiry_register.py, unified_audit.py (blind-reader-void12 packet sources)",
+   "homes": [
+    "Simulators:blind-reader-void12/.../sources/",
+    "TAF:calibration/"
+   ],
+   "why_not": "frozen specimen copies inside a study packet, not homes"
+  },
+  {
+   "name": "TOOL_FINDER NAME_COLLISIONS, other 10",
+   "homes": [
+    "see TOOL_FINDER/entries.py"
+   ],
+   "why_not": "one repo only, outside the 3 repos, or different concepts under one name (filter applied per row, L0)"
+  },
+  {
+   "name": "coincidence card (map row)",
+   "homes": [
+    "Simulators only"
+   ],
+   "why_not": "three homes, all in Simulators: multi-home, not across repos"
+  }
+ ]
+}

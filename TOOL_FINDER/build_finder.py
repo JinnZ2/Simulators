@@ -15,7 +15,8 @@ verbatim is the defect this index exists to avoid. A repo with no local
 checkout reads QUOTE_NOT_CHECKED for its entries, never a pass.
 
 Sibling checkouts are looked for at ../<dir> beside this repo; override with
-FINDER_<REPO>_PATH (e.g. FINDER_METHOD_LAYER_PATH).
+FINDER_<REPO>_PATH (e.g. FINDER_METHOD_LAYER_PATH). Every build prints a sibling_state
+line first (repo@sha, or ABSENT): QUOTE_NOT_CHECKED counts are a property of that line.
 
 status: RUN      the entry's own check command exited 0, in this session
         UNKNOWN  it was run and exited non-zero, or timed out
@@ -246,6 +247,20 @@ def selftest():
     return 0 if ok == tot else 1
 
 
+def sibling_state():
+    """Report-format field: repo@sha for each repo in DIRS, ABSENT where no checkout.
+    QUOTE_NOT_CHECKED counts depend on it, so every run prints it."""
+    out = []
+    for r in sorted(DIRS):
+        d = repo_dir(r)
+        if d is None:
+            out.append("%s ABSENT" % r)
+            continue
+        p = subprocess.run(["git", "-C", d, "rev-parse", "HEAD"], capture_output=True, text=True)
+        out.append("%s@%s" % (r, p.stdout.strip()[:12] if p.returncode == 0 else "UNREADABLE"))
+    return "sibling_state: " + "; ".join(out)
+
+
 def main(argv):
     if "--selftest" in argv:
         return selftest()
@@ -255,6 +270,7 @@ def main(argv):
         json.dump(status, open(STATUS, "w"), indent=1, sort_keys=True)
     elif os.path.isfile(STATUS):
         status = json.load(open(STATUS))
+    print(sibling_state())
     rows, probs = build(status)
     if probs:
         print("REFUSED: quotes not verbatim:\n  " + "\n  ".join(probs))

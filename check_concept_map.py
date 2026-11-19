@@ -12,6 +12,8 @@ from a sibling checkout (../<repo>, ../jinnz2/<repo>, or $CONCEPT_MAP_REPOS/<rep
 No checkout: NOT_CHECKED, never OK. A pinned `tip` that no longer matches the ref is STALE.
 Collision evidence is a URL or note (not checked) or {repo, path, ref}, shown as repo:path@ref and
 checked: the ref must resolve (archive/* branches like any other), sit exactly at `tip` if given, contain `tip_contains` if given, hold the path, and match `sha256` if given.
+Every check run prints a sibling_state line first: repo@sha for each repo the JSON names, ABSENT where
+there is no checkout; NOT_CHECKED counts are a property of that line.
 No code is moved by this file. Stdlib only.
 """
 import json, os, subprocess, sys
@@ -41,6 +43,32 @@ def checkout(repo):
 def git(d, *a):
     p = subprocess.run(["git", "-C", d] + list(a), capture_output=True, text=True)
     return p.returncode, p.stdout.strip()
+
+
+def sibling_state(data, cdata):
+    """Report-format field: repo@sha for each repo the two JSON files name, ABSENT where no checkout.
+    The sha is HEAD of the checkout used; NOT_CHECKED counts above depend on it."""
+    repos = set()
+
+    def walk(x):
+        if isinstance(x, dict):
+            if isinstance(x.get("repo"), str) and x["repo"] not in ("VOID",):
+                repos.add(x["repo"])
+            for v in x.values():
+                walk(v)
+        elif isinstance(x, list):
+            for v in x:
+                walk(v)
+    walk(data); walk(cdata)
+    out = []
+    for r in sorted(repos):
+        d = HERE if r == "Simulators" else checkout(r)
+        if d is None:
+            out.append("%s ABSENT" % r)
+            continue
+        rc, sha = git(d, "rev-parse", "HEAD")
+        out.append("%s@%s" % (r, sha[:12] if not rc else "UNREADABLE"))
+    return "sibling_state: " + "; ".join(out)
 
 
 def check_location(loc, here=HERE):
@@ -439,6 +467,7 @@ if __name__ == "__main__":
         open(CMD, "w", encoding="utf-8").write(render_collisions(cdata))
     if "--selftest" in sys.argv:
         sys.exit(1 if selftest(data) else 0)
+    print(sibling_state(data, cdata))
     md = open(MD, encoding="utf-8").read() if os.path.exists(MD) else ""
     f, _ = run(data, md, strict="--strict" in sys.argv)
     cf = collision_problems(cdata, open(CMD, encoding="utf-8").read() if os.path.exists(CMD) else "")

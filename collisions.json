@@ -14,15 +14,26 @@
     {
      "repo": "thermodynamic-accountability-framework",
      "path": "calibration",
-     "ref": "origin/claude/unknown-axis-followup-2",
-     "tip_contains": "a2c5d99"
+     "ref": "origin/archive/unknown-axis-followup",
+     "tip": "a2c5d99d8b41f71d2995d62b00661f35cf75361b",
+     "repinned_2026-11-19": {
+      "old_pin": {
+       "repo": "thermodynamic-accountability-framework",
+       "path": "calibration",
+       "ref": "origin/claude/unknown-axis-followup-2",
+       "tip_contains": "a2c5d99"
+      },
+      "reason": "origin/claude/unknown-axis-followup-2 moved to 51083ca, which does not contain a2c5d99; origin/archive/unknown-axis-followup sits exactly at a2c5d99",
+      "checked": "check_concept_map.py with all sibling checkouts present, 2026-11-19"
+     }
     },
     {
      "repo": "thermodynamic-accountability-framework",
      "path": "calibration",
      "ref": "origin/archive/not-determinable-reason",
      "tip_contains": "92cd578"
-    }
+    },
+    "Note 2026-11-19: the PR 82 pin on origin/claude/unknown-axis-followup-2 (contains a2c5d99) repinned to origin/archive/unknown-axis-followup @ a2c5d99 (exact tip); old pin kept inside the entry as repinned_2026-11-19.old_pin."
    ],
    "sides": [
     {
@@ -545,29 +556,62 @@
     {
      "repo": "Simulators",
      "path": "forest-model-ledger/ledger/toolkit/cases/texts/kimi_substrate_neutral_intelligence_audit.md",
-     "ref": "origin/claude/forest-toolkit-build",
-     "tip_contains": "d402fa8",
-     "sha256": "86945968c31d3c3bbf289ed78ab918d8d7af6a2d978df22b6f0a6a5b9a60b7c8"
+     "ref": "origin/archive/pr256-tip",
+     "tip": "d402fa8eb084eae6b2226e1e5193d1a648c6757f",
+     "sha256": "86945968c31d3c3bbf289ed78ab918d8d7af6a2d978df22b6f0a6a5b9a60b7c8",
+     "repinned_2026-11-19": {
+      "old_pin": {
+       "repo": "Simulators",
+       "path": "forest-model-ledger/ledger/toolkit/cases/texts/kimi_substrate_neutral_intelligence_audit.md",
+       "ref": "origin/claude/forest-toolkit-build",
+       "tip_contains": "d402fa8",
+       "sha256": "86945968c31d3c3bbf289ed78ab918d8d7af6a2d978df22b6f0a6a5b9a60b7c8"
+      },
+      "reason": "origin/claude/forest-toolkit-build no longer resolves on the Simulators remote; origin/archive/pr256-tip sits exactly at d402fa8, the SHA the old pin required (tip_contains)",
+      "checked": "check_concept_map.py with all sibling checkouts present, 2026-11-19"
+     }
     },
     {
      "repo": "Simulators",
      "path": "forest-model-ledger/ledger/toolkit/cases/texts/chat_paste_2026-11-10.txt",
-     "ref": "origin/claude/forest-toolkit-build",
-     "tip_contains": "d402fa8",
-     "sha256": "42a206e2603b814f89fd694e31c566c90a07bf606f28d89802149f33fc0444b4"
+     "ref": "origin/archive/pr256-tip",
+     "tip": "d402fa8eb084eae6b2226e1e5193d1a648c6757f",
+     "sha256": "42a206e2603b814f89fd694e31c566c90a07bf606f28d89802149f33fc0444b4",
+     "repinned_2026-11-19": {
+      "old_pin": {
+       "repo": "Simulators",
+       "path": "forest-model-ledger/ledger/toolkit/cases/texts/chat_paste_2026-11-10.txt",
+       "ref": "origin/claude/forest-toolkit-build",
+       "tip_contains": "d402fa8",
+       "sha256": "42a206e2603b814f89fd694e31c566c90a07bf606f28d89802149f33fc0444b4"
+      },
+      "reason": "origin/claude/forest-toolkit-build no longer resolves on the Simulators remote; origin/archive/pr256-tip sits exactly at d402fa8, the SHA the old pin required (tip_contains)",
+      "checked": "check_concept_map.py with all sibling checkouts present, 2026-11-19"
+     }
     },
     {
      "repo": "Simulators",
      "path": "forest-model-ledger/CLAIM_TABLE.md",
-     "ref": "origin/claude/forest-toolkit-build",
-     "tip_contains": "d402fa8"
+     "ref": "origin/archive/pr256-tip",
+     "tip": "d402fa8eb084eae6b2226e1e5193d1a648c6757f",
+     "repinned_2026-11-19": {
+      "old_pin": {
+       "repo": "Simulators",
+       "path": "forest-model-ledger/CLAIM_TABLE.md",
+       "ref": "origin/claude/forest-toolkit-build",
+       "tip_contains": "d402fa8"
+      },
+      "reason": "origin/claude/forest-toolkit-build no longer resolves on the Simulators remote; origin/archive/pr256-tip sits exactly at d402fa8, the SHA the old pin required (tip_contains)",
+      "checked": "check_concept_map.py with all sibling checkouts present, 2026-11-19"
+     }
     },
     {
      "repo": "Simulators",
      "path": "forest-model-ledger/ledger/toolkit/cases/texts/MANIFEST.yaml",
      "ref": "origin/archive/pr256-tip",
      "tip": "d402fa8eb084eae6b2226e1e5193d1a648c6757f"
-    }
+    },
+    "Note 2026-11-19: three pins on origin/claude/forest-toolkit-build repinned to origin/archive/pr256-tip @ d402fa8 (exact tip); the old pins are kept inside each entry as repinned_2026-11-19.old_pin."
    ],
    "sides": [
     {
@@ -908,7 +952,8 @@
    "Owner works phone-only (no keyboard, no local compute).",
    "Sessions vary in model (Opus/Sonnet/Haiku/Fable) and model updates.",
    "Committer/author field = the pusher, not the model (basis: the 18 Perplexity commits in the playground row are committed under the user's GitHub noreply account).",
-   "Feature freeze (dated record, filed 2026-11-19): source = the owner's chat statement of 2026-11-11 in chat Claude, \"Freeze new features until map + cleanup done\"; status IN FORCE as of 2026-11-19 (the owner's record); lifts when the concept map and the cleanup are done. Records-only work is allowed under it (the owner, 2026-11-19). The statement itself is in chat, not in this repository."
+   "Feature freeze (dated record, filed 2026-11-19): source = the owner's chat statement of 2026-11-11 in chat Claude, \"Freeze new features until map + cleanup done\"; status IN FORCE as of 2026-11-19 (the owner's record); lifts when the concept map and the cleanup are done. Records-only work is allowed under it (the owner, 2026-11-19). The statement itself is in chat, not in this repository.",
+   "Freeze measurand lines (PROPOSED 2026-11-19, records only; not adopted until the owner marks them): FREEZE_CLEANUP_MEASURAND.md. 'map' = multi-home concepts mapped / multi-home concepts that exist, denominator MULTI_HOME_REGISTER.json (DRAFT); 'cleanup' = every item filed on 2026-11-11 has a row and a done-test that holds. Source located for the TAF items only (TAF docs/cleanup/TAF_CLEANUP_PHASE1_INVENTORY.md); the study-aperture branch deletions (items 24-30) are NOT LOCATED in any repo read."
   ]
  }
 }
