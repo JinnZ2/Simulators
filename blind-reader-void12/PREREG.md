@@ -110,3 +110,21 @@ The packet zip for variant B differs from variant A's in the brief and in that f
 **Variants.** Variant A is the brief as written. Variant B (`variants/READER_BRIEF.v2.variant_B.md`) removes the clause "even if the second system attaches different extra fields or detail", as in v1. Both stay in the design. Readers of v1 cannot be reused for v2 and should not be given v2.
 
 **Hashes.** `key_v2.json` sha256 `c88a910a03a6456900efabd130c57a19f1a0133c9566ebce34ae0b6e813b18d1`; `make_packet_v2.py` sha256 `37e0dd55c76231359c4060ef8f3a703cf5865eefa63bd1ca9fe18f04c4923e48`; v1 key sha256 `5c1a6caba4e3b0f1bc7d1a93b8e2503158e343a67d58fae5c77fe91a710a500b` (unchanged).
+
+## Key v2, amendment 1 (added 2026-11-19, before any further reading)
+
+The owner decided the content of amendment 1 in their own words on 2026-11-19 at 09:31 Central (recorded verbatim in `KEY_V2_AMENDMENT_1.md`, section 1). The text was drafted by Manus. Manus is not independent of the key: the rule it applies was written after the one filed v2 reading (Claude-v2-A) had been scored, and Manus ran the scorer on that reading under the new key once, to check that the scorer works, before committing the text; no list or rule was changed after that run.
+
+What changes: four `slots_specific` lists (T08, T09, T10, T12), the scoring rules N1 and C1 (named in the key, so key v2 output is byte-identical), and a statement about how the carried lists were derived. What does not: the brief, the packet, the clusters, `slots_carried`, `key_v2.json`, every filed reading and score. v2 readers stay poolable.
+
+Pinned (sha256 of the files at commit `1c45e1e`):
+
+| file | sha256 |
+|---|---|
+| `KEY_V2_AMENDMENT_1.md` | `2f881227942f06322b122a1890b4c5d814ab635e9eaf93adf36832dcd29baf74` |
+| `scoring/key_v2_a1.json` | `a7309046319e62210018dd3c48c88174abf63282200c8bb0a40a1c698b5d8ba4` |
+| `scoring/score_v2.py` | `22055614cac916e0970c7a8061bb305099289e8f48c647601c3048a0d347c426` |
+| `scoring/key_v2.json` (unchanged) | `c88a910a03a6456900efabd130c57a19f1a0133c9566ebce34ae0b6e813b18d1` |
+| `build/make_key_a1.py` | `5c01a8fa50e34f0848ff895bae581e9834c9c5955c28577c56938ba36adaffad` |
+
+Every v2 reading read before this section is scored under key v2 and under key a1, and both scores are filed. A reader of another family reads only after this section is merged, and reads the v2 packet unchanged. Readings from before packet v2 (one slot list) are not scored by `score_v2.py`.
