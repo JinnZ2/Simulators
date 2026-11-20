@@ -145,3 +145,17 @@ Instances named with the proposal:
 - An earlier x5 vs x10 count. Source: the chat session, as relayed by the owner 2026-11-20. It has
   no firing-log row, and the logger did not see it.
 
+
+## Amendment 2026-11-20: candidate code F15
+
+Added at the owner's order; F01-F14 above are unchanged. Status: PROPOSED (not used in a test run;
+no firing-log row carries it).
+
+| code | firing | example shape |
+|---|---|---|
+| F15 | order contradicts itself (header vs item, or item vs item) | a header that scopes one repository above an item that targets another; two items of one order that cannot both hold |
+
+Instances named with the proposal:
+
+- FL08 (`confusion/FIRING_LOG.md`): header vs item. FL08 stays coded VOID as filed; it is not recoded.
+- FL09 (`confusion/FIRING_LOG.md`): item vs item. FL09 stays coded VOID as filed; it is not recoded.
