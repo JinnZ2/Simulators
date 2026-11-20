@@ -38,6 +38,7 @@ jobs:
       - name: antifungal-mechanism-sim
         run: python -m unittest discover -s antifungal-mechanism-sim/tests -p 'test_*.py'
       - name: enclosure-first-residual
+        timeout-minutes: 5   # stalled about 46 min in run #1876; local time 3.3 s (studies/ci/STALL_1876.md)
         run: python -m unittest discover -s enclosure-first-residual/tests -p 'test_*.py'
       - name: threshold-states interaction (canonical)
         run: python -m unittest discover -s threshold-states -p 'test_*.py'
