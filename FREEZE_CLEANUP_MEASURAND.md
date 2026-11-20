@@ -263,4 +263,15 @@ Correction to "GONE in all 82" for `tool-finder-pointer` (sections 3, 4 and the 
 Head counts in this run: Simulators 29 (30 at 04:53Z), method-layer 3 (4 at 04:53Z;
 `claude/name-to-handle` is gone there).
 
+Correction 2026-11-20 to the 04:53Z rerun above (its rows are kept as written):
+
+- That run read 81 repos, not 82. The repo list file had no final newline, so the loop skipped
+  its last name, `urban-resilience-sim`. "every call exited 0" holds for the 81 calls made.
+- So "`claude/clone-refspec-note` EXISTS in 66 repos; gone from urban-resilience-sim" is wrong.
+  Read 2026-11-20T09:49Z: urban-resilience-sim has `refs/heads/claude/clone-refspec-note`.
+  The count is 67, unchanged from 2026-11-19, if the other 66 have not changed since 04:53Z.
+- "GONE in all 82" in that table was over 81 repos. urban-resilience-sim has 3 heads, none
+  matching `manus/wo11-current-main`, `tool-finder-pointer` or `healing-folder-additions-u5aojl`.
+- The second run (09:47Z) called `git ls-remote` per repo by name, not from that file.
+
 Observer slots: null.
