@@ -53,3 +53,16 @@ The step's command, from `.github/workflows/test.yml`:
   (same branch as this note). A stall now ends the step after 5 minutes instead of the job
   running on. It does not remove the cause. No change to `_find_method_layer()`: item 5 shows no
   tree walk to bound.
+
+## Note 2026-11-20 (after PR #328)
+
+Status: **OPEN.** Re-examine if the step fails on timeout.
+
+- Discovery hypothesis refuted. `_find_method_layer()` checks fixed paths (at most 7 candidates,
+  no tree walk); the whole step took 2.75–2.88 s locally under four settings of
+  `METHOD_LAYER_PATH` (table in "What was checked", item 5).
+- Run #1877 (push, `3021cdc`): the `enclosure-first-residual` step ran 17:48:51Z–17:48:54Z, 3 s,
+  success. Run #1878 (pull_request, same commit): success. No recurrence on one run of each.
+- Cause of the stall in run #1876: not established.
+- `timeout-minutes: 5` is on the step since PR #328 (merge `67ced757d4f0fd879b7b08d7b609b81f449b3d3e`).
+  A recurrence now ends the step after 5 minutes.
