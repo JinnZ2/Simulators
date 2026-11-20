@@ -10,7 +10,8 @@ kept, with what changed, because the repair is the record. Every one has
 a test in [`tests/test_gate.py`](tests/test_gate.py) that asserted the
 broken behaviour first and asserts the fix now, so a regression turns it
 red. Section 1 is not a defect and was not "fixed": it is a limit on what
-`G-RES` can promise.
+`G-RES` can promise. Section 12 is the same kind of entry for `claim()`:
+the gate checks that support exists, not that it agrees with the claim.
 
 The delivered files —
 [`gate.py`](gate.py), [`guards.json`](guards.json),
@@ -438,3 +439,49 @@ The checker identifies itself by content, not by path. Its first version
 matched on a single marker and flagged its own docstring — the check working
 and the rule being wrong — and a path-based skip would have broken the one
 case it exists for, scanning a tree that contains a copy of the tool.
+
+---
+
+## 12. `claim()` checks that support exists, not that the claim agrees with it — NOT A DEFECT
+
+Found by using the gate from outside this repository, on
+`JinnZ2/Mandala-Computing` `experiments/holo_tool_audit.py` (2026-10-27),
+an ablation study of a solver's failure on 3-SAT.
+
+The first wording of the diagnosis claim was *"the ring schedule, **not**
+the extra energy terms, drives the falloff"*, supported by five recorded
+quantities. Two of those quantities contradicted it: at n = 28, removing the
+extra terms moved success from 2/10 to 4/10, and the same energy annealed
+over all cells reached 6/10 against 9/10 for the plain solver. Both numbers
+point to the extra terms as a second cause. The gate recorded the claim
+`supported`, with no finding.
+
+That is correct behaviour for what `claim()` is. G-SUP asks that the
+quantities a claim names exist, and G-LAYER asks what layer they sit on.
+Neither guard reads the claim's text, and neither compares a direction or
+magnitude in the text against the values. A guard that did would need to
+parse prose, and §9 already showed what happens when this gate infers from
+free-text strings: `expected != observed` flagged every sound run.
+
+So this belongs with §1 as a limit on what the gate can promise, not with
+§4 as a defect. **A `supported` claim means its support is named and
+recorded. It does not mean the support agrees with the claim.** The gate
+stops a run with no declaration, a ratio across unlike objects, and a claim
+on nothing. It does not stop a claim on the wrong reading of the right
+numbers.
+
+What closed it in the case that found it was the author re-reading the
+recorded values against the text. The wording was changed to *"dominant
+cause … secondary cause that appears at n = 28 … no measurable effect"*.
+Where the gate cannot read the claim, the reader still has to.
+
+A structural repair would be a claim field the gate *can* check, for
+example a declared direction per supporting quantity (`supports` /
+`against` / `bound`), with a finding when a claim named as the conclusion
+rests on an `against` quantity it never answers. That is PROPOSED here, not
+built: it would change the claim signature every caller uses.
+
+`tests/test_gate.py::DeliveredRegistryAndReplay::test_claim_text_is_not_read`
+pins the limit: a claim whose text contradicts its own recorded support is
+`supported` with no finding. If a direction field is ever built, this test
+should be rewritten to assert the new finding, not deleted.
