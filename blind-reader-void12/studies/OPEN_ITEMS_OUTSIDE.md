@@ -48,3 +48,10 @@ Collected from the two bullets above; no fix (AUDIT of the fix choice first).
 - Reason it is open: the filing session has no push access to study-aperture, and the GitHub API is denied for that repository there.
 - Where the same note is filed: formula-audit `READING_NOTES.md`, "Note 2026-11-19: the outside audit's author" (merged by formula-audit PR #13, `a1513b9`).
 - Next stage: IMPLEMENT (records) by a session with study-aperture push access.
+- Follow-up 2026-11-20 (the lines above are kept as written): filed. The author note is in study-aperture `READING_NOTES.md`, merged by study-aperture PR #37 at `8164f9d` (commit `6c45954`). The session gained push access to study-aperture on 2026-11-19. Still open from the note itself: the author (Kimi or GPT, UNRESOLVED) and the audit text, which is in no repository.
+
+## Later (2026-11-20): study-aperture CI and the Python floor
+
+- Open: study-aperture's CI (`.github/workflows/checks.yml`) runs Python 3.11 to 3.14. The ecosystem floor recorded in housekeeping is 3.10 (owner-stated, 2026-11-20). Python 3.10 is not run there.
+- No change made. Recorded only.
+- Next stage: owner's decision (add 3.10 to the matrix, or record study-aperture's floor as 3.11).

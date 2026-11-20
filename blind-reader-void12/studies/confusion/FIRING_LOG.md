@@ -20,3 +20,14 @@ Read: Geometric-manifold- branch claude/subliminal-research-filing, 3243a50 to 6
 
 FL01 was first filed in Geometric-manifold- at `6474bfe` and moved here; its text is unchanged
 apart from the repository name added to the paths and the `status` cell.
+
+## 2026-11-20: study-aperture PR #37
+
+```text
+Reader: Claude family (Claude Code session)
+Read: study-aperture PR #37, commit 6c45954 (one dated note in READING_NOTES.md)
+```
+
+| id | code | term or passage | what was missing | what the reader did | source | resolves with | found | reached | status |
+|---|---|---|---|---|---|---|---|---|---|
+| FL03 | F01 | "say the word and I merge" (session replies after `6c45954`, twice) | whether the merge criteria were met | routed the merge to the owner. The criteria were already met and readable by the session: the change was records-only, and CI was green (8 of 8 check runs success on `6c45954`). | study-aperture PR #37, check runs on `6c45954` | the PR's diff and its check runs | after the output was written (named by the owner, 2026-11-20) | published reply; the merge waited one turn | resolved: study-aperture PR #37 merged at `8164f9d` |
