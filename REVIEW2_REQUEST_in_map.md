@@ -20,7 +20,8 @@ READ:
       sha256 6604b93ea0f74578a60da2b64d78ff2eac10adc9c2b88f2de7ee75d60df6799d
       concept_map.json @ 2fd67dd3202d22bc34e06befc6648932d752b924 with one field removed
       28 rows; each row: concept, home, status, locations
-  Read the files at the homes only where a row cannot be judged without them.
+  Judge from the attached files only; mark GUESS where a row cannot be judged without
+  the homes.
   Do not read, before returning: MULTI_HOME_REGISTER.json, concept_map.json, CONCEPT_MAP.md,
   FREEZE_CLEANUP_MEASURAND.md, build_multi_home_register.py, REVIEW2_REQUEST_in_map.md,
   studies/review/README.md, studies/review/MULTI_HOME_REGISTER_for_review_2026-11-20.json.

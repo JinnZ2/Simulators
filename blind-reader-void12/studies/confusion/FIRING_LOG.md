@@ -69,3 +69,15 @@ Read: Simulators main, commit 17df5dc (merge of origin/main 434e368 into a12dc9a
 
 Rule from FL05 (owner order, 2026-11-20): a merge onto main is made with `-m`, and the message
 carries the trailers. `--no-edit` is not used for a merge that will be pushed.
+
+## 2026-11-20: a contradiction in the REVIEW-2 block routed to the owner
+
+```text
+Reader: Claude family (Claude Code session)
+Read: Simulators REVIEW2_REQUEST_in_map.md at 7ccc05e (the block after the attachment line was added)
+```
+
+| id | code | term or passage | what was missing | what the reader did | source | resolves with | found | reached | status |
+|---|---|---|---|---|---|---|---|---|---|
+| FL06 | F01 | "Say if you want it." (session reply after `7ccc05e`) | which of two lines in the block governs: "Use the attachments; don't fetch the repository" or "Read the files at the homes only where a row cannot be judged without them" | found that the second line sends a reviewer to the repository the first forbids, wrote the fix, and routed it to the owner. The block's own rule settles it: the attachment line exists so the reviewer does not reach the repository, so the homes line has to yield. | the session's reply after `7ccc05e` | the attachment line's stated purpose (owner note: "without it, a reviewer with web access might fetch the repo") | after the output was written (named by the owner, 2026-11-20) | published reply; the block waited one turn | resolved: the homes line replaced at the owner's order |
+
