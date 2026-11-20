@@ -62,7 +62,15 @@ def build():
           "Blob ids at `%s` (the bytes the reviewer read; the reviewer did not verify the sha256 values):" % REVIEW_COMMIT, ""]
     for p in ("MULTI_HOME_REGISTER_for_review_2026-11-20_v2.json", "concept_map_for_review_2026-11-20.json"):
         o.append("- `studies/review/%s`: `%s`" % (p, git("rev-parse", "%s:studies/review/%s" % (REVIEW_COMMIT, p)).strip()))
-    o += ["", "## Owner's summary, excerpt as relayed in chat 2026-11-20 (the owner's text, not the reviewer's)", "",
+    o += ["", "## Noted discrepancy: the relayed summary (2026-11-20)", "",
+          "The counts above (L2 YES 16, PARTIAL 12; GRAIN 10) are primary: they are counted from the filed text.",
+          "The summary relayed with the review gave L2 YES 15, PARTIAL 13 and GRAIN 11.", "",
+          "- Source of the summary: chat Claude, relayed by the owner (owner order, 2026-11-20).",
+          "- Cause: a miscount in the relay. Its own GRAIN list has 10 entries (02, 03, 04, 06, 07, 09, 10, 11, 17, 18).",
+          "- Logged as FL07 in `blind-reader-void12/studies/confusion/FIRING_LOG.md`.",
+          "- Until 2026-11-20 this section was headed \"Owner's summary, excerpt as relayed in chat\" and",
+          "  attributed the text to the owner; the owner's order names chat Claude as its source.", "",
+          "Excerpt of the summary, as relayed:", "",
           "```",
           "REVIEW-2 (GPT-6, L2: different family; memory ON, prior exposure to the repos, not to these files)",
           "  YES 15 · PARTIAL 13 · NO 0      vs the builder's L0: YES 25 · PARTIAL 3",
@@ -77,9 +85,6 @@ def build():
           "                                         (the builder said PARTIAL too → agreement, counted once per level: L0 + L2)",
           "                    08 non-detection     its homes are split across two rows; neither row lists both (the builder said YES)",
           "```", "",
-          "Difference between that summary and the filed review text: the per-concept lines of the review",
-          "count as shown under Counts above; the rows the summary lists under GRAIN number 10.",
-          "The summary's figures are kept as relayed.", "",
           "## Notes", "",
           "- 03 and 07: PARTIAL at L0 and at L2 (same reading, cause GRAIN).",
           "- 05: PARTIAL at L0 and at L2. L0 gave a naming reason; L2 found the missing study-aperture home.",

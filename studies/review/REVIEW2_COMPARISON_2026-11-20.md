@@ -52,7 +52,18 @@ Blob ids at `7366f50` (the bytes the reviewer read; the reviewer did not verify 
 - `studies/review/MULTI_HOME_REGISTER_for_review_2026-11-20_v2.json`: `26af8dfabeb36d245ec85d432ca4d00e15afb226`
 - `studies/review/concept_map_for_review_2026-11-20.json`: `a38df07737243c54a2f98a8af868c4b8935d712a`
 
-## Owner's summary, excerpt as relayed in chat 2026-11-20 (the owner's text, not the reviewer's)
+## Noted discrepancy: the relayed summary (2026-11-20)
+
+The counts above (L2 YES 16, PARTIAL 12; GRAIN 10) are primary: they are counted from the filed text.
+The summary relayed with the review gave L2 YES 15, PARTIAL 13 and GRAIN 11.
+
+- Source of the summary: chat Claude, relayed by the owner (owner order, 2026-11-20).
+- Cause: a miscount in the relay. Its own GRAIN list has 10 entries (02, 03, 04, 06, 07, 09, 10, 11, 17, 18).
+- Logged as FL07 in `blind-reader-void12/studies/confusion/FIRING_LOG.md`.
+- Until 2026-11-20 this section was headed "Owner's summary, excerpt as relayed in chat" and
+  attributed the text to the owner; the owner's order names chat Claude as its source.
+
+Excerpt of the summary, as relayed:
 
 ```
 REVIEW-2 (GPT-6, L2: different family; memory ON, prior exposure to the repos, not to these files)
@@ -68,10 +79,6 @@ WHY THEY DIFFER (DERIVED)
                                          (the builder said PARTIAL too → agreement, counted once per level: L0 + L2)
                     08 non-detection     its homes are split across two rows; neither row lists both (the builder said YES)
 ```
-
-Difference between that summary and the filed review text: the per-concept lines of the review
-count as shown under Counts above; the rows the summary lists under GRAIN number 10.
-The summary's figures are kept as relayed.
 
 ## Notes
 

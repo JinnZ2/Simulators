@@ -81,3 +81,18 @@ Read: Simulators REVIEW2_REQUEST_in_map.md at 7ccc05e (the block after the attac
 |---|---|---|---|---|---|---|---|---|---|
 | FL06 | F01 | "Say if you want it." (session reply after `7ccc05e`) | which of two lines in the block governs: "Use the attachments; don't fetch the repository" or "Read the files at the homes only where a row cannot be judged without them" | found that the second line sends a reviewer to the repository the first forbids, wrote the fix, and routed it to the owner. The block's own rule settles it: the attachment line exists so the reviewer does not reach the repository, so the homes line has to yield. | the session's reply after `7ccc05e` | the attachment line's stated purpose (owner note: "without it, a reviewer with web access might fetch the repo") | after the output was written (named by the owner, 2026-11-20) | published reply; the block waited one turn | resolved: the homes line replaced at the owner's order |
 
+## 2026-11-20: a count relayed without a recount of its own list
+
+```text
+Reader: Claude family (chat session)
+Read: the REVIEW-2 text of GPT-6 (later filed as Simulators studies/review/REVIEW2_in_map_GPT6_2026-11-20.md)
+```
+
+| id | code | term or passage | what was missing | what the reader did | source | resolves with | found | reached | status |
+|---|---|---|---|---|---|---|---|---|---|
+| FL07 | VOID (no code in F01-F13 names a count stated without a recount) | "YES 15 · PARTIAL 13 · NO 0" and "GRAIN (11 rows)" (the summary relayed with the review) | a recount of the summary's own list: its GRAIN list has 10 entries (02, 03, 04, 06, 07, 09, 10, 11, 17, 18), and the review's per-concept lines read YES 16, PARTIAL 12 | stated the three counts in a summary relayed to the implementer | the owner's relay in the Claude Code session, 2026-11-20; the chat session itself was not seen by the logger | counting the filed text (`studies/review/make_comparison.py`) | after the output was written (caught by the Claude Code session's count against the filed text; logged at the owner's order, 2026-11-20) | relayed order; the comparison file kept the relayed figures as a noted discrepancy and the freeze record used the counted ones | resolved: counted figures primary in `studies/review/REVIEW2_COMPARISON_2026-11-20.md` |
+
+Code note for FL07: F01-F13 were read in `../EMBEDDED_AUDIT_TESTS.md` (F13 in its amendment of
+2026-11-20). None describes an arithmetic count that disagrees with its own list, so the code is
+VOID and no nearest code is named.
+
