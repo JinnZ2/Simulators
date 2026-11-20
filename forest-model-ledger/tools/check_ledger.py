@@ -540,7 +540,7 @@ if __name__ == "__main__":
     if summ["provisional_tools"]:
         print("held-out PROVISIONAL tools:", ", ".join(summ["provisional_tools"]))
         for c in summ["cleared_provisional"]:
-            print("  cleared by a held-out PROVISIONAL tool (listed, not failed; Kavik's call):", c)
+            print("  cleared by a held-out PROVISIONAL tool (listed, not failed; JinnZ2's call):", c)
     for t in summ["no_exit"]:
         print("  no exit defined:", t)
     for n in notes:
