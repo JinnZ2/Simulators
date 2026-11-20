@@ -1,14 +1,19 @@
 # REVIEW-2 request: in_map on the multi-home register
 
-Status: DRAFT, not sent. Drafted 2026-11-20 by the builder of the map rows (L0). The reviewer
+Status: DRAFT, not sent. Drafted 2026-11-20 by the builder of the map rows (L0). Amended 2026-11-20: READ now points
+at the stripped register (no in_map fields) and concept_map.json at 2fd67dd; the field list is "concept, homes". The reviewer
 must be a different model family from the builder (Claude Code).
 
 ```
 MODE: REVIEW-2
 
-READ (Simulators @ 2fd67dd3202d22bc34e06befc6648932d752b924):
-  MULTI_HOME_REGISTER.json     28 rows; each row: concept, homes (repo:path@sha, blob), in_map
-  concept_map.json             28 rows; each row: concept, home, status, locations
+READ:
+  studies/review/MULTI_HOME_REGISTER_for_review_2026-11-20.json
+      sha256 2a2ae5a04a5075b88f80c5bab285de8f69a8b4dda37e0031bd087416a9bf9308
+      28 rows; read per row: concept, homes (repo:path@sha, blob)
+  concept_map.json (Simulators @ 2fd67dd3202d22bc34e06befc6648932d752b924)
+      sha256 aecd39f4d4ac7c2e4beed7904bfd4c8116dbf3c18895510de7a692482939e1e6
+      28 rows; each row: concept, home, status, locations
   Read the files at the homes only where a row cannot be judged without them.
   Do not read FREEZE_CLEANUP_MEASURAND.md, CONCEPT_MAP.md or build_multi_home_register.py
   before returning: they carry the builder's readings.
