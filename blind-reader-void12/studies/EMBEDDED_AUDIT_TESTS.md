@@ -159,3 +159,20 @@ Instances named with the proposal:
 
 - FL08 (`confusion/FIRING_LOG.md`): header vs item. FL08 stays coded VOID as filed; it is not recoded.
 - FL09 (`confusion/FIRING_LOG.md`): item vs item. FL09 stays coded VOID as filed; it is not recoded.
+
+## Amendment 2026-11-20: candidate code F16
+
+Added at the owner's order; F01-F15 above are unchanged. Status: PROPOSED (not used in a test run;
+no firing-log row carries it).
+
+| code | firing | example shape |
+|---|---|---|
+| F16 | stated without checking against its own source | field names written from memory where the document that defines them was at hand; a count stated above a list it does not match |
+
+F16 is proposed as the parent of F14: F14 (a count stated without recounting its own list) is the
+count case of F16. F14's text is unchanged.
+
+Instances named with the proposal:
+
+- FL07 (`confusion/FIRING_LOG.md`): a count against its own list. FL07 stays coded VOID as filed; it is not recoded.
+- FL10 (`confusion/FIRING_LOG.md`): field names against the document that defines them. FL10 stays coded VOID as filed; it is not recoded.
