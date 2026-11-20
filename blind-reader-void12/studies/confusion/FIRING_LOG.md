@@ -107,3 +107,18 @@ Read: the order of 2026-11-20 headed "MODE: IMPLEMENT (records + tail; Simulator
 |---|---|---|---|---|---|---|---|---|---|
 | FL08 | VOID (F05 read; it names modes merged without a header, and this is a repo scope, not a mode) | "4. Freeze source note (fb3c0f8): point to the FREEZE file §6 lift record at 56a208e." (item 4 of that order) | a header line covering the second repo: `fb3c0f8` is a Geometric-manifold- commit, and the header scoped Simulators only | wrote the item under a header that named one repo. The implementer appended the note in Geometric-manifold- (`8f73888`, direct to main) and said so in its report. | the owner's relay of the order in the Claude Code session, 2026-11-20; Geometric-manifold- `fb3c0f8`, `8f73888`; the chat session itself was not seen by the logger | a header that names every repo an item touches | after the commit (named in the implementer's report; logged at the owner's order, 2026-11-20) | pushed to Geometric-manifold- main | resolved as a record: `8f73888` is kept (append-only) |
 
+
+## 2026-11-20: two items of one order that could not both hold
+
+```text
+Reader: Claude family (chat session)
+Read: the order of 2026-11-20 headed "MODE: IMPLEMENT (Geometric-manifold-, branch + PR, no merge)" (explore harness)
+```
+
+| id | code | term or passage | what was missing | what the reader did | source | resolves with | found | reached | status |
+|---|---|---|---|---|---|---|---|---|---|
+| FL09 | VOID (F01-F14 read; none names two items of one order that contradict each other) | item 3: "Plain text of the outputs is not committed." and item 6: "records committed in runs/" | a rule for `raw_output`: the spec requires that field in every record, so a committed BLIND record carries the plain output that item 3 keeps out of the repository | wrote both items into one order. The implementer committed the records with plain `raw_output` (Geometric-manifold- `4d79e45`, PR #34) and named the contradiction in the PR body and its report. | the owner's relay of the order in the Claude Code session, 2026-11-20; Geometric-manifold- `4d79e45`, PR #34; the chat session itself was not seen by the logger | sealed `raw_output` in committed records (spec addition of 2026-11-20; Geometric-manifold- branch `claude/explore-harness-sealed`) | after the push (caught by the Claude Code session; logged at the owner's order, 2026-11-20) | pushed to a branch of a public repository; plain outputs readable at `4d79e45` | resolved by supersession: PR #34 closed unmerged; branch `claude/explore-harness` @ `4d79e45` kept, and any reader of it is exposed |
+
+Code note for FL09: F01-F12 were read in `../EMBEDDED_AUDIT_TESTS.md`, F13 and F14 in its
+amendments of 2026-11-20. None describes an order whose items contradict each other, so the code is
+VOID and no nearest code is named.
