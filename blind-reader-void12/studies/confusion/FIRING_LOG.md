@@ -44,3 +44,14 @@ resilience-indigenous-worldwide #21)
 | id | code | term or passage | what was missing | what the reader did | source | resolves with | found | reached | status |
 |---|---|---|---|---|---|---|---|---|---|
 | FL04 | F01 | "the model trailers break the no-model-identifier rule: say if you want them amended" (session reply after the six draft PRs) | the scope of the no-model-identifier rule | applied the rule outside its scope, then routed the result to the owner. The rule covers the Reader field in confusion records; the Co-Authored-By trailers are the owner's deliberate model marking (decision 2026-11-11). Both facts were on record, so no amend question was needed. The misapplication half has no code in F01-F12; F01 is the routing half. | the session's report on the six draft PRs, 2026-11-20 | the rule's stated scope and the 2026-11-11 decision | after the output was written (named by the owner, 2026-11-20) | published reply; no branch was amended | resolved: trailers kept; the PRs merged as cherry-picked (#13, #16, #12, #21, #8, #98) |
+
+## Correction 2026-11-20: FL04 recoded
+
+FL04 is filed above as written with code F01 and the note that its first half ("applied the rule
+outside its scope") had no code. With candidate F13 added to the codebook (`../EMBEDDED_AUDIT_TESTS.md`,
+amendment 2026-11-20), FL04 reads as two firings:
+
+| id | code | half |
+|---|---|---|
+| FL04a | F13 | applied the no-model-identifier rule to commit trailers, outside its stated scope (the Reader field in confusion records) |
+| FL04b | F01 | routed the result to the owner ("say if you want them amended") |

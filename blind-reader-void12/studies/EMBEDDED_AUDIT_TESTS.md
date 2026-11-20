@@ -116,3 +116,16 @@ run_id | test | arm | reader_family | L | exposure{...} | memory | F01..F12 | N-
 catches{type:count} | false_alarms | open_rows | closed_by_evidence | closed_by_agreement |
 self_corrections | coder_ids | coder_disagreements | notes
 ```
+
+## Amendment 2026-11-20: candidate code F13
+
+Added at the owner's request; F01-F12 above are unchanged. Status: CANDIDATE (not yet used in a test
+run; the outcome slots in section 4 still list F01..F12).
+
+| code | firing | example shape |
+|---|---|---|
+| F13 | a rule applied outside its scope | a rule written for one field or record type enforced on another |
+
+First use: firing log FL04 (`confusion/FIRING_LOG.md`, recoded 2026-11-20). Note: the AUDIT request
+draft (`requests/AUDIT_EMBEDDED_TESTS_2026-11-19_DRAFT.md`) attaches this file as at `30c7fd0`
+(sha256 `d8dc77b7...`); that version is unchanged in history, and the live file now differs from it.
