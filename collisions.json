@@ -6,7 +6,7 @@
    "concept": "GAP_INSTRUMENT",
    "agents": "two Claude Code sessions",
    "collided": "one status name, two meanings (an instrument crash; a label the instrument does not recognise)",
-   "found": "chat-side (Kavik + Claude), comparing the report of TAF PR 82 (GAP_INSTRUMENT = a module raised) with the report of PR 84 (= a label outside the severity table). PR tips dated 2026-11-11T14:15:59Z (82, a2c5d99) and 2026-11-11T14:15:24Z (84, 92cd578); the report texts themselves are not in a repo",
+   "found": "chat-side (JinnZ2 + Claude), comparing the report of TAF PR 82 (GAP_INSTRUMENT = a module raised) with the report of PR 84 (= a label outside the severity table). PR tips dated 2026-11-11T14:15:59Z (82, a2c5d99) and 2026-11-11T14:15:24Z (84, 92cd578); the report texts themselves are not in a repo",
    "resolution": "split into GAP_INSTRUMENT_CRASH / GAP_INSTRUMENT_UNRECOGNIZED_LABEL; both names are on unmerged branches only",
    "evidence": [
     "https://github.com/JinnZ2/thermodynamic-accountability-framework/pull/82",
@@ -413,7 +413,7 @@
    "agents": "three Claude Code sessions (three TAF PR branches)",
    "collided": "calibration/pipeline.py score aggregation changed three ways: PR 81 sets a no-score result to (None, Band.UNKNOWN) inline; PR 82 adds _aggregate returning 2 values, (None, NOT_MEASURED) with no module report; PR 84 adds _aggregate returning 3 values, the third a not_measured_reason",
    "found": "chat-side, TAF cleanup phase 1 inventory, trial merge of stack tips (TAF_CLEANUP_PHASE1_INVENTORY.md, not in the TAF checkout read here); the three diffs of calibration/pipeline.py were then read in this session on 2026-11-11 and match",
-   "resolution": "picked 2026-11-11 (Kavik): three-value (score, band, reason) from PR 84 plus the no-score -> UNKNOWN rule from PR 81, folded on the PR 85 branch (65bb724); 80/82/84 closed, branches kept under archive/",
+   "resolution": "picked 2026-11-11 (JinnZ2): three-value (score, band, reason) from PR 84 plus the no-score -> UNKNOWN rule from PR 81, folded on the PR 85 branch (65bb724); 80/82/84 closed, branches kept under archive/",
    "note": "Diffs read at PR tips ed275ef (81), a2c5d99 (82), 92cd578 (84). PR 81's title does not name the pipeline; the change is in its diff.",
    "evidence": [
     "https://github.com/JinnZ2/thermodynamic-accountability-framework/pull/81",
@@ -546,11 +546,11 @@
   {
    "date": "2026-11-10/11",
    "concept": "provenance credit",
-   "agents": "Kimi / Kavik / DeepSeek",
+   "agents": "Kimi / JinnZ2 / DeepSeek",
    "collided": "Kimi audit section 1.1 'Provenance map of the dialogue' assigns P11 (physics common denominator) to DeepSeek. In the dialogue DeepSeek's reply opens 'You're right, and the correction matters' and says 'Your physics point is the strongest substrate-neutral anchor available', which places the point with the human. The human source has no row in the table; the section's prose names an 'unseen interlocutor'",
    "found": "chat-side read of the pinned texts, then a first-hand check by the forest-ledger session (FML_035); the quoted lines were re-read in this session on 2026-11-11 (audit table line 43; chat paste lines 425 and 436)",
    "resolution": "recorded; uncorrected in source",
-   "note": "Refs point at claude/forest-toolkit-build, which contains the PR 256 tip d402fa8; both text files are byte-identical there and match their MANIFEST sha256. 4cf10ec is an earlier reported tip, unresolved in this checkout. No tag: tag pushes are refused from sessions, so by Kavik's decision (2026-11-11) the branch archive/pr256-tip holds the old PR 256 tip d402fa8; pushed and read back at that sha.",
+   "note": "Refs point at claude/forest-toolkit-build, which contains the PR 256 tip d402fa8; both text files are byte-identical there and match their MANIFEST sha256. 4cf10ec is an earlier reported tip, unresolved in this checkout. No tag: tag pushes are refused from sessions, so by JinnZ2's decision (2026-11-11) the branch archive/pr256-tip holds the old PR 256 tip d402fa8; pushed and read back at that sha.",
    "evidence": [
     "https://github.com/JinnZ2/Simulators/pull/256",
     {
@@ -621,7 +621,7 @@
      "void_reason": "VOID: this side is a document author, not a commit; there is no trailer to read"
     },
     {
-     "label": "Kavik",
+     "label": "JinnZ2",
      "repo": "VOID",
      "commits": "VOID",
      "void_reason": "VOID: this side is a document author, not a commit; there is no trailer to read"

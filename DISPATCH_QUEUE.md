@@ -1,6 +1,6 @@
 # DISPATCH_QUEUE
 
-Approved by Kavik 2026-10-10.
+Approved by JinnZ2 2026-10-10.
 
 Purpose: standing-rule step 5 needs a queue both sessions can read.
 Chat-side memory is unreachable from Claude Code, so it is mirrored here.

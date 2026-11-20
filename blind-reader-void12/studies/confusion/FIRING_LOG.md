@@ -4,7 +4,7 @@ Firings of the codebook in `../EMBEDDED_AUDIT_TESTS.md` (F01-F12) that were seen
 test run, kept beside the codebook. One row per firing; rows are filed as written and a later
 correction goes in a dated section at the end. Columns follow `../CONFUSION_TEMPLATE.md`, plus
 `code`. This file is not a score, belongs to no test arm, and is never used to rank readers.
-Created 2026-11-19 (co-authored, Kavik + Claude).
+Created 2026-11-19 (co-authored, JinnZ2 + Claude).
 
 ## 2026-11-19: subliminal-learning filing (Geometric-manifold- PR #23)
 

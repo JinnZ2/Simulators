@@ -10,7 +10,7 @@ when power, software or a vendor fails.
 You get a scored site assessment plus stress-test reports that a plant
 manager, grant reviewer or co-op can read.
 
-Built to `WORK_ORDER.md` (issued 2026-10-23, Kavik + Claude). CC0.
+Built to `WORK_ORDER.md` (issued 2026-10-23, JinnZ2 + Claude). CC0.
 
 **Provenance.** The work order came with an upload,
 `OKComputer_Dyslexia_Spatial_Gap.zip`. OKComputer is Kimi, an open-source

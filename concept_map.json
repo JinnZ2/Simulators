@@ -216,7 +216,7 @@
    "concept": "attribution directionality",
    "home": "NOT_LOCATED",
    "status": "no file carries the term",
-   "decided_by": "pending: a definition or a path from Kavik",
+   "decided_by": "pending: a definition or a path from JinnZ2",
    "searched": "2026-11-11: GitHub code search over user:JinnZ2 (default branches only), 0 hits; grep of local checkouts of Simulators (this branch), study-aperture, method-layer, TAF, decision-aperture, 0 hits",
    "locations": [
     {
@@ -280,7 +280,7 @@
      "repo": "Simulators",
      "ref": null,
      "path": "forest-model-ledger/CLAUDE.md",
-     "builder": "Kavik + Claude (METHOD BRIEF)",
+     "builder": "JinnZ2 + Claude (METHOD BRIEF)",
      "note": "the rule as text"
     },
     {
@@ -402,7 +402,7 @@
    "concept": "ROTL",
    "home": "NOT_LOCATED",
    "status": "term not found; expansion not known to this session",
-   "decided_by": "pending: expansion and a path from Kavik",
+   "decided_by": "pending: expansion and a path from JinnZ2",
    "searched": "2026-11-11: GitHub code search over user:JinnZ2 (default branches only), 0 hits; grep of local checkouts of Simulators (this branch), study-aperture, method-layer, TAF, decision-aperture, 0 hits",
    "locations": []
   },
@@ -410,7 +410,7 @@
    "concept": "correctness gradients",
    "home": "NOT_LOCATED",
    "status": "term not found",
-   "decided_by": "pending: a definition or a path from Kavik",
+   "decided_by": "pending: a definition or a path from JinnZ2",
    "searched": "2026-11-11: GitHub code search over user:JinnZ2 (default branches only), 0 hits; grep of local checkouts of Simulators (this branch), study-aperture, method-layer, TAF, decision-aperture, 0 hits",
    "locations": []
   }

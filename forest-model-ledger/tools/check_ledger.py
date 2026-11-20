@@ -5,7 +5,7 @@
     python3 tools/check_ledger.py --selftest # plant one defect per rule in a copy; each must fire
     python3 tools/check_ledger.py --owed-mode original|owed|proposed
 
---owed-mode (2026-11-11, chat side; Kavik decides, both behaviours kept):
+--owed-mode (2026-11-11, chat side; JinnZ2 decides, both behaviours kept):
   original  (default) a NEEDS_TOOL row whose tool is built but not yet run on its run is a FAIL
   owed      the same rows are listed as owed and do not fail
   proposed  result reads PASS|FAIL + OWED(n), never bare PASS when n > 0; each owed row carries an
@@ -540,7 +540,7 @@ if __name__ == "__main__":
     if summ["provisional_tools"]:
         print("held-out PROVISIONAL tools:", ", ".join(summ["provisional_tools"]))
         for c in summ["cleared_provisional"]:
-            print("  cleared by a held-out PROVISIONAL tool (listed, not failed; Kavik's call):", c)
+            print("  cleared by a held-out PROVISIONAL tool (listed, not failed; JinnZ2's call):", c)
     for t in summ["no_exit"]:
         print("  no exit defined:", t)
     for n in notes:

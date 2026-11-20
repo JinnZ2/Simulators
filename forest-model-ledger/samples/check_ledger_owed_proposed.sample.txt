@@ -31,10 +31,10 @@ owed-mode proposed
   owed: parameter_recovery built, not yet run on run_15   expires VOID   (no exit)
   owed rows 24, of which no exit (VOID expiry) 24, expired 0
 held-out PROVISIONAL tools: ablation, assumption_block_trace, multi_seed_ensemble
-  cleared by a held-out PROVISIONAL tool (listed, not failed; Kavik's call): ablation / run_10 (cleared by run_14)
-  cleared by a held-out PROVISIONAL tool (listed, not failed; Kavik's call): ablation / run_11 (cleared by run_15)
-  cleared by a held-out PROVISIONAL tool (listed, not failed; Kavik's call): multi_seed_ensemble / run_10 (cleared by run_14)
-  cleared by a held-out PROVISIONAL tool (listed, not failed; Kavik's call): multi_seed_ensemble / run_11 (cleared by run_15)
+  cleared by a held-out PROVISIONAL tool (listed, not failed; JinnZ2's call): ablation / run_10 (cleared by run_14)
+  cleared by a held-out PROVISIONAL tool (listed, not failed; JinnZ2's call): ablation / run_11 (cleared by run_15)
+  cleared by a held-out PROVISIONAL tool (listed, not failed; JinnZ2's call): multi_seed_ensemble / run_10 (cleared by run_14)
+  cleared by a held-out PROVISIONAL tool (listed, not failed; JinnZ2's call): multi_seed_ensemble / run_11 (cleared by run_15)
   no exit defined: CC_002_grid_onto_ode_convergence.shared_constraint
   no exit defined: CC_002_grid_onto_ode_convergence.local_normal_form
   no exit defined: CC_002_grid_onto_ode_convergence.statistical_artifact

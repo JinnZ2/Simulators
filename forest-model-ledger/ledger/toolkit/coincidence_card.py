@@ -19,7 +19,7 @@ Readings (closed set):
   RESOLVED    all five looked at, at least one supported
   PROVISIONAL would read RESOLVED, but recheck_when names tools still in
               build: the evidence stands, the producing tool does not exist
-              yet. Re-check when every named tool is built (Kavik, 2026-11-10)
+              yet. Re-check when every named tool is built (JinnZ2, 2026-11-10)
   CURIOSITY   all five ruled_out; the card must name a branch
 
 Slot states: void | supported | ruled_out | ABSENT_AT_SENSITIVITY(<value>).

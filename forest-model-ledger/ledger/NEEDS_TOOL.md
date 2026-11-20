@@ -66,7 +66,7 @@ run_8 was REPORTED until its original code arrived 2026-11-11; INCOMPLETE is PRO
 ## Owed expiry
 
 Read only under `tools/check_ledger.py --owed-mode proposed` (2026-11-11; the mode is a
-proposal awaiting Kavik). One row per owed (tool, run): when the row is no longer
+proposal awaiting JinnZ2). One row per owed (tool, run): when the row is no longer
 allowed to stay owed. Declared when the row opens. `date:YYYY-MM-DD`, `run:run_N`
 (expires once run_N exists) or `VOID`. A row with no entry here reads VOID and is
 counted as no exit. Every row open on 2026-11-11 opened before this rule, so none

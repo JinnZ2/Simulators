@@ -93,7 +93,7 @@ home: CANONICAL (decided), CANDIDATE (two or more homes, undecided), SINGLE (one
 
 - home: NOT_LOCATED
 - status: no file carries the term
-- decided by: pending: a definition or a path from Kavik
+- decided by: pending: a definition or a path from JinnZ2
 - searched: 2026-11-11: GitHub code search over user:JinnZ2 (default branches only), 0 hits; grep of local checkouts of Simulators (this branch), study-aperture, method-layer, TAF, decision-aperture, 0 hits
 
 | role | where | builder | note |
@@ -121,7 +121,7 @@ home: CANONICAL (decided), CANDIDATE (two or more homes, undecided), SINGLE (one
 
 | role | where | builder | note |
 |---|---|---|---|
-| candidate | `Simulators:forest-model-ledger/CLAUDE.md` | Kavik + Claude (METHOD BRIEF) | the rule as text |
+| candidate | `Simulators:forest-model-ledger/CLAUDE.md` | JinnZ2 + Claude (METHOD BRIEF) | the rule as text |
 | copy | `Simulators:forest-model-ledger/ledger/anchors/ANCHOR_run9.yaml` | Claude Code (commit trailer) | one anchor record |
 | candidate | `Simulators:relational-playground/playground/anchor.py` | Claude Code (commit trailer) |  |
 | candidate | `study-aperture@origin/main:experimental/playground/reference/anchor.py` | Perplexity (commit trailer) |  |
@@ -157,12 +157,12 @@ home: CANONICAL (decided), CANDIDATE (two or more homes, undecided), SINGLE (one
 
 - home: NOT_LOCATED
 - status: term not found; expansion not known to this session
-- decided by: pending: expansion and a path from Kavik
+- decided by: pending: expansion and a path from JinnZ2
 - searched: 2026-11-11: GitHub code search over user:JinnZ2 (default branches only), 0 hits; grep of local checkouts of Simulators (this branch), study-aperture, method-layer, TAF, decision-aperture, 0 hits
 
 ## correctness gradients
 
 - home: NOT_LOCATED
 - status: term not found
-- decided by: pending: a definition or a path from Kavik
+- decided by: pending: a definition or a path from JinnZ2
 - searched: 2026-11-11: GitHub code search over user:JinnZ2 (default branches only), 0 hits; grep of local checkouts of Simulators (this branch), study-aperture, method-layer, TAF, decision-aperture, 0 hits
