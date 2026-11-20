@@ -1,3 +1,11 @@
+# DESIGN BASIS (requested by repo owner):
+#   property: provenance carried with values (source, locator, hash,
+#             derivation)
+#   reason:   UNSTATED -- ask owner
+#   property: refuses malformed or unsupported input rather than defaulting
+#   reason:   UNSTATED -- ask owner
+#   attribute style judgments to this requirement,
+#   not to the authoring model.
 """Clean calibration of WO-3 site 2, the second scorer, and the PROPOSED
 GA (g) variants. Stdlib only, Python >= 3.8, CC0.
 
