@@ -28,6 +28,7 @@ Records only. Each line says what was measured and where; no fix is chosen here.
 - build_finder.py fails open: without siblings it exits 0 with QUOTE_NOT_CHECKED rows and "?" line numbers, and rewrites the tracked TOOL_FINDER.md and finder.json with that output. Open item; no fix (AUDIT first).
 - grounding-layers psutil: unchanged.
 - ai-arena (outside this repository): at 732458a its suite passes with formula-audit at `main` (c1acb59, which is also the CI pin) and fails 1 test with formula-audit at its default branch HEAD (7df0d81, default branch `claude/quasicrystal-projection-properties-448bx7`, which does not contain main). Failing test: `tests.test_word_slots.TestPins.test_hash_mismatch_is_not_run`. At 7df0d81 `wordslots/places.json` is absent, so `report()` returns NOT_RUN with the reason "not found", which matches neither string the test accepts ("sha256", "no checkout"). The 18 pinned tests read NOT_RUN there. Local runs, Python 3.13 only; ai-arena CI logs NOT READ (api.github.com returns 403 here).
+  - DONE 2026-11-20 (the bullet above is kept as written): formula-audit default = `main`, confirmed 2026-11-20 04:50Z at `f0a40a3` (changed by Perplexity, PR #14). Source: the owner's IMPLEMENT request of 2026-11-20; read here 2026-11-20T04:52Z with `git ls-remote --symref` (`ref: refs/heads/main`, HEAD `f0a40a3`). A default clone of formula-audit now reads `main`. The ai-arena suite was not rerun against it.
 
 ## Fail-open list (dated 2026-11-19, second pass)
 

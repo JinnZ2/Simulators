@@ -143,4 +143,39 @@ Item 16, rechecked against TAF origin/main 16285cccdd48 (fetched --prune 2026-11
 - Reading: the merge part of item 16 holds; "folded at 65bb724" does not resolve; the #85 head
   branch was not deleted.
 
+## 5. Recheck (dated 2026-11-20, fourth pass)
+
+### formula-audit default branch: DONE
+
+- Item: formula-audit's GitHub default branch was `claude/quasicrystal-projection-properties-448bx7`
+  (stale; see `blind-reader-void12/studies/OPEN_ITEMS_OUTSIDE.md`, the ai-arena bullet).
+- Status: DONE. Default = `main`, confirmed 2026-11-20 04:50Z at `f0a40a3` (changed by
+  Perplexity, PR #14). Source: the owner's IMPLEMENT request of 2026-11-20.
+- Read here 2026-11-20T04:52Z: `git ls-remote --symref` on formula-audit returns
+  `ref: refs/heads/main`, HEAD `f0a40a3`. The same line is filed in formula-audit
+  `READING_NOTES.md` (commit `2a66d4a`).
+- No row for this item existed in sections 2 to 4 of this file; this entry is its row.
+
+### Items 26-30, done-test rerun
+
+Method as in section 3: `git ls-remote --heads` over the same 82 repos, started
+2026-11-20T04:53:05Z, every call exited 0. Exact name, with or without a `claude/` prefix.
+
+| item | branch | reading 2026-11-20 | change since 2026-11-19T23:00Z |
+|---|---|---|---|
+| 26 (Simulators x9), 27 (method-layer x8), 30 (+4 named) | names not received | not run | Simulators has 30 heads (30 before); method-layer has 4 (3 before; new: `claude/name-to-handle`) |
+| 28 | `manus/wo11-current-main` | EXISTS in 22 repos | none |
+| 29 | `tool-finder-pointer` | GONE in all 82 | none |
+| 30 | `claude/healing-folder-additions-u5aojl` | EXISTS in 4 repos: AI-Consciousness-Sensors, Rosetta-Shape-Core, Simulators, thermodynamic-accountability-framework | none |
+| 30 | `claude/clone-refspec-note` | EXISTS in 66 repos | 67 before; gone from urban-resilience-sim |
+
+28, 22 repos: AI-Human-Audit-Protocol AI-arena Academic-Translator Adaptive-Intelligence-Framework-
+Antarctic-basin-dynamics BE2-communication Bio-Grid-American-Manufacturing- BioGrid2.0
+Combine-Cognitive-Architecture- Coop-framework Cyclic-programming DIY-CNC Fractal_Compass_Core
+Fulgerite-Antenna-Prototype- GlyphAI HAAS Hardware-Store Inversion assumption_validator
+biomachine_ecology fairmont-ecological-recovery infrastructure-stability-model.
+
+Per-target-repo readings for 28 and 30 still need the repo lists, and 26, 27 and the 4 named in
+30 still need the branch names.
+
 Observer slots: null.
