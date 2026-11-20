@@ -96,3 +96,14 @@ Code note for FL07: F01-F13 were read in `../EMBEDDED_AUDIT_TESTS.md` (F13 in it
 2026-11-20). None describes an arithmetic count that disagrees with its own list, so the code is
 VOID and no nearest code is named.
 
+## 2026-11-20: an order header scoped one repo, one item targeted another
+
+```text
+Reader: Claude family (chat session)
+Read: the order of 2026-11-20 headed "MODE: IMPLEMENT (records + tail; Simulators main, branch if any edit beyond append)"
+```
+
+| id | code | term or passage | what was missing | what the reader did | source | resolves with | found | reached | status |
+|---|---|---|---|---|---|---|---|---|---|
+| FL08 | VOID (F05 read; it names modes merged without a header, and this is a repo scope, not a mode) | "4. Freeze source note (fb3c0f8): point to the FREEZE file §6 lift record at 56a208e." (item 4 of that order) | a header line covering the second repo: `fb3c0f8` is a Geometric-manifold- commit, and the header scoped Simulators only | wrote the item under a header that named one repo. The implementer appended the note in Geometric-manifold- (`8f73888`, direct to main) and said so in its report. | the owner's relay of the order in the Claude Code session, 2026-11-20; Geometric-manifold- `fb3c0f8`, `8f73888`; the chat session itself was not seen by the logger | a header that names every repo an item touches | after the commit (named in the implementer's report; logged at the owner's order, 2026-11-20) | pushed to Geometric-manifold- main | resolved as a record: `8f73888` is kept (append-only) |
+

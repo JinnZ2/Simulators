@@ -129,3 +129,19 @@ run; the outcome slots in section 4 still list F01..F12).
 First use: firing log FL04 (`confusion/FIRING_LOG.md`, recoded 2026-11-20). Note: the AUDIT request
 draft (`requests/AUDIT_EMBEDDED_TESTS_2026-11-19_DRAFT.md`) attaches this file as at `30c7fd0`
 (sha256 `d8dc77b7...`); that version is unchanged in history, and the live file now differs from it.
+
+## Amendment 2026-11-20: candidate code F14
+
+Added at the owner's order; F01-F13 above are unchanged. Status: PROPOSED (not used in a test run;
+no firing-log row carries it).
+
+| code | firing | example shape |
+|---|---|---|
+| F14 | a count stated without recounting its own list | "GRAIN (11 rows)" above a list of 10 entries |
+
+Instances named with the proposal:
+
+- FL07 (`confusion/FIRING_LOG.md`). FL07 stays coded VOID as filed; it is not recoded.
+- An earlier x5 vs x10 count. Source: the chat session, as relayed by the owner 2026-11-20. It has
+  no firing-log row, and the logger did not see it.
+
