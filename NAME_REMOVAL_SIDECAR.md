@@ -1,6 +1,10 @@
 # Name removal sidecar
 
-Status: awaiting owner decision A. Nothing in these files has been changed.
+Status: KEPT BY OWNER DECISION 2026-11-19. The PINNED and QUOTE-OR-HISTORY files below stay as they are;
+no history rewrite. Nothing in these files has been changed.
+
+Amended 2026-11-20: the status read "awaiting owner decision A" when filed (4da7f0c1); the owner's decision
+replaces it.
 
 Scope: files on each repository's default branch (and formula-audit `main`) at 2026-11-20 04:12Z that contain the personal name the
 header removals replaced (case-insensitive whole-word match on the three strings in the removal commits' removed lines). The name
