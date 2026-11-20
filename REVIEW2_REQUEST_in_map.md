@@ -18,8 +18,10 @@ READ:
       concept_map.json @ 2fd67dd3202d22bc34e06befc6648932d752b924 with one field removed
       28 rows; each row: concept, home, status, locations
   Read the files at the homes only where a row cannot be judged without them.
-  Do not read FREEZE_CLEANUP_MEASURAND.md, CONCEPT_MAP.md or build_multi_home_register.py
-  before returning: they carry the builder's readings.
+  Do not read, before returning: MULTI_HOME_REGISTER.json, concept_map.json, CONCEPT_MAP.md,
+  FREEZE_CLEANUP_MEASURAND.md, build_multi_home_register.py, REVIEW2_REQUEST_in_map.md,
+  studies/review/README.md, studies/review/MULTI_HOME_REGISTER_for_review_2026-11-20.json.
+  They carry the builder's readings.
 
 QUESTION, per register concept (28):
   Does concept_map.json hold a row that covers this concept at these homes?
