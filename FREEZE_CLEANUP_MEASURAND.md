@@ -353,4 +353,22 @@ MCP tool reaches the same data.
 Tail (does not hold the freeze): TAF `claude/unknown-axis-followup-2`, `claude/unknown-axis-followup`;
 decision-aperture `claude/tool-finder-pointer`; `manus/wo11-current-main` in 22 repos outside item 28.
 
+### Update 2026-11-20, second entry: SAFE list, archives, shallow check
+
+The section 6 rows "SAFE list recorded: NOT LOCATED" and "archive branches: not checkable" above
+are kept as written and superseded by this entry.
+
+- SAFE list recorded: DONE. `studies/cleanup/SAFE_BRANCHES_2026-11-20.tsv`, 292 rows
+  (ancestor 240, content-proof 40, archive-match 12, a2 0). It is a rerun of 2026-11-20
+  10:07Z-10:08Z, not the 2026-11-19 reclass: that scratch file is NOT LOCATED. "a2" was not run;
+  no definition of it was located. 2 repos NOT READ. See `studies/cleanup/README.md`.
+- Archives: needs_archive YES = 40 (the content-proof rows), listed in
+  `studies/cleanup/ARCHIVES_NEEDED_2026-11-20.tsv`. 2 already have an archive branch containing
+  the tip; 38 have none. LISTED, not created: this run pushed to no other repository.
+- `build_multi_home_register.py` now refuses a shallow sibling, and a checkout whose depth git
+  does not report. `--selftest`: 6 checks. Test: `tests/test_multi_home_register_shallow.py`.
+
+Verdict after this entry: NOT MET. Left: 3 register rows PARTIAL; REVIEW-2 on the register not
+done; 38 archive branches listed and not made (if "made where needed" is read as created).
+
 Observer slots: null.

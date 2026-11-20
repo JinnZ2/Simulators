@@ -51,11 +51,28 @@ def git(d, *a):
 SHAS = {}
 
 
+def is_shallow(d):
+    """True / False from git; None when git gives neither (read as not known, and refused)."""
+    rc, out = git(d, "rev-parse", "--is-shallow-repository")
+    return {"true": True, "false": False}.get(out) if rc == 0 else None
+
+
+def refuse_shallow(r, d):
+    # A home is pinned at the last commit touching its path. In a shallow checkout that commit
+    # is the shallow boundary for every path older than the boundary, so the pin is wrong and
+    # nothing in the output shows it (found 2026-11-20: study-aperture homes all read c26fbd2).
+    sh = is_shallow(d)
+    if sh is not False:
+        sys.exit("REFUSED: %s checkout at %s is %s; homes cannot be pinned (git fetch --unshallow)"
+                 % (r, d, "shallow" if sh else "of unknown depth"))
+
+
 def sha(r):
     if r not in SHAS:
         d = repo_dir(r)
         if d is None:
             sys.exit("REFUSED: no checkout of %s (set CONCEPT_MAP_REPOS)" % r)
+        refuse_shallow(r, d)
         rc, s = git(d, "rev-parse", "HEAD" if r == "Simulators" else "origin/main")
         SHAS[r] = s
     return SHAS[r]
@@ -226,7 +243,51 @@ def build():
             "counts": counts, "rows": rows, "considered_not_included": considered}
 
 
+def selftest():
+    """Builds a two-commit repo and a depth-1 clone of it in a temp dir; the builder must refuse
+    the clone and accept the full repo. Touches no sibling."""
+    import shutil
+    import tempfile
+    t = tempfile.mkdtemp()
+    fails = 0
+    try:
+        full = os.path.join(t, "full")
+        os.mkdir(full)
+        ident = ["-c", "user.name=selftest", "-c", "user.email=selftest@example.invalid"]
+        subprocess.run(["git", "-C", full, "init", "-q"], check=True)
+        for n in ("1", "2"):
+            open(os.path.join(full, "f"), "w").write(n)
+            subprocess.run(["git", "-C", full, "add", "f"], check=True)
+            subprocess.run(["git", "-C", full] + ident + ["commit", "-q", "-m", n], check=True)
+        clone = os.path.join(t, "clone")
+        subprocess.run(["git", "clone", "-q", "--depth", "1", "file://" + full, clone], check=True)
+
+        def refused(d):
+            try:
+                refuse_shallow("x", d)
+            except SystemExit as e:
+                return str(e)
+            return None
+        checks = [
+            ("full repo reads not shallow", is_shallow(full) is False),
+            ("depth-1 clone reads shallow", is_shallow(clone) is True),
+            ("not a repo reads unknown", is_shallow(t) is None),
+            ("full repo is accepted", refused(full) is None),
+            ("depth-1 clone is refused", (refused(clone) or "").startswith("REFUSED") and "shallow" in refused(clone)),
+            ("unknown depth is refused", (refused(t) or "").startswith("REFUSED")),
+        ]
+        for name, ok in checks:
+            print("%s  %s" % ("ok  " if ok else "FAIL", name))
+            fails += 0 if ok else 1
+    finally:
+        shutil.rmtree(t, ignore_errors=True)
+    print("checks: %d   failed: %d" % (len(checks), fails))
+    return 1 if fails else 0
+
+
 if __name__ == "__main__":
+    if "--selftest" in sys.argv:
+        sys.exit(selftest())
     reg = build()
     text = json.dumps(reg, indent=1, ensure_ascii=False) + "\n"
     if "--check" in sys.argv:
