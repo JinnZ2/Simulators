@@ -31,3 +31,16 @@ Read: study-aperture PR #37, commit 6c45954 (one dated note in READING_NOTES.md)
 | id | code | term or passage | what was missing | what the reader did | source | resolves with | found | reached | status |
 |---|---|---|---|---|---|---|---|---|---|
 | FL03 | F01 | "say the word and I merge" (session replies after `6c45954`, twice) | whether the merge criteria were met | routed the merge to the owner. The criteria were already met and readable by the session: the change was records-only, and CI was green (8 of 8 check runs success on `6c45954`). | study-aperture PR #37, check runs on `6c45954` | the PR's diff and its check runs | after the output was written (named by the owner, 2026-11-20) | published reply; the merge waited one turn | resolved: study-aperture PR #37 merged at `8164f9d` |
+
+## 2026-11-20: author-characterization draft PRs (six repositories)
+
+```text
+Reader: Claude family (Claude Code session)
+Read: cherry-picks of the removal commits onto main (Geometric-to-Binary-Computational-Bridge #98,
+Logic-Ferret #13, Seed-physics #8, metabolic-accounting #16, planetary-conservation-framework #12,
+resilience-indigenous-worldwide #21)
+```
+
+| id | code | term or passage | what was missing | what the reader did | source | resolves with | found | reached | status |
+|---|---|---|---|---|---|---|---|---|---|
+| FL04 | F01 | "the model trailers break the no-model-identifier rule: say if you want them amended" (session reply after the six draft PRs) | the scope of the no-model-identifier rule | applied the rule outside its scope, then routed the result to the owner. The rule covers the Reader field in confusion records; the Co-Authored-By trailers are the owner's deliberate model marking (decision 2026-11-11). Both facts were on record, so no amend question was needed. The misapplication half has no code in F01-F12; F01 is the routing half. | the session's report on the six draft PRs, 2026-11-20 | the rule's stated scope and the 2026-11-11 decision | after the output was written (named by the owner, 2026-11-20) | published reply; no branch was amended | resolved: trailers kept; the PRs merged as cherry-picked (#13, #16, #12, #21, #8, #98) |
