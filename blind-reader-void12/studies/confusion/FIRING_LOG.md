@@ -122,3 +122,19 @@ Read: the order of 2026-11-20 headed "MODE: IMPLEMENT (Geometric-manifold-, bran
 Code note for FL09: F01-F12 were read in `../EMBEDDED_AUDIT_TESTS.md`, F13 and F14 in its
 amendments of 2026-11-20. None describes an order whose items contradict each other, so the code is
 VOID and no nearest code is named.
+
+## 2026-11-20: field names written from memory instead of quoted
+
+```text
+Reader: Claude family (chat session)
+Read: the order of 2026-11-20 headed "MODE: IMPLEMENT (Geometric-manifold-, branch + PR, no merge)" (channel_scope on subliminal_guard)
+```
+
+| id | code | term or passage | what was missing | what the reader did | source | resolves with | found | reached | status |
+|---|---|---|---|---|---|---|---|---|---|
+| FL10 | VOID (F01-F15 read; none names a term written from memory in place of a quotation) | "channel_scope {checked_channels, blind_channels, carrier_regime}" (item 2 of that order) | the document's own field names: `CHANNEL_SCOPE.md` §1 has `assumed_regime`, `channels_reached`, `blind_channels`, `notes` | named the §4 fields in the order without quoting the document; two of the three names are not in it and `notes` was left out. Item 1 of the same order said to quote §4's fields exactly. | the owner's relay of the order in the Claude Code session, 2026-11-20; Geometric-manifold- `docs/research/residual-audit/CHANNEL_SCOPE.md` §1; the chat session itself was not seen by the logger | quoting the document | before the build (caught by the Claude Code session reading the document; reported in PR #36 and its report; logged at the owner's order, 2026-11-20) | relayed order; the build used the document's names | resolved: `subliminal_guard_v2.py` carries the document's field names |
+
+Code note for FL10: F01-F12 were read in `../EMBEDDED_AUDIT_TESTS.md`, F13, F14 and F15 in its
+amendments of 2026-11-20. F14 fits by shape: a value stated without rechecking it against its own
+source. F14's text names a count and its list, and these are field names, so F14 is not used and its
+text is not widened. The code is VOID.
