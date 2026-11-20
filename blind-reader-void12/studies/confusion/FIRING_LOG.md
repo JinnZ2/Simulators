@@ -55,3 +55,17 @@ amendment 2026-11-20), FL04 reads as two firings:
 |---|---|---|
 | FL04a | F13 | applied the no-model-identifier rule to commit trailers, outside its stated scope (the Reader field in confusion records) |
 | FL04b | F01 | routed the result to the owner ("say if you want them amended") |
+
+## 2026-11-20: merge commit on Simulators main without trailers
+
+```text
+Reader: Claude family (Claude Code session)
+Read: Simulators main, commit 17df5dc (merge of origin/main 434e368 into a12dc9a)
+```
+
+| id | code | term or passage | what was missing | what the reader did | source | resolves with | found | reached | status |
+|---|---|---|---|---|---|---|---|---|---|
+| FL05 | F10 (nearest; no code in F01-F13 names an omitted trailer) | "Merge remote-tracking branch 'origin/main' into HEAD" (the whole message of `17df5dc`) | the Co-Authored-By and Claude-Session trailers every commit by the session carries | after a rejected push (main had moved to `434e368`), ran `git merge --no-edit` and pushed. `--no-edit` takes git's default message, so the commit went to main with no trailer. The standing trailer rule was on record and was applied to the two commits either side of it. | Simulators `17df5dc` (`git cat-file -p`) | the trailer rule; `git merge -m` | after the push (reported by the session in the same reply; logged at the owner's order, 2026-11-20) | pushed to main; the commit cannot be reworded without rewriting main's history | open as a record: `17df5dc` stays as pushed |
+
+Rule from FL05 (owner order, 2026-11-20): a merge onto main is made with `-m`, and the message
+carries the trailers. `--no-edit` is not used for a merge that will be pushed.

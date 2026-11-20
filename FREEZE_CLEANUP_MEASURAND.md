@@ -412,4 +412,18 @@ Freeze verdict against the measurand as amended (third entry): NOT MET.
 "cleanup" reads DONE under the amended condition. "map" does not. Tail items (deletions with
 their archives) do not hold the freeze.
 
+### Amendment 2026-11-20, fifth entry: PR-state reads for the 70 repos move to the tail
+
+Source: owner order in chat, 2026-11-20.
+
+- The PR-state reads the GitHub tool could not make (70 repos: 132 open_pr cells NOT_READ on the
+  SAFE list, 11 a2 candidate PRs NOT READ) are tail work. Each is read per repo at deletion time,
+  before any branch in that repo is deleted.
+- The unread cells do not hold the freeze. They stay marked NOT_READ in
+  `studies/cleanup/SAFE_BRANCHES_2026-11-20.tsv` and `A2_RUN_2026-11-20.tsv` until read.
+- No change to the verdict of the fourth entry: "cleanup" DONE, "map" not met (3 rows PARTIAL;
+  REVIEW-2 not done).
+- `17df5dc` on main is a merge commit with git's default message and no trailer; logged as FL05
+  in `blind-reader-void12/studies/confusion/FIRING_LOG.md`.
+
 Observer slots: null.
