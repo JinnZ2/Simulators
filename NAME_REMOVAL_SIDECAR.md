@@ -159,3 +159,13 @@ Counts: PINNED 68 files (150 lines), QUOTE-OR-HISTORY 61 files (118 lines).
 | thermodynamic-accountability-framework | `CONFLICTS.md` | 3 | header says verbatim/as received |
 
 Source: classification run in the session of 2026-11-20 (Claude Code), counts by `git grep -I -i -w -c`. Observer slots: null.
+
+## Second private person (added 2026-11-20)
+
+The second private person's name, grepped the same way (whole word, case-insensitive, all 105 reachable repos). It was replaced by a role in AI-Consciousness-Sensors (PR #44). One file stays under the owner decision of 2026-11-19:
+
+| repo | path | lines | class | why |
+|---|---|---|---|---|
+| drift-archive-audit | `HARVEST.md` | 24 | QUOTE-OR-HISTORY | audit record quoting other files; not pinned (its blob id and sha256 appear in no other file) |
+
+Source: grep in the session of 2026-11-20 (Claude Code). Observer slots: null.
