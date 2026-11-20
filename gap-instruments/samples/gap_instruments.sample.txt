@@ -1,7 +1,8 @@
 
 === PHYSICAL LIMIT ===
-evidence fields: {'MEASURED': 0, 'ESTIMATED': 0, 'UNKNOWN': 0, 'GAP': 7, 'filled_fraction': 0.0}
+evidence fields: {'MEASURED': 0, 'ESTIMATED': 0, 'UNKNOWN': 0, 'GAP': 8, 'filled_fraction': 0.0}
 unevaluated fraction: UNKNOWN
+limit_basis: unknown  (counted as GAP)
   UNRESOLVED: system_instance unspecified
   UNRESOLVED: operating_condition unspecified
   UNRESOLVED: physical_quantity unspecified
@@ -27,3 +28,47 @@ unevaluated fraction: UNKNOWN
 === INSTANCE CHANGES (label held, configuration changed) ===
   1979-80  capitalism (US): Chrysler loan guarantees | after: state carries failure risk
   2008     capitalism (US): TARP, AIG, GM/Chrysler | after: losses socialized, gains private
+
+=== PHYSICAL LIMIT (seed: EAST 2026, PROPOSED, carried) ===
+evidence fields: {'MEASURED': 1, 'ESTIMATED': 1, 'UNKNOWN': 0, 'GAP': 5, 'filled_fraction': 0.286}
+unevaluated fraction: UNKNOWN
+limit_basis: empirical_rule
+  UNRESOLVED: operating_condition unspecified
+  verdict: NOT ASSIGNED
+
+=== CALIBRATION (predict, then measure; target checked first) ===
+  CAL-MILES-GPS     TARGET_MISMATCH NOT_SCORED abs_error --       tolerance -- | safe OVER signed -- | method NOT_TESTED
+    TARGET_MISMATCH: the prediction names 'miles driven to the dock, incl. going around the shop', the instrument measured 'route miles to the address point'; logged, not an error
+    UNRESOLVED: calibration: confidence not stated
+  CAL-MILES-ACTUAL  MATCH           HIT        abs_error 0-1      tolerance 0.5 | safe OVER signed 0-1 | method NOT_TESTED
+    tolerance basis: written precision
+    UNRESOLVED: calibration: confidence not stated
+  CAL-FUEL          TARGET_MISMATCH NOT_SCORED abs_error --       tolerance -- | safe OVER signed -- | method NO
+    TARGET_MISMATCH: the prediction names 'fuel needed for the trip', the instrument measured 'fuel tank level'; logged, not an error
+    UNRESOLVED: calibration: confidence not stated
+  CAL-TIME          MATCH           HIT        abs_error 0.9667   tolerance 1.0 | safe OVER signed 0.9667 | method NOT_TESTED
+    tolerance basis: written precision, doubled by '~'
+    UNRESOLVED: calibration: confidence not stated
+  summary: n 4, hits 2, misses 0, target mismatches 2, not scored 2
+    miles driven to the dock, incl. going around the shop: n 2, scored 1, mae 0-1, mean signed 0-1
+    fuel needed for the trip: n 1, scored 0, mae --, mean signed --
+    on-duty time: n 1, scored 1, mae 0.9667, mean signed 0.9667
+  method matches standard (kept apart): {'YES': 0, 'NO': 1, 'UNKNOWN': 0, 'NOT_TESTED': 3}
+  confidence vs hit rate: NOT_COMPUTABLE: 0 of 2 scored rows state a confidence
+  verdict: NOT ASSIGNED
+
+=== CONFOUNDS (presence and size logged; meaning deferred) ===
+  corpus_prior             present UNKNOWN  size not recorded | control - | interpretation GAP
+  framing_pull             present UNKNOWN  size not recorded | control - | interpretation GAP
+  trained_reflex           present UNKNOWN  size not recorded | control - | interpretation GAP
+  narration_not_causal     present UNKNOWN  size not recorded | control - | interpretation GAP
+  context_contamination    present UNKNOWN  size not recorded | control - | interpretation GAP
+  sampling_variance        present UNKNOWN  size not recorded | control - | interpretation GAP
+  version_drift            present UNKNOWN  size not recorded | control - | interpretation GAP
+  evaluator_sharing        present UNKNOWN  size not recorded | control - | interpretation GAP
+  term_freight             present UNKNOWN  size not recorded | control - | interpretation GAP
+  observer_effect          present UNKNOWN  size not recorded | control - | interpretation GAP
+  target_mismatch          present True     size [ESTIMATED] 2.7-3.7 mi | control - | interpretation GAP
+  frame_graded_assessment  present UNKNOWN  size not recorded | control - | interpretation GAP
+  summary: {'n': 12, 'present': {'True': 1, 'False': 0, 'UNKNOWN': 11}, 'sized': 1, 'controlled': 0, 'interpretation_GAP': 12}
+  verdict: NOT ASSIGNED
