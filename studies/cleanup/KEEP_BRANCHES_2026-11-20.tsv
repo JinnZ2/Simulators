@@ -1,0 +1,4 @@
+repo	branch	tip	proof	needs_archive	archive_branch	commits_not_on_default	default_branch	default_tip	open_pr	open_pr_basis	note
+Simulators	claude/healing-folder-additions-u5aojl	db000ab8572343a6c5c1697240dee5dc1888fa96	content-proof	YES		4	main	5abf7d517252	YES	open PR #261, head db000ab85723	session's own working branch; excluded
+orbital-phycom	claude/ci-floor-3-10	173d2d6da699855b6a7443b1cc10805d9b84ab40	content-proof	YES		1	main	286754726ec5	YES	open PR #5, head 173d2d6da699	
+orbital-phycom	claude/ci-quick-tests-module-run	c593cc22769b49121b7e100ed9096c3c272f2058	content-proof	YES		1	main	286754726ec5	YES	open PR #7, head c593cc22769b	

@@ -371,4 +371,45 @@ are kept as written and superseded by this entry.
 Verdict after this entry: NOT MET. Left: 3 register rows PARTIAL; REVIEW-2 on the register not
 done; 38 archive branches listed and not made (if "made where needed" is read as created).
 
+### Amendment 2026-11-20, third entry: archives leave the done condition
+
+Source: owner order in chat, 2026-11-20, relaying a correction from chat Claude: "the earlier split
+wrongly put archives in the done condition."
+
+- ~~archive branches made where needed~~ (struck 2026-11-20; it stood in the first table of this
+  section as a DONE condition).
+- An archive branch is created in the same step as the deletion it protects. Both are tail items.
+- Done condition for "cleanup", as amended: SAFE list recorded + needs_archive marked, with the
+  other conditions of the first table unchanged (formula-audit default = main; items 24-30
+  done-tested; item 16 rechecked; items 1 / 18 / 33 checked).
+- The closing line of the second entry ("38 archive branches listed and not made") is no longer
+  something left for the verdict.
+
+### Update 2026-11-20, fourth entry: a2, open_pr, own branch, verdict
+
+- a2 (PR merged AND `refs/pull/N/head` == tip) run over the 156 unproven branches: 1 holds
+  (`AI-Consciousness-Sensors claude/error-records`, PR #43, merged 10:07:51Z), and that branch is
+  already gone, so 0 rows are added to the SAFE list. 11 candidate PRs NOT READ (repos outside the
+  session's GitHub tool scope). `studies/cleanup/A2_RUN_2026-11-20.tsv`.
+- open_pr column added. YES 3, moved to `studies/cleanup/KEEP_BRANCHES_2026-11-20.tsv`. NOT_READ
+  132 (70 repos out of scope); those rows stay in the SAFE list with the column unread.
+- `Simulators claude/healing-folder-additions-u5aojl`: the session's own working branch, excluded
+  (in KEEP).
+- SAFE list now 289 rows; needs_archive YES 37.
+- CI `tests` #1860 on `8f7a239`: success.
+
+Freeze verdict against the measurand as amended (third entry): NOT MET.
+
+| part | reading | left |
+|---|---|---|
+| cleanup: SAFE list recorded | met | open_pr unread on 132 rows; a2 unread on 11 PRs; 2 repos not cloned. Recorded as limits of the list |
+| cleanup: needs_archive marked | met | |
+| cleanup: formula-audit default, items 24-30, item 16, items 1 / 18 / 33 | met | |
+| map: `--strict` exit 0, no ABSENT | met | |
+| map: every register row in_map YES | not met | 3 rows PARTIAL |
+| map: REVIEW-2 at L2+ on the register | not met | request drafted, not sent |
+
+"cleanup" reads DONE under the amended condition. "map" does not. Tail items (deletions with
+their archives) do not hold the freeze.
+
 Observer slots: null.
