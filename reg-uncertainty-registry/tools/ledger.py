@@ -2,7 +2,9 @@
 # SPDX-License-Identifier: CC0-1.0
 # DESIGN BASIS (requested by repo owner):
 #   property: refuses malformed or unsupported input rather than defaulting
-#   reason:   UNSTATED -- ask owner
+#   reason:   "it is never silently dropped and never read as NOT_FOUND
+#             (NOT_FOUND needs two empty searches or a different object at
+#             the citation)." (quoted from this file)
 #   attribute style judgments to this requirement,
 #   not to the authoring model.
 """

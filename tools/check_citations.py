@@ -5,7 +5,9 @@
 #             derivation)
 #   reason:   UNSTATED -- ask owner
 #   property: refuses malformed or unsupported input rather than defaulting
-#   reason:   UNSTATED -- ask owner
+#   reason:   "Rows are never dropped. A row the rules cannot classify is
+#             refused and named; it does not disappear from the count."
+#             (quoted from this file)
 #   attribute style judgments to this requirement,
 #   not to the authoring model.
 """

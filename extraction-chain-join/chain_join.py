@@ -1,7 +1,10 @@
 # SPDX-License-Identifier: CC0-1.0
 # DESIGN BASIS (requested by repo owner):
 #   property: refuses malformed or unsupported input rather than defaulting
-#   reason:   UNSTATED -- ask owner
+#   reason:   "Every reading carries its coverage, because the order says
+#             ownership data is incomplete by design and coverage goes with
+#             every result. `result()` refuses to build a reading without
+#             one." (quoted from this file)
 #   attribute style judgments to this requirement,
 #   not to the authoring model.
 """chain_join.py -- instruments for joining the extraction-money-power-emissions
