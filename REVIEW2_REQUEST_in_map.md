@@ -9,6 +9,9 @@ must be a different model family from the builder (Claude Code).
 ```
 MODE: REVIEW-2
 
+The two READ files are attached to this conversation; their sha256 values are listed below. Use the
+attachments; don't fetch the repository.
+
 READ:
   studies/review/MULTI_HOME_REGISTER_for_review_2026-11-20_v2.json
       sha256 934771a52bc0be9ee29b438cf03f5752a3ccf93af86e20f438db88377a34eb1f
@@ -49,3 +52,11 @@ EXPOSURE ATTESTATION (return it filled in):
 
 Builder's readings, for comparison AFTER the return only: `MULTI_HOME_REGISTER.json` field
 `in_map` (YES 25, PARTIAL 3, NO 0 at this commit).
+
+Carry steps (owner, 2026-11-20):
+1. Open both download links and save the files.
+   - https://raw.githubusercontent.com/JinnZ2/Simulators/7366f505be38cf1163219ea10296050e64fbe767/studies/review/MULTI_HOME_REGISTER_for_review_2026-11-20_v2.json
+   - https://raw.githubusercontent.com/JinnZ2/Simulators/7366f505be38cf1163219ea10296050e64fbe767/studies/review/concept_map_for_review_2026-11-20.json
+2. Start a new Kimi or GPT conversation with memory off.
+3. Attach both files, then paste the block above (it opens with the attachment line).
+4. Bring back its answer: 28 lines plus the filled-in attestation.
