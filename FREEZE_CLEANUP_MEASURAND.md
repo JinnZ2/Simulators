@@ -178,4 +178,89 @@ biomachine_ecology fairmont-ecological-recovery infrastructure-stability-model.
 Per-target-repo readings for 28 and 30 still need the repo lists, and 26, 27 and the 4 named in
 30 still need the branch names.
 
+### Items 26-30 with names (added 2026-11-20, second run)
+
+Source of the names and target repos: the owner's AUDIT request of 2026-11-20, citing the owner
+chat of 2026-11-11 (Manus work order items 24-30). The request text arrived cut off at its last
+line ("the 66-repo count is the APPLY clu"); everything before that line is used as received.
+
+Method: `git ls-remote --heads https://github.com/JinnZ2/<repo>.git` per target repo, run
+2026-11-20T09:47:18Z to 09:47:43Z, every call exited 0. A branch matches on the exact name, with
+or without a `claude/` prefix, and also on `<name>-*` (suffix). Suffix matches found: none.
+
+| item | repo | branch | reading |
+|---|---|---|---|
+| 26 | Simulators | `law-audit-card` | GONE |
+| 26 | Simulators | `orientation-chamber` | GONE |
+| 26 | Simulators | `tool-finder` | GONE |
+| 26 | Simulators | `c2-seed-redraw-notes` | GONE |
+| 26 | Simulators | `coupling-check-disaster-twiklx` | GONE |
+| 26 | Simulators | `wo3-reader-a-note` | GONE |
+| 26 | Simulators | `glyph-inward-gaps` | GONE |
+| 26 | Simulators | `gap-instruments` | GONE |
+| 26 | Simulators | `new-tech-gap-spec-cases-im1j89` | GONE |
+| 27 | method-layer | `clone-refspec-note` | GONE |
+| 27 | method-layer | `gap-instruments` | GONE |
+| 27 | method-layer | `glyph-inward` | GONE |
+| 27 | method-layer | `healing-folder-additions` | GONE |
+| 27 | method-layer | `instrument-index-schema` | GONE |
+| 27 | method-layer | `new-tech-gap-spec-cases` | GONE |
+| 27 | method-layer | `reasoning-layer-cards` | GONE |
+| 27 | method-layer | `tool-finder-aliases` | GONE |
+| 28 | AI-Consciousness-Sensors | `manus/wo11-current-main` | GONE |
+| 28 | Component-failure-repurposing-database | `manus/wo11-current-main` | GONE |
+| 28 | curly-octo-happiness | `manus/wo11-current-main` | GONE |
+| 28 | decision-aperture | `manus/wo11-current-main` | GONE |
+| 28 | chain-position-detectability | `manus/wo11-current-main` | GONE |
+| 28 | differential-frame-core | `manus/wo11-current-main` | GONE |
+| 28 | drift-archive-audit | `manus/wo11-current-main` | GONE |
+| 28 | electromagnetic-ocean-restoration | `manus/wo11-current-main` | GONE |
+| 28 | curly-octo-happiness | the two other `manus/wo11-*` branches (names not given) | GONE: no head containing `manus` or `wo11` (5 heads) |
+| 29 | AI-Consciousness-Sensors | `tool-finder-pointer` | GONE |
+| 29 | Noise-as-Information-Sensor | `tool-finder-pointer` | GONE |
+| 29 | Polyhedral-Intelligence | `tool-finder-pointer` | GONE |
+| 29 | chain-position-detectability | `tool-finder-pointer` | GONE |
+| 29 | differential-frame-core | `tool-finder-pointer` | GONE |
+| 29 | drift-archive-audit | `tool-finder-pointer` | GONE |
+| 30 | Component-failure-repurposing-database | `healing-folder-additions-u5aojl` | GONE |
+| 30 | measurement-scope-gaps | `healing-folder-additions-u5aojl` | GONE |
+| 30 | simulation | `healing-folder-additions-u5aojl` | GONE |
+| 30 | Noise-as-Information-Sensor | `clone-refspec-note` | GONE |
+| 30 | drift-archive-audit | `clone-refspec-note` | GONE |
+| 30 | Noise-as-Information-Sensor | `noise-reconcile-claims` | GONE |
+| 30 | chain-position-detectability | `trained-objective-residual-tension` | GONE |
+| 30 | decision-aperture | `claude-md-files` | GONE |
+| 30 | decision-aperture | `fix/preserve-unmeasured-friction` | GONE |
+
+Count: 41 rows, 41 GONE, 0 EXISTS.
+
+Outside the item targets (never in items 28 or 30 per the request; listed so the earlier counts
+in sections 3 to 5 are not read as item failures):
+
+- `manus/wo11-current-main` still EXISTS, as `refs/heads/manus/wo11-current-main`, in 22 repos,
+  none of them an item-28 target: AI-Human-Audit-Protocol AI-arena Academic-Translator
+  Adaptive-Intelligence-Framework- Antarctic-basin-dynamics BE2-communication
+  Bio-Grid-American-Manufacturing- BioGrid2.0 Combine-Cognitive-Architecture- Coop-framework
+  Cyclic-programming DIY-CNC Fractal_Compass_Core Fulgerite-Antenna-Prototype- GlyphAI HAAS
+  Hardware-Store Inversion assumption_validator biomachine_ecology fairmont-ecological-recovery
+  infrastructure-stability-model. (The request says "the other 14"; the count read here is 22,
+  because none of the 8 targets was among the 22.)
+- `refs/heads/claude/healing-folder-additions-u5aojl` EXISTS in Simulators and
+  AI-Consciousness-Sensors (read in this run); Rosetta-Shape-Core and TAF as of 04:53Z, not
+  reread. None is an item-30 target.
+- `refs/heads/claude/clone-refspec-note` EXISTS in non-target repos (66 at 04:53Z; in this run
+  seen in AI-Consciousness-Sensors, curly-octo-happiness, chain-position-detectability,
+  decision-aperture). Not an item-30 target in any of them.
+
+Correction to "GONE in all 82" for `tool-finder-pointer` (sections 3, 4 and the table above):
+
+- `refs/heads/claude/tool-finder-pointer` EXISTS in decision-aperture, at `30d4f02`
+  (read 2026-11-20T09:47Z). decision-aperture is not one of the six item-29 targets.
+- The 82-repo list did not include decision-aperture, curly-octo-happiness,
+  measurement-scope-gaps or simulation, so "all 82" never covered them. The earlier lines are
+  kept as written.
+
+Head counts in this run: Simulators 29 (30 at 04:53Z), method-layer 3 (4 at 04:53Z;
+`claude/name-to-handle` is gone there).
+
 Observer slots: null.
