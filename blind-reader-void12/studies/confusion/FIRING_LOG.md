@@ -138,3 +138,18 @@ Code note for FL10: F01-F12 were read in `../EMBEDDED_AUDIT_TESTS.md`, F13, F14 
 amendments of 2026-11-20. F14 fits by shape: a value stated without rechecking it against its own
 source. F14's text names a count and its list, and these are field names, so F14 is not used and its
 text is not widened. The code is VOID.
+
+## 2026-11-20: header says read-only except one item; another item also writes
+
+```text
+Reader: Claude family (chat session)
+Read: the order of 2026-11-20 headed "MODE: AUDIT then SUGGEST (Geometric-manifold- + Simulators; read-only except item 4)"
+```
+
+| id | code | term or passage | what was missing | what the reader did | source | resolves with | found | reached | status |
+|---|---|---|---|---|---|---|---|---|---|
+| FL11 | F15 (PROPOSED code; assigned at the owner's order) | header: "read-only except item 4"; item 5: "Simulators EMBEDDED_AUDIT_TESTS.md: candidate F16 ... PROPOSED" | item 5 in the header's list of writes: item 5 is a write to a file, and the header allows a write in item 4 only | wrote the header and item 5 into one order. The implementer made the item 5 write (Simulators `87fe38f`) and named the mismatch in its report. | the owner's relay of the order in the Claude Code session, 2026-11-20; Simulators `87fe38f`; the chat session itself was not seen by the logger | a header that lists every writing item (the next order's header did: "writes: items 2-5 in Geometric, item 6 in Simulators") | at execution (caught by the Claude Code session; reported in its report; logged at the owner's order, 2026-11-20) | relayed order; one write made outside the header's stated exception | resolved: the write stands; later headers list the writing items |
+
+Code note for FL11: the owner's order names the code. F15 is "order contradicts itself", PROPOSED in
+the amendments of 2026-11-20 to `../EMBEDDED_AUDIT_TESTS.md`; the shape here is the same as FL08 and
+FL09 (two parts of one order that cannot both be followed). FL08 and FL09 are not recoded.
