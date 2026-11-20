@@ -1274,7 +1274,7 @@ Consequence: `ToolRuns::test_tool_exits_clean` is RED again. It is red for the
       test_known_answer_gate::ToolRuns::test_tool_exits_clean   (16.2: the 33 skips @85ce0d9; 28 @9262516)
       test_run_manifest::TestRedirectContract x2                (16.2: the two redirects)
 
-### 16.2 OPEN — awaiting Kavik (parked; nothing below was changed)
+### 16.2 OPEN — awaiting JinnZ2 (parked; nothing below was changed)
 
     1  sense_as_match.py -> test_sense.py
        The redirect names a file that has never been committed. Deliver
@@ -1354,7 +1354,7 @@ The two redirect tests are red for three files, not one:
     crediting-rate/archive/f168f79/crediting_rate_v2.py -> crediting-rate/test_crediting_v2.py
         The target exists only at commit f168f79.
     instrument-index/coverage.py -> test_index.py
-        Section 16.2 item 2. Parked, awaiting Kavik. Never committed.
+        Section 16.2 item 2. Parked, awaiting JinnZ2. Never committed.
     sense_as_match.py -> test_sense.py
         Section 16.2 item 1. Clears when claude/sense-as-match merges; that
         branch adds root test_sense.py.
