@@ -502,4 +502,18 @@ Verdict against the measurand as amended: MET.
   PR-state reads for 70 repos; 11 a2 candidate PRs); the reviewer's sha256 limit; items held
   under the freeze stay held until the owner orders each one.
 
+### 2026-11-20, seventh entry: source of the relayed summary; diff review as a tail item
+
+Source: owner order in chat, 2026-11-20 (MODE: IMPLEMENT, records + tail).
+
+- The sixth entry says "The owner's relayed summary gives L2 YES 15, PARTIAL 13 and GRAIN 11".
+  The summary's source is chat Claude, relayed by the owner; the cause of the difference is a
+  miscount in the relay (its GRAIN list has 10 entries). The counted figures (YES 16, PARTIAL
+  12, GRAIN 10) are primary. Logged as FL07 in
+  `blind-reader-void12/studies/confusion/FIRING_LOG.md`.
+- `studies/review/REVIEW2_REQUEST_map_diff_56a208e.md` asks for a second reading of the diff at
+  `56a208e` (covers on six rows, two added locations, the strict rule text). It is a tail item,
+  not a gate, and nothing is ordered from it. The lift record of the sixth entry stands.
+- CI on `56a208e`: run #1870, both jobs success. CI on `34f9c7f`: run #1863, both jobs success.
+
 Observer slots: null.

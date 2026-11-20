@@ -1,0 +1,243 @@
+diff --git a/build_multi_home_register.py b/build_multi_home_register.py
+index d4c56c2..0f9b3da 100644
+--- a/build_multi_home_register.py
++++ b/build_multi_home_register.py
+@@ -19,8 +19,13 @@ Sources, each named per row:
+ A home is repo:path@commit (12 hex: the last commit touching the path, as of HEAD for
+ Simulators and origin/main for the others) plus the blob id when the path is a file. Every home is
+ resolved with git at that commit; one that does not resolve makes the build refuse.
+-in_map_by_path is mechanical (a concept_map.json location has the same repo and path);
+-in_map is a reading at grain; both are kept. grain_judgment: who = this session, level L0.
++in_map_by_path is mechanical (a concept_map.json location has the same repo and path).
++in_map, from 2026-11-20, is the strict mechanical rule: YES = one map row names the concept (in
++its "concept" or its "covers" list) AND lists every registered home (repo + path); PARTIAL = a
++row names it or lists a home, but no single row does both in full; NO = neither. Until
++2026-11-20 in_map was a reading at grain by this session (L0); that reading is kept per row as
++in_map_L0_2026-11-20. The "covers" lists in concept_map.json are the judgment now: who = this
++session, written after REVIEW-2 (GPT-6, L2, studies/review/REVIEW2_in_map_GPT6_2026-11-20.md).
+ No code is moved. Stdlib only.
+ """
+ import json, os, subprocess, sys
+@@ -31,7 +36,9 @@ REPOS = ("Simulators", "study-aperture", "thermodynamic-accountability-framework
+ SA_PKG = "experimental/playground/"
+ RP_PKG = "relational-playground/playground/"
+ JUDGE = {"who": "Claude Code session (same session that built the register)", "level": "L0",
+-         "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"}
++         "note": "in_map is mechanical (strict rule) from 2026-11-20; the judgment sits in the map's covers "
++                 "lists, written by this session after REVIEW-2 at L2 (GPT-6, 2026-11-20); "
++                 "was until 2026-11-20: self-reading; not independent; a REVIEW-2 at L2+ is the next stage"}
+ 
+ 
+ def repo_dir(r):
+@@ -110,6 +117,25 @@ def by_path(homes, mp):
+     return ("YES" if hits else "NO"), hits
+ 
+ 
++def strict_in_map(concept, homes, data):
++    """YES = one map row names the concept (concept or covers) and lists every home."""
++    want = {(h["repo"], h["path"].rstrip("/")) for h in homes}
++    named, part = [], []
++    for mr in data["rows"]:
++        names = mr["concept"] == concept or concept in mr.get("covers", [])
++        have = {(l["repo"], l["path"].rstrip("/")) for l in mr["locations"]}
++        if names and want <= have:
++            return "YES", "%s (named in %s; %d of %d homes listed)" % (
++                mr["concept"], "concept" if mr["concept"] == concept else "covers", len(want), len(want))
++        if names:
++            named.append("%s names it, lists %d of %d homes" % (mr["concept"], len(want & have), len(want)))
++        elif want & have:
++            part.append("%s lists %d of %d homes, does not name it" % (mr["concept"], len(want & have), len(want)))
++    if named or part:
++        return "PARTIAL", "; ".join(named + part)
++    return "NO", "no map row names it or lists a home"
++
++
+ def split_loc(s):
+     """'file.py :: token (note)' -> (file, token). VOID handled by the caller."""
+     f, _, tok = s.partition("::")
+@@ -121,6 +147,8 @@ def split_loc(s):
+ 
+ 
+ # ---- in_map readings (L0) for S2 rows; key = crossrun concept
++# From 2026-11-20 these no longer set in_map (strict rule, see strict_in_map); they are emitted
++# unchanged as in_map_L0_2026-11-20 so the earlier reading stays on the record.
+ S2_IN_MAP = {
+     "boundary closure gate before any physics": ("YES", "L0 gate (budget closure)"),
+     "noise band on a misclosure": ("PARTIAL", "same files as the L0 gate row; the tolerance itself is not named in the map"),
+@@ -185,7 +213,8 @@ def build():
+                            home("study-aperture", SA_PKG + "equations/measurand.py")],
+                  "source": "S3 grep: .py basename shared Simulators/study-aperture; headers read",
+                  "grain_note": "CANDIDATE match only: decomposition (instrument-epistemology) vs declared identity "
+-                               "on linked runs (playground); same word, possibly two concepts"})
++                               "on linked runs (playground); same word, possibly two concepts. "
++                               "2026-11-20: possible two concepts (REVIEW-2); not split"})
+     rows.append({"concept": "thermodynamic audit inside an economic sim",
+                  "homes": [home("Simulators", "earth_economics/earth_economic_sim.py"),
+                            home("thermodynamic-accountability-framework", "calibration/unified_audit.py")],
+@@ -210,11 +239,14 @@ def build():
+     for r in rows:
+         r["in_map_by_path"], r["map_rows_by_path"] = by_path(r["homes"], mp)
+         if r["source"].startswith("S4"):
+-            r["in_map"], r["in_map_basis"] = "YES", r["concept"]
++            l0 = ("YES", r["concept"])
+         elif r["concept"] in S2_IN_MAP:
+-            r["in_map"], r["in_map_basis"] = S2_IN_MAP[r["concept"]]
++            l0 = S2_IN_MAP[r["concept"]]
+         else:
+-            r["in_map"], r["in_map_basis"] = ("YES" if r["in_map_by_path"] == "YES" else "NO"), "by path; no other map row read as covering it"
++            l0 = (("YES" if r["in_map_by_path"] == "YES" else "NO"), "by path; no other map row read as covering it")
++        r["in_map"], r["in_map_basis"] = strict_in_map(r["concept"], r["homes"], data)
++        r["in_map_rule"] = "strict: a row names the concept in concept or covers AND lists every home"
++        r["in_map_L0_2026-11-20"] = {"in_map": l0[0], "basis": l0[1], "note": "builder reading before the strict rule"}
+         r["grain_judgment"] = JUDGE
+     considered = [
+         {"name": "institutional_audit.py", "homes": ["Simulators:fragility-cascade/", "TAF:metrology/"],
+diff --git a/check_concept_map.py b/check_concept_map.py
+index 54850b4..8e193b2 100644
+--- a/check_concept_map.py
++++ b/check_concept_map.py
+@@ -100,6 +100,9 @@ def row_problems(row):
+             out.append("role %r not in %s" % (l.get("role"), ROLES))
+         if not l.get("builder"):
+             out.append("%s: builder absent (write 'not recorded')" % l.get("path"))
++    cov = row.get("covers")
++    if cov is not None and (not isinstance(cov, list) or not cov or any(not isinstance(c, str) or not c.strip() for c in cov)):
++        out.append("covers, when present, is a non-empty list of register concept names")
+     n = {r: sum(1 for l in locs if l.get("role") == r) for r in ROLES}
+     home = row.get("home")
+     if home == "CANONICAL" and (n["canonical"] != 1 or row.get("decided_by") == PENDING):
+@@ -131,6 +134,8 @@ def render(data):
+             o.append("- searched: %s" % r["searched"])
+         if r.get("note"):
+             o.append("- note: %s" % r["note"])
++        if r.get("covers"):
++            o.append("- covers (register concepts held by this row; not merged, not renamed): %s" % "; ".join(r["covers"]))
+         if r["locations"]:
+             o += ["", "| role | where | builder | note |", "|---|---|---|---|"]
+             for l in r["locations"]:
+diff --git a/concept_map.json b/concept_map.json
+index e121c1d..f241c8a 100644
+--- a/concept_map.json
++++ b/concept_map.json
+@@ -1,5 +1,5 @@
+ {
+- "as_of": "2026-11-11",
++ "as_of": "2026-11-20",
+  "rows": [
+   {
+    "concept": "playground (equation-substitution laboratory)",
+@@ -30,6 +30,12 @@
+    "home": "CANDIDATE",
+    "status": "three implementations; the relational-playground gate restates the rule in stdlib",
+    "decided_by": "pending cross-run",
++   "covers": [
++    "known-answer validation",
++    "planted defects on the lab itself",
++    "null harness",
++    "zero cases is not a pass"
++   ],
+    "locations": [
+     {
+      "role": "candidate",
+@@ -70,6 +76,15 @@
+      "path": "relational-playground/playground/known_answer_gate.py",
+      "builder": "Claude Code (commit trailer)",
+      "note": "FP 0 / TP 1 gate per model"
++    },
++    {
++     "role": "candidate",
++     "repo": "study-aperture",
++     "ref": "origin/main",
++     "path": "experimental/playground/validation/planted_defects.py",
++     "builder": "Perplexity (commit trailer)",
++     "note": "added 2026-11-20 after REVIEW-2 (HOME): registered home of 'planted defects on the lab itself'",
++     "home_ref": "study-aperture:experimental/playground/validation/planted_defects.py@9587178428d9"
+     }
+    ]
+   },
+@@ -78,6 +93,9 @@
+    "home": "CANDIDATE",
+    "status": "three builds; TAF register holds real slots, the other two are mechanisms",
+    "decided_by": "pending cross-run",
++   "covers": [
++    "UNKNOWN carries what would end it"
++   ],
+    "locations": [
+     {
+      "role": "candidate",
+@@ -118,6 +136,9 @@
+    "home": "CANDIDATE",
+    "status": "defined in TAF glossary; built in two playgrounds",
+    "decided_by": "pending cross-run",
++   "covers": [
++    "non-detection as bounded null"
++   ],
+    "locations": [
+     {
+      "role": "candidate",
+@@ -142,6 +163,15 @@
+      "path": "docs/glossary.md",
+      "builder": "Claude Code",
+      "note": "status definition only"
++    },
++    {
++     "role": "candidate",
++     "repo": "study-aperture",
++     "ref": "origin/main",
++     "path": "experimental/playground/detection/non_detection.py",
++     "builder": "Perplexity (commit trailer)",
++     "note": "added 2026-11-20 after REVIEW-2 (HOME): registered home of 'non-detection as bounded null'; scoped_absence.py imports NonDetectionRecord from it",
++     "home_ref": "study-aperture:experimental/playground/detection/non_detection.py@c780f5c388c2"
+     }
+    ]
+   },
+@@ -242,6 +272,10 @@
+    "home": "CANDIDATE",
+    "status": "three builds",
+    "decided_by": "pending cross-run",
++   "covers": [
++    "boundary closure gate before any physics",
++    "noise band on a misclosure"
++   ],
+    "locations": [
+     {
+      "role": "candidate",
+@@ -274,6 +308,10 @@
+    "home": "CANDIDATE",
+    "status": "rule text in the forest METHOD BRIEF; two code builds",
+    "decided_by": "pending cross-run",
++   "covers": [
++    "frozen anchor",
++    "return test (asserted return + tolerance)"
++   ],
+    "locations": [
+     {
+      "role": "candidate",
+@@ -331,6 +369,9 @@
+    "home": "CANDIDATE",
+    "status": "two equation-family builds plus the original run code",
+    "decided_by": "pending cross-run",
++   "covers": [
++    "percolation family"
++   ],
+    "locations": [
+     {
+      "role": "candidate",
+@@ -371,6 +412,9 @@
+    "home": "CANDIDATE",
+    "status": "two builds",
+    "decided_by": "pending cross-run",
++   "covers": [
++    "branching family"
++   ],
+    "locations": [
+     {
+      "role": "candidate",
+@@ -753,6 +797,7 @@
+    "status": "candidate match only: decomposition (instrument-epistemology) vs declared identity on linked runs (playground); same word, possibly two concepts, not decided",
+    "decided_by": "pending cross-run",
+    "added": "2026-11-20, from MULTI_HOME_REGISTER.json (in_map NO at 2026-11-19); source: S3 grep: .py basename shared Simulators/study-aperture; headers read",
++   "note": "2026-11-20: possible two concepts (REVIEW-2); not split",
+    "locations": [
+     {
+      "role": "candidate",
