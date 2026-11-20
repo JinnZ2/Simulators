@@ -1,20 +1,20 @@
 {
  "status": "DRAFT",
- "as_of": "2026-11-19",
+ "as_of": "2026-11-20",
  "built_by": "build_multi_home_register.py",
  "scope": "concepts with more than one home across Simulators / study-aperture / thermodynamic-accountability-framework",
  "read_at": {
   "Simulators": "HEAD",
-  "study-aperture": "origin/main@03bd2014cd20",
-  "thermodynamic-accountability-framework": "origin/main@16285cccdd48"
+  "study-aperture": "origin/main@8164f9d4d6c4",
+  "thermodynamic-accountability-framework": "origin/main@50596669a2b5"
  },
  "denominator_note": "rows is a lower bound from four named sources, not an enumeration; grep covered top-level names and .py basenames only",
  "counts": {
   "rows": 28,
-  "in_map YES": 11,
+  "in_map YES": 25,
   "in_map PARTIAL": 3,
-  "in_map NO": 14,
-  "in_map_by_path YES": 15,
+  "in_map NO": 0,
+  "in_map_by_path YES": 28,
   "tokens not found": 0
  },
  "rows": [
@@ -40,9 +40,11 @@
    ],
    "source": "S1 TOOL_FINDER/entries.py NAME_COLLISIONS (\"same concept, two names\")",
    "grain_note": "one concept, two names; law-audit-card imports the TAF module rather than reimplementing (entries.py note, 2026-11-10)",
-   "in_map_by_path": "NO",
-   "map_rows_by_path": [],
-   "in_map": "NO",
+   "in_map_by_path": "YES",
+   "map_rows_by_path": [
+    "stated_purpose / scope_valid (law purpose and scope against first principle intent)"
+   ],
+   "in_map": "YES",
    "in_map_basis": "by path; no other map row read as covering it",
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
@@ -307,7 +309,8 @@
    "in_map_by_path": "YES",
    "map_rows_by_path": [
     "UNKNOWN expiry",
-    "scoped absence (ABSENT_AT_SENSITIVITY)"
+    "scoped absence (ABSENT_AT_SENSITIVITY)",
+    "value / condition basis vocabulary"
    ],
    "in_map": "YES",
    "in_map_basis": "scoped absence (ABSENT_AT_SENSITIVITY)",
@@ -346,7 +349,8 @@
    "in_map_by_path": "YES",
    "map_rows_by_path": [
     "UNKNOWN expiry",
-    "scoped absence (ABSENT_AT_SENSITIVITY)"
+    "scoped absence (ABSENT_AT_SENSITIVITY)",
+    "value / condition basis vocabulary"
    ],
    "in_map": "YES",
    "in_map_basis": "UNKNOWN expiry",
@@ -458,10 +462,12 @@
    ],
    "source": "S2 playground-crossrun/adapters/concept_map.py ROWS (location on both sides)",
    "grain_note": "crossrun grain is finer than map rows: one map row can cover several of these; combined-playground/cplay/ may carry a third Simulators copy, not checked per row",
-   "in_map_by_path": "NO",
-   "map_rows_by_path": [],
-   "in_map": "NO",
-   "in_map_basis": "",
+   "in_map_by_path": "YES",
+   "map_rows_by_path": [
+    "system continuity vs configuration continuity"
+   ],
+   "in_map": "YES",
+   "in_map_basis": "system continuity vs configuration continuity",
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
@@ -494,10 +500,16 @@
    ],
    "source": "S2 playground-crossrun/adapters/concept_map.py ROWS (location on both sides)",
    "grain_note": "crossrun grain is finer than map rows: one map row can cover several of these; combined-playground/cplay/ may carry a third Simulators copy, not checked per row",
-   "in_map_by_path": "NO",
-   "map_rows_by_path": [],
-   "in_map": "NO",
-   "in_map_basis": "",
+   "in_map_by_path": "YES",
+   "map_rows_by_path": [
+    "applicability / domain of validity",
+    "no universal ranking",
+    "observer declared before comparison",
+    "observer regime partition (names differ: PASSIVE vs REACTIVITY; not merged)",
+    "value / condition basis vocabulary"
+   ],
+   "in_map": "YES",
+   "in_map_basis": "observer declared before comparison",
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
@@ -530,10 +542,13 @@
    ],
    "source": "S2 playground-crossrun/adapters/concept_map.py ROWS (location on both sides)",
    "grain_note": "crossrun grain is finer than map rows: one map row can cover several of these; combined-playground/cplay/ may carry a third Simulators copy, not checked per row",
-   "in_map_by_path": "NO",
-   "map_rows_by_path": [],
-   "in_map": "NO",
-   "in_map_basis": "",
+   "in_map_by_path": "YES",
+   "map_rows_by_path": [
+    "observer declared before comparison",
+    "observer regime partition (names differ: PASSIVE vs REACTIVITY; not merged)"
+   ],
+   "in_map": "YES",
+   "in_map_basis": "observer regime partition (names differ: PASSIVE vs REACTIVITY; not merged)",
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
@@ -566,10 +581,15 @@
    ],
    "source": "S2 playground-crossrun/adapters/concept_map.py ROWS (location on both sides)",
    "grain_note": "crossrun grain is finer than map rows: one map row can cover several of these; combined-playground/cplay/ may carry a third Simulators copy, not checked per row",
-   "in_map_by_path": "NO",
-   "map_rows_by_path": [],
-   "in_map": "NO",
-   "in_map_basis": "",
+   "in_map_by_path": "YES",
+   "map_rows_by_path": [
+    "applicability / domain of validity",
+    "no universal ranking",
+    "observer declared before comparison",
+    "value / condition basis vocabulary"
+   ],
+   "in_map": "YES",
+   "in_map_basis": "no universal ranking",
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
@@ -602,10 +622,15 @@
    ],
    "source": "S2 playground-crossrun/adapters/concept_map.py ROWS (location on both sides)",
    "grain_note": "crossrun grain is finer than map rows: one map row can cover several of these; combined-playground/cplay/ may carry a third Simulators copy, not checked per row",
-   "in_map_by_path": "NO",
-   "map_rows_by_path": [],
-   "in_map": "NO",
-   "in_map_basis": "",
+   "in_map_by_path": "YES",
+   "map_rows_by_path": [
+    "applicability / domain of validity",
+    "no universal ranking",
+    "observer declared before comparison",
+    "value / condition basis vocabulary"
+   ],
+   "in_map": "YES",
+   "in_map_basis": "applicability / domain of validity",
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
@@ -717,10 +742,14 @@
    "in_map_by_path": "YES",
    "map_rows_by_path": [
     "UNKNOWN expiry",
-    "scoped absence (ABSENT_AT_SENSITIVITY)"
+    "applicability / domain of validity",
+    "no universal ranking",
+    "observer declared before comparison",
+    "scoped absence (ABSENT_AT_SENSITIVITY)",
+    "value / condition basis vocabulary"
    ],
-   "in_map": "NO",
-   "in_map_basis": "",
+   "in_map": "YES",
+   "in_map_basis": "value / condition basis vocabulary",
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
@@ -757,9 +786,11 @@
    ],
    "source": "S3 grep: top-level name shared by all three repos",
    "grain_note": "study-aperture and TAF copies have the same blob; the Simulators copy differs",
-   "in_map_by_path": "NO",
-   "map_rows_by_path": [],
-   "in_map": "NO",
+   "in_map_by_path": "YES",
+   "map_rows_by_path": [
+    "READING_PROTOCOL (how a folder is to be read)"
+   ],
+   "in_map": "YES",
    "in_map_basis": "by path; no other map row read as covering it",
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
@@ -789,9 +820,11 @@
    ],
    "source": "S3 grep: .py basename shared Simulators/TAF; same header, different blobs",
    "grain_note": "one file in two places, drifted (diff 88 lines at these commits)",
-   "in_map_by_path": "NO",
-   "map_rows_by_path": [],
-   "in_map": "NO",
+   "in_map_by_path": "YES",
+   "map_rows_by_path": [
+    "driver-hours evidence register"
+   ],
+   "in_map": "YES",
    "in_map_basis": "by path; no other map row read as covering it",
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
@@ -821,9 +854,11 @@
    ],
    "source": "S3 grep: .py basename shared Simulators/study-aperture; same blob",
    "grain_note": "a vendored copy: same bytes today, can drift; whether a vendored copy is a home is a reading",
-   "in_map_by_path": "NO",
-   "map_rows_by_path": [],
-   "in_map": "NO",
+   "in_map_by_path": "YES",
+   "map_rows_by_path": [
+    "conditional_claims (vendored tool)"
+   ],
+   "in_map": "YES",
    "in_map_basis": "by path; no other map row read as covering it",
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
@@ -853,9 +888,11 @@
    ],
    "source": "S3 grep: .py basename shared Simulators/study-aperture; same blob",
    "grain_note": "a vendored copy: same bytes today, can drift; whether a vendored copy is a home is a reading",
-   "in_map_by_path": "NO",
-   "map_rows_by_path": [],
-   "in_map": "NO",
+   "in_map_by_path": "YES",
+   "map_rows_by_path": [
+    "false_agree (vendored tool)"
+   ],
+   "in_map": "YES",
    "in_map_basis": "by path; no other map row read as covering it",
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
@@ -885,9 +922,11 @@
    ],
    "source": "S3 grep: .py basename shared Simulators/study-aperture; same blob",
    "grain_note": "a vendored copy: same bytes today, can drift; whether a vendored copy is a home is a reading",
-   "in_map_by_path": "NO",
-   "map_rows_by_path": [],
-   "in_map": "NO",
+   "in_map_by_path": "YES",
+   "map_rows_by_path": [
+    "provenance_graph (vendored tool)"
+   ],
+   "in_map": "YES",
    "in_map_basis": "by path; no other map row read as covering it",
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
@@ -917,9 +956,11 @@
    ],
    "source": "S3 grep: .py basename shared Simulators/study-aperture; headers read",
    "grain_note": "CANDIDATE match only: decomposition (instrument-epistemology) vs declared identity on linked runs (playground); same word, possibly two concepts",
-   "in_map_by_path": "NO",
-   "map_rows_by_path": [],
-   "in_map": "NO",
+   "in_map_by_path": "YES",
+   "map_rows_by_path": [
+    "measurand declaration (measurand vs indication / declared identity)"
+   ],
+   "in_map": "YES",
    "in_map_basis": "by path; no other map row read as covering it",
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
@@ -949,9 +990,11 @@
    ],
    "source": "S3 grep: earth_economic_sim.py names TAF ('In reality, this would import modules from TAF')",
    "grain_note": "CANDIDATE: a stand-in in Simulators for TAF's auditor; the TAF path is the nearest auditor module read, not a declared counterpart",
-   "in_map_by_path": "NO",
-   "map_rows_by_path": [],
-   "in_map": "NO",
+   "in_map_by_path": "YES",
+   "map_rows_by_path": [
+    "thermodynamic audit inside an economic sim"
+   ],
+   "in_map": "YES",
    "in_map_basis": "by path; no other map row read as covering it",
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",

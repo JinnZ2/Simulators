@@ -413,6 +413,393 @@
    "decided_by": "pending: a definition or a path from JinnZ2",
    "searched": "2026-11-11: GitHub code search over user:JinnZ2 (default branches only), 0 hits; grep of local checkouts of Simulators (this branch), study-aperture, method-layer, TAF, decision-aperture, 0 hits",
    "locations": []
+  },
+  {
+   "concept": "stated_purpose / scope_valid (law purpose and scope against first principle intent)",
+   "home": "CANDIDATE",
+   "status": "one concept under two names; the Simulators card imports the TAF module (law-audit-card/card.py names regulatory_scope_audit) and reads undeclared intent as VOID where TAF reads it as applying",
+   "decided_by": "pending cross-run",
+   "added": "2026-11-20, from MULTI_HOME_REGISTER.json (in_map NO at 2026-11-19); source: S1 TOOL_FINDER/entries.py NAME_COLLISIONS (\"same concept, two names\")",
+   "locations": [
+    {
+     "role": "candidate",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "law-audit-card/card.py",
+     "builder": "Claude Code (commit trailer)",
+     "note": "imports the TAF module; undeclared intent -> VOID",
+     "home_ref": "Simulators:law-audit-card/card.py@06fa86c56e73"
+    },
+    {
+     "role": "candidate",
+     "repo": "thermodynamic-accountability-framework",
+     "ref": "origin/main",
+     "path": "core/regulatory_scope_audit.py",
+     "builder": "not recorded (add commit b15e629 has no trailer; git author Claude)",
+     "note": "undeclared intent -> intent applies (TAF CLAUDE.md note 2026-11-10)",
+     "home_ref": "thermodynamic-accountability-framework:core/regulatory_scope_audit.py@f3728dfcdf80"
+    }
+   ]
+  },
+  {
+   "concept": "system continuity vs configuration continuity",
+   "home": "CANDIDATE",
+   "status": "two independent builds (crossrun row, location on both sides)",
+   "decided_by": "pending cross-run",
+   "added": "2026-11-20, from MULTI_HOME_REGISTER.json (in_map NO at 2026-11-19); source: S2 playground-crossrun/adapters/concept_map.py ROWS (location on both sides)",
+   "locations": [
+    {
+     "role": "candidate",
+     "repo": "study-aperture",
+     "ref": "origin/main",
+     "path": "experimental/playground/reference/continuity.py",
+     "builder": "not recorded (add commit c26fbd2 has no trailer; git author JinnZ2)",
+     "note": "",
+     "home_ref": "study-aperture:experimental/playground/reference/continuity.py@9587178428d9"
+    },
+    {
+     "role": "candidate",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "relational-playground/playground/continuity.py",
+     "builder": "Claude Code (commit trailer)",
+     "note": "",
+     "home_ref": "Simulators:relational-playground/playground/continuity.py@861b7c5568fe"
+    }
+   ]
+  },
+  {
+   "concept": "observer declared before comparison",
+   "home": "CANDIDATE",
+   "status": "two independent builds (crossrun row, location on both sides)",
+   "decided_by": "pending cross-run",
+   "added": "2026-11-20, from MULTI_HOME_REGISTER.json (in_map NO at 2026-11-19); source: S2 playground-crossrun/adapters/concept_map.py ROWS (location on both sides)",
+   "locations": [
+    {
+     "role": "candidate",
+     "repo": "study-aperture",
+     "ref": "origin/main",
+     "path": "experimental/playground/applicability/mapping.py",
+     "builder": "not recorded (add commit c26fbd2 has no trailer; git author JinnZ2)",
+     "note": "",
+     "home_ref": "study-aperture:experimental/playground/applicability/mapping.py@c86d6b9cb150"
+    },
+    {
+     "role": "candidate",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "relational-playground/playground/controls.py",
+     "builder": "Claude Code (commit trailer)",
+     "note": "",
+     "home_ref": "Simulators:relational-playground/playground/controls.py@512f320aba19"
+    }
+   ]
+  },
+  {
+   "concept": "observer regime partition (names differ: PASSIVE vs REACTIVITY; not merged)",
+   "home": "CANDIDATE",
+   "status": "two independent builds; the names differ (PASSIVE vs REACTIVITY) and are not merged",
+   "decided_by": "pending cross-run",
+   "added": "2026-11-20, from MULTI_HOME_REGISTER.json (in_map NO at 2026-11-19); source: S2 playground-crossrun/adapters/concept_map.py ROWS (location on both sides)",
+   "locations": [
+    {
+     "role": "candidate",
+     "repo": "study-aperture",
+     "ref": "origin/main",
+     "path": "experimental/playground/observation/__init__.py",
+     "builder": "not recorded (add commit c26fbd2 has no trailer; git author JinnZ2)",
+     "note": "",
+     "home_ref": "study-aperture:experimental/playground/observation/__init__.py@79f402c7153c"
+    },
+    {
+     "role": "candidate",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "relational-playground/playground/controls.py",
+     "builder": "Claude Code (commit trailer)",
+     "note": "",
+     "home_ref": "Simulators:relational-playground/playground/controls.py@512f320aba19"
+    }
+   ]
+  },
+  {
+   "concept": "no universal ranking",
+   "home": "CANDIDATE",
+   "status": "two independent builds (crossrun row, location on both sides)",
+   "decided_by": "pending cross-run",
+   "added": "2026-11-20, from MULTI_HOME_REGISTER.json (in_map NO at 2026-11-19); source: S2 playground-crossrun/adapters/concept_map.py ROWS (location on both sides)",
+   "locations": [
+    {
+     "role": "candidate",
+     "repo": "study-aperture",
+     "ref": "origin/main",
+     "path": "experimental/playground/applicability/mapping.py",
+     "builder": "not recorded (add commit c26fbd2 has no trailer; git author JinnZ2)",
+     "note": "",
+     "home_ref": "study-aperture:experimental/playground/applicability/mapping.py@c86d6b9cb150"
+    },
+    {
+     "role": "candidate",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "relational-playground/playground/experiments/comparison.py",
+     "builder": "Claude Code (commit trailer)",
+     "note": "",
+     "home_ref": "Simulators:relational-playground/playground/experiments/comparison.py@2cdfd53f64c6"
+    }
+   ]
+  },
+  {
+   "concept": "applicability / domain of validity",
+   "home": "CANDIDATE",
+   "status": "two independent builds (crossrun row, location on both sides)",
+   "decided_by": "pending cross-run",
+   "added": "2026-11-20, from MULTI_HOME_REGISTER.json (in_map NO at 2026-11-19); source: S2 playground-crossrun/adapters/concept_map.py ROWS (location on both sides)",
+   "locations": [
+    {
+     "role": "candidate",
+     "repo": "study-aperture",
+     "ref": "origin/main",
+     "path": "experimental/playground/applicability/mapping.py",
+     "builder": "not recorded (add commit c26fbd2 has no trailer; git author JinnZ2)",
+     "note": "",
+     "home_ref": "study-aperture:experimental/playground/applicability/mapping.py@c86d6b9cb150"
+    },
+    {
+     "role": "candidate",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "relational-playground/playground/analysis/applicability.py",
+     "builder": "Claude Code (commit trailer)",
+     "note": "",
+     "home_ref": "Simulators:relational-playground/playground/analysis/applicability.py@861b7c5568fe"
+    }
+   ]
+  },
+  {
+   "concept": "value / condition basis vocabulary",
+   "home": "CANDIDATE",
+   "status": "two independent builds (crossrun row, location on both sides)",
+   "decided_by": "pending cross-run",
+   "added": "2026-11-20, from MULTI_HOME_REGISTER.json (in_map NO at 2026-11-19); source: S2 playground-crossrun/adapters/concept_map.py ROWS (location on both sides)",
+   "locations": [
+    {
+     "role": "candidate",
+     "repo": "study-aperture",
+     "ref": "origin/main",
+     "path": "experimental/playground/applicability/mapping.py",
+     "builder": "not recorded (add commit c26fbd2 has no trailer; git author JinnZ2)",
+     "note": "",
+     "home_ref": "study-aperture:experimental/playground/applicability/mapping.py@c86d6b9cb150"
+    },
+    {
+     "role": "candidate",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "relational-playground/playground/uncertainty.py",
+     "builder": "Claude Code (commit trailer)",
+     "note": "",
+     "home_ref": "Simulators:relational-playground/playground/uncertainty.py@9b8c5e281fd7"
+    }
+   ]
+  },
+  {
+   "concept": "READING_PROTOCOL (how a folder is to be read)",
+   "home": "CANDIDATE",
+   "status": "three files of one name; the study-aperture and TAF copies have the same blob (601fdd196ceb), the Simulators file differs (ae6dd1146a38)",
+   "decided_by": "pending cross-run",
+   "added": "2026-11-20, from MULTI_HOME_REGISTER.json (in_map NO at 2026-11-19); source: S3 grep: top-level name shared by all three repos",
+   "locations": [
+    {
+     "role": "candidate",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "READING_PROTOCOL.md",
+     "builder": "not recorded (add commit e9594f8 has no trailer; git author Claude)",
+     "note": "differs from the other two",
+     "home_ref": "Simulators:READING_PROTOCOL.md@751490c471fb"
+    },
+    {
+     "role": "candidate",
+     "repo": "study-aperture",
+     "ref": "origin/main",
+     "path": "READING_PROTOCOL.md",
+     "builder": "Claude Code (commit trailer)",
+     "note": "same blob as the TAF copy",
+     "home_ref": "study-aperture:READING_PROTOCOL.md@1bd269730fbc"
+    },
+    {
+     "role": "candidate",
+     "repo": "thermodynamic-accountability-framework",
+     "ref": "origin/main",
+     "path": "READING_PROTOCOL.md",
+     "builder": "Claude Code (commit trailer)",
+     "note": "same blob as the study-aperture copy",
+     "home_ref": "thermodynamic-accountability-framework:READING_PROTOCOL.md@9f3766b68c19"
+    }
+   ]
+  },
+  {
+   "concept": "driver-hours evidence register",
+   "home": "CANDIDATE",
+   "status": "one file in two places, drifted (88 diff lines at the pinned commits)",
+   "decided_by": "pending cross-run",
+   "added": "2026-11-20, from MULTI_HOME_REGISTER.json (in_map NO at 2026-11-19); source: S3 grep: .py basename shared Simulators/TAF; same header, different blobs",
+   "locations": [
+    {
+     "role": "candidate",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "automation-gap/driver_hours_evidence_register.py",
+     "builder": "Claude Code (commit trailer)",
+     "note": "",
+     "home_ref": "Simulators:automation-gap/driver_hours_evidence_register.py@445f829ffc11"
+    },
+    {
+     "role": "candidate",
+     "repo": "thermodynamic-accountability-framework",
+     "ref": "origin/main",
+     "path": "labor_thermodynamics/driver_hours_evidence_register.py",
+     "builder": "Claude Code (commit trailer)",
+     "note": "",
+     "home_ref": "thermodynamic-accountability-framework:labor_thermodynamics/driver_hours_evidence_register.py@eaed14d2a289"
+    }
+   ]
+  },
+  {
+   "concept": "conditional_claims (vendored tool)",
+   "home": "CANONICAL",
+   "status": "vendored copy, same blob at the pinned commits; can drift",
+   "decided_by": "study-aperture vendored/PROVENANCE.md and vendored/SHA256SUMS (vendored from Simulators)",
+   "added": "2026-11-20, from MULTI_HOME_REGISTER.json (in_map NO at 2026-11-19); source: S3 grep: .py basename shared Simulators/study-aperture; same blob",
+   "locations": [
+    {
+     "role": "canonical",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "tools/conditional_claims.py",
+     "builder": "Claude Code (commit trailer)",
+     "note": "upstream",
+     "home_ref": "Simulators:tools/conditional_claims.py@5f7c7db1b4f7"
+    },
+    {
+     "role": "copy",
+     "repo": "study-aperture",
+     "ref": "origin/main",
+     "path": "vendored/conditional_claims.py",
+     "builder": "not recorded (add commit c26fbd2 has no trailer; git author JinnZ2)",
+     "note": "vendored copy; do-not-modify rule in study-aperture CLAUDE.md",
+     "home_ref": "study-aperture:vendored/conditional_claims.py@5b2f2c540703"
+    }
+   ]
+  },
+  {
+   "concept": "false_agree (vendored tool)",
+   "home": "CANONICAL",
+   "status": "vendored copy, same blob at the pinned commits; can drift",
+   "decided_by": "study-aperture vendored/PROVENANCE.md and vendored/SHA256SUMS (vendored from Simulators)",
+   "added": "2026-11-20, from MULTI_HOME_REGISTER.json (in_map NO at 2026-11-19); source: S3 grep: .py basename shared Simulators/study-aperture; same blob",
+   "locations": [
+    {
+     "role": "canonical",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "tools/false_agree.py",
+     "builder": "Claude Code (commit trailer)",
+     "note": "upstream",
+     "home_ref": "Simulators:tools/false_agree.py@fd6d3bcd428e"
+    },
+    {
+     "role": "copy",
+     "repo": "study-aperture",
+     "ref": "origin/main",
+     "path": "vendored/false_agree.py",
+     "builder": "not recorded (add commit c26fbd2 has no trailer; git author JinnZ2)",
+     "note": "vendored copy; do-not-modify rule in study-aperture CLAUDE.md",
+     "home_ref": "study-aperture:vendored/false_agree.py@5b2f2c540703"
+    }
+   ]
+  },
+  {
+   "concept": "provenance_graph (vendored tool)",
+   "home": "CANONICAL",
+   "status": "vendored copy, same blob at the pinned commits; can drift",
+   "decided_by": "study-aperture vendored/PROVENANCE.md and vendored/SHA256SUMS (vendored from Simulators)",
+   "added": "2026-11-20, from MULTI_HOME_REGISTER.json (in_map NO at 2026-11-19); source: S3 grep: .py basename shared Simulators/study-aperture; same blob",
+   "locations": [
+    {
+     "role": "canonical",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "tools/provenance_graph.py",
+     "builder": "Claude Code (commit trailer)",
+     "note": "upstream",
+     "home_ref": "Simulators:tools/provenance_graph.py@cc9114186c51"
+    },
+    {
+     "role": "copy",
+     "repo": "study-aperture",
+     "ref": "origin/main",
+     "path": "vendored/provenance_graph.py",
+     "builder": "not recorded (add commit c26fbd2 has no trailer; git author JinnZ2)",
+     "note": "vendored copy; do-not-modify rule in study-aperture CLAUDE.md",
+     "home_ref": "study-aperture:vendored/provenance_graph.py@5b2f2c540703"
+    }
+   ]
+  },
+  {
+   "concept": "measurand declaration (measurand vs indication / declared identity)",
+   "home": "CANDIDATE",
+   "status": "candidate match only: decomposition (instrument-epistemology) vs declared identity on linked runs (playground); same word, possibly two concepts, not decided",
+   "decided_by": "pending cross-run",
+   "added": "2026-11-20, from MULTI_HOME_REGISTER.json (in_map NO at 2026-11-19); source: S3 grep: .py basename shared Simulators/study-aperture; headers read",
+   "locations": [
+    {
+     "role": "candidate",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "instrument-epistemology/src/instrum/measurand.py",
+     "builder": "Claude Code (commit trailer)",
+     "note": "measurand vs indication decomposition",
+     "home_ref": "Simulators:instrument-epistemology/src/instrum/measurand.py@b31ab273b674"
+    },
+    {
+     "role": "candidate",
+     "repo": "study-aperture",
+     "ref": "origin/main",
+     "path": "experimental/playground/equations/measurand.py",
+     "builder": "not recorded (add commit c26fbd2 has no trailer; git author JinnZ2)",
+     "note": "declared measurand identity on linked runs",
+     "home_ref": "study-aperture:experimental/playground/equations/measurand.py@e4a9bc9f9609"
+    }
+   ]
+  },
+  {
+   "concept": "thermodynamic audit inside an economic sim",
+   "home": "SINGLE",
+   "status": "single home: a stand-in in Simulators; earth_economic_sim.py says 'In reality, this would import modules from TAF' and no TAF file is declared as its counterpart",
+   "decided_by": "evidence: the file's own line; no cross-run needed",
+   "added": "2026-11-20, from MULTI_HOME_REGISTER.json (in_map NO at 2026-11-19); source: S3 grep: earth_economic_sim.py names TAF ('In reality, this would import modules from TAF')",
+   "locations": [
+    {
+     "role": "candidate",
+     "repo": "Simulators",
+     "ref": null,
+     "path": "earth_economics/earth_economic_sim.py",
+     "builder": "not recorded (add commit 7632c2a has no trailer; git author JinnZ2)",
+     "note": "stand-in auditor inside the sim",
+     "home_ref": "Simulators:earth_economics/earth_economic_sim.py@1eade85651a3"
+    },
+    {
+     "role": "nearest",
+     "repo": "thermodynamic-accountability-framework",
+     "ref": "origin/main",
+     "path": "calibration/unified_audit.py",
+     "builder": "not recorded (add commit c81a758 has no trailer; git author Claude)",
+     "note": "nearest auditor module read; not a declared counterpart, not shown to be the same concept",
+     "home_ref": "thermodynamic-accountability-framework:calibration/unified_audit.py@51083ca4e447"
+    }
+   ]
   }
  ]
 }

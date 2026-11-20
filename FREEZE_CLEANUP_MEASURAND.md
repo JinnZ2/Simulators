@@ -52,9 +52,11 @@ needs the chat-side record; until then each of 2-15, 20-21, 23-31 reads NOT LOCA
 Count note: the TAF file lists 18 branch names plus one stray archive branch and says "all 19";
 18 + 1 = 19 is the reading taken here. That is a reading, not a statement in the file.
 
-done-test for "cleanup" as a whole (PROPOSED): every filed item has a row, every row's done-test
+~~done-test for "cleanup" as a whole (PROPOSED): every filed item has a row, every row's done-test
 holds, and no row reads NOT LOCATED. At draft: not met (items NOT LOCATED, item 16 fails as
-written, three rows NOT_CHECKABLE_HERE).
+written, three rows NOT_CHECKABLE_HERE).~~
+
+Struck 2026-11-20 (text kept as written): replaced by the owner decision of 2026-11-20, section 6.
 
 Checked with full clones of TAF (origin/main 16285cccdd48) and study-aperture (origin/main
 03bd2014cd20) on 2026-11-19. Observer slots: null.
@@ -273,5 +275,82 @@ Correction 2026-11-20 to the 04:53Z rerun above (its rows are kept as written):
 - "GONE in all 82" in that table was over 81 repos. urban-resilience-sim has 3 heads, none
   matching `manus/wo11-current-main`, `tool-finder-pointer` or `healing-folder-additions-u5aojl`.
 - The second run (09:47Z) called `git ls-remote` per repo by name, not from that file.
+
+## 6. Amendment (owner decision 2026-11-20) and recheck (fifth pass)
+
+Source of the amendment: owner order in chat, 2026-11-20.
+
+- Branch deletions are a TAIL item. They do not hold the freeze.
+- "cleanup" counts as DONE when all of these hold:
+
+| condition | reading 2026-11-20 | source |
+|---|---|---|
+| SAFE list recorded | NOT LOCATED: no file in Simulators, TAF, study-aperture or method-layer records a list under that name (grep for "SAFE list", "SAFE_LIST", "safe to delete" over .md and .json, 2026-11-20) | own grep |
+| archive branches made where needed | 7 `archive/*` branches exist on TAF (expiry-condition-stage1, manus-wo6-read-me-this-way, not-determinable-reason, silent-fill-register, undeclared-intent-switch, unknown-axis-followup, unknown-coverage-axis). "Where needed" is not checkable without the SAFE list | `git ls-remote --heads` TAF, 10:00Z |
+| formula-audit default = main | holds | section 5 |
+| items 24-30 done-tested | holds (run twice; rows in section 5) | section 5 |
+| item 16 rechecked | holds (below) | below |
+| items 1 / 18 / 33 checked, or NOT CHECKABLE | checked, all three hold (below) | below |
+
+### Item 16 recheck: DONE, with a correction
+
+- Correction to the row in section 2: `65bb724` IS a commit object in the local TAF clone
+  (local branch `work85`; reflog of `origin/claude/unknown-axis-followup-2`, entry `@{1}: update by
+  push`). It is not on the remote (`git fetch origin 65bb724f0484...` finds no ref) and is not an
+  ancestor of `origin/main`. "Not a valid object in a full TAF clone" was true of a fresh clone
+  only.
+- `65bb724` and `51083ca` have the same subject ("Fold #84 into #85: ...") and the same author
+  date (2026-11-11T20:40:00+00:00), different parents (b85433c + 92cd578 against 02059dc +
+  68752e9) and different trees (14 files differ, 2395 insertions, 5 deletions). The reflog entry
+  `@{0}` is a forced update to `51083ca`.
+- #85 is merged: merge commit `16285cc`, parents 3887eb4 + 51083ca, on `origin/main`;
+  merged_at 2026-11-18T00:36:26Z; head `claude/unknown-axis-followup-2` at `51083ca`. #80, #82 and
+  #84 are closed, not merged. Source: GitHub MCP `list_pull_requests` and `git log`, 2026-11-20.
+- The done-test as written ("65bb724 reachable from TAF origin/main") does not hold and cannot:
+  the sha was replaced before the merge. Read against `51083ca`, it holds.
+- Head branch `claude/unknown-axis-followup-2` still EXISTS at `51083ca` (`git ls-remote`, 10:00Z).
+  So does `claude/unknown-axis-followup` at `a2c5d99`. Both are tail items.
+
+### Items 1, 18, 33: checked (GitHub MCP `list_pull_requests`, TAF, 2026-11-20)
+
+The section 2 rows said NOT_CHECKABLE_HERE because api.github.com refuses the shell. The GitHub
+MCP tool reaches the same data.
+
+| item | reading |
+|---|---|
+| 1 | #76 merged, 2026-11-11T14:23:41Z. Holds |
+| 18 | #78 merged, 2026-11-11T14:26:25Z, head `e177780`, which is an ancestor of `origin/main`; #79 merged, 14:26:23Z. Holds |
+| 33 | #87 "drop-electrification-corrosion" is open, draft, head `c49b360`. Holds (the PR exists) |
+
+### "map" reading, 2026-11-20
+
+- 14 rows added to `concept_map.json` for the 14 register rows that read in_map NO: 10 CANDIDATE,
+  3 CANONICAL (the three vendored tools; upstream = Simulators `tools/`, by study-aperture
+  `vendored/PROVENANCE.md`), 1 SINGLE ("thermodynamic audit inside an economic sim": the sim's own
+  line says it stands in for TAF modules; the TAF path is listed as nearest). Each location
+  carries `home_ref` = repo:path@sha from the register.
+- Register rebuilt: 28 rows; in_map YES 25, PARTIAL 3, NO 0; in_map_by_path YES 28. in_map is still
+  an L0 reading by the builder of the map.
+- `check_concept_map.py --strict`: exit 0; `sibling_state: Simulators@186314d6a0e5;
+  study-aperture@6c45954ff2f8; thermodynamic-accountability-framework@508c9595b73e` (HEAD of each
+  local checkout; paths are read at origin/main, study-aperture 8164f9d4d6c4, TAF 50596669a2b5).
+  No ABSENT.
+- Found while rebuilding: the study-aperture clone was shallow, and the first rebuild pinned every
+  study-aperture home at the shallow boundary commit `c26fbd2`. The clone was unshallowed and the
+  register rebuilt. The builder does not check for a shallow sibling.
+
+### Freeze verdict against the amended measurand: NOT MET
+
+| part | reading | what is left |
+|---|---|---|
+| map: every row in_map YES | not met | 3 rows PARTIAL (noise band on a misclosure; planted defects on the lab itself; zero cases is not a pass) |
+| map: REVIEW-2 at L2+ on the register | not met | request drafted, `REVIEW2_REQUEST_in_map.md`; not sent |
+| map: `--strict` exit 0, no ABSENT | met | |
+| cleanup: SAFE list recorded | not met | the list is not located in any repo |
+| cleanup: archive branches where needed | not checkable | depends on the SAFE list |
+| cleanup: other four conditions | met | |
+
+Tail (does not hold the freeze): TAF `claude/unknown-axis-followup-2`, `claude/unknown-axis-followup`;
+decision-aperture `claude/tool-finder-pointer`; `manus/wo11-current-main` in 22 repos outside item 28.
 
 Observer slots: null.

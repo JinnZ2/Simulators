@@ -115,14 +115,14 @@ S2_IN_MAP = {
     "UNKNOWN carries what would end it": ("YES", "UNKNOWN expiry"),
     "frozen anchor": ("YES", "anchor / return"),
     "return test (asserted return + tolerance)": ("YES", "anchor / return"),
-    "system continuity vs configuration continuity": ("NO", ""),
-    "observer declared before comparison": ("NO", ""),
-    "observer regime partition (names differ: PASSIVE vs REACTIVITY; not merged)": ("NO", ""),
-    "no universal ranking": ("NO", ""),
-    "applicability / domain of validity": ("NO", ""),
+    "system continuity vs configuration continuity": ("YES", "system continuity vs configuration continuity"),  # was ("NO", "") until 2026-11-20: map row of the same name added
+    "observer declared before comparison": ("YES", "observer declared before comparison"),  # was ("NO", "") until 2026-11-20: map row of the same name added
+    "observer regime partition (names differ: PASSIVE vs REACTIVITY; not merged)": ("YES", "observer regime partition (names differ: PASSIVE vs REACTIVITY; not merged)"),  # was ("NO", "") until 2026-11-20: map row of the same name added
+    "no universal ranking": ("YES", "no universal ranking"),  # was ("NO", "") until 2026-11-20: map row of the same name added
+    "applicability / domain of validity": ("YES", "applicability / domain of validity"),  # was ("NO", "") until 2026-11-20: map row of the same name added
     "percolation family": ("YES", "percolation"),
     "branching family": ("YES", "branching"),
-    "value / condition basis vocabulary": ("NO", ""),
+    "value / condition basis vocabulary": ("YES", "value / condition basis vocabulary"),  # was ("NO", "") until 2026-11-20: map row of the same name added
 }
 
 
@@ -218,7 +218,7 @@ def build():
               "in_map NO": sum(r["in_map"] == "NO" for r in rows),
               "in_map_by_path YES": sum(r["in_map_by_path"] == "YES" for r in rows),
               "tokens not found": sum(1 for r in rows for h in r["homes"] if h.get("token_found") is False)}
-    return {"status": "DRAFT", "as_of": "2026-11-19", "built_by": "build_multi_home_register.py",
+    return {"status": "DRAFT", "as_of": "2026-11-20", "built_by": "build_multi_home_register.py",
             "scope": "concepts with more than one home across Simulators / study-aperture / thermodynamic-accountability-framework",
             "read_at": {r: ("HEAD" if r == "Simulators" else "origin/main@" + sha(r)[:12]) for r in REPOS},
             "denominator_note": "rows is a lower bound from four named sources, not an enumeration; "

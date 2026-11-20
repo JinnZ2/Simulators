@@ -166,3 +166,158 @@ home: CANONICAL (decided), CANDIDATE (two or more homes, undecided), SINGLE (one
 - status: term not found
 - decided by: pending: a definition or a path from JinnZ2
 - searched: 2026-11-11: GitHub code search over user:JinnZ2 (default branches only), 0 hits; grep of local checkouts of Simulators (this branch), study-aperture, method-layer, TAF, decision-aperture, 0 hits
+
+## stated_purpose / scope_valid (law purpose and scope against first principle intent)
+
+- home: CANDIDATE
+- status: one concept under two names; the Simulators card imports the TAF module (law-audit-card/card.py names regulatory_scope_audit) and reads undeclared intent as VOID where TAF reads it as applying
+- decided by: pending cross-run
+
+| role | where | builder | note |
+|---|---|---|---|
+| candidate | `Simulators:law-audit-card/card.py` | Claude Code (commit trailer) | imports the TAF module; undeclared intent -> VOID |
+| candidate | `thermodynamic-accountability-framework@origin/main:core/regulatory_scope_audit.py` | not recorded (add commit b15e629 has no trailer; git author Claude) | undeclared intent -> intent applies (TAF CLAUDE.md note 2026-11-10) |
+
+## system continuity vs configuration continuity
+
+- home: CANDIDATE
+- status: two independent builds (crossrun row, location on both sides)
+- decided by: pending cross-run
+
+| role | where | builder | note |
+|---|---|---|---|
+| candidate | `study-aperture@origin/main:experimental/playground/reference/continuity.py` | not recorded (add commit c26fbd2 has no trailer; git author JinnZ2) |  |
+| candidate | `Simulators:relational-playground/playground/continuity.py` | Claude Code (commit trailer) |  |
+
+## observer declared before comparison
+
+- home: CANDIDATE
+- status: two independent builds (crossrun row, location on both sides)
+- decided by: pending cross-run
+
+| role | where | builder | note |
+|---|---|---|---|
+| candidate | `study-aperture@origin/main:experimental/playground/applicability/mapping.py` | not recorded (add commit c26fbd2 has no trailer; git author JinnZ2) |  |
+| candidate | `Simulators:relational-playground/playground/controls.py` | Claude Code (commit trailer) |  |
+
+## observer regime partition (names differ: PASSIVE vs REACTIVITY; not merged)
+
+- home: CANDIDATE
+- status: two independent builds; the names differ (PASSIVE vs REACTIVITY) and are not merged
+- decided by: pending cross-run
+
+| role | where | builder | note |
+|---|---|---|---|
+| candidate | `study-aperture@origin/main:experimental/playground/observation/__init__.py` | not recorded (add commit c26fbd2 has no trailer; git author JinnZ2) |  |
+| candidate | `Simulators:relational-playground/playground/controls.py` | Claude Code (commit trailer) |  |
+
+## no universal ranking
+
+- home: CANDIDATE
+- status: two independent builds (crossrun row, location on both sides)
+- decided by: pending cross-run
+
+| role | where | builder | note |
+|---|---|---|---|
+| candidate | `study-aperture@origin/main:experimental/playground/applicability/mapping.py` | not recorded (add commit c26fbd2 has no trailer; git author JinnZ2) |  |
+| candidate | `Simulators:relational-playground/playground/experiments/comparison.py` | Claude Code (commit trailer) |  |
+
+## applicability / domain of validity
+
+- home: CANDIDATE
+- status: two independent builds (crossrun row, location on both sides)
+- decided by: pending cross-run
+
+| role | where | builder | note |
+|---|---|---|---|
+| candidate | `study-aperture@origin/main:experimental/playground/applicability/mapping.py` | not recorded (add commit c26fbd2 has no trailer; git author JinnZ2) |  |
+| candidate | `Simulators:relational-playground/playground/analysis/applicability.py` | Claude Code (commit trailer) |  |
+
+## value / condition basis vocabulary
+
+- home: CANDIDATE
+- status: two independent builds (crossrun row, location on both sides)
+- decided by: pending cross-run
+
+| role | where | builder | note |
+|---|---|---|---|
+| candidate | `study-aperture@origin/main:experimental/playground/applicability/mapping.py` | not recorded (add commit c26fbd2 has no trailer; git author JinnZ2) |  |
+| candidate | `Simulators:relational-playground/playground/uncertainty.py` | Claude Code (commit trailer) |  |
+
+## READING_PROTOCOL (how a folder is to be read)
+
+- home: CANDIDATE
+- status: three files of one name; the study-aperture and TAF copies have the same blob (601fdd196ceb), the Simulators file differs (ae6dd1146a38)
+- decided by: pending cross-run
+
+| role | where | builder | note |
+|---|---|---|---|
+| candidate | `Simulators:READING_PROTOCOL.md` | not recorded (add commit e9594f8 has no trailer; git author Claude) | differs from the other two |
+| candidate | `study-aperture@origin/main:READING_PROTOCOL.md` | Claude Code (commit trailer) | same blob as the TAF copy |
+| candidate | `thermodynamic-accountability-framework@origin/main:READING_PROTOCOL.md` | Claude Code (commit trailer) | same blob as the study-aperture copy |
+
+## driver-hours evidence register
+
+- home: CANDIDATE
+- status: one file in two places, drifted (88 diff lines at the pinned commits)
+- decided by: pending cross-run
+
+| role | where | builder | note |
+|---|---|---|---|
+| candidate | `Simulators:automation-gap/driver_hours_evidence_register.py` | Claude Code (commit trailer) |  |
+| candidate | `thermodynamic-accountability-framework@origin/main:labor_thermodynamics/driver_hours_evidence_register.py` | Claude Code (commit trailer) |  |
+
+## conditional_claims (vendored tool)
+
+- home: CANONICAL
+- status: vendored copy, same blob at the pinned commits; can drift
+- decided by: study-aperture vendored/PROVENANCE.md and vendored/SHA256SUMS (vendored from Simulators)
+
+| role | where | builder | note |
+|---|---|---|---|
+| canonical | `Simulators:tools/conditional_claims.py` | Claude Code (commit trailer) | upstream |
+| copy | `study-aperture@origin/main:vendored/conditional_claims.py` | not recorded (add commit c26fbd2 has no trailer; git author JinnZ2) | vendored copy; do-not-modify rule in study-aperture CLAUDE.md |
+
+## false_agree (vendored tool)
+
+- home: CANONICAL
+- status: vendored copy, same blob at the pinned commits; can drift
+- decided by: study-aperture vendored/PROVENANCE.md and vendored/SHA256SUMS (vendored from Simulators)
+
+| role | where | builder | note |
+|---|---|---|---|
+| canonical | `Simulators:tools/false_agree.py` | Claude Code (commit trailer) | upstream |
+| copy | `study-aperture@origin/main:vendored/false_agree.py` | not recorded (add commit c26fbd2 has no trailer; git author JinnZ2) | vendored copy; do-not-modify rule in study-aperture CLAUDE.md |
+
+## provenance_graph (vendored tool)
+
+- home: CANONICAL
+- status: vendored copy, same blob at the pinned commits; can drift
+- decided by: study-aperture vendored/PROVENANCE.md and vendored/SHA256SUMS (vendored from Simulators)
+
+| role | where | builder | note |
+|---|---|---|---|
+| canonical | `Simulators:tools/provenance_graph.py` | Claude Code (commit trailer) | upstream |
+| copy | `study-aperture@origin/main:vendored/provenance_graph.py` | not recorded (add commit c26fbd2 has no trailer; git author JinnZ2) | vendored copy; do-not-modify rule in study-aperture CLAUDE.md |
+
+## measurand declaration (measurand vs indication / declared identity)
+
+- home: CANDIDATE
+- status: candidate match only: decomposition (instrument-epistemology) vs declared identity on linked runs (playground); same word, possibly two concepts, not decided
+- decided by: pending cross-run
+
+| role | where | builder | note |
+|---|---|---|---|
+| candidate | `Simulators:instrument-epistemology/src/instrum/measurand.py` | Claude Code (commit trailer) | measurand vs indication decomposition |
+| candidate | `study-aperture@origin/main:experimental/playground/equations/measurand.py` | not recorded (add commit c26fbd2 has no trailer; git author JinnZ2) | declared measurand identity on linked runs |
+
+## thermodynamic audit inside an economic sim
+
+- home: SINGLE
+- status: single home: a stand-in in Simulators; earth_economic_sim.py says 'In reality, this would import modules from TAF' and no TAF file is declared as its counterpart
+- decided by: evidence: the file's own line; no cross-run needed
+
+| role | where | builder | note |
+|---|---|---|---|
+| candidate | `Simulators:earth_economics/earth_economic_sim.py` | not recorded (add commit 7632c2a has no trailer; git author JinnZ2) | stand-in auditor inside the sim |
+| nearest | `thermodynamic-accountability-framework@origin/main:calibration/unified_audit.py` | not recorded (add commit c81a758 has no trailer; git author Claude) | nearest auditor module read; not a declared counterpart, not shown to be the same concept |
