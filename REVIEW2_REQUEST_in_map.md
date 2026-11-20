@@ -24,7 +24,8 @@ READ:
   They carry the builder's readings.
 
 QUESTION, per register concept (28):
-  Does concept_map.json hold a row that covers this concept at these homes?
+  Does the map copy (concept_map_for_review_2026-11-20.json) hold a row that covers this
+  concept at these homes?
 
 RETURN, one line per concept:
   concept | in_map YES / PARTIAL / NO | map row read as covering it (or none) | reason
