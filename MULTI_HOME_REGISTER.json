@@ -11,8 +11,8 @@
  "denominator_note": "rows is a lower bound from four named sources, not an enumeration; grep covered top-level names and .py basenames only",
  "counts": {
   "rows": 28,
-  "in_map YES": 25,
-  "in_map PARTIAL": 3,
+  "in_map YES": 28,
+  "in_map PARTIAL": 0,
   "in_map NO": 0,
   "in_map_by_path YES": 28,
   "tokens not found": 0
@@ -45,11 +45,17 @@
     "stated_purpose / scope_valid (law purpose and scope against first principle intent)"
    ],
    "in_map": "YES",
-   "in_map_basis": "by path; no other map row read as covering it",
+   "in_map_basis": "stated_purpose / scope_valid (law purpose and scope against first principle intent) (named in concept; 2 of 2 homes listed)",
+   "in_map_rule": "strict: a row names the concept in concept or covers AND lists every home",
+   "in_map_L0_2026-11-20": {
+    "in_map": "YES",
+    "basis": "by path; no other map row read as covering it",
+    "note": "builder reading before the strict rule"
+   },
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
-    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+    "note": "in_map is mechanical (strict rule) from 2026-11-20; the judgment sits in the map's covers lists, written by this session after REVIEW-2 at L2 (GPT-6, 2026-11-20); was until 2026-11-20: self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
    }
   },
   {
@@ -83,11 +89,17 @@
     "L0 gate (budget closure)"
    ],
    "in_map": "YES",
-   "in_map_basis": "L0 gate (budget closure)",
+   "in_map_basis": "L0 gate (budget closure) (named in covers; 2 of 2 homes listed)",
+   "in_map_rule": "strict: a row names the concept in concept or covers AND lists every home",
+   "in_map_L0_2026-11-20": {
+    "in_map": "YES",
+    "basis": "L0 gate (budget closure)",
+    "note": "builder reading before the strict rule"
+   },
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
-    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+    "note": "in_map is mechanical (strict rule) from 2026-11-20; the judgment sits in the map's covers lists, written by this session after REVIEW-2 at L2 (GPT-6, 2026-11-20); was until 2026-11-20: self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
    }
   },
   {
@@ -120,12 +132,18 @@
    "map_rows_by_path": [
     "L0 gate (budget closure)"
    ],
-   "in_map": "PARTIAL",
-   "in_map_basis": "same files as the L0 gate row; the tolerance itself is not named in the map",
+   "in_map": "YES",
+   "in_map_basis": "L0 gate (budget closure) (named in covers; 2 of 2 homes listed)",
+   "in_map_rule": "strict: a row names the concept in concept or covers AND lists every home",
+   "in_map_L0_2026-11-20": {
+    "in_map": "PARTIAL",
+    "basis": "same files as the L0 gate row; the tolerance itself is not named in the map",
+    "note": "builder reading before the strict rule"
+   },
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
-    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+    "note": "in_map is mechanical (strict rule) from 2026-11-20; the judgment sits in the map's covers lists, written by this session after REVIEW-2 at L2 (GPT-6, 2026-11-20); was until 2026-11-20: self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
    }
   },
   {
@@ -159,11 +177,17 @@
     "known-answer / null harness"
    ],
    "in_map": "YES",
-   "in_map_basis": "known-answer / null harness",
+   "in_map_basis": "known-answer / null harness (named in covers; 2 of 2 homes listed)",
+   "in_map_rule": "strict: a row names the concept in concept or covers AND lists every home",
+   "in_map_L0_2026-11-20": {
+    "in_map": "YES",
+    "basis": "known-answer / null harness",
+    "note": "builder reading before the strict rule"
+   },
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
-    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+    "note": "in_map is mechanical (strict rule) from 2026-11-20; the judgment sits in the map's covers lists, written by this session after REVIEW-2 at L2 (GPT-6, 2026-11-20); was until 2026-11-20: self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
    }
   },
   {
@@ -196,12 +220,18 @@
    "map_rows_by_path": [
     "known-answer / null harness"
    ],
-   "in_map": "PARTIAL",
-   "in_map_basis": "the map row names the harness, not the planted-defect set",
+   "in_map": "YES",
+   "in_map_basis": "known-answer / null harness (named in covers; 2 of 2 homes listed)",
+   "in_map_rule": "strict: a row names the concept in concept or covers AND lists every home",
+   "in_map_L0_2026-11-20": {
+    "in_map": "PARTIAL",
+    "basis": "the map row names the harness, not the planted-defect set",
+    "note": "builder reading before the strict rule"
+   },
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
-    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+    "note": "in_map is mechanical (strict rule) from 2026-11-20; the judgment sits in the map's covers lists, written by this session after REVIEW-2 at L2 (GPT-6, 2026-11-20); was until 2026-11-20: self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
    }
   },
   {
@@ -235,11 +265,17 @@
     "known-answer / null harness"
    ],
    "in_map": "YES",
-   "in_map_basis": "known-answer / null harness",
+   "in_map_basis": "known-answer / null harness (named in covers; 2 of 2 homes listed)",
+   "in_map_rule": "strict: a row names the concept in concept or covers AND lists every home",
+   "in_map_L0_2026-11-20": {
+    "in_map": "YES",
+    "basis": "known-answer / null harness",
+    "note": "builder reading before the strict rule"
+   },
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
-    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+    "note": "in_map is mechanical (strict rule) from 2026-11-20; the judgment sits in the map's covers lists, written by this session after REVIEW-2 at L2 (GPT-6, 2026-11-20); was until 2026-11-20: self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
    }
   },
   {
@@ -272,12 +308,18 @@
    "map_rows_by_path": [
     "known-answer / null harness"
    ],
-   "in_map": "PARTIAL",
-   "in_map_basis": "a rule inside the known-answer files; not a map row",
+   "in_map": "YES",
+   "in_map_basis": "known-answer / null harness (named in covers; 2 of 2 homes listed)",
+   "in_map_rule": "strict: a row names the concept in concept or covers AND lists every home",
+   "in_map_L0_2026-11-20": {
+    "in_map": "PARTIAL",
+    "basis": "a rule inside the known-answer files; not a map row",
+    "note": "builder reading before the strict rule"
+   },
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
-    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+    "note": "in_map is mechanical (strict rule) from 2026-11-20; the judgment sits in the map's covers lists, written by this session after REVIEW-2 at L2 (GPT-6, 2026-11-20); was until 2026-11-20: self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
    }
   },
   {
@@ -313,11 +355,17 @@
     "value / condition basis vocabulary"
    ],
    "in_map": "YES",
-   "in_map_basis": "scoped absence (ABSENT_AT_SENSITIVITY)",
+   "in_map_basis": "scoped absence (ABSENT_AT_SENSITIVITY) (named in covers; 2 of 2 homes listed)",
+   "in_map_rule": "strict: a row names the concept in concept or covers AND lists every home",
+   "in_map_L0_2026-11-20": {
+    "in_map": "YES",
+    "basis": "scoped absence (ABSENT_AT_SENSITIVITY)",
+    "note": "builder reading before the strict rule"
+   },
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
-    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+    "note": "in_map is mechanical (strict rule) from 2026-11-20; the judgment sits in the map's covers lists, written by this session after REVIEW-2 at L2 (GPT-6, 2026-11-20); was until 2026-11-20: self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
    }
   },
   {
@@ -353,11 +401,17 @@
     "value / condition basis vocabulary"
    ],
    "in_map": "YES",
-   "in_map_basis": "UNKNOWN expiry",
+   "in_map_basis": "UNKNOWN expiry (named in covers; 2 of 2 homes listed)",
+   "in_map_rule": "strict: a row names the concept in concept or covers AND lists every home",
+   "in_map_L0_2026-11-20": {
+    "in_map": "YES",
+    "basis": "UNKNOWN expiry",
+    "note": "builder reading before the strict rule"
+   },
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
-    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+    "note": "in_map is mechanical (strict rule) from 2026-11-20; the judgment sits in the map's covers lists, written by this session after REVIEW-2 at L2 (GPT-6, 2026-11-20); was until 2026-11-20: self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
    }
   },
   {
@@ -391,11 +445,17 @@
     "anchor / return"
    ],
    "in_map": "YES",
-   "in_map_basis": "anchor / return",
+   "in_map_basis": "anchor / return (named in covers; 2 of 2 homes listed)",
+   "in_map_rule": "strict: a row names the concept in concept or covers AND lists every home",
+   "in_map_L0_2026-11-20": {
+    "in_map": "YES",
+    "basis": "anchor / return",
+    "note": "builder reading before the strict rule"
+   },
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
-    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+    "note": "in_map is mechanical (strict rule) from 2026-11-20; the judgment sits in the map's covers lists, written by this session after REVIEW-2 at L2 (GPT-6, 2026-11-20); was until 2026-11-20: self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
    }
   },
   {
@@ -429,11 +489,17 @@
     "anchor / return"
    ],
    "in_map": "YES",
-   "in_map_basis": "anchor / return",
+   "in_map_basis": "anchor / return (named in covers; 2 of 2 homes listed)",
+   "in_map_rule": "strict: a row names the concept in concept or covers AND lists every home",
+   "in_map_L0_2026-11-20": {
+    "in_map": "YES",
+    "basis": "anchor / return",
+    "note": "builder reading before the strict rule"
+   },
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
-    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+    "note": "in_map is mechanical (strict rule) from 2026-11-20; the judgment sits in the map's covers lists, written by this session after REVIEW-2 at L2 (GPT-6, 2026-11-20); was until 2026-11-20: self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
    }
   },
   {
@@ -467,11 +533,17 @@
     "system continuity vs configuration continuity"
    ],
    "in_map": "YES",
-   "in_map_basis": "system continuity vs configuration continuity",
+   "in_map_basis": "system continuity vs configuration continuity (named in concept; 2 of 2 homes listed)",
+   "in_map_rule": "strict: a row names the concept in concept or covers AND lists every home",
+   "in_map_L0_2026-11-20": {
+    "in_map": "YES",
+    "basis": "system continuity vs configuration continuity",
+    "note": "builder reading before the strict rule"
+   },
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
-    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+    "note": "in_map is mechanical (strict rule) from 2026-11-20; the judgment sits in the map's covers lists, written by this session after REVIEW-2 at L2 (GPT-6, 2026-11-20); was until 2026-11-20: self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
    }
   },
   {
@@ -509,11 +581,17 @@
     "value / condition basis vocabulary"
    ],
    "in_map": "YES",
-   "in_map_basis": "observer declared before comparison",
+   "in_map_basis": "observer declared before comparison (named in concept; 2 of 2 homes listed)",
+   "in_map_rule": "strict: a row names the concept in concept or covers AND lists every home",
+   "in_map_L0_2026-11-20": {
+    "in_map": "YES",
+    "basis": "observer declared before comparison",
+    "note": "builder reading before the strict rule"
+   },
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
-    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+    "note": "in_map is mechanical (strict rule) from 2026-11-20; the judgment sits in the map's covers lists, written by this session after REVIEW-2 at L2 (GPT-6, 2026-11-20); was until 2026-11-20: self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
    }
   },
   {
@@ -548,11 +626,17 @@
     "observer regime partition (names differ: PASSIVE vs REACTIVITY; not merged)"
    ],
    "in_map": "YES",
-   "in_map_basis": "observer regime partition (names differ: PASSIVE vs REACTIVITY; not merged)",
+   "in_map_basis": "observer regime partition (names differ: PASSIVE vs REACTIVITY; not merged) (named in concept; 2 of 2 homes listed)",
+   "in_map_rule": "strict: a row names the concept in concept or covers AND lists every home",
+   "in_map_L0_2026-11-20": {
+    "in_map": "YES",
+    "basis": "observer regime partition (names differ: PASSIVE vs REACTIVITY; not merged)",
+    "note": "builder reading before the strict rule"
+   },
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
-    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+    "note": "in_map is mechanical (strict rule) from 2026-11-20; the judgment sits in the map's covers lists, written by this session after REVIEW-2 at L2 (GPT-6, 2026-11-20); was until 2026-11-20: self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
    }
   },
   {
@@ -589,11 +673,17 @@
     "value / condition basis vocabulary"
    ],
    "in_map": "YES",
-   "in_map_basis": "no universal ranking",
+   "in_map_basis": "no universal ranking (named in concept; 2 of 2 homes listed)",
+   "in_map_rule": "strict: a row names the concept in concept or covers AND lists every home",
+   "in_map_L0_2026-11-20": {
+    "in_map": "YES",
+    "basis": "no universal ranking",
+    "note": "builder reading before the strict rule"
+   },
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
-    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+    "note": "in_map is mechanical (strict rule) from 2026-11-20; the judgment sits in the map's covers lists, written by this session after REVIEW-2 at L2 (GPT-6, 2026-11-20); was until 2026-11-20: self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
    }
   },
   {
@@ -630,11 +720,17 @@
     "value / condition basis vocabulary"
    ],
    "in_map": "YES",
-   "in_map_basis": "applicability / domain of validity",
+   "in_map_basis": "applicability / domain of validity (named in concept; 2 of 2 homes listed)",
+   "in_map_rule": "strict: a row names the concept in concept or covers AND lists every home",
+   "in_map_L0_2026-11-20": {
+    "in_map": "YES",
+    "basis": "applicability / domain of validity",
+    "note": "builder reading before the strict rule"
+   },
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
-    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+    "note": "in_map is mechanical (strict rule) from 2026-11-20; the judgment sits in the map's covers lists, written by this session after REVIEW-2 at L2 (GPT-6, 2026-11-20); was until 2026-11-20: self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
    }
   },
   {
@@ -668,11 +764,17 @@
     "percolation"
    ],
    "in_map": "YES",
-   "in_map_basis": "percolation",
+   "in_map_basis": "percolation (named in covers; 2 of 2 homes listed)",
+   "in_map_rule": "strict: a row names the concept in concept or covers AND lists every home",
+   "in_map_L0_2026-11-20": {
+    "in_map": "YES",
+    "basis": "percolation",
+    "note": "builder reading before the strict rule"
+   },
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
-    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+    "note": "in_map is mechanical (strict rule) from 2026-11-20; the judgment sits in the map's covers lists, written by this session after REVIEW-2 at L2 (GPT-6, 2026-11-20); was until 2026-11-20: self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
    }
   },
   {
@@ -706,11 +808,17 @@
     "branching"
    ],
    "in_map": "YES",
-   "in_map_basis": "branching",
+   "in_map_basis": "branching (named in covers; 2 of 2 homes listed)",
+   "in_map_rule": "strict: a row names the concept in concept or covers AND lists every home",
+   "in_map_L0_2026-11-20": {
+    "in_map": "YES",
+    "basis": "branching",
+    "note": "builder reading before the strict rule"
+   },
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
-    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+    "note": "in_map is mechanical (strict rule) from 2026-11-20; the judgment sits in the map's covers lists, written by this session after REVIEW-2 at L2 (GPT-6, 2026-11-20); was until 2026-11-20: self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
    }
   },
   {
@@ -749,11 +857,17 @@
     "value / condition basis vocabulary"
    ],
    "in_map": "YES",
-   "in_map_basis": "value / condition basis vocabulary",
+   "in_map_basis": "value / condition basis vocabulary (named in concept; 2 of 2 homes listed)",
+   "in_map_rule": "strict: a row names the concept in concept or covers AND lists every home",
+   "in_map_L0_2026-11-20": {
+    "in_map": "YES",
+    "basis": "value / condition basis vocabulary",
+    "note": "builder reading before the strict rule"
+   },
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
-    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+    "note": "in_map is mechanical (strict rule) from 2026-11-20; the judgment sits in the map's covers lists, written by this session after REVIEW-2 at L2 (GPT-6, 2026-11-20); was until 2026-11-20: self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
    }
   },
   {
@@ -791,11 +905,17 @@
     "READING_PROTOCOL (how a folder is to be read)"
    ],
    "in_map": "YES",
-   "in_map_basis": "by path; no other map row read as covering it",
+   "in_map_basis": "READING_PROTOCOL (how a folder is to be read) (named in concept; 3 of 3 homes listed)",
+   "in_map_rule": "strict: a row names the concept in concept or covers AND lists every home",
+   "in_map_L0_2026-11-20": {
+    "in_map": "YES",
+    "basis": "by path; no other map row read as covering it",
+    "note": "builder reading before the strict rule"
+   },
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
-    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+    "note": "in_map is mechanical (strict rule) from 2026-11-20; the judgment sits in the map's covers lists, written by this session after REVIEW-2 at L2 (GPT-6, 2026-11-20); was until 2026-11-20: self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
    }
   },
   {
@@ -825,11 +945,17 @@
     "driver-hours evidence register"
    ],
    "in_map": "YES",
-   "in_map_basis": "by path; no other map row read as covering it",
+   "in_map_basis": "driver-hours evidence register (named in concept; 2 of 2 homes listed)",
+   "in_map_rule": "strict: a row names the concept in concept or covers AND lists every home",
+   "in_map_L0_2026-11-20": {
+    "in_map": "YES",
+    "basis": "by path; no other map row read as covering it",
+    "note": "builder reading before the strict rule"
+   },
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
-    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+    "note": "in_map is mechanical (strict rule) from 2026-11-20; the judgment sits in the map's covers lists, written by this session after REVIEW-2 at L2 (GPT-6, 2026-11-20); was until 2026-11-20: self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
    }
   },
   {
@@ -859,11 +985,17 @@
     "conditional_claims (vendored tool)"
    ],
    "in_map": "YES",
-   "in_map_basis": "by path; no other map row read as covering it",
+   "in_map_basis": "conditional_claims (vendored tool) (named in concept; 2 of 2 homes listed)",
+   "in_map_rule": "strict: a row names the concept in concept or covers AND lists every home",
+   "in_map_L0_2026-11-20": {
+    "in_map": "YES",
+    "basis": "by path; no other map row read as covering it",
+    "note": "builder reading before the strict rule"
+   },
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
-    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+    "note": "in_map is mechanical (strict rule) from 2026-11-20; the judgment sits in the map's covers lists, written by this session after REVIEW-2 at L2 (GPT-6, 2026-11-20); was until 2026-11-20: self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
    }
   },
   {
@@ -893,11 +1025,17 @@
     "false_agree (vendored tool)"
    ],
    "in_map": "YES",
-   "in_map_basis": "by path; no other map row read as covering it",
+   "in_map_basis": "false_agree (vendored tool) (named in concept; 2 of 2 homes listed)",
+   "in_map_rule": "strict: a row names the concept in concept or covers AND lists every home",
+   "in_map_L0_2026-11-20": {
+    "in_map": "YES",
+    "basis": "by path; no other map row read as covering it",
+    "note": "builder reading before the strict rule"
+   },
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
-    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+    "note": "in_map is mechanical (strict rule) from 2026-11-20; the judgment sits in the map's covers lists, written by this session after REVIEW-2 at L2 (GPT-6, 2026-11-20); was until 2026-11-20: self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
    }
   },
   {
@@ -927,11 +1065,17 @@
     "provenance_graph (vendored tool)"
    ],
    "in_map": "YES",
-   "in_map_basis": "by path; no other map row read as covering it",
+   "in_map_basis": "provenance_graph (vendored tool) (named in concept; 2 of 2 homes listed)",
+   "in_map_rule": "strict: a row names the concept in concept or covers AND lists every home",
+   "in_map_L0_2026-11-20": {
+    "in_map": "YES",
+    "basis": "by path; no other map row read as covering it",
+    "note": "builder reading before the strict rule"
+   },
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
-    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+    "note": "in_map is mechanical (strict rule) from 2026-11-20; the judgment sits in the map's covers lists, written by this session after REVIEW-2 at L2 (GPT-6, 2026-11-20); was until 2026-11-20: self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
    }
   },
   {
@@ -955,17 +1099,23 @@
     }
    ],
    "source": "S3 grep: .py basename shared Simulators/study-aperture; headers read",
-   "grain_note": "CANDIDATE match only: decomposition (instrument-epistemology) vs declared identity on linked runs (playground); same word, possibly two concepts",
+   "grain_note": "CANDIDATE match only: decomposition (instrument-epistemology) vs declared identity on linked runs (playground); same word, possibly two concepts. 2026-11-20: possible two concepts (REVIEW-2); not split",
    "in_map_by_path": "YES",
    "map_rows_by_path": [
     "measurand declaration (measurand vs indication / declared identity)"
    ],
    "in_map": "YES",
-   "in_map_basis": "by path; no other map row read as covering it",
+   "in_map_basis": "measurand declaration (measurand vs indication / declared identity) (named in concept; 2 of 2 homes listed)",
+   "in_map_rule": "strict: a row names the concept in concept or covers AND lists every home",
+   "in_map_L0_2026-11-20": {
+    "in_map": "YES",
+    "basis": "by path; no other map row read as covering it",
+    "note": "builder reading before the strict rule"
+   },
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
-    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+    "note": "in_map is mechanical (strict rule) from 2026-11-20; the judgment sits in the map's covers lists, written by this session after REVIEW-2 at L2 (GPT-6, 2026-11-20); was until 2026-11-20: self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
    }
   },
   {
@@ -995,11 +1145,17 @@
     "thermodynamic audit inside an economic sim"
    ],
    "in_map": "YES",
-   "in_map_basis": "by path; no other map row read as covering it",
+   "in_map_basis": "thermodynamic audit inside an economic sim (named in concept; 2 of 2 homes listed)",
+   "in_map_rule": "strict: a row names the concept in concept or covers AND lists every home",
+   "in_map_L0_2026-11-20": {
+    "in_map": "YES",
+    "basis": "by path; no other map row read as covering it",
+    "note": "builder reading before the strict rule"
+   },
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
-    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+    "note": "in_map is mechanical (strict rule) from 2026-11-20; the judgment sits in the map's covers lists, written by this session after REVIEW-2 at L2 (GPT-6, 2026-11-20); was until 2026-11-20: self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
    }
   },
   {
@@ -1027,11 +1183,17 @@
     "playground (equation-substitution laboratory)"
    ],
    "in_map": "YES",
-   "in_map_basis": "playground (equation-substitution laboratory)",
+   "in_map_basis": "playground (equation-substitution laboratory) (named in concept; 2 of 2 homes listed)",
+   "in_map_rule": "strict: a row names the concept in concept or covers AND lists every home",
+   "in_map_L0_2026-11-20": {
+    "in_map": "YES",
+    "basis": "playground (equation-substitution laboratory)",
+    "note": "builder reading before the strict rule"
+   },
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
-    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+    "note": "in_map is mechanical (strict rule) from 2026-11-20; the judgment sits in the map's covers lists, written by this session after REVIEW-2 at L2 (GPT-6, 2026-11-20); was until 2026-11-20: self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
    }
   },
   {
@@ -1061,11 +1223,17 @@
     "attribution directionality"
    ],
    "in_map": "YES",
-   "in_map_basis": "attribution directionality",
+   "in_map_basis": "attribution directionality (named in concept; 2 of 2 homes listed)",
+   "in_map_rule": "strict: a row names the concept in concept or covers AND lists every home",
+   "in_map_L0_2026-11-20": {
+    "in_map": "YES",
+    "basis": "attribution directionality",
+    "note": "builder reading before the strict rule"
+   },
    "grain_judgment": {
     "who": "Claude Code session (same session that built the register)",
     "level": "L0",
-    "note": "self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
+    "note": "in_map is mechanical (strict rule) from 2026-11-20; the judgment sits in the map's covers lists, written by this session after REVIEW-2 at L2 (GPT-6, 2026-11-20); was until 2026-11-20: self-reading; not independent; a REVIEW-2 at L2+ is the next stage"
    }
   }
  ],

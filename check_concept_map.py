@@ -100,6 +100,9 @@ def row_problems(row):
             out.append("role %r not in %s" % (l.get("role"), ROLES))
         if not l.get("builder"):
             out.append("%s: builder absent (write 'not recorded')" % l.get("path"))
+    cov = row.get("covers")
+    if cov is not None and (not isinstance(cov, list) or not cov or any(not isinstance(c, str) or not c.strip() for c in cov)):
+        out.append("covers, when present, is a non-empty list of register concept names")
     n = {r: sum(1 for l in locs if l.get("role") == r) for r in ROLES}
     home = row.get("home")
     if home == "CANONICAL" and (n["canonical"] != 1 or row.get("decided_by") == PENDING):
@@ -131,6 +134,8 @@ def render(data):
             o.append("- searched: %s" % r["searched"])
         if r.get("note"):
             o.append("- note: %s" % r["note"])
+        if r.get("covers"):
+            o.append("- covers (register concepts held by this row; not merged, not renamed): %s" % "; ".join(r["covers"]))
         if r["locations"]:
             o += ["", "| role | where | builder | note |", "|---|---|---|---|"]
             for l in r["locations"]:

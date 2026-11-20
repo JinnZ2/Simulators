@@ -1,7 +1,7 @@
 # CONCEPT_MAP
 
 Generated from `concept_map.json` by `check_concept_map.py --write`. Edit the JSON, not this file.
-One block per concept. No code is moved. As of 2026-11-11.
+One block per concept. No code is moved. As of 2026-11-20.
 
 home: CANONICAL (decided), CANDIDATE (two or more homes, undecided), SINGLE (one copy), NOT_LOCATED.
 
@@ -21,6 +21,7 @@ home: CANONICAL (decided), CANDIDATE (two or more homes, undecided), SINGLE (one
 - home: CANDIDATE
 - status: three implementations; the relational-playground gate restates the rule in stdlib
 - decided by: pending cross-run
+- covers (register concepts held by this row; not merged, not renamed): known-answer validation; planted defects on the lab itself; null harness; zero cases is not a pass
 
 | role | where | builder | note |
 |---|---|---|---|
@@ -29,12 +30,14 @@ home: CANONICAL (decided), CANDIDATE (two or more homes, undecided), SINGLE (one
 | candidate | `study-aperture@origin/main:experimental/playground/validation/known_answer.py` | Perplexity (commit trailer) |  |
 | candidate | `study-aperture@origin/main:experimental/playground/validation/null_harness.py` | Perplexity (commit trailer) |  |
 | copy | `Simulators:relational-playground/playground/known_answer_gate.py` | Claude Code (commit trailer) | FP 0 / TP 1 gate per model |
+| candidate | `study-aperture@origin/main:experimental/playground/validation/planted_defects.py` | Perplexity (commit trailer) | added 2026-11-20 after REVIEW-2 (HOME): registered home of 'planted defects on the lab itself' |
 
 ## UNKNOWN expiry
 
 - home: CANDIDATE
 - status: three builds; TAF register holds real slots, the other two are mechanisms
 - decided by: pending cross-run
+- covers (register concepts held by this row; not merged, not renamed): UNKNOWN carries what would end it
 
 | role | where | builder | note |
 |---|---|---|---|
@@ -48,12 +51,14 @@ home: CANONICAL (decided), CANDIDATE (two or more homes, undecided), SINGLE (one
 - home: CANDIDATE
 - status: defined in TAF glossary; built in two playgrounds
 - decided by: pending cross-run
+- covers (register concepts held by this row; not merged, not renamed): non-detection as bounded null
 
 | role | where | builder | note |
 |---|---|---|---|
 | candidate | `study-aperture@origin/main:experimental/playground/detection/scoped_absence.py` | Perplexity (commit trailer) |  |
 | candidate | `Simulators:relational-playground/playground/uncertainty.py` | Claude Code (commit trailer) | same file as expiry |
 | copy | `thermodynamic-accountability-framework@origin/main:docs/glossary.md` | Claude Code | status definition only |
+| candidate | `study-aperture@origin/main:experimental/playground/detection/non_detection.py` | Perplexity (commit trailer) | added 2026-11-20 after REVIEW-2 (HOME): registered home of 'non-detection as bounded null'; scoped_absence.py imports NonDetectionRecord from it |
 
 ## failure axes (PHYSICAL / INSTRUMENT / DETERMINATION)
 
@@ -106,6 +111,7 @@ home: CANONICAL (decided), CANDIDATE (two or more homes, undecided), SINGLE (one
 - home: CANDIDATE
 - status: three builds
 - decided by: pending cross-run
+- covers (register concepts held by this row; not merged, not renamed): boundary closure gate before any physics; noise band on a misclosure
 
 | role | where | builder | note |
 |---|---|---|---|
@@ -118,6 +124,7 @@ home: CANONICAL (decided), CANDIDATE (two or more homes, undecided), SINGLE (one
 - home: CANDIDATE
 - status: rule text in the forest METHOD BRIEF; two code builds
 - decided by: pending cross-run
+- covers (register concepts held by this row; not merged, not renamed): frozen anchor; return test (asserted return + tolerance)
 
 | role | where | builder | note |
 |---|---|---|---|
@@ -133,6 +140,7 @@ home: CANONICAL (decided), CANDIDATE (two or more homes, undecided), SINGLE (one
 - home: CANDIDATE
 - status: two equation-family builds plus the original run code
 - decided by: pending cross-run
+- covers (register concepts held by this row; not merged, not renamed): percolation family
 
 | role | where | builder | note |
 |---|---|---|---|
@@ -146,6 +154,7 @@ home: CANONICAL (decided), CANDIDATE (two or more homes, undecided), SINGLE (one
 - home: CANDIDATE
 - status: two builds
 - decided by: pending cross-run
+- covers (register concepts held by this row; not merged, not renamed): branching family
 
 | role | where | builder | note |
 |---|---|---|---|
@@ -305,6 +314,7 @@ home: CANONICAL (decided), CANDIDATE (two or more homes, undecided), SINGLE (one
 - home: CANDIDATE
 - status: candidate match only: decomposition (instrument-epistemology) vs declared identity on linked runs (playground); same word, possibly two concepts, not decided
 - decided by: pending cross-run
+- note: 2026-11-20: possible two concepts (REVIEW-2); not split
 
 | role | where | builder | note |
 |---|---|---|---|

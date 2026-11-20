@@ -1,5 +1,5 @@
 {
- "as_of": "2026-11-11",
+ "as_of": "2026-11-20",
  "rows": [
   {
    "concept": "playground (equation-substitution laboratory)",
@@ -30,6 +30,12 @@
    "home": "CANDIDATE",
    "status": "three implementations; the relational-playground gate restates the rule in stdlib",
    "decided_by": "pending cross-run",
+   "covers": [
+    "known-answer validation",
+    "planted defects on the lab itself",
+    "null harness",
+    "zero cases is not a pass"
+   ],
    "locations": [
     {
      "role": "candidate",
@@ -70,6 +76,15 @@
      "path": "relational-playground/playground/known_answer_gate.py",
      "builder": "Claude Code (commit trailer)",
      "note": "FP 0 / TP 1 gate per model"
+    },
+    {
+     "role": "candidate",
+     "repo": "study-aperture",
+     "ref": "origin/main",
+     "path": "experimental/playground/validation/planted_defects.py",
+     "builder": "Perplexity (commit trailer)",
+     "note": "added 2026-11-20 after REVIEW-2 (HOME): registered home of 'planted defects on the lab itself'",
+     "home_ref": "study-aperture:experimental/playground/validation/planted_defects.py@9587178428d9"
     }
    ]
   },
@@ -78,6 +93,9 @@
    "home": "CANDIDATE",
    "status": "three builds; TAF register holds real slots, the other two are mechanisms",
    "decided_by": "pending cross-run",
+   "covers": [
+    "UNKNOWN carries what would end it"
+   ],
    "locations": [
     {
      "role": "candidate",
@@ -118,6 +136,9 @@
    "home": "CANDIDATE",
    "status": "defined in TAF glossary; built in two playgrounds",
    "decided_by": "pending cross-run",
+   "covers": [
+    "non-detection as bounded null"
+   ],
    "locations": [
     {
      "role": "candidate",
@@ -142,6 +163,15 @@
      "path": "docs/glossary.md",
      "builder": "Claude Code",
      "note": "status definition only"
+    },
+    {
+     "role": "candidate",
+     "repo": "study-aperture",
+     "ref": "origin/main",
+     "path": "experimental/playground/detection/non_detection.py",
+     "builder": "Perplexity (commit trailer)",
+     "note": "added 2026-11-20 after REVIEW-2 (HOME): registered home of 'non-detection as bounded null'; scoped_absence.py imports NonDetectionRecord from it",
+     "home_ref": "study-aperture:experimental/playground/detection/non_detection.py@c780f5c388c2"
     }
    ]
   },
@@ -242,6 +272,10 @@
    "home": "CANDIDATE",
    "status": "three builds",
    "decided_by": "pending cross-run",
+   "covers": [
+    "boundary closure gate before any physics",
+    "noise band on a misclosure"
+   ],
    "locations": [
     {
      "role": "candidate",
@@ -274,6 +308,10 @@
    "home": "CANDIDATE",
    "status": "rule text in the forest METHOD BRIEF; two code builds",
    "decided_by": "pending cross-run",
+   "covers": [
+    "frozen anchor",
+    "return test (asserted return + tolerance)"
+   ],
    "locations": [
     {
      "role": "candidate",
@@ -331,6 +369,9 @@
    "home": "CANDIDATE",
    "status": "two equation-family builds plus the original run code",
    "decided_by": "pending cross-run",
+   "covers": [
+    "percolation family"
+   ],
    "locations": [
     {
      "role": "candidate",
@@ -371,6 +412,9 @@
    "home": "CANDIDATE",
    "status": "two builds",
    "decided_by": "pending cross-run",
+   "covers": [
+    "branching family"
+   ],
    "locations": [
     {
      "role": "candidate",
@@ -753,6 +797,7 @@
    "status": "candidate match only: decomposition (instrument-epistemology) vs declared identity on linked runs (playground); same word, possibly two concepts, not decided",
    "decided_by": "pending cross-run",
    "added": "2026-11-20, from MULTI_HOME_REGISTER.json (in_map NO at 2026-11-19); source: S3 grep: .py basename shared Simulators/study-aperture; headers read",
+   "note": "2026-11-20: possible two concepts (REVIEW-2); not split",
    "locations": [
     {
      "role": "candidate",

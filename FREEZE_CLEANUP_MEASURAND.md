@@ -426,4 +426,80 @@ Source: owner order in chat, 2026-11-20.
 - `17df5dc` on main is a merge commit with git's default message and no trailer; logged as FL05
   in `blind-reader-void12/studies/confusion/FIRING_LOG.md`.
 
+### 2026-11-20, sixth entry: REVIEW-2 received, map fixed, recheck, verdict, lift record
+
+Source: owner order in chat, 2026-11-20 (MODE: IMPLEMENT, map work + records), with the
+reviewer's text relayed in the same message.
+
+REVIEW-2:
+
+- Filed as received: `studies/review/REVIEW2_in_map_GPT6_2026-11-20.md`. Reviewer GPT-6,
+  independence L2 (different family; memory ON; prior exposure to the repositories, not to the
+  two files). Read at Simulators `7366f50`: the stripped register and map copies in
+  `studies/review/`.
+- Limit: the reviewer did not verify the sha256 values. The blob ids at `7366f50` identify the
+  bytes (listed in `studies/review/REVIEW2_COMPARISON_2026-11-20.md`).
+- Per-concept comparison, builder L0 against L2, with cause: same file. Counted from the filed
+  text: L2 YES 16, PARTIAL 12, NO 0; L0 YES 25, PARTIAL 3. Cause: AGREE 16, GRAIN 10, HOME 2.
+  The owner's relayed summary gives L2 YES 15, PARTIAL 13 and GRAIN 11; kept as relayed in the
+  comparison file, with the difference stated there.
+
+Map changes (`concept_map.json`; no row renamed, merged or removed):
+
+- GRAIN: a `covers` list on six umbrella rows: L0 gate (02, 03), known-answer / null harness
+  (04, 05, 06, 07), anchor / return (10, 11), UNKNOWN expiry (09), percolation (17),
+  branching (18).
+- HOME, concept 05: `study-aperture:experimental/playground/validation/planted_defects.py@9587178428d9`
+  added as a location on the known-answer / null harness row.
+- HOME, concept 08: a `covers` entry on the existing row scoped absence (ABSENT_AT_SENSITIVITY),
+  plus the location `study-aperture:experimental/playground/detection/non_detection.py@c780f5c388c2`.
+  A covers entry, not a new row: the Simulators home was already on that row
+  (`relational-playground/playground/uncertainty.py`, token ABSENT_AT_SENSITIVITY), and
+  `scoped_absence.py`, already on the row, imports `NonDetectionRecord` from `non_detection.py`.
+  A new row would have listed the same Simulators file a third time. The UNKNOWN expiry row is
+  unchanged for this concept.
+- Concept 25: note on the map row and in the register's grain_note: "2026-11-20: possible two
+  concepts (REVIEW-2); not split".
+
+Rule and recheck:
+
+- `build_multi_home_register.py`: `in_map` is now the strict mechanical rule (YES = one map row
+  names the concept in `concept` or `covers` AND lists every registered home). The earlier
+  builder reading is kept per row as `in_map_L0_2026-11-20`. Tested on constructed rows in
+  `tests/test_multi_home_register_strict.py` (YES twice, PARTIAL three ways, NO).
+- Rebuilt: 28 rows, in_map YES 28, PARTIAL 0, NO 0; tokens not found 0. `--check` identical.
+- `check_concept_map.py --strict` with siblings: exit 0; rows 28, paths OK 68, NOT_CHECKED 0,
+  failed 0; no ABSENT. sibling_state: Simulators@148031b8ce05 (plus this commit's working
+  tree); study-aperture@6c45954ff2f8 (checkout HEAD; rows read `origin/main`@8164f9d4d6c4);
+  thermodynamic-accountability-framework@508c9595b73e (rows read `origin/main`@50596669a2b5).
+- The recheck is deterministic and was run by the implementer (the owner's order allows this
+  under the AUDIT-2 rule). The `covers` lists and the two added locations are the implementer's
+  writing, made after the L2 review; no second reader has read the changed map.
+
+Verdict against the measurand as amended: MET.
+
+| part | reading | evidence |
+|---|---|---|
+| cleanup (amended done condition) | met | third and fifth entries above; `studies/cleanup/` |
+| map: `--strict` exit 0, no ABSENT | met | run above |
+| map: every register row in_map YES | met | `MULTI_HOME_REGISTER.json` counts: YES 28 of 28, strict rule |
+| map: REVIEW-2 at L2+ on the register | met | `studies/review/REVIEW2_in_map_GPT6_2026-11-20.md` |
+
+#### Lift record
+
+- Date: 2026-11-20.
+- The feature freeze stated by the owner on 2026-11-11 lifts: both measurand lines ("cleanup",
+  "map") read done under the amended conditions of this section.
+- Basis for writing this record: item 7 of the owner's order of 2026-11-20 ("if MET, write the
+  lift record").
+- Evidence paths: `FREEZE_CLEANUP_MEASURAND.md` section 6 (this file);
+  `studies/cleanup/SAFE_BRANCHES_2026-11-20.tsv`, `KEEP_BRANCHES_2026-11-20.tsv`,
+  `ARCHIVES_NEEDED_2026-11-20.tsv`, `A2_RUN_2026-11-20.tsv`; `concept_map.json`,
+  `CONCEPT_MAP.md`, `MULTI_HOME_REGISTER.json`, `build_multi_home_register.py`;
+  `studies/review/REVIEW2_in_map_GPT6_2026-11-20.md`, `REVIEW2_COMPARISON_2026-11-20.md`,
+  `make_comparison.py`; `tests/test_multi_home_register_strict.py`.
+- Still open, and not part of the condition: the tail (branch deletions with their archives; the
+  PR-state reads for 70 repos; 11 a2 candidate PRs); the reviewer's sha256 limit; items held
+  under the freeze stay held until the owner orders each one.
+
 Observer slots: null.
