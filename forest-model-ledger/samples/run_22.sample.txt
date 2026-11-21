@@ -1,0 +1,18 @@
+run_22: support_match on case e (first-hand, not author-written)
+support_match.py sha256 a16da4d9b9f86b63... (frozen; checked)
+text  kimi_organizational_mode_probe_spec_PARKED.md        sha256 7374ca15577d31be...
+text  study_aperture_publication_provenance_README.md      sha256 5eb4e94cb44c0c58...
+
+claim  kimi_organizational_mode_probe_spec_PARKED.md:11
+       - Probe failure is recorded as "tested, not found under a declared detection procedure" — never "absent." This mirrors the publication-provenance screening vocabulary (SCREENED_NO_INDICATORS_FOUND ≠ safe) [2].
+tag    kimi_organizational_mode_probe_spec_PARKED.md:74
+       [2] VERIFIED — `experimental/publication_provenance/README.md` "This does not" screening vocabulary, fetched raw from `main` 2026-11-12.
+support  study_aperture_publication_provenance_README.md: 22 non-blank lines, 149-172 (rule: cited section, header to end of file)
+support lines naming SCREENED_NO_INDICATORS_FOUND: 0 of 22
+context (not detector input): SCREENED_NO_INDICATORS_FOUND in the whole cited file: 0; in the attributing spec: 1
+
+case                               before: assigns_without_support  after: support_match
+e_kimi_probe_citation_verified     False                            SILENT_ON_CLAIM    fires True
+before flags: ['NO_ALTERNATIVES']
+
+expected fires True; observed fires True: AS EXPECTED
