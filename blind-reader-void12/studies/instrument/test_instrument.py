@@ -25,7 +25,8 @@ def carried(case):
     rule = case["scope_rule"]
     if rule == "TERM_OWN_RECORD_ONLY": counted = [r["record_id"] for r in own]
     elif rule == "ALL_REPORTING_PATH_RECORDS":
-        counted = [r["record_id"] for r in case["records"] if r["on_reporting_path"] and r["relationship"] != "WRAPPER_RECORD"]
+        # M02_D2 (hashed): "every record ... on the path that reports this term"; an on-path wrapper is such a record (KC11)
+        counted = [r["record_id"] for r in case["records"] if r["on_reporting_path"]]
     elif rule == "FIRST_WRAPPER_ONLY":
         counted = [r["record_id"] for r in own] + [r["record_id"] for r in case["records"] if r["relationship"] == "WRAPPER_RECORD" and r["depth"] == 1]
     else: raise ValueError(rule)

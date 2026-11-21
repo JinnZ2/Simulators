@@ -32,6 +32,13 @@
    "records": [
     {"record_id": "E0", "relationship": "TERM_OWN_RECORD", "on_reporting_path": true, "depth": 0, "fields": ["sort", "detail"], "nested_field_refs": {"detail": "E1"}},
     {"record_id": "E1", "relationship": "NESTED_RECORD", "on_reporting_path": false, "depth": 1, "fields": ["line", "trace"], "nested_field_refs": {}}],
-   "expected": {"counted": ["E0", "E1"], "opened": ["E1"], "fields": ["sort", "detail", "line", "trace"]}}
+   "expected": {"counted": ["E0", "E1"], "opened": ["E1"], "fields": ["sort", "detail", "line", "trace"]}},
+  {"case_id": "M02-KA-06", "description": "an on-path wrapper under the all-reporting-path rule (M02 D2): it is a record on the reporting path, so it counts (added for KC11)",
+   "scope_rule": "ALL_REPORTING_PATH_RECORDS", "traversal_rule": "NAME_DO_NOT_OPEN",
+   "records": [
+    {"record_id": "CORE", "relationship": "TERM_OWN_RECORD", "on_reporting_path": true, "depth": 0, "fields": ["phase", "mark"], "nested_field_refs": {}},
+    {"record_id": "BOX", "relationship": "WRAPPER_RECORD", "on_reporting_path": true, "depth": 1, "fields": ["items", "count"], "nested_field_refs": {"items": "CORE"}},
+    {"record_id": "SHELF", "relationship": "WRAPPER_RECORD", "on_reporting_path": false, "depth": 2, "fields": ["boxes"], "nested_field_refs": {"boxes": "BOX"}}],
+   "expected": {"counted": ["CORE", "BOX"], "opened": [], "fields": ["phase", "mark", "items", "count"]}}
  ]
 }
