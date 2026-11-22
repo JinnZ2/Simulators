@@ -198,6 +198,13 @@ NOT RECORDED here. `ledger/data_sources.yaml` lists this source as
 `not_retrieved` with `used_by: []`; that file was not edited by this
 order.
 
+## Network state (2026-11-22)
+
+zenodo.org, datadryad.org, doi.org were added to the environment's
+allowed hosts for Phase A and remain allowed. Any later session can
+fetch the full source including the holdout. Phase B must not call
+these hosts; a call marks that run exposed and unscored.
+
 ## Provenance
 
 Co-authored, Kavik + Claude, work order of 2026-11-22; the decisions on
