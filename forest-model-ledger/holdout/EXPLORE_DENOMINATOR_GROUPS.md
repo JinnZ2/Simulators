@@ -480,6 +480,138 @@ at fault (plant fixed, separated lab effects), or the test is too weak
 at scope-group size to be trusted on groups of 2 to 10 studies. Most
 real groups hold 2 or 3 studies, smaller than the gate's 4.
 
+## 9. Amended addendum (2026-11-22): arms, field drops, power-gated lab test
+
+Dated note: this addendum replaces the first one. Section 8 is kept as
+written; its lab gate ran at 4 studies and its `lab` command is now the
+`addendum` command. Items 4 and 5 of the amended addendum (the three
+empty slots and the [stated] line) are section 8.1, unchanged.
+
+Printed by `python3 ledger/toolkit/denominator_sorter.py addendum
+SOURCE_CSV` and pasted by script. `run` still prints the section 3 to 5
+output byte for byte. [OBSERVED]
+
+    known-answer, 3 planted groups + 6 loners: recovered exactly on 5 of 5 seeds  PASS
+    null, 40 studies all different: no group reported on 5 of 5 seeds  PASS
+    missing field reads NOT RECORDED and is not merged with a recorded value  PASS
+    GATE PASS
+    lab test at 5 studies, planted lab effect: flagged on 4 of 5 seeds  FAIL
+    lab test at 5 studies, pure noise: clean on 5 of 5 seeds  PASS
+    LAB GATE FAIL
+
+### 9.1 UNIT = study x arm
+
+An arm is one value combination of the seven fields present in a
+study's rows. Every row sits in exactly one arm; an arm signature has
+single values. At arm level a group needs units from at least two
+studies. The study-level run is kept beside it.
+
+    1 UNIT = study x arm (study-level kept beside it)
+      side               level   units  groups  units in groups  singletons
+      anchor (<= 2018)   study     155      35               94          61
+      anchor (<= 2018)   arm       233      57              208          25
+      holdout (> 2018)   study      47       6               14          33
+      holdout (> 2018)   arm        80      18               48          32
+      pooled             study     202      43              122          80
+      pooled             arm       313      66              282          31
+      study level: signatures that are groups on both sides 3 ; units in them 23 (holdout 8)
+      arm   level: signatures that are groups on both sides 13 ; units in them 103 (holdout 37)
+
+[DERIVED] Splitting into arms removes most of the scatter that came from
+set-valued fields: pooled, 282 of 313 arm units share a denominator with
+an arm from another study, against 122 of 202 studies. Signatures that
+are groups on both sides of 2018 go from 3 to 13, and holdout units
+inside them from 8 to 37.
+
+### 9.2 Field-drop sensitivity (report only; the signature is unchanged)
+
+For each field: leave it out, regroup, report. Within-group residual
+spread = weighted mean square of the finder's all-columns residuals
+about each group's mean, with a group-count correction. "same rows" reads
+it on the rows grouped under the full signature, before and after the
+drop, so the two numbers are comparable; "own rows" reads it on whatever
+rows the dropped signature groups. The mark uses "same rows".
+
+    2 FIELD-DROP SENSITIVITY (pooled; signature not changed)
+      residuals: rebuilt all-columns fit explains 0.039316, finder reports 0.039316  MATCH
+      study level
+        dropped field         groups  singletons  both-sides groups  units in them  spread same rows  spread own rows  mark
+        (none)                   43          80                  3             23            0.2756           0.2756  -
+        Experimental.setting     43          73                  3             23            0.2757           0.2666  moves outcome
+        Phase2.time              44          31                  6             52            0.2807           0.2616  moves outcome
+        Approach                 40          45                  6             48            0.2834           0.3187  moves outcome
+        Phase1.culti             46          40                  8             49            0.2758           0.2893  moves outcome
+        SoilTp                   43          55                  3             29            0.2767           0.3066  moves outcome
+        Phase2.grow              40          47                  6             49            0.2851           0.2881  moves outcome
+        Response                 46          50                  3             31            0.2803           0.2966  moves outcome
+      arm level
+        dropped field         groups  singletons  both-sides groups  units in them  spread same rows  spread own rows  mark
+        (none)                   66          31                 13            103            0.2705           0.2705  -
+        Experimental.setting     65          19                 16            122            0.2706           0.2631  moves outcome
+        Phase2.time              37           5                 14            182            0.2785           0.2782  moves outcome
+        Approach                 43          23                 11            130            0.2897           0.2955  moves outcome
+        Phase1.culti             44          15                 19            187            0.2781           0.2724  moves outcome
+        SoilTp                   45          20                 18            164            0.2809           0.2810  moves outcome
+        Phase2.grow              40          26                 17            189            0.2897           0.2917  moves outcome
+        Response                 47          17                 14            167            0.2787           0.2770  moves outcome
+
+[DERIVED] By the order's rule (a drop that does not raise within-group
+spread), no field is marked "splits without moving outcome" at either
+level. Two things qualify that:
+
+    the rule has no noise band. Dropping Experimental.setting raises the
+    same-rows spread by 0.0001 at both levels (0.2756 to 0.2757, 0.2705
+    to 0.2706). Whether a rise that small is distinguishable from none
+    was not tested: NOT RECORDED.
+
+    merging groups can only keep or raise the uncorrected spread on the
+    same rows. The group-count correction is what lets a drop read as
+    "does not raise", and it is small here. The rule is therefore tilted
+    toward "moves outcome".
+
+    largest rises at arm level: Approach and Phase2.grow (0.2705 to
+    0.2897 each). Smallest: Experimental.setting, then Phase1.culti and
+    Phase2.time.
+
+### 9.3 Lab spread inside each group: gate FAILED again, real run NOT done
+
+Power gate as ordered: the lab test may run only on groups with at
+least 5 studies (chosen, no external source); smaller groups would read
+"underpowered, not tested".
+
+    3 LAB SPREAD inside each group (power gate: >= 5 studies)
+      LAB GATE FAIL: lab test not run on real data
+
+The synthetic gate was re-run at the smallest allowed size, 5 studies
+of 15 rows:
+
+    seed 0  planted effects +0.038 -0.063 +0.522 -0.221 -0.041  share 0.619  null max 0.234  excess +0.571  FLAG
+    seed 1  planted effects +0.104 +0.635 +0.082 -0.028 +0.185  share 0.610  null max 0.281  excess +0.556  FLAG
+    seed 2  planted effects +0.057 +0.039 -0.054 +0.046 +0.217  share 0.259  null max 0.299  excess +0.199  -
+    seed 3  planted effects +0.612 -0.088 -0.289 +0.173 +0.614  share 0.708  null max 0.188  excess +0.658  FLAG
+    seed 4  planted effects -0.196 +0.063 +0.254 -0.358 +0.014  share 0.485  null max 0.206  excess +0.434  FLAG
+
+[OBSERVED] Null leg clean on 5 of 5 seeds; planted leg flagged on 4 of
+5. On seed 2 four of the five planted lab effects are within 0.06 of
+zero and one is +0.217; the observed share (0.259) is under the largest
+of 499 shuffled shares (0.299).
+
+Under the sorter order's rule a failed gate stops the real run. The lab
+test was NOT run on any real group. No per-group lab-spread table
+exists and no group is tagged "signature-matched, protocol-unmatched".
+Tag state for every group: NOT RECORDED. The gate's planted draw and
+the flag rule were left as written.
+
+[DERIVED] The power gate changes which groups would be tested; it does
+not change what the synthetic gate measures, which is that the test
+misses a lab difference when most labs barely differ. What a flag would
+mean is not in doubt (the null leg is clean); what a non-flag would mean
+is.
+
+### 9.4 Slots
+
+    4 slots per study: lab_institution, lab_country, governance_regime ; NOT RECORDED on 202 of 202 studies ; expiry_condition: filled from each paper's affiliations and methods
+
 ## Provenance
 
 Co-authored, Kavik + Claude, work order of 2026-11-22 (END marker
@@ -488,6 +620,9 @@ from the missing_column_finder branch, which this work does not touch.
 Code: `ledger/toolkit/denominator_sorter.py`; `run` and `--gate` use the
 standard library only, and the addendum's `lab` command imports
 `ledger/toolkit/missing_column_finder.py` (numpy), brought onto this
-branch by merge from its own branch, unedited.
+branch by merge from its own branch, unedited. The amended addendum
+(section 9) is the `addendum` command; it rebuilds the finder's
+all-columns residuals from the finder's own parts and checks the
+explained share against the finder before using them.
 Source data: Zenodo record 10403125, sha256 asserted, not committed.
 The reading in section 6 is this run's.

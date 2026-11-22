@@ -4,7 +4,7 @@ EXPLORATORY.  It fits nothing, scores nothing and tests no prediction.
 
     python3 ledger/toolkit/denominator_sorter.py --gate
     python3 ledger/toolkit/denominator_sorter.py run SOURCE_CSV
-    python3 ledger/toolkit/denominator_sorter.py lab SOURCE_CSV   # addendum
+    python3 ledger/toolkit/denominator_sorter.py addendum SOURCE_CSV
 
 A study's DENOMINATOR SIGNATURE is read from seven recorded columns:
     Experimental.setting, Phase2.time (binned), Approach (control type),
@@ -42,9 +42,28 @@ ADDENDUM (2026-11-22):
           would absorb every between-lab difference by construction.  A
           flag tags the group "signature-matched, protocol-unmatched".
 
-`run` and `--gate` use the standard library only.  `lab` imports
-missing_column_finder (numpy) and uses its eta2, tau2_intercept, _codes
-and _verdict unchanged, with its FLAG rule and shuffle count.
+AMENDED ADDENDUM (2026-11-22, replaces the first):
+  arms    UNIT = study x arm.  An arm is one value combination of the seven
+          fields present in a study's rows, so every row sits in exactly
+          one arm and an arm signature has single values.  The study-level
+          run is kept as is; both are reported.  At arm level a group
+          needs units from at least two studies.
+  drop    for each field: leave it out of the signature, regroup, report.
+          The signature itself is not changed.  Within-group residual
+          spread = weighted mean square of the finder's all-columns
+          residuals about each group's mean, with a group-count
+          correction, read on the SAME rows before and after the drop
+          (the rows grouped under the full signature).  A drop that does
+          not raise it is marked "splits without moving outcome".
+  power   the lab test runs only on groups with >= MIN_LAB_STUDIES studies
+          (chosen, no external source); smaller groups read
+          "underpowered, not tested".
+
+`run` and `--gate` use the standard library only.  `addendum` imports
+missing_column_finder (numpy) and uses its eta2, tau2_intercept, _codes,
+_verdict, _xfun and COLUMNS unchanged, with its FLAG rule and shuffle
+count.  The all-columns residuals are recomputed here from those parts
+and checked against the finder's own explained share before use.
 """
 import csv
 import hashlib
@@ -59,6 +78,7 @@ NR = "NOT RECORDED"
 SLOTS = ["lab_institution", "lab_country", "governance_regime"]
 SLOT_EXPIRY = "filled from each paper's affiliations and methods"
 MIN_SPARE_ROWS = 2      # lab test needs rows beyond one per study; else not checkable
+MIN_LAB_STUDIES = 5     # power gate: chosen, no external source
 SOURCE_SHA = "bb56ba5ac31b13be09cf3df42c1215b53255bb1eb3bb8a91838ab8cb4cb5c82c"
 CUTOFF_YEAR = 2018
 
@@ -169,46 +189,148 @@ def lab_test(rows, perm_seed):
                 state="tested", rows=len(keep), studies=len(studies))
 
 
-def lab_table(rows, ids):
-    import missing_column_finder as mcf
-    by_study = {}
+def study_units(rows):
+    by = {}
     for r in rows:
-        by_study.setdefault(r["Author"], []).append(r)
-    res = sort_studies(rows)
-    out = []
-    for i, g in enumerate(res["groups"]):
-        grows = [r for s in g["studies"] for r in by_study[s]]
-        out.append((ids[g["signature"]], g, lab_test(grows, mcf.PERM_SEED + i)))
-    return res, out
+        by.setdefault(r["Author"], []).append(r)
+    return {s: (signature(rs), s, rs) for s, rs in by.items()}
 
 
-def render_lab(name, res, table):
-    tested = [t for t in table if t[2]["state"] == "tested"]
-    flagged = [t for t in tested if t[2]["flag"]]
-    L = ["%s: %d scope groups, %d tested, %d not checkable, %d flagged"
-         % (name, len(table), len(tested), len(table) - len(tested), len(flagged)),
-         "  id    studies   rows   lab share  null mean  null max   excess   tag"]
-    for gid, g, t in table:
-        if t["state"] != "tested":
-            L.append("  %-5s %5d  %6d   not checkable (rows barely exceed studies)" % (gid, g["n_studies"], g["n_rows"]))
+def arm_units(rows):
+    by = {}
+    for r in rows:
+        by.setdefault((r["Author"], tuple(_value(r, f) for f in FIELDS)), []).append(r)
+    return {"%s || %s" % (k[0], " | ".join(k[1])): (k[1], k[0], rs) for k, rs in by.items()}
+
+
+def group_units(units, drop=None):
+    """units: id -> (signature, study, rows).  A group = one signature held
+    by units from at least two studies.  drop = index of a field left out."""
+    by = {}
+    for uid, (sig, study, rs) in units.items():
+        key = sig if drop is None else sig[:drop] + sig[drop + 1:]
+        by.setdefault(key, []).append(uid)
+    groups, singles = {}, []
+    for key, uids in by.items():
+        if len({units[u][1] for u in uids}) >= 2:
+            groups[key] = sorted(uids)
+        else:
+            singles += uids
+    return groups, sorted(singles)
+
+
+def _side(units, uid):
+    return "anchor" if int(units[uid][2][0]["Year"]) <= CUTOFF_YEAR else "holdout"
+
+
+def both_sides(units, drop=None):
+    """Signatures that are groups on each side separately; units inside them."""
+    ga, _ = group_units({u: v for u, v in units.items() if _side(units, u) == "anchor"}, drop)
+    gh, _ = group_units({u: v for u, v in units.items() if _side(units, u) == "holdout"}, drop)
+    keys = set(ga) & set(gh)
+    return len(keys), sum(len(ga[k]) + len(gh[k]) for k in keys), sum(len(gh[k]) for k in keys)
+
+
+def finder_residuals(rows):
+    """Row id -> (residual, weight) from the finder's all-columns fit,
+    rebuilt from its parts; the explained share must equal the finder's."""
+    import numpy as np
+    import missing_column_finder as mcf
+    base = [(r, mcf._num(r["rr"]), mcf._num(r["var"])) for r in rows]
+    base = [b for b in base if b[1] is not None and b[2] is not None and b[2] > 0]
+    y = np.array([b[1] for b in base])
+    v = np.array([b[2] for b in base])
+    w = 1.0 / (v + mcf.tau2_intercept(y, v))
+    X = np.array([[np.nan if mcf._xfun(c)(b[0]) is None else mcf._xfun(c)(b[0]) for c in mcf.COLUMNS]
+                  for b in base], dtype=float)
+    full = ~np.isnan(X).any(axis=1)
+    A = np.column_stack([np.ones(full.sum()), X[full]])
+    sw = np.sqrt(w[full])
+    beta, *_ = np.linalg.lstsq(A * sw[:, None], y[full] * sw, rcond=None)
+    e = y[full] - A @ beta
+    share = 1.0 - float(np.sum(w[full] * e ** 2)) / mcf._sst(y[full], w[full])
+    kept = [b[0] for b, k in zip(base, full) if k]
+    return {id(r): (float(ei), float(wi)) for r, ei, wi in zip(kept, e, w[full])}, share
+
+
+def within_spread(units, groups, resid, only=None):
+    """Weighted mean square of residuals about group means, with a
+    group-count correction.  only = set of row ids to read (same-rows rule)."""
+    ss = sw = 0.0
+    n = g = 0
+    for uids in groups.values():
+        pts = [resid[id(r)] for u in uids for r in units[u][2]
+               if id(r) in resid and (only is None or id(r) in only)]
+        if len(pts) < 2:
             continue
-        L.append("  %-5s %5d  %6d   %8.3f   %8.3f  %8.3f  %+7.3f   %s"
-                 % (gid, t["studies"], t["rows"], t["share"], t["null_mean"], t["null_max"], t["excess"],
+        tw = sum(p[1] for p in pts)
+        m = sum(p[0] * p[1] for p in pts) / tw
+        ss += sum(p[1] * (p[0] - m) ** 2 for p in pts)
+        sw += tw
+        n += len(pts)
+        g += 1
+    if n - g < 1 or sw <= 0:
+        return None
+    return ss / sw * n / (n - g)
+
+
+def drop_table(units, resid):
+    g0, s0 = group_units(units)
+    common = {id(r) for uids in g0.values() for u in uids for r in units[u][2]}
+    base = within_spread(units, g0, resid, common)
+    out = [("(none)", len(g0), len(s0)) + both_sides(units) + (base, base, "-")]
+    for i, f in enumerate(FIELDS):
+        g, s = group_units(units, i)
+        same = within_spread(units, g, resid, common)
+        own = within_spread(units, g, resid)
+        mark = "splits without moving outcome" if same is not None and same <= base else "moves outcome"
+        out.append((f, len(g), len(s)) + both_sides(units, i) + (same, own, mark))
+    return out
+
+
+def lab_table(units, name_of):
+    import missing_column_finder as mcf
+    groups, _ = group_units(units)
+    out = []
+    order = sorted(groups, key=lambda k: (-len({units[u][1] for u in groups[k]}), k))
+    for i, key in enumerate(order):
+        uids = groups[key]
+        nst = len({units[u][1] for u in uids})
+        grows = [r for u in uids for r in units[u][2]]
+        if nst < MIN_LAB_STUDIES:
+            out.append((name_of(key), nst, len(grows), {"state": "underpowered, not tested"}))
+        else:
+            out.append((name_of(key), nst, len(grows), lab_test(grows, mcf.PERM_SEED + i)))
+    return out
+
+
+def render_lab(name, table):
+    tested = [t for t in table if t[3]["state"] == "tested"]
+    flagged = [t for t in tested if t[3]["flag"]]
+    L = ["%s: %d groups; %d with >= %d studies tested; %d underpowered, not tested; %d flagged"
+         % (name, len(table), len(tested), MIN_LAB_STUDIES,
+            sum(t[3]["state"].startswith("underpowered") for t in table), len(flagged)),
+         "  studies   rows   lab share  null mean  null max   excess   tag / signature"]
+    for sig, nst, nrows, t in table:
+        if t["state"] != "tested":
+            continue
+        L.append("  %5d  %6d   %8.3f   %8.3f  %8.3f  %+7.3f   %s"
+                 % (nst, nrows, t["share"], t["null_mean"], t["null_max"], t["excess"],
                     "signature-matched, protocol-unmatched" if t["flag"] else "-"))
-    L.append("  tagged signature-matched, protocol-unmatched: %s"
-             % (", ".join(t[0] for t in flagged) or "none"))
+        L.append("        %s" % sig)
     return "\n".join(L)
 
 
 def lab_gate(seeds=(0, 1, 2, 3, 4), verbose=True):
-    """The lab test at scope-group size: 4 studies, 15 rows each."""
+    """The lab test at the smallest group size it is allowed to run on:
+    MIN_LAB_STUDIES studies, 15 rows each."""
     import numpy as np
     hit = clean = 0
     for sd in seeds:
         for planted in (True, False):
             rng = np.random.default_rng(sd)
             rows = []
-            for s in range(4):
+            for s in range(MIN_LAB_STUDIES):
                 eff = rng.normal(0, 0.3) if planted else 0.0
                 for _ in range(15):
                     var = rng.uniform(0.01, 0.1)
@@ -217,10 +339,10 @@ def lab_gate(seeds=(0, 1, 2, 3, 4), verbose=True):
             flag = lab_test(rows, 500 + sd).get("flag", False)
             hit += planted and flag
             clean += (not planted) and (not flag)
-    lines = ["lab test at group size, planted lab effect: flagged on %d of %d seeds  %s"
-             % (hit, len(seeds), "PASS" if hit == len(seeds) else "FAIL"),
-             "lab test at group size, pure noise: clean on %d of %d seeds  %s"
-             % (clean, len(seeds), "PASS" if clean == len(seeds) else "FAIL")]
+    lines = ["lab test at %d studies, planted lab effect: flagged on %d of %d seeds  %s"
+             % (MIN_LAB_STUDIES, hit, len(seeds), "PASS" if hit == len(seeds) else "FAIL"),
+             "lab test at %d studies, pure noise: clean on %d of %d seeds  %s"
+             % (MIN_LAB_STUDIES, clean, len(seeds), "PASS" if clean == len(seeds) else "FAIL")]
     ok = hit == len(seeds) and clean == len(seeds)
     lines.append("LAB GATE %s" % ("PASS" if ok else "FAIL"))
     if verbose:
@@ -308,29 +430,60 @@ def main():
     a = sys.argv[1:]
     if a == ["--gate"]:
         raise SystemExit(0 if gate()[0] else 1)
-    if len(a) == 2 and a[0] == "lab":
+    if len(a) == 2 and a[0] == "addendum":
         import os
         sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import missing_column_finder as mcf
         print("gates first:")
-        if not gate()[0] or not lab_gate()[0]:
+        g_ok = gate()[0]
+        lab_ok = lab_gate()[0]
+        if not g_ok:
             raise SystemExit("GATE FAIL: not run on real data")
         raw = open(a[1], "rb").read()
         if hashlib.sha256(raw).hexdigest() != SOURCE_SHA:
             raise SystemExit("source sha256 mismatch: not run")
         allrows = list(csv.DictReader(io.StringIO(raw.decode("utf-8", errors="replace"), newline="")))
-        pooled = sort_studies(allrows)
-        ids = {g["signature"]: "D%02d" % (i + 1) for i, g in enumerate(sorted(
-            pooled["groups"] + pooled["singletons"], key=lambda g: (-g["n_studies"], g["signature"])))}
         sides = [("anchor (<= 2018)", [r for r in allrows if int(r["Year"]) <= CUTOFF_YEAR]),
                  ("holdout (> 2018)", [r for r in allrows if int(r["Year"]) > CUTOFF_YEAR]),
                  ("pooled", allrows)]
+        print("\n1 UNIT = study x arm (study-level kept beside it)")
+        print("  side               level   units  groups  units in groups  singletons")
         for name, rows in sides:
-            res, table = lab_table(rows, ids)
-            print()
-            print(render_lab(name, res, table))
-        filled = sum(v != NR for r_ in [slots(None)] for v in r_.values())
-        print("\nslots per study: %s ; filled on %d of %d studies ; expiry_condition: %s"
-              % (", ".join(SLOTS), filled, pooled["studies"], SLOT_EXPIRY))
+            for lvl, mk in (("study", study_units), ("arm", arm_units)):
+                u = mk(rows)
+                g, s = group_units(u)
+                print("  %-18s %-6s %6d  %6d  %15d  %10d"
+                      % (name, lvl, len(u), len(g), sum(len(x) for x in g.values()), len(s)))
+        for lvl, mk in (("study", study_units), ("arm", arm_units)):
+            nb, ub, uh = both_sides(mk(allrows))
+            print("  %-5s level: signatures that are groups on both sides %d ; units in them %d (holdout %d)"
+                  % (lvl, nb, ub, uh))
+        resid, share = finder_residuals(allrows)
+        ref = mcf.analyse(allrows, n_perm=1)["together"]["share"]
+        print("\n2 FIELD-DROP SENSITIVITY (pooled; signature not changed)")
+        print("  residuals: rebuilt all-columns fit explains %.6f, finder reports %.6f  %s"
+              % (share, ref, "MATCH" if abs(share - ref) < 1e-12 else "MISMATCH"))
+        if abs(share - ref) >= 1e-12:
+            raise SystemExit("residuals do not match the finder: sensitivity not run")
+        for lvl, mk in (("study", study_units), ("arm", arm_units)):
+            print("  %s level" % lvl)
+            print("    dropped field         groups  singletons  both-sides groups  units in them"
+                  "  spread same rows  spread own rows  mark")
+            for f, ng, ns, nb, ub, uh, same, own, mark in drop_table(mk(allrows), resid):
+                print("    %-20s %6d  %10d  %17d  %13d  %16s  %15s  %s"
+                      % (f, ng, ns, nb, ub, "%.4f" % same if same is not None else "n/a",
+                         "%.4f" % own if own is not None else "n/a", mark))
+        print("\n3 LAB SPREAD inside each group (power gate: >= %d studies)" % MIN_LAB_STUDIES)
+        if not lab_ok:
+            print("  LAB GATE FAIL: lab test not run on real data")
+        else:
+            for name, rows in sides:
+                for lvl, mk in (("study", study_units), ("arm", arm_units)):
+                    print()
+                    print(render_lab("%s, %s level" % (name, lvl),
+                                     lab_table(mk(rows), lambda k: " | ".join(k))))
+        print("\n4 slots per study: %s ; NOT RECORDED on %d of %d studies ; expiry_condition: %s"
+              % (", ".join(SLOTS), len(study_units(allrows)), len(study_units(allrows)), SLOT_EXPIRY))
         return
     if len(a) == 2 and a[0] == "run":
         print("gate first:")
