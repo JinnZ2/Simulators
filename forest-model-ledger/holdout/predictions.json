@@ -1,0 +1,1135 @@
+{
+ "anchor": {
+  "commit": "55c651b8f7228b4d28a21ad442bf817752e80d21",
+  "rerun_here": {
+   "N_misclosure": -5.061906449554954e-11,
+   "final_T": 36.61960269548185,
+   "fires": 80,
+   "overall": "PASS",
+   "water_misclosure": -3.426148253993233e-13
+  },
+  "run": "run_9",
+  "status": "candidate"
+ },
+ "anchor_experiment": {
+  "closure": {
+   "C": "not checkable (VOID in the base model)",
+   "N": {
+    "max_abs_misclosure": 5.151434834260726e-13,
+    "state": "pass"
+   },
+   "P": "not checkable (VOID in the base model)",
+   "energy": "not checkable (VOID in the base model)",
+   "sims_audited": 50,
+   "sims_not_closed": 0,
+   "water": {
+    "max_abs_misclosure": 5.806466418789569e-14,
+    "state": "pass"
+   }
+  },
+  "nonwoody_G": {
+   "M1_by_seed": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "M1_max": 0.0,
+   "M1_mean": 0.0,
+   "M1_min": 0.0,
+   "M2_by_seed": [
+    0.2675142709623601,
+    0.24443734058493058,
+    0.22753460588803487,
+    0.2474779231160535,
+    0.22621326056538255
+   ],
+   "M2_max": 0.2675142709623601,
+   "M2_mean": 0.2426354802233523,
+   "M2_min": 0.22621326056538255
+  },
+  "t2_months": 2.25,
+  "woody_T": {
+   "M1_by_seed": [
+    0.0047863649381954775,
+    0.003838943539177527,
+    0.005592416293843747,
+    0.006475100849368029,
+    0.0053445932467560305
+   ],
+   "M1_max": 0.006475100849368029,
+   "M1_mean": 0.005207483773468162,
+   "M1_min": 0.003838943539177527,
+   "M2_by_seed": [
+    -0.10470191517804352,
+    -0.0962993737386927,
+    -0.087751738857909,
+    -0.09487042871786447,
+    -0.08747113599505571
+   ],
+   "M2_max": -0.08747113599505571,
+   "M2_mean": -0.0942189184975131,
+   "M2_min": -0.10470191517804352
+  }
+ },
+ "anchor_studies": {
+  "rows": 3707,
+  "studies": 155
+ },
+ "constants": {
+  "aff": 2.5,
+  "bootstrap": 2000,
+  "bootstrap_seed": 20261122,
+  "cond_years": 20,
+  "k_lig": 0.03,
+  "lig": 0.4,
+  "pot_v": 0.3,
+  "seedling": 0.5,
+  "seeds": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ "curves": {
+  "B1": [
+   {
+    "E": 0.0,
+    "M1_by_seed": [
+     0.0047863649381954775,
+     0.003838943539177527,
+     0.005592416293843747,
+     0.006475100849368029,
+     0.0053445932467560305
+    ],
+    "M1_max": 0.006475100849368029,
+    "M1_mean": 0.005207483773468162,
+    "M1_min": 0.003838943539177527,
+    "M2_by_seed": [
+     -0.10470191517804352,
+     -0.0962993737386927,
+     -0.087751738857909,
+     -0.09487042871786447,
+     -0.08747113599505571
+    ],
+    "M2_max": -0.08747113599505571,
+    "M2_mean": -0.0942189184975131,
+    "M2_min": -0.10470191517804352,
+    "b": 1.5
+   },
+   {
+    "E": 0.125,
+    "M1_by_seed": [
+     0.0033465917194055086,
+     0.0027299243255245937,
+     0.004117661163811079,
+     0.004818220128116651,
+     0.0039037148415693003
+    ],
+    "M1_max": 0.004818220128116651,
+    "M1_mean": 0.0037832224356854267,
+    "M1_min": 0.0027299243255245937,
+    "M2_by_seed": [
+     -0.10541558949254688,
+     -0.09627208746413811,
+     -0.08842093921379143,
+     -0.09567250594212624,
+     -0.08812394121217917
+    ],
+    "M2_max": -0.08812394121217917,
+    "M2_mean": -0.09478101266495638,
+    "M2_min": -0.10541558949254688,
+    "b": 1.25
+   },
+   {
+    "E": 0.25,
+    "M1_by_seed": [
+     0.001843887963847059,
+     0.00153921900345727,
+     0.0025702378319720372,
+     0.0030853972614077753,
+     0.0023904062252723753
+    ],
+    "M1_max": 0.0030853972614077753,
+    "M1_mean": 0.0022858296571913036,
+    "M1_min": 0.00153921900345727,
+    "M2_by_seed": [
+     -0.10612328895744622,
+     -0.09612932825046845,
+     -0.08908627111384719,
+     -0.0964690107100724,
+     -0.08877357938776433
+    ],
+    "M2_max": -0.08877357938776433,
+    "M2_mean": -0.09531629568391972,
+    "M2_min": -0.10612328895744622,
+    "b": 0.9999999999999999
+   },
+   {
+    "E": 0.375,
+    "M1_by_seed": [
+     0.0002696271662303631,
+     0.00023925947775927135,
+     0.0009400702250579976,
+     0.0012661403454917782,
+     0.0007944568021384287
+    ],
+    "M1_max": 0.0012661403454917782,
+    "M1_mean": 0.0007019108033355678,
+    "M1_min": 0.00023925947775927135,
+    "M2_by_seed": [
+     -0.10682433251412254,
+     -0.0958654770708395,
+     -0.08974767342779358,
+     -0.09725955804358061,
+     -0.08942015969655234
+    ],
+    "M2_max": -0.08942015969655234,
+    "M2_mean": -0.09582344015057771,
+    "M2_min": -0.10682433251412254,
+    "b": 0.7499999999999998
+   },
+   {
+    "E": 0.5,
+    "M1_by_seed": [
+     -0.0013862871949388053,
+     -0.001204716879868087,
+     -0.0007845977241866865,
+     -0.0006517995037367308,
+     -0.0008960766369418626
+    ],
+    "M1_max": -0.0006517995037367308,
+    "M1_mean": -0.0009846955879344345,
+    "M1_min": -0.0013862871949388053,
+    "M2_by_seed": [
+     -0.10751802970820477,
+     -0.09548229400151499,
+     -0.09040528310397218,
+     -0.09804388203890524,
+     -0.09006404167300941
+    ],
+    "M2_max": -0.09006404167300941,
+    "M2_mean": -0.09630270610512132,
+    "M2_min": -0.10751802970820477,
+    "b": 0.4999999999999999
+   },
+   {
+    "E": 0.625,
+    "M1_by_seed": [
+     -0.003135671378354534,
+     -0.002834383635102069,
+     -0.0026174501153500293,
+     -0.0026826994825980503,
+     -0.0026951300654148155
+    ],
+    "M1_max": -0.0026174501153500293,
+    "M1_mean": -0.002793066935363899,
+    "M1_min": -0.003135671378354534,
+    "M2_by_seed": [
+     -0.10820372150868589,
+     -0.09499201696624149,
+     -0.0910595559795635,
+     -0.09882193563855103,
+     -0.09070596996258498
+    ],
+    "M2_max": -0.09070596996258498,
+    "M2_mean": -0.09675664001112538,
+    "M2_min": -0.10820372150868589,
+    "b": 0.24999999999999994
+   },
+   {
+    "E": 0.75,
+    "M1_by_seed": [
+     -0.004992327497175432,
+     -0.0046966597830134516,
+     -0.004574330221420253,
+     -0.004843129898804205,
+     -0.004618875574833673
+    ],
+    "M1_max": -0.004574330221420253,
+    "M1_mean": -0.004745064595049403,
+    "M1_min": -0.004992327497175432,
+    "M2_by_seed": [
+     -0.10888083889720518,
+     -0.09442009942839256,
+     -0.09171144297079181,
+     -0.09959404202829954,
+     -0.09134726408100165
+    ],
+    "M2_max": -0.09134726408100165,
+    "M2_mean": -0.09719073748113814,
+    "M2_min": -0.10888083889720518,
+    "b": -2.7755575615628914e-16
+   },
+   {
+    "E": 0.875,
+    "M1_by_seed": [
+     -0.0069723063442432625,
+     -0.006840275391688217,
+     -0.006673402375025274,
+     -0.00715216459659859,
+     -0.006685894525689612
+    ],
+    "M1_max": -0.006673402375025274,
+    "M1_mean": -0.006864808646648991,
+    "M1_min": -0.00715216459659859,
+    "M2_by_seed": [
+     -0.10954897927380465,
+     -0.09380668040100153,
+     -0.0923626402190514,
+     -0.10036111821697548,
+     -0.09199007761822157
+    ],
+    "M2_max": -0.09199007761822157,
+    "M2_mean": -0.09761389914581092,
+    "M2_min": -0.10954897927380465,
+    "b": -0.2500000000000002
+   },
+   {
+    "E": 1.0,
+    "M1_by_seed": [
+     -0.00909413281187753,
+     -0.009310540275856675,
+     -0.008935152563581183,
+     -0.009631449938213162,
+     -0.008917187872368554
+    ],
+    "M1_max": -0.008917187872368554,
+    "M1_mean": -0.00917769269237942,
+    "M1_min": -0.009631449938213162,
+    "M2_by_seed": [
+     -0.1102079972027069,
+     -0.09320579165954548,
+     -0.09301593106539183,
+     -0.10112499432688295,
+     -0.09263773788313606
+    ],
+    "M2_max": -0.09263773788313606,
+    "M2_mean": -0.09803849042753264,
+    "M2_min": -0.1102079972027069,
+    "b": -0.5000000000000002
+   }
+  ],
+  "B2": [
+   {
+    "M1_by_seed": [
+     0.0007366562508202367,
+     0.0005710747146880574,
+     0.0008328794892998035,
+     0.0009300666326479228,
+     0.0008174680292514656
+    ],
+    "M1_max": 0.0009300666326479228,
+    "M1_mean": 0.0007776290233414973,
+    "M1_min": 0.0005710747146880574,
+    "M2_by_seed": [
+     -0.02275615389273295,
+     -0.020361686163041518,
+     -0.018911123111264177,
+     -0.020470172536646566,
+     -0.018935244073063767
+    ],
+    "M2_max": -0.018911123111264177,
+    "M2_mean": -0.0202868759553498,
+    "M2_min": -0.02275615389273295,
+    "months": 0.5
+   },
+   {
+    "M1_by_seed": [
+     0.0015890611584321146,
+     0.0012418299904448425,
+     0.0018147894212941318,
+     0.0020510524087390576,
+     0.0017673933815594146
+    ],
+    "M1_max": 0.0020510524087390576,
+    "M1_mean": 0.0016928252720939123,
+    "M1_min": 0.0012418299904448425,
+    "M2_by_seed": [
+     -0.0445174857598417,
+     -0.04013222113034951,
+     -0.037096110732790025,
+     -0.04015734175726626,
+     -0.03709423273214338
+    ],
+    "M2_max": -0.03709423273214338,
+    "M2_mean": -0.03979947842247818,
+    "M2_min": -0.0445174857598417,
+    "months": 1
+   },
+   {
+    "M1_by_seed": [
+     0.004192472468911762,
+     0.003348200611973125,
+     0.004882777857195434,
+     0.005636809425844259,
+     0.004678886170228516
+    ],
+    "M1_max": 0.005636809425844259,
+    "M1_mean": 0.004547829306830619,
+    "M1_min": 0.003348200611973125,
+    "M2_by_seed": [
+     -0.09514961236348224,
+     -0.0872431574333668,
+     -0.0796881642225386,
+     -0.08618205213784101,
+     -0.07946851719143669
+    ],
+    "M2_max": -0.07946851719143669,
+    "M2_mean": -0.08554630066973308,
+    "M2_min": -0.09514961236348224,
+    "months": 2
+   },
+   {
+    "M1_by_seed": [
+     0.006692239964244961,
+     0.005433985440422317,
+     0.007885572971784535,
+     0.009192707219845109,
+     0.0074839594777723235
+    ],
+    "M1_max": 0.009192707219845109,
+    "M1_mean": 0.007337693014813848,
+    "M1_min": 0.005433985440422317,
+    "M2_by_seed": [
+     -0.13234215948698277,
+     -0.12278657496807951,
+     -0.11110166726039439,
+     -0.11996841102354892,
+     -0.11061935879060146
+    ],
+    "M2_max": -0.11061935879060146,
+    "M2_mean": -0.11936363430592141,
+    "M2_min": -0.13234215948698277,
+    "months": 3
+   },
+   {
+    "M1_by_seed": [
+     0.016231560555016025,
+     0.013700269555107046,
+     0.019500856199293534,
+     0.022971600547416617,
+     0.01820404784346113
+    ],
+    "M1_max": 0.022971600547416617,
+    "M1_mean": 0.018121666940058873,
+    "M1_min": 0.013700269555107046,
+    "M2_by_seed": [
+     -0.23751316388275606,
+     -0.22677421432786654,
+     -0.19955641506125202,
+     -0.21415673855589532,
+     -0.19816998817480458
+    ],
+    "M2_max": -0.19816998817480458,
+    "M2_mean": -0.21523410400051493,
+    "M2_min": -0.23751316388275606,
+    "months": 6
+   },
+   {
+    "M1_by_seed": [
+     0.03340791193671218,
+     0.02904757545821075,
+     0.040173663319674015,
+     0.047665853972698756,
+     0.03710537709481885
+    ],
+    "M1_max": 0.047665853972698756,
+    "M1_mean": 0.037480076356422906,
+    "M1_min": 0.02904757545821075,
+    "M2_by_seed": [
+     -0.3994631687315772,
+     -0.39225636063300107,
+     -0.33296162141383495,
+     -0.35491679599939346,
+     -0.33044021933824863
+    ],
+    "M2_max": -0.33044021933824863,
+    "M2_mean": -0.36200763322321106,
+    "M2_min": -0.3994631687315772,
+    "months": 12
+   },
+   {
+    "M1_by_seed": [
+     0.04970045127393054,
+     0.04490646917695069,
+     0.05965808956728973,
+     0.06846866406652814,
+     0.0561066608304535
+    ],
+    "M1_max": 0.06846866406652814,
+    "M1_mean": 0.055768066983030516,
+    "M1_min": 0.04490646917695069,
+    "M2_by_seed": [
+     -0.6336246175568233,
+     -0.6476306420382997,
+     -0.5210642004847985,
+     -0.5471502453992365,
+     -0.5184828950202812
+    ],
+    "M2_max": -0.5184828950202812,
+    "M2_mean": -0.5735905200998878,
+    "M2_min": -0.6476306420382997,
+    "months": 24
+   },
+   {
+    "M1_by_seed": [
+     0.051508370877845336,
+     0.04674007647717259,
+     0.062246542524352154,
+     0.07004755792849415,
+     0.05934494141129454
+    ],
+    "M1_max": 0.07004755792849415,
+    "M1_mean": 0.05797749784383175,
+    "M1_min": 0.04674007647717259,
+    "M2_by_seed": [
+     -0.8016956491493583,
+     -0.8381141802962818,
+     -0.6496942786924962,
+     -0.6757986607342013,
+     -0.6573059497398535
+    ],
+    "M2_max": -0.6496942786924962,
+    "M2_mean": -0.7245217437224383,
+    "M2_min": -0.8381141802962818,
+    "months": 36
+   }
+  ],
+  "B3": {
+   "field (neighbours 3.0, volume 1)": {
+    "M1_by_seed": [
+     0.004051534560909002,
+     0.0032378529123273463,
+     0.0048941293200462435,
+     0.005627288007546099,
+     0.004669423535181095
+    ],
+    "M1_max": 0.005627288007546099,
+    "M1_mean": 0.0044960456672019575,
+    "M1_min": 0.0032378529123273463,
+    "M2_by_seed": [
+     -0.1056343843982895,
+     -0.09680449601915023,
+     -0.08856540823766938,
+     -0.09610890748689054,
+     -0.08815110139023798
+    ],
+    "M2_max": -0.08815110139023798,
+    "M2_mean": -0.09505285950644753,
+    "M2_min": -0.1056343843982895
+   },
+   "greenhouse (alone, volume 0.3)": {
+    "M1_by_seed": [
+     0.004299133194371826,
+     0.0034450849573119035,
+     0.005202105312015078,
+     0.005974003825826957,
+     0.004966754019082603
+    ],
+    "M1_max": 0.005974003825826957,
+    "M1_mean": 0.0047774162617216735,
+    "M1_min": 0.0034450849573119035,
+    "M2_by_seed": [
+     -0.10574092174482375,
+     -0.09710966065121081,
+     -0.08855645283955632,
+     -0.09591132438844084,
+     -0.08823489165341566
+    ],
+    "M2_max": -0.08823489165341566,
+    "M2_mean": -0.09511065025548948,
+    "M2_min": -0.10574092174482375
+   },
+   "neighbours removed only": {
+    "M1_by_seed": [
+     0.0047863649381954775,
+     0.003838943539177527,
+     0.005592416293843747,
+     0.006475100849368029,
+     0.0053445932467560305
+    ],
+    "M1_max": 0.006475100849368029,
+    "M1_mean": 0.005207483773468162,
+    "M1_min": 0.003838943539177527,
+    "M2_by_seed": [
+     -0.10470191517804352,
+     -0.0962993737386927,
+     -0.087751738857909,
+     -0.09487042871786447,
+     -0.08747113599505571
+    ],
+    "M2_max": -0.08747113599505571,
+    "M2_mean": -0.0942189184975131,
+    "M2_min": -0.10470191517804352
+   },
+   "pot volume only": {
+    "M1_by_seed": [
+     0.002577933296040372,
+     0.002007140563417483,
+     0.0034379094836508545,
+     0.003878185127758239,
+     0.003262606899636477
+    ],
+    "M1_max": 0.003878185127758239,
+    "M1_mean": 0.0030327550741006846,
+    "M1_min": 0.002007140563417483,
+    "M2_by_seed": [
+     -0.10998977357121352,
+     -0.10024219909460064,
+     -0.09266179220732604,
+     -0.10107754772748932,
+     -0.0919325064001147
+    ],
+    "M2_max": -0.0919325064001147,
+    "M2_mean": -0.09918076380014886,
+    "M2_min": -0.10998977357121352
+   }
+  }
+ },
+ "date_utc": "2026-11-22",
+ "direction_note": "direction and interval are the anchor-study fit; model_direction is the branch run's reading; they are sealed side by side and never merged",
+ "inputs": {
+  "anchor_ref": "origin/archive/anchor-run9 == 55c651b8f7228b4d28a21ad442bf817752e80d21; 3 pinned files match at that commit",
+  "anchor_studies.csv": "e2ea825c7bb1372dc2b9a2d1c46f1c2a14f78b466f0a7f382bacb0c129a29438",
+  "ledger/toolkit/budget_closure.py": "796b76f69e069f082603c3ee4392d56a0261de3ef139fbe942f14a21ba05a456",
+  "model/base.py": "ebb656bbf9554f3a6ed08055a0787f1e3a4ab6c024006a11555aed45eaea4ec8",
+  "runs/run_9.py": "0bae61f9a04d989a2d58fd90a24290c8285d7f62f0de47b81d760d671765ef22"
+ },
+ "interval_note": "interval = 80% cluster-bootstrap interval (studies resampled) of the moderator estimate on anchor studies; it is not widened for the holdout's own sampling error, whose size this run did not read",
+ "license": "CC0-1.0",
+ "predictions": {
+  "B1": {
+   "assumptions": [
+    {
+     "assumption": "fertility E maps onto aridity / water limitation: E = min(AI, 1); MAP is read as a second monotone proxy of E",
+     "failure_signature": "model and fit disagree in sign on AI, or AI and MAP fits disagree with each other",
+     "id": "A1"
+    },
+    {
+     "assumption": "the benefit term is linear in E and changes sign inside 0..1 (written into the equation; run_1 flag: partly circular)",
+     "failure_signature": "holdout rr vs AI is flat or curved with no sign change inside the sampled AI range",
+     "id": "A2"
+    },
+    {
+     "assumption": "aff is set so that b at E = 0 equals run_9's b",
+     "failure_signature": "direction holds but the magnitude is off by a constant factor",
+     "id": "A3"
+    },
+    {
+     "assumption": "E changes only b; precipitation, deposition and decay stay at run_9 values",
+     "failure_signature": "an aridity effect appears in sterilised-soil growth as well (not a coupling effect)",
+     "id": "A4"
+    }
+   ],
+   "atom": "stress-gated coupling",
+   "change": "b = aff*(0.6-0.8E), aff = 2.5 (aff*0.6 = run_9 b = 1.5 at E = 0); E = min(AI, 1)",
+   "closure": {
+    "C": "not checkable (VOID in the base model)",
+    "N": {
+     "max_abs_misclosure": 5.435651928564766e-13,
+     "state": "pass"
+    },
+    "P": "not checkable (VOID in the base model)",
+    "energy": "not checkable (VOID in the base model)",
+    "sims_audited": 225,
+    "sims_not_closed": 0,
+    "water": {
+     "max_abs_misclosure": 7.327471962526033e-14,
+     "state": "pass"
+    }
+   },
+   "column": [
+    "AI",
+    "MAP"
+   ],
+   "crowding": "NOT RECORDED",
+   "crowding_basis": "probe not run: no tool-less fresh chat was available to this session; a sub-agent given only the question keeps file and network access to the repository, including the holdout files this run may not read",
+   "direction": {
+    "AI": "negative",
+    "MAP": "negative"
+   },
+   "interval": {
+    "AI": [
+     -0.33421212016735946,
+     -0.1271195885624885
+    ],
+    "MAP": [
+     -0.22359998102744807,
+     -0.011751725988985603
+    ]
+   },
+   "kind": "branch",
+   "mapping": {
+    "failure_signature": "Self-Other rows and Self-Sterilized rows give opposite moderator directions; M2 (self vs other-conditioned soil) is carried beside M1 for that reading",
+    "id": "M1",
+    "known_limits": [
+     "the model has one mutualist pool and no pathogen pool, so M1 cannot go negative except through b < 0 (B1)",
+     "the sterilised arm keeps fungal necromass as fast litter (a nutrient flush)",
+     "Response (aboveground / total biomass) is one pool here"
+    ],
+    "statement": "PSF log ratio rr is read as the network-effect log ratio: ln(focal biomass on its own conditioned soil with the fungal pool intact / on the same soil with the fungal pool moved to fast litter). Run-1 analogue.",
+    "status": "ASSUMPTION, PROPOSED"
+   },
+   "model_direction": "negative",
+   "model_direction_M2": "NOT RECORDED",
+   "model_summary": {
+    "E_where_M1_changes_sign": 0.4270209403160623,
+    "E_where_b_changes_sign": 0.7499999999999999,
+    "M1_at_E0": 0.005207483773468162,
+    "M1_at_E1": -0.00917769269237942,
+    "M2_shape_vs_E": "decreasing",
+    "diff_vs_anchor_M1": [
+     0.0,
+     -0.001424261337782735,
+     -0.002921654116276858,
+     -0.004505572970132593,
+     -0.006192179361402596,
+     -0.008000550708832061,
+     -0.009952548368517566,
+     -0.012072292420117153,
+     -0.014385176465847582
+    ],
+    "shape_M1_vs_E": "decreasing"
+   },
+   "per_column": {
+    "AI": {
+     "direction": "negative",
+     "estimate": -0.23782431973956833,
+     "interval": [
+      -0.33421212016735946,
+      -0.1271195885624885
+     ],
+     "interval_excludes_zero": true,
+     "interval_level": 0.8,
+     "model_and_fit_agree": true,
+     "model_direction": "negative",
+     "n_rows": 3707,
+     "n_studies": 155,
+     "quantity": "rr ~ AI",
+     "rows_dropped": 0
+    },
+    "MAP": {
+     "direction": "negative",
+     "estimate": -0.11644701576574666,
+     "interval": [
+      -0.22359998102744807,
+      -0.011751725988985603
+     ],
+     "interval_excludes_zero": true,
+     "interval_level": 0.8,
+     "model_and_fit_agree": true,
+     "model_direction": "negative",
+     "n_rows": 3707,
+     "n_studies": 155,
+     "quantity": "rr ~ MAP per 1000 mm",
+     "rows_dropped": 0
+    }
+   },
+   "tag": null
+  },
+  "B2": {
+   "assumptions": [
+    {
+     "assumption": "one model year = 12 Phase2.time units (months)",
+     "failure_signature": "the modelled lag sits at a time scale the data never samples",
+     "id": "A1"
+    },
+    {
+     "assumption": "the response is read as |rr| under M1 at the end of phase 2",
+     "failure_signature": "sign changes with duration cancel in the mean while |rr| moves",
+     "id": "A2"
+    },
+    {
+     "assumption": "the conditioned soil does not change with phase-2 duration (same phase 1 for all T)",
+     "failure_signature": "long experiments differ from short ones in phase-1 method, not duration",
+     "id": "A3"
+    },
+    {
+     "assumption": "no fire in phase 2",
+     "failure_signature": "none expected in pots; field rows with burns would break it",
+     "id": "A4"
+    }
+   ],
+   "atom": "lag / slow response",
+   "change": "phase-2 duration T varied over [0.5, 1, 2, 3, 6, 12, 24, 36] months; nothing else",
+   "closure": {
+    "C": "not checkable (VOID in the base model)",
+    "N": {
+     "max_abs_misclosure": 5.151434834260726e-13,
+     "state": "pass"
+    },
+    "P": "not checkable (VOID in the base model)",
+    "energy": "not checkable (VOID in the base model)",
+    "sims_audited": 200,
+    "sims_not_closed": 0,
+    "water": {
+     "max_abs_misclosure": 5.806466418789569e-14,
+     "state": "pass"
+    }
+   },
+   "column": [
+    "Phase2.time"
+   ],
+   "crowding": "NOT RECORDED",
+   "crowding_basis": "probe not run: no tool-less fresh chat was available to this session; a sub-agent given only the question keeps file and network access to the repository, including the holdout files this run may not read",
+   "direction": {
+    "Phase2.time": "positive"
+   },
+   "interval": {
+    "Phase2.time": [
+     -0.003983978165279944,
+     0.0075999942403195886
+    ]
+   },
+   "kind": "branch",
+   "mapping": {
+    "failure_signature": "Self-Other rows and Self-Sterilized rows give opposite moderator directions; M2 (self vs other-conditioned soil) is carried beside M1 for that reading",
+    "id": "M1",
+    "known_limits": [
+     "the model has one mutualist pool and no pathogen pool, so M1 cannot go negative except through b < 0 (B1)",
+     "the sterilised arm keeps fungal necromass as fast litter (a nutrient flush)",
+     "Response (aboveground / total biomass) is one pool here"
+    ],
+    "statement": "PSF log ratio rr is read as the network-effect log ratio: ln(focal biomass on its own conditioned soil with the fungal pool intact / on the same soil with the fungal pool moved to fast litter). Run-1 analogue.",
+    "status": "ASSUMPTION, PROPOSED"
+   },
+   "model_direction": "positive",
+   "model_direction_M2": "NOT RECORDED",
+   "model_summary": {
+    "absM1_longest": 0.05797749784383175,
+    "absM1_peak_months": 36,
+    "absM1_shortest": 0.0007776290233414973,
+    "diff_vs_anchor_M1": [
+     -0.004429854750126664,
+     -0.0035146585013742493,
+     -0.0006596544666375428,
+     0.0021302092413456866,
+     0.012914183166590711,
+     0.03227259258295474,
+     0.05056058320956235,
+     0.05277001407036359
+    ],
+    "shape_absM1_vs_T": "increasing",
+    "shape_absM2_vs_T": "increasing"
+   },
+   "per_column": {
+    "Phase2.time": {
+     "direction": "positive",
+     "estimate": 0.0019424212507444005,
+     "interval": [
+      -0.003983978165279944,
+      0.0075999942403195886
+     ],
+     "interval_excludes_zero": false,
+     "interval_level": 0.8,
+     "model_and_fit_agree": true,
+     "model_direction": "positive",
+     "n_rows": 3701,
+     "n_studies": 154,
+     "quantity": "|rr| ~ Phase2.time (months)",
+     "rows_dropped": 6
+    }
+   },
+   "tag": null
+  },
+  "B3": {
+   "assumptions": [
+    {
+     "assumption": "greenhouse = focal plant alone in a pot holding POT_V of the plot's soil; field = whole plot with the grass neighbour at INIT",
+     "failure_signature": "the greenhouse minus field difference tracks Phase2.grow (Alone / Competition) and not setting",
+     "id": "A1"
+    },
+    {
+     "assumption": "amounts scale with soil volume; half-saturations K, Kf, Wh are concentrations and scale with it; dep and P0 scale with pot area",
+     "failure_signature": "neighbour part and volume part have opposite signs and the sum hides both",
+     "id": "A2"
+    },
+    {
+     "assumption": "the neighbour is the run_9 grass guild",
+     "failure_signature": "woody neighbours in field rows change the competition term",
+     "id": "A3"
+    },
+    {
+     "assumption": "light ceiling KT is not rescaled for the pot",
+     "failure_signature": "pot-bound plants hit a ceiling the model does not have",
+     "id": "A4"
+    }
+   ],
+   "atom": "instrument boundary",
+   "change": "phase-2 boundary: neighbour count (3.0 -> 0) and soil volume (1 -> 0.3)",
+   "closure": {
+    "C": "not checkable (VOID in the base model)",
+    "N": {
+     "max_abs_misclosure": 5.151434834260726e-13,
+     "state": "pass"
+    },
+    "P": "not checkable (VOID in the base model)",
+    "energy": "not checkable (VOID in the base model)",
+    "sims_audited": 100,
+    "sims_not_closed": 0,
+    "water": {
+     "max_abs_misclosure": 5.806466418789569e-14,
+     "state": "pass"
+    }
+   },
+   "column": [
+    "Experimental.setting"
+   ],
+   "crowding": "NOT RECORDED",
+   "crowding_basis": "probe not run: no tool-less fresh chat was available to this session; a sub-agent given only the question keeps file and network access to the repository, including the holdout files this run may not read",
+   "direction": {
+    "Experimental.setting": "negative"
+   },
+   "interval": {
+    "Experimental.setting": [
+     -0.1289293040360282,
+     0.11545196870488564
+    ]
+   },
+   "kind": "branch",
+   "mapping": {
+    "failure_signature": "Self-Other rows and Self-Sterilized rows give opposite moderator directions; M2 (self vs other-conditioned soil) is carried beside M1 for that reading",
+    "id": "M1",
+    "known_limits": [
+     "the model has one mutualist pool and no pathogen pool, so M1 cannot go negative except through b < 0 (B1)",
+     "the sterilised arm keeps fungal necromass as fast litter (a nutrient flush)",
+     "Response (aboveground / total biomass) is one pool here"
+    ],
+    "statement": "PSF log ratio rr is read as the network-effect log ratio: ln(focal biomass on its own conditioned soil with the fungal pool intact / on the same soil with the fungal pool moved to fast litter). Run-1 analogue.",
+    "status": "ASSUMPTION, PROPOSED"
+   },
+   "model_direction": "positive",
+   "model_direction_M2": "unresolved (seeds disagree in sign)",
+   "model_summary": {
+    "diff_vs_anchor_M1": {
+     "field (neighbours 3.0, volume 1)": -0.0007114381062662042,
+     "greenhouse (alone, volume 0.3)": -0.0004300675117464882,
+     "neighbours removed only": 0.0,
+     "pot volume only": -0.002174728699367477
+    },
+    "greenhouse_minus_field_M1": 0.000281370594519716,
+    "greenhouse_minus_field_M2": -5.779074904195547e-05,
+    "neighbour_part_M1": 0.0007114381062662042,
+    "volume_part_M1": -0.0014632905931012729
+   },
+   "per_column": {
+    "Experimental.setting": {
+     "direction": "negative",
+     "estimate": -0.010388792323854997,
+     "interval": [
+      -0.1289293040360282,
+      0.11545196870488564
+     ],
+     "interval_excludes_zero": false,
+     "interval_level": 0.8,
+     "model_and_fit_agree": false,
+     "model_direction": "positive",
+     "n_rows": 3707,
+     "n_studies": 155,
+     "quantity": "rr Greenhouse minus Field",
+     "rows_dropped": 0
+    }
+   },
+   "tag": null
+  },
+  "B4": {
+   "assumptions": [
+    {
+     "assumption": "Woody = the tree guild T (pays fungi, slow litter); Nonwoody = the grass guild G (no fungal partner, fast litter)",
+     "failure_signature": "nonwoody rows with strong mycorrhizal response; the difference then reads as partner presence, not litter",
+     "id": "A1"
+    },
+    {
+     "assumption": "a fraction LIG of tree mortality is lignin; a slow guild decays it at K_LIG per yr at full moisture; the pool does not burn",
+     "failure_signature": "the woody reading moves with fire frequency instead of with the pool",
+     "id": "A2"
+    },
+    {
+     "assumption": "grass litter carries no lignin",
+     "failure_signature": "nonwoody reading unchanged by the branch (holds by construction here)",
+     "id": "A3"
+    },
+    {
+     "assumption": "COND_YEARS of conditioning is long enough for the slow pool to matter",
+     "failure_signature": "the branch reading equals the anchor reading within seed range",
+     "id": "A4"
+    }
+   ],
+   "atom": "slow-pool coupling",
+   "change": "lignin pool Ll: 0.4 of tree mortality enters it, slow guild decays it at 0.03/yr",
+   "closure": {
+    "C": "not checkable (VOID in the base model)",
+    "N": {
+     "max_abs_misclosure": 5.506706202140776e-13,
+     "state": "pass"
+    },
+    "P": "not checkable (VOID in the base model)",
+    "energy": "not checkable (VOID in the base model)",
+    "sims_audited": 75,
+    "sims_not_closed": 0,
+    "water": {
+     "max_abs_misclosure": 5.806466418789569e-14,
+     "state": "pass"
+    }
+   },
+   "column": [
+    "Life.form"
+   ],
+   "crowding": "NOT RECORDED",
+   "crowding_basis": "probe not run: no tool-less fresh chat was available to this session; a sub-agent given only the question keeps file and network access to the repository, including the holdout files this run may not read",
+   "direction": {
+    "Life.form": "positive"
+   },
+   "interval": {
+    "Life.form": [
+     0.02017982322842634,
+     0.18154793997154306
+    ]
+   },
+   "kind": "branch",
+   "mapping": {
+    "failure_signature": "Self-Other rows and Self-Sterilized rows give opposite moderator directions; M2 (self vs other-conditioned soil) is carried beside M1 for that reading",
+    "id": "M1",
+    "known_limits": [
+     "the model has one mutualist pool and no pathogen pool, so M1 cannot go negative except through b < 0 (B1)",
+     "the sterilised arm keeps fungal necromass as fast litter (a nutrient flush)",
+     "Response (aboveground / total biomass) is one pool here"
+    ],
+    "statement": "PSF log ratio rr is read as the network-effect log ratio: ln(focal biomass on its own conditioned soil with the fungal pool intact / on the same soil with the fungal pool moved to fast litter). Run-1 analogue.",
+    "status": "ASSUMPTION, PROPOSED"
+   },
+   "model_direction": "positive",
+   "model_direction_M2": "negative",
+   "model_summary": {
+    "base_module_restored": true,
+    "diff_vs_anchor_M1": {
+     "nonwoody_G": 0.0,
+     "woody_T": -0.001954904328917007
+    },
+    "lig0_returns_anchor_M1": 0.0,
+    "nonwoody_G": {
+     "M1_by_seed": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "M1_max": 0.0,
+     "M1_mean": 0.0,
+     "M1_min": 0.0,
+     "M2_by_seed": [
+      0.2665917267558507,
+      0.2393481577986186,
+      0.2351354801843023,
+      0.2567479498880251,
+      0.23333972363405062
+     ],
+     "M2_max": 0.2665917267558507,
+     "M2_mean": 0.24623260765216942,
+     "M2_min": 0.23333972363405062
+    },
+    "woody_T": {
+     "M1_by_seed": [
+      0.003458991199169711,
+      0.0032601324851022095,
+      0.003083106108264147,
+      0.003511440049289251,
+      0.002949227380930455
+     ],
+     "M1_max": 0.003511440049289251,
+     "M1_mean": 0.003252579444551155,
+     "M1_min": 0.002949227380930455,
+     "M2_by_seed": [
+      -0.10621265174234683,
+      -0.09524375252879012,
+      -0.09372065735496948,
+      -0.10209884087302631,
+      -0.09312273311807391
+     ],
+     "M2_max": -0.09312273311807391,
+     "M2_mean": -0.09807972712344135,
+     "M2_min": -0.10621265174234683
+    },
+    "woody_minus_nonwoody_M1": 0.003252579444551155,
+    "woody_minus_nonwoody_M1_anchor": 0.005207483773468162,
+    "woody_minus_nonwoody_M2": -0.34431233477561074,
+    "woody_minus_nonwoody_M2_anchor": -0.3368543987208654
+   },
+   "per_column": {
+    "Life.form": {
+     "direction": "positive",
+     "estimate": 0.10000976579975283,
+     "interval": [
+      0.02017982322842634,
+      0.18154793997154306
+     ],
+     "interval_excludes_zero": true,
+     "interval_level": 0.8,
+     "model_and_fit_agree": true,
+     "model_direction": "positive",
+     "n_rows": 3707,
+     "n_studies": 155,
+     "quantity": "rr Woody minus Nonwoody",
+     "rows_dropped": 0
+    }
+   },
+   "tag": null
+  },
+  "R5": {
+   "assumptions": [
+    {
+     "assumption": "no mechanism; a moderator fit on anchor studies only",
+     "failure_signature": "not applicable",
+     "id": "A1"
+    }
+   ],
+   "atom": "REFERENCE: enemy release",
+   "change": "none; fit only, not a branch",
+   "closure": "not checkable (no model run)",
+   "column": [
+    "Sp.origin"
+   ],
+   "crowding": "NOT RECORDED",
+   "crowding_basis": "not a branch; the order tags R5 a dense reference and asks for no probe",
+   "direction": {
+    "Sp.origin": "positive"
+   },
+   "interval": {
+    "Sp.origin": [
+     0.04381907716259804,
+     0.23887693607909996
+    ]
+   },
+   "kind": "reference",
+   "mapping": "none (fit only)",
+   "model_direction": "NOT RECORDED (no model run; enemy release is not in run_9)",
+   "model_direction_M2": "NOT RECORDED",
+   "model_summary": null,
+   "per_column": {
+    "Sp.origin": {
+     "direction": "positive",
+     "estimate": 0.13751075510642874,
+     "interval": [
+      0.04381907716259804,
+      0.23887693607909996
+     ],
+     "interval_excludes_zero": true,
+     "interval_level": 0.8,
+     "model_and_fit_agree": null,
+     "model_direction": "NOT RECORDED (no model run; enemy release is not in run_9)",
+     "n_rows": 3707,
+     "n_studies": 155,
+     "quantity": "rr Non-native minus Native",
+     "rows_dropped": 0
+    }
+   },
+   "tag": "dense reference, no run_9 mechanism"
+  }
+ },
+ "record": "forest-model-ledger holdout Phase B predictions"
+}
