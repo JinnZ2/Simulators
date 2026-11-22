@@ -172,8 +172,8 @@ no field holds a function of both.
 
 ## 6. Welds to state
 
-[co-authored] From chat Claude's audit of the arXiv abstract (DERIVED). A weld here is a place
-where two different things travel under one word.
+[co-authored] From chat Claude's audit of the arXiv abstract (DERIVED).
+A weld here is a place where two different things travel under one word.
 
     1  corpus = one field       Their corpus is one field. An atom absent
                                 from a corpus cannot be sampled from it.
