@@ -5,6 +5,7 @@ EXPLORATORY.  It fits nothing, scores nothing and tests no prediction.
     python3 ledger/toolkit/denominator_sorter.py --gate
     python3 ledger/toolkit/denominator_sorter.py run SOURCE_CSV
     python3 ledger/toolkit/denominator_sorter.py addendum SOURCE_CSV
+    python3 ledger/toolkit/denominator_sorter.py power SOURCE_CSV
 
 A study's DENOMINATOR SIGNATURE is read from seven recorded columns:
     Experimental.setting, Phase2.time (binned), Approach (control type),
@@ -58,6 +59,17 @@ AMENDED ADDENDUM (2026-11-22, replaces the first):
   power   the lab test runs only on groups with >= MIN_LAB_STUDIES studies
           (chosen, no external source); smaller groups read
           "underpowered, not tested".
+
+POWER CURVE (2026-11-22, after the lab gate failed twice):
+  random planted effects can fall near zero; pass/fail at one size cannot
+  separate tool failure from low power.  So the lab test is characterised
+  on synthetic groups instead: k studies of 15 rows, row noise as in the
+  failed gate, lab effects FIXED (equally spaced, centred, scaled to the
+  stated sd), 50 seeds per cell, flag rule unchanged.  RULE, declared
+  before any real group is read: the real lab test runs only on group
+  sizes with detection >= 0.8 at sd 0.2 and false-flag <= 0.05; other
+  groups read "underpowered at this size", tag NOT RECORDED.  A real
+  group of k studies is read at the largest tested size <= k.
 
 `run` and `--gate` use the standard library only.  `addendum` imports
 missing_column_finder (numpy) and uses its eta2, tau2_intercept, _codes,
@@ -350,6 +362,68 @@ def lab_gate(seeds=(0, 1, 2, 3, 4), verbose=True):
     return ok, lines
 
 
+# ---------------------------------------------------------------- power curve
+POWER_K = [2, 3, 4, 5, 8]
+POWER_SD = [0.05, 0.1, 0.2, 0.4]       # chosen, no external source
+POWER_SEEDS = 50
+POWER_ROWS = 15
+RULE_SD, RULE_DETECT, RULE_FALSE = 0.2, 0.8, 0.05
+
+
+def fixed_effects(k, sd):
+    """k lab effects, equally spaced, mean 0, population sd exactly sd."""
+    if sd == 0:
+        return [0.0] * k
+    base = [i - (k - 1) / 2.0 for i in range(k)]
+    s = (sum(b * b for b in base) / k) ** 0.5
+    return [b / s * sd for b in base]
+
+
+def power_cell(k, sd, seeds=POWER_SEEDS):
+    import numpy as np
+    hits = 0
+    for seed in range(seeds):
+        rng = np.random.default_rng(100000 * k + 1000 * int(round(sd * 100)) + seed)
+        rows = []
+        for s, eff in enumerate(fixed_effects(k, sd)):
+            for _ in range(POWER_ROWS):
+                var = rng.uniform(0.01, 0.1)
+                rows.append({"Author": "S%d" % s, "var": "%.6f" % var,
+                             "rr": "%.6f" % (eff + rng.normal(0, var ** 0.5))})
+        hits += bool(lab_test(rows, 7000 + seed).get("flag", False))
+    return hits / seeds
+
+
+def power_curve():
+    return {k: {sd: power_cell(k, sd) for sd in [0.0] + POWER_SD} for k in POWER_K}
+
+
+def qualifies(curve, k):
+    return curve[k][RULE_SD] >= RULE_DETECT and curve[k][0.0] <= RULE_FALSE
+
+
+def size_for(n_studies):
+    """Largest tested size not above the real group's study count."""
+    below = [k for k in POWER_K if k <= n_studies]
+    return max(below) if below else None
+
+
+def power_lab_table(units, curve, perm_base):
+    groups, _ = group_units(units)
+    out = []
+    order = sorted(groups, key=lambda key: (-len({units[u][1] for u in groups[key]}), key))
+    for i, key in enumerate(order):
+        uids = groups[key]
+        nst = len({units[u][1] for u in uids})
+        grows = [r for u in uids for r in units[u][2]]
+        k = size_for(nst)
+        if k is None or not qualifies(curve, k):
+            out.append((key, nst, len(grows), {"state": "underpowered at this size"}))
+        else:
+            out.append((key, nst, len(grows), lab_test(grows, perm_base + i)))
+    return out
+
+
 # ----------------------------------------------------------------------- gate
 _LEVELS = {"Experimental.setting": ["Greenhouse", "Field"], "Approach": ["Self-Other", "Self-Sterilized"],
            "Phase1.culti": ["Monoculture", "Community"], "SoilTp": ["Whole soil", "Inoculum"],
@@ -430,6 +504,63 @@ def main():
     a = sys.argv[1:]
     if a == ["--gate"]:
         raise SystemExit(0 if gate()[0] else 1)
+    if len(a) == 2 and a[0] == "power":
+        import os
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import missing_column_finder as mcf
+        if not gate()[0]:
+            raise SystemExit("GATE FAIL: not run")
+        print("POWER CURVE (synthetic only): %d rows per study, %d seeds per cell, flag rule unchanged"
+              % (POWER_ROWS, POWER_SEEDS))
+        curve = power_curve()
+        print("  detection rate, lab effects fixed at spread sd")
+        print("  k studies   " + "   ".join("sd %.2f" % s for s in POWER_SD) + "   false-flag (pure noise)")
+        for k in POWER_K:
+            print("  %9d   " % k + "   ".join("%7.2f" % curve[k][s] for s in POWER_SD)
+                  + "   %7.2f" % curve[k][0.0])
+        print("RULE (declared before real data): detection >= %.1f at sd %.1f and false-flag <= %.2f"
+              % (RULE_DETECT, RULE_SD, RULE_FALSE))
+        ok_k = [k for k in POWER_K if qualifies(curve, k)]
+        print("  qualifying sizes: %s ; a real group of k studies is read at the largest tested size <= k"
+              % (", ".join(map(str, ok_k)) or "none"))
+        if not ok_k:
+            print("RESULT: no group size qualifies, so no real group qualifies. The lab test is not run.")
+            return
+        raw = open(a[1], "rb").read()
+        if hashlib.sha256(raw).hexdigest() != SOURCE_SHA:
+            raise SystemExit("source sha256 mismatch: not run")
+        allrows = list(csv.DictReader(io.StringIO(raw.decode("utf-8", errors="replace"), newline="")))
+        sides = [("anchor (<= 2018)", [r for r in allrows if int(r["Year"]) <= CUTOFF_YEAR]),
+                 ("holdout (> 2018)", [r for r in allrows if int(r["Year"]) > CUTOFF_YEAR]),
+                 ("pooled", allrows)]
+        any_real = False
+        for name, rows in sides:
+            for lvl, mk in (("study", study_units), ("arm", arm_units)):
+                table = power_lab_table(mk(rows), curve, mcf.PERM_SEED)
+                tested = [x for x in table if x[3]["state"] == "tested"]
+                any_real |= bool(tested)
+                flagged = [x for x in tested if x[3]["flag"]]
+                under = sum(x[3]["state"].startswith("underpowered") for x in table)
+                thin = sum(x[2] < POWER_ROWS * x[1] for x in tested)
+                print("\n%s, %s level: %d groups; %d tested; %d underpowered at this size; "
+                      "%d not checkable (rows barely exceed studies); %d flagged"
+                      % (name, lvl, len(table), len(tested), under,
+                         len(table) - len(tested) - under, len(flagged)))
+                print("  tested groups with fewer than %d rows per study (thinner than the power curve's groups): "
+                      "%d of %d ; flagged among them: %d"
+                      % (POWER_ROWS, thin, len(tested), sum(x[2] < POWER_ROWS * x[1] for x in flagged)))
+                show = tested if name == "pooled" else flagged
+                if show:
+                    print("  %s" % ("every tested group:" if name == "pooled" else "flagged groups only:"))
+                    print("  studies   rows   lab share  null mean  null max   excess   tag / signature")
+                for key, nst, nrows, r_ in show:
+                    print("  %5d  %6d   %8.3f   %8.3f  %8.3f  %+7.3f   %s"
+                          % (nst, nrows, r_["share"], r_["null_mean"], r_["null_max"], r_["excess"],
+                             "signature-matched, protocol-unmatched" if r_["flag"] else "not flagged"))
+                    print("        %s" % " | ".join(key))
+        if not any_real:
+            print("\nRESULT: no real group qualifies. The lab test is not run.")
+        return
     if len(a) == 2 and a[0] == "addendum":
         import os
         sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))

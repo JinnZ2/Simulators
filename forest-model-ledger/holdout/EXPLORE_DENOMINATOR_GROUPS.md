@@ -480,6 +480,11 @@ at fault (plant fixed, separated lab effects), or the test is too weak
 at scope-group size to be trusted on groups of 2 to 10 studies. Most
 real groups hold 2 or 3 studies, smaller than the gate's 4.
 
+Dated note 2026-11-22, reason for the redesign in section 10: "random
+planted effects can fall near zero; pass/fail at one size cannot
+separate tool failure from low power." The failed gate result above is
+kept as run.
+
 ## 9. Amended addendum (2026-11-22): arms, field drops, power-gated lab test
 
 Dated note: this addendum replaces the first one. Section 8 is kept as
@@ -612,6 +617,347 @@ is.
 
     4 slots per study: lab_institution, lab_country, governance_regime ; NOT RECORDED on 202 of 202 studies ; expiry_condition: filled from each paper's affiliations and methods
 
+## 10. Lab test power curve, then the real lab test (2026-11-22)
+
+Printed by `python3 ledger/toolkit/denominator_sorter.py power
+SOURCE_CSV` and pasted by script. Synthetic first; the rule was fixed in
+the order before any real group was read.
+
+    synthetic groups   k studies of 15 rows; row variance uniform on
+                       0.01 to 0.1, as in the failed gate
+    lab effects        FIXED: equally spaced, centred, scaled to the
+                       stated spread sd (for k = 2 that is +sd and -sd)
+    cells              50 seeds each; flag rule unchanged
+    constants          the sizes, the four sd values, 0.8 and 0.05 are
+                       chosen, no external source
+
+    POWER CURVE (synthetic only): 15 rows per study, 50 seeds per cell, flag rule unchanged
+      detection rate, lab effects fixed at spread sd
+      k studies   sd 0.05   sd 0.10   sd 0.20   sd 0.40   false-flag (pure noise)
+              2      0.08      0.24      0.90      1.00      0.00
+              3      0.04      0.30      0.94      1.00      0.00
+              4      0.04      0.50      1.00      1.00      0.00
+              5      0.06      0.40      1.00      1.00      0.00
+              8      0.04      0.80      1.00      1.00      0.00
+    RULE (declared before real data): detection >= 0.8 at sd 0.2 and false-flag <= 0.05
+      qualifying sizes: 2, 3, 4, 5, 8 ; a real group of k studies is read at the largest tested size <= k
+
+[OBSERVED] Every tested size qualifies, including k = 2 (detection 0.90
+at sd 0.2). No false flag in 250 pure-noise groups. At sd 0.1 detection
+is between 0.24 and 0.80 and at sd 0.05 it is near the false-flag
+floor: the test does not see lab differences that small at these sizes.
+
+[DERIVED] This settles the two gate failures in sections 8.2 and 9.3 as
+low power on one draw, not a fault in the test: that draw planted lab
+effects near zero.
+
+Scope of the curve, which the rule does not cover: it was run at 15
+rows per study. Many real groups are thinner. Each table below counts
+the tested groups under 15 rows per study; for those, a non-flag says
+less than the curve suggests. A flag does not depend on the curve (the
+false-flag rate is what backs it).
+
+### 10.1 Real lab test
+
+Spread is taken about each group's mean, with no column fitted first
+(section 8.2 gives the reason). Pooled tables list every tested group;
+side tables list flagged groups only, with the counts for the rest.
+
+    anchor (<= 2018), study level: 35 groups; 33 tested; 0 underpowered at this size; 2 not checkable (rows barely exceed studies); 2 flagged
+      tested groups with fewer than 15 rows per study (thinner than the power curve's groups): 16 of 33 ; flagged among them: 0
+      flagged groups only:
+      studies   rows   lab share  null mean  null max   excess   tag / signature
+          6     465      0.388      0.010     0.040   +0.378   signature-matched, protocol-unmatched
+            Greenhouse | <=3mo | Self-Other | Monoculture | Inoculum | Competition | Aboveground
+          2      60      0.197      0.018     0.163   +0.179   signature-matched, protocol-unmatched
+            Greenhouse | <=3mo | Self-Other+Self-Sterilized | Monoculture | Whole soil | Competition | Total_biomass
+
+    anchor (<= 2018), arm level: 57 groups; 54 tested; 0 underpowered at this size; 3 not checkable (rows barely exceed studies); 7 flagged
+      tested groups with fewer than 15 rows per study (thinner than the power curve's groups): 38 of 54 ; flagged among them: 2
+      flagged groups only:
+      studies   rows   lab share  null mean  null max   excess   tag / signature
+         11     701      0.293      0.014     0.043   +0.279   signature-matched, protocol-unmatched
+            Greenhouse | <=3mo | Self-Other | Monoculture | Inoculum | Competition | Aboveground
+          9     445      0.077      0.020     0.068   +0.057   signature-matched, protocol-unmatched
+            Greenhouse | <=3mo | Self-Other | Monoculture | Inoculum | Alone | Aboveground
+          6     141      0.467      0.039     0.173   +0.428   signature-matched, protocol-unmatched
+            Greenhouse | <=3mo | Self-Other | Monoculture | Whole soil | Competition | Total_biomass
+          5      60      0.598      0.059     0.574   +0.539   signature-matched, protocol-unmatched
+            Greenhouse | <=3mo | Self-Other | Monoculture | Inoculum | Alone | Total_biomass
+          4      76      0.223      0.042     0.196   +0.180   signature-matched, protocol-unmatched
+            Greenhouse | 6-12mo | Self-Other | Community | Inoculum | Alone | Aboveground
+          2      22      0.449      0.042     0.381   +0.407   signature-matched, protocol-unmatched
+            Greenhouse | <=3mo | Self-Sterilized | Monoculture | Whole soil | Competition | Total_biomass
+          2      39      0.225      0.024     0.161   +0.201   signature-matched, protocol-unmatched
+            Greenhouse | >12mo | Self-Other | Monoculture | Whole soil | Competition | Aboveground
+
+    holdout (> 2018), study level: 6 groups; 6 tested; 0 underpowered at this size; 0 not checkable (rows barely exceed studies); 2 flagged
+      tested groups with fewer than 15 rows per study (thinner than the power curve's groups): 1 of 6 ; flagged among them: 0
+      flagged groups only:
+      studies   rows   lab share  null mean  null max   excess   tag / signature
+          3     111      0.277      0.018     0.099   +0.259   signature-matched, protocol-unmatched
+            Greenhouse | <=3mo | Self-Other | Monoculture | Whole soil | Alone | Total_biomass
+          2      75      0.349      0.011     0.104   +0.338   signature-matched, protocol-unmatched
+            Greenhouse | >12mo | Self-Other | Community | Inoculum | Alone | Total_biomass
+
+    holdout (> 2018), arm level: 18 groups; 18 tested; 0 underpowered at this size; 0 not checkable (rows barely exceed studies); 3 flagged
+      tested groups with fewer than 15 rows per study (thinner than the power curve's groups): 10 of 18 ; flagged among them: 1
+      flagged groups only:
+      studies   rows   lab share  null mean  null max   excess   tag / signature
+          3      36      0.394      0.060     0.394   +0.334   signature-matched, protocol-unmatched
+            Greenhouse | <=3mo | Self-Other | Monoculture | Inoculum | Alone | Total_biomass
+          3     111      0.277      0.017     0.138   +0.259   signature-matched, protocol-unmatched
+            Greenhouse | <=3mo | Self-Other | Monoculture | Whole soil | Alone | Total_biomass
+          2      75      0.349      0.011     0.166   +0.338   signature-matched, protocol-unmatched
+            Greenhouse | >12mo | Self-Other | Community | Inoculum | Alone | Total_biomass
+
+    pooled, study level: 43 groups; 42 tested; 0 underpowered at this size; 1 not checkable (rows barely exceed studies); 6 flagged
+      tested groups with fewer than 15 rows per study (thinner than the power curve's groups): 22 of 42 ; flagged among them: 0
+      every tested group:
+      studies   rows   lab share  null mean  null max   excess   tag / signature
+         10     275      0.210      0.030     0.118   +0.180   signature-matched, protocol-unmatched
+            Greenhouse | <=3mo | Self-Other | Monoculture | Whole soil | Alone | Total_biomass
+          7     240      0.015      0.024     0.069   -0.009   not flagged
+            Greenhouse | <=3mo | Self-Other | Monoculture | Whole soil | Alone | Aboveground
+          6     465      0.388      0.010     0.042   +0.377   signature-matched, protocol-unmatched
+            Greenhouse | <=3mo | Self-Other | Monoculture | Inoculum | Competition | Aboveground
+          6     496      0.084      0.010     0.050   +0.074   signature-matched, protocol-unmatched
+            Greenhouse | <=3mo | Self-Other+Self-Sterilized | Monoculture | Inoculum | Alone | Aboveground
+          5      19      0.347      0.198     0.779   +0.149   not flagged
+            Greenhouse | 3-6mo | Self-Other | Monoculture | Whole soil | Alone | Total_biomass
+          4      29      0.160      0.095     0.370   +0.065   not flagged
+            Greenhouse | <=3mo | Self-Other | Monoculture | Inoculum | Alone | Aboveground
+          3       5      0.438      0.478     0.993   -0.041   not flagged
+            Field | >12mo | Self-Other | Community | Whole soil | Competition | Aboveground
+          3      60      0.004      0.034     0.137   -0.029   not flagged
+            Greenhouse | 3-6mo | Self-Other | Community | Whole soil | Alone | Total_biomass
+          3      30      0.018      0.076     0.423   -0.058   not flagged
+            Greenhouse | 3-6mo | Self-Other | Community | Whole soil | Competition | Total_biomass
+          3      58      0.288      0.036     0.208   +0.252   signature-matched, protocol-unmatched
+            Greenhouse | 3-6mo | Self-Other+Self-Sterilized | Community | Inoculum | Alone | Total_biomass
+          3      48      0.018      0.045     0.289   -0.028   not flagged
+            Greenhouse | <=3mo | Self-Other | Community | Inoculum | Alone | Total_biomass
+          3     382      0.018      0.005     0.026   +0.013   not flagged
+            Greenhouse | <=3mo | Self-Other | Monoculture | Whole soil | Competition | Aboveground
+          3     113      0.040      0.020     0.114   +0.020   not flagged
+            Greenhouse | <=3mo | Self-Other+Self-Sterilized | Monoculture | Inoculum | Alone | Total_biomass
+          3     256      0.011      0.009     0.075   +0.002   not flagged
+            Greenhouse | <=3mo | Self-Other+Self-Sterilized | Monoculture | Inoculum | Competition | Aboveground
+          3      26      0.078      0.082     0.388   -0.004   not flagged
+            Greenhouse | <=3mo | Self-Other+Self-Sterilized | Monoculture | Whole soil | Alone | Total_biomass
+          3       6      0.862      0.371     0.862   +0.491   not flagged
+            Greenhouse | <=3mo | Self-Sterilized | Monoculture | Inoculum | Alone | Total_biomass
+          2       8      0.324      0.161     0.614   +0.163   not flagged
+            Field | 3-6mo | Self-Other | Community | Whole soil | Alone+Competition | Aboveground
+          2      20      0.006      0.057     0.521   -0.050   not flagged
+            Field | 3-6mo | Self-Other | Community | Whole soil | Competition | Aboveground
+          2      42      0.095      0.028     0.265   +0.067   not flagged
+            Field | 3-6mo | Self-Other | Monoculture | Whole soil | Alone | Aboveground
+          2      24      0.001      0.045     0.405   -0.044   not flagged
+            Field | >12mo | Self-Other | Monoculture | Whole soil | Competition | Aboveground
+          2      14      0.002      0.086     0.478   -0.084   not flagged
+            Greenhouse | 3-6mo | Self-Other | Community | Inoculum | Alone | Aboveground
+          2      14      0.016      0.076     0.622   -0.060   not flagged
+            Greenhouse | 3-6mo | Self-Other | Community | Inoculum | Competition | Aboveground
+          2      66      0.038      0.011     0.106   +0.027   not flagged
+            Greenhouse | 3-6mo | Self-Other | Monoculture | Inoculum | Alone | Total_biomass
+          2      28      0.049      0.040     0.329   +0.009   not flagged
+            Greenhouse | 3-6mo | Self-Other+Self-Sterilized | Community | Inoculum | Alone | Aboveground
+          2      20      0.366      0.045     0.552   +0.320   not flagged
+            Greenhouse | 3-6mo | Self-Other+Self-Sterilized | Monoculture | Inoculum | Competition | Aboveground
+          2      77      0.006      0.014     0.129   -0.008   not flagged
+            Greenhouse | 6-12mo | Self-Other | Community | Whole soil | Competition | Aboveground
+          2      10      0.253      0.113     0.477   +0.139   not flagged
+            Greenhouse | 6-12mo | Self-Other | Monoculture | Whole soil | Alone | Aboveground
+          2       6      0.912      0.203     0.912   +0.709   not flagged
+            Greenhouse | 6-12mo | Self-Other | Monoculture | Whole soil | Competition | Aboveground
+          2      88      0.000      0.013     0.093   -0.013   not flagged
+            Greenhouse | 6-12mo | Self-Other+Self-Sterilized | Community | Inoculum | Alone | Aboveground
+          2       6      0.232      0.199     0.658   +0.034   not flagged
+            Greenhouse | 6-12mo | Self-Other+Self-Sterilized | Community | Whole soil | Alone | Aboveground
+          2      54      0.028      0.020     0.161   +0.008   not flagged
+            Greenhouse | <=3mo | Self-Other | Monoculture | Inoculum | Competition | Total_biomass
+          2      54      0.017      0.017     0.135   +0.000   not flagged
+            Greenhouse | <=3mo | Self-Other | Monoculture | Whole soil | Alone+Competition | Aboveground
+          2     174      0.015      0.005     0.054   +0.010   not flagged
+            Greenhouse | <=3mo | Self-Other | Monoculture | Whole soil | Alone+Competition | Total_biomass
+          2      22      0.391      0.040     0.391   +0.351   not flagged
+            Greenhouse | <=3mo | Self-Other | Monoculture | Whole soil | Competition | Total_biomass
+          2      18      0.221      0.050     0.476   +0.171   not flagged
+            Greenhouse | <=3mo | Self-Other+Self-Sterilized | Community | Inoculum | Alone | Total_biomass
+          2      10      0.174      0.113     0.654   +0.061   not flagged
+            Greenhouse | <=3mo | Self-Other+Self-Sterilized | Community | Whole soil | Alone | Aboveground
+          2      16      0.000      0.071     0.748   -0.071   not flagged
+            Greenhouse | <=3mo | Self-Other+Self-Sterilized | Monoculture | Whole soil | Competition | Aboveground
+          2      60      0.197      0.017     0.194   +0.180   signature-matched, protocol-unmatched
+            Greenhouse | <=3mo | Self-Other+Self-Sterilized | Monoculture | Whole soil | Competition | Total_biomass
+          2       5      0.640      0.228     0.640   +0.412   not flagged
+            Greenhouse | <=3mo | Self-Sterilized | Community | Whole soil | Competition | Total_biomass
+          2      26      0.192      0.038     0.302   +0.154   not flagged
+            Greenhouse | <=3mo+3-6mo | Self-Other | Monoculture | Inoculum | Alone | Aboveground
+          2      75      0.349      0.010     0.110   +0.339   signature-matched, protocol-unmatched
+            Greenhouse | >12mo | Self-Other | Community | Inoculum | Alone | Total_biomass
+          2      39      0.225      0.028     0.265   +0.197   not flagged
+            Greenhouse | >12mo | Self-Other | Monoculture | Whole soil | Competition | Aboveground
+
+    pooled, arm level: 66 groups; 65 tested; 0 underpowered at this size; 1 not checkable (rows barely exceed studies); 13 flagged
+      tested groups with fewer than 15 rows per study (thinner than the power curve's groups): 44 of 65 ; flagged among them: 6
+      every tested group:
+      studies   rows   lab share  null mean  null max   excess   tag / signature
+         15     388      0.206      0.031     0.081   +0.175   signature-matched, protocol-unmatched
+            Greenhouse | <=3mo | Self-Other | Monoculture | Whole soil | Alone | Total_biomass
+         14     591      0.076      0.022     0.063   +0.054   signature-matched, protocol-unmatched
+            Greenhouse | <=3mo | Self-Other | Monoculture | Inoculum | Alone | Aboveground
+         13     293      0.122      0.039     0.105   +0.084   signature-matched, protocol-unmatched
+            Greenhouse | <=3mo | Self-Other | Monoculture | Whole soil | Alone | Aboveground
+         12     883      0.258      0.012     0.049   +0.246   signature-matched, protocol-unmatched
+            Greenhouse | <=3mo | Self-Other | Monoculture | Inoculum | Competition | Aboveground
+         11      75      0.474      0.139     0.437   +0.336   signature-matched, protocol-unmatched
+            Greenhouse | <=3mo | Self-Sterilized | Monoculture | Inoculum | Alone | Total_biomass
+          8      52      0.648      0.139     0.627   +0.509   signature-matched, protocol-unmatched
+            Greenhouse | 3-6mo | Self-Other | Community | Inoculum | Alone | Aboveground
+          8      96      0.577      0.060     0.447   +0.517   signature-matched, protocol-unmatched
+            Greenhouse | <=3mo | Self-Other | Monoculture | Inoculum | Alone | Total_biomass
+          8      48      0.500      0.166     0.593   +0.335   not flagged
+            Greenhouse | <=3mo | Self-Sterilized | Monoculture | Inoculum | Alone | Aboveground
+          7      24      0.443      0.236     0.670   +0.208   not flagged
+            Greenhouse | 3-6mo | Self-Other | Monoculture | Whole soil | Alone | Total_biomass
+          7      64      0.092      0.097     0.310   -0.005   not flagged
+            Greenhouse | <=3mo | Self-Other | Community | Inoculum | Alone | Total_biomass
+          7     438      0.026      0.013     0.048   +0.013   not flagged
+            Greenhouse | <=3mo | Self-Other | Monoculture | Whole soil | Competition | Aboveground
+          6      32      0.328      0.160     0.519   +0.168   not flagged
+            Greenhouse | 3-6mo | Self-Sterilized | Community | Inoculum | Alone | Aboveground
+          6     141      0.467      0.039     0.200   +0.428   signature-matched, protocol-unmatched
+            Greenhouse | <=3mo | Self-Other | Monoculture | Whole soil | Competition | Total_biomass
+          6      62      0.171      0.082     0.341   +0.089   not flagged
+            Greenhouse | <=3mo | Self-Sterilized | Monoculture | Inoculum | Competition | Aboveground
+          5     296      0.046      0.012     0.063   +0.034   not flagged
+            Field | >12mo | Self-Other | Monoculture | Whole soil | Competition | Aboveground
+          5     103      0.028      0.039     0.282   -0.011   not flagged
+            Greenhouse | 3-6mo | Self-Other | Monoculture | Inoculum | Alone | Aboveground
+          5     157      0.016      0.015     0.247   +0.001   not flagged
+            Greenhouse | 3-6mo | Self-Other | Monoculture | Inoculum | Alone | Total_biomass
+          5      94      0.217      0.047     0.196   +0.170   signature-matched, protocol-unmatched
+            Greenhouse | 6-12mo | Self-Other | Community | Inoculum | Alone | Aboveground
+          5      26      0.413      0.155     0.586   +0.258   not flagged
+            Greenhouse | <=3mo | Self-Sterilized | Community | Inoculum | Alone | Total_biomass
+          4      24      0.270      0.138     0.782   +0.132   not flagged
+            Field | 3-6mo | Self-Other | Community | Whole soil | Competition | Aboveground
+          4      25      0.494      0.115     0.802   +0.379   not flagged
+            Field | >12mo | Self-Other | Community | Whole soil | Competition | Aboveground
+          4      47      0.347      0.063     0.323   +0.284   signature-matched, protocol-unmatched
+            Greenhouse | 3-6mo | Self-Other | Community | Inoculum | Alone | Total_biomass
+          4      61      0.007      0.050     0.185   -0.042   not flagged
+            Greenhouse | 3-6mo | Self-Other | Community | Whole soil | Alone | Total_biomass
+          4     268      0.030      0.011     0.061   +0.019   not flagged
+            Greenhouse | 3-6mo | Self-Other | Monoculture | Inoculum | Competition | Aboveground
+          4      13      0.196      0.251     0.884   -0.055   not flagged
+            Greenhouse | 3-6mo | Self-Sterilized | Community | Inoculum | Alone | Total_biomass
+          4      35      0.401      0.079     0.582   +0.322   not flagged
+            Greenhouse | 3-6mo | Self-Sterilized | Monoculture | Inoculum | Alone | Total_biomass
+          4      65      0.109      0.049     0.250   +0.059   not flagged
+            Greenhouse | <=3mo | Self-Other | Monoculture | Inoculum | Competition | Total_biomass
+          4      21      0.551      0.155     0.502   +0.395   signature-matched, protocol-unmatched
+            Greenhouse | <=3mo | Self-Sterilized | Monoculture | Inoculum | Competition | Total_biomass
+          4      12      0.685      0.274     0.791   +0.412   not flagged
+            Greenhouse | <=3mo | Self-Sterilized | Monoculture | Whole soil | Alone | Total_biomass
+          3      22      0.029      0.088     0.516   -0.059   not flagged
+            Greenhouse | 3-6mo | Self-Other | Community | Inoculum | Competition | Aboveground
+          3      30      0.018      0.067     0.415   -0.049   not flagged
+            Greenhouse | 3-6mo | Self-Other | Community | Whole soil | Competition | Total_biomass
+          3      18      0.298      0.116     0.609   +0.182   not flagged
+            Greenhouse | 3-6mo | Self-Sterilized | Monoculture | Inoculum | Alone | Aboveground
+          3      37      0.118      0.051     0.306   +0.067   not flagged
+            Greenhouse | 3-6mo | Self-Sterilized | Monoculture | Inoculum | Competition | Total_biomass
+          3      10      0.687      0.214     0.742   +0.473   not flagged
+            Greenhouse | 6-12mo | Self-Other | Community | Whole soil | Alone | Aboveground
+          3      45      0.069      0.045     0.484   +0.024   not flagged
+            Greenhouse | 6-12mo | Self-Sterilized | Community | Inoculum | Alone | Aboveground
+          3       7      0.450      0.316     0.812   +0.134   not flagged
+            Greenhouse | <=3mo | Self-Other | Community | Inoculum | Alone | Aboveground
+          3       7      0.008      0.303     0.800   -0.295   not flagged
+            Greenhouse | <=3mo | Self-Other | Community | Inoculum | Competition | Aboveground
+          3      21      0.041      0.091     0.483   -0.049   not flagged
+            Greenhouse | <=3mo | Self-Other | Community | Inoculum | Competition | Total_biomass
+          3      10      0.310      0.212     0.701   +0.099   not flagged
+            Greenhouse | <=3mo | Self-Other | Community | Whole soil | Alone | Aboveground
+          3      80      0.123      0.022     0.145   +0.100   not flagged
+            Greenhouse | <=3mo | Self-Sterilized | Community | Inoculum | Alone | Aboveground
+          3      10      0.413      0.188     0.896   +0.225   not flagged
+            Greenhouse | <=3mo | Self-Sterilized | Community | Inoculum | Competition | Aboveground
+          3       7      0.920      0.328     0.920   +0.592   not flagged
+            Greenhouse | <=3mo | Self-Sterilized | Community | Whole soil | Alone | Aboveground
+          3       9      0.443      0.232     0.883   +0.211   not flagged
+            Greenhouse | <=3mo | Self-Sterilized | Community | Whole soil | Competition | Total_biomass
+          3      10      0.513      0.210     0.732   +0.303   not flagged
+            Greenhouse | <=3mo | Self-Sterilized | Monoculture | Whole soil | Competition | Aboveground
+          2       4      0.696      0.298     0.696   +0.397   not flagged
+            Field | 3-6mo | Self-Other | Community | Whole soil | Alone | Aboveground
+          2      42      0.095      0.028     0.232   +0.067   not flagged
+            Field | 3-6mo | Self-Other | Monoculture | Whole soil | Alone | Aboveground
+          2       6      0.817      0.204     0.817   +0.613   not flagged
+            Greenhouse | 3-6mo | Self-Other | Community | Inoculum | Competition | Total_biomass
+          2      16      0.015      0.069     0.471   -0.053   not flagged
+            Greenhouse | 3-6mo | Self-Other | Community | Whole soil | Alone | Aboveground
+          2      11      0.100      0.084     0.515   +0.016   not flagged
+            Greenhouse | 3-6mo | Self-Other | Monoculture | Inoculum | Competition | Total_biomass
+          2     252      0.006      0.003     0.039   +0.003   not flagged
+            Greenhouse | 3-6mo | Self-Other | Monoculture | Whole soil | Alone | Aboveground
+          2      24      0.115      0.039     0.411   +0.076   not flagged
+            Greenhouse | 3-6mo | Self-Other | Monoculture | Whole soil | Competition | Aboveground
+          2       7      0.255      0.186     0.590   +0.070   not flagged
+            Greenhouse | 3-6mo | Self-Other | Monoculture | Whole soil | Competition | Total_biomass
+          2      11      0.493      0.106     0.689   +0.386   not flagged
+            Greenhouse | 3-6mo | Self-Sterilized | Community | Inoculum | Competition | Aboveground
+          2       6      0.472      0.164     0.472   +0.308   not flagged
+            Greenhouse | 3-6mo | Self-Sterilized | Community | Inoculum | Competition | Total_biomass
+          2      16      0.013      0.065     0.527   -0.053   not flagged
+            Greenhouse | 3-6mo | Self-Sterilized | Community | Whole soil | Alone | Aboveground
+          2       6      0.941      0.190     0.941   +0.751   not flagged
+            Greenhouse | 3-6mo | Self-Sterilized | Monoculture | Inoculum | Competition | Aboveground
+          2      77      0.006      0.014     0.112   -0.008   not flagged
+            Greenhouse | 6-12mo | Self-Other | Community | Whole soil | Competition | Aboveground
+          2      86      0.008      0.012     0.163   -0.004   not flagged
+            Greenhouse | 6-12mo | Self-Other | Monoculture | Inoculum | Alone | Aboveground
+          2      10      0.253      0.117     0.477   +0.135   not flagged
+            Greenhouse | 6-12mo | Self-Other | Monoculture | Whole soil | Alone | Aboveground
+          2       6      0.912      0.208     0.912   +0.704   not flagged
+            Greenhouse | 6-12mo | Self-Other | Monoculture | Whole soil | Competition | Aboveground
+          2       6      0.491      0.094     0.491   +0.398   not flagged
+            Greenhouse | <=3mo | Self-Sterilized | Community | Whole soil | Alone | Total_biomass
+          2       5      0.915      0.250     0.915   +0.664   not flagged
+            Greenhouse | <=3mo | Self-Sterilized | Monoculture | Whole soil | Alone | Aboveground
+          2      22      0.449      0.050     0.436   +0.399   signature-matched, protocol-unmatched
+            Greenhouse | <=3mo | Self-Sterilized | Monoculture | Whole soil | Competition | Total_biomass
+          2      75      0.349      0.012     0.128   +0.337   signature-matched, protocol-unmatched
+            Greenhouse | >12mo | Self-Other | Community | Inoculum | Alone | Total_biomass
+          2      39      0.225      0.030     0.244   +0.195   not flagged
+            Greenhouse | >12mo | Self-Other | Monoculture | Whole soil | Competition | Aboveground
+
+[DERIVED] Reading, scoped to these groups and this test:
+
+    pooled, study level   6 of 42 tested groups flagged
+    pooled, arm level     13 of 65 tested groups flagged
+    tagged                each flagged group carries "signature-matched,
+                          protocol-unmatched": its studies share all
+                          seven recorded fields and still differ from
+                          each other by more than row noise allows
+    not flagged           is NOT "protocol-matched". At spread sd 0.1 the
+                          test misses most of the time, and most
+                          unflagged groups are thinner than the curve's.
+                          Their tag stays NOT RECORDED.
+    same signature        several flagged groups recur across the side
+                          and pooled tables; they are one group seen
+                          more than once, not independent flags
+    many tests            about 65 groups were tested per pooled table
+                          at a false-flag rate the synthetic run put at
+                          0 of 250; no correction was applied
+
+What the flag cannot say: which unrecorded difference separates the
+labs. That is what the three empty slots in section 8.1 and the
+finder's Author expiry_condition are for.
+
 ## Provenance
 
 Co-authored, Kavik + Claude, work order of 2026-11-22 (END marker
@@ -623,6 +969,8 @@ standard library only, and the addendum's `lab` command imports
 branch by merge from its own branch, unedited. The amended addendum
 (section 9) is the `addendum` command; it rebuilds the finder's
 all-columns residuals from the finder's own parts and checks the
-explained share against the finder before using them.
+explained share against the finder before using them. Section 10 is the
+`power` command: a synthetic power curve, a size rule fixed in the order
+before real data, then the real lab test on qualifying groups.
 Source data: Zenodo record 10403125, sha256 asserted, not committed.
 The reading in section 6 is this run's.
