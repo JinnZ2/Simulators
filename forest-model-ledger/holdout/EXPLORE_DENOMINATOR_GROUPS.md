@@ -450,6 +450,38 @@ these three.
 [stated] Institutional mandates and governance rules are expected to be
 a common denominator difference across fields.
 
+Dated addition 2026-11-22, instrument slots. Four more empty slots on
+every study and every arm, beside the three above:
+
+    instrument_manufacturer   instrument_model   calibration_date
+    measurement_method        how biomass or the response was measured:
+                              drying temperature and time, balance,
+                              scanner, and so on
+    expiry_condition          filled from each paper's methods section
+
+Printed by `python3 ledger/toolkit/denominator_sorter.py slots
+SOURCE_CSV` and pasted by script:
+
+    SLOTS (pooled): empty on every unit, never imputed, outside the signature
+      slot                      NOT RECORDED on studies   NOT RECORDED on arms   expiry_condition
+      lab_institution                  202 of 202              313 of 313         filled from each paper's affiliations and methods
+      lab_country                      202 of 202              313 of 313         filled from each paper's affiliations and methods
+      governance_regime                202 of 202              313 of 313         filled from each paper's affiliations and methods
+      instrument_manufacturer          202 of 202              313 of 313         filled from each paper's methods section
+      instrument_model                 202 of 202              313 of 313         filled from each paper's methods section
+      calibration_date                 202 of 202              313 of 313         filled from each paper's methods section
+      measurement_method               202 of 202              313 of 313         filled from each paper's methods section
+      signature fields: 7 ; slots inside the signature: 0 ; slots: 7
+
+No slot takes part in matching until it is filled: two unknowns are not
+a match. So every scope group in this record is matched on seven
+recorded fields and unknown on seven slots. The heading above says
+"three"; it is kept as first written.
+
+[stated] "Equipment manufacturer, model and calibration add measurement
+variability; AI assessment needs these recorded to know what differs
+between studies."
+
 ### 8.2 Lab test inside each scope group: gate FAILED, real run NOT done
 
 The test is missing_column_finder's Author (lab) test, imported

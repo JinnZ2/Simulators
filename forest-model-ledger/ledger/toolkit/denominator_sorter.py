@@ -7,6 +7,7 @@ EXPLORATORY.  It fits nothing, scores nothing and tests no prediction.
     python3 ledger/toolkit/denominator_sorter.py addendum SOURCE_CSV
     python3 ledger/toolkit/denominator_sorter.py power SOURCE_CSV
     python3 ledger/toolkit/denominator_sorter.py dropnull SOURCE_CSV
+    python3 ledger/toolkit/denominator_sorter.py slots SOURCE_CSV
 
 A study's DENOMINATOR SIGNATURE is read from seven recorded columns:
     Experimental.setting, Phase2.time (binned), Approach (control type),
@@ -73,6 +74,14 @@ POWER CURVE (2026-11-22, after the lab gate failed twice):
   groups read "underpowered at this size", tag NOT RECORDED.  A real
   group of k studies is read at the largest tested size <= k.
 
+INSTRUMENT SLOTS (2026-11-22): four more EMPTY slots on every study and
+  arm, beside the three lab slots: instrument_manufacturer,
+  instrument_model, calibration_date, measurement_method (how biomass or
+  the response was measured: drying temperature and time, balance,
+  scanner, and so on).  NOT RECORDED everywhere, never imputed, filled
+  from each paper's methods section.  No slot takes part in matching
+  until it is filled: two unknowns are not a match.
+
 FIELD-DROP NULL (2026-11-22, arm level, pooled):
   the first field-drop rule could only read "moves outcome" by
   construction (merging cannot lower within-group spread).  Replaced by a
@@ -100,6 +109,9 @@ TIME_BINS = [(3.0, "<=3mo"), (6.0, "3-6mo"), (12.0, "6-12mo"), (float("inf"), ">
 NR = "NOT RECORDED"
 SLOTS = ["lab_institution", "lab_country", "governance_regime"]
 SLOT_EXPIRY = "filled from each paper's affiliations and methods"
+INSTRUMENT_SLOTS = ["instrument_manufacturer", "instrument_model", "calibration_date",
+                    "measurement_method"]
+INSTRUMENT_EXPIRY = "filled from each paper's methods section"
 MIN_SPARE_ROWS = 2      # lab test needs rows beyond one per study; else not checkable
 MIN_LAB_STUDIES = 5     # power gate: chosen, no external source
 SOURCE_SHA = "bb56ba5ac31b13be09cf3df42c1215b53255bb1eb3bb8a91838ab8cb4cb5c82c"
@@ -132,9 +144,10 @@ def signature(rows):
 
 
 def slots(_rows):
-    """The three unfilled slots of one study.  Always NOT RECORDED here:
-    the source carries no column for any of them."""
-    return {s: NR for s in SLOTS}
+    """The unfilled slots of one study or arm: three lab slots and four
+    instrument slots.  Always NOT RECORDED here: the source carries no
+    column for any of them.  None is part of the signature."""
+    return {s: NR for s in SLOTS + INSTRUMENT_SLOTS}
 
 
 def may_pool(sig_a, sig_b):
@@ -556,6 +569,23 @@ def main():
     a = sys.argv[1:]
     if a == ["--gate"]:
         raise SystemExit(0 if gate()[0] else 1)
+    if len(a) == 2 and a[0] == "slots":
+        raw = open(a[1], "rb").read()
+        if hashlib.sha256(raw).hexdigest() != SOURCE_SHA:
+            raise SystemExit("source sha256 mismatch: not run")
+        allrows = list(csv.DictReader(io.StringIO(raw.decode("utf-8", errors="replace"), newline="")))
+        su, au = study_units(allrows), arm_units(allrows)
+        print("SLOTS (pooled): empty on every unit, never imputed, outside the signature")
+        print("  slot                      NOT RECORDED on studies   NOT RECORDED on arms   expiry_condition")
+        for names, exp in ((SLOTS, SLOT_EXPIRY), (INSTRUMENT_SLOTS, INSTRUMENT_EXPIRY)):
+            for s in names:
+                ns = sum(slots(v[2])[s] == NR for v in su.values())
+                na = sum(slots(v[2])[s] == NR for v in au.values())
+                print("  %-24s  %10d of %-10d  %8d of %-10d  %s" % (s, ns, len(su), na, len(au), exp))
+        in_sig = [s for s in SLOTS + INSTRUMENT_SLOTS if s in FIELDS]
+        print("  signature fields: %d ; slots inside the signature: %d ; slots: %d"
+              % (len(FIELDS), len(in_sig), len(SLOTS + INSTRUMENT_SLOTS)))
+        return
     if len(a) == 2 and a[0] == "dropnull":
         import os
         sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
