@@ -1,0 +1,9 @@
+{
+ "commitment": "f5dcc443d5afb4144ea0836015d0694c6796b723aa6d3c34e0bb00d7f7bcc65d",
+ "date_utc": "2026-11-22",
+ "license": "CC0-1.0",
+ "predictions_bytes": 33257,
+ "predictions_sha256": "24477fdf93936f76e2475d337da033f6e304e17ca69203e4daebabfca48a9f26",
+ "record": "Phase B predictions commitment",
+ "scheme": "sha256(nonce_B || predictions.json bytes), nonce_B = 32 random bytes, not committed"
+}
