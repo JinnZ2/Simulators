@@ -7,7 +7,7 @@ sources:
     retrieved_url: "https://zenodo.org/api/records/10403125/files/PSF.data.EL.open.csv/content"
     retrieved_utc: "2026-11-22T18:55:31Z"
     retrieved_file: "PSF.data.EL.open.csv"
-    retrieved_bytes: 1609518
+    retrieved_bytes: "1609518"
     retrieved_by: "retrieved by run, Phase A, PR #330"
     used_by: []
     checksum: "sha256:bb56ba5ac31b13be09cf3df42c1215b53255bb1eb3bb8a91838ab8cb4cb5c82c"
