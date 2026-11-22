@@ -11,16 +11,17 @@ Index line: two readings per branch, CLOSURE (physics) and CROWDING
 Tags: OBSERVED = stated in a source or seen in a run; DERIVED = follows
 from what is stated here; PROPOSED = untested. [co-authored] = stated in
 the work order of 2026-11-22 (Kavik + Claude), carried as stated.
+[stated] = the owner said it directly; standing definitions, not findings.
 
 ## 0. Source and what is taken from it
 
 Artiles et al., "The Alien Space of Science", arXiv:2603.01092 (v3,
-2026-10-21). Cited, not copied. Statements about Artiles et al. come from chat Claude's fetch of the arXiv
-abstract page (arXiv:2603.01092v3) on 2026-11-22, relayed by the owner.
-Abstract only; the PDF was not read by any party to this file. Atom
-extraction method, coherence-model training, rater counts and stated
-limitations: NOT RECORDED. The four welds are chat Claude's audit of the
-abstract (DERIVED).
+2026-10-21). Cited, not copied. Statements about Artiles et al. come
+from chat Claude's fetch of the arXiv abstract page (arXiv:2603.01092v3)
+on 2026-11-22, relayed by the owner. Abstract only; the PDF was not read
+by any party to this file. Atom extraction method, coherence-model
+training, rater counts and stated limitations: NOT RECORDED. The four
+welds are chat Claude's audit of the abstract (DERIVED).
 
 [co-authored] Their move: score COHERENCE and AVAILABILITY separately,
 then sample combinations that hold together but that no existing author
@@ -80,10 +81,11 @@ single combined score is malformed.
     CROWDING   how dense is the corpus default at this branch?
 
                dense | thin | absent | NOT RECORDED
+               cut: see section 7 edge 3
 
-               + crowding_basis: who assessed it (Kavik / model / both)
-                 and how (search terms and corpus, field experience,
-                 model recall with no search, ...)
+               + crowding_basis: who ran the probe (Kavik / model /
+                 both), which model, and how (search terms and corpus,
+                 field experience, model recall with no search, ...)
 
 [DERIVED] Three places a silence could pass as a value, each closed:
 
@@ -170,7 +172,7 @@ no field holds a function of both.
 
 ## 6. Welds to state
 
-[co-authored] From the audit of the source paper. A weld here is a place
+[co-authored] From chat Claude's audit of the arXiv abstract (DERIVED). A weld here is a place
 where two different things travel under one word.
 
     1  corpus = one field       Their corpus is one field. An atom absent
@@ -222,11 +224,12 @@ where two different things travel under one word.
 
 Co-authored, Kavik + Claude, work order of 2026-11-22. Sections tagged
 [co-authored] carry the order as stated; DERIVED and PROPOSED lines were
-added in this render and are marked. Statements about Artiles et al. come from chat Claude's fetch of the arXiv
-abstract page (arXiv:2603.01092v3) on 2026-11-22, relayed by the owner.
-Abstract only; the PDF was not read by any party to this file. Atom
-extraction method, coherence-model training, rater counts and stated
-limitations: NOT RECORDED. The four welds are chat Claude's audit of the
-abstract (DERIVED). No instrument, corpus or
-run accompanies this note. Mirrored byte-identical in the Simulators
-repository at `tools/density_vs_closure_sampling.md`.
+added in this render and are marked. Statements about Artiles et al.
+come from chat Claude's fetch of the arXiv abstract page
+(arXiv:2603.01092v3) on 2026-11-22, relayed by the owner. Abstract only;
+the PDF was not read by any party to this file. Atom extraction method,
+coherence-model training, rater counts and stated limitations: NOT
+RECORDED. The four welds are chat Claude's audit of the abstract
+(DERIVED). No instrument, corpus or run accompanies this note. Mirrored
+byte-identical in the Simulators repository at
+`tools/density_vs_closure_sampling.md`.
