@@ -101,6 +101,30 @@ explored until it is run back and diffed against that anchor. The L0
 gate is the one in `relational-playground/` there: each budget LIVE or
 VOID with a reason.
 
+## 2a. Feasibility boundary
+
+Every "not feasible", "costs too much", "can't be done" or bottleneck
+claim records:
+
+    feasibility_boundary = single unit | site | region | full supply chain
+                           | NOT RECORDED
+    fence_type           = physical   (conservation law, material limit:
+                                       holds at every boundary)
+                         | institutional (ownership, accounting, contract,
+                                       isolation between operators)
+                         | NOT RECORDED
+    redraw_result        = still infeasible | feasible | not checked
+
+A claim with fence_type institutional is "infeasible inside this fence",
+never "infeasible". Redraw the boundary before discarding the idea.
+
+[stated] Many bottlenecks come from a fence someone put up that does not
+need to exist as a fence.
+
+Worked case (DERIVED): graphene fiber energy cost judged per plant vs
+merged with arc-furnace steelmaking, which already graphitizes its
+electrodes near 3000 C.
+
 ## 3. Selection rule
 
 [co-authored] Flow of branches through the two gates:
@@ -161,6 +185,8 @@ window it cannot be told apart from a branch nobody has reached yet
     crowding_basis   who (Kavik / model / both) and how. MANDATORY
     holdout_status   hit | miss | false lead | not run
     tag              OBSERVED | DERIVED | PROPOSED
+    feasibility_boundary   single unit | site | region | full supply
+                     chain | NOT RECORDED (section 2a)
     volume           volume = weight of evidence behind the tag: thin /
                      moderate / solid. [stated] by owner as a standing
                      tag; null until assessed.
