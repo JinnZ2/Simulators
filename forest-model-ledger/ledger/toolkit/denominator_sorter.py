@@ -4,6 +4,7 @@ EXPLORATORY.  It fits nothing, scores nothing and tests no prediction.
 
     python3 ledger/toolkit/denominator_sorter.py --gate
     python3 ledger/toolkit/denominator_sorter.py run SOURCE_CSV
+    python3 ledger/toolkit/denominator_sorter.py lab SOURCE_CSV   # addendum
 
 A study's DENOMINATOR SIGNATURE is read from seven recorded columns:
     Experimental.setting, Phase2.time (binned), Approach (control type),
@@ -22,9 +23,28 @@ group.  A difference BETWEEN groups is a candidate scope effect, never a
 contradiction.  may_pool() is that rule as code; nothing in this file
 compares effect sizes across or within groups.
 
-Stdlib only.  The Phase2.time bins are hand-set (months): <=3, 3-6, 6-12,
->12.  A different binning gives different groups; that is stated in every
-report.
+The Phase2.time bins are hand-set (months): <=3, 3-6, 6-12, >12.  A
+different binning gives different groups; that is stated in every report.
+
+ADDENDUM (2026-11-22):
+  slots   every study also carries three EMPTY slots: lab_institution,
+          lab_country, governance_regime (permits, sterilization or
+          biosafety rules, funding mandates).  All read NOT RECORDED; the
+          source has no such column and nothing is imputed.  They take no
+          part in the match: two unknowns are not a match.  Latitude and
+          Longitude give the field site, not the lab's location, and are
+          not used to fill them.
+  lab     inside each scope group, missing_column_finder's Author (lab)
+          test: share of the group's spread that sits between studies,
+          against rows shuffled across the group.  The spread is taken
+          about the GROUP MEAN, with no column fitted first: in a group of
+          k studies, k-1 study-level columns (MAT, MAP, AI, latitude)
+          would absorb every between-lab difference by construction.  A
+          flag tags the group "signature-matched, protocol-unmatched".
+
+`run` and `--gate` use the standard library only.  `lab` imports
+missing_column_finder (numpy) and uses its eta2, tau2_intercept, _codes
+and _verdict unchanged, with its FLAG rule and shuffle count.
 """
 import csv
 import hashlib
@@ -36,6 +56,9 @@ FIELDS = ["Experimental.setting", "Phase2.time", "Approach", "Phase1.culti",
           "SoilTp", "Phase2.grow", "Response"]
 TIME_BINS = [(3.0, "<=3mo"), (6.0, "3-6mo"), (12.0, "6-12mo"), (float("inf"), ">12mo")]
 NR = "NOT RECORDED"
+SLOTS = ["lab_institution", "lab_country", "governance_regime"]
+SLOT_EXPIRY = "filled from each paper's affiliations and methods"
+MIN_SPARE_ROWS = 2      # lab test needs rows beyond one per study; else not checkable
 SOURCE_SHA = "bb56ba5ac31b13be09cf3df42c1215b53255bb1eb3bb8a91838ab8cb4cb5c82c"
 CUTOFF_YEAR = 2018
 
@@ -63,6 +86,12 @@ def signature(rows):
         order = [n for _, n in TIME_BINS] if f == "Phase2.time" else sorted(vals - {NR})
         out.append("+".join([v for v in order if v in vals] + ([NR] if NR in vals else [])))
     return tuple(out)
+
+
+def slots(_rows):
+    """The three unfilled slots of one study.  Always NOT RECORDED here:
+    the source carries no column for any of them."""
+    return {s: NR for s in SLOTS}
 
 
 def may_pool(sig_a, sig_b):
@@ -113,6 +142,90 @@ def render(name, res, ids):
     L.append("  studies with a field NOT RECORDED: %s"
              % (", ".join("%s %d" % kv for kv in nr.items()) or "none"))
     return "\n".join(L)
+
+
+# -------------------------------------------------------- addendum: lab test
+def lab_test(rows, perm_seed):
+    """missing_column_finder's lab test on one scope group's rows, spread
+    taken about the group mean."""
+    import numpy as np
+    import missing_column_finder as mcf
+    keep = [(r, mcf._num(r["rr"]), mcf._num(r["var"])) for r in rows]
+    keep = [k for k in keep if k[1] is not None and k[2] is not None and k[2] > 0]
+    studies = sorted({k[0]["Author"] for k in keep})
+    if len(studies) < 2 or len(keep) - len(studies) < MIN_SPARE_ROWS:
+        return {"state": "not checkable", "rows": len(keep), "studies": len(studies)}
+    y = np.array([k[1] for k in keep])
+    v = np.array([k[2] for k in keep])
+    w = 1.0 / (v + mcf.tau2_intercept(y, v))
+    e = y - np.sum(w * y) / np.sum(w)
+    code, names = mcf._codes([k[0]["Author"] for k in keep])
+    rng = np.random.default_rng(perm_seed)
+    null = []
+    for _ in range(mcf.N_PERM):
+        p = rng.permutation(len(e))
+        null.append(mcf.eta2(e[p], w[p], code, len(names)))
+    return dict(mcf._verdict(mcf.eta2(e, w, code, len(names)), null),
+                state="tested", rows=len(keep), studies=len(studies))
+
+
+def lab_table(rows, ids):
+    import missing_column_finder as mcf
+    by_study = {}
+    for r in rows:
+        by_study.setdefault(r["Author"], []).append(r)
+    res = sort_studies(rows)
+    out = []
+    for i, g in enumerate(res["groups"]):
+        grows = [r for s in g["studies"] for r in by_study[s]]
+        out.append((ids[g["signature"]], g, lab_test(grows, mcf.PERM_SEED + i)))
+    return res, out
+
+
+def render_lab(name, res, table):
+    tested = [t for t in table if t[2]["state"] == "tested"]
+    flagged = [t for t in tested if t[2]["flag"]]
+    L = ["%s: %d scope groups, %d tested, %d not checkable, %d flagged"
+         % (name, len(table), len(tested), len(table) - len(tested), len(flagged)),
+         "  id    studies   rows   lab share  null mean  null max   excess   tag"]
+    for gid, g, t in table:
+        if t["state"] != "tested":
+            L.append("  %-5s %5d  %6d   not checkable (rows barely exceed studies)" % (gid, g["n_studies"], g["n_rows"]))
+            continue
+        L.append("  %-5s %5d  %6d   %8.3f   %8.3f  %8.3f  %+7.3f   %s"
+                 % (gid, t["studies"], t["rows"], t["share"], t["null_mean"], t["null_max"], t["excess"],
+                    "signature-matched, protocol-unmatched" if t["flag"] else "-"))
+    L.append("  tagged signature-matched, protocol-unmatched: %s"
+             % (", ".join(t[0] for t in flagged) or "none"))
+    return "\n".join(L)
+
+
+def lab_gate(seeds=(0, 1, 2, 3, 4), verbose=True):
+    """The lab test at scope-group size: 4 studies, 15 rows each."""
+    import numpy as np
+    hit = clean = 0
+    for sd in seeds:
+        for planted in (True, False):
+            rng = np.random.default_rng(sd)
+            rows = []
+            for s in range(4):
+                eff = rng.normal(0, 0.3) if planted else 0.0
+                for _ in range(15):
+                    var = rng.uniform(0.01, 0.1)
+                    rows.append({"Author": "S%d" % s, "var": "%.6f" % var,
+                                 "rr": "%.6f" % (eff + rng.normal(0, var ** 0.5))})
+            flag = lab_test(rows, 500 + sd).get("flag", False)
+            hit += planted and flag
+            clean += (not planted) and (not flag)
+    lines = ["lab test at group size, planted lab effect: flagged on %d of %d seeds  %s"
+             % (hit, len(seeds), "PASS" if hit == len(seeds) else "FAIL"),
+             "lab test at group size, pure noise: clean on %d of %d seeds  %s"
+             % (clean, len(seeds), "PASS" if clean == len(seeds) else "FAIL")]
+    ok = hit == len(seeds) and clean == len(seeds)
+    lines.append("LAB GATE %s" % ("PASS" if ok else "FAIL"))
+    if verbose:
+        print("\n".join(lines))
+    return ok, lines
 
 
 # ----------------------------------------------------------------------- gate
@@ -195,6 +308,30 @@ def main():
     a = sys.argv[1:]
     if a == ["--gate"]:
         raise SystemExit(0 if gate()[0] else 1)
+    if len(a) == 2 and a[0] == "lab":
+        import os
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        print("gates first:")
+        if not gate()[0] or not lab_gate()[0]:
+            raise SystemExit("GATE FAIL: not run on real data")
+        raw = open(a[1], "rb").read()
+        if hashlib.sha256(raw).hexdigest() != SOURCE_SHA:
+            raise SystemExit("source sha256 mismatch: not run")
+        allrows = list(csv.DictReader(io.StringIO(raw.decode("utf-8", errors="replace"), newline="")))
+        pooled = sort_studies(allrows)
+        ids = {g["signature"]: "D%02d" % (i + 1) for i, g in enumerate(sorted(
+            pooled["groups"] + pooled["singletons"], key=lambda g: (-g["n_studies"], g["signature"])))}
+        sides = [("anchor (<= 2018)", [r for r in allrows if int(r["Year"]) <= CUTOFF_YEAR]),
+                 ("holdout (> 2018)", [r for r in allrows if int(r["Year"]) > CUTOFF_YEAR]),
+                 ("pooled", allrows)]
+        for name, rows in sides:
+            res, table = lab_table(rows, ids)
+            print()
+            print(render_lab(name, res, table))
+        filled = sum(v != NR for r_ in [slots(None)] for v in r_.values())
+        print("\nslots per study: %s ; filled on %d of %d studies ; expiry_condition: %s"
+              % (", ".join(SLOTS), filled, pooled["studies"], SLOT_EXPIRY))
+        return
     if len(a) == 2 and a[0] == "run":
         print("gate first:")
         if not gate()[0]:

@@ -11,7 +11,8 @@ Tags: DERIVED = computed in this run from the data and the stated
 choices; PROPOSED = a reading or a next step, untested; OBSERVED = seen
 in this run (gate lines, hashes); NOT RECORDED = a field the source
 leaves empty, or something nobody in this run looked at. Every grouping
-below is DERIVED.
+below is DERIVED. [stated] = the owner said it directly; a standing
+definition or expectation, not a finding.
 
 Every number in the indented blocks was printed by
 `python3 ledger/toolkit/denominator_sorter.py run SOURCE_CSV` and pasted
@@ -416,11 +417,77 @@ All DERIVED; next steps PROPOSED.
                     gate is its own --gate. Trust: PROPOSED.
     holdout rows    not committed; the run rebuilds them from the source
 
+## 8. Addendum (2026-11-22): lab test inside groups, three empty slots
+
+Added on the same branch after the run above. Sections 1 to 7 are
+unchanged and `run` prints the same output as before, byte for byte.
+[OBSERVED]
+
+### 8.1 Three empty slots per study
+
+    lab_institution     NOT RECORDED on 202 of 202 studies
+    lab_country         NOT RECORDED on 202 of 202 studies
+    governance_regime   NOT RECORDED on 202 of 202 studies
+                        (permits, sterilization or biosafety rules,
+                        funding mandates)
+    expiry_condition    filled from each paper's affiliations and methods
+
+The source has no column for any of the three and nothing is imputed.
+Latitude and Longitude give the field site, not the lab's location, and
+are not used to fill them. The slots take no part in the match: two
+unknowns are not a match. Every scope group in sections 3 to 5 is
+therefore matched on seven recorded fields and unmatched-or-unknown on
+these three.
+
+[stated] Institutional mandates and governance rules are expected to be
+a common denominator difference across fields.
+
+### 8.2 Lab test inside each scope group: gate FAILED, real run NOT done
+
+The test is missing_column_finder's Author (lab) test, imported
+unchanged (its share, its shuffled null, its FLAG rule), applied to one
+scope group at a time, with spread taken about the group mean. A group
+that flags would be tagged "signature-matched, protocol-unmatched".
+
+A gate at scope-group size was run first (4 studies, 15 rows each):
+
+    gates first:
+    known-answer, 3 planted groups + 6 loners: recovered exactly on 5 of 5 seeds  PASS
+    null, 40 studies all different: no group reported on 5 of 5 seeds  PASS
+    missing field reads NOT RECORDED and is not merged with a recorded value  PASS
+    GATE PASS
+    lab test at group size, planted lab effect: flagged on 4 of 5 seeds  FAIL
+    lab test at group size, pure noise: clean on 5 of 5 seeds  PASS
+    LAB GATE FAIL
+    GATE FAIL: not run on real data
+
+[OBSERVED] The planted-effect leg flagged on 4 of 5 seeds. Under the
+order's rule a failed gate stops the real run, so the lab test was NOT
+run on the anchor, holdout or pooled groups. There is no per-group
+lab-spread table and no group is tagged protocol-unmatched. Tag state
+for every group: NOT RECORDED.
+
+[OBSERVED] The miss, read without changing anything: on the seed that
+did not flag, the four planted lab effects were all drawn within 0.06 of
+zero, against row noise of 0.1 to 0.3. The observed share (0.190) sat
+just under the largest shuffled share (0.204).
+
+[DERIVED] So the gate, as written, sometimes plants almost nothing, and
+at 4 studies the test cannot see a lab difference that small. The gate
+was not redesigned after seeing it fail and the flag rule was not
+loosened. Two readings stay open and the owner picks: the gate design is
+at fault (plant fixed, separated lab effects), or the test is too weak
+at scope-group size to be trusted on groups of 2 to 10 studies. Most
+real groups hold 2 or 3 studies, smaller than the gate's 4.
+
 ## Provenance
 
 Co-authored, Kavik + Claude, work order of 2026-11-22 (END marker
 present). Base branch: claude/forest-holdout-phase-c (PR #332); separate
 from the missing_column_finder branch, which this work does not touch.
-Code: `ledger/toolkit/denominator_sorter.py`, standard library only.
+Code: `ledger/toolkit/denominator_sorter.py`; `run` and `--gate` use the
+standard library only, and the addendum's `lab` command imports
+`ledger/toolkit/missing_column_finder.py` (numpy), brought onto this
+branch by merge from its own branch, unedited.
 Source data: Zenodo record 10403125, sha256 asserted, not committed.
 The reading in section 6 is this run's.
