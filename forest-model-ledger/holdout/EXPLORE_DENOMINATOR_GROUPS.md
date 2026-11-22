@@ -482,6 +482,23 @@ recorded fields and unknown on seven slots. The heading above says
 variability; AI assessment needs these recorded to know what differs
 between studies."
 
+Dated addition 2026-11-22, an eighth slot: coordinate_meaning, what
+Latitude / Longitude locate. The README does not say (quoted above).
+Same expiry_condition: filled from each paper's methods section. Slot
+table as it now prints, eight slots, all empty, none in the signature:
+
+    SLOTS (pooled): empty on every unit, never imputed, outside the signature
+      slot                      NOT RECORDED on studies   NOT RECORDED on arms   expiry_condition
+      lab_institution                  202 of 202              313 of 313         filled from each paper's affiliations and methods
+      lab_country                      202 of 202              313 of 313         filled from each paper's affiliations and methods
+      governance_regime                202 of 202              313 of 313         filled from each paper's affiliations and methods
+      instrument_manufacturer          202 of 202              313 of 313         filled from each paper's methods section
+      instrument_model                 202 of 202              313 of 313         filled from each paper's methods section
+      calibration_date                 202 of 202              313 of 313         filled from each paper's methods section
+      measurement_method               202 of 202              313 of 313         filled from each paper's methods section
+      coordinate_meaning               202 of 202              313 of 313         filled from each paper's methods section
+      signature fields: 7 ; slots inside the signature: 0 ; slots: 8
+
 ### 8.2 Lab test inside each scope group: gate FAILED, real run NOT done
 
 The test is missing_column_finder's Author (lab) test, imported
@@ -1010,6 +1027,10 @@ finder's Author expiry_condition are for.
 
 ## 11. Field-drop null (arm level, pooled; 2026-11-22)
 
+Dated note 2026-11-22: "Approach defines the control soil, the
+denominator of rr; pooling across Approach mixes two measurands."
+Section 12 reruns the Phase B fits inside each Approach.
+
 Replaces the mark in section 9.2. For each field: shuffle that field's
 values across the 313 arms (value counts kept), group on the signature
 with the shuffled field in it, then leave the field out and record the
@@ -1055,6 +1076,107 @@ Scope: pooled, arm level only, as ordered. Each shuffle regroups, so
 the rows read "before" differ from shuffle to shuffle; within one
 shuffle the before and after rows are the same.
 
+## 12. Approach strata (2026-11-22; spent holdout, exploratory, scores nothing)
+
+Each Phase B moderator fit (B1 AI, B1 MAP, B2, B3, B4, R5) rerun inside
+Self-Other and inside Self-Sterilized, on the anchor side and on the
+holdout side. The fit, the moderator definitions and the cluster
+bootstrap are `phase_b.fit` called through `phase_c.FITS`, imported and
+unchanged. The "all rows" lines repeat the sealed anchor fits and the
+Phase C holdout fits for reference. A study with both approaches counts
+in both strata. Cells under 5 studies would read "thin"; none does.
+
+Printed by `python3 ledger/toolkit/denominator_sorter.py strata
+SOURCE_CSV` and pasted by script.
+
+    APPROACH STRATA: Phase B fits (imported, unchanged) inside each Approach; spent holdout, scores nothing
+      cell = estimate [80% interval] studies rows ; thin = under 5 studies
+      B1 AI (AI)
+        all rows         anchor   -0.2378 [ -0.3342,  -0.1271] 155 st  3707 rows
+                         holdout  +0.0407 [ -0.0091,  +0.0820]  47 st  2262 rows
+        Self-Other       anchor   -0.1497 [ -0.2534,  -0.0399] 133 st  3198 rows
+                         holdout  +0.0406 [ -0.0159,  +0.0837]  42 st  2105 rows
+        Self-Sterilized  anchor   -0.6103 [ -0.8995,  -0.3450]  65 st   509 rows
+                         holdout  +0.0188 [ -0.3317,  +0.1337]  23 st   157 rows
+      B1 MAP (MAP)
+        all rows         anchor   -0.1164 [ -0.2236,  -0.0118] 155 st  3707 rows
+                         holdout  +0.0373 [ -0.0053,  +0.0569]  47 st  2262 rows
+        Self-Other       anchor   -0.0672 [ -0.1634,  +0.0247] 133 st  3198 rows
+                         holdout  +0.0344 [ -0.0271,  +0.0521]  42 st  2105 rows
+        Self-Sterilized  anchor   -0.3222 [ -0.6425,  -0.0279]  65 st   509 rows
+                         holdout  +0.0445 [ -0.1275,  +0.1613]  23 st   157 rows
+      B2 (Phase2.time)
+        all rows         anchor   +0.0019 [ -0.0040,  +0.0076] 154 st  3701 rows
+                         holdout  -0.0006 [ -0.0068,  +0.0027]  47 st  2262 rows
+        Self-Other       anchor   +0.0026 [ -0.0028,  +0.0066] 132 st  3192 rows
+                         holdout  +0.0003 [ -0.0059,  +0.0036]  42 st  2105 rows
+        Self-Sterilized  anchor   -0.0093 [ -0.0395,  +0.0311]  65 st   509 rows
+                         holdout  -0.0115 [ -0.0230,  +0.0534]  23 st   157 rows
+      B3 (Experimental.setting)
+        all rows         anchor   -0.0104 [ -0.1289,  +0.1155] 155 st  3707 rows
+                         holdout  -0.0379 [ -0.1307,  +0.0152]  47 st  2262 rows
+        Self-Other       anchor   -0.0183 [ -0.1357,  +0.1149] 133 st  3198 rows
+                         holdout  -0.0458 [ -0.1435,  +0.0103]  42 st  2105 rows
+        Self-Sterilized  anchor  not checkable (65 studies, 509 rows)
+                         holdout  -0.0297 [ -0.1395,  +0.0586]  23 st   157 rows
+      B4 (Life.form)
+        all rows         anchor   +0.1000 [ +0.0202,  +0.1815] 155 st  3707 rows
+                         holdout  +0.0738 [ -0.0036,  +0.1397]  47 st  2262 rows
+        Self-Other       anchor   +0.0696 [ -0.0162,  +0.1507] 133 st  3198 rows
+                         holdout  +0.0301 [ -0.0755,  +0.0950]  42 st  2105 rows
+        Self-Sterilized  anchor   +0.2989 [ +0.0157,  +0.6146]  65 st   509 rows
+                         holdout  +0.3275 [ +0.1657,  +0.5363]  23 st   157 rows
+      R5 (Sp.origin)
+        all rows         anchor   +0.1375 [ +0.0438,  +0.2389] 155 st  3707 rows
+                         holdout  -0.1385 [ -0.3174,  +0.0155]  47 st  2262 rows
+        Self-Other       anchor   +0.0721 [ -0.0106,  +0.1501] 133 st  3198 rows
+                         holdout  -0.1756 [ -0.3893,  -0.0068]  42 st  2105 rows
+        Self-Sterilized  anchor   +0.4764 [ +0.0989,  +0.7486]  65 st   509 rows
+                         holdout  +0.0552 [ -0.1913,  +0.2743]  23 st   157 rows
+
+B3, anchor, Self-Sterilized is not checkable because all 509 of those
+rows are Greenhouse: the moderator has no variation there. [OBSERVED]
+
+    FLIP READING: anchor vs holdout sign of the point estimate
+      id       all rows        Self-Other               Self-Sterilized
+      B1 AI    - -> + flip     - -> + flip              - -> + flip
+      B1 MAP   - -> + flip     - -> + flip              - -> + flip
+      B2       + -> - flip     + -> + same              - -> - same
+      B3       - -> - same     - -> - same              not checkable
+      B4       + -> + same     + -> + same              + -> + same
+      R5       + -> - flip     + -> - flip              + -> + same
+      flips in all rows: B1 AI, B1 MAP, B2, R5
+      disappear inside a stratum with both cells at >= 5 studies: B2 in Self-Other, B2 in Self-Sterilized, R5 in Self-Sterilized
+
+[DERIVED] Reading. "Flip" compares the sign of the anchor and holdout
+point estimates; it ignores the intervals, most of which include zero.
+
+    B1 AI, B1 MAP   the flip does NOT disappear in either stratum. The
+                    anchor slope is negative and the holdout slope
+                    positive inside Self-Other and inside
+                    Self-Sterilized alike. Splitting by control type
+                    does not account for it.
+    R5              the flip stays inside Self-Other (anchor +0.0721,
+                    holdout -0.1756, the holdout interval excluding
+                    zero) and disappears inside Self-Sterilized (both
+                    positive, holdout interval including zero).
+    B2              the flip disappears in both strata, but every B2
+                    estimate is within about 0.01 of zero with an
+                    interval across zero; the signs carry little.
+    B3, B4          no flip to begin with. B4 is larger inside
+                    Self-Sterilized (about +0.30 on both sides) than
+                    inside Self-Other (+0.07 and +0.03).
+
+    the two strata differ from each other on the anchor side by more
+    than the anchor and holdout differ in most rows: B1 AI is -0.15
+    inside Self-Other and -0.61 inside Self-Sterilized; R5 is +0.07 and
+    +0.48. That is what section 11's Approach result looks like in the
+    fits.
+
+    this is one split, read after the holdout was spent, with six fits
+    and two strata and no correction. It says where to look, not what
+    is so.
+
 ## Provenance
 
 Co-authored, Kavik + Claude, work order of 2026-11-22 (END marker
@@ -1069,6 +1191,7 @@ all-columns residuals from the finder's own parts and checks the
 explained share against the finder before using them. Section 10 is the
 `power` command: a synthetic power curve, a size rule fixed in the order
 before real data, then the real lab test on qualifying groups. Section 11 is the
-`dropnull` command.
+`dropnull` command. Section 12 is the `strata` command, which calls
+`holdout/phase_b.py` and `holdout/phase_c.py` unchanged.
 Source data: Zenodo record 10403125, sha256 asserted, not committed.
 The reading in section 6 is this run's.

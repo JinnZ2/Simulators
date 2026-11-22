@@ -8,6 +8,7 @@ EXPLORATORY.  It fits nothing, scores nothing and tests no prediction.
     python3 ledger/toolkit/denominator_sorter.py power SOURCE_CSV
     python3 ledger/toolkit/denominator_sorter.py dropnull SOURCE_CSV
     python3 ledger/toolkit/denominator_sorter.py slots SOURCE_CSV
+    python3 ledger/toolkit/denominator_sorter.py strata SOURCE_CSV
 
 A study's DENOMINATOR SIGNATURE is read from seven recorded columns:
     Experimental.setting, Phase2.time (binned), Approach (control type),
@@ -82,6 +83,16 @@ INSTRUMENT SLOTS (2026-11-22): four more EMPTY slots on every study and
   from each paper's methods section.  No slot takes part in matching
   until it is filled: two unknowns are not a match.
 
+  A fifth, coordinate_meaning: what Latitude / Longitude locate.  The
+  source README does not say.
+
+APPROACH STRATA (2026-11-22, spent holdout, scores nothing): each Phase B
+  moderator fit rerun inside Self-Other and inside Self-Sterilized, anchor
+  and holdout, with phase_b.fit imported unchanged through phase_c.FITS.
+  Approach defines the control soil, the denominator of rr; pooling across
+  Approach mixes two measurands.  Cells under THIN_STUDIES studies read
+  "thin".
+
 FIELD-DROP NULL (2026-11-22, arm level, pooled):
   the first field-drop rule could only read "moves outcome" by
   construction (merging cannot lower within-group spread).  Replaced by a
@@ -112,6 +123,8 @@ SLOT_EXPIRY = "filled from each paper's affiliations and methods"
 INSTRUMENT_SLOTS = ["instrument_manufacturer", "instrument_model", "calibration_date",
                     "measurement_method"]
 INSTRUMENT_EXPIRY = "filled from each paper's methods section"
+OTHER_SLOTS = ["coordinate_meaning"]     # what Latitude / Longitude locate; README does not say
+THIN_STUDIES = 5
 MIN_SPARE_ROWS = 2      # lab test needs rows beyond one per study; else not checkable
 MIN_LAB_STUDIES = 5     # power gate: chosen, no external source
 SOURCE_SHA = "bb56ba5ac31b13be09cf3df42c1215b53255bb1eb3bb8a91838ab8cb4cb5c82c"
@@ -147,7 +160,7 @@ def slots(_rows):
     """The unfilled slots of one study or arm: three lab slots and four
     instrument slots.  Always NOT RECORDED here: the source carries no
     column for any of them.  None is part of the signature."""
-    return {s: NR for s in SLOTS + INSTRUMENT_SLOTS}
+    return {s: NR for s in SLOTS + INSTRUMENT_SLOTS + OTHER_SLOTS}
 
 
 def may_pool(sig_a, sig_b):
@@ -569,6 +582,75 @@ def main():
     a = sys.argv[1:]
     if a == ["--gate"]:
         raise SystemExit(0 if gate()[0] else 1)
+    if len(a) == 2 and a[0] == "strata":
+        import os
+        here = os.path.dirname(os.path.abspath(__file__))
+        root = os.path.dirname(os.path.dirname(here))
+        sys.path.insert(0, root)
+        sys.path.insert(0, os.path.join(root, "holdout"))
+        import phase_b
+        import phase_c
+        raw = open(a[1], "rb").read()
+        if hashlib.sha256(raw).hexdigest() != SOURCE_SHA:
+            raise SystemExit("source sha256 mismatch: not run")
+        allrows = list(csv.DictReader(io.StringIO(raw.decode("utf-8", errors="replace"), newline="")))
+        side = {"anchor": [r for r in allrows if int(r["Year"]) <= CUTOFF_YEAR],
+                "holdout": [r for r in allrows if int(r["Year"]) > CUTOFF_YEAR]}
+
+        def cell(rows, xfun, yfun):
+            n_st = len({r["Author"] for r in rows})
+            try:
+                with __import__("warnings").catch_warnings():
+                    __import__("warnings").simplefilter("ignore")
+                    f = phase_b.fit(rows, xfun, yfun=yfun)
+                est, (lo, hi) = f["estimate"], f["interval80"]
+                if not all(x == x for x in (est, lo, hi)):
+                    raise ValueError
+            except Exception:
+                return {"state": "not checkable", "studies": n_st, "rows": len(rows)}
+            return {"state": "thin" if f["n_studies"] < THIN_STUDIES else "ok", "est": est, "lo": lo,
+                    "hi": hi, "studies": f["n_studies"], "rows": f["n_rows"]}
+
+        def txt(c):
+            if c["state"] == "not checkable":
+                return "not checkable (%d studies, %d rows)" % (c["studies"], c["rows"])
+            return "%+8.4f [%+8.4f, %+8.4f] %3d st %5d rows%s" % (
+                c["est"], c["lo"], c["hi"], c["studies"], c["rows"], "  thin" if c["state"] == "thin" else "")
+
+        def sgn(c):
+            return None if c["state"] == "not checkable" else ("+" if c["est"] > 0 else "-")
+
+        print("APPROACH STRATA: Phase B fits (imported, unchanged) inside each Approach; spent holdout, scores nothing")
+        print("  cell = estimate [80%% interval] studies rows ; thin = under %d studies" % THIN_STUDIES)
+        strata = [("all rows", None), ("Self-Other", "Self-Other"), ("Self-Sterilized", "Self-Sterilized")]
+        res = {}
+        for fid, pid, col, xfun, yfun in phase_c.FITS:
+            print("  %s (%s)" % (fid, col))
+            for sname, val in strata:
+                c = {s: cell([r for r in side[s] if val is None or r["Approach"] == val], xfun, yfun)
+                     for s in ("anchor", "holdout")}
+                res[(fid, sname)] = c
+                print("    %-16s anchor  %s" % (sname, txt(c["anchor"])))
+                print("    %-16s holdout %s" % ("", txt(c["holdout"])))
+        print("\nFLIP READING: anchor vs holdout sign of the point estimate")
+        print("  id       all rows        Self-Other               Self-Sterilized")
+
+        def flip(c):
+            a_, h_ = sgn(c["anchor"]), sgn(c["holdout"])
+            if a_ is None or h_ is None:
+                return "not checkable"
+            base = "%s -> %s %s" % (a_, h_, "flip" if a_ != h_ else "same")
+            return base + (" (thin)" if "thin" in (c["anchor"]["state"], c["holdout"]["state"]) else "")
+        for fid, pid, col, xfun, yfun in phase_c.FITS:
+            print("  %-7s  %-14s  %-23s  %s" % (fid, flip(res[(fid, "all rows")]),
+                                                flip(res[(fid, "Self-Other")]), flip(res[(fid, "Self-Sterilized")])))
+        flips = [f[0] for f in phase_c.FITS if "flip" in flip(res[(f[0], "all rows")])]
+        gone = [(fid, s) for fid in flips for s in ("Self-Other", "Self-Sterilized")
+                if flip(res[(fid, s)]).endswith("same")]
+        print("  flips in all rows: %s" % (", ".join(flips) or "none"))
+        print("  disappear inside a stratum with both cells at >= %d studies: %s"
+              % (THIN_STUDIES, ", ".join("%s in %s" % g for g in gone) or "none"))
+        return
     if len(a) == 2 and a[0] == "slots":
         raw = open(a[1], "rb").read()
         if hashlib.sha256(raw).hexdigest() != SOURCE_SHA:
@@ -577,14 +659,15 @@ def main():
         su, au = study_units(allrows), arm_units(allrows)
         print("SLOTS (pooled): empty on every unit, never imputed, outside the signature")
         print("  slot                      NOT RECORDED on studies   NOT RECORDED on arms   expiry_condition")
-        for names, exp in ((SLOTS, SLOT_EXPIRY), (INSTRUMENT_SLOTS, INSTRUMENT_EXPIRY)):
+        for names, exp in ((SLOTS, SLOT_EXPIRY), (INSTRUMENT_SLOTS, INSTRUMENT_EXPIRY),
+                           (OTHER_SLOTS, INSTRUMENT_EXPIRY)):
             for s in names:
                 ns = sum(slots(v[2])[s] == NR for v in su.values())
                 na = sum(slots(v[2])[s] == NR for v in au.values())
                 print("  %-24s  %10d of %-10d  %8d of %-10d  %s" % (s, ns, len(su), na, len(au), exp))
-        in_sig = [s for s in SLOTS + INSTRUMENT_SLOTS if s in FIELDS]
+        in_sig = [s for s in slots(None) if s in FIELDS]
         print("  signature fields: %d ; slots inside the signature: %d ; slots: %d"
-              % (len(FIELDS), len(in_sig), len(SLOTS + INSTRUMENT_SLOTS)))
+              % (len(FIELDS), len(in_sig), len(slots(None))))
         return
     if len(a) == 2 and a[0] == "dropnull":
         import os
