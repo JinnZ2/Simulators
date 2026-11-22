@@ -121,9 +121,13 @@ never "infeasible". Redraw the boundary before discarding the idea.
 [stated] Many bottlenecks come from a fence someone put up that does not
 need to exist as a fence.
 
-Worked case (DERIVED): graphene fiber energy cost judged per plant vs
-merged with arc-furnace steelmaking, which already graphitizes its
-electrodes near 3000 C.
+Worked case (DERIVED, figures from model knowledge, not sourced;
+volume: moderate): graphene fiber's final heat step (~2800 C) judged per
+plant looks energy-prohibitive. Graphite electrode makers already run
+graphitization furnaces at ~2800-3000 C, and electric arc furnaces that
+consume those electrodes run arcs above 3000 C. The high-heat capability
+exists in two adjacent operators; the fence between them is
+institutional, not physical.
 
 ## 3. Selection rule
 
@@ -187,6 +191,8 @@ window it cannot be told apart from a branch nobody has reached yet
     tag              OBSERVED | DERIVED | PROPOSED
     feasibility_boundary   single unit | site | region | full supply
                      chain | NOT RECORDED (section 2a)
+    fence_type       physical | institutional | NOT RECORDED (section 2a)
+    redraw_result    still infeasible | feasible | not checked (section 2a)
     volume           volume = weight of evidence behind the tag: thin /
                      moderate / solid. [stated] by owner as a standing
                      tag; null until assessed.
