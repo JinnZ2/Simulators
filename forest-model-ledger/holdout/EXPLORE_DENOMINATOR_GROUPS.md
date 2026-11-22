@@ -433,8 +433,16 @@ unchanged and `run` prints the same output as before, byte for byte.
     expiry_condition    filled from each paper's affiliations and methods
 
 The source has no column for any of the three and nothing is imputed.
-Latitude and Longitude give the field site, not the lab's location, and
-are not used to fill them. The slots take no part in the match: two
+The source README (sha256 1aeac2d8...484b, fetched in Phase A) defines
+the two coordinate columns in these words and no others:
+
+    "* Latitude: Latitude (degree)"
+    "* Longitude: Longitude (degree)"
+
+It does not say what the coordinates locate. They are not used to fill
+the slots. (Dated note 2026-11-22: this paragraph first read "give the
+field site, not the lab's location"; that wording was this record's,
+not the source's, and is dropped.) The slots take no part in the match: two
 unknowns are not a match. Every scope group in sections 3 to 5 is
 therefore matched on seven recorded fields and unmatched-or-unknown on
 these three.
@@ -530,6 +538,11 @@ inside them from 8 to 37.
 
 ### 9.2 Field-drop sensitivity (report only; the signature is unchanged)
 
+Dated note 2026-11-22: "The first field-drop rule could only read 'moves
+outcome' by construction (merging cannot lower within-group spread);
+replaced by the null comparison below. Earlier table kept as run." The
+null comparison is section 11.
+
 For each field: leave it out, regroup, report. Within-group residual
 spread = weighted mean square of the finder's all-columns residuals
 about each group's mean, with a group-count correction. "same rows" reads
@@ -606,6 +619,11 @@ test was NOT run on any real group. No per-group lab-spread table
 exists and no group is tagged "signature-matched, protocol-unmatched".
 Tag state for every group: NOT RECORDED. The gate's planted draw and
 the flag rule were left as written.
+
+Dated note 2026-11-22, kept with this failed run as with the one in
+section 8.2: "random planted effects can fall near zero; pass/fail at
+one size cannot separate tool failure from low power." The power curve
+that replaces pass/fail is section 10.
 
 [DERIVED] The power gate changes which groups would be tested; it does
 not change what the synthetic gate measures, which is that the test
@@ -958,6 +976,53 @@ What the flag cannot say: which unrecorded difference separates the
 labs. That is what the three empty slots in section 8.1 and the
 finder's Author expiry_condition are for.
 
+## 11. Field-drop null (arm level, pooled; 2026-11-22)
+
+Replaces the mark in section 9.2. For each field: shuffle that field's
+values across the 313 arms (value counts kept), group on the signature
+with the shuffled field in it, then leave the field out and record the
+same-rows spread rise. 200 shuffles per field (chosen, no external
+source). The real rise is the section 9.2 arm-level rise. A field
+"moves outcome" only if its real rise is above the 95th percentile of
+its own null rises.
+
+Printed by `python3 ledger/toolkit/denominator_sorter.py dropnull
+SOURCE_CSV` and pasted by script.
+
+    FIELD-DROP NULL (arm level, pooled): 200 shuffles per field, value counts kept
+      dropped field         real rise   null mean   null 95th   share of null >= real   shuffles  mark
+      Experimental.setting   +0.0001     +0.0014     +0.0061                   0.845        200  not distinguishable from merging noise
+      Phase2.time            +0.0081     +0.0103     +0.0183                   0.670        200  not distinguishable from merging noise
+      Approach               +0.0192     +0.0054     +0.0097                   0.000        200  moves outcome
+      Phase1.culti           +0.0076     +0.0098     +0.0148                   0.725        200  not distinguishable from merging noise
+      SoilTp                 +0.0104     +0.0066     +0.0109                   0.060        200  not distinguishable from merging noise
+      Phase2.grow            +0.0193     +0.0104     +0.0223                   0.095        200  not distinguishable from merging noise
+      Response               +0.0082     +0.0086     +0.0145                   0.520        200  not distinguishable from merging noise
+
+[DERIVED] Reading:
+
+    Approach        the only field whose removal raises within-group
+                    spread by more than merging on a shuffled copy of
+                    itself does; none of 200 shuffles reached its rise
+    SoilTp,         real rise above the null mean but under the 95th
+    Phase2.grow     percentile (0.060 and 0.095 of shuffles at or above)
+    the other four  real rise at or below the null mean: on this
+                    statistic they split studies apart without the split
+                    showing in the outcome
+
+    "not distinguishable from merging noise" is not "does not matter".
+    The statistic is spread about group means of one residual; a field
+    could shift outcomes in a way that this null, at 200 shuffles and
+    313 arms, cannot separate. It also is not a licence to drop the
+    field: the signature is unchanged.
+
+    seven fields were each read at the 95th percentile with no
+    correction for reading seven.
+
+Scope: pooled, arm level only, as ordered. Each shuffle regroups, so
+the rows read "before" differ from shuffle to shuffle; within one
+shuffle the before and after rows are the same.
+
 ## Provenance
 
 Co-authored, Kavik + Claude, work order of 2026-11-22 (END marker
@@ -971,6 +1036,7 @@ branch by merge from its own branch, unedited. The amended addendum
 all-columns residuals from the finder's own parts and checks the
 explained share against the finder before using them. Section 10 is the
 `power` command: a synthetic power curve, a size rule fixed in the order
-before real data, then the real lab test on qualifying groups.
+before real data, then the real lab test on qualifying groups. Section 11 is the
+`dropnull` command.
 Source data: Zenodo record 10403125, sha256 asserted, not committed.
 The reading in section 6 is this run's.

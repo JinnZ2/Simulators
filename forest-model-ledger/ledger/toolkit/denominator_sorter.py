@@ -6,6 +6,7 @@ EXPLORATORY.  It fits nothing, scores nothing and tests no prediction.
     python3 ledger/toolkit/denominator_sorter.py run SOURCE_CSV
     python3 ledger/toolkit/denominator_sorter.py addendum SOURCE_CSV
     python3 ledger/toolkit/denominator_sorter.py power SOURCE_CSV
+    python3 ledger/toolkit/denominator_sorter.py dropnull SOURCE_CSV
 
 A study's DENOMINATOR SIGNATURE is read from seven recorded columns:
     Experimental.setting, Phase2.time (binned), Approach (control type),
@@ -32,9 +33,10 @@ ADDENDUM (2026-11-22):
           lab_country, governance_regime (permits, sterilization or
           biosafety rules, funding mandates).  All read NOT RECORDED; the
           source has no such column and nothing is imputed.  They take no
-          part in the match: two unknowns are not a match.  Latitude and
-          Longitude give the field site, not the lab's location, and are
-          not used to fill them.
+          part in the match: two unknowns are not a match.  The source
+          README defines "Latitude: Latitude (degree)" and "Longitude:
+          Longitude (degree)" and says nothing about what they locate;
+          they are not used to fill the slots.
   lab     inside each scope group, missing_column_finder's Author (lab)
           test: share of the group's spread that sits between studies,
           against rows shuffled across the group.  The spread is taken
@@ -70,6 +72,15 @@ POWER CURVE (2026-11-22, after the lab gate failed twice):
   sizes with detection >= 0.8 at sd 0.2 and false-flag <= 0.05; other
   groups read "underpowered at this size", tag NOT RECORDED.  A real
   group of k studies is read at the largest tested size <= k.
+
+FIELD-DROP NULL (2026-11-22, arm level, pooled):
+  the first field-drop rule could only read "moves outcome" by
+  construction (merging cannot lower within-group spread).  Replaced by a
+  null: shuffle the field's values across arms (value counts kept), group
+  on the signature with the shuffled field in it, then drop the field and
+  record the same-rows spread rise.  DROP_SHUFFLES shuffles.  A real field
+  "moves outcome" only if its real rise is above the 95th percentile of
+  its own null rises; otherwise "not distinguishable from merging noise".
 
 `run` and `--gate` use the standard library only.  `addendum` imports
 missing_column_finder (numpy) and uses its eta2, tau2_intercept, _codes,
@@ -300,6 +311,47 @@ def drop_table(units, resid):
     return out
 
 
+DROP_SHUFFLES = 200      # chosen, no external source
+DROP_SEED = 20261122
+
+
+def _rise(units, i, resid):
+    """Same-rows spread rise when field i is left out of the signature."""
+    g0, _ = group_units(units)
+    common = {id(r) for uids in g0.values() for u in uids for r in units[u][2]}
+    before = within_spread(units, g0, resid, common)
+    g1, _ = group_units(units, i)
+    after = within_spread(units, g1, resid, common)
+    if before is None or after is None:
+        return None
+    return after - before
+
+
+def drop_null(units, resid, shuffles=DROP_SHUFFLES, seed=DROP_SEED):
+    out = []
+    uids = sorted(units)
+    for i, f in enumerate(FIELDS):
+        real = _rise(units, i, resid)
+        rng = random.Random(seed * 10 + i)
+        null = []
+        for _ in range(shuffles):
+            vals = [units[u][0][i] for u in uids]
+            rng.shuffle(vals)
+            shuf = {u: (units[u][0][:i] + (v,) + units[u][0][i + 1:], units[u][1], units[u][2])
+                    for u, v in zip(uids, vals)}
+            r = _rise(shuf, i, resid)
+            if r is not None:
+                null.append(r)
+        null.sort()
+        p95 = null[min(len(null) - 1, int(round(0.95 * (len(null) - 1))))] if null else None
+        mark = ("not checkable" if real is None or p95 is None else
+                "moves outcome" if real > p95 else "not distinguishable from merging noise")
+        out.append((f, real, sum(null) / len(null) if null else None, p95,
+                    sum(x >= real for x in null) / len(null) if null and real is not None else None,
+                    len(null), mark))
+    return out
+
+
 def lab_table(units, name_of):
     import missing_column_finder as mcf
     groups, _ = group_units(units)
@@ -504,6 +556,26 @@ def main():
     a = sys.argv[1:]
     if a == ["--gate"]:
         raise SystemExit(0 if gate()[0] else 1)
+    if len(a) == 2 and a[0] == "dropnull":
+        import os
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import missing_column_finder as mcf
+        if not gate()[0]:
+            raise SystemExit("GATE FAIL: not run")
+        raw = open(a[1], "rb").read()
+        if hashlib.sha256(raw).hexdigest() != SOURCE_SHA:
+            raise SystemExit("source sha256 mismatch: not run")
+        allrows = list(csv.DictReader(io.StringIO(raw.decode("utf-8", errors="replace"), newline="")))
+        resid, share = finder_residuals(allrows)
+        ref = mcf.analyse(allrows, n_perm=1)["together"]["share"]
+        if abs(share - ref) >= 1e-12:
+            raise SystemExit("residuals do not match the finder: not run")
+        print("FIELD-DROP NULL (arm level, pooled): %d shuffles per field, value counts kept" % DROP_SHUFFLES)
+        print("  dropped field         real rise   null mean   null 95th   share of null >= real   shuffles  mark")
+        for f, real, mean, p95, frac, n, mark in drop_null(arm_units(allrows), resid):
+            print("  %-20s %+9.4f   %+9.4f   %+9.4f   %21.3f   %8d  %s"
+                  % (f, real, mean, p95, frac, n, mark))
+        return
     if len(a) == 2 and a[0] == "power":
         import os
         sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
