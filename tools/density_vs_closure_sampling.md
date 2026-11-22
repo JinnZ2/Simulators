@@ -15,8 +15,12 @@ the work order of 2026-11-22 (Kavik + Claude), carried as stated.
 ## 0. Source and what is taken from it
 
 Artiles et al., "The Alien Space of Science", arXiv:2603.01092 (v3,
-2026-10-21). Cited, not copied. Carried as relayed in the work order;
-the paper was not re-read in this render.
+2026-10-21). Cited, not copied. Statements about Artiles et al. come from chat Claude's fetch of the arXiv
+abstract page (arXiv:2603.01092v3) on 2026-11-22, relayed by the owner.
+Abstract only; the PDF was not read by any party to this file. Atom
+extraction method, coherence-model training, rater counts and stated
+limitations: NOT RECORDED. The four welds are chat Claude's audit of the
+abstract (DERIVED).
 
 [co-authored] Their move: score COHERENCE and AVAILABILITY separately,
 then sample combinations that hold together but that no existing author
@@ -155,8 +159,9 @@ window it cannot be told apart from a branch nobody has reached yet
     crowding_basis   who (Kavik / model / both) and how. MANDATORY
     holdout_status   hit | miss | false lead | not run
     tag              OBSERVED | DERIVED | PROPOSED
-    volume           carried from the work order as a field name; the
-                     order does not define its measure. null until declared
+    volume           volume = weight of evidence behind the tag: thin /
+                     moderate / solid. [stated] by owner as a standing
+                     tag; null until assessed.
     observer slots   null (reserved; nothing is written here by this method)
 
 A record with `crowding` set and `crowding_basis` empty does not load.
@@ -202,9 +207,14 @@ where two different things travel under one word.
 2. [DERIVED] CLOSURE only reaches branches that model a conserved
    quantity. For the rest it reads `not checkable`, and the method then
    has no physics reading at all; it does not fall back to resemblance.
-3. [PROPOSED] thin / dense has no declared cut. Until one is declared
-   with its corpus, two assessors can tag the same branch differently
-   and both be following this note. Keep both tags with both bases.
+3. [PROPOSED] (co-authored) The crowding cut. NOT RECORDED stays as a
+   fourth value.
+
+       dense  = default reading appears on a cold first ask, unprompted
+       thin   = appears only once the branch is named or primed
+       absent = does not appear even when primed; corpus must be stated
+
+   crowding_basis must name who ran the probe and which model.
 4. [PROPOSED] Nothing here has been run. The selection rule, the atom
    admission test and the holdout spec are untested.
 
@@ -212,9 +222,11 @@ where two different things travel under one word.
 
 Co-authored, Kavik + Claude, work order of 2026-11-22. Sections tagged
 [co-authored] carry the order as stated; DERIVED and PROPOSED lines were
-added in this render and are marked. The source paper (arXiv:2603.01092)
-is cited from the order and was not opened in this render, so every
-statement about its method is carried, not verified. The four welds are
-carried from the order's audit of that paper. No instrument, corpus or
+added in this render and are marked. Statements about Artiles et al. come from chat Claude's fetch of the arXiv
+abstract page (arXiv:2603.01092v3) on 2026-11-22, relayed by the owner.
+Abstract only; the PDF was not read by any party to this file. Atom
+extraction method, coherence-model training, rater counts and stated
+limitations: NOT RECORDED. The four welds are chat Claude's audit of the
+abstract (DERIVED). No instrument, corpus or
 run accompanies this note. Mirrored byte-identical in the Simulators
 repository at `tools/density_vs_closure_sampling.md`.
