@@ -1,4 +1,5 @@
-# listed in the work order for later. Nothing retrieved; nothing here has been read.
+# Retrieved: DS_JIANG_PSF (2026-11-22, PR #330). All other entries: not
+# retrieved; nothing else here has been read.
 sources:
   - id: DS_JIANG_PSF
     what: "Jiang et al. global plant-soil feedback dataset"

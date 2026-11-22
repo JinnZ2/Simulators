@@ -198,6 +198,10 @@ NOT RECORDED here. `ledger/data_sources.yaml` lists this source as
 `not_retrieved` with `used_by: []`; that file was not edited by this
 order.
 
+Dated note 2026-11-22: superseded by the follow-up order on this PR
+(commits 4bcca3a, 2c02eaa); data_sources.yaml now lists DS_JIANG_PSF
+as retrieved. The text above is kept as true at Phase A time.
+
 ## Network state (2026-11-22)
 
 zenodo.org, datadryad.org, doi.org were added to the environment's
