@@ -29,7 +29,9 @@ from biological feedback rules needs its own evidence.
                             decider: VOID
     channel_exists          yes / no / NOT RECORDED
     channel_safe            reporting punished? yes / no / NOT RECORDED
-    feasibility_boundary    see density_vs_closure_sampling.md section 2a
+    feasibility_boundary    see tools/density_vs_closure_sampling.md
+                            section 2a (method-layer #36 / Simulators
+                            #329, unmerged; sha256 b6577d69...803b)
     fence_type              physical / institutional / NOT RECORDED
 
 ## 3. Measures (all untested)
