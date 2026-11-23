@@ -470,6 +470,13 @@ def myc(path, frpath):
                 cells.append("%d / %d" % (len(rr), len({r["Author"] for r in rr})))
             print("    %-7s  %-16s " % (s, sname) + "".join("%-14s" % c for c in cells))
 
+    print("  LIFE FORM AGAINST TYPE: rows that are Woody / all rows of the type")
+    for s in ("anchor", "holdout"):
+        cells = []
+        for lv in MYC_LEVELS:
+            rr_ = [r for r in side[s] if r["myc_type"] == lv]
+            cells.append("%d / %d" % (sum(1 for r in rr_ if r["Life.form"] == "Woody"), len(rr_)))
+        print("    %-7s  %-16s " % (s, "pooled") + "".join("%-14s" % c for c in cells))
     print("  B4 RERUN: myc_type in place of Life.form; phase_b.fit unchanged; one contrast at a time")
     print("    cell = estimate [80%% interval] studies rows ; thin = under %d studies on either level" % THIN)
     contrasts = [("Life.form Woody - Nonwoody (as sealed)", lambda r: phase_b.dummy("Life.form", "Woody", "Nonwoody")(r)),

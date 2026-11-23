@@ -305,6 +305,9 @@ FUNGALROOT_JSONL`, pasted by script.
         holdout  pooled           2020 / 43     111 / 10      34 / 6        52 / 10       0 / 0         45 / 5        
         holdout  Self-Other       1883 / 39     97 / 9        34 / 6        48 / 10       0 / 0         43 / 5        
         holdout  Self-Sterilized  137 / 21      14 / 2        0 / 0         4 / 3         0 / 0         2 / 1         
+      LIFE FORM AGAINST TYPE: rows that are Woody / all rows of the type
+        anchor   pooled           222 / 3197    133 / 133     136 / 137     44 / 176      0 / 1         10 / 63       
+        holdout  pooled           135 / 2020    110 / 111     34 / 34       0 / 52        0 / 0         4 / 45        
       B4 RERUN: myc_type in place of Life.form; phase_b.fit unchanged; one contrast at a time
         cell = estimate [80% interval] studies rows ; thin = under 5 studies on either level
         Life.form Woody - Nonwoody (as sealed)
@@ -368,8 +371,8 @@ FUNGALROOT_JSONL`, pasted by script.
                 holdout 0.980); about four fifths of those at species
                 level, the rest through the genus aggregate.
     spread      the type is lopsided: AM carries 86% of anchor rows and
-                89% of holdout rows. ECM, AM+ECM and NM together sit on
-                10 to 21 studies per side when pooled.
+                89% of holdout rows. ECM, AM+ECM and NM each sit on 6 to
+                21 studies per side when pooled.
     B4          with ECM against AM in place of woody against nonwoody,
                 Self-Other is positive on both sides with both intervals
                 excluding zero (anchor +0.38, holdout +0.12); "any ECM"
@@ -389,9 +392,9 @@ FUNGALROOT_JSONL`, pasted by script.
                 stays flagged. Mycorrhizal type, as joined here, does
                 not account for the Species clustering.
     scope       exploratory, after the holdout was spent; five contrasts
-                by two strata by two sides with no correction. Woody and
-                ECM overlap heavily in these data, so "ECM - AM" is not
-                separated from life form here. Types come from records
+                by two strata by two sides with no correction. All but one
+                ECM or AM+ECM row on each side is Woody (table above), so
+                "ECM - AM" is not separated from life form here. Types come from records
                 of mixed quality under one hand-set rule.
 
 ## 3. Design doc
