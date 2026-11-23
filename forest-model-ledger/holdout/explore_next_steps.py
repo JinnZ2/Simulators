@@ -8,6 +8,7 @@ scored.  Every reading printed is DERIVED.
     python3 holdout/explore_next_steps.py rate SOURCE_CSV
     python3 holdout/explore_next_steps.py loso SOURCE_CSV
     python3 holdout/explore_next_steps.py share SOURCE_CSV
+    python3 holdout/explore_next_steps.py myc SOURCE_CSV FUNGALROOT_JSONL
 
 coverage  item 1: AI and MAP ranges, anchor vs holdout, pooled and inside
           each Approach.  Ranges only; no fit is run.
@@ -27,6 +28,33 @@ loso      follow-up item 1: holdout B1 (AI, MAP) refit with each holdout
           (AI, MAP) pair on the holdout side.
 share     the largest single study's share of rows beside each of the six
           Phase B fits, per side and stratum.  Counts only; no fit.
+myc       follow-up item 2: mycorrhizal type joined from FungalRoot
+          occurrence records (GBIF dataset 744edc21-8dd2-474e-8a0b-
+          b8c3d56a3c2d, fetched through the GBIF occurrence API; sha256 of
+          the fetched file asserted).  No type is filled from recall: a
+          taxon with no record reads NOT RECORDED.
+          record -> type set (the source's own "Mycorrhiza type" values):
+            AM -> AM ; "EcM, AM undetermined", "EcM, no AM colonization"
+            -> ECM ; "EcM,AM" -> AM and ECM ; non-mycorrhizal -> NM ;
+            ErM, OM, Other -> OTHER (the order's list has no slot for
+            them; kept apart, never folded into NM or NOT RECORDED) ;
+            "non-ectomycorrhizal (AM undetermined)" says nothing about
+            the four classes and is not counted.
+          taxon rule (hand-set): a type counts for a taxon when it is on
+          at least MYC_MIN of the taxon's counted records.  AM and ECM
+          both count -> AM+ECM ; else AM ; else ECM ; else NM ; else
+          OTHER.
+          join: Species string against the source's interpreted species
+          name, then its verbatim name (level "species"); then Genus
+          against all of the genus's records (level "genus"; the source
+          holds records, not a genus table, so a genus type here is an
+          aggregate of records and is tagged as such).
+          B4 with myc_type: phase_b.fit and phase_b.dummy, imported and
+          unchanged, one two-level contrast at a time (the fit takes one
+          moderator).  Species test: missing_column_finder.analyse,
+          unchanged, with five myc dummy columns added in memory (AM is
+          the reference; NOT RECORDED is its own column so the row set is
+          the same before and after).
 
 Mark rule for coverage (hand-set, written before the table was seen):
   narrower  holdout min-max width < NARROW * anchor min-max width
@@ -333,8 +361,212 @@ def share(path):
                   % ((fid, sname) + cells[0] + cells[1]))
 
 
+FUNGALROOT_SHA = "FILLED_AT_FETCH"
+MYC_MIN = 0.2
+MYC_MAP = {"AM": {"AM"}, "EcM, AM undetermined": {"ECM"}, "EcM, no AM colonization": {"ECM"},
+           "EcM,AM": {"AM", "ECM"}, "non-mycorrhizal": {"NM"}, "ErM": {"OTHER"}, "OM": {"OTHER"},
+           "Other": {"OTHER"}, "ErM,EcM": {"OTHER", "ECM"}, "ErM,AM": {"OTHER", "AM"},
+           "non-ectomycorrhizal (AM undetermined)": set()}
+NR = "NOT RECORDED"
+MYC_LEVELS = ["AM", "ECM", "AM+ECM", "NM", "OTHER", NR]
+THIN = 5
+
+
+def _norm(name):
+    return " ".join((name or "").lower().split())
+
+
+def _taxon_type(counts):
+    n = counts.get("_n", 0)
+    if not n:
+        return None
+    on = {t for t in ("AM", "ECM", "NM", "OTHER") if counts.get(t, 0) / n >= MYC_MIN}
+    if "AM" in on and "ECM" in on:
+        return "AM+ECM"
+    for t in ("AM", "ECM", "NM", "OTHER"):
+        if t in on:
+            return t
+    return None
+
+
+def fungalroot(path):
+    import json
+    raw = open(path, "rb").read()
+    if hashlib.sha256(raw).hexdigest() != FUNGALROOT_SHA:
+        raise SystemExit("STOP: FungalRoot file sha256 mismatch: not run")
+    sp, ge, unknown, n = {}, {}, {}, 0
+    for line in raw.decode("ascii").splitlines():
+        d = json.loads(line)
+        n += 1
+        types = set()
+        counted = False
+        for k, v in d["mof"]:
+            if k != "Mycorrhiza type":
+                continue
+            if v not in MYC_MAP:
+                unknown[v] = unknown.get(v, 0) + 1
+                continue
+            if MYC_MAP[v]:
+                counted = True
+                types |= MYC_MAP[v]
+        if not counted:
+            continue
+        verb = " ".join((d.get("scientificName") or "").split()[:2])
+        for name in {_norm(d.get("species")), _norm(verb)} - {""}:
+            c = sp.setdefault(name, {})
+            c["_n"] = c.get("_n", 0) + 1
+            for t in types:
+                c[t] = c.get(t, 0) + 1
+        g = _norm(d.get("genus")) or _norm(verb.split()[0] if verb else "")
+        if g:
+            c = ge.setdefault(g, {})
+            c["_n"] = c.get("_n", 0) + 1
+            for t in types:
+                c[t] = c.get(t, 0) + 1
+    return sp, ge, unknown, n, len(raw)
+
+
+def myc(path, frpath):
+    side = load(path)
+    sp, ge, unknown, nrec, nbytes = fungalroot(frpath)
+    fits, est = _fits()
+    import phase_b
+    print("MYCORRHIZAL-TYPE JOIN: FungalRoot occurrence records; spent holdout, scores nothing")
+    print("  source file: %d records, %d bytes, sha256 asserted; species names with a counted type: %d; genera: %d"
+          % (nrec, nbytes, len(sp), len(ge)))
+    print("  source type values outside the declared map (not counted): %s"
+          % (", ".join("%s x%d" % kv for kv in sorted(unknown.items())) or "none"))
+    for s in ("anchor", "holdout"):
+        for r in side[s]:
+            t = _taxon_type(sp.get(_norm(r["Species"]), {}))
+            lvl = "species"
+            if t is None:
+                t = _taxon_type(ge.get(_norm(r["Genus"]), {}))
+                lvl = "genus"
+            if t is None:
+                t, lvl = NR, "none"
+            r["myc_type"], r["myc_level"] = t, lvl
+    print("  MATCH RATE (no fill: unmatched = NOT RECORDED, kept)")
+    print("    side     unit      total   species-level   genus-level   NOT RECORDED   matched share")
+    for s in ("anchor", "holdout"):
+        rows = side[s]
+        for unit, items in (("rows", [(r["myc_level"],) for r in rows]),
+                            ("species", [(lv,) for lv in {r["Species"]: r["myc_level"] for r in rows}.values()])):
+            c = {}
+            for (lv,) in items:
+                c[lv] = c.get(lv, 0) + 1
+            tot = len(items)
+            print("    %-7s  %-8s %6d   %13d   %11d   %12d   %.3f"
+                  % (s, unit, tot, c.get("species", 0), c.get("genus", 0), c.get("none", 0),
+                     (tot - c.get("none", 0)) / tot))
+    print("  TYPE COUNTS: rows / studies")
+    print("    side     stratum          " + "".join("%-14s" % lv for lv in MYC_LEVELS))
+    for s in ("anchor", "holdout"):
+        for sname, val in STRATA:
+            rows = [r for r in side[s] if val is None or r["Approach"] == val]
+            cells = []
+            for lv in MYC_LEVELS:
+                rr = [r for r in rows if r["myc_type"] == lv]
+                cells.append("%d / %d" % (len(rr), len({r["Author"] for r in rr})))
+            print("    %-7s  %-16s " % (s, sname) + "".join("%-14s" % c for c in cells))
+
+    print("  B4 RERUN: myc_type in place of Life.form; phase_b.fit unchanged; one contrast at a time")
+    print("    cell = estimate [80%% interval] studies rows ; thin = under %d studies on either level" % THIN)
+    contrasts = [("Life.form Woody - Nonwoody (as sealed)", lambda r: phase_b.dummy("Life.form", "Woody", "Nonwoody")(r)),
+                 ("ECM - AM", phase_b.dummy("myc_type", "ECM", "AM")),
+                 ("AM+ECM - AM", phase_b.dummy("myc_type", "AM+ECM", "AM")),
+                 ("NM - AM", phase_b.dummy("myc_type", "NM", "AM")),
+                 ("any ECM - AM", lambda r: 1.0 if r["myc_type"] in ("ECM", "AM+ECM")
+                  else (0.0 if r["myc_type"] == "AM" else None))]
+    rr = lambda r: float(r["rr"])  # noqa: E731
+    for cname, xfun in contrasts:
+        print("    %s" % cname)
+        for sname, val in STRATA[1:]:
+            for s in ("anchor", "holdout"):
+                rows = [r for r in side[s] if r["Approach"] == val]
+                st = {0.0: set(), 1.0: set()}
+                for r in rows:
+                    x = xfun(r)
+                    if x is not None:
+                        st[x].add(r["Author"])
+                head = "      %-16s %-7s " % (sname if s == "anchor" else "", s)
+                if not st[0.0] or not st[1.0]:
+                    print(head + "not checkable (one level absent: %d / %d studies)" % (len(st[1.0]), len(st[0.0])))
+                    continue
+                try:
+                    e, (lo, hi), ns, nr = est(rows, xfun, rr)
+                    if not all(v == v for v in (e, lo, hi)):
+                        raise ValueError
+                except Exception:
+                    print(head + "not checkable (fit did not return)")
+                    continue
+                print(head + "%+8.4f [%+8.4f, %+8.4f] %3d st %5d rows   level studies %d / %d%s"
+                      % (e, lo, hi, ns, nr, len(st[1.0]), len(st[0.0]),
+                         "  thin" if min(len(st[0.0]), len(st[1.0])) < THIN else ""))
+
+    sys.path.insert(0, os.path.join(os.path.dirname(HERE), "ledger", "toolkit"))
+    import missing_column_finder as mcf
+    dums = ["myc_ECM", "myc_AMECM", "myc_NM", "myc_OTHER", "myc_NR"]
+    lv_of = dict(zip(dums, ["ECM", "AM+ECM", "NM", "OTHER", NR]))
+    for s in ("anchor", "holdout"):
+        for r in side[s]:
+            for dname in dums:
+                r[dname] = "yes" if r["myc_type"] == lv_of[dname] else "no"
+    print("  SPECIES TEST: missing_column_finder.analyse (unchanged), before and after 5 myc columns are added")
+    print("    share = Species share of the spread left after the columns ; excess = share minus null mean")
+    print("    stratum          side     columns   left     between-study: share  excess  flag   "
+          "within-study: share  excess  flag")
+    saved = (list(mcf.COLUMNS), dict(mcf.BINARY))
+    drops = []
+    try:
+        for sname, val in STRATA[1:]:
+            for s, rows in (("anchor", side["anchor"]), ("holdout", side["holdout"]),
+                            ("pooled", side["anchor"] + side["holdout"])):
+                rows = [r for r in rows if r["Approach"] == val]
+                got = {}
+                for tag in ("before", "after"):
+                    mcf.COLUMNS[:] = saved[0] + (dums if tag == "after" else [])
+                    mcf.BINARY.clear()
+                    mcf.BINARY.update(saved[1])
+                    if tag == "after":
+                        mcf.BINARY.update({dname: ("yes", "no") for dname in dums})
+                    import warnings
+                    with warnings.catch_warnings():
+                        warnings.simplefilter("ignore")
+                        o = mcf.analyse(rows)
+                    g = o["groupings"]["Species"]
+                    got[tag] = g
+
+                    def cell(v):
+                        if not isinstance(v, dict):
+                            return "%-28s" % "not checkable"
+                        return "%6.3f  %+6.3f  %-4s        " % (v["share"], v["excess"], "FLAG" if v["flag"] else "-")
+                    print("    %-16s %-7s  %-7s   %.4f                  %s %s"
+                          % (sname if (s == "anchor" and tag == "before") else "", s if tag == "before" else "",
+                             "%d %s" % (len(o["together"]["columns_used"]), tag[:3]), o["together"]["left"],
+                             cell(g["between_study"]), cell(g["within_study"])))
+                for k in ("between_study", "within_study"):
+                    b, a_ = got["before"][k], got["after"][k]
+                    if isinstance(b, dict) and isinstance(a_, dict):
+                        drops.append((sname, s, k, b["share"], a_["share"], b["excess"], a_["excess"]))
+    finally:
+        mcf.COLUMNS[:] = saved[0]
+        mcf.BINARY.clear()
+        mcf.BINARY.update(saved[1])
+    print("  DOES THE SPECIES SHARE DROP? (after minus before; read on excess against the finder's own"
+          " MIN_EXCESS, %.2f)" % mcf.MIN_EXCESS)
+    print("    stratum          side     test            share     excess    reading")
+    for sname, s, k, b, a_, be, ae in drops:
+        print("    %-16s %-7s  %-14s %+8.4f  %+8.4f  %s"
+              % (sname, s, k, a_ - b, ae - be,
+                 "drops" if ae - be <= -mcf.MIN_EXCESS else
+                 ("rises" if ae - be >= mcf.MIN_EXCESS else "no change (under %.2f)" % mcf.MIN_EXCESS)))
+
+
 def main():
     a = sys.argv[1:]
+    if len(a) == 3 and a[0] == "myc":
+        return myc(a[1], a[2])
     if len(a) == 2 and a[0] == "loso":
         return loso(a[1])
     if len(a) == 2 and a[0] == "share":
