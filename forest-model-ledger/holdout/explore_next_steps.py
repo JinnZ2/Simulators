@@ -6,6 +6,8 @@ scored.  Every reading printed is DERIVED.
     python3 holdout/explore_next_steps.py coverage SOURCE_CSV
     python3 holdout/explore_next_steps.py power
     python3 holdout/explore_next_steps.py rate SOURCE_CSV
+    python3 holdout/explore_next_steps.py loso SOURCE_CSV
+    python3 holdout/explore_next_steps.py share SOURCE_CSV
 
 coverage  item 1: AI and MAP ranges, anchor vs holdout, pooled and inside
           each Approach.  Ranges only; no fit is run.
@@ -15,6 +17,16 @@ power     item 3 arithmetic: reads the anchor estimates and 80% intervals
           data file is opened.
 rate      item 3 arithmetic: studies per publication year in the source,
           and their Approach / setting mix, as a base for "expected n".
+loso      follow-up item 1: holdout B1 (AI, MAP) refit with each holdout
+          study removed in turn, pooled and inside each Approach.  The fit
+          is phase_b.fit through phase_c.FITS, imported and unchanged
+          (needs numpy).  Mark rule, written before the table was seen:
+          if the slope with the dominant site removed has the anchor's
+          sign -> "flip carried by one site"; else "flip not carried by
+          that site".  Dominant site = the rows at the most common
+          (AI, MAP) pair on the holdout side.
+share     the largest single study's share of rows beside each of the six
+          Phase B fits, per side and stratum.  Counts only; no fit.
 
 Mark rule for coverage (hand-set, written before the table was seen):
   narrower  holdout min-max width < NARROW * anchor min-max width
@@ -232,8 +244,101 @@ def rate(path):
           % (full[0], full[-1], counts[0], counts[-1], quantile(counts, 0.5)))
 
 
+def _fits():
+    sys.path.insert(0, HERE)
+    sys.path.insert(0, os.path.dirname(HERE))
+    import warnings
+    import phase_b
+    import phase_c
+
+    def est(rows, xfun, yfun):
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            f = phase_b.fit(rows, xfun, yfun=yfun)
+        return f["estimate"], f["interval80"], f["n_studies"], f["n_rows"]
+    return phase_c.FITS, est
+
+
+def loso(path):
+    side = load(path)
+    fits, est = _fits()
+    hold = side["holdout"]
+    pairs = {}
+    for r in hold:
+        pairs[(r["AI"], r["MAP"])] = pairs.get((r["AI"], r["MAP"]), 0) + 1
+    dom = max(pairs, key=pairs.get)
+    owners = {}
+    for r in hold:
+        if (r["AI"], r["MAP"]) == dom:
+            owners[r["Author"]] = owners.get(r["Author"], 0) + 1
+    print("LEAVE-ONE-STUDY-OUT, holdout B1: phase_b.fit (imported, unchanged); spent holdout, scores nothing")
+    print("  dominant site: AI %s, MAP %s; %d of %d holdout rows; studies with rows there: %s"
+          % (dom[0], dom[1], pairs[dom], len(hold),
+             "; ".join("%s (%d rows)" % (k.encode("ascii", "replace").decode(), v)
+                       for k, v in sorted(owners.items(), key=lambda kv: -kv[1]))))
+    print("  id      stratum          anchor     holdout    LOSO slope range        signs   site removed"
+          "                 studies  rows   mark")
+    print("                           slope      slope      min        max        -  +    slope [80% interval]")
+    detail = []
+    for fid, pid, col, xfun, yfun in fits:
+        if pid != "B1":
+            continue
+        for sname, val in STRATA:
+            a_rows = [r for r in side["anchor"] if val is None or r["Approach"] == val]
+            h_rows = [r for r in hold if val is None or r["Approach"] == val]
+            a_est = est(a_rows, xfun, yfun)[0]
+            h_est = est(h_rows, xfun, yfun)[0]
+            res = []
+            for st in sorted({r["Author"] for r in h_rows}):
+                e = est([r for r in h_rows if r["Author"] != st], xfun, yfun)[0]
+                res.append((e, st, sum(1 for r in h_rows if r["Author"] == st)))
+            res.sort()
+            neg = sum(1 for e, _, _ in res if e < 0)
+            d_est, (dlo, dhi), dn, dr = est([r for r in h_rows if (r["AI"], r["MAP"]) != dom], xfun, yfun)
+            same = (d_est < 0) == (a_est < 0)
+            print("  %-6s  %-16s %+8.4f   %+8.4f   %+8.4f   %+8.4f   %2d %2d   %+8.4f [%+8.4f, %+8.4f]   %4d  %5d   %s"
+                  % (fid, sname, a_est, h_est, res[0][0], res[-1][0], neg, len(res) - neg, d_est, dlo, dhi,
+                     dn, dr, "flip carried by one site" if same else "flip not carried by that site"))
+            detail.append((fid, sname, res[0], res[-1]))
+    print("  the single removals that move the slope most:")
+    for fid, sname, lo, hi in detail:
+        print("    %-6s %-16s lowest %+8.4f without %s (%d rows); highest %+8.4f without %s (%d rows)"
+              % (fid, sname, lo[0], lo[1].encode("ascii", "replace").decode(), lo[2],
+                 hi[0], hi[1].encode("ascii", "replace").decode(), hi[2]))
+
+
+def share(path):
+    side = load(path)
+    fits, _ = _fits()
+    print("LARGEST SINGLE STUDY'S SHARE OF ROWS beside each Phase B fit (rows the fit can use); counts only")
+    print("  id      stratum          anchor: share  rows   studies     holdout: share  rows   studies")
+    for fid, pid, col, xfun, yfun in fits:
+        for sname, val in STRATA:
+            cells = []
+            for s in ("anchor", "holdout"):
+                by = {}
+                for r in side[s]:
+                    if val is not None and r["Approach"] != val:
+                        continue
+                    try:
+                        if xfun(r) is None:
+                            continue
+                        yfun(r)
+                    except ValueError:
+                        continue
+                    by[r["Author"]] = by.get(r["Author"], 0) + 1
+                n = sum(by.values())
+                cells.append((max(by.values()) / n, n, len(by)))
+            print("  %-6s  %-16s        %.3f  %5d   %5d              %.3f  %5d   %5d"
+                  % ((fid, sname) + cells[0] + cells[1]))
+
+
 def main():
     a = sys.argv[1:]
+    if len(a) == 2 and a[0] == "loso":
+        return loso(a[1])
+    if len(a) == 2 and a[0] == "share":
+        return share(a[1])
     if len(a) == 2 and a[0] == "coverage":
         return coverage(a[1])
     if a == ["power"]:

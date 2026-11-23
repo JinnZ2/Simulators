@@ -18,7 +18,8 @@ this run looked, or the source could not be read.
 
 Every number in the indented blocks of section 1 was printed by
 `python3 holdout/explore_next_steps.py coverage SOURCE_CSV` and pasted by
-script. None was typed.
+script, as were the blocks of sections 1b and 1c by their own commands.
+None was typed.
 
 ## 1. B1 climate coverage (ranges only, no refit)
 
@@ -110,6 +111,90 @@ written into the script before the table was seen. [OBSERVED]
                 heavily sampled site. A leave-one-study-out refit would
                 show it; the order asked for ranges only, so it was not
                 run.
+                [added 2026-11-23, follow-up order] It was then run:
+                section 1b. The answer is no.
+
+## 1b. Leave-one-study-out, holdout B1 (follow-up order of 2026-11-23)
+
+Each holdout study removed in turn and the B1 fit rerun, pooled and
+inside each Approach. The fit is `phase_b.fit` called through
+`phase_c.FITS`, imported and unchanged. The mark rule was written into
+the script before the table was seen. Printed by
+`python3 holdout/explore_next_steps.py loso SOURCE_CSV`, pasted by script.
+
+    LEAVE-ONE-STUDY-OUT, holdout B1: phase_b.fit (imported, unchanged); spent holdout, scores nothing
+      dominant site: AI 0.557, MAP 502; 800 of 2262 holdout rows; studies with rows there: Dostal et al. 2021 (800 rows)
+      id      stratum          anchor     holdout    LOSO slope range        signs   site removed                 studies  rows   mark
+                               slope      slope      min        max        -  +    slope [80% interval]
+      B1 AI   pooled            -0.2378    +0.0407    +0.0158    +0.0559    0 47    +0.0377 [ -0.0115,  +0.0865]     46   1462   flip not carried by that site
+      B1 AI   Self-Other        -0.1497    +0.0406    +0.0089    +0.0583    0 42    +0.0416 [ -0.0067,  +0.0909]     41   1305   flip not carried by that site
+      B1 AI   Self-Sterilized   -0.6103    +0.0188    -0.1530    +0.0602    4 19    +0.0188 [ -0.3317,  +0.1337]     23    157   flip not carried by that site
+      B1 MAP  pooled            -0.1164    +0.0373    +0.0206    +0.0445    0 47    +0.0349 [ -0.0057,  +0.0623]     46   1462   flip not carried by that site
+      B1 MAP  Self-Other        -0.0672    +0.0344    +0.0048    +0.0424    0 42    +0.0344 [ -0.0180,  +0.0621]     41   1305   flip not carried by that site
+      B1 MAP  Self-Sterilized   -0.3222    +0.0445    -0.0147    +0.0802    2 21    +0.0445 [ -0.1275,  +0.1613]     23    157   flip not carried by that site
+      the single removals that move the slope most:
+        B1 AI  pooled           lowest  +0.0158 without Segnitz et al. 2020 (71 rows); highest  +0.0559 without Forero et al. 2019 (518 rows)
+        B1 AI  Self-Other       lowest  +0.0089 without Segnitz et al. 2020 (71 rows); highest  +0.0583 without Forero et al. 2019 (518 rows)
+        B1 AI  Self-Sterilized  lowest  -0.1530 without Nuske et al. 2021 (10 rows); highest  +0.0602 without Uddin et al. 2021 (2 rows)
+        B1 MAP pooled           lowest  +0.0206 without Segnitz et al. 2020 (71 rows); highest  +0.0445 without Forero et al. 2019 (518 rows)
+        B1 MAP Self-Other       lowest  +0.0048 without Segnitz et al. 2020 (71 rows); highest  +0.0424 without Forero et al. 2019 (518 rows)
+        B1 MAP Self-Sterilized  lowest  -0.0147 without Nuske et al. 2021 (10 rows); highest  +0.0802 without Stein et al. 2020 (32 rows)
+
+[DERIVED] Reading.
+
+    mark        "flip not carried by that site" in all six cells. The
+                dominant site is one study (Dostal et al. 2021, 800
+                rows). With it removed the pooled and Self-Other slopes
+                stay positive and move by less than 0.004. It has no
+                Self-Sterilized rows, so that stratum's fit is the same
+                with and without it.
+    range       pooled and Self-Other: the slope is positive under every
+                single removal (47 of 47 and 42 of 42). No one study
+                carries the sign.
+                Self-Sterilized: the sign depends on single studies.
+                Removing Nuske et al. 2021 (10 rows) takes the AI slope
+                from +0.019 to -0.153; 4 of 23 removals give a negative
+                AI slope and 2 of 23 a negative MAP slope.
+    scope       point estimates. Every interval printed above includes
+                zero, as did the full holdout fits. Removing one study
+                at a time does not test two or more acting together.
+
+## 1c. Largest single study's share of rows, beside every fit
+
+The order asks for this beside every fit already in this record. This
+record holds no fit of its own apart from section 1b; the fits it reads
+are the six Phase B fits, so the share is given for each of those, per
+side and stratum. Printed by
+`python3 holdout/explore_next_steps.py share SOURCE_CSV`, pasted by
+script.
+
+    LARGEST SINGLE STUDY'S SHARE OF ROWS beside each Phase B fit (rows the fit can use); counts only
+      id      stratum          anchor: share  rows   studies     holdout: share  rows   studies
+      B1 AI   pooled                  0.110   3707     155              0.354   2262      47
+      B1 AI   Self-Other              0.124   3198     133              0.380   2105      42
+      B1 AI   Self-Sterilized         0.147    509      65              0.204    157      23
+      B1 MAP  pooled                  0.110   3707     155              0.354   2262      47
+      B1 MAP  Self-Other              0.124   3198     133              0.380   2105      42
+      B1 MAP  Self-Sterilized         0.147    509      65              0.204    157      23
+      B2      pooled                  0.110   3701     154              0.354   2262      47
+      B2      Self-Other              0.124   3192     132              0.380   2105      42
+      B2      Self-Sterilized         0.147    509      65              0.204    157      23
+      B3      pooled                  0.110   3707     155              0.354   2262      47
+      B3      Self-Other              0.124   3198     133              0.380   2105      42
+      B3      Self-Sterilized         0.147    509      65              0.204    157      23
+      B4      pooled                  0.110   3707     155              0.354   2262      47
+      B4      Self-Other              0.124   3198     133              0.380   2105      42
+      B4      Self-Sterilized         0.147    509      65              0.204    157      23
+      R5      pooled                  0.110   3707     155              0.354   2262      47
+      R5      Self-Other              0.124   3198     133              0.380   2105      42
+      R5      Self-Sterilized         0.147    509      65              0.204    157      23
+
+[DERIVED] The share is the same for all six fits inside a cell because
+the same rows enter each (B2 drops 6 anchor rows with no Phase2.time).
+The largest holdout study carries 35% of holdout rows (38% inside
+Self-Other); the largest anchor study carries 11% (12%). Rows are not
+the fit's weights: the bootstrap resamples studies, so a large study
+moves the point estimate more than it narrows the interval.
 
 ## 2. Mycorrhizal-type join: STOPPED, nothing joined
 
