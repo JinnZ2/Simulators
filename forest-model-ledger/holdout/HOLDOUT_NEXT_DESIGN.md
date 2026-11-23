@@ -57,11 +57,18 @@ Carried unchanged and not restated here: salted commitment of the
 holdout bytes before any branch exists, salted commitment of the
 predictions before reveal, every predicted number from code.
 
-[PROPOSED] Two additions from this run's item 1, for Kavik to accept or
-drop: (a) a coverage table (moderator ranges, anchor against holdout,
-per stratum) is computed at reveal before any slope is read; (b) the
-share of holdout rows carried by the single largest study is reported
-beside every fit.
+Two additions, proposed in the first version of this doc and ACCEPTED by
+the follow-up order of 2026-11-23:
+
+    R7  coverage    at reveal, a coverage table (moderator ranges,
+                    anchor against holdout, per stratum) is computed
+                    and recorded before any slope is read.
+    R8  share       the share of rows carried by the single largest
+                    study is reported beside every fit, per side and
+                    stratum.
+
+Superseded wording, kept: "[PROPOSED] Two additions from this run's item
+1, for Kavik to accept or drop".
 
 ## 2. The power gate applied to what is on record (DERIVED)
 
@@ -97,6 +104,16 @@ cells fail the gate. Had the gate existed, the Phase C result (every
 direction INDETERMINATE) was the expected one for those cells. The one
 PASS, B1 AI inside Self-Sterilized, rests on an anchor slope of -0.61;
 the holdout slope there was +0.02 with an interval including zero.
+
+Power gate applied to the spent holdout: 10 of 11 cells fail. Next sealed
+test is scoped to the one passing cell, B1 AI within Self-Sterilized,
+unless accrual raises n.
+
+[DERIVED] Beside that scope, from EXPLORE_NEXT_STEPS.md section 1b: the
+Self-Sterilized B1 AI holdout slope changes sign when single studies are
+removed (4 of 23 removals), so a test scoped to that cell reads a slope
+that one study can move.
+
 "Studies needed" assumes the holdout effect equals the anchor effect and
 the same spread per study; both are assumptions, and the first failed
 for B1.
@@ -118,6 +135,7 @@ for B1.
                           no search was run here.
 
     S2  the Karst et al. 2023 field studies
+        status            measurand unverified; not a candidate until checked
         expected n        NOT RECORDED
         Approach mix      NOT RECORDED
         setting mix       NOT RECORDED
@@ -154,7 +172,8 @@ database's inclusion rule, not a count of what exists.
 
 ## 4. Open before any seal
 
-    - which source (Kavik picks; none is picked here)
+    - which source (Kavik picks; none is picked here); S2 only after
+      its measurand is checked
     - arm-level anchor intervals inside each Approach, so R3 can run in
       the units of R1
     - whether UNDERPOWERED predictions are sealed or dropped
@@ -165,8 +184,10 @@ database's inclusion rule, not a count of what exists.
 
 Base branch: claude/denominator-sorter (PR #334) at commit c0a7d77.
 Code: `holdout/explore_next_steps.py`, commands `power` and `rate`.
-Rules R1-R6 are the work order's, restated; the two additions in section
-1 and every reading are this run's. Source data for `rate`: Zenodo
+Rules R1-R6 are the work order's, restated; R7 and R8 were proposed by
+this run and accepted by the follow-up order of 2026-11-23, which also
+set the scope sentence in section 2 and the S2 status line. Every reading
+is this run's. Source data for `rate`: Zenodo
 record 10403125, sha256
 bb56ba5ac31b13be09cf3df42c1215b53255bb1eb3bb8a91838ab8cb4cb5c82c,
 asserted, not committed.
