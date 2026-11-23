@@ -361,7 +361,7 @@ def share(path):
                   % ((fid, sname) + cells[0] + cells[1]))
 
 
-FUNGALROOT_SHA = "FILLED_AT_FETCH"
+FUNGALROOT_SHA = "430ab42cadb7412deeb7fa9f81ae8e0cb8f9c8c60bba23bc5c125b8834410980"
 MYC_MIN = 0.2
 MYC_MAP = {"AM": {"AM"}, "EcM, AM undetermined": {"ECM"}, "EcM, no AM colonization": {"ECM"},
            "EcM,AM": {"AM", "ECM"}, "non-mycorrhizal": {"NM"}, "ErM": {"OTHER"}, "OM": {"OTHER"},

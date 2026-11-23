@@ -177,8 +177,8 @@ database's inclusion rule, not a count of what exists.
     - arm-level anchor intervals inside each Approach, so R3 can run in
       the units of R1
     - whether UNDERPOWERED predictions are sealed or dropped
-    - the mycorrhizal-type join (EXPLORE_NEXT_STEPS.md section 2,
-      stopped: source not reachable)
+    - whether myc_type enters the next test as a moderator
+      (EXPLORE_NEXT_STEPS.md section 2b: the join ran; exploratory)
 
 ## Provenance
 

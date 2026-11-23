@@ -198,6 +198,9 @@ moves the point estimate more than it narrows the interval.
 
 ## 2. Mycorrhizal-type join: STOPPED, nothing joined
 
+[added 2026-11-23, follow-up order] Superseded by section 2b, where the
+join ran. The text below is kept as written.
+
 The FungalRoot database could not be fetched, so item 2 stopped at its
 first step, as the order says. No type was filled from recall. The B4
 rerun with myc_type and the Species test with myc_type were not run.
@@ -232,6 +235,165 @@ genus-level table supplied as files with their source URLs. The join
 rule in the order (Species, then Genus, level tagged, unmatched kept as
 NOT RECORDED) is unchanged and unbuilt.
 
+## 2b. Mycorrhizal-type join: retry after the host change (2026-11-23)
+
+Section 2 is kept as written. The follow-up order had gbif.org and
+api.gbif.org added to the environment's allowed hosts; the retry ran.
+
+[OBSERVED] Record verified before use, 2026-11-23T18:13:16Z, from
+https://api.gbif.org/v1/dataset/744edc21-8dd2-474e-8a0b-b8c3d56a3c2d :
+
+    title      Taxon occurrence data for the FungalRoot database
+    doi        10.15468/a7ujmj
+    citation   Soudzilovskaia N A, Vaessen S, Barcelo M, He J, Rahimlou S,
+               Abarenkov K, Brundrett M C, Gomes S, Merckx V, Martinez-Suz
+               L, Tedersoo L. Taxon occurrence data for the FungalRoot
+               database. PlutoF. Occurrence dataset
+               https://doi.org/10.15468/a7ujmj accessed via GBIF.org on
+               2026-11-23.
+    license    CC BY-NC 4.0 (so the records are NOT committed here; this
+               repository is CC0)
+    records    36515
+
+[OBSERVED] Fetch. The Darwin Core archive sits on orphans.gbif.org,
+which the proxy still refuses (403 to CONNECT, 18:13:26Z). The records
+were read through the occurrence API instead:
+
+    URL        https://api.gbif.org/v1/occurrence/search?datasetKey=
+               744edc21-8dd2-474e-8a0b-b8c3d56a3c2d&limit=L&offset=N
+               (L 300 for offsets 0-10199, L 100 after)
+    UTC        2026-11-23T18:13:56Z to 19:11Z
+    file       fungalroot_occurrences_full.jsonl: one line per record in
+               offset order, holding key, occurrenceID, scientificName,
+               species, genus, family, taxonRank, taxonomicStatus,
+               acceptedScientificName and the MeasurementOrFact pairs
+               other than "Source". It is this run's extract, not the
+               API's raw bytes, which were not kept.
+    bytes      14523948
+    sha256     430ab42cadb7412deeb7fa9f81ae8e0cb8f9c8c60bba23bc5c125b8834410980
+    records    36515 lines, 36515 distinct keys
+
+What this source is and is not: occurrence records, each a published
+report of a mycorrhizal type on one taxon. It is not the paper's
+genus-level table (the journal host is not reachable). A species type
+here is this run's rule over that species' records; a genus type is the
+same rule over all of the genus's records and is tagged "genus". The type
+map and the taxon rule are in the script docstring. The map was written
+after the first 10200 records' type values had been seen and before any
+join; one further value turned up in the full file and is reported
+uncounted. The 0.2 threshold was not varied. Five PSF "Species" values
+are community mixes, not taxa; they read NOT RECORDED. No type was
+filled from recall. [OBSERVED]
+
+Printed by `python3 holdout/explore_next_steps.py myc SOURCE_CSV
+FUNGALROOT_JSONL`, pasted by script.
+
+    MYCORRHIZAL-TYPE JOIN: FungalRoot occurrence records; spent holdout, scores nothing
+      source file: 36515 records, 14523948 bytes, sha256 asserted; species names with a counted type: 15547; genera: 4180
+      source type values outside the declared map (not counted): AM-like (non-vascular plants) x22
+      MATCH RATE (no fill: unmatched = NOT RECORDED, kept)
+        side     unit      total   species-level   genus-level   NOT RECORDED   matched share
+        anchor   rows       3707            2997           647             63   0.983
+        anchor   species     489             357           111             21   0.957
+        holdout  rows       2262            1829           388             45   0.980
+        holdout  species     295             214            72              9   0.969
+      TYPE COUNTS: rows / studies
+        side     stratum          AM            ECM           AM+ECM        NM            OTHER         NOT RECORDED  
+        anchor   pooled           3197 / 139    133 / 16      137 / 20      176 / 21      1 / 1         63 / 14       
+        anchor   Self-Other       2812 / 118    94 / 14       92 / 19       142 / 20      1 / 1         57 / 12       
+        anchor   Self-Sterilized  385 / 58      39 / 8        45 / 9        34 / 9        0 / 0         6 / 4         
+        holdout  pooled           2020 / 43     111 / 10      34 / 6        52 / 10       0 / 0         45 / 5        
+        holdout  Self-Other       1883 / 39     97 / 9        34 / 6        48 / 10       0 / 0         43 / 5        
+        holdout  Self-Sterilized  137 / 21      14 / 2        0 / 0         4 / 3         0 / 0         2 / 1         
+      B4 RERUN: myc_type in place of Life.form; phase_b.fit unchanged; one contrast at a time
+        cell = estimate [80% interval] studies rows ; thin = under 5 studies on either level
+        Life.form Woody - Nonwoody (as sealed)
+          Self-Other       anchor   +0.0696 [ -0.0162,  +0.1507] 133 st  3198 rows   level studies 38 / 99
+                           holdout  +0.0301 [ -0.0755,  +0.0950]  42 st  2105 rows   level studies 16 / 31
+          Self-Sterilized  anchor   +0.2989 [ +0.0157,  +0.6146]  65 st   509 rows   level studies 24 / 42
+                           holdout  +0.3275 [ +0.1657,  +0.5363]  23 st   157 rows   level studies 9 / 17
+        ECM - AM
+          Self-Other       anchor   +0.3793 [ +0.2445,  +0.4669] 124 st  2906 rows   level studies 14 / 118
+                           holdout  +0.1219 [ +0.0537,  +0.2016]  41 st  1980 rows   level studies 9 / 39
+          Self-Sterilized  anchor   +0.3213 [ +0.0392,  +0.6359]  62 st   424 rows   level studies 8 / 58
+                           holdout  +0.3146 [ -0.3369,  +0.4966]  23 st   151 rows   level studies 2 / 21  thin
+        AM+ECM - AM
+          Self-Other       anchor   +0.0288 [ -0.0790,  +0.1264] 122 st  2904 rows   level studies 19 / 118
+                           holdout  +0.1815 [ +0.1157,  +0.3037]  40 st  1917 rows   level studies 6 / 39
+          Self-Sterilized  anchor   +0.2479 [ -0.0163,  +0.5234]  60 st   430 rows   level studies 9 / 58
+                           holdout not checkable (one level absent: 0 / 21 studies)
+        NM - AM
+          Self-Other       anchor   -0.0067 [ -0.1630,  +0.1085] 122 st  2954 rows   level studies 20 / 118
+                           holdout  -0.5324 [ -0.8587,  -0.2031]  39 st  1931 rows   level studies 10 / 39
+          Self-Sterilized  anchor   +0.1417 [ -0.1945,  +0.3031]  60 st   419 rows   level studies 9 / 58
+                           holdout  -0.3797 [ -0.7066,  -0.0646]  21 st   141 rows   level studies 3 / 21  thin
+        any ECM - AM
+          Self-Other       anchor   +0.1927 [ +0.0735,  +0.2841] 126 st  2998 rows   level studies 27 / 118
+                           holdout  +0.1377 [ +0.0793,  +0.2089]  41 st  2014 rows   level studies 10 / 39
+          Self-Sterilized  anchor   +0.2809 [ +0.0264,  +0.5187]  63 st   469 rows   level studies 14 / 58
+                           holdout  +0.3146 [ -0.3369,  +0.4966]  23 st   151 rows   level studies 2 / 21  thin
+      SPECIES TEST: missing_column_finder.analyse (unchanged), before and after 5 myc columns are added
+        share = Species share of the spread left after the columns ; excess = share minus null mean
+        stratum          side     columns   left     between-study: share  excess  flag   within-study: share  excess  flag
+        Self-Other       anchor   11 bef    0.9566                   0.854  -0.023  -             0.346  +0.226  FLAG        
+                                  16 aft    0.9418                   0.856  -0.021  -             0.339  +0.227  FLAG        
+                         holdout  11 bef    0.9673                   0.773  -0.201  -             0.309  +0.161  FLAG        
+                                  15 aft    0.9230                   0.774  -0.200  -             0.275  +0.124  FLAG        
+                         pooled   11 bef    0.9731                   0.813  -0.023  -             0.314  +0.205  FLAG        
+                                  16 aft    0.9589                   0.815  -0.021  -             0.303  +0.198  FLAG        
+        Self-Sterilized  anchor   10 bef    0.8507                   0.611  -0.205  -             0.583  +0.146  FLAG        
+                                  14 aft    0.8453                   0.600  -0.215  -             0.586  +0.152  FLAG        
+                         holdout  11 bef    0.7233                   0.997  +0.054  -             0.334  +0.093  -           
+                                  14 aft    0.7002                   0.997  +0.053  -             0.346  +0.098  -           
+                         pooled   11 bef    0.8700                   0.635  -0.205  -             0.541  +0.134  -           
+                                  15 aft    0.8664                   0.633  -0.207  -             0.543  +0.138  -           
+      DOES THE SPECIES SHARE DROP? (after minus before; read on excess against the finder's own MIN_EXCESS, 0.02)
+        stratum          side     test            share     excess    reading
+        Self-Other       anchor   between_study   +0.0019   +0.0023  no change (under 0.02)
+        Self-Other       anchor   within_study    -0.0065   +0.0015  no change (under 0.02)
+        Self-Other       holdout  between_study   +0.0001   +0.0001  no change (under 0.02)
+        Self-Other       holdout  within_study    -0.0342   -0.0367  drops
+        Self-Other       pooled   between_study   +0.0018   +0.0018  no change (under 0.02)
+        Self-Other       pooled   within_study    -0.0103   -0.0071  no change (under 0.02)
+        Self-Sterilized  anchor   between_study   -0.0101   -0.0098  no change (under 0.02)
+        Self-Sterilized  anchor   within_study    +0.0034   +0.0059  no change (under 0.02)
+        Self-Sterilized  holdout  between_study   -0.0008   -0.0009  no change (under 0.02)
+        Self-Sterilized  holdout  within_study    +0.0121   +0.0049  no change (under 0.02)
+        Self-Sterilized  pooled   between_study   -0.0019   -0.0020  no change (under 0.02)
+        Self-Sterilized  pooled   within_study    +0.0018   +0.0038  no change (under 0.02)
+
+[DERIVED] Reading.
+
+    match       98% of rows on each side get a type (anchor 0.983,
+                holdout 0.980); about four fifths of those at species
+                level, the rest through the genus aggregate.
+    spread      the type is lopsided: AM carries 86% of anchor rows and
+                89% of holdout rows. ECM, AM+ECM and NM together sit on
+                10 to 21 studies per side when pooled.
+    B4          with ECM against AM in place of woody against nonwoody,
+                Self-Other is positive on both sides with both intervals
+                excluding zero (anchor +0.38, holdout +0.12); "any ECM"
+                against AM likewise (+0.19, +0.14). The sealed Life.form
+                contrast in the same stratum had both intervals across
+                zero. Inside Self-Sterilized the holdout has 2 studies
+                with an ECM species: thin, not read.
+                NM against AM: near zero on the anchor side, negative on
+                the holdout side in both strata (Self-Other -0.53,
+                interval excluding zero). The two sides disagree.
+                AM+ECM against AM: the sides differ in size in
+                Self-Other (+0.03, +0.18).
+    Species     adding the five myc columns leaves the Species share
+                where it was. Between-study: no change in any of six
+                cells. Within-study: one cell of six drops by more than
+                0.02 (Self-Other holdout, excess +0.161 to +0.124) and
+                stays flagged. Mycorrhizal type, as joined here, does
+                not account for the Species clustering.
+    scope       exploratory, after the holdout was spent; five contrasts
+                by two strata by two sides with no correction. Woody and
+                ECM overlap heavily in these data, so "ECM - AM" is not
+                separated from life form here. Types come from records
+                of mixed quality under one hand-set rule.
+
 ## 3. Design doc
 
 Item 3 is `holdout/HOLDOUT_NEXT_DESIGN.md`. It seals nothing and runs no
@@ -241,6 +403,9 @@ fit.
 
 Base branch: claude/denominator-sorter (PR #334) at commit c0a7d77.
 Code: `holdout/explore_next_steps.py` (standard library only).
+Follow-up order of 2026-11-23: sections 1b, 1c and 2b. FungalRoot records:
+section 2b (fetched extract, sha256 asserted by the script, not
+committed).
 Source data: Zenodo record 10403125, file PSF.data.EL.open.csv, fetched
 2026-11-23T16:41:49Z from
 https://zenodo.org/api/records/10403125/files/PSF.data.EL.open.csv/content,
