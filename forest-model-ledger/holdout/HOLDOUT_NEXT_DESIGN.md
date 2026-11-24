@@ -179,6 +179,8 @@ database's inclusion rule, not a count of what exists.
     - whether UNDERPOWERED predictions are sealed or dropped
     - whether myc_type enters the next test as a moderator
       (EXPLORE_NEXT_STEPS.md section 2b: the join ran; exploratory)
+    - ECM-AM (Self-Other) is a candidate sealed prediction for a new
+      data source only; Jiang holdout is spent.
 
 ## Provenance
 

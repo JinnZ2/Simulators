@@ -9,6 +9,7 @@ scored.  Every reading printed is DERIVED.
     python3 holdout/explore_next_steps.py loso SOURCE_CSV
     python3 holdout/explore_next_steps.py share SOURCE_CSV
     python3 holdout/explore_next_steps.py myc SOURCE_CSV FUNGALROOT_JSONL
+    python3 holdout/explore_next_steps.py f2 SOURCE_CSV FUNGALROOT_JSONL
 
 coverage  item 1: AI and MAP ranges, anchor vs holdout, pooled and inside
           each Approach.  Ranges only; no fit is run.
@@ -55,6 +56,12 @@ myc       follow-up item 2: mycorrhizal type joined from FungalRoot
           unchanged, with five myc dummy columns added in memory (AM is
           the reference; NOT RECORDED is its own column so the row set is
           the same before and after).
+f2        order 335-F2, on the same join: (1) ECM - AM inside Woody rows
+          only; (2) leave-one-study-out on ECM - AM (Self-Other) and
+          NM - AM (both strata); (3) the taxon rule at MYC_MIN 0.1 / 0.2 /
+          0.3; (4) the Phase C fit-rule columns for every myc contrast,
+          read against the ANCHOR fit (nothing here was sealed).  Thin =
+          under F2_THIN studies on either level of the contrast.
 
 Mark rule for coverage (hand-set, written before the table was seen):
   narrower  holdout min-max width < NARROW * anchor min-max width
@@ -570,8 +577,161 @@ def myc(path, frpath):
                  ("rises" if ae - be >= mcf.MIN_EXCESS else "no change (under %.2f)" % mcf.MIN_EXCESS)))
 
 
+F2_THIN = 3
+F2_SWEEP = [0.1, 0.2, 0.3]
+
+
+def _assign(side, sp, ge):
+    for s in ("anchor", "holdout"):
+        for r in side[s]:
+            t = _taxon_type(sp.get(_norm(r["Species"]), {}))
+            lvl = "species"
+            if t is None:
+                t = _taxon_type(ge.get(_norm(r["Genus"]), {}))
+                lvl = "genus"
+            if t is None:
+                t, lvl = NR, "none"
+            r["myc_type"], r["myc_level"] = t, lvl
+
+
+def _contrasts():
+    import phase_b
+    return [("ECM - AM", phase_b.dummy("myc_type", "ECM", "AM")),
+            ("AM+ECM - AM", phase_b.dummy("myc_type", "AM+ECM", "AM")),
+            ("NM - AM", phase_b.dummy("myc_type", "NM", "AM")),
+            ("any ECM - AM", lambda r: 1.0 if r["myc_type"] in ("ECM", "AM+ECM")
+             else (0.0 if r["myc_type"] == "AM" else None))]
+
+
+def _cell(rows, xfun, est, thin=F2_THIN):
+    """One contrast on one row set.  state in ok / thin / not checkable."""
+    st = {0.0: set(), 1.0: set()}
+    big = {}
+    for r in rows:
+        x = xfun(r)
+        if x is not None:
+            st[x].add(r["Author"])
+            big[r["Author"]] = big.get(r["Author"], 0) + 1
+    c = {"hi_st": len(st[1.0]), "lo_st": len(st[0.0]), "studies": len(big), "rows": sum(big.values()),
+         "share": (max(big.values()) / sum(big.values())) if big else None}
+    if not st[0.0] or not st[1.0]:
+        return dict(c, state="not checkable")
+    try:
+        e, (lo, hi), ns, nr = est(rows, xfun, lambda r: float(r["rr"]))
+        if not all(v == v for v in (e, lo, hi)):
+            raise ValueError
+    except Exception:
+        return dict(c, state="not checkable")
+    return dict(c, state="thin" if min(c["hi_st"], c["lo_st"]) < thin else "ok", est=e, lo=lo, hi=hi)
+
+
+def _txt(c):
+    if c["state"] == "not checkable":
+        return "not checkable (level studies %d / %d)" % (c["hi_st"], c["lo_st"])
+    return "%+8.4f [%+8.4f, %+8.4f] %3d st %5d rows   level studies %d / %d%s" % (
+        c["est"], c["lo"], c["hi"], c["studies"], c["rows"], c["hi_st"], c["lo_st"],
+        "  thin" if c["state"] == "thin" else "")
+
+
+def f2(path, frpath):
+    side = load(path)
+    sp, ge, _unknown, nrec, _nbytes = fungalroot(frpath)
+    _fits_, est = _fits()
+    _assign(side, sp, ge)
+    cons = dict(_contrasts())
+    two = STRATA[1:]
+    print("ORDER 335-F2 on the FungalRoot join (%d records); exploratory, post-holdout, scores nothing" % nrec)
+    print("  cell = estimate [80%% interval] studies rows ; thin = under %d studies on either level" % F2_THIN)
+
+    print("  1 SEPARATION: ECM - AM inside Life.form == Woody only (all-rows cell beside it)")
+    for sname, val in two:
+        for s in ("anchor", "holdout"):
+            rows = [r for r in side[s] if r["Approach"] == val]
+            head = "    %-16s %-7s " % (sname if s == "anchor" else "", s)
+            print(head + "woody only  " + _txt(_cell([r for r in rows if r["Life.form"] == "Woody"],
+                                                     cons["ECM - AM"], est)))
+            print("    %-16s %-7s " % ("", "") + "all rows    " + _txt(_cell(rows, cons["ECM - AM"], est)))
+
+    print("  2 LEAVE-ONE-STUDY-OUT (each study in the contrast removed in turn)")
+    print("    contrast   stratum          side     full est   min        max        drops  - / +   sign holds"
+          "   largest-study row share")
+    for cname, sname in (("ECM - AM", "Self-Other"), ("NM - AM", "Self-Other"), ("NM - AM", "Self-Sterilized")):
+        xfun = cons[cname]
+        for s in ("anchor", "holdout"):
+            rows = [r for r in side[s] if r["Approach"] == sname]
+            full = _cell(rows, xfun, est)
+            if full["state"] == "not checkable":
+                print("    %-9s  %-16s %-7s  not checkable" % (cname, sname, s))
+                continue
+            res, nc = [], 0
+            for stname in sorted({r["Author"] for r in rows if xfun(r) is not None}):
+                c = _cell([r for r in rows if r["Author"] != stname], xfun, est)
+                if c["state"] == "not checkable":
+                    nc += 1
+                else:
+                    res.append(c["est"])
+            neg = sum(1 for e in res if e < 0)
+            holds = all((e < 0) == (full["est"] < 0) for e in res)
+            print("    %-9s  %-16s %-7s  %+8.4f   %+8.4f   %+8.4f   %3d   %2d / %-3d  %-10s   %.3f%s%s"
+                  % (cname, sname, s, full["est"], min(res), max(res), len(res), neg, len(res) - neg,
+                     "yes" if holds else "no", full["share"],
+                     "  thin" if full["state"] == "thin" else "",
+                     "  (%d drops not checkable)" % nc if nc else ""))
+
+    print("  4 FIT-RULE COLUMNS, Phase C definitions, holdout read against the ANCHOR fit (not sealed)")
+    print("    direction: read only when the holdout 80% interval excludes zero, else INDETERMINATE")
+    print("    interval_hit: holdout estimate inside the anchor interval ; overlap: the two intervals overlap")
+    print("    contrast       stratum          anchor dir  holdout dir     direction       interval_hit  overlap")
+    for cname, xfun in _contrasts():
+        for sname, val in two:
+            a = _cell([r for r in side["anchor"] if r["Approach"] == val], xfun, est)
+            h = _cell([r for r in side["holdout"] if r["Approach"] == val], xfun, est)
+            if "not checkable" in (a["state"], h["state"]):
+                print("    %-13s  %-16s not checkable on %s"
+                      % (cname, sname, " and ".join(k for k, c in (("anchor", a), ("holdout", h))
+                                                    if c["state"] == "not checkable")))
+                continue
+            adir = "positive" if a["est"] > 0 else "negative"
+            hdir = ("positive" if h["est"] > 0 else "negative") if (h["lo"] > 0 or h["hi"] < 0) else "INDETERMINATE"
+            print("    %-13s  %-16s %-10s  %-14s  %-14s  %-12s  %s%s"
+                  % (cname, sname, adir, hdir,
+                     "INDETERMINATE" if hdir == "INDETERMINATE" else ("hit" if hdir == adir else "miss"),
+                     "yes" if a["lo"] <= h["est"] <= a["hi"] else "no",
+                     "yes" if (h["lo"] <= a["hi"] and a["lo"] <= h["hi"]) else "no",
+                     "   thin" if "thin" in (a["state"], h["state"]) else ""))
+
+    print("  3 THRESHOLD SWEEP: taxon rule at MYC_MIN %s (0.2 is the rule used everywhere else)"
+          % " / ".join("%.1f" % v for v in F2_SWEEP))
+    global MYC_MIN
+    keep = MYC_MIN
+    try:
+        for v in F2_SWEEP:
+            MYC_MIN = v
+            _assign(side, sp, ge)
+            print("    MYC_MIN %.1f" % v)
+            print("      side     rows: species  genus  NOT RECORDED    rows by type: "
+                  + "  ".join(MYC_LEVELS[:5]))
+            for s in ("anchor", "holdout"):
+                lv = {}
+                ty = {}
+                for r in side[s]:
+                    lv[r["myc_level"]] = lv.get(r["myc_level"], 0) + 1
+                    ty[r["myc_type"]] = ty.get(r["myc_type"], 0) + 1
+                print("      %-7s        %6d  %5d  %12d                  %s"
+                      % (s, lv.get("species", 0), lv.get("genus", 0), lv.get("none", 0),
+                         "  ".join("%d" % ty.get(t, 0) for t in MYC_LEVELS[:5])))
+            for s in ("anchor", "holdout"):
+                print("      ECM - AM, Self-Other, %-7s %s"
+                      % (s, _txt(_cell([r for r in side[s] if r["Approach"] == "Self-Other"],
+                                       cons["ECM - AM"], est))))
+    finally:
+        MYC_MIN = keep
+
+
 def main():
     a = sys.argv[1:]
+    if len(a) == 3 and a[0] == "f2":
+        return f2(a[1], a[2])
     if len(a) == 3 and a[0] == "myc":
         return myc(a[1], a[2])
     if len(a) == 2 and a[0] == "loso":

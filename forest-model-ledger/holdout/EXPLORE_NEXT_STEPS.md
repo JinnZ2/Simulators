@@ -402,11 +402,143 @@ FUNGALROOT_JSONL`, pasted by script.
 Item 3 is `holdout/HOLDOUT_NEXT_DESIGN.md`. It seals nothing and runs no
 fit.
 
+## 4. Order 335-F2 (run 2026-11-24 UTC; exploratory, post-holdout, scores nothing)
+
+Follow-up 2 on the mycorrhizal join of section 2b. Same source file, same
+type map, same fit (`phase_b.fit`, imported and unchanged) and the same
+cluster bootstrap. Thin here means under 3 studies on either level of a
+contrast, as the order sets it (section 2b used 5). Printed by
+`python3 holdout/explore_next_steps.py f2 SOURCE_CSV FUNGALROOT_JSONL`,
+pasted by script. The script prints block 4 before block 3.
+
+    ORDER 335-F2 on the FungalRoot join (36515 records); exploratory, post-holdout, scores nothing
+      cell = estimate [80% interval] studies rows ; thin = under 3 studies on either level
+      1 SEPARATION: ECM - AM inside Life.form == Woody only (all-rows cell beside it)
+        Self-Other       anchor  woody only   +0.4228 [ +0.2391,  +0.5853]  33 st   252 rows   level studies 14 / 27
+                                 all rows     +0.3793 [ +0.2445,  +0.4669] 124 st  2906 rows   level studies 14 / 118
+                         holdout woody only   +0.1883 [ +0.0697,  +0.3698]  15 st   206 rows   level studies 8 / 13
+                                 all rows     +0.1219 [ +0.0537,  +0.2016]  41 st  1980 rows   level studies 9 / 39
+        Self-Sterilized  anchor  woody only   +0.0121 [ -0.2173,  +0.2066]  22 st   103 rows   level studies 8 / 18
+                                 all rows     +0.3213 [ +0.0392,  +0.6359]  62 st   424 rows   level studies 8 / 58
+                         holdout woody only   +0.0576 [ -0.5782,  +0.2688]   9 st    39 rows   level studies 2 / 7  thin
+                                 all rows     +0.3146 [ -0.3369,  +0.4966]  23 st   151 rows   level studies 2 / 21  thin
+      2 LEAVE-ONE-STUDY-OUT (each study in the contrast removed in turn)
+        contrast   stratum          side     full est   min        max        drops  - / +   sign holds   largest-study row share
+        ECM - AM   Self-Other       anchor    +0.3793    +0.2756    +0.4056   124    0 / 124  yes          0.120
+        ECM - AM   Self-Other       holdout   +0.1219    +0.1040    +0.1615    41    0 / 41   yes          0.395
+        NM - AM    Self-Other       anchor    -0.0067    -0.0448    +0.0705   122   117 / 5    no           0.134
+        NM - AM    Self-Other       holdout   -0.5324    -0.6247    -0.2898    39   39 / 0    yes          0.414
+        NM - AM    Self-Sterilized  anchor    +0.1417    -0.0624    +0.2091    60    1 / 59   no           0.179
+        NM - AM    Self-Sterilized  holdout   -0.3797    -0.5728    -0.1708    21   21 / 0    yes          0.227
+      4 FIT-RULE COLUMNS, Phase C definitions, holdout read against the ANCHOR fit (not sealed)
+        direction: read only when the holdout 80% interval excludes zero, else INDETERMINATE
+        interval_hit: holdout estimate inside the anchor interval ; overlap: the two intervals overlap
+        contrast       stratum          anchor dir  holdout dir     direction       interval_hit  overlap
+        ECM - AM       Self-Other       positive    positive        hit             no            no
+        ECM - AM       Self-Sterilized  positive    INDETERMINATE   INDETERMINATE   yes           yes   thin
+        AM+ECM - AM    Self-Other       positive    positive        hit             no            yes
+        AM+ECM - AM    Self-Sterilized  not checkable on holdout
+        NM - AM        Self-Other       negative    negative        hit             no            no
+        NM - AM        Self-Sterilized  positive    negative        miss            no            yes
+        any ECM - AM   Self-Other       positive    positive        hit             yes           yes
+        any ECM - AM   Self-Sterilized  positive    INDETERMINATE   INDETERMINATE   yes           yes   thin
+      3 THRESHOLD SWEEP: taxon rule at MYC_MIN 0.1 / 0.2 / 0.3 (0.2 is the rule used everywhere else)
+        MYC_MIN 0.1
+          side     rows: species  genus  NOT RECORDED    rows by type: AM  ECM  AM+ECM  NM  OTHER
+          anchor           2997    647            63                  3160  119  191  173  1
+          holdout          1829    388            45                  2010  56  117  34  0
+          ECM - AM, Self-Other, anchor   +0.3563 [ +0.2383,  +0.4414] 121 st  2870 rows   level studies 12 / 116
+          ECM - AM, Self-Other, holdout  +0.1288 [ +0.0402,  +0.2395]  40 st  1935 rows   level studies 8 / 37
+        MYC_MIN 0.2
+          side     rows: species  genus  NOT RECORDED    rows by type: AM  ECM  AM+ECM  NM  OTHER
+          anchor           2997    647            63                  3197  133  137  176  1
+          holdout          1829    388            45                  2020  111  34  52  0
+          ECM - AM, Self-Other, anchor   +0.3793 [ +0.2445,  +0.4669] 124 st  2906 rows   level studies 14 / 118
+          ECM - AM, Self-Other, holdout  +0.1219 [ +0.0537,  +0.2016]  41 st  1980 rows   level studies 9 / 39
+        MYC_MIN 0.3
+          side     rows: species  genus  NOT RECORDED    rows by type: AM  ECM  AM+ECM  NM  OTHER
+          anchor           2997    647            63                  3201  140  109  193  1
+          holdout          1829    388            45                  2003  113  23  78  0
+          ECM - AM, Self-Other, anchor   +0.3814 [ +0.2453,  +0.4657] 124 st  2917 rows   level studies 15 / 118
+          ECM - AM, Self-Other, holdout  +0.1266 [ +0.0605,  +0.2084]  41 st  1974 rows   level studies 9 / 40
+
+[DERIVED] Reading.
+
+    1 separation   inside Self-Other the ECM - AM difference is still
+                   there among woody rows alone, on both sides, with
+                   both intervals excluding zero (anchor +0.42, holdout
+                   +0.19). In that stratum it is not life form under
+                   another name.
+                   inside Self-Sterilized it is not there among woody
+                   rows (anchor +0.01, interval across zero); the
+                   all-rows +0.32 in that stratum goes with life form.
+                   The holdout cell there is thin (2 ECM studies).
+    2 LOSO         ECM - AM, Self-Other: positive under every single
+                   removal on both sides (124 of 124, 41 of 41).
+                   NM - AM: the holdout sign holds under every removal
+                   in both strata; the anchor sign does not (it sits at
+                   zero in Self-Other and flips once in
+                   Self-Sterilized). The largest study carries 39% and
+                   41% of the holdout rows in the Self-Other contrasts.
+    3 sweep        the taxon rule's threshold moves rows between ECM
+                   and AM+ECM (holdout ECM rows 56 / 111 / 113) and
+                   leaves the match counts alone. ECM - AM in Self-Other
+                   stays positive with the interval excluding zero at
+                   all three settings on both sides (anchor +0.36 to
+                   +0.38, holdout +0.12 to +0.13).
+    4 fit rules    read against the anchor fit: 4 direction hits (all
+                   Self-Other), 1 miss (NM - AM, Self-Sterilized), 2
+                   INDETERMINATE (both thin), 1 not checkable.
+                   interval_hit is "no" for three of the four hits: the
+                   sign carries over, the size does not (ECM - AM in
+                   Self-Other is about a third of its anchor size).
+    scope          none of this was sealed. These are anchor fits and
+                   holdout fits made after the holdout was read, on a
+                   join built after it was read; "hit" here is a
+                   description, not a score. No correction for the
+                   number of contrasts.
+
+### 4.5 Source pin
+
+[OBSERVED] As returned by the GBIF API at fetch time (dataset call at
+2026-11-23T18:13:16Z; first occurrence call at 18:13:26Z):
+
+    dataset key           744edc21-8dd2-474e-8a0b-b8c3d56a3c2d
+    doi                   10.15468/a7ujmj
+    dataset modified      2023-03-21T15:05:30.028+00:00
+    dataset created       2019-12-08T21:05:20.984+00:00
+    dataset version       NOT RECORDED (no version field was read; the
+                          archive endpoint URL ends ".232.zip", meaning
+                          not checked)
+    last crawled          2026-10-30T14:37:39.938+00:00, crawl id 344
+                          (read off the first occurrence record)
+    record count          36515
+    fetch code commit     NOT RECORDED: the two paging scripts ran from
+                          the session's scratch directory and were never
+                          committed
+    type-rule code        holdout/explore_next_steps.py, functions
+                          fungalroot() and _taxon_type(); first committed
+                          at ba43407, file hash pinned at efa9422
+    order 335-F2 code     the commit that adds this section
+
+### 4.6 License
+
+[OBSERVED] No per-taxon type map is committed. The branch holds the PSF
+anchor file, the scripts and the records; the FungalRoot extract and any
+species-to-type table exist only in the session's scratch directory.
+What is committed from the join is aggregate: counts of rows and studies
+per type, and fit estimates. The script holds the map from the source's
+type VALUES to the five classes, which names no taxon. Nothing was
+removed from the branch.
+
+Observer slots: null.
+
 ## Provenance
 
 Base branch: claude/denominator-sorter (PR #334) at commit c0a7d77.
 Code: `holdout/explore_next_steps.py` (standard library only).
-Follow-up order of 2026-11-23: sections 1b, 1c and 2b. FungalRoot records:
+Follow-up order of 2026-11-23: sections 1b, 1c and 2b. Order 335-F2:
+section 4. FungalRoot records:
 section 2b (fetched extract, sha256 asserted by the script, not
 committed).
 Source data: Zenodo record 10403125, file PSF.data.EL.open.csv, fetched
