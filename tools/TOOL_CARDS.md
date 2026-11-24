@@ -48,6 +48,8 @@ wraps are collapsed to one space). A VOID cell is a field the source does not ca
 | anchor_switching | an interruption or a switch to another branch of work [iw] | VOID: no card field | VOID: no card field | no anchor was placed: full rebuild of position | PROPOSED | `Simulators:reasoning-toolkit/CARDS.md`#21-anchor-switching @ `b128fd0` sha256 `19535eab9b73` (card text only; no code) |
 | position_as_frame_event | a stated position, framework or purpose to be read without taking a side [iw] | VOID: no card field | VOID: no card field | the reader treats the readout as a verdict on the position (re-enters the contest) | PROPOSED | `Simulators:reasoning-toolkit/CARDS.md`#22-position-as-frame-event @ `b128fd0` sha256 `19535eab9b73` (card text only; no code) |
 | rejoin_protocol | an old order, a repository or a channel picked up again after time apart [iw] | VOID: no card field | VOID: no card field | both sides changed their reference while apart (no fixed point to align against) | PROPOSED | `Simulators:reasoning-toolkit/CARDS.md`#23-rejoin-protocol-explorer-re-entry @ `0957631` sha256 `fa7e4a41a369` (card text only; no code) |
+| missing_column_finder | residual spread that the recorded columns leave unexplained [iw] | rows with rr, var, a study label, recorded columns and grouping labels [iw] | share of spread per column, alone and together; per grouping a lab, between-study and within-study share against a shuffle null; MISSING COLUMN candidates [iw] | the built-in gate fails, or the source sha256 does not match: not run on real data [iw] | PROPOSED | PENDING_MERGE (PR 339) `Simulators:forest-model-ledger/ledger/toolkit/missing_column_finder.py` sha256 `a5c8ac8a6f0a` |
+| denominator_sorter | studies pooled under one measure whose controls or protocols may differ [iw] | rows with a study label and seven recorded design columns [iw] | scope groups of studies with identical signatures; studies with no common denominator; a field-drop outcome test against a shuffle null [iw] | a field with no recorded value reads NOT RECORDED and is never matched to a recorded one [iw] | PROPOSED | PENDING_MERGE (PR 339) `Simulators:forest-model-ledger/ledger/toolkit/denominator_sorter.py` sha256 `1e3ea5938815` |
 
 ## Cards
 
@@ -350,4 +352,33 @@ wraps are collapsed to one space). A VOID cell is a field the source does not ca
 - index cells: trigger INDEX_WRITTEN; inputs VOID; output VOID; fails_when WRAP_COLLAPSED
 - aliases: rejoin; re-entry; handshake decay; explorer return; meet-up
 - finder: card-rejoin-protocol
+
+### missing_column_finder
+
+- kind: tool
+- measures [INDEX_WRITTEN]: whether leftover spread clusters by a grouping that no recorded column carries; it scores nothing and tests no prediction
+- fits [INDEX_WRITTEN]: a pooled effect-size table where studies disagree and the recorded moderators explain little
+- breaks when [INDEX_WRITTEN]: a flag is read as a named cause; the grouping only says where to look. Gate status: gate run, thresholds not set
+- warning sign [INDEX_WRITTEN]: a share read without its shuffle null beside it
+- index cells: trigger INDEX_WRITTEN; inputs INDEX_WRITTEN; output INDEX_WRITTEN; fails_when INDEX_WRITTEN
+- aliases: missing column finder; does residual spread cluster by something unrecorded; which grouping explains what the columns do not
+- finder: none
+- not built: PASS / FAIL thresholds for the gate: not set (owner sets them)
+- evidence: PENDING_MERGE `Simulators:forest-model-ledger/ledger/toolkit/gate/gate_missing_column_finder.py` TK-G1: gate run, thresholds not set (PR 339)
+- evidence: PENDING_MERGE `Simulators:forest-model-ledger/ledger/toolkit/missing_column_finder_stdlib.py` TK-G1: gate run, thresholds not set (PR 339)
+- evidence: PENDING_MERGE `Simulators:forest-model-ledger/samples/gate_missing_column_finder.sample.txt` TK-G1: gate run, thresholds not set (PR 339)
+
+### denominator_sorter
+
+- kind: tool
+- measures [INDEX_WRITTEN]: which studies share a recorded denominator signature; it never reads the effect size to form groups
+- fits [INDEX_WRITTEN]: a meta-analysis table where pooling may mix measurands
+- breaks when [INDEX_WRITTEN]: two measurands carry the same value in every recorded field: the sorter cannot split them. Gate status: gate run, thresholds not set
+- warning sign [INDEX_WRITTEN]: a between-group difference read as a contradiction instead of a candidate scope effect
+- index cells: trigger INDEX_WRITTEN; inputs INDEX_WRITTEN; output INDEX_WRITTEN; fails_when INDEX_WRITTEN
+- aliases: denominator sorter; sort studies by what they measured against; which studies may be pooled
+- finder: none
+- not built: PASS / FAIL thresholds for the gate: not set (owner sets them)
+- evidence: PENDING_MERGE `Simulators:forest-model-ledger/ledger/toolkit/gate/gate_denominator_sorter.py` TK-G1: gate run, thresholds not set (PR 339)
+- evidence: PENDING_MERGE `Simulators:forest-model-ledger/samples/gate_denominator_sorter.sample.txt` TK-G1: gate run, thresholds not set (PR 339)
 

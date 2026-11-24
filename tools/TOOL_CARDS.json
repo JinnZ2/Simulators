@@ -1132,6 +1132,147 @@
    "finder": "card-rejoin-protocol",
    "not_built": [],
    "evidence": []
+  },
+  {
+   "id": "missing_column_finder",
+   "kind": "tool",
+   "status": "PROPOSED",
+   "trigger": "residual spread that the recorded columns leave unexplained",
+   "inputs": "rows with rr, var, a study label, recorded columns and grouping labels",
+   "output": "share of spread per column, alone and together; per grouping a lab, between-study and within-study share against a shuffle null; MISSING COLUMN candidates",
+   "fails_when": "the built-in gate fails, or the source sha256 does not match: not run on real data",
+   "location": {
+    "repo": "Simulators",
+    "state": "PENDING_MERGE",
+    "pr": 339,
+    "branch_commit": "e6dbdaace5e5c0b110d8db3d58a63ffbc8cfc0d6",
+    "path": "forest-model-ledger/ledger/toolkit/missing_column_finder.py",
+    "sha256": "a5c8ac8a6f0ab6e7808cd512361d7bebcea9581b505f51b471f344414b1ba6d3"
+   },
+   "measures": "whether leftover spread clusters by a grouping that no recorded column carries; it scores nothing and tests no prediction",
+   "fits": "a pooled effect-size table where studies disagree and the recorded moderators explain little",
+   "breaks_when": "a flag is read as a named cause; the grouping only says where to look. Gate status: gate run, thresholds not set",
+   "warning_sign": "a share read without its shuffle null beside it",
+   "cell_source": {
+    "trigger": "INDEX_WRITTEN",
+    "inputs": "INDEX_WRITTEN",
+    "output": "INDEX_WRITTEN",
+    "fails_when": "INDEX_WRITTEN",
+    "measures": "INDEX_WRITTEN",
+    "fits": "INDEX_WRITTEN",
+    "breaks_when": "INDEX_WRITTEN",
+    "warning_sign": "INDEX_WRITTEN"
+   },
+   "aliases": [
+    "missing column finder",
+    "does residual spread cluster by something unrecorded",
+    "which grouping explains what the columns do not"
+   ],
+   "finder": null,
+   "not_built": [
+    "PASS / FAIL thresholds for the gate: not set (owner sets them)"
+   ],
+   "evidence": [
+    {
+     "repo": "Simulators",
+     "state": "PENDING_MERGE",
+     "pr": 339,
+     "branch_commit": "e6dbdaace5e5c0b110d8db3d58a63ffbc8cfc0d6",
+     "path": "forest-model-ledger/ledger/toolkit/gate/gate_missing_column_finder.py",
+     "sha256": "a0f4d90dd56f678024e28d0c696be00b5a1f36b2b9fc75081c8a1e048d46ab6f",
+     "ids": [
+      "TK-G1: gate run, thresholds not set"
+     ],
+     "gate_status": "gate run, thresholds not set"
+    },
+    {
+     "repo": "Simulators",
+     "state": "PENDING_MERGE",
+     "pr": 339,
+     "branch_commit": "e6dbdaace5e5c0b110d8db3d58a63ffbc8cfc0d6",
+     "path": "forest-model-ledger/ledger/toolkit/missing_column_finder_stdlib.py",
+     "sha256": "7aa3b4d600b7ec5612842fca683ff773327512cdf5c056d3bedace4083b6bedf",
+     "ids": [
+      "TK-G1: gate run, thresholds not set"
+     ]
+    },
+    {
+     "repo": "Simulators",
+     "state": "PENDING_MERGE",
+     "pr": 339,
+     "branch_commit": "e6dbdaace5e5c0b110d8db3d58a63ffbc8cfc0d6",
+     "path": "forest-model-ledger/samples/gate_missing_column_finder.sample.txt",
+     "sha256": "8e19a27d119c085f598529b2335bb846033cf091c4812fd2ab3e7b6e8d81647c",
+     "ids": [
+      "TK-G1: gate run, thresholds not set"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "denominator_sorter",
+   "kind": "tool",
+   "status": "PROPOSED",
+   "trigger": "studies pooled under one measure whose controls or protocols may differ",
+   "inputs": "rows with a study label and seven recorded design columns",
+   "output": "scope groups of studies with identical signatures; studies with no common denominator; a field-drop outcome test against a shuffle null",
+   "fails_when": "a field with no recorded value reads NOT RECORDED and is never matched to a recorded one",
+   "location": {
+    "repo": "Simulators",
+    "state": "PENDING_MERGE",
+    "pr": 339,
+    "branch_commit": "e6dbdaace5e5c0b110d8db3d58a63ffbc8cfc0d6",
+    "path": "forest-model-ledger/ledger/toolkit/denominator_sorter.py",
+    "sha256": "1e3ea5938815f3cb9a985b76e4ff4196b6ec0a930e8d15a03c5aa0f8bf459a75"
+   },
+   "measures": "which studies share a recorded denominator signature; it never reads the effect size to form groups",
+   "fits": "a meta-analysis table where pooling may mix measurands",
+   "breaks_when": "two measurands carry the same value in every recorded field: the sorter cannot split them. Gate status: gate run, thresholds not set",
+   "warning_sign": "a between-group difference read as a contradiction instead of a candidate scope effect",
+   "cell_source": {
+    "trigger": "INDEX_WRITTEN",
+    "inputs": "INDEX_WRITTEN",
+    "output": "INDEX_WRITTEN",
+    "fails_when": "INDEX_WRITTEN",
+    "measures": "INDEX_WRITTEN",
+    "fits": "INDEX_WRITTEN",
+    "breaks_when": "INDEX_WRITTEN",
+    "warning_sign": "INDEX_WRITTEN"
+   },
+   "aliases": [
+    "denominator sorter",
+    "sort studies by what they measured against",
+    "which studies may be pooled"
+   ],
+   "finder": null,
+   "not_built": [
+    "PASS / FAIL thresholds for the gate: not set (owner sets them)"
+   ],
+   "evidence": [
+    {
+     "repo": "Simulators",
+     "state": "PENDING_MERGE",
+     "pr": 339,
+     "branch_commit": "e6dbdaace5e5c0b110d8db3d58a63ffbc8cfc0d6",
+     "path": "forest-model-ledger/ledger/toolkit/gate/gate_denominator_sorter.py",
+     "sha256": "ddfc23503795fb9d5dd0e4d313afe0435728f954fa3cab86a518fc7bb1d1f6d2",
+     "ids": [
+      "TK-G1: gate run, thresholds not set"
+     ],
+     "gate_status": "gate run, thresholds not set"
+    },
+    {
+     "repo": "Simulators",
+     "state": "PENDING_MERGE",
+     "pr": 339,
+     "branch_commit": "e6dbdaace5e5c0b110d8db3d58a63ffbc8cfc0d6",
+     "path": "forest-model-ledger/samples/gate_denominator_sorter.sample.txt",
+     "sha256": "ef1adf28f950aa6fd3b4f1d051b05baa57a683eeeda584bb9cca5cd1c0d840d8",
+     "ids": [
+      "TK-G1: gate run, thresholds not set"
+     ]
+    }
+   ]
   }
  ],
  "human_interest": null,
