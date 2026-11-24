@@ -57,8 +57,11 @@ Each: units, data source, test design = VOID until a run.
 - Akerlof 1970: information asymmetry drives good goods out
 - industrial farming: owner decoupled from land; diminishing return per
   energy input ([stated] by Kavik)
-- this repo: forest holdout (PRs #330-#334) - pooled measure across
-  unrecorded lab protocols hid the denominator
+- this repo: forest holdout (Simulators PR #334, commit
+  c0a7d77c04eff06a00658a79eec4e8e19febddf5, path
+  forest-model-ledger/holdout/EXPLORE_DENOMINATOR_GROUPS.md, sha256
+  523f3aa13e44b546e7abdf4de7067f97230738f3e25b6a12b9f31b75b735d718) -
+  pooled measure across unrecorded lab protocols hid the denominator
 
 ## 5. Open slots
 
