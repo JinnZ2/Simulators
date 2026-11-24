@@ -1,0 +1,11 @@
+corrected_share_finder: REPORT ONLY, thresholds unchanged.  Tag: DERIVED (basis: OBSERVED)
+  corrected = recovered mean - null median (200 shuffles at the same s); 20 replicates
+
+  planted s   realized   recovered   null median   corrected   recovered/realized   corrected/realized
+       0.02     0.0198      0.0242        0.0071      0.0171                1.224                0.866
+       0.03     0.0302      0.0343        0.0076      0.0268                1.136                0.885
+       0.05     0.0493      0.0515        0.0073      0.0442                1.045                0.897
+       0.07     0.0703      0.0719        0.0071      0.0648                1.023                0.922
+       0.10     0.1006      0.0917        0.0073      0.0845                0.912                0.840
+       0.30     0.2969      0.2843        0.0071      0.2772                0.957                0.934
+       0.50     0.5021      0.4635        0.0070      0.4565                0.923                0.909

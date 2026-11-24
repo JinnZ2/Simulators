@@ -358,7 +358,7 @@ wraps are collapsed to one space). A VOID cell is a field the source does not ca
 - kind: tool
 - measures [INDEX_WRITTEN]: whether leftover spread clusters by a grouping that no recorded column carries; it scores nothing and tests no prediction
 - fits [INDEX_WRITTEN]: a pooled effect-size table where studies disagree and the recorded moderators explain little
-- breaks when [INDEX_WRITTEN]: a flag is read as a named cause; the grouping only says where to look. Detection floor at the gated design: planted variance share 0.07 (20 of 20 replicates above the declared null max 0.0326); at 0.05, 16 of 20; at 0.03, 12 of 20; at 0.02, 2 of 20. A share below 0.07 can be missed. Gate status: threshold rules declared for the gated design only
+- breaks when [INDEX_WRITTEN]: a flag is read as a named cause; the grouping only says where to look. Detection floor at the gated design: planted variance share 0.07 (20 of 20 replicates above the declared null max 0.0326); at 0.05, 16 of 20; at 0.03, 12 of 20; at 0.02, 2 of 20. A share below 0.07 can be missed. Gate status: threshold rules declared for the gated design only Noise-floor-corrected share, DERIVED (basis: OBSERVED), report only, thresholds unchanged: corrected = recovered mean - null median (200 shuffles at the same s); planted s -> corrected share (corrected/realized): 0.02 -> 0.0171 (0.866); 0.03 -> 0.0268 (0.885); 0.05 -> 0.0442 (0.897); 0.07 -> 0.0648 (0.922); 0.10 -> 0.0845 (0.840); 0.30 -> 0.2772 (0.934); 0.50 -> 0.4565 (0.909).
 - warning sign [INDEX_WRITTEN]: a share read without its shuffle null beside it
 - index cells: trigger INDEX_WRITTEN; inputs INDEX_WRITTEN; output INDEX_WRITTEN; fails_when INDEX_WRITTEN
 - aliases: missing column finder; does residual spread cluster by something unrecorded; which grouping explains what the columns do not
@@ -375,6 +375,8 @@ wraps are collapsed to one space). A VOID cell is a field the source does not ca
 - evidence: PENDING_MERGE `Simulators:forest-model-ledger/samples/finder_bias.sample.txt` TK-G1 follow-up: threshold rules declared; null FLAG rate run (PR 339)
 - evidence: PENDING_MERGE `Simulators:forest-model-ledger/ledger/toolkit/gate/power_floor_finder.py` TK-G1 follow-up 2: power floor sweep (PR 339)
 - evidence: PENDING_MERGE `Simulators:forest-model-ledger/samples/power_floor_finder.sample.txt` TK-G1 follow-up 2: power floor sweep (PR 339)
+- evidence: PENDING_MERGE `Simulators:forest-model-ledger/ledger/toolkit/gate/corrected_share_finder.py` TK-G1 follow-up 3: noise-floor-corrected share (script) (PR 339)
+- evidence: PENDING_MERGE `Simulators:forest-model-ledger/samples/corrected_share_finder.sample.txt` TK-G1 follow-up 3: noise-floor-corrected share (PR 339)
 
 ### denominator_sorter
 

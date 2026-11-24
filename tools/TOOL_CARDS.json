@@ -1151,7 +1151,7 @@
    },
    "measures": "whether leftover spread clusters by a grouping that no recorded column carries; it scores nothing and tests no prediction",
    "fits": "a pooled effect-size table where studies disagree and the recorded moderators explain little",
-   "breaks_when": "a flag is read as a named cause; the grouping only says where to look. Detection floor at the gated design: planted variance share 0.07 (20 of 20 replicates above the declared null max 0.0326); at 0.05, 16 of 20; at 0.03, 12 of 20; at 0.02, 2 of 20. A share below 0.07 can be missed. Gate status: threshold rules declared for the gated design only",
+   "breaks_when": "a flag is read as a named cause; the grouping only says where to look. Detection floor at the gated design: planted variance share 0.07 (20 of 20 replicates above the declared null max 0.0326); at 0.05, 16 of 20; at 0.03, 12 of 20; at 0.02, 2 of 20. A share below 0.07 can be missed. Gate status: threshold rules declared for the gated design only Noise-floor-corrected share, DERIVED (basis: OBSERVED), report only, thresholds unchanged: corrected = recovered mean - null median (200 shuffles at the same s); planted s -> corrected share (corrected/realized): 0.02 -> 0.0171 (0.866); 0.03 -> 0.0268 (0.885); 0.05 -> 0.0442 (0.897); 0.07 -> 0.0648 (0.922); 0.10 -> 0.0845 (0.840); 0.30 -> 0.2772 (0.934); 0.50 -> 0.4565 (0.909).",
    "warning_sign": "a share read without its shuffle null beside it",
    "cell_source": {
     "trigger": "INDEX_WRITTEN",
@@ -1265,6 +1265,26 @@
      "sha256": "1de4cab6305531482d39363804839c57e9284a31632d8d43660aff3b3e9ebee7",
      "ids": [
       "TK-G1 follow-up 2: power floor sweep"
+     ]
+    },
+    {
+     "repo": "Simulators",
+     "state": "PENDING_MERGE",
+     "pr": 339,
+     "path": "forest-model-ledger/ledger/toolkit/gate/corrected_share_finder.py",
+     "sha256": "0b818c41b966653926c512c0ca2d6e23f823e90b243ff082b45a06d9f22227e1",
+     "ids": [
+      "TK-G1 follow-up 3: noise-floor-corrected share (script)"
+     ]
+    },
+    {
+     "repo": "Simulators",
+     "state": "PENDING_MERGE",
+     "pr": 339,
+     "path": "forest-model-ledger/samples/corrected_share_finder.sample.txt",
+     "sha256": "dedc9eaa6913ce8571d3e1bd5181433945f7f7c01430495c0e32b0b4da8b5658",
+     "ids": [
+      "TK-G1 follow-up 3: noise-floor-corrected share"
      ]
     }
    ],

@@ -73,3 +73,15 @@ Written in the session that ran work order TK-G1 (2026-11-23). Every
 number in the sample files is printed by the scripts; none is typed. The
 descriptions above are DERIVED from reading the two tools' code on the
 PR #334 head (commit c0a7d77c04eff06a00658a79eec4e8e19febddf5).
+
+## Noise-floor-corrected share (TK-G1 follow-up 3, 2026-11-24)
+
+Report only. No threshold is read, set or changed. Tag: DERIVED (basis: OBSERVED).
+
+    corrected share = recovered mean - null median
+    null median     = median share over 200 shuffles of the planted labels
+                      at the same planted s (replicate 0)
+
+Script: `corrected_share_finder.py`. Output: `samples/corrected_share_finder.sample.txt`.
+Corrected over realized runs 0.840 to 0.934 across the seven planted s; the
+uncorrected ratio runs 0.912 to 1.224.
