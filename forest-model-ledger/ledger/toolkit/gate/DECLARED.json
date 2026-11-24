@@ -1,0 +1,35 @@
+{
+ "what": "Threshold rules for the finder and sorter gates (work order TK-G1 follow-up). Committed BEFORE the null FLAG-rate run. A later change is a dated entry under 'amendments', never an edit.",
+ "declared": "2026-11-24",
+ "status": "PROPOSED",
+ "co_authored": true,
+ "license": "CC0-1.0",
+ "gated_design": {
+  "finder": "gate_missing_column_finder.py: 40 studies x 15 rows, 3 noise columns, 1 planted label of 6 levels, seed 20261123",
+  "sorter": "gate_denominator_sorter.py: 20 studies x 10 rows, row sd 0.3, seed 20261123"
+ },
+ "finder": {
+  "flag": "flag <=> recovered share > the maximum of the 200-shuffle null at the gated design",
+  "bias": "recovered / realized share, reported per planted s; a report, not a threshold",
+  "scope": "the gated design only; another design needs its own 200-shuffle null"
+ },
+ "sorter": {
+  "split": "bookkeeping only, never a finding",
+  "finding": "finding <=> the field-drop outcome test fires",
+  "measured_alpha": "0.055 over 200 null draws (samples/gate_denominator_sorter.sample.txt)"
+ },
+ "combined_claim": "needs BOTH a finder flag AND a sorter outcome test that fires",
+ "null_flag_rate_run": {
+  "what": "the finder's own FLAG (its 499 inner shuffles, MIN_EXCESS 0.02, unchanged) on the planted grouping, with the planted labels shuffled across rows",
+  "shuffles": 200,
+  "planted_s": [
+   0.1,
+   0.3,
+   0.5
+  ],
+  "seed": "20261123 + 700000 + index of s",
+  "rule": "if the FLAG rate at any planted s is above 0.05: report it and set no threshold",
+  "also_reported": "the rate under the declared rule above (share > max of the 200-shuffle null), by leave-one-out over the same 200 shuffles"
+ },
+ "amendments": []
+}
