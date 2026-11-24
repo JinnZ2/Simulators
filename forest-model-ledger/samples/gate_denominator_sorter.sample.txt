@@ -1,0 +1,17 @@
+gate_denominator_sorter: seed 20261123, 20 studies x 10 rows, row sd 0.3,
+  field-drop shuffles 200 (tool default), 95th percentile rule unchanged
+  thresholds: NOT SET (numbers only)
+
+KNOWN-ANSWER: two measurands, 20 replicates per gap
+  form         gap g   split found   assignment accuracy (mean)   outcome test fires
+  RECORDED       0.2   20 of 20                        1.000    7 of 20   (moves outcome 7; not distinguishable from merging noise 13)
+  RECORDED       0.5   20 of 20                        1.000   17 of 20   (moves outcome 17; not distinguishable from merging noise 3)
+  RECORDED       1.0   20 of 20                        1.000   20 of 20   (moves outcome 20)
+  UNRECORDED     0.2    0 of 20                        0.500    0 of 20   (not distinguishable from merging noise 20)
+  UNRECORDED     0.5    0 of 20                        0.500    0 of 20   (not distinguishable from merging noise 20)
+  UNRECORDED     1.0    0 of 20                        0.500    0 of 20   (not distinguishable from merging noise 20)
+
+NULL: one measurand, 200 draws
+  form         false split rate   false 'moves outcome' rate
+  RECORDED                1.000                        0.055
+  UNRECORDED              0.000                        0.000
