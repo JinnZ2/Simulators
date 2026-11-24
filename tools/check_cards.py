@@ -46,6 +46,15 @@ here, the row reads NOT_CHECKED and is counted apart; nothing is assumed to
 match. Structural rules (fields present, ids unique, aliases resolve, a
 PENDING_MERGE row has a PR number) are checked everywhere.
 
+Status: PROPOSED, OBSERVED, DERIVED, or DERIVED with its basis named,
+"DERIVED (basis: OBSERVED)" or "DERIVED (basis: PROPOSED)". Any other basis,
+and any other status, voids the card. A gate state ("gate run, thresholds not
+set") is not a status: it is carried in breaks_when and not_built.
+
+pairs_with (optional): a list of {"id", "reason"} naming a card this one is
+used with. The id must be a card, the reason must be stated, and the other
+card must name this one back; a one-way or dangling pair voids the card.
+
 Aliases: every card has at least one, an alias names exactly one card, and
 --find resolves them. A row with a `finder` name must have that entry in
 TOOL_FINDER/finder.json: the card points at the existing entry and does not
@@ -69,7 +78,8 @@ FIELDS = ("id", "trigger", "inputs", "output", "fails_when", "status", "location
           "measures", "fits", "breaks_when", "warning_sign")
 EXTRA = ("kind", "cell_source", "aliases", "finder", "not_built", "evidence")
 STATES = ("PINNED", "PENDING_MERGE", "CARD_TEXT", "VOID")
-STATUS = ("PROPOSED", "OBSERVED")
+STATUS = ("PROPOSED", "OBSERVED", "DERIVED", "DERIVED (basis: OBSERVED)",
+          "DERIVED (basis: PROPOSED)")
 CELLS = ("trigger", "inputs", "output", "fails_when", "measures", "fits", "breaks_when",
          "warning_sign")
 SOURCES = ("VERBATIM", "WRAP_COLLAPSED", "INDEX_WRITTEN", "VOID")
@@ -245,6 +255,13 @@ def check(doc):
         mine = [a for a, v in shared.items() if res["id"] in v]
         if mine and res["verdict"] != "VOID":
             res.update(verdict="VOID", why="alias %r names more than one card" % mine[0])
+    pairs = {r.get("id"): r.get("pairs_with") for r in rows if "pairs_with" in r}
+    for res in results:
+        if res["id"] not in pairs or res["verdict"] == "VOID":
+            continue
+        why = pair_fault(res["id"], pairs, ids)
+        if why:
+            res.update(verdict="VOID", why=why)
     counts = {}
     for res in results:
         counts[res["verdict"]] = counts.get(res["verdict"], 0) + 1
@@ -252,6 +269,24 @@ def check(doc):
             "finder_read": names is not None,
             "warnings": [(r["id"], w) for r in results for w in r["warn"]],
             "void": [r["id"] for r in results if r["verdict"] == "VOID"]}
+
+
+def pair_fault(rid, pairs, ids):
+    """None, or why this card's pairs_with does not hold."""
+    mine = pairs[rid]
+    if not isinstance(mine, list) or not mine:
+        return "pairs_with must be a non-empty list of {id, reason}"
+    for p in mine:
+        if not (isinstance(p, dict) and isinstance(p.get("id"), str)
+                and isinstance(p.get("reason"), str) and p["reason"].strip()):
+            return "a pairs_with entry needs an id and a stated reason"
+        if p["id"] == rid or p["id"] not in ids:
+            return "pairs_with names %r, which is not another card" % p["id"]
+        back = pairs.get(p["id"])
+        if not (isinstance(back, list) and any(isinstance(b, dict) and b.get("id") == rid
+                                               for b in back)):
+            return "pairs_with %r is one-way: that card does not name this one" % p["id"]
+    return None
 
 
 def cell(s):
@@ -308,6 +343,8 @@ def render(doc):
               "- finder: %s" % (r["finder"] or "none")]
         for n in r["not_built"]:
             L.append("- not built: %s" % n)
+        for p in r.get("pairs_with") or []:
+            L.append("- pairs with: %s (%s)" % (p["id"], p["reason"]))
         for e in r["evidence"]:
             L.append("- evidence: %s `%s:%s` %s (PR %s)" % (
                 e["state"], e["repo"], e["path"], ", ".join(e["ids"]), e.get("pr")))
@@ -435,6 +472,24 @@ def selftest():
     expect("a card with no alias voids", verdict(bent(pend, lambda r: r.update(aliases=[]))), "VOID")
     expect("an unknown status voids", verdict(bent(pend, lambda r: r.update(status="VALIDATED"))),
            "VOID")
+    expect("status DERIVED is accepted", verdict(bent(pend, lambda r: r.update(status="DERIVED"))),
+           "PENDING")
+    expect("status DERIVED with a named basis is accepted",
+           [verdict(bent(pend, lambda r, b=b: r.update(status="DERIVED (basis: %s)" % b)))
+            for b in ("OBSERVED", "PROPOSED")], ["PENDING", "PENDING"])
+    expect("DERIVED with any other basis voids",
+           [verdict(bent(pend, lambda r, s=s: r.update(status=s)))
+            for s in ("DERIVED (basis: VALIDATED)", "DERIVED (basis: )", "DERIVED (OBSERVED)")],
+           ["VOID", "VOID", "VOID"])
+    one_way = copy.deepcopy(doc)
+    one_way["rows"][0]["pairs_with"] = [{"id": one_way["rows"][1]["id"], "reason": "planted"}]
+    one_way["rows"][1].pop("pairs_with", None)
+    expect("a one-way pairs_with voids the card",
+           one_way["rows"][0]["id"] in check(one_way)["void"], True)
+    dangling = copy.deepcopy(doc)
+    dangling["rows"][0]["pairs_with"] = [{"id": "card-not-there", "reason": "planted"}]
+    expect("pairs_with naming no card voids the card",
+           dangling["rows"][0]["id"] in check(dangling)["void"], True)
     if names is not None:
         expect("a finder name with no entry voids the card",
                verdict(bent(pinned, lambda r: r.update(finder="card-not-there"))), "VOID")

@@ -2,7 +2,8 @@
 
 CC0. Work order TK-G1, 2026-11-23, co-authored (Kavik + Claude).
 
-Status: gate run, thresholds not set. Nothing here is validated.
+Status: gate run; threshold rules declared (DECLARED.json) for the gated
+design only. Nothing here is validated.
 
 ## What is here
 
@@ -35,13 +36,23 @@ between two measurands is split only when a recorded field differs. The
 gate runs both forms (RECORDED, UNRECORDED) and reports the tool's
 field-drop outcome test beside the split.
 
+## Threshold rules and the null FLAG rate (2026-11-24)
+
+`DECLARED.json` was committed before the null FLAG-rate run. Finder: flag
+when the share is above the maximum of the 200-shuffle null at the gated
+design. Sorter: a split is bookkeeping, never a finding; a finding needs
+the outcome test to fire. A combined claim needs both.
+
+    python3 ledger/toolkit/gate/null_flag_rate_finder.py   # about 3 min, 4 workers
+
+Pinned output: `samples/null_flag_rate_finder.sample.txt`,
+`samples/finder_bias.sample.txt`.
+
 ## Not established [DERIVED]
 
-- Thresholds: NOT RECORDED. No PASS / FAIL is set.
+- The declared rules hold for the gated design only.
 - One synthetic design per tool. Other study counts, row counts, level
   counts and noise shapes: NOT RECORDED.
-- The finder null reads the recovered share only; the finder's FLAG rate
-  under the null is NOT RECORDED.
 - The port leaves out the original's `synthetic()` and `gate()`.
 
 Observer slots: null.

@@ -358,27 +358,34 @@ wraps are collapsed to one space). A VOID cell is a field the source does not ca
 - kind: tool
 - measures [INDEX_WRITTEN]: whether leftover spread clusters by a grouping that no recorded column carries; it scores nothing and tests no prediction
 - fits [INDEX_WRITTEN]: a pooled effect-size table where studies disagree and the recorded moderators explain little
-- breaks when [INDEX_WRITTEN]: a flag is read as a named cause; the grouping only says where to look. Gate status: gate run, thresholds not set
+- breaks when [INDEX_WRITTEN]: a flag is read as a named cause; the grouping only says where to look. Gate status: gate run; threshold rules declared for the gated design only, not validated
 - warning sign [INDEX_WRITTEN]: a share read without its shuffle null beside it
 - index cells: trigger INDEX_WRITTEN; inputs INDEX_WRITTEN; output INDEX_WRITTEN; fails_when INDEX_WRITTEN
 - aliases: missing column finder; does residual spread cluster by something unrecorded; which grouping explains what the columns do not
 - finder: none
-- not built: PASS / FAIL thresholds for the gate: not set (owner sets them)
+- not built: thresholds are declared rules for the gated design only (gate/DECLARED.json); no other design has been gated
+- pairs with: denominator_sorter (a combined claim needs both: the finder flags a grouping the recorded columns do not carry, and the sorter's field-drop outcome test fires; the sorter's split alone is bookkeeping, not a finding (rules: forest-model-ledger/ledger/toolkit/gate/DECLARED.json))
 - evidence: PENDING_MERGE `Simulators:forest-model-ledger/ledger/toolkit/gate/gate_missing_column_finder.py` TK-G1: gate run, thresholds not set (PR 339)
 - evidence: PENDING_MERGE `Simulators:forest-model-ledger/ledger/toolkit/missing_column_finder_stdlib.py` TK-G1: gate run, thresholds not set (PR 339)
 - evidence: PENDING_MERGE `Simulators:forest-model-ledger/samples/gate_missing_column_finder.sample.txt` TK-G1: gate run, thresholds not set (PR 339)
+- evidence: PENDING_MERGE `Simulators:forest-model-ledger/ledger/toolkit/gate/DECLARED.json` TK-G1 follow-up: threshold rules declared; null FLAG rate run (PR 339)
+- evidence: PENDING_MERGE `Simulators:forest-model-ledger/ledger/toolkit/gate/null_flag_rate_finder.py` TK-G1 follow-up: threshold rules declared; null FLAG rate run (PR 339)
+- evidence: PENDING_MERGE `Simulators:forest-model-ledger/samples/null_flag_rate_finder.sample.txt` TK-G1 follow-up: threshold rules declared; null FLAG rate run (PR 339)
+- evidence: PENDING_MERGE `Simulators:forest-model-ledger/samples/finder_bias.sample.txt` TK-G1 follow-up: threshold rules declared; null FLAG rate run (PR 339)
 
 ### denominator_sorter
 
 - kind: tool
 - measures [INDEX_WRITTEN]: which studies share a recorded denominator signature; it never reads the effect size to form groups
 - fits [INDEX_WRITTEN]: a meta-analysis table where pooling may mix measurands
-- breaks when [INDEX_WRITTEN]: two measurands carry the same value in every recorded field: the sorter cannot split them. Gate status: gate run, thresholds not set
+- breaks when [INDEX_WRITTEN]: two measurands carry the same value in every recorded field: the sorter cannot split them. Gate status: gate run; threshold rules declared for the gated design only, not validated
 - warning sign [INDEX_WRITTEN]: a between-group difference read as a contradiction instead of a candidate scope effect
 - index cells: trigger INDEX_WRITTEN; inputs INDEX_WRITTEN; output INDEX_WRITTEN; fails_when INDEX_WRITTEN
 - aliases: denominator sorter; sort studies by what they measured against; which studies may be pooled
 - finder: none
-- not built: PASS / FAIL thresholds for the gate: not set (owner sets them)
+- not built: thresholds are declared rules for the gated design only (gate/DECLARED.json); no other design has been gated
+- pairs with: missing_column_finder (a combined claim needs both: the finder flags a grouping the recorded columns do not carry, and the sorter's field-drop outcome test fires; the sorter's split alone is bookkeeping, not a finding (rules: forest-model-ledger/ledger/toolkit/gate/DECLARED.json))
 - evidence: PENDING_MERGE `Simulators:forest-model-ledger/ledger/toolkit/gate/gate_denominator_sorter.py` TK-G1: gate run, thresholds not set (PR 339)
 - evidence: PENDING_MERGE `Simulators:forest-model-ledger/samples/gate_denominator_sorter.sample.txt` TK-G1: gate run, thresholds not set (PR 339)
+- evidence: PENDING_MERGE `Simulators:forest-model-ledger/ledger/toolkit/gate/DECLARED.json` TK-G1 follow-up: threshold rules declared (PR 339)
 
