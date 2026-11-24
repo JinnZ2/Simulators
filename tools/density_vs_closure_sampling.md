@@ -129,6 +129,10 @@ consume those electrodes run arcs above 3000 C. The high-heat capability
 exists in two adjacent operators; the fence between them is
 institutional, not physical.
 
+Used by: tools/sensor_coupling_skeleton.md, field feasibility_boundary
+(method-layer PR #37 / Simulators PR #337; unmerged; back-reference,
+unpinned by rule - the hash pin runs skeleton -> this file)
+
 ## 3. Selection rule
 
 [co-authored] Flow of branches through the two gates:
@@ -265,3 +269,7 @@ RECORDED. The four welds are chat Claude's audit of the abstract
 (DERIVED). No instrument, corpus or run accompanies this note. Mirrored
 byte-identical in the Simulators repository at
 `tools/density_vs_closure_sampling.md`.
+
+Rule (owner decision 2026-11-23): "Pins run downstream to upstream by
+hash. Back-references run upstream to downstream by path and PR only,
+never by hash, so no two files pin each other."
