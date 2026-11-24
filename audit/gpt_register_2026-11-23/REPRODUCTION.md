@@ -494,3 +494,141 @@ Path of the only catch matrix found: repository Geometric-manifold-, branch
 `claude/deviations-planted-defect-spec` (PR #38, not merged),
 `docs/research/deviations/DEVIATIONS_2026-11-21.md`. It is not in this
 repository and was not edited.
+
+## Correction section 3, 2026-11-24 UTC (owner's order 336-F3)
+
+Nothing above this heading is changed. Tag added here: INHERITED (the
+reviewer's claim matches an error already in the artifact's own text).
+
+### E1. scoring/test_score.py, pinned bytes against current bytes
+
+Deviation recorded: `blind-reader-void12/PREREG.md` line 76 pins
+`scoring/test_score.py` at sha256 `7754586a1862...` (the bytes at
+`bf89b233`). The file was changed at `003deae3` and is now sha256
+`71ce47da1ff5...`. The pin is stale. `PREREG.md` is a freeze file and is
+not edited. The section `003deae3` added to `PREREG.md` pins variant B's
+brief and does not mention `test_score.py` [OBSERVED: the added lines were
+read].
+
+Full diff, `git diff bf89b233 003deae3 -- scoring/test_score.py`:
+
+```diff
+diff --git a/blind-reader-void12/scoring/test_score.py b/blind-reader-void12/scoring/test_score.py
+index 5b4f498b..c1c8b8bd 100644
+--- a/blind-reader-void12/scoring/test_score.py
++++ b/blind-reader-void12/scoring/test_score.py
+@@ -71,6 +71,18 @@ class KeyAndPacket(unittest.TestCase):
+                 for w in preds | {"vocab_branches", "second reader", "second-reader", "void-12", "blind"}:
+                     self.assertNotIn(w.lower(), low, "%s contains %r" % (rel, w))
+ 
++    def test_variant_brief_has_no_key_vocabulary_and_differs_only_by_the_clause(self):
++        with open(os.path.join(ROOT, "variants", "READER_BRIEF.variant_B.md"), encoding="utf-8") as fh:
++            b = fh.read()
++        with open(os.path.join(ROOT, "reader_packet", "READER_BRIEF.md"), encoding="utf-8") as fh:
++            a = fh.read()
++        self.assertEqual(a.replace(", even if the second system attaches different extra fields or detail", ""), b)
++        for w in ("MAPS", "PARTIAL", "HOMONYM", "SPLIT"):
++            self.assertIsNone(re.search(r"\b%s\b" % w, b))
++        low = b.lower()
++        for w in {t["predicate"] for t in KEY["terms"].values()} | {"vocab_branches", "void-12", "second reader"}:
++            self.assertNotIn(w.lower(), low)
++
+     def test_terms_json_has_only_neutral_fields(self):
+         t = S.load(os.path.join(ROOT, "reader_packet", "terms.json"))["terms"]
+         self.assertEqual(len(t), 15)
+```
+
+The change adds one test and removes nothing. `test_score.py` is the test
+file for the scorer; `scoring/score.py` does not import it (0 occurrences
+of the name in `score.py`), and `score.py` matches its own pin. So a
+reading's score cannot depend on which version of `test_score.py` is
+present [DERIVED]. Both versions were still run, in a scratch copy of the
+tree at this branch's HEAD, and `score.py` was rerun on every filed reading
+[OBSERVED]:
+
+| run | result |
+|---|---|
+| `python3 -B -m unittest test_score`, pinned bytes | 15 tests, OK |
+| `python3 -B -m unittest test_score`, current bytes | 16 tests, OK |
+
+| reading | score with pinned test file present | score with current test file present | differs | against filed `score.txt` |
+|---|---|---|---|---|
+| 2026-11-18_pilot-A | 7 of 8 declared pairs agree | same output | no | byte-identical |
+| 2026-11-18_pilot-B | 7 of 8 declared pairs agree | same output | no | byte-identical |
+| 2026-11-18_claude-fresh-1 | 5 of 8 declared pairs agree | same output | no | byte-identical |
+| 2026-11-18_claude-v2-A | NOT SCORED by `score.py` (exit 2, fails v1 validation) | same | no | filed score is from `score_v2.py` |
+| 2026-11-19_kimi-v2-A | NOT SCORED by `score.py` (exit 2) | same | no | filed score is from `score_v2.py` |
+| 2026-11-19_gpt6-v2 | NOT SCORED by `score.py` (exit 2) | same | no | filed score is from `score_v2.py` |
+
+`score.py` was run once per reading, not once per test-file version: the
+two columns are equal because the scorer is one file in both cases. The v2
+scorer (`score_v2.py`, tested by `test_score_v2.py`) is outside this pin
+and was not rerun.
+
+### E2. tools/known_answer.py, pin search
+
+Searched: every tracked file of this branch and of the 22 other
+repositories checked out in the session (working-tree HEADs, as found), for the sha256 or git blob id of
+every version of `tools/known_answer.py` in this repository's history (156
+values); and files named like PREREG, FREEZE, commitment, SHA256SUMS,
+PROVENANCE, TOOL_CARDS, PIN or MANIFEST for the file's name.
+
+| where | what it records | kind |
+|---|---|---|
+| repository method-layer, `reasoning-layer/layer3/inventory_update_metadata.json` lines 872-878 | path `tools/known_answer.py`, sha256 `17b5b3a022fd...`, 3091 lines, 151591 bytes, date 2026-10-14, last_commit `198937ec` | a recorded sha256 of an earlier version, in an inventory file |
+| this repository, `archive/*/PROVENANCE.md` (6 files) | name the file as a pick rule; no hash | not a pin |
+| this repository, `tools/TOOL_CARDS.json` | no entry for the file | none |
+| PREREG, FREEZE or commitment files, any repository | none | none |
+
+One sha256 of the file is recorded in another repository, so the order's
+"pinned anywhere" branch is taken and nothing is changed. The recorded
+value is not the current file's (current sha256 `5d65201d4326...`); the
+file has changed since that inventory was written.
+
+PROPOSED: "docstring says one; code holds two" (`tools/known_answer.py`
+line 20 against lines 1102 and 1213). No edit made, no branch, no PR.
+
+### E3. Confirmed 6, META-PROTOCOL.md read in full
+
+Lines read: 673 of 673. Verdict: not present. No line forbids deleting
+duplicates or dead ends, in those words or others. The lines nearest to
+the claim:
+
+- lines 136-138: "These never merge on their own. An observed-but-unvalidated
+  thing does not get promoted to validated because it's been sitting around,
+  and it does not get deleted because it hasn't been validated yet." (about
+  unvalidated observations, not duplicates)
+- lines 465-466: "A gap that closes and points nowhere is a dead end you
+  built yourself." (about gap entries; says nothing on deletion)
+- line 610: "nothing is marked failed, rejected, or wrong" (about marking)
+
+D1's verdict for confirmed 6 stands and loses its caveat about term search.
+Confirmed 1 is reclassed INHERITED: the register's "one" matches the
+file's docstring and not its code. Catch matrix counts: differs 1
+(confirmed 6), inherited 1 (confirmed 1).
+
+### E4. kernel_stake pins against the kernel repository
+
+`https://github.com/torvalds/linux` was reachable (`git ls-remote`, then a
+depth-1 fetch of the 8 tags without file contents). The kernel.org host was
+refused by the session proxy (CONNECT 403).
+
+| tag | id in PREREGISTRATION.md | tag id on the remote (first 12) | match | paths resolving at the tag |
+|---|---|---|---|---|
+| v4.14 | e3d97e8db5c4 | e3d97e8db5c4 | yes | 36 of 36 |
+| v4.19 | 2241b8bcf2b5 | 2241b8bcf2b5 | yes | 36 of 36 |
+| v5.4 | 6e815efe19a9 | 6e815efe19a9 | yes | 36 of 36 |
+| v5.10 | 3f995f8e0b54 | 3f995f8e0b54 | yes | 36 of 36 |
+| v5.15 | dc7089468610 | dc7089468610 | yes | 36 of 36 |
+| v6.1 | 7614896350aa | 7614896350aa | yes | 36 of 36 |
+| v6.6 | 5260836abb70 | 5260836abb70 | yes | 36 of 36 |
+| v6.12 | 06090c9b622a | 06090c9b622a | yes | 36 of 36 |
+
+- The 8 ids are the ids of the annotated tag objects, not of the commits
+  the tags point at (for v4.14 the commit is `bebc6082da0a`). The file's
+  column is headed "sha" and does not say which.
+- Paths: the 36 directories of section 3 of the file (15 + 12 + 9), each a
+  tree at every tag. The dropped candidate `init/` was not counted.
+- Tag dates and the MAINTAINERS coverage the file states were not checked.
+- D2's row for this file: "ids not checked" no longer holds; they were
+  checked here.
