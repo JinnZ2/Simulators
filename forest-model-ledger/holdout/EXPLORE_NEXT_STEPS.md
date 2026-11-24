@@ -715,3 +715,20 @@ bb56ba5ac31b13be09cf3df42c1215b53255bb1eb3bb8a91838ab8cb4cb5c82c
 (asserted by the script; not committed). anchor_studies.csv sha256
 e2ea825c7bb1372dc2b9a2d1c46f1c2a14f78b466f0a7f382bacb0c129a29438,
 asserted. The readings in section 1 are this run's.
+
+## 5. Dated note, 2026-11-24 UTC (order 335-F5; appended)
+
+Prefix: the 50940 bytes of this file before this section, sha256
+1cc56928d30e1ce79c1d16aed86503a6de6a63b3f8943ff885ed98947475ca42
+
+"Holdout-internal split (4.8): setting and duration do not move ECM-AM
+ within the holdout (+0.09 to +0.12), including the cell matching the
+ anchor's mix. Remaining candidates for the anchor/holdout size gap,
+ untested: (1) selection inflation - the contrast was chosen after
+ anchor tables were seen, so the anchor size carries selection bias;
+ (2) study/lab identity (9 holdout ECM studies); (3) era drift after
+ 2018 not captured by setting/duration; (4) ECM genus composition.
+ A sealed test on new data should predict near the holdout/pooled size
+ with shrinkage expected, not the anchor size. (DERIVED)"
+
+Observer slots: null.
