@@ -268,3 +268,24 @@ Zenodo record 10403125, not committed. The sealed predictions were made
 by a separate session from anchor studies only; this run verified their
 bytes and scored them. The readings in section 5 are this run's and are
 tagged DERIVED or PROPOSED.
+
+## Correction, 2026-11-24 UTC (append only; nothing above is changed)
+
+Owner's order 336-F2, item 1, recorded as given:
+
+"The claim that every number in the indented blocks was printed by
+ phase_c.py and none typed is broader than true: indented blocks also
+ carry prose and assumption text from predictions.json (67 lines not in
+ script output). Trailing spaces were dropped from 4 output lines.
+ Independent re-check 2026-11-24 (Claude session, same family): seals
+ a-d PASS, six scores 0 differing numbers."
+
+[OBSERVED] Counting note from the re-check: the 67 is the count of
+indented lines that do not match a script output line exactly; 4 of those
+are the lines that differ only by the dropped trailing spaces, which
+leaves 63 that are not script output in any form. The re-check ran
+`holdout/phase_c.py` at commit 7a10271 on the source refetched
+2026-11-24T01:28:09Z (HTTP 200, same sha256); it ran no `--seal` and
+changed no file. The re-check is by a session of the same family as the
+sessions that ran Phases A to C; it is a second run, not an independent
+family.
