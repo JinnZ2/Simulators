@@ -181,6 +181,9 @@ database's inclusion rule, not a count of what exists.
       (EXPLORE_NEXT_STEPS.md section 2b: the join ran; exploratory)
     - ECM-AM (Self-Other) is a candidate sealed prediction for a new
       data source only; Jiang holdout is spent.
+      See EXPLORE_NEXT_STEPS.md 4.7 (crowding: dense, known-answer reading).
+      Any sealed test of this contrast must fix Experimental.setting and
+      Phase2.time strata in the seal.
 
 ## Provenance
 

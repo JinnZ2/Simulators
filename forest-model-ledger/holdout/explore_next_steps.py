@@ -11,6 +11,7 @@ scored.  Every reading printed is DERIVED.
     python3 holdout/explore_next_steps.py myc SOURCE_CSV FUNGALROOT_JSONL
     python3 holdout/explore_next_steps.py f2 SOURCE_CSV FUNGALROOT_JSONL
     python3 holdout/explore_next_steps.py f3 SOURCE_CSV FUNGALROOT_JSONL
+    python3 holdout/explore_next_steps.py f4 SOURCE_CSV FUNGALROOT_JSONL
 
 coverage  item 1: AI and MAP ranges, anchor vs holdout, pooled and inside
           each Approach.  Ranges only; no fit is run.
@@ -68,6 +69,10 @@ f3        order 335-F3: (2) leave-one-SITE-out, site = the dataset's
           does not say what the pair locates: coordinate_meaning is an
           empty slot); (3) four counts and two restricted fits beside the
           ECM - AM Self-Other size gap.  Nothing is read as cause.
+f4        order 335-F4: ECM - AM inside Self-Other, HOLDOUT only, split by
+          Experimental.setting and by Phase2.time (<= 12 / > 12 months).
+          Thin = under F2_THIN ECM studies in the cell.  The anchor cells
+          are printed as counts only, to show why it cannot be split.
 
 Mark rule for coverage (hand-set, written before the table was seen):
   narrower  holdout min-max width < NARROW * anchor min-max width
@@ -838,8 +843,67 @@ def f3(path, frpath):
                 print("       %-7s %-4s          %s" % (s, t, "".join("%-14s" % c for c in cellz)))
 
 
+def f4(path, frpath):
+    side = load(path)
+    sp, ge, _unknown, nrec, _nbytes = fungalroot(frpath)
+    _fits_, est = _fits()
+    _assign(side, sp, ge)
+    xfun = dict(_contrasts())["ECM - AM"]
+
+    def t12(r):
+        try:
+            return float(r["Phase2.time"]) > 12
+        except ValueError:
+            return None
+    splits = [("a) Experimental.setting", [("Field", lambda r: r["Experimental.setting"] == "Field"),
+                                           ("Greenhouse", lambda r: r["Experimental.setting"] == "Greenhouse")]),
+              ("b) Phase2.time", [("<= 12 months", lambda r: t12(r) is False),
+                                  ("> 12 months", lambda r: t12(r) is True)])]
+    print("ORDER 335-F4 on the FungalRoot join (%d records); exploratory, post-holdout, scores nothing" % nrec)
+    print("  2 HOLDOUT-INTERNAL SPLIT: ECM - AM inside Self-Other; thin = under %d ECM studies in the cell"
+          % F2_THIN)
+    print("    split                    cell           side      ECM rows  ECM st   AM rows  AM st   "
+          "estimate [80% interval] studies rows")
+    for s in ("holdout", "anchor"):
+        rows = [r for r in side[s] if r["Approach"] == "Self-Other" and xfun(r) is not None]
+        for sname, cells in splits:
+            for cname, keep in cells:
+                rs = [r for r in rows if keep(r)]
+                ecm = [r for r in rs if r["myc_type"] == "ECM"]
+                am = [r for r in rs if r["myc_type"] == "AM"]
+                head = "    %-24s %-14s %-8s %8d  %6d  %8d  %5d   " % (
+                    sname, cname, s, len(ecm), len({r["Author"] for r in ecm}),
+                    len(am), len({r["Author"] for r in am}))
+                if s == "anchor":
+                    print(head + "counts only (anchor not split)")
+                    continue
+                c = _cell(rs, xfun, est)
+                if c["state"] == "not checkable":
+                    print(head + "not checkable")
+                    continue
+                print(head + "%+8.4f [%+8.4f, %+8.4f] %3d st %5d rows%s"
+                      % (c["est"], c["lo"], c["hi"], c["studies"], c["rows"],
+                         "  thin" if c["hi_st"] < F2_THIN else ""))
+        if s == "holdout":
+            c = _cell(rows, xfun, est)
+            print("    %-24s %-14s %-8s %8d  %6d  %8d  %5d   %+8.4f [%+8.4f, %+8.4f] %3d st %5d rows"
+                  % ("unsplit", "all", s, sum(1 for r in rows if r["myc_type"] == "ECM"), c["hi_st"],
+                     sum(1 for r in rows if r["myc_type"] == "AM"), c["lo_st"],
+                     c["est"], c["lo"], c["hi"], c["studies"], c["rows"]))
+            both = {}
+            for r in rows:
+                if r["myc_type"] == "ECM":
+                    k = (r["Experimental.setting"], "> 12" if t12(r) else "<= 12")
+                    both.setdefault(k, []).append(r)
+            print("    holdout ECM rows by setting x duration (rows / studies): "
+                  + "; ".join("%s, %s mo: %d / %d" % (k[0], k[1], len(v), len({r["Author"] for r in v}))
+                              for k, v in sorted(both.items())))
+
+
 def main():
     a = sys.argv[1:]
+    if len(a) == 3 and a[0] == "f4":
+        return f4(a[1], a[2])
     if len(a) == 3 and a[0] == "f3":
         return f3(a[1], a[2])
     if len(a) == 3 and a[0] == "f2":

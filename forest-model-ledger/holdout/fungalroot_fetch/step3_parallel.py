@@ -7,6 +7,16 @@
 # After it, the extract:          cat first.jsonl $(ls pages/*.jsonl | sort) > fungalroot_occurrences_full.jsonl
 # Extract as fetched: 36515 lines, 14523948 bytes, sha256
 # 430ab42cadb7412deeb7fa9f81ae8e0cb8f9c8c60bba23bc5c125b8834410980
+# CANONICAL ASSEMBLY (added 2026-11-24, order 335-F4; the lines above stay as
+# the as-fetched order). Sort the records by gbifID, ascending, as integers
+# (the extract's "key" field is the GBIF occurrence key), and write each with
+# the same serialization as the fetch:
+#   recs = [json.loads(l) for l in open("fungalroot_occurrences_full.jsonl")]
+#   recs.sort(key=lambda r: int(r["key"]))
+#   out = "".join(json.dumps(r, sort_keys=True, ensure_ascii=True) + "\n" for r in recs)
+# Extract sorted by gbifID: 36515 lines, 14523948 bytes, sha256
+# b75b193366044a67ba6087fceac8d5eff6ea0226e435f7f0714d955a58b35523
+# This hash does not depend on the order the API returned pages in.
 import json,subprocess,time,os
 from concurrent.futures import ThreadPoolExecutor
 key='744edc21-8dd2-474e-8a0b-b8c3d56a3c2d'

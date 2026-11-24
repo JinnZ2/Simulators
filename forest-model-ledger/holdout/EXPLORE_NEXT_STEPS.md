@@ -527,6 +527,16 @@ pasted by script. The script prints block 4 before block 3.
                           offset order; the API states no such
                           guarantee that this run read, and a re-crawl
                           of the dataset would change it.
+    extract sha256 (sorted by gbifID)
+                          [added 2026-11-24, order 335-F4]
+                          b75b193366044a67ba6087fceac8d5eff6ea0226e435f7f0714d955a58b35523
+                          36515 lines, 14523948 bytes; records sorted by
+                          the GBIF occurrence key as integers, same
+                          serialization. Computed from the scratch
+                          extract, which still existed (its as-fetched
+                          hash was re-checked first). This one does not
+                          depend on page order; a re-crawl that changes
+                          any record would still change it.
     type-rule code        holdout/explore_next_steps.py, functions
                           fungalroot() and _taxon_type(); first committed
                           at ba43407, file hash pinned at efa9422
@@ -642,6 +652,50 @@ NM-AM: CURIOSITY branch. The anchor Self-Other estimate is about zero
 (-0.0067, interval across zero), so the direction "hit" recorded for it
 in section 4, block 4, is void.
 
+### 4.8 Order 335-F4 (run 2026-11-24 UTC; exploratory, post-holdout, scores nothing)
+
+Holdout-internal split of ECM - AM inside Self-Other, by setting and by
+duration. Same fit and bootstrap. The anchor cannot be split: it has 1
+Field ECM row (1 study) and 3 ECM rows over 12 months (2 studies), so
+its cells are printed as counts only. Printed by
+`python3 holdout/explore_next_steps.py f4 SOURCE_CSV FUNGALROOT_JSONL`,
+pasted by script.
+
+    ORDER 335-F4 on the FungalRoot join (36515 records); exploratory, post-holdout, scores nothing
+      2 HOLDOUT-INTERNAL SPLIT: ECM - AM inside Self-Other; thin = under 3 ECM studies in the cell
+        split                    cell           side      ECM rows  ECM st   AM rows  AM st   estimate [80% interval] studies rows
+        a) Experimental.setting  Field          holdout        31       3       401      8    +0.0925 [ +0.0181,  +0.2011]   9 st   432 rows
+        a) Experimental.setting  Greenhouse     holdout        66       7      1482     33    +0.1142 [ -0.0444,  +0.2548]  34 st  1548 rows
+        b) Phase2.time           <= 12 months   holdout        32       7      1591     35    +0.1217 [ -0.0766,  +0.4403]  36 st  1623 rows
+        b) Phase2.time           > 12 months    holdout        65       3       292      6    +0.1146 [ +0.0361,  +0.1370]   7 st   357 rows
+        unsplit                  all            holdout        97       9      1883     39    +0.1219 [ +0.0537,  +0.2016]  41 st  1980 rows
+        holdout ECM rows by setting x duration (rows / studies): Field, <= 12 mo: 5 / 1; Field, > 12 mo: 26 / 2; Greenhouse, <= 12 mo: 27 / 6; Greenhouse, > 12 mo: 39 / 1
+        a) Experimental.setting  Field          anchor          1       1       131     15   counts only (anchor not split)
+        a) Experimental.setting  Greenhouse     anchor         93      13      2681    106   counts only (anchor not split)
+        b) Phase2.time           <= 12 months   anchor         91      12      2734    110   counts only (anchor not split)
+        b) Phase2.time           > 12 months    anchor          3       2        73      8   counts only (anchor not split)
+
+[DERIVED] Reading. No cell is thin by the order's rule (each has at
+least 3 ECM studies), but two cells sit on exactly 3. Inside the holdout
+the estimate is about the same in all four cells (+0.09 to +0.12) and
+equal to the unsplit +0.12; the Field and over-12-months intervals
+exclude zero, the Greenhouse and up-to-12-months intervals do not. So
+within the holdout, setting and duration do not move this contrast, and
+the holdout's Greenhouse cell (+0.11) and up-to-12-months cell (+0.12)
+are still about a third of the anchor's +0.38, whose ECM rows are nearly
+all Greenhouse and up to 12 months. The mix difference in 4.7 is real as
+a count; these splits do not show it carrying the size gap. The split
+cells are not independent of study: 26 of the 31 Field ECM rows come
+from 2 studies and all 39 Greenhouse over-12-months ECM rows from 1.
+
+Scoped revision, appended 2026-11-24 (order 335-F4), verbatim:
+
+"Setting and duration explain ~0% of variance in aggregate (finder
+ result). Within ECM rows their mix differs sharply between sides
+ (field 1/94 vs 31/97; >12 mo 3/94 vs 65/97). The aggregate null does
+ not test this interaction. Holdout ECM rows come from 9 studies;
+ method mix and study identity are not separable here."
+
 Observer slots: null.
 
 ## Provenance
@@ -649,7 +703,8 @@ Observer slots: null.
 Base branch: claude/denominator-sorter (PR #334) at commit c0a7d77.
 Code: `holdout/explore_next_steps.py` (standard library only).
 Follow-up order of 2026-11-23: sections 1b, 1c and 2b. Order 335-F2:
-section 4. Order 335-F3: section 4.7 and holdout/fungalroot_fetch/. FungalRoot records:
+section 4. Order 335-F3: section 4.7 and holdout/fungalroot_fetch/.
+Order 335-F4: section 4.8. FungalRoot records:
 section 2b (fetched extract, sha256 asserted by the script, not
 committed).
 Source data: Zenodo record 10403125, file PSF.data.EL.open.csv, fetched
