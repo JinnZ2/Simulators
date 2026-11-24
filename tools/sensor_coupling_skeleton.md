@@ -30,8 +30,13 @@ from biological feedback rules needs its own evidence.
     channel_exists          yes / no / NOT RECORDED
     channel_safe            reporting punished? yes / no / NOT RECORDED
     feasibility_boundary    see tools/density_vs_closure_sampling.md
-                            section 2a (method-layer #36 / Simulators
-                            #329, unmerged; sha256 b6577d69...803b)
+                            section 2a (method-layer #36, commit
+                            fb98459e841ea6815102d81741eefd1e47f86482 /
+                            Simulators #329, commit
+                            d56be76874b9f1bc22ee6778e33062738a8730e0;
+                            unmerged; sha256
+                            dbe1cd2e3912c1be917c80a3bf47d6c3
+                            2d229662ad28d93fb15e9b61e4a8d8eb)
     fence_type              physical / institutional / NOT RECORDED
 
 ## 3. Measures (all untested)
@@ -76,3 +81,7 @@ Observer slots: null.
 
 Skeleton from a voice session, 2026-11-23; citations from model
 knowledge, unverified.
+
+Rule (owner decision 2026-11-23): "Pins run downstream to upstream by
+hash. Back-references run upstream to downstream by path and PR only,
+never by hash, so no two files pin each other."
