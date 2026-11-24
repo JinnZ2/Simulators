@@ -273,3 +273,110 @@ One difference between the register and the repository, logged: the register
 the index says "three filed v2 readings coded". Both hold for the same three
 readers; the gpt6 records carry packet variant and sha256 as null where the
 other two carry variant A and a hash. No count differs.
+
+## Correction section, 2026-11-24 UTC (owner's order 336-F1)
+
+Nothing above this heading is changed. Where this section and an earlier
+one differ, this section holds.
+
+Tags added for this section, beside those on line 10: NOT RECORDED,
+NOT CHECKED, NOT TESTED, PASS, PROPOSED, STATEMENT PRESENT.
+
+### C1. Register filed
+
+The register text is now a file: `REGISTER_AS_RECEIVED.md` beside this one,
+file sha256 `33092afccd1f1081f087edd2cfdf3537375419cb8c82e6612c887a85802eea39`
+(12165 bytes). The received text inside it is 10863 bytes, sha256
+`4e4502487af097a300c0c632fb882c84ccf25e6502ae179bf9e0aad191d2dad0`. Every
+"register text (quoted)" cell in the F01-F10 table of the dated addition
+above is a quote from section 5 of that file at that hash. The sentence
+there, "It is still not a file in this repository", held when written and
+no longer holds.
+
+### C2. Relabel of F04, F05, F07
+
+| id | status in the dated addition | status now |
+|---|---|---|
+| F04 | REPRODUCED as a statement of the index | STATEMENT PRESENT; underlying claim NOT CHECKED |
+| F05 | REPRODUCED as a statement of the index | STATEMENT PRESENT; underlying claim NOT CHECKED |
+| F07 | REPRODUCED as a statement of the README | STATEMENT PRESENT; underlying claim NOT CHECKED |
+
+Why (2026-11-24): for these three, what was regenerated is only that a
+sentence sits in a README. The claims under the sentences (no D1 reading
+exists; the M02 coding has not been done; no model evaluation has been
+completed) were not tested, so REPRODUCED was the wrong word for them. For
+F04 one part was looked at and stays OBSERVED: `m01_records.json` holds no
+condition other than D0.
+
+### C3. F08, what the comparison was
+
+F08 stays REPRODUCED. What R01 compared: 4 totals (structural, a1_defined,
+presence, applicability), 9 per-reader counts (3 readers by 3 analysis
+arms), the per-field table (26 fields), and the full text printed by
+`arms.py --check` against `arms_report.txt`. n = 111 records, 87 of them
+listed. Size of difference the register claimed: NOT RECORDED (the register
+states no size; its acceptance criterion is exact agreement). Detectable
+difference: the counts are integers from a script with no random draw and
+the comparison is exact, so a difference of one record in any compared count
+would have shown [DERIVED]. `reproduce.py` was run more than once in the
+filing session with the same output [OBSERVED]; no run on another machine or
+Python version was made: NOT RECORDED.
+
+### C4. Deviation log
+
+- "F01-F10 filled on the session's own offer, without a separate order; owner kept it 2026-11-23."
+- The first filing gave the executor's family and not its model (stated in
+  Provenance above). Unchanged.
+
+### C5. Outstanding register items
+
+Same status classes as the F table. Checked on the PR branch (main at
+`9a118df` plus this folder), 2026-11-24 UTC, Python 3.13.18.
+
+| item | register text (short) | status | basis |
+|---|---|---|---|
+| R05 | provenance and independence fields for every result | PARTLY RUN: fields read from files for the six filed readings; three fields NOT RECORDED | table below |
+| F10 | complete repository-wide frozen artifact inventory | NOT RUN | the register gives no rule for what counts as a frozen artifact; choosing one is a choice it does not fix. One count by file name only, not an inventory: 4 tracked files named PREREG.md, FREEZE_LOG.md or PREREGISTRATION.md (`blind-reader-void12/PREREG.md`, `frame-location-benchmark/FREEZE_LOG.md`, `kernel_stake/PREREGISTRATION.md`, `relational-playground/experiments/model_comparison/forest_fire_regime/PREREG.md`) |
+| confirmed 1 | known-answer registry keeps a failing case as calibration | REPRODUCED; count DIFFERS | `python3 -B tools/known_answer.py` exits 0, prints "cases disagreeing with the registry: 0" and two cases marked "FAIL (pinned)" ("matched set", "half-signal vs full-signal"). The register and the module docstring (line 20) say one; the run shows two |
+| confirmed 2 | null harness has positive and negative controls and depends on NumPy | REPRODUCED | `null-harness/null_harness.py` line 47 `import numpy as np` at module scope; README lines 7-8 name both controls; with numpy 2.5.3 present the module runs, exit 0. A run without numpy was not made |
+| confirmed 3 | frame-location harness frozen before cases; no results yet | order RECORDED only; no-results STATEMENT PRESENT, underlying claim NOT CHECKED | R03 and F07 above |
+| confirmed 4 | M01 rules give different counts; one classification does not reproduce a key outcome | REPRODUCED | R01 (0 / 33 / 47 / 52) and R02 (T02 value) |
+| confirmed 5 | review folder holds competing homes and unresolved cross-runs | NOT CHECKABLE as worded; one part OBSERVED | the register names no path. `studies/review/` holds two stripped copies of `MULTI_HOME_REGISTER.json` and one of `concept_map.json`, and three of its files contain "crossrun" or "cross-run". `ledger/reviews/` is a second folder the words could mean. "intentionally" and "unresolved" were not tested |
+| confirmed 6 | META-PROTOCOL forbids deleting duplicates or dead ends | DIFFERS as worded | `META-PROTOCOL.md` has no line with "duplicat"; "dead end" occurs once (line 466), about a gap that points nowhere, not about deletion. Nearest text, lines 136-138: an observed-but-unvalidated thing "does not get deleted because it hasn't been validated yet". Search was by those terms only; a rule in other words would be missed |
+| risk A | models import unrelated earlier topics | NOT RUN | needs model runs and a scoring rule; the register fixes neither |
+| risk B | models summarize away preserved uncertainty | NOT RUN | same reason |
+| risk C | fixtures taken for executed experiments | risk NOT RUN; premise OBSERVED | `frame-location-benchmark/runs/` holds constructed fixtures and the README (lines 11, 107) says they are not a result. No reader was tested |
+| risk D | exit code 1 read as failure | risk NOT TESTED; premise OBSERVED | as in the dated addition. PROPOSED: document exit codes in the docstring of `blind-reader-void12/studies/instrument/validate.py`. The code is not changed here |
+| risk E | generated documents edited directly | risk NOT RUN; premise OBSERVED for four files | `reasoning-gate/GUARDS.md`, `GAP_INDEX.md`, `CONCEPT_MAP.md` and `COLLISIONS.md` each say on line 3 or 4 that they are generated and name the generator. Other generated files were not listed |
+
+R05, fields per filed reading (`blind-reader-void12/readings/`). Each cell
+is read from the file named in the column head or computed now; nothing is
+filled from memory. Model column: the folder gives a reader label, and for
+three readings a family but no model; the label is copied, not checked.
+
+| reading (folder) | family (INDEPENDENCE_LEDGER.md) | first commit of folder | exposure P K R I O (ledger) | packet (m01_records.json) | condition | execution date | input hash | output sha256 (response.json, computed now, first 16) | level (ledger) |
+|---|---|---|---|---|---|---|---|---|---|
+| 2026-11-18_pilot-A | Claude | `460805a0` | y n ? n n | not in M01 | not in M01 | NOT RECORDED | zip `6a7f7df8...f163` (RUN_NOTES) | `a1965988cb0a2275` | L1 |
+| 2026-11-18_pilot-B | Claude | `460805a0` | y n ? n n | not in M01 | not in M01 | NOT RECORDED | zip `b19ec02c...e61c` (RUN_NOTES) | `5a1bc4961a00481c` | L1 |
+| 2026-11-18_claude-fresh-1 | Claude | `dab5b856` | y ? ? ? ? | not in M01 | not in M01 | NOT RECORDED | NOT RECORDED here (RUN_NOTES not read past its packet line) | `f2ca48909b7677d3` | L0 cap |
+| 2026-11-18_claude-v2-A | Claude | `13110b97` | y ? ? ? ? | v2, variant A, `94836e79...4a63` | D0 | NOT RECORDED | `94836e79...4a63` | `c86f2211d110ec9b` | L0 cap |
+| 2026-11-19_kimi-v2-A | Kimi | `bfd2c467` | y n ? n ? | v2, variant A, `94836e79...4a63` | D0 | NOT RECORDED | `94836e79...4a63` | `fda486e33078b366` | L2 |
+| 2026-11-19_gpt6-v2 | GPT | `2676b433` | y n y ? ? | v2, variant null, sha256 null | D0 | NOT RECORDED | NOT RECORDED (null in the record) | `88cd9a447cc67baf` | L2 |
+
+Notes on the R05 table:
+- Execution date: the folder names carry a date; whether it is the run date
+  or the filing date was not read from the files, so the field is NOT
+  RECORDED.
+- "Exact source commit" is given as the commit that first added the folder;
+  the commit of the packet each reader was sent is not in the table.
+- Independent reproduction status is the ledger's level, copied. The ledger
+  is the work of a Claude Code session and says so. No level was recomputed.
+- Results outside `readings/` (M02: none coded; frame-location: none) have
+  no rows.
+- "?" in the exposure column is the ledger's own mark for void.
+
+### C6. Not done in this section
+
+- The check of PR #332 and the CI reads asked for in the same order are
+  reported to the owner and not filed (the order says no commit for them).
+- No code, fixture, key, record or generated output was changed.
