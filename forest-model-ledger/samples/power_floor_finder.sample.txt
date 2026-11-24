@@ -1,0 +1,10 @@
+power_floor_finder: 20 replicates per planted s, design 40 studies x 15 rows, 6 levels
+  declared null max 0.0326; floor = smallest s with >= 19 of 20 above it
+
+  planted s   realized (mean)   recovered mean      min      max   above null max   finder FLAG   bias (recovered / realized)
+       0.02            0.0198           0.0242   0.0038   0.0414          2 of 20       3 of 20        1.224
+       0.03            0.0302           0.0343   0.0086   0.0518         12 of 20      12 of 20        1.136
+       0.05            0.0493           0.0515   0.0217   0.0976         16 of 20      14 of 20        1.045
+       0.07            0.0703           0.0719   0.0435   0.0892         20 of 20      20 of 20        1.023
+
+  floor: planted s = 0.07

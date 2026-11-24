@@ -48,6 +48,16 @@ the outcome test to fire. A combined claim needs both.
 Pinned output: `samples/null_flag_rate_finder.sample.txt`,
 `samples/finder_bias.sample.txt`.
 
+## Power floor (2026-11-24)
+
+Declared in `DECLARED.json` (second amendment) before the sweep. Planted
+shares 0.02, 0.03, 0.05, 0.07, 20 replicates each, against the declared
+null max 0.0326. Floor: planted s = 0.07 (20 of 20 above).
+
+    python3 ledger/toolkit/gate/power_floor_finder.py   # about 80 s
+
+Pinned output: `samples/power_floor_finder.sample.txt`.
+
 ## Not established [DERIVED]
 
 - The declared rules hold for the gated design only.

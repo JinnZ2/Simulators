@@ -55,6 +55,9 @@ pairs_with (optional): a list of {"id", "reason"} naming a card this one is
 used with. The id must be a card, the reason must be stated, and the other
 card must name this one back; a one-way or dangling pair voids the card.
 
+scope (optional): one line saying where the card's status was earned. Rendered
+as written; matched against nothing.
+
 Aliases: every card has at least one, an alias names exactly one card, and
 --find resolves them. A row with a `finder` name must have that entry in
 TOOL_FINDER/finder.json: the card points at the existing entry and does not
@@ -343,6 +346,8 @@ def render(doc):
               "- finder: %s" % (r["finder"] or "none")]
         for n in r["not_built"]:
             L.append("- not built: %s" % n)
+        if r.get("scope"):
+            L.append("- scope: %s" % r["scope"])
         for p in r.get("pairs_with") or []:
             L.append("- pairs with: %s (%s)" % (p["id"], p["reason"]))
         for e in r["evidence"]:
