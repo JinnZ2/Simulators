@@ -35,8 +35,7 @@ from biological feedback rules needs its own evidence.
                             Simulators #329, commit
                             d56be76874b9f1bc22ee6778e33062738a8730e0;
                             unmerged; sha256
-                            dbe1cd2e3912c1be917c80a3bf47d6c3
-                            2d229662ad28d93fb15e9b61e4a8d8eb)
+                            dbe1cd2e3912c1be917c80a3bf47d6c32d229662ad28d93fb15e9b61e4a8d8eb)
     fence_type              physical / institutional / NOT RECORDED
 
 ## 3. Measures (all untested)
