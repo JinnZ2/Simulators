@@ -632,3 +632,64 @@ refused by the session proxy (CONNECT 403).
 - Tag dates and the MAINTAINERS coverage the file states were not checked.
 - D2's row for this file: "ids not checked" no longer holds; they were
   checked here.
+
+## Correction section 4, 2026-11-24 UTC (owner's order 336-F4)
+
+Appended; every line above is unchanged. The file before this section was
+41920 bytes, sha256
+`ba87ce83bbd39619de2f51a1bda1441804cee71e00a53b1ca6c9621250c5a61d`.
+
+### G1. Owner decision on the known_answer.py inventory entry (verbatim)
+
+"An inventory entry recording an earlier version's hash is a state
+ record, not a pin; it does not hold the current bytes. known_answer.py
+ is not pinned. Owner decision 2026-11-23."
+
+This closes the open point of E2. The docstring count named in confirmed 4
+is changed on a separate branch, `claude/known-answer-docstring-count`
+(commit `918bbcca`), not in this pull request.
+
+### G2. score_v2.py: pin, current bytes, reruns
+
+- Pinned: yes. `blind-reader-void12/PREREG.md` line 126 lists
+  `scoring/score_v2.py` with sha256
+  `22055614cac916e0970c7a8061bb305099289e8f48c647601c3048a0d347c426`. It is
+  one of the 34 pins of D2.
+- Current bytes: sha256 of the file at this branch's head is the same value.
+  PASS.
+- Keys used: `scoring/key_v2.json`
+  (`c88a910a03a6456900efabd130c57a19f1a0133c9566ebce34ae0b6e813b18d1`,
+  PREREG.md lines 112 and 127) and `scoring/key_v2_a1.json`
+  (`a7309046319e62210018dd3c48c88174abf63282200c8bb0a40a1c698b5d8ba4`,
+  PREREG.md line 125). Both current files match.
+- Rerun: `python3 -B scoring/score_v2.py readings/<r>/response.json --key
+  scoring/<key> --json <out>`, output written outside the tree, compared
+  with `cmp` against the filed files. sha256 columns are the first 12 hex
+  digits of the filed file.
+
+| reading | key | exit | text vs filed | json vs filed | filed .txt | filed .json |
+|---|---|---|---|---|---|---|
+| 2026-11-18_claude-v2-A | key_v2.json | 0 | identical (score.txt) | identical (score.json) | bcf18041b3ab | 7b461684387f |
+| 2026-11-18_claude-v2-A | key_v2_a1.json | 0 | identical (score_a1.txt) | identical (score_a1.json) | 33d0e92bec9e | 3f41775256e1 |
+| 2026-11-19_kimi-v2-A | key_v2.json | 0 | identical (score.txt) | identical (score.json) | 8acf8e64d564 | 20a70f98f3c2 |
+| 2026-11-19_kimi-v2-A | key_v2_a1.json | 0 | identical (score_a1.txt) | identical (score_a1.json) | 2310c2d65c2b | 327409187277 |
+| 2026-11-19_gpt6-v2 | key_v2.json | 0 | identical (score.txt) | identical (score.json) | 548f73141b8b | 20f07b4c5bdd |
+| 2026-11-19_gpt6-v2 | key_v2_a1.json | 0 | identical (score_a1.txt) | identical (score_a1.json) | e2785fd8020d | 15a0b7371d7d |
+
+12 of 12 files identical byte for byte. No deviation is recorded for
+score_v2.py. NOT CHECKED: whether the filed scores were produced by these
+bytes at the time of filing; the rerun shows only that the current pinned
+bytes produce them now.
+
+### G3. kernel_stake PREREGISTRATION.md, 'sha' column (verbatim)
+
+"PREREGISTRATION.md 'sha' column holds annotated tag object ids, not commit
+ ids; header does not say which. Not edited (freeze file)."
+
+Source: E4 of this file.
+
+## Provenance (section 4)
+
+Co-authored, Kavik + Claude, 2026-11-24 UTC. G1 and G3 quote the owner's
+order 336-F4. G2 was run in this session on branch
+`claude/gpt-register-reproduction`. License CC0-1.0. Observer slots: null.
