@@ -380,3 +380,117 @@ Notes on the R05 table:
 - The check of PR #332 and the CI reads asked for in the same order are
   reported to the owner and not filed (the order says no commit for them).
 - No code, fixture, key, record or generated output was changed.
+
+## Correction section 2, 2026-11-24 UTC (owner's order 336-F2)
+
+Nothing above this heading is changed. Tags added here: FROZEN, NOT FROZEN.
+
+### D1. Confirmed items 1 and 6 against the file history (order item 3)
+
+The register names no commit. Its date is 2026-11-23. Main on that date was
+`9a118df` (last commit 2026-11-20).
+
+| item | file | last change before the register | state at the register's date | verdict |
+|---|---|---|---|---|
+| confirmed 1 | `tools/known_answer.py` | `02dd4c7d`, 2026-11-11 | two `pinned_failing` entries (lines 1102 and 1213: "half-signal vs full-signal", "matched set"); docstring line 20 says "one of the seeds is a CURRENTLY FAILING case". Both pins and that docstring sentence first appear in one commit, `53031dff`, 2026-08-24 | register miscount (it says one; the code held two on its date). The file's own docstring carries the same "one" |
+| confirmed 6 | `META-PROTOCOL.md` | `2c35d23c`, 2026-08-31 | no line about deleting duplicates or dead ends under these search terms: delet, duplicat, dead end, remov, discard, erase, prune, tidy, clean up, redundan, copies. Nearest: lines 136-138 | repo did not change after the register; the register's wording is not in the file under those terms. Of the order's three verdicts the nearest is "register miscount" (a register-side difference, not a count). The file was searched by term and not read in full, so a rule in other words would be missed |
+
+For item 6 of the catch matrix: DIFFERS = 2 (confirmed 1, confirmed 6).
+
+### D2. F10 under the owner's rule (order item 4)
+
+Rule, PROPOSED, owner-ordered 2026-11-23: "frozen = artifact sha256 or
+commit recorded in a prereg/freeze file committed before the first commit
+containing its results; else NOT FROZEN; freeze file with no pin -> NOT
+CHECKABLE." Run over the 4 files named in C5 and the files they reference.
+F10 status moves from NOT RUN to RUN under this rule for these 4 files only;
+it is still not a repository-wide inventory.
+
+One choice the rule leaves open, made here and marked: which results belong
+to which pinned artifact. Used: v1 packet, key and scorer -> the first v1
+reading folder; v2 key and builder -> the first v2 reading folder; amendment
+1 files -> the first reading filed after it; M01 criteria and schema ->
+`studies/m01_records.json`; M01 extension and M02 files -> none exist.
+"Before" is tested with `git merge-base --is-ancestor` (pin commit is an
+ancestor of, and not the same as, the results commit). "current file" is the
+sha256 of the file on this branch against the pin.
+
+| freeze file | pins | status |
+|---|---|---|
+| `blind-reader-void12/PREREG.md` | 34 distinct sha256 pins | per artifact, table below |
+| `frame-location-benchmark/FREEZE_LOG.md` | none (no sha256, no commit) | NOT CHECKABLE |
+| `relational-playground/experiments/model_comparison/forest_fire_regime/PREREG.md` | none | NOT CHECKABLE |
+| `kernel_stake/PREREGISTRATION.md` | 8 commit ids of an outside repository (kernel tags v4.14 to v6.12, lines 60-67) | FROZEN by the rule: file committed at `4147046e`, an ancestor of `025d12ea` where `RESULTS.md` and `measures.json` first appear. The 8 ids were not checked against the outside repository: NOT RECORDED |
+
+`blind-reader-void12/PREREG.md`, per artifact (paths relative to
+`blind-reader-void12/`; sha256 shown to 12 characters):
+
+| artifact | sha256 pin | group | pin first in PREREG.md at | first results commit | current file | status |
+|---|---|---|---|---|---|---|
+| `reader_packet/READER_BRIEF.md` | `6f33a9528e47` | v1 | `bf89b233` | 460805a0 | match | FROZEN |
+| `reader_packet/response_template.json` | `e54ee502cfbc` | v1 | `bf89b233` | 460805a0 | match | FROZEN |
+| `reader_packet/sources/Simulators/combined-playground/cplay/axes.py` | `0e40b7e5ce87` | v1 | `bf89b233` | 460805a0 | match | FROZEN |
+| `reader_packet/sources/Simulators/combined-playground/cplay/closure.py` | `827d681c8b08` | v1 | `bf89b233` | 460805a0 | match | FROZEN |
+| `reader_packet/sources/Simulators/combined-playground/cplay/tokens.py` | `8c43890bf90a` | v1 | `bf89b233` | 460805a0 | match | FROZEN |
+| `reader_packet/sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md` | `72bbd9774991` | v1 | `bf89b233` | 460805a0 | match | FROZEN |
+| `reader_packet/sources/formula-audit/numcheck/check.py` | `f6df0dc196f5` | v1 | `bf89b233` | 460805a0 | match | FROZEN |
+| `reader_packet/sources/thermodynamic-accountability-framework/calibration/expiry_register.py` | `ddaf2cc5b653` | v1 | `bf89b233` | 460805a0 | match | FROZEN |
+| `reader_packet/sources/thermodynamic-accountability-framework/calibration/unified_audit.py` | `fcccb9af8d8e` | v1 | `bf89b233` | 460805a0 | match | FROZEN |
+| `reader_packet/sources/thermodynamic-accountability-framework/docs/glossary.md` | `412ed3abf4c2` | v1 | `bf89b233` | 460805a0 | match | FROZEN |
+| `reader_packet/terms.json` | `467f4fe6769e` | v1 | `bf89b233` | 460805a0 | match | FROZEN |
+| `reader_packet/PACKET_MANIFEST.json` | `c7327f9d3d52` | v1 | `bf89b233` | 460805a0 | match | FROZEN |
+| `scoring/key.json` | `5c1a6caba4e3` | v1 | `bf89b233` | 460805a0 | match | FROZEN |
+| `scoring/score.py` | `3f7b10c8b831` | v1 | `bf89b233` | 460805a0 | match | FROZEN |
+| `scoring/test_score.py` | `7754586a1862` | v1 | `bf89b233` | 460805a0 | DIFFERS since `003deae3` | FROZEN by the rule as worded; file is not the pinned bytes |
+| `build/make_packet_and_key.py` | `e70ad6dc4981` | v1 | `bf89b233` | 460805a0 | match | FROZEN |
+| `combined-playground/cplay/vocab_branches.py` (the first reading) | `30fe580e4e8b` | v1 | `bf89b233` | 460805a0 | match | FROZEN |
+| `variants/READER_BRIEF.variant_B.md` | `cdaca465b8b1` | v1 | `003deae3` | 460805a0 | match | FROZEN |
+| `build/make_packet_v2.py` | `37e0dd55c762` | v2 | `dab5b856` | 13110b97 | match | FROZEN |
+| `KEY_V2_AMENDMENT_1.md` | `2f881227942f` | a1 | `926fd504` | bfd2c467 | match | FROZEN |
+| `scoring/key_v2_a1.json` | `a7309046319e` | a1 | `926fd504` | bfd2c467 | match | FROZEN |
+| `scoring/score_v2.py` | `22055614cac9` | a1 | `926fd504` | bfd2c467 | match | FROZEN |
+| `scoring/key_v2.json` | `c88a910a03a6` | v2 | `dab5b856` | 13110b97 | match | FROZEN |
+| `build/make_key_a1.py` | `5c01a8fa50e3` | a1 | `926fd504` | bfd2c467 | match | FROZEN |
+| `studies/M01_CRITERIA.md` | `f194ecbcd991` | m01 | `67b8e9d2` | 3d3ac5fc | match | FROZEN |
+| `studies/M01_SCHEMA.json` | `2e63b53a5085` | m01 | `67b8e9d2` | 3d3ac5fc | match | FROZEN |
+| `studies/M01_EXTENSION.md` | `9710be2a9a77` | ext | `66d4f284` | none | match | FROZEN (no results yet) |
+| `studies/M02_CRITERIA.md` | `bddfc32b0731` | ext | `66d4f284` | none | match | FROZEN (no results yet) |
+| `studies/M02_SCHEMA.json` | `e2e80ba2e7d6` | ext | `66d4f284` | none | match | FROZEN (no results yet) |
+| `studies/instructions/M01_D1.md` | `055b0a30028a` | ext | `66d4f284` | none | match | FROZEN (no results yet) |
+| `studies/instructions/M02_D1.md` | `4769714245b6` | ext | `66d4f284` | none | match | FROZEN (no results yet) |
+| `studies/instructions/M02_D2.md` | `6787145f8bbf` | ext | `66d4f284` | none | match | FROZEN (no results yet) |
+| `studies/instructions/M02_D3.md` | `cce4d69c553e` | ext | `66d4f284` | none | match | FROZEN (no results yet) |
+| `studies/as_received/gpt6_g01_g02_instrumentation.patch` | `ad346f60225e` | ext | `66d4f284` | none | match | FROZEN (no results yet) |
+
+Counts: 34 artifacts; 26 FROZEN; 8 FROZEN with no results yet (the rule's
+"before the first commit containing its results" holds with nothing to
+precede); 0 NOT FROZEN. 33 current files match their pin; 1 does not.
+
+Notes:
+- `scoring/test_score.py`: the pin was recorded at `bf89b233`; the file was
+  changed at `003deae3` (before the first reading, `460805a0`) and the pin in
+  `PREREG.md` still gives the earlier bytes. Whether `PREREG.md` records that
+  change in words was not read: NOT RECORDED.
+- Amendment 1: its pin commit `926fd504` precedes the first later reading
+  (`bfd2c467`). One earlier reading, claude-v2-A, was also scored under it
+  (`score_a1.json` first at `356a77ac`, after the pin); the reading itself
+  predates the pin. `PREREG.md` says the same in its amendment section.
+- Hashes that `PREREG.md` states twice are one row.
+- Not run: files referenced without a pin (for example the reader packet
+  zips named in the RUN_NOTES files).
+
+### D3. Check section addition (order item 5)
+
+"REGISTER_AS_RECEIVED.md received text kept non-ASCII as received; declared exception."
+
+### D4. Catch matrix row (order item 6)
+
+NOT RECORDED: no file named or described as a review2 catch matrix is on
+this branch. Searched tracked file names for "catch" and "matrix" and
+tracked text for "catch matrix". The row as ordered, not filed anywhere:
+reviewer GPT; register 2026-11-23; confirmed items 6; differs 2; not
+checkable 1; channel FETCH/HYGIENE; volume: thin.
+Path of the only catch matrix found: repository Geometric-manifold-, branch
+`claude/deviations-planted-defect-spec` (PR #38, not merged),
+`docs/research/deviations/DEVIATIONS_2026-11-21.md`. It is not in this
+repository and was not edited.
