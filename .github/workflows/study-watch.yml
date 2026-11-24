@@ -1,16 +1,23 @@
 # SPDX-License-Identifier: CC0-1.0
 #
-# study-watch. Opens a pull request. Merges nothing.
+# study-watch. Pushes a branch and opens an issue linking it. Merges nothing.
 #
 # WHY IT EXISTS: the runner network reaches Crossref, OpenAlex and arXiv --
 # keyless, free, and all three refused by the local egress gate this repo is
 # otherwise developed behind. That reach is the point. The schedule is
 # incidental and can be removed without changing what the action is for.
 #
-# APPROVAL: the pull request IS the gate. There is deliberately no
+# APPROVAL: a human is the gate. The run lands on its own branch and an issue
+# links that branch and its compare view; a human reviews it, opens the pull
+# request, and merges -- or nothing lands. There is deliberately no
 # auto-merge path, no `gh pr merge`, no `--auto`, and no model configured as
-# a standing approver. A human merges or nothing lands.
-
+# a standing approver.
+#
+# Changed 2026-11-24: this step used to run `gh pr create`. The repo setting
+# "Allow GitHub Actions to create and approve pull requests" is off (and is
+# left off on purpose), so the 2026-11-01 run pushed its branch and then
+# failed at PR creation. Opening an issue keeps the same human gate without
+# widening what the workflow token can do.
 name: study-watch
 
 on:
@@ -22,7 +29,7 @@ on:
 
 permissions:
   contents: write
-  pull-requests: write
+  issues: write
 
 jobs:
   watch:
@@ -57,7 +64,7 @@ jobs:
       - name: retrieve and filter
         run: python3 notes/study_watch.py --run --live
 
-      - name: open a pull request
+      - name: push a branch and open an issue linking it
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -68,6 +75,9 @@ jobs:
           fi
           stamp="$(date -u +%Y-%m-%d)"
           branch="study-watch/${stamp}"
+          base="${{ github.event.repository.default_branch }}"
+          compare="${{ github.server_url }}/${{ github.repository }}/compare/${base}...${branch}"
+          tree="${{ github.server_url }}/${{ github.repository }}/tree/${branch}"
           git config user.name  "study-watch"
           git config user.email "study-watch@users.noreply.github.com"
           git checkout -b "$branch"
@@ -75,15 +85,21 @@ jobs:
           git commit -m "study-watch ${stamp}: notification run" \
                      -m "Notification only. Nothing computed over what the
           queries returned. matches_would_measure is UNADJUDICATED for every
-          candidate; a reviewer decides in this pull request.
+          candidate; a reviewer decides before anything is merged.
 
           Silence from this action is not evidence of absence. Anything the coarse
           query never returned is invisible here and the size of that set is not
           measurable from inside it."
           git push -u origin "$branch"
-          gh pr create \
+          gh issue create \
             --title "study-watch ${stamp}" \
             --body "Notification run. Merges nothing on its own.
+
+          Branch: [\`${branch}\`](${tree})
+          Compare / open a pull request: ${compare}
+
+          A human reviews the branch and, if it should land, opens the pull request
+          from the compare link and merges it. Nothing lands otherwise.
 
           **Read before merging.** \`matches_would_measure\` is \`UNADJUDICATED\` on
           every row by design: an entry's WOULD MEASURE is a design and a candidate is
@@ -95,7 +111,5 @@ jobs:
           invisible to this pipeline, and the size of that set is not measurable from
           inside it.
 
-          No auto-merge is configured and none should be added." \
-            --base "${{ github.event.repository.default_branch }}" \
-            --head "$branch"
-          # Deliberately nothing after this. No merge step exists.
+          No auto-merge is configured and none should be added."
+          # Deliberately nothing after this. No pull request, no merge step.
