@@ -10,6 +10,7 @@ scored.  Every reading printed is DERIVED.
     python3 holdout/explore_next_steps.py share SOURCE_CSV
     python3 holdout/explore_next_steps.py myc SOURCE_CSV FUNGALROOT_JSONL
     python3 holdout/explore_next_steps.py f2 SOURCE_CSV FUNGALROOT_JSONL
+    python3 holdout/explore_next_steps.py f3 SOURCE_CSV FUNGALROOT_JSONL
 
 coverage  item 1: AI and MAP ranges, anchor vs holdout, pooled and inside
           each Approach.  Ranges only; no fit is run.
@@ -62,6 +63,11 @@ f2        order 335-F2, on the same join: (1) ECM - AM inside Woody rows
           0.3; (4) the Phase C fit-rule columns for every myc contrast,
           read against the ANCHOR fit (nothing here was sealed).  Thin =
           under F2_THIN studies on either level of the contrast.
+f3        order 335-F3: (2) leave-one-SITE-out, site = the dataset's
+          (Latitude, Longitude) pair, its only location field (the README
+          does not say what the pair locates: coordinate_meaning is an
+          empty slot); (3) four counts and two restricted fits beside the
+          ECM - AM Self-Other size gap.  Nothing is read as cause.
 
 Mark rule for coverage (hand-set, written before the table was seen):
   narrower  holdout min-max width < NARROW * anchor min-max width
@@ -728,8 +734,114 @@ def f2(path, frpath):
         MYC_MIN = keep
 
 
+def f3(path, frpath):
+    sys.path.insert(0, HERE)
+    import phase_c
+    side = load(path)
+    sp, ge, _unknown, nrec, _nbytes = fungalroot(frpath)
+    _fits_, est = _fits()
+    _assign(side, sp, ge)
+    cons = dict(_contrasts())
+    site = lambda r: (r["Latitude"], r["Longitude"])  # noqa: E731
+    woody = lambda r: r["Life.form"] == "Woody"  # noqa: E731
+    print("ORDER 335-F3 on the FungalRoot join (%d records); exploratory, post-holdout, scores nothing" % nrec)
+    print("  2 LEAVE-ONE-SITE-OUT: site = (Latitude, Longitude) pair; each site in the contrast removed in turn")
+    for s in ("anchor", "holdout"):
+        rs = side[s]
+        by_site, by_auth = {}, {}
+        for r in rs:
+            by_site.setdefault(site(r), set()).add(r["Author"])
+            by_auth.setdefault(r["Author"], set()).add(site(r))
+        print("    %-7s %d sites, %d studies; sites shared by more than one study: %d; studies with more than one site: %d"
+              % (s, len(by_site), len(by_auth), sum(1 for v in by_site.values() if len(v) > 1),
+                 sum(1 for v in by_auth.values() if len(v) > 1)))
+    print("    contrast   rows        stratum          side     full est   min        max        sites  - / +"
+          "   sign holds   largest-site row share")
+    cells = [("ECM - AM", "all rows", "Self-Other", None), ("ECM - AM", "woody only", "Self-Other", woody),
+             ("NM - AM", "all rows", "Self-Other", None), ("NM - AM", "all rows", "Self-Sterilized", None)]
+    for cname, rname, sname, keep in cells:
+        xfun = cons[cname]
+        for s in ("anchor", "holdout"):
+            rows = [r for r in side[s] if r["Approach"] == sname and (keep is None or keep(r))]
+            full = _cell(rows, xfun, est)
+            if full["state"] == "not checkable":
+                print("    %-9s  %-10s  %-16s %-7s  not checkable" % (cname, rname, sname, s))
+                continue
+            cnt = {}
+            for r in rows:
+                if xfun(r) is not None:
+                    cnt[site(r)] = cnt.get(site(r), 0) + 1
+            res, nc = [], 0
+            for st in sorted(cnt):
+                c = _cell([r for r in rows if site(r) != st], xfun, est)
+                if c["state"] == "not checkable":
+                    nc += 1
+                else:
+                    res.append(c["est"])
+            neg = sum(1 for e in res if e < 0)
+            holds = all((e < 0) == (full["est"] < 0) for e in res)
+            print("    %-9s  %-10s  %-16s %-7s  %+8.4f   %+8.4f   %+8.4f   %4d  %3d / %-3d  %-10s   %.3f%s%s"
+                  % (cname, rname, sname, s, full["est"], min(res), max(res), len(cnt), neg, len(res) - neg,
+                     "yes" if holds else "no", max(cnt.values()) / sum(cnt.values()),
+                     "  thin" if full["state"] == "thin" else "",
+                     "  (%d drops not checkable)" % nc if nc else ""))
+
+    print("  3 SIZE GAP, ECM - AM inside Self-Other: what differs between the sides (counts and two fits)")
+    xfun = cons["ECM - AM"]
+    so = {s: [r for r in side[s] if r["Approach"] == "Self-Other" and xfun(r) is not None]
+          for s in ("anchor", "holdout")}
+    print("    a) rows by match level, per type          ECM: species  genus  genus share     AM: species  genus  genus share")
+    for s in ("anchor", "holdout"):
+        out = []
+        for t in ("ECM", "AM"):
+            a_ = sum(1 for r in so[s] if r["myc_type"] == t and r["myc_level"] == "species")
+            b_ = sum(1 for r in so[s] if r["myc_type"] == t and r["myc_level"] == "genus")
+            out.append("%6d  %5d  %.3f      " % (a_, b_, b_ / (a_ + b_)))
+        print("       %-7s                                      %s      %s" % (s, out[0], out[1]))
+    print("    b) species-level matches only")
+    for s in ("anchor", "holdout"):
+        print("       %-7s all levels     %s" % (s, _txt(_cell(so[s], xfun, est))))
+        print("       %-7s species only   %s"
+              % ("", _txt(_cell([r for r in so[s] if r["myc_level"] == "species"], xfun, est))))
+    print("    c) largest study dropped (the same drop as in the 335-F2 leave-one-study-out)")
+    for s in ("anchor", "holdout"):
+        n = {}
+        for r in so[s]:
+            n[r["Author"]] = n.get(r["Author"], 0) + 1
+        big = max(n, key=n.get)
+        ecm = sum(1 for r in so[s] if r["Author"] == big and r["myc_type"] == "ECM")
+        print("       %-7s without %s (%d rows, %.3f of the contrast's rows, %d of them ECM)   %s"
+              % (s, big.encode("ascii", "replace").decode(), n[big], n[big] / len(so[s]), ecm,
+                 _txt(_cell([r for r in so[s] if r["Author"] != big], xfun, est))))
+    print("    d) mix, rows / studies")
+    for col, levels, lab in (("Experimental.setting", ["Greenhouse", "Field"], None),
+                             ("Phase2.time", [b[2] for b in phase_c.TIME_BINS] + [NR], "bin")):
+        print("       %-22s %s" % (col, "".join("%-14s" % v for v in levels)))
+        for s in ("anchor", "holdout"):
+            for t in ("ECM", "AM"):
+                rr_ = [r for r in so[s] if r["myc_type"] == t]
+                cellz = []
+                for v in levels:
+                    if lab is None:
+                        m = [r for r in rr_ if r[col] == v]
+                    else:
+                        m = []
+                        for r in rr_:
+                            try:
+                                tt = float(r[col])
+                                b = next((n3 for lo, hi, n3 in phase_c.TIME_BINS if lo < tt <= hi), "<= 3 mo")
+                            except ValueError:
+                                b = NR
+                            if b == v:
+                                m.append(r)
+                    cellz.append("%d / %d" % (len(m), len({r["Author"] for r in m})))
+                print("       %-7s %-4s          %s" % (s, t, "".join("%-14s" % c for c in cellz)))
+
+
 def main():
     a = sys.argv[1:]
+    if len(a) == 3 and a[0] == "f3":
+        return f3(a[1], a[2])
     if len(a) == 3 and a[0] == "f2":
         return f2(a[1], a[2])
     if len(a) == 3 and a[0] == "myc":

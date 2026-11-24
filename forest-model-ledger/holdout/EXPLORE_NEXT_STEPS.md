@@ -516,6 +516,17 @@ pasted by script. The script prints block 4 before block 3.
     fetch code commit     NOT RECORDED: the two paging scripts ran from
                           the session's scratch directory and were never
                           committed
+                          [added 2026-11-24, order 335-F3] committed after
+                          the fact at 0f9d282, holdout/fungalroot_fetch/
+                          (three steps as run; see section 4.7). The
+                          extract hash is regenerable in principle and
+                          has NOT been regenerated: a second fetch was
+                          not run (about 40 minutes at the proxy's
+                          rate). It would reproduce the hash only if
+                          GBIF returns the same records in the same
+                          offset order; the API states no such
+                          guarantee that this run read, and a re-crawl
+                          of the dataset would change it.
     type-rule code        holdout/explore_next_steps.py, functions
                           fungalroot() and _taxon_type(); first committed
                           at ba43407, file hash pinned at efa9422
@@ -531,6 +542,106 @@ per type, and fit estimates. The script holds the map from the source's
 type VALUES to the five classes, which names no taxon. Nothing was
 removed from the branch.
 
+### 4.7 Order 335-F3 (run 2026-11-24 UTC; exploratory, post-holdout, scores nothing)
+
+Fetch code. [OBSERVED] Committed at 0f9d282, no data and no taxon table:
+
+    holdout/fungalroot_fetch/step1_first_10200.py
+        sha256 a487aa71711aa5563f08e8375499b07777bfa49bec1f84ab1df1006c3fd9bb2f
+        ran inline; text copied from the session transcript
+    holdout/fungalroot_fetch/step2_sequential_unused.py
+        sha256 e199a71201ee1657431af886535e97d031ca23a6162e98c0497e0843afab71c5
+        scratch file byte for byte under a comment header; stopped after
+        one page; output not used
+    holdout/fungalroot_fetch/step3_parallel.py
+        sha256 0dfbc7123cc0ffaf80c92db6d2b02f5d0544be37957509215c5d489a926a3aeb
+        scratch file byte for byte under a comment header; the assembly
+        commands are in its header
+
+Site. The dataset has no field named site. Its only location field is
+the Latitude / Longitude pair, so site = that pair. The README does not
+say what the pair locates (coordinate_meaning is an empty slot), so a
+"site" here may be a collection point, a study area or an institution.
+[OBSERVED]
+
+Printed by `python3 holdout/explore_next_steps.py f3 SOURCE_CSV
+FUNGALROOT_JSONL`, pasted by script.
+
+    ORDER 335-F3 on the FungalRoot join (36515 records); exploratory, post-holdout, scores nothing
+      2 LEAVE-ONE-SITE-OUT: site = (Latitude, Longitude) pair; each site in the contrast removed in turn
+        anchor  315 sites, 155 studies; sites shared by more than one study: 11; studies with more than one site: 33
+        holdout 58 sites, 47 studies; sites shared by more than one study: 3; studies with more than one site: 7
+        contrast   rows        stratum          side     full est   min        max        sites  - / +   sign holds   largest-site row share
+        ECM - AM   all rows    Self-Other       anchor    +0.3793    +0.3656    +0.4056    219    0 / 219  yes          0.120
+        ECM - AM   all rows    Self-Other       holdout   +0.1219    +0.1019    +0.1615     47    0 / 47   yes          0.395
+        ECM - AM   woody only  Self-Other       anchor    +0.4228    +0.3422    +0.4970    118    0 / 118  yes          0.119
+        ECM - AM   woody only  Self-Other       holdout   +0.1883    +0.0939    +0.2587     15    0 / 15   yes          0.311
+        NM - AM    all rows    Self-Other       anchor    -0.0067    -0.0383    +0.0705    163  158 / 5    no           0.134
+        NM - AM    all rows    Self-Other       holdout   -0.5324    -0.6247    -0.2898     45   45 / 0    yes          0.414
+        NM - AM    all rows    Self-Sterilized  anchor    +0.1417    +0.0203    +0.2091    120    0 / 120  yes          0.115
+        NM - AM    all rows    Self-Sterilized  holdout   -0.3797    -0.5728    -0.1708     24   24 / 0    yes          0.227
+      3 SIZE GAP, ECM - AM inside Self-Other: what differs between the sides (counts and two fits)
+        a) rows by match level, per type          ECM: species  genus  genus share     AM: species  genus  genus share
+           anchor                                           90      4  0.043              2264    548  0.195      
+           holdout                                          54     43  0.443              1595    288  0.153      
+        b) species-level matches only
+           anchor  all levels      +0.3793 [ +0.2445,  +0.4669] 124 st  2906 rows   level studies 14 / 118
+                   species only    +0.4096 [ +0.2686,  +0.4950] 117 st  2354 rows   level studies 13 / 112
+           holdout all levels      +0.1219 [ +0.0537,  +0.2016]  41 st  1980 rows   level studies 9 / 39
+                   species only    +0.1279 [ +0.0384,  +0.2282]  39 st  1649 rows   level studies 7 / 37
+        c) largest study dropped (the same drop as in the 335-F2 leave-one-study-out)
+           anchor  without Fitzpatrick,2017 (350 rows, 0.120 of the contrast's rows, 0 of them ECM)    +0.3948 [ +0.2593,  +0.4830] 123 st  2556 rows   level studies 14 / 117
+           holdout without Dostal et al. 2021 (782 rows, 0.395 of the contrast's rows, 0 of them ECM)    +0.1132 [ +0.0562,  +0.1760]  40 st  1198 rows   level studies 9 / 38
+        d) mix, rows / studies
+           Experimental.setting   Greenhouse    Field         
+           anchor  ECM           93 / 13       1 / 1         
+           anchor  AM            2681 / 106    131 / 15      
+           holdout ECM           66 / 7        31 / 3        
+           holdout AM            1482 / 33     401 / 8       
+           Phase2.time            <= 3 mo       3-6 mo        6-12 mo       > 12 mo       NOT RECORDED  
+           anchor  ECM           26 / 4        30 / 3        35 / 5        3 / 2         0 / 0         
+           anchor  AM            2233 / 68     478 / 39      23 / 6        73 / 8        5 / 1         
+           holdout ECM           1 / 1         15 / 2        16 / 4        65 / 3        0 / 0         
+           holdout AM            708 / 22      535 / 10      348 / 6       292 / 6       0 / 0         
+
+[DERIVED] Reading. Nothing below is read as cause.
+
+    2 sites      ECM - AM inside Self-Other keeps its sign under every
+                 single-site removal, all rows and woody only, both
+                 sides. NM - AM: holdout sign holds in both strata;
+                 anchor Self-Other does not (it sits at zero).
+    3 size gap   anchor +0.38, holdout +0.12. What lines up with the
+                 gap and what does not:
+                 lines up      a) match level: 4% of anchor ECM rows are
+                               typed at genus level against 44% of
+                               holdout ECM rows.
+                               d) setting: 1 of 94 anchor ECM rows is
+                               Field against 31 of 97 holdout ECM rows.
+                               d) duration: 3 of 94 anchor ECM rows run
+                               over 12 months against 65 of 97 holdout
+                               ECM rows.
+                 does not      b) species-level matches only: the gap
+                               stays (anchor +0.41, holdout +0.13).
+                               c) largest study dropped: the gap stays
+                               (anchor +0.39, holdout +0.11); neither
+                               largest study has an ECM row.
+                 So the genus-level typing is on the list of differences
+                 but removing it does not close the gap. Setting and
+                 duration differ sharply between the sides for ECM rows
+                 and were not refit (the order allows no further fits).
+                 The holdout ECM rows come from 9 studies.
+
+Crowding.
+
+"ECM-AM contrasts were chosen after the earlier tables were seen, by a
+ proposer whose training may contain a published ECM-positive /
+ AM-negative feedback claim. Direction recovery here is a known-answer
+ reading, not a blind test. crowding: dense (DERIVED, not probed)."
+
+NM-AM: CURIOSITY branch. The anchor Self-Other estimate is about zero
+(-0.0067, interval across zero), so the direction "hit" recorded for it
+in section 4, block 4, is void.
+
 Observer slots: null.
 
 ## Provenance
@@ -538,7 +649,7 @@ Observer slots: null.
 Base branch: claude/denominator-sorter (PR #334) at commit c0a7d77.
 Code: `holdout/explore_next_steps.py` (standard library only).
 Follow-up order of 2026-11-23: sections 1b, 1c and 2b. Order 335-F2:
-section 4. FungalRoot records:
+section 4. Order 335-F3: section 4.7 and holdout/fungalroot_fetch/. FungalRoot records:
 section 2b (fetched extract, sha256 asserted by the script, not
 committed).
 Source data: Zenodo record 10403125, file PSF.data.EL.open.csv, fetched
