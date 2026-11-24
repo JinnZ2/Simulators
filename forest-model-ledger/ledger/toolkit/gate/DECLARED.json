@@ -31,5 +31,38 @@
   "rule": "if the FLAG rate at any planted s is above 0.05: report it and set no threshold",
   "also_reported": "the rate under the declared rule above (share > max of the 200-shuffle null), by leave-one-out over the same 200 shuffles"
  },
- "amendments": []
+ "amendments": [
+  {
+   "date": "2026-11-24",
+   "order": "TK-G1 follow-up 2",
+   "committed": "before the sweep was run",
+   "power_floor_sweep": {
+    "planted_s": [
+     0.02,
+     0.03,
+     0.05,
+     0.07
+    ],
+    "replicates": 20,
+    "design": "the gated finder design, unchanged",
+    "seed": "20261123 + 2000000 + 1000 * index of s + replicate",
+    "null_max": {
+     "value": 0.0326,
+     "how": "the largest of the six 200-shuffle null maxima already recorded at the gated design, read by script from samples/gate_missing_column_finder.sample.txt and samples/null_flag_rate_finder.sample.txt",
+     "the_six": [
+      0.0326,
+      0.0305,
+      0.0271,
+      0.0293,
+      0.0285,
+      0.0242
+     ]
+    },
+    "above": "a replicate counts when its recovered within-study share for the planted grouping is above null_max",
+    "floor": "the smallest planted s at which at least 19 of 20 replicates are above null_max; if no s in the sweep reaches 19, the floor reads 'above 0.07, below 0.1' or NOT REACHED as the counts show",
+    "reported_per_s": "recovered mean and min, count above null_max, bias = recovered / realized",
+    "no_change": "no threshold is changed after the run"
+   }
+  }
+ ]
 }
