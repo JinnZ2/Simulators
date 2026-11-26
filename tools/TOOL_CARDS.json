@@ -1132,6 +1132,251 @@
    "finder": "card-rejoin-protocol",
    "not_built": [],
    "evidence": []
+  },
+  {
+   "id": "missing_column_finder",
+   "kind": "tool",
+   "status": "OBSERVED",
+   "trigger": "residual spread that the recorded columns leave unexplained",
+   "inputs": "rows with rr, var, a study label, recorded columns and grouping labels",
+   "output": "share of spread per column, alone and together; per grouping a lab, between-study and within-study share against a shuffle null; MISSING COLUMN candidates",
+   "fails_when": "the built-in gate fails, or the source sha256 does not match: not run on real data",
+   "location": {
+    "repo": "Simulators",
+    "state": "PENDING_MERGE",
+    "pr": 339,
+    "branch_commit": "e6dbdaace5e5c0b110d8db3d58a63ffbc8cfc0d6",
+    "path": "forest-model-ledger/ledger/toolkit/missing_column_finder.py",
+    "sha256": "a5c8ac8a6f0ab6e7808cd512361d7bebcea9581b505f51b471f344414b1ba6d3"
+   },
+   "measures": "whether leftover spread clusters by a grouping that no recorded column carries; it scores nothing and tests no prediction",
+   "fits": "a pooled effect-size table where studies disagree and the recorded moderators explain little",
+   "breaks_when": "a flag is read as a named cause; the grouping only says where to look. Detection floor at the gated design: planted variance share 0.07 (20 of 20 replicates above the declared null max 0.0326); at 0.05, 16 of 20; at 0.03, 12 of 20; at 0.02, 2 of 20. A share below 0.07 can be missed. Gate status: threshold rules declared for the gated design only Noise-floor-corrected share, DERIVED (basis: OBSERVED), report only, thresholds unchanged: corrected = recovered mean - null median (200 shuffles at the same s); planted s -> corrected share (corrected/realized): 0.02 -> 0.0171 (0.866); 0.03 -> 0.0268 (0.885); 0.05 -> 0.0442 (0.897); 0.07 -> 0.0648 (0.922); 0.10 -> 0.0845 (0.840); 0.30 -> 0.2772 (0.934); 0.50 -> 0.4565 (0.909).",
+   "warning_sign": "a share read without its shuffle null beside it",
+   "cell_source": {
+    "trigger": "INDEX_WRITTEN",
+    "inputs": "INDEX_WRITTEN",
+    "output": "INDEX_WRITTEN",
+    "fails_when": "INDEX_WRITTEN",
+    "measures": "INDEX_WRITTEN",
+    "fits": "INDEX_WRITTEN",
+    "breaks_when": "INDEX_WRITTEN",
+    "warning_sign": "INDEX_WRITTEN"
+   },
+   "aliases": [
+    "missing column finder",
+    "does residual spread cluster by something unrecorded",
+    "which grouping explains what the columns do not"
+   ],
+   "finder": null,
+   "not_built": [
+    "thresholds are declared rules for the gated design only (gate/DECLARED.json); no other design has been gated"
+   ],
+   "evidence": [
+    {
+     "repo": "Simulators",
+     "state": "PENDING_MERGE",
+     "pr": 339,
+     "branch_commit": "e6dbdaace5e5c0b110d8db3d58a63ffbc8cfc0d6",
+     "path": "forest-model-ledger/ledger/toolkit/gate/gate_missing_column_finder.py",
+     "sha256": "a0f4d90dd56f678024e28d0c696be00b5a1f36b2b9fc75081c8a1e048d46ab6f",
+     "ids": [
+      "TK-G1: gate run, thresholds not set"
+     ],
+     "gate_status": "gate run, thresholds not set"
+    },
+    {
+     "repo": "Simulators",
+     "state": "PENDING_MERGE",
+     "pr": 339,
+     "branch_commit": "e6dbdaace5e5c0b110d8db3d58a63ffbc8cfc0d6",
+     "path": "forest-model-ledger/ledger/toolkit/missing_column_finder_stdlib.py",
+     "sha256": "7aa3b4d600b7ec5612842fca683ff773327512cdf5c056d3bedace4083b6bedf",
+     "ids": [
+      "TK-G1: gate run, thresholds not set"
+     ]
+    },
+    {
+     "repo": "Simulators",
+     "state": "PENDING_MERGE",
+     "pr": 339,
+     "branch_commit": "e6dbdaace5e5c0b110d8db3d58a63ffbc8cfc0d6",
+     "path": "forest-model-ledger/samples/gate_missing_column_finder.sample.txt",
+     "sha256": "8e19a27d119c085f598529b2335bb846033cf091c4812fd2ab3e7b6e8d81647c",
+     "ids": [
+      "TK-G1: gate run, thresholds not set"
+     ]
+    },
+    {
+     "repo": "Simulators",
+     "state": "PENDING_MERGE",
+     "pr": 339,
+     "path": "forest-model-ledger/ledger/toolkit/gate/DECLARED.json",
+     "sha256": "b7fb7cc43dda4eec73921a0979b373de83769ef90146e3c479d55238ed1e1e5b",
+     "ids": [
+      "TK-G1 follow-up: threshold rules declared; null FLAG rate run"
+     ]
+    },
+    {
+     "repo": "Simulators",
+     "state": "PENDING_MERGE",
+     "pr": 339,
+     "path": "forest-model-ledger/ledger/toolkit/gate/null_flag_rate_finder.py",
+     "sha256": "e1dfcf3ed622dfa73cd327a432851b73885fb04ee47696a6c4a87f9aa45e7520",
+     "ids": [
+      "TK-G1 follow-up: threshold rules declared; null FLAG rate run"
+     ]
+    },
+    {
+     "repo": "Simulators",
+     "state": "PENDING_MERGE",
+     "pr": 339,
+     "path": "forest-model-ledger/samples/null_flag_rate_finder.sample.txt",
+     "sha256": "026d8da8fe97acabf06eda538fbffffad519c4a9f2c43b36c5a1c9d6f4041e1e",
+     "ids": [
+      "TK-G1 follow-up: threshold rules declared; null FLAG rate run"
+     ]
+    },
+    {
+     "repo": "Simulators",
+     "state": "PENDING_MERGE",
+     "pr": 339,
+     "path": "forest-model-ledger/samples/finder_bias.sample.txt",
+     "sha256": "68a8d3050ded7b073e0c68bcb0fda80a81e75e68890c7ebe51505b5ca71d3cfb",
+     "ids": [
+      "TK-G1 follow-up: threshold rules declared; null FLAG rate run"
+     ]
+    },
+    {
+     "repo": "Simulators",
+     "state": "PENDING_MERGE",
+     "pr": 339,
+     "path": "forest-model-ledger/ledger/toolkit/gate/power_floor_finder.py",
+     "sha256": "ce259553cf808b6193f44b77e057d926d7d48b5a5ff211087f136b12da1dec58",
+     "ids": [
+      "TK-G1 follow-up 2: power floor sweep"
+     ]
+    },
+    {
+     "repo": "Simulators",
+     "state": "PENDING_MERGE",
+     "pr": 339,
+     "path": "forest-model-ledger/samples/power_floor_finder.sample.txt",
+     "sha256": "1de4cab6305531482d39363804839c57e9284a31632d8d43660aff3b3e9ebee7",
+     "ids": [
+      "TK-G1 follow-up 2: power floor sweep"
+     ]
+    },
+    {
+     "repo": "Simulators",
+     "state": "PENDING_MERGE",
+     "pr": 339,
+     "path": "forest-model-ledger/ledger/toolkit/gate/corrected_share_finder.py",
+     "sha256": "0b818c41b966653926c512c0ca2d6e23f823e90b243ff082b45a06d9f22227e1",
+     "ids": [
+      "TK-G1 follow-up 3: noise-floor-corrected share (script)"
+     ]
+    },
+    {
+     "repo": "Simulators",
+     "state": "PENDING_MERGE",
+     "pr": 339,
+     "path": "forest-model-ledger/samples/corrected_share_finder.sample.txt",
+     "sha256": "dedc9eaa6913ce8571d3e1bd5181433945f7f7c01430495c0e32b0b4da8b5658",
+     "ids": [
+      "TK-G1 follow-up 3: noise-floor-corrected share"
+     ]
+    }
+   ],
+   "pairs_with": [
+    {
+     "id": "denominator_sorter",
+     "reason": "a combined claim needs both: the finder flags a grouping the recorded columns do not carry, and the sorter's field-drop outcome test fires; the sorter's split alone is bookkeeping, not a finding (rules: forest-model-ledger/ledger/toolkit/gate/DECLARED.json)"
+    }
+   ],
+   "scope": "synthetic gated design (40x15, 6 levels); real-data performance unmeasured"
+  },
+  {
+   "id": "denominator_sorter",
+   "kind": "tool",
+   "status": "OBSERVED",
+   "trigger": "studies pooled under one measure whose controls or protocols may differ",
+   "inputs": "rows with a study label and seven recorded design columns",
+   "output": "scope groups of studies with identical signatures; studies with no common denominator; a field-drop outcome test against a shuffle null",
+   "fails_when": "a field with no recorded value reads NOT RECORDED and is never matched to a recorded one",
+   "location": {
+    "repo": "Simulators",
+    "state": "PENDING_MERGE",
+    "pr": 339,
+    "branch_commit": "e6dbdaace5e5c0b110d8db3d58a63ffbc8cfc0d6",
+    "path": "forest-model-ledger/ledger/toolkit/denominator_sorter.py",
+    "sha256": "1e3ea5938815f3cb9a985b76e4ff4196b6ec0a930e8d15a03c5aa0f8bf459a75"
+   },
+   "measures": "which studies share a recorded denominator signature; it never reads the effect size to form groups",
+   "fits": "a meta-analysis table where pooling may mix measurands",
+   "breaks_when": "two measurands carry the same value in every recorded field: the sorter cannot split them. Outcome test at the gated design: fires on 7 of 20 at mean gap 0.2 row sd, 17 of 20 at 0.5, 20 of 20 at 1.0; false rate 0.055 over 200 null draws. Gate status: threshold rules declared for the gated design only",
+   "warning_sign": "a between-group difference read as a contradiction instead of a candidate scope effect",
+   "cell_source": {
+    "trigger": "INDEX_WRITTEN",
+    "inputs": "INDEX_WRITTEN",
+    "output": "INDEX_WRITTEN",
+    "fails_when": "INDEX_WRITTEN",
+    "measures": "INDEX_WRITTEN",
+    "fits": "INDEX_WRITTEN",
+    "breaks_when": "INDEX_WRITTEN",
+    "warning_sign": "INDEX_WRITTEN"
+   },
+   "aliases": [
+    "denominator sorter",
+    "sort studies by what they measured against",
+    "which studies may be pooled"
+   ],
+   "finder": null,
+   "not_built": [
+    "thresholds are declared rules for the gated design only (gate/DECLARED.json); no other design has been gated"
+   ],
+   "evidence": [
+    {
+     "repo": "Simulators",
+     "state": "PENDING_MERGE",
+     "pr": 339,
+     "branch_commit": "e6dbdaace5e5c0b110d8db3d58a63ffbc8cfc0d6",
+     "path": "forest-model-ledger/ledger/toolkit/gate/gate_denominator_sorter.py",
+     "sha256": "ddfc23503795fb9d5dd0e4d313afe0435728f954fa3cab86a518fc7bb1d1f6d2",
+     "ids": [
+      "TK-G1: gate run, thresholds not set"
+     ],
+     "gate_status": "gate run, thresholds not set"
+    },
+    {
+     "repo": "Simulators",
+     "state": "PENDING_MERGE",
+     "pr": 339,
+     "branch_commit": "e6dbdaace5e5c0b110d8db3d58a63ffbc8cfc0d6",
+     "path": "forest-model-ledger/samples/gate_denominator_sorter.sample.txt",
+     "sha256": "ef1adf28f950aa6fd3b4f1d051b05baa57a683eeeda584bb9cca5cd1c0d840d8",
+     "ids": [
+      "TK-G1: gate run, thresholds not set"
+     ]
+    },
+    {
+     "repo": "Simulators",
+     "state": "PENDING_MERGE",
+     "pr": 339,
+     "path": "forest-model-ledger/ledger/toolkit/gate/DECLARED.json",
+     "sha256": "b7fb7cc43dda4eec73921a0979b373de83769ef90146e3c479d55238ed1e1e5b",
+     "ids": [
+      "TK-G1 follow-up: threshold rules declared"
+     ]
+    }
+   ],
+   "pairs_with": [
+    {
+     "id": "missing_column_finder",
+     "reason": "a combined claim needs both: the finder flags a grouping the recorded columns do not carry, and the sorter's field-drop outcome test fires; the sorter's split alone is bookkeeping, not a finding (rules: forest-model-ledger/ledger/toolkit/gate/DECLARED.json)"
+    }
+   ],
+   "scope": "synthetic gated design (20x10, row sd 0.3); real-data performance unmeasured"
   }
  ],
  "human_interest": null,

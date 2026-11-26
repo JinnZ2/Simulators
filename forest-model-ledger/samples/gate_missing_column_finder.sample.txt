@@ -1,0 +1,15 @@
+gate_missing_column_finder: seed 20261123, 40 studies x 15 rows, 6 planted levels,
+  total variance 0.09, sampling variance 0.01, finder shuffles 499, FLAG rule unchanged
+  thresholds: NOT SET (numbers only)
+
+KNOWN-ANSWER: 20 replicates per planted share
+  planted s   realized share (mean)   recovered share: mean    min    max   flagged   three columns together (mean)
+        0.1                  0.1006                   0.0917  0.0582  0.1223   20 of 20         0.0041
+        0.3                  0.2969                   0.2843  0.2498  0.3276   20 of 20         0.0044
+        0.5                  0.5021                   0.4635  0.3962  0.5086   20 of 20         0.0044
+
+NULL: planted labels shuffled across rows, 200 shuffles per planted share
+  planted s   recovered share: median    95th pct     max     unshuffled (same rows)
+        0.1                    0.0073      0.0162  0.0326       0.0893
+        0.3                    0.0071      0.0171  0.0305       0.2594
+        0.5                    0.0070      0.0180  0.0271       0.4818

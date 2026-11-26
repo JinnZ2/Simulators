@@ -1,0 +1,10 @@
+null_flag_rate_finder: 200 shuffles per planted s, finder shuffles 499, MIN_EXCESS 0.02
+  design: 40 studies x 15 rows; seed 20261123 + 700000 + index of s
+  rule (DECLARED.json): if the FLAG rate at any planted s is above 0.05: report it and set no threshold
+
+  planted s   FLAG within-study   FLAG between-study   FLAG lab (Author)   max null share   declared rule, leave-one-out
+        0.1      0 of 200 (0.000)       0 of 200 (0.000)      0 of 200 (0.000)           0.0293   1 of 200 (0.005)
+        0.3      0 of 200 (0.000)       0 of 200 (0.000)      0 of 200 (0.000)           0.0285   1 of 200 (0.005)
+        0.5      0 of 200 (0.000)       1 of 200 (0.005)      0 of 200 (0.000)           0.0242   1 of 200 (0.005)
+
+  no FLAG rate above 0.05

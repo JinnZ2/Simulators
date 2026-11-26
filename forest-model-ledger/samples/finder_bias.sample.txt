@@ -1,0 +1,5 @@
+recovered / realized share (bias), from samples/gate_missing_column_finder.sample.txt
+  planted s   realized   recovered   ratio
+        0.1     0.1006      0.0917   0.912
+        0.3     0.2969      0.2843   0.958
+        0.5     0.5021      0.4635   0.923
