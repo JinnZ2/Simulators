@@ -1,0 +1,79 @@
+# Claim record for case e (runs/run_22.py). Support rule, fixed before the run: every non-blank line of
+# the section [2] names, from its header to the end of the file. The coder (this session) knew the expected
+# verdict before coding; the rule is what keeps the line choice from being a pick (run_19 flag 1).
+claims:
+  - id: e_kimi_probe_citation_verified
+    claim:
+      file: kimi_organizational_mode_probe_spec_PARKED.md
+      line: "11"
+    credited_to: "experimental/publication_provenance/README.md"
+    item_terms:
+      - SCREENED_NO_INDICATORS_FOUND
+    support:
+      - file: study_aperture_publication_provenance_README.md
+        line: "149"
+      - file: study_aperture_publication_provenance_README.md
+        line: "151"
+      - file: study_aperture_publication_provenance_README.md
+        line: "152"
+      - file: study_aperture_publication_provenance_README.md
+        line: "153"
+      - file: study_aperture_publication_provenance_README.md
+        line: "154"
+      - file: study_aperture_publication_provenance_README.md
+        line: "155"
+      - file: study_aperture_publication_provenance_README.md
+        line: "156"
+      - file: study_aperture_publication_provenance_README.md
+        line: "157"
+      - file: study_aperture_publication_provenance_README.md
+        line: "158"
+      - file: study_aperture_publication_provenance_README.md
+        line: "159"
+      - file: study_aperture_publication_provenance_README.md
+        line: "160"
+      - file: study_aperture_publication_provenance_README.md
+        line: "161"
+      - file: study_aperture_publication_provenance_README.md
+        line: "162"
+      - file: study_aperture_publication_provenance_README.md
+        line: "163"
+      - file: study_aperture_publication_provenance_README.md
+        line: "164"
+      - file: study_aperture_publication_provenance_README.md
+        line: "165"
+      - file: study_aperture_publication_provenance_README.md
+        line: "166"
+      - file: study_aperture_publication_provenance_README.md
+        line: "167"
+      - file: study_aperture_publication_provenance_README.md
+        line: "168"
+      - file: study_aperture_publication_provenance_README.md
+        line: "170"
+      - file: study_aperture_publication_provenance_README.md
+        line: "171"
+      - file: study_aperture_publication_provenance_README.md
+        line: "172"
+    support_basis:
+      - "line 149 of the section [2] names ('This does not'); [2] is the only basis line 11 presents for the token"
+      - "line 151 of the section [2] names ('This does not'); [2] is the only basis line 11 presents for the token"
+      - "line 152 of the section [2] names ('This does not'); [2] is the only basis line 11 presents for the token"
+      - "line 153 of the section [2] names ('This does not'); [2] is the only basis line 11 presents for the token"
+      - "line 154 of the section [2] names ('This does not'); [2] is the only basis line 11 presents for the token"
+      - "line 155 of the section [2] names ('This does not'); [2] is the only basis line 11 presents for the token"
+      - "line 156 of the section [2] names ('This does not'); [2] is the only basis line 11 presents for the token"
+      - "line 157 of the section [2] names ('This does not'); [2] is the only basis line 11 presents for the token"
+      - "line 158 of the section [2] names ('This does not'); [2] is the only basis line 11 presents for the token"
+      - "line 159 of the section [2] names ('This does not'); [2] is the only basis line 11 presents for the token"
+      - "line 160 of the section [2] names ('This does not'); [2] is the only basis line 11 presents for the token"
+      - "line 161 of the section [2] names ('This does not'); [2] is the only basis line 11 presents for the token"
+      - "line 162 of the section [2] names ('This does not'); [2] is the only basis line 11 presents for the token"
+      - "line 163 of the section [2] names ('This does not'); [2] is the only basis line 11 presents for the token"
+      - "line 164 of the section [2] names ('This does not'); [2] is the only basis line 11 presents for the token"
+      - "line 165 of the section [2] names ('This does not'); [2] is the only basis line 11 presents for the token"
+      - "line 166 of the section [2] names ('This does not'); [2] is the only basis line 11 presents for the token"
+      - "line 167 of the section [2] names ('This does not'); [2] is the only basis line 11 presents for the token"
+      - "line 168 of the section [2] names ('This does not'); [2] is the only basis line 11 presents for the token"
+      - "line 170 of the section [2] names ('This does not'); [2] is the only basis line 11 presents for the token"
+      - "line 171 of the section [2] names ('This does not'); [2] is the only basis line 11 presents for the token"
+      - "line 172 of the section [2] names ('This does not'); [2] is the only basis line 11 presents for the token"
