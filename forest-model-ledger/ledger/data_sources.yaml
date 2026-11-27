@@ -1,11 +1,18 @@
-# listed in the work order for later. Nothing retrieved; nothing here has been read.
+# Sources listed in the work order for later retrieval.
+# Retrieved: DS_JIANG_PSF (2026-11-22, PR #330). All other entries: not
+# retrieved; nothing else here has been read.
 sources:
   - id: DS_JIANG_PSF
     what: "Jiang et al. global plant-soil feedback dataset"
     locator: "zenodo.org/records/10403125 ; Dryad doi:10.5061/dryad.n2z34tn35"
-    retrieved: not_retrieved
+    retrieved: retrieved
+    retrieved_url: "https://zenodo.org/api/records/10403125/files/PSF.data.EL.open.csv/content"
+    retrieved_utc: "2026-11-22T18:55:31Z"
+    retrieved_file: "PSF.data.EL.open.csv"
+    retrieved_bytes: "1609518"
+    retrieved_by: "retrieved by run, Phase A, PR #330"
     used_by: []
-    checksum: void
+    checksum: "sha256:bb56ba5ac31b13be09cf3df42c1215b53255bb1eb3bb8a91838ab8cb4cb5c82c"
   - id: DS_KARST_2023
     what: "Karst 2023 CMN review (26 field studies)"
     locator: "doi:10.1038/s41559-023-01986-1"
