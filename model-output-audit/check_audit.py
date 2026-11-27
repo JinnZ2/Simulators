@@ -45,6 +45,11 @@ def run(clones=None):
           all(c["record_id"] in inv for c in claims if c["record_id"]), "%d without" % sum(1 for c in claims if not c["record_id"]))
     check("flagged cells follow the declared rule (n >= 20, rate >= 2 x floor and >= floor + 10 points)",
           all(c["n"] >= 20 for c in rec["flagged_cells"]), "%d flagged" % len(rec["flagged_cells"]))
+    fid = json.load(open(os.path.join(HERE, "fidelity.json"), encoding="utf-8"))
+    check("addendum 2b: no MATCH or DRIFT is assigned; every found spec has match None; counts add up to the inventory",
+          fid["commits"]["MATCH"] == 0 and fid["commits"]["DRIFT"] == 0 and all(r["fidelity"]["match"] is None and r["fidelity"]["drift_type"] is None for r in fid["records"])
+          and fid["commits"]["MISSING_SPEC_void"] + len(fid["records"]) == len(inv),
+          "%d spec found, %d MISSING_SPEC" % (len(fid["records"]), fid["commits"]["MISSING_SPEC_void"]))
     if clones is None:
         check("every quote is in its source", "NOT_RUN", "needs the clones")
     else:
@@ -66,6 +71,8 @@ def run(clones=None):
             if not ok:
                 missing.append(c["claim_id"])
         check("the clones are at the commits recorded in repos.json", not moved, "moved: %s" % (moved or "none"))
+        import fidelity
+        check("addendum 2b: fidelity.json equals a rebuild", json.loads(json.dumps(fidelity.build(clones), ensure_ascii=False)) == fid)
         check("every quote is in its source, at the line recorded", not missing, "%d quotes, %d not found" % (len(claims), len(missing)))
     return out
 

@@ -119,7 +119,27 @@ either direction.
   order asks about failure claims, so these are listed in `records.json` under `side_notes` only.
   They may be environment or tree-state effects.
 
+## Addendum 2b: spec-to-code fidelity (first step only)
+
+The addendum (`ADDENDUM_2b.md`) arrived cut off: the `fidelity` block is not closed and nothing
+follows the `drift_type` comment. Only the part that needs no reading was done (`fidelity.py`,
+`fidelity.json`): finding where a spec is recoverable.
+
+| Item | Count |
+|---|---|
+| Spec files found by name (WORK_ORDER, DISPATCH, SPEC, SOURCE_DROP, ADDENDUM, ORDER) | 177, in 11 repos (162 in Simulators) |
+| Commits touching a folder that holds a spec file: `match` = None (not yet compared) | 675 |
+| Commits with no spec file found: `match` = MISSING_SPEC (void) | 12,901 |
+| MATCH / DRIFT assigned | 0 / 0 |
+
+No spec has been read against its code. MISSING_SPEC means no spec file was found by this rule,
+not that no instruction existed: chat logs are not in the repos, and commit messages and READMEs
+say what was done rather than what was asked, so they were not used as specs.
+
 ## Open voids
+
+- Addendum 2b: 675 commits with a spec found and no comparison made; the rest of the addendum's
+  instructions were not received.
 
 - 13,329 candidates with no verdict.
 - 2 repos NOT_CLONED (`experiments`, `gap-quantification-protocol`: private, refused).

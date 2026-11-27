@@ -50,9 +50,19 @@
   "detail": "0 flagged"
  },
  {
+  "check": "addendum 2b: no MATCH or DRIFT is assigned; every found spec has match None; counts add up to the inventory",
+  "state": "PASS",
+  "detail": "675 spec found, 12901 MISSING_SPEC"
+ },
+ {
   "check": "the clones are at the commits recorded in repos.json",
   "state": "PASS",
   "detail": "moved: none"
+ },
+ {
+  "check": "addendum 2b: fidelity.json equals a rebuild",
+  "state": "PASS",
+  "detail": ""
  },
  {
   "check": "every quote is in its source, at the line recorded",
