@@ -64,7 +64,8 @@
         "uncertainty": ""
       }
     },
-    "notes": ""
+    "notes": "",
+    "limit_basis": "unknown"
   },
   "discrepancy": {
     "record_id": "DISC-001",
@@ -228,6 +229,373 @@
         "unit": "USD",
         "uncertainty": "authorized, not disbursed"
       }
+    }
+  ],
+  "limit_seed": {
+    "record_id": "LIMIT-EAST-2026",
+    "system_instance": "EAST tokamak, 2026 (as supplied)",
+    "operating_condition": "",
+    "physical_quantity": "plasma density relative to the Greenwald limit",
+    "external_bound": {
+      "value": "Greenwald density limit n_G",
+      "status": "ESTIMATED",
+      "source": "empirical rule fitted to past experiments (as supplied)",
+      "unit": "",
+      "uncertainty": "not quantified here"
+    },
+    "ai_reported_limit": {
+      "value": "",
+      "status": "GAP",
+      "source": "",
+      "unit": "",
+      "uncertainty": ""
+    },
+    "independent_measurement": {
+      "value": "",
+      "status": "GAP",
+      "source": "",
+      "unit": "",
+      "uncertainty": ""
+    },
+    "observed_response": {
+      "value": "stable at 1.3-1.65 x n_G",
+      "status": "MEASURED",
+      "source": "EAST 2026, as supplied; not checked here",
+      "unit": "x n_G",
+      "uncertainty": "range as stated; per-shot uncertainty not stated"
+    },
+    "instrumentation_method": {
+      "value": "",
+      "status": "GAP",
+      "source": "",
+      "unit": "",
+      "uncertainty": ""
+    },
+    "sensor_availability": "UNKNOWN",
+    "calibration_status": "UNKNOWN",
+    "configuration_status": "UNKNOWN",
+    "access_status": "UNKNOWN",
+    "observability": {
+      "outputs_total": "UNKNOWN",
+      "outputs_evaluated": "UNKNOWN",
+      "independently_verified": "UNKNOWN",
+      "evaluator_independent_of_generator": "UNKNOWN",
+      "shared_failure_modes": "",
+      "detection_method": {
+        "value": "",
+        "status": "GAP",
+        "source": "",
+        "unit": "",
+        "uncertainty": ""
+      },
+      "undetected_error_estimate": {
+        "value": "",
+        "status": "GAP",
+        "source": "",
+        "unit": "",
+        "uncertainty": ""
+      }
+    },
+    "notes": "",
+    "limit_basis": "empirical_rule"
+  },
+  "calibration": [
+    {
+      "quantity_named": "miles driven to the dock, incl. going around the shop",
+      "predicted": "30",
+      "confidence": "",
+      "measured": {
+        "value": "26.3",
+        "status": "MEASURED",
+        "source": "GPS, to the address point (as dictated)",
+        "unit": "mi",
+        "uncertainty": "display 0.1 mi"
+      },
+      "instrument_scope": "GPS distance to the address point; does not see on-site movement",
+      "operator_buffer": "going around the shop and back to the dock; instrument deviation (gauges, dashboard, GPS), environment, construction, traffic, road wear (stated by the operator 2026-10-27)",
+      "goal": "arrive on time",
+      "version_stamp": "n/a: human operator",
+      "timestamp": "2026-10-25/26 (voice dictated)",
+      "instrument_quantity": "route miles to the address point",
+      "tolerance": "",
+      "method_matches_standard": "NOT_TESTED",
+      "method_note": "",
+      "record_id": "CAL-MILES-GPS",
+      "safe_side": "OVER"
+    },
+    {
+      "quantity_named": "miles driven to the dock, incl. going around the shop",
+      "predicted": "30",
+      "confidence": "",
+      "measured": {
+        "value": "29-30",
+        "status": "ESTIMATED",
+        "source": "operator, as dictated; instrument not named",
+        "unit": "mi",
+        "uncertainty": "~, stated as a range"
+      },
+      "instrument_scope": "instrument not named in the dictation",
+      "operator_buffer": "going around the shop and back to the dock; instrument deviation (gauges, dashboard, GPS), environment, construction, traffic, road wear (stated by the operator 2026-10-27)",
+      "goal": "arrive on time",
+      "version_stamp": "n/a: human operator",
+      "timestamp": "2026-10-25/26 (voice dictated)",
+      "instrument_quantity": "miles driven to the dock, incl. going around the shop",
+      "tolerance": "",
+      "method_matches_standard": "NOT_TESTED",
+      "method_note": "",
+      "record_id": "CAL-MILES-ACTUAL",
+      "safe_side": "OVER"
+    },
+    {
+      "quantity_named": "fuel needed for the trip",
+      "predicted": "full",
+      "confidence": "",
+      "measured": {
+        "value": "full",
+        "status": "MEASURED",
+        "source": "fuel gauge (as dictated)",
+        "unit": "",
+        "uncertainty": "gauge resolution not stated"
+      },
+      "instrument_scope": "fuel gauge reading; does not see what the trip will burn",
+      "operator_buffer": "instrument deviation (gauges, dashboard, GPS), environment, construction, traffic, road wear (stated by the operator 2026-10-27)",
+      "goal": "do not run short before the dock (operator 2026-10-27: underestimate is the risk, as for time and miles)",
+      "version_stamp": "n/a: human operator",
+      "timestamp": "2026-10-25/26 (voice dictated)",
+      "instrument_quantity": "fuel tank level",
+      "tolerance": "",
+      "method_matches_standard": "NO",
+      "method_note": "inferred full from memory of the fill-up; the gauge then confirmed it",
+      "record_id": "CAL-FUEL",
+      "safe_side": "OVER"
+    },
+    {
+      "quantity_named": "on-duty time",
+      "predicted": "~15",
+      "confidence": "",
+      "measured": {
+        "value": "14:02",
+        "status": "MEASURED",
+        "source": "ELD on-duty (as dictated)",
+        "unit": "min",
+        "uncertainty": "14 min 02 s (reading confirmed by the operator 2026-10-27)"
+      },
+      "instrument_scope": "ELD on-duty time as logged",
+      "operator_buffer": "instrument deviation (gauges, dashboard, GPS), environment, construction, traffic, road wear (stated by the operator 2026-10-27)",
+      "goal": "arrive on time",
+      "version_stamp": "n/a: human operator",
+      "timestamp": "2026-10-25/26 (voice dictated)",
+      "instrument_quantity": "on-duty time",
+      "tolerance": "",
+      "method_matches_standard": "NOT_TESTED",
+      "method_note": "",
+      "record_id": "CAL-TIME",
+      "safe_side": "OVER"
+    }
+  ],
+  "calibration_scores": [
+    {
+      "record_id": "CAL-MILES-GPS",
+      "quantity": "miles driven to the dock, incl. going around the shop",
+      "target_match": "TARGET_MISMATCH",
+      "outcome": "NOT_SCORED",
+      "abs_error": null,
+      "tolerance": null,
+      "tolerance_basis": null,
+      "signed_error": null,
+      "safe_side": "OVER",
+      "method_matches_standard": "NOT_TESTED",
+      "reason": "TARGET_MISMATCH: the prediction names 'miles driven to the dock, incl. going around the shop', the instrument measured 'route miles to the address point'; logged, not an error"
+    },
+    {
+      "record_id": "CAL-MILES-ACTUAL",
+      "quantity": "miles driven to the dock, incl. going around the shop",
+      "target_match": "MATCH",
+      "outcome": "HIT",
+      "abs_error": [
+        0.0,
+        1.0
+      ],
+      "tolerance": 0.5,
+      "tolerance_basis": "written precision",
+      "signed_error": [
+        0.0,
+        1.0
+      ],
+      "safe_side": "OVER",
+      "method_matches_standard": "NOT_TESTED",
+      "reason": ""
+    },
+    {
+      "record_id": "CAL-FUEL",
+      "quantity": "fuel needed for the trip",
+      "target_match": "TARGET_MISMATCH",
+      "outcome": "NOT_SCORED",
+      "abs_error": null,
+      "tolerance": null,
+      "tolerance_basis": null,
+      "signed_error": null,
+      "safe_side": "OVER",
+      "method_matches_standard": "NO",
+      "reason": "TARGET_MISMATCH: the prediction names 'fuel needed for the trip', the instrument measured 'fuel tank level'; logged, not an error"
+    },
+    {
+      "record_id": "CAL-TIME",
+      "quantity": "on-duty time",
+      "target_match": "MATCH",
+      "outcome": "HIT",
+      "abs_error": [
+        0.9667,
+        0.9667
+      ],
+      "tolerance": 1.0,
+      "tolerance_basis": "written precision, doubled by '~'",
+      "signed_error": [
+        0.9667,
+        0.9667
+      ],
+      "safe_side": "OVER",
+      "method_matches_standard": "NOT_TESTED",
+      "reason": ""
+    }
+  ],
+  "calibration_summary": {
+    "n": 4,
+    "hits": 2,
+    "misses": 0,
+    "target_mismatches": 2,
+    "target_not_evaluable": 0,
+    "not_scored": 2,
+    "method_matches_standard": {
+      "YES": 0,
+      "NO": 1,
+      "UNKNOWN": 0,
+      "NOT_TESTED": 3
+    },
+    "by_quantity": {
+      "miles driven to the dock, incl. going around the shop": {
+        "n": 2,
+        "scored": 1,
+        "mae": [
+          0.0,
+          1.0
+        ],
+        "mean_signed_error": [
+          0.0,
+          1.0
+        ]
+      },
+      "fuel needed for the trip": {
+        "n": 1,
+        "scored": 0,
+        "mae": null,
+        "mean_signed_error": null
+      },
+      "on-duty time": {
+        "n": 1,
+        "scored": 1,
+        "mae": [
+          0.9667,
+          0.9667
+        ],
+        "mean_signed_error": [
+          0.9667,
+          0.9667
+        ]
+      }
+    },
+    "confidence_vs_hit_rate": "NOT_COMPUTABLE: 0 of 2 scored rows state a confidence"
+  },
+  "confounds": [
+    {
+      "name": "corpus_prior",
+      "present": "UNKNOWN",
+      "size": null,
+      "control_used": "",
+      "interpretation": "GAP"
+    },
+    {
+      "name": "framing_pull",
+      "present": "UNKNOWN",
+      "size": null,
+      "control_used": "",
+      "interpretation": "GAP"
+    },
+    {
+      "name": "trained_reflex",
+      "present": "UNKNOWN",
+      "size": null,
+      "control_used": "",
+      "interpretation": "GAP"
+    },
+    {
+      "name": "narration_not_causal",
+      "present": "UNKNOWN",
+      "size": null,
+      "control_used": "",
+      "interpretation": "GAP"
+    },
+    {
+      "name": "context_contamination",
+      "present": "UNKNOWN",
+      "size": null,
+      "control_used": "",
+      "interpretation": "GAP"
+    },
+    {
+      "name": "sampling_variance",
+      "present": "UNKNOWN",
+      "size": null,
+      "control_used": "",
+      "interpretation": "GAP"
+    },
+    {
+      "name": "version_drift",
+      "present": "UNKNOWN",
+      "size": null,
+      "control_used": "",
+      "interpretation": "GAP"
+    },
+    {
+      "name": "evaluator_sharing",
+      "present": "UNKNOWN",
+      "size": null,
+      "control_used": "",
+      "interpretation": "GAP"
+    },
+    {
+      "name": "term_freight",
+      "present": "UNKNOWN",
+      "size": null,
+      "control_used": "",
+      "interpretation": "GAP"
+    },
+    {
+      "name": "observer_effect",
+      "present": "UNKNOWN",
+      "size": null,
+      "control_used": "",
+      "interpretation": "GAP"
+    },
+    {
+      "name": "target_mismatch",
+      "present": true,
+      "size": {
+        "value": "2.7-3.7",
+        "status": "ESTIMATED",
+        "source": "CAL-MILES-ACTUAL minus CAL-MILES-GPS (29-30 minus 26.3)",
+        "unit": "mi",
+        "uncertainty": "from the ~29-30 range"
+      },
+      "control_used": "",
+      "interpretation": "GAP"
+    },
+    {
+      "name": "frame_graded_assessment",
+      "present": "UNKNOWN",
+      "size": null,
+      "control_used": "",
+      "interpretation": "GAP"
     }
   ]
 }
