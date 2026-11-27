@@ -1,0 +1,271 @@
+{
+ "pool": 158,
+ "sampled": 20,
+ "specs": [
+  {
+   "repo": "Simulators",
+   "spec_source": "move-set-derivation/SOURCE_DROP.md",
+   "spec_sha256": "63dbac1a80e3c4111ee293491475415c113c7fbd4d7d8e850978ccf4c691c01a",
+   "code_files": 3,
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-08-29",
+   "constants": [],
+   "tokens_in_spec": 0,
+   "tokens_absent_from_code": []
+  },
+  {
+   "repo": "Simulators",
+   "spec_source": "relational-playground/SPEC_GPT.md",
+   "spec_sha256": "2846b28820b7c1b126b581c238479114b570715091af754bf1d1b9a4b389aeab",
+   "code_files": 61,
+   "model": "Claude Fable",
+   "model_version": "5.2",
+   "date": "2026-11-11",
+   "constants": [],
+   "tokens_in_spec": 1,
+   "tokens_absent_from_code": [
+    "SPEC_GPT"
+   ]
+  },
+  {
+   "repo": "Simulators",
+   "spec_source": "unowned-join/WORK_ORDER.md",
+   "spec_sha256": "f423f2cb62089fd64c970e0a6d66d388c6033c1b794460c89229733e29237983",
+   "code_files": 3,
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-09-22",
+   "constants": [],
+   "tokens_in_spec": 0,
+   "tokens_absent_from_code": []
+  },
+  {
+   "repo": "Simulators",
+   "spec_source": "uninstrumented/WORK_ORDER_03.md",
+   "spec_sha256": "b7ad382541c13b03f595f26d99addf6654790f86b62bd4acf5013ace9530ff97",
+   "code_files": 32,
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-08-16",
+   "constants": [],
+   "tokens_in_spec": 2,
+   "tokens_absent_from_code": [
+    "MARKERS_HELD",
+    "NOT_STUDIED"
+   ]
+  },
+  {
+   "repo": "Simulators",
+   "spec_source": "readout-count/WORK_ORDER.md",
+   "spec_sha256": "5324ed51c1ea44e91fb069144de7a92774b9f5240b6147ac788b704b6ca6676d",
+   "code_files": 5,
+   "model": "Claude Fable",
+   "model_version": "5.1",
+   "date": "2026-09-02",
+   "constants": [],
+   "tokens_in_spec": 1,
+   "tokens_absent_from_code": [
+    "STRICT_CAUSAL"
+   ]
+  },
+  {
+   "repo": "Simulators",
+   "spec_source": "observer-exclusion/SPEC_V2.md",
+   "spec_sha256": "709bb01b10f54819fad7399bd1e68fbf38125e602ca650f829a25bb638bc4a7f",
+   "code_files": 3,
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-08-25",
+   "constants": [],
+   "tokens_in_spec": 1,
+   "tokens_absent_from_code": [
+    "Q2_OBSERVER_EXCLUSION_SPEC"
+   ]
+  },
+  {
+   "repo": "Simulators",
+   "spec_source": "false-tradeoff/WORK_ORDER.md",
+   "spec_sha256": "f6c03a64b7c05c8561f94e7bbdcf50855ac766ec3f40fac17dbc70145bd3ddae",
+   "code_files": 3,
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-09-12",
+   "constants": [],
+   "tokens_in_spec": 5,
+   "tokens_absent_from_code": []
+  },
+  {
+   "repo": "simulation",
+   "spec_source": "frame-instruments/WORK_ORDER_B1_B3.md",
+   "spec_sha256": "ca58413f7a85a3e0d950170e78fada2d7efbd0ac92745b158967e454eb6499a1",
+   "code_files": 53,
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-09-22",
+   "constants": [],
+   "tokens_in_spec": 0,
+   "tokens_absent_from_code": []
+  },
+  {
+   "repo": "Simulators",
+   "spec_source": "anchor-position/WORK_ORDER_2.md",
+   "spec_sha256": "137ca3254c042bcf87b7a8475c43415491950cb917786c32445a709dd4cf8531",
+   "code_files": 4,
+   "model": "Claude Fable",
+   "model_version": "5.1",
+   "date": "2026-09-09",
+   "constants": [],
+   "tokens_in_spec": 7,
+   "tokens_absent_from_code": [
+    "APM_002",
+    "CONSTANT_SILENT"
+   ]
+  },
+  {
+   "repo": "Simulators",
+   "spec_source": "transmission-cascade/WORK_ORDER.md",
+   "spec_sha256": "73fc38411c6c7d206c018583c82f5e743e77dd40b1564695236507d8128346e1",
+   "code_files": 2,
+   "model": "Claude Opus",
+   "model_version": "4.8",
+   "date": "2026-09-19",
+   "constants": [],
+   "tokens_in_spec": 0,
+   "tokens_absent_from_code": []
+  },
+  {
+   "repo": "Simulators",
+   "spec_source": "credential-channel/WORK_ORDER.md",
+   "spec_sha256": "cc8262c18111dc8eab61ad2bcfdb5522e57f9663de0068749ed6b4472b1f614a",
+   "code_files": 2,
+   "model": "Claude Opus",
+   "model_version": "4.8",
+   "date": "2026-09-19",
+   "constants": [],
+   "tokens_in_spec": 0,
+   "tokens_absent_from_code": []
+  },
+  {
+   "repo": "Simulators",
+   "spec_source": "operator-structure-echo/SPEC_ECHO.md",
+   "spec_sha256": "2b2a146c4403038531f7ad2714a01134b8de090be766307c17e09f6031501f52",
+   "code_files": 2,
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-08-23",
+   "constants": [],
+   "tokens_in_spec": 0,
+   "tokens_absent_from_code": []
+  },
+  {
+   "repo": "Simulators",
+   "spec_source": "quiet-failure/WORK_ORDER.md",
+   "spec_sha256": "89b70674ea89c65371dd27a95d79f14ccbf04a7a992eabd84af9c1400c46dfae",
+   "code_files": 6,
+   "model": "Claude Fable",
+   "model_version": "5.1",
+   "date": "2026-09-20",
+   "constants": [],
+   "tokens_in_spec": 0,
+   "tokens_absent_from_code": []
+  },
+  {
+   "repo": "Simulators",
+   "spec_source": "claim-record/SOURCE_DROP.md",
+   "spec_sha256": "d08e451e7c0a29d8a3fa27b78e3a2e52d7859b1713a7bf9c68b13516b4cf502b",
+   "code_files": 2,
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-08-25",
+   "constants": [],
+   "tokens_in_spec": 0,
+   "tokens_absent_from_code": []
+  },
+  {
+   "repo": "Simulators",
+   "spec_source": "revision-survival/WORK_ORDER_V2.md",
+   "spec_sha256": "5d8aa73cae5223ecbb00185f50a78bb7da3fa9b57a2ece54bbda149853c02118",
+   "code_files": 4,
+   "model": "Claude Fable",
+   "model_version": "5.1",
+   "date": "2026-09-17",
+   "constants": [],
+   "tokens_in_spec": 11,
+   "tokens_absent_from_code": [
+    "CLAIM_TABLE"
+   ]
+  },
+  {
+   "repo": "Simulators",
+   "spec_source": "route-independence/WORK_ORDER_A6.3_2026-09-30_verification-split.md",
+   "spec_sha256": "b455385e852d73b53418d393ab17ed9a6677b62497382cfad852352761d11474",
+   "code_files": 39,
+   "model": "Claude Fable",
+   "model_version": "5.1",
+   "date": "2026-09-27",
+   "constants": [],
+   "tokens_in_spec": 9,
+   "tokens_absent_from_code": [
+    "KNOWN_RED",
+    "RIN_142",
+    "RIN_145",
+    "RIN_N"
+   ]
+  },
+  {
+   "repo": "JinnZ2",
+   "spec_source": "energy_english/SPEC.md",
+   "spec_sha256": "4b709e1e031bf5e888c4ee39914a51c040593552209d2f147892f6969ce1568b",
+   "code_files": 51,
+   "model": null,
+   "model_version": null,
+   "date": "2026-04-25",
+   "constants": [],
+   "tokens_in_spec": 2,
+   "tokens_absent_from_code": [
+    "ENERGY_ENGLISH_AXIOM"
+   ]
+  },
+  {
+   "repo": "Simulators",
+   "spec_source": "reg-uncertainty-registry/WORK_ORDER_1a.md",
+   "spec_sha256": "ecf19bfb3b0518f729c6544975bec44a6863a86d4984f02e1e914ba617d1c00b",
+   "code_files": 15,
+   "model": "Claude Opus",
+   "model_version": "5.5",
+   "date": "2026-10-20",
+   "constants": [],
+   "tokens_in_spec": 2,
+   "tokens_absent_from_code": []
+  },
+  {
+   "repo": "Simulators",
+   "spec_source": "playground-crossrun/WORK_ORDER.md",
+   "spec_sha256": "306ad96cabc011e056e4b28add031de0aba0447d6eae61c40eb98c65fc7b4b0b",
+   "code_files": 9,
+   "model": "Claude Opus",
+   "model_version": "5.5",
+   "date": "2026-11-11",
+   "constants": [],
+   "tokens_in_spec": 4,
+   "tokens_absent_from_code": [
+    "COMBINED_SPEC",
+    "GAP_INSTRUMENT_CRASH",
+    "NOT_DETERMINABLE"
+   ]
+  },
+  {
+   "repo": "Simulators",
+   "spec_source": "nonidentity-census/WORK_ORDER.md",
+   "spec_sha256": "dfedd15a7544d3004c065f67384afd5fe29f98dc831fa0ba20a1368f54968eca",
+   "code_files": 5,
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-08-23",
+   "constants": [],
+   "tokens_in_spec": 0,
+   "tokens_absent_from_code": []
+  }
+ ]
+}

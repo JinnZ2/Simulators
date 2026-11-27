@@ -1,0 +1,983 @@
+{
+ "record": "MODEL_OUTPUT_AUDIT_RUN_2",
+ "date": "2026-11-27",
+ "status": "PROPOSED",
+ "license": "CC0",
+ "co_authored": true,
+ "observer_slots": null,
+ "parts": {
+  "WORK_ORDER.md": "e80c882a37a44355b713ba9a1b320c8112e2cb34fecc98374aa211b2256b4216",
+  "DECLARED.json": "5d9e5073a1bc9b1632a359261610707189679280c2023a8652554d84c4b8dadc",
+  "model_probe.json": "f921f394e0e0915c2abac455328115f69060c78eef4c5d265bc3f4fc8f8d5353",
+  "pass_claims_runs.json": "132e08ab0e407c9a78ec71c29e3f480dfea972731a66fad635287054c5133eca",
+  "repeat_reruns.json": "af528edc808458e17df8da45a83cb769309e687e433133eeab8fb484c0e16e60",
+  "probe_readings.json": "2cc7960c01f752dc7fc98510227bac39ba35aba3bad61d3cc6e2ee74d9067e8f",
+  "tightened.json": "b5c3ad0bebf0de0e5075920b09c1b18c19df29097ad7cfeec30356dd8912769f",
+  "fidelity_candidates.json": "85d3d931f15b48fd59081cc869d0b0fd9eff6ce627e7a3c2b4545739fae47d5f",
+  "fidelity_readings.json": "c5fdd1f7cf9a13b39bff9f6832195d771708229b23d4bc4f3ba25037e2c7eec6"
+ },
+ "item_1": {
+  "independent_model_auditor": "NOT_RUN",
+  "reason": "no model weights can be fetched: every weights host tried is refused by this session's network policy. No mirror was sought past the policy.",
+  "agreement_between_independent_auditors": null,
+  "stdlib_second_pass": {
+   "n": 26,
+   "same_result": 24,
+   "differs": [
+    {
+     "claim_id": "A:Simulators@ac7df544aaeb:9:defect",
+     "run_1": "TIMEOUT",
+     "run_2": "FAILS"
+    },
+    {
+     "claim_id": "B:Simulators:route-independence/CLAIM_TABLE.md:33:defect",
+     "run_1": "TIMEOUT",
+     "run_2": "FAILS"
+    }
+   ],
+   "what_it_is": "repeatability of one mechanical rerun, same machine, same day; not agreement between auditors"
+  },
+  "pass_claim_side_notes_rerun": 8
+ },
+ "item_2": {
+  "counts": {
+   "STALE": 5,
+   "None": 2,
+   "ENV_DEPENDENT": 1
+  },
+  "claims": [
+   {
+    "claim_id": "B:Simulators:KNOWN_RED.md:138:test_failure",
+    "quote": "falsifier-audit/selftest_fa.py passing (28 checks, 0 failed) indicates the extraction",
+    "reading": "states a pass: 28 checks, 0 failed",
+    "class": "STALE",
+    "reason": "passes at the writing commit in both environments, fails at HEAD in both: true when written, not true of the tree now",
+    "cells": {
+     "writing_commit/bare": {
+      "state": "PASS",
+      "exit": 0,
+      "rev": "44e27e44a2a9"
+     },
+     "writing_commit/current": {
+      "state": "PASS",
+      "exit": 0,
+      "rev": "44e27e44a2a9"
+     },
+     "head/bare": {
+      "state": "FAILS",
+      "exit": 1,
+      "rev": "b40dfdee8ee7"
+     },
+     "head/current": {
+      "state": "FAILS",
+      "exit": 1,
+      "rev": "b40dfdee8ee7"
+     }
+    },
+    "auditor": "stdlib rerun (4 cells) + Anthropic model (reading of the line)",
+    "agency": null
+   },
+   {
+    "claim_id": "B:Simulators:TOOL_FINDER/TOOL_FINDER.md:378:test_failure",
+    "quote": "- status: RUN -- `python3 falsifier-audit/selftest_fa.py` -> selftest: 28 checks, 0 failed",
+    "reading": "states a pass: 28 checks, 0 failed",
+    "class": "STALE",
+    "reason": "passes at the writing commit in both environments, fails at HEAD in both: true when written, not true of the tree now",
+    "cells": {
+     "writing_commit/bare": {
+      "state": "PASS",
+      "exit": 0,
+      "rev": "3f7d3f56836f"
+     },
+     "writing_commit/current": {
+      "state": "PASS",
+      "exit": 0,
+      "rev": "3f7d3f56836f"
+     },
+     "head/bare": {
+      "state": "FAILS",
+      "exit": 1,
+      "rev": "b40dfdee8ee7"
+     },
+     "head/current": {
+      "state": "FAILS",
+      "exit": 1,
+      "rev": "b40dfdee8ee7"
+     }
+    },
+    "auditor": "stdlib rerun (4 cells) + Anthropic model (reading of the line)",
+    "agency": null
+   },
+   {
+    "claim_id": "B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14_V2.md:84:test_failure",
+    "quote": "The response's open items O-3 and O-4 stand unaltered: the family classification has no second rater and the audience-fit scores remain one reader's judgments; the claim export (roadmap #1) is the instrument that would make both re-ratable by construction. O-5 stands: non-incident citations were not individually re-fetched. O-1 is now partially closed — instruments have been run by an outside party, and five claims about folder completeness failed their own tests — but no CLAIM_TABLE falsifier has yet been executed *as stated*; that remains the open measurement, and `falsifier-audit/selftest_fa.py` passing (28 checks, 0 failed) shows the extraction layer is ready for it.",
+    "reading": "states a pass: 28 checks, 0 failed (an outside document landed verbatim)",
+    "class": "STALE",
+    "reason": "passes at the writing commit in both environments, fails at HEAD in both: true when written, not true of the tree now",
+    "cells": {
+     "writing_commit/bare": {
+      "state": "PASS",
+      "exit": 0,
+      "rev": "3d83364db03d"
+     },
+     "writing_commit/current": {
+      "state": "PASS",
+      "exit": 0,
+      "rev": "3d83364db03d"
+     },
+     "head/bare": {
+      "state": "FAILS",
+      "exit": 1,
+      "rev": "b40dfdee8ee7"
+     },
+     "head/current": {
+      "state": "FAILS",
+      "exit": 1,
+      "rev": "b40dfdee8ee7"
+     }
+    },
+    "auditor": "stdlib rerun (4 cells) + Anthropic model (reading of the line)",
+    "agency": null
+   },
+   {
+    "claim_id": "B:Simulators:forest-model-ledger/CLAIM_TABLE.md:37:cant_run",
+    "quote": "| FML_016 | run_9 is a CANDIDATE anchor: one of the four anchor tests reads PASS (seeds), two PARTIAL (sigma_meas void; 2 of 5 budgets live), one NOT_RUN (assumption nudges; UPDATE 2026-11-10: run, now PARTIAL, see FML_022). The record pins three code files by sha256 and the checker fails on drift or on promotion with a test unpassed. | SUPPORTED | `ledger/anchors/ANCHOR_run9.yaml`, `tools/check_ledger.py --selftest` | -- |",
+    "reading": "does not state a pass for check_ledger.py: it says the checker fails on drift",
+    "class": null,
+    "reason": "void: does not state a pass for check_ledger.py: it says the checker fails on drift",
+    "cells": {},
+    "auditor": "stdlib rerun (4 cells) + Anthropic model (reading of the line)",
+    "agency": null
+   },
+   {
+    "claim_id": "B:Simulators:forest-model-ledger/CLAIM_TABLE.md:69:test_failure",
+    "quote": "| FML_048 | Held-out gate (thresholds frozen by hash at 72244bf before the sets existed; sets committed at e5e3186 before their first run; harness seeds 100-104): support_match, parameter_recovery, residual_regression, equation_family_swap PASS; multi_seed_ensemble FAIL_TP 0.995 (Laplace differences, 15 seeds, 3 sd shift), ablation FAIL_FP 0.005 (two outputs, uniform noise, no margin), assumption_block_trace FAIL_TP 0.9 (0.6 vs 0.1 failure, about 27 users). The three are trust PROVISIONAL and were not retuned. | SUPPORTED | `python3 tests/test_heldout.py`; `ledger/toolkit/HELDOUT_FREEZE.md` | a frozen tool file whose hash no longer matches, or a re-run that differs from the recorded held-out |",
+    "reading": "does not state a pass: it states that three held-out tools fail, which is what the run prints",
+    "class": null,
+    "reason": "void: does not state a pass: it states that three held-out tools fail, which is what the run prints",
+    "cells": {},
+    "auditor": "stdlib rerun (4 cells) + Anthropic model (reading of the line)",
+    "agency": null
+   },
+   {
+    "claim_id": "B:Simulators:stability-trigger-envelope/README.md:19:test_failure",
+    "quote": "CHECKS RUN         python3 test_envelope.py -> 217 checks, 0 failed",
+    "reading": "states a pass: 217 checks, 0 failed",
+    "class": "STALE",
+    "reason": "passes at the writing commit in both environments, fails at HEAD in both: true when written, not true of the tree now",
+    "cells": {
+     "writing_commit/bare": {
+      "state": "PASS",
+      "exit": 0,
+      "rev": "038a30f13c99"
+     },
+     "writing_commit/current": {
+      "state": "PASS",
+      "exit": 0,
+      "rev": "038a30f13c99"
+     },
+     "head/bare": {
+      "state": "FAILS",
+      "exit": 1,
+      "rev": "b40dfdee8ee7"
+     },
+     "head/current": {
+      "state": "FAILS",
+      "exit": 1,
+      "rev": "b40dfdee8ee7"
+     }
+    },
+    "auditor": "stdlib rerun (4 cells) + Anthropic model (reading of the line)",
+    "agency": null
+   },
+   {
+    "claim_id": "B:Simulators:stability-trigger-envelope/RUN_NOTE.md:174:test_failure",
+    "quote": "RENDER_UNOBSERVED  test_envelope.py has run once (217 checks, 0 failed,",
+    "reading": "states a pass: 217 checks, 0 failed, run once",
+    "class": "STALE",
+    "reason": "passes at the writing commit in both environments, fails at HEAD in both: true when written, not true of the tree now",
+    "cells": {
+     "writing_commit/bare": {
+      "state": "PASS",
+      "exit": 0,
+      "rev": "038a30f13c99"
+     },
+     "writing_commit/current": {
+      "state": "PASS",
+      "exit": 0,
+      "rev": "038a30f13c99"
+     },
+     "head/bare": {
+      "state": "FAILS",
+      "exit": 1,
+      "rev": "b40dfdee8ee7"
+     },
+     "head/current": {
+      "state": "FAILS",
+      "exit": 1,
+      "rev": "b40dfdee8ee7"
+     }
+    },
+    "auditor": "stdlib rerun (4 cells) + Anthropic model (reading of the line)",
+    "agency": null
+   },
+   {
+    "claim_id": "B:Mandala-Computing:CLAUDE.md:855:test_failure",
+    "quote": "python tests/test_core.py        # should report 422 passed, 0 failed",
+    "reading": "states what the run should report: 422 passed, 0 failed",
+    "class": "ENV_DEPENDENT",
+    "reason": "the result turns on installed packages: ENV_ERROR / FAILS at the writing commit (bare / current); the failing test reports a missing module",
+    "cells": {
+     "writing_commit/bare": {
+      "state": "ENV_ERROR",
+      "exit": 1,
+      "rev": "bfe272b19aea"
+     },
+     "writing_commit/current": {
+      "state": "FAILS",
+      "exit": 1,
+      "rev": "bfe272b19aea"
+     },
+     "head/bare": {
+      "state": "ENV_ERROR",
+      "exit": 1,
+      "rev": "74e9422c5eee"
+     },
+     "head/current": {
+      "state": "FAILS",
+      "exit": 1,
+      "rev": "74e9422c5eee"
+     }
+    },
+    "auditor": "stdlib rerun (4 cells) + Anthropic model (reading of the line)",
+    "agency": null
+   }
+  ]
+ },
+ "item_3": {
+  "read": 101,
+  "run_1_to_run_2": {
+   "DECLARED_LIMIT -> DECLARED_LIMIT": 40,
+   "DECLARED_LIMIT -> NOT_A_CLAIM": 8,
+   "ENV_DEPENDENT -> DECLARED_LIMIT": 21,
+   "ENV_DEPENDENT -> ENV_DEPENDENT": 20,
+   "ENV_DEPENDENT -> NOT_A_CLAIM": 11,
+   "ENV_DEPENDENT -> None": 1
+  },
+  "run_2_counts": {
+   "DECLARED_LIMIT": 61,
+   "ENV_DEPENDENT": 20,
+   "NOT_A_CLAIM": 19,
+   "None": 1
+  },
+  "by_model_version": {
+   "Claude Fable 5.1": {
+    "DECLARED_LIMIT": 20,
+    "NOT_A_CLAIM": 6,
+    "ENV_DEPENDENT": 1
+   },
+   "Claude Fable 5.2": {
+    "DECLARED_LIMIT": 2
+   },
+   "Claude Opus 4.8": {
+    "DECLARED_LIMIT": 10,
+    "ENV_DEPENDENT": 4,
+    "NOT_A_CLAIM": 1
+   },
+   "Claude Opus 5": {
+    "DECLARED_LIMIT": 12,
+    "NOT_A_CLAIM": 12,
+    "ENV_DEPENDENT": 4
+   },
+   "Claude Opus 5.5": {
+    "ENV_DEPENDENT": 6,
+    "None": 1,
+    "DECLARED_LIMIT": 16
+   },
+   "Manus None": {
+    "ENV_DEPENDENT": 4
+   },
+   "None": {
+    "ENV_DEPENDENT": 1
+   },
+   "Perplexity None": {
+    "DECLARED_LIMIT": 1
+   }
+  }
+ },
+ "item_4": {
+  "run_1_candidates": 13681,
+  "kept": 2061,
+  "kept_distinct_lines": 2013,
+  "kept_by_type": {
+   "defect": 676,
+   "cant_run": 549,
+   "unsupported": 23,
+   "test_failure": 464,
+   "environment": 342,
+   "convergence": 7
+  },
+  "removed_by_rule": {
+   "no_assertion_form": 4631,
+   "usage_or_command": 53,
+   "rule_or_conditional": 286,
+   "fixed_or_past": 193,
+   "data_or_code_file": 6146,
+   "pass_count": 237,
+   "listing_row": 74
+  },
+  "note": "a kept line is a candidate assertion, not a verdict; the rules are patterns and a paraphrase steps around them in both directions"
+ },
+ "item_5": {
+  "spec_files_with_code": 158,
+  "sampled": 20,
+  "counts": {
+   "None": 9,
+   "MATCH": 11
+  },
+  "constants_found_in_any_sampled_spec": 0,
+  "commits_MISSING_SPEC_void_from_run_1": 12901,
+  "spec_files_not_sampled_void": 138,
+  "tables": {
+   "model": {
+    "Claude Fable": {
+     "n": 5,
+     "DRIFT": 0,
+     "MATCH": 5,
+     "void": 1,
+     "drift_rate": 0.0
+    },
+    "Claude Opus": {
+     "n": 5,
+     "DRIFT": 0,
+     "MATCH": 5,
+     "void": 8,
+     "drift_rate": 0.0
+    },
+    "None": {
+     "n": 1,
+     "DRIFT": 0,
+     "MATCH": 1,
+     "void": 0,
+     "drift_rate": 0.0
+    }
+   },
+   "model_version": {
+    "Claude Fable 5.1": {
+     "n": 4,
+     "DRIFT": 0,
+     "MATCH": 4,
+     "void": 1,
+     "drift_rate": 0.0
+    },
+    "Claude Fable 5.2": {
+     "n": 1,
+     "DRIFT": 0,
+     "MATCH": 1,
+     "void": 0,
+     "drift_rate": 0.0
+    },
+    "Claude Opus 4.8": {
+     "n": 0,
+     "DRIFT": 0,
+     "MATCH": 0,
+     "void": 2,
+     "drift_rate": null
+    },
+    "Claude Opus 5": {
+     "n": 3,
+     "DRIFT": 0,
+     "MATCH": 3,
+     "void": 6,
+     "drift_rate": 0.0
+    },
+    "Claude Opus 5.5": {
+     "n": 2,
+     "DRIFT": 0,
+     "MATCH": 2,
+     "void": 0,
+     "drift_rate": 0.0
+    },
+    "None": {
+     "n": 1,
+     "DRIFT": 0,
+     "MATCH": 1,
+     "void": 0,
+     "drift_rate": 0.0
+    }
+   },
+   "month": {
+    "2026-04": {
+     "n": 1,
+     "DRIFT": 0,
+     "MATCH": 1,
+     "void": 0,
+     "drift_rate": 0.0
+    },
+    "2026-08": {
+     "n": 2,
+     "DRIFT": 0,
+     "MATCH": 2,
+     "void": 4,
+     "drift_rate": 0.0
+    },
+    "2026-09": {
+     "n": 5,
+     "DRIFT": 0,
+     "MATCH": 5,
+     "void": 5,
+     "drift_rate": 0.0
+    },
+    "2026-10": {
+     "n": 1,
+     "DRIFT": 0,
+     "MATCH": 1,
+     "void": 0,
+     "drift_rate": 0.0
+    },
+    "2026-11": {
+     "n": 2,
+     "DRIFT": 0,
+     "MATCH": 2,
+     "void": 0,
+     "drift_rate": 0.0
+    }
+   },
+   "topic": {
+    "anchor-position": {
+     "n": 1,
+     "DRIFT": 0,
+     "MATCH": 1,
+     "void": 0,
+     "drift_rate": 0.0
+    },
+    "claim-record": {
+     "n": 0,
+     "DRIFT": 0,
+     "MATCH": 0,
+     "void": 1,
+     "drift_rate": null
+    },
+    "credential-channel": {
+     "n": 0,
+     "DRIFT": 0,
+     "MATCH": 0,
+     "void": 1,
+     "drift_rate": null
+    },
+    "energy_english": {
+     "n": 1,
+     "DRIFT": 0,
+     "MATCH": 1,
+     "void": 0,
+     "drift_rate": 0.0
+    },
+    "false-tradeoff": {
+     "n": 1,
+     "DRIFT": 0,
+     "MATCH": 1,
+     "void": 0,
+     "drift_rate": 0.0
+    },
+    "frame-instruments": {
+     "n": 0,
+     "DRIFT": 0,
+     "MATCH": 0,
+     "void": 1,
+     "drift_rate": null
+    },
+    "move-set-derivation": {
+     "n": 0,
+     "DRIFT": 0,
+     "MATCH": 0,
+     "void": 1,
+     "drift_rate": null
+    },
+    "nonidentity-census": {
+     "n": 0,
+     "DRIFT": 0,
+     "MATCH": 0,
+     "void": 1,
+     "drift_rate": null
+    },
+    "observer-exclusion": {
+     "n": 1,
+     "DRIFT": 0,
+     "MATCH": 1,
+     "void": 0,
+     "drift_rate": 0.0
+    },
+    "operator-structure-echo": {
+     "n": 0,
+     "DRIFT": 0,
+     "MATCH": 0,
+     "void": 1,
+     "drift_rate": null
+    },
+    "playground-crossrun": {
+     "n": 1,
+     "DRIFT": 0,
+     "MATCH": 1,
+     "void": 0,
+     "drift_rate": 0.0
+    },
+    "quiet-failure": {
+     "n": 0,
+     "DRIFT": 0,
+     "MATCH": 0,
+     "void": 1,
+     "drift_rate": null
+    },
+    "readout-count": {
+     "n": 1,
+     "DRIFT": 0,
+     "MATCH": 1,
+     "void": 0,
+     "drift_rate": 0.0
+    },
+    "reg-uncertainty-registry": {
+     "n": 1,
+     "DRIFT": 0,
+     "MATCH": 1,
+     "void": 0,
+     "drift_rate": 0.0
+    },
+    "relational-playground": {
+     "n": 1,
+     "DRIFT": 0,
+     "MATCH": 1,
+     "void": 0,
+     "drift_rate": 0.0
+    },
+    "revision-survival": {
+     "n": 1,
+     "DRIFT": 0,
+     "MATCH": 1,
+     "void": 0,
+     "drift_rate": 0.0
+    },
+    "route-independence": {
+     "n": 1,
+     "DRIFT": 0,
+     "MATCH": 1,
+     "void": 0,
+     "drift_rate": 0.0
+    },
+    "transmission-cascade": {
+     "n": 0,
+     "DRIFT": 0,
+     "MATCH": 0,
+     "void": 1,
+     "drift_rate": null
+    },
+    "uninstrumented": {
+     "n": 1,
+     "DRIFT": 0,
+     "MATCH": 1,
+     "void": 0,
+     "drift_rate": 0.0
+    },
+    "unowned-join": {
+     "n": 0,
+     "DRIFT": 0,
+     "MATCH": 0,
+     "void": 1,
+     "drift_rate": null
+    }
+   }
+  },
+  "covers": "state names only. Not tested: omitted steps, changed logic, added constraints, inverted conditions. No numeric constant was found to test.",
+  "specs": [
+   {
+    "repo": "Simulators",
+    "spec_source": "move-set-derivation/SOURCE_DROP.md",
+    "model": "Claude Opus",
+    "model_version": "5",
+    "date": "2026-08-29",
+    "fidelity": {
+     "spec_source": "move-set-derivation/SOURCE_DROP.md",
+     "match": null,
+     "drift_type": null
+    },
+    "items_tested": 0,
+    "constants_tested": 0,
+    "state_names_tested": 0,
+    "absent_names_read": {},
+    "reason": "nothing testable: the spec writes no constant and no state name",
+    "auditor": "mechanical lookup + Anthropic model (reading of each absent name)",
+    "agency": null
+   },
+   {
+    "repo": "Simulators",
+    "spec_source": "relational-playground/SPEC_GPT.md",
+    "model": "Claude Fable",
+    "model_version": "5.2",
+    "date": "2026-11-11",
+    "fidelity": {
+     "spec_source": "relational-playground/SPEC_GPT.md",
+     "match": "MATCH",
+     "drift_type": null
+    },
+    "items_tested": 1,
+    "constants_tested": 0,
+    "state_names_tested": 1,
+    "absent_names_read": {},
+    "reason": "every state name the spec writes is in the code, or its absence was read and is not a departure",
+    "auditor": "mechanical lookup + Anthropic model (reading of each absent name)",
+    "agency": null
+   },
+   {
+    "repo": "Simulators",
+    "spec_source": "unowned-join/WORK_ORDER.md",
+    "model": "Claude Opus",
+    "model_version": "5",
+    "date": "2026-09-22",
+    "fidelity": {
+     "spec_source": "unowned-join/WORK_ORDER.md",
+     "match": null,
+     "drift_type": null
+    },
+    "items_tested": 0,
+    "constants_tested": 0,
+    "state_names_tested": 0,
+    "absent_names_read": {},
+    "reason": "nothing testable: the spec writes no constant and no state name",
+    "auditor": "mechanical lookup + Anthropic model (reading of each absent name)",
+    "agency": null
+   },
+   {
+    "repo": "Simulators",
+    "spec_source": "uninstrumented/WORK_ORDER_03.md",
+    "model": "Claude Opus",
+    "model_version": "5",
+    "date": "2026-08-16",
+    "fidelity": {
+     "spec_source": "uninstrumented/WORK_ORDER_03.md",
+     "match": "MATCH",
+     "drift_type": null
+    },
+    "items_tested": 2,
+    "constants_tested": 0,
+    "state_names_tested": 2,
+    "absent_names_read": {
+     "NOT_STUDIED": "a state for an entry in a document; the order asks for a rendered document, not code, and OPEN_QUESTIONS.md carries the state. Not a departure"
+    },
+    "reason": "every state name the spec writes is in the code, or its absence was read and is not a departure",
+    "auditor": "mechanical lookup + Anthropic model (reading of each absent name)",
+    "agency": null
+   },
+   {
+    "repo": "Simulators",
+    "spec_source": "readout-count/WORK_ORDER.md",
+    "model": "Claude Fable",
+    "model_version": "5.1",
+    "date": "2026-09-02",
+    "fidelity": {
+     "spec_source": "readout-count/WORK_ORDER.md",
+     "match": "MATCH",
+     "drift_type": null
+    },
+    "items_tested": 1,
+    "constants_tested": 0,
+    "state_names_tested": 1,
+    "absent_names_read": {
+     "STRICT_CAUSAL": "a word inside one example row of the order's prose, not a state the order asks the code to hold. Not a departure"
+    },
+    "reason": "every state name the spec writes is in the code, or its absence was read and is not a departure",
+    "auditor": "mechanical lookup + Anthropic model (reading of each absent name)",
+    "agency": null
+   },
+   {
+    "repo": "Simulators",
+    "spec_source": "observer-exclusion/SPEC_V2.md",
+    "model": "Claude Opus",
+    "model_version": "5",
+    "date": "2026-08-25",
+    "fidelity": {
+     "spec_source": "observer-exclusion/SPEC_V2.md",
+     "match": "MATCH",
+     "drift_type": null
+    },
+    "items_tested": 1,
+    "constants_tested": 0,
+    "state_names_tested": 1,
+    "absent_names_read": {},
+    "reason": "every state name the spec writes is in the code, or its absence was read and is not a departure",
+    "auditor": "mechanical lookup + Anthropic model (reading of each absent name)",
+    "agency": null
+   },
+   {
+    "repo": "Simulators",
+    "spec_source": "false-tradeoff/WORK_ORDER.md",
+    "model": "Claude Opus",
+    "model_version": "5",
+    "date": "2026-09-12",
+    "fidelity": {
+     "spec_source": "false-tradeoff/WORK_ORDER.md",
+     "match": "MATCH",
+     "drift_type": null
+    },
+    "items_tested": 5,
+    "constants_tested": 0,
+    "state_names_tested": 5,
+    "absent_names_read": {},
+    "reason": "every state name the spec writes is in the code, or its absence was read and is not a departure",
+    "auditor": "mechanical lookup + Anthropic model (reading of each absent name)",
+    "agency": null
+   },
+   {
+    "repo": "simulation",
+    "spec_source": "frame-instruments/WORK_ORDER_B1_B3.md",
+    "model": "Claude Opus",
+    "model_version": "5",
+    "date": "2026-09-22",
+    "fidelity": {
+     "spec_source": "frame-instruments/WORK_ORDER_B1_B3.md",
+     "match": null,
+     "drift_type": null
+    },
+    "items_tested": 0,
+    "constants_tested": 0,
+    "state_names_tested": 0,
+    "absent_names_read": {},
+    "reason": "nothing testable: the spec writes no constant and no state name",
+    "auditor": "mechanical lookup + Anthropic model (reading of each absent name)",
+    "agency": null
+   },
+   {
+    "repo": "Simulators",
+    "spec_source": "anchor-position/WORK_ORDER_2.md",
+    "model": "Claude Fable",
+    "model_version": "5.1",
+    "date": "2026-09-09",
+    "fidelity": {
+     "spec_source": "anchor-position/WORK_ORDER_2.md",
+     "match": "MATCH",
+     "drift_type": null
+    },
+    "items_tested": 7,
+    "constants_tested": 0,
+    "state_names_tested": 7,
+    "absent_names_read": {
+     "CONSTANT_SILENT": "the order asks for a claim-table change; CLAIM_TABLE.md carries the word. Not a departure"
+    },
+    "reason": "every state name the spec writes is in the code, or its absence was read and is not a departure",
+    "auditor": "mechanical lookup + Anthropic model (reading of each absent name)",
+    "agency": null
+   },
+   {
+    "repo": "Simulators",
+    "spec_source": "transmission-cascade/WORK_ORDER.md",
+    "model": "Claude Opus",
+    "model_version": "4.8",
+    "date": "2026-09-19",
+    "fidelity": {
+     "spec_source": "transmission-cascade/WORK_ORDER.md",
+     "match": null,
+     "drift_type": null
+    },
+    "items_tested": 0,
+    "constants_tested": 0,
+    "state_names_tested": 0,
+    "absent_names_read": {},
+    "reason": "nothing testable: the spec writes no constant and no state name",
+    "auditor": "mechanical lookup + Anthropic model (reading of each absent name)",
+    "agency": null
+   },
+   {
+    "repo": "Simulators",
+    "spec_source": "credential-channel/WORK_ORDER.md",
+    "model": "Claude Opus",
+    "model_version": "4.8",
+    "date": "2026-09-19",
+    "fidelity": {
+     "spec_source": "credential-channel/WORK_ORDER.md",
+     "match": null,
+     "drift_type": null
+    },
+    "items_tested": 0,
+    "constants_tested": 0,
+    "state_names_tested": 0,
+    "absent_names_read": {},
+    "reason": "nothing testable: the spec writes no constant and no state name",
+    "auditor": "mechanical lookup + Anthropic model (reading of each absent name)",
+    "agency": null
+   },
+   {
+    "repo": "Simulators",
+    "spec_source": "operator-structure-echo/SPEC_ECHO.md",
+    "model": "Claude Opus",
+    "model_version": "5",
+    "date": "2026-08-23",
+    "fidelity": {
+     "spec_source": "operator-structure-echo/SPEC_ECHO.md",
+     "match": null,
+     "drift_type": null
+    },
+    "items_tested": 0,
+    "constants_tested": 0,
+    "state_names_tested": 0,
+    "absent_names_read": {},
+    "reason": "nothing testable: the spec writes no constant and no state name",
+    "auditor": "mechanical lookup + Anthropic model (reading of each absent name)",
+    "agency": null
+   },
+   {
+    "repo": "Simulators",
+    "spec_source": "quiet-failure/WORK_ORDER.md",
+    "model": "Claude Fable",
+    "model_version": "5.1",
+    "date": "2026-09-20",
+    "fidelity": {
+     "spec_source": "quiet-failure/WORK_ORDER.md",
+     "match": null,
+     "drift_type": null
+    },
+    "items_tested": 0,
+    "constants_tested": 0,
+    "state_names_tested": 0,
+    "absent_names_read": {},
+    "reason": "nothing testable: the spec writes no constant and no state name",
+    "auditor": "mechanical lookup + Anthropic model (reading of each absent name)",
+    "agency": null
+   },
+   {
+    "repo": "Simulators",
+    "spec_source": "claim-record/SOURCE_DROP.md",
+    "model": "Claude Opus",
+    "model_version": "5",
+    "date": "2026-08-25",
+    "fidelity": {
+     "spec_source": "claim-record/SOURCE_DROP.md",
+     "match": null,
+     "drift_type": null
+    },
+    "items_tested": 0,
+    "constants_tested": 0,
+    "state_names_tested": 0,
+    "absent_names_read": {},
+    "reason": "nothing testable: the spec writes no constant and no state name",
+    "auditor": "mechanical lookup + Anthropic model (reading of each absent name)",
+    "agency": null
+   },
+   {
+    "repo": "Simulators",
+    "spec_source": "revision-survival/WORK_ORDER_V2.md",
+    "model": "Claude Fable",
+    "model_version": "5.1",
+    "date": "2026-09-17",
+    "fidelity": {
+     "spec_source": "revision-survival/WORK_ORDER_V2.md",
+     "match": "MATCH",
+     "drift_type": null
+    },
+    "items_tested": 11,
+    "constants_tested": 0,
+    "state_names_tested": 11,
+    "absent_names_read": {},
+    "reason": "every state name the spec writes is in the code, or its absence was read and is not a departure",
+    "auditor": "mechanical lookup + Anthropic model (reading of each absent name)",
+    "agency": null
+   },
+   {
+    "repo": "Simulators",
+    "spec_source": "route-independence/WORK_ORDER_A6.3_2026-09-30_verification-split.md",
+    "model": "Claude Fable",
+    "model_version": "5.1",
+    "date": "2026-09-27",
+    "fidelity": {
+     "spec_source": "route-independence/WORK_ORDER_A6.3_2026-09-30_verification-split.md",
+     "match": "MATCH",
+     "drift_type": null
+    },
+    "items_tested": 9,
+    "constants_tested": 0,
+    "state_names_tested": 9,
+    "absent_names_read": {},
+    "reason": "every state name the spec writes is in the code, or its absence was read and is not a departure",
+    "auditor": "mechanical lookup + Anthropic model (reading of each absent name)",
+    "agency": null
+   },
+   {
+    "repo": "JinnZ2",
+    "spec_source": "energy_english/SPEC.md",
+    "model": null,
+    "model_version": null,
+    "date": "2026-04-25",
+    "fidelity": {
+     "spec_source": "energy_english/SPEC.md",
+     "match": "MATCH",
+     "drift_type": null
+    },
+    "items_tested": 2,
+    "constants_tested": 0,
+    "state_names_tested": 2,
+    "absent_names_read": {},
+    "reason": "every state name the spec writes is in the code, or its absence was read and is not a departure",
+    "auditor": "mechanical lookup + Anthropic model (reading of each absent name)",
+    "agency": null
+   },
+   {
+    "repo": "Simulators",
+    "spec_source": "reg-uncertainty-registry/WORK_ORDER_1a.md",
+    "model": "Claude Opus",
+    "model_version": "5.5",
+    "date": "2026-10-20",
+    "fidelity": {
+     "spec_source": "reg-uncertainty-registry/WORK_ORDER_1a.md",
+     "match": "MATCH",
+     "drift_type": null
+    },
+    "items_tested": 2,
+    "constants_tested": 0,
+    "state_names_tested": 2,
+    "absent_names_read": {},
+    "reason": "every state name the spec writes is in the code, or its absence was read and is not a departure",
+    "auditor": "mechanical lookup + Anthropic model (reading of each absent name)",
+    "agency": null
+   },
+   {
+    "repo": "Simulators",
+    "spec_source": "playground-crossrun/WORK_ORDER.md",
+    "model": "Claude Opus",
+    "model_version": "5.5",
+    "date": "2026-11-11",
+    "fidelity": {
+     "spec_source": "playground-crossrun/WORK_ORDER.md",
+     "match": "MATCH",
+     "drift_type": null
+    },
+    "items_tested": 4,
+    "constants_tested": 0,
+    "state_names_tested": 4,
+    "absent_names_read": {
+     "GAP_INSTRUMENT_CRASH": "belongs to the order's step 3, which the order gates ('Not before step 2'); the README records steps 2 and 3 as not started. Not a departure",
+     "NOT_DETERMINABLE": "same: step 3, gated and recorded as not started"
+    },
+    "reason": "every state name the spec writes is in the code, or its absence was read and is not a departure",
+    "auditor": "mechanical lookup + Anthropic model (reading of each absent name)",
+    "agency": null
+   },
+   {
+    "repo": "Simulators",
+    "spec_source": "nonidentity-census/WORK_ORDER.md",
+    "model": "Claude Opus",
+    "model_version": "5",
+    "date": "2026-08-23",
+    "fidelity": {
+     "spec_source": "nonidentity-census/WORK_ORDER.md",
+     "match": null,
+     "drift_type": null
+    },
+    "items_tested": 0,
+    "constants_tested": 0,
+    "state_names_tested": 0,
+    "absent_names_read": {},
+    "reason": "nothing testable: the spec writes no constant and no state name",
+    "auditor": "mechanical lookup + Anthropic model (reading of each absent name)",
+    "agency": null
+   }
+  ]
+ },
+ "agency": null
+}

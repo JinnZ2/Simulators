@@ -1,0 +1,9 @@
+{
+ "probed_at": "2026-11-27T16:40:35Z",
+ "question": "can a non-Anthropic open model (Gemma or equivalent) be obtained and run locally in this session",
+ "local": {"ollama": "not installed", "llama.cpp binaries": "not installed", "torch": "not installed", "transformers": "not installed", "llama_cpp": "not installed (the package itself can be downloaded from the package index)", "cpus": 4, "memory_gb": 15},
+ "weights_hosts": {"huggingface.co": "CONNECT 403", "ollama.com": "CONNECT 403", "registry.ollama.ai": "CONNECT 403", "ai.google.dev": "CONNECT 403", "kaggle.com": "CONNECT 403", "hf-mirror.com": "CONNECT 403"},
+ "result": "NOT_RUN",
+ "reason": "no model weights can be fetched: every weights host tried is refused by this session's network policy. No mirror was sought past the policy.",
+ "consequence": "no verdict in run 2 is attributed to an independent model. The auditors on record are: the stdlib rerun (mechanical) and an Anthropic model (this session). Agreement between independent auditors: not measured."
+}

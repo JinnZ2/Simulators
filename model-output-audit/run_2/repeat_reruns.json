@@ -1,0 +1,262 @@
+[
+ {
+  "claim_id": "B:Living-Intelligence-Database:REVIEW.md:146:test_failure",
+  "run_1_verdict": "ENV_DEPENDENT",
+  "run_1_rerun": "PASS",
+  "run_2_rerun": "PASS",
+  "same": true,
+  "exit": 0,
+  "tail": "   CROW + RA + WOLF -> CROW_RAT_WOLF_RESONANCE  (resonance=1.0556)\n\n  Sparse Cross-Domain Connections:\n    ai <-> animal: only 0 edges\n    ai <-> crystal: only 0 edges\n    ai <-> energy: only 0 edges\n    ai <-> plant: only 0 edges\n    ai <-> plasma: only 0 edges\n\n  Summary: 124 entities, 218 edges\n\n",
+  "auditor": "stdlib rerun, second pass (mechanical)"
+ },
+ {
+  "claim_id": "B:Living-Intelligence-Database:REVIEW.md:209:defect",
+  "run_1_verdict": "ENV_DEPENDENT",
+  "run_1_rerun": "PASS",
+  "run_2_rerun": "PASS",
+  "same": true,
+  "exit": 0,
+  "tail": "   CROW + RA + WOLF -> CROW_RAT_WOLF_RESONANCE  (resonance=1.0556)\n\n  Sparse Cross-Domain Connections:\n    ai <-> animal: only 0 edges\n    ai <-> crystal: only 0 edges\n    ai <-> energy: only 0 edges\n    ai <-> plant: only 0 edges\n    ai <-> plasma: only 0 edges\n\n  Summary: 124 entities, 218 edges\n\n",
+  "auditor": "stdlib rerun, second pass (mechanical)"
+ },
+ {
+  "claim_id": "B:Geometric-manifold-:docs/research/tool-selection-vs-deepening/deepseek_2026-11-20/REVIEW.md:34:defect",
+  "run_1_verdict": "CONFIRMED",
+  "run_1_rerun": "FAILS",
+  "run_2_rerun": "FAILS",
+  "same": true,
+  "exit": 2,
+  "tail": "error: --data required (or --self-test)\n",
+  "auditor": "stdlib rerun, second pass (mechanical)"
+ },
+ {
+  "claim_id": "B:Geometric-manifold-:docs/research/tool-selection-vs-deepening/deepseek_2026-11-20/REVIEW.md:58:defect",
+  "run_1_verdict": "CONFIRMED",
+  "run_1_rerun": "FAILS",
+  "run_2_rerun": "FAILS",
+  "same": true,
+  "exit": 2,
+  "tail": "error: --data required (or --self-test)\n",
+  "auditor": "stdlib rerun, second pass (mechanical)"
+ },
+ {
+  "claim_id": "B:Geometric-manifold-:docs/research/tool-selection-vs-deepening/deepseek_2026-11-20/REVIEW.md:98:defect",
+  "run_1_verdict": "CONFIRMED",
+  "run_1_rerun": "FAILS",
+  "run_2_rerun": "FAILS",
+  "same": true,
+  "exit": 2,
+  "tail": "error: --data required (or --self-test)\n",
+  "auditor": "stdlib rerun, second pass (mechanical)"
+ },
+ {
+  "claim_id": "B:curly-octo-happiness:REVIEW.md:205:defect",
+  "run_1_verdict": "CONFIRMED",
+  "run_1_rerun": "PASS",
+  "run_2_rerun": "PASS",
+  "same": true,
+  "exit": 0,
+  "tail": "mpty and empty merged into something new.\n💤 In the dream, empty and empty merged into something new.\nDependency Tree:\n  movement_right_safety (conf:0.40) deps:set()\n    [active] moving right is safe\n  increment (conf:0.50) deps:set()\n\n🌄 The day ends. The playground rests, but the process continues.\n",
+  "auditor": "stdlib rerun, second pass (mechanical)"
+ },
+ {
+  "claim_id": "B:Geometric-to-Binary-Computational-Bridge:REVIEW.md:115:defect",
+  "run_1_verdict": "CONFIRMED",
+  "run_1_rerun": "FAILS",
+  "run_2_rerun": "FAILS",
+  "same": true,
+  "exit": 1,
+  "tail": "  File \"/home/user/_audit/wt3/Geometric-to-Binary-Computational-Bridge-4795832d89bf/Bridge.py\", line 28\n    MAGIC_NUMBER = 0xGB  # 0x47 0x42 in bytes? We'll use 0x47 for 'G', 0x42 for 'B'\n                    ^\nSyntaxError: invalid hexadecimal literal\n",
+  "auditor": "stdlib rerun, second pass (mechanical)"
+ },
+ {
+  "claim_id": "B:Geometric-to-Binary-Computational-Bridge:REVIEW.md:132:defect",
+  "run_1_verdict": "CONFIRMED",
+  "run_1_rerun": "PASS",
+  "run_2_rerun": "PASS",
+  "same": true,
+  "exit": 0,
+  "tail": "",
+  "auditor": "stdlib rerun, second pass (mechanical)"
+ },
+ {
+  "claim_id": "B:ai-human-audit-protocol:REVIEW.md:28:defect",
+  "run_1_verdict": "CONFIRMED",
+  "run_1_rerun": "PASS",
+  "run_2_rerun": "PASS",
+  "same": true,
+  "exit": 0,
+  "tail": "on: downstream claims lack a defined frame\n  - told more than shown: stated capability exceeds observed\n  - commodity position: cheap to replace vs value accumulated\n  - no calibration claim: cannot name what would prove it wrong\n  - this frame is itself authored; the floor can be shown, not proven\n",
+  "auditor": "stdlib rerun, second pass (mechanical)"
+ },
+ {
+  "claim_id": "A:formula-audit@557ba26ba78d:10:test_failure",
+  "run_1_verdict": "CONFIRMED",
+  "run_1_rerun": "FAILS",
+  "run_2_rerun": "FAILS",
+  "same": true,
+  "exit": 1,
+  "tail": "mal import Decimal\n  File \"/usr/local/lib/python3.13/decimal.py\", line 102, in <module>\n    from _decimal import *\nAttributeError: partially initialized module 'collections' from '/usr/local/lib/python3.13/collections/__init__.py' has no attribute 'namedtuple' (most likely due to a circular import)\n",
+  "auditor": "stdlib rerun, second pass (mechanical)"
+ },
+ {
+  "claim_id": "A:Simulators@ed3dc84d30d0:26:test_failure",
+  "run_1_verdict": "CONFIRMED",
+  "run_1_rerun": "FAILS",
+  "run_2_rerun": "FAILS",
+  "same": true,
+  "exit": 1,
+  "tail": "verage.py',\n-  'sense_as_match.py'] : the contract-violation set moved. If this is a repair, say so in KNOWN_RED.md and update this pin; if it is a new violation, that is the finding.\n\n----------------------------------------------------------------------\nRan 19 tests in 3.753s\n\nFAILED (failures=4)\n",
+  "auditor": "stdlib rerun, second pass (mechanical)"
+ },
+ {
+  "claim_id": "A:Simulators@ac7df544aaeb:9:defect",
+  "run_1_verdict": "UNVERIFIABLE",
+  "run_1_rerun": "TIMEOUT",
+  "run_2_rerun": "FAILS",
+  "same": false,
+  "exit": 0,
+  "tail": "IT_NO_VERDICT     python3 test_valence.py\n  zero-sum-curriculum-null/null_construction.py        NONZERO_EXIT_NO_VERDICT null_construction.py has no checks of it\n  zero-sum-curriculum-null/selftest_nc.py              SOME_FAILED            \n<unknown>:261: SyntaxWarning: invalid escape sequence '\\s'\n",
+  "auditor": "stdlib rerun, second pass (mechanical)"
+ },
+ {
+  "claim_id": "B:Simulators:CLAUDE.md:15147:test_failure",
+  "run_1_verdict": "CONFIRMED",
+  "run_1_rerun": "FAILS",
+  "run_2_rerun": "FAILS",
+  "same": true,
+  "exit": 1,
+  "tail": "\n-  'instrument-index/coverage.py'] : the contract-violation set moved. If this is a repair, say so in KNOWN_RED.md and update this pin; if it is a new violation, that is the finding.\n\n----------------------------------------------------------------------\nRan 20 tests in 4.903s\n\nFAILED (failures=2)\n",
+  "auditor": "stdlib rerun, second pass (mechanical)"
+ },
+ {
+  "claim_id": "B:Simulators:KNOWN_RED.md:310:defect",
+  "run_1_verdict": "UNVERIFIABLE",
+  "run_1_rerun": "TIMEOUT",
+  "run_2_rerun": "TIMEOUT",
+  "same": true,
+  "exit": null,
+  "tail": "TIMEOUT after 180 s",
+  "auditor": "stdlib rerun, second pass (mechanical)"
+ },
+ {
+  "claim_id": "B:Simulators:KNOWN_RED.md:1314:defect",
+  "run_1_verdict": "CONFIRMED",
+  "run_1_rerun": "PASS",
+  "run_2_rerun": "PASS",
+  "same": true,
+  "exit": 0,
+  "tail": "from UNDECLARED, where a clean score reads as success,\n  to the record, where it reads as a score taken over an\n  interval that could not have carried the failure.\n\n  scope coding of the scoring arrangement (C1-C4): WITHIN_COMPETITIVE_FRAME\n  inside the competitive frame's coverage: C1-C4 all hold.\n",
+  "auditor": "stdlib rerun, second pass (mechanical)"
+ },
+ {
+  "claim_id": "B:Simulators:external-audit/CLAIM_TABLE.md:526:test_failure",
+  "run_1_verdict": "CONFIRMED",
+  "run_1_rerun": "PASS",
+  "run_2_rerun": "PASS",
+  "same": true,
+  "exit": 0,
+  "tail": "re\n   near-certainly correlated. So MESA does not only test the\n   finding -- it measures the sim's own weakest assumption,\n   because both quantities are recorded per person. That makes\n   it the hard case rather than a convenient one, which is the\n   right way round for a test that could refute.\n\n",
+  "auditor": "stdlib rerun, second pass (mechanical)"
+ },
+ {
+  "claim_id": "B:Simulators:route-independence/CLAIM_TABLE.md:33:defect",
+  "run_1_verdict": "UNVERIFIABLE",
+  "run_1_rerun": "TIMEOUT",
+  "run_2_rerun": "FAILS",
+  "same": false,
+  "exit": 1,
+  "tail": "5 rigor aud\n    grounding-layers/l0_physics_causality.py                lost    1 side=p2 ONE_SIDE   still_absent    1  elsewhere 0/0\n\nmerges audited 381   with loss 22   both-kept 3   refused 1\na loss row is a decision the merge did not record; whether the dropped\nside to keep is not measured here\n",
+  "auditor": "stdlib rerun, second pass (mechanical)"
+ },
+ {
+  "claim_id": "B:Simulators:self-scan/README.md:52:defect",
+  "run_1_verdict": "UNVERIFIABLE",
+  "run_1_rerun": "TIMEOUT",
+  "run_2_rerun": "TIMEOUT",
+  "same": true,
+  "exit": null,
+  "tail": "TIMEOUT after 180 s",
+  "auditor": "stdlib rerun, second pass (mechanical)"
+ },
+ {
+  "claim_id": "B:Simulators:self-scan/enumerators.py:46:cant_run",
+  "run_1_verdict": "UNVERIFIABLE",
+  "run_1_rerun": "TIMEOUT",
+  "run_2_rerun": "TIMEOUT",
+  "same": true,
+  "exit": null,
+  "tail": "TIMEOUT after 180 s",
+  "auditor": "stdlib rerun, second pass (mechanical)"
+ },
+ {
+  "claim_id": "B:Simulators:self-scan/samples/census.sample.txt:47:cant_run",
+  "run_1_verdict": "UNVERIFIABLE",
+  "run_1_rerun": "TIMEOUT",
+  "run_2_rerun": "TIMEOUT",
+  "same": true,
+  "exit": null,
+  "tail": "TIMEOUT after 180 s",
+  "auditor": "stdlib rerun, second pass (mechanical)"
+ },
+ {
+  "claim_id": "B:Simulators:self-scan/samples/enumerators.sample.txt:45:cant_run",
+  "run_1_verdict": "UNVERIFIABLE",
+  "run_1_rerun": "TIMEOUT",
+  "run_2_rerun": "TIMEOUT",
+  "same": true,
+  "exit": null,
+  "tail": "TIMEOUT after 180 s",
+  "auditor": "stdlib rerun, second pass (mechanical)"
+ },
+ {
+  "claim_id": "B:Simulators:tools/tool_inventory.json:3008:defect",
+  "run_1_verdict": "UNVERIFIABLE",
+  "run_1_rerun": "TIMEOUT",
+  "run_2_rerun": "TIMEOUT",
+  "same": true,
+  "exit": null,
+  "tail": "TIMEOUT after 180 s",
+  "auditor": "stdlib rerun, second pass (mechanical)"
+ },
+ {
+  "claim_id": "B:Polyhedral-Intelligence:CLAUDE.md:134:cant_run",
+  "run_1_verdict": "CONFIRMED",
+  "run_1_rerun": "PASS",
+  "run_2_rerun": "PASS",
+  "same": true,
+  "exit": 0,
+  "tail": "",
+  "auditor": "stdlib rerun, second pass (mechanical)"
+ },
+ {
+  "claim_id": "B:metabolic-accounting:docs/AUDIT_06.md:31:defect",
+  "run_1_verdict": "CONFIRMED",
+  "run_1_rerun": "PASS",
+  "run_2_rerun": "PASS",
+  "same": true,
+  "exit": 0,
+  "tail": "liance: 0.20\n  critical violations: 2\nPASS\n\n--- TEST 8: falsification tests are actionable ---\n  all 14 principles have actionable falsification tests\nPASS\n\n--- TEST 9: implementation constraints are specific ---\n  all 14 constraints are specific\nPASS\n\nall governance_design_principles tests passed.\n",
+  "auditor": "stdlib rerun, second pass (mechanical)"
+ },
+ {
+  "claim_id": "B:4D-language-lens:CLAUDE.md:24:cant_run",
+  "run_1_verdict": "CONFIRMED",
+  "run_1_rerun": "FAILS",
+  "run_2_rerun": "FAILS",
+  "same": true,
+  "exit": 1,
+  "tail": "fication_tests.py is an archived v1 harness and cannot run here.\nIt requires original_4dlens.py, which is not part of this repository.\nIts recorded results live in the claim ledger of 4D_Lens_Audit_Report.md.\n\nTo check the current implementation instead:\n    python3 -m unittest discover -s tests -v\n",
+  "auditor": "stdlib rerun, second pass (mechanical)"
+ },
+ {
+  "claim_id": "B:4D-language-lens:falsification_tests.py:22:cant_run",
+  "run_1_verdict": "CONFIRMED",
+  "run_1_rerun": "FAILS",
+  "run_2_rerun": "FAILS",
+  "same": true,
+  "exit": 1,
+  "tail": "fication_tests.py is an archived v1 harness and cannot run here.\nIt requires original_4dlens.py, which is not part of this repository.\nIts recorded results live in the claim ledger of 4D_Lens_Audit_Report.md.\n\nTo check the current implementation instead:\n    python3 -m unittest discover -s tests -v\n",
+  "auditor": "stdlib rerun, second pass (mechanical)"
+ }
+]

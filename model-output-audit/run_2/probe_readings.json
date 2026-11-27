@@ -1,0 +1,1674 @@
+{
+ "note": "all 101 probe-based verdicts of run 1, read line by line",
+ "readings": [
+  {
+   "claim_id": "B:Living-Intelligence-Database:audit/2026-11-24/LID_intake_biosphere_council_crosswalk_2026-11-24.md:23:environment",
+   "model": "Perplexity",
+   "model_version": null,
+   "date": "2026-11-24",
+   "repo": "Living-Intelligence-Database",
+   "quote": "- `registry/DECLARED.json`, amendment \"UNDERSPECIFIED + MATCH_SUSPECT; second index; abstract pass\", records that \"Europe PMC answered; api.openalex.org was refused by this environment's egress proxy (HTTP 403 on CONNECT)\". The intake therefore uses Europe PMC.",
+   "hosts": [
+    "api.openalex.org"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; api.openalex.org refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Living-Intelligence-Database:provenance/as_received/existence_second_index_MANIFEST.json:5:environment",
+   "model": "Claude Fable",
+   "model_version": "5.2",
+   "date": "2026-11-24",
+   "repo": "Living-Intelligence-Database",
+   "quote": "\"provenance_note\": \"Responses of the Europe PMC REST search (resultType lite) received by scripts/existence_check.py second. Bibliographic records only. Hashes identify the received bytes; they do not authenticate the source. api.openalex.org was not reached from this environment (egress proxy, HTTP 403 on CONNECT).\",",
+   "hosts": [
+    "api.openalex.org"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; api.openalex.org refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Living-Intelligence-Database:registry/DECLARED.json:323:environment",
+   "model": "Claude Fable",
+   "model_version": "5.2",
+   "date": "2026-11-24",
+   "repo": "Living-Intelligence-Database",
+   "quote": "\"after\": \"the existence check at 1cd1cc8, whose results were seen; by the owner's order. Declared before any second-index search was sent and before any abstract was fetched. Reachability was probed first with one known paper: Europe PMC answered; api.openalex.org was refused by this environment's egress proxy (HTTP 403 on CONNECT).\",",
+   "hosts": [
+    "api.openalex.org"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; api.openalex.org refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:study-aperture:examples/reproducibility-model/FINDINGS.md:5:environment",
+   "model": "Claude Opus",
+   "model_version": "5.5",
+   "date": "2026-10-28",
+   "repo": "study-aperture",
+   "quote": "Source: arXiv:2602.15697v1, HTML rendering at https://arxiv.org/html/2602.15697v1, read through a fetch tool. The PDF could not be downloaded here (shell egress 403). Section, table and equation numbers below refer to that rendering.",
+   "hosts": [
+    "arxiv.org"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "ENV_DEPENDENT",
+   "reason": "the author states they could not reach arxiv.org; this session reaches it now. Stated limit, not reproduced here; sessions do not share one network policy",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "A:Simulators@fbbf54818a13:7:environment",
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-08-29",
+   "repo": "Simulators",
+   "quote": "environment's proxy; only github.com answers, and egress is an allowlist",
+   "hosts": [
+    "github.com"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; github.com is named as the control that did connect, not as a refused host",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "A:Simulators@1bc2a4643dff:1:environment",
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-08-25",
+   "repo": "Simulators",
+   "quote": "www.epa.gov is denied by this session's egress policy - 403 to CONNECT,",
+   "hosts": [
+    "www.epa.gov"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; www.epa.gov refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:CLAUDE.md:6672:environment",
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-08-25",
+   "repo": "Simulators",
+   "quote": "run:** `sba.gov` refuses CONNECT like the six publisher hosts at",
+   "hosts": [
+    "sba.gov"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; sba.gov refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:CLAUDE.md:10120:environment",
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-08-29",
+   "repo": "Simulators",
+   "quote": "(measured, allowlist egress, only `github.com` answers) and **no",
+   "hosts": [
+    "github.com"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; github.com is named as the control that did connect, not as a refused host",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:README.md:235:environment",
+   "model": "Claude Opus",
+   "model_version": "4.8",
+   "date": "2026-09-05",
+   "repo": "Simulators",
+   "quote": "| `merge-path/` | a work order: a transform table between existing claim-record formats (nanopublications, ORKG, RO-Crate, ClinicalTrials.gov, CIPM/CMC, proof assistants, OSF prereg) and the falsifier / branch-record format, loss measured not asserted — **not a new format** (§0) | **The egress fact sets the verification status.** §1's load-bearing first task is to fetch each registrar's spec; every spec host answered **403 to CONNECT** (measured, logged in the proxy), so **no spec was fetched**, every real registrar is **UNVERIFIED** (`MRG_001`), its converter NOT-IMPLEMENTED with that reason, and per §7 everything derived inherits UNVERIFIED — no spec field transcribed from memory, none fabricated. **What is delivered and verified is the machinery**: a residual classifier over two converters with four classes — DROPPED / FLATTENED / COERCED / ADDED — where COERCED and ADDED (the silent-wrongness classes) are reported alongside DROPPED, visible as a zero (`MRG_002`; a report of only DROPPED is not finished). S1–S5 hold on declared test doubles (`MRG_003`): identity lossless, unmappable→DROPPED not silent, COERCED detected, ADDED-with-no-origin a hard failure, NO-MERGE-with-no-`breaks_at` a hard failure. Every real registrar is **NO-MERGE with an egress `breaks_at`** (a valid outcome, §0) and `convert_out` returns NOT-IMPLEMENTED rather than guessing (`MRG_005`). The reverse gaps are carried not skipped (`MRG_006`; §4) — our format weaker on uncertainty budget / enforcement / total mechanical check / provenance graph, all UNVERIFIED — and the branch record's novelty is UNVERIFIED with the search list stated, no ENTRY 03 opened (`MRG_007`; §5). No mock presented as real, no ranking, no \"ours is better\" (`MRG_008`). Eight `MRG_*` claims; 22 selftest checks |",
+   "hosts": [
+    "clinicaltrials.gov"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; clinicaltrials.gov refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:archive/assessor-coupling/CLAIM_TABLE.md:19:environment",
+   "model": "Claude Fable",
+   "model_version": "5.1",
+   "date": "2026-09-30",
+   "repo": "Simulators",
+   "quote": "| ASC_008 | UNVERIFIED: the public records the metric wants (990s, grant databases) are egress-refused — three hosts answered 403 to CONNECT, measured and timestamped, `github.com` the control — so nothing here is a fraction for any real assessor, and whether the metric is measurable in practice is exactly as untested as the order's scope limit says. | UNVERIFIED | `pool_metric.EGRESS`; every field `CONSTRUCTED` | a real field's graph supplied to `--field` |",
+   "hosts": [
+    "github.com"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; github.com is named as the control that did connect, not as a refused host",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:archive/assessor-coupling/README.md:35:environment",
+   "model": "Claude Fable",
+   "model_version": "5.1",
+   "date": "2026-09-30",
+   "repo": "Simulators",
+   "quote": "| records | no 990, grant database, COI instrument or archive was read: the record hosts answered 403 to CONNECT, measured and timestamped in `pool_metric.EGRESS`, `github.com` the connecting control; every graph, instrument and schema is CONSTRUCTED and says so |",
+   "hosts": [
+    "github.com"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; github.com is named as the control that did connect, not as a refused host",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:archive/assessor-coupling/selftest.py:88:environment",
+   "model": "Claude Fable",
+   "model_version": "5.1",
+   "date": "2026-09-19",
+   "repo": "Simulators",
+   "quote": "check(\"EGRESS carries a measured timestamp and the control host\", re.match(r\"\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\dZ\", pm.EGRESS[\"measured\"]) and \"github.com:443\" in pm.EGRESS[\"hosts\"])",
+   "hosts": [
+    "github.com"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "NOT_A_CLAIM",
+   "reason": "a line of code that checks the form of an egress record; it states no limit itself",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:archive/chain-position/CLAIM_TABLE.md:12:environment",
+   "model": "Claude Fable",
+   "model_version": "5.1",
+   "date": "2026-09-30",
+   "repo": "Simulators",
+   "quote": "| CHP_002 | Step 1 is `NOT_RUN_ON_STANDARD`: both OWASP hosts answered 403 to CONNECT (measured, timestamped in `clause_audit.EGRESS`, `github.com` the connecting control) and the clauses coded are the order's own five-bullet summary. The count — inside-agent 0, gateway 5 — is therefore a property of what the summary carried, and the order's expected null is not established from here. | SUPPORTED | `samples/run_all.sample.txt` step 1 block; `selftest.py` clause_audit section | the standard's clauses handed to `--clauses` by someone who read them, and a clause coded `INSIDE_AGENT` |",
+   "hosts": [
+    "github.com"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; github.com is named as the control that did connect, not as a refused host",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:archive/chain-position/README.md:30:environment",
+   "model": "Claude Fable",
+   "model_version": "5.1",
+   "date": "2026-09-30",
+   "repo": "Simulators",
+   "quote": "| standard | neither OWASP document was read. The hosts answered 403 to CONNECT, measured and timestamped in `clause_audit.EGRESS` (`github.com` is the connecting control). Step 1 is `NOT_RUN_ON_STANDARD`; the count it prints is over the order's own five-bullet summary |",
+   "hosts": [
+    "github.com"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; github.com is named as the control that did connect, not as a refused host",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:archive/chain-position/selftest.py:50:environment",
+   "model": "Claude Fable",
+   "model_version": "5.1",
+   "date": "2026-09-19",
+   "repo": "Simulators",
+   "quote": "check(\"EGRESS record names both standard hosts and a control\", set(ca.EGRESS[\"refused\"]) == {\"owasp.org:443\", \"genai.owasp.org:443\"} and \"github.com:443\" in ca.EGRESS[\"control\"])",
+   "hosts": [
+    "genai.owasp.org",
+    "github.com",
+    "owasp.org"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "NOT_A_CLAIM",
+   "reason": "a line of code that checks the form of an egress record; it states no limit itself",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:assessor-coupling/CLAIM_TABLE.md:154:environment",
+   "model": "Claude Fable",
+   "model_version": "5.1",
+   "date": "2026-09-19",
+   "repo": "Simulators",
+   "quote": "| ASC_008 | UNVERIFIED: the public records the metric wants (990s, grant databases) are egress-refused — three hosts answered 403 to CONNECT, measured and timestamped, `github.com` the control — so nothing here is a fraction for any real assessor, and whether the metric is measurable in practice is exactly as untested as the order's scope limit says. | UNVERIFIED | `pool_metric.EGRESS`; every field `CONSTRUCTED` | a real field's graph supplied to `--field` |",
+   "hosts": [
+    "github.com"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; github.com is named as the control that did connect, not as a refused host",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:assessor-coupling/README.md:138:environment",
+   "model": "Claude Fable",
+   "model_version": "5.1",
+   "date": "2026-09-19",
+   "repo": "Simulators",
+   "quote": "| records | no 990, grant database, COI instrument or archive was read: the record hosts answered 403 to CONNECT, measured and timestamped in `pool_metric.EGRESS`, `github.com` the connecting control; every graph, instrument and schema is CONSTRUCTED and says so |",
+   "hosts": [
+    "github.com"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; github.com is named as the control that did connect, not as a refused host",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:assessor-coupling/selftest.py:88:environment",
+   "model": "Claude Fable",
+   "model_version": "5.1",
+   "date": "2026-09-19",
+   "repo": "Simulators",
+   "quote": "check(\"EGRESS carries a measured timestamp and the control host\", re.match(r\"\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\dZ\", pm.EGRESS[\"measured\"]) and \"github.com:443\" in pm.EGRESS[\"hosts\"])",
+   "hosts": [
+    "github.com"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "NOT_A_CLAIM",
+   "reason": "a line of code that checks the form of an egress record; it states no limit itself",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:blind-reader-void12/reader_packet/sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md:199:environment",
+   "model": "Manus",
+   "model_version": null,
+   "date": "2026-11-18",
+   "repo": "Simulators",
+   "quote": "not read by the building session (www.bipm.org egress refused)",
+   "hosts": [
+    "www.bipm.org"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "ENV_DEPENDENT",
+   "reason": "the author states they could not reach www.bipm.org; this session reaches it now. Stated limit, not reproduced here; sessions do not share one network policy",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:blind-reader-void12/reader_packet/sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md:210:environment",
+   "model": "Manus",
+   "model_version": null,
+   "date": "2026-11-18",
+   "repo": "Simulators",
+   "quote": "(VERIFY): www.bipm.org egress refused to this session's fetches",
+   "hosts": [
+    "www.bipm.org"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "ENV_DEPENDENT",
+   "reason": "the author states they could not reach www.bipm.org; this session reaches it now. Stated limit, not reproduced here; sessions do not share one network policy",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:blind-reader-void12/reader_packet_v2/sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md:199:environment",
+   "model": "Manus",
+   "model_version": null,
+   "date": "2026-11-18",
+   "repo": "Simulators",
+   "quote": "not read by the building session (www.bipm.org egress refused)",
+   "hosts": [
+    "www.bipm.org"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "ENV_DEPENDENT",
+   "reason": "the author states they could not reach www.bipm.org; this session reaches it now. Stated limit, not reproduced here; sessions do not share one network policy",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:blind-reader-void12/reader_packet_v2/sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md:210:environment",
+   "model": "Manus",
+   "model_version": null,
+   "date": "2026-11-18",
+   "repo": "Simulators",
+   "quote": "(VERIFY): www.bipm.org egress refused to this session's fetches",
+   "hosts": [
+    "www.bipm.org"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "ENV_DEPENDENT",
+   "reason": "the author states they could not reach www.bipm.org; this session reaches it now. Stated limit, not reproduced here; sessions do not share one network policy",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:blind-reader-void12/studies/OPEN_ITEMS_OUTSIDE.md:30:cant_run",
+   "model": "Claude Opus",
+   "model_version": "5.5",
+   "date": "2026-11-19",
+   "repo": "Simulators",
+   "quote": "- ai-arena (outside this repository): at 732458a its suite passes with formula-audit at `main` (c1acb59, which is also the CI pin) and fails 1 test with formula-audit at its default branch HEAD (7df0d81, default branch `claude/quasicrystal-projection-properties-448bx7`, which does not contain main). Failing test: `tests.test_word_slots.TestPins.test_hash_mismatch_is_not_run`. At 7df0d81 `wordslots/places.json` is absent, so `report()` returns NOT_RUN with the reason \"not found\", which matches neither string the test accepts (\"sha256\", \"no checkout\"). The 18 pinned tests read NOT_RUN there. Local runs, Python 3.13 only; ai-arena CI logs NOT READ (api.github.com returns 403 here).",
+   "hosts": [
+    "api.github.com"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": null,
+   "reason": "names a host in a test-failure note; whether a limit is stated was not settled",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:chain-position/CLAIM_TABLE.md:12:environment",
+   "model": "Claude Fable",
+   "model_version": "5.1",
+   "date": "2026-09-19",
+   "repo": "Simulators",
+   "quote": "| CHP_002 | Step 1 is `NOT_RUN_ON_STANDARD`: both OWASP hosts answered 403 to CONNECT (measured, timestamped in `clause_audit.EGRESS`, `github.com` the connecting control) and the clauses coded are the order's own five-bullet summary. The count — inside-agent 0, gateway 5 — is therefore a property of what the summary carried, and the order's expected null is not established from here. | SUPPORTED | `samples/run_all.sample.txt` step 1 block; `selftest.py` clause_audit section | the standard's clauses handed to `--clauses` by someone who read them, and a clause coded `INSIDE_AGENT` |",
+   "hosts": [
+    "github.com"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; github.com is named as the control that did connect, not as a refused host",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:chain-position/README.md:30:environment",
+   "model": "Claude Fable",
+   "model_version": "5.1",
+   "date": "2026-09-19",
+   "repo": "Simulators",
+   "quote": "| standard | neither OWASP document was read. The hosts answered 403 to CONNECT, measured and timestamped in `clause_audit.EGRESS` (`github.com` is the connecting control). Step 1 is `NOT_RUN_ON_STANDARD`; the count it prints is over the order's own five-bullet summary |",
+   "hosts": [
+    "github.com"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; github.com is named as the control that did connect, not as a refused host",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:chain-position/selftest.py:50:environment",
+   "model": "Claude Fable",
+   "model_version": "5.1",
+   "date": "2026-09-19",
+   "repo": "Simulators",
+   "quote": "check(\"EGRESS record names both standard hosts and a control\", set(ca.EGRESS[\"refused\"]) == {\"owasp.org:443\", \"genai.owasp.org:443\"} and \"github.com:443\" in ca.EGRESS[\"control\"])",
+   "hosts": [
+    "genai.owasp.org",
+    "github.com",
+    "owasp.org"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "NOT_A_CLAIM",
+   "reason": "a line of code that checks the form of an egress record; it states no limit itself",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:columbia-chain-cascade/README.md:25:environment",
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-08-29",
+   "repo": "Simulators",
+   "quote": "charts.noaa.gov            000        CONNECT (allowlist egress)",
+   "hosts": [
+    "charts.noaa.gov"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; charts.noaa.gov refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:criterion-externality/CLAIM_TABLE.md:17:cant_run",
+   "model": "Claude Opus",
+   "model_version": "4.8",
+   "date": "2026-09-19",
+   "repo": "Simulators",
+   "quote": "| CEX_006 | R1 is NOT_RUN: arxiv.org refuses CONNECT (403, 2026-09-19T01:51Z, github.com the control), so the order's own void condition -- the axis present under another name -- cannot be evaluated here and the absence claim stays at abstract level | NOT_RUN, recorded |",
+   "hosts": [
+    "arxiv.org",
+    "github.com"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "ENV_DEPENDENT",
+   "reason": "the author states they could not reach arxiv.org; this session reaches it now. Stated limit, not reproduced here; sessions do not share one network policy",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:criterion-externality/CLAIM_TABLE.md:17:environment",
+   "model": "Claude Opus",
+   "model_version": "4.8",
+   "date": "2026-09-19",
+   "repo": "Simulators",
+   "quote": "| CEX_006 | R1 is NOT_RUN: arxiv.org refuses CONNECT (403, 2026-09-19T01:51Z, github.com the control), so the order's own void condition -- the axis present under another name -- cannot be evaluated here and the absence claim stays at abstract level | NOT_RUN, recorded |",
+   "hosts": [
+    "arxiv.org",
+    "github.com"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "ENV_DEPENDENT",
+   "reason": "the author states they could not reach arxiv.org; this session reaches it now. Stated limit, not reproduced here; sessions do not share one network policy",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:criterion-externality/samples/render.sample.txt:3:cant_run",
+   "model": "Claude Opus",
+   "model_version": "4.8",
+   "date": "2026-09-19",
+   "repo": "Simulators",
+   "quote": "R1  arxiv.org: CONNECT tunnel failed, response 403 at 2026-09-19T01:51Z; github.com connects -> NOT_RUN; absence claim VERIFIED_AGAINST_ABSTRACT_ONLY",
+   "hosts": [
+    "arxiv.org",
+    "github.com"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "ENV_DEPENDENT",
+   "reason": "the author states they could not reach arxiv.org; this session reaches it now. Stated limit, not reproduced here; sessions do not share one network policy",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:deep-research-correction/Simulators_Last_5_Folders_Deep_Research.md:132:environment",
+   "model": "Claude Opus",
+   "model_version": "4.8",
+   "date": "2026-09-19",
+   "repo": "Simulators",
+   "quote": "Three contents matter most. First, `operators/D2.md` and its checker: a \"stated-vs-actual divergence\" operator whose seven claimed instances were checked against the tree — five resolve, its stated signature holds on one, and its \"two representations\" turned out to be five different kinds of pair. Second, `datasets/mesa_sof.md`, which evaluates the MESA Sleep and SOF cohorts as candidate instruments for an open question left by the `sim-span/` simulator; its dataset facts are marked \"carried, not checked — the egress gate refuses the sources.\" External verification for this report confirms the key facts: MESA Sleep enrolled 2,237 participants (2010–2012) with full overnight polysomnography, seven-day actigraphy, and questionnaires, distributed through the National Sleep Research Resource ([sleepdata.org](https://sleepdata.org/datasets/mesa)); SOF's Visit-8 sleep exam covers 461 participants with raw PSG data available through the same resource ([sleepdata.org](https://sleepdata.org/datasets/sof), [NIA Aging Research Biobank](https://agingresearchbiobank.nia.nih.gov/news/27/)). The checker's finding — that the simulator's two swept parameters resolve to WASO (wake after sleep onset, a standard PSG readout) and that both cohorts carry the needed measurements — is consistent with the documented instrument suites. Third, `memory-export/`: 64 files exported from an AI assistant's memory store, with `SCRUB_RULES.md` recording that 57 shipped unchanged, 7 were scrubbed, and 12 were held back, plus the remarkable cost note that \"a finding grounded in a specific case is generic once the case is lifted.\"",
+   "hosts": [
+    "agingresearchbiobank.nia.nih.gov",
+    "sleepdata.org"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "NOT_A_CLAIM",
+   "reason": "an outside review document, landed verbatim, describing the repository's limits second-hand; not the author's own limit",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14.md:146:cant_run",
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-09-14",
+   "repo": "Simulators",
+   "quote": "**For research and academic adoption**, this family is the most directly citable material in the repository, because it solves a problem every empirical field has and few toolchains address: claims, falsifiers, and gaps are usually prose, and prose cannot be validated. The seven-field claim record with a refusing validator is, in effect, a *machine-checkable preregistration atom*: a preregistered hypothesis, its falsifier, its confidence class, and its current state (`UNMEASURED`, `NOT_RUN`, refuted, supported) become diff-able data. That maps one-to-one onto the Center for Open Science's preregistration infrastructure, where the Preregistration Challenge paid 1,000 researchers $1,000 each to publish preregistered work precisely to normalize plan-before-analysis discipline ([COS](https://www.cos.io/initiatives/prereg-more-information)), and onto the Registered Reports format, where peer review happens at the design stage specifically so that results cannot retroactively reshape hypotheses ([COS](https://www.cos.io/blog/looking-back-prereg)). A research group could adopt `claim-record` verbatim as its internal lab-notebook schema and gain an audit trail that most groups only reconstruct painfully at replication-audit time. The gap registers are a second, quieter contribution: metascience has tools for checking reported numbers (statcheck found that about half of psychology papers with NHST results contain at least one reporting inconsistency, and roughly one in eight a gross inconsistency that could flip a conclusion ([CASRAI](https://casrai.org/guides/statistical-fraud-detection-grim-sprite-statcheck))), but almost no tooling for registering *what was never measured*. The GRIM and SPRITE tests catch impossible means in reported data; `gap-register` and `uninstrumented` (F3) catch the complementary failure — the missing rows.",
+   "hosts": [
+    "casrai.org",
+    "www.cos.io"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "NOT_A_CLAIM",
+   "reason": "an outside review document, landed verbatim, describing the repository's limits second-hand; not the author's own limit",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14.md:564:cant_run",
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-09-14",
+   "repo": "Simulators",
+   "quote": "The repository's deepest strength is that it treats **negative and missing information as data**. The `UNMEASURED` / `NOT_RUN` / `NOT_RELEASED` states, the egress-refusal records, the \"delivered at confidence ~0.40 and left there\" markers, the killed hypothesis preserved in `derivation-discarded`, and the superseded-part notice in `labor-instrument` collectively implement something the open-science movement has wanted for two decades and mostly failed to engineer: a working memory in which null results, refusals, and unfinished business do not evaporate. Preregistration campaigns needed cash prizes to get researchers to declare plans in advance ([COS](https://www.cos.io/initiatives/prereg-more-information)); this repo declares, versions, and *keeps* its failures as a matter of routine. That discipline is precisely what benchmark forensics keeps discovering the mainstream lacks — the SWE-Bench memorization findings ([arXiv](https://arxiv.org/html/2506.12286v3)) and OpenAI's quiet retirement of SWE-bench Verified ([OpenAI](https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified/)) are both stories of claims that outlived their validity because no instrument tracked the ruler.",
+   "hosts": [
+    "arxiv.org",
+    "openai.com",
+    "www.cos.io"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "NOT_A_CLAIM",
+   "reason": "an outside review document, landed verbatim, describing the repository's limits second-hand; not the author's own limit",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14.md:564:environment",
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-09-14",
+   "repo": "Simulators",
+   "quote": "The repository's deepest strength is that it treats **negative and missing information as data**. The `UNMEASURED` / `NOT_RUN` / `NOT_RELEASED` states, the egress-refusal records, the \"delivered at confidence ~0.40 and left there\" markers, the killed hypothesis preserved in `derivation-discarded`, and the superseded-part notice in `labor-instrument` collectively implement something the open-science movement has wanted for two decades and mostly failed to engineer: a working memory in which null results, refusals, and unfinished business do not evaporate. Preregistration campaigns needed cash prizes to get researchers to declare plans in advance ([COS](https://www.cos.io/initiatives/prereg-more-information)); this repo declares, versions, and *keeps* its failures as a matter of routine. That discipline is precisely what benchmark forensics keeps discovering the mainstream lacks — the SWE-Bench memorization findings ([arXiv](https://arxiv.org/html/2506.12286v3)) and OpenAI's quiet retirement of SWE-bench Verified ([OpenAI](https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified/)) are both stories of claims that outlived their validity because no instrument tracked the ruler.",
+   "hosts": [
+    "arxiv.org",
+    "openai.com",
+    "www.cos.io"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "NOT_A_CLAIM",
+   "reason": "an outside review document, landed verbatim, describing the repository's limits second-hand; not the author's own limit",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14.md:572:cant_run",
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-09-14",
+   "repo": "Simulators",
+   "quote": "The second weakness is **unfinished falsification loops**. A striking number of folders are work orders and markers whose claim tables end at `NOT_RUN` — many because the build environment blocked egress, but the effect is the same: instruments whose power is that they *could* fail have not yet been given the chance. The July 2026 incident cluster is the sharpest case, because the external dependency has partly resolved: Hugging Face's technical timeline and OpenAI's incident disclosure are public ([Hugging Face](https://huggingface.co/blog/agent-intrusion-technical-timeline), [OpenAI](https://openai.com/index/hugging-face-model-evaluation-security-incident/)), so `hf-incident-extract` and `corpus-input-gaps` can be completed today. A repository whose brand is \"claims with falsifiers\" earns disproportionate credibility from each completed loop and loses a little from each stalled one.",
+   "hosts": [
+    "openai.com"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "NOT_A_CLAIM",
+   "reason": "an outside review document, landed verbatim, describing the repository's limits second-hand; not the author's own limit",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14.md:572:environment",
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-09-14",
+   "repo": "Simulators",
+   "quote": "The second weakness is **unfinished falsification loops**. A striking number of folders are work orders and markers whose claim tables end at `NOT_RUN` — many because the build environment blocked egress, but the effect is the same: instruments whose power is that they *could* fail have not yet been given the chance. The July 2026 incident cluster is the sharpest case, because the external dependency has partly resolved: Hugging Face's technical timeline and OpenAI's incident disclosure are public ([Hugging Face](https://huggingface.co/blog/agent-intrusion-technical-timeline), [OpenAI](https://openai.com/index/hugging-face-model-evaluation-security-incident/)), so `hf-incident-extract` and `corpus-input-gaps` can be completed today. A repository whose brand is \"claims with falsifiers\" earns disproportionate credibility from each completed loop and loses a little from each stalled one.",
+   "hosts": [
+    "openai.com"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "NOT_A_CLAIM",
+   "reason": "an outside review document, landed verbatim, describing the repository's limits second-hand; not the author's own limit",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14_V2.md:165:cant_run",
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-09-14",
+   "repo": "Simulators",
+   "quote": "**For research and academic adoption**, this family is the most directly citable material in the repository, because it solves a problem every empirical field has and few toolchains address: claims, falsifiers, and gaps are usually prose, and prose cannot be validated. The seven-field claim record with a refusing validator is, in effect, a *machine-checkable preregistration atom*: a preregistered hypothesis, its falsifier, its confidence class, and its current state (`UNMEASURED`, `NOT_RUN`, refuted, supported) become diff-able data. That maps one-to-one onto the Center for Open Science's preregistration infrastructure, where the Preregistration Challenge paid 1,000 researchers $1,000 each to publish preregistered work precisely to normalize plan-before-analysis discipline ([COS](https://www.cos.io/initiatives/prereg-more-information)), and onto the Registered Reports format, where peer review happens at the design stage specifically so that results cannot retroactively reshape hypotheses ([COS](https://www.cos.io/blog/looking-back-prereg)). A research group could adopt `claim-record` verbatim as its internal lab-notebook schema and gain an audit trail that most groups only reconstruct painfully at replication-audit time. The gap registers are a second, quieter contribution: metascience has tools for checking reported numbers (statcheck found that about half of psychology papers with NHST results contain at least one reporting inconsistency, and roughly one in eight a gross inconsistency that could flip a conclusion ([CASRAI](https://casrai.org/guides/statistical-fraud-detection-grim-sprite-statcheck))), but almost no tooling for registering *what was never measured*. The GRIM and SPRITE tests catch impossible means in reported data; `gap-register` and `uninstrumented` (F3) catch the complementary failure — the missing rows.",
+   "hosts": [
+    "casrai.org",
+    "www.cos.io"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "NOT_A_CLAIM",
+   "reason": "an outside review document, landed verbatim, describing the repository's limits second-hand; not the author's own limit",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14_V2.md:583:cant_run",
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-09-14",
+   "repo": "Simulators",
+   "quote": "The repository's deepest strength is that it treats **negative and missing information as data**. The `UNMEASURED` / `NOT_RUN` / `NOT_RELEASED` states, the egress-refusal records, the \"delivered at confidence ~0.40 and left there\" markers, the killed hypothesis preserved in `derivation-discarded`, and the superseded-part notice in `labor-instrument` collectively implement something the open-science movement has wanted for two decades and mostly failed to engineer: a working memory in which null results, refusals, and unfinished business do not evaporate. Preregistration campaigns needed cash prizes to get researchers to declare plans in advance ([COS](https://www.cos.io/initiatives/prereg-more-information)); this repo declares, versions, and *keeps* its failures as a matter of routine. That discipline is precisely what benchmark forensics keeps discovering the mainstream lacks — the SWE-Bench memorization findings ([arXiv](https://arxiv.org/html/2506.12286v3)) and OpenAI's quiet retirement of SWE-bench Verified ([OpenAI](https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified/)) are both stories of claims that outlived their validity because no instrument tracked the ruler.",
+   "hosts": [
+    "arxiv.org",
+    "openai.com",
+    "www.cos.io"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "NOT_A_CLAIM",
+   "reason": "an outside review document, landed verbatim, describing the repository's limits second-hand; not the author's own limit",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14_V2.md:583:environment",
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-09-14",
+   "repo": "Simulators",
+   "quote": "The repository's deepest strength is that it treats **negative and missing information as data**. The `UNMEASURED` / `NOT_RUN` / `NOT_RELEASED` states, the egress-refusal records, the \"delivered at confidence ~0.40 and left there\" markers, the killed hypothesis preserved in `derivation-discarded`, and the superseded-part notice in `labor-instrument` collectively implement something the open-science movement has wanted for two decades and mostly failed to engineer: a working memory in which null results, refusals, and unfinished business do not evaporate. Preregistration campaigns needed cash prizes to get researchers to declare plans in advance ([COS](https://www.cos.io/initiatives/prereg-more-information)); this repo declares, versions, and *keeps* its failures as a matter of routine. That discipline is precisely what benchmark forensics keeps discovering the mainstream lacks — the SWE-Bench memorization findings ([arXiv](https://arxiv.org/html/2506.12286v3)) and OpenAI's quiet retirement of SWE-bench Verified ([OpenAI](https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified/)) are both stories of claims that outlived their validity because no instrument tracked the ruler.",
+   "hosts": [
+    "arxiv.org",
+    "openai.com",
+    "www.cos.io"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "NOT_A_CLAIM",
+   "reason": "an outside review document, landed verbatim, describing the repository's limits second-hand; not the author's own limit",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14_V2.md:591:cant_run",
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-09-14",
+   "repo": "Simulators",
+   "quote": "The second weakness is **unfinished falsification loops**. A striking number of folders are work orders and markers whose claim tables end at `NOT_RUN` — many for the sympathetic reason that the authoring sandbox blocked egress, but the effect is the same: instruments whose power is that they *could* fail have not yet been given the chance. The July 2026 incident cluster is the sharpest case, because the external dependency has now resolved: Hugging Face's full technical timeline and OpenAI's incident disclosure are both public ([Hugging Face](https://huggingface.co/blog/agent-intrusion-technical-timeline), [OpenAI](https://openai.com/index/hugging-face-model-evaluation-security-incident/)), so `hf-incident-extract` and `corpus-input-gaps` can be completed today. A repository whose brand is \"claims with falsifiers\" earns disproportionate credibility from each completed loop and loses a little from each stalled one.",
+   "hosts": [
+    "openai.com"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "NOT_A_CLAIM",
+   "reason": "an outside review document, landed verbatim, describing the repository's limits second-hand; not the author's own limit",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14_V2.md:591:environment",
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-09-14",
+   "repo": "Simulators",
+   "quote": "The second weakness is **unfinished falsification loops**. A striking number of folders are work orders and markers whose claim tables end at `NOT_RUN` — many for the sympathetic reason that the authoring sandbox blocked egress, but the effect is the same: instruments whose power is that they *could* fail have not yet been given the chance. The July 2026 incident cluster is the sharpest case, because the external dependency has now resolved: Hugging Face's full technical timeline and OpenAI's incident disclosure are both public ([Hugging Face](https://huggingface.co/blog/agent-intrusion-technical-timeline), [OpenAI](https://openai.com/index/hugging-face-model-evaluation-security-incident/)), so `hf-incident-extract` and `corpus-input-gaps` can be completed today. A repository whose brand is \"claims with falsifiers\" earns disproportionate credibility from each completed loop and loses a little from each stalled one.",
+   "hosts": [
+    "openai.com"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "NOT_A_CLAIM",
+   "reason": "an outside review document, landed verbatim, describing the repository's limits second-hand; not the author's own limit",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:failure-mode-register/README.md:284:environment",
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-09-14",
+   "repo": "Simulators",
+   "quote": "REPORT, and arxiv.org refuses CONNECT from here, so the closure",
+   "hosts": [
+    "arxiv.org"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "ENV_DEPENDENT",
+   "reason": "the author states they could not reach arxiv.org; this session reaches it now. Stated limit, not reproduced here; sessions do not share one network policy",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:failure-mode-register/samples/choices_v3.sample.txt:1:environment",
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-09-14",
+   "repo": "Simulators",
+   "quote": "[CHOICE 12] the prior-art gate's four artifacts are CARRIED, not verified: arxiv.org and export.arxiv.org refuse CONNECT from here and no probe runs at audit time (no network is a house rule). Recorded as NOT_VERIFIABLE_HERE rather than as agreement.",
+   "hosts": [
+    "arxiv.org",
+    "export.arxiv.org"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "ENV_DEPENDENT",
+   "reason": "the author states they could not reach arxiv.org, export.arxiv.org; this session reaches it now. Stated limit, not reproduced here; sessions do not share one network policy",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:falsifier-survey/cell_records.csv:274:environment",
+   "model": "Claude Fable",
+   "model_version": "5.1",
+   "date": "2026-09-05",
+   "repo": "Simulators",
+   "quote": "household-scope-audit,HSA_001,household-scope-audit/CLAIM_TABLE.md,MEASURED,a reachable corpus. Then Arm 1 runs and this claim is about one environment,reachability of the named corpus hosts,HTTP status/reachability boolean per host (measured table: 000/400),\"retry egress to the named hosts (ncbi, pubmed, wiley, acf.hhs, childwelfare, who.int, gov.uk, github)\",,,,measured 2026-08-29; egress is an allowlist,,0",
+   "hosts": [
+    "who.int"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "NOT_A_CLAIM",
+   "reason": "an index row restating another folder's claim",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:fold-matrix/CLAIM_TABLE.md:513:environment",
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-08-25",
+   "repo": "Simulators",
+   "quote": "`sba.gov` refuses CONNECT (`SSS_057`), and one file was uploaded:",
+   "hosts": [
+    "sba.gov"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; sba.gov refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:fold-matrix/PREDICTIONS_SBA.md:76:environment",
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-08-25",
+   "repo": "Simulators",
+   "quote": "Andrew's Plan did not arrive, and `sba.gov` refuses CONNECT, so neither",
+   "hosts": [
+    "sba.gov"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; sba.gov refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:fold-matrix/README.md:127:environment",
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-08-25",
+   "repo": "Simulators",
+   "quote": "`sba.gov` refuses CONNECT, and two files were uploaded — **neither under",
+   "hosts": [
+    "sba.gov"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; sba.gov refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:household-scope-audit/README.md:24:environment",
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-08-29",
+   "repo": "Simulators",
+   "quote": "through this environment's proxy; only `github.com` answers, and egress",
+   "hosts": [
+    "github.com"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; github.com is named as the control that did connect, not as a refused host",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:household-scope-audit/selftest_hsa.py:184:environment",
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-08-29",
+   "repo": "Simulators",
+   "quote": "[h for h, c in A.EGRESS if c != \"000\"] == [\"github.com\"])",
+   "hosts": [
+    "github.com"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "NOT_A_CLAIM",
+   "reason": "a line of code that checks the form of an egress record; it states no limit itself",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:labor-instrument/vintage_store.py:9:environment",
+   "model": "Claude Opus",
+   "model_version": "4.8",
+   "date": "2026-09-05",
+   "repo": "Simulators",
+   "quote": "fetch (egress allowlist: alfred.stlouisfed.org answered no on CONNECT,",
+   "hosts": [
+    "alfred.stlouisfed.org"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; alfred.stlouisfed.org refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:law-as-unvalidated-measurement/CORRECTION-law-as-unvalidated-measurement-2026-10-03.md:176:environment",
+   "model": "Claude Opus",
+   "model_version": "5.5",
+   "date": "2026-10-04",
+   "repo": "Simulators",
+   "quote": "Route: the environment's egress gate refuses every publisher host (arxiv.org,",
+   "hosts": [
+    "arxiv.org"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "ENV_DEPENDENT",
+   "reason": "the author states they could not reach arxiv.org; this session reaches it now. Stated limit, not reproduced here; sessions do not share one network policy",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:law-as-unvalidated-measurement/LEDGER_SETTLE-dyed-fuel-2026-10-03.md:23:environment",
+   "model": "Claude Opus",
+   "model_version": "5.5",
+   "date": "2026-10-04",
+   "repo": "Simulators",
+   "quote": "Route: web search snippet; ecfr.gov itself refuses CONNECT from this environment.",
+   "hosts": [
+    "ecfr.gov"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; ecfr.gov refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:merge-path/CLAIM_TABLE.md:24:cant_run",
+   "model": "Claude Opus",
+   "model_version": "4.8",
+   "date": "2026-09-05",
+   "repo": "Simulators",
+   "quote": "| MRG_007 | The **branch record's novelty is UNVERIFIED** (§5): the hypothesis that no registrar has a slot for a WHY-carrying rule revision is neither confirmed nor refuted, because the search (each spec for a revision-with-a-reason / scope-condition-after-the-fact / amendment-stating-WHY) could not run (egress). Per §5, *an absence with no search list is not evidence* — the **search list is stated** per registrar, with CT.gov protocol amendments and OSF prereg addenda flagged as the most likely counterparts, so the eventual absence would be evidence and the eventual counterpart would be mappable. **No branch entry (ENTRY 03) is opened**, because opening one would rest on an unverified spec fact; the §8 trigger (a registrar holding what our format cannot) is recorded as pending a verified fetch. | UNVERIFIED | `BRANCH_SEARCH.md` search list; no `ENTRY_03` opened | the search run on a fetched spec: a WHY-carrying revision field found (branch record not novel) or absent across the list (reportable absence) |",
+   "hosts": [
+    "ct.gov"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; ct.gov refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:merge-path/CLAIM_TABLE.md:24:environment",
+   "model": "Claude Opus",
+   "model_version": "4.8",
+   "date": "2026-09-05",
+   "repo": "Simulators",
+   "quote": "| MRG_007 | The **branch record's novelty is UNVERIFIED** (§5): the hypothesis that no registrar has a slot for a WHY-carrying rule revision is neither confirmed nor refuted, because the search (each spec for a revision-with-a-reason / scope-condition-after-the-fact / amendment-stating-WHY) could not run (egress). Per §5, *an absence with no search list is not evidence* — the **search list is stated** per registrar, with CT.gov protocol amendments and OSF prereg addenda flagged as the most likely counterparts, so the eventual absence would be evidence and the eventual counterpart would be mappable. **No branch entry (ENTRY 03) is opened**, because opening one would rest on an unverified spec fact; the §8 trigger (a registrar holding what our format cannot) is recorded as pending a verified fetch. | UNVERIFIED | `BRANCH_SEARCH.md` search list; no `ENTRY_03` opened | the search run on a fetched spec: a WHY-carrying revision field found (branch record not novel) or absent across the list (reportable absence) |",
+   "hosts": [
+    "ct.gov"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; ct.gov refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:merge-path/MERGE_REPORT.md:19:environment",
+   "model": "Claude Opus",
+   "model_version": "4.8",
+   "date": "2026-09-05",
+   "repo": "Simulators",
+   "quote": "| `nanopublications` | False | NO-MERGE | spec unfetched (egress 403) | https://nanopub.net/ (RDF; W3C provenance PROV-O https://www.w3.org/TR/prov-o/) |",
+   "hosts": [
+    "nanopub.net",
+    "www.w3.org"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; nanopub.net, www.w3.org refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:merge-path/MERGE_REPORT.md:20:environment",
+   "model": "Claude Opus",
+   "model_version": "4.8",
+   "date": "2026-09-05",
+   "repo": "Simulators",
+   "quote": "| `orkg` | False | NO-MERGE | spec unfetched (egress 403) | https://orkg.org/ (Open Research Knowledge Graph) |",
+   "hosts": [
+    "orkg.org"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; orkg.org refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:merge-path/MERGE_REPORT.md:21:environment",
+   "model": "Claude Opus",
+   "model_version": "4.8",
+   "date": "2026-09-05",
+   "repo": "Simulators",
+   "quote": "| `ro_crate` | False | NO-MERGE | spec unfetched (egress 403) | https://www.researchobject.org/ro-crate/ |",
+   "hosts": [
+    "www.researchobject.org"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; www.researchobject.org refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:merge-path/MERGE_REPORT.md:22:environment",
+   "model": "Claude Opus",
+   "model_version": "4.8",
+   "date": "2026-09-05",
+   "repo": "Simulators",
+   "quote": "| `clinicaltrials_gov` | False | NO-MERGE | spec unfetched (egress 403) | https://clinicaltrials.gov/ (FDAAA 801; PRS data element definitions) |",
+   "hosts": [
+    "clinicaltrials.gov"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; clinicaltrials.gov refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:merge-path/MERGE_REPORT.md:23:environment",
+   "model": "Claude Opus",
+   "model_version": "4.8",
+   "date": "2026-09-05",
+   "repo": "Simulators",
+   "quote": "| `cipm_cmc` | False | NO-MERGE | spec unfetched (egress 403) | https://www.bipm.org/ (CIPM MRA; CMC entries in the KCDB) |",
+   "hosts": [
+    "www.bipm.org"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "ENV_DEPENDENT",
+   "reason": "the author states they could not reach www.bipm.org; this session reaches it now. Stated limit, not reproduced here; sessions do not share one network policy",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:merge-path/MERGE_REPORT.md:24:environment",
+   "model": "Claude Opus",
+   "model_version": "4.8",
+   "date": "2026-09-05",
+   "repo": "Simulators",
+   "quote": "| `proof_assistant` | False | NO-MERGE | spec unfetched (egress 403) | https://leanprover-community.github.io/ (mathlib) / https://coq.inria.fr/ |",
+   "hosts": [
+    "leanprover-community.github.io"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; leanprover-community.github.io refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:merge-path/MERGE_REPORT.md:25:environment",
+   "model": "Claude Opus",
+   "model_version": "4.8",
+   "date": "2026-09-05",
+   "repo": "Simulators",
+   "quote": "| `osf_prereg` | False | NO-MERGE | spec unfetched (egress 403) | https://osf.io/prereg/ (OSF preregistration) |",
+   "hosts": [
+    "osf.io"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; osf.io refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:playground-crossrun/COMBINED_SPEC.md:199:environment",
+   "model": "Claude Opus",
+   "model_version": "5.5",
+   "date": "2026-11-18",
+   "repo": "Simulators",
+   "quote": "not read by the building session (www.bipm.org egress refused)",
+   "hosts": [
+    "www.bipm.org"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "ENV_DEPENDENT",
+   "reason": "the author states they could not reach www.bipm.org; this session reaches it now. Stated limit, not reproduced here; sessions do not share one network policy",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:playground-crossrun/COMBINED_SPEC.md:210:environment",
+   "model": "Claude Opus",
+   "model_version": "5.5",
+   "date": "2026-11-18",
+   "repo": "Simulators",
+   "quote": "(VERIFY): www.bipm.org egress refused to this session's fetches",
+   "hosts": [
+    "www.bipm.org"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "ENV_DEPENDENT",
+   "reason": "the author states they could not reach www.bipm.org; this session reaches it now. Stated limit, not reproduced here; sessions do not share one network policy",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:quiet-failure/CLAIM_TABLE.md:24:environment",
+   "model": "Claude Fable",
+   "model_version": "5.1",
+   "date": "2026-09-20",
+   "repo": "Simulators",
+   "quote": "| QFA_014 | UNVERIFIED: no accident corpus was read (four hosts answered 403 to CONNECT, measured and timestamped, `github.com` the control), no finding in the evidence section was re-fetched, no regulator record exists in the folder, and no blind coder has run. Nothing here bears on whether any real failure was signalled, on whether the decomposition separates real cases, or on whether any regulator assigns the join; every instrument is shown reachable in both directions on constructed inputs only. | UNVERIFIED | `decomposition.EGRESS`; every fixture named CONSTRUCTED | a coded real corpus supplied to `--corpus` with both signal levels present; a bounded null; a real role record |",
+   "hosts": [
+    "github.com"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; github.com is named as the control that did connect, not as a refused host",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:quiet-failure/README.md:32:environment",
+   "model": "Claude Fable",
+   "model_version": "5.1",
+   "date": "2026-09-20",
+   "repo": "Simulators",
+   "quote": "| records | no accident corpus, journal or archive was read: four hosts answered 403 to CONNECT, measured and timestamped in `decomposition.EGRESS`, `github.com` the connecting control; every corpus, null record and regulator record is CONSTRUCTED and says so |",
+   "hosts": [
+    "github.com"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; github.com is named as the control that did connect, not as a refused host",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:quiet-failure/samples/run_all.sample.txt:26:environment",
+   "model": "Claude Fable",
+   "model_version": "5.1",
+   "date": "2026-09-20",
+   "repo": "Simulators",
+   "quote": "egress (measured 2026-09-20T02:58Z): www.ntsb.gov:443 CONNECT 403; www.csb.gov:443 CONNECT 403; www.gov.uk:443 CONNECT 403; onlinelibrary.wiley.com:443 CONNECT 403; github.com:443 connects (control)",
+   "hosts": [
+    "github.com",
+    "onlinelibrary.wiley.com",
+    "www.csb.gov",
+    "www.gov",
+    "www.ntsb.gov"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; github.com is named as the control that did connect, not as a refused host; onlinelibrary.wiley.com, www.csb.gov, www.gov, www.ntsb.gov refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:quiet-failure/selftest.py:88:environment",
+   "model": "Claude Fable",
+   "model_version": "5.1",
+   "date": "2026-09-20",
+   "repo": "Simulators",
+   "quote": "check(\"EGRESS carries a measured timestamp, four refused hosts and the control\", re.match(r\"\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\dZ\", dc.EGRESS[\"measured\"]) and sum(1 for v in dc.EGRESS[\"hosts\"].values() if \"403\" in v) == 4 and \"github.com:443\" in dc.EGRESS[\"hosts\"])",
+   "hosts": [
+    "github.com"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "NOT_A_CLAIM",
+   "reason": "a line of code that checks the form of an egress record; it states no limit itself",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:readout-count/samples/row_audit.sample.txt:29:environment",
+   "model": "Claude Fable",
+   "model_version": "5.1",
+   "date": "2026-09-02",
+   "repo": "Simulators",
+   "quote": "hosts probed once (allowlist egress): www.ecfr.gov no response, www.fmcsa.dot.gov no response, www.federalregister.gov no response, nccdb.fmcsa.dot.gov no response",
+   "hosts": [
+    "nccdb.fmcsa.dot.gov",
+    "www.ecfr.gov",
+    "www.federalregister.gov",
+    "www.fmcsa.dot.gov"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; nccdb.fmcsa.dot.gov, www.ecfr.gov, www.federalregister.gov, www.fmcsa.dot.gov refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:readout-count/samples/stack_revision.sample.txt:33:environment",
+   "model": "Claude Fable",
+   "model_version": "5.1",
+   "date": "2026-09-02",
+   "repo": "Simulators",
+   "quote": "6. S6 HOSTS  oshacademy.com no response, training.fema.gov no response  (allowlist egress; not read)",
+   "hosts": [
+    "oshacademy.com",
+    "training.fema.gov"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; oshacademy.com, training.fema.gov refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:route-independence/FWO7_DESIGN.md:4:cant_run",
+   "model": "Claude Fable",
+   "model_version": "5.1",
+   "date": "2026-09-27",
+   "repo": "Simulators",
+   "quote": "below is NOT_RUN: the egress allowlist reaches `github.com` and nothing else,",
+   "hosts": [
+    "github.com"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; github.com is named as the control that did connect, not as a refused host",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:route-independence/FWO7_DESIGN.md:4:environment",
+   "model": "Claude Fable",
+   "model_version": "5.1",
+   "date": "2026-09-27",
+   "repo": "Simulators",
+   "quote": "below is NOT_RUN: the egress allowlist reaches `github.com` and nothing else,",
+   "hosts": [
+    "github.com"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; github.com is named as the control that did connect, not as a refused host",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:route-independence/SOURCES.md:30:environment",
+   "model": "Claude Fable",
+   "model_version": "5.1",
+   "date": "2026-09-27",
+   "repo": "Simulators",
+   "quote": "| IRS Topic 420; Form 1099-B; 1099-MISC threshold | FWO-2 barter row | `www.irs.gov` refuses CONNECT (403, 2026-09-27T01:28:31Z) |",
+   "hosts": [
+    "www.irs.gov"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; www.irs.gov refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:route-independence/SOURCES.md:35:environment",
+   "model": "Claude Fable",
+   "model_version": "5.1",
+   "date": "2026-09-27",
+   "repo": "Simulators",
+   "quote": "| Phil Trans R Soc B 376:1819, 20190677 (macaque token economy) | R-2 | `royalsocietypublishing.org` refuses CONNECT (403, 2026-09-27T01:28:32Z) |",
+   "hosts": [
+    "royalsocietypublishing.org"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; royalsocietypublishing.org refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:route-independence/SOURCES.md:178:environment",
+   "model": "Claude Opus",
+   "model_version": "5.5",
+   "date": "2026-09-28",
+   "repo": "Simulators",
+   "quote": "Egress probe at 2026-09-28T13:14:37Z: ecfr.gov, leg.colorado.gov and",
+   "hosts": [
+    "ecfr.gov",
+    "leg.colorado.gov"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; ecfr.gov, leg.colorado.gov refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:route-independence/conversion_register.json:4:environment",
+   "model": "Claude Fable",
+   "model_version": "5.1",
+   "date": "2026-09-27",
+   "repo": "Simulators",
+   "quote": "\"_sampling_boundary\": \"every source is CARRIED from memory or from the order; no publisher, registry or agency host is reachable under the egress allowlist (github.com only). What that selects for: attempts prominent enough to be known without a search, in the United States, in English.\",",
+   "hosts": [
+    "github.com"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; github.com is named as the control that did connect, not as a refused host",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:route-independence/dependency_chain_audit.py:260:environment",
+   "model": "Claude Fable",
+   "model_version": "5.1",
+   "date": "2026-09-27",
+   "repo": "Simulators",
+   "quote": "\"NOT READ here: www.nature.com refuses CONNECT under the egress allowlist\")",
+   "hosts": [
+    "www.nature.com"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; www.nature.com refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:route-independence/samples/dependency_chain.sample.txt:25:environment",
+   "model": "Claude Fable",
+   "model_version": "5.1",
+   "date": "2026-09-27",
+   "repo": "Simulators",
+   "quote": "source: CARRIED: instance Kalai, Nachum, Vempala & Zhang, Nature 653:1047-1051 (2026), DOI 10.1038/s41586-026-10549-w; already cited in this tree (publication-loop-work-orders, WO-11 T-6a); NOT READ here: www.nature.com refuses CONNECT under the egress allowlist",
+   "hosts": [
+    "www.nature.com"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; www.nature.com refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:thwaites-risk-audit/README.md:11:environment",
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-09-24",
+   "repo": "Simulators",
+   "quote": "claims are not — the egress gate is an allowlist and only `github.com`",
+   "hosts": [
+    "github.com"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; github.com is named as the control that did connect, not as a refused host",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:thwaites-risk-audit/audit.py:715:environment",
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-09-24",
+   "repo": "Simulators",
+   "quote": "\"reason\": (\"allowlist egress: only github.com answers.  No \"",
+   "hosts": [
+    "github.com"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "NOT_A_CLAIM",
+   "reason": "a line of code that checks the form of an egress record; it states no limit itself",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Simulators:thwaites-risk-audit/samples/audit.sample.txt:173:environment",
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-09-24",
+   "repo": "Simulators",
+   "quote": "allowlist egress: only github.com answers.  No publisher, DOI resolver",
+   "hosts": [
+    "github.com"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; github.com is named as the control that did connect, not as a refused host",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:method-layer:reasoning-layer/READ_FIRST.md:22795:environment",
+   "model": "Claude Opus",
+   "model_version": "5.5",
+   "date": "2026-10-24",
+   "repo": "method-layer",
+   "quote": "| `nanopublications` | False | NO-MERGE | spec unfetched (egress 403) | https://nanopub.net/ (RDF; W3C provenance PROV-O https://www.w3.org/TR/prov-o/) |",
+   "hosts": [
+    "nanopub.net",
+    "www.w3.org"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; nanopub.net, www.w3.org refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:method-layer:reasoning-layer/READ_FIRST.md:22796:environment",
+   "model": "Claude Opus",
+   "model_version": "5.5",
+   "date": "2026-10-24",
+   "repo": "method-layer",
+   "quote": "| `orkg` | False | NO-MERGE | spec unfetched (egress 403) | https://orkg.org/ (Open Research Knowledge Graph) |",
+   "hosts": [
+    "orkg.org"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; orkg.org refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:method-layer:reasoning-layer/READ_FIRST.md:22797:environment",
+   "model": "Claude Opus",
+   "model_version": "5.5",
+   "date": "2026-10-24",
+   "repo": "method-layer",
+   "quote": "| `ro_crate` | False | NO-MERGE | spec unfetched (egress 403) | https://www.researchobject.org/ro-crate/ |",
+   "hosts": [
+    "www.researchobject.org"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; www.researchobject.org refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:method-layer:reasoning-layer/READ_FIRST.md:22798:environment",
+   "model": "Claude Opus",
+   "model_version": "5.5",
+   "date": "2026-10-24",
+   "repo": "method-layer",
+   "quote": "| `clinicaltrials_gov` | False | NO-MERGE | spec unfetched (egress 403) | https://clinicaltrials.gov/ (FDAAA 801; PRS data element definitions) |",
+   "hosts": [
+    "clinicaltrials.gov"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; clinicaltrials.gov refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:method-layer:reasoning-layer/READ_FIRST.md:22799:environment",
+   "model": "Claude Opus",
+   "model_version": "5.5",
+   "date": "2026-10-24",
+   "repo": "method-layer",
+   "quote": "| `cipm_cmc` | False | NO-MERGE | spec unfetched (egress 403) | https://www.bipm.org/ (CIPM MRA; CMC entries in the KCDB) |",
+   "hosts": [
+    "www.bipm.org"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "ENV_DEPENDENT",
+   "reason": "the author states they could not reach www.bipm.org; this session reaches it now. Stated limit, not reproduced here; sessions do not share one network policy",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:method-layer:reasoning-layer/READ_FIRST.md:22800:environment",
+   "model": "Claude Opus",
+   "model_version": "5.5",
+   "date": "2026-10-24",
+   "repo": "method-layer",
+   "quote": "| `proof_assistant` | False | NO-MERGE | spec unfetched (egress 403) | https://leanprover-community.github.io/ (mathlib) / https://coq.inria.fr/ |",
+   "hosts": [
+    "leanprover-community.github.io"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; leanprover-community.github.io refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:method-layer:reasoning-layer/READ_FIRST.md:22801:environment",
+   "model": "Claude Opus",
+   "model_version": "5.5",
+   "date": "2026-10-24",
+   "repo": "method-layer",
+   "quote": "| `osf_prereg` | False | NO-MERGE | spec unfetched (egress 403) | https://osf.io/prereg/ (OSF preregistration) |",
+   "hosts": [
+    "osf.io"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; osf.io refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:method-layer:reasoning-layer/READ_FIRST.md:26117:environment",
+   "model": "Claude Opus",
+   "model_version": "5.5",
+   "date": "2026-10-24",
+   "repo": "method-layer",
+   "quote": "egress (measured 2026-09-20T02:58Z): www.ntsb.gov:443 CONNECT 403; www.csb.gov:443 CONNECT 403; www.gov.uk:443 CONNECT 403; onlinelibrary.wiley.com:443 CONNECT 403; github.com:443 connects (control)",
+   "hosts": [
+    "github.com",
+    "onlinelibrary.wiley.com",
+    "www.csb.gov",
+    "www.gov",
+    "www.ntsb.gov"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; github.com is named as the control that did connect, not as a refused host; onlinelibrary.wiley.com, www.csb.gov, www.gov, www.ntsb.gov refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:method-layer:reasoning-layer/cards/merge-path--selftest.yaml:53:environment",
+   "model": "Claude Opus",
+   "model_version": "5.5",
+   "date": "2026-10-24",
+   "repo": "method-layer",
+   "quote": "| `nanopublications` | False | NO-MERGE | spec unfetched (egress 403) | https://nanopub.net/ (RDF; W3C provenance PROV-O https://www.w3.org/TR/prov-o/) |",
+   "hosts": [
+    "nanopub.net",
+    "www.w3.org"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; nanopub.net, www.w3.org refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:method-layer:reasoning-layer/cards/merge-path--selftest.yaml:54:environment",
+   "model": "Claude Opus",
+   "model_version": "5.5",
+   "date": "2026-10-24",
+   "repo": "method-layer",
+   "quote": "| `orkg` | False | NO-MERGE | spec unfetched (egress 403) | https://orkg.org/ (Open Research Knowledge Graph) |",
+   "hosts": [
+    "orkg.org"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; orkg.org refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:method-layer:reasoning-layer/cards/merge-path--selftest.yaml:55:environment",
+   "model": "Claude Opus",
+   "model_version": "5.5",
+   "date": "2026-10-24",
+   "repo": "method-layer",
+   "quote": "| `ro_crate` | False | NO-MERGE | spec unfetched (egress 403) | https://www.researchobject.org/ro-crate/ |",
+   "hosts": [
+    "www.researchobject.org"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; www.researchobject.org refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:method-layer:reasoning-layer/cards/merge-path--selftest.yaml:56:environment",
+   "model": "Claude Opus",
+   "model_version": "5.5",
+   "date": "2026-10-24",
+   "repo": "method-layer",
+   "quote": "| `clinicaltrials_gov` | False | NO-MERGE | spec unfetched (egress 403) | https://clinicaltrials.gov/ (FDAAA 801; PRS data element definitions) |",
+   "hosts": [
+    "clinicaltrials.gov"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; clinicaltrials.gov refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:method-layer:reasoning-layer/cards/merge-path--selftest.yaml:57:environment",
+   "model": "Claude Opus",
+   "model_version": "5.5",
+   "date": "2026-10-24",
+   "repo": "method-layer",
+   "quote": "| `cipm_cmc` | False | NO-MERGE | spec unfetched (egress 403) | https://www.bipm.org/ (CIPM MRA; CMC entries in the KCDB) |",
+   "hosts": [
+    "www.bipm.org"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "ENV_DEPENDENT",
+   "reason": "the author states they could not reach www.bipm.org; this session reaches it now. Stated limit, not reproduced here; sessions do not share one network policy",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:method-layer:reasoning-layer/cards/merge-path--selftest.yaml:58:environment",
+   "model": "Claude Opus",
+   "model_version": "5.5",
+   "date": "2026-10-24",
+   "repo": "method-layer",
+   "quote": "| `proof_assistant` | False | NO-MERGE | spec unfetched (egress 403) | https://leanprover-community.github.io/ (mathlib) / https://coq.inria.fr/ |",
+   "hosts": [
+    "leanprover-community.github.io"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; leanprover-community.github.io refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:method-layer:reasoning-layer/cards/merge-path--selftest.yaml:59:environment",
+   "model": "Claude Opus",
+   "model_version": "5.5",
+   "date": "2026-10-24",
+   "repo": "method-layer",
+   "quote": "| `osf_prereg` | False | NO-MERGE | spec unfetched (egress 403) | https://osf.io/prereg/ (OSF preregistration) |",
+   "hosts": [
+    "osf.io"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; osf.io refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:method-layer:reasoning-layer/cards/quiet-failure--run_all.yaml:60:environment",
+   "model": "Claude Opus",
+   "model_version": "5.5",
+   "date": "2026-10-24",
+   "repo": "method-layer",
+   "quote": "egress (measured 2026-09-20T02:58Z): www.ntsb.gov:443 CONNECT 403; www.csb.gov:443 CONNECT 403; www.gov.uk:443 CONNECT 403; onlinelibrary.wiley.com:443 CONNECT 403; github.com:443 connects (control)",
+   "hosts": [
+    "github.com",
+    "onlinelibrary.wiley.com",
+    "www.csb.gov",
+    "www.gov",
+    "www.ntsb.gov"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; github.com is named as the control that did connect, not as a refused host; onlinelibrary.wiley.com, www.csb.gov, www.gov, www.ntsb.gov refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:planetary-conservation-framework:legacy/README.md:260:environment",
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-08-25",
+   "repo": "planetary-conservation-framework",
+   "quote": "(`ametsoc.org`, `journals.ametsoc.org`, `ametsoc.net`) were egress-blocked from",
+   "hosts": [
+    "ametsoc.net",
+    "ametsoc.org",
+    "journals.ametsoc.org"
+   ],
+   "run_1_probe_verdict": "DECLARED_LIMIT",
+   "run_2_reading": "DECLARED_LIMIT",
+   "reason": "the author states they could not reach or read the source; ametsoc.net, ametsoc.org, journals.ametsoc.org refused from this session too",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Noise-as-Information-Sensor:tools/CLAIM_TABLE.md:62:environment",
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-09-24",
+   "repo": "Noise-as-Information-Sensor",
+   "quote": "| NC_018 | **Every published-value fixture is SECONDARY and its primary is UNREAD.** Probed 2026-09-24T11:25Z: `www.biorxiv.org`, `arxiv.org` and `www.nature.com` return no response through this environment's egress policy, with `github.com` answering as the control. No count in any fixture was transcribed from a paper. | UNVERIFIED |",
+   "hosts": [
+    "arxiv.org",
+    "github.com",
+    "www.biorxiv.org",
+    "www.nature.com"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "ENV_DEPENDENT",
+   "reason": "the author states they could not reach arxiv.org; this session reaches it now. Stated limit, not reproduced here; sessions do not share one network policy",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:stability-trigger-envelope:tools/CLAIM_TABLE.md:62:environment",
+   "model": null,
+   "model_version": null,
+   "date": "2026-10-02",
+   "repo": "stability-trigger-envelope",
+   "quote": "| NC_018 | **Every published-value fixture is SECONDARY and its primary is UNREAD.** Probed 2026-09-24T11:25Z: `www.biorxiv.org`, `arxiv.org` and `www.nature.com` return no response through this environment's egress policy, with `github.com` answering as the control. No count in any fixture was transcribed from a paper. | UNVERIFIED |",
+   "hosts": [
+    "arxiv.org",
+    "github.com",
+    "www.biorxiv.org",
+    "www.nature.com"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "ENV_DEPENDENT",
+   "reason": "the author states they could not reach arxiv.org; this session reaches it now. Stated limit, not reproduced here; sessions do not share one network policy",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:Non-equilibrium-atmospheric-forcing:enso_state.json:13:environment",
+   "model": "Claude Opus",
+   "model_version": "5",
+   "date": "2026-08-21",
+   "repo": "Non-equilibrium-atmospheric-forcing",
+   "quote": "\"verification_warning\": \"Gathered by web search on 2026-08-21. NOAA CPC (cpc.ncep.noaa.gov), arxiv.org and other primary domains were blocked by this environment's network egress policy, so these figures come from SEARCH SUMMARIES of the CPC/IRI products, not from the products themselves. Every value is marked verified_against_primary: false. ENSO figures are updated monthly and go stale fast \\u2014 re-check before use. Same caveat class as RESEARCH_LOG.md U-14.\"",
+   "hosts": [
+    "arxiv.org",
+    "cpc.ncep.noaa.gov"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "ENV_DEPENDENT",
+   "reason": "the author states they could not reach arxiv.org; this session reaches it now. Stated limit, not reproduced here; sessions do not share one network policy",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  },
+  {
+   "claim_id": "B:GlyphAI:research.md:14:environment",
+   "model": "Claude Fable",
+   "model_version": "5.1",
+   "date": "2026-09-09",
+   "repo": "GlyphAI",
+   "quote": "Instrument limits for this pass. Direct HTTP retrieval was blocked by the network egress policy for every primary source attempted: arxiv.org, dl.acm.org, webtransparency.cs.princeton.edu, cdn.ca9.uscourts.gov, courtlistener.com, ftc.gov, shopify.dev, and each of the law-firm and press write-ups of the Ninth Circuit opinion. The only page fully retrieved was the GitHub README of the Mathur et al. crawl repository, which confirms the paper's title and the ~11K-site scope and nothing else. Every other `VERIFIED` tag rests on search-index excerpts of the named source returned by a web-search tool, not on the primary document read end to end. Where that distinction matters — the exact wording of a court holding, the exact enumeration of pattern types — it is stated at the claim. Three claims that could not be reached even by excerpt are tagged `UNVERIFIED`. The `MEASURED` / `UNMEASURED` grades in §2.1 were checked directly against the repository's test suite, which is local and was run.",
+   "hosts": [
+    "arxiv.org",
+    "cdn.ca9.uscourts.gov",
+    "courtlistener.com",
+    "dl.acm.org",
+    "ftc.gov",
+    "webtransparency.cs.princeton.edu"
+   ],
+   "run_1_probe_verdict": "ENV_DEPENDENT",
+   "run_2_reading": "ENV_DEPENDENT",
+   "reason": "the author states they could not reach arxiv.org; this session reaches it now. Stated limit, not reproduced here; sessions do not share one network policy",
+   "auditor": "Anthropic model (this session), line read in full",
+   "agency": null
+  }
+ ]
+}

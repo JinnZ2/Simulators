@@ -1,0 +1,9 @@
+{
+ "note": "The auditor's reading of each state name a sampled spec writes that is absent from the code in its folder. Names that are file names or claim ids (SPEC_GPT, MARKERS_HELD, CLAIM_TABLE, KNOWN_RED, COMBINED_SPEC, ENERGY_ENGLISH_AXIOM, Q2_OBSERVER_EXCLUSION_SPEC, APM_002, RIN_*) are not states and are listed without a reading.",
+ "readings": {
+  "uninstrumented/WORK_ORDER_03.md": {"absent": {"NOT_STUDIED": "a state for an entry in a document; the order asks for a rendered document, not code, and OPEN_QUESTIONS.md carries the state. Not a departure"}, "drift": []},
+  "readout-count/WORK_ORDER.md": {"absent": {"STRICT_CAUSAL": "a word inside one example row of the order's prose, not a state the order asks the code to hold. Not a departure"}, "drift": []},
+  "anchor-position/WORK_ORDER_2.md": {"absent": {"CONSTANT_SILENT": "the order asks for a claim-table change; CLAIM_TABLE.md carries the word. Not a departure"}, "drift": []},
+  "playground-crossrun/WORK_ORDER.md": {"absent": {"GAP_INSTRUMENT_CRASH": "belongs to the order's step 3, which the order gates ('Not before step 2'); the README records steps 2 and 3 as not started. Not a departure", "NOT_DETERMINABLE": "same: step 3, gated and recorded as not started"}, "drift": []}
+ }
+}

@@ -1,0 +1,256 @@
+[
+ {
+  "claim_id": "B:Simulators:KNOWN_RED.md:138:test_failure",
+  "quote": "falsifier-audit/selftest_fa.py passing (28 checks, 0 failed) indicates the extraction",
+  "reading": "states a pass: 28 checks, 0 failed",
+  "auditor": "Anthropic model (this session)",
+  "cells": {
+   "writing_commit/bare": {
+    "exit": 0,
+    "state": "PASS",
+    "tail": "sult is weaker than it looks: a classifier \n  question:  what is the reference body here (the null), and what happens to this falsifier if it moves?\n  detail:    undeclared reference term(s): the null\n[A4] A4/upgrade-queue:upgrade-queue/CLAIM_TABLE.md:22   status:OPEN\n  falsifier: a declared in-repo reference that does not exist passing as IN-REPO; an adopt-test marked RUNNABLE_HERE whose corpus is external\n  question:  what is the reference body here (reference), and what happens to this falsifier if it moves?\n  detail:    undeclared reference term(s): reference\nselftest: 28 checks, 0 failed\n",
+    "rev": "44e27e44a2a9",
+    "command": "python3 falsifier-audit/selftest_fa.py",
+    "cwd": "."
+   },
+   "writing_commit/current": {
+    "exit": 0,
+    "state": "PASS",
+    "tail": "sult is weaker than it looks: a classifier \n  question:  what is the reference body here (the null), and what happens to this falsifier if it moves?\n  detail:    undeclared reference term(s): the null\n[A4] A4/upgrade-queue:upgrade-queue/CLAIM_TABLE.md:22   status:OPEN\n  falsifier: a declared in-repo reference that does not exist passing as IN-REPO; an adopt-test marked RUNNABLE_HERE whose corpus is external\n  question:  what is the reference body here (reference), and what happens to this falsifier if it moves?\n  detail:    undeclared reference term(s): reference\nselftest: 28 checks, 0 failed\n",
+    "rev": "44e27e44a2a9",
+    "command": "python3 falsifier-audit/selftest_fa.py",
+    "cwd": "."
+   },
+   "head/bare": {
+    "exit": 1,
+    "state": "FAILS",
+    "tail": "sult is weaker than it looks: a classifier \n  question:  what is the reference body here (the null), and what happens to this falsifier if it moves?\n  detail:    undeclared reference term(s): the null\n[A4] A4/upgrade-queue:upgrade-queue/CLAIM_TABLE.md:22   status:OPEN\n  falsifier: a declared in-repo reference that does not exist passing as IN-REPO; an adopt-test marked RUNNABLE_HERE whose corpus is external\n  question:  what is the reference body here (reference), and what happens to this falsifier if it moves?\n  detail:    undeclared reference term(s): reference\nselftest: 28 checks, 1 failed\n",
+    "rev": "b40dfdee8ee7",
+    "command": "python3 falsifier-audit/selftest_fa.py",
+    "cwd": "."
+   },
+   "head/current": {
+    "exit": 1,
+    "state": "FAILS",
+    "tail": "sult is weaker than it looks: a classifier \n  question:  what is the reference body here (the null), and what happens to this falsifier if it moves?\n  detail:    undeclared reference term(s): the null\n[A4] A4/upgrade-queue:upgrade-queue/CLAIM_TABLE.md:22   status:OPEN\n  falsifier: a declared in-repo reference that does not exist passing as IN-REPO; an adopt-test marked RUNNABLE_HERE whose corpus is external\n  question:  what is the reference body here (reference), and what happens to this falsifier if it moves?\n  detail:    undeclared reference term(s): reference\nselftest: 28 checks, 1 failed\n",
+    "rev": "b40dfdee8ee7",
+    "command": "python3 falsifier-audit/selftest_fa.py",
+    "cwd": "."
+   }
+  }
+ },
+ {
+  "claim_id": "B:Simulators:TOOL_FINDER/TOOL_FINDER.md:378:test_failure",
+  "quote": "- status: RUN -- `python3 falsifier-audit/selftest_fa.py` -> selftest: 28 checks, 0 failed",
+  "reading": "states a pass: 28 checks, 0 failed",
+  "auditor": "Anthropic model (this session)",
+  "cells": {
+   "writing_commit/bare": {
+    "exit": 0,
+    "state": "PASS",
+    "tail": "sult is weaker than it looks: a classifier \n  question:  what is the reference body here (the null), and what happens to this falsifier if it moves?\n  detail:    undeclared reference term(s): the null\n[A4] A4/upgrade-queue:upgrade-queue/CLAIM_TABLE.md:22   status:OPEN\n  falsifier: a declared in-repo reference that does not exist passing as IN-REPO; an adopt-test marked RUNNABLE_HERE whose corpus is external\n  question:  what is the reference body here (reference), and what happens to this falsifier if it moves?\n  detail:    undeclared reference term(s): reference\nselftest: 28 checks, 0 failed\n",
+    "rev": "3f7d3f56836f",
+    "command": "python3 falsifier-audit/selftest_fa.py",
+    "cwd": "."
+   },
+   "writing_commit/current": {
+    "exit": 0,
+    "state": "PASS",
+    "tail": "sult is weaker than it looks: a classifier \n  question:  what is the reference body here (the null), and what happens to this falsifier if it moves?\n  detail:    undeclared reference term(s): the null\n[A4] A4/upgrade-queue:upgrade-queue/CLAIM_TABLE.md:22   status:OPEN\n  falsifier: a declared in-repo reference that does not exist passing as IN-REPO; an adopt-test marked RUNNABLE_HERE whose corpus is external\n  question:  what is the reference body here (reference), and what happens to this falsifier if it moves?\n  detail:    undeclared reference term(s): reference\nselftest: 28 checks, 0 failed\n",
+    "rev": "3f7d3f56836f",
+    "command": "python3 falsifier-audit/selftest_fa.py",
+    "cwd": "."
+   },
+   "head/bare": {
+    "exit": 1,
+    "state": "FAILS",
+    "tail": "sult is weaker than it looks: a classifier \n  question:  what is the reference body here (the null), and what happens to this falsifier if it moves?\n  detail:    undeclared reference term(s): the null\n[A4] A4/upgrade-queue:upgrade-queue/CLAIM_TABLE.md:22   status:OPEN\n  falsifier: a declared in-repo reference that does not exist passing as IN-REPO; an adopt-test marked RUNNABLE_HERE whose corpus is external\n  question:  what is the reference body here (reference), and what happens to this falsifier if it moves?\n  detail:    undeclared reference term(s): reference\nselftest: 28 checks, 1 failed\n",
+    "rev": "b40dfdee8ee7",
+    "command": "python3 falsifier-audit/selftest_fa.py",
+    "cwd": "."
+   },
+   "head/current": {
+    "exit": 1,
+    "state": "FAILS",
+    "tail": "sult is weaker than it looks: a classifier \n  question:  what is the reference body here (the null), and what happens to this falsifier if it moves?\n  detail:    undeclared reference term(s): the null\n[A4] A4/upgrade-queue:upgrade-queue/CLAIM_TABLE.md:22   status:OPEN\n  falsifier: a declared in-repo reference that does not exist passing as IN-REPO; an adopt-test marked RUNNABLE_HERE whose corpus is external\n  question:  what is the reference body here (reference), and what happens to this falsifier if it moves?\n  detail:    undeclared reference term(s): reference\nselftest: 28 checks, 1 failed\n",
+    "rev": "b40dfdee8ee7",
+    "command": "python3 falsifier-audit/selftest_fa.py",
+    "cwd": "."
+   }
+  }
+ },
+ {
+  "claim_id": "B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14_V2.md:84:test_failure",
+  "quote": "The response's open items O-3 and O-4 stand unaltered: the family classification has no second rater and the audience-fit scores remain one reader's judgments; the claim export (roadmap #1) is the instrument that would make both re-ratable by construction. O-5 stands: non-incident citations were not individually re-fetched. O-1 is now partially closed — instruments have been run by an outside party, and five claims about folder completeness failed their own tests — but no CLAIM_TABLE falsifier has yet been executed *as stated*; that remains the open measurement, and `falsifier-audit/selftest_fa.py` passing (28 checks, 0 failed) shows the extraction layer is ready for it.",
+  "reading": "states a pass: 28 checks, 0 failed (an outside document landed verbatim)",
+  "auditor": "Anthropic model (this session)",
+  "cells": {
+   "writing_commit/bare": {
+    "exit": 0,
+    "state": "PASS",
+    "tail": "sult is weaker than it looks: a classifier \n  question:  what is the reference body here (the null), and what happens to this falsifier if it moves?\n  detail:    undeclared reference term(s): the null\n[A4] A4/upgrade-queue:upgrade-queue/CLAIM_TABLE.md:22   status:OPEN\n  falsifier: a declared in-repo reference that does not exist passing as IN-REPO; an adopt-test marked RUNNABLE_HERE whose corpus is external\n  question:  what is the reference body here (reference), and what happens to this falsifier if it moves?\n  detail:    undeclared reference term(s): reference\nselftest: 28 checks, 0 failed\n",
+    "rev": "3d83364db03d",
+    "command": "python3 falsifier-audit/selftest_fa.py",
+    "cwd": "."
+   },
+   "writing_commit/current": {
+    "exit": 0,
+    "state": "PASS",
+    "tail": "sult is weaker than it looks: a classifier \n  question:  what is the reference body here (the null), and what happens to this falsifier if it moves?\n  detail:    undeclared reference term(s): the null\n[A4] A4/upgrade-queue:upgrade-queue/CLAIM_TABLE.md:22   status:OPEN\n  falsifier: a declared in-repo reference that does not exist passing as IN-REPO; an adopt-test marked RUNNABLE_HERE whose corpus is external\n  question:  what is the reference body here (reference), and what happens to this falsifier if it moves?\n  detail:    undeclared reference term(s): reference\nselftest: 28 checks, 0 failed\n",
+    "rev": "3d83364db03d",
+    "command": "python3 falsifier-audit/selftest_fa.py",
+    "cwd": "."
+   },
+   "head/bare": {
+    "exit": 1,
+    "state": "FAILS",
+    "tail": "sult is weaker than it looks: a classifier \n  question:  what is the reference body here (the null), and what happens to this falsifier if it moves?\n  detail:    undeclared reference term(s): the null\n[A4] A4/upgrade-queue:upgrade-queue/CLAIM_TABLE.md:22   status:OPEN\n  falsifier: a declared in-repo reference that does not exist passing as IN-REPO; an adopt-test marked RUNNABLE_HERE whose corpus is external\n  question:  what is the reference body here (reference), and what happens to this falsifier if it moves?\n  detail:    undeclared reference term(s): reference\nselftest: 28 checks, 1 failed\n",
+    "rev": "b40dfdee8ee7",
+    "command": "python3 falsifier-audit/selftest_fa.py",
+    "cwd": "."
+   },
+   "head/current": {
+    "exit": 1,
+    "state": "FAILS",
+    "tail": "sult is weaker than it looks: a classifier \n  question:  what is the reference body here (the null), and what happens to this falsifier if it moves?\n  detail:    undeclared reference term(s): the null\n[A4] A4/upgrade-queue:upgrade-queue/CLAIM_TABLE.md:22   status:OPEN\n  falsifier: a declared in-repo reference that does not exist passing as IN-REPO; an adopt-test marked RUNNABLE_HERE whose corpus is external\n  question:  what is the reference body here (reference), and what happens to this falsifier if it moves?\n  detail:    undeclared reference term(s): reference\nselftest: 28 checks, 1 failed\n",
+    "rev": "b40dfdee8ee7",
+    "command": "python3 falsifier-audit/selftest_fa.py",
+    "cwd": "."
+   }
+  }
+ },
+ {
+  "claim_id": "B:Simulators:forest-model-ledger/CLAIM_TABLE.md:37:cant_run",
+  "quote": "| FML_016 | run_9 is a CANDIDATE anchor: one of the four anchor tests reads PASS (seeds), two PARTIAL (sigma_meas void; 2 of 5 budgets live), one NOT_RUN (assumption nudges; UPDATE 2026-11-10: run, now PARTIAL, see FML_022). The record pins three code files by sha256 and the checker fails on drift or on promotion with a test unpassed. | SUPPORTED | `ledger/anchors/ANCHOR_run9.yaml`, `tools/check_ledger.py --selftest` | -- |",
+  "reading": "does not state a pass for check_ledger.py: it says the checker fails on drift",
+  "auditor": "Anthropic model (this session)",
+  "cells": {}
+ },
+ {
+  "claim_id": "B:Simulators:forest-model-ledger/CLAIM_TABLE.md:69:test_failure",
+  "quote": "| FML_048 | Held-out gate (thresholds frozen by hash at 72244bf before the sets existed; sets committed at e5e3186 before their first run; harness seeds 100-104): support_match, parameter_recovery, residual_regression, equation_family_swap PASS; multi_seed_ensemble FAIL_TP 0.995 (Laplace differences, 15 seeds, 3 sd shift), ablation FAIL_FP 0.005 (two outputs, uniform noise, no margin), assumption_block_trace FAIL_TP 0.9 (0.6 vs 0.1 failure, about 27 users). The three are trust PROVISIONAL and were not retuned. | SUPPORTED | `python3 tests/test_heldout.py`; `ledger/toolkit/HELDOUT_FREEZE.md` | a frozen tool file whose hash no longer matches, or a re-run that differs from the recorded held-out |",
+  "reading": "does not state a pass: it states that three held-out tools fail, which is what the run prints",
+  "auditor": "Anthropic model (this session)",
+  "cells": {}
+ },
+ {
+  "claim_id": "B:Simulators:stability-trigger-envelope/README.md:19:test_failure",
+  "quote": "CHECKS RUN         python3 test_envelope.py -> 217 checks, 0 failed",
+  "reading": "states a pass: 217 checks, 0 failed",
+  "auditor": "Anthropic model (this session)",
+  "cells": {
+   "writing_commit/bare": {
+    "exit": 0,
+    "state": "PASS",
+    "tail": "stability-trigger-envelope: 217 checks, 0 failed\n",
+    "rev": "038a30f13c99",
+    "command": "python3 test_envelope.py",
+    "cwd": "stability-trigger-envelope"
+   },
+   "writing_commit/current": {
+    "exit": 0,
+    "state": "PASS",
+    "tail": "stability-trigger-envelope: 217 checks, 0 failed\n",
+    "rev": "038a30f13c99",
+    "command": "python3 test_envelope.py",
+    "cwd": "stability-trigger-envelope"
+   },
+   "head/bare": {
+    "exit": 1,
+    "state": "FAILS",
+    "tail": "Traceback (most recent call last):\n  File \"/home/user/_audit/wt3/Simulators-b40dfdee8ee7/stability-trigger-envelope/test_envelope.py\", line 21, in <module>\n    import cases\n  File \"/home/user/_audit/wt3/Simulators-b40dfdee8ee7/stability-trigger-envelope/cases.py\", line 20, in <module>\n    from descent_record import descent_record, trace\nImportError: cannot import name 'descent_record' from 'descent_record' (/home/user/_audit/wt3/Simulators-b40dfdee8ee7/stability-trigger-envelope/descent_record.py). Did you mean: 'DescentRecord'?\n",
+    "rev": "b40dfdee8ee7",
+    "command": "python3 test_envelope.py",
+    "cwd": "stability-trigger-envelope"
+   },
+   "head/current": {
+    "exit": 1,
+    "state": "FAILS",
+    "tail": "Traceback (most recent call last):\n  File \"/home/user/_audit/wt3/Simulators-b40dfdee8ee7/stability-trigger-envelope/test_envelope.py\", line 21, in <module>\n    import cases\n  File \"/home/user/_audit/wt3/Simulators-b40dfdee8ee7/stability-trigger-envelope/cases.py\", line 20, in <module>\n    from descent_record import descent_record, trace\nImportError: cannot import name 'descent_record' from 'descent_record' (/home/user/_audit/wt3/Simulators-b40dfdee8ee7/stability-trigger-envelope/descent_record.py). Did you mean: 'DescentRecord'?\n",
+    "rev": "b40dfdee8ee7",
+    "command": "python3 test_envelope.py",
+    "cwd": "stability-trigger-envelope"
+   }
+  }
+ },
+ {
+  "claim_id": "B:Simulators:stability-trigger-envelope/RUN_NOTE.md:174:test_failure",
+  "quote": "RENDER_UNOBSERVED  test_envelope.py has run once (217 checks, 0 failed,",
+  "reading": "states a pass: 217 checks, 0 failed, run once",
+  "auditor": "Anthropic model (this session)",
+  "cells": {
+   "writing_commit/bare": {
+    "exit": 0,
+    "state": "PASS",
+    "tail": "stability-trigger-envelope: 217 checks, 0 failed\n",
+    "rev": "038a30f13c99",
+    "command": "python3 test_envelope.py",
+    "cwd": "stability-trigger-envelope"
+   },
+   "writing_commit/current": {
+    "exit": 0,
+    "state": "PASS",
+    "tail": "stability-trigger-envelope: 217 checks, 0 failed\n",
+    "rev": "038a30f13c99",
+    "command": "python3 test_envelope.py",
+    "cwd": "stability-trigger-envelope"
+   },
+   "head/bare": {
+    "exit": 1,
+    "state": "FAILS",
+    "tail": "Traceback (most recent call last):\n  File \"/home/user/_audit/wt3/Simulators-b40dfdee8ee7/stability-trigger-envelope/test_envelope.py\", line 21, in <module>\n    import cases\n  File \"/home/user/_audit/wt3/Simulators-b40dfdee8ee7/stability-trigger-envelope/cases.py\", line 20, in <module>\n    from descent_record import descent_record, trace\nImportError: cannot import name 'descent_record' from 'descent_record' (/home/user/_audit/wt3/Simulators-b40dfdee8ee7/stability-trigger-envelope/descent_record.py). Did you mean: 'DescentRecord'?\n",
+    "rev": "b40dfdee8ee7",
+    "command": "python3 test_envelope.py",
+    "cwd": "stability-trigger-envelope"
+   },
+   "head/current": {
+    "exit": 1,
+    "state": "FAILS",
+    "tail": "Traceback (most recent call last):\n  File \"/home/user/_audit/wt3/Simulators-b40dfdee8ee7/stability-trigger-envelope/test_envelope.py\", line 21, in <module>\n    import cases\n  File \"/home/user/_audit/wt3/Simulators-b40dfdee8ee7/stability-trigger-envelope/cases.py\", line 20, in <module>\n    from descent_record import descent_record, trace\nImportError: cannot import name 'descent_record' from 'descent_record' (/home/user/_audit/wt3/Simulators-b40dfdee8ee7/stability-trigger-envelope/descent_record.py). Did you mean: 'DescentRecord'?\n",
+    "rev": "b40dfdee8ee7",
+    "command": "python3 test_envelope.py",
+    "cwd": "stability-trigger-envelope"
+   }
+  }
+ },
+ {
+  "claim_id": "B:Mandala-Computing:CLAUDE.md:855:test_failure",
+  "quote": "python tests/test_core.py        # should report 422 passed, 0 failed",
+  "reading": "states what the run should report: 422 passed, 0 failed",
+  "auditor": "Anthropic model (this session)",
+  "cells": {
+   "writing_commit/bare": {
+    "exit": 1,
+    "state": "ENV_ERROR",
+    "tail": "Traceback (most recent call last):\n  File \"/home/user/_audit/wt3/Mandala-Computing-bfe272b19aea/tests/test_core.py\", line 12, in <module>\n    import numpy as np\nModuleNotFoundError: No module named 'numpy'\n",
+    "rev": "bfe272b19aea",
+    "command": "python3 tests/test_core.py",
+    "cwd": "."
+   },
+   "writing_commit/current": {
+    "exit": 1,
+    "state": "FAILS",
+    "tail": "_bridge_returns_valid\n  PASS  test_thermal_intersection_equilibrium\n  PASS  test_tier_hierarchy\n  PASS  test_tier_hierarchy_t1_dominates\n  PASS  test_tier_weights_sum\n  PASS  test_trial_factor\nMandala Computer initialized\n   Depth: 3  Symmetry: 8-fold\n   Temperature: 1.0\n   Atlas loaded (shapes.json)\n\n   Encoding TSP with 4 cities\n   Bloomed 7 cells, 19 couplings\n  PASS  test_tsp_energy\n  PASS  test_unknown_field_is_non_negative\n  PASS  test_vague_claim_high_concern\n  PASS  test_verification_grounding_score\n  PASS  test_verification_physics_units_counted\n\n421 passed, 1 failed out of 422 tests\n",
+    "rev": "bfe272b19aea",
+    "command": "python3 tests/test_core.py",
+    "cwd": "."
+   },
+   "head/bare": {
+    "exit": 1,
+    "state": "ENV_ERROR",
+    "tail": "Traceback (most recent call last):\n  File \"/home/user/_audit/wt3/Mandala-Computing-74e9422c5eee/tests/test_core.py\", line 12, in <module>\n    import numpy as np\nModuleNotFoundError: No module named 'numpy'\n",
+    "rev": "74e9422c5eee",
+    "command": "python3 tests/test_core.py",
+    "cwd": "."
+   },
+   "head/current": {
+    "exit": 1,
+    "state": "FAILS",
+    "tail": "_bridge_returns_valid\n  PASS  test_thermal_intersection_equilibrium\n  PASS  test_tier_hierarchy\n  PASS  test_tier_hierarchy_t1_dominates\n  PASS  test_tier_weights_sum\n  PASS  test_trial_factor\nMandala Computer initialized\n   Depth: 3  Symmetry: 8-fold\n   Temperature: 1.0\n   Atlas loaded (shapes.json)\n\n   Encoding TSP with 4 cities\n   Bloomed 7 cells, 19 couplings\n  PASS  test_tsp_energy\n  PASS  test_unknown_field_is_non_negative\n  PASS  test_vague_claim_high_concern\n  PASS  test_verification_grounding_score\n  PASS  test_verification_physics_units_counted\n\n421 passed, 1 failed out of 422 tests\n",
+    "rev": "74e9422c5eee",
+    "command": "python3 tests/test_core.py",
+    "cwd": "."
+   }
+  }
+ }
+]
