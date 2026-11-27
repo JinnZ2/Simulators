@@ -17,7 +17,7 @@ running the metric against a case whose answer was fixed in advance:
 
 Both are real, both are in this tree, and both are registered below as
 cases. A registry seeded only with metrics that pass is a registry nobody
-has tested, so one of the seeds is a CURRENTLY FAILING case, pinned. If it
+has tested, so both seeds carry a CURRENTLY FAILING case, pinned. If one
 starts passing, the test goes red and the note here has to be updated.
 
 WHAT THE GATE REFUSES, so that it is not decorative:
