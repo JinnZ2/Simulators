@@ -1,0 +1,3108 @@
+{
+ "record": "MODEL_OUTPUT_AUDIT_RUN_3_PACKET",
+ "status": "PROPOSED",
+ "license": "CC0",
+ "observer_slots": null,
+ "note": "what the local auditor is shown. No earlier verdict is in this file.",
+ "counts": {
+  "rerun": 26,
+  "probe": 101,
+  "pass": 8
+ },
+ "items": [
+  {
+   "item_id": "rerun#B:Living-Intelligence-Database:REVIEW.md:146:test_failure",
+   "claim_id": "B:Living-Intelligence-Database:REVIEW.md:146:test_failure",
+   "kind": "rerun",
+   "repo": "Living-Intelligence-Database",
+   "clone_url": "https://github.com/JinnZ2/Living-Intelligence-Database",
+   "quote": "`scripts/discover.py:27` — `import numpy as np` — fails with `ModuleNotFoundError` since `numpy` is not in any dependency manifest. The only documented install step across all README/guide files is `pip install jsonschema`.",
+   "location": {
+    "path": "REVIEW.md",
+    "line": 146,
+    "written_by_commit": "3552ebec3be779b7ea3cbca33c6a92f9ea681bfe"
+   },
+   "claim_type": "test_failure",
+   "runs": [
+    {
+     "tree": "run_1_tree",
+     "rev": "8bf3d00bcde2d0aee68033aa3aeedf6b71b2ebaf",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "scripts/discover.py"
+     ]
+    },
+    {
+     "tree": "writing_commit",
+     "rev": "3552ebec3be779b7ea3cbca33c6a92f9ea681bfe",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "scripts/discover.py"
+     ]
+    }
+   ],
+   "hosts": []
+  },
+  {
+   "item_id": "rerun#B:Living-Intelligence-Database:REVIEW.md:209:defect",
+   "claim_id": "B:Living-Intelligence-Database:REVIEW.md:209:defect",
+   "kind": "rerun",
+   "repo": "Living-Intelligence-Database",
+   "clone_url": "https://github.com/JinnZ2/Living-Intelligence-Database",
+   "quote": "`pip install jsonschema` is the only documented install step. `discover.py` requires `numpy`. There is no `requirements.txt`, `setup.py`, `pyproject.toml`, or `environment.yml`. A new contributor following the docs will hit `ModuleNotFoundError` the first time they run `scripts/discover.py`.",
+   "location": {
+    "path": "REVIEW.md",
+    "line": 209,
+    "written_by_commit": "3552ebec3be779b7ea3cbca33c6a92f9ea681bfe"
+   },
+   "claim_type": "defect",
+   "runs": [
+    {
+     "tree": "run_1_tree",
+     "rev": "8bf3d00bcde2d0aee68033aa3aeedf6b71b2ebaf",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "scripts/discover.py"
+     ]
+    },
+    {
+     "tree": "writing_commit",
+     "rev": "3552ebec3be779b7ea3cbca33c6a92f9ea681bfe",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "scripts/discover.py"
+     ]
+    }
+   ],
+   "hosts": []
+  },
+  {
+   "item_id": "rerun#B:Geometric-manifold-:docs/research/tool-selection-vs-deepening/deepseek_2026-11-20/REVIEW.md:34:defect",
+   "claim_id": "B:Geometric-manifold-:docs/research/tool-selection-vs-deepening/deepseek_2026-11-20/REVIEW.md:34:defect",
+   "kind": "rerun",
+   "repo": "Geometric-manifold-",
+   "clone_url": "https://github.com/JinnZ2/Geometric-manifold-",
+   "quote": "| `harness_self_test` | OBSERVED (synthetic) | **VOID.** `step1_recheck.py --self-test` crashes (R1 below). It has not passed anywhere this record knows of. |",
+   "location": {
+    "path": "docs/research/tool-selection-vs-deepening/deepseek_2026-11-20/REVIEW.md",
+    "line": 34,
+    "written_by_commit": "f33bfc2ee4dc3a9fb8255ed28970af5308f7c362"
+   },
+   "claim_type": "defect",
+   "runs": [
+    {
+     "tree": "run_1_tree",
+     "rev": "e814887bed510ef0d4bd67c54820399f0ad088d6",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "docs/research/tool-selection-vs-deepening/deepseek_2026-11-20/step1_recheck.py"
+     ]
+    },
+    {
+     "tree": "writing_commit",
+     "rev": "f33bfc2ee4dc3a9fb8255ed28970af5308f7c362",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "docs/research/tool-selection-vs-deepening/deepseek_2026-11-20/step1_recheck.py"
+     ]
+    }
+   ],
+   "hosts": []
+  },
+  {
+   "item_id": "rerun#B:Geometric-manifold-:docs/research/tool-selection-vs-deepening/deepseek_2026-11-20/REVIEW.md:58:defect",
+   "claim_id": "B:Geometric-manifold-:docs/research/tool-selection-vs-deepening/deepseek_2026-11-20/REVIEW.md:58:defect",
+   "kind": "rerun",
+   "repo": "Geometric-manifold-",
+   "clone_url": "https://github.com/JinnZ2/Geometric-manifold-",
+   "quote": "R1 OBSERVED: step1_recheck.py --self-test crashes, TypeError run()",
+   "location": {
+    "path": "docs/research/tool-selection-vs-deepening/deepseek_2026-11-20/REVIEW.md",
+    "line": 58,
+    "written_by_commit": "6de02bb91b109dda62d08bf40e867e5a61f96766"
+   },
+   "claim_type": "defect",
+   "runs": [
+    {
+     "tree": "run_1_tree",
+     "rev": "e814887bed510ef0d4bd67c54820399f0ad088d6",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "docs/research/tool-selection-vs-deepening/deepseek_2026-11-20/step1_recheck.py"
+     ]
+    },
+    {
+     "tree": "writing_commit",
+     "rev": "6de02bb91b109dda62d08bf40e867e5a61f96766",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "docs/research/tool-selection-vs-deepening/deepseek_2026-11-20/step1_recheck.py"
+     ]
+    }
+   ],
+   "hosts": []
+  },
+  {
+   "item_id": "rerun#B:Geometric-manifold-:docs/research/tool-selection-vs-deepening/deepseek_2026-11-20/REVIEW.md:98:defect",
+   "claim_id": "B:Geometric-manifold-:docs/research/tool-selection-vs-deepening/deepseek_2026-11-20/REVIEW.md:98:defect",
+   "kind": "rerun",
+   "repo": "Geometric-manifold-",
+   "clone_url": "https://github.com/JinnZ2/Geometric-manifold-",
+   "quote": "### R1, filer's run: `step1_recheck.py --self-test` crashes",
+   "location": {
+    "path": "docs/research/tool-selection-vs-deepening/deepseek_2026-11-20/REVIEW.md",
+    "line": 98,
+    "written_by_commit": "6de02bb91b109dda62d08bf40e867e5a61f96766"
+   },
+   "claim_type": "defect",
+   "runs": [
+    {
+     "tree": "run_1_tree",
+     "rev": "e814887bed510ef0d4bd67c54820399f0ad088d6",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "docs/research/tool-selection-vs-deepening/deepseek_2026-11-20/step1_recheck.py"
+     ]
+    },
+    {
+     "tree": "writing_commit",
+     "rev": "6de02bb91b109dda62d08bf40e867e5a61f96766",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "docs/research/tool-selection-vs-deepening/deepseek_2026-11-20/step1_recheck.py"
+     ]
+    }
+   ],
+   "hosts": []
+  },
+  {
+   "item_id": "rerun#B:curly-octo-happiness:REVIEW.md:205:defect",
+   "claim_id": "B:curly-octo-happiness:REVIEW.md:205:defect",
+   "kind": "rerun",
+   "repo": "curly-octo-happiness",
+   "clone_url": "https://github.com/JinnZ2/curly-octo-happiness",
+   "quote": "**3.5 — `meta_playground.py:8-14` — four `ModuleNotFoundError`s** (see §1.10); also `run_self_model_step` (line 59) is never defined anywhere, and `SkillLab.propose_skill(..., test=\"assert increment(3)==4\")` at line 68 is logged as `\"status\": \"passed\"` without checking the result.",
+   "location": {
+    "path": "REVIEW.md",
+    "line": 205,
+    "written_by_commit": "ce93698c5978d1cb24ca2e2cdd866db8903dad1c"
+   },
+   "claim_type": "defect",
+   "runs": [
+    {
+     "tree": "run_1_tree",
+     "rev": "a3d5c55328cc671c4384d0a02eccb70c7d828b89",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "meta_playground.py"
+     ]
+    },
+    {
+     "tree": "writing_commit",
+     "rev": "ce93698c5978d1cb24ca2e2cdd866db8903dad1c",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "meta_playground.py"
+     ]
+    }
+   ],
+   "hosts": []
+  },
+  {
+   "item_id": "rerun#B:Geometric-to-Binary-Computational-Bridge:REVIEW.md:115:defect",
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:REVIEW.md:115:defect",
+   "kind": "rerun",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "clone_url": "https://github.com/JinnZ2/Geometric-to-Binary-Computational-Bridge",
+   "quote": "`0xGB` is not a valid hex literal (`G` isn't a hex digit) — `python3 -m py_compile Bridge.py` raises `SyntaxError: invalid hexadecimal literal`. `pyproject.toml` already excludes this file from `ruff` with a comment calling it \"an orphaned prototype that nothing imports,\" rather than fixing or deleting it.",
+   "location": {
+    "path": "REVIEW.md",
+    "line": 115,
+    "written_by_commit": "fadd25196420067aa96fe23e6134fff135d85f20"
+   },
+   "claim_type": "defect",
+   "runs": [
+    {
+     "tree": "run_1_tree",
+     "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "Bridge.py"
+     ]
+    },
+    {
+     "tree": "writing_commit",
+     "rev": "fadd25196420067aa96fe23e6134fff135d85f20",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "Bridge.py"
+     ]
+    }
+   ],
+   "hosts": []
+  },
+  {
+   "item_id": "rerun#B:Geometric-to-Binary-Computational-Bridge:REVIEW.md:132:defect",
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:REVIEW.md:132:defect",
+   "kind": "rerun",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "clone_url": "https://github.com/JinnZ2/Geometric-to-Binary-Computational-Bridge",
+   "quote": "- `experiments/solvers/python_runner.py` — the entire module appears duplicated: `from __future__ import annotations` occurs twice (lines 7 and 65 — a hard `SyntaxError`, future-imports must be the first statement), two different import blocks (`from dispatcher import Problem, register_runner` at line 13 vs. `from runner_api import Problem, register_runner` at line 68), and two `@register_runner(\"python\") def run_python(...)` definitions (lines 155 and 250, confirmed via `ruff` F811 \"redefinition of unused `run_python`\").",
+   "location": {
+    "path": "REVIEW.md",
+    "line": 132,
+    "written_by_commit": "fadd25196420067aa96fe23e6134fff135d85f20"
+   },
+   "claim_type": "defect",
+   "runs": [
+    {
+     "tree": "run_1_tree",
+     "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "experiments/solvers/python_runner.py"
+     ]
+    },
+    {
+     "tree": "writing_commit",
+     "rev": "fadd25196420067aa96fe23e6134fff135d85f20",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "experiments/solvers/python_runner.py"
+     ]
+    }
+   ],
+   "hosts": []
+  },
+  {
+   "item_id": "rerun#B:ai-human-audit-protocol:REVIEW.md:28:defect",
+   "claim_id": "B:ai-human-audit-protocol:REVIEW.md:28:defect",
+   "kind": "rerun",
+   "repo": "ai-human-audit-protocol",
+   "clone_url": "https://github.com/JinnZ2/ai-human-audit-protocol",
+   "quote": "- Verified: `python -c \"import physics.reference_frame\"` → `ModuleNotFoundError: No module named 'frame_projection'`. CI only passes because it runs `python physics/reference_frame.py` / `(cd physics && python …)` (`ci.yml:65-67`). Fix (each file):",
+   "location": {
+    "path": "REVIEW.md",
+    "line": 28,
+    "written_by_commit": "71b46bb102bd637e76d2dffd6feadf4ad46a45db"
+   },
+   "claim_type": "defect",
+   "runs": [
+    {
+     "tree": "run_1_tree",
+     "rev": "72947579c330aca900902f47cd77d12d4de27cb4",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "physics/reference_frame.py"
+     ]
+    },
+    {
+     "tree": "writing_commit",
+     "rev": "71b46bb102bd637e76d2dffd6feadf4ad46a45db",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "physics/reference_frame.py"
+     ]
+    }
+   ],
+   "hosts": []
+  },
+  {
+   "item_id": "rerun#A:formula-audit@557ba26ba78d:10:test_failure",
+   "claim_id": "A:formula-audit@557ba26ba78d:10:test_failure",
+   "kind": "rerun",
+   "repo": "formula-audit",
+   "clone_url": "https://github.com/JinnZ2/formula-audit",
+   "quote": "it fails at import (glyph/operator.py shadows the stdlib operator)",
+   "location": {
+    "commit": "557ba26ba78dbab31f1f9c52fa3022a5185fa0e5",
+    "message_line": 10
+   },
+   "claim_type": "test_failure",
+   "runs": [
+    {
+     "tree": "run_1_tree",
+     "rev": "557ba26ba78dbab31f1f9c52fa3022a5185fa0e5",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "glyph/operator.py"
+     ]
+    }
+   ],
+   "hosts": []
+  },
+  {
+   "item_id": "rerun#A:Simulators@ed3dc84d30d0:26:test_failure",
+   "claim_id": "A:Simulators@ed3dc84d30d0:26:test_failure",
+   "kind": "rerun",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "Root suite: 133 tests, 4 failures, all in tests/test_run_manifest.py (two",
+   "location": {
+    "commit": "ed3dc84d30d0b3f1566d1c25e6a8d265486da253",
+    "message_line": 26
+   },
+   "claim_type": "test_failure",
+   "runs": [
+    {
+     "tree": "run_1_tree",
+     "rev": "ed3dc84d30d0b3f1566d1c25e6a8d265486da253",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "tests/test_run_manifest.py"
+     ]
+    }
+   ],
+   "hosts": []
+  },
+  {
+   "item_id": "rerun#A:Simulators@ac7df544aaeb:9:defect",
+   "claim_id": "A:Simulators@ac7df544aaeb:9:defect",
+   "kind": "rerun",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "THE DEFECT. census.py line 189 screens unparsed output with",
+   "location": {
+    "commit": "ac7df544aaebfbd736c3c3ddcaa38cb381835305",
+    "message_line": 9
+   },
+   "claim_type": "defect",
+   "runs": [
+    {
+     "tree": "run_1_tree",
+     "rev": "ac7df544aaebfbd736c3c3ddcaa38cb381835305",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "self-scan/census.py"
+     ]
+    }
+   ],
+   "hosts": []
+  },
+  {
+   "item_id": "rerun#B:Simulators:CLAUDE.md:15147:test_failure",
+   "claim_id": "B:Simulators:CLAUDE.md:15147:test_failure",
+   "kind": "rerun",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "`tests/test_run_manifest.py` failures are a subset of KNOWN_RED §11's 8",
+   "location": {
+    "path": "CLAUDE.md",
+    "line": 15147,
+    "written_by_commit": "b10392ff8159c5ba6ec22843da5c86dd805275fc"
+   },
+   "claim_type": "test_failure",
+   "runs": [
+    {
+     "tree": "run_1_tree",
+     "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "tests/test_run_manifest.py"
+     ]
+    },
+    {
+     "tree": "writing_commit",
+     "rev": "b10392ff8159c5ba6ec22843da5c86dd805275fc",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "tests/test_run_manifest.py"
+     ]
+    }
+   ],
+   "hosts": []
+  },
+  {
+   "item_id": "rerun#B:Simulators:KNOWN_RED.md:310:defect",
+   "claim_id": "B:Simulators:KNOWN_RED.md:310:defect",
+   "kind": "rerun",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "### 9.2 THE MECHANISM — a defect in census.py, not in the three tools",
+   "location": {
+    "path": "KNOWN_RED.md",
+    "line": 310,
+    "written_by_commit": "ac7df544aaebfbd736c3c3ddcaa38cb381835305"
+   },
+   "claim_type": "defect",
+   "runs": [
+    {
+     "tree": "run_1_tree",
+     "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "self-scan/census.py"
+     ]
+    },
+    {
+     "tree": "writing_commit",
+     "rev": "ac7df544aaebfbd736c3c3ddcaa38cb381835305",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "self-scan/census.py"
+     ]
+    }
+   ],
+   "hosts": []
+  },
+  {
+   "item_id": "rerun#B:Simulators:KNOWN_RED.md:1314:defect",
+   "claim_id": "B:Simulators:KNOWN_RED.md:1314:defect",
+   "kind": "rerun",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "cooperative-substrate-proof/p5_lag.py::lag_ratio       ModuleNotFoundError 'scope' 6 skipped",
+   "location": {
+    "path": "KNOWN_RED.md",
+    "line": 1314,
+    "written_by_commit": "85ce0d9e3f4617dfd16f04845921b3c02724cdc9"
+   },
+   "claim_type": "defect",
+   "runs": [
+    {
+     "tree": "run_1_tree",
+     "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "cooperative-substrate-proof/p5_lag.py"
+     ]
+    },
+    {
+     "tree": "writing_commit",
+     "rev": "85ce0d9e3f4617dfd16f04845921b3c02724cdc9",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "cooperative-substrate-proof/p5_lag.py"
+     ]
+    }
+   ],
+   "hosts": []
+  },
+  {
+   "item_id": "rerun#B:Simulators:external-audit/CLAIM_TABLE.md:526:test_failure",
+   "claim_id": "B:Simulators:external-audit/CLAIM_TABLE.md:526:test_failure",
+   "kind": "rerun",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "`notes/check_datasets.py` fails with *G-SPAN resolves outside sim-span/*",
+   "location": {
+    "path": "external-audit/CLAIM_TABLE.md",
+    "line": 526,
+    "written_by_commit": "3d83364db03d6c0a2e6f8f06c466319d1d593f9c"
+   },
+   "claim_type": "test_failure",
+   "runs": [
+    {
+     "tree": "run_1_tree",
+     "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "notes/check_datasets.py"
+     ]
+    },
+    {
+     "tree": "writing_commit",
+     "rev": "3d83364db03d6c0a2e6f8f06c466319d1d593f9c",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "notes/check_datasets.py"
+     ]
+    }
+   ],
+   "hosts": []
+  },
+  {
+   "item_id": "rerun#B:Simulators:route-independence/CLAIM_TABLE.md:33:defect",
+   "claim_id": "B:Simulators:route-independence/CLAIM_TABLE.md:33:defect",
+   "kind": "rerun",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "| RIN_023 | The instrument, `tools/merge_silent_loss.py`, and the defect its first run had. The first sweep over 52 merges reported ~1,400 lost lines across three merges (`e92afa1`, `e25f15c`, `f9541dc`) including the whole of `BNRAM_STRICT.md`, `META-PROTOCOL.md`, `PVL.md`, `PROTOCOL.md` and `PREAMBLE.md`; none of it was real. The clone was shallow, `git merge-base` returned nothing for those three, and the script read an unreachable base as an empty file, so every line a parent held read as lost. Caught by blob ids, not by the count: the base, p1 and merge copies of `BNRAM_STRICT.md` were one blob. The instrument now returns `BASE_UNREACHABLE` and `BASE_AMBIGUOUS(n)` as refusals with no file rows, the shallow case is built in the selftest from a `--depth 1` clone of a constructed repo, and after `git fetch --unshallow` the same three merges read 0 / 1 / 0 files. The absent-vs-known-negative repair, found by running the instrument on the thing it measures. Stated limits: exact-line multiset (a copy masks a loss of one copy), `elsewhere` sampled at 12 lines of 30+ characters per file, and nothing here says which side to keep -- that is what a merge commit does not record. | OBSERVED | SUPPORTED | a merge with a reachable base reading BASE_UNREACHABLE, or the selftest's shallow arm passing on a full clone |",
+   "location": {
+    "path": "route-independence/CLAIM_TABLE.md",
+    "line": 33,
+    "written_by_commit": "0a182ed7c47a8d75f00bd193752858ed889c5c56"
+   },
+   "claim_type": "defect",
+   "runs": [
+    {
+     "tree": "run_1_tree",
+     "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "tools/merge_silent_loss.py"
+     ]
+    },
+    {
+     "tree": "writing_commit",
+     "rev": "0a182ed7c47a8d75f00bd193752858ed889c5c56",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "tools/merge_silent_loss.py"
+     ]
+    }
+   ],
+   "hosts": []
+  },
+  {
+   "item_id": "rerun#B:Simulators:self-scan/README.md:52:defect",
+   "claim_id": "B:Simulators:self-scan/README.md:52:defect",
+   "kind": "rerun",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "| `enumerators.py` | is self-enumeration one defect or two? Measured by running, not read from source |",
+   "location": {
+    "path": "self-scan/README.md",
+    "line": 52,
+    "written_by_commit": "312846cbfdc183fb769b84e919e540459116b255"
+   },
+   "claim_type": "defect",
+   "runs": [
+    {
+     "tree": "run_1_tree",
+     "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "self-scan/enumerators.py"
+     ]
+    },
+    {
+     "tree": "writing_commit",
+     "rev": "312846cbfdc183fb769b84e919e540459116b255",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "self-scan/enumerators.py"
+     ]
+    }
+   ],
+   "hosts": []
+  },
+  {
+   "item_id": "rerun#B:Simulators:self-scan/enumerators.py:46:cant_run",
+   "claim_id": "B:Simulators:self-scan/enumerators.py:46:cant_run",
+   "kind": "rerun",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "# `census.py` cannot run itself (SS_017) and neither can this module run",
+   "location": {
+    "path": "self-scan/enumerators.py",
+    "line": 46,
+    "written_by_commit": "312846cbfdc183fb769b84e919e540459116b255"
+   },
+   "claim_type": "cant_run",
+   "runs": [
+    {
+     "tree": "run_1_tree",
+     "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "self-scan/census.py"
+     ]
+    },
+    {
+     "tree": "writing_commit",
+     "rev": "312846cbfdc183fb769b84e919e540459116b255",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "self-scan/census.py"
+     ]
+    }
+   ],
+   "hosts": []
+  },
+  {
+   "item_id": "rerun#B:Simulators:self-scan/samples/census.sample.txt:47:cant_run",
+   "claim_id": "B:Simulators:self-scan/samples/census.sample.txt:47:cant_run",
+   "kind": "rerun",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "self-scan/census.py                                  EXCLUDED_SELF_REFERENCE a census cannot run its own run",
+   "location": {
+    "path": "self-scan/samples/census.sample.txt",
+    "line": 47,
+    "written_by_commit": "241e8b84bff9cd357bb1423352b9f5c74dede711"
+   },
+   "claim_type": "cant_run",
+   "runs": [
+    {
+     "tree": "run_1_tree",
+     "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "self-scan/census.py"
+     ]
+    },
+    {
+     "tree": "writing_commit",
+     "rev": "241e8b84bff9cd357bb1423352b9f5c74dede711",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "self-scan/census.py"
+     ]
+    }
+   ],
+   "hosts": []
+  },
+  {
+   "item_id": "rerun#B:Simulators:self-scan/samples/enumerators.sample.txt:45:cant_run",
+   "claim_id": "B:Simulators:self-scan/samples/enumerators.sample.txt:45:cant_run",
+   "kind": "rerun",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "self-scan/census.py                                  -      -      -       NOT RUN: SS_017 -- a census cannot run its own",
+   "location": {
+    "path": "self-scan/samples/enumerators.sample.txt",
+    "line": 45,
+    "written_by_commit": "312846cbfdc183fb769b84e919e540459116b255"
+   },
+   "claim_type": "cant_run",
+   "runs": [
+    {
+     "tree": "run_1_tree",
+     "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "self-scan/census.py"
+     ]
+    },
+    {
+     "tree": "writing_commit",
+     "rev": "312846cbfdc183fb769b84e919e540459116b255",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "self-scan/census.py"
+     ]
+    }
+   ],
+   "hosts": []
+  },
+  {
+   "item_id": "rerun#B:Simulators:tools/tool_inventory.json:3008:defect",
+   "claim_id": "B:Simulators:tools/tool_inventory.json:3008:defect",
+   "kind": "rerun",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "{\"repo\": \"Simulators\", \"path\": \"self-scan/enumerators.py\", \"kind\": \"CLAIM_TOOL\", \"inspects\": [\"PROTOCOL\"], \"desc\": \"Tests whether self-enumeration is one defect or two, tracing enumerators\"},",
+   "location": {
+    "path": "tools/tool_inventory.json",
+    "line": 3008,
+    "written_by_commit": "6e1c49b99cdbd66427e7dc989fccb57d63809f5e"
+   },
+   "claim_type": "defect",
+   "runs": [
+    {
+     "tree": "run_1_tree",
+     "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "self-scan/enumerators.py"
+     ]
+    },
+    {
+     "tree": "writing_commit",
+     "rev": "6e1c49b99cdbd66427e7dc989fccb57d63809f5e",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "self-scan/enumerators.py"
+     ]
+    }
+   ],
+   "hosts": []
+  },
+  {
+   "item_id": "rerun#B:Polyhedral-Intelligence:CLAUDE.md:134:cant_run",
+   "claim_id": "B:Polyhedral-Intelligence:CLAUDE.md:134:cant_run",
+   "kind": "rerun",
+   "repo": "Polyhedral-Intelligence",
+   "clone_url": "https://github.com/JinnZ2/Polyhedral-Intelligence",
+   "quote": "**`integrated.py`** defines `PolyhedralEmotionalMatrix` and `UnifiedResonanceEngine` classes but references four external classes from the **Emotions-as-Sensors** repo (`https://github.com/JinnZ2/Emotions-as-Sensors`): `FELTEngine`, `FELTSensorImplementation`, `FearSensorImplementation`, and `GlyphPhaseSynchronizer`. These classes do not yet have Python implementations — they are aspirational interfaces whose data contracts are defined in Emotions-as-Sensors' JSON sensor definitions and schemas. `integrated.py` is an architectural design sketch, not runnable code. See the [Emotions-as-Sensors integration section](#emotions-as-sensors-felt-system) below for the full API surface.",
+   "location": {
+    "path": "CLAUDE.md",
+    "line": 134,
+    "written_by_commit": "86e65df20ffc1d18550fe8a8424195430c7fbcea"
+   },
+   "claim_type": "cant_run",
+   "runs": [
+    {
+     "tree": "run_1_tree",
+     "rev": "f933133d89537e8e583ac3fe734a1736468eee93",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "integrated.py"
+     ]
+    },
+    {
+     "tree": "writing_commit",
+     "rev": "86e65df20ffc1d18550fe8a8424195430c7fbcea",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "integrated.py"
+     ]
+    }
+   ],
+   "hosts": []
+  },
+  {
+   "item_id": "rerun#B:metabolic-accounting:docs/AUDIT_06.md:31:defect",
+   "claim_id": "B:metabolic-accounting:docs/AUDIT_06.md:31:defect",
+   "kind": "rerun",
+   "repo": "metabolic-accounting",
+   "clone_url": "https://github.com/JinnZ2/metabolic-accounting",
+   "quote": "### A.1 `test_governance_design_principles.py` — `ModuleNotFoundError`   `[OPEN]`",
+   "location": {
+    "path": "docs/AUDIT_06.md",
+    "line": 31,
+    "written_by_commit": "f94042444d7d41e1abd4c7a95cee98b62124928d"
+   },
+   "claim_type": "defect",
+   "runs": [
+    {
+     "tree": "run_1_tree",
+     "rev": "e1f00f7e50b04ddac6cf275e99863c1a1ecc71c2",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "tests/test_governance_design_principles.py"
+     ]
+    },
+    {
+     "tree": "writing_commit",
+     "rev": "f94042444d7d41e1abd4c7a95cee98b62124928d",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "tests/test_governance_design_principles.py"
+     ]
+    }
+   ],
+   "hosts": []
+  },
+  {
+   "item_id": "rerun#B:4D-language-lens:CLAUDE.md:24:cant_run",
+   "claim_id": "B:4D-language-lens:CLAUDE.md:24:cant_run",
+   "kind": "rerun",
+   "repo": "4D-language-lens",
+   "clone_url": "https://github.com/JinnZ2/4D-language-lens",
+   "quote": "`falsification_tests.py` is an archived v1 harness. It imports `original_4dlens.py`, which is not in this repo, so it cannot run; it raises `SystemExit` with an explanation instead of an `ImportError` traceback. Leave it as a historical artifact — do not repoint it at `FourDLensV2`. The v2 fixes were derived from these exact tests, so running them against v2 would measure nothing.",
+   "location": {
+    "path": "CLAUDE.md",
+    "line": 24,
+    "written_by_commit": "43c0e08361ff7e6e26df4d26ce5548c98085f980"
+   },
+   "claim_type": "cant_run",
+   "runs": [
+    {
+     "tree": "run_1_tree",
+     "rev": "2729c42641be5428b152a2971ccbfbfb0bb59bf1",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "falsification_tests.py"
+     ]
+    },
+    {
+     "tree": "writing_commit",
+     "rev": "43c0e08361ff7e6e26df4d26ce5548c98085f980",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "falsification_tests.py"
+     ]
+    }
+   ],
+   "hosts": []
+  },
+  {
+   "item_id": "rerun#B:4D-language-lens:falsification_tests.py:22:cant_run",
+   "claim_id": "B:4D-language-lens:falsification_tests.py:22:cant_run",
+   "kind": "rerun",
+   "repo": "4D-language-lens",
+   "clone_url": "https://github.com/JinnZ2/4D-language-lens",
+   "quote": "\"falsification_tests.py is an archived v1 harness and cannot run here.\\n\"",
+   "location": {
+    "path": "falsification_tests.py",
+    "line": 22,
+    "written_by_commit": "43c0e08361ff7e6e26df4d26ce5548c98085f980"
+   },
+   "claim_type": "cant_run",
+   "runs": [
+    {
+     "tree": "run_1_tree",
+     "rev": "2729c42641be5428b152a2971ccbfbfb0bb59bf1",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "falsification_tests.py"
+     ]
+    },
+    {
+     "tree": "writing_commit",
+     "rev": "43c0e08361ff7e6e26df4d26ce5548c98085f980",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "falsification_tests.py"
+     ]
+    }
+   ],
+   "hosts": []
+  },
+  {
+   "item_id": "probe#B:Living-Intelligence-Database:audit/2026-11-24/LID_intake_biosphere_council_crosswalk_2026-11-24.md:23:environment",
+   "claim_id": "B:Living-Intelligence-Database:audit/2026-11-24/LID_intake_biosphere_council_crosswalk_2026-11-24.md:23:environment",
+   "kind": "probe",
+   "repo": "Living-Intelligence-Database",
+   "clone_url": "https://github.com/JinnZ2/Living-Intelligence-Database",
+   "quote": "- `registry/DECLARED.json`, amendment \"UNDERSPECIFIED + MATCH_SUSPECT; second index; abstract pass\", records that \"Europe PMC answered; api.openalex.org was refused by this environment's egress proxy (HTTP 403 on CONNECT)\". The intake therefore uses Europe PMC.",
+   "location": {
+    "path": "audit/2026-11-24/LID_intake_biosphere_council_crosswalk_2026-11-24.md",
+    "line": 23,
+    "written_by_commit": "16808ab59efb25736c1a1404623d4f151f81ab4e"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "api.openalex.org"
+   ]
+  },
+  {
+   "item_id": "probe#B:Living-Intelligence-Database:provenance/as_received/existence_second_index_MANIFEST.json:5:environment",
+   "claim_id": "B:Living-Intelligence-Database:provenance/as_received/existence_second_index_MANIFEST.json:5:environment",
+   "kind": "probe",
+   "repo": "Living-Intelligence-Database",
+   "clone_url": "https://github.com/JinnZ2/Living-Intelligence-Database",
+   "quote": "\"provenance_note\": \"Responses of the Europe PMC REST search (resultType lite) received by scripts/existence_check.py second. Bibliographic records only. Hashes identify the received bytes; they do not authenticate the source. api.openalex.org was not reached from this environment (egress proxy, HTTP 403 on CONNECT).\",",
+   "location": {
+    "path": "provenance/as_received/existence_second_index_MANIFEST.json",
+    "line": 5,
+    "written_by_commit": "1ad88826fbd21b7debe6134c0f0b847751bc0c66"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "api.openalex.org"
+   ]
+  },
+  {
+   "item_id": "probe#B:Living-Intelligence-Database:registry/DECLARED.json:323:environment",
+   "claim_id": "B:Living-Intelligence-Database:registry/DECLARED.json:323:environment",
+   "kind": "probe",
+   "repo": "Living-Intelligence-Database",
+   "clone_url": "https://github.com/JinnZ2/Living-Intelligence-Database",
+   "quote": "\"after\": \"the existence check at 1cd1cc8, whose results were seen; by the owner's order. Declared before any second-index search was sent and before any abstract was fetched. Reachability was probed first with one known paper: Europe PMC answered; api.openalex.org was refused by this environment's egress proxy (HTTP 403 on CONNECT).\",",
+   "location": {
+    "path": "registry/DECLARED.json",
+    "line": 323,
+    "written_by_commit": "9e9c7ed10315a7ece000a004da7b9e1489f7342d"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "api.openalex.org"
+   ]
+  },
+  {
+   "item_id": "probe#B:study-aperture:examples/reproducibility-model/FINDINGS.md:5:environment",
+   "claim_id": "B:study-aperture:examples/reproducibility-model/FINDINGS.md:5:environment",
+   "kind": "probe",
+   "repo": "study-aperture",
+   "clone_url": "https://github.com/JinnZ2/study-aperture",
+   "quote": "Source: arXiv:2602.15697v1, HTML rendering at https://arxiv.org/html/2602.15697v1, read through a fetch tool. The PDF could not be downloaded here (shell egress 403). Section, table and equation numbers below refer to that rendering.",
+   "location": {
+    "path": "examples/reproducibility-model/FINDINGS.md",
+    "line": 5,
+    "written_by_commit": "f9a453150f990c32bdd8aea0b1797f329f172f03"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "arxiv.org"
+   ]
+  },
+  {
+   "item_id": "probe#A:Simulators@fbbf54818a13:7:environment",
+   "claim_id": "A:Simulators@fbbf54818a13:7:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "environment's proxy; only github.com answers, and egress is an allowlist",
+   "location": {
+    "commit": "fbbf54818a137207528559a53b63afbf35047500",
+    "message_line": 7
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "github.com"
+   ]
+  },
+  {
+   "item_id": "probe#A:Simulators@1bc2a4643dff:1:environment",
+   "claim_id": "A:Simulators@1bc2a4643dff:1:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "www.epa.gov is denied by this session's egress policy - 403 to CONNECT,",
+   "location": {
+    "commit": "1bc2a4643dff5db2083eb6a55d627f3da132f25e",
+    "message_line": 1
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "www.epa.gov"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:CLAUDE.md:6672:environment",
+   "claim_id": "B:Simulators:CLAUDE.md:6672:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "run:** `sba.gov` refuses CONNECT like the six publisher hosts at",
+   "location": {
+    "path": "CLAUDE.md",
+    "line": 6672,
+    "written_by_commit": "55068170c9c97322300ef67ab235d91a1a5bf970"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "sba.gov"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:CLAUDE.md:10120:environment",
+   "claim_id": "B:Simulators:CLAUDE.md:10120:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "(measured, allowlist egress, only `github.com` answers) and **no",
+   "location": {
+    "path": "CLAUDE.md",
+    "line": 10120,
+    "written_by_commit": "fbbf54818a137207528559a53b63afbf35047500"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "github.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:README.md:235:environment",
+   "claim_id": "B:Simulators:README.md:235:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "| `merge-path/` | a work order: a transform table between existing claim-record formats (nanopublications, ORKG, RO-Crate, ClinicalTrials.gov, CIPM/CMC, proof assistants, OSF prereg) and the falsifier / branch-record format, loss measured not asserted — **not a new format** (§0) | **The egress fact sets the verification status.** §1's load-bearing first task is to fetch each registrar's spec; every spec host answered **403 to CONNECT** (measured, logged in the proxy), so **no spec was fetched**, every real registrar is **UNVERIFIED** (`MRG_001`), its converter NOT-IMPLEMENTED with that reason, and per §7 everything derived inherits UNVERIFIED — no spec field transcribed from memory, none fabricated. **What is delivered and verified is the machinery**: a residual classifier over two converters with four classes — DROPPED / FLATTENED / COERCED / ADDED — where COERCED and ADDED (the silent-wrongness classes) are reported alongside DROPPED, visible as a zero (`MRG_002`; a report of only DROPPED is not finished). S1–S5 hold on declared test doubles (`MRG_003`): identity lossless, unmappable→DROPPED not silent, COERCED detected, ADDED-with-no-origin a hard failure, NO-MERGE-with-no-`breaks_at` a hard failure. Every real registrar is **NO-MERGE with an egress `breaks_at`** (a valid outcome, §0) and `convert_out` returns NOT-IMPLEMENTED rather than guessing (`MRG_005`). The reverse gaps are carried not skipped (`MRG_006`; §4) — our format weaker on uncertainty budget / enforcement / total mechanical check / provenance graph, all UNVERIFIED — and the branch record's novelty is UNVERIFIED with the search list stated, no ENTRY 03 opened (`MRG_007`; §5). No mock presented as real, no ranking, no \"ours is better\" (`MRG_008`). Eight `MRG_*` claims; 22 selftest checks |",
+   "location": {
+    "path": "README.md",
+    "line": 235,
+    "written_by_commit": "eef993a7f03d28fcbdde3c8012190a7b8fc56e14"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "clinicaltrials.gov"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:archive/assessor-coupling/CLAIM_TABLE.md:19:environment",
+   "claim_id": "B:Simulators:archive/assessor-coupling/CLAIM_TABLE.md:19:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "| ASC_008 | UNVERIFIED: the public records the metric wants (990s, grant databases) are egress-refused — three hosts answered 403 to CONNECT, measured and timestamped, `github.com` the control — so nothing here is a fraction for any real assessor, and whether the metric is measurable in practice is exactly as untested as the order's scope limit says. | UNVERIFIED | `pool_metric.EGRESS`; every field `CONSTRUCTED` | a real field's graph supplied to `--field` |",
+   "location": {
+    "path": "archive/assessor-coupling/CLAIM_TABLE.md",
+    "line": 19,
+    "written_by_commit": "247f4cca7c9163794494b65e08b63fd7f8a9207e"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "github.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:archive/assessor-coupling/README.md:35:environment",
+   "claim_id": "B:Simulators:archive/assessor-coupling/README.md:35:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "| records | no 990, grant database, COI instrument or archive was read: the record hosts answered 403 to CONNECT, measured and timestamped in `pool_metric.EGRESS`, `github.com` the connecting control; every graph, instrument and schema is CONSTRUCTED and says so |",
+   "location": {
+    "path": "archive/assessor-coupling/README.md",
+    "line": 35,
+    "written_by_commit": "247f4cca7c9163794494b65e08b63fd7f8a9207e"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "github.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:archive/assessor-coupling/selftest.py:88:environment",
+   "claim_id": "B:Simulators:archive/assessor-coupling/selftest.py:88:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "check(\"EGRESS carries a measured timestamp and the control host\", re.match(r\"\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\dZ\", pm.EGRESS[\"measured\"]) and \"github.com:443\" in pm.EGRESS[\"hosts\"])",
+   "location": {
+    "path": "archive/assessor-coupling/selftest.py",
+    "line": 88,
+    "written_by_commit": "0e77d9a97bf9510ddb4a71d9439215d8eedd9fda"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "github.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:archive/chain-position/CLAIM_TABLE.md:12:environment",
+   "claim_id": "B:Simulators:archive/chain-position/CLAIM_TABLE.md:12:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "| CHP_002 | Step 1 is `NOT_RUN_ON_STANDARD`: both OWASP hosts answered 403 to CONNECT (measured, timestamped in `clause_audit.EGRESS`, `github.com` the connecting control) and the clauses coded are the order's own five-bullet summary. The count — inside-agent 0, gateway 5 — is therefore a property of what the summary carried, and the order's expected null is not established from here. | SUPPORTED | `samples/run_all.sample.txt` step 1 block; `selftest.py` clause_audit section | the standard's clauses handed to `--clauses` by someone who read them, and a clause coded `INSIDE_AGENT` |",
+   "location": {
+    "path": "archive/chain-position/CLAIM_TABLE.md",
+    "line": 12,
+    "written_by_commit": "c656081824dffcb8e60bc374a23252785577d310"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "github.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:archive/chain-position/README.md:30:environment",
+   "claim_id": "B:Simulators:archive/chain-position/README.md:30:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "| standard | neither OWASP document was read. The hosts answered 403 to CONNECT, measured and timestamped in `clause_audit.EGRESS` (`github.com` is the connecting control). Step 1 is `NOT_RUN_ON_STANDARD`; the count it prints is over the order's own five-bullet summary |",
+   "location": {
+    "path": "archive/chain-position/README.md",
+    "line": 30,
+    "written_by_commit": "c656081824dffcb8e60bc374a23252785577d310"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "github.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:archive/chain-position/selftest.py:50:environment",
+   "claim_id": "B:Simulators:archive/chain-position/selftest.py:50:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "check(\"EGRESS record names both standard hosts and a control\", set(ca.EGRESS[\"refused\"]) == {\"owasp.org:443\", \"genai.owasp.org:443\"} and \"github.com:443\" in ca.EGRESS[\"control\"])",
+   "location": {
+    "path": "archive/chain-position/selftest.py",
+    "line": 50,
+    "written_by_commit": "84935a2b08efc83e29a1e0eea02e709eb5c32656"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "genai.owasp.org",
+    "github.com",
+    "owasp.org"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:assessor-coupling/CLAIM_TABLE.md:154:environment",
+   "claim_id": "B:Simulators:assessor-coupling/CLAIM_TABLE.md:154:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "| ASC_008 | UNVERIFIED: the public records the metric wants (990s, grant databases) are egress-refused — three hosts answered 403 to CONNECT, measured and timestamped, `github.com` the control — so nothing here is a fraction for any real assessor, and whether the metric is measurable in practice is exactly as untested as the order's scope limit says. | UNVERIFIED | `pool_metric.EGRESS`; every field `CONSTRUCTED` | a real field's graph supplied to `--field` |",
+   "location": {
+    "path": "assessor-coupling/CLAIM_TABLE.md",
+    "line": 154,
+    "written_by_commit": "0e77d9a97bf9510ddb4a71d9439215d8eedd9fda"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "github.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:assessor-coupling/README.md:138:environment",
+   "claim_id": "B:Simulators:assessor-coupling/README.md:138:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "| records | no 990, grant database, COI instrument or archive was read: the record hosts answered 403 to CONNECT, measured and timestamped in `pool_metric.EGRESS`, `github.com` the connecting control; every graph, instrument and schema is CONSTRUCTED and says so |",
+   "location": {
+    "path": "assessor-coupling/README.md",
+    "line": 138,
+    "written_by_commit": "0e77d9a97bf9510ddb4a71d9439215d8eedd9fda"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "github.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:assessor-coupling/selftest.py:88:environment",
+   "claim_id": "B:Simulators:assessor-coupling/selftest.py:88:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "check(\"EGRESS carries a measured timestamp and the control host\", re.match(r\"\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\dZ\", pm.EGRESS[\"measured\"]) and \"github.com:443\" in pm.EGRESS[\"hosts\"])",
+   "location": {
+    "path": "assessor-coupling/selftest.py",
+    "line": 88,
+    "written_by_commit": "0e77d9a97bf9510ddb4a71d9439215d8eedd9fda"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "github.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:blind-reader-void12/reader_packet/sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md:199:environment",
+   "claim_id": "B:Simulators:blind-reader-void12/reader_packet/sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md:199:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "not read by the building session (www.bipm.org egress refused)",
+   "location": {
+    "path": "blind-reader-void12/reader_packet/sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md",
+    "line": 199,
+    "written_by_commit": "bf89b2338a979a6c3a74a162cb57d9db9de927ae"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "www.bipm.org"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:blind-reader-void12/reader_packet/sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md:210:environment",
+   "claim_id": "B:Simulators:blind-reader-void12/reader_packet/sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md:210:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "(VERIFY): www.bipm.org egress refused to this session's fetches",
+   "location": {
+    "path": "blind-reader-void12/reader_packet/sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md",
+    "line": 210,
+    "written_by_commit": "bf89b2338a979a6c3a74a162cb57d9db9de927ae"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "www.bipm.org"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:blind-reader-void12/reader_packet_v2/sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md:199:environment",
+   "claim_id": "B:Simulators:blind-reader-void12/reader_packet_v2/sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md:199:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "not read by the building session (www.bipm.org egress refused)",
+   "location": {
+    "path": "blind-reader-void12/reader_packet_v2/sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md",
+    "line": 199,
+    "written_by_commit": "dab5b856f1d640bcd8261c5e7800e8bed46045b4"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "www.bipm.org"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:blind-reader-void12/reader_packet_v2/sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md:210:environment",
+   "claim_id": "B:Simulators:blind-reader-void12/reader_packet_v2/sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md:210:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "(VERIFY): www.bipm.org egress refused to this session's fetches",
+   "location": {
+    "path": "blind-reader-void12/reader_packet_v2/sources/Simulators/playground-crossrun/COMBINED_SPEC.lines_1-390.md",
+    "line": 210,
+    "written_by_commit": "dab5b856f1d640bcd8261c5e7800e8bed46045b4"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "www.bipm.org"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:blind-reader-void12/studies/OPEN_ITEMS_OUTSIDE.md:30:cant_run",
+   "claim_id": "B:Simulators:blind-reader-void12/studies/OPEN_ITEMS_OUTSIDE.md:30:cant_run",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "- ai-arena (outside this repository): at 732458a its suite passes with formula-audit at `main` (c1acb59, which is also the CI pin) and fails 1 test with formula-audit at its default branch HEAD (7df0d81, default branch `claude/quasicrystal-projection-properties-448bx7`, which does not contain main). Failing test: `tests.test_word_slots.TestPins.test_hash_mismatch_is_not_run`. At 7df0d81 `wordslots/places.json` is absent, so `report()` returns NOT_RUN with the reason \"not found\", which matches neither string the test accepts (\"sha256\", \"no checkout\"). The 18 pinned tests read NOT_RUN there. Local runs, Python 3.13 only; ai-arena CI logs NOT READ (api.github.com returns 403 here).",
+   "location": {
+    "path": "blind-reader-void12/studies/OPEN_ITEMS_OUTSIDE.md",
+    "line": 30,
+    "written_by_commit": "9c59213762160ac4ba1b4bff34b0ad194cba9202"
+   },
+   "claim_type": "cant_run",
+   "runs": [],
+   "hosts": [
+    "api.github.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:chain-position/CLAIM_TABLE.md:12:environment",
+   "claim_id": "B:Simulators:chain-position/CLAIM_TABLE.md:12:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "| CHP_002 | Step 1 is `NOT_RUN_ON_STANDARD`: both OWASP hosts answered 403 to CONNECT (measured, timestamped in `clause_audit.EGRESS`, `github.com` the connecting control) and the clauses coded are the order's own five-bullet summary. The count — inside-agent 0, gateway 5 — is therefore a property of what the summary carried, and the order's expected null is not established from here. | SUPPORTED | `samples/run_all.sample.txt` step 1 block; `selftest.py` clause_audit section | the standard's clauses handed to `--clauses` by someone who read them, and a clause coded `INSIDE_AGENT` |",
+   "location": {
+    "path": "chain-position/CLAIM_TABLE.md",
+    "line": 12,
+    "written_by_commit": "84935a2b08efc83e29a1e0eea02e709eb5c32656"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "github.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:chain-position/README.md:30:environment",
+   "claim_id": "B:Simulators:chain-position/README.md:30:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "| standard | neither OWASP document was read. The hosts answered 403 to CONNECT, measured and timestamped in `clause_audit.EGRESS` (`github.com` is the connecting control). Step 1 is `NOT_RUN_ON_STANDARD`; the count it prints is over the order's own five-bullet summary |",
+   "location": {
+    "path": "chain-position/README.md",
+    "line": 30,
+    "written_by_commit": "84935a2b08efc83e29a1e0eea02e709eb5c32656"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "github.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:chain-position/selftest.py:50:environment",
+   "claim_id": "B:Simulators:chain-position/selftest.py:50:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "check(\"EGRESS record names both standard hosts and a control\", set(ca.EGRESS[\"refused\"]) == {\"owasp.org:443\", \"genai.owasp.org:443\"} and \"github.com:443\" in ca.EGRESS[\"control\"])",
+   "location": {
+    "path": "chain-position/selftest.py",
+    "line": 50,
+    "written_by_commit": "84935a2b08efc83e29a1e0eea02e709eb5c32656"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "genai.owasp.org",
+    "github.com",
+    "owasp.org"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:columbia-chain-cascade/README.md:25:environment",
+   "claim_id": "B:Simulators:columbia-chain-cascade/README.md:25:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "charts.noaa.gov            000        CONNECT (allowlist egress)",
+   "location": {
+    "path": "columbia-chain-cascade/README.md",
+    "line": 25,
+    "written_by_commit": "00e1a7940cdcb6116e520ef005b046a36ab9f6ed"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "charts.noaa.gov"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:criterion-externality/CLAIM_TABLE.md:17:cant_run",
+   "claim_id": "B:Simulators:criterion-externality/CLAIM_TABLE.md:17:cant_run",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "| CEX_006 | R1 is NOT_RUN: arxiv.org refuses CONNECT (403, 2026-09-19T01:51Z, github.com the control), so the order's own void condition -- the axis present under another name -- cannot be evaluated here and the absence claim stays at abstract level | NOT_RUN, recorded |",
+   "location": {
+    "path": "criterion-externality/CLAIM_TABLE.md",
+    "line": 17,
+    "written_by_commit": "0ea874c1eef34c081bdba9aa2683b15310448fa6"
+   },
+   "claim_type": "cant_run",
+   "runs": [],
+   "hosts": [
+    "arxiv.org",
+    "github.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:criterion-externality/CLAIM_TABLE.md:17:environment",
+   "claim_id": "B:Simulators:criterion-externality/CLAIM_TABLE.md:17:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "| CEX_006 | R1 is NOT_RUN: arxiv.org refuses CONNECT (403, 2026-09-19T01:51Z, github.com the control), so the order's own void condition -- the axis present under another name -- cannot be evaluated here and the absence claim stays at abstract level | NOT_RUN, recorded |",
+   "location": {
+    "path": "criterion-externality/CLAIM_TABLE.md",
+    "line": 17,
+    "written_by_commit": "0ea874c1eef34c081bdba9aa2683b15310448fa6"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "arxiv.org",
+    "github.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:criterion-externality/samples/render.sample.txt:3:cant_run",
+   "claim_id": "B:Simulators:criterion-externality/samples/render.sample.txt:3:cant_run",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "R1  arxiv.org: CONNECT tunnel failed, response 403 at 2026-09-19T01:51Z; github.com connects -> NOT_RUN; absence claim VERIFIED_AGAINST_ABSTRACT_ONLY",
+   "location": {
+    "path": "criterion-externality/samples/render.sample.txt",
+    "line": 3,
+    "written_by_commit": "0ea874c1eef34c081bdba9aa2683b15310448fa6"
+   },
+   "claim_type": "cant_run",
+   "runs": [],
+   "hosts": [
+    "arxiv.org",
+    "github.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:deep-research-correction/Simulators_Last_5_Folders_Deep_Research.md:132:environment",
+   "claim_id": "B:Simulators:deep-research-correction/Simulators_Last_5_Folders_Deep_Research.md:132:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "Three contents matter most. First, `operators/D2.md` and its checker: a \"stated-vs-actual divergence\" operator whose seven claimed instances were checked against the tree — five resolve, its stated signature holds on one, and its \"two representations\" turned out to be five different kinds of pair. Second, `datasets/mesa_sof.md`, which evaluates the MESA Sleep and SOF cohorts as candidate instruments for an open question left by the `sim-span/` simulator; its dataset facts are marked \"carried, not checked — the egress gate refuses the sources.\" External verification for this report confirms the key facts: MESA Sleep enrolled 2,237 participants (2010–2012) with full overnight polysomnography, seven-day actigraphy, and questionnaires, distributed through the National Sleep Research Resource ([sleepdata.org](https://sleepdata.org/datasets/mesa)); SOF's Visit-8 sleep exam covers 461 participants with raw PSG data available through the same resource ([sleepdata.org](https://sleepdata.org/datasets/sof), [NIA Aging Research Biobank](https://agingresearchbiobank.nia.nih.gov/news/27/)). The checker's finding — that the simulator's two swept parameters resolve to WASO (wake after sleep onset, a standard PSG readout) and that both cohorts carry the needed measurements — is consistent with the documented instrument suites. Third, `memory-export/`: 64 files exported from an AI assistant's memory store, with `SCRUB_RULES.md` recording that 57 shipped unchanged, 7 were scrubbed, and 12 were held back, plus the remarkable cost note that \"a finding grounded in a specific case is generic once the case is lifted.\"",
+   "location": {
+    "path": "deep-research-correction/Simulators_Last_5_Folders_Deep_Research.md",
+    "line": 132,
+    "written_by_commit": "147ab07aeb92ea6cf5d1aaa541d144c762bb0317"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "agingresearchbiobank.nia.nih.gov",
+    "sleepdata.org"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14.md:146:cant_run",
+   "claim_id": "B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14.md:146:cant_run",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "**For research and academic adoption**, this family is the most directly citable material in the repository, because it solves a problem every empirical field has and few toolchains address: claims, falsifiers, and gaps are usually prose, and prose cannot be validated. The seven-field claim record with a refusing validator is, in effect, a *machine-checkable preregistration atom*: a preregistered hypothesis, its falsifier, its confidence class, and its current state (`UNMEASURED`, `NOT_RUN`, refuted, supported) become diff-able data. That maps one-to-one onto the Center for Open Science's preregistration infrastructure, where the Preregistration Challenge paid 1,000 researchers $1,000 each to publish preregistered work precisely to normalize plan-before-analysis discipline ([COS](https://www.cos.io/initiatives/prereg-more-information)), and onto the Registered Reports format, where peer review happens at the design stage specifically so that results cannot retroactively reshape hypotheses ([COS](https://www.cos.io/blog/looking-back-prereg)). A research group could adopt `claim-record` verbatim as its internal lab-notebook schema and gain an audit trail that most groups only reconstruct painfully at replication-audit time. The gap registers are a second, quieter contribution: metascience has tools for checking reported numbers (statcheck found that about half of psychology papers with NHST results contain at least one reporting inconsistency, and roughly one in eight a gross inconsistency that could flip a conclusion ([CASRAI](https://casrai.org/guides/statistical-fraud-detection-grim-sprite-statcheck))), but almost no tooling for registering *what was never measured*. The GRIM and SPRITE tests catch impossible means in reported data; `gap-register` and `uninstrumented` (F3) catch the complementary failure — the missing rows.",
+   "location": {
+    "path": "external-audit/DEEP_RESEARCH_2026_09_14.md",
+    "line": 146,
+    "written_by_commit": "850445c55a33bdcaf15b635237116d3c41990db2"
+   },
+   "claim_type": "cant_run",
+   "runs": [],
+   "hosts": [
+    "casrai.org",
+    "www.cos.io"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14.md:564:cant_run",
+   "claim_id": "B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14.md:564:cant_run",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "The repository's deepest strength is that it treats **negative and missing information as data**. The `UNMEASURED` / `NOT_RUN` / `NOT_RELEASED` states, the egress-refusal records, the \"delivered at confidence ~0.40 and left there\" markers, the killed hypothesis preserved in `derivation-discarded`, and the superseded-part notice in `labor-instrument` collectively implement something the open-science movement has wanted for two decades and mostly failed to engineer: a working memory in which null results, refusals, and unfinished business do not evaporate. Preregistration campaigns needed cash prizes to get researchers to declare plans in advance ([COS](https://www.cos.io/initiatives/prereg-more-information)); this repo declares, versions, and *keeps* its failures as a matter of routine. That discipline is precisely what benchmark forensics keeps discovering the mainstream lacks — the SWE-Bench memorization findings ([arXiv](https://arxiv.org/html/2506.12286v3)) and OpenAI's quiet retirement of SWE-bench Verified ([OpenAI](https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified/)) are both stories of claims that outlived their validity because no instrument tracked the ruler.",
+   "location": {
+    "path": "external-audit/DEEP_RESEARCH_2026_09_14.md",
+    "line": 564,
+    "written_by_commit": "850445c55a33bdcaf15b635237116d3c41990db2"
+   },
+   "claim_type": "cant_run",
+   "runs": [],
+   "hosts": [
+    "arxiv.org",
+    "openai.com",
+    "www.cos.io"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14.md:564:environment",
+   "claim_id": "B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14.md:564:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "The repository's deepest strength is that it treats **negative and missing information as data**. The `UNMEASURED` / `NOT_RUN` / `NOT_RELEASED` states, the egress-refusal records, the \"delivered at confidence ~0.40 and left there\" markers, the killed hypothesis preserved in `derivation-discarded`, and the superseded-part notice in `labor-instrument` collectively implement something the open-science movement has wanted for two decades and mostly failed to engineer: a working memory in which null results, refusals, and unfinished business do not evaporate. Preregistration campaigns needed cash prizes to get researchers to declare plans in advance ([COS](https://www.cos.io/initiatives/prereg-more-information)); this repo declares, versions, and *keeps* its failures as a matter of routine. That discipline is precisely what benchmark forensics keeps discovering the mainstream lacks — the SWE-Bench memorization findings ([arXiv](https://arxiv.org/html/2506.12286v3)) and OpenAI's quiet retirement of SWE-bench Verified ([OpenAI](https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified/)) are both stories of claims that outlived their validity because no instrument tracked the ruler.",
+   "location": {
+    "path": "external-audit/DEEP_RESEARCH_2026_09_14.md",
+    "line": 564,
+    "written_by_commit": "850445c55a33bdcaf15b635237116d3c41990db2"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "arxiv.org",
+    "openai.com",
+    "www.cos.io"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14.md:572:cant_run",
+   "claim_id": "B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14.md:572:cant_run",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "The second weakness is **unfinished falsification loops**. A striking number of folders are work orders and markers whose claim tables end at `NOT_RUN` — many because the build environment blocked egress, but the effect is the same: instruments whose power is that they *could* fail have not yet been given the chance. The July 2026 incident cluster is the sharpest case, because the external dependency has partly resolved: Hugging Face's technical timeline and OpenAI's incident disclosure are public ([Hugging Face](https://huggingface.co/blog/agent-intrusion-technical-timeline), [OpenAI](https://openai.com/index/hugging-face-model-evaluation-security-incident/)), so `hf-incident-extract` and `corpus-input-gaps` can be completed today. A repository whose brand is \"claims with falsifiers\" earns disproportionate credibility from each completed loop and loses a little from each stalled one.",
+   "location": {
+    "path": "external-audit/DEEP_RESEARCH_2026_09_14.md",
+    "line": 572,
+    "written_by_commit": "850445c55a33bdcaf15b635237116d3c41990db2"
+   },
+   "claim_type": "cant_run",
+   "runs": [],
+   "hosts": [
+    "openai.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14.md:572:environment",
+   "claim_id": "B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14.md:572:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "The second weakness is **unfinished falsification loops**. A striking number of folders are work orders and markers whose claim tables end at `NOT_RUN` — many because the build environment blocked egress, but the effect is the same: instruments whose power is that they *could* fail have not yet been given the chance. The July 2026 incident cluster is the sharpest case, because the external dependency has partly resolved: Hugging Face's technical timeline and OpenAI's incident disclosure are public ([Hugging Face](https://huggingface.co/blog/agent-intrusion-technical-timeline), [OpenAI](https://openai.com/index/hugging-face-model-evaluation-security-incident/)), so `hf-incident-extract` and `corpus-input-gaps` can be completed today. A repository whose brand is \"claims with falsifiers\" earns disproportionate credibility from each completed loop and loses a little from each stalled one.",
+   "location": {
+    "path": "external-audit/DEEP_RESEARCH_2026_09_14.md",
+    "line": 572,
+    "written_by_commit": "850445c55a33bdcaf15b635237116d3c41990db2"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "openai.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14_V2.md:165:cant_run",
+   "claim_id": "B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14_V2.md:165:cant_run",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "**For research and academic adoption**, this family is the most directly citable material in the repository, because it solves a problem every empirical field has and few toolchains address: claims, falsifiers, and gaps are usually prose, and prose cannot be validated. The seven-field claim record with a refusing validator is, in effect, a *machine-checkable preregistration atom*: a preregistered hypothesis, its falsifier, its confidence class, and its current state (`UNMEASURED`, `NOT_RUN`, refuted, supported) become diff-able data. That maps one-to-one onto the Center for Open Science's preregistration infrastructure, where the Preregistration Challenge paid 1,000 researchers $1,000 each to publish preregistered work precisely to normalize plan-before-analysis discipline ([COS](https://www.cos.io/initiatives/prereg-more-information)), and onto the Registered Reports format, where peer review happens at the design stage specifically so that results cannot retroactively reshape hypotheses ([COS](https://www.cos.io/blog/looking-back-prereg)). A research group could adopt `claim-record` verbatim as its internal lab-notebook schema and gain an audit trail that most groups only reconstruct painfully at replication-audit time. The gap registers are a second, quieter contribution: metascience has tools for checking reported numbers (statcheck found that about half of psychology papers with NHST results contain at least one reporting inconsistency, and roughly one in eight a gross inconsistency that could flip a conclusion ([CASRAI](https://casrai.org/guides/statistical-fraud-detection-grim-sprite-statcheck))), but almost no tooling for registering *what was never measured*. The GRIM and SPRITE tests catch impossible means in reported data; `gap-register` and `uninstrumented` (F3) catch the complementary failure — the missing rows.",
+   "location": {
+    "path": "external-audit/DEEP_RESEARCH_2026_09_14_V2.md",
+    "line": 165,
+    "written_by_commit": "3d83364db03d6c0a2e6f8f06c466319d1d593f9c"
+   },
+   "claim_type": "cant_run",
+   "runs": [],
+   "hosts": [
+    "casrai.org",
+    "www.cos.io"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14_V2.md:583:cant_run",
+   "claim_id": "B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14_V2.md:583:cant_run",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "The repository's deepest strength is that it treats **negative and missing information as data**. The `UNMEASURED` / `NOT_RUN` / `NOT_RELEASED` states, the egress-refusal records, the \"delivered at confidence ~0.40 and left there\" markers, the killed hypothesis preserved in `derivation-discarded`, and the superseded-part notice in `labor-instrument` collectively implement something the open-science movement has wanted for two decades and mostly failed to engineer: a working memory in which null results, refusals, and unfinished business do not evaporate. Preregistration campaigns needed cash prizes to get researchers to declare plans in advance ([COS](https://www.cos.io/initiatives/prereg-more-information)); this repo declares, versions, and *keeps* its failures as a matter of routine. That discipline is precisely what benchmark forensics keeps discovering the mainstream lacks — the SWE-Bench memorization findings ([arXiv](https://arxiv.org/html/2506.12286v3)) and OpenAI's quiet retirement of SWE-bench Verified ([OpenAI](https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified/)) are both stories of claims that outlived their validity because no instrument tracked the ruler.",
+   "location": {
+    "path": "external-audit/DEEP_RESEARCH_2026_09_14_V2.md",
+    "line": 583,
+    "written_by_commit": "3d83364db03d6c0a2e6f8f06c466319d1d593f9c"
+   },
+   "claim_type": "cant_run",
+   "runs": [],
+   "hosts": [
+    "arxiv.org",
+    "openai.com",
+    "www.cos.io"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14_V2.md:583:environment",
+   "claim_id": "B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14_V2.md:583:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "The repository's deepest strength is that it treats **negative and missing information as data**. The `UNMEASURED` / `NOT_RUN` / `NOT_RELEASED` states, the egress-refusal records, the \"delivered at confidence ~0.40 and left there\" markers, the killed hypothesis preserved in `derivation-discarded`, and the superseded-part notice in `labor-instrument` collectively implement something the open-science movement has wanted for two decades and mostly failed to engineer: a working memory in which null results, refusals, and unfinished business do not evaporate. Preregistration campaigns needed cash prizes to get researchers to declare plans in advance ([COS](https://www.cos.io/initiatives/prereg-more-information)); this repo declares, versions, and *keeps* its failures as a matter of routine. That discipline is precisely what benchmark forensics keeps discovering the mainstream lacks — the SWE-Bench memorization findings ([arXiv](https://arxiv.org/html/2506.12286v3)) and OpenAI's quiet retirement of SWE-bench Verified ([OpenAI](https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified/)) are both stories of claims that outlived their validity because no instrument tracked the ruler.",
+   "location": {
+    "path": "external-audit/DEEP_RESEARCH_2026_09_14_V2.md",
+    "line": 583,
+    "written_by_commit": "3d83364db03d6c0a2e6f8f06c466319d1d593f9c"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "arxiv.org",
+    "openai.com",
+    "www.cos.io"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14_V2.md:591:cant_run",
+   "claim_id": "B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14_V2.md:591:cant_run",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "The second weakness is **unfinished falsification loops**. A striking number of folders are work orders and markers whose claim tables end at `NOT_RUN` — many for the sympathetic reason that the authoring sandbox blocked egress, but the effect is the same: instruments whose power is that they *could* fail have not yet been given the chance. The July 2026 incident cluster is the sharpest case, because the external dependency has now resolved: Hugging Face's full technical timeline and OpenAI's incident disclosure are both public ([Hugging Face](https://huggingface.co/blog/agent-intrusion-technical-timeline), [OpenAI](https://openai.com/index/hugging-face-model-evaluation-security-incident/)), so `hf-incident-extract` and `corpus-input-gaps` can be completed today. A repository whose brand is \"claims with falsifiers\" earns disproportionate credibility from each completed loop and loses a little from each stalled one.",
+   "location": {
+    "path": "external-audit/DEEP_RESEARCH_2026_09_14_V2.md",
+    "line": 591,
+    "written_by_commit": "3d83364db03d6c0a2e6f8f06c466319d1d593f9c"
+   },
+   "claim_type": "cant_run",
+   "runs": [],
+   "hosts": [
+    "openai.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14_V2.md:591:environment",
+   "claim_id": "B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14_V2.md:591:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "The second weakness is **unfinished falsification loops**. A striking number of folders are work orders and markers whose claim tables end at `NOT_RUN` — many for the sympathetic reason that the authoring sandbox blocked egress, but the effect is the same: instruments whose power is that they *could* fail have not yet been given the chance. The July 2026 incident cluster is the sharpest case, because the external dependency has now resolved: Hugging Face's full technical timeline and OpenAI's incident disclosure are both public ([Hugging Face](https://huggingface.co/blog/agent-intrusion-technical-timeline), [OpenAI](https://openai.com/index/hugging-face-model-evaluation-security-incident/)), so `hf-incident-extract` and `corpus-input-gaps` can be completed today. A repository whose brand is \"claims with falsifiers\" earns disproportionate credibility from each completed loop and loses a little from each stalled one.",
+   "location": {
+    "path": "external-audit/DEEP_RESEARCH_2026_09_14_V2.md",
+    "line": 591,
+    "written_by_commit": "3d83364db03d6c0a2e6f8f06c466319d1d593f9c"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "openai.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:failure-mode-register/README.md:284:environment",
+   "claim_id": "B:Simulators:failure-mode-register/README.md:284:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "REPORT, and arxiv.org refuses CONNECT from here, so the closure",
+   "location": {
+    "path": "failure-mode-register/README.md",
+    "line": 284,
+    "written_by_commit": "6633778c71ec4a662e5aeaf3f6cd176c005f735d"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "arxiv.org"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:failure-mode-register/samples/choices_v3.sample.txt:1:environment",
+   "claim_id": "B:Simulators:failure-mode-register/samples/choices_v3.sample.txt:1:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "[CHOICE 12] the prior-art gate's four artifacts are CARRIED, not verified: arxiv.org and export.arxiv.org refuse CONNECT from here and no probe runs at audit time (no network is a house rule). Recorded as NOT_VERIFIABLE_HERE rather than as agreement.",
+   "location": {
+    "path": "failure-mode-register/samples/choices_v3.sample.txt",
+    "line": 1,
+    "written_by_commit": "6633778c71ec4a662e5aeaf3f6cd176c005f735d"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "arxiv.org",
+    "export.arxiv.org"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:falsifier-survey/cell_records.csv:274:environment",
+   "claim_id": "B:Simulators:falsifier-survey/cell_records.csv:274:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "household-scope-audit,HSA_001,household-scope-audit/CLAIM_TABLE.md,MEASURED,a reachable corpus. Then Arm 1 runs and this claim is about one environment,reachability of the named corpus hosts,HTTP status/reachability boolean per host (measured table: 000/400),\"retry egress to the named hosts (ncbi, pubmed, wiley, acf.hhs, childwelfare, who.int, gov.uk, github)\",,,,measured 2026-08-29; egress is an allowlist,,0",
+   "location": {
+    "path": "falsifier-survey/cell_records.csv",
+    "line": 274,
+    "written_by_commit": "5e81b9dd9ae1ba65d0994ac1548b7b25a1f41125"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "who.int"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:fold-matrix/CLAIM_TABLE.md:513:environment",
+   "claim_id": "B:Simulators:fold-matrix/CLAIM_TABLE.md:513:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "`sba.gov` refuses CONNECT (`SSS_057`), and one file was uploaded:",
+   "location": {
+    "path": "fold-matrix/CLAIM_TABLE.md",
+    "line": 513,
+    "written_by_commit": "d1338097bdfbe2df88ded2d7d7f1d14fcdd2d33f"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "sba.gov"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:fold-matrix/PREDICTIONS_SBA.md:76:environment",
+   "claim_id": "B:Simulators:fold-matrix/PREDICTIONS_SBA.md:76:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "Andrew's Plan did not arrive, and `sba.gov` refuses CONNECT, so neither",
+   "location": {
+    "path": "fold-matrix/PREDICTIONS_SBA.md",
+    "line": 76,
+    "written_by_commit": "d1338097bdfbe2df88ded2d7d7f1d14fcdd2d33f"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "sba.gov"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:fold-matrix/README.md:127:environment",
+   "claim_id": "B:Simulators:fold-matrix/README.md:127:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "`sba.gov` refuses CONNECT, and two files were uploaded — **neither under",
+   "location": {
+    "path": "fold-matrix/README.md",
+    "line": 127,
+    "written_by_commit": "5c52562e908b064ec615bcc46f5f40a23013be76"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "sba.gov"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:household-scope-audit/README.md:24:environment",
+   "claim_id": "B:Simulators:household-scope-audit/README.md:24:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "through this environment's proxy; only `github.com` answers, and egress",
+   "location": {
+    "path": "household-scope-audit/README.md",
+    "line": 24,
+    "written_by_commit": "fbbf54818a137207528559a53b63afbf35047500"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "github.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:household-scope-audit/selftest_hsa.py:184:environment",
+   "claim_id": "B:Simulators:household-scope-audit/selftest_hsa.py:184:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "[h for h, c in A.EGRESS if c != \"000\"] == [\"github.com\"])",
+   "location": {
+    "path": "household-scope-audit/selftest_hsa.py",
+    "line": 184,
+    "written_by_commit": "fbbf54818a137207528559a53b63afbf35047500"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "github.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:labor-instrument/vintage_store.py:9:environment",
+   "claim_id": "B:Simulators:labor-instrument/vintage_store.py:9:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "fetch (egress allowlist: alfred.stlouisfed.org answered no on CONNECT,",
+   "location": {
+    "path": "labor-instrument/vintage_store.py",
+    "line": 9,
+    "written_by_commit": "18a76e40ac07a28056f6d9cdf5ffcf326682675d"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "alfred.stlouisfed.org"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:law-as-unvalidated-measurement/CORRECTION-law-as-unvalidated-measurement-2026-10-03.md:176:environment",
+   "claim_id": "B:Simulators:law-as-unvalidated-measurement/CORRECTION-law-as-unvalidated-measurement-2026-10-03.md:176:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "Route: the environment's egress gate refuses every publisher host (arxiv.org,",
+   "location": {
+    "path": "law-as-unvalidated-measurement/CORRECTION-law-as-unvalidated-measurement-2026-10-03.md",
+    "line": 176,
+    "written_by_commit": "60152f7baade3a2da3677e5a5a35054f8e53cd08"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "arxiv.org"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:law-as-unvalidated-measurement/LEDGER_SETTLE-dyed-fuel-2026-10-03.md:23:environment",
+   "claim_id": "B:Simulators:law-as-unvalidated-measurement/LEDGER_SETTLE-dyed-fuel-2026-10-03.md:23:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "Route: web search snippet; ecfr.gov itself refuses CONNECT from this environment.",
+   "location": {
+    "path": "law-as-unvalidated-measurement/LEDGER_SETTLE-dyed-fuel-2026-10-03.md",
+    "line": 23,
+    "written_by_commit": "60152f7baade3a2da3677e5a5a35054f8e53cd08"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "ecfr.gov"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:merge-path/CLAIM_TABLE.md:24:cant_run",
+   "claim_id": "B:Simulators:merge-path/CLAIM_TABLE.md:24:cant_run",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "| MRG_007 | The **branch record's novelty is UNVERIFIED** (§5): the hypothesis that no registrar has a slot for a WHY-carrying rule revision is neither confirmed nor refuted, because the search (each spec for a revision-with-a-reason / scope-condition-after-the-fact / amendment-stating-WHY) could not run (egress). Per §5, *an absence with no search list is not evidence* — the **search list is stated** per registrar, with CT.gov protocol amendments and OSF prereg addenda flagged as the most likely counterparts, so the eventual absence would be evidence and the eventual counterpart would be mappable. **No branch entry (ENTRY 03) is opened**, because opening one would rest on an unverified spec fact; the §8 trigger (a registrar holding what our format cannot) is recorded as pending a verified fetch. | UNVERIFIED | `BRANCH_SEARCH.md` search list; no `ENTRY_03` opened | the search run on a fetched spec: a WHY-carrying revision field found (branch record not novel) or absent across the list (reportable absence) |",
+   "location": {
+    "path": "merge-path/CLAIM_TABLE.md",
+    "line": 24,
+    "written_by_commit": "eef993a7f03d28fcbdde3c8012190a7b8fc56e14"
+   },
+   "claim_type": "cant_run",
+   "runs": [],
+   "hosts": [
+    "ct.gov"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:merge-path/CLAIM_TABLE.md:24:environment",
+   "claim_id": "B:Simulators:merge-path/CLAIM_TABLE.md:24:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "| MRG_007 | The **branch record's novelty is UNVERIFIED** (§5): the hypothesis that no registrar has a slot for a WHY-carrying rule revision is neither confirmed nor refuted, because the search (each spec for a revision-with-a-reason / scope-condition-after-the-fact / amendment-stating-WHY) could not run (egress). Per §5, *an absence with no search list is not evidence* — the **search list is stated** per registrar, with CT.gov protocol amendments and OSF prereg addenda flagged as the most likely counterparts, so the eventual absence would be evidence and the eventual counterpart would be mappable. **No branch entry (ENTRY 03) is opened**, because opening one would rest on an unverified spec fact; the §8 trigger (a registrar holding what our format cannot) is recorded as pending a verified fetch. | UNVERIFIED | `BRANCH_SEARCH.md` search list; no `ENTRY_03` opened | the search run on a fetched spec: a WHY-carrying revision field found (branch record not novel) or absent across the list (reportable absence) |",
+   "location": {
+    "path": "merge-path/CLAIM_TABLE.md",
+    "line": 24,
+    "written_by_commit": "eef993a7f03d28fcbdde3c8012190a7b8fc56e14"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "ct.gov"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:merge-path/MERGE_REPORT.md:19:environment",
+   "claim_id": "B:Simulators:merge-path/MERGE_REPORT.md:19:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "| `nanopublications` | False | NO-MERGE | spec unfetched (egress 403) | https://nanopub.net/ (RDF; W3C provenance PROV-O https://www.w3.org/TR/prov-o/) |",
+   "location": {
+    "path": "merge-path/MERGE_REPORT.md",
+    "line": 19,
+    "written_by_commit": "eef993a7f03d28fcbdde3c8012190a7b8fc56e14"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "nanopub.net",
+    "www.w3.org"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:merge-path/MERGE_REPORT.md:20:environment",
+   "claim_id": "B:Simulators:merge-path/MERGE_REPORT.md:20:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "| `orkg` | False | NO-MERGE | spec unfetched (egress 403) | https://orkg.org/ (Open Research Knowledge Graph) |",
+   "location": {
+    "path": "merge-path/MERGE_REPORT.md",
+    "line": 20,
+    "written_by_commit": "eef993a7f03d28fcbdde3c8012190a7b8fc56e14"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "orkg.org"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:merge-path/MERGE_REPORT.md:21:environment",
+   "claim_id": "B:Simulators:merge-path/MERGE_REPORT.md:21:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "| `ro_crate` | False | NO-MERGE | spec unfetched (egress 403) | https://www.researchobject.org/ro-crate/ |",
+   "location": {
+    "path": "merge-path/MERGE_REPORT.md",
+    "line": 21,
+    "written_by_commit": "eef993a7f03d28fcbdde3c8012190a7b8fc56e14"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "www.researchobject.org"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:merge-path/MERGE_REPORT.md:22:environment",
+   "claim_id": "B:Simulators:merge-path/MERGE_REPORT.md:22:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "| `clinicaltrials_gov` | False | NO-MERGE | spec unfetched (egress 403) | https://clinicaltrials.gov/ (FDAAA 801; PRS data element definitions) |",
+   "location": {
+    "path": "merge-path/MERGE_REPORT.md",
+    "line": 22,
+    "written_by_commit": "eef993a7f03d28fcbdde3c8012190a7b8fc56e14"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "clinicaltrials.gov"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:merge-path/MERGE_REPORT.md:23:environment",
+   "claim_id": "B:Simulators:merge-path/MERGE_REPORT.md:23:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "| `cipm_cmc` | False | NO-MERGE | spec unfetched (egress 403) | https://www.bipm.org/ (CIPM MRA; CMC entries in the KCDB) |",
+   "location": {
+    "path": "merge-path/MERGE_REPORT.md",
+    "line": 23,
+    "written_by_commit": "eef993a7f03d28fcbdde3c8012190a7b8fc56e14"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "www.bipm.org"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:merge-path/MERGE_REPORT.md:24:environment",
+   "claim_id": "B:Simulators:merge-path/MERGE_REPORT.md:24:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "| `proof_assistant` | False | NO-MERGE | spec unfetched (egress 403) | https://leanprover-community.github.io/ (mathlib) / https://coq.inria.fr/ |",
+   "location": {
+    "path": "merge-path/MERGE_REPORT.md",
+    "line": 24,
+    "written_by_commit": "eef993a7f03d28fcbdde3c8012190a7b8fc56e14"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "leanprover-community.github.io"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:merge-path/MERGE_REPORT.md:25:environment",
+   "claim_id": "B:Simulators:merge-path/MERGE_REPORT.md:25:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "| `osf_prereg` | False | NO-MERGE | spec unfetched (egress 403) | https://osf.io/prereg/ (OSF preregistration) |",
+   "location": {
+    "path": "merge-path/MERGE_REPORT.md",
+    "line": 25,
+    "written_by_commit": "eef993a7f03d28fcbdde3c8012190a7b8fc56e14"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "osf.io"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:playground-crossrun/COMBINED_SPEC.md:199:environment",
+   "claim_id": "B:Simulators:playground-crossrun/COMBINED_SPEC.md:199:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "not read by the building session (www.bipm.org egress refused)",
+   "location": {
+    "path": "playground-crossrun/COMBINED_SPEC.md",
+    "line": 199,
+    "written_by_commit": "7288ca55f2a1e871442cd921744ed9def73c5ba8"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "www.bipm.org"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:playground-crossrun/COMBINED_SPEC.md:210:environment",
+   "claim_id": "B:Simulators:playground-crossrun/COMBINED_SPEC.md:210:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "(VERIFY): www.bipm.org egress refused to this session's fetches",
+   "location": {
+    "path": "playground-crossrun/COMBINED_SPEC.md",
+    "line": 210,
+    "written_by_commit": "91dfe080896eafc160c464713849f22bffdfecdb"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "www.bipm.org"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:quiet-failure/CLAIM_TABLE.md:24:environment",
+   "claim_id": "B:Simulators:quiet-failure/CLAIM_TABLE.md:24:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "| QFA_014 | UNVERIFIED: no accident corpus was read (four hosts answered 403 to CONNECT, measured and timestamped, `github.com` the control), no finding in the evidence section was re-fetched, no regulator record exists in the folder, and no blind coder has run. Nothing here bears on whether any real failure was signalled, on whether the decomposition separates real cases, or on whether any regulator assigns the join; every instrument is shown reachable in both directions on constructed inputs only. | UNVERIFIED | `decomposition.EGRESS`; every fixture named CONSTRUCTED | a coded real corpus supplied to `--corpus` with both signal levels present; a bounded null; a real role record |",
+   "location": {
+    "path": "quiet-failure/CLAIM_TABLE.md",
+    "line": 24,
+    "written_by_commit": "fb6c896b6d0ffab6e67c8010af5b477fbf9f0095"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "github.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:quiet-failure/README.md:32:environment",
+   "claim_id": "B:Simulators:quiet-failure/README.md:32:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "| records | no accident corpus, journal or archive was read: four hosts answered 403 to CONNECT, measured and timestamped in `decomposition.EGRESS`, `github.com` the connecting control; every corpus, null record and regulator record is CONSTRUCTED and says so |",
+   "location": {
+    "path": "quiet-failure/README.md",
+    "line": 32,
+    "written_by_commit": "fb6c896b6d0ffab6e67c8010af5b477fbf9f0095"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "github.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:quiet-failure/samples/run_all.sample.txt:26:environment",
+   "claim_id": "B:Simulators:quiet-failure/samples/run_all.sample.txt:26:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "egress (measured 2026-09-20T02:58Z): www.ntsb.gov:443 CONNECT 403; www.csb.gov:443 CONNECT 403; www.gov.uk:443 CONNECT 403; onlinelibrary.wiley.com:443 CONNECT 403; github.com:443 connects (control)",
+   "location": {
+    "path": "quiet-failure/samples/run_all.sample.txt",
+    "line": 26,
+    "written_by_commit": "fb6c896b6d0ffab6e67c8010af5b477fbf9f0095"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "github.com",
+    "onlinelibrary.wiley.com",
+    "www.csb.gov",
+    "www.gov",
+    "www.ntsb.gov"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:quiet-failure/selftest.py:88:environment",
+   "claim_id": "B:Simulators:quiet-failure/selftest.py:88:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "check(\"EGRESS carries a measured timestamp, four refused hosts and the control\", re.match(r\"\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\dZ\", dc.EGRESS[\"measured\"]) and sum(1 for v in dc.EGRESS[\"hosts\"].values() if \"403\" in v) == 4 and \"github.com:443\" in dc.EGRESS[\"hosts\"])",
+   "location": {
+    "path": "quiet-failure/selftest.py",
+    "line": 88,
+    "written_by_commit": "fb6c896b6d0ffab6e67c8010af5b477fbf9f0095"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "github.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:readout-count/samples/row_audit.sample.txt:29:environment",
+   "claim_id": "B:Simulators:readout-count/samples/row_audit.sample.txt:29:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "hosts probed once (allowlist egress): www.ecfr.gov no response, www.fmcsa.dot.gov no response, www.federalregister.gov no response, nccdb.fmcsa.dot.gov no response",
+   "location": {
+    "path": "readout-count/samples/row_audit.sample.txt",
+    "line": 29,
+    "written_by_commit": "3a0268e1dca4f1469f4346e281228f029c7a19fc"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "nccdb.fmcsa.dot.gov",
+    "www.ecfr.gov",
+    "www.federalregister.gov",
+    "www.fmcsa.dot.gov"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:readout-count/samples/stack_revision.sample.txt:33:environment",
+   "claim_id": "B:Simulators:readout-count/samples/stack_revision.sample.txt:33:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "6. S6 HOSTS  oshacademy.com no response, training.fema.gov no response  (allowlist egress; not read)",
+   "location": {
+    "path": "readout-count/samples/stack_revision.sample.txt",
+    "line": 33,
+    "written_by_commit": "a1d9bdceffac9eebce5a85cb6458c040869fdad0"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "oshacademy.com",
+    "training.fema.gov"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:route-independence/FWO7_DESIGN.md:4:cant_run",
+   "claim_id": "B:Simulators:route-independence/FWO7_DESIGN.md:4:cant_run",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "below is NOT_RUN: the egress allowlist reaches `github.com` and nothing else,",
+   "location": {
+    "path": "route-independence/FWO7_DESIGN.md",
+    "line": 4,
+    "written_by_commit": "5159ba4b6f91bf486d72482b49ca11388dfbef94"
+   },
+   "claim_type": "cant_run",
+   "runs": [],
+   "hosts": [
+    "github.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:route-independence/FWO7_DESIGN.md:4:environment",
+   "claim_id": "B:Simulators:route-independence/FWO7_DESIGN.md:4:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "below is NOT_RUN: the egress allowlist reaches `github.com` and nothing else,",
+   "location": {
+    "path": "route-independence/FWO7_DESIGN.md",
+    "line": 4,
+    "written_by_commit": "5159ba4b6f91bf486d72482b49ca11388dfbef94"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "github.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:route-independence/SOURCES.md:30:environment",
+   "claim_id": "B:Simulators:route-independence/SOURCES.md:30:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "| IRS Topic 420; Form 1099-B; 1099-MISC threshold | FWO-2 barter row | `www.irs.gov` refuses CONNECT (403, 2026-09-27T01:28:31Z) |",
+   "location": {
+    "path": "route-independence/SOURCES.md",
+    "line": 30,
+    "written_by_commit": "177d885ae69ca63ff7b024d6c76fc4def865aee9"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "www.irs.gov"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:route-independence/SOURCES.md:35:environment",
+   "claim_id": "B:Simulators:route-independence/SOURCES.md:35:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "| Phil Trans R Soc B 376:1819, 20190677 (macaque token economy) | R-2 | `royalsocietypublishing.org` refuses CONNECT (403, 2026-09-27T01:28:32Z) |",
+   "location": {
+    "path": "route-independence/SOURCES.md",
+    "line": 35,
+    "written_by_commit": "177d885ae69ca63ff7b024d6c76fc4def865aee9"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "royalsocietypublishing.org"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:route-independence/SOURCES.md:178:environment",
+   "claim_id": "B:Simulators:route-independence/SOURCES.md:178:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "Egress probe at 2026-09-28T13:14:37Z: ecfr.gov, leg.colorado.gov and",
+   "location": {
+    "path": "route-independence/SOURCES.md",
+    "line": 178,
+    "written_by_commit": "90926f434950c18017de15da560f7e42a2238e52"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "ecfr.gov",
+    "leg.colorado.gov"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:route-independence/conversion_register.json:4:environment",
+   "claim_id": "B:Simulators:route-independence/conversion_register.json:4:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "\"_sampling_boundary\": \"every source is CARRIED from memory or from the order; no publisher, registry or agency host is reachable under the egress allowlist (github.com only). What that selects for: attempts prominent enough to be known without a search, in the United States, in English.\",",
+   "location": {
+    "path": "route-independence/conversion_register.json",
+    "line": 4,
+    "written_by_commit": "5159ba4b6f91bf486d72482b49ca11388dfbef94"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "github.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:route-independence/dependency_chain_audit.py:260:environment",
+   "claim_id": "B:Simulators:route-independence/dependency_chain_audit.py:260:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "\"NOT READ here: www.nature.com refuses CONNECT under the egress allowlist\")",
+   "location": {
+    "path": "route-independence/dependency_chain_audit.py",
+    "line": 260,
+    "written_by_commit": "5159ba4b6f91bf486d72482b49ca11388dfbef94"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "www.nature.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:route-independence/samples/dependency_chain.sample.txt:25:environment",
+   "claim_id": "B:Simulators:route-independence/samples/dependency_chain.sample.txt:25:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "source: CARRIED: instance Kalai, Nachum, Vempala & Zhang, Nature 653:1047-1051 (2026), DOI 10.1038/s41586-026-10549-w; already cited in this tree (publication-loop-work-orders, WO-11 T-6a); NOT READ here: www.nature.com refuses CONNECT under the egress allowlist",
+   "location": {
+    "path": "route-independence/samples/dependency_chain.sample.txt",
+    "line": 25,
+    "written_by_commit": "dfece8f391b7b5f0b921d0e75cf4e5eae011cc92"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "www.nature.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:thwaites-risk-audit/README.md:11:environment",
+   "claim_id": "B:Simulators:thwaites-risk-audit/README.md:11:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "claims are not — the egress gate is an allowlist and only `github.com`",
+   "location": {
+    "path": "thwaites-risk-audit/README.md",
+    "line": 11,
+    "written_by_commit": "8f6057f6d50944550f4ea0d0504b1476a48c5b6c"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "github.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:thwaites-risk-audit/audit.py:715:environment",
+   "claim_id": "B:Simulators:thwaites-risk-audit/audit.py:715:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "\"reason\": (\"allowlist egress: only github.com answers.  No \"",
+   "location": {
+    "path": "thwaites-risk-audit/audit.py",
+    "line": 715,
+    "written_by_commit": "8f6057f6d50944550f4ea0d0504b1476a48c5b6c"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "github.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:Simulators:thwaites-risk-audit/samples/audit.sample.txt:173:environment",
+   "claim_id": "B:Simulators:thwaites-risk-audit/samples/audit.sample.txt:173:environment",
+   "kind": "probe",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "allowlist egress: only github.com answers.  No publisher, DOI resolver",
+   "location": {
+    "path": "thwaites-risk-audit/samples/audit.sample.txt",
+    "line": 173,
+    "written_by_commit": "8f6057f6d50944550f4ea0d0504b1476a48c5b6c"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "github.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:method-layer:reasoning-layer/READ_FIRST.md:22795:environment",
+   "claim_id": "B:method-layer:reasoning-layer/READ_FIRST.md:22795:environment",
+   "kind": "probe",
+   "repo": "method-layer",
+   "clone_url": "https://github.com/JinnZ2/method-layer",
+   "quote": "| `nanopublications` | False | NO-MERGE | spec unfetched (egress 403) | https://nanopub.net/ (RDF; W3C provenance PROV-O https://www.w3.org/TR/prov-o/) |",
+   "location": {
+    "path": "reasoning-layer/READ_FIRST.md",
+    "line": 22795,
+    "written_by_commit": "7a5d1857f2a20033711d2b45b8b4516e8f9811c1"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "nanopub.net",
+    "www.w3.org"
+   ]
+  },
+  {
+   "item_id": "probe#B:method-layer:reasoning-layer/READ_FIRST.md:22796:environment",
+   "claim_id": "B:method-layer:reasoning-layer/READ_FIRST.md:22796:environment",
+   "kind": "probe",
+   "repo": "method-layer",
+   "clone_url": "https://github.com/JinnZ2/method-layer",
+   "quote": "| `orkg` | False | NO-MERGE | spec unfetched (egress 403) | https://orkg.org/ (Open Research Knowledge Graph) |",
+   "location": {
+    "path": "reasoning-layer/READ_FIRST.md",
+    "line": 22796,
+    "written_by_commit": "7a5d1857f2a20033711d2b45b8b4516e8f9811c1"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "orkg.org"
+   ]
+  },
+  {
+   "item_id": "probe#B:method-layer:reasoning-layer/READ_FIRST.md:22797:environment",
+   "claim_id": "B:method-layer:reasoning-layer/READ_FIRST.md:22797:environment",
+   "kind": "probe",
+   "repo": "method-layer",
+   "clone_url": "https://github.com/JinnZ2/method-layer",
+   "quote": "| `ro_crate` | False | NO-MERGE | spec unfetched (egress 403) | https://www.researchobject.org/ro-crate/ |",
+   "location": {
+    "path": "reasoning-layer/READ_FIRST.md",
+    "line": 22797,
+    "written_by_commit": "7a5d1857f2a20033711d2b45b8b4516e8f9811c1"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "www.researchobject.org"
+   ]
+  },
+  {
+   "item_id": "probe#B:method-layer:reasoning-layer/READ_FIRST.md:22798:environment",
+   "claim_id": "B:method-layer:reasoning-layer/READ_FIRST.md:22798:environment",
+   "kind": "probe",
+   "repo": "method-layer",
+   "clone_url": "https://github.com/JinnZ2/method-layer",
+   "quote": "| `clinicaltrials_gov` | False | NO-MERGE | spec unfetched (egress 403) | https://clinicaltrials.gov/ (FDAAA 801; PRS data element definitions) |",
+   "location": {
+    "path": "reasoning-layer/READ_FIRST.md",
+    "line": 22798,
+    "written_by_commit": "7a5d1857f2a20033711d2b45b8b4516e8f9811c1"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "clinicaltrials.gov"
+   ]
+  },
+  {
+   "item_id": "probe#B:method-layer:reasoning-layer/READ_FIRST.md:22799:environment",
+   "claim_id": "B:method-layer:reasoning-layer/READ_FIRST.md:22799:environment",
+   "kind": "probe",
+   "repo": "method-layer",
+   "clone_url": "https://github.com/JinnZ2/method-layer",
+   "quote": "| `cipm_cmc` | False | NO-MERGE | spec unfetched (egress 403) | https://www.bipm.org/ (CIPM MRA; CMC entries in the KCDB) |",
+   "location": {
+    "path": "reasoning-layer/READ_FIRST.md",
+    "line": 22799,
+    "written_by_commit": "7a5d1857f2a20033711d2b45b8b4516e8f9811c1"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "www.bipm.org"
+   ]
+  },
+  {
+   "item_id": "probe#B:method-layer:reasoning-layer/READ_FIRST.md:22800:environment",
+   "claim_id": "B:method-layer:reasoning-layer/READ_FIRST.md:22800:environment",
+   "kind": "probe",
+   "repo": "method-layer",
+   "clone_url": "https://github.com/JinnZ2/method-layer",
+   "quote": "| `proof_assistant` | False | NO-MERGE | spec unfetched (egress 403) | https://leanprover-community.github.io/ (mathlib) / https://coq.inria.fr/ |",
+   "location": {
+    "path": "reasoning-layer/READ_FIRST.md",
+    "line": 22800,
+    "written_by_commit": "7a5d1857f2a20033711d2b45b8b4516e8f9811c1"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "leanprover-community.github.io"
+   ]
+  },
+  {
+   "item_id": "probe#B:method-layer:reasoning-layer/READ_FIRST.md:22801:environment",
+   "claim_id": "B:method-layer:reasoning-layer/READ_FIRST.md:22801:environment",
+   "kind": "probe",
+   "repo": "method-layer",
+   "clone_url": "https://github.com/JinnZ2/method-layer",
+   "quote": "| `osf_prereg` | False | NO-MERGE | spec unfetched (egress 403) | https://osf.io/prereg/ (OSF preregistration) |",
+   "location": {
+    "path": "reasoning-layer/READ_FIRST.md",
+    "line": 22801,
+    "written_by_commit": "7a5d1857f2a20033711d2b45b8b4516e8f9811c1"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "osf.io"
+   ]
+  },
+  {
+   "item_id": "probe#B:method-layer:reasoning-layer/READ_FIRST.md:26117:environment",
+   "claim_id": "B:method-layer:reasoning-layer/READ_FIRST.md:26117:environment",
+   "kind": "probe",
+   "repo": "method-layer",
+   "clone_url": "https://github.com/JinnZ2/method-layer",
+   "quote": "egress (measured 2026-09-20T02:58Z): www.ntsb.gov:443 CONNECT 403; www.csb.gov:443 CONNECT 403; www.gov.uk:443 CONNECT 403; onlinelibrary.wiley.com:443 CONNECT 403; github.com:443 connects (control)",
+   "location": {
+    "path": "reasoning-layer/READ_FIRST.md",
+    "line": 26117,
+    "written_by_commit": "7a5d1857f2a20033711d2b45b8b4516e8f9811c1"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "github.com",
+    "onlinelibrary.wiley.com",
+    "www.csb.gov",
+    "www.gov",
+    "www.ntsb.gov"
+   ]
+  },
+  {
+   "item_id": "probe#B:method-layer:reasoning-layer/cards/merge-path--selftest.yaml:53:environment",
+   "claim_id": "B:method-layer:reasoning-layer/cards/merge-path--selftest.yaml:53:environment",
+   "kind": "probe",
+   "repo": "method-layer",
+   "clone_url": "https://github.com/JinnZ2/method-layer",
+   "quote": "| `nanopublications` | False | NO-MERGE | spec unfetched (egress 403) | https://nanopub.net/ (RDF; W3C provenance PROV-O https://www.w3.org/TR/prov-o/) |",
+   "location": {
+    "path": "reasoning-layer/cards/merge-path--selftest.yaml",
+    "line": 53,
+    "written_by_commit": "7a5d1857f2a20033711d2b45b8b4516e8f9811c1"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "nanopub.net",
+    "www.w3.org"
+   ]
+  },
+  {
+   "item_id": "probe#B:method-layer:reasoning-layer/cards/merge-path--selftest.yaml:54:environment",
+   "claim_id": "B:method-layer:reasoning-layer/cards/merge-path--selftest.yaml:54:environment",
+   "kind": "probe",
+   "repo": "method-layer",
+   "clone_url": "https://github.com/JinnZ2/method-layer",
+   "quote": "| `orkg` | False | NO-MERGE | spec unfetched (egress 403) | https://orkg.org/ (Open Research Knowledge Graph) |",
+   "location": {
+    "path": "reasoning-layer/cards/merge-path--selftest.yaml",
+    "line": 54,
+    "written_by_commit": "7a5d1857f2a20033711d2b45b8b4516e8f9811c1"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "orkg.org"
+   ]
+  },
+  {
+   "item_id": "probe#B:method-layer:reasoning-layer/cards/merge-path--selftest.yaml:55:environment",
+   "claim_id": "B:method-layer:reasoning-layer/cards/merge-path--selftest.yaml:55:environment",
+   "kind": "probe",
+   "repo": "method-layer",
+   "clone_url": "https://github.com/JinnZ2/method-layer",
+   "quote": "| `ro_crate` | False | NO-MERGE | spec unfetched (egress 403) | https://www.researchobject.org/ro-crate/ |",
+   "location": {
+    "path": "reasoning-layer/cards/merge-path--selftest.yaml",
+    "line": 55,
+    "written_by_commit": "7a5d1857f2a20033711d2b45b8b4516e8f9811c1"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "www.researchobject.org"
+   ]
+  },
+  {
+   "item_id": "probe#B:method-layer:reasoning-layer/cards/merge-path--selftest.yaml:56:environment",
+   "claim_id": "B:method-layer:reasoning-layer/cards/merge-path--selftest.yaml:56:environment",
+   "kind": "probe",
+   "repo": "method-layer",
+   "clone_url": "https://github.com/JinnZ2/method-layer",
+   "quote": "| `clinicaltrials_gov` | False | NO-MERGE | spec unfetched (egress 403) | https://clinicaltrials.gov/ (FDAAA 801; PRS data element definitions) |",
+   "location": {
+    "path": "reasoning-layer/cards/merge-path--selftest.yaml",
+    "line": 56,
+    "written_by_commit": "7a5d1857f2a20033711d2b45b8b4516e8f9811c1"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "clinicaltrials.gov"
+   ]
+  },
+  {
+   "item_id": "probe#B:method-layer:reasoning-layer/cards/merge-path--selftest.yaml:57:environment",
+   "claim_id": "B:method-layer:reasoning-layer/cards/merge-path--selftest.yaml:57:environment",
+   "kind": "probe",
+   "repo": "method-layer",
+   "clone_url": "https://github.com/JinnZ2/method-layer",
+   "quote": "| `cipm_cmc` | False | NO-MERGE | spec unfetched (egress 403) | https://www.bipm.org/ (CIPM MRA; CMC entries in the KCDB) |",
+   "location": {
+    "path": "reasoning-layer/cards/merge-path--selftest.yaml",
+    "line": 57,
+    "written_by_commit": "7a5d1857f2a20033711d2b45b8b4516e8f9811c1"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "www.bipm.org"
+   ]
+  },
+  {
+   "item_id": "probe#B:method-layer:reasoning-layer/cards/merge-path--selftest.yaml:58:environment",
+   "claim_id": "B:method-layer:reasoning-layer/cards/merge-path--selftest.yaml:58:environment",
+   "kind": "probe",
+   "repo": "method-layer",
+   "clone_url": "https://github.com/JinnZ2/method-layer",
+   "quote": "| `proof_assistant` | False | NO-MERGE | spec unfetched (egress 403) | https://leanprover-community.github.io/ (mathlib) / https://coq.inria.fr/ |",
+   "location": {
+    "path": "reasoning-layer/cards/merge-path--selftest.yaml",
+    "line": 58,
+    "written_by_commit": "7a5d1857f2a20033711d2b45b8b4516e8f9811c1"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "leanprover-community.github.io"
+   ]
+  },
+  {
+   "item_id": "probe#B:method-layer:reasoning-layer/cards/merge-path--selftest.yaml:59:environment",
+   "claim_id": "B:method-layer:reasoning-layer/cards/merge-path--selftest.yaml:59:environment",
+   "kind": "probe",
+   "repo": "method-layer",
+   "clone_url": "https://github.com/JinnZ2/method-layer",
+   "quote": "| `osf_prereg` | False | NO-MERGE | spec unfetched (egress 403) | https://osf.io/prereg/ (OSF preregistration) |",
+   "location": {
+    "path": "reasoning-layer/cards/merge-path--selftest.yaml",
+    "line": 59,
+    "written_by_commit": "7a5d1857f2a20033711d2b45b8b4516e8f9811c1"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "osf.io"
+   ]
+  },
+  {
+   "item_id": "probe#B:method-layer:reasoning-layer/cards/quiet-failure--run_all.yaml:60:environment",
+   "claim_id": "B:method-layer:reasoning-layer/cards/quiet-failure--run_all.yaml:60:environment",
+   "kind": "probe",
+   "repo": "method-layer",
+   "clone_url": "https://github.com/JinnZ2/method-layer",
+   "quote": "egress (measured 2026-09-20T02:58Z): www.ntsb.gov:443 CONNECT 403; www.csb.gov:443 CONNECT 403; www.gov.uk:443 CONNECT 403; onlinelibrary.wiley.com:443 CONNECT 403; github.com:443 connects (control)",
+   "location": {
+    "path": "reasoning-layer/cards/quiet-failure--run_all.yaml",
+    "line": 60,
+    "written_by_commit": "7a5d1857f2a20033711d2b45b8b4516e8f9811c1"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "github.com",
+    "onlinelibrary.wiley.com",
+    "www.csb.gov",
+    "www.gov",
+    "www.ntsb.gov"
+   ]
+  },
+  {
+   "item_id": "probe#B:planetary-conservation-framework:legacy/README.md:260:environment",
+   "claim_id": "B:planetary-conservation-framework:legacy/README.md:260:environment",
+   "kind": "probe",
+   "repo": "planetary-conservation-framework",
+   "clone_url": "https://github.com/JinnZ2/planetary-conservation-framework",
+   "quote": "(`ametsoc.org`, `journals.ametsoc.org`, `ametsoc.net`) were egress-blocked from",
+   "location": {
+    "path": "legacy/README.md",
+    "line": 260,
+    "written_by_commit": "77d2d5e372193fadfc845203d3c70a3b57e93cae"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "ametsoc.net",
+    "ametsoc.org",
+    "journals.ametsoc.org"
+   ]
+  },
+  {
+   "item_id": "probe#B:Noise-as-Information-Sensor:tools/CLAIM_TABLE.md:62:environment",
+   "claim_id": "B:Noise-as-Information-Sensor:tools/CLAIM_TABLE.md:62:environment",
+   "kind": "probe",
+   "repo": "Noise-as-Information-Sensor",
+   "clone_url": "https://github.com/JinnZ2/Noise-as-Information-Sensor",
+   "quote": "| NC_018 | **Every published-value fixture is SECONDARY and its primary is UNREAD.** Probed 2026-09-24T11:25Z: `www.biorxiv.org`, `arxiv.org` and `www.nature.com` return no response through this environment's egress policy, with `github.com` answering as the control. No count in any fixture was transcribed from a paper. | UNVERIFIED |",
+   "location": {
+    "path": "tools/CLAIM_TABLE.md",
+    "line": 62,
+    "written_by_commit": "97eda65e152185473fd9bc8e4cd76ab21472920e"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "arxiv.org",
+    "github.com",
+    "www.biorxiv.org",
+    "www.nature.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:stability-trigger-envelope:tools/CLAIM_TABLE.md:62:environment",
+   "claim_id": "B:stability-trigger-envelope:tools/CLAIM_TABLE.md:62:environment",
+   "kind": "probe",
+   "repo": "stability-trigger-envelope",
+   "clone_url": "https://github.com/JinnZ2/stability-trigger-envelope",
+   "quote": "| NC_018 | **Every published-value fixture is SECONDARY and its primary is UNREAD.** Probed 2026-09-24T11:25Z: `www.biorxiv.org`, `arxiv.org` and `www.nature.com` return no response through this environment's egress policy, with `github.com` answering as the control. No count in any fixture was transcribed from a paper. | UNVERIFIED |",
+   "location": {
+    "path": "tools/CLAIM_TABLE.md",
+    "line": 62,
+    "written_by_commit": "075bacd9d1d64afad34a80aa7b4e435a1dd5d288"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "arxiv.org",
+    "github.com",
+    "www.biorxiv.org",
+    "www.nature.com"
+   ]
+  },
+  {
+   "item_id": "probe#B:Non-equilibrium-atmospheric-forcing:enso_state.json:13:environment",
+   "claim_id": "B:Non-equilibrium-atmospheric-forcing:enso_state.json:13:environment",
+   "kind": "probe",
+   "repo": "Non-equilibrium-atmospheric-forcing",
+   "clone_url": "https://github.com/JinnZ2/Non-equilibrium-atmospheric-forcing",
+   "quote": "\"verification_warning\": \"Gathered by web search on 2026-08-21. NOAA CPC (cpc.ncep.noaa.gov), arxiv.org and other primary domains were blocked by this environment's network egress policy, so these figures come from SEARCH SUMMARIES of the CPC/IRI products, not from the products themselves. Every value is marked verified_against_primary: false. ENSO figures are updated monthly and go stale fast \\u2014 re-check before use. Same caveat class as RESEARCH_LOG.md U-14.\"",
+   "location": {
+    "path": "enso_state.json",
+    "line": 13,
+    "written_by_commit": "b3246c5ca79b22396053c12bbc9692919372c8fb"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "arxiv.org",
+    "cpc.ncep.noaa.gov"
+   ]
+  },
+  {
+   "item_id": "probe#B:GlyphAI:research.md:14:environment",
+   "claim_id": "B:GlyphAI:research.md:14:environment",
+   "kind": "probe",
+   "repo": "GlyphAI",
+   "clone_url": "https://github.com/JinnZ2/GlyphAI",
+   "quote": "Instrument limits for this pass. Direct HTTP retrieval was blocked by the network egress policy for every primary source attempted: arxiv.org, dl.acm.org, webtransparency.cs.princeton.edu, cdn.ca9.uscourts.gov, courtlistener.com, ftc.gov, shopify.dev, and each of the law-firm and press write-ups of the Ninth Circuit opinion. The only page fully retrieved was the GitHub README of the Mathur et al. crawl repository, which confirms the paper's title and the ~11K-site scope and nothing else. Every other `VERIFIED` tag rests on search-index excerpts of the named source returned by a web-search tool, not on the primary document read end to end. Where that distinction matters — the exact wording of a court holding, the exact enumeration of pattern types — it is stated at the claim. Three claims that could not be reached even by excerpt are tagged `UNVERIFIED`. The `MEASURED` / `UNMEASURED` grades in §2.1 were checked directly against the repository's test suite, which is local and was run.",
+   "location": {
+    "path": "research.md",
+    "line": 14,
+    "written_by_commit": "7701299215f1cfa8a2e4a01951346f767f53df75"
+   },
+   "claim_type": "environment",
+   "runs": [],
+   "hosts": [
+    "arxiv.org",
+    "cdn.ca9.uscourts.gov",
+    "courtlistener.com",
+    "dl.acm.org",
+    "ftc.gov",
+    "webtransparency.cs.princeton.edu"
+   ]
+  },
+  {
+   "item_id": "pass#B:Simulators:KNOWN_RED.md:138:test_failure",
+   "claim_id": "B:Simulators:KNOWN_RED.md:138:test_failure",
+   "kind": "pass",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "falsifier-audit/selftest_fa.py passing (28 checks, 0 failed) indicates the extraction",
+   "location": {
+    "path": "KNOWN_RED.md",
+    "line": 138,
+    "written_by_commit": "44e27e44a2a90dfafb7884dc3f8e2ceb2dea29db"
+   },
+   "claim_type": "test_failure",
+   "runs": [
+    {
+     "tree": "writing_commit",
+     "rev": "44e27e44a2a90dfafb7884dc3f8e2ceb2dea29db",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "falsifier-audit/selftest_fa.py"
+     ]
+    },
+    {
+     "tree": "head",
+     "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "falsifier-audit/selftest_fa.py"
+     ]
+    }
+   ],
+   "hosts": []
+  },
+  {
+   "item_id": "pass#B:Simulators:TOOL_FINDER/TOOL_FINDER.md:378:test_failure",
+   "claim_id": "B:Simulators:TOOL_FINDER/TOOL_FINDER.md:378:test_failure",
+   "kind": "pass",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "- status: RUN -- `python3 falsifier-audit/selftest_fa.py` -> selftest: 28 checks, 0 failed",
+   "location": {
+    "path": "TOOL_FINDER/TOOL_FINDER.md",
+    "line": 378,
+    "written_by_commit": "3f7d3f56836fb3cf03c86c1f382492d8ac6fe171"
+   },
+   "claim_type": "test_failure",
+   "runs": [
+    {
+     "tree": "writing_commit",
+     "rev": "3f7d3f56836fb3cf03c86c1f382492d8ac6fe171",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "falsifier-audit/selftest_fa.py"
+     ]
+    },
+    {
+     "tree": "head",
+     "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "falsifier-audit/selftest_fa.py"
+     ]
+    }
+   ],
+   "hosts": []
+  },
+  {
+   "item_id": "pass#B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14_V2.md:84:test_failure",
+   "claim_id": "B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14_V2.md:84:test_failure",
+   "kind": "pass",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "The response's open items O-3 and O-4 stand unaltered: the family classification has no second rater and the audience-fit scores remain one reader's judgments; the claim export (roadmap #1) is the instrument that would make both re-ratable by construction. O-5 stands: non-incident citations were not individually re-fetched. O-1 is now partially closed — instruments have been run by an outside party, and five claims about folder completeness failed their own tests — but no CLAIM_TABLE falsifier has yet been executed *as stated*; that remains the open measurement, and `falsifier-audit/selftest_fa.py` passing (28 checks, 0 failed) shows the extraction layer is ready for it.",
+   "location": {
+    "path": "external-audit/DEEP_RESEARCH_2026_09_14_V2.md",
+    "line": 84,
+    "written_by_commit": "3d83364db03d6c0a2e6f8f06c466319d1d593f9c"
+   },
+   "claim_type": "test_failure",
+   "runs": [
+    {
+     "tree": "writing_commit",
+     "rev": "3d83364db03d6c0a2e6f8f06c466319d1d593f9c",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "falsifier-audit/selftest_fa.py"
+     ]
+    },
+    {
+     "tree": "head",
+     "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "falsifier-audit/selftest_fa.py"
+     ]
+    }
+   ],
+   "hosts": []
+  },
+  {
+   "item_id": "pass#B:Simulators:forest-model-ledger/CLAIM_TABLE.md:37:cant_run",
+   "claim_id": "B:Simulators:forest-model-ledger/CLAIM_TABLE.md:37:cant_run",
+   "kind": "pass",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "| FML_016 | run_9 is a CANDIDATE anchor: one of the four anchor tests reads PASS (seeds), two PARTIAL (sigma_meas void; 2 of 5 budgets live), one NOT_RUN (assumption nudges; UPDATE 2026-11-10: run, now PARTIAL, see FML_022). The record pins three code files by sha256 and the checker fails on drift or on promotion with a test unpassed. | SUPPORTED | `ledger/anchors/ANCHOR_run9.yaml`, `tools/check_ledger.py --selftest` | -- |",
+   "location": {
+    "path": "forest-model-ledger/CLAIM_TABLE.md",
+    "line": 37,
+    "written_by_commit": "f633fb9d160364fc2eedb968dd50c0805bee33d0"
+   },
+   "claim_type": "cant_run",
+   "runs": [],
+   "hosts": []
+  },
+  {
+   "item_id": "pass#B:Simulators:forest-model-ledger/CLAIM_TABLE.md:69:test_failure",
+   "claim_id": "B:Simulators:forest-model-ledger/CLAIM_TABLE.md:69:test_failure",
+   "kind": "pass",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "| FML_048 | Held-out gate (thresholds frozen by hash at 72244bf before the sets existed; sets committed at e5e3186 before their first run; harness seeds 100-104): support_match, parameter_recovery, residual_regression, equation_family_swap PASS; multi_seed_ensemble FAIL_TP 0.995 (Laplace differences, 15 seeds, 3 sd shift), ablation FAIL_FP 0.005 (two outputs, uniform noise, no margin), assumption_block_trace FAIL_TP 0.9 (0.6 vs 0.1 failure, about 27 users). The three are trust PROVISIONAL and were not retuned. | SUPPORTED | `python3 tests/test_heldout.py`; `ledger/toolkit/HELDOUT_FREEZE.md` | a frozen tool file whose hash no longer matches, or a re-run that differs from the recorded held-out |",
+   "location": {
+    "path": "forest-model-ledger/CLAIM_TABLE.md",
+    "line": 69,
+    "written_by_commit": "83d911b911113465f1ce56ec019c8efe71c42921"
+   },
+   "claim_type": "test_failure",
+   "runs": [],
+   "hosts": []
+  },
+  {
+   "item_id": "pass#B:Simulators:stability-trigger-envelope/README.md:19:test_failure",
+   "claim_id": "B:Simulators:stability-trigger-envelope/README.md:19:test_failure",
+   "kind": "pass",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "CHECKS RUN         python3 test_envelope.py -> 217 checks, 0 failed",
+   "location": {
+    "path": "stability-trigger-envelope/README.md",
+    "line": 19,
+    "written_by_commit": "038a30f13c99b4aaa0d26affd35eebfa99460b2b"
+   },
+   "claim_type": "test_failure",
+   "runs": [
+    {
+     "tree": "writing_commit",
+     "rev": "038a30f13c99b4aaa0d26affd35eebfa99460b2b",
+     "cwd": "stability-trigger-envelope",
+     "argv": [
+      "python3",
+      "test_envelope.py"
+     ]
+    },
+    {
+     "tree": "head",
+     "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+     "cwd": "stability-trigger-envelope",
+     "argv": [
+      "python3",
+      "test_envelope.py"
+     ]
+    }
+   ],
+   "hosts": []
+  },
+  {
+   "item_id": "pass#B:Simulators:stability-trigger-envelope/RUN_NOTE.md:174:test_failure",
+   "claim_id": "B:Simulators:stability-trigger-envelope/RUN_NOTE.md:174:test_failure",
+   "kind": "pass",
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "quote": "RENDER_UNOBSERVED  test_envelope.py has run once (217 checks, 0 failed,",
+   "location": {
+    "path": "stability-trigger-envelope/RUN_NOTE.md",
+    "line": 174,
+    "written_by_commit": "038a30f13c99b4aaa0d26affd35eebfa99460b2b"
+   },
+   "claim_type": "test_failure",
+   "runs": [
+    {
+     "tree": "writing_commit",
+     "rev": "038a30f13c99b4aaa0d26affd35eebfa99460b2b",
+     "cwd": "stability-trigger-envelope",
+     "argv": [
+      "python3",
+      "test_envelope.py"
+     ]
+    },
+    {
+     "tree": "head",
+     "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+     "cwd": "stability-trigger-envelope",
+     "argv": [
+      "python3",
+      "test_envelope.py"
+     ]
+    }
+   ],
+   "hosts": []
+  },
+  {
+   "item_id": "pass#B:Mandala-Computing:CLAUDE.md:855:test_failure",
+   "claim_id": "B:Mandala-Computing:CLAUDE.md:855:test_failure",
+   "kind": "pass",
+   "repo": "Mandala-Computing",
+   "clone_url": "https://github.com/JinnZ2/Mandala-Computing",
+   "quote": "python tests/test_core.py        # should report 422 passed, 0 failed",
+   "location": {
+    "path": "CLAUDE.md",
+    "line": 855,
+    "written_by_commit": "bfe272b19aeaa461c6c6525a1fc1fe84e5d9ad81"
+   },
+   "claim_type": "test_failure",
+   "runs": [
+    {
+     "tree": "writing_commit",
+     "rev": "bfe272b19aeaa461c6c6525a1fc1fe84e5d9ad81",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "tests/test_core.py"
+     ]
+    },
+    {
+     "tree": "head",
+     "rev": "74e9422c5eee088eeb4bf6dff55674fe39b64d60",
+     "cwd": ".",
+     "argv": [
+      "python3",
+      "tests/test_core.py"
+     ]
+    }
+   ],
+   "hosts": []
+  }
+ ],
+ "specs_in_pool": 11,
+ "specs": [
+  {
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "spec_source": "anchor-position/WORK_ORDER_2.md",
+   "spec_sha256": "137ca3254c042bcf87b7a8475c43415491950cb917786c32445a709dd4cf8531",
+   "code_folder": "anchor-position",
+   "picked": true
+  },
+  {
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "spec_source": "relational-playground/SPEC_GPT.md",
+   "spec_sha256": "2846b28820b7c1b126b581c238479114b570715091af754bf1d1b9a4b389aeab",
+   "code_folder": "relational-playground",
+   "picked": true
+  },
+  {
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "spec_source": "playground-crossrun/WORK_ORDER.md",
+   "spec_sha256": "306ad96cabc011e056e4b28add031de0aba0447d6eae61c40eb98c65fc7b4b0b",
+   "code_folder": "playground-crossrun",
+   "picked": true
+  },
+  {
+   "repo": "JinnZ2",
+   "clone_url": "https://github.com/JinnZ2/JinnZ2",
+   "rev": "de5e32a7d937e8a623ecdf9b38672b146eacf395",
+   "spec_source": "energy_english/SPEC.md",
+   "spec_sha256": "4b709e1e031bf5e888c4ee39914a51c040593552209d2f147892f6969ce1568b",
+   "code_folder": "energy_english",
+   "picked": true
+  },
+  {
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "spec_source": "readout-count/WORK_ORDER.md",
+   "spec_sha256": "5324ed51c1ea44e91fb069144de7a92774b9f5240b6147ac788b704b6ca6676d",
+   "code_folder": "readout-count",
+   "picked": true
+  },
+  {
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "spec_source": "revision-survival/WORK_ORDER_V2.md",
+   "spec_sha256": "5d8aa73cae5223ecbb00185f50a78bb7da3fa9b57a2ece54bbda149853c02118",
+   "code_folder": "revision-survival",
+   "picked": false
+  },
+  {
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "spec_source": "observer-exclusion/SPEC_V2.md",
+   "spec_sha256": "709bb01b10f54819fad7399bd1e68fbf38125e602ca650f829a25bb638bc4a7f",
+   "code_folder": "observer-exclusion",
+   "picked": false
+  },
+  {
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "spec_source": "route-independence/WORK_ORDER_A6.3_2026-09-30_verification-split.md",
+   "spec_sha256": "b455385e852d73b53418d393ab17ed9a6677b62497382cfad852352761d11474",
+   "code_folder": "route-independence",
+   "picked": false
+  },
+  {
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "spec_source": "uninstrumented/WORK_ORDER_03.md",
+   "spec_sha256": "b7ad382541c13b03f595f26d99addf6654790f86b62bd4acf5013ace9530ff97",
+   "code_folder": "uninstrumented",
+   "picked": false
+  },
+  {
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "spec_source": "reg-uncertainty-registry/WORK_ORDER_1a.md",
+   "spec_sha256": "ecf19bfb3b0518f729c6544975bec44a6863a86d4984f02e1e914ba617d1c00b",
+   "code_folder": "reg-uncertainty-registry",
+   "picked": false
+  },
+  {
+   "repo": "Simulators",
+   "clone_url": "https://github.com/JinnZ2/Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "spec_source": "false-tradeoff/WORK_ORDER.md",
+   "spec_sha256": "f6c03a64b7c05c8561f94e7bbdcf50855ac766ec3f40fac17dbc70145bd3ddae",
+   "code_folder": "false-tradeoff",
+   "picked": false
+  }
+ ],
+ "agency": null
+}

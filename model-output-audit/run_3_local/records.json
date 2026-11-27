@@ -1,0 +1,16 @@
+{
+ "record": "MODEL_OUTPUT_AUDIT_RUN_3_LOCAL",
+ "status": "PROPOSED",
+ "license": "CC0",
+ "co_authored": true,
+ "observer_slots": null,
+ "items": 135,
+ "agency": null,
+ "state": "NOT_RUN",
+ "reason": "verdicts.jsonl is absent: the local auditor has not been run. This kit was filed by the session that wrote run 2, which is not the independent auditor and wrote no verdict.",
+ "auditor": null,
+ "agreement_with_run_2": null,
+ "per_class": null,
+ "disagreements": null,
+ "fidelity": null
+}
