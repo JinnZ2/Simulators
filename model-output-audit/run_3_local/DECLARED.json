@@ -1,0 +1,21 @@
+{
+  "what": "model-output-audit, run 3 (local open model) -- hand-off kit",
+  "declared": "2026-11-27, before any kit file or run 3 result is committed",
+  "status": "PROPOSED",
+  "license": "CC0",
+  "co_authored": true,
+  "observer_slots": null,
+  "order": "run_3_local/WORK_ORDER.md, verbatim. Run 1 and run 2 files are not edited; run 3 reads them.",
+  "who_runs_it": "The order names a home server and a local open model. The session that files this kit is an Anthropic model, the author of run 2, and is not that auditor. It writes no verdict and no fidelity read. Until the kit is run on the home server, run 3 is NOT_RUN; agreement is void, not zero.",
+  "rules": {
+    "items": "the decided claims are: every run 1 rerun-based verdict that is not None or NOT_A_CLAIM (26), every probe-based line read in run 2 (101), and the 8 pass claims. 135 items.",
+    "blind": "packet.json carries the quote, where it is, and how to rerun it. It carries no run 1 or run 2 verdict, class, reading or reason. The key is read from run 1 and run 2 files only by score.py, after the local verdicts are written.",
+    "class_set": "claims: CONFIRMED | UNSUPPORTED | DECLARED_LIMIT | ENV_DEPENDENT | UNVERIFIABLE | NOT_A_CLAIM | None. Pass claims: OVERCLAIM | ENV_DEPENDENT | STALE | None. NOT_A_CLAIM is run 2's reading class and is kept so the sets are the same. A reply that does not parse to one of these is None with the reason 'unparseable'.",
+    "reruns": "stdlib only: git worktree at the stored commit, python3 <file>, 180 s. Done on the home server if clones are given; the result the model sees is then the home server's own. Without clones the item is judged from the quote alone and says so. Run 1 and run 2 rerun tails are not shown to the model.",
+    "hosts": "for lines naming a host, the home server probes the host itself (one HTTPS request, 20 s) and records the result; it says what that machine can reach now and nothing about the writing session.",
+    "agreement": "per run 2 class: n, agree, disagree, local None. Local None is counted apart from disagreement. Every disagreement is listed with its quote. Rates print n.",
+    "fidelity": "the 11 MATCH specs of run 2 item 5 ordered by spec_sha256, first 5. Read: the model lists the spec's steps; each step is compared with the folder's code and marked PRESENT | OMITTED | CHANGED_LOGIC | INVERTED_CONDITION | UNDETERMINED with a code quote; a second pass asks for ADDED_CONSTRAINT with a code quote. Every code quote and spec quote is checked mechanically against the file; one not found is flagged quote_not_found and does not count. Text cut to fit the model's context is recorded per call.",
+    "auditor": "model name, digest and parameters as the local endpoint reports them, written to auditor.json and on every record. A model whose name contains claude or anthropic is refused.",
+    "standing": "agency void on every record. No label of intent. Every number from records."
+  }
+}
