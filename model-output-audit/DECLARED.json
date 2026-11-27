@@ -18,5 +18,19 @@
     "rates": "UNSUPPORTED rate = UNSUPPORTED / (CONFIRMED + UNSUPPORTED + ENV_DEPENDENT). The floor is that rate over all models together, printed first. A cell is flagged only if its n is at least 20 and its rate is at least twice the floor and at least 10 points above it. n is printed beside every rate. No significance is claimed.",
     "auditor": "the audit is run by a model that is itself one of the tagged authors. Its readings are a same-class judgment, not an outside check. The mechanical parts (inventory, quotes, reruns, rates) are recomputable by anyone from the records.",
     "not_claimed": "a single output cannot separate silent degradation from ordinary error. No verdict here says why a claim was wrong, or who decided anything."
-  }
+  },
+  "amendments": [
+    {
+      "date": "2026-11-27",
+      "name": "addendum 2b: spec-to-code fidelity",
+      "after": "branch model-output-audit at a35d9d74. Declared before any fidelity file is committed.",
+      "rules": {
+        "order_text": "kept as received in ADDENDUM_2b.md. It arrived cut off: the fidelity block is not closed and nothing follows the drift_type comment. No field, class or step is added to finish it.",
+        "spec_source": "found mechanically: a file at a repo's HEAD whose name marks it as an instruction (WORK_ORDER*, DISPATCH*, SPEC*, SOURCE_DROP*, ADDENDUM*, ORDER*; .md or .txt). Its folder is the output it governs. Chat logs are not in the repos and are not opened. A commit message or README says what was done, not what was asked, and is not used as a spec here.",
+        "match": "MISSING_SPEC (void) for a commit none of whose changed paths lies in or under a folder that holds a spec file. For a commit that does, match = None: a spec exists and has not yet been compared with the code. No MATCH or DRIFT is assigned in this step; that needs each spec read against its code, and the order's instructions for doing so were not received.",
+        "drift_type": "None on every record.",
+        "note": "MISSING_SPEC means no spec file was found by this rule, not that no instruction existed."
+      }
+    }
+  ]
 }
