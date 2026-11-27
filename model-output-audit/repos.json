@@ -1,0 +1,743 @@
+{
+ "listed": 106,
+ "repos": [
+  {
+   "repo": "Mathematic-economics",
+   "state": "CLONED",
+   "head": "dd2f62d2517b8028cc0bbeff17435a75a3d31623",
+   "branch": "main",
+   "commits": 270
+  },
+  {
+   "repo": "Living-Intelligence-Database",
+   "state": "CLONED",
+   "head": "8bf3d00bcde2d0aee68033aa3aeedf6b71b2ebaf",
+   "branch": "main",
+   "commits": 216
+  },
+  {
+   "repo": "simulation",
+   "state": "CLONED",
+   "head": "f5284363f777551d8b2d09ead1ff88de6fd0cbbf",
+   "branch": "main",
+   "commits": 87
+  },
+  {
+   "repo": "Geometric-manifold-",
+   "state": "CLONED",
+   "head": "e814887bed510ef0d4bd67c54820399f0ad088d6",
+   "branch": "main",
+   "commits": 199
+  },
+  {
+   "repo": "geometric-optimization",
+   "state": "CLONED",
+   "head": "913fc87222b01819b70c368ebc3f6ff48cd318bb",
+   "branch": "main",
+   "commits": 37
+  },
+  {
+   "repo": "curly-octo-happiness",
+   "state": "CLONED",
+   "head": "a3d5c55328cc671c4384d0a02eccb70c7d828b89",
+   "branch": "main",
+   "commits": 156
+  },
+  {
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "state": "CLONED",
+   "head": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+   "branch": "main",
+   "commits": 821
+  },
+  {
+   "repo": "Keystone-Codex",
+   "state": "CLONED",
+   "head": "5a070d0d45de49acfee75a2e09f5b43b7c1d3761",
+   "branch": "main",
+   "commits": 45
+  },
+  {
+   "repo": "PhysicsGuard",
+   "state": "CLONED",
+   "head": "2b12c6d0667f81c8b5e42f610c9d46db0a4bfd66",
+   "branch": "main",
+   "commits": 34
+  },
+  {
+   "repo": "PatternBridge",
+   "state": "CLONED",
+   "head": "4ed060f9c40b8f005d14fd2f2b26e9fc5d7b585b",
+   "branch": "main",
+   "commits": 57
+  },
+  {
+   "repo": "substrate-phycom",
+   "state": "CLONED",
+   "head": "cfadaeeaa9af17ab719406b72c0bc599e8e7444a",
+   "branch": "main",
+   "commits": 23
+  },
+  {
+   "repo": "electromagnetic-ocean-restoration",
+   "state": "CLONED",
+   "head": "6daa8569429992c4fe9190d3bae66819d84ff359",
+   "branch": "main",
+   "commits": 21
+  },
+  {
+   "repo": "orbital-phycom",
+   "state": "CLONED",
+   "head": "83e7553ab18d030365c8ce4ab0874f86ad7a0df1",
+   "branch": "main",
+   "commits": 58
+  },
+  {
+   "repo": "Component-failure-repurposing-database",
+   "state": "CLONED",
+   "head": "228cbbc5dac8e5c55c9fdb4828786e87c963b51f",
+   "branch": "main",
+   "commits": 222
+  },
+  {
+   "repo": "Rosetta-Shape-Core",
+   "state": "CLONED",
+   "head": "30c13fe6694db6c92cda452681569df29fa99e5a",
+   "branch": "main",
+   "commits": 360
+  },
+  {
+   "repo": "study-aperture",
+   "state": "CLONED",
+   "head": "2eb3335af5ecf9342135ffec711ba29b53602603",
+   "branch": "main",
+   "commits": 103
+  },
+  {
+   "repo": "decision-aperture",
+   "state": "CLONED",
+   "head": "7ad3de3247d3d9245b1a8a5faeb00ae2f481e8d5",
+   "branch": "main",
+   "commits": 22
+  },
+  {
+   "repo": "ai-human-audit-protocol",
+   "state": "CLONED",
+   "head": "72947579c330aca900902f47cd77d12d4de27cb4",
+   "branch": "main",
+   "commits": 159
+  },
+  {
+   "repo": "Resilient-AI-Human-Collaboration-",
+   "state": "CLONED",
+   "head": "67387b8fe1112abf4cf4b84d5429bb3aa8317401",
+   "branch": "main",
+   "commits": 65
+  },
+  {
+   "repo": "earth-systems-physics",
+   "state": "CLONED",
+   "head": "45bd35e02c792b4b46ce707b0a58bd7178f76efc",
+   "branch": "main",
+   "commits": 309
+  },
+  {
+   "repo": "AI-Consciousness-Sensors",
+   "state": "CLONED",
+   "head": "65795f55c3a106ceee433308cf67c7cef0ced9f7",
+   "branch": "main",
+   "commits": 2431
+  },
+  {
+   "repo": "Mathematical-collapse-prevention-model",
+   "state": "CLONED",
+   "head": "cce44a13b16a7379a7021792e3bc4f11b1093a92",
+   "branch": "main",
+   "commits": 53
+  },
+  {
+   "repo": "biomachine_ecology",
+   "state": "CLONED",
+   "head": "b8d9811f2dde56af4a3c303fbc3ebb43155a3e5b",
+   "branch": "main",
+   "commits": 44
+  },
+  {
+   "repo": "Bio-Grid-American-Manufacturing-",
+   "state": "CLONED",
+   "head": "b7234fae3ea08d9ee9a5a4ebb8309938cb435c88",
+   "branch": "main",
+   "commits": 147
+  },
+  {
+   "repo": "BioGrid2.0",
+   "state": "CLONED",
+   "head": "f0ced3a28fce433e75f64848f76688425439d764",
+   "branch": "main",
+   "commits": 430
+  },
+  {
+   "repo": "vibe-code-audit",
+   "state": "CLONED",
+   "head": "d3c7f18bc709d5bda4c22a3e3e383b489686ebf3",
+   "branch": "main",
+   "commits": 15
+  },
+  {
+   "repo": "AI-arena",
+   "state": "CLONED",
+   "head": "bb9ab966e252439d106bd1202175d85c0fee7e9c",
+   "branch": "main",
+   "commits": 102
+  },
+  {
+   "repo": "formula-audit",
+   "state": "CLONED",
+   "head": "1bf73bc750674d03942975b0196d1210da87ab57",
+   "branch": "main",
+   "commits": 62
+  },
+  {
+   "repo": "Emotions-as-Sensors",
+   "state": "CLONED",
+   "head": "7e211d5e2d75eabc62e7b4a1d480c0086b062504",
+   "branch": "main",
+   "commits": 392
+  },
+  {
+   "repo": "thermodynamic-accountability-framework",
+   "state": "CLONED",
+   "head": "c5442b0812cf7187ae007946fd5c5d16e573297a",
+   "branch": "main",
+   "commits": 531
+  },
+  {
+   "repo": "Simulators",
+   "state": "CLONED",
+   "head": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "branch": "main",
+   "commits": 1778
+  },
+  {
+   "repo": "Symbolic-sensor-suite",
+   "state": "CLONED",
+   "head": "44d8184bc7a8f4c4b933c4b6901833d8089fb136",
+   "branch": "main",
+   "commits": 215
+  },
+  {
+   "repo": "method-layer",
+   "state": "CLONED",
+   "head": "4636166350f46597b8566e225475ecc7412b18e9",
+   "branch": "main",
+   "commits": 97
+  },
+  {
+   "repo": "Seed-physics",
+   "state": "CLONED",
+   "head": "51376d11c51e1132837e2596258c2477ced8d91d",
+   "branch": "main",
+   "commits": 46
+  },
+  {
+   "repo": "Inversion",
+   "state": "CLONED",
+   "head": "3caec638e8dfc20310ad84f899deb236ce8a843e",
+   "branch": "main",
+   "commits": 110
+  },
+  {
+   "repo": "Combine-Cognitive-Architecture-",
+   "state": "CLONED",
+   "head": "42ca8bcab810ccef3083b4997a0ac2704e4c3307",
+   "branch": "main",
+   "commits": 43
+  },
+  {
+   "repo": "Resilience-indigenous-worldwide",
+   "state": "CLONED",
+   "head": "575acfd26c1273b5655370fd06afb5d6001583fd",
+   "branch": "main",
+   "commits": 127
+  },
+  {
+   "repo": "infrastructure-stability-model",
+   "state": "CLONED",
+   "head": "4237ec16d75f607c7cff0b2f0401aa4b16561d6b",
+   "branch": "main",
+   "commits": 54
+  },
+  {
+   "repo": "JinnZ2",
+   "state": "CLONED",
+   "head": "de5e32a7d937e8a623ecdf9b38672b146eacf395",
+   "branch": "main",
+   "commits": 642
+  },
+  {
+   "repo": "planetary-conservation-framework",
+   "state": "CLONED",
+   "head": "51061f37cfb3c3c29d954e0e37d69c073de79219",
+   "branch": "main",
+   "commits": 70
+  },
+  {
+   "repo": "differential-frame-core",
+   "state": "CLONED",
+   "head": "7eb82eaf756a48bed247f5d7e8e1b9555f1a80fb",
+   "branch": "main",
+   "commits": 29
+  },
+  {
+   "repo": "chain-position-detectability",
+   "state": "CLONED",
+   "head": "1b5bea413a619101855cfac3bdb958ea0ead8339",
+   "branch": "main",
+   "commits": 42
+  },
+  {
+   "repo": "Resilience",
+   "state": "CLONED",
+   "head": "482246aefa75eaa1b9688d5a582511f62021cf17",
+   "branch": "main",
+   "commits": 195
+  },
+  {
+   "repo": "Polyhedral-Intelligence",
+   "state": "CLONED",
+   "head": "f933133d89537e8e583ac3fe734a1736468eee93",
+   "branch": "main",
+   "commits": 136
+  },
+  {
+   "repo": "Mandala-Computing",
+   "state": "CLONED",
+   "head": "74e9422c5eee088eeb4bf6dff55674fe39b64d60",
+   "branch": "main",
+   "commits": 145
+  },
+  {
+   "repo": "Logic-Ferret",
+   "state": "CLONED",
+   "head": "303d362a9ef6cc019c5563fd27f19bc7ff6ae94e",
+   "branch": "main",
+   "commits": 79
+  },
+  {
+   "repo": "Regenerative-intelligence-core",
+   "state": "CLONED",
+   "head": "0b327f9c2f9a67a5eafa79d54a84cf62b17c192d",
+   "branch": "main",
+   "commits": 78
+  },
+  {
+   "repo": "Logistics-Disparity-Sensor",
+   "state": "CLONED",
+   "head": "c67efd31869fa7fbf7e70dd7b9cedb0a9cbf25d6",
+   "branch": "main",
+   "commits": 33
+  },
+  {
+   "repo": "Antarctic-basin-dynamics",
+   "state": "CLONED",
+   "head": "7c15ee252b6e31a9978e103b8449d3ed6c909810",
+   "branch": "main",
+   "commits": 41
+  },
+  {
+   "repo": "Cross-Domain-Toolkit",
+   "state": "CLONED",
+   "head": "8563d2eabe74fdf77222da37bcd62a469165a3d2",
+   "branch": "main",
+   "commits": 42
+  },
+  {
+   "repo": "Shadow-Hunting",
+   "state": "CLONED",
+   "head": "03033f8afb1896b14d229c1a649960a1ffd735bf",
+   "branch": "main",
+   "commits": 42
+  },
+  {
+   "repo": "drift-archive-audit",
+   "state": "CLONED",
+   "head": "f6a2818994b9a1171988fc687bffca91496625c0",
+   "branch": "main",
+   "commits": 109
+  },
+  {
+   "repo": "Noise-as-Information-Sensor",
+   "state": "CLONED",
+   "head": "d8271ae41985f4a7cac945625798e744ba0be0ec",
+   "branch": "main",
+   "commits": 50
+  },
+  {
+   "repo": "metabolic-accounting",
+   "state": "CLONED",
+   "head": "e1f00f7e50b04ddac6cf275e99863c1a1ecc71c2",
+   "branch": "main",
+   "commits": 130
+  },
+  {
+   "repo": "explorative-math",
+   "state": "CLONED",
+   "head": "e276e9269d31b7de4c8dd6b9b180f0e8c9cea13d",
+   "branch": "main",
+   "commits": 64
+  },
+  {
+   "repo": "hands-lie-detector",
+   "state": "CLONED",
+   "head": "1de8ee0e129a0294ac81a2260d78d043947681b9",
+   "branch": "main",
+   "commits": 63
+  },
+  {
+   "repo": "Voice-Integrity-Module",
+   "state": "CLONED",
+   "head": "010ad874f33e5054484f8ce82797c4a70a43d325",
+   "branch": "main",
+   "commits": 26
+  },
+  {
+   "repo": "Prosthetic-arm-CNC",
+   "state": "CLONED",
+   "head": "7fd7dff87188956a757f2eed9310782d2c47616c",
+   "branch": "main",
+   "commits": 16
+  },
+  {
+   "repo": "shape-index",
+   "state": "CLONED",
+   "head": "336c10bf263318dc63fe9ebde78ba8d05be91076",
+   "branch": "main",
+   "commits": 25
+  },
+  {
+   "repo": "trust-exit-model",
+   "state": "CLONED",
+   "head": "a65f4450e68fad9f156cd73756b358d71474074b",
+   "branch": "main",
+   "commits": 20
+  },
+  {
+   "repo": "Fractal-Compass-Atlas",
+   "state": "CLONED",
+   "head": "a254dc80df6a04bdeb1158e0a754f542264faedc",
+   "branch": "main",
+   "commits": 42
+  },
+  {
+   "repo": "Resilience-hydrology-core",
+   "state": "CLONED",
+   "head": "f7a19ec24cd389f7d30ad9d7082160a574d94880",
+   "branch": "main",
+   "commits": 36
+  },
+  {
+   "repo": "Plain-English-Translator",
+   "state": "CLONED",
+   "head": "857cfe5ad6363fa9f3841c5d34f1b63fb1166c1f",
+   "branch": "main",
+   "commits": 23
+  },
+  {
+   "repo": "temporal-consciousness-playground",
+   "state": "CLONED",
+   "head": "01a81d2543afd7fbcd45eeacab5dc162059c5826",
+   "branch": "main",
+   "commits": 37
+  },
+  {
+   "repo": "hgai-geometric-systems",
+   "state": "CLONED",
+   "head": "b23dda360fc4e9b15c2ac0f61ebe617ab2ba7f06",
+   "branch": "main",
+   "commits": 50
+  },
+  {
+   "repo": "Infrastructure-assistance",
+   "state": "CLONED",
+   "head": "ed6cba20d325b52b3e06b96625be1d05f9d45851",
+   "branch": "main",
+   "commits": 18
+  },
+  {
+   "repo": "open-source-plastic-lab",
+   "state": "CLONED",
+   "head": "d64a6c67a7a17634eecfa302e7a6d8b980e554bc",
+   "branch": "main",
+   "commits": 26
+  },
+  {
+   "repo": "Nexus-emergency-management",
+   "state": "CLONED",
+   "head": "1ffad661b125e516b4c5df9815dcfa8858f1da56",
+   "branch": "main",
+   "commits": 36
+  },
+  {
+   "repo": "BE2-communication",
+   "state": "CLONED",
+   "head": "ecdd7d3750dc9d4a373dd5c34740868d6e47b793",
+   "branch": "main",
+   "commits": 44
+  },
+  {
+   "repo": "fairmont-ecological-recovery",
+   "state": "CLONED",
+   "head": "b9113e1824002d75c90f84c25380308e2282de35",
+   "branch": "main",
+   "commits": 26
+  },
+  {
+   "repo": "stability-trigger-envelope",
+   "state": "CLONED",
+   "head": "a3054f748bc09cf24749918d95a003756f5ef8a7",
+   "branch": "main",
+   "commits": 5
+  },
+  {
+   "repo": "Fulgerite-Antenna-Prototype-",
+   "state": "CLONED",
+   "head": "f3e5fbe1fcd12191d487a469df56fd488b4b05d9",
+   "branch": "main",
+   "commits": 20
+  },
+  {
+   "repo": "geometric-to-binary",
+   "state": "CLONED",
+   "head": "edeeb11668aba6e444842667a553cc896069607d",
+   "branch": "master",
+   "commits": 61
+  },
+  {
+   "repo": "Non-equilibrium-atmospheric-forcing",
+   "state": "CLONED",
+   "head": "b47d7175a71234f89131c4c8ec1a187b6a7ec07e",
+   "branch": "main",
+   "commits": 35
+  },
+  {
+   "repo": "Universal-Redesign-Algorithm-",
+   "state": "CLONED",
+   "head": "609298ab35d4d982141209f0e42036a7c8d0d4db",
+   "branch": "main",
+   "commits": 56
+  },
+  {
+   "repo": "dyed-fuel-diff",
+   "state": "CLONED",
+   "head": "86b68b476843a2706142a57e36fa0adba68b0300",
+   "branch": "main",
+   "commits": 8
+  },
+  {
+   "repo": "The-Curriculum-of-Everything-Earth-",
+   "state": "CLONED",
+   "head": "33d6045ddc1bae679fc14fec95178ebb7fcc183b",
+   "branch": "main",
+   "commits": 43
+  },
+  {
+   "repo": "Sovereign-Octahedral-Mandala-Substrate-SOMS-",
+   "state": "CLONED",
+   "head": "0c63b5281a7058841897c900e55c8dfbd2714149",
+   "branch": "main",
+   "commits": 163
+  },
+  {
+   "repo": "YouTube-Wisdom-Lens",
+   "state": "CLONED",
+   "head": "784eda45d9d1866a7b53701eb6ac03266d4654c5",
+   "branch": "main",
+   "commits": 28
+  },
+  {
+   "repo": "Municipal-Code-Translator",
+   "state": "CLONED",
+   "head": "e37335d07b2f1b26d19630fce8fb15838830c207",
+   "branch": "main",
+   "commits": 13
+  },
+  {
+   "repo": "SymbolicSentinel",
+   "state": "CLONED",
+   "head": "8b7d040f7027a39cd9984c62c8df6025d3e64adb",
+   "branch": "main",
+   "commits": 54
+  },
+  {
+   "repo": "urban-resilience-sim",
+   "state": "CLONED",
+   "head": "db842d019783cb7d6d141f546b7abd09c71459c0",
+   "branch": "main",
+   "commits": 15
+  },
+  {
+   "repo": "Coop-framework",
+   "state": "CLONED",
+   "head": "5ba6552b396ca1ee95408228b060b531fa12c1fe",
+   "branch": "main",
+   "commits": 32
+  },
+  {
+   "repo": "Symbolic-Defense-Protocol",
+   "state": "CLONED",
+   "head": "e80008def9b3cee38c1ec77fe301ea8cc1fbfc8f",
+   "branch": "main",
+   "commits": 49
+  },
+  {
+   "repo": "TRDAP",
+   "state": "CLONED",
+   "head": "c827068e15c0393177362417e7f90bfb495f907b",
+   "branch": "main",
+   "commits": 43
+  },
+  {
+   "repo": "Adaptive-Intelligence-Framework-",
+   "state": "CLONED",
+   "head": "04b8aa04c4e264f1e9893afd3ad3e3dac4a93a9d",
+   "branch": "main",
+   "commits": 37
+  },
+  {
+   "repo": "Permeable-intelligence-commons",
+   "state": "CLONED",
+   "head": "b2f860ebf3576a86fa6c7a8259132ec2e8d916ce",
+   "branch": "main",
+   "commits": 35
+  },
+  {
+   "repo": "Nuclear-Donut-DataCenter",
+   "state": "CLONED",
+   "head": "63139881cefd9528a27ec653db560b737fede17b",
+   "branch": "main",
+   "commits": 40
+  },
+  {
+   "repo": "Hardware-Store",
+   "state": "CLONED",
+   "head": "2677b05a0df807f0c74d5cc597d203d5b308b668",
+   "branch": "main",
+   "commits": 41
+  },
+  {
+   "repo": "Academic-Translator",
+   "state": "CLONED",
+   "head": "f8e1bea5c536e0b964c94dc0d92da1fa3539dad1",
+   "branch": "main",
+   "commits": 22
+  },
+  {
+   "repo": "GlyphAI",
+   "state": "CLONED",
+   "head": "d0c461e424769b485dbe04e1b14ddd9fa178979f",
+   "branch": "main",
+   "commits": 56
+  },
+  {
+   "repo": "Study-on-Nazca-Lines",
+   "state": "CLONED",
+   "head": "d1042f0bbd82e2f99d885cff578cd95224f220f1",
+   "branch": "main",
+   "commits": 20
+  },
+  {
+   "repo": "Fractal_Compass_Core",
+   "state": "CLONED",
+   "head": "2559cc286d473387c1b3cbba27cb101a12174fa3",
+   "branch": "main",
+   "commits": 25
+  },
+  {
+   "repo": "tool-off-metrology",
+   "state": "CLONED",
+   "head": "3250cb8111c3de4d6cb5795f69dc7bdd96df7913",
+   "branch": "main",
+   "commits": 20
+  },
+  {
+   "repo": "assumption_validator",
+   "state": "CLONED",
+   "head": "4a38f5a3e45a0b3bea5ebef0d52a23b49f851942",
+   "branch": "main",
+   "commits": 17
+  },
+  {
+   "repo": "4D-language-lens",
+   "state": "CLONED",
+   "head": "2729c42641be5428b152a2971ccbfbfb0bb59bf1",
+   "branch": "main",
+   "commits": 11
+  },
+  {
+   "repo": "Cyclic-programming",
+   "state": "CLONED",
+   "head": "1e346ce2c97471118ef4debd1b400e82b32ea7c4",
+   "branch": "main",
+   "commits": 54
+  },
+  {
+   "repo": "framework-instruments",
+   "state": "CLONED",
+   "head": "ce1f187600f1d98d354dc91b47128ea3c5ff3d46",
+   "branch": "main",
+   "commits": 19
+  },
+  {
+   "repo": "DIY-CNC",
+   "state": "CLONED",
+   "head": "3e6586e0fb059d00ea7ee268f6719e985ba137b1",
+   "branch": "main",
+   "commits": 25
+  },
+  {
+   "repo": "interdisciplinary-studies",
+   "state": "CLONED",
+   "head": "26818f1b6b4e5534c38c78480f6a0b348092038e",
+   "branch": "main",
+   "commits": 32
+  },
+  {
+   "repo": "HAAS",
+   "state": "CLONED",
+   "head": "f78e7cb73852532b5969079bf73bae350f281ff0",
+   "branch": "main",
+   "commits": 17
+  },
+  {
+   "repo": "CEED",
+   "state": "CLONED",
+   "head": "8832f26d5e11cebf6b43e32223efb4a7514a2463",
+   "branch": "main",
+   "commits": 69
+  },
+  {
+   "repo": "measurement-scope-gaps",
+   "state": "CLONED",
+   "head": "074c80ea6e1ecd7f3139a40e29f6b6c0c2cf9bf0",
+   "branch": "main",
+   "commits": 29
+  },
+  {
+   "repo": "experiments",
+   "state": "NOT_CLONED",
+   "reason": "clone refused: private repository outside this session's access"
+  },
+  {
+   "repo": "gap-quantification-protocol",
+   "state": "NOT_CLONED",
+   "reason": "clone refused: private repository outside this session's access"
+  },
+  {
+   "repo": "gods-eye-view-fork",
+   "state": "CLONED",
+   "head": "e5ace631b45f91427c5ae190b4da8c25bb4d789c",
+   "branch": "main",
+   "commits": 26
+  }
+ ]
+}

@@ -1,0 +1,62 @@
+[
+ {
+  "check": "every part file has the hash recorded",
+  "state": "PASS",
+  "detail": ""
+ },
+ {
+  "check": "records.json equals a rebuild from the parts (verdict counts, floor and every table recomputed)",
+  "state": "PASS",
+  "detail": ""
+ },
+ {
+  "check": "every verdict has a reason",
+  "state": "PASS",
+  "detail": "414 verdict records"
+ },
+ {
+  "check": "every rerun-based verdict has a rerun log with a command and an exit code or a timeout",
+  "state": "PASS",
+  "detail": "313"
+ },
+ {
+  "check": "every CONFIRMED verdict whose first rerun was clean names a second run",
+  "state": "PASS",
+  "detail": ""
+ },
+ {
+  "check": "voids are counted as void: candidates = verdicts given + void",
+  "state": "PASS",
+  "detail": "13681 candidates, 352 given, 13329 void"
+ },
+ {
+  "check": "no void is inside a rate",
+  "state": "PASS",
+  "detail": ""
+ },
+ {
+  "check": "agency is void on every inventory and verdict record",
+  "state": "PASS",
+  "detail": ""
+ },
+ {
+  "check": "every claim with a record id points at an inventory record; a file line with no blame commit has none",
+  "state": "PASS",
+  "detail": "0 without"
+ },
+ {
+  "check": "flagged cells follow the declared rule (n >= 20, rate >= 2 x floor and >= floor + 10 points)",
+  "state": "PASS",
+  "detail": "0 flagged"
+ },
+ {
+  "check": "the clones are at the commits recorded in repos.json",
+  "state": "PASS",
+  "detail": "moved: none"
+ },
+ {
+  "check": "every quote is in its source, at the line recorded",
+  "state": "PASS",
+  "detail": "13681 quotes, 0 not found"
+ }
+]

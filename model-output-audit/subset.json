@@ -1,0 +1,2198 @@
+{
+ "eligible": 313,
+ "taken": 313,
+ "rule": "DECLARED.json rules.verification_subset",
+ "claims": [
+  {
+   "claim_id": "B:Simulators:potential/README.md:148:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "potential/tools/check_registry_drift.py",
+   "order": "0015a9026781939c9c6a95a9a84a2d9479d6a9b33259f8a212f9dd025b6299f9"
+  },
+  {
+   "claim_id": "B:AI-arena:README.md:141:test_failure",
+   "repo": "AI-arena",
+   "rev": "bb9ab966e252439d106bd1202175d85c0fee7e9c",
+   "target": "experimental/word_slots.py",
+   "order": "0033a4cb35f7aafd5a7a48f674ba8b3fbfe1866c40a7552ff62c48c883dd2916"
+  },
+  {
+   "claim_id": "B:Simulators:KNOWN_RED.md:199:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "internal-reference-boundary/test_boundary.py",
+   "order": "00c566b4a4bc6e69af6d8e6752bb99fee5bb01ea6fa7eb8114f59f1a961f6538"
+  },
+  {
+   "claim_id": "B:ai-human-audit-protocol:CHANGELOG.md:318:test_failure",
+   "repo": "ai-human-audit-protocol",
+   "rev": "72947579c330aca900902f47cd77d12d4de27cb4",
+   "target": "validate.py",
+   "order": "01d949a13e7548c4336f0cfcceba727c30a1cff7b195d0605053bf010c82290d"
+  },
+  {
+   "claim_id": "B:Simulators:route-independence/CLAIM_TABLE.md:217:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "route-independence/test_gate_state.py",
+   "order": "020c59be151e9819705b4d3ca283ecdc2f536e70d7aa438302f0e5ec10ded093"
+  },
+  {
+   "claim_id": "B:Simulators:TOOL_FINDER/TOOL_FINDER.md:254:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "encoding-selection/selftest_es.py",
+   "order": "047d41d6dd5c4e71353c10ea54201a21be6ab4da3915d18730feda760dd0e8dc"
+  },
+  {
+   "claim_id": "A:Simulators@fa9a00eb8d9f:55:defect",
+   "repo": "Simulators",
+   "rev": "fa9a00eb8d9fe75d481cbc33f0b328350b4e8c0f",
+   "target": "tools/run_manifest.py",
+   "order": "055982c975429315add4be5740ebaecf26a63f8adf33153f2f9dc2a04be57b37"
+  },
+  {
+   "claim_id": "A:Geometric-to-Binary-Computational-Bridge@ceb29310d19a:18:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "ceb29310d19a3bce8dfd819248bd3d5dc38c2feb",
+   "target": "bridges/sound_encoder.py",
+   "order": "06433533534fda51514e178c33c3d4296d126b44a603d44eb4847e4d5f1506f6"
+  },
+  {
+   "claim_id": "A:Geometric-to-Binary-Computational-Bridge@5cd9089d4b0b:3:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "5cd9089d4b0b418a640cd9887b57b0f1a0741878",
+   "target": "Silicon/FRET/soliton_transport.py",
+   "order": "0756c0dd723853c21ced1475d8b2001c4430020d2d38209f887ef363d805db96"
+  },
+  {
+   "claim_id": "B:Simulators:crediting-rate/CLAIM_TABLE.md:328:cant_run",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "crediting-rate/crediting_rate_v2.py",
+   "order": "07f9e40c3242d9bb0cbb475f6404725416b7f98a47bb429eebfbab570afbab81"
+  },
+  {
+   "claim_id": "B:Polyhedral-Intelligence:CLAUDE.md:134:cant_run",
+   "repo": "Polyhedral-Intelligence",
+   "rev": "f933133d89537e8e583ac3fe734a1736468eee93",
+   "target": "integrated.py",
+   "order": "084cc9e4f3a7101ac7cf61448169aafacd3a0b563c973d48bedaba470f17e521"
+  },
+  {
+   "claim_id": "B:stability-trigger-envelope:README.md:34:test_failure",
+   "repo": "stability-trigger-envelope",
+   "rev": "a3054f748bc09cf24749918d95a003756f5ef8a7",
+   "target": "test_envelope.py",
+   "order": "09b613afe8837b11a9e124410c7f3e6762b41015ac187b687bf5206d4ae80413"
+  },
+  {
+   "claim_id": "B:Simulators:KNOWN_RED.md:362:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "failure-mode-register/test_register_v2.py",
+   "order": "0abec42fc97e2cb9a66a13a1e9af8f509c36514b32a3565f60d87bf4675eea9a"
+  },
+  {
+   "claim_id": "B:Simulators:tools/tool_inventory.json:3017:cant_run",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "sheet-structure-scan/docreader.py",
+   "order": "0c3cb227c74b3cc12d23aba68e78d6a66f6067f6a3557459a364a5e6b6ddce85"
+  },
+  {
+   "claim_id": "B:hgai-geometric-systems:docs/EXPERIMENT-LOG.md:490:cant_run",
+   "repo": "hgai-geometric-systems",
+   "rev": "b23dda360fc4e9b15c2ac0f61ebe617ab2ba7f06",
+   "target": "sovereign_impact_sensor.py",
+   "order": "0cc896fe6f7e9476d7a8118f9a249e777a400075b7a5e5321c082d45cf5dd626"
+  },
+  {
+   "claim_id": "B:Living-Intelligence-Database:validation/fixtures/DECLARED.json:53:cant_run",
+   "repo": "Living-Intelligence-Database",
+   "rev": "8bf3d00bcde2d0aee68033aa3aeedf6b71b2ebaf",
+   "target": "scripts/build_index.py",
+   "order": "0d1579fb4643afef69c37f9afd21337bdd144ef64443dd4b52dcce2b88063a9f"
+  },
+  {
+   "claim_id": "B:Simulators:KNOWN_RED.md:363:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "internal-reference-boundary/test_boundary.py",
+   "order": "0e380c04ce014badf357b24c3a62ff1bc8a274550615a334c3f0b67138b83075"
+  },
+  {
+   "claim_id": "B:stability-trigger-envelope:tools/residual_partition.py:439:test_failure",
+   "repo": "stability-trigger-envelope",
+   "rev": "a3054f748bc09cf24749918d95a003756f5ef8a7",
+   "target": "tools/residual_partition.py",
+   "order": "0ed0952f48ab75f6780d0c3fbdc2f188ca77272dc2009321e0fa5f7d4707b561"
+  },
+  {
+   "claim_id": "B:Simulators:KNOWN_RED.md:138:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "falsifier-audit/selftest_fa.py",
+   "order": "113d92a4a55caed1cf2e86a5bf209faffdbd7724c78ec8a93f442159afd0f9e4"
+  },
+  {
+   "claim_id": "B:metabolic-accounting:docs/AUDIT_06.md:31:defect",
+   "repo": "metabolic-accounting",
+   "rev": "e1f00f7e50b04ddac6cf275e99863c1a1ecc71c2",
+   "target": "tests/test_governance_design_principles.py",
+   "order": "11463f30802f453ea97773a1c7f8a277ab8663658a4dea97a9d7f3f183365338"
+  },
+  {
+   "claim_id": "B:Simulators:falsifier-survey/cell_records.csv:1232:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "fragility-cascade/thermo_purpose.py",
+   "order": "117394e8e0d63643dce5ff342efcdb8e8c8ff2ca6da0621e8e4a7d0380f3480f"
+  },
+  {
+   "claim_id": "B:Simulators:falsifier-survey/cell_records.csv:737:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "rigidification-sensor/sensor_v1.py",
+   "order": "1198a6dc91cd49f0b54eb0839dbaf842779f01f6cd730db18b24b9bcb0c659de"
+  },
+  {
+   "claim_id": "A:Mathematic-economics@134ec727f2b2:32:defect",
+   "repo": "Mathematic-economics",
+   "rev": "134ec727f2b200acd93bc014e95b789aba709cf7",
+   "target": "tests/test_claim_contract.py",
+   "order": "15de8faa5ff0905d16a4aa4810425488987db7eedf785e599b859e69c9178060"
+  },
+  {
+   "claim_id": "A:Rosetta-Shape-Core@938bb4a02518:43:test_failure",
+   "repo": "Rosetta-Shape-Core",
+   "rev": "938bb4a025188d351ad3d4ef10f21dcbc847bcf5",
+   "target": "src/rosetta_shape_core/tier_check.py",
+   "order": "174a3f2e31a076ded2a89049bbff38cd4de376f33529095318b575be46a4857e"
+  },
+  {
+   "claim_id": "A:Geometric-to-Binary-Computational-Bridge@2c7812f56645:49:test_failure",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "2c7812f5664566ea05e5e5723e4ee17fb8dabe4b",
+   "target": "fabrication/archive_tests/archive_smoke.py",
+   "order": "1753f5e1dcf3704c41a99755ee13eb66ce173490ea34c7c888322c56f97a3213"
+  },
+  {
+   "claim_id": "B:Simulators:TOOL_FINDER/TOOL_FINDER.md:224:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "return-path/test_return.py",
+   "order": "178d27643add2723a6702566f740ed90035bfb42a693c3065b92ce060db2ba25"
+  },
+  {
+   "claim_id": "B:Simulators:KNOWN_RED.md:983:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "archive/stability-trigger-envelope/test_envelope.py",
+   "order": "1901d79536fe329be59de9861bd047e6ec08d8e5920a2e3907335b15344089fb"
+  },
+  {
+   "claim_id": "B:Living-Intelligence-Database:REVIEW.md:559:defect",
+   "repo": "Living-Intelligence-Database",
+   "rev": "8bf3d00bcde2d0aee68033aa3aeedf6b71b2ebaf",
+   "target": "validation/verify.py",
+   "order": "1be6b2a179588e4420001d3018b3d717902c02cef6223bf8c0ab9a7c14ea87a2"
+  },
+  {
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:CLAUDE.md:44:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+   "target": "tests/test_epg_bounds.py",
+   "order": "1c4e99dd097d8d1bd6a9b095922b8edcfeda4e30befd378009343f74417b7734"
+  },
+  {
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:CLAUDE.md:208:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+   "target": "tests/test_repo_guard.py",
+   "order": "1cdbbb588247ffd6211648db5c83e4633a79135d68eb42d578cea2b50eab4be7"
+  },
+  {
+   "claim_id": "B:Simulators:route-independence/CLAIM_TABLE.md:324:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "route-independence/test_standing_a61.py",
+   "order": "1d4e6d5f652be058286495091d37bb9cf599c3d2012acb3e435c2b72ef2cd1d1"
+  },
+  {
+   "claim_id": "B:Simulators:route-independence/README.md:346:cant_run",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "route-independence/standards_register.py",
+   "order": "1d5ed93f8cbb92b4308bd6ddfc7fb365d67611ffa4c4793c310fb1ac95f971f3"
+  },
+  {
+   "claim_id": "B:Noise-as-Information-Sensor:tools/channel_loss.py:410:test_failure",
+   "repo": "Noise-as-Information-Sensor",
+   "rev": "d8271ae41985f4a7cac945625798e744ba0be0ec",
+   "target": "tools/channel_loss.py",
+   "order": "1ea15daa96f7233d241b79b650ed13801ea1280aff739e8e8de841e2b25da5fa"
+  },
+  {
+   "claim_id": "B:Logic-Ferret:legacy/README.md:63:defect",
+   "repo": "Logic-Ferret",
+   "rev": "303d362a9ef6cc019c5563fd27f19bc7ff6ae94e",
+   "target": "sensor_suite/sensors/gaslight_frequency_meter.py",
+   "order": "204e4bc3a13bed52aed15365601393a42f7d1e41333440a8581491387a7c6528"
+  },
+  {
+   "claim_id": "B:Simulators:ICSC/check_landing.py:10:cant_run",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "ICSC/check_landing.py",
+   "order": "2081d05d4ace466e84ad7bcafa315603ff700e0be8cd24d1cb4e23891176f8ea"
+  },
+  {
+   "claim_id": "A:Simulators@bea19420d0f8:34:defect",
+   "repo": "Simulators",
+   "rev": "bea19420d0f80f608b6e3072e3d72391962b5c1e",
+   "target": "fragility-cascade/run_all.py",
+   "order": "237ff0e178d9b3546067e4e093110550f8178e13288f73c86fa1c5eb966713f2"
+  },
+  {
+   "claim_id": "B:geometric-optimization:tests/test_solver.py:4:test_failure",
+   "repo": "geometric-optimization",
+   "rev": "913fc87222b01819b70c368ebc3f6ff48cd318bb",
+   "target": "legacy/gas/solver.py",
+   "order": "2469d71128f37d7c73ae6a82af4fddfed08fd55259f062d1d410cdc0e1098d14"
+  },
+  {
+   "claim_id": "B:Simulators:archive/stability-trigger-envelope/RUN_NOTE.md:159:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "archive/stability-trigger-envelope/test_envelope.py",
+   "order": "248276dd9c252560f3a8f874dffc42c429916770ae88eec5920b9906f86877ab"
+  },
+  {
+   "claim_id": "B:Simulators:cooperative-substrate/CLAIM_TABLE.md:12:cant_run",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "cooperative-substrate/run_all.py",
+   "order": "258e25e0eb90ae2476bafc8c7477db3bf8230a052961ce459cb55cd04815e030"
+  },
+  {
+   "claim_id": "B:AI-Consciousness-Sensors:sims/playground_extensions.py:32:defect",
+   "repo": "AI-Consciousness-Sensors",
+   "rev": "65795f55c3a106ceee433308cf67c7cef0ced9f7",
+   "target": "sims/playground_v5.py",
+   "order": "2674675a1bce083b0e97a12a7625ef8b0fa96b1f650f9f6b321b682b7e1b40eb"
+  },
+  {
+   "claim_id": "B:substrate-phycom:CLAUDE.md:93:defect",
+   "repo": "substrate-phycom",
+   "rev": "cfadaeeaa9af17ab719406b72c0bc599e8e7444a",
+   "target": "integration/demo_failures.py",
+   "order": "29a2523243c452b71c85326cde8e9ee961cd31d5d83a4a8c64aca26f9991f89e"
+  },
+  {
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:adaptive_sim/falsifiers_adaptive_sim.py:8:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+   "target": "adaptive_sim/adaptive_sim_framework.py",
+   "order": "2a3c6ef8d247cf3a81a8433543ffbaf6f4776240602aeeb34ad3f367f9332f03"
+  },
+  {
+   "claim_id": "A:curly-octo-happiness@fde506fa803a:2:defect",
+   "repo": "curly-octo-happiness",
+   "rev": "fde506fa803aabd47e45d2b142d92bb2fe50cc04",
+   "target": "octahedral_canon.py",
+   "order": "2a998c43baeced10ae768430d9dd51015f1067c198b8152ba3f191c7b9a90975"
+  },
+  {
+   "claim_id": "B:Simulators:route-independence/CLAIM_TABLE.md:289:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "route-independence/test_chains_a456.py",
+   "order": "2b60698a2841092252993201c12cf1b7999c76b9d117b95509bf5782a7c7ea93"
+  },
+  {
+   "claim_id": "B:Plain-English-Translator:CLAUDE.md:25:defect",
+   "repo": "Plain-English-Translator",
+   "rev": "857cfe5ad6363fa9f3841c5d34f1b63fb1166c1f",
+   "target": "tests/test_translator.py",
+   "order": "2bad5564ed95a277071c53bdf7e163fcd9facec253e09e907029b8b092a7b37f"
+  },
+  {
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:Engine/falsifiers_engine.py:8:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+   "target": "Engine/geometric_solver.py",
+   "order": "2c79223db31a3483aad2f8a012d9b1c2421d543eb038950141d2e0d17437c55d"
+  },
+  {
+   "claim_id": "B:ai-human-audit-protocol:CHANGELOG.md:270:test_failure",
+   "repo": "ai-human-audit-protocol",
+   "rev": "72947579c330aca900902f47cd77d12d4de27cb4",
+   "target": "validate.py",
+   "order": "2d258f6dead1964811c298d4e28ee9e3419f5e735d8353a3fb6f7e81fe2cc5ff"
+  },
+  {
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:geometric_intelligence/CLAIMS.md:28:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+   "target": "geometric_intelligence/falsifiers_gi_network.py",
+   "order": "2e366c4c7cf0de792d07063a4a2a29de0f75b08da6fca57280d4de1f5dae67a3"
+  },
+  {
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:Engine/CLAIMS.md:15:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+   "target": "Engine/falsifiers_engine.py",
+   "order": "2fd84019a9138859f1c4cf8501fdb32afe769e5f0b1edc126041d2d44ef776a5"
+  },
+  {
+   "claim_id": "B:infrastructure-stability-model:audit/README.md:254:test_failure",
+   "repo": "infrastructure-stability-model",
+   "rev": "4237ec16d75f607c7cff0b2f0401aa4b16561d6b",
+   "target": "audit/failure_geometry_analysis.py",
+   "order": "2febf562b50918daff833189e92afee654960c71fd8340e54ed3e859110b4c81"
+  },
+  {
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:adaptive_sim/CLAIMS.md:26:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+   "target": "adaptive_sim/falsifiers_adaptive_sim.py",
+   "order": "3134da02158d483202448298f31f59b34f3e277505d062f477b739644db562f4"
+  },
+  {
+   "claim_id": "B:stability-trigger-envelope:tools/channel_loss.py:399:test_failure",
+   "repo": "stability-trigger-envelope",
+   "rev": "a3054f748bc09cf24749918d95a003756f5ef8a7",
+   "target": "tools/channel_loss.py",
+   "order": "31c98b2141ebeb3df85a0d6f4b038c095a16cd9e0eba3cc6b0062c9f2268add5"
+  },
+  {
+   "claim_id": "B:Simulators:forest-model-ledger/CLAIM_TABLE.md:37:cant_run",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "forest-model-ledger/tools/check_ledger.py",
+   "order": "3357af50131b6b55058b801f5792af67a50d42ead047cb2bffcb8ef44b83385f"
+  },
+  {
+   "claim_id": "B:Simulators:criteria-drift/OPEN_RESEARCH.md:488:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "criteria-drift/regression_audit.py",
+   "order": "34be42cb9193af8081bdcbc63907d3cfdf6ce87aa8f7ac7d3eb1f20c290cd580"
+  },
+  {
+   "claim_id": "B:Simulators:external-audit/CLAIM_TABLE.md:526:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "notes/check_datasets.py",
+   "order": "3680a4a31bfe7c2a5aad8a8fd40700517af1e11ba8d98faea3513534c8bbeeca"
+  },
+  {
+   "claim_id": "A:Simulators@51bbebb81992:13:test_failure",
+   "repo": "Simulators",
+   "rev": "51bbebb81992ca544e2820ec573ce602a8d24b75",
+   "target": "route-independence/test_fwo15.py",
+   "order": "36adcce44c328275bc25b9b97c9901b65d32de065ead2286d317b943dd2c8c37"
+  },
+  {
+   "claim_id": "A:Geometric-to-Binary-Computational-Bridge@5cd9089d4b0b:4:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "5cd9089d4b0b418a640cd9887b57b0f1a0741878",
+   "target": "AISS/assessment_framework.py",
+   "order": "36ccc83138b447cc9b5dc74030ea630c2e5ec37558e020a9a0683bd0a5a9dc76"
+  },
+  {
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:Negentropic/oral-record/case_check.py:6:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+   "target": "Negentropic/oral-record/case_check.py",
+   "order": "36d2121022a7714f68e6b40d8152d10927f1414c61bafaae5fd1dbfd79d2e97a"
+  },
+  {
+   "claim_id": "B:Simulators:falsifier-survey/cell_records.csv:1272:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "fragility-cascade/clock.py",
+   "order": "37227e23305ee9346b09d451e8841dff931fc6bc6cc1cbe26d9c4ac083da63f8"
+  },
+  {
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:geometric_intelligence/CLAIMS.md:61:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+   "target": "geometric_intelligence/falsifiers_gi_network.py",
+   "order": "3737f8caa220bde2f5ab70dc46710f760788aeb9da7f258962c99c4defd47461"
+  },
+  {
+   "claim_id": "B:hgai-geometric-systems:README.md:220:defect",
+   "repo": "hgai-geometric-systems",
+   "rev": "b23dda360fc4e9b15c2ac0f61ebe617ab2ba7f06",
+   "target": "defect_field.py",
+   "order": "379f12406682f136af08232f0860d7de6ac1f03583732f1424db7e683b782111"
+  },
+  {
+   "claim_id": "B:Simulators:CLAUDE.md:1285:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "energy/exploration_layers/percolation_lens.py",
+   "order": "37c9e9322b0c3343a3c8e22ae5b31a6299cf95180b1b33213d06ca5a58be7cf1"
+  },
+  {
+   "claim_id": "B:Mathematic-economics:docs/economics/dynamic_cpi_r/AUDIT.md:8:cant_run",
+   "repo": "Mathematic-economics",
+   "rev": "dd2f62d2517b8028cc0bbeff17435a75a3d31623",
+   "target": "legacy/docs/economics/dynamic_cpi_r/drafts/dynamic_inflation_weight.py",
+   "order": "385a7bd3566bba542178c0ba62aa42313c12abf0b549450961b128ce08a9e5f8"
+  },
+  {
+   "claim_id": "B:stability-trigger-envelope:tools/two_body_source.py:875:test_failure",
+   "repo": "stability-trigger-envelope",
+   "rev": "a3054f748bc09cf24749918d95a003756f5ef8a7",
+   "target": "tools/two_body_source.py",
+   "order": "3890b54440bb8c571d74a4844a4e3496c794e8ab3af4d4e99f3dbe2e42aa0aef"
+  },
+  {
+   "claim_id": "A:thermodynamic-accountability-framework@15bdc05d000a:23:defect",
+   "repo": "thermodynamic-accountability-framework",
+   "rev": "15bdc05d000abf0834b61ddfa6a94794ec02d4dd",
+   "target": "calibration/anti_metaphor_locker.py",
+   "order": "393d712f7adeee8a8fcbab848c78b981bfd860e7a0fd47be1ed0d21aa93be7ea"
+  },
+  {
+   "claim_id": "B:Mandala-Computing:CLAUDE.md:413:defect",
+   "repo": "Mandala-Computing",
+   "rev": "74e9422c5eee088eeb4bf6dff55674fe39b64d60",
+   "target": "mandala_scale_invariance_breakdown.py",
+   "order": "3a6924d33e409c0ea59a5511ac8f2e793475364555b79d4a323f0c95bd3ab835"
+  },
+  {
+   "claim_id": "B:Simulators:tools/tool_inventory.json:2534:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "external-audit/crosscheck.py",
+   "order": "3acfda23e1b2df21ecb646edf407ab66ba712a7aed8fefccde2234b93e01e796"
+  },
+  {
+   "claim_id": "B:hgai-geometric-systems:README.md:153:defect",
+   "repo": "hgai-geometric-systems",
+   "rev": "b23dda360fc4e9b15c2ac0f61ebe617ab2ba7f06",
+   "target": "defect_weather_model.py",
+   "order": "3b574bea2fa316098cdfff5445c05041106cedb929e42af2b84a0c6c091c951e"
+  },
+  {
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:CLAUDE.md:1028:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+   "target": "Silicon/fp4_autopilot.py",
+   "order": "3bb6dd26a4e6745c413c9b3879e6553b7d7460c3e8ac163b36b72dfaa1300348"
+  },
+  {
+   "claim_id": "A:Simulators@240425aadced:12:cant_run",
+   "repo": "Simulators",
+   "rev": "240425aadced8589270d2d6030330a0180613492",
+   "target": "tools/known_answer.py",
+   "order": "3bff8b309820e9895d02438dd90eccf59f7e83f2bcbb7513bc7f4b919db6e806"
+  },
+  {
+   "claim_id": "A:earth-systems-physics@63a6dce26af6:12:test_failure",
+   "repo": "earth-systems-physics",
+   "rev": "63a6dce26af680ae59bbe2f6ca8a6a341a7a892f",
+   "target": "test_financial_energy_footprint.py",
+   "order": "3c055db7eeba94e4f80c3b240151714ea0798bc510c30d2692622c2da35c1c89"
+  },
+  {
+   "claim_id": "B:Geometric-manifold-:docs/research/tool-selection-vs-deepening/deepseek_2026-11-20/REVIEW.md:34:defect",
+   "repo": "Geometric-manifold-",
+   "rev": "e814887bed510ef0d4bd67c54820399f0ad088d6",
+   "target": "docs/research/tool-selection-vs-deepening/deepseek_2026-11-20/step1_recheck.py",
+   "order": "3cf1bee7689f09d731811820c617943d806f11ec0b3dd633ff511fc522316f7e"
+  },
+  {
+   "claim_id": "B:4D-language-lens:CLAUDE.md:40:test_failure",
+   "repo": "4D-language-lens",
+   "rev": "2729c42641be5428b152a2971ccbfbfb0bb59bf1",
+   "target": "tests/test_cli.py",
+   "order": "3d9198967367943096bca204021feb2d25e71bdb17374f065ed1d2c91450ee74"
+  },
+  {
+   "claim_id": "B:Mandala-Computing:CLAUDE.md:855:test_failure",
+   "repo": "Mandala-Computing",
+   "rev": "74e9422c5eee088eeb4bf6dff55674fe39b64d60",
+   "target": "tests/test_core.py",
+   "order": "3dff19f54af128b05376663f281bd8cea6c7b6fb52a775063ac29197a0cd707d"
+  },
+  {
+   "claim_id": "B:Simulators:archive/stability-trigger-envelope/README.md:19:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "archive/stability-trigger-envelope/test_envelope.py",
+   "order": "3e03a25097b6c296112a916dcd3bafa8b64737aba42a1a8ccdf6c28d69f39496"
+  },
+  {
+   "claim_id": "B:Geometric-manifold-:falsifier-survey/cell_records.csv:71:test_failure",
+   "repo": "Geometric-manifold-",
+   "rev": "e814887bed510ef0d4bd67c54820399f0ad088d6",
+   "target": "experiments/ep2_prereg_sim.py",
+   "order": "3e6cf7b756da688d220ea9eb60e11ba5e4a3911f9b0cadde0bd9457e85a04e73"
+  },
+  {
+   "claim_id": "A:Simulators@b0c8795a4cf7:22:test_failure",
+   "repo": "Simulators",
+   "rev": "b0c8795a4cf70b23d31254a14896f709b6917e34",
+   "target": "human-sensing-prior/test_pathways.py",
+   "order": "40427fe981d11e402f1da589f9c65782df5cd7834983121b0a178eb824dcd773"
+  },
+  {
+   "claim_id": "B:Simulators:measurement-fork/CLAIM_TABLE.md:688:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "measurement-fork/PROBES_K11_K18.py",
+   "order": "4120f9eaebb2354f7b37c9365e9e85bd91ca888619fa1d98d324a828ea10537a"
+  },
+  {
+   "claim_id": "A:Simulators@ed3dc84d30d0:31:test_failure",
+   "repo": "Simulators",
+   "rev": "ed3dc84d30d0b3f1566d1c25e6a8d265486da253",
+   "target": "route-independence/test_standing_a61.py",
+   "order": "415c307c7d9aad05e2e20d63c9404ef15ed1644c5b96e5cc261e75166f646d71"
+  },
+  {
+   "claim_id": "B:Simulators:potential/INVENTORY.md:141:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "potential/test_all.py",
+   "order": "42f93b10422e15e99e81fc49efd0b39f6222ca106bc12beacd647ee1debde492"
+  },
+  {
+   "claim_id": "A:thermodynamic-accountability-framework@1fd327364ae8:53:defect",
+   "repo": "thermodynamic-accountability-framework",
+   "rev": "1fd327364ae87dc05c9ca4a3ea38c1e10da1d654",
+   "target": "concerns/checklist.py",
+   "order": "439a71c1c4840cf8e5f08c90c849a722b80de91b9ca9d4ab9722307b73604ad9"
+  },
+  {
+   "claim_id": "B:Living-Intelligence-Database:audit/2026-11-24/LID_intake_biosphere_council_crosswalk_2026-11-24.md:65:cant_run",
+   "repo": "Living-Intelligence-Database",
+   "rev": "8bf3d00bcde2d0aee68033aa3aeedf6b71b2ebaf",
+   "target": "validation/fixtures/run_fixtures.py",
+   "order": "4600cc1fa2ba07485d5f4dbc7a6544348b491cdfcd8f387c806c17bb73919307"
+  },
+  {
+   "claim_id": "B:Simulators:measurement-fork/falsifier_sweep.py:10:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "measurement-fork/coupling.py",
+   "order": "462a02d3c350a5883143b6b24eed23773c03533041fe219f00c6a3bc8fee5024"
+  },
+  {
+   "claim_id": "B:Living-Intelligence-Database:REVIEW.md:209:defect",
+   "repo": "Living-Intelligence-Database",
+   "rev": "8bf3d00bcde2d0aee68033aa3aeedf6b71b2ebaf",
+   "target": "scripts/discover.py",
+   "order": "4671471a0e9b928eb6a0790b366d2bc2c6af34c7965ad38bac44eba35b1988c9"
+  },
+  {
+   "claim_id": "B:Simulators:tools/check_cards.py:6:cant_run",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "tools/check_cards.py",
+   "order": "46b2d84117cbed28a0f2e1d1a0c8e4bdb238805bf131c441fd970c338719ef4e"
+  },
+  {
+   "claim_id": "B:AI-arena:README.md:179:cant_run",
+   "repo": "AI-arena",
+   "rev": "bb9ab966e252439d106bd1202175d85c0fee7e9c",
+   "target": "tests/run_counts.py",
+   "order": "46de97212f58a65d8f93c5dae460977114f9f7c157cbfdfa08f1c0c76d7cc8eb"
+  },
+  {
+   "claim_id": "B:formula-audit:READING_NOTES.md:29:test_failure",
+   "repo": "formula-audit",
+   "rev": "1bf73bc750674d03942975b0196d1210da87ab57",
+   "target": "tests/test_numcheck.py",
+   "order": "4764225d38ea21155fadabbbf4cbf2b4891fdea1f589beb097cf591ada939620"
+  },
+  {
+   "claim_id": "B:trust-exit-model:docs/method.md:281:test_failure",
+   "repo": "trust-exit-model",
+   "rev": "a65f4450e68fad9f156cd73756b358d71474074b",
+   "target": "tools/instrument_explorer.py",
+   "order": "491365c169024e5ee66814ba93f3b647fe61f08369ea7a112a756f6dd54a8d3e"
+  },
+  {
+   "claim_id": "B:Emotions-as-Sensors:CLAUDE.md:265:test_failure",
+   "repo": "Emotions-as-Sensors",
+   "rev": "7e211d5e2d75eabc62e7b4a1d480c0086b062504",
+   "target": "tools/validate.py",
+   "order": "49406278e3a40b5eb56e837b672e2476e3a5799aae0bf83443c355cb518b83b5"
+  },
+  {
+   "claim_id": "B:stability-trigger-envelope:tools/CLAIM_TABLE.md:64:cant_run",
+   "repo": "stability-trigger-envelope",
+   "rev": "a3054f748bc09cf24749918d95a003756f5ef8a7",
+   "target": "experiments/check_claims.py",
+   "order": "4a2e3be6b025ba29edaf5dffba7570a4c56e1d24abd76d6deb51ea5a889f08d8"
+  },
+  {
+   "claim_id": "A:Emotions-as-Sensors@5fc722cf82f9:1:defect",
+   "repo": "Emotions-as-Sensors",
+   "rev": "5fc722cf82f9ce6c19554d4fae37ca952dc606f9",
+   "target": "src/emotion_core.py",
+   "order": "4a4912e223750f91b4050343316fccebfd1167ff35ff30b7d0f65620bf53918d"
+  },
+  {
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:mappings/Md.md:10:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+   "target": "mappings/six_sigma_audit.py",
+   "order": "4bd3df61f41909addb9dd5cbe0d2c9eac2458e638c3e5f1405dc066e5d263d49"
+  },
+  {
+   "claim_id": "B:Geometric-manifold-:docs/research/tool-selection-vs-deepening/deepseek_2026-11-20/REVIEW.md:98:defect",
+   "repo": "Geometric-manifold-",
+   "rev": "e814887bed510ef0d4bd67c54820399f0ad088d6",
+   "target": "docs/research/tool-selection-vs-deepening/deepseek_2026-11-20/step1_recheck.py",
+   "order": "4c1e6d118e1447f58adb74d1fe6c9f250a2b7e7a610281d03ec3b106be84fa72"
+  },
+  {
+   "claim_id": "B:Simulators:KNOWN_RED.md:1368:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "crediting-rate/crediting_rate_v2.py",
+   "order": "4d57596268eec4729d0ef22eb7be64a79e53d4eef925164f7a932821d7f02923"
+  },
+  {
+   "claim_id": "A:Simulators@038a30f13c99:21:test_failure",
+   "repo": "Simulators",
+   "rev": "038a30f13c99b4aaa0d26affd35eebfa99460b2b",
+   "target": "stability-trigger-envelope/test_envelope.py",
+   "order": "4dd7d1234aebe357dfbcbb7ab889d47289bc5f342cc051b254de253c37c34680"
+  },
+  {
+   "claim_id": "B:CEED:simulation/cascade.py:60:defect",
+   "repo": "CEED",
+   "rev": "8832f26d5e11cebf6b43e32223efb4a7514a2463",
+   "target": "simulation/cascade.py",
+   "order": "4e3ad70fdd0c1284dd57da7b52762945a4b01c25f0e013c394c54350e1d96279"
+  },
+  {
+   "claim_id": "B:Simulators:falsifier-survey/cell_records.csv:313:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "columbia-chain-cascade/selftest_ccc.py",
+   "order": "4e77228e71a1bf584b47307996185ba7b8f62db428495402a2647cafc525ac25"
+  },
+  {
+   "claim_id": "A:Geometric-to-Binary-Computational-Bridge@a5f2eda6b56d:76:test_failure",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "a5f2eda6b56d029555b9f4c9344e298a06896390",
+   "target": "tests/test_silicon_modules.py",
+   "order": "4e91412861fd8646a100b8eb4f99ba7b7102375ef4c5f0a41d98a87d50a5dbc2"
+  },
+  {
+   "claim_id": "B:Simulators:forest-model-ledger/CLAIM_TABLE.md:47:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "forest-model-ledger/tools/check_ledger.py",
+   "order": "4eb4cb734a7c6f3cbb3601e7f97f5d166b435b19f9f1b46a1a75fc4386be221c"
+  },
+  {
+   "claim_id": "B:Simulators:forest-model-ledger/CLAIM_TABLE.md:69:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "forest-model-ledger/tests/test_heldout.py",
+   "order": "4fef43e19032aacf769776ff65ded59db8e713687d6da4b3e2dd96b171d44fd2"
+  },
+  {
+   "claim_id": "A:Simulators@26b01f25dd09:7:test_failure",
+   "repo": "Simulators",
+   "rev": "26b01f25dd0908ee0c95813ca5566329022c395b",
+   "target": "cooperative-substrate-proof/test_proof.py",
+   "order": "50427d39b3811fb7d94a14d9efd0fb95a3971b304e211435fa67a2b489735273"
+  },
+  {
+   "claim_id": "B:Sovereign-Octahedral-Mandala-Substrate-SOMS-:experiments/README.md:121:defect",
+   "repo": "Sovereign-Octahedral-Mandala-Substrate-SOMS-",
+   "rev": "0c63b5281a7058841897c900e55c8dfbd2714149",
+   "target": "experiments/firefly_swarm.py",
+   "order": "515f1801d60ad51c7aeed01e50d91c9550d69c5a216ce2c1a2afa0088bfae62b"
+  },
+  {
+   "claim_id": "B:Plain-English-Translator:CLAUDE.md:145:defect",
+   "repo": "Plain-English-Translator",
+   "rev": "857cfe5ad6363fa9f3841c5d34f1b63fb1166c1f",
+   "target": "batch_translate.py",
+   "order": "538151ce936bd67e9c84006de1de0ab7c4433a913400615c6f31162c42bacd6e"
+  },
+  {
+   "claim_id": "B:Living-Intelligence-Database:REVIEW.md:146:test_failure",
+   "repo": "Living-Intelligence-Database",
+   "rev": "8bf3d00bcde2d0aee68033aa3aeedf6b71b2ebaf",
+   "target": "scripts/discover.py",
+   "order": "538e3d959f887e414d3c1c7b98d49d1a7e6dabc3db4200942f792370df4918cd"
+  },
+  {
+   "claim_id": "A:Simulators@f6d385ce8672:28:test_failure",
+   "repo": "Simulators",
+   "rev": "f6d385ce8672b5717e1ed0eb903101924255d745",
+   "target": "route-independence/test_standing_a61.py",
+   "order": "53e205c839036c14a59c8a802caa3dcbc2b0dda7486582171bba5f7d56f0510b"
+  },
+  {
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:falsifier-survey/cell_records.csv:461:test_failure",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+   "target": "fabrication/claim_back.py",
+   "order": "54042657e2ff04bfe4a18f327213b7374049e9d6eb56e30ad4a39a1520989706"
+  },
+  {
+   "claim_id": "B:thermodynamic-accountability-framework:community_black_start/coordination_register.json:274:cant_run",
+   "repo": "thermodynamic-accountability-framework",
+   "rev": "c5442b0812cf7187ae007946fd5c5d16e573297a",
+   "target": "community_black_start/tests/test_e11.py",
+   "order": "54139f80b9119a62bbd74f5b0b3baa693a5f78480cb233fc1d80cdd70a1ccb6b"
+  },
+  {
+   "claim_id": "B:Inversion:scripts/ai_entry/readme.py:9:defect",
+   "repo": "Inversion",
+   "rev": "3caec638e8dfc20310ad84f899deb236ce8a843e",
+   "target": "scripts/ai_entry/readme.py",
+   "order": "542e79666db97518fc6620af896efce529f52e89e413e69c104a46d4d5915b79"
+  },
+  {
+   "claim_id": "B:stability-trigger-envelope:reports/FIRST_RUN.md:42:test_failure",
+   "repo": "stability-trigger-envelope",
+   "rev": "a3054f748bc09cf24749918d95a003756f5ef8a7",
+   "target": "test_envelope.py",
+   "order": "574d1f3e612ef2b2472c1b766d251560a1cef5ae6132e8e6353e362668a88638"
+  },
+  {
+   "claim_id": "B:curly-octo-happiness:REVIEW.md:205:defect",
+   "repo": "curly-octo-happiness",
+   "rev": "a3d5c55328cc671c4384d0a02eccb70c7d828b89",
+   "target": "meta_playground.py",
+   "order": "591e07d566541b729019c1cf69dbd6583ad35a9c24c56cce6eff0ffbbcc3a0d8"
+  },
+  {
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:CLAUDE.md:206:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+   "target": "tests/test_epg_bounds.py",
+   "order": "5a00bc3ba1fb3721faebbcdd0b63fc91bf0b4272192c42ca206462647ead21d3"
+  },
+  {
+   "claim_id": "B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14_V2.md:32:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "cooperative-substrate/selftest_csp.py",
+   "order": "5b2a857a8d3c92bd43b7f6b58a3ef8319968374173a90cac6d31b1bbddaf415d"
+  },
+  {
+   "claim_id": "B:Simulators:README.md:207:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "effective-redundancy-audit/effective_redundancy.py",
+   "order": "5ba79aa96efcd081c6c70568e87a4a14fee0b3c06425a6c022f23435a16a5660"
+  },
+  {
+   "claim_id": "B:Simulators:criteria-drift/tests/test_repairs.py:2:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "criteria-drift/tests/test_repairs.py",
+   "order": "5bf0ae5e3d1f60190746bd154a7d902e94ee680bca80a1e705eba3f0ae7200cd"
+  },
+  {
+   "claim_id": "B:Simulators:self-scan/samples/enumerators.sample.txt:45:cant_run",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "self-scan/census.py",
+   "order": "5ca513f643812931be28336ab9297b885203ba39954e4ac3af171b43cfa33ec3"
+  },
+  {
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:bridges/CLAIMS.md:15:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+   "target": "bridges/falsifiers_glyph_sensor.py",
+   "order": "5caf1ab01fe64b0e2df92e85d750ca219664be982f57b0091ff5af2e5c9616b0"
+  },
+  {
+   "claim_id": "B:Sovereign-Octahedral-Mandala-Substrate-SOMS-:atlas/remote/g2b/GI/03-consciousness-model.md:139:defect",
+   "repo": "Sovereign-Octahedral-Mandala-Substrate-SOMS-",
+   "rev": "0c63b5281a7058841897c900e55c8dfbd2714149",
+   "target": "atlas/remote/g2b/bridges/cognitive/consciousness_encoder.py",
+   "order": "5d7b86afdecfb77e5e65394402c23c1b64daabee6420c3920d5117dac7f105c5"
+  },
+  {
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:Silicon/field_propulsion_protocol.md:351:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+   "target": "ASIS/asc_core.py",
+   "order": "5deb1c5a4d82032eb7da8b833c35699a3228b96f7b7023779ba28f795eefee05"
+  },
+  {
+   "claim_id": "B:Simulators:criteria-drift/CLAIM_TABLE.md:25:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "criteria-drift/regression_audit.py",
+   "order": "5e80ae39e1545faf4d07ddf7e226429cfc9882f32fe92fbeca8abe3d135d2a5f"
+  },
+  {
+   "claim_id": "B:Noise-as-Information-Sensor:tools/rerun_find_rate.py:295:test_failure",
+   "repo": "Noise-as-Information-Sensor",
+   "rev": "d8271ae41985f4a7cac945625798e744ba0be0ec",
+   "target": "tools/rerun_find_rate.py",
+   "order": "5ffc201f043a0445af35db280b0b465e9f697f6609008c233c1f0bfd5020655e"
+  },
+  {
+   "claim_id": "A:Simulators@dd0f7941c14c:4:test_failure",
+   "repo": "Simulators",
+   "rev": "dd0f7941c14ce2683003c2cb4243cc80786fbb6f",
+   "target": "instrument-index/coverage.py",
+   "order": "61275fa8f433adadc8467c5f0344130ecaa0b7e774223fa7f261155bee9ae90f"
+  },
+  {
+   "claim_id": "B:curly-octo-happiness:REVIEW.md:184:defect",
+   "repo": "curly-octo-happiness",
+   "rev": "a3d5c55328cc671c4384d0a02eccb70c7d828b89",
+   "target": "project/cognitive_playground.py",
+   "order": "624b9ac22bb2e3c113966c6ead55ff3933e768a042766566b01439929ccd27b7"
+  },
+  {
+   "claim_id": "B:hgai-geometric-systems:CLAUDE.md:53:defect",
+   "repo": "hgai-geometric-systems",
+   "rev": "b23dda360fc4e9b15c2ac0f61ebe617ab2ba7f06",
+   "target": "defect_weather_model.py",
+   "order": "62aa9730611e00f42826857222319cee522a251a3bbbf86abd549bc309329a38"
+  },
+  {
+   "claim_id": "B:Simulators:route-independence/CLAIM_TABLE.md:33:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "tools/merge_silent_loss.py",
+   "order": "639d200594ebfe70e9046dd6bdbb7f2e3be53244a13282f9696d3bdf81321377"
+  },
+  {
+   "claim_id": "B:Geometric-manifold-:docs/research/residual-audit/INTERIM_HOME.md:44:test_failure",
+   "repo": "Geometric-manifold-",
+   "rev": "e814887bed510ef0d4bd67c54820399f0ad088d6",
+   "target": "docs/research/subliminal_guard.py",
+   "order": "649843fc0792c5aa64f5c1ef06f331d904d18e86c275d4c61fbbdf2299a18fe3"
+  },
+  {
+   "claim_id": "B:Simulators:forest-model-ledger/CLAUDE.md:177:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "forest-model-ledger/tools/check_ledger.py",
+   "order": "662feefb69353c0a1404e0b56e5a98a39f7945d9c0ea7f7e0d220f5360f336e6"
+  },
+  {
+   "claim_id": "B:Polyhedral-Intelligence:REVIEW.md:101:defect",
+   "repo": "Polyhedral-Intelligence",
+   "rev": "f933133d89537e8e583ac3fe734a1736468eee93",
+   "target": "data/training/generate.py",
+   "order": "66c2e838a94f4af03e7c72313a032ea595b2c269f866b415f3d84ff894715b28"
+  },
+  {
+   "claim_id": "B:Simulators:TOOL_FINDER/TOOL_FINDER.md:676:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "blame-attribution/pair_check.py",
+   "order": "69134f38c358b5b464ef3b6a16ba32107b0fb2ab0c13aff4df135785ce1eb689"
+  },
+  {
+   "claim_id": "B:Simulators:sheet-structure-scan/CLAIM_TABLE.md:454:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "sheet-structure-scan/fixture.py",
+   "order": "6923bc0d33e01f65c70e6e80c440df81ee61875505a7fa3602e6c9f1661194ee"
+  },
+  {
+   "claim_id": "B:Simulators:self-scan/samples/census.sample.txt:47:cant_run",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "self-scan/census.py",
+   "order": "6a220cc2e2ff615a2d85bc4e269d98750f01cbff43a34c6161c6613619dd8b44"
+  },
+  {
+   "claim_id": "B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14_V2.md:47:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "columbia-chain-cascade/selftest_kill.py",
+   "order": "6aa6fb7bbaf2bc0d9363fb9cda7045d3d1879463edef2c529e50c269334511f5"
+  },
+  {
+   "claim_id": "A:Simulators@55068170c9c9:9:cant_run",
+   "repo": "Simulators",
+   "rev": "55068170c9c97322300ef67ab235d91a1a5bf970",
+   "target": "sheet-structure-scan/docreader.py",
+   "order": "6b8fb36063ffabf6f74f1321157549f35fd5f92d718494ed33ac93e6803e3e3c"
+  },
+  {
+   "claim_id": "B:Simulators:tools/check_cards.py:9:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "tools/check_cards.py",
+   "order": "6d18e118f3161d797eda848ec05b25eddd9e36cae578673faa094df7cf54620b"
+  },
+  {
+   "claim_id": "B:curly-octo-happiness:REVIEW.md:339:defect",
+   "repo": "curly-octo-happiness",
+   "rev": "a3d5c55328cc671c4384d0a02eccb70c7d828b89",
+   "target": "design/archive/plugin_manager_v3.py",
+   "order": "6d618c80f79c1569dc7c36cf7a2a0237aab500375acc3f88f4e176e85144ca34"
+  },
+  {
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:REVIEW.md:61:test_failure",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+   "target": "Engine/geometric_solver.py",
+   "order": "6e4158baa4a181a8823f3cf330c6b1caa0814ce1708bf76c38f7bf2e32b5d240"
+  },
+  {
+   "claim_id": "B:Living-Intelligence-Database:REVIEW.md:269:defect",
+   "repo": "Living-Intelligence-Database",
+   "rev": "8bf3d00bcde2d0aee68033aa3aeedf6b71b2ebaf",
+   "target": "validation/falsifier.py",
+   "order": "6f5ea842d5a40941e621133466599c2f778f949430d7bf9af58e9a846340e12a"
+  },
+  {
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:integrations/gods-eye-view/03-orbital/README.md:71:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+   "target": "Negentropic/precession.py",
+   "order": "73cd21d1a9d4a3fe704cea7a18d8c800ebc6394a3cf969db2df1d783582bee94"
+  },
+  {
+   "claim_id": "A:Geometric-to-Binary-Computational-Bridge@d978a2be9af2:7:test_failure",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "d978a2be9af25e71e52b06735585c5bba2b5fd76",
+   "target": "tests/test_bridges.py",
+   "order": "74b318cdd5d49cecab551ba57a4ed0302072fb61c3141773e1b1747d410571f7"
+  },
+  {
+   "claim_id": "B:curly-octo-happiness:CLAUDE.md:51:convergence",
+   "repo": "curly-octo-happiness",
+   "rev": "a3d5c55328cc671c4384d0a02eccb70c7d828b89",
+   "target": "grounding/core/safety.py",
+   "order": "74fb3a7c12a23c8039bff51d8cf39a0c6da050d8f925caa8640a1cab541cedce"
+  },
+  {
+   "claim_id": "B:curly-octo-happiness:REVIEW.md:260:defect",
+   "repo": "curly-octo-happiness",
+   "rev": "a3d5c55328cc671c4384d0a02eccb70c7d828b89",
+   "target": "plugins/meta_encoder.py",
+   "order": "75e80e57d8c488099174a3f50ddf003e6e592ceac7d3e784e42c9eddae27482f"
+  },
+  {
+   "claim_id": "B:Mathematical-collapse-prevention-model:CLAUDE.md:105:defect",
+   "repo": "Mathematical-collapse-prevention-model",
+   "rev": "cce44a13b16a7379a7021792e3bc4f11b1093a92",
+   "target": "tests/test_legacy_imports.py",
+   "order": "760813fcdf57473838adb586ccc1346ee5d81a9f95374dcadcd24bc6d2c99538"
+  },
+  {
+   "claim_id": "B:Noise-as-Information-Sensor:tools/CLAIM_TABLE.md:64:cant_run",
+   "repo": "Noise-as-Information-Sensor",
+   "rev": "d8271ae41985f4a7cac945625798e744ba0be0ec",
+   "target": "experiments/check_claims.py",
+   "order": "78fb2f29e9f4269a700ed985961896ff00f52827ada82929dc528d427ff71f9e"
+  },
+  {
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:falsifier-survey/cell_records.csv:5:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+   "target": "ASIS/asc_core.py",
+   "order": "793537807f1c4a20b7322104e3b63875a496f749d800bb2970d28ec439bdbe60"
+  },
+  {
+   "claim_id": "B:thermodynamic-accountability-framework:judgment_registry/cli.py:7:defect",
+   "repo": "thermodynamic-accountability-framework",
+   "rev": "c5442b0812cf7187ae007946fd5c5d16e573297a",
+   "target": "judgment_registry/cli.py",
+   "order": "7a3edb54b4669f6159ffcdcae69c40606f7ddf7b1333edaa7fec1fcba8839251"
+  },
+  {
+   "claim_id": "B:Simulators:KNOWN_RED.md:1242:cant_run",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "tools/known_answer.py",
+   "order": "7a53f5e913be768f8c2da7dccadda871e4a8aa6fd52b0b94cf6afb1497edc51e"
+  },
+  {
+   "claim_id": "A:Simulators@ed3dc84d30d0:26:test_failure",
+   "repo": "Simulators",
+   "rev": "ed3dc84d30d0b3f1566d1c25e6a8d265486da253",
+   "target": "tests/test_run_manifest.py",
+   "order": "7a6afb29e9f9377c1bd366619b3e852b263f1670e3fd33315aa1ec6c4646c185"
+  },
+  {
+   "claim_id": "B:Simulators:falsifier-audit/QUEUE.md:1082:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "anchor-interval/corpus_loop.py",
+   "order": "7aaa4283c2d692aa92545bec843854906f804c429e1f8d4bc9c1ac80ff6f63c4"
+  },
+  {
+   "claim_id": "B:stability-trigger-envelope:tools/rerun_find_rate.py:288:test_failure",
+   "repo": "stability-trigger-envelope",
+   "rev": "a3054f748bc09cf24749918d95a003756f5ef8a7",
+   "target": "tools/rerun_find_rate.py",
+   "order": "7bc61cc6eeb80019b06a1be164450e3ac6bca7eb5f04373a30806ad15558292f"
+  },
+  {
+   "claim_id": "B:Living-Intelligence-Database:.github/workflows/weekly_science_intake.yml:16:cant_run",
+   "repo": "Living-Intelligence-Database",
+   "rev": "8bf3d00bcde2d0aee68033aa3aeedf6b71b2ebaf",
+   "target": "validation/fixtures/run_fixtures.py",
+   "order": "7c9e61b65e11bbad294ceb5169be5b052a589824cb1f435949ce9fa7849b3e1e"
+  },
+  {
+   "claim_id": "B:earth-systems-physics:CLAUDE.md:51:defect",
+   "repo": "earth-systems-physics",
+   "rev": "45bd35e02c792b4b46ce707b0a58bd7178f76efc",
+   "target": "layer_7_infrastructure.py",
+   "order": "7cd0fdd02cda56d2423f3146803d4243f2b459c845a53754bf314f27741762d0"
+  },
+  {
+   "claim_id": "B:Simulators:deep-research-correction/Simulators_Last_5_Folders_Deep_Research.md:115:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "move-set/move_set_audit.py",
+   "order": "7d18161ba1004aaaede6b52f86612c40e47a22aa4b4a21144e44834eb9115464"
+  },
+  {
+   "claim_id": "B:Geometric-manifold-:docs/research/tool-selection-vs-deepening/deepseek_2026-11-20/REVIEW.md:58:defect",
+   "repo": "Geometric-manifold-",
+   "rev": "e814887bed510ef0d4bd67c54820399f0ad088d6",
+   "target": "docs/research/tool-selection-vs-deepening/deepseek_2026-11-20/step1_recheck.py",
+   "order": "7d677545e4bc38d96f8af0f8363ef65dbb265e35e4576708ccf9f66afb4d5ec3"
+  },
+  {
+   "claim_id": "B:explorative-math:docs/probe_provenance_2026-11-18.json:95:defect",
+   "repo": "explorative-math",
+   "rev": "e276e9269d31b7de4c8dd6b9b180f0e8c9cea13d",
+   "target": "toolkit/generator.py",
+   "order": "7e4ac607184cbb8db3de522dbd676f625334ef45cb0829a87f01a0b6612278f3"
+  },
+  {
+   "claim_id": "B:Simulators:forest-model-ledger/tests/test_toolkit.py:6:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "forest-model-ledger/tools/check_ledger.py",
+   "order": "7f2397b12adc430d532581a7e124e59b0229599969f86716cd4fc753d0d6c69f"
+  },
+  {
+   "claim_id": "A:Keystone-Codex@b05bc217c18e:2:defect",
+   "repo": "Keystone-Codex",
+   "rev": "b05bc217c18e8ab7f0078592f476bda3850183eb",
+   "target": "src/prove.py",
+   "order": "7f758017bbb2024fa35efa79cde6d3c16274a7151f3cb461713ab22e15cc28ee"
+  },
+  {
+   "claim_id": "B:earth-systems-physics:REVIEW.md:198:test_failure",
+   "repo": "earth-systems-physics",
+   "rev": "45bd35e02c792b4b46ce707b0a58bd7178f76efc",
+   "target": "layer_0_emag.py",
+   "order": "7fb579017a1f5ed56562e96d689953090837577eb27a478fa6fd000454d95c75"
+  },
+  {
+   "claim_id": "B:Simulators:route-independence/CLAIM_TABLE.md:358:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "route-independence/test_fwo15.py",
+   "order": "80827c045441ef864393f631c456f1d49fb392fef52021b6ba539bd2a1921e52"
+  },
+  {
+   "claim_id": "B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14_V2.md:84:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "falsifier-audit/selftest_fa.py",
+   "order": "80e6a89b246aa5d0784506e45414e6b704571e8ba1eae66f5d94812058c29f7d"
+  },
+  {
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:REVIEW.md:132:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+   "target": "experiments/solvers/python_runner.py",
+   "order": "81bde44bdb1e42b373fa685da01861d40c4570fdb7951559c4879c7d48d9984b"
+  },
+  {
+   "claim_id": "A:Cyclic-programming@001c215028b0:27:defect",
+   "repo": "Cyclic-programming",
+   "rev": "001c215028b05cc1ddb3d5811bca3f8611d26a8d",
+   "target": "taxonomy_lab.py",
+   "order": "81e37935b4f894a59c1d028e773d8d77c97c5eb3cb112ac964aa81b49e06ad60"
+  },
+  {
+   "claim_id": "A:Simulators@8f65c8526a7c:17:test_failure",
+   "repo": "Simulators",
+   "rev": "8f65c8526a7ccfeb62e0b6196ed42916e60ad143",
+   "target": "human-sensing-prior/test_pathways.py",
+   "order": "831761841d01b5e24b2c27dd37c66286406a8a6f98f4a6a76046396da5ecf444"
+  },
+  {
+   "claim_id": "A:Simulators@ac7df544aaeb:9:defect",
+   "repo": "Simulators",
+   "rev": "ac7df544aaebfbd736c3c3ddcaa38cb381835305",
+   "target": "self-scan/census.py",
+   "order": "8345950c8e48095d939454b7f306a1c2f9f628eea2988f6fdecd9d14c0b208ff"
+  },
+  {
+   "claim_id": "B:Simulators:self-scan/enumerators.py:46:cant_run",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "self-scan/census.py",
+   "order": "8380c15d708094463f5f418a1f8cc9f1e674657759e40654d9410428b5531d25"
+  },
+  {
+   "claim_id": "B:Simulators:fourd-municipal-engine-v2/SPEC_V2_ADDENDUM.md:28:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "fourd-municipal-engine-v2/fourd_municipal_engine/parser/schemas.py",
+   "order": "838c36a4bd20c5d6844b22400737b769953825770a01c34750e4f137001196da"
+  },
+  {
+   "claim_id": "B:Simulators:KNOWN_RED.md:364:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "tools/sourced.py",
+   "order": "848cdedbf2f598ff46e6e5095024474ee78e3f2aaff4fda0393d7009dd57c1be"
+  },
+  {
+   "claim_id": "B:Simulators:stability-trigger-envelope/RUN_NOTE.md:174:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "stability-trigger-envelope/test_envelope.py",
+   "order": "84bec1a6b3682d103d681adb10812bb255c78a598d733b3dabae0f5d200420fa"
+  },
+  {
+   "claim_id": "A:Logic-Ferret@e3981336f077:66:test_failure",
+   "repo": "Logic-Ferret",
+   "rev": "e3981336f07766687339249eb298a5d378426afd",
+   "target": "setup.py",
+   "order": "85923b72676ed9a7dc99fb3cb9506c647bd072a89c427f053da02d9db41f7c2b"
+  },
+  {
+   "claim_id": "B:Simulators:blind-reader-void12/amendment_options/decide/DECISION_EVIDENCE.md:37:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "blind-reader-void12/amendment_options/derive/derive_specific.py",
+   "order": "859b88cabe5a221cf2b7876310eae27171899f36df195a5a4738b4fcf5213a6e"
+  },
+  {
+   "claim_id": "B:Simulators:blind-reader-void12/readings/2026-11-18_claude-fresh-1/raw_output.txt:74:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "combined-playground/cplay/axes.py",
+   "order": "866f1edd1aa8715add3fbd37dff981014ff4b6676c107be09f75d1d78e6933e3"
+  },
+  {
+   "claim_id": "B:ai-human-audit-protocol:CHANGELOG.md:371:test_failure",
+   "repo": "ai-human-audit-protocol",
+   "rev": "72947579c330aca900902f47cd77d12d4de27cb4",
+   "target": "validate.py",
+   "order": "877a6d89a76de2657ff7b8c5715fa85809b26aa8676770fdc71a86ed5384e70c"
+  },
+  {
+   "claim_id": "B:thermodynamic-accountability-framework:assembly_instrument/README.md:78:defect",
+   "repo": "thermodynamic-accountability-framework",
+   "rev": "c5442b0812cf7187ae007946fd5c5d16e573297a",
+   "target": "assembly_instrument/validate.py",
+   "order": "879c2c923cc1aca94fcbaf5acff6f96516d972f44533213bea37536faca3a760"
+  },
+  {
+   "claim_id": "B:Polyhedral-Intelligence:CLAUDE.md:37:cant_run",
+   "repo": "Polyhedral-Intelligence",
+   "rev": "f933133d89537e8e583ac3fe734a1736468eee93",
+   "target": "integrated.py",
+   "order": "896eaaa6abb0d4dd56593eba20d0cf446d5d22f818c0beb94091f70aef2010ad"
+  },
+  {
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:CLAUDE.md:334:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+   "target": "Silicon/epg_bounds.py",
+   "order": "8a0c63a469b267434cf37194089dd0dc8fa04ba6f066ed813b07935cb1dfe552"
+  },
+  {
+   "claim_id": "A:Simulators@f6d385ce8672:27:test_failure",
+   "repo": "Simulators",
+   "rev": "f6d385ce8672b5717e1ed0eb903101924255d745",
+   "target": "route-independence/test_sourcing_a62.py",
+   "order": "8a48d79a16e7134fdcdbfba440854b9b380d8ce2b7421cea357f12df7340513d"
+  },
+  {
+   "claim_id": "B:thermodynamic-accountability-framework:docs/economics/dynamic_cpi_r/AUDIT.md:8:cant_run",
+   "repo": "thermodynamic-accountability-framework",
+   "rev": "c5442b0812cf7187ae007946fd5c5d16e573297a",
+   "target": "docs/economics/dynamic_cpi_r/drafts/dynamic_inflation_weight.py",
+   "order": "8a92318d4da377f3103d09d1bca50916398353747fc118783dff3fe0b16dc88e"
+  },
+  {
+   "claim_id": "A:metabolic-accounting@bf677e62cffb:1:defect",
+   "repo": "metabolic-accounting",
+   "rev": "bf677e62cffbe34ef543b6ca33a2f0478825662f",
+   "target": "distributional/tiers.py",
+   "order": "8a9879e747075dc97059177ee010996a7d1fefa7401e3a8711c9e535f6688983"
+  },
+  {
+   "claim_id": "B:Simulators:KNOWN_RED.md:911:cant_run",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "cooperative-substrate-proof/p3_comprehension.py",
+   "order": "8b5dfd201097b4d9155bae4862e63c483445c39c747dd5faaa5392a785f149fb"
+  },
+  {
+   "claim_id": "B:Simulators:tools/tool_inventory.json:3000:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "routing-data-layer/upstream.py",
+   "order": "8bf3f4c51d77d6d613b3e28a649f666a4bd41077083173ed45c7f9e9ec47d003"
+  },
+  {
+   "claim_id": "B:earth-systems-physics:CLAUDE.md:143:test_failure",
+   "repo": "earth-systems-physics",
+   "rev": "45bd35e02c792b4b46ce707b0a58bd7178f76efc",
+   "target": "calibration/architecture_mismatch.py",
+   "order": "8c0884346ff8d16b64969f392c049a2b2dfc119c31b1c9fb0cf2cd8653fa6e12"
+  },
+  {
+   "claim_id": "B:Living-Intelligence-Database:validation/fixtures/run_fixtures.py:160:cant_run",
+   "repo": "Living-Intelligence-Database",
+   "rev": "8bf3d00bcde2d0aee68033aa3aeedf6b71b2ebaf",
+   "target": "scripts/build_index.py",
+   "order": "8c25eaa2d7813b0ab50c9f1c9dff658adf24f0639088effa0fccf554c9663dc3"
+  },
+  {
+   "claim_id": "B:Simulators:route-independence/CLAIM_TABLE.md:69:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "route-independence/route_independence.py",
+   "order": "8c4f94a5b8b934228f9f6b7a9b7546630ad7c3fbb0c7a55552bcf680fb45612f"
+  },
+  {
+   "claim_id": "A:Simulators@928b4e4ca804:25:test_failure",
+   "repo": "Simulators",
+   "rev": "928b4e4ca804489ee7fe634bbc68bd3ae49102ee",
+   "target": "chain-position/load_class.py",
+   "order": "8c8388748c3e97c707532c8f015cfc8acd8fa3551b4b4c77874fe2e1cc92b1ae"
+  },
+  {
+   "claim_id": "B:ai-human-audit-protocol:CHANGELOG.md:1408:defect",
+   "repo": "ai-human-audit-protocol",
+   "rev": "72947579c330aca900902f47cd77d12d4de27cb4",
+   "target": "consortium/bridges.py",
+   "order": "8d30b54bfb2cb31c1ecdb3055cf0e11c175780c98db18d51af81e9ed4e2c3df2"
+  },
+  {
+   "claim_id": "B:Simulators:KNOWN_RED.md:1314:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "cooperative-substrate-proof/p5_lag.py",
+   "order": "8dc0ce93bf479d86b6ab019d09cff16a072d0f2393e577d83121be7f313c0462"
+  },
+  {
+   "claim_id": "B:Simulators:KNOWN_RED.md:348:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "failure-mode-register/test_register.py",
+   "order": "8dda33015406cc969a688d0ac5aa6ef757b2caf14d4c1d5fed8054c9839e5735"
+  },
+  {
+   "claim_id": "B:hgai-geometric-systems:docs/02-M-S-equation.md:165:defect",
+   "repo": "hgai-geometric-systems",
+   "rev": "b23dda360fc4e9b15c2ac0f61ebe617ab2ba7f06",
+   "target": "hgai.py",
+   "order": "8f36d12bd9c9d96136e7225adbbfae5c736ba7f0a9c2a41ca081ba7bbd280545"
+  },
+  {
+   "claim_id": "A:Geometric-to-Binary-Computational-Bridge@5653eb371f1e:25:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "5653eb371f1e13f824f735e2c8d2e11faa5324c3",
+   "target": "Silicon/FRET/geometry_lock.py",
+   "order": "915cb468a4ce48e324bee82f2b8fdc4568467ccdf3f8cfade9d2095cdff48e5f"
+  },
+  {
+   "claim_id": "A:Simulators@9ccb626d935e:29:defect",
+   "repo": "Simulators",
+   "rev": "9ccb626d935eeaba0f6d52de4ed67900eb0fc3d3",
+   "target": "energy/modules/late_trigger_lens.py",
+   "order": "919808de25b4b71d7c0488c70371ef5574444bb3b376b280f9f8ba3106d84017"
+  },
+  {
+   "claim_id": "B:Noise-as-Information-Sensor:tools/two_body_source.py:881:test_failure",
+   "repo": "Noise-as-Information-Sensor",
+   "rev": "d8271ae41985f4a7cac945625798e744ba0be0ec",
+   "target": "tools/two_body_source.py",
+   "order": "91f7a09702728f1ca6c040e341c23eb6417acb40064ad5fa7b545e24917276e1"
+  },
+  {
+   "claim_id": "B:metabolic-accounting:legacy/FALSIFIED.md:52:defect",
+   "repo": "metabolic-accounting",
+   "rev": "e1f00f7e50b04ddac6cf275e99863c1a1ecc71c2",
+   "target": "regulatory/frameworks.py",
+   "order": "92a99fdd51f25cacbc78a385173a41a1b8feaaa2ce6071697b3e8bc43a775e3d"
+  },
+  {
+   "claim_id": "A:Simulators@4a1385284dc0:34:test_failure",
+   "repo": "Simulators",
+   "rev": "4a1385284dc01d8d32dd8b08231dedd56d8926ee",
+   "target": "trigger-geometry/test_trigger.py",
+   "order": "930d96613f99f55b97e67957418d8fbefbeadc7e36f4e84993975401cc366e9e"
+  },
+  {
+   "claim_id": "A:Simulators@37c8e58aaa9e:27:test_failure",
+   "repo": "Simulators",
+   "rev": "37c8e58aaa9e080d094a0f34ffa08e7524542767",
+   "target": "route-independence/test_standing_a61.py",
+   "order": "953ce7df80c912a0d7256a4e09e51811d738f8810b448d85c6488c8bbda646f2"
+  },
+  {
+   "claim_id": "B:Simulators:KNOWN_RED.md:198:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "failure-mode-register/test_register_v2.py",
+   "order": "95b071d324e2427ee8fb4de6a3ee05d0491896e4d7a5ed44bf0c6f035f3ffa93"
+  },
+  {
+   "claim_id": "B:Simulators:routing-data-layer/README.md:76:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "routing-data-layer/upstream.py",
+   "order": "972f997222be385093a86d8c6b5974de77f2d6862e76d09e2673f3bdadc6a83a"
+  },
+  {
+   "claim_id": "B:Simulators:tools/tool_inventory.json:3067:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "tools/known_red_check.py",
+   "order": "996c9e481b27d52a1df8dd0f8969b04f9f826b2a97d2e3d6d9076e8c2d1cd805"
+  },
+  {
+   "claim_id": "B:Simulators:CLAUDE.md:2161:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "measurement-fork/PROBES_K11_K18.py",
+   "order": "99802f5c0755fc0ce80c199023fc06ece3a34ff89adb040afa3dede7da6927b7"
+  },
+  {
+   "claim_id": "A:formula-audit@557ba26ba78d:10:test_failure",
+   "repo": "formula-audit",
+   "rev": "557ba26ba78dbab31f1f9c52fa3022a5185fa0e5",
+   "target": "glyph/operator.py",
+   "order": "9d55546309056fb1a0d1b7e45855246a2ce77cc347c700319160f65db4251676"
+  },
+  {
+   "claim_id": "B:thermodynamic-accountability-framework:docs/audit_2026_04_07.md:96:defect",
+   "repo": "thermodynamic-accountability-framework",
+   "rev": "c5442b0812cf7187ae007946fd5c5d16e573297a",
+   "target": "simulations/full_coupled_system.py",
+   "order": "9dcffe104bd557f9af37822746b9161d251be7c356d6cf519055150952296e94"
+  },
+  {
+   "claim_id": "B:Simulators:TOOL_FINDER/TOOL_FINDER.md:666:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "label-position-test/selftest_lpt.py",
+   "order": "9ddd5dad4f2844672b36b3874c8f768205e59eeece43face2768c9525183a761"
+  },
+  {
+   "claim_id": "B:Simulators:TOOL_FINDER/TOOL_FINDER.md:542:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "valence-divergence/test_valence.py",
+   "order": "9f7ee8621667d1aa159df97c387b0026de3900e4dfcf8ab561d379804aebf107"
+  },
+  {
+   "claim_id": "B:Simulators:loop-weight/loop_weight.py:27:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "loop-weight/test_loop.py",
+   "order": "9f880d5e18b35f8872384054fa33058af84689018e896254c1c418c34bb4fc93"
+  },
+  {
+   "claim_id": "B:Living-Intelligence-Database:REVIEW.md:281:defect",
+   "repo": "Living-Intelligence-Database",
+   "rev": "8bf3d00bcde2d0aee68033aa3aeedf6b71b2ebaf",
+   "target": "validation/scope_checker.py",
+   "order": "9fbca925ae9b5502004628cb1a5f416c38882f29e08de5c28f4a76174b7a5c99"
+  },
+  {
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:Negentropic/oral-record/README.md:19:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+   "target": "Negentropic/oral-record/case_check.py",
+   "order": "a087441124bf04810823a813d09c5a4c481a0f81d010a1cb277c56b8348704af"
+  },
+  {
+   "claim_id": "B:Polyhedral-Intelligence:REVIEW.md:254:cant_run",
+   "repo": "Polyhedral-Intelligence",
+   "rev": "f933133d89537e8e583ac3fe734a1736468eee93",
+   "target": "integrated.py",
+   "order": "a1f15d822ef83796e3772bf8388929679e85e15b2326e3fb098f96ce186c6d21"
+  },
+  {
+   "claim_id": "B:stability-trigger-envelope:tools/typed.py:377:test_failure",
+   "repo": "stability-trigger-envelope",
+   "rev": "a3054f748bc09cf24749918d95a003756f5ef8a7",
+   "target": "tools/typed.py",
+   "order": "a2baeaa1af0669cd2e5622ce1bebee54b5338b81c62d52a9f1931d0115563c36"
+  },
+  {
+   "claim_id": "B:Simulators:TOOL_FINDER/TOOL_FINDER.md:234:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "readout-count/selftest_rc.py",
+   "order": "a2d72d3b7157132e4ea0acd5fd4e96d33d5fa2b2a19a6be3d9389d95f4ae1521"
+  },
+  {
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:geometric_intelligence/CLAIMS.md:58:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+   "target": "geometric_intelligence/falsifiers_gi_network.py",
+   "order": "a2d860408c269d55e7d30800e5dcfee8eed0ee03a7ab5a4911fab50efc4afc57"
+  },
+  {
+   "claim_id": "B:Simulators:tools/tool_inventory.json:3008:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "self-scan/enumerators.py",
+   "order": "a3035f331ec6c718000ee929927c757afcd433e316af1c0f4fcdca78df62f0f2"
+  },
+  {
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:github/README.md:67:test_failure",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+   "target": "github/tests/test_collisions.py",
+   "order": "a3dd217cabf8e541c85431df88751330ad4852dfe7dd768474efdaaf56666c00"
+  },
+  {
+   "claim_id": "B:Simulators:blind-reader-void12/studies/GROK_REPO_READ_CHECK.md:27:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "grounding-layers/ai_observer_state.py",
+   "order": "a4fd01840213a78b7b3e477a08fd4c3c182252e96abee9abf886f58bcac413ea"
+  },
+  {
+   "claim_id": "B:Sovereign-Octahedral-Mandala-Substrate-SOMS-:experiments/README.md:123:defect",
+   "repo": "Sovereign-Octahedral-Mandala-Substrate-SOMS-",
+   "rev": "0c63b5281a7058841897c900e55c8dfbd2714149",
+   "target": "experiments/thermal_bridge_quantum.py",
+   "order": "a5e763a0b6e2fe8081332ebbca53a70fe647133da919f5a62727a30f030e312f"
+  },
+  {
+   "claim_id": "B:thermodynamic-accountability-framework:community_black_start/coordination_register.json:255:cant_run",
+   "repo": "thermodynamic-accountability-framework",
+   "rev": "c5442b0812cf7187ae007946fd5c5d16e573297a",
+   "target": "community_black_start/tests/test_e10.py",
+   "order": "a66202ebc384bbdd49838fbe35a1a3737e0d97ec117ae5360430b8413c3de097"
+  },
+  {
+   "claim_id": "B:Simulators:KNOWN_RED.md:310:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "self-scan/census.py",
+   "order": "a6922e7cf7e7c7dbeba9ad54665bdaf16585e23d7ea4ebc604c75816dc2f8c2e"
+  },
+  {
+   "claim_id": "B:Simulators:measurement-fork/PROBES_K11_K18.py:9:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "measurement-fork/coupling.py",
+   "order": "a6c25f563c0127d986c7bde19a54c571885201903c23174d987f2b9ae72e223d"
+  },
+  {
+   "claim_id": "B:Simulators:CLAUDE.md:14271:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "check_concept_map.py",
+   "order": "a7b99bfb57e32aeed6b63a09c6d3e9181e1515869eee68c27fb8f5b2046137d6"
+  },
+  {
+   "claim_id": "B:metabolic-accounting:STATUS.md:832:defect",
+   "repo": "metabolic-accounting",
+   "rev": "e1f00f7e50b04ddac6cf275e99863c1a1ecc71c2",
+   "target": "tests/test_investment_historical_cases.py",
+   "order": "a9c6ce2b91cd5e5841217bea34dfb3ea0414a73b82241ec88ba9dc1ed89817d2"
+  },
+  {
+   "claim_id": "A:Polyhedral-Intelligence@c940f9e3c712:0:defect",
+   "repo": "Polyhedral-Intelligence",
+   "rev": "c940f9e3c712ce43eb0c9eb67a5966cb4d36d328",
+   "target": "integrated.py",
+   "order": "aa6fbd4979977cd9d6bec81ede43fcfcd6ede1407596815589e1ea9de3627cd9"
+  },
+  {
+   "claim_id": "B:Simulators:route-independence/README.md:348:cant_run",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "route-independence/unpaid_maintenance.py",
+   "order": "ab792e70cd1e35f729eaa6100c828027915aaa52818fdb5a2e79ecdb16f6877c"
+  },
+  {
+   "claim_id": "A:Mathematic-economics@134ec727f2b2:31:test_failure",
+   "repo": "Mathematic-economics",
+   "rev": "134ec727f2b200acd93bc014e95b789aba709cf7",
+   "target": "tests/test_automation_scope_audit.py",
+   "order": "ab9bd41b4db47ff55d7eddb8314e0ab42ed56b71bc594126c7a13a53155658ac"
+  },
+  {
+   "claim_id": "B:Simulators:TOOL_FINDER/REPORT_WO_FINDER.md:98:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "tools/known_red_check.py",
+   "order": "abb871ea89bd0d888d78bf1c9914e2f6acd0208a6a618d6a4c1c3007fae8ba22"
+  },
+  {
+   "claim_id": "B:framework-instruments:docs/AUDIT_2026-09-06.md:40:defect",
+   "repo": "framework-instruments",
+   "rev": "ce1f187600f1d98d354dc91b47128ea3c5ff3d46",
+   "target": "instruments/b1-runner-up-trace/b1_score.py",
+   "order": "ad1a79b011c9fbfcb142512ea743f78c958c898326f248aec70b077e3fc69d18"
+  },
+  {
+   "claim_id": "A:planetary-conservation-framework@0e4ab0f2c7ec:27:defect",
+   "repo": "planetary-conservation-framework",
+   "rev": "0e4ab0f2c7ec09ca35ecf00af62bcc2d4ea3540a",
+   "target": "tools/fix_paste_corruption.py",
+   "order": "ad37d533d74da4bc8d85494a8b7b5e75c4b776d8dc2dc0dcba3776709c7853b7"
+  },
+  {
+   "claim_id": "B:Simulators:forest-model-ledger/ledger/expiry.yaml:5:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "forest-model-ledger/tools/check_ledger.py",
+   "order": "b01e1f8dc33f4fbef9096ed8e4175debbe0dd89cbb524526a68446d814eb00f5"
+  },
+  {
+   "claim_id": "B:Simulators:blind-reader-void12/PREREG.md:102:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "blind-reader-void12/scoring/test_score_v2.py",
+   "order": "b20abdfda8869c6ab3084d31f6a0a4f5e005df3142d13052c8c71f3e40b3ec4d"
+  },
+  {
+   "claim_id": "B:Keystone-Codex:CLAUDE.md:139:defect",
+   "repo": "Keystone-Codex",
+   "rev": "5a070d0d45de49acfee75a2e09f5b43b7c1d3761",
+   "target": "src/prove.py",
+   "order": "b2f9949591c84c80d8922bc33551f67b51f64fbabf32aa00bd33a409adbbf2ab"
+  },
+  {
+   "claim_id": "A:metabolic-accounting@bf677e62cffb:10:defect",
+   "repo": "metabolic-accounting",
+   "rev": "bf677e62cffbe34ef543b6ca33a2f0478825662f",
+   "target": "distributional/access.py",
+   "order": "b5224c1202fca530294abb28a43137f4324b9bc56861565e06c6fc749d5af604"
+  },
+  {
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:GI/03-consciousness-model.md:139:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+   "target": "bridges/cognitive/consciousness_encoder.py",
+   "order": "b5beadc52b050da4098b421a7893ddf6d627cb51cad03f41395b65085ce18851"
+  },
+  {
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:geometric_intelligence/CLAIMS.md:13:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+   "target": "geometric_intelligence/falsifiers_gi_network.py",
+   "order": "b6781f068c592abefb799b4f5bdd5f674aa6a83595182c7265cd718cc0f4e3e0"
+  },
+  {
+   "claim_id": "B:Simulators:forest-model-ledger/tools/check_ledger.py:5:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "forest-model-ledger/tools/check_ledger.py",
+   "order": "b85807232180a7e0d7efbf1b19bac3c568e7912ba95992506ae35347ce3c288a"
+  },
+  {
+   "claim_id": "A:Geometric-to-Binary-Computational-Bridge@4ca5401ac0f5:54:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "4ca5401ac0f54ad11ad65bd82fdd2a33224b0a10",
+   "target": "fabrication/verify/peak_multi.py",
+   "order": "b8884e8ae45b255843eeefcf5a2c2d886ef3ed13ed6665b3c2895e0a8e27fa95"
+  },
+  {
+   "claim_id": "B:Simulators:TOOL_FINDER/REPORT_WO_FINDER.md:346:cant_run",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "evidence-demotion-detector/detect.py",
+   "order": "b9a79f759c910c45816be38482a4ecddb323fa84da6c0e8bc5f776442239ee14"
+  },
+  {
+   "claim_id": "B:infrastructure-stability-model:legacy/ledger.json:37:defect",
+   "repo": "infrastructure-stability-model",
+   "rev": "4237ec16d75f607c7cff0b2f0401aa4b16561d6b",
+   "target": "validate.py",
+   "order": "ba406dc2e07ca42779c3bcf80122bce74e82b3bd5f5e4d50d40512b2c5afbf06"
+  },
+  {
+   "claim_id": "B:Living-Intelligence-Database:REVIEW.md:275:defect",
+   "repo": "Living-Intelligence-Database",
+   "rev": "8bf3d00bcde2d0aee68033aa3aeedf6b71b2ebaf",
+   "target": "validation/dependency_tree.py",
+   "order": "badf8ec5a9b7fe7bfe4e95ee765cf39f78283209a3f8710be8a5edbf1d05acc4"
+  },
+  {
+   "claim_id": "B:Simulators:measurand-partition/README.md:38:cant_run",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "measurand-partition/wo1_partition.py",
+   "order": "bc8579c823e8586bca898cfb08593d3eb1ab3ad312c73c1bd6fa82756cce42d6"
+  },
+  {
+   "claim_id": "B:curly-octo-happiness:REVIEW.md:320:defect",
+   "repo": "curly-octo-happiness",
+   "rev": "a3d5c55328cc671c4384d0a02eccb70c7d828b89",
+   "target": "unified_playground.py",
+   "order": "be073ec314e1d147a5694b72690a7e891c5602e593f50525c0486d30e0e4c5e0"
+  },
+  {
+   "claim_id": "B:Simulators:tests/test_known_red_pins.py:4:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "tools/known_red_check.py",
+   "order": "be42e7c53671316e5d6001855200039f31194c0078e229dfd7f751da9ee68a25"
+  },
+  {
+   "claim_id": "B:method-layer:reasoning-layer/README.md:75:cant_run",
+   "repo": "method-layer",
+   "rev": "4636166350f46597b8566e225475ecc7412b18e9",
+   "target": "reasoning-layer/validate.py",
+   "order": "be790118703bd5c5104ad93e26c1a813d13165516ddf2c96e47efdef010afdc3"
+  },
+  {
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:falsifier-survey/cell_records.csv:462:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+   "target": "Negentropic/core.py",
+   "order": "bea6e42265ae56f4782518c1a3d3b7a80f471bbe30f2056121f049ad8eda5b22"
+  },
+  {
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:REVIEW.md:115:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+   "target": "Bridge.py",
+   "order": "befee3b0e350023da45bfeccf58b369ff7211a0dd84ac8f527c165eb65f33377"
+  },
+  {
+   "claim_id": "B:chain-position-detectability:CLAUDE.md:161:cant_run",
+   "repo": "chain-position-detectability",
+   "rev": "1b5bea413a619101855cfac3bdb958ea0ead8339",
+   "target": "tools/check_repo.py",
+   "order": "c01c96a8bf4b7f4a7aee52be51890539220c31df5c81b099c4fde2a00a35a1b7"
+  },
+  {
+   "claim_id": "B:Simulators:TOOL_FINDER/TOOL_FINDER.md:378:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "falsifier-audit/selftest_fa.py",
+   "order": "c05666bbef8983f54315fb9b0d98d8fd217e7e191787c38a75a470fcde2b45c7"
+  },
+  {
+   "claim_id": "B:Living-Intelligence-Database:validation/fixtures/run_fixtures.py:158:cant_run",
+   "repo": "Living-Intelligence-Database",
+   "rev": "8bf3d00bcde2d0aee68033aa3aeedf6b71b2ebaf",
+   "target": "build_index.py",
+   "order": "c0855b38cda15b79118a289febcbddfaf11bc75a8b81d1f4314b83863f6ffab5"
+  },
+  {
+   "claim_id": "B:Simulators:route-independence/CLAIM_TABLE.md:391:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "potential/tools/registry_sourced.py",
+   "order": "c17564101989658efd56d1e745211902a019bb9d6358db317ce23d3c2b517cf7"
+  },
+  {
+   "claim_id": "A:Geometric-to-Binary-Computational-Bridge@b3f009708c3b:94:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "b3f009708c3b36716670839252fb24c60e4c3daf",
+   "target": "fabrication/lowering.py",
+   "order": "c232fae7b88cdc332be04009f3cf1c6471571615a1b62bd67d2b633f3f314e65"
+  },
+  {
+   "claim_id": "B:Simulators:KNOWN_RED.md:342:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "tools/sourced.py",
+   "order": "c2828885d339ab7a8c27ea897b3498b67ec4e6e628c9dfa08506fc6dfd9b2277"
+  },
+  {
+   "claim_id": "B:Simulators:KNOWN_RED.md:912:cant_run",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "cooperative-substrate-proof/p5_lag.py",
+   "order": "c34cdb56fa800478569a4ed100522df31d0a319b5454cd944c6e1af62af8d676"
+  },
+  {
+   "claim_id": "B:Plain-English-Translator:CLAUDE.md:135:defect",
+   "repo": "Plain-English-Translator",
+   "rev": "857cfe5ad6363fa9f3841c5d34f1b63fb1166c1f",
+   "target": "tests/test_translator.py",
+   "order": "c3c7b556472602d695275d5094a957c5c0d031ea4f3ad2fb1e401f3f01444806"
+  },
+  {
+   "claim_id": "B:Simulators:frame-instruments/CLAIM_TABLE.md:10:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "frame-instruments/b1/report.py",
+   "order": "c3fd622b732f7a61ee15756238fc9c5314d8304dd53889a0155eeb626fd0283d"
+  },
+  {
+   "claim_id": "A:Simulators@26b01f25dd09:12:test_failure",
+   "repo": "Simulators",
+   "rev": "26b01f25dd0908ee0c95813ca5566329022c395b",
+   "target": "cooperative-substrate-proof/test_proof.py",
+   "order": "c45ad9521c6bb512c6859d9544036cd75186431108a7ce3ba53c2695274ff1da"
+  },
+  {
+   "claim_id": "B:Simulators:potential/INVENTORY.md:142:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "potential/test_perturbation.py",
+   "order": "c57fc8818b54e48ada0969d0a983df44fd5ccbadfe553d9b944a8b7ae66dae80"
+  },
+  {
+   "claim_id": "B:Simulators:falsifier-survey/cell_records.csv:507:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "design-basis-ai/r1v2_audit.py",
+   "order": "c58b019fd28bb41103ecea9e1c20bb4b66907d765795df137b13f1710c8c17f8"
+  },
+  {
+   "claim_id": "B:Living-Intelligence-Database:registry/known_held_links.json:2:test_failure",
+   "repo": "Living-Intelligence-Database",
+   "rev": "8bf3d00bcde2d0aee68033aa3aeedf6b71b2ebaf",
+   "target": "scripts/build_index.py",
+   "order": "c8b1eae8b003f1f5df56fefb1e995083182cb2bc233386b268cd285d483d0bdf"
+  },
+  {
+   "claim_id": "A:GlyphAI@f00f27244594:3:defect",
+   "repo": "GlyphAI",
+   "rev": "f00f27244594378c0fcc83fd473fec5af8dac022",
+   "target": "examples/lightbulb_scenario.py",
+   "order": "c8f1778abdefb4fa9768dba4aa27af4908a7bf3c048ac77192112c4afb41f5a2"
+  },
+  {
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:integrations/gods-eye-view/03-orbital/links.json:105:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+   "target": "Negentropic/precession.py",
+   "order": "ca3369397e21c48484081e1538fc3aa6afbd0856360930ed8a4e9b6766819972"
+  },
+  {
+   "claim_id": "B:Simulators:climate-modeling/README.md:135:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "climate-modeling/audits/cascade_speed.py",
+   "order": "cb75799a8ef94e9aca3d77f676df02cf3a2c8d2857cf034ef02615c22e8cb131"
+  },
+  {
+   "claim_id": "B:ai-human-audit-protocol:REVIEW.md:28:defect",
+   "repo": "ai-human-audit-protocol",
+   "rev": "72947579c330aca900902f47cd77d12d4de27cb4",
+   "target": "physics/reference_frame.py",
+   "order": "cca39eec6a8a301effb37983b8ab6fcd01f617ae3fcb0bce01d624d39e107917"
+  },
+  {
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:geometric_intelligence/CLAIMS.md:35:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+   "target": "geometric_intelligence/falsifiers_gi_network.py",
+   "order": "ccc0ad207a122c3c4a92be43007759c90fa697377af98a2a6cf6caeea265b7c4"
+  },
+  {
+   "claim_id": "B:stability-trigger-envelope:RUN_NOTE.md:174:test_failure",
+   "repo": "stability-trigger-envelope",
+   "rev": "a3054f748bc09cf24749918d95a003756f5ef8a7",
+   "target": "test_envelope.py",
+   "order": "cdde92b6ba32b3f42d37a60fb379425d3d9caae5a493baba1f81edcb07a28a3e"
+  },
+  {
+   "claim_id": "B:Simulators:TOOL_FINDER/TOOL_FINDER.md:244:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "transmission-decay/selftest_power.py",
+   "order": "cf75565614b816c8856a762395ed1871eaeafc9f9ef18148e1484c45877ff8d6"
+  },
+  {
+   "claim_id": "B:Simulators:KNOWN_RED.md:996:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "tests/test_compile_gate.py",
+   "order": "cfedf688e011eb8f7246a502130ffec9ac5aa9b6c0407918a0310d6bb46b00f3"
+  },
+  {
+   "claim_id": "B:Polyhedral-Intelligence:REVIEW.md:280:test_failure",
+   "repo": "Polyhedral-Intelligence",
+   "rev": "f933133d89537e8e583ac3fe734a1736468eee93",
+   "target": "Poly.py",
+   "order": "d4fc8b38bbec0e4cc7861d7e60e08808ed09a05830b5c4b5da299de5e8e209c9"
+  },
+  {
+   "claim_id": "A:Simulators@dacca581660e:13:defect",
+   "repo": "Simulators",
+   "rev": "dacca581660e404aa4f12e49622ec9d65fb24caa",
+   "target": "potential/tools/registry.py",
+   "order": "d555e9610b9d7c19aaf9b73514944f2e89c06f5486635bcf1b01e37ae91688b6"
+  },
+  {
+   "claim_id": "A:method-layer@7a5d1857f2a2:9:test_failure",
+   "repo": "method-layer",
+   "rev": "7a5d1857f2a20033711d2b45b8b4516e8f9811c1",
+   "target": "reasoning-layer/validate.py",
+   "order": "d6baade65d315ccbad22b8fdb207c515e486118fed73a2774404d120c991272a"
+  },
+  {
+   "claim_id": "B:explorative-math:runs/adversarial_probes_seed0.json:140:defect",
+   "repo": "explorative-math",
+   "rev": "e276e9269d31b7de4c8dd6b9b180f0e8c9cea13d",
+   "target": "toolkit/generator.py",
+   "order": "d88f004623d3f16f8f15e1e2b24c4bc447725880f3fefa290ac459de6bdfb1f2"
+  },
+  {
+   "claim_id": "A:Logic-Ferret@f42513f00f23:26:defect",
+   "repo": "Logic-Ferret",
+   "rev": "f42513f00f234fcefbaad4cb17827e3c6037bffb",
+   "target": "sensor_suite/sensors/gaslight_frequency_meter.py",
+   "order": "d89501da08b4bdfc8f4388f5192795338ac4c388c6ff06f2a87fc1cade161a3e"
+  },
+  {
+   "claim_id": "B:Simulators:reasoning-gate/AUDIT_NOTES.md:61:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "reasoning-gate/gate.py",
+   "order": "d990d77b184f2141b5fc2127a4a2077bcf4e56e772d2c4d2a9d6d88a2a53dec3"
+  },
+  {
+   "claim_id": "B:Simulators:crediting-rate/CLAIM_TABLE.md:326:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "crediting-rate/crediting_rate_v2.py",
+   "order": "d9da022b8e983329051e048fb541d72248a023855bba1a86822b119c6ac178a9"
+  },
+  {
+   "claim_id": "B:Simulators:KNOWN_RED.md:196:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "tools/sourced.py",
+   "order": "dadaf6af5e8638a964a6d464c25998fd690f31e47b8151730c51cfb4353ea7df"
+  },
+  {
+   "claim_id": "B:Simulators:blind-reader-void12/studies/OPEN_ITEMS_OUTSIDE.md:8:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "grounding-layers/observer_state.py",
+   "order": "db51147b0680ceb89efb9617d3d5e5a5fe2845cd34705df64ea00cf989418d51"
+  },
+  {
+   "claim_id": "B:4D-language-lens:CLAUDE.md:24:cant_run",
+   "repo": "4D-language-lens",
+   "rev": "2729c42641be5428b152a2971ccbfbfb0bb59bf1",
+   "target": "falsification_tests.py",
+   "order": "dca673855c609c2c9aaec45ca110883cdd97c08b65ffea711b88146ac53bf2f1"
+  },
+  {
+   "claim_id": "B:metabolic-accounting:CLAUDE.md:28:defect",
+   "repo": "metabolic-accounting",
+   "rev": "e1f00f7e50b04ddac6cf275e99863c1a1ecc71c2",
+   "target": "tests/test_tier_vector.py",
+   "order": "dcbb1bdb0924179c977e12bc391f144fa89ea9b2611669c69a549cdf82f672ff"
+  },
+  {
+   "claim_id": "B:Simulators:field-mode-eval/README.md:116:cant_run",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "field-mode-eval/score.py",
+   "order": "ddb87c4455b0a0784ee589e792ce6c44936e6e217166a90482f73293860217b6"
+  },
+  {
+   "claim_id": "B:Simulators:CLAUDE.md:15147:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "tests/test_run_manifest.py",
+   "order": "ddcce27c74c7e4c3450efe0c925e2af7e84a8f1bb544424dec3eab9b9ca1f352"
+  },
+  {
+   "claim_id": "B:Simulators:route-independence/CLAIM_TABLE.md:115:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "route-independence/question_space.py",
+   "order": "ddf90d4a7420d7de64122f504161b85a0b8c1811572bccb53e3886e87acb4695"
+  },
+  {
+   "claim_id": "B:Simulators:falsifier-survey/cell_records.csv:784:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "sheet-structure-scan/targets/epa_check.py",
+   "order": "de1f3f0e7041fff5f280eac6d9e4c6adc68e2db2c9ebe3c9f671f63b3a5ce308"
+  },
+  {
+   "claim_id": "B:Simulators:falsifier-survey/cell_records.csv:272:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "question-availability/check_marker.py",
+   "order": "de512bc1128f58a7da231c3bb2ebf7ff4e056f8795a54a8383cd2f49de5dca12"
+  },
+  {
+   "claim_id": "A:Simulators@5159ba4b6f91:6:cant_run",
+   "repo": "Simulators",
+   "rev": "5159ba4b6f91bf486d72482b49ca11388dfbef94",
+   "target": "route-independence/dependency_chain_audit.py",
+   "order": "dfe2fd29b31e061593105814f8e899e795bdb3531be10321f0ebb6525576add0"
+  },
+  {
+   "claim_id": "A:Simulators@ac7df544aaeb:21:test_failure",
+   "repo": "Simulators",
+   "rev": "ac7df544aaebfbd736c3c3ddcaa38cb381835305",
+   "target": "failure-mode-register/test_register.py",
+   "order": "e17e245eb88576444f9f6deeab5ef617d501f0afa415738ed40ebe245648e9cd"
+  },
+  {
+   "claim_id": "B:Living-Intelligence-Database:REVIEW.md:263:defect",
+   "repo": "Living-Intelligence-Database",
+   "rev": "8bf3d00bcde2d0aee68033aa3aeedf6b71b2ebaf",
+   "target": "validation/audit.py",
+   "order": "e1b6111a980e80ecc8b58fc6c8074ad69e1e4e60c6cef374c5d62a3c54992579"
+  },
+  {
+   "claim_id": "B:Noise-as-Information-Sensor:tools/typed.py:388:test_failure",
+   "repo": "Noise-as-Information-Sensor",
+   "rev": "d8271ae41985f4a7cac945625798e744ba0be0ec",
+   "target": "tools/typed.py",
+   "order": "e1c8d32ec5ad9fca63bec11c7041bd6238e90f3d3e2ca275724383e21289e908"
+  },
+  {
+   "claim_id": "B:AI-Consciousness-Sensors:REVIEW.md:235:defect",
+   "repo": "AI-Consciousness-Sensors",
+   "rev": "65795f55c3a106ceee433308cf67c7cef0ced9f7",
+   "target": "src/score.py",
+   "order": "e211a5e9c3dd1747571cb79a4db0327406db2f4c40456a5c15b1ecbed4097a69"
+  },
+  {
+   "claim_id": "B:hgai-geometric-systems:CLAUDE.md:83:defect",
+   "repo": "hgai-geometric-systems",
+   "rev": "b23dda360fc4e9b15c2ac0f61ebe617ab2ba7f06",
+   "target": "defect_field.py",
+   "order": "e302189f9fec46c7173d0379a0e96c3c06b499886005f1f8912aab2ec9386423"
+  },
+  {
+   "claim_id": "B:thermodynamic-accountability-framework:docs/audit_2026_04_07.md:97:defect",
+   "repo": "thermodynamic-accountability-framework",
+   "rev": "c5442b0812cf7187ae007946fd5c5d16e573297a",
+   "target": "simulations/federation.py",
+   "order": "e382c3dc3fcd83795daaadf712e9b749ede26b65aeb731eafb400c0b8efd8e59"
+  },
+  {
+   "claim_id": "B:Simulators:self-scan/README.md:52:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "self-scan/enumerators.py",
+   "order": "e492a0e033e1d48935294696b5145b13009cad92ea16a67d6f940654ed9f6648"
+  },
+  {
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:claims_index.py:9:test_failure",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+   "target": "claims_index.py",
+   "order": "e499db8d8a40f8dffae2dee3fc1691a0423fb48e3544f0a0e9205379f0bb548d"
+  },
+  {
+   "claim_id": "B:Simulators:falsifier-survey/cell_records.csv:1158:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "investigation-sim/bins.py",
+   "order": "e5f0fb6b39a6e26281a7e8868fea5d3edfa9afac45920137852148a47cbb079e"
+  },
+  {
+   "claim_id": "B:AI-Consciousness-Sensors:REVIEW.md:267:test_failure",
+   "repo": "AI-Consciousness-Sensors",
+   "rev": "65795f55c3a106ceee433308cf67c7cef0ced9f7",
+   "target": "sensors/adapter.py",
+   "order": "e5fbd687cafc9517ed799226a2a0b36fdae631741bb410e518e9aef85f05e950"
+  },
+  {
+   "claim_id": "A:Simulators@240425aadced:20:test_failure",
+   "repo": "Simulators",
+   "rev": "240425aadced8589270d2d6030330a0180613492",
+   "target": "instrument-index/tests/test_build_index.py",
+   "order": "e6be2dc6ed04281c54e26495859ff978a4db3a63d1d0b1572774ca721e5251c8"
+  },
+  {
+   "claim_id": "B:Simulators:photoperiod-claim-harness/tests/test_repairs.py:2:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "photoperiod-claim-harness/tests/test_repairs.py",
+   "order": "e891c4d81755c07e77a44d794d08095a9a427026a79d88e0341354ece02d09a4"
+  },
+  {
+   "claim_id": "A:framework-instruments@ca3032bfecee:9:defect",
+   "repo": "framework-instruments",
+   "rev": "ca3032bfeceec42c4707f08334ab3aa435be8510",
+   "target": "instruments/coverage_pairs.py",
+   "order": "ea209a5f904df783476985d1fe438bf98832be575c6b9da39db9b5a8cc67b1de"
+  },
+  {
+   "claim_id": "B:drift-archive-audit:ENCODING-AUDIT.md:59:defect",
+   "repo": "drift-archive-audit",
+   "rev": "f6a2818994b9a1171988fc687bffca91496625c0",
+   "target": "instrument/reachability_sweep.py",
+   "order": "eac5e6ef4c830a5921f4a8c0c55a7a2f8eac84bfb7db8a38a3c26e93a2885523"
+  },
+  {
+   "claim_id": "B:curly-octo-happiness:REVIEW.md:209:defect",
+   "repo": "curly-octo-happiness",
+   "rev": "a3d5c55328cc671c4384d0a02eccb70c7d828b89",
+   "target": "design/archive/unified_playground_v6.py",
+   "order": "eb9ad3e9f269891986cfa050a7e440598db53a51f8e94a44b23bd48c98baf065"
+  },
+  {
+   "claim_id": "B:Simulators:external-audit/README.md:127:cant_run",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "columbia-chain-cascade/assemble_gaps_v2.py",
+   "order": "ebe4aa7443248473d9dca499c4d136f624530211db14ac57d654ed6acede673f"
+  },
+  {
+   "claim_id": "B:Simulators:external-audit/DEEP_RESEARCH_2026_09_14_V2.md:30:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "tools/known_answer.py",
+   "order": "ec15e1148c999ef9f81767d52c3eacde7b3fc290c8735959d52b9b4c18c324e6"
+  },
+  {
+   "claim_id": "B:curly-octo-happiness:REVIEW.md:316:defect",
+   "repo": "curly-octo-happiness",
+   "rev": "a3d5c55328cc671c4384d0a02eccb70c7d828b89",
+   "target": "shared.py",
+   "order": "ec4d173d0d274e2ba4f276a5726461d5156049e5336e43a75256e89c79fa74d6"
+  },
+  {
+   "claim_id": "B:method-layer:reasoning-layer/README.md:120:test_failure",
+   "repo": "method-layer",
+   "rev": "4636166350f46597b8566e225475ecc7412b18e9",
+   "target": "reasoning-layer/validate.py",
+   "order": "ec9560c7f4439ce3b4afd7f22a3d4ae8a9178b5fdaf4de305d6c826d50b9e566"
+  },
+  {
+   "claim_id": "B:Noise-as-Information-Sensor:tools/residual_partition.py:447:test_failure",
+   "repo": "Noise-as-Information-Sensor",
+   "rev": "d8271ae41985f4a7cac945625798e744ba0be0ec",
+   "target": "tools/residual_partition.py",
+   "order": "ee4738f25d0f1b5e3ce2968d22bea972763d34ba078f058d4a9035ade7b51716"
+  },
+  {
+   "claim_id": "B:hgai-geometric-systems:CLAUDE.md:84:defect",
+   "repo": "hgai-geometric-systems",
+   "rev": "b23dda360fc4e9b15c2ac0f61ebe617ab2ba7f06",
+   "target": "defect_weather_model.py",
+   "order": "ee6ef2817e4277b34b543dccff26a53fec9dc2d49aa971163c4506e6ec0b15b6"
+  },
+  {
+   "claim_id": "B:4D-language-lens:falsification_tests.py:22:cant_run",
+   "repo": "4D-language-lens",
+   "rev": "2729c42641be5428b152a2971ccbfbfb0bb59bf1",
+   "target": "falsification_tests.py",
+   "order": "ee9277218432a9e3597da20971cf186804e53430908cc46577fde6f2a23c2a95"
+  },
+  {
+   "claim_id": "B:Sovereign-Octahedral-Mandala-Substrate-SOMS-:experiments/substrate_pilot_v0/CLAIM_TABLE.md:9:test_failure",
+   "repo": "Sovereign-Octahedral-Mandala-Substrate-SOMS-",
+   "rev": "0c63b5281a7058841897c900e55c8dfbd2714149",
+   "target": "experiments/substrate_pilot_v0/ledger.py",
+   "order": "efac736a60c1098c5d6110c4e98b335ba1bffcda234bb4b2c5793ad200a523b2"
+  },
+  {
+   "claim_id": "B:Simulators:CLAUDE.md:12771:cant_run",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "columbia-chain-cascade/assemble_gaps_v2.py",
+   "order": "f0fe77092ebc3ca0b35701faf8039bbb97fc2cdedf11d985f6ae96ab7c22daef"
+  },
+  {
+   "claim_id": "B:Simulators:stability-trigger-envelope/README.md:19:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "stability-trigger-envelope/test_envelope.py",
+   "order": "f439830c4132e4fb014f5d97cca808bbd6b413d604e167348c16b4a84f76d022"
+  },
+  {
+   "claim_id": "B:earth-systems-physics:CLAUDE.md:509:test_failure",
+   "repo": "earth-systems-physics",
+   "rev": "45bd35e02c792b4b46ce707b0a58bd7178f76efc",
+   "target": "oil_phase_shift/loop4_aquifer_community_automation.py",
+   "order": "f44f1b56fee8f8e0efbeb15ff963361b33e0414609690d21000ff6c3cbe6ef1c"
+  },
+  {
+   "claim_id": "A:Simulators@90926f434950:2:test_failure",
+   "repo": "Simulators",
+   "rev": "90926f434950c18017de15da560f7e42a2238e52",
+   "target": "route-independence/test_chains_a456.py",
+   "order": "f52556e7c434ab97ace8ebb5067f75b41fe6fe485764cf3a4a0238c994741b8c"
+  },
+  {
+   "claim_id": "A:Geometric-to-Binary-Computational-Bridge@5a6fa66f5bdb:35:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "5a6fa66f5bdb5fcc275d7639fe2e193f4da30976",
+   "target": "fabrication/verify/tests/sweep_smoke.py",
+   "order": "f67bfd69b5566fff2d8356bc7d71d40a53afa463ec02dc8ba617f9d3ee6c8fe8"
+  },
+  {
+   "claim_id": "B:Geometric-to-Binary-Computational-Bridge:adaptive_sim/CLAIMS.md:18:test_failure",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "4795832d89bf022f4351eb03f008f412bb7c8e9a",
+   "target": "adaptive_sim/falsifiers_adaptive_sim.py",
+   "order": "f8865c61990e116dfa403178d501c0b7582c0e200edb5b642f9c62ef6dbf2f8a"
+  },
+  {
+   "claim_id": "B:Simulators:reg-uncertainty-registry/README.md:45:defect",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "reg-uncertainty-registry/tools/validate.py",
+   "order": "f8cee9433ec18bae8d231862e04ef896a73e6291f79141dd54a792a522da8c74"
+  },
+  {
+   "claim_id": "B:Mathematic-economics:REVIEW.md:170:defect",
+   "repo": "Mathematic-economics",
+   "rev": "dd2f62d2517b8028cc0bbeff17435a75a3d31623",
+   "target": "audit/coherence_playground.py",
+   "order": "f93e0717406943f119ec5837b9593f8c2ab2a6610d7ce46821902551ca674bdf"
+  },
+  {
+   "claim_id": "B:Simulators:archive/cooperative-substrate-proof/PROVENANCE.md:17:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "cooperative-substrate-proof/test_proof.py",
+   "order": "fb60779298fe2b9126b73f7137a8c1d1d05dac4b6733cf71ef5544a31dd62e79"
+  },
+  {
+   "claim_id": "B:Simulators:simulation-hypothesis-budget/CLAIM_TABLE.md:60:test_failure",
+   "repo": "Simulators",
+   "rev": "b40dfdee8ee70310c62b712d8c2dc5c172c3f30e",
+   "target": "simulation-hypothesis-budget/multiscale.py",
+   "order": "fd1fce41eb52f0fad85acdb0bd24320eba808ff6ddca761881998d52a7146d2b"
+  },
+  {
+   "claim_id": "A:Geometric-to-Binary-Computational-Bridge@891bfcaee235:42:defect",
+   "repo": "Geometric-to-Binary-Computational-Bridge",
+   "rev": "891bfcaee235dc4af64b422e30aeccce2d6bd24d",
+   "target": "tests/test_bridges.py",
+   "order": "fdb964525a610cc2d253abfcfb54ad67aecf1efe7d2bdb326472e60cecdb7de8"
+  },
+  {
+   "claim_id": "B:Sovereign-Octahedral-Mandala-Substrate-SOMS-:experiments/README.md:122:defect",
+   "repo": "Sovereign-Octahedral-Mandala-Substrate-SOMS-",
+   "rev": "0c63b5281a7058841897c900e55c8dfbd2714149",
+   "target": "experiments/fret_quantum_sync.py",
+   "order": "fe488bada2abd059bcf2edcdb94e5abd2edbdcbae3aca27515a66e46e665272d"
+  },
+  {
+   "claim_id": "A:vibe-code-audit@d0f5fe5f461c:5:test_failure",
+   "repo": "vibe-code-audit",
+   "rev": "d0f5fe5f461c463ada4cdf654df74bfb7d19f96e",
+   "target": "test_audit.py",
+   "order": "fe9f73ecd7668d438e8d232e397a558643d3ce6135f4cc5d04290c116813f09f"
+  }
+ ]
+}

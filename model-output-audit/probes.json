@@ -1,0 +1,415 @@
+{
+ "probed_at": "2026-11-27T16:36:33.193723Z",
+ "method": "curl -m 20 https://HOST/ through the session proxy, once",
+ "note": "says what this session can reach now; says nothing about the session that wrote a claim",
+ "hosts": [
+  {
+   "host": "agingresearchbiobank.nia.nih.gov",
+   "claims_naming_it": 1,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "alfred.stlouisfed.org",
+   "claims_naming_it": 1,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "ametsoc.net",
+   "claims_naming_it": 1,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "ametsoc.org",
+   "claims_naming_it": 1,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "api.github.com",
+   "claims_naming_it": 1,
+   "http_code": "200",
+   "connect_code": "200",
+   "curl_error": null,
+   "state": "REACHED"
+  },
+  {
+   "host": "api.openalex.org",
+   "claims_naming_it": 3,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "arxiv.org",
+   "claims_naming_it": 15,
+   "http_code": "200",
+   "connect_code": "200",
+   "curl_error": null,
+   "state": "REACHED"
+  },
+  {
+   "host": "casrai.org",
+   "claims_naming_it": 2,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "cdn.ca9.uscourts.gov",
+   "claims_naming_it": 1,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "charts.noaa.gov",
+   "claims_naming_it": 1,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "clinicaltrials.gov",
+   "claims_naming_it": 4,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "courtlistener.com",
+   "claims_naming_it": 1,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "cpc.ncep.noaa.gov",
+   "claims_naming_it": 1,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "ct.gov",
+   "claims_naming_it": 2,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "dl.acm.org",
+   "claims_naming_it": 1,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "ecfr.gov",
+   "claims_naming_it": 2,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "export.arxiv.org",
+   "claims_naming_it": 1,
+   "http_code": "200",
+   "connect_code": "200",
+   "curl_error": null,
+   "state": "REACHED"
+  },
+  {
+   "host": "ftc.gov",
+   "claims_naming_it": 1,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "genai.owasp.org",
+   "claims_naming_it": 2,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "github.com",
+   "claims_naming_it": 34,
+   "http_code": "400",
+   "connect_code": "200",
+   "curl_error": null,
+   "state": "REACHED"
+  },
+  {
+   "host": "journals.ametsoc.org",
+   "claims_naming_it": 1,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "leanprover-community.github.io",
+   "claims_naming_it": 3,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "leg.colorado.gov",
+   "claims_naming_it": 1,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "nanopub.net",
+   "claims_naming_it": 3,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "nccdb.fmcsa.dot.gov",
+   "claims_naming_it": 1,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "onlinelibrary.wiley.com",
+   "claims_naming_it": 3,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "openai.com",
+   "claims_naming_it": 8,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "orkg.org",
+   "claims_naming_it": 3,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "osf.io",
+   "claims_naming_it": 3,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "oshacademy.com",
+   "claims_naming_it": 1,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "owasp.org",
+   "claims_naming_it": 2,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "royalsocietypublishing.org",
+   "claims_naming_it": 1,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "sba.gov",
+   "claims_naming_it": 4,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "sleepdata.org",
+   "claims_naming_it": 1,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "training.fema.gov",
+   "claims_naming_it": 1,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "webtransparency.cs.princeton.edu",
+   "claims_naming_it": 1,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "who.int",
+   "claims_naming_it": 1,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "www.biorxiv.org",
+   "claims_naming_it": 2,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "www.bipm.org",
+   "claims_naming_it": 9,
+   "http_code": "302",
+   "connect_code": "200",
+   "curl_error": null,
+   "state": "REACHED"
+  },
+  {
+   "host": "www.cos.io",
+   "claims_naming_it": 6,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "www.csb.gov",
+   "claims_naming_it": 3,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "www.ecfr.gov",
+   "claims_naming_it": 1,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "www.epa.gov",
+   "claims_naming_it": 1,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "www.federalregister.gov",
+   "claims_naming_it": 1,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "www.fmcsa.dot.gov",
+   "claims_naming_it": 1,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "www.gov",
+   "claims_naming_it": 3,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "www.irs.gov",
+   "claims_naming_it": 1,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "www.nature.com",
+   "claims_naming_it": 4,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "www.ntsb.gov",
+   "claims_naming_it": 3,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "www.researchobject.org",
+   "claims_naming_it": 3,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  },
+  {
+   "host": "www.w3.org",
+   "claims_naming_it": 3,
+   "http_code": "000",
+   "connect_code": "403",
+   "curl_error": "curl: (56) CONNECT tunnel failed, response 403",
+   "state": "REFUSED_OR_FAILED"
+  }
+ ]
+}

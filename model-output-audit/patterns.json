@@ -1,0 +1,14 @@
+{
+  "note": "Fixed before extraction. Case-insensitive, applied to one line at a time. A match is a candidate.",
+  "types": {
+    "cant_run": "can't run|cannot run|could not run|couldn't run|unable to run|\\bNOT_RUN\\b|not runnable|could not be run|cannot be run|can't be run",
+    "convergence": "won't converge|does not converge|did not converge|doesn't converge|fails to converge|not feasible|infeasible",
+    "test_failure": "\\b[0-9]+ (tests? )?fail(ed|ing|ures?)\\b|\\btests? fail|\\bKNOWN_RED\\b|pre-existing fail|baseline fail|\\bfail(s|ed|ing)? (on|at|with|under)\\b",
+    "defect": "doesn't work|does not work|\\bis broken\\b|\\bcrash(es|ed)\\b|\\bTraceback\\b|\\bSyntaxError\\b|\\bImportError\\b|\\bModuleNotFoundError\\b|\\bdefect\\b|\\bbug\\b",
+    "environment": "refuses CONNECT|\\begress\\b|not installed|no network|missing dependenc",
+    "unsupported": "\\bunsupported\\b|\\bcontradict(s|ion|ed)\\b"
+  },
+  "text_extensions": [".md", ".txt", ".py", ".json", ".yaml", ".yml", ".csv", ".rst"],
+  "max_line_chars": 2000,
+  "max_file_bytes": 3000000
+}
